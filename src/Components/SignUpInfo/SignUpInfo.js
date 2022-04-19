@@ -1,27 +1,15 @@
-import { useState } from 'react';
 import { TextField } from '@mui/material';
 
-const SignUpInfo = () => {
-  const [inputValues, setInputValues] = useState({
-    email: '',
-    password: '',
-    confirmPassword: ''
-
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setInputValues({ ...inputValues, [name]: value });
-  }
-  
+const SignUpInfo = ({ formData, setFormData }) => {
   return (
     <div className='sign-up-container'>
       <TextField 
         type='email'
         id='email'
         name='email'
+        value={formData.email}
         label='Email'
-        onChange={handleChange}
+        onChange={(event) => {setFormData({ ...formData, email: event.target.value })}}
         variant='outlined'
         size='small'
         required />
@@ -29,8 +17,9 @@ const SignUpInfo = () => {
         type='password'
         id='password'
         name='password'
+        value={formData.password}
         label='Password'
-        onChange={handleChange}
+        onChange={(event) => {setFormData({ ...formData, password: event.target.value })}}
         variant='outlined'
         size='small'
         required />
@@ -38,8 +27,9 @@ const SignUpInfo = () => {
         type='password'
         id='confirmed-password'
         name='confirmPassword'
+        value={formData.confirmPassword}
         label='Confirm Password'
-        onChange={handleChange}
+        onChange={(event) => {setFormData({ ...formData, confirmPassword: event.target.value })}}
         variant='outlined'
         size='small'
         required />
