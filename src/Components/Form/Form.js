@@ -3,6 +3,7 @@ import Other from '../Other/Other';
 import PersonalInfo from '../PersonalInfo/PersonalInfo';
 import SignUpInfo from '../SignUpInfo/SignUpInfo';
 import { Typography, Button } from '@mui/material';
+import './Form.css';
 
 const Form = () => {
   const [page, setPage] = useState(0);
@@ -52,7 +53,8 @@ const Form = () => {
           <Button 
             onClick={() => {
               if (page === FormTitles.length - 1) {
-                alert('Form has been submitted')
+                alert('Form has been submitted');
+                console.log({ formData });
               } else {
                 setPage((currentPage) => currentPage + 1);
               }
@@ -67,5 +69,3 @@ const Form = () => {
 }
 
 export default Form;
-
-// style ={{width: '100%'}
