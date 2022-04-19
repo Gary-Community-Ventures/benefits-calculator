@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Other from '../Other/Other';
 import PersonalInfo from '../PersonalInfo/PersonalInfo';
 import SignUpInfo from '../SignUpInfo/SignUpInfo';
-import { Typography, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import './Form.css';
 
 const Form = () => {
