@@ -6,16 +6,26 @@ import { Typography, Button } from '@mui/material';
 
 const Form = () => {
   const [page, setPage] = useState(0);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+    firstName: '',
+    lastName: '',
+    userName: '',
+    numberOfChildren: 0,
+    numberOfAdults: 0
+  });
 
   const FormTitles = ['Sign Up', 'Personal Info', 'Other'];
 
   const pageDisplay = () => {
     if (page === 0) {
-      return <SignUpInfo />
+      return <SignUpInfo formData={formData} setFormData={setFormData} />
     } else if (page === 1) {
-      return <PersonalInfo />
+      return <PersonalInfo formData={formData} setFormData={setFormData}/>
     } else {
-      return <Other />
+      return <Other formData={formData} setFormData={setFormData}/>
     }
   }
 
