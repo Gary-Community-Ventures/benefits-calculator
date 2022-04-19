@@ -1,41 +1,35 @@
 import { TextField } from '@mui/material';
-import { useState } from 'react';
 
-const PersonalInfo = () => {
-  const [inputValues, setInputValues] = useState({
-    firstName: '',
-    lastName: '',
-    userName: ''
-  });
-  
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setInputValues({ ...inputValues, [name]: value });
-  }
-
+const PersonalInfo = ({ formData, setFormData }) => {
   return (
     <div className='personal-info-container'>
       <TextField 
+        type='text'
         id='first-name'
         name='firstName'
+        value={formData.firstName}
         label='First name'
-        onChange={handleChange} 
+        onChange={(event) => {setFormData({...formData, firstName: event.target.value })}} 
         variant='outlined'
         size='small'
         required />
       <TextField
+        type='text'
         id='last-name'
         name='lastName'
+        value={formData.lastName}
         label='Last Name'
-        onChange={handleChange}
+        onChange={(event) => {setFormData({...formData, lastName: event.target.value })}}
         variant='outlined'
         size='small'
         required />
       <TextField 
+        type='text'
         id='username'
-        name='userName'
+        name='username'
+        value={formData.username}
         label='Username'
-        onChange={handleChange}
+        onChange={(event) => {setFormData({ ...formData, username: event.target.value })}}
         variant='outlined'
         size='small'
         required />
