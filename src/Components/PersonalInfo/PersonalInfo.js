@@ -1,4 +1,5 @@
 import { TextField } from '@mui/material';
+import './PersonalInfo.css';
 
 const PersonalInfo = ({ formData, setFormData }) => {
   return (
