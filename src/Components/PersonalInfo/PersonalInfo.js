@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import { useState } from 'react';
 
 const PersonalInfo = () => {
@@ -14,21 +15,30 @@ const PersonalInfo = () => {
 
   return (
     <div className='personal-info-container'>
-      <input 
-        type='text' 
-        placeholder='First name...'
+      <TextField 
+        id='first-name'
         name='firstName'
-        onChange={handleChange} />
-      <input
-        type='text' 
-        placeholder='Last Name...'
+        label='First name'
+        onChange={handleChange} 
+        variant='outlined'
+        size='small'
+        required />
+      <TextField
+        id='last-name'
         name='lastName'
-        onChange={handleChange} />
-      <input 
-        type='text' 
-        placeholder='Username...'
+        label='Last Name'
+        onChange={handleChange}
+        variant='outlined'
+        size='small'
+        required />
+      <TextField 
+        id='username'
         name='userName'
-        onChange={handleChange} />
+        label='Username'
+        onChange={handleChange}
+        variant='outlined'
+        size='small'
+        required />
     </div>
   );
 }
