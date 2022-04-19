@@ -1,26 +1,15 @@
-import { useState } from 'react';
 import { TextField } from '@mui/material';
 
-
-const Other = () => {
-  const [inputValues, setInputValues] = useState({
-    numberOfChildren: 0,
-    numberOfAdults: 0
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setInputValues({...inputValues, [name]: value });
-  }
-
+const Other = ({ formData, setFormData }) => {
   return (
     <div className='other-container'>
       <TextField 
         type='number'
         id='number-of-children'
         name='numberOfChildren'
+        value={formData.numberOfChildren}
         label='Number of children'
-        onChange={handleChange}
+        onChange={(event) => {setFormData({ ...formData, numberOfChildren: event.target.value })}}
         variant='outlined'
         size='small'
         required />
@@ -28,8 +17,9 @@ const Other = () => {
         type='number'
         id='number-of-adults'
         name='numberOfAdults'
+        value={formData.numberOfAdults}
         label='Number of adults'
-        onChange={handleChange}
+        onChange={(event) => {setFormData({ ...formData, numberOfAdults: event.target.value })}}
         variant='outlined'
         size='small'
         required />
