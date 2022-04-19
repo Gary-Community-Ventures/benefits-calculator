@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Other from '../Other/Other';
 import PersonalInfo from '../PersonalInfo/PersonalInfo';
 import SignUpInfo from '../SignUpInfo/SignUpInfo';
-import './Form.css';
+import { Typography } from '@mui/material';
 
 const Form = () => {
   const [page, setPage] = useState(0);
@@ -24,7 +24,7 @@ const Form = () => {
       <div className='progress-bar'></div>
       <div className='form-container'>
         <div className='header'>
-          <h2>{FormTitles[page]}</h2>
+          <Typography variant="h5">{FormTitles[page]}</Typography>
         </div>
         <div className='body'>
           {pageDisplay()}
