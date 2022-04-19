@@ -34,6 +34,6 @@ const Other = () => {
         size='small'
         required />
     </div>
-  )
+  );
 }
 export default Other;
