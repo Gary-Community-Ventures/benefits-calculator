@@ -17,6 +17,7 @@ const SignUpInfo = () => {
   return (
     <div className='sign-up-container'>
       <TextField 
+        type='email'
         id='email'
         name='email'
         label='Email'
@@ -25,6 +26,7 @@ const SignUpInfo = () => {
         size='small'
         required />
       <TextField 
+        type='password'
         id='password'
         name='password'
         label='Password'
@@ -33,6 +35,7 @@ const SignUpInfo = () => {
         size='small'
         required />
       <TextField 
+        type='password'
         id='confirmed-password'
         name='confirmPassword'
         label='Confirm Password'
