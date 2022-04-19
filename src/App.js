@@ -1,11 +1,17 @@
 import Form from '../src/Components/Form/Form';
 import './App.css';
+import { Typography, AppBar, CssBaseline } from '@mui/material';
 
 const App = () => {
   return (
     <div className='App'>
-      <h1 className='App-header'>Benefits Calculator</h1>
-      <Form />
+      <CssBaseline />
+      <AppBar position='relative'> 
+        <Typography variant='h3' align='left'>Benefits Calculator</Typography>
+      </AppBar>
+      <main>
+        <Form />
+      </main>
     </div>
   );
 }
