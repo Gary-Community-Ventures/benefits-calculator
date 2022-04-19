@@ -50,13 +50,16 @@ const Form = () => {
             Prev
           </Button>
           <Button 
-            disabled={page === FormTitles.length - 1}
             onClick={() => {
-              setPage((currentPage) => currentPage + 1);
+              if (page === FormTitles.length - 1) {
+                alert('Form has been submitted')
+              } else {
+                setPage((currentPage) => currentPage + 1);
+              }
             }}
             variant='contained'
           >
-            Next
+           {page === FormTitles.length - 1 ? 'Submit' : 'Next'}
           </Button>
       </div>
     </div>
@@ -64,3 +67,5 @@ const Form = () => {
 }
 
 export default Form;
+
+// style ={{width: '100%'}
