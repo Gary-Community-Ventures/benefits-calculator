@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TextField } from '@mui/material';
 
 const SignUpInfo = () => {
   const [inputValues, setInputValues] = useState({
@@ -15,21 +16,30 @@ const SignUpInfo = () => {
   
   return (
     <div className='sign-up-container'>
-      <input 
-        type='text' 
-        placeholder='Email...'
+      <TextField 
+        id='email'
         name='email'
-        onChange={handleChange} />
-      <input 
-        type='text' 
-        placeholder='Password...'
+        label='Email'
+        onChange={handleChange}
+        variant='outlined'
+        size='small'
+        required />
+      <TextField 
+        id='password'
         name='password'
-        onChange={handleChange} />
-      <input 
-        type='text' 
-        placeholder='Confirm Password...'
+        label='Password'
+        onChange={handleChange}
+        variant='outlined'
+        size='small'
+        required />
+      <TextField 
+        id='confirmed-password'
         name='confirmPassword'
-        onChange={handleChange} />
+        label='Confirm Password'
+        onChange={handleChange}
+        variant='outlined'
+        size='small'
+        required />
     </div>
   );
 }
