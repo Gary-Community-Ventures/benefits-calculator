@@ -1,10 +1,15 @@
 import { TextField } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import './PersonalInfo.css';
 
 const PersonalInfo = ({ formData, setFormData }) => {
+  const StyledTextField = styled(TextField)({
+    marginBottom: 20
+  });
+
   return (
     <div className='personal-info-container'>
-      <TextField 
+      <StyledTextField 
         type='text'
         id='first-name'
         name='firstName'
@@ -14,7 +19,7 @@ const PersonalInfo = ({ formData, setFormData }) => {
         variant='outlined'
         size='small'
         required />
-      <TextField
+      <StyledTextField
         type='text'
         id='last-name'
         name='lastName'
@@ -24,7 +29,7 @@ const PersonalInfo = ({ formData, setFormData }) => {
         variant='outlined'
         size='small'
         required />
-      <TextField 
+      <StyledTextField 
         type='text'
         id='username'
         name='username'

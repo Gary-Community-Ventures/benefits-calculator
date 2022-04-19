@@ -1,9 +1,15 @@
 import { TextField } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import './Other.css';
 
 const Other = ({ formData, setFormData }) => {
+  const StyledTextField = styled(TextField)({
+    marginBottom: 20
+  });
+
   return (
     <div className='other-container'>
-      <TextField 
+      <StyledTextField 
         type='number'
         id='number-of-children'
         name='numberOfChildren'
@@ -13,7 +19,7 @@ const Other = ({ formData, setFormData }) => {
         variant='outlined'
         size='small'
         required />
-      <TextField 
+      <StyledTextField 
         type='number'
         id='number-of-adults'
         name='numberOfAdults'

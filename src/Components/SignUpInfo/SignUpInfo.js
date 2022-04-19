@@ -1,10 +1,15 @@
 import { TextField } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import './SignUpInfo.css';
 
 const SignUpInfo = ({ formData, setFormData }) => {
+  const StyledTextField = styled(TextField)({
+    marginBottom: 20
+  });
+
   return (
     <div className='sign-up-container'>
-      <TextField 
+      <StyledTextField 
         type='email'
         id='email'
         name='email'
@@ -14,7 +19,7 @@ const SignUpInfo = ({ formData, setFormData }) => {
         variant='outlined'
         size='small'
         required />
-      <TextField 
+      <StyledTextField 
         type='password'
         id='password'
         name='password'
@@ -24,7 +29,7 @@ const SignUpInfo = ({ formData, setFormData }) => {
         variant='outlined'
         size='small'
         required />
-      <TextField 
+      <StyledTextField 
         type='password'
         id='confirmed-password'
         name='confirmPassword'
