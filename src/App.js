@@ -7,7 +7,7 @@ const App = () => {
     <div className='App'>
       <CssBaseline />
       <AppBar position='relative'> 
-        <Typography variant='h3' align='left'>Benefits Calculator</Typography>
+        <Typography variant='h4' align='center'>Benefits Calculator</Typography>
       </AppBar>
       <main>
         <Form />
