@@ -1,4 +1,5 @@
 .other-container {
   display: flex;
   flex-direction: column;
+  height: 180px;
 }
