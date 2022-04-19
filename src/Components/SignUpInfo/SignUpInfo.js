@@ -1,4 +1,5 @@
 import { TextField } from '@mui/material';
+import './SignUpInfo.css';
 
 const SignUpInfo = ({ formData, setFormData }) => {
   return (
