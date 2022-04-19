@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { TextField } from '@mui/material';
+
 
 const Other = () => {
   const [inputValues, setInputValues] = useState({
@@ -13,16 +15,24 @@ const Other = () => {
 
   return (
     <div className='other-container'>
-      <input 
-        type='text'
-        placeholder='Number of children...'
+      <TextField 
+        type='number'
+        id='number-of-children'
         name='numberOfChildren'
-        onChange={handleChange} />
-      <input 
-        type='text'
-        placeholder='Number of adults...'
+        label='Number of children'
+        onChange={handleChange}
+        variant='outlined'
+        size='small'
+        required />
+      <TextField 
+        type='number'
+        id='number-of-adults'
         name='numberOfAdults'
-        onChange={handleChange} />
+        label='Number of adults'
+        onChange={handleChange}
+        variant='outlined'
+        size='small'
+        required />
     </div>
   )
 }
