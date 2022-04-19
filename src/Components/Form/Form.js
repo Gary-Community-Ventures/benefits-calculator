@@ -12,7 +12,7 @@ const Form = () => {
     confirmPassword: '',
     firstName: '',
     lastName: '',
-    userName: '',
+    username: '',
     numberOfChildren: 0,
     numberOfAdults: 0
   });
