@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Other from '../Other/Other';
 import PersonalInfo from '../PersonalInfo/PersonalInfo';
 import SignUpInfo from '../SignUpInfo/SignUpInfo';
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 
 const Form = () => {
   const [page, setPage] = useState(0);
@@ -30,22 +30,24 @@ const Form = () => {
           {pageDisplay()}
         </div>
         <div className='footer'></div>
-          <button
+          <Button
             disabled={page === 0}
             onClick={() => {
               setPage((currentPage) => currentPage - 1);
             }}
+            variant='contained'
           >
             Prev
-          </button>
-          <button 
+          </Button>
+          <Button 
             disabled={page === FormTitles.length - 1}
             onClick={() => {
               setPage((currentPage) => currentPage + 1);
             }}
+            variant='contained'
           >
             Next
-          </button>
+          </Button>
       </div>
     </div>
   );
