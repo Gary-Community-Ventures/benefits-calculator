@@ -2,11 +2,11 @@ import { TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import './SignUpInfo.css';
 
-const SignUpInfo = ({ formData, setFormData }) => {
-  const StyledTextField = styled(TextField)({
-    marginBottom: 20
-  });
+const StyledTextField = styled(TextField)({
+  marginBottom: 20
+});
 
+const SignUpInfo = ({ formData, setFormData }) => {
   return (
     <div className='sign-up-container'>
       <StyledTextField 

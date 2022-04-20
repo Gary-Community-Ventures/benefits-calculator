@@ -2,11 +2,11 @@ import { TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import './PersonalInfo.css';
 
-const PersonalInfo = ({ formData, setFormData }) => {
-  const StyledTextField = styled(TextField)({
-    marginBottom: 20
-  });
+const StyledTextField = styled(TextField)({
+  marginBottom: 20
+});
 
+const PersonalInfo = ({ formData, setFormData }) => {
   return (
     <div className='personal-info-container'>
       <StyledTextField 

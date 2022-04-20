@@ -2,11 +2,11 @@ import { TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import './Other.css';
 
-const Other = ({ formData, setFormData }) => {
-  const StyledTextField = styled(TextField)({
-    marginBottom: 20
-  });
+const StyledTextField = styled(TextField)({
+  marginBottom: 20
+});
 
+const Other = ({ formData, setFormData }) => {
   return (
     <div className='other-container'>
       <StyledTextField 
