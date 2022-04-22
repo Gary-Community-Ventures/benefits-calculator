@@ -30,7 +30,7 @@ const SignUpInfo = ({ formData, setFormData }) => {
         size='small'
         required 
         error={formData.password === ''}
-        helperText={formData.password === '' ? 'Please enter a password' : ''} />
+        helperText={formData.password === '' ? 'Please enter a password.' : ''} />
       <StyledTextField 
         type='password'
         name='confirmPassword'

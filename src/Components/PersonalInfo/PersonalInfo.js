@@ -11,34 +11,37 @@ const PersonalInfo = ({ formData, setFormData }) => {
     <div className='personal-info-container'>
       <StyledTextField 
         type='text'
-        id='first-name'
         name='firstName'
         value={formData.firstName}
         label='First name'
         onChange={(event) => {setFormData({...formData, firstName: event.target.value })}} 
         variant='outlined'
         size='small'
-        required />
+        required 
+        error={formData.firstName === ''}
+        helperText={formData.firstName === '' ? 'Please enter your first name.' : ''}/>
       <StyledTextField
         type='text'
-        id='last-name'
         name='lastName'
         value={formData.lastName}
         label='Last Name'
         onChange={(event) => {setFormData({...formData, lastName: event.target.value })}}
         variant='outlined'
         size='small'
-        required />
+        required 
+        error={formData.lastName === ''}
+        helperText={formData.lastName === '' ? 'Please enter your last name.' : ''}/>
       <StyledTextField 
         type='text'
-        id='username'
         name='username'
         value={formData.username}
         label='Username'
         onChange={(event) => {setFormData({ ...formData, username: event.target.value })}}
         variant='outlined'
         size='small'
-        required />
+        required 
+        error={formData.username === ''}
+        helperText={formData.username === '' ? 'Please enter a username.' : ''}/>
     </div>
   );
 }
