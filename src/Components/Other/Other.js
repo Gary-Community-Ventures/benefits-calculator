@@ -11,24 +11,26 @@ const Other = ({ formData, setFormData }) => {
     <div className='other-container'>
       <StyledTextField 
         type='number'
-        id='number-of-children'
         name='numberOfChildren'
         value={formData.numberOfChildren}
         label='Number of children'
         onChange={(event) => {setFormData({ ...formData, numberOfChildren: event.target.value })}}
         variant='outlined'
         size='small'
-        required />
+        required 
+        error={formData.numberOfChildren < 0}
+        helperText={formData.numberOfChildren < 0 ? 'Please enter a valid number.' : ''}/>
       <StyledTextField 
         type='number'
-        id='number-of-adults'
         name='numberOfAdults'
         value={formData.numberOfAdults}
         label='Number of adults'
         onChange={(event) => {setFormData({ ...formData, numberOfAdults: event.target.value })}}
         variant='outlined'
         size='small'
-        required />
+        required 
+        error={formData.numberOfAdults < 0}
+        helperText={formData.numberOfAdults < 0 ? 'Please enter a valid number.' : ''}/>
     </div>
   );
 }
