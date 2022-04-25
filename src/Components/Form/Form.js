@@ -20,14 +20,27 @@ const Form = () => {
     numberOfAdults: 0
   });
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]:  value });
+  };
   const displayPage = (pageIndex) => {
     switch(pageIndex) {
       case 0:
-      return <SignUpInfo formData={formData} setFormData={setFormData} />
+        return <SignUpInfo 
+                formData={formData} 
+                setFormData={setFormData} 
+                handleChange={handleChange} />
       case 1: 
-      return <PersonalInfo formData={formData} setFormData={setFormData}/>
+        return <PersonalInfo 
+                formData={formData} 
+                setFormData={setFormData}
+                handleChange={handleChange} />
       case 2:
-      return <Other formData={formData} setFormData={setFormData}/>
+        return <Other 
+                formData={formData} 
+                setFormData={setFormData}
+                handleChange={handleChange} />
     }
   }
 
