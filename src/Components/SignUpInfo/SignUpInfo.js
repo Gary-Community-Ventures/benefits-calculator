@@ -1,12 +1,13 @@
 import { TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
+// import { useForm, SubmitHandler } from 'react-hook-form';
 import './SignUpInfo.css';
 
 const StyledTextField = styled(TextField)({
   marginBottom: 20
 });
 
-const SignUpInfo = ({ formData, setFormData }) => {
+const SignUpInfo = ({ formData, setFormData, handleChange }) => {
   return (
     <div className='sign-up-container'>
       <StyledTextField 
@@ -14,7 +15,7 @@ const SignUpInfo = ({ formData, setFormData }) => {
         name='email'
         value={formData.email}
         label='Email'
-        onChange={(event) => {setFormData({ ...formData, email: event.target.value})}}
+        onChange={(event) => {handleChange(event)}}
         variant='outlined'
         size='small'
         required 
@@ -25,7 +26,7 @@ const SignUpInfo = ({ formData, setFormData }) => {
         name='password'
         value={formData.password}
         label='Password'
-        onChange={(event) => {setFormData({ ...formData, password: event.target.value})}}
+        onChange={(event) => {handleChange(event)}}
         variant='outlined'
         size='small'
         required 
@@ -36,7 +37,7 @@ const SignUpInfo = ({ formData, setFormData }) => {
         name='confirmPassword'
         value={formData.confirmPassword}
         label='Confirm Password'
-        onChange={(event) => {setFormData({ ...formData, confirmPassword: event.target.value})}}
+        onChange={(event) => {handleChange(event)}}
         variant='outlined'
         size='small'
         required 

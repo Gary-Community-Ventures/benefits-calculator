@@ -6,7 +6,7 @@ const StyledTextField = styled(TextField)({
   marginBottom: 20
 });
 
-const PersonalInfo = ({ formData, setFormData }) => {
+const PersonalInfo = ({ formData, setFormData, handleChange }) => {
   return (
     <div className='personal-info-container'>
       <StyledTextField 
@@ -14,7 +14,7 @@ const PersonalInfo = ({ formData, setFormData }) => {
         name='firstName'
         value={formData.firstName}
         label='First name'
-        onChange={(event) => {setFormData({...formData, firstName: event.target.value })}} 
+        onChange={(event) => {handleChange(event)}}
         variant='outlined'
         size='small'
         required 
@@ -25,7 +25,7 @@ const PersonalInfo = ({ formData, setFormData }) => {
         name='lastName'
         value={formData.lastName}
         label='Last Name'
-        onChange={(event) => {setFormData({...formData, lastName: event.target.value })}}
+        onChange={(event) => {handleChange(event)}}
         variant='outlined'
         size='small'
         required 
@@ -36,7 +36,7 @@ const PersonalInfo = ({ formData, setFormData }) => {
         name='username'
         value={formData.username}
         label='Username'
-        onChange={(event) => {setFormData({ ...formData, username: event.target.value })}}
+        onChange={(event) => {handleChange(event)}}
         variant='outlined'
         size='small'
         required 

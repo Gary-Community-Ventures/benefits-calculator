@@ -6,7 +6,7 @@ const StyledTextField = styled(TextField)({
   marginBottom: 20
 });
 
-const Other = ({ formData, setFormData }) => {
+const Other = ({ formData, setFormData, handleChange }) => {
   return (
     <div className='other-container'>
       <StyledTextField 
@@ -14,7 +14,7 @@ const Other = ({ formData, setFormData }) => {
         name='numberOfChildren'
         value={formData.numberOfChildren}
         label='Number of children'
-        onChange={(event) => {setFormData({ ...formData, numberOfChildren: event.target.value })}}
+        onChange={(event) => {handleChange(event)}}
         variant='outlined'
         size='small'
         required 
@@ -25,7 +25,7 @@ const Other = ({ formData, setFormData }) => {
         name='numberOfAdults'
         value={formData.numberOfAdults}
         label='Number of adults'
-        onChange={(event) => {setFormData({ ...formData, numberOfAdults: event.target.value })}}
+        onChange={(event) => {handleChange(event)}}
         variant='outlined'
         size='small'
         required 
