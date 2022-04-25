@@ -36,7 +36,7 @@ const Form = () => {
       <div className='progress-bar'></div>
       <div className='form-container'>
         <div className='body'>
-          {pageDisplay()}
+          {displayPage(page)}
         </div>
         <div className='footer'></div>
           <Button
