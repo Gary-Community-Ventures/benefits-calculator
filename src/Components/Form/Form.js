@@ -7,6 +7,8 @@ import './Form.css';
 
 const Form = () => {
   const [page, setPage] = useState(0);
+  const pages = ['Sign Up', 'Personal Info', 'Other'];
+  
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -49,7 +51,7 @@ const Form = () => {
           </Button>
           <Button 
             onClick={() => {
-              if (page === FormTitles.length - 1) {
+              if (page === pages.length - 1) {
                 alert('Form has been submitted');
                 console.log({ formData });
               } else {
@@ -58,7 +60,7 @@ const Form = () => {
             }}
             variant='contained'
           >
-           {page === FormTitles.length - 1 ? 'Submit' : 'Next'}
+           {page === pages.length - 1 ? 'Submit' : 'Next'}
           </Button>
       </div>
     </div>
