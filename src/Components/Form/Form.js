@@ -20,14 +20,13 @@ const Form = () => {
     numberOfAdults: 0
   });
 
-  const FormTitles = ['Sign Up', 'Personal Info', 'Other'];
-
-  const pageDisplay = () => {
-    if (page === 0) {
+  const displayPage = (pageIndex) => {
+    switch(pageIndex) {
+      case 0:
       return <SignUpInfo formData={formData} setFormData={setFormData} />
-    } else if (page === 1) {
+      case 1: 
       return <PersonalInfo formData={formData} setFormData={setFormData}/>
-    } else {
+      case 2:
       return <Other formData={formData} setFormData={setFormData}/>
     }
   }
