@@ -7,6 +7,29 @@ const StyledTextField = styled(TextField)({
 });
 
 const SignUpInfo = ({ formData, handleChange, page, setPage }) => {
+  const validateEmail = () => {
+    return /^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(formData.email);
+  }
+  
+  const validatePassword = () => {
+    return formData.password.length > 0;
+  }
+  
+  const validateConfirmPassword = () => {
+    return formData.confirmPassword.length > 0 && formData.confirmPassword === formData.password;
+  }
+  
+  const inputsAreValid = () => {
+    return validateEmail() && validatePassword() && validateConfirmPassword();
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (inputsAreValid()) {
+      setPage(page + 1);
+    }
+  }
+
   return (
     <div className='sign-up-container'>
       <StyledTextField 
@@ -43,7 +66,7 @@ const SignUpInfo = ({ formData, handleChange, page, setPage }) => {
         error={formData.confirmPassword === '' || formData.confirmPassword !== formData.password} 
         helperText={formData.confirmPassword === '' || formData.confirmPassword !== formData.password ? 'Please enter a matching password.' : ''} />
         <Button
-          onClick={() => {setPage(page + 1)}}
+          onClick={(event) => {handleSubmit(event)}}
           variant='contained'>
           Next
         </Button>
