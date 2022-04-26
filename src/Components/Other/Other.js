@@ -7,6 +7,17 @@ const StyledTextField = styled(TextField)({
 });
 
 const Other = ({ formData, handleChange, page, setPage }) => {
+  const validateNumChildrenAdults = () => {
+    return formData.numberOfChildren >= 0 && formData.numberOfAdults >= 1;
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (validateNumChildrenAdults()) {
+      setPage(page + 1);
+    }
+  }
+
   return (
     <div className='other-container'>
       <StyledTextField 
@@ -38,7 +49,7 @@ const Other = ({ formData, handleChange, page, setPage }) => {
             Prev
           </Button>
           <Button
-            onClick={() => {setPage(page + 1)}}
+            onClick={(event) => {handleSubmit(event)}}
             variant='contained'>
             Next
           </Button>
