@@ -6,7 +6,6 @@ import './Form.css';
 
 const Form = () => {
   const [page, setPage] = useState(0);
-  const pages = ['Sign Up', 'Personal Info', 'Other'];
 
   const [formData, setFormData] = useState({
     email: '',
