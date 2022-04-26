@@ -7,6 +7,16 @@ const StyledTextField = styled(TextField)({
 });
 
 const PersonalInfo = ({ formData, handleChange, page, setPage }) => {
+  const validateFirstLastUserNames = () => {
+    return formData.firstName.length > 0 && formData.lastName.length > 0 && formData.username.length > 0;
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (validateFirstLastUserNames()) {
+      setPage(page + 1);
+    }
+  }
   return (
     <div className='personal-info-container'>
       <StyledTextField 
@@ -49,7 +59,7 @@ const PersonalInfo = ({ formData, handleChange, page, setPage }) => {
             Prev
           </Button>
           <Button
-            onClick={() => {setPage(page + 1)}}
+            onClick={(event) => {handleSubmit(event)}}
             variant='contained'>
             Next
           </Button>
