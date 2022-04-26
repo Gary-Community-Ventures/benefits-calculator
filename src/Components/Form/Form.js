@@ -2,6 +2,7 @@ import { useState } from 'react';
 import SignUpInfo from '../SignUpInfo/SignUpInfo';
 import PersonalInfo from '../PersonalInfo/PersonalInfo';
 import Other from '../Other/Other';
+import Confirm from '../Confirm/Confirm';
 import './Form.css';
 
 const Form = () => {
@@ -76,6 +77,11 @@ const Form = () => {
                 handleChange={handleChange} 
                 page={page}
                 setPage={setPage}/>
+      case 3: 
+        return <Confirm 
+                formData={formData} 
+                page={page}
+                setPage={setPage} />
     }
   }
 
