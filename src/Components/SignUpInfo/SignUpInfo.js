@@ -1,13 +1,12 @@
-import { TextField } from '@mui/material';
+import { TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-// import { useForm, SubmitHandler } from 'react-hook-form';
 import './SignUpInfo.css';
 
 const StyledTextField = styled(TextField)({
   marginBottom: 20
 });
 
-const SignUpInfo = ({ formData, setFormData, handleChange }) => {
+const SignUpInfo = ({ formData, handleChange, page, setPage }) => {
   return (
     <div className='sign-up-container'>
       <StyledTextField 
@@ -43,6 +42,11 @@ const SignUpInfo = ({ formData, setFormData, handleChange }) => {
         required 
         error={formData.confirmPassword === '' || formData.confirmPassword !== formData.password} 
         helperText={formData.confirmPassword === '' || formData.confirmPassword !== formData.password ? 'Please enter a matching password.' : ''} />
+        <Button
+          onClick={() => {setPage(page + 1)}}
+          variant='contained'>
+          Next
+        </Button>
     </div>
   );
 }

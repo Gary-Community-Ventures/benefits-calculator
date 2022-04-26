@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import './PersonalInfo.css';
 
@@ -6,7 +6,7 @@ const StyledTextField = styled(TextField)({
   marginBottom: 20
 });
 
-const PersonalInfo = ({ formData, setFormData, handleChange }) => {
+const PersonalInfo = ({ formData, handleChange, page, setPage }) => {
   return (
     <div className='personal-info-container'>
       <StyledTextField 
@@ -42,6 +42,18 @@ const PersonalInfo = ({ formData, setFormData, handleChange }) => {
         required 
         error={formData.username === ''}
         helperText={formData.username === '' ? 'Please enter a username.' : ''}/>
+        <div className='footer'>
+          <Button
+            onClick={() => {setPage(page - 1)}}
+            variant='contained'>
+            Prev
+          </Button>
+          <Button
+            onClick={() => {setPage(page + 1)}}
+            variant='contained'>
+            Next
+          </Button>
+        </div>
     </div>
   );
 }

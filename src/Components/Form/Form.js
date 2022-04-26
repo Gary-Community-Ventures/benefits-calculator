@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import Other from '../Other/Other';
-import PersonalInfo from '../PersonalInfo/PersonalInfo';
 import SignUpInfo from '../SignUpInfo/SignUpInfo';
-import { Button } from '@mui/material';
+import PersonalInfo from '../PersonalInfo/PersonalInfo';
+import Other from '../Other/Other';
 import './Form.css';
 
 const Form = () => {
   const [page, setPage] = useState(0);
   const pages = ['Sign Up', 'Personal Info', 'Other'];
-  
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -63,52 +62,31 @@ const Form = () => {
       case 0:
         return <SignUpInfo 
                 formData={formData} 
-                setFormData={setFormData} 
-                handleChange={handleChange} />
+                handleChange={handleChange} 
+                page={page}
+                setPage={setPage} />
       case 1: 
         return <PersonalInfo 
                 formData={formData} 
-                setFormData={setFormData}
-                handleChange={handleChange} />
+                handleChange={handleChange} 
+                page={page}
+                setPage={setPage}/>
       case 2:
         return <Other 
                 formData={formData} 
-                setFormData={setFormData}
-                handleChange={handleChange} />
+                handleChange={handleChange} 
+                page={page}
+                setPage={setPage}/>
     }
   }
 
   return (
     <div className='benefits-form'>
-      <div className='progress-bar'></div>
-      <div className='form-container'>
+      <form className='form-container'>
         <div className='body'>
           {displayPage(page)}
         </div>
-        <div className='footer'></div>
-          <Button
-            disabled={page === 0}
-            onClick={() => {
-              setPage((currentPage) => currentPage - 1);
-            }}
-            variant='contained'
-          >
-            Prev
-          </Button>
-          <Button 
-            onClick={() => {
-              if (page === pages.length - 1) {
-                alert('Form has been submitted');
-                console.log({ formData });
-              } else {
-                setPage((currentPage) => currentPage + 1);
-              }
-            }}
-            variant='contained'
-          >
-           {page === pages.length - 1 ? 'Submit' : 'Next'}
-          </Button>
-      </div>
+      </form>
     </div>
   );
 }

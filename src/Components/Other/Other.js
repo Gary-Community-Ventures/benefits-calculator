@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import './Other.css';
 
@@ -6,7 +6,7 @@ const StyledTextField = styled(TextField)({
   marginBottom: 20
 });
 
-const Other = ({ formData, setFormData, handleChange }) => {
+const Other = ({ formData, handleChange, page, setPage }) => {
   return (
     <div className='other-container'>
       <StyledTextField 
@@ -31,6 +31,11 @@ const Other = ({ formData, setFormData, handleChange }) => {
         required 
         error={formData.numberOfAdults < 0}
         helperText={formData.numberOfAdults < 0 ? 'Please enter a valid number.' : ''}/>
+        <Button
+          onClick={() => {setPage(page - 1)}}
+          variant='contained'>
+          Prev
+        </Button>
     </div>
   );
 }
