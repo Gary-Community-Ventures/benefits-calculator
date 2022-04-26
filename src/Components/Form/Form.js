@@ -3,6 +3,7 @@ import SignUpInfo from '../SignUpInfo/SignUpInfo';
 import PersonalInfo from '../PersonalInfo/PersonalInfo';
 import Other from '../Other/Other';
 import Confirm from '../Confirm/Confirm';
+import Success from '../Success/Success';
 import './Form.css';
 
 const Form = () => {
@@ -82,6 +83,8 @@ const Form = () => {
                 formData={formData} 
                 page={page}
                 setPage={setPage} />
+      case 4:
+        return <Success />
     }
   }
 
