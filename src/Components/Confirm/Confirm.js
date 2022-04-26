@@ -1,6 +1,5 @@
 import { List, ListItemText, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import './Confirm.css';
 
 const StyledListItemText = styled(ListItemText)({
   marginBottom: 20
