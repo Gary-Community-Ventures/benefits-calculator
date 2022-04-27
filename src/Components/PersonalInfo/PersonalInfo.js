@@ -17,6 +17,7 @@ const PersonalInfo = ({ formData, handleChange, page, setPage }) => {
       setPage(page + 1);
     }
   }
+  
   return (
     <div className='personal-info-container'>
       <StyledTextField 
