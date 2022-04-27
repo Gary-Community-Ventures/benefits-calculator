@@ -42,7 +42,7 @@ const Other = ({ formData, handleChange, page, setPage }) => {
         required 
         error={formData.numberOfAdults < 0}
         helperText={formData.numberOfAdults < 0 ? 'Please enter a valid number.' : ''}/>
-        <div className='footer'>
+        <div className='other-info-footer'>
           <Button
             onClick={() => {setPage(page - 1)}}
             variant='contained'>
