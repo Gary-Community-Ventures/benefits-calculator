@@ -38,13 +38,13 @@ const Form = () => {
                 formData={formData} 
                 handleChange={handleChange} 
                 page={page}
-                setPage={setPage}/>
+                setPage={setPage} />
       case 2:
         return <Other 
                 formData={formData} 
                 handleChange={handleChange} 
                 page={page}
-                setPage={setPage}/>
+                setPage={setPage} />
       case 3: 
         return <Confirm 
                 formData={formData} 
@@ -57,11 +57,7 @@ const Form = () => {
 
   return (
     <div className='benefits-form'>
-      <form className='form-container'>
-        <div className='body'>
-          {displayPage(page)}
-        </div>
-      </form>
+      {displayPage(page)}
     </div>
   );
 }
