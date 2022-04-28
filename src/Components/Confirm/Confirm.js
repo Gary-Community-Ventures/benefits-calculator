@@ -45,7 +45,7 @@ const Confirm = ({ formData, page, setPage }) => {
         <Button
           onClick={() => {setPage(page + 1)}}
           variant='contained'>
-          Confirm & Submit
+          Submit
         </Button>
         </div>
     </div>
