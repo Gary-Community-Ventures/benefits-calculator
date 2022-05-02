@@ -17,8 +17,7 @@ const Form = () => {
     lastName: '',
     username: '',
     numberOfChildren: 0,
-    numberOfAdults: 0,
-    isSubmitting: false
+    numberOfAdults: 0
   });
 
   const handleChange = (event) => {

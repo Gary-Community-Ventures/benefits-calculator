@@ -41,8 +41,8 @@ const SignUpInfo = ({ formData, handleChange, page, setPage }) => {
         variant='outlined'
         size='small'
         required 
-        error={formData.isSubmitting && !/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(formData.email)}
-        helperText={formData.isSubmitting && !/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(formData.email) ? 'Invalid email.' : ''} />
+        error={!/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(formData.email)}
+        helperText={!/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(formData.email) ? 'Invalid email.' : ''} />
       <StyledTextField 
         type='password'
         name='password'
@@ -52,8 +52,8 @@ const SignUpInfo = ({ formData, handleChange, page, setPage }) => {
         variant='outlined'
         size='small'
         required 
-        error={formData.isSubmitting && formData.password === ''}
-        helperText={formData.isSubmitting && formData.password === '' ? 'Please enter a password.' : ''} />
+        error={formData.password === ''}
+        helperText={formData.password === '' ? 'Please enter a password.' : ''} />
       <StyledTextField 
         type='password'
         name='confirmPassword'
@@ -63,8 +63,8 @@ const SignUpInfo = ({ formData, handleChange, page, setPage }) => {
         variant='outlined'
         size='small'
         required 
-        error={(formData.isSubmitting && formData.confirmPassword === '') || (formData.confirmPassword !== formData.password)} 
-        helperText={(formData.isSubmitting && formData.confirmPassword === '') || (formData.confirmPassword !== formData.password ? 'Please enter a matching password.' : '')} />
+        error={(formData.confirmPassword === '') || (formData.confirmPassword !== formData.password)} 
+        helperText={(formData.confirmPassword === '') || (formData.confirmPassword !== formData.password ? 'Please enter a matching password.' : '')} />
         <Button
           onClick={(event) => {handleSubmit(event)}}
           variant='contained'>
