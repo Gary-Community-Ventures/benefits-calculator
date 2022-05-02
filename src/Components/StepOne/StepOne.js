@@ -21,9 +21,7 @@ const StepOne = ({ formData, handleChange, page, setPage }) => {
   
   return (
     <div className='step-one-container'>
-      <div className='step-title'>
-        Step {page + 1} of 7
-      </div>
+      <p className='step-progress-title'>Step {page + 1} of 7</p>
       <h2 className='sub-header'>Tell us a little more about yourself.</h2>
       <p className='question-label'>How old are you?</p>
       <StyledTextField
