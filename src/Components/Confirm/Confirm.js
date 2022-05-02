@@ -1,5 +1,6 @@
 import { List, ListItemText, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import './Confirm.css';
 
 const StyledListItemText = styled(ListItemText)({
   marginBottom: 20
@@ -35,17 +36,17 @@ const Confirm = ({ formData, page, setPage }) => {
           primary='Number of Adults'
           secondary={numberOfAdults} />
       </List>
-      <div className='footer'>
-          <Button
-            onClick={() => {setPage(page - 1)}}
-            variant='contained'>
-            Prev
-          </Button>
-          <Button
-            onClick={() => {setPage(page + 1)}}
-            variant='contained'>
-            Confirm & Continue
-          </Button>
+      <div className='confirm-footer'>
+        <Button
+          onClick={() => {setPage(page - 1)}}
+          variant='contained'>
+          Prev
+        </Button>
+        <Button
+          onClick={() => {setPage(page + 1)}}
+          variant='contained'>
+          Submit
+        </Button>
         </div>
     </div>
   );

@@ -53,7 +53,7 @@ const PersonalInfo = ({ formData, handleChange, page, setPage }) => {
         required 
         error={formData.username === ''}
         helperText={formData.username === '' ? 'Please enter a username.' : ''}/>
-        <div className='footer'>
+        <div className='personal-info-footer'>
           <Button
             onClick={() => {setPage(page - 1)}}
             variant='contained'>
