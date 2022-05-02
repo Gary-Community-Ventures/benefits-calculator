@@ -17,7 +17,7 @@ const Form = () => {
   
   const displayPage = (pageIndex) => {
     switch(pageIndex) {
-      case 0:
+      default:
         return <StepOne 
                 formData={formData} 
                 handleChange={handleChange} 
