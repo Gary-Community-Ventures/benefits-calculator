@@ -64,7 +64,7 @@ const SignUpInfo = ({ formData, handleChange, page, setPage }) => {
         size='small'
         required 
         error={(formData.isSubmitting && formData.confirmPassword === '') || (formData.confirmPassword !== formData.password)} 
-        helperText={(formData.isSubmitting && formData.confirmPassword === '') || (formData.confirmPassword !== formData.password ? 'Please enter a matching password.' : '')} />
+        helperText={(formData.isSubmitting && formData.confirmPassword === '') || (formData.confirmPassword !== formData.password) ? 'Please enter a matching password.' : ''} />
         <Button
           onClick={(event) => {handleSubmit(event)}}
           variant='contained'>
