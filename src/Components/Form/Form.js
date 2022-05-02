@@ -17,12 +17,13 @@ const Form = () => {
     lastName: '',
     username: '',
     numberOfChildren: 0,
-    numberOfAdults: 0
+    numberOfAdults: 0,
+    isSubmitting: false
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]:  value });
+    setFormData({ ...formData, [name]: value, isSubmitting: true });
   };
   
   const displayPage = (pageIndex) => {
