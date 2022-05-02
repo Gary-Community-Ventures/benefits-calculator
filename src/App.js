@@ -1,23 +1,17 @@
-import logo from './logo.svg';
+import Form from '../src/Components/Form/Form';
 import './App.css';
+import { Typography, AppBar, CssBaseline } from '@mui/material';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <CssBaseline />
+      <AppBar position='relative'> 
+        <Typography variant='h4' align='center'>Benefits Calculator</Typography>
+      </AppBar>
+      <main>
+        <Form />
+      </main>
     </div>
   );
 }
