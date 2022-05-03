@@ -28,7 +28,7 @@ const Form = () => {
   
   const displayPage = (pageIndex) => {
     switch(pageIndex) {
-      case 0:
+      default:
         return <SignUpInfo 
                 formData={formData} 
                 handleChange={handleChange} 
