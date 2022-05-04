@@ -1,0 +1,15 @@
+.question-label-1, .question-label-2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+}
+
+.follow-up-p-tag {
+  margin-bottom: 1rem;
+}
+
+.form-group-1 {
+  margin-bottom: 24px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #505c66;
+}
