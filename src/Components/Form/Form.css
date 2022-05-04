@@ -7,3 +7,15 @@
   align-items: center;
   margin-top: 20px;
 }
+
+.step-progress-title {
+  font-weight: 700;
+  color: #1976d2;
+}
+
+.sub-header {
+  font-size: 32px;
+  margin-bottom: 24px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #505c66;
+}
