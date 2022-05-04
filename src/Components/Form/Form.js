@@ -15,7 +15,10 @@ const Form = () => {
     isBlindOrVisuallyImpaired: false,
     isDisabled: false,
     isAVeteran: false,
-    isNone: false
+    isNoneOfTheseApply: false,
+    isOnMedicaid: false,
+    isOnDisabilityRelatedMedicaid: false,
+    isNotReceivingAnyMedicaidBenefits: false 
   });
 
   const handleChange = (event) => {
