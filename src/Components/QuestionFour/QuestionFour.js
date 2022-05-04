@@ -18,8 +18,8 @@ const QuestionFour = ({formData, handleCheckboxChange, page, setPage }) => {
   }
   return (
     <>
-      <p className='question-label-2'>Do you receive any of these benefits?</p>
-      <FormGroup className='form-group-2'>
+      <p className='question-label'>Do you receive any of these benefits?</p>
+      <FormGroup className='form-group'>
         <FormControlLabel 
           control={<Checkbox checked={formData.isOnMedicaid} onChange={handleCheckboxChange} />} 
           label='Medicaid'
