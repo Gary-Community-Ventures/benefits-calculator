@@ -1,7 +1,34 @@
-import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, Button } from '@mui/material';
 import './StepTwo.css';
 
 const StepTwo = ({formData, handleCheckboxChange, page, setPage }) => {
+  const validateIsNoneOfTheseApply = () => {
+    if (formData.isNoneOfTheseApply) {
+      return formData.isStudent === false && formData.isPregnant === false 
+        && formData.isUnemployed === false && formData.isBlindOrVisuallyImpaired === false 
+        && formData.isDisabled === false && formData.isAVeteran === false;
+    } else if (formData.isNoneOfTheseApply === false) {
+      return formData.isStudent === true || formData.isPregnant === true 
+      || formData.isUnemployed === true || formData.isBlindOrVisuallyImpaired === true 
+      || formData.isDisabled === true || formData.isAVeteran === true;
+    }
+  }
+
+  const validateIsNotReceivingAnyMedicaidBenefits = () => {
+    if (formData.isNotReceivingAnyMedicaidBenefits) {
+      return formData.isOnMedicaid === false && formData.isOnDisabilityRelatedMedicaid === false;
+    } else if (formData.isNotReceivingAnyMedicaidBenefits === false) {
+      return formData.isOnMedicaid === true || formData.isOnDisabilityRelatedMedicaid === true;
+    }
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (validateIsNoneOfTheseApply() && validateIsNotReceivingAnyMedicaidBenefits() ) {
+      setPage(page + 1);
+    }
+  }
+
   return (
     <div className='step-two-container'>
       <p className='step-progress-title'>Step {page + 1} of 7</p>
@@ -53,6 +80,16 @@ const StepTwo = ({formData, handleCheckboxChange, page, setPage }) => {
           label='None of these apply'
           value='isNotReceivingAnyMedicaidBenefits' />
       </FormGroup>
+      <Button
+        onClick={() => {setPage(page - 1)}}
+        variant='contained'>
+        Prev
+      </Button>
+      <Button
+        onClick={(event) => {handleSubmit(event)}}
+        variant='contained'>
+        Continue
+      </Button>
     </div>
   );
 }
