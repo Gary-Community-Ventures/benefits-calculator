@@ -12,6 +12,7 @@ const Form = () => {
     applicantAge: 0,
     zipcode: '',
     isStudent: false,
+    isAFullTimeStudent: false,
     isPregnant: false,
     isUnemployed: false,
     isBlindOrVisuallyImpaired: false,
@@ -30,7 +31,13 @@ const Form = () => {
 
   const handleCheckboxChange = (event) => {
     const { value } = event.target;
-    setFormData({...formData, [value]: !formData[value]})
+    setFormData({ ...formData, [value]: !formData[value] });
+  }
+
+  const handleRadioButtonChange = (event) => {
+    const { name, value } = event.target;
+    let boolValue = (value === 'true');
+    setFormData({ ...formData, [name]: boolValue });
   }
   
   const displayPage = (pageIndex) => {
@@ -52,7 +59,8 @@ const Form = () => {
                 formData={formData}
                 handleCheckboxChange={handleCheckboxChange} 
                 page={page}
-                setPage={setPage} />
+                setPage={setPage}
+                handleRadioButtonChange={handleRadioButtonChange} />
       case 3:
         return <QuestionFour
                 formData={formData}
