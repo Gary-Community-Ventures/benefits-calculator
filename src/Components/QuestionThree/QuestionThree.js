@@ -1,8 +1,8 @@
-import { Checkbox, FormControlLabel, FormGroup, Button } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, Button, FormLabel, RadioGroup, Radio } from '@mui/material';
 import './QuestionThree.css';
 
 
-const QuestionThree = ({formData, handleCheckboxChange, page, setPage }) => {
+const QuestionThree = ({formData, handleCheckboxChange, page, setPage, handleRadioButtonChange }) => {
   const validateIsNoneOfTheseApply = () => {
     if (formData.isNoneOfTheseApply) {
       return formData.isStudent === false && formData.isPregnant === false 
@@ -31,6 +31,19 @@ const QuestionThree = ({formData, handleCheckboxChange, page, setPage }) => {
           control={<Checkbox checked={formData.isStudent} onChange={handleCheckboxChange} />}  
           label='Student' 
           value='isStudent' />
+        {formData.isStudent ? 
+          <>
+            <FormLabel id='is-a-full-time-student-group'> Are you a full time student? </FormLabel>
+            <RadioGroup
+              aria-labelledby='is-a-full-time-student-group'
+              name='isAFullTimeStudent'
+              value={formData.isAFullTimeStudent}
+              onChange={handleRadioButtonChange} >
+                <FormControlLabel value='true' control={<Radio />} label='Yes' />
+                <FormControlLabel value='false' control={<Radio />} label='No' />
+              </RadioGroup>
+          </> 
+          : ''}
         <FormControlLabel 
           control={<Checkbox checked={formData.isPregnant} onChange={handleCheckboxChange} />} 
           label='Pregnant' 
