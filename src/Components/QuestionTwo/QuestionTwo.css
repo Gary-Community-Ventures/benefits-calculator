@@ -3,3 +3,8 @@
   font-weight: 700;
   margin-bottom: 8px;
 }
+
+.question-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}

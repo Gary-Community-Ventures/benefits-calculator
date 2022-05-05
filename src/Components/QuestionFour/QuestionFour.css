@@ -7,3 +7,8 @@
 .form-group {
   margin-bottom: 24px;
 }
+
+.question-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
