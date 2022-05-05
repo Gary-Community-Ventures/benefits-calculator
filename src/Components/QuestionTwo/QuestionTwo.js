@@ -30,16 +30,18 @@ const QuestionTwo = ({formData, handleChange, page, setPage }) => {
         required 
         error={formData.zipcode === '' || formData.zipcode.length < 5 } 
         helperText={(formData.zipcode === '' || formData.zipcode.length < 5) ? 'This entry is required to continue.' : '' } /> 
-      <Button
-        onClick={() => {setPage(page - 1)}}
-        variant='contained'>
-        Prev
-      </Button>
-      <Button
-        onClick={(event) => {handleSubmit(event)}}
-        variant='contained'>
-        Continue
-      </Button>
+      <div className='question-buttons'>
+        <Button
+          onClick={() => {setPage(page - 1)}}
+          variant='contained'>
+          Prev
+        </Button>
+        <Button
+          onClick={(event) => {handleSubmit(event)}}
+          variant='contained'>
+          Continue
+        </Button>
+      </div>
     </>
   );
 }

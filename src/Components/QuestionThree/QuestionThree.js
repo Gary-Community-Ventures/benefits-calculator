@@ -56,16 +56,18 @@ const QuestionThree = ({formData, handleCheckboxChange, page, setPage }) => {
           label='None of these apply'
           value='isNoneOfTheseApply' />
       </FormGroup>
-      <Button
-        onClick={() => {setPage(page - 1)}}
-        variant='contained'>
-        Prev
-      </Button>
-      <Button
-        onClick={(event) => {handleSubmit(event)}}
-        variant='contained'>
-        Continue
-      </Button>
+      <div className='question-buttons'>
+        <Button
+          onClick={() => {setPage(page - 1)}}
+          variant='contained'>
+          Prev
+        </Button>
+        <Button
+          onClick={(event) => {handleSubmit(event)}}
+          variant='contained'>
+          Continue
+        </Button>
+      </div>
     </>
   );
 }
