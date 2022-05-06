@@ -5,8 +5,9 @@ import './QuestionThree.css';
 const QuestionThree = ({formData, handleCheckboxChange, page, setPage, handleRadioButtonChange }) => {
   const validateIsNoneOfTheseApply = () => {
     if (formData.isNoneOfTheseApply) {
-      return formData.isStudent === false && formData.isPregnant === false 
-        && formData.isUnemployed === false && formData.isBlindOrVisuallyImpaired === false 
+      return formData.isStudent === false && formData.isAFullTimeStudent === false &&
+        formData.isPregnant === false && formData.isUnemployed === false && 
+        formData.hasWorkedInPast18Mos === false && formData.isBlindOrVisuallyImpaired === false 
         && formData.isDisabled === false && formData.isAVeteran === false;
     } else if (formData.isNoneOfTheseApply === false) {
       return formData.isStudent === true || formData.isPregnant === true 
@@ -21,6 +22,8 @@ const QuestionThree = ({formData, handleCheckboxChange, page, setPage, handleRad
       setPage(page + 1);
     }
   }
+
+
   
   return (
     <>
@@ -33,7 +36,7 @@ const QuestionThree = ({formData, handleCheckboxChange, page, setPage, handleRad
           value='isStudent' />
         {formData.isStudent ? 
           <>
-            <FormLabel id='is-a-full-time-student-group'> Are you a full time student? </FormLabel>
+            <FormLabel id='is-a-full-time-student-group' className='follow-up-p-tag'> Are you a full time student? </FormLabel>
             <RadioGroup
               aria-labelledby='is-a-full-time-student-group'
               name='isAFullTimeStudent'
@@ -42,8 +45,9 @@ const QuestionThree = ({formData, handleCheckboxChange, page, setPage, handleRad
                 <FormControlLabel value='true' control={<Radio />} label='Yes' />
                 <FormControlLabel value='false' control={<Radio />} label='No' />
               </RadioGroup>
-          </> 
-          : ''}
+          </>
+          : ''
+        }
         <FormControlLabel 
           control={<Checkbox checked={formData.isPregnant} onChange={handleCheckboxChange} />} 
           label='Pregnant' 
@@ -52,6 +56,20 @@ const QuestionThree = ({formData, handleCheckboxChange, page, setPage, handleRad
           control={<Checkbox checked={formData.isUnemployed} onChange={handleCheckboxChange} />} 
           label='Unemployed' 
           value='isUnemployed' />
+        {formData.isUnemployed ? 
+          <>
+            <FormLabel id='is-a-full-time-student-group' className='follow-up-p-tag'> Did you work in the past 18 months? </FormLabel>
+            <RadioGroup
+              aria-labelledby='has-worked-in-past-18-mos-group'
+              name='hasWorkedInPast18Mos'
+              value={formData.hasWorkedInPast18Mos}
+              onChange={handleRadioButtonChange} >
+                <FormControlLabel value='true' control={<Radio />} label='Yes' />
+                <FormControlLabel value='false' control={<Radio />} label='No' />
+              </RadioGroup>
+          </>
+          : ''
+        }
         <FormControlLabel 
           control={<Checkbox checked={formData.isBlindOrVisuallyImpaired} onChange={handleCheckboxChange} />} 
           label='Blind or visually impaired' 
