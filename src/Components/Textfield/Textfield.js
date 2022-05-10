@@ -18,8 +18,8 @@ const Textfield = ({ componentDetails, formData, handleChange }) => {
         onChange={(event) => {handleChange(event)}}
         variant='outlined'
         required
-        error={inputError}
-        helperText={inputHelperText} />
+        error={inputError(formData[inputName])}
+        helperText={inputHelperText(formData[inputName])} />
     </>
   );
 }
