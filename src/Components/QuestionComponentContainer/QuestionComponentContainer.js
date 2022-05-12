@@ -8,13 +8,15 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
 
     if (matchingQuestion.componentDetails.componentType === 'Textfield') {
       return (
-        <Textfield 
-          componentDetails={matchingQuestion.componentDetails}
-          formData={formData}
-          handleChange={handleChange} />
-      ) 
+        <>
+          <p className='question-label'>{matchingQuestion.question}</p>
+          <Textfield 
+            componentDetails={matchingQuestion.componentDetails}
+            formData={formData}
+            handleChange={handleChange} />
+        </>
+      );
     }
- 
   }
 
   return (
