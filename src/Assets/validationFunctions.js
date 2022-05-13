@@ -8,14 +8,12 @@ const displayAgeHelperText = (applicantAge) => {
 
 const zipcodeHasError = (zipcode) => {
   const numZipcode = Number(zipcode);
-  const typeOfZipcode = typeof numZipcode;
-  return zipcode.length !== 5 || typeOfZipcode !== 'number';
+  return zipcode.length !== 5 || Number.isInteger(numZipcode) === false;
 } 
 
 const displayZipcodeHelperText = (zipcode) => {
   const numZipcode = Number(zipcode);
-  const typeOfZipcode = typeof numZipcode;
-  return (zipcode.length !== 5 || typeOfZipcode !== 'number') ? 'This entry is required to continue.' : '' ;
+  return (zipcode.length !== 5 || Number.isInteger(numZipcode) === false) ? 'This entry is required to continue.' : '' ;
 } 
 
 module.exports = {
