@@ -1,4 +1,4 @@
-import { ageHasError, displayAgeHelperText, zipcodeHasError, displayZipcodeHelperText } from './validationFunctions';
+import { ageHasError, displayAgeHelperText, zipcodeHasError, displayZipcodeHelperText, radiofieldHasError } from './validationFunctions';
 
 const questions = [
   {
@@ -24,8 +24,18 @@ const questions = [
       inputError: zipcodeHasError,
       inputHelperText: displayZipcodeHelperText
     }    
-  }
-  //inputOptions
+  },
+  {
+    id: 2,
+    question: 'Are you a full-time student?',
+    componentDetails: {
+      componentType:'Radiofield',
+      ariaLabel: 'is a full-time student',
+      inputName: 'isAFullTimeStudent',
+      inputError: radiofieldHasError
+    }    
+  },
+  
 ];
 
 export default questions;
