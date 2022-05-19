@@ -16,7 +16,6 @@ const Form = () => {
     isAVeteran: false,
     isOnMedicaid: false,
     isOnDisabilityRelatedMedicaid: false,
-    isNotReceivingAnyMedicaidBenefits: true 
   });
 
   const handleChange = (event) => {
