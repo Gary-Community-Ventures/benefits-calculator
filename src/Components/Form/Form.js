@@ -10,7 +10,6 @@ const Form = () => {
     zipcode: '',
     isAFullTimeStudent: false,
     isPregnant: false,
-    isUnemployed: false,
     hasWorkedInPast18Mos: false,
     isBlindOrVisuallyImpaired: false,
     isDisabled: false,
