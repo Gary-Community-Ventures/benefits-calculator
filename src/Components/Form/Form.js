@@ -14,7 +14,6 @@ const Form = () => {
     isBlindOrVisuallyImpaired: false,
     isDisabled: false,
     isAVeteran: false,
-    isNoneOfTheseApply: true,
     isOnMedicaid: false,
     isOnDisabilityRelatedMedicaid: false,
     isNotReceivingAnyMedicaidBenefits: true 
