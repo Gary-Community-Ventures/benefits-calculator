@@ -55,6 +55,26 @@ const questions = [
       inputError: radiofieldHasError
     }    
   },
+  {
+    id: 5,
+    question: 'Are you blind or visually impaired?',
+    componentDetails: {
+      componentType:'Radiofield',
+      ariaLabel: 'is blind or visually impaired',
+      inputName: 'isBlindOrVisuallyImpaired',
+      inputError: radiofieldHasError
+    }    
+  },
+  {
+    id: 6,
+    question: 'Do you have any disabilities?',
+    componentDetails: {
+      componentType:'Radiofield',
+      ariaLabel: 'has any disabilities',
+      inputName: 'isDisabled',
+      inputError: radiofieldHasError
+    }    
+  },
   
 ];
 
