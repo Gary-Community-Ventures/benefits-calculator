@@ -16,9 +16,14 @@ const displayZipcodeHelperText = (zipcode) => {
   return (zipcode.length !== 5 || Number.isInteger(numZipcode) === false) ? 'This entry is required to continue.' : '' ;
 } 
 
+const radiofieldHasError = (radiofield) => {
+  return typeof radiofield !== 'boolean';
+}
+
 module.exports = {
   ageHasError,
   displayAgeHelperText,
   zipcodeHasError,
-  displayZipcodeHelperText
+  displayZipcodeHelperText,
+  radiofieldHasError
 }
