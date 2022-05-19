@@ -87,11 +87,31 @@ const questions = [
   },
   {
     id: 8,
-    question: 'Have you served in the U.S. Armed Forces, National Guard or Reserves?',
+    question: 'Do you receive Medicaid?',
     componentDetails: {
       componentType:'Radiofield',
-      ariaLabel: 'is a veteran',
-      inputName: 'isAVeteran',
+      ariaLabel: 'is on Medicaid',
+      inputName: 'isOnMedicaid',
+      inputError: radiofieldHasError
+    }    
+  },
+  {
+    id: 9,
+    question: 'Do you receive disability-related Medicaid?',
+    componentDetails: {
+      componentType:'Radiofield',
+      ariaLabel: 'is on disability-related medicaid',
+      inputName: 'isOnDisabilityRelatedMedicaid',
+      inputError: radiofieldHasError
+    }    
+  },
+  {
+    id: 10,
+    question: 'Do you receive disability-related Medicaid?',
+    componentDetails: {
+      componentType:'Radiofield',
+      ariaLabel: 'is on disability-related medicaid',
+      inputName: 'isOnDisabilityRelatedMedicaid',
       inputError: radiofieldHasError
     }    
   },
