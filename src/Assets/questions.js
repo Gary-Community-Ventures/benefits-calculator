@@ -35,6 +35,26 @@ const questions = [
       inputError: radiofieldHasError
     }    
   },
+  {
+    id: 3,
+    question: 'Are you pregnant?',
+    componentDetails: {
+      componentType:'Radiofield',
+      ariaLabel: 'is pregnant',
+      inputName: 'isPregnant',
+      inputError: radiofieldHasError
+    }    
+  },
+  {
+    id: 4,
+    question: 'Have you worked in the past 18 months?',
+    componentDetails: {
+      componentType:'Radiofield',
+      ariaLabel: 'has worked in the past 18 months',
+      inputName: 'hasWorkedInPast18Mos',
+      inputError: radiofieldHasError
+    }    
+  },
   
 ];
 
