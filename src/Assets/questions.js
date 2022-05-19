@@ -75,6 +75,26 @@ const questions = [
       inputError: radiofieldHasError
     }    
   },
+  {
+    id: 7,
+    question: 'Have you served in the U.S. Armed Forces, National Guard or Reserves?',
+    componentDetails: {
+      componentType:'Radiofield',
+      ariaLabel: 'is a veteran',
+      inputName: 'isAVeteran',
+      inputError: radiofieldHasError
+    }    
+  },
+  {
+    id: 8,
+    question: 'Have you served in the U.S. Armed Forces, National Guard or Reserves?',
+    componentDetails: {
+      componentType:'Radiofield',
+      ariaLabel: 'is a veteran',
+      inputName: 'isAVeteran',
+      inputError: radiofieldHasError
+    }    
+  },
   
 ];
 
