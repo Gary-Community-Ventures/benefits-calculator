@@ -16,28 +16,24 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
           componentDetails={matchingQuestion.componentDetails}
           formData={formData}
           handleChange={handleChange} />
-        {matchingQuestion.id === 0 ? 
+        <div className='question-buttons'>
+          {matchingQuestion.id > 0 && <PreviousButton 
+            page={page} 
+            setPage={setPage} />}
           <ContinueButton 
             handleSubmit={handleSubmit} 
             inputError={matchingQuestion.componentDetails.inputError}
             formData={formData} 
             inputName={matchingQuestion.componentDetails.inputName} />
-        
-        : 
-          <div className='question-buttons'>
-          {matchingQuestion.id > 0 && <PreviousButton 
-              page={page} 
-            setPage={setPage} />}
-            <ContinueButton 
-              handleSubmit={handleSubmit} 
-              inputError={matchingQuestion.componentDetails.inputError}
-              formData={formData} 
-              inputName={matchingQuestion.componentDetails.inputName} />
-          </div>
-        }
+        </div>
       </div>
     );
+  }
+
   const createRadiofieldComponent = () => {
+    const inputName = matchingQuestion.componentDetails.inputName;
+    const { followUpQuestions } = matchingQuestion;
+    const hasFollowUpQuestions = followUpQuestions && followUpQuestions.length > 0;
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
@@ -45,6 +41,7 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
           componentDetails={matchingQuestion.componentDetails}
           formData={formData}
           handleRadioButtonChange={handleRadioButtonChange} />
+        {formData[inputName] === true && hasFollowUpQuestions && renderFollowUpQuestions()}
         <div className='question-buttons'>
           <PreviousButton 
             page={page} 
@@ -57,6 +54,19 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
         </div>
       </div>
     ); 
+  }
+
+  const renderFollowUpQuestions = () => {
+    const { followUpQuestions } = matchingQuestion;
+    return followUpQuestions.map((followUp, index) => {
+      return <div key={index}>
+        <p className='question-label'>{followUp.question}</p>
+        <Radiofield
+          componentDetails={followUp.componentDetails}
+          formData={formData}
+          handleRadioButtonChange={handleRadioButtonChange} />
+      </div>
+    });
   }
 
   if (matchingQuestion.componentDetails.componentType === 'Textfield') {
