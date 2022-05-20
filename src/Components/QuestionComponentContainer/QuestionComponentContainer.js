@@ -7,8 +7,8 @@ import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page, setPage, handleRadioButtonChange }) => {
   const matchingQuestion = questions.find((question) => question.id === page);
-  console.log({matchingQuestion})
-  if (matchingQuestion.componentDetails.componentType === 'Textfield') {
+  // console.log({matchingQuestion})
+  const createTextfieldComponent = () => {
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
@@ -37,7 +37,7 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
         }
       </div>
     );
-  } else if (matchingQuestion.componentDetails.componentType === 'Radiofield') {
+  const createRadiofieldComponent = () => {
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
@@ -57,6 +57,12 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
         </div>
       </div>
     ); 
+  }
+
+  if (matchingQuestion.componentDetails.componentType === 'Textfield') {
+    return createTextfieldComponent();
+  } else if (matchingQuestion.componentDetails.componentType === 'Radiofield') {
+    return createRadiofieldComponent();
   }
 
 }
