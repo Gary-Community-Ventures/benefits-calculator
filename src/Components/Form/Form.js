@@ -3,7 +3,7 @@ import QuestionComponentContainer from '../QuestionComponentContainer/QuestionCo
 import './Form.css';
 
 const Form = () => {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(4);
 
   const [formData, setFormData] = useState({
     applicantAge: 0,
@@ -23,7 +23,8 @@ const Form = () => {
   useEffect(() => {
     if (formData.student === false) {
       setFormData({ ...formData, studentFulltime: false });
-    } else if (formData.unemployed === false) { 
+    }
+    if (formData.unemployed === false) { 
       setFormData({ ...formData, unemployedWorkedInLast18Mos: false });
     }
   }, [formData.student, formData.unemployed]);
