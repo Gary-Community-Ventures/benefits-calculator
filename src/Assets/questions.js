@@ -27,13 +27,23 @@ const questions = [
   },
   {
     id: 2,
-    question: 'Are you a full-time student?',
+    question: 'Are you a student?',
     componentDetails: {
       componentType:'Radiofield',
-      ariaLabel: 'is a full-time student',
-      inputName: 'isAFullTimeStudent',
+      ariaLabel: 'is a student',
+      inputName: 'student',
       inputError: radiofieldHasError
-    }    
+    },
+    hasConditionalFollowUpQ: true,
+    followUpQuestions: [{
+      question: 'Are you a full-time student?',
+      componentDetails: {
+        componentType:'Radiofield',
+        ariaLabel: 'is a full-time student',
+        inputName: 'studentFulltime',
+        inputError: radiofieldHasError
+      }
+    }]
   },
   {
     id: 3,
@@ -47,13 +57,23 @@ const questions = [
   },
   {
     id: 4,
-    question: 'Have you worked in the past 18 months?',
+    question: 'Are you currently unemployed?',
     componentDetails: {
       componentType:'Radiofield',
-      ariaLabel: 'has worked in the past 18 months',
-      inputName: 'hasWorkedInPast18Mos',
+      ariaLabel: 'is currently unemployed',
+      inputName: 'unemployed',
       inputError: radiofieldHasError
-    }    
+    },
+    hasConditionalFollowUpQ: true,
+    followUpQuestions: [{
+      question: 'Did you work in the past 18 months?',
+      componentDetails: {
+        componentType:'Radiofield',
+        ariaLabel: 'has worked in the past 18 months',
+        inputName: 'unemployedWorkedInLast18Mos',
+        inputError: radiofieldHasError
+      }
+    }]    
   },
   {
     id: 5,
@@ -107,11 +127,11 @@ const questions = [
   },
   {
     id: 10,
-    question: 'Do you receive disability-related Medicaid?',
+    question: '',
     componentDetails: {
       componentType:'Radiofield',
-      ariaLabel: 'is on disability-related medicaid',
-      inputName: 'isOnDisabilityRelatedMedicaid',
+      ariaLabel: '',
+      inputName: '',
       inputError: radiofieldHasError
     }    
   },
