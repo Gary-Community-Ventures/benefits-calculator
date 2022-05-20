@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import QuestionComponentContainer from '../QuestionComponentContainer/QuestionComponentContainer';
 import './Form.css';
 
@@ -19,6 +19,14 @@ const Form = () => {
     isOnMedicaid: false,
     isOnDisabilityRelatedMedicaid: false,
   });
+
+  useEffect(() => {
+    if (formData.student === false) {
+      setFormData({ ...formData, studentFulltime: false });
+    } else if (formData.unemployed === false) { 
+      setFormData({ ...formData, unemployedWorkedInLast18Mos: false });
+    }
+  }, [formData.student, formData.unemployed]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
