@@ -8,9 +8,11 @@ const Form = () => {
   const [formData, setFormData] = useState({
     applicantAge: 0,
     zipcode: '',
-    isAFullTimeStudent: false,
+    student: false,
+    studentFulltime: false,
     isPregnant: false,
-    hasWorkedInPast18Mos: false,
+    unemployed: false,
+    unemployedWorkedInLast18Mos: false,
     isBlindOrVisuallyImpaired: false,
     isDisabled: false,
     isAVeteran: false,
