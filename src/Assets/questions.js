@@ -127,11 +127,11 @@ const questions = [
   },
   {
     id: 10,
-    question: '',
+    question: 'Do you have an income?',
     componentDetails: {
       componentType:'Radiofield',
-      ariaLabel: '',
-      inputName: '',
+      ariaLabel: 'has an income',
+      inputName: 'hasIncome',
       inputError: radiofieldHasError
     }    
   },
