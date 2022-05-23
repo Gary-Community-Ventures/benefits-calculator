@@ -18,6 +18,7 @@ const Form = () => {
     isAVeteran: false,
     isOnMedicaid: false,
     isOnDisabilityRelatedMedicaid: false,
+    hasIncome: false
   });
 
   useEffect(() => {
