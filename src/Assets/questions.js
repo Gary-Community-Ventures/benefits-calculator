@@ -34,7 +34,6 @@ const questions = [
       inputName: 'student',
       inputError: radiofieldHasError
     },
-    hasConditionalFollowUpQ: true,
     followUpQuestions: [{
       question: 'Are you a full-time student?',
       componentDetails: {
@@ -64,7 +63,6 @@ const questions = [
       inputName: 'unemployed',
       inputError: radiofieldHasError
     },
-    hasConditionalFollowUpQ: true,
     followUpQuestions: [{
       question: 'Did you work in the past 18 months?',
       componentDetails: {
