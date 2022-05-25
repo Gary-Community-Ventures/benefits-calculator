@@ -131,6 +131,12 @@ const questions = [
       ariaLabel: 'has an income',
       inputName: 'hasIncome',
       inputError: radiofieldHasError
+    },
+    followUpQuestions: [{
+      question: 'What type of income have you had most recently?',
+      componentDetails: {
+        componentType:'Selectfield',
+        ariaLabel: 'most recent type of income',
     }    
   },
   
