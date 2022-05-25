@@ -3,6 +3,7 @@ import Radiofield from '../Radiofield/Radiofield';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import questions from '../../Assets/questions';
+import Selectfield from '../SelectField/Selectfield';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page, setPage, handleRadioButtonChange }) => {
@@ -59,13 +60,24 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
   const renderFollowUpQuestions = () => {
     const { followUpQuestions } = matchingQuestion;
     return followUpQuestions.map((followUp, index) => {
-      return <div key={index}>
-        <p className='question-label'>{followUp.question}</p>
-        <Radiofield
-          componentDetails={followUp.componentDetails}
-          formData={formData}
-          handleRadioButtonChange={handleRadioButtonChange} />
-      </div>
+      if (followUp.componentDetails.componentType === 'Radiofield') {
+        return <div key={index}>
+          <p className='question-label'>{followUp.question}</p>
+          <Radiofield
+            componentDetails={followUp.componentDetails}
+            formData={formData}
+            handleRadioButtonChange={handleRadioButtonChange} />
+        </div>
+      } else if (followUp.componentDetails.componentType === 'Selectfield') {
+        return <div key={index}>
+          <p className='question-label'>{followUp.question}</p>
+          <Selectfield 
+            componentDetails={followUp.componentDetails}
+            formData={formData}
+            handleChange={handleChange}
+          />
+        </div>
+      }
     });
   }
 
