@@ -20,10 +20,22 @@ const radiofieldHasError = (radiofield) => {
   return typeof radiofield !== 'boolean';
 }
 
+const incomeStreamValueHasError = (valueInput) => {
+  const numValueInput = Number(valueInput);
+  return numValueInput <= 0;
+}
+
+const displayIncomeStreamValueHelperText = (valueInput) => {
+  const numValueInput = Number(valueInput);
+  return numValueInput <= 0 && 'This entry is required to continue.';
+}
+
 module.exports = {
   ageHasError,
   displayAgeHelperText,
   zipcodeHasError,
   displayZipcodeHelperText,
-  radiofieldHasError
+  radiofieldHasError,
+  incomeStreamValueHasError,
+  displayIncomeStreamValueHelperText
 }
