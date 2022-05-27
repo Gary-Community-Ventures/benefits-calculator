@@ -62,7 +62,6 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
           onChange={(event) => { handleSelectChange(event) }}>
           {createMenuItems()}
         </StyledSelectfield>
-        <FormHelperText></FormHelperText>
       </FormControl>
       <>
         <p className='question-label'>How much do you receive for: {selectedMenuItem.incomeStreamLabel}?</p>
@@ -70,7 +69,7 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
           type='number'
           name={selectedMenuItem.incomeStreamName}
           value={selectedMenuItem.incomeAmount}
-          label={selectedMenuItem.incomeStreamLabel}
+          label='Amount'
           onChange={(event) => {handleTextfieldChange(event)}}
             variant='outlined'
             required
