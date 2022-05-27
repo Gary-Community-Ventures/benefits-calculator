@@ -17,7 +17,8 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
   const [selectedMenuItem, setSelectedMenuItem] = useState({ 
     incomeStreamName: '', 
     incomeStreamLabel: '', 
-    incomeAmount: 0 
+    incomeAmount: 0,
+    incomeFrequency: ''
   });
 
   const createMenuItems = () => {
