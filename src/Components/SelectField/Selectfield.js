@@ -44,7 +44,7 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
   }
 
   const handleTextfieldChange = (event) => {
-    const { name, value } = event.target; 
+    const { value } = event.target; 
     setSelectedMenuItem({ ...selectedMenuItem, incomeAmount: Math.round(Number(value)) }); 
   }
   }
