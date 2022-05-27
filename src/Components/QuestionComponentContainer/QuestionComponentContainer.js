@@ -69,13 +69,9 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
             handleRadioButtonChange={handleRadioButtonChange} />
         </div>
       } else if (followUp.componentDetails.componentType === 'Selectfield') {
-        return <div key={index}>
+        return <div className='question-container' key={index}>
           <p className='question-label'>{followUp.question}</p>
-          <Selectfield 
-            componentDetails={followUp.componentDetails}
-            formData={formData}
-            handleChange={handleChange}
-          />
+          <Selectfield handleIncomeStreamAmountChange={handleIncomeStreamAmountChange} />
         </div>
       }
     });
