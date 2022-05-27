@@ -33,6 +33,28 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
 
     return [disabledSelectMenuItem, menuItems];
   }
+
+  const createFrequencyMenuItems = () => {
+    const disabledSelectMenuItem = <MenuItem value='select' key='disabled-frequency-select-value' disabled>Select</MenuItem>;
+    const incomeFrequencyOptions = {
+      weekly:'Every week',
+      biweekly: 'Every 2 weeks',
+      monthly: 'Every month',
+      semimonthly: 'Twice a month',
+      yearly: 'Every year'
+    };
+
+    const menuItemKeys = Object.keys(incomeFrequencyOptions);
+    const menuItemLabels = Object.values(incomeFrequencyOptions);
+    const menuItems = menuItemKeys.map((menuItemKey, i) => {
+      return (
+        <MenuItem value={menuItemKey} key={menuItemLabels[i]}>{menuItemLabels[i]}</MenuItem>
+      );
+    });
+
+    return [disabledSelectMenuItem, menuItems];
+
+  }
   
   const handleSelectChange = (event) => {
     setSelectedMenuItem({ 
