@@ -70,6 +70,11 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
     const { value } = event.target; 
     setSelectedMenuItem({ ...selectedMenuItem, incomeAmount: Math.round(Number(value)) }); 
   }
+
+  const handleFrequencySelectChange = (event) => {
+    const { value } = event.target; 
+    setSelectedMenuItem({ ...selectedMenuItem, incomeFrequency: value }); 
+  }
   }
 
   return (
