@@ -1,6 +1,7 @@
 import { FormControl, Select, MenuItem, InputLabel, FormHelperText, TextField } from "@mui/material";
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
+import { incomeStreamValueHasError, displayIncomeStreamValueHelperText } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
 
 const StyledSelectfield = styled(Select)({
@@ -73,9 +74,9 @@ const Selectfield = ({ formData, handleIncomeStreamAmountChange }) => {
           onChange={(event) => {handleTextfieldChange(event)}}
             variant='outlined'
             required
-            // error={inputError(formData[inputName])}
-            // helperText={inputHelperText(formData[inputName])} 
-            /> */}
+          error={incomeStreamValueHasError(selectedMenuItem.incomeAmount)} 
+          helperText={displayIncomeStreamValueHelperText(selectedMenuItem.incomeAmount)} 
+        />
       </>
     </>
   );
