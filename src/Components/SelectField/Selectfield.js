@@ -14,8 +14,8 @@ const StyledTextField = styled(TextField)({
 
 const Selectfield = ({ formData, handleIncomeStreamAmountChange }) => {
   const [selectedMenuItem, setSelectedMenuItem] = useState({ 
-    stateValue: '', 
-    labelValue: '', 
+    incomeStreamName: '', 
+    incomeStreamLabel: '', 
     incomeAmount: 0 
   });
 
@@ -34,7 +34,7 @@ const Selectfield = ({ formData, handleIncomeStreamAmountChange }) => {
   }
   
   const handleSelectChange = (event) => {
-    setSelectedMenuItem({ ...selectedMenuItem, stateValue: event.target.value, labelValue: incomeOptions[event.target.value] });
+    setSelectedMenuItem({ ...selectedMenuItem, incomeStreamName: event.target.value, incomeStreamLabel: incomeOptions[event.target.value] });
   }
   }
 
@@ -45,8 +45,8 @@ const Selectfield = ({ formData, handleIncomeStreamAmountChange }) => {
         <StyledSelectfield
           labelId='income-type-label'
           id='income-type'
-          value={selectedMenuItem.stateValue}
-          name={selectedMenuItem.labelValue}
+          value={selectedMenuItem.incomeStreamName}
+          name={selectedMenuItem.incomeStreamLabel}
           label='Income Type'
           onChange={(event) => { handleSelectChange(event) }}>
           {createMenuItems()}
