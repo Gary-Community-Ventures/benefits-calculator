@@ -12,8 +12,12 @@ const StyledTextField = styled(TextField)({
   marginBottom: 20
 });
 
-const Selectfield = ({ formData }) => {
-  const [selectedMenuItem, setSelectedMenuItem] = useState({ stateValue: '', labelValue: ''});
+const Selectfield = ({ formData, handleIncomeStreamAmountChange }) => {
+  const [selectedMenuItem, setSelectedMenuItem] = useState({ 
+    stateValue: '', 
+    labelValue: '', 
+    incomeAmount: 0 
+  });
 
   const createMenuItems = () => {
     const disabledSelectMenuItem = <MenuItem value='select' key='disabled-select-value' disabled>Select</MenuItem>;
