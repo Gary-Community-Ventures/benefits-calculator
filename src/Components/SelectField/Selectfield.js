@@ -64,13 +64,13 @@ const Selectfield = ({ formData, handleIncomeStreamAmountChange }) => {
         <FormHelperText></FormHelperText>
       </FormControl>
       <>
-        <p className='question-label'>How much do you receive for: {selectedMenuItem.labelValue}?</p>
-        {/* <StyledTextField 
-            // type='number'
-            // name={inputName}
-            // value={formData[inputName]}
-            // label={inputLabel}
-            onChange={(event) => {handleChange(event)}}
+        <p className='question-label'>How much do you receive for: {selectedMenuItem.incomeStreamLabel}?</p>
+        <StyledTextField 
+          type='number'
+          name={selectedMenuItem.incomeStreamName}
+          value={selectedMenuItem.incomeAmount}
+          label={selectedMenuItem.incomeStreamLabel}
+          onChange={(event) => {handleTextfieldChange(event)}}
             variant='outlined'
             required
             // error={inputError(formData[inputName])}
