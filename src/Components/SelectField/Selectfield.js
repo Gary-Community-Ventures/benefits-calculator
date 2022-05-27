@@ -34,7 +34,12 @@ const Selectfield = ({ formData, handleIncomeStreamAmountChange }) => {
   }
   
   const handleSelectChange = (event) => {
-    setSelectedMenuItem({ ...selectedMenuItem, incomeStreamName: event.target.value, incomeStreamLabel: incomeOptions[event.target.value] });
+    setSelectedMenuItem({ 
+      incomeStreamName: event.target.value, 
+      incomeStreamLabel: incomeOptions[event.target.value],
+      incomeAmount: 0,
+      incomeFrequency: '' 
+    });
   }
   }
 
