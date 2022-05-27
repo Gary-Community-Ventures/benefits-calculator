@@ -78,6 +78,21 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
           helperText={displayIncomeStreamValueHelperText(selectedMenuItem.incomeAmount)} 
         />
       </>
+      <>
+        <p className='question-label'>How often do you receive this income: {selectedMenuItem.incomeStreamLabel}?</p>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel if='income-frequency-label'>Frequency</InputLabel>
+        <StyledSelectfield
+          labelId='income-frequency-label'
+          id='income-frequency'
+          value={selectedMenuItem.incomeFrequency}
+          name={selectedMenuItem.incomeFrequency}//incomeFrequency
+          label='Income Frequency'
+          onChange={(event) => { handleFrequencySelectChange(event) }}>
+          {createFrequencyMenuItems()}
+        </StyledSelectfield>
+        </FormControl>
+      </>
     </>
   );
 }
