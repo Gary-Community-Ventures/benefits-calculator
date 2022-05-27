@@ -13,7 +13,7 @@ const StyledTextField = styled(TextField)({
   marginBottom: 20
 });
 
-const Selectfield = ({ formData, handleIncomeStreamAmountChange }) => {
+const Selectfield = ({ handleIncomeStreamAmountChange }) => {
   const [selectedMenuItem, setSelectedMenuItem] = useState({ 
     incomeStreamName: '', 
     incomeStreamLabel: '', 
