@@ -87,10 +87,16 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
     setSelectedMenuItem(updatedSelectedMenuItems);
   }
 
-  const handleFrequencySelectChange = (event) => {
+  const handleFrequencySelectChange = (event, index) => {
     const { value } = event.target; 
-    setSelectedMenuItem({ ...selectedMenuItem, incomeFrequency: value }); 
+    const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
+      if (i === index) {
+        return { ...incomeSourceData, incomeFrequency: value }
+      } else {
+        return incomeSourceData;
   }
+    });
+    setSelectedMenuItem(updatedSelectedMenuItems);
   }
 
   const createIncomeStreamsDropdownMenu = (incomeStreamName, incomeStreamLabel, index) => {
