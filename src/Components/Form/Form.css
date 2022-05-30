@@ -19,3 +19,8 @@
   padding-bottom: 32px;
   border-bottom: 1px solid #505c66;
 }
+
+.bottom-border {
+  border-bottom: 1px solid #505c66;
+  margin-bottom: 32px;
+}
