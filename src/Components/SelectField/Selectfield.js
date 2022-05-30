@@ -79,7 +79,7 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
   }
   }
 
-  const createIncomeStreamsDropdownMenu = (incomeStreamName, incomeStreamLabel) => {
+  const createIncomeStreamsDropdownMenu = (incomeStreamName, incomeStreamLabel, index) => {
   return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel if='income-type-label'>Income Type</InputLabel>
@@ -89,7 +89,7 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
         value={incomeStreamName}
         name={incomeStreamLabel}
           label='Income Type'
-          onChange={(event) => { handleSelectChange(event) }}>
+        onChange={(event) => { handleSelectChange(event, index) }}>
           {createMenuItems()}
         </StyledSelectfield>
       </FormControl>
