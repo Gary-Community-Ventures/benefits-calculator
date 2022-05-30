@@ -170,8 +170,30 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
     });
   }
   }
+
+  const handleAddAdditionalIncomeSource = (event) => {
+    event.preventDefault();
+    setSelectedMenuItem([
+      ...selectedMenuItem,
+      {
+        incomeStreamName: '', 
+        incomeStreamLabel: '', 
+        incomeAmount: 0,
+        incomeFrequency: ''
+      }
+    ]);
+  };
+
   return (
-    createIncomeBlockQuestion(selectedMenuItem.incomeStreamName, selectedMenuItem.incomeStreamLabel, selectedMenuItem.incomeAmount, selectedMenuItem.incomeFrequency)
+    <>
+      {createIncomeBlockQuestions()}
+      <Button
+        variant='contained'
+        onClick={(event) => handleAddAdditionalIncomeSource(event)}
+      >
+        Add additional income source
+      </Button>
+    </>
   );
 }
 export default Selectfield;
