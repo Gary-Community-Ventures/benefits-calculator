@@ -59,13 +59,20 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
 
   }
   
-  const handleSelectChange = (event) => {
-    setSelectedMenuItem({ 
+  const handleSelectChange = (event, index) => {
+    const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
+      if (i === index) {
+        return { 
       incomeStreamName: event.target.value, 
       incomeStreamLabel: incomeOptions[event.target.value],
       incomeAmount: 0,
       incomeFrequency: '' 
+        }
+      } else {
+        return incomeSourceData;
+      }
     });
+    setSelectedMenuItem(updatedSelectedMenuItems);
   }
 
   const handleTextfieldChange = (event) => {
