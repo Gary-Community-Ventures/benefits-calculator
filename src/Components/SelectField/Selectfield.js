@@ -132,7 +132,16 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
       </>
     );
   }
+
+  const createIncomeBlockQuestion = (incomeStreamName, incomeStreamLabel, incomeAmount, incomeFrequency) => {
+    return (
+      <>
+        {createIncomeStreamsDropdownMenu(incomeStreamName, incomeStreamLabel)}
+        {createIncomeAmountTextfield(incomeStreamName, incomeAmount)}
+        {createIncomeStreamFrequencyDropdownMenu(incomeFrequency)}
     </>
+    );
+  }
   );
 }
 export default Selectfield;
