@@ -14,12 +14,14 @@ const StyledTextField = styled(TextField)({
 });
 
 const Selectfield = ({ handleIncomeStreamAmountChange }) => {
-  const [selectedMenuItem, setSelectedMenuItem] = useState({ 
+  const [selectedMenuItem, setSelectedMenuItem] = useState([
+    {
     incomeStreamName: '', 
     incomeStreamLabel: '', 
     incomeAmount: 0,
     incomeFrequency: ''
-  });
+    }
+  ]);
 
   const createMenuItems = () => {
     const disabledSelectMenuItem = <MenuItem value='select' key='disabled-select-value' disabled>Select</MenuItem>;
