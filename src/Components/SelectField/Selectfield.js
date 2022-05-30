@@ -135,14 +135,20 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
     );
   }
 
-  const createIncomeBlockQuestion = (incomeStreamName, incomeStreamLabel, incomeAmount, incomeFrequency) => {
+  const createIncomeBlockQuestions = () => {
+    return selectedMenuItem.map((incomeSourceData, index) => {
+      const { incomeStreamName, incomeStreamLabel, incomeAmount, incomeFrequency } = incomeSourceData;
+      const incomeStreamQuestion = <p className='question-label'>If you receive another type of income, select it below.</p>;
     return (
-      <>
-        {createIncomeStreamsDropdownMenu(incomeStreamName, incomeStreamLabel)}
-        {createIncomeAmountTextfield(incomeStreamName, incomeAmount)}
-        {createIncomeStreamFrequencyDropdownMenu(incomeFrequency)}
-    </>
+        <div key={index}>
+          {index > 0 && incomeStreamQuestion}
+          {createIncomeStreamsDropdownMenu(incomeStreamName, incomeStreamLabel, index)}
+          {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+          {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+        </div>
     );
+    });
+  }
   }
   return (
     createIncomeBlockQuestion(selectedMenuItem.incomeStreamName, selectedMenuItem.incomeStreamLabel, selectedMenuItem.incomeAmount, selectedMenuItem.incomeFrequency)
