@@ -129,10 +129,10 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
     );
   }
 
-  const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency) => {
+  const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     return (
-      <>
-        <p className='question-label'>How often do you receive this income: {selectedMenuItem.incomeStreamLabel}?</p>
+      <div className='bottom-border'>
+        <p className='question-label'>How often do you receive this income: {selectedMenuItem[index].incomeStreamLabel}?</p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel if='income-frequency-label'>Frequency</InputLabel>
         <StyledSelectfield
@@ -141,11 +141,11 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
           value={incomeFrequency}
           name={incomeFrequency}
           label='Income Frequency'
-          onChange={(event) => { handleFrequencySelectChange(event) }}>
+          onChange={(event) => { handleFrequencySelectChange(event, index) }}>
           {createFrequencyMenuItems()}
         </StyledSelectfield>
         </FormControl>
-      </>
+      </div>
     );
   }
 
