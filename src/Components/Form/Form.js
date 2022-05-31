@@ -19,30 +19,7 @@ const Form = () => {
     isOnMedicaid: false,
     isOnDisabilityRelatedMedicaid: false,
     hasIncome: false,
-    incomeStreams: {
-      wages: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      selfEmployment: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      unemployment: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      cashAssistance: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      childSupport: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      disabilityMedicaid: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      sSI: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      sSDependent: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      sSDisability: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      sSSurvivor: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      sSRetirement: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      nYSDisability: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      veteran: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      pension: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      deferredComp: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      workersComp: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      alimony: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      boarder: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      gifts: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      rental: {incomeWagesAmount: 0, incomeWagesFreq: ''},
-      investment: {incomeWagesAmount: 0, incomeWagesFreq: ''}
-    },
-    
+    incomeStreams: [],
   });
 
   useEffect(() => {
