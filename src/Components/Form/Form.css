@@ -16,13 +16,13 @@
 .sub-header {
   font-size: 32px;
   margin-bottom: 24px;
-  padding-bottom: 32px;
+  padding-bottom: 24px;
   border-bottom: 1px solid #505c66;
 }
 
 .bottom-border {
   border-bottom: 1px solid #505c66;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .income-block-textfield {

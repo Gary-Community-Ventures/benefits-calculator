@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { incomeStreamValueHasError, displayIncomeStreamValueHelperText } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
+import './Selectfield.css';
 
 const StyledSelectfield = styled(Select)({
   marginBottom: 20,
@@ -11,6 +12,10 @@ const StyledSelectfield = styled(Select)({
 
 const StyledTextField = styled(TextField)({
   marginBottom: 20
+});
+
+const StyledDeleteButton = styled(Button)({
+  minWidth: 32
 });
 
 const Selectfield = ({ handleIncomeStreamAmountChange }) => {
@@ -161,6 +166,9 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
       const incomeStreamQuestion = <p className='question-label'>If you receive another type of income, select it below.</p>;
     return (
         <div key={index}>
+          <div className='delete-button-container'>
+            {index > 0 && <StyledDeleteButton variant='contained' value={index} onClick={(event) => deleteIncomeBlock(event)}>x</StyledDeleteButton>}
+          </div>
           {index > 0 && incomeStreamQuestion}
           {createIncomeStreamsDropdownMenu(incomeStreamName, incomeStreamLabel, index)}
           {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
