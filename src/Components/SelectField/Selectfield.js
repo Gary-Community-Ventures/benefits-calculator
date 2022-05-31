@@ -118,7 +118,7 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
   
   const createIncomeAmountTextfield = (incomeStreamName, incomeAmount, index) => {
     return (
-      <>
+      <div className='income-block-textfield'>
         <p className='question-label'>How much do you receive for: {selectedMenuItem[index].incomeStreamLabel}?</p>
         <StyledTextField 
           type='number'
@@ -131,7 +131,7 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
           error={incomeStreamValueHasError(selectedMenuItem[index].incomeAmount)} 
           helperText={displayIncomeStreamValueHelperText(selectedMenuItem[index].incomeAmount)} 
         />
-      </>
+      </div>
     );
   }
 
