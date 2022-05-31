@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { incomeStreamValueHasError, displayIncomeStreamValueHelperText } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
-import './Selectfield.css';
+import './IncomeBlock.css';
 
 const StyledSelectfield = styled(Select)({
   marginBottom: 20,
@@ -18,13 +18,13 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 32
 });
 
-const Selectfield = ({ handleIncomeStreamAmountChange }) => {
+const IncomeBlock = ({ handleIncomeStreamAmountChange }) => {
   const [selectedMenuItem, setSelectedMenuItem] = useState([
     {
-    incomeStreamName: '', 
-    incomeStreamLabel: '', 
-    incomeAmount: 0,
-    incomeFrequency: ''
+      incomeStreamName: '', 
+      incomeStreamLabel: '', 
+      incomeAmount: 0,
+      incomeFrequency: ''
     }
   ]);
 
@@ -68,10 +68,10 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
     const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
       if (i === index) {
         return { 
-      incomeStreamName: event.target.value, 
-      incomeStreamLabel: incomeOptions[event.target.value],
-      incomeAmount: 0,
-      incomeFrequency: '' 
+          incomeStreamName: event.target.value, 
+          incomeStreamLabel: incomeOptions[event.target.value],
+          incomeAmount: 0, 
+          incomeFrequency: ''
         }
       } else {
         return incomeSourceData;
@@ -81,7 +81,7 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
   }
 
   const handleTextfieldChange = (event, index) => {
-    const { value } = event.target; 
+    const { value } = event.target;
     const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
       if (i === index) {
         return { ...incomeSourceData, incomeAmount: Math.round(Number(value)) }
@@ -99,25 +99,25 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
         return { ...incomeSourceData, incomeFrequency: value }
       } else {
         return incomeSourceData;
-  }
+      }
     });
     setSelectedMenuItem(updatedSelectedMenuItems);
   }
 
   const createIncomeStreamsDropdownMenu = (incomeStreamName, incomeStreamLabel, index) => {
-  return (
+    return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='income-type-label'>Income Type</InputLabel>
-        <StyledSelectfield
-          labelId='income-type-label'
+      <InputLabel if='income-type-label'>Income Type</InputLabel>
+      <StyledSelectfield
+        labelId='income-type-label'
         id={incomeStreamName}
         value={incomeStreamName}
         name={incomeStreamLabel}
-          label='Income Type'
+        label='Income Type'
         onChange={(event) => { handleSelectChange(event, index) }}>
-          {createMenuItems()}
-        </StyledSelectfield>
-      </FormControl>
+        {createMenuItems()}
+      </StyledSelectfield>
+    </FormControl>
     );
   }
   
@@ -131,8 +131,8 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
           value={incomeAmount}
           label='Amount'
           onChange={(event) => {handleTextfieldChange(event, index)}}
-            variant='outlined'
-            required
+          variant='outlined'
+          required
           error={incomeStreamValueHasError(selectedMenuItem[index].incomeAmount)} 
           helperText={displayIncomeStreamValueHelperText(selectedMenuItem[index].incomeAmount)} 
         />
@@ -164,19 +164,19 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
     return selectedMenuItem.map((incomeSourceData, index) => {
       const { incomeStreamName, incomeStreamLabel, incomeAmount, incomeFrequency } = incomeSourceData;
       const incomeStreamQuestion = <p className='question-label'>If you receive another type of income, select it below.</p>;
-    return (
+      return (
         <div key={index}>
           {index > 0 &&
-          <div className='delete-button-container'>
+            <div className='delete-button-container'>
               <StyledDeleteButton variant='contained' onClick={() => deleteIncomeBlock(index)}>x</StyledDeleteButton>
-          </div>
+            </div>
           }
           {index > 0 && incomeStreamQuestion}
           {createIncomeStreamsDropdownMenu(incomeStreamName, incomeStreamLabel, index)}
           {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
           {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
         </div>
-    );
+      );
     });
   }
 
@@ -185,6 +185,9 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
     setSelectedMenuItem(updatedSelectedMenuItems);  
   }
   
+  const handleSubmit = (event) => {
+    // handleIncomeStreamAmountChange(event);
+    // handleIncomeStreamAmountChange needs to be called once the user is ready to submit
   }
 
   const handleAddAdditionalIncomeSource = (event) => {
@@ -212,4 +215,4 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
     </>
   );
 }
-export default Selectfield;
+export default IncomeBlock;

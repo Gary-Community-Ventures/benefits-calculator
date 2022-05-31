@@ -2,8 +2,8 @@ import Textfield from '../Textfield/Textfield';
 import Radiofield from '../Radiofield/Radiofield';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
+import IncomeBlock from '../IncomeBlock/IncomeBlock';
 import questions from '../../Assets/questions';
-import Selectfield from '../SelectField/Selectfield';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page, setPage, handleRadioButtonChange }) => {
@@ -70,10 +70,10 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
             formData={formData}
             handleRadioButtonChange={handleRadioButtonChange} />
         </div>
-      } else if (followUp.componentDetails.componentType === 'Selectfield') {
+      } else if (followUp.componentDetails.componentType === 'IncomeBlock') {
         return <div className='question-container' key={index}>
           <p className='question-label'>{followUp.question}</p>
-          <Selectfield handleIncomeStreamAmountChange={handleIncomeStreamAmountChange} />
+          <IncomeBlock handleIncomeStreamAmountChange={handleIncomeStreamAmountChange} />
         </div>
       }
     });
