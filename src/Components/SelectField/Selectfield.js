@@ -177,6 +177,13 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
     );
     });
   }
+
+  const deleteIncomeBlock = (event) => {
+    const selectedIndex = Number(event.target.value);
+    const updatedSelectedMenuItems = selectedMenuItem.filter((incomeSourceData, index) => index !== selectedIndex );
+    setSelectedMenuItem(updatedSelectedMenuItems);  
+  }
+  
   }
 
   const handleAddAdditionalIncomeSource = (event) => {
