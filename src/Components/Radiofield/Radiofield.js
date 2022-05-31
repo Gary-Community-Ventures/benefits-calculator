@@ -1,4 +1,5 @@
 import {FormControlLabel, RadioGroup, Radio } from '@mui/material';
+import './Radiofield.css';
 
 const Radiofield = ({ componentDetails, formData, handleRadioButtonChange }) => {
   const { ariaLabel, inputName } = componentDetails;
@@ -8,8 +9,8 @@ const Radiofield = ({ componentDetails, formData, handleRadioButtonChange }) => 
       name={inputName}
       value={formData[inputName]}
       onChange={handleRadioButtonChange} >
-        <FormControlLabel value='true' control={<Radio />} label='Yes' />
-        <FormControlLabel value='false' control={<Radio />} label='No' />
+        <FormControlLabel className='radiofield-radio-label' value='true' control={<Radio />} label='Yes' />
+        <FormControlLabel className='radiofield-radio-label' value='false' control={<Radio />} label='No' />
     </RadioGroup>
   );
 }
