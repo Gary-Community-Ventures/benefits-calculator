@@ -166,9 +166,11 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
       const incomeStreamQuestion = <p className='question-label'>If you receive another type of income, select it below.</p>;
     return (
         <div key={index}>
+          {index > 0 &&
           <div className='delete-button-container'>
-            {index > 0 && <StyledDeleteButton variant='contained' value={index} onClick={(event) => deleteIncomeBlock(event)}>x</StyledDeleteButton>}
+              <StyledDeleteButton variant='contained' onClick={() => deleteIncomeBlock(index)}>x</StyledDeleteButton>
           </div>
+          }
           {index > 0 && incomeStreamQuestion}
           {createIncomeStreamsDropdownMenu(incomeStreamName, incomeStreamLabel, index)}
           {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
@@ -178,8 +180,7 @@ const Selectfield = ({ handleIncomeStreamAmountChange }) => {
     });
   }
 
-  const deleteIncomeBlock = (event) => {
-    const selectedIndex = Number(event.target.value);
+  const deleteIncomeBlock = (selectedIndex) => {
     const updatedSelectedMenuItems = selectedMenuItem.filter((incomeSourceData, index) => index !== selectedIndex );
     setSelectedMenuItem(updatedSelectedMenuItems);  
   }
