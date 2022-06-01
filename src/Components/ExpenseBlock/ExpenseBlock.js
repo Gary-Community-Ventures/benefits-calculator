@@ -26,6 +26,26 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
     }
   ]);
 
+  const createExpenseBlockQuestions = () => {
+    return selectedMenuItem.map((expenseSourceData, index) => {
+      const { expenseSourceName, expenseSourceLabel, expenseAmount, expenseFrequency } = expenseSourceData;
+      const expenseSourceQuestion = <p className='question-label'>If you have another expense, select it below.</p>;
+
+      return (
+        <div key={index}>
+          {index > 0 &&
+            <div className='delete-button-container'>
+              <StyledDeleteButton variant='contained' onClick={() => deleteExpenseBlock(index)}>x</StyledDeleteButton>
+            </div>
+          }
+          {index > 0 && expenseSourceQuestion}
+          {createExpenseDropdownMenu(expenseSourceName, expenseSourceLabel, index)}
+          {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
+          {createExpenseFrequencyDropdownMenu(expenseFrequency, index)}
+        </div>
+      );
+    })
+  }
   return (
     <>
       {createExpenseBlockQuestions()}
