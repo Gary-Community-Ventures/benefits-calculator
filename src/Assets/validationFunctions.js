@@ -30,6 +30,15 @@ const displayIncomeStreamValueHelperText = (valueInput) => {
   return numValueInput <= 0 && 'This entry is required to continue.';
 }
 
+const incomeStreamsAreValid = (incomeStreams) => {
+  const allIncomeStreamsAreValid = incomeStreams.every(incomeSourceData => {
+    const { incomeStreamName, incomeAmount, incomeFrequency } = incomeSourceData;
+    return incomeStreamName.length > 0 && incomeAmount > 0 && incomeFrequency.length > 0;
+  });
+  
+  return allIncomeStreamsAreValid;
+}
+
 module.exports = {
   ageHasError,
   displayAgeHelperText,
@@ -37,5 +46,6 @@ module.exports = {
   displayZipcodeHelperText,
   radiofieldHasError,
   incomeStreamValueHasError,
-  displayIncomeStreamValueHelperText
+  displayIncomeStreamValueHelperText,
+  incomeStreamsAreValid
 }
