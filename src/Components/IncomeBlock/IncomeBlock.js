@@ -202,7 +202,7 @@ const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => 
         incomeFrequency: ''
       }
     ]);
-  };
+  }
 
   const handleSaveAndContinue = (event) => {
      event.preventDefault();
