@@ -118,6 +118,20 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
 
     setSelectedMenuItem(updatedSelectedMenuItems);
   }
+
+  const handleTextfieldChange = (event, index) => {
+    const { value } = event.target;
+    const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
+      if (i === index) {
+        return { ...expenseSourceData, expenseAmount: Math.round(Number(value)) }
+      } else {
+        return expenseSourceData;
+      }
+    });
+
+    setSelectedMenuItem(updatedSelectedMenuItems);
+  }
+
   return (
     <>
       {createExpenseBlockQuestions()}
