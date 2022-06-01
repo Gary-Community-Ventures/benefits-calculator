@@ -210,6 +210,17 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
       >
         Add additional expense source
       </Button>
+      <div className='expense-block-question-buttons'>
+        <PreviousButton 
+          page={page} 
+          setPage={setPage} />
+         <Button
+          variant='contained'
+          onClick={(event) => { handleSaveAndContinue(event) }}
+          >
+          Save and Continue
+        </Button>
+      </div>
     </>
   );
 
