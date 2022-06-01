@@ -39,6 +39,25 @@ const incomeStreamsAreValid = (incomeStreams) => {
   return allIncomeStreamsAreValid;
 }
 
+const expenseSourceValueHasError = (valueInput) => { //#1
+  const numValueInput = Number(valueInput);
+  return numValueInput <= 0;
+}
+
+const displayExpenseSourceValueHelperText = (valueInput) => { //#2
+  const numValueInput = Number(valueInput);
+  return numValueInput <= 0 && 'This entry is required to continue.';
+}
+
+const expenseSourcesAreValid = (expenses) => { //#3
+  const allExpensesAreValid = expenses.every(expenseSourceData => {
+    const { expenseSourceName, expenseAmount, expenseFrequency } = expenseSourceData;
+    return expenseSourceName.length > 0 && expenseAmount > 0 && expenseFrequency.length > 0;
+  });
+  
+  return allExpensesAreValid;
+}
+
 module.exports = {
   ageHasError,
   displayAgeHelperText,
@@ -47,5 +66,8 @@ module.exports = {
   radiofieldHasError,
   incomeStreamValueHasError,
   displayIncomeStreamValueHelperText,
-  incomeStreamsAreValid
+  incomeStreamsAreValid,
+  expenseSourceValueHasError,
+  displayExpenseSourceValueHelperText,
+  expenseSourcesAreValid
 }
