@@ -37,6 +37,7 @@ const Form = () => {
   };
 
   const handleCheckboxChange = (event) => {
+    //will need this for legal terms of agreement checkbox
     const { value } = event.target;
     setFormData({ ...formData, [value]: !formData[value] });
   }
