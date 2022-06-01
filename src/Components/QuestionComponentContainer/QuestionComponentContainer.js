@@ -38,7 +38,7 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
-        <Radiofield 
+        <Radiofield
           componentDetails={matchingQuestion.componentDetails}
           formData={formData}
           handleRadioButtonChange={handleRadioButtonChange} />
