@@ -46,6 +46,11 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
       );
     })
   }
+
+  const deleteExpenseBlock = (selectedIndex) => {
+    const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex );
+    setSelectedMenuItem(updatedSelectedMenuItems);  
+  }
   return (
     <>
       {createExpenseBlockQuestions()}
