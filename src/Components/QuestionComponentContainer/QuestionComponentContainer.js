@@ -43,18 +43,7 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
           formData={formData}
           handleRadioButtonChange={handleRadioButtonChange} />
         {formData[inputName] === true && hasFollowUpQuestions && renderFollowUpQuestions()}
-        {(inputName === 'hasIncome' && formData[inputName] === false || inputName !== 'hasIncome') &&
-        <div className='question-buttons'>
-          <PreviousButton 
-            page={page} 
-            setPage={setPage} />
-          <ContinueButton 
-            handleSubmit={handleSubmit} 
-            inputError={matchingQuestion.componentDetails.inputError}
-            formData={formData} 
-            inputName={matchingQuestion.componentDetails.inputName} />
-        </div>
-         }
+        {createPreviousAndContinueButtons(matchingQuestion)}
       </div>
     ); 
   }
