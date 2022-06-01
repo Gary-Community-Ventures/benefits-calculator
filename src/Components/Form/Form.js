@@ -71,6 +71,11 @@ const Form = () => {
     setPage(page + 1);
   }
 
+  const handleExpenseSourcesSubmit = (validatedExpenseSources) => {
+    setFormData({ ...formData, expenses: validatedExpenseSources });
+    setPage(page + 1);
+  }
+
   const displayPage = () => {
     return <QuestionComponentContainer 
             formData={formData} 
@@ -79,7 +84,8 @@ const Form = () => {
             page={page}
             setPage={setPage} 
             handleRadioButtonChange={handleRadioButtonChange} 
-            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} /> 
+            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
+            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} /> 
   }  
 
   return (
