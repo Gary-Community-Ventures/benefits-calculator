@@ -54,6 +54,11 @@ const Form = () => {
     }
   }  
   
+  const handleIncomeStreamsSubmit = (validatedIncomeStreams) => {
+    setFormData({ ...formData, incomeStreams: validatedIncomeStreams });
+    setPage(page + 1);
+  }
+
   const displayPage = () => {
     return <QuestionComponentContainer 
             formData={formData} 
