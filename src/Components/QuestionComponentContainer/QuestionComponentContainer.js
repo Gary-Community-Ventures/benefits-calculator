@@ -3,6 +3,7 @@ import Radiofield from '../Radiofield/Radiofield';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import IncomeBlock from '../IncomeBlock/IncomeBlock';
+import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import questions from '../../Assets/questions';
 import './QuestionComponentContainer.css';
 
