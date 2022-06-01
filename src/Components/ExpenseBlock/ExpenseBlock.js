@@ -47,6 +47,23 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
     })
   }
 
+
+  const createExpenseDropdownMenu = (expenseSourceName, expenseSourceLabel, index) => {
+    return (
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <InputLabel if='expense-type-label'>Expense Type</InputLabel>
+      <StyledSelectfield
+        labelId='expense-type-label'
+        id={expenseSourceName}
+        value={expenseSourceName}
+        name={expenseSourceLabel}
+        label='Expense Type'
+        onChange={(event) => { handleSelectChange(event, index) }}>
+        {createExpenseMenuItems()}
+      </StyledSelectfield>
+    </FormControl>
+    );
+  }
   const deleteExpenseBlock = (selectedIndex) => {
     const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex );
     setSelectedMenuItem(updatedSelectedMenuItems);  
