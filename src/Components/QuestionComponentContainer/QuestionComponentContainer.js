@@ -62,7 +62,11 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
       } else if (followUp.componentDetails.componentType === 'IncomeBlock') {
         return <div className='question-container' key={index}>
           <p className='question-label'>{followUp.question}</p>
-          <IncomeBlock handleIncomeStreamAmountChange={handleIncomeStreamAmountChange} />
+          <IncomeBlock 
+            page={page} 
+            setPage={setPage} 
+            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
+            formData={formData} />
         </div>
       }
     });
