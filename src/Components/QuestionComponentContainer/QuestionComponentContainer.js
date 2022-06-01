@@ -83,9 +83,12 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
   }
 
   const createPreviousAndContinueButtons = (question) => {
-    //render normal button block if the question isn't the income question or if the user doesn't have an income at all, 
-    //otherwise these buttons will be in the IncomeBlock component
-    if (question.id !== 10 || question.id === 10 && formData[question.componentDetails.inputName] === false) {
+    //render normal button block if the question isn't the income or expense question or if the user doesn't have an income/expenses at all, 
+    //otherwise these buttons will be created in the IncomeBlock/ExpenseBlock components
+    const isNotIncomeOrExpenseQ = question.id < 10 || question.id >= 12;
+    const hasFalsyIncome = question.id === 10 && formData[question.componentDetails.inputName] === false;
+    const hasFalsyExpense = question.id === 11 && formData[question.componentDetails.inputName] === false;
+    if (isNotIncomeOrExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className='question-buttons'>
         <PreviousButton 
