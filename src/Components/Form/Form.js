@@ -20,6 +20,8 @@ const Form = () => {
     isOnDisabilityRelatedMedicaid: false,
     hasIncome: false,
     incomeStreams: [],
+    hasExpenses: false,
+    expenses: []
   });
 
   useEffect(() => {
