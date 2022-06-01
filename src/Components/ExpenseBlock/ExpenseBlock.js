@@ -145,6 +145,19 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
     setSelectedMenuItem(updatedSelectedMenuItems);  
   }
 
+  const handleAddAdditionalExpenseSource = (event) => {
+    event.preventDefault();
+    setSelectedMenuItem([
+      ...selectedMenuItem,
+      {
+        expenseSourceName: '', 
+        expenseSourceLabel: '', 
+        expenseAmount: 0,
+        expenseFrequency: ''
+      }
+    ]);
+  }
+
   const handleFrequencySelectChange = (event, index) => {
     const { value } = event.target; 
     const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
