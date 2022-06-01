@@ -191,11 +191,6 @@ const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => 
     setSelectedMenuItem(updatedSelectedMenuItems);  
   }
   
-  const handleSubmit = (event) => {
-    // handleIncomeStreamAmountChange(event);
-    // handleIncomeStreamAmountChange needs to be called once the user is ready to submit
-  }
-
   const handleAddAdditionalIncomeSource = (event) => {
     event.preventDefault();
     setSelectedMenuItem([
