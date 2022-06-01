@@ -35,7 +35,12 @@ const Form = () => {
     if(formData.hasIncome === false) {
       setFormData({...formData, incomeStreams: [] });
     }
-  }, [formData.student, formData.unemployed, formData.hasIncome]);
+
+    if(formData.hasExpenses === false) {
+      setFormData({...formData, expenses: [] });
+    }
+    
+  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
