@@ -2,6 +2,8 @@ import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from "@m
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { expenseSourceValueHasError, displayExpenseSourceValueHelperText } from '../../Assets/validationFunctions';
+import expenseOptions from '../../Assets/expenseOptions';
+import PreviousButton from "../PreviousButton/PreviousButton";
 const StyledSelectfield = styled(Select)({
   marginBottom: 20,
   minWidth: 200
