@@ -7,7 +7,7 @@ import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import questions from '../../Assets/questions';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page, setPage, handleRadioButtonChange, handleIncomeStreamsSubmit }) => {
+const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page, setPage, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit }) => {
   const matchingQuestion = questions.find((question) => question.id === page);
 
   const createTextfieldComponent = () => {
