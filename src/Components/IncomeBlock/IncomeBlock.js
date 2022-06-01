@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { incomeStreamValueHasError, displayIncomeStreamValueHelperText } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
+import PreviousButton from "../PreviousButton/PreviousButton";
+import { incomeStreamsAreValid } from "../../Assets/validationFunctions";
 import './IncomeBlock.css';
 
 const StyledSelectfield = styled(Select)({
