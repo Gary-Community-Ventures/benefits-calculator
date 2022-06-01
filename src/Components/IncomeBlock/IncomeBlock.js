@@ -20,8 +20,12 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 32
 });
 
-const IncomeBlock = ({ handleIncomeStreamAmountChange }) => {
-  const [selectedMenuItem, setSelectedMenuItem] = useState([
+const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => {
+  //if there are any elements in state for incomeStreams create IncomeBlock components for those 
+  //first by assigning them to the initial selectedMenuItem state
+  //if not then create the initial income block questions
+  const [selectedMenuItem, setSelectedMenuItem] = useState(formData.incomeStreams.length > 0 ? formData.incomeStreams :
+  [
     {
       incomeStreamName: '', 
       incomeStreamLabel: '', 
