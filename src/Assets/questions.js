@@ -139,10 +139,24 @@ const questions = [
         componentType: 'IncomeBlock',
         ariaLabel: 'most recent type of income'
       }
-    }    
-      }
     }]    
   },
+  {
+    id: 11,
+    question: 'Do you have any expenses?',
+    componentDetails: {
+      componentType: 'Radiofield',
+      ariaLabel: 'has expenses',
+      inputName: 'hasExpenses',
+      inputError: radiofieldHasError
+    },
+    followUpQuestions: [{
+      question: 'What type of expense have you had most recently?',
+      componentDetails: {
+        componentType: 'ExpenseBlock',
+        ariaLabel: 'most recent type of expense'
+      }
+    }]    
   },
   
 ];
