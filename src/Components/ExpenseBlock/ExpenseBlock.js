@@ -4,6 +4,9 @@ import { styled } from '@mui/material/styles';
 import { expenseSourceValueHasError, displayExpenseSourceValueHelperText } from '../../Assets/validationFunctions';
 import expenseOptions from '../../Assets/expenseOptions';
 import PreviousButton from "../PreviousButton/PreviousButton";
+import { expenseSourcesAreValid } from "../../Assets/validationFunctions";
+import './ExpenseBlock.css';
+
 const StyledSelectfield = styled(Select)({
   marginBottom: 20,
   minWidth: 200
@@ -169,6 +172,13 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
     });
 
     setSelectedMenuItem(updatedSelectedMenuItems);
+  }
+
+  const handleSaveAndContinue = (event) => {
+    event.preventDefault();
+    if(expenseSourcesAreValid(selectedMenuItem)) {
+      handleExpenseSourcesSubmit(selectedMenuItem);
+    }
   }
 
   const handleSelectChange = (event, index) => {
