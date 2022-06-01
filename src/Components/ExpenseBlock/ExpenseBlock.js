@@ -83,6 +83,25 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
     );
   }
 
+  const createExpenseFrequencyDropdownMenu = (expenseSourceFrequency, index) => {
+    return (
+      <div className='bottom-border'>
+        <p className='question-label'>How often do you have this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel if='expense-frequency-label'>Frequency</InputLabel>
+        <StyledSelectfield
+          labelId='expense-frequency-label'
+          id='expense-frequency'
+          value={expenseSourceFrequency}
+          name={expenseSourceFrequency}
+          label='Expense Frequency'
+          onChange={(event) => { handleFrequencySelectChange(event, index) }}>
+          {createExpenseFrequencyMenuItems()}
+        </StyledSelectfield>
+        </FormControl>
+      </div>
+    );
+  }
   const createExpenseMenuItems = () => {
     const disabledSelectMenuItem = <MenuItem value='select' key='disabled-select-value' disabled>Select</MenuItem>;
     const menuItemKeys = Object.keys(expenseOptions);
