@@ -47,13 +47,13 @@ const Form = () => {
     const { value } = event.target;
     setFormData({ ...formData, [value]: !formData[value] });
   }
-
+  
   const handleRadioButtonChange = (event) => {
     const { name, value } = event.target;
     let boolValue = (value === 'true');
     setFormData({ ...formData, [name]: boolValue });
   }
-
+  
   const handleSubmit = (event, validateInputFunction, inputToBeValidated) => {
     event.preventDefault();
     if (!validateInputFunction(inputToBeValidated)) {
