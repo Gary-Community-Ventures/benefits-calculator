@@ -102,6 +102,28 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
       </div>
     );
   }
+
+  const createExpenseFrequencyMenuItems = () => {
+    const disabledSelectMenuItem = <MenuItem value='select' key='disabled-frequency-select-value' disabled>Select</MenuItem>;
+    const expenseFrequencyOptions = {
+      weekly:'Every week',
+      biweekly: 'Every 2 weeks',
+      monthly: 'Every month',
+      semimonthly: 'Twice a month',
+      yearly: 'Every year'
+    };
+    const menuItemKeys = Object.keys(expenseFrequencyOptions);
+    const menuItemLabels = Object.values(expenseFrequencyOptions);
+  
+    const menuItems = menuItemKeys.map((menuItemKey, i) => {
+      return (
+        <MenuItem value={menuItemKey} key={menuItemLabels[i]}>{menuItemLabels[i]}</MenuItem>
+      );
+    });
+
+    return [disabledSelectMenuItem, menuItems];
+  }
+
   const createExpenseMenuItems = () => {
     const disabledSelectMenuItem = <MenuItem value='select' key='disabled-select-value' disabled>Select</MenuItem>;
     const menuItemKeys = Object.keys(expenseOptions);
