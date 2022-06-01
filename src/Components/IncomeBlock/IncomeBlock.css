@@ -2,3 +2,9 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.income-block-question-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1.25rem;
+}
