@@ -68,6 +68,23 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
     const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex );
     setSelectedMenuItem(updatedSelectedMenuItems);  
   }
+
+  const handleSelectChange = (event, index) => {
+    const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
+      if (i === index) {
+        return { 
+          expenseSourceName: event.target.value, 
+          expenseSourceLabel: expenseOptions[event.target.value],
+          expenseAmount: 0, 
+          expenseFrequency: ''
+        }
+      } else {
+        return expenseSourceData;
+      }
+    });
+
+    setSelectedMenuItem(updatedSelectedMenuItems);
+  }
   return (
     <>
       {createExpenseBlockQuestions()}
