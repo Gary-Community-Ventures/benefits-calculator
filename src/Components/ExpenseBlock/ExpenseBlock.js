@@ -14,3 +14,24 @@ const StyledTextField = styled(TextField)({
 const StyledDeleteButton = styled(Button)({
   minWidth: 32
 });
+
+const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) => {
+  const [selectedMenuItem, setSelectedMenuItem] = useState(formData.expenses.length > 0 ? formData.expenses :
+  [
+    {
+      expenseSourceName: '', 
+      expenseSourceLabel: '', 
+      expenseAmount: 0,
+      expenseFrequency: ''
+    }
+  ]);
+
+  return (
+    <>
+      {createExpenseBlockQuestions()}
+    </>
+  );
+
+}
+
+export default ExpenseBlock;
