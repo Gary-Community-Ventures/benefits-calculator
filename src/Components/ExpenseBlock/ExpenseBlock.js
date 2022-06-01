@@ -191,6 +191,12 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
   return (
     <>
       {createExpenseBlockQuestions()}
+      <Button
+        variant='contained'
+        onClick={(event) => handleAddAdditionalExpenseSource(event)}
+      >
+        Add additional expense source
+      </Button>
     </>
   );
 
