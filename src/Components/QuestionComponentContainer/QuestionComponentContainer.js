@@ -79,6 +79,25 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
     });
   }
 
+  const createPreviousAndContinueButtons = (question) => {
+    //render normal button block if the question isn't the income question or if the user doesn't have an income at all, 
+    //otherwise these buttons will be in the IncomeBlock component
+    if (question.id !== 10 || question.id === 10 && formData[question.componentDetails.inputName] === false) {
+      return (
+        <div className='question-buttons'>
+        <PreviousButton 
+          page={page} 
+          setPage={setPage} />
+         <ContinueButton 
+          handleSubmit={handleSubmit} 
+          inputError={matchingQuestion.componentDetails.inputError}
+          formData={formData} 
+          inputName={matchingQuestion.componentDetails.inputName} />
+      </div>
+      );
+    }
+  }
+
   if (matchingQuestion.componentDetails.componentType === 'Textfield') {
     return createTextfieldComponent();
   } else if (matchingQuestion.componentDetails.componentType === 'Radiofield') {
