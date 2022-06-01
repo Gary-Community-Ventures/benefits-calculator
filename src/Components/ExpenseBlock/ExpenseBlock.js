@@ -121,6 +121,19 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
     setSelectedMenuItem(updatedSelectedMenuItems);  
   }
 
+  const handleFrequencySelectChange = (event, index) => {
+    const { value } = event.target; 
+    const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
+      if (i === index) {
+        return { ...expenseSourceData, expenseFrequency: value }
+      } else {
+        return expenseSourceData;
+      }
+    });
+
+    setSelectedMenuItem(updatedSelectedMenuItems);
+  }
+
   const handleSelectChange = (event, index) => {
     const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
       if (i === index) {
