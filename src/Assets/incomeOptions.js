@@ -1,9 +1,9 @@
 const incomeOptions = {
   wages: 'Wages, salaries, tips',
   selfEmployment: 'Self-employment Income',
-  unemployment: 'Unemployment benefits',
-  cashAssistance: 'Cash Assistance grant',
-  childSupport: 'Child support (received)',
+  unemployment: 'Unemployment Benefits',
+  cashAssistance: 'Cash Assistance Grant',
+  childSupport: 'Child Support (Received)',
   disabilityMedicaid: 'Disability-related Medicaid',
   sSI: 'Supplemental Security Income (SSI)',
   sSDependent: 'Social Security Dependent Benefits',
@@ -15,10 +15,10 @@ const incomeOptions = {
   pension: 'Government or Private Pension',
   deferredComp: 'Withdrawals from Deferred Compensation (IRA, Keogh, etc.)',
   workersComp: "Worker's Compensation",
-  alimony: 'Alimony (received)',
-  boarder: 'Boarder or lodger',
-  gifts: 'Gifts/contributions (received)',
-  rental: 'Rental income',
-  investment: 'Investment income (interest, dividends, and profit from selling stocks)'
+  alimony: 'Alimony (Received)',
+  boarder: 'Boarder or Lodger',
+  gifts: 'Gifts/Contributions (Received)',
+  rental: 'Rental Income',
+  investment: 'Investment Income (interest, dividends, and profit from selling stocks)'
 }
 export default incomeOptions;
