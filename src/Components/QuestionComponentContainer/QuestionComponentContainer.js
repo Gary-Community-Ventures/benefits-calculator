@@ -6,9 +6,9 @@ import IncomeBlock from '../IncomeBlock/IncomeBlock';
 import questions from '../../Assets/questions';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page, setPage, handleRadioButtonChange }) => {
+const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page, setPage, handleRadioButtonChange, handleIncomeStreamsSubmit }) => {
   const matchingQuestion = questions.find((question) => question.id === page);
-  // console.log({matchingQuestion})
+
   const createTextfieldComponent = () => {
     return (
       <div className='question-container' id={matchingQuestion.id}>

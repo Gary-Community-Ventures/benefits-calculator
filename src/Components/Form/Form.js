@@ -62,7 +62,7 @@ const Form = () => {
             page={page}
             setPage={setPage} 
             handleRadioButtonChange={handleRadioButtonChange} 
-            handleIncomeStreamAmountChange={handleIncomeStreamAmountChange} /> 
+            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} /> 
   }  
 
   return (
