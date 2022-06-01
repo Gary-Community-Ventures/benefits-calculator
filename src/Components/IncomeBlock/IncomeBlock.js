@@ -204,6 +204,13 @@ const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => 
     ]);
   };
 
+  const handleSaveAndContinue = (event) => {
+     event.preventDefault();
+     if(incomeStreamsAreValid(selectedMenuItem)) {
+       handleIncomeStreamsSubmit(selectedMenuItem);
+    }
+  }
+
   return (
     <>
       {createIncomeBlockQuestions()}
