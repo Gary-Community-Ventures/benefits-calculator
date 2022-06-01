@@ -69,6 +69,15 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
             handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
             formData={formData} />
         </div>
+      }  else if (followUp.componentDetails.componentType === 'ExpenseBlock') {
+        return <div className='question-container' key={index}>
+          <p className='question-label'>{followUp.question}</p>
+          <ExpenseBlock 
+           page={page} 
+           setPage={setPage} 
+           handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
+           formData={formData} />
+        </div>
       }
     });
   }
