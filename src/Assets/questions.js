@@ -147,7 +147,8 @@ const questions = [
   {
     id: 11,
     question: 'Do you have any expenses?',
-    questionDescription: 'This includes costs like child care, child support, rent, medical expenses, heating bills and more.',
+    questionDescription: 'This includes costs like child care, child support, rent, medical ' + 
+      'expenses, heating bills and more.',
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'has expenses',
