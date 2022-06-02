@@ -80,11 +80,16 @@ const displayHouseholdAssetsHelperText = (householdAssets) => {
 
 const housingSourcesAreValid = (selectedHousing) => {
   const housingKeys = Object.keys(selectedHousing);
-  if (selectedHousing.preferNotToSay === true && housingKeys.length > 1) {
-    return false;
-  } else {
-    const atLeaseOneOptionWasSelected = housingKeys.some(housingKey => selectedHousing[housingKey] === true);
-    return atLeaseOneOptionWasSelected;
+  const preferNotToSay = selectedHousing.preferNotToSay === true;
+  const atLeastOneOptionWasSelected = housingKeys.some(housingKey => selectedHousing[housingKey] === true);
+  if (preferNotToSay) {
+    const numberOfTrues = Object.values(selectedHousing)
+      .filter(value => value === true)
+      .length;
+    return numberOfTrues === 1;
+  } else if (atLeastOneOptionWasSelected) {
+    // preferNotToSay = false && at least one other option was selected
+    return true;
   }
 }
 
