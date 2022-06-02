@@ -4,7 +4,7 @@ import QuestionComponentContainer from '../QuestionComponentContainer/QuestionCo
 import './Form.css';
 
 const Form = () => {
-  const [page, setPage] = useState(4);
+  const [page, setPage] = useState(0);
 
   const [formData, setFormData] = useState({
     applicantAge: 0,
@@ -76,7 +76,6 @@ const Form = () => {
   }  
 
   const handleHousingSourcesSubmit = (validatedHousingSources) => {
-    console.log(`in handleHousingSourcesSubmit`)
     setFormData({ ...formData, housing: validatedHousingSources });
     // setPage(page + 1);
     console.log({formData});
