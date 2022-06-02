@@ -25,7 +25,7 @@ const Form = () => {
     expenses: [],
     householdSize: 0,
     householdAssets: 0,
-    housing: []
+    housing: {}
   });
 
   useEffect(() => {
@@ -74,6 +74,13 @@ const Form = () => {
       setPage(page + 1);
     }
   }  
+
+  const handleHousingSourcesSubmit = (validatedHousingSources) => {
+    console.log(`in handleHousingSourcesSubmit`)
+    setFormData({ ...formData, housing: validatedHousingSources });
+    // setPage(page + 1);
+    console.log({formData});
+  }
   
   const handleIncomeStreamsSubmit = (validatedIncomeStreams) => {
     setFormData({ ...formData, incomeStreams: validatedIncomeStreams });
@@ -94,12 +101,13 @@ const Form = () => {
             setPage={setPage} 
             handleRadioButtonChange={handleRadioButtonChange} 
             handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
-            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} /> 
+            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
+            handleHousingSourcesSubmit={handleHousingSourcesSubmit} /> 
   }  
 
   return (
     <main className='benefits-form'>
-      <p className='step-progress-title'>Step {page + 1} of {questions.length}</p>
+      <p className='step-progress-title'>Step {page + 1} of {questions.length + 1}</p>
       <h2 className='sub-header'>Tell us a little more about yourself.</h2>
         {displayPage()}
     </main>
