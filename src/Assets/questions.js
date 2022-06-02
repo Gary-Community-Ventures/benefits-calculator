@@ -190,7 +190,14 @@ const questions = [
       inputHelperText: displayHouseholdAssetsHelperText
     }
   },
-  
+  {
+    id: 14,
+    question: 'Which of these best applies to your housing situation?',
+    questionDescription: "It's OK to pick more than one.",
+    componentDetails: {
+      componentType: 'Checkboxfield',
+    }
+  }
 ];
 
 export default questions;
