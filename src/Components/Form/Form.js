@@ -34,11 +34,11 @@ const Form = () => {
     }
 
     if(formData.hasIncome === false) {
-      setFormData({...formData, incomeStreams: [] });
+      setFormData({ ...formData, incomeStreams: [] });
     }
 
     if(formData.hasExpenses === false) {
-      setFormData({...formData, expenses: [] });
+      setFormData({ ...formData, expenses: [] });
     }
     
   }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses]);
