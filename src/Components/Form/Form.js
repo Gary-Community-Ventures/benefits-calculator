@@ -21,7 +21,8 @@ const Form = () => {
     hasIncome: false,
     incomeStreams: [],
     hasExpenses: false,
-    expenses: []
+    expenses: [],
+    householdSize: 0,
   });
 
   useEffect(() => {
