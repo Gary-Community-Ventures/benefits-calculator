@@ -8,3 +8,7 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+.question-description {
+  margin-bottom: 1rem;
+}
