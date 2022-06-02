@@ -58,6 +58,15 @@ const expenseSourcesAreValid = (expenses) => {
   return allExpensesAreValid;
 }
 
+const householdSizeHasError = (sizeOfHousehold) => {
+  const numValueInput = Number(sizeOfHousehold);
+  return numValueInput <= 0 || numValueInput > 8;
+}
+
+const displayHouseholdSizeHelperText = (sizeOfHousehold) => {
+  const numValueInput = Number(sizeOfHousehold);
+  return (numValueInput <= 0 || numValueInput > 8) && 'Number of People (max. 8)';
+}
 module.exports = {
   ageHasError,
   displayAgeHelperText,
@@ -69,5 +78,7 @@ module.exports = {
   incomeStreamsAreValid,
   expenseSourceValueHasError,
   displayExpenseSourceValueHelperText,
-  expenseSourcesAreValid
+  expenseSourcesAreValid,
+  householdSizeHasError,
+  displayHouseholdSizeHelperText,
 }
