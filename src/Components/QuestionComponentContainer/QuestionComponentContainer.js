@@ -14,6 +14,7 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
+        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
         <Textfield 
           componentDetails={matchingQuestion.componentDetails}
           formData={formData}
@@ -39,6 +40,7 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
+        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
         <Radiofield
           componentDetails={matchingQuestion.componentDetails}
           formData={formData}
