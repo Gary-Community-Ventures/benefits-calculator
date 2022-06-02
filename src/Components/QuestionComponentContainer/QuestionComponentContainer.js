@@ -1,5 +1,6 @@
-import Textfield from '../Textfield/Textfield';
+import HousingBlock from '../HousingBlock/HousingBlock';
 import Radiofield from '../Radiofield/Radiofield';
+import Textfield from '../Textfield/Textfield';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import IncomeBlock from '../IncomeBlock/IncomeBlock';
@@ -7,8 +8,22 @@ import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import questions from '../../Assets/questions';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page, setPage, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit }) => {
+const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page, setPage, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHousingSourcesSubmit }) => {
   const matchingQuestion = questions.find((question) => question.id === page);
+
+  const createCheckboxfieldComponent = () => {
+    return (
+      <div className='question-container' id={matchingQuestion.id}>
+        <p className='question-label'>{matchingQuestion.question}</p>
+        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
+        <HousingBlock 
+          page={page} 
+          setPage={setPage} 
+          handleHousingSourcesSubmit={handleHousingSourcesSubmit} 
+          formData={formData} />
+      </div>
+    );
+  }
 
   const createTextfieldComponent = () => {
     return (
@@ -75,10 +90,10 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
         return <div className='question-container' key={index}>
           <p className='question-label'>{followUp.question}</p>
           <ExpenseBlock 
-           page={page} 
-           setPage={setPage} 
-           handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
-           formData={formData} />
+            page={page}
+            setPage={setPage}
+            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+            formData={formData} />
         </div>
       }
     });
@@ -93,15 +108,15 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
     if (isNotIncomeOrExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className='question-buttons'>
-        <PreviousButton 
-          page={page} 
-          setPage={setPage} />
-         <ContinueButton 
-          handleSubmit={handleSubmit} 
-          inputError={matchingQuestion.componentDetails.inputError}
-          formData={formData} 
-          inputName={matchingQuestion.componentDetails.inputName} />
-      </div>
+          <PreviousButton
+            page={page}
+            setPage={setPage} />
+          <ContinueButton
+            handleSubmit={handleSubmit}
+            inputError={matchingQuestion.componentDetails.inputError}
+            formData={formData}
+            inputName={matchingQuestion.componentDetails.inputName} />
+        </div>
       );
     }
   }
@@ -110,6 +125,8 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
     return createTextfieldComponent();
   } else if (matchingQuestion.componentDetails.componentType === 'Radiofield') {
     return createRadiofieldComponent();
+  } else if (matchingQuestion.componentDetails.componentType === 'Checkboxfield') {
+    return createCheckboxfieldComponent();
   }
 
 }
