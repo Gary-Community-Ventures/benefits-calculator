@@ -158,6 +158,18 @@ const questions = [
       }
     }]    
   },
+  {
+    id: 12,
+    question: 'Including you, how many people are in your household?',
+    componentDetails: {
+      componentType: 'Textfield',
+      inputType: 'number',
+      inputName: 'householdSize',
+      inputLabel: 'Household Size',
+      inputError: householdSizeHasError,
+      inputHelperText: displayHouseholdSizeHelperText
+    }
+  },
   
 ];
 
