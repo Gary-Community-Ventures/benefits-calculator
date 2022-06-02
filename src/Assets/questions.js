@@ -1,6 +1,7 @@
 import { ageHasError, displayAgeHelperText, zipcodeHasError, 
   displayZipcodeHelperText, radiofieldHasError, householdSizeHasError,
   displayHouseholdSizeHelperText, householdAssetsHasError, displayHouseholdAssetsHelperText,
+  } from './validationFunctions';
 
 const questions = [
   {
@@ -128,6 +129,7 @@ const questions = [
   {
     id: 10,
     question: 'Do you have an income?',
+    questionDescription: 'This includes money from jobs, alimony, investments, or gifts.',
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'has an income',
@@ -145,6 +147,7 @@ const questions = [
   {
     id: 11,
     question: 'Do you have any expenses?',
+    questionDescription: 'This includes costs like child care, child support, rent, medical expenses, heating bills and more.',
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'has expenses',
@@ -162,6 +165,8 @@ const questions = [
   {
     id: 12,
     question: 'Including you, how many people are in your household?',
+    questionDescription: 'This is usually family members who you both live ' + 
+      'and share important resources with like food and bills.',
     componentDetails: {
       componentType: 'Textfield',
       inputType: 'number',
