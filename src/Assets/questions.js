@@ -1,7 +1,7 @@
 import { ageHasError, displayAgeHelperText, zipcodeHasError, 
   displayZipcodeHelperText, radiofieldHasError, householdSizeHasError,
   displayHouseholdSizeHelperText, householdAssetsHasError, displayHouseholdAssetsHelperText,
-  } from './validationFunctions';
+  housingHasError } from './validationFunctions';
 
 const questions = [
   {
@@ -196,6 +196,8 @@ const questions = [
     questionDescription: "It's OK to pick more than one.",
     componentDetails: {
       componentType: 'Checkboxfield',
+      inputError: housingHasError,
+      inputName: 'housing'
     }
   }
 ];
