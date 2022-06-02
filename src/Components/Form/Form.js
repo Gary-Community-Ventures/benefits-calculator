@@ -24,7 +24,8 @@ const Form = () => {
     hasExpenses: false,
     expenses: [],
     householdSize: 0,
-    householdAssets: 0
+    householdAssets: 0,
+    housing: []
   });
 
   useEffect(() => {
