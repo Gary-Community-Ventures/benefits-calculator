@@ -67,6 +67,17 @@ const displayHouseholdSizeHelperText = (sizeOfHousehold) => {
   const numValueInput = Number(sizeOfHousehold);
   return (numValueInput <= 0 || numValueInput > 8) && 'Number of People (max. 8)';
 }
+
+const householdAssetsHasError = (householdAssets) => {
+  const numValueInput = Number(householdAssets);
+  return numValueInput < 0;
+}
+
+const displayHouseholdAssetsHelperText = (householdAssets) => {
+  const numValueInput = Number(householdAssets);
+  return numValueInput < 0 && 'This entry is required to continue.';
+}
+
 module.exports = {
   ageHasError,
   displayAgeHelperText,
@@ -81,4 +92,6 @@ module.exports = {
   expenseSourcesAreValid,
   householdSizeHasError,
   displayHouseholdSizeHelperText,
+  householdAssetsHasError,
+  displayHouseholdAssetsHelperText
 }
