@@ -1,5 +1,6 @@
 import { ageHasError, displayAgeHelperText, zipcodeHasError, 
-  displayZipcodeHelperText, radiofieldHasError } from './validationFunctions';
+  displayZipcodeHelperText, radiofieldHasError, householdSizeHasError,
+  displayHouseholdSizeHelperText, householdAssetsHasError, displayHouseholdAssetsHelperText,
 
 const questions = [
   {
