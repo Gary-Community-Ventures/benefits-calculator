@@ -78,6 +78,16 @@ const displayHouseholdAssetsHelperText = (householdAssets) => {
   return numValueInput < 0 && 'This entry is required to continue.';
 }
 
+const housingSourcesAreValid = (selectedHousing) => {
+  const housingKeys = Object.keys(selectedHousing);
+  if (selectedHousing.preferNotToSay === true && housingKeys.length > 1) {
+    return false;
+  } else {
+    const atLeaseOneOptionWasSelected = housingKeys.some(housingKey => selectedHousing[housingKey] === true);
+    return atLeaseOneOptionWasSelected;
+  }
+}
+
 module.exports = {
   ageHasError,
   displayAgeHelperText,
@@ -93,5 +103,6 @@ module.exports = {
   householdSizeHasError,
   displayHouseholdSizeHelperText,
   householdAssetsHasError,
-  displayHouseholdAssetsHelperText
+  displayHouseholdAssetsHelperText,
+  housingSourcesAreValid
 }
