@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import questions from '../../Assets/questions';
 import QuestionComponentContainer from '../QuestionComponentContainer/QuestionComponentContainer';
 import './Form.css';
 
@@ -97,7 +98,7 @@ const Form = () => {
 
   return (
     <main className='benefits-form'>
-      <p className='step-progress-title'>Step {page + 1} of 7</p>
+      <p className='step-progress-title'>Step {page + 1} of {questions.length}</p>
       <h2 className='sub-header'>Tell us a little more about yourself.</h2>
         {displayPage()}
     </main>
