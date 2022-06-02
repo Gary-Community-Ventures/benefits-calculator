@@ -176,6 +176,19 @@ const questions = [
       inputHelperText: displayHouseholdSizeHelperText
     }
   },
+  {
+    id: 13,
+    question: 'How much does your whole household have right now in:',
+    questionDescription: 'Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?',
+    componentDetails: {
+      componentType: 'Textfield',
+      inputType: 'number',
+      inputName: 'householdAssets',
+      inputLabel: 'Household Assets',
+      inputError: householdAssetsHasError,
+      inputHelperText: displayHouseholdAssetsHelperText
+    }
+  },
   
 ];
 
