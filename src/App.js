@@ -11,8 +11,7 @@ const App = () => {
           <Typography variant='h4' align='center'>Benefits Calculator</Typography>
         </AppBar>
       <Routes>
-        <Route path='/' element={<Form />} > 
-        </Route> 
+        <Route path='/' element={<Form />} /> 
       </Routes>
     </div>
   );
