@@ -1,65 +1,115 @@
-import { useState } from 'react';
-import SignUpInfo from '../SignUpInfo/SignUpInfo';
-import PersonalInfo from '../PersonalInfo/PersonalInfo';
-import Other from '../Other/Other';
-import Confirm from '../Confirm/Confirm';
-import Success from '../Success/Success';
+import { useState, useEffect } from 'react';
+import questions from '../../Assets/questions';
+import QuestionComponentContainer from '../QuestionComponentContainer/QuestionComponentContainer';
 import './Form.css';
 
 const Form = () => {
   const [page, setPage] = useState(0);
 
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    firstName: '',
-    lastName: '',
-    username: '',
-    numberOfChildren: 0,
-    numberOfAdults: 0,
-    isSubmitting: false
+    applicantAge: 0,
+    zipcode: '',
+    student: false,
+    studentFulltime: false,
+    isPregnant: false,
+    unemployed: false,
+    unemployedWorkedInLast18Mos: false,
+    isBlindOrVisuallyImpaired: false,
+    isDisabled: false,
+    isAVeteran: false,
+    isOnMedicaid: false,
+    isOnDisabilityRelatedMedicaid: false,
+    hasIncome: false,
+    incomeStreams: [],
+    hasExpenses: false,
+    expenses: [],
+    householdSize: 0,
+    householdAssets: 0,
+    housing: {}
   });
+
+  useEffect(() => {
+    if (formData.student === false) {
+      setFormData({ ...formData, studentFulltime: false });
+    }
+    if (formData.unemployed === false) { 
+      setFormData({ ...formData, unemployedWorkedInLast18Mos: false });
+    }
+
+    if(formData.hasIncome === false) {
+      setFormData({ ...formData, incomeStreams: [] });
+    }
+
+    if(formData.hasExpenses === false) {
+      setFormData({ ...formData, expenses: [] });
+    }
+    
+  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value, isSubmitting: true });
-  };
-  
-  const displayPage = (pageIndex) => {
-    switch(pageIndex) {
-      default:
-        return <SignUpInfo 
-                formData={formData} 
-                handleChange={handleChange} 
-                page={page}
-                setPage={setPage} />
-      case 1: 
-        return <PersonalInfo 
-                formData={formData} 
-                handleChange={handleChange} 
-                page={page}
-                setPage={setPage} />
-      case 2:
-        return <Other 
-                formData={formData} 
-                handleChange={handleChange} 
-                page={page}
-                setPage={setPage} />
-      case 3: 
-        return <Confirm 
-                formData={formData} 
-                page={page}
-                setPage={setPage} />
-      case 4:
-        return <Success />
+
+    if (name !== 'zipcode') {
+      setFormData({ ...formData, [name]: Number(value) });
+    } else {
+      setFormData({ ...formData, [name]: value });
     }
+  };
+
+  const handleCheckboxChange = (event) => {
+    //will need this for legal terms of agreement checkbox
+    const { value } = event.target;
+    setFormData({ ...formData, [value]: !formData[value] });
+  }
+  
+  const handleRadioButtonChange = (event) => {
+    const { name, value } = event.target;
+    let boolValue = (value === 'true');
+    setFormData({ ...formData, [name]: boolValue });
+  }
+  
+  const handleSubmit = (event, validateInputFunction, inputToBeValidated) => {
+    event.preventDefault();
+    if (!validateInputFunction(inputToBeValidated)) {
+      setPage(page + 1);
+    }
+  }  
+
+  const handleHousingSourcesSubmit = (validatedHousingSources) => {
+    setFormData({ ...formData, housing: validatedHousingSources });
+    // setPage(page + 1);
+    console.log({formData});
+  }
+  
+  const handleIncomeStreamsSubmit = (validatedIncomeStreams) => {
+    setFormData({ ...formData, incomeStreams: validatedIncomeStreams });
+    setPage(page + 1);
   }
 
+  const handleExpenseSourcesSubmit = (validatedExpenseSources) => {
+    setFormData({ ...formData, expenses: validatedExpenseSources });
+    setPage(page + 1);
+  }
+
+  const displayPage = () => {
+    return <QuestionComponentContainer 
+            formData={formData} 
+            handleChange={handleChange} 
+            handleSubmit={handleSubmit}
+            page={page}
+            setPage={setPage} 
+            handleRadioButtonChange={handleRadioButtonChange} 
+            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
+            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
+            handleHousingSourcesSubmit={handleHousingSourcesSubmit} /> 
+  }  
+
   return (
-    <div className='benefits-form'>
-      {displayPage(page)}
-    </div>
+    <main className='benefits-form'>
+      <p className='step-progress-title'>Step {page + 1} of {questions.length + 1}</p>
+      <h2 className='sub-header'>Tell us a little more about yourself.</h2>
+        {displayPage()}
+    </main>
   );
 }
 

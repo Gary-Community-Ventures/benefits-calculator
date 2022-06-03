@@ -1,0 +1,14 @@
+.question-label {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.question-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}

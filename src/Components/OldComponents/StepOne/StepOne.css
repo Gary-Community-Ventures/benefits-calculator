@@ -1,0 +1,22 @@
+.step-one-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.step-progress-title {
+  font-weight: 700;
+  color: #1976d2;
+}
+
+.sub-header {
+  font-size: 32px;
+  margin-bottom: 24px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #505c66;
+}
+
+.question-label {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}

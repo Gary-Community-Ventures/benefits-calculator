@@ -1,0 +1,14 @@
+.delete-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.expense-block-question-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1.25rem;
+}
+
+.expense-block-textfield {
+  margin-left: 8px;
+}
