@@ -74,17 +74,17 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
   const createExpenseDropdownMenu = (expenseSourceName, expenseSourceLabel, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-      <InputLabel if='expense-type-label'>Expense Type</InputLabel>
-      <StyledSelectfield
-        labelId='expense-type-label'
-        id={expenseSourceName}
-        value={expenseSourceName}
-        name={expenseSourceLabel}
-        label='Expense Type'
-        onChange={(event) => { handleSelectChange(event, index) }}>
-        {createExpenseMenuItems()}
-      </StyledSelectfield>
-    </FormControl>
+        <InputLabel if='expense-type-label'>Expense Type</InputLabel>
+        <StyledSelectfield
+          labelId='expense-type-label'
+          id={expenseSourceName}
+          value={expenseSourceName}
+          name={expenseSourceLabel}
+          label='Expense Type'
+          onChange={(event) => { handleSelectChange(event, index) }}>
+          {createExpenseMenuItems()}
+        </StyledSelectfield>
+      </FormControl>
     );
   }
 
@@ -93,16 +93,16 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
       <div className='bottom-border'>
         <p className='question-label'>How often do you have this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='expense-frequency-label'>Frequency</InputLabel>
-        <StyledSelectfield
-          labelId='expense-frequency-label'
-          id='expense-frequency'
-          value={expenseSourceFrequency}
-          name={expenseSourceFrequency}
-          label='Expense Frequency'
-          onChange={(event) => { handleFrequencySelectChange(event, index) }}>
-          {createExpenseFrequencyMenuItems()}
-        </StyledSelectfield>
+          <InputLabel if='expense-frequency-label'>Frequency</InputLabel>
+          <StyledSelectfield
+            labelId='expense-frequency-label'
+            id='expense-frequency'
+            value={expenseSourceFrequency}
+            name={expenseSourceFrequency}
+            label='Expense Frequency'
+            onChange={(event) => { handleFrequencySelectChange(event, index) }}>
+            {createExpenseFrequencyMenuItems()}
+          </StyledSelectfield>
         </FormControl>
       </div>
     );
