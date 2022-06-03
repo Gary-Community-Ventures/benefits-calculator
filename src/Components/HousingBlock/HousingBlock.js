@@ -50,10 +50,10 @@ const HousingBlock = ({ page, setPage, handleHousingSourcesSubmit, formData }) =
         <PreviousButton 
           page={page} 
           setPage={setPage} />
-         <Button
+        <Button
           variant='contained'
           onClick={(event) => { handleCheckboxSaveAndContinue(event) }}
-          >
+        >
           Save and Continue
         </Button>
       </div>
