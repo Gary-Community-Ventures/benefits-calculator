@@ -3,7 +3,7 @@ const expenseOptions = {
   childSupport: 'Child Support (Paid)',
   dependentCare: 'Dependent Care',
   rent: 'Rent',
-  medical: 'Medical expense',
+  medical: 'Medical Expense',
   heating: 'Heating',
   cooling: 'Cooling',
   mortgage: 'Mortgage',
