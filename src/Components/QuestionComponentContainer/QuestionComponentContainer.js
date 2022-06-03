@@ -11,7 +11,7 @@ import './QuestionComponentContainer.css';
 const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page, setPage, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHousingSourcesSubmit }) => {
   const matchingQuestion = questions.find((question) => question.id === page);
 
-  const createCheckboxfieldComponent = () => {
+  const createHousingBlockComponent = () => {
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
@@ -125,8 +125,8 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page
     return createTextfieldComponent();
   } else if (matchingQuestion.componentDetails.componentType === 'Radiofield') {
     return createRadiofieldComponent();
-  } else if (matchingQuestion.componentDetails.componentType === 'Checkboxfield') {
-    return createCheckboxfieldComponent();
+  } else if (matchingQuestion.componentDetails.componentType === 'HousingBlock') {
+    return createHousingBlockComponent();
   }
 
 }

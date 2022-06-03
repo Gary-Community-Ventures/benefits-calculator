@@ -195,7 +195,7 @@ const questions = [
     question: 'Which of these best applies to your housing situation?',
     questionDescription: "It's OK to pick more than one.",
     componentDetails: {
-      componentType: 'Checkboxfield',
+      componentType: 'HousingBlock',
       inputError: housingHasError,
       inputName: 'housing'
     }
