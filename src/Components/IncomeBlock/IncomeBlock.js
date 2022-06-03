@@ -235,7 +235,6 @@ const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => 
       </div>
     </>
   );
-
 }
 
 export default IncomeBlock;
