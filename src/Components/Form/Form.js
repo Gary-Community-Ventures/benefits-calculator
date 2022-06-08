@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import questions from '../../Assets/questions';
 import QuestionComponentContainer from '../QuestionComponentContainer/QuestionComponentContainer';
+import Confirmation from '../Confirmation/Confirmation';
 import './Form.css';
 
 const Form = () => {
@@ -29,9 +30,11 @@ const Form = () => {
   });
 
   useEffect(() => {
+
     if (formData.student === false) {
       setFormData({ ...formData, studentFulltime: false });
     }
+    
     if (formData.unemployed === false) { 
       setFormData({ ...formData, unemployedWorkedInLast18Mos: false });
     }
