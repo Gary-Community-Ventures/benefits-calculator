@@ -93,8 +93,13 @@ const Form = () => {
     setPage(page + 1);
   }
 
-  const displayPage = () => {
-    return <QuestionComponentContainer 
+  const displayPage = (currentPage) => {
+    if (currentPage < 15 ) {
+      return (
+        <>
+          <p className='step-progress-title'>Step {page + 1} of {questions.length + 1}</p>
+          <h2 className='sub-header'>Tell us a little more about yourself.</h2>
+          <QuestionComponentContainer 
             formData={formData} 
             handleChange={handleChange} 
             handleSubmit={handleSubmit}
@@ -104,13 +109,25 @@ const Form = () => {
             handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
             handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
             handleHousingSourcesSubmit={handleHousingSourcesSubmit} /> 
+        </>
+      );
+    } else if (currentPage === 15) {
+      return (
+        <>
+          <h2 className='sub-header'>Ok. Here's what we've got so far:</h2>
+          <p className='question-label'>Is all of your information correct?</p>
+          <Confirmation 
+            formData={formData} 
+            page={page}
+            setPage={setPage} />
+        </>
+      );
+    }
   }  
 
   return (
     <main className='benefits-form'>
-      <p className='step-progress-title'>Step {page + 1} of {questions.length + 1}</p>
-      <h2 className='sub-header'>Tell us a little more about yourself.</h2>
-        {displayPage()}
+      {displayPage(page)}
     </main>
   );
 }
