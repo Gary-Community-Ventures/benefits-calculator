@@ -80,8 +80,7 @@ const Form = () => {
 
   const handleHousingSourcesSubmit = (validatedHousingSources) => {
     setFormData({ ...formData, housing: validatedHousingSources });
-    // setPage(page + 1);
-    console.log({formData});
+    setPage(page + 1);
   }
   
   const handleIncomeStreamsSubmit = (validatedIncomeStreams) => {
