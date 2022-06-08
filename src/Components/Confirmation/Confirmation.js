@@ -55,6 +55,15 @@ const Confirmation = ({ formData, page, setPage }) => {
     );
   }
 
+
+  const listAllIncomeStreams = () => {
+    const mappedListItems = incomeStreams.map(incomeStream => {
+      return <li key={incomeStream.incomeStreamName}>${incomeStream.incomeAmount}, {incomeStream.incomeStreamLabel}, {incomeStream.incomeFrequency}</li>
+    });
+
+    return mappedListItems;
+  }
+
   return (
     <div className='confirmation-container'>
       {displayAllFormData()}
