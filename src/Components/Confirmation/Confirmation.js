@@ -55,6 +55,25 @@ const Confirmation = ({ formData, page, setPage }) => {
     );
   }
 
+  const listAllExpenses = () => {
+    const mappedExpenses = expenses.map(expense => {
+      return <li key={expense.expenseSourceName}>${expense.expenseAmount}, {expense.expenseSourceLabel}, {expense.expenseFrequency}</li>
+    });
+
+    return mappedExpenses;
+  }
+
+  const listAllHousing = () => {
+    const housingKeys = Object.keys(housing);
+
+    const mappedHousingListItems = housingKeys
+      .filter(housingOption => housing[housingOption] === true)
+      .map(selectedOption => {
+        return  <li key={selectedOption}>{housingOptions[selectedOption]}</li>;
+      });
+    
+    return mappedHousingListItems;
+  }
 
   const listAllIncomeStreams = () => {
     const mappedListItems = incomeStreams.map(incomeStream => {
