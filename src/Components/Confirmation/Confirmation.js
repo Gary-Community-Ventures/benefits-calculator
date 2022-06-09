@@ -1,3 +1,5 @@
+import { Button } from '@mui/material';
+import PreviousButton from "../PreviousButton/PreviousButton";
 import housingOptions from '../../Assets/housingOptions';
 import './Confirmation.css';
 
@@ -86,6 +88,16 @@ const Confirmation = ({ formData, page, setPage }) => {
   return (
     <div className='confirmation-container'>
       {displayAllFormData()}
+      <div className='income-block-question-buttons'>
+        <PreviousButton 
+          page={page} 
+          setPage={setPage} />
+        <Button
+          variant='contained'
+          onClick={() => setPage(page + 1)}>
+          Continue to my results
+        </Button>
+      </div>
     </div>
   );
 }
