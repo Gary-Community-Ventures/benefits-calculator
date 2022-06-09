@@ -34,7 +34,7 @@ const Form = () => {
     if (formData.student === false) {
       setFormData({ ...formData, studentFulltime: false });
     }
-    
+
     if (formData.unemployed === false) { 
       setFormData({ ...formData, unemployedWorkedInLast18Mos: false });
     }
@@ -57,7 +57,7 @@ const Form = () => {
     } else {
       setFormData({ ...formData, [name]: value });
     }
-  };
+  }
 
   const handleCheckboxChange = (event) => {
     //will need this for legal terms of agreement checkbox
