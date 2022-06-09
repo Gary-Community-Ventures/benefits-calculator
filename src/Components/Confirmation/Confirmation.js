@@ -95,7 +95,7 @@ const Confirmation = ({ formData, page, setPage }) => {
         <Button
           variant='contained'
           onClick={() => setPage(page + 1)}>
-          Continue to my results
+          Yes, continue to my results
         </Button>
       </div>
     </div>
