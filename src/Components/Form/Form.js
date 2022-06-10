@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import questions from '../../Assets/questions';
 import QuestionComponentContainer from '../QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from '../Confirmation/Confirmation';
+import Results from '../Results/Results';
 import './Form.css';
 
 const Form = () => {
@@ -114,6 +115,7 @@ const Form = () => {
     } else if (currentPage === 15) {
       return (
         <>
+          <p className='step-progress-title'>Step {page + 1} of {questions.length + 1}</p>
           <h2 className='sub-header'>Ok. Here's what we've got so far:</h2>
           <p className='question-label'>Is all of your information correct?</p>
           <Confirmation 
@@ -121,6 +123,10 @@ const Form = () => {
             page={page}
             setPage={setPage} />
         </>
+      );
+    } else if (currentPage === 16) {
+      return (
+        <Results formData={formData} />
       );
     }
   }  
