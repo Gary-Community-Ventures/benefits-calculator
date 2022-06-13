@@ -1,7 +1,7 @@
 import { Button, Link, Card, CardContent, CardActions, Typography } from "@mui/material";
 import programs from '../../Assets/programOptions';
 
-const Results = ({ formData }) => {
+const Results = () => {
   const displayProgramCards = () => {
     const programCards = Object.keys(programs).map(program => {
       return (
@@ -45,11 +45,13 @@ const Results = ({ formData }) => {
   }
 
   return (
-    <div className='results-container'>
-      <h2 className='sub-header'># programs for you to look at.</h2>
-      <p className='question-label'>Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.</p>
-      {displayProgramCards()}
-    </div>
+    <main className='benefits-form'>
+      <div className='results-container'>
+        <h2 className='sub-header'># programs for you to look at.</h2>
+        <p className='question-label'>Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.</p>
+        {displayProgramCards()}
+      </div>
+    </main>
   );
 }
 
