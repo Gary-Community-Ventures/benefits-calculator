@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import PreviousButton from "../PreviousButton/PreviousButton";
 import housingOptions from '../../Assets/housingOptions';
@@ -8,6 +9,8 @@ const Confirmation = ({ formData, page, setPage }) => {
     isBlindOrVisuallyImpaired, isDisabled, isAVeteran, isOnMedicaid, isOnDisabilityRelatedMedicaid, hasIncome, incomeStreams,
     hasExpenses, expenses, householdSize, householdAssets, housing } = formData;
   
+  let navigate = useNavigate();
+
   const displayAllFormData = () => {
     const householdSizeDescriptor = householdSize === 1 ? 'person' : 'people';
     
@@ -94,7 +97,7 @@ const Confirmation = ({ formData, page, setPage }) => {
           setPage={setPage} />
         <Button
           variant='contained'
-          onClick={() => setPage(page + 1)}>
+          onClick={() => navigate('results')}>
           Yes, continue to my results
         </Button>
       </div>
