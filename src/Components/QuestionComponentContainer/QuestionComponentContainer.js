@@ -6,10 +6,13 @@ import ContinueButton from '../ContinueButton/ContinueButton';
 import IncomeBlock from '../IncomeBlock/IncomeBlock';
 import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import questions from '../../Assets/questions';
+import { useParams } from 'react-router-dom';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, page, setPage, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHousingSourcesSubmit }) => {
-  const matchingQuestion = questions.find((question) => question.id === page);
+const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHousingSourcesSubmit }) => {
+  let { id } = useParams();
+  let numberId = Number(id);
+  const matchingQuestion = questions.find((question) => question.id === numberId);
 
   const createHousingBlockComponent = () => {
     return (
