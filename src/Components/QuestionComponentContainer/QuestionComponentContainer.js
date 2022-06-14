@@ -38,9 +38,7 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, hand
           formData={formData}
           handleChange={handleChange} />
         <div className='question-buttons'>
-          {matchingQuestion.id > 0 && <PreviousButton 
-            page={page} 
-            setPage={setPage} />}
+          <PreviousButton />
           <ContinueButton 
             handleSubmit={handleSubmit} 
             inputError={matchingQuestion.componentDetails.inputError}
