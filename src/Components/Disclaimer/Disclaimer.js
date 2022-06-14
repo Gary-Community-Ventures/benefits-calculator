@@ -9,7 +9,7 @@ const StyledTypography = styled(Typography)`
   height: 24px;
 `;
 
-const Disclaimer = ({ formData, page, handleCheckboxChange }) => {
+const Disclaimer = ({ formData, handleCheckboxChange }) => {
   const [buttonWasClicked, setButtonWasClicked] = useState(false);
   
   let navigate = useNavigate();
@@ -18,7 +18,7 @@ const Disclaimer = ({ formData, page, handleCheckboxChange }) => {
     event.preventDefault();
     setButtonWasClicked(true);
     if (formData.agreeToTermsOfService === true) {
-      navigate(`/question-${page}`);
+      navigate('/question-2');
     }
   }
 
