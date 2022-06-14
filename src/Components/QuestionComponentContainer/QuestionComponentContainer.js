@@ -122,13 +122,17 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, hand
     }
   }
 
-  if (matchingQuestion.componentDetails.componentType === 'Textfield') {
-    return createTextfieldComponent();
-  } else if (matchingQuestion.componentDetails.componentType === 'Radiofield') {
-    return createRadiofieldComponent();
-  } else if (matchingQuestion.componentDetails.componentType === 'HousingBlock') {
-    return createHousingBlockComponent();
-  }
+  return (
+    <main className='benefits-form'>
+      <p className='step-progress-title'>Step {id} of {questions.length + 2}</p>
+      <h2 className='sub-header'>Tell us a little more about yourself.</h2> 
+      {
+        matchingQuestion.componentDetails.componentType === 'Textfield' && createTextfieldComponent() ||
+        matchingQuestion.componentDetails.componentType === 'Radiofield' && createRadiofieldComponent() ||
+        matchingQuestion.componentDetails.componentType === 'HousingBlock' && createHousingBlockComponent()
+      }
+    </main>
+  );
 
 }
 
