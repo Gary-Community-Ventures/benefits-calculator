@@ -5,7 +5,7 @@ import { ageHasError, displayAgeHelperText, zipcodeHasError,
 
 const questions = [
   {
-    id: 0,
+    id: 2,
     question: 'How old are you?',
     componentDetails: {
       componentType: 'Textfield',
@@ -17,7 +17,7 @@ const questions = [
     }
   },
   {
-    id: 1,
+    id: 3,
     question: 'What is your zip code?',
     componentDetails: {
       componentType: 'Textfield',
@@ -29,7 +29,7 @@ const questions = [
     }    
   },
   {
-    id: 2,
+    id: 4,
     question: 'Are you a student?',
     componentDetails: {
       componentType: 'Radiofield',
@@ -48,7 +48,7 @@ const questions = [
     }]
   },
   {
-    id: 3,
+    id: 5,
     question: 'Are you pregnant?',
     componentDetails: {
       componentType: 'Radiofield',
@@ -58,7 +58,7 @@ const questions = [
     }    
   },
   {
-    id: 4,
+    id: 6,
     question: 'Are you currently unemployed?',
     componentDetails: {
       componentType: 'Radiofield',
@@ -77,7 +77,7 @@ const questions = [
     }]    
   },
   {
-    id: 5,
+    id: 7,
     question: 'Are you blind or visually impaired?',
     componentDetails: {
       componentType: 'Radiofield',
@@ -87,7 +87,7 @@ const questions = [
     }    
   },
   {
-    id: 6,
+    id: 8,
     question: 'Do you have any disabilities?',
     componentDetails: {
       componentType: 'Radiofield',
@@ -97,7 +97,7 @@ const questions = [
     }    
   },
   {
-    id: 7,
+    id: 9,
     question: 'Have you served in the U.S. Armed Forces, National Guard or Reserves?',
     componentDetails: {
       componentType: 'Radiofield',
@@ -107,7 +107,7 @@ const questions = [
     }    
   },
   {
-    id: 8,
+    id: 10,
     question: 'Do you receive Medicaid?',
     componentDetails: {
       componentType: 'Radiofield',
@@ -117,7 +117,7 @@ const questions = [
     }    
   },
   {
-    id: 9,
+    id: 11,
     question: 'Do you receive disability-related Medicaid?',
     componentDetails: {
       componentType: 'Radiofield',
@@ -127,7 +127,7 @@ const questions = [
     }    
   },
   {
-    id: 10,
+    id: 12,
     question: 'Do you have an income?',
     questionDescription: 'This includes money from jobs, alimony, investments, or gifts.',
     componentDetails: {
@@ -145,7 +145,7 @@ const questions = [
     }]    
   },
   {
-    id: 11,
+    id: 13,
     question: 'Do you have any expenses?',
     questionDescription: 'This includes costs like child care, child support, rent, medical ' + 
       'expenses, heating bills and more.',
@@ -164,7 +164,7 @@ const questions = [
     }]    
   },
   {
-    id: 12,
+    id: 14,
     question: 'Including you, how many people are in your household?',
     questionDescription: 'This is usually family members who you both live ' + 
       'and share important resources with like food and bills.',
@@ -178,7 +178,7 @@ const questions = [
     }
   },
   {
-    id: 13,
+    id: 15,
     question: 'How much does your whole household have right now in:',
     questionDescription: 'Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?',
     componentDetails: {
@@ -191,7 +191,7 @@ const questions = [
     }
   },
   {
-    id: 14,
+    id: 16,
     question: 'Which of these best applies to your housing situation?',
     questionDescription: "It's OK to pick more than one.",
     componentDetails: {
