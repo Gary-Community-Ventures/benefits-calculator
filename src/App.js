@@ -2,12 +2,15 @@ import Form from '../src/Components/Form/Form';
 import './App.css';
 import { Typography, AppBar, CssBaseline } from '@mui/material';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
+import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
+import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
 
 const App = () => {
-  const [page, setPage] = useState(0);
+  let navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     agreeToTermsOfService: false,
@@ -74,12 +77,13 @@ const App = () => {
     setFormData({ ...formData, [name]: boolValue });
   }
   
-  const handleSubmit = (event, validateInputFunction, inputToBeValidated) => {
+  const handleSubmit = (event, validateInputFunction, inputToBeValidated, numberId) => {
     event.preventDefault();
+
     if (!validateInputFunction(inputToBeValidated)) {
-      setPage(page + 1);
-    }
-  }  
+      navigate(`/question-${numberId + 1}`)
+    }  
+  }
 
   const handleHousingSourcesSubmit = (validatedHousingSources) => {
     setFormData({ ...formData, housing: validatedHousingSources });
