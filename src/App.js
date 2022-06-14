@@ -1,7 +1,9 @@
 import Form from '../src/Components/Form/Form';
 import './App.css';
 import { Typography, AppBar, CssBaseline } from '@mui/material';
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Disclaimer from './Components/Disclaimer/Disclaimer';
 import Results from './Components/Results/Results';
 
 const App = () => {
@@ -96,13 +98,19 @@ const App = () => {
 
   return (
     <div className='App'>
-        <CssBaseline />
+      <CssBaseline />
+      <AppBar position='relative'>
         <AppBar position='relative'> 
-          <Typography variant='h4' align='center'>Benefits Calculator</Typography>
-        </AppBar>
+      <AppBar position='relative'>
+        <Typography variant='h4' align='center'>Benefits Calculator</Typography>
+      </AppBar>
       <Routes>
-        <Route path='/' element={<Form />} /> 
-        <Route path='/results' element={<Results />} /> 
+        <Route 
+          path='/' 
+          element={<Disclaimer 
+            formData={formData}
+            page={page}
+            handleCheckboxChange={handleCheckboxChange} /> } /> 
       </Routes>
     </div>
   );
