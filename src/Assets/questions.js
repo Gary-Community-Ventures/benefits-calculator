@@ -53,7 +53,7 @@ const questions = [
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'is pregnant',
-      inputName: 'isPregnant',
+      inputName: 'pregnant',
       inputError: radiofieldHasError
     }    
   },
@@ -82,7 +82,7 @@ const questions = [
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'is blind or visually impaired',
-      inputName: 'isBlindOrVisuallyImpaired',
+      inputName: 'blindOrVisuallyImpaired',
       inputError: radiofieldHasError
     }    
   },
@@ -92,7 +92,7 @@ const questions = [
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'has any disabilities',
-      inputName: 'isDisabled',
+      inputName: 'disabled',
       inputError: radiofieldHasError
     }    
   },
@@ -102,7 +102,7 @@ const questions = [
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'is a veteran',
-      inputName: 'isAVeteran',
+      inputName: 'veteran',
       inputError: radiofieldHasError
     }    
   },
@@ -112,7 +112,7 @@ const questions = [
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'is on Medicaid',
-      inputName: 'isOnMedicaid',
+      inputName: 'medicaid',
       inputError: radiofieldHasError
     }    
   },
@@ -122,7 +122,7 @@ const questions = [
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'is on disability-related medicaid',
-      inputName: 'isOnDisabilityRelatedMedicaid',
+      inputName: 'disabilityRelatedMedicaid',
       inputError: radiofieldHasError
     }    
   },
