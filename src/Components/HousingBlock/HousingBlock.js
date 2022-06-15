@@ -4,7 +4,7 @@ import { useState } from 'react';
 import PreviousButton from "../PreviousButton/PreviousButton";
 import housingOptions from '../../Assets/housingOptions';
 
-const HousingBlock = ({ page, setPage, handleHousingSourcesSubmit, formData }) => {
+const HousingBlock = ({ handleHousingSourcesSubmit, formData }) => {
   const [selectedMenuItems, setSelectedMenuItems] = useState(Object.keys(formData.housing).length > 0 ? formData.housing : {
     renting: false,
     owner: false, 
@@ -47,9 +47,7 @@ const HousingBlock = ({ page, setPage, handleHousingSourcesSubmit, formData }) =
         {createFormControlLabels()}
       </FormGroup>
       <div className='expense-block-question-buttons'>
-        <PreviousButton 
-          page={page} 
-          setPage={setPage} />
+        <PreviousButton />
         <Button
           variant='contained'
           onClick={(event) => { handleCheckboxSaveAndContinue(event) }}

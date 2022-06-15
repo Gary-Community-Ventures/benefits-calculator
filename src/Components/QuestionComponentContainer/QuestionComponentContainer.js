@@ -20,8 +20,6 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, hand
         <p className='question-label'>{matchingQuestion.question}</p>
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
         <HousingBlock 
-          page={page} 
-          setPage={setPage} 
           handleHousingSourcesSubmit={handleHousingSourcesSubmit} 
           formData={formData} />
       </div>
