@@ -127,6 +127,9 @@ const App = () => {
             handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
             handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
             handleHousingSourcesSubmit={handleHousingSourcesSubmit} /> } /> 
+        <Route
+          path='*'
+          element={<Navigate to="/step-1" replace /> } />
       </Routes>
     </div>
   );
