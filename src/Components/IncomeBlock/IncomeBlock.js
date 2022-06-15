@@ -212,8 +212,10 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
 
   const handleSaveAndContinue = (event) => {
      event.preventDefault();
+   
      if(incomeStreamsAreValid(selectedMenuItem)) {
-       handleIncomeStreamsSubmit(selectedMenuItem);
+      //need to pass the id obtained from useParams in this component to the handler s.t. it can navigate to the next step
+      handleIncomeStreamsSubmit(selectedMenuItem, stepIdNumber); 
     }
   }
 
