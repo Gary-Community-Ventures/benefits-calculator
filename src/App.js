@@ -75,11 +75,11 @@ const App = () => {
     setFormData({ ...formData, [name]: boolValue });
   }
   
-  const handleSubmit = (event, validateInputFunction, inputToBeValidated, numberId) => {
+  const handleSubmit = (event, validateInputFunction, inputToBeValidated, stepId) => {
     event.preventDefault();
 
     if (!validateInputFunction(inputToBeValidated)) {
-      navigate(`/step-${numberId + 1}`);
+      navigate(`/step-${stepId + 1}`);
     }  
   }
 
@@ -88,9 +88,9 @@ const App = () => {
     setPage(page + 1);
   }
   
-  const handleIncomeStreamsSubmit = (validatedIncomeStreams, numberId) => {
+  const handleIncomeStreamsSubmit = (validatedIncomeStreams, stepId) => {
     setFormData({ ...formData, incomeStreams: validatedIncomeStreams });
-    navigate(`/step-${numberId + 1}`);
+    navigate(`/step-${stepId + 1}`);
   }
 
   const handleExpenseSourcesSubmit = (validatedExpenseSources) => {
