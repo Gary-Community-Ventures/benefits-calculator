@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import housingOptions from '../../Assets/housingOptions';
 import questions from '../../Assets/questions';
@@ -19,11 +19,14 @@ const Confirmation = ({ formData }) => {
         <p className='confirmation-label'>
           <b>Your household: </b>
           { householdSize } {householdSizeDescriptor}
+          <Link to='/step-14' className='edit-link'>Edit</Link>
         </p>
         <p className='confirmation-label'>
           <b>You, {applicantAge}, head of household</b>
+          <Link to='/step-2' className='edit-link'>Edit</Link>
         </p>
         <article className='confirmation-label'><b>Conditions:</b>
+          <Link to='/step-4' className='edit-link'>Edit</Link>
           <ul>
             { studentFulltime && <li> Full-time student </li> }
             { student && (studentFulltime === false) && <li> Student </li> }
@@ -38,23 +41,28 @@ const Confirmation = ({ formData }) => {
           </ul>
         </article>
         <article className='confirmation-label'><b>Income:</b>
+          <Link to='/step-12' className='edit-link'>Edit</Link>
           { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams()} </ul> }
         </article>
         <article className='confirmation-label'><b>Expenses:</b>
+          <Link to='/step-13' className='edit-link'>Edit</Link>
           { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses()} </ul> }
         </article>
         <p className='confirmation-label'>
           <b> Household resources: </b>
           ${householdAssets}
+          <Link to='/step-15' className='edit-link'>Edit</Link>
         </p>
         <p className='confirmation-label-description'>This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.</p>
         <article className='confirmation-label'>
           <b> Housing: </b>
+          <Link to='/step-16' className='edit-link'>Edit</Link>
           { <ul> {listAllHousing()} </ul> }
         </article>
         <p className='confirmation-label'>
           <b> Your zipcode: </b>
           { zipcode }
+          <Link to='/step-3' className='edit-link'>Edit</Link>
         </p>
       </>
     );
