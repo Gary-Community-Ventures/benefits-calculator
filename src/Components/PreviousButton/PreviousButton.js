@@ -9,11 +9,7 @@ const PreviousButton = () => {
   return (
     <Button
       onClick={() => {
-        if (numberId === 2) { //if it's the first question, navigate to the homepage
-          navigate('/')
-        } else {
-          navigate(`/question-${numberId - 1}`);
-        }
+        navigate(`/step-${numberId - 1}`);
       }}
       variant='contained'>
       Prev
