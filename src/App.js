@@ -93,9 +93,9 @@ const App = () => {
     navigate(`/step-${stepId + 1}`);
   }
 
-  const handleExpenseSourcesSubmit = (validatedExpenseSources) => {
+  const handleExpenseSourcesSubmit = (validatedExpenseSources, stepId) => {
     setFormData({ ...formData, expenses: validatedExpenseSources });
-    setPage(page + 1);
+    navigate(`/step-${stepId + 1}`);
   }
 
   return (
