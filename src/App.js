@@ -123,7 +123,10 @@ const App = () => {
             handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
             handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
             handleHousingSourcesSubmit={handleHousingSourcesSubmit} /> } /> 
-        <Route
+        <Route 
+          path='/confirm-information' 
+          element={<Confirmation
+            formData={formData} /> } /> 
           path='*'
           element={<Navigate to="/step-1" replace /> } />
       </Routes>
