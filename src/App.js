@@ -102,8 +102,6 @@ const App = () => {
     <div className='App'>
       <CssBaseline />
       <AppBar position='relative'>
-        <AppBar position='relative'> 
-      <AppBar position='relative'>
         <Typography variant='h4' align='center'>Benefits Calculator</Typography>
       </AppBar>
       <Routes>
