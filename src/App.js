@@ -127,6 +127,10 @@ const App = () => {
           path='/confirm-information' 
           element={<Confirmation
             formData={formData} /> } /> 
+        <Route 
+          path='/results' 
+          element={<Results /> } /> 
+        <Route
           path='*'
           element={<Navigate to="/step-1" replace /> } />
       </Routes>
