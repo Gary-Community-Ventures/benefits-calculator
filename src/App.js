@@ -1,16 +1,16 @@
-import Form from '../src/Components/Form/Form';
-import './App.css';
 import { Typography, AppBar, CssBaseline } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
+import { useNavigate, useParams, Navigate, Routes, Route } from 'react-router-dom';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
+import './App.css';
 
 const App = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const numberId = Number(id);
 
   const [formData, setFormData] = useState({
     agreeToTermsOfService: false,
@@ -81,7 +81,7 @@ const App = () => {
     event.preventDefault();
 
     if (!validateInputFunction(inputToBeValidated)) {
-      navigate(`/question-${numberId + 1}`)
+      navigate(`/step-${numberId + 1}`)
     }  
   }
 
