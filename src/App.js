@@ -9,8 +9,6 @@ import './App.css';
 
 const App = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const numberId = Number(id);
 
   const [formData, setFormData] = useState({
     agreeToTermsOfService: false,
