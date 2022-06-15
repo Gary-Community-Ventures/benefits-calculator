@@ -180,7 +180,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   const handleSaveAndContinue = (event) => {
     event.preventDefault();
     if(expenseSourcesAreValid(selectedMenuItem)) {
-      handleExpenseSourcesSubmit(selectedMenuItem);
+      handleExpenseSourcesSubmit(selectedMenuItem, stepNumberId);
     }
   }
 
