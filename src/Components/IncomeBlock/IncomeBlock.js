@@ -223,10 +223,7 @@ const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => 
         Add additional income source
       </Button>
       <div className='income-block-question-buttons'>
-        <PreviousButton 
-          page={page} 
-          setPage={setPage} />
-         <Button
+        <PreviousButton />
           variant='contained'
           onClick={(event) => { handleSaveAndContinue(event) }}
           >
