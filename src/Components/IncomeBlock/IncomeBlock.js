@@ -218,15 +218,14 @@ const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => 
       {createIncomeBlockQuestions()}
       <Button
         variant='contained'
-        onClick={(event) => handleAddAdditionalIncomeSource(event)}
-      >
+        onClick={(event) => handleAddAdditionalIncomeSource(event)} >
         Add additional income source
       </Button>
       <div className='income-block-question-buttons'>
         <PreviousButton />
+        <Button
           variant='contained'
-          onClick={(event) => { handleSaveAndContinue(event) }}
-          >
+          onClick={(event) => { handleSaveAndContinue(event) }} >
           Save and Continue
         </Button>
       </div>
