@@ -79,7 +79,7 @@ const App = () => {
     event.preventDefault();
 
     if (!validateInputFunction(inputToBeValidated)) {
-      navigate(`/step-${numberId + 1}`)
+      navigate(`/step-${numberId + 1}`);
     }  
   }
 
