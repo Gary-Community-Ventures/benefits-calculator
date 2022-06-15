@@ -82,8 +82,6 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, hand
         return <div className='question-container' key={index}>
           <p className='question-label'>{followUp.question}</p>
           <IncomeBlock 
-            page={page} 
-            setPage={setPage} 
             handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
             formData={formData} />
         </div>
@@ -91,8 +89,6 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, hand
         return <div className='question-container' key={index}>
           <p className='question-label'>{followUp.question}</p>
           <ExpenseBlock 
-            page={page}
-            setPage={setPage}
             handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
             formData={formData} />
         </div>
