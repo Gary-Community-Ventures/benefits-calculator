@@ -3,13 +3,13 @@ import { useParams } from 'react-router-dom';
 
 const ContinueButton = ({ handleSubmit, inputError, formData, inputName }) => {
   let { id } = useParams();
-  let numberId = Number(id);
+  let stepNumberId = Number(id);
 
   return (
     <Button
       variant='contained'
       onClick={(event) => {
-        handleSubmit(event, inputError, formData[inputName], numberId);
+        handleSubmit(event, inputError, formData[inputName], stepNumberId);
       }}>
       Continue
     </Button>
