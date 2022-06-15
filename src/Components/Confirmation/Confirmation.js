@@ -89,7 +89,11 @@ const Confirmation = ({ formData, page, setPage }) => {
   }
 
   return (
-    <div className='confirmation-container'>
+    <div className='benefits-form'>
+      <p className='step-progress-title'>Step 17 of {questions.length + 2}</p>
+      <h2 className='sub-header'>Ok. Here's what we've got so far:</h2>
+      <p className='question-label'>Is all of your information correct?</p>
+      <div className='confirmation-container'>
       {displayAllFormData()}
       <div className='income-block-question-buttons'>
         <PreviousButton 
@@ -100,6 +104,7 @@ const Confirmation = ({ formData, page, setPage }) => {
           onClick={() => navigate('results')}>
           Yes, continue to my results
         </Button>
+        </div>
       </div>
     </div>
   );
