@@ -88,9 +88,9 @@ const App = () => {
     setPage(page + 1);
   }
   
-  const handleIncomeStreamsSubmit = (validatedIncomeStreams) => {
+  const handleIncomeStreamsSubmit = (validatedIncomeStreams, numberId) => {
     setFormData({ ...formData, incomeStreams: validatedIncomeStreams });
-    setPage(page + 1);
+    navigate(`/step-${numberId + 1}`);
   }
 
   const handleExpenseSourcesSubmit = (validatedExpenseSources) => {
