@@ -1,16 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
-import PreviousButton from "../PreviousButton/PreviousButton";
 import housingOptions from '../../Assets/housingOptions';
+import questions from '../../Assets/questions';
 import './Confirmation.css';
 
-const Confirmation = ({ formData, page, setPage }) => {
+const Confirmation = ({ formData }) => {
+  const navigate = useNavigate();
+
   const { applicantAge, zipcode, student, studentFulltime, isPregnant, unemployed, unemployedWorkedInLast18Mos,
     isBlindOrVisuallyImpaired, isDisabled, isAVeteran, isOnMedicaid, isOnDisabilityRelatedMedicaid, hasIncome, incomeStreams,
     hasExpenses, expenses, householdSize, householdAssets, housing } = formData;
   
-  let navigate = useNavigate();
-
   const displayAllFormData = () => {
     const householdSizeDescriptor = householdSize === 1 ? 'person' : 'people';
     
@@ -94,16 +94,20 @@ const Confirmation = ({ formData, page, setPage }) => {
       <h2 className='sub-header'>Ok. Here's what we've got so far:</h2>
       <p className='question-label'>Is all of your information correct?</p>
       <div className='confirmation-container'>
-      {displayAllFormData()}
-      <div className='income-block-question-buttons'>
-        <PreviousButton 
-          page={page} 
-          setPage={setPage} />
+        {displayAllFormData()}
+        <div className='income-block-question-buttons'>
         <Button
-          variant='contained'
-          onClick={() => navigate('results')}>
-          Yes, continue to my results
+          onClick={() => {
+            navigate(`/step-16`);
+          }}
+          variant='contained'>
+          Prev
         </Button>
+          <Button
+            variant='contained'
+            onClick={() => navigate('/results')}>
+            Yes, continue to my results
+          </Button>
         </div>
       </div>
     </div>
