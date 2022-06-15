@@ -85,7 +85,7 @@ const App = () => {
 
   const handleHousingSourcesSubmit = (validatedHousingSources) => {
     setFormData({ ...formData, housing: validatedHousingSources });
-    setPage(page + 1);
+    navigate('/confirm-information');
   }
   
   const handleIncomeStreamsSubmit = (validatedIncomeStreams, stepId) => {
