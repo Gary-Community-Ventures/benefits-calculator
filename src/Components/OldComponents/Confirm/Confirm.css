@@ -1,9 +1,0 @@
-.confirm-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.confirm-footer{
-  display: flex;
-  justify-content: space-evenly;
-}

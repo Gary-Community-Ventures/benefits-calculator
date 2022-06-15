@@ -1,9 +1,0 @@
-.other-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.other-info-footer {
-  display: flex;
-  justify-content: space-evenly;
-}
