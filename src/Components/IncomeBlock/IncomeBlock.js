@@ -1,5 +1,6 @@
 import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from "@mui/material";
 import { useState } from 'react';
+import { useParams } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { incomeStreamValueHasError, displayIncomeStreamValueHelperText } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
@@ -20,7 +21,10 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 32
 });
 
-const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => {
+const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
+  const { id } = useParams();
+  const stepIdNumber = Number(id);
+
   //if there are any elements in state for incomeStreams create IncomeBlock components for those 
   //first by assigning them to the initial selectedMenuItem state
   //if not then create the initial income block questions
