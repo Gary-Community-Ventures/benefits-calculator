@@ -109,11 +109,13 @@ const App = () => {
         <Typography variant='h4' align='center'>Benefits Calculator</Typography>
       </AppBar>
       <Routes>
+        <Route
+          path='/'
+          element={<Navigate to="/step-1" replace /> } />
         <Route 
-          path='/' 
+          path='/step-1' 
           element={<Disclaimer 
             formData={formData}
-            page={page}
             handleCheckboxChange={handleCheckboxChange} /> } /> 
       </Routes>
     </div>
