@@ -1,6 +1,6 @@
 import { Typography, AppBar, CssBaseline } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams, Navigate, Routes, Route } from 'react-router-dom';
+import { useNavigate, Navigate, Routes, Route } from 'react-router-dom';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
