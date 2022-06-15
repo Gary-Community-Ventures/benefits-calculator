@@ -116,7 +116,17 @@ const App = () => {
           path='/step-1' 
           element={<Disclaimer 
             formData={formData}
-            handleCheckboxChange={handleCheckboxChange} /> } /> 
+            handleCheckboxChange={handleCheckboxChange} /> } />
+        <Route 
+          path='/step-:id' 
+          element={<QuestionComponentContainer 
+            formData={formData} 
+            handleChange={handleChange} 
+            handleSubmit={handleSubmit}
+            handleRadioButtonChange={handleRadioButtonChange} 
+            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
+            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
+            handleHousingSourcesSubmit={handleHousingSourcesSubmit} /> } /> 
       </Routes>
     </div>
   );
