@@ -20,7 +20,7 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 32
 });
 
-const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) => {
+const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   const [selectedMenuItem, setSelectedMenuItem] = useState(formData.expenses.length > 0 ? formData.expenses :
   [
     {
