@@ -1,10 +1,10 @@
 import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from "@mui/material";
 import { useState } from 'react';
+import { useParams } from "react-router-dom";
 import { styled } from '@mui/material/styles';
-import { expenseSourceValueHasError, displayExpenseSourceValueHelperText } from '../../Assets/validationFunctions';
+import { expenseSourceValueHasError, displayExpenseSourceValueHelperText, expenseSourcesAreValid } from '../../Assets/validationFunctions';
 import expenseOptions from '../../Assets/expenseOptions';
 import PreviousButton from "../PreviousButton/PreviousButton";
-import { expenseSourcesAreValid } from "../../Assets/validationFunctions";
 import './ExpenseBlock.css';
 
 const StyledSelectfield = styled(Select)({
@@ -21,6 +21,9 @@ const StyledDeleteButton = styled(Button)({
 });
 
 const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
+  const { id } = useParams();
+  const stepNumberId = Number(id);
+
   const [selectedMenuItem, setSelectedMenuItem] = useState(formData.expenses.length > 0 ? formData.expenses :
   [
     {
