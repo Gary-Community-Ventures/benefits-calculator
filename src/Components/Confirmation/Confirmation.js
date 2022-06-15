@@ -7,8 +7,8 @@ import './Confirmation.css';
 const Confirmation = ({ formData }) => {
   const navigate = useNavigate();
 
-  const { applicantAge, zipcode, student, studentFulltime, isPregnant, unemployed, unemployedWorkedInLast18Mos,
-    isBlindOrVisuallyImpaired, isDisabled, isAVeteran, isOnMedicaid, isOnDisabilityRelatedMedicaid, hasIncome, incomeStreams,
+  const { applicantAge, zipcode, student, studentFulltime, pregnant, unemployed, unemployedWorkedInLast18Mos,
+    blindOrVisuallyImpaired, disabled, veteran, medicaid, disabilityRelatedMedicaid, hasIncome, incomeStreams,
     hasExpenses, expenses, householdSize, householdAssets, housing } = formData;
   
   const displayAllFormData = () => {
@@ -27,14 +27,14 @@ const Confirmation = ({ formData }) => {
           <ul>
             { studentFulltime && <li> Full-time student </li> }
             { student && (studentFulltime === false) && <li> Student </li> }
-            { isPregnant && <li> Pregnant </li> }
+            { pregnant && <li> Pregnant </li> }
             { unemployedWorkedInLast18Mos && <li> Unemployed, worked in the last 18 months </li> }
             { unemployed && (unemployedWorkedInLast18Mos === false) && <li> Unemployed </li> }
-            { isBlindOrVisuallyImpaired && <li> Blind or visually impaired </li> }
-            { isDisabled && <li> Disabled </li> }
-            { isAVeteran && <li> Veteran </li> }
-            { isOnMedicaid && <li> Receiving Medicaid </li> }
-            { isOnDisabilityRelatedMedicaid && <li> Receiving disability-related Medicaid </li> }
+            { blindOrVisuallyImpaired && <li> Blind or visually impaired </li> }
+            { disabled && <li> Disabled </li> }
+            { veteran && <li> Veteran </li> }
+            { medicaid && <li> Receiving Medicaid </li> }
+            { disabilityRelatedMedicaid && <li> Receiving disability-related Medicaid </li> }
           </ul>
         </article>
         <article className='confirmation-label'><b>Income:</b>
