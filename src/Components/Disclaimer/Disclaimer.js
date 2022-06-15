@@ -18,7 +18,7 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
     event.preventDefault();
     setButtonWasClicked(true);
     if (formData.agreeToTermsOfService === true) {
-      navigate('/question-2');
+      navigate('/step-2');
     }
   }
 
