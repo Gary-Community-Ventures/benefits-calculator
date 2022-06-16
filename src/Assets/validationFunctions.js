@@ -32,8 +32,9 @@ const zipcodeHasError = (zipcode) => {
 } 
 
 const displayZipcodeHelperText = (zipcode) => {
-  const numZipcode = Number(zipcode);
-  return (zipcode.length !== 5 || Number.isInteger(numZipcode) === false) ? 'This entry is required to continue.' : '' ;
+  if (zipcodeHasError(zipcode)) {
+    return 'Please enter a valid CO zipcode';
+  }
 } 
 
 const radiofieldHasError = (radiofield) => {
