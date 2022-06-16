@@ -18,13 +18,12 @@ const displayAgeHelperText = (applicantAge) => {
 }
 
 const zipcodeHasError = (zipcode) => {
-  const numberZipcode = Number(zipcode);
   //the zipcode input must have digits [0-9] and be exactly 5 digits long
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
   if (numberMustBeFiveDigitsLongRegex.test(zipcode)) {
     //this means that the zipcode input passed the regex test so we can just return false since there is no error
-    //in the future, we can add an additional test here that checks it against all CO zipcodes
-    return false;
+    //this additional test checks the zipcode input against all CO zipcodes
+    return !coZipcodes.includes(zipcode);
   } else {
     return true;
   }
