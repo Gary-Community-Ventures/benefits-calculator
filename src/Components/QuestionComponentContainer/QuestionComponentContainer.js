@@ -9,7 +9,7 @@ import questions from '../../Assets/questions';
 import { useParams } from 'react-router-dom';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHousingSourcesSubmit }) => {
+const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHousingSourcesSubmit }) => {
   let { id } = useParams();
   let numberId = Number(id);
   const matchingQuestion = questions.find((question) => question.id === numberId);
@@ -34,7 +34,7 @@ const QuestionComponentContainer = ({ formData, handleChange, handleSubmit, hand
         <Textfield 
           componentDetails={matchingQuestion.componentDetails}
           formData={formData}
-          handleChange={handleChange} />
+          handleTextfieldChange={handleTextfieldChange} />
         <div className='question-buttons'>
           <PreviousButton />
           <ContinueButton 
