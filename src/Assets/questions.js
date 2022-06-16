@@ -9,7 +9,7 @@ const questions = [
     question: 'How old are you?',
     componentDetails: {
       componentType: 'Textfield',
-      inputType: 'number',
+      inputType: 'text',
       inputName: 'applicantAge',
       inputLabel: 'Age',
       inputError: ageHasError,
