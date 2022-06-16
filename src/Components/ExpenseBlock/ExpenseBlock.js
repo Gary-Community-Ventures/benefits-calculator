@@ -29,7 +29,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     {
       expenseSourceName: '', 
       expenseSourceLabel: '', 
-      expenseAmount: 0,
+      expenseAmount: '',
       expenseFrequency: ''
     }
   ]);
