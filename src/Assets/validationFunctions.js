@@ -13,13 +13,21 @@ const displayAgeHelperText = (applicantAge) => {
   const minimumAge = 13;
   const maximumAge = 130;
   if (numberApplicantAge < minimumAge || numberApplicantAge > maximumAge) {
-    return 'Please enter a valid age (13-130).';
+    return 'Please enter a valid age (13-130)';
   };
 }
 
 const zipcodeHasError = (zipcode) => {
-  const numZipcode = Number(zipcode);
-  return zipcode.length !== 5 || Number.isInteger(numZipcode) === false;
+  const numberZipcode = Number(zipcode);
+  //the zipcode input must have digits [0-9] and be exactly 5 digits long
+  const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
+  if (numberMustBeFiveDigitsLongRegex.test(zipcode)) {
+    //this means that the zipcode input passed the regex test so we can just return false since there is no error
+    //in the future, we can add an additional test here that checks it against all CO zipcodes
+    return false;
+  } else {
+    return true;
+  }
 } 
 
 const displayZipcodeHelperText = (zipcode) => {
