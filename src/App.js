@@ -53,13 +53,12 @@ const App = () => {
     
   }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses]);
 
-  const handleChange = (event) => {
+  const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
+    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
 
-    if (name !== 'zipcode') {
+    if (numberUpToEightDigitsLongRegex.test(value)) {
       setFormData({ ...formData, [name]: Number(value) });
-    } else {
-      setFormData({ ...formData, [name]: value });
     }
   }
 
