@@ -1,7 +1,15 @@
-import { ageHasError, displayAgeHelperText, zipcodeHasError, 
-  displayZipcodeHelperText, radiofieldHasError, householdSizeHasError,
-  displayHouseholdSizeHelperText, householdAssetsHasError, displayHouseholdAssetsHelperText,
-  housingHasError } from './validationFunctions';
+import { 
+  ageHasError,
+  displayAgeHelperText,
+  zipcodeHasError,
+  displayZipcodeHelperText,
+  radiofieldHasError,
+  householdSizeHasError,
+  displayHouseholdSizeHelperText,
+  householdAssetsHasError,
+  displayHouseholdAssetsHelperText,
+  housingHasError
+} from './validationFunctions';
 
 const questions = [
   {
