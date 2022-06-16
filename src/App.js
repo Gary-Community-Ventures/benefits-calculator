@@ -29,7 +29,7 @@ const App = () => {
     hasExpenses: false,
     expenses: [],
     householdSize: '',
-    householdAssets: 0,
+    householdAssets: '',
     housing: {}
   });
 
