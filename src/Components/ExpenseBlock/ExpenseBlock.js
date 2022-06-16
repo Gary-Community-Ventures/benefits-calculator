@@ -201,17 +201,21 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     setSelectedMenuItem(updatedSelectedMenuItems);
   }
 
-  const handleTextfieldChange = (event, index) => {
+  const handleExpenseTextfieldChange = (event, index) => {
     const { value } = event.target;
-    const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
-      if (i === index) {
-        return { ...expenseSourceData, expenseAmount: Math.round(Number(value)) }
-      } else {
-        return expenseSourceData;
-      }
-    });
+    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
 
-    setSelectedMenuItem(updatedSelectedMenuItems);
+    if (numberUpToEightDigitsLongRegex.test(value)) { 
+      const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
+        if (i === index) {
+          return { ...expenseSourceData, expenseAmount: Math.round(Number(value)) }
+        } else {
+          return expenseSourceData;
+        }
+      });
+  
+      setSelectedMenuItem(updatedSelectedMenuItems);
+    }
   }
 
   return (
