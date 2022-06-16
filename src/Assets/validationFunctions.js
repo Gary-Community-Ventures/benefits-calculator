@@ -1,9 +1,20 @@
 const ageHasError = (applicantAge) => {
-  return applicantAge < 18 || applicantAge > 130;
+  // handleTextfieldChange prevents setting anything to formData that does not pass a number regex test
+  // so applicantAge will always be initiated as a string and converted to a number once it passes the regex test
+  const numberApplicantAge = Number(applicantAge);
+  //the numbers that we type in have to be 0-8 digits long but we want them to be within this min/max range
+  const minimumAge = 13; 
+  const maximumAge = 130;
+  return numberApplicantAge < minimumAge || numberApplicantAge > maximumAge;
 }
 
 const displayAgeHelperText = (applicantAge) => {
-  return (applicantAge < 18 || applicantAge > 130) ? 'This entry is required to continue.' : '';
+  const numberApplicantAge = Number(applicantAge);
+  const minimumAge = 13;
+  const maximumAge = 130;
+  if (numberApplicantAge < minimumAge || numberApplicantAge > maximumAge) {
+    return 'Please enter a valid age (13-130).';
+  };
 }
 
 const zipcodeHasError = (zipcode) => {
