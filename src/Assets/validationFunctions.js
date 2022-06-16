@@ -1,3 +1,5 @@
+import coZipcodes from "./coZipcodes";
+
 const ageHasError = (applicantAge) => {
   // handleTextfieldChange prevents setting anything to formData that does not pass a number regex test
   // so applicantAge will always be initiated as a string and converted to a number once it passes the regex test
