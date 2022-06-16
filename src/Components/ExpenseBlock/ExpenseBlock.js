@@ -60,7 +60,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
       <div className='expense-block-textfield'>
         <p className='question-label'>How much is this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
         <StyledTextField 
-          type='number'
+          type='text'
           name={expenseSourceName}
           value={expenseAmount}
           label='Amount'
