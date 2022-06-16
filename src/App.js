@@ -116,7 +116,7 @@ const App = () => {
           path='/step-:id' 
           element={<QuestionComponentContainer 
             formData={formData} 
-            handleChange={handleChange} 
+            handleTextfieldChange={handleTextfieldChange} 
             handleSubmit={handleSubmit}
             handleRadioButtonChange={handleRadioButtonChange} 
             handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
