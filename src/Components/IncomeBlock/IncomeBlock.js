@@ -33,7 +33,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     {
       incomeStreamName: '', 
       incomeStreamLabel: '', 
-      incomeAmount: 0,
+      incomeAmount: '',
       incomeFrequency: ''
     }
   ]);
