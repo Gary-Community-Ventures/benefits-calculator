@@ -61,13 +61,13 @@ const incomeStreamsAreValid = (incomeStreams) => {
 }
 
 const expenseSourceValueHasError = (valueInput) => {
-  const numValueInput = Number(valueInput);
-  return numValueInput <= 0;
+  return valueInput <= 0;
 }
 
 const displayExpenseSourceValueHelperText = (valueInput) => {
-  const numValueInput = Number(valueInput);
-  return numValueInput <= 0 && 'This entry is required to continue.';
+  if (expenseSourceValueHasError(valueInput)) {
+    return 'Please enter a number greater than 0';
+  }
 }
 
 const expenseSourcesAreValid = (expenses) => {
