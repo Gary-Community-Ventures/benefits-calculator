@@ -90,17 +90,21 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     setSelectedMenuItem(updatedSelectedMenuItems);
   }
 
-  const handleTextfieldChange = (event, index) => {
+  const handleIncomeTextfieldChange = (event, index) => {
     const { value } = event.target;
-    const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
-      if (i === index) {
-        return { ...incomeSourceData, incomeAmount: Math.round(Number(value)) }
-      } else {
-        return incomeSourceData;
-      }
-    });
-    
-    setSelectedMenuItem(updatedSelectedMenuItems);
+    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
+
+    if (numberUpToEightDigitsLongRegex.test(value)) {
+      const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
+        if (i === index) {
+          return { ...incomeSourceData, incomeAmount: Math.round(Number(value)) }
+        } else {
+          return incomeSourceData;
+        }
+      });
+      
+      setSelectedMenuItem(updatedSelectedMenuItems);
+    }
   }
 
   const handleFrequencySelectChange = (event, index) => {
@@ -142,7 +146,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
           name={incomeStreamName}
           value={incomeAmount}
           label='Amount'
-          onChange={(event) => {handleTextfieldChange(event, index)}}
+          onChange={(event) => {handleIncomeTextfieldChange(event, index)}}
           variant='outlined'
           required
           error={incomeStreamValueHasError(selectedMenuItem[index].incomeAmount)} 
