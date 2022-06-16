@@ -90,13 +90,13 @@ const displayHouseholdSizeHelperText = (sizeOfHousehold) => {
 }
 
 const householdAssetsHasError = (householdAssets) => {
-  const numValueInput = Number(householdAssets);
-  return numValueInput < 0;
+  return householdAssets <= 0;
 }
 
 const displayHouseholdAssetsHelperText = (householdAssets) => {
-  const numValueInput = Number(householdAssets);
-  return numValueInput < 0 && 'This entry is required to continue.';
+  if (householdAssetsHasError(householdAssets)) {
+    return 'Please enter a number greater than 0';
+  }
 }
 
 const housingSourcesAreValid = (selectedHousing) => {
