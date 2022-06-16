@@ -178,7 +178,7 @@ const questions = [
       'and share important resources with like food and bills.',
     componentDetails: {
       componentType: 'Textfield',
-      inputType: 'number',
+      inputType: 'text',
       inputName: 'householdSize',
       inputLabel: 'Household Size',
       inputError: householdSizeHasError,
