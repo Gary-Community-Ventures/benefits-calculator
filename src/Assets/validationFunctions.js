@@ -114,7 +114,11 @@ const housingSourcesAreValid = (selectedHousing) => {
   }
 }
 
-module.exports = {
+const housingHasError = () => {
+  //once error p tags are added to HousingBlock component, create this function with the error message
+};
+
+export {
   ageHasError,
   displayAgeHelperText,
   zipcodeHasError,
@@ -130,5 +134,6 @@ module.exports = {
   displayHouseholdSizeHelperText,
   householdAssetsHasError,
   displayHouseholdAssetsHelperText,
-  housingSourcesAreValid
+  housingSourcesAreValid,
+  housingHasError
 }
