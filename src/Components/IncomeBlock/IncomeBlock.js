@@ -138,7 +138,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
       <div className='income-block-textfield'>
         <p className='question-label'>How much do you receive for: {selectedMenuItem[index].incomeStreamLabel}?</p>
         <StyledTextField 
-          type='number'
+          type='text'
           name={incomeStreamName}
           value={incomeAmount}
           label='Amount'
