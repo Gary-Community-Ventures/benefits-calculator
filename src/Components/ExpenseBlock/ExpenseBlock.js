@@ -64,7 +64,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
           name={expenseSourceName}
           value={expenseAmount}
           label='Amount'
-          onChange={(event) => { handleTextfieldChange(event, index) }}
+          onChange={(event) => { handleExpenseTextfieldChange(event, index) }}
           variant='outlined'
           required
           error={expenseSourceValueHasError(selectedMenuItem[index].expenseAmount)} 
