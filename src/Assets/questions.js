@@ -191,7 +191,7 @@ const questions = [
     questionDescription: 'Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?',
     componentDetails: {
       componentType: 'Textfield',
-      inputType: 'number',
+      inputType: 'text',
       inputName: 'householdAssets',
       inputLabel: 'Household Assets',
       inputError: householdAssetsHasError,
