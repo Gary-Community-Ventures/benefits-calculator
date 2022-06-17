@@ -47,6 +47,10 @@ const HousingBlock = ({ handleHousingSourcesSubmit, formData }) => {
     }
   }
 
+  const housingBlockIsMissingCheckbox = () => {
+    return Object.keys(selectedMenuItems).every(key => selectedMenuItems[key] === false);
+  }
+
   return (
     <>
       <FormGroup className='form-group'>
