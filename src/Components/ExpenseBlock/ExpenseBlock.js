@@ -223,6 +223,12 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     }
   }
 
+  const expenseBlockIsMissingAnInput = () => {
+    return selectedMenuItem[0].expenseSourceName === '' || 
+      selectedMenuItem[0].expenseAmount === 0 || 
+      selectedMenuItem[0].expenseFrequency === '';
+  }
+  
   return (
     <>
       {createExpenseBlockQuestions()}
