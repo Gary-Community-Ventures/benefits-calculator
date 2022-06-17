@@ -237,6 +237,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   return (
     <>
       {createIncomeBlockQuestions()}
+      { isMissingAnInput() && 
+        <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalIncomeSource(event)} >
