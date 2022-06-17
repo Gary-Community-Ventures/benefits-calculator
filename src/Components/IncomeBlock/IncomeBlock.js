@@ -205,6 +205,12 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     const updatedSelectedMenuItems = selectedMenuItem.filter((incomeSourceData, index) => index !== selectedIndex );
     setSelectedMenuItem(updatedSelectedMenuItems);  
   }
+
+  const isMissingAnInput = () => {
+    return selectedMenuItem[0].incomeStreamName === '' || 
+      selectedMenuItem[0].incomeAmount === 0 || 
+      selectedMenuItem[0].incomeFrequency === '';
+  }
   
   const handleAddAdditionalIncomeSource = (event) => {
     event.preventDefault();
