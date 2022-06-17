@@ -205,12 +205,6 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     const updatedSelectedMenuItems = selectedMenuItem.filter((incomeSourceData, index) => index !== selectedIndex );
     setSelectedMenuItem(updatedSelectedMenuItems);  
   }
-
-  const isMissingAnInput = () => {
-    return selectedMenuItem[0].incomeStreamName === '' || 
-      selectedMenuItem[0].incomeAmount === 0 || 
-      selectedMenuItem[0].incomeFrequency === '';
-  }
   
   const handleAddAdditionalIncomeSource = (event) => {
     event.preventDefault();
@@ -234,10 +228,16 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     }
   }
 
+  const incomeBlockIsMissingAnInput = () => {
+    return selectedMenuItem[0].incomeStreamName === '' || 
+      selectedMenuItem[0].incomeAmount === 0 || 
+      selectedMenuItem[0].incomeFrequency === '';
+  }
+
   return (
     <>
       {createIncomeBlockQuestions()}
-      { isMissingAnInput() && 
+      { incomeBlockIsMissingAnInput() && 
         <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
       <Button
         variant='contained'
