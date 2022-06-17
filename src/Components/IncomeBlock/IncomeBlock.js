@@ -1,4 +1,4 @@
-import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from "@mui/material";
+import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
 import { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { styled } from '@mui/material/styles';
@@ -20,6 +20,11 @@ const StyledTextField = styled(TextField)({
 const StyledDeleteButton = styled(Button)({
   minWidth: 32
 });
+
+const StyledTypography = styled(Typography)`
+  color: #c6252b;
+  height: 24px;
+`;
 
 const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   const { id } = useParams();
