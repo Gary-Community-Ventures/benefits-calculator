@@ -232,6 +232,8 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   return (
     <>
       {createExpenseBlockQuestions()}
+      { expenseBlockIsMissingAnInput() && 
+        <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalExpenseSource(event)}
