@@ -1,8 +1,8 @@
-import { Button, Card, CardContent, CardActions, Typography, FormControlLabel, Checkbox } from "@mui/material";
+import { Button, Card, CardContent, CardActions, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import questions from "../../Assets/questions";
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import questions from '../../Assets/questions';
 
 const StyledTypography = styled(Typography)`
   color: #c6252b;
