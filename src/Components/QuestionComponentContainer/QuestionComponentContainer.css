@@ -7,3 +7,20 @@
 .question-description {
   margin-bottom: 1rem;
 }
+
+.household-data-q-underline {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #505c66;
+}
+
+.household-data-sub-header {
+  font-size: 24px;
+  line-height: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.household-data-sub2-header {
+  margin-bottom: 1rem;
+}
