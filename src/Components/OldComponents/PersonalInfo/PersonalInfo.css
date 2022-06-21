@@ -1,9 +1,0 @@
-.personal-info-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.personal-info-footer {
-  display: flex;
-  justify-content: space-evenly;
-}

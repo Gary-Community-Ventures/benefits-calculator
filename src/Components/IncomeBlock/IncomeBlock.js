@@ -1,5 +1,6 @@
-import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from "@mui/material";
+import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
 import { useState } from 'react';
+import { useParams } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { incomeStreamValueHasError, displayIncomeStreamValueHelperText } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
@@ -20,7 +21,15 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 32
 });
 
-const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => {
+const StyledTypography = styled(Typography)`
+  color: #c6252b;
+  height: 24px;
+`;
+
+const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
+  const { id } = useParams();
+  const stepIdNumber = Number(id);
+
   //if there are any elements in state for incomeStreams create IncomeBlock components for those 
   //first by assigning them to the initial selectedMenuItem state
   //if not then create the initial income block questions
@@ -29,7 +38,7 @@ const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => 
     {
       incomeStreamName: '', 
       incomeStreamLabel: '', 
-      incomeAmount: 0,
+      incomeAmount: '',
       incomeFrequency: ''
     }
   ]);
@@ -86,17 +95,21 @@ const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => 
     setSelectedMenuItem(updatedSelectedMenuItems);
   }
 
-  const handleTextfieldChange = (event, index) => {
+  const handleIncomeTextfieldChange = (event, index) => {
     const { value } = event.target;
-    const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
-      if (i === index) {
-        return { ...incomeSourceData, incomeAmount: Math.round(Number(value)) }
-      } else {
-        return incomeSourceData;
-      }
-    });
-    
-    setSelectedMenuItem(updatedSelectedMenuItems);
+    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
+
+    if (numberUpToEightDigitsLongRegex.test(value)) {
+      const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
+        if (i === index) {
+          return { ...incomeSourceData, incomeAmount: Math.round(Number(value)) }
+        } else {
+          return incomeSourceData;
+        }
+      });
+      
+      setSelectedMenuItem(updatedSelectedMenuItems);
+    }
   }
 
   const handleFrequencySelectChange = (event, index) => {
@@ -134,11 +147,11 @@ const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => 
       <div className='income-block-textfield'>
         <p className='question-label'>How much do you receive for: {selectedMenuItem[index].incomeStreamLabel}?</p>
         <StyledTextField 
-          type='number'
+          type='text'
           name={incomeStreamName}
           value={incomeAmount}
           label='Amount'
-          onChange={(event) => {handleTextfieldChange(event, index)}}
+          onChange={(event) => {handleIncomeTextfieldChange(event, index)}}
           variant='outlined'
           required
           error={incomeStreamValueHasError(selectedMenuItem[index].incomeAmount)} 
@@ -208,28 +221,34 @@ const IncomeBlock = ({ page, setPage, handleIncomeStreamsSubmit, formData }) => 
 
   const handleSaveAndContinue = (event) => {
      event.preventDefault();
+   
      if(incomeStreamsAreValid(selectedMenuItem)) {
-       handleIncomeStreamsSubmit(selectedMenuItem);
+      //need to pass the id obtained from useParams in this component to the handler s.t. it can navigate to the next step
+      handleIncomeStreamsSubmit(selectedMenuItem, stepIdNumber); 
     }
+  }
+
+  const incomeBlockIsMissingAnInput = () => {
+    return selectedMenuItem[0].incomeStreamName === '' || 
+      selectedMenuItem[0].incomeAmount === 0 || 
+      selectedMenuItem[0].incomeFrequency === '';
   }
 
   return (
     <>
       {createIncomeBlockQuestions()}
+      { incomeBlockIsMissingAnInput() && 
+        <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
       <Button
         variant='contained'
-        onClick={(event) => handleAddAdditionalIncomeSource(event)}
-      >
+        onClick={(event) => handleAddAdditionalIncomeSource(event)} >
         Add additional income source
       </Button>
       <div className='income-block-question-buttons'>
-        <PreviousButton 
-          page={page} 
-          setPage={setPage} />
-         <Button
+        <PreviousButton />
+        <Button
           variant='contained'
-          onClick={(event) => { handleSaveAndContinue(event) }}
-          >
+          onClick={(event) => { handleSaveAndContinue(event) }} >
           Save and Continue
         </Button>
       </div>

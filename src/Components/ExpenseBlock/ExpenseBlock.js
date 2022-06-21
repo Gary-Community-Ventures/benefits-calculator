@@ -1,10 +1,10 @@
-import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from "@mui/material";
+import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
 import { useState } from 'react';
+import { useParams } from "react-router-dom";
 import { styled } from '@mui/material/styles';
-import { expenseSourceValueHasError, displayExpenseSourceValueHelperText } from '../../Assets/validationFunctions';
+import { expenseSourceValueHasError, displayExpenseSourceValueHelperText, expenseSourcesAreValid } from '../../Assets/validationFunctions';
 import expenseOptions from '../../Assets/expenseOptions';
 import PreviousButton from "../PreviousButton/PreviousButton";
-import { expenseSourcesAreValid } from "../../Assets/validationFunctions";
 import './ExpenseBlock.css';
 
 const StyledSelectfield = styled(Select)({
@@ -20,13 +20,21 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 32
 });
 
-const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) => {
+const StyledTypography = styled(Typography)`
+  color: #c6252b;
+  height: 24px;
+`;
+
+const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
+  const { id } = useParams();
+  const stepNumberId = Number(id);
+
   const [selectedMenuItem, setSelectedMenuItem] = useState(formData.expenses.length > 0 ? formData.expenses :
   [
     {
       expenseSourceName: '', 
       expenseSourceLabel: '', 
-      expenseAmount: 0,
+      expenseAmount: '',
       expenseFrequency: ''
     }
   ]);
@@ -57,11 +65,11 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
       <div className='expense-block-textfield'>
         <p className='question-label'>How much is this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
         <StyledTextField 
-          type='number'
+          type='text'
           name={expenseSourceName}
           value={expenseAmount}
           label='Amount'
-          onChange={(event) => { handleTextfieldChange(event, index) }}
+          onChange={(event) => { handleExpenseTextfieldChange(event, index) }}
           variant='outlined'
           required
           error={expenseSourceValueHasError(selectedMenuItem[index].expenseAmount)} 
@@ -177,7 +185,7 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
   const handleSaveAndContinue = (event) => {
     event.preventDefault();
     if(expenseSourcesAreValid(selectedMenuItem)) {
-      handleExpenseSourcesSubmit(selectedMenuItem);
+      handleExpenseSourcesSubmit(selectedMenuItem, stepNumberId);
     }
   }
 
@@ -198,22 +206,34 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
     setSelectedMenuItem(updatedSelectedMenuItems);
   }
 
-  const handleTextfieldChange = (event, index) => {
+  const handleExpenseTextfieldChange = (event, index) => {
     const { value } = event.target;
-    const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
-      if (i === index) {
-        return { ...expenseSourceData, expenseAmount: Math.round(Number(value)) }
-      } else {
-        return expenseSourceData;
-      }
-    });
+    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
 
-    setSelectedMenuItem(updatedSelectedMenuItems);
+    if (numberUpToEightDigitsLongRegex.test(value)) { 
+      const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
+        if (i === index) {
+          return { ...expenseSourceData, expenseAmount: Math.round(Number(value)) }
+        } else {
+          return expenseSourceData;
+        }
+      });
+  
+      setSelectedMenuItem(updatedSelectedMenuItems);
+    }
   }
 
+  const expenseBlockIsMissingAnInput = () => {
+    return selectedMenuItem[0].expenseSourceName === '' || 
+      selectedMenuItem[0].expenseAmount === 0 || 
+      selectedMenuItem[0].expenseFrequency === '';
+  }
+  
   return (
     <>
       {createExpenseBlockQuestions()}
+      { expenseBlockIsMissingAnInput() && 
+        <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalExpenseSource(event)}
@@ -221,9 +241,7 @@ const ExpenseBlock = ({ page, setPage, handleExpenseSourcesSubmit, formData }) =
         Add additional expense source
       </Button>
       <div className='expense-block-question-buttons'>
-        <PreviousButton 
-          page={page} 
-          setPage={setPage} />
+        <PreviousButton />
          <Button
           variant='contained'
           onClick={(event) => { handleSaveAndContinue(event) }}

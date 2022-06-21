@@ -5,7 +5,7 @@ const StyledTextField = styled(TextField)({
   marginBottom: 20
 });
 
-const Textfield = ({ componentDetails, formData, handleChange }) => {
+const Textfield = ({ componentDetails, formData, handleTextfieldChange }) => {
   const { inputType, inputName, inputLabel, inputError, inputHelperText } = componentDetails;
 
   return (
@@ -15,7 +15,7 @@ const Textfield = ({ componentDetails, formData, handleChange }) => {
         name={inputName}
         value={formData[inputName]}
         label={inputLabel}
-        onChange={(event) => {handleChange(event)}}
+        onChange={(event) => {handleTextfieldChange(event)}}
         variant='outlined'
         required
         error={inputError(formData[inputName])}
