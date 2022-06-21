@@ -114,10 +114,6 @@ const housingSourcesAreValid = (selectedHousing) => {
   }
 }
 
-const housingHasError = () => {
-  //once error p tags are added to HousingBlock component, create this function with the error message
-};
-
 export {
   ageHasError,
   displayAgeHelperText,
@@ -134,6 +130,5 @@ export {
   displayHouseholdSizeHelperText,
   householdAssetsHasError,
   displayHouseholdAssetsHelperText,
-  housingSourcesAreValid,
-  housingHasError
+  housingSourcesAreValid
 }
