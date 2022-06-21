@@ -7,8 +7,7 @@ import {
   householdSizeHasError,
   displayHouseholdSizeHelperText,
   householdAssetsHasError,
-  displayHouseholdAssetsHelperText,
-  housingHasError
+  displayHouseholdAssetsHelperText
 } from './validationFunctions';
 
 const questions = [
@@ -204,7 +203,6 @@ const questions = [
     questionDescription: "It's OK to pick more than one.",
     componentDetails: {
       componentType: 'HousingBlock',
-      inputError: housingHasError,
       inputName: 'housing'
     }
   }
