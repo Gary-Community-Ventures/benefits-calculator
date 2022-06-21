@@ -18,11 +18,11 @@ const Confirmation = ({ formData }) => {
       <>
         <p className='confirmation-label'>
           <b>Your household: </b>
-          { householdSize } {householdSizeDescriptor}
+          { householdSize } { householdSizeDescriptor }
           <Link to='/step-14' className='edit-link'>Edit</Link>
         </p>
         <p className='confirmation-label'>
-          <b>You, {applicantAge}, head of household</b>
+          <b>You, { applicantAge }, head of household</b>
           <Link to='/step-2' className='edit-link'>Edit</Link>
         </p>
         <article className='confirmation-label'><b>Conditions:</b>
@@ -50,14 +50,14 @@ const Confirmation = ({ formData }) => {
         </article>
         <p className='confirmation-label'>
           <b> Household resources: </b>
-          ${householdAssets}
+          ${ householdAssets }
           <Link to='/step-15' className='edit-link'>Edit</Link>
         </p>
         <p className='confirmation-label-description'>This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.</p>
         <article className='confirmation-label'>
           <b> Housing: </b>
           <Link to='/step-16' className='edit-link'>Edit</Link>
-          { <ul> {listAllHousing()} </ul> }
+          { <ul> { listAllHousing() } </ul> }
         </article>
         <p className='confirmation-label'>
           <b> Your zipcode: </b>
@@ -70,7 +70,7 @@ const Confirmation = ({ formData }) => {
 
   const listAllExpenses = () => {
     const mappedExpenses = expenses.map(expense => {
-      return <li key={expense.expenseSourceName}>${expense.expenseAmount}, {expense.expenseSourceLabel}, {expense.expenseFrequency}</li>
+      return <li key={ expense.expenseSourceName }>${ expense.expenseAmount }, { expense.expenseSourceLabel }, { expense.expenseFrequency }</li>
     });
 
     return mappedExpenses;
@@ -82,7 +82,7 @@ const Confirmation = ({ formData }) => {
     const mappedHousingListItems = housingKeys
       .filter(housingOption => housing[housingOption] === true)
       .map(selectedOption => {
-        return  <li key={selectedOption}>{housingOptions[selectedOption]}</li>;
+        return  <li key={ selectedOption }>{ housingOptions[selectedOption] }</li>;
       });
     
     return mappedHousingListItems;
@@ -90,7 +90,7 @@ const Confirmation = ({ formData }) => {
 
   const listAllIncomeStreams = () => {
     const mappedListItems = incomeStreams.map(incomeStream => {
-      return <li key={incomeStream.incomeStreamName}>${incomeStream.incomeAmount}, {incomeStream.incomeStreamLabel}, {incomeStream.incomeFrequency}</li>
+      return <li key={ incomeStream.incomeStreamName }>${ incomeStream.incomeAmount }, { incomeStream.incomeStreamLabel }, { incomeStream.incomeFrequency }</li>
     });
 
     return mappedListItems;
@@ -98,11 +98,11 @@ const Confirmation = ({ formData }) => {
 
   return (
     <div className='benefits-form'>
-      <p className='step-progress-title'>Step 17 of {questions.length + 2}</p>
+      <p className='step-progress-title'>Step 17 of { questions.length + 2 }</p>
       <h2 className='sub-header'>Ok. Here's what we've got so far:</h2>
       <p className='question-label'>Is all of your information correct?</p>
       <div className='confirmation-container'>
-        {displayAllFormData()}
+        { displayAllFormData() }
         <div className='income-block-question-buttons'>
         <Button
           onClick={() => {
