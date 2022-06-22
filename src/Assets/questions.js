@@ -186,6 +186,15 @@ const questions = [
   },
   {
     id: 15,
+    question: 'Tell us about the next person in your household.',
+    componentDetails: {
+      componentType: 'HouseholdDataBlock',
+      ariaLabel: 'screener household data',
+      inputName: 'householdData'
+    }
+  },
+  {
+    id: 16,
     question: 'How much does your whole household have right now in:',
     questionDescription: 'Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?',
     componentDetails: {
@@ -198,7 +207,7 @@ const questions = [
     }
   },
   {
-    id: 16,
+    id: 17,
     question: 'Which of these best applies to your housing situation?',
     questionDescription: "It's OK to pick more than one.",
     componentDetails: {
