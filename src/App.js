@@ -75,11 +75,15 @@ const App = () => {
     setFormData({ ...formData, [name]: boolValue });
   }
   
-  const handleSubmit = (event, validateInputFunction, inputToBeValidated, stepId) => {
+  const handleSubmit = (event, validateInputFunction, inputToBeValidated, stepId, householdSize) => {
     event.preventDefault();
 
     if (!validateInputFunction(inputToBeValidated)) {
-      navigate(`/step-${stepId + 1}`);
+      if (stepId === 14 && householdSize === 1) { //if you're on the householdSize q and the value is 1
+        navigate(`/step-${stepId + 2}`); //skip question 15 and go to 16
+      } else { //you've indicated that you're householdSize is larger than 1
+        navigate(`/step-${stepId + 1}`);
+      }
     }  
   }
 
