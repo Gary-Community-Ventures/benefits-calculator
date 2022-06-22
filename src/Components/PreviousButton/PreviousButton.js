@@ -11,10 +11,8 @@ const PreviousButton = ({ formData }) => {
       onClick={() => {
         if (numberId === 16 && formData.householdSize === 1) {
           navigate(`/step-${numberId - 2}`);
-
         } else {
           navigate(`/step-${numberId - 1}`);
-
         }
       }}
       variant='contained'>
