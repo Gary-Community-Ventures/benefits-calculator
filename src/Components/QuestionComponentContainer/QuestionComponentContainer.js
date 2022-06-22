@@ -121,9 +121,10 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
       { matchingQuestion.id === 15 && <h2 className='household-data-sub-header'>So far you’ve told us about:</h2> }
       { matchingQuestion.id === 15 && <h4 className='household-data-sub2-header'> 🔵 You, {formData.applicantAge} Head of household</h4> }
       {
-        matchingQuestion.componentDetails.componentType === 'Textfield' && createTextfieldComponent() ||
-        matchingQuestion.componentDetails.componentType === 'Radiofield' && createRadiofieldComponent() ||
-        matchingQuestion.componentDetails.componentType === 'HousingBlock' && createHousingBlockComponent()
+        ( matchingQuestion.componentDetails.componentType === 'Textfield' && createTextfieldComponent() ) ||
+        ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createRadiofieldComponent() ) ||
+        ( matchingQuestion.componentDetails.componentType === 'HousingBlock' && createHousingBlockComponent() ) ||
+        ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() )
       }
     </main>
   );
