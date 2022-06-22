@@ -36,7 +36,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           formData={formData}
           handleTextfieldChange={handleTextfieldChange} />
         <div className='question-buttons'>
-          <PreviousButton />
+          <PreviousButton formData={formData} />
           <ContinueButton 
             handleSubmit={handleSubmit} 
             inputError={matchingQuestion.componentDetails.inputError}
@@ -103,7 +103,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     if (isNotIncomeOrExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className='question-buttons'>
-          <PreviousButton />
+          <PreviousButton formData={formData} />
           <ContinueButton
             handleSubmit={handleSubmit}
             inputError={matchingQuestion.componentDetails.inputError}
