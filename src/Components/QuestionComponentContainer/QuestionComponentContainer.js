@@ -117,7 +117,9 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   return (
     <main className='benefits-form'>
       <p className='step-progress-title'>Step {id} of {questions.length + 2}</p>
-      <h2 className='sub-header'>Tell us a little more about yourself.</h2> 
+      { matchingQuestion.id !== 15 && <h2 className='sub-header'>Tell us a little more about yourself.</h2> }
+      { matchingQuestion.id === 15 && <h2 className='household-data-sub-header'>So far you’ve told us about:</h2> }
+      { matchingQuestion.id === 15 && <h4 className='household-data-sub2-header'> 🔵 You, {formData.applicantAge} Head of household</h4> }
       {
         matchingQuestion.componentDetails.componentType === 'Textfield' && createTextfieldComponent() ||
         matchingQuestion.componentDetails.componentType === 'Radiofield' && createRadiofieldComponent() ||
