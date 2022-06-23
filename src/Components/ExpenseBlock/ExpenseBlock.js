@@ -236,16 +236,14 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
         <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
       <Button
         variant='contained'
-        onClick={(event) => handleAddAdditionalExpenseSource(event)}
-      >
+        onClick={(event) => handleAddAdditionalExpenseSource(event)} >
         Add additional expense source
       </Button>
       <div className='prev-save-continue-buttons'>
         <PreviousButton />
-         <Button
+        <Button
           variant='contained'
-          onClick={(event) => { handleSaveAndContinue(event) }}
-          >
+          onClick={(event) => { handleSaveAndContinue(event) }} >
           Save and Continue
         </Button>
       </div>
