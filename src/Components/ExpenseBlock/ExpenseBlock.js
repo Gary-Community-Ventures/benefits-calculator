@@ -240,7 +240,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
       >
         Add additional expense source
       </Button>
-      <div className='expense-block-question-buttons'>
+      <div className='prev-save-continue-buttons'>
         <PreviousButton />
          <Button
           variant='contained'
