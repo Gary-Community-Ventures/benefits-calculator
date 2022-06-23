@@ -4,9 +4,7 @@
 }
 
 .expense-block-question-buttons {
-  display: flex;
-  justify-content: space-evenly;
-  margin: 1.25rem;
+  margin-top: 1rem; 
 }
 
 .expense-block-textfield {
