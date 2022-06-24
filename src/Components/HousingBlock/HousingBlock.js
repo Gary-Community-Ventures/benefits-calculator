@@ -58,7 +58,7 @@ const HousingBlock = ({ handleHousingSourcesSubmit, formData }) => {
       </FormGroup>
       { housingBlockIsMissingCheckbox() && 
         <StyledTypography gutterBottom>*Please select a housing option</StyledTypography> || <StyledTypography></StyledTypography>}
-      <div className='expense-block-question-buttons'>
+      <div className='prev-save-continue-buttons'>
         <PreviousButton />
         <Button
           variant='contained'

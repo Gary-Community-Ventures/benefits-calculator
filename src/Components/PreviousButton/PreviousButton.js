@@ -8,6 +8,7 @@ const PreviousButton = ({ formData }) => {
 
   return (
     <Button
+      className='prev-button'
       onClick={() => {
         if (numberId === 16 && formData.householdSize === 1) {
           navigate(`/step-${numberId - 2}`);

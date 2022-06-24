@@ -244,7 +244,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
         onClick={(event) => handleAddAdditionalIncomeSource(event)} >
         Add additional income source
       </Button>
-      <div className='income-block-question-buttons'>
+      <div className='prev-save-continue-buttons'>
         <PreviousButton />
         <Button
           variant='contained'

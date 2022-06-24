@@ -8,6 +8,14 @@
   margin-bottom: 1rem;
 }
 
+.prev-button {
+  margin-right: 2.25rem !important;
+}
+
+.prev-save-continue-buttons, .prev-continue-results-buttons {
+  margin-top: 1rem; 
+}
+
 .household-data-q-underline {
   font-size: 2rem;
   margin-bottom: 24px;
