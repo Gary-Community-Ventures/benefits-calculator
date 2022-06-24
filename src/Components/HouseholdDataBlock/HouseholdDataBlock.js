@@ -51,6 +51,7 @@ const HouseholdDataBlock = ({ formData }) => {
       const updatedHouseholdData = householdData.map((personData, i) => {
         if (i === index) {
           return {
+            ...personData,
             age: value,
             ageLabel: `Person ${i + 1} Age`
           };
