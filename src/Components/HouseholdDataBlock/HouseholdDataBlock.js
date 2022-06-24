@@ -7,7 +7,8 @@ const HouseholdDataBlock = ({ formData }) => {
   
   const [householdData, setHouseholdData] = useState([{
       age: '',
-      ageLabel: `Person 1 Age`
+      ageLabel: `Person 1 Age`,
+      relationshipToHH: ``
     }
   ]);
 
