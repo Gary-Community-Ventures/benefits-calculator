@@ -61,8 +61,10 @@ const HouseholdDataBlock = ({ formData }) => {
   }
 
   return (
-    <div className='person-data-container'>
-      { createAgeQuestion(0) }
+
+  return (
+    <div>
+      { createHouseholdBlocks() }
     </div>
   );
 }
