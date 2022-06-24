@@ -9,7 +9,6 @@ const HouseholdDataBlock = ({ formData }) => {
   
   const [householdData, setHouseholdData] = useState([{
       age: '',
-      ageLabel: `Person 1 Age`,
       relationshipToHH: ``
     }
   ]);
@@ -19,7 +18,7 @@ const HouseholdDataBlock = ({ formData }) => {
       inputType: 'text',
       inputName: 'age', 
       inputValue: householdData[personIndex].age,
-      inputLabel: householdData[personIndex].ageLabel,
+      inputLabel: `Person ${personIndex + 1} Age`,
       inputError: ageHasError,
       inputHelperText: displayAgeHelperText
     }
@@ -52,8 +51,7 @@ const HouseholdDataBlock = ({ formData }) => {
         if (i === index) {
           return {
             ...personData,
-            age: value,
-            ageLabel: `Person ${i + 1} Age`
+            age: value
           };
         } else {
           return personData;
