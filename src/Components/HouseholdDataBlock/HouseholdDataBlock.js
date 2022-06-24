@@ -80,6 +80,18 @@ const HouseholdDataBlock = ({ formData }) => {
     });
   }
 
+
+  const createRelationshipDropdownMenu = (index) => {
+    return (
+      <DropdownMenu 
+        dropdownComponentProps={createDropdownCompProps()}
+        options={relationshipOptions}
+        householdData={householdData}
+        setHouseholdData={setHouseholdData}
+        index={index} />
+    ); 
+  }
+
   return (
     <div>
       { createHouseholdBlocks() }
