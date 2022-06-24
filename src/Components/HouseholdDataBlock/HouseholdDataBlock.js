@@ -60,7 +60,17 @@ const HouseholdDataBlock = ({ formData }) => {
     }
   }
 
-  return (
+
+  const createHouseholdBlocks = () => {
+    return householdData.map((personData, index) => {
+      return (
+        <div key={index}>
+          { createAgeQuestion(index) }
+          { createHOfHRelationQuestion(index) } 
+        </div>
+      );
+    });
+  }
 
   return (
     <div>
