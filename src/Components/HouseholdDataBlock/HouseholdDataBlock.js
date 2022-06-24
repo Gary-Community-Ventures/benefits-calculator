@@ -60,6 +60,14 @@ const HouseholdDataBlock = ({ formData }) => {
     }
   }
 
+  const createHOfHRelationQuestion = (index) => {
+    return (
+      <>
+        <p className='question-label'>What is this person’s relationship to the head of the household?</p>
+        { createRelationshipDropdownMenu(index) }
+      </>
+    );
+  }
 
   const createHouseholdBlocks = () => {
     return householdData.map((personData, index) => {
