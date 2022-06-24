@@ -69,6 +69,7 @@ const HouseholdDataBlock = ({ formData }) => {
       <>
         <p className='question-label'>What is this person’s relationship to the head of the household?</p>
         { createRelationshipDropdownMenu(index) }
+        <p className='household-data-q-underline'></p>
       </>
     );
   }
