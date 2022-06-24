@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Textfield from '../Textfield/Textfield';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
+import relationshipOptions from '../../Assets/relationshipOptions';
 import { ageHasError, displayAgeHelperText } from '../../Assets/validationFunctions';
 
 const HouseholdDataBlock = ({ formData }) => {
