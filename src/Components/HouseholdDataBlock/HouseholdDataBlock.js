@@ -80,6 +80,17 @@ const HouseholdDataBlock = ({ formData }) => {
     });
   }
 
+  const createDropdownCompProps = () => {
+    const dropdownCompProps = {
+      labelId:'relation-to-hh-label',
+      inputLabelText: 'Relation',
+      id: 'relationship-select',
+      label:'Relation Type', 
+      disabledSelectMenuItemText: 'Click to select relationship'
+    }
+
+    return dropdownCompProps;
+  }
 
   const createRelationshipDropdownMenu = (index) => {
     return (
