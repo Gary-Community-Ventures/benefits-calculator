@@ -8,6 +8,7 @@ const PreviousButton = () => {
 
   return (
     <Button
+      className='prev-button'
       onClick={() => {
         navigate(`/step-${numberId - 1}`);
       }}

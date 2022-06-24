@@ -103,14 +103,15 @@ const Confirmation = ({ formData }) => {
       <p className='question-label'>Is all of your information correct?</p>
       <div className='confirmation-container'>
         { displayAllFormData() }
-        <div className='income-block-question-buttons'>
-        <Button
-          onClick={() => {
-            navigate(`/step-16`);
-          }}
-          variant='contained'>
-          Prev
-        </Button>
+        <div className='prev-continue-results-buttons'>
+          <Button
+            className='prev-button'
+            onClick={() => {
+              navigate(`/step-16`);
+            }}
+            variant='contained'>
+            Prev
+          </Button>
           <Button
             variant='contained'
             onClick={() => navigate('/results')}>
