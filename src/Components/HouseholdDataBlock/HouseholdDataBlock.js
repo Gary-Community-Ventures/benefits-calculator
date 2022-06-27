@@ -91,6 +91,7 @@ const HouseholdDataBlock = ({ formData }) => {
         <div key={index}>
           { createAgeQuestion(index) }
           { createHOfHRelationQuestion(index) } 
+          { createConditionsQuestion(index) } 
         </div>
       );
     });
@@ -117,6 +118,18 @@ const HouseholdDataBlock = ({ formData }) => {
         setHouseholdData={setHouseholdData}
         index={index} />
     ); 
+  }
+
+
+  const createConditionsQuestion = (index) => {
+    return (
+      <>
+        <p className='question-label'>Do any of these apply to them?</p>
+        <p className='question-description'>It's OK to pick more than one.</p>
+        { createConditionsCheckboxMenu(index) }
+        <p className='household-data-q-underline'></p>
+      </>
+    );
   }
 
   return (
