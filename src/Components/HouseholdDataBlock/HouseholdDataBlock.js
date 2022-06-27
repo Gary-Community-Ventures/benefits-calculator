@@ -9,7 +9,18 @@ const HouseholdDataBlock = ({ formData }) => {
   
   const [householdData, setHouseholdData] = useState([{
       age: '',
-      relationshipToHH: ``
+      relationshipToHH: ``,
+      student: false,
+      studentFulltime: false,
+      pregnant: false,
+      unemployed: false,
+      unemployedWorkedInLast18Mos: false,
+      blindOrVisuallyImpaired: false,
+      disabled: false,
+      veteran: false,
+      medicaid: false,
+      disabilityRelatedMedicaid: false,
+      noneOfTheseApply: false,
     }
   ]);
 
