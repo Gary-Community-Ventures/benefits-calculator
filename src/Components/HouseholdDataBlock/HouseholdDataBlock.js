@@ -120,6 +120,15 @@ const HouseholdDataBlock = ({ formData }) => {
     ); 
   }
 
+  const createConditionsCheckboxMenu = (index) => {
+    return (
+      <CheckboxGroup 
+        options={conditionOptions}
+        householdData={householdData}
+        setHouseholdData={setHouseholdData} 
+        index={index}/>
+    );
+  }
 
   const createConditionsQuestion = (index) => {
     return (
