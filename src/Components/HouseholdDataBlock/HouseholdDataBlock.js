@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Textfield from '../Textfield/Textfield';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
+import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
 import { ageHasError, displayAgeHelperText } from '../../Assets/validationFunctions';
@@ -92,6 +93,8 @@ const HouseholdDataBlock = ({ formData }) => {
           { createAgeQuestion(index) }
           { createHOfHRelationQuestion(index) } 
           { createConditionsQuestion(index) } 
+          { personData.student && createFTStudentRadioQuestion(index) }
+          <p className='household-data-q-underline'></p>
         </div>
       );
     });
@@ -122,7 +125,7 @@ const HouseholdDataBlock = ({ formData }) => {
 
   const createConditionsCheckboxMenu = (index) => {
     return (
-      <CheckboxGroup 
+      <CheckboxGroup
         options={conditionOptions}
         householdData={householdData}
         setHouseholdData={setHouseholdData} 
@@ -136,9 +139,28 @@ const HouseholdDataBlock = ({ formData }) => {
         <p className='question-label'>Do any of these apply to them?</p>
         <p className='question-description'>It's OK to pick more than one.</p>
         { createConditionsCheckboxMenu(index) }
-        <p className='household-data-q-underline'></p>
       </>
     );
+  }
+
+  const createFTStudentRadioQuestion = (index) => {
+    const radiofieldProps = {
+      ariaLabel: 'is a full-time student',
+      inputName: 'studentFulltime',
+      value: householdData[index].studentFulltime
+    };
+
+    return (
+      <>
+        <p className='question-label'>Are they a full-time student?</p>
+        <HHDataRadiofield 
+          componentDetails={radiofieldProps}
+          householdData={householdData}
+          setHouseholdData={setHouseholdData}
+          index={index} />
+      </>
+    );
+
   }
 
   return (
