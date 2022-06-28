@@ -35,26 +35,25 @@ const App = () => {
   });
 
   useEffect(() => {
+    const updatedFormData = { ...formData };
 
     if (formData.student === false) {
-      setFormData({ ...formData, studentFulltime: false });
-      return;
+      updatedFormData.studentFulltime = false;
     }
 
     if (formData.unemployed === false) { 
-      setFormData({ ...formData, unemployedWorkedInLast18Mos: false });
-      return;
+      updatedFormData.unemployedWorkedInLast18Mos = false;
     }
 
     if(formData.hasIncome === false) {
-      setFormData({ ...formData, incomeStreams: [] });
-      return;
+      updatedFormData.incomeStreams = [];
     }
 
     if(formData.hasExpenses === false) {
-      setFormData({ ...formData, expenses: [] });
-      return;
+      updatedFormData.expenses = [];
     }
+
+    setFormData(updatedFormData);
     
   }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses]);
 
