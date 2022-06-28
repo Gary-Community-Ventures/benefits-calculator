@@ -38,18 +38,22 @@ const App = () => {
 
     if (formData.student === false) {
       setFormData({ ...formData, studentFulltime: false });
+      return;
     }
 
     if (formData.unemployed === false) { 
       setFormData({ ...formData, unemployedWorkedInLast18Mos: false });
+      return;
     }
 
     if(formData.hasIncome === false) {
       setFormData({ ...formData, incomeStreams: [] });
+      return;
     }
 
     if(formData.hasExpenses === false) {
       setFormData({ ...formData, expenses: [] });
+      return;
     }
     
   }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses]);
