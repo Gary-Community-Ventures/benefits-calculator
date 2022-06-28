@@ -94,6 +94,7 @@ const HouseholdDataBlock = ({ formData }) => {
           { createHOfHRelationQuestion(index) } 
           { createConditionsQuestion(index) } 
           { personData.student && createFTStudentRadioQuestion(index) }
+          { personData.unemployed && createUnemployed18MosRadioQuestion(index) }
           <p className='household-data-q-underline'></p>
         </div>
       );
@@ -161,6 +162,23 @@ const HouseholdDataBlock = ({ formData }) => {
       </>
     );
 
+  const createUnemployed18MosRadioQuestion = (index) => {
+    const radiofieldProps = {
+      ariaLabel: 'has worked in the past 18 months',
+      inputName: 'unemployedWorkedInLast18Mos',
+      value: householdData[index].unemployedWorkedInLast18Mos
+    };
+
+    return (
+      <>
+        <p className='question-label radio-question'>Did they work in the last 18 months?</p>
+        <HHDataRadiofield 
+          componentDetails={radiofieldProps}
+          householdData={householdData}
+          setHouseholdData={setHouseholdData}
+          index={index} />
+      </>
+    );
   }
 
   return (
