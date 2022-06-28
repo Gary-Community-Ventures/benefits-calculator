@@ -153,7 +153,7 @@ const HouseholdDataBlock = ({ formData }) => {
 
     return (
       <>
-        <p className='question-label'>Are they a full-time student?</p>
+        <p className='question-label radio-question'>Are they a full-time student?</p>
         <HHDataRadiofield 
           componentDetails={radiofieldProps}
           householdData={householdData}
@@ -161,6 +161,7 @@ const HouseholdDataBlock = ({ formData }) => {
           index={index} />
       </>
     );
+  }
 
   const createUnemployed18MosRadioQuestion = (index) => {
     const radiofieldProps = {
