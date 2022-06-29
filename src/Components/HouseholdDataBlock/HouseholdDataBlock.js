@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Textfield from '../Textfield/Textfield';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
@@ -8,9 +8,12 @@ import conditionOptions from '../../Assets/conditionOptions';
 import { ageHasError, displayAgeHelperText } from '../../Assets/validationFunctions';
 
 const HouseholdDataBlock = ({ formData }) => {
-  const { householdSize } = formData; //# of blocks that will need to be created for each household member
-  
-  const [householdData, setHouseholdData] = useState([{
+  const { householdSize } = formData; //# of blocks - 1 that will need to be created for each household member
+  const householdSizeNumber = Number(householdSize);
+  const initialHouseholdData = [];
+
+  for (let i = 1; i < householdSizeNumber; i++) { //we start at i = 1 since we don't want to count the head of household
+    initialHouseholdData.push({
       age: '',
       relationshipToHH: ``,
       student: false,
@@ -24,8 +27,58 @@ const HouseholdDataBlock = ({ formData }) => {
       medicaid: false,
       disabilityRelatedMedicaid: false,
       noneOfTheseApply: false,
-    }
-  ]);
+      hasIncome: false,
+      incomeStreams: [],
+      hasExpenses: false,
+      expenses: []
+    });
+  }
+  
+  const [householdData, setHouseholdData] = useState(initialHouseholdData);
+
+  const useEffectDependencies = []
+  householdData.forEach((personData) => {
+    useEffectDependencies.push(...[personData.student, personData.unemployed, personData.hasIncome, personData.hasExpenses]);
+  });
+  
+  useEffect(() => {
+    let updatedHouseholdData = [ ...householdData ];
+
+    updatedHouseholdData = updatedHouseholdData.map((personData) => {
+      if (personData.student === false) {
+        personData.studentFulltime = false;
+      }
+
+      if (personData.unemployed === false) {
+        personData.unemployedWorkedInLast18Mos = false;
+      }
+
+      if (personData.hasIncome === false) {
+        personData.incomeStreams = [];
+      }
+
+      if (personData.hasExpenses === false) {
+        personData.expenses = [];
+      }
+
+      if (personData.noneOfTheseApply === true) {
+        personData.student = false;
+        personData.studentFulltime = false;
+        personData.pregnant = false;
+        personData.unemployed = false;
+        personData.unemployedWorkedInLast18Mos = false;
+        personData.blindOrVisuallyImpaired = false;
+        personData.disabled = false;
+        personData.veteran = false;
+        personData.medicaid = false;
+        personData.disabilityRelatedMedicaid = false;
+      }
+
+      return personData;
+    });
+
+    setHouseholdData(updatedHouseholdData);
+  }, useEffectDependencies);
 
   const createAgeQuestion = (personIndex) => {
     const ageTextfieldProps = {
