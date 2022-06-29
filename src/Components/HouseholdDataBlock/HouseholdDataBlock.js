@@ -3,6 +3,7 @@ import Textfield from '../Textfield/Textfield';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
+import HouseholdDataIncomeBlock from '../IncomeBlock/HouseholdDataIncomeBlock';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
 import { ageHasError, displayAgeHelperText } from '../../Assets/validationFunctions';
@@ -149,6 +150,8 @@ const HouseholdDataBlock = ({ formData }) => {
           { personData.student && createFTStudentRadioQuestion(index) }
           { personData.unemployed && createUnemployed18MosRadioQuestion(index) }
           <p className='household-data-q-underline'></p>
+          { createIncomeRadioQuestion(index) }
+          <p className='household-data-q-underline'></p>
         </div>
       );
     });
@@ -226,6 +229,26 @@ const HouseholdDataBlock = ({ formData }) => {
     return (
       <>
         <p className='question-label radio-question'>Did they work in the last 18 months?</p>
+        <HHDataRadiofield 
+          componentDetails={radiofieldProps}
+          householdData={householdData}
+          setHouseholdData={setHouseholdData}
+          index={index} />
+      </>
+    );
+  }
+
+  const createIncomeRadioQuestion = (index) => {
+    const radiofieldProps = {
+      ariaLabel: 'has an income',
+      inputName: 'hasIncome',
+      value: householdData[index].hasIncome
+    };
+
+    return (
+      <>
+        <p className='question-label radio-question'>Do they have an income?</p>
+        <p className='question-description'>This includes money from jobs, alimony, investments, or gifts.</p>
         <HHDataRadiofield 
           componentDetails={radiofieldProps}
           householdData={householdData}
