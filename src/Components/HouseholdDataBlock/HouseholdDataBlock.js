@@ -155,6 +155,7 @@ const HouseholdDataBlock = ({ formData }) => {
           { createIncomeRadioQuestion(index) }
           <p className='household-data-q-underline'></p>
           { personData.hasIncome && createPersonIncomeBlock(index) }
+          { createExpenseRadioQuestion(index) }
         </div>
       );
     });
@@ -270,6 +271,26 @@ const HouseholdDataBlock = ({ formData }) => {
           setHouseholdData={setHouseholdData} 
           personDataIndex={index} />
         <p className='household-data-q-underline'></p>
+      </>
+    );
+  }
+
+  const createExpenseRadioQuestion = (index) => {
+    const radiofieldProps = {
+      ariaLabel: 'has expenses',
+      inputName: 'hasExpenses',
+      value: householdData[index].hasExpenses
+    };
+
+    return (
+      <>
+        <p className='question-label radio-question'>Do they have any expenses?</p>
+        <p className='question-description'>This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.</p>
+        <HHDataRadiofield 
+          componentDetails={radiofieldProps}
+          householdData={householdData}
+          setHouseholdData={setHouseholdData}
+          index={index} />
       </>
     );
   }
