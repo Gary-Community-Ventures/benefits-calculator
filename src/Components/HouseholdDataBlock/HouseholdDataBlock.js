@@ -142,7 +142,7 @@ const HouseholdDataBlock = ({ formData }) => {
     );
   }
 
-  const createHouseholdBlocks = () => {
+  const createPersonDataBlocks = () => {
     return householdData.map((personData, index) => {
       return (
         <div key={index}>
@@ -272,7 +272,7 @@ const HouseholdDataBlock = ({ formData }) => {
 
   return (
     <div>
-      { createHouseholdBlocks() }
+      { createPersonDataBlocks() }
     </div>
   );
 }
