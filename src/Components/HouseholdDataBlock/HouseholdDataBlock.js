@@ -39,7 +39,7 @@ const HouseholdDataBlock = ({ formData }) => {
   
   const [householdData, setHouseholdData] = useState(initialHouseholdData);
 
-  const useEffectDependencies = []
+  const useEffectDependencies = [];
   householdData.forEach((personData) => {
     useEffectDependencies.push(...[personData.student, personData.unemployed, personData.hasIncome, personData.hasExpenses]);
   });
