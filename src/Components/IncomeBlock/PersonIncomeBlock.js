@@ -262,7 +262,7 @@ const PersonIncomeBlock = ({ personData, householdData, setHouseholdData, person
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalIncomeSource(event)} >
-        Add additional income source
+        Add another income
       </Button>
     </>
   );
