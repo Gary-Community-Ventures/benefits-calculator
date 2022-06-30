@@ -3,7 +3,7 @@ import Textfield from '../Textfield/Textfield';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
-import HouseholdDataIncomeBlock from '../IncomeBlock/HouseholdDataIncomeBlock';
+import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
 import { ageHasError, displayAgeHelperText } from '../../Assets/validationFunctions';
@@ -153,7 +153,7 @@ const HouseholdDataBlock = ({ formData }) => {
           { personData.unemployed && createUnemployed18MosRadioQuestion(index) }
           <p className='household-data-q-underline'></p>
           { createIncomeRadioQuestion(index) }
-          <p className='household-data-q-underline'></p>
+          { personData.hasIncome && createPersonIncomeBlock(index)}
         </div>
       );
     });
@@ -257,6 +257,16 @@ const HouseholdDataBlock = ({ formData }) => {
           setHouseholdData={setHouseholdData}
           index={index} />
       </>
+    );
+  }
+
+  const createPersonIncomeBlock = (index) => {
+    return (
+      <PersonIncomeBlock 
+        personData={householdData[index]} 
+        householdData={householdData}
+        setHouseholdData={setHouseholdData} 
+        personDataIndex={index} />
     );
   }
 
