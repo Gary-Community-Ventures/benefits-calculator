@@ -1,9 +1,8 @@
 import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
 import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { incomeStreamValueHasError, displayIncomeStreamValueHelperText } from '../../Assets/validationFunctions';
+import { incomeStreamValueHasError, displayIncomeStreamValueHelperText, incomeStreamsAreValid } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
-import { incomeStreamsAreValid } from "../../Assets/validationFunctions";
 import './IncomeBlock.css';
 
 const StyledSelectfield = styled(Select)({
