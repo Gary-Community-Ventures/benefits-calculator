@@ -13,7 +13,9 @@ const HouseholdDataBlock = ({ formData }) => {
   const householdSizeNumber = Number(householdSize);
   const initialHouseholdData = [];
 
-  for (let i = 1; i < householdSizeNumber; i++) { //we start at i = 1 since we don't want to count the head of household
+  for (let i = 1; i < householdSizeNumber; i++) { 
+    //we start at i = 1 since we don't want to count the head of household
+    //this page will be blank unless formData.household size is 2 or greater
     initialHouseholdData.push({
       age: '',
       relationshipToHH: ``,
