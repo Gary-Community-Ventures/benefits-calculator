@@ -153,7 +153,8 @@ const HouseholdDataBlock = ({ formData }) => {
           { personData.unemployed && createUnemployed18MosRadioQuestion(index) }
           <p className='household-data-q-underline'></p>
           { createIncomeRadioQuestion(index) }
-          { personData.hasIncome && createPersonIncomeBlock(index)}
+          <p className='household-data-q-underline'></p>
+          { personData.hasIncome && createPersonIncomeBlock(index) }
         </div>
       );
     });
@@ -261,12 +262,15 @@ const HouseholdDataBlock = ({ formData }) => {
   }
 
   const createPersonIncomeBlock = (index) => {
-    return (
-      <PersonIncomeBlock 
-        personData={householdData[index]} 
-        householdData={householdData}
-        setHouseholdData={setHouseholdData} 
-        personDataIndex={index} />
+    return ( 
+      <>
+        <PersonIncomeBlock 
+          personData={householdData[index]} 
+          householdData={householdData}
+          setHouseholdData={setHouseholdData} 
+          personDataIndex={index} />
+        <p className='household-data-q-underline'></p>
+      </>
     );
   }
 
