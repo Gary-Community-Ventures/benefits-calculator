@@ -4,6 +4,7 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
+import PersonExpenseBlock from '../ExpenseBlock/PersonExpenseBlock';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
 import { ageHasError, displayAgeHelperText } from '../../Assets/validationFunctions';
@@ -156,6 +157,8 @@ const HouseholdDataBlock = ({ formData }) => {
           <p className='household-data-q-underline'></p>
           { personData.hasIncome && createPersonIncomeBlock(index) }
           { createExpenseRadioQuestion(index) }
+          <p className='household-data-q-underline'></p>
+          { personData.hasExpenses && createPersonExpenseBlock(index) }
         </div>
       );
     });
@@ -291,6 +294,19 @@ const HouseholdDataBlock = ({ formData }) => {
           householdData={householdData}
           setHouseholdData={setHouseholdData}
           index={index} />
+      </>
+    );
+  }
+
+  const createPersonExpenseBlock = (index) => {
+    return (
+      <>
+        <PersonExpenseBlock 
+          personData={householdData[index]} 
+          householdData={householdData}
+          setHouseholdData={setHouseholdData} 
+          personDataIndex={index} />
+        <p className='household-data-q-underline'></p>
       </>
     );
   }
