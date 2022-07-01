@@ -12,6 +12,8 @@ import { ageHasError, displayAgeHelperText } from '../../Assets/validationFuncti
 const HouseholdDataBlock = ({ formData }) => {
   const { householdSize } = formData; //# of blocks - 1 that will need to be created for each household member
   const householdSizeNumber = Number(householdSize);
+  const [page, setPage] = useState(0);
+
   const initialHouseholdData = [];
 
   for (let i = 1; i < householdSizeNumber; i++) { 
