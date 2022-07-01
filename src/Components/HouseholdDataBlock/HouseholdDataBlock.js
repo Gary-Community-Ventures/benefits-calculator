@@ -5,11 +5,12 @@ import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import PersonExpenseBlock from '../ExpenseBlock/PersonExpenseBlock';
+import HouseholdDataContinueButton from '../ContinueButton/HouseholdDataContinueButton';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
 import { ageHasError, displayAgeHelperText } from '../../Assets/validationFunctions';
 
-const HouseholdDataBlock = ({ formData }) => {
+const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const { householdSize } = formData; //# of blocks - 1 that will need to be created for each household member
   const householdSizeNumber = Number(householdSize);
   const [page, setPage] = useState(0);
