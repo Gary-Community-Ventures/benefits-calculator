@@ -105,6 +105,11 @@ const App = () => {
     navigate(`/step-${stepId + 1}`);
   }
 
+  const handleHouseholdDataSubmit = (unvalidatedHouseholdData) => {
+    setFormData({ ...formData, householdData: unvalidatedHouseholdData });
+    navigate('/step-16');
+  }
+
   return (
     <div className='App'>
       <CssBaseline />
@@ -129,7 +134,8 @@ const App = () => {
             handleRadioButtonChange={handleRadioButtonChange} 
             handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
             handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
-            handleHousingSourcesSubmit={handleHousingSourcesSubmit} /> } /> 
+            handleHousingSourcesSubmit={handleHousingSourcesSubmit} 
+            handleHouseholdDataSubmit={handleHouseholdDataSubmit} /> } /> 
         <Route 
           path='/confirm-information' 
           element={<Confirmation
