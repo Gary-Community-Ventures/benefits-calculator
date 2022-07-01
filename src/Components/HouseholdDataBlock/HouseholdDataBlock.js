@@ -9,6 +9,7 @@ import HouseholdDataContinueButton from '../ContinueButton/HouseholdDataContinue
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
 import { ageHasError, displayAgeHelperText } from '../../Assets/validationFunctions';
+import HouseholdDataPreviousButton from '../PreviousButton/HouseholdDataPreviousButton';
 
 const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const { householdSize } = formData; //# of blocks - 1 that will need to be created for each household member
@@ -167,6 +168,10 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
           <p className='household-data-q-underline'></p>
           { personData.hasExpenses && createPersonExpenseBlock(index) }
           <div className='question-buttons'>
+            <HouseholdDataPreviousButton 
+              page={page}
+              setPage={setPage}
+            />
             <HouseholdDataContinueButton 
               page={page}
               setPage={setPage} 
