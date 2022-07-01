@@ -146,7 +146,7 @@ const HouseholdDataBlock = ({ formData }) => {
   }
 
   const createPersonDataBlocks = () => {
-    return householdData.map((personData, index) => {
+    const personDataBlocks = householdData.map((personData, index) => {
       return (
         <div key={index}>
           { createAgeQuestion(index) }
@@ -161,9 +161,20 @@ const HouseholdDataBlock = ({ formData }) => {
           { createExpenseRadioQuestion(index) }
           <p className='household-data-q-underline'></p>
           { personData.hasExpenses && createPersonExpenseBlock(index) }
+          <div className='question-buttons'>
+            <HouseholdDataContinueButton 
+              page={page}
+              setPage={setPage} 
+              householdSizeNumber={householdSizeNumber} 
+              handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+              householdData={householdData}
+            />
+          </div>
         </div>
       );
     });
+
+    return personDataBlocks;
   }
 
   const createDropdownCompProps = () => {
