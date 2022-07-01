@@ -15,30 +15,34 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const householdSizeNumber = Number(householdSize);
   const [page, setPage] = useState(0);
 
-  const initialHouseholdData = [];
+  let initialHouseholdData = [];
 
-  for (let i = 1; i < householdSizeNumber; i++) { 
-    //we start at i = 1 since we don't want to count the head of household
-    //this page will be blank unless formData.household size is 2 or greater
-    initialHouseholdData.push({
-      age: '',
-      relationshipToHH: ``,
-      student: false,
-      studentFulltime: false,
-      pregnant: false,
-      unemployed: false,
-      unemployedWorkedInLast18Mos: false,
-      blindOrVisuallyImpaired: false,
-      disabled: false,
-      veteran: false,
-      medicaid: false,
-      disabilityRelatedMedicaid: false,
-      noneOfTheseApply: false,
-      hasIncome: false,
-      incomeStreams: [],
-      hasExpenses: false,
-      expenses: []
-    });
+  if (formData.householdData.length > 1) {
+    initialHouseholdData = formData.householdData;
+  } else {
+    for (let i = 1; i < householdSizeNumber; i++) { 
+      //we start at i = 1 since we don't want to count the head of household
+      //this page will be blank unless formData.household size is 2 or greater
+      initialHouseholdData.push({
+        age: '',
+        relationshipToHH: ``,
+        student: false,
+        studentFulltime: false,
+        pregnant: false,
+        unemployed: false,
+        unemployedWorkedInLast18Mos: false,
+        blindOrVisuallyImpaired: false,
+        disabled: false,
+        veteran: false,
+        medicaid: false,
+        disabilityRelatedMedicaid: false,
+        noneOfTheseApply: false,
+        hasIncome: false,
+        incomeStreams: [],
+        hasExpenses: false,
+        expenses: []
+      });
+    }
   }
   
   const [householdData, setHouseholdData] = useState(initialHouseholdData);
