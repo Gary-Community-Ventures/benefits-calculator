@@ -324,9 +324,16 @@ const HouseholdDataBlock = ({ formData }) => {
     );
   }
 
+  const displaySinglePersonDataPage = (currentPage) => {
+    const allHouseholdDataBlockComponents = createPersonDataBlocks();
+    
+    //this will only show the personDataBlock who's householdData index matches the currentPage
+    return allHouseholdDataBlockComponents[currentPage]; 
+  }
+
   return (
     <div>
-      { createPersonDataBlocks() }
+      { displaySinglePersonDataPage(page) }
     </div>
   );
 }
