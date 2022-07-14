@@ -18,6 +18,7 @@ const HouseholdDataPreviousButton = ({ page, setPage }) => {
 
   return (
     <Button
+      className='prev-button'
       variant='contained'
       onClick={(event) => { handlePrevious(event) }}>
       Prev
