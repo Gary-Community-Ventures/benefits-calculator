@@ -156,19 +156,21 @@ const PersonIncomeBlock = ({ personData, householdData, setHouseholdData, person
   
   const createIncomeAmountTextfield = (incomeStreamName, incomeAmount, index) => {
     return (
-      <div className='income-block-textfield'>
+      <div>
         <p className='question-label'>How much do they receive for this type of income: {selectedMenuItem[index].incomeStreamLabel}?</p>
-        <StyledTextField 
-          type='text'
-          name={incomeStreamName}
-          value={incomeAmount}
-          label='Amount'
-          onChange={(event) => {handleIncomeTextfieldChange(event, index)}}
-          variant='outlined'
-          required
-          error={incomeStreamValueHasError(selectedMenuItem[index].incomeAmount)} 
-          helperText={displayIncomeStreamValueHelperText(selectedMenuItem[index].incomeAmount)} 
-        />
+        <div className='income-block-textfield'>
+          <StyledTextField 
+            type='text'
+            name={incomeStreamName}
+            value={incomeAmount}
+            label='Amount'
+            onChange={(event) => {handleIncomeTextfieldChange(event, index)}}
+            variant='outlined'
+            required
+            error={incomeStreamValueHasError(selectedMenuItem[index].incomeAmount)} 
+            helperText={displayIncomeStreamValueHelperText(selectedMenuItem[index].incomeAmount)} 
+            />
+        </div>
       </div>
     );
   }
