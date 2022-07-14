@@ -115,7 +115,7 @@ const Confirmation = ({ formData }) => {
           <Button
             variant='contained'
             onClick={() => navigate('/results')}>
-            Yes, continue to my results
+            Continue
           </Button>
         </div>
       </div>
