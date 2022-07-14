@@ -62,19 +62,21 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
 
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
     return (
-      <div className='expense-block-textfield'>
+      <div>
         <p className='question-label'>How much is this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
-        <StyledTextField 
-          type='text'
-          name={expenseSourceName}
-          value={expenseAmount}
-          label='Amount'
-          onChange={(event) => { handleExpenseTextfieldChange(event, index) }}
-          variant='outlined'
-          required
-          error={expenseSourceValueHasError(selectedMenuItem[index].expenseAmount)} 
-          helperText={displayExpenseSourceValueHelperText(selectedMenuItem[index].expenseAmount)} 
-        />
+        <div className='expense-block-textfield'>
+          <StyledTextField 
+            type='text'
+            name={expenseSourceName}
+            value={expenseAmount}
+            label='Amount'
+            onChange={(event) => { handleExpenseTextfieldChange(event, index) }}
+            variant='outlined'
+            required
+            error={expenseSourceValueHasError(selectedMenuItem[index].expenseAmount)} 
+            helperText={displayExpenseSourceValueHelperText(selectedMenuItem[index].expenseAmount)} 
+          />
+        </div>
       </div>
     );
   }
