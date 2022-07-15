@@ -9,11 +9,11 @@ const Confirmation = ({ formData }) => {
 
   const { applicantAge, zipcode, student, studentFulltime, pregnant, unemployed, unemployedWorkedInLast18Mos,
     blindOrVisuallyImpaired, disabled, veteran, medicaid, disabilityRelatedMedicaid, hasIncome, incomeStreams,
-    hasExpenses, expenses, householdSize, householdAssets, housing } = formData;
+    hasExpenses, expenses, householdSize, householdData, householdAssets, housing } = formData;
   
   const displayAllFormData = () => {
     const householdSizeDescriptor = householdSize === 1 ? 'person' : 'people';
-    
+    console.log({householdData})
     return (
       <>
         <p className='confirmation-label'>
@@ -48,17 +48,20 @@ const Confirmation = ({ formData }) => {
           <Link to='/step-13' className='edit-link'>Edit</Link>
           { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses()} </ul> }
         </article>
+        <p className='confirmation-section-underline'></p>
         <p className='confirmation-label'>
           <b> Household resources: </b>
           ${ householdAssets }
           <Link to='/step-15' className='edit-link'>Edit</Link>
         </p>
         <p className='confirmation-label-description'>This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.</p>
+        <p className='confirmation-section-underline'></p>
         <article className='confirmation-label'>
           <b> Housing: </b>
           <Link to='/step-16' className='edit-link'>Edit</Link>
           { <ul> { listAllHousing() } </ul> }
         </article>
+        <p className='confirmation-section-underline'></p>
         <p className='confirmation-label'>
           <b> Your zipcode: </b>
           { zipcode }
