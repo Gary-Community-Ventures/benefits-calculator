@@ -82,6 +82,17 @@ const Confirmation = ({ formData }) => {
 
     return householdMemberAges;
   }
+  const displayAllFormData = () => {
+    const householdSizeDescriptor = householdSize === 1 ? 'person' : 'people';
+
+    return (
+      <>
+        <p className='confirmation-label'>
+          <b>Your household: </b>
+          { householdSize } { householdSizeDescriptor }
+          <Link to='/step-14' className='edit-link'>Edit</Link>
+        </p>
+        { displayAllHouseholdData() }
         <p className='confirmation-section-underline'></p>
         <p className='confirmation-label'>
           <b> Household resources: </b>
