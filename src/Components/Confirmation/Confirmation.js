@@ -20,7 +20,8 @@ const Confirmation = ({ formData }) => {
   const displayAllMembersDataBlock = () => {
     const allHouseholdRelations = getAllHouseholdRelations();
     const allHouseholdAges = getAllHouseholdAges();
-
+    const colors = ['🟢', '🟡', '🟣', '🟠', '🟤', '⚫️', '🔴'];
+    
     const householdMemberDataBlocks = householdData.map((personData, i) => {
       const { student, studentFulltime, pregnant, unemployed, unemployedWorkedInLast18Mos,
         blindOrVisuallyImpaired, disabled, veteran, medicaid, disabilityRelatedMedicaid, 
@@ -29,7 +30,7 @@ const Confirmation = ({ formData }) => {
       return (
         <div key={i}>
           <p className='confirmation-label'>
-            <b>{allHouseholdRelations[i]}, { allHouseholdAges[i] }</b>
+            <b>{colors[i]} {allHouseholdRelations[i]}, { allHouseholdAges[i] }</b>
             <Link to='/step-15' className='edit-link'>Edit</Link>
           </p>
           <article className='confirmation-label'><b>Conditions:</b>
