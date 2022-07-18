@@ -9,10 +9,13 @@ const Confirmation = ({ formData }) => {
 
   const { zipcode, householdSize, householdData, householdAssets, housing } = formData;
   
-  const displayAllFormData = () => {
-    const householdSizeDescriptor = householdSize === 1 ? 'person' : 'people';
-    console.log({householdData})
-    return (
+  const displayAllHouseholdData = () => {
+    if (householdData.length >= 1) {
+      return displayAllMembersDataBlock();
+    } else {
+      return onePersonHouseholdDataBlock();
+    }
+  }
       <>
         <p className='confirmation-label'>
           <b>Your household: </b>
