@@ -21,6 +21,9 @@ const Confirmation = ({ formData }) => {
           { householdSize } { householdSizeDescriptor }
           <Link to='/step-14' className='edit-link'>Edit</Link>
         </p>
+  const onePersonHouseholdDataBlock = () => {
+    return (
+      <>
         <p className='confirmation-label'>
           <b>You, { applicantAge }, head of household</b>
           <Link to='/step-2' className='edit-link'>Edit</Link>
@@ -48,6 +51,9 @@ const Confirmation = ({ formData }) => {
           <Link to='/step-13' className='edit-link'>Edit</Link>
           { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses()} </ul> }
         </article>
+      </>
+    );
+  }
         <p className='confirmation-section-underline'></p>
         <p className='confirmation-label'>
           <b> Household resources: </b>
