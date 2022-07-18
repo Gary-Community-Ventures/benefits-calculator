@@ -7,9 +7,7 @@ import './Confirmation.css';
 const Confirmation = ({ formData }) => {
   const navigate = useNavigate();
 
-  const { applicantAge, zipcode, student, studentFulltime, pregnant, unemployed, unemployedWorkedInLast18Mos,
-    blindOrVisuallyImpaired, disabled, veteran, medicaid, disabilityRelatedMedicaid, hasIncome, incomeStreams,
-    hasExpenses, expenses, householdSize, householdData, householdAssets, housing } = formData;
+  const { zipcode, householdSize, householdData, householdAssets, housing } = formData;
   
   const displayAllFormData = () => {
     const householdSizeDescriptor = householdSize === 1 ? 'person' : 'people';
