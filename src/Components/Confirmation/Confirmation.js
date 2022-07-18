@@ -6,7 +6,6 @@ import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
   const navigate = useNavigate();
-
   const { zipcode, householdSize, householdData, householdAssets, housing } = formData;
   
   const displayAllHouseholdData = () => {
@@ -21,7 +20,7 @@ const Confirmation = ({ formData }) => {
     const allHouseholdRelations = getAllHouseholdRelations();
     const allHouseholdAges = getAllHouseholdAges();
     const colors = ['🟢', '🟡', '🟣', '🟠', '🟤', '⚫️', '🔴'];
-    
+
     const householdMemberDataBlocks = householdData.map((personData, i) => {
       const { student, studentFulltime, pregnant, unemployed, unemployedWorkedInLast18Mos,
         blindOrVisuallyImpaired, disabled, veteran, medicaid, disabilityRelatedMedicaid, 
