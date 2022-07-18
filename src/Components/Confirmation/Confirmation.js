@@ -154,8 +154,8 @@ const Confirmation = ({ formData }) => {
     );
   }
 
-  const listAllExpenses = () => {
-    const mappedExpenses = expenses.map(expense => {
+  const listAllExpenses = (memberExpenses) => {
+    const mappedExpenses = memberExpenses.map(expense => {
       return <li key={ expense.expenseSourceName }>${ expense.expenseAmount }, { expense.expenseSourceLabel }, { expense.expenseFrequency }</li>
     });
 
