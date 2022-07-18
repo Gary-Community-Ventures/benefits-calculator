@@ -174,8 +174,8 @@ const Confirmation = ({ formData }) => {
     return mappedHousingListItems;
   }
 
-  const listAllIncomeStreams = () => {
-    const mappedListItems = incomeStreams.map(incomeStream => {
+  const listAllIncomeStreams = (memberIncomeStreams) => {
+    const mappedListItems = memberIncomeStreams.map(incomeStream => {
       return <li key={ incomeStream.incomeStreamName }>${ incomeStream.incomeAmount }, { incomeStream.incomeStreamLabel }, { incomeStream.incomeFrequency }</li>
     });
 
