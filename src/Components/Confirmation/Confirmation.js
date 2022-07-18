@@ -112,17 +112,14 @@ const Confirmation = ({ formData }) => {
     return householdMembers;
   }
 
-  const getAllHouseholdAges = () => {
-    let householdMemberAges = [applicantAge];
-
-    if (householdData.length >= 1) { 
-      householdData.forEach(personData => {
-        householdMemberAges.push(Number(personData.age));
-      });
-    }
+  const getAllHouseholdAges = () => {    
+    const householdMemberAges = householdData.map(personData => {
+      return Number(personData.age);
+    });
 
     return householdMemberAges;
   }
+  
   const displayAllFormData = () => {
     const householdSizeDescriptor = householdSize === 1 ? 'person' : 'people';
 
