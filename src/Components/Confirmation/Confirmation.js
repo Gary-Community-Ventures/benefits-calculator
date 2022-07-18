@@ -10,7 +10,7 @@ const Confirmation = ({ formData }) => {
   const { zipcode, householdSize, householdData, householdAssets, housing } = formData;
   
   const displayAllHouseholdData = () => {
-    if (householdData.length >= 1) {
+    if (householdSize > 1) {
       return displayAllMembersDataBlock();
     } else {
       return headOfHouseholdDataBlock();
