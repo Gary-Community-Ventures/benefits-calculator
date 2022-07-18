@@ -59,10 +59,10 @@ const Confirmation = ({ formData }) => {
       );
     });
 
-    return [onePersonHouseholdDataBlock(), householdMemberDataBlocks];
+    return [headOfHouseholdDataBlock(), householdMemberDataBlocks];
   }
 
-  const onePersonHouseholdDataBlock = () => {
+  const headOfHouseholdDataBlock = () => {
     const { applicantAge, student, studentFulltime, pregnant, unemployed, 
       unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
       disabilityRelatedMedicaid, hasIncome, incomeStreams, hasExpenses, expenses } = formData;
