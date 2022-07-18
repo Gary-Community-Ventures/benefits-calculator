@@ -63,8 +63,12 @@ const Confirmation = ({ formData }) => {
   }
 
   const onePersonHouseholdDataBlock = () => {
+    const { applicantAge, student, studentFulltime, pregnant, unemployed, 
+      unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
+      disabilityRelatedMedicaid, hasIncome, incomeStreams, hasExpenses, expenses } = formData;
+
     return (
-      <>
+      <div key='head-of-household-data-block'>
         <p className='confirmation-label'>
           <b>You, { applicantAge }, head of household</b>
           <Link to='/step-2' className='edit-link'>Edit</Link>
@@ -86,13 +90,13 @@ const Confirmation = ({ formData }) => {
         </article>
         <article className='confirmation-label'><b>Income:</b>
           <Link to='/step-12' className='edit-link'>Edit</Link>
-          { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams()} </ul> }
+          { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
         </article>
         <article className='confirmation-label'><b>Expenses:</b>
           <Link to='/step-13' className='edit-link'>Edit</Link>
-          { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses()} </ul> }
+          { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul> }
         </article>
-      </>
+      </div>
     );
   }
 
