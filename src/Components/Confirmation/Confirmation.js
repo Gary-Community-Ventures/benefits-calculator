@@ -13,7 +13,7 @@ const Confirmation = ({ formData }) => {
     if (householdData.length >= 1) {
       return displayAllMembersDataBlock();
     } else {
-      return onePersonHouseholdDataBlock();
+      return headOfHouseholdDataBlock();
     }
   }
 
