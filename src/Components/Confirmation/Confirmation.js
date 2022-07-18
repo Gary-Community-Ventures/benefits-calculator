@@ -16,12 +16,52 @@ const Confirmation = ({ formData }) => {
       return onePersonHouseholdDataBlock();
     }
   }
-      <>
-        <p className='confirmation-label'>
-          <b>Your household: </b>
-          { householdSize } { householdSizeDescriptor }
-          <Link to='/step-14' className='edit-link'>Edit</Link>
-        </p>
+
+  const displayAllMembersDataBlock = () => {
+    const allHouseholdRelations = getAllHouseholdRelations();
+    const allHouseholdAges = getAllHouseholdAges();
+
+    const householdMemberDataBlocks = householdData.map((personData, i) => {
+      const { student, studentFulltime, pregnant, unemployed, unemployedWorkedInLast18Mos,
+        blindOrVisuallyImpaired, disabled, veteran, medicaid, disabilityRelatedMedicaid, 
+        hasIncome, incomeStreams, hasExpenses, expenses } = personData;
+
+      return (
+        <div key={i}>
+          <p className='confirmation-label'>
+            <b>{allHouseholdRelations[i]}, { allHouseholdAges[i] }</b>
+            <Link to='/step-15' className='edit-link'>Edit</Link>
+          </p>
+          <article className='confirmation-label'><b>Conditions:</b>
+          <Link to='/step-15' className='edit-link'>Edit</Link>
+          <ul>
+            { studentFulltime && <li> Full-time student </li> }
+            { student && (studentFulltime === false) && <li> Student </li> }
+            { pregnant && <li> Pregnant </li> }
+            { unemployedWorkedInLast18Mos && <li> Unemployed, worked in the last 18 months </li> }
+            { unemployed && (unemployedWorkedInLast18Mos === false) && <li> Unemployed </li> }
+            { blindOrVisuallyImpaired && <li> Blind or visually impaired </li> }
+            { disabled && <li> Disabled </li> }
+            { veteran && <li> Veteran </li> }
+            { medicaid && <li> Receiving Medicaid </li> }
+            { disabilityRelatedMedicaid && <li> Receiving disability-related Medicaid </li> }
+          </ul>
+        </article>
+        <article className='confirmation-label'><b>Income:</b>
+          <Link to='/step-15' className='edit-link'>Edit</Link>
+          { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
+        </article>
+        <article className='confirmation-label'><b>Expenses:</b>
+          <Link to='/step-15' className='edit-link'>Edit</Link>
+          { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul> }
+        </article>
+        </div>
+      );
+    });
+
+    return [onePersonHouseholdDataBlock(), householdMemberDataBlocks];
+  }
+
   const onePersonHouseholdDataBlock = () => {
     return (
       <>
