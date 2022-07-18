@@ -101,17 +101,13 @@ const Confirmation = ({ formData }) => {
   }
 
   const getAllHouseholdRelations = () => {
-    let householdMembers = ['You'];
-
-    if (householdData.length >= 1) {
-      householdData.forEach(personData => {
-        const upperCaseFirstLetter = personData.relationshipToHH[0].toUpperCase();
-        const upperCaseRelation = upperCaseFirstLetter + personData.relationshipToHH.slice(1);
-        const relationString =  upperCaseRelation.split(/(?=[A-Z])/).join(' ');
-        
-        householdMembers.push(relationString);
-      });
-    }
+    const householdMembers = householdData.map(personData => {
+      const upperCaseFirstLetter = personData.relationshipToHH[0].toUpperCase();
+      const upperCaseRelation = upperCaseFirstLetter + personData.relationshipToHH.slice(1);
+      const relationString =  upperCaseRelation.split(/(?=[A-Z])/).join(' ');
+      
+      return relationString;
+    });
     
     return householdMembers;
   }
