@@ -11,6 +11,12 @@ const header = {
   'Content-Type': 'application/json',
   'Authorization': apiKey
 };
+
+const postParentScreen = (partialFormData) => {
+  return fetch(screensEndpoint, {
+    body: JSON.stringify(partialFormData),
+    method: "POST",
+    headers: header
   })
     .then(response => {
       if(!response.ok) {
