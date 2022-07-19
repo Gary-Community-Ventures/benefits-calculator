@@ -67,6 +67,35 @@ const Results = ({ formData }) => {
     
     return headOfhouseholdInformation;
   }
+
+  const getRemainingHouseholdMemberData = (screenerDataId) => {
+    const householdMemberData = formData.householdData.map(personData => {
+      const { age, student, studentFulltime, pregnant, unemployed,
+        unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
+        disabilityRelatedMedicaid, hasIncome, hasExpenses, relationshipToHH } = personData;
+
+      const memberData = {
+        screen: screenerDataId,
+        relationship: relationshipToHH,
+        age: Number(age),
+        student: student,
+        student_full_time: studentFulltime,
+        pregnant: pregnant,
+        unemployed: unemployed,
+        worked_in_last_18_mos: unemployedWorkedInLast18Mos,
+        visually_impaired: blindOrVisuallyImpaired,
+        disabled: disabled,
+        veteran: veteran,
+        medicaid: medicaid,
+        disability_medicaid: disabilityRelatedMedicaid,
+        has_income: hasIncome,
+        has_expenses: hasExpenses
+      };
+
+      return memberData;
+    });
+    
+    return householdMemberData;
   }
 
   const displayProgramCards = () => {
