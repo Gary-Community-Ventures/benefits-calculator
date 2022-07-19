@@ -2,8 +2,28 @@ import { Button, Link, Card, CardContent, CardActions, Typography } from "@mui/m
 import programs from '../../Assets/programOptions';
 import { postParentScreen } from "../../apiCalls";
 
+const Results = ({ formData }) => {
+  const postScreenerToApi = () => {
+    const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing } = formData;
+    const housingOptionKeys = Object.keys(housing);
+    const finalHousingOption = housingOptionKeys.find(housingSituation => housing[housingSituation] === true);
+    const headOfHHScreen = {
+      agree_to_tos: agreeToTermsOfService ,
+      zipcode: zipcode,
+      household_size: householdSize,
+      household_assets: householdAssets,
+      housing_situation: finalHousingOption
+    };
 
-const Results = () => {
+    postParentScreen(headOfHHScreen)
+      .then(response => { 
+        console.log({response})
+        const newBenefitsUserId = response.id;
+        console.log({newBenefitsUserId});
+
+      })
+  }
+
   const displayProgramCards = () => {
     const programCards = Object.keys(programs).map(program => {
       return (
