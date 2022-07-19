@@ -64,7 +64,7 @@ const HousingBlock = ({ handleHousingSourcesSubmit, formData }) => {
           variant='contained'
           onClick={(event) => { handleCheckboxSaveAndContinue(event) }}
         >
-          Save and Continue
+          Continue
         </Button>
       </div>
     </>

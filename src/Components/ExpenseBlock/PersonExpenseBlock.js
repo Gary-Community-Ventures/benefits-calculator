@@ -1,10 +1,8 @@
 import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
-import { useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { expenseSourceValueHasError, displayExpenseSourceValueHelperText, expenseSourcesAreValid } from '../../Assets/validationFunctions';
 import expenseOptions from '../../Assets/expenseOptions';
-import PreviousButton from "../PreviousButton/PreviousButton";
 import './ExpenseBlock.css';
 
 const StyledSelectfield = styled(Select)({
@@ -25,11 +23,8 @@ const StyledTypography = styled(Typography)`
   height: 24px;
 `;
 
-const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
-  const { id } = useParams();
-  const stepNumberId = Number(id);
-
-  const [selectedMenuItem, setSelectedMenuItem] = useState(formData.expenses.length > 0 ? formData.expenses :
+const PersonExpenseBlock = ({ personData, householdData, setHouseholdData, personDataIndex }) => {
+  const [selectedMenuItem, setSelectedMenuItem] = useState(personData.expenses.length > 0 ? personData.expenses :
   [
     {
       expenseSourceName: '', 
@@ -39,10 +34,28 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     }
   ]);
 
+  useEffect(() => {
+    let updatedSelectedMenuItem = [ ...selectedMenuItem ];
+    if (expenseSourcesAreValid(updatedSelectedMenuItem)) {
+      const updatedHouseholdData = householdData.map((personData, i) => {
+        if (i === personDataIndex) {
+          return {
+            ...personData,
+            expenses: updatedSelectedMenuItem
+          };
+        } else {
+          return personData;
+        }
+      });
+
+      setHouseholdData(updatedHouseholdData);
+    }
+  }, [selectedMenuItem]);
+
   const createExpenseBlockQuestions = () => {
     return selectedMenuItem.map((expenseSourceData, index) => {
       const { expenseSourceName, expenseSourceLabel, expenseAmount, expenseFrequency } = expenseSourceData;
-      const expenseSourceQuestion = <p className='question-label'>If you have another expense, select it below.</p>;
+      const expenseSourceQuestion = <p className='question-label'>If they have another expense, select it below.</p>;
 
       return (
         <div key={index}>
@@ -65,7 +78,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
       <div>
         <p className='question-label'>How much is this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
         <div className='expense-block-textfield'>
-          <StyledTextField 
+          <StyledTextField
             type='text'
             name={expenseSourceName}
             value={expenseAmount}
@@ -100,8 +113,8 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
 
   const createExpenseFrequencyDropdownMenu = (expenseSourceFrequency, index) => {
     return (
-      <div className='bottom-border'>
-        <p className='question-label'>How often do you have this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
+      <div>
+        <p className='question-label'>How often do they have this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel if='expense-frequency-label'>Frequency</InputLabel>
           <StyledSelectfield
@@ -153,9 +166,22 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     return [disabledSelectMenuItem, menuItems];
   }
 
-  const deleteExpenseBlock = (selectedIndex) => {
+  const deleteExpenseBlock = (selectedIndex) => {//done but need to test
     const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex );
     setSelectedMenuItem(updatedSelectedMenuItems);  
+
+    const updatedHouseholdData = householdData.map((personData, i) => {
+      if (i === personDataIndex) {
+        return {
+          ...personData,
+          expenses: updatedSelectedMenuItems
+        };
+      } else {
+        return personData;
+      }
+    });
+
+    setHouseholdData(updatedHouseholdData);
   }
 
   const handleAddAdditionalExpenseSource = (event) => {
@@ -182,13 +208,6 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     });
 
     setSelectedMenuItem(updatedSelectedMenuItems);
-  }
-
-  const handleSaveAndContinue = (event) => {
-    event.preventDefault();
-    if(expenseSourcesAreValid(selectedMenuItem)) {
-      handleExpenseSourcesSubmit(selectedMenuItem, stepNumberId);
-    }
   }
 
   const handleSelectChange = (event, index) => {
@@ -233,6 +252,10 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   
   return (
     <>
+      <p className='question-label radio-question'>What type of expense have they had most recently?</p>
+      <p className='question-description'>Answer the best you can. You will be able to include additional types of expenses. 
+        The more you include, the more accurate your results will be.
+      </p>
       {createExpenseBlockQuestions()}
       { expenseBlockIsMissingAnInput() && 
         <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
@@ -241,17 +264,9 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
         onClick={(event) => handleAddAdditionalExpenseSource(event)} >
         Add another expense
       </Button>
-      <div className='prev-save-continue-buttons'>
-        <PreviousButton />
-        <Button
-          variant='contained'
-          onClick={(event) => { handleSaveAndContinue(event) }} >
-          Continue
-        </Button>
-      </div>
     </>
   );
 
 }
 
-export default ExpenseBlock;
+export default PersonExpenseBlock;

@@ -1,11 +1,8 @@
 import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
-import { useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { incomeStreamValueHasError, displayIncomeStreamValueHelperText } from '../../Assets/validationFunctions';
+import { incomeStreamValueHasError, displayIncomeStreamValueHelperText, incomeStreamsAreValid } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
-import PreviousButton from "../PreviousButton/PreviousButton";
-import { incomeStreamsAreValid } from "../../Assets/validationFunctions";
 import './IncomeBlock.css';
 
 const StyledSelectfield = styled(Select)({
@@ -26,14 +23,11 @@ const StyledTypography = styled(Typography)`
   height: 24px;
 `;
 
-const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
-  const { id } = useParams();
-  const stepIdNumber = Number(id);
-
+const PersonIncomeBlock = ({ personData, householdData, setHouseholdData, personDataIndex }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those 
   //first by assigning them to the initial selectedMenuItem state
   //if not then create the initial income block questions
-  const [selectedMenuItem, setSelectedMenuItem] = useState(formData.incomeStreams.length > 0 ? formData.incomeStreams :
+  const [selectedMenuItem, setSelectedMenuItem] = useState(personData.incomeStreams.length > 0 ? personData.incomeStreams :
   [
     {
       incomeStreamName: '', 
@@ -42,6 +36,24 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
       incomeFrequency: ''
     }
   ]);
+
+  useEffect(() => {
+    let updatedSelectedMenuItem = [ ...selectedMenuItem ];
+    if (incomeStreamsAreValid(updatedSelectedMenuItem)) {
+      const updatedHouseholdData = householdData.map((personData, i) => {
+        if (i === personDataIndex) {
+          return {
+            ...personData,
+            incomeStreams: updatedSelectedMenuItem
+          };
+        } else {
+          return personData;
+        }
+      });
+
+      setHouseholdData(updatedHouseholdData);
+    }
+  }, [selectedMenuItem]);
 
   const createMenuItems = () => {
     const disabledSelectMenuItem = <MenuItem value='select' key='disabled-select-value' disabled>Select</MenuItem>;
@@ -145,9 +157,9 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   const createIncomeAmountTextfield = (incomeStreamName, incomeAmount, index) => {
     return (
       <div>
-        <p className='question-label'>How much do you receive for: {selectedMenuItem[index].incomeStreamLabel}?</p>
+        <p className='question-label'>How much do they receive for this type of income: {selectedMenuItem[index].incomeStreamLabel}?</p>
         <div className='income-block-textfield'>
-          <StyledTextField
+          <StyledTextField 
             type='text'
             name={incomeStreamName}
             value={incomeAmount}
@@ -157,7 +169,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
             required
             error={incomeStreamValueHasError(selectedMenuItem[index].incomeAmount)} 
             helperText={displayIncomeStreamValueHelperText(selectedMenuItem[index].incomeAmount)} 
-          />
+            />
         </div>
       </div>
     );
@@ -165,8 +177,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
 
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     return (
-      <div className='bottom-border'>
-        <p className='question-label'>How often do you receive this income: {selectedMenuItem[index].incomeStreamLabel}?</p>
+      <div>
+        <p className='question-label'>How often do they receive this income: {selectedMenuItem[index].incomeStreamLabel}?</p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel if='income-frequency-label'>Frequency</InputLabel>
         <StyledSelectfield
@@ -186,7 +198,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   const createIncomeBlockQuestions = () => {
     return selectedMenuItem.map((incomeSourceData, index) => {
       const { incomeStreamName, incomeStreamLabel, incomeAmount, incomeFrequency } = incomeSourceData;
-      const incomeStreamQuestion = <p className='question-label'>If you receive another type of income, select it below.</p>;
+      const incomeStreamQuestion = <p className='question-label'>If they receive another type of income, select it below.</p>;
       return (
         <div key={index}>
           {index > 0 &&
@@ -206,6 +218,19 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   const deleteIncomeBlock = (selectedIndex) => {
     const updatedSelectedMenuItems = selectedMenuItem.filter((incomeSourceData, index) => index !== selectedIndex );
     setSelectedMenuItem(updatedSelectedMenuItems);  
+
+    const updatedHouseholdData = householdData.map((personData, i) => {
+      if (i === personDataIndex) {
+        return {
+          ...personData,
+          incomeStreams: updatedSelectedMenuItems
+        };
+      } else {
+        return personData;
+      }
+    });
+
+    setHouseholdData(updatedHouseholdData);
   }
   
   const handleAddAdditionalIncomeSource = (event) => {
@@ -221,15 +246,6 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     ]);
   }
 
-  const handleSaveAndContinue = (event) => {
-     event.preventDefault();
-   
-     if(incomeStreamsAreValid(selectedMenuItem)) {
-      //need to pass the id obtained from useParams in this component to the handler s.t. it can navigate to the next step
-      handleIncomeStreamsSubmit(selectedMenuItem, stepIdNumber); 
-    }
-  }
-
   const incomeBlockIsMissingAnInput = () => {
     return selectedMenuItem[0].incomeStreamName === '' || 
       selectedMenuItem[0].incomeAmount === 0 || 
@@ -238,6 +254,10 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
 
   return (
     <>
+      <p className='question-label radio-question'>What type of income have they had most recently?</p>
+      <p className='question-description'>Answer the best you can. You will be able to include additional types of income. 
+        The more you include, the more accurate your results will be.
+      </p>
       {createIncomeBlockQuestions()}
       { incomeBlockIsMissingAnInput() && 
         <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
@@ -246,16 +266,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
         onClick={(event) => handleAddAdditionalIncomeSource(event)} >
         Add another income
       </Button>
-      <div className='prev-save-continue-buttons'>
-        <PreviousButton />
-        <Button
-          variant='contained'
-          onClick={(event) => { handleSaveAndContinue(event) }} >
-          Continue
-        </Button>
-      </div>
     </>
   );
 }
 
-export default IncomeBlock;
+export default PersonIncomeBlock;

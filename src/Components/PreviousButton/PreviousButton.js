@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const PreviousButton = () => {
+const PreviousButton = ({ formData }) => {
   let { id } = useParams();
   let numberId = Number(id);
   let navigate = useNavigate();
@@ -10,7 +10,11 @@ const PreviousButton = () => {
     <Button
       className='prev-button'
       onClick={() => {
-        navigate(`/step-${numberId - 1}`);
+        if (numberId === 16 && formData.householdSize === 1) {
+          navigate(`/step-${numberId - 2}`);
+        } else {
+          navigate(`/step-${numberId - 1}`);
+        }
       }}
       variant='contained'>
       Prev

@@ -6,23 +6,71 @@ import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
   const navigate = useNavigate();
-
-  const { applicantAge, zipcode, student, studentFulltime, pregnant, unemployed, unemployedWorkedInLast18Mos,
-    blindOrVisuallyImpaired, disabled, veteran, medicaid, disabilityRelatedMedicaid, hasIncome, incomeStreams,
-    hasExpenses, expenses, householdSize, householdAssets, housing } = formData;
+  const { zipcode, householdSize, householdData, householdAssets, housing } = formData;
   
-  const displayAllFormData = () => {
-    const householdSizeDescriptor = householdSize === 1 ? 'person' : 'people';
-    
+  const displayAllHouseholdData = () => {
+    if (householdSize > 1) {
+      return displayAllMembersDataBlock();
+    } else {
+      return headOfHouseholdDataBlock();
+    }
+  }
+
+  const displayAllMembersDataBlock = () => {
+    const allHouseholdRelations = getAllHouseholdRelations();
+    const allHouseholdAges = getAllHouseholdAges();
+    const colors = ['🟢', '🟡', '🟣', '🟠', '🟤', '⚫️', '🔴'];
+
+    const householdMemberDataBlocks = householdData.map((personData, i) => {
+      const { student, studentFulltime, pregnant, unemployed, unemployedWorkedInLast18Mos,
+        blindOrVisuallyImpaired, disabled, veteran, medicaid, disabilityRelatedMedicaid, 
+        hasIncome, incomeStreams, hasExpenses, expenses } = personData;
+
+      return (
+        <div key={i}>
+          <p className='confirmation-label'>
+            <b>{colors[i]} {allHouseholdRelations[i]}, { allHouseholdAges[i] }</b>
+            <Link to='/step-15' className='edit-link'>Edit</Link>
+          </p>
+          <article className='confirmation-label'><b>Conditions:</b>
+          <Link to='/step-15' className='edit-link'>Edit</Link>
+          <ul>
+            { studentFulltime && <li> Full-time student </li> }
+            { student && (studentFulltime === false) && <li> Student </li> }
+            { pregnant && <li> Pregnant </li> }
+            { unemployedWorkedInLast18Mos && <li> Unemployed, worked in the last 18 months </li> }
+            { unemployed && (unemployedWorkedInLast18Mos === false) && <li> Unemployed </li> }
+            { blindOrVisuallyImpaired && <li> Blind or visually impaired </li> }
+            { disabled && <li> Disabled </li> }
+            { veteran && <li> Veteran </li> }
+            { medicaid && <li> Receiving Medicaid </li> }
+            { disabilityRelatedMedicaid && <li> Receiving disability-related Medicaid </li> }
+          </ul>
+        </article>
+        <article className='confirmation-label'><b>Income:</b>
+          <Link to='/step-15' className='edit-link'>Edit</Link>
+          { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
+        </article>
+        <article className='confirmation-label'><b>Expenses:</b>
+          <Link to='/step-15' className='edit-link'>Edit</Link>
+          { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul> }
+        </article>
+        </div>
+      );
+    });
+
+    return [headOfHouseholdDataBlock(), householdMemberDataBlocks];
+  }
+
+  const headOfHouseholdDataBlock = () => {
+    const { applicantAge, student, studentFulltime, pregnant, unemployed, 
+      unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
+      disabilityRelatedMedicaid, hasIncome, incomeStreams, hasExpenses, expenses } = formData;
+
     return (
-      <>
+      <div key='head-of-household-data-block'>
         <p className='confirmation-label'>
-          <b>Your household: </b>
-          { householdSize } { householdSizeDescriptor }
-          <Link to='/step-14' className='edit-link'>Edit</Link>
-        </p>
-        <p className='confirmation-label'>
-          <b>You, { applicantAge }, head of household</b>
+          <b>🔵 You, { applicantAge }, head of household</b>
           <Link to='/step-2' className='edit-link'>Edit</Link>
         </p>
         <article className='confirmation-label'><b>Conditions:</b>
@@ -42,23 +90,61 @@ const Confirmation = ({ formData }) => {
         </article>
         <article className='confirmation-label'><b>Income:</b>
           <Link to='/step-12' className='edit-link'>Edit</Link>
-          { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams()} </ul> }
+          { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
         </article>
         <article className='confirmation-label'><b>Expenses:</b>
           <Link to='/step-13' className='edit-link'>Edit</Link>
-          { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses()} </ul> }
+          { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul> }
         </article>
+      </div>
+    );
+  }
+
+  const getAllHouseholdRelations = () => {
+    const householdMembers = householdData.map(personData => {
+      const upperCaseFirstLetter = personData.relationshipToHH[0].toUpperCase();
+      const upperCaseRelation = upperCaseFirstLetter + personData.relationshipToHH.slice(1);
+      const relationString =  upperCaseRelation.split(/(?=[A-Z])/).join(' ');
+      
+      return relationString;
+    });
+    
+    return householdMembers;
+  }
+
+  const getAllHouseholdAges = () => {    
+    const householdMemberAges = householdData.map(personData => {
+      return Number(personData.age);
+    });
+
+    return householdMemberAges;
+  }
+  
+  const displayAllFormData = () => {
+    const householdSizeDescriptor = householdSize === 1 ? 'person' : 'people';
+
+    return (
+      <>
+        <p className='confirmation-label'>
+          <b>Your household: </b>
+          { householdSize } { householdSizeDescriptor }
+          <Link to='/step-14' className='edit-link'>Edit</Link>
+        </p>
+        { displayAllHouseholdData() }
+        <p className='confirmation-section-underline'></p>
         <p className='confirmation-label'>
           <b> Household resources: </b>
           ${ householdAssets }
           <Link to='/step-15' className='edit-link'>Edit</Link>
         </p>
         <p className='confirmation-label-description'>This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.</p>
+        <p className='confirmation-section-underline'></p>
         <article className='confirmation-label'>
           <b> Housing: </b>
           <Link to='/step-16' className='edit-link'>Edit</Link>
           { <ul> { listAllHousing() } </ul> }
         </article>
+        <p className='confirmation-section-underline'></p>
         <p className='confirmation-label'>
           <b> Your zipcode: </b>
           { zipcode }
@@ -68,8 +154,8 @@ const Confirmation = ({ formData }) => {
     );
   }
 
-  const listAllExpenses = () => {
-    const mappedExpenses = expenses.map(expense => {
+  const listAllExpenses = (memberExpenses) => {
+    const mappedExpenses = memberExpenses.map(expense => {
       return <li key={ expense.expenseSourceName }>${ expense.expenseAmount }, { expense.expenseSourceLabel }, { expense.expenseFrequency }</li>
     });
 
@@ -88,8 +174,8 @@ const Confirmation = ({ formData }) => {
     return mappedHousingListItems;
   }
 
-  const listAllIncomeStreams = () => {
-    const mappedListItems = incomeStreams.map(incomeStream => {
+  const listAllIncomeStreams = (memberIncomeStreams) => {
+    const mappedListItems = memberIncomeStreams.map(incomeStream => {
       return <li key={ incomeStream.incomeStreamName }>${ incomeStream.incomeAmount }, { incomeStream.incomeStreamLabel }, { incomeStream.incomeFrequency }</li>
     });
 
@@ -115,7 +201,7 @@ const Confirmation = ({ formData }) => {
           <Button
             variant='contained'
             onClick={() => navigate('/results')}>
-            Yes, continue to my results
+            Continue
           </Button>
         </div>
       </div>

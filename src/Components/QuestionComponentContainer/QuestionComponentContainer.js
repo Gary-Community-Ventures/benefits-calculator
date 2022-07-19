@@ -5,14 +5,26 @@ import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import IncomeBlock from '../IncomeBlock/IncomeBlock';
 import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
+import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import questions from '../../Assets/questions';
 import { useParams } from 'react-router-dom';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHousingSourcesSubmit }) => {
+const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHousingSourcesSubmit, handleHouseholdDataSubmit }) => {
   let { id } = useParams();
   let numberId = Number(id);
   const matchingQuestion = questions.find((question) => question.id === numberId);
+
+  const createHouseholdDataBlock = () => {
+    return (
+      <div className='question-container' id={matchingQuestion.id}>
+        <p className='question-label household-data-q-underline'>{matchingQuestion.question}</p>
+        <HouseholdDataBlock 
+          formData={formData} 
+          handleHouseholdDataSubmit={handleHouseholdDataSubmit} />
+      </div>
+    );
+  }
 
   const createHousingBlockComponent = () => {
     return (
@@ -36,7 +48,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           formData={formData}
           handleTextfieldChange={handleTextfieldChange} />
         <div className='question-buttons'>
-          <PreviousButton />
+          <PreviousButton formData={formData} />
           <ContinueButton 
             handleSubmit={handleSubmit} 
             inputError={matchingQuestion.componentDetails.inputError}
@@ -103,7 +115,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     if (isNotIncomeOrExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className='question-buttons'>
-          <PreviousButton />
+          <PreviousButton formData={formData} />
           <ContinueButton
             handleSubmit={handleSubmit}
             inputError={matchingQuestion.componentDetails.inputError}
@@ -117,11 +129,14 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   return (
     <main className='benefits-form'>
       <p className='step-progress-title'>Step {id} of {questions.length + 2}</p>
-      <h2 className='sub-header'>Tell us a little more about yourself.</h2> 
+      { matchingQuestion.id !== 15 && <h2 className='sub-header'>Tell us a little more about yourself.</h2> }
+      { matchingQuestion.id === 15 && <h2 className='household-data-sub-header'>So far you’ve told us about:</h2> }
+      { matchingQuestion.id === 15 && <h4 className='household-data-sub2-header'> 🔵 You, {formData.applicantAge} Head of household</h4> }
       {
-        matchingQuestion.componentDetails.componentType === 'Textfield' && createTextfieldComponent() ||
-        matchingQuestion.componentDetails.componentType === 'Radiofield' && createRadiofieldComponent() ||
-        matchingQuestion.componentDetails.componentType === 'HousingBlock' && createHousingBlockComponent()
+        ( matchingQuestion.componentDetails.componentType === 'Textfield' && createTextfieldComponent() ) ||
+        ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createRadiofieldComponent() ) ||
+        ( matchingQuestion.componentDetails.componentType === 'HousingBlock' && createHousingBlockComponent() ) ||
+        ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() )
       }
     </main>
   );

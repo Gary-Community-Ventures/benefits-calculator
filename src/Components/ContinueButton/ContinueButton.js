@@ -9,7 +9,7 @@ const ContinueButton = ({ handleSubmit, inputError, formData, inputName }) => {
     <Button
       variant='contained'
       onClick={(event) => {
-        handleSubmit(event, inputError, formData[inputName], stepNumberId);
+        handleSubmit(event, inputError, formData[inputName], stepNumberId, formData.householdSize);
       }}>
       Continue
     </Button>

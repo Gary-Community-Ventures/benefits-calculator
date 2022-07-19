@@ -29,27 +29,31 @@ const App = () => {
     hasExpenses: false,
     expenses: [],
     householdSize: '',
+    householdData: [],
     householdAssets: '',
     housing: {}
   });
 
   useEffect(() => {
+    const updatedFormData = { ...formData };
 
     if (formData.student === false) {
-      setFormData({ ...formData, studentFulltime: false });
+      updatedFormData.studentFulltime = false;
     }
 
     if (formData.unemployed === false) { 
-      setFormData({ ...formData, unemployedWorkedInLast18Mos: false });
+      updatedFormData.unemployedWorkedInLast18Mos = false;
     }
 
     if(formData.hasIncome === false) {
-      setFormData({ ...formData, incomeStreams: [] });
+      updatedFormData.incomeStreams = [];
     }
 
     if(formData.hasExpenses === false) {
-      setFormData({ ...formData, expenses: [] });
+      updatedFormData.expenses = [];
     }
+
+    setFormData(updatedFormData);
     
   }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses]);
 
@@ -74,11 +78,15 @@ const App = () => {
     setFormData({ ...formData, [name]: boolValue });
   }
   
-  const handleSubmit = (event, validateInputFunction, inputToBeValidated, stepId) => {
+  const handleSubmit = (event, validateInputFunction, inputToBeValidated, stepId, householdSize) => {
     event.preventDefault();
 
     if (!validateInputFunction(inputToBeValidated)) {
-      navigate(`/step-${stepId + 1}`);
+      if (stepId === 14 && householdSize === 1) { //if you're on the householdSize q and the value is 1
+        navigate(`/step-${stepId + 2}`); //skip question 15 and go to 16
+      } else { //you've indicated that you're householdSize is larger than 1
+        navigate(`/step-${stepId + 1}`);
+      }
     }  
   }
 
@@ -95,6 +103,11 @@ const App = () => {
   const handleExpenseSourcesSubmit = (validatedExpenseSources, stepId) => {
     setFormData({ ...formData, expenses: validatedExpenseSources });
     navigate(`/step-${stepId + 1}`);
+  }
+
+  const handleHouseholdDataSubmit = (unvalidatedHouseholdData) => {
+    setFormData({ ...formData, householdData: unvalidatedHouseholdData });
+    navigate('/step-16');
   }
 
   return (
@@ -121,7 +134,8 @@ const App = () => {
             handleRadioButtonChange={handleRadioButtonChange} 
             handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
             handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
-            handleHousingSourcesSubmit={handleHousingSourcesSubmit} /> } /> 
+            handleHousingSourcesSubmit={handleHousingSourcesSubmit} 
+            handleHouseholdDataSubmit={handleHouseholdDataSubmit} /> } /> 
         <Route 
           path='/confirm-information' 
           element={<Confirmation
