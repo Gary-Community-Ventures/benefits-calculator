@@ -6,6 +6,11 @@ const incomeStreamsEndpoint = 'https://cobenefits-api.herokuapp.com/api/incomest
 const expensesEndpoint = 'https://cobenefits-api.herokuapp.com/api/expenses/';
 let eligibilityEndpoint = 'https://cobenefits-api.herokuapp.com/api/eligibility/';
 
+const header = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json',
+  'Authorization': apiKey
+};
   })
     .then(response => {
       if(!response.ok) {
