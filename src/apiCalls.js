@@ -1,12 +1,11 @@
 const apiKey = "Token " + process.env.REACT_APP_API_KEY;
 
-const getUserBenefits = (screenerId) => {
-  return fetch(`https://cobenefits-api.herokuapp.com/api/eligibility/${screenerId}`, {
-    method: "GET",
-    headers: {
-      "Authorization": apiKey,
-      "Content-Type": "application/json"
-    }
+const screensEndpoint = 'https://cobenefits-api.herokuapp.com/api/screens/';
+const householdsEndpoint = 'https://cobenefits-api.herokuapp.com/api/householdmembers/';
+const incomeStreamsEndpoint = 'https://cobenefits-api.herokuapp.com/api/incomestreams/';
+const expensesEndpoint = 'https://cobenefits-api.herokuapp.com/api/expenses/';
+let eligibilityEndpoint = 'https://cobenefits-api.herokuapp.com/api/eligibility/';
+
   })
     .then(response => {
       if(!response.ok) {
