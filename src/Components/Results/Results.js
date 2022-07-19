@@ -1,6 +1,6 @@
 import { Button, Link, Card, CardContent, CardActions, Typography } from "@mui/material";
 import programs from '../../Assets/programOptions';
-import { postParentScreen } from "../../apiCalls";
+import { postPartialParentScreen, postHouseholdMemberData } from "../../apiCalls";
 
 const Results = ({ formData }) => {
   const postScreenerToApi = () => {
@@ -99,6 +99,7 @@ const Results = ({ formData }) => {
   }
 
   const displayProgramCards = () => {
+    postScreenerToApi();
     const programCards = Object.keys(programs).map(program => {
       return (
         <Card variant='outlined' key={programs[program].programName}>
