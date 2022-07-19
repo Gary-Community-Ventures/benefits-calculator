@@ -15,12 +15,32 @@ const Results = ({ formData }) => {
       housing_situation: finalHousingOption
     };
 
-    postParentScreen(headOfHHScreen)
-      .then(response => { 
-        console.log({response})
-        const newBenefitsUserId = response.id;
-        console.log({newBenefitsUserId});
+    return postPartialParentScreen(headOfHHScreen)
+      .then(response => {
+        const screenerDataId = response.id;
+        return postAllHouseholdDataInformation(screenerDataId);
+      })
+  }
 
+  const postAllHouseholdDataInformation = (screenerDataId) => {
+    const headOfHouseholdData = getHeadOfHHData(screenerDataId);
+    const remainingHouseholdMemberData = getRemainingHouseholdMemberData(screenerDataId);
+    const allHouseholdData = [headOfHouseholdData, ...remainingHouseholdMemberData];
+    const allPromises = [];
+    let allResponses = [];
+    
+    allHouseholdData.forEach(personData => {
+      const responsePromise = postHouseholdMemberData(personData);
+      allPromises.push(responsePromise);
+    });
+
+    return Promise.all(allPromises)
+      .then(data => {
+        allResponses = data;
+        console.log({allResponses})
+        return allResponses;
+      });
+  }
       })
   }
 
