@@ -41,7 +41,32 @@ const Results = ({ formData }) => {
         return allResponses;
       });
   }
-      })
+
+  const getHeadOfHHData = (screenerDataId) => {
+    const { applicantAge, student, studentFulltime, pregnant, unemployed,
+      unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
+      disabilityRelatedMedicaid, hasIncome, hasExpenses, incomeStreams, expenses } = formData;
+    
+    const headOfhouseholdInformation = {
+      screen: screenerDataId,
+      relationship: 'headOfHousehold',
+      age: Number(applicantAge),
+      student: student,
+      student_full_time: studentFulltime,
+      pregnant: pregnant,
+      unemployed: unemployed,
+      worked_in_last_18_mos: unemployedWorkedInLast18Mos,
+      visually_impaired: blindOrVisuallyImpaired,
+      disabled: disabled,
+      veteran: veteran,
+      medicaid: medicaid,
+      disability_medicaid: disabilityRelatedMedicaid,
+      has_income: hasIncome,
+      has_expenses: hasExpenses
+    };
+    
+    return headOfhouseholdInformation;
+  }
   }
 
   const displayProgramCards = () => {
