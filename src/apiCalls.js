@@ -27,5 +27,5 @@ const postParentScreen = (partialFormData) => {
 }
 
 module.exports = {
-  getUserBenefits,
+  postParentScreen
 }
