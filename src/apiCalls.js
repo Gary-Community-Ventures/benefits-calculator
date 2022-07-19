@@ -41,5 +41,6 @@ const postHouseholdMemberData = (householdMemberData) => {
 }
 
 module.exports = {
-  postParentScreen
+  postPartialParentScreen,
+  postHouseholdMemberData
 }
