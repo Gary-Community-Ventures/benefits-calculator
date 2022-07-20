@@ -15,6 +15,29 @@ const Results = ({ formData }) => {
     fetchResults();
   }, []);
 
+  const fetchResults = async () => {
+    const screensBody = getScreensBody(formData);
+    const screensResponse = await postPartialParentScreen(screensBody);
+    
+    const householdMembersBodies = getHouseholdMembersBodies(formData, screensResponse.id);
+    householdMembersBodies.forEach(async (householdMembersBody) => {
+      const householdMembersResponse = await postHouseholdMemberData(householdMembersBody);
+
+      const incomeStreamsBodies = getIncomeStreamsBodies(householdMembersBody, householdMembersResponse.id);
+      incomeStreamsBodies.forEach(async (incomeStreamsBody) => {
+        await postHouseholdMemberIncomeStream(incomeStreamsBody);
+      });
+      
+      const expensesBodies = getExpensesBodies(householdMembersBody, householdMembersResponse.id);
+      expensesBodies.forEach(async (expensesBody) => {
+        await postHouseholdMemberExpense(expensesBody);
+      });
+    });
+
+    const eligibilityResponse = await getEligibility(screensResponse.id);
+    setResults(eligibilityResponse);
+  }
+
     const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing } = formData;
     const housingOptionKeys = Object.keys(housing);
     const finalHousingOption = housingOptionKeys.find(housingSituation => housing[housingSituation] === true);
