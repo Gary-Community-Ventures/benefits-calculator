@@ -9,7 +9,8 @@ import {
 } from "../../apiCalls";
 
 const Results = ({ formData }) => {
-  const postScreenerToApi = () => {
+  const [results, setResults] = useState();
+  
     const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing } = formData;
     const housingOptionKeys = Object.keys(housing);
     const finalHousingOption = housingOptionKeys.find(housingSituation => housing[housingSituation] === true);
