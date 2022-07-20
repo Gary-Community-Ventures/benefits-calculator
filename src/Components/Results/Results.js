@@ -39,6 +39,7 @@ const Results = ({ formData }) => {
     const eligibilityResponse = await getEligibility(screensResponse.id);
     setResults(eligibilityResponse);
     setScreenerId(screensResponse.id);
+    setIsLoading(false);
   }
 
   const getScreensBody = (formData) => {
