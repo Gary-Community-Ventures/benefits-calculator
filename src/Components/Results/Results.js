@@ -50,6 +50,14 @@ const Results = ({ formData }) => {
       housing_situation: finalHousingOption
     };
   };
+
+  const getHouseholdMembersBodies = (formData, screensId) => {
+    const headOfHousehold = getHouseHoldMemberBody(formData, 'headOfHousehold', screensId);
+    const otherHouseholdMembers = formData.householdData.map(otherMember => {
+      return getHouseHoldMemberBody(otherMember, otherMember.relationshipToHH, screensId);
+    });
+    return [headOfHousehold, ...otherHouseholdMembers];
+  };
     const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing } = formData;
     const housingOptionKeys = Object.keys(housing);
     const finalHousingOption = housingOptionKeys.find(housingSituation => housing[housingSituation] === true);
