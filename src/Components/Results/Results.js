@@ -11,6 +11,7 @@ import {
 const Results = ({ formData }) => {
   const [results, setResults] = useState([]);
   const [screenerId, setScreenerId] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchResults();
