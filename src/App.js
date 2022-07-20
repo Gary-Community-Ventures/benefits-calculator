@@ -12,7 +12,7 @@ const App = () => {
 
   const [formData, setFormData] = useState({
     agreeToTermsOfService: false,
-    applicantAge: '',
+    age: '',
     zipcode: '',
     student: false,
     studentFulltime: false,
