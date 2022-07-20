@@ -58,6 +58,17 @@ const Results = ({ formData }) => {
     });
     return [headOfHousehold, ...otherHouseholdMembers];
   };
+  const getIncomeStreamsBodies = (householdMemberBody, householdMemberId) => {
+    return householdMemberBody.income_streams.map(incomeStream => {
+      return {
+        type: incomeStream.incomeStreamName,
+        amount: incomeStream.incomeAmount,
+        frequency: incomeStream.incomeFrequency,
+        screen: householdMemberBody.screen,
+        household_member: householdMemberId
+      };
+    });
+  }
     const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing } = formData;
     const housingOptionKeys = Object.keys(housing);
     const finalHousingOption = housingOptionKeys.find(housingSituation => housing[housingSituation] === true);
