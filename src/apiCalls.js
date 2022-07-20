@@ -40,6 +40,19 @@ const postHouseholdMemberData = (householdMemberData) => {
     })
 }
 
+const postHouseholdMemberIncomeStream = (singleIncomeStream) => {
+  return fetch(incomeStreamsEndpoint, {
+    method: 'POST',
+    body: JSON.stringify(singleIncomeStream),
+    headers: header
+  })
+    .then(response => {
+      if(!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+}
 module.exports = {
   postPartialParentScreen,
   postHouseholdMemberData
