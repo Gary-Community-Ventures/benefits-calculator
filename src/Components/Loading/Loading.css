@@ -1,12 +1,13 @@
 .loading-container {
   text-align: center;
+  font-size: 22px;
+  margin-top: 1rem;
 }
 
 .loading-image {
-  height: 10%;
-  width: 10%;
+  height: 150px;
+  width: 150px;
   animation: rotate-s-loader 1s linear infinite;
-  margin: 6rem auto;
 }
 
 @keyframes rotate-s-loader {
@@ -16,4 +17,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.loading-text {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 2rem;
 }
