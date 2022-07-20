@@ -125,10 +125,11 @@ const Results = ({ formData }) => {
                 {results[result].name}
               </Typography>
               <Typography variant='body1' gutterBottom>
-                {results[result].description}
+                <b>Estimated value:</b> Up to {'$' + results[result].estimated_value} per year. 
+                Including application and approval, the average time to acquire this benefit is {results[result].estimated_delivery_time}.
               </Typography>
               <Typography variant='body1' gutterBottom>
-                <b>Estimated value:</b> Up to {'$' + results[result].estimated_value} is dispersed within {results[result].estimated_delivery_time} of agency approval.
+                {results[result].description}
               </Typography>
               <Link href={results[result].learn_more_link}>
                 Learn more
