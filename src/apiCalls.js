@@ -67,7 +67,24 @@ const postHouseholdMemberExpense = (singleExpense) => {
       return response.json();
     })
 }
+
+const getEligibility = (screenerId) => {
+  return fetch(eligibilityEndpoint + screenerId, {
+    method: "GET",
+    headers: header
+  })
+    .then(response => {
+      if(!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+}
+
 module.exports = {
   postPartialParentScreen,
-  postHouseholdMemberData
+  postHouseholdMemberData,
+  postHouseholdMemberIncomeStream,
+  postHouseholdMemberExpense,
+  getEligibility
 }
