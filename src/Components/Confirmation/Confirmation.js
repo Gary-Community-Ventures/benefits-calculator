@@ -63,14 +63,14 @@ const Confirmation = ({ formData }) => {
   }
 
   const headOfHouseholdDataBlock = () => {
-    const { applicantAge, student, studentFulltime, pregnant, unemployed, 
+    const { age, student, studentFulltime, pregnant, unemployed, 
       unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
       disabilityRelatedMedicaid, hasIncome, incomeStreams, hasExpenses, expenses } = formData;
 
     return (
       <div key='head-of-household-data-block'>
         <p className='confirmation-label'>
-          <b>🔵 You, { applicantAge }, head of household</b>
+          <b>🔵 You, { age }, head of household</b>
           <Link to='/step-2' className='edit-link'>Edit</Link>
         </p>
         <article className='confirmation-label'><b>Conditions:</b>
