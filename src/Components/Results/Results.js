@@ -9,7 +9,7 @@ import {
 } from "../../apiCalls";
 
 const Results = ({ formData }) => {
-  const [results, setResults] = useState();
+  const [results, setResults] = useState([]);
   
   useEffect(() => {
     fetchResults();
