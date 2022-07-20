@@ -18,21 +18,21 @@ const Results = ({ formData }) => {
   const fetchResults = async () => {
     const screensBody = getScreensBody(formData);
     const screensResponse = await postPartialParentScreen(screensBody);
-    
     const householdMembersBodies = getHouseholdMembersBodies(formData, screensResponse.id);
-    householdMembersBodies.forEach(async (householdMembersBody) => {
+    
+    for (const householdMembersBody of householdMembersBodies) {
       const householdMembersResponse = await postHouseholdMemberData(householdMembersBody);
 
       const incomeStreamsBodies = getIncomeStreamsBodies(householdMembersBody, householdMembersResponse.id);
-      incomeStreamsBodies.forEach(async (incomeStreamsBody) => {
+      for (const incomeStreamsBody of incomeStreamsBodies) {
         await postHouseholdMemberIncomeStream(incomeStreamsBody);
-      });
+      }
       
       const expensesBodies = getExpensesBodies(householdMembersBody, householdMembersResponse.id);
-      expensesBodies.forEach(async (expensesBody) => {
+      for (const expensesBody of expensesBodies) {
         await postHouseholdMemberExpense(expensesBody);
-      });
-    });
+      }
+    }
 
     const eligibilityResponse = await getEligibility(screensResponse.id);
     setResults(eligibilityResponse);
