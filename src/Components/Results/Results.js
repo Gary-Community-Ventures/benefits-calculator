@@ -119,121 +119,39 @@ const Results = ({ formData }) => {
       housing_situation: finalHousingOption
     };
 
-    return postPartialParentScreen(headOfHHScreen)
-      .then(response => {
-        const screenerDataId = response.id;
-        return postAllHouseholdDataInformation(screenerDataId);
-      })
-  }
-
-  const postAllHouseholdDataInformation = (screenerDataId) => {
-    const headOfHouseholdData = getHeadOfHHData(screenerDataId);
-    const remainingHouseholdMemberData = getRemainingHouseholdMemberData(screenerDataId);
-    const allHouseholdData = [headOfHouseholdData, ...remainingHouseholdMemberData];
-    const allPromises = [];
-    let allResponses = [];
-    
-    allHouseholdData.forEach(personData => {
-      const responsePromise = postHouseholdMemberData(personData);
-      allPromises.push(responsePromise);
-    });
-
-    return Promise.all(allPromises)
-      .then(data => {
-        allResponses = data;
-        console.log({allResponses})
-        return allResponses;
-      });
-  }
-
-  const getHeadOfHHData = (screenerDataId) => {
-    const { applicantAge, student, studentFulltime, pregnant, unemployed,
-      unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
-      disabilityRelatedMedicaid, hasIncome, hasExpenses, incomeStreams, expenses } = formData;
-    
-    const headOfhouseholdInformation = {
-      screen: screenerDataId,
-      relationship: 'headOfHousehold',
-      age: Number(applicantAge),
-      student: student,
-      student_full_time: studentFulltime,
-      pregnant: pregnant,
-      unemployed: unemployed,
-      worked_in_last_18_mos: unemployedWorkedInLast18Mos,
-      visually_impaired: blindOrVisuallyImpaired,
-      disabled: disabled,
-      veteran: veteran,
-      medicaid: medicaid,
-      disability_medicaid: disabilityRelatedMedicaid,
-      has_income: hasIncome,
-      has_expenses: hasExpenses
-    };
-    
-    return headOfhouseholdInformation;
-  }
-
-  const getRemainingHouseholdMemberData = (screenerDataId) => {
-    const householdMemberData = formData.householdData.map(personData => {
-      const { age, student, studentFulltime, pregnant, unemployed,
-        unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
-        disabilityRelatedMedicaid, hasIncome, hasExpenses, relationshipToHH } = personData;
-
-      const memberData = {
-        screen: screenerDataId,
-        relationship: relationshipToHH,
-        age: Number(age),
-        student: student,
-        student_full_time: studentFulltime,
-        pregnant: pregnant,
-        unemployed: unemployed,
-        worked_in_last_18_mos: unemployedWorkedInLast18Mos,
-        visually_impaired: blindOrVisuallyImpaired,
-        disabled: disabled,
-        veteran: veteran,
-        medicaid: medicaid,
-        disability_medicaid: disabilityRelatedMedicaid,
-        has_income: hasIncome,
-        has_expenses: hasExpenses
-      };
-
-      return memberData;
-    });
-    
-    return householdMemberData;
-  }
-
-  const displayProgramCards = () => {
-    postScreenerToApi();
-    const programCards = Object.keys(programs).map(program => {
+  const displayProgramCards = (results) => {
+    const programCards = Object.keys(results).map(result => {
       return (
-        <Card variant='outlined' key={programs[program].programName}>
+        <Card variant='outlined' key={results[result].name}>
           <CardContent>    
             <Typography variant='h6'>
-              {programs[program].programSnapshot}
+              {results[result].description_short}
             </Typography>
             <Typography 
               color='text.secondary' 
               gutterBottom >
-              {programs[program].programName}
+              {results[result].name}
             </Typography>
-            <Typography variant='body1'>
-              {programs[program].programDescription}
+            <Typography variant='body1' gutterBottom>
+              {results[result].description}
             </Typography>
-            <Typography variant='body1'>
-              Estimated value up to {programs[program].dollarValue} is dispersed within {programs[program].estimatedDeliveryTime} of agency approval.
+            <Typography variant='body1' gutterBottom>
+              <b>Estimated value:</b> Up to {'$' + results[result].estimated_value} is dispersed within {results[result].estimated_delivery_time} of agency approval.
             </Typography>
-            { programs[program].legalStatusRequired &&
-              <Typography variant='body1'>
-                *Must be a legal resident or citizen in order to qualify.
-              </Typography>
-            }
-            <Link href={programs[program].learnMoreLink}>
+            <Typography variant='body1' gutterBottom>
+              <b>Eligibility requirements: </b>
+              { results[result].eligible && results[result].passed_tests }
+              { results[result].eligible === false && results[result].failed_tests }
+            </Typography>
+            
+            
+            <Link href={results[result].learn_more_link}>
               Learn more
             </Link>
             <CardActions>
               <Button
                 variant='contained'
-                href={programs[program].applyButtonLink} >
+                href={results[result].apply_button_link} >
                 Apply
               </Button>
             </CardActions>
