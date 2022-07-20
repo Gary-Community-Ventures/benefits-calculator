@@ -38,6 +38,18 @@ const Results = ({ formData }) => {
     setResults(eligibilityResponse);
   }
 
+  const getScreensBody = (formData) => {
+    const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing } = formData;
+    const housingOptionKeys = Object.keys(housing);
+    const finalHousingOption = housingOptionKeys.find(housingSituation => housing[housingSituation] === true);
+    return {
+      agree_to_tos: agreeToTermsOfService ,
+      zipcode: zipcode,
+      household_size: householdSize,
+      household_assets: householdAssets,
+      housing_situation: finalHousingOption
+    };
+  };
     const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing } = formData;
     const housingOptionKeys = Object.keys(housing);
     const finalHousingOption = housingOptionKeys.find(housingSituation => housing[housingSituation] === true);
