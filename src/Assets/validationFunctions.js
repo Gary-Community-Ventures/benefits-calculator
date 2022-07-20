@@ -95,7 +95,7 @@ const householdAssetsHasError = (householdAssets) => {
 
 const displayHouseholdAssetsHelperText = (householdAssets) => {
   if (householdAssetsHasError(householdAssets)) {
-    return 'Please enter a positive number.';
+    return 'Please enter 0 or a positive number.';
   }
 }
 
