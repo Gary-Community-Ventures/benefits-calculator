@@ -52,12 +52,39 @@ const Results = ({ formData }) => {
   };
 
   const getHouseholdMembersBodies = (formData, screensId) => {
-    const headOfHousehold = getHouseHoldMemberBody(formData, 'headOfHousehold', screensId);
+    const headOfHousehold = getHouseholdMemberBody(formData, 'headOfHousehold', screensId);
     const otherHouseholdMembers = formData.householdData.map(otherMember => {
-      return getHouseHoldMemberBody(otherMember, otherMember.relationshipToHH, screensId);
+      return getHouseholdMemberBody(otherMember, otherMember.relationshipToHH, screensId);
     });
     return [headOfHousehold, ...otherHouseholdMembers];
   };
+
+  const getHouseholdMemberBody = (formData, relationshipToHH, screensId) => {
+    const { age, student, studentFulltime, pregnant, unemployed,
+      unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
+      disabilityRelatedMedicaid, hasIncome, hasExpenses, incomeStreams, expenses } = formData;
+    
+    return {
+      screen: screensId,
+      relationship: relationshipToHH,
+      age: Number(age),
+      student: student,
+      student_full_time: studentFulltime,
+      pregnant: pregnant,
+      unemployed: unemployed,
+      worked_in_last_18_mos: unemployedWorkedInLast18Mos,
+      visually_impaired: blindOrVisuallyImpaired,
+      disabled: disabled,
+      veteran: veteran,
+      medicaid: medicaid,
+      disability_medicaid: disabilityRelatedMedicaid,
+      has_income: hasIncome,
+      has_expenses: hasExpenses,
+      income_streams: incomeStreams,
+      expenses: expenses
+    };
+  };
+
   const getIncomeStreamsBodies = (householdMemberBody, householdMemberId) => {
     return householdMemberBody.income_streams.map(incomeStream => {
       return {
