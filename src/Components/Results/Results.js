@@ -10,7 +10,8 @@ import {
 
 const Results = ({ formData }) => {
   const [results, setResults] = useState([]);
-  
+  const [screenerId, setScreenerId] = useState(0);
+
   useEffect(() => {
     fetchResults();
   }, []);
@@ -19,7 +20,6 @@ const Results = ({ formData }) => {
     const screensBody = getScreensBody(formData);
     const screensResponse = await postPartialParentScreen(screensBody);
     const householdMembersBodies = getHouseholdMembersBodies(formData, screensResponse.id);
-    
     for (const householdMembersBody of householdMembersBodies) {
       const householdMembersResponse = await postHouseholdMemberData(householdMembersBody);
 
@@ -36,6 +36,7 @@ const Results = ({ formData }) => {
 
     const eligibilityResponse = await getEligibility(screensResponse.id);
     setResults(eligibilityResponse);
+    setScreenerId(screensResponse.id);
   }
 
   const getScreensBody = (formData) => {
@@ -151,6 +152,7 @@ const Results = ({ formData }) => {
       <div className='results-container'>
         <h2 className='sub-header'> {results && results.length} programs for you to look at.</h2>
         <p className='question-label'>Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.</p>
+        <p className='question-label'>Screener ID: {screenerId}</p>
         {results && displayProgramCards(results)}
       </div>
     </main>
