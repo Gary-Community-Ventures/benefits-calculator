@@ -9,7 +9,7 @@ import './App.css';
 
 const App = () => {
   const navigate = useNavigate();
-  console.log("process.env.REACT_APP_API_KEY", process.env.REACT_APP_API_KEY);
+  console.log("process.env.REACT_APP_API_KEY asdf", process.env.REACT_APP_API_KEY);
 
   // const [formData, setFormData] = useState({
   //   agreeToTermsOfService: false,
