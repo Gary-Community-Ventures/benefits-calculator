@@ -158,7 +158,7 @@ const Results = ({ formData }) => {
   return (
     <main className='benefits-form'>
       <div className='results-container'>
-        <h2 className='sub-header'> {results && results.length} programs for you to look at.</h2>
+        <h2 className='sub-header'> {results.length} programs for you to look at.</h2>
         <p className='question-label'>Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.</p>
         <p className='question-label'>Screener ID: {screenerId}</p>
         { displayProgramCards(results) }
