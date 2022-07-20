@@ -108,16 +108,6 @@ const Results = ({ formData }) => {
       };
     });
   }
-    const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing } = formData;
-    const housingOptionKeys = Object.keys(housing);
-    const finalHousingOption = housingOptionKeys.find(housingSituation => housing[housingSituation] === true);
-    const headOfHHScreen = {
-      agree_to_tos: agreeToTermsOfService ,
-      zipcode: zipcode,
-      household_size: householdSize,
-      household_assets: householdAssets,
-      housing_situation: finalHousingOption
-    };
 
   const displayProgramCards = (results) => {
     const programCards = Object.keys(results).map(result => {
