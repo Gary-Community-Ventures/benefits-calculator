@@ -69,6 +69,18 @@ const Results = ({ formData }) => {
       };
     });
   }
+
+  const getExpensesBodies = (householdMemberBody, householdMemberId) => {
+    return householdMemberBody.expenses.map(expense => {
+      return {
+        type: expense.expenseSourceName,
+        amount: expense.expenseAmount,
+        frequency: expense.expenseFrequency,
+        screen: householdMemberBody.screen,
+        household_member: householdMemberId
+      };
+    });
+  }
     const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing } = formData;
     const housingOptionKeys = Object.keys(housing);
     const finalHousingOption = housingOptionKeys.find(housingSituation => housing[housingSituation] === true);
