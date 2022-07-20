@@ -53,6 +53,20 @@ const postHouseholdMemberIncomeStream = (singleIncomeStream) => {
       return response.json();
     })
 }
+
+const postHouseholdMemberExpense = (singleExpense) => {
+  return fetch(expensesEndpoint, {
+    method: 'POST',
+    body: JSON.stringify(singleExpense),
+    headers: header
+  })
+    .then(response => {
+      if(!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+}
 module.exports = {
   postPartialParentScreen,
   postHouseholdMemberData
