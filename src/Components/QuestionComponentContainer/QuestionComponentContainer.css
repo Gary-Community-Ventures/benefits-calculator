@@ -32,3 +32,12 @@
 .household-data-sub2-header {
   margin-bottom: 1rem;
 }
+
+.underline-id {
+  text-decoration: underline;
+}
+
+.remember-disclaimer-label {
+  font-size: 20px;
+  margin-bottom: 8px;
+}

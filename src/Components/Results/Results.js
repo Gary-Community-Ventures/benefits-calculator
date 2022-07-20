@@ -125,10 +125,11 @@ const Results = ({ formData }) => {
                 {results[result].name}
               </Typography>
               <Typography variant='body1' gutterBottom>
-                {results[result].description}
+                <b>Estimated value:</b> Up to {'$' + results[result].estimated_value} per year. 
+                Including application and approval, the average time to acquire this benefit is {results[result].estimated_delivery_time}.
               </Typography>
               <Typography variant='body1' gutterBottom>
-                <b>Estimated value:</b> Up to {'$' + results[result].estimated_value} is dispersed within {results[result].estimated_delivery_time} of agency approval.
+                {results[result].description}
               </Typography>
               <Link href={results[result].learn_more_link}>
                 Learn more
@@ -158,9 +159,11 @@ const Results = ({ formData }) => {
   return (
     <main className='benefits-form'>
       <div className='results-container'>
-        <h2 className='sub-header'> {results.length} programs for you to look at.</h2>
-        <p className='question-label'>Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.</p>
-        <p className='question-label'>Screener ID: {screenerId}</p>
+        <p className='question-label underline-id'>Screener ID: {screenerId}</p>
+        <h2 className='sub-header'> {results.length} programs for you to look at</h2>
+        <p className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
+          but based on the information you provided, we believe you are likely eligible for the programs below:
+        </p>
         { displayProgramCards(results) }
       </div>
     </main>
