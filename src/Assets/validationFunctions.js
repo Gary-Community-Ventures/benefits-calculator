@@ -90,12 +90,12 @@ const displayHouseholdSizeHelperText = (sizeOfHousehold) => {
 }
 
 const householdAssetsHasError = (householdAssets) => {
-  return householdAssets <= 0;
+  return householdAssets < 0;
 }
 
 const displayHouseholdAssetsHelperText = (householdAssets) => {
   if (householdAssetsHasError(householdAssets)) {
-    return 'Please enter a number greater than 0';
+    return 'Please enter a positive number.';
   }
 }
 
