@@ -11,6 +11,10 @@ import {
 const Results = ({ formData }) => {
   const [results, setResults] = useState();
   
+  useEffect(() => {
+    fetchResults();
+  }, []);
+
     const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing } = formData;
     const housingOptionKeys = Object.keys(housing);
     const finalHousingOption = housingOptionKeys.find(housingSituation => housing[housingSituation] === true);
