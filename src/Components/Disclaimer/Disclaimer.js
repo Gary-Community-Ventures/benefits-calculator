@@ -32,12 +32,13 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
             Gary Community Ventures Disclaimer for Public Benefit Program Screening
           </Typography>
           <Typography variant='body1'>
-            GCV's Benefit Calculator offers a screening tool that recommends public benefits programs for you to consider based upon information you provide about your household.
-            To enroll in a benefit, you need to apply through the appropriate administering agency. 
-            GCV's Benefit Calculator will tell you how to apply for any benefit on this website, but cannot guarantee eligibility. 
-            The administering agency will determine final eligibility upon your submission of an application for each program.
-            The information you share for purposes of public benefits screening will be anonymous and can be shared with City agencies to improve access to benefits and programs. 
-            To find out more about how the City might use the data you share with GCV's Benefit Calculator, visit the Terms of Use for [X link], and Privacy Policy for [Y link].
+            GCV's Benefit Calculator is a tool that recommends public benefits programs for you to consider based upon 
+            information you provide about your household and publicly available information regarding programs you may be eligible for. 
+            To enroll in a benefit, you will need to apply through the appropriate government agency. GCV's Benefit Calculator will tell 
+            you how to apply for any benefit on this website, but cannot guarantee eligibility or acceptance into any program. The administering 
+            agency will determine final eligibility upon your submission of an application for each program. The information you share for purposes 
+            of the public benefits screening will be kept confidential but may be shared with a government agency to assist you in the application 
+            process with your permission. 
           </Typography>
         </CardContent>  
       </Card>

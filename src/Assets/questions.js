@@ -17,7 +17,7 @@ const questions = [
     componentDetails: {
       componentType: 'Textfield',
       inputType: 'text',
-      inputName: 'applicantAge',
+      inputName: 'age',
       inputLabel: 'Age',
       inputError: ageHasError,
       inputHelperText: displayAgeHelperText

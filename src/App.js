@@ -12,7 +12,7 @@ const App = () => {
 
   const [formData, setFormData] = useState({
     agreeToTermsOfService: false,
-    applicantAge: '',
+    age: '',
     zipcode: '',
     student: false,
     studentFulltime: false,
@@ -142,7 +142,7 @@ const App = () => {
             formData={formData} /> } /> 
         <Route 
           path='/results' 
-          element={<Results /> } /> 
+          element={<Results formData={formData} /> } /> 
         <Route
           path='*'
           element={<Navigate to="/step-1" replace /> } />
