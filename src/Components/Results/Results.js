@@ -128,13 +128,6 @@ const Results = ({ formData }) => {
             <Typography variant='body1' gutterBottom>
               <b>Estimated value:</b> Up to {'$' + results[result].estimated_value} is dispersed within {results[result].estimated_delivery_time} of agency approval.
             </Typography>
-            <Typography variant='body1' gutterBottom>
-              <b>Eligibility requirements: </b>
-              { results[result].eligible && results[result].passed_tests }
-              { results[result].eligible === false && results[result].failed_tests }
-            </Typography>
-            
-            
             <Link href={results[result].learn_more_link}>
               Learn more
             </Link>
