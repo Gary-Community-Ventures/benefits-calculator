@@ -111,40 +111,48 @@ const Results = ({ formData }) => {
   }
 
   const displayProgramCards = (results) => {
-    const programCards = Object.keys(results).map(result => {
+    if (results.length) {
+      const programCards = Object.keys(results).map(result => {
+        return (
+          <Card variant='outlined' key={results[result].name}>
+            <CardContent>    
+              <Typography variant='h6'>
+                {results[result].description_short}
+              </Typography>
+              <Typography 
+                color='text.secondary' 
+                gutterBottom >
+                {results[result].name}
+              </Typography>
+              <Typography variant='body1' gutterBottom>
+                {results[result].description}
+              </Typography>
+              <Typography variant='body1' gutterBottom>
+                <b>Estimated value:</b> Up to {'$' + results[result].estimated_value} is dispersed within {results[result].estimated_delivery_time} of agency approval.
+              </Typography>
+              <Link href={results[result].learn_more_link}>
+                Learn more
+              </Link>
+              <CardActions>
+                <Button
+                  variant='contained'
+                  href={results[result].apply_button_link} >
+                  Apply
+                </Button>
+              </CardActions>
+            </CardContent>
+          </Card>
+        );
+      });
+      
+      return programCards;
+    } else {
       return (
-        <Card variant='outlined' key={results[result].name}>
-          <CardContent>    
-            <Typography variant='h6'>
-              {results[result].description_short}
-            </Typography>
-            <Typography 
-              color='text.secondary' 
-              gutterBottom >
-              {results[result].name}
-            </Typography>
-            <Typography variant='body1' gutterBottom>
-              {results[result].description}
-            </Typography>
-            <Typography variant='body1' gutterBottom>
-              <b>Estimated value:</b> Up to {'$' + results[result].estimated_value} is dispersed within {results[result].estimated_delivery_time} of agency approval.
-            </Typography>
-            <Link href={results[result].learn_more_link}>
-              Learn more
-            </Link>
-            <CardActions>
-              <Button
-                variant='contained'
-                href={results[result].apply_button_link} >
-                Apply
-              </Button>
-            </CardActions>
-          </CardContent>
-        </Card>
+        <div>
+          Sorry, we were not able to find any programs for you based on the information that was provided.
+        </div>
       );
-    });
-
-    return programCards;
+    }
   }
 
   return (
@@ -153,7 +161,7 @@ const Results = ({ formData }) => {
         <h2 className='sub-header'> {results && results.length} programs for you to look at.</h2>
         <p className='question-label'>Remember that we can’t guarantee eligibility, but can only recommend programs for you to consider.</p>
         <p className='question-label'>Screener ID: {screenerId}</p>
-        {results && displayProgramCards(results)}
+        { displayProgramCards(results) }
       </div>
     </main>
   );
