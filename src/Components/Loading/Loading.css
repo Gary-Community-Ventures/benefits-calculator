@@ -1,0 +1,19 @@
+.loading-container {
+  text-align: center;
+}
+
+.loading-image {
+  height: 10%;
+  width: 10%;
+  animation: rotate-s-loader 1s linear infinite;
+  margin: 6rem auto;
+}
+
+@keyframes rotate-s-loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
