@@ -7,10 +7,12 @@ import {
   postHouseholdMemberExpense,
   getEligibility
 } from "../../apiCalls";
+import Loading from '../Loading/Loading';
 
 const Results = ({ formData }) => {
   const [results, setResults] = useState([]);
   const [screenerId, setScreenerId] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchResults();
@@ -37,6 +39,7 @@ const Results = ({ formData }) => {
     const eligibilityResponse = await getEligibility(screensResponse.id);
     setResults(eligibilityResponse);
     setScreenerId(screensResponse.id);
+    setIsLoading(false);
   }
 
   const getScreensBody = (formData) => {
@@ -159,12 +162,16 @@ const Results = ({ formData }) => {
   return (
     <main className='benefits-form'>
       <div className='results-container'>
-        <p className='question-label underline-id'>Screener ID: {screenerId}</p>
-        <h2 className='sub-header'> {results.length} programs for you to look at</h2>
-        <p className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
-          but based on the information you provided, we believe you are likely eligible for the programs below:
-        </p>
-        { displayProgramCards(results) }
+        { isLoading ? <Loading /> : 
+          <>
+            <p className='question-label underline-id'>Screener ID: {screenerId}</p>
+            <h2 className='sub-header'> {results.length} programs for you to look at</h2>
+            <p className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
+              but based on the information you provided, we believe you are likely eligible for the programs below:
+            </p>
+            { displayProgramCards(results) }
+          </>
+        }
       </div>
     </main>
   );

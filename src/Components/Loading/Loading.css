@@ -1,0 +1,25 @@
+.loading-container {
+  text-align: center;
+  font-size: 22px;
+}
+
+.loading-image {
+  height: 150px;
+  width: 150px;
+  animation: rotate-s-loader 1s linear infinite;
+}
+
+@keyframes rotate-s-loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
