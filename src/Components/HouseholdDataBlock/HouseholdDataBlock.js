@@ -18,7 +18,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   let initialHouseholdData = [];
 
-  if (formData.householdData.length > 1) {
+  if (formData.householdData.length >= 1) {
     initialHouseholdData = formData.householdData;
   } else {
     for (let i = 1; i < householdSizeNumber; i++) { 
