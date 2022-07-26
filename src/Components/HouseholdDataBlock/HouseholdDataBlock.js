@@ -121,7 +121,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <Textfield 
         componentDetails={componentInputProps}
-        formData={householdData[index]}
+        formData={state.householdData[index]}
         handleTextfieldChange={handleTextfieldChange} 
         index={index} />
     );
