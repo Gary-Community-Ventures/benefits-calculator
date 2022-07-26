@@ -118,6 +118,14 @@ const householdMemberAgeHasError = (applicantAge) => {
   const numberApplicantAge = Number(applicantAge);
   return numberApplicantAge < 0;
 }
+
+const displayHouseholdMemberAgeHelperText = (applicantAge) => {
+  const numberApplicantAge = Number(applicantAge);
+  
+  if (numberApplicantAge < 0) {
+    return 'Please enter 0 or a positive number';
+  };
+}
 export {
   ageHasError,
   displayAgeHelperText,
