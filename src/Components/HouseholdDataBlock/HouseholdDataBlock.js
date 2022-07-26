@@ -241,7 +241,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     const radiofieldProps = {
       ariaLabel: 'is a full-time student',
       inputName: 'studentFulltime',
-      value: householdData[index].studentFulltime
+      value: state.householdData[index].studentFulltime
     };
 
     return (
@@ -249,8 +249,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         <p className='question-label radio-question'>Are they a full-time student?</p>
         <HHDataRadiofield 
           componentDetails={radiofieldProps}
-          householdData={householdData}
-          setHouseholdData={setHouseholdData}
+          setState={setState}
+          state={state}
           index={index} />
       </>
     );
