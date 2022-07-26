@@ -211,8 +211,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       <DropdownMenu 
         dropdownComponentProps={createDropdownCompProps()}
         options={relationshipOptions}
-        householdData={householdData}
-        setHouseholdData={setHouseholdData}
+        setState={setState}
+        state={state}
         index={index} />
     ); 
   }
