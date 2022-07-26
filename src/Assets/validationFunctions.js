@@ -114,6 +114,10 @@ const housingSourcesAreValid = (selectedHousing) => {
   }
 }
 
+const householdMemberAgeHasError = (applicantAge) => {
+  const numberApplicantAge = Number(applicantAge);
+  return numberApplicantAge < 0;
+}
 export {
   ageHasError,
   displayAgeHelperText,

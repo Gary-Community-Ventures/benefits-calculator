@@ -46,7 +46,11 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     }
   }
   
-  const [householdData, setHouseholdData] = useState(initialHouseholdData);
+  const [state, setState] = useState({
+    householdData: initialHouseholdData,
+    wasSubmitted: false,
+    error: ''
+  });
 
   const useEffectDependencies = [];
   householdData.forEach((personData) => {
