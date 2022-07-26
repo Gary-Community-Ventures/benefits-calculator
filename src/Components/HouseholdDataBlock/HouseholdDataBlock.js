@@ -8,7 +8,6 @@ import PersonExpenseBlock from '../ExpenseBlock/PersonExpenseBlock';
 import HouseholdDataContinueButton from '../ContinueButton/HouseholdDataContinueButton';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
-import { ageHasError, displayAgeHelperText } from '../../Assets/validationFunctions';
 import HouseholdDataPreviousButton from '../PreviousButton/HouseholdDataPreviousButton';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { householdMemberAgeHasError, displayHouseholdMemberAgeHelperText } from '../../Assets/validationFunctions';
@@ -173,6 +172,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
           { createExpenseRadioQuestion(index) }
           <p className='household-data-q-underline'></p>
           { personData.hasExpenses && createPersonExpenseBlock(index) }
+          { state.error && <ErrorMessage error={state.error} /> }
           <div className='question-buttons'>
             <HouseholdDataPreviousButton 
               page={page}
