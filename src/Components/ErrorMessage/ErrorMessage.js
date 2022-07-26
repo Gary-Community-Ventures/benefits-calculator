@@ -1,13 +1,12 @@
-import { Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
-
-const StyledTypography = styled(Typography)`
-  color: #c6252b;
-  height: 24px;
-`;
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 const ErrorMessage = ({ error }) => {
-  return <StyledTypography gutterBottom>*{error}</StyledTypography>;
+  return (
+    <Stack sx={{ width: '100%', marginBottom: '1.1rem' }} spacing={2}>
+      <Alert severity="error" >{error}</Alert> 
+    </Stack>
+  );
 }
 
 export default ErrorMessage;
