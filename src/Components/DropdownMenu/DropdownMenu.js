@@ -6,11 +6,11 @@ const StyledSelectfield = styled(Select)({
   minWidth: 200
 });
 
-const DropdownMenu = ({ dropdownComponentProps, options, householdData, setHouseholdData, index }) => {
+const DropdownMenu = ({ dropdownComponentProps, options, setState, state, index }) => {
   const { labelId, inputLabelText, id, label, disabledSelectMenuItemText } = dropdownComponentProps;
 
   const handleSelectChange = (event) => {
-    const updatedHouseholdData = householdData.map((personData, i) => {
+    const updatedHouseholdData = state.householdData.map((personData, i) => {
       if (i === index) {
         return {
           ...personData,
@@ -21,7 +21,7 @@ const DropdownMenu = ({ dropdownComponentProps, options, householdData, setHouse
       }
     });
 
-    setHouseholdData(updatedHouseholdData);
+    setState({...state, householdData: updatedHouseholdData});
   }
 
   const createMenuItems = (options) => {
@@ -44,7 +44,7 @@ const DropdownMenu = ({ dropdownComponentProps, options, householdData, setHouse
       <StyledSelectfield
         labelId={labelId}
         id={id}
-        value={householdData[index].relationshipToHH}
+        value={state.householdData[index].relationshipToHH}
         label={label}
         onChange={(event) => { handleSelectChange(event) }}>
         {createMenuItems(options)}
