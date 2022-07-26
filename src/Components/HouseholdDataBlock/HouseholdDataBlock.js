@@ -279,7 +279,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     const radiofieldProps = {
       ariaLabel: 'has an income',
       inputName: 'hasIncome',
-      value: householdData[index].hasIncome
+      value: state.householdData[index].hasIncome
     };
 
     return (
@@ -288,8 +288,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         <p className='question-description'>This includes money from jobs, alimony, investments, or gifts.</p>
         <HHDataRadiofield 
           componentDetails={radiofieldProps}
-          householdData={householdData}
-          setHouseholdData={setHouseholdData}
+          setState={setState}
+          state={state}
           index={index} />
       </>
     );
