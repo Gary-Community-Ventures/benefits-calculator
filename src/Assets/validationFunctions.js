@@ -126,6 +126,42 @@ const displayHouseholdMemberAgeHelperText = (applicantAge) => {
     return 'Please enter 0 or a positive number';
   };
 }
+
+const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) => {
+  const allValidatedMemberData = householdDataState.householdData.every(personData => {
+    const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired, 
+      disabled, veteran, medicaid, disabilityRelatedMedicaid, noneOfTheseApply, hasIncome,
+      incomeStreams, hasExpenses, expenses 
+    } = personData;
+
+    if (Number(age) <= 0) {
+      //what if they have a newborn? What age should be entered for them?
+      setHouseholdDataState({...householdDataState, error: 'Please enter an age greater than 0'});
+      return false;
+    } else if (relationshipToHH === '') {
+      setHouseholdDataState({...householdDataState, error: 'Please select a relation option'});
+      return false;
+    } else if (noneOfTheseApply && student || noneOfTheseApply && pregnant || 
+      noneOfTheseApply && unemployed || noneOfTheseApply && blindOrVisuallyImpaired ||
+      noneOfTheseApply && disabled || noneOfTheseApply && veteran || noneOfTheseApply && medicaid ||
+      noneOfTheseApply && disabilityRelatedMedicaid) {
+      setHouseholdDataState({...householdDataState, error: 'Please deselect all other options if none of these conditions apply'})
+      return false;
+    } else if (hasIncome && incomeStreamsAreValid(incomeStreams) === false) {
+      setHouseholdDataState({...householdDataState, error: 'Please select and enter a response for all three income fields'});
+      return false;
+    } else if (hasExpenses && expenseSourcesAreValid(expenses) === false) {
+      setHouseholdDataState({...householdDataState, error: 'Please select and enter a response for all three expense fields'});
+      return false;
+    } else {
+      return true;
+    }
+
+  });
+
+  return allValidatedMemberData;
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
