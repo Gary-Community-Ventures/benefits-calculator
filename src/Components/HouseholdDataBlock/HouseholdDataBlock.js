@@ -132,7 +132,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
 
     if (numberUpToEightDigitsLongRegex.test(value)) {
-      const updatedHouseholdData = householdData.map((personData, i) => {
+      const updatedHouseholdData = state.householdData.map((personData, i) => {
         if (i === index) {
           return {
             ...personData,
@@ -143,7 +143,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         }
       });
 
-      setHouseholdData(updatedHouseholdData);
+      setState({...state, householdData: updatedHouseholdData});
     }
   }
 
