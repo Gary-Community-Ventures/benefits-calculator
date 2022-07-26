@@ -332,9 +332,9 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <>
         <PersonExpenseBlock 
-          personData={householdData[index]} 
-          householdData={householdData}
-          setHouseholdData={setHouseholdData} 
+          personData={state.householdData[index]} 
+          setState={setState}
+          state={state}
           personDataIndex={index} />
         <p className='household-data-q-underline'></p>
       </>
