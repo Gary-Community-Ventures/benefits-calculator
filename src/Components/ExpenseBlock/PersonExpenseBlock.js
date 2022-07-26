@@ -23,7 +23,7 @@ const StyledTypography = styled(Typography)`
   height: 24px;
 `;
 
-const PersonExpenseBlock = ({ personData, householdData, setHouseholdData, personDataIndex }) => {
+const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) => {
   const [selectedMenuItem, setSelectedMenuItem] = useState(personData.expenses.length > 0 ? personData.expenses :
   [
     {
@@ -37,7 +37,7 @@ const PersonExpenseBlock = ({ personData, householdData, setHouseholdData, perso
   useEffect(() => {
     let updatedSelectedMenuItem = [ ...selectedMenuItem ];
     if (expenseSourcesAreValid(updatedSelectedMenuItem)) {
-      const updatedHouseholdData = householdData.map((personData, i) => {
+      const updatedHouseholdData = state.householdData.map((personData, i) => {
         if (i === personDataIndex) {
           return {
             ...personData,
@@ -48,7 +48,7 @@ const PersonExpenseBlock = ({ personData, householdData, setHouseholdData, perso
         }
       });
 
-      setHouseholdData(updatedHouseholdData);
+      setState({...state, householdData: updatedHouseholdData});
     }
   }, [selectedMenuItem]);
 
@@ -170,7 +170,7 @@ const PersonExpenseBlock = ({ personData, householdData, setHouseholdData, perso
     const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex );
     setSelectedMenuItem(updatedSelectedMenuItems);  
 
-    const updatedHouseholdData = householdData.map((personData, i) => {
+    const updatedHouseholdData = state.householdData.map((personData, i) => {
       if (i === personDataIndex) {
         return {
           ...personData,
@@ -181,7 +181,7 @@ const PersonExpenseBlock = ({ personData, householdData, setHouseholdData, perso
       }
     });
 
-    setHouseholdData(updatedHouseholdData);
+    setState({...state, householdData: updatedHouseholdData});
   }
 
   const handleAddAdditionalExpenseSource = (event) => {
