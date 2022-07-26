@@ -221,8 +221,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <CheckboxGroup
         options={conditionOptions}
-        householdData={householdData}
-        setHouseholdData={setHouseholdData} 
+        state={state}
+        setState={setState}
         index={index}/>
     );
   }
