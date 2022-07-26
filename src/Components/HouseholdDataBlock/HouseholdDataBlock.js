@@ -183,7 +183,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
               setPage={setPage} 
               householdSizeNumber={householdSizeNumber} 
               handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-              householdData={householdData}
+              setState={setState}
+              state={state}
             />
           </div>
         </div>
