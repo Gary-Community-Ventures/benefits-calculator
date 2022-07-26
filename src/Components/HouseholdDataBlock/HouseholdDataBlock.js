@@ -60,7 +60,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   });
   
   useEffect(() => {
-    let updatedHouseholdData = [ ...householdData ];
+    let updatedHouseholdData = [ ...state.householdData ];
 
     updatedHouseholdData = updatedHouseholdData.map((personData) => {
       if (personData.student === false) {
@@ -95,7 +95,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       return personData;
     });
 
-    setHouseholdData(updatedHouseholdData);
+    setState({...state, householdData: updatedHouseholdData})
   }, useEffectDependencies);
 
   const createAgeQuestion = (personIndex) => {
