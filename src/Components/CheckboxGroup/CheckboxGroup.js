@@ -1,22 +1,22 @@
 import { FormControlLabel, FormGroup, Checkbox, FormControl } from "@mui/material";
 
-const CheckboxGroup = ({ options, householdData, setHouseholdData, index }) => {
+const CheckboxGroup = ({ options, state, setState, index }) => {
  
   const handleCheckboxChange = (event) => {
     const { name } = event.target;
 
-    const updatedHouseholdData = householdData.map((personData, i) => {
+    const updatedHouseholdData = state.householdData.map((personData, i) => {
       if (i === index) {
         return {
           ...personData,
-          [name]: !(householdData[index][name])
+          [name]: !(state.householdData[index][name])
         };
       } else {
         return personData;
       }
     });
 
-    setHouseholdData(updatedHouseholdData);
+    setState({ ...state, householdData: updatedHouseholdData });
   }
 
   const createFormControlLabels = (optionList) => {
@@ -27,7 +27,7 @@ const CheckboxGroup = ({ options, householdData, setHouseholdData, index }) => {
         <FormControlLabel 
           control={
             <Checkbox 
-              checked={householdData[index][optionKey]} 
+              checked={state.householdData[index][optionKey]} 
               onChange={handleCheckboxChange}
               name={optionKey} />
           } 
