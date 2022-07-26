@@ -102,10 +102,10 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     const ageTextfieldProps = {
       inputType: 'text',
       inputName: 'age', 
-      inputValue: householdData[personIndex].age,
+      inputValue: state.householdData[personIndex].age,
       inputLabel: `Person ${personIndex + 1} Age`,
-      inputError: ageHasError,
-      inputHelperText: displayAgeHelperText
+      inputError: householdMemberAgeHasError,
+      inputHelperText: displayHouseholdMemberAgeHelperText
     }
 
     return (
