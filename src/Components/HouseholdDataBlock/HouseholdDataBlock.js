@@ -158,7 +158,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   }
 
   const createPersonDataBlocks = () => {
-    const personDataBlocks = householdData.map((personData, index) => {
+    const personDataBlocks = state.householdData.map((personData, index) => {
       return (
         <div key={index}>
           { createAgeQuestion(index) }
