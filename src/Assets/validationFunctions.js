@@ -178,5 +178,8 @@ export {
   displayHouseholdSizeHelperText,
   householdAssetsHasError,
   displayHouseholdAssetsHelperText,
-  housingSourcesAreValid
+  housingSourcesAreValid,
+  householdMemberAgeHasError,
+  displayHouseholdMemberAgeHelperText,
+  householdMemberDataIsValid
 }
