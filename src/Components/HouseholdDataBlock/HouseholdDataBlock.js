@@ -10,6 +10,8 @@ import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
 import { ageHasError, displayAgeHelperText } from '../../Assets/validationFunctions';
 import HouseholdDataPreviousButton from '../PreviousButton/HouseholdDataPreviousButton';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { householdMemberAgeHasError, displayHouseholdMemberAgeHelperText } from '../../Assets/validationFunctions';
 
 const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const { householdSize } = formData; //# of blocks - 1 that will need to be created for each household member
