@@ -174,7 +174,7 @@ const Results = ({ formData }) => {
         { isLoading ? <Loading /> : 
           <>
             <p className='question-label underline-id'>Screener ID: {screenerId}</p>
-            <h2 className='sub-header'> {results.length} programs for you to look at</h2>
+            <h2 className='sub-header'> {results.length} programs, up to ${totalDollarAmount()} per year for you to look at</h2>
             <p className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
               but based on the information you provided, we believe you are likely eligible for the programs below:
             </p>
