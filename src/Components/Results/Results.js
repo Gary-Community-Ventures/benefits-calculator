@@ -113,6 +113,15 @@ const Results = ({ formData }) => {
     });
   }
 
+  const totalDollarAmount = () => {
+    const total = results.reduce((total, program) => {
+      total += program.estimated_value;
+      return total;
+    }, 0);
+    
+    return total.toLocaleString();
+  }
+
   const displayProgramCards = (results) => {
     if (results.length) {
       const programCards = Object.keys(results).map(result => {
