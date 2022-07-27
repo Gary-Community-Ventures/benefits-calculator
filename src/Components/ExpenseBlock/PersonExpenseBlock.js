@@ -243,12 +243,6 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
       setSelectedMenuItem(updatedSelectedMenuItems);
     }
   }
-
-  const expenseBlockIsMissingAnInput = () => {
-    return selectedMenuItem[0].expenseSourceName === '' || 
-      selectedMenuItem[0].expenseAmount === 0 || 
-      selectedMenuItem[0].expenseFrequency === '';
-  }
   
   return (
     <>
