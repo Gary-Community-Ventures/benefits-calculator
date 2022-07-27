@@ -246,12 +246,6 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
     ]);
   }
 
-  const incomeBlockIsMissingAnInput = () => {
-    return selectedMenuItem[0].incomeStreamName === '' || 
-      selectedMenuItem[0].incomeAmount === 0 || 
-      selectedMenuItem[0].incomeFrequency === '';
-  }
-
   return (
     <>
       <p className='question-label radio-question'>What type of income have they had most recently?</p>
