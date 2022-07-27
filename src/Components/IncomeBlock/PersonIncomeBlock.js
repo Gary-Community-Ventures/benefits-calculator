@@ -259,8 +259,6 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
         The more you include, the more accurate your results will be.
       </p>
       {createIncomeBlockQuestions()}
-      { incomeBlockIsMissingAnInput() && 
-        <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalIncomeSource(event)} >
