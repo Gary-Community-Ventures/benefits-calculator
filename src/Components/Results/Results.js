@@ -113,6 +113,15 @@ const Results = ({ formData }) => {
     });
   }
 
+  const totalDollarAmount = () => {
+    const total = results.reduce((total, program) => {
+      total += program.estimated_value;
+      return total;
+    }, 0);
+    
+    return total.toLocaleString();
+  }
+
   const displayProgramCards = (results) => {
     if (results.length) {
       const programCards = Object.keys(results).map(result => {
@@ -128,7 +137,7 @@ const Results = ({ formData }) => {
                 {results[result].name}
               </Typography>
               <Typography variant='body1' gutterBottom>
-                <b>Estimated value:</b> Up to {'$' + results[result].estimated_value} per year. 
+                <b>Estimated value:</b> Up to {'$' + results[result].estimated_value.toLocaleString()} per year. 
                 Including application and approval, the average time to acquire this benefit is {results[result].estimated_delivery_time}.
               </Typography>
               <Typography variant='body1' gutterBottom>
@@ -165,7 +174,7 @@ const Results = ({ formData }) => {
         { isLoading ? <Loading /> : 
           <>
             <p className='question-label underline-id'>Screener ID: {screenerId}</p>
-            <h2 className='sub-header'> {results.length} programs for you to look at</h2>
+            <h2 className='sub-header'> {results.length} programs, up to ${totalDollarAmount()} per year for you to look at</h2>
             <p className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
               but based on the information you provided, we believe you are likely eligible for the programs below:
             </p>
