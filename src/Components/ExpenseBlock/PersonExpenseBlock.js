@@ -257,8 +257,6 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
         The more you include, the more accurate your results will be.
       </p>
       {createExpenseBlockQuestions()}
-      { expenseBlockIsMissingAnInput() && 
-        <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalExpenseSource(event)} >
