@@ -86,6 +86,9 @@ const questions = [
   {
     id: 7,
     question: 'Are you blind or visually impaired?',
+    questionDescription: '"Visually impaired" means a total lack of vision in your better eye, ' +
+      'vision of or below 20/200 in your better eye even with eyeglasses or other corrections, or tunnel ' + 
+      'vision that significantly limits your field of vision.',
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'is blind or visually impaired',
