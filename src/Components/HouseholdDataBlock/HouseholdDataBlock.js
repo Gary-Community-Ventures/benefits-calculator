@@ -8,8 +8,9 @@ import PersonExpenseBlock from '../ExpenseBlock/PersonExpenseBlock';
 import HouseholdDataContinueButton from '../ContinueButton/HouseholdDataContinueButton';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
-import { ageHasError, displayAgeHelperText } from '../../Assets/validationFunctions';
 import HouseholdDataPreviousButton from '../PreviousButton/HouseholdDataPreviousButton';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { householdMemberAgeHasError, displayHouseholdMemberAgeHelperText } from '../../Assets/validationFunctions';
 
 const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const { householdSize } = formData; //# of blocks - 1 that will need to be created for each household member
@@ -46,15 +47,19 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     }
   }
   
-  const [householdData, setHouseholdData] = useState(initialHouseholdData);
+  const [state, setState] = useState({
+    householdData: initialHouseholdData,
+    wasSubmitted: false,
+    error: ''
+  });
 
   const useEffectDependencies = [];
-  householdData.forEach((personData) => {
+  state.householdData.forEach((personData) => {
     useEffectDependencies.push(...[personData.student, personData.unemployed, personData.hasIncome, personData.hasExpenses]);
   });
   
   useEffect(() => {
-    let updatedHouseholdData = [ ...householdData ];
+    let updatedHouseholdData = [ ...state.householdData ];
 
     updatedHouseholdData = updatedHouseholdData.map((personData) => {
       if (personData.student === false) {
@@ -89,17 +94,17 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       return personData;
     });
 
-    setHouseholdData(updatedHouseholdData);
+    setState({...state, householdData: updatedHouseholdData})
   }, useEffectDependencies);
 
   const createAgeQuestion = (personIndex) => {
     const ageTextfieldProps = {
       inputType: 'text',
       inputName: 'age', 
-      inputValue: householdData[personIndex].age,
+      inputValue: state.householdData[personIndex].age,
       inputLabel: `Person ${personIndex + 1} Age`,
-      inputError: ageHasError,
-      inputHelperText: displayAgeHelperText
+      inputError: householdMemberAgeHasError,
+      inputHelperText: displayHouseholdMemberAgeHelperText
     }
 
     return (
@@ -115,7 +120,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <Textfield 
         componentDetails={componentInputProps}
-        formData={householdData[index]}
+        formData={state.householdData[index]}
         handleTextfieldChange={handleTextfieldChange} 
         index={index} />
     );
@@ -126,7 +131,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
 
     if (numberUpToEightDigitsLongRegex.test(value)) {
-      const updatedHouseholdData = householdData.map((personData, i) => {
+      const updatedHouseholdData = state.householdData.map((personData, i) => {
         if (i === index) {
           return {
             ...personData,
@@ -137,7 +142,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         }
       });
 
-      setHouseholdData(updatedHouseholdData);
+      setState({...state, householdData: updatedHouseholdData});
     }
   }
 
@@ -152,7 +157,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   }
 
   const createPersonDataBlocks = () => {
-    const personDataBlocks = householdData.map((personData, index) => {
+    const personDataBlocks = state.householdData.map((personData, index) => {
       return (
         <div key={index}>
           { createAgeQuestion(index) }
@@ -167,6 +172,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
           { createExpenseRadioQuestion(index) }
           <p className='household-data-q-underline'></p>
           { personData.hasExpenses && createPersonExpenseBlock(index) }
+          { state.error && <ErrorMessage error={state.error} /> }
           <div className='question-buttons'>
             <HouseholdDataPreviousButton 
               page={page}
@@ -177,7 +183,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
               setPage={setPage} 
               householdSizeNumber={householdSizeNumber} 
               handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-              householdData={householdData}
+              setState={setState}
+              state={state}
             />
           </div>
         </div>
@@ -204,8 +211,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       <DropdownMenu 
         dropdownComponentProps={createDropdownCompProps()}
         options={relationshipOptions}
-        householdData={householdData}
-        setHouseholdData={setHouseholdData}
+        setState={setState}
+        state={state}
         index={index} />
     ); 
   }
@@ -214,8 +221,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <CheckboxGroup
         options={conditionOptions}
-        householdData={householdData}
-        setHouseholdData={setHouseholdData} 
+        state={state}
+        setState={setState}
         index={index}/>
     );
   }
@@ -234,7 +241,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     const radiofieldProps = {
       ariaLabel: 'is a full-time student',
       inputName: 'studentFulltime',
-      value: householdData[index].studentFulltime
+      value: state.householdData[index].studentFulltime
     };
 
     return (
@@ -242,8 +249,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         <p className='question-label radio-question'>Are they a full-time student?</p>
         <HHDataRadiofield 
           componentDetails={radiofieldProps}
-          householdData={householdData}
-          setHouseholdData={setHouseholdData}
+          setState={setState}
+          state={state}
           index={index} />
       </>
     );
@@ -253,7 +260,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     const radiofieldProps = {
       ariaLabel: 'has worked in the past 18 months',
       inputName: 'unemployedWorkedInLast18Mos',
-      value: householdData[index].unemployedWorkedInLast18Mos
+      value: state.householdData[index].unemployedWorkedInLast18Mos
     };
 
     return (
@@ -261,8 +268,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         <p className='question-label radio-question'>Did they work in the last 18 months?</p>
         <HHDataRadiofield 
           componentDetails={radiofieldProps}
-          householdData={householdData}
-          setHouseholdData={setHouseholdData}
+          setState={setState}
+          state={state}
           index={index} />
       </>
     );
@@ -272,7 +279,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     const radiofieldProps = {
       ariaLabel: 'has an income',
       inputName: 'hasIncome',
-      value: householdData[index].hasIncome
+      value: state.householdData[index].hasIncome
     };
 
     return (
@@ -281,8 +288,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         <p className='question-description'>This includes money from jobs, alimony, investments, or gifts.</p>
         <HHDataRadiofield 
           componentDetails={radiofieldProps}
-          householdData={householdData}
-          setHouseholdData={setHouseholdData}
+          setState={setState}
+          state={state}
           index={index} />
       </>
     );
@@ -292,9 +299,9 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return ( 
       <>
         <PersonIncomeBlock 
-          personData={householdData[index]} 
-          householdData={householdData}
-          setHouseholdData={setHouseholdData} 
+          personData={state.householdData[index]} 
+          setState={setState}
+          state={state}
           personDataIndex={index} />
         <p className='household-data-q-underline'></p>
       </>
@@ -305,7 +312,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     const radiofieldProps = {
       ariaLabel: 'has expenses',
       inputName: 'hasExpenses',
-      value: householdData[index].hasExpenses
+      value: state.householdData[index].hasExpenses
     };
 
     return (
@@ -314,8 +321,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         <p className='question-description'>This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.</p>
         <HHDataRadiofield 
           componentDetails={radiofieldProps}
-          householdData={householdData}
-          setHouseholdData={setHouseholdData}
+          setState={setState}
+          state={state}
           index={index} />
       </>
     );
@@ -325,9 +332,9 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <>
         <PersonExpenseBlock 
-          personData={householdData[index]} 
-          householdData={householdData}
-          setHouseholdData={setHouseholdData} 
+          personData={state.householdData[index]} 
+          setState={setState}
+          state={state}
           personDataIndex={index} />
         <p className='household-data-q-underline'></p>
       </>

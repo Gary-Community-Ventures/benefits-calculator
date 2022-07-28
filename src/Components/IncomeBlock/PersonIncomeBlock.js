@@ -23,7 +23,7 @@ const StyledTypography = styled(Typography)`
   height: 24px;
 `;
 
-const PersonIncomeBlock = ({ personData, householdData, setHouseholdData, personDataIndex }) => {
+const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those 
   //first by assigning them to the initial selectedMenuItem state
   //if not then create the initial income block questions
@@ -40,7 +40,7 @@ const PersonIncomeBlock = ({ personData, householdData, setHouseholdData, person
   useEffect(() => {
     let updatedSelectedMenuItem = [ ...selectedMenuItem ];
     if (incomeStreamsAreValid(updatedSelectedMenuItem)) {
-      const updatedHouseholdData = householdData.map((personData, i) => {
+      const updatedHouseholdData = state.householdData.map((personData, i) => {
         if (i === personDataIndex) {
           return {
             ...personData,
@@ -51,7 +51,7 @@ const PersonIncomeBlock = ({ personData, householdData, setHouseholdData, person
         }
       });
 
-      setHouseholdData(updatedHouseholdData);
+      setState({...state, householdData: updatedHouseholdData});
     }
   }, [selectedMenuItem]);
 
@@ -219,7 +219,7 @@ const PersonIncomeBlock = ({ personData, householdData, setHouseholdData, person
     const updatedSelectedMenuItems = selectedMenuItem.filter((incomeSourceData, index) => index !== selectedIndex );
     setSelectedMenuItem(updatedSelectedMenuItems);  
 
-    const updatedHouseholdData = householdData.map((personData, i) => {
+    const updatedHouseholdData = state.householdData.map((personData, i) => {
       if (i === personDataIndex) {
         return {
           ...personData,
@@ -230,7 +230,7 @@ const PersonIncomeBlock = ({ personData, householdData, setHouseholdData, person
       }
     });
 
-    setHouseholdData(updatedHouseholdData);
+    setState({...state, householdData: updatedHouseholdData});
   }
   
   const handleAddAdditionalIncomeSource = (event) => {
@@ -246,12 +246,6 @@ const PersonIncomeBlock = ({ personData, householdData, setHouseholdData, person
     ]);
   }
 
-  const incomeBlockIsMissingAnInput = () => {
-    return selectedMenuItem[0].incomeStreamName === '' || 
-      selectedMenuItem[0].incomeAmount === 0 || 
-      selectedMenuItem[0].incomeFrequency === '';
-  }
-
   return (
     <>
       <p className='question-label radio-question'>What type of income have they had most recently?</p>
@@ -259,8 +253,6 @@ const PersonIncomeBlock = ({ personData, householdData, setHouseholdData, person
         The more you include, the more accurate your results will be.
       </p>
       {createIncomeBlockQuestions()}
-      { incomeBlockIsMissingAnInput() && 
-        <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalIncomeSource(event)} >
