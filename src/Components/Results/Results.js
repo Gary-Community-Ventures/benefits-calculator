@@ -40,9 +40,17 @@ const Results = ({ formData }) => {
     }
 
     const eligibilityResponse = await getEligibility(screensResponse.id);
-    setResults(eligibilityResponse);
-    setScreenerId(screensResponse.id);
-    setIsLoading(false);
+
+    const qualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === true)
+      .sort((benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value);
+    const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
+
+    setResults({ 
+      eligiblePrograms: qualifiedPrograms, 
+      ineligiblePrograms: unqualifiedPrograms, 
+      screenerId: screensResponse.id, 
+      isLoading: false 
+    });
   }
 
   const getScreensBody = (formData) => {
