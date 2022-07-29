@@ -10,9 +10,12 @@ import {
 import Loading from '../Loading/Loading';
 
 const Results = ({ formData }) => {
-  const [results, setResults] = useState([]);
-  const [screenerId, setScreenerId] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [results, setResults] = useState({
+    eligiblePrograms: [], 
+    ineligiblePrograms: [],
+    screenerId: 0,
+    isLoading: true 
+  });
 
   useEffect(() => {
     fetchResults();
@@ -37,9 +40,17 @@ const Results = ({ formData }) => {
     }
 
     const eligibilityResponse = await getEligibility(screensResponse.id);
-    setResults(eligibilityResponse);
-    setScreenerId(screensResponse.id);
-    setIsLoading(false);
+
+    const qualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === true)
+      .sort((benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value);
+    const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
+
+    setResults({ 
+      eligiblePrograms: qualifiedPrograms, 
+      ineligiblePrograms: unqualifiedPrograms, 
+      screenerId: screensResponse.id, 
+      isLoading: false 
+    });
   }
 
   const getScreensBody = (formData) => {
@@ -113,7 +124,7 @@ const Results = ({ formData }) => {
     });
   }
 
-  const totalDollarAmount = () => {
+  const totalDollarAmount = (results) => {
     const total = results.reduce((total, program) => {
       total += program.estimated_value;
       return total;
@@ -123,8 +134,6 @@ const Results = ({ formData }) => {
   }
 
   const displayProgramCards = (results) => {
-    results.sort((benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value);
-
     if (results.length) {
       const programCards = Object.keys(results).map(result => {
         return (
@@ -173,14 +182,14 @@ const Results = ({ formData }) => {
   return (
     <main className='benefits-form'>
       <div className='results-container'>
-        { isLoading ? <Loading /> : 
+        { results.isLoading ? <Loading /> : 
           <>
-            <p className='question-label underline-id'>Screener ID: {screenerId}</p>
-            <h2 className='sub-header'> {results.length} programs, up to ${totalDollarAmount()} per year for you to look at</h2>
+            <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
+            <h2 className='sub-header'> {results.eligiblePrograms.length} programs, up to ${totalDollarAmount(results.eligiblePrograms)} per year for you to look at</h2>
             <p className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
               but based on the information you provided, we believe you are likely eligible for the programs below:
             </p>
-            { displayProgramCards(results) }
+            { displayProgramCards(results.eligiblePrograms) }
           </>
         }
       </div>
