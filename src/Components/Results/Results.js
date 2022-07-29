@@ -182,7 +182,7 @@ const Results = ({ formData }) => {
   return (
     <main className='benefits-form'>
       <div className='results-container'>
-        { isLoading ? <Loading /> : 
+        { results.isLoading ? <Loading /> : 
           <>
             <p className='question-label underline-id'>Screener ID: {screenerId}</p>
             <h2 className='sub-header'> {results.length} programs, up to ${totalDollarAmount()} per year for you to look at</h2>
