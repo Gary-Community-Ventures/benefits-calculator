@@ -189,7 +189,7 @@ const Results = ({ formData }) => {
             <p className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
               but based on the information you provided, we believe you are likely eligible for the programs below:
             </p>
-            { displayProgramCards(results) }
+            { displayProgramCards(results.eligiblePrograms) }
           </>
         }
       </div>
