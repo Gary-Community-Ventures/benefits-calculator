@@ -124,7 +124,7 @@ const Results = ({ formData }) => {
     });
   }
 
-  const totalDollarAmount = () => {
+  const totalDollarAmount = (results) => {
     const total = results.reduce((total, program) => {
       total += program.estimated_value;
       return total;
