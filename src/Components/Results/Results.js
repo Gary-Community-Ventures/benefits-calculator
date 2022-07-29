@@ -134,8 +134,6 @@ const Results = ({ formData }) => {
   }
 
   const displayProgramCards = (results) => {
-    results.sort((benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value);
-
     if (results.length) {
       const programCards = Object.keys(results).map(result => {
         return (
