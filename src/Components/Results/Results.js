@@ -210,6 +210,22 @@ const Results = ({ formData, continueButton, programSubset, passedOrFailedTests 
     }
   }
 
+  const displaySubheader = (benefitsSubset) => {
+    if (benefitsSubset === 'eligiblePrograms') {
+      return (
+        <p className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
+          but based on the information you provided, we believe you are likely eligible for the programs below:
+        </p>
+      );
+    } else if (benefitsSubset === 'ineligiblePrograms') {
+      return (
+        <p className='remember-disclaimer-label'>Based on the information you provided, we believe 
+          you are likely <b>not eligible</b> for the programs below:
+        </p>
+      );
+    }
+  }
+
   return (
     <main className='benefits-form'>
       <div className='results-container'>
