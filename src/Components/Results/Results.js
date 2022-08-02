@@ -146,33 +146,35 @@ const Results = ({ formData }) => {
       );
     }
   }
+
+  const displayProgramCards = (results, passOrFailTests) => {
     if (results.length) {
-      const programCards = Object.keys(results).map(result => {
+      const programCards = results.map(result => {
         return (
-          <Card variant='outlined' key={results[result].name}>
+          <Card variant='outlined' key={result.name} sx={{marginBottom: 2}}> 
             <CardContent>    
               <Typography variant='h6'>
-                {results[result].description_short}
+                {result.description_short}
               </Typography>
               <Typography 
                 color='text.secondary' 
                 gutterBottom >
-                {results[result].name}
+                {result.name}
               </Typography>
               <Typography variant='body1' gutterBottom>
-                <b>Estimated value:</b> Up to {'$' + results[result].estimated_value.toLocaleString()} per year. 
-                Including application and approval, the average time to acquire this benefit is {results[result].estimated_delivery_time}.
+                <b>Estimated value:</b> Up to {'$' + result.estimated_value.toLocaleString()} per year. 
+                Including application and approval, the average time to acquire this benefit is {result.estimated_delivery_time}.
               </Typography>
               <Typography variant='body1' gutterBottom>
-                {results[result].description}
+                {result.description}
               </Typography>
-              <Link href={results[result].learn_more_link}>
+              <Link href={result.learn_more_link}>
                 Learn more
               </Link>
               <CardActions>
                 <Button
                   variant='contained'
-                  href={results[result].apply_button_link} >
+                  href={result.apply_button_link} >
                   Apply
                 </Button>
               </CardActions>
