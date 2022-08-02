@@ -232,11 +232,9 @@ const Results = ({ formData, continueButton, programSubset, passedOrFailedTests 
         { results.isLoading ? <Loading /> : 
           <>
             <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
-            <h2 className='sub-header'> {results.eligiblePrograms.length} programs, up to ${totalDollarAmount(results.eligiblePrograms)} per year for you to look at</h2>
-            <p className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
-              but based on the information you provided, we believe you are likely eligible for the programs below:
-            </p>
-            { displayProgramCards(results.eligiblePrograms, 'passed_tests') }
+            <h2 className='sub-header'> {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year for you to look at</h2>
+            { displaySubheader(programSubset) }
+            { displayProgramCards(results[programSubset], passedOrFailedTests) }
             <ResultsPreviousButton />
             { continueButton && <ResultsContinueButton /> }
           </>
