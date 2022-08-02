@@ -134,7 +134,18 @@ const Results = ({ formData }) => {
     return total.toLocaleString();
   }
 
-  const displayProgramCards = (results) => {
+  const displayTestResults = (tests) => {
+    if (tests.length) {
+      return ( 
+        <>
+          { tests.map(testResult => {
+              return <li key={testResult}>{testResult}</li>
+            })
+          }
+        </>
+      );
+    }
+  }
     if (results.length) {
       const programCards = Object.keys(results).map(result => {
         return (
