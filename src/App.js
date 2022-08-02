@@ -110,6 +110,10 @@ const App = () => {
     navigate('/step-16');
   }
 
+  const handleResultsSubmit = () => {
+    navigate('/ineligible-results');
+  }
+
   return (
     <div className='App'>
       <CssBaseline />
