@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Button, Link, Card, CardContent, CardActions, Typography } from "@mui/material";
+import { Button, Link, Card, CardContent, CardActions, Typography, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
   postPartialParentScreen,
   postHouseholdMemberData,
