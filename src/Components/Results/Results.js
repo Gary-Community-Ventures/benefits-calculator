@@ -9,8 +9,9 @@ import {
   getEligibility
 } from "../../apiCalls";
 import Loading from '../Loading/Loading';
+import ResultsContinueButton from '../ContinueButton/ResultsContinueButton';
 
-const Results = ({ formData }) => {
+const Results = ({ formData, continueButton }) => {
   const [results, setResults] = useState({
     eligiblePrograms: [], 
     ineligiblePrograms: [],
@@ -219,6 +220,7 @@ const Results = ({ formData }) => {
               but based on the information you provided, we believe you are likely eligible for the programs below:
             </p>
             { displayProgramCards(results.eligiblePrograms, 'passed_tests') }
+            { continueButton && <ResultsContinueButton handleResultsSubmit={handleResultsSubmit} />}
           </>
         }
       </div>
