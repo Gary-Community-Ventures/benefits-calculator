@@ -184,12 +184,12 @@ const Results = ({ formData, continueButton, programSubset, passedOrFailedTests 
             { result[passOrFailTests].length > 0 && 
               <Accordion>
                 <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"> 
-                  <Typography variant='body1'>
-                    <b>Expand for eligibility details</b>
-                  </Typography>
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"> 
+                    <Typography variant='body1'>
+                      <b>Expand for eligibility details</b>
+                    </Typography>
                 </AccordionSummary>
                 <AccordionDetails sx={{paddingTop: 0}}>
                   { displayTestResults(result[passOrFailTests]) }
