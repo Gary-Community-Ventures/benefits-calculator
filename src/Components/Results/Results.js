@@ -203,9 +203,9 @@ const Results = ({ formData, continueButton, programSubset, passedOrFailedTests 
       return programCards;
     } else {
       return (
-        <div>
+        <Typography variant='body1' sx={{marginBottom: 2, marginTop: 2}}>
           Sorry, we were not able to find any programs for you based on the information that was provided.
-        </div>
+        </Typography>
       );
     }
   }
