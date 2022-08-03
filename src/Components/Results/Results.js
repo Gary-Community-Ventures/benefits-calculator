@@ -164,8 +164,6 @@ const Results = ({ formData, programSubset, passedOrFailedTests }) => {
               { passOrFailTests === 'passed_tests' &&
                 <Typography variant='body1' gutterBottom>
                   <b>Estimated value:</b> Up to {'$' + result.estimated_value.toLocaleString()} per year. 
-                <b>Estimated value:</b> Up to {'$' + result.estimated_value.toLocaleString()} per year. 
-                  <b>Estimated value:</b> Up to {'$' + result.estimated_value.toLocaleString()} per year. 
                   Including application and approval, the average time to acquire this benefit is {result.estimated_delivery_time}.
                 </Typography>
               }
