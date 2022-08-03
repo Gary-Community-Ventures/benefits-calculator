@@ -8,8 +8,10 @@ const ResultsPreviousButton = () => {
   const handlePreviousSubmit = () => {
     if (location.pathname === '/ineligible-results') {
       navigate('/results');
+      window.scrollTo(0, 0);
     } else if (location.pathname === '/results') {
       navigate('/confirm-information' );
+      window.scrollTo(0, 0);
     }
   }
   
