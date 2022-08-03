@@ -236,10 +236,8 @@ const Results = ({ formData, programSubset, passedOrFailedTests }) => {
             { programSubset === 'eligiblePrograms' && 
               <Link 
                 href='/ineligible-results' 
-                underline='hover' 
                 target='_blank' 
                 rel='noreferrer'
-                color='inherit'
                 sx={{fontSize: 18}}>
                 * For additional information on programs that you were not eligible for click here.
               </Link>
