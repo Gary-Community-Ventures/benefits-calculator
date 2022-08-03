@@ -142,7 +142,11 @@ const App = () => {
             formData={formData} /> } /> 
         <Route 
           path='/results' 
-          element={<Results formData={formData} /> } /> 
+          element={<Results 
+            formData={formData} 
+            continueButton={true} 
+            programSubset='eligiblePrograms' 
+            passedOrFailedTests='passed_tests' /> } /> 
         <Route
           path='*'
           element={<Navigate to="/step-1" replace /> } />
