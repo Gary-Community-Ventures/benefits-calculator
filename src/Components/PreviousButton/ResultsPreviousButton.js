@@ -10,7 +10,7 @@ const ResultsPreviousButton = () => {
       navigate('/results');
       window.scrollTo(0, 0);
     } else if (location.pathname === '/results') {
-      navigate('/confirm-information' );
+      navigate('/confirm-information');
       window.scrollTo(0, 0);
     }
   }
