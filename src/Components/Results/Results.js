@@ -9,10 +9,8 @@ import {
   getEligibility
 } from "../../apiCalls";
 import Loading from '../Loading/Loading';
-import ResultsContinueButton from '../ContinueButton/ResultsContinueButton';
-import ResultsPreviousButton from '../PreviousButton/ResultsPreviousButton';
 
-const Results = ({ formData, continueButton, programSubset, passedOrFailedTests }) => {
+const Results = ({ formData, programSubset, passedOrFailedTests }) => {
   const [results, setResults] = useState({
     eligiblePrograms: [], 
     ineligiblePrograms: [],
