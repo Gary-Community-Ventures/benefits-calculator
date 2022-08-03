@@ -6,7 +6,10 @@ const ResultsContinueButton = () => {
   return (
     <Button
       variant='contained'
-      onClick={() => navigate('/ineligible-results') }>
+      onClick={() => {
+        navigate('/ineligible-results');
+        window.scrollTo(0, 0);  
+      }}>
       Continue
     </Button>
   );
