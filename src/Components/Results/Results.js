@@ -161,10 +161,14 @@ const Results = ({ formData, programSubset, passedOrFailedTests }) => {
                 gutterBottom >
                 {result.name}
               </Typography>
-              <Typography variant='body1' gutterBottom>
+              { passOrFailTests === 'passed_tests' &&
+                <Typography variant='body1' gutterBottom>
+                  <b>Estimated value:</b> Up to {'$' + result.estimated_value.toLocaleString()} per year. 
                 <b>Estimated value:</b> Up to {'$' + result.estimated_value.toLocaleString()} per year. 
-                Including application and approval, the average time to acquire this benefit is {result.estimated_delivery_time}.
-              </Typography>
+                  <b>Estimated value:</b> Up to {'$' + result.estimated_value.toLocaleString()} per year. 
+                  Including application and approval, the average time to acquire this benefit is {result.estimated_delivery_time}.
+                </Typography>
+              }
               <Typography variant='body1' gutterBottom>
                 {result.description}
               </Typography>
