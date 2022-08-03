@@ -144,14 +144,12 @@ const App = () => {
           path='/results' 
           element={<Results 
             formData={formData} 
-            continueButton={true} 
             programSubset='eligiblePrograms' 
             passedOrFailedTests='passed_tests' /> } /> 
         <Route 
           path='/ineligible-results' 
           element={<Results 
             formData={formData} 
-            continueButton={false} 
             programSubset='ineligiblePrograms' 
             passedOrFailedTests='failed_tests' /> } /> 
         <Route
