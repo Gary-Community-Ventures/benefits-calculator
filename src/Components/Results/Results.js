@@ -230,7 +230,12 @@ const Results = ({ formData, programSubset, passedOrFailedTests }) => {
         { results.isLoading ? <Loading /> : 
           <>
             <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
-            <h2 className='sub-header'> {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year for you to look at</h2>
+            { programSubset === 'eligiblePrograms' && 
+              <h2 className='sub-header'> 
+                {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} 
+                per year for you to look at
+              </h2>
+            }
             { displaySubheader(programSubset) }
             { displayProgramCards(results[programSubset], passedOrFailedTests) }
             { programSubset === 'eligiblePrograms' && 
