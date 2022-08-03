@@ -233,8 +233,17 @@ const Results = ({ formData, programSubset, passedOrFailedTests }) => {
             <h2 className='sub-header'> {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year for you to look at</h2>
             { displaySubheader(programSubset) }
             { displayProgramCards(results[programSubset], passedOrFailedTests) }
-            <ResultsPreviousButton />
-            { continueButton && <ResultsContinueButton /> }
+            { programSubset === 'eligiblePrograms' && 
+              <Link 
+                href='/ineligible-results' 
+                underline='hover' 
+                target='_blank' 
+                rel='noreferrer'
+                color='inherit'
+                sx={{fontSize: 18}}>
+                * For additional information on programs that you were not eligible for click here.
+              </Link>
+            }
           </>
         }
       </div>
