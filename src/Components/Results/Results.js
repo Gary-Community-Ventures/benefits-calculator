@@ -11,6 +11,7 @@ import {
 } from "../../apiCalls";
 import Loading from '../Loading/Loading';
 
+const Results = ({ results, setResults, formData, programSubset, passedOrFailedTests }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
