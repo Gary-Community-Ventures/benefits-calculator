@@ -1,0 +1,12 @@
+.ineligibility-link {
+  margin: 0;
+  color: #1976d2;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  text-decoration-color: rgba(25, 118, 210, 0.4);
+  font-size: 18px;
+}
+
+.ineligibility-link:hover {
+  text-decoration-color: inherit;
+}
