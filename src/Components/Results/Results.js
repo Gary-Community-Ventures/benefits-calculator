@@ -238,13 +238,15 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
             { displaySubheader(programSubset) }
             { displayProgramCards(results[programSubset], passedOrFailedTests) }
             { programSubset === 'eligiblePrograms' && 
-              <Link 
-                href='/ineligible-results' 
-                target='_blank' 
-                rel='noreferrer'
-                sx={{fontSize: 18}}>
+              <Typography
+                onClick={() => {
+                  navigate('/ineligible-results');
+                  window.scrollTo(0,0);
+                }}
+                className='ineligibility-link'>
                 * For additional information on programs that you were not eligible for click here.
-              </Link>
+              </Typography> 
+            }
             }
           </>
         }
