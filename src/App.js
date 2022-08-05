@@ -143,7 +143,9 @@ const App = () => {
         <Route 
           path='/results' 
           element={<Results 
-            formData={formData} 
+            formData={formData}
+            results={results}
+            setResults={setResults}
             programSubset='eligiblePrograms' 
             passedOrFailedTests='passed_tests' /> } /> 
         <Route 
