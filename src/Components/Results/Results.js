@@ -234,8 +234,7 @@ const Results = ({ formData, programSubset, passedOrFailedTests }) => {
             <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
             { programSubset === 'eligiblePrograms' && 
               <h2 className='sub-header'> 
-                {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} 
-                per year for you to look at
+                {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year for you to look at
               </h2>
             }
             { displaySubheader(programSubset) }
