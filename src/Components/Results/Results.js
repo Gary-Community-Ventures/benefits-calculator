@@ -247,6 +247,15 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 * For additional information on programs that you were not eligible for click here.
               </Typography> 
             }
+            { programSubset === 'ineligiblePrograms' && 
+              <Typography
+                onClick={() => {
+                  navigate('/results');
+                  window.scrollTo(0,0);
+                }}
+                className='ineligibility-link'>
+                Go back to eligible programs
+              </Typography> 
             }
           </>
         }
