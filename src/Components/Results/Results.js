@@ -11,13 +11,7 @@ import {
 } from "../../apiCalls";
 import Loading from '../Loading/Loading';
 
-const Results = ({ formData, programSubset, passedOrFailedTests }) => {
-  const [results, setResults] = useState({
-    eligiblePrograms: [], 
-    ineligiblePrograms: [],
-    screenerId: 0,
-    isLoading: true 
-  });
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchResults();
