@@ -151,7 +151,7 @@ const App = () => {
         <Route 
           path='/ineligible-results' 
           element={<Results 
-            formData={formData} 
+            results={results}
             programSubset='ineligiblePrograms' 
             passedOrFailedTests='failed_tests' /> } /> 
         <Route
