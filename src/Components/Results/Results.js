@@ -15,7 +15,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchResults();
+    if (results.screenerId === 0) {
+      fetchResults();
+    }
   }, []);
 
   const fetchResults = async () => {
