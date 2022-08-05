@@ -10,6 +10,7 @@ import {
   getEligibility
 } from "../../apiCalls";
 import Loading from '../Loading/Loading';
+import './Results.css';
 
 const Results = ({ results, setResults, formData, programSubset, passedOrFailedTests }) => {
   const navigate = useNavigate();
