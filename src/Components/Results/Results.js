@@ -245,7 +245,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   window.scrollTo(0,0);
                 }}
                 className='ineligibility-link'>
-                * For additional information on programs that you were not eligible for click here.
+                * For additional information on programs that you were not eligible for click here
               </Typography> 
             }
             { programSubset === 'ineligiblePrograms' && 
