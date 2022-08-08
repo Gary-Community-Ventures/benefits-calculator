@@ -27,6 +27,13 @@ const App = () => {
     hasIncome: false,
     incomeStreams: [],
     hasExpenses: false,
+    expenses: [],
+    householdSize: '',
+    householdData: [],
+    householdAssets: '',
+    housing: {}
+  });
+ 
   const [results, setResults] = useState({
     eligiblePrograms: [], 
     ineligiblePrograms: [],
