@@ -9,4 +9,5 @@
 
 .ineligibility-link:hover {
   text-decoration-color: inherit;
+  cursor: pointer;
 }
