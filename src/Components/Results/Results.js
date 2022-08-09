@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Button, Link, Card, CardContent, CardActions, Typography } from "@mui/material";
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button, Link, Card, CardContent, CardActions, Typography, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
   postPartialParentScreen,
   postHouseholdMemberData,
@@ -8,17 +10,15 @@ import {
   getEligibility
 } from "../../apiCalls";
 import Loading from '../Loading/Loading';
+import './Results.css';
 
-const Results = ({ formData }) => {
-  const [results, setResults] = useState({
-    eligiblePrograms: [], 
-    ineligiblePrograms: [],
-    screenerId: 0,
-    isLoading: true 
-  });
+const Results = ({ results, setResults, formData, programSubset, passedOrFailedTests }) => {
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchResults();
+    if (results.screenerId === 0) {
+      fetchResults();
+    }
   }, []);
 
   const fetchResults = async () => {
@@ -133,38 +133,68 @@ const Results = ({ formData }) => {
     return total.toLocaleString();
   }
 
-  const displayProgramCards = (results) => {
+  const displayTestResults = (tests) => {
+    if (tests.length) {
+      return ( 
+        <>
+          { tests.map(testResult => {
+              return <li key={testResult}>{testResult}</li>
+            })
+          }
+        </>
+      );
+    }
+  }
+
+  const displayProgramCards = (results, passOrFailTests) => {
     if (results.length) {
-      const programCards = Object.keys(results).map(result => {
+      const programCards = results.map(result => {
         return (
-          <Card variant='outlined' key={results[result].name}>
+          <Card variant='outlined' key={result.name} sx={{marginBottom: 2}}> 
             <CardContent>    
               <Typography variant='h6'>
-                {results[result].description_short}
+                {result.description_short}
               </Typography>
               <Typography 
                 color='text.secondary' 
                 gutterBottom >
-                {results[result].name}
+                {result.name}
               </Typography>
+              { passOrFailTests === 'passed_tests' &&
+                <Typography variant='body1' gutterBottom>
+                  <b>Estimated value:</b> Up to {'$' + result.estimated_value.toLocaleString()} per year. 
+                  Including application and approval, the average time to acquire this benefit is {result.estimated_delivery_time}.
+                </Typography>
+              }
               <Typography variant='body1' gutterBottom>
-                <b>Estimated value:</b> Up to {'$' + results[result].estimated_value.toLocaleString()} per year. 
-                Including application and approval, the average time to acquire this benefit is {results[result].estimated_delivery_time}.
+                {result.description}
               </Typography>
-              <Typography variant='body1' gutterBottom>
-                {results[result].description}
-              </Typography>
-              <Link href={results[result].learn_more_link}>
+              <Link href={result.learn_more_link}>
                 Learn more
               </Link>
               <CardActions>
                 <Button
                   variant='contained'
-                  href={results[result].apply_button_link} >
+                  href={result.apply_button_link} >
                   Apply
                 </Button>
               </CardActions>
             </CardContent>
+            { result[passOrFailTests].length > 0 && 
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"> 
+                    <Typography variant='body1'>
+                      <b>Expand for eligibility details</b>
+                    </Typography>
+                </AccordionSummary>
+                <AccordionDetails sx={{paddingTop: 0}}>
+                  { displayTestResults(result[passOrFailTests]) }
+                </AccordionDetails>
+              </Accordion> 
+            }
           </Card>
         );
       });
@@ -172,9 +202,25 @@ const Results = ({ formData }) => {
       return programCards;
     } else {
       return (
-        <div>
+        <Typography variant='body1' sx={{marginBottom: 2, marginTop: 2}}>
           Sorry, we were not able to find any programs for you based on the information that was provided.
-        </div>
+        </Typography>
+      );
+    }
+  }
+
+  const displaySubheader = (benefitsSubset) => {
+    if (benefitsSubset === 'eligiblePrograms') {
+      return (
+        <p className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
+          but based on the information you provided, we believe you are likely eligible for the programs below:
+        </p>
+      );
+    } else if (benefitsSubset === 'ineligiblePrograms') {
+      return (
+        <p className='remember-disclaimer-label'>Based on the information you provided, we believe 
+          you are likely <b>not eligible</b> for the programs below:
+        </p>
       );
     }
   }
@@ -185,11 +231,33 @@ const Results = ({ formData }) => {
         { results.isLoading ? <Loading /> : 
           <>
             <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
-            <h2 className='sub-header'> {results.eligiblePrograms.length} programs, up to ${totalDollarAmount(results.eligiblePrograms)} per year for you to look at</h2>
-            <p className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
-              but based on the information you provided, we believe you are likely eligible for the programs below:
-            </p>
-            { displayProgramCards(results.eligiblePrograms) }
+            { programSubset === 'eligiblePrograms' && 
+              <h2 className='sub-header'> 
+                {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year for you to look at
+              </h2>
+            }
+            { displaySubheader(programSubset) }
+            { displayProgramCards(results[programSubset], passedOrFailedTests) }
+            { programSubset === 'eligiblePrograms' && 
+              <Typography
+                onClick={() => {
+                  navigate('/ineligible-results');
+                  window.scrollTo(0,0);
+                }}
+                className='ineligibility-link'>
+                * For additional information on programs that you were not eligible for click here
+              </Typography> 
+            }
+            { programSubset === 'ineligiblePrograms' && 
+              <Typography
+                onClick={() => {
+                  navigate('/results');
+                  window.scrollTo(0,0);
+                }}
+                className='ineligibility-link'>
+                Go back to eligible programs
+              </Typography> 
+            }
           </>
         }
       </div>

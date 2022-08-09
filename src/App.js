@@ -33,6 +33,13 @@ const App = () => {
     householdAssets: '',
     housing: {}
   });
+ 
+  const [results, setResults] = useState({
+    eligiblePrograms: [], 
+    ineligiblePrograms: [],
+    screenerId: 0,
+    isLoading: true 
+  });
 
   useEffect(() => {
     const updatedFormData = { ...formData };
@@ -142,7 +149,18 @@ const App = () => {
             formData={formData} /> } /> 
         <Route 
           path='/results' 
-          element={<Results formData={formData} /> } /> 
+          element={<Results 
+            formData={formData}
+            results={results}
+            setResults={setResults}
+            programSubset='eligiblePrograms' 
+            passedOrFailedTests='passed_tests' /> } /> 
+        <Route 
+          path='/ineligible-results' 
+          element={<Results 
+            results={results}
+            programSubset='ineligiblePrograms' 
+            passedOrFailedTests='failed_tests' /> } /> 
         <Route
           path='*'
           element={<Navigate to="/step-1" replace /> } />

@@ -17,6 +17,7 @@ const HouseholdDataContinueButton = ({ page, setPage, householdSizeNumber, handl
       //we just want to validate that all of the information has been filled out
       //and then set the page + 1 for them to fill out the next member's information
       setPage(Number(page) + 1);
+      window.scrollTo(0, 0);
     }
   }
 

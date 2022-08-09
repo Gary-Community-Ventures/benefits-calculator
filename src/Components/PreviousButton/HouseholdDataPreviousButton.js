@@ -13,6 +13,7 @@ const HouseholdDataPreviousButton = ({ page, setPage }) => {
     } else { 
       //go back to the previous member's data block
       setPage(Number(page) - 1);
+      window.scrollTo(0, 0);
     }
   }
 
