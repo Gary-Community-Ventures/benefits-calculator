@@ -32,13 +32,22 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
             Gary Community Ventures Disclaimer for Public Benefit Program Screening
           </Typography>
           <Typography variant='body1'>
-            GCV's Benefit Calculator is a tool that recommends public benefits programs for you to consider based upon 
-            information you provide about your household and publicly available information regarding programs you may be eligible for. 
-            To enroll in a benefit, you will need to apply through the appropriate government agency. GCV's Benefit Calculator will tell 
-            you how to apply for any benefit on this website, but cannot guarantee eligibility or acceptance into any program. The administering 
-            agency will determine final eligibility upon your submission of an application for each program. The information you share for purposes 
-            of the public benefits screening will be kept confidential but may be shared with a government agency to assist you in the application 
-            process with your permission. 
+            This benefit calculator is a tool that recommends public benefits programs for you to consider
+            based upon information you provide about your household and Gary Philanthropy’s (“Gary”) best 
+            understanding of publicly available information regarding benefits programs. Gary cannot guarantee 
+            eligibility or acceptance into any program. To enroll in a benefit, you will need to apply through 
+            the appropriate government agency. The administering government agency will determine final eligibility 
+            upon your submission of an application for each program.
+
+            The information you share through the public benefits screening will be kept confidential but may be shared
+            with a government agency and/or the third-party organization assisting you with the benefits calculator process
+            for the sole purpose of assisting with benefits applications or offering you additional free services through Gary. 
+            Under no circumstances will your information be sold.
+
+            By filling out this benefits calculator, you agree to future contact from Gary or our affiliates regarding your
+            use of the benefits calculator or to offer additional programs that may be of interest to you and your family. 
+            Standard message and data costs may apply to these communications, and you may opt out of receiving these communications
+            at any time through the opt-out link in the communication.
           </Typography>
         </CardContent>  
       </Card>
@@ -50,7 +59,7 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
       { buttonWasClicked && formData.agreeToTermsOfService === false && <StyledTypography> Please check the box below to continue. </StyledTypography> || <StyledTypography></StyledTypography> }
       <FormControlLabel 
         control={<Checkbox checked={formData.agreeToTermsOfService} onChange={handleCheckboxChange} />}  
-        label='I have read, understand, and agree to the terms of: the GCV Disclaimer for Public Benefit Program Screening, the GCV Privacy Policy, and the GCV Benefits Calculator Terms of Use.'
+        label='I have read, understand, and agree to the terms of the Gary Disclaimer and consent to contact above.'
         value='agreeToTermsOfService' />
       <CardActions>
         <Button
