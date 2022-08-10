@@ -5,6 +5,7 @@ const householdsEndpoint = 'https://cobenefits-api.herokuapp.com/api/householdme
 const incomeStreamsEndpoint = 'https://cobenefits-api.herokuapp.com/api/incomestreams/';
 const expensesEndpoint = 'https://cobenefits-api.herokuapp.com/api/expenses/';
 let eligibilityEndpoint = 'https://cobenefits-api.herokuapp.com/api/eligibility/';
+let emailRequestEndpoint = 'https://cobenefits-api.herokuapp.com/api/send/';
 
 const header = {
   'Accept': 'application/json',
@@ -81,10 +82,25 @@ const getEligibility = (screenerId) => {
     })
 }
 
+const postEmailRequest = (screenerId, email) => {
+  return fetch(emailRequestEndpoint + screenerId, {
+    method: 'POST',
+    body: JSON.stringify({ email: email }),
+    headers: header
+  })
+    .then(response => {
+      if(!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+}
+
 module.exports = {
   postPartialParentScreen,
   postHouseholdMemberData,
   postHouseholdMemberIncomeStream,
   postHouseholdMemberExpense,
-  getEligibility
+  getEligibility,
+  postEmailRequest
 }
