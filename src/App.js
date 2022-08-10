@@ -5,33 +5,95 @@ import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
+import EmailResults from './Components/EmailResults/EmailResults';
 import './App.css';
 
 const App = () => {
   const navigate = useNavigate();
 
+  // const [formData, setFormData] = useState({
+  //   agreeToTermsOfService: false,
+  //   age: '',
+  //   zipcode: '',
+  //   student: false,
+  //   studentFulltime: false,
+  //   pregnant: false,
+  //   unemployed: false,
+  //   unemployedWorkedInLast18Mos: false,
+  //   blindOrVisuallyImpaired: false,
+  //   disabled: false,
+  //   veteran: false,
+  //   medicaid: false,
+  //   disabilityRelatedMedicaid: false,
+  //   hasIncome: false,
+  //   incomeStreams: [],
+  //   hasExpenses: false,
+  //   expenses: [],
+  //   householdSize: '',
+  //   householdData: [],
+  //   householdAssets: '',
+  //   housing: {}
+  // });
+
   const [formData, setFormData] = useState({
     agreeToTermsOfService: false,
-    age: '',
-    zipcode: '',
+    age: '33',
+    zipcode: '80211',
     student: false,
     studentFulltime: false,
-    pregnant: false,
+    pregnant: true,
     unemployed: false,
-    unemployedWorkedInLast18Mos: false,
+    unemployedWorkedInLast18Mos: true,
     blindOrVisuallyImpaired: false,
     disabled: false,
     veteran: false,
     medicaid: false,
     disabilityRelatedMedicaid: false,
-    hasIncome: false,
-    incomeStreams: [],
-    hasExpenses: false,
-    expenses: [],
-    householdSize: '',
-    householdData: [],
-    householdAssets: '',
-    housing: {}
+    hasIncome: true,
+    incomeStreams: [{
+      incomeStreamName: 'wages', 
+      incomeStreamLabel: 'Wages, salaries, tips', 
+      incomeAmount: '29000',
+      incomeFrequency: 'yearly'
+    }],
+    hasExpenses: true,
+    expenses: [{
+      expenseSourceName: 'rent', 
+      expenseSourceLabel: 'Rent', 
+      expenseAmount: '500',
+      expenseFrequency: 'monthly'
+    }],
+    householdSize: '2',
+    householdData: [{
+      age: '3',
+      relationshipToHH: `child`,
+      student: false,
+      studentFulltime: false,
+      pregnant: false,
+      unemployed: false,
+      unemployedWorkedInLast18Mos: false,
+      blindOrVisuallyImpaired: false,
+      disabled: false,
+      veteran: false,
+      medicaid: false,
+      disabilityRelatedMedicaid: false,
+      noneOfTheseApply: true,
+      hasIncome: false,
+      incomeStreams: [],
+      hasExpenses: false,
+      expenses: []
+    }],
+    householdAssets: '1000',
+    housing: {
+      renting: true,
+      owner: false, 
+      stayingWithFriend: false,
+      hotel: false,
+      shelter: false,
+      preferNotToSay: false
+    },
+    relationship: 'headOfHousehold',
+    email: ''
   });
  
   const [results, setResults] = useState({
@@ -117,6 +179,11 @@ const App = () => {
     navigate('/step-16');
   }
 
+  const handleEmailTextfieldChange = (event) => {
+    const { name, value } = event.target;    
+    setFormData({ ...formData, [name]: value});
+  }
+
   return (
     <div className='App'>
       <CssBaseline />
@@ -161,6 +228,12 @@ const App = () => {
             results={results}
             programSubset='ineligiblePrograms' 
             passedOrFailedTests='failed_tests' /> } /> 
+        <Route
+          path='/email-results' 
+          element={<EmailResults 
+            formData={formData}
+            results={results} 
+            handleEmailTextfieldChange={handleEmailTextfieldChange} /> } />
         <Route
           path='*'
           element={<Navigate to="/step-1" replace /> } />
