@@ -162,6 +162,16 @@ const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) =
   return allValidatedMemberData;
 }
 
+const emailHasError = (email) => {
+  return !(/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email));
+} 
+
+const displayEmailHelperText = (email) => {
+  if (emailHasError(email)) {
+    return 'Please enter a valid email address.';
+  }
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -181,5 +191,7 @@ export {
   housingSourcesAreValid,
   householdMemberAgeHasError,
   displayHouseholdMemberAgeHelperText,
-  householdMemberDataIsValid
+  householdMemberDataIsValid,
+  emailHasError,
+  displayEmailHelperText
 }
