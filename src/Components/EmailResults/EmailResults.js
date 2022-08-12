@@ -2,7 +2,7 @@ import { TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { emailHasError, displayEmailHelperText } from '../../Assets/validationFunctions';
-import { postEmailRequest } from '../../apiCalls';
+import { postUser, updateScreen } from '../../apiCalls';
 
 const StyledTextField = styled(TextField)({
   marginBottom: 20
@@ -11,8 +11,20 @@ const StyledTextField = styled(TextField)({
 const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
   let navigate = useNavigate();
 
-  const handleEmailSubmit = () => {
-    postEmailRequest(results.screenerId, formData.email);
+  const handleEmailSubmit = async () => {
+    const user = {
+      email_or_cell: formData.email,
+      email: formData.email,
+      tcpa_consent: false
+    }
+    const userResponse = await postUser(user);
+
+    const screenUpdates = {
+      user: userResponse.id,
+      last_email_request_date: new Date().toJSON()
+    }
+    const screenResponse = updateScreen(results.screenerId, screenUpdates);
+    navigate('/results');
   } 
 
   return (
@@ -23,7 +35,7 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
         name='email'
         value={formData.email}
         label='Email' 
-        onChange={() => {handleEmailTextfieldChange(event)}}
+        onChange={(event) => {handleEmailTextfieldChange(event)}}
         variant='outlined'
         required
         error={emailHasError(formData.email)}
