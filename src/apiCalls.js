@@ -4,7 +4,9 @@ const screensEndpoint = 'https://cobenefits-api.herokuapp.com/api/screens/';
 const householdsEndpoint = 'https://cobenefits-api.herokuapp.com/api/householdmembers/';
 const incomeStreamsEndpoint = 'https://cobenefits-api.herokuapp.com/api/incomestreams/';
 const expensesEndpoint = 'https://cobenefits-api.herokuapp.com/api/expenses/';
+const userEndpoint = 'https://cobenefits-api.herokuapp.com/api/users/';
 let eligibilityEndpoint = 'https://cobenefits-api.herokuapp.com/api/eligibility/';
+let screensUpdateEndpoint = 'https://cobenefits-api.herokuapp.com/api/screens/';
 
 const header = {
   'Accept': 'application/json',
@@ -12,9 +14,38 @@ const header = {
   'Authorization': apiKey
 };
 
+const postUser = (userData) => {
+  return fetch(userEndpoint, {
+    method: 'POST',
+    body: JSON.stringify(userData),
+    headers: header
+  })
+    .then(response => {
+      if(!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+
+}
+
 const postPartialParentScreen = (partialFormData) => {
   return fetch(screensEndpoint, {
     method: 'POST',
+    body: JSON.stringify(partialFormData),
+    headers: header
+  })
+    .then(response => {
+      if(!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+}
+
+const updateScreen = (screenerId, partialFormData) => {
+  return fetch(screensUpdateEndpoint + screenerId + '/', {
+    method: 'PATCH',
     body: JSON.stringify(partialFormData),
     headers: header
   })
@@ -83,8 +114,10 @@ const getEligibility = (screenerId) => {
 
 module.exports = {
   postPartialParentScreen,
+  updateScreen,
+  postUser,
   postHouseholdMemberData,
   postHouseholdMemberIncomeStream,
   postHouseholdMemberExpense,
-  getEligibility
+  getEligibility,
 }

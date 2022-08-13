@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Link, Card, CardContent, CardActions, Typography, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Grid from '@mui/material/Grid';
+import SendIcon from '@mui/icons-material/Send';
+
 import {
   postPartialParentScreen,
   postHouseholdMemberData,
@@ -228,38 +231,64 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   return (
     <main className='benefits-form'>
       <div className='results-container'>
-        { results.isLoading ? <Loading /> : 
-          <>
-            <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
-            { programSubset === 'eligiblePrograms' && 
-              <h2 className='sub-header'> 
-                {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year for you to look at
-              </h2>
-            }
-            { displaySubheader(programSubset) }
-            { displayProgramCards(results[programSubset], passedOrFailedTests) }
-            { programSubset === 'eligiblePrograms' && 
-              <Typography
-                onClick={() => {
-                  navigate('/ineligible-results');
-                  window.scrollTo(0,0);
-                }}
-                className='ineligibility-link'>
-                * For additional information on programs that you were not eligible for click here
-              </Typography> 
-            }
-            { programSubset === 'ineligiblePrograms' && 
-              <Typography
-                onClick={() => {
-                  navigate('/results');
-                  window.scrollTo(0,0);
-                }}
-                className='ineligibility-link'>
-                Go back to eligible programs
-              </Typography> 
-            }
-          </>
-        }
+        <Grid container spacing={2}>
+          { results.isLoading ? <Loading /> : 
+            <>
+              <Grid xs={12}>
+                <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
+              </Grid>
+              { programSubset === 'eligiblePrograms' && 
+                <>
+                <Grid xs={12}>
+                  <h2 className='sub-header'> 
+                    {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year for you to look at
+                  </h2>
+                </Grid>
+                </>
+              }
+              <Grid xs={12} sm={8}>
+                { displaySubheader(programSubset) }
+              </Grid>
+              <Grid xs={12} sm={4} container justifyContent="flex-end">
+                <Button
+                  sx={{mb: 5}}
+                  variant='contained'
+                  endIcon={<SendIcon />}
+                  onClick={() => {
+                    navigate('/email-results');
+                  }}
+                  className='ineligibility-link'>
+                    Email Results
+                </Button>
+              </Grid>
+              <Grid xs={12}>
+                { displayProgramCards(results[programSubset], passedOrFailedTests) }
+              </Grid>
+              <Grid xs={12}>
+                { programSubset === 'eligiblePrograms' && 
+                  <Typography
+                    onClick={() => {
+                      navigate('/ineligible-results');
+                      window.scrollTo(0,0);
+                    }}
+                    className='ineligibility-link'>
+                    * For additional information on programs that you were not eligible for click here
+                  </Typography> 
+                }
+                { programSubset === 'ineligiblePrograms' && 
+                  <Typography
+                    onClick={() => {
+                      navigate('/results');
+                      window.scrollTo(0,0);
+                    }}
+                    className='ineligibility-link'>
+                    Go back to eligible programs
+                  </Typography> 
+                }
+              </Grid>
+            </>
+          }
+        </Grid>
       </div>
     </main>
   );
