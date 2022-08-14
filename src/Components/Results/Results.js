@@ -232,7 +232,12 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     <main className='benefits-form'>
       <div className='results-container'>
         <Grid container spacing={2}>
-          { results.isLoading ? <Loading /> : 
+          { results.isLoading ? 
+            <Grid container xs={12} justifyContent="center" alignItems="center">
+              <Grid item xs={6} sx={{mt: 5}}>
+                <Loading />
+              </Grid>
+            </Grid> : 
             <>
               <Grid xs={12}>
                 <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
