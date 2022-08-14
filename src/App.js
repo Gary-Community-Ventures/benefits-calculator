@@ -39,6 +39,7 @@ const App = () => {
     agreeToTermsOfService: false,
     age: '33',
     zipcode: '80211',
+    startTime: new Date().toJSON(),
     student: false,
     studentFulltime: false,
     pregnant: true,

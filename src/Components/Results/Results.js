@@ -57,12 +57,13 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const getScreensBody = (formData) => {
-    const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing } = formData;
+    const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing, startTime } = formData;
     const housingOptionKeys = Object.keys(housing);
     const finalHousingOption = housingOptionKeys.find(housingSituation => housing[housingSituation] === true);
     return {
       agree_to_tos: agreeToTermsOfService ,
       zipcode: zipcode,
+      start_date: startTime,
       household_size: householdSize,
       household_assets: householdAssets,
       housing_situation: finalHousingOption
