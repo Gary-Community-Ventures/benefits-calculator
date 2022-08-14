@@ -1,6 +1,6 @@
 import { Typography, AppBar, CssBaseline } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useNavigate, Navigate, Routes, Route } from 'react-router-dom';
+import { useNavigate, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
@@ -35,7 +35,9 @@ const App = () => {
   //   housing: {}
   // });
 
+  const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState({
+    isTest: searchParams.get('test') ? searchParams.get('test') : false,
     agreeToTermsOfService: false,
     age: '33',
     zipcode: '80211',
