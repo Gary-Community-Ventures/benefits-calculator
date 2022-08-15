@@ -191,7 +191,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 <TableCell>Benefit</TableCell>
                 <TableCell align="right">Value</TableCell>
                 <TableCell align="right">Time to Receipt</TableCell>
-                <TableCell className="hidden-xs" />
+                <TableCell className="hidden-xs" display={{ xs: 'none' }} />
               </TableRow>
             </TableHead>
             <TableBody>
@@ -242,7 +242,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
             </Typography>
           </TableCell>
           <TableCell align="right">{benefit.estimated_delivery_time}</TableCell>
-          <TableCell className="hidden-xs">
+          <TableCell className="hidden-xs" display={{ xs: 'none' }}>
             <IconButton
               aria-label="expand row"
               size="small"
@@ -255,7 +255,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ m: 2 }}>
+              <Box sx={{ padding: 1 }}>
                 <Typography variant='body1' gutterBottom>
                   {benefit.description}
                 </Typography>
