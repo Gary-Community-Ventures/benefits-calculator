@@ -1,9 +1,23 @@
 import { useEffect } from 'react';
+import { useState } from 'react';
+import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Link, Card, CardContent, CardActions, Typography, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
 import SendIcon from '@mui/icons-material/Send';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import {
   postPartialParentScreen,
@@ -151,69 +165,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     }
   }
 
-  const displayProgramCards = (results, passOrFailTests) => {
-    if (results.length) {
-      const programCards = results.map(result => {
-        return (
-          <Card variant='outlined' key={result.name} sx={{marginBottom: 2}}> 
-            <CardContent>    
-              <Typography variant='h6'>
-                {result.description_short}
-              </Typography>
-              <Typography 
-                color='text.secondary' 
-                gutterBottom >
-                {result.name}
-              </Typography>
-              { passOrFailTests === 'passed_tests' &&
-                <Typography variant='body1' gutterBottom>
-                  <b>Estimated value:</b> Up to {'$' + result.estimated_value.toLocaleString()} per year. 
-                  Including application and approval, the average time to acquire this benefit is {result.estimated_delivery_time}.
-                </Typography>
-              }
-              <Typography variant='body1' gutterBottom>
-                {result.description}
-              </Typography>
-              <Link href={result.learn_more_link}>
-                Learn more
-              </Link>
-              <CardActions>
-                <Button
-                  variant='contained'
-                  href={result.apply_button_link} >
-                  Apply
-                </Button>
-              </CardActions>
-            </CardContent>
-            { result[passOrFailTests].length > 0 && 
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"> 
-                    <Typography variant='body1'>
-                      <b>Expand for eligibility details</b>
-                    </Typography>
-                </AccordionSummary>
-                <AccordionDetails sx={{paddingTop: 0}}>
-                  { displayTestResults(result[passOrFailTests]) }
-                </AccordionDetails>
-              </Accordion> 
-            }
-          </Card>
-        );
-      });
-      
-      return programCards;
-    } else {
-      return (
-        <Typography variant='body1' sx={{marginBottom: 2, marginTop: 2}}>
-          Sorry, we were not able to find any programs for you based on the information that was provided.
-        </Typography>
-      );
-    }
-  }
-
   const displaySubheader = (benefitsSubset) => {
     if (benefitsSubset === 'eligiblePrograms') {
       return (
@@ -228,6 +179,115 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         </p>
       );
     }
+  }
+
+  const resultsTable = (results) => {
+    if (results.length) {
+      return (
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Benefit</TableCell>
+                <TableCell align="right">Value</TableCell>
+                <TableCell align="right">Time to Receipt</TableCell>
+                <TableCell />
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {results.map(row => (
+                <ResultsRow key={row.name} row={row} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      );
+    } else {
+      return (
+        <Typography variant='body1' sx={{marginBottom: 2, marginTop: 2}}>
+          Sorry, we were not able to find any programs for you based on the information that was provided.
+        </Typography>
+      );
+    }
+  }
+  
+  const ResultsRow = (row) => {
+    const [open, setOpen] = useState(false);
+    let benefit = row.row
+
+    switch(benefit.value_type) {
+      case 'non-discretionary':
+        benefit.value_type = 'reduced expenses';
+        break;
+      case 'unrestricted':
+        benefit.value_type = 'cash';
+        break;
+      case 'discretionary':
+        benefit.value_type = 'reduced cost services';
+        break;
+    }
+
+    return (
+      <Fragment>
+        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+          <TableCell component="th" scope="row">
+            <Link onClick={() => setOpen(!open)}>
+              {benefit.name}
+            </Link>
+          </TableCell>
+          <TableCell align="right">
+            {'$' + benefit.estimated_value.toLocaleString()}
+            <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
+              {benefit.value_type}
+            </Typography>
+          </TableCell>
+          <TableCell align="right">{benefit.estimated_delivery_time}</TableCell>
+          <TableCell>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <Box sx={{ m: 2 }}>
+                <Typography variant='body1' gutterBottom>
+                  {benefit.description}
+                </Typography>
+                <Button
+                  variant='contained'
+                  target="_blank"
+                  href={benefit.apply_button_link} >
+                  Apply
+                </Button>
+                
+                { (benefit.passed_tests.length > 0 || benefit.failed_tests.length > 0)  && 
+                  <Accordion sx={{ m: 2 }}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"> 
+                        <Typography variant='body2'>
+                          <Link>Expand for eligibility details</Link>
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails sx={{paddingTop: 0}}>
+                      { displayTestResults(benefit.passed_tests) }
+                      { displayTestResults(benefit.failed_tests) }
+                    </AccordionDetails>
+                  </Accordion> 
+                }
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </Fragment>
+    );
   }
 
   return (
@@ -269,11 +329,12 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 </Button>
               </Grid>
               <Grid xs={12}>
-                { displayProgramCards(results[programSubset], passedOrFailedTests) }
+                { resultsTable(results[programSubset])}
               </Grid>
               <Grid xs={12}>
                 { programSubset === 'eligiblePrograms' && 
                   <Typography
+                    sx={{mt: 2}}
                     onClick={() => {
                       navigate('/ineligible-results');
                       window.scrollTo(0,0);
@@ -284,6 +345,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 }
                 { programSubset === 'ineligiblePrograms' && 
                   <Typography
+                    sx={{mt: 2}}
                     onClick={() => {
                       navigate('/results');
                       window.scrollTo(0,0);
