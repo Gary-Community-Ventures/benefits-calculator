@@ -10,94 +10,96 @@ import './App.css';
 
 const App = () => {
   const navigate = useNavigate();
-
-  // const [formData, setFormData] = useState({
-  //   agreeToTermsOfService: false,
-  //   age: '',
-  //   zipcode: '',
-  //   student: false,
-  //   studentFulltime: false,
-  //   pregnant: false,
-  //   unemployed: false,
-  //   unemployedWorkedInLast18Mos: false,
-  //   blindOrVisuallyImpaired: false,
-  //   disabled: false,
-  //   veteran: false,
-  //   medicaid: false,
-  //   disabilityRelatedMedicaid: false,
-  //   hasIncome: false,
-  //   incomeStreams: [],
-  //   hasExpenses: false,
-  //   expenses: [],
-  //   householdSize: '',
-  //   householdData: [],
-  //   householdAssets: '',
-  //   housing: {}
-  // });
-
   const [searchParams] = useSearchParams();
+  
   const [formData, setFormData] = useState({
     isTest: searchParams.get('test') ? searchParams.get('test') : false,
     agreeToTermsOfService: false,
-    age: '33',
-    zipcode: '80211',
+    age: '',
+    zipcode: '',
     startTime: new Date().toJSON(),
     student: false,
     studentFulltime: false,
-    pregnant: true,
+    pregnant: false,
     unemployed: false,
-    unemployedWorkedInLast18Mos: true,
+    unemployedWorkedInLast18Mos: false,
     blindOrVisuallyImpaired: false,
     disabled: false,
     veteran: false,
     medicaid: false,
     disabilityRelatedMedicaid: false,
-    hasIncome: true,
-    incomeStreams: [{
-      incomeStreamName: 'wages', 
-      incomeStreamLabel: 'Wages, salaries, tips', 
-      incomeAmount: '29000',
-      incomeFrequency: 'yearly'
-    }],
-    hasExpenses: true,
-    expenses: [{
-      expenseSourceName: 'rent', 
-      expenseSourceLabel: 'Rent', 
-      expenseAmount: '500',
-      expenseFrequency: 'monthly'
-    }],
-    householdSize: '2',
-    householdData: [{
-      age: '3',
-      relationshipToHH: `child`,
-      student: false,
-      studentFulltime: false,
-      pregnant: false,
-      unemployed: false,
-      unemployedWorkedInLast18Mos: false,
-      blindOrVisuallyImpaired: false,
-      disabled: false,
-      veteran: false,
-      medicaid: false,
-      disabilityRelatedMedicaid: false,
-      noneOfTheseApply: true,
-      hasIncome: false,
-      incomeStreams: [],
-      hasExpenses: false,
-      expenses: []
-    }],
-    householdAssets: '1000',
-    housing: {
-      renting: true,
-      owner: false, 
-      stayingWithFriend: false,
-      hotel: false,
-      shelter: false,
-      preferNotToSay: false
-    },
-    relationship: 'headOfHousehold',
-    email: ''
+    hasIncome: false,
+    incomeStreams: [],
+    hasExpenses: false,
+    expenses: [],
+    householdSize: '',
+    householdData: [],
+    householdAssets: '',
+    housing: {}
   });
+
+  // const [formData, setFormData] = useState({
+  //   isTest: searchParams.get('test') ? searchParams.get('test') : false,
+  //   agreeToTermsOfService: false,
+  //   age: '33',
+  //   zipcode: '80211',
+  //   startTime: new Date().toJSON(),
+  //   student: false,
+  //   studentFulltime: false,
+  //   pregnant: true,
+  //   unemployed: false,
+  //   unemployedWorkedInLast18Mos: true,
+  //   blindOrVisuallyImpaired: false,
+  //   disabled: false,
+  //   veteran: false,
+  //   medicaid: false,
+  //   disabilityRelatedMedicaid: false,
+  //   hasIncome: true,
+  //   incomeStreams: [{
+  //     incomeStreamName: 'wages', 
+  //     incomeStreamLabel: 'Wages, salaries, tips', 
+  //     incomeAmount: '29000',
+  //     incomeFrequency: 'yearly'
+  //   }],
+  //   hasExpenses: true,
+  //   expenses: [{
+  //     expenseSourceName: 'rent', 
+  //     expenseSourceLabel: 'Rent', 
+  //     expenseAmount: '500',
+  //     expenseFrequency: 'monthly'
+  //   }],
+  //   householdSize: '2',
+  //   householdData: [{
+  //     age: '3',
+  //     relationshipToHH: `child`,
+  //     student: false,
+  //     studentFulltime: false,
+  //     pregnant: false,
+  //     unemployed: false,
+  //     unemployedWorkedInLast18Mos: false,
+  //     blindOrVisuallyImpaired: false,
+  //     disabled: false,
+  //     veteran: false,
+  //     medicaid: false,
+  //     disabilityRelatedMedicaid: false,
+  //     noneOfTheseApply: true,
+  //     hasIncome: false,
+  //     incomeStreams: [],
+  //     hasExpenses: false,
+  //     expenses: []
+  //   }],
+  //   householdAssets: '1000',
+  //   housing: {
+  //     renting: true,
+  //     owner: false, 
+  //     stayingWithFriend: false,
+  //     hotel: false,
+  //     shelter: false,
+  //     preferNotToSay: false
+  //   },
+  //   relationship: 'headOfHousehold',
+  //   email: ''
+  // });
  
   const [results, setResults] = useState({
     eligiblePrograms: [], 
