@@ -301,7 +301,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               </Grid>
             </Grid> : 
             <>
-              <Grid container xs={12} sx={{m: 2}}>
+              <Grid container xs={12} sx={{mt: 2, mr: 2, ml: 2}}>
                 <Grid xs={12}>
                   <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
                 </Grid>
@@ -319,13 +319,13 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 </Grid>
                 <Grid xs={12} sm={4} container justifyContent="flex-end">
                   <Button
-                    sx={{mb: 5}}
+                    sx={{mb: 2, mt: 1}}
                     variant='contained'
                     endIcon={<SendIcon />}
                     onClick={() => {
                       navigate('/email-results');
                     }}
-                    className='ineligibility-link'>
+                    className='results-link'>
                       Email Results
                   </Button>
                 </Grid>
@@ -336,7 +336,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               <Grid xs={12}>
                 { programSubset === 'eligiblePrograms' && 
                   <Typography
-                    sx={{mt: 2}}
+                    sx={{mt: 2, ml: 2}}
                     onClick={() => {
                       navigate('/ineligible-results');
                       window.scrollTo(0,0);
@@ -347,7 +347,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 }
                 { programSubset === 'ineligiblePrograms' && 
                   <Typography
-                    sx={{mt: 2}}
+                    sx={{mt: 2, ml: 2}}
                     onClick={() => {
                       navigate('/results');
                       window.scrollTo(0,0);
