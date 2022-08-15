@@ -191,7 +191,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 <TableCell>Benefit</TableCell>
                 <TableCell align="right">Value</TableCell>
                 <TableCell align="right">Time to Receipt</TableCell>
-                <TableCell />
+                <TableCell className="hidden-xs" />
               </TableRow>
             </TableHead>
             <TableBody>
@@ -242,7 +242,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
             </Typography>
           </TableCell>
           <TableCell align="right">{benefit.estimated_delivery_time}</TableCell>
-          <TableCell>
+          <TableCell className="hidden-xs">
             <IconButton
               aria-label="expand row"
               size="small"
@@ -301,32 +301,34 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               </Grid>
             </Grid> : 
             <>
-              <Grid xs={12}>
-                <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
-              </Grid>
-              { programSubset === 'eligiblePrograms' && 
-                <>
+              <Grid container xs={12} sx={{m: 2}}>
                 <Grid xs={12}>
-                  <h2 className='sub-header'> 
-                    {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year for you to look at
-                  </h2>
+                  <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
                 </Grid>
-                </>
-              }
-              <Grid xs={12} sm={8}>
-                { displaySubheader(programSubset) }
-              </Grid>
-              <Grid xs={12} sm={4} container justifyContent="flex-end">
-                <Button
-                  sx={{mb: 5}}
-                  variant='contained'
-                  endIcon={<SendIcon />}
-                  onClick={() => {
-                    navigate('/email-results');
-                  }}
-                  className='ineligibility-link'>
-                    Email Results
-                </Button>
+                { programSubset === 'eligiblePrograms' && 
+                  <>
+                  <Grid xs={12}>
+                    <h2 className='sub-header'> 
+                      {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year for you to look at
+                    </h2>
+                  </Grid>
+                  </>
+                }
+                <Grid xs={12} sm={8}>
+                  { displaySubheader(programSubset) }
+                </Grid>
+                <Grid xs={12} sm={4} container justifyContent="flex-end">
+                  <Button
+                    sx={{mb: 5}}
+                    variant='contained'
+                    endIcon={<SendIcon />}
+                    onClick={() => {
+                      navigate('/email-results');
+                    }}
+                    className='ineligibility-link'>
+                      Email Results
+                  </Button>
+                </Grid>
               </Grid>
               <Grid xs={12}>
                 { resultsTable(results[programSubset])}
