@@ -309,7 +309,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   <>
                   <Grid xs={12}>
                     <h2 className='sub-header'> 
-                      {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year for you to look at
+                      {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year for you to consider
                     </h2>
                   </Grid>
                   </>
