@@ -2,7 +2,7 @@ import { TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { emailHasError, displayEmailHelperText } from '../../Assets/validationFunctions';
-import { postUser, updateScreen } from '../../apiCalls';
+import { postMessage } from '../../apiCalls';
 import Grid from '@mui/material/Grid';
 
 const StyledTextField = styled(TextField)({
@@ -13,24 +13,19 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
   let navigate = useNavigate();
 
   const handleEmailSubmit = async () => {
-    const user = {
-      email_or_cell: formData.email,
+    const message = {
       email: formData.email,
-      tcpa_consent: false
+      type: 'emailScreen',
+      screen: results.screenerId
     }
-    const userResponse = await postUser(user);
 
-    const screenUpdates = {
-      user: userResponse.id,
-      last_email_request_date: new Date().toJSON()
-    }
-    const screenResponse = updateScreen(results.screenerId, screenUpdates);
+    const messageResponse = postMessage(message)
     navigate('/results');
   } 
 
   return (
     <main className='benefits-form'>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{mt: 2, mr: 2, ml: 2}}>
         <Grid xs={12}>
           <h2 className='sub-header'>Email a copy of my results</h2>
         </Grid>
