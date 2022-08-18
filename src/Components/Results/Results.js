@@ -152,6 +152,15 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     return total.toLocaleString();
   }
 
+  const totalDollarAmountMonthly = (results) => {
+    const total = results.reduce((total, program) => {
+      total += Math.round(program.estimated_value / 12);
+      return total;
+    }, 0);
+    
+    return total.toLocaleString();
+  }
+
   const displayTestResults = (tests) => {
     if (tests.length) {
       return ( 
@@ -189,7 +198,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
             <TableHead>
               <TableRow>
                 <TableCell>Benefit</TableCell>
-                <TableCell align="right">Value</TableCell>
+                <TableCell align="right">Annual Value</TableCell>
                 <TableCell align="right">Time to Receipt</TableCell>
                 <TableCell className="hidden-xs" display={{ xs: 'none' }} />
               </TableRow>
@@ -308,9 +317,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 { programSubset === 'eligiblePrograms' && 
                   <>
                   <Grid xs={12}>
-                    <h2 className='sub-header'> 
-                      {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year for you to consider
-                    </h2>
+                    <Typography className='sub-header' variant="h6"> 
+                      {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year or ${totalDollarAmountMonthly(results[programSubset])} per month for you to consider
+                    </Typography>
                   </Grid>
                   </>
                 }
