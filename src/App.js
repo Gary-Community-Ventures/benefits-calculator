@@ -39,10 +39,10 @@ const App = () => {
   });
 
   // const [formData, setFormData] = useState({
-  //   isTest: searchParams.get('test') ? searchParams.get('test') : false,
+  //   isTest: searchParams.get('test') ? searchParams.get('test') : true,
   //   agreeToTermsOfService: false,
   //   age: '33',
-  //   zipcode: '80211',
+  //   zipcode: '80204',
   //   startTime: new Date().toJSON(),
   //   student: false,
   //   studentFulltime: false,
