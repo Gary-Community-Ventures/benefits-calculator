@@ -96,6 +96,7 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
               message="Email sent! You can send to another email or click back to return to your results."
               action={action}
               severity="success"
+              sx={{mb: 4, mr: 2}}
             />            
             
           </div>
