@@ -14,6 +14,7 @@ const App = () => {
   
   const [formData, setFormData] = useState({
     isTest: searchParams.get('test') ? searchParams.get('test') : false,
+    externalID: searchParams.get('externalid') ? searchParams.get('externalid') : false,
     agreeToTermsOfService: false,
     age: '',
     zipcode: '',
@@ -40,6 +41,7 @@ const App = () => {
 
   // const [formData, setFormData] = useState({
   //   isTest: searchParams.get('test') ? searchParams.get('test') : true,
+  //   externalID: searchParams.get('externalid') ? searchParams.get('externalid') : false,
   //   agreeToTermsOfService: false,
   //   age: '33',
   //   zipcode: '80204',
