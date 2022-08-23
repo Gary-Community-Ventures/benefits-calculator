@@ -1,4 +1,4 @@
-import { Typography, AppBar, CssBaseline } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
@@ -6,6 +6,7 @@ import QuestionComponentContainer from './Components/QuestionComponentContainer/
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
 import EmailResults from './Components/EmailResults/EmailResults';
+import Header from './Components/Header/Header';
 import './App.css';
 
 const App = () => {
@@ -192,9 +193,7 @@ const App = () => {
   return (
     <div className='App'>
       <CssBaseline />
-      <AppBar position='relative'>
-        <Typography variant='h4' align='center'>Benefits Calculator</Typography>
-      </AppBar>
+      <Header/>
       <Routes>
         <Route
           path='/'
