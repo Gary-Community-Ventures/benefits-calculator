@@ -2,6 +2,7 @@ import { Button, Card, CardContent, CardActions, Typography, FormControlLabel, C
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import questions from '../../Assets/questions';
 
 const StyledTypography = styled(Typography)`
@@ -24,8 +25,17 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
 
   return (
     <div className='benefits-form'>
-      <p className='step-progress-title'>Step 1 of { questions.length + 1 }</p>
-      <h2 className='sub-header'>What you should know before we begin:</h2>
+      <p className='step-progress-title'>
+        <FormattedMessage
+          id='disclaimer.step-header'
+          defaultMessage='Step 1 of ' />
+          { questions.length + 1 }
+      </p>
+      <h2 className='sub-header'>
+        <FormattedMessage
+          id='disclaimer.header'
+          defaultMessage='What you should know before we begin: ' />
+      </h2>
       <Card variant='outlined'>
         <CardContent>
           <Typography variant='h6'>
