@@ -8,5 +8,11 @@
   "disclaimer.helper-text": "Check the box below and then click the button to get started.",
   "disclaimer.error": "Please check the box below to continue.",
   "disclaimer-label": "I have read, understand, and agree to the terms of the Gary Disclaimer and consent to contact above.",
-  "continue-button": "Continue"
+  "continue-button": "Continue",
+  "qcc.step-text": "Step ", 
+  "qcc.of-text": " of ",
+  "qcc.tell-us-text": "Tell us a little more about yourself.",
+  "qcc.so-far-text": "So far you’ve told us about:",
+  "qcc.you-text": " You, ",
+  "qcc.hoh-text": " Head of household"
 }
