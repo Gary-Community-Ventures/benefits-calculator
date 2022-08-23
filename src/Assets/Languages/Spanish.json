@@ -2,5 +2,11 @@
   "header.appName": "Calculadora de Beneficios",
   "header.selectLang": "Idioma",
   "disclaimer.step-header": "Paso 1 de ",
-  "disclaimer.header": "Lo que debe saber antes de comenzar: "
+  "disclaimer.header": "Lo que debe saber antes de comenzar:",
+  "disclaimer.sub-header": "Descargo de Responsabilidad de Gary Community Ventures para la evaluación del programa de beneficios públicos",
+  "disclaimer.body": "Esta calculadora de beneficios es una herramienta que recomienda programas de beneficios públicos para que los considere en función de la información que proporcione sobre su hogar y la mejor comprensión de Gary Philanthropy (\"Gary\") de la información disponible públicamente sobre los programas de beneficios. Gary no puede garantizar la elegibilidad o la aceptación en ningún programa. Para inscribirse en un beneficio, deberá presentar una solicitud a través de la agencia gubernamental correspondiente. La agencia gubernamental administradora determinará la elegibilidad final una vez que envíe una solicitud para cada programa. La información que comparta a través de la selección de beneficios públicos se mantendrá confidencial pero puede compartirse con una agencia gubernamental y/o la organización de terceros que lo ayuden con el proceso de la calculadora de beneficios con el único propósito de ayudarlo con las solicitudes de beneficios o ofrecerle servicios gratuitos adicionales a través de Gary. Bajo ninguna circunstancia se venderá su información. Al completar esta calculadora de beneficios, acepta futuras contacto de Gary o de nuestros afiliados con respecto a su uso de la calculadora de beneficios o para ofrecer programas adicionales que puedan ser de su interés y el de su familia. Es posible que se apliquen costos estándar de mensajes y datos a estas comunicaciones, y puede optar a no recibir estas comunicaciones en cualquier momento a través del enlace de exclusión en la comunicación",
+  "disclaimer.helper-text": "Marque la casilla a continuación y luego haga clic en el botón para comenzar.",
+  "disclaimer.error": "Por favor marque la casilla de abajo para continuar.",
+  "disclaimer-label": "He leído, comprendo y acepto los términos de la Exención de responsabilidad de Gary y acepto el contacto anterior.",
+  "continue-button": "Continuar"
 }
