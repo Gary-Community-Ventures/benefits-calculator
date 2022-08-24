@@ -13,7 +13,7 @@ const ContinueButton = ({ handleSubmit, inputError, formData, inputName }) => {
         handleSubmit(event, inputError, formData[inputName], stepNumberId, formData.householdSize);
       }}>
       <FormattedMessage 
-        id='button.continue'
+        id='continueButton'
         defaultMessage='Continue' />
     </Button>
   );
