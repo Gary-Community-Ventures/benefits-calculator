@@ -44,6 +44,20 @@
   "questions.id-12-description" : "This includes money from jobs, alimony, investments, or gifts.",
   "questions.id-12-ariaLabel": "has an income",
   "questions.id-12a": "What type of income have you had most recently?",
-  "questions.id-12a-ariaLabel": "most recent type of income"
-  
+  "questions.id-12a-ariaLabel": "most recent type of income",
+  "questions.id-13": "Do you have any expenses?",
+  "questions.id-13-description" : "This includes costs like child care, child support, rent, medical expenses, heating bills and more.",
+  "questions.id-13-ariaLabel": "has expenses",
+  "questions.id-13a": "What type of expense have you had most recently?",
+  "questions.id-13a-ariaLabel": "most recent type of expense",
+  "questions.id-14": "Including you, how many people are in your household?",
+  "questions.id-14-description" : "This is usually family members who you both live and share important resources with like food and bills.",
+  "questions.id-14-inputLabel": "Household Size",
+  "questions.id-15": "Tell us about the next person in your household.",
+  "questions.id-15-ariaLabel": "screener household data",
+  "questions.id-16": "How much does your whole household have right now in:",
+  "questions.id-16-description" : "Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?",
+  "questions.id-16-inputLabel": "Household Assets",
+  "questions.id-17": "Which of these best applies to your housing situation?",
+  "questions.id-17-description" : "It's OK to pick more than one."
 }
