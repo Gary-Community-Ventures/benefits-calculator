@@ -246,63 +246,106 @@ const questions = [
   },
   {
     id: 13,
-    question: 'Do you have any expenses?',
-    questionDescription: 'This includes costs like child care, child support, rent, medical ' + 
-      'expenses, heating bills and more.',
+    question:
+      <FormattedMessage
+        id='questions.id-13'
+        defaultMessage='Do you have any expenses?' />,
+    questionDescription:
+      <FormattedMessage
+        id='questions.id-13-description'
+        defaultMessage='This includes costs like child care, child support, rent, medical expenses, heating bills and more.' />,
     componentDetails: {
       componentType: 'Radiofield',
-      ariaLabel: 'has expenses',
+      ariaLabel: 
+        <FormattedMessage
+          id='questions.id-13-ariaLabel'
+          defaultMessage='has expenses' />,
       inputName: 'hasExpenses',
       inputError: radiofieldHasError
     },
     followUpQuestions: [{
-      question: 'What type of expense have you had most recently?',
+      question:
+        <FormattedMessage
+          id='questions.id-13a'
+          defaultMessage='What type of expense have you had most recently?' />,
       componentDetails: {
         componentType: 'ExpenseBlock',
-        ariaLabel: 'most recent type of expense'
+        ariaLabel: 
+          <FormattedMessage
+            id='questions.id-13a-ariaLabel'
+            defaultMessage='most recent type of expense' />,
       }
-    }]    
+    }]
   },
   {
     id: 14,
-    question: 'Including you, how many people are in your household?',
-    questionDescription: 'This is usually family members who you both live ' + 
-      'and share important resources with like food and bills.',
+    question:
+      <FormattedMessage
+        id='questions.id-14'
+        defaultMessage='Including you, how many people are in your household?' />,
+    questionDescription: 
+      <FormattedMessage
+        id='questions.id-14-description'
+        defaultMessage='This is usually family members who you both live and share important resources with like food and bills.' />,
     componentDetails: {
       componentType: 'Textfield',
       inputType: 'text',
       inputName: 'householdSize',
-      inputLabel: 'Household Size',
+      inputLabel: 
+        <FormattedMessage
+          id='questions.id-14-inputLabel'
+          defaultMessage='Household Size' />,
       inputError: householdSizeHasError,
       inputHelperText: displayHouseholdSizeHelperText
     }
   },
   {
     id: 15,
-    question: 'Tell us about the next person in your household.',
+    question:
+      <FormattedMessage
+        id='questions.id-15'
+        defaultMessage='Tell us about the next person in your household.' />,
     componentDetails: {
       componentType: 'HouseholdDataBlock',
-      ariaLabel: 'screener household data',
+      ariaLabel: 
+        <FormattedMessage
+          id='questions.id-15-ariaLabel'
+          defaultMessage='screener household data' />,
       inputName: 'householdData'
     }
   },
   {
     id: 16,
-    question: 'How much does your whole household have right now in:',
-    questionDescription: 'Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?',
+    question:
+      <FormattedMessage
+        id='questions.id-16'
+        defaultMessage='How much does your whole household have right now in:' />,
+    questionDescription: 
+      <FormattedMessage
+        id='questions.id-16-description'
+        defaultMessage='Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?' />,
     componentDetails: {
       componentType: 'Textfield',
       inputType: 'text',
       inputName: 'householdAssets',
-      inputLabel: 'Household Assets',
+      inputLabel: 
+        <FormattedMessage
+          id='questions.id-16-inputLabel'
+          defaultMessage='Household Assets' />,
       inputError: householdAssetsHasError,
       inputHelperText: displayHouseholdAssetsHelperText
     }
   },
   {
     id: 17,
-    question: 'Which of these best applies to your housing situation?',
-    questionDescription: "It's OK to pick more than one.",
+    question:
+      <FormattedMessage
+        id='questions.id-17'
+        defaultMessage='Which of these best applies to your housing situation?' />,
+    questionDescription: 
+      <FormattedMessage
+        id='questions.id-17-description'
+        defaultMessage="It's OK to pick more than one." />,
     componentDetails: {
       componentType: 'HousingBlock',
       inputName: 'housing'
