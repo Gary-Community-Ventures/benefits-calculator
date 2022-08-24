@@ -31,5 +31,19 @@
   "questions.id-6a-ariaLabel": "has worked in the past 18 months",
   "questions.id-7": "Are you blind or visually impaired?",
   "questions.id-7-description": "\"Visually impaired\" means a total lack of vision in your better eye, vision of or below 20/200 in your better eye even with eyeglasses or other corrections, or tunnel vision that significantly limits your field of vision.",
-  "questions.id-7-ariaLabel": "is blind or visually impaired"
+  "questions.id-7-ariaLabel": "is blind or visually impaired",
+  "questions.id-8": "Do you have any disabilities?",
+  "questions.id-8-ariaLabel": "has any disabilities",
+  "questions.id-9": "Have you served in the U.S. Armed Forces, National Guard or Reserves?",
+  "questions.id-9-ariaLabel": "is a veteran",
+  "questions.id-10": "Do you receive Medicaid?",
+  "questions.id-10-ariaLabel": "is on Medicaid",
+  "questions.id-11": "Do you receive disability-related Medicaid?",
+  "questions.id-11-ariaLabel": "is on disability-related medicaid",
+  "questions.id-12": "Do you have an income?",
+  "questions.id-12-description" : "This includes money from jobs, alimony, investments, or gifts.",
+  "questions.id-12-ariaLabel": "has an income",
+  "questions.id-12a": "What type of income have you had most recently?",
+  "questions.id-12a-ariaLabel": "most recent type of income"
+  
 }
