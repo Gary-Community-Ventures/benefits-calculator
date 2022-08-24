@@ -74,5 +74,7 @@
   "validation-helperText.hhMemberExpense": "Please select and enter a response for all three expense fields",
   "validation-helperText.email": "Please enter a valid email address",
   "button.previous": "Prev",
-  "button.continue": "Continue"
+  "button.continue": "Continue",
+  "radiofield.label-yes": "Yes",
+  "radiofield.label-no": "No"
 }
