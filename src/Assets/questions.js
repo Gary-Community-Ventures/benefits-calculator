@@ -9,46 +9,71 @@ import {
   householdAssetsHasError,
   displayHouseholdAssetsHelperText
 } from './validationFunctions';
+import { FormattedMessage } from 'react-intl';
 
 const questions = [
   {
     id: 2,
-    question: 'How old are you?',
+    question: 
+      <FormattedMessage
+        id='questions.id-2'
+        defaultMessage='How old are you?' />,
     componentDetails: {
       componentType: 'Textfield',
       inputType: 'text',
       inputName: 'age',
-      inputLabel: 'Age',
+      inputLabel: 
+        <FormattedMessage 
+          id='questions.id-2-inputLabel' 
+          defaultMessage='Age' />,
       inputError: ageHasError,
       inputHelperText: displayAgeHelperText
     }
   },
   {
     id: 3,
-    question: 'What is your zip code?',
+    question: 
+      <FormattedMessage
+        id='questions.id-3'
+        defaultMessage='What is your zip code?' />,
     componentDetails: {
       componentType: 'Textfield',
       inputType: 'text',
       inputName: 'zipcode',
-      inputLabel: 'Zip Code',
+      inputLabel: 
+        <FormattedMessage 
+          id='questions.id-3-inputLabel' 
+          defaultMessage='Zip Code' />,
       inputError: zipcodeHasError,
       inputHelperText: displayZipcodeHelperText
     }    
   },
   {
     id: 4,
-    question: 'Are you a student?',
+    question: 
+      <FormattedMessage
+        id='questions.id-4'
+        defaultMessage='Are you a student?' />,
     componentDetails: {
       componentType: 'Radiofield',
-      ariaLabel: 'is a student',
+      ariaLabel: 
+        <FormattedMessage 
+          id='questions.id-4-ariaLabel' 
+          defaultMessage='is a student' />,
       inputName: 'student',
       inputError: radiofieldHasError
     },
     followUpQuestions: [{
-      question: 'Are you a full-time student?',
+      question: 
+        <FormattedMessage
+          id='questions.id-4a'
+          defaultMessage='Are you a full-time student?' />,
       componentDetails: {
         componentType: 'Radiofield',
-        ariaLabel: 'is a full-time student',
+        ariaLabel: 
+          <FormattedMessage 
+            id='questions.id-4a-ariaLabel' 
+            defaultMessage='is a full-time student' />,
         inputName: 'studentFulltime',
         inputError: radiofieldHasError
       }
@@ -56,28 +81,46 @@ const questions = [
   },
   {
     id: 5,
-    question: 'Are you pregnant?',
+    question: 
+      <FormattedMessage
+        id='questions.id-5'
+        defaultMessage='Are you pregnant?' />,
     componentDetails: {
       componentType: 'Radiofield',
-      ariaLabel: 'is pregnant',
+      ariaLabel: 
+        <FormattedMessage 
+          id='questions.id-5-ariaLabel' 
+          defaultMessage='is pregnant' />,
       inputName: 'pregnant',
       inputError: radiofieldHasError
     }    
   },
   {
     id: 6,
-    question: 'Are you currently unemployed?',
+    question: 
+      <FormattedMessage
+        id='questions.id-6'
+        defaultMessage='Are you currently unemployed?' />,
     componentDetails: {
       componentType: 'Radiofield',
-      ariaLabel: 'is currently unemployed',
+      ariaLabel: 
+        <FormattedMessage 
+          id='questions.id-6-ariaLabel' 
+          defaultMessage='is currently unemployed' />,
       inputName: 'unemployed',
       inputError: radiofieldHasError
     },
     followUpQuestions: [{
-      question: 'Did you work in the past 18 months?',
+      question: 
+        <FormattedMessage
+          id='questions.id-6a'
+          defaultMessage='Did you work in the past 18 months?' />,
       componentDetails: {
         componentType: 'Radiofield',
-        ariaLabel: 'has worked in the past 18 months',
+        ariaLabel: 
+          <FormattedMessage 
+            id='questions.id-6a-ariaLabel' 
+            defaultMessage='has worked in the past 18 months' />,
         inputName: 'unemployedWorkedInLast18Mos',
         inputError: radiofieldHasError
       }
@@ -85,13 +128,21 @@ const questions = [
   },
   {
     id: 7,
-    question: 'Are you blind or visually impaired?',
-    questionDescription: '"Visually impaired" means a total lack of vision in your better eye, ' +
-      'vision of or below 20/200 in your better eye even with eyeglasses or other corrections, or tunnel ' + 
-      'vision that significantly limits your field of vision.',
+    question: 
+      <FormattedMessage
+        id='questions.id-7'
+        defaultMessage='Are you blind or visually impaired?' />,
+    questionDescription: 
+      <FormattedMessage 
+        id='questions.id-7-description'
+        defaultMessage='"Visually impaired" means a total lack of vision in your better eye, vision of or below 20/200 in your better eye even with eyeglasses or other corrections, or tunnel vision that significantly limits your field of vision.' 
+        />,
     componentDetails: {
       componentType: 'Radiofield',
-      ariaLabel: 'is blind or visually impaired',
+      ariaLabel: 
+        <FormattedMessage 
+          id='questions.id-7-ariaLabel' 
+          defaultMessage='is blind or visually impaired' />,
       inputName: 'blindOrVisuallyImpaired',
       inputError: radiofieldHasError
     }    
