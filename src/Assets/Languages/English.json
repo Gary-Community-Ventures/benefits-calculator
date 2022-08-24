@@ -59,5 +59,19 @@
   "questions.id-16-description" : "Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?",
   "questions.id-16-inputLabel": "Household Assets",
   "questions.id-17": "Which of these best applies to your housing situation?",
-  "questions.id-17-description" : "It's OK to pick more than one."
+  "questions.id-17-description" : "It's OK to pick more than one.",
+  "validation-helperText.age": "Please enter a valid age (13-130)",
+  "validation-helperText.zipcode": "Please enter a valid CO zipcode",
+  "validation-helperText.incomeValue": "Please enter a number greater than 0",
+  "validation-helperText.expenseValue": "Please enter a number greater than 0",
+  "validation-helperText.householdSize": "Number of People (max. 8)",
+  "validation-helperText.assets": "Please enter 0 or a positive number.",
+  "validation-helperText.hHMemberAge": "Please enter 0 or a positive number",
+  "validation-helperText.hhMemberAgeB": "Please enter an age greater than 0",
+  "validation-helperText.hhMemberRelation": "Please select a relation option",
+  "validation-helperText.hhMemberNoneApply": "Please deselect all other options if none of these conditions apply",
+  "validation-helperText.hhMemberIncome": "Please select and enter a response for all three income fields",
+  "validation-helperText.hhMemberExpense": "Please select and enter a response for all three expense fields",
+  "validation-helperText.email": "Please enter a valid email address"
+
 }
