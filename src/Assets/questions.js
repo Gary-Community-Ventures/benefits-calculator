@@ -149,59 +149,98 @@ const questions = [
   },
   {
     id: 8,
-    question: 'Do you have any disabilities?',
+    question:
+      <FormattedMessage
+        id='questions.id-8'
+        defaultMessage='Do you have any disabilities?' />,
     componentDetails: {
       componentType: 'Radiofield',
-      ariaLabel: 'has any disabilities',
+      ariaLabel:
+        <FormattedMessage
+          id='questions.id-8-ariaLabel'
+          defaultMessage='has any disabilities' />,
       inputName: 'disabled',
       inputError: radiofieldHasError
     }    
   },
   {
     id: 9,
-    question: 'Have you served in the U.S. Armed Forces, National Guard or Reserves?',
+    question:
+      <FormattedMessage
+        id='questions.id-9'
+        defaultMessage='Have you served in the U.S. Armed Forces, National Guard or Reserves?' />,
     componentDetails: {
       componentType: 'Radiofield',
-      ariaLabel: 'is a veteran',
+      ariaLabel:
+        <FormattedMessage
+          id='questions.id-9-ariaLabel'
+          defaultMessage='is a veteran' />,
       inputName: 'veteran',
       inputError: radiofieldHasError
     }    
   },
   {
     id: 10,
-    question: 'Do you receive Medicaid?',
+    question:
+      <FormattedMessage
+        id='questions.id-10'
+        defaultMessage='Do you receive Medicaid?' />,
     componentDetails: {
       componentType: 'Radiofield',
-      ariaLabel: 'is on Medicaid',
+      ariaLabel:
+        <FormattedMessage
+          id='questions.id-10-ariaLabel'
+          defaultMessage='is on Medicaid' />,
       inputName: 'medicaid',
       inputError: radiofieldHasError
     }    
   },
   {
     id: 11,
-    question: 'Do you receive disability-related Medicaid?',
+    question:
+      <FormattedMessage
+        id='questions.id-11'
+        defaultMessage='Do you receive disability-related Medicaid?' />,
     componentDetails: {
       componentType: 'Radiofield',
-      ariaLabel: 'is on disability-related medicaid',
+      ariaLabel:
+        <FormattedMessage
+          id='questions.id-11-ariaLabel'
+          defaultMessage='is on disability-related medicaid' />,
       inputName: 'disabilityRelatedMedicaid',
       inputError: radiofieldHasError
     }    
   },
   {
     id: 12,
-    question: 'Do you have an income?',
-    questionDescription: 'This includes money from jobs, alimony, investments, or gifts.',
+    question:
+      <FormattedMessage
+        id='questions.id-12'
+        defaultMessage='Do you have an income?' />,
+    questionDescription: 
+      <FormattedMessage
+        id='questions.id-12-description'
+        defaultMessage='This includes money from jobs, alimony, investments, or gifts.' />,
     componentDetails: {
       componentType: 'Radiofield',
-      ariaLabel: 'has an income',
+      ariaLabel:
+        <FormattedMessage
+          id='questions.id-12-ariaLabel'
+          defaultMessage='has an income' />,
       inputName: 'hasIncome',
       inputError: radiofieldHasError
     },
     followUpQuestions: [{
-      question: 'What type of income have you had most recently?',
+      question:
+        <FormattedMessage
+          id='questions.id-12a'
+          defaultMessage='What type of income have you had most recently?' />,
       componentDetails: {
         componentType: 'IncomeBlock',
-        ariaLabel: 'most recent type of income'
+        ariaLabel:
+          <FormattedMessage
+            id='questions.id-12a-ariaLabel'
+            defaultMessage='most recent type of income' />
       }
     }]    
   },
