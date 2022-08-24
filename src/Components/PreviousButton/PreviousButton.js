@@ -19,7 +19,7 @@ const PreviousButton = ({ formData }) => {
       }}
       variant='contained'>
         <FormattedMessage 
-          id='button.previous'
+          id='previousButton'
           defaultMessage='Prev' />
     </Button>
   );
