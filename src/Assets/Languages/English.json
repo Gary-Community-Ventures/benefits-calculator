@@ -14,5 +14,22 @@
   "qcc.tell-us-text": "Tell us a little more about yourself.",
   "qcc.so-far-text": "So far you’ve told us about:",
   "qcc.you-text": " You, ",
-  "qcc.hoh-text": " Head of household"
+  "qcc.hoh-text": " Head of household",
+  "questions.id-2": "How old are you?",
+  "questions.id-2-inputLabel": "Age",
+  "questions.id-3": "What is your zipcode?",
+  "questions.id-3-inputLabel": "Zip Code",
+  "questions.id-4": "Are you a student?",
+  "questions.id-4-ariaLabel": "is a student",
+  "questions.id-4a": "Are you a full-time student?",
+  "questions.id-4a-ariaLabel": "is a full-time student",
+  "questions.id-5": "Are you pregnant?",
+  "questions.id-5-ariaLabel": "is pregnant",
+  "questions.id-6": "Are you currently unemployed?",
+  "questions.id-6-ariaLabel": "is currently unemployed",
+  "questions.id-6a": "Did you work in the past 18 months?",
+  "questions.id-6a-ariaLabel": "has worked in the past 18 months",
+  "questions.id-7": "Are you blind or visually impaired?",
+  "questions.id-7-description": "\"Visually impaired\" means a total lack of vision in your better eye, vision of or below 20/200 in your better eye even with eyeglasses or other corrections, or tunnel vision that significantly limits your field of vision.",
+  "questions.id-7-ariaLabel": "is blind or visually impaired"
 }
