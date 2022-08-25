@@ -4,6 +4,7 @@ import { housingSourcesAreValid } from "../../Assets/validationFunctions";
 import { useState } from 'react';
 import PreviousButton from "../PreviousButton/PreviousButton";
 import housingOptions from '../../Assets/housingOptions';
+import { FormattedMessage } from 'react-intl';
 
 const StyledTypography = styled(Typography)`
   color: #c6252b;
@@ -57,14 +58,23 @@ const HousingBlock = ({ handleHousingSourcesSubmit, formData }) => {
         {createFormControlLabels()}
       </FormGroup>
       { housingBlockIsMissingCheckbox() && 
-        <StyledTypography gutterBottom>*Please select a housing option</StyledTypography> || <StyledTypography></StyledTypography>}
+        <StyledTypography gutterBottom>
+          <FormattedMessage 
+            id='housingBlock.errorMessage'
+            defaultMessage='*Please select a housing option' />
+        </StyledTypography> 
+      || 
+        <StyledTypography />
+      }
       <div className='prev-save-continue-buttons'>
         <PreviousButton />
         <Button
           variant='contained'
           onClick={(event) => { handleCheckboxSaveAndContinue(event) }}
         >
-          Continue
+          <FormattedMessage 
+            id='continueButton'
+            defaultMessage='Continue' />
         </Button>
       </div>
     </>
