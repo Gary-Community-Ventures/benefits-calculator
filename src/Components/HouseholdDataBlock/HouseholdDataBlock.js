@@ -168,7 +168,11 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const createHOfHRelationQuestion = (index) => {
     return (
       <>
-        <p className='question-label'>What is this person’s relationship to the head of the household?</p>
+        <p className='question-label'>
+          <FormattedMessage
+            id='householdDataBlock.createHOfHRelationQuestion-relation'
+            defaultMessage='What is this person’s relationship to the head of the household?' />
+        </p>
         { createRelationshipDropdownMenu(index) }
         <p className='household-data-q-underline'></p>
       </>
@@ -216,10 +220,19 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const createDropdownCompProps = () => {
     const dropdownCompProps = {
       labelId:'relation-to-hh-label',
-      inputLabelText: 'Relation',
+      inputLabelText: 
+        <FormattedMessage
+          id='householdDataBlock.createDropdownCompProps-inputLabelText'
+          defaultMessage='Relation' />,
       id: 'relationship-select',
-      label:'Relation Type', 
-      disabledSelectMenuItemText: 'Click to select relationship'
+      label:
+        <FormattedMessage
+          id='householdDataBlock.createDropdownCompProps-label'
+          defaultMessage='Relation Type' />,
+      disabledSelectMenuItemText: 
+        <FormattedMessage
+          id='householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText'
+          defaultMessage='Click to select relationship' />
     }
 
     return dropdownCompProps;
