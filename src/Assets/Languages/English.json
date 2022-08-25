@@ -105,6 +105,8 @@
   "relationshipOptions.boyfriendOrGirlfriend":  "Boyfriend/Girlfriend",
   "relationshipOptions.domesticPartner":  "Domestic Partner",
   "relationshipOptions.unrelated":  "Unrelated",
-  "relationshipOptions.relatedOther":  "Related in some other way"
+  "relationshipOptions.relatedOther":  "Related in some other way",
+  "householdDataBlock.createConditionsQuestion-do-these-apply": "Do any of these apply to them?",
+  "householdDataBlock.createConditionsQuestion-pick": "It's OK to pick more than one."
 
 }
