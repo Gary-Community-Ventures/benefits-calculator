@@ -107,6 +107,15 @@
   "relationshipOptions.unrelated":  "Unrelated",
   "relationshipOptions.relatedOther":  "Related in some other way",
   "householdDataBlock.createConditionsQuestion-do-these-apply": "Do any of these apply to them?",
-  "householdDataBlock.createConditionsQuestion-pick": "It's OK to pick more than one."
+  "householdDataBlock.createConditionsQuestion-pick": "It's OK to pick more than one.",
+  "conditionOptions.student": "Student",
+  "conditionOptions.pregnant": "Pregnant",
+  "conditionOptions.unemployed": "Unemployed",
+  "conditionOptions.blindOrVisuallyImpaired": "Blind or visually impaired",
+  "conditionOptions.disabled": "Have any disabilities",
+  "conditionOptions.veteran": "Served in the U.S. Armed Forces, National Guard or Reserves",
+  "conditionOptions.medicaid": "Receives Medicaid",
+  "conditionOptions.disabilityRelatedMedicaid": "Receives Disability-related Medicaid",
+  "conditionOptions.noneOfTheseApply": "None of these apply"
 
 }
