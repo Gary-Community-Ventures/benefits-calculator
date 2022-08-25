@@ -102,11 +102,11 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <>
         <FormattedMessage 
-          id='householdDataBlock.ageInputLabel-person'
+          id='householdDataBlock.createFMInputLabel-person'
           defaultMessage='Person ' />
         {personIndex + 1}
         <FormattedMessage 
-          id='householdDataBlock.ageInputLabel-age'
+          id='householdDataBlock.createFMInputLabel-age'
           defaultMessage=' Age' />
       </>
     );
@@ -124,7 +124,10 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
     return (
       <>
-        <p className='question-label'>How old are they?</p>
+        <p className='question-label'>
+
+          How old are they?
+        </p>
         { createTextfield(ageTextfieldProps, personIndex) }
         <p className='household-data-q-underline'></p>
       </>
