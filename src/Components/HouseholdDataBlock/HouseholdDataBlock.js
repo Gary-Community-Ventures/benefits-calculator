@@ -11,6 +11,7 @@ import conditionOptions from '../../Assets/conditionOptions';
 import HouseholdDataPreviousButton from '../PreviousButton/HouseholdDataPreviousButton';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { householdMemberAgeHasError, displayHouseholdMemberAgeHelperText } from '../../Assets/validationFunctions';
+import { FormattedMessage } from 'react-intl';
 
 const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const { householdSize } = formData; //# of blocks - 1 that will need to be created for each household member
@@ -97,7 +98,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     setState({...state, householdData: updatedHouseholdData})
   }, useEffectDependencies);
 
-  const createInputLabel = (personIndex) => {
+  const createFMInputLabel = (personIndex) => {
     return (
       <>
         <FormattedMessage 
@@ -116,7 +117,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       inputType: 'text',
       inputName: 'age', 
       inputValue: state.householdData[personIndex].age,
-      inputLabel: `Person ${personIndex + 1} Age`,
+      inputLabel: createFMInputLabel(personIndex),
       inputError: householdMemberAgeHasError,
       inputHelperText: displayHouseholdMemberAgeHelperText
     }
