@@ -7,7 +7,6 @@ export const Context = React.createContext();
 
 const Wrapper = (props) => {
   const local = navigator.language;
-  console.log({local})
   let language;
   
   local.includes("en-US") ? language = English : language = Spanish;
