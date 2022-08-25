@@ -83,5 +83,8 @@
   "housingOptions.hotel": "In a hotel",
   "housingOptions.shelter": "In a shelter or homeless",
   "housingOptions.preferNotToSay": "Prefer not to say",
-  "housingBlock.errorMessage": "*Please select a housing option"
+  "housingBlock.errorMessage": "*Please select a housing option",
+  "householdDataBlock.ageInputLabel-person": "Person ",
+  "householdDataBlock.ageInputLabel-age": " Age"
+  
 }
