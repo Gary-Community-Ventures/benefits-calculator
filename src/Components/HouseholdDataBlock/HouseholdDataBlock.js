@@ -279,14 +279,21 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const createFTStudentRadioQuestion = (index) => {
     const radiofieldProps = {
-      ariaLabel: 'is a full-time student',
+      ariaLabel: 
+        <FormattedMessage 
+          id='householdDataBlock.createFTStudentRadioQuestion-ariaLabel' 
+          defaultMessage='is a full-time student' />,
       inputName: 'studentFulltime',
       value: state.householdData[index].studentFulltime
     };
 
     return (
       <>
-        <p className='question-label radio-question'>Are they a full-time student?</p>
+        <p className='question-label radio-question'>
+          <FormattedMessage 
+            id='householdDataBlock.createFTStudentRadioQuestion-questionLabel' 
+            defaultMessage='Are they a full-time student?' />
+        </p>
         <HHDataRadiofield 
           componentDetails={radiofieldProps}
           setState={setState}
