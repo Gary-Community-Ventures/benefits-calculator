@@ -1,5 +1,6 @@
 import {FormControlLabel, RadioGroup, Radio } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { FormattedMessage } from 'react-intl';
 import './Radiofield.css';
 
 const StyledFormControlLabel = styled(FormControlLabel)({
@@ -34,8 +35,24 @@ const HHDataRadiofield = ({ componentDetails, state, setState, index }) => {
         name={inputName}
         value={value}
         onChange={(event) => { handleRadioButtonChange(event, index) } }>
-          <StyledFormControlLabel value='true' control={<Radio />} label='Yes' />
-          <StyledFormControlLabel value='false' control={<Radio />} label='No' />
+          <StyledFormControlLabel 
+            value='true' 
+            control={<Radio />} 
+            label={
+              <FormattedMessage 
+                id='radiofield.label-yes' 
+                defaultMessage='Yes' />
+            }
+          />
+          <StyledFormControlLabel 
+            value='false' 
+            control={<Radio />} 
+            label={
+              <FormattedMessage 
+                id='radiofield.label-no' 
+                defaultMessage='No' />
+            }
+          />
       </RadioGroup>
     </div>
   );
