@@ -85,6 +85,7 @@
   "housingOptions.preferNotToSay": "Prefer not to say",
   "housingBlock.errorMessage": "*Please select a housing option",
   "householdDataBlock.createFMInputLabel-person": "Person ",
-  "householdDataBlock.createFMInputLabel-age": " Age"
+  "householdDataBlock.createFMInputLabel-age": " Age",
+  "householdDataBlock.createAgeQuestion-how": "How old are they?"
 
 }
