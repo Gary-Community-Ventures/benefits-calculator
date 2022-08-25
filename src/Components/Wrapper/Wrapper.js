@@ -7,6 +7,7 @@ export const Context = React.createContext();
 
 const Wrapper = (props) => {
   const local = navigator.language;
+  console.log({local})
   let language;
   
   local.includes("en-US") ? language = English : language = Spanish;
@@ -22,7 +23,7 @@ const Wrapper = (props) => {
 
   return (
     <Context.Provider value={{ locale, selectLanguage }} >
-      <IntlProvider locale={ locale } messages={ messages } defaultLocale="en-US">
+      <IntlProvider locale={ locale } messages={ messages } defaultLocale={ locale }>
         { props.children }
       </IntlProvider>
     </Context.Provider>
