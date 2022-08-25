@@ -262,8 +262,16 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const createConditionsQuestion = (index) => {
     return (
       <>
-        <p className='question-label'>Do any of these apply to them?</p>
-        <p className='question-description'>It's OK to pick more than one.</p>
+        <p className='question-label'>
+          <FormattedMessage 
+            id='householdDataBlock.createConditionsQuestion-do-these-apply' 
+            defaultMessage='Do any of these apply to them?' />
+        </p>
+        <p className='question-description'>
+          <FormattedMessage 
+            id='householdDataBlock.createConditionsQuestion-pick' 
+            defaultMessage="It's OK to pick more than one." />
+        </p>
         { createConditionsCheckboxMenu(index) }
       </>
     );
