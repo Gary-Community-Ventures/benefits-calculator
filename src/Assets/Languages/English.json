@@ -90,5 +90,21 @@
   "householdDataBlock.createHOfHRelationQuestion-relation": "What is this person’s relationship to the head of the household?",
   "householdDataBlock.createDropdownCompProps-inputLabelText": "Relation",
   "householdDataBlock.createDropdownCompProps-label": "Relation Type",
-  "householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText": "Click to select relationship"
+  "householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText": "Click to select relationship",
+  "relationshipOptions.child": "Child",
+  "relationshipOptions.fosterChild":  "Foster Child",
+  "relationshipOptions.stepChild":  "Step-child",
+  "relationshipOptions.grandChild":  "Grandchild",
+  "relationshipOptions.spouse":  "Spouse",
+  "relationshipOptions.parent":  "Parent",
+  "relationshipOptions.fosterParent":  "Foster Parent",
+  "relationshipOptions.stepParent":  "Step-parent",
+  "relationshipOptions.grandParent":  "Grandparent",
+  "relationshipOptions.sisterOrBrother":  "Sister/Brother",
+  "relationshipOptions.stepSisterOrBrother":  "Step-sister/Step-brother",
+  "relationshipOptions.boyfriendOrGirlfriend":  "Boyfriend/Girlfriend",
+  "relationshipOptions.domesticPartner":  "Domestic Partner",
+  "relationshipOptions.unrelated":  "Unrelated",
+  "relationshipOptions.relatedOther":  "Related in some other way"
+
 }
