@@ -86,6 +86,9 @@
   "housingBlock.errorMessage": "*Please select a housing option",
   "householdDataBlock.createFMInputLabel-person": "Person ",
   "householdDataBlock.createFMInputLabel-age": " Age",
-  "householdDataBlock.createAgeQuestion-how": "How old are they?"
-
+  "householdDataBlock.createAgeQuestion-how": "How old are they?",
+  "householdDataBlock.createHOfHRelationQuestion-relation": "What is this person’s relationship to the head of the household?",
+  "householdDataBlock.createDropdownCompProps-inputLabelText": "Relation",
+  "householdDataBlock.createDropdownCompProps-label": "Relation Type",
+  "householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText": "Click to select relationship"
 }
