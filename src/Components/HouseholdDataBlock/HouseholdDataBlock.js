@@ -97,6 +97,20 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     setState({...state, householdData: updatedHouseholdData})
   }, useEffectDependencies);
 
+  const createInputLabel = (personIndex) => {
+    return (
+      <>
+        <FormattedMessage 
+          id='householdDataBlock.ageInputLabel-person'
+          defaultMessage='Person ' />
+        {personIndex + 1}
+        <FormattedMessage 
+          id='householdDataBlock.ageInputLabel-age'
+          defaultMessage=' Age' />
+      </>
+    );
+  }
+
   const createAgeQuestion = (personIndex) => {
     const ageTextfieldProps = {
       inputType: 'text',
