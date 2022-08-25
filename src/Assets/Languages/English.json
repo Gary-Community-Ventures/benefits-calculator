@@ -76,5 +76,11 @@
   "previousButton": "Prev",
   "continueButton": "Continue",
   "radiofield.label-yes": "Yes",
-  "radiofield.label-no": "No"
+  "radiofield.label-no": "No",
+  "housingOptions.renting": "Renting",
+  "housingOptions.owner": "You or a household member owns the home or apartment",
+  "housingOptions.stayingWithFriend": "Staying with friend",
+  "housingOptions.hotel": "In a hotel",
+  "housingOptions.shelter": "In a shelter or homeless",
+  "housingOptions.preferNotToSay": "Prefer not to say"
 }
