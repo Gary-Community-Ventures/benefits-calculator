@@ -127,6 +127,29 @@
   "personIncomeBlock.return-questionLabel": "What type of income have they had most recently?",
   "personIncomeBlock.return-questionDescription": "Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.",
   "personIncomeBlock.return-addIncomeButton": "Add another income",
-  "personIncomeBlock.createMenuItems-disabledSelectMenuItem": "Select"
+  "personIncomeBlock.createMenuItems-disabledSelectMenuItem": "Select",
+  "incomeOptions.wages": "Wages, salaries, tips",
+  "incomeOptions.selfEmployment": "Self-employment Income",
+  "incomeOptions.unemployment": "Unemployment Benefits",
+  "incomeOptions.cashAssistance": "Cash Assistance Grant",
+  "incomeOptions.childSupport": "Child Support (Received)",
+  "incomeOptions.disabilityMedicaid": "Disability-related Medicaid",
+  "incomeOptions.sSI": "Supplemental Security Income (SSI)",
+  "incomeOptions.sSDependent": "Social Security Dependent Benefits",
+  "incomeOptions.sSDisability": "Social Security Disability Benefits",
+  "incomeOptions.sSSurvivor": "Social Security Survivor's Benefits",
+  "incomeOptions.sSRetirement": "Social Security Retirement Benefits",
+  "incomeOptions.cOSDisability": "Colorado State Disability Benefits",
+  "incomeOptions.veteran": "Veteran's Pension or Benefits",
+  "incomeOptions.pension": "Government or Private Pension",
+  "incomeOptions.deferredComp": "Withdrawals from Deferred Compensation (IRA, Keogh, etc.)",
+  "incomeOptions.workersComp": "Worker's Compensation",
+  "incomeOptions.alimony": "Alimony (Received)",
+  "incomeOptions.boarder": "Boarder or Lodger",
+  "incomeOptions.gifts": "Gifts/Contributions (Received)",
+  "incomeOptions.rental": "Rental Income",
+  "incomeOptions.investment": "Investment Income (interest, dividends, and profit from selling stocks)"
+
+  
 
 }
