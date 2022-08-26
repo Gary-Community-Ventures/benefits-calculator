@@ -1,3 +1,4 @@
+import { FormattedMessage } from 'react-intl';
 import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
 import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
@@ -248,15 +249,23 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 
   return (
     <>
-      <p className='question-label radio-question'>What type of income have they had most recently?</p>
-      <p className='question-description'>Answer the best you can. You will be able to include additional types of income. 
-        The more you include, the more accurate your results will be.
+      <p className='question-label radio-question'>
+        <FormattedMessage 
+          id='personIncomeBlock.return-questionLabel' 
+          defaultMessage='What type of income have they had most recently?' />
+      </p>
+      <p className='question-description'>
+        <FormattedMessage 
+          id='personIncomeBlock.return-questionDescription' 
+          defaultMessage='Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.' />
       </p>
       {createIncomeBlockQuestions()}
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalIncomeSource(event)} >
-        Add another income
+          <FormattedMessage 
+            id='personIncomeBlock.return-addIncomeButton' 
+            defaultMessage='Add another income' />
       </Button>
     </>
   );
