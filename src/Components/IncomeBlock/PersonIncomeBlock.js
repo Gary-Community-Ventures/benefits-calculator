@@ -57,7 +57,15 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   }, [selectedMenuItem]);
 
   const createMenuItems = () => {
-    const disabledSelectMenuItem = <MenuItem value='select' key='disabled-select-value' disabled>Select</MenuItem>;
+    const disabledSelectMenuItem = 
+      <MenuItem 
+        value='select' 
+        key='disabled-select-value' 
+        disabled >
+        <FormattedMessage 
+          id='personIncomeBlock.createMenuItems-disabledSelectMenuItem' 
+          defaultMessage='Select' />
+      </MenuItem>;
     const menuItemKeys = Object.keys(incomeOptions);
     const menuItemLabels = Object.values(incomeOptions);
 
