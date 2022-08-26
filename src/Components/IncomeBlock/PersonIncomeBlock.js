@@ -207,7 +207,12 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   const createIncomeBlockQuestions = () => {
     return selectedMenuItem.map((incomeSourceData, index) => {
       const { incomeStreamName, incomeStreamLabel, incomeAmount, incomeFrequency } = incomeSourceData;
-      const incomeStreamQuestion = <p className='question-label'>If they receive another type of income, select it below.</p>;
+      const incomeStreamQuestion = 
+        <p className='question-label'>
+          <FormattedMessage 
+            id='personIncomeBlock.createIncomeBlockQuestions-questionLabel' 
+            defaultMessage='If they receive another type of income, select it below.' />
+        </p>;
       return (
         <div key={index}>
           {index > 0 &&
