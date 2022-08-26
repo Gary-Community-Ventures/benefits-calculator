@@ -120,6 +120,9 @@
   "householdDataBlock.createFTStudentRadioQuestion-ariaLabel": "is a full-time student",
   "householdDataBlock.createFTStudentRadioQuestion-questionLabel": "Are they a full-time student?",
   "householdDataBlock.createUnemployed18MosRadioQuestion-ariaLabel": "has worked in the past 18 months",
-  "householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel": "Did they work in the last 18 months?"
+  "householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel": "Did they work in the last 18 months?",
+  "householdDataBlock.createIncomeRadioQuestion-ariaLabel": "has an income",
+  "householdDataBlock.createIncomeRadioQuestion-questionLabel": "Do they have an income?",
+  "householdDataBlock.createIncomeRadioQuestion-questionDescription": "This includes money from jobs, alimony, investments, or gifts."
 
 }
