@@ -331,15 +331,26 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const createIncomeRadioQuestion = (index) => {
     const radiofieldProps = {
-      ariaLabel: 'has an income',
+      ariaLabel: 
+        <FormattedMessage 
+          id='householdDataBlock.createIncomeRadioQuestion-ariaLabel' 
+          defaultMessage='has an income' />,
       inputName: 'hasIncome',
       value: state.householdData[index].hasIncome
     };
 
     return (
       <>
-        <p className='question-label radio-question'>Do they have an income?</p>
-        <p className='question-description'>This includes money from jobs, alimony, investments, or gifts.</p>
+        <p className='question-label radio-question'>
+          <FormattedMessage 
+            id='householdDataBlock.createIncomeRadioQuestion-questionLabel' 
+            defaultMessage='Do they have an income?' />
+        </p>
+        <p className='question-description'>
+          <FormattedMessage 
+            id='householdDataBlock.createIncomeRadioQuestion-questionDescription' 
+            defaultMessage='This includes money from jobs, alimony, investments, or gifts.' />
+        </p>
         <HHDataRadiofield 
           componentDetails={radiofieldProps}
           setState={setState}
