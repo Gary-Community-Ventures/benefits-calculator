@@ -126,6 +126,7 @@
   "householdDataBlock.createIncomeRadioQuestion-questionDescription": "This includes money from jobs, alimony, investments, or gifts.",
   "personIncomeBlock.return-questionLabel": "What type of income have they had most recently?",
   "personIncomeBlock.return-questionDescription": "Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.",
-  "personIncomeBlock.return-addIncomeButton": "Add another income"
+  "personIncomeBlock.return-addIncomeButton": "Add another income",
+  "personIncomeBlock.createMenuItems-disabledSelectMenuItem": "Select"
 
 }
