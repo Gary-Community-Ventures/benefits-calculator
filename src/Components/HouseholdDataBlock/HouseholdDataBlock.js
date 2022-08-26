@@ -305,14 +305,21 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const createUnemployed18MosRadioQuestion = (index) => {
     const radiofieldProps = {
-      ariaLabel: 'has worked in the past 18 months',
+      ariaLabel: 
+        <FormattedMessage 
+          id='householdDataBlock.createUnemployed18MosRadioQuestion-ariaLabel' 
+          defaultMessage='has worked in the past 18 months' />,
       inputName: 'unemployedWorkedInLast18Mos',
       value: state.householdData[index].unemployedWorkedInLast18Mos
     };
 
     return (
       <>
-        <p className='question-label radio-question'>Did they work in the last 18 months?</p>
+        <p className='question-label radio-question'>
+          <FormattedMessage 
+            id='householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel' 
+            defaultMessage='Did they work in the last 18 months?' />
+        </p>
         <HHDataRadiofield 
           componentDetails={radiofieldProps}
           setState={setState}
