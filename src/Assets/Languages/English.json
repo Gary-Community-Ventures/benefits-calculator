@@ -148,8 +148,6 @@
   "incomeOptions.boarder": "Boarder or Lodger",
   "incomeOptions.gifts": "Gifts/Contributions (Received)",
   "incomeOptions.rental": "Rental Income",
-  "incomeOptions.investment": "Investment Income (interest, dividends, and profit from selling stocks)"
-
-  
-
+  "incomeOptions.investment": "Investment Income (interest, dividends, and profit from selling stocks)",
+  "personIncomeBlock.createIncomeBlockQuestions-questionLabel": "If they receive another type of income, select it below."
 }
