@@ -162,13 +162,22 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex, disab
   const createIncomeAmountTextfield = (incomeStreamName, incomeAmount, index) => {
     return (
       <div>
-        <p className='question-label'>How much do they receive for this type of income: {selectedMenuItem[index].incomeStreamLabel}?</p>
+        <p className='question-label'>
+          <FormattedMessage 
+            id='personIncomeBlock.createIncomeAmountTextfield-questionLabel' 
+            defaultMessage='How much do they receive for this type of income: ' />
+          {selectedMenuItem[index].incomeStreamLabel}?
+        </p>
         <div className='income-block-textfield'>
           <StyledTextField 
             type='text'
             name={incomeStreamName}
             value={incomeAmount}
-            label='Amount'
+            label={
+              <FormattedMessage 
+                id='personIncomeBlock.createIncomeAmountTextfield-amountLabel' 
+                defaultMessage='Amount' />
+            }
             onChange={(event) => {handleIncomeTextfieldChange(event, index)}}
             variant='outlined'
             required
