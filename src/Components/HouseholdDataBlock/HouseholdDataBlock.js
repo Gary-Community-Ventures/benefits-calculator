@@ -361,18 +361,13 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   }
 
   const createPersonIncomeBlock = (index) => {
-    const disabledSelectMenuItemText = 
-      <FormattedMessage 
-        id='personIncomeBlock.createMenuItems-disabledSelectMenuItem' 
-        defaultMessage='Select' />;
     return ( 
       <>
         <PersonIncomeBlock 
           personData={state.householdData[index]} 
           setState={setState}
           state={state}
-          personDataIndex={index} 
-          disabledSelectMenuItemText={disabledSelectMenuItemText} />
+          personDataIndex={index} />
         <p className='household-data-q-underline'></p>
       </>
     );

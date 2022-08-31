@@ -24,7 +24,7 @@ const StyledTypography = styled(Typography)`
   height: 24px;
 `;
 
-const PersonIncomeBlock = ({ personData, state, setState, personDataIndex, disabledSelectMenuItemText }) => {
+const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those 
   //first by assigning them to the initial selectedMenuItem state
   //if not then create the initial income block questions
@@ -58,7 +58,11 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex, disab
 
   const createMenuItems = () => {
     const disabledSelectMenuItem = 
-      <MenuItem value='select' key='disabled-select-value' disabled>{disabledSelectMenuItemText}</MenuItem>;
+      <MenuItem value='select' key='disabled-select-value' disabled>
+        <FormattedMessage 
+        id='personIncomeBlock.createMenuItems-disabledSelectMenuItem' 
+        defaultMessage='Select' />
+      </MenuItem>;
     const menuItemKeys = Object.keys(incomeOptions);
     const menuItemLabels = Object.values(incomeOptions);
 
