@@ -169,6 +169,7 @@
   "personExpenseBlock.return-questionDescription": "Responda lo mejor que pueda. Podrá incluir tipos de gastos adicionales. Cuanto más incluya, más precisos serán sus resultados.",
   "personExpenseBlock.return-addExpenseButton": "Agregar otro gasto",
   "personExpenseBlock.createExpenseBlockQuestions-questionLabel": "Si tiene otro gasto, selecciónelo a continuación.",
-  "personExpenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel": "Tipo de gasto"
+  "personExpenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel": "Tipo de gasto",
+  "personExpenseBlock.createExpenseMenuItems-disabledSelect": "Seleccionar"
 
 }
