@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 const HouseholdDataPreviousButton = ({ page, setPage }) => {
   const navigate = useNavigate();
@@ -22,7 +23,9 @@ const HouseholdDataPreviousButton = ({ page, setPage }) => {
       className='prev-button'
       variant='contained'
       onClick={(event) => { handlePrevious(event) }}>
-      Prev
+      <FormattedMessage 
+        id='previousButton'
+        defaultMessage='Prev' />
     </Button>
   );
 }
