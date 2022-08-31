@@ -9,7 +9,7 @@
   "disclaimer.error": "Por favor marque la casilla de abajo para continuar.",
   "disclaimer-label": "He leído, comprendo y acepto los términos de la Exención de responsabilidad de Gary y acepto el contacto anterior.",
   "continue-button": "Continuar",
-  "qcc.step-text": "Paso",
+  "qcc.step-text": "Paso ",
   "qcc.of-text": " de ",
   "qcc.tell-us-text": "Cuéntanos un poco más sobre ti.",
   "qcc.so-far-text": "Hasta ahora nos ha hablado de:",
@@ -168,6 +168,7 @@
   "personExpenseBlock.return-questionLabel": "¿Qué tipo de gasto ha tenido más recientemente?",
   "personExpenseBlock.return-questionDescription": "Responda lo mejor que pueda. Podrá incluir tipos de gastos adicionales. Cuanto más incluya, más precisos serán sus resultados.",
   "personExpenseBlock.return-addExpenseButton": "Agregar otro gasto",
-  "personExpenseBlock.createExpenseBlockQuestions-questionLabel": "Si tiene otro gasto, selecciónelo a continuación."
+  "personExpenseBlock.createExpenseBlockQuestions-questionLabel": "Si tiene otro gasto, selecciónelo a continuación.",
+  "personExpenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel": "Tipo de gasto"
 
 }
