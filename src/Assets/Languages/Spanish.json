@@ -190,5 +190,7 @@
   "expenseFrequencyOptions.biweekly": "Cada 2 semanas",
   "expenseFrequencyOptions.monthly": "Cada mes",
   "expenseFrequencyOptions.semimonthly": "Dos veces al mes",
-  "expenseFrequencyOptions.yearly": "Cada año"
+  "expenseFrequencyOptions.yearly": "Cada año",
+  "personExpenseBlock.createExpenseAmountTextfield-questionLabel": "¿Cuánto es este tipo de gasto: ",
+  "personExpenseBlock.createExpenseAmountTextfield-expenseAmountTextfieldLabel": "Cantidad"
 }
