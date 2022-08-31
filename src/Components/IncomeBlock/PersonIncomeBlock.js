@@ -227,8 +227,8 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex, disab
           }
           {index > 0 && incomeStreamQuestion}
           {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
-          {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
           {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+          {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
         </div>
       );
     });
