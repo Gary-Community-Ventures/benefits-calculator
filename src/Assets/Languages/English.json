@@ -167,6 +167,7 @@
   "householdDataBlock.createExpenseRadioQuestion-questionDescription": "This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.",
   "personExpenseBlock.return-questionLabel": "What type of expense have they had most recently?",
   "personExpenseBlock.return-questionDescription": "Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.",
-  "personExpenseBlock.return-addExpenseButton": "Add another expense"
+  "personExpenseBlock.return-addExpenseButton": "Add another expense",
+  "personExpenseBlock.createExpenseBlockQuestions-questionLabel": "If they have another expense, select it below."
 
 }
