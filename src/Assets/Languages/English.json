@@ -161,6 +161,9 @@
   "incomeFrequencyOptions.biweekly": "Every 2 weeks",
   "incomeFrequencyOptions.monthly": "Every month",
   "incomeFrequencyOptions.semimonthly": "Twice a month",
-  "incomeFrequencyOptions.yearly": "Every year"
+  "incomeFrequencyOptions.yearly": "Every year",
+  "householdDataBlock.createExpenseRadioQuestion-ariaLabel": "has expenses",
+  "householdDataBlock.createExpenseRadioQuestion-questionLabel": "Do they have any expenses",
+  "householdDataBlock.createExpenseRadioQuestion-questionDescription": "This includes costs like rent, mortgage, medical bills, child care, child support and heating bills."
 
 }

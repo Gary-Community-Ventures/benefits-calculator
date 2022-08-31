@@ -161,5 +161,9 @@
   "incomeFrequencyOptions.biweekly": "Cada 2 semanas",
   "incomeFrequencyOptions.monthly": "Cada mes",
   "incomeFrequencyOptions.semimonthly": "Dos veces al mes",
-  "incomeFrequencyOptions.yearly": "Cada año"
+  "incomeFrequencyOptions.yearly": "Cada año",
+  "householdDataBlock.createExpenseRadioQuestion-ariaLabel": "tiene gastos",
+  "householdDataBlock.createExpenseRadioQuestion-questionLabel": "¿Tienen algún gasto?",
+  "householdDataBlock.createExpenseRadioQuestion-questionDescription": "Esto incluye costos como alquiler, hipoteca, facturas médicas, cuidado de niños, manutención infantil y facturas de calefacción."
+
 }
