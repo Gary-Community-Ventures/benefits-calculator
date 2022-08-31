@@ -184,6 +184,11 @@
   "expenseOptions.insurancePremiums": "Primas de seguro de terceros",
   "personExpenseBlock.createExpenseFrequencyDropdownMenu-questionLabel": "¿Con qué frecuencia tienen este tipo de gasto: ",
   "personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencyInputLabel": "Frecuencia",
-  "personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel": "Frecuencia de gastos"
-
+  "personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel": "Frecuencia de gastos",
+  "personExpenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText": "Seleccionar",
+  "expenseFrequencyOptions.weekly": "Cada semana",
+  "expenseFrequencyOptions.biweekly": "Cada 2 semanas",
+  "expenseFrequencyOptions.monthly": "Cada mes",
+  "expenseFrequencyOptions.semimonthly": "Dos veces al mes",
+  "expenseFrequencyOptions.yearly": "Cada año"
 }

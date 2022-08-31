@@ -184,5 +184,11 @@
   "expenseOptions.insurancePremiums": "Third Party Insurance Premiums",
   "personExpenseBlock.createExpenseFrequencyDropdownMenu-questionLabel": "How often do they have this type of expense: ",
   "personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencyInputLabel": "Frequency",
-  "personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel": "Expense Frequency"
+  "personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel": "Expense Frequency",
+  "personExpenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText": "Select",
+  "expenseFrequencyOptions.weekly": "Every week",
+  "expenseFrequencyOptions.biweekly": "Every 2 weeks",
+  "expenseFrequencyOptions.monthly": "Every month",
+  "expenseFrequencyOptions.semimonthly": "Twice a month",
+  "expenseFrequencyOptions.yearly": "Every year"
 }
