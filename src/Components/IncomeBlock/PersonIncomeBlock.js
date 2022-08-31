@@ -176,7 +176,11 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
           labelId='income-type-label'
           id={incomeStreamName}
           value={incomeStreamName}
-          label='Income Type'
+          label={
+            <FormattedMessage 
+            id='personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel' 
+            defaultMessage='Income Type' />
+          }
           onChange={(event) => { handleSelectChange(event, index) }}>
           {createMenuItems()}
         </StyledSelectfield>
