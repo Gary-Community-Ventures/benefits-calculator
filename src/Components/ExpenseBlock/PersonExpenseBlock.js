@@ -82,13 +82,22 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
     return (
       <div>
-        <p className='question-label'>How much is this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
+        <p className='question-label'>
+          <FormattedMessage 
+            id='personExpenseBlock.createExpenseAmountTextfield-questionLabel' 
+            defaultMessage='How much is this type of expense: ' /> 
+          {selectedMenuItem[index].expenseSourceLabel}?
+        </p>
         <div className='expense-block-textfield'>
           <StyledTextField
             type='text'
             name={expenseSourceName}
             value={expenseAmount}
-            label='Amount'
+            label={
+              <FormattedMessage 
+                id='personExpenseBlock.createExpenseAmountTextfield-expenseAmountTextfieldLabel' 
+                defaultMessage='Amount' />
+            }
             onChange={(event) => { handleExpenseTextfieldChange(event, index) }}
             variant='outlined'
             required
