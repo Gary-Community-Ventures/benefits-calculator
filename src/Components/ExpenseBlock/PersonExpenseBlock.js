@@ -1,5 +1,6 @@
 import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
 import { useState, useEffect } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { styled } from '@mui/material/styles';
 import { expenseSourceValueHasError, displayExpenseSourceValueHelperText, expenseSourcesAreValid } from '../../Assets/validationFunctions';
 import expenseOptions from '../../Assets/expenseOptions';
@@ -166,7 +167,7 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
     return [disabledSelectMenuItem, menuItems];
   }
 
-  const deleteExpenseBlock = (selectedIndex) => {//done but need to test
+  const deleteExpenseBlock = (selectedIndex) => {
     const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex );
     setSelectedMenuItem(updatedSelectedMenuItems);  
 
@@ -246,15 +247,23 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
   
   return (
     <>
-      <p className='question-label radio-question'>What type of expense have they had most recently?</p>
-      <p className='question-description'>Answer the best you can. You will be able to include additional types of expenses. 
-        The more you include, the more accurate your results will be.
+      <p className='question-label radio-question'>
+        <FormattedMessage 
+          id='personExpenseBlock.return-questionLabel' 
+          defaultMessage='What type of expense have they had most recently?' />
+      </p>
+      <p className='question-description'>
+        <FormattedMessage 
+          id='personExpenseBlock.return-questionDescription' 
+          defaultMessage='Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.' />
       </p>
       {createExpenseBlockQuestions()}
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalExpenseSource(event)} >
-        Add another expense
+          <FormattedMessage 
+            id='personExpenseBlock.return-addExpenseButton' 
+            defaultMessage='Add another expense' />
       </Button>
     </>
   );
