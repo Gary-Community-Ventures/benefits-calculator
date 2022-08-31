@@ -139,7 +139,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex, disab
     setSelectedMenuItem(updatedSelectedMenuItems);
   }
 
-  const createIncomeStreamsDropdownMenu = (incomeStreamName, incomeStreamLabel, index) => {
+  const createIncomeStreamsDropdownMenu = (incomeStreamName, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel if='income-type-label'>
@@ -202,7 +202,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex, disab
 
   const createIncomeBlockQuestions = () => {
     return selectedMenuItem.map((incomeSourceData, index) => {
-      const { incomeStreamName, incomeStreamLabel, incomeAmount, incomeFrequency } = incomeSourceData;
+      const { incomeStreamName, incomeAmount, incomeFrequency } = incomeSourceData;
       const incomeStreamQuestion = 
         <p className='question-label'>
           <FormattedMessage 
@@ -217,7 +217,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex, disab
             </div>
           }
           {index > 0 && incomeStreamQuestion}
-          {createIncomeStreamsDropdownMenu(incomeStreamName, incomeStreamLabel, index)}
+          {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
           {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
           {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
         </div>
