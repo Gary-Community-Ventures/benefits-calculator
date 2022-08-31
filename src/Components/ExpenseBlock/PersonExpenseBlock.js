@@ -103,13 +103,21 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
   const createExpenseDropdownMenu = (expenseSourceName, expenseSourceLabel, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='expense-type-label'>Expense Type</InputLabel>
+        <InputLabel if='expense-type-label'>
+          <FormattedMessage 
+            id='personExpenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel' 
+            defaultMessage='Expense Type' />
+        </InputLabel>
         <StyledSelectfield
           labelId='expense-type-label'
           id={expenseSourceName}
           value={expenseSourceName}
           name={expenseSourceLabel}
-          label='Expense Type'
+          label={
+            <FormattedMessage 
+              id='personExpenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel' 
+              defaultMessage='Expense Type' />
+          }
           onChange={(event) => { handleSelectChange(event, index) }}>
           {createExpenseMenuItems()}
         </StyledSelectfield>
