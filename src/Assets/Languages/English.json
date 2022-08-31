@@ -155,6 +155,12 @@
   "personIncomeBlock.createIncomeAmountTextfield-amountLabel": "Amount",
   "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel": "How often do they receive this income: ",
   "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel": "Frequency",
-  "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel": "Income Frequency"
+  "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel": "Income Frequency",
+  "personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem": "Select",
+  "incomeFrequencyOptions.weekly": "Every week",
+  "incomeFrequencyOptions.biweekly": "Every 2 weeks",
+  "incomeFrequencyOptions.monthly": "Every month",
+  "incomeFrequencyOptions.semimonthly": "Twice a month",
+  "incomeFrequencyOptions.yearly": "Every year"
 
 }

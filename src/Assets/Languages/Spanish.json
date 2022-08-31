@@ -153,8 +153,13 @@
   "personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel": "Tipo de ingreso",
   "personIncomeBlock.createIncomeAmountTextfield-questionLabel": "¿Cuánto reciben por este tipo de ingreso: ",
   "personIncomeBlock.createIncomeAmountTextfield-amountLabel": "Cantidad",
-
   "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel": "¿Con qué frecuencia reciben este ingreso: ",
   "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel": "Frecuencia",
-  "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel": "Frecuencia de ingresos"
+  "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel": "Frecuencia de ingresos",
+  "personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem": "Seleccionar",
+  "incomeFrequencyOptions.weekly": "Cada semana",
+  "incomeFrequencyOptions.biweekly": "Cada 2 semanas",
+  "incomeFrequencyOptions.monthly": "Cada mes",
+  "incomeFrequencyOptions.semimonthly": "Dos veces al mes",
+  "incomeFrequencyOptions.yearly": "Cada año"
 }
