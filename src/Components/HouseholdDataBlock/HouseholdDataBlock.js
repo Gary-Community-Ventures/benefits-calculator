@@ -375,15 +375,26 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const createExpenseRadioQuestion = (index) => {
     const radiofieldProps = {
-      ariaLabel: 'has expenses',
+      ariaLabel: 
+        <FormattedMessage 
+          id='householdDataBlock.createExpenseRadioQuestion-ariaLabel' 
+          defaultMessage='has expenses' />,
       inputName: 'hasExpenses',
       value: state.householdData[index].hasExpenses
     };
 
     return (
       <>
-        <p className='question-label radio-question'>Do they have any expenses?</p>
-        <p className='question-description'>This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.</p>
+        <p className='question-label radio-question'>
+          <FormattedMessage 
+            id='householdDataBlock.createExpenseRadioQuestion-questionLabel' 
+            defaultMessage='Do they have any expenses' />
+        </p>
+        <p className='question-description'>
+          <FormattedMessage 
+            id='householdDataBlock.createExpenseRadioQuestion-questionDescription' 
+            defaultMessage='This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.' />
+        </p>
         <HHDataRadiofield 
           componentDetails={radiofieldProps}
           setState={setState}
