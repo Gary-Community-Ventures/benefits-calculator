@@ -181,5 +181,8 @@
   "expenseOptions.mortgage": "Mortgage",
   "expenseOptions.utilities": "Utilities",
   "expenseOptions.telephone": "Telephone",
-  "expenseOptions.insurancePremiums": "Third Party Insurance Premiums"
+  "expenseOptions.insurancePremiums": "Third Party Insurance Premiums",
+  "personExpenseBlock.createExpenseFrequencyDropdownMenu-questionLabel": "How often do they have this type of expense: ",
+  "personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencyInputLabel": "Frequency",
+  "personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel": "Expense Frequency"
 }

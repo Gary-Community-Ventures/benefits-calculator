@@ -181,6 +181,9 @@
   "expenseOptions.mortgage": "Hipoteca",
   "expenseOptions.utilities": "Utilidades",
   "expenseOptions.telephone": "Teléfono",
-  "expenseOptions.insurancePremiums": "Primas de seguro de terceros"
+  "expenseOptions.insurancePremiums": "Primas de seguro de terceros",
+  "personExpenseBlock.createExpenseFrequencyDropdownMenu-questionLabel": "¿Con qué frecuencia tienen este tipo de gasto: ",
+  "personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencyInputLabel": "Frecuencia",
+  "personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel": "Frecuencia de gastos"
 
 }
