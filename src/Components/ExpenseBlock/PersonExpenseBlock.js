@@ -167,7 +167,12 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
   }
 
   const createExpenseMenuItems = () => {
-    const disabledSelectMenuItem = <MenuItem value='select' key='disabled-select-value' disabled>Select</MenuItem>;
+    const disabledSelectMenuItem = 
+      <MenuItem value='select' key='disabled-select-value' disabled>
+        <FormattedMessage 
+          id='personExpenseBlock.createExpenseMenuItems-disabledSelect' 
+          defaultMessage='Select' />
+      </MenuItem>;
     const menuItemKeys = Object.keys(expenseOptions);
     const menuItemLabels = Object.values(expenseOptions);
 
