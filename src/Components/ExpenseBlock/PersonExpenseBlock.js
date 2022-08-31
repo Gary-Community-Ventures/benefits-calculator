@@ -178,7 +178,7 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
 
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <MenuItem value={menuItemKey} key={menuItemLabels[i]}>{menuItemLabels[i]}</MenuItem>
+        <MenuItem value={menuItemKey} key={menuItemKey}>{menuItemLabels[i]}</MenuItem>
       );
     });
 
