@@ -170,5 +170,16 @@
   "personExpenseBlock.return-addExpenseButton": "Add another expense",
   "personExpenseBlock.createExpenseBlockQuestions-questionLabel": "If they have another expense, select it below.",
   "personExpenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel": "Expense Type",
-  "personExpenseBlock.createExpenseMenuItems-disabledSelect": "Select"
+  "personExpenseBlock.createExpenseMenuItems-disabledSelect": "Select",
+  "expenseOptions.childCare": "Child Care",
+  "expenseOptions.childSupport": "Child Support (Paid)",
+  "expenseOptions.dependentCare": "Dependent Care",
+  "expenseOptions.rent": "Rent",
+  "expenseOptions.medical": "Medical Expense",
+  "expenseOptions.heating": "Heating",
+  "expenseOptions.cooling": "Cooling",
+  "expenseOptions.mortgage": "Mortgage",
+  "expenseOptions.utilities": "Utilities",
+  "expenseOptions.telephone": "Telephone",
+  "expenseOptions.insurancePremiums": "Third Party Insurance Premiums"
 }

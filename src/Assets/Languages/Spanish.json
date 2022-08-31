@@ -170,6 +170,17 @@
   "personExpenseBlock.return-addExpenseButton": "Agregar otro gasto",
   "personExpenseBlock.createExpenseBlockQuestions-questionLabel": "Si tiene otro gasto, selecciónelo a continuación.",
   "personExpenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel": "Tipo de gasto",
-  "personExpenseBlock.createExpenseMenuItems-disabledSelect": "Seleccionar"
+  "personExpenseBlock.createExpenseMenuItems-disabledSelect": "Seleccionar",
+  "expenseOptions.childCare": "Cuidado Infantil",
+  "expenseOptions.childSupport": "Manutención infantil (pagada)",
+  "expenseOptions.dependentCare": "Cuidado de Dependientes",
+  "expenseOptions.rent": "Alquiler",
+  "expenseOptions.medical": "Gastos Médicos",
+  "expenseOptions.heating": "Calefacción",
+  "expenseOptions.cooling": "Refrigeración",
+  "expenseOptions.mortgage": "Hipoteca",
+  "expenseOptions.utilities": "Utilidades",
+  "expenseOptions.telephone": "Teléfono",
+  "expenseOptions.insurancePremiums": "Primas de seguro de terceros"
 
 }
