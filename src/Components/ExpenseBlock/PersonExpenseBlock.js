@@ -56,7 +56,12 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
   const createExpenseBlockQuestions = () => {
     return selectedMenuItem.map((expenseSourceData, index) => {
       const { expenseSourceName, expenseSourceLabel, expenseAmount, expenseFrequency } = expenseSourceData;
-      const expenseSourceQuestion = <p className='question-label'>If they have another expense, select it below.</p>;
+      const expenseSourceQuestion = 
+        <p className='question-label'>
+          <FormattedMessage 
+            id='personExpenseBlock.createExpenseBlockQuestions-questionLabel' 
+            defaultMessage='If they have another expense, select it below.' />
+        </p>;
 
       return (
         <div key={index}>
@@ -67,8 +72,8 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
           }
           {index > 0 && expenseSourceQuestion}
           {createExpenseDropdownMenu(expenseSourceName, expenseSourceLabel, index)}
-          {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
           {createExpenseFrequencyDropdownMenu(expenseFrequency, index)}
+          {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
         </div>
       );
     })
