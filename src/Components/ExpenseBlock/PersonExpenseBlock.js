@@ -127,15 +127,28 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
   const createExpenseFrequencyDropdownMenu = (expenseSourceFrequency, index) => {
     return (
       <div>
-        <p className='question-label'>How often do they have this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
+        <p className='question-label'>
+          <FormattedMessage 
+            id='personExpenseBlock.createExpenseFrequencyDropdownMenu-questionLabel' 
+            defaultMessage='How often do they have this type of expense:' />
+          {selectedMenuItem[index].expenseSourceLabel}?
+        </p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel if='expense-frequency-label'>Frequency</InputLabel>
+          <InputLabel if='expense-frequency-label'>
+            <FormattedMessage 
+              id='personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencyInputLabel' 
+              defaultMessage='Frequency' />
+          </InputLabel>
           <StyledSelectfield
             labelId='expense-frequency-label'
             id='expense-frequency'
             value={expenseSourceFrequency}
             name={expenseSourceFrequency}
-            label='Expense Frequency'
+            label={
+              <FormattedMessage 
+                id='personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel' 
+                defaultMessage='Expense Frequency' />
+            }
             onChange={(event) => { handleFrequencySelectChange(event, index) }}>
             {createExpenseFrequencyMenuItems()}
           </StyledSelectfield>
