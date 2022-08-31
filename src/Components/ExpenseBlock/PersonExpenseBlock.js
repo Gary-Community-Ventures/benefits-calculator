@@ -100,7 +100,7 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
     );
   }
 
-  const createExpenseDropdownMenu = (expenseSourceName, expenseSourceLabel, index) => {
+  const createExpenseDropdownMenu = (expenseSourceName, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel if='expense-type-label'>
@@ -112,7 +112,6 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
           labelId='expense-type-label'
           id={expenseSourceName}
           value={expenseSourceName}
-          name={expenseSourceLabel}
           label={
             <FormattedMessage 
               id='personExpenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel' 
