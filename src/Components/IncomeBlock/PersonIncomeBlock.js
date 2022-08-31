@@ -64,7 +64,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex, disab
 
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <MenuItem value={menuItemKey} key={menuItemLabels[i]}>{menuItemLabels[i]}</MenuItem>
+        <MenuItem value={menuItemKey} key={menuItemKey}>{menuItemLabels[i]}</MenuItem>
       );
     });
 
@@ -142,12 +142,15 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex, disab
   const createIncomeStreamsDropdownMenu = (incomeStreamName, incomeStreamLabel, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='income-type-label'>Income Type</InputLabel>
+        <InputLabel if='income-type-label'>
+          <FormattedMessage 
+            id='personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel' 
+            defaultMessage='Income Type' />
+        </InputLabel>
         <StyledSelectfield
           labelId='income-type-label'
           id={incomeStreamName}
           value={incomeStreamName}
-          name={incomeStreamLabel}
           label='Income Type'
           onChange={(event) => { handleSelectChange(event, index) }}>
           {createMenuItems()}
