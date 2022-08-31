@@ -150,5 +150,8 @@
   "incomeOptions.rental": "Rental Income",
   "incomeOptions.investment": "Investment Income (interest, dividends, and profit from selling stocks)",
   "personIncomeBlock.createIncomeBlockQuestions-questionLabel": "If they receive another type of income, select it below.",
-  "personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel": "Income Type"
+  "personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel": "Income Type",
+  "personIncomeBlock.createIncomeAmountTextfield-questionLabel": "How much do they receive for this type of income: ",
+  "personIncomeBlock.createIncomeAmountTextfield-amountLabel": "Amount"
+
 }
