@@ -164,6 +164,9 @@
   "incomeFrequencyOptions.yearly": "Every year",
   "householdDataBlock.createExpenseRadioQuestion-ariaLabel": "has expenses",
   "householdDataBlock.createExpenseRadioQuestion-questionLabel": "Do they have any expenses",
-  "householdDataBlock.createExpenseRadioQuestion-questionDescription": "This includes costs like rent, mortgage, medical bills, child care, child support and heating bills."
+  "householdDataBlock.createExpenseRadioQuestion-questionDescription": "This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.",
+  "personExpenseBlock.return-questionLabel": "What type of expense have they had most recently?",
+  "personExpenseBlock.return-questionDescription": "Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.",
+  "personExpenseBlock.return-addExpenseButton": "Add another expense"
 
 }

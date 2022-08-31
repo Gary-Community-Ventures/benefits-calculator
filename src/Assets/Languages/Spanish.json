@@ -164,6 +164,9 @@
   "incomeFrequencyOptions.yearly": "Cada año",
   "householdDataBlock.createExpenseRadioQuestion-ariaLabel": "tiene gastos",
   "householdDataBlock.createExpenseRadioQuestion-questionLabel": "¿Tienen algún gasto?",
-  "householdDataBlock.createExpenseRadioQuestion-questionDescription": "Esto incluye costos como alquiler, hipoteca, facturas médicas, cuidado de niños, manutención infantil y facturas de calefacción."
+  "householdDataBlock.createExpenseRadioQuestion-questionDescription": "Esto incluye costos como alquiler, hipoteca, facturas médicas, cuidado de niños, manutención infantil y facturas de calefacción.",
+  "personExpenseBlock.return-questionLabel": "¿Qué tipo de gasto ha tenido más recientemente?",
+  "personExpenseBlock.return-questionDescription": "Responda lo mejor que pueda. Podrá incluir tipos de gastos adicionales. Cuanto más incluya, más precisos serán sus resultados.",
+  "personExpenseBlock.return-addExpenseButton": "Agregar otro gasto"
 
 }
