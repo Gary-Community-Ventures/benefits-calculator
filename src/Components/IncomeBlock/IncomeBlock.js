@@ -216,7 +216,6 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
           labelId='income-frequency-label'
           id='income-frequency'
           value={incomeFrequency}
-          name={incomeFrequency}
           label={
             <FormattedMessage 
               id='incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencySelectLabel' 
