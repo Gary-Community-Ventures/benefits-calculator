@@ -199,6 +199,7 @@
   "incomeBlock.createMenuItems-disabledSelectMenuItemText": "Select",
   "incomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel": "How often do you receive this income:",
   "incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencyLabel": "Frequency",
-  "incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencySelectLabel": "Income Frequency"
+  "incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencySelectLabel": "Income Frequency",
+  "incomeBlock.createFrequencyMenuItems-disabledSelectMenuItemText": "Select"
 
 }

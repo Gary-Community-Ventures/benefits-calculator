@@ -64,13 +64,34 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   }
 
   const createFrequencyMenuItems = () => {
-    const disabledSelectMenuItem = <MenuItem value='select' key='disabled-frequency-select-value' disabled>Select</MenuItem>;
+    const disabledSelectMenuItem = 
+      <MenuItem value='select' key='disabled-frequency-select-value' disabled>
+        <FormattedMessage 
+          id='incomeBlock.createFrequencyMenuItems-disabledSelectMenuItemText' 
+          defaultMessage='Select' />
+      </MenuItem>;
+      
     const incomeFrequencyOptions = {
-      weekly:'Every week',
-      biweekly: 'Every 2 weeks',
-      monthly: 'Every month',
-      semimonthly: 'Twice a month',
-      yearly: 'Every year'
+      weekly: 
+        <FormattedMessage 
+          id='incomeFrequencyOptions.weekly' 
+          defaultMessage='Every week' />,
+      biweekly: 
+        <FormattedMessage 
+          id='incomeFrequencyOptions.biweekly' 
+          defaultMessage='Every 2 weeks' />,
+      monthly: 
+        <FormattedMessage 
+          id='incomeFrequencyOptions.monthly' 
+          defaultMessage='Every month' />,
+      semimonthly: 
+        <FormattedMessage 
+          id='incomeFrequencyOptions.semimonthly' 
+          defaultMessage='Twice a month' />,
+      yearly: 
+        <FormattedMessage 
+          id='incomeFrequencyOptions.yearly' 
+          defaultMessage='Every year' />
     };
 
     const menuItemKeys = Object.keys(incomeFrequencyOptions);
