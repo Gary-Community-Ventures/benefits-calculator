@@ -110,7 +110,12 @@ const Confirmation = ({ formData }) => {
           </Link>
           { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
         </article>
-        <article className='confirmation-label'><b>Expenses:</b>
+        <article className='confirmation-label'>
+          <b>
+            <FormattedMessage 
+              id='confirmation.headOfHouseholdDataBlock-expensesLabel' 
+              defaultMessage='Expenses:' />
+          </b>
           <Link to='/step-13' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 

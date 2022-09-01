@@ -237,6 +237,7 @@
   "frequencyOptions.biweekly": "Cada 2 semanas",
   "frequencyOptions.monthly": "Cada mes",
   "frequencyOptions.semimonthly": "Dos veces al mes",
-  "frequencyOptions.yearly": "Cada año"
+  "frequencyOptions.yearly": "Cada año",
+  "confirmation.headOfHouseholdDataBlock-expensesLabel": "Gastos:"
   
 }
