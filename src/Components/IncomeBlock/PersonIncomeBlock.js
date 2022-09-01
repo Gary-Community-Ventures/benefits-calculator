@@ -30,7 +30,8 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
       incomeStreamName: '', 
       incomeStreamLabel: '', 
       incomeAmount: '',
-      incomeFrequency: ''
+      incomeFrequency: '',
+      incomeFrequencyLabel: ''
     }
   ]);
 
@@ -59,6 +60,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
         id='personIncomeBlock.createMenuItems-disabledSelectMenuItem' 
         defaultMessage='Select' />
       </MenuItem>;
+
     const menuItemKeys = Object.keys(incomeOptions);
     const menuItemLabels = Object.values(incomeOptions);
 
@@ -98,7 +100,8 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
           incomeStreamName: event.target.value, 
           incomeStreamLabel: incomeOptions[event.target.value],
           incomeAmount: 0, 
-          incomeFrequency: ''
+          incomeFrequency: '',
+          incomeFrequencyLabel: ''
         }
       } else {
         return incomeSourceData;
@@ -129,7 +132,11 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
     const { value } = event.target; 
     const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
       if (i === index) {
-        return { ...incomeSourceData, incomeFrequency: value }
+        return { 
+          ...incomeSourceData, 
+          incomeFrequency: value,
+          incomeFrequencyLabel: frequencyOptions[value]
+        }
       } else {
         return incomeSourceData;
       }
@@ -276,7 +283,8 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
         incomeStreamName: '', 
         incomeStreamLabel: '', 
         incomeAmount: 0,
-        incomeFrequency: ''
+        incomeFrequency: '',
+        incomeFrequencyLabel: ''
       }
     ]);
   }
