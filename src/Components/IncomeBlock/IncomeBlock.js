@@ -36,7 +36,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
       incomeStreamName: '', 
       incomeStreamLabel: '', 
       incomeAmount: '',
-      incomeFrequency: ''
+      incomeFrequency: '',
+      incomeFrequencyLabel: ''
     }
   ]);
 
@@ -86,7 +87,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
           incomeStreamName: event.target.value, 
           incomeStreamLabel: incomeOptions[event.target.value],
           incomeAmount: 0, 
-          incomeFrequency: ''
+          incomeFrequency: '',
+          incomeFrequencyLabel: ''
         }
       } else {
         return incomeSourceData;
@@ -117,7 +119,11 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     const { value } = event.target; 
     const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
       if (i === index) {
-        return { ...incomeSourceData, incomeFrequency: value }
+        return { 
+          ...incomeSourceData, 
+          incomeFrequency: value, 
+          incomeFrequencyLabel: frequencyOptions[value] 
+        }
       } else {
         return incomeSourceData;
       }
@@ -250,7 +256,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
         incomeStreamName: '', 
         incomeStreamLabel: '', 
         incomeAmount: 0,
-        incomeFrequency: ''
+        incomeFrequency: '',
+        incomeFrequencyLabel: '',
       }
     ]);
   }
