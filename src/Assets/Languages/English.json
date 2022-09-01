@@ -196,6 +196,9 @@
   "incomeBlock.createIncomeBlockQuestions-questionLabel": "If you receive another type of income, select it below.",
   "incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeInputLabel": "Income Type",
   "incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeSelectLabel": "Income Type",
-  "incomeBlock.createMenuItems-disabledSelectMenuItemText": "Select"
+  "incomeBlock.createMenuItems-disabledSelectMenuItemText": "Select",
+  "incomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel": "How often do you receive this income:",
+  "incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencyLabel": "Frequency",
+  "incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencySelectLabel": "Income Frequency"
 
 }
