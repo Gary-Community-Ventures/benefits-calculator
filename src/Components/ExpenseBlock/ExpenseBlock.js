@@ -154,13 +154,18 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   }
 
   const createExpenseMenuItems = () => {
-    const disabledSelectMenuItem = <MenuItem value='select' key='disabled-select-value' disabled>Select</MenuItem>;
+    const disabledSelectMenuItem = 
+      <MenuItem value='select' key='disabled-select-value' disabled>
+        <FormattedMessage 
+          id='expenseBlock.createExpenseMenuItems-disabledSelectMenuItemText' 
+          defaultMessage='Select' />
+      </MenuItem>;
     const menuItemKeys = Object.keys(expenseOptions);
     const menuItemLabels = Object.values(expenseOptions);
 
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <MenuItem value={menuItemKey} key={menuItemLabels[i]}>{menuItemLabels[i]}</MenuItem>
+        <MenuItem value={menuItemKey} key={menuItemKey}>{menuItemLabels[i]}</MenuItem>
       );
     });
 

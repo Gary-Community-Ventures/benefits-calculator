@@ -207,5 +207,6 @@
   "incomeBlock.return-addIncomeButton": "Agregar otro ingreso",
   "expenseBlock.createExpenseBlockQuestions-questionLabel": "Si tiene otro gasto, selecciónelo a continuación.",
   "expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel": "Tipo de gasto",
-  "expenseBlock.createExpenseDropdownMenu-expenseTypeSelectLabel": "Tipo de gasto"
+  "expenseBlock.createExpenseDropdownMenu-expenseTypeSelectLabel": "Tipo de gasto",
+  "expenseBlock.createExpenseMenuItems-disabledSelectMenuItemText": "Seleccionar"
 }
