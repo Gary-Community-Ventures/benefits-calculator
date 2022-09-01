@@ -88,7 +88,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     );
   }
 
-  const createExpenseDropdownMenu = (expenseSourceName, expenseSourceLabel, index) => {
+  const createExpenseDropdownMenu = (expenseSourceName, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel if='expense-type-label'>Expense Type</InputLabel>
@@ -96,7 +96,6 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
           labelId='expense-type-label'
           id={expenseSourceName}
           value={expenseSourceName}
-          name={expenseSourceLabel}
           label='Expense Type'
           onChange={(event) => { handleSelectChange(event, index) }}>
           {createExpenseMenuItems()}
