@@ -1,12 +1,12 @@
-import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
+import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { styled } from '@mui/material/styles';
-import { incomeStreamValueHasError, displayIncomeStreamValueHelperText } from '../../Assets/validationFunctions';
+import PreviousButton from '../PreviousButton/PreviousButton';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { incomeStreamValueHasError, displayIncomeStreamValueHelperText, incomeStreamsAreValid } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
-import PreviousButton from "../PreviousButton/PreviousButton";
-import { incomeStreamsAreValid } from "../../Assets/validationFunctions";
 import './IncomeBlock.css';
 
 const StyledSelectfield = styled(Select)({
