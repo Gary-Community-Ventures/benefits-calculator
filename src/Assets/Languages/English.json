@@ -212,6 +212,8 @@
   "expenseBlock.createExpenseFrequencyDropdownMenu-questionLabel": "How often do you have this type of expense: ",
   "expenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencyInputLabel": "Frequency",
   "expenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel": "Expense Frequency",
-  "expenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText": "Select"
+  "expenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText": "Select",
+  "expenseBlock.createExpenseAmountTextfield-questionLabel": "How much is this type of expense: ",
+  "expenseBlock.createExpenseAmountTextfield-amountLabel": "Amount"
 
 }

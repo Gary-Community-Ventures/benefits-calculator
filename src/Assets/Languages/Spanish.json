@@ -212,5 +212,7 @@
   "expenseBlock.createExpenseFrequencyDropdownMenu-questionLabel": "¿Con qué frecuencia tiene este tipo de gasto: ",
   "expenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencyInputLabel": "Frecuencia",
   "expenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel": "Frecuencia de gastos",
-  "expenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText": "Seleccionar"
+  "expenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText": "Seleccionar",
+  "expenseBlock.createExpenseAmountTextfield-questionLabel": "¿Cuánto es este tipo de gasto: ",
+  "expenseBlock.createExpenseAmountTextfield-amountLabel": "Cantidad"
 }
