@@ -1,5 +1,6 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { FormattedMessage } from 'react-intl';
 import housingOptions from '../../Assets/housingOptions';
 import questions from '../../Assets/questions';
 import './Confirmation.css';
@@ -184,9 +185,26 @@ const Confirmation = ({ formData }) => {
 
   return (
     <div className='benefits-form'>
-      <p className='step-progress-title'>Step 17 of { questions.length + 2 }</p>
-      <h2 className='sub-header'>Ok. Here's what we've got so far:</h2>
-      <p className='question-label'>Is all of your information correct?</p>
+      <p className='step-progress-title'>
+        <FormattedMessage 
+          id='confirmation.return-stepLabel' 
+          defaultMessage='Step ' /> 
+        17 
+        <FormattedMessage 
+          id='confirmation.return-ofLabel' 
+          defaultMessage=' of ' /> 
+        { questions.length + 2 }
+      </p>
+      <h2 className='sub-header'>
+        <FormattedMessage 
+          id='confirmation.return-subheader' 
+          defaultMessage="Ok. Here's what we've got so far:" />
+      </h2>
+      <p className='question-label'>
+        <FormattedMessage 
+          id='confirmation.return-questionLabel' 
+          defaultMessage='Is all of your information correct?' />
+      </p>
       <div className='confirmation-container'>
         { displayAllFormData() }
         <div className='prev-continue-results-buttons'>
@@ -196,12 +214,16 @@ const Confirmation = ({ formData }) => {
               navigate(`/step-16`);
             }}
             variant='contained'>
-            Prev
+            <FormattedMessage 
+              id='previousButton'
+              defaultMessage='Prev' />
           </Button>
           <Button
             variant='contained'
             onClick={() => navigate('/results')}>
-            Continue
+            <FormattedMessage 
+              id='continueButton'
+              defaultMessage='Continue' />
           </Button>
         </div>
       </div>
