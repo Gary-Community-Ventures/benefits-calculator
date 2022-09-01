@@ -145,7 +145,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   
   const createIncomeAmountTextfield = (incomeStreamName, incomeAmount, index) => {
     return (
-      <div>
+      <div className='bottom-border'>
         <p className='question-label'>How much do you receive for: {selectedMenuItem[index].incomeStreamLabel}?</p>
         <div className='income-block-textfield'>
           <StyledTextField
@@ -166,7 +166,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
 
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     return (
-      <div className='bottom-border'>
+      <div>
         <p className='question-label'>How often do you receive this income: {selectedMenuItem[index].incomeStreamLabel}?</p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel if='income-frequency-label'>Frequency</InputLabel>
@@ -202,8 +202,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
           }
           {index > 0 && incomeStreamQuestion}
           {createIncomeStreamsDropdownMenu(incomeStreamName, incomeStreamLabel, index)}
-          {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
           {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+          {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
         </div>
       );
     });
