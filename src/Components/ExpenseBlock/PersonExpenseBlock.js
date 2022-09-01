@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { styled } from '@mui/material/styles';
 import { expenseSourceValueHasError, displayExpenseSourceValueHelperText, expenseSourcesAreValid } from '../../Assets/validationFunctions';
 import expenseOptions from '../../Assets/expenseOptions';
+import frequencyOptions from "../../Assets/frequencyOptions";
 import './ExpenseBlock.css';
 
 const StyledSelectfield = styled(Select)({
@@ -174,31 +175,8 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
           defaultMessage='Select' />
       </MenuItem>;
 
-    const expenseFrequencyOptions = {
-      weekly: 
-        <FormattedMessage 
-          id='expenseFrequencyOptions.weekly' 
-          defaultMessage='Every week' />,
-      biweekly: 
-        <FormattedMessage 
-          id='expenseFrequencyOptions.biweekly' 
-          defaultMessage='Every 2 weeks' />,
-      monthly: 
-        <FormattedMessage 
-          id='expenseFrequencyOptions.monthly' 
-          defaultMessage='Every month' />,
-      semimonthly: 
-        <FormattedMessage 
-          id='expenseFrequencyOptions.semimonthly' 
-          defaultMessage='Twice a month' />,
-      yearly: 
-        <FormattedMessage 
-          id='expenseFrequencyOptions.yearly' 
-          defaultMessage='Every year' />
-    };
-
-    const frequencyMenuItemKeys = Object.keys(expenseFrequencyOptions);
-    const frequencyMenuItemLabels = Object.values(expenseFrequencyOptions);
+    const frequencyMenuItemKeys = Object.keys(frequencyOptions);
+    const frequencyMenuItemLabels = Object.values(frequencyOptions);
   
     const frequencyMenuItems = frequencyMenuItemKeys.map((freqMenuItemKey, i) => {
       return (
