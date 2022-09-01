@@ -300,7 +300,14 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     <>
       {createIncomeBlockQuestions()}
       { incomeBlockIsMissingAnInput() && 
-        <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
+        <ErrorMessage 
+          error={ 
+            <FormattedMessage 
+              id='incomeBlock.return-error-message' 
+              defaultMessage='*Please select and enter a response for all three fields' />
+          } 
+        />
+      }
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalIncomeSource(event)} >
