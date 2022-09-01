@@ -195,6 +195,7 @@
   "personExpenseBlock.createExpenseAmountTextfield-expenseAmountTextfieldLabel": "Amount",
   "incomeBlock.createIncomeBlockQuestions-questionLabel": "If you receive another type of income, select it below.",
   "incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeInputLabel": "Income Type",
-  "incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeSelectLabel": "Income Type"
+  "incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeSelectLabel": "Income Type",
+  "incomeBlock.createMenuItems-disabledSelectMenuItemText": "Select"
 
 }
