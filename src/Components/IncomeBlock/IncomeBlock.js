@@ -98,7 +98,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     const menuItemLabels = Object.values(incomeFrequencyOptions);
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <MenuItem value={menuItemKey} key={menuItemLabels[i]}>{menuItemLabels[i]}</MenuItem>
+        <MenuItem value={menuItemKey} key={menuItemKey}>{menuItemLabels[i]}</MenuItem>
       );
     });
 
