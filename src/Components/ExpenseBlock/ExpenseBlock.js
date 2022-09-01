@@ -298,14 +298,18 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalExpenseSource(event)} >
-        Add another expense
+        <FormattedMessage 
+          id='expenseBlock.return-addExpenseButton' 
+          defaultMessage='Add another expense' />
       </Button>
       <div className='prev-save-continue-buttons'>
         <PreviousButton />
         <Button
           variant='contained'
           onClick={(event) => { handleSaveAndContinue(event) }} >
-          Continue
+          <FormattedMessage 
+            id='continueButton'
+            defaultMessage='Continue' />
         </Button>
       </div>
     </>
