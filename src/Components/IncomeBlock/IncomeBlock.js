@@ -186,7 +186,12 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   const createIncomeBlockQuestions = () => {
     return selectedMenuItem.map((incomeSourceData, index) => {
       const { incomeStreamName, incomeStreamLabel, incomeAmount, incomeFrequency } = incomeSourceData;
-      const incomeStreamQuestion = <p className='question-label'>If you receive another type of income, select it below.</p>;
+      const incomeStreamQuestion = 
+        <p className='question-label'>
+          <FormattedMessage 
+            id='incomeBlock.createIncomeBlockQuestions-questionLabel' 
+            defaultMessage='If you receive another type of income, select it below.' />
+        </p>;
       return (
         <div key={index}>
           {index > 0 &&
