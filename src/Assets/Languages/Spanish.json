@@ -203,7 +203,7 @@
   "incomeBlock.createFrequencyMenuItems-disabledSelectMenuItemText": "Seleccionar",
   "incomeBlock.createIncomeAmountTextfield-questionLabel": "¿Cuánto recibe por: ",
   "incomeBlock.createIncomeAmountTextfield-amountLabel": "Cantidad",
-  "incomeBlock.return-error-message": "*Seleccione e ingrese una respuesta para los tres campos",
+  "incomeBlock.return-error-message": "Seleccione e ingrese una respuesta para los tres campos",
   "incomeBlock.return-addIncomeButton": "Agregar otro ingreso",
   "expenseBlock.createExpenseBlockQuestions-questionLabel": "Si tiene otro gasto, selecciónelo a continuación.",
   "expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel": "Tipo de gasto",
@@ -214,5 +214,6 @@
   "expenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel": "Frecuencia de gastos",
   "expenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText": "Seleccionar",
   "expenseBlock.createExpenseAmountTextfield-questionLabel": "¿Cuánto es este tipo de gasto: ",
-  "expenseBlock.createExpenseAmountTextfield-amountLabel": "Cantidad"
+  "expenseBlock.createExpenseAmountTextfield-amountLabel": "Cantidad",
+  "expenseBlock.return-error-message": "Seleccione e ingrese una respuesta para los tres campos"
 }
