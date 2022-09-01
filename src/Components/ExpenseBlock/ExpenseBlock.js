@@ -145,13 +145,34 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   }
 
   const createExpenseFrequencyMenuItems = () => {
-    const disabledSelectMenuItem = <MenuItem value='select' key='disabled-frequency-select-value' disabled>Select</MenuItem>;
+    const disabledSelectMenuItem = 
+      <MenuItem value='select' key='disabled-frequency-select-value' disabled>
+        <FormattedMessage 
+          id='expenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText' 
+          defaultMessage='Select' />
+      </MenuItem>;
+
     const expenseFrequencyOptions = {
-      weekly:'Every week',
-      biweekly: 'Every 2 weeks',
-      monthly: 'Every month',
-      semimonthly: 'Twice a month',
-      yearly: 'Every year'
+      weekly: 
+        <FormattedMessage 
+          id='expenseFrequencyOptions.weekly' 
+          defaultMessage='Every week' />,
+      biweekly: 
+        <FormattedMessage 
+          id='expenseFrequencyOptions.biweekly' 
+          defaultMessage='Every 2 weeks' />,
+      monthly: 
+        <FormattedMessage 
+          id='expenseFrequencyOptions.monthly' 
+          defaultMessage='Every month' />,
+      semimonthly: 
+        <FormattedMessage 
+          id='expenseFrequencyOptions.semimonthly' 
+          defaultMessage='Twice a month' />,
+      yearly: 
+        <FormattedMessage 
+          id='expenseFrequencyOptions.yearly' 
+          defaultMessage='Every year' />
     };
     const frequencyMenuItemKeys = Object.keys(expenseFrequencyOptions);
     const frequencyMenuItemLabels = Object.values(expenseFrequencyOptions);
