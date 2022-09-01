@@ -228,6 +228,19 @@
   "confirmation.displayAllFormData-householdResourcesText": "Household resources: ",
   "confirmation.displayAllFormData-householdResourcesDescription": "This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.",
   "confirmation.displayAllFormData-housingText": "Housing:",
-  "confirmation.displayAllFormData-zipcodeText": "Your zipcode:"
+  "confirmation.displayAllFormData-zipcodeText": "Your zipcode:",
+  "confirmation.headOfHouseholdDataBlock-youText": " You, ",
+  "confirmation.headOfHouseholdDataBlock-headOfHouseholdText": " head of household",
+  "confirmation.headOfHouseholdDataBlock-conditionsText": "Conditions:",
+  "confirmation.headOfHouseholdDataBlock-studentFulltimeText": "Full-time student",
+  "confirmation.headOfHouseholdDataBlock-studentText": "Student",
+  "confirmation.headOfHouseholdDataBlock-pregnantText": "Pregnant",
+  "confirmation.headOfHouseholdDataBlock-unemployed18MosText": "Unemployed, worked in the last 18 months",
+  "confirmation.headOfHouseholdDataBlock-unemployedText": "Unemployed",
+  "confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText": "Blind or visually impaired",
+  "confirmation.headOfHouseholdDataBlock-disabledText": "Disabled",
+  "confirmation.headOfHouseholdDataBlock-veteranText": "Veteran",
+  "confirmation.headOfHouseholdDataBlock-medicaidText": "Receiving Medicaid",
+  "confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText": "Receiving disability-related Medicaid"
 
 }
