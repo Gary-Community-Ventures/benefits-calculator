@@ -202,6 +202,7 @@
   "incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencySelectLabel": "Income Frequency",
   "incomeBlock.createFrequencyMenuItems-disabledSelectMenuItemText": "Select",
   "incomeBlock.createIncomeAmountTextfield-questionLabel": "How much do you receive for: ",
-  "incomeBlock.createIncomeAmountTextfield-amountLabel": "Amount"
+  "incomeBlock.createIncomeAmountTextfield-amountLabel": "Amount",
+  "incomeBlock.return-error-message": "*Please select and enter a response for all three fields"
 
 }
