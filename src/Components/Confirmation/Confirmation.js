@@ -97,12 +97,25 @@ const Confirmation = ({ formData }) => {
           </Link>
           { displayConditions(formData) }
         </article>
-        <article className='confirmation-label'><b>Income:</b>
-          <Link to='/step-12' className='edit-link'>Edit</Link>
+        <article className='confirmation-label'>
+          <b>
+            <FormattedMessage 
+              id='confirmation.headOfHouseholdDataBlock-incomeLabel' 
+              defaultMessage='Income:' />
+          </b>
+          <Link to='/step-12' className='edit-link'>
+            <FormattedMessage 
+              id='confirmation.editLinkText' 
+              defaultMessage='Edit' />
+          </Link>
           { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
         </article>
         <article className='confirmation-label'><b>Expenses:</b>
-          <Link to='/step-13' className='edit-link'>Edit</Link>
+          <Link to='/step-13' className='edit-link'>
+            <FormattedMessage 
+              id='confirmation.editLinkText' 
+              defaultMessage='Edit' />
+          </Link>
           { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul> }
         </article>
       </div>
