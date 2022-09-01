@@ -1,10 +1,11 @@
-import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
-import { useState } from 'react';
-import { useParams } from "react-router-dom";
+import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import { expenseSourceValueHasError, displayExpenseSourceValueHelperText, expenseSourcesAreValid } from '../../Assets/validationFunctions';
 import expenseOptions from '../../Assets/expenseOptions';
-import PreviousButton from "../PreviousButton/PreviousButton";
+import PreviousButton from '../PreviousButton/PreviousButton';
 import './ExpenseBlock.css';
 
 const StyledSelectfield = styled(Select)({
