@@ -33,7 +33,7 @@ const App = () => {
     incomeStreams: [],
     hasExpenses: false,
     expenses: [],
-    householdSize: '',
+    householdSize: '2',
     householdData: [],
     householdAssets: '',
     housing: {}

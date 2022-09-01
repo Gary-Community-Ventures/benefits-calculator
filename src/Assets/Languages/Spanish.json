@@ -193,6 +193,8 @@
   "expenseFrequencyOptions.yearly": "Cada año",
   "personExpenseBlock.createExpenseAmountTextfield-questionLabel": "¿Cuánto es este tipo de gasto: ",
   "personExpenseBlock.createExpenseAmountTextfield-expenseAmountTextfieldLabel": "Cantidad",
-  "incomeBlock.createIncomeBlockQuestions-questionLabel": "Si recibe otro tipo de ingreso, selecciónelo a continuación."
+  "incomeBlock.createIncomeBlockQuestions-questionLabel": "Si recibe otro tipo de ingreso, selecciónelo a continuación.",
+  "incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeInputLabel": "Tipo de ingreso",
+  "incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeSelectLabel": "Tipo de ingreso"
 
 }
