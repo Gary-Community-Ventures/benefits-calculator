@@ -228,5 +228,19 @@
   "confirmation.displayAllFormData-householdResourcesText": "Recursos del hogar: ",
   "confirmation.displayAllFormData-householdResourcesDescription": "Esto es dinero en efectivo, cuentas corrientes o de ahorro, acciones, bonos o fondos mutuos.",
   "confirmation.displayAllFormData-housingText": "Vivienda:",
-  "confirmation.displayAllFormData-zipcodeText": "Su código postal: "
+  "confirmation.displayAllFormData-zipcodeText": "Su código postal: ",
+  "confirmation.headOfHouseholdDataBlock-youText": " Usted, ",
+  "confirmation.headOfHouseholdDataBlock-headOfHouseholdText": " cabeza de familia",
+  "confirmation.headOfHouseholdDataBlock-conditionsText": "Condiciones:",
+  "confirmation.headOfHouseholdDataBlock-studentFulltimeText": "Estudiante de tiempo completo",
+  "confirmation.headOfHouseholdDataBlock-studentText": "Estudiante",
+  "confirmation.headOfHouseholdDataBlock-pregnantText": "Embarazada",
+  "confirmation.headOfHouseholdDataBlock-unemployed18MosText": "Desempleado, trabajado en los últimos 18 meses",
+  "confirmation.headOfHouseholdDataBlock-unemployedText": "Desempleado",
+  "confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText": "Ciego o con discapacidad visual",
+  "confirmation.headOfHouseholdDataBlock-disabledText": "Deshabilitado",
+  "confirmation.headOfHouseholdDataBlock-veteranText": "Veterano",
+  "confirmation.headOfHouseholdDataBlock-medicaidText": "Recibiendo Medicaid",
+  "confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText": "Recibiendo Medicaid relacionado con la discapacidad"
+  
 }
