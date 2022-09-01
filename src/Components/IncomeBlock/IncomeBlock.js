@@ -126,16 +126,23 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     setSelectedMenuItem(updatedSelectedMenuItems);
   }
 
-  const createIncomeStreamsDropdownMenu = (incomeStreamName, incomeStreamLabel, index) => {
+  const createIncomeStreamsDropdownMenu = (incomeStreamName, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='income-type-label'>Income Type</InputLabel>
+        <InputLabel if='income-type-label'>
+          <FormattedMessage 
+            id='incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeInputLabel' 
+            defaultMessage='Income Type' />
+        </InputLabel>
         <StyledSelectfield
           labelId='income-type-label'
           id={incomeStreamName}
           value={incomeStreamName}
-          name={incomeStreamLabel}
-          label='Income Type'
+          label={
+            <FormattedMessage 
+            id='incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeSelectLabel' 
+            defaultMessage='Income Type' />
+          }
           onChange={(event) => { handleSelectChange(event, index) }}>
           {createMenuItems()}
         </StyledSelectfield>
@@ -186,7 +193,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
 
   const createIncomeBlockQuestions = () => {
     return selectedMenuItem.map((incomeSourceData, index) => {
-      const { incomeStreamName, incomeStreamLabel, incomeAmount, incomeFrequency } = incomeSourceData;
+      const { incomeStreamName, incomeAmount, incomeFrequency } = incomeSourceData;
       const incomeStreamQuestion = 
         <p className='question-label'>
           <FormattedMessage 
@@ -201,7 +208,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
             </div>
           }
           {index > 0 && incomeStreamQuestion}
-          {createIncomeStreamsDropdownMenu(incomeStreamName, incomeStreamLabel, index)}
+          {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
           {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
           {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
         </div>
