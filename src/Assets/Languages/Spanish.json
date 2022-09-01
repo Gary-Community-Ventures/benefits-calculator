@@ -216,5 +216,9 @@
   "expenseBlock.createExpenseAmountTextfield-questionLabel": "¿Cuánto es este tipo de gasto: ",
   "expenseBlock.createExpenseAmountTextfield-amountLabel": "Cantidad",
   "expenseBlock.return-error-message": "Seleccione e ingrese una respuesta para los tres campos",
-  "expenseBlock.return-addExpenseButton": "Agregar otro gasto"
+  "expenseBlock.return-addExpenseButton": "Agregar otro gasto",
+  "confirmation.return-stepLabel": "Paso ",
+  "confirmation.return-ofLabel": " de ",
+  "confirmation.return-subheader": "Ok. Esto es lo que tenemos hasta ahora:",
+  "confirmation.return-questionLabel": "¿Toda su información es correcta?"
 }

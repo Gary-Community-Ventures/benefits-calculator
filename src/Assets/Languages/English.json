@@ -216,6 +216,10 @@
   "expenseBlock.createExpenseAmountTextfield-questionLabel": "How much is this type of expense: ",
   "expenseBlock.createExpenseAmountTextfield-amountLabel": "Amount",
   "expenseBlock.return-error-message": "Please select and enter a response for all three fields",
-  "expenseBlock.return-addExpenseButton": "Add another expense"
+  "expenseBlock.return-addExpenseButton": "Add another expense",
+  "confirmation.return-stepLabel": "Step ",
+  "confirmation.return-ofLabel": " of ",
+  "confirmation.return-subheader": "Ok. Here's what we've got so far:",
+  "confirmation.return-questionLabel": "Is all of your information correct?"
 
 }
