@@ -304,7 +304,7 @@ const Confirmation = ({ formData }) => {
 
   const listAllExpenses = (memberExpenses) => {
     const mappedExpenses = memberExpenses.map(expense => {
-      return <li key={ expense.expenseSourceName }>${ expense.expenseAmount }, { expense.expenseSourceLabel }, { expense.expenseFrequency }</li>
+      return <li key={ expense.expenseSourceName }>${ expense.expenseAmount.toLocaleString(2) }, { expense.expenseSourceLabel }, { expense.expenseFrequencyLabel }</li>
     });
 
     return mappedExpenses;
