@@ -115,15 +115,27 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   const createExpenseFrequencyDropdownMenu = (expenseSourceFrequency, index) => {
     return (
       <div>
-        <p className='question-label'>How often do you have this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
+        <p className='question-label'>
+          <FormattedMessage 
+            id='expenseBlock.createExpenseFrequencyDropdownMenu-questionLabel' 
+            defaultMessage='How often do you have this type of expense: ' />
+          {selectedMenuItem[index].expenseSourceLabel}?
+        </p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel if='expense-frequency-label'>Frequency</InputLabel>
+          <InputLabel if='expense-frequency-label'>
+            <FormattedMessage 
+              id='expenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencyInputLabel' 
+              defaultMessage='Frequency' />
+          </InputLabel>
           <StyledSelectfield
             labelId='expense-frequency-label'
             id='expense-frequency'
             value={expenseSourceFrequency}
-            name={expenseSourceFrequency}
-            label='Expense Frequency'
+            label={
+              <FormattedMessage 
+                id='expenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel' 
+                defaultMessage='Expense Frequency' />
+            }
             onChange={(event) => { handleFrequencySelectChange(event, index) }}>
             {createExpenseFrequencyMenuItems()}
           </StyledSelectfield>
