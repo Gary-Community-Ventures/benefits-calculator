@@ -197,9 +197,11 @@
   "incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeInputLabel": "Income Type",
   "incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeSelectLabel": "Income Type",
   "incomeBlock.createMenuItems-disabledSelectMenuItemText": "Select",
-  "incomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel": "How often do you receive this income:",
+  "incomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel": "How often do you receive this income: ",
   "incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencyLabel": "Frequency",
   "incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencySelectLabel": "Income Frequency",
-  "incomeBlock.createFrequencyMenuItems-disabledSelectMenuItemText": "Select"
+  "incomeBlock.createFrequencyMenuItems-disabledSelectMenuItemText": "Select",
+  "incomeBlock.createIncomeAmountTextfield-questionLabel": "How much do you receive for: ",
+  "incomeBlock.createIncomeAmountTextfield-amountLabel": "Amount"
 
 }

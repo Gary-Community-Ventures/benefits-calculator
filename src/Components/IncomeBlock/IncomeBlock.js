@@ -179,13 +179,22 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   const createIncomeAmountTextfield = (incomeStreamName, incomeAmount, index) => {
     return (
       <div className='bottom-border'>
-        <p className='question-label'>How much do you receive for: {selectedMenuItem[index].incomeStreamLabel}?</p>
+        <p className='question-label'>
+          <FormattedMessage 
+            id='incomeBlock.createIncomeAmountTextfield-questionLabel' 
+            defaultMessage='How much do you receive for: ' /> 
+          {selectedMenuItem[index].incomeStreamLabel}?
+        </p>
         <div className='income-block-textfield'>
           <StyledTextField
             type='text'
             name={incomeStreamName}
             value={incomeAmount}
-            label='Amount'
+            label={
+              <FormattedMessage 
+                id='incomeBlock.createIncomeAmountTextfield-amountLabel' 
+                defaultMessage='Amount' />
+            }
             onChange={(event) => {handleIncomeTextfieldChange(event, index)}}
             variant='outlined'
             required
@@ -203,7 +212,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
         <p className='question-label'>
           <FormattedMessage 
             id='incomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel' 
-            defaultMessage='How often do you receive this income:' /> 
+            defaultMessage='How often do you receive this income: ' /> 
           {selectedMenuItem[index].incomeStreamLabel}?
         </p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
