@@ -7,6 +7,7 @@ import PreviousButton from '../PreviousButton/PreviousButton';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { incomeStreamValueHasError, displayIncomeStreamValueHelperText, incomeStreamsAreValid } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
+import frequencyOptions from '../../Assets/frequencyOptions';
 import './IncomeBlock.css';
 
 const StyledSelectfield = styled(Select)({
