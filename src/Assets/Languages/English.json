@@ -192,5 +192,7 @@
   "expenseFrequencyOptions.semimonthly": "Twice a month",
   "expenseFrequencyOptions.yearly": "Every year",
   "personExpenseBlock.createExpenseAmountTextfield-questionLabel": "How much is this type of expense: ",
-  "personExpenseBlock.createExpenseAmountTextfield-expenseAmountTextfieldLabel": "Amount"
+  "personExpenseBlock.createExpenseAmountTextfield-expenseAmountTextfieldLabel": "Amount",
+  "incomeBlock.createIncomeBlockQuestions-questionLabel": "If you receive another type of income, select it below."
+
 }
