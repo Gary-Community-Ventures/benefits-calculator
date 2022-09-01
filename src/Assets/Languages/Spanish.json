@@ -220,5 +220,13 @@
   "confirmation.return-stepLabel": "Paso ",
   "confirmation.return-ofLabel": " de ",
   "confirmation.return-subheader": "Ok. Esto es lo que tenemos hasta ahora:",
-  "confirmation.return-questionLabel": "¿Toda su información es correcta?"
+  "confirmation.return-questionLabel": "¿Toda su información es correcta?",
+  "confirmation.displayAllFormData-personLabel": "persona",
+  "confirmation.displayAllFormData-peopleLabel": "personas",
+  "confirmation.displayAllFormData-yourHouseholdLabel": "Su hogar: ",
+  "confirmation.editLinkText": "Editar",
+  "confirmation.displayAllFormData-householdResourcesText": "Recursos del hogar: ",
+  "confirmation.displayAllFormData-householdResourcesDescription": "Esto es dinero en efectivo, cuentas corrientes o de ahorro, acciones, bonos o fondos mutuos.",
+  "confirmation.displayAllFormData-housingText": "Vivienda:",
+  "confirmation.displayAllFormData-zipcodeText": "Su código postal: "
 }

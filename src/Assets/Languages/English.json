@@ -220,6 +220,14 @@
   "confirmation.return-stepLabel": "Step ",
   "confirmation.return-ofLabel": " of ",
   "confirmation.return-subheader": "Ok. Here's what we've got so far:",
-  "confirmation.return-questionLabel": "Is all of your information correct?"
+  "confirmation.return-questionLabel": "Is all of your information correct?",
+  "confirmation.displayAllFormData-personLabel": "person",
+  "confirmation.displayAllFormData-peopleLabel": "people",
+  "confirmation.displayAllFormData-yourHouseholdLabel": "Your household: ",
+  "confirmation.editLinkText": "Edit",
+  "confirmation.displayAllFormData-householdResourcesText": "Household resources: ",
+  "confirmation.displayAllFormData-householdResourcesDescription": "This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.",
+  "confirmation.displayAllFormData-housingText": "Housing:",
+  "confirmation.displayAllFormData-zipcodeText": "Your zipcode:"
 
 }
