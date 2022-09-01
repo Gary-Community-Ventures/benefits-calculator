@@ -29,7 +29,6 @@ const HouseholdDataContinueButton = ({ page, setPage, householdSizeNumber, handl
       <FormattedMessage 
         id='continueButton'
         defaultMessage='Continue' />
-      Continue
     </Button>
   );
 }
