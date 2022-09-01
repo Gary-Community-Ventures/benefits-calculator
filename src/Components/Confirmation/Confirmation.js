@@ -122,34 +122,79 @@ const Confirmation = ({ formData }) => {
   }
   
   const displayAllFormData = () => {
-    const householdSizeDescriptor = householdSize === 1 ? 'person' : 'people';
+    const householdSizeDescriptor = 
+      householdSize === 1 ? 
+        <FormattedMessage 
+          id='confirmation.displayAllFormData-personLabel' 
+          defaultMessage='person' />
+      : 
+        <FormattedMessage 
+          id='confirmation.displayAllFormData-peopleLabel' 
+          defaultMessage='people' /> 
+    ;
 
     return (
       <>
         <p className='confirmation-label'>
-          <b>Your household: </b>
+          <b>
+            <FormattedMessage 
+              id='confirmation.displayAllFormData-yourHouseholdLabel' 
+              defaultMessage='Your household: ' />
+          </b>
           { householdSize } { householdSizeDescriptor }
-          <Link to='/step-14' className='edit-link'>Edit</Link>
+          <Link to='/step-14' className='edit-link'>
+            <FormattedMessage 
+              id='confirmation.editLinkText' 
+              defaultMessage='Edit' />
+          </Link>
         </p>
         { displayAllHouseholdData() }
         <p className='confirmation-section-underline'></p>
         <p className='confirmation-label'>
-          <b> Household resources: </b>
+          <b> 
+            <FormattedMessage 
+              id='confirmation.displayAllFormData-householdResourcesText' 
+              defaultMessage='Household resources: ' />
+          </b>
           ${ householdAssets }
-          <Link to='/step-16' className='edit-link'>Edit</Link>
+          <Link to='/step-16' className='edit-link'>
+            <FormattedMessage 
+              id='confirmation.editLinkText' 
+              defaultMessage='Edit' />
+          </Link>
         </p>
-        <p className='confirmation-label-description'>This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.</p>
+        <p className='confirmation-label-description'>
+          <FormattedMessage 
+            id='confirmation.displayAllFormData-householdResourcesDescription' 
+            defaultMessage='This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.' />
+        </p>
         <p className='confirmation-section-underline'></p>
         <article className='confirmation-label'>
-          <b> Housing: </b>
-          <Link to='/step-17' className='edit-link'>Edit</Link>
+          <b> 
+            <FormattedMessage 
+              id='confirmation.displayAllFormData-housingText' 
+              defaultMessage='Housing:' />
+            </b>
+          <Link to='/step-17' className='edit-link'>
+            <FormattedMessage 
+              id='confirmation.editLinkText' 
+              defaultMessage='Edit' />
+          </Link>
           { <ul> { listAllHousing() } </ul> }
         </article>
         <p className='confirmation-section-underline'></p>
         <p className='confirmation-label'>
-          <b> Your zipcode: </b>
+          <b> 
+            <FormattedMessage 
+              id='confirmation.displayAllFormData-zipcodeText' 
+              defaultMessage='Your zipcode:' /> 
+          </b>
           { zipcode }
-          <Link to='/step-3' className='edit-link'>Edit</Link>
+          <Link to='/step-3' className='edit-link'>
+            <FormattedMessage 
+              id='confirmation.editLinkText' 
+              defaultMessage='Edit' />
+          </Link>
         </p>
       </>
     );
