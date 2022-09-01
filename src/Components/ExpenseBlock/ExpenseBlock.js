@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { expenseSourceValueHasError, displayExpenseSourceValueHelperText, expenseSourcesAreValid } from '../../Assets/validationFunctions';
 import expenseOptions from '../../Assets/expenseOptions';
+import frequencyOptions from '../../Assets/frequencyOptions';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import './ExpenseBlock.css';
 
@@ -156,32 +157,9 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
           id='expenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText' 
           defaultMessage='Select' />
       </MenuItem>;
-
-    const expenseFrequencyOptions = {
-      weekly: 
-        <FormattedMessage 
-          id='expenseFrequencyOptions.weekly' 
-          defaultMessage='Every week' />,
-      biweekly: 
-        <FormattedMessage 
-          id='expenseFrequencyOptions.biweekly' 
-          defaultMessage='Every 2 weeks' />,
-      monthly: 
-        <FormattedMessage 
-          id='expenseFrequencyOptions.monthly' 
-          defaultMessage='Every month' />,
-      semimonthly: 
-        <FormattedMessage 
-          id='expenseFrequencyOptions.semimonthly' 
-          defaultMessage='Twice a month' />,
-      yearly: 
-        <FormattedMessage 
-          id='expenseFrequencyOptions.yearly' 
-          defaultMessage='Every year' />
-    };
-
-    const frequencyMenuItemKeys = Object.keys(expenseFrequencyOptions);
-    const frequencyMenuItemLabels = Object.values(expenseFrequencyOptions);
+      
+    const frequencyMenuItemKeys = Object.keys(frequencyOptions);
+    const frequencyMenuItemLabels = Object.values(frequencyOptions);
   
     const frequencyMenuItems = frequencyMenuItemKeys.map((freqMenuItemKey, i) => {
       return (
@@ -199,6 +177,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
           id='expenseBlock.createExpenseMenuItems-disabledSelectMenuItemText' 
           defaultMessage='Select' />
       </MenuItem>;
+
     const menuItemKeys = Object.keys(expenseOptions);
     const menuItemLabels = Object.values(expenseOptions);
 
