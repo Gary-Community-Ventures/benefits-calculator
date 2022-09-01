@@ -193,6 +193,8 @@
   "expenseFrequencyOptions.yearly": "Every year",
   "personExpenseBlock.createExpenseAmountTextfield-questionLabel": "How much is this type of expense: ",
   "personExpenseBlock.createExpenseAmountTextfield-expenseAmountTextfieldLabel": "Amount",
-  "incomeBlock.createIncomeBlockQuestions-questionLabel": "If you receive another type of income, select it below."
+  "incomeBlock.createIncomeBlockQuestions-questionLabel": "If you receive another type of income, select it below.",
+  "incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeInputLabel": "Income Type",
+  "incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeSelectLabel": "Income Type"
 
 }
