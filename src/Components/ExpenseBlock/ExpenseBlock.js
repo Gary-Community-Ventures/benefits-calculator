@@ -174,12 +174,13 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
           id='expenseFrequencyOptions.yearly' 
           defaultMessage='Every year' />
     };
+
     const frequencyMenuItemKeys = Object.keys(expenseFrequencyOptions);
     const frequencyMenuItemLabels = Object.values(expenseFrequencyOptions);
   
     const frequencyMenuItems = frequencyMenuItemKeys.map((freqMenuItemKey, i) => {
       return (
-        <MenuItem value={freqMenuItemKey} key={frequencyMenuItemLabels[i]}>{frequencyMenuItemLabels[i]}</MenuItem>
+        <MenuItem value={freqMenuItemKey} key={freqMenuItemKey}>{frequencyMenuItemLabels[i]}</MenuItem>
       );
     });
 
