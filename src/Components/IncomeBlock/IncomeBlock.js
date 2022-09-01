@@ -314,7 +314,9 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
         <Button
           variant='contained'
           onClick={(event) => { handleSaveAndContinue(event) }} >
-          Continue
+          <FormattedMessage 
+            id='continueButton'
+            defaultMessage='Continue' />
         </Button>
       </div>
     </>
