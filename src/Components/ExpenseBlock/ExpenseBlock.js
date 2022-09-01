@@ -286,17 +286,11 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
       setSelectedMenuItem(updatedSelectedMenuItems);
     }
   }
-
-  const expenseBlockIsMissingAnInput = () => {
-    return selectedMenuItem[0].expenseSourceName === '' || 
-      selectedMenuItem[0].expenseAmount === 0 || 
-      selectedMenuItem[0].expenseFrequency === '';
-  }
   
   return (
     <>
       { createExpenseBlockQuestions() }
-      { expenseBlockIsMissingAnInput() && 
+      { !expenseSourcesAreValid(selectedMenuItem) && 
         <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
       <Button
         variant='contained'
