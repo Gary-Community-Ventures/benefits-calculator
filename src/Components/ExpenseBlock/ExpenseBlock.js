@@ -60,8 +60,8 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
           }
           {index > 0 && expenseSourceQuestion}
           {createExpenseDropdownMenu(expenseSourceName, expenseSourceLabel, index)}
-          {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
           {createExpenseFrequencyDropdownMenu(expenseFrequency, index)}
+          {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
         </div>
       );
     })
@@ -69,7 +69,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
 
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
     return (
-      <div>
+      <div className='bottom-border'>
         <p className='question-label'>How much is this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
         <div className='expense-block-textfield'>
           <StyledTextField 
@@ -107,7 +107,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
 
   const createExpenseFrequencyDropdownMenu = (expenseSourceFrequency, index) => {
     return (
-      <div className='bottom-border'>
+      <div>
         <p className='question-label'>How often do you have this type of expense: {selectedMenuItem[index].expenseSourceLabel}?</p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <InputLabel if='expense-frequency-label'>Frequency</InputLabel>
@@ -240,7 +240,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   
   return (
     <>
-      {createExpenseBlockQuestions()}
+      { createExpenseBlockQuestions() }
       { expenseBlockIsMissingAnInput() && 
         <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
       <Button
