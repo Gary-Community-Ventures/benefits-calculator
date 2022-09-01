@@ -64,30 +64,38 @@ const Confirmation = ({ formData }) => {
   }
 
   const headOfHouseholdDataBlock = () => {
-    const { age, student, studentFulltime, pregnant, unemployed, 
-      unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
-      disabilityRelatedMedicaid, hasIncome, incomeStreams, hasExpenses, expenses } = formData;
-
+    const { age, hasIncome, incomeStreams, hasExpenses, expenses } = formData;
     return (
       <div key='head-of-household-data-block'>
         <p className='confirmation-label'>
-          <b>🔵 You, { age }, head of household</b>
-          <Link to='/step-2' className='edit-link'>Edit</Link>
+          <b> 
+            🔵 
+            <FormattedMessage 
+              id='confirmation.headOfHouseholdDataBlock-youText' 
+              defaultMessage=' You, ' /> 
+            { age }, 
+            <FormattedMessage 
+              id='confirmation.headOfHouseholdDataBlock-headOfHouseholdText' 
+              defaultMessage=' head of household' />
+          </b>
+          <Link to='/step-2' className='edit-link'>
+            <FormattedMessage 
+                id='confirmation.editLinkText' 
+                defaultMessage='Edit' />
+          </Link>
         </p>
-        <article className='confirmation-label'><b>Conditions:</b>
-          <Link to='/step-4' className='edit-link'>Edit</Link>
-          <ul>
-            { studentFulltime && <li> Full-time student </li> }
-            { student && (studentFulltime === false) && <li> Student </li> }
-            { pregnant && <li> Pregnant </li> }
-            { unemployedWorkedInLast18Mos && <li> Unemployed, worked in the last 18 months </li> }
-            { unemployed && (unemployedWorkedInLast18Mos === false) && <li> Unemployed </li> }
-            { blindOrVisuallyImpaired && <li> Blind or visually impaired </li> }
-            { disabled && <li> Disabled </li> }
-            { veteran && <li> Veteran </li> }
-            { medicaid && <li> Receiving Medicaid </li> }
-            { disabilityRelatedMedicaid && <li> Receiving disability-related Medicaid </li> }
-          </ul>
+        <article className='confirmation-label'>
+          <b>
+            <FormattedMessage 
+              id='confirmation.headOfHouseholdDataBlock-conditionsText' 
+              defaultMessage='Conditions:' />
+          </b>
+          <Link to='/step-4' className='edit-link'>
+            <FormattedMessage 
+              id='confirmation.editLinkText' 
+              defaultMessage='Edit' />
+          </Link>
+          { displayConditions(formData) }
         </article>
         <article className='confirmation-label'><b>Income:</b>
           <Link to='/step-12' className='edit-link'>Edit</Link>
