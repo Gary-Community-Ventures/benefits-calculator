@@ -33,7 +33,8 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
       expenseSourceName: '', 
       expenseSourceLabel: '', 
       expenseAmount: '',
-      expenseFrequency: ''
+      expenseFrequency: '',
+      expenseFrequencyLabel: ''
     }
   ]);
 
@@ -203,7 +204,8 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
         expenseSourceName: '', 
         expenseSourceLabel: '', 
         expenseAmount: 0,
-        expenseFrequency: ''
+        expenseFrequency: '',
+        expenseFrequencyLabel: ''
       }
     ]);
   }
@@ -212,7 +214,11 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     const { value } = event.target; 
     const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
       if (i === index) {
-        return { ...expenseSourceData, expenseFrequency: value }
+        return { 
+          ...expenseSourceData, 
+          expenseFrequency: value,
+          expenseFrequencyLabel: frequencyOptions[value]
+        }
       } else {
         return expenseSourceData;
       }
@@ -235,7 +241,8 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
           expenseSourceName: event.target.value, 
           expenseSourceLabel: expenseOptions[event.target.value],
           expenseAmount: 0, 
-          expenseFrequency: ''
+          expenseFrequency: '',
+          expenseFrequencyLabel: ''
         }
       } else {
         return expenseSourceData;
