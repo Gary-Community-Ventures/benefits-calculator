@@ -231,6 +231,12 @@
   "confirmation.headOfHouseholdDataBlock-disabledText": "Disabled",
   "confirmation.headOfHouseholdDataBlock-veteranText": "Veteran",
   "confirmation.headOfHouseholdDataBlock-medicaidText": "Receiving Medicaid",
-  "confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText": "Receiving disability-related Medicaid"
+  "confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText": "Receiving disability-related Medicaid",
+  "confirmation.headOfHouseholdDataBlock-incomeLabel": "Income:",
+  "frequencyOptions.weekly": "Every week",
+  "frequencyOptions.biweekly": "Every 2 weeks",
+  "frequencyOptions.monthly": "Every month",
+  "frequencyOptions.semimonthly": "Twice a month",
+  "frequencyOptions.yearly": "Every year"
 
 }
