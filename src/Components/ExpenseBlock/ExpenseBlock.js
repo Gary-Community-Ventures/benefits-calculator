@@ -42,7 +42,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
 
   const createExpenseBlockQuestions = () => {
     return selectedMenuItem.map((expenseSourceData, index) => {
-      const { expenseSourceName, expenseSourceLabel, expenseAmount, expenseFrequency } = expenseSourceData;
+      const { expenseSourceName, expenseAmount, expenseFrequency } = expenseSourceData;
       
       const expenseSourceQuestion = 
         <p className='question-label'>
@@ -59,7 +59,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
             </div>
           }
           {index > 0 && expenseSourceQuestion}
-          {createExpenseDropdownMenu(expenseSourceName, expenseSourceLabel, index)}
+          {createExpenseDropdownMenu(expenseSourceName, index)}
           {createExpenseFrequencyDropdownMenu(expenseFrequency, index)}
           {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
         </div>
