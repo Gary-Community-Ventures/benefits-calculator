@@ -324,7 +324,7 @@ const Confirmation = ({ formData }) => {
 
   const listAllIncomeStreams = (memberIncomeStreams) => {
     const mappedListItems = memberIncomeStreams.map(incomeStream => {
-      return <li key={ incomeStream.incomeStreamName }>${ incomeStream.incomeAmount }, { incomeStream.incomeStreamLabel }, { incomeStream.incomeFrequency }</li>
+      return <li key={ incomeStream.incomeStreamName }>${ incomeStream.incomeAmount.toLocaleString(2) }, { incomeStream.incomeStreamLabel }, { incomeStream.incomeFrequencyLabel }</li>
     });
 
     return mappedListItems;
