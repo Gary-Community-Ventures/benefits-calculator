@@ -290,16 +290,10 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     }
   }
 
-  const incomeBlockIsMissingAnInput = () => {
-    return selectedMenuItem[0].incomeStreamName === '' || 
-      selectedMenuItem[0].incomeAmount === 0 || 
-      selectedMenuItem[0].incomeFrequency === '';
-  }
-
   return (
     <>
       {createIncomeBlockQuestions()}
-      { incomeBlockIsMissingAnInput() && 
+      { !incomeStreamsAreValid(selectedMenuItem) && 
         <ErrorMessage 
           error={ 
             <FormattedMessage 
