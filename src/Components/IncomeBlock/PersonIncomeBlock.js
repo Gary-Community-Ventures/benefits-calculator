@@ -1,5 +1,5 @@
 import { FormattedMessage } from 'react-intl';
-import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
+import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from "@mui/material";
 import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { incomeStreamValueHasError, displayIncomeStreamValueHelperText, incomeStreamsAreValid } from '../../Assets/validationFunctions';
@@ -19,11 +19,6 @@ const StyledTextField = styled(TextField)({
 const StyledDeleteButton = styled(Button)({
   minWidth: 32
 });
-
-const StyledTypography = styled(Typography)`
-  color: #c6252b;
-  height: 24px;
-`;
 
 const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those 
