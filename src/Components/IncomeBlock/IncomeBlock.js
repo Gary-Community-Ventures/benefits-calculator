@@ -1,6 +1,7 @@
 import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
 import { useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import { styled } from '@mui/material/styles';
 import { incomeStreamValueHasError, displayIncomeStreamValueHelperText } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
