@@ -1,8 +1,9 @@
-import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from '@mui/material';
+import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { expenseSourceValueHasError, displayExpenseSourceValueHelperText, expenseSourcesAreValid } from '../../Assets/validationFunctions';
 import expenseOptions from '../../Assets/expenseOptions';
 import PreviousButton from '../PreviousButton/PreviousButton';
@@ -20,11 +21,6 @@ const StyledTextField = styled(TextField)({
 const StyledDeleteButton = styled(Button)({
   minWidth: 32
 });
-
-const StyledTypography = styled(Typography)`
-  color: #c6252b;
-  height: 24px;
-`;
 
 const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   const { id } = useParams();
@@ -291,7 +287,14 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     <>
       { createExpenseBlockQuestions() }
       { !expenseSourcesAreValid(selectedMenuItem) && 
-        <StyledTypography gutterBottom>*Please select and enter a response for all three fields</StyledTypography> }
+        <ErrorMessage 
+          error={ 
+            <FormattedMessage 
+              id='expenseBlock.return-error-message' 
+              defaultMessage='Please select and enter a response for all three fields' />
+          } 
+        />
+      }
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalExpenseSource(event)} >
