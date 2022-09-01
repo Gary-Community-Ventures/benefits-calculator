@@ -43,7 +43,13 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   const createExpenseBlockQuestions = () => {
     return selectedMenuItem.map((expenseSourceData, index) => {
       const { expenseSourceName, expenseSourceLabel, expenseAmount, expenseFrequency } = expenseSourceData;
-      const expenseSourceQuestion = <p className='question-label'>If you have another expense, select it below.</p>;
+      
+      const expenseSourceQuestion = 
+        <p className='question-label'>
+          <FormattedMessage 
+            id='expenseBlock.createExpenseBlockQuestions-questionLabel' 
+            defaultMessage='If you have another expense, select it below.' />
+        </p>;
 
       return (
         <div key={index}>
