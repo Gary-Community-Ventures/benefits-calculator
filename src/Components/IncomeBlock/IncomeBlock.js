@@ -287,7 +287,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
 
   return (
     <>
-      {createIncomeBlockQuestions()}
+      { createIncomeBlockQuestions() }
       { !incomeStreamsAreValid(selectedMenuItem) && 
         <ErrorMessage 
           error={ 
