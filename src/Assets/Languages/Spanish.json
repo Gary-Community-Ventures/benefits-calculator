@@ -215,5 +215,6 @@
   "expenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText": "Seleccionar",
   "expenseBlock.createExpenseAmountTextfield-questionLabel": "¿Cuánto es este tipo de gasto: ",
   "expenseBlock.createExpenseAmountTextfield-amountLabel": "Cantidad",
-  "expenseBlock.return-error-message": "Seleccione e ingrese una respuesta para los tres campos"
+  "expenseBlock.return-error-message": "Seleccione e ingrese una respuesta para los tres campos",
+  "expenseBlock.return-addExpenseButton": "Agregar otro gasto"
 }
