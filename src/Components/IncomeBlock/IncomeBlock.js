@@ -66,31 +66,9 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
           defaultMessage='Select' />
       </MenuItem>;
       
-    const incomeFrequencyOptions = {
-      weekly: 
-        <FormattedMessage 
-          id='incomeFrequencyOptions.weekly' 
-          defaultMessage='Every week' />,
-      biweekly: 
-        <FormattedMessage 
-          id='incomeFrequencyOptions.biweekly' 
-          defaultMessage='Every 2 weeks' />,
-      monthly: 
-        <FormattedMessage 
-          id='incomeFrequencyOptions.monthly' 
-          defaultMessage='Every month' />,
-      semimonthly: 
-        <FormattedMessage 
-          id='incomeFrequencyOptions.semimonthly' 
-          defaultMessage='Twice a month' />,
-      yearly: 
-        <FormattedMessage 
-          id='incomeFrequencyOptions.yearly' 
-          defaultMessage='Every year' />
-    };
-
-    const menuItemKeys = Object.keys(incomeFrequencyOptions);
-    const menuItemLabels = Object.values(incomeFrequencyOptions);
+    const menuItemKeys = Object.keys(frequencyOptions);
+    const menuItemLabels = Object.values(frequencyOptions);
+    
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
         <MenuItem value={menuItemKey} key={menuItemKey}>{menuItemLabels[i]}</MenuItem>
