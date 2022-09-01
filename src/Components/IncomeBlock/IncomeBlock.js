@@ -45,13 +45,18 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   ]);
 
   const createMenuItems = () => {
-    const disabledSelectMenuItem = <MenuItem value='select' key='disabled-select-value' disabled>Select</MenuItem>;
+    const disabledSelectMenuItem = 
+      <MenuItem value='select' key='disabled-select-value' disabled>
+        <FormattedMessage 
+          id='incomeBlock.createMenuItems-disabledSelectMenuItemText' 
+          defaultMessage='Select' />
+      </MenuItem>;
     const menuItemKeys = Object.keys(incomeOptions);
     const menuItemLabels = Object.values(incomeOptions);
 
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <MenuItem value={menuItemKey} key={menuItemLabels[i]}>{menuItemLabels[i]}</MenuItem>
+        <MenuItem value={menuItemKey} key={menuItemKey}>{menuItemLabels[i]}</MenuItem>
       );
     });
 
