@@ -205,5 +205,7 @@
   "incomeBlock.createIncomeAmountTextfield-amountLabel": "Cantidad",
   "incomeBlock.return-error-message": "*Seleccione e ingrese una respuesta para los tres campos",
   "incomeBlock.return-addIncomeButton": "Agregar otro ingreso",
-  "expenseBlock.createExpenseBlockQuestions-questionLabel": "Si tiene otro gasto, selecciónelo a continuación."
+  "expenseBlock.createExpenseBlockQuestions-questionLabel": "Si tiene otro gasto, selecciónelo a continuación.",
+  "expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel": "Tipo de gasto",
+  "expenseBlock.createExpenseDropdownMenu-expenseTypeSelectLabel": "Tipo de gasto"
 }
