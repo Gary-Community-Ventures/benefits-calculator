@@ -179,15 +179,28 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     return (
       <div>
-        <p className='question-label'>How often do you receive this income: {selectedMenuItem[index].incomeStreamLabel}?</p>
+        <p className='question-label'>
+          <FormattedMessage 
+            id='incomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel' 
+            defaultMessage='How often do you receive this income:' /> 
+          {selectedMenuItem[index].incomeStreamLabel}?
+        </p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='income-frequency-label'>Frequency</InputLabel>
+        <InputLabel if='income-frequency-label'>
+          <FormattedMessage 
+            id='incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencyLabel' 
+            defaultMessage='Frequency' />
+        </InputLabel>
         <StyledSelectfield
           labelId='income-frequency-label'
           id='income-frequency'
           value={incomeFrequency}
           name={incomeFrequency}
-          label='Income Frequency'
+          label={
+            <FormattedMessage 
+              id='incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencySelectLabel' 
+              defaultMessage='Income Frequency' />
+          }
           onChange={(event) => { handleFrequencySelectChange(event, index) }}>
           {createFrequencyMenuItems()}
         </StyledSelectfield>
