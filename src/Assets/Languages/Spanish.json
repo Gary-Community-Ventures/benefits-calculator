@@ -248,7 +248,11 @@
   "results.return-goBackToEligibleText": "Volver a los programas elegibles",
   "results.displaySubheader-rememberDisclaimerText": "Recuerde que no podemos garantizar la elegibilidad, pero según la información que proporcionó, creemos que es probable que sea elegible para los siguientes programas:",
   "results.displaySubheader-basedOnInformationText": "Según la información que proporcionó, creemos que es probable que ",
-  "results.displaySubheader-notEligibleText": " no califica ",
-  "results.displaySubheader-forTheProgramsBelowText": "para los siguientes programas:"
+  "results.displaySubheader-notEligibleText": " no califique ",
+  "results.displaySubheader-forTheProgramsBelowText": "para los siguientes programas:",
+  "results.resultsTable-benefitLabel": "Beneficio",
+  "results.resultsTable-annualValueLabel": "Valor anual",
+  "results.resultsTable-timeToReceiptLabel": "Tiempo para recibir",
+  "results.resultsTable-sorryNoProgramsWereFoundLabel": "Lo sentimos, no pudimos encontrar ningún programa para usted según la información proporcionada.",
   
 }
