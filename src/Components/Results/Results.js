@@ -345,14 +345,14 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       <div className='results-container'>
         <Grid container spacing={2}>
           { results.isLoading ? 
-            <Grid container xs={12} justifyContent="center" alignItems="center">
-              <Grid item xs={6} sx={{mt: 5}}>
+            <Grid container xs={12} item={true} justifyContent="center" alignItems="center">
+              <Grid xs={6} sx={{mt: 5}} item={true}>
                 <Loading />
               </Grid>
             </Grid> : 
             <>
-              <Grid container xs={12} sx={{mt: 2, mr: 2, ml: 2}}>
-                <Grid xs={12}>
+              <Grid container xs={12} item={true} sx={{mt: 2, mr: 2, ml: 2}} >
+                <Grid xs={12} item={true}>
                   <p className='question-label underline-id'>
                     <FormattedMessage 
                       id='results.return-screenerIdLabel' 
@@ -362,7 +362,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 </Grid>
                 { programSubset === 'eligiblePrograms' && 
                   <>
-                  <Grid xs={12}>
+                  <Grid xs={12} item={true}>
                     <Typography className='sub-header' variant="h6"> 
                       {results[programSubset].length} 
                       <FormattedMessage 
@@ -380,10 +380,10 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   </Grid>
                   </>
                 }
-                <Grid xs={12} sm={8}>
+                <Grid xs={12} item={true} sm={8}>
                   { displaySubheader(programSubset) }
                 </Grid>
-                <Grid xs={12} sm={4} container justifyContent="flex-end">
+                <Grid xs={12} item={true} sm={4} container justifyContent="flex-end">
                   <Button
                     sx={{mb: 2, mt: 1}}
                     variant='contained'
@@ -398,10 +398,10 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   </Button>
                 </Grid>
               </Grid>
-              <Grid xs={12}>
+              <Grid xs={12} item={true}>
                 { resultsTable(results[programSubset])}
               </Grid>
-              <Grid xs={12}>
+              <Grid xs={12} item={true}>
                 { programSubset === 'eligiblePrograms' && 
                   <Typography
                     sx={{mt: 2, ml: 2}}
