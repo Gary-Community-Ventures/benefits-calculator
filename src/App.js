@@ -21,6 +21,18 @@ const App = () => {
     startTime: new Date().toJSON(),
     student: false,
     studentFulltime: false,
+      incomeStreamLabel: 'Wages, salaries, tips', 
+      incomeAmount: '29000',
+      incomeFrequency: 'yearly',
+      incomeFrequencyLabel: 'Every year'
+    }],
+    hasExpenses: true,
+    expenses: [{
+      expenseSourceName: 'rent', 
+      expenseSourceLabel: 'Rent', 
+      expenseAmount: '500',
+      expenseFrequency: 'monthly',
+      expenseFrequencyLabel: 'Every month'
     pregnant: false,
     unemployed: false,
     unemployedWorkedInLast18Mos: false,
@@ -60,14 +72,16 @@ const App = () => {
   //     incomeStreamName: 'wages', 
   //     incomeStreamLabel: 'Wages, salaries, tips', 
   //     incomeAmount: '29000',
-  //     incomeFrequency: 'yearly'
+  //     incomeFrequency: 'yearly',
+  //     incomeFrequencyLabel: 'Every year'
   //   }],
   //   hasExpenses: true,
   //   expenses: [{
   //     expenseSourceName: 'rent', 
   //     expenseSourceLabel: 'Rent', 
   //     expenseAmount: '500',
-  //     expenseFrequency: 'monthly'
+  //     expenseFrequency: 'monthly',
+  //     expenseFrequencyLabel: 'Every month'
   //   }],
   //   householdSize: '2',
   //   householdData: [{
