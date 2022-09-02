@@ -324,13 +324,29 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
             <>
               <Grid container xs={12} sx={{mt: 2, mr: 2, ml: 2}}>
                 <Grid xs={12}>
-                  <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
+                  <p className='question-label underline-id'>
+                    <FormattedMessage 
+                      id='results.return-screenerIdLabel' 
+                      defaultMessage='Screener ID: ' /> 
+                    {results.screenerId}
+                  </p>
                 </Grid>
                 { programSubset === 'eligiblePrograms' && 
                   <>
                   <Grid xs={12}>
                     <Typography className='sub-header' variant="h6"> 
-                      {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year or ${totalDollarAmountMonthly(results[programSubset])} per month for you to consider
+                      {results[programSubset].length} 
+                      <FormattedMessage 
+                        id='results.return-programsUpToLabel' 
+                        defaultMessage=' programs, up to ' /> 
+                      ${totalDollarAmount(results[programSubset])} 
+                      <FormattedMessage 
+                        id='results.return-perYearOrLabel' 
+                        defaultMessage=' per year or ' />
+                      ${totalDollarAmountMonthly(results[programSubset])} 
+                      <FormattedMessage 
+                        id='results.return-perMonthLabel' 
+                        defaultMessage=' per month for you to consider' />
                     </Typography>
                   </Grid>
                   </>
@@ -347,7 +363,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                       navigate('/email-results');
                     }}
                     className='results-link'>
-                      Email Results
+                    <FormattedMessage 
+                      id='results.return-emailResultsButton' 
+                      defaultMessage='Email Results' />
                   </Button>
                 </Grid>
               </Grid>
@@ -363,7 +381,10 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                       window.scrollTo(0,0);
                     }}
                     className='ineligibility-link'>
-                    * For additional information on programs that you were not eligible for click here
+                    <FormattedMessage 
+                      id='results.return-ineligibilityLinkText' 
+                      defaultMessage='* For additional information on programs 
+                      that you were not eligible for click here' />
                   </Typography> 
                 }
                 { programSubset === 'ineligiblePrograms' && 
@@ -374,7 +395,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                       window.scrollTo(0,0);
                     }}
                     className='ineligibility-link'>
-                    Go back to eligible programs
+                    <FormattedMessage 
+                      id='results.return-goBackToEligibleText' 
+                      defaultMessage='Go back to eligible programs' />
                   </Typography> 
                 }
               </Grid>
