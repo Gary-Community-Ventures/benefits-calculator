@@ -309,7 +309,7 @@ const Confirmation = ({ formData }) => {
           <b> 
             <FormattedMessage 
               id='confirmation.displayAllFormData-zipcodeText' 
-              defaultMessage='Your zipcode:' /> 
+              defaultMessage='Your zipcode: ' /> 
           </b>
           { zipcode }
           <Link to='/step-3' className='edit-link'>
@@ -324,7 +324,7 @@ const Confirmation = ({ formData }) => {
 
   const listAllExpenses = (memberExpenses) => {
     const mappedExpenses = memberExpenses.map(expense => {
-      return <li key={ expense.expenseSourceName }>${ expense.expenseAmount.toLocaleString(2) }, { expense.expenseSourceLabel }, { expense.expenseFrequencyLabel }</li>
+      return <li key={ expense.expenseSourceName }>${ Number(expense.expenseAmount).toLocaleString(2) }, { expense.expenseSourceLabel }, { expense.expenseFrequencyLabel }</li>
     });
 
     return mappedExpenses;
