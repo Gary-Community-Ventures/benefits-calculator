@@ -2,6 +2,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import housingOptions from '../../Assets/housingOptions';
+import relationshipOptions from '../../Assets/relationshipOptions';
 import questions from '../../Assets/questions';
 import './Confirmation.css';
 
@@ -209,12 +210,8 @@ const Confirmation = ({ formData }) => {
   }
 
   const getAllHouseholdRelations = () => {
-    const householdMembers = householdData.map(personData => {
-      const upperCaseFirstLetter = personData.relationshipToHH[0].toUpperCase();
-      const upperCaseRelation = upperCaseFirstLetter + personData.relationshipToHH.slice(1);
-      const relationString =  upperCaseRelation.split(/(?=[A-Z])/).join(' ');
-      
-      return relationString;
+    const householdMembers = householdData.map(personData => {      
+      return relationshipOptions[personData.relationshipToHH];
     });
     
     return householdMembers;
