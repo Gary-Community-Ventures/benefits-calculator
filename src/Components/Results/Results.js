@@ -252,13 +252,22 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
     switch(benefit.value_type) {
       case 'non-discretionary':
-        benefit.value_type = 'reduced expenses';
+        benefit.value_type = 
+          <FormattedMessage 
+            id='results.resultsRow-reducedExpensesText' 
+            defaultMessage='reduced expenses' />;
         break;
       case 'unrestricted':
-        benefit.value_type = 'cash';
+        benefit.value_type = 
+          <FormattedMessage 
+            id='results.resultsRow-cashText' 
+            defaultMessage='cash' />;
         break;
       case 'discretionary':
-        benefit.value_type = 'reduced cost services';
+        benefit.value_type = 
+          <FormattedMessage 
+            id='results.resultsRow-reducedCostText' 
+            defaultMessage='reduced cost services' />;
         break;
     }
 
@@ -297,8 +306,10 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 <Button
                   variant='contained'
                   target="_blank"
-                  href={benefit.apply_button_link} >
-                  Apply
+                  href={benefit.apply_button_link}>
+                  <FormattedMessage 
+                    id='results.resultsRow-applyButton' 
+                    defaultMessage='Apply' />
                 </Button>
                 
                 { (benefit.passed_tests.length > 0 || benefit.failed_tests.length > 0)  && 
@@ -308,7 +319,11 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                       aria-controls="panel1a-content"
                       id="panel1a-header"> 
                         <Typography variant='body2'>
-                          <Link>Expand for eligibility details</Link>
+                          <Link>
+                            <FormattedMessage 
+                              id='results.resultsRow-expandForEligibilityLink' 
+                              defaultMessage='Expand for eligibility details' />
+                          </Link>
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={{paddingTop: 0}}>
