@@ -263,5 +263,6 @@
   "emailResults.return-backButton": "Back",
   "emailResults.return-sendButton": "Send",
   "emailResults.return-emailSentMessage": "Email sent! You can send to another email or click back to return to your results.",
-  "emailResults.return-emailTextfieldLabel": "Email"
+  "emailResults.return-emailTextfieldLabel": "Email",
+  "loading.return-loadingText": "Please wait while we gather your results..."
 }
