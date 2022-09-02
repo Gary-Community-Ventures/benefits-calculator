@@ -209,9 +209,21 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
           <Table aria-label="collapsible table">
             <TableHead>
               <TableRow>
-                <TableCell>Benefit</TableCell>
-                <TableCell align="right">Annual Value</TableCell>
-                <TableCell align="right">Time to Receipt</TableCell>
+                <TableCell>
+                  <FormattedMessage 
+                    id='results.resultsTable-benefitLabel' 
+                    defaultMessage='Benefit' />
+                </TableCell>
+                <TableCell align="right">
+                  <FormattedMessage 
+                    id='results.resultsTable-annualValueLabel' 
+                    defaultMessage='Annual Value' />
+                </TableCell>
+                <TableCell align="right">
+                  <FormattedMessage 
+                    id='results.resultsTable-timeToReceiptLabel' 
+                    defaultMessage='Time to Receipt' />
+                </TableCell>
                 <TableCell className="hidden-xs" display={{ xs: 'none' }} />
               </TableRow>
             </TableHead>
@@ -226,7 +238,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     } else {
       return (
         <Typography variant='body1' sx={{marginBottom: 2, marginTop: 2}}>
-          Sorry, we were not able to find any programs for you based on the information that was provided.
+          <FormattedMessage 
+            id='results.resultsTable-sorryNoProgramsWereFoundLabel' 
+            defaultMessage='Sorry, we were not able to find any programs for you based on the information that was provided.' />
         </Typography>
       );
     }
