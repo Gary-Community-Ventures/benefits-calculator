@@ -258,5 +258,10 @@
   "results.resultsRow-expandForEligibilityLink": "Expand for eligibility details",
   "results.resultsRow-reducedExpensesText": "reduced expenses",
   "results.resultsRow-cashText": "cash",
-  "results.resultsRow-reducedCostText": "reduced cost services"
+  "results.resultsRow-reducedCostText": "reduced cost services",
+  "emailResults.return-emailResultsHeader": "Email a copy of my results",
+  "emailResults.return-backButton": "Back",
+  "emailResults.return-sendButton": "Send",
+  "emailResults.return-emailSentMessage": "Email sent! You can send to another email or click back to return to your results.",
+  "emailResults.return-emailTextfieldLabel": "Email"
 }

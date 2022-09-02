@@ -258,6 +258,10 @@
   "results.resultsRow-expandForEligibilityLink": "Expandir para detalles de elegibilidad",
   "results.resultsRow-reducedExpensesText": "gastos reducidos",
   "results.resultsRow-cashText": "efectivo",
-  "results.resultsRow-reducedCostText": "servicios de costo reducido"
-  
+  "results.resultsRow-reducedCostText": "servicios de costo reducido",
+  "emailResults.return-emailResultsHeader": "Enviar una copia de mis resultados por correo electrónico",
+  "emailResults.return-backButton": "Regresar",
+  "emailResults.return-sendButton": "Enviar",
+  "emailResults.return-emailSentMessage": "¡Correo electrónico enviado! Puedes enviarlo a otro correo electrónico o hacer clic en Atrás para volver a tus resultados.",
+  "emailResults.return-emailTextfieldLabel": "Correo electrónico"
 }
