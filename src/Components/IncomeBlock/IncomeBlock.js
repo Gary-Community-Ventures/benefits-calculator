@@ -257,7 +257,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
         incomeStreamLabel: '', 
         incomeAmount: 0,
         incomeFrequency: '',
-        incomeFrequencyLabel: '',
+        incomeFrequencyLabel: ''
       }
     ]);
   }
