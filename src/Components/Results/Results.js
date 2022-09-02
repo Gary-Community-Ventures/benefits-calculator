@@ -1,5 +1,6 @@
 import { useEffect, useState, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
@@ -175,14 +176,27 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   const displaySubheader = (benefitsSubset) => {
     if (benefitsSubset === 'eligiblePrograms') {
       return (
-        <Typography variant='body1' className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
-          but based on the information you provided, we believe you are likely eligible for the programs below:
+        <Typography variant='body1' className='remember-disclaimer-label'>
+          <FormattedMessage 
+            id='results.displaySubheader-rememberDisclaimerText' 
+            defaultMessage="Remember that we can't guarantee eligibility, but based on the information you provided, 
+            we believe you are likely eligible for the programs below:" />
         </Typography>
       );
     } else if (benefitsSubset === 'ineligiblePrograms') {
       return (
-        <Typography variant='body1' className='remember-disclaimer-label'>Based on the information you provided, we believe 
-          you are likely <b>not eligible</b> for the programs below:
+        <Typography variant='body1' className='remember-disclaimer-label'>
+          <FormattedMessage 
+            id='results.displaySubheader-basedOnInformationText' 
+            defaultMessage='Based on the information you provided, we believe you are likely ' />
+          <b>
+            <FormattedMessage 
+              id='results.displaySubheader-notEligibleText' 
+              defaultMessage=' not eligible ' />
+          </b> 
+          <FormattedMessage 
+            id='results.displaySubheader-forTheProgramsBelowText' 
+            defaultMessage='for the programs below:' />
         </Typography>
       );
     }
