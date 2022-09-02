@@ -254,5 +254,10 @@
   "results.resultsTable-annualValueLabel": "Valor anual",
   "results.resultsTable-timeToReceiptLabel": "Tiempo para recibir",
   "results.resultsTable-sorryNoProgramsWereFoundLabel": "Lo sentimos, no pudimos encontrar ningún programa para usted según la información proporcionada.",
+  "results.resultsRow-applyButton": "Aplicar",
+  "results.resultsRow-expandForEligibilityLink": "Expandir para detalles de elegibilidad",
+  "results.resultsRow-reducedExpensesText": "gastos reducidos",
+  "results.resultsRow-cashText": "efectivo",
+  "results.resultsRow-reducedCostText": "servicios de costo reducido"
   
 }
