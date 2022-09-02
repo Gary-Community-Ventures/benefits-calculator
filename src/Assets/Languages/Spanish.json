@@ -238,6 +238,17 @@
   "frequencyOptions.monthly": "Cada mes",
   "frequencyOptions.semimonthly": "Dos veces al mes",
   "frequencyOptions.yearly": "Cada año",
-  "confirmation.headOfHouseholdDataBlock-expensesLabel": "Gastos:"
+  "confirmation.headOfHouseholdDataBlock-expensesLabel": "Gastos:",
+  "results.return-screenerIdLabel": "ID del evaluador: ",
+  "results.return-programsUpToLabel": " programas, hasta ",
+  "results.return-perYearOrLabel": " por año o ",
+  "results.return-perMonthLabel": " por mes para que lo consideres",
+  "results.return-emailResultsButton": "Enviar resultados",
+  "results.return-ineligibilityLinkText": "* Para obtener información adicional sobre los programas para los que no era elegible, haga clic aquí",
+  "results.return-goBackToEligibleText": "Volver a los programas elegibles",
+  "results.displaySubheader-rememberDisclaimerText": "Recuerde que no podemos garantizar la elegibilidad, pero según la información que proporcionó, creemos que es probable que sea elegible para los siguientes programas:",
+  "results.displaySubheader-basedOnInformationText": "Según la información que proporcionó, creemos que es probable que ",
+  "results.displaySubheader-notEligibleText": " no califica ",
+  "results.displaySubheader-forTheProgramsBelowText": "para los siguientes programas:"
   
 }
