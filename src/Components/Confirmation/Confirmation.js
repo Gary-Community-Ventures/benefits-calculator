@@ -278,7 +278,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.displayAllFormData-householdResourcesText' 
               defaultMessage='Household resources: ' />
           </b>
-          ${ householdAssets }
+          ${ Number(householdAssets).toLocaleString(2) }
           <Link to='/step-16' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
@@ -344,7 +344,7 @@ const Confirmation = ({ formData }) => {
 
   const listAllIncomeStreams = (memberIncomeStreams) => {
     const mappedListItems = memberIncomeStreams.map(incomeStream => {
-      return <li key={ incomeStream.incomeStreamName }>${ incomeStream.incomeAmount.toLocaleString(2) }, { incomeStream.incomeStreamLabel }, { incomeStream.incomeFrequencyLabel }</li>
+      return <li key={ incomeStream.incomeStreamName }>${ Number(incomeStream.incomeAmount).toLocaleString(2) }, { incomeStream.incomeStreamLabel }, { incomeStream.incomeFrequencyLabel }</li>
     });
 
     return mappedListItems;
