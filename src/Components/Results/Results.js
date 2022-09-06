@@ -1,4 +1,5 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState, Fragment, useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import { useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
@@ -30,6 +31,7 @@ import './Results.css';
 
 const Results = ({ results, setResults, formData, programSubset, passedOrFailedTests }) => {
   const navigate = useNavigate();
+  const locale = useContext(Context).locale;
 
   useEffect(() => {
     if (results.screenerId === 0) {
@@ -55,8 +57,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       }
     }
 
-    const eligibilityResponse = await getEligibility(screensResponse.id);
-
+    const eligibilityResponse = await getEligibility(screensResponse.id, locale);
     const qualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === true)
       .sort((benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value);
     const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
