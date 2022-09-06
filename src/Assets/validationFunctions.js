@@ -187,7 +187,6 @@ const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) =
       noneOfTheseApply && unemployed || noneOfTheseApply && blindOrVisuallyImpaired ||
       noneOfTheseApply && disabled || noneOfTheseApply && veteran || noneOfTheseApply && medicaid ||
       noneOfTheseApply && disabilityRelatedMedicaid) {
-      
       setHouseholdDataState({
         ...householdDataState, 
         error: 
