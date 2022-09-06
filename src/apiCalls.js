@@ -140,7 +140,7 @@ const getEligibility = (screenerId, locale) => {
     })
 }
 
-module.exports = {
+export {
   postPartialParentScreen,
   updateScreen,
   postUser,
