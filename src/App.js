@@ -12,9 +12,9 @@ import './App.css';
 const App = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  
+
   const [formData, setFormData] = useState({
-    isTest: searchParams.get('test') ? searchParams.get('test') : false,
+    isTest: searchParams.get('test') ? searchParams.get('test') : true,
     agreeToTermsOfService: false,
     age: '',
     zipcode: '',
@@ -196,55 +196,55 @@ const App = () => {
   return (
     <div className='App'>
       <CssBaseline />
-      <Header/>
-      <Routes>
-        <Route
-          path='/'
-          element={<Navigate to="/step-1" replace /> } />
-        <Route 
-          path='/step-1' 
-          element={<Disclaimer 
-            formData={formData}
-            handleCheckboxChange={handleCheckboxChange} /> } />
-        <Route 
-          path='/step-:id' 
-          element={<QuestionComponentContainer 
-            formData={formData} 
-            handleTextfieldChange={handleTextfieldChange} 
-            handleSubmit={handleSubmit}
-            handleRadioButtonChange={handleRadioButtonChange} 
-            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
-            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
-            handleHousingSourcesSubmit={handleHousingSourcesSubmit} 
-            handleHouseholdDataSubmit={handleHouseholdDataSubmit} /> } /> 
-        <Route 
-          path='/confirm-information' 
-          element={<Confirmation
-            formData={formData} /> } /> 
-        <Route 
-          path='/results' 
-          element={<Results 
-            formData={formData}
-            results={results}
-            setResults={setResults}
-            programSubset='eligiblePrograms' 
-            passedOrFailedTests='passed_tests' /> } /> 
-        <Route 
-          path='/ineligible-results' 
-          element={<Results 
-            results={results}
-            programSubset='ineligiblePrograms' 
-            passedOrFailedTests='failed_tests' /> } /> 
-        <Route
-          path='/email-results' 
-          element={<EmailResults 
-            formData={formData}
-            results={results} 
-            handleEmailTextfieldChange={handleEmailTextfieldChange} /> } />
-        <Route
-          path='*'
-          element={<Navigate to="/step-1" replace /> } />
-      </Routes>
+        <Header />
+        <Routes>
+          <Route
+            path='/'
+            element={<Navigate to="/step-1" replace /> } />
+          <Route 
+            path='/step-1' 
+            element={<Disclaimer 
+              formData={formData}
+              handleCheckboxChange={handleCheckboxChange} /> } />
+          <Route 
+            path='/step-:id' 
+            element={<QuestionComponentContainer 
+              formData={formData} 
+              handleTextfieldChange={handleTextfieldChange} 
+              handleSubmit={handleSubmit}
+              handleRadioButtonChange={handleRadioButtonChange} 
+              handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
+              handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
+              handleHousingSourcesSubmit={handleHousingSourcesSubmit} 
+              handleHouseholdDataSubmit={handleHouseholdDataSubmit} /> } /> 
+          <Route 
+            path='/confirm-information' 
+            element={<Confirmation
+              formData={formData} /> } /> 
+          <Route 
+            path='/results' 
+            element={<Results 
+              formData={formData}
+              results={results}
+              setResults={setResults}
+              programSubset='eligiblePrograms' 
+              passedOrFailedTests='passed_tests' /> } /> 
+          <Route 
+            path='/ineligible-results' 
+            element={<Results 
+              results={results}
+              programSubset='ineligiblePrograms' 
+              passedOrFailedTests='failed_tests' /> } /> 
+          <Route
+            path='/email-results' 
+            element={<EmailResults 
+              formData={formData}
+              results={results} 
+              handleEmailTextfieldChange={handleEmailTextfieldChange} /> } />
+          <Route
+            path='*'
+            element={<Navigate to="/step-1" replace /> } />
+        </Routes>
     </div>
   );
 }
