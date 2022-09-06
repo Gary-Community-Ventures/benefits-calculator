@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { Fragment } from 'react';
+import { useEffect, useState, Fragment, useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import { useNavigate } from 'react-router-dom';
-import { Button, Link, Card, CardContent, CardActions, Typography, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import { FormattedMessage } from 'react-intl';
+import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
 import SendIcon from '@mui/icons-material/Send';
@@ -31,6 +31,7 @@ import './Results.css';
 
 const Results = ({ results, setResults, formData, programSubset, passedOrFailedTests }) => {
   const navigate = useNavigate();
+  const locale = useContext(Context).locale;
 
   useEffect(() => {
     if (results.screenerId === 0) {
@@ -56,8 +57,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       }
     }
 
-    const eligibilityResponse = await getEligibility(screensResponse.id);
-
+    const eligibilityResponse = await getEligibility(screensResponse.id, locale);
     const qualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === true)
       .sort((benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value);
     const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
@@ -178,14 +178,27 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   const displaySubheader = (benefitsSubset) => {
     if (benefitsSubset === 'eligiblePrograms') {
       return (
-        <Typography variant='body1' className='remember-disclaimer-label'>Remember that we can't guarantee eligibility, 
-          but based on the information you provided, we believe you are likely eligible for the programs below:
+        <Typography variant='body1' className='remember-disclaimer-label'>
+          <FormattedMessage 
+            id='results.displaySubheader-rememberDisclaimerText' 
+            defaultMessage="Remember that we can't guarantee eligibility, but based on the information you provided, 
+            we believe you are likely eligible for the programs below:" />
         </Typography>
       );
     } else if (benefitsSubset === 'ineligiblePrograms') {
       return (
-        <Typography variant='body1' className='remember-disclaimer-label'>Based on the information you provided, we believe 
-          you are likely <b>not eligible</b> for the programs below:
+        <Typography variant='body1' className='remember-disclaimer-label'>
+          <FormattedMessage 
+            id='results.displaySubheader-basedOnInformationText' 
+            defaultMessage='Based on the information you provided, we believe you are likely ' />
+          <b>
+            <FormattedMessage 
+              id='results.displaySubheader-notEligibleText' 
+              defaultMessage=' not eligible ' />
+          </b> 
+          <FormattedMessage 
+            id='results.displaySubheader-forTheProgramsBelowText' 
+            defaultMessage='for the programs below:' />
         </Typography>
       );
     }
@@ -198,9 +211,21 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
           <Table aria-label="collapsible table">
             <TableHead>
               <TableRow>
-                <TableCell>Benefit</TableCell>
-                <TableCell align="right">Annual Value</TableCell>
-                <TableCell align="right">Time to Receipt</TableCell>
+                <TableCell>
+                  <FormattedMessage 
+                    id='results.resultsTable-benefitLabel' 
+                    defaultMessage='Benefit' />
+                </TableCell>
+                <TableCell align="right">
+                  <FormattedMessage 
+                    id='results.resultsTable-annualValueLabel' 
+                    defaultMessage='Annual Value' />
+                </TableCell>
+                <TableCell align="right">
+                  <FormattedMessage 
+                    id='results.resultsTable-timeToReceiptLabel' 
+                    defaultMessage='Time to Receipt' />
+                </TableCell>
                 <TableCell className="hidden-xs" display={{ xs: 'none' }} />
               </TableRow>
             </TableHead>
@@ -215,7 +240,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     } else {
       return (
         <Typography variant='body1' sx={{marginBottom: 2, marginTop: 2}}>
-          Sorry, we were not able to find any programs for you based on the information that was provided.
+          <FormattedMessage 
+            id='results.resultsTable-sorryNoProgramsWereFoundLabel' 
+            defaultMessage='Sorry, we were not able to find any programs for you based on the information that was provided.' />
         </Typography>
       );
     }
@@ -227,13 +254,22 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
     switch(benefit.value_type) {
       case 'non-discretionary':
-        benefit.value_type = 'reduced expenses';
+        benefit.value_type = 
+          <FormattedMessage 
+            id='results.resultsRow-reducedExpensesText' 
+            defaultMessage='reduced expenses' />;
         break;
       case 'unrestricted':
-        benefit.value_type = 'cash';
+        benefit.value_type = 
+          <FormattedMessage 
+            id='results.resultsRow-cashText' 
+            defaultMessage='cash' />;
         break;
       case 'discretionary':
-        benefit.value_type = 'reduced cost services';
+        benefit.value_type = 
+          <FormattedMessage 
+            id='results.resultsRow-reducedCostText' 
+            defaultMessage='reduced cost services' />;
         break;
     }
 
@@ -272,8 +308,10 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 <Button
                   variant='contained'
                   target="_blank"
-                  href={benefit.apply_button_link} >
-                  Apply
+                  href={benefit.apply_button_link}>
+                  <FormattedMessage 
+                    id='results.resultsRow-applyButton' 
+                    defaultMessage='Apply' />
                 </Button>
                 
                 { (benefit.passed_tests.length > 0 || benefit.failed_tests.length > 0)  && 
@@ -283,7 +321,11 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                       aria-controls="panel1a-content"
                       id="panel1a-header"> 
                         <Typography variant='body2'>
-                          <Link>Expand for eligibility details</Link>
+                          <Link>
+                            <FormattedMessage 
+                              id='results.resultsRow-expandForEligibilityLink' 
+                              defaultMessage='Expand for eligibility details' />
+                          </Link>
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails sx={{paddingTop: 0}}>
@@ -305,29 +347,45 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       <div className='results-container'>
         <Grid container spacing={2}>
           { results.isLoading ? 
-            <Grid container xs={12} justifyContent="center" alignItems="center">
-              <Grid item xs={6} sx={{mt: 5}}>
+            <Grid container xs={12} item={true} justifyContent="center" alignItems="center">
+              <Grid xs={6} sx={{mt: 5}} item={true}>
                 <Loading />
               </Grid>
             </Grid> : 
             <>
-              <Grid container xs={12} sx={{mt: 2, mr: 2, ml: 2}}>
-                <Grid xs={12}>
-                  <p className='question-label underline-id'>Screener ID: {results.screenerId}</p>
+              <Grid container xs={12} item={true} sx={{mt: 2, mr: 2, ml: 2}} >
+                <Grid xs={12} item={true}>
+                  <p className='question-label underline-id'>
+                    <FormattedMessage 
+                      id='results.return-screenerIdLabel' 
+                      defaultMessage='Screener ID: ' /> 
+                    {results.screenerId}
+                  </p>
                 </Grid>
                 { programSubset === 'eligiblePrograms' && 
                   <>
-                  <Grid xs={12}>
+                  <Grid xs={12} item={true}>
                     <Typography className='sub-header' variant="h6"> 
-                      {results[programSubset].length} programs, up to ${totalDollarAmount(results[programSubset])} per year or ${totalDollarAmountMonthly(results[programSubset])} per month for you to consider
+                      {results[programSubset].length} 
+                      <FormattedMessage 
+                        id='results.return-programsUpToLabel' 
+                        defaultMessage=' programs, up to ' /> 
+                      ${totalDollarAmount(results[programSubset])} 
+                      <FormattedMessage 
+                        id='results.return-perYearOrLabel' 
+                        defaultMessage=' per year or ' />
+                      ${totalDollarAmountMonthly(results[programSubset])} 
+                      <FormattedMessage 
+                        id='results.return-perMonthLabel' 
+                        defaultMessage=' per month for you to consider' />
                     </Typography>
                   </Grid>
                   </>
                 }
-                <Grid xs={12} sm={8}>
+                <Grid xs={12} item={true} sm={8}>
                   { displaySubheader(programSubset) }
                 </Grid>
-                <Grid xs={12} sm={4} container justifyContent="flex-end">
+                <Grid xs={12} item={true} sm={4} container justifyContent="flex-end">
                   <Button
                     sx={{mb: 2, mt: 1}}
                     variant='contained'
@@ -336,14 +394,16 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                       navigate('/email-results');
                     }}
                     className='results-link'>
-                      Email Results
+                    <FormattedMessage 
+                      id='results.return-emailResultsButton' 
+                      defaultMessage='Email Results' />
                   </Button>
                 </Grid>
               </Grid>
-              <Grid xs={12}>
+              <Grid xs={12} item={true}>
                 { resultsTable(results[programSubset])}
               </Grid>
-              <Grid xs={12}>
+              <Grid xs={12} item={true}>
                 { programSubset === 'eligiblePrograms' && 
                   <Typography
                     sx={{mt: 2, ml: 2}}
@@ -352,7 +412,10 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                       window.scrollTo(0,0);
                     }}
                     className='ineligibility-link'>
-                    * For additional information on programs that you were not eligible for click here
+                    <FormattedMessage 
+                      id='results.return-ineligibilityLinkText' 
+                      defaultMessage='* For additional information on programs 
+                      that you were not eligible for click here' />
                   </Typography> 
                 }
                 { programSubset === 'ineligiblePrograms' && 
@@ -363,7 +426,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                       window.scrollTo(0,0);
                     }}
                     className='ineligibility-link'>
-                    Go back to eligible programs
+                    <FormattedMessage 
+                      id='results.return-goBackToEligibleText' 
+                      defaultMessage='Go back to eligible programs' />
                   </Typography> 
                 }
               </Grid>

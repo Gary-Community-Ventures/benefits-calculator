@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 const PreviousButton = ({ formData }) => {
   let { id } = useParams();
@@ -17,7 +18,9 @@ const PreviousButton = ({ formData }) => {
         }
       }}
       variant='contained'>
-      Prev
+        <FormattedMessage 
+          id='previousButton'
+          defaultMessage='Prev' />
     </Button>
   );
 }

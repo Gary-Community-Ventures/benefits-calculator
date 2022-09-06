@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import { FormattedMessage } from 'react-intl';
 import { householdMemberDataIsValid } from '../../Assets/validationFunctions';
 
 const HouseholdDataContinueButton = ({ page, setPage, householdSizeNumber, handleHouseholdDataSubmit, setState, state }) => {
@@ -25,7 +26,9 @@ const HouseholdDataContinueButton = ({ page, setPage, householdSizeNumber, handl
     <Button
       variant='contained'
       onClick={(event) => { handleContinue(event) }}>
-      Continue
+      <FormattedMessage 
+        id='continueButton'
+        defaultMessage='Continue' />
     </Button>
   );
 }

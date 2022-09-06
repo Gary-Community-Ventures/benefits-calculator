@@ -1,8 +1,10 @@
-import { FormControl, Select, MenuItem, InputLabel, TextField, Typography, Button } from "@mui/material";
+import { FormattedMessage } from 'react-intl';
+import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from "@mui/material";
 import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { incomeStreamValueHasError, displayIncomeStreamValueHelperText, incomeStreamsAreValid } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
+import frequencyOptions from '../../Assets/frequencyOptions';
 import './IncomeBlock.css';
 
 const StyledSelectfield = styled(Select)({
@@ -18,11 +20,6 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 32
 });
 
-const StyledTypography = styled(Typography)`
-  color: #c6252b;
-  height: 24px;
-`;
-
 const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those 
   //first by assigning them to the initial selectedMenuItem state
@@ -33,7 +30,8 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
       incomeStreamName: '', 
       incomeStreamLabel: '', 
       incomeAmount: '',
-      incomeFrequency: ''
+      incomeFrequency: '',
+      incomeFrequencyLabel: ''
     }
   ]);
 
@@ -56,13 +54,19 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   }, [selectedMenuItem]);
 
   const createMenuItems = () => {
-    const disabledSelectMenuItem = <MenuItem value='select' key='disabled-select-value' disabled>Select</MenuItem>;
+    const disabledSelectMenuItem = 
+      <MenuItem value='select' key='disabled-select-value' disabled>
+        <FormattedMessage 
+        id='personIncomeBlock.createMenuItems-disabledSelectMenuItem' 
+        defaultMessage='Select' />
+      </MenuItem>;
+
     const menuItemKeys = Object.keys(incomeOptions);
     const menuItemLabels = Object.values(incomeOptions);
 
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <MenuItem value={menuItemKey} key={menuItemLabels[i]}>{menuItemLabels[i]}</MenuItem>
+        <MenuItem value={menuItemKey} key={menuItemKey}>{menuItemLabels[i]}</MenuItem>
       );
     });
 
@@ -70,20 +74,19 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   }
 
   const createFrequencyMenuItems = () => {
-    const disabledSelectMenuItem = <MenuItem value='select' key='disabled-frequency-select-value' disabled>Select</MenuItem>;
-    const incomeFrequencyOptions = {
-      weekly:'Every week',
-      biweekly: 'Every 2 weeks',
-      monthly: 'Every month',
-      semimonthly: 'Twice a month',
-      yearly: 'Every year'
-    };
+    const disabledSelectMenuItem = 
+      <MenuItem value='select' key='disabled-frequency-select-value' disabled>
+        <FormattedMessage 
+          id='personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem' 
+          defaultMessage='Select' />
+      </MenuItem>;
 
-    const menuItemKeys = Object.keys(incomeFrequencyOptions);
-    const menuItemLabels = Object.values(incomeFrequencyOptions);
+    const menuItemKeys = Object.keys(frequencyOptions);
+    const menuItemLabels = Object.values(frequencyOptions);
+
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <MenuItem value={menuItemKey} key={menuItemLabels[i]}>{menuItemLabels[i]}</MenuItem>
+        <MenuItem value={menuItemKey} key={menuItemKey}>{menuItemLabels[i]}</MenuItem>
       );
     });
 
@@ -97,7 +100,8 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
           incomeStreamName: event.target.value, 
           incomeStreamLabel: incomeOptions[event.target.value],
           incomeAmount: 0, 
-          incomeFrequency: ''
+          incomeFrequency: '',
+          incomeFrequencyLabel: ''
         }
       } else {
         return incomeSourceData;
@@ -128,7 +132,11 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
     const { value } = event.target; 
     const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
       if (i === index) {
-        return { ...incomeSourceData, incomeFrequency: value }
+        return { 
+          ...incomeSourceData, 
+          incomeFrequency: value,
+          incomeFrequencyLabel: frequencyOptions[value]
+        }
       } else {
         return incomeSourceData;
       }
@@ -137,16 +145,23 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
     setSelectedMenuItem(updatedSelectedMenuItems);
   }
 
-  const createIncomeStreamsDropdownMenu = (incomeStreamName, incomeStreamLabel, index) => {
+  const createIncomeStreamsDropdownMenu = (incomeStreamName, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='income-type-label'>Income Type</InputLabel>
+        <InputLabel if='income-type-label'>
+          <FormattedMessage 
+            id='personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel' 
+            defaultMessage='Income Type' />
+        </InputLabel>
         <StyledSelectfield
           labelId='income-type-label'
           id={incomeStreamName}
           value={incomeStreamName}
-          name={incomeStreamLabel}
-          label='Income Type'
+          label={
+            <FormattedMessage 
+            id='personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel' 
+            defaultMessage='Income Type' />
+          }
           onChange={(event) => { handleSelectChange(event, index) }}>
           {createMenuItems()}
         </StyledSelectfield>
@@ -157,13 +172,22 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   const createIncomeAmountTextfield = (incomeStreamName, incomeAmount, index) => {
     return (
       <div>
-        <p className='question-label'>How much do they receive for this type of income: {selectedMenuItem[index].incomeStreamLabel}?</p>
+        <p className='question-label'>
+          <FormattedMessage 
+            id='personIncomeBlock.createIncomeAmountTextfield-questionLabel' 
+            defaultMessage='How much do they receive for this type of income: ' />
+          {selectedMenuItem[index].incomeStreamLabel}?
+        </p>
         <div className='income-block-textfield'>
           <StyledTextField 
             type='text'
             name={incomeStreamName}
             value={incomeAmount}
-            label='Amount'
+            label={
+              <FormattedMessage 
+                id='personIncomeBlock.createIncomeAmountTextfield-amountLabel' 
+                defaultMessage='Amount' />
+            }
             onChange={(event) => {handleIncomeTextfieldChange(event, index)}}
             variant='outlined'
             required
@@ -178,15 +202,28 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     return (
       <div>
-        <p className='question-label'>How often do they receive this income: {selectedMenuItem[index].incomeStreamLabel}?</p>
+        <p className='question-label'>
+          <FormattedMessage 
+            id='personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel' 
+            defaultMessage='How often do they receive this income: ' />
+            {selectedMenuItem[index].incomeStreamLabel}?
+        </p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='income-frequency-label'>Frequency</InputLabel>
+        <InputLabel if='income-frequency-label'>
+          <FormattedMessage 
+            id='personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel' 
+            defaultMessage='Frequency' />
+        </InputLabel>
         <StyledSelectfield
           labelId='income-frequency-label'
           id='income-frequency'
           value={incomeFrequency}
           name={incomeFrequency}
-          label='Income Frequency'
+          label={
+            <FormattedMessage 
+              id='personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel' 
+              defaultMessage='Income Frequency' />
+          }
           onChange={(event) => { handleFrequencySelectChange(event, index) }}>
           {createFrequencyMenuItems()}
         </StyledSelectfield>
@@ -197,8 +234,13 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 
   const createIncomeBlockQuestions = () => {
     return selectedMenuItem.map((incomeSourceData, index) => {
-      const { incomeStreamName, incomeStreamLabel, incomeAmount, incomeFrequency } = incomeSourceData;
-      const incomeStreamQuestion = <p className='question-label'>If they receive another type of income, select it below.</p>;
+      const { incomeStreamName, incomeAmount, incomeFrequency } = incomeSourceData;
+      const incomeStreamQuestion = 
+        <p className='question-label'>
+          <FormattedMessage 
+            id='personIncomeBlock.createIncomeBlockQuestions-questionLabel' 
+            defaultMessage='If they receive another type of income, select it below.' />
+        </p>;
       return (
         <div key={index}>
           {index > 0 &&
@@ -207,9 +249,9 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
             </div>
           }
           {index > 0 && incomeStreamQuestion}
-          {createIncomeStreamsDropdownMenu(incomeStreamName, incomeStreamLabel, index)}
-          {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+          {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
           {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+          {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
         </div>
       );
     });
@@ -241,22 +283,31 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
         incomeStreamName: '', 
         incomeStreamLabel: '', 
         incomeAmount: 0,
-        incomeFrequency: ''
+        incomeFrequency: '',
+        incomeFrequencyLabel: ''
       }
     ]);
   }
 
   return (
     <>
-      <p className='question-label radio-question'>What type of income have they had most recently?</p>
-      <p className='question-description'>Answer the best you can. You will be able to include additional types of income. 
-        The more you include, the more accurate your results will be.
+      <p className='question-label radio-question'>
+        <FormattedMessage 
+          id='personIncomeBlock.return-questionLabel' 
+          defaultMessage='What type of income have they had most recently?' />
+      </p>
+      <p className='question-description'>
+        <FormattedMessage 
+          id='personIncomeBlock.return-questionDescription' 
+          defaultMessage='Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.' />
       </p>
       {createIncomeBlockQuestions()}
       <Button
         variant='contained'
         onClick={(event) => handleAddAdditionalIncomeSource(event)} >
-        Add another income
+          <FormattedMessage 
+            id='personIncomeBlock.return-addIncomeButton' 
+            defaultMessage='Add another income' />
       </Button>
     </>
   );

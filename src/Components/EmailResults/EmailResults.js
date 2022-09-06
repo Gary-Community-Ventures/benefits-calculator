@@ -2,6 +2,7 @@ import { TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useState, SyntheticEvent, Fragment, useRef } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { emailHasError, displayEmailHelperText } from '../../Assets/validationFunctions';
 import { postMessage } from '../../apiCalls';
 import Grid from '@mui/material/Grid';
@@ -57,13 +58,21 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
     <main className='benefits-form'>
       <Grid container spacing={2} sx={{mt: 2, mr: 2, ml: 2}}>
         <Grid xs={12}>
-          <h2 className='sub-header'>Email a copy of my results</h2>
+          <h2 className='sub-header'>
+            <FormattedMessage 
+              id='emailResults.return-emailResultsHeader' 
+              defaultMessage='Email a copy of my results' />
+          </h2>
         </Grid>
         <Grid xs={12}>
           <StyledTextField 
             type='email'
             name='email'
-            label='Email'
+            label={
+              <FormattedMessage 
+                id='emailResults.return-emailTextfieldLabel' 
+                defaultMessage='Email' />
+            }
             inputRef={emailInput}
             onChange={(event) => {handleEmailTextfieldChange(event)}}
             variant='outlined'
@@ -80,25 +89,32 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
               onClick={() => {
                 navigate('/results');
               }}>
-              Back
+              <FormattedMessage 
+                id='emailResults.return-backButton' 
+                defaultMessage='Back' />
             </Button>
             <Button
               variant='contained'
               onClick={(event) => {
                 handleEmailSubmit(event);
               }}>
-              Send
+              <FormattedMessage 
+                id='emailResults.return-sendButton' 
+                defaultMessage='Send' />
             </Button>
             <Snackbar
               open={open}
               autoHideDuration={6000}
               onClose={handleClose}
-              message="Email sent! You can send to another email or click back to return to your results."
+              message={
+                <FormattedMessage 
+                  id='emailResults.return-emailSentMessage' 
+                  defaultMessage='Email sent! You can send to another email or click back to return to your results.' />
+              }
               action={action}
               severity="success"
               sx={{mb: 4, mr: 2}}
             />            
-            
           </div>
         </Grid>
       </Grid>

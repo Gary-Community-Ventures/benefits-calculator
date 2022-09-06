@@ -1,3 +1,4 @@
+import { FormattedMessage } from "react-intl";
 import coZipcodes from "./coZipcodes";
 
 const ageHasError = (applicantAge) => {
@@ -15,7 +16,11 @@ const displayAgeHelperText = (applicantAge) => {
   const minimumAge = 13;
   const maximumAge = 130;
   if (numberApplicantAge < minimumAge || numberApplicantAge > maximumAge) {
-    return 'Please enter a valid age (13-130)';
+    return (
+      <FormattedMessage 
+        id='validation-helperText.age' 
+        defaultMessage='Please enter a valid age (13-130)' />
+    );
   };
 }
 
@@ -33,7 +38,11 @@ const zipcodeHasError = (zipcode) => {
 
 const displayZipcodeHelperText = (zipcode) => {
   if (zipcodeHasError(zipcode)) {
-    return 'Please enter a valid CO zipcode';
+    return (
+      <FormattedMessage 
+        id='validation-helperText.zipcode' 
+        defaultMessage='Please enter a valid CO zipcode' />
+    );
   }
 } 
 
@@ -47,7 +56,11 @@ const incomeStreamValueHasError = (valueInput) => {
 
 const displayIncomeStreamValueHelperText = (valueInput) => {
   if (incomeStreamValueHasError(valueInput)) {
-    return 'Please enter a number greater than 0';
+    return (
+      <FormattedMessage 
+        id='validation-helperText.incomeValue' 
+        defaultMessage='Please enter a number greater than 0' />
+    );
   }
 }
 
@@ -66,7 +79,11 @@ const expenseSourceValueHasError = (valueInput) => {
 
 const displayExpenseSourceValueHelperText = (valueInput) => {
   if (expenseSourceValueHasError(valueInput)) {
-    return 'Please enter a number greater than 0';
+    return (
+      <FormattedMessage 
+        id='validation-helperText.expenseValue' 
+        defaultMessage='Please enter a number greater than 0' />
+    );
   }
 }
 
@@ -86,7 +103,12 @@ const householdSizeHasError = (sizeOfHousehold) => {
 
 const displayHouseholdSizeHelperText = (sizeOfHousehold) => {
   const numValueInput = Number(sizeOfHousehold);
-  return (numValueInput <= 0 || numValueInput > 8) && 'Number of People (max. 8)';
+  return (
+    (numValueInput <= 0 || numValueInput > 8) && 
+      <FormattedMessage 
+        id='validation-helperText.householdSize' 
+        defaultMessage='Number of People (max. 8)' />
+  );
 }
 
 const householdAssetsHasError = (householdAssets) => {
@@ -95,7 +117,11 @@ const householdAssetsHasError = (householdAssets) => {
 
 const displayHouseholdAssetsHelperText = (householdAssets) => {
   if (householdAssetsHasError(householdAssets)) {
-    return 'Please enter 0 or a positive number.';
+    return (
+      <FormattedMessage
+        id='validation-helperText.assets'
+        defaultMessage='Please enter 0 or a positive number.' />
+      );
   }
 }
 
@@ -123,7 +149,11 @@ const displayHouseholdMemberAgeHelperText = (applicantAge) => {
   const numberApplicantAge = Number(applicantAge);
   
   if (numberApplicantAge < 0) {
-    return 'Please enter 0 or a positive number';
+    return (
+      <FormattedMessage 
+        id='validation-helperText.hHMemberAge' 
+        defaultMessage='Please enter 0 or a positive number' />
+    );
   };
 }
 
@@ -136,22 +166,52 @@ const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) =
 
     if (Number(age) <= 0) {
       //what if they have a newborn? What age should be entered for them?
-      setHouseholdDataState({...householdDataState, error: 'Please enter an age greater than 0'});
+      setHouseholdDataState({
+        ...householdDataState, 
+        error: 
+          <FormattedMessage 
+            id='validation-helperText.hhMemberAgeB'
+            defaultMessage='Please enter an age greater than 0' /> 
+      });
       return false;
     } else if (relationshipToHH === '') {
-      setHouseholdDataState({...householdDataState, error: 'Please select a relation option'});
+      setHouseholdDataState({
+        ...householdDataState, 
+        error: 
+          <FormattedMessage 
+            id='validation-helperText.hhMemberRelation'
+            defaultMessage='Please select a relation option' /> 
+      });
       return false;
     } else if (noneOfTheseApply && student || noneOfTheseApply && pregnant || 
       noneOfTheseApply && unemployed || noneOfTheseApply && blindOrVisuallyImpaired ||
       noneOfTheseApply && disabled || noneOfTheseApply && veteran || noneOfTheseApply && medicaid ||
       noneOfTheseApply && disabilityRelatedMedicaid) {
-      setHouseholdDataState({...householdDataState, error: 'Please deselect all other options if none of these conditions apply'})
+      setHouseholdDataState({
+        ...householdDataState, 
+        error: 
+          <FormattedMessage 
+            id='validation-helperText.hhMemberNoneApply'
+            defaultMessage='Please deselect all other options if none of these conditions apply' />
+      });
       return false;
     } else if (hasIncome && incomeStreamsAreValid(incomeStreams) === false) {
-      setHouseholdDataState({...householdDataState, error: 'Please select and enter a response for all three income fields'});
+      setHouseholdDataState({
+        ...householdDataState,
+        error: 
+          <FormattedMessage 
+            id='validation-helperText.hhMemberIncome'
+            defaultMessage='Please select and enter a response for all three income fields' />
+      });
       return false;
     } else if (hasExpenses && expenseSourcesAreValid(expenses) === false) {
-      setHouseholdDataState({...householdDataState, error: 'Please select and enter a response for all three expense fields'});
+      setHouseholdDataState({
+        ...householdDataState, 
+        error: 
+          <FormattedMessage 
+            id='validation-helperText.hhMemberExpense'
+            defaultMessage='Please select and enter a response for all three expense fields' />
+      });
       return false;
     } else {
       return true;
@@ -168,7 +228,11 @@ const emailHasError = (email) => {
 
 const displayEmailHelperText = (email) => {
   if (emailHasError(email)) {
-    return 'Please enter a valid email address.';
+    return (
+      <FormattedMessage
+        id='validation-helperText.email'
+        defaultMessage='Please enter a valid email address' />
+      );
   }
 }
 

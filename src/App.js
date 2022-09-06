@@ -1,4 +1,4 @@
-import { Typography, AppBar, CssBaseline } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
@@ -6,12 +6,13 @@ import QuestionComponentContainer from './Components/QuestionComponentContainer/
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
 import EmailResults from './Components/EmailResults/EmailResults';
+import Header from './Components/Header/Header';
 import './App.css';
 
 const App = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  
+
   const [formData, setFormData] = useState({
     isTest: searchParams.get('test') ? searchParams.get('test') : false,
     externalID: searchParams.get('externalid') ? searchParams.get('externalid') : null,
@@ -36,7 +37,8 @@ const App = () => {
     householdSize: '',
     householdData: [],
     householdAssets: '',
-    housing: {}
+    housing: {},
+    email: ''
   });
 
   // const [formData, setFormData] = useState({
@@ -61,14 +63,16 @@ const App = () => {
   //     incomeStreamName: 'wages', 
   //     incomeStreamLabel: 'Wages, salaries, tips', 
   //     incomeAmount: '29000',
-  //     incomeFrequency: 'yearly'
+  //     incomeFrequency: 'yearly',
+  //     incomeFrequencyLabel: 'Every year'
   //   }],
   //   hasExpenses: true,
   //   expenses: [{
   //     expenseSourceName: 'rent', 
   //     expenseSourceLabel: 'Rent', 
   //     expenseAmount: '500',
-  //     expenseFrequency: 'monthly'
+  //     expenseFrequency: 'monthly',
+  //     expenseFrequencyLabel: 'Every month'
   //   }],
   //   householdSize: '2',
   //   householdData: [{
@@ -194,57 +198,55 @@ const App = () => {
   return (
     <div className='App'>
       <CssBaseline />
-      <AppBar position='relative'>
-        <Typography variant='h4' align='center'>Benefits Calculator</Typography>
-      </AppBar>
-      <Routes>
-        <Route
-          path='/'
-          element={<Navigate to="/step-1" replace /> } />
-        <Route 
-          path='/step-1' 
-          element={<Disclaimer 
-            formData={formData}
-            handleCheckboxChange={handleCheckboxChange} /> } />
-        <Route 
-          path='/step-:id' 
-          element={<QuestionComponentContainer 
-            formData={formData} 
-            handleTextfieldChange={handleTextfieldChange} 
-            handleSubmit={handleSubmit}
-            handleRadioButtonChange={handleRadioButtonChange} 
-            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
-            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
-            handleHousingSourcesSubmit={handleHousingSourcesSubmit} 
-            handleHouseholdDataSubmit={handleHouseholdDataSubmit} /> } /> 
-        <Route 
-          path='/confirm-information' 
-          element={<Confirmation
-            formData={formData} /> } /> 
-        <Route 
-          path='/results' 
-          element={<Results 
-            formData={formData}
-            results={results}
-            setResults={setResults}
-            programSubset='eligiblePrograms' 
-            passedOrFailedTests='passed_tests' /> } /> 
-        <Route 
-          path='/ineligible-results' 
-          element={<Results 
-            results={results}
-            programSubset='ineligiblePrograms' 
-            passedOrFailedTests='failed_tests' /> } /> 
-        <Route
-          path='/email-results' 
-          element={<EmailResults 
-            formData={formData}
-            results={results} 
-            handleEmailTextfieldChange={handleEmailTextfieldChange} /> } />
-        <Route
-          path='*'
-          element={<Navigate to="/step-1" replace /> } />
-      </Routes>
+        <Header />
+        <Routes>
+          <Route
+            path='/'
+            element={<Navigate to="/step-1" replace /> } />
+          <Route 
+            path='/step-1' 
+            element={<Disclaimer 
+              formData={formData}
+              handleCheckboxChange={handleCheckboxChange} /> } />
+          <Route 
+            path='/step-:id' 
+            element={<QuestionComponentContainer 
+              formData={formData} 
+              handleTextfieldChange={handleTextfieldChange} 
+              handleSubmit={handleSubmit}
+              handleRadioButtonChange={handleRadioButtonChange} 
+              handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
+              handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
+              handleHousingSourcesSubmit={handleHousingSourcesSubmit} 
+              handleHouseholdDataSubmit={handleHouseholdDataSubmit} /> } /> 
+          <Route 
+            path='/confirm-information' 
+            element={<Confirmation
+              formData={formData} /> } /> 
+          <Route 
+            path='/results' 
+            element={<Results 
+              formData={formData}
+              results={results}
+              setResults={setResults}
+              programSubset='eligiblePrograms' 
+              passedOrFailedTests='passed_tests' /> } /> 
+          <Route 
+            path='/ineligible-results' 
+            element={<Results 
+              results={results}
+              programSubset='ineligiblePrograms' 
+              passedOrFailedTests='failed_tests' /> } /> 
+          <Route
+            path='/email-results' 
+            element={<EmailResults 
+              formData={formData}
+              results={results} 
+              handleEmailTextfieldChange={handleEmailTextfieldChange} /> } />
+          <Route
+            path='*'
+            element={<Navigate to="/step-1" replace /> } />
+        </Routes>
     </div>
   );
 }
