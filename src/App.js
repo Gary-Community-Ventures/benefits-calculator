@@ -14,7 +14,7 @@ const App = () => {
   const [searchParams] = useSearchParams();
 
   const [formData, setFormData] = useState({
-    isTest: searchParams.get('test') ? searchParams.get('test') : true,
+    isTest: searchParams.get('test') ? searchParams.get('test') : false,
     agreeToTermsOfService: false,
     age: '',
     zipcode: '',
