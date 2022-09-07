@@ -58,8 +58,7 @@
   "questions.id-16": "¿Cuánto tiene toda su familia en este momento en:",
   "questions.id-16-description" : "¿Efectivo disponible? ¿Cuentas corrientes o de ahorro? ¿Acciones, bonos o fondos mutuos?",
   "questions.id-16-inputLabel": "Activos del hogar",
-  "questions.id-17": "¿Cuál de estos se aplica mejor a su situación de vivienda?",
-  "questions.id-17-description": "Está bien elegir más de uno.",
+  
   "validation-helperText.age": "Ingrese una edad válida (13-130)",
   "validation-helperText.zipcode": "Ingrese un código postal CO válido",
   "validation-helperText.incomeValue": "Ingrese un número mayor que 0",
