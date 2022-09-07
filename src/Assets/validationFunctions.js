@@ -183,10 +183,10 @@ const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) =
             defaultMessage='Please select a relation option' /> 
       });
       return false;
-    } else if (noneOfTheseApply && student || noneOfTheseApply && pregnant || 
-      noneOfTheseApply && unemployed || noneOfTheseApply && blindOrVisuallyImpaired ||
-      noneOfTheseApply && disabled || noneOfTheseApply && veteran || noneOfTheseApply && medicaid ||
-      noneOfTheseApply && disabilityRelatedMedicaid) {
+    } else if ( (noneOfTheseApply && student) || (noneOfTheseApply && pregnant) || 
+      (noneOfTheseApply && unemployed) || (noneOfTheseApply && blindOrVisuallyImpaired) ||
+      (noneOfTheseApply && disabled) || (noneOfTheseApply && veteran) || (noneOfTheseApply && medicaid) ||
+      (noneOfTheseApply && disabilityRelatedMedicaid) ) {
       setHouseholdDataState({
         ...householdDataState, 
         error: 

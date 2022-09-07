@@ -17,10 +17,10 @@ const expenseOptions = {
     <FormattedMessage 
       id='expenseOptions.rent' 
       defaultMessage='Rent' />,
-  medical: 
+  mortgage: 
     <FormattedMessage 
-      id='expenseOptions.medical' 
-      defaultMessage='Medical Expense' />,
+      id='expenseOptions.mortgage' 
+      defaultMessage='Mortgage' />,
   heating: 
     <FormattedMessage 
       id='expenseOptions.heating' 
@@ -29,22 +29,38 @@ const expenseOptions = {
     <FormattedMessage 
       id='expenseOptions.cooling' 
       defaultMessage='Cooling' />,
-  mortgage: 
+  otherUtilities: 
     <FormattedMessage 
-      id='expenseOptions.mortgage' 
-      defaultMessage='Mortgage' />,
-  utilities: 
-    <FormattedMessage 
-      id='expenseOptions.utilities' 
-      defaultMessage='Utilities' />,
+      id='expenseOptions.otherUtilities' 
+      defaultMessage='Other Utilities' />,
   telephone: 
     <FormattedMessage 
       id='expenseOptions.telephone' 
       defaultMessage='Telephone' />,
-  insurancePremiums: 
+  internet: 
     <FormattedMessage 
-      id='expenseOptions.insurancePremiums' 
-      defaultMessage='Third Party Insurance Premiums' />
+      id='expenseOptions.internet' 
+      defaultMessage='Internet' />,
+  auto: 
+    <FormattedMessage 
+      id='expenseOptions.auto' 
+      defaultMessage='Auto Insurance Premium &/or Payment' />,
+  medical: 
+    <FormattedMessage 
+      id='expenseOptions.medical' 
+      defaultMessage='Medical Insurance Premium &/or Bills' />,
+  studentLoans: 
+    <FormattedMessage 
+      id='expenseOptions.studentLoans' 
+      defaultMessage='Student Loans' />,
+  creditCard: 
+    <FormattedMessage 
+      id='expenseOptions.creditCard' 
+      defaultMessage='Credit Card Debt' />,
+  personalLoan: 
+    <FormattedMessage 
+      id='expenseOptions.personalLoan' 
+      defaultMessage='Personal Loan' />
 };
 
 export default expenseOptions;
