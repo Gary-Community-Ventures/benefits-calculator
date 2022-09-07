@@ -1,4 +1,3 @@
-import HousingBlock from '../HousingBlock/HousingBlock';
 import Radiofield from '../Radiofield/Radiofield';
 import Textfield from '../Textfield/Textfield';
 import PreviousButton from '../PreviousButton/PreviousButton';
