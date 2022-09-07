@@ -58,8 +58,7 @@
   "questions.id-16": "How much does your whole household have right now in:",
   "questions.id-16-description" : "Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?",
   "questions.id-16-inputLabel": "Household Assets",
-  "questions.id-17": "Which of these best applies to your housing situation?",
-  "questions.id-17-description" : "It's OK to pick more than one.",
+  
   "validation-helperText.age": "Please enter a valid age (13-130)",
   "validation-helperText.zipcode": "Please enter a valid CO zipcode",
   "validation-helperText.incomeValue": "Please enter a number greater than 0",
