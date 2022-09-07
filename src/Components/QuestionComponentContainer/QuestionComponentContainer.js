@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import './QuestionComponentContainer.css';
 import { FormattedMessage } from 'react-intl';
 
-const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHousingSourcesSubmit, handleHouseholdDataSubmit }) => {
+const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit }) => {
   let { id } = useParams();
   let numberId = Number(id);
   const matchingQuestion = questions.find((question) => question.id === numberId);
