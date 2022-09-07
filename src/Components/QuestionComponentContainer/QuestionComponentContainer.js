@@ -164,7 +164,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
       {
         ( matchingQuestion.componentDetails.componentType === 'Textfield' && createTextfieldComponent() ) ||
         ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createRadiofieldComponent() ) ||
-        ( matchingQuestion.componentDetails.componentType === 'HousingBlock' && createHousingBlockComponent() ) ||
         ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() )
       }
     </main>
