@@ -26,18 +26,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     );
   }
 
-  const createHousingBlockComponent = () => {
-    return (
-      <div className='question-container' id={matchingQuestion.id}>
-        <p className='question-label'>{matchingQuestion.question}</p>
-        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
-        <HousingBlock 
-          handleHousingSourcesSubmit={handleHousingSourcesSubmit} 
-          formData={formData} />
-      </div>
-    );
-  }
-
   const createTextfieldComponent = () => {
     return (
       <div className='question-container' id={matchingQuestion.id}>
