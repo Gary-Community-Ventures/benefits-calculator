@@ -37,7 +37,6 @@ const App = () => {
     householdSize: '',
     householdData: [],
     householdAssets: '',
-    housing: {},
     email: ''
   });
 
@@ -95,14 +94,6 @@ const App = () => {
   //     expenses: []
   //   }],
   //   householdAssets: '1000',
-  //   housing: {
-  //     renting: true,
-  //     owner: false, 
-  //     stayingWithFriend: false,
-  //     hotel: false,
-  //     shelter: false,
-  //     preferNotToSay: false
-  //   },
   //   relationship: 'headOfHousehold',
   //   email: ''
   // });
