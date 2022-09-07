@@ -335,21 +335,6 @@ const questions = [
       inputError: householdAssetsHasError,
       inputHelperText: displayHouseholdAssetsHelperText
     }
-  },
-  {
-    id: 17,
-    question:
-      <FormattedMessage
-        id='questions.id-17'
-        defaultMessage='Which of these best applies to your housing situation?' />,
-    questionDescription: 
-      <FormattedMessage
-        id='questions.id-17-description'
-        defaultMessage="It's OK to pick more than one." />,
-    componentDetails: {
-      componentType: 'HousingBlock',
-      inputName: 'housing'
-    }
   }
 ];
 
