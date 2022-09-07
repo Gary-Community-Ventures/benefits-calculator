@@ -291,20 +291,6 @@ const Confirmation = ({ formData }) => {
             defaultMessage='This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.' />
         </p>
         <p className='confirmation-section-underline'></p>
-        <article className='confirmation-label'>
-          <b> 
-            <FormattedMessage 
-              id='confirmation.displayAllFormData-housingText' 
-              defaultMessage='Housing:' />
-            </b>
-          <Link to='/step-17' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
-              defaultMessage='Edit' />
-          </Link>
-          { <ul> { listAllHousing() } </ul> }
-        </article>
-        <p className='confirmation-section-underline'></p>
         <p className='confirmation-label'>
           <b> 
             <FormattedMessage 
@@ -330,17 +316,17 @@ const Confirmation = ({ formData }) => {
     return mappedExpenses;
   }
 
-  const listAllHousing = () => {
-    const housingKeys = Object.keys(housing);
+  // const listAllHousing = () => {
+  //   const housingKeys = Object.keys(housing);
 
-    const mappedHousingListItems = housingKeys
-      .filter(housingOption => housing[housingOption] === true)
-      .map(selectedOption => {
-        return  <li key={ selectedOption }>{ housingOptions[selectedOption] }</li>;
-      });
+  //   const mappedHousingListItems = housingKeys
+  //     .filter(housingOption => housing[housingOption] === true)
+  //     .map(selectedOption => {
+  //       return  <li key={ selectedOption }>{ housingOptions[selectedOption] }</li>;
+  //     });
     
-    return mappedHousingListItems;
-  }
+  //   return mappedHousingListItems;
+  // }
 
   const listAllIncomeStreams = (memberIncomeStreams) => {
     const mappedListItems = memberIncomeStreams.map(incomeStream => {
