@@ -157,6 +157,8 @@ const App = () => {
     if (!validateInputFunction(inputToBeValidated)) {
       if (stepId === 14 && householdSize === 1) { //if you're on the householdSize q and the value is 1
         navigate(`/step-${stepId + 2}`); //skip question 15 and go to 16
+      } else if (stepId === 17) {
+        navigate('/confirm-information');
       } else { //you've indicated that you're householdSize is larger than 1
         navigate(`/step-${stepId + 1}`);
       }
