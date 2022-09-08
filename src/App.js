@@ -205,7 +205,8 @@ const App = () => {
               handleRadioButtonChange={handleRadioButtonChange} 
               handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
               handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-              handleHouseholdDataSubmit={handleHouseholdDataSubmit} /> } /> 
+              handleHouseholdDataSubmit={handleHouseholdDataSubmit} 
+              setFormData={setFormData} /> } /> 
           <Route 
             path='/confirm-information' 
             element={<Confirmation
