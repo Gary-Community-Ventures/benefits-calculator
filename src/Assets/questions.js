@@ -7,7 +7,9 @@ import {
   householdSizeHasError,
   displayHouseholdSizeHelperText,
   householdAssetsHasError,
-  displayHouseholdAssetsHelperText
+  displayHouseholdAssetsHelperText,
+  lastTaxFilingYearHasError,
+  displayMissingTaxFilingYear
 } from './validationFunctions';
 import { FormattedMessage } from 'react-intl';
 
@@ -334,6 +336,18 @@ const questions = [
           defaultMessage='Household Assets' />,
       inputError: householdAssetsHasError,
       inputHelperText: displayHouseholdAssetsHelperText
+    }
+  },
+  {
+    id: 17,
+    question:
+      <FormattedMessage
+        id='questions.id-17'
+        defaultMessage='What was the last year you filed taxes for?' />,
+    componentDetails: {
+      componentType: 'BasicSelect',
+      inputName: 'lastTaxFilingYear',
+      inputError: lastTaxFilingYearHasError,
     }
   }
 ];
