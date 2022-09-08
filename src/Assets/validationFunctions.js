@@ -232,7 +232,21 @@ const displayEmailHelperText = (email) => {
       <FormattedMessage
         id='validation-helperText.email'
         defaultMessage='Please enter a valid email address' />
-      );
+    );
+  }
+}
+
+const lastTaxFilingYearHasError = (year) => {
+  return year === '';
+}
+
+const displayMissingTaxFilingYear = (year) => {
+  if (lastTaxFilingYearHasError(year)) {
+    return (
+      <FormattedMessage
+        id='validation-helperText.lastTaxFilingYear'
+        defaultMessage='Please select a year' />
+    );
   }
 }
 
@@ -257,5 +271,7 @@ export {
   displayHouseholdMemberAgeHelperText,
   householdMemberDataIsValid,
   emailHasError,
-  displayEmailHelperText
+  displayEmailHelperText,
+  lastTaxFilingYearHasError,
+  displayMissingTaxFilingYear
 }
