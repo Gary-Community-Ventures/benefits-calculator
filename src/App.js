@@ -37,6 +37,7 @@ const App = () => {
     householdSize: '',
     householdData: [],
     householdAssets: '',
+    lastTaxFilingYear: '',
     email: ''
   });
 
@@ -95,6 +96,7 @@ const App = () => {
   //   }],
   //   householdAssets: '1000',
   //   relationship: 'headOfHousehold',
+  //   lastTaxFilingYear: '2021',
   //   email: ''
   // });
  
