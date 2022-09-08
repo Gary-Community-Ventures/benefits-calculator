@@ -342,7 +342,7 @@ const Confirmation = ({ formData }) => {
         <FormattedMessage 
           id='confirmation.return-stepLabel' 
           defaultMessage='Step ' /> 
-        17 
+        18
         <FormattedMessage 
           id='confirmation.return-ofLabel' 
           defaultMessage=' of ' /> 
@@ -364,7 +364,7 @@ const Confirmation = ({ formData }) => {
           <Button
             className='prev-button'
             onClick={() => {
-              navigate(`/step-16`);
+              navigate(`/step-17`);
             }}
             variant='contained'>
             <FormattedMessage 
