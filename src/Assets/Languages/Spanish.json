@@ -15,6 +15,8 @@
   "qcc.so-far-text": "Hasta ahora nos ha hablado de:",
   "qcc.you-text": " Usted, ",
   "qcc.hoh-text": " Jefe de familia",
+  "qcc.createTaxDropdownMenu-label": "Año fiscal",
+  "qcc.disabledSelectMenuItemText": "Seleccione un año fiscal",
   "questions.id-2": "¿Cuántos años tienes?",
   "questions.id-2-inputLabel": "Edad",
   "questions.id-3": "¿Cuál es tu código postal?",
@@ -58,7 +60,7 @@
   "questions.id-16": "¿Cuánto tiene toda su familia en este momento en:",
   "questions.id-16-description" : "¿Efectivo disponible? ¿Cuentas corrientes o de ahorro? ¿Acciones, bonos o fondos mutuos?",
   "questions.id-16-inputLabel": "Activos del hogar",
-  
+  "questions.id-17": "¿Cuál fue el último año en el que declaraste impuestos?",
   "validation-helperText.age": "Ingrese una edad válida (13-130)",
   "validation-helperText.zipcode": "Ingrese un código postal CO válido",
   "validation-helperText.incomeValue": "Ingrese un número mayor que 0",
@@ -72,6 +74,7 @@
   "validation-helperText.hhMemberIncome": "Seleccione e ingrese una respuesta para los tres campos de ingresos",
   "validation-helperText.hhMemberExpense": "Seleccione e ingrese una respuesta para los tres campos de gastos",
   "validation-helperText.email": "Ingrese una dirección de correo electrónico válida",
+  "validation-helperText.lastTaxFilingYear": "*Seleccione un año",
   "previousButton": "Anterior",
   "continueButton": "Continuar",
   "radiofield.label-yes": "Sí",
@@ -266,5 +269,6 @@
   "emailResults.return-sendButton": "Enviar",
   "emailResults.return-emailSentMessage": "¡Correo electrónico enviado! Puedes enviarlo a otro correo electrónico o hacer clic en Atrás para volver a tus resultados.",
   "emailResults.return-emailTextfieldLabel": "Correo electrónico",
-  "loading.return-loadingText": "Espere mientras recopilamos sus resultados..."
+  "loading.return-loadingText": "Espere mientras recopilamos sus resultados...",
+  "taxYearOptions.noRecentFiling": "No he presentado impuestos en los últimos 5 años"
 }
