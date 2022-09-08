@@ -1,14 +1,14 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
-import housingOptions from '../../Assets/housingOptions';
 import relationshipOptions from '../../Assets/relationshipOptions';
+import taxYearOptions from '../../Assets/taxYearOptions';
 import questions from '../../Assets/questions';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
   const navigate = useNavigate();
-  const { zipcode, householdSize, householdData, householdAssets, housing } = formData;
+  const { zipcode, householdSize, householdData, householdAssets, lastTaxFilingYear } = formData;
   
   const displayAllHouseholdData = () => {
     if (householdSize > 1) {
@@ -294,6 +294,20 @@ const Confirmation = ({ formData }) => {
         <p className='confirmation-label'>
           <b> 
             <FormattedMessage 
+              id='confirmation.displayAllFormData-lastTaxFilingYear' 
+              defaultMessage='Last Tax Filing Year: ' />
+          </b>
+          {taxYearOptions[lastTaxFilingYear]}
+          <Link to='/step-17' className='edit-link'>
+            <FormattedMessage 
+              id='confirmation.editLinkText' 
+              defaultMessage='Edit' />
+          </Link>
+        </p>
+        <p className='confirmation-section-underline'></p>
+        <p className='confirmation-label'>
+          <b> 
+            <FormattedMessage 
               id='confirmation.displayAllFormData-zipcodeText' 
               defaultMessage='Your zipcode: ' /> 
           </b>
@@ -315,18 +329,6 @@ const Confirmation = ({ formData }) => {
 
     return mappedExpenses;
   }
-
-  // const listAllHousing = () => {
-  //   const housingKeys = Object.keys(housing);
-
-  //   const mappedHousingListItems = housingKeys
-  //     .filter(housingOption => housing[housingOption] === true)
-  //     .map(selectedOption => {
-  //       return  <li key={ selectedOption }>{ housingOptions[selectedOption] }</li>;
-  //     });
-    
-  //   return mappedHousingListItems;
-  // }
 
   const listAllIncomeStreams = (memberIncomeStreams) => {
     const mappedListItems = memberIncomeStreams.map(incomeStream => {
