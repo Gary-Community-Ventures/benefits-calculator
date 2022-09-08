@@ -122,10 +122,15 @@ const postHouseholdMemberExpense = (singleExpense) => {
     })
 }
 
-const getEligibility = (screenerId) => {
+const getEligibility = (screenerId, locale) => {
+  const headerWithLocale = {
+    ...header,
+    'Accept-Language': locale === 'es' ? 'es,en-us' : 'en-us'
+  };
+
   return fetch(eligibilityEndpoint + screenerId, {
     method: "GET",
-    headers: header
+    headers: headerWithLocale
   })
     .then(response => {
       if(!response.ok) {
@@ -135,7 +140,7 @@ const getEligibility = (screenerId) => {
     })
 }
 
-module.exports = {
+export {
   postPartialParentScreen,
   updateScreen,
   postUser,

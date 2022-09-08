@@ -1,4 +1,5 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState, Fragment, useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import { useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
@@ -30,6 +31,7 @@ import './Results.css';
 
 const Results = ({ results, setResults, formData, programSubset, passedOrFailedTests }) => {
   const navigate = useNavigate();
+  const locale = useContext(Context).locale;
 
   useEffect(() => {
     if (results.screenerId === 0) {
@@ -55,8 +57,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       }
     }
 
-    const eligibilityResponse = await getEligibility(screensResponse.id);
-
+    const rawEligibilityResponse = await getEligibility(screensResponse.id, locale);
+    const languageCode = locale.toLowerCase();
+    const eligibilityResponse = rawEligibilityResponse.translations[languageCode];
     const qualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === true)
       .sort((benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value);
     const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
@@ -70,11 +73,12 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const getScreensBody = (formData) => {
-    const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing, startTime, isTest } = formData;
+    const { agreeToTermsOfService, zipcode, householdSize, householdAssets, housing, startTime, isTest, externalID } = formData;
     const housingOptionKeys = Object.keys(housing);
     const finalHousingOption = housingOptionKeys.find(housingSituation => housing[housingSituation] === true);
     return {
       is_test: isTest,
+      external_id: externalID,
       agree_to_tos: agreeToTermsOfService,
       zipcode: zipcode,
       start_date: startTime,

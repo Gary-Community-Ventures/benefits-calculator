@@ -24,20 +24,24 @@ const Header = () => {
               </Typography>
           </Grid>
           <Grid item xs={2}>
-            <Box>
-              <FormControl fullWidth>
-                <Select
-                  labelId='select-language-label'
-                  id='select-language'
-                  value={context.locale}
-                  label='Language'
-                  onChange={context.selectLanguage}
-                  aria-label='select a language'
-                >
-                  <MenuItem value='en-US'>English</MenuItem>
-                  <MenuItem value='es'>Español</MenuItem>
-                </Select>
-              </FormControl>
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid item={true} container spacing={2}>
+                <Grid item={true} xs={10}>
+                  <FormControl fullWidth>
+                    <Select
+                      labelId='select-language-label'
+                      id='select-language'
+                      value={context.locale}
+                      label='Language'
+                      onChange={context.selectLanguage}
+                      aria-label='select a language'
+                    >
+                      <MenuItem value='en-US'>English</MenuItem>
+                      <MenuItem value='es'>Español</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
             </Box>
           </Grid>
         </Grid>
