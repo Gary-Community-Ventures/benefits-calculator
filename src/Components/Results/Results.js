@@ -57,7 +57,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       }
     }
 
-    const eligibilityResponse = await getEligibility(screensResponse.id, locale);
+    const rawEligibilityResponse = await getEligibility(screensResponse.id, locale);
+    const languageCode = locale.toLowerCase();
+    const eligibilityResponse = rawEligibilityResponse.translations[languageCode];
     const qualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === true)
       .sort((benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value);
     const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
