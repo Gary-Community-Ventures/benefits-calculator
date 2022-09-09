@@ -37,7 +37,7 @@ const App = () => {
     householdSize: '',
     householdData: [],
     householdAssets: '',
-    housing: {},
+    lastTaxFilingYear: '',
     email: ''
   });
 
@@ -95,15 +95,8 @@ const App = () => {
   //     expenses: []
   //   }],
   //   householdAssets: '1000',
-  //   housing: {
-  //     renting: true,
-  //     owner: false, 
-  //     stayingWithFriend: false,
-  //     hotel: false,
-  //     shelter: false,
-  //     preferNotToSay: false
-  //   },
   //   relationship: 'headOfHousehold',
+  //   lastTaxFilingYear: '2021',
   //   email: ''
   // });
  
@@ -164,17 +157,14 @@ const App = () => {
     if (!validateInputFunction(inputToBeValidated)) {
       if (stepId === 14 && householdSize === 1) { //if you're on the householdSize q and the value is 1
         navigate(`/step-${stepId + 2}`); //skip question 15 and go to 16
+      } else if (stepId === 17) {
+        navigate('/confirm-information');
       } else { //you've indicated that you're householdSize is larger than 1
         navigate(`/step-${stepId + 1}`);
       }
     }  
   }
 
-  const handleHousingSourcesSubmit = (validatedHousingSources) => {
-    setFormData({ ...formData, housing: validatedHousingSources });
-    navigate('/confirm-information');
-  }
-  
   const handleIncomeStreamsSubmit = (validatedIncomeStreams, stepId) => {
     setFormData({ ...formData, incomeStreams: validatedIncomeStreams });
     navigate(`/step-${stepId + 1}`);
@@ -216,9 +206,9 @@ const App = () => {
               handleSubmit={handleSubmit}
               handleRadioButtonChange={handleRadioButtonChange} 
               handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
-              handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} 
-              handleHousingSourcesSubmit={handleHousingSourcesSubmit} 
-              handleHouseholdDataSubmit={handleHouseholdDataSubmit} /> } /> 
+              handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+              handleHouseholdDataSubmit={handleHouseholdDataSubmit} 
+              setFormData={setFormData} /> } /> 
           <Route 
             path='/confirm-information' 
             element={<Confirmation

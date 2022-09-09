@@ -1,14 +1,14 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
-import housingOptions from '../../Assets/housingOptions';
 import relationshipOptions from '../../Assets/relationshipOptions';
+import taxYearOptions from '../../Assets/taxYearOptions';
 import questions from '../../Assets/questions';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
   const navigate = useNavigate();
-  const { zipcode, householdSize, householdData, householdAssets, housing } = formData;
+  const { zipcode, householdSize, householdData, householdAssets, lastTaxFilingYear } = formData;
   
   const displayAllHouseholdData = () => {
     if (householdSize > 1) {
@@ -291,19 +291,19 @@ const Confirmation = ({ formData }) => {
             defaultMessage='This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.' />
         </p>
         <p className='confirmation-section-underline'></p>
-        <article className='confirmation-label'>
+        <p className='confirmation-label'>
           <b> 
             <FormattedMessage 
-              id='confirmation.displayAllFormData-housingText' 
-              defaultMessage='Housing:' />
-            </b>
+              id='confirmation.displayAllFormData-lastTaxFilingYear' 
+              defaultMessage='Last Tax Filing Year: ' />
+          </b>
+          {taxYearOptions[lastTaxFilingYear]}
           <Link to='/step-17' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
           </Link>
-          { <ul> { listAllHousing() } </ul> }
-        </article>
+        </p>
         <p className='confirmation-section-underline'></p>
         <p className='confirmation-label'>
           <b> 
@@ -330,18 +330,6 @@ const Confirmation = ({ formData }) => {
     return mappedExpenses;
   }
 
-  const listAllHousing = () => {
-    const housingKeys = Object.keys(housing);
-
-    const mappedHousingListItems = housingKeys
-      .filter(housingOption => housing[housingOption] === true)
-      .map(selectedOption => {
-        return  <li key={ selectedOption }>{ housingOptions[selectedOption] }</li>;
-      });
-    
-    return mappedHousingListItems;
-  }
-
   const listAllIncomeStreams = (memberIncomeStreams) => {
     const mappedListItems = memberIncomeStreams.map(incomeStream => {
       return <li key={ incomeStream.incomeStreamName }> { incomeStream.incomeStreamLabel }: ${ Number(incomeStream.incomeAmount).toLocaleString(2) } / { incomeStream.incomeFrequencyLabel }</li>
@@ -356,7 +344,7 @@ const Confirmation = ({ formData }) => {
         <FormattedMessage 
           id='confirmation.return-stepLabel' 
           defaultMessage='Step ' /> 
-        17 
+        18
         <FormattedMessage 
           id='confirmation.return-ofLabel' 
           defaultMessage=' of ' /> 
@@ -378,7 +366,7 @@ const Confirmation = ({ formData }) => {
           <Button
             className='prev-button'
             onClick={() => {
-              navigate(`/step-16`);
+              navigate(`/step-17`);
             }}
             variant='contained'>
             <FormattedMessage 

@@ -7,7 +7,9 @@ import {
   householdSizeHasError,
   displayHouseholdSizeHelperText,
   householdAssetsHasError,
-  displayHouseholdAssetsHelperText
+  displayHouseholdAssetsHelperText,
+  lastTaxFilingYearHasError,
+  displayMissingTaxFilingYear
 } from './validationFunctions';
 import { FormattedMessage } from 'react-intl';
 
@@ -341,14 +343,11 @@ const questions = [
     question:
       <FormattedMessage
         id='questions.id-17'
-        defaultMessage='Which of these best applies to your housing situation?' />,
-    questionDescription: 
-      <FormattedMessage
-        id='questions.id-17-description'
-        defaultMessage="It's OK to pick more than one." />,
+        defaultMessage='What was the last year you filed taxes for?' />,
     componentDetails: {
-      componentType: 'HousingBlock',
-      inputName: 'housing'
+      componentType: 'BasicSelect',
+      inputName: 'lastTaxFilingYear',
+      inputError: lastTaxFilingYearHasError,
     }
   }
 ];

@@ -29,7 +29,7 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
         <FormattedMessage
           id='disclaimer.step-header'
           defaultMessage='Step 1 of ' />
-          { questions.length + 1 }
+          { questions.length + 2 }
       </p>
       <h2 className='sub-header'>
         <FormattedMessage

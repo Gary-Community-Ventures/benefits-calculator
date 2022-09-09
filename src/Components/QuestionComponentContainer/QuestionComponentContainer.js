@@ -1,4 +1,5 @@
-import HousingBlock from '../HousingBlock/HousingBlock';
+import { FormattedMessage } from 'react-intl';
+import { useParams } from 'react-router-dom';
 import Radiofield from '../Radiofield/Radiofield';
 import Textfield from '../Textfield/Textfield';
 import PreviousButton from '../PreviousButton/PreviousButton';
@@ -6,12 +7,12 @@ import ContinueButton from '../ContinueButton/ContinueButton';
 import IncomeBlock from '../IncomeBlock/IncomeBlock';
 import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
+import BasicSelect from '../DropdownMenu/BasicSelect';
 import questions from '../../Assets/questions';
-import { useParams } from 'react-router-dom';
+import taxYearOptions from '../../Assets/taxYearOptions';
 import './QuestionComponentContainer.css';
-import { FormattedMessage } from 'react-intl';
 
-const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHousingSourcesSubmit, handleHouseholdDataSubmit }) => {
+const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData }) => {
   let { id } = useParams();
   let numberId = Number(id);
   const matchingQuestion = questions.find((question) => question.id === numberId);
@@ -27,14 +28,45 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     );
   }
 
-  const createHousingBlockComponent = () => {
+  const createTaxDropdownMenu = () => {
+    const TaxComponentProperties = {
+      labelId: 'tax-year-select-label',
+      inputLabelText: 
+        <FormattedMessage
+          id='qcc.createTaxDropdownMenu-label'
+          defaultMessage='Tax year'
+        />,
+      id:'tax-year-select',
+      value: 'lastTaxFilingYear',
+      label: 
+        <FormattedMessage
+          id='qcc.createTaxDropdownMenu-label'
+          defaultMessage='Tax year'
+        />,
+      disabledSelectMenuItemText: 
+        <FormattedMessage
+          id='qcc.disabledSelectMenuItemText'
+          defaultMessage='Select a Tax Year' />
+    };
+
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
-        <HousingBlock 
-          handleHousingSourcesSubmit={handleHousingSourcesSubmit} 
-          formData={formData} />
+          <BasicSelect
+            componentProperties={TaxComponentProperties}
+            setFormData={setFormData}
+            formData={formData} 
+            options={taxYearOptions} 
+            formDataProperty='lastTaxFilingYear' />
+        <div className='question-buttons'>
+          <PreviousButton formData={formData} />
+          <ContinueButton 
+            handleSubmit={handleSubmit} 
+            inputError={matchingQuestion.componentDetails.inputError}
+            formData={formData} 
+            inputName={matchingQuestion.componentDetails.inputName} />
+        </div>
       </div>
     );
   }
@@ -165,8 +197,8 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
       {
         ( matchingQuestion.componentDetails.componentType === 'Textfield' && createTextfieldComponent() ) ||
         ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createRadiofieldComponent() ) ||
-        ( matchingQuestion.componentDetails.componentType === 'HousingBlock' && createHousingBlockComponent() ) ||
-        ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() )
+        ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() ) ||
+        ( matchingQuestion.componentDetails.componentType === 'BasicSelect' && createTaxDropdownMenu() )
       }
     </main>
   );
