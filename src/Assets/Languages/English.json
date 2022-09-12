@@ -264,5 +264,20 @@
   "emailResults.return-emailSentMessage": "Email sent! You can send to another email or click back to return to your results.",
   "emailResults.return-emailTextfieldLabel": "Email",
   "loading.return-loadingText": "Please wait while we gather your results...",
-  "taxYearOptions.noRecentFiling": "I have not filed taxes in the last 5 years"
+  "taxYearOptions.noRecentFiling": "I have not filed taxes in the last 5 years",
+  "benefitOptions.tanf": "Temporary Assistance for Needy Families - also known as Colorado Works or TANF",
+  "benefitOptions.wic": "Special Supplemental Nutrition Program for Women, Infants, and Children - also known as Colorado WIC",
+  "benefitOptions.snap": "Supplemental Nutrition Assistance Program - also known as the Food Assistance Program or SNAP",
+  "benefitOptions.lifeline": "Lifeline Phone/Internet Service",
+  "benefitOptions.acp": "Affordable Connectivity Program",
+  "benefitOptions.eitc": "Earned Income Tax Credit",
+  "benefitOptions.coeitc": "Colorado Earned Income Tax Credit",
+  "benefitOptions.nslp": "National School Lunch Program",
+  "benefitOptions.ctc": "Child Tax Credit",
+  "benefitOptions.medicaid": "MEDICAID - also known as Health First Colorado",
+  "benefitOptions.rtdlive": "RTD Live",
+  "benefitOptions.cccap": "Colorado Child Care Assistance Program",
+  "benefitOptions.mydenver": "MY Denver Card",
+  "benefitOptions.chp": "CHP+",
+  "benefitOptions.ccb": "Colorado Cash Back TABOR refund"
 }

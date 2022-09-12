@@ -10,6 +10,7 @@ import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import questions from '../../Assets/questions';
 import taxYearOptions from '../../Assets/taxYearOptions';
+import conditionOptions from '../../Assets/benefitOptions';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData }) => {
@@ -108,6 +109,24 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
         {createPreviousAndContinueButtons(matchingQuestion)}
       </div>
     ); 
+  }
+
+  //THIS NEEDS FINISHED
+  const createCheckboxFieldComponent = () => {
+    return (
+      <div className='question-container' id={matchingQuestion.id}>
+        <p className='question-label'>{matchingQuestion.question}</p>
+        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
+        //COPIED FROM householddatablock variables need changed
+        <CheckboxGroup
+          options={conditionOptions}
+          state={state}
+          setState={setState}
+          index={index}/>
+        {formData[inputName] === true && hasFollowUpQuestions && renderFollowUpQuestions()}
+        {createPreviousAndContinueButtons(matchingQuestion)}
+      </div>
+    );
   }
 
   const renderFollowUpQuestions = () => {
