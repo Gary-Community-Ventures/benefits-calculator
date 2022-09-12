@@ -114,7 +114,24 @@ const App = () => {
   //   householdAssets: '1000',
   //   relationship: 'headOfHousehold',
   //   lastTaxFilingYear: '2021',
-  //   email: ''
+  //   email: '',
+  //   benefits: {
+  //     tanf: true,
+  //     wic: true,
+  //     snap: false,
+  //     lifeline: false,
+  //     acp: false,
+  //     eitc: false,
+  //     coeitc: false,
+  //     nslp: false,
+  //     ctc: false,
+  //     medicaid: false,
+  //     rtdlive: false,
+  //     cccap: false,
+  //     mydenver: false,
+  //     chp: false,
+  //     ccb: false
+  //   }
   // });
  
   const [results, setResults] = useState({
