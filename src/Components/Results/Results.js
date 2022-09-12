@@ -308,7 +308,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 <Typography variant='body1' sx={{ fontStyle: 'italic', marginBottom: 2 }}>
                   <FormattedMessage
                     id='results.return-estimatedDeliveryTimeA'
-                    defaultMessage="On average people who are approved for this benefit start receiving it " />
+                    defaultMessage="*On average people who are approved for this benefit start receiving it " />
                   {benefit.estimated_delivery_time}
                   <FormattedMessage
                     id='results.return-estimatedDeliveryTimeB'
