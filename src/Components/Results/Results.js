@@ -223,8 +223,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 </TableCell>
                 <TableCell align="right">
                   <FormattedMessage 
-                    id='results.resultsTable-timeToReceiptLabel' 
-                    defaultMessage='Time to Receipt' />
+                    id='results.resultsTable-timeToApply' 
+                    defaultMessage='Time to Apply' />
                 </TableCell>
                 <TableCell className="hidden-xs" display={{ xs: 'none' }} />
               </TableRow>
@@ -287,7 +287,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               {benefit.value_type}
             </Typography>
           </TableCell>
-          <TableCell align="right">{benefit.estimated_delivery_time}</TableCell>
+          <TableCell align="right">{benefit.estimated_application_time}</TableCell>
           <TableCell className="hidden-xs" display={{ xs: 'none' }}>
             <IconButton
               aria-label="expand row"
@@ -304,6 +304,15 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               <Box sx={{ padding: 1 }}>
                 <Typography variant='body1' gutterBottom>
                   {benefit.description}
+                </Typography>
+                <Typography variant='body1' sx={{ fontStyle: 'italic', marginBottom: 2 }}>
+                  <FormattedMessage
+                    id='results.return-estimatedDeliveryTimeA'
+                    defaultMessage="*On average people who are approved for this benefit start receiving it " />
+                  {benefit.estimated_delivery_time}
+                  <FormattedMessage
+                    id='results.return-estimatedDeliveryTimeB'
+                    defaultMessage=" after completing the application." />
                 </Typography>
                 <Button
                   variant='contained'
