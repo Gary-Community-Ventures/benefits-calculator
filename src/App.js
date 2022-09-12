@@ -38,7 +38,24 @@ const App = () => {
     householdData: [],
     householdAssets: '',
     lastTaxFilingYear: '',
-    email: ''
+    email: '',
+    benefits: {
+      tanf: false,
+      wic: false,
+      snap: false,
+      lifeline: false,
+      acp: false,
+      eitc: false,
+      coeitc: false,
+      nslp: false,
+      ctc: false,
+      medicaid: false,
+      rtdlive: false,
+      cccap: false,
+      mydenver: false,
+      chp: false,
+      ccb: false
+    }
   });
 
   // const [formData, setFormData] = useState({
@@ -97,7 +114,24 @@ const App = () => {
   //   householdAssets: '1000',
   //   relationship: 'headOfHousehold',
   //   lastTaxFilingYear: '2021',
-  //   email: ''
+  //   email: '',
+  //   benefits: {
+  //     tanf: true,
+  //     wic: true,
+  //     snap: false,
+  //     lifeline: false,
+  //     acp: false,
+  //     eitc: false,
+  //     coeitc: false,
+  //     nslp: false,
+  //     ctc: false,
+  //     medicaid: false,
+  //     rtdlive: false,
+  //     cccap: false,
+  //     mydenver: false,
+  //     chp: false,
+  //     ccb: false
+  //   }
   // });
  
   const [results, setResults] = useState({
@@ -157,7 +191,7 @@ const App = () => {
     if (!validateInputFunction(inputToBeValidated)) {
       if (stepId === 14 && householdSize === 1) { //if you're on the householdSize q and the value is 1
         navigate(`/step-${stepId + 2}`); //skip question 15 and go to 16
-      } else if (stepId === 17) {
+      } else if (stepId === 18) {
         navigate('/confirm-information');
       } else { //you've indicated that you're householdSize is larger than 1
         navigate(`/step-${stepId + 1}`);

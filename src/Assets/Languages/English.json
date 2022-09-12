@@ -61,6 +61,7 @@
   "questions.id-16-description" : "Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?",
   "questions.id-16-inputLabel": "Household Assets",
   "questions.id-17": "What was the last year you filed taxes for?",
+  "questions.id-18": "Which benefits are you or your household members currently receiving or have received in the past year?",
   "validation-helperText.age": "Please enter a valid age (13-130)",
   "validation-helperText.zipcode": "Please enter a valid CO zipcode",
   "validation-helperText.incomeValue": "Please enter a number greater than 0",

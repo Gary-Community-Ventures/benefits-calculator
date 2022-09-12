@@ -61,6 +61,7 @@
   "questions.id-16-description": "¿Efectivo en mano? ¿Cuentas corrientes o de ahorro? ¿Acciones, bonos o fondos mutuales de inversión?",
   "questions.id-16-inputLabel": "Bienes del hogar",
   "questions.id-17": "¿Cuál fue el último año en el que declaro impuestos?",
+  "questions.id-18": "¿Qué beneficios están recibiendo usted o los miembros de su hogar actualmente o han recibido en el último año?",
   "validation-helperText.age": "Ingrese una edad válida (13 a 130)",
   "validation-helperText.zipcode": "Ingrese un código postal válido de Colorado",
   "validation-helperText.incomeValue": "Ingrese un número mayor que 0",

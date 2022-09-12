@@ -9,8 +9,10 @@ import {
   householdAssetsHasError,
   displayHouseholdAssetsHelperText,
   lastTaxFilingYearHasError,
-  displayMissingTaxFilingYear
+  displayMissingTaxFilingYear,
+  benefitsHasError
 } from './validationFunctions';
+import benefitOptions from './benefitOptions';
 import { FormattedMessage } from 'react-intl';
 
 const questions = [
@@ -348,6 +350,19 @@ const questions = [
       componentType: 'BasicSelect',
       inputName: 'lastTaxFilingYear',
       inputError: lastTaxFilingYearHasError,
+    }
+  },
+  {
+    id: 18,
+    question:
+      <FormattedMessage
+        id='questions.id-18'
+        defaultMessage='Which benefits are you or your household members currently receiving or have received in the past year?' />,
+    componentDetails: {
+      componentType: 'BasicCheckboxGroup',
+      inputName: 'benefits',
+      options: benefitOptions,
+      inputError: benefitsHasError
     }
   }
 ];

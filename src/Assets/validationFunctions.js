@@ -250,6 +250,10 @@ const displayMissingTaxFilingYear = (year) => {
   }
 }
 
+const benefitsHasError = (benefits) => {
+  return false;
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -273,5 +277,6 @@ export {
   emailHasError,
   displayEmailHelperText,
   lastTaxFilingYearHasError,
-  displayMissingTaxFilingYear
+  displayMissingTaxFilingYear,
+  benefitsHasError
 }

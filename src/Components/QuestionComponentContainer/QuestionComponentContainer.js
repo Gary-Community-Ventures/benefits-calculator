@@ -8,9 +8,9 @@ import IncomeBlock from '../IncomeBlock/IncomeBlock';
 import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
+import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import questions from '../../Assets/questions';
 import taxYearOptions from '../../Assets/taxYearOptions';
-import conditionOptions from '../../Assets/benefitOptions';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData }) => {
@@ -111,19 +111,16 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     ); 
   }
 
-  //THIS NEEDS FINISHED
-  const createCheckboxFieldComponent = () => {
+  const createBasicCheckboxGroup = () => {
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
-        //COPIED FROM householddatablock variables need changed
-        <CheckboxGroup
-          options={conditionOptions}
-          state={state}
-          setState={setState}
-          index={index}/>
-        {formData[inputName] === true && hasFollowUpQuestions && renderFollowUpQuestions()}
+        <BasicCheckboxGroup
+          stateVariable={matchingQuestion.componentDetails.inputName}
+          options={matchingQuestion.componentDetails.options}
+          state={formData}
+          setState={setFormData} />
         {createPreviousAndContinueButtons(matchingQuestion)}
       </div>
     );
@@ -217,7 +214,8 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
         ( matchingQuestion.componentDetails.componentType === 'Textfield' && createTextfieldComponent() ) ||
         ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createRadiofieldComponent() ) ||
         ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() ) ||
-        ( matchingQuestion.componentDetails.componentType === 'BasicSelect' && createTaxDropdownMenu() )
+        ( matchingQuestion.componentDetails.componentType === 'BasicSelect' && createTaxDropdownMenu() ) ||
+        ( matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' && createBasicCheckboxGroup() )
       }
     </main>
   );
