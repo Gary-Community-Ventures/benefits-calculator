@@ -287,7 +287,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               {benefit.value_type}
             </Typography>
           </TableCell>
-          <TableCell align="right">{benefit.estimated_delivery_time}</TableCell>
+          <TableCell align="right">{benefit.estimated_application_time}</TableCell>
           <TableCell className="hidden-xs" display={{ xs: 'none' }}>
             <IconButton
               aria-label="expand row"
