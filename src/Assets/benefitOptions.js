@@ -23,7 +23,7 @@ const benefitOptions = {
       defaultMessage='Affordable Connectivity Program' />,
   eitc:
     <FormattedMessage
-      id='benefitOptions.acp'
+      id='benefitOptions.eitc'
       defaultMessage='Earned Income Tax Credit' />,
   coeitc:
     <FormattedMessage
