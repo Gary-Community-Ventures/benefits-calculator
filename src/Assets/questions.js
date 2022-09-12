@@ -9,7 +9,8 @@ import {
   householdAssetsHasError,
   displayHouseholdAssetsHelperText,
   lastTaxFilingYearHasError,
-  displayMissingTaxFilingYear
+  displayMissingTaxFilingYear,
+  benefitsHasError
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import { FormattedMessage } from 'react-intl';
@@ -361,7 +362,7 @@ const questions = [
       componentType: 'BasicCheckboxGroup',
       inputName: 'benefits',
       options: benefitOptions,
-      inputError: false
+      inputError: benefitsHasError
     }
   }
 ];
