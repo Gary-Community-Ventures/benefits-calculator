@@ -224,7 +224,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 <TableCell align="right">
                   <FormattedMessage 
                     id='results.resultsTable-timeToReceiptLabel' 
-                    defaultMessage='Time to Receipt' />
+                    defaultMessage='Time to Apply' />
                 </TableCell>
                 <TableCell className="hidden-xs" display={{ xs: 'none' }} />
               </TableRow>
