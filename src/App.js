@@ -38,7 +38,24 @@ const App = () => {
     householdData: [],
     householdAssets: '',
     lastTaxFilingYear: '',
-    email: ''
+    email: '',
+    benefits: {
+      tanf: false,
+      wic: false,
+      snap: false,
+      lifeline: false,
+      acp: false,
+      eitc: false,
+      coeitc: false,
+      nslp: false,
+      ctc: false,
+      medicaid: false,
+      rtdlive: false,
+      cccap: false,
+      mydenver: false,
+      chp: false,
+      ccb: false
+    }
   });
 
   // const [formData, setFormData] = useState({
