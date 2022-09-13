@@ -10,7 +10,7 @@ const HouseholdDataPreviousButton = ({ page, setPage }) => {
     
     if (Number(page) === 0) { //we're at the first member's data block
       //so we just want to navigate back to step 14
-      navigate('/step-14');
+      navigate('/step-15');
     } else { 
       //go back to the previous member's data block
       setPage(Number(page) - 1);
