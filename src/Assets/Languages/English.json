@@ -106,8 +106,6 @@
   "conditionOptions.blindOrVisuallyImpaired": "Blind or visually impaired",
   "conditionOptions.disabled": "Have any disabilities",
   "conditionOptions.veteran": "Served in the U.S. Armed Forces, National Guard or Reserves",
-  "conditionOptions.medicaid": "Receives Medicaid",
-  "conditionOptions.disabilityRelatedMedicaid": "Receives Disability-related Medicaid",
   "conditionOptions.noneOfTheseApply": "None of these apply",
   "householdDataBlock.createFTStudentRadioQuestion-ariaLabel": "is a full-time student",
   "householdDataBlock.createFTStudentRadioQuestion-questionLabel": "Are they a full-time student?",
