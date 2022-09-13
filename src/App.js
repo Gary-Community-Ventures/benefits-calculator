@@ -99,8 +99,6 @@ const App = () => {
   //     blindOrVisuallyImpaired: false,
   //     disabled: false,
   //     veteran: false,
-  //     medicaid: false,
-  //     disabilityRelatedMedicaid: false,
   //     noneOfTheseApply: true,
   //     hasIncome: false,
   //     incomeStreams: [],
