@@ -158,9 +158,9 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   const createPreviousAndContinueButtons = (question) => {
     //render normal button block if the question isn't the income or expense question or if the user doesn't have an income/expenses at all, 
     //otherwise these buttons will be created in the IncomeBlock/ExpenseBlock components
-    const isNotIncomeOrExpenseQ = question.id < 12 || question.id >= 14;
-    const hasFalsyIncome = question.id === 12 && formData[question.componentDetails.inputName] === false;
-    const hasFalsyExpense = question.id === 13 && formData[question.componentDetails.inputName] === false;
+    const isNotIncomeOrExpenseQ = question.id < 13 || question.id >= 15;
+    const hasFalsyIncome = question.id === 13 && formData[question.componentDetails.inputName] === false;
+    const hasFalsyExpense = question.id === 14 && formData[question.componentDetails.inputName] === false;
     if (isNotIncomeOrExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className='question-buttons'>
