@@ -211,7 +211,7 @@ const App = () => {
 
   const handleHouseholdDataSubmit = (unvalidatedHouseholdData) => {
     setFormData({ ...formData, householdData: unvalidatedHouseholdData });
-    navigate('/step-16');
+    navigate('/step-17');
   }
 
   const handleEmailTextfieldChange = (event) => {
