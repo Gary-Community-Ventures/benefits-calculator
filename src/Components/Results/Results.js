@@ -73,8 +73,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const getScreensBody = (formData) => {
-    const { agreeToTermsOfService, zipcode, householdSize, householdAssets, startTime, isTest, externalID } = formData;
-
+    const { agreeToTermsOfService, zipcode, householdSize, householdAssets, startTime, isTest, externalID, lastTaxFilingYear, benefits } = formData;
     return {
       is_test: isTest,
       external_id: externalID,
@@ -82,7 +81,23 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       zipcode: zipcode,
       start_date: startTime,
       household_size: householdSize,
-      household_assets: householdAssets
+      household_assets: householdAssets,
+      last_tax_filing_year: lastTaxFilingYear,
+      has_acp: benefits.acp,
+      has_ccb: benefits.ccb,
+      has_cccap: benefits.cccap,
+      has_chp: benefits.chp,
+      has_coeitc: benefits.coeitc,
+      has_ctc: benefits.ctc,
+      has_eitc: benefits.eitc,
+      has_lifeline: benefits.lifeline,
+      has_medicaid: benefits.medicaid,
+      has_mydenver: benefits.mydenver,
+      has_nslp: benefits.nslp,
+      has_rtdlive: benefits.rtdlive,
+      has_snap: benefits.snap,
+      has_tanf: benefits.tanf,
+      has_wic: benefits.wic
     };
   };
 
@@ -178,12 +193,13 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   const displaySubheader = (benefitsSubset) => {
     if (benefitsSubset === 'eligiblePrograms') {
       return (
-        <Typography variant='body1' className='remember-disclaimer-label'>
-          <FormattedMessage 
-            id='results.displaySubheader-rememberDisclaimerText' 
-            defaultMessage="Remember that we can't guarantee eligibility, but based on the information you provided, 
-            we believe you are likely eligible for the programs below:" />
-        </Typography>
+        <p>
+          <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
+            <FormattedMessage 
+              id='results.displaySubheader-signupText' 
+              defaultMessage="To receive a copy of these results by email, updates on future benefits you may be eligible for, and incentive offers please click the signup button." />
+          </Typography>
+        </p>
       );
     } else if (benefitsSubset === 'ineligiblePrograms') {
       return (
@@ -364,12 +380,12 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
             <>
               <Grid container xs={12} item={true} sx={{mt: 2, mr: 2, ml: 2}} >
                 <Grid xs={12} item={true}>
-                  <p className='question-label underline-id'>
+                  <Typography className='body2'>
                     <FormattedMessage 
                       id='results.return-screenerIdLabel' 
                       defaultMessage='Screener ID: ' /> 
                     {results.screenerId}
-                  </p>
+                  </Typography>
                 </Grid>
                 { programSubset === 'eligiblePrograms' && 
                   <>
@@ -404,8 +420,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                     }}
                     className='results-link'>
                     <FormattedMessage 
-                      id='results.return-emailResultsButton' 
-                      defaultMessage='Email Results' />
+                      id='results.return-signupResultsButton' 
+                      defaultMessage='Signup' />
                   </Button>
                 </Grid>
               </Grid>

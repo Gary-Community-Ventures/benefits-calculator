@@ -31,3 +31,13 @@
   border-bottom: 1px solid #505c66;
   margin-bottom: 24px;
 }
+
+.language-switcher .MuiInputBase-input {
+  color: rgb(25, 118, 210)
+}
+.language-switcher .MuiSelect-icon {
+  color: #fff;
+}
+.Mui-focused .MuiInput-input  {
+  background-color: rgba(0,0,0,0) !important;
+}

@@ -1,4 +1,4 @@
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useState, SyntheticEvent, Fragment, useRef } from 'react';
@@ -60,9 +60,16 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
         <Grid xs={12}>
           <h2 className='sub-header'>
             <FormattedMessage 
-              id='emailResults.return-emailResultsHeader' 
-              defaultMessage='Email a copy of my results' />
+              id='emailResults.return-signupHeader' 
+              defaultMessage='Signup for benefits updates and offers' />
           </h2>
+          <p>
+            <Typography variant='body1' className='signup-description' sx={{mb: 1}}>
+              <FormattedMessage
+                id='emailResults.return-signupDescription'
+                defaultMessage="To receive a copy of these results by email, updates on future benefits you may be eligible for, and incentive offers please provide your email address below." />
+            </Typography>
+          </p>
         </Grid>
         <Grid xs={12}>
           <StyledTextField 
@@ -99,8 +106,8 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
                 handleEmailSubmit(event);
               }}>
               <FormattedMessage 
-                id='emailResults.return-sendButton' 
-                defaultMessage='Send' />
+                id='emailResults.return-signupButton' 
+                defaultMessage='Signup' />
             </Button>
             <Snackbar
               open={open}
@@ -108,8 +115,8 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
               onClose={handleClose}
               message={
                 <FormattedMessage 
-                  id='emailResults.return-emailSentMessage' 
-                  defaultMessage='Email sent! You can send to another email or click back to return to your results.' />
+                  id='emailResults.return-signupCompleted' 
+                  defaultMessage='You are now signed up. You should receive an email shortly with a copy of your results. Click back to return to your results.' />
               }
               action={action}
               severity="success"
