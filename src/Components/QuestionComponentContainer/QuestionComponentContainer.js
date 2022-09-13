@@ -187,19 +187,19 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           defaultMessage=' of ' />
         {questions.length + 2}
       </p>
-      { matchingQuestion.id !== 15 && 
+      { matchingQuestion.id !== 16 && 
         <h2 className='sub-header'>
           <FormattedMessage
             id='qcc.tell-us-text'
             defaultMessage='Tell us a little more about yourself.' />
         </h2> }
-      { matchingQuestion.id === 15 && 
+      { matchingQuestion.id === 16 && 
         <h2 className='household-data-sub-header'>
           <FormattedMessage
             id='qcc.so-far-text'
             defaultMessage='So far you’ve told us about:' />
         </h2> }
-      { matchingQuestion.id === 15 && 
+      { matchingQuestion.id === 16 && 
         <h4 className='household-data-sub2-header'> 
           🔵 
           <FormattedMessage
