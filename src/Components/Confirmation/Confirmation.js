@@ -148,8 +148,7 @@ const Confirmation = ({ formData }) => {
 
   const displayConditions = (userData) => {
     const { student, studentFulltime, pregnant, unemployed, 
-      unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
-      disabilityRelatedMedicaid } = userData;
+      unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran } = userData;
 
     return (
       <ul>
@@ -207,20 +206,6 @@ const Confirmation = ({ formData }) => {
             <FormattedMessage 
               id='confirmation.headOfHouseholdDataBlock-veteranText' 
               defaultMessage='Veteran' />
-          </li> 
-        }
-        { medicaid && 
-          <li> 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-medicaidText' 
-              defaultMessage='Receiving Medicaid' /> 
-          </li> 
-        }
-        { disabilityRelatedMedicaid && 
-          <li> 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText' 
-              defaultMessage='Receiving disability-related Medicaid ' /> 
           </li> 
         }
       </ul>
