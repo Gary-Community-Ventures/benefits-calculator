@@ -28,8 +28,6 @@ const App = () => {
     blindOrVisuallyImpaired: false,
     disabled: false,
     veteran: false,
-    medicaid: false,
-    disabilityRelatedMedicaid: false,
     hasIncome: false,
     incomeStreams: [],
     hasExpenses: false,
@@ -73,8 +71,6 @@ const App = () => {
   //   blindOrVisuallyImpaired: false,
   //   disabled: false,
   //   veteran: false,
-  //   medicaid: false,
-  //   disabilityRelatedMedicaid: false,
   //   hasIncome: true,
   //   incomeStreams: [{
   //     incomeStreamName: 'wages', 
