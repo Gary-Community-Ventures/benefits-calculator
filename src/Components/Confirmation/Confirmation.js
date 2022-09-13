@@ -264,7 +264,7 @@ const Confirmation = ({ formData }) => {
               defaultMessage='Your household: ' />
           </b>
           { householdSize } { householdSizeDescriptor }
-          <Link to='/step-14' className='edit-link'>
+          <Link to='/step-13' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -279,7 +279,7 @@ const Confirmation = ({ formData }) => {
               defaultMessage='Household resources: ' />
           </b>
           ${ Number(householdAssets).toLocaleString(2) }
-          <Link to='/step-16' className='edit-link'>
+          <Link to='/step-15' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -298,7 +298,7 @@ const Confirmation = ({ formData }) => {
               defaultMessage='Last Tax Filing Year: ' />
           </b>
           {taxYearOptions[lastTaxFilingYear]}
-          <Link to='/step-17' className='edit-link'>
+          <Link to='/step-16' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
