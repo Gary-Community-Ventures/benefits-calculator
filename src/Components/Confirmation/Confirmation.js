@@ -30,7 +30,7 @@ const Confirmation = ({ formData }) => {
         <div key={i}>
           <p className='confirmation-label'>
             <b>{colors[i]} {allHouseholdRelations[i]}, { allHouseholdAges[i] }</b>
-            <Link to='/step-15' className='edit-link'>
+            <Link to='/step-14' className='edit-link'>
               <FormattedMessage 
                 id='confirmation.editLinkText' 
                 defaultMessage='Edit' />
@@ -42,7 +42,7 @@ const Confirmation = ({ formData }) => {
                 id='confirmation.headOfHouseholdDataBlock-conditionsText' 
                 defaultMessage='Conditions:' />
             </b>
-          <Link to='/step-15' className='edit-link'>
+          <Link to='/step-14' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -55,7 +55,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-incomeLabel' 
               defaultMessage='Income:' />
           </b>
-          <Link to='/step-15' className='edit-link'>
+          <Link to='/step-14' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -68,7 +68,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-expensesLabel' 
               defaultMessage='Expenses:' />
           </b>
-          <Link to='/step-15' className='edit-link'>
+          <Link to='/step-14' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
