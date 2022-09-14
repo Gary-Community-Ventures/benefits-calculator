@@ -30,7 +30,7 @@ const Confirmation = ({ formData }) => {
         <div key={i}>
           <p className='confirmation-label'>
             <b>{colors[i]} {allHouseholdRelations[i]}, { allHouseholdAges[i] }</b>
-            <Link to='/step-15' className='edit-link'>
+            <Link to='/step-14' className='edit-link'>
               <FormattedMessage 
                 id='confirmation.editLinkText' 
                 defaultMessage='Edit' />
@@ -42,7 +42,7 @@ const Confirmation = ({ formData }) => {
                 id='confirmation.headOfHouseholdDataBlock-conditionsText' 
                 defaultMessage='Conditions:' />
             </b>
-          <Link to='/step-15' className='edit-link'>
+          <Link to='/step-14' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -55,7 +55,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-incomeLabel' 
               defaultMessage='Income:' />
           </b>
-          <Link to='/step-15' className='edit-link'>
+          <Link to='/step-14' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -68,7 +68,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-expensesLabel' 
               defaultMessage='Expenses:' />
           </b>
-          <Link to='/step-15' className='edit-link'>
+          <Link to='/step-14' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -109,7 +109,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-conditionsText' 
               defaultMessage='Conditions:' />
           </b>
-          <Link to='/step-4' className='edit-link'>
+          <Link to='/step-5' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -122,7 +122,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-incomeLabel' 
               defaultMessage='Income:' />
           </b>
-          <Link to='/step-12' className='edit-link'>
+          <Link to='/step-11' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -135,7 +135,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-expensesLabel' 
               defaultMessage='Expenses:' />
           </b>
-          <Link to='/step-13' className='edit-link'>
+          <Link to='/step-12' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -264,7 +264,7 @@ const Confirmation = ({ formData }) => {
               defaultMessage='Your household: ' />
           </b>
           { householdSize } { householdSizeDescriptor }
-          <Link to='/step-14' className='edit-link'>
+          <Link to='/step-13' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -279,7 +279,7 @@ const Confirmation = ({ formData }) => {
               defaultMessage='Household resources: ' />
           </b>
           ${ Number(householdAssets).toLocaleString(2) }
-          <Link to='/step-16' className='edit-link'>
+          <Link to='/step-15' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -298,7 +298,7 @@ const Confirmation = ({ formData }) => {
               defaultMessage='Last Tax Filing Year: ' />
           </b>
           {taxYearOptions[lastTaxFilingYear]}
-          <Link to='/step-17' className='edit-link'>
+          <Link to='/step-16' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
@@ -366,7 +366,7 @@ const Confirmation = ({ formData }) => {
           <Button
             className='prev-button'
             onClick={() => {
-              navigate(`/step-18`);
+              navigate(`/step-${questions.length + 1}`);
             }}
             variant='contained'>
             <FormattedMessage 

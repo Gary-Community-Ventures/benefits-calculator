@@ -111,7 +111,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const getHouseholdMemberBody = (formData, relationshipToHH, screensId) => {
     const { age, student, studentFulltime, pregnant, unemployed,
-      unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
+      unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid,
       disabilityRelatedMedicaid, hasIncome, hasExpenses, incomeStreams, expenses } = formData;
     
     return {

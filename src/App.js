@@ -28,8 +28,6 @@ const App = () => {
     blindOrVisuallyImpaired: false,
     disabled: false,
     veteran: false,
-    medicaid: false,
-    disabilityRelatedMedicaid: false,
     hasIncome: false,
     incomeStreams: [],
     hasExpenses: false,
@@ -73,8 +71,6 @@ const App = () => {
   //   blindOrVisuallyImpaired: false,
   //   disabled: false,
   //   veteran: false,
-  //   medicaid: false,
-  //   disabilityRelatedMedicaid: false,
   //   hasIncome: true,
   //   incomeStreams: [{
   //     incomeStreamName: 'wages', 
@@ -189,9 +185,9 @@ const App = () => {
     event.preventDefault();
 
     if (!validateInputFunction(inputToBeValidated)) {
-      if (stepId === 14 && householdSize === 1) { //if you're on the householdSize q and the value is 1
-        navigate(`/step-${stepId + 2}`); //skip question 15 and go to 16
-      } else if (stepId === 18) {
+      if (stepId === 13 && householdSize === 1) { //if you're on the householdSize q and the value is 1
+        navigate(`/step-${stepId + 2}`); //skip question 16 and go to 17
+      } else if (stepId === 16) {
         navigate('/confirm-information');
       } else { //you've indicated that you're householdSize is larger than 1
         navigate(`/step-${stepId + 1}`);
@@ -211,7 +207,7 @@ const App = () => {
 
   const handleHouseholdDataSubmit = (unvalidatedHouseholdData) => {
     setFormData({ ...formData, householdData: unvalidatedHouseholdData });
-    navigate('/step-16');
+    navigate('/step-15');
   }
 
   const handleEmailTextfieldChange = (event) => {

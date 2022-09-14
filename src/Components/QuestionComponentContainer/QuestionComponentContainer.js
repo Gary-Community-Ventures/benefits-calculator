@@ -158,9 +158,9 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   const createPreviousAndContinueButtons = (question) => {
     //render normal button block if the question isn't the income or expense question or if the user doesn't have an income/expenses at all, 
     //otherwise these buttons will be created in the IncomeBlock/ExpenseBlock components
-    const isNotIncomeOrExpenseQ = question.id < 12 || question.id >= 14;
-    const hasFalsyIncome = question.id === 12 && formData[question.componentDetails.inputName] === false;
-    const hasFalsyExpense = question.id === 13 && formData[question.componentDetails.inputName] === false;
+    const isNotIncomeOrExpenseQ = question.id < 11 || question.id >= 13;
+    const hasFalsyIncome = question.id === 11 && formData[question.componentDetails.inputName] === false;
+    const hasFalsyExpense = question.id === 12 && formData[question.componentDetails.inputName] === false;
     if (isNotIncomeOrExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className='question-buttons'>
@@ -187,19 +187,19 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           defaultMessage=' of ' />
         {questions.length + 2}
       </p>
-      { matchingQuestion.id !== 15 && 
+      { matchingQuestion.id !== 14 && 
         <h2 className='sub-header'>
           <FormattedMessage
             id='qcc.tell-us-text'
             defaultMessage='Tell us a little more about yourself.' />
         </h2> }
-      { matchingQuestion.id === 15 && 
+      { matchingQuestion.id === 14 && 
         <h2 className='household-data-sub-header'>
           <FormattedMessage
             id='qcc.so-far-text'
             defaultMessage='So far you’ve told us about:' />
         </h2> }
-      { matchingQuestion.id === 15 && 
+      { matchingQuestion.id === 14 && 
         <h4 className='household-data-sub2-header'> 
           🔵 
           <FormattedMessage
