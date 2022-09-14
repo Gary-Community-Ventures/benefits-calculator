@@ -40,7 +40,7 @@
   "questions.id-10": "¿Sirvió en las Fuerzas Armadas, Guardia Nacional o Reservas de Estados Unidos?",
   "questions.id-10-ariaLabel": "es veterano",
   "questions.id-11": "¿Tiene ingresos?",
-  "questions.id-11-description": "Esto incluye ingresos por concepto de trabajo, pensión alimenticia, inversiones o regalos. Incluya solamente sus ingresos.",
+  "questions.id-11-description": "Esto incluye ingresos por concepto de trabajo, pensión alimenticia, inversiones o regalos. Agregue solamente sus ingresos.",
   "questions.id-11-ariaLabel": "tiene ingresos",
   "questions.id-11a": "¿Qué tipo de ingresos ha percibido últimamente?",
   "questions.id-11a-ariaLabel": "tipo de ingresos más recientes",
