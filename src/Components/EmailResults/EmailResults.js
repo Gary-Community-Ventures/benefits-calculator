@@ -1,10 +1,12 @@
-import { TextField, Button, Typography } from '@mui/material';
+import { TextField, Button, Typography, FormGroup, FormControlLabel, Checkbox, FormLabel, fabClasses } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { useState, SyntheticEvent, Fragment, useRef } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useState, SyntheticEvent, Fragment, useRef, useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
+import { Link } from 'react-router-dom'
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { emailHasError, displayEmailHelperText } from '../../Assets/validationFunctions';
-import { postMessage } from '../../apiCalls';
+import { postMessage, postUser, updateScreen } from '../../apiCalls';
 import Grid from '@mui/material/Grid';
 import Snackbar from '@mui/material/Snackbar';
 import CloseIcon from '@mui/icons-material/Close';
@@ -19,16 +21,57 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
   let navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const emailInput = useRef(null);
+  const phoneInput = useRef(null);
+  const firstNameInput = useRef(null);
+  const lastNameInput = useRef(null);
+  const sendResults = useRef(false);
+  const sendUpdates = useRef(false);
+  const sendOffers = useRef(false);
+  const commConsent = useRef(false);
+  const locale = useContext(Context).locale;
+  let privacyLink = "https://20208592.hs-sites.com/en/data-privacy-policy?__hstc=144746475.066f707c0b490f88f5429b1856cf0908.1663037963489.1663086538117.1663095192641.3&__hssc=144746475.1.1663095192641&__hsfp=2418539872";
+  if (locale == "es") {
+    privacyLink = "https://20208592.hs-sites.com/es/data-privacy-policy";
+  }
 
   const handleEmailSubmit = async () => {
-    const message = {
-      email: formData.email,
-      type: 'emailScreen',
-      screen: results.screenerId
+    let phoneNumber = '';
+    if (phoneInput.current.value) {
+      phoneNumber = phoneInput.current.value.replace(/\D/g,'');
+      if(phoneNumber.length == 10) {
+        phoneNumber = '+1'+phoneNumber;
+      }
     }
 
-    const messageResponse = postMessage(message)
-    emailInput.current.value = "";
+    const user = {
+      email_or_cell: emailInput.current.value ? emailInput.current.value : phoneNumber,
+      cell: phoneNumber ? phoneNumber : '',
+      email: emailInput.current.value ? emailInput.current.value : '',
+      tcpa_consent: commConsent.current.checked,
+      send_offers: sendOffers.current.checked,
+      send_updates: sendUpdates.current.checked
+    }
+    const userResponse = await postUser(user);
+
+    const screenUpdates = {
+      user: userResponse.id,
+    }
+    const screenResponse = await updateScreen(results.screenerId, screenUpdates);
+
+    if (sendResults.current.checked) {
+      const message = {
+        email: formData.email,
+        type: 'emailScreen',
+        screen: results.screenerId,
+        uid: userResponse.id
+      }
+      const messageResponse = await postMessage(message)
+      const emailRequestUpdate = {
+        last_email_request_date: new Date().toJSON()
+      }
+      const screenEmailResponse = await updateScreen(results.screenerId, emailRequestUpdate);
+    }
+
     setOpen(true);
   } 
 
@@ -63,13 +106,34 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
               id='emailResults.return-signupHeader' 
               defaultMessage='Signup for benefits updates and offers' />
           </h2>
-          <p>
-            <Typography variant='body1' className='signup-description' sx={{mb: 1}}>
-              <FormattedMessage
-                id='emailResults.return-signupDescription'
-                defaultMessage="To receive a copy of these results by email, updates on future benefits you may be eligible for, and incentive offers please provide your email address below." />
-            </Typography>
-          </p>
+        </Grid>
+        <Grid xs={12}>
+          <StyledTextField
+              sx={{mr: 1}} 
+              type='text'
+              name='first_name'
+              label={
+                <FormattedMessage 
+                  id='emailResults.return-firstNameTextfieldLabel' 
+                  defaultMessage='First Name' />
+              }
+              inputRef={firstNameInput}
+              onChange={(event) => {handleEmailTextfieldChange(event)}}
+              variant='outlined'
+              required
+            />
+          <StyledTextField 
+              type='text'
+              name='last_name'
+              label={
+                <FormattedMessage 
+                  id='emailResults.return-lastNameTextfieldLabel' 
+                  defaultMessage='Last Name' />
+              }
+              inputRef={lastNameInput}
+              variant='outlined'
+              required
+            />
         </Grid>
         <Grid xs={12}>
           <StyledTextField 
@@ -86,6 +150,87 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
             required
             error={emailHasError(formData.email)}
             helperText={displayEmailHelperText(formData.email)} 
+          />
+        </Grid>
+        <Grid xs={12}>
+          <StyledTextField 
+              type='tel'
+              name='phone'
+              label={
+                <FormattedMessage 
+                  id='emailResults.return-phoneTextfieldLabel' 
+                  defaultMessage='Cell Phone' />
+              }
+              inputRef={phoneInput}
+              variant='outlined'
+            />          
+        </Grid>
+        <Grid xs={12}>
+          <FormLabel>What would you like us to contact you about?</FormLabel>
+          <FormGroup>
+            <FormControlLabel
+              sx={{mt: 1}}
+              control={
+                <Checkbox inputRef={sendResults} name="sendResults" />
+              }
+              label={<FormattedMessage 
+                id='emailResults.return-sendcopy' 
+                defaultMessage='Please send me a copy of my results.' />}
+            />
+            <FormControlLabel
+              sx={{mt: 1}}
+              control={
+                <Checkbox inputRef={sendUpdates} name="sendUpdates" />
+              }
+              label={<FormattedMessage 
+                id='emailResults.return-sendupdates' 
+                defaultMessage='Please notify me when new benefits become available to me that I am likely eligible for based on the information I have provided.' />}
+            />
+            <FormControlLabel
+              sx={{mt: 1}}
+              control={
+                <Checkbox inputRef={sendOffers} name="sendOffers" />
+              }
+              label={<FormattedMessage 
+                id='emailResults.return-sendoffers' 
+                defaultMessage='Please notify me when there are paid opportunities to provide feedback on this screener.' />}
+            />
+          </FormGroup>
+
+          <Typography variant='body1' sx={{mb: 1, mt: 4}} style={{ fontWeight: 600 }}>
+              <FormattedMessage
+                id='emailResults.return-consentText'
+                defaultMessage="By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications, and you may opt out of receiving these communications at any time through the opt-out link in the communication." />
+            </Typography>
+
+          <FormControlLabel
+            sx={{mb: 1}}
+            control={
+              <Checkbox inputRef={commConsent} name="commConsent" required />
+            }
+            label={
+              <div>
+                <FormattedMessage 
+                  id='emailResults.return-consentCheck1' 
+                  defaultMessage="I have read, understand, and agree to the terms of My Friend Ben's " />
+                <FormattedMessage
+                  id='emailResults.return-consentCheck'
+                  defaultMessage="{linkVal}"
+                  values={{ 
+                    linkVal: <a 
+                    href={privacyLink}
+                    target="_blank"
+                    rel='noopener noreferrer'>
+                      <FormattedMessage
+                        id='emailResults.return-consentCheckLink'
+                        defaultMessage='data privacy policy' />
+                      </a>
+                  }} />
+                <FormattedMessage 
+                  id='emailResults.return-consentCheck4' 
+                  defaultMessage=" and consent to contact above." />
+              </div>
+            }
           />
         </Grid>
         <Grid xs={12}>
@@ -116,7 +261,7 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
               message={
                 <FormattedMessage 
                   id='emailResults.return-signupCompleted' 
-                  defaultMessage='You are now signed up. You should receive an email shortly with a copy of your results. Click back to return to your results.' />
+                  defaultMessage='Your preferences have been updated. Click the back button to return to your results.' />
               }
               action={action}
               severity="success"
