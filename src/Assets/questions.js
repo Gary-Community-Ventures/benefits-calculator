@@ -205,7 +205,7 @@ const questions = [
     questionDescription: 
       <FormattedMessage
         id='questions.id-11-description'
-        defaultMessage='This includes money from jobs, alimony, investments, or gifts.' />,
+        defaultMessage='This includes money from jobs, alimony, investments, or gifts. Enter income for yourself only.' />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel:
