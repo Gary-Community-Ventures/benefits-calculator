@@ -166,7 +166,11 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
             />          
         </Grid>
         <Grid xs={12}>
-          <FormLabel>What would you like us to contact you about?</FormLabel>
+          <FormLabel>
+            <FormattedMessage
+              id='emailResults.return-contactAbout'
+              defaultMessage='What would you like us to contact you about?' />
+          </FormLabel>
           <FormGroup>
             <FormControlLabel
               sx={{mt: 1}}
