@@ -47,6 +47,8 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
       email_or_cell: emailInput.current.value ? emailInput.current.value : phoneNumber,
       cell: phoneNumber ? phoneNumber : '',
       email: emailInput.current.value ? emailInput.current.value : '',
+      first_name: firstNameInput.current.value,
+      last_name: lastNameInput.current.value,
       tcpa_consent: commConsent.current.checked,
       send_offers: sendOffers.current.checked,
       send_updates: sendUpdates.current.checked
@@ -58,6 +60,7 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
     }
     const screenResponse = await updateScreen(results.screenerId, screenUpdates);
 
+    setOpen(true);
     if (sendResults.current.checked) {
       const message = {
         email: formData.email,
@@ -72,7 +75,6 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
       const screenEmailResponse = await updateScreen(results.screenerId, emailRequestUpdate);
     }
 
-    setOpen(true);
   } 
 
   const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
