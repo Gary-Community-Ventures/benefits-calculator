@@ -58,6 +58,7 @@
   "questions.id-15-description": "¿Efectivo en mano? ¿Cuentas corrientes o de ahorro? ¿Acciones, bonos o fondos mutuales de inversión?",
   "questions.id-15-inputLabel": "Bienes del hogar",
   "questions.id-16": "¿Cuál fue el último año en el que declaro impuestos?",
+  "questions.id-17": "¿Cómo se enteró de esta calculadora?",
   "validation-helperText.age": "Ingrese una edad válida (13 a 130)",
   "validation-helperText.zipcode": "Ingrese un código postal válido de Colorado",
   "validation-helperText.incomeValue": "Ingrese un número mayor que 0",
@@ -297,4 +298,6 @@
   "benefitOptions.mydenver": "MY Denver Card",
   "benefitOptions.chp": "CHP+",
   "benefitOptions.ccb": "Colorado Cash Back TABOR refund",
+  "referralOptions.searchEngine": "Google o otro motor de búsqueda",
+  "referralOptions.other": "Otro"
 }
