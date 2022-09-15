@@ -53,6 +53,31 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
 
     return createBasicSelectMenu(taxComponentProperties, taxYearOptions);
   }
+
+  const createReferralDropdownMenu = () => {
+    const referralComponentProperties = {
+      labelId: 'referral-source-select-label',
+      inputLabelText: 
+        <FormattedMessage
+          id='qcc.createReferralDropdownMenu-label'
+          defaultMessage='Referral Source'
+        />,
+      id:'referral-source-select',
+      value: 'referralSource',
+      label: 
+        <FormattedMessage
+          id='qcc.createReferralDropdownMenu-label'
+          defaultMessage='Referral Source'
+        />,
+      disabledSelectMenuItemText: 
+        <FormattedMessage
+          id='qcc.createReferralDropdownMenu-disabledSelectMenuItemText'
+          defaultMessage='Select a source' />
+    };
+
+    return createBasicSelectMenu(referralComponentProperties, referralOptions);
+  }
+
   const createBasicSelectMenu = (componentProperties, options) => {
     return (
       <div className='question-container' id={matchingQuestion.id}>
