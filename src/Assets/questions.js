@@ -10,7 +10,8 @@ import {
   displayHouseholdAssetsHelperText,
   lastTaxFilingYearHasError,
   displayMissingTaxFilingYear,
-  benefitsHasError
+  benefitsHasError,
+  referralSourceHasError
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import { FormattedMessage } from 'react-intl';
