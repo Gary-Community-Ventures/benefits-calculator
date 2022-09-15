@@ -254,6 +254,10 @@ const benefitsHasError = (benefits) => {
   return false;
 }
 
+const referralSourceHasError = (referralSource) => {
+  return referralSource === '';
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -278,5 +282,6 @@ export {
   displayEmailHelperText,
   lastTaxFilingYearHasError,
   displayMissingTaxFilingYear,
-  benefitsHasError
+  benefitsHasError,
+  referralSourceHasError
 }
