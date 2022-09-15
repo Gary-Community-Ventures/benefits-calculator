@@ -51,16 +51,17 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           defaultMessage='Select a Tax Year' />
     };
 
+  const createBasicSelectMenu = (componentProperties, options) => {
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
           <BasicSelect
-            componentProperties={TaxComponentProperties}
+            componentProperties={componentProperties}
             setFormData={setFormData}
             formData={formData} 
-            options={taxYearOptions} 
-            formDataProperty='lastTaxFilingYear' />
+            options={options} 
+            formDataProperty={componentProperties.value} />
         <div className='question-buttons'>
           <PreviousButton formData={formData} />
           <ContinueButton 
