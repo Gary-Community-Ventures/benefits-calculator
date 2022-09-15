@@ -16,7 +16,8 @@
   "qcc.you-text": " You, ",
   "qcc.hoh-text": " Head of household",
   "qcc.createTaxDropdownMenu-label": "Tax Year",
-  "qcc.disabledSelectMenuItemText": "Select a Tax Year",
+  "qcc.createTaxDropdownMenu-disabledSelectMenuItemText": "Select a Tax Year",
+
   "questions.id-2": "How old are you?",
   "questions.id-2-inputLabel": "Age",
   "questions.id-3": "What is your zipcode?",
