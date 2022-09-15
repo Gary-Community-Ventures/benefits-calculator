@@ -53,6 +53,14 @@ const App = () => {
       mydenver: false,
       chp: false,
       ccb: false
+    },
+    referralSource: {
+      gary: false,
+      benefitsInAction: false,
+      villageExchange: false,
+      theFax: false,
+      searchEngine: false,
+      other: false
     }
   });
 
