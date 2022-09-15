@@ -330,7 +330,19 @@ const questions = [
     componentDetails: {
       componentType: 'BasicSelect',
       inputName: 'lastTaxFilingYear',
-      inputError: lastTaxFilingYearHasError,
+      inputError: lastTaxFilingYearHasError
+    }
+  },
+  {
+    id: 17,
+    question:
+      <FormattedMessage
+        id='questions.id-17'
+        defaultMessage='How did you hear about this screener?' />,
+    componentDetails: {
+      componentType: 'BasicSelect',
+      inputName: 'referralSource',
+      inputError: referralSourceHasError
     }
   }
 ];
