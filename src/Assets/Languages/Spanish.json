@@ -17,7 +17,8 @@
   "qcc.hoh-text": " Jefe de hogar",
   "qcc.createTaxDropdownMenu-label": "Año fiscal",
   "qcc.createTaxDropdownMenu-disabledSelectMenuItemText": "Seleccione un año fiscal",
-
+  "qcc.createReferralDropdownMenu-label": "Fuente de referencia",
+  "qcc.createReferralDropdownMenu-disabledSelectMenuItemText": "Seleccione una opción",
   "questions.id-2": "¿Qué edad tiene?",
   "questions.id-2-inputLabel": "Edad",
   "questions.id-3": "¿Cuál es su código postal?",

@@ -17,7 +17,8 @@
   "qcc.hoh-text": " Head of household",
   "qcc.createTaxDropdownMenu-label": "Tax Year",
   "qcc.createTaxDropdownMenu-disabledSelectMenuItemText": "Select a Tax Year",
-
+  "qcc.createReferralDropdownMenu-label": "Referral Source",
+  "qcc.createReferralDropdownMenu-disabledSelectMenuItemText": "Select a source",
   "questions.id-2": "How old are you?",
   "questions.id-2-inputLabel": "Age",
   "questions.id-3": "What is your zipcode?",
@@ -301,4 +302,5 @@
   "benefitOptions.ccb": "Colorado Cash Back TABOR refund",
   "referralOptions.searchEngine": "Google or other search engine",
   "referralOptions.other": "Other"
+
 }
