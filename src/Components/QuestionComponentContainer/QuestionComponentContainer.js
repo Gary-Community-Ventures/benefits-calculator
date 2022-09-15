@@ -31,7 +31,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   }
 
   const createTaxDropdownMenu = () => {
-    const TaxComponentProperties = {
+    const taxComponentProperties = {
       labelId: 'tax-year-select-label',
       inputLabelText: 
         <FormattedMessage
@@ -47,10 +47,12 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
         />,
       disabledSelectMenuItemText: 
         <FormattedMessage
-          id='qcc.disabledSelectMenuItemText'
+          id='qcc.createTaxDropdownMenu-disabledSelectMenuItemText'
           defaultMessage='Select a Tax Year' />
     };
 
+    return createBasicSelectMenu(taxComponentProperties, taxYearOptions);
+  }
   const createBasicSelectMenu = (componentProperties, options) => {
     return (
       <div className='question-container' id={matchingQuestion.id}>
