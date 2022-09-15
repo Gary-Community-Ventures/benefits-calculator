@@ -54,14 +54,7 @@ const App = () => {
       chp: false,
       ccb: false
     },
-    referralSource: {
-      gary: false,
-      benefitsInAction: false,
-      villageExchange: false,
-      theFax: false,
-      searchEngine: false,
-      other: false
-    }
+    referralSource: ''
   });
 
   // const [formData, setFormData] = useState({
@@ -195,7 +188,7 @@ const App = () => {
     if (!validateInputFunction(inputToBeValidated)) {
       if (stepId === 13 && householdSize === 1) { //if you're on the householdSize q and the value is 1
         navigate(`/step-${stepId + 2}`); //skip question 16 and go to 17
-      } else if (stepId === 16) {
+      } else if (stepId === 17) {
         navigate('/confirm-information');
       } else { //you've indicated that you're householdSize is larger than 1
         navigate(`/step-${stepId + 1}`);
