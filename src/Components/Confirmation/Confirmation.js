@@ -332,6 +332,28 @@ const Confirmation = ({ formData }) => {
       </article>
     );
   }
+
+  const displayReferralSource = () => {
+    const { referralSource, otherSource } = formData;
+    const referralSourceLabel = referralOptions[referralSource];
+    const finalReferralSource = (referralSource !== 'other') ? referralSourceLabel : otherSource;
+   
+    return (
+      <article className='confirmation-label'>
+        <b> 
+          <FormattedMessage 
+            id='confirmation.displayAllFormData-referralSourceText' 
+            defaultMessage='Referral Source: ' /> 
+        </b>
+        { finalReferralSource }
+        <Link to='/step-17' className='edit-link'>
+          <FormattedMessage 
+            id='confirmation.editLinkText' 
+            defaultMessage='Edit' />
+        </Link>
+      </article>
+    );
+  }
   
   const displayAllFormData = () => {
     return (
@@ -342,6 +364,8 @@ const Confirmation = ({ formData }) => {
         { displayHouseholdAssetsSection() }
         <p className='confirmation-section-underline'></p>
         { displayLastTaxFilingYearSection() }
+        <p className='confirmation-section-underline'></p>
+        { displayReferralSource() }
         <p className='confirmation-section-underline'></p>
         { displayZipcodeSection() }
       </>
