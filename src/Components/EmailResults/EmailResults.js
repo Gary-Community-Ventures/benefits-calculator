@@ -206,7 +206,7 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
           <Typography variant='body1' sx={{mb: 1, mt: 4}} style={{ fontWeight: 600 }}>
               <FormattedMessage
                 id='emailResults.return-consentText'
-                defaultMessage="By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications, and you may opt out of receiving these communications at any time through the opt-out link in the communication." />
+                defaultMessage="By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication." />
             </Typography>
 
           <FormControlLabel
@@ -234,7 +234,7 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
                   }} />
                 <FormattedMessage 
                   id='emailResults.return-consentCheck4' 
-                  defaultMessage=" and consent to contact above." />
+                  defaultMessage=" and consent to contact." />
               </div>
             }
           />

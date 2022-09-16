@@ -278,12 +278,12 @@
   "emailResults.return-phoneTextfieldLabel": "Cell Phone",
   "emailResults.return-contactAbout": "What would you like us to contact you about?",
   "emailResults.return-sendcopy": "Please send me a copy of my results.",
-  "emailResults.return-sendupdates": "Please notify me when new benefits become available to me that I am likely eligible for based on the information I have provided.",
+  "emailResults.return-sendupdates": "Please notify me when new benefits become available that I am likely eligible for based on the information I have provided.",
   "emailResults.return-sendoffers": "Please notify me when there are paid opportunities to provide feedback on this screener.",
-  "emailResults.return-consentText": "By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications, and you may opt out of receiving these communications at any time through the opt-out link in the communication.",
+  "emailResults.return-consentText": "By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication.",
   "emailResults.return-consentCheck1": "I have read, understand, and agree to the terms of My Friend Ben's ",
   "emailResults.return-consentCheckLink": "data privacy policy",
-  "emailResults.return-consentCheck4": " and consent to contact above.",
+  "emailResults.return-consentCheck4": " and consent to contact.",
   "emailResults.return-signupCompleted": "Your preferences have been updated. Click the back button to return to your results.",
   "loading.return-loadingText": "Please wait while we gather your results...",
   "results.displaySubheader-loadingDisclaimerText": "Remember that we can't guarantee eligibility, but based on the information you provided, we believe you are likely eligible for the following programs.",
@@ -305,5 +305,4 @@
   "benefitOptions.ccb": "Colorado Cash Back TABOR refund",
   "referralOptions.searchEngine": "Google or other search engine",
   "referralOptions.other": "Other"
-
 }
