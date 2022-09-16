@@ -143,6 +143,7 @@ const App = () => {
 
   useEffect(() => {
     const updatedFormData = { ...formData };
+    const referralSourceIsNotOther = !(formData.referralSource === 'other');
 
     if (formData.student === false) {
       updatedFormData.studentFulltime = false;
@@ -152,17 +153,21 @@ const App = () => {
       updatedFormData.unemployedWorkedInLast18Mos = false;
     }
 
-    if(formData.hasIncome === false) {
+    if (formData.hasIncome === false) {
       updatedFormData.incomeStreams = [];
     }
 
-    if(formData.hasExpenses === false) {
+    if (formData.hasExpenses === false) {
       updatedFormData.expenses = [];
+    }
+
+    if (referralSourceIsNotOther) {
+      updatedFormData.otherSource = '';
     }
 
     setFormData(updatedFormData);
     
-  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses]);
+  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses, formData.referralSource]);
 
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
