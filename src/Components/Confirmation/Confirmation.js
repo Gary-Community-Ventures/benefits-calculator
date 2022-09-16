@@ -253,7 +253,7 @@ const Confirmation = ({ formData }) => {
         <FormattedMessage 
           id='confirmation.displayAllFormData-peopleLabel' 
           defaultMessage='people' /> 
-      ;
+    ;
     return (
       <article className='confirmation-label'>
         <b>
