@@ -89,14 +89,8 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
             formData={formData} 
             options={options} 
             formDataProperty={componentProperties.value} />
-        <div className='question-buttons'>
-          <PreviousButton formData={formData} />
-          <ContinueButton 
-            handleSubmit={handleSubmit} 
-            inputError={matchingQuestion.componentDetails.inputError}
-            formData={formData} 
-            inputName={matchingQuestion.componentDetails.inputName} />
-        </div>
+        {matchingQuestion.followUpQuestions && formData[componentProperties.value] === 'other' && renderFollowUpQuestions()}
+        {createPreviousAndContinueButtons(matchingQuestion)}
       </div>
     );
   }
