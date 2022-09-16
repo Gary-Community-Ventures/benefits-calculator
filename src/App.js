@@ -34,7 +34,7 @@ const App = () => {
     expenses: [],
     householdSize: '',
     householdData: [],
-    householdAssets: 0,
+    householdAssets: '',
     lastTaxFilingYear: '',
     email: '',
     benefits: {
