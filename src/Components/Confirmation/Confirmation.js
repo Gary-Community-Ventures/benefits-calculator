@@ -254,6 +254,7 @@ const Confirmation = ({ formData }) => {
           id='confirmation.displayAllFormData-peopleLabel' 
           defaultMessage='people' /> 
     ;
+
     return (
       <article className='confirmation-label'>
         <b>
@@ -271,7 +272,7 @@ const Confirmation = ({ formData }) => {
     );
   }
 
-  const displayHouseholdResourcesSection = () => {
+  const displayHouseholdAssetsSection = () => {
     return (
       <>
         <article className='confirmation-label'>
@@ -295,6 +296,24 @@ const Confirmation = ({ formData }) => {
       </>
     );
   }
+
+  const displayLastTaxFilingYearSection = () => {
+    return (
+      <article className='confirmation-label'>
+        <b> 
+          <FormattedMessage 
+            id='confirmation.displayAllFormData-lastTaxFilingYear' 
+            defaultMessage='Last Tax Filing Year: ' />
+        </b>
+        {taxYearOptions[lastTaxFilingYear]}
+        <Link to='/step-16' className='edit-link'>
+          <FormattedMessage 
+            id='confirmation.editLinkText' 
+            defaultMessage='Edit' />
+        </Link>
+      </article>
+    );
+  }
   
   const displayAllFormData = () => {
     return (
@@ -302,21 +321,9 @@ const Confirmation = ({ formData }) => {
         { displayHouseholdSizeSection() }
         { displayAllHouseholdData() }
         <p className='confirmation-section-underline'></p>
-        { displayHouseholdResourcesSection() }
+        { displayHouseholdAssetsSection() }
         <p className='confirmation-section-underline'></p>
-        <p className='confirmation-label'>
-          <b> 
-            <FormattedMessage 
-              id='confirmation.displayAllFormData-lastTaxFilingYear' 
-              defaultMessage='Last Tax Filing Year: ' />
-          </b>
-          {taxYearOptions[lastTaxFilingYear]}
-          <Link to='/step-16' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
-              defaultMessage='Edit' />
-          </Link>
-        </p>
+        { displayLastTaxFilingYearSection() }
         <p className='confirmation-section-underline'></p>
         <p className='confirmation-label'>
           <b> 
