@@ -54,7 +54,8 @@ const App = () => {
       chp: false,
       ccb: false
     },
-    referralSource: ''
+    referralSource: '',
+    otherSource: ''
   });
 
   // const [formData, setFormData] = useState({
@@ -128,7 +129,9 @@ const App = () => {
   //     mydenver: false,
   //     chp: false,
   //     ccb: false
-  //   }
+  //   },
+  //   referralSource: '',
+  //   otherSource: ''
   // });
  
   const [results, setResults] = useState({
