@@ -4,15 +4,15 @@ const benefitOptions = {
   tanf: 
     <FormattedMessage 
       id='benefitOptions.tanf' 
-      defaultMessage='Temporary Assistance for Needy Families - also known as Colorado Works or TANF' />,
+      defaultMessage='Temporary Assistance for Needy Families (TANF/Colorado Works)' />,
   wic: 
     <FormattedMessage 
       id='benefitOptions.wic' 
-      defaultMessage='Special Supplemental Nutrition Program for Women, Infants, and Children - also known as Colorado WIC' />,
+      defaultMessage='Special Supplemental Nutrition Program for Women, Infants, and Children (WIC)' />,
   snap: 
     <FormattedMessage 
       id='benefitOptions.snap' 
-      defaultMessage='Supplemental Nutrition Assistance Program - also known as the Food Assistance Program or SNAP' />,
+      defaultMessage='Supplemental Nutrition Assistance Program (Food Assistance Program/SNAP)' />,
   lifeline: 
     <FormattedMessage 
       id='benefitOptions.lifeline' 
