@@ -333,7 +333,7 @@ const Confirmation = ({ formData }) => {
     );
   }
 
-  const displayReferralSource = () => {
+  const displayReferralSourceSection = () => {
     const { referralSource, otherSource } = formData;
     const referralSourceLabel = referralOptions[referralSource];
     const finalReferralSource = (referralSource !== 'other') ? referralSourceLabel : otherSource;
@@ -365,7 +365,7 @@ const Confirmation = ({ formData }) => {
         <p className='confirmation-section-underline'></p>
         { displayLastTaxFilingYearSection() }
         <p className='confirmation-section-underline'></p>
-        { displayReferralSource() }
+        { displayReferralSourceSection() }
         <p className='confirmation-section-underline'></p>
         { displayZipcodeSection() }
       </>
