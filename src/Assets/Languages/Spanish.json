@@ -288,7 +288,7 @@
   "loading.return-loadingText": "Espere mientras reunimos sus resultados...",
   "results.displaySubheader-loadingDisclaimerText": "Recuerde que no podemos garantizar elegibilidad, pero según la información que nos proporcionó, creemos que posiblemente sea elegible para los siguientes programas.",
   "taxYearOptions.noRecentFiling": "No he presentado impuestos en los últimos 5 años",
-  "benefitOptions.tanf": "Asistencia Temporal para Familias Necesitadas (TANF) (Colorado Works)",
+  "benefitOptions.tanf": "Asistencia Temporal para Familias Necesitadas (TANF/Colorado Works)",
   "benefitOptions.wic": "Mujeres, Lactantes y Niños de Colorado (WIC)",
   "benefitOptions.snap": "Programa de Asistencia Nutricional Suplementaria (SNAP)",
   "benefitOptions.lifeline": "Lifeline Phone/Internet Service",
