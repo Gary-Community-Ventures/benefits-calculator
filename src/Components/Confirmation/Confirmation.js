@@ -314,6 +314,24 @@ const Confirmation = ({ formData }) => {
       </article>
     );
   }
+
+  const displayZipcodeSection = () => {
+    return (
+      <article className='confirmation-label'>
+        <b> 
+          <FormattedMessage 
+            id='confirmation.displayAllFormData-zipcodeText' 
+            defaultMessage='Your zipcode: ' /> 
+        </b>
+        { zipcode }
+        <Link to='/step-3' className='edit-link'>
+          <FormattedMessage 
+            id='confirmation.editLinkText' 
+            defaultMessage='Edit' />
+        </Link>
+      </article>
+    );
+  }
   
   const displayAllFormData = () => {
     return (
@@ -325,19 +343,7 @@ const Confirmation = ({ formData }) => {
         <p className='confirmation-section-underline'></p>
         { displayLastTaxFilingYearSection() }
         <p className='confirmation-section-underline'></p>
-        <p className='confirmation-label'>
-          <b> 
-            <FormattedMessage 
-              id='confirmation.displayAllFormData-zipcodeText' 
-              defaultMessage='Your zipcode: ' /> 
-          </b>
-          { zipcode }
-          <Link to='/step-3' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
-              defaultMessage='Edit' />
-          </Link>
-        </p>
+        { displayZipcodeSection() }
       </>
     );
   }
