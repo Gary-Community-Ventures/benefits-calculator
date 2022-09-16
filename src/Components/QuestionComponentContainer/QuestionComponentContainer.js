@@ -174,6 +174,17 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
             handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
             formData={formData} />
         </div>
+      } else if (followUp.componentDetails.componentType === 'Textfield') {
+        return (
+          <div className='question-container' key={index}>
+            <p className='question-label'>{followUp.question}</p>
+            <Textfield 
+              componentDetails={matchingQuestion.followUpQuestions[0].componentDetails}
+              formData={formData}
+              handleTextfieldChange={handleTextfieldChange}
+              index='0' />
+          </div>
+        );
       }
     });
   }
