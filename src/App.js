@@ -170,6 +170,8 @@ const App = () => {
 
     if (numberUpToEightDigitsLongRegex.test(value)) {
       setFormData({ ...formData, [name]: Number(value) });
+    } else if (name === 'otherSource') {
+      setFormData({ ...formData, [name]: value });
     }
   }
 
