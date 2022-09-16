@@ -242,8 +242,8 @@ const Confirmation = ({ formData }) => {
 
     return householdMemberAges;
   }
-  
-  const displayAllFormData = () => {
+
+  const displayHouseholdSizeSection = () => {
     const householdSizeDescriptor = 
       householdSize === 1 ? 
         <FormattedMessage 
@@ -253,51 +253,50 @@ const Confirmation = ({ formData }) => {
         <FormattedMessage 
           id='confirmation.displayAllFormData-peopleLabel' 
           defaultMessage='people' /> 
-    ;
+      ;
+    return (
+      <article className='confirmation-label'>
+        <b>
+          <FormattedMessage 
+            id='confirmation.displayAllFormData-yourHouseholdLabel' 
+            defaultMessage='Your household: ' />
+        </b>
+        { householdSize } { householdSizeDescriptor }
+        <Link to='/step-13' className='edit-link'>
+          <FormattedMessage 
+            id='confirmation.editLinkText' 
+            defaultMessage='Edit' />
+        </Link>
+      </article>
+    );
+  }
 
-    const displayHouseholdSizeSection = () => {
-      return (
+  const displayHouseholdResourcesSection = () => {
+    return (
+      <>
         <article className='confirmation-label'>
-          <b>
+          <b> 
             <FormattedMessage 
-              id='confirmation.displayAllFormData-yourHouseholdLabel' 
-              defaultMessage='Your household: ' />
+              id='confirmation.displayAllFormData-householdResourcesText' 
+              defaultMessage='Household resources: ' />
           </b>
-          { householdSize } { householdSizeDescriptor }
-          <Link to='/step-13' className='edit-link'>
+          ${ Number(householdAssets).toLocaleString(2) }
+          <Link to='/step-15' className='edit-link'>
             <FormattedMessage 
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
           </Link>
         </article>
-      );
-    }
-
-    const displayHouseholdResourcesSection = () => {
-      return (
-        <>
-          <article className='confirmation-label'>
-            <b> 
-              <FormattedMessage 
-                id='confirmation.displayAllFormData-householdResourcesText' 
-                defaultMessage='Household resources: ' />
-            </b>
-            ${ Number(householdAssets).toLocaleString(2) }
-            <Link to='/step-15' className='edit-link'>
-              <FormattedMessage 
-                id='confirmation.editLinkText' 
-                defaultMessage='Edit' />
-            </Link>
-          </article>
-          <p className='confirmation-label-description'>
-            <FormattedMessage 
-              id='confirmation.displayAllFormData-householdResourcesDescription' 
-              defaultMessage='This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.' />
-          </p>
-        </>
-      );
-    }
-
+        <p className='confirmation-label-description'>
+          <FormattedMessage 
+            id='confirmation.displayAllFormData-householdResourcesDescription' 
+            defaultMessage='This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.' />
+        </p>
+      </>
+    );
+  }
+  
+  const displayAllFormData = () => {
     return (
       <>
         { displayHouseholdSizeSection() }
