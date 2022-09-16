@@ -258,6 +258,16 @@ const referralSourceHasError = (referralSource) => {
   return referralSource === '';
 }
 
+const displayReferralSourceHelperText = (source) => {
+  if (referralSourceHasError(source)) {
+    return (
+        <FormattedMessage 
+          id='validation-helperText.referralSource' 
+          defaultMessage='Please type in your source.' />
+    );
+  }
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -283,5 +293,6 @@ export {
   lastTaxFilingYearHasError,
   displayMissingTaxFilingYear,
   benefitsHasError,
-  referralSourceHasError
+  referralSourceHasError,
+  displayReferralSourceHelperText
 }
