@@ -11,7 +11,8 @@ import {
   lastTaxFilingYearHasError,
   displayMissingTaxFilingYear,
   benefitsHasError,
-  referralSourceHasError
+  referralSourceHasError,
+  displayReferralSourceHelperText
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import { FormattedMessage } from 'react-intl';
@@ -344,7 +345,25 @@ const questions = [
       componentType: 'BasicSelect',
       inputName: 'referralSource',
       inputError: referralSourceHasError
-    }
+    },
+    followUpQuestions: [{
+      question: 
+        <FormattedMessage
+          id='questions.id-17a'
+          defaultMessage='If other, please specify:' />,
+      componentDetails: {
+        componentType: 'Textfield',
+        inputType: 'text',
+        inputName: 'otherSource',
+        inputLabel: 
+          <FormattedMessage 
+            id='questions.id-17a-inputLabel' 
+            defaultMessage='Other referral source' />,
+        inputError: referralSourceHasError,
+        inputHelperText: displayReferralSourceHelperText
+      }
+    }]
+
   }
 ];
 
