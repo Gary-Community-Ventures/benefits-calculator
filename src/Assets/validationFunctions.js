@@ -112,7 +112,7 @@ const displayHouseholdSizeHelperText = (sizeOfHousehold) => {
 }
 
 const householdAssetsHasError = (householdAssets) => {
-  return householdAssets < 0;
+  return householdAssets < 0 || householdAssets === '';
 }
 
 const displayHouseholdAssetsHelperText = (householdAssets) => {
@@ -254,6 +254,20 @@ const benefitsHasError = (benefits) => {
   return false;
 }
 
+const referralSourceHasError = (referralSource) => {
+  return referralSource === '';
+}
+
+const displayReferralSourceHelperText = (source) => {
+  if (referralSourceHasError(source)) {
+    return (
+        <FormattedMessage 
+          id='validation-helperText.referralSource' 
+          defaultMessage='Please type in your source.' />
+    );
+  }
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -278,5 +292,7 @@ export {
   displayEmailHelperText,
   lastTaxFilingYearHasError,
   displayMissingTaxFilingYear,
-  benefitsHasError
+  benefitsHasError,
+  referralSourceHasError,
+  displayReferralSourceHelperText
 }

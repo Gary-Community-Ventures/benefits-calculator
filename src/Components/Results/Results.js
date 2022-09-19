@@ -73,7 +73,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const getScreensBody = (formData) => {
-    const { agreeToTermsOfService, zipcode, householdSize, householdAssets, startTime, isTest, externalID, lastTaxFilingYear, benefits } = formData;
+    const { agreeToTermsOfService, zipcode, householdSize, householdAssets, startTime, isTest, externalID, lastTaxFilingYear, benefits, referralSource, otherSource } = formData;
+    const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
+
     return {
       is_test: isTest,
       external_id: externalID,
@@ -97,7 +99,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       has_rtdlive: benefits.rtdlive,
       has_snap: benefits.snap,
       has_tanf: benefits.tanf,
-      has_wic: benefits.wic
+      has_wic: benefits.wic,
+      referral_source: finalReferralSource
     };
   };
 

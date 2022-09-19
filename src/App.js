@@ -34,7 +34,7 @@ const App = () => {
     expenses: [],
     householdSize: '',
     householdData: [],
-    householdAssets: 0,
+    householdAssets: '',
     lastTaxFilingYear: '',
     email: '',
     benefits: {
@@ -53,7 +53,9 @@ const App = () => {
       mydenver: false,
       chp: false,
       ccb: false
-    }
+    },
+    referralSource: '',
+    otherSource: ''
   });
 
   // const [formData, setFormData] = useState({
@@ -127,7 +129,9 @@ const App = () => {
   //     mydenver: false,
   //     chp: false,
   //     ccb: false
-  //   }
+  //   },
+  //   referralSource: '',
+  //   otherSource: ''
   // });
  
   const [results, setResults] = useState({
@@ -139,6 +143,7 @@ const App = () => {
 
   useEffect(() => {
     const updatedFormData = { ...formData };
+    const referralSourceIsNotOther = !(formData.referralSource === 'other');
 
     if (formData.student === false) {
       updatedFormData.studentFulltime = false;
@@ -148,17 +153,21 @@ const App = () => {
       updatedFormData.unemployedWorkedInLast18Mos = false;
     }
 
-    if(formData.hasIncome === false) {
+    if (formData.hasIncome === false) {
       updatedFormData.incomeStreams = [];
     }
 
-    if(formData.hasExpenses === false) {
+    if (formData.hasExpenses === false) {
       updatedFormData.expenses = [];
+    }
+
+    if (referralSourceIsNotOther) {
+      updatedFormData.otherSource = '';
     }
 
     setFormData(updatedFormData);
     
-  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses]);
+  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses, formData.referralSource]);
 
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
@@ -166,6 +175,8 @@ const App = () => {
 
     if (numberUpToEightDigitsLongRegex.test(value)) {
       setFormData({ ...formData, [name]: Number(value) });
+    } else if (name === 'otherSource') {
+      setFormData({ ...formData, [name]: value });
     }
   }
 
@@ -187,7 +198,7 @@ const App = () => {
     if (!validateInputFunction(inputToBeValidated)) {
       if (stepId === 13 && householdSize === 1) { //if you're on the householdSize q and the value is 1
         navigate(`/step-${stepId + 2}`); //skip question 16 and go to 17
-      } else if (stepId === 16) {
+      } else if (stepId === 17) {
         navigate('/confirm-information');
       } else { //you've indicated that you're householdSize is larger than 1
         navigate(`/step-${stepId + 1}`);

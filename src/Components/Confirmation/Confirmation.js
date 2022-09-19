@@ -3,14 +3,15 @@ import { Button } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import taxYearOptions from '../../Assets/taxYearOptions';
+import referralOptions from '../../Assets/referralOptions';
 import questions from '../../Assets/questions';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
   const navigate = useNavigate();
-  const { zipcode, householdSize, householdData, householdAssets, lastTaxFilingYear } = formData;
   
   const displayAllHouseholdData = () => {
+    const { householdSize } = formData;
     if (householdSize > 1) {
       return displayAllMembersDataBlock();
     } else {
@@ -19,6 +20,7 @@ const Confirmation = ({ formData }) => {
   }
 
   const displayAllMembersDataBlock = () => {
+    const { householdData } = formData;
     const allHouseholdRelations = getAllHouseholdRelations();
     const allHouseholdAges = getAllHouseholdAges();
     const colors = ['🟢', '🟡', '🟣', '🟠', '🟤', '⚫️', '🔴'];
@@ -228,6 +230,7 @@ const Confirmation = ({ formData }) => {
   }
 
   const getAllHouseholdRelations = () => {
+    const { householdData } = formData;
     const householdMembers = householdData.map(personData => {      
       return relationshipOptions[personData.relationshipToHH];
     });
@@ -236,14 +239,16 @@ const Confirmation = ({ formData }) => {
   }
 
   const getAllHouseholdAges = () => {    
+    const { householdData } = formData;
     const householdMemberAges = householdData.map(personData => {
       return Number(personData.age);
     });
 
     return householdMemberAges;
   }
-  
-  const displayAllFormData = () => {
+
+  const displayHouseholdSizeSection = () => {
+    const { householdSize } = formData;
     const householdSizeDescriptor = 
       householdSize === 1 ? 
         <FormattedMessage 
@@ -256,23 +261,27 @@ const Confirmation = ({ formData }) => {
     ;
 
     return (
+      <article className='confirmation-label'>
+        <b>
+          <FormattedMessage 
+            id='confirmation.displayAllFormData-yourHouseholdLabel' 
+            defaultMessage='Your household: ' />
+        </b>
+        { householdSize } { householdSizeDescriptor }
+        <Link to='/step-13' className='edit-link'>
+          <FormattedMessage 
+            id='confirmation.editLinkText' 
+            defaultMessage='Edit' />
+        </Link>
+      </article>
+    );
+  }
+
+  const displayHouseholdAssetsSection = () => {
+    const { householdAssets } = formData;
+    return (
       <>
-        <p className='confirmation-label'>
-          <b>
-            <FormattedMessage 
-              id='confirmation.displayAllFormData-yourHouseholdLabel' 
-              defaultMessage='Your household: ' />
-          </b>
-          { householdSize } { householdSizeDescriptor }
-          <Link to='/step-13' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
-              defaultMessage='Edit' />
-          </Link>
-        </p>
-        { displayAllHouseholdData() }
-        <p className='confirmation-section-underline'></p>
-        <p className='confirmation-label'>
+        <article className='confirmation-label'>
           <b> 
             <FormattedMessage 
               id='confirmation.displayAllFormData-householdResourcesText' 
@@ -284,40 +293,89 @@ const Confirmation = ({ formData }) => {
               id='confirmation.editLinkText' 
               defaultMessage='Edit' />
           </Link>
-        </p>
+        </article>
         <p className='confirmation-label-description'>
           <FormattedMessage 
             id='confirmation.displayAllFormData-householdResourcesDescription' 
             defaultMessage='This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.' />
         </p>
+      </>
+    );
+  }
+
+  const displayLastTaxFilingYearSection = () => {
+    const { lastTaxFilingYear } = formData;
+    return (
+      <article className='confirmation-label'>
+        <b> 
+          <FormattedMessage 
+            id='confirmation.displayAllFormData-lastTaxFilingYear' 
+            defaultMessage='Last Tax Filing Year: ' />
+        </b>
+        {taxYearOptions[lastTaxFilingYear]}
+        <Link to='/step-16' className='edit-link'>
+          <FormattedMessage 
+            id='confirmation.editLinkText' 
+            defaultMessage='Edit' />
+        </Link>
+      </article>
+    );
+  }
+
+  const displayZipcodeSection = () => {
+    const { zipcode } = formData;
+    return (
+      <article className='confirmation-label'>
+        <b> 
+          <FormattedMessage 
+            id='confirmation.displayAllFormData-zipcodeText' 
+            defaultMessage='Your zipcode: ' /> 
+        </b>
+        { zipcode }
+        <Link to='/step-3' className='edit-link'>
+          <FormattedMessage 
+            id='confirmation.editLinkText' 
+            defaultMessage='Edit' />
+        </Link>
+      </article>
+    );
+  }
+
+  const displayReferralSourceSection = () => {
+    const { referralSource, otherSource } = formData;
+    const referralSourceLabel = referralOptions[referralSource];
+    const finalReferralSource = (referralSource !== 'other') ? referralSourceLabel : otherSource;
+   
+    return (
+      <article className='confirmation-label'>
+        <b> 
+          <FormattedMessage 
+            id='confirmation.displayAllFormData-referralSourceText' 
+            defaultMessage='Referral Source: ' /> 
+        </b>
+        { finalReferralSource }
+        <Link to='/step-17' className='edit-link'>
+          <FormattedMessage 
+            id='confirmation.editLinkText' 
+            defaultMessage='Edit' />
+        </Link>
+      </article>
+    );
+  }
+  
+  const displayAllFormData = () => {
+    return (
+      <>
+        { displayHouseholdSizeSection() }
+        { displayAllHouseholdData() }
         <p className='confirmation-section-underline'></p>
-        <p className='confirmation-label'>
-          <b> 
-            <FormattedMessage 
-              id='confirmation.displayAllFormData-lastTaxFilingYear' 
-              defaultMessage='Last Tax Filing Year: ' />
-          </b>
-          {taxYearOptions[lastTaxFilingYear]}
-          <Link to='/step-16' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
-              defaultMessage='Edit' />
-          </Link>
-        </p>
+        { displayHouseholdAssetsSection() }
         <p className='confirmation-section-underline'></p>
-        <p className='confirmation-label'>
-          <b> 
-            <FormattedMessage 
-              id='confirmation.displayAllFormData-zipcodeText' 
-              defaultMessage='Your zipcode: ' /> 
-          </b>
-          { zipcode }
-          <Link to='/step-3' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
-              defaultMessage='Edit' />
-          </Link>
-        </p>
+        { displayLastTaxFilingYearSection() }
+        <p className='confirmation-section-underline'></p>
+        { displayReferralSourceSection() }
+        <p className='confirmation-section-underline'></p>
+        { displayZipcodeSection() }
       </>
     );
   }

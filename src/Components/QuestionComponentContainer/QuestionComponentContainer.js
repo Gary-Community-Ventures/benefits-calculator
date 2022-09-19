@@ -11,6 +11,7 @@ import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import questions from '../../Assets/questions';
 import taxYearOptions from '../../Assets/taxYearOptions';
+import referralOptions from '../../Assets/referralOptions';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData }) => {
@@ -30,7 +31,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   }
 
   const createTaxDropdownMenu = () => {
-    const TaxComponentProperties = {
+    const taxComponentProperties = {
       labelId: 'tax-year-select-label',
       inputLabelText: 
         <FormattedMessage
@@ -46,28 +47,50 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
         />,
       disabledSelectMenuItemText: 
         <FormattedMessage
-          id='qcc.disabledSelectMenuItemText'
+          id='qcc.createTaxDropdownMenu-disabledSelectMenuItemText'
           defaultMessage='Select a Tax Year' />
     };
 
+    return createBasicSelectMenu(taxComponentProperties, taxYearOptions);
+  }
+
+  const createReferralDropdownMenu = () => {
+    const referralComponentProperties = {
+      labelId: 'referral-source-select-label',
+      inputLabelText: 
+        <FormattedMessage
+          id='qcc.createReferralDropdownMenu-label'
+          defaultMessage='Referral Source'
+        />,
+      id:'referral-source-select',
+      value: 'referralSource',
+      label: 
+        <FormattedMessage
+          id='qcc.createReferralDropdownMenu-label'
+          defaultMessage='Referral Source'
+        />,
+      disabledSelectMenuItemText: 
+        <FormattedMessage
+          id='qcc.createReferralDropdownMenu-disabledSelectMenuItemText'
+          defaultMessage='Select a source' />
+    };
+
+    return createBasicSelectMenu(referralComponentProperties, referralOptions);
+  }
+
+  const createBasicSelectMenu = (componentProperties, options) => {
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
           <BasicSelect
-            componentProperties={TaxComponentProperties}
+            componentProperties={componentProperties}
             setFormData={setFormData}
             formData={formData} 
-            options={taxYearOptions} 
-            formDataProperty='lastTaxFilingYear' />
-        <div className='question-buttons'>
-          <PreviousButton formData={formData} />
-          <ContinueButton 
-            handleSubmit={handleSubmit} 
-            inputError={matchingQuestion.componentDetails.inputError}
-            formData={formData} 
-            inputName={matchingQuestion.componentDetails.inputName} />
-        </div>
+            options={options} 
+            formDataProperty={componentProperties.value} />
+        {matchingQuestion.followUpQuestions && formData[componentProperties.value] === 'other' && renderFollowUpQuestions()}
+        {createPreviousAndContinueButtons(matchingQuestion)}
       </div>
     );
   }
@@ -151,6 +174,17 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
             handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
             formData={formData} />
         </div>
+      } else if (followUp.componentDetails.componentType === 'Textfield') {
+        return (
+          <div className='question-container' key={index}>
+            <p className='question-label'>{followUp.question}</p>
+            <Textfield 
+              componentDetails={matchingQuestion.followUpQuestions[0].componentDetails}
+              formData={formData}
+              handleTextfieldChange={handleTextfieldChange}
+              index='0' />
+          </div>
+        );
       }
     });
   }
@@ -214,8 +248,9 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
         ( matchingQuestion.componentDetails.componentType === 'Textfield' && createTextfieldComponent() ) ||
         ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createRadiofieldComponent() ) ||
         ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() ) ||
-        ( matchingQuestion.componentDetails.componentType === 'BasicSelect' && createTaxDropdownMenu() ) ||
-        ( matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' && createBasicCheckboxGroup() )
+        ( matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' && createBasicCheckboxGroup() ) ||
+        ( matchingQuestion.componentDetails.inputName === 'lastTaxFilingYear' && createTaxDropdownMenu() ) ||
+        ( matchingQuestion.componentDetails.inputName === 'referralSource' && createReferralDropdownMenu() )
       }
     </main>
   );

@@ -10,7 +10,9 @@ import {
   displayHouseholdAssetsHelperText,
   lastTaxFilingYearHasError,
   displayMissingTaxFilingYear,
-  benefitsHasError
+  benefitsHasError,
+  referralSourceHasError,
+  displayReferralSourceHelperText
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import { FormattedMessage } from 'react-intl';
@@ -330,8 +332,38 @@ const questions = [
     componentDetails: {
       componentType: 'BasicSelect',
       inputName: 'lastTaxFilingYear',
-      inputError: lastTaxFilingYearHasError,
+      inputError: lastTaxFilingYearHasError
     }
+  },
+  {
+    id: 17,
+    question:
+      <FormattedMessage
+        id='questions.id-17'
+        defaultMessage='How did you hear about this screener?' />,
+    componentDetails: {
+      componentType: 'BasicSelect',
+      inputName: 'referralSource',
+      inputError: referralSourceHasError
+    },
+    followUpQuestions: [{
+      question: 
+        <FormattedMessage
+          id='questions.id-17a'
+          defaultMessage='If other, please specify:' />,
+      componentDetails: {
+        componentType: 'Textfield',
+        inputType: 'text',
+        inputName: 'otherSource',
+        inputLabel: 
+          <FormattedMessage 
+            id='questions.id-17a-inputLabel' 
+            defaultMessage='Other referral source' />,
+        inputError: referralSourceHasError,
+        inputHelperText: displayReferralSourceHelperText
+      }
+    }]
+
   }
 ];
 
