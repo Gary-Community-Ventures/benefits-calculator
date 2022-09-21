@@ -407,7 +407,27 @@ const questions = [
     componentDetails: {
       componentType: 'BasicSelect',
       inputName: 'referralSource',
-      inputError: referralSourceHasError
+      inputError: referralSourceHasError,
+      componentProperties: {
+        labelId: 'referral-source-select-label',
+        inputLabelText: 
+          <FormattedMessage
+            id='qcc.createReferralDropdownMenu-label'
+            defaultMessage='Referral Source'
+          />,
+        id:'referral-source-select',
+        value: 'referralSource',
+        label: 
+          <FormattedMessage
+            id='qcc.createReferralDropdownMenu-label'
+            defaultMessage='Referral Source'
+          />,
+        disabledSelectMenuItemText: 
+          <FormattedMessage
+            id='qcc.createReferralDropdownMenu-disabledSelectMenuItemText'
+            defaultMessage='Select a source' />
+      },
+      options: referralOptions
     },
     followUpQuestions: [{
       question: 
