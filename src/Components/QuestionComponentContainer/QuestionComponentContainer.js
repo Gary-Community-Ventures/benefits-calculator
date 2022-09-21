@@ -78,20 +78,16 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     return createBasicSelectMenu(referralComponentProperties, referralOptions);
   }
 
-  const createBasicSelectMenu = (componentProperties, options) => {
+  const renderBasicSelectComponent = () => {
     return (
-      <div className='question-container' id={matchingQuestion.id}>
-        <p className='question-label'>{matchingQuestion.question}</p>
-        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
-          <BasicSelect
-            componentProperties={componentProperties}
-            setFormData={setFormData}
+      <BasicSelect
+        componentProperties={matchingQuestion.componentDetails.componentProperties}
+        setFormData={setFormData}
+        formData={formData} 
             formData={formData} 
-            options={options} 
-            formDataProperty={componentProperties.value} />
-        {matchingQuestion.followUpQuestions && formData[componentProperties.value] === 'other' && renderFollowUpQuestions()}
-        {createPreviousAndContinueButtons(matchingQuestion)}
-      </div>
+        formData={formData} 
+        options={matchingQuestion.componentDetails.options} 
+        formDataProperty={matchingQuestion.componentDetails.inputName} />
     );
   }
 
