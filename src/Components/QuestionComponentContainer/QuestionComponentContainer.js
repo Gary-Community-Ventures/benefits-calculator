@@ -231,9 +231,9 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
         ( matchingQuestion.componentDetails.componentType === 'Textfield' && createComponent(renderTextfieldComponent()) ) ||
         ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createComponent(renderRadiofieldComponent()) ) ||
         ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() ) ||
-        ( matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' && createBasicCheckboxGroup() ) ||
-        ( matchingQuestion.componentDetails.inputName === 'lastTaxFilingYear' && createTaxDropdownMenu() ) ||
-        ( matchingQuestion.componentDetails.inputName === 'referralSource' && createReferralDropdownMenu() )
+        ( matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' && createComponent(renderBasicCheckboxGroup()) ) ||
+        ( matchingQuestion.componentDetails.inputName === 'lastTaxFilingYear' && createComponent(renderBasicSelectComponent()) ) ||
+        ( matchingQuestion.componentDetails.inputName === 'referralSource' && createComponent(renderBasicSelectComponent()) )
       }
     </main>
   );
