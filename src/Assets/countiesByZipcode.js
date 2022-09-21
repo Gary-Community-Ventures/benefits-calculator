@@ -965,3 +965,5 @@ const countiesByZipcode = {
   '81657': [ 'Eagle County', 'Summit County' ],
   '82063': [ 'Jackson County', 'Larimer County' ]
 }
+
+export default countiesByZipcode;
