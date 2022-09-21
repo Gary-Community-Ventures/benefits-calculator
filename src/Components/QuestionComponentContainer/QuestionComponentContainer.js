@@ -46,11 +46,11 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     ); 
   }
 
-  const renderBasicCheckboxGroup = () => {
+  const renderBasicCheckboxGroup = (question) => {
     return (
       <BasicCheckboxGroup
-        stateVariable={matchingQuestion.componentDetails.inputName}
-        options={matchingQuestion.componentDetails.options}
+        stateVariable={question.componentDetails.inputName}
+        options={question.componentDetails.options}
         state={formData}
         setState={setFormData} />
     );
