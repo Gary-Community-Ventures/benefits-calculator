@@ -37,10 +37,10 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     );
   }
 
-  const renderRadiofieldComponent = () => {
+  const renderRadiofieldComponent = (question) => {
     return (      
       <Radiofield
-        componentDetails={matchingQuestion.componentDetails}
+        componentDetails={question.componentDetails}
         formData={formData}
         handleRadioButtonChange={handleRadioButtonChange} />
     ); 
