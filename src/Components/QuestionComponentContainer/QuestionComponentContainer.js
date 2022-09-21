@@ -106,21 +106,12 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     );
   }
 
-  const createRadiofieldComponent = () => {
-    const inputName = matchingQuestion.componentDetails.inputName;
-    const { followUpQuestions } = matchingQuestion;
-    const hasFollowUpQuestions = followUpQuestions && followUpQuestions.length > 0;
-    return (
-      <div className='question-container' id={matchingQuestion.id}>
-        <p className='question-label'>{matchingQuestion.question}</p>
-        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
-        <Radiofield
-          componentDetails={matchingQuestion.componentDetails}
-          formData={formData}
-          handleRadioButtonChange={handleRadioButtonChange} />
-        {formData[inputName] === true && hasFollowUpQuestions && renderFollowUpQuestions()}
-        {createPreviousAndContinueButtons(matchingQuestion)}
-      </div>
+  const renderRadiofieldComponent = () => {
+    return (      
+      <Radiofield
+        componentDetails={matchingQuestion.componentDetails}
+        formData={formData}
+        handleRadioButtonChange={handleRadioButtonChange} />
     ); 
   }
 
