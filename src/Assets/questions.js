@@ -16,6 +16,9 @@ import {
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import { FormattedMessage } from 'react-intl';
+import taxYearOptions from './taxYearOptions';
+import referralOptions from './referralOptions';
+import countiesByZipcode from './countiesByZipcode';
 
 const questions = [
   {
