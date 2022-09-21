@@ -206,6 +206,20 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
       );
     }
   };
+
+  return (
+    <main className='benefits-form'>
+      <p className='step-progress-title'>
+        <FormattedMessage 
+          id='qcc.step-text'
+          defaultMessage='Step ' /> 
+        {id}
+        <FormattedMessage 
+          id='qcc.of-text'
+          defaultMessage=' of ' />
+        {questions.length + 2}
+      </p>
+      {renderHeaderAndSubheader()}
       {
         ( matchingQuestion.componentDetails.componentType === 'Textfield' && createComponent(renderTextfieldComponent(matchingQuestion)) ) ||
         ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createComponent(renderRadiofieldComponent(matchingQuestion)) ) ||
