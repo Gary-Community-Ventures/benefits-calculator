@@ -98,8 +98,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   const renderTextfieldComponent = () => {
     return (
       <Textfield 
-        <Textfield 
-      <Textfield 
         componentDetails={matchingQuestion.componentDetails}
         formData={formData}
         handleTextfieldChange={handleTextfieldChange} />
