@@ -89,6 +89,24 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     );
   }
 
+  const shouldRenderFollowUpQuestions = (hasFollowUpQuestions, inputName) => {
+    if (!hasFollowUpQuestions) {
+      return false;
+    }
+    if (inputName === 'zipcode') {
+      return !zipcodeHasError(formData.zipcode);
+    }
+    if (formData[inputName] === true) {
+      // this case is for a radio button question where the user selected "yes"
+      return true;
+    }
+    if (formData[inputName] === 'other') {
+      // this case is for the referral source question where the user selected "other"
+      return true;
+    }
+    return false;
+  };
+
   const renderFollowUpQuestions = () => {
     const { followUpQuestions } = matchingQuestion;
     return followUpQuestions.map((followUp, index) => {
