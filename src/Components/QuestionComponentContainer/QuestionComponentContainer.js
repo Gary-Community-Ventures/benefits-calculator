@@ -84,8 +84,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
         componentProperties={matchingQuestion.componentDetails.componentProperties}
         setFormData={setFormData}
         formData={formData} 
-            formData={formData} 
-        formData={formData} 
         options={matchingQuestion.componentDetails.options} 
         formDataProperty={matchingQuestion.componentDetails.inputName} />
     );
