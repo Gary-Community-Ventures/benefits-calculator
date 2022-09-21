@@ -76,7 +76,10 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
         <p className='question-label'>{matchingQuestion.question}</p>
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
         {component}
-        {formData[inputName] === true && hasFollowUpQuestions && renderFollowUpQuestions()}
+        {((formData[inputName] === true) || //if the main question is a truthy boolean value
+          (formData[inputName] === 'other') || //if the main question's input is other
+          (inputName === 'zipcode' && formData.zipcode.toString().length === 5)) //if the main question's input is zipcode and it's been entered
+          && hasFollowUpQuestions && renderFollowUpQuestions()}
         {createPreviousAndContinueButtons(matchingQuestion)}
       </div>
     );
