@@ -93,8 +93,6 @@ const questions = [
         },
         options: countiesByZipcode
       }
-    }    
-      }
     }]
   },
   {
@@ -446,7 +444,6 @@ const questions = [
         inputHelperText: displayReferralSourceHelperText
       }
     }]
-
   }
 ];
 
