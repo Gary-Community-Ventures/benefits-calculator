@@ -12,7 +12,8 @@ import {
   displayMissingTaxFilingYear,
   benefitsHasError,
   referralSourceHasError,
-  displayReferralSourceHelperText
+  displayReferralSourceHelperText,
+  displayMissingSelectHelperText
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import { FormattedMessage } from 'react-intl';
