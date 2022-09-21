@@ -56,7 +56,46 @@ const questions = [
           defaultMessage='Zip Code' />,
       inputError: zipcodeHasError,
       inputHelperText: displayZipcodeHelperText
+    },
+    followUpQuestions: [{
+      question: 
+        <FormattedMessage
+          id='questions.id-3a'
+          defaultMessage='Please select a county:' />,
+      componentDetails: {
+        componentType: 'BasicSelect',
+        inputType: 'text',
+        inputName: 'county',
+        inputLabel: 
+          <FormattedMessage 
+            id='questions.id-3a-inputLabel' 
+            defaultMessage='County' />,
+        inputError: referralSourceHasError,
+        inputHelperText: displayMissingSelectHelperText,
+        componentProperties: {
+          labelId: 'county-select-label',
+          inputLabelText: 
+            <FormattedMessage
+              id='qcc.createCountyDropdownMenu-label'
+              defaultMessage='County'
+            />,
+          id:'referral-source-select',
+          value: 'referralSource',
+          label: 
+            <FormattedMessage
+              id='qcc.createCountyDropdownMenu-label'
+              defaultMessage='County'
+            />,
+          disabledSelectMenuItemText: 
+            <FormattedMessage
+              id='qcc.createCountyDropdownMenu-disabledSelectMenuItemText'
+              defaultMessage='Select a county' />
+        },
+        options: countiesByZipcode
+      }
     }    
+      }
+    }]
   },
   {
     id: 4,
