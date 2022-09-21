@@ -76,19 +76,19 @@ const questions = [
           labelId: 'county-select-label',
           inputLabelText: 
             <FormattedMessage
-              id='qcc.createCountyDropdownMenu-label'
+              id='questions.id-3a-inputLabel'
               defaultMessage='County'
             />,
           id:'county-source-select',
           value: 'county',
           label: 
             <FormattedMessage
-              id='qcc.createCountyDropdownMenu-label'
+              id='questions.id-3a-inputLabel'
               defaultMessage='County'
             />,
           disabledSelectMenuItemText: 
             <FormattedMessage
-              id='qcc.createCountyDropdownMenu-disabledSelectMenuItemText'
+              id='questions.id-3a-disabledSelectMenuItemText'
               defaultMessage='Select a county' />
         },
         options: countiesByZipcode
