@@ -86,12 +86,9 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     const { followUpQuestions } = matchingQuestion;
     return followUpQuestions.map((followUp, index) => {
       if (followUp.componentDetails.componentType === 'Radiofield') {
-        return <div key={index}>
+        return <div className='question-container' key={index}>
           <p className='question-label'>{followUp.question}</p>
-          <Radiofield
-            componentDetails={followUp.componentDetails}
-            formData={formData}
-            handleRadioButtonChange={handleRadioButtonChange} />
+          {renderRadiofieldComponent(followUp)}
         </div>
       } else if (followUp.componentDetails.componentType === 'IncomeBlock') {
         return <div className='question-container' key={index}>
