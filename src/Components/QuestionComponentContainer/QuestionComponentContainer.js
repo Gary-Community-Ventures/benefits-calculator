@@ -245,8 +245,8 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
             defaultMessage=' Head of household' />
         </h4> }
       {
-        ( matchingQuestion.componentDetails.componentType === 'Textfield' && createTextfieldComponent() ) ||
-        ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createRadiofieldComponent() ) ||
+        ( matchingQuestion.componentDetails.componentType === 'Textfield' && createComponent(renderTextfieldComponent()) ) ||
+        ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createComponent(renderRadiofieldComponent()) ) ||
         ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() ) ||
         ( matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' && createBasicCheckboxGroup() ) ||
         ( matchingQuestion.componentDetails.inputName === 'lastTaxFilingYear' && createTaxDropdownMenu() ) ||
