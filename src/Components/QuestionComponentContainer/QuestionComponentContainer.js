@@ -10,8 +10,6 @@ import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import questions from '../../Assets/questions';
-import taxYearOptions from '../../Assets/taxYearOptions';
-import referralOptions from '../../Assets/referralOptions';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData }) => {
@@ -28,54 +26,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           handleHouseholdDataSubmit={handleHouseholdDataSubmit} />
       </div>
     );
-  }
-
-  const createTaxDropdownMenu = () => {
-    const taxComponentProperties = {
-      labelId: 'tax-year-select-label',
-      inputLabelText: 
-        <FormattedMessage
-          id='qcc.createTaxDropdownMenu-label'
-          defaultMessage='Tax year'
-        />,
-      id:'tax-year-select',
-      value: 'lastTaxFilingYear',
-      label: 
-        <FormattedMessage
-          id='qcc.createTaxDropdownMenu-label'
-          defaultMessage='Tax year'
-        />,
-      disabledSelectMenuItemText: 
-        <FormattedMessage
-          id='qcc.createTaxDropdownMenu-disabledSelectMenuItemText'
-          defaultMessage='Select a Tax Year' />
-    };
-
-    return createBasicSelectMenu(taxComponentProperties, taxYearOptions);
-  }
-
-  const createReferralDropdownMenu = () => {
-    const referralComponentProperties = {
-      labelId: 'referral-source-select-label',
-      inputLabelText: 
-        <FormattedMessage
-          id='qcc.createReferralDropdownMenu-label'
-          defaultMessage='Referral Source'
-        />,
-      id:'referral-source-select',
-      value: 'referralSource',
-      label: 
-        <FormattedMessage
-          id='qcc.createReferralDropdownMenu-label'
-          defaultMessage='Referral Source'
-        />,
-      disabledSelectMenuItemText: 
-        <FormattedMessage
-          id='qcc.createReferralDropdownMenu-disabledSelectMenuItemText'
-          defaultMessage='Select a source' />
-    };
-
-    return createBasicSelectMenu(referralComponentProperties, referralOptions);
   }
 
   const renderBasicSelectComponent = () => {
