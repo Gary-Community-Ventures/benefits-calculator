@@ -79,8 +79,8 @@ const questions = [
               id='qcc.createCountyDropdownMenu-label'
               defaultMessage='County'
             />,
-          id:'referral-source-select',
-          value: 'referralSource',
+          id:'county-source-select',
+          value: 'county',
           label: 
             <FormattedMessage
               id='qcc.createCountyDropdownMenu-label'
