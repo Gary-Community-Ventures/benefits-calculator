@@ -10,6 +10,7 @@ import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import questions from '../../Assets/questions';
+import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData }) => {
@@ -80,10 +81,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
         <p className='question-label'>{matchingQuestion.question}</p>
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
         {component}
-        {((formData[inputName] === true) || //if the main question is a truthy boolean value
-          (formData[inputName] === 'other') || //if the main question's input is other
-          (inputName === 'zipcode' && formData.zipcode.toString().length === 5)) //if the main question's input is zipcode and it's been entered
-          && hasFollowUpQuestions && renderFollowUpQuestions()}
+        {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && renderFollowUpQuestions()}
         {createPreviousAndContinueButtons(matchingQuestion)}
       </div>
     );
