@@ -169,41 +169,43 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     }
   }
 
-  return (
-    <main className='benefits-form'>
-      <p className='step-progress-title'>
-        <FormattedMessage 
-          id='qcc.step-text'
-          defaultMessage='Step ' /> 
-        {id}
-        <FormattedMessage 
-          id='qcc.of-text'
-          defaultMessage=' of ' />
-        {questions.length + 2}
-      </p>
-      { matchingQuestion.id !== 14 && 
+  const renderHeaderAndSubheader = () => {
+    if (matchingQuestion.id !== 14) {
+      return (
         <h2 className='sub-header'>
           <FormattedMessage
             id='qcc.tell-us-text'
             defaultMessage='Tell us a little more about yourself.' />
-        </h2> }
-      { matchingQuestion.id === 14 && 
-        <h2 className='household-data-sub-header'>
-          <FormattedMessage
-            id='qcc.so-far-text'
-            defaultMessage='So far you’ve told us about:' />
-        </h2> }
-      { matchingQuestion.id === 14 && 
+        </h2>
+      );
+    } else {
+      return (
+        <>
+          <h2 className='household-data-sub-header'>
+            <FormattedMessage
+              id='qcc.so-far-text'
+              defaultMessage='So far you’ve told us about:' />
+          </h2>
+          <h4 className='household-data-sub2-header'> 
         <h4 className='household-data-sub2-header'> 
+          <h4 className='household-data-sub2-header'> 
+            🔵 
           🔵 
-          <FormattedMessage
-            id='qcc.you-text'
-            defaultMessage=' You, ' />
+            🔵 
+            <FormattedMessage
+              id='qcc.you-text'
+              defaultMessage=' You, ' />
+            {formData.age} 
           {formData.age} 
-          <FormattedMessage
-            id='qcc.hoh-text'
-            defaultMessage=' Head of household' />
-        </h4> }
+            {formData.age} 
+            <FormattedMessage
+              id='qcc.hoh-text'
+              defaultMessage=' Head of household' />
+          </h4>
+        </>
+      );
+    }
+  };
       {
         ( matchingQuestion.componentDetails.componentType === 'Textfield' && createComponent(renderTextfieldComponent(matchingQuestion)) ) ||
         ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createComponent(renderRadiofieldComponent(matchingQuestion)) ) ||
