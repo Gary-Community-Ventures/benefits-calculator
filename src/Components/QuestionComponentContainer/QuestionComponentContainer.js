@@ -95,24 +95,14 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     );
   }
 
-  const createTextfieldComponent = () => {
+  const renderTextfieldComponent = () => {
     return (
-      <div className='question-container' id={matchingQuestion.id}>
-        <p className='question-label'>{matchingQuestion.question}</p>
-        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
+      <Textfield 
         <Textfield 
-          componentDetails={matchingQuestion.componentDetails}
-          formData={formData}
-          handleTextfieldChange={handleTextfieldChange} />
-        <div className='question-buttons'>
-          <PreviousButton formData={formData} />
-          <ContinueButton 
-            handleSubmit={handleSubmit} 
-            inputError={matchingQuestion.componentDetails.inputError}
-            formData={formData} 
-            inputName={matchingQuestion.componentDetails.inputName} />
-        </div>
-      </div>
+      <Textfield 
+        componentDetails={matchingQuestion.componentDetails}
+        formData={formData}
+        handleTextfieldChange={handleTextfieldChange} />
     );
   }
 
