@@ -28,21 +28,10 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     );
   }
 
-  const renderBasicSelectComponent = () => {
-    return (
-      <BasicSelect
-        componentProperties={matchingQuestion.componentDetails.componentProperties}
-        setFormData={setFormData}
-        formData={formData} 
-        options={matchingQuestion.componentDetails.options} 
-        formDataProperty={matchingQuestion.componentDetails.inputName} />
-    );
-  }
-
-  const renderTextfieldComponent = () => {
+  const renderTextfieldComponent = (question) => {
     return (
       <Textfield 
-        componentDetails={matchingQuestion.componentDetails}
+        componentDetails={question.componentDetails}
         formData={formData}
         handleTextfieldChange={handleTextfieldChange} />
     );
