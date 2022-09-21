@@ -375,7 +375,27 @@ const questions = [
     componentDetails: {
       componentType: 'BasicSelect',
       inputName: 'lastTaxFilingYear',
-      inputError: lastTaxFilingYearHasError
+      inputError: lastTaxFilingYearHasError,
+      componentProperties: {
+        labelId: 'tax-year-select-label',
+        inputLabelText: 
+          <FormattedMessage
+            id='qcc.createTaxDropdownMenu-label'
+            defaultMessage='Tax year'
+          />,
+        id:'tax-year-select',
+        value: 'lastTaxFilingYear',
+        label: 
+          <FormattedMessage
+            id='qcc.createTaxDropdownMenu-label'
+            defaultMessage='Tax year'
+          />,
+        disabledSelectMenuItemText: 
+          <FormattedMessage
+            id='qcc.createTaxDropdownMenu-disabledSelectMenuItemText'
+            defaultMessage='Select a Tax Year' />
+      },
+      options: taxYearOptions
     }
   },
   {
