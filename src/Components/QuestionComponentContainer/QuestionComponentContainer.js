@@ -57,12 +57,16 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   }
 
   const renderBasicSelectComponent = (question) => {
+    const finalOptions = question.componentDetails.inputName === 'county' 
+      ? question.componentDetails.options[formData.zipcode] 
+      : question.componentDetails.options;
+
     return (
       <BasicSelect
         componentProperties={question.componentDetails.componentProperties}
         setFormData={setFormData}
         formData={formData} 
-        options={question.componentDetails.options} 
+        options={finalOptions} 
         formDataProperty={question.componentDetails.inputName} />
     );
   }
