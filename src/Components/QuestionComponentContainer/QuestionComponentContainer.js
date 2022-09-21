@@ -122,6 +122,13 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
               index='0' />
           </div>
         );
+      } else if (followUp.componentDetails.componentType === 'BasicSelect') {
+        return (
+          <div className='question-container' key={index}>
+            <p className='question-label'>{followUp.question}</p>
+            {renderBasicSelectComponent(followUp)}
+          </div>
+        );
       }
     });
   }
