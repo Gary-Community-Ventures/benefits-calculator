@@ -56,6 +56,17 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     );
   }
 
+  const renderBasicSelectComponent = (question) => {
+    return (
+      <BasicSelect
+        componentProperties={question.componentDetails.componentProperties}
+        setFormData={setFormData}
+        formData={formData} 
+        options={question.componentDetails.options} 
+        formDataProperty={question.componentDetails.inputName} />
+    );
+  }
+
   const createComponent = (component) => {
     const inputName = matchingQuestion.componentDetails.inputName;
     const { followUpQuestions } = matchingQuestion;
