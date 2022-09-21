@@ -115,16 +115,16 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     ); 
   }
 
-  const createBasicCheckboxGroup = () => {
+  const renderBasicCheckboxGroup = () => {
     return (
-      <div className='question-container' id={matchingQuestion.id}>
-        <p className='question-label'>{matchingQuestion.question}</p>
-        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
-        <BasicCheckboxGroup
-          stateVariable={matchingQuestion.componentDetails.inputName}
-          options={matchingQuestion.componentDetails.options}
-          state={formData}
-          setState={setFormData} />
+      <BasicCheckboxGroup
+        stateVariable={matchingQuestion.componentDetails.inputName}
+        options={matchingQuestion.componentDetails.options}
+        state={formData}
+        setState={setFormData} />
+    );
+  }
+
   const createComponent = (component) => {
     const inputName = matchingQuestion.componentDetails.inputName;
     const { followUpQuestions } = matchingQuestion;
