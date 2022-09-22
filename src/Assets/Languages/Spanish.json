@@ -1,4 +1,4 @@
-{
+ {
   "header.appName": "myfriendben",
   "header.selectLang": "Idioma",
   "disclaimer.step-header": "Paso 1 de ",
@@ -222,7 +222,8 @@
   "confirmation.editLinkText": "Editar",
   "confirmation.displayAllFormData-householdResourcesText": "Recursos del hogar: ",
   "confirmation.displayAllFormData-householdResourcesDescription": "Se trata de efectivo en mano, cuentas de cheques o ahorros, acciones, bonos o fondos mutuales de inversión.",
-  "confirmation.displayAllFormData-zipcodeText": "Su código postal: ",
+  "confirmation.displayAllFormData-zipcodeText": "Código postal: ",
+  "confirmation.displayAllFormData-countyText" : "Condado: ",
   "confirmation.displayAllFormData-lastTaxFilingYear": "Último año de declaración de impuestos: ",
   "confirmation.displayAllFormData-referralSourceText": "Fuente de referencia: ",
   "confirmation.headOfHouseholdDataBlock-youText": " Usted, ",
