@@ -323,13 +323,13 @@ const Confirmation = ({ formData }) => {
   }
 
   const displayZipcodeSection = () => {
-    const { zipcode } = formData;
+    const { zipcode, county } = formData;
     return (
       <article className='confirmation-label'>
         <b> 
           <FormattedMessage 
             id='confirmation.displayAllFormData-zipcodeText' 
-            defaultMessage='Your zipcode: ' /> 
+            defaultMessage='Zip code: ' /> 
         </b>
         { zipcode }
         <Link to='/step-3' className='edit-link'>
@@ -337,6 +337,13 @@ const Confirmation = ({ formData }) => {
             id='confirmation.editLinkText' 
             defaultMessage='Edit' />
         </Link>
+        <br></br>
+        <b> 
+          <FormattedMessage 
+            id='confirmation.displayAllFormData-countyText' 
+            defaultMessage='County: ' /> 
+        </b>
+        { county }
       </article>
     );
   }
