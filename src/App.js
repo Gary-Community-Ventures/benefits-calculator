@@ -196,16 +196,20 @@ const App = () => {
   
   const handleSubmit = (event, validateInputFunction, inputToBeValidated, stepId, householdSize) => {
     event.preventDefault();
-
+    const isZipcodeQuestionAndCountyIsEmpty = (stepId === 3 && formData.county === '');
+    const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (stepId === 17 && formData.referralSource === 'other' && formData.otherSource === '');
+    
     if (!validateInputFunction(inputToBeValidated)) {
-      if (stepId === 13 && householdSize === 1) { //if you're on the householdSize q and the value is 1
+      if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
+        return;
+      } else if (stepId === 13 && householdSize === 1) { //if you're on the householdSize q and the value is 1
         navigate(`/step-${stepId + 2}`); //skip question 16 and go to 17
       } else if (stepId === 17) {
         navigate('/confirm-information');
       } else { //you've indicated that you're householdSize is larger than 1
         navigate(`/step-${stepId + 1}`);
       }
-    }  
+    }
   }
 
   const handleIncomeStreamsSubmit = (validatedIncomeStreams, stepId) => {
