@@ -10,8 +10,7 @@ import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import questions from '../../Assets/questions';
-import taxYearOptions from '../../Assets/taxYearOptions';
-import referralOptions from '../../Assets/referralOptions';
+import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData }) => {
@@ -30,93 +29,50 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     );
   }
 
-  const createTaxDropdownMenu = () => {
-    const taxComponentProperties = {
-      labelId: 'tax-year-select-label',
-      inputLabelText: 
-        <FormattedMessage
-          id='qcc.createTaxDropdownMenu-label'
-          defaultMessage='Tax year'
-        />,
-      id:'tax-year-select',
-      value: 'lastTaxFilingYear',
-      label: 
-        <FormattedMessage
-          id='qcc.createTaxDropdownMenu-label'
-          defaultMessage='Tax year'
-        />,
-      disabledSelectMenuItemText: 
-        <FormattedMessage
-          id='qcc.createTaxDropdownMenu-disabledSelectMenuItemText'
-          defaultMessage='Select a Tax Year' />
-    };
-
-    return createBasicSelectMenu(taxComponentProperties, taxYearOptions);
-  }
-
-  const createReferralDropdownMenu = () => {
-    const referralComponentProperties = {
-      labelId: 'referral-source-select-label',
-      inputLabelText: 
-        <FormattedMessage
-          id='qcc.createReferralDropdownMenu-label'
-          defaultMessage='Referral Source'
-        />,
-      id:'referral-source-select',
-      value: 'referralSource',
-      label: 
-        <FormattedMessage
-          id='qcc.createReferralDropdownMenu-label'
-          defaultMessage='Referral Source'
-        />,
-      disabledSelectMenuItemText: 
-        <FormattedMessage
-          id='qcc.createReferralDropdownMenu-disabledSelectMenuItemText'
-          defaultMessage='Select a source' />
-    };
-
-    return createBasicSelectMenu(referralComponentProperties, referralOptions);
-  }
-
-  const createBasicSelectMenu = (componentProperties, options) => {
+  const renderTextfieldComponent = (question) => {
     return (
-      <div className='question-container' id={matchingQuestion.id}>
-        <p className='question-label'>{matchingQuestion.question}</p>
-        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
-          <BasicSelect
-            componentProperties={componentProperties}
-            setFormData={setFormData}
-            formData={formData} 
-            options={options} 
-            formDataProperty={componentProperties.value} />
-        {matchingQuestion.followUpQuestions && formData[componentProperties.value] === 'other' && renderFollowUpQuestions()}
-        {createPreviousAndContinueButtons(matchingQuestion)}
-      </div>
+      <Textfield 
+        componentDetails={question.componentDetails}
+        formData={formData}
+        handleTextfieldChange={handleTextfieldChange} />
     );
   }
 
-  const createTextfieldComponent = () => {
+  const renderRadiofieldComponent = (question) => {
+    return (      
+      <Radiofield
+        componentDetails={question.componentDetails}
+        formData={formData}
+        handleRadioButtonChange={handleRadioButtonChange} />
+    ); 
+  }
+
+  const renderBasicCheckboxGroup = (question) => {
     return (
-      <div className='question-container' id={matchingQuestion.id}>
-        <p className='question-label'>{matchingQuestion.question}</p>
-        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
-        <Textfield 
-          componentDetails={matchingQuestion.componentDetails}
-          formData={formData}
-          handleTextfieldChange={handleTextfieldChange} />
-        <div className='question-buttons'>
-          <PreviousButton formData={formData} />
-          <ContinueButton 
-            handleSubmit={handleSubmit} 
-            inputError={matchingQuestion.componentDetails.inputError}
-            formData={formData} 
-            inputName={matchingQuestion.componentDetails.inputName} />
-        </div>
-      </div>
+      <BasicCheckboxGroup
+        stateVariable={question.componentDetails.inputName}
+        options={question.componentDetails.options}
+        state={formData}
+        setState={setFormData} />
     );
   }
 
-  const createRadiofieldComponent = () => {
+  const renderBasicSelectComponent = (question) => {
+    const finalOptions = question.componentDetails.inputName === 'county' 
+      ? question.componentDetails.options[formData.zipcode] 
+      : question.componentDetails.options;
+
+    return (
+      <BasicSelect
+        componentProperties={question.componentDetails.componentProperties}
+        setFormData={setFormData}
+        formData={formData} 
+        options={finalOptions} 
+        formDataProperty={question.componentDetails.inputName} />
+    );
+  }
+
+  const createComponent = (component) => {
     const inputName = matchingQuestion.componentDetails.inputName;
     const { followUpQuestions } = matchingQuestion;
     const hasFollowUpQuestions = followUpQuestions && followUpQuestions.length > 0;
@@ -124,41 +80,38 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
-        <Radiofield
-          componentDetails={matchingQuestion.componentDetails}
-          formData={formData}
-          handleRadioButtonChange={handleRadioButtonChange} />
-        {formData[inputName] === true && hasFollowUpQuestions && renderFollowUpQuestions()}
-        {createPreviousAndContinueButtons(matchingQuestion)}
-      </div>
-    ); 
-  }
-
-  const createBasicCheckboxGroup = () => {
-    return (
-      <div className='question-container' id={matchingQuestion.id}>
-        <p className='question-label'>{matchingQuestion.question}</p>
-        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
-        <BasicCheckboxGroup
-          stateVariable={matchingQuestion.componentDetails.inputName}
-          options={matchingQuestion.componentDetails.options}
-          state={formData}
-          setState={setFormData} />
+        {component}
+        {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && renderFollowUpQuestions()}
         {createPreviousAndContinueButtons(matchingQuestion)}
       </div>
     );
   }
 
+  const shouldRenderFollowUpQuestions = (hasFollowUpQuestions, inputName) => {
+    if (!hasFollowUpQuestions) {
+      return false;
+    }
+    if (inputName === 'zipcode') {
+      return !zipcodeHasError(formData.zipcode);
+    }
+    if (formData[inputName] === true) {
+      // this case is for a radio button question where the user selected "yes"
+      return true;
+    }
+    if (formData[inputName] === 'other') {
+      // this case is for the referral source question where the user selected "other"
+      return true;
+    }
+    return false;
+  };
+
   const renderFollowUpQuestions = () => {
     const { followUpQuestions } = matchingQuestion;
     return followUpQuestions.map((followUp, index) => {
       if (followUp.componentDetails.componentType === 'Radiofield') {
-        return <div key={index}>
+        return <div className='question-container' key={index}>
           <p className='question-label'>{followUp.question}</p>
-          <Radiofield
-            componentDetails={followUp.componentDetails}
-            formData={formData}
-            handleRadioButtonChange={handleRadioButtonChange} />
+          {renderRadiofieldComponent(followUp)}
         </div>
       } else if (followUp.componentDetails.componentType === 'IncomeBlock') {
         return <div className='question-container' key={index}>
@@ -185,6 +138,13 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
               index='0' />
           </div>
         );
+      } else if (followUp.componentDetails.componentType === 'BasicSelect') {
+        return (
+          <div className='question-container' key={index}>
+            <p className='question-label'>{followUp.question}</p>
+            {renderBasicSelectComponent(followUp)}
+          </div>
+        );
       }
     });
   }
@@ -209,6 +169,38 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
     }
   }
 
+  const renderHeaderAndSubheader = () => {
+    if (matchingQuestion.id !== 14) {
+      return (
+        <h2 className='sub-header'>
+          <FormattedMessage
+            id='qcc.tell-us-text'
+            defaultMessage='Tell us a little more about yourself.' />
+        </h2>
+      );
+    } else {
+      return (
+        <>
+          <h2 className='household-data-sub-header'>
+            <FormattedMessage
+              id='qcc.so-far-text'
+              defaultMessage='So far you’ve told us about:' />
+          </h2>
+          <h4 className='household-data-sub2-header'> 
+            🔵 
+            <FormattedMessage
+              id='qcc.you-text'
+              defaultMessage=' You, ' />
+            {formData.age} 
+            <FormattedMessage
+              id='qcc.hoh-text'
+              defaultMessage=' Head of household' />
+          </h4>
+        </>
+      );
+    }
+  };
+
   return (
     <main className='benefits-form'>
       <p className='step-progress-title'>
@@ -221,36 +213,13 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           defaultMessage=' of ' />
         {questions.length + 2}
       </p>
-      { matchingQuestion.id !== 14 && 
-        <h2 className='sub-header'>
-          <FormattedMessage
-            id='qcc.tell-us-text'
-            defaultMessage='Tell us a little more about yourself.' />
-        </h2> }
-      { matchingQuestion.id === 14 && 
-        <h2 className='household-data-sub-header'>
-          <FormattedMessage
-            id='qcc.so-far-text'
-            defaultMessage='So far you’ve told us about:' />
-        </h2> }
-      { matchingQuestion.id === 14 && 
-        <h4 className='household-data-sub2-header'> 
-          🔵 
-          <FormattedMessage
-            id='qcc.you-text'
-            defaultMessage=' You, ' />
-          {formData.age} 
-          <FormattedMessage
-            id='qcc.hoh-text'
-            defaultMessage=' Head of household' />
-        </h4> }
+      {renderHeaderAndSubheader()}
       {
-        ( matchingQuestion.componentDetails.componentType === 'Textfield' && createTextfieldComponent() ) ||
-        ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createRadiofieldComponent() ) ||
+        ( matchingQuestion.componentDetails.componentType === 'Textfield' && createComponent(renderTextfieldComponent(matchingQuestion)) ) ||
+        ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createComponent(renderRadiofieldComponent(matchingQuestion)) ) ||
         ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() ) ||
-        ( matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' && createBasicCheckboxGroup() ) ||
-        ( matchingQuestion.componentDetails.inputName === 'lastTaxFilingYear' && createTaxDropdownMenu() ) ||
-        ( matchingQuestion.componentDetails.inputName === 'referralSource' && createReferralDropdownMenu() )
+        ( matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' && createComponent(renderBasicCheckboxGroup(matchingQuestion)) ) ||
+        ( matchingQuestion.componentDetails.componentType === 'BasicSelect' && createComponent(renderBasicSelectComponent(matchingQuestion)) )
       }
     </main>
   );

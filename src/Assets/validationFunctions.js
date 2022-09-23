@@ -268,6 +268,16 @@ const displayReferralSourceHelperText = (source) => {
   }
 }
 
+const displayMissingSelectHelperText = (source) => {
+  if (referralSourceHasError(source)) {
+    return (
+        <FormattedMessage 
+          id='validation-helperText.selectOption' 
+          defaultMessage='Please select an option.' />
+    );
+  }
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -294,5 +304,6 @@ export {
   displayMissingTaxFilingYear,
   benefitsHasError,
   referralSourceHasError,
-  displayReferralSourceHelperText
+  displayReferralSourceHelperText,
+  displayMissingSelectHelperText
 }
