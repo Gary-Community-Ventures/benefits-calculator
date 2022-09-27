@@ -1,4 +1,4 @@
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
@@ -12,6 +12,44 @@ import './App.css';
 const App = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const primaryBlueColor = '#0096B0';
+  const primaryGreenColor = '#4ecdc4';
+  const primaryBlackColor = '#2A2B2A';
+
+  const theme = createTheme({
+    components: {
+      // Name of the component
+      MuiButton: {
+        styleOverrides: {
+          // Name of the slot
+          root: {
+            // Some CSS
+            backgroundColor: primaryBlueColor,
+            ":hover": {
+              backgroundColor: primaryGreenColor
+            }
+          },
+        },
+      },
+      MuiAppBar: {
+        styleOverrides: {
+          root: {
+            backgroundColor: primaryBlackColor
+          }
+        }
+      },
+      MuiCheckbox: {
+        styleOverrides: {
+          root: {
+            "&.Mui-checked": {
+              color: primaryBlueColor
+            }
+          }
+        }
+      }
+    }
+  });
+
 
   const [formData, setFormData] = useState({
     isTest: searchParams.get('test') ? searchParams.get('test') : false,
