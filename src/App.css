@@ -41,3 +41,23 @@
 .Mui-focused .MuiInput-input  {
   background-color: rgba(0,0,0,0) !important;
 }
+
+/* text input label in a focus state */
+.MuiInputLabel-root.MuiInputLabel-formControl.Mui-focused {
+  color: #0096B0;
+}
+
+/* text input outline in a focus state */
+.MuiOutlinedInput-root.MuiInputBase-formControl.Mui-focused .MuiOutlinedInput-notchedOutline.MuiOutlinedInput-notchedOutline {
+  border-color: #0096B0;
+}
+
+/* text input outline in an error state */
+/* .MuiOutlinedInput-root.MuiInputBase-formControl.Mui-error .MuiOutlinedInput-notchedOutline.MuiOutlinedInput-notchedOutline {
+  border-color: #d32f2f;
+} */
+
+/* text input outline in a default state */
+/* .MuiOutlinedInput-root.MuiInputBase-formControl .MuiOutlinedInput-notchedOutline.MuiOutlinedInput-notchedOutline {
+  border-color: #0096B0;
+} */
