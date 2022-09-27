@@ -17,7 +17,7 @@
 
 .step-progress-title {
   font-weight: 700;
-  color: #1976d2;
+  color: #0096B0;
 }
 
 .sub-header {
@@ -33,7 +33,7 @@
 }
 
 .language-switcher .MuiInputBase-input {
-  color: rgb(25, 118, 210)
+  color: #2A2B2A;
 }
 .language-switcher .MuiSelect-icon {
   color: #fff;
