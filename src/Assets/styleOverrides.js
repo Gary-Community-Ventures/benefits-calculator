@@ -32,6 +32,15 @@ const styleOverrides = {
           }
         }
       }
+    },
+    MuiRadio: {
+      styleOverrides: {
+        root: {
+          "&.Mui-checked": {
+            color: primaryBlueColor
+          }
+        }
+      }
     }
   }
 };
