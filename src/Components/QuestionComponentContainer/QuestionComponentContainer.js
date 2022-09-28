@@ -187,7 +187,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
               defaultMessage='So far you’ve told us about:' />
           </h2>
           <h4 className='household-data-sub2-header'> 
-            🔵 
+            ⚫️
             <FormattedMessage
               id='qcc.you-text'
               defaultMessage=' You, ' />
