@@ -41,6 +41,13 @@ const styleOverrides = {
           }
         }
       }
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: primaryBlueColor
+        }
+      }
     }
   }
 };
