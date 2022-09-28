@@ -45,7 +45,10 @@ const styleOverrides = {
     MuiLink: {
       styleOverrides: {
         root: {
-          color: primaryBlueColor
+          color: primaryBlueColor,
+          "&:hover": {
+            color: primaryGreenColor
+          }
         }
       }
     }
