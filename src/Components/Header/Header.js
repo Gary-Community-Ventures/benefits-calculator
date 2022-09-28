@@ -17,7 +17,7 @@ const Header = () => {
           <Grid item xs={10}>
               <Typography 
                 variant='h4' 
-                align='center' 
+                align='left' 
                 onClick={() => navigate('/step-1')}> 
                 <img src={logo} alt='logo' className='logo'/>
               </Typography>
