@@ -7,6 +7,10 @@
   color: #0096B0;
 }
 
+.edit-link:hover {
+  color: #4ecdc4;
+}
+
 .confirmation-section-underline {
   margin-bottom: 24px;
   padding-bottom: 24px;
