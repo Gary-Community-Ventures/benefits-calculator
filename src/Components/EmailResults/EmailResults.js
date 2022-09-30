@@ -106,7 +106,7 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
           <h2 className='sub-header'>
             <FormattedMessage 
               id='emailResults.return-signupHeader' 
-              defaultMessage='Signup for benefits updates and offers' />
+              defaultMessage='Signup for benefits, updates, and offers' />
           </h2>
         </Grid>
         <Grid xs={12}>
