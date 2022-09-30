@@ -62,7 +62,7 @@ const App = () => {
   });
 
   // const [formData, setFormData] = useState({
-  //   isTest: searchParams.get('test') ? searchParams.get('test') : true,
+  //   isTest: true,
   //   externalID: searchParams.get('externalid') ? searchParams.get('externalid') : null,
   //   agreeToTermsOfService: false,
   //   age: '33',
