@@ -98,17 +98,21 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
     </Fragment>
   );
 
-
+  const displaySubheader = () => {
+    return (
+      <Grid xs={12}>
+        <h2 className='sub-header'>
+          <FormattedMessage 
+            id='emailResults.return-signupHeader' 
+            defaultMessage='Signup for benefits, updates, and offers' />
+        </h2>
+      </Grid>
+    );
+  }
   return (
     <main className='benefits-form'>
       <Grid container spacing={2} sx={{mt: 2, mr: 2, ml: 2}}>
-        <Grid xs={12}>
-          <h2 className='sub-header'>
-            <FormattedMessage 
-              id='emailResults.return-signupHeader' 
-              defaultMessage='Signup for benefits, updates, and offers' />
-          </h2>
-        </Grid>
+        { displaySubheader() }
         <Grid xs={12}>
           <StyledTextField
               sx={{mr: 1}} 
