@@ -8,14 +8,9 @@ import Grid from '@mui/material/Grid';
 import SendIcon from '@mui/icons-material/Send';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -403,6 +398,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         groupingColDef={groupingColDef}
         getRowHeight={() => 'auto'}
         disableChildrenFiltering
+        hideFooter={true}
         rows={rows} 
         columns={columns} 
         filterModel={{ items: filt }}
@@ -430,7 +426,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const benefitValueFormatter = (params) => {
-    let row = params.api.getRow(params.id);
     let formatted_value = '';
     if (params.value.toLocaleString().length > 0) {
       formatted_value = '$' + params.value.toLocaleString();
@@ -454,109 +449,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
           {row.type}
         </Typography>
       </div>
-    );
-  }
-
-  const ResultsRow = (row) => {
-    const [open, setOpen] = useState(false);
-    let benefit = row.row
-
-    switch(benefit.value_type) {
-      case 'non-discretionary':
-        benefit.value_type = 
-          <FormattedMessage 
-            id='results.resultsRow-reducedExpensesText' 
-            defaultMessage='reduced expenses' />;
-        break;
-      case 'unrestricted':
-        benefit.value_type = 
-          <FormattedMessage 
-            id='results.resultsRow-cashText' 
-            defaultMessage='cash' />;
-        break;
-      case 'discretionary':
-        benefit.value_type = 
-          <FormattedMessage 
-            id='results.resultsRow-reducedCostText' 
-            defaultMessage='reduced cost services' />;
-        break;
-    }
-
-    return (
-      <Fragment>
-        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-          <TableCell component="th" scope="row">
-            <Link onClick={() => setOpen(!open)}>
-              {benefit.name}
-            </Link>
-          </TableCell>
-          <TableCell align="right">
-            {'$' + benefit.estimated_value.toLocaleString()}
-            <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
-              {benefit.value_type}
-            </Typography>
-          </TableCell>
-          <TableCell align="right">{benefit.estimated_application_time}</TableCell>
-          <TableCell className="hidden-xs" display={{ xs: 'none' }}>
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ padding: 1 }}>
-                <Typography variant='body1' gutterBottom>
-                  {benefit.description}
-                </Typography>
-                <Typography variant='body1' sx={{ fontStyle: 'italic', marginBottom: 2 }}>
-                  <FormattedMessage
-                    id='results.return-estimatedDeliveryTimeA'
-                    defaultMessage="*On average people who are approved for this benefit start receiving it " />
-                  {benefit.estimated_delivery_time}
-                  <FormattedMessage
-                    id='results.return-estimatedDeliveryTimeB'
-                    defaultMessage=" after completing the application." />
-                </Typography>
-                <Button
-                  variant='contained'
-                  target="_blank"
-                  href={benefit.apply_button_link}>
-                  <FormattedMessage 
-                    id='results.resultsRow-applyButton' 
-                    defaultMessage='Apply' />
-                </Button>
-                
-                { (benefit.passed_tests.length > 0 || benefit.failed_tests.length > 0)  && 
-                  <Accordion sx={{ m: 2 }}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"> 
-                        <Typography variant='body2'>
-                          <Link>
-                            <FormattedMessage 
-                              id='results.resultsRow-expandForEligibilityLink' 
-                              defaultMessage='Expand for eligibility details' />
-                          </Link>
-                        </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails sx={{paddingTop: 0}}>
-                      { displayTestResults(benefit.passed_tests) }
-                      { displayTestResults(benefit.failed_tests) }
-                    </AccordionDetails>
-                  </Accordion> 
-                }
-              </Box>
-            </Collapse>
-          </TableCell>
-        </TableRow>
-      </Fragment>
     );
   }
 
@@ -620,7 +512,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               </Grid>
               <Grid xs={12} item={true}>
                 <FormControlLabel
-                  label="Only show benefits that do not require a citizen in the household"
+                  label={<FormattedMessage id='results.returnsignupCitizenFilter' defaultMessage="Only show benefits that do not require a citizen in the household" />}
                   control={
                     <Checkbox
                       onChange={(e) => {
