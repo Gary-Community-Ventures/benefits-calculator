@@ -41,13 +41,11 @@
 .Mui-focused .MuiInput-input  {
   background-color: rgba(0,0,0,0) !important;
 }
-<<<<<<< HEAD
 .MuiDataGrid-columnHeaderTitle {
     overflow: visible !important;
     line-height: 1.43rem !important;
     white-space: normal !important;
 }
-=======
 
 /* text input label in a focus state */
 .MuiInputLabel-root.MuiInputLabel-formControl.Mui-focused {
@@ -68,4 +66,3 @@
 /* .MuiOutlinedInput-root.MuiInputBase-formControl .MuiOutlinedInput-notchedOutline.MuiOutlinedInput-notchedOutline {
   border-color: #0096B0;
 } */
->>>>>>> 39821888d1c41c25abdaeea9c9d7b76a7683247c
