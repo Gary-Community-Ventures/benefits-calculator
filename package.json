@@ -12,6 +12,8 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.6.2",
     "@mui/styled-engine-sc": "^5.6.1",
+    "@mui/x-data-grid": "^5.17.3",
+    "@mui/x-data-grid-pro": "^5.17.4",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
     "@testing-library/user-event": "^13.5.0",
