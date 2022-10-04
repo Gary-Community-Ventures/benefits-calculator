@@ -270,6 +270,7 @@
   "results.resultsRow-reducedExpensesText": "gastos reducidos",
   "results.resultsRow-cashText": "efectivo",
   "results.resultsRow-reducedCostText": "servicios a costo reducido",
+  "results.returnsignupCitizenFilter": "Mostrar solo los beneficios que no requieren un ciudadano en el hogar",
   "emailResults.return-emailResultsHeader": "Enviar por correo electrónico una copia de mis resultados",
   "emailResults.return-signupHeader": "Regístrese para recibir actualizaciones y ofertas de beneficios",
   "emailResults.return-signupDescription": "Para recibir una copia de estos resultados por correo electrónico, actualizaciones sobre futuros beneficios para los que pueda ser elegible y ofertas de incentivos, proporcione su dirección de correo electrónico a continuación.",
