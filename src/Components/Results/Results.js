@@ -2,7 +2,7 @@ import { useEffect, useState, Fragment, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
 import SendIcon from '@mui/icons-material/Send';
@@ -14,6 +14,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -28,10 +29,19 @@ import {
 } from "../../apiCalls";
 import Loading from '../Loading/Loading';
 import './Results.css';
+import { SentimentSatisfiedAlt, SignalWifiStatusbarNullTwoTone } from '@mui/icons-material';
+
+export const isNavigationKey = (key: string) =>
+  key === 'Home' ||
+  key === 'End' ||
+  key.indexOf('Arrow') === 0 ||
+  key.indexOf('Page') === 0 ||
+  key === ' ';
 
 const Results = ({ results, setResults, formData, programSubset, passedOrFailedTests }) => {
   const navigate = useNavigate();
   const locale = useContext(Context).locale;
+  const [filt, setFilt] = useState([]);
 
   useEffect(() => {
     if (results.screenerId === 0) {
@@ -223,50 +233,229 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     }
   }
 
-  const resultsTable = (results) => {
-    if (results.length) {
-      return (
-        <TableContainer component={Paper}>
-          <Table aria-label="collapsible table">
-            <TableHead>
-              <TableRow>
-                <TableCell>
-                  <FormattedMessage 
-                    id='results.resultsTable-benefitLabel' 
-                    defaultMessage='Benefit' />
-                </TableCell>
-                <TableCell align="right">
-                  <FormattedMessage 
-                    id='results.resultsTable-annualValueLabel' 
-                    defaultMessage='Annual Value' />
-                </TableCell>
-                <TableCell align="right">
-                  <FormattedMessage 
-                    id='results.resultsTable-timeToApply' 
-                    defaultMessage='Time to Apply' />
-                </TableCell>
-                <TableCell className="hidden-xs" display={{ xs: 'none' }} />
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {results.map(row => (
-                <ResultsRow key={row.name} row={row} />
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      );
-    } else {
-      return (
-        <Typography variant='body1' sx={{marginBottom: 2, marginTop: 2}}>
-          <FormattedMessage 
-            id='results.resultsTable-sorryNoProgramsWereFoundLabel' 
-            defaultMessage='Sorry, we were not able to find any programs for you based on the information that was provided.' />
-        </Typography>
-      );
+  const DataGridRows = (results) => {
+    let dgr = [];
+    let count = 0;
+    for (let i = 0; i < results.length; i++) {
+      let dataGridRow = {
+        id: count,
+        path: results[i].name,
+        name: results[i].name,
+        value: results[i].estimated_value,
+        type: results[i].value_type,
+        description: results[i].description,
+        application_time: results[i].estimated_application_time,
+        delivery_time: results[i].estimated_delivery_time,
+        application_link: results[i].apply_button_link,
+        passed_tests: results[i].passed_tests,
+        failed_tests: results[i].failed_tests,
+        citizenship: results[i].legal_status_required
+      };
+      dgr.push(dataGridRow);
+      count++;
+      let dataGridChild = {
+        id: count,
+        path: results[i].name + '/Detail',
+        name: results[i].description,
+        value: '',
+        type: '',
+        application_time: '',
+        delivery_time: results[i].estimated_delivery_time,
+        description: results[i].description,
+        citizenship: '',
+        application_link: results[i].apply_button_link,
+        passed_tests: results[i].passed_tests,
+        failed_tests: results[i].failed_tests,
+      }
+      dgr.push(dataGridChild);
+      count++;
     }
+    return dgr;
   }
-  
+
+  const CustomGridTreeDataGroupingCell = (props: GridRenderCellParams) => {
+    const { id, field, rowNode } = props;
+    const apiRef = useGridApiContext();
+    const filteredDescendantCountLookup = useGridSelector(
+      apiRef,
+      gridFilteredDescendantCountLookupSelector,
+    );
+
+    const handleKeyDown: ButtonProps['onKeyDown'] = (event) => {
+      if (event.key === ' ') {
+        event.stopPropagation();
+      }
+      if (isNavigationKey(event.key) && !event.shiftKey) {
+        apiRef.current.publishEvent('cellNavigationKeyDown', props, event);
+      }
+    };
+
+    const handleClick: ButtonProps['onClick'] = (event) => {
+      apiRef.current.setRowChildrenExpansion(id, !rowNode.childrenExpanded);
+      apiRef.current.setCellFocus(id, field);
+      event.stopPropagation();
+    };
+
+    let row = apiRef.current.getRow(id);
+    const filteredDescendantCount = filteredDescendantCountLookup[rowNode.id] ?? 0;
+    return (
+      <div>
+        {filteredDescendantCount > 0 ? (
+          <Link
+            onClick={handleClick}
+            onKeyDown={handleKeyDown}
+            tabIndex={-1}
+          >
+            {row.name}
+          </Link>
+        ) : (
+          <Box sx={{ padding: 1 }}>
+          <Typography variant='body1' gutterBottom>
+            {row.description}
+          </Typography>
+          <Typography variant='body1' sx={{ fontStyle: 'italic', marginBottom: 2 }}>
+            <FormattedMessage
+              id='results.return-estimatedDeliveryTimeA'
+              defaultMessage="*On average people who are approved for this benefit start receiving it " />
+            {row.delivery_time}
+            <FormattedMessage
+              id='results.return-estimatedDeliveryTimeB'
+              defaultMessage=" after completing the application." />
+          </Typography>
+          <Button
+            variant='contained'
+            target="_blank"
+            href={row.application_link}>
+            <FormattedMessage 
+              id='results.resultsRow-applyButton' 
+              defaultMessage='Apply' />
+          </Button>
+          
+          { (row.passed_tests.length > 0 || row.failed_tests.length > 0)  && 
+            <Accordion sx={{ m: 2 }}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"> 
+                  <Typography variant='body2'>
+                    <Link>
+                      <FormattedMessage 
+                        id='results.resultsRow-expandForEligibilityLink' 
+                        defaultMessage='Expand for eligibility details' />
+                    </Link>
+                  </Typography>
+              </AccordionSummary>
+              <AccordionDetails sx={{paddingTop: 0}}>
+                { displayTestResults(row.passed_tests) }
+                { displayTestResults(row.failed_tests) }
+              </AccordionDetails>
+            </Accordion> 
+          }
+        </Box>
+        )}
+      </div>
+    );
+  }
+
+  const groupingColDef: DataGridProProps['groupingColDef'] = {
+    headerName: 'Benefit',
+    flex: 1,
+    colSpan: ({ row }) => {
+      if (row.path.indexOf('Detail') !== -1) {
+        return 4;
+      }
+      else {
+        return 1;
+      }
+    },
+    renderCell: (params) => <CustomGridTreeDataGroupingCell {...params} />
+  };
+
+  const DataGridTable = (results) => {
+    const rows: GridRowsProp = DataGridRows(results);
+    const nameHeader = <FormattedMessage 
+      id='results.resultsTable-benefitLabel' 
+      defaultMessage='Benefit' />
+    const valueHeader = <FormattedMessage 
+      id='results.resultsTable-annualValueLabel' 
+      defaultMessage='Annual Value' />
+    const appTimeHeader = <FormattedMessage 
+      id='results.resultsTable-timeToApply' 
+      defaultMessage='Time to Apply' />
+
+    const columns: GridColDef[] = [
+      { field: 'name', headerName: nameHeader, flex: 1 },  
+      { field: 'value', headerName: valueHeader, flex: 1, valueFormatter: benefitValueFormatter, renderCell: benefitValueRender },
+      { field: 'type', headerName: 'Type', flex: 1 },
+      { field: 'application_time', headerName: appTimeHeader, flex: 1 },
+      { field: 'delivery_time', headerName: 'Delivery Time', flex: 1 },
+      { field: 'citizenship', headerName: 'Citizenship Requirements', flex: 1 },
+      { field: 'application_link', headerName: 'Application Link', flex: 1 },
+      { field: 'passed_tests', headerName: 'Passed Tests', flex: 1 },
+      { field: 'failed_tests', headerName: 'Passed Tests', flex: 1 }
+    ];
+    return (
+      <DataGridPro
+        treeData
+        autoHeight
+        getTreeDataPath={(row) => row.path.split('/')}
+        groupingColDef={groupingColDef}
+        getRowHeight={() => 'auto'}
+        disableChildrenFiltering
+        rows={rows} 
+        columns={columns} 
+        filterModel={{ items: filt }}
+        sx={{
+          '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': { py: '8px' },
+          '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': { py: '15px' },
+          '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': { py: '22px' },
+        }}
+        initialState={{
+          columns: {
+            columnVisibilityModel: {
+              citizenship: false,
+              delivery_time: false,
+              type: false,
+              name: false,
+              description: false,
+              application_link: false,
+              passed_tests: false,
+              failed_tests: false
+            }
+          }
+        }}
+        />
+    );
+  }
+
+  const benefitValueFormatter = (params) => {
+    let row = params.api.getRow(params.id);
+    let formatted_value = '';
+    if (params.value.toLocaleString().length > 0) {
+      formatted_value = '$' + params.value.toLocaleString();
+    }
+
+    return formatted_value;
+  }
+
+  const benefitValueRender = (params) => {
+    let row = params.api.getRow(params.id);
+    let formatted_value = '';
+
+    if (params.value.toLocaleString().length > 0) {
+      formatted_value = '$' + params.value.toLocaleString();
+    }
+
+    return (
+      <div>
+        {formatted_value}
+        <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
+          {row.type}
+        </Typography>
+      </div>
+    );
+  }
+
   const ResultsRow = (row) => {
     const [open, setOpen] = useState(false);
     let benefit = row.row
@@ -429,7 +618,29 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 </Grid>
               </Grid>
               <Grid xs={12} item={true}>
-                { resultsTable(results[programSubset])}
+                <FormControlLabel
+                  label="Only show benefits that do not require a citizen in the household"
+                  control={
+                    <Checkbox
+                      onChange={(e) => {
+                          if (e.target.checked) {
+                            setFilt([
+                              {
+                                columnField: "citizenship",
+                                operatorValue: "startsWith",
+                                value: "None"
+                              }
+                            ])
+                          }
+                          else {
+                            setFilt([])
+                          }
+                        }
+                      }
+                    />
+                  }
+                />
+                { DataGridTable(results[programSubset])}
               </Grid>
               <Grid xs={12} item={true}>
                 { programSubset === 'eligiblePrograms' && 
