@@ -1,6 +1,7 @@
 import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
+import { LicenseInfo } from '@mui/x-license-pro';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
@@ -9,6 +10,8 @@ import EmailResults from './Components/EmailResults/EmailResults';
 import Header from './Components/Header/Header';
 import styleOverrides from './Assets/styleOverrides';
 import './App.css';
+
+LicenseInfo.setLicenseKey('505464fa6deb7bd75c286bf36859d580Tz01MTQ5MyxFPTE2OTU4Mjk0NDQyMTEsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI=');
 
 const App = () => {
   const navigate = useNavigate();
