@@ -1,7 +1,8 @@
 import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useNavigate, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
+import ReactGA from 'react-ga';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
@@ -11,13 +12,16 @@ import Header from './Components/Header/Header';
 import styleOverrides from './Assets/styleOverrides';
 import './App.css';
 
+const TRACKING_ID = "G-NZ9D1VLR0D";
+ReactGA.initialize(TRACKING_ID);
 LicenseInfo.setLicenseKey('505464fa6deb7bd75c286bf36859d580Tz01MTQ5MyxFPTE2OTU4Mjk0NDQyMTEsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI=');
 
 const App = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const theme = createTheme(styleOverrides);
-  
+
   const [formData, setFormData] = useState({
     isTest: searchParams.get('test') ? searchParams.get('test') : false,
     externalID: searchParams.get('externalid') ? searchParams.get('externalid') : null,
@@ -149,6 +153,10 @@ const App = () => {
   });
 
   useEffect(() => {
+    ReactGA.pageview(window.location.pathname +  window.location.search);
+  }, [location]);
+
+  useEffect(() => {
     const updatedFormData = { ...formData };
     const referralSourceIsNotOther = !(formData.referralSource === 'other');
 
@@ -203,7 +211,7 @@ const App = () => {
     event.preventDefault();
     const isZipcodeQuestionAndCountyIsEmpty = (stepId === 3 && formData.county === '');
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (stepId === 17 && formData.referralSource === 'other' && formData.otherSource === '');
-    
+
     if (!validateInputFunction(inputToBeValidated)) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
         return;
