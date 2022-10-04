@@ -12,10 +12,14 @@ import {
   displayMissingTaxFilingYear,
   benefitsHasError,
   referralSourceHasError,
-  displayReferralSourceHelperText
+  displayReferralSourceHelperText,
+  displayMissingSelectHelperText
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import { FormattedMessage } from 'react-intl';
+import taxYearOptions from './taxYearOptions';
+import referralOptions from './referralOptions';
+import countiesByZipcode from './countiesByZipcode';
 
 const questions = [
   {
@@ -52,7 +56,44 @@ const questions = [
           defaultMessage='Zip Code' />,
       inputError: zipcodeHasError,
       inputHelperText: displayZipcodeHelperText
-    }    
+    },
+    followUpQuestions: [{
+      question: 
+        <FormattedMessage
+          id='questions.id-3a'
+          defaultMessage='Please select a county:' />,
+      componentDetails: {
+        componentType: 'BasicSelect',
+        inputType: 'text',
+        inputName: 'county',
+        inputLabel: 
+          <FormattedMessage 
+            id='questions.id-3a-inputLabel' 
+            defaultMessage='County' />,
+        inputError: referralSourceHasError,
+        inputHelperText: displayMissingSelectHelperText,
+        componentProperties: {
+          labelId: 'county-select-label',
+          inputLabelText: 
+            <FormattedMessage
+              id='questions.id-3a-inputLabel'
+              defaultMessage='County'
+            />,
+          id:'county-source-select',
+          value: 'county',
+          label: 
+            <FormattedMessage
+              id='questions.id-3a-inputLabel'
+              defaultMessage='County'
+            />,
+          disabledSelectMenuItemText: 
+            <FormattedMessage
+              id='questions.id-3a-disabledSelectMenuItemText'
+              defaultMessage='Select a county' />
+        },
+        options: countiesByZipcode
+      }
+    }]
   },
   {
     id: 4,
@@ -332,7 +373,27 @@ const questions = [
     componentDetails: {
       componentType: 'BasicSelect',
       inputName: 'lastTaxFilingYear',
-      inputError: lastTaxFilingYearHasError
+      inputError: lastTaxFilingYearHasError,
+      componentProperties: {
+        labelId: 'tax-year-select-label',
+        inputLabelText: 
+          <FormattedMessage
+            id='qcc.createTaxDropdownMenu-label'
+            defaultMessage='Tax year'
+          />,
+        id:'tax-year-select',
+        value: 'lastTaxFilingYear',
+        label: 
+          <FormattedMessage
+            id='qcc.createTaxDropdownMenu-label'
+            defaultMessage='Tax year'
+          />,
+        disabledSelectMenuItemText: 
+          <FormattedMessage
+            id='qcc.createTaxDropdownMenu-disabledSelectMenuItemText'
+            defaultMessage='Select a Tax Year' />
+      },
+      options: taxYearOptions
     }
   },
   {
@@ -344,7 +405,27 @@ const questions = [
     componentDetails: {
       componentType: 'BasicSelect',
       inputName: 'referralSource',
-      inputError: referralSourceHasError
+      inputError: referralSourceHasError,
+      componentProperties: {
+        labelId: 'referral-source-select-label',
+        inputLabelText: 
+          <FormattedMessage
+            id='qcc.createReferralDropdownMenu-label'
+            defaultMessage='Referral Source'
+          />,
+        id:'referral-source-select',
+        value: 'referralSource',
+        label: 
+          <FormattedMessage
+            id='qcc.createReferralDropdownMenu-label'
+            defaultMessage='Referral Source'
+          />,
+        disabledSelectMenuItemText: 
+          <FormattedMessage
+            id='qcc.createReferralDropdownMenu-disabledSelectMenuItemText'
+            defaultMessage='Select a source' />
+      },
+      options: referralOptions
     },
     followUpQuestions: [{
       question: 
@@ -363,7 +444,6 @@ const questions = [
         inputHelperText: displayReferralSourceHelperText
       }
     }]
-
   }
 ];
 

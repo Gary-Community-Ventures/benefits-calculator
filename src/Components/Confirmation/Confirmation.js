@@ -23,7 +23,6 @@ const Confirmation = ({ formData }) => {
     const { householdData } = formData;
     const allHouseholdRelations = getAllHouseholdRelations();
     const allHouseholdAges = getAllHouseholdAges();
-    const colors = ['🟢', '🟡', '🟣', '🟠', '🟤', '⚫️', '🔴'];
 
     const householdMemberDataBlocks = householdData.map((personData, i) => {
       const { hasIncome, incomeStreams, hasExpenses, expenses } = personData;
@@ -31,7 +30,7 @@ const Confirmation = ({ formData }) => {
       return (
         <div key={i}>
           <p className='confirmation-label'>
-            <b>{colors[i]} {allHouseholdRelations[i]}, { allHouseholdAges[i] }</b>
+            <b>⚫️ {allHouseholdRelations[i]}, { allHouseholdAges[i] }</b>
             <Link to='/step-14' className='edit-link'>
               <FormattedMessage 
                 id='confirmation.editLinkText' 
@@ -90,7 +89,7 @@ const Confirmation = ({ formData }) => {
       <div key='head-of-household-data-block'>
         <p className='confirmation-label'>
           <b> 
-            🔵 
+            ⚫️ 
             <FormattedMessage 
               id='confirmation.headOfHouseholdDataBlock-youText' 
               defaultMessage=' You, ' /> 
@@ -323,13 +322,13 @@ const Confirmation = ({ formData }) => {
   }
 
   const displayZipcodeSection = () => {
-    const { zipcode } = formData;
+    const { zipcode, county } = formData;
     return (
       <article className='confirmation-label'>
         <b> 
           <FormattedMessage 
             id='confirmation.displayAllFormData-zipcodeText' 
-            defaultMessage='Your zipcode: ' /> 
+            defaultMessage='Zip code: ' /> 
         </b>
         { zipcode }
         <Link to='/step-3' className='edit-link'>
@@ -337,6 +336,13 @@ const Confirmation = ({ formData }) => {
             id='confirmation.editLinkText' 
             defaultMessage='Edit' />
         </Link>
+        <br></br>
+        <b> 
+          <FormattedMessage 
+            id='confirmation.displayAllFormData-countyText' 
+            defaultMessage='County: ' /> 
+        </b>
+        { county }
       </article>
     );
   }

@@ -83,7 +83,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const getScreensBody = (formData) => {
-    const { agreeToTermsOfService, zipcode, householdSize, householdAssets, startTime, isTest, externalID, lastTaxFilingYear, benefits, referralSource, otherSource } = formData;
+    const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets, startTime, isTest, externalID, lastTaxFilingYear, benefits, referralSource, otherSource } = formData;
     const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 
     return {
@@ -91,6 +91,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       external_id: externalID,
       agree_to_tos: agreeToTermsOfService,
       zipcode: zipcode,
+      county: county,
       start_date: startTime,
       household_size: householdSize,
       household_assets: householdAssets,
