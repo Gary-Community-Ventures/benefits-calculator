@@ -1,6 +1,7 @@
 import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
+import { LicenseInfo } from '@mui/x-license-pro';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
@@ -10,116 +11,41 @@ import Header from './Components/Header/Header';
 import styleOverrides from './Assets/styleOverrides';
 import './App.css';
 
+LicenseInfo.setLicenseKey('505464fa6deb7bd75c286bf36859d580Tz01MTQ5MyxFPTE2OTU4Mjk0NDQyMTEsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI=');
+
 const App = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const theme = createTheme(styleOverrides);
   
-  const [formData, setFormData] = useState({
-    isTest: searchParams.get('test') ? searchParams.get('test') : false,
-    externalID: searchParams.get('externalid') ? searchParams.get('externalid') : null,
-    agreeToTermsOfService: false,
-    age: '',
-    zipcode: '',
-    county: '',
-    startTime: new Date().toJSON(),
-    student: false,
-    studentFulltime: false,
-    pregnant: false,
-    unemployed: false,
-    unemployedWorkedInLast18Mos: false,
-    blindOrVisuallyImpaired: false,
-    disabled: false,
-    veteran: false,
-    hasIncome: false,
-    incomeStreams: [],
-    hasExpenses: false,
-    expenses: [],
-    householdSize: '',
-    householdData: [],
-    householdAssets: 0,
-    lastTaxFilingYear: '',
-    email: '',
-    benefits: {
-      tanf: false,
-      wic: false,
-      snap: false,
-      lifeline: false,
-      acp: false,
-      eitc: false,
-      coeitc: false,
-      nslp: false,
-      ctc: false,
-      medicaid: false,
-      rtdlive: false,
-      cccap: false,
-      mydenver: false,
-      chp: false,
-      ccb: false
-    },
-    referralSource: '',
-    otherSource: ''
-  });
-
   // const [formData, setFormData] = useState({
-  //   isTest: true,
+  //   isTest: searchParams.get('test') ? searchParams.get('test') : false,
   //   externalID: searchParams.get('externalid') ? searchParams.get('externalid') : null,
   //   agreeToTermsOfService: false,
-  //   age: '33',
-  //   zipcode: '80204',
+  //   age: '',
+  //   zipcode: '',
   //   county: '',
   //   startTime: new Date().toJSON(),
   //   student: false,
   //   studentFulltime: false,
-  //   pregnant: true,
+  //   pregnant: false,
   //   unemployed: false,
-  //   unemployedWorkedInLast18Mos: true,
+  //   unemployedWorkedInLast18Mos: false,
   //   blindOrVisuallyImpaired: false,
   //   disabled: false,
   //   veteran: false,
-  //   hasIncome: true,
-  //   incomeStreams: [{
-  //     incomeStreamName: 'wages', 
-  //     incomeStreamLabel: 'Wages, salaries, tips', 
-  //     incomeAmount: '29000',
-  //     incomeFrequency: 'yearly',
-  //     incomeFrequencyLabel: 'Every year'
-  //   }],
-  //   hasExpenses: true,
-  //   expenses: [{
-  //     expenseSourceName: 'rent', 
-  //     expenseSourceLabel: 'Rent', 
-  //     expenseAmount: '500',
-  //     expenseFrequency: 'monthly',
-  //     expenseFrequencyLabel: 'Every month'
-  //   }],
-  //   householdSize: '2',
-  //   householdData: [{
-  //     age: '3',
-  //     relationshipToHH: `child`,
-  //     student: false,
-  //     studentFulltime: false,
-  //     pregnant: false,
-  //     unemployed: false,
-  //     unemployedWorkedInLast18Mos: false,
-  //     blindOrVisuallyImpaired: false,
-  //     disabled: false,
-  //     veteran: false,
-  //     medicaid: false,
-  //     disabilityRelatedMedicaid: false,
-  //     noneOfTheseApply: true,
-  //     hasIncome: false,
-  //     incomeStreams: [],
-  //     hasExpenses: false,
-  //     expenses: []
-  //   }],
-  //   householdAssets: '1000',
-  //   relationship: 'headOfHousehold',
-  //   lastTaxFilingYear: '2021',
+  //   hasIncome: false,
+  //   incomeStreams: [],
+  //   hasExpenses: false,
+  //   expenses: [],
+  //   householdSize: '',
+  //   householdData: [],
+  //   householdAssets: 0,
+  //   lastTaxFilingYear: '',
   //   email: '',
   //   benefits: {
-  //     tanf: true,
-  //     wic: true,
+  //     tanf: false,
+  //     wic: false,
   //     snap: false,
   //     lifeline: false,
   //     acp: false,
@@ -137,6 +63,83 @@ const App = () => {
   //   referralSource: '',
   //   otherSource: ''
   // });
+
+  const [formData, setFormData] = useState({
+    isTest: true,
+    externalID: searchParams.get('externalid') ? searchParams.get('externalid') : null,
+    agreeToTermsOfService: false,
+    age: '33',
+    zipcode: '80204',
+    county: '',
+    startTime: new Date().toJSON(),
+    student: false,
+    studentFulltime: false,
+    pregnant: true,
+    unemployed: false,
+    unemployedWorkedInLast18Mos: true,
+    blindOrVisuallyImpaired: false,
+    disabled: false,
+    veteran: false,
+    hasIncome: true,
+    incomeStreams: [{
+      incomeStreamName: 'wages', 
+      incomeStreamLabel: 'Wages, salaries, tips', 
+      incomeAmount: '29000',
+      incomeFrequency: 'yearly',
+      incomeFrequencyLabel: 'Every year'
+    }],
+    hasExpenses: true,
+    expenses: [{
+      expenseSourceName: 'rent', 
+      expenseSourceLabel: 'Rent', 
+      expenseAmount: '500',
+      expenseFrequency: 'monthly',
+      expenseFrequencyLabel: 'Every month'
+    }],
+    householdSize: '2',
+    householdData: [{
+      age: '3',
+      relationshipToHH: `child`,
+      student: false,
+      studentFulltime: false,
+      pregnant: false,
+      unemployed: false,
+      unemployedWorkedInLast18Mos: false,
+      blindOrVisuallyImpaired: false,
+      disabled: false,
+      veteran: false,
+      medicaid: false,
+      disabilityRelatedMedicaid: false,
+      noneOfTheseApply: true,
+      hasIncome: false,
+      incomeStreams: [],
+      hasExpenses: false,
+      expenses: []
+    }],
+    householdAssets: '1000',
+    relationship: 'headOfHousehold',
+    lastTaxFilingYear: '2021',
+    email: '',
+    benefits: {
+      tanf: true,
+      wic: true,
+      snap: false,
+      lifeline: false,
+      acp: false,
+      eitc: false,
+      coeitc: false,
+      nslp: false,
+      ctc: false,
+      medicaid: false,
+      rtdlive: false,
+      cccap: false,
+      mydenver: false,
+      chp: false,
+      ccb: false
+    },
+    referralSource: '',
+    otherSource: ''
+  });
  
   const [results, setResults] = useState({
     eligiblePrograms: [], 
