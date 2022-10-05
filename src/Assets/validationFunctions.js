@@ -305,6 +305,32 @@ const displayPhoneHasErrorHelperText = (phoneNumber) => {
     );
   }
 }
+
+const displayEmailResultsHasErrorHelperText = (props) => {
+  const { email, phone, firstName, lastName, 
+    sendResults, sendUpdates, sendOffers, commConsent } = props;
+  const atLeastOneCheckboxSelectionWasMade = [sendResults, sendUpdates, sendOffers].some(box => box === true);
+
+  if (firstOrLastNameHaveError(firstName, lastName)) {
+    return displayFirstOrLastNameErrorHelperText(firstName, lastName);
+  } else if (emailHasError(email)) {
+    return displayEmailHelperText(email);
+  } else if (phoneHasError(phone)) {
+    return displayPhoneHasErrorHelperText(phone);
+  } else if (atLeastOneCheckboxSelectionWasMade === false) {
+    return (
+      <FormattedMessage 
+        id='validation-helperText.notificationSelection' 
+        defaultMessage='Please select a notification option' />
+    );
+  } else if (commConsent === false) {
+    return (
+      <FormattedMessage 
+        id='validation-helperText.consentCheckbox' 
+        defaultMessage='Please check the box above to sign up for the selected notifications' />
+    );
+  }
+}
 export {
   ageHasError,
   displayAgeHelperText,
