@@ -227,11 +227,6 @@ const App = () => {
     navigate('/step-15');
   }
 
-  const handleEmailTextfieldChange = (event) => {
-    const { name, value } = event.target;    
-    setFormData({ ...formData, [name]: value});
-  }
-
   return (
     <ThemeProvider theme={theme}>
       <div className='App'>
