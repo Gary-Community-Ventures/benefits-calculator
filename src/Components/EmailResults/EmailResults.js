@@ -50,11 +50,11 @@ const EmailResults = ({ results }) => {
       setSignUpInfo({ ...signUpInfo, [name]: value });
     }
   }
-    if (phoneInput.current.value) {
-      phoneNumber = phoneInput.current.value.replace(/\D/g,'');
-      if(phoneNumber.length == 10) {
-        phoneNumber = '+1'+phoneNumber;
-      }
+
+  const handleCheckboxChange = (event) => {
+    const { name } = event.target;
+    setSignUpInfo({ ...signUpInfo, [name]: !signUpInfo[name] });
+  }
     }
 
     const user = {
