@@ -18,8 +18,7 @@ const StyledTextField = styled(TextField)({
   marginBottom: 20
 });
 
-const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
-  let navigate = useNavigate();
+const EmailResults = ({ results }) => {
   const [open, setOpen] = useState(false);
   const emailInput = useRef(null);
   const phoneInput = useRef(null);
