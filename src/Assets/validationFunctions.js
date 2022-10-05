@@ -278,8 +278,8 @@ const displayMissingSelectHelperText = (source) => {
   }
 }
 
-const firstOrLastNameHaveError = (firstName, lastName) => {
-  return firstName === '' || lastName === '';
+const nameHasError = (name) => {
+  return name === '' ;
 }
 
 const displayFirstOrLastNameErrorHelperText = (firstName, lastName) => {
