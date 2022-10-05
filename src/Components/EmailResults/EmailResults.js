@@ -139,9 +139,12 @@ const EmailResults = ({ results }) => {
   }
 
   const displayErrorMessage = () => {
-    return (
-      <ErrorMessage error={displayEmailResultsHasErrorHelperText(signUpInfo)} />
-    );
+    if (emailResultsHasError(signUpInfo)) {
+      return (
+        <ErrorMessage
+          error={displayEmailResultsHasErrorHelperText(signUpInfo)} />
+      );
+    }
   }
 
   return (
@@ -295,7 +298,7 @@ const EmailResults = ({ results }) => {
             }
           />
         </Grid>
-        { hasError && displayErrorMessage() }
+        { displayErrorMessage() }
         <Grid xs={12} item>
           <div className='question-buttons'>
             <Button
