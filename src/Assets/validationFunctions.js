@@ -290,6 +290,12 @@ const displayFirstOrLastNameErrorHelperText = (firstName, lastName) => {
     );
   }
 }
+
+const phoneHasError = (phoneNumber) => {
+  const digitizedPhone = phoneNumber.replace(/\D/g,'');
+  return digitizedPhone.length !== 10;
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
