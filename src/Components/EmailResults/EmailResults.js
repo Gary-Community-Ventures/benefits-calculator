@@ -156,8 +156,8 @@ const EmailResults = ({ results }) => {
             name='firstName'
             value={signUpInfo.firstName}
             onChange={(event) => {handleTextfieldChange(event)}}
-            error={firstOrLastNameHaveError(signUpInfo.firstName, signUpInfo.lastName)}
-            helperText={displayFirstOrLastNameErrorHelperText(signUpInfo.firstName, signUpInfo.lastName)}
+            error={nameHasError(signUpInfo.firstName)}
+            helperText={displayFirstNameHelperText(signUpInfo.firstName)}
             variant='outlined'
             required
             />
@@ -171,8 +171,8 @@ const EmailResults = ({ results }) => {
             name='lastName'
             value={signUpInfo.lastName}
             onChange={(event) => {handleTextfieldChange(event)}}
-            error={firstOrLastNameHaveError(signUpInfo.firstName, signUpInfo.lastName)}
-            helperText={displayFirstOrLastNameErrorHelperText(signUpInfo.firstName, signUpInfo.lastName)}
+            error={nameHasError(signUpInfo.lastName)}
+            helperText={displayLastNameHelperText(signUpInfo.lastName)}
             variant='outlined'
             required
             />
@@ -256,7 +256,7 @@ const EmailResults = ({ results }) => {
               <FormattedMessage
                 id='emailResults.return-consentText'
                 defaultMessage="By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication." />
-            </Typography>
+          </Typography>
           <FormControlLabel
             sx={{mb: 1}}
             control={
@@ -291,7 +291,7 @@ const EmailResults = ({ results }) => {
             }
           />
         </Grid>
-        { emailResultsHasError(signUpInfo) && displayErrorMessage(displayEmailResultsHasErrorHelperText(signUpInfo)) }
+        { emailResultsHasError(signUpInfo) && displayErrorMessage(displayEmailResultsHelperText(signUpInfo)) }
         <Grid xs={12} item>
           <div className='question-buttons'>
             <Button
