@@ -386,6 +386,8 @@ export {
   nameHasError,
   displayFirstNameHelperText,
   displayLastNameHelperText,
+  phoneHasError,
+  displayPhoneHasErrorHelperText,
   emailResultsHasError,
   displayEmailResultsHelperText
 }
