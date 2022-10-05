@@ -90,7 +90,7 @@ const EmailResults = ({ results }) => {
       const screenUpdates = {
         user: userResponse.id,
       }
-      const screenResponse = await updateScreen(results.screenerId, screenUpdates);
+      await updateScreen(results.screenerId, screenUpdates);
   
       setOpen(true);
       if (sendResults) {
@@ -100,22 +100,16 @@ const EmailResults = ({ results }) => {
           screen: results.screenerId,
           uid: userResponse.id
         }
-        const messageResponse = await postMessage(message)
+        await postMessage(message);
         const emailRequestUpdate = {
           last_email_request_date: new Date().toJSON()
         }
         const screenEmailResponse = await updateScreen(results.screenerId, emailRequestUpdate);
       }
-
     }
   } 
-    }
 
-  const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
+  const handleClose = () => {
     setOpen(false);
   };
 
