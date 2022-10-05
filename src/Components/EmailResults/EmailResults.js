@@ -150,18 +150,26 @@ const EmailResults = ({ results }) => {
         { displaySubheader() }
         <Grid xs={12} item>
           <StyledTextField
+            sx={{mr: 1}} 
               sx={{mr: 1}} 
-              type='text'
-              name='first_name'
-              label={
+            sx={{mr: 1}} 
+            type='text'
+            label={
+              <FormattedMessage 
                 <FormattedMessage 
+              <FormattedMessage 
+              id='emailResults.return-firstNameTextfieldLabel' 
                   id='emailResults.return-firstNameTextfieldLabel' 
-                  defaultMessage='First Name' />
-              }
-              inputRef={firstNameInput}
-              onChange={(event) => {handleEmailTextfieldChange(event)}}
-              variant='outlined'
-              required
+              id='emailResults.return-firstNameTextfieldLabel' 
+              defaultMessage='First Name' />
+            }
+            name='firstName'
+            value={signUpInfo.firstName}
+            onChange={(event) => {handleTextfieldChange(event)}}
+            error={firstOrLastNameHaveError(signUpInfo.firstName, signUpInfo.lastName)}
+            helperText={displayFirstOrLastNameErrorHelperText(signUpInfo.firstName, signUpInfo.lastName)}
+            variant='outlined'
+            required
             />
           <StyledTextField 
               type='text'
