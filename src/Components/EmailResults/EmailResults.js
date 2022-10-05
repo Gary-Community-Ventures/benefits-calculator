@@ -311,7 +311,7 @@ const EmailResults = ({ results }) => {
             <Button
               variant='contained'
               onClick={(event) => {
-                handleEmailSubmit(event);
+                handleSubmit(event);
               }}>
               <FormattedMessage 
                 id='emailResults.return-signupButton' 
