@@ -62,7 +62,9 @@ const EmailResults = ({ results }) => {
       
     } else {
       setHasError(false);
-      
+      const { email, phone, firstName, lastName, 
+        sendResults, sendUpdates, sendOffers, commConsent } = signUpInfo; 
+        
       let phoneNumber = '';
       if (phone) {
         phoneNumber = phone.replace(/\D/g,'');
@@ -72,8 +74,6 @@ const EmailResults = ({ results }) => {
         }
       }
 
-      const { email, phone, firstName, lastName, 
-        sendResults, sendUpdates, sendOffers, commConsent } = signUpInfo; 
   
       const user = {
         email_or_cell: email ? email : phoneNumber,
