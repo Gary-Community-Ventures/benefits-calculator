@@ -40,8 +40,16 @@ const EmailResults = ({ results }) => {
     privacyLink = "https://20208592.hs-sites.com/es/data-privacy-policy";
   }
 
-  const handleEmailSubmit = async () => {
-    let phoneNumber = '';
+  const handleTextfieldChange = (event) => {
+    const { name, value } = event.target;
+    const numberUpToTenDigitsLongRegex = /^\d{0,10}$/;
+
+    if (name === 'phone' && numberUpToTenDigitsLongRegex.test(value)) {
+      setSignUpInfo({ ...signUpInfo, [name]: value });
+    } else if (name !== 'phone') {
+      setSignUpInfo({ ...signUpInfo, [name]: value });
+    }
+  }
     if (phoneInput.current.value) {
       phoneNumber = phoneInput.current.value.replace(/\D/g,'');
       if(phoneNumber.length == 10) {
