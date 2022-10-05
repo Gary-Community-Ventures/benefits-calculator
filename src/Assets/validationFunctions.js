@@ -277,6 +277,9 @@ const displayMissingSelectHelperText = (source) => {
     );
   }
 }
+const firstOrLastNameHaveError = (firstName, lastName) => {
+  return firstName === '' || lastName === '';
+}
 
 export {
   ageHasError,
