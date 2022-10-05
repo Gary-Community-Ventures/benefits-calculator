@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { useState, Fragment, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
-import { emailHasError, displayEmailHelperText, emailResultsHasError, 
-  displayEmailResultsHasErrorHelperText, firstOrLastNameHaveError, displayFirstOrLastNameErrorHelperText } 
+import { emailHasError, displayEmailHelperText, 
+  displayFirstNameHelperText, displayLastNameHelperText,
+  nameHasError, emailResultsHasError, displayEmailResultsHelperText } 
   from '../../Assets/validationFunctions';
 import { postMessage, postUser, updateScreen } from '../../apiCalls';
 import Grid from '@mui/material/Grid';
