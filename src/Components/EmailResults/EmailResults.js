@@ -149,7 +149,7 @@ const EmailResults = ({ results }) => {
 
   return (
     <main className='benefits-form'>
-      <Grid container item spacing={2} sx={{mt: 2, mr: 2, ml: 2}}>
+      <Grid container item spacing={2}>
         { displaySubheader() }
         <Grid xs={12} item>
           <StyledTextField
