@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { useState, Fragment, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
-import { emailHasError, displayEmailHelperText, 
-  displayFirstNameHelperText, displayLastNameHelperText,
-  nameHasError, emailResultsHasError, displayEmailResultsHelperText } 
+import { nameHasError, displayFirstNameHelperText, displayLastNameHelperText,
+  emailHasError, displayEmailHelperText, phoneHasError, displayPhoneHasErrorHelperText,
+  signUpFormHasError, displaySignUpFormHelperText } 
   from '../../Assets/validationFunctions';
 import { postMessage, postUser, updateScreen } from '../../apiCalls';
 import Grid from '@mui/material/Grid';
@@ -57,7 +57,7 @@ const EmailResults = ({ results }) => {
   }
 
   const handleSubmit = async () => {
-    if (emailResultsHasError(signUpInfo) === false) {
+    if (signUpFormHasError(signUpInfo) === false) {
       const { email, phone, firstName, lastName, 
         sendResults, sendUpdates, sendOffers, commConsent } = signUpInfo; 
         
@@ -205,7 +205,10 @@ const EmailResults = ({ results }) => {
               name='phone'
               value={signUpInfo.phone}
               onChange={(event) => {handleTextfieldChange(event)}}
+              error={phoneHasError(signUpInfo.phone)}
+              helperText={displayPhoneHasErrorHelperText(signUpInfo.phone)} 
               variant='outlined'
+              required
             />          
         </Grid>
         <Grid xs={12} item>
@@ -291,7 +294,7 @@ const EmailResults = ({ results }) => {
             }
           />
         </Grid>
-        { emailResultsHasError(signUpInfo) && displayErrorMessage(displayEmailResultsHelperText(signUpInfo)) }
+        { signUpFormHasError(signUpInfo) && displayErrorMessage(displaySignUpFormHelperText(signUpInfo)) }
         <Grid xs={12} item>
           <div className='question-buttons'>
             <Button
