@@ -166,16 +166,19 @@ const EmailResults = ({ results }) => {
             required
             />
           <StyledTextField 
-              type='text'
-              name='last_name'
-              label={
-                <FormattedMessage 
-                  id='emailResults.return-lastNameTextfieldLabel' 
-                  defaultMessage='Last Name' />
-              }
-              inputRef={lastNameInput}
-              variant='outlined'
-              required
+            type='text'
+            label={
+              <FormattedMessage 
+              id='emailResults.return-lastNameTextfieldLabel' 
+              defaultMessage='Last Name' />
+            }
+            name='lastName'
+            value={signUpInfo.lastName}
+            onChange={(event) => {handleTextfieldChange(event)}}
+            error={firstOrLastNameHaveError(signUpInfo.firstName, signUpInfo.lastName)}
+            helperText={displayFirstOrLastNameErrorHelperText(signUpInfo.firstName, signUpInfo.lastName)}
+            variant='outlined'
+            required
             />
         </Grid>
         <Grid xs={12} item>
