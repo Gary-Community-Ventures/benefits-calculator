@@ -104,7 +104,7 @@ const EmailResults = ({ results }) => {
         const emailRequestUpdate = {
           last_email_request_date: new Date().toJSON()
         }
-        const screenEmailResponse = await updateScreen(results.screenerId, emailRequestUpdate);
+        await updateScreen(results.screenerId, emailRequestUpdate);
       }
     }
   } 
