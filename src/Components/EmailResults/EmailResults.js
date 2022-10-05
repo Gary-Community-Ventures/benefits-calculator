@@ -146,9 +146,9 @@ const EmailResults = ({ results }) => {
 
   return (
     <main className='benefits-form'>
-      <Grid container spacing={2} sx={{mt: 2, mr: 2, ml: 2}}>
+      <Grid container item spacing={2} sx={{mt: 2, mr: 2, ml: 2}}>
         { displaySubheader() }
-        <Grid xs={12}>
+        <Grid xs={12} item>
           <StyledTextField
               sx={{mr: 1}} 
               type='text'
@@ -176,7 +176,7 @@ const EmailResults = ({ results }) => {
               required
             />
         </Grid>
-        <Grid xs={12}>
+        <Grid xs={12} item>
           <StyledTextField 
             type='email'
             name='email'
@@ -193,7 +193,7 @@ const EmailResults = ({ results }) => {
             helperText={displayEmailHelperText(formData.email)} 
           />
         </Grid>
-        <Grid xs={12}>
+        <Grid xs={12} item>
           <StyledTextField 
               type='tel'
               name='phone'
@@ -206,7 +206,7 @@ const EmailResults = ({ results }) => {
               variant='outlined'
             />          
         </Grid>
-        <Grid xs={12}>
+        <Grid xs={12} item>
           <FormLabel>
             <FormattedMessage
               id='emailResults.return-contactAbout'
@@ -278,7 +278,7 @@ const EmailResults = ({ results }) => {
             }
           />
         </Grid>
-        <Grid xs={12}>
+        <Grid xs={12} item>
           <div className='question-buttons'>
             <Button
               sx={{mr: 2}}
