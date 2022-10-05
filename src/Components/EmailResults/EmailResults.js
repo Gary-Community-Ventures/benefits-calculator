@@ -19,6 +19,17 @@ const StyledTextField = styled(TextField)({
 });
 
 const EmailResults = ({ results }) => {
+  const [signUpInfo, setSignUpInfo] = useState({
+    email: '',
+    phone: '',
+    firstName: '',
+    lastName: '',
+    sendResults: false,
+    sendUpdates: false,
+    sendOffers: false,
+    commConsent: false
+  });
+  const [hasError, setHasError] = useState(false);
   const [open, setOpen] = useState(false);
   const emailInput = useRef(null);
   const phoneInput = useRef(null);
