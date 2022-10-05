@@ -57,11 +57,7 @@ const EmailResults = ({ results }) => {
   }
 
   const handleSubmit = async () => {
-    if (emailResultsHasError(signUpInfo)) {
-      setHasError(true);
-      
-    } else {
-      setHasError(false);
+    if (emailResultsHasError(signUpInfo) === false) {
       const { email, phone, firstName, lastName, 
         sendResults, sendUpdates, sendOffers, commConsent } = signUpInfo; 
         
