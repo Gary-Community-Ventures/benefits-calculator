@@ -133,13 +133,10 @@ const EmailResults = ({ results }) => {
     );
   }
 
-  const displayErrorMessage = () => {
-    if (emailResultsHasError(signUpInfo)) {
-      return (
-        <ErrorMessage
-          error={displayEmailResultsHasErrorHelperText(signUpInfo)} />
-      );
-    }
+  const displayErrorMessage = (error) => {
+    return (
+      <ErrorMessage error={error} />
+    );
   }
 
   return (
