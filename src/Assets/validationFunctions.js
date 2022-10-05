@@ -281,6 +281,15 @@ const firstOrLastNameHaveError = (firstName, lastName) => {
   return firstName === '' || lastName === '';
 }
 
+const displayFirstOrLastNameErrorHelperText = (firstName, lastName) => {
+  if (firstOrLastNameHaveError(firstName, lastName)) {
+    return (
+      <FormattedMessage 
+        id='validation-helperText.firstOrLastName' 
+        defaultMessage='Please enter your first and last name' />
+    );
+  }
+}
 export {
   ageHasError,
   displayAgeHelperText,
