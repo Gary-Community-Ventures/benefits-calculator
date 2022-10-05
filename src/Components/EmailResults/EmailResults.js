@@ -184,18 +184,18 @@ const EmailResults = ({ results }) => {
         <Grid xs={12} item>
           <StyledTextField 
             type='email'
-            name='email'
             label={
               <FormattedMessage 
-                id='emailResults.return-emailTextfieldLabel' 
-                defaultMessage='Email' />
+              id='emailResults.return-emailTextfieldLabel' 
+              defaultMessage='Email' />
             }
-            inputRef={emailInput}
-            onChange={(event) => {handleEmailTextfieldChange(event)}}
+            name='email'
+            value={signUpInfo.email}
+            onChange={(event) => {handleTextfieldChange(event)}}
+            error={emailHasError(signUpInfo.email)}
+            helperText={displayEmailHelperText(signUpInfo.email)} 
             variant='outlined'
             required
-            error={emailHasError(formData.email)}
-            helperText={displayEmailHelperText(formData.email)} 
           />
         </Grid>
         <Grid xs={12} item>
