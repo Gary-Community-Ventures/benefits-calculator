@@ -277,6 +277,7 @@ const displayMissingSelectHelperText = (source) => {
     );
   }
 }
+
 const firstOrLastNameHaveError = (firstName, lastName) => {
   return firstName === '' || lastName === '';
 }
@@ -306,6 +307,16 @@ const displayPhoneHasErrorHelperText = (phoneNumber) => {
   }
 }
 
+const emailResultsHasError = (props) => {
+  const { email, phone, firstName, lastName, 
+    sendResults, sendUpdates, sendOffers, commConsent } = props;
+  const atLeastOneCheckboxSelectionWasMade = [sendResults, sendUpdates, sendOffers]
+    .some(box => box === true);
+
+  return (emailHasError(email)) || (phoneHasError(phone)) || (!firstName) ||
+    (!lastName) || (atLeastOneCheckboxSelectionWasMade === false) || (commConsent === false);
+}
+
 const displayEmailResultsHasErrorHelperText = (props) => {
   const { email, phone, firstName, lastName, 
     sendResults, sendUpdates, sendOffers, commConsent } = props;
@@ -331,6 +342,7 @@ const displayEmailResultsHasErrorHelperText = (props) => {
     );
   }
 }
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -358,5 +370,9 @@ export {
   benefitsHasError,
   referralSourceHasError,
   displayReferralSourceHelperText,
-  displayMissingSelectHelperText
+  displayMissingSelectHelperText,
+  firstOrLastNameHaveError,
+  displayFirstOrLastNameErrorHelperText,
+  emailResultsHasError,
+  displayEmailResultsHasErrorHelperText
 }
