@@ -128,7 +128,7 @@ const EmailResults = ({ results }) => {
 
   const displaySubheader = () => {
     return (
-      <Grid xs={12}>
+      <Grid xs={12} item>
         <h2 className='sub-header'>
           <FormattedMessage 
             id='emailResults.return-signupHeader' 
