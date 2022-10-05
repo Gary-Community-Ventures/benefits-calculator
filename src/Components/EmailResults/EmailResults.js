@@ -137,6 +137,13 @@ const EmailResults = ({ results }) => {
       </Grid>
     );
   }
+
+  const displayErrorMessage = () => {
+    return (
+      <ErrorMessage error={displayEmailResultsHasErrorHelperText(signUpInfo)} />
+    );
+  }
+
   return (
     <main className='benefits-form'>
       <Grid container spacing={2} sx={{mt: 2, mr: 2, ml: 2}}>
