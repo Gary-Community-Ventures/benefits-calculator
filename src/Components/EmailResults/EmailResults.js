@@ -1,17 +1,18 @@
-import { TextField, Button, Typography, FormGroup, FormControlLabel, Checkbox, FormLabel, fabClasses } from '@mui/material';
+import { TextField, Button, Typography, FormGroup, FormControlLabel, Checkbox, FormLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { useState, SyntheticEvent, Fragment, useRef, useContext } from 'react';
+import { useState, Fragment, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
-import { Link } from 'react-router-dom'
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { emailHasError, displayEmailHelperText } from '../../Assets/validationFunctions';
+import { FormattedMessage } from 'react-intl';
+import { emailHasError, displayEmailHelperText, emailResultsHasError, 
+  displayEmailResultsHasErrorHelperText, firstOrLastNameHaveError, displayFirstOrLastNameErrorHelperText } 
+  from '../../Assets/validationFunctions';
 import { postMessage, postUser, updateScreen } from '../../apiCalls';
 import Grid from '@mui/material/Grid';
 import Snackbar from '@mui/material/Snackbar';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const StyledTextField = styled(TextField)({
   marginBottom: 20
