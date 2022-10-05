@@ -296,6 +296,15 @@ const phoneHasError = (phoneNumber) => {
   return digitizedPhone.length !== 10;
 }
 
+const displayPhoneHasErrorHelperText = (phoneNumber) => {
+  if (phoneHasError(phoneNumber)) {
+    return (
+      <FormattedMessage 
+          id='validation-helperText.phoneNumber' 
+          defaultMessage='Please enter a 10 digit phone number' />
+    );
+  }
+}
 export {
   ageHasError,
   displayAgeHelperText,
