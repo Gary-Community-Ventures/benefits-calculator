@@ -28,7 +28,7 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
   const sendUpdates = useRef(false);
   const sendOffers = useRef(false);
   const commConsent = useRef(false);
-  const locale = useContext(Context).locale;
+  const locale = useContext(Context).locale.toLowerCase();
   let privacyLink = "https://20208592.hs-sites.com/en/data-privacy-policy?__hstc=144746475.066f707c0b490f88f5429b1856cf0908.1663037963489.1663086538117.1663095192641.3&__hssc=144746475.1.1663095192641&__hsfp=2418539872";
   if (locale == "es") {
     privacyLink = "https://20208592.hs-sites.com/es/data-privacy-policy";
@@ -50,6 +50,7 @@ const EmailResults = ({ formData, results, handleEmailTextfieldChange }) => {
       first_name: firstNameInput.current.value,
       last_name: lastNameInput.current.value,
       tcpa_consent: commConsent.current.checked,
+      language_code: locale,
       send_offers: sendOffers.current.checked,
       send_updates: sendUpdates.current.checked
     }

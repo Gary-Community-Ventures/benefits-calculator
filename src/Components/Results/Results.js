@@ -6,14 +6,8 @@ import { Button, Checkbox, FormControlLabel, Link, Typography, Accordion, Accord
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
 import SendIcon from '@mui/icons-material/Send';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import TableCell from '@mui/material/TableCell';
-import TableRow from '@mui/material/TableRow';
 import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import {
   postPartialParentScreen,
@@ -45,7 +39,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }, []);
 
   const fetchResults = async () => {
-    const screensBody = getScreensBody(formData);
+    const screensBody = getScreensBody(formData, locale.toLowerCase());
     const screensResponse = await postPartialParentScreen(screensBody);
     const householdMembersBodies = getHouseholdMembersBodies(formData, screensResponse.id);
     for (const householdMembersBody of householdMembersBodies) {
@@ -77,7 +71,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     });
   }
 
-  const getScreensBody = (formData) => {
+  const getScreensBody = (formData, languageCode) => {
     const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets, startTime, isTest, externalID, lastTaxFilingYear, benefits, referralSource, otherSource } = formData;
     const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 
@@ -91,6 +85,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       household_size: householdSize,
       household_assets: householdAssets,
       last_tax_filing_year: lastTaxFilingYear,
+      request_language_code: languageCode,
       has_acp: benefits.acp,
       has_ccb: benefits.ccb,
       has_cccap: benefits.cccap,
