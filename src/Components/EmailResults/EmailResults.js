@@ -290,7 +290,7 @@ const EmailResults = ({ results }) => {
             }
           />
         </Grid>
-        { displayErrorMessage() }
+        { emailResultsHasError(signUpInfo) && displayErrorMessage(displayEmailResultsHasErrorHelperText(signUpInfo)) }
         <Grid xs={12} item>
           <div className='question-buttons'>
             <Button
