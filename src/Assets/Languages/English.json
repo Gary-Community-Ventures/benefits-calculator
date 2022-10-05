@@ -275,6 +275,7 @@
   "results.resultsRow-reducedExpensesText": "reduced expenses",
   "results.resultsRow-cashText": "cash",
   "results.resultsRow-reducedCostText": "reduced cost services",
+  "results.returnsignupCitizenFilter": "Only show benefits that do not require a citizen in the household",
   "emailResults.return-emailResultsHeader": "Email a copy of my results",
   "emailResults.return-signupHeader": "Signup for benefits, updates, and offers",
   "emailResults.return-signupDescription": "To receive a copy of these results by email, updates on future benefits you may be eligible for, and incentive offers please provide your email address below.",

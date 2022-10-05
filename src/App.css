@@ -41,6 +41,11 @@
 .Mui-focused .MuiInput-input  {
   background-color: rgba(0,0,0,0) !important;
 }
+.MuiDataGrid-columnHeaderTitle {
+    overflow: visible !important;
+    line-height: 1.43rem !important;
+    white-space: normal !important;
+}
 
 /* text input label in a focus state */
 .MuiInputLabel-root.MuiInputLabel-formControl.Mui-focused {

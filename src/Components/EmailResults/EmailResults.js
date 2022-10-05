@@ -30,11 +30,11 @@ const EmailResults = ({ results }) => {
     sendOffers: false,
     commConsent: false
   });
-  const [open, setOpen] = useState(false);
 
+  const [open, setOpen] = useState(false);
   let navigate = useNavigate();
 
-  const locale = useContext(Context).locale;
+  const locale = useContext(Context).locale.toLowerCase();
   let privacyLink = "https://20208592.hs-sites.com/en/data-privacy-policy?__hstc=144746475.066f707c0b490f88f5429b1856cf0908.1663037963489.1663086538117.1663095192641.3&__hssc=144746475.1.1663095192641&__hsfp=2418539872";
   if (locale == "es") {
     privacyLink = "https://20208592.hs-sites.com/es/data-privacy-policy";
@@ -70,7 +70,6 @@ const EmailResults = ({ results }) => {
         }
       }
 
-  
       const user = {
         email_or_cell: email ? email : phoneNumber,
         cell: phone ? phone : '',
@@ -78,6 +77,7 @@ const EmailResults = ({ results }) => {
         first_name: firstName,
         last_name: lastName,
         tcpa_consent: commConsent,
+        language_code: locale,
         send_offers: sendOffers,
         send_updates: sendUpdates
       }
@@ -150,8 +150,8 @@ const EmailResults = ({ results }) => {
             type='text'
             label={
               <FormattedMessage 
-              id='emailResults.return-firstNameTextfieldLabel' 
-              defaultMessage='First Name' />
+                id='emailResults.return-firstNameTextfieldLabel' 
+                defaultMessage='First Name' />
             }
             name='firstName'
             value={signUpInfo.firstName}
@@ -160,13 +160,13 @@ const EmailResults = ({ results }) => {
             helperText={displayFirstNameHelperText(signUpInfo.firstName)}
             variant='outlined'
             required
-            />
+          />
           <StyledTextField 
             type='text'
             label={
               <FormattedMessage 
-              id='emailResults.return-lastNameTextfieldLabel' 
-              defaultMessage='Last Name' />
+                id='emailResults.return-lastNameTextfieldLabel' 
+                defaultMessage='Last Name' />
             }
             name='lastName'
             value={signUpInfo.lastName}
@@ -175,15 +175,15 @@ const EmailResults = ({ results }) => {
             helperText={displayLastNameHelperText(signUpInfo.lastName)}
             variant='outlined'
             required
-            />
+          />
         </Grid>
         <Grid xs={12} item>
           <StyledTextField 
             type='email'
             label={
               <FormattedMessage 
-              id='emailResults.return-emailTextfieldLabel' 
-              defaultMessage='Email' />
+                id='emailResults.return-emailTextfieldLabel' 
+                defaultMessage='Email' />
             }
             name='email'
             value={signUpInfo.email}
@@ -196,20 +196,20 @@ const EmailResults = ({ results }) => {
         </Grid>
         <Grid xs={12} item>
           <StyledTextField 
-              type='tel'
-              label={
-                <FormattedMessage 
+            type='tel'
+            label={
+              <FormattedMessage 
                 id='emailResults.return-phoneTextfieldLabel' 
                 defaultMessage='Cell Phone' />
-              }
-              name='phone'
-              value={signUpInfo.phone}
-              onChange={(event) => {handleTextfieldChange(event)}}
-              error={phoneHasError(signUpInfo.phone)}
-              helperText={displayPhoneHasErrorHelperText(signUpInfo.phone)} 
-              variant='outlined'
-              required
-            />          
+            }
+            name='phone'
+            value={signUpInfo.phone}
+            onChange={(event) => {handleTextfieldChange(event)}}
+            error={phoneHasError(signUpInfo.phone)}
+            helperText={displayPhoneHasErrorHelperText(signUpInfo.phone)} 
+            variant='outlined'
+            required
+          />          
         </Grid>
         <Grid xs={12} item>
           <FormLabel>
@@ -226,9 +226,10 @@ const EmailResults = ({ results }) => {
                   onChange={handleCheckboxChange}
                   name="sendResults" />
               }
-              label={<FormattedMessage 
-                id='emailResults.return-sendcopy' 
-                defaultMessage='Please send me a copy of my results.' />}
+              label={
+                <FormattedMessage 
+                  id='emailResults.return-sendcopy' 
+                  defaultMessage='Please send me a copy of my results.' />}
             />
             <FormControlLabel
               sx={{mt: 1}}
@@ -238,9 +239,10 @@ const EmailResults = ({ results }) => {
                   onChange={handleCheckboxChange}
                   name="sendUpdates" />
               }
-              label={<FormattedMessage 
-                id='emailResults.return-sendupdates' 
-                defaultMessage='Please notify me when new benefits become available to me that I am likely eligible for based on the information I have provided.' />}
+              label={
+                <FormattedMessage 
+                  id='emailResults.return-sendupdates' 
+                  defaultMessage='Please notify me when new benefits become available to me that I am likely eligible for based on the information I have provided.' />}
             />
             <FormControlLabel
               sx={{mt: 1}}
@@ -250,15 +252,16 @@ const EmailResults = ({ results }) => {
                   onChange={handleCheckboxChange}
                   name="sendOffers" />
               }
-              label={<FormattedMessage 
-                id='emailResults.return-sendoffers' 
-                defaultMessage='Please notify me when there are paid opportunities to provide feedback on this screener.' />}
+              label={
+                <FormattedMessage 
+                  id='emailResults.return-sendoffers' 
+                  defaultMessage='Please notify me when there are paid opportunities to provide feedback on this screener.' />}
             />
           </FormGroup>
           <Typography variant='body1' sx={{mb: 1, mt: 4}} style={{ fontWeight: 600 }}>
-              <FormattedMessage
-                id='emailResults.return-consentText'
-                defaultMessage="By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication." />
+            <FormattedMessage
+              id='emailResults.return-consentText'
+              defaultMessage="By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication." />
           </Typography>
           <FormControlLabel
             sx={{mb: 1}}
