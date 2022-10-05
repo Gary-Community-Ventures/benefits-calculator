@@ -222,7 +222,10 @@ const EmailResults = ({ results }) => {
             <FormControlLabel
               sx={{mt: 1}}
               control={
-                <Checkbox inputRef={sendResults} name="sendResults" />
+                <Checkbox 
+                  checked={signUpInfo.sendResults}
+                  onChange={handleCheckboxChange}
+                  name="sendResults" />
               }
               label={<FormattedMessage 
                 id='emailResults.return-sendcopy' 
