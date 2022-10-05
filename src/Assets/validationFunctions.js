@@ -282,12 +282,15 @@ const nameHasError = (name) => {
   return name === '' ;
 }
 
-const displayFirstOrLastNameErrorHelperText = (firstName, lastName) => {
-  if (firstOrLastNameHaveError(firstName, lastName)) {
+const displayFirstNameHelperText = (firstName) => {
+  if (nameHasError(firstName)) {
     return (
       <FormattedMessage 
-        id='validation-helperText.firstOrLastName' 
-        defaultMessage='Please enter your first and last name' />
+        id='validation-helperText.firstName' 
+        defaultMessage='Please enter your first name' />
+    );
+  }
+}
     );
   }
 }
