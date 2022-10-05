@@ -317,7 +317,7 @@ const displayPhoneHasErrorHelperText = (phoneNumber) => {
   }
 }
 
-const emailResultsHasError = (props) => {
+const signUpFormHasError = (props) => {
   const { email, phone, firstName, lastName, 
     sendResults, sendUpdates, sendOffers, commConsent } = props;
   const atLeastOneCheckboxSelectionWasMade = [sendResults, sendUpdates, sendOffers]
@@ -327,7 +327,7 @@ const emailResultsHasError = (props) => {
     (!lastName) || (atLeastOneCheckboxSelectionWasMade === false) || (commConsent === false);
 }
 
-const displayEmailResultsHelperText = (props) => {
+const displaySignUpFormHelperText = (props) => {
   const { email, phone, firstName, lastName, 
     sendResults, sendUpdates, sendOffers, commConsent } = props;
   const atLeastOneCheckboxSelectionWasMade = [sendResults, sendUpdates, sendOffers].some(box => box === true);
@@ -388,6 +388,6 @@ export {
   displayLastNameHelperText,
   phoneHasError,
   displayPhoneHasErrorHelperText,
-  emailResultsHasError,
-  displayEmailResultsHelperText
+  signUpFormHasError,
+  displaySignUpFormHelperText
 }
