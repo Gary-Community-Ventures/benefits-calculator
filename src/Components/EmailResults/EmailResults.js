@@ -201,13 +201,14 @@ const EmailResults = ({ results }) => {
         <Grid xs={12} item>
           <StyledTextField 
               type='tel'
-              name='phone'
               label={
                 <FormattedMessage 
-                  id='emailResults.return-phoneTextfieldLabel' 
-                  defaultMessage='Cell Phone' />
+                id='emailResults.return-phoneTextfieldLabel' 
+                defaultMessage='Cell Phone' />
               }
-              inputRef={phoneInput}
+              name='phone'
+              value={signUpInfo.phone}
+              onChange={(event) => {handleTextfieldChange(event)}}
               variant='outlined'
             />          
         </Grid>
