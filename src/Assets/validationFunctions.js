@@ -291,6 +291,13 @@ const displayFirstNameHelperText = (firstName) => {
     );
   }
 }
+
+const displayLastNameHelperText = (lastName) => {
+  if (nameHasError(lastName)) {
+    return (
+      <FormattedMessage 
+        id='validation-helperText.lastName' 
+        defaultMessage='Please enter your last name' />
     );
   }
 }
