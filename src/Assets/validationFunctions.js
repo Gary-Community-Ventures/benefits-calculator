@@ -383,8 +383,9 @@ export {
   referralSourceHasError,
   displayReferralSourceHelperText,
   displayMissingSelectHelperText,
-  firstOrLastNameHaveError,
-  displayFirstOrLastNameErrorHelperText,
+  nameHasError,
+  displayFirstNameHelperText,
+  displayLastNameHelperText,
   emailResultsHasError,
-  displayEmailResultsHasErrorHelperText
+  displayEmailResultsHelperText
 }
