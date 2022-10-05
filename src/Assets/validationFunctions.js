@@ -327,13 +327,15 @@ const emailResultsHasError = (props) => {
     (!lastName) || (atLeastOneCheckboxSelectionWasMade === false) || (commConsent === false);
 }
 
-const displayEmailResultsHasErrorHelperText = (props) => {
+const displayEmailResultsHelperText = (props) => {
   const { email, phone, firstName, lastName, 
     sendResults, sendUpdates, sendOffers, commConsent } = props;
   const atLeastOneCheckboxSelectionWasMade = [sendResults, sendUpdates, sendOffers].some(box => box === true);
 
-  if (firstOrLastNameHaveError(firstName, lastName)) {
-    return displayFirstOrLastNameErrorHelperText(firstName, lastName);
+  if (nameHasError(firstName)) {
+    return displayFirstNameHelperText(firstName);
+  } else if (nameHasError(lastName)) {
+    return displayLastNameHelperText(lastName);
   } else if (emailHasError(email)) {
     return displayEmailHelperText(email);
   } else if (phoneHasError(phone)) {
