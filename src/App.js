@@ -273,9 +273,7 @@ const App = () => {
             <Route
               path='/email-results' 
               element={<EmailResults 
-                formData={formData}
-                results={results} 
-                handleEmailTextfieldChange={handleEmailTextfieldChange} /> } />
+                results={results} /> } />
             <Route
               path='*'
               element={<Navigate to="/step-1" replace /> } />
