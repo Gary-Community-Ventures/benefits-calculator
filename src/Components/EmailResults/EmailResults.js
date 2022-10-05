@@ -264,7 +264,11 @@ const EmailResults = ({ results }) => {
           <FormControlLabel
             sx={{mb: 1}}
             control={
-              <Checkbox inputRef={commConsent} name="commConsent" required />
+              <Checkbox 
+                checked={signUpInfo.commConsent} 
+                onChange={handleCheckboxChange}
+                name="commConsent" 
+                required />
             }
             label={
               <div>
