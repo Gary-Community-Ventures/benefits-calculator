@@ -151,15 +151,9 @@ const EmailResults = ({ results }) => {
         <Grid xs={12} item>
           <StyledTextField
             sx={{mr: 1}} 
-              sx={{mr: 1}} 
-            sx={{mr: 1}} 
             type='text'
             label={
               <FormattedMessage 
-                <FormattedMessage 
-              <FormattedMessage 
-              id='emailResults.return-firstNameTextfieldLabel' 
-                  id='emailResults.return-firstNameTextfieldLabel' 
               id='emailResults.return-firstNameTextfieldLabel' 
               defaultMessage='First Name' />
             }
