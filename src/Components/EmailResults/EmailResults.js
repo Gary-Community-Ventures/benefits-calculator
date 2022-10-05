@@ -55,41 +55,61 @@ const EmailResults = ({ results }) => {
     const { name } = event.target;
     setSignUpInfo({ ...signUpInfo, [name]: !signUpInfo[name] });
   }
-    }
 
-    const user = {
-      email_or_cell: emailInput.current.value ? emailInput.current.value : phoneNumber,
-      cell: phoneNumber ? phoneNumber : '',
-      email: emailInput.current.value ? emailInput.current.value : '',
-      first_name: firstNameInput.current.value,
-      last_name: lastNameInput.current.value,
-      tcpa_consent: commConsent.current.checked,
-      send_offers: sendOffers.current.checked,
-      send_updates: sendUpdates.current.checked
-    }
-    const userResponse = await postUser(user);
-
-    const screenUpdates = {
-      user: userResponse.id,
-    }
-    const screenResponse = await updateScreen(results.screenerId, screenUpdates);
-
-    setOpen(true);
-    if (sendResults.current.checked) {
-      const message = {
-        email: formData.email,
-        type: 'emailScreen',
-        screen: results.screenerId,
-        uid: userResponse.id
+  const handleSubmit = async () => {
+    if (emailResultsHasError(signUpInfo)) {
+      setHasError(true);
+      
+    } else {
+      setHasError(false);
+      
+      let phoneNumber = '';
+      if (phone) {
+        phoneNumber = phone.replace(/\D/g,'');
+      
+        if (phoneNumber.length == 10) {
+          phoneNumber = '+1' + phoneNumber;
+        }
       }
-      const messageResponse = await postMessage(message)
-      const emailRequestUpdate = {
-        last_email_request_date: new Date().toJSON()
-      }
-      const screenEmailResponse = await updateScreen(results.screenerId, emailRequestUpdate);
-    }
 
+      const { email, phone, firstName, lastName, 
+        sendResults, sendUpdates, sendOffers, commConsent } = signUpInfo; 
+  
+      const user = {
+        email_or_cell: email ? email : phoneNumber,
+        cell: phone ? phone : '',
+        email: email ? email : '',
+        first_name: firstName,
+        last_name: lastName,
+        tcpa_consent: commConsent,
+        send_offers: sendOffers,
+        send_updates: sendUpdates
+      }
+      const userResponse = await postUser(user);
+  
+      const screenUpdates = {
+        user: userResponse.id,
+      }
+      const screenResponse = await updateScreen(results.screenerId, screenUpdates);
+  
+      setOpen(true);
+      if (sendResults) {
+        const message = {
+          email: email,
+          type: 'emailScreen',
+          screen: results.screenerId,
+          uid: userResponse.id
+        }
+        const messageResponse = await postMessage(message)
+        const emailRequestUpdate = {
+          last_email_request_date: new Date().toJSON()
+        }
+        const screenEmailResponse = await updateScreen(results.screenerId, emailRequestUpdate);
+      }
+
+    }
   } 
+    }
 
   const handleClose = (event: SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
