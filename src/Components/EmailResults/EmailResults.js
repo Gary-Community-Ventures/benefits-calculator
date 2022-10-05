@@ -29,7 +29,6 @@ const EmailResults = ({ results }) => {
     sendOffers: false,
     commConsent: false
   });
-  const [hasError, setHasError] = useState(false);
   const [open, setOpen] = useState(false);
 
   let navigate = useNavigate();
