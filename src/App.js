@@ -39,7 +39,6 @@ const App = () => {
     householdData: [],
     householdAssets: 0,
     lastTaxFilingYear: '',
-    email: '',
     benefits: {
       tanf: false,
       wic: false,
@@ -116,7 +115,6 @@ const App = () => {
   //   householdAssets: '1000',
   //   relationship: 'headOfHousehold',
   //   lastTaxFilingYear: '2021',
-  //   email: '',
   //   benefits: {
   //     tanf: true,
   //     wic: true,
