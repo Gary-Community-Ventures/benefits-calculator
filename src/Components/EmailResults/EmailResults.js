@@ -141,7 +141,7 @@ const EmailResults = ({ results }) => {
     );
   }
 
-  const displayErrorMessage = (error) => {
+  const renderErrorMessage = (error) => {
     return (
       <ErrorMessage error={error} />
     );
