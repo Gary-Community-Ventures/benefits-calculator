@@ -82,26 +82,32 @@ const EmailResults = ({ results }) => {
         send_offers: sendOffers,
         send_updates: sendUpdates
       }
-      const userResponse = await postUser(user);
-  
-      const screenUpdates = {
-        user: userResponse.id,
-      }
-      await updateScreen(results.screenerId, screenUpdates);
-  
-      setOpen(true);
-      if (sendResults) {
-        const message = {
-          email: email,
-          type: 'emailScreen',
-          screen: results.screenerId,
-          uid: userResponse.id
+      try {
+        const userResponse = await postUser(user);
+        const screenUpdates = {
+          user: userResponse.id,
         }
-        await postMessage(message);
-        const emailRequestUpdate = {
-          last_email_request_date: new Date().toJSON()
+        await updateScreen(results.screenerId, screenUpdates);
+    
+        setOpen(true);
+
+        if (sendResults) {
+          const message = {
+            email: email,
+            type: 'emailScreen',
+            screen: results.screenerId,
+            uid: userResponse.id
+          }
+          await postMessage(message);
+
+          const emailRequestUpdate = {
+            last_email_request_date: new Date().toJSON()
+          }
+          await updateScreen(results.screenerId, emailRequestUpdate);
         }
-        await updateScreen(results.screenerId, emailRequestUpdate);
+
+      } catch (error) {
+        setSignUpInfo({ ...signUpInfo, error: error.message });
       }
     }
   } 
