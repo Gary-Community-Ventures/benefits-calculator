@@ -36,8 +36,12 @@ const postUser = (userData) => {
       return response.json();
     })
     .then(data => {
-      if (!savedResponse.ok) {
-        throw new Error(`${savedResponse.status} ${JSON.stringify(data)}`);
+      if (data.cell && data.email) {
+        throw new Error(data.cell + ' ' + data.email)
+      } else if (data.cell) {
+        throw new Error(data.cell)
+      } else if (data.email) {
+        throw new Error(data.email)
       }
     });
 }
