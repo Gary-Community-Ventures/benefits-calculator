@@ -25,17 +25,21 @@ const header = {
 };
 
 const postUser = (userData) => {
+  let savedResponse;
   return fetch(userEndpoint, {
     method: 'POST',
     body: JSON.stringify(userData),
     headers: header
   })
     .then(response => {
-      if(!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
+      savedResponse = response;
       return response.json();
     })
+    .then(data => {
+      if (!savedResponse.ok) {
+        throw new Error(`${savedResponse.status} ${JSON.stringify(data)}`);
+      }
+    });
 }
 
 const postMessage = (messageData) => {
