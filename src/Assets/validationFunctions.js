@@ -223,7 +223,7 @@ const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) =
 }
 
 const emailHasError = (email) => {
-  return !(/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email));
+  return email !== '' && !(/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email));
 } 
 
 const displayEmailHelperText = (email) => {
