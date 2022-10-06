@@ -28,7 +28,8 @@ const EmailResults = ({ results }) => {
     sendResults: false,
     sendUpdates: false,
     sendOffers: false,
-    commConsent: false
+    commConsent: false,
+    error: null
   });
 
   const [open, setOpen] = useState(false);
