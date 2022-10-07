@@ -323,7 +323,7 @@ const signUpFormHasError = (props) => {
   const atLeastOneCheckboxSelectionWasMade = [sendResults, sendUpdates, sendOffers]
     .some(box => box === true);
 
-  return (emailHasError(email)) || (phoneHasError(phone)) || (!firstName) ||
+  return (emailHasError(email)) || (phoneHasError(phone)) || (!email && !phone) || (!firstName) ||
     (!lastName) || (atLeastOneCheckboxSelectionWasMade === false) || (commConsent === false);
 }
 
