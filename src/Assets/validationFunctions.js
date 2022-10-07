@@ -304,7 +304,7 @@ const displayLastNameHelperText = (lastName) => {
 
 const phoneHasError = (phoneNumber) => {
   const digitizedPhone = phoneNumber.replace(/\D/g,'');
-  return digitizedPhone.length !== 10;
+  return phoneNumber !== '' && digitizedPhone.length !== 10;
 }
 
 const displayPhoneHasErrorHelperText = (phoneNumber) => {
