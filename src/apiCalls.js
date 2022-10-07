@@ -25,25 +25,18 @@ const header = {
 };
 
 const postUser = (userData) => {
-  let savedResponse;
   return fetch(userEndpoint, {
     method: 'POST',
     body: JSON.stringify(userData),
     headers: header
   })
-    .then(response => {
-      savedResponse = response;
-      return response.json();
-    })
-    .then(data => {
-      if (data.cell && data.email) {
-        throw new Error(data.cell + ' ' + data.email)
-      } else if (data.cell) {
-        throw new Error(data.cell)
-      } else if (data.email) {
-        throw new Error(data.email)
-      }
-    });
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('A user with this email or phone number already exists in our system.');
+    }
+
+    return response.json();
+  });
 }
 
 const postMessage = (messageData) => {
