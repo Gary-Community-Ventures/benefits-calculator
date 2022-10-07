@@ -86,6 +86,7 @@
   "validation-helperText.lastName": "Please enter your last name",
   "validation-helperText.notificationSelection": "Please select a notification option",
   "validation-helperText.consentCheckbox": "Please check the box above to sign up for the selected notifications",
+  "validation-helperText.noEmailOrPhoneNumber": "Please enter an email or phone number",
   "previousButton": "Prev",
   "continueButton": "Continue",
   "radiofield.label-yes": "Yes",

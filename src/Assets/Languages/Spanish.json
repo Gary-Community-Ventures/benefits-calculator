@@ -86,6 +86,7 @@
   "validation-helperText.lastName": "Ingrese su apellido",
   "validation-helperText.notificationSelection": "Seleccione una opción de notificación",
   "validation-helperText.consentCheckbox": "Marque la casilla de arriba para suscribirse a las notificaciones seleccionadas",
+  "validation-helperText.noEmailOrPhoneNumber": "Ingrese un correo electrónico o número de teléfono",
   "previousButton": "Previo",
   "continueButton": "Continuar",
   "radiofield.label-yes": "Sí",
