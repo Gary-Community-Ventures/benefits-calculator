@@ -350,6 +350,8 @@ const displaySignUpFormHelperText = (props) => {
     return displayEmailHelperText(email);
   } else if (phoneHasError(phone)) {
     return displayPhoneHasErrorHelperText(phone);
+  } else if (!email && !phone) {
+    return displayNoEmailOrPhoneHelperText(email, phone);
   } else if (atLeastOneCheckboxSelectionWasMade === false) {
     return (
       <FormattedMessage 
