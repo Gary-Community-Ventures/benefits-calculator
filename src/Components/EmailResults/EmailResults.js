@@ -82,6 +82,7 @@ const EmailResults = ({ results }) => {
         send_offers: sendOffers,
         send_updates: sendUpdates
       }
+
       try {
         const userResponse = await postUser(user);
         const screenUpdates = {
