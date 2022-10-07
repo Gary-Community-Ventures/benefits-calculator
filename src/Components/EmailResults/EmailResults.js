@@ -89,6 +89,7 @@ const EmailResults = ({ results }) => {
         }
         await updateScreen(results.screenerId, screenUpdates);
     
+        setSignUpInfo({ ...signUpInfo, error: null });
         setOpen(true);
 
         if (sendResults) {
