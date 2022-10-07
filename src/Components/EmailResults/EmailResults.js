@@ -73,7 +73,7 @@ const EmailResults = ({ results }) => {
 
       const user = {
         email_or_cell: email ? email : phoneNumber,
-        cell: phone ? phone : '',
+        cell: phoneNumber ? phoneNumber : '',
         email: email ? email : '',
         first_name: firstName,
         last_name: lastName,
