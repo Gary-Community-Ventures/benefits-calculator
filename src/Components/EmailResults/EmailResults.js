@@ -147,6 +147,13 @@ const EmailResults = ({ results }) => {
     );
   }
 
+  const displayErrorMessage = () => { 
+    return (
+      (signUpFormHasError(signUpInfo) && renderErrorMessage(displaySignUpFormHelperText(signUpInfo))) || 
+      (signUpInfo.error && renderErrorMessage(signUpInfo.error))
+    );
+  }
+
   return (
     <main className='benefits-form'>
       <Grid container item spacing={2}>
