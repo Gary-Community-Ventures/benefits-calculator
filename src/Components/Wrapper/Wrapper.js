@@ -10,7 +10,7 @@ const Wrapper = (props) => {
   let defaultMessages = English;
   const pathname = window.location.pathname;
   
-  if (pathname.includes('es')) {
+  if (pathname.includes('/es/')) {
     defaultLanguage = 'es';
     defaultMessages = Spanish;
   }

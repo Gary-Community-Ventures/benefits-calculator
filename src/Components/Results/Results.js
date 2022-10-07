@@ -20,7 +20,7 @@ import Loading from '../Loading/Loading';
 import './Results.css';
 import { SentimentSatisfiedAlt, SignalWifiStatusbarNullTwoTone } from '@mui/icons-material';
 
-export const isNavigationKey = (key: string) =>
+export const isNavigationKey = (key) =>
   key === 'Home' ||
   key === 'End' ||
   key.indexOf('Arrow') === 0 ||

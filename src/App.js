@@ -46,7 +46,6 @@ const App = () => {
     householdData: [],
     householdAssets: 0,
     lastTaxFilingYear: '',
-    email: '',
     benefits: {
       tanf: false,
       wic: false,
@@ -123,7 +122,6 @@ const App = () => {
   //   householdAssets: '1000',
   //   relationship: 'headOfHousehold',
   //   lastTaxFilingYear: '2021',
-  //   email: '',
   //   benefits: {
   //     tanf: true,
   //     wic: true,
@@ -141,7 +139,7 @@ const App = () => {
   //     chp: false,
   //     ccb: false
   //   },
-  //   referralSource: '',
+  //   referralSource: 'gary',
   //   otherSource: ''
   // });
  
@@ -240,11 +238,6 @@ const App = () => {
     navigate('/step-15');
   }
 
-  const handleEmailTextfieldChange = (event) => {
-    const { name, value } = event.target;    
-    setFormData({ ...formData, [name]: value});
-  }
-
   return (
     <ThemeProvider theme={theme}>
       <div className='App'>
@@ -291,9 +284,7 @@ const App = () => {
             <Route
               path='/email-results' 
               element={<EmailResults 
-                formData={formData}
-                results={results} 
-                handleEmailTextfieldChange={handleEmailTextfieldChange} /> } />
+                results={results} /> } />
             <Route
               path='*'
               element={<Navigate to="/step-1" replace /> } />

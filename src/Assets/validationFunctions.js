@@ -223,7 +223,7 @@ const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) =
 }
 
 const emailHasError = (email) => {
-  return !(/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email));
+  return email !== '' && !(/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email));
 } 
 
 const displayEmailHelperText = (email) => {
@@ -278,6 +278,95 @@ const displayMissingSelectHelperText = (source) => {
   }
 }
 
+const nameHasError = (name) => {
+  return name === '' ;
+}
+
+const displayFirstNameHelperText = (firstName) => {
+  if (nameHasError(firstName)) {
+    return (
+      <FormattedMessage 
+        id='validation-helperText.firstName' 
+        defaultMessage='Please enter your first name' />
+    );
+  }
+}
+
+const displayLastNameHelperText = (lastName) => {
+  if (nameHasError(lastName)) {
+    return (
+      <FormattedMessage 
+        id='validation-helperText.lastName' 
+        defaultMessage='Please enter your last name' />
+    );
+  }
+}
+
+const phoneHasError = (phoneNumber) => {
+  const digitizedPhone = phoneNumber.replace(/\D/g,'');
+  return phoneNumber !== '' && digitizedPhone.length !== 10;
+}
+
+const displayPhoneHasErrorHelperText = (phoneNumber) => {
+  if (phoneHasError(phoneNumber)) {
+    return (
+      <FormattedMessage 
+          id='validation-helperText.phoneNumber' 
+          defaultMessage='Please enter a 10 digit phone number' />
+    );
+  }
+}
+
+const signUpFormHasError = (props) => {
+  const { email, phone, firstName, lastName, 
+    sendResults, sendUpdates, sendOffers, commConsent } = props;
+  const atLeastOneCheckboxSelectionWasMade = [sendResults, sendUpdates, sendOffers]
+    .some(box => box === true);
+
+  return (emailHasError(email)) || (phoneHasError(phone)) || (!email && !phone) || (!firstName) ||
+    (!lastName) || (atLeastOneCheckboxSelectionWasMade === false) || (commConsent === false);
+}
+
+const displayNoEmailOrPhoneHelperText = (email, phone) => {
+  if (!email && !phone) {
+    return (
+      <FormattedMessage 
+          id='validation-helperText.noEmailOrPhoneNumber' 
+          defaultMessage='Please enter an email or phone number' />
+    );
+  }
+} 
+
+const displaySignUpFormHelperText = (props) => {
+  const { email, phone, firstName, lastName, 
+    sendResults, sendUpdates, sendOffers, commConsent } = props;
+  const atLeastOneCheckboxSelectionWasMade = [sendResults, sendUpdates, sendOffers].some(box => box === true);
+
+  if (nameHasError(firstName)) {
+    return displayFirstNameHelperText(firstName);
+  } else if (nameHasError(lastName)) {
+    return displayLastNameHelperText(lastName);
+  } else if (emailHasError(email)) {
+    return displayEmailHelperText(email);
+  } else if (phoneHasError(phone)) {
+    return displayPhoneHasErrorHelperText(phone);
+  } else if (!email && !phone) {
+    return displayNoEmailOrPhoneHelperText(email, phone);
+  } else if (atLeastOneCheckboxSelectionWasMade === false) {
+    return (
+      <FormattedMessage 
+        id='validation-helperText.notificationSelection' 
+        defaultMessage='Please select a notification option' />
+    );
+  } else if (commConsent === false) {
+    return (
+      <FormattedMessage 
+        id='validation-helperText.consentCheckbox' 
+        defaultMessage='Please check the box above to sign up for the selected notifications' />
+    );
+  }
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -305,5 +394,12 @@ export {
   benefitsHasError,
   referralSourceHasError,
   displayReferralSourceHelperText,
-  displayMissingSelectHelperText
+  displayMissingSelectHelperText,
+  nameHasError,
+  displayFirstNameHelperText,
+  displayLastNameHelperText,
+  phoneHasError,
+  displayPhoneHasErrorHelperText,
+  signUpFormHasError,
+  displaySignUpFormHelperText
 }
