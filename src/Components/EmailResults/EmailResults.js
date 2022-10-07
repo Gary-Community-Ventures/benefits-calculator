@@ -222,7 +222,8 @@ const EmailResults = ({ results }) => {
             onChange={(event) => {handleTextfieldChange(event)}}
             error={phoneHasError(signUpInfo.phone)}
             helperText={displayPhoneHasErrorHelperText(signUpInfo.phone)} 
-            variant='outlined'          />          
+            variant='outlined'          
+          />          
         </Grid>
         <Grid xs={12} item>
           <FormLabel>
