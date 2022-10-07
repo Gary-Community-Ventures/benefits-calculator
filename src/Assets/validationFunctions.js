@@ -327,6 +327,16 @@ const signUpFormHasError = (props) => {
     (!lastName) || (atLeastOneCheckboxSelectionWasMade === false) || (commConsent === false);
 }
 
+const displayNoEmailOrPhoneHelperText = (email, phone) => {
+  if (!email && !phone) {
+    return (
+      <FormattedMessage 
+          id='validation-helperText.noEmailOrPhoneNumber' 
+          defaultMessage='Please enter an email or phone number' />
+    );
+  }
+} 
+
 const displaySignUpFormHelperText = (props) => {
   const { email, phone, firstName, lastName, 
     sendResults, sendUpdates, sendOffers, commConsent } = props;
