@@ -308,7 +308,7 @@ const EmailResults = ({ results }) => {
             }
           />
         </Grid>
-        { signUpFormHasError(signUpInfo) && displayErrorMessage(displaySignUpFormHelperText(signUpInfo)) }
+        { displayErrorMessage() }
         <Grid xs={12} item>
           <div className='question-buttons'>
             <Button
