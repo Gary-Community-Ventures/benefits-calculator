@@ -34,7 +34,6 @@ const postUser = (userData) => {
     if (!response.ok) {
       throw new Error('A user with this email or phone number already exists in our system.');
     }
-
     return response.json();
   });
 }
