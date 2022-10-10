@@ -137,7 +137,7 @@ const EmailResults = ({ results }) => {
         <h2 className='sub-header'>
           <FormattedMessage 
             id='emailResults.return-signupHeader' 
-            defaultMessage='Signup for benefits, updates, and offers' />
+            defaultMessage='Optional: Sign up for benefits updates and offers"' />
         </h2>
       </Grid>
     );
