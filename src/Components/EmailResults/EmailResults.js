@@ -236,19 +236,6 @@ const EmailResults = ({ results }) => {
               sx={{mt: 1}}
               control={
                 <Checkbox 
-                  checked={signUpInfo.sendResults}
-                  onChange={handleCheckboxChange}
-                  name="sendResults" />
-              }
-              label={
-                <FormattedMessage 
-                  id='emailResults.return-sendcopy' 
-                  defaultMessage='Please send me a copy of my results.' />}
-            />
-            <FormControlLabel
-              sx={{mt: 1}}
-              control={
-                <Checkbox 
                   checked={signUpInfo.sendUpdates}
                   onChange={handleCheckboxChange}
                   name="sendUpdates" />
