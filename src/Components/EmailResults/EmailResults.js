@@ -84,13 +84,13 @@ const EmailResults = ({ results }) => {
       }
 
       try {
+        setSignUpInfo({ ...signUpInfo, error: null });
         const userResponse = await postUser(user);
         const screenUpdates = {
           user: userResponse.id,
         }
         await updateScreen(results.screenerId, screenUpdates);
-    
-        setSignUpInfo({ ...signUpInfo, error: null });
+        
         setOpen(true);
 
         if (sendResults) {
