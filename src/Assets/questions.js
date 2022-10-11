@@ -13,13 +13,15 @@ import {
   benefitsHasError,
   referralSourceHasError,
   displayReferralSourceHelperText,
-  displayMissingSelectHelperText
+  displayMissingSelectHelperText, 
+  signUpOptionsHaveError
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import { FormattedMessage } from 'react-intl';
 import taxYearOptions from './taxYearOptions';
 import referralOptions from './referralOptions';
 import countiesByZipcode from './countiesByZipcode';
+import signUpOptions from './signUpOptions';
 
 const questions = [
   {
@@ -442,6 +444,32 @@ const questions = [
             defaultMessage='Other referral source' />,
         inputError: referralSourceHasError,
         inputHelperText: displayReferralSourceHelperText
+      }
+    }]
+  },
+  { id: 18,
+    question: 
+      <FormattedMessage
+        id='questions.id-18'
+        defaultMessage='What would you like us to contact you about?' />,
+    componentDetails: {
+      componentType: 'BasicCheckboxGroup',
+      inputName: 'signUpInfo',
+      options: signUpOptions,
+      inputError: signUpOptionsHaveError
+    },
+    followUpQuestions: [{
+      question:
+        <FormattedMessage
+          id='questions.id-18a'
+          defaultMessage='Please provide your contact info below: ' />,
+      componentDetails: {
+        componentType: 'SignUp',
+        inputName: 'signUpInfo',
+        ariaLabel: 
+          <FormattedMessage
+            id='questions.id-18-ariaLabel'
+            defaultMessage='screener optional signup page' />,
       }
     }]
   }
