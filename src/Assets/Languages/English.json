@@ -68,6 +68,8 @@
   "questions.id-17a": "If other, please specify:",
   "questions.id-17a-inputLabel": "Other referral source",
   "questions.id-18": "What would you like us to contact you about?",
+  "questions.id-18a": "Please provide your contact info below: ",
+  "questions.id-18a-ariaLabel": "screener optional signup page",
   "validation-helperText.age": "Please enter a valid age (13-130)",
   "validation-helperText.zipcode": "Please enter a valid CO zipcode",
   "validation-helperText.incomeValue": "Please enter a number greater than 0",

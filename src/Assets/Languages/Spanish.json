@@ -68,6 +68,8 @@
   "questions.id-17a": "Si es otro, especifique:",
   "questions.id-17a-inputLabel": "Otra fuente de referencia",
   "questions.id-18": "¿Sobre qué le gustaría que nos comuniquemos con usted?",
+  "questions.id-18a": "Proporcione su información de contacto a continuación: ",
+  "questions.id-18a-ariaLabel": "página de registro opcional",
   "validation-helperText.age": "Ingrese una edad válida (13 a 130)",
   "validation-helperText.zipcode": "Ingrese un código postal válido de Colorado",
   "validation-helperText.incomeValue": "Ingrese un número mayor que 0",
