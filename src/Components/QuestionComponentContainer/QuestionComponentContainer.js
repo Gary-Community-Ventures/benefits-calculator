@@ -170,7 +170,15 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   }
 
   const renderHeaderAndSubheader = () => {
-    if (matchingQuestion.id !== 14) {
+    if (matchingQuestion.id === 18) {
+      return (
+        <h2 className='sub-header'>
+          <FormattedMessage 
+            id='qcc.optional-sign-up-text' 
+            defaultMessage='Optional: Sign up for benefits, updates, and offers' />
+        </h2>
+      );
+    } else if (matchingQuestion.id !== 14) {
       return (
         <h2 className='sub-header'>
           <FormattedMessage
