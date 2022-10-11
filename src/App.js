@@ -64,7 +64,17 @@ const App = () => {
       ccb: false
     },
     referralSource: '',
-    otherSource: ''
+    otherSource: '',
+    signUpInfo: {
+      email: '',
+      phone: '',
+      firstName: '',
+      lastName: '',
+      sendOffers: false,
+      sendUpdates: false,
+      commConsent: false,
+      error: null
+    }
   });
 
   // const [formData, setFormData] = useState({
@@ -140,7 +150,17 @@ const App = () => {
   //     ccb: false
   //   },
   //   referralSource: 'gary',
-  //   otherSource: ''
+  //   otherSource: '',
+  //   signUpInfo: {
+  //     email: '',
+  //     phone: '',
+  //     firstName: '',
+  //     lastName: '',
+  //     sendOffers: false,
+  //     sendUpdates: false,
+  //     commConsent: false,
+  //     error: null
+  //   }
   // });
  
   const [results, setResults] = useState({
