@@ -66,6 +66,7 @@
   "questions.id-17": "How did you hear about this screener?",
   "questions.id-17a": "If other, please specify:",
   "questions.id-17a-inputLabel": "Other referral source",
+  "questions.id-18": "What would you like us to contact you about?",
   "validation-helperText.age": "Please enter a valid age (13-130)",
   "validation-helperText.zipcode": "Please enter a valid CO zipcode",
   "validation-helperText.incomeValue": "Please enter a number greater than 0",
@@ -288,7 +289,7 @@
   "emailResults.return-firstNameTextfieldLabel": "First Name",
   "emailResults.return-lastNameTextfieldLabel": "Last Name",
   "emailResults.return-phoneTextfieldLabel": "Cell Phone",
-  "emailResults.return-contactAbout": "What would you like us to contact you about?",
+
   "emailResults.return-sendupdates": "Please notify me when new benefits become available that I am likely eligible for based on the information I have provided.",
   "emailResults.return-sendoffers": "Please notify me when there are paid opportunities to provide feedback on this screener.",
   "emailResults.return-consentText": "By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication.",
