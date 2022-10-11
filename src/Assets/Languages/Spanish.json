@@ -289,9 +289,6 @@
   "emailResults.return-firstNameTextfieldLabel": "Primer nombre",
   "emailResults.return-lastNameTextfieldLabel": "Apellido",
   "emailResults.return-phoneTextfieldLabel": "Teléfono móvil",
-
-  "emailResults.return-sendupdates": "Por favor notifiqueme cuando nuevos beneficios estén disponibles que probablemente sea elegible, basado en la información que he proporcionado",
-  "emailResults.return-sendoffers": "Notifiqueme cuando haya oportunidades monetarias para hablar sobre esta calculadora",
   "emailResults.return-consentText": "Al completar este formulario, acepta que Gary o nuestros afiliados se comuniquen en el futuro sobre el uso de la calculadora de beneficios y ofrezcan programas adicionales que puedan ser de su interés y la de su familia. Es posible que se apliquen costos estándar de mensajes y datos a estas comunicaciones. Puede optar a no recibir estas comunicaciones en cualquier momento a través del enlace de exclusión en la comunicación.",
   "emailResults.return-consentCheck1": "He leído, comprendo y acepto los términos del descargo de ",
   "emailResults.return-consentCheckLink": "privacidad de datos ",
@@ -316,5 +313,7 @@
   "benefitOptions.chp": "Plan de salud CHP+",
   "benefitOptions.ccb": "Reembolso de Colorado",
   "referralOptions.searchEngine": "Google o otro motor de búsqueda",
-  "referralOptions.other": "Otro"
+  "referralOptions.other": "Otro",
+  "signUpOptions.sendUpdates": "Por favor notifiqueme cuando nuevos beneficios estén disponibles que probablemente sea elegible, basado en la información que he proporcionado",
+  "signUpOptions.sendOffers": "Notifiqueme cuando haya oportunidades monetarias para hablar sobre esta calculadora"
 }

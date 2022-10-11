@@ -289,9 +289,6 @@
   "emailResults.return-firstNameTextfieldLabel": "First Name",
   "emailResults.return-lastNameTextfieldLabel": "Last Name",
   "emailResults.return-phoneTextfieldLabel": "Cell Phone",
-
-  "emailResults.return-sendupdates": "Please notify me when new benefits become available that I am likely eligible for based on the information I have provided.",
-  "emailResults.return-sendoffers": "Please notify me when there are paid opportunities to provide feedback on this screener.",
   "emailResults.return-consentText": "By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication.",
   "emailResults.return-consentCheck1": "I have read, understand, and agree to the terms of My Friend Ben's ",
   "emailResults.return-consentCheckLink": "data privacy policy",
@@ -316,5 +313,7 @@
   "benefitOptions.chp": "CHP+",
   "benefitOptions.ccb": "Colorado Cash Back TABOR refund",
   "referralOptions.searchEngine": "Google or other search engine",
-  "referralOptions.other": "Other"
+  "referralOptions.other": "Other",
+  "signUpOptions.sendUpdates": "Please notify me when new benefits become available that I am likely eligible for based on the information I have provided.",
+  "signUpOptions.sendOffers": "Please notify me when there are paid opportunities to provide feedback on this screener."
 }
