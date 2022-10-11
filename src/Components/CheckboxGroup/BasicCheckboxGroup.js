@@ -44,7 +44,7 @@ const BasicCheckboxGroup = ({ stateVariable, options, state, setState }) => {
   }
 
   return (
-    <FormControl>
+    <FormControl sx={{ marginBottom: 2}}>
       <FormGroup>
         {createFormControlLabels()}
       </FormGroup>
