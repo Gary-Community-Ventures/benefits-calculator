@@ -9,7 +9,7 @@ import { nameHasError, displayFirstNameHelperText, displayLastNameHelperText,
 
 
 const SignUp = ({ formData, handleTextfieldChange }) => {
-  
+
   const createFirstNameTextfield = () => {
     const firstNameProps = {
       inputType: 'text',
@@ -38,7 +38,21 @@ const SignUp = ({ formData, handleTextfieldChange }) => {
     };
   
     return createTextfield(lastNameProps);
+  }
 
+  const createEmailTextfield = () => {
+    const emailProps = {
+      inputType: 'text',
+      inputName: 'email',
+      inputLabel: 
+        <FormattedMessage 
+          id='emailResults.return-emailTextfieldLabel' 
+          defaultMessage='Email' />,
+      inputError: emailHasError,
+      inputHelperText: displayEmailHelperText
+    };
+
+    return createTextfield(emailProps);  
   }
   
   const createTextfield = (componentProps) => {
@@ -56,6 +70,9 @@ const SignUp = ({ formData, handleTextfieldChange }) => {
       <Grid xs={12} item marginTop={'1.5rem'}>
         { createFirstNameTextfield() }
         { createLastNameTextfield() }
+      </Grid>
+      <Grid xs={12} item>
+        { createEmailTextfield() }
       </Grid>
     </>
   );
