@@ -54,6 +54,21 @@ const SignUp = ({ formData, handleTextfieldChange }) => {
 
     return createTextfield(emailProps);  
   }
+
+  const createPhoneTextfield = () => {
+    const phoneProps = {
+      inputType: 'tel',
+      inputName: 'phone',
+      inputLabel: 
+        <FormattedMessage 
+          id='emailResults.return-phoneTextfieldLabel' 
+          defaultMessage='Cell Phone' />,
+      inputError: phoneHasError,
+      inputHelperText: displayPhoneHasErrorHelperText
+    };
+
+    return createTextfield(phoneProps);  
+  }
   
   const createTextfield = (componentProps) => {
     return (
@@ -73,6 +88,9 @@ const SignUp = ({ formData, handleTextfieldChange }) => {
       </Grid>
       <Grid xs={12} item>
         { createEmailTextfield() }
+      </Grid>
+      <Grid xs={12} item>
+        { createPhoneTextfield() }
       </Grid>
     </>
   );
