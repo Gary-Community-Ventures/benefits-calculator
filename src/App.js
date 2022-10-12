@@ -204,9 +204,17 @@ const App = () => {
 
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
-    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
+    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/; //for zipcode
+    const numberUpToTenDigitsLongRegex = /^\d{0,10}$/; //for phone number
+    const isFirstLastOrEmail = name === 'firstName'|| name === 'lastName' || name === 'email';
 
-    if (name === 'firstName'|| name === 'lastName') {
+    if (isFirstLastOrEmail ) {
+      const updatedSignUpInfo = { ...formData.signUpInfo, [name]: value };
+      setFormData({ ...formData, signUpInfo: updatedSignUpInfo });
+      return;
+    }
+
+    if (name === 'phone' && numberUpToTenDigitsLongRegex.test(value)) {
       const updatedSignUpInfo = { ...formData.signUpInfo, [name]: value };
       setFormData({ ...formData, signUpInfo: updatedSignUpInfo });
       return;
