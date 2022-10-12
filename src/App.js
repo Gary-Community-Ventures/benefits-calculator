@@ -206,6 +206,12 @@ const App = () => {
     const { name, value } = event.target;
     const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
 
+    if (name === 'firstName'|| name === 'lastName') {
+      const updatedSignUpInfo = { ...formData.signUpInfo, [name]: value };
+      setFormData({ ...formData, signUpInfo: updatedSignUpInfo });
+      return;
+    }
+
     if (numberUpToEightDigitsLongRegex.test(value)) {
       setFormData({ ...formData, [name]: Number(value) });
     } else if (name === 'otherSource') {
