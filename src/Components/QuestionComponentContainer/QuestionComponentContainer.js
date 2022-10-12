@@ -9,6 +9,7 @@ import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
+import SignUp from '../SignUp/SignUp';
 import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
@@ -148,6 +149,15 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           <div className='question-container' key={index}>
             <p className='question-label'>{followUp.question}</p>
             {renderBasicSelectComponent(followUp)}
+          </div>
+        );
+      } else if (followUp.componentDetails.componentType === 'SignUp') {
+        return (
+          <div className='question-container' key={index}>
+            <p className='question-label'>{followUp.question}</p>
+            <SignUp 
+              formData={formData} 
+              handleTextfieldChange={handleTextfieldChange} />
           </div>
         );
       }
