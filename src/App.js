@@ -305,7 +305,8 @@ const App = () => {
                 handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
                 handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
                 handleHouseholdDataSubmit={handleHouseholdDataSubmit} 
-                setFormData={setFormData} /> } /> 
+                setFormData={setFormData} 
+                handleCheckboxChange={handleCheckboxChange} /> } /> 
             <Route 
               path='/confirm-information' 
               element={<Confirmation
