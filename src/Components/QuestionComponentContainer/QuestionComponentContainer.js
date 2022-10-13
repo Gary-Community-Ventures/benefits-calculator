@@ -14,7 +14,9 @@ import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData }) => {
+const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, 
+  handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
+  handleCheckboxChange }) => {
   let { id } = useParams();
   let numberId = Number(id);
   const matchingQuestion = questions.find((question) => question.id === numberId);
@@ -157,7 +159,8 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
             <p className='question-label'>{followUp.question}</p>
             <SignUp 
               formData={formData} 
-              handleTextfieldChange={handleTextfieldChange} />
+              handleTextfieldChange={handleTextfieldChange} 
+              handleCheckboxChange={handleCheckboxChange} />
           </div>
         );
       }
