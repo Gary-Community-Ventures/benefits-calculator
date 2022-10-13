@@ -126,7 +126,7 @@ const SignUp = ({ formData, handleTextfieldChange }) => {
   }
   
   return (
-    <>
+    <div className='bottom-border'>
       <Grid xs={12} item marginTop={'1.5rem'}>
         { createFirstNameTextfield() }
         { createLastNameTextfield() }
@@ -140,7 +140,7 @@ const SignUp = ({ formData, handleTextfieldChange }) => {
       <Grid xs={12} item marginBottom={'1rem'}>
         { displayDisclosureSection() }
       </Grid>
-    </>
+    </div>
   );
 }
 
