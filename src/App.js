@@ -228,9 +228,18 @@ const App = () => {
   }
 
   const handleCheckboxChange = (event) => {
-    //the value is the name of the formData property
+    //the value is the name of the formData property for everything except the commConsent
     const { value } = event.target; 
-    setFormData({ ...formData, [value]: !formData[value] });
+    const { name } = event.target;
+
+    if (name === 'commConsent') {
+      const updatedCommConsent = !(formData.signUpInfo.commConsent);
+      const updatedSignUpInfo = { ...formData.signUpInfo, commConsent: updatedCommConsent };
+      setFormData({ ...formData, signUpInfo: updatedSignUpInfo });
+      return;
+    } else {
+      setFormData({ ...formData, [value]: !formData[value] });
+    }
   }
   
   const handleRadioButtonChange = (event) => {
