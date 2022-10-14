@@ -151,13 +151,13 @@ const App = () => {
   //   referralSource: 'gary',
   //   otherSource: '',
   //   signUpInfo: {
-  //     email: '',
+  //     email: 'testabc@gmail.com',
   //     phone: '',
-  //     firstName: '',
-  //     lastName: '',
-  //     sendOffers: false,
+  //     firstName: 'Test',
+  //     lastName: 'Test',
+  //     sendOffers: true,
   //     sendUpdates: false,
-  //     commConsent: false
+  //     commConsent: true
   //   }
   // });
  
