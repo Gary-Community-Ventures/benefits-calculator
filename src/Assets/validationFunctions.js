@@ -364,6 +364,17 @@ const displaySignUpFormHelperText = (props) => {
   }
 }
 
+const signUpOptionsHaveError = (signUpInfo) => {
+  const { sendOffers, sendUpdates } = signUpInfo;
+  const doesNotWantNotifications = sendOffers === false && sendUpdates === false;
+
+  if (doesNotWantNotifications) {
+    return false;
+  } else {
+    return signUpFormHasError(signUpInfo);
+  }
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -398,5 +409,6 @@ export {
   phoneHasError,
   displayPhoneHasErrorHelperText,
   signUpFormHasError,
-  displaySignUpFormHelperText
+  displaySignUpFormHelperText,
+  signUpOptionsHaveError
 }
