@@ -500,7 +500,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               <Grid xs={12} item={true}>
                 { programSubset === 'eligiblePrograms' && 
                   <Typography
-                    sx={{mt: 2, ml: 2}}
+                    sx={{mt: '.25rem'}}
                     onClick={() => {
                       navigate('/ineligible-results');
                       window.scrollTo(0,0);
@@ -514,7 +514,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 }
                 { programSubset === 'ineligiblePrograms' && 
                   <Typography
-                    sx={{mt: 2, ml: 2}}
+                    sx={{mt: '.25rem'}}
                     onClick={() => {
                       navigate('/results');
                       window.scrollTo(0,0);
