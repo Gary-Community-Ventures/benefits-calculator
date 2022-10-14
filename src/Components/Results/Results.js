@@ -196,7 +196,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   const displaySubheader = (benefitsSubset) => {
     if (benefitsSubset === 'ineligiblePrograms') {
       return (
-        <Typography variant='body1' className='remember-disclaimer-label'>
+        <Typography className='sub-header' variant="h6">
           <FormattedMessage 
             id='results.displaySubheader-basedOnInformationText' 
             defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
@@ -468,7 +468,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   </Grid>
                   </>
                 }
-                <Grid xs={12} item={true} sm={8}>
+                <Grid xs={12} item={true}>
                   { displaySubheader(programSubset) }
                 </Grid>
               </Grid>
