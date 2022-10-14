@@ -9,6 +9,7 @@ import { nameHasError, displayFirstNameHelperText, displayLastNameHelperText,
   signUpFormHasError, displaySignUpFormHelperText } 
   from '../../Assets/validationFunctions';
 
+const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
   const locale = useContext(Context).locale.toLowerCase();
   let privacyLink = "https://20208592.hs-sites.com/en/data-privacy-policy?__hstc=144746475.066f707c0b490f88f5429b1856cf0908.1663037963489.1663086538117.1663095192641.3&__hssc=144746475.1.1663095192641&__hsfp=2418539872";
   
