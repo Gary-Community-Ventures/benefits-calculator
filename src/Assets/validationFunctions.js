@@ -336,9 +336,8 @@ const displayNoEmailOrPhoneHelperText = (email, phone) => {
 } 
 
 const displaySignUpFormHelperText = (props) => {
-  const { email, phone, firstName, lastName, 
-    sendResults, sendUpdates, sendOffers, commConsent } = props;
-  const atLeastOneCheckboxSelectionWasMade = [sendResults, sendUpdates, sendOffers].some(box => box === true);
+  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = props;
+  const atLeastOneCheckboxSelectionWasMade = (sendUpdates === true) || (sendOffers === true);
 
   if (nameHasError(firstName)) {
     return displayFirstNameHelperText(firstName);
