@@ -194,17 +194,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const displaySubheader = (benefitsSubset) => {
-    if (benefitsSubset === 'eligiblePrograms') {
-      return (
-        <p>
-          <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
-            <FormattedMessage 
-              id='results.displaySubheader-signupText' 
-              defaultMessage="To receive a copy of these results by email, updates on future benefits you may be eligible for, and incentive offers please click the signup button." />
-          </Typography>
-        </p>
-      );
-    } else if (benefitsSubset === 'ineligiblePrograms') {
+    if (benefitsSubset === 'ineligiblePrograms') {
       return (
         <Typography variant='body1' className='remember-disclaimer-label'>
           <FormattedMessage 
