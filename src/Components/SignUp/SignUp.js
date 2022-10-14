@@ -24,7 +24,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
       inputName: 'firstName',
       inputLabel: 
         <FormattedMessage 
-          id='emailResults.return-firstNameTextfieldLabel' 
+          id='signUp.createFirstNameTextfield-label' 
           defaultMessage='First Name' />,
       inputError: nameHasError,
       inputHelperText: displayFirstNameHelperText
@@ -39,7 +39,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
       inputName: 'lastName',
       inputLabel: 
         <FormattedMessage 
-          id='emailResults.return-lastNameTextfieldLabel' 
+          id='signUp.createLastNameTextfield-label' 
           defaultMessage='Last Name' />,
       inputError: nameHasError,
       inputHelperText: displayLastNameHelperText
@@ -54,7 +54,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
       inputName: 'email',
       inputLabel: 
         <FormattedMessage 
-          id='emailResults.return-emailTextfieldLabel' 
+          id='signUp.createEmailTextfield-label' 
           defaultMessage='Email' />,
       inputError: emailHasError,
       inputHelperText: displayEmailHelperText
@@ -69,7 +69,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
       inputName: 'phone',
       inputLabel: 
         <FormattedMessage 
-          id='emailResults.return-phoneTextfieldLabel' 
+          id='signUp.createPhoneTextfield-label' 
           defaultMessage='Cell Phone' />,
       inputError: phoneHasError,
       inputHelperText: displayPhoneHasErrorHelperText
@@ -93,7 +93,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
       <>
         <Typography variant='body1' sx={{ mt: '1rem' }} style={{ fontWeight: 600 }}>
           <FormattedMessage
-            id='emailResults.return-consentText'
+            id='signUp.displayDisclosureSection-consentText'
             defaultMessage="By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication." />
         </Typography>
         <FormControlLabel
@@ -108,7 +108,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
           label={
             <div>
               <FormattedMessage 
-                id='emailResults.return-consentCheck1' 
+                id='signUp.displayDisclosureSection-consentCheck1' 
                 defaultMessage="I have read, understand, and agree to the terms of My Friend Ben's " />
               <FormattedMessage
                 id='emailResults.return-consentCheck'
@@ -119,12 +119,12 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
                   target="_blank"
                   rel='noopener noreferrer'>
                     <FormattedMessage
-                      id='emailResults.return-consentCheckLink'
-                      defaultMessage='data privacy policy' />
+                      id='signUp.displayDisclosureSection-consentCheckLink'
+                      defaultMessage='data privacy policy ' />
                     </a>
                 }} />
               <FormattedMessage 
-                id='emailResults.return-consentCheck4' 
+                id='signUp.displayDisclosureSection-consentCheck4' 
                 defaultMessage=" and consent to contact." />
             </div>
           }
