@@ -72,8 +72,7 @@ const App = () => {
       lastName: '',
       sendOffers: false,
       sendUpdates: false,
-      commConsent: false,
-      error: null
+      commConsent: false
     }
   });
 
@@ -158,8 +157,7 @@ const App = () => {
   //     lastName: '',
   //     sendOffers: false,
   //     sendUpdates: false,
-  //     commConsent: false,
-  //     error: null
+  //     commConsent: false
   //   }
   // });
  
