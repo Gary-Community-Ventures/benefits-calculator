@@ -1,14 +1,19 @@
 import { Typography, FormGroup, FormControlLabel, Checkbox, FormLabel } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
-import Grid from '@mui/material/Grid';
+import { Context } from '../Wrapper/Wrapper';
+import { useContext } from 'react';
 import Textfield from '../Textfield/Textfield';
 import { nameHasError, displayFirstNameHelperText, displayLastNameHelperText,
   emailHasError, displayEmailHelperText, phoneHasError, displayPhoneHasErrorHelperText,
   signUpFormHasError, displaySignUpFormHelperText } 
   from '../../Assets/validationFunctions';
 
-
-const SignUp = ({ formData, handleTextfieldChange }) => {
+  const locale = useContext(Context).locale.toLowerCase();
+  let privacyLink = "https://20208592.hs-sites.com/en/data-privacy-policy?__hstc=144746475.066f707c0b490f88f5429b1856cf0908.1663037963489.1663086538117.1663095192641.3&__hssc=144746475.1.1663095192641&__hsfp=2418539872";
+  
+  if (locale == "es") {
+    privacyLink = "https://20208592.hs-sites.com/es/data-privacy-policy";
+  }
 
   const createFirstNameTextfield = () => {
     const firstNameProps = {
