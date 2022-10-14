@@ -1,4 +1,5 @@
-import { Typography, FormGroup, FormControlLabel, Checkbox, FormLabel } from '@mui/material';
+import { Typography, FormControlLabel, Checkbox } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper';
 import { useContext } from 'react';
