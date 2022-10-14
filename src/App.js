@@ -196,9 +196,23 @@ const App = () => {
       updatedFormData.otherSource = '';
     }
 
+    if (formData.signUpInfo.sendOffers === false && formData.signUpInfo.sendUpdates === false) {
+      updatedFormData.signUpInfo = {
+        email: '',
+        phone: '',
+        firstName: '',
+        lastName: '',
+        sendOffers: false,
+        sendUpdates: false,
+        commConsent: false
+      };
+    }
+
     setFormData(updatedFormData);
     
-  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses, formData.referralSource]);
+  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses, 
+    formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates]
+  );
 
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
