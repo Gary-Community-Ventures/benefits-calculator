@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper';
 import { useContext } from 'react';
 import Textfield from '../Textfield/Textfield';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { nameHasError, displayFirstNameHelperText, displayLastNameHelperText,
   emailHasError, displayEmailHelperText, phoneHasError, displayPhoneHasErrorHelperText,
   signUpFormHasError, displaySignUpFormHelperText } 
@@ -129,8 +130,17 @@ import { nameHasError, displayFirstNameHelperText, displayLastNameHelperText,
       </>
     );
   }
+
+  const displayErrorMessage = () => {
+    if (signUpFormHasError(formData.signUpInfo)) {   
+      return (
+        <ErrorMessage error={displaySignUpFormHelperText(formData.signUpInfo)} />
+      );
+    }
+  }
   
   return (
+    <>
     <div className='bottom-border'>
       <Grid xs={12} item marginTop={'1.5rem'}>
         { createFirstNameTextfield() }
@@ -146,6 +156,10 @@ import { nameHasError, displayFirstNameHelperText, displayLastNameHelperText,
         { displayDisclosureSection() }
       </Grid>
     </div>
+    <Grid xs={12} item>
+      { displayErrorMessage() }
+    </Grid>
+    </>
   );
 }
 
