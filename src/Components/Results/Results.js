@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Checkbox, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
-import SendIcon from '@mui/icons-material/Send';
 import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 
@@ -458,7 +457,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               </Grid>
             </Grid> : 
             <>
-              <Grid container xs={12} item={true} sx={{mt: 2, mr: 2, ml: 2}} >
+              <Grid container xs={12} item={true} sx={{mt: 2}} >
                 <Grid xs={12} item={true}>
                   <Typography className='body2'>
                     <FormattedMessage 
@@ -489,20 +488,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 }
                 <Grid xs={12} item={true} sm={8}>
                   { displaySubheader(programSubset) }
-                </Grid>
-                <Grid xs={12} item={true} sm={4} container justifyContent="flex-end">
-                  <Button
-                    sx={{mb: 2, mt: 1}}
-                    variant='contained'
-                    endIcon={<SendIcon />}
-                    onClick={() => {
-                      navigate('/email-results');
-                    }}
-                    className='results-link'>
-                    <FormattedMessage 
-                      id='results.return-signupResultsButton' 
-                      defaultMessage='Signup' />
-                  </Button>
                 </Grid>
               </Grid>
               <Grid xs={12} item={true}>
