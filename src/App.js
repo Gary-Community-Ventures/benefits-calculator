@@ -7,7 +7,6 @@ import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
-import EmailResults from './Components/EmailResults/EmailResults';
 import Header from './Components/Header/Header';
 import styleOverrides from './Assets/styleOverrides';
 import './App.css';
@@ -336,11 +335,7 @@ const App = () => {
               element={<Results 
                 results={results}
                 programSubset='ineligiblePrograms' 
-                passedOrFailedTests='failed_tests' /> } /> 
-            <Route
-              path='/email-results' 
-              element={<EmailResults 
-                results={results} /> } />
+                passedOrFailedTests='failed_tests' /> } />
             <Route
               path='*'
               element={<Navigate to="/step-1" replace /> } />
