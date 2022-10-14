@@ -318,10 +318,8 @@ const displayPhoneHasErrorHelperText = (phoneNumber) => {
 }
 
 const signUpFormHasError = (props) => {
-  const { email, phone, firstName, lastName, 
-    sendResults, sendUpdates, sendOffers, commConsent } = props;
-  const atLeastOneCheckboxSelectionWasMade = [sendResults, sendUpdates, sendOffers]
-    .some(box => box === true);
+  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = props;
+  const atLeastOneCheckboxSelectionWasMade = (sendUpdates === true) || (sendOffers === true);
 
   return (emailHasError(email)) || (phoneHasError(phone)) || (!email && !phone) || (!firstName) ||
     (!lastName) || (atLeastOneCheckboxSelectionWasMade === false) || (commConsent === false);
