@@ -199,15 +199,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         <Typography variant='body1' className='remember-disclaimer-label'>
           <FormattedMessage 
             id='results.displaySubheader-basedOnInformationText' 
-            defaultMessage='Based on the information you provided, we believe you are likely ' />
-          <b>
-            <FormattedMessage 
-              id='results.displaySubheader-notEligibleText' 
-              defaultMessage=' not eligible ' />
-          </b> 
-          <FormattedMessage 
-            id='results.displaySubheader-forTheProgramsBelowText' 
-            defaultMessage='for the programs below:' />
+            defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
         </Typography>
       );
     }
