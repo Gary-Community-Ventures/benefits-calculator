@@ -21,9 +21,9 @@
 }
 
 .sub-header {
-  font-size: 32px;
-  margin-bottom: 24px;
-  padding-bottom: 24px;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid #505c66;
 }
 
