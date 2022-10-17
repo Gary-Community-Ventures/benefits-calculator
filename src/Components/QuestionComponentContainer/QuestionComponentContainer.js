@@ -196,22 +196,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
             defaultMessage='Optional: Sign up for benefits, updates, and offers' />
         </h2>
       );
-    } else if (matchingQuestion.id !== 14) {
-      return (
-        <div className='sub-header'>
-          <FormattedMessage
-            id='qcc.tell-us-text'
-            defaultMessage='Tell us a little more about yourself.' />
-        { matchingQuestion.id <= 12 &&
-          <h4 className='subheader-desc'>
-            <FormattedMessage
-              id='qcc.renderHeaderAndSubheader-subheader-desc'
-              defaultMessage="You will have an opportunity to tell us about other household members in future questions." />
-          </h4>
-        }
-        </div>
-      );
-    } else {
+    } else if (matchingQuestion.id === 14) {
       return (
         <>
           <h2 className='household-data-sub-header'>
@@ -230,6 +215,29 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
               defaultMessage=' Head of household' />
           </h4>
         </>
+      );
+    } else if (matchingQuestion.id >= 2 && matchingQuestion.id <= 12) {
+      return (
+        <div className='sub-header'>
+          <FormattedMessage
+            id='qcc.tell-us-text'
+            defaultMessage='Tell us a little more about yourself.' />
+        { matchingQuestion.id <= 12 &&
+          <h4 className='subheader-desc'>
+            <FormattedMessage
+              id='qcc.renderHeaderAndSubheader-subheader-desc'
+              defaultMessage="You will have an opportunity to tell us about other household members in future questions." />
+          </h4>
+        }
+        </div>
+      );
+    } else if (matchingQuestion.id >= 13 && matchingQuestion.id <= 17) {
+      return (
+        <div className='sub-header'>
+          <FormattedMessage
+            id='qcc.tell-us-about-household-text'
+            defaultMessage='Tell us a little more about your household.' />
+        </div>
       );
     }
   };
