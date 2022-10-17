@@ -198,20 +198,18 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
       );
     } else if (matchingQuestion.id !== 14) {
       return (
-        <div className='bottom-border'>
-          <h2 className='tell-us-about-yourself-header'>
+        <h2 className='sub-header'>
+          <FormattedMessage
+            id='qcc.tell-us-text'
+            defaultMessage='Tell us a little more about yourself.' />
+        { matchingQuestion.id <= 12 &&
+          <h4 className='subheader-desc'>
             <FormattedMessage
-              id='qcc.tell-us-text'
-              defaultMessage='Tell us a little more about yourself.' />
-          </h2>
-          { matchingQuestion.id <= 12 &&
-            <h4 className='subheader-desc'>
-              <FormattedMessage
-                id='qcc.renderHeaderAndSubheader-subheader-desc'
-                defaultMessage="You will have an opportunity to tell us about other household members in future questions." />
-            </h4>
-          }
-        </div>
+              id='qcc.renderHeaderAndSubheader-subheader-desc'
+              defaultMessage="You will have an opportunity to tell us about other household members in future questions." />
+          </h4>
+        }
+        </h2>
       );
     } else {
       return (
