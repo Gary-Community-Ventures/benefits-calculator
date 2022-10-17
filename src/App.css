@@ -29,7 +29,7 @@
 
 .bottom-border {
   border-bottom: 1px solid #505c66;
-  margin-bottom: 24px;
+  margin-bottom: 1rem;
 }
 
 .language-switcher .MuiInputBase-input {
