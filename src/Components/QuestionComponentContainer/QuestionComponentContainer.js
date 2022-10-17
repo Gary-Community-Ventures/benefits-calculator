@@ -198,7 +198,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
       );
     } else if (matchingQuestion.id !== 14) {
       return (
-        <h2 className='sub-header'>
+        <div className='sub-header'>
           <FormattedMessage
             id='qcc.tell-us-text'
             defaultMessage='Tell us a little more about yourself.' />
@@ -209,7 +209,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
               defaultMessage="You will have an opportunity to tell us about other household members in future questions." />
           </h4>
         }
-        </h2>
+        </div>
       );
     } else {
       return (
