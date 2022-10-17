@@ -66,3 +66,8 @@
 /* .MuiOutlinedInput-root.MuiInputBase-formControl .MuiOutlinedInput-notchedOutline.MuiOutlinedInput-notchedOutline {
   border-color: #0096B0;
 } */
+
+.subheader-desc {
+  font-weight: 400;
+  font-size: 1rem;
+}
