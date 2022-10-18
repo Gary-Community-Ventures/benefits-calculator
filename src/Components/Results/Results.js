@@ -176,6 +176,32 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     });
   }
 
+  const postUserSignUpInfo = async () => {
+    const { email, phone, firstName, lastName, 
+      sendUpdates, sendOffers, commConsent } = formData.signUpInfo;
+    const lowerCaseLocale = locale.toLowerCase();
+    const phoneNumber = '+1' + phone;
+
+    const user = {
+      email_or_cell: email ? email : phoneNumber,
+      cell: phone ? phoneNumber : '',
+      email: email ? email : '',
+      first_name: firstName,
+      last_name: lastName,
+      tcpa_consent: commConsent,
+      language_code: lowerCaseLocale,
+      send_offers: sendOffers,
+      send_updates: sendUpdates
+    };
+    
+    try {
+      const userSignUpResponse = await postUser(user); //this should return what's on the swagger docs
+      return userSignUpResponse.id;
+    } catch {
+      return false;
+    }
+  }
+
   const totalDollarAmount = (results) => {
     const total = results.reduce((total, program) => {
       total += program.estimated_value;
