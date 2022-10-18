@@ -77,11 +77,12 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     });
   }
 
-  const getScreensBody = (formData, languageCode) => {
-    const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets, startTime, isTest, externalID, lastTaxFilingYear, benefits, referralSource, otherSource } = formData;
+  const getScreensBody = (formData, languageCode, userId) => {
+    const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets, startTime, isTest, 
+      externalID, lastTaxFilingYear, benefits, referralSource, otherSource } = formData;
     const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 
-    return {
+    const screenBody = {
       is_test: isTest,
       external_id: externalID,
       agree_to_tos: agreeToTermsOfService,
@@ -109,6 +110,12 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       has_wic: benefits.wic,
       referral_source: finalReferralSource
     };
+
+    if (userId !== '' && userId !== false) {
+      screenBody.user = userId;
+    }
+
+    return screenBody;
   };
 
   const getHouseholdMembersBodies = (formData, screensId) => {
