@@ -21,15 +21,16 @@
 }
 
 .sub-header {
-  font-size: 32px;
-  margin-bottom: 24px;
-  padding-bottom: 24px;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid #505c66;
 }
 
 .bottom-border {
   border-bottom: 1px solid #505c66;
-  margin-bottom: 24px;
+  margin-bottom: 1rem;
 }
 
 .language-switcher .MuiInputBase-input {
@@ -66,3 +67,8 @@
 /* .MuiOutlinedInput-root.MuiInputBase-formControl .MuiOutlinedInput-notchedOutline.MuiOutlinedInput-notchedOutline {
   border-color: #0096B0;
 } */
+
+.subheader-desc {
+  font-weight: 400;
+  font-size: 1rem;
+}

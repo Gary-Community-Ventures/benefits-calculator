@@ -318,10 +318,8 @@ const displayPhoneHasErrorHelperText = (phoneNumber) => {
 }
 
 const signUpFormHasError = (props) => {
-  const { email, phone, firstName, lastName, 
-    sendResults, sendUpdates, sendOffers, commConsent } = props;
-  const atLeastOneCheckboxSelectionWasMade = [sendResults, sendUpdates, sendOffers]
-    .some(box => box === true);
+  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = props;
+  const atLeastOneCheckboxSelectionWasMade = (sendUpdates === true) || (sendOffers === true);
 
   return (emailHasError(email)) || (phoneHasError(phone)) || (!email && !phone) || (!firstName) ||
     (!lastName) || (atLeastOneCheckboxSelectionWasMade === false) || (commConsent === false);
@@ -338,9 +336,8 @@ const displayNoEmailOrPhoneHelperText = (email, phone) => {
 } 
 
 const displaySignUpFormHelperText = (props) => {
-  const { email, phone, firstName, lastName, 
-    sendResults, sendUpdates, sendOffers, commConsent } = props;
-  const atLeastOneCheckboxSelectionWasMade = [sendResults, sendUpdates, sendOffers].some(box => box === true);
+  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = props;
+  const atLeastOneCheckboxSelectionWasMade = (sendUpdates === true) || (sendOffers === true);
 
   if (nameHasError(firstName)) {
     return displayFirstNameHelperText(firstName);
@@ -364,6 +361,17 @@ const displaySignUpFormHelperText = (props) => {
         id='validation-helperText.consentCheckbox' 
         defaultMessage='Please check the box above to sign up for the selected notifications' />
     );
+  }
+}
+
+const signUpOptionsHaveError = (signUpInfo) => {
+  const { sendOffers, sendUpdates } = signUpInfo;
+  const doesNotWantNotifications = sendOffers === false && sendUpdates === false;
+
+  if (doesNotWantNotifications) {
+    return false;
+  } else {
+    return signUpFormHasError(signUpInfo);
   }
 }
 
@@ -401,5 +409,6 @@ export {
   phoneHasError,
   displayPhoneHasErrorHelperText,
   signUpFormHasError,
-  displaySignUpFormHelperText
+  displaySignUpFormHelperText,
+  signUpOptionsHaveError
 }

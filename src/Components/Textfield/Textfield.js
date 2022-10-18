@@ -2,7 +2,8 @@ import { TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const StyledTextField = styled(TextField)({
-  marginBottom: 20
+  marginBottom: 20,
+  marginRight: '1rem'
 });
 
 const Textfield = ({ componentDetails, formData, handleTextfieldChange, index }) => {

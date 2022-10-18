@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Checkbox, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
-import SendIcon from '@mui/icons-material/Send';
 import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 
@@ -14,7 +13,8 @@ import {
   postHouseholdMemberData,
   postHouseholdMemberIncomeStream,
   postHouseholdMemberExpense,
-  getEligibility
+  getEligibility,
+  postUser
 } from "../../apiCalls";
 import Loading from '../Loading/Loading';
 import './Results.css';
@@ -39,7 +39,13 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }, []);
 
   const fetchResults = async () => {
-    const screensBody = getScreensBody(formData, locale.toLowerCase());
+    let userId = '';
+
+    if (formData.signUpInfo.sendOffers || formData.signUpInfo.sendUpdates) {
+      userId = await postUserSignUpInfo();
+    }
+
+    const screensBody = getScreensBody(formData, locale.toLowerCase(), userId);
     const screensResponse = await postPartialParentScreen(screensBody);
     const householdMembersBodies = getHouseholdMembersBodies(formData, screensResponse.id);
     for (const householdMembersBody of householdMembersBodies) {
@@ -71,11 +77,12 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     });
   }
 
-  const getScreensBody = (formData, languageCode) => {
-    const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets, startTime, isTest, externalID, lastTaxFilingYear, benefits, referralSource, otherSource } = formData;
+  const getScreensBody = (formData, languageCode, userId) => {
+    const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets, startTime, isTest, 
+      externalID, lastTaxFilingYear, benefits, referralSource, otherSource } = formData;
     const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 
-    return {
+    const screenBody = {
       is_test: isTest,
       external_id: externalID,
       agree_to_tos: agreeToTermsOfService,
@@ -103,6 +110,12 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       has_wic: benefits.wic,
       referral_source: finalReferralSource
     };
+
+    if (userId !== '' && userId !== false) {
+      screenBody.user = userId;
+    }
+
+    return screenBody;
   };
 
   const getHouseholdMembersBodies = (formData, screensId) => {
@@ -163,6 +176,32 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     });
   }
 
+  const postUserSignUpInfo = async () => {
+    const { email, phone, firstName, lastName, 
+      sendUpdates, sendOffers, commConsent } = formData.signUpInfo;
+    const lowerCaseLocale = locale.toLowerCase();
+    const phoneNumber = '+1' + phone;
+
+    const user = {
+      email_or_cell: email ? email : phoneNumber,
+      cell: phone ? phoneNumber : '',
+      email: email ? email : '',
+      first_name: firstName,
+      last_name: lastName,
+      tcpa_consent: commConsent,
+      language_code: lowerCaseLocale,
+      send_offers: sendOffers,
+      send_updates: sendUpdates
+    };
+    
+    try {
+      const userSignUpResponse = await postUser(user); //this should return what's on the swagger docs
+      return userSignUpResponse.id;
+    } catch {
+      return false;
+    }
+  }
+
   const totalDollarAmount = (results) => {
     const total = results.reduce((total, program) => {
       total += program.estimated_value;
@@ -195,30 +234,12 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const displaySubheader = (benefitsSubset) => {
-    if (benefitsSubset === 'eligiblePrograms') {
+    if (benefitsSubset === 'ineligiblePrograms') {
       return (
-        <p>
-          <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
-            <FormattedMessage 
-              id='results.displaySubheader-signupText' 
-              defaultMessage="To receive a copy of these results by email, updates on future benefits you may be eligible for, and incentive offers please click the signup button." />
-          </Typography>
-        </p>
-      );
-    } else if (benefitsSubset === 'ineligiblePrograms') {
-      return (
-        <Typography variant='body1' className='remember-disclaimer-label'>
+        <Typography className='sub-header' variant="h6">
           <FormattedMessage 
             id='results.displaySubheader-basedOnInformationText' 
-            defaultMessage='Based on the information you provided, we believe you are likely ' />
-          <b>
-            <FormattedMessage 
-              id='results.displaySubheader-notEligibleText' 
-              defaultMessage=' not eligible ' />
-          </b> 
-          <FormattedMessage 
-            id='results.displaySubheader-forTheProgramsBelowText' 
-            defaultMessage='for the programs below:' />
+            defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
         </Typography>
       );
     }
@@ -458,7 +479,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               </Grid>
             </Grid> : 
             <>
-              <Grid container xs={12} item={true} sx={{mt: 2, mr: 2, ml: 2}} >
+              <Grid container xs={12} item={true} sx={{mt: 2}} >
                 <Grid xs={12} item={true}>
                   <Typography className='body2'>
                     <FormattedMessage 
@@ -487,22 +508,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   </Grid>
                   </>
                 }
-                <Grid xs={12} item={true} sm={8}>
+                <Grid xs={12} item={true}>
                   { displaySubheader(programSubset) }
-                </Grid>
-                <Grid xs={12} item={true} sm={4} container justifyContent="flex-end">
-                  <Button
-                    sx={{mb: 2, mt: 1}}
-                    variant='contained'
-                    endIcon={<SendIcon />}
-                    onClick={() => {
-                      navigate('/email-results');
-                    }}
-                    className='results-link'>
-                    <FormattedMessage 
-                      id='results.return-signupResultsButton' 
-                      defaultMessage='Signup' />
-                  </Button>
                 </Grid>
               </Grid>
               <Grid xs={12} item={true}>
@@ -533,7 +540,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               <Grid xs={12} item={true}>
                 { programSubset === 'eligiblePrograms' && 
                   <Typography
-                    sx={{mt: 2, ml: 2}}
+                    sx={{mt: '.25rem'}}
                     onClick={() => {
                       navigate('/ineligible-results');
                       window.scrollTo(0,0);
@@ -547,7 +554,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 }
                 { programSubset === 'ineligiblePrograms' && 
                   <Typography
-                    sx={{mt: 2, ml: 2}}
+                    sx={{mt: '.25rem'}}
                     onClick={() => {
                       navigate('/results');
                       window.scrollTo(0,0);

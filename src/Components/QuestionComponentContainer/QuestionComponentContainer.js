@@ -9,11 +9,14 @@ import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
+import SignUp from '../SignUp/SignUp';
 import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData }) => {
+const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, 
+  handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
+  handleCheckboxChange }) => {
   let { id } = useParams();
   let numberId = Number(id);
   const matchingQuestion = questions.find((question) => question.id === numberId);
@@ -102,6 +105,11 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
       // this case is for the referral source question where the user selected "other"
       return true;
     }
+    if ((inputName === 'signUpInfo' && formData.signUpInfo.sendUpdates) ||
+      (inputName === 'signUpInfo' && formData.signUpInfo.sendOffers)) {
+      return true;
+    }
+
     return false;
   };
 
@@ -145,6 +153,16 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
             {renderBasicSelectComponent(followUp)}
           </div>
         );
+      } else if (followUp.componentDetails.componentType === 'SignUp') {
+        return (
+          <div className='question-container' key={index}>
+            <p className='question-label'>{followUp.question}</p>
+            <SignUp 
+              formData={formData} 
+              handleTextfieldChange={handleTextfieldChange} 
+              handleCheckboxChange={handleCheckboxChange} />
+          </div>
+        );
       }
     });
   }
@@ -170,15 +188,15 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   }
 
   const renderHeaderAndSubheader = () => {
-    if (matchingQuestion.id !== 14) {
+    if (matchingQuestion.id === 18) {
       return (
         <h2 className='sub-header'>
-          <FormattedMessage
-            id='qcc.tell-us-text'
-            defaultMessage='Tell us a little more about yourself.' />
+          <FormattedMessage 
+            id='qcc.optional-sign-up-text' 
+            defaultMessage='Optional: Sign up for benefits, updates, and offers' />
         </h2>
       );
-    } else {
+    } else if (matchingQuestion.id === 14) {
       return (
         <>
           <h2 className='household-data-sub-header'>
@@ -197,6 +215,29 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
               defaultMessage=' Head of household' />
           </h4>
         </>
+      );
+    } else if (matchingQuestion.id >= 2 && matchingQuestion.id <= 12) {
+      return (
+        <div className='sub-header'>
+          <FormattedMessage
+            id='qcc.tell-us-text'
+            defaultMessage='Tell us a little more about yourself.' />
+        { matchingQuestion.id <= 12 &&
+          <h4 className='subheader-desc'>
+            <FormattedMessage
+              id='qcc.renderHeaderAndSubheader-subheader-desc'
+              defaultMessage="You will have an opportunity to tell us about other household members in future questions." />
+          </h4>
+        }
+        </div>
+      );
+    } else if (matchingQuestion.id >= 13 && matchingQuestion.id <= 17) {
+      return (
+        <div className='sub-header'>
+          <FormattedMessage
+            id='qcc.tell-us-about-household-text'
+            defaultMessage='Tell us a little more about your household.' />
+        </div>
       );
     }
   };

@@ -7,7 +7,6 @@ import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
-import EmailResults from './Components/EmailResults/EmailResults';
 import Header from './Components/Header/Header';
 import styleOverrides from './Assets/styleOverrides';
 import './App.css';
@@ -64,7 +63,16 @@ const App = () => {
       ccb: false
     },
     referralSource: '',
-    otherSource: ''
+    otherSource: '',
+    signUpInfo: {
+      email: '',
+      phone: '',
+      firstName: '',
+      lastName: '',
+      sendOffers: false,
+      sendUpdates: false,
+      commConsent: false
+    }
   });
 
   // const [formData, setFormData] = useState({
@@ -140,7 +148,16 @@ const App = () => {
   //     ccb: false
   //   },
   //   referralSource: 'gary',
-  //   otherSource: ''
+  //   otherSource: '',
+  //   signUpInfo: {
+  //     email: 'testabc@gmail.com',
+  //     phone: '',
+  //     firstName: 'Test',
+  //     lastName: 'Test',
+  //     sendOffers: true,
+  //     sendUpdates: false,
+  //     commConsent: true
+  //   }
   // });
  
   const [results, setResults] = useState({
@@ -178,13 +195,41 @@ const App = () => {
       updatedFormData.otherSource = '';
     }
 
+    if (formData.signUpInfo.sendOffers === false && formData.signUpInfo.sendUpdates === false) {
+      updatedFormData.signUpInfo = {
+        email: '',
+        phone: '',
+        firstName: '',
+        lastName: '',
+        sendOffers: false,
+        sendUpdates: false,
+        commConsent: false
+      };
+    }
+
     setFormData(updatedFormData);
     
-  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses, formData.referralSource]);
+  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses, 
+    formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates]
+  );
 
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
-    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
+    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/; //for zipcode
+    const numberUpToTenDigitsLongRegex = /^\d{0,10}$/; //for phone number
+    const isFirstLastOrEmail = name === 'firstName'|| name === 'lastName' || name === 'email';
+
+    if (isFirstLastOrEmail ) {
+      const updatedSignUpInfo = { ...formData.signUpInfo, [name]: value };
+      setFormData({ ...formData, signUpInfo: updatedSignUpInfo });
+      return;
+    }
+
+    if (name === 'phone' && numberUpToTenDigitsLongRegex.test(value)) {
+      const updatedSignUpInfo = { ...formData.signUpInfo, [name]: value };
+      setFormData({ ...formData, signUpInfo: updatedSignUpInfo });
+      return;
+    }
 
     if (numberUpToEightDigitsLongRegex.test(value)) {
       setFormData({ ...formData, [name]: Number(value) });
@@ -194,9 +239,18 @@ const App = () => {
   }
 
   const handleCheckboxChange = (event) => {
-    //the value is the name of the formData property
+    //the value is the name of the formData property for everything except the commConsent
     const { value } = event.target; 
-    setFormData({ ...formData, [value]: !formData[value] });
+    const { name } = event.target;
+
+    if (name === 'commConsent') {
+      const updatedCommConsent = !(formData.signUpInfo.commConsent);
+      const updatedSignUpInfo = { ...formData.signUpInfo, commConsent: updatedCommConsent };
+      setFormData({ ...formData, signUpInfo: updatedSignUpInfo });
+      return;
+    } else {
+      setFormData({ ...formData, [value]: !formData[value] });
+    }
   }
   
   const handleRadioButtonChange = (event) => {
@@ -215,7 +269,7 @@ const App = () => {
         return;
       } else if (stepId === 13 && householdSize === 1) { //if you're on the householdSize q and the value is 1
         navigate(`/step-${stepId + 2}`); //skip question 16 and go to 17
-      } else if (stepId === 17) {
+      } else if (stepId === 18) {
         navigate('/confirm-information');
       } else { //you've indicated that you're householdSize is larger than 1
         navigate(`/step-${stepId + 1}`);
@@ -262,7 +316,8 @@ const App = () => {
                 handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
                 handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
                 handleHouseholdDataSubmit={handleHouseholdDataSubmit} 
-                setFormData={setFormData} /> } /> 
+                setFormData={setFormData} 
+                handleCheckboxChange={handleCheckboxChange} /> } /> 
             <Route 
               path='/confirm-information' 
               element={<Confirmation
@@ -280,11 +335,7 @@ const App = () => {
               element={<Results 
                 results={results}
                 programSubset='ineligiblePrograms' 
-                passedOrFailedTests='failed_tests' /> } /> 
-            <Route
-              path='/email-results' 
-              element={<EmailResults 
-                results={results} /> } />
+                passedOrFailedTests='failed_tests' /> } />
             <Route
               path='*'
               element={<Navigate to="/step-1" replace /> } />

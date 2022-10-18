@@ -84,13 +84,13 @@ const EmailResults = ({ results }) => {
       }
 
       try {
+        setSignUpInfo({ ...signUpInfo, error: null });
         const userResponse = await postUser(user);
         const screenUpdates = {
           user: userResponse.id,
         }
         await updateScreen(results.screenerId, screenUpdates);
-    
-        setSignUpInfo({ ...signUpInfo, error: null });
+        
         setOpen(true);
 
         if (sendResults) {
@@ -137,7 +137,7 @@ const EmailResults = ({ results }) => {
         <h2 className='sub-header'>
           <FormattedMessage 
             id='emailResults.return-signupHeader' 
-            defaultMessage='Signup for benefits, updates, and offers' />
+            defaultMessage='Optional: Sign up for benefits updates and offers"' />
         </h2>
       </Grid>
     );
@@ -232,19 +232,6 @@ const EmailResults = ({ results }) => {
               defaultMessage='What would you like us to contact you about?' />
           </FormLabel>
           <FormGroup>
-            <FormControlLabel
-              sx={{mt: 1}}
-              control={
-                <Checkbox 
-                  checked={signUpInfo.sendResults}
-                  onChange={handleCheckboxChange}
-                  name="sendResults" />
-              }
-              label={
-                <FormattedMessage 
-                  id='emailResults.return-sendcopy' 
-                  defaultMessage='Please send me a copy of my results.' />}
-            />
             <FormControlLabel
               sx={{mt: 1}}
               control={

@@ -129,6 +129,11 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
             id='householdDataBlock.createAgeQuestion-how'
             defaultMessage='How old are they?' />
         </p>
+        <p className='question-description'>
+          <FormattedMessage 
+            id='householdDataBlock.createAgeQuestion-zero' 
+            defaultMessage="If your child is less than a year old, enter 0." />
+        </p>
         { createTextfield(ageTextfieldProps, personIndex) }
         <p className='household-data-q-underline'></p>
       </>
