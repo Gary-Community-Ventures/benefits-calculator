@@ -164,8 +164,7 @@ const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) =
       incomeStreams, hasExpenses, expenses 
     } = personData;
 
-    if (Number(age) <= 0) {
-      //what if they have a newborn? What age should be entered for them?
+    if (Number(age) < 0) {
       setHouseholdDataState({
         ...householdDataState, 
         error: 
