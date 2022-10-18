@@ -39,7 +39,13 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }, []);
 
   const fetchResults = async () => {
-    const screensBody = getScreensBody(formData, locale.toLowerCase());
+    let userId = '';
+
+    if (formData.signUpInfo.sendOffers || formData.signUpInfo.sendUpdates) {
+      userId = await postUserSignUpInfo();
+    }
+
+    const screensBody = getScreensBody(formData, locale.toLowerCase(), userId);
     const screensResponse = await postPartialParentScreen(screensBody);
     const householdMembersBodies = getHouseholdMembersBodies(formData, screensResponse.id);
     for (const householdMembersBody of householdMembersBodies) {
