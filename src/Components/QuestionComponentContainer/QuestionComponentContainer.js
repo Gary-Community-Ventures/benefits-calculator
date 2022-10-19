@@ -193,7 +193,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
         <h2 className='sub-header'>
           <FormattedMessage 
             id='qcc.optional-sign-up-text' 
-            defaultMessage='Optional: Sign up for benefits, updates, and offers' />
+            defaultMessage='Optional: Sign up for benefits updates and offers' />
         </h2>
       );
     } else if (matchingQuestion.id === 14) {
