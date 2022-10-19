@@ -79,7 +79,7 @@
   "validation-helperText.householdSize": "Cantidad de personas (máximo de 8)",
   "validation-helperText.assets": "Ingrese 0 o un número positivo",
   "validation-helperText.hHMemberAge": "Ingrese 0 o un número positivo",
-  "validation-helperText.hhMemberAgeB": "Ingrese una edad mayor que 0",
+  "validation-helperText.hhMemberAgeB": "Ingrese 0 o un número positivo para la edad del miembro del hogar",
   "validation-helperText.hhMemberRelation": "Seleccione una opción de parentesco",
   "validation-helperText.hhMemberNoneApply": "Deseleccione las demás opciones si ninguna de estas condiciones le corresponden",
   "validation-helperText.hhMemberIncome": "Seleccione e ingrese una respuesta en los tres campos de ingresos",

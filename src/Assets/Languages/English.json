@@ -79,7 +79,7 @@
   "validation-helperText.householdSize": "Number of People (max. 8)",
   "validation-helperText.assets": "Please enter 0 or a positive number.",
   "validation-helperText.hHMemberAge": "Please enter 0 or a positive number",
-  "validation-helperText.hhMemberAgeB": "Please enter an age greater than 0",
+  "validation-helperText.hhMemberAgeB": "Please enter 0 or a positive number for the household member's age",
   "validation-helperText.hhMemberRelation": "Please select a relation option",
   "validation-helperText.hhMemberNoneApply": "Please deselect all other options if none of these conditions apply",
   "validation-helperText.hhMemberIncome": "Please select and enter a response for all three income fields",
