@@ -164,13 +164,13 @@ const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) =
       incomeStreams, hasExpenses, expenses 
     } = personData;
 
-    if (Number(age) < 0) {
+    if (Number(age) < 0 || age === '') {
       setHouseholdDataState({
         ...householdDataState, 
         error: 
           <FormattedMessage 
             id='validation-helperText.hhMemberAgeB'
-            defaultMessage='Please enter an age greater than 0' /> 
+            defaultMessage="Please enter 0 or a positive number for the household member's age" /> 
       });
       return false;
     } else if (relationshipToHH === '') {

@@ -216,22 +216,20 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           </h4>
         </>
       );
-    } else if (matchingQuestion.id >= 2 && matchingQuestion.id <= 12) {
+    } else if (matchingQuestion.id >= 2 && matchingQuestion.id <= 11) {
       return (
         <div className='sub-header'>
           <FormattedMessage
             id='qcc.tell-us-text'
             defaultMessage='Tell us a little more about yourself.' />
-        { matchingQuestion.id <= 12 &&
           <h4 className='subheader-desc'>
             <FormattedMessage
               id='qcc.renderHeaderAndSubheader-subheader-desc'
               defaultMessage="You will have an opportunity to tell us about other household members in future questions." />
           </h4>
-        }
         </div>
       );
-    } else if (matchingQuestion.id >= 13 && matchingQuestion.id <= 17) {
+    } else if (matchingQuestion.id >= 12 && matchingQuestion.id <= 17) {
       return (
         <div className='sub-header'>
           <FormattedMessage
