@@ -2,7 +2,7 @@ import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
