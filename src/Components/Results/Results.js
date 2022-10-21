@@ -40,7 +40,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }, []);
 
   const fetchResults = async () => {
-    let userId = '';
+    let userId = 0 ;
 
     if (formData.signUpInfo.sendOffers || formData.signUpInfo.sendUpdates) {
       userId = await postUserSignUpInfo();
@@ -74,7 +74,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       eligiblePrograms: qualifiedPrograms, 
       ineligiblePrograms: unqualifiedPrograms, 
       screenerId: screensResponse.id, 
-      isLoading: false 
+      isLoading: false,
+      user: userId
     });
   }
 
