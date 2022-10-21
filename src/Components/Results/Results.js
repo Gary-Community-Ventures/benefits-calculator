@@ -286,10 +286,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         <Grid xs={12} item={true}>
           <Typography className='sub-header' variant="h6">
             <FormattedMessage 
-          <FormattedMessage 
-            <FormattedMessage 
-              id='results.displaySubheader-basedOnInformationText' 
-            id='results.displaySubheader-basedOnInformationText' 
               id='results.displaySubheader-basedOnInformationText' 
               defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
           </Typography>
