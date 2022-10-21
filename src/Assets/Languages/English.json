@@ -310,5 +310,9 @@
   "signUp.displayDisclosureSection-consentText": "By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication.",
   "signUp.displayDisclosureSection-consentCheck1": "I have read, understand, and agree to the terms of My Friend Ben's ",
   "signUp.displayDisclosureSection-consentCheckLink": "data privacy policy",
-  "signUp.displayDisclosureSection-consentCheck4": " and consent to contact."
+  "signUp.displayDisclosureSection-consentCheck4": " and consent to contact.",
+  "emailResults.displaySubheader-text": "Send me a copy of my results",
+  "emailResults.enter-emailLabel": "Please enter or confirm your email address:",
+  "emailResults.return-sendButton": "Send",
+  "emailResults.return-signupCompleted": "A copy of your results has been sent. Click the prev button to return to your results."
 }
