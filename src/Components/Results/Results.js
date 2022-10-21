@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Button, Checkbox, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
 import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
@@ -234,13 +235,65 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const displaySubheader = (benefitsSubset) => {
-    if (benefitsSubset === 'ineligiblePrograms') {
+    if (benefitsSubset === 'eligiblePrograms') {
       return (
-        <Typography className='sub-header' variant="h6">
+        <>
+          <Grid xs={12} item={true}>
+            <Typography className='sub-header' variant="h6"> 
+              {results[programSubset].length} 
+              <FormattedMessage 
+                id='results.return-programsUpToLabel' 
+                defaultMessage=' programs, up to ' /> 
+              ${totalDollarAmount(results[programSubset])} 
+              <FormattedMessage 
+                id='results.return-perYearOrLabel' 
+                defaultMessage=' per year or ' />
+              ${totalDollarAmountMonthly(results[programSubset])} 
+              <FormattedMessage 
+                id='results.return-perMonthLabel' 
+                defaultMessage=' per month for you to consider' />
+            </Typography>
+          </Grid>
+          <Grid container>
+            <Grid sm={10} item={true}>
+              <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
+                <FormattedMessage 
+                  id='results.displaySubheader-signupText' 
+                  defaultMessage='To receive a copy of these results by email please click the email results button.' />
+              </Typography>
+            </Grid>
+            <Grid xs={12} item={true} sm={2} justifyContent="end">
+              <Box justifyContent='end' display='flex'>
+                <Button
+                  sx={{mb: 2, mt: 1}}
+                  variant='contained'
+                  endIcon={<SendIcon />}
+                  onClick={() => {
+                    navigate('/email-results');
+                  }}
+                  className='results-link'>
+                  <FormattedMessage 
+                    id='results.return-emailResultsButton' 
+                    defaultMessage='Email Results' />
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
+        </>
+      );
+    } else if (benefitsSubset === 'ineligiblePrograms') {
+      return (
+        <Grid xs={12} item={true}>
+          <Typography className='sub-header' variant="h6">
+            <FormattedMessage 
           <FormattedMessage 
+            <FormattedMessage 
+              id='results.displaySubheader-basedOnInformationText' 
             id='results.displaySubheader-basedOnInformationText' 
-            defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
-        </Typography>
+              id='results.displaySubheader-basedOnInformationText' 
+              defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
+          </Typography>
+        </Grid>
       );
     }
   }
