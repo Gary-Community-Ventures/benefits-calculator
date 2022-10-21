@@ -541,29 +541,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                     {results.screenerId}
                   </Typography>
                 </Grid>
-                { programSubset === 'eligiblePrograms' && 
-                  <>
-                  <Grid xs={12} item={true}>
-                    <Typography className='sub-header' variant="h6"> 
-                      {results[programSubset].length} 
-                      <FormattedMessage 
-                        id='results.return-programsUpToLabel' 
-                        defaultMessage=' programs, up to ' /> 
-                      ${totalDollarAmount(results[programSubset])} 
-                      <FormattedMessage 
-                        id='results.return-perYearOrLabel' 
-                        defaultMessage=' per year or ' />
-                      ${totalDollarAmountMonthly(results[programSubset])} 
-                      <FormattedMessage 
-                        id='results.return-perMonthLabel' 
-                        defaultMessage=' per month for you to consider' />
-                    </Typography>
-                  </Grid>
-                  </>
-                }
-                <Grid xs={12} item={true}>
-                  { displaySubheader(programSubset) }
-                </Grid>
+                { displaySubheader(programSubset) }
               </Grid>
               <Grid xs={12} item={true}>
                 <FormControlLabel
