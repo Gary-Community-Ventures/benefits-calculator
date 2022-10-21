@@ -8,7 +8,7 @@ import QuestionComponentContainer from './Components/QuestionComponentContainer/
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
-import EmailResults from './Components/EmailResults/EmailResults';
+import EmailResults2 from './Components/EmailResults/EmailResults2';
 import styleOverrides from './Assets/styleOverrides';
 import './App.css';
 
@@ -339,7 +339,8 @@ const App = () => {
                 passedOrFailedTests='failed_tests' /> } />
             <Route
               path='/email-results' 
-              element={<EmailResults 
+              element={<EmailResults2
+                formData={formData}
                 results={results}
                 handleTextfieldChange={handleTextfieldChange} /> } />
             <Route
