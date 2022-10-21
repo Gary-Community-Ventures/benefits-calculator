@@ -1,11 +1,12 @@
 import { Button } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 const PreviousButton = ({ formData }) => {
   let { id } = useParams();
   let numberId = Number(id);
   let navigate = useNavigate();
+  let location = useLocation();
 
   return (
     <Button
@@ -13,6 +14,8 @@ const PreviousButton = ({ formData }) => {
       onClick={() => {
         if (numberId === 15 && formData.householdSize === 1) {
           navigate(`/step-${numberId - 2}`);
+        } else if (location.pathname === '/email-results'){
+          navigate(`/results`);
         } else {
           navigate(`/step-${numberId - 1}`);
         }
