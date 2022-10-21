@@ -165,7 +165,8 @@ const App = () => {
     eligiblePrograms: [], 
     ineligiblePrograms: [],
     screenerId: 0,
-    isLoading: true 
+    isLoading: true,
+    user: 0
   });
 
   useEffect(() => {
