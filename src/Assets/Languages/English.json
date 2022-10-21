@@ -270,7 +270,7 @@
   "results.return-estimatedDeliveryTimeB" : " after completing the application.",
   "results.displaySubheader-rememberDisclaimerText": "Remember that we can't guarantee eligibility, but based on the information you provided, we believe you are likely eligible for the programs below:",
   "results.displaySubheader-basedOnInformationText": "Based on the information you provided, we believe you are likely not eligible for the programs below:",
-  "results.displaySubheader-signupText": "To receive a copy of these results by email please click the email results button.",
+  "results.displaySubheader-emailResultsDescText": "To receive a copy of these results by email please click the email results button.",
   "results.resultsTable-benefitLabel": "Benefit",
   "results.resultsTable-annualValueLabel": "Annual Value",
   "results.resultsTable-timeToApply": "Time to Apply",
