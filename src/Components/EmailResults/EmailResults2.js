@@ -120,6 +120,7 @@ const EmailResults2 = ({ formData, handleTextfieldChange, results }) => {
           defaultMessage='Please enter or confirm your email address:' />
       </article>
       { createEmailTextfield() }
+      { state.error && displayErrorMessage(state.errorMessage) }
       <div className='question-buttons'>
         <PreviousButton formData={formData}/>
         <Button
