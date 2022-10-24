@@ -4,10 +4,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
-import Textfield from "../Textfield/Textfield";
 import { emailHasError, displayEmailHelperText } from "../../Assets/validationFunctions";
 import { postMessage, updateScreen } from '../../apiCalls';
+import Textfield from "../Textfield/Textfield";
 import PreviousButton from "../PreviousButton/PreviousButton";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const EmailResults2 = ({ formData, handleTextfieldChange, results }) => {
   const [open, setOpen] = useState(false);
