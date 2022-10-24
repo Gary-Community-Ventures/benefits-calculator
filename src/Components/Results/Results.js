@@ -113,7 +113,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       referral_source: finalReferralSource
     };
 
-    if (userId !== '' && userId !== false) {
+    if (userId !== 0 && userId !== false) {
       screenBody.user = userId;
     }
 
