@@ -101,6 +101,12 @@ const EmailResults2 = ({ formData, handleTextfieldChange, results }) => {
     </>
   );
 
+  const displayErrorMessage = (errorMessage) => {
+    return (
+      <ErrorMessage error={errorMessage} />
+    );
+  }
+
   return (
     <main className='benefits-form'>
       <h2 className='sub-header'>
