@@ -43,7 +43,7 @@ const EmailResults2 = ({ formData, handleTextfieldChange, results }) => {
   }
 
   const handleClose = () => {
-    setOpen(false);
+    setState({ ...state, open: false });
   };
 
   const handleSubmit = async () => {
