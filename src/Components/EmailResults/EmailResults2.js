@@ -132,7 +132,7 @@ const EmailResults2 = ({ formData, handleTextfieldChange, results }) => {
             defaultMessage='Send' />
         </Button>
         <Snackbar
-          open={open}
+          open={state.open}
           autoHideDuration={6000}
           onClose={handleClose}
           message={
