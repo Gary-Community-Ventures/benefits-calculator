@@ -11,7 +11,11 @@ import PreviousButton from "../PreviousButton/PreviousButton";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const EmailResults2 = ({ formData, handleTextfieldChange, results }) => {
-  const [open, setOpen] = useState(false);
+  const [state, setState] = useState({
+    open: false,
+    error: false,
+    errorMessage: ''
+  });
 
   const createEmailTextfield = () => {
     const emailProps = {
