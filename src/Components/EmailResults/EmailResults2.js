@@ -51,9 +51,13 @@ const EmailResults2 = ({ formData, handleTextfieldChange, results }) => {
     const { email } = signUpInfo;
     
     if (emailHasError(email) === false) {
-      try {
-        setOpen(true);
+      setState({ 
+        ...state, 
+        error: false, 
+        errorMessage: '' 
+      });
 
+      try {
         const message = {
           email: email,
           type: 'emailScreen',
@@ -61,14 +65,25 @@ const EmailResults2 = ({ formData, handleTextfieldChange, results }) => {
           uid: results.user
         }
         await postMessage(message);
-
+        //^^ if the user's email already exists in our system this function will throw an error =>
+        //we won't be able to get the uid from results because of the error exception
+        
         const emailRequestUpdate = {
           last_email_request_date: new Date().toJSON()
         }
         await updateScreen(results.screenerId, emailRequestUpdate);
+        
+        setState({ 
+          ...state, 
+          open: true 
+        });
 
-      } catch {
-        console.log(`there's an error`)
+      } catch (error) {
+        setState({
+          ...state, 
+          error: true, 
+          errorMessage: error.message 
+        });
       }
     }
   }
