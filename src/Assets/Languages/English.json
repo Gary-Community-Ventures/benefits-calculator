@@ -48,7 +48,7 @@
   "questions.id-10": "Have you served in the U.S. Armed Forces, National Guard or Reserves?",
   "questions.id-10-ariaLabel": "is a veteran",
   "questions.id-11": "Do you have an income?",
-  "questions.id-11-description" : "This includes money from jobs, alimony, investments, or gifts. Income is the money you earn or receive before deducting taxes. Enter income for yourself only.",
+  "questions.id-11-description" : "Income is the money you earn or receive before deducting taxes. This includes money from jobs, alimony, investments, or gifts. Enter income for yourself only. You will have a chance to enter income for other household members later.",
   "questions.id-11-ariaLabel": "has an income",
   "questions.id-11a": "What type of income have you had most recently?",
   "questions.id-11a-ariaLabel": "most recent type of income",
