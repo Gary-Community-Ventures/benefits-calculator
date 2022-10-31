@@ -41,7 +41,7 @@
   "questions.id-7a": "Did you work in the past 18 months?",
   "questions.id-7a-ariaLabel": "has worked in the past 18 months",
   "questions.id-8": "Are you blind or visually impaired?",
-  "questions.id-8-description": "\"Visually impaired\" means a total lack of vision in your better eye, vision of or below 20/200 in your better eye even with eyeglasses or other corrections, or tunnel vision that significantly limits your field of vision.",
+  "questions.id-8-description": "\"Visually impaired\" means you cannot correct your vision to a \"normal\" level.",
   "questions.id-8-ariaLabel": "is blind or visually impaired",
   "questions.id-9": "Do you have any disabilities?",
   "questions.id-9-ariaLabel": "has any disabilities",

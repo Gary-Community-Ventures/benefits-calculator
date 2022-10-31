@@ -197,7 +197,7 @@ const questions = [
     questionDescription: 
       <FormattedMessage 
         id='questions.id-8-description'
-        defaultMessage='"Visually impaired" means a total lack of vision in your better eye, vision of or below 20/200 in your better eye even with eyeglasses or other corrections, or tunnel vision that significantly limits your field of vision.' 
+        defaultMessage='"Visually impaired" means you cannot correct your vision to a "normal" level.' 
         />,
     componentDetails: {
       componentType: 'Radiofield',
