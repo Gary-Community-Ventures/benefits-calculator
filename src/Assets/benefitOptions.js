@@ -4,63 +4,59 @@ const benefitOptions = {
   tanf: 
     <FormattedMessage 
       id='benefitOptions.tanf' 
-      defaultMessage='Temporary Assistance for Needy Families (TANF/Colorado Works)' />,
+      defaultMessage='Cash assistance and work support (Temporary Assistance for Needy Families (TANF/Colorado Works))' />,
   wic: 
     <FormattedMessage 
       id='benefitOptions.wic' 
-      defaultMessage='Special Supplemental Nutrition Program for Women, Infants, and Children (WIC)' />,
+      defaultMessage='Food and breastfeeding assistance (Special Supplemental Nutrition Program for Women, Infants, and Children (WIC))' />,
   snap: 
     <FormattedMessage 
       id='benefitOptions.snap' 
-      defaultMessage='Supplemental Nutrition Assistance Program (Food Assistance Program/SNAP)' />,
+      defaultMessage='Food assistance (Supplemental Nutrition Assistance Program/SNAP)' />,
   lifeline: 
     <FormattedMessage 
       id='benefitOptions.lifeline' 
-      defaultMessage='Lifeline Phone/Internet Service' />,
+      defaultMessage='Phone or internet discount (Lifeline Phone/Internet Service)' />,
   acp: 
     <FormattedMessage 
       id='benefitOptions.acp' 
-      defaultMessage='Affordable Connectivity Program' />,
+      defaultMessage='Home internet discount (Affordable Connectivity Program)' />,
   eitc:
     <FormattedMessage
       id='benefitOptions.eitc'
-      defaultMessage='Earned Income Tax Credit' />,
+      defaultMessage='Federal tax credit: earned income (Earned Income Tax Credit)' />,
   coeitc:
     <FormattedMessage
       id='benefitOptions.coeitc'
-      defaultMessage='Colorado Earned Income Tax Credit' />,
+      defaultMessage='State tax credit: earned income (Colorado Earned Income Tax Credit)' />,
   nslp:
     <FormattedMessage
       id='benefitOptions.nslp'
-      defaultMessage='National School Lunch Program' />,
+      defaultMessage='Free school meals (National School Lunch Program)' />,
   ctc:
     <FormattedMessage
       id='benefitOptions.ctc'
-      defaultMessage='Child Tax Credit' />,
+      defaultMessage='Federal tax credit: child tax credit (Child Tax Credit)' />,
   medicaid:
     <FormattedMessage
       id='benefitOptions.medicaid'
-      defaultMessage='MEDICAID - also known as Health First Colorado' />,
+      defaultMessage='Free or low-cost public health insurance (Medicaid - also known as Health First Colorado)' />,
   rtdlive:
     <FormattedMessage
       id='benefitOptions.rtdlive'
-      defaultMessage='RTD Live' />,
+      defaultMessage='Discounted RTD fares (RTD LiVE)' />,
   cccap:
     <FormattedMessage
       id='benefitOptions.cccap'
-      defaultMessage='Colorado Child Care Assistance Program' />,
+      defaultMessage='Help with child care costs (Colorado Child Care Assistance Program)' />,
   mydenver:
     <FormattedMessage
       id='benefitOptions.mydenver'
-      defaultMessage='MY Denver Card' />,
+      defaultMessage='Reduced-cost youth programs (MY Denver Card)' />,
   chp:
     <FormattedMessage
       id='benefitOptions.chp'
-      defaultMessage='CHP+' />,
-  ccb:
-    <FormattedMessage
-      id='benefitOptions.ccb'
-      defaultMessage='Colorado Cash Back TABOR refund' />
+      defaultMessage='Low-cost health insurance for children and pregnant women (CHP+)' />
 };
 
 export default benefitOptions;
