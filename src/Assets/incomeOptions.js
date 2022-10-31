@@ -21,10 +21,6 @@ const incomeOptions = {
     <FormattedMessage 
       id='incomeOptions.childSupport' 
       defaultMessage='Child Support (Received)' />,
-  disabilityMedicaid: 
-    <FormattedMessage 
-      id='incomeOptions.disabilityMedicaid' 
-      defaultMessage='Disability-related Medicaid' />,
   sSI: 
     <FormattedMessage 
       id='incomeOptions.sSI' 
