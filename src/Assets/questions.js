@@ -281,7 +281,7 @@ const questions = [
     question:
       <FormattedMessage
         id='questions.id-12'
-        defaultMessage='Do you have any expenses?' />,
+        defaultMessage='Does your household have any expenses?' />,
     questionDescription:
       <FormattedMessage
         id='questions.id-12-description'

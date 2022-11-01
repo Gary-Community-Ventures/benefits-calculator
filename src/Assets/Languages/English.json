@@ -52,7 +52,7 @@
   "questions.id-11-ariaLabel": "has an income",
   "questions.id-11a": "What type of income have you had most recently?",
   "questions.id-11a-ariaLabel": "most recent type of income",
-  "questions.id-12": "Do you have any expenses?",
+  "questions.id-12": "Does your household have any expenses?",
   "questions.id-12-description" : "This includes costs like child care, child support, rent, medical expenses, heating bills and more.",
   "questions.id-12-ariaLabel": "has expenses",
   "questions.id-12a": "What type of expense have you had most recently?",
