@@ -53,7 +53,7 @@
   "questions.id-11a": "¿Qué tipo de ingresos ha recibido últimamente?",
   "questions.id-11a-ariaLabel": "tipo de ingresos más recientes",
   "questions.id-12": "¿Tiene gastos en su hogar?",
-  "questions.id-12-description": "Esto incluye costos como servicio de cuido de niños, pension alimenticia, alquiler, gastos médicos, facturas de electricidad y otros.",
+  "questions.id-12-description" : "Sume los gastos de todas las personas que viven en su hogar. Esto incluye costos como cuidado de niños, manutención de niños, alquiler, gastos médicos, facturas de calefacción y más. Solo preguntaremos sobre los gastos que puedan afectar los beneficios. No preguntaremos sobre gastos como los de la alimentacion, ya que las facturas del supermercado no afectan los beneficios.",
   "questions.id-12-ariaLabel": "tiene gastos",
   "questions.id-12a": "¿Qué tipo de gastos ha tenido últimamente?",
   "questions.id-12a-ariaLabel": "tipo de gastos más recientes",

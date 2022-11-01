@@ -285,7 +285,9 @@ const questions = [
     questionDescription:
       <FormattedMessage
         id='questions.id-12-description'
-        defaultMessage='This includes costs like child care, child support, rent, medical expenses, heating bills and more.' />,
+        defaultMessage='Add up expenses for everyone who lives in your home. 
+          This includes costs like child care, child support, rent, medical expenses, heating bills, and more. 
+          We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits.' />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 
