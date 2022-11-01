@@ -162,7 +162,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
         <p className='question-label'>
           <FormattedMessage 
             id='incomeBlock.createIncomeAmountTextfield-questionLabel' 
-            defaultMessage='How much do you receive for: ' /> 
+            defaultMessage='How much do you receive each pay period for: ' /> 
           {selectedMenuItem[index].incomeStreamLabel}?
         </p>
         <div className='income-block-textfield'>

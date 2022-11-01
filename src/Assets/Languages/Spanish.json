@@ -208,7 +208,7 @@
   "incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencyLabel": "Frecuencia",
   "incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencySelectLabel": "Frecuencia de ingresos",
   "incomeBlock.createFrequencyMenuItems-disabledSelectMenuItemText": "Seleccionar",
-  "incomeBlock.createIncomeAmountTextfield-questionLabel": "Cuánto recibe por: ",
+  "incomeBlock.createIncomeAmountTextfield-questionLabel": "¿Cuánto recibe en cada período de pago por: ",
   "incomeBlock.createIncomeAmountTextfield-amountLabel": "Monto",
   "incomeBlock.return-error-message": "Seleccione e ingrese una respuesta en los tres campos",
   "incomeBlock.return-addIncomeButton": "Agregar otro ingreso",
