@@ -64,7 +64,7 @@
   "questions.id-14-ariaLabel": "screener household data",
   "questions.id-15": "How much does your whole household have right now in:",
   "questions.id-15-description" : "Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?",
-  "questions.id-15-inputLabel": "Household Assets",
+  "questions.id-15-inputLabel": "Dollar Amount",
   "questions.id-16": "What was the last year you filed taxes for?",
   "questions.id-17": "How did you hear about this screener?",
   "questions.id-17a": "If other, please specify:",

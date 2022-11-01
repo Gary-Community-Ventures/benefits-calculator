@@ -365,7 +365,7 @@ const questions = [
       inputLabel: 
         <FormattedMessage
           id='questions.id-15-inputLabel'
-          defaultMessage='Household Assets' />,
+          defaultMessage='Dollar Amount' />,
       inputError: householdAssetsHasError,
       inputHelperText: displayHouseholdAssetsHelperText
     }
