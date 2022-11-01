@@ -29,10 +29,6 @@ const expenseOptions = {
     <FormattedMessage 
       id='expenseOptions.cooling' 
       defaultMessage='Cooling' />,
-  otherUtilities: 
-    <FormattedMessage 
-      id='expenseOptions.otherUtilities' 
-      defaultMessage='Other Utilities' />,
   telephone: 
     <FormattedMessage 
       id='expenseOptions.telephone' 
@@ -41,6 +37,10 @@ const expenseOptions = {
     <FormattedMessage 
       id='expenseOptions.internet' 
       defaultMessage='Internet' />,
+  otherUtilities: 
+    <FormattedMessage 
+      id='expenseOptions.otherUtilities' 
+      defaultMessage='Other Utilities' />,
   auto: 
     <FormattedMessage 
       id='expenseOptions.auto' 
