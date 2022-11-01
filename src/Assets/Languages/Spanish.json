@@ -305,7 +305,7 @@
   "signUp.createLastNameTextfield-label": "Apellido",
   "signUp.createEmailTextfield-label": "Correo electrónico",
   "signUp.createPhoneTextfield-label": "Teléfono móvil",
-  "signUp.displayDisclosureSection-consentText": "Al completar este formulario, acepta que Gary o nuestros afiliados se comuniquen en el futuro sobre el uso de la calculadora de beneficios y ofrezcan programas adicionales que puedan ser de su interés y la de su familia. Es posible que se apliquen costos estándar de mensajes y datos a estas comunicaciones. Puede optar a no recibir estas comunicaciones en cualquier momento a través del enlace de exclusión en la comunicación.",
+  "signUp.displayDisclosureSection-consentText": "Al completar este formulario, acepta que Gary Philanthropy o nuestros afiliados se comuniquen en el futuro sobre el uso de la calculadora de beneficios y ofrezcan programas adicionales que puedan ser de su interés y la de su familia. Es posible que se apliquen costos estándar de mensajes y datos a estas comunicaciones. Puede optar a no recibir estas comunicaciones en cualquier momento a través del enlace de exclusión en la comunicación.",
   "signUp.displayDisclosureSection-consentCheck1": "He leído, comprendo y acepto los términos del descargo de ",
   "signUp.displayDisclosureSection-consentCheckLink": "privacidad de datos",
   "signUp.displayDisclosureSection-consentCheck4": " de My Friend Ben y doy mi consentimiento de contacto.",
