@@ -176,7 +176,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         <p className='question-label'>
           <FormattedMessage
             id='householdDataBlock.createHOfHRelationQuestion-relation'
-            defaultMessage='What is this person’s relationship to the head of the household?' />
+            defaultMessage='What is this person’s relationship to you?' />
         </p>
         { createRelationshipDropdownMenu(index) }
         <p className='household-data-q-underline'></p>

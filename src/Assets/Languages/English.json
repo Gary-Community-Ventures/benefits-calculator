@@ -101,7 +101,7 @@
   "householdDataBlock.createFMInputLabel-age": " Age",
   "householdDataBlock.createAgeQuestion-how": "How old are they?",
   "householdDataBlock.createAgeQuestion-zero": "If your child is less than a year old, enter 0.",
-  "householdDataBlock.createHOfHRelationQuestion-relation": "What is this person’s relationship to the head of the household?",
+  "householdDataBlock.createHOfHRelationQuestion-relation": "What is this person’s relationship to you?",
   "householdDataBlock.createDropdownCompProps-inputLabelText": "Relation",
   "householdDataBlock.createDropdownCompProps-label": "Relation Type",
   "householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText": "Click to select relationship",
