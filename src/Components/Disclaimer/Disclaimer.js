@@ -41,7 +41,7 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
           <Typography variant='h6'>
             <FormattedMessage 
               id='disclaimer.sub-header'
-              defaultMessage='Gary Community Ventures Disclaimer' />
+              defaultMessage='Gary Philanthropy Disclaimer' />
           </Typography>
           <Typography variant='body1'>
             <FormattedMessage
