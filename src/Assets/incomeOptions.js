@@ -25,10 +25,6 @@ const incomeOptions = {
     <FormattedMessage 
       id='incomeOptions.sSI' 
       defaultMessage='Supplemental Security Income (SSI)' />,
-  sSDependent: 
-    <FormattedMessage 
-      id='incomeOptions.sSDependent' 
-      defaultMessage='Social Security Dependent Benefits' />,
   sSDisability: 
     <FormattedMessage 
       id='incomeOptions.sSDisability' 
@@ -36,11 +32,15 @@ const incomeOptions = {
   sSSurvivor: 
     <FormattedMessage 
       id='incomeOptions.sSSurvivor' 
-      defaultMessage="Social Security Survivor's Benefits" />,
+      defaultMessage="Social Security Survivor's Benefits (Widow/Widower)" />,
   sSRetirement:
     <FormattedMessage 
       id='incomeOptions.sSRetirement' 
       defaultMessage='Social Security Retirement Benefits' />,
+  sSDependent: 
+    <FormattedMessage 
+      id='incomeOptions.sSDependent' 
+      defaultMessage='Social Security Dependent Benefits (retirement, disability, or survivors)' />,
   cOSDisability: 
     <FormattedMessage 
       id='incomeOptions.cOSDisability' 
@@ -52,7 +52,7 @@ const incomeOptions = {
   pension: 
     <FormattedMessage 
       id='incomeOptions.pension' 
-      defaultMessage='Government or Private Pension' />,
+      defaultMessage='Military, Government, or Private Pension' />,
   deferredComp: 
     <FormattedMessage 
       id='incomeOptions.deferredComp' 
