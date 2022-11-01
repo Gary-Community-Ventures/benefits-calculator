@@ -349,7 +349,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         <p className='question-label radio-question'>
           <FormattedMessage 
             id='householdDataBlock.createIncomeRadioQuestion-questionLabel' 
-            defaultMessage='Do they have an income?' />
+            defaultMessage='Does this individual in your household have significant income you have not already included?' />
         </p>
         <p className='question-description'>
           <FormattedMessage 

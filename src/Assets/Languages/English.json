@@ -136,7 +136,7 @@
   "householdDataBlock.createUnemployed18MosRadioQuestion-ariaLabel": "has worked in the past 18 months",
   "householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel": "Did they work in the last 18 months?",
   "householdDataBlock.createIncomeRadioQuestion-ariaLabel": "has an income",
-  "householdDataBlock.createIncomeRadioQuestion-questionLabel": "Do they have an income?",
+  "householdDataBlock.createIncomeRadioQuestion-questionLabel": "Does this individual in your household have significant income you have not already included?",
   "householdDataBlock.createIncomeRadioQuestion-questionDescription": "This includes money from jobs, alimony, investments, or gifts.",
   "personIncomeBlock.return-questionLabel": "What type of income have they had most recently?",
   "personIncomeBlock.return-questionDescription": "Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.",
