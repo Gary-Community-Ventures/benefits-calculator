@@ -175,7 +175,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
         <p className='question-label'>
           <FormattedMessage 
             id='personIncomeBlock.createIncomeAmountTextfield-questionLabel' 
-            defaultMessage='How much do they receive for this type of income: ' />
+            defaultMessage='How much do they receive each pay period for this type of income: ' />
           {selectedMenuItem[index].incomeStreamLabel}?
         </p>
         <div className='income-block-textfield'>

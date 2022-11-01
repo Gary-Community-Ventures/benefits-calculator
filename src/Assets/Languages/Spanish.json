@@ -164,7 +164,7 @@
   "incomeOptions.investment": "Ingresos por inversiones (intereses, dividendos y ganancias por la venta de acciones)",
   "personIncomeBlock.createIncomeBlockQuestions-questionLabel": "Si recibe otro tipo de ingresos, seleccione de las opciones a continuación.",
   "personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel": "Tipo de ingresos",
-  "personIncomeBlock.createIncomeAmountTextfield-questionLabel": "¿Cuánto recibe por este tipo de ingresos: ",
+  "personIncomeBlock.createIncomeAmountTextfield-questionLabel": "¿Cuánto reciben en cada período de pago por este tipo de ingreso: ",
   "personIncomeBlock.createIncomeAmountTextfield-amountLabel": "Monto",
   "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel": "¿Con qué frecuencia recibe estos ingresos: ",
   "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel": "Frecuencia",

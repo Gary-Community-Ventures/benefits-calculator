@@ -164,7 +164,7 @@
   "incomeOptions.investment": "Investment Income (interest, dividends, and profit from selling stocks)",
   "personIncomeBlock.createIncomeBlockQuestions-questionLabel": "If they receive another type of income, select it below.",
   "personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel": "Income Type",
-  "personIncomeBlock.createIncomeAmountTextfield-questionLabel": "How much do they receive for this type of income: ",
+  "personIncomeBlock.createIncomeAmountTextfield-questionLabel": "How much do they receive each pay period for this type of income: ",
   "personIncomeBlock.createIncomeAmountTextfield-amountLabel": "Amount",
   "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel": "How often do they receive this income: ",
   "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel": "Frequency",
