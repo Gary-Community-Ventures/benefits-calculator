@@ -55,7 +55,7 @@
   "questions.id-12": "Does your household have any expenses?",
   "questions.id-12-description" : "Add up expenses for everyone who lives in your home. This includes costs like child care, child support, rent, medical expenses, heating bills, and more. We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits.",
   "questions.id-12-ariaLabel": "has expenses",
-  "questions.id-12a": "What type of expense have you had most recently?",
+  "questions.id-12a": "What type of expense has your household had most recently?",
   "questions.id-12a-ariaLabel": "most recent type of expense",
   "questions.id-13": "Including you, how many people are in your household?",
   "questions.id-13-description" : "This is usually family members who you both live and share important resources with like food and bills.",

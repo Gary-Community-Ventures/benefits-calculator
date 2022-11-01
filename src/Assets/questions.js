@@ -301,7 +301,7 @@ const questions = [
       question:
         <FormattedMessage
           id='questions.id-12a'
-          defaultMessage='What type of expense have you had most recently?' />,
+          defaultMessage='What type of expense has your household had most recently?' />,
       componentDetails: {
         componentType: 'ExpenseBlock',
         ariaLabel: 

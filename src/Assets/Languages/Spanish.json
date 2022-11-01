@@ -55,7 +55,7 @@
   "questions.id-12": "¿Tiene gastos en su hogar?",
   "questions.id-12-description" : "Sume los gastos de todas las personas que viven en su hogar. Esto incluye costos como cuidado de niños, manutención de niños, alquiler, gastos médicos, facturas de calefacción y más. Solo preguntaremos sobre los gastos que puedan afectar los beneficios. No preguntaremos sobre gastos como los de la alimentacion, ya que las facturas del supermercado no afectan los beneficios.",
   "questions.id-12-ariaLabel": "tiene gastos",
-  "questions.id-12a": "¿Qué tipo de gastos ha tenido últimamente?",
+  "questions.id-12a": "¿Qué tipo de gasto ha tenido su hogar más recientemente?",
   "questions.id-12a-ariaLabel": "tipo de gastos más recientes",
   "questions.id-13": "Contándolo a usted, cuántas personas hay en su hogar?",
   "questions.id-13-description": "Esto se refiere habitualmente a miembros de su familia que viven y comparten con usted recursos importantes como alimentos y facturas.",
