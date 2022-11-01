@@ -43,7 +43,7 @@
   "questions.id-8": "¿Es ciego o tiene discapacidad visual?",
   "questions.id-8-description": "\"Discapacidad visual\" significa que no puede corregir su visión a un nivel \"normal\".",
   "questions.id-8-ariaLabel": "es ciego o tiene problemas de visión",
-  "questions.id-9": "¿Tiene alguna discapacidad?",
+  "questions.id-9": "¿Tiene alguna discapacidad que le imposibilite trabajar ahora o en el futuro?",
   "questions.id-9-ariaLabel": "tiene alguna discapacidad",
   "questions.id-10": "¿Sirvió en las Fuerzas Armadas, Guardia Nacional o Reservas de Estados Unidos?",
   "questions.id-10-ariaLabel": "es veterano",

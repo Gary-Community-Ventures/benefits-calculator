@@ -214,7 +214,7 @@ const questions = [
     question:
       <FormattedMessage
         id='questions.id-9'
-        defaultMessage='Do you have any disabilities?' />,
+        defaultMessage='Do you have any disabilities that make you unable to work now or in the future?' />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel:
