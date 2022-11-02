@@ -66,6 +66,7 @@
   "questions.id-15-description" : "Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?",
   "questions.id-15-inputLabel": "Dollar Amount",
   "questions.id-16": "What was the last year you filed taxes for?",
+  "questions.id-16-description": "The most recent year you can file taxes for is 2021.",
   "questions.id-17": "How did you hear about this screener?",
   "questions.id-17a": "If other, please specify:",
   "questions.id-17a-inputLabel": "Other referral source",
