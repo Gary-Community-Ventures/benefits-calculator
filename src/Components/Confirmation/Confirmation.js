@@ -43,26 +43,26 @@ const Confirmation = ({ formData }) => {
                 id='confirmation.headOfHouseholdDataBlock-conditionsText' 
                 defaultMessage='Conditions:' />
             </b>
-          <Link to='/step-14' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
-              defaultMessage='Edit' />
-          </Link>
-          { displayConditions(personData) }
-        </article>
-        <article className='confirmation-label'>
-          <b>
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-incomeLabel' 
-              defaultMessage='Income:' />
-          </b>
-          <Link to='/step-14' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
-              defaultMessage='Edit' />
-          </Link>
-          { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
-        </article>
+            <Link to='/step-14' className='edit-link'>
+              <FormattedMessage
+                id='confirmation.editLinkText'
+                defaultMessage='Edit' />
+            </Link>
+            { displayConditions(personData) }
+          </article>
+          <article className='confirmation-label'>
+            <b>
+              <FormattedMessage
+                id='confirmation.headOfHouseholdDataBlock-incomeLabel'
+                defaultMessage='Income:' />
+            </b>
+            <Link to='/step-14' className='edit-link'>
+              <FormattedMessage
+                id='confirmation.editLinkText'
+                defaultMessage='Edit' />
+            </Link>
+            { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
+          </article>
         </div>
       );
     });
