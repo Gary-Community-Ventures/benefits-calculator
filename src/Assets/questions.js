@@ -197,7 +197,7 @@ const questions = [
     questionDescription: 
       <FormattedMessage 
         id='questions.id-8-description'
-        defaultMessage='"Visually impaired" means a total lack of vision in your better eye, vision of or below 20/200 in your better eye even with eyeglasses or other corrections, or tunnel vision that significantly limits your field of vision.' 
+        defaultMessage='"Visually impaired" means you cannot correct your vision to a "normal" level.' 
         />,
     componentDetails: {
       componentType: 'Radiofield',
@@ -214,7 +214,7 @@ const questions = [
     question:
       <FormattedMessage
         id='questions.id-9'
-        defaultMessage='Do you have any disabilities?' />,
+        defaultMessage='Do you have any disabilities that make you unable to work now or in the future?' />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel:
@@ -250,7 +250,9 @@ const questions = [
     questionDescription: 
       <FormattedMessage
         id='questions.id-11-description'
-        defaultMessage='This includes money from jobs, alimony, investments, or gifts. Income is the money you earn or receive before deducting taxes. Enter income for yourself only.' />,
+        defaultMessage='Income is the money you earn or receive before deducting taxes. 
+          This includes money from jobs, alimony, investments, or gifts. Enter income for yourself only. 
+          You will have a chance to enter income for other household members later.' />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel:
@@ -279,11 +281,13 @@ const questions = [
     question:
       <FormattedMessage
         id='questions.id-12'
-        defaultMessage='Do you have any expenses?' />,
+        defaultMessage='Does your household have any expenses?' />,
     questionDescription:
       <FormattedMessage
         id='questions.id-12-description'
-        defaultMessage='This includes costs like child care, child support, rent, medical expenses, heating bills and more.' />,
+        defaultMessage='Add up expenses for everyone who lives in your home. 
+          This includes costs like child care, child support, rent, medical expenses, heating bills, and more. 
+          We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits.' />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 
@@ -297,7 +301,7 @@ const questions = [
       question:
         <FormattedMessage
           id='questions.id-12a'
-          defaultMessage='What type of expense have you had most recently?' />,
+          defaultMessage='What type of expense has your household had most recently?' />,
       componentDetails: {
         componentType: 'ExpenseBlock',
         ariaLabel: 
@@ -361,7 +365,7 @@ const questions = [
       inputLabel: 
         <FormattedMessage
           id='questions.id-15-inputLabel'
-          defaultMessage='Household Assets' />,
+          defaultMessage='Dollar Amount' />,
       inputError: householdAssetsHasError,
       inputHelperText: displayHouseholdAssetsHelperText
     }

@@ -41,7 +41,7 @@ const displayZipcodeHelperText = (zipcode) => {
     return (
       <FormattedMessage 
         id='validation-helperText.zipcode' 
-        defaultMessage='Please enter a valid CO zipcode' />
+        defaultMessage='Please enter a valid CO zip code' />
     );
   }
 } 

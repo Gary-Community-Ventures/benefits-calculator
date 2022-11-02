@@ -94,7 +94,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
         <Typography variant='body1' sx={{ mt: '1rem' }} style={{ fontWeight: 600 }}>
           <FormattedMessage
             id='signUp.displayDisclosureSection-consentText'
-            defaultMessage="By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication." />
+            defaultMessage="By filling out this form, you agree to future contact from Gary Philanthropy or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication." />
         </Typography>
         <FormControlLabel
           sx={{mb: 1}}
