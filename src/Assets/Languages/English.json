@@ -264,13 +264,13 @@
   "results.return-perYearOrLabel": " per year or ",
   "results.return-perMonthLabel": " per month for you to consider",
   "results.return-emailResultsButton": "Email Results",
-  "results.return-signupResultsButton": "Signup",
   "results.return-ineligibilityLinkText": "* For additional information on programs that you were not eligible for click here",
   "results.return-goBackToEligibleText": "Go back to eligible programs",
   "results.return-estimatedDeliveryTimeA": "*On average people who are approved for this benefit start receiving it ",
   "results.return-estimatedDeliveryTimeB" : " after completing the application.",
   "results.displaySubheader-rememberDisclaimerText": "Remember that we can't guarantee eligibility, but based on the information you provided, we believe you are likely eligible for the programs below:",
   "results.displaySubheader-basedOnInformationText": "Based on the information you provided, we believe you are likely not eligible for the programs below:",
+  "results.displaySubheader-emailResultsDescText": "To receive a copy of these results by email please click the email results button.",
   "results.resultsTable-benefitLabel": "Benefit",
   "results.resultsTable-annualValueLabel": "Annual Value",
   "results.resultsTable-timeToApply": "Time to Apply",
@@ -310,5 +310,9 @@
   "signUp.displayDisclosureSection-consentText": "By filling out this form, you agree to future contact from Gary or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication.",
   "signUp.displayDisclosureSection-consentCheck1": "I have read, understand, and agree to the terms of My Friend Ben's ",
   "signUp.displayDisclosureSection-consentCheckLink": "data privacy policy",
-  "signUp.displayDisclosureSection-consentCheck4": " and consent to contact."
+  "signUp.displayDisclosureSection-consentCheck4": " and consent to contact.",
+  "emailResults.displaySubheader-text": "Send me a copy of my results",
+  "emailResults.enter-emailLabel": "Please enter or confirm your email address:",
+  "emailResults.return-sendButton": "Send",
+  "emailResults.return-signupCompleted": "A copy of your results has been sent. Click the prev button to return to your results."
 }

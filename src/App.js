@@ -8,6 +8,7 @@ import QuestionComponentContainer from './Components/QuestionComponentContainer/
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
+import EmailResults2 from './Components/EmailResults/EmailResults2';
 import styleOverrides from './Assets/styleOverrides';
 import './App.css';
 
@@ -164,7 +165,8 @@ const App = () => {
     eligiblePrograms: [], 
     ineligiblePrograms: [],
     screenerId: 0,
-    isLoading: true 
+    isLoading: true,
+    user: 0
   });
 
   useEffect(() => {
@@ -336,6 +338,12 @@ const App = () => {
                 results={results}
                 programSubset='ineligiblePrograms' 
                 passedOrFailedTests='failed_tests' /> } />
+            <Route
+              path='/email-results' 
+              element={<EmailResults2
+                formData={formData}
+                results={results}
+                handleTextfieldChange={handleTextfieldChange} /> } />
             <Route
               path='*'
               element={<Navigate to="/step-1" replace /> } />

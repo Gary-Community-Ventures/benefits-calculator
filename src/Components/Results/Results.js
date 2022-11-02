@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Button, Checkbox, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
 import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
@@ -39,7 +40,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }, []);
 
   const fetchResults = async () => {
-    let userId = '';
+    let userId = 0 ;
 
     if (formData.signUpInfo.sendOffers || formData.signUpInfo.sendUpdates) {
       userId = await postUserSignUpInfo();
@@ -73,7 +74,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       eligiblePrograms: qualifiedPrograms, 
       ineligiblePrograms: unqualifiedPrograms, 
       screenerId: screensResponse.id, 
-      isLoading: false 
+      isLoading: false,
+      user: userId
     });
   }
 
@@ -111,7 +113,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       referral_source: finalReferralSource
     };
 
-    if (userId !== '' && userId !== false) {
+    if (userId !== 0 && userId !== false) {
       screenBody.user = userId;
     }
 
@@ -234,13 +236,61 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const displaySubheader = (benefitsSubset) => {
-    if (benefitsSubset === 'ineligiblePrograms') {
+    if (benefitsSubset === 'eligiblePrograms') {
       return (
-        <Typography className='sub-header' variant="h6">
-          <FormattedMessage 
-            id='results.displaySubheader-basedOnInformationText' 
-            defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
-        </Typography>
+        <>
+          <Grid xs={12} item={true}>
+            <Typography className='sub-header' variant="h6"> 
+              {results[programSubset].length} 
+              <FormattedMessage 
+                id='results.return-programsUpToLabel' 
+                defaultMessage=' programs, up to ' /> 
+              ${totalDollarAmount(results[programSubset])} 
+              <FormattedMessage 
+                id='results.return-perYearOrLabel' 
+                defaultMessage=' per year or ' />
+              ${totalDollarAmountMonthly(results[programSubset])} 
+              <FormattedMessage 
+                id='results.return-perMonthLabel' 
+                defaultMessage=' per month for you to consider' />
+            </Typography>
+          </Grid>
+          <Grid container>
+            <Grid sm={10} item={true}>
+              <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
+                <FormattedMessage 
+                  id='results.displaySubheader-emailResultsDescText' 
+                  defaultMessage='To receive a copy of these results by email please click the email results button.' />
+              </Typography>
+            </Grid>
+            <Grid xs={12} item={true} sm={2} justifyContent="end">
+              <Box justifyContent='end' display='flex'>
+                <Button
+                  sx={{mb: 2, mt: 1}}
+                  variant='contained'
+                  endIcon={<SendIcon />}
+                  onClick={() => {
+                    navigate('/email-results');
+                  }}
+                  className='results-link'>
+                  <FormattedMessage 
+                    id='results.return-emailResultsButton' 
+                    defaultMessage='Email Results' />
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
+        </>
+      );
+    } else if (benefitsSubset === 'ineligiblePrograms') {
+      return (
+        <Grid xs={12} item={true}>
+          <Typography className='sub-header' variant="h6">
+            <FormattedMessage 
+              id='results.displaySubheader-basedOnInformationText' 
+              defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
+          </Typography>
+        </Grid>
       );
     }
   }
@@ -488,29 +538,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                     {results.screenerId}
                   </Typography>
                 </Grid>
-                { programSubset === 'eligiblePrograms' && 
-                  <>
-                  <Grid xs={12} item={true}>
-                    <Typography className='sub-header' variant="h6"> 
-                      {results[programSubset].length} 
-                      <FormattedMessage 
-                        id='results.return-programsUpToLabel' 
-                        defaultMessage=' programs, up to ' /> 
-                      ${totalDollarAmount(results[programSubset])} 
-                      <FormattedMessage 
-                        id='results.return-perYearOrLabel' 
-                        defaultMessage=' per year or ' />
-                      ${totalDollarAmountMonthly(results[programSubset])} 
-                      <FormattedMessage 
-                        id='results.return-perMonthLabel' 
-                        defaultMessage=' per month for you to consider' />
-                    </Typography>
-                  </Grid>
-                  </>
-                }
-                <Grid xs={12} item={true}>
-                  { displaySubheader(programSubset) }
-                </Grid>
+                { displaySubheader(programSubset) }
               </Grid>
               <Grid xs={12} item={true}>
                 <FormControlLabel
