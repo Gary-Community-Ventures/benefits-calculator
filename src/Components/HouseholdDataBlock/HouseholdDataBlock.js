@@ -41,9 +41,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         disabilityRelatedMedicaid: false,
         noneOfTheseApply: false,
         hasIncome: false,
-        incomeStreams: [],
-        hasExpenses: false,
-        expenses: []
+        incomeStreams: []
       });
     }
   }
