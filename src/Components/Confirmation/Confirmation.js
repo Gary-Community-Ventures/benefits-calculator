@@ -25,7 +25,7 @@ const Confirmation = ({ formData }) => {
     const allHouseholdAges = getAllHouseholdAges();
 
     const householdMemberDataBlocks = householdData.map((personData, i) => {
-      const { hasIncome, incomeStreams, hasExpenses, expenses } = personData;
+      const { hasIncome, incomeStreams } = personData;
 
       return (
         <div key={i}>
@@ -62,19 +62,6 @@ const Confirmation = ({ formData }) => {
               defaultMessage='Edit' />
           </Link>
           { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
-        </article>
-        <article className='confirmation-label'>
-          <b>
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-expensesLabel' 
-              defaultMessage='Expenses:' />
-          </b>
-          <Link to='/step-14' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
-              defaultMessage='Edit' />
-          </Link>
-          { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul> }
         </article>
         </div>
       );
