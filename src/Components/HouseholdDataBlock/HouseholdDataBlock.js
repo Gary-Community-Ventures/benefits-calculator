@@ -54,7 +54,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const useEffectDependencies = [];
   state.householdData.forEach((personData) => {
-    useEffectDependencies.push(...[personData.student, personData.unemployed, personData.hasIncome, personData.hasExpenses]);
+    useEffectDependencies.push(...[personData.student, personData.unemployed, personData.hasIncome]);
   });
   
   useEffect(() => {
@@ -71,10 +71,6 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
       if (personData.hasIncome === false) {
         personData.incomeStreams = [];
-      }
-
-      if (personData.hasExpenses === false) {
-        personData.expenses = [];
       }
 
       if (personData.noneOfTheseApply === true) {
