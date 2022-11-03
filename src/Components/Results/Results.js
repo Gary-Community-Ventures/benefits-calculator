@@ -148,9 +148,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       medicaid: medicaid,
       disability_medicaid: disabilityRelatedMedicaid,
       has_income: hasIncome,
-      has_expenses: hasExpenses,
+      has_expenses: hasExpenses ? hasExpenses : false,
       income_streams: incomeStreams,
-      expenses: expenses
+      expenses: expenses ? expenses : []
     };
   };
 
