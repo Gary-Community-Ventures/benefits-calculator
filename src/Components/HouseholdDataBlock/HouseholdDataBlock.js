@@ -41,9 +41,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         disabilityRelatedMedicaid: false,
         noneOfTheseApply: false,
         hasIncome: false,
-        incomeStreams: [],
-        hasExpenses: false,
-        expenses: []
+        incomeStreams: []
       });
     }
   }
@@ -56,7 +54,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const useEffectDependencies = [];
   state.householdData.forEach((personData) => {
-    useEffectDependencies.push(...[personData.student, personData.unemployed, personData.hasIncome, personData.hasExpenses]);
+    useEffectDependencies.push(...[personData.student, personData.unemployed, personData.hasIncome]);
   });
   
   useEffect(() => {
@@ -73,10 +71,6 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
       if (personData.hasIncome === false) {
         personData.incomeStreams = [];
-      }
-
-      if (personData.hasExpenses === false) {
-        personData.expenses = [];
       }
 
       if (personData.noneOfTheseApply === true) {
@@ -197,9 +191,6 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
           { createIncomeRadioQuestion(index) }
           <p className='household-data-q-underline'></p>
           { personData.hasIncome && createPersonIncomeBlock(index) }
-          { createExpenseRadioQuestion(index) }
-          <p className='household-data-q-underline'></p>
-          { personData.hasExpenses && createPersonExpenseBlock(index) }
           { state.error && <ErrorMessage error={state.error} /> }
           <div className='question-buttons'>
             <HouseholdDataPreviousButton 
@@ -369,50 +360,6 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return ( 
       <>
         <PersonIncomeBlock 
-          personData={state.householdData[index]} 
-          setState={setState}
-          state={state}
-          personDataIndex={index} />
-        <p className='household-data-q-underline'></p>
-      </>
-    );
-  }
-
-  const createExpenseRadioQuestion = (index) => {
-    const radiofieldProps = {
-      ariaLabel: 
-        <FormattedMessage 
-          id='householdDataBlock.createExpenseRadioQuestion-ariaLabel' 
-          defaultMessage='has expenses' />,
-      inputName: 'hasExpenses',
-      value: state.householdData[index].hasExpenses
-    };
-
-    return (
-      <>
-        <p className='question-label radio-question'>
-          <FormattedMessage 
-            id='householdDataBlock.createExpenseRadioQuestion-questionLabel' 
-            defaultMessage='Do they have any expenses' />
-        </p>
-        <p className='question-description'>
-          <FormattedMessage 
-            id='householdDataBlock.createExpenseRadioQuestion-questionDescription' 
-            defaultMessage='This includes costs like rent, mortgage, medical bills, child care, child support and heating bills.' />
-        </p>
-        <HHDataRadiofield 
-          componentDetails={radiofieldProps}
-          setState={setState}
-          state={state}
-          index={index} />
-      </>
-    );
-  }
-
-  const createPersonExpenseBlock = (index) => {
-    return (
-      <>
-        <PersonExpenseBlock 
           personData={state.householdData[index]} 
           setState={setState}
           state={state}

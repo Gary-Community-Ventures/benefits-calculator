@@ -25,7 +25,7 @@ const Confirmation = ({ formData }) => {
     const allHouseholdAges = getAllHouseholdAges();
 
     const householdMemberDataBlocks = householdData.map((personData, i) => {
-      const { hasIncome, incomeStreams, hasExpenses, expenses } = personData;
+      const { hasIncome, incomeStreams } = personData;
 
       return (
         <div key={i}>
@@ -43,39 +43,26 @@ const Confirmation = ({ formData }) => {
                 id='confirmation.headOfHouseholdDataBlock-conditionsText' 
                 defaultMessage='Conditions:' />
             </b>
-          <Link to='/step-14' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
-              defaultMessage='Edit' />
-          </Link>
-          { displayConditions(personData) }
-        </article>
-        <article className='confirmation-label'>
-          <b>
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-incomeLabel' 
-              defaultMessage='Income:' />
-          </b>
-          <Link to='/step-14' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
-              defaultMessage='Edit' />
-          </Link>
-          { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
-        </article>
-        <article className='confirmation-label'>
-          <b>
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-expensesLabel' 
-              defaultMessage='Expenses:' />
-          </b>
-          <Link to='/step-14' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
-              defaultMessage='Edit' />
-          </Link>
-          { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul> }
-        </article>
+            <Link to='/step-14' className='edit-link'>
+              <FormattedMessage
+                id='confirmation.editLinkText'
+                defaultMessage='Edit' />
+            </Link>
+            { displayConditions(personData) }
+          </article>
+          <article className='confirmation-label'>
+            <b>
+              <FormattedMessage
+                id='confirmation.headOfHouseholdDataBlock-incomeLabel'
+                defaultMessage='Income:' />
+            </b>
+            <Link to='/step-14' className='edit-link'>
+              <FormattedMessage
+                id='confirmation.editLinkText'
+                defaultMessage='Edit' />
+            </Link>
+            { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
+          </article>
         </div>
       );
     });
