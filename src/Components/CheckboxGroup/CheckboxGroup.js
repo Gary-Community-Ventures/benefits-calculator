@@ -24,12 +24,14 @@ const CheckboxGroup = ({ options, state, setState, index }) => {
 
     const formControlLabels = optionKeys.map((optionKey) => {
       return (
-        <FormControlLabel 
+        <FormControlLabel
+          sx={{ alignItems: 'flex-start', marginTop: `1rem` }}
           control={
             <Checkbox 
               checked={state.householdData[index][optionKey]} 
               onChange={handleCheckboxChange}
-              name={optionKey} />
+              name={optionKey} 
+              sx={{ marginTop: -1 }} />
           } 
           label={optionList[optionKey]}
           key={optionKey}
