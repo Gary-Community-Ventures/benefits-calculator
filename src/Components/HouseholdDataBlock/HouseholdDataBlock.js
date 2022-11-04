@@ -4,7 +4,6 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
-import PersonExpenseBlock from '../ExpenseBlock/PersonExpenseBlock';
 import HouseholdDataContinueButton from '../ContinueButton/HouseholdDataContinueButton';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
