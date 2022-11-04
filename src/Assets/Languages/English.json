@@ -249,7 +249,7 @@
   "confirmation.headOfHouseholdDataBlock-medicaidText": "Receiving Medicaid",
   "confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText": "Receiving disability-related Medicaid",
   "confirmation.headOfHouseholdDataBlock-incomeLabel": "Income:",
-  "confirmation.headOfHouseholdDataBlock-expensesLabel": "Expenses:",
+  "confirmation.headOfHouseholdDataBlock-expensesLabel": "Monthly Expenses:",
   "frequencyOptions.weekly": "Every week",
   "frequencyOptions.biweekly": "Every 2 weeks",
   "frequencyOptions.monthly": "Every month",
