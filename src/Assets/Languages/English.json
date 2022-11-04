@@ -257,8 +257,6 @@
   "frequencyOptions.weekly": "Every week",
   "frequencyOptions.biweekly": "Every 2 weeks",
   "frequencyOptions.monthly": "Every month",
-  "frequencyOptions.semimonthly": "Twice a month",
-  "frequencyOptions.yearly": "Every year",
   "results.return-screenerIdLabel": "Screener ID: ",
   "results.return-programsUpToLabel": " programs, up to ",
   "results.return-perYearOrLabel": " per year or ",
