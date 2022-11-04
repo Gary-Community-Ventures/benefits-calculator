@@ -157,23 +157,6 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     ]);
   }
 
-  const handleFrequencySelectChange = (event, index) => {
-    const { value } = event.target; 
-    const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
-      if (i === index) {
-        return { 
-          ...expenseSourceData, 
-          expenseFrequency: value,
-          expenseFrequencyLabel: frequencyOptions[value]
-        }
-      } else {
-        return expenseSourceData;
-      }
-    });
-
-    setSelectedMenuItem(updatedSelectedMenuItems);
-  }
-
   const handleSaveAndContinue = (event) => {
     event.preventDefault();
     if(expenseSourcesAreValid(selectedMenuItem)) {
