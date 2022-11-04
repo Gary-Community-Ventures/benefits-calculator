@@ -151,8 +151,8 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
         expenseSourceName: '', 
         expenseSourceLabel: '', 
         expenseAmount: 0,
-        expenseFrequency: '',
-        expenseFrequencyLabel: ''
+        expenseFrequency: 'monthly',
+        expenseFrequencyLabel: frequencyOptions.monthly
       }
     ]);
   }
