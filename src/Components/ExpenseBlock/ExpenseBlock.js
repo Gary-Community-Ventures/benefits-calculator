@@ -118,58 +118,6 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     );
   }
 
-  const createExpenseFrequencyDropdownMenu = (expenseSourceFrequency, index) => {
-    return (
-      <div>
-        <p className='question-label'>
-          <FormattedMessage 
-            id='expenseBlock.createExpenseFrequencyDropdownMenu-questionLabel' 
-            defaultMessage='How often do you have this type of expense: ' />
-          {selectedMenuItem[index].expenseSourceLabel}?
-        </p>
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel if='expense-frequency-label'>
-            <FormattedMessage 
-              id='expenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencyInputLabel' 
-              defaultMessage='Frequency' />
-          </InputLabel>
-          <StyledSelectfield
-            labelId='expense-frequency-label'
-            id='expense-frequency'
-            value={expenseSourceFrequency}
-            label={
-              <FormattedMessage 
-                id='expenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel' 
-                defaultMessage='Expense Frequency' />
-            }
-            onChange={(event) => { handleFrequencySelectChange(event, index) }}>
-            {createExpenseFrequencyMenuItems()}
-          </StyledSelectfield>
-        </FormControl>
-      </div>
-    );
-  }
-
-  const createExpenseFrequencyMenuItems = () => {
-    const disabledSelectMenuItem = 
-      <MenuItem value='select' key='disabled-frequency-select-value' disabled>
-        <FormattedMessage 
-          id='expenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText' 
-          defaultMessage='Select' />
-      </MenuItem>;
-      
-    const frequencyMenuItemKeys = Object.keys(frequencyOptions);
-    const frequencyMenuItemLabels = Object.values(frequencyOptions);
-  
-    const frequencyMenuItems = frequencyMenuItemKeys.map((freqMenuItemKey, i) => {
-      return (
-        <MenuItem value={freqMenuItemKey} key={freqMenuItemKey}>{frequencyMenuItemLabels[i]}</MenuItem>
-      );
-    });
-
-    return [disabledSelectMenuItem, frequencyMenuItems];
-  }
-
   const createExpenseMenuItems = () => {
     const disabledSelectMenuItem = 
       <MenuItem value='select' key='disabled-select-value' disabled>
