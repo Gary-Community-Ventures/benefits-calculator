@@ -121,7 +121,7 @@ const Confirmation = ({ formData }) => {
           <b>
             <FormattedMessage 
               id='confirmation.headOfHouseholdDataBlock-expensesLabel' 
-              defaultMessage='Expenses:' />
+              defaultMessage='Monthly Expenses:' />
           </b>
           <Link to='/step-12' className='edit-link'>
             <FormattedMessage 
@@ -375,7 +375,7 @@ const Confirmation = ({ formData }) => {
 
   const listAllExpenses = (memberExpenses) => {
     const mappedExpenses = memberExpenses.map(expense => {
-      return <li key={ expense.expenseSourceName }> { expense.expenseSourceLabel }: ${ Number(expense.expenseAmount).toLocaleString(2) } / { expense.expenseFrequencyLabel }</li>
+      return <li key={ expense.expenseSourceName }> { expense.expenseSourceLabel }: ${ Number(expense.expenseAmount).toLocaleString(2) } </li>
     });
 
     return mappedExpenses;
