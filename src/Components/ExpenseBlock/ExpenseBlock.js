@@ -171,8 +171,8 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
           expenseSourceName: event.target.value, 
           expenseSourceLabel: expenseOptions[event.target.value],
           expenseAmount: 0, 
-          expenseFrequency: '',
-          expenseFrequencyLabel: ''
+          expenseFrequency: 'monthly',
+          expenseFrequencyLabel: frequencyOptions.monthly
         }
       } else {
         return expenseSourceData;
