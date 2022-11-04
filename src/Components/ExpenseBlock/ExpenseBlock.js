@@ -6,7 +6,6 @@ import { FormattedMessage } from 'react-intl';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { expenseSourceValueHasError, displayExpenseSourceValueHelperText, expenseSourcesAreValid } from '../../Assets/validationFunctions';
 import expenseOptions from '../../Assets/expenseOptions';
-import frequencyOptions from '../../Assets/frequencyOptions';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import './ExpenseBlock.css';
 
@@ -32,9 +31,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     {
       expenseSourceName: '', 
       expenseSourceLabel: '', 
-      expenseAmount: '',
-      expenseFrequency: 'monthly',
-      expenseFrequencyLabel: frequencyOptions.monthly
+      expenseAmount: ''
     }
   ]);
 
@@ -150,9 +147,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
       {
         expenseSourceName: '', 
         expenseSourceLabel: '', 
-        expenseAmount: 0,
-        expenseFrequency: 'monthly',
-        expenseFrequencyLabel: frequencyOptions.monthly
+        expenseAmount: 0
       }
     ]);
   }
@@ -170,9 +165,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
         return { 
           expenseSourceName: event.target.value, 
           expenseSourceLabel: expenseOptions[event.target.value],
-          expenseAmount: 0, 
-          expenseFrequency: 'monthly',
-          expenseFrequencyLabel: frequencyOptions.monthly
+          expenseAmount: 0
         }
       } else {
         return expenseSourceData;
