@@ -89,8 +89,8 @@ const displayExpenseSourceValueHelperText = (valueInput) => {
 
 const expenseSourcesAreValid = (expenses) => {
   const allExpensesAreValid = expenses.every(expenseSourceData => {
-    const { expenseSourceName, expenseAmount, expenseFrequency } = expenseSourceData;
-    return expenseSourceName.length > 0 && expenseAmount > 0 && expenseFrequency.length > 0;
+    const { expenseSourceName, expenseAmount } = expenseSourceData;
+    return expenseSourceName.length > 0 && expenseAmount > 0;
   });
   
   return allExpensesAreValid;

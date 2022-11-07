@@ -6,7 +6,6 @@ import { FormattedMessage } from 'react-intl';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { expenseSourceValueHasError, displayExpenseSourceValueHelperText, expenseSourcesAreValid } from '../../Assets/validationFunctions';
 import expenseOptions from '../../Assets/expenseOptions';
-import frequencyOptions from '../../Assets/frequencyOptions';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import './ExpenseBlock.css';
 
@@ -32,15 +31,13 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     {
       expenseSourceName: '', 
       expenseSourceLabel: '', 
-      expenseAmount: '',
-      expenseFrequency: '',
-      expenseFrequencyLabel: ''
+      expenseAmount: ''
     }
   ]);
 
   const createExpenseBlockQuestions = () => {
     return selectedMenuItem.map((expenseSourceData, index) => {
-      const { expenseSourceName, expenseAmount, expenseFrequency } = expenseSourceData;
+      const { expenseSourceName, expenseAmount } = expenseSourceData;
       
       const expenseSourceQuestion = 
         <p className='question-label'>
@@ -58,7 +55,6 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
           }
           {index > 0 && expenseSourceQuestion}
           {createExpenseDropdownMenu(expenseSourceName, index)}
-          {createExpenseFrequencyDropdownMenu(expenseFrequency, index)}
           {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
         </div>
       );
@@ -119,58 +115,6 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     );
   }
 
-  const createExpenseFrequencyDropdownMenu = (expenseSourceFrequency, index) => {
-    return (
-      <div>
-        <p className='question-label'>
-          <FormattedMessage 
-            id='expenseBlock.createExpenseFrequencyDropdownMenu-questionLabel' 
-            defaultMessage='How often do you have this type of expense: ' />
-          {selectedMenuItem[index].expenseSourceLabel}?
-        </p>
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel if='expense-frequency-label'>
-            <FormattedMessage 
-              id='expenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencyInputLabel' 
-              defaultMessage='Frequency' />
-          </InputLabel>
-          <StyledSelectfield
-            labelId='expense-frequency-label'
-            id='expense-frequency'
-            value={expenseSourceFrequency}
-            label={
-              <FormattedMessage 
-                id='expenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel' 
-                defaultMessage='Expense Frequency' />
-            }
-            onChange={(event) => { handleFrequencySelectChange(event, index) }}>
-            {createExpenseFrequencyMenuItems()}
-          </StyledSelectfield>
-        </FormControl>
-      </div>
-    );
-  }
-
-  const createExpenseFrequencyMenuItems = () => {
-    const disabledSelectMenuItem = 
-      <MenuItem value='select' key='disabled-frequency-select-value' disabled>
-        <FormattedMessage 
-          id='expenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText' 
-          defaultMessage='Select' />
-      </MenuItem>;
-      
-    const frequencyMenuItemKeys = Object.keys(frequencyOptions);
-    const frequencyMenuItemLabels = Object.values(frequencyOptions);
-  
-    const frequencyMenuItems = frequencyMenuItemKeys.map((freqMenuItemKey, i) => {
-      return (
-        <MenuItem value={freqMenuItemKey} key={freqMenuItemKey}>{frequencyMenuItemLabels[i]}</MenuItem>
-      );
-    });
-
-    return [disabledSelectMenuItem, frequencyMenuItems];
-  }
-
   const createExpenseMenuItems = () => {
     const disabledSelectMenuItem = 
       <MenuItem value='select' key='disabled-select-value' disabled>
@@ -203,28 +147,9 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
       {
         expenseSourceName: '', 
         expenseSourceLabel: '', 
-        expenseAmount: 0,
-        expenseFrequency: '',
-        expenseFrequencyLabel: ''
+        expenseAmount: 0
       }
     ]);
-  }
-
-  const handleFrequencySelectChange = (event, index) => {
-    const { value } = event.target; 
-    const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
-      if (i === index) {
-        return { 
-          ...expenseSourceData, 
-          expenseFrequency: value,
-          expenseFrequencyLabel: frequencyOptions[value]
-        }
-      } else {
-        return expenseSourceData;
-      }
-    });
-
-    setSelectedMenuItem(updatedSelectedMenuItems);
   }
 
   const handleSaveAndContinue = (event) => {
@@ -240,9 +165,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
         return { 
           expenseSourceName: event.target.value, 
           expenseSourceLabel: expenseOptions[event.target.value],
-          expenseAmount: 0, 
-          expenseFrequency: '',
-          expenseFrequencyLabel: ''
+          expenseAmount: 0
         }
       } else {
         return expenseSourceData;

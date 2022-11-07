@@ -171,7 +171,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       return {
         type: expense.expenseSourceName,
         amount: expense.expenseAmount,
-        frequency: expense.expenseFrequency,
+        frequency: 'monthly',
         screen: householdMemberBody.screen,
         household_member: householdMemberId
       };
