@@ -28,10 +28,8 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   [
     {
       incomeStreamName: '', 
-      incomeStreamLabel: '', 
       incomeAmount: '',
-      incomeFrequency: '',
-      incomeFrequencyLabel: ''
+      incomeFrequency: ''    
     }
   ]);
 
