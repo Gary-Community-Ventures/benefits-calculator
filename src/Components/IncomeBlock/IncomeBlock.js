@@ -148,8 +148,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
             id='incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeSelectLabel' 
             defaultMessage='Income Type' />
           }
-          onChange={(event) => { handleSelectChange(event, index) }}>
-          {createMenuItems()}
+          onChange={(event) => { handleIncomeStreamsSelectChange(event, index) }}>
+          {createIncomeStreamsMenuItems()}
         </StyledSelectfield>
       </FormControl>
     );
