@@ -21,8 +21,7 @@ const App = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const theme = createTheme(styleOverrides);
-
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     isTest: searchParams.get('test') ? searchParams.get('test') : false,
     externalID: searchParams.get('externalid') ? searchParams.get('externalid') : null,
     agreeToTermsOfService: false,
@@ -74,7 +73,7 @@ const App = () => {
       sendUpdates: false,
       commConsent: false
     }
-  });
+  };
 
   // const [formData, setFormData] = useState({
   //   isTest: true,
