@@ -82,15 +82,13 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     return [disabledSelectMenuItem, menuItems];
   }
   
-  const handleSelectChange = (event, index) => {
+  const handleIncomeStreamsSelectChange = (event, index) => {
     const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
       if (i === index) {
         return { 
-          incomeStreamName: event.target.value, 
-          incomeStreamLabel: incomeOptions[event.target.value],
+          incomeStreamName: event.target.value,
           incomeAmount: 0, 
-          incomeFrequency: '',
-          incomeFrequencyLabel: ''
+          incomeFrequency: ''
         }
       } else {
         return incomeSourceData;
