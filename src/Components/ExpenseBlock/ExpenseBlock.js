@@ -148,8 +148,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     setSelectedMenuItem([
       ...selectedMenuItem,
       {
-        expenseSourceName: '', 
-        expenseSourceLabel: '', 
+        expenseSourceName: '',
         expenseAmount: 0
       }
     ]);
