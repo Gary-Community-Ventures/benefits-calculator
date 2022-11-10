@@ -165,8 +165,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
       if (i === index) {
         return { 
-          expenseSourceName: event.target.value, 
-          expenseSourceLabel: expenseOptions[event.target.value],
+          expenseSourceName: event.target.value,
           expenseAmount: 0
         }
       } else {
