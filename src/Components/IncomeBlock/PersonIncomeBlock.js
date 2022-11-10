@@ -134,8 +134,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
       if (i === index) {
         return { 
           ...incomeSourceData, 
-          incomeFrequency: value,
-          incomeFrequencyLabel: frequencyOptions[value]
+          incomeFrequency: value        
         }
       } else {
         return incomeSourceData;
