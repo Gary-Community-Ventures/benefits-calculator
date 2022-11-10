@@ -8,7 +8,7 @@ import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
 import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
-
+import Loading from '../Loading/Loading';
 import {
   postPartialParentScreen,
   postHouseholdMemberData,
@@ -17,9 +17,7 @@ import {
   getEligibility,
   postUser
 } from "../../apiCalls";
-import Loading from '../Loading/Loading';
 import './Results.css';
-import { SentimentSatisfiedAlt, SignalWifiStatusbarNullTwoTone } from '@mui/icons-material';
 
 export const isNavigationKey = (key) =>
   key === 'Home' ||
