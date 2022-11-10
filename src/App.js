@@ -183,6 +183,9 @@ const App = () => {
       return JSON.parse(localStorageResults);
     }
   }
+ 
+  const [results, setResults] = useState(getCurrentResultsState());
+
   useEffect(() => {
     ReactGA.pageview(window.location.pathname +  window.location.search);
   }, [location]);
