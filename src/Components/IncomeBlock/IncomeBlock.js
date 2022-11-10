@@ -39,7 +39,9 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     }
   ]);
 
-  const createMenuItems = () => {
+  const getIncomeStreamLabel = (incomeStreamName) => {
+    return incomeOptions[incomeStreamName];
+  };
     const disabledSelectMenuItem = 
       <MenuItem value='select' key='disabled-select-value' disabled>
         <FormattedMessage 
