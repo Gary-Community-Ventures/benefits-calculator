@@ -234,8 +234,9 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem('formData', JSON.stringify(formData));
+    localStorage.setItem('results', JSON.stringify(results));
 
-  }, [formData]);
+  }, [formData, results]);
 
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
