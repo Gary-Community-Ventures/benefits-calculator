@@ -75,6 +75,14 @@ const App = () => {
     }
   };
 
+  const getCurrentState = () => {
+    const localStorageFormData = localStorage.getItem('formData');
+    if (localStorageFormData === null) {
+      return initialFormData;
+    } else {
+      return JSON.parse(localStorageFormData);
+    }
+  }
   // const [formData, setFormData] = useState({
   //   isTest: true,
   //   externalID: searchParams.get('externalid') ? searchParams.get('externalid') : null,
