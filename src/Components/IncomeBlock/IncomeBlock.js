@@ -121,8 +121,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
       if (i === index) {
         return { 
           ...incomeSourceData, 
-          incomeFrequency: value, 
-          incomeFrequencyLabel: frequencyOptions[value] 
+          incomeFrequency: value   
         }
       } else {
         return incomeSourceData;
