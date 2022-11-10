@@ -280,10 +280,8 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
       ...selectedMenuItem,
       {
         incomeStreamName: '', 
-        incomeStreamLabel: '', 
         incomeAmount: 0,
-        incomeFrequency: '',
-        incomeFrequencyLabel: ''
+        incomeFrequency: ''      
       }
     ]);
   }
