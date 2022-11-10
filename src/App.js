@@ -223,6 +223,11 @@ const App = () => {
     formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates]
   );
 
+  useEffect(() => {
+    localStorage.setItem('formData', JSON.stringify(formData));
+
+  }, [formData]);
+
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
     const numberUpToEightDigitsLongRegex = /^\d{0,8}$/; //for zipcode
