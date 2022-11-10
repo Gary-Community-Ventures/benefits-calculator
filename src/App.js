@@ -175,6 +175,14 @@ const App = () => {
     user: 0
   };
 
+  const getCurrentResultsState = () => {
+    const localStorageResults = localStorage.getItem('results');
+    if (localStorageResults === null) {
+      return initialResults;
+    } else {
+      return JSON.parse(localStorageResults);
+    }
+  }
   useEffect(() => {
     ReactGA.pageview(window.location.pathname +  window.location.search);
   }, [location]);
