@@ -110,11 +110,9 @@ const App = () => {
   //   }],
   //   hasExpenses: true,
   //   expenses: [{
-  //     expenseSourceName: 'rent', 
-  //     expenseSourceLabel: 'Rent', 
+  //     expenseSourceName: 'rent',
   //     expenseAmount: '500',
-  //     expenseFrequency: 'monthly',
-  //     expenseFrequencyLabel: 'Every month'
+  //     expenseFrequency: 'monthly'
   //   }],
   //   householdSize: '2',
   //   householdData: [{
