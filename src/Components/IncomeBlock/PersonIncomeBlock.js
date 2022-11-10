@@ -33,6 +33,10 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
     }
   ]);
 
+  const getIncomeStreamLabel = (incomeStreamName) => {
+    return incomeOptions[incomeStreamName];
+  }
+
   useEffect(() => {
     let updatedSelectedMenuItem = [ ...selectedMenuItem ];
     if (incomeStreamsAreValid(updatedSelectedMenuItem)) {
