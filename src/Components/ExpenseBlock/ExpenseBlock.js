@@ -34,6 +34,10 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     }
   ]);
 
+  const getExpenseSourceLabel = (expenseSourceName) => {
+    return expenseOptions[expenseSourceName];
+  }
+
   const createExpenseBlockQuestions = () => {
     return selectedMenuItem.map((expenseSourceData, index) => {
       const { expenseSourceName, expenseAmount } = expenseSourceData;
