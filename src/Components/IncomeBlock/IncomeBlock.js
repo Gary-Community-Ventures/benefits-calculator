@@ -162,7 +162,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
           <FormattedMessage 
             id='incomeBlock.createIncomeAmountTextfield-questionLabel' 
             defaultMessage='How much do you receive each pay period for: ' /> 
-          {selectedMenuItem[index].incomeStreamLabel}?
+          {getIncomeStreamLabel(selectedMenuItem[index].incomeStreamName)}?
         </p>
         <div className='income-block-textfield'>
           <StyledTextField
@@ -192,7 +192,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
           <FormattedMessage 
             id='incomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel' 
             defaultMessage='How often do you receive this income: ' /> 
-          {selectedMenuItem[index].incomeStreamLabel}?
+          {getIncomeStreamLabel(selectedMenuItem[index].incomeStreamName)}?
         </p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel if='income-frequency-label'>
