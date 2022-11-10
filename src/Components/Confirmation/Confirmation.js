@@ -386,6 +386,11 @@ const Confirmation = ({ formData }) => {
   const getIncomeStreamNameLabel = (incomeStreamName) => {
     return incomeOptions[incomeStreamName];
   }
+
+  const getIncomeStreamFrequencyLabel = (incomeFrequency) => {
+    return frequencyOptions[incomeFrequency];
+  }
+
   const listAllIncomeStreams = (memberIncomeStreams) => {
     const mappedListItems = memberIncomeStreams.map(incomeStream => {
       return <li key={ incomeStream.incomeStreamName }> { incomeStream.incomeStreamLabel }: ${ Number(incomeStream.incomeAmount).toLocaleString(2) } / { incomeStream.incomeFrequencyLabel }</li>
