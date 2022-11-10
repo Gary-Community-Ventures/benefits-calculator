@@ -375,6 +375,10 @@ const Confirmation = ({ formData }) => {
     );
   }
 
+  const getExpenseSourceLabel = (expenseSourceName) => {
+    return expenseOptions[expenseSourceName];
+  }
+
   const listAllExpenses = (memberExpenses) => {
     const mappedExpenses = memberExpenses.map(expense => {
       return <li key={ expense.expenseSourceName }> { expense.expenseSourceLabel }: ${ Number(expense.expenseAmount).toLocaleString(2) } </li>
