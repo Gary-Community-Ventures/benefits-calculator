@@ -166,14 +166,14 @@ const App = () => {
   //     commConsent: true
   //   }
   // });
- 
-  const [results, setResults] = useState({
+
+  const initialResults = {
     eligiblePrograms: [], 
     ineligiblePrograms: [],
     screenerId: 0,
     isLoading: true,
     user: 0
-  });
+  };
 
   useEffect(() => {
     ReactGA.pageview(window.location.pathname +  window.location.search);
