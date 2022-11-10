@@ -7,6 +7,7 @@ import referralOptions from '../../Assets/referralOptions';
 import questions from '../../Assets/questions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
+import expenseOptions from '../../Assets/expenseOptions';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
@@ -381,7 +382,7 @@ const Confirmation = ({ formData }) => {
 
   const listAllExpenses = (memberExpenses) => {
     const mappedExpenses = memberExpenses.map(expense => {
-      return <li key={ expense.expenseSourceName }> { expense.expenseSourceLabel }: ${ Number(expense.expenseAmount).toLocaleString(2) } </li>
+      return <li key={ expense.expenseSourceName }> { getExpenseSourceLabel(expense.expenseSourceName) }: ${ Number(expense.expenseAmount).toLocaleString(2) } </li>
     });
 
     return mappedExpenses;
