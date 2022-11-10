@@ -71,7 +71,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
           <FormattedMessage 
             id='expenseBlock.createExpenseAmountTextfield-questionLabel' 
             defaultMessage='How much is this type of expense: ' />
-          {selectedMenuItem[index].expenseSourceLabel}?
+          {getExpenseSourceLabel(selectedMenuItem[index].expenseSourceName)}?
         </p>
         <div className='expense-block-textfield'>
           <StyledTextField 
