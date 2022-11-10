@@ -5,6 +5,8 @@ import relationshipOptions from '../../Assets/relationshipOptions';
 import taxYearOptions from '../../Assets/taxYearOptions';
 import referralOptions from '../../Assets/referralOptions';
 import questions from '../../Assets/questions';
+import incomeOptions from '../../Assets/incomeOptions';
+import frequencyOptions from '../../Assets/frequencyOptions';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
