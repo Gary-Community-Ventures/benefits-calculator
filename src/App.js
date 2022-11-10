@@ -105,10 +105,8 @@ const App = () => {
   //   hasIncome: true,
   //   incomeStreams: [{
   //     incomeStreamName: 'wages', 
-  //     incomeStreamLabel: 'Wages, salaries, tips', 
   //     incomeAmount: '29000',
-  //     incomeFrequency: 'yearly',
-  //     incomeFrequencyLabel: 'Every year'
+  //     incomeFrequency: 'yearly'
   //   }],
   //   hasExpenses: true,
   //   expenses: [{
