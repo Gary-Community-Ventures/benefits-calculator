@@ -71,7 +71,7 @@ const Disclaimer = ({ formData, handleCheckboxChange, handleStartOverButtonClick
         color='text.secondary'>
           <FormattedMessage 
             id='disclaimer.helper-text' 
-            defaultMessage='Check the box below and then click the button to get started.'
+            defaultMessage='Check the box below and then click the Continue button to get started.'
           />
       </Typography>
       { buttonWasClicked && formData.agreeToTermsOfService === false && 
