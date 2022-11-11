@@ -68,8 +68,7 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
         </CardContent>  
       </Card>
       <Typography 
-        color='text.secondary' 
-        gutterBottom >
+        color='text.secondary'>
           <FormattedMessage 
             id='disclaimer.helper-text' 
             defaultMessage='Check the box below and then click the button to get started.'
