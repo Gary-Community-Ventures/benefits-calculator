@@ -23,6 +23,10 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
     }
   }
 
+  const formIsPartiallyCompleted = () => {
+    return formData.age !== '';
+  }
+
   return (
     <div className='benefits-form'>
       <p className='step-progress-title'>
