@@ -90,10 +90,10 @@ const Disclaimer = ({ formData, handleCheckboxChange, handleStartOverButtonClick
           defaultMessage='I have read, understand, and agree to the terms of the Gary Disclaimer and consent to contact above.' />}
         value='agreeToTermsOfService' 
         sx={{ mt: '-.5rem' }}/>
-      <CardActions sx={{ mt: '1rem' }}>
+      <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         { formIsPartiallyCompleted() &&
           <Button
-            sx={{ mr: '2.25rem', ml: '-.5rem'}}
+            sx={{ mr: '2.25rem'}}
             variant='contained'
             onClick={(event) => handleStartOverButtonClick(event)} >
               <FormattedMessage
