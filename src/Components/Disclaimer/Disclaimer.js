@@ -10,7 +10,7 @@ const StyledTypography = styled(Typography)`
   height: 24px;
 `;
 
-const Disclaimer = ({ formData, handleCheckboxChange }) => {
+const Disclaimer = ({ formData, handleCheckboxChange, handleStartOverButtonClick }) => {
   const [buttonWasClicked, setButtonWasClicked] = useState(false);
   
   let navigate = useNavigate();
@@ -90,6 +90,17 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
           defaultMessage='I have read, understand, and agree to the terms of the Gary Disclaimer and consent to contact above.' />}
         value='agreeToTermsOfService' 
         sx={{ mt: '-.5rem' }}/>
+      <CardActions sx={{ mt: '1rem' }}>
+        { formIsPartiallyCompleted() &&
+          <Button
+            sx={{ mr: '2.25rem', ml: '-.5rem'}}
+            variant='contained'
+            onClick={(event) => handleStartOverButtonClick(event)} >
+              <FormattedMessage
+                id='startOver-button'
+                defaultMessage='Start Over' />
+          </Button>
+        }
         <Button
           variant='contained'
           onClick={(event) => handleContinueButtonClick(event)} >
