@@ -318,6 +318,11 @@ const App = () => {
   }
 
   const handleStartOverButtonClick = (event) => {
+    localStorage.clear();
+    setFormData(initialFormData);
+    setResults(initialResults);
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <div className='App'>
