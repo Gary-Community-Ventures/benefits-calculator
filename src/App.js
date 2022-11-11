@@ -317,6 +317,7 @@ const App = () => {
     navigate('/step-15');
   }
 
+  const handleStartOverButtonClick = (event) => {
   return (
     <ThemeProvider theme={theme}>
       <div className='App'>
