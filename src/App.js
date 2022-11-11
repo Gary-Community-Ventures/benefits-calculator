@@ -331,7 +331,8 @@ const App = () => {
               path='/step-1' 
               element={<Disclaimer 
                 formData={formData}
-                handleCheckboxChange={handleCheckboxChange} /> } />
+                handleCheckboxChange={handleCheckboxChange}
+                handleStartOverButtonClick={handleStartOverButtonClick} /> } />
             <Route 
               path='/step-:id' 
               element={<QuestionComponentContainer 
