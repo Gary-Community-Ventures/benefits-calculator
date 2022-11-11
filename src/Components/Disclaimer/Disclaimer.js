@@ -88,8 +88,8 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
         label={<FormattedMessage 
           id='disclaimer-label'
           defaultMessage='I have read, understand, and agree to the terms of the Gary Disclaimer and consent to contact above.' />}
-        value='agreeToTermsOfService' />
-      <CardActions>
+        value='agreeToTermsOfService' 
+        sx={{ mt: '-.5rem' }}/>
         <Button
           variant='contained'
           onClick={(event) => handleContinueButtonClick(event)} >
