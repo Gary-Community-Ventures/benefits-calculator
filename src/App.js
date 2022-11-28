@@ -317,7 +317,7 @@ const App = () => {
     navigate('/step-15');
   }
 
-  const handleStartOverButtonClick = (event) => {
+  const clearLocalStorageFormDataAndResults = () => {
     localStorage.clear();
     setFormData(initialFormData);
     setResults(initialResults);
@@ -337,7 +337,7 @@ const App = () => {
               element={<Disclaimer 
                 formData={formData}
                 handleCheckboxChange={handleCheckboxChange}
-                handleStartOverButtonClick={handleStartOverButtonClick} /> } />
+                clearLocalStorageFormDataAndResults={clearLocalStorageFormDataAndResults} /> } />
             <Route 
               path='/step-:id' 
               element={<QuestionComponentContainer 
