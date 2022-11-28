@@ -30,10 +30,13 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   [
     {
       expenseSourceName: '', 
-      expenseSourceLabel: '', 
       expenseAmount: ''
     }
   ]);
+
+  const getExpenseSourceLabel = (expenseSourceName) => {
+    return expenseOptions[expenseSourceName];
+  }
 
   const createExpenseBlockQuestions = () => {
     return selectedMenuItem.map((expenseSourceData, index) => {
@@ -68,7 +71,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
           <FormattedMessage 
             id='expenseBlock.createExpenseAmountTextfield-questionLabel' 
             defaultMessage='How much is this type of expense: ' />
-          {selectedMenuItem[index].expenseSourceLabel}?
+          {getExpenseSourceLabel(selectedMenuItem[index].expenseSourceName)}?
         </p>
         <div className='expense-block-textfield'>
           <StyledTextField 
@@ -145,8 +148,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     setSelectedMenuItem([
       ...selectedMenuItem,
       {
-        expenseSourceName: '', 
-        expenseSourceLabel: '', 
+        expenseSourceName: '',
         expenseAmount: 0
       }
     ]);
@@ -163,8 +165,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
     const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
       if (i === index) {
         return { 
-          expenseSourceName: event.target.value, 
-          expenseSourceLabel: expenseOptions[event.target.value],
+          expenseSourceName: event.target.value,
           expenseAmount: 0
         }
       } else {

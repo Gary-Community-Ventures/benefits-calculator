@@ -34,14 +34,16 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   [
     {
       incomeStreamName: '', 
-      incomeStreamLabel: '', 
       incomeAmount: '',
-      incomeFrequency: '',
-      incomeFrequencyLabel: ''
+      incomeFrequency: ''
     }
   ]);
 
-  const createMenuItems = () => {
+  const getIncomeStreamNameLabel = (incomeStreamName) => {
+    return incomeOptions[incomeStreamName];
+  };
+
+  const createIncomeStreamsMenuItems = () => {
     const disabledSelectMenuItem = 
       <MenuItem value='select' key='disabled-select-value' disabled>
         <FormattedMessage 
@@ -80,15 +82,13 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     return [disabledSelectMenuItem, menuItems];
   }
   
-  const handleSelectChange = (event, index) => {
+  const handleIncomeStreamsSelectChange = (event, index) => {
     const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
       if (i === index) {
         return { 
-          incomeStreamName: event.target.value, 
-          incomeStreamLabel: incomeOptions[event.target.value],
+          incomeStreamName: event.target.value,
           incomeAmount: 0, 
-          incomeFrequency: '',
-          incomeFrequencyLabel: ''
+          incomeFrequency: ''
         }
       } else {
         return incomeSourceData;
@@ -121,8 +121,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
       if (i === index) {
         return { 
           ...incomeSourceData, 
-          incomeFrequency: value, 
-          incomeFrequencyLabel: frequencyOptions[value] 
+          incomeFrequency: value   
         }
       } else {
         return incomeSourceData;
@@ -149,8 +148,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
             id='incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeSelectLabel' 
             defaultMessage='Income Type' />
           }
-          onChange={(event) => { handleSelectChange(event, index) }}>
-          {createMenuItems()}
+          onChange={(event) => { handleIncomeStreamsSelectChange(event, index) }}>
+          {createIncomeStreamsMenuItems()}
         </StyledSelectfield>
       </FormControl>
     );
@@ -163,7 +162,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
           <FormattedMessage 
             id='incomeBlock.createIncomeAmountTextfield-questionLabel' 
             defaultMessage='How much do you receive each pay period for: ' /> 
-          {selectedMenuItem[index].incomeStreamLabel}?
+          {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
         </p>
         <div className='income-block-textfield'>
           <StyledTextField
@@ -193,7 +192,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
           <FormattedMessage 
             id='incomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel' 
             defaultMessage='How often do you receive this income: ' /> 
-          {selectedMenuItem[index].incomeStreamLabel}?
+          {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
         </p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel if='income-frequency-label'>
@@ -254,10 +253,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
       ...selectedMenuItem,
       {
         incomeStreamName: '', 
-        incomeStreamLabel: '', 
         incomeAmount: 0,
-        incomeFrequency: '',
-        incomeFrequencyLabel: ''
+        incomeFrequency: ''
       }
     ]);
   }

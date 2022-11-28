@@ -21,8 +21,7 @@ const App = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const theme = createTheme(styleOverrides);
-
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     isTest: searchParams.get('test') ? searchParams.get('test') : false,
     externalID: searchParams.get('externalid') ? searchParams.get('externalid') : null,
     agreeToTermsOfService: false,
@@ -74,7 +73,18 @@ const App = () => {
       sendUpdates: false,
       commConsent: false
     }
-  });
+  };
+
+  const getCurrentState = () => {
+    const localStorageFormData = localStorage.getItem('formData');
+    if (localStorageFormData === null) {
+      return initialFormData;
+    } else {
+      return JSON.parse(localStorageFormData);
+    }
+  }
+
+  const [formData, setFormData] = useState(getCurrentState());
 
   // const [formData, setFormData] = useState({
   //   isTest: true,
@@ -95,18 +105,14 @@ const App = () => {
   //   hasIncome: true,
   //   incomeStreams: [{
   //     incomeStreamName: 'wages', 
-  //     incomeStreamLabel: 'Wages, salaries, tips', 
   //     incomeAmount: '29000',
-  //     incomeFrequency: 'yearly',
-  //     incomeFrequencyLabel: 'Every year'
+  //     incomeFrequency: 'yearly'
   //   }],
   //   hasExpenses: true,
   //   expenses: [{
-  //     expenseSourceName: 'rent', 
-  //     expenseSourceLabel: 'Rent', 
+  //     expenseSourceName: 'rent',
   //     expenseAmount: '500',
-  //     expenseFrequency: 'monthly',
-  //     expenseFrequencyLabel: 'Every month'
+  //     expenseFrequency: 'monthly'
   //   }],
   //   householdSize: '2',
   //   householdData: [{
@@ -160,14 +166,25 @@ const App = () => {
   //     commConsent: true
   //   }
   // });
- 
-  const [results, setResults] = useState({
+
+  const initialResults = {
     eligiblePrograms: [], 
     ineligiblePrograms: [],
     screenerId: 0,
     isLoading: true,
     user: 0
-  });
+  };
+
+  const getCurrentResultsState = () => {
+    const localStorageResults = localStorage.getItem('results');
+    if (localStorageResults === null) {
+      return initialResults;
+    } else {
+      return JSON.parse(localStorageResults);
+    }
+  }
+ 
+  const [results, setResults] = useState(getCurrentResultsState());
 
   useEffect(() => {
     ReactGA.pageview(window.location.pathname +  window.location.search);
@@ -214,6 +231,12 @@ const App = () => {
   }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses, 
     formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates]
   );
+
+  useEffect(() => {
+    localStorage.setItem('formData', JSON.stringify(formData));
+    localStorage.setItem('results', JSON.stringify(results));
+
+  }, [formData, results]);
 
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
@@ -294,6 +317,12 @@ const App = () => {
     navigate('/step-15');
   }
 
+  const handleStartOverButtonClick = (event) => {
+    localStorage.clear();
+    setFormData(initialFormData);
+    setResults(initialResults);
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <div className='App'>
@@ -307,7 +336,8 @@ const App = () => {
               path='/step-1' 
               element={<Disclaimer 
                 formData={formData}
-                handleCheckboxChange={handleCheckboxChange} /> } />
+                handleCheckboxChange={handleCheckboxChange}
+                handleStartOverButtonClick={handleStartOverButtonClick} /> } />
             <Route 
               path='/step-:id' 
               element={<QuestionComponentContainer 

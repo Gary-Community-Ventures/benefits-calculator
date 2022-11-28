@@ -5,6 +5,9 @@ import relationshipOptions from '../../Assets/relationshipOptions';
 import taxYearOptions from '../../Assets/taxYearOptions';
 import referralOptions from '../../Assets/referralOptions';
 import questions from '../../Assets/questions';
+import incomeOptions from '../../Assets/incomeOptions';
+import frequencyOptions from '../../Assets/frequencyOptions';
+import expenseOptions from '../../Assets/expenseOptions';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
@@ -373,17 +376,29 @@ const Confirmation = ({ formData }) => {
     );
   }
 
+  const getExpenseSourceLabel = (expenseSourceName) => {
+    return expenseOptions[expenseSourceName];
+  }
+
   const listAllExpenses = (memberExpenses) => {
     const mappedExpenses = memberExpenses.map(expense => {
-      return <li key={ expense.expenseSourceName }> { expense.expenseSourceLabel }: ${ Number(expense.expenseAmount).toLocaleString(2) } </li>
+      return <li key={ expense.expenseSourceName }> { getExpenseSourceLabel(expense.expenseSourceName) }: ${ Number(expense.expenseAmount).toLocaleString(2) } </li>
     });
 
     return mappedExpenses;
   }
 
+  const getIncomeStreamNameLabel = (incomeStreamName) => {
+    return incomeOptions[incomeStreamName];
+  }
+
+  const getIncomeStreamFrequencyLabel = (incomeFrequency) => {
+    return frequencyOptions[incomeFrequency];
+  }
+
   const listAllIncomeStreams = (memberIncomeStreams) => {
     const mappedListItems = memberIncomeStreams.map(incomeStream => {
-      return <li key={ incomeStream.incomeStreamName }> { incomeStream.incomeStreamLabel }: ${ Number(incomeStream.incomeAmount).toLocaleString(2) } / { incomeStream.incomeFrequencyLabel }</li>
+      return <li key={ incomeStream.incomeStreamName }> { getIncomeStreamNameLabel(incomeStream.incomeStreamName) }: ${ Number(incomeStream.incomeAmount).toLocaleString(2) } / { getIncomeStreamFrequencyLabel(incomeStream.incomeFrequency) }</li>
     });
 
     return mappedListItems;
