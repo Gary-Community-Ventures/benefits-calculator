@@ -30,7 +30,7 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
           <Typography variant='body1'>
             <FormattedMessage
               id='landingPage.body'
-              defaultMessage="MyFriendBen is a tool that can help determine benefits you may be eligible for. Our goal is to increase benefit participation rates by making key information more transparent, accessible, and accurate. Here's what you should know before you get started: " />
+              defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:" />
           </Typography>
           <ul className='landing-page-list-container'>
             <li>
