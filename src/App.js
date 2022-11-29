@@ -9,6 +9,7 @@ import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
 import EmailResults2 from './Components/EmailResults/EmailResults2';
+import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
 import './App.css';
 
@@ -331,7 +332,9 @@ const App = () => {
           <Routes>
             <Route
               path='/'
-              element={<Navigate to="/step-1" replace /> } />
+            <Route
+              path='/step-0' 
+              element={<LandingPage /> } />
             <Route 
               path='/step-1' 
               element={<Disclaimer 
