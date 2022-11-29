@@ -1,11 +1,16 @@
 import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import questions from '../../Assets/questions';
 import './LandingPage.css';
 
-const LandingPage = () => {
+const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    clearLocalStorageFormDataAndResults();
+  }, []);
 
   return (
     <div className='benefits-form'>
