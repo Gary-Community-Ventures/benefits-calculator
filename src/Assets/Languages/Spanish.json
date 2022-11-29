@@ -308,5 +308,10 @@
   "emailResults.displaySubheader-text": "Envíeme una copia de mis resultados",
   "emailResults.enter-emailLabel": "Por favor ingrese o confirme su dirección de correo electrónico:",
   "emailResults.return-sendButton": "Enviar",
-  "emailResults.return-signupCompleted": "Se ha enviado una copia de sus resultados. Haga clic en el botón previo para volver a sus resultados."
+  "emailResults.return-signupCompleted": "Se ha enviado una copia de sus resultados. Haga clic en el botón previo para volver a sus resultados.",
+  "landingPage.step-header": "Paso 0 de ",
+  "landingPage.body": "MyFriendBen es una herramienta que puede ayudarle a determinar los beneficios para los que puede ser elegible. Nuestro objetivo es aumentar las tasas de participación en los beneficios al hacer que la información clave sea más transparente, accesible y precisa. Esto es lo que debe de saber antes de comenzar:",
+  "landingPage.firstBulletItem": "Esta herramienta no puede garantizar su elegibilidad. Deberá solicitar los beneficios para obtener una decisión final.",
+  "landingPage.secondBulletItem": "Algunos beneficios están disponibles solo para los miembros del hogar que sean ciudadanos de los EE. UU. En algunos casos, incluso después de que alguien se convierta en ciudadano de los EE. UU., puede haber un período de espera antes de que un beneficio esté disponible. Cuando llegue al final de esta herramienta, tendrá la oportunidad de clasificar los resultados para ver solo los beneficios que no requieren un ciudadano en el hogar.",
+  "landingPage.thirdBulletItem": "Tomamos en serio la seguridad de datos. Recopilamos los datos mínimos que necesitamos para brindarle resultados precisos. El filtro nunca requiere información de identificación personal, como su nombre y apellido o dirección. Puede optar a proporcionar esta información para recibir oportunidades pagadas de comentarios o notificaciones futuras sobre los beneficios para los que probablemente sea elegible."
 }
