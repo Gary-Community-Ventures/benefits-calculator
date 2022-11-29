@@ -332,7 +332,7 @@ const App = () => {
           <Routes>
             <Route
               path='/'
-              element={<Navigate to="/step-0" replace /> } />
+              element={<Navigate to='/step-0' replace /> } />
             <Route
               path='/step-0' 
               element={<LandingPage /> } />
@@ -380,7 +380,7 @@ const App = () => {
                 handleTextfieldChange={handleTextfieldChange} /> } />
             <Route
               path='*'
-              element={<Navigate to="/step-1" replace /> } />
+              element={<Navigate to='/step-0' replace /> } />
           </Routes>
       </div>
     </ThemeProvider>
