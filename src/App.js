@@ -335,13 +335,13 @@ const App = () => {
               element={<Navigate to='/step-0' replace /> } />
             <Route
               path='/step-0' 
-              element={<LandingPage /> } />
+              element={<LandingPage
+                clearLocalStorageFormDataAndResults={clearLocalStorageFormDataAndResults} /> } />
             <Route 
               path='/step-1' 
               element={<Disclaimer 
                 formData={formData}
-                handleCheckboxChange={handleCheckboxChange}
-                clearLocalStorageFormDataAndResults={clearLocalStorageFormDataAndResults} /> } />
+                handleCheckboxChange={handleCheckboxChange} /> } />
             <Route 
               path='/step-:id' 
               element={<QuestionComponentContainer 
