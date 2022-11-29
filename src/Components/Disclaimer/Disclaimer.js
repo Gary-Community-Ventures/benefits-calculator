@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, CardActions, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import questions from '../../Assets/questions';
 
@@ -10,16 +10,9 @@ const StyledTypography = styled(Typography)`
   height: 24px;
 `;
 
-const Disclaimer = ({ formData, handleCheckboxChange, clearLocalStorageFormDataAndResults }) => {
+const Disclaimer = ({ formData, handleCheckboxChange }) => {
   const [buttonWasClicked, setButtonWasClicked] = useState(false);
-  
   let navigate = useNavigate();
-
-  useEffect(() => {
-    if (formIsPartiallyCompleted()) {
-      clearLocalStorageFormDataAndResults();
-    }
-  }, []);
 
   const handleContinueButtonClick = (event) => {
     event.preventDefault();
@@ -27,10 +20,6 @@ const Disclaimer = ({ formData, handleCheckboxChange, clearLocalStorageFormDataA
     if (formData.agreeToTermsOfService === true) {
       navigate('/step-2');
     }
-  }
-
-  const formIsPartiallyCompleted = () => {
-    return formData.age !== '';
   }
 
   return (
