@@ -14,8 +14,10 @@ const PreviousButton = ({ formData }) => {
       onClick={() => {
         if (numberId === 15 && formData.householdSize === 1) {
           navigate(`/step-${numberId - 2}`);
-        } else if (location.pathname === '/email-results'){
+        } else if (location.pathname === '/email-results') {
           navigate(`/results`);
+        } else if (location.pathname === '/step-1') {
+          navigate(`/step-0`);
         } else {
           navigate(`/step-${numberId - 1}`);
         }
