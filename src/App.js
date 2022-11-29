@@ -332,6 +332,7 @@ const App = () => {
           <Routes>
             <Route
               path='/'
+              element={<Navigate to="/step-0" replace /> } />
             <Route
               path='/step-0' 
               element={<LandingPage /> } />
