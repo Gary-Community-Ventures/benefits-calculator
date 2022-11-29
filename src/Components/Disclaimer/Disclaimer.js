@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import PreviousButton from '../PreviousButton/PreviousButton';
 import questions from '../../Assets/questions';
 
 const StyledTypography = styled(Typography)`
@@ -86,6 +87,7 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
         value='agreeToTermsOfService' 
         sx={{ mt: '-.5rem' }}/>
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
+        <PreviousButton formData={formData} />
         <Button
           variant='contained'
           onClick={(event) => handleContinueButtonClick(event)} >
