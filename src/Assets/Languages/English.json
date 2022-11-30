@@ -294,6 +294,7 @@
   "benefitOptions.mydenver": "Reduced-cost youth programs (MY Denver Card)",
   "benefitOptions.chp": "Low-cost health insurance for children and pregnant women (CHP+)",
   "benefitOptions.leap": "Help with winter heating bills (LEAP)",
+  "referralOptions.communityEvent": "Community Event",
   "referralOptions.searchEngine": "Google or other search engine",
   "referralOptions.other": "Other",
   "signUpOptions.sendUpdates": "Please notify me when new benefits become available that I am likely eligible for based on the information I have provided.",
