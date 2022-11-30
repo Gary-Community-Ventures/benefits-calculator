@@ -516,6 +516,21 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     );
   }
 
+  const handleCustomSwitchToggle = (e) => {
+    if (e.target.checked) {
+      setFilt([
+        {
+          columnField: "citizenship",
+          operatorValue: "startsWith",
+          value: "None"
+        }
+      ])
+    }
+    else {
+      setFilt([])
+    }
+  }
+
   return (
     <main className='benefits-form'>
       <div className='results-container'>
