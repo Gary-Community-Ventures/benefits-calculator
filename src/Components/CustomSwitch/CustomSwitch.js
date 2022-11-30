@@ -15,11 +15,7 @@ const CustomBlueSwitch = styled(Switch)(({ theme }) => ({
 
 const CustomSwitch = ({ handleCustomSwitchToggle }) => {
   return (
-    <CustomBlueSwitch 
-      onChange={(event) => { 
-        handleCustomSwitchToggle(event);
-      }}
-    />
+    <CustomBlueSwitch onChange={(event) => handleCustomSwitchToggle(event)} />
   );
 }
 
