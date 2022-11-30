@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import PreviousButton from '../PreviousButton/PreviousButton';
 import questions from '../../Assets/questions';
 
 const StyledTypography = styled(Typography)`
@@ -10,9 +11,8 @@ const StyledTypography = styled(Typography)`
   height: 24px;
 `;
 
-const Disclaimer = ({ formData, handleCheckboxChange, handleStartOverButtonClick }) => {
+const Disclaimer = ({ formData, handleCheckboxChange }) => {
   const [buttonWasClicked, setButtonWasClicked] = useState(false);
-  
   let navigate = useNavigate();
 
   const handleContinueButtonClick = (event) => {
@@ -21,10 +21,6 @@ const Disclaimer = ({ formData, handleCheckboxChange, handleStartOverButtonClick
     if (formData.agreeToTermsOfService === true) {
       navigate('/step-2');
     }
-  }
-
-  const formIsPartiallyCompleted = () => {
-    return formData.age !== '';
   }
 
   return (
@@ -91,16 +87,7 @@ const Disclaimer = ({ formData, handleCheckboxChange, handleStartOverButtonClick
         value='agreeToTermsOfService' 
         sx={{ mt: '-.5rem' }}/>
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
-        { formIsPartiallyCompleted() &&
-          <Button
-            sx={{ mr: '2.25rem'}}
-            variant='contained'
-            onClick={(event) => handleStartOverButtonClick(event)} >
-              <FormattedMessage
-                id='startOver-button'
-                defaultMessage='Start Over' />
-          </Button>
-        }
+        <PreviousButton formData={formData} />
         <Button
           variant='contained'
           onClick={(event) => handleContinueButtonClick(event)} >

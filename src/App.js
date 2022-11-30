@@ -9,6 +9,7 @@ import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
 import EmailResults2 from './Components/EmailResults/EmailResults2';
+import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
 import './App.css';
 
@@ -317,7 +318,7 @@ const App = () => {
     navigate('/step-15');
   }
 
-  const handleStartOverButtonClick = (event) => {
+  const clearLocalStorageFormDataAndResults = () => {
     localStorage.clear();
     setFormData(initialFormData);
     setResults(initialResults);
@@ -331,13 +332,16 @@ const App = () => {
           <Routes>
             <Route
               path='/'
-              element={<Navigate to="/step-1" replace /> } />
+              element={<Navigate to='/step-0' replace /> } />
+            <Route
+              path='/step-0' 
+              element={<LandingPage
+                clearLocalStorageFormDataAndResults={clearLocalStorageFormDataAndResults} /> } />
             <Route 
               path='/step-1' 
               element={<Disclaimer 
                 formData={formData}
-                handleCheckboxChange={handleCheckboxChange}
-                handleStartOverButtonClick={handleStartOverButtonClick} /> } />
+                handleCheckboxChange={handleCheckboxChange} /> } />
             <Route 
               path='/step-:id' 
               element={<QuestionComponentContainer 
@@ -376,7 +380,7 @@ const App = () => {
                 handleTextfieldChange={handleTextfieldChange} /> } />
             <Route
               path='*'
-              element={<Navigate to="/step-1" replace /> } />
+              element={<Navigate to='/step-0' replace /> } />
           </Routes>
       </div>
     </ThemeProvider>

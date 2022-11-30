@@ -18,7 +18,7 @@ const Header = () => {
               <Typography 
                 variant='h4' 
                 align='left' 
-                onClick={() => navigate('/step-1')}> 
+                onClick={() => navigate('/step-0')}> 
                 <img src={logo} alt='logo' className='logo'/>
               </Typography>
           </Grid>
