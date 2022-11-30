@@ -64,7 +64,7 @@
   "questions.id-14": "Tell us about the next person in your household.",
   "questions.id-14-ariaLabel": "screener household data",
   "questions.id-15": "How much does your whole household have right now in:",
-  "questions.id-15-description" : "Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds? Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds? In some cases, eligibility for benefits may be affected if your household owns other valuable assets such as a car or life insurance policy.",
+  "questions.id-15-description" : "Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds? In some cases, eligibility for benefits may be affected if your household owns other valuable assets such as a car or life insurance policy.",
   "questions.id-15-inputLabel": "Dollar Amount",
   "questions.id-16": "What was the last year you filed taxes for?",
   "questions.id-16-description": "The most recent year you can file taxes for is 2021.",
