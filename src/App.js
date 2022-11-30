@@ -61,7 +61,7 @@ const App = () => {
       cccap: false,
       mydenver: false,
       chp: false,
-      ccb: false
+      leap: false
     },
     referralSource: '',
     otherSource: '',
