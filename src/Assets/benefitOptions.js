@@ -56,7 +56,11 @@ const benefitOptions = {
   chp:
     <FormattedMessage
       id='benefitOptions.chp'
-      defaultMessage='Low-cost health insurance for children and pregnant women (CHP+)' />
+      defaultMessage='Low-cost health insurance for children and pregnant women (CHP+)' />,
+  leap:
+    <FormattedMessage
+      id='benefitOptions.leap'
+      defaultMessage='Help with winter heating bills (LEAP)' />
 };
 
 export default benefitOptions;
