@@ -2,13 +2,14 @@ import { useEffect, useState, Fragment, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { Button, Checkbox, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Button, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
 import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
+import CustomSwitch from '../CustomSwitch/CustomSwitch';
 import {
   postPartialParentScreen,
   postHouseholdMemberData,
@@ -556,25 +557,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               <Grid xs={12} item={true}>
                 <FormControlLabel
                   label={<FormattedMessage id='results.returnsignupCitizenFilter' defaultMessage="Only show benefits that do not require a citizen in the household" />}
-                  control={
-                    <Checkbox
-                      onChange={(e) => {
-                          if (e.target.checked) {
-                            setFilt([
-                              {
-                                columnField: "citizenship",
-                                operatorValue: "startsWith",
-                                value: "None"
-                              }
-                            ])
-                          }
-                          else {
-                            setFilt([])
-                          }
-                        }
-                      }
-                    />
-                  }
+                  control={<CustomSwitch 
+                    handleCustomSwitchToggle={handleCustomSwitchToggle} /> }
                 />
                 { DataGridTable(results[programSubset])}
               </Grid>
