@@ -557,8 +557,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               <Grid xs={12} item={true}>
                 <FormControlLabel
                   label={<FormattedMessage id='results.returnsignupCitizenFilter' defaultMessage="Only show benefits that do not require a citizen in the household" />}
-                  control={<CustomSwitch 
-                    handleCustomSwitchToggle={handleCustomSwitchToggle} /> }
+                  control={<CustomSwitch handleCustomSwitchToggle={handleCustomSwitchToggle} /> }
                 />
                 { DataGridTable(results[programSubset])}
               </Grid>
