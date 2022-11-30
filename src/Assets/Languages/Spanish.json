@@ -64,7 +64,7 @@
   "questions.id-14": "Cuéntenos sobre la siguiente persona en su hogar.",
   "questions.id-14-ariaLabel": "datos del cuestionario del hogar",
   "questions.id-15": "¿A cuánto ascienden los recursos de todo su hogar en este momento?",
-  "questions.id-15-description": "¿Efectivo en mano? ¿Cuentas corrientes o de ahorro? ¿Acciones, bonos o fondos mutuales de inversión?",
+  "questions.id-15-description": "¿Efectivo en mano? ¿Cuentas corrientes o de ahorro? ¿Acciones, bonos o fondos mutuales de inversión? En algunos casos, elegibilidad para beneficios puede verse afectado si su hogar posee otros activos valiosos, como un automóvil o una póliza de seguro de vida.",
   "questions.id-15-inputLabel": "Cantidad en dólares",
   "questions.id-16": "¿Cuál fue el último año en el que declaro impuestos?",
   "questions.id-16-description": "El año más reciente para el que puede declarar impuestos es 2021.",

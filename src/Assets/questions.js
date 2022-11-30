@@ -357,7 +357,7 @@ const questions = [
     questionDescription: 
       <FormattedMessage
         id='questions.id-15-description'
-        defaultMessage='Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?' />,
+        defaultMessage='Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds? In some cases, eligibility for benefits may be affected if your household owns other valuable assets such as a car or life insurance policy.' />,
     componentDetails: {
       componentType: 'Textfield',
       inputType: 'text',
