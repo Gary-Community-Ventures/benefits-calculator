@@ -11,6 +11,9 @@ const CustomBlueSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
     backgroundColor: '#0096B0',
   },
+  '.MuiSwitch-thumb': {
+    boxShadow: '0px 0px 5px 0px rgb(1 1 1 / 80%), 0px 1px 1px 0px rgb(0 0 0 / 10%), 0px 1px 1px 0px rgb(0 0 0 / 12%)'
+  }
 }));
 
 const CustomSwitch = ({ handleCustomSwitchToggle }) => {
