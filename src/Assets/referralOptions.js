@@ -5,6 +5,10 @@ const referralOptions = {
   benefitsInAction: 'Benefits in Action',
   villageExchange: 'Village Exchange',
   theFax: 'The Fax',
+  communityEvent: 
+    <FormattedMessage 
+      id='referralOptions.communityEvent' 
+      defaultMessage='Community Event' />,
   searchEngine:  
     <FormattedMessage 
       id='referralOptions.searchEngine' 
