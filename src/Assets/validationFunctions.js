@@ -160,7 +160,7 @@ const displayHouseholdMemberAgeHelperText = (applicantAge) => {
 const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) => {
   const allValidatedMemberData = householdDataState.householdData.every(personData => {
     const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired, 
-      disabled, veteran, medicaid, disabilityRelatedMedicaid, noneOfTheseApply, hasIncome,
+      disabled, veteran, noneOfTheseApply, hasIncome,
       incomeStreams, hasExpenses, expenses 
     } = personData;
 
@@ -184,8 +184,7 @@ const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) =
       return false;
     } else if ( (noneOfTheseApply && student) || (noneOfTheseApply && pregnant) || 
       (noneOfTheseApply && unemployed) || (noneOfTheseApply && blindOrVisuallyImpaired) ||
-      (noneOfTheseApply && disabled) || (noneOfTheseApply && veteran) || (noneOfTheseApply && medicaid) ||
-      (noneOfTheseApply && disabilityRelatedMedicaid) ) {
+      (noneOfTheseApply && disabled) || (noneOfTheseApply && veteran) ) {
       setHouseholdDataState({
         ...householdDataState, 
         error: 
