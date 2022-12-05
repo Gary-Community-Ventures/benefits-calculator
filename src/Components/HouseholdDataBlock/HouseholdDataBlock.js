@@ -36,8 +36,6 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         blindOrVisuallyImpaired: false,
         disabled: false,
         veteran: false,
-        medicaid: false,
-        disabilityRelatedMedicaid: false,
         noneOfTheseApply: false,
         hasIncome: false,
         incomeStreams: []
@@ -81,8 +79,6 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         personData.blindOrVisuallyImpaired = false;
         personData.disabled = false;
         personData.veteran = false;
-        personData.medicaid = false;
-        personData.disabilityRelatedMedicaid = false;
       }
 
       return personData;
