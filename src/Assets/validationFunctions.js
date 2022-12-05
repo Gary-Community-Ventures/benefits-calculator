@@ -160,8 +160,7 @@ const displayHouseholdMemberAgeHelperText = (applicantAge) => {
 const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) => {
   const allValidatedMemberData = householdDataState.householdData.every(personData => {
     const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired, 
-      disabled, veteran, noneOfTheseApply, hasIncome,
-      incomeStreams, hasExpenses, expenses 
+      disabled, veteran, noneOfTheseApply, hasIncome, incomeStreams, hasExpenses, expenses 
     } = personData;
 
     if (Number(age) < 0 || age === '') {
