@@ -130,8 +130,6 @@
   "conditionOptions.blindOrVisuallyImpaired": "Ciego o con problemas de visión",
   "conditionOptions.disabled": "Tiene alguna discapacidad",
   "conditionOptions.veteran": "Sirvió en las Fuerzas Armadas, Guardia Nacional o Reservas de Estados Unidos",
-  "conditionOptions.medicaid": "Tiene cobertura de Medicaid",
-  "conditionOptions.disabilityRelatedMedicaid": "Tiene cobertura de Medicaid relacionada con su discapacidad",
   "conditionOptions.noneOfTheseApply": "Ninguna de las opciones anteriores",
   "householdDataBlock.createFTStudentRadioQuestion-ariaLabel": "es estudiante de tiempo completo",
   "householdDataBlock.createFTStudentRadioQuestion-questionLabel": "¿Es estudiante de tiempo completo?",
