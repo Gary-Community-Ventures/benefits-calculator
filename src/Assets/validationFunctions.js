@@ -70,7 +70,9 @@ const incomeStreamsAreValid = (incomeStreams) => {
     return incomeStreamName.length > 0 && incomeAmount > 0 && incomeFrequency.length > 0;
   });
   
-  return allIncomeStreamsAreValid;
+  //incomeStreams must have a non-zero length since this function is only called if 
+  //the user indicated that they had income
+  return incomeStreams.length > 0 && allIncomeStreamsAreValid;
 }
 
 const expenseSourceValueHasError = (valueInput) => {
