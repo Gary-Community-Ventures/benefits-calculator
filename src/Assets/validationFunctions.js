@@ -71,7 +71,8 @@ const incomeStreamsAreValid = (incomeStreams) => {
   });
   
   //incomeStreams must have a non-zero length since this function is only called if 
-  //the user indicated that they had income
+  //the user indicated that they had income. This stmt was also added to fix the vacuously 
+  //true stmt that allIncomeStreamsAreValid for an empty array
   return incomeStreams.length > 0 && allIncomeStreamsAreValid;
 }
 
