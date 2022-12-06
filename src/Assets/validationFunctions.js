@@ -388,7 +388,7 @@ export {
   housingSourcesAreValid,
   householdMemberAgeHasError,
   displayHouseholdMemberAgeHelperText,
-  householdMemberDataIsValid,
+  personDataIsValid,
   emailHasError,
   displayEmailHelperText,
   lastTaxFilingYearHasError,
