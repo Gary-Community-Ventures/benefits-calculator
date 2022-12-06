@@ -157,66 +157,99 @@ const displayHouseholdMemberAgeHelperText = (applicantAge) => {
   };
 }
 
-const householdMemberDataIsValid = (householdDataState, setHouseholdDataState) => {
-  const allValidatedMemberData = householdDataState.householdData.every(personData => {
+const personDataIsValid = (householdDataState, setHouseholdDataState, index) => {
+  const matchingPersonData = householdDataState.householdData[index]; 
+  const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired, 
     const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired, 
-      disabled, veteran, noneOfTheseApply, hasIncome, incomeStreams, hasExpenses, expenses 
-    } = personData;
+  const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired, 
+    disabled, veteran, noneOfTheseApply, hasIncome, incomeStreams } = matchingPersonData;
 
-    if (Number(age) < 0 || age === '') {
-      setHouseholdDataState({
+  if (Number(age) < 0 || age === '') {
+    setHouseholdDataState({
+      ...householdDataState, 
         ...householdDataState, 
+      ...householdDataState, 
+      error: 
         error: 
+      error: 
+        <FormattedMessage 
           <FormattedMessage 
-            id='validation-helperText.hhMemberAgeB'
+        <FormattedMessage 
+          id='validation-helperText.hhMemberAgeB'
+          defaultMessage="Please enter 0 or a positive number for the household member's age" /> 
             defaultMessage="Please enter 0 or a positive number for the household member's age" /> 
-      });
-      return false;
-    } else if (relationshipToHH === '') {
-      setHouseholdDataState({
+          defaultMessage="Please enter 0 or a positive number for the household member's age" /> 
+    });
+    return false;
+  } else if (relationshipToHH === '') {
+    setHouseholdDataState({
+      ...householdDataState, 
         ...householdDataState, 
+      ...householdDataState, 
+      error: 
         error: 
+      error: 
+        <FormattedMessage 
           <FormattedMessage 
-            id='validation-helperText.hhMemberRelation'
+        <FormattedMessage 
+          id='validation-helperText.hhMemberRelation'
+          defaultMessage='Please select a relation option' /> 
             defaultMessage='Please select a relation option' /> 
-      });
-      return false;
+          defaultMessage='Please select a relation option' /> 
+    });
+    return false;
+  } else if ( (noneOfTheseApply && student) || (noneOfTheseApply && pregnant) || 
     } else if ( (noneOfTheseApply && student) || (noneOfTheseApply && pregnant) || 
-      (noneOfTheseApply && unemployed) || (noneOfTheseApply && blindOrVisuallyImpaired) ||
-      (noneOfTheseApply && disabled) || (noneOfTheseApply && veteran) ) {
-      setHouseholdDataState({
+  } else if ( (noneOfTheseApply && student) || (noneOfTheseApply && pregnant) || 
+    (noneOfTheseApply && unemployed) || (noneOfTheseApply && blindOrVisuallyImpaired) ||
+    (noneOfTheseApply && disabled) || (noneOfTheseApply && veteran) ) {
+    setHouseholdDataState({
+      ...householdDataState, 
         ...householdDataState, 
+      ...householdDataState, 
+      error: 
         error: 
+      error: 
+        <FormattedMessage 
           <FormattedMessage 
-            id='validation-helperText.hhMemberNoneApply'
-            defaultMessage='Please deselect all other options if none of these conditions apply' />
-      });
-      return false;
-    } else if (hasIncome && incomeStreamsAreValid(incomeStreams) === false) {
-      setHouseholdDataState({
+        <FormattedMessage 
+          id='validation-helperText.hhMemberNoneApply'
+          defaultMessage='Please deselect all other options if none of these conditions apply' />
+    });
+    return false;
+  } else if (!student && !pregnant && !unemployed && !blindOrVisuallyImpaired && !disabled && !veteran && !noneOfTheseApply) {
+    setHouseholdDataState({
+      ...householdDataState, 
         ...householdDataState,
+      ...householdDataState, 
+      error: 
         error: 
+      error: 
+        <FormattedMessage 
           <FormattedMessage 
-            id='validation-helperText.hhMemberIncome'
-            defaultMessage='Please select and enter a response for all three income fields' />
-      });
-      return false;
-    } else if (hasExpenses && expenseSourcesAreValid(expenses) === false) {
-      setHouseholdDataState({
+        <FormattedMessage 
+          id='validation-helperText.noneApply'
+          defaultMessage="If none of these conditions apply please select 'None of these apply' " />
+    });
+    return false;
+  } else if (hasIncome && incomeStreamsAreValid(incomeStreams) === false) {
+    setHouseholdDataState({
+      ...householdDataState,
         ...householdDataState, 
+      ...householdDataState,
+      error: 
         error: 
+      error: 
+        <FormattedMessage 
           <FormattedMessage 
-            id='validation-helperText.hhMemberExpense'
-            defaultMessage='Please select and enter a response for all three expense fields' />
-      });
-      return false;
-    } else {
-      return true;
-    }
-
-  });
-
-  return allValidatedMemberData;
+        <FormattedMessage 
+          id='validation-helperText.hhMemberIncome'
+          defaultMessage='Please select and enter a response for all three income fields' />
+    });
+    return false;
+  } else {
+    return true;
+  }
 }
 
 const emailHasError = (email) => {
