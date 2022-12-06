@@ -313,8 +313,8 @@ const App = () => {
     navigate(`/step-${stepId + 1}`);
   }
 
-  const handleHouseholdDataSubmit = (unvalidatedHouseholdData) => {
-    setFormData({ ...formData, householdData: unvalidatedHouseholdData });
+  const handleHouseholdDataSubmit = (validatedHouseholdData) => {
+    setFormData({ ...formData, householdData: validatedHouseholdData });
     navigate('/step-15');
   }
 
