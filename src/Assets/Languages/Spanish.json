@@ -84,6 +84,7 @@
   "validation-helperText.hhMemberAgeB": "Ingrese 0 o un número positivo para la edad del miembro del hogar",
   "validation-helperText.hhMemberRelation": "Seleccione una opción de parentesco",
   "validation-helperText.hhMemberNoneApply": "Deseleccione las demás opciones si ninguna de estas condiciones le corresponden",
+  "validation-helperText.noneApply": "Si no corresponde ninguna opcion seleccione \"Ninguna de las opciones anteriores\" ",
   "validation-helperText.hhMemberIncome": "Seleccione e ingrese una respuesta en los tres campos de ingresos",
   "validation-helperText.hhMemberExpense": "Seleccione e ingrese una respuesta en los tres campos de gastos",
   "validation-helperText.email": "Ingrese una dirección de correo electrónico válida",
