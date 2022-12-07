@@ -13,10 +13,12 @@ import { householdMemberAgeHasError, displayHouseholdMemberAgeHelperText } from 
 import { FormattedMessage } from 'react-intl';
 
 const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
-  const { householdSize } = formData; //# of blocks - 1 that will need to be created for each household member
-  const householdSizeNumber = Number(householdSize);
+  const { householdSize } = formData;
+  
+  //# of blocks that will need to be created for each household member
+  //subtract 1 because we don't want to count the head of household
+  const householdSizeNumber = Number(householdSize) - 1;
   const [page, setPage] = useState(0);
-
   let initialHouseholdData = [];
 
   if (formData.householdData.length >= 1) {
