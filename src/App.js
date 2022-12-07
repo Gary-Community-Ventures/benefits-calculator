@@ -294,6 +294,7 @@ const App = () => {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
         return;
       } else if (stepId === 13 && householdSize === 1) { //if you're on the householdSize q and the value is 1
+        setFormData({ ...formData, householdData: [] });
         navigate(`/step-${stepId + 2}`); //skip question 16 and go to 17
       } else if (stepId === 18) {
         navigate('/confirm-information');
