@@ -8,7 +8,7 @@ const HouseholdDataContinueButton = ({ page, setPage, householdSizeNumber, handl
     event.preventDefault();
     setState({ ...state, error: '' }); //resets the error property
 
-    if (personDataIsValid(state, setState, page) && ((Number(page) + 1) === (Number(householdSizeNumber) - 1))) {
+    if (personDataIsValid(state, setState, page) && ((Number(page) + 1) === (Number(householdSizeNumber))) ) {
       //if this person's inputs are valid and we're at the last hh member then send the hhdata back up to App
       handleHouseholdDataSubmit(state.householdData);
     } else if ((personDataIsValid(state, setState, page))) { //we are not at the last page
