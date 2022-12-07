@@ -1,22 +1,18 @@
 import { Button } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
-import { householdMemberDataIsValid } from '../../Assets/validationFunctions';
+import { personDataIsValid } from '../../Assets/validationFunctions';
 
-const HouseholdDataContinueButton = ({ page, setPage, householdSizeNumber, handleHouseholdDataSubmit, setState, state }) => {
+const HouseholdDataContinueButton = ({ page, setPage, remainingHHMNumber, handleHouseholdDataSubmit, setState, state }) => {
 
   const handleContinue = (event) => {
     event.preventDefault();
-    
-    if ((Number(page) + 1) === (Number(householdSizeNumber) - 1)) {
-      //then we're at the end and we want to send all of this data back to app via a function
-      //we should first validate that all of the information has been filled out for each family member
-      //if that is the case we call handleHouseholdDataSubmit, else display error msg to user
-      if (householdMemberDataIsValid(state, setState)) {
-        handleHouseholdDataSubmit(state.householdData);
-      }
-    } else { //there are still more household member block(s) that need to be filled out
-      //we just want to validate that all of the information has been filled out
-      //and then set the page + 1 for them to fill out the next member's information
+    setState({ ...state, error: '' }); //resets the error property
+
+    if (personDataIsValid(state, setState, page) && ((Number(page) + 1) === (Number(remainingHHMNumber))) ) {
+      //if this person's inputs are valid and we're at the last hh member then send the hhdata back up to App
+      handleHouseholdDataSubmit(state.householdData);
+    } else if ((personDataIsValid(state, setState, page))) { //we are not at the last page
+      //validate the householdMember's data if it's valid then 
       setPage(Number(page) + 1);
       window.scrollTo(0, 0);
     }

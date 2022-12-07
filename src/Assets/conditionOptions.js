@@ -25,14 +25,6 @@ const conditionOptions = {
     <FormattedMessage 
       id='conditionOptions.veteran' 
       defaultMessage='Served in the U.S. Armed Forces, National Guard or Reserves' />,
-  medicaid: 
-    <FormattedMessage 
-      id='conditionOptions.medicaid' 
-      defaultMessage='Receives Medicaid' />,
-  disabilityRelatedMedicaid: 
-    <FormattedMessage 
-      id='conditionOptions.disabilityRelatedMedicaid' 
-      defaultMessage='Receives Disability-related Medicaid' />,
   noneOfTheseApply: 
     <FormattedMessage 
       id='conditionOptions.noneOfTheseApply' 

@@ -13,19 +13,18 @@ import { householdMemberAgeHasError, displayHouseholdMemberAgeHelperText } from 
 import { FormattedMessage } from 'react-intl';
 
 const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
-  const { householdSize } = formData; //# of blocks - 1 that will need to be created for each household member
-  const householdSizeNumber = Number(householdSize);
+  const { householdSize } = formData;
+  
+  //# of blocks that will need to be created for each household member
+  //subtract 1 because we don't want to count the head of household
+  const remainingHHMNumber = Number(householdSize) - 1;
   const [page, setPage] = useState(0);
-
   let initialHouseholdData = [];
 
-  if (formData.householdData.length >= 1) {
-    initialHouseholdData = formData.householdData;
-  } else {
-    for (let i = 1; i < householdSizeNumber; i++) { 
-      //we start at i = 1 since we don't want to count the head of household
-      //this page will be blank unless formData.household size is 2 or greater
-      initialHouseholdData.push({
+  const createHHMInitData = (householdSizeNum) => {
+    const result = [];
+    for (let i = 0; i < householdSizeNum; i++) { 
+      result.push({
         age: '',
         relationshipToHH: ``,
         student: false,
@@ -36,13 +35,29 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         blindOrVisuallyImpaired: false,
         disabled: false,
         veteran: false,
-        medicaid: false,
-        disabilityRelatedMedicaid: false,
         noneOfTheseApply: false,
         hasIncome: false,
         incomeStreams: []
       });
     }
+    return result;
+  }
+
+  if (formData.householdData.length > 0 && formData.householdData.length === remainingHHMNumber) {
+    //the hhData and remHHM numbers are the same => use the hhData saved in state
+    initialHouseholdData = formData.householdData;
+  } else if (formData.householdData.length < remainingHHMNumber) {
+    //they've added/increased the size of their household so we need to create objects
+    //for each of the new members and add them to the existing formData.householdData
+    const householdSizeDifference = remainingHHMNumber - formData.householdData.length;
+    const newHHMembers = createHHMInitData(householdSizeDifference);
+    initialHouseholdData = [...formData.householdData, ...newHHMembers];
+  } else if (formData.householdData.length > remainingHHMNumber) {
+    //they've decreased the size of their household so we need to remove members 
+    //from the end of the formData.householdData array
+    const householdSizeDifference = formData.householdData.length - remainingHHMNumber;
+    const updatedHHMembers = formData.householdData.slice(0, formData.householdData.length - householdSizeDifference);
+    initialHouseholdData = updatedHHMembers;
   }
   
   const [state, setState] = useState({
@@ -81,8 +96,6 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         personData.blindOrVisuallyImpaired = false;
         personData.disabled = false;
         personData.veteran = false;
-        personData.medicaid = false;
-        personData.disabilityRelatedMedicaid = false;
       }
 
       return personData;
@@ -199,7 +212,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
             <HouseholdDataContinueButton 
               page={page}
               setPage={setPage} 
-              householdSizeNumber={householdSizeNumber} 
+              remainingHHMNumber={remainingHHMNumber} 
               handleHouseholdDataSubmit={handleHouseholdDataSubmit}
               setState={setState}
               state={state}
