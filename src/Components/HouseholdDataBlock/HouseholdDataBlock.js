@@ -42,6 +42,23 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     }
     return result;
   }
+
+  if (formData.householdData.length > 0 && formData.householdData.length === householdSizeNumber) {
+    //the hhData and hhSize numbers are the same => use the hhData saved in state
+    initialHouseholdData = formData.householdData;
+  } else if (formData.householdData.length < householdSizeNumber) {
+    //they've added/increased the size of their household so we need to create objects
+    //for each of the new members and add them to the existing formData.householdData
+    const householdSizeDifference = householdSizeNumber - formData.householdData.length;
+    const newHHMembers = createHHMInitData(householdSizeDifference);
+    initialHouseholdData = [...formData.householdData, ...newHHMembers];
+  } else if (formData.householdData.length > householdSizeNumber) {
+    //they've decreased the size of their household so we need to remove members 
+    //from the end of the formData.householdData array
+    const householdSizeDifference = formData.householdData.length - householdSizeNumber;
+    const updatedHHMembers = formData.householdData.slice(0, formData.householdData.length - householdSizeDifference); //it's not removing index 1 when hhSize = 2 => still has 2 hhData elements
+    initialHouseholdData = updatedHHMembers;
+  }
   
   const [state, setState] = useState({
     householdData: initialHouseholdData,
