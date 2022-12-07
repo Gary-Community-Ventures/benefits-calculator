@@ -21,13 +21,10 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const [page, setPage] = useState(0);
   let initialHouseholdData = [];
 
-  if (formData.householdData.length >= 1) {
-    initialHouseholdData = formData.householdData;
-  } else {
-    for (let i = 1; i < householdSizeNumber; i++) { 
-      //we start at i = 1 since we don't want to count the head of household
-      //this page will be blank unless formData.household size is 2 or greater
-      initialHouseholdData.push({
+  const createHHMInitData = (householdSizeNumber) => {
+    const result = [];
+    for (let i = 0; i < householdSizeNumber; i++) { 
+      result.push({
         age: '',
         relationshipToHH: ``,
         student: false,
@@ -43,6 +40,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         incomeStreams: []
       });
     }
+    return result;
   }
   
   const [state, setState] = useState({
