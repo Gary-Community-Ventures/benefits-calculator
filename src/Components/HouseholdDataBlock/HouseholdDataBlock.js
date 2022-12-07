@@ -17,13 +17,13 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   
   //# of blocks that will need to be created for each household member
   //subtract 1 because we don't want to count the head of household
-  const householdSizeNumber = Number(householdSize) - 1;
+  const remainingHHMNumber = Number(householdSize) - 1;
   const [page, setPage] = useState(0);
   let initialHouseholdData = [];
 
-  const createHHMInitData = (householdSizeNumber) => {
+  const createHHMInitData = (householdSizeNum) => {
     const result = [];
-    for (let i = 0; i < householdSizeNumber; i++) { 
+    for (let i = 0; i < householdSizeNum; i++) { 
       result.push({
         age: '',
         relationshipToHH: ``,
@@ -43,19 +43,19 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return result;
   }
 
-  if (formData.householdData.length > 0 && formData.householdData.length === householdSizeNumber) {
+  if (formData.householdData.length > 0 && formData.householdData.length === remainingHHMNumber) {
     //the hhData and hhSize numbers are the same => use the hhData saved in state
     initialHouseholdData = formData.householdData;
-  } else if (formData.householdData.length < householdSizeNumber) {
+  } else if (formData.householdData.length < remainingHHMNumber) {
     //they've added/increased the size of their household so we need to create objects
     //for each of the new members and add them to the existing formData.householdData
-    const householdSizeDifference = householdSizeNumber - formData.householdData.length;
+    const householdSizeDifference = remainingHHMNumber - formData.householdData.length;
     const newHHMembers = createHHMInitData(householdSizeDifference);
     initialHouseholdData = [...formData.householdData, ...newHHMembers];
-  } else if (formData.householdData.length > householdSizeNumber) {
+  } else if (formData.householdData.length > remainingHHMNumber) {
     //they've decreased the size of their household so we need to remove members 
     //from the end of the formData.householdData array
-    const householdSizeDifference = formData.householdData.length - householdSizeNumber;
+    const householdSizeDifference = formData.householdData.length - remainingHHMNumber;
     const updatedHHMembers = formData.householdData.slice(0, formData.householdData.length - householdSizeDifference); //it's not removing index 1 when hhSize = 2 => still has 2 hhData elements
     initialHouseholdData = updatedHHMembers;
   }
@@ -212,7 +212,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
             <HouseholdDataContinueButton 
               page={page}
               setPage={setPage} 
-              householdSizeNumber={householdSizeNumber} 
+              remainingHHMNumber={remainingHHMNumber} 
               handleHouseholdDataSubmit={handleHouseholdDataSubmit}
               setState={setState}
               state={state}
