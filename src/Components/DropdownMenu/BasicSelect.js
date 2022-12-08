@@ -27,6 +27,19 @@ const BasicSelect = ({ componentProperties, setFormData, formData, options, form
     return [disabledSelectMenuItem, dropdownMenuItems];
   }
 
+  const sortNumbersDescendingThenStringsLastWithoutSorting = (a, z) => {
+    //instructions on how to compare elements when they're being sorted
+    if (isNaN(Number(a)) || isNaN(Number(z))) {
+      return 0; // if either key is string, keep original order
+    } else if (Number(a) < Number(z)) {
+      return 1; // sort a after z
+    } else if (Number(a) > Number(z)) {
+      return -1; // sort z after a
+    } else {
+      return 0; // a === z, so keep original order
+    }
+  }
+
   return (
     <FormControl sx={{ m: 1, minWidth: 120 }}>
       <InputLabel id={labelId}>{inputLabelText}</InputLabel>
