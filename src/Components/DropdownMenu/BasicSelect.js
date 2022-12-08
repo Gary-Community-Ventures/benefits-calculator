@@ -17,6 +17,8 @@ const BasicSelect = ({ componentProperties, setFormData, formData, options, form
     const disabledSelectMenuItem = <MenuItem value='disabled-select' key='disabled-select' disabled>{disabledSelectMenuItemText}</MenuItem>
     const menuItemKeys = Object.keys(options);
     const menuItemLabels = Object.values(options);
+    menuItemKeys.sort((a, z) => sortNumbersDescendingThenStringsLastWithoutSorting(a, z));
+    menuItemLabels.sort((a, z) => sortNumbersDescendingThenStringsLastWithoutSorting(a, z));
     
     const dropdownMenuItems = menuItemKeys.map((option, i) => {
       return (
