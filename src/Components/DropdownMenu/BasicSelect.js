@@ -17,6 +17,8 @@ const BasicSelect = ({ componentProperties, setFormData, formData, options, form
     const disabledSelectMenuItem = <MenuItem value='disabled-select' key='disabled-select' disabled>{disabledSelectMenuItemText}</MenuItem>
     const menuItemKeys = Object.keys(options);
     const menuItemLabels = Object.values(options);
+    menuItemKeys.sort((a, z) => sortNumbersDescendingThenStringsLastWithoutSorting(a, z));
+    menuItemLabels.sort((a, z) => sortNumbersDescendingThenStringsLastWithoutSorting(a, z));
     
     const dropdownMenuItems = menuItemKeys.map((option, i) => {
       return (
@@ -25,6 +27,19 @@ const BasicSelect = ({ componentProperties, setFormData, formData, options, form
     });
     
     return [disabledSelectMenuItem, dropdownMenuItems];
+  }
+
+  const sortNumbersDescendingThenStringsLastWithoutSorting = (a, z) => {
+    //instructions on how to compare elements when they're being sorted
+    if (isNaN(Number(a)) || isNaN(Number(z))) {
+      return 0; // if either key is string, keep original order
+    } else if (Number(a) < Number(z)) {
+      return 1; // sort a after z
+    } else if (Number(a) > Number(z)) {
+      return -1; // sort z after a
+    } else {
+      return 0; // a === z, so keep original order
+    }
   }
 
   return (

@@ -37,10 +37,6 @@ const benefitOptions = {
     <FormattedMessage
       id='benefitOptions.ctc'
       defaultMessage='Federal tax credit: child tax credit (Child Tax Credit)' />,
-  medicaid:
-    <FormattedMessage
-      id='benefitOptions.medicaid'
-      defaultMessage='Free or low-cost public health insurance (Medicaid - also known as Health First Colorado)' />,
   rtdlive:
     <FormattedMessage
       id='benefitOptions.rtdlive'
@@ -53,10 +49,6 @@ const benefitOptions = {
     <FormattedMessage
       id='benefitOptions.mydenver'
       defaultMessage='Reduced-cost youth programs (MY Denver Card)' />,
-  chp:
-    <FormattedMessage
-      id='benefitOptions.chp'
-      defaultMessage='Low-cost health insurance for children and pregnant women (CHP+)' />,
   leap:
     <FormattedMessage
       id='benefitOptions.leap'
