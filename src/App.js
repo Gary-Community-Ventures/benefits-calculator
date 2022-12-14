@@ -20,6 +20,7 @@ LicenseInfo.setLicenseKey('505464fa6deb7bd75c286bf36859d580Tz01MTQ5MyxFPTE2OTU4M
 const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const urlSearchParams = location.search;
   const [searchParams] = useSearchParams();
   const theme = createTheme(styleOverrides);
   const initialFormData = {
@@ -333,7 +334,7 @@ const App = () => {
           <Routes>
             <Route
               path='/'
-              element={<Navigate to='/step-0' replace /> } />
+              element={<Navigate to={`/step-0${urlSearchParams}`} replace /> } />
             <Route
               path='/step-0' 
               element={<LandingPage
