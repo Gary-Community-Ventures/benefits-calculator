@@ -218,7 +218,11 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const totalDollarAmountMonthly = (results) => {
     const total = results.reduce((total, program) => {
-      total += Math.round(program.estimated_value / 12);
+      if (filt.length > 0 && program.legal_status_required !== 'citizen') {
+        total += Math.round(program.estimated_value / 12);
+      } else if (filt.length === 0) {
+        total += Math.round(program.estimated_value / 12);
+      }
       return total;
     }, 0);
     
