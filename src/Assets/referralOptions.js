@@ -2,6 +2,7 @@ import { FormattedMessage } from 'react-intl';
 
 const referralOptions = {
   gary: 'Gary Community Ventures - Build with Families',
+  auroraCC: 'Aurora Community Connection',
   jeffcoPP: 'Jeffco Prosperity Partners',
   benefitsInAction: 'Benefits in Action',
   villageExchange: 'Village Exchange',
