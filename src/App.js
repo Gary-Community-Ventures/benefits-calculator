@@ -57,7 +57,6 @@ const App = () => {
       coeitc: false,
       nslp: false,
       ctc: false,
-      medicaid: false,
       rtdlive: false,
       cccap: false,
       mydenver: false,
