@@ -63,6 +63,13 @@ export const createDevFormData = (searchParams) => {
       mydenver: false,
       leap: false
     },
+    healthInsurance: {
+      employer: false,
+      private: false, 
+      medicaid: false,
+      chp: false,
+      none: false
+    },
     referralSource: 'gary',
     otherSource: '',
     signUpInfo: {
