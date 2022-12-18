@@ -370,6 +370,12 @@ const signUpOptionsHaveError = (signUpInfo) => {
   }
 }
 
+const healthInsuranceHasError = (healthInsuranceSelections) => {
+  const healthInsuranceKeys = Object.keys(healthInsuranceSelections);
+  const noOptionWasSelected = healthInsuranceKeys.every(option => healthInsuranceSelections[option] === false);
+  return noOptionWasSelected;
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -405,5 +411,6 @@ export {
   displayPhoneHasErrorHelperText,
   signUpFormHasError,
   displaySignUpFormHelperText,
-  signUpOptionsHaveError
+  signUpOptionsHaveError,
+  healthInsuranceHasError
 }
