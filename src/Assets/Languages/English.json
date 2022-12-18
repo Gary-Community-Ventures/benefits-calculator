@@ -31,6 +31,7 @@
   "questions.zipcode-a-inputLabel": "County",
   "questions.zipcode-a-disabledSelectMenuItemText": "Select a county",
   "questions.benefits": "Which benefits are you or your household members currently receiving or have received in the past year?",
+  "questions.healthInsurance": "Which type(s) of health insurance do members of your household have? Check all that apply.",
   "questions.student": "Are you a student?",
   "questions.student-ariaLabel": "is a student",
   "questions.student-a": "Are you a full-time student?",

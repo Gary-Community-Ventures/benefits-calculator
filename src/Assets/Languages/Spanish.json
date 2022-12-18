@@ -31,6 +31,7 @@
   "questions.zipcode-a-inputLabel": "Condado",
   "questions.zipcode-a-disabledSelectMenuItemText": "Seleccione un condado",
   "questions.benefits": "¿Qué beneficios están recibiendo usted o los miembros de su hogar actualmente o han recibido en el último año?",
+  "questions.healthInsurance": "¿Qué tipo(s) de seguro médico tienen los miembros de su hogar? Marque todo lo que corresponda.",
   "questions.student": "¿Es estudiante?",
   "questions.student-ariaLabel": "es estudiante",
   "questions.student-a": "¿Es estudiante de tiempo completo?",
