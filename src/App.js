@@ -286,7 +286,7 @@ const App = () => {
     setFormData({ ...formData, [name]: boolValue });
   }
   
-  const handleSubmit = (event, validateInputFunction, inputToBeValidated, stepId, householdSize) => {
+  const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, householdSize) => {
     event.preventDefault();
     const isZipcodeQuestionAndCountyIsEmpty = (stepId === 3 && formData.county === '');
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (stepId === 17 && formData.referralSource === 'other' && formData.otherSource === '');
@@ -349,7 +349,7 @@ const App = () => {
               element={<QuestionComponentContainer 
                 formData={formData} 
                 handleTextfieldChange={handleTextfieldChange} 
-                handleSubmit={handleSubmit}
+                handleContinueSubmit={handleContinueSubmit}
                 handleRadioButtonChange={handleRadioButtonChange} 
                 handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
                 handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}

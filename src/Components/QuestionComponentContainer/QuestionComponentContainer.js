@@ -14,7 +14,7 @@ import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, 
+const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange, 
   handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
   handleCheckboxChange }) => {
   let { id } = useParams();
@@ -178,7 +178,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
         <div className='question-buttons'>
           <PreviousButton formData={formData} />
           <ContinueButton
-            handleSubmit={handleSubmit}
+            handleContinueSubmit={handleContinueSubmit}
             inputError={matchingQuestion.componentDetails.inputError}
             formData={formData}
             inputName={matchingQuestion.componentDetails.inputName} />
