@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
-const ContinueButton = ({ handleContinueSubmit, inputError, formData, inputName }) => {
+const ContinueButton = ({ handleContinueSubmit, inputError, formData, inputName, questionName }) => {
   let { id } = useParams();
   let stepNumberId = Number(id);
 
@@ -10,7 +10,7 @@ const ContinueButton = ({ handleContinueSubmit, inputError, formData, inputName 
     <Button
       variant='contained'
       onClick={(event) => {
-        handleContinueSubmit(event, inputError, formData[inputName], stepNumberId, formData.householdSize);
+        handleContinueSubmit(event, inputError, formData[inputName], stepNumberId, questionName, formData.householdSize);
       }}>
       <FormattedMessage 
         id='continueButton'

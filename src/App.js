@@ -207,18 +207,18 @@ const App = () => {
     setFormData({ ...formData, [name]: boolValue });
   }
   
-  const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, householdSize) => {
+  const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, householdSize) => {
     event.preventDefault();
-    const isZipcodeQuestionAndCountyIsEmpty = (stepId === 3 && formData.county === '');
-    const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (stepId === 17 && formData.referralSource === 'other' && formData.otherSource === '');
+    const isZipcodeQuestionAndCountyIsEmpty = (questionName === 'zipcode' && formData.county === '');
+    const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '');
 
     if (!validateInputFunction(inputToBeValidated)) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
         return;
-      } else if (stepId === 13 && householdSize === 1) { //if you're on the householdSize q and the value is 1
+      } else if (questionName === 'householdSize' && householdSize === 1) { //if you're on the householdSize q and the value is 1
         setFormData({ ...formData, householdData: [] });
-        navigate(`/step-${stepId + 2}`); //skip question 16 and go to 17
-      } else if (stepId === 18) {
+        navigate(`/step-${stepId + 2}`); //skip householdData question
+      } else if (questionName === 'signUpInfo') {
         navigate('/confirm-information');
       } else { //you've indicated that you're householdSize is larger than 1
         navigate(`/step-${stepId + 1}`);
@@ -236,9 +236,9 @@ const App = () => {
     navigate(`/step-${stepId + 1}`);
   }
 
-  const handleHouseholdDataSubmit = (validatedHouseholdData) => {
+  const handleHouseholdDataSubmit = (validatedHouseholdData, stepId) => {
     setFormData({ ...formData, householdData: validatedHouseholdData });
-    navigate('/step-15');
+    navigate(`/step-${stepId + 1}`);
   }
 
   const clearLocalStorageFormDataAndResults = () => {

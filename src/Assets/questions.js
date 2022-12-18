@@ -26,6 +26,7 @@ import signUpOptions from './signUpOptions';
 const questions = [
   {
     id: 2,
+    name: 'age',
     question: 
       <FormattedMessage
         id='questions.id-2'
@@ -40,10 +41,12 @@ const questions = [
           defaultMessage='Age' />,
       inputError: ageHasError,
       inputHelperText: displayAgeHelperText
-    }
+    },
+    headerType: 'aboutYourself'
   },
   {
     id: 3,
+    name: 'zipcode',
     question: 
       <FormattedMessage
         id='questions.id-3'
@@ -64,6 +67,7 @@ const questions = [
         <FormattedMessage
           id='questions.id-3a'
           defaultMessage='Please select a county:' />,
+      name: 'county',
       componentDetails: {
         componentType: 'BasicSelect',
         inputType: 'text',
@@ -95,10 +99,12 @@ const questions = [
         },
         options: countiesByZipcode
       }
-    }]
+    }],
+    headerType: 'aboutYourself'
   },
   {
     id: 4,
+    name: 'benefits',
     question:
       <FormattedMessage
         id='questions.id-4'
@@ -108,10 +114,12 @@ const questions = [
       inputName: 'benefits',
       options: benefitOptions,
       inputError: benefitsHasError
-    }
+    },
+    headerType: 'aboutYourself'
   },
   {
     id: 5,
+    name: 'student',
     question: 
       <FormattedMessage
         id='questions.id-5'
@@ -130,6 +138,7 @@ const questions = [
         <FormattedMessage
           id='questions.id-5a'
           defaultMessage='Are you a full-time student?' />,
+      name: 'studentFulltime',
       componentDetails: {
         componentType: 'Radiofield',
         ariaLabel: 
@@ -139,10 +148,12 @@ const questions = [
         inputName: 'studentFulltime',
         inputError: radiofieldHasError
       }
-    }]
+    }],
+    headerType: 'aboutYourself'
   },
   {
     id: 6,
+    name: 'pregnant',
     question: 
       <FormattedMessage
         id='questions.id-6'
@@ -155,10 +166,12 @@ const questions = [
           defaultMessage='is pregnant' />,
       inputName: 'pregnant',
       inputError: radiofieldHasError
-    }    
+    },
+    headerType: 'aboutYourself' 
   },
   {
     id: 7,
+    name: 'unemployed',
     question: 
       <FormattedMessage
         id='questions.id-7'
@@ -177,6 +190,7 @@ const questions = [
         <FormattedMessage
           id='questions.id-7a'
           defaultMessage='Did you work in the past 18 months?' />,
+      name: 'unemployedWorkedInLast18Mos',
       componentDetails: {
         componentType: 'Radiofield',
         ariaLabel: 
@@ -186,10 +200,12 @@ const questions = [
         inputName: 'unemployedWorkedInLast18Mos',
         inputError: radiofieldHasError
       }
-    }]    
+    }],
+    headerType: 'aboutYourself'  
   },
   {
     id: 8,
+    name: 'blindOrVisuallyImpaired',
     question: 
       <FormattedMessage
         id='questions.id-8'
@@ -207,10 +223,12 @@ const questions = [
           defaultMessage='is blind or visually impaired' />,
       inputName: 'blindOrVisuallyImpaired',
       inputError: radiofieldHasError
-    }    
+    },
+    headerType: 'aboutYourself'
   },
   {
     id: 9,
+    name: 'disabled',
     question:
       <FormattedMessage
         id='questions.id-9'
@@ -223,10 +241,12 @@ const questions = [
           defaultMessage='has any disabilities' />,
       inputName: 'disabled',
       inputError: radiofieldHasError
-    }    
+    },
+    headerType: 'aboutYourself'
   },
   {
     id: 10,
+    name: 'veteran',
     question:
       <FormattedMessage
         id='questions.id-10'
@@ -239,10 +259,12 @@ const questions = [
           defaultMessage='is a veteran' />,
       inputName: 'veteran',
       inputError: radiofieldHasError
-    }    
+    },
+    headerType: 'aboutYourself'
   },
   {
     id: 11,
+    name: 'hasIncome',
     question:
       <FormattedMessage
         id='questions.id-11'
@@ -267,17 +289,21 @@ const questions = [
         <FormattedMessage
           id='questions.id-11a'
           defaultMessage='What type of income have you had most recently?' />,
+      name: 'incomeStreams',
       componentDetails: {
         componentType: 'IncomeBlock',
         ariaLabel:
           <FormattedMessage
             id='questions.id-11a-ariaLabel'
-            defaultMessage='most recent type of income' />
+            defaultMessage='most recent type of income' />,
+        inputName: 'incomeStreams'
       }
-    }]    
+    }],
+    headerType: 'aboutYourself'
   },
   {
     id: 12,
+    name: 'hasExpenses',
     question:
       <FormattedMessage
         id='questions.id-12'
@@ -302,17 +328,21 @@ const questions = [
         <FormattedMessage
           id='questions.id-12a'
           defaultMessage='What type of expense has your household had most recently?' />,
+      name: 'expenses',
       componentDetails: {
         componentType: 'ExpenseBlock',
         ariaLabel: 
           <FormattedMessage
             id='questions.id-12a-ariaLabel'
             defaultMessage='most recent type of expense' />,
+        inputName: 'expenses'
       }
-    }]
+    }],
+    headerType: 'aboutHousehold'
   },
   {
     id: 13,
+    name: 'householdSize',
     question:
       <FormattedMessage
         id='questions.id-13'
@@ -331,10 +361,12 @@ const questions = [
           defaultMessage='Household Size' />,
       inputError: householdSizeHasError,
       inputHelperText: displayHouseholdSizeHelperText
-    }
+    }, 
+    headerType: 'aboutHousehold'
   },
   {
     id: 14,
+    name: 'householdData',
     question:
       <FormattedMessage
         id='questions.id-14'
@@ -346,10 +378,12 @@ const questions = [
           id='questions.id-14-ariaLabel'
           defaultMessage='screener household data' />,
       inputName: 'householdData'
-    }
+    },
+    headerType: 'householdData'
   },
   {
     id: 15,
+    name: 'householdAssets',
     question:
       <FormattedMessage
         id='questions.id-15'
@@ -368,10 +402,12 @@ const questions = [
           defaultMessage='Dollar Amount' />,
       inputError: householdAssetsHasError,
       inputHelperText: displayHouseholdAssetsHelperText
-    }
+    },
+    headerType: 'aboutHousehold'
   },
   {
     id: 16,
+    name: 'lastTaxFilingYear',
     question:
       <FormattedMessage
         id='questions.id-16'
@@ -404,10 +440,12 @@ const questions = [
             defaultMessage='Select a Tax Year' />
       },
       options: taxYearOptions
-    }
+    },
+    headerType: 'aboutHousehold'
   },
   {
     id: 17,
+    name: 'referralSource',
     question:
       <FormattedMessage
         id='questions.id-17'
@@ -442,6 +480,7 @@ const questions = [
         <FormattedMessage
           id='questions.id-17a'
           defaultMessage='If other, please specify:' />,
+      name: 'otherSource',
       componentDetails: {
         componentType: 'Textfield',
         inputType: 'text',
@@ -453,9 +492,11 @@ const questions = [
         inputError: referralSourceHasError,
         inputHelperText: displayReferralSourceHelperText
       }
-    }]
+    }],
+    headerType: 'aboutHousehold'
   },
   { id: 18,
+    name: 'signUpInfo',
     question: 
       <FormattedMessage
         id='questions.id-18'
@@ -479,7 +520,8 @@ const questions = [
             id='questions.id-18-ariaLabel'
             defaultMessage='screener optional signup page' />,
       }
-    }]
+    }],
+    headerType: 'signUpInfo'
   }
 ];
 
