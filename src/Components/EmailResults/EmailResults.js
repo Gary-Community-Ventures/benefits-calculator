@@ -57,7 +57,7 @@ const EmailResults = ({ results }) => {
     setSignUpInfo({ ...signUpInfo, [name]: !signUpInfo[name] });
   }
 
-  const handleSubmit = async () => {
+  const handleEmailSubmit = async () => {
     if (signUpFormHasError(signUpInfo) === false) {
       const { email, phone, firstName, lastName, 
         sendResults, sendUpdates, sendOffers, commConsent } = signUpInfo; 
@@ -314,7 +314,7 @@ const EmailResults = ({ results }) => {
             <Button
               variant='contained'
               onClick={(event) => {
-                handleSubmit(event);
+                handleEmailSubmit(event);
               }}>
               <FormattedMessage 
                 id='emailResults.return-signupButton' 
