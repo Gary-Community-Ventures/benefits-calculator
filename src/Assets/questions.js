@@ -14,14 +14,16 @@ import {
   referralSourceHasError,
   displayReferralSourceHelperText,
   displayMissingSelectHelperText, 
-  signUpOptionsHaveError
+  signUpOptionsHaveError,
+  healthInsuranceHasError
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
-import { FormattedMessage } from 'react-intl';
 import taxYearOptions from './taxYearOptions';
 import referralOptions from './referralOptions';
 import countiesByZipcode from './countiesByZipcode';
 import signUpOptions from './signUpOptions';
+import healthInsuranceOptions from './healthInsuranceOptions';
+import { FormattedMessage } from 'react-intl';
 
 const questions = [
   {
@@ -119,6 +121,21 @@ const questions = [
   },
   {
     id: 5,
+    name: 'healthInsurance',
+    question:
+      <FormattedMessage
+        id='questions.healthInsurance'
+        defaultMessage='Which type(s) of health insurance do members of your household have? Check all that apply.' />,
+    componentDetails: {
+      componentType: 'BasicCheckboxGroup',
+      inputName: 'healthInsurance',
+      options: healthInsuranceOptions,
+      inputError: healthInsuranceHasError
+    },
+    headerType: 'aboutYourself'
+  },
+  {
+    id: 6,
     name: 'student',
     question: 
       <FormattedMessage
@@ -146,7 +163,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 6,
+    id: 7,
     name: 'pregnant',
     question: 
       <FormattedMessage
@@ -161,7 +178,7 @@ const questions = [
     headerType: 'aboutYourself' 
   },
   {
-    id: 7,
+    id: 8,
     name: 'unemployed',
     question: 
       <FormattedMessage
@@ -189,7 +206,7 @@ const questions = [
     headerType: 'aboutYourself'  
   },
   {
-    id: 8,
+    id: 9,
     name: 'blindOrVisuallyImpaired',
     question: 
       <FormattedMessage
@@ -209,7 +226,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 9,
+    id: 10,
     name: 'disabled',
     question:
       <FormattedMessage
@@ -224,7 +241,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 10,
+    id: 11,
     name: 'veteran',
     question:
       <FormattedMessage
@@ -239,7 +256,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 11,
+    id: 12,
     name: 'hasIncome',
     question:
       <FormattedMessage
@@ -272,7 +289,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 12,
+    id: 13,
     name: 'hasExpenses',
     question:
       <FormattedMessage
@@ -305,7 +322,7 @@ const questions = [
     headerType: 'aboutHousehold'
   },
   {
-    id: 13,
+    id: 14,
     name: 'householdSize',
     question:
       <FormattedMessage
@@ -329,7 +346,7 @@ const questions = [
     headerType: 'aboutHousehold'
   },
   {
-    id: 14,
+    id: 15,
     name: 'householdData',
     question:
       <FormattedMessage
@@ -343,7 +360,7 @@ const questions = [
     headerType: 'householdData'
   },
   {
-    id: 15,
+    id: 16,
     name: 'householdAssets',
     question:
       <FormattedMessage
@@ -367,7 +384,7 @@ const questions = [
     headerType: 'aboutHousehold'
   },
   {
-    id: 16,
+    id: 17,
     name: 'lastTaxFilingYear',
     question:
       <FormattedMessage
@@ -405,7 +422,7 @@ const questions = [
     headerType: 'aboutHousehold'
   },
   {
-    id: 17,
+    id: 18,
     name: 'referralSource',
     question:
       <FormattedMessage
@@ -456,7 +473,7 @@ const questions = [
     }],
     headerType: 'aboutHousehold'
   },
-  { id: 18,
+  { id: 19,
     name: 'signUpInfo',
     question: 
       <FormattedMessage
