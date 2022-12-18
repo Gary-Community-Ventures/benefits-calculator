@@ -14,7 +14,8 @@ import {
   referralSourceHasError,
   displayReferralSourceHelperText,
   displayMissingSelectHelperText, 
-  signUpOptionsHaveError
+  signUpOptionsHaveError,
+  healthInsuranceOptionsHasError
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import { FormattedMessage } from 'react-intl';
@@ -22,6 +23,7 @@ import taxYearOptions from './taxYearOptions';
 import referralOptions from './referralOptions';
 import countiesByZipcode from './countiesByZipcode';
 import signUpOptions from './signUpOptions';
+import healthInsuranceOptions from './healthInsuranceOptions';
 
 const questions = [
   {
@@ -112,15 +114,28 @@ const questions = [
   },
   {
     id: 5,
-    question: 
+    question:
       <FormattedMessage
         id='questions.id-5'
+        defaultMessage='Which type(s) of health insurance do members of your household have? Check all that apply.' />,
+    componentDetails: {
+      componentType: 'BasicCheckboxGroup',
+      inputName: 'healthInsurance',
+      options: healthInsuranceOptions,
+      inputError: healthInsuranceOptionsHasError
+    }
+  },
+  {
+    id: 6,
+    question: 
+      <FormattedMessage
+        id='questions.id-6'
         defaultMessage='Are you a student?' />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 
         <FormattedMessage 
-          id='questions.id-5-ariaLabel' 
+          id='questions.id-6-ariaLabel' 
           defaultMessage='is a student' />,
       inputName: 'student',
       inputError: radiofieldHasError
@@ -128,13 +143,13 @@ const questions = [
     followUpQuestions: [{
       question: 
         <FormattedMessage
-          id='questions.id-5a'
+          id='questions.id-6a'
           defaultMessage='Are you a full-time student?' />,
       componentDetails: {
         componentType: 'Radiofield',
         ariaLabel: 
           <FormattedMessage 
-            id='questions.id-5a-ariaLabel' 
+            id='questions.id-6a-ariaLabel' 
             defaultMessage='is a full-time student' />,
         inputName: 'studentFulltime',
         inputError: radiofieldHasError
@@ -142,32 +157,32 @@ const questions = [
     }]
   },
   {
-    id: 6,
+    id: 7,
     question: 
       <FormattedMessage
-        id='questions.id-6'
+        id='questions.id-7'
         defaultMessage='Are you pregnant?' />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 
         <FormattedMessage 
-          id='questions.id-6-ariaLabel' 
+          id='questions.id-7-ariaLabel' 
           defaultMessage='is pregnant' />,
       inputName: 'pregnant',
       inputError: radiofieldHasError
     }    
   },
   {
-    id: 7,
+    id: 8,
     question: 
       <FormattedMessage
-        id='questions.id-7'
+        id='questions.id-8'
         defaultMessage='Are you currently unemployed?' />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 
         <FormattedMessage 
-          id='questions.id-7-ariaLabel' 
+          id='questions.id-8-ariaLabel' 
           defaultMessage='is currently unemployed' />,
       inputName: 'unemployed',
       inputError: radiofieldHasError
@@ -175,13 +190,13 @@ const questions = [
     followUpQuestions: [{
       question: 
         <FormattedMessage
-          id='questions.id-7a'
+          id='questions.id-8a'
           defaultMessage='Did you work in the past 18 months?' />,
       componentDetails: {
         componentType: 'Radiofield',
         ariaLabel: 
           <FormattedMessage 
-            id='questions.id-7a-ariaLabel' 
+            id='questions.id-8a-ariaLabel' 
             defaultMessage='has worked in the past 18 months' />,
         inputName: 'unemployedWorkedInLast18Mos',
         inputError: radiofieldHasError
@@ -189,39 +204,23 @@ const questions = [
     }]    
   },
   {
-    id: 8,
+    id: 9,
     question: 
       <FormattedMessage
-        id='questions.id-8'
+        id='questions.id-9'
         defaultMessage='Are you blind or visually impaired?' />,
     questionDescription: 
       <FormattedMessage 
-        id='questions.id-8-description'
+        id='questions.id-9-description'
         defaultMessage='"Visually impaired" means you cannot correct your vision to a "normal" level.' 
         />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 
         <FormattedMessage 
-          id='questions.id-8-ariaLabel' 
+          id='questions.id-9-ariaLabel' 
           defaultMessage='is blind or visually impaired' />,
       inputName: 'blindOrVisuallyImpaired',
-      inputError: radiofieldHasError
-    }    
-  },
-  {
-    id: 9,
-    question:
-      <FormattedMessage
-        id='questions.id-9'
-        defaultMessage='Do you have any disabilities that make you unable to work now or in the future?' />,
-    componentDetails: {
-      componentType: 'Radiofield',
-      ariaLabel:
-        <FormattedMessage
-          id='questions.id-9-ariaLabel'
-          defaultMessage='has any disabilities' />,
-      inputName: 'disabled',
       inputError: radiofieldHasError
     }    
   },
@@ -230,14 +229,14 @@ const questions = [
     question:
       <FormattedMessage
         id='questions.id-10'
-        defaultMessage='Have you served in the U.S. Armed Forces, National Guard or Reserves?' />,
+        defaultMessage='Do you have any disabilities that make you unable to work now or in the future?' />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel:
         <FormattedMessage
           id='questions.id-10-ariaLabel'
-          defaultMessage='is a veteran' />,
-      inputName: 'veteran',
+          defaultMessage='has any disabilities' />,
+      inputName: 'disabled',
       inputError: radiofieldHasError
     }    
   },
@@ -246,10 +245,26 @@ const questions = [
     question:
       <FormattedMessage
         id='questions.id-11'
+        defaultMessage='Have you served in the U.S. Armed Forces, National Guard or Reserves?' />,
+    componentDetails: {
+      componentType: 'Radiofield',
+      ariaLabel:
+        <FormattedMessage
+          id='questions.id-11-ariaLabel'
+          defaultMessage='is a veteran' />,
+      inputName: 'veteran',
+      inputError: radiofieldHasError
+    }    
+  },
+  {
+    id: 12,
+    question:
+      <FormattedMessage
+        id='questions.id-12'
         defaultMessage='Do you have an income?' />,
     questionDescription: 
       <FormattedMessage
-        id='questions.id-11-description'
+        id='questions.id-12-description'
         defaultMessage='Income is the money you earn or receive before deducting taxes. 
           This includes money from jobs, alimony, investments, or gifts. Enter income for yourself only. 
           You will have a chance to enter income for other household members later.' />,
@@ -257,7 +272,7 @@ const questions = [
       componentType: 'Radiofield',
       ariaLabel:
         <FormattedMessage
-          id='questions.id-11-ariaLabel'
+          id='questions.id-12-ariaLabel'
           defaultMessage='has an income' />,
       inputName: 'hasIncome',
       inputError: radiofieldHasError
@@ -265,26 +280,26 @@ const questions = [
     followUpQuestions: [{
       question:
         <FormattedMessage
-          id='questions.id-11a'
+          id='questions.id-12a'
           defaultMessage='What type of income have you had most recently?' />,
       componentDetails: {
         componentType: 'IncomeBlock',
         ariaLabel:
           <FormattedMessage
-            id='questions.id-11a-ariaLabel'
+            id='questions.id-12a-ariaLabel'
             defaultMessage='most recent type of income' />
       }
     }]    
   },
   {
-    id: 12,
+    id: 13,
     question:
       <FormattedMessage
-        id='questions.id-12'
+        id='questions.id-13'
         defaultMessage='Does your household have any expenses?' />,
     questionDescription:
       <FormattedMessage
-        id='questions.id-12-description'
+        id='questions.id-13-description'
         defaultMessage='Add up expenses for everyone who lives in your home. 
           This includes costs like child care, child support, rent, medical expenses, heating bills, and more. 
           We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits.' />,
@@ -292,7 +307,7 @@ const questions = [
       componentType: 'Radiofield',
       ariaLabel: 
         <FormattedMessage
-          id='questions.id-12-ariaLabel'
+          id='questions.id-13-ariaLabel'
           defaultMessage='has expenses' />,
       inputName: 'hasExpenses',
       inputError: radiofieldHasError
@@ -300,26 +315,26 @@ const questions = [
     followUpQuestions: [{
       question:
         <FormattedMessage
-          id='questions.id-12a'
+          id='questions.id-13a'
           defaultMessage='What type of expense has your household had most recently?' />,
       componentDetails: {
         componentType: 'ExpenseBlock',
         ariaLabel: 
           <FormattedMessage
-            id='questions.id-12a-ariaLabel'
+            id='questions.id-13a-ariaLabel'
             defaultMessage='most recent type of expense' />,
       }
     }]
   },
   {
-    id: 13,
+    id: 14,
     question:
       <FormattedMessage
-        id='questions.id-13'
+        id='questions.id-14'
         defaultMessage='Including you, how many people are in your household?' />,
     questionDescription: 
       <FormattedMessage
-        id='questions.id-13-description'
+        id='questions.id-14-description'
         defaultMessage='This is usually family members who you both live and share important resources with like food and bills.' />,
     componentDetails: {
       componentType: 'Textfield',
@@ -327,25 +342,10 @@ const questions = [
       inputName: 'householdSize',
       inputLabel: 
         <FormattedMessage
-          id='questions.id-13-inputLabel'
+          id='questions.id-14-inputLabel'
           defaultMessage='Household Size' />,
       inputError: householdSizeHasError,
       inputHelperText: displayHouseholdSizeHelperText
-    }
-  },
-  {
-    id: 14,
-    question:
-      <FormattedMessage
-        id='questions.id-14'
-        defaultMessage='Tell us about the next person in your household.' />,
-    componentDetails: {
-      componentType: 'HouseholdDataBlock',
-      ariaLabel: 
-        <FormattedMessage
-          id='questions.id-14-ariaLabel'
-          defaultMessage='screener household data' />,
-      inputName: 'householdData'
     }
   },
   {
@@ -353,21 +353,14 @@ const questions = [
     question:
       <FormattedMessage
         id='questions.id-15'
-        defaultMessage='How much does your whole household have right now in:' />,
-    questionDescription: 
-      <FormattedMessage
-        id='questions.id-15-description'
-        defaultMessage='Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds? In some cases, eligibility for benefits may be affected if your household owns other valuable assets such as a car or life insurance policy.' />,
+        defaultMessage='Tell us about the next person in your household.' />,
     componentDetails: {
-      componentType: 'Textfield',
-      inputType: 'text',
-      inputName: 'householdAssets',
-      inputLabel: 
+      componentType: 'HouseholdDataBlock',
+      ariaLabel: 
         <FormattedMessage
-          id='questions.id-15-inputLabel'
-          defaultMessage='Dollar Amount' />,
-      inputError: householdAssetsHasError,
-      inputHelperText: displayHouseholdAssetsHelperText
+          id='questions.id-15-ariaLabel'
+          defaultMessage='screener household data' />,
+      inputName: 'householdData'
     }
   },
   {
@@ -375,10 +368,32 @@ const questions = [
     question:
       <FormattedMessage
         id='questions.id-16'
+        defaultMessage='How much does your whole household have right now in:' />,
+    questionDescription: 
+      <FormattedMessage
+        id='questions.id-16-description'
+        defaultMessage='Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds?' />,
+    componentDetails: {
+      componentType: 'Textfield',
+      inputType: 'text',
+      inputName: 'householdAssets',
+      inputLabel: 
+        <FormattedMessage
+          id='questions.id-16-inputLabel'
+          defaultMessage='Dollar Amount' />,
+      inputError: householdAssetsHasError,
+      inputHelperText: displayHouseholdAssetsHelperText
+    }
+  },
+  {
+    id: 17,
+    question:
+      <FormattedMessage
+        id='questions.id-17'
         defaultMessage='What was the last year you filed taxes for?' />,
     questionDescription:
       <FormattedMessage
-        id='questions.id-16-description'
+        id='questions.id-17-description'
         defaultMessage='The most recent year you can file taxes for is 2021.' />,
     componentDetails: {
       componentType: 'BasicSelect',
@@ -407,10 +422,10 @@ const questions = [
     }
   },
   {
-    id: 17,
+    id: 18,
     question:
       <FormattedMessage
-        id='questions.id-17'
+        id='questions.id-18'
         defaultMessage='How did you hear about this screener?' />,
     componentDetails: {
       componentType: 'BasicSelect',
@@ -440,7 +455,7 @@ const questions = [
     followUpQuestions: [{
       question: 
         <FormattedMessage
-          id='questions.id-17a'
+          id='questions.id-18a'
           defaultMessage='If other, please specify:' />,
       componentDetails: {
         componentType: 'Textfield',
@@ -448,17 +463,17 @@ const questions = [
         inputName: 'otherSource',
         inputLabel: 
           <FormattedMessage 
-            id='questions.id-17a-inputLabel' 
+            id='questions.id-18a-inputLabel' 
             defaultMessage='Other referral source' />,
         inputError: referralSourceHasError,
         inputHelperText: displayReferralSourceHelperText
       }
     }]
   },
-  { id: 18,
+  { id: 19,
     question: 
       <FormattedMessage
-        id='questions.id-18'
+        id='questions.id-19'
         defaultMessage='What would you like us to contact you about?' />,
     componentDetails: {
       componentType: 'BasicCheckboxGroup',
@@ -469,14 +484,14 @@ const questions = [
     followUpQuestions: [{
       question:
         <FormattedMessage
-          id='questions.id-18a'
+          id='questions.id-19a'
           defaultMessage='Please provide your contact info below: ' />,
       componentDetails: {
         componentType: 'SignUp',
         inputName: 'signUpInfo',
         ariaLabel: 
           <FormattedMessage
-            id='questions.id-18-ariaLabel'
+            id='questions.id-19-ariaLabel'
             defaultMessage='screener optional signup page' />,
       }
     }]

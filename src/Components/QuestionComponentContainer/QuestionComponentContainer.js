@@ -170,9 +170,9 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   const createPreviousAndContinueButtons = (question) => {
     //render normal button block if the question isn't the income or expense question or if the user doesn't have an income/expenses at all, 
     //otherwise these buttons will be created in the IncomeBlock/ExpenseBlock components
-    const isNotIncomeOrExpenseQ = question.id < 11 || question.id >= 13;
-    const hasFalsyIncome = question.id === 11 && formData[question.componentDetails.inputName] === false;
-    const hasFalsyExpense = question.id === 12 && formData[question.componentDetails.inputName] === false;
+    const isNotIncomeOrExpenseQ = question.inputName !== 'hasIncome' || question.inputName !== 'hasExpenses';
+    const hasFalsyIncome = question.inputName === 'hasIncome' && formData[question.componentDetails.inputName] === false;
+    const hasFalsyExpense = question.inputName === 'hasExpenses' && formData[question.componentDetails.inputName] === false;
     if (isNotIncomeOrExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className='question-buttons'>
@@ -188,7 +188,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   }
 
   const renderHeaderAndSubheader = () => {
-    if (matchingQuestion.id === 18) {
+    if (matchingQuestion.inputName === 'signUpInfo') {
       return (
         <h2 className='sub-header'>
           <FormattedMessage 
@@ -196,7 +196,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
             defaultMessage='Optional: Sign up for benefits updates and offers' />
         </h2>
       );
-    } else if (matchingQuestion.id === 14) {
+    } else if (matchingQuestion.inputName === 'householdData') {
       return (
         <>
           <h2 className='household-data-sub-header'>
@@ -216,7 +216,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           </h4>
         </>
       );
-    } else if (matchingQuestion.id >= 2 && matchingQuestion.id <= 11) {
+    } else if (matchingQuestion.id >= 2 && matchingQuestion.id <= 12) {
       return (
         <div className='sub-header'>
           <FormattedMessage
@@ -229,7 +229,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           </h4>
         </div>
       );
-    } else if (matchingQuestion.id >= 12 && matchingQuestion.id <= 17) {
+    } else if (matchingQuestion.id >= 13 && matchingQuestion.id <= 18) {
       return (
         <div className='sub-header'>
           <FormattedMessage

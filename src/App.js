@@ -60,8 +60,14 @@ const App = () => {
       rtdlive: false,
       cccap: false,
       mydenver: false,
-      chp: false,
       leap: false
+    },
+    healthInsurance: {
+      employer: false,
+      private: false, 
+      medicaid: false,
+      chp: false,
+      none: false
     },
     referralSource: '',
     otherSource: '',
@@ -148,7 +154,6 @@ const App = () => {
   //     coeitc: false,
   //     nslp: false,
   //     ctc: false,
-  //     medicaid: false,
   //     rtdlive: false,
   //     cccap: false,
   //     mydenver: false,
@@ -288,15 +293,15 @@ const App = () => {
   const handleSubmit = (event, validateInputFunction, inputToBeValidated, stepId, householdSize) => {
     event.preventDefault();
     const isZipcodeQuestionAndCountyIsEmpty = (stepId === 3 && formData.county === '');
-    const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (stepId === 17 && formData.referralSource === 'other' && formData.otherSource === '');
+    const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (stepId === 18 && formData.referralSource === 'other' && formData.otherSource === '');
 
     if (!validateInputFunction(inputToBeValidated)) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
         return;
-      } else if (stepId === 13 && householdSize === 1) { //if you're on the householdSize q and the value is 1
+      } else if (stepId === 14 && householdSize === 1) { //if you're on the householdSize q and the value is 1
         setFormData({ ...formData, householdData: [] });
-        navigate(`/step-${stepId + 2}`); //skip question 16 and go to 17
-      } else if (stepId === 18) {
+        navigate(`/step-${stepId + 2}`); //skip question 15 and go to 16
+      } else if (stepId === 19) {
         navigate('/confirm-information');
       } else { //you've indicated that you're householdSize is larger than 1
         navigate(`/step-${stepId + 1}`);
@@ -316,7 +321,7 @@ const App = () => {
 
   const handleHouseholdDataSubmit = (validatedHouseholdData) => {
     setFormData({ ...formData, householdData: validatedHouseholdData });
-    navigate('/step-15');
+    navigate('/step-16');
   }
 
   const clearLocalStorageFormDataAndResults = () => {
