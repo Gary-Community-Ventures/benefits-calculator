@@ -113,7 +113,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       has_private_hi: healthInsurance.private,
       has_medicaid_hi: healthInsurance.medicaid,
       has_chp_hi: healthInsurance.chp,
-      has_none_hi: healthInsurance.none,
+      has_no_hi: healthInsurance.none,
       referral_source: finalReferralSource,
     };
 
