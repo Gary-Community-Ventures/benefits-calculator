@@ -80,7 +80,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const getScreensBody = (formData, languageCode, userId) => {
     const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets, startTime, isTest, 
-      externalID, lastTaxFilingYear, benefits, referralSource, otherSource } = formData;
+      externalID, lastTaxFilingYear, benefits, healthInsurance, referralSource, otherSource } = formData;
     const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 
     const screenBody = {
@@ -109,7 +109,12 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       has_snap: benefits.snap,
       has_tanf: benefits.tanf,
       has_wic: benefits.wic,
-      referral_source: finalReferralSource
+      has_employer_hi: healthInsurance.employer,
+      has_private_hi: healthInsurance.private,
+      has_medicaid_hi: healthInsurance.medicaid,
+      has_chp_hi: healthInsurance.chp,
+      has_none_hi: healthInsurance.none,
+      referral_source: finalReferralSource,
     };
 
     if (userId !== 0 && userId !== false) {
