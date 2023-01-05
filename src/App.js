@@ -23,13 +23,17 @@ const App = () => {
   const location = useLocation();
   const urlSearchParams = location.search;
   const [searchParams] = useSearchParams();
+  const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
+  const zip = searchParams.get('zip') ? searchParams.get('zip') : '';
+  const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : '';
   const theme = createTheme(styleOverrides);
+
   const initialFormData = {
     isTest: searchParams.get('test') ? searchParams.get('test') : false,
-    externalID: searchParams.get('externalid') ? searchParams.get('externalid') : null,
+    externalID: externalId,
     agreeToTermsOfService: false,
     age: '',
-    zipcode: '',
+    zipcode: zip,
     county: '',
     startTime: new Date().toJSON(),
     student: false,
@@ -70,7 +74,7 @@ const App = () => {
       chp: false,
       none: false
     },
-    referralSource: '',
+    referralSource: referrer,
     otherSource: '',
     signUpInfo: {
       email: '',
