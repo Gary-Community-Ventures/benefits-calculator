@@ -287,10 +287,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const createFTStudentRadioQuestion = (index) => {
     const radiofieldProps = {
-      ariaLabel: 
-        <FormattedMessage 
-          id='householdDataBlock.createFTStudentRadioQuestion-ariaLabel' 
-          defaultMessage='is a full-time student' />,
+      ariaLabel: 'householdDataBlock.createFTStudentRadioQuestion-ariaLabel',
       inputName: 'studentFulltime',
       value: state.householdData[index].studentFulltime
     };
@@ -313,10 +310,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const createUnemployed18MosRadioQuestion = (index) => {
     const radiofieldProps = {
-      ariaLabel: 
-        <FormattedMessage 
-          id='householdDataBlock.createUnemployed18MosRadioQuestion-ariaLabel' 
-          defaultMessage='has worked in the past 18 months' />,
+      ariaLabel: 'householdDataBlock.createUnemployed18MosRadioQuestion-ariaLabel',
       inputName: 'unemployedWorkedInLast18Mos',
       value: state.householdData[index].unemployedWorkedInLast18Mos
     };
@@ -339,10 +333,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const createIncomeRadioQuestion = (index) => {
     const radiofieldProps = {
-      ariaLabel: 
-        <FormattedMessage 
-          id='householdDataBlock.createIncomeRadioQuestion-ariaLabel' 
-          defaultMessage='has an income' />,
+      ariaLabel: 'householdDataBlock.createIncomeRadioQuestion-ariaLabel',
       inputName: 'hasIncome',
       value: state.householdData[index].hasIncome
     };

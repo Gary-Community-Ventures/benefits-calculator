@@ -25,7 +25,7 @@ const StyledDeleteButton = styled(Button)({
 
 const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   const { id } = useParams();
-  const stepIdNumber = Number(id);
+  const stepNumberId = Number(id);
 
   //if there are any elements in state for incomeStreams create IncomeBlock components for those 
   //first by assigning them to the initial selectedMenuItem state
@@ -264,7 +264,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
    
      if(incomeStreamsAreValid(selectedMenuItem)) {
       //need to pass the id obtained from useParams in this component to the handler s.t. it can navigate to the next step
-      handleIncomeStreamsSubmit(selectedMenuItem, stepIdNumber); 
+      handleIncomeStreamsSubmit(selectedMenuItem, stepNumberId); 
     }
   }
 

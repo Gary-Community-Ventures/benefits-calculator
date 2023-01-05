@@ -1,6 +1,6 @@
 import {FormControlLabel, RadioGroup, Radio } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import './Radiofield.css';
 
 const StyledFormControlLabel = styled(FormControlLabel)({
@@ -9,10 +9,13 @@ const StyledFormControlLabel = styled(FormControlLabel)({
 
 const Radiofield = ({ componentDetails, formData, handleRadioButtonChange }) => {
   const { ariaLabel, inputName } = componentDetails;
+  const intl = useIntl();
+  const translatedAriaLabel = intl.formatMessage({ id: ariaLabel });
+  
   return (
     <div className='radiogroup-container'>
       <RadioGroup
-        aria-labelledby={ariaLabel}
+        aria-labelledby={translatedAriaLabel}
         name={inputName}
         value={formData[inputName]}
         onChange={handleRadioButtonChange} >

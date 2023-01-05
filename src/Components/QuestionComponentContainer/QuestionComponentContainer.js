@@ -14,7 +14,7 @@ import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSubmit, handleRadioButtonChange, 
+const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange, 
   handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
   handleCheckboxChange }) => {
   let { id } = useParams();
@@ -170,25 +170,26 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
   const createPreviousAndContinueButtons = (question) => {
     //render normal button block if the question isn't the income or expense question or if the user doesn't have an income/expenses at all, 
     //otherwise these buttons will be created in the IncomeBlock/ExpenseBlock components
-    const isNotIncomeOrExpenseQ = question.id < 11 || question.id >= 13;
-    const hasFalsyIncome = question.id === 11 && formData[question.componentDetails.inputName] === false;
-    const hasFalsyExpense = question.id === 12 && formData[question.componentDetails.inputName] === false;
-    if (isNotIncomeOrExpenseQ || hasFalsyIncome || hasFalsyExpense) {
+    const isNotIncomeAndNotExpenseQ = question.name !== 'hasIncome' && question.name !== 'hasExpenses';
+    const hasFalsyIncome = question.name === 'hasIncome' && formData[question.componentDetails.inputName] === false;
+    const hasFalsyExpense = question.name === 'hasExpenses' && formData[question.componentDetails.inputName] === false;
+    if (isNotIncomeAndNotExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className='question-buttons'>
-          <PreviousButton formData={formData} />
+          <PreviousButton formData={formData} questionName={question.name} />
           <ContinueButton
-            handleSubmit={handleSubmit}
+            handleContinueSubmit={handleContinueSubmit}
             inputError={matchingQuestion.componentDetails.inputError}
             formData={formData}
-            inputName={matchingQuestion.componentDetails.inputName} />
+            inputName={matchingQuestion.componentDetails.inputName}
+            questionName={matchingQuestion.name} />
         </div>
       );
     }
   }
 
   const renderHeaderAndSubheader = () => {
-    if (matchingQuestion.id === 18) {
+    if (matchingQuestion.headerType === 'signUpInfo') {
       return (
         <h2 className='sub-header'>
           <FormattedMessage 
@@ -196,7 +197,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
             defaultMessage='Optional: Sign up for benefits updates and offers' />
         </h2>
       );
-    } else if (matchingQuestion.id === 14) {
+    } else if (matchingQuestion.headerType === 'householdData') {
       return (
         <>
           <h2 className='household-data-sub-header'>
@@ -216,7 +217,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           </h4>
         </>
       );
-    } else if (matchingQuestion.id >= 2 && matchingQuestion.id <= 11) {
+    } else if (matchingQuestion.headerType === 'aboutYourself') {
       return (
         <div className='sub-header'>
           <FormattedMessage
@@ -229,7 +230,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleSub
           </h4>
         </div>
       );
-    } else if (matchingQuestion.id >= 12 && matchingQuestion.id <= 17) {
+    } else if (matchingQuestion.headerType === 'aboutHousehold') {
       return (
         <div className='sub-header'>
           <FormattedMessage
