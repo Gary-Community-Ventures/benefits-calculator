@@ -84,7 +84,9 @@ const App = () => {
       sendOffers: false,
       sendUpdates: false,
       commConsent: false
-    }
+    },
+    urlSearchParams: urlSearchParams,
+    isBIAUser: isBIAUser
   };
 
   const getCurrentState = () => {
