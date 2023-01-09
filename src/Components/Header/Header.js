@@ -3,12 +3,14 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper';
 import LanguageIcon from '@mui/icons-material/Language';
-import logo from '../../Assets/logo.png';
+import MFBLogo from '../../Assets/logo.png';
+import BIAMFBLogo from '../../Assets/biamfbcombinedlogo.png';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ formData }) => {
   const context = useContext(Context);
   const navigate = useNavigate();
+  const { urlSearchParams, isBIAUser } = formData;
 
   return (
     <AppBar position='sticky'>
@@ -18,8 +20,11 @@ const Header = () => {
               <Typography 
                 variant='h4' 
                 align='left' 
-                onClick={() => navigate('/step-0')}> 
-                <img src={logo} alt='logo' className='logo'/>
+                onClick={() => navigate(`/step-0${urlSearchParams}`)}> 
+                <img 
+                  src={isBIAUser ? BIAMFBLogo : MFBLogo} 
+                  alt={isBIAUser ? 'benefits in action and my friend ben logo' : 'my friend ben logo'} 
+                  className='logo'/>
               </Typography>
           </Grid>
           <Grid item xs={2}>
