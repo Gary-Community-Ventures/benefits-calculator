@@ -262,7 +262,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div className='App'>
         <CssBaseline />
-          <Header />
+          <Header formData={formData} />
           <Routes>
             <Route
               path='/'
