@@ -33,7 +33,7 @@ const App = () => {
     externalID: externalId,
     agreeToTermsOfService: false,
     age: '',
-    zipcode: zip,
+    zipcode: '',
     county: '',
     startTime: new Date().toJSON(),
     student: false,
