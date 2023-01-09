@@ -24,7 +24,7 @@ const App = () => {
   const urlSearchParams = location.search;
   const [searchParams] = useSearchParams();
   const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
-  const zip = searchParams.get('zip') ? searchParams.get('zip') : '';
+  const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : null;
   const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : '';
   const theme = createTheme(styleOverrides);
 
