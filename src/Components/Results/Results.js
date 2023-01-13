@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Button, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
 import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
@@ -248,6 +249,23 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     }
   }
 
+  const displayNavigators = (navigators) => {
+    console.log(navigators)
+    if (navigators.length) {
+      return (
+        <>
+          { navigators.map(navigator => {
+            return (
+							<li key={navigator.name}>
+								<a href={navigator.assistance_link}>{navigator.name}</a>
+							</li>
+						);
+          })}
+        </>
+      )
+    }
+  }
+
   const displaySubheader = (benefitsSubset) => {
     if (benefitsSubset === 'eligiblePrograms') {
       return (
@@ -324,6 +342,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         application_link: results[i].apply_button_link,
         passed_tests: results[i].passed_tests,
         failed_tests: results[i].failed_tests,
+        navigators: results[i].navigators,
         citizenship: results[i].legal_status_required
       };
       dgr.push(dataGridRow);
@@ -341,6 +360,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         application_link: results[i].apply_button_link,
         passed_tests: results[i].passed_tests,
         failed_tests: results[i].failed_tests,
+        navigators: results[i].navigators
       }
       dgr.push(dataGridChild);
       count++;
@@ -373,6 +393,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
     let row = apiRef.current.getRow(id);
     const filteredDescendantCount = filteredDescendantCountLookup[rowNode.id] ?? 0;
+
+    const [expand_apply_assistance, set_expand_apply_assistance] = useState(false)
     return (
       <div>
         {filteredDescendantCount > 0 ? (
@@ -405,7 +427,40 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               id='results.resultsRow-applyButton' 
               defaultMessage='Apply' />
           </Button>
-          
+          <Button
+            variant='contained'
+            target="_blank"
+            onClick={(event)=>{
+              event.preventDefault();
+              set_expand_apply_assistance(!expand_apply_assistance);
+            }}>
+            <FormattedMessage 
+              id='results.resultsRow-applyButton' 
+              defaultMessage='Apply' />
+          </Button>
+          { (row.navigators.length > 0)  && 
+            <Accordion 
+              sx={{ m: 2 }}
+              expanded={expand_apply_assistance}
+              className={expand_apply_assistance? '': 'hide'}
+              >
+              <AccordionSummary
+                expandIcon={<CloseIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"> 
+                  <Typography variant='body2'>
+                    <Link>
+                      <FormattedMessage 
+                        id='results.resultsRow-applyWithAssistance' 
+                        defaultMessage='Navigators' />
+                    </Link>
+                  </Typography>
+              </AccordionSummary>
+              <AccordionDetails sx={{paddingTop: 0}}>
+                { displayNavigators(row.navigators) }
+              </AccordionDetails>
+            </Accordion> 
+          }
           { (row.passed_tests.length > 0 || row.failed_tests.length > 0)  && 
             <Accordion sx={{ m: 2 }}>
               <AccordionSummary
@@ -496,7 +551,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               description: false,
               application_link: false,
               passed_tests: false,
-              failed_tests: false
+              failed_tests: false,
+              navigators: false
             }
           }
         }}

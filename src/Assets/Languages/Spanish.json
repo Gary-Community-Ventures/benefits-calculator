@@ -272,6 +272,7 @@
   "results.resultsTable-sorryNoProgramsWereFoundLabel": "Lamentablemente no pudimos encontrar ningún programa para usted según la información que nos proporcionó.",
   "results.resultsRow-applyButton": "Solicitar",
   "results.resultsRow-expandForEligibilityLink": "Expandir para ver la información sobre elegibilidad",
+  "results.resultsRow-applyWithAssistance": "Aplicar con asistencia",
   "results.resultsRow-reducedExpensesText": "gastos reducidos",
   "results.resultsRow-cashText": "efectivo",
   "results.resultsRow-reducedCostText": "servicios a costo reducido",

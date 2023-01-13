@@ -12,3 +12,7 @@
   cursor: pointer;
   color: #4ecdc4;
 }
+
+.hide {
+  display: none;
+}
