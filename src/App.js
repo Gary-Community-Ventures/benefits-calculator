@@ -23,13 +23,14 @@ const App = () => {
   const location = useLocation();
   const urlSearchParams = location.search;
   const [searchParams] = useSearchParams();
+  const isTest = searchParams.get('test') ? searchParams.get('test') : false;
   const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
   const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : null;
   const isBIAUser = externalId !== null && referrer !== null;
   const theme = createTheme(styleOverrides);
 
   const initialFormData = {
-    isTest: searchParams.get('test') ? searchParams.get('test') : false,
+    isTest: isTest,
     externalID: externalId,
     agreeToTermsOfService: false,
     age: '',
