@@ -80,6 +80,8 @@ export const createDevFormData = (searchParams) => {
       sendOffers: true,
       sendUpdates: false,
       commConsent: true
-    }
+    },
+    urlSearchParams: null,
+    isBIAUser: null
   };
 };
