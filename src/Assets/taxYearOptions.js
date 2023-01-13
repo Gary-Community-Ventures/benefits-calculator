@@ -6,6 +6,7 @@ const taxYearOptions = {
   2019: '2019',
   2020: '2020',
   2021: '2021',
+  2022: '2022',
   noRecentFiling: 
     <FormattedMessage 
       id='taxYearOptions.noRecentFiling' 
