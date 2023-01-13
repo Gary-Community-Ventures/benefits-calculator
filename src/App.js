@@ -25,8 +25,8 @@ const App = () => {
   const [searchParams] = useSearchParams();
   const isTest = searchParams.get('test') ? searchParams.get('test') : false;
   const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
-  const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : null;
-  const isBIAUser = externalId !== null && referrer !== null;
+  const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : '';
+  const isBIAUser = externalId !== null && referrer !== '';
   const theme = createTheme(styleOverrides);
 
   const initialFormData = {
