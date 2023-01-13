@@ -4,6 +4,7 @@ const referralOptions = {
   gary: 'Gary Community Ventures - Build with Families',
   auroraCC: 'Aurora Community Connection',
   jeffcoPP: 'Jeffco Prosperity Partners',
+  taxHelpCO: 'Tax Help Colorado',
   bia: 'Benefits in Action',
   villageExchange: 'Village Exchange',
   theFax: 'The Fax',
