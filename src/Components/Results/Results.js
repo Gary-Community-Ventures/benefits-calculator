@@ -427,25 +427,31 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               id='results.resultsRow-applyButton' 
               defaultMessage='Apply' />
           </Button>
-          <Button
-            variant='contained'
-            target="_blank"
-            onClick={(event)=>{
-              event.preventDefault();
-              set_expand_apply_assistance(!expand_apply_assistance);
-            }}>
-            <FormattedMessage 
-              id='results.resultsRow-applyButton' 
-              defaultMessage='Apply' />
-          </Button>
-          { (row.navigators.length > 0)  && 
+        { (row.navigators.length > 0)  && 
+          <>
+            {(!expand_apply_assistance) && (
+            <Button
+              variant='contained'
+              target="_blank"
+              className={expand_apply_assistance? 'hide': ''}
+              onClick={(event)=>{
+                event.preventDefault();
+                set_expand_apply_assistance(true);
+             }}>
+              <FormattedMessage 
+                id='results.resultsRow-applyButton' 
+                defaultMessage='Apply' />
+            </Button>
+            )}
+            {(expand_apply_assistance) && (
             <Accordion 
               sx={{ m: 2 }}
               expanded={expand_apply_assistance}
-              className={expand_apply_assistance? '': 'hide'}
               >
               <AccordionSummary
-                expandIcon={<CloseIcon />}
+                expandIcon={<CloseIcon onClick={()=> {
+                  set_expand_apply_assistance(false);
+                }}/>}
                 aria-controls="panel1a-content"
                 id="panel1a-header"> 
                   <Typography variant='body2'>
@@ -459,7 +465,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               <AccordionDetails sx={{paddingTop: 0}}>
                 { displayNavigators(row.navigators) }
               </AccordionDetails>
-            </Accordion> 
+            </Accordion>
+            )}
+          </>
           }
           { (row.passed_tests.length > 0 || row.failed_tests.length > 0)  && 
             <Accordion sx={{ m: 2 }}>
