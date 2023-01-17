@@ -429,31 +429,31 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
           </Button>
         { (row.navigators.length > 0)  && 
           <>
-            {(!expand_apply_assistance) && (
             <Button
               variant='contained'
               target="_blank"
               className={expand_apply_assistance? 'hide': ''}
               onClick={(event)=>{
                 event.preventDefault();
-                set_expand_apply_assistance(true);
+                set_expand_apply_assistance(!expand_apply_assistance);
              }}>
               <FormattedMessage 
-                id='results.resultsRow-applyButton' 
+                id='results.resultsRow-applyWithAssistanceButton' 
                 defaultMessage='Apply' />
             </Button>
-            )}
-            {(expand_apply_assistance) && (
+            {(expand_apply_assistance||true) && (
             <Accordion 
               sx={{ m: 2 }}
               expanded={expand_apply_assistance}
+              className={expand_apply_assistance?'':'hide'}
               >
               <AccordionSummary
-                expandIcon={<CloseIcon onClick={()=> {
-                  set_expand_apply_assistance(false);
-                }}/>}
+                expandIcon={<CloseIcon />}
                 aria-controls="panel1a-content"
-                id="panel1a-header"> 
+                id="panel1a-header"
+                onClick={()=> {
+                  set_expand_apply_assistance(false);
+                }}> 
                   <Typography variant='body2'>
                     <Link>
                       <FormattedMessage 
