@@ -16,3 +16,7 @@
 .hide {
   display: none;
 }
+
+.line-seperator {
+  color: #505c66;
+}

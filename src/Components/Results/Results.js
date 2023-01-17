@@ -275,8 +275,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 								<br />
 								{navigator.assistance_link && (
 									<h4>
-										Link:{' '}
-										<a href={navigator.assistance_link}>
+										Link: <a href={navigator.assistance_link}>
 											{navigator.assistance_link}
 										</a>
 									</h4>
@@ -285,9 +284,13 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 								{navigator.phone_number && (
 									<h4>Phone Number: {formatPhoneNumber(navigator.phone_number)}</h4>
 								)}
+                <br />
 							</div>
 						);
-          })}
+          }).reduce((accu, elem) => {
+						//https://stackoverflow.com/questions/34034038/how-to-render-react-components-by-using-map-and-join/35840806#35840806
+						return accu === null ? [elem] : [...accu, <hr className='line-seperator'></hr>, elem];
+					}, null)}
         </>
       )
     }
@@ -421,7 +424,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     let row = apiRef.current.getRow(id);
     const filteredDescendantCount = filteredDescendantCountLookup[rowNode.id] ?? 0;
 
-    const [expand_apply_assistance, set_expand_apply_assistance] = useState(false)
     return (
       <div>
         {filteredDescendantCount > 0 ? (
@@ -465,7 +467,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   <Link>
                     <FormattedMessage 
                       id='results.resultsRow-applyWithAssistance' 
-                      defaultMessage='Navigators' />
+                      defaultMessage='Apply with Assistance' />
                   </Link>
                 </Typography>
             </AccordionSummary>
