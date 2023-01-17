@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Button, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
 import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
@@ -251,26 +250,40 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const displayNavigators = (navigators) => {
     console.log(navigators)
+    //https://stackoverflow.com/questions/8358084/regular-expression-to-reformat-a-us-phone-number-in-javascript
+    function formatPhoneNumber(phoneNumberString) {
+			const cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+			const match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+			if (match) {
+				const intlCode = match[1] ? '+1 ' : '';
+				return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join(
+					''
+				);
+			}
+			return null;
+		}
     if (navigators.length) {
       return (
         <>
           { navigators.map(navigator => {
             return (
 							<div>
-								<h3>
-									<a href={navigator.assistance_link}>{navigator.name}</a>
-								</h3>
-								<p>{navigator.description}</p>
+								<h2>{navigator.name}</h2>
+								<p>
+									<em>{navigator.description}</em>
+								</p>
+								<br />
 								{navigator.assistance_link && (
 									<h4>
-										Link: <a href={navigator.assistance_link}>
+										Link:{' '}
+										<a href={navigator.assistance_link}>
 											{navigator.assistance_link}
 										</a>
 									</h4>
 								)}
 								{navigator.email && <h4>Email: {navigator.email}</h4>}
 								{navigator.phone_number && (
-									<h4>Phone Number: {navigator.phone_number}</h4>
+									<h4>Phone Number: {formatPhoneNumber(navigator.phone_number)}</h4>
 								)}
 							</div>
 						);
@@ -442,45 +455,25 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               defaultMessage='Apply' />
           </Button>
         { (row.navigators.length > 0)  && 
-          <>
-            <Button
-              variant='contained'
-              target="_blank"
-              className={expand_apply_assistance? 'hide': ''}
-              onClick={(event)=>{
-                event.preventDefault();
-                set_expand_apply_assistance(!expand_apply_assistance);
-             }}>
-              <FormattedMessage 
-                id='results.resultsRow-applyWithAssistanceButton' 
-                defaultMessage='Apply' />
-            </Button>
-            <Accordion 
-              sx={{ m: 2 }}
-              expanded={expand_apply_assistance}
-              className={expand_apply_assistance?'':'hide'}
-              >
-              <AccordionSummary
-                expandIcon={<CloseIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-                onClick={()=> {
-                  set_expand_apply_assistance(false);
-                }}> 
-                  <Typography variant='body2'>
-                    <Link>
-                      <FormattedMessage 
-                        id='results.resultsRow-applyWithAssistance' 
-                        defaultMessage='Navigators' />
-                    </Link>
-                  </Typography>
-              </AccordionSummary>
-              <AccordionDetails sx={{paddingTop: 0}}>
-                { displayNavigators(row.navigators) }
-              </AccordionDetails>
-            </Accordion>
-          </>
-          }
+          <Accordion sx={{ m: 2 }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+              > 
+                <Typography variant='body2'>
+                  <Link>
+                    <FormattedMessage 
+                      id='results.resultsRow-applyWithAssistance' 
+                      defaultMessage='Navigators' />
+                  </Link>
+                </Typography>
+            </AccordionSummary>
+            <AccordionDetails sx={{paddingTop: 0}}>
+              { displayNavigators(row.navigators) }
+            </AccordionDetails>
+          </Accordion>
+        }
           { (row.passed_tests.length > 0 || row.failed_tests.length > 0)  && 
             <Accordion sx={{ m: 2 }}>
               <AccordionSummary
