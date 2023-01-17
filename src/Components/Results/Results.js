@@ -256,9 +256,23 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         <>
           { navigators.map(navigator => {
             return (
-							<li key={navigator.name}>
-								<a href={navigator.assistance_link}>{navigator.name}</a>
-							</li>
+							<div>
+								<h3>
+									<a href={navigator.assistance_link}>{navigator.name}</a>
+								</h3>
+								<p>{navigator.description}</p>
+								{navigator.assistance_link && (
+									<h4>
+										Link: <a href={navigator.assistance_link}>
+											{navigator.assistance_link}
+										</a>
+									</h4>
+								)}
+								{navigator.email && <h4>Email: {navigator.email}</h4>}
+								{navigator.phone_number && (
+									<h4>Phone Number: {navigator.phone_number}</h4>
+								)}
+							</div>
 						);
           })}
         </>
@@ -441,7 +455,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 id='results.resultsRow-applyWithAssistanceButton' 
                 defaultMessage='Apply' />
             </Button>
-            {(expand_apply_assistance||true) && (
             <Accordion 
               sx={{ m: 2 }}
               expanded={expand_apply_assistance}
@@ -466,7 +479,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 { displayNavigators(row.navigators) }
               </AccordionDetails>
             </Accordion>
-            )}
           </>
           }
           { (row.passed_tests.length > 0 || row.failed_tests.length > 0)  && 
