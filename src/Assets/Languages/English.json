@@ -68,7 +68,7 @@
   "questions.householdAssets-description" : "Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds? In some cases, eligibility for benefits may be affected if your household owns other valuable assets such as a car or life insurance policy.",
   "questions.householdAssets-inputLabel": "Dollar Amount",
   "questions.lastTaxFilingYear": "What was the last year you filed taxes for?",
-  "questions.lastTaxFilingYear-description": "The most recent year you can file taxes for is 2021.",
+  "questions.lastTaxFilingYear-description": "The most recent year you can file taxes for is 2022.",
   "questions.referralSource": "How did you hear about this screener?",
   "questions.referralSource-a": "If other, please specify:",
   "questions.referralSource-a-inputLabel": "Other referral source",
@@ -318,6 +318,6 @@
   "healthInsuranceOptions.employer": "Employer-provided health insurance",
   "healthInsuranceOptions.private": "Private health insurance",
   "healthInsuranceOptions.medicaid": "Free or low-cost public health insurance through Health First Colorado (Medicaid)",
-  "healthInsuranceOptions.chp": "Low-cost health insurance for git children and pregnant women through Child Health Plus (CHP+)",
+  "healthInsuranceOptions.chp": "Low-cost health insurance for children and pregnant women through Child Health Plan Plus (CHP+)",
   "healthInsuranceOptions.none": "One or more household member(s) do not have health insurance"
 }

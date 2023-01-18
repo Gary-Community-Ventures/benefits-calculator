@@ -393,7 +393,7 @@ const questions = [
     questionDescription:
       <FormattedMessage
         id='questions.lastTaxFilingYear-description'
-        defaultMessage='The most recent year you can file taxes for is 2021.' />,
+        defaultMessage='The most recent year you can file taxes for is 2022.' />,
     componentDetails: {
       componentType: 'BasicSelect',
       inputName: 'lastTaxFilingYear',

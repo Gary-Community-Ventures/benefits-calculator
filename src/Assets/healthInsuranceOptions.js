@@ -16,7 +16,7 @@ const healthInsuranceOptions = {
   chp: 
     <FormattedMessage
       id='healthInsuranceOptions.chp'
-      defaultMessage='Low-cost health insurance for children and pregnant women through Child Health Plus (CHP+)' />,
+      defaultMessage='Low-cost health insurance for children and pregnant women through Child Health Plan Plus (CHP+)' />,
   none: 
     <FormattedMessage
       id='healthInsuranceOptions.none'
