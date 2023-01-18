@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Button, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
 import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
@@ -69,6 +70,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 			.filter((program) => program.eligible === true && !formData.benefits[program.name_abbreviated])
 			.sort((benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value);
     const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
+    console.log('backend')
+    console.log(unqualifiedPrograms)
 
     setResults({ 
       eligiblePrograms: qualifiedPrograms, 
@@ -357,6 +360,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const DataGridRows = (results) => {
+    console.log('dataGrid')
+    console.log(results)
     let dgr = [];
     let count = 0;
     for (let i = 0; i < results.length; i++) {
@@ -405,6 +410,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       apiRef,
       gridFilteredDescendantCountLookupSelector,
     );
+    const [navListOpen, setNavListOpen] = useState(false)
+    const openNaveList = () => {setNavListOpen(!navListOpen)}
 
     const handleKeyDown: ButtonProps['onKeyDown'] = (event) => {
       if (event.key === ' ') {
@@ -457,24 +464,20 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               defaultMessage='Apply' />
           </Button>
         { (row.navigators.length > 0)  && 
-          <Accordion sx={{ m: 2 }}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-              > 
-                <Typography variant='body2'>
-                  <Link>
-                    <FormattedMessage 
-                      id='results.resultsRow-applyWithAssistance' 
-                      defaultMessage='Apply with Assistance' />
-                  </Link>
-                </Typography>
-            </AccordionSummary>
-            <AccordionDetails sx={{paddingTop: 0}}>
-              { displayNavigators(row.navigators) }
-            </AccordionDetails>
-          </Accordion>
+          <Button
+            variant='contained'
+            target="_blank"
+            onClick={openNaveList}
+            sx={{'margin-left': '5px'}}>
+            <FormattedMessage 
+              id='results.resultsRow-applyWithAssistance' 
+              defaultMessage='Apply With Assistance' />
+          </Button>
+        }
+        { (row.navigators.length > 0)  && 
+          <div className={`navigator-list ${navListOpen?'':'hide'}`}>
+            <CloseIcon onClick={openNaveList} className="top-right"/>
+            { displayNavigators(row.navigators) }</div>
         }
           { (row.passed_tests.length > 0 || row.failed_tests.length > 0)  && 
             <Accordion sx={{ m: 2 }}>
@@ -506,6 +509,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     headerName: 'Benefit',
     flex: 1,
     colSpan: ({ row }) => {
+      console.log(row)
       if (row.path.indexOf('Detail') !== -1) {
         return 4;
       }
