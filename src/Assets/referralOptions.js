@@ -5,6 +5,7 @@ const referralOptions = {
   taxAssistanceSite: 'Tax Assistance Site (VITA/Tax Help Colorado)',
   auroraCC: 'Aurora Community Connection',
   jeffcoPP: 'Jeffco Prosperity Partners',
+  projectWorthmore: 'Project Worthmore',
   bia: 'Benefits in Action',
   villageExchange: 'Village Exchange',
   theFax: 'The Fax',
