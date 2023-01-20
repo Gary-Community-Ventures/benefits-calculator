@@ -6,7 +6,15 @@ import { Button, FormControlLabel, Link, Typography, Accordion, AccordionSummary
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
-import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
+import {
+	DataGridPro,
+	GridRowsProp,
+	DataGridProProps,
+	useGridSelector,
+	useGridApiContext,
+	gridFilteredDescendantCountLookupSelector,
+	GridLinkOperator,
+} from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
@@ -30,7 +38,20 @@ export const isNavigationKey = (key) =>
 const Results = ({ results, setResults, formData, programSubset, passedOrFailedTests }) => {
   const navigate = useNavigate();
   const locale = useContext(Context).locale;
-  const [filt, setFilt] = useState([]);
+  const [filt, setFilt] = useState([
+		{
+			id: 1,
+			columnField: 'citizenship',
+			operatorValue: 'startsWith',
+			value: 'none',
+		},
+		{
+			id: 3,
+			columnField: 'citizenship',
+			operatorValue: 'startsWith',
+			value: 'citizen',
+		},
+	]);
 
   useEffect(() => {
     if (results.screenerId === 0) {
@@ -480,7 +501,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         hideFooter={true}
         rows={rows} 
         columns={columns} 
-        filterModel={{ items: filt }}
+        filterModel={{ items: filt, linkOperator: GridLinkOperator.Or }}
         sx={{
           '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': { py: '8px' },
           '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': { py: '15px' },
@@ -534,15 +555,35 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   const handleCustomSwitchToggle = (e) => {
     if (e.target.checked) {
       setFilt([
-        {
-          columnField: "citizenship",
-          operatorValue: "startsWith",
-          value: "None"
-        }
-      ])
+				{
+					id: 1,
+					columnField: 'citizenship',
+					operatorValue: 'startsWith',
+					value: 'none',
+				},
+				{
+					id: 2,
+					columnField: 'citizenship',
+					operatorValue: 'startsWith',
+					value: 'non-citizen',
+				},
+			]);
     }
     else {
-      setFilt([])
+      setFilt([
+				{
+					id: 1,
+					columnField: 'citizenship',
+					operatorValue: 'startsWith',
+					value: 'none',
+				},
+				{
+					id: 3,
+					columnField: 'citizenship',
+					operatorValue: 'startsWith',
+					value: 'citizen',
+				},
+			]);
     }
   }
 
