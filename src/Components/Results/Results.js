@@ -463,7 +463,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
             variant='contained'
             target="_blank"
             onClick={openNaveList}
-            sx={{'margin-left': '5px'}}>
+            sx={{marginLeft: '5px'}}>
             <FormattedMessage 
               id='results.resultsRow-applyWithAssistance' 
               defaultMessage='Apply With Assistance' />
