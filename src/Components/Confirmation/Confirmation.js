@@ -350,7 +350,7 @@ const Confirmation = ({ formData }) => {
             defaultMessage='Referral Source: ' /> 
         </b>
         { finalReferralSource }
-        <Link to='/step-17' className='edit-link'>
+        <Link to='/step-18' className='edit-link'>
           <FormattedMessage 
             id='confirmation.editLinkText' 
             defaultMessage='Edit' />
