@@ -257,7 +257,7 @@ const Confirmation = ({ formData }) => {
             defaultMessage='Your household: ' />
         </b>
         { householdSize } { householdSizeDescriptor }
-        <Link to='/step-13' className='edit-link'>
+        <Link to='/step-14' className='edit-link'>
           <FormattedMessage 
             id='confirmation.editLinkText' 
             defaultMessage='Edit' />
