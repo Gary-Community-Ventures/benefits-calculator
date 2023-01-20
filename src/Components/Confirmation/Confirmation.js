@@ -302,7 +302,7 @@ const Confirmation = ({ formData }) => {
             defaultMessage='Last Tax Filing Year: ' />
         </b>
         {taxYearOptions[lastTaxFilingYear]}
-        <Link to='/step-16' className='edit-link'>
+        <Link to='/step-17' className='edit-link'>
           <FormattedMessage 
             id='confirmation.editLinkText' 
             defaultMessage='Edit' />
