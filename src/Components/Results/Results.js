@@ -232,9 +232,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const totalDollarAmount = (results) => {
     const total = results.reduce((total, program) => {
-      if (filt.length > 0 && program.legal_status_required !== 'citizen') {
+      if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
         total += program.estimated_value;
-      } else if (filt.length === 0){
+      } else if (filt[1].value === 'citizen' && program.legal_status_required !== 'non-citizen'){
         total += program.estimated_value;
       }
       return total;
@@ -245,9 +245,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const totalDollarAmountMonthly = (results) => {
     const total = results.reduce((total, program) => {
-      if (filt.length > 0 && program.legal_status_required !== 'citizen') {
+      if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
         total += Math.round(program.estimated_value / 12);
-      } else if (filt.length === 0) {
+      } else if (filt[1].value === 'citizen' && program.legal_status_required !== 'non-citizen') {
         total += Math.round(program.estimated_value / 12);
       }
       return total;
