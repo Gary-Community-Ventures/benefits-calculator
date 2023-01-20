@@ -70,8 +70,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 			.filter((program) => program.eligible === true && !formData.benefits[program.name_abbreviated])
 			.sort((benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value);
     const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
-    console.log('backend')
-    console.log(unqualifiedPrograms)
 
     setResults({ 
       eligiblePrograms: qualifiedPrograms, 
@@ -252,7 +250,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const displayNavigators = (navigators) => {
-    console.log(navigators)
     //https://stackoverflow.com/questions/8358084/regular-expression-to-reformat-a-us-phone-number-in-javascript
     function formatPhoneNumber(phoneNumberString) {
 			const cleaned = ('' + phoneNumberString).replace(/\D/g, '');
@@ -360,8 +357,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const DataGridRows = (results) => {
-    console.log('dataGrid')
-    console.log(results)
     let dgr = [];
     let count = 0;
     for (let i = 0; i < results.length; i++) {
@@ -509,7 +504,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     headerName: 'Benefit',
     flex: 1,
     colSpan: ({ row }) => {
-      console.log(row)
       if (row.path.indexOf('Detail') !== -1) {
         return 4;
       }
