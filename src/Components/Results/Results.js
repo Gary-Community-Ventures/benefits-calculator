@@ -474,10 +474,11 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               defaultMessage='Apply With Assistance' />
           </Button>
         }
-        { (row.navigators.length > 0)  && 
-          <div className={`navigator-list ${navListOpen?'':'hide'}`}>
+        { (row.navigators.length > 0 && navListOpen)  && 
+          <div className='navigator-list'>
             <CloseIcon onClick={openNaveList} className="top-right"/>
-            { displayNavigators(row.navigators) }</div>
+            { displayNavigators(row.navigators) }
+          </div>
         }
           { (row.passed_tests.length > 0 || row.failed_tests.length > 0)  && 
             <Accordion sx={{ m: 2 }}>
