@@ -22,8 +22,6 @@ const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const urlSearchParams = location.search;
-  // console.log({location})
-  // console.log({urlSearchParams})
   const [searchParams] = useSearchParams();
   const isTest = searchParams.get('test') ? searchParams.get('test') : false;
   const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
@@ -32,7 +30,7 @@ const App = () => {
   const theme = createTheme(styleOverrides);
 
   const initialFormData = {
-    isTest: true,
+    isTest: isTest,
     externalID: externalId,
     agreeToTermsOfService: false,
     age: '',
