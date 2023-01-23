@@ -284,7 +284,6 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 								{navigator.phone_number && (
 									<h4>Phone Number: {formatPhoneNumber(navigator.phone_number)}</h4>
 								)}
-                <br />
 							</div>
 						);
           }).reduce((accu, elem) => {
