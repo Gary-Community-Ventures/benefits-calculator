@@ -1,22 +1,14 @@
 const apiKey = "Token " + process.env.REACT_APP_API_KEY;
+const domain = process.env.REACT_APP_DOMAIN_URL;
 
-const screensEndpoint = 'https://cobenefits-api.herokuapp.com/api/screens/';
-const householdsEndpoint = 'https://cobenefits-api.herokuapp.com/api/householdmembers/';
-const incomeStreamsEndpoint = 'https://cobenefits-api.herokuapp.com/api/incomestreams/';
-const expensesEndpoint = 'https://cobenefits-api.herokuapp.com/api/expenses/';
-const userEndpoint = 'https://cobenefits-api.herokuapp.com/api/users/';
-const messageEndpoint = 'https://cobenefits-api.herokuapp.com/api/messages/';
-let eligibilityEndpoint = 'https://cobenefits-api.herokuapp.com/api/eligibility/';
-let screensUpdateEndpoint = 'https://cobenefits-api.herokuapp.com/api/screens/';
-
-// const screensEndpoint = 'http://127.0.0.1:8000/api/screens/';
-// const householdsEndpoint = 'http://127.0.0.1:8000/api/householdmembers/';
-// const incomeStreamsEndpoint = 'http://127.0.0.1:8000/api/incomestreams/';
-// const expensesEndpoint = 'http://127.0.0.1:8000/api/expenses/';
-// const userEndpoint = 'http://127.0.0.1:8000/api/users/';
-// const messageEndpoint = 'http://127.0.0.1:8000/api/messages/';
-// let eligibilityEndpoint = 'http://127.0.0.1:8000/api/eligibility/';
-// let screensUpdateEndpoint = 'http://127.0.0.1:8000/api/screens/';
+const screensEndpoint = `${domain}/api/screens/`;
+const householdsEndpoint = `${domain}/api/householdmembers/`;
+const incomeStreamsEndpoint = `${domain}/api/incomestreams/`;
+const expensesEndpoint = `${domain}/api/expenses/`;
+const userEndpoint = `${domain}/api/users/`;
+const messageEndpoint = `${domain}/api/messages/`;
+let eligibilityEndpoint = `${domain}/api/eligibility/`;
+let screensUpdateEndpoint = `${domain}/api/screens/`;
 
 const header = {
   'Accept': 'application/json',
