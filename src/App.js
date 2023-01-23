@@ -255,8 +255,12 @@ const App = () => {
 
   const clearLocalStorageFormDataAndResults = () => {
     localStorage.clear();
-    setFormData(initialFormData);
-    setResults(initialResults);
+    //the setTimeout function was added in order to make sure that you don't clear and 
+    //set the formData and results at the same time
+    setTimeout(() => {
+      setFormData(initialFormData);
+      setResults(initialResults);
+    }, '100');
   }
 
   return (
