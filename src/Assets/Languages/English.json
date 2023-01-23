@@ -272,6 +272,7 @@
   "results.resultsTable-sorryNoProgramsWereFoundLabel": "Sorry, we were not able to find any programs for you based on the information that was provided.",
   "results.resultsRow-applyButton": "Apply",
   "results.resultsRow-expandForEligibilityLink": "Expand for eligibility details",
+  "results.resultsRow-applyWithAssistance": "Apply with assistance",
   "results.resultsRow-reducedExpensesText": "reduced expenses",
   "results.resultsRow-cashText": "cash",
   "results.resultsRow-reducedCostText": "reduced cost services",

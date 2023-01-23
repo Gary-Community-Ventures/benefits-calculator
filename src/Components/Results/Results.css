@@ -12,3 +12,35 @@
   cursor: pointer;
   color: #4ecdc4;
 }
+
+.navigator-list {
+  position: relative;
+  background-color: white;
+  padding: 0rem 1rem 0rem 1rem;
+  box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+}
+
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}
+
+.line-seperator {
+  color: #505c66;
+}
+
+.navigator-section {
+  padding-bottom: 1rem;
+}
+
+.navigator-header{
+  font-size: 1rem;
+  font-weight: 500;
+  padding-top: 1rem;
+}
+
+.navigator-link {
+  font-size: 0.875rem;
+}
