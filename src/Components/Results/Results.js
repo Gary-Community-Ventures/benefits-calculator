@@ -268,7 +268,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
           { navigators.map(navigator => {
             return (
 							<div>
-								<h2>{navigator.name}</h2>
+								<h2 className='navigator-header'>{navigator.name}</h2>
 								<p>
 									<em>{navigator.description}</em>
 								</p>

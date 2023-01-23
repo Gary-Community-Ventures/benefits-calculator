@@ -34,3 +34,8 @@
 .line-seperator {
   color: #505c66;
 }
+
+.navigator-header{
+  font-size: 1rem;
+  font-weight: 500;
+}
