@@ -22,6 +22,8 @@ const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const urlSearchParams = location.search;
+  // console.log({location})
+  // console.log({urlSearchParams})
   const [searchParams] = useSearchParams();
   const isTest = searchParams.get('test') ? searchParams.get('test') : false;
   const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
@@ -30,7 +32,7 @@ const App = () => {
   const theme = createTheme(styleOverrides);
 
   const initialFormData = {
-    isTest: isTest,
+    isTest: true,
     externalID: externalId,
     agreeToTermsOfService: false,
     age: '',
@@ -255,8 +257,11 @@ const App = () => {
 
   const clearLocalStorageFormDataAndResults = () => {
     localStorage.clear();
-    setFormData(initialFormData);
-    setResults(initialResults);
+    setTimeout(() => {
+      setFormData(initialFormData);
+      setResults(initialResults);
+      console.log({formData})
+    },'1000')
   }
 
   return (
