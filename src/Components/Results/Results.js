@@ -267,22 +267,28 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         <>
           { navigators.map(navigator => {
             return (
-							<div>
-								<h2 className='navigator-header'>{navigator.name}</h2>
+							<div className="navigator-section">
+								<h2 className="navigator-header">{navigator.name}</h2>
 								<p>
 									<em>{navigator.description}</em>
 								</p>
 								<br />
 								{navigator.assistance_link && (
 									<h4>
-										Link: <a href={navigator.assistance_link}>
+										Link:{' '}
+										<a
+											href={navigator.assistance_link}
+											className="ineligibility-link navigator-link"
+										>
 											{navigator.assistance_link}
 										</a>
 									</h4>
 								)}
 								{navigator.email && <h4>Email: {navigator.email}</h4>}
 								{navigator.phone_number && (
-									<h4>Phone Number: {formatPhoneNumber(navigator.phone_number)}</h4>
+									<h4>
+										Phone Number: {formatPhoneNumber(navigator.phone_number)}
+									</h4>
 								)}
 							</div>
 						);
