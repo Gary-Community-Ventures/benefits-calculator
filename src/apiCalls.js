@@ -1,15 +1,6 @@
 const apiKey = "Token " + process.env.REACT_APP_API_KEY;
 const domain = process.env.REACT_APP_DOMAIN_URL;
 
-// const screensEndpoint = 'https://cobenefits-api.herokuapp.com/api/screens/';
-// const householdsEndpoint = 'https://cobenefits-api.herokuapp.com/api/householdmembers/';
-// const incomeStreamsEndpoint = 'https://cobenefits-api.herokuapp.com/api/incomestreams/';
-// const expensesEndpoint = 'https://cobenefits-api.herokuapp.com/api/expenses/';
-// const userEndpoint = 'https://cobenefits-api.herokuapp.com/api/users/';
-// const messageEndpoint = 'https://cobenefits-api.herokuapp.com/api/messages/';
-// let eligibilityEndpoint = 'https://cobenefits-api.herokuapp.com/api/eligibility/';
-// let screensUpdateEndpoint = 'https://cobenefits-api.herokuapp.com/api/screens/';
-
 const screensEndpoint = `${domain}/api/screens/`;
 const householdsEndpoint = `${domain}/api/householdmembers/`;
 const incomeStreamsEndpoint = `${domain}/api/incomestreams/`;
