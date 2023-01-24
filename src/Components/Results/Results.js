@@ -551,6 +551,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const handleCustomSwitchToggle = (e) => {
+    // Filter out citizen benefits when toggle is on
+    // Filter out non-citizen benifits when toggle is off
     if (e.target.checked) {
       setFilt([
 				{
