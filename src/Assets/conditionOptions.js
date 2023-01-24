@@ -24,7 +24,7 @@ const conditionOptions = {
   veteran: 
     <FormattedMessage 
       id='conditionOptions.veteran' 
-      defaultMessage='Served in the U.S. Armed Forces, National Guard or Reserves' />,
+      defaultMessage='Are serving or have served in the U.S. Armed Forces, National Guard or Reserves' />,
   noneOfTheseApply: 
     <FormattedMessage 
       id='conditionOptions.noneOfTheseApply' 
