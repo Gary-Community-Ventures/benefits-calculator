@@ -229,7 +229,16 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       return false;
     }
   }
-
+  const totalEligible = (results) => {
+    return results.reduce((total, program) => {
+      if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
+        total += 1;
+      } else if (filt[1].value === 'citizen' && program.legal_status_required !== 'non-citizen'){
+        total += 1;
+      }
+      return total;
+    }, 0)
+  }
   const totalDollarAmount = (results) => {
     const total = results.reduce((total, program) => {
       if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
@@ -275,7 +284,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         <>
           <Grid xs={12} item={true}>
             <Typography className='sub-header' variant="h6"> 
-              {results[programSubset].length} 
+              {totalEligible(results[programSubset])} 
               <FormattedMessage 
                 id='results.return-programsUpToLabel' 
                 defaultMessage=' programs, up to ' /> 
