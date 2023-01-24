@@ -7,7 +7,15 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
-import { DataGridPro, GridRowsProp, DataGridProProps, useGridSelector, useGridApiContext, gridFilteredDescendantCountLookupSelector} from '@mui/x-data-grid-pro';
+import {
+	DataGridPro,
+	GridRowsProp,
+	DataGridProProps,
+	useGridSelector,
+	useGridApiContext,
+	gridFilteredDescendantCountLookupSelector,
+	GridLinkOperator,
+} from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
@@ -31,7 +39,20 @@ export const isNavigationKey = (key) =>
 const Results = ({ results, setResults, formData, programSubset, passedOrFailedTests }) => {
   const navigate = useNavigate();
   const locale = useContext(Context).locale;
-  const [filt, setFilt] = useState([]);
+  const [filt, setFilt] = useState([
+		{
+			id: 1,
+			columnField: 'citizenship',
+			operatorValue: 'startsWith',
+			value: 'none',
+		},
+		{
+			id: 3,
+			columnField: 'citizenship',
+			operatorValue: 'startsWith',
+			value: 'citizen',
+		},
+	]);
 
   useEffect(() => {
     if (results.screenerId === 0) {
@@ -210,30 +231,28 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     }
   }
 
-  const totalDollarAmount = (results) => {
-    const total = results.reduce((total, program) => {
-      if (filt.length > 0 && program.legal_status_required !== 'citizen') {
-        total += program.estimated_value;
-      } else if (filt.length === 0){
-        total += program.estimated_value;
+  const totalEligiblePrograms = (results) => {
+    return results.reduce((total, program) => {
+      if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
+        total += 1;
+      } else if (filt[1].value === 'citizen' && program.legal_status_required !== 'non-citizen'){
+        total += 1;
       }
       return total;
     }, 0);
-    
-    return total.toLocaleString();
   }
 
-  const totalDollarAmountMonthly = (results) => {
+  const totalDollarAmount = (results) => {
     const total = results.reduce((total, program) => {
-      if (filt.length > 0 && program.legal_status_required !== 'citizen') {
-        total += Math.round(program.estimated_value / 12);
-      } else if (filt.length === 0) {
-        total += Math.round(program.estimated_value / 12);
+      if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
+        total += program.estimated_value;
+      } else if (filt[1].value === 'citizen' && program.legal_status_required !== 'non-citizen'){
+        total += program.estimated_value;
       }
       return total;
     }, 0);
     
-    return total.toLocaleString();
+    return total;
   }
 
   const displayTestResults = (tests) => {
@@ -307,15 +326,15 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         <>
           <Grid xs={12} item={true}>
             <Typography className='sub-header' variant="h6"> 
-              {results[programSubset].length} 
+              {totalEligiblePrograms(results[programSubset])} 
               <FormattedMessage 
                 id='results.return-programsUpToLabel' 
                 defaultMessage=' programs, up to ' /> 
-              ${totalDollarAmount(results[programSubset])} 
+              ${totalDollarAmount(results[programSubset]).toLocaleString()} 
               <FormattedMessage 
                 id='results.return-perYearOrLabel' 
                 defaultMessage=' per year or ' />
-              ${totalDollarAmountMonthly(results[programSubset])} 
+              ${Math.round(totalDollarAmount(results[programSubset])/12).toLocaleString()} 
               <FormattedMessage 
                 id='results.return-perMonthLabel' 
                 defaultMessage=' per month for you to consider' />
@@ -554,7 +573,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         hideFooter={true}
         rows={rows} 
         columns={columns} 
-        filterModel={{ items: filt }}
+        filterModel={{ items: filt, linkOperator: GridLinkOperator.Or }}
         sx={{
           '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': { py: '8px' },
           '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': { py: '15px' },
@@ -607,17 +626,39 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const handleCustomSwitchToggle = (e) => {
+    // Filter out citizen benefits when toggle is on
+    // Filter out non-citizen benifits when toggle is off
     if (e.target.checked) {
       setFilt([
-        {
-          columnField: "citizenship",
-          operatorValue: "startsWith",
-          value: "None"
-        }
-      ])
+				{
+					id: 1,
+					columnField: 'citizenship',
+					operatorValue: 'startsWith',
+					value: 'none',
+				},
+				{
+					id: 2,
+					columnField: 'citizenship',
+					operatorValue: 'startsWith',
+					value: 'non-citizen',
+				},
+			]);
     }
     else {
-      setFilt([])
+      setFilt([
+				{
+					id: 1,
+					columnField: 'citizenship',
+					operatorValue: 'startsWith',
+					value: 'none',
+				},
+				{
+					id: 3,
+					columnField: 'citizenship',
+					operatorValue: 'startsWith',
+					value: 'citizen',
+				},
+			]);
     }
   }
 
