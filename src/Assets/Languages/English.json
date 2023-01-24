@@ -131,7 +131,7 @@
   "conditionOptions.unemployed": "Unemployed",
   "conditionOptions.blindOrVisuallyImpaired": "Blind or visually impaired",
   "conditionOptions.disabled": "Have any disabilities",
-  "conditionOptions.veteran": "Served in the U.S. Armed Forces, National Guard or Reserves",
+  "conditionOptions.veteran": "Are serving or have served in the U.S. Armed Forces, National Guard or Reserves",
   "conditionOptions.noneOfTheseApply": "None of these apply",
   "householdDataBlock.createFTStudentRadioQuestion-ariaLabel": "is a full-time student",
   "householdDataBlock.createFTStudentRadioQuestion-questionLabel": "Are they a full-time student?",

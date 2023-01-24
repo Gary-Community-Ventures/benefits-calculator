@@ -131,7 +131,7 @@
   "conditionOptions.unemployed": "Sin empleo",
   "conditionOptions.blindOrVisuallyImpaired": "Ciego o con problemas de visión",
   "conditionOptions.disabled": "Tiene alguna discapacidad",
-  "conditionOptions.veteran": "Sirvió en las Fuerzas Armadas, Guardia Nacional o Reservas de Estados Unidos",
+  "conditionOptions.veteran": "Está sirviendo o ha servido en las Fuerzas Armadas de los EE. UU, Guardia Nacional o las Reservas", 
   "conditionOptions.noneOfTheseApply": "Ninguna de las opciones anteriores",
   "householdDataBlock.createFTStudentRadioQuestion-ariaLabel": "es estudiante de tiempo completo",
   "householdDataBlock.createFTStudentRadioQuestion-questionLabel": "¿Es estudiante de tiempo completo?",
