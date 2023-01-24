@@ -47,7 +47,7 @@
   "questions.blindOrVisuallyImpaired-ariaLabel": "es ciego o tiene problemas de visión",
   "questions.disabled": "¿Tiene alguna discapacidad que le imposibilite trabajar ahora o en el futuro?",
   "questions.disabled-ariaLabel": "tiene alguna discapacidad",
-  "questions.veteran": "¿Sirvió en las Fuerzas Armadas, Guardia Nacional o Reservas de Estados Unidos?",
+  "questions.veteran": "¿Sirve o ha servido en las Fuerzas Armadas de los EE.UU, Guardia Nacional o Reservas?",
   "questions.veteran-ariaLabel": "es veterano",
   "questions.hasIncome": "¿Tiene ingresos?",
   "questions.hasIncome-description" : "El ingreso es el dinero que gana o recibe antes de deducir impuestos. Esto incluye dinero de trabajos, pensión alimenticia, inversiones o regalos. Ingrese ingresos solo para usted. Tendrá la oportunidad de ingresar ingresos para otros miembros del hogar más adelante.",

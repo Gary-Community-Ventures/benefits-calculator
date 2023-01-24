@@ -246,7 +246,7 @@ const questions = [
     question:
       <FormattedMessage
         id='questions.veteran'
-        defaultMessage='Have you served in the U.S. Armed Forces, National Guard or Reserves?' />,
+        defaultMessage='Do you serve or have you served in the U.S. Armed Forces, National Guard or Reserves?' />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'questions.veteran-ariaLabel',

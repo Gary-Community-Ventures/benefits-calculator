@@ -47,7 +47,7 @@
   "questions.blindOrVisuallyImpaired-ariaLabel": "is blind or visually impaired",
   "questions.disabled": "Do you have any disabilities that make you unable to work now or in the future?",
   "questions.disabled-ariaLabel": "has any disabilities",
-  "questions.veteran": "Have you served in the U.S. Armed Forces, National Guard or Reserves?",
+  "questions.veteran": "Do you serve or have you served in the U.S. Armed Forces, National Guard or Reserves?",
   "questions.veteran-ariaLabel": "is a veteran",
   "questions.hasIncome": "Do you have an income?",
   "questions.hasIncome-description" : "Income is the money you earn or receive before deducting taxes. This includes money from jobs, alimony, investments, or gifts. Enter income for yourself only. You will have a chance to enter income for other household members later.",
