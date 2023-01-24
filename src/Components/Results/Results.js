@@ -18,7 +18,7 @@ import {
   postHouseholdMemberExpense,
   getEligibility,
   postUser
-} from "../../apiCalls";
+} from '../../apiCalls';
 import './Results.css';
 
 export const isNavigationKey = (key) =>
@@ -306,7 +306,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       return (
         <>
           <Grid xs={12} item={true}>
-            <Typography className='sub-header' variant="h6"> 
+            <Typography className='sub-header' variant='h6'> 
               {results[programSubset].length} 
               <FormattedMessage 
                 id='results.return-programsUpToLabel' 
@@ -329,7 +329,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   defaultMessage='To receive a copy of these results by email please click the email results button.' />
               </Typography>
             </Grid>
-            <Grid xs={12} item={true} sm={2} justifyContent="end">
+            <Grid xs={12} item={true} sm={2} justifyContent='end'>
               <Box justifyContent='end' display='flex'>
                 <Button
                   sx={{mb: 2, mt: 1}}
@@ -351,7 +351,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     } else if (benefitsSubset === 'ineligiblePrograms') {
       return (
         <Grid xs={12} item={true}>
-          <Typography className='sub-header' variant="h6">
+          <Typography className='sub-header' variant='h6'>
             <FormattedMessage 
               id='results.displaySubheader-basedOnInformationText' 
               defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
@@ -449,15 +449,15 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
           <Typography variant='body1' sx={{ fontStyle: 'italic', marginBottom: 2 }}>
             <FormattedMessage
               id='results.return-estimatedDeliveryTimeA'
-              defaultMessage="*On average people who are approved for this benefit start receiving it " />
+              defaultMessage='*On average people who are approved for this benefit start receiving it ' />
             {row.delivery_time}
             <FormattedMessage
               id='results.return-estimatedDeliveryTimeB'
-              defaultMessage=" after completing the application." />
+              defaultMessage=' after completing the application.' />
           </Typography>
           <Button
             variant='contained'
-            target="_blank"
+            target='_blank'
             href={row.application_link}>
             <FormattedMessage 
               id='results.resultsRow-applyButton' 
@@ -466,7 +466,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         { (row.navigators.length > 0)  && 
           <Button
             variant='contained'
-            target="_blank"
+            target='_blank'
             onClick={openNaveList}
             sx={{marginLeft: '5px'}}>
             <FormattedMessage 
@@ -476,7 +476,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         }
         { (row.navigators.length > 0 && navListOpen)  && 
           <div className='navigator-list'>
-            <CloseIcon onClick={openNaveList} className="top-right"/>
+            <CloseIcon onClick={openNaveList} className='top-right'/>
             { displayNavigators(row.navigators) }
           </div>
         }
@@ -484,8 +484,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
             <Accordion sx={{ m: 2 }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"> 
+                aria-controls='panel1a-content'
+                id='panel1a-header'> 
                   <Typography variant='body2'>
                     <Link>
                       <FormattedMessage 
@@ -599,7 +599,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     return (
       <div>
         {formatted_value}
-        <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
+        <Typography variant='body2' sx={{ fontStyle: 'italic' }}>
           {row.type}
         </Typography>
       </div>
@@ -610,9 +610,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     if (e.target.checked) {
       setFilt([
         {
-          columnField: "citizenship",
-          operatorValue: "startsWith",
-          value: "None"
+          columnField: 'citizenship',
+          operatorValue: 'startsWith',
+          value: 'None'
         }
       ])
     }
@@ -626,7 +626,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       <div className='results-container'>
         <Grid container spacing={2}>
           { results.isLoading ? 
-            <Grid container xs={12} item={true} justifyContent="center" alignItems="center">
+            <Grid container xs={12} item={true} justifyContent='center' alignItems='center'>
               <Grid xs={6} sx={{mt: 5}} item={true}>
                 <Loading />
               </Grid>
@@ -645,7 +645,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               </Grid>
               <Grid xs={12} item={true}>
                 <FormControlLabel
-                  label={<FormattedMessage id='results.returnsignupCitizenFilter' defaultMessage="Only show benefits that do not require a citizen in the household" />}
+                  label={<FormattedMessage id='results.returnsignupCitizenFilter' defaultMessage='Only show benefits that do not require a citizen in the household' />}
                   control={<CustomSwitch handleCustomSwitchToggle={handleCustomSwitchToggle} /> }
                 />
                 { DataGridTable(results[programSubset])}
