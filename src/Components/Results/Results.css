@@ -31,8 +31,9 @@
   color: #505c66;
 }
 
-.navigator-section {
+.navigator-container {
   padding-bottom: 1rem;
+  line-height: 1.5rem;
 }
 
 .navigator-header{
@@ -43,4 +44,14 @@
 
 .navigator-link {
   font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.navigator-desc {
+  font-style: italic;
+  margin-bottom: .5rem;
+}
+
+.font-weight {
+  font-weight: 500;
 }

@@ -258,31 +258,29 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     }
   }
 
+  const displayNavigators = (navigators) => {    
     if (navigators.length) {
       return (
         <>
           { navigators.map(navigator => {
             return (
-							<div className="navigator-section">
-								<h2 className="navigator-header">{navigator.name}</h2>
-								<p>
-									<em>{navigator.description}</em>
-								</p>
-								<br />
+							<div className='navigator-container'>
+								<h2 className='navigator-header'>{navigator.name}</h2>
+								<p className='navigator-desc'>{navigator.description}</p>
 								{navigator.assistance_link && (
-									<h4>
+									<h4 className='font-weight'>
 										Link:{' '}
 										<a
 											href={navigator.assistance_link}
-											className="ineligibility-link navigator-link"
+											className='ineligibility-link navigator-link'
 										>
 											{navigator.assistance_link}
 										</a>
 									</h4>
 								)}
-								{navigator.email && <h4>Email: {navigator.email}</h4>}
+								{navigator.email && <h4 className='font-weight'>Email: {navigator.email}</h4>}
 								{navigator.phone_number && (
-									<h4>
+									<h4 className='font-weight'>
 										Phone Number: {formatPhoneNumber(navigator.phone_number)}
 									</h4>
 								)}
@@ -293,7 +291,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 						return accu === null ? [elem] : [...accu, <hr className='line-seperator'></hr>, elem];
 					}, null)}
         </>
-      )
+      );
     }
   }
 
