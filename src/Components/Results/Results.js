@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment, useContext } from 'react';
+import { useEffect, useState, Fragment, useContext, useRef } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -60,6 +60,15 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     }
   }, []);
 
+  const firstUpdate = useRef(true);
+  useEffect(() => {
+    if (!firstUpdate.current) {
+      responseLanguage();
+    } else {
+      firstUpdate.current = false;
+    }
+  }, [locale, results.rawResponse])
+
   const fetchResults = async () => {
     let userId = 0 ;
 
@@ -85,21 +94,42 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     }
 
     const rawEligibilityResponse = await getEligibility(screensResponse.id, locale);
-    const languageCode = locale.toLowerCase();
-    const eligibilityResponse = rawEligibilityResponse.translations[languageCode];
-    const qualifiedPrograms = eligibilityResponse
-			.filter((program) => program.eligible === true && !formData.benefits[program.name_abbreviated])
-			.sort((benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value);
-    const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
-
-    setResults({ 
-      eligiblePrograms: qualifiedPrograms, 
-      ineligiblePrograms: unqualifiedPrograms, 
-      screenerId: screensResponse.id, 
-      isLoading: false,
-      user: userId
-    });
+    setResults({
+			eligiblePrograms: [],
+			ineligiblePrograms: [],
+			rawResponse: {
+				response: rawEligibilityResponse,
+				screen: screensResponse,
+				userId: userId,
+			},
+			screenerId: 0,
+			isLoading: true,
+			user: 0,
+		});
   }
+
+  const responseLanguage= () => {
+    const rawEligibility = results.rawResponse
+		const languageCode = locale.toLowerCase();
+		const eligibilityResponse = rawEligibility.response.translations[languageCode];
+		const qualifiedPrograms = eligibilityResponse
+			.filter(
+				(program) => program.eligible === true && !formData.benefits[program.name_abbreviated]
+			)
+			.sort(
+				(benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value
+			);
+		const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
+
+		setResults({
+			eligiblePrograms: qualifiedPrograms,
+			ineligiblePrograms: unqualifiedPrograms,
+      rawResponse: results.rawResponse,
+			screenerId: rawEligibility.screen.id,
+			isLoading: false,
+			user: rawEligibility.userId,
+		});
+	};
 
   const getScreensBody = (formData, languageCode, userId) => {
     const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets, startTime, isTest, 

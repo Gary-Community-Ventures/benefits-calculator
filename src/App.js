@@ -105,6 +105,7 @@ const App = () => {
   const initialResults = {
     eligiblePrograms: [], 
     ineligiblePrograms: [],
+    rawResponse: {},
     screenerId: 0,
     isLoading: true,
     user: 0
@@ -169,7 +170,7 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem('formData', JSON.stringify(formData));
-    localStorage.setItem('results', JSON.stringify(results));
+    localStorage.setItem('results', JSON.stringify(results))
 
   }, [formData, results]);
 
@@ -308,7 +309,9 @@ const App = () => {
             <Route 
               path='/ineligible-results' 
               element={<Results 
+                formData={formData}
                 results={results}
+                setResults={setResults}
                 programSubset='ineligiblePrograms' 
                 passedOrFailedTests='failed_tests' /> } />
             <Route
