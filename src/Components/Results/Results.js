@@ -229,7 +229,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       return false;
     }
   }
-  const totalEligible = (results) => {
+
+  const totalEligiblePrograms = (results) => {
     return results.reduce((total, program) => {
       if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
         total += 1;
@@ -237,8 +238,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         total += 1;
       }
       return total;
-    }, 0)
+    }, 0);
   }
+
   const totalDollarAmount = (results) => {
     const total = results.reduce((total, program) => {
       if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
@@ -249,20 +251,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       return total;
     }, 0);
     
-    return total.toLocaleString();
-  }
-
-  const totalDollarAmountMonthly = (results) => {
-    const total = results.reduce((total, program) => {
-      if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
-        total += Math.round(program.estimated_value / 12);
-      } else if (filt[1].value === 'citizen' && program.legal_status_required !== 'non-citizen') {
-        total += Math.round(program.estimated_value / 12);
-      }
-      return total;
-    }, 0);
-    
-    return total.toLocaleString();
+    return total;
   }
 
   const displayTestResults = (tests) => {
@@ -284,15 +273,15 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         <>
           <Grid xs={12} item={true}>
             <Typography className='sub-header' variant="h6"> 
-              {totalEligible(results[programSubset])} 
+              {totalEligiblePrograms(results[programSubset])} 
               <FormattedMessage 
                 id='results.return-programsUpToLabel' 
                 defaultMessage=' programs, up to ' /> 
-              ${totalDollarAmount(results[programSubset])} 
+              ${totalDollarAmount(results[programSubset]).toLocaleString()} 
               <FormattedMessage 
                 id='results.return-perYearOrLabel' 
                 defaultMessage=' per year or ' />
-              ${totalDollarAmountMonthly(results[programSubset])} 
+              ${Math.round(totalDollarAmount(results[programSubset])/12).toLocaleString()} 
               <FormattedMessage 
                 id='results.return-perMonthLabel' 
                 defaultMessage=' per month for you to consider' />
