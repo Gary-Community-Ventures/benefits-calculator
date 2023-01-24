@@ -26,7 +26,7 @@ import {
   postHouseholdMemberExpense,
   getEligibility,
   postUser
-} from "../../apiCalls";
+} from '../../apiCalls';
 import './Results.css';
 
 export const isNavigationKey = (key) =>
@@ -268,44 +268,38 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     }
   }
 
-  const displayNavigators = (navigators) => {
-    //https://stackoverflow.com/questions/8358084/regular-expression-to-reformat-a-us-phone-number-in-javascript
-    function formatPhoneNumber(phoneNumberString) {
-			const cleaned = ('' + phoneNumberString).replace(/\D/g, '');
-			const match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
-			if (match) {
-				const intlCode = match[1] ? '+1 ' : '';
-				return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join(
-					''
-				);
-			}
-			return null;
-		}
+  const formatPhoneNumber = (phoneNumberString) => {
+    const cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    const match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      const intlCode = match[1] ? '+1 ' : '';
+      return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
+    }
+  }
+
+  const displayNavigators = (navigators) => {    
     if (navigators.length) {
       return (
         <>
           { navigators.map(navigator => {
             return (
-							<div className="navigator-section">
-								<h2 className="navigator-header">{navigator.name}</h2>
-								<p>
-									<em>{navigator.description}</em>
-								</p>
-								<br />
+							<div className='navigator-container' key={navigator.name}>
+								<h2 className='navigator-header'>{navigator.name}</h2>
+								<p className='navigator-desc'>{navigator.description}</p>
 								{navigator.assistance_link && (
-									<h4>
+									<h4 className='font-weight'>
 										Link:{' '}
 										<a
 											href={navigator.assistance_link}
-											className="ineligibility-link navigator-link"
+											className='ineligibility-link navigator-link'
 										>
 											{navigator.assistance_link}
 										</a>
 									</h4>
 								)}
-								{navigator.email && <h4>Email: {navigator.email}</h4>}
+								{navigator.email && <h4 className='font-weight'>Email: {navigator.email}</h4>}
 								{navigator.phone_number && (
-									<h4>
+									<h4 className='font-weight'>
 										Phone Number: {formatPhoneNumber(navigator.phone_number)}
 									</h4>
 								)}
@@ -316,7 +310,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 						return accu === null ? [elem] : [...accu, <hr className='line-seperator'></hr>, elem];
 					}, null)}
         </>
-      )
+      );
     }
   }
 
@@ -325,7 +319,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       return (
         <>
           <Grid xs={12} item={true}>
-            <Typography className='sub-header' variant="h6"> 
+            <Typography className='sub-header' variant='h6'> 
               {totalEligiblePrograms(results[programSubset])} 
               <FormattedMessage 
                 id='results.return-programsUpToLabel' 
@@ -348,7 +342,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   defaultMessage='To receive a copy of these results by email please click the email results button.' />
               </Typography>
             </Grid>
-            <Grid xs={12} item={true} sm={2} justifyContent="end">
+            <Grid xs={12} item={true} sm={2} justifyContent='end'>
               <Box justifyContent='end' display='flex'>
                 <Button
                   sx={{mb: 2, mt: 1}}
@@ -370,7 +364,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     } else if (benefitsSubset === 'ineligiblePrograms') {
       return (
         <Grid xs={12} item={true}>
-          <Typography className='sub-header' variant="h6">
+          <Typography className='sub-header' variant='h6'>
             <FormattedMessage 
               id='results.displaySubheader-basedOnInformationText' 
               defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
@@ -468,15 +462,15 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
           <Typography variant='body1' sx={{ fontStyle: 'italic', marginBottom: 2 }}>
             <FormattedMessage
               id='results.return-estimatedDeliveryTimeA'
-              defaultMessage="*On average people who are approved for this benefit start receiving it " />
+              defaultMessage='*On average people who are approved for this benefit start receiving it ' />
             {row.delivery_time}
             <FormattedMessage
               id='results.return-estimatedDeliveryTimeB'
-              defaultMessage=" after completing the application." />
+              defaultMessage=' after completing the application.' />
           </Typography>
           <Button
             variant='contained'
-            target="_blank"
+            target='_blank'
             href={row.application_link}>
             <FormattedMessage 
               id='results.resultsRow-applyButton' 
@@ -485,7 +479,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         { (row.navigators.length > 0)  && 
           <Button
             variant='contained'
-            target="_blank"
+            target='_blank'
             onClick={openNaveList}
             sx={{marginLeft: '5px'}}>
             <FormattedMessage 
@@ -495,7 +489,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         }
         { (row.navigators.length > 0 && navListOpen)  && 
           <div className='navigator-list'>
-            <CloseIcon onClick={openNaveList} className="top-right"/>
+            <CloseIcon onClick={openNaveList} className='top-right'/>
             { displayNavigators(row.navigators) }
           </div>
         }
@@ -503,8 +497,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
             <Accordion sx={{ m: 2 }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"> 
+                aria-controls='panel1a-content'
+                id='panel1a-header'> 
                   <Typography variant='body2'>
                     <Link>
                       <FormattedMessage 
@@ -618,7 +612,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     return (
       <div>
         {formatted_value}
-        <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
+        <Typography variant='body2' sx={{ fontStyle: 'italic' }}>
           {row.type}
         </Typography>
       </div>
@@ -667,7 +661,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       <div className='results-container'>
         <Grid container spacing={2}>
           { results.isLoading ? 
-            <Grid container xs={12} item={true} justifyContent="center" alignItems="center">
+            <Grid container xs={12} item={true} justifyContent='center' alignItems='center'>
               <Grid xs={6} sx={{mt: 5}} item={true}>
                 <Loading />
               </Grid>
@@ -686,7 +680,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
               </Grid>
               <Grid xs={12} item={true}>
                 <FormControlLabel
-                  label={<FormattedMessage id='results.returnsignupCitizenFilter' defaultMessage="Only show benefits that do not require a citizen in the household" />}
+                  label={<FormattedMessage id='results.returnsignupCitizenFilter' defaultMessage='Only show benefits that do not require a citizen in the household' />}
                   control={<CustomSwitch handleCustomSwitchToggle={handleCustomSwitchToggle} /> }
                 />
                 { DataGridTable(results[programSubset])}
