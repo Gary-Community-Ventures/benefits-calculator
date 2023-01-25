@@ -15,7 +15,8 @@ import {
   displayReferralSourceHelperText,
   displayMissingSelectHelperText, 
   signUpOptionsHaveError,
-  healthInsuranceHasError
+  healthInsuranceHasError,
+  acuteHHConditionsHasError
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import taxYearOptions from './taxYearOptions';
@@ -333,7 +334,7 @@ const questions = [
       componentType: 'BasicCheckboxGroup',
       inputName: 'acuteHHConditions',
       options: acuteConditionOptions,
-      inputError: benefitsHasError
+      inputError: acuteHHConditionsHasError
     },
     headerType: 'aboutHousehold'
   },
