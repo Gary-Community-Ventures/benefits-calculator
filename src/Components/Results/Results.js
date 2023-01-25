@@ -138,6 +138,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       has_chp_hi: healthInsurance.chp,
       has_no_hi: healthInsurance.none,
       referral_source: finalReferralSource,
+      referrer_code: referralSource,
     };
 
     if (userId !== 0 && userId !== false) {
