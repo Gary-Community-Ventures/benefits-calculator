@@ -103,7 +103,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const getScreensBody = (formData, languageCode, userId) => {
     const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets, startTime, isTest, 
-      externalID, lastTaxFilingYear, benefits, healthInsurance, referralSource, otherSource } = formData;
+      externalID, lastTaxFilingYear, benefits, healthInsurance, referralSource, otherSource, acuteHHConditions } = formData;
     const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 
     const screenBody = {
@@ -138,6 +138,12 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       has_chp_hi: healthInsurance.chp,
       has_no_hi: healthInsurance.none,
       referral_source: finalReferralSource,
+      has_food: acuteHHConditions.food,
+      has_baby_supplies: acuteHHConditions.babySupplies,
+      has_housing: acuteHHConditions.housing,
+      has_support: acuteHHConditions.support,
+      has_child_dev: acuteHHConditions.childDevelopment,
+      has_loss: acuteHHConditions.loss
     };
 
     if (userId !== 0 && userId !== false) {
