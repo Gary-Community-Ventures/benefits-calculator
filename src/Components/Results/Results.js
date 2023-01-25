@@ -103,7 +103,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const getScreensBody = (formData, languageCode, userId) => {
     const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets, startTime, isTest, 
-      externalID, lastTaxFilingYear, benefits, healthInsurance, referralSource, otherSource } = formData;
+      externalID, lastTaxFilingYear, benefits, healthInsurance, referralSource, referrerCode, otherSource } = formData;
     const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 
     const screenBody = {
@@ -138,7 +138,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       has_chp_hi: healthInsurance.chp,
       has_no_hi: healthInsurance.none,
       referral_source: finalReferralSource,
-      referrer_code: referralSource,
+      referrer_code: referrerCode,
     };
 
     if (userId !== 0 && userId !== false) {
