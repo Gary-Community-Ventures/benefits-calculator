@@ -319,5 +319,8 @@
   "healthInsuranceOptions.private": "Seguro médico privado",
   "healthInsuranceOptions.medicaid": "Seguro de salud público gratuito o de bajo costo a través de Health First Colorado (Medicaid)",
   "healthInsuranceOptions.chp": "Seguro de salud de bajo costo para niños pequeños y mujeres embarazadas a través de Child Health Plan Plus (CHP+)",
-  "healthInsuranceOptions.none": "Uno o más miembros del hogar no tienen seguro médico"
+  "healthInsuranceOptions.none": "Uno o más miembros del hogar no tienen seguro médico",
+  "acuteConditionOptions.foodInsecurity": "inseguridad alimentaria",
+  "acuteConditionOptions.mentalHealthIssues": "problemas de salud mental",
+  "acuteConditionOptions.housingIssues": "problemas de vivienda"
 }

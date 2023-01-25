@@ -319,5 +319,8 @@
   "healthInsuranceOptions.private": "Private health insurance",
   "healthInsuranceOptions.medicaid": "Free or low-cost public health insurance through Health First Colorado (Medicaid)",
   "healthInsuranceOptions.chp": "Low-cost health insurance for children and pregnant women through Child Health Plan Plus (CHP+)",
-  "healthInsuranceOptions.none": "One or more household member(s) do not have health insurance"
+  "healthInsuranceOptions.none": "One or more household member(s) do not have health insurance",
+  "acuteConditionOptions.foodInsecurity": "food insecurity",
+  "acuteConditionOptions.mentalHealthIssues": "mental health issues",
+  "acuteConditionOptions.housingIssues": "housing issues"
 }
