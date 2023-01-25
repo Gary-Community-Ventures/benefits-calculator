@@ -376,6 +376,10 @@ const healthInsuranceHasError = (healthInsuranceSelections) => {
   return noOptionWasSelected;
 }
 
+const acuteHHConditionsHasError = (conditions) => {
+  return false;
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -412,5 +416,6 @@ export {
   signUpFormHasError,
   displaySignUpFormHelperText,
   signUpOptionsHaveError,
-  healthInsuranceHasError
+  healthInsuranceHasError,
+  acuteHHConditionsHasError
 }
