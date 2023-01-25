@@ -20,7 +20,7 @@ const acuteConditionOptions = {
   childDevelopment:
     <FormattedMessage 
       id='acuteConditionOptions.childDevelopment' 
-      defaultMessage="Concern about your baby's toddler's development" />,
+      defaultMessage="Concern about your baby's/toddler's development" />,
   loss:
     <FormattedMessage 
       id='acuteConditionOptions.loss' 
