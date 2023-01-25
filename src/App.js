@@ -76,6 +76,7 @@ const App = () => {
       none: false
     },
     referralSource: referrer,
+    referrer_code: referrer,
     otherSource: '',
     signUpInfo: {
       email: '',
