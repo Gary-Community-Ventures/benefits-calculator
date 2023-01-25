@@ -84,9 +84,9 @@ export const createDevFormData = (searchParams) => {
     urlSearchParams: null,
     isBIAUser: isBIAUser,
     acuteHHConditions: {
-      food: false,
+      food: true,
       babySupplies: false,
-      housing: false,
+      housing: true,
       support: false,
       childDevelopment: false,
       loss: false
