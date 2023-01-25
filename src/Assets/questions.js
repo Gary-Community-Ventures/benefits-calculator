@@ -23,6 +23,7 @@ import referralOptions from './referralOptions';
 import countiesByZipcode from './countiesByZipcode';
 import signUpOptions from './signUpOptions';
 import healthInsuranceOptions from './healthInsuranceOptions';
+import acuteConditionOptions from './acuteConditionOptions';
 import { FormattedMessage } from 'react-intl';
 
 const questions = [
@@ -323,6 +324,21 @@ const questions = [
   },
   {
     id: 14,
+    name: 'acuteHHConditions',
+    question:
+      <FormattedMessage
+        id='questions.acuteHHConditions'
+        defaultMessage='Is anyone in the household currently experiencing issues with any of the following:' />,
+    componentDetails: {
+      componentType: 'BasicCheckboxGroup',
+      inputName: 'acuteHHConditions',
+      options: acuteConditionOptions,
+      inputError: benefitsHasError
+    },
+    headerType: 'aboutHousehold'
+  },
+  {
+    id: 15,
     name: 'householdSize',
     question:
       <FormattedMessage
@@ -346,7 +362,7 @@ const questions = [
     headerType: 'aboutHousehold'
   },
   {
-    id: 15,
+    id: 16,
     name: 'householdData',
     question:
       <FormattedMessage
@@ -360,7 +376,7 @@ const questions = [
     headerType: 'householdData'
   },
   {
-    id: 16,
+    id: 17,
     name: 'householdAssets',
     question:
       <FormattedMessage
@@ -384,7 +400,7 @@ const questions = [
     headerType: 'aboutHousehold'
   },
   {
-    id: 17,
+    id: 18,
     name: 'lastTaxFilingYear',
     question:
       <FormattedMessage
@@ -422,7 +438,7 @@ const questions = [
     headerType: 'aboutHousehold'
   },
   {
-    id: 18,
+    id: 19,
     name: 'referralSource',
     question:
       <FormattedMessage
@@ -473,7 +489,7 @@ const questions = [
     }],
     headerType: 'aboutHousehold'
   },
-  { id: 19,
+  { id: 20,
     name: 'signUpInfo',
     question: 
       <FormattedMessage
