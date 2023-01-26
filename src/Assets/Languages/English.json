@@ -75,7 +75,7 @@
   "questions.signUpInfo": "What would you like us to contact you about?",
   "questions.signUpInfo-a": "Please provide your contact info below: ",
   "questions.signUpInfo-a-ariaLabel": "screener optional signup page",
-  "questions.acuteHHConditions": "Is anyone in the household currently experiencing issues with any of the following:",
+  "questions.acuteHHConditions": "Is anyone in your household in immediate need of any of the following:",
   "validation-helperText.age": "Please enter a valid age (13-130)",
   "validation-helperText.zipcode": "Please enter a valid CO zip code",
   "validation-helperText.incomeValue": "Please enter a number greater than 0",

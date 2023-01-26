@@ -329,7 +329,7 @@ const questions = [
     question:
       <FormattedMessage
         id='questions.acuteHHConditions'
-        defaultMessage='Is anyone in the household currently experiencing issues with any of the following:' />,
+        defaultMessage='Is anyone in your household in immediate need of any of the following:' />,
     componentDetails: {
       componentType: 'BasicCheckboxGroup',
       inputName: 'acuteHHConditions',
