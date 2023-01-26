@@ -143,7 +143,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       has_housing: acuteHHConditions.housing,
       has_support: acuteHHConditions.support,
       has_child_dev: acuteHHConditions.childDevelopment,
-      has_loss: acuteHHConditions.loss
+      has_funeral_expenses: acuteHHConditions.loss
     };
 
     if (userId !== 0 && userId !== false) {
