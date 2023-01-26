@@ -321,10 +321,10 @@
   "healthInsuranceOptions.medicaid": "Seguro de salud público gratuito o de bajo costo a través de Health First Colorado (Medicaid)",
   "healthInsuranceOptions.chp": "Seguro de salud de bajo costo para niños pequeños y mujeres embarazadas a través de Child Health Plan Plus (CHP+)",
   "healthInsuranceOptions.none": "Uno o más miembros del hogar no tienen seguro médico",
-  "acuteConditionOptions.food": "Acceso a alimentos",
-  "acuteConditionOptions.babySupplies": "Acceso a pañales gratuitos y otros suministros para bebés",
+  "acuteConditionOptions.food": "Alimentos o comestibles",
+  "acuteConditionOptions.babySupplies": "Pañales y otros suministros para bebés",  
   "acuteConditionOptions.housing": "Ayuda de emergencia para pagar la hipoteca, el alquiler o los servicios públicos debido a dificultades financieras",
   "acuteConditionOptions.support": "Un desafío que usted (o su hijo) tiene y que le interesaría hablar con alguien fuera de su hogar",
-  "acuteConditionOptions.childDevelopment": "Preocupación por el desarrollo de sus hijos",
+  "acuteConditionOptions.childDevelopment": "Preocupación por el desarrollo de su bebé o niño pequeño",  
   "acuteConditionOptions.loss": "Costos de funeral, entierro o cremación"
 }

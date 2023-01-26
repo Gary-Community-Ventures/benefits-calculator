@@ -4,11 +4,11 @@ const acuteConditionOptions = {
   food:
     <FormattedMessage 
       id='acuteConditionOptions.food' 
-      defaultMessage='Access to food' />,
+      defaultMessage='Food or groceries' />,
   babySupplies:
     <FormattedMessage 
       id='acuteConditionOptions.babySupplies' 
-      defaultMessage='Access to free diapers and other baby supplies' />,
+      defaultMessage='Diapers and other baby supplies' />,
   housing:
     <FormattedMessage 
       id='acuteConditionOptions.housing' 
@@ -20,7 +20,7 @@ const acuteConditionOptions = {
   childDevelopment:
     <FormattedMessage 
       id='acuteConditionOptions.childDevelopment' 
-      defaultMessage="Concern about your baby's/toddler's development" />,
+      defaultMessage="Concern about your baby or toddler's development" />,
   loss:
     <FormattedMessage 
       id='acuteConditionOptions.loss' 
