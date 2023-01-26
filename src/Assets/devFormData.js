@@ -82,6 +82,14 @@ export const createDevFormData = (searchParams) => {
       commConsent: true
     },
     urlSearchParams: null,
-    isBIAUser: null
+    isBIAUser: isBIAUser,
+    acuteHHConditions: {
+      food: true,
+      babySupplies: false,
+      housing: true,
+      support: false,
+      childDevelopment: false,
+      loss: false
+    }
   };
 };

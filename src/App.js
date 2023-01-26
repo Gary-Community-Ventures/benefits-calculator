@@ -88,7 +88,15 @@ const App = () => {
       commConsent: false
     },
     urlSearchParams: urlSearchParams,
-    isBIAUser: isBIAUser
+    isBIAUser: isBIAUser,
+    acuteHHConditions: {
+      food: false,
+      babySupplies: false,
+      housing: false,
+      support: false,
+      childDevelopment: false,
+      loss: false
+    }
   };
 
   const getCurrentState = () => {

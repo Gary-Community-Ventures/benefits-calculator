@@ -75,6 +75,7 @@
   "questions.signUpInfo": "¿Sobre qué le gustaría que nos comuniquemos con usted?",
   "questions.signUpInfo-a": "Proporcione su información de contacto a continuación: ",
   "questions.signUpInfo-a-ariaLabel": "página de registro opcional",
+  "questions.acuteHHConditions": "Hay alguien en su hogar que necesite de inmediato alguno de los siguientes:",
   "validation-helperText.age": "Ingrese una edad válida (13 a 130)",
   "validation-helperText.zipcode": "Ingrese un código postal válido de Colorado",
   "validation-helperText.incomeValue": "Ingrese un número mayor que 0",
@@ -319,5 +320,11 @@
   "healthInsuranceOptions.private": "Seguro médico privado",
   "healthInsuranceOptions.medicaid": "Seguro de salud público gratuito o de bajo costo a través de Health First Colorado (Medicaid)",
   "healthInsuranceOptions.chp": "Seguro de salud de bajo costo para niños pequeños y mujeres embarazadas a través de Child Health Plan Plus (CHP+)",
-  "healthInsuranceOptions.none": "Uno o más miembros del hogar no tienen seguro médico"
+  "healthInsuranceOptions.none": "Uno o más miembros del hogar no tienen seguro médico",
+  "acuteConditionOptions.food": "Alimentos o comestibles",
+  "acuteConditionOptions.babySupplies": "Pañales y otros suministros para bebés",  
+  "acuteConditionOptions.housing": "Ayuda de emergencia para pagar la hipoteca, el alquiler o los servicios públicos debido a dificultades financieras",
+  "acuteConditionOptions.support": "Un desafío que usted (o su hijo) tiene y que le interesaría hablar con alguien fuera de su hogar",
+  "acuteConditionOptions.childDevelopment": "Preocupación por el desarrollo de su bebé o niño pequeño",  
+  "acuteConditionOptions.loss": "Costos de funeral, entierro o cremación"
 }
