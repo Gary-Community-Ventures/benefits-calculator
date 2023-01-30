@@ -668,12 +668,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     <main className='benefits-form'>
       <div className='results-container'>
         <Grid container spacing={2}>
-          { results.isLoading ? 
-            <Grid container xs={12} item={true} justifyContent='center' alignItems='center'>
-              <Grid xs={6} sx={{mt: 5}} item={true}>
-                <Loading />
-              </Grid>
-            </Grid> : 
+          { results.isLoading ? <Loading /> : 
             <>
               <Grid container xs={12} item={true} sx={{mt: 2}} >
                 <Grid xs={12} item={true}>
