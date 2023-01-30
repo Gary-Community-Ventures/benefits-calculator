@@ -664,23 +664,29 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     }
   }
 
+  const displayHeaderSection = () => {
+    return (
+      <Grid container xs={12} item={true} sx={{mt: 2}} >
+        <Grid xs={12} item={true}>
+          <Typography className='body2'>
+            <FormattedMessage 
+              id='results.return-screenerIdLabel' 
+              defaultMessage='Screener ID: ' /> 
+            {results.screenerId}
+          </Typography>
+        </Grid>
+        { displaySubheader(programSubset) }
+      </Grid>
+    );
+  }
+
   return (
     <main className='benefits-form'>
       <div className='results-container'>
         <Grid container spacing={2}>
           { results.isLoading ? <Loading /> : 
             <>
-              <Grid container xs={12} item={true} sx={{mt: 2}} >
-                <Grid xs={12} item={true}>
-                  <Typography className='body2'>
-                    <FormattedMessage 
-                      id='results.return-screenerIdLabel' 
-                      defaultMessage='Screener ID: ' /> 
-                    {results.screenerId}
-                  </Typography>
-                </Grid>
-                { displaySubheader(programSubset) }
-              </Grid>
+              {displayHeaderSection()}
               <Grid xs={12} item={true}>
                 <FormControlLabel
                   label={<FormattedMessage id='results.returnsignupCitizenFilter' defaultMessage='Only show benefits that do not require a citizen in the household' />}
