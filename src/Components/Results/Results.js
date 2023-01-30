@@ -680,49 +680,53 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     );
   }
 
+  const displayIneligibleEligibleLink = (programSubset) => {
+    const linkText = (programSubset === 'eligiblePrograms') ?
+      <FormattedMessage 
+        id='results.return-ineligibilityLinkText' 
+        defaultMessage='* For additional information on programs 
+        that you were not eligible for click here' />
+      :
+      <FormattedMessage 
+        id='results.return-goBackToEligibleText' 
+        defaultMessage='Go back to eligible programs' /> 
+    ;
+
+    const route = (programSubset === 'eligiblePrograms') ? '/ineligible-results' : '/results';
+    
+    return (
+      <Grid xs={12} item={true}>
+        <Typography
+          sx={{mt: '.25rem'}}
+          onClick={() => {
+            navigate(`${route}`);
+            window.scrollTo(0,0);
+          }}
+          className='ineligibility-link'>
+          {linkText}
+        </Typography> 
+      </Grid>
+    );
+  }
+
   return (
     <main className='benefits-form'>
       <div className='results-container'>
         <Grid container spacing={2}>
           { results.isLoading ? <Loading /> : 
             <>
-              {displayHeaderSection()}
+              { displayHeaderSection() }
               <Grid xs={12} item={true}>
                 <FormControlLabel
-                  label={<FormattedMessage id='results.returnsignupCitizenFilter' defaultMessage='Only show benefits that do not require a citizen in the household' />}
+                  label={<FormattedMessage 
+                    id='results.returnsignupCitizenFilter' 
+                    defaultMessage='Only show benefits that do not require a citizen in the household' />
+                  }
                   control={<CustomSwitch handleCustomSwitchToggle={handleCustomSwitchToggle} /> }
                 />
                 { DataGridTable(results[programSubset])}
               </Grid>
-              <Grid xs={12} item={true}>
-                { programSubset === 'eligiblePrograms' && 
-                  <Typography
-                    sx={{mt: '.25rem'}}
-                    onClick={() => {
-                      navigate('/ineligible-results');
-                      window.scrollTo(0,0);
-                    }}
-                    className='ineligibility-link'>
-                    <FormattedMessage 
-                      id='results.return-ineligibilityLinkText' 
-                      defaultMessage='* For additional information on programs 
-                      that you were not eligible for click here' />
-                  </Typography> 
-                }
-                { programSubset === 'ineligiblePrograms' && 
-                  <Typography
-                    sx={{mt: '.25rem'}}
-                    onClick={() => {
-                      navigate('/results');
-                      window.scrollTo(0,0);
-                    }}
-                    className='ineligibility-link'>
-                    <FormattedMessage 
-                      id='results.return-goBackToEligibleText' 
-                      defaultMessage='Go back to eligible programs' />
-                  </Typography> 
-                }
-              </Grid>
+              { displayIneligibleEligibleLink() }
             </>
           }
         </Grid>
