@@ -680,8 +680,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     );
   }
 
-  const displayIneligibleEligibleLink = (programSubset) => {
-    const linkText = (programSubset === 'eligiblePrograms') ?
+  const displayIneligibleEligibleLink = (currentProgramsOnDisplay) => {
+    const linkText = (currentProgramsOnDisplay === 'eligiblePrograms') ?
       <FormattedMessage 
         id='results.return-ineligibilityLinkText' 
         defaultMessage='* For additional information on programs 
@@ -692,7 +692,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         defaultMessage='Go back to eligible programs' /> 
     ;
 
-    const route = (programSubset === 'eligiblePrograms') ? '/ineligible-results' : '/results';
+    const route = (currentProgramsOnDisplay === 'eligiblePrograms') ? '/ineligible-results' : '/results';
     
     return (
       <Grid xs={12} item={true}>
@@ -726,7 +726,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 />
                 { DataGridTable(results[programSubset])}
               </Grid>
-              { displayIneligibleEligibleLink() }
+              { displayIneligibleEligibleLink(programSubset) }
             </>
           }
         </Grid>
