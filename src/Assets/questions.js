@@ -1,4 +1,4 @@
-import { 
+import {
   ageHasError,
   displayAgeHelperText,
   zipcodeHasError,
@@ -13,7 +13,7 @@ import {
   benefitsHasError,
   referralSourceHasError,
   displayReferralSourceHelperText,
-  displayMissingSelectHelperText, 
+  displayMissingSelectHelperText,
   signUpOptionsHaveError,
   healthInsuranceHasError,
   acuteHHConditionsHasError
@@ -31,7 +31,7 @@ const questions = [
   {
     id: 2,
     name: 'age',
-    question: 
+    question:
       <FormattedMessage
         id='questions.age'
         defaultMessage='How old are you?' />,
@@ -39,9 +39,9 @@ const questions = [
       componentType: 'Textfield',
       inputType: 'text',
       inputName: 'age',
-      inputLabel: 
-        <FormattedMessage 
-          id='questions.age-inputLabel' 
+      inputLabel:
+        <FormattedMessage
+          id='questions.age-inputLabel'
           defaultMessage='Age' />,
       inputError: ageHasError,
       inputHelperText: displayAgeHelperText
@@ -51,7 +51,7 @@ const questions = [
   {
     id: 3,
     name: 'zipcode',
-    question: 
+    question:
       <FormattedMessage
         id='questions.zipcode'
         defaultMessage='What is your zip code?' />,
@@ -59,15 +59,15 @@ const questions = [
       componentType: 'Textfield',
       inputType: 'text',
       inputName: 'zipcode',
-      inputLabel: 
-        <FormattedMessage 
-          id='questions.zipcode-inputLabel' 
+      inputLabel:
+        <FormattedMessage
+          id='questions.zipcode-inputLabel'
           defaultMessage='Zip Code' />,
       inputError: zipcodeHasError,
       inputHelperText: displayZipcodeHelperText
     },
     followUpQuestions: [{
-      question: 
+      question:
         <FormattedMessage
           id='questions.zipcode-a'
           defaultMessage='Please select a county:' />,
@@ -76,27 +76,27 @@ const questions = [
         componentType: 'BasicSelect',
         inputType: 'text',
         inputName: 'county',
-        inputLabel: 
-          <FormattedMessage 
-            id='questions.zipcode-a-inputLabel' 
+        inputLabel:
+          <FormattedMessage
+            id='questions.zipcode-a-inputLabel'
             defaultMessage='County' />,
         inputError: referralSourceHasError,
         inputHelperText: displayMissingSelectHelperText,
         componentProperties: {
           labelId: 'county-select-label',
-          inputLabelText: 
+          inputLabelText:
             <FormattedMessage
               id='questions.zipcode-a-inputLabel'
               defaultMessage='County'
             />,
           id:'county-source-select',
           value: 'county',
-          label: 
+          label:
             <FormattedMessage
               id='questions.zipcode-a-inputLabel'
               defaultMessage='County'
             />,
-          disabledSelectMenuItemText: 
+          disabledSelectMenuItemText:
             <FormattedMessage
               id='questions.zipcode-a-disabledSelectMenuItemText'
               defaultMessage='Select a county' />
@@ -139,7 +139,7 @@ const questions = [
   {
     id: 6,
     name: 'student',
-    question: 
+    question:
       <FormattedMessage
         id='questions.student'
         defaultMessage='Are you a student?' />,
@@ -150,7 +150,7 @@ const questions = [
       inputError: radiofieldHasError
     },
     followUpQuestions: [{
-      question: 
+      question:
         <FormattedMessage
           id='questions.student-a'
           defaultMessage='Are you a full-time student?' />,
@@ -167,7 +167,7 @@ const questions = [
   {
     id: 7,
     name: 'pregnant',
-    question: 
+    question:
       <FormattedMessage
         id='questions.pregnant'
         defaultMessage='Are you pregnant?' />,
@@ -177,12 +177,12 @@ const questions = [
       inputName: 'pregnant',
       inputError: radiofieldHasError
     },
-    headerType: 'aboutYourself' 
+    headerType: 'aboutYourself'
   },
   {
     id: 8,
     name: 'unemployed',
-    question: 
+    question:
       <FormattedMessage
         id='questions.unemployed'
         defaultMessage='Are you currently unemployed?' />,
@@ -193,7 +193,7 @@ const questions = [
       inputError: radiofieldHasError
     },
     followUpQuestions: [{
-      question: 
+      question:
         <FormattedMessage
           id='questions.unemployed-a'
           defaultMessage='Did you work in the past 18 months?' />,
@@ -205,19 +205,19 @@ const questions = [
         inputError: radiofieldHasError
       }
     }],
-    headerType: 'aboutYourself'  
+    headerType: 'aboutYourself'
   },
   {
     id: 9,
     name: 'blindOrVisuallyImpaired',
-    question: 
+    question:
       <FormattedMessage
         id='questions.blindOrVisuallyImpaired'
         defaultMessage='Are you blind or visually impaired?' />,
-    questionDescription: 
-      <FormattedMessage 
+    questionDescription:
+      <FormattedMessage
         id='questions.blindOrVisuallyImpaired-description'
-        defaultMessage='"Visually impaired" means you cannot correct your vision to a "normal" level.' 
+        defaultMessage='"Visually impaired" means you cannot correct your vision to a "normal" level.'
         />,
     componentDetails: {
       componentType: 'Radiofield',
@@ -264,11 +264,11 @@ const questions = [
       <FormattedMessage
         id='questions.hasIncome'
         defaultMessage='Do you have an income?' />,
-    questionDescription: 
+    questionDescription:
       <FormattedMessage
         id='questions.hasIncome-description'
-        defaultMessage='Income is the money you earn or receive before deducting taxes. 
-          This includes money from jobs, alimony, investments, or gifts. Enter income for yourself only. 
+        defaultMessage='Income is the money you earn or receive before deducting taxes.
+          This includes money from jobs, alimony, investments, or gifts. Enter income for yourself only.
           You will have a chance to enter income for other household members later.' />,
     componentDetails: {
       componentType: 'Radiofield',
@@ -300,8 +300,8 @@ const questions = [
     questionDescription:
       <FormattedMessage
         id='questions.hasExpenses-description'
-        defaultMessage='Add up expenses for everyone who lives in your home. 
-          This includes costs like child care, child support, rent, medical expenses, heating bills, and more. 
+        defaultMessage='Add up expenses for everyone who lives in your home.
+          This includes costs like child care, child support, rent, medical expenses, heating bills, and more.
           We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits.' />,
     componentDetails: {
       componentType: 'Radiofield',
@@ -329,7 +329,7 @@ const questions = [
     question:
       <FormattedMessage
         id='questions.acuteHHConditions'
-        defaultMessage='Is anyone in your household in immediate need of any of the following:' />,
+        defaultMessage='Is anyone in your household in immediate need of help with any of the following?' />,
     componentDetails: {
       componentType: 'BasicCheckboxGroup',
       inputName: 'acuteHHConditions',
@@ -345,7 +345,7 @@ const questions = [
       <FormattedMessage
         id='questions.householdSize'
         defaultMessage='Including you, how many people are in your household?' />,
-    questionDescription: 
+    questionDescription:
       <FormattedMessage
         id='questions.householdSize-description'
         defaultMessage='This is usually family members who you both live and share important resources with like food and bills.' />,
@@ -353,13 +353,13 @@ const questions = [
       componentType: 'Textfield',
       inputType: 'text',
       inputName: 'householdSize',
-      inputLabel: 
+      inputLabel:
         <FormattedMessage
           id='questions.householdSize-inputLabel'
           defaultMessage='Household Size' />,
       inputError: householdSizeHasError,
       inputHelperText: displayHouseholdSizeHelperText
-    }, 
+    },
     headerType: 'aboutHousehold'
   },
   {
@@ -383,7 +383,7 @@ const questions = [
       <FormattedMessage
         id='questions.householdAssets'
         defaultMessage='How much does your whole household have right now in:' />,
-    questionDescription: 
+    questionDescription:
       <FormattedMessage
         id='questions.householdAssets-description'
         defaultMessage='Cash on hand? Checking or saving accounts? Stocks, bonds or mutual funds? In some cases, eligibility for benefits may be affected if your household owns other valuable assets such as a car or life insurance policy.' />,
@@ -391,7 +391,7 @@ const questions = [
       componentType: 'Textfield',
       inputType: 'text',
       inputName: 'householdAssets',
-      inputLabel: 
+      inputLabel:
         <FormattedMessage
           id='questions.householdAssets-inputLabel'
           defaultMessage='Dollar Amount' />,
@@ -417,19 +417,19 @@ const questions = [
       inputError: lastTaxFilingYearHasError,
       componentProperties: {
         labelId: 'tax-year-select-label',
-        inputLabelText: 
+        inputLabelText:
           <FormattedMessage
             id='qcc.createTaxDropdownMenu-label'
             defaultMessage='Tax year'
           />,
         id:'tax-year-select',
         value: 'lastTaxFilingYear',
-        label: 
+        label:
           <FormattedMessage
             id='qcc.createTaxDropdownMenu-label'
             defaultMessage='Tax year'
           />,
-        disabledSelectMenuItemText: 
+        disabledSelectMenuItemText:
           <FormattedMessage
             id='qcc.createTaxDropdownMenu-disabledSelectMenuItemText'
             defaultMessage='Select a Tax Year' />
@@ -451,19 +451,19 @@ const questions = [
       inputError: referralSourceHasError,
       componentProperties: {
         labelId: 'referral-source-select-label',
-        inputLabelText: 
+        inputLabelText:
           <FormattedMessage
             id='qcc.createReferralDropdownMenu-label'
             defaultMessage='Referral Source'
           />,
         id:'referral-source-select',
         value: 'referralSource',
-        label: 
+        label:
           <FormattedMessage
             id='qcc.createReferralDropdownMenu-label'
             defaultMessage='Referral Source'
           />,
-        disabledSelectMenuItemText: 
+        disabledSelectMenuItemText:
           <FormattedMessage
             id='qcc.createReferralDropdownMenu-disabledSelectMenuItemText'
             defaultMessage='Select a source' />
@@ -471,7 +471,7 @@ const questions = [
       options: referralOptions
     },
     followUpQuestions: [{
-      question: 
+      question:
         <FormattedMessage
           id='questions.referralSource-a'
           defaultMessage='If other, please specify:' />,
@@ -480,9 +480,9 @@ const questions = [
         componentType: 'Textfield',
         inputType: 'text',
         inputName: 'otherSource',
-        inputLabel: 
-          <FormattedMessage 
-            id='questions.referralSource-a-inputLabel' 
+        inputLabel:
+          <FormattedMessage
+            id='questions.referralSource-a-inputLabel'
             defaultMessage='Other referral source' />,
         inputError: referralSourceHasError,
         inputHelperText: displayReferralSourceHelperText
@@ -492,7 +492,7 @@ const questions = [
   },
   { id: 20,
     name: 'signUpInfo',
-    question: 
+    question:
       <FormattedMessage
         id='questions.signUpInfo'
         defaultMessage='What would you like us to contact you about?' />,
