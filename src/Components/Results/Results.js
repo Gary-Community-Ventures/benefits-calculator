@@ -795,7 +795,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   }
                   control={<CustomSwitch handleCustomSwitchToggle={handleCustomSwitchToggle} /> }
                 />
-                { DataGridTable(results[programSubset])}
+                { displayResultsFilterButtons() }
+                { filterResultsButton.allBenefits && DataGridTable(results[programSubset])}
+                { filterResultsButton.urgentNeeds && <UrgentNeedsTable /> }
               </Grid>
               { displayIneligibleEligibleLink(programSubset) }
             </>
