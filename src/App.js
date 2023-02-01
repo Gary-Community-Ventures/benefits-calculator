@@ -11,6 +11,7 @@ import Header from './Components/Header/Header';
 import EmailResults2 from './Components/EmailResults/EmailResults2';
 import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
+import referralOptions from './Assets/referralOptions'
 import './App.css';
 // import { createDevFormData } from './Assets/devFormData';
 
@@ -75,9 +76,9 @@ const App = () => {
       chp: false,
       none: false
     },
-    referralSource: referrer,
+    referralSource: referrer in referralOptions ? referrer: 'other',
     referrerCode: referrer,
-    otherSource: '',
+    otherSource: referrer in referralOptions ? '' : referrer,
     signUpInfo: {
       email: '',
       phone: '',
