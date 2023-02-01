@@ -743,6 +743,43 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     );
   }
 
+  const displayResultsFilterButtons = () => {
+    return (
+      <div>
+        <Button 
+          className={ filterResultsButton.allBenefits ? 'results-link' 
+            : 'results-filter-button-grey' 
+          }
+          onClick={() => {
+            setFilterResultsButton({ 
+              allBenefits: true, 
+              urgentNeeds: false 
+            });
+          }}
+          sx={{mt: 4, mr: 1}}
+          variant='contained'
+          >
+          Benefit Programs
+        </Button>
+        <Button 
+          className={ filterResultsButton.urgentNeeds ? 'results-link' 
+            : 'results-filter-button-grey' 
+          }
+          onClick={() => {
+            setFilterResultsButton({ 
+              allBenefits: false, 
+              urgentNeeds: true 
+            });
+          }}
+          sx={{mt: 4}}
+          variant='contained'
+          >
+          Urgent Needs Resources
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <main className='benefits-form'>
       <div className='results-container'>
