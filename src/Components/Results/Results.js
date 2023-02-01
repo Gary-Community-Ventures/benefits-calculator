@@ -39,6 +39,10 @@ export const isNavigationKey = (key) =>
 const Results = ({ results, setResults, formData, programSubset, passedOrFailedTests }) => {
   const navigate = useNavigate();
   const locale = useContext(Context).locale;
+  const [filterResultsButton, setFilterResultsButton] = useState({
+    allBenefits: true,
+    urgentNeeds: false
+  });
   const [filt, setFilt] = useState([
 		{
 			id: 1,
