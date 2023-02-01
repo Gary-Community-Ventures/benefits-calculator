@@ -27,6 +27,7 @@ const App = () => {
   const isTest = searchParams.get('test') ? searchParams.get('test') : false;
   const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
   const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : '';
+  const isReferrerInOptions = referrer == '' || referrer in referralOptions
   const isBIAUser = externalId !== null && referrer !== '';
   const theme = createTheme(styleOverrides);
 
@@ -76,9 +77,9 @@ const App = () => {
       chp: false,
       none: false
     },
-    referralSource: referrer in referralOptions ? referrer: 'other',
+    referralSource: isReferrerInOptions ? referrer: 'other',
     referrerCode: referrer,
-    otherSource: referrer in referralOptions ? '' : referrer,
+    otherSource: isReferrerInOptions ? '' : referrer,
     signUpInfo: {
       email: '',
       phone: '',
