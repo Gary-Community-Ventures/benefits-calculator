@@ -108,10 +108,10 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 		});
   }
 
-  const responseLanguage= () => {
-    const rawEligibility = results.rawResponse
+  const responseLanguage = () => {
+    const { rawResponse } = results;
 		const languageCode = locale.toLowerCase();
-		const eligibilityResponse = rawEligibility.response.translations[languageCode];
+		const eligibilityResponse = rawResponse.programs[languageCode];
 		const qualifiedPrograms = eligibilityResponse
 			.filter(
 				(program) => program.eligible === true && !formData.benefits[program.name_abbreviated]
@@ -120,15 +120,13 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 				(benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value
 			);
 		const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
-
+    
 		setResults({
+      ...results,
 			eligiblePrograms: qualifiedPrograms,
 			ineligiblePrograms: unqualifiedPrograms,
-      rawResponse: results.rawResponse,
-			screenerId: rawEligibility.screen.id,
-			isLoading: false,
-			user: rawEligibility.userId,
-		});
+			isLoading: false
+    });
 	};
 
   const getScreensBody = (formData, languageCode, userId) => {
