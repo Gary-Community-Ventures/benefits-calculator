@@ -101,14 +101,10 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     setResults({
 			eligiblePrograms: [],
 			ineligiblePrograms: [],
-			rawResponse: {
-				response: rawEligibilityResponse,
-				screen: screensResponse,
-				userId: userId,
-			},
-			screenerId: 0,
+			rawResponse: rawEligibilityResponse,
+			screenerId: screensResponse.id,
 			isLoading: true,
-			user: 0,
+			user: userId
 		});
   }
 
