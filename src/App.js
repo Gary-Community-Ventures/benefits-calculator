@@ -11,6 +11,7 @@ import Header from './Components/Header/Header';
 import EmailResults2 from './Components/EmailResults/EmailResults2';
 import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
+import referralOptions from './Assets/referralOptions'
 import './App.css';
 // import { createDevFormData } from './Assets/devFormData';
 
@@ -26,6 +27,7 @@ const App = () => {
   const isTest = searchParams.get('test') ? searchParams.get('test') : false;
   const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
   const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : '';
+  const setReferrerSource = referrer == '' || referrer in referralOptions
   const isBIAUser = externalId !== null && referrer !== '';
   const theme = createTheme(styleOverrides);
 
@@ -75,9 +77,9 @@ const App = () => {
       chp: false,
       none: false
     },
-    referralSource: referrer,
+    referralSource: setReferrerSource ? referrer : 'other',
     referrerCode: referrer,
-    otherSource: '',
+    otherSource: setReferrerSource ? '' : referrer,
     signUpInfo: {
       email: '',
       phone: '',
