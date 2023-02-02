@@ -42,9 +42,9 @@
   padding-top: 1rem;
 }
 
-.navigator-link {
+.navigator-info {
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 400!important;
 }
 
 .navigator-desc {
