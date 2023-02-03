@@ -47,13 +47,24 @@ const Results = ({ results, setResults, formData}) => {
   });
 
   const [filt, setFilt] = useState({
-    citizen: {
-      id: 1,
-      columnField: 'citizenship',
-      operatorValue: 'isAnyOf',
-      value: ['citizen', 'none']
-    }
-  });
+		citizen: {
+			id: 1,
+			columnField: 'citizenship',
+			operatorValue: 'isAnyOf',
+			value: ['citizen', 'none'],
+		},
+		eligible: {
+			id: 2,
+			columnField: 'eligible',
+			operatorValue: 'is',
+			value: 'true',
+		},
+	});
+  const updateFilter = (filtName, filter) => {
+    const newFilter = {...filt}
+    newFilter[filtName] = filter
+    setFilt(newFilter)
+  }
 
   useEffect(() => {
     if (results.screenerId === 0) {
@@ -409,7 +420,8 @@ const Results = ({ results, setResults, formData}) => {
         passed_tests: results[i].passed_tests,
         failed_tests: results[i].failed_tests,
         navigators: results[i].navigators,
-        citizenship: results[i].legal_status_required
+        citizenship: results[i].legal_status_required,
+        eligible: results[i].eligible
       };
       dgr.push(dataGridRow);
       count++;
@@ -426,7 +438,8 @@ const Results = ({ results, setResults, formData}) => {
         application_link: results[i].apply_button_link,
         passed_tests: results[i].passed_tests,
         failed_tests: results[i].failed_tests,
-        navigators: results[i].navigators
+        navigators: results[i].navigators,
+        eligible: ''
       }
       dgr.push(dataGridChild);
       count++;
@@ -572,7 +585,8 @@ const Results = ({ results, setResults, formData}) => {
       { field: 'citizenship', headerName: 'Citizenship Requirements', flex: 1 },
       { field: 'application_link', headerName: 'Application Link', flex: 1 },
       { field: 'passed_tests', headerName: 'Passed Tests', flex: 1 },
-      { field: 'failed_tests', headerName: 'Passed Tests', flex: 1 }
+      { field: 'failed_tests', headerName: 'Passed Tests', flex: 1 },
+      { field: 'eligible', headerName: 'Eligible', flex: 1, 'type': 'boolean' }
     ];
     return (
       <DataGridPro
@@ -585,7 +599,7 @@ const Results = ({ results, setResults, formData}) => {
         hideFooter={true}
         rows={rows} 
         columns={columns} 
-        filterModel={{ items: [filt.citizen], linkOperator: GridLinkOperator.And }}
+        filterModel={{ items: [filt.citizen, filt.eligible], linkOperator: GridLinkOperator.And }}
         sx={{
           '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': { py: '8px' },
           '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': { py: '15px' },
@@ -602,7 +616,8 @@ const Results = ({ results, setResults, formData}) => {
               application_link: false,
               passed_tests: false,
               failed_tests: false,
-              navigators: false
+              navigators: false,
+              eligible: false
             }
           }
         }}
@@ -641,23 +656,25 @@ const Results = ({ results, setResults, formData}) => {
     // Filter out citizen benefits when toggle is on
     // Filter out non-citizen benifits when toggle is off
     if (e.target.checked) {
-			setFilt({
-				citizen: {
+			updateFilter(
+        'citizen',
+				{
 					id: 1,
 					columnField: 'citizenship',
 					operatorValue: 'isAnyOf',
 					value: ['non-citizen', 'none'],
 				},
-			});
+			);
 		} else {
-			setFilt({
-				citizen: {
+			updateFilter(
+				'citizen',
+        {
 					id: 1,
 					columnField: 'citizenship',
 					operatorValue: 'isAnyOf',
 					value: ['citizen', 'none'],
 				},
-			});
+			);
 		}
   }
 
@@ -732,7 +749,7 @@ const Results = ({ results, setResults, formData}) => {
                 { displayResultsFilterButtons() }
                 {<Filter
                   filt={filt}
-                  setFilt={setFilt}
+                  updateFilter={updateFilter}
                   categories={['food', 'cash']}
                 />}
                 { filterResultsButton.allBenefits && DataGridTable(results.programs)}
