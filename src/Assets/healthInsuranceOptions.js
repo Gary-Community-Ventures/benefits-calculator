@@ -1,23 +1,27 @@
 import { FormattedMessage } from "react-intl";
 
 const healthInsuranceOptions = {
-  employer: 
+  employer:
     <FormattedMessage
       id='healthInsuranceOptions.employer'
       defaultMessage='Employer-provided health insurance' />,
-  private: 
+  private:
     <FormattedMessage
       id='healthInsuranceOptions.private'
       defaultMessage='Private health insurance' />,
-  medicaid: 
+  medicaid:
     <FormattedMessage
       id='healthInsuranceOptions.medicaid'
       defaultMessage='Free or low-cost public health insurance through Health First Colorado (Medicaid)' />,
-  chp: 
+  medicare:
+    <FormattedMessage
+      id='healthInsuranceOptions.medicare'
+      defaultMessage='Medicare' />,
+  chp:
     <FormattedMessage
       id='healthInsuranceOptions.chp'
       defaultMessage='Low-cost health insurance for children and pregnant women through Child Health Plan Plus (CHP+)' />,
-  none: 
+  none:
     <FormattedMessage
       id='healthInsuranceOptions.none'
       defaultMessage='One or more household member(s) do not have health insurance' />

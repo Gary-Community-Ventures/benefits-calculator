@@ -166,6 +166,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       has_employer_hi: healthInsurance.employer,
       has_private_hi: healthInsurance.private,
       has_medicaid_hi: healthInsurance.medicaid,
+      has_medicare_hi: healthInsurance.medicare,
       has_chp_hi: healthInsurance.chp,
       has_no_hi: healthInsurance.none,
       referral_source: finalReferralSource,
