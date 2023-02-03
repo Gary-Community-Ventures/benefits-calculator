@@ -42,11 +42,6 @@
   padding-top: 1rem;
 }
 
-.navigator-link {
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
 .navigator-desc {
   font-style: italic;
   margin-bottom: .5rem;
@@ -54,4 +49,9 @@
 
 .font-weight {
   font-weight: 500;
+}
+
+.navigator-info {
+  font-size: 0.875rem;
+  font-weight: 400;
 }
