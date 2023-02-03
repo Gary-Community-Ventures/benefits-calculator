@@ -1,7 +1,7 @@
 import { useEffect, useState, Fragment, useContext, useRef } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useNavigate } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import Filter from '../FilterTable/FilterTable.js'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -41,6 +41,7 @@ export const isNavigationKey = (key) =>
 const Results = ({ results, setResults, formData}) => {
   const navigate = useNavigate();
   const locale = useContext(Context).locale;
+  const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState({
     allBenefits: true,
     urgentNeeds: false
@@ -566,18 +567,21 @@ const Results = ({ results, setResults, formData}) => {
 
   const DataGridTable = (results) => {
     const rows: GridRowsProp = DataGridRows(results);
-    const nameHeader = <FormattedMessage 
-      id='results.resultsTable-benefitLabel' 
-      defaultMessage='Benefit' />
-    const valueHeader = <FormattedMessage 
-      id='results.resultsTable-annualValueLabel' 
-      defaultMessage='Annual Value' />
-    const appTimeHeader = <FormattedMessage 
-      id='results.resultsTable-timeToApply' 
-      defaultMessage='Time to Apply' />
+    const nameHeader = intl.formatMessage({
+			id: 'results.resultsTable-timeToApply',
+      defaultMessage: 'Benefit'
+		});
+    const valueHeader = intl.formatMessage({
+      id: 'results.resultsTable-annualValueLabel',
+      defaultMessage: 'Annual Value'
+    })
+    const appTimeHeader = intl.formatMessage({
+      id: 'results.resultsTable-timeToApply',
+      defaultMessage: 'Time to Apply'
+    })
 
     const columns: GridColDef[] = [
-      { field: 'name', headerName: nameHeader, flex: 1 },  
+      { field: 'name', headerName: nameHeader, flex: 1 },
       { field: 'value', headerName: valueHeader, flex: 1, valueFormatter: benefitValueFormatter, renderCell: benefitValueRender },
       { field: 'type', headerName: 'Type', flex: 1 },
       { field: 'application_time', headerName: appTimeHeader, flex: 1 },
