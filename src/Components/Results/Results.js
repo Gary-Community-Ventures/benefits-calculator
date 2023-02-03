@@ -38,13 +38,14 @@ export const isNavigationKey = (key) =>
   key.indexOf('Page') === 0 ||
   key === ' ';
 
-const Results = ({ results, setResults, formData, programSubset, passedOrFailedTests }) => {
+const Results = ({ results, setResults, formData}) => {
   const navigate = useNavigate();
   const locale = useContext(Context).locale;
   const [filterResultsButton, setFilterResultsButton] = useState({
     allBenefits: true,
     urgentNeeds: false
   });
+
   const [filt, setFilt] = useState({
     citizen: {
       id: 1,
@@ -95,8 +96,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
     const rawEligibilityResponse = await getEligibility(screensResponse.id, locale);
     setResults({
-			eligiblePrograms: [],
-			ineligiblePrograms: [],
+			programs: [],
 			rawResponse: rawEligibilityResponse,
 			screenerId: screensResponse.id,
 			isLoading: true,
@@ -108,19 +108,17 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     const { rawResponse } = results;
 		const languageCode = locale.toLowerCase();
 		const eligibilityResponse = rawResponse.programs[languageCode];
-		const qualifiedPrograms = eligibilityResponse
+		const programs = eligibilityResponse
 			.filter(
-				(program) => program.eligible === true && !formData.benefits[program.name_abbreviated]
+				(program) => !formData.benefits[program.name_abbreviated]
 			)
 			.sort(
 				(benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value
 			);
-		const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
     
 		setResults({
       ...results,
-			eligiblePrograms: qualifiedPrograms,
-			ineligiblePrograms: unqualifiedPrograms,
+			programs: programs,
 			isLoading: false
     });
 	};
@@ -346,64 +344,52 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     }
   }
 
-  const displaySubheader = (benefitsSubset) => {
-    if (benefitsSubset === 'eligiblePrograms') {
-      return (
-        <>
-          <Grid xs={12} item={true}>
-            <Typography className='sub-header' variant='h6'> 
-              {totalEligiblePrograms(results[programSubset])} 
-              <FormattedMessage 
-                id='results.return-programsUpToLabel' 
-                defaultMessage=' programs, up to ' /> 
-              ${totalDollarAmount(results[programSubset]).toLocaleString()} 
-              <FormattedMessage 
-                id='results.return-perYearOrLabel' 
-                defaultMessage=' per year or ' />
-              ${Math.round(totalDollarAmount(results[programSubset])/12).toLocaleString()} 
-              <FormattedMessage 
-                id='results.return-perMonthLabel' 
-                defaultMessage=' per month for you to consider' />
-            </Typography>
-          </Grid>
-          <Grid container>
-            <Grid sm={10} item={true}>
-              <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
-                <FormattedMessage 
-                  id='results.displaySubheader-emailResultsDescText' 
-                  defaultMessage='To receive a copy of these results by email please click the email results button.' />
-              </Typography>
-            </Grid>
-            <Grid xs={12} item={true} sm={2} justifyContent='end'>
-              <Box justifyContent='end' display='flex'>
-                <Button
-                  sx={{mb: 2, mt: 1}}
-                  variant='contained'
-                  endIcon={<SendIcon />}
-                  onClick={() => {
-                    navigate('/email-results');
-                  }}
-                  className='results-link'>
-                  <FormattedMessage 
-                    id='results.return-emailResultsButton' 
-                    defaultMessage='Email Results' />
-                </Button>
-              </Box>
-            </Grid>
-          </Grid>
-        </>
-      );
-    } else if (benefitsSubset === 'ineligiblePrograms') {
-      return (
+  const displaySubheader = () => {
+    return (
+      <>
         <Grid xs={12} item={true}>
-          <Typography className='sub-header' variant='h6'>
+          <Typography className='sub-header' variant='h6'> 
+            {totalEligiblePrograms(results.programs)} 
             <FormattedMessage 
-              id='results.displaySubheader-basedOnInformationText' 
-              defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
+              id='results.return-programsUpToLabel' 
+              defaultMessage=' programs, up to ' /> 
+            ${totalDollarAmount(results.programs).toLocaleString()} 
+            <FormattedMessage 
+              id='results.return-perYearOrLabel' 
+              defaultMessage=' per year or ' />
+            ${Math.round(totalDollarAmount(results.programs)/12).toLocaleString()} 
+            <FormattedMessage 
+              id='results.return-perMonthLabel' 
+              defaultMessage=' per month for you to consider' />
           </Typography>
         </Grid>
-      );
-    }
+        <Grid container>
+          <Grid sm={10} item={true}>
+            <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
+              <FormattedMessage 
+                id='results.displaySubheader-emailResultsDescText' 
+                defaultMessage='To receive a copy of these results by email please click the email results button.' />
+            </Typography>
+          </Grid>
+          <Grid xs={12} item={true} sm={2} justifyContent='end'>
+            <Box justifyContent='end' display='flex'>
+              <Button
+                sx={{mb: 2, mt: 1}}
+                variant='contained'
+                endIcon={<SendIcon />}
+                onClick={() => {
+                  navigate('/email-results');
+                }}
+                className='results-link'>
+                <FormattedMessage 
+                  id='results.return-emailResultsButton' 
+                  defaultMessage='Email Results' />
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
+      </>
+    );
   }
 
   const DataGridRows = (results) => {
@@ -686,36 +672,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
             {results.screenerId}
           </Typography>
         </Grid>
-        { displaySubheader(programSubset) }
-      </Grid>
-    );
-  }
-
-  const displayIneligibleEligibleLink = (currentProgramsOnDisplay) => {
-    const linkText = (currentProgramsOnDisplay === 'eligiblePrograms') ?
-      <FormattedMessage 
-        id='results.return-ineligibilityLinkText' 
-        defaultMessage='* For additional information on programs 
-        that you were not eligible for click here' />
-      :
-      <FormattedMessage 
-        id='results.return-goBackToEligibleText' 
-        defaultMessage='Go back to eligible programs' /> 
-    ;
-
-    const route = (currentProgramsOnDisplay === 'eligiblePrograms') ? '/ineligible-results' : '/results';
-    
-    return (
-      <Grid xs={12} item={true}>
-        <Typography
-          sx={{mt: '.25rem'}}
-          onClick={() => {
-            navigate(`${route}`);
-            window.scrollTo(0,0);
-          }}
-          className='ineligibility-link'>
-          {linkText}
-        </Typography> 
+        { displaySubheader() }
       </Grid>
     );
   }
@@ -778,10 +735,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   setFilt={setFilt}
                   categories={['food', 'cash']}
                 />}
-                { filterResultsButton.allBenefits && DataGridTable(results[programSubset])}
+                { filterResultsButton.allBenefits && DataGridTable(results.programs)}
                 { filterResultsButton.urgentNeeds && <Table /> }
               </Grid>
-              { displayIneligibleEligibleLink(programSubset) }
             </>
           }
         </Grid>

@@ -112,8 +112,7 @@ const App = () => {
   // const [formData, setFormData] = useState(createDevFormData(searchParams));
 
   const initialResults = {
-    eligiblePrograms: [], 
-    ineligiblePrograms: [],
+    programs: [], 
     rawResponse: {},
     screenerId: 0,
     isLoading: true,
@@ -180,7 +179,6 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('formData', JSON.stringify(formData));
     localStorage.setItem('results', JSON.stringify(results));
-
   }, [formData, results]);
 
   const handleTextfieldChange = (event) => {
@@ -313,16 +311,7 @@ const App = () => {
                 formData={formData}
                 results={results}
                 setResults={setResults}
-                programSubset='eligiblePrograms' 
-                passedOrFailedTests='passed_tests' /> } /> 
-            <Route 
-              path='/ineligible-results' 
-              element={<Results 
-                formData={formData}
-                results={results}
-                setResults={setResults}
-                programSubset='ineligiblePrograms' 
-                passedOrFailedTests='failed_tests' /> } />
+                /> } /> 
             <Route
               path='/email-results' 
               element={<EmailResults2
