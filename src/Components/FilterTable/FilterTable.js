@@ -9,12 +9,37 @@ import { FormattedMessage } from 'react-intl';
 import { useState } from 'react';
 import './FilterTable.css';
 
-const Filter = ({ filt, setFilt }) => {
+const Filter = ({ filt, updateFilter, categories }) => {
 	const [showFilters, setShowFilter] = useState(false);
 
 	const toggleFilterForm = () => {
 		setShowFilter(!showFilters);
 	};
+
+	const eligibilityFilterChange = (event) => {
+		const filters = {
+			eligibleBenefits: {
+				id: 2,
+				columnField: 'eligible',
+				operatorValue: 'is',
+				value: 'true',
+			},
+			ineligibleBenefits: {
+				id: 2,
+				columnField: 'eligible',
+				operatorValue: 'is',
+				value: 'false',
+			},
+			alreadyHave: {
+				id: 2,
+				columnField: 'eligible',
+				operatorValue: 'is',
+				value: 'true',
+			},
+		};
+
+		updateFilter('eligible', filters[event.target.value]);
+	}
 
 	return (
 		<div className="filter">
@@ -25,7 +50,7 @@ const Filter = ({ filt, setFilt }) => {
 				onClick={toggleFilterForm}
 			>
 				<FormattedMessage
-					id="results.filterByCategoryButton"
+					id="filter.filterByCategoryButton"
 					defaultMessage="Filter By Category"
 				/>
 			</Button>
@@ -34,40 +59,44 @@ const Filter = ({ filt, setFilt }) => {
 					<div>
 						<FormControl>
 							<FormLabel id="benefit-eligibility">
-								Benefit Eligibility
+								<FormattedMessage
+									id="filter.filterByEligibility"
+									defaultMessage="Filter By Eligibility"
+								/>
 							</FormLabel>
 							<RadioGroup
 								aria-labelledby="benefit-eligibility"
-								defaultValue="Eligible Benefits"
+								defaultValue="eligibleBenefits"
 								name="benefit-eligibility"
+								onChange={eligibilityFilterChange}
 							>
 								<FormControlLabel
-									value="Eligible Benefits"
+									value="eligibleBenefits"
 									control={<Radio />}
 									label={
 										<FormattedMessage
-											id="results.filterByCategoryButton"
-											defaultMessage="Filter By Category"
+											id="filter.filterEligibe"
+											defaultMessage="Eligible"
 										/>
 									}
 								/>
 								<FormControlLabel
-									value="Ineligible Benefits"
+									value="ineligibleBenefits"
 									control={<Radio />}
 									label={
 										<FormattedMessage
-											id="results.filterByCategoryButton"
-											defaultMessage="Filter By Category"
+											id="filter.filterIneligibe"
+											defaultMessage="Ineligible"
 										/>
 									}
 								/>
 								<FormControlLabel
-									value="Benefits I already have"
+									value="alreadyHave"
 									control={<Radio />}
 									label={
 										<FormattedMessage
-											id="results.filterByCategoryButton"
-											defaultMessage="Filter By Category"
+											id="filter.filterAlreadyHave"
+											defaultMessage="Benefits I Already Have"
 										/>
 									}
 								/>
@@ -76,44 +105,32 @@ const Filter = ({ filt, setFilt }) => {
 					</div>
 					<div>
 						<FormControl>
-							<FormLabel id="benefit-category">
-								Benefit Category
-							</FormLabel>
+							<FormLabel id="benefit-category">Benefit Category</FormLabel>
 							<RadioGroup
 								aria-labelledby="benefit-category"
-								defaultValue="Eligible Benefits"
+								defaultValue="all"
 								name="benefit-category"
 							>
 								<FormControlLabel
-									value="Eligible Benefits"
+									value="all"
 									control={<Radio />}
 									label={
 										<FormattedMessage
-											id="results.filterByCategoryButton"
+											id="filter.filterByCategoryButton"
 											defaultMessage="Filter By Category"
 										/>
 									}
 								/>
-								<FormControlLabel
-									value="Ineligible Benefits"
-									control={<Radio />}
-									label={
-										<FormattedMessage
-											id="results.filterByCategoryButton"
-											defaultMessage="Filter By Category"
+								{categories.map((category) => {
+									return (
+										<FormControlLabel
+											key={category}
+											value={category}
+											control={<Radio />}
+											label={category}
 										/>
-									}
-								/>
-								<FormControlLabel
-									value="Benefits I already have"
-									control={<Radio />}
-									label={
-										<FormattedMessage
-											id="results.filterByCategoryButton"
-											defaultMessage="Filter By Category"
-										/>
-									}
-								/>
+									);
+								})}
 							</RadioGroup>
 						</FormControl>
 					</div>

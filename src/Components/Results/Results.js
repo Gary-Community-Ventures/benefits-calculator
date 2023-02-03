@@ -61,6 +61,7 @@ const Results = ({ results, setResults, formData}) => {
 			value: 'true',
 		},
 	});
+
   const updateFilter = (filtName, filter) => {
     const newFilter = {...filt}
     newFilter[filtName] = filter
