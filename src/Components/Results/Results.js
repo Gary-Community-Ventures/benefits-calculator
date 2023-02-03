@@ -45,20 +45,14 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     allBenefits: true,
     urgentNeeds: false
   });
-  const [filt, setFilt] = useState([
-		{
-			id: 1,
-			columnField: 'citizenship',
-			operatorValue: 'startsWith',
-			value: 'none',
-		},
-		{
-			id: 3,
-			columnField: 'citizenship',
-			operatorValue: 'startsWith',
-			value: 'citizen',
-		},
-	]);
+  const [filt, setFilt] = useState({
+    citizen: {
+      id: 1,
+      columnField: 'citizenship',
+      operatorValue: 'isAnyOf',
+      value: ['citizen', 'none']
+    }
+  });
 
   useEffect(() => {
     if (results.screenerId === 0) {
@@ -271,9 +265,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const totalEligiblePrograms = (results) => {
     return results.reduce((total, program) => {
-      if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
+      if (filt.citizen.value.includes('non-citizen') && program.legal_status_required !== 'citizen') {
         total += 1;
-      } else if (filt[1].value === 'citizen' && program.legal_status_required !== 'non-citizen'){
+      } else if (filt.citizen.value.includes('citizen') && program.legal_status_required !== 'non-citizen'){
         total += 1;
       }
       return total;
@@ -282,9 +276,9 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const totalDollarAmount = (results) => {
     const total = results.reduce((total, program) => {
-      if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
+      if (filt.citizen.value.includes('non-citizen') && program.legal_status_required !== 'citizen') {
         total += program.estimated_value;
-      } else if (filt[1].value === 'citizen' && program.legal_status_required !== 'non-citizen'){
+      } else if (filt.citizen.value.includes('citizen') && program.legal_status_required !== 'non-citizen'){
         total += program.estimated_value;
       }
       return total;
@@ -605,8 +599,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         hideFooter={true}
         rows={rows} 
         columns={columns} 
-        components={{Toolbar: Filter}}
-        filterModel={{ items: filt, linkOperator: GridLinkOperator.Or }}
+        filterModel={{ items: [filt.citizen], linkOperator: GridLinkOperator.And }}
         sx={{
           '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': { py: '8px' },
           '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': { py: '15px' },
@@ -662,37 +655,24 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     // Filter out citizen benefits when toggle is on
     // Filter out non-citizen benifits when toggle is off
     if (e.target.checked) {
-      setFilt([
-				{
+			setFilt({
+				citizen: {
 					id: 1,
 					columnField: 'citizenship',
-					operatorValue: 'startsWith',
-					value: 'none',
+					operatorValue: 'isAnyOf',
+					value: ['non-citizen', 'none'],
 				},
-				{
-					id: 2,
-					columnField: 'citizenship',
-					operatorValue: 'startsWith',
-					value: 'non-citizen',
-				},
-			]);
-    }
-    else {
-      setFilt([
-				{
+			});
+		} else {
+			setFilt({
+				citizen: {
 					id: 1,
 					columnField: 'citizenship',
-					operatorValue: 'startsWith',
-					value: 'none',
+					operatorValue: 'isAnyOf',
+					value: ['citizen', 'none'],
 				},
-				{
-					id: 3,
-					columnField: 'citizenship',
-					operatorValue: 'startsWith',
-					value: 'citizen',
-				},
-			]);
-    }
+			});
+		}
   }
 
   const displayHeaderSection = () => {
@@ -793,6 +773,11 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   control={<CustomSwitch handleCustomSwitchToggle={handleCustomSwitchToggle} /> }
                 />
                 { displayResultsFilterButtons() }
+                {<Filter
+                  filt={filt}
+                  setFilt={setFilt}
+                  categories={['food', 'cash']}
+                />}
                 { filterResultsButton.allBenefits && DataGridTable(results[programSubset])}
                 { filterResultsButton.urgentNeeds && <Table /> }
               </Grid>
