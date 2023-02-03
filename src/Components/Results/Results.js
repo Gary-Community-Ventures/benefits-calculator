@@ -19,7 +19,7 @@ import {
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
-import Table from '../Table/Table';
+import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
   postPartialParentScreen,
   postHouseholdMemberData,
@@ -792,7 +792,12 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 />
                 { displayResultsFilterButtons() }
                 { filterResultsButton.allBenefits && DataGridTable(results[programSubset])}
-                { filterResultsButton.urgentNeeds && <Table /> }
+                { filterResultsButton.urgentNeeds && 
+                  <UrgentNeedsTable 
+                    urgentNeedsPrograms={results.rawResponse.urgent_needs} 
+                    locale={locale} 
+                  /> 
+                }
               </Grid>
               { displayIneligibleEligibleLink(programSubset) }
             </>
