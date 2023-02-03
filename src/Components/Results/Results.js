@@ -3,6 +3,7 @@ import { Context } from '../Wrapper/Wrapper';
 import { useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Button, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import Filter from '../FilterTable/FilterTable.js'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
@@ -604,6 +605,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         hideFooter={true}
         rows={rows} 
         columns={columns} 
+        components={{Toolbar: Filter}}
         filterModel={{ items: filt, linkOperator: GridLinkOperator.Or }}
         sx={{
           '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': { py: '8px' },
