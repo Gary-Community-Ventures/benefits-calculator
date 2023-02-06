@@ -413,6 +413,7 @@ const Results = ({ results, setResults, formData}) => {
         id: count,
         path: results[i].name,
         name: results[i].name,
+        name_abbreviated: results[i].name_abbreviated,
         value: results[i].estimated_value,
         type: results[i].value_type,
         description: results[i].description,
@@ -431,6 +432,7 @@ const Results = ({ results, setResults, formData}) => {
         id: count,
         path: results[i].name + '/Detail',
         name: results[i].description,
+        name_abbreviated: '',
         value: '',
         type: '',
         application_time: '',
@@ -591,7 +593,8 @@ const Results = ({ results, setResults, formData}) => {
       { field: 'application_link', headerName: 'Application Link', flex: 1 },
       { field: 'passed_tests', headerName: 'Passed Tests', flex: 1 },
       { field: 'failed_tests', headerName: 'Passed Tests', flex: 1 },
-      { field: 'eligible', headerName: 'Eligible', flex: 1, 'type': 'boolean' }
+      { field: 'eligible', headerName: 'Eligible', flex: 1, 'type': 'boolean' },
+      { field: 'name_abbreviated', headerName: 'Name Abbreviated', flex: 1 }
     ];
     return (
       <DataGridPro
@@ -622,7 +625,8 @@ const Results = ({ results, setResults, formData}) => {
               passed_tests: false,
               failed_tests: false,
               navigators: false,
-              eligible: false
+              eligible: false,
+              name_abbreviated: false
             }
           }
         }}
