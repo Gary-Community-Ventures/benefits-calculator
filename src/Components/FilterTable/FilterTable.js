@@ -61,6 +61,22 @@ const Filter = ({ filt, updateFilter, categories }) => {
 		);
 	} 
 
+	const categoryFilterChange = (event) => {
+		if (event.target.value === 'all') {
+			updateFilter({name: 'category', filter: false});
+		} else {
+			updateFilter({
+				name: 'category',
+				filter: {
+					id: 4,
+					columnField: 'category',
+					operatorValue: 'equals',
+					value: event.target.value,
+				}
+			});
+		}
+	}
+
 	return (
 		<div className="filter">
 			<Button
@@ -134,6 +150,7 @@ const Filter = ({ filt, updateFilter, categories }) => {
 								aria-labelledby="benefit-category"
 								defaultValue="all"
 								name="benefit-category"
+								onChange={categoryFilterChange}
 							>
 								<FormControlLabel
 									value="all"

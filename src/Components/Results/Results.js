@@ -66,13 +66,18 @@ const Results = ({ results, setResults, formData}) => {
 			operatorValue: 'is',
 			value: 'false',
 		},
+    category: false,
     filtList: function() {
       const filters = [
         this.citizen,
         this.eligible,
       ]
-      if (this.hasBenefit !==false)
+      if (this.hasBenefit !== false) {
         filters.push(this.hasBenefit)
+      }
+      if (this.category !== false) {
+        filters.push(this.category);
+      }
       return filters
     }
 	});
