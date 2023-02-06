@@ -806,7 +806,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                   /> 
                 }
               </Grid>
-              { displayIneligibleEligibleLink(programSubset) }
+              { filterResultsButton.allBenefits && displayIneligibleEligibleLink(programSubset) }
             </>
           }
         </Grid>
