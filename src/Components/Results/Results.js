@@ -436,6 +436,7 @@ const Results = ({ results, setResults, formData}) => {
 				application_link: results[i].apply_button_link,
 				passed_tests: results[i].passed_tests,
 				failed_tests: results[i].failed_tests,
+        category: results[i].category,
 				navigators: results[i].navigators,
 				citizenship: results[i].legal_status_required,
 				eligible: results[i].eligible,
@@ -455,6 +456,7 @@ const Results = ({ results, setResults, formData}) => {
         application_link: results[i].apply_button_link,
         passed_tests: results[i].passed_tests,
         failed_tests: results[i].failed_tests,
+        category: results[i].category,
         navigators: results[i].navigators,
       }
       dgr.push(dataGridChild);
@@ -606,14 +608,24 @@ const Results = ({ results, setResults, formData}) => {
       { field: 'passed_tests', headerName: 'Passed Tests', flex: 1 },
       { field: 'failed_tests', headerName: 'Passed Tests', flex: 1 },
       { field: 'eligible', headerName: 'Eligible', flex: 1, 'type': 'boolean' },
-      { field: 'has_benefit', headerName: 'Has Benefit', flex: 1, 'type': 'boolean' }
+      { field: 'has_benefit', headerName: 'Has Benefit', flex: 1, 'type': 'boolean' },
+      { field: 'category', headerName: 'Category', flex: 1 },
     ];
+
+    const allCategories = () => {
+      return results.reduce((acc, benefit) => {
+        if (!acc.includes(benefit.category)) {
+          acc = [...acc, benefit.category]
+        }
+        return acc
+      }, [])
+    }
     return (
 			<>
 				<Filter
 					filt={filt}
 					updateFilter={updateFilter}
-					categories={['food', 'cash']}
+					categories={allCategories()}
 				/>
 				<DataGridPro
 					treeData
@@ -655,6 +667,7 @@ const Results = ({ results, setResults, formData}) => {
 								navigators: false,
 								eligible: false,
 								has_benefit: false,
+                categorie: false
 							},
 						},
 					}}
