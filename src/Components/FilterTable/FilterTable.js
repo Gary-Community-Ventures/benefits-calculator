@@ -11,6 +11,7 @@ import './FilterTable.css';
 
 const Filter = ({ filt, updateFilter, categories }) => {
 	const [showFilters, setShowFilter] = useState(false);
+	const [eligibilitySelected, seteligibilitySelected] = useState('eligibleBenefits');
 
 	const toggleFilterForm = () => {
 		setShowFilter(!showFilters);
@@ -37,7 +38,8 @@ const Filter = ({ filt, updateFilter, categories }) => {
 				value: 'true',
 			},
 		};
-
+		
+		seteligibilitySelected(event.target.value);
 		updateFilter('eligible', filters[event.target.value]);
 	}
 
@@ -67,10 +69,12 @@ const Filter = ({ filt, updateFilter, categories }) => {
 							<RadioGroup
 								aria-labelledby="benefit-eligibility"
 								defaultValue="eligibleBenefits"
+								value={eligibilitySelected}
 								name="benefit-eligibility"
 								onChange={eligibilityFilterChange}
 							>
 								<FormControlLabel
+									checked={eligibilitySelected === 'eligibleBenefits'}
 									value="eligibleBenefits"
 									control={<Radio />}
 									label={
@@ -81,6 +85,7 @@ const Filter = ({ filt, updateFilter, categories }) => {
 									}
 								/>
 								<FormControlLabel
+									checked={eligibilitySelected === 'ineligibleBenefits'}
 									value="ineligibleBenefits"
 									control={<Radio />}
 									label={
@@ -91,6 +96,7 @@ const Filter = ({ filt, updateFilter, categories }) => {
 									}
 								/>
 								<FormControlLabel
+									checked={eligibilitySelected === 'alreadyHave'}
 									value="alreadyHave"
 									control={<Radio />}
 									label={
