@@ -47,9 +47,9 @@ const UrgentNeedsRow = ({ rowProps }) => {
                 <Typography variant="body2" gutterBottom component="div">
                   {rowProps.description}
                 </Typography>
-                {rowProps.phone_number.length && 
+                {rowProps.phone_number.length &&
                   <h4 className='font-weight'>
-                    <FormattedMessage 
+                    <FormattedMessage
                       id='urgentNeedsRow.formatPhoneNumber'
                       defaultMessage='Phone Number: '
                     />
@@ -63,8 +63,8 @@ const UrgentNeedsRow = ({ rowProps }) => {
                   target='_blank'
                   href={rowProps.link}
                   sx={{marginTop: '1rem'}}>
-                  <FormattedMessage 
-                    id='urgentNeedsTable.visit-website-button' 
+                  <FormattedMessage
+                    id='urgentNeedsTable.visit-website-button'
                     defaultMessage='Visit website' />
                 </Button>
               </Box>
