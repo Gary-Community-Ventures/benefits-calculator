@@ -755,7 +755,10 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
           sx={{mt: 4, mr: 1}}
           variant='contained'
           >
-          Benefit Programs
+          <FormattedMessage
+            id='results.displayResultsFilterButtons-benefitPrograms'
+            defaultMessage='Benefit Programs'
+          />
         </Button>
         <Button 
           className={ filterResultsButton.urgentNeeds ? 'results-link' 
