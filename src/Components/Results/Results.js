@@ -91,7 +91,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       for (const incomeStreamsBody of incomeStreamsBodies) {
         await postHouseholdMemberIncomeStream(incomeStreamsBody);
       }
-      
+
       const expensesBodies = getExpensesBodies(householdMembersBody, householdMembersResponse.id);
       for (const expensesBody of expensesBodies) {
         await postHouseholdMemberExpense(expensesBody);
@@ -131,8 +131,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 	};
 
   const getScreensBody = (formData, languageCode, userId) => {
-    const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets, 
-      startTime, isTest, externalID, lastTaxFilingYear, benefits, healthInsurance, 
+    const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets,
+      startTime, isTest, externalID, lastTaxFilingYear, benefits, healthInsurance,
       referralSource, referrerCode, otherSource, acuteHHConditions } = formData;
     const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 
@@ -165,6 +165,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       has_employer_hi: healthInsurance.employer,
       has_private_hi: healthInsurance.private,
       has_medicaid_hi: healthInsurance.medicaid,
+      has_medicare_hi: healthInsurance.medicare,
       has_chp_hi: healthInsurance.chp,
       has_no_hi: healthInsurance.none,
       referral_source: finalReferralSource,
@@ -196,7 +197,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     const { age, student, studentFulltime, pregnant, unemployed,
       unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid,
       disabilityRelatedMedicaid, hasIncome, hasExpenses, incomeStreams, expenses } = formData;
-    
+
     return {
       screen: screensId,
       relationship: relationshipToHH,
@@ -243,7 +244,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
   }
 
   const postUserSignUpInfo = async () => {
-    const { email, phone, firstName, lastName, 
+    const { email, phone, firstName, lastName,
       sendUpdates, sendOffers, commConsent } = formData.signUpInfo;
     const lowerCaseLocale = locale.toLowerCase();
     const phoneNumber = '+1' + phone;
@@ -259,7 +260,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       send_offers: sendOffers,
       send_updates: sendUpdates
     };
-    
+
     try {
       const userSignUpResponse = await postUser(user); //this should return what's on the swagger docs
       return userSignUpResponse.id;
@@ -288,13 +289,13 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       }
       return total;
     }, 0);
-    
+
     return total;
   }
 
   const displayTestResults = (tests) => {
     if (tests.length) {
-      return ( 
+      return (
         <>
           { tests.map(testResult => {
               return <li key={testResult}>{testResult}</li>
@@ -314,7 +315,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     }
   }
 
-  const displayNavigators = (navigators) => {    
+  const displayNavigators = (navigators) => {
     if (navigators.length) {
       return (
         <>
@@ -328,16 +329,16 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 										Link:{' '}
 										<a
 											href={navigator.assistance_link}
-											className='ineligibility-link navigator-link'
+											className='ineligibility-link navigator-info'
 										>
 											{navigator.assistance_link}
 										</a>
 									</h4>
 								)}
-								{navigator.email && <h4 className='font-weight'>Email: {navigator.email}</h4>}
+								{navigator.email && <h4 className='font-weight'>Email: <span className="navigator-info">{navigator.email}</span></h4>}
 								{navigator.phone_number && (
 									<h4 className='font-weight'>
-										Phone Number: {formatPhoneNumber(navigator.phone_number)}
+										Phone Number: <span className="navigator-info">{formatPhoneNumber(navigator.phone_number)}</span>
 									</h4>
 								)}
 							</div>
@@ -356,26 +357,26 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       return (
         <>
           <Grid xs={12} item={true}>
-            <Typography className='sub-header' variant='h6'> 
-              {totalEligiblePrograms(results[programSubset])} 
-              <FormattedMessage 
-                id='results.return-programsUpToLabel' 
-                defaultMessage=' programs, up to ' /> 
-              ${totalDollarAmount(results[programSubset]).toLocaleString()} 
-              <FormattedMessage 
-                id='results.return-perYearOrLabel' 
+            <Typography className='sub-header' variant='h6'>
+              {totalEligiblePrograms(results[programSubset])}
+              <FormattedMessage
+                id='results.return-programsUpToLabel'
+                defaultMessage=' programs, up to ' />
+              ${totalDollarAmount(results[programSubset]).toLocaleString()}
+              <FormattedMessage
+                id='results.return-perYearOrLabel'
                 defaultMessage=' per year or ' />
-              ${Math.round(totalDollarAmount(results[programSubset])/12).toLocaleString()} 
-              <FormattedMessage 
-                id='results.return-perMonthLabel' 
+              ${Math.round(totalDollarAmount(results[programSubset])/12).toLocaleString()}
+              <FormattedMessage
+                id='results.return-perMonthLabel'
                 defaultMessage=' per month for you to consider' />
             </Typography>
           </Grid>
           <Grid container>
             <Grid sm={10} item={true}>
               <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
-                <FormattedMessage 
-                  id='results.displaySubheader-emailResultsDescText' 
+                <FormattedMessage
+                  id='results.displaySubheader-emailResultsDescText'
                   defaultMessage='To receive a copy of these results by email please click the email results button.' />
               </Typography>
             </Grid>
@@ -389,8 +390,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                     navigate('/email-results');
                   }}
                   className='results-link'>
-                  <FormattedMessage 
-                    id='results.return-emailResultsButton' 
+                  <FormattedMessage
+                    id='results.return-emailResultsButton'
                     defaultMessage='Email Results' />
                 </Button>
               </Box>
@@ -402,8 +403,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       return (
         <Grid xs={12} item={true}>
           <Typography className='sub-header' variant='h6'>
-            <FormattedMessage 
-              id='results.displaySubheader-basedOnInformationText' 
+            <FormattedMessage
+              id='results.displaySubheader-basedOnInformationText'
               defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
           </Typography>
         </Grid>
@@ -509,37 +510,37 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
             variant='contained'
             target='_blank'
             href={row.application_link}>
-            <FormattedMessage 
-              id='results.resultsRow-applyButton' 
+            <FormattedMessage
+              id='results.resultsRow-applyButton'
               defaultMessage='Apply' />
           </Button>
-        { (row.navigators.length > 0)  && 
+        { (row.navigators.length > 0)  &&
           <Button
             variant='contained'
             target='_blank'
             onClick={openNaveList}
             sx={{marginLeft: '5px'}}>
-            <FormattedMessage 
-              id='results.resultsRow-applyWithAssistance' 
+            <FormattedMessage
+              id='results.resultsRow-applyWithAssistance'
               defaultMessage='Apply With Assistance' />
           </Button>
         }
-        { (row.navigators.length > 0 && navListOpen)  && 
+        { (row.navigators.length > 0 && navListOpen)  &&
           <div className='navigator-list'>
             <CloseIcon onClick={openNaveList} className='top-right'/>
             { displayNavigators(row.navigators) }
           </div>
         }
-          { (row.passed_tests.length > 0 || row.failed_tests.length > 0)  && 
+          { (row.passed_tests.length > 0 || row.failed_tests.length > 0)  &&
             <Accordion sx={{ m: 2 }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls='panel1a-content'
-                id='panel1a-header'> 
+                id='panel1a-header'>
                   <Typography variant='body2'>
                     <Link>
-                      <FormattedMessage 
-                        id='results.resultsRow-expandForEligibilityLink' 
+                      <FormattedMessage
+                        id='results.resultsRow-expandForEligibilityLink'
                         defaultMessage='Expand for eligibility details' />
                     </Link>
                   </Typography>
@@ -548,7 +549,7 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
                 { displayTestResults(row.passed_tests) }
                 { displayTestResults(row.failed_tests) }
               </AccordionDetails>
-            </Accordion> 
+            </Accordion>
           }
         </Box>
         )}
@@ -572,18 +573,18 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const DataGridTable = (results) => {
     const rows: GridRowsProp = DataGridRows(results);
-    const nameHeader = <FormattedMessage 
-      id='results.resultsTable-benefitLabel' 
+    const nameHeader = <FormattedMessage
+      id='results.resultsTable-benefitLabel'
       defaultMessage='Benefit' />
-    const valueHeader = <FormattedMessage 
-      id='results.resultsTable-annualValueLabel' 
+    const valueHeader = <FormattedMessage
+      id='results.resultsTable-annualValueLabel'
       defaultMessage='Annual Value' />
-    const appTimeHeader = <FormattedMessage 
-      id='results.resultsTable-timeToApply' 
+    const appTimeHeader = <FormattedMessage
+      id='results.resultsTable-timeToApply'
       defaultMessage='Time to Apply' />
 
     const columns: GridColDef[] = [
-      { field: 'name', headerName: nameHeader, flex: 1 },  
+      { field: 'name', headerName: nameHeader, flex: 1 },
       { field: 'value', headerName: valueHeader, flex: 1, valueFormatter: benefitValueFormatter, renderCell: benefitValueRender },
       { field: 'type', headerName: 'Type', flex: 1 },
       { field: 'application_time', headerName: appTimeHeader, flex: 1 },
@@ -602,8 +603,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         getRowHeight={() => 'auto'}
         disableChildrenFiltering
         hideFooter={true}
-        rows={rows} 
-        columns={columns} 
+        rows={rows}
+        columns={columns}
         filterModel={{ items: filt, linkOperator: GridLinkOperator.Or }}
         sx={{
           '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': { py: '8px' },

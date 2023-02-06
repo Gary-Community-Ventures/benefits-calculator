@@ -11,6 +11,7 @@ import Header from './Components/Header/Header';
 import EmailResults2 from './Components/EmailResults/EmailResults2';
 import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
+import referralOptions from './Assets/referralOptions'
 import './App.css';
 // import { createDevFormData } from './Assets/devFormData';
 
@@ -26,6 +27,7 @@ const App = () => {
   const isTest = searchParams.get('test') ? searchParams.get('test') : false;
   const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
   const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : '';
+  const setReferrerSource = referrer == '' || referrer in referralOptions
   const isBIAUser = externalId !== null && referrer !== '';
   const theme = createTheme(styleOverrides);
 
@@ -70,14 +72,15 @@ const App = () => {
     },
     healthInsurance: {
       employer: false,
-      private: false, 
+      private: false,
       medicaid: false,
+      medicare: false,
       chp: false,
       none: false
     },
-    referralSource: referrer,
+    referralSource: setReferrerSource ? referrer : 'other',
     referrerCode: referrer,
-    otherSource: '',
+    otherSource: setReferrerSource ? '' : referrer,
     signUpInfo: {
       email: '',
       phone: '',
@@ -112,7 +115,7 @@ const App = () => {
   // const [formData, setFormData] = useState(createDevFormData(searchParams));
 
   const initialResults = {
-    eligiblePrograms: [], 
+    eligiblePrograms: [],
     ineligiblePrograms: [],
     rawResponse: {},
     screenerId: 0,
@@ -128,7 +131,7 @@ const App = () => {
       return JSON.parse(localStorageResults);
     }
   }
- 
+
   const [results, setResults] = useState(getCurrentResultsState());
 
   useEffect(() => {
@@ -143,7 +146,7 @@ const App = () => {
       updatedFormData.studentFulltime = false;
     }
 
-    if (formData.unemployed === false) { 
+    if (formData.unemployed === false) {
       updatedFormData.unemployedWorkedInLast18Mos = false;
     }
 
@@ -172,8 +175,8 @@ const App = () => {
     }
 
     setFormData(updatedFormData);
-    
-  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses, 
+
+  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses,
     formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates]
   );
 
@@ -210,7 +213,7 @@ const App = () => {
 
   const handleCheckboxChange = (event) => {
     //the value is the name of the formData property for everything except the commConsent
-    const { value } = event.target; 
+    const { value } = event.target;
     const { name } = event.target;
 
     if (name === 'commConsent') {
@@ -222,13 +225,13 @@ const App = () => {
       setFormData({ ...formData, [value]: !formData[value] });
     }
   }
-  
+
   const handleRadioButtonChange = (event) => {
     const { name, value } = event.target;
     let boolValue = (value === 'true');
     setFormData({ ...formData, [name]: boolValue });
   }
-  
+
   const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, householdSize) => {
     event.preventDefault();
     const isZipcodeQuestionAndCountyIsEmpty = (questionName === 'zipcode' && formData.county === '');
@@ -265,7 +268,7 @@ const App = () => {
 
   const clearLocalStorageFormDataAndResults = () => {
     localStorage.clear();
-    //the setTimeout function was added in order to make sure that you don't clear and 
+    //the setTimeout function was added in order to make sure that you don't clear and
     //set the formData and results at the same time
     setTimeout(() => {
       setFormData(initialFormData);
@@ -283,48 +286,48 @@ const App = () => {
               path='/'
               element={<Navigate to={`/step-0${urlSearchParams}`} replace /> } />
             <Route
-              path='/step-0' 
+              path='/step-0'
               element={<LandingPage
                 clearLocalStorageFormDataAndResults={clearLocalStorageFormDataAndResults} /> } />
-            <Route 
-              path='/step-1' 
-              element={<Disclaimer 
+            <Route
+              path='/step-1'
+              element={<Disclaimer
                 formData={formData}
                 handleCheckboxChange={handleCheckboxChange} /> } />
-            <Route 
-              path='/step-:id' 
-              element={<QuestionComponentContainer 
-                formData={formData} 
-                handleTextfieldChange={handleTextfieldChange} 
+            <Route
+              path='/step-:id'
+              element={<QuestionComponentContainer
+                formData={formData}
+                handleTextfieldChange={handleTextfieldChange}
                 handleContinueSubmit={handleContinueSubmit}
-                handleRadioButtonChange={handleRadioButtonChange} 
-                handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
+                handleRadioButtonChange={handleRadioButtonChange}
+                handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
                 handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-                handleHouseholdDataSubmit={handleHouseholdDataSubmit} 
-                setFormData={setFormData} 
-                handleCheckboxChange={handleCheckboxChange} /> } /> 
-            <Route 
-              path='/confirm-information' 
+                handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+                setFormData={setFormData}
+                handleCheckboxChange={handleCheckboxChange} /> } />
+            <Route
+              path='/confirm-information'
               element={<Confirmation
-                formData={formData} /> } /> 
-            <Route 
-              path='/results' 
-              element={<Results 
+                formData={formData} /> } />
+            <Route
+              path='/results'
+              element={<Results
                 formData={formData}
                 results={results}
                 setResults={setResults}
-                programSubset='eligiblePrograms' 
-                passedOrFailedTests='passed_tests' /> } /> 
-            <Route 
-              path='/ineligible-results' 
-              element={<Results 
+                programSubset='eligiblePrograms'
+                passedOrFailedTests='passed_tests' /> } />
+            <Route
+              path='/ineligible-results'
+              element={<Results
                 formData={formData}
                 results={results}
                 setResults={setResults}
-                programSubset='ineligiblePrograms' 
+                programSubset='ineligiblePrograms'
                 passedOrFailedTests='failed_tests' /> } />
             <Route
-              path='/email-results' 
+              path='/email-results'
               element={<EmailResults2
                 formData={formData}
                 results={results}
