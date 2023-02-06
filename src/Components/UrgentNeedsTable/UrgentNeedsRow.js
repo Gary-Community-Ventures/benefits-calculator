@@ -43,7 +43,7 @@ const UrgentNeedsRow = ({ rowProps }) => {
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}></TableCell>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box>
+              <Box sx={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
                 <Typography variant="body2" gutterBottom component="div">
                   {rowProps.description}
                 </Typography>
