@@ -60,11 +60,28 @@ const Results = ({ results, setResults, formData}) => {
 			operatorValue: 'is',
 			value: 'true',
 		},
+		hasBenefit: {
+			id: 3,
+			columnField: 'has_benefit',
+			operatorValue: 'is',
+			value: 'false',
+		},
+    filtList: function() {
+      const filters = [
+        this.citizen,
+        this.eligible,
+      ]
+      if (this.hasBenefit !==false)
+        filters.push(this.hasBenefit)
+      return filters
+    }
 	});
-
-  const updateFilter = (filtName, filter) => {
-    const newFilter = {...filt}
-    newFilter[filtName] = filter
+  const updateFilter = function() {
+    const newFilter = { ...filt };
+    for (let i=0; i<arguments.length; i++) {
+      let filter = arguments[i]
+      newFilter[filter.name] = filter.filter
+    }
     setFilt(newFilter)
   }
 
@@ -122,9 +139,6 @@ const Results = ({ results, setResults, formData}) => {
 		const languageCode = locale.toLowerCase();
 		const eligibilityResponse = rawResponse.programs[languageCode];
 		const programs = eligibilityResponse
-			.filter(
-				(program) => !formData.benefits[program.name_abbreviated]
-			)
 			.sort(
 				(benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value
 			);
@@ -410,29 +424,28 @@ const Results = ({ results, setResults, formData}) => {
     let count = 0;
     for (let i = 0; i < results.length; i++) {
       let dataGridRow = {
-        id: count,
-        path: results[i].name,
-        name: results[i].name,
-        name_abbreviated: results[i].name_abbreviated,
-        value: results[i].estimated_value,
-        type: results[i].value_type,
-        description: results[i].description,
-        application_time: results[i].estimated_application_time,
-        delivery_time: results[i].estimated_delivery_time,
-        application_link: results[i].apply_button_link,
-        passed_tests: results[i].passed_tests,
-        failed_tests: results[i].failed_tests,
-        navigators: results[i].navigators,
-        citizenship: results[i].legal_status_required,
-        eligible: results[i].eligible
-      };
+				id: count,
+				path: results[i].name,
+				name: results[i].name,
+				has_benefit: formData.benefits[results[i].name_abbreviated],
+				value: results[i].estimated_value,
+				type: results[i].value_type,
+				description: results[i].description,
+				application_time: results[i].estimated_application_time,
+				delivery_time: results[i].estimated_delivery_time,
+				application_link: results[i].apply_button_link,
+				passed_tests: results[i].passed_tests,
+				failed_tests: results[i].failed_tests,
+				navigators: results[i].navigators,
+				citizenship: results[i].legal_status_required,
+				eligible: results[i].eligible,
+			};
       dgr.push(dataGridRow);
       count++;
       let dataGridChild = {
         id: count,
         path: results[i].name + '/Detail',
         name: results[i].description,
-        name_abbreviated: '',
         value: '',
         type: '',
         application_time: '',
@@ -443,7 +456,6 @@ const Results = ({ results, setResults, formData}) => {
         passed_tests: results[i].passed_tests,
         failed_tests: results[i].failed_tests,
         navigators: results[i].navigators,
-        eligible: ''
       }
       dgr.push(dataGridChild);
       count++;
@@ -594,44 +606,61 @@ const Results = ({ results, setResults, formData}) => {
       { field: 'passed_tests', headerName: 'Passed Tests', flex: 1 },
       { field: 'failed_tests', headerName: 'Passed Tests', flex: 1 },
       { field: 'eligible', headerName: 'Eligible', flex: 1, 'type': 'boolean' },
-      { field: 'name_abbreviated', headerName: 'Name Abbreviated', flex: 1 }
+      { field: 'has_benefit', headerName: 'Has Benefit', flex: 1, 'type': 'boolean' }
     ];
     return (
-      <DataGridPro
-        treeData
-        autoHeight
-        getTreeDataPath={(row) => row.path.split('/')}
-        groupingColDef={groupingColDef}
-        getRowHeight={() => 'auto'}
-        disableChildrenFiltering
-        hideFooter={true}
-        rows={rows} 
-        columns={columns} 
-        filterModel={{ items: [filt.citizen, filt.eligible], linkOperator: GridLinkOperator.And }}
-        sx={{
-          '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': { py: '8px' },
-          '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': { py: '15px' },
-          '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': { py: '22px' },
-        }}
-        initialState={{
-          columns: {
-            columnVisibilityModel: {
-              citizenship: false,
-              delivery_time: false,
-              type: false,
-              name: false,
-              description: false,
-              application_link: false,
-              passed_tests: false,
-              failed_tests: false,
-              navigators: false,
-              eligible: false,
-              name_abbreviated: false
-            }
-          }
-        }}
-        />
-    );
+			<>
+				<Filter
+					filt={filt}
+					updateFilter={updateFilter}
+					categories={['food', 'cash']}
+				/>
+				<DataGridPro
+					treeData
+					autoHeight
+					getTreeDataPath={(row) => row.path.split('/')}
+					groupingColDef={groupingColDef}
+					getRowHeight={() => 'auto'}
+					disableChildrenFiltering
+					disableColumnFilter
+					hideFooter={true}
+					rows={rows}
+					columns={columns}
+					filterModel={{
+						items: filt.filtList(),
+						linkOperator: GridLinkOperator.And,
+					}}
+					sx={{
+						'&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': {
+							py: '8px',
+						},
+						'&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': {
+							py: '15px',
+						},
+						'&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': {
+							py: '22px',
+						},
+					}}
+					initialState={{
+						columns: {
+							columnVisibilityModel: {
+								citizenship: false,
+								delivery_time: false,
+								type: false,
+								name: false,
+								description: false,
+								application_link: false,
+								passed_tests: false,
+								failed_tests: false,
+								navigators: false,
+								eligible: false,
+								has_benefit: false,
+							},
+						},
+					}}
+				/>
+			</>
+		);
   }
 
   const benefitValueFormatter = (params) => {
@@ -665,25 +694,25 @@ const Results = ({ results, setResults, formData}) => {
     // Filter out citizen benefits when toggle is on
     // Filter out non-citizen benifits when toggle is off
     if (e.target.checked) {
-			updateFilter(
-        'citizen',
-				{
+			updateFilter({
+        name: 'citizen',
+				filter: {
 					id: 1,
 					columnField: 'citizenship',
 					operatorValue: 'isAnyOf',
 					value: ['non-citizen', 'none'],
 				},
-			);
+      });
 		} else {
-			updateFilter(
-				'citizen',
-        {
+			updateFilter({
+				name: 'citizen',
+        filter: {
 					id: 1,
 					columnField: 'citizenship',
 					operatorValue: 'isAnyOf',
 					value: ['citizen', 'none'],
 				},
-			);
+      });
 		}
   }
 
@@ -756,11 +785,6 @@ const Results = ({ results, setResults, formData}) => {
                   control={<CustomSwitch handleCustomSwitchToggle={handleCustomSwitchToggle} /> }
                 />
                 { displayResultsFilterButtons() }
-                {<Filter
-                  filt={filt}
-                  updateFilter={updateFilter}
-                  categories={['food', 'cash']}
-                />}
                 { filterResultsButton.allBenefits && DataGridTable(results.programs)}
                 { filterResultsButton.urgentNeeds && <Table /> }
               </Grid>

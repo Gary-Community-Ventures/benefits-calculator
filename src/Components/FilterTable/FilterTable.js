@@ -18,7 +18,7 @@ const Filter = ({ filt, updateFilter, categories }) => {
 	};
 
 	const eligibilityFilterChange = (event) => {
-		const filters = {
+		const eligibilityFilters = {
 			eligibleBenefits: {
 				id: 2,
 				columnField: 'eligible',
@@ -38,10 +38,28 @@ const Filter = ({ filt, updateFilter, categories }) => {
 				value: 'true',
 			},
 		};
-		
+		const hasBenefitFilters = {
+			eligibleBenefits: {
+				id: 3,
+				columnField: 'has_benefit',
+				operatorValue: 'is',
+				value: 'false',
+			},
+			ineligibleBenefits: {
+				id: 3,
+				columnField: 'has_benefit',
+				operatorValue: 'is',
+				value: 'false',
+			},
+			alreadyHave: false,
+		};
+
 		seteligibilitySelected(event.target.value);
-		updateFilter('eligible', filters[event.target.value]);
-	}
+		updateFilter(
+			{ name: 'eligible', filter: eligibilityFilters[event.target.value] },
+			{ name: 'hasBenefit', filter: hasBenefitFilters[event.target.value] }
+		);
+	} 
 
 	return (
 		<div className="filter">
