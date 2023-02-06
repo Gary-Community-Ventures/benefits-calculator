@@ -40,8 +40,8 @@ const UrgentNeedsRow = ({ rowProps }) => {
           <TableCell>{rowProps.type}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}></TableCell>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <TableCell style={{paddingBottom: 0, paddingTop: 0}}></TableCell>
+          <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
                 <Typography variant="body2" gutterBottom component="div">
@@ -49,14 +49,20 @@ const UrgentNeedsRow = ({ rowProps }) => {
                 </Typography>
                 {rowProps.phone_number.length && 
                   <h4 className='font-weight'>
-                    Phone Number: <span className="navigator-info">{formatPhoneNumber(rowProps.phone_number)}</span>
+                    <FormattedMessage 
+                      id='urgentNeedsRow.formatPhoneNumber'
+                      defaultMessage='Phone Number: '
+                    />
+                    <span className="navigator-info">
+                      {formatPhoneNumber(rowProps.phone_number)}
+                    </span>
                   </h4>
                 }
                 <Button
                   variant='contained'
                   target='_blank'
                   href={rowProps.link}
-                  sx={{ marginTop: '1rem'}}>
+                  sx={{marginTop: '1rem'}}>
                   <FormattedMessage 
                     id='urgentNeedsTable.visit-website-button' 
                     defaultMessage='Visit website' />

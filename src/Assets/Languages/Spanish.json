@@ -332,5 +332,6 @@
   "acuteConditionOptions.loss": "Costos de funeral, entierro o cremación",
   "urgentNeedsTable.visit-website-button": "Visite el sitio web",
   "urgentNeedsTable.resources-columnHeader": "Recursos",
-  "urgentNeedsTable.typeOfResource-columnHeader": "Tipo de Recurso"
+  "urgentNeedsTable.typeOfResource-columnHeader": "Tipo de Recurso",
+  "urgentNeedsRow.formatPhoneNumber": "Número de teléfono: "
 }
