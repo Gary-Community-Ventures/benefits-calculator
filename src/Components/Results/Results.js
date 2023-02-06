@@ -773,7 +773,10 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
           sx={{mt: 4}}
           variant='contained'
           >
-          Urgent Needs Resources
+          <FormattedMessage
+            id='results.displayResultsFilterButtons-urgentNeedsResources'
+            defaultMessage='Urgent Needs Resources'
+          />
         </Button>
       </div>
     );

@@ -279,6 +279,7 @@
   "results.resultsRow-reducedCostText": "reduced cost services",
   "results.returnsignupCitizenFilter": "Only show benefits that do not require a citizen in the household",
   "results.displayResultsFilterButtons-benefitPrograms": "Benefit Programs",
+  "results.displayResultsFilterButtons-urgentNeedsResources": "Urgent Needs Resources",
   "loading.return-loadingText": "Please wait while we gather your results...",
   "results.displaySubheader-loadingDisclaimerText": "Remember that we can't guarantee eligibility, but based on the information you provided, we believe you are likely eligible for the following programs.",
   "taxYearOptions.noRecentFiling": "I have not filed taxes in the last 5 years",
