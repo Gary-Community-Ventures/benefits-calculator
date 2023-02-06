@@ -328,5 +328,7 @@
   "acuteConditionOptions.support": "Un desafío que usted (o su hijo) tiene y que le interesaría hablar con alguien fuera de su hogar",
   "acuteConditionOptions.childDevelopment": "Preocupación por el desarrollo de su bebé o niño pequeño",
   "acuteConditionOptions.loss": "Costos de funeral, entierro o cremación",
-  "urgentNeedsTable.visit-website-button": "Visita el sitio web"
+  "urgentNeedsTable.visit-website-button": "Visite el sitio web",
+  "urgentNeedsTable.resources-columnHeader": "Recursos",
+  "urgentNeedsTable.typeOfResource-columnHeader": "Tipo de Recurso"
 }

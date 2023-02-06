@@ -6,6 +6,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import UrgentNeedsRow from './UrgentNeedsRow';
+import { FormattedMessage } from 'react-intl';
 
 const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
   const finalUrgentNeedsPrograms = urgentNeedsPrograms[locale.toLowerCase()];
@@ -16,8 +17,18 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
         <TableHead>
           <TableRow>
             <TableCell></TableCell>
-            <TableCell align='left'>Resources</TableCell>
-            <TableCell align='left'>Type of Resource</TableCell>
+            <TableCell align='left'>
+              <FormattedMessage 
+                id='urgentNeedsTable.resources-columnHeader'
+                defaultMessage='Resources' 
+              />
+            </TableCell>
+            <TableCell align='left'>
+              <FormattedMessage 
+                id='urgentNeedsTable.typeOfResource-columnHeader'
+                defaultMessage='Type of Resource'
+              />
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
