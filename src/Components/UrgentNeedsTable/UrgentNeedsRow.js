@@ -40,7 +40,8 @@ const UrgentNeedsRow = ({ rowProps }) => {
           <TableCell>{rowProps.type}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <TableCell></TableCell>
+          <TableCell colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box>
                 <Typography variant="body2" gutterBottom component="div">
