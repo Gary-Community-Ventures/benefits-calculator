@@ -48,8 +48,8 @@ const UrgentNeedsRow = ({ rowProps }) => {
                   {rowProps.description}
                 </Typography>
                 {rowProps.phone_number.length && 
-                  <h4>
-                    Phone Number: {formatPhoneNumber(rowProps.phone_number)}
+                  <h4 className='font-weight'>
+                    Phone Number: <span className="navigator-info">{formatPhoneNumber(rowProps.phone_number)}</span>
                   </h4>
                 }
                 <Button
