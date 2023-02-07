@@ -86,22 +86,21 @@ const Filter = ({
 
 	return (
 		<div className="filter">
-			<Button
-				startIcon={<FilterListIcon />}
-				sx={{ mt: 1 }}
-				variant="contained"
-				onClick={toggleFilterForm}
-			>
+			<span className="filters-button" onClick={toggleFilterForm}>
+				<FilterListIcon  sx={{mr: '.5rem'}} />
 				<FormattedMessage
 					id="filter.filterByCategoryButton"
 					defaultMessage="Filter By Category"
 				/>
-			</Button>
+			</span>
 			{showFilters && (
 				<div className="filterForm">
-					<div>
-						<FormControl>
-							<FormLabel id="benefit-eligibility">
+					<div className="filter-selection-container">
+						<FormControl className="full-width">
+							<FormLabel
+								id="benefit-eligibility"
+								sx={{ color: '#000000', fontWeight: 500 }}
+							>
 								<FormattedMessage
 									id="filter.filterByEligibility"
 									defaultMessage="Filter By Eligibility"
@@ -114,45 +113,54 @@ const Filter = ({
 								name="benefit-eligibility"
 								onChange={eligibilityFilterChange}
 							>
-								<FormControlLabel
-									checked={eligibilitySelected === 'eligibleBenefits'}
-									value="eligibleBenefits"
-									control={<Radio />}
-									label={
-										<FormattedMessage
-											id="filter.filterEligibe"
-											defaultMessage="Eligible"
-										/>
-									}
-								/>
-								<FormControlLabel
-									checked={eligibilitySelected === 'ineligibleBenefits'}
-									value="ineligibleBenefits"
-									control={<Radio />}
-									label={
-										<FormattedMessage
-											id="filter.filterIneligibe"
-											defaultMessage="Ineligible"
-										/>
-									}
-								/>
-								<FormControlLabel
-									checked={eligibilitySelected === 'alreadyHave'}
-									value="alreadyHave"
-									control={<Radio />}
-									label={
-										<FormattedMessage
-											id="filter.filterAlreadyHave"
-											defaultMessage="Benefits I Already Have"
-										/>
-									}
-								/>
+								<article className="radio-option">
+									<FormControlLabel
+										checked={eligibilitySelected === 'eligibleBenefits'}
+										value="eligibleBenefits"
+										control={<Radio />}
+										label={
+											<FormattedMessage
+												id="filter.filterEligibe"
+												defaultMessage="Eligible"
+											/>
+										}
+									/>
+								</article>
+								<article className="radio-option">
+									<FormControlLabel
+										checked={eligibilitySelected === 'ineligibleBenefits'}
+										value="ineligibleBenefits"
+										control={<Radio />}
+										label={
+											<FormattedMessage
+												id="filter.filterIneligibe"
+												defaultMessage="Ineligible"
+											/>
+										}
+									/>
+								</article>
+								<article className="radio-option">
+									<FormControlLabel
+										checked={eligibilitySelected === 'alreadyHave'}
+										value="alreadyHave"
+										control={<Radio />}
+										label={
+											<FormattedMessage
+												id="filter.filterAlreadyHave"
+												defaultMessage="Benefits I Already Have"
+											/>
+										}
+									/>
+								</article>
 							</RadioGroup>
 						</FormControl>
 					</div>
-					<div>
-						<FormControl>
-							<FormLabel id="benefit-category">
+					<div className="filter-selection-container margin-bottom">
+						<FormControl className="full-width">
+							<FormLabel
+								id="benefit-category"
+								sx={{ color: '#000000', fontWeight: 500 }}
+							>
 								<FormattedMessage
 									id="filter.filterByCategory"
 									defaultMessage="Filter By Category"
@@ -163,26 +171,29 @@ const Filter = ({
 								name="benefit-category"
 								onChange={categoryFilterChange}
 							>
-								<FormControlLabel
-									checked={categorySelected === 'All Categories'}
-									value="All Categories"
-									control={<Radio />}
-									label={
-										<FormattedMessage
-											id="filter.filterAllCategories"
-											defaultMessage="All Categories"
-										/>
-									}
-								/>
+								<article className="radio-option">
+									<FormControlLabel
+										checked={categorySelected === 'All Categories'}
+										value="All Categories"
+										control={<Radio />}
+										label={
+											<FormattedMessage
+												id="filter.filterAllCategories"
+												defaultMessage="All Categories"
+											/>
+										}
+									/>
+								</article>
 								{categories.map((category) => {
 									return (
-										<FormControlLabel
-											key={category}
-											checked={categorySelected === category}
-											value={category}
-											control={<Radio />}
-											label={category}
-										/>
+										<article className="radio-option" key={category}>
+											<FormControlLabel
+												checked={categorySelected === category}
+												value={category}
+												control={<Radio />}
+												label={category}
+											/>
+										</article>
 									);
 								})}
 							</RadioGroup>

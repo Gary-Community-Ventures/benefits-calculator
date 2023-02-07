@@ -642,26 +642,29 @@ const Results = ({ results, setResults, formData}) => {
     }
 
     return (
-      <>
-        <FormControlLabel
-          label={
-            <FormattedMessage
-              id="results.returnsignupCitizenFilter"
-              defaultMessage="Only show benefits that do not require a citizen in the household"
-            />
-          }
-          control={
-            <CustomSwitch handleCustomSwitchToggle={handleCustomSwitchToggle} checked={citizenshipToggle} />
-          }
-        />
+			<>
+				<FormControlLabel
+					label={
+						<FormattedMessage
+							id="results.returnsignupCitizenFilter"
+							defaultMessage="Only show benefits that do not require a citizen in the household"
+						/>
+					}
+					control={
+						<CustomSwitch
+							handleCustomSwitchToggle={handleCustomSwitchToggle}
+							checked={citizenshipToggle}
+						/>
+					}
+				/>
 				<Filter
 					filt={filt}
 					updateFilter={updateFilter}
 					categories={allCategories()}
-          eligibilityState={eligibilityState}
-          categoryState={categoryState}
+					eligibilityState={eligibilityState}
+					categoryState={categoryState}
 				/>
-				<Toolbar sx={{ border: 1 }}>
+				<Toolbar sx={{ border: 1, backgroundColor: '#0096B0', color: 'white' }}>
 					<span className="space-around border-right">
 						{filt.category.value ?? (
 							<FormattedMessage
@@ -671,7 +674,7 @@ const Results = ({ results, setResults, formData}) => {
 						)}
 					</span>
 					<span className="space-around">
-						${categoryValue()}{' '}
+						${categoryValue().toLocaleString()}{' '}
 						<FormattedMessage id="results.perYear" defaultMessage="Per Year" />
 					</span>
 				</Toolbar>
