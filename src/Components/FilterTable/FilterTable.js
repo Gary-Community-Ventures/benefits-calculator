@@ -90,7 +90,7 @@ const Filter = ({
 				<FilterListIcon  sx={{mr: '.5rem'}} />
 				<FormattedMessage
 					id="filter.filterByCategoryButton"
-					defaultMessage="Filter By Category"
+					defaultMessage="Filters"
 				/>
 			</span>
 			{showFilters && (
