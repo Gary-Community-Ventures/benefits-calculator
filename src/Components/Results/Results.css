@@ -13,6 +13,14 @@
   color: #4ecdc4;
 }
 
+.space-around {
+  padding: 0px 5px 0px 5px;
+}
+
+.border-right {
+  border-right: 1px solid black;
+}
+
 .navigator-list {
   position: relative;
   background-color: white;

@@ -21,6 +21,7 @@ import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
 import Table from '../Table/Table';
+import Toolbar from '@mui/material/Toolbar';
 import {
   postPartialParentScreen,
   postHouseholdMemberData,
@@ -46,6 +47,9 @@ const Results = ({ results, setResults, formData}) => {
     allBenefits: true,
     urgentNeeds: false
   });
+  const [citizenshipToggle, setCitizenshipToggle] = useState(false)
+	const eligibilityState = useState('eligibleBenefits');
+	const categoryState = useState('All Categories');
 
   const [filt, setFilt] = useState({
 		citizen: {
@@ -625,13 +629,52 @@ const Results = ({ results, setResults, formData}) => {
         return acc
       }, [])
     }
+
+    const categoryValue = () => {
+      return results.reduce((acc, program) => {
+        if (filt.category === false || program.category === filt.category.value) {
+          if (filt.citizen.value.includes(program.legal_status_required)) {
+						acc += program.estimated_value;
+					}
+        }
+        return acc
+      }, 0)
+    }
+
     return (
-			<>
+      <>
+        <FormControlLabel
+          label={
+            <FormattedMessage
+              id="results.returnsignupCitizenFilter"
+              defaultMessage="Only show benefits that do not require a citizen in the household"
+            />
+          }
+          control={
+            <CustomSwitch handleCustomSwitchToggle={handleCustomSwitchToggle} checked={citizenshipToggle} />
+          }
+        />
 				<Filter
 					filt={filt}
 					updateFilter={updateFilter}
 					categories={allCategories()}
+          eligibilityState={eligibilityState}
+          categoryState={categoryState}
 				/>
+				<Toolbar sx={{ border: 1 }}>
+					<span className="space-around border-right">
+						{filt.category.value ?? (
+							<FormattedMessage
+								id="filter.filterAllCategories"
+								defaultMessage="All Categories"
+							/>
+						)}
+					</span>
+					<span className="space-around">
+						${categoryValue()}{' '}
+						<FormattedMessage id="results.perYear" defaultMessage="Per Year" />
+					</span>
+				</Toolbar>
 				<DataGridPro
 					treeData
 					autoHeight
@@ -672,7 +715,7 @@ const Results = ({ results, setResults, formData}) => {
 								navigators: false,
 								eligible: false,
 								has_benefit: false,
-                categorie: false
+								category: false,
 							},
 						},
 					}}
@@ -732,6 +775,7 @@ const Results = ({ results, setResults, formData}) => {
 				},
       });
 		}
+    setCitizenshipToggle(e.target.checked);
   }
 
   const displayHeaderSection = () => {
@@ -795,13 +839,6 @@ const Results = ({ results, setResults, formData}) => {
             <>
               { displayHeaderSection() }
               <Grid xs={12} item={true}>
-                <FormControlLabel
-                  label={<FormattedMessage 
-                    id='results.returnsignupCitizenFilter' 
-                    defaultMessage='Only show benefits that do not require a citizen in the household' />
-                  }
-                  control={<CustomSwitch handleCustomSwitchToggle={handleCustomSwitchToggle} /> }
-                />
                 { displayResultsFilterButtons() }
                 { filterResultsButton.allBenefits && DataGridTable(results.programs)}
                 { filterResultsButton.urgentNeeds && <Table /> }

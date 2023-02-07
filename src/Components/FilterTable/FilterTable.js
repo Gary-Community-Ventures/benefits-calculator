@@ -9,10 +9,15 @@ import { FormattedMessage } from 'react-intl';
 import { useState } from 'react';
 import './FilterTable.css';
 
-const Filter = ({ filt, updateFilter, categories }) => {
+const Filter = ({
+	updateFilter,
+	categories,
+	eligibilityState,
+	categoryState,
+}) => {
 	const [showFilters, setShowFilter] = useState(false);
-	const [eligibilitySelected, seteligibilitySelected] = useState('eligibleBenefits');
-	const [categorySelected, setCategorySelected] = useState('all');
+	const [eligibilitySelected, seteligibilitySelected] = eligibilityState;
+	const [categorySelected, setCategorySelected] = categoryState;
 
 	const toggleFilterForm = () => {
 		setShowFilter(!showFilters);
@@ -60,11 +65,11 @@ const Filter = ({ filt, updateFilter, categories }) => {
 			{ name: 'eligible', filter: eligibilityFilters[event.target.value] },
 			{ name: 'hasBenefit', filter: hasBenefitFilters[event.target.value] }
 		);
-	}
+	};
 
 	const categoryFilterChange = (event) => {
-		if (event.target.value === 'all') {
-			updateFilter({name: 'category', filter: false});
+		if (event.target.value === 'All Categories') {
+			updateFilter({ name: 'category', filter: false });
 		} else {
 			updateFilter({
 				name: 'category',
@@ -73,11 +78,11 @@ const Filter = ({ filt, updateFilter, categories }) => {
 					columnField: 'category',
 					operatorValue: 'equals',
 					value: event.target.value,
-				}
+				},
 			});
 		}
 		setCategorySelected(event.target.value);
-	}
+	};
 
 	return (
 		<div className="filter">
@@ -147,20 +152,25 @@ const Filter = ({ filt, updateFilter, categories }) => {
 					</div>
 					<div>
 						<FormControl>
-							<FormLabel id="benefit-category">Benefit Category</FormLabel>
+							<FormLabel id="benefit-category">
+								<FormattedMessage
+									id="filter.filterByCategory"
+									defaultMessage="Filter By Category"
+								/>
+							</FormLabel>
 							<RadioGroup
 								aria-labelledby="benefit-category"
 								name="benefit-category"
 								onChange={categoryFilterChange}
 							>
 								<FormControlLabel
-									checked={categorySelected === 'all'}
-									value="all"
+									checked={categorySelected === 'All Categories'}
+									value="All Categories"
 									control={<Radio />}
 									label={
 										<FormattedMessage
-											id="filter.filterByCategoryButton"
-											defaultMessage="Filter By Category"
+											id="filter.filterAllCategories"
+											defaultMessage="All Categories"
 										/>
 									}
 								/>
