@@ -12,6 +12,7 @@ import './FilterTable.css';
 const Filter = ({ filt, updateFilter, categories }) => {
 	const [showFilters, setShowFilter] = useState(false);
 	const [eligibilitySelected, seteligibilitySelected] = useState('eligibleBenefits');
+	const [categorySelected, setCategorySelected] = useState('all');
 
 	const toggleFilterForm = () => {
 		setShowFilter(!showFilters);
@@ -59,7 +60,7 @@ const Filter = ({ filt, updateFilter, categories }) => {
 			{ name: 'eligible', filter: eligibilityFilters[event.target.value] },
 			{ name: 'hasBenefit', filter: hasBenefitFilters[event.target.value] }
 		);
-	} 
+	}
 
 	const categoryFilterChange = (event) => {
 		if (event.target.value === 'all') {
@@ -75,6 +76,7 @@ const Filter = ({ filt, updateFilter, categories }) => {
 				}
 			});
 		}
+		setCategorySelected(event.target.value);
 	}
 
 	return (
@@ -148,11 +150,11 @@ const Filter = ({ filt, updateFilter, categories }) => {
 							<FormLabel id="benefit-category">Benefit Category</FormLabel>
 							<RadioGroup
 								aria-labelledby="benefit-category"
-								defaultValue="all"
 								name="benefit-category"
 								onChange={categoryFilterChange}
 							>
 								<FormControlLabel
+									checked={categorySelected === 'all'}
 									value="all"
 									control={<Radio />}
 									label={
@@ -166,6 +168,7 @@ const Filter = ({ filt, updateFilter, categories }) => {
 									return (
 										<FormControlLabel
 											key={category}
+											checked={categorySelected === category}
 											value={category}
 											control={<Radio />}
 											label={category}
