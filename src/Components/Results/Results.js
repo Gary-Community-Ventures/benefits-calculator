@@ -22,6 +22,7 @@ import Loading from '../Loading/Loading';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
 import Table from '../Table/Table';
 import Toolbar from '@mui/material/Toolbar';
+import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
   postPartialParentScreen,
   postHouseholdMemberData,
@@ -126,7 +127,7 @@ const Results = ({ results, setResults, formData}) => {
       for (const incomeStreamsBody of incomeStreamsBodies) {
         await postHouseholdMemberIncomeStream(incomeStreamsBody);
       }
-      
+
       const expensesBodies = getExpensesBodies(householdMembersBody, householdMembersResponse.id);
       for (const expensesBody of expensesBodies) {
         await postHouseholdMemberExpense(expensesBody);
@@ -160,8 +161,8 @@ const Results = ({ results, setResults, formData}) => {
 	};
 
   const getScreensBody = (formData, languageCode, userId) => {
-    const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets, 
-      startTime, isTest, externalID, lastTaxFilingYear, benefits, healthInsurance, 
+    const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets,
+      startTime, isTest, externalID, lastTaxFilingYear, benefits, healthInsurance,
       referralSource, referrerCode, otherSource, acuteHHConditions } = formData;
     const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 
@@ -194,6 +195,7 @@ const Results = ({ results, setResults, formData}) => {
       has_employer_hi: healthInsurance.employer,
       has_private_hi: healthInsurance.private,
       has_medicaid_hi: healthInsurance.medicaid,
+      has_medicare_hi: healthInsurance.medicare,
       has_chp_hi: healthInsurance.chp,
       has_no_hi: healthInsurance.none,
       referral_source: finalReferralSource,
@@ -225,7 +227,7 @@ const Results = ({ results, setResults, formData}) => {
     const { age, student, studentFulltime, pregnant, unemployed,
       unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid,
       disabilityRelatedMedicaid, hasIncome, hasExpenses, incomeStreams, expenses } = formData;
-    
+
     return {
       screen: screensId,
       relationship: relationshipToHH,
@@ -272,7 +274,7 @@ const Results = ({ results, setResults, formData}) => {
   }
 
   const postUserSignUpInfo = async () => {
-    const { email, phone, firstName, lastName, 
+    const { email, phone, firstName, lastName,
       sendUpdates, sendOffers, commConsent } = formData.signUpInfo;
     const lowerCaseLocale = locale.toLowerCase();
     const phoneNumber = '+1' + phone;
@@ -288,7 +290,7 @@ const Results = ({ results, setResults, formData}) => {
       send_offers: sendOffers,
       send_updates: sendUpdates
     };
-    
+
     try {
       const userSignUpResponse = await postUser(user); //this should return what's on the swagger docs
       return userSignUpResponse.id;
@@ -317,13 +319,13 @@ const Results = ({ results, setResults, formData}) => {
       }
       return total;
     }, 0);
-    
+
     return total;
   }
 
   const displayTestResults = (tests) => {
     if (tests.length) {
-      return ( 
+      return (
         <>
           { tests.map(testResult => {
               return <li key={testResult}>{testResult}</li>
@@ -343,7 +345,7 @@ const Results = ({ results, setResults, formData}) => {
     }
   }
 
-  const displayNavigators = (navigators) => {    
+  const displayNavigators = (navigators) => {
     if (navigators.length) {
       return (
         <>
@@ -357,16 +359,16 @@ const Results = ({ results, setResults, formData}) => {
 										Link:{' '}
 										<a
 											href={navigator.assistance_link}
-											className='ineligibility-link navigator-link'
+											className='ineligibility-link navigator-info'
 										>
 											{navigator.assistance_link}
 										</a>
 									</h4>
 								)}
-								{navigator.email && <h4 className='font-weight'>Email: {navigator.email}</h4>}
+								{navigator.email && <h4 className='font-weight'>Email: <span className="navigator-info">{navigator.email}</span></h4>}
 								{navigator.phone_number && (
 									<h4 className='font-weight'>
-										Phone Number: {formatPhoneNumber(navigator.phone_number)}
+										Phone Number: <span className="navigator-info">{formatPhoneNumber(navigator.phone_number)}</span>
 									</h4>
 								)}
 							</div>
@@ -530,37 +532,37 @@ const Results = ({ results, setResults, formData}) => {
             variant='contained'
             target='_blank'
             href={row.application_link}>
-            <FormattedMessage 
-              id='results.resultsRow-applyButton' 
+            <FormattedMessage
+              id='results.resultsRow-applyButton'
               defaultMessage='Apply' />
           </Button>
-        { (row.navigators.length > 0)  && 
+        { (row.navigators.length > 0)  &&
           <Button
             variant='contained'
             target='_blank'
             onClick={openNaveList}
             sx={{marginLeft: '5px'}}>
-            <FormattedMessage 
-              id='results.resultsRow-applyWithAssistance' 
+            <FormattedMessage
+              id='results.resultsRow-applyWithAssistance'
               defaultMessage='Apply With Assistance' />
           </Button>
         }
-        { (row.navigators.length > 0 && navListOpen)  && 
+        { (row.navigators.length > 0 && navListOpen)  &&
           <div className='navigator-list'>
             <CloseIcon onClick={openNaveList} className='top-right'/>
             { displayNavigators(row.navigators) }
           </div>
         }
-          { (row.passed_tests.length > 0 || row.failed_tests.length > 0)  && 
+          { (row.passed_tests.length > 0 || row.failed_tests.length > 0)  &&
             <Accordion sx={{ m: 2 }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls='panel1a-content'
-                id='panel1a-header'> 
+                id='panel1a-header'>
                   <Typography variant='body2'>
                     <Link>
-                      <FormattedMessage 
-                        id='results.resultsRow-expandForEligibilityLink' 
+                      <FormattedMessage
+                        id='results.resultsRow-expandForEligibilityLink'
                         defaultMessage='Expand for eligibility details' />
                     </Link>
                   </Typography>
@@ -569,7 +571,7 @@ const Results = ({ results, setResults, formData}) => {
                 { displayTestResults(row.passed_tests) }
                 { displayTestResults(row.failed_tests) }
               </AccordionDetails>
-            </Accordion> 
+            </Accordion>
           }
         </Box>
         )}
@@ -624,10 +626,10 @@ const Results = ({ results, setResults, formData}) => {
     const allCategories = () => {
       return results.reduce((acc, benefit) => {
         if (!acc.includes(benefit.category)) {
-          acc = [...acc, benefit.category]
+          acc = [...acc, benefit.category];
         }
         return acc
-      }, [])
+      }, []);
     }
 
     const categoryValue = () => {
@@ -638,7 +640,7 @@ const Results = ({ results, setResults, formData}) => {
 					}
         }
         return acc
-      }, 0)
+      }, 0);
     }
 
     return (
@@ -813,7 +815,10 @@ const Results = ({ results, setResults, formData}) => {
           sx={{mt: 4, mr: 1}}
           variant='contained'
           >
-          Benefit Programs
+          <FormattedMessage
+            id='results.displayResultsFilterButtons-benefitPrograms'
+            defaultMessage='Benefit Programs'
+          />
         </Button>
         <Button 
           className={ filterResultsButton.urgentNeeds ? 'results-link' 
@@ -828,7 +833,10 @@ const Results = ({ results, setResults, formData}) => {
           sx={{mt: 4}}
           variant='contained'
           >
-          Urgent Needs Resources
+          <FormattedMessage
+            id='results.displayResultsFilterButtons-urgentNeedsResources'
+            defaultMessage='Urgent Needs Resources'
+          />
         </Button>
       </div>
     );
@@ -844,7 +852,12 @@ const Results = ({ results, setResults, formData}) => {
               <Grid xs={12} item={true}>
                 { displayResultsFilterButtons() }
                 { filterResultsButton.allBenefits && DataGridTable(results.programs)}
-                { filterResultsButton.urgentNeeds && <Table /> }
+                { filterResultsButton.urgentNeeds && 
+                  <UrgentNeedsTable 
+                    urgentNeedsPrograms={results.rawResponse.urgent_needs} 
+                    locale={locale} 
+                  /> 
+                }
               </Grid>
             </>
           }

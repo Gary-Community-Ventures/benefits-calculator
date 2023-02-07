@@ -286,6 +286,8 @@
   "filter.filterAlreadyHave": "Beneficios Que Ya Tengo",
   "filter.filterByCategory": "Filtrar Por Categoría",
   "filter.filterAllCategories": "Todas Las Categorias",
+  "results.displayResultsFilterButtons-benefitPrograms": "Programas de beneficios",
+  "results.displayResultsFilterButtons-urgentNeedsResources": "Recursos de necesidades urgentes",
   "loading.return-loadingText": "Espere mientras reunimos sus resultados...",
   "results.displaySubheader-loadingDisclaimerText": "Recuerde que no podemos garantizar elegibilidad, pero según la información que nos proporcionó, creemos que posiblemente sea elegible para los siguientes programas.",
   "taxYearOptions.noRecentFiling": "No he presentado impuestos en los últimos 5 años",
@@ -327,6 +329,7 @@
   "healthInsuranceOptions.employer": "Seguro de salud proporcionado por el empleador",
   "healthInsuranceOptions.private": "Seguro médico privado",
   "healthInsuranceOptions.medicaid": "Seguro de salud público gratuito o de bajo costo a través de Health First Colorado (Medicaid)",
+  "healthInsuranceOptions.medicare": "Seguro médico del estado (Medicare)",
   "healthInsuranceOptions.chp": "Seguro de salud de bajo costo para niños pequeños y mujeres embarazadas a través de Child Health Plan Plus (CHP+)",
   "healthInsuranceOptions.none": "Uno o más miembros del hogar no tienen seguro médico",
   "acuteConditionOptions.food": "Alimentos o comestibles",
@@ -334,5 +337,9 @@
   "acuteConditionOptions.housing": "Ayuda de emergencia para pagar la hipoteca, el alquiler o los servicios públicos debido a dificultades financieras",
   "acuteConditionOptions.support": "Un desafío que usted (o su hijo) tiene y que le interesaría hablar con alguien fuera de su hogar",
   "acuteConditionOptions.childDevelopment": "Preocupación por el desarrollo de su bebé o niño pequeño",
-  "acuteConditionOptions.loss": "Costos de funeral, entierro o cremación"
+  "acuteConditionOptions.loss": "Costos de funeral, entierro o cremación",
+  "urgentNeedsTable.visit-website-button": "Visite el sitio web",
+  "urgentNeedsTable.resources-columnHeader": "Recursos",
+  "urgentNeedsTable.typeOfResource-columnHeader": "Tipo de Recurso",
+  "urgentNeedsRow.formatPhoneNumber": "Número de teléfono: "
 }
