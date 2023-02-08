@@ -9,6 +9,7 @@ import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import expenseOptions from '../../Assets/expenseOptions';
 import benefitOptions from '../../Assets/benefitOptions';
+import healthInsuranceOptions from '../../Assets/healthInsuranceOptions';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
@@ -366,19 +367,25 @@ const Confirmation = ({ formData }) => {
         { displayHouseholdSizeSection() }
         { displayAllHouseholdData() }
         <p className='confirmation-section-underline'></p>
-        { displayHouseholdAssetsSection() }
+          { displayHouseholdAssetsSection() }
         <p className='confirmation-section-underline'></p>
-        { displayHHCheckboxSection('benefits', 
-          'confirmation.displayAllFormData-currentHHBenefitsText', 
-          'Current household benefits: ', '/step-4', benefitOptions
-          )
-        }
+          { displayHHCheckboxSection('benefits', 
+            'confirmation.displayAllFormData-currentHHBenefitsText', 
+            'Household benefits:', '/step-4', benefitOptions
+            )
+          }
         <p className='confirmation-section-underline'></p>
-        { displayLastTaxFilingYearSection() }
+          { displayHHCheckboxSection('healthInsurance', 
+            'confirmation.displayAllFormData-healthInsurance', 
+            'Household health insurance:', '/step-5', healthInsuranceOptions
+            )
+          }
         <p className='confirmation-section-underline'></p>
-        { displayReferralSourceSection() }
+          { displayLastTaxFilingYearSection() }
         <p className='confirmation-section-underline'></p>
-        { displayZipcodeSection() }
+          { displayReferralSourceSection() }
+        <p className='confirmation-section-underline'></p>
+          { displayZipcodeSection() }
       </>
     );
   }
