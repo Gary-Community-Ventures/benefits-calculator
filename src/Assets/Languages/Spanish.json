@@ -252,6 +252,7 @@
   "confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText": "Tiene cobertura de Medicaid relacionada con su discapacidad",
   "confirmation.headOfHouseholdDataBlock-incomeLabel": "Ingreso:",
   "confirmation.headOfHouseholdDataBlock-expensesLabel": "Gastos Mensuales:",
+  "confirmation.displayAllFormData-currentHHBenefitsText": "Beneficios actuales del hogar:",
   "frequencyOptions.weekly": "Semanal",
   "frequencyOptions.biweekly": "Cada 2 semanas",
   "frequencyOptions.monthly": "Cada mes",
