@@ -404,6 +404,13 @@ const Confirmation = ({ formData }) => {
     return mappedListItems;
   }
 
+  const listAllCurrentHHBenefits = (benefits) => {
+    const mappedListItems = benefits.map(benefit => {
+      return <li key={ benefit }> { benefitOptions[benefit] } </li>
+    });
+    
+    return mappedListItems;
+  }
   return (
     <div className='benefits-form'>
       <p className='step-progress-title'>
