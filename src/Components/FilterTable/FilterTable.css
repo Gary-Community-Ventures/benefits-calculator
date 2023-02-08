@@ -5,7 +5,7 @@
   border: 1px solid #b7b1b1;
   background: white;
   z-index: 5;
-  box-shadow: 5px 5px 5px;
+  box-shadow: 1px 1px 10px rgb(0 0 0 / 0.4);
 }
 
 .filters-button {
