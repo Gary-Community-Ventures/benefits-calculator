@@ -368,7 +368,11 @@ const Confirmation = ({ formData }) => {
         <p className='confirmation-section-underline'></p>
         { displayHouseholdAssetsSection() }
         <p className='confirmation-section-underline'></p>
-        { displayCurrentHHBenefitsSection() }
+        { displayHHCheckboxSection('benefits', 
+          'confirmation.displayAllFormData-currentHHBenefitsText', 
+          'Current household benefits: ', '/step-4', benefitOptions
+          )
+        }
         <p className='confirmation-section-underline'></p>
         { displayLastTaxFilingYearSection() }
         <p className='confirmation-section-underline'></p>
@@ -407,34 +411,34 @@ const Confirmation = ({ formData }) => {
     return mappedListItems;
   }
 
-  const listAllCurrentHHBenefits = (benefits) => {
-    const mappedListItems = benefits.map(benefit => {
-      return <li key={ benefit }> { benefitOptions[benefit] } </li>
+  const listAllTruthyValues = (selectedOptions, relatedOptionsList) => {
+    const mappedListItems = selectedOptions.map(option => {
+      return <li key={ option }> { relatedOptionsList[option] } </li>
     });
     
     return mappedListItems;
   }
 
-  const displayCurrentHHBenefitsSection = () => {
-    const { benefits } = formData;
-    const benefitKeys = Object.keys(benefits);
-    const selectedBenefitOptions = benefitKeys.filter(benefit => benefits[benefit]);
-
+  const displayHHCheckboxSection = (stateVariableName, fMessageId, fMessageDefaultMsg, linkTo, optionsList) => {
+    const stateVariableObj = formData[stateVariableName];
+    const stateVariableKeys = Object.keys(stateVariableObj);
+    const truthyOptions = stateVariableKeys.filter(key => stateVariableObj[key]);
+    
     return (
       <>
         <article className='confirmation-label'>
           <b>
             <FormattedMessage
-              id='confirmation.displayAllFormData-currentHHBenefitsText'
-              defaultMessage='Current household benefits: ' />
+              id={fMessageId}
+              defaultMessage={fMessageDefaultMsg} />
           </b>
-          <Link to='/step-4' className='edit-link'>
+          <Link to={linkTo} className='edit-link'>
             <FormattedMessage
               id='confirmation.editLinkText'
               defaultMessage='Edit' />
           </Link>
           <ul>
-            { listAllCurrentHHBenefits(selectedBenefitOptions) }
+            { listAllTruthyValues(truthyOptions, optionsList) }
           </ul>
         </article>
       </>
