@@ -666,20 +666,22 @@ const Results = ({ results, setResults, formData}) => {
 					eligibilityState={eligibilityState}
 					categoryState={categoryState}
 				/>
-				<Toolbar sx={{ border: 1, backgroundColor: '#0096B0', color: 'white' }}>
-					<span className="space-around border-right">
-						{filt.category.value ?? (
+				{filt.category !== false && (
+					<Toolbar
+						sx={{ border: 1, backgroundColor: '#0096B0', color: 'white' }}
+					>
+						<span className="space-around border-right">
+							{filt.category.value}
+						</span>
+						<span className="space-around">
+							${categoryValue().toLocaleString()}{' '}
 							<FormattedMessage
-								id="filter.filterAllCategories"
-								defaultMessage="All Categories"
+								id="results.perYear"
+								defaultMessage="Per Year"
 							/>
-						)}
-					</span>
-					<span className="space-around">
-						${categoryValue().toLocaleString()}{' '}
-						<FormattedMessage id="results.perYear" defaultMessage="Per Year" />
-					</span>
-				</Toolbar>
+						</span>
+					</Toolbar>
+				)}
 				<DataGridPro
 					treeData
 					autoHeight
