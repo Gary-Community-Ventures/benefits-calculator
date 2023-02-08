@@ -10,6 +10,7 @@ import frequencyOptions from '../../Assets/frequencyOptions';
 import expenseOptions from '../../Assets/expenseOptions';
 import benefitOptions from '../../Assets/benefitOptions';
 import healthInsuranceOptions from '../../Assets/healthInsuranceOptions';
+import acuteConditionOptions from '../../Assets/acuteConditionOptions';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
@@ -378,6 +379,12 @@ const Confirmation = ({ formData }) => {
           { displayHHCheckboxSection('healthInsurance', 
             'confirmation.displayAllFormData-healthInsurance', 
             'Household health insurance:', '/step-5', healthInsuranceOptions
+            )
+          }
+        <p className='confirmation-section-underline'></p>
+          { displayHHCheckboxSection('acuteHHConditions', 
+            'confirmation.displayAllFormData-acuteHHConditions', 
+            'Immediate Needs:', '/step-14', acuteConditionOptions
             )
           }
         <p className='confirmation-section-underline'></p>

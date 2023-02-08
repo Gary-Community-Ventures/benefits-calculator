@@ -254,6 +254,7 @@
   "confirmation.headOfHouseholdDataBlock-expensesLabel": "Monthly Expenses:",
   "confirmation.displayAllFormData-currentHHBenefitsText": "Household benefits:",
   "confirmation.displayAllFormData-healthInsurance": "Household health insurance: ",
+  "confirmation.displayAllFormData-acuteHHConditions": "Immediate Needs:",
   "frequencyOptions.weekly": "Every week",
   "frequencyOptions.biweekly": "Every 2 weeks",
   "frequencyOptions.monthly": "Every month",
