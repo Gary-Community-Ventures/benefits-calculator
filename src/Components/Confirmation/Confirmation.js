@@ -8,6 +8,7 @@ import questions from '../../Assets/questions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import expenseOptions from '../../Assets/expenseOptions';
+import benefitOptions from '../../Assets/benefitOptions';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
@@ -411,6 +412,33 @@ const Confirmation = ({ formData }) => {
     
     return mappedListItems;
   }
+
+  const displayCurrentHHBenefitsSection = () => {
+    const { benefits } = formData;
+    const benefitKeys = Object.keys(benefits);
+    const selectedBenefitOptions = benefitKeys.filter(benefit => benefits[benefit]);
+
+    return (
+      <>
+        <article className='confirmation-label'>
+          <b>
+            <FormattedMessage
+              id='confirmation.displayAllFormData-currentHHBenefitsText'
+              defaultMessage='Current household benefits: ' />
+          </b>
+          <Link to='/step-4' className='edit-link'>
+            <FormattedMessage
+              id='confirmation.editLinkText'
+              defaultMessage='Edit' />
+          </Link>
+          <ul>
+            { listAllCurrentHHBenefits(selectedBenefitOptions) }
+          </ul>
+        </article>
+      </>
+    );
+  }
+
   return (
     <div className='benefits-form'>
       <p className='step-progress-title'>
