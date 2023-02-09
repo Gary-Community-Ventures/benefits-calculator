@@ -15,7 +15,7 @@ const Filter = ({
 	categoryState,
 }) => {
 	const [showFilters, setShowFilter] = useState(false);
-	const [eligibilitySelected, seteligibilitySelected] = eligibilityState;
+	const [eligibilitySelected, setEligibilitySelected] = eligibilityState;
 	const [categorySelected, setCategorySelected] = categoryState;
 
 	const toggleFilterForm = () => {
@@ -59,7 +59,7 @@ const Filter = ({
 			alreadyHave: false,
 		};
 
-		seteligibilitySelected(event.target.value);
+		setEligibilitySelected(event.target.value);
 		updateFilter(
 			{ name: 'eligible', filter: eligibilityFilters[event.target.value] },
 			{ name: 'hasBenefit', filter: hasBenefitFilters[event.target.value] }
