@@ -86,6 +86,7 @@ const Results = ({ results, setResults, formData}) => {
       return filters
     }
 	});
+
   const updateFilter = function() {
     const newFilter = { ...filt };
     for (let i=0; i<arguments.length; i++) {
@@ -159,6 +160,32 @@ const Results = ({ results, setResults, formData}) => {
 			isLoading: false
     });
 	};
+
+  const categoryValues = (results) => {
+		const categoryValues = {};
+		for (let result of results) {
+      if (categoryValues[result.category] === undefined) {
+        categoryValues[result.category] = 0
+      }
+			categoryValues[result.category] += result.estimated_value;
+		}
+		if (categoryValues['Child Care, Preschool, and Youth'] > 720) {
+			categoryValues['Child Care, Preschool, and Youth'] = 720;
+		}
+		return categoryValues;
+	};
+
+  const totalDollarAmount = (results, category) => {
+    const valuesByCategory = categoryValues(results)
+    if (category) {
+      return valuesByCategory[category]
+    }
+    let total = 0;
+    for (let name in valuesByCategory) {
+      total += valuesByCategory[name]
+    }
+    return total
+  }
 
   const getScreensBody = (formData, languageCode, userId) => {
     const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets,
@@ -308,19 +335,6 @@ const Results = ({ results, setResults, formData}) => {
       }
       return total;
     }, 0);
-  }
-
-  const totalDollarAmount = (results) => {
-    const total = results.reduce((total, program) => {
-      if (filt.citizen.value.includes('non-citizen') && program.legal_status_required !== 'citizen') {
-        total += program.estimated_value;
-      } else if (filt.citizen.value.includes('citizen') && program.legal_status_required !== 'non-citizen'){
-        total += program.estimated_value;
-      }
-      return total;
-    }, 0);
-
-    return total;
   }
 
   const displayTestResults = (tests) => {
@@ -674,7 +688,7 @@ const Results = ({ results, setResults, formData}) => {
 							{filt.category.value}
 						</span>
 						<span className="space-around">
-							${categoryValue().toLocaleString()}{' '}
+							${totalDollarAmount(results, filt.category.value).toLocaleString()}{' '}
 							<FormattedMessage
 								id="results.perYear"
 								defaultMessage="Per Year"
