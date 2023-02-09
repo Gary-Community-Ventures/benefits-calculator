@@ -648,7 +648,7 @@ const Results = ({ results, setResults, formData}) => {
 				<FormControlLabel
 					label={
 						<FormattedMessage
-							id="results.returnsignupCitizenFilter"
+							id="results.returnSignupCitizenFilter"
 							defaultMessage="Only show benefits that do not require a citizen in the household"
 						/>
 					}

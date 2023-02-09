@@ -277,7 +277,7 @@
   "results.resultsRow-reducedExpensesText": "gastos reducidos",
   "results.resultsRow-cashText": "efectivo",
   "results.resultsRow-reducedCostText": "servicios a costo reducido",
-  "results.returnsignupCitizenFilter": "Solo mostrar los beneficios que no requieren ciudadañia en el hogar",
+  "results.returnSignupCitizenFilter": "Solo mostrar los beneficios que no requieren ciudadañia en el hogar",
   "results.perYear": "Por Año",
   "filter.filterByCategoryButton": "Filtrar",
   "filter.filterByEligibility": "Filtrar Por Elegibilidad",
