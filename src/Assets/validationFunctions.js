@@ -6,7 +6,7 @@ const ageHasError = (applicantAge) => {
   // so applicantAge will always be initiated as a string and converted to a number once it passes the regex test
   const numberApplicantAge = Number(applicantAge);
   //the numbers that we type in have to be 0-8 digits long but we want them to be within this min/max range
-  const minimumAge = 13; 
+  const minimumAge = 13;
   const maximumAge = 130;
   return numberApplicantAge < minimumAge || numberApplicantAge > maximumAge;
 }
@@ -17,8 +17,8 @@ const displayAgeHelperText = (applicantAge) => {
   const maximumAge = 130;
   if (numberApplicantAge < minimumAge || numberApplicantAge > maximumAge) {
     return (
-      <FormattedMessage 
-        id='validation-helperText.age' 
+      <FormattedMessage
+        id='validation-helperText.age'
         defaultMessage='Please enter a valid age (13-130)' />
     );
   };
@@ -34,17 +34,17 @@ const zipcodeHasError = (zipcode) => {
   } else {
     return true;
   }
-} 
+}
 
 const displayZipcodeHelperText = (zipcode) => {
   if (zipcodeHasError(zipcode)) {
     return (
-      <FormattedMessage 
-        id='validation-helperText.zipcode' 
+      <FormattedMessage
+        id='validation-helperText.zipcode'
         defaultMessage='Please enter a valid CO zip code' />
     );
   }
-} 
+}
 
 const radiofieldHasError = (radiofield) => {
   return typeof radiofield !== 'boolean';
@@ -57,8 +57,8 @@ const incomeStreamValueHasError = (valueInput) => {
 const displayIncomeStreamValueHelperText = (valueInput) => {
   if (incomeStreamValueHasError(valueInput)) {
     return (
-      <FormattedMessage 
-        id='validation-helperText.incomeValue' 
+      <FormattedMessage
+        id='validation-helperText.incomeValue'
         defaultMessage='Please enter a number greater than 0' />
     );
   }
@@ -69,9 +69,9 @@ const incomeStreamsAreValid = (incomeStreams) => {
     const { incomeStreamName, incomeAmount, incomeFrequency } = incomeSourceData;
     return incomeStreamName.length > 0 && incomeAmount > 0 && incomeFrequency.length > 0;
   });
-  
-  //incomeStreams must have a non-zero length since this function is only called if 
-  //the user indicated that they had income. This stmt was also added to fix the vacuously 
+
+  //incomeStreams must have a non-zero length since this function is only called if
+  //the user indicated that they had income. This stmt was also added to fix the vacuously
   //true stmt that allIncomeStreamsAreValid for an empty array
   return incomeStreams.length > 0 && allIncomeStreamsAreValid;
 }
@@ -83,8 +83,8 @@ const expenseSourceValueHasError = (valueInput) => {
 const displayExpenseSourceValueHelperText = (valueInput) => {
   if (expenseSourceValueHasError(valueInput)) {
     return (
-      <FormattedMessage 
-        id='validation-helperText.expenseValue' 
+      <FormattedMessage
+        id='validation-helperText.expenseValue'
         defaultMessage='Please enter a number greater than 0' />
     );
   }
@@ -95,7 +95,7 @@ const expenseSourcesAreValid = (expenses) => {
     const { expenseSourceName, expenseAmount } = expenseSourceData;
     return expenseSourceName.length > 0 && expenseAmount > 0;
   });
-  
+
   return allExpensesAreValid;
 }
 
@@ -107,9 +107,9 @@ const householdSizeHasError = (sizeOfHousehold) => {
 const displayHouseholdSizeHelperText = (sizeOfHousehold) => {
   const numValueInput = Number(sizeOfHousehold);
   return (
-    (numValueInput <= 0 || numValueInput > 8) && 
-      <FormattedMessage 
-        id='validation-helperText.householdSize' 
+    (numValueInput <= 0 || numValueInput > 8) &&
+      <FormattedMessage
+        id='validation-helperText.householdSize'
         defaultMessage='Number of People (max. 8)' />
   );
 }
@@ -150,55 +150,55 @@ const householdMemberAgeHasError = (applicantAge) => {
 
 const displayHouseholdMemberAgeHelperText = (applicantAge) => {
   const numberApplicantAge = Number(applicantAge);
-  
+
   if (numberApplicantAge < 0) {
     return (
-      <FormattedMessage 
-        id='validation-helperText.hHMemberAge' 
+      <FormattedMessage
+        id='validation-helperText.hHMemberAge'
         defaultMessage='Please enter 0 or a positive number' />
     );
   };
 }
 
 const personDataIsValid = (householdDataState, setHouseholdDataState, index) => {
-  const matchingPersonData = householdDataState.householdData[index]; 
-  const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired, 
+  const matchingPersonData = householdDataState.householdData[index];
+  const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired,
     disabled, veteran, noneOfTheseApply, hasIncome, incomeStreams } = matchingPersonData;
 
   if (Number(age) < 0 || age === '') {
     setHouseholdDataState({
-      ...householdDataState, 
-      error: 
-        <FormattedMessage 
+      ...householdDataState,
+      error:
+        <FormattedMessage
           id='validation-helperText.hhMemberAgeB'
-          defaultMessage="Please enter 0 or a positive number for the household member's age" /> 
+          defaultMessage="Please enter 0 or a positive number for the household member's age" />
     });
     return false;
   } else if (relationshipToHH === '') {
     setHouseholdDataState({
-      ...householdDataState, 
-      error: 
-        <FormattedMessage 
+      ...householdDataState,
+      error:
+        <FormattedMessage
           id='validation-helperText.hhMemberRelation'
-          defaultMessage='Please select a relation option' /> 
+          defaultMessage='Please select a relation option' />
     });
     return false;
-  } else if ( (noneOfTheseApply && student) || (noneOfTheseApply && pregnant) || 
+  } else if ( (noneOfTheseApply && student) || (noneOfTheseApply && pregnant) ||
     (noneOfTheseApply && unemployed) || (noneOfTheseApply && blindOrVisuallyImpaired) ||
     (noneOfTheseApply && disabled) || (noneOfTheseApply && veteran) ) {
     setHouseholdDataState({
-      ...householdDataState, 
-      error: 
-        <FormattedMessage 
+      ...householdDataState,
+      error:
+        <FormattedMessage
           id='validation-helperText.hhMemberNoneApply'
           defaultMessage='Please deselect all other options if none of these conditions apply' />
     });
     return false;
   } else if (!student && !pregnant && !unemployed && !blindOrVisuallyImpaired && !disabled && !veteran && !noneOfTheseApply) {
     setHouseholdDataState({
-      ...householdDataState, 
-      error: 
-        <FormattedMessage 
+      ...householdDataState,
+      error:
+        <FormattedMessage
           id='validation-helperText.noneApply'
           defaultMessage="If none of these conditions apply please select 'None of these apply' " />
     });
@@ -206,8 +206,8 @@ const personDataIsValid = (householdDataState, setHouseholdDataState, index) => 
   } else if (hasIncome && incomeStreamsAreValid(incomeStreams) === false) {
     setHouseholdDataState({
       ...householdDataState,
-      error: 
-        <FormattedMessage 
+      error:
+        <FormattedMessage
           id='validation-helperText.hhMemberIncome'
           defaultMessage='Please select and enter a response for all three income fields' />
     });
@@ -219,7 +219,7 @@ const personDataIsValid = (householdDataState, setHouseholdDataState, index) => 
 
 const emailHasError = (email) => {
   return email !== '' && !(/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email));
-} 
+}
 
 const displayEmailHelperText = (email) => {
   if (emailHasError(email)) {
@@ -256,8 +256,8 @@ const referralSourceHasError = (referralSource) => {
 const displayReferralSourceHelperText = (source) => {
   if (referralSourceHasError(source)) {
     return (
-        <FormattedMessage 
-          id='validation-helperText.referralSource' 
+        <FormattedMessage
+          id='validation-helperText.referralSource'
           defaultMessage='Please type in your source.' />
     );
   }
@@ -266,8 +266,8 @@ const displayReferralSourceHelperText = (source) => {
 const displayMissingSelectHelperText = (source) => {
   if (referralSourceHasError(source)) {
     return (
-        <FormattedMessage 
-          id='validation-helperText.selectOption' 
+        <FormattedMessage
+          id='validation-helperText.selectOption'
           defaultMessage='Please select an option.' />
     );
   }
@@ -280,8 +280,8 @@ const nameHasError = (name) => {
 const displayFirstNameHelperText = (firstName) => {
   if (nameHasError(firstName)) {
     return (
-      <FormattedMessage 
-        id='validation-helperText.firstName' 
+      <FormattedMessage
+        id='validation-helperText.firstName'
         defaultMessage='Please enter your first name' />
     );
   }
@@ -290,8 +290,8 @@ const displayFirstNameHelperText = (firstName) => {
 const displayLastNameHelperText = (lastName) => {
   if (nameHasError(lastName)) {
     return (
-      <FormattedMessage 
-        id='validation-helperText.lastName' 
+      <FormattedMessage
+        id='validation-helperText.lastName'
         defaultMessage='Please enter your last name' />
     );
   }
@@ -305,8 +305,8 @@ const phoneHasError = (phoneNumber) => {
 const displayPhoneHasErrorHelperText = (phoneNumber) => {
   if (phoneHasError(phoneNumber)) {
     return (
-      <FormattedMessage 
-          id='validation-helperText.phoneNumber' 
+      <FormattedMessage
+          id='validation-helperText.phoneNumber'
           defaultMessage='Please enter a 10 digit phone number' />
     );
   }
@@ -323,12 +323,12 @@ const signUpFormHasError = (props) => {
 const displayNoEmailOrPhoneHelperText = (email, phone) => {
   if (!email && !phone) {
     return (
-      <FormattedMessage 
-          id='validation-helperText.noEmailOrPhoneNumber' 
+      <FormattedMessage
+          id='validation-helperText.noEmailOrPhoneNumber'
           defaultMessage='Please enter an email or phone number' />
     );
   }
-} 
+}
 
 const displaySignUpFormHelperText = (props) => {
   const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = props;
@@ -346,14 +346,14 @@ const displaySignUpFormHelperText = (props) => {
     return displayNoEmailOrPhoneHelperText(email, phone);
   } else if (atLeastOneCheckboxSelectionWasMade === false) {
     return (
-      <FormattedMessage 
-        id='validation-helperText.notificationSelection' 
+      <FormattedMessage
+        id='validation-helperText.notificationSelection'
         defaultMessage='Please select a notification option' />
     );
   } else if (commConsent === false) {
     return (
-      <FormattedMessage 
-        id='validation-helperText.consentCheckbox' 
+      <FormattedMessage
+        id='validation-helperText.consentCheckbox'
         defaultMessage='Please check the box above to sign up for the selected notifications' />
     );
   }
@@ -374,6 +374,16 @@ const healthInsuranceHasError = (healthInsuranceSelections) => {
   const healthInsuranceKeys = Object.keys(healthInsuranceSelections);
   const noOptionWasSelected = healthInsuranceKeys.every(option => healthInsuranceSelections[option] === false);
   return noOptionWasSelected;
+}
+
+const displayHealthInsuranceHelperText = (healthInsuranceSelections) => {
+  if (healthInsuranceHasError(healthInsuranceSelections)) {
+    return (
+      <FormattedMessage
+        id='validation-helperText.healthInsurance'
+        defaultMessage='If none of these apply, please select "One or more household member(s) do not have health insurance"' />
+    );
+  };
 }
 
 const acuteHHConditionsHasError = (conditions) => {
@@ -417,5 +427,6 @@ export {
   displaySignUpFormHelperText,
   signUpOptionsHaveError,
   healthInsuranceHasError,
+  displayHealthInsuranceHelperText,
   acuteHHConditionsHasError
 }

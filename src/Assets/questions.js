@@ -16,7 +16,8 @@ import {
   displayMissingSelectHelperText,
   signUpOptionsHaveError,
   healthInsuranceHasError,
-  acuteHHConditionsHasError
+  acuteHHConditionsHasError,
+  displayHealthInsuranceHelperText
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import taxYearOptions from './taxYearOptions';
@@ -132,7 +133,8 @@ const questions = [
       componentType: 'BasicCheckboxGroup',
       inputName: 'healthInsurance',
       options: healthInsuranceOptions,
-      inputError: healthInsuranceHasError
+      inputError: healthInsuranceHasError,
+      inputHelperText: displayHealthInsuranceHelperText
     },
     headerType: 'aboutYourself'
   },
