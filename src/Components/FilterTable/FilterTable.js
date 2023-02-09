@@ -1,5 +1,4 @@
 import FilterListIcon from '@mui/icons-material/FilterList';
-import { Button } from '@mui/material';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -120,7 +119,7 @@ const Filter = ({
 										control={<Radio />}
 										label={
 											<FormattedMessage
-												id="filter.filterEligibe"
+												id="filter.filterEligible"
 												defaultMessage="Eligible"
 											/>
 										}
@@ -133,7 +132,7 @@ const Filter = ({
 										control={<Radio />}
 										label={
 											<FormattedMessage
-												id="filter.filterIneligibe"
+												id="filter.filterInEligible"
 												defaultMessage="Ineligible"
 											/>
 										}
