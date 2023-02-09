@@ -78,6 +78,7 @@
   "questions.acuteHHConditions": "¿Alguien en su hogar necesita ayuda inmediata con alguno de los siguientes?",
   "validation-helperText.age": "Ingrese una edad válida (13 a 130)",
   "validation-helperText.zipcode": "Ingrese un código postal válido de Colorado",
+  "validation-helperText.healthInsurance": "Si ninguno de estos aplica, seleccione \"Uno o más miembros del hogar no tienen seguro médico\"",
   "validation-helperText.incomeValue": "Ingrese un número mayor que 0",
   "validation-helperText.expenseValue": "Ingrese un número mayor que 0",
   "validation-helperText.householdSize": "Cantidad de personas (máximo de 8)",
