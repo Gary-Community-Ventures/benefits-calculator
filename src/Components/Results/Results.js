@@ -164,7 +164,6 @@ const Results = ({ results, setResults, formData}) => {
       if (categoryValues[result.category] === undefined) {
         categoryValues[result.category] = 0
       }
-      console.log(result.legal_status_required);
       if (filt.citizen.value.includes(result.legal_status_required)) {
 				categoryValues[result.category] += result.estimated_value;
 			}
@@ -645,17 +644,6 @@ const Results = ({ results, setResults, formData}) => {
         }
         return acc
       }, []);
-    }
-
-    const categoryValue = () => {
-      return results.reduce((acc, program) => {
-        if (filt.category === false || program.category === filt.category.value) {
-          if (filt.citizen.value.includes(program.legal_status_required)) {
-						acc += program.estimated_value;
-					}
-        }
-        return acc
-      }, 0);
     }
 
     return (
