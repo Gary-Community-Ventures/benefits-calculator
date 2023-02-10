@@ -781,7 +781,7 @@ const Results = ({ results, setResults, formData}) => {
           onClick={() => {
             setFilterResultsButton('benefits');
           }}
-          sx={{mt: 1, mr: 1, mb: 1}}
+          sx={{mt: 1, mr: .5, mb: 1, p:.8, fontSize:'.8rem'}}
           variant='contained'
           >
           <FormattedMessage
@@ -796,12 +796,12 @@ const Results = ({ results, setResults, formData}) => {
           onClick={() => {
             setFilterResultsButton('urgentNeeds');
           }}
-          sx={{mt: 1, mb: 1}}
+          sx={{mt: 1, mb: 1, p:.8, fontSize:'.8rem',}}
           variant='contained'
           >
           <FormattedMessage
             id='results.displayResultsFilterButtons-urgentNeedsResources'
-            defaultMessage='Urgent Needs Resources'
+            defaultMessage='Immediate Needs'
           />
         </Button>
       </div>
