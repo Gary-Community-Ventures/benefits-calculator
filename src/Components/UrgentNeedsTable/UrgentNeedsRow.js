@@ -47,7 +47,7 @@ const UrgentNeedsRow = ({ rowProps }) => {
                 <Typography variant="body2" gutterBottom component="div">
                   {rowProps.description}
                 </Typography>
-                {rowProps.phone_number.length &&
+                {rowProps.phone_number &&
                   <h4 className='font-weight'>
                     <FormattedMessage
                       id='urgentNeedsRow.formatPhoneNumber'
