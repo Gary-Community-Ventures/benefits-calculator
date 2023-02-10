@@ -164,7 +164,10 @@ const Results = ({ results, setResults, formData}) => {
       if (categoryValues[result.category] === undefined) {
         categoryValues[result.category] = 0
       }
-			categoryValues[result.category] += result.estimated_value;
+      console.log(result.legal_status_required);
+      if (filt.citizen.value.includes(result.legal_status_required)) {
+				categoryValues[result.category] += result.estimated_value;
+			}
 		}
 		if (categoryValues['Child Care, Preschool, and Youth'] > 720) {
 			categoryValues['Child Care, Preschool, and Youth'] = 720;
