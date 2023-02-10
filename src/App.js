@@ -27,7 +27,7 @@ const App = () => {
   const isTest = searchParams.get('test') ? searchParams.get('test') : false;
   const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
   const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : '';
-  const setReferrerSource = referrer == '' || referrer in referralOptions
+  const setReferrerSource = referrer === '' || referrer in referralOptions
   const isBIAUser = externalId !== null && referrer !== '';
   const theme = createTheme(styleOverrides);
 
