@@ -281,7 +281,7 @@
   "results.resultsRow-reducedExpensesText": "reduced expenses",
   "results.resultsRow-cashText": "cash",
   "results.resultsRow-reducedCostText": "reduced cost services",
-  "results.returnSignupCitizenFilter": "Only show benefits that do not require a citizen in the household",
+  "results.returnSignupCitizenFilter": "Citizen or Qualified Non-Citizen Status Not Required",
   "results.perYear": "Per Year",
   "filter.filterByCategoryButton": "Filters",
   "filter.filterByEligibility": "Filter By Eligibility",

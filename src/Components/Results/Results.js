@@ -45,7 +45,7 @@ const Results = ({ results, setResults, formData}) => {
   const locale = useContext(Context).locale;
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
-  const [citizenshipToggle, setCitizenshipToggle] = useState(false)
+  const citizenToggleState = useState(false)
 	const eligibilityState = useState('eligibleBenefits');
 	const categoryState = useState('All Categories');
 
@@ -655,26 +655,13 @@ const Results = ({ results, setResults, formData}) => {
 
     return (
 			<>
-				<FormControlLabel
-					label={
-						<FormattedMessage
-							id="results.returnSignupCitizenFilter"
-							defaultMessage="Only show benefits that do not require a citizen in the household"
-						/>
-					}
-					control={
-						<CustomSwitch
-							handleCustomSwitchToggle={handleCustomSwitchToggle}
-							checked={citizenshipToggle}
-						/>
-					}
-				/>
 				<Filter
 					filt={filt}
 					updateFilter={updateFilter}
 					categories={allCategories()}
 					eligibilityState={eligibilityState}
 					categoryState={categoryState}
+          citizenToggleState={citizenToggleState}
 				/>
 				{filt.category !== false && (
 					<Toolbar
@@ -766,33 +753,6 @@ const Results = ({ results, setResults, formData}) => {
         </Typography>
       </div>
     );
-  }
-
-  const handleCustomSwitchToggle = (e) => {
-    // Filter out citizen benefits when toggle is on
-    // Filter out non-citizen benifits when toggle is off
-    if (e.target.checked) {
-			updateFilter({
-        name: 'citizen',
-				filter: {
-					id: 1,
-					columnField: 'citizenship',
-					operatorValue: 'isAnyOf',
-					value: ['non-citizen', 'none'],
-				},
-      });
-		} else {
-			updateFilter({
-				name: 'citizen',
-        filter: {
-					id: 1,
-					columnField: 'citizenship',
-					operatorValue: 'isAnyOf',
-					value: ['citizen', 'none'],
-				},
-      });
-		}
-    setCitizenshipToggle(e.target.checked);
   }
 
   const displayHeaderSection = () => {

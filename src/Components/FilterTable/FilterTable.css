@@ -28,6 +28,10 @@
   width: 100%;
 }
 
+.toggle {
+  padding-left: .5rem;
+}
+
 .radio-option {
   border: 1px solid #b7b1b1;
   margin: .25rem 0 .25rem 0;
