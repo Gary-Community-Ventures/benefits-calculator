@@ -44,10 +44,7 @@ const Results = ({ results, setResults, formData}) => {
   const navigate = useNavigate();
   const locale = useContext(Context).locale;
   const intl = useIntl();
-  const [filterResultsButton, setFilterResultsButton] = useState({
-    allBenefits: true,
-    urgentNeeds: false
-  });
+  const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const [citizenshipToggle, setCitizenshipToggle] = useState(false)
 	const eligibilityState = useState('eligibleBenefits');
 	const categoryState = useState('All Categories');
@@ -819,14 +816,11 @@ const Results = ({ results, setResults, formData}) => {
     return (
       <div>
         <Button 
-          className={ filterResultsButton.allBenefits ? 'results-link' 
+          className={ filterResultsButton === 'benefits' ? 'results-link' 
             : 'results-filter-button-grey' 
           }
           onClick={() => {
-            setFilterResultsButton({ 
-              allBenefits: true, 
-              urgentNeeds: false 
-            });
+            setFilterResultsButton('benefits');
           }}
           sx={{mt: 4, mr: 1}}
           variant='contained'
@@ -837,14 +831,11 @@ const Results = ({ results, setResults, formData}) => {
           />
         </Button>
         <Button 
-          className={ filterResultsButton.urgentNeeds ? 'results-link' 
+          className={ filterResultsButton === 'urgentNeeds' ? 'results-link' 
             : 'results-filter-button-grey' 
           }
           onClick={() => {
-            setFilterResultsButton({ 
-              allBenefits: false, 
-              urgentNeeds: true 
-            });
+            setFilterResultsButton('urgentNeeds');
           }}
           sx={{mt: 4}}
           variant='contained'
@@ -867,8 +858,8 @@ const Results = ({ results, setResults, formData}) => {
               { displayHeaderSection() }
               <Grid xs={12} item={true}>
                 { displayResultsFilterButtons() }
-                { filterResultsButton.allBenefits && DataGridTable(results.programs)}
-                { filterResultsButton.urgentNeeds && 
+                { filterResultsButton === 'benefits' && DataGridTable(results.programs)}
+                { filterResultsButton === 'urgentNeeds' && 
                   <UrgentNeedsTable 
                     urgentNeedsPrograms={results.rawResponse.urgent_needs} 
                     locale={locale} 
