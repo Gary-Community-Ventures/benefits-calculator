@@ -412,7 +412,14 @@ const Results = ({ results, setResults, formData}) => {
               defaultMessage=' per month for you to consider' />
           </Typography>
         </Grid>
-        <Grid container>
+      </>
+    );
+  }
+
+  const displayFooter = () => {
+    return (
+      <>
+        <Grid container xs={12} item={true} sx={{mt: 2}} >
           <Grid sm={10} item={true}>
             <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
               <FormattedMessage 
@@ -823,7 +830,7 @@ const Results = ({ results, setResults, formData}) => {
           onClick={() => {
             setFilterResultsButton('benefits');
           }}
-          sx={{mt: 4, mr: 1}}
+          sx={{mt: 1, mr: 1, mb: 1}}
           variant='contained'
           >
           <FormattedMessage
@@ -838,7 +845,7 @@ const Results = ({ results, setResults, formData}) => {
           onClick={() => {
             setFilterResultsButton('urgentNeeds');
           }}
-          sx={{mt: 4}}
+          sx={{mt: 1, mb: 1}}
           variant='contained'
           >
           <FormattedMessage
@@ -867,6 +874,7 @@ const Results = ({ results, setResults, formData}) => {
                   /> 
                 }
               </Grid>
+              { displayFooter() }
             </>
           }
         </Grid>
