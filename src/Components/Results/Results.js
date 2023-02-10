@@ -1,8 +1,9 @@
 import { useEffect, useState, Fragment, useContext, useRef } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useNavigate } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import Filter from '../FilterTable/FilterTable.js'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
@@ -19,6 +20,9 @@ import {
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
+import Table from '../Table/Table';
+import Toolbar from '@mui/material/Toolbar';
+import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
   postPartialParentScreen,
   postHouseholdMemberData,
@@ -36,23 +40,58 @@ export const isNavigationKey = (key) =>
   key.indexOf('Page') === 0 ||
   key === ' ';
 
-const Results = ({ results, setResults, formData, programSubset, passedOrFailedTests }) => {
+const Results = ({ results, setResults, formData}) => {
   const navigate = useNavigate();
   const locale = useContext(Context).locale;
-  const [filt, setFilt] = useState([
-		{
+  const intl = useIntl();
+  const [filterResultsButton, setFilterResultsButton] = useState('benefits');
+  const [citizenshipToggle, setCitizenshipToggle] = useState(false)
+	const eligibilityState = useState('eligibleBenefits');
+	const categoryState = useState('All Categories');
+
+  const [filt, setFilt] = useState({
+		citizen: {
 			id: 1,
 			columnField: 'citizenship',
-			operatorValue: 'startsWith',
-			value: 'none',
+			operatorValue: 'isAnyOf',
+			value: ['citizen', 'none'],
 		},
-		{
+		eligible: {
+			id: 2,
+			columnField: 'eligible',
+			operatorValue: 'is',
+			value: 'true',
+		},
+		hasBenefit: {
 			id: 3,
-			columnField: 'citizenship',
-			operatorValue: 'startsWith',
-			value: 'citizen',
+			columnField: 'has_benefit',
+			operatorValue: 'is',
+			value: 'false',
 		},
-	]);
+    category: false,
+    filtList: function() {
+      const filters = [
+        this.citizen,
+        this.eligible,
+      ]
+      if (this.hasBenefit !== false) {
+        filters.push(this.hasBenefit)
+      }
+      if (this.category !== false) {
+        filters.push(this.category);
+      }
+      return filters
+    }
+	});
+
+  const updateFilter = function() {
+    const newFilter = { ...filt };
+    for (let i=0; i<arguments.length; i++) {
+      let filter = arguments[i]
+      newFilter[filter.name] = filter.filter
+    }
+    setFilt(newFilter)
+  }
 
   useEffect(() => {
     if (results.screenerId === 0) {
@@ -95,41 +134,55 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
     const rawEligibilityResponse = await getEligibility(screensResponse.id, locale);
     setResults({
-			eligiblePrograms: [],
-			ineligiblePrograms: [],
-			rawResponse: {
-				response: rawEligibilityResponse,
-				screen: screensResponse,
-				userId: userId,
-			},
-			screenerId: 0,
+			programs: [],
+			rawResponse: rawEligibilityResponse,
+			screenerId: screensResponse.id,
 			isLoading: true,
-			user: 0,
+			user: userId
 		});
   }
 
-  const responseLanguage= () => {
-    const rawEligibility = results.rawResponse
+  const responseLanguage = () => {
+    const { rawResponse } = results;
 		const languageCode = locale.toLowerCase();
-		const eligibilityResponse = rawEligibility.response.translations[languageCode];
-		const qualifiedPrograms = eligibilityResponse
-			.filter(
-				(program) => program.eligible === true && !formData.benefits[program.name_abbreviated]
-			)
+		const eligibilityResponse = rawResponse.programs[languageCode];
+		const programs = eligibilityResponse
 			.sort(
 				(benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value
 			);
-		const unqualifiedPrograms = eligibilityResponse.filter((program) => program.eligible === false);
-
+    
 		setResults({
-			eligiblePrograms: qualifiedPrograms,
-			ineligiblePrograms: unqualifiedPrograms,
-      rawResponse: results.rawResponse,
-			screenerId: rawEligibility.screen.id,
-			isLoading: false,
-			user: rawEligibility.userId,
-		});
+      ...results,
+			programs: programs,
+			isLoading: false
+    });
 	};
+
+  const categoryValues = (results) => {
+		const categoryValues = {};
+		for (let result of results) {
+      if (categoryValues[result.category] === undefined) {
+        categoryValues[result.category] = 0
+      }
+			categoryValues[result.category] += result.estimated_value;
+		}
+		if (categoryValues['Child Care, Preschool, and Youth'] > 720) {
+			categoryValues['Child Care, Preschool, and Youth'] = 720;
+		}
+		return categoryValues;
+	};
+
+  const totalDollarAmount = (results, category) => {
+    const valuesByCategory = categoryValues(results)
+    if (category) {
+      return valuesByCategory[category]
+    }
+    let total = 0;
+    for (let name in valuesByCategory) {
+      total += valuesByCategory[name]
+    }
+    return total
+  }
 
   const getScreensBody = (formData, languageCode, userId) => {
     const { agreeToTermsOfService, zipcode, county, householdSize, householdAssets,
@@ -272,26 +325,13 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const totalEligiblePrograms = (results) => {
     return results.reduce((total, program) => {
-      if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
+      if (filt.citizen.value.includes('non-citizen') && program.legal_status_required !== 'citizen') {
         total += 1;
-      } else if (filt[1].value === 'citizen' && program.legal_status_required !== 'non-citizen'){
+      } else if (filt.citizen.value.includes('citizen') && program.legal_status_required !== 'non-citizen'){
         total += 1;
       }
       return total;
     }, 0);
-  }
-
-  const totalDollarAmount = (results) => {
-    const total = results.reduce((total, program) => {
-      if (filt[1].value === 'non-citizen' && program.legal_status_required !== 'citizen') {
-        total += program.estimated_value;
-      } else if (filt[1].value === 'citizen' && program.legal_status_required !== 'non-citizen'){
-        total += program.estimated_value;
-      }
-      return total;
-    }, 0);
-
-    return total;
   }
 
   const displayTestResults = (tests) => {
@@ -353,64 +393,52 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     }
   }
 
-  const displaySubheader = (benefitsSubset) => {
-    if (benefitsSubset === 'eligiblePrograms') {
-      return (
-        <>
-          <Grid xs={12} item={true}>
-            <Typography className='sub-header' variant='h6'>
-              {totalEligiblePrograms(results[programSubset])}
-              <FormattedMessage
-                id='results.return-programsUpToLabel'
-                defaultMessage=' programs, up to ' />
-              ${totalDollarAmount(results[programSubset]).toLocaleString()}
-              <FormattedMessage
-                id='results.return-perYearOrLabel'
-                defaultMessage=' per year or ' />
-              ${Math.round(totalDollarAmount(results[programSubset])/12).toLocaleString()}
-              <FormattedMessage
-                id='results.return-perMonthLabel'
-                defaultMessage=' per month for you to consider' />
-            </Typography>
-          </Grid>
-          <Grid container>
-            <Grid sm={10} item={true}>
-              <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
-                <FormattedMessage
-                  id='results.displaySubheader-emailResultsDescText'
-                  defaultMessage='To receive a copy of these results by email please click the email results button.' />
-              </Typography>
-            </Grid>
-            <Grid xs={12} item={true} sm={2} justifyContent='end'>
-              <Box justifyContent='end' display='flex'>
-                <Button
-                  sx={{mb: 2, mt: 1}}
-                  variant='contained'
-                  endIcon={<SendIcon />}
-                  onClick={() => {
-                    navigate('/email-results');
-                  }}
-                  className='results-link'>
-                  <FormattedMessage
-                    id='results.return-emailResultsButton'
-                    defaultMessage='Email Results' />
-                </Button>
-              </Box>
-            </Grid>
-          </Grid>
-        </>
-      );
-    } else if (benefitsSubset === 'ineligiblePrograms') {
-      return (
+  const displaySubheader = () => {
+    return (
+      <>
         <Grid xs={12} item={true}>
-          <Typography className='sub-header' variant='h6'>
-            <FormattedMessage
-              id='results.displaySubheader-basedOnInformationText'
-              defaultMessage='Based on the information you provided, we believe you are likely not eligible for the programs below:' />
+          <Typography className='sub-header' variant='h6'> 
+            {totalEligiblePrograms(results.programs)} 
+            <FormattedMessage 
+              id='results.return-programsUpToLabel' 
+              defaultMessage=' programs, up to ' /> 
+            ${totalDollarAmount(results.programs).toLocaleString()} 
+            <FormattedMessage 
+              id='results.return-perYearOrLabel' 
+              defaultMessage=' per year or ' />
+            ${Math.round(totalDollarAmount(results.programs)/12).toLocaleString()} 
+            <FormattedMessage 
+              id='results.return-perMonthLabel' 
+              defaultMessage=' per month for you to consider' />
           </Typography>
         </Grid>
-      );
-    }
+        <Grid container>
+          <Grid sm={10} item={true}>
+            <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
+              <FormattedMessage 
+                id='results.displaySubheader-emailResultsDescText' 
+                defaultMessage='To receive a copy of these results by email please click the email results button.' />
+            </Typography>
+          </Grid>
+          <Grid xs={12} item={true} sm={2} justifyContent='end'>
+            <Box justifyContent='end' display='flex'>
+              <Button
+                sx={{mb: 2, mt: 1}}
+                variant='contained'
+                endIcon={<SendIcon />}
+                onClick={() => {
+                  navigate('/email-results');
+                }}
+                className='results-link'>
+                <FormattedMessage 
+                  id='results.return-emailResultsButton' 
+                  defaultMessage='Email Results' />
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
+      </>
+    );
   }
 
   const DataGridRows = (results) => {
@@ -418,20 +446,23 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     let count = 0;
     for (let i = 0; i < results.length; i++) {
       let dataGridRow = {
-        id: count,
-        path: results[i].name,
-        name: results[i].name,
-        value: results[i].estimated_value,
-        type: results[i].value_type,
-        description: results[i].description,
-        application_time: results[i].estimated_application_time,
-        delivery_time: results[i].estimated_delivery_time,
-        application_link: results[i].apply_button_link,
-        passed_tests: results[i].passed_tests,
-        failed_tests: results[i].failed_tests,
-        navigators: results[i].navigators,
-        citizenship: results[i].legal_status_required
-      };
+				id: count,
+				path: results[i].name,
+				name: results[i].name,
+				has_benefit: formData.benefits[results[i].name_abbreviated],
+				value: results[i].estimated_value,
+				type: results[i].value_type,
+				description: results[i].description,
+				application_time: results[i].estimated_application_time,
+				delivery_time: results[i].estimated_delivery_time,
+				application_link: results[i].apply_button_link,
+				passed_tests: results[i].passed_tests,
+				failed_tests: results[i].failed_tests,
+        category: results[i].category,
+				navigators: results[i].navigators,
+				citizenship: results[i].legal_status_required,
+				eligible: results[i].eligible,
+			};
       dgr.push(dataGridRow);
       count++;
       let dataGridChild = {
@@ -447,7 +478,8 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
         application_link: results[i].apply_button_link,
         passed_tests: results[i].passed_tests,
         failed_tests: results[i].failed_tests,
-        navigators: results[i].navigators
+        category: results[i].category,
+        navigators: results[i].navigators,
       }
       dgr.push(dataGridChild);
       count++;
@@ -574,15 +606,19 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
 
   const DataGridTable = (results) => {
     const rows: GridRowsProp = DataGridRows(results);
-    const nameHeader = <FormattedMessage
-      id='results.resultsTable-benefitLabel'
-      defaultMessage='Benefit' />
-    const valueHeader = <FormattedMessage
-      id='results.resultsTable-annualValueLabel'
-      defaultMessage='Annual Value' />
-    const appTimeHeader = <FormattedMessage
-      id='results.resultsTable-timeToApply'
-      defaultMessage='Time to Apply' />
+
+    const nameHeader = intl.formatMessage({
+			id: 'results.resultsTable-timeToApply',
+      defaultMessage: 'Benefit'
+		});
+    const valueHeader = intl.formatMessage({
+      id: 'results.resultsTable-annualValueLabel',
+      defaultMessage: 'Annual Value'
+    })
+    const appTimeHeader = intl.formatMessage({
+      id: 'results.resultsTable-timeToApply',
+      defaultMessage: 'Time to Apply'
+    })
 
     const columns: GridColDef[] = [
       { field: 'name', headerName: nameHeader, flex: 1 },
@@ -593,42 +629,118 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
       { field: 'citizenship', headerName: 'Citizenship Requirements', flex: 1 },
       { field: 'application_link', headerName: 'Application Link', flex: 1 },
       { field: 'passed_tests', headerName: 'Passed Tests', flex: 1 },
-      { field: 'failed_tests', headerName: 'Passed Tests', flex: 1 }
+      { field: 'failed_tests', headerName: 'Passed Tests', flex: 1 },
+      { field: 'eligible', headerName: 'Eligible', flex: 1, 'type': 'boolean' },
+      { field: 'has_benefit', headerName: 'Has Benefit', flex: 1, 'type': 'boolean' },
+      { field: 'category', headerName: 'Category', flex: 1 },
     ];
+
+    const allCategories = () => {
+      return results.reduce((acc, benefit) => {
+        if (!acc.includes(benefit.category)) {
+          acc = [...acc, benefit.category];
+        }
+        return acc
+      }, []);
+    }
+
+    const categoryValue = () => {
+      return results.reduce((acc, program) => {
+        if (filt.category === false || program.category === filt.category.value) {
+          if (filt.citizen.value.includes(program.legal_status_required)) {
+						acc += program.estimated_value;
+					}
+        }
+        return acc
+      }, 0);
+    }
+
     return (
-      <DataGridPro
-        treeData
-        autoHeight
-        getTreeDataPath={(row) => row.path.split('/')}
-        groupingColDef={groupingColDef}
-        getRowHeight={() => 'auto'}
-        disableChildrenFiltering
-        hideFooter={true}
-        rows={rows}
-        columns={columns}
-        filterModel={{ items: filt, linkOperator: GridLinkOperator.Or }}
-        sx={{
-          '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': { py: '8px' },
-          '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': { py: '15px' },
-          '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': { py: '22px' },
-        }}
-        initialState={{
-          columns: {
-            columnVisibilityModel: {
-              citizenship: false,
-              delivery_time: false,
-              type: false,
-              name: false,
-              description: false,
-              application_link: false,
-              passed_tests: false,
-              failed_tests: false,
-              navigators: false
-            }
-          }
-        }}
-        />
-    );
+			<>
+				<FormControlLabel
+					label={
+						<FormattedMessage
+							id="results.returnSignupCitizenFilter"
+							defaultMessage="Only show benefits that do not require a citizen in the household"
+						/>
+					}
+					control={
+						<CustomSwitch
+							handleCustomSwitchToggle={handleCustomSwitchToggle}
+							checked={citizenshipToggle}
+						/>
+					}
+				/>
+				<Filter
+					filt={filt}
+					updateFilter={updateFilter}
+					categories={allCategories()}
+					eligibilityState={eligibilityState}
+					categoryState={categoryState}
+				/>
+				{filt.category !== false && (
+					<Toolbar
+						sx={{ border: 1, backgroundColor: '#0096B0', color: 'white' }}
+					>
+						<span className="space-around border-right">
+							{filt.category.value}
+						</span>
+						<span className="space-around">
+							${totalDollarAmount(results, filt.category.value).toLocaleString()}{' '}
+							<FormattedMessage
+								id="results.perYear"
+								defaultMessage="Per Year"
+							/>
+						</span>
+					</Toolbar>
+				)}
+				<DataGridPro
+					treeData
+					autoHeight
+					getTreeDataPath={(row) => row.path.split('/')}
+					groupingColDef={groupingColDef}
+					getRowHeight={() => 'auto'}
+					disableChildrenFiltering
+					disableColumnFilter
+					hideFooter={true}
+					rows={rows}
+					columns={columns}
+					filterModel={{
+						items: filt.filtList(),
+						linkOperator: GridLinkOperator.And,
+					}}
+					sx={{
+						'&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': {
+							py: '8px',
+						},
+						'&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': {
+							py: '15px',
+						},
+						'&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': {
+							py: '22px',
+						},
+					}}
+					initialState={{
+						columns: {
+							columnVisibilityModel: {
+								citizenship: false,
+								delivery_time: false,
+								type: false,
+								name: false,
+								description: false,
+								application_link: false,
+								passed_tests: false,
+								failed_tests: false,
+								navigators: false,
+								eligible: false,
+								has_benefit: false,
+								category: false,
+							},
+						},
+					}}
+				/>
+			</>
+		);
   }
 
   const benefitValueFormatter = (params) => {
@@ -662,95 +774,97 @@ const Results = ({ results, setResults, formData, programSubset, passedOrFailedT
     // Filter out citizen benefits when toggle is on
     // Filter out non-citizen benifits when toggle is off
     if (e.target.checked) {
-      setFilt([
-				{
+			updateFilter({
+        name: 'citizen',
+				filter: {
 					id: 1,
 					columnField: 'citizenship',
-					operatorValue: 'startsWith',
-					value: 'none',
+					operatorValue: 'isAnyOf',
+					value: ['non-citizen', 'none'],
 				},
-				{
-					id: 2,
-					columnField: 'citizenship',
-					operatorValue: 'startsWith',
-					value: 'non-citizen',
-				},
-			]);
-    }
-    else {
-      setFilt([
-				{
+      });
+		} else {
+			updateFilter({
+				name: 'citizen',
+        filter: {
 					id: 1,
 					columnField: 'citizenship',
-					operatorValue: 'startsWith',
-					value: 'none',
+					operatorValue: 'isAnyOf',
+					value: ['citizen', 'none'],
 				},
-				{
-					id: 3,
-					columnField: 'citizenship',
-					operatorValue: 'startsWith',
-					value: 'citizen',
-				},
-			]);
-    }
+      });
+		}
+    setCitizenshipToggle(e.target.checked);
+  }
+
+  const displayHeaderSection = () => {
+    return (
+      <Grid container xs={12} item={true} sx={{mt: 2}} >
+        <Grid xs={12} item={true}>
+          <Typography className='body2'>
+            <FormattedMessage 
+              id='results.return-screenerIdLabel' 
+              defaultMessage='Screener ID: ' /> 
+            {results.screenerId}
+          </Typography>
+        </Grid>
+        { displaySubheader() }
+      </Grid>
+    );
+  }
+
+  const displayResultsFilterButtons = () => {
+    return (
+      <div>
+        <Button 
+          className={ filterResultsButton === 'benefits' ? 'results-link' 
+            : 'results-filter-button-grey' 
+          }
+          onClick={() => {
+            setFilterResultsButton('benefits');
+          }}
+          sx={{mt: 4, mr: 1}}
+          variant='contained'
+          >
+          <FormattedMessage
+            id='results.displayResultsFilterButtons-benefitPrograms'
+            defaultMessage='Benefit Programs'
+          />
+        </Button>
+        <Button 
+          className={ filterResultsButton === 'urgentNeeds' ? 'results-link' 
+            : 'results-filter-button-grey' 
+          }
+          onClick={() => {
+            setFilterResultsButton('urgentNeeds');
+          }}
+          sx={{mt: 4}}
+          variant='contained'
+          >
+          <FormattedMessage
+            id='results.displayResultsFilterButtons-urgentNeedsResources'
+            defaultMessage='Urgent Needs Resources'
+          />
+        </Button>
+      </div>
+    );
   }
 
   return (
     <main className='benefits-form'>
       <div className='results-container'>
         <Grid container spacing={2}>
-          { results.isLoading ?
-            <Grid container xs={12} item={true} justifyContent='center' alignItems='center'>
-              <Grid xs={6} sx={{mt: 5}} item={true}>
-                <Loading />
-              </Grid>
-            </Grid> :
+          { results.isLoading ? <Loading /> : 
             <>
-              <Grid container xs={12} item={true} sx={{mt: 2}} >
-                <Grid xs={12} item={true}>
-                  <Typography className='body2'>
-                    <FormattedMessage
-                      id='results.return-screenerIdLabel'
-                      defaultMessage='Screener ID: ' />
-                    {results.screenerId}
-                  </Typography>
-                </Grid>
-                { displaySubheader(programSubset) }
-              </Grid>
+              { displayHeaderSection() }
               <Grid xs={12} item={true}>
-                <FormControlLabel
-                  label={<FormattedMessage id='results.returnsignupCitizenFilter' defaultMessage='Only show benefits that do not require a citizen in the household' />}
-                  control={<CustomSwitch handleCustomSwitchToggle={handleCustomSwitchToggle} /> }
-                />
-                { DataGridTable(results[programSubset])}
-              </Grid>
-              <Grid xs={12} item={true}>
-                { programSubset === 'eligiblePrograms' &&
-                  <Typography
-                    sx={{mt: '.25rem'}}
-                    onClick={() => {
-                      navigate('/ineligible-results');
-                      window.scrollTo(0,0);
-                    }}
-                    className='ineligibility-link'>
-                    <FormattedMessage
-                      id='results.return-ineligibilityLinkText'
-                      defaultMessage='* For additional information on programs
-                      that you were not eligible for click here' />
-                  </Typography>
-                }
-                { programSubset === 'ineligiblePrograms' &&
-                  <Typography
-                    sx={{mt: '.25rem'}}
-                    onClick={() => {
-                      navigate('/results');
-                      window.scrollTo(0,0);
-                    }}
-                    className='ineligibility-link'>
-                    <FormattedMessage
-                      id='results.return-goBackToEligibleText'
-                      defaultMessage='Go back to eligible programs' />
-                  </Typography>
+                { displayResultsFilterButtons() }
+                { filterResultsButton === 'benefits' && DataGridTable(results.programs)}
+                { filterResultsButton === 'urgentNeeds' && 
+                  <UrgentNeedsTable 
+                    urgentNeedsPrograms={results.rawResponse.urgent_needs} 
+                    locale={locale} 
+                  /> 
                 }
               </Grid>
             </>

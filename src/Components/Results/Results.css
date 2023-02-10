@@ -13,6 +13,14 @@
   color: #4ecdc4;
 }
 
+.space-around {
+  padding: 0px 5px 0px 5px;
+}
+
+.border-right {
+  border-right: 1px solid white;
+}
+
 .navigator-list {
   position: relative;
   background-color: white;
@@ -49,6 +57,10 @@
 
 .font-weight {
   font-weight: 500;
+}
+
+.results-filter-button-grey {
+  background-color: #8d8d8d;
 }
 
 .navigator-info {
