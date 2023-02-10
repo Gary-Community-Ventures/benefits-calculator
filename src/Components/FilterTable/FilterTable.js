@@ -125,11 +125,11 @@ const Filter = ({
 			{showFilters && (
 				<div className="filterForm">
 					<FormControlLabel
-					className='toggle'
+						className="toggle"
 						label={
 							<FormattedMessage
 								id="results.returnSignupCitizenFilter"
-								defaultMessage="Citizen/Qualified Non-citizen required"
+								defaultMessage="Citizen or qualified non-citizen status required"
 							/>
 						}
 						control={

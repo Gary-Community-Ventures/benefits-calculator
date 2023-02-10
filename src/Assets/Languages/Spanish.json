@@ -281,7 +281,7 @@
   "results.resultsRow-reducedExpensesText": "gastos reducidos",
   "results.resultsRow-cashText": "efectivo",
   "results.resultsRow-reducedCostText": "servicios a costo reducido",
-  "results.returnSignupCitizenFilter": "Se Requiere Ciudadano/ No Ciudadano Calificado",
+  "results.returnSignupCitizenFilter": "Se Requiere Estatus de Ciudadano o No Ciudadano Calificado",
   "results.perYear": "Por Año",
   "filter.filterByCategoryButton": "Filtrar",
   "filter.filterByEligibility": "Filtrar Por Elegibilidad",
