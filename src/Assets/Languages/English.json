@@ -78,6 +78,7 @@
   "questions.acuteHHConditions": "Is anyone in your household in immediate need of help with any of the following?",
   "validation-helperText.age": "Please enter a valid age (13-130)",
   "validation-helperText.zipcode": "Please enter a valid CO zip code",
+  "validation-helperText.healthInsurance": "If none of these apply, please select \"One or more household member(s) do not have health insurance\"",
   "validation-helperText.incomeValue": "Please enter a number greater than 0",
   "validation-helperText.expenseValue": "Please enter a number greater than 0",
   "validation-helperText.householdSize": "Number of People (max. 8)",
