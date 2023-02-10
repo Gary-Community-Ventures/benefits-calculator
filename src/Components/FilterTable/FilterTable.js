@@ -4,6 +4,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import CustomSwitch from '../CustomSwitch/CustomSwitch';
 import { FormattedMessage } from 'react-intl';
 import { useState } from 'react';
 import './FilterTable.css';
@@ -13,8 +14,10 @@ const Filter = ({
 	categories,
 	eligibilityState,
 	categoryState,
+	citizenToggleState
 }) => {
 	const [showFilters, setShowFilter] = useState(false);
+	const [citizenshipToggle, setCitizenshipToggle] = citizenToggleState;
 	const [eligibilitySelected, setEligibilitySelected] = eligibilityState;
 	const [categorySelected, setCategorySelected] = categoryState;
 
@@ -83,10 +86,37 @@ const Filter = ({
 		setCategorySelected(event.target.value);
 	};
 
+	const handleCustomSwitchToggle = (e) => {
+		// Filter out citizen benefits when toggle is on
+		// Filter out non-citizen benifits when toggle is off
+		if (e.target.checked) {
+			updateFilter({
+				name: 'citizen',
+				filter: {
+					id: 1,
+					columnField: 'citizenship',
+					operatorValue: 'isAnyOf',
+					value: ['non-citizen', 'none'],
+				},
+			});
+		} else {
+			updateFilter({
+				name: 'citizen',
+				filter: {
+					id: 1,
+					columnField: 'citizenship',
+					operatorValue: 'isAnyOf',
+					value: ['citizen', 'none'],
+				},
+			});
+		}
+		setCitizenshipToggle(e.target.checked);
+	};
+
 	return (
 		<div className="filter">
 			<span className="filters-button" onClick={toggleFilterForm}>
-				<FilterListIcon  sx={{mr: '.5rem'}} />
+				<FilterListIcon sx={{ mr: '.5rem' }} />
 				<FormattedMessage
 					id="filter.filterByCategoryButton"
 					defaultMessage="Filters"
@@ -94,6 +124,21 @@ const Filter = ({
 			</span>
 			{showFilters && (
 				<div className="filterForm">
+					<FormControlLabel
+					className='toggle'
+						label={
+							<FormattedMessage
+								id="results.returnSignupCitizenFilter"
+								defaultMessage="Citizen/Qualified Non-citizen required"
+							/>
+						}
+						control={
+							<CustomSwitch
+								handleCustomSwitchToggle={handleCustomSwitchToggle}
+								checked={citizenshipToggle}
+							/>
+						}
+					/>
 					<div className="filter-selection-container">
 						<FormControl className="full-width">
 							<FormLabel
