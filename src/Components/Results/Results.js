@@ -606,6 +606,7 @@ const Results = ({ results, setResults, formData}) => {
 
   const DataGridTable = (results) => {
     const rows: GridRowsProp = DataGridRows(results);
+
     const nameHeader = intl.formatMessage({
 			id: 'results.resultsTable-timeToApply',
       defaultMessage: 'Benefit'

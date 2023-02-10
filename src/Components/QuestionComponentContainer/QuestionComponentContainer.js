@@ -13,8 +13,9 @@ import SignUp from '../SignUp/SignUp';
 import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
-const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange, 
+const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange,
   handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
   handleCheckboxChange }) => {
   let { id } = useParams();
@@ -25,8 +26,8 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label household-data-q-underline'>{matchingQuestion.question}</p>
-        <HouseholdDataBlock 
-          formData={formData} 
+        <HouseholdDataBlock
+          formData={formData}
           handleHouseholdDataSubmit={handleHouseholdDataSubmit} />
       </div>
     );
@@ -34,7 +35,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
 
   const renderTextfieldComponent = (question) => {
     return (
-      <Textfield 
+      <Textfield
         componentDetails={question.componentDetails}
         formData={formData}
         handleTextfieldChange={handleTextfieldChange} />
@@ -42,12 +43,12 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
   }
 
   const renderRadiofieldComponent = (question) => {
-    return (      
+    return (
       <Radiofield
         componentDetails={question.componentDetails}
         formData={formData}
         handleRadioButtonChange={handleRadioButtonChange} />
-    ); 
+    );
   }
 
   const renderBasicCheckboxGroup = (question) => {
@@ -61,16 +62,16 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
   }
 
   const renderBasicSelectComponent = (question) => {
-    const finalOptions = question.componentDetails.inputName === 'county' 
-      ? question.componentDetails.options[formData.zipcode] 
+    const finalOptions = question.componentDetails.inputName === 'county'
+      ? question.componentDetails.options[formData.zipcode]
       : question.componentDetails.options;
 
     return (
       <BasicSelect
         componentProperties={question.componentDetails.componentProperties}
         setFormData={setFormData}
-        formData={formData} 
-        options={finalOptions} 
+        formData={formData}
+        options={finalOptions}
         formDataProperty={question.componentDetails.inputName} />
     );
   }
@@ -79,12 +80,18 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     const inputName = matchingQuestion.componentDetails.inputName;
     const { followUpQuestions } = matchingQuestion;
     const hasFollowUpQuestions = followUpQuestions && followUpQuestions.length > 0;
+    // this is specifically for step 5 error handling
+    const isHealthInsuranceQ = matchingQuestion.name === 'healthInsurance';
+    const helperText = isHealthInsuranceQ && matchingQuestion.componentDetails.inputHelperText(formData[matchingQuestion.name]);
+    const hasError = isHealthInsuranceQ && matchingQuestion.componentDetails.inputError(formData[matchingQuestion.name]);
+
     return (
       <div className='question-container' id={matchingQuestion.id}>
         <p className='question-label'>{matchingQuestion.question}</p>
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
         {component}
         {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && renderFollowUpQuestions()}
+        {isHealthInsuranceQ && hasError && <ErrorMessage error={helperText} />}
         {createPreviousAndContinueButtons(matchingQuestion)}
       </div>
     );
@@ -124,14 +131,14 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
       } else if (followUp.componentDetails.componentType === 'IncomeBlock') {
         return <div className='question-container' key={index}>
           <p className='question-label'>{followUp.question}</p>
-          <IncomeBlock 
-            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} 
+          <IncomeBlock
+            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
             formData={formData} />
         </div>
       }  else if (followUp.componentDetails.componentType === 'ExpenseBlock') {
         return <div className='question-container' key={index}>
           <p className='question-label'>{followUp.question}</p>
-          <ExpenseBlock 
+          <ExpenseBlock
             handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
             formData={formData} />
         </div>
@@ -139,7 +146,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         return (
           <div className='question-container' key={index}>
             <p className='question-label'>{followUp.question}</p>
-            <Textfield 
+            <Textfield
               componentDetails={matchingQuestion.followUpQuestions[0].componentDetails}
               formData={formData}
               handleTextfieldChange={handleTextfieldChange}
@@ -157,9 +164,9 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         return (
           <div className='question-container' key={index}>
             <p className='question-label'>{followUp.question}</p>
-            <SignUp 
-              formData={formData} 
-              handleTextfieldChange={handleTextfieldChange} 
+            <SignUp
+              formData={formData}
+              handleTextfieldChange={handleTextfieldChange}
               handleCheckboxChange={handleCheckboxChange} />
           </div>
         );
@@ -168,7 +175,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
   }
 
   const createPreviousAndContinueButtons = (question) => {
-    //render normal button block if the question isn't the income or expense question or if the user doesn't have an income/expenses at all, 
+    //render normal button block if the question isn't the income or expense question or if the user doesn't have an income/expenses at all,
     //otherwise these buttons will be created in the IncomeBlock/ExpenseBlock components
     const isNotIncomeAndNotExpenseQ = question.name !== 'hasIncome' && question.name !== 'hasExpenses';
     const hasFalsyIncome = question.name === 'hasIncome' && formData[question.componentDetails.inputName] === false;
@@ -192,8 +199,8 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     if (matchingQuestion.headerType === 'signUpInfo') {
       return (
         <h2 className='sub-header'>
-          <FormattedMessage 
-            id='qcc.optional-sign-up-text' 
+          <FormattedMessage
+            id='qcc.optional-sign-up-text'
             defaultMessage='Optional: Sign up for benefits updates and offers' />
         </h2>
       );
@@ -205,12 +212,12 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
               id='qcc.so-far-text'
               defaultMessage='So far you’ve told us about:' />
           </h2>
-          <h4 className='household-data-sub2-header'> 
+          <h4 className='household-data-sub2-header'>
             ⚫️
             <FormattedMessage
               id='qcc.you-text'
               defaultMessage=' You, ' />
-            {formData.age} 
+            {formData.age}
             <FormattedMessage
               id='qcc.hoh-text'
               defaultMessage=' Head of household' />
@@ -244,11 +251,11 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
   return (
     <main className='benefits-form'>
       <p className='step-progress-title'>
-        <FormattedMessage 
+        <FormattedMessage
           id='qcc.step-text'
-          defaultMessage='Step ' /> 
+          defaultMessage='Step ' />
         {id}
-        <FormattedMessage 
+        <FormattedMessage
           id='qcc.of-text'
           defaultMessage=' of ' />
         {questions.length + 2}

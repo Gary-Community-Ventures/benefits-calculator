@@ -8,6 +8,9 @@ import questions from '../../Assets/questions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import expenseOptions from '../../Assets/expenseOptions';
+import benefitOptions from '../../Assets/benefitOptions';
+import healthInsuranceOptions from '../../Assets/healthInsuranceOptions';
+import acuteConditionOptions from '../../Assets/acuteConditionOptions';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
@@ -365,13 +368,31 @@ const Confirmation = ({ formData }) => {
         { displayHouseholdSizeSection() }
         { displayAllHouseholdData() }
         <p className='confirmation-section-underline'></p>
-        { displayHouseholdAssetsSection() }
+          { displayHouseholdAssetsSection() }
         <p className='confirmation-section-underline'></p>
-        { displayLastTaxFilingYearSection() }
+          { displayHHCheckboxSection('benefits', 
+            'confirmation.displayAllFormData-currentHHBenefitsText', 
+            'Household benefits:', '/step-4', benefitOptions
+            )
+          }
         <p className='confirmation-section-underline'></p>
-        { displayReferralSourceSection() }
+          { displayHHCheckboxSection('healthInsurance', 
+            'confirmation.displayAllFormData-healthInsurance', 
+            'Household health insurance:', '/step-5', healthInsuranceOptions
+            )
+          }
         <p className='confirmation-section-underline'></p>
-        { displayZipcodeSection() }
+          { displayHHCheckboxSection('acuteHHConditions', 
+            'confirmation.displayAllFormData-acuteHHConditions', 
+            'Immediate Needs:', '/step-14', acuteConditionOptions
+            )
+          }
+        <p className='confirmation-section-underline'></p>
+          { displayLastTaxFilingYearSection() }
+        <p className='confirmation-section-underline'></p>
+          { displayReferralSourceSection() }
+        <p className='confirmation-section-underline'></p>
+          { displayZipcodeSection() }
       </>
     );
   }
@@ -402,6 +423,40 @@ const Confirmation = ({ formData }) => {
     });
 
     return mappedListItems;
+  }
+
+  const listAllTruthyValues = (selectedOptions, relatedOptionsList) => {
+    const mappedListItems = selectedOptions.map(option => {
+      return <li key={ option }> { relatedOptionsList[option] } </li>
+    });
+    
+    return mappedListItems;
+  }
+
+  const displayHHCheckboxSection = (stateVariableName, fMessageId, fMessageDefaultMsg, linkTo, optionsList) => {
+    const stateVariableObj = formData[stateVariableName];
+    const stateVariableKeys = Object.keys(stateVariableObj);
+    const truthyOptions = stateVariableKeys.filter(key => stateVariableObj[key]);
+    
+    return (
+      <>
+        <article className='confirmation-label'>
+          <b>
+            <FormattedMessage
+              id={fMessageId}
+              defaultMessage={fMessageDefaultMsg} />
+          </b>
+          <Link to={linkTo} className='edit-link'>
+            <FormattedMessage
+              id='confirmation.editLinkText'
+              defaultMessage='Edit' />
+          </Link>
+          <ul>
+            { listAllTruthyValues(truthyOptions, optionsList) }
+          </ul>
+        </article>
+      </>
+    );
   }
 
   return (
