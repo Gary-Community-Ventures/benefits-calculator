@@ -1,8 +1,8 @@
-import { useEffect, useState, Fragment, useContext, useRef } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, FormControlLabel, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import Filter from '../FilterTable/FilterTable.js'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
@@ -33,7 +33,7 @@ export const isNavigationKey = (key) =>
   key.indexOf('Page') === 0 ||
   key === ' ';
 
-const Results = ({ results, setResults, formData}) => {
+const Results = ({ formData }) => {
   const { id: screenerId } = useParams()
   const navigate = useNavigate();
   const locale = useContext(Context).locale;
@@ -42,6 +42,15 @@ const Results = ({ results, setResults, formData}) => {
   const citizenToggleState = useState(false)
 	const eligibilityState = useState('eligibleBenefits');
 	const categoryState = useState('All Categories');
+
+  const initialResults = {
+    programs: [],
+    rawResponse: {},
+    screenerId: 0,
+    isLoading: true,
+  };
+
+  const [results, setResults] = useState(initialResults);
 
   const [filt, setFilt] = useState({
 		citizen: {
@@ -106,7 +115,6 @@ const Results = ({ results, setResults, formData}) => {
 			programs: [],
 			rawResponse: rawEligibilityResponse,
 			screenerId: rawEligibilityResponse.screen_id,
-			isLoading: true,
 		});
   }
 

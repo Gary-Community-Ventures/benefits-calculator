@@ -101,11 +101,6 @@ const EmailResults = ({ results }) => {
             uid: userResponse.id
           }
           await postMessage(message);
-
-          const emailRequestUpdate = {
-            last_email_request_date: new Date().toJSON()
-          }
-          await updateScreen(results.screenerId, emailRequestUpdate);
         }
 
       } catch (error) {

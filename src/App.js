@@ -116,15 +116,6 @@ const App = () => {
   const [formData, setFormData] = useState(getCurrentState());
   // const [formData, setFormData] = useState(createDevFormData(searchParams));
 
-  const initialResults = {
-    programs: [], 
-    rawResponse: {},
-    screenerId: 0,
-    isLoading: true,
-  };
-
-  const [results, setResults] = useState(initialResults);
-
   useEffect(() => {
     ReactGA.pageview(window.location.pathname +  window.location.search);
   }, [location]);
@@ -261,7 +252,6 @@ const App = () => {
     //set the formData and results at the same time
     setTimeout(() => {
       setFormData(initialFormData);
-      setResults(initialResults);
     }, '100');
   }
 
@@ -310,14 +300,11 @@ const App = () => {
               path='/results/:id'
               element={<Results
                 formData={formData}
-                results={results}
-                setResults={setResults}
                 /> } /> 
             <Route
               path='/email-results/:id'
               element={<EmailResults2
                 formData={formData}
-                results={results}
                 handleTextfieldChange={handleTextfieldChange} /> } />
             <Route
               path='*'
