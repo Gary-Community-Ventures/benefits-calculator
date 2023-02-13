@@ -22,12 +22,7 @@ import Loading from '../Loading/Loading';
 import Toolbar from '@mui/material/Toolbar';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
-  postPartialParentScreen,
-  postHouseholdMemberData,
-  postHouseholdMemberIncomeStream,
-  postHouseholdMemberExpense,
   getEligibility,
-  postUser
 } from '../../apiCalls';
 import './Results.css';
 
@@ -93,9 +88,7 @@ const Results = ({ results, setResults, formData}) => {
   }
 
   useEffect(() => {
-    if (results.screenerId === 0) {
-      fetchResults();
-    }
+    fetchResults();
   }, []);
 
   const firstUpdate = useRef(true);
@@ -108,12 +101,11 @@ const Results = ({ results, setResults, formData}) => {
   }, [locale, results.rawResponse])
 
   const fetchResults = async () => {
-
     const rawEligibilityResponse = await getEligibility(screenerId, locale);
     setResults({
 			programs: [],
 			rawResponse: rawEligibilityResponse,
-			screenerId: screenerId,
+			screenerId: rawEligibilityResponse.screen_id,
 			isLoading: true,
 		});
   }
@@ -273,7 +265,7 @@ const Results = ({ results, setResults, formData}) => {
                 variant='contained'
                 endIcon={<SendIcon />}
                 onClick={() => {
-                  navigate('/email-results');
+                  navigate(`/email-results/${screenerId}`);
                 }}
                 className='results-link'>
                 <FormattedMessage 

@@ -33,6 +33,7 @@ const App = () => {
   const theme = createTheme(styleOverrides);
 
   const initialFormData = {
+    screenUUID: undefined,
     isTest: isTest,
     externalID: externalId,
     agreeToTermsOfService: false,
@@ -120,17 +121,7 @@ const App = () => {
     rawResponse: {},
     screenerId: 0,
     isLoading: true,
-    user: 0
   };
-
-  // const getCurrentResultsState = () => {
-  //   const localStorageResults = localStorage.getItem('results');
-  //   if (localStorageResults === null) {
-  //     return initialResults;
-  //   } else {
-  //     return JSON.parse(localStorageResults);
-  //   }
-  // }
 
   const [results, setResults] = useState(initialResults);
 
@@ -182,8 +173,7 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem('formData', JSON.stringify(formData));
-    localStorage.setItem('results', JSON.stringify(results));
-  }, [formData, results]);
+  }, [formData]);
 
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
@@ -313,6 +303,7 @@ const App = () => {
               path='/submit-screen'
               element={<SubmitScreen
                 formData={formData}
+                setFormData={setFormData}
                 navigate={navigate}
                 /> } /> 
             <Route
@@ -323,7 +314,7 @@ const App = () => {
                 setResults={setResults}
                 /> } /> 
             <Route
-              path='/email-results'
+              path='/email-results/:id'
               element={<EmailResults2
                 formData={formData}
                 results={results}

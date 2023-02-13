@@ -9,13 +9,17 @@ import {
 import { Context } from '../Wrapper/Wrapper';
 import { useContext, useEffect } from 'react';
 
-const SubmitScreen = ({ formData, navigate }) => {
+const SubmitScreen = ({ formData, navigate, setFormData }) => {
 	const locale = useContext(Context).locale;
 	useEffect(() => {
 		fetchResults();
 	}, []);
 
 	const fetchResults = async () => {
+    if (formData.screenUUID !== undefined) {
+      navigate(formData.screenUUID);
+      return
+    }
 		let userId = 0;
 
 		if (formData.signUpInfo.sendOffers || formData.signUpInfo.sendUpdates) {
@@ -49,7 +53,8 @@ const SubmitScreen = ({ formData, navigate }) => {
 				await postHouseholdMemberExpense(expensesBody);
 			}
 		}
-    navigate(`/results/${screensResponse.id}`);
+    setFormData({ ...formData, screenUUID: screensResponse.uuid });
+    navigate(`/results/${screensResponse.uuid}`);
 	};
 
 	const getScreensBody = (formData, languageCode, userId) => {

@@ -62,7 +62,7 @@ const EmailResults2 = ({ formData, handleTextfieldChange, results }) => {
           email: email,
           type: 'emailScreen',
           screen: results.screenerId,
-          uid: results.user
+          // uid: results.user
         }
         await postMessage(message);
         //^^ if the user's email already exists in our system this function will throw an error =>
