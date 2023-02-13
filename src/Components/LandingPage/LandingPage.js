@@ -41,7 +41,7 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
             <li>
               <FormattedMessage
                 id='landingPage.secondBulletItem'
-                defaultMessage='Some benefits are available only to household members who are U.S. citizens. In some cases, even after someone becomes a U.S. citizen, there may be a waiting period before a benefit is available. When you get to the end of this tool, you will have a chance to sort results so that you see only benefits that do not require a citizen in the household.' />
+                defaultMessage='Some benefits are available only to household members who are U.S. citizens or immigrants who are qualified non-citizens. In some cases, even after someone obtains citizenship or qualified non-citizenship status, a waiting period or other conditions may apply. When you get to the end of this tool, you will have a chance to sort results so that you see only benefits that do not require a citizen or qualified non-citizen in the household.' />
             </li>
             <li>
               <FormattedMessage
