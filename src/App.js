@@ -6,6 +6,7 @@ import ReactGA from "react-ga4";
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
+import SubmitScreen from './Components/SubmitScreen/SubmitScreen';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
 import EmailResults2 from './Components/EmailResults/EmailResults2';
@@ -122,16 +123,16 @@ const App = () => {
     user: 0
   };
 
-  const getCurrentResultsState = () => {
-    const localStorageResults = localStorage.getItem('results');
-    if (localStorageResults === null) {
-      return initialResults;
-    } else {
-      return JSON.parse(localStorageResults);
-    }
-  }
+  // const getCurrentResultsState = () => {
+  //   const localStorageResults = localStorage.getItem('results');
+  //   if (localStorageResults === null) {
+  //     return initialResults;
+  //   } else {
+  //     return JSON.parse(localStorageResults);
+  //   }
+  // }
 
-  const [results, setResults] = useState(getCurrentResultsState());
+  const [results, setResults] = useState(initialResults);
 
   useEffect(() => {
     ReactGA.pageview(window.location.pathname +  window.location.search);
@@ -309,7 +310,13 @@ const App = () => {
               element={<Confirmation
                 formData={formData} /> } />
             <Route
-              path='/results'
+              path='/submit-screen'
+              element={<SubmitScreen
+                formData={formData}
+                navigate={navigate}
+                /> } /> 
+            <Route
+              path='/results/:id'
               element={<Results
                 formData={formData}
                 results={results}
