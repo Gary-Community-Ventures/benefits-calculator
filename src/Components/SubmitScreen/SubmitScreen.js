@@ -19,7 +19,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 
 	const fetchResults = async () => {
     if (formData.screenUUID !== undefined) {
-      navigate(formData.screenUUID);
+      navigate(`/confirm-information`);
       return
     }
 		let userId = 0;
