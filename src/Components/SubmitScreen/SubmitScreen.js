@@ -8,9 +8,11 @@ import {
 } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const SubmitScreen = ({ formData, navigate, setFormData }) => {
+const SubmitScreen = ({ formData, setFormData }) => {
 	const locale = useContext(Context).locale;
+	const navigate = useNavigate()
 	useEffect(() => {
 		fetchResults();
 	}, []);

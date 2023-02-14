@@ -294,7 +294,6 @@ const App = () => {
               element={<SubmitScreen
                 formData={formData}
                 setFormData={setFormData}
-                navigate={navigate}
                 /> } /> 
             <Route
               path='/results/:id'
