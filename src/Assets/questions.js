@@ -327,18 +327,34 @@ const questions = [
   },
   {
     id: 14,
-    name: 'benefits',
+    name: 'hasBenefits',
     question:
       <FormattedMessage
-        id='questions.benefits'
-        defaultMessage='Which benefits are you or your household members currently receiving or have received in the past year?' />,
+        id='questions.hasBenefits'
+        defaultMessage='Does your household currently have any benefits?' />,
     componentDetails: {
-      componentType: 'BasicCheckboxGroup',
-      inputName: 'benefits',
-      options: benefitOptions,
-      inputError: benefitsHasError
+      componentType: 'Radiofield',
+      ariaLabel: 'questions.hasBenefits-ariaLabel',
+      inputName: 'hasBenefits',
+      inputError: radiofieldHasError
     },
-    headerType: 'aboutYourself'
+    followUpQuestions: [{
+      question:
+        <FormattedMessage
+          id='questions.hasBenefits-a'
+          defaultMessage='Please tell us what benefits your household currently has.' />,
+      questionDescription:
+        <FormattedMessage
+          id='questions.hasBenefits-a-description'
+          defaultMessage='We will only show you new benefits you may be eligible for on the results page.' />,
+      name: 'benefits',
+      componentDetails: {
+        componentType: 'AccordionContainer',
+        ariaLabel: 'questions.hasBenefits-a-ariaLabel',
+        inputName: 'benefits'
+      }
+    }],
+    headerType: 'aboutHousehold'
   },
   {
     id: 15,
