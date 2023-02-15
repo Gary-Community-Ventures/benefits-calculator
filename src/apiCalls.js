@@ -8,7 +8,6 @@ const expensesEndpoint = `${domain}/api/expenses/`;
 const userEndpoint = `${domain}/api/users/`;
 const messageEndpoint = `${domain}/api/messages/`;
 let eligibilityEndpoint = `${domain}/api/eligibility/`;
-let screensUpdateEndpoint = `${domain}/api/screens/`;
 
 const header = {
   'Accept': 'application/json',
@@ -47,20 +46,6 @@ const postMessage = (messageData) => {
 const postPartialParentScreen = (partialFormData) => {
   return fetch(screensEndpoint, {
     method: 'POST',
-    body: JSON.stringify(partialFormData),
-    headers: header
-  })
-    .then(response => {
-      if(!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
-      return response.json();
-    })
-}
-
-const updateScreen = (screenerId, partialFormData) => {
-  return fetch(screensUpdateEndpoint + screenerId + '/', {
-    method: 'PATCH',
     body: JSON.stringify(partialFormData),
     headers: header
   })
@@ -134,7 +119,6 @@ const getEligibility = (screenerId, locale) => {
 
 export {
   postPartialParentScreen,
-  updateScreen,
   postUser,
   postMessage,
   postHouseholdMemberData,

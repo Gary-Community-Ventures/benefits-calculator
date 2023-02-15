@@ -6,6 +6,7 @@ import ReactGA from "react-ga4";
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
+import SubmitScreen from './Components/SubmitScreen/SubmitScreen';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
 import EmailResults2 from './Components/EmailResults/EmailResults2';
@@ -32,6 +33,7 @@ const App = () => {
   const theme = createTheme(styleOverrides);
 
   const initialFormData = {
+    screenUUID: undefined,
     isTest: isTest,
     externalID: externalId,
     agreeToTermsOfService: false,
@@ -114,25 +116,6 @@ const App = () => {
   const [formData, setFormData] = useState(getCurrentState());
   // const [formData, setFormData] = useState(createDevFormData(searchParams));
 
-  const initialResults = {
-    programs: [], 
-    rawResponse: {},
-    screenerId: 0,
-    isLoading: true,
-    user: 0
-  };
-
-  const getCurrentResultsState = () => {
-    const localStorageResults = localStorage.getItem('results');
-    if (localStorageResults === null) {
-      return initialResults;
-    } else {
-      return JSON.parse(localStorageResults);
-    }
-  }
-
-  const [results, setResults] = useState(getCurrentResultsState());
-
   useEffect(() => {
     ReactGA.pageview(window.location.pathname +  window.location.search);
   }, [location]);
@@ -181,8 +164,7 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem('formData', JSON.stringify(formData));
-    localStorage.setItem('results', JSON.stringify(results));
-  }, [formData, results]);
+  }, [formData]);
 
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
@@ -270,7 +252,6 @@ const App = () => {
     //set the formData and results at the same time
     setTimeout(() => {
       setFormData(initialFormData);
-      setResults(initialResults);
     }, '100');
   }
 
@@ -309,17 +290,20 @@ const App = () => {
               element={<Confirmation
                 formData={formData} /> } />
             <Route
-              path='/results'
-              element={<Results
+              path='/submit-screen'
+              element={<SubmitScreen
                 formData={formData}
-                results={results}
-                setResults={setResults}
+                setFormData={setFormData}
                 /> } /> 
             <Route
-              path='/email-results'
+              path='/results/:id'
+              element={<Results
+                formData={formData}
+                /> } /> 
+            <Route
+              path='/email-results/:id'
               element={<EmailResults2
                 formData={formData}
-                results={results}
                 handleTextfieldChange={handleTextfieldChange} /> } />
             <Route
               path='*'

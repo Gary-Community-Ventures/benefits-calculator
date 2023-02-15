@@ -5,17 +5,20 @@ import IconButton from '@mui/material/IconButton';
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { emailHasError, displayEmailHelperText } from "../../Assets/validationFunctions";
-import { postMessage, updateScreen } from '../../apiCalls';
+import { postMessage } from '../../apiCalls';
 import Textfield from "../Textfield/Textfield";
 import PreviousButton from "../PreviousButton/PreviousButton";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { useParams } from "react-router-dom";
 
-const EmailResults2 = ({ formData, handleTextfieldChange, results }) => {
+const EmailResults2 = ({ formData, handleTextfieldChange }) => {
   const [state, setState] = useState({
     open: false,
     error: false,
     errorMessage: ''
   });
+  const { id: screenId } = useParams();
+
 
   const createEmailTextfield = () => {
     const emailProps = {
@@ -61,17 +64,11 @@ const EmailResults2 = ({ formData, handleTextfieldChange, results }) => {
         const message = {
           email: email,
           type: 'emailScreen',
-          screen: results.screenerId,
-          uid: results.user
+          screen: screenId,
         }
         await postMessage(message);
         //^^ if the user's email already exists in our system this function will throw an error =>
         //we won't be able to get the uid from results because of the error exception
-        
-        const emailRequestUpdate = {
-          last_email_request_date: new Date().toJSON()
-        }
-        await updateScreen(results.screenerId, emailRequestUpdate);
         
         setState({ 
           ...state, 
