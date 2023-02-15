@@ -15,7 +15,7 @@ import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
   const navigate = useNavigate();
-  
+
   const displayAllHouseholdData = () => {
     const { householdSize } = formData;
     if (householdSize > 1) {
@@ -38,15 +38,15 @@ const Confirmation = ({ formData }) => {
           <p className='confirmation-label'>
             <b>⚫️ {allHouseholdRelations[i]}, { allHouseholdAges[i] }</b>
             <Link to='/step-16' className='edit-link'>
-              <FormattedMessage 
-                id='confirmation.editLinkText' 
+              <FormattedMessage
+                id='confirmation.editLinkText'
                 defaultMessage='Edit' />
             </Link>
           </p>
           <article className='confirmation-label'>
             <b>
-              <FormattedMessage 
-                id='confirmation.headOfHouseholdDataBlock-conditionsText' 
+              <FormattedMessage
+                id='confirmation.headOfHouseholdDataBlock-conditionsText'
                 defaultMessage='Conditions:' />
             </b>
             <Link to='/step-16' className='edit-link'>
@@ -81,57 +81,57 @@ const Confirmation = ({ formData }) => {
     return (
       <div key='head-of-household-data-block'>
         <p className='confirmation-label'>
-          <b> 
-            ⚫️ 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-youText' 
-              defaultMessage=' You, ' /> 
-            { age }, 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-headOfHouseholdText' 
+          <b>
+            ⚫️
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-youText'
+              defaultMessage=' You, ' />
+            { age },
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-headOfHouseholdText'
               defaultMessage=' head of household' />
           </b>
           <Link to='/step-2' className='edit-link'>
-            <FormattedMessage 
-                id='confirmation.editLinkText' 
+            <FormattedMessage
+                id='confirmation.editLinkText'
                 defaultMessage='Edit' />
           </Link>
         </p>
         <article className='confirmation-label'>
           <b>
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-conditionsText' 
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-conditionsText'
               defaultMessage='Conditions:' />
           </b>
-          <Link to='/step-6' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
+          <Link to='/step-5' className='edit-link'>
+            <FormattedMessage
+              id='confirmation.editLinkText'
               defaultMessage='Edit' />
           </Link>
           { displayConditions(formData) }
         </article>
         <article className='confirmation-label'>
           <b>
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-incomeLabel' 
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-incomeLabel'
               defaultMessage='Income:' />
           </b>
-          <Link to='/step-12' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
+          <Link to='/step-11' className='edit-link'>
+            <FormattedMessage
+              id='confirmation.editLinkText'
               defaultMessage='Edit' />
           </Link>
           { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
         </article>
         <article className='confirmation-label'>
           <b>
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-expensesLabel' 
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-expensesLabel'
               defaultMessage='Monthly Expenses:' />
           </b>
-          <Link to='/step-13' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
+          <Link to='/step-12' className='edit-link'>
+            <FormattedMessage
+              id='confirmation.editLinkText'
               defaultMessage='Edit' />
           </Link>
           { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul> }
@@ -141,81 +141,81 @@ const Confirmation = ({ formData }) => {
   }
 
   const displayConditions = (userData) => {
-    const { student, studentFulltime, pregnant, unemployed, 
-      unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid, 
+    const { student, studentFulltime, pregnant, unemployed,
+      unemployedWorkedInLast18Mos, blindOrVisuallyImpaired, disabled, veteran, medicaid,
       disabilityRelatedMedicaid } = userData;
 
     return (
       <ul>
-        { studentFulltime && 
-          <li> 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-studentFulltimeText' 
+        { studentFulltime &&
+          <li>
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-studentFulltimeText'
               defaultMessage='Full-time student' />
-          </li> 
+          </li>
         }
-        { student && (studentFulltime === false) && 
-          <li> 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-studentText' 
-              defaultMessage='Student' /> 
-          </li> 
+        { student && (studentFulltime === false) &&
+          <li>
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-studentText'
+              defaultMessage='Student' />
+          </li>
         }
-        { pregnant && 
-          <li> 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-pregnantText' 
+        { pregnant &&
+          <li>
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-pregnantText'
               defaultMessage='Pregnant' />
-          </li> 
+          </li>
         }
-        { unemployedWorkedInLast18Mos && 
-          <li> 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-unemployed18MosText' 
+        { unemployedWorkedInLast18Mos &&
+          <li>
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-unemployed18MosText'
               defaultMessage='Unemployed, worked in the last 18 months' />
-          </li> 
+          </li>
         }
-        { unemployed && (unemployedWorkedInLast18Mos === false) && 
-          <li> 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-unemployedText' 
-              defaultMessage='Unemployed' /> 
-          </li> 
+        { unemployed && (unemployedWorkedInLast18Mos === false) &&
+          <li>
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-unemployedText'
+              defaultMessage='Unemployed' />
+          </li>
         }
-        { blindOrVisuallyImpaired && 
-          <li> 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText' 
+        { blindOrVisuallyImpaired &&
+          <li>
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText'
               defaultMessage='Blind or visually impaired' />
-          </li> 
+          </li>
         }
-        { disabled && 
-          <li> 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-disabledText' 
+        { disabled &&
+          <li>
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-disabledText'
               defaultMessage='Disabled' />
-          </li> 
+          </li>
         }
-        { veteran && 
-          <li> 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-veteranText' 
+        { veteran &&
+          <li>
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-veteranText'
               defaultMessage='Veteran' />
-          </li> 
+          </li>
         }
-        { medicaid && 
-          <li> 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-medicaidText' 
-              defaultMessage='Receiving Medicaid' /> 
-          </li> 
+        { medicaid &&
+          <li>
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-medicaidText'
+              defaultMessage='Receiving Medicaid' />
+          </li>
         }
-        { disabilityRelatedMedicaid && 
-          <li> 
-            <FormattedMessage 
-              id='confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText' 
-              defaultMessage='Receiving disability-related Medicaid ' /> 
-          </li> 
+        { disabilityRelatedMedicaid &&
+          <li>
+            <FormattedMessage
+              id='confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText'
+              defaultMessage='Receiving disability-related Medicaid ' />
+          </li>
         }
       </ul>
     );
@@ -223,14 +223,14 @@ const Confirmation = ({ formData }) => {
 
   const getAllHouseholdRelations = () => {
     const { householdData } = formData;
-    const householdMembers = householdData.map(personData => {      
+    const householdMembers = householdData.map(personData => {
       return relationshipOptions[personData.relationshipToHH];
     });
-    
+
     return householdMembers;
   }
 
-  const getAllHouseholdAges = () => {    
+  const getAllHouseholdAges = () => {
     const { householdData } = formData;
     const householdMemberAges = householdData.map(personData => {
       return Number(personData.age);
@@ -241,28 +241,28 @@ const Confirmation = ({ formData }) => {
 
   const displayHouseholdSizeSection = () => {
     const { householdSize } = formData;
-    const householdSizeDescriptor = 
-      householdSize === 1 ? 
-        <FormattedMessage 
-          id='confirmation.displayAllFormData-personLabel' 
+    const householdSizeDescriptor =
+      householdSize === 1 ?
+        <FormattedMessage
+          id='confirmation.displayAllFormData-personLabel'
           defaultMessage='person' />
-      : 
-        <FormattedMessage 
-          id='confirmation.displayAllFormData-peopleLabel' 
-          defaultMessage='people' /> 
+      :
+        <FormattedMessage
+          id='confirmation.displayAllFormData-peopleLabel'
+          defaultMessage='people' />
     ;
 
     return (
       <article className='confirmation-label'>
         <b>
-          <FormattedMessage 
-            id='confirmation.displayAllFormData-yourHouseholdLabel' 
+          <FormattedMessage
+            id='confirmation.displayAllFormData-yourHouseholdLabel'
             defaultMessage='Your household: ' />
         </b>
         { householdSize } { householdSizeDescriptor }
         <Link to='/step-15' className='edit-link'>
-          <FormattedMessage 
-            id='confirmation.editLinkText' 
+          <FormattedMessage
+            id='confirmation.editLinkText'
             defaultMessage='Edit' />
         </Link>
       </article>
@@ -274,21 +274,21 @@ const Confirmation = ({ formData }) => {
     return (
       <>
         <article className='confirmation-label'>
-          <b> 
-            <FormattedMessage 
-              id='confirmation.displayAllFormData-householdResourcesText' 
+          <b>
+            <FormattedMessage
+              id='confirmation.displayAllFormData-householdResourcesText'
               defaultMessage='Household resources: ' />
           </b>
           ${ Number(householdAssets).toLocaleString(2) }
           <Link to='/step-17' className='edit-link'>
-            <FormattedMessage 
-              id='confirmation.editLinkText' 
+            <FormattedMessage
+              id='confirmation.editLinkText'
               defaultMessage='Edit' />
           </Link>
         </article>
         <p className='confirmation-label-description'>
-          <FormattedMessage 
-            id='confirmation.displayAllFormData-householdResourcesDescription' 
+          <FormattedMessage
+            id='confirmation.displayAllFormData-householdResourcesDescription'
             defaultMessage='This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.' />
         </p>
       </>
@@ -299,15 +299,15 @@ const Confirmation = ({ formData }) => {
     const { lastTaxFilingYear } = formData;
     return (
       <article className='confirmation-label'>
-        <b> 
-          <FormattedMessage 
-            id='confirmation.displayAllFormData-lastTaxFilingYear' 
+        <b>
+          <FormattedMessage
+            id='confirmation.displayAllFormData-lastTaxFilingYear'
             defaultMessage='Last Tax Filing Year: ' />
         </b>
         {taxYearOptions[lastTaxFilingYear]}
         <Link to='/step-18' className='edit-link'>
-          <FormattedMessage 
-            id='confirmation.editLinkText' 
+          <FormattedMessage
+            id='confirmation.editLinkText'
             defaultMessage='Edit' />
         </Link>
       </article>
@@ -318,22 +318,22 @@ const Confirmation = ({ formData }) => {
     const { zipcode, county } = formData;
     return (
       <article className='confirmation-label'>
-        <b> 
-          <FormattedMessage 
-            id='confirmation.displayAllFormData-zipcodeText' 
-            defaultMessage='Zip code: ' /> 
+        <b>
+          <FormattedMessage
+            id='confirmation.displayAllFormData-zipcodeText'
+            defaultMessage='Zip code: ' />
         </b>
         { zipcode }
         <Link to='/step-3' className='edit-link'>
-          <FormattedMessage 
-            id='confirmation.editLinkText' 
+          <FormattedMessage
+            id='confirmation.editLinkText'
             defaultMessage='Edit' />
         </Link>
         <br></br>
-        <b> 
-          <FormattedMessage 
-            id='confirmation.displayAllFormData-countyText' 
-            defaultMessage='County: ' /> 
+        <b>
+          <FormattedMessage
+            id='confirmation.displayAllFormData-countyText'
+            defaultMessage='County: ' />
         </b>
         { county }
       </article>
@@ -344,24 +344,24 @@ const Confirmation = ({ formData }) => {
     const { referralSource, otherSource } = formData;
     const referralSourceLabel = referralOptions[referralSource];
     const finalReferralSource = (referralSource !== 'other') ? referralSourceLabel : otherSource;
-   
+
     return (
       <article className='confirmation-label'>
-        <b> 
-          <FormattedMessage 
-            id='confirmation.displayAllFormData-referralSourceText' 
-            defaultMessage='Referral Source: ' /> 
+        <b>
+          <FormattedMessage
+            id='confirmation.displayAllFormData-referralSourceText'
+            defaultMessage='Referral Source: ' />
         </b>
         { finalReferralSource }
         <Link to='/step-19' className='edit-link'>
-          <FormattedMessage 
-            id='confirmation.editLinkText' 
+          <FormattedMessage
+            id='confirmation.editLinkText'
             defaultMessage='Edit' />
         </Link>
       </article>
     );
   }
-  
+
   const displayAllFormData = () => {
     return (
       <>
@@ -370,20 +370,20 @@ const Confirmation = ({ formData }) => {
         <p className='confirmation-section-underline'></p>
           { displayHouseholdAssetsSection() }
         <p className='confirmation-section-underline'></p>
-          { displayHHCheckboxSection('benefits', 
-            'confirmation.displayAllFormData-currentHHBenefitsText', 
-            'Household benefits:', '/step-4', benefitOptions
+          { displayHHCheckboxSection('benefits',
+            'confirmation.displayAllFormData-currentHHBenefitsText',
+            'Household benefits:', '/step-14', benefitOptions
             )
           }
         <p className='confirmation-section-underline'></p>
-          { displayHHCheckboxSection('healthInsurance', 
-            'confirmation.displayAllFormData-healthInsurance', 
-            'Household health insurance:', '/step-5', healthInsuranceOptions
+          { displayHHCheckboxSection('healthInsurance',
+            'confirmation.displayAllFormData-healthInsurance',
+            'Household health insurance:', '/step-4', healthInsuranceOptions
             )
           }
         <p className='confirmation-section-underline'></p>
-          { displayHHCheckboxSection('acuteHHConditions', 
-            'confirmation.displayAllFormData-acuteHHConditions', 
+          { displayHHCheckboxSection('acuteHHConditions',
+            'confirmation.displayAllFormData-acuteHHConditions',
             'Immediate Needs:', '/step-14', acuteConditionOptions
             )
           }
@@ -429,7 +429,7 @@ const Confirmation = ({ formData }) => {
     const mappedListItems = selectedOptions.map(option => {
       return <li key={ option }> { relatedOptionsList[option] } </li>
     });
-    
+
     return mappedListItems;
   }
 
@@ -437,7 +437,7 @@ const Confirmation = ({ formData }) => {
     const stateVariableObj = formData[stateVariableName];
     const stateVariableKeys = Object.keys(stateVariableObj);
     const truthyOptions = stateVariableKeys.filter(key => stateVariableObj[key]);
-    
+
     return (
       <>
         <article className='confirmation-label'>
@@ -462,23 +462,23 @@ const Confirmation = ({ formData }) => {
   return (
     <div className='benefits-form'>
       <p className='step-progress-title'>
-        <FormattedMessage 
-          id='confirmation.return-stepLabel' 
-          defaultMessage='Step ' /> 
+        <FormattedMessage
+          id='confirmation.return-stepLabel'
+          defaultMessage='Step ' />
         { questions.length + 2 }
-        <FormattedMessage 
-          id='confirmation.return-ofLabel' 
-          defaultMessage=' of ' /> 
+        <FormattedMessage
+          id='confirmation.return-ofLabel'
+          defaultMessage=' of ' />
         { questions.length + 2 }
       </p>
       <h2 className='sub-header'>
-        <FormattedMessage 
-          id='confirmation.return-subheader' 
+        <FormattedMessage
+          id='confirmation.return-subheader'
           defaultMessage="Ok. Here's what we've got so far:" />
       </h2>
       <p className='question-label'>
-        <FormattedMessage 
-          id='confirmation.return-questionLabel' 
+        <FormattedMessage
+          id='confirmation.return-questionLabel'
           defaultMessage='Is all of your information correct?' />
       </p>
       <div className='confirmation-container'>
@@ -490,14 +490,14 @@ const Confirmation = ({ formData }) => {
               navigate(`/step-${questions.length + 1}`);
             }}
             variant='contained'>
-            <FormattedMessage 
+            <FormattedMessage
               id='previousButton'
               defaultMessage='Prev' />
           </Button>
           <Button
             variant='contained'
             onClick={() => navigate('/submit-screen')}>
-            <FormattedMessage 
+            <FormattedMessage
               id='continueButton'
               defaultMessage='Continue' />
           </Button>
