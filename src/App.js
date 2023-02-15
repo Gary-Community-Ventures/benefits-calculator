@@ -57,6 +57,7 @@ const App = () => {
     householdData: [],
     householdAssets: 0,
     lastTaxFilingYear: '',
+    hasBenefits: false,
     benefits: {
       tanf: false,
       wic: false,
@@ -294,12 +295,12 @@ const App = () => {
               element={<SubmitScreen
                 formData={formData}
                 setFormData={setFormData}
-                /> } /> 
+                /> } />
             <Route
               path='/results/:id'
               element={<Results
                 formData={formData}
-                /> } /> 
+                /> } />
             <Route
               path='/email-results/:id'
               element={<EmailResults2
