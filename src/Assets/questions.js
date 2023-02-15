@@ -109,21 +109,6 @@ const questions = [
   },
   {
     id: 4,
-    name: 'benefits',
-    question:
-      <FormattedMessage
-        id='questions.benefits'
-        defaultMessage='Which benefits are you or your household members currently receiving or have received in the past year?' />,
-    componentDetails: {
-      componentType: 'BasicCheckboxGroup',
-      inputName: 'benefits',
-      options: benefitOptions,
-      inputError: benefitsHasError
-    },
-    headerType: 'aboutYourself'
-  },
-  {
-    id: 5,
     name: 'healthInsurance',
     question:
       <FormattedMessage
@@ -139,7 +124,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 6,
+    id: 5,
     name: 'student',
     question:
       <FormattedMessage
@@ -167,7 +152,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 7,
+    id: 6,
     name: 'pregnant',
     question:
       <FormattedMessage
@@ -182,7 +167,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 8,
+    id: 7,
     name: 'unemployed',
     question:
       <FormattedMessage
@@ -210,7 +195,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 9,
+    id: 8,
     name: 'blindOrVisuallyImpaired',
     question:
       <FormattedMessage
@@ -230,7 +215,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 10,
+    id: 9,
     name: 'disabled',
     question:
       <FormattedMessage
@@ -245,7 +230,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 11,
+    id: 10,
     name: 'veteran',
     question:
       <FormattedMessage
@@ -260,7 +245,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 12,
+    id: 11,
     name: 'hasIncome',
     question:
       <FormattedMessage
@@ -293,7 +278,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 13,
+    id: 12,
     name: 'hasExpenses',
     question:
       <FormattedMessage
@@ -326,7 +311,7 @@ const questions = [
     headerType: 'aboutHousehold'
   },
   {
-    id: 14,
+    id: 13,
     name: 'acuteHHConditions',
     question:
       <FormattedMessage
@@ -339,6 +324,21 @@ const questions = [
       inputError: acuteHHConditionsHasError
     },
     headerType: 'aboutHousehold'
+  },
+  {
+    id: 14,
+    name: 'benefits',
+    question:
+      <FormattedMessage
+        id='questions.benefits'
+        defaultMessage='Which benefits are you or your household members currently receiving or have received in the past year?' />,
+    componentDetails: {
+      componentType: 'BasicCheckboxGroup',
+      inputName: 'benefits',
+      options: benefitOptions,
+      inputError: benefitsHasError
+    },
+    headerType: 'aboutYourself'
   },
   {
     id: 15,
