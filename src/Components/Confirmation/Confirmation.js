@@ -384,7 +384,7 @@ const Confirmation = ({ formData }) => {
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('acuteHHConditions',
             'confirmation.displayAllFormData-acuteHHConditions',
-            'Immediate Needs:', '/step-14', acuteConditionOptions
+            'Immediate Needs:', '/step-13', acuteConditionOptions
             )
           }
         <p className='confirmation-section-underline'></p>
