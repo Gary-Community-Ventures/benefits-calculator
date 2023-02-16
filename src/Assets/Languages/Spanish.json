@@ -323,6 +323,7 @@
   "signUp.displayDisclosureSection-consentCheck4": " de My Friend Ben y doy mi consentimiento de contacto.",
   "emailResults.displaySubheader-text": "Envíeme una copia de mis resultados",
   "emailResults.enter-emailLabel": "Por favor ingrese o confirme su dirección de correo electrónico:",
+  "emailResults.enert-phoneNumberLabel": "Por favor ingrese o confirme su número de teléfono:",
   "emailResults.return-sendButton": "Enviar",
   "emailResults.return-signupCompleted": "Se ha enviado una copia de sus resultados. Haga clic en el botón previo para volver a sus resultados.",
   "landingPage.step-header": "Paso 0 de ",

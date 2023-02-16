@@ -323,6 +323,7 @@
   "signUp.displayDisclosureSection-consentCheck4": " and consent to contact.",
   "emailResults.displaySubheader-text": "Send me a copy of my results",
   "emailResults.enter-emailLabel": "Please enter or confirm your email address:",
+  "emailResults.enert-phoneNumberLabel": "Please enter or confirm your phone number:",
   "emailResults.return-sendButton": "Send",
   "emailResults.return-signupCompleted": "A copy of your results has been sent. Click the prev button to return to your results.",
   "landingPage.step-header": "Step 0 of ",
