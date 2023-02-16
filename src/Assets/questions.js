@@ -332,6 +332,10 @@ const questions = [
       <FormattedMessage
         id='questions.hasBenefits'
         defaultMessage='Does your household currently have any benefits?' />,
+    questionDescription:
+      <FormattedMessage
+        id='questions.hasBenefits-description'
+        defaultMessage='For example, does any person in your household receive public benefits like SNAP food assistance, CCCAP help with child care costs, TANF cash assistance, or tax credits like EITC?' />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'questions.hasBenefits-ariaLabel',

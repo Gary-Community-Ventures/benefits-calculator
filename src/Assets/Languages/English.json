@@ -31,6 +31,7 @@
   "questions.zipcode-a-inputLabel": "County",
   "questions.zipcode-a-disabledSelectMenuItemText": "Select a county",
   "questions.hasBenefits": "Does your household currently have any benefits?",
+  "questions.hasBenefits-description": "For example, does any person in your household receive public benefits like SNAP food assistance, CCCAP help with child care costs, TANF cash assistance, or tax credits like EITC?",
   "questions.hasBenefits-ariaLabel": "has benefits",
   "questions.hasBenefits-a": "Please tell us what benefits your household currently has.",
   "questions.hasBenefits-a-description": "We will only show you new benefits you may be eligible for on the results page.",

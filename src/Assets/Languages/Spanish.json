@@ -31,6 +31,7 @@
   "questions.zipcode-a-inputLabel": "Condado",
   "questions.zipcode-a-disabledSelectMenuItemText": "Seleccione un condado",
   "questions.hasBenefits": "¿Alguien en su hogar actualmente recibe algun beneficio?",
+  "questions.hasBenefits-description": "Por ejemplo, ¿Alguna persona en su hogar recibe beneficios públicos como asistencia alimentaria SNAP, ayuda CCCAP asistencia con los costos  de cuidado de niños, asistencia en efectivo TANF, o créditos fiscales con EITC?",
   "questions.hasBenefits-ariaLabel": "tiene beneficios",
   "questions.hasBenefits-a": "Díganos qué beneficios tiene actualmente su hogar.",
   "questions.hasBenefits-a-description": "En la página de resultados, solo le mostraremos los nuevos beneficios para los que puede ser elegible.",
