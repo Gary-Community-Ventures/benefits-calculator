@@ -349,5 +349,12 @@
   "urgentNeedsTable.visit-website-button": "Visit website",
   "urgentNeedsTable.resources-columnHeader": "Resources",
   "urgentNeedsTable.typeOfResource-columnHeader": "Type of Resource",
-  "urgentNeedsRow.formatPhoneNumber": "Phone Number: "
+  "urgentNeedsRow.formatPhoneNumber": "Phone Number: ",
+  "benefitCategories.cash": "Cash Assistance",
+  "benefitCategories.foodAndNutrition": "Food and Nutrition",
+  "benefitCategories.childCare": "Child Care, Preschool, and Youth",
+  "benefitCategories.housingAndUtilities": "Housing and Utilities",
+  "benefitCategories.transportation": "Transportation",
+  "benefitCategories.healthCare": "Health Care",
+  "benefitCategories.taxCredits": "Tax Credits"
 }

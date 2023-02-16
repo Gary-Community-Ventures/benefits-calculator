@@ -349,5 +349,12 @@
   "urgentNeedsTable.visit-website-button": "Visite el sitio web",
   "urgentNeedsTable.resources-columnHeader": "Recursos",
   "urgentNeedsTable.typeOfResource-columnHeader": "Tipo de Recurso",
-  "urgentNeedsRow.formatPhoneNumber": "Número de teléfono: "
+  "urgentNeedsRow.formatPhoneNumber": "Número de teléfono: ",
+  "benefitCategories.cash": "Asistencia en Efectivo",
+  "benefitCategories.foodAndNutrition": "Alimentos y Nutrición",
+  "benefitCategories.childCare": "Cuidado de niños, preescolar y jóvenes",
+  "benefitCategories.housingAndUtilities": "Vivienda y Servicios",
+  "benefitCategories.transportation": "Transporte",
+  "benefitCategories.healthCare": "Cuidado de la Salud",
+  "benefitCategories.taxCredits": "Créditos fiscales"
 }
