@@ -379,5 +379,8 @@
   "transportationBenefits.rtdlive": "Tarifas RTD con descuento (RTD LiVE)",
   "healthCareBenefits.reproductivehealth": "Control de la natalidad gratuito (Programa de Atención de la Salud Reproductiva)",
   "healthCareBenefits.familyplanning": "Beneficios gratuitos de planificación familiar (Servicios de planificación familiar)",
-  "healthCareBenefits.dentallowincseniors": "Atención dental de bajo costo para personas mayores de 60 años (Programa de salud dental de Colorado para personas mayores de bajos ingresos)"
+  "healthCareBenefits.dentallowincseniors": "Atención dental de bajo costo para personas mayores de 60 años (Programa de salud dental de Colorado para personas mayores de bajos ingresos)",
+  "taxCreditBenefits.eitc": "Crédito fiscal federal: ingreso del trabajo (Crédito fiscal por ingreso del trabajo)",
+  "taxCreditBenefits.coeitc": "Crédito fiscal estatal: ingresos del trabajo (Crédito fiscal por ingresos del trabajo de Colorado/Crédito fiscal por ingresos del trabajo ampliado)",
+  "taxCreditBenefits.ctc": "Crédito fiscal federal: crédito fiscal por hijos (crédito fiscal por hijos)"
 }

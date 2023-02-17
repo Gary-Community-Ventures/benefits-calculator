@@ -379,5 +379,8 @@
   "transportationBenefits.rtdlive": "Discounted RTD fares (RTD LiVE)",
   "healthCareBenefits.reproductivehealth": "Free birth control (Reproductive Health Care Program)",
   "healthCareBenefits.familyplanning": "Free family planning benefits (Family Planning Services)",
-  "healthCareBenefits.dentallowincseniors": "Low-cost dental care for people 60 years of age or older (Colorado Dental Health Program for Low-Income Seniors)"
+  "healthCareBenefits.dentallowincseniors": "Low-cost dental care for people 60 years of age or older (Colorado Dental Health Program for Low-Income Seniors)",
+  "taxCreditBenefits.eitc": "Federal tax credit: earned income (Earned Income Tax Credit)",
+  "taxCreditBenefits.coeitc": "State tax credit: earned income (Colorado Earned Income Tax Credit/Expanded Earned Income Tax Credit)",
+  "taxCreditBenefits.ctc": "Federal tax credit: child tax credit (Child Tax Credit)"
 }
