@@ -1,4 +1,4 @@
-Fben {
+{
   "header.appName": "myfriendben",
   "header.selectLang": "Idioma",
   "disclaimer.step-header": "Paso 1 de ",
@@ -366,5 +366,10 @@ Fben {
   "foodAndNutritionBenefits.snap": "Asistencia alimentaria (Programa de Asistencia Nutricional Suplementaria/SNAP)",
   "foodAndNutritionBenefits.wic": "Asistencia alimentaria y de lactancia (Programa Especial de Nutrición Suplementaria para Mujeres, Bebés y Niños/WIC)",
   "foodAndNutritionBenefits.nslp": "Comidas escolares gratuitas (Programa Nacional de Almuerzos Escolares)",
-  "foodAndNutritionBenefits.ede": "Apoyo alimentario para personas mayores de 60 años (Everyday Eats)"
+  "foodAndNutritionBenefits.ede": "Apoyo alimentario para personas mayores de 60 años (Everyday Eats)",
+  "childCareBenefits.cccap": "Ayuda con los costos de cuidado infantil (Programa de asistencia para el cuidado infantil de Colorado/CCCAP)",
+  "childCareBenefits.denverpresc": "Créditos de matrícula para niños en edad preescolar de Denver (Programa preescolar de Denver)",
+  "childCareBenefits.coheadstart": "Cuidado infantil y preescolar gratuitos (Colorado Head Start)",
+  "childCareBenefits.univpresc": "Preescolar gratuito (Universal Preschool Colorado)",
+  "childCareBenefits.mydenver": "Programas para jóvenes de costo reducido (MY Denver Card)"
 }

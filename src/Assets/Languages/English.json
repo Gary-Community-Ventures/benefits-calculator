@@ -366,5 +366,10 @@
   "foodAndNutritionBenefits.snap": "Food assistance (Supplemental Nutrition Assistance Program/SNAP)",
   "foodAndNutritionBenefits.wic": "Food and breastfeeding assistance (Special Supplemental Nutrition Program for Women, Infants, and Children/WIC)",
   "foodAndNutritionBenefits.nslp": "Free school meals (National School Lunch Program)",
-  "foodAndNutritionBenefits.ede": "Food support for people 60 years of age or older (Everyday Eats)"
+  "foodAndNutritionBenefits.ede": "Food support for people 60 years of age or older (Everyday Eats)",
+  "childCareBenefits.cccap": "Help with child care costs (Colorado Child Care Assistance Program/CCCAP)",
+  "childCareBenefits.denverpresc": "Tuition credits for Denver preschoolers (Denver Preschool Program)",
+  "childCareBenefits.coheadstart": "Free early child care and preschool (Colorado Head Start)",
+  "childCareBenefits.univpresc": "Free preschool (Universal Preschool Colorado)",
+  "childCareBenefits.mydenver": "Reduced-cost youth programs (MY Denver Card)"
 }
