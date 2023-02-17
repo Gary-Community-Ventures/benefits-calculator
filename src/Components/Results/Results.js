@@ -164,6 +164,7 @@ const Results = ({ formData }) => {
 
   const totalEligiblePrograms = (results) => {
     return results.reduce((total, program) => {
+      if (program.estimated_value <= 0) return total
       if (filt.citizen.value.includes('non-citizen') && program.legal_status_required !== 'citizen') {
         total += 1;
       } else if (filt.citizen.value.includes('citizen') && program.legal_status_required !== 'non-citizen'){
