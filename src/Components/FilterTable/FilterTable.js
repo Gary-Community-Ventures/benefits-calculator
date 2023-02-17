@@ -129,7 +129,7 @@ const Filter = ({
 						label={
 							<FormattedMessage
 								id="results.returnSignupCitizenFilter"
-								defaultMessage="Citizen or Qualified Non-Citizen Status Not Required"
+								defaultMessage="Only show benefits that do not require a citizen or qualified non-citizen in the household"
 							/>
 						}
 						control={

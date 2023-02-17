@@ -126,7 +126,7 @@ const Results = ({ formData }) => {
 			.sort(
 				(benefitA, benefitB) => benefitB.estimated_value - benefitA.estimated_value
 			);
-    
+
 		setResults({
       ...results,
 			programs: programs,
@@ -164,6 +164,7 @@ const Results = ({ formData }) => {
 
   const totalEligiblePrograms = (results) => {
     return results.reduce((total, program) => {
+      if (program.estimated_value <= 0) return total
       if (filt.citizen.value.includes('non-citizen') && program.legal_status_required !== 'citizen') {
         total += 1;
       } else if (filt.citizen.value.includes('citizen') && program.legal_status_required !== 'non-citizen'){
@@ -236,19 +237,19 @@ const Results = ({ formData }) => {
     return (
       <>
         <Grid xs={12} item={true}>
-          <Typography className='sub-header' variant='h6'> 
-            {totalEligiblePrograms(results.programs)} 
-            <FormattedMessage 
-              id='results.return-programsUpToLabel' 
-              defaultMessage=' programs, up to ' /> 
-            ${totalDollarAmount(results.programs).toLocaleString()} 
-            <FormattedMessage 
-              id='results.return-perYearOrLabel' 
+          <Typography className='sub-header' variant='h6'>
+            {totalEligiblePrograms(results.programs)}
+            <FormattedMessage
+              id='results.return-programsUpToLabel'
+              defaultMessage=' programs, up to ' />
+            ${totalDollarAmount(results.programs).toLocaleString()}
+            <FormattedMessage
+              id='results.return-perYearOrLabel'
               defaultMessage=' per year or ' />
-            ${Math.round(totalDollarAmount(results.programs)/12).toLocaleString()} 
-            <FormattedMessage 
-              id='results.return-perMonthLabel' 
-              defaultMessage=' per month for you to consider' />
+            ${Math.round(totalDollarAmount(results.programs)/12).toLocaleString()}
+            <FormattedMessage
+              id='results.return-perMonthLabel'
+              defaultMessage=' per month in cash or reduced expenses for you to consider' />
           </Typography>
         </Grid>
       </>
@@ -597,9 +598,9 @@ const Results = ({ formData }) => {
       <Grid container xs={12} item={true} sx={{mt: 2}} >
         <Grid xs={12} item={true}>
           <Typography className='body2'>
-            <FormattedMessage 
-              id='results.return-screenerIdLabel' 
-              defaultMessage='Screener ID: ' /> 
+            <FormattedMessage
+              id='results.return-screenerIdLabel'
+              defaultMessage='Screener ID: ' />
             {results.screenerId}
           </Typography>
         </Grid>
@@ -611,9 +612,9 @@ const Results = ({ formData }) => {
   const displayResultsFilterButtons = () => {
     return (
       <div>
-        <Button 
-          className={ filterResultsButton === 'benefits' ? 'results-link' 
-            : 'results-filter-button-grey' 
+        <Button
+          className={ filterResultsButton === 'benefits' ? 'results-link'
+            : 'results-filter-button-grey'
           }
           onClick={() => {
             setFilterResultsButton('benefits');
@@ -626,9 +627,9 @@ const Results = ({ formData }) => {
             defaultMessage='Benefit Programs'
           />
         </Button>
-        <Button 
-          className={ filterResultsButton === 'urgentNeeds' ? 'results-link' 
-            : 'results-filter-button-grey' 
+        <Button
+          className={ filterResultsButton === 'urgentNeeds' ? 'results-link'
+            : 'results-filter-button-grey'
           }
           onClick={() => {
             setFilterResultsButton('urgentNeeds');
@@ -649,17 +650,17 @@ const Results = ({ formData }) => {
     <main className='benefits-form'>
       <div className='results-container'>
         <Grid container spacing={2}>
-          { results.isLoading ? <Loading /> : 
+          { results.isLoading ? <Loading /> :
             <>
               { displayHeaderSection() }
               <Grid xs={12} item={true}>
                 { displayResultsFilterButtons() }
                 { filterResultsButton === 'benefits' && DataGridTable(results.programs)}
-                { filterResultsButton === 'urgentNeeds' && 
-                  <UrgentNeedsTable 
-                    urgentNeedsPrograms={results.rawResponse.urgent_needs} 
-                    locale={locale} 
-                  /> 
+                { filterResultsButton === 'urgentNeeds' &&
+                  <UrgentNeedsTable
+                    urgentNeedsPrograms={results.rawResponse.urgent_needs}
+                    locale={locale}
+                  />
                 }
               </Grid>
               { displayFooter() }
