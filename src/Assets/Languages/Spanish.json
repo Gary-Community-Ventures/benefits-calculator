@@ -362,5 +362,9 @@ Fben {
   "cashAssistanceBenefits.ssi": "Asistencia federal en efectivo para personas discapacitadas, ciegas o mayores de 65 años (Seguridad de Ingreso Suplementario/SSI)",
   "cashAssistanceBenefits.andcs": "Asistencia estatal en efectivo para personas discapacitadas que reciben SSI (Ayuda para discapacitados necesitados - Suplemento de Colorado/AND-CS)",
   "cashAssistanceBenefits.oap": "Asistencia estatal en efectivo para personas mayores de 60 años (pensión de vejez/OAP)",
-  "cashAssistanceBenefits.coPropTaxRentHeatCreditRebate": "Efectivo para pagar el impuesto sobre la propiedad, el alquiler y las facturas de calefacción (Impuesto sobre la propiedad de Colorado/Renta/Reembolso de créditos de calefacción)"
+  "cashAssistanceBenefits.coPropTaxRentHeatCreditRebate": "Efectivo para pagar el impuesto sobre la propiedad, el alquiler y las facturas de calefacción (Impuesto sobre la propiedad de Colorado/Renta/Reembolso de créditos de calefacción)",
+  "foodAndNutritionBenefits.snap": "Asistencia alimentaria (Programa de Asistencia Nutricional Suplementaria/SNAP)",
+  "foodAndNutritionBenefits.wic": "Asistencia alimentaria y de lactancia (Programa Especial de Nutrición Suplementaria para Mujeres, Bebés y Niños/WIC)",
+  "foodAndNutritionBenefits.nslp": "Comidas escolares gratuitas (Programa Nacional de Almuerzos Escolares)",
+  "foodAndNutritionBenefits.ede": "Apoyo alimentario para personas mayores de 60 años (Everyday Eats)"
 }

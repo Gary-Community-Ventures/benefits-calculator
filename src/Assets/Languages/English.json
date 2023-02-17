@@ -362,5 +362,9 @@
   "cashAssistanceBenefits.ssi": "Federal cash assistance for individuals who are disabled, blind, or 65 years of age or older (Supplemental Security Income/SSI)",
   "cashAssistanceBenefits.andcs": "State cash assistance for individuals who are disabled and receiving SSI (Aid to the Needy Disabled - Colorado Supplement/AND-CS)",
   "cashAssistanceBenefits.oap": "State cash assistance for individuals 60 years of age or older (Old Age Pension/OAP)",
-  "cashAssistanceBenefits.coPropTaxRentHeatCreditRebate": "Cash to pay property tax, rent, and heat bills (Colorado Property Tax/Rent/Heat Credit Rebate)"
+  "cashAssistanceBenefits.coPropTaxRentHeatCreditRebate": "Cash to pay property tax, rent, and heat bills (Colorado Property Tax/Rent/Heat Credit Rebate)",
+  "foodAndNutritionBenefits.snap": "Food assistance (Supplemental Nutrition Assistance Program/SNAP)",
+  "foodAndNutritionBenefits.wic": "Food and breastfeeding assistance (Special Supplemental Nutrition Program for Women, Infants, and Children/WIC)",
+  "foodAndNutritionBenefits.nslp": "Free school meals (National School Lunch Program)",
+  "foodAndNutritionBenefits.ede": "Food support for people 60 years of age or older (Everyday Eats)"
 }
