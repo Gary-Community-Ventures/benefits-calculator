@@ -77,7 +77,6 @@ const EmailResults2 = ({ formData, handleTextfieldChange }) => {
       });
 
       try {
-        console.log(sendType);
         const message = {
           ...sendType,
           screen: screenId,
