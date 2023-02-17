@@ -226,7 +226,7 @@
   "expenseBlock.return-addExpenseButton": "Agregue otro gasto",
   "confirmation.return-stepLabel": "Paso ",
   "confirmation.return-ofLabel": " de ",
-  "confirmation.return-subheader": "OK. Esto es lo que tenemos hasta aquí:",
+  "confirmation.return-subheader": "OK. Esto es lo que tenemos:",
   "confirmation.return-questionLabel": "¿Toda su información es correcta?",
   "confirmation.displayAllFormData-personLabel": "persona",
   "confirmation.displayAllFormData-peopleLabel": "personas",
