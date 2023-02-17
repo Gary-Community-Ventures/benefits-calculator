@@ -277,8 +277,8 @@ const Results = ({ formData }) => {
                 }}
                 className='results-link'>
                 <FormattedMessage 
-                  id='results.return-emailResultsButton' 
-                  defaultMessage='Email Results' />
+                  id='results.return-sendResultsButton' 
+                  defaultMessage='Send Results' />
               </Button>
             </Box>
           </Grid>
