@@ -371,5 +371,9 @@
   "childCareBenefits.denverpresc": "Créditos de matrícula para niños en edad preescolar de Denver (Programa preescolar de Denver)",
   "childCareBenefits.coheadstart": "Cuidado infantil y preescolar gratuitos (Colorado Head Start)",
   "childCareBenefits.univpresc": "Preescolar gratuito (Universal Preschool Colorado)",
-  "childCareBenefits.mydenver": "Programas para jóvenes de costo reducido (MY Denver Card)"
+  "childCareBenefits.mydenver": "Programas para jóvenes de costo reducido (MY Denver Card)",
+  "housingAndUtilities.acp": "Descuento de Internet residencial (Programa de conectividad asequible)",
+  "housingAndUtilities.lifeline": "Descuento de teléfono o Internet (servicio de Internet/teléfono de Lifeline)",
+  "housingAndUtilities.leap": "Ayuda con las facturas de calefacción de invierno (Programa de asistencia de energía para personas de bajos ingresos/LEAP)",
+  "housingAndUtilities.erc": "Actualizaciones gratuitas de energía para el hogar (Centro de recursos de energía)"
 }
