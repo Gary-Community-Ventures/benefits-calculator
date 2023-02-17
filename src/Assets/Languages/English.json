@@ -375,5 +375,6 @@
   "housingAndUtilities.acp": "Home internet discount (Affordable Connectivity Program)",
   "housingAndUtilities.lifeline": "Phone or internet discount (Lifeline Phone/Internet Service)",
   "housingAndUtilities.leap": "Help with winter heating bills (Low-Income Energy Assistance Program/LEAP)",
-  "housingAndUtilities.erc": "Free home energy upgrades (Energy Resource Center)"
+  "housingAndUtilities.erc": "Free home energy upgrades (Energy Resource Center)",
+  "transportationBenefits.rtdlive": "Discounted RTD fares (RTD LiVE)"
 }
