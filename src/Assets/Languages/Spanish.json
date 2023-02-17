@@ -1,4 +1,4 @@
- {
+Fben {
   "header.appName": "myfriendben",
   "header.selectLang": "Idioma",
   "disclaimer.step-header": "Paso 1 de ",
@@ -357,5 +357,10 @@
   "benefitCategories.housingAndUtilities": "Vivienda y Servicios",
   "benefitCategories.transportation": "Transporte",
   "benefitCategories.healthCare": "Cuidado de la Salud",
-  "benefitCategories.taxCredits": "Créditos fiscales"
+  "benefitCategories.taxCredits": "Créditos fiscales",
+  "cashAssistanceBenefits.tanf": "Asistencia en efectivo y apoyo laboral (Asistencia Temporal para Familias Necesitadas (TANF/Colorado Works))",
+  "cashAssistanceBenefits.ssi": "Asistencia federal en efectivo para personas discapacitadas, ciegas o mayores de 65 años (Seguridad de Ingreso Suplementario/SSI)",
+  "cashAssistanceBenefits.andcs": "Asistencia estatal en efectivo para personas discapacitadas que reciben SSI (Ayuda para discapacitados necesitados - Suplemento de Colorado/AND-CS)",
+  "cashAssistanceBenefits.oap": "Asistencia estatal en efectivo para personas mayores de 60 años (pensión de vejez/OAP)",
+  "cashAssistanceBenefits.coPropTaxRentHeatCreditRebate": "Efectivo para pagar el impuesto sobre la propiedad, el alquiler y las facturas de calefacción (Impuesto sobre la propiedad de Colorado/Renta/Reembolso de créditos de calefacción)"
 }
