@@ -474,7 +474,7 @@ const Confirmation = ({ formData }) => {
       <h2 className='sub-header'>
         <FormattedMessage
           id='confirmation.return-subheader'
-          defaultMessage="Ok. Here's what we've got so far:" />
+          defaultMessage="Ok. Here's what we've got:" />
       </h2>
       <p className='question-label'>
         <FormattedMessage
