@@ -270,7 +270,7 @@
   "results.return-estimatedDeliveryTimeB" : " después de completar la solicitud.",
   "results.displaySubheader-rememberDisclaimerText": "Recuerde que no podemos garantizar elegibilidad, pero según la información que nos proporcionó, creemos que posiblemente sea elegible para los siguientes programas:",
   "results.displaySubheader-basedOnInformationText": "Según la información que nos proporcionó, creemos que posiblemente no sea elegible para los siguientes programas: ",
-  "results.displaySubheader-emailResultsDescText": "Para recibir una copia de sus resultados por correo electrónico, haga clic en el botón de enviar resultados.",
+  "results.displaySubheader-emailResultsDescText": "Para recibir una copia de sus resultados por correo electrónico o mensaje de texto, haga clic en el botón de enviar resultados.",
   "results.resultsTable-benefitLabel": "Beneficio",
   "results.resultsTable-annualValueLabel": "Valor anual",
   "results.resultsTable-timeToApply": "Tiempo para aplicar",
