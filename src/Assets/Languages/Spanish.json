@@ -376,5 +376,8 @@
   "housingAndUtilities.lifeline": "Descuento de teléfono o Internet (servicio de Internet/teléfono de Lifeline)",
   "housingAndUtilities.leap": "Ayuda con las facturas de calefacción de invierno (Programa de asistencia de energía para personas de bajos ingresos/LEAP)",
   "housingAndUtilities.erc": "Actualizaciones gratuitas de energía para el hogar (Centro de recursos de energía)",
-  "transportationBenefits.rtdlive": "Tarifas RTD con descuento (RTD LiVE)"
+  "transportationBenefits.rtdlive": "Tarifas RTD con descuento (RTD LiVE)",
+  "healthCareBenefits.reproductivehealth": "Control de la natalidad gratuito (Programa de Atención de la Salud Reproductiva)",
+  "healthCareBenefits.familyplanning": "Beneficios gratuitos de planificación familiar (Servicios de planificación familiar)",
+  "healthCareBenefits.dentallowincseniors": "Atención dental de bajo costo para personas mayores de 60 años (Programa de salud dental de Colorado para personas mayores de bajos ingresos)"
 }
