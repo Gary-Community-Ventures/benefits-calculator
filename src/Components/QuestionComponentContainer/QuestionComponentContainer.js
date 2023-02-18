@@ -10,10 +10,11 @@ import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import SignUp from '../SignUp/SignUp';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import AccordionsContainer from '../../Components/AccordionsContainer/AccordionsContainer';
 import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange,
   handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
@@ -168,6 +169,17 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
               formData={formData}
               handleTextfieldChange={handleTextfieldChange}
               handleCheckboxChange={handleCheckboxChange} />
+          </div>
+        );
+      } else if (followUp.componentDetails.componentType === 'AccordionContainer') {
+        return (
+          <div className='question-container' key={index}>
+            <p className='question-label'>{followUp.question}</p>
+            <p className='question-description'>{matchingQuestion.followUpQuestions[0].questionDescription}</p>
+            <AccordionsContainer
+              formData={formData}
+              setFormData={setFormData}
+            />
           </div>
         );
       }
