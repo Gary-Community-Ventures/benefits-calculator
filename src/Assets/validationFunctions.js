@@ -398,6 +398,16 @@ const benefitsHasError = (hasBenefits, formData) => {
   }
 }
 
+const displayBenefitsHelperText = (hasBenefits, formData) => {
+  if (benefitsHasError(hasBenefits, formData)) {
+    return (
+      <FormattedMessage
+        id='validation-helperText.benefits'
+        defaultMessage='If your household does not receive any of these benefits, please select the "No" option above.' />
+    );
+  }
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -436,5 +446,6 @@ export {
   healthInsuranceHasError,
   displayHealthInsuranceHelperText,
   acuteHHConditionsHasError,
-  benefitsHasError
+  benefitsHasError,
+  displayBenefitsHelperText
 }

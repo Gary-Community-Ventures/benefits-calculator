@@ -104,6 +104,7 @@
   "validation-helperText.notificationSelection": "Please select a notification option",
   "validation-helperText.consentCheckbox": "Please check the box above to sign up for the selected notifications",
   "validation-helperText.noEmailOrPhoneNumber": "Please enter an email or phone number",
+  "validation-helperText.benefits": "If your household does not receive any of these benefits, please select the \"No\" option above.",
   "previousButton": "Prev",
   "continueButton": "Continue",
   "radiofield.label-yes": "Yes",
