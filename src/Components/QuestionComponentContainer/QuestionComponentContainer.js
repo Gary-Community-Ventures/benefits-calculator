@@ -187,16 +187,14 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
   }
 
   const createPreviousAndContinueButtons = (question) => {
-    //render normal button block if the question isn't the income, expense or benefits question or
-    //if the user doesn't have an income/expenses/benefits at all,
+    //render normal button block if the question isn't the income or expense question OR
+    //if the user doesn't have an income/expenses at all,
     //otherwise these buttons will be created in the IncomeBlock/ExpenseBlock components
-    const isNotIncomeExpenseOrBenefitsQ = question.name !== 'hasIncome' && question.name !== 'hasExpenses'
-      && question.name !== 'hasBenefits';
+    const isNotIncomeAndNotExpenseQ = question.name !== 'hasIncome' && question.name !== 'hasExpenses';
     const hasFalsyIncome = question.name === 'hasIncome' && formData[question.componentDetails.inputName] === false;
     const hasFalsyExpense = question.name === 'hasExpenses' && formData[question.componentDetails.inputName] === false;
-    const hasFalsyBenefits = question.name === 'hasBenefits' && formData[question.componentDetails.inputName] === false;
 
-    if (isNotIncomeExpenseOrBenefitsQ || hasFalsyIncome || hasFalsyExpense || hasFalsyBenefits) {
+    if (isNotIncomeAndNotExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className='question-buttons'>
           <PreviousButton formData={formData} questionName={question.name} />
