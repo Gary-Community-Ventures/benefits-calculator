@@ -172,14 +172,18 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
           </div>
         );
       } else if (followUp.componentDetails.componentType === 'AccordionContainer') {
+        const hasError = matchingQuestion.componentDetails.inputError(formData.hasBenefits, formData);
+        const errorText = matchingQuestion.componentDetails.inputHelperText(formData.hasBenefits, formData);
+
         return (
-          <div className='question-container' key={index}>
+          <div className='question-container accordions-container' key={index}>
             <p className='question-label'>{followUp.question}</p>
             <p className='question-description'>{matchingQuestion.followUpQuestions[0].questionDescription}</p>
             <AccordionsContainer
               formData={formData}
               setFormData={setFormData}
             />
+            { hasError && <ErrorMessage error={errorText} /> }
           </div>
         );
       }
