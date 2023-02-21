@@ -242,7 +242,7 @@ const App = () => {
     const isZipcodeQuestionAndCountyIsEmpty = (questionName === 'zipcode' && formData.county === '');
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '');
 
-    if (!validateInputFunction(inputToBeValidated)) {
+    if (!validateInputFunction(inputToBeValidated, formData)) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
         return;
       } else if (questionName === 'householdSize' && householdSize === 1) { //if you're on the householdSize q and the value is 1
