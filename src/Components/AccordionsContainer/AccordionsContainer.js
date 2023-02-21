@@ -7,6 +7,7 @@ import transportationBenefits from '../../Assets/BenefitCategoryLists/transporta
 import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBenefits';
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
 import CategoryAccordion from "../CategoryAccordion/CategoryAccordion";
+import './AccordionsContainer.css';
 
 const AccordionsContainer = ({ formData, setFormData }) => {
   const accordionsData = [
@@ -58,7 +59,7 @@ const AccordionsContainer = ({ formData, setFormData }) => {
   }
 
   return (
-    <div>
+    <div className='accordions-container'>
       { createAccordions(accordionsData) }
     </div>
   );
