@@ -13,7 +13,7 @@
 }
 
 .prev-save-continue-buttons, .prev-continue-results-buttons {
-  margin-top: 1rem; 
+  margin-top: 1rem;
 }
 
 .household-data-q-underline {
@@ -40,4 +40,8 @@
 .remember-disclaimer-label {
   font-size: 20px;
   margin-bottom: 8px;
+}
+
+.accordions-container {
+  margin-bottom: 1rem;
 }
