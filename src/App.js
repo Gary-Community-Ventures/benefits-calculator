@@ -169,10 +169,22 @@ const App = () => {
       };
     }
 
+    if (formData.hasBenefits === false) {
+      const currentBenefitsCopy = Object.keys({ ...updatedFormData.benefits });
+
+      const newFalsyBenefits = currentBenefitsCopy.reduce((acc, benefit) => {
+        acc[benefit] = false;
+        return acc;
+      }, {});
+
+      updatedFormData.benefits = newFalsyBenefits;
+    }
+
     setFormData(updatedFormData);
 
   }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses,
-    formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates]
+    formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates,
+    formData.hasBenefits]
   );
 
   useEffect(() => {
