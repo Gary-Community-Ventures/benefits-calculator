@@ -296,7 +296,7 @@ const Results = ({ formData }) => {
 				id: count,
 				path: results[i].name,
 				name: results[i].name,
-				has_benefit: formData.benefits[results[i].name_abbreviated],
+				has_benefit: results[i].already_has,
 				value: results[i].estimated_value,
 				type: results[i].value_type,
 				description: results[i].description,
