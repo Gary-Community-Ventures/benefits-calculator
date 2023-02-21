@@ -17,7 +17,8 @@ import {
   signUpOptionsHaveError,
   healthInsuranceHasError,
   acuteHHConditionsHasError,
-  displayHealthInsuranceHelperText
+  displayHealthInsuranceHelperText,
+  displayBenefitsHelperText
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import taxYearOptions from './taxYearOptions';
@@ -340,7 +341,8 @@ const questions = [
       componentType: 'Radiofield',
       ariaLabel: 'questions.hasBenefits-ariaLabel',
       inputName: 'hasBenefits',
-      inputError: radiofieldHasError
+      inputError: benefitsHasError,
+      inputHelperText: displayBenefitsHelperText
     },
     followUpQuestions: [{
       question:
