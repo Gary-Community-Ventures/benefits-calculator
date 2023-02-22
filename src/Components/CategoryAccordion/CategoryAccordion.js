@@ -5,9 +5,9 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 
-const CategoryAccordion = ({ categoryName, categoryOptions, formData, setFormData }) => {
+const CategoryAccordion = ({ categoryName, categoryOptions, formData, setFormData, handleAccordionSelectChange, expanded, index }) => {
   return (
-    <Accordion>
+    <Accordion expanded={expanded === index} onChange={handleAccordionSelectChange(index)}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon style={{ color: '#ffffff', height: '28.8' }}/>}
         aria-controls="panel1a-content"
