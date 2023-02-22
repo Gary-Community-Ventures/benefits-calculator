@@ -57,6 +57,9 @@ const AccordionsContainer = ({ formData, setFormData }) => {
             categoryOptions={accordionData.categoryOptions}
             formData={formData}
             setFormData={setFormData}
+            handleAccordionSelectChange={handleAccordionSelectChange}
+            expanded={expanded}
+            index={index}
           />
         </div>
       );
