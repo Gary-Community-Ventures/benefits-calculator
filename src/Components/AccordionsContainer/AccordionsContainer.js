@@ -13,6 +13,10 @@ import './AccordionsContainer.css';
 const AccordionsContainer = ({ formData, setFormData }) => {
   const [expanded, setExpanded] = useState(false);
 
+  const handleAccordionSelectChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   const accordionsData = [
     {
       categoryName: benefitCategories.cash,
