@@ -7,9 +7,12 @@ import transportationBenefits from '../../Assets/BenefitCategoryLists/transporta
 import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBenefits';
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
 import CategoryAccordion from "../CategoryAccordion/CategoryAccordion";
+import { useState } from 'react';
 import './AccordionsContainer.css';
 
 const AccordionsContainer = ({ formData, setFormData }) => {
+  const [expanded, setExpanded] = useState(false);
+
   const accordionsData = [
     {
       categoryName: benefitCategories.cash,
