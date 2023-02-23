@@ -1,95 +1,70 @@
 import { FormattedMessage } from 'react-intl';
 
 const allBenefitsList = {
-  tanf:
+  acp:
     <FormattedMessage
-      id='cashAssistanceBenefits.tanf'
-      defaultMessage='Cash assistance and work support (Temporary Assistance for Needy Families (TANF/Colorado Works))'
-    />,
-  ssi:
-    <FormattedMessage
-      id='cashAssistanceBenefits.ssi'
-      defaultMessage='Federal cash assistance for individuals who are disabled, blind, or 65 years of age or older (Supplemental Security Income/SSI)'
+      id='housingAndUtilities.acp'
+      defaultMessage='Home internet discount (Affordable Connectivity Program)'
     />,
   andcs:
     <FormattedMessage
       id='cashAssistanceBenefits.andcs'
       defaultMessage='State cash assistance for individuals who are disabled and receiving SSI (Aid to the Needy Disabled - Colorado Supplement/AND-CS)'
     />,
-  oap:
-    <FormattedMessage
-      id='cashAssistanceBenefits.oap'
-      defaultMessage='State cash assistance for individuals 60 years of age or older (Old Age Pension/OAP)'
-    />,
-  coPropTaxRentHeatCreditRebate:
-    <FormattedMessage
-      id='cashAssistanceBenefits.coPropTaxRentHeatCreditRebate'
-      defaultMessage='Cash to pay property tax, rent, and heat bills (Colorado Property Tax/Rent/Heat Credit Rebate)'
-    />,
   cccap:
     <FormattedMessage
       id='childCareBenefits.cccap'
       defaultMessage='Help with child care costs (Colorado Child Care Assistance Program/CCCAP)'
     />,
-  denverpresc:
+  coeitc:
     <FormattedMessage
-      id='childCareBenefits.denverpresc'
-      defaultMessage='Tuition credits for Denver preschoolers (Denver Preschool Program)'
+      id='taxCreditBenefits.coeitc'
+      defaultMessage='State tax credit: earned income (Colorado Earned Income Tax Credit/Expanded Earned Income Tax Credit)'
     />,
   coheadstart:
     <FormattedMessage
       id='childCareBenefits.coheadstart'
       defaultMessage='Free early child care and preschool (Colorado Head Start)'
     />,
-  univpresc:
+  coPropTaxRentHeatCreditRebate:
     <FormattedMessage
-      id='childCareBenefits.univpresc'
-      defaultMessage='Free preschool (Universal Preschool Colorado)'
+      id='cashAssistanceBenefits.coPropTaxRentHeatCreditRebate'
+      defaultMessage='Cash to pay property tax, rent, and heat bills (Colorado Property Tax/Rent/Heat Credit Rebate)'
     />,
-  mydenver:
+  ctc:
     <FormattedMessage
-      id='childCareBenefits.mydenver'
-      defaultMessage='Reduced-cost youth programs (MY Denver Card)'
-    />,
-  snap:
-    <FormattedMessage
-      id='foodAndNutritionBenefits.snap'
-      defaultMessage='Food assistance (Supplemental Nutrition Assistance Program/SNAP)'
-    />,
-  wic:
-    <FormattedMessage
-      id='foodAndNutritionBenefits.wic'
-      defaultMessage='Food and breastfeeding assistance (Special Supplemental Nutrition Program for Women, Infants, and Children/WIC)'
-    />,
-  nslp:
-    <FormattedMessage
-      id='foodAndNutritionBenefits.nslp'
-      defaultMessage='Free school meals (National School Lunch Program)'
-    />,
-  ede:
-    <FormattedMessage
-      id='foodAndNutritionBenefits.ede'
-      defaultMessage='Food support for people 60 years of age or older (Everyday Eats)'
-    />,
-  reproductivehealth:
-    <FormattedMessage
-      id='healthCareBenefits.reproductivehealth'
-      defaultMessage='Free birth control (Reproductive Health Care Program)'
-    />,
-  familyplanning:
-    <FormattedMessage
-      id='healthCareBenefits.familyplanning'
-      defaultMessage='Free family planning benefits (Family Planning Services)'
+      id='taxCreditBenefits.ctc'
+      defaultMessage='Federal tax credit: child tax credit (Child Tax Credit)'
     />,
   dentallowincseniors:
     <FormattedMessage
       id='healthCareBenefits.dentallowincseniors'
       defaultMessage='Low-cost dental care for people 60 years of age or older (Colorado Dental Health Program for Low-Income Seniors)'
     />,
-  acp:
+  denverpresc:
     <FormattedMessage
-      id='housingAndUtilities.acp'
-      defaultMessage='Home internet discount (Affordable Connectivity Program)'
+      id='childCareBenefits.denverpresc'
+      defaultMessage='Tuition credits for Denver preschoolers (Denver Preschool Program)'
+    />,
+  ede:
+    <FormattedMessage
+      id='foodAndNutritionBenefits.ede'
+      defaultMessage='Food support for people 60 years of age or older (Everyday Eats)'
+    />,
+  eitc:
+    <FormattedMessage
+      id='taxCreditBenefits.eitc'
+      defaultMessage='Federal tax credit: earned income (Earned Income Tax Credit)'
+    />,
+  erc:
+    <FormattedMessage
+      id='housingAndUtilities.erc'
+      defaultMessage='Free home energy upgrades (Energy Resource Center)'
+    />,
+  familyplanning:
+    <FormattedMessage
+      id='healthCareBenefits.familyplanning'
+      defaultMessage='Free family planning benefits (Family Planning Services)'
     />,
   lifeline:
     <FormattedMessage
@@ -101,30 +76,55 @@ const allBenefitsList = {
       id='housingAndUtilities.leap'
       defaultMessage='Help with winter heating bills (Low-Income Energy Assistance Program/LEAP)'
     />,
-  erc:
+  mydenver:
     <FormattedMessage
-      id='housingAndUtilities.erc'
-      defaultMessage='Free home energy upgrades (Energy Resource Center)'
+      id='childCareBenefits.mydenver'
+      defaultMessage='Reduced-cost youth programs (MY Denver Card)'
     />,
-  eitc:
+  nslp:
     <FormattedMessage
-      id='taxCreditBenefits.eitc'
-      defaultMessage='Federal tax credit: earned income (Earned Income Tax Credit)'
+      id='foodAndNutritionBenefits.nslp'
+      defaultMessage='Free school meals (National School Lunch Program)'
     />,
-  coeitc:
+  oap:
     <FormattedMessage
-      id='taxCreditBenefits.coeitc'
-      defaultMessage='State tax credit: earned income (Colorado Earned Income Tax Credit/Expanded Earned Income Tax Credit)'
+      id='cashAssistanceBenefits.oap'
+      defaultMessage='State cash assistance for individuals 60 years of age or older (Old Age Pension/OAP)'
     />,
-  ctc:
+  reproductivehealth:
     <FormattedMessage
-      id='taxCreditBenefits.ctc'
-      defaultMessage='Federal tax credit: child tax credit (Child Tax Credit)'
+      id='healthCareBenefits.reproductivehealth'
+      defaultMessage='Free birth control (Reproductive Health Care Program)'
     />,
   rtdlive:
     <FormattedMessage
       id='transportationBenefits.rtdlive'
       defaultMessage='Discounted RTD fares (RTD LiVE)'
+    />,
+  snap:
+    <FormattedMessage
+      id='foodAndNutritionBenefits.snap'
+      defaultMessage='Food assistance (Supplemental Nutrition Assistance Program/SNAP)'
+    />,
+  ssi:
+    <FormattedMessage
+      id='cashAssistanceBenefits.ssi'
+      defaultMessage='Federal cash assistance for individuals who are disabled, blind, or 65 years of age or older (Supplemental Security Income/SSI)'
+    />,
+  tanf:
+    <FormattedMessage
+      id='cashAssistanceBenefits.tanf'
+      defaultMessage='Cash assistance and work support (Temporary Assistance for Needy Families (TANF/Colorado Works))'
+    />,
+  univpresc:
+    <FormattedMessage
+      id='childCareBenefits.univpresc'
+      defaultMessage='Free preschool (Universal Preschool Colorado)'
+    />,
+  wic:
+    <FormattedMessage
+      id='foodAndNutritionBenefits.wic'
+      defaultMessage='Food and breastfeeding assistance (Special Supplemental Nutrition Program for Women, Infants, and Children/WIC)'
     />
 }
 
