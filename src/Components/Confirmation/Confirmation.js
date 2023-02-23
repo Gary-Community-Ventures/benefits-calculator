@@ -8,9 +8,9 @@ import questions from '../../Assets/questions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import expenseOptions from '../../Assets/expenseOptions';
-import benefitOptions from '../../Assets/benefitOptions';
 import healthInsuranceOptions from '../../Assets/healthInsuranceOptions';
 import acuteConditionOptions from '../../Assets/acuteConditionOptions';
+import allBenefitsList from '../../Assets/BenefitCategoryLists/allBenefitsList';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
@@ -372,7 +372,7 @@ const Confirmation = ({ formData }) => {
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('benefits',
             'confirmation.displayAllFormData-currentHHBenefitsText',
-            'Household benefits:', '/step-14', benefitOptions
+            'Household benefits:', '/step-14', allBenefitsList
             )
           }
         <p className='confirmation-section-underline'></p>
