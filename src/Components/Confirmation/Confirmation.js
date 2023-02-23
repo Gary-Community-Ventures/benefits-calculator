@@ -10,7 +10,13 @@ import frequencyOptions from '../../Assets/frequencyOptions';
 import expenseOptions from '../../Assets/expenseOptions';
 import healthInsuranceOptions from '../../Assets/healthInsuranceOptions';
 import acuteConditionOptions from '../../Assets/acuteConditionOptions';
-import allBenefitsList from '../../Assets/BenefitCategoryLists/allBenefitsList';
+import cashAssistanceBenefits from '../../Assets/BenefitCategoryLists/cashAssistanceBenefits';
+import foodAndNutritionBenefits from '../../Assets/BenefitCategoryLists/foodAndNutritionBenefits';
+import childCareBenefits from '../../Assets/BenefitCategoryLists/childCareBenefits';
+import housingAndUtilities from '../../Assets/BenefitCategoryLists/housingAndUtilities';
+import transportationBenefits from '../../Assets/BenefitCategoryLists/transportationBenefits';
+import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBenefits';
+import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
@@ -363,6 +369,16 @@ const Confirmation = ({ formData }) => {
   }
 
   const displayAllFormData = () => {
+    const allBenefitsList = {
+      ...cashAssistanceBenefits,
+      ...foodAndNutritionBenefits,
+      ...childCareBenefits,
+      ...housingAndUtilities,
+      ...transportationBenefits,
+      ...healthCareBenefits,
+      ...taxCreditBenefits
+    };
+
     return (
       <>
         { displayHouseholdSizeSection() }
