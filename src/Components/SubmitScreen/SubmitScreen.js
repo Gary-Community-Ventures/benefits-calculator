@@ -76,6 +76,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			referrerCode,
 			otherSource,
 			acuteHHConditions,
+			hasBenefits
 		} = formData;
 		const finalReferralSource =
 			otherSource !== '' ? otherSource : referralSource;
@@ -91,6 +92,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			household_assets: householdAssets,
 			last_tax_filing_year: lastTaxFilingYear,
 			request_language_code: languageCode,
+			has_benefits: hasBenefits,
 			has_acp: benefits.acp,
 			has_andcs: benefits.andcs,
 			has_cccap: benefits.cccap,
