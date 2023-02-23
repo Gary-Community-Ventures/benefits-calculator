@@ -263,7 +263,7 @@ const Results = ({ formData }) => {
           <Grid sm={10} item={true}>
             <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
               <FormattedMessage 
-                id='results.displaySubheader-emailResultsDescText' 
+                id='results.displaySubheader-sendResultsDescText' 
                 defaultMessage='To receive a copy of these results by email or text please click the email results button.' />
             </Typography>
           </Grid>
