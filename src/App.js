@@ -169,14 +169,7 @@ const App = () => {
     }
 
     if (formData.hasBenefits === false) {
-      const currentBenefitsCopy = Object.keys({ ...updatedFormData.benefits });
-
-      const newFalsyBenefits = currentBenefitsCopy.reduce((acc, benefit) => {
-        acc[benefit] = false;
-        return acc;
-      }, {});
-
-      updatedFormData.benefits = newFalsyBenefits;
+      updatedFormData.benefits = initialFormData.benefits;
     }
 
     setFormData(updatedFormData);
