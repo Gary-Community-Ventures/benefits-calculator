@@ -16,11 +16,6 @@ const childCareBenefits = {
       id='childCareBenefits.coheadstart'
       defaultMessage='Free early child care and preschool (Colorado Head Start)'
     />,
-  univpresc:
-    <FormattedMessage
-      id='childCareBenefits.univpresc'
-      defaultMessage='Free preschool (Universal Preschool Colorado)'
-    />,
   mydenver:
     <FormattedMessage
       id='childCareBenefits.mydenver'

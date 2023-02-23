@@ -82,7 +82,6 @@ const App = () => {
       snap: false,
       ssi: false,
       tanf: false,
-      univpresc: false,
       wic: false
     },
     healthInsurance: {

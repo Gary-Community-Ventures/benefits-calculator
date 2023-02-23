@@ -116,11 +116,6 @@ const allBenefitsList = {
       id='cashAssistanceBenefits.tanf'
       defaultMessage='Cash assistance and work support (Temporary Assistance for Needy Families (TANF/Colorado Works))'
     />,
-  univpresc:
-    <FormattedMessage
-      id='childCareBenefits.univpresc'
-      defaultMessage='Free preschool (Universal Preschool Colorado)'
-    />,
   wic:
     <FormattedMessage
       id='foodAndNutritionBenefits.wic'
