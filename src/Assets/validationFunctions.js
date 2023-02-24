@@ -245,10 +245,6 @@ const displayMissingTaxFilingYear = (year) => {
   }
 }
 
-const benefitsHasError = (benefits) => {
-  return false;
-}
-
 const referralSourceHasError = (referralSource) => {
   return referralSource === '';
 }
@@ -390,6 +386,28 @@ const acuteHHConditionsHasError = (conditions) => {
   return false;
 }
 
+const benefitsHasError = (hasBenefits, formData) => {
+  if (hasBenefits === false) {
+    return false;
+  } else if (hasBenefits === true) {
+    const { benefits } = formData;
+    const selectedAtLeastOneBenefit = Object.keys(benefits).some(benefit => formData.benefits[benefit] === true);
+
+    //return the opposite since we're indicating whether or not there's an error
+    return !(selectedAtLeastOneBenefit);
+  }
+}
+
+const displayBenefitsHelperText = (hasBenefits, formData) => {
+  if (benefitsHasError(hasBenefits, formData)) {
+    return (
+      <FormattedMessage
+        id='validation-helperText.benefits'
+        defaultMessage='If your household does not receive any of these benefits, please select the "No" option above.' />
+    );
+  }
+}
+
 export {
   ageHasError,
   displayAgeHelperText,
@@ -414,7 +432,6 @@ export {
   displayEmailHelperText,
   lastTaxFilingYearHasError,
   displayMissingTaxFilingYear,
-  benefitsHasError,
   referralSourceHasError,
   displayReferralSourceHelperText,
   displayMissingSelectHelperText,
@@ -428,5 +445,7 @@ export {
   signUpOptionsHaveError,
   healthInsuranceHasError,
   displayHealthInsuranceHelperText,
-  acuteHHConditionsHasError
+  acuteHHConditionsHasError,
+  benefitsHasError,
+  displayBenefitsHelperText
 }

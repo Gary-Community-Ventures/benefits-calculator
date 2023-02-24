@@ -57,20 +57,32 @@ const App = () => {
     householdData: [],
     householdAssets: 0,
     lastTaxFilingYear: '',
+    hasBenefits: false,
     benefits: {
-      tanf: false,
-      wic: false,
-      snap: false,
-      lifeline: false,
       acp: false,
-      eitc: false,
-      coeitc: false,
-      nslp: false,
-      ctc: false,
-      rtdlive: false,
+      andcs: false,
       cccap: false,
+      coeitc: false,
+      coheadstart: false,
+      coPropTaxRentHeatCreditRebate: false,
+      ctc: false,
+      dentallowincseniors: false,
+      denverpresc: false,
+      ede: false,
+      eitc: false,
+      erc: false,
+      familyplanning: false,
+      lifeline: false,
+      leap: false,
       mydenver: false,
-      leap: false
+      nslp: false,
+      oap: false,
+      reproductivehealth: false,
+      rtdlive: false,
+      snap: false,
+      ssi: false,
+      tanf: false,
+      wic: false
     },
     healthInsurance: {
       employer: false,
@@ -156,10 +168,15 @@ const App = () => {
       };
     }
 
+    if (formData.hasBenefits === false) {
+      updatedFormData.benefits = initialFormData.benefits;
+    }
+
     setFormData(updatedFormData);
 
   }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses,
-    formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates]
+    formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates,
+    formData.hasBenefits]
   );
 
   useEffect(() => {
@@ -217,7 +234,7 @@ const App = () => {
     const isZipcodeQuestionAndCountyIsEmpty = (questionName === 'zipcode' && formData.county === '');
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '');
 
-    if (!validateInputFunction(inputToBeValidated)) {
+    if (!validateInputFunction(inputToBeValidated, formData)) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
         return;
       } else if (questionName === 'householdSize' && householdSize === 1) { //if you're on the householdSize q and the value is 1
@@ -294,12 +311,12 @@ const App = () => {
               element={<SubmitScreen
                 formData={formData}
                 setFormData={setFormData}
-                /> } /> 
+                /> } />
             <Route
               path='/results/:id'
               element={<Results
                 formData={formData}
-                /> } /> 
+                /> } />
             <Route
               path='/email-results/:id'
               element={<EmailResults2

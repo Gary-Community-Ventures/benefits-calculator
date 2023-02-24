@@ -17,7 +17,8 @@ import {
   signUpOptionsHaveError,
   healthInsuranceHasError,
   acuteHHConditionsHasError,
-  displayHealthInsuranceHelperText
+  displayHealthInsuranceHelperText,
+  displayBenefitsHelperText
 } from './validationFunctions';
 import benefitOptions from './benefitOptions';
 import taxYearOptions from './taxYearOptions';
@@ -109,21 +110,6 @@ const questions = [
   },
   {
     id: 4,
-    name: 'benefits',
-    question:
-      <FormattedMessage
-        id='questions.benefits'
-        defaultMessage='Which benefits are you or your household members currently receiving or have received in the past year?' />,
-    componentDetails: {
-      componentType: 'BasicCheckboxGroup',
-      inputName: 'benefits',
-      options: benefitOptions,
-      inputError: benefitsHasError
-    },
-    headerType: 'aboutYourself'
-  },
-  {
-    id: 5,
     name: 'healthInsurance',
     question:
       <FormattedMessage
@@ -139,7 +125,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 6,
+    id: 5,
     name: 'student',
     question:
       <FormattedMessage
@@ -167,7 +153,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 7,
+    id: 6,
     name: 'pregnant',
     question:
       <FormattedMessage
@@ -182,7 +168,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 8,
+    id: 7,
     name: 'unemployed',
     question:
       <FormattedMessage
@@ -210,7 +196,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 9,
+    id: 8,
     name: 'blindOrVisuallyImpaired',
     question:
       <FormattedMessage
@@ -230,7 +216,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 10,
+    id: 9,
     name: 'disabled',
     question:
       <FormattedMessage
@@ -245,7 +231,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 11,
+    id: 10,
     name: 'veteran',
     question:
       <FormattedMessage
@@ -260,7 +246,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 12,
+    id: 11,
     name: 'hasIncome',
     question:
       <FormattedMessage
@@ -293,7 +279,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 13,
+    id: 12,
     name: 'hasExpenses',
     question:
       <FormattedMessage
@@ -326,7 +312,7 @@ const questions = [
     headerType: 'aboutHousehold'
   },
   {
-    id: 14,
+    id: 13,
     name: 'acuteHHConditions',
     question:
       <FormattedMessage
@@ -338,6 +324,42 @@ const questions = [
       options: acuteConditionOptions,
       inputError: acuteHHConditionsHasError
     },
+    headerType: 'aboutHousehold'
+  },
+  {
+    id: 14,
+    name: 'hasBenefits',
+    question:
+      <FormattedMessage
+        id='questions.hasBenefits'
+        defaultMessage='Does your household currently have any benefits?' />,
+    questionDescription:
+      <FormattedMessage
+        id='questions.hasBenefits-description'
+        defaultMessage='For example, does any person in your household receive public benefits like SNAP food assistance, CCCAP help with child care costs, TANF cash assistance, or tax credits like EITC?' />,
+    componentDetails: {
+      componentType: 'Radiofield',
+      ariaLabel: 'questions.hasBenefits-ariaLabel',
+      inputName: 'hasBenefits',
+      inputError: benefitsHasError,
+      inputHelperText: displayBenefitsHelperText
+    },
+    followUpQuestions: [{
+      question:
+        <FormattedMessage
+          id='questions.hasBenefits-a'
+          defaultMessage='Please tell us what benefits your household currently has.' />,
+      questionDescription:
+        <FormattedMessage
+          id='questions.hasBenefits-a-description'
+          defaultMessage='We will only show you new benefits you may be eligible for on the results page.' />,
+      name: 'benefits',
+      componentDetails: {
+        componentType: 'AccordionContainer',
+        ariaLabel: 'questions.hasBenefits-a-ariaLabel',
+        inputName: 'benefits'
+      }
+    }],
     headerType: 'aboutHousehold'
   },
   {

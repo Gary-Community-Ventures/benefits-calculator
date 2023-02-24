@@ -8,9 +8,15 @@ import questions from '../../Assets/questions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import expenseOptions from '../../Assets/expenseOptions';
-import benefitOptions from '../../Assets/benefitOptions';
 import healthInsuranceOptions from '../../Assets/healthInsuranceOptions';
 import acuteConditionOptions from '../../Assets/acuteConditionOptions';
+import cashAssistanceBenefits from '../../Assets/BenefitCategoryLists/cashAssistanceBenefits';
+import foodAndNutritionBenefits from '../../Assets/BenefitCategoryLists/foodAndNutritionBenefits';
+import childCareBenefits from '../../Assets/BenefitCategoryLists/childCareBenefits';
+import housingAndUtilities from '../../Assets/BenefitCategoryLists/housingAndUtilities';
+import transportationBenefits from '../../Assets/BenefitCategoryLists/transportationBenefits';
+import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBenefits';
+import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
@@ -103,7 +109,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-conditionsText'
               defaultMessage='Conditions:' />
           </b>
-          <Link to='/step-6' className='edit-link'>
+          <Link to='/step-5' className='edit-link'>
             <FormattedMessage
               id='confirmation.editLinkText'
               defaultMessage='Edit' />
@@ -116,7 +122,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-incomeLabel'
               defaultMessage='Income:' />
           </b>
-          <Link to='/step-12' className='edit-link'>
+          <Link to='/step-11' className='edit-link'>
             <FormattedMessage
               id='confirmation.editLinkText'
               defaultMessage='Edit' />
@@ -129,7 +135,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-expensesLabel'
               defaultMessage='Monthly Expenses:' />
           </b>
-          <Link to='/step-13' className='edit-link'>
+          <Link to='/step-12' className='edit-link'>
             <FormattedMessage
               id='confirmation.editLinkText'
               defaultMessage='Edit' />
@@ -363,6 +369,16 @@ const Confirmation = ({ formData }) => {
   }
 
   const displayAllFormData = () => {
+    const allBenefitsList = {
+      ...cashAssistanceBenefits,
+      ...foodAndNutritionBenefits,
+      ...childCareBenefits,
+      ...housingAndUtilities,
+      ...transportationBenefits,
+      ...healthCareBenefits,
+      ...taxCreditBenefits
+    };
+
     return (
       <>
         { displayHouseholdSizeSection() }
@@ -372,19 +388,19 @@ const Confirmation = ({ formData }) => {
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('benefits',
             'confirmation.displayAllFormData-currentHHBenefitsText',
-            'Household benefits:', '/step-4', benefitOptions
+            'Household benefits:', '/step-14', allBenefitsList
             )
           }
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('healthInsurance',
             'confirmation.displayAllFormData-healthInsurance',
-            'Household health insurance:', '/step-5', healthInsuranceOptions
+            'Household health insurance:', '/step-4', healthInsuranceOptions
             )
           }
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('acuteHHConditions',
             'confirmation.displayAllFormData-acuteHHConditions',
-            'Immediate Needs:', '/step-14', acuteConditionOptions
+            'Immediate Needs:', '/step-13', acuteConditionOptions
             )
           }
         <p className='confirmation-section-underline'></p>

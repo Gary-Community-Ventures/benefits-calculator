@@ -10,10 +10,11 @@ import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import SignUp from '../SignUp/SignUp';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import AccordionsContainer from '../../Components/AccordionsContainer/AccordionsContainer';
 import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange,
   handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
@@ -170,16 +171,33 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
               handleCheckboxChange={handleCheckboxChange} />
           </div>
         );
+      } else if (followUp.componentDetails.componentType === 'AccordionContainer') {
+        const hasError = matchingQuestion.componentDetails.inputError(formData.hasBenefits, formData);
+        const errorText = matchingQuestion.componentDetails.inputHelperText(formData.hasBenefits, formData);
+
+        return (
+          <div className='question-container accordions-container' key={index}>
+            <p className='question-label'>{followUp.question}</p>
+            <p className='question-description'>{matchingQuestion.followUpQuestions[0].questionDescription}</p>
+            <AccordionsContainer
+              formData={formData}
+              setFormData={setFormData}
+            />
+            { hasError && <ErrorMessage error={errorText} /> }
+          </div>
+        );
       }
     });
   }
 
   const createPreviousAndContinueButtons = (question) => {
-    //render normal button block if the question isn't the income or expense question or if the user doesn't have an income/expenses at all,
+    //render normal button block if the question isn't the income or expense question OR
+    //if the user doesn't have an income/expenses at all,
     //otherwise these buttons will be created in the IncomeBlock/ExpenseBlock components
     const isNotIncomeAndNotExpenseQ = question.name !== 'hasIncome' && question.name !== 'hasExpenses';
     const hasFalsyIncome = question.name === 'hasIncome' && formData[question.componentDetails.inputName] === false;
     const hasFalsyExpense = question.name === 'hasExpenses' && formData[question.componentDetails.inputName] === false;
+
     if (isNotIncomeAndNotExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className='question-buttons'>
