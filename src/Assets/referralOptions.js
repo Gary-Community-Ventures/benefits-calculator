@@ -7,19 +7,13 @@ const referralOptions = {
   jeffcoPP: 'Jeffco Prosperity Partners',
   projectWorthmore: 'Project Worthmore',
   bia: 'Benefits in Action',
-  villageExchange: 'Village Exchange',
-  theFax: 'The Fax',
-  communityEvent: 
-    <FormattedMessage 
-      id='referralOptions.communityEvent' 
-      defaultMessage='Community Event' />,
-  searchEngine:  
-    <FormattedMessage 
-      id='referralOptions.searchEngine' 
+  searchEngine:
+    <FormattedMessage
+      id='referralOptions.searchEngine'
       defaultMessage='Google or other search engine' />,
-  other:   
-    <FormattedMessage 
-      id='referralOptions.other' 
+  other:
+    <FormattedMessage
+      id='referralOptions.other'
       defaultMessage='Other' />
 }
 
