@@ -262,9 +262,9 @@ const Results = ({ formData }) => {
         <Grid container xs={12} item={true} sx={{mt: 2}} >
           <Grid sm={10} item={true}>
             <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
-              <FormattedMessage
-                id='results.displaySubheader-emailResultsDescText'
-                defaultMessage='To receive a copy of these results by email please click the email results button.' />
+              <FormattedMessage 
+                id='results.displaySubheader-sendResultsDescText' 
+                defaultMessage='To receive a copy of these results by email or text please click the email results button.' />
             </Typography>
           </Grid>
           <Grid xs={12} item={true} sm={2} justifyContent='end'>
@@ -277,9 +277,9 @@ const Results = ({ formData }) => {
                   navigate(`/email-results/${screenerId}`);
                 }}
                 className='results-link'>
-                <FormattedMessage
-                  id='results.return-emailResultsButton'
-                  defaultMessage='Email Results' />
+                <FormattedMessage 
+                  id='results.return-sendResultsButton' 
+                  defaultMessage='Send Results' />
               </Button>
             </Box>
           </Grid>

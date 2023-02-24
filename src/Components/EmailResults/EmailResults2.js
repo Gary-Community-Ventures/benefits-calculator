@@ -4,12 +4,18 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { emailHasError, displayEmailHelperText } from "../../Assets/validationFunctions";
+import {
+	emailHasError,
+	displayEmailHelperText,
+	phoneHasError,
+	displayPhoneHasErrorHelperText,
+} from '../../Assets/validationFunctions';
 import { postMessage } from '../../apiCalls';
 import Textfield from "../Textfield/Textfield";
 import PreviousButton from "../PreviousButton/PreviousButton";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { useParams } from "react-router-dom";
+import "./EmailResults.css";
 
 const EmailResults2 = ({ formData, handleTextfieldChange }) => {
   const [state, setState] = useState({
@@ -20,16 +26,16 @@ const EmailResults2 = ({ formData, handleTextfieldChange }) => {
   const { id: screenId } = useParams();
 
 
-  const createEmailTextfield = () => {
+  const createEmailTextfield = (type, errorType, errorMessage, inputLabelId) => {
     const emailProps = {
       inputType: 'text',
-      inputName: 'email',
+      inputName: type,
       inputLabel: 
         <FormattedMessage 
-          id='signUp.createEmailTextfield-label' 
+          id={ inputLabelId } 
           defaultMessage='Email' />,
-      inputError: emailHasError,
-      inputHelperText: displayEmailHelperText
+      inputError: errorType,
+      inputHelperText: errorMessage
     };
 
     return createTextfield(emailProps);  
@@ -49,11 +55,21 @@ const EmailResults2 = ({ formData, handleTextfieldChange }) => {
     setState({ ...state, open: false });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event, type) => {
     const { signUpInfo } = formData;
-    const { email } = signUpInfo;
+    const { email, phone } = signUpInfo;
+
+    let sendType;
+    let validInput;
+    if (type === 'emailScreen') {
+      sendType = { email, type };
+      validInput = emailHasError(email) === false && email !== '';
+    } else if (type === 'textScreen') {
+      sendType = { phone, type };
+      validInput = phoneHasError(phone) === false && phone !== '';
+    }
     
-    if (emailHasError(email) === false) {
+    if (validInput) {
       setState({ 
         ...state, 
         error: false, 
@@ -62,8 +78,7 @@ const EmailResults2 = ({ formData, handleTextfieldChange }) => {
 
       try {
         const message = {
-          email: email,
-          type: 'emailScreen',
+          ...sendType,
           screen: screenId,
         }
         await postMessage(message);
@@ -105,45 +120,81 @@ const EmailResults2 = ({ formData, handleTextfieldChange }) => {
   }
 
   return (
-    <main className='benefits-form'>
-      <h2 className='sub-header'>
-        <FormattedMessage 
-          id='emailResults.displaySubheader-text' 
-          defaultMessage='Send me a copy of my results' />
-      </h2>
-      <article className='question-container question-label'>
-        <FormattedMessage 
-          id='emailResults.enter-emailLabel'
-          defaultMessage='Please enter or confirm your email address:' />
-      </article>
-      { createEmailTextfield() }
-      { state.error && displayErrorMessage(state.errorMessage) }
-      <div className='question-buttons'>
-        <PreviousButton formData={formData}/>
-        <Button
-          variant='contained'
-          onClick={(event) => {
-            handleSubmit(event);
-          }}>
-          <FormattedMessage 
-            id='emailResults.return-sendButton' 
-            defaultMessage='Send' />
-        </Button>
-        <Snackbar
-          open={state.open}
-          autoHideDuration={6000}
-          onClose={handleClose}
-          message={
-            <FormattedMessage 
-              id='emailResults.return-signupCompleted' 
-              defaultMessage='A copy of your results have been sent. Click the prev button to return to your results.' />
-          }
-          action={action}
-          severity="success"
-          sx={{mb: 4, mr: 2}}
-        />            
-      </div>
-    </main>
-  );
+		<main className="benefits-form">
+			<h2 className="sub-header">
+				<FormattedMessage
+					id="emailResults.displaySubheader-text"
+					defaultMessage="Send me a copy of my results"
+				/>
+			</h2>
+			<article className="question-container question-label">
+				<FormattedMessage
+					id="emailResults.enter-emailLabel"
+					defaultMessage="Please enter or confirm your email address:"
+				/>
+			</article>
+			{createEmailTextfield(
+				'email',
+				emailHasError,
+				displayEmailHelperText,
+				'signUp.createEmailTextfield-label'
+			)}
+			<Button
+        sx={{m: '.5rem'}}
+				variant="contained"
+				onClick={(event) => {
+          handleSubmit(event, 'emailScreen');
+				}}
+			>
+				<FormattedMessage
+					id="emailResults.return-sendButton"
+					defaultMessage="Send"
+          />
+			</Button>
+      {state.error && displayErrorMessage(state.errorMessage)}
+			<article className="question-container question-label">
+				<FormattedMessage
+					id="emailResults.enert-phoneNumberLabel"
+					defaultMessage="Please enter or confirm your phone number:"
+				/>
+			</article>
+      {createEmailTextfield(
+        'phone',
+        phoneHasError,
+        displayPhoneHasErrorHelperText,
+        'signUp.createPhoneTextfield-label'
+      )}
+      <Button
+        sx={{m: '.5rem'}}
+        variant="contained"
+        onClick={(event) => {
+          handleSubmit(event, 'textScreen');
+        }}
+        >
+        <FormattedMessage
+          id="emailResults.return-sendButton"
+          defaultMessage="Send"
+          />
+      </Button>
+      {state.error && displayErrorMessage(state.errorMessage)}
+			<div className="question-buttons">
+				<PreviousButton formData={formData} />
+				<Snackbar
+					open={state.open}
+					autoHideDuration={6000}
+					onClose={handleClose}
+					message={
+						<FormattedMessage
+							id="emailResults.return-signupCompleted"
+							defaultMessage="A copy of your results have been sent. Click the prev button to return to your results."
+						/>
+					}
+					action={action}
+					severity="success"
+					sx={{ mb: 4, mr: 2 }}
+				/>
+			</div>
+		</main>
+	);
 }
 export default EmailResults2;
