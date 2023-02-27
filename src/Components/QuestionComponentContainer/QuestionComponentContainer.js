@@ -26,7 +26,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
 
   const createHouseholdDataBlock = () => {
     return (
-      <div className='question-container' id={matchingQuestion.id}>
+      <div className='question-container' id={id}>
         <p className='question-label household-data-q-underline'>{matchingQuestion.question}</p>
         <HouseholdDataBlock
           formData={formData}
@@ -88,7 +88,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     const hasError = isHealthInsuranceQ && matchingQuestion.componentDetails.inputError(formData[matchingQuestion.name]);
 
     return (
-      <div className='question-container' id={matchingQuestion.id}>
+      <div className='question-container' id={id}>
         <p className='question-label'>{matchingQuestion.question}</p>
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
         {component}
