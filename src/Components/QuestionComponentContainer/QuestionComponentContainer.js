@@ -267,6 +267,10 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     }
   };
 
+  const totalNumberOfQuestions = () => {
+    return Object.keys(stepDirectory).length + 2;
+  }
+
   return (
     <main className='benefits-form'>
       <p className='step-progress-title'>
@@ -277,7 +281,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         <FormattedMessage
           id='qcc.of-text'
           defaultMessage=' of ' />
-        {questions.length + 2}
+        {totalNumberOfQuestions()}
       </p>
       {renderHeaderAndSubheader()}
       {
