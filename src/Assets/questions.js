@@ -27,11 +27,11 @@ import countiesByZipcode from './countiesByZipcode';
 import signUpOptions from './signUpOptions';
 import healthInsuranceOptions from './healthInsuranceOptions';
 import acuteConditionOptions from './acuteConditionOptions';
+import stepDirectory from './stepDirectory';
 import { FormattedMessage } from 'react-intl';
 
-const questions = [
-  {
-    id: 2,
+const questions = {
+  [stepDirectory.age]: {
     name: 'age',
     question:
       <FormattedMessage
@@ -50,8 +50,7 @@ const questions = [
     },
     headerType: 'aboutYourself'
   },
-  {
-    id: 3,
+  [stepDirectory.zipcode]: {
     name: 'zipcode',
     question:
       <FormattedMessage
@@ -108,8 +107,7 @@ const questions = [
     }],
     headerType: 'aboutYourself'
   },
-  {
-    id: 4,
+  [stepDirectory.student]: {
     name: 'student',
     question:
       <FormattedMessage
@@ -134,10 +132,9 @@ const questions = [
         inputError: radiofieldHasError
       }
     }],
-    headerType: 'aboutYourself'
+      headerType: 'aboutYourself'
   },
-  {
-    id: 5,
+  [stepDirectory.pregnant]: {
     name: 'pregnant',
     question:
       <FormattedMessage
@@ -151,8 +148,7 @@ const questions = [
     },
     headerType: 'aboutYourself'
   },
-  {
-    id: 6,
+  [stepDirectory.unemployed]: {
     name: 'unemployed',
     question:
       <FormattedMessage
@@ -179,8 +175,7 @@ const questions = [
     }],
     headerType: 'aboutYourself'
   },
-  {
-    id: 7,
+  [stepDirectory.blindOrVisuallyImpaired]: {
     name: 'blindOrVisuallyImpaired',
     question:
       <FormattedMessage
@@ -199,8 +194,7 @@ const questions = [
     },
     headerType: 'aboutYourself'
   },
-  {
-    id: 8,
+  [stepDirectory.disabled]: {
     name: 'disabled',
     question:
       <FormattedMessage
@@ -214,8 +208,7 @@ const questions = [
     },
     headerType: 'aboutYourself'
   },
-  {
-    id: 9,
+  [stepDirectory.veteran]: {
     name: 'veteran',
     question:
       <FormattedMessage
@@ -229,8 +222,7 @@ const questions = [
     },
     headerType: 'aboutYourself'
   },
-  {
-    id: 10,
+  [stepDirectory.hasIncome]: {
     name: 'hasIncome',
     question:
       <FormattedMessage
@@ -262,8 +254,7 @@ const questions = [
     }],
     headerType: 'aboutYourself'
   },
-  {
-    id: 11,
+  [stepDirectory.hasExpenses]: {
     name: 'hasExpenses',
     question:
       <FormattedMessage
@@ -295,7 +286,7 @@ const questions = [
     }],
     headerType: 'aboutHousehold'
   },
-  {
+  [stepDirectory.acuteHHConditions]: {
     id: 12,
     name: 'acuteHHConditions',
     question:
@@ -310,8 +301,7 @@ const questions = [
     },
     headerType: 'aboutHousehold'
   },
-  {
-    id: 13,
+  [stepDirectory.hasBenefits]: {
     name: 'hasBenefits',
     question:
       <FormattedMessage
@@ -346,8 +336,7 @@ const questions = [
     }],
     headerType: 'aboutHousehold'
   },
-  {
-    id: 14,
+  [stepDirectory.healthInsurance]: {
     name: 'healthInsurance',
     question:
       <FormattedMessage
@@ -362,8 +351,7 @@ const questions = [
     },
     headerType: 'aboutYourself'
   },
-  {
-    id: 15,
+  [stepDirectory.householdSize]: {
     name: 'householdSize',
     question:
       <FormattedMessage
@@ -386,8 +374,7 @@ const questions = [
     },
     headerType: 'aboutHousehold'
   },
-  {
-    id: 16,
+  [stepDirectory.householdData]: {
     name: 'householdData',
     question:
       <FormattedMessage
@@ -400,8 +387,7 @@ const questions = [
     },
     headerType: 'householdData'
   },
-  {
-    id: 17,
+  [stepDirectory.householdAssets]: {
     name: 'householdAssets',
     question:
       <FormattedMessage
@@ -424,8 +410,7 @@ const questions = [
     },
     headerType: 'aboutHousehold'
   },
-  {
-    id: 18,
+  [stepDirectory.lastTaxFilingYear]: {
     name: 'lastTaxFilingYear',
     question:
       <FormattedMessage
@@ -462,8 +447,7 @@ const questions = [
     },
     headerType: 'aboutHousehold'
   },
-  {
-    id: 19,
+  [stepDirectory.referralSource]: {
     name: 'referralSource',
     question:
       <FormattedMessage
@@ -514,7 +498,7 @@ const questions = [
     }],
     headerType: 'aboutHousehold'
   },
-  { id: 20,
+  [stepDirectory.signUpInfo]: {
     name: 'signUpInfo',
     question:
       <FormattedMessage
@@ -539,6 +523,6 @@ const questions = [
     }],
     headerType: 'signUpInfo'
   }
-];
+};
 
 export default questions;
