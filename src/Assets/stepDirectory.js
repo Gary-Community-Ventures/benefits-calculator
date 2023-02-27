@@ -12,6 +12,7 @@ const stepDirectory = {
   acuteHHConditions: '/step-12',
   hasBenefits: '/step-13',
   healthInsurance: '/step-14',
+  //the hhSize and hhData have to be consecutive
   householdSize: '/step-15',
   householdData: '/step-16',
   householdAssets: '/step-17',
