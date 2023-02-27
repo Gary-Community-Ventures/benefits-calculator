@@ -508,7 +508,7 @@ const Confirmation = ({ formData }) => {
           <Button
             className='prev-button'
             onClick={() => {
-              navigate(`/step-${questions.length + 1}`);
+              navigate(`/step-${totalNumberOfQuestions() - 1}`);
             }}
             variant='contained'>
             <FormattedMessage
