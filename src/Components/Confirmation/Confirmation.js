@@ -476,17 +476,21 @@ const Confirmation = ({ formData }) => {
     );
   }
 
+  const totalNumberOfQuestions = () => {
+    return Object.keys(stepDirectory).length + 2;
+  }
+
   return (
     <div className='benefits-form'>
       <p className='step-progress-title'>
         <FormattedMessage
           id='confirmation.return-stepLabel'
           defaultMessage='Step ' />
-        { questions.length + 2 }
+        { totalNumberOfQuestions() }
         <FormattedMessage
           id='confirmation.return-ofLabel'
           defaultMessage=' of ' />
-        { questions.length + 2 }
+        { totalNumberOfQuestions() }
       </p>
       <h2 className='sub-header'>
         <FormattedMessage
