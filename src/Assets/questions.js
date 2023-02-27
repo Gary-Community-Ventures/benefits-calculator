@@ -110,22 +110,6 @@ const questions = [
   },
   {
     id: 4,
-    name: 'healthInsurance',
-    question:
-      <FormattedMessage
-        id='questions.healthInsurance'
-        defaultMessage='Which type(s) of health insurance do members of your household have? Check all that apply.' />,
-    componentDetails: {
-      componentType: 'BasicCheckboxGroup',
-      inputName: 'healthInsurance',
-      options: healthInsuranceOptions,
-      inputError: healthInsuranceHasError,
-      inputHelperText: displayHealthInsuranceHelperText
-    },
-    headerType: 'aboutYourself'
-  },
-  {
-    id: 5,
     name: 'student',
     question:
       <FormattedMessage
@@ -153,7 +137,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 6,
+    id: 5,
     name: 'pregnant',
     question:
       <FormattedMessage
@@ -168,7 +152,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 7,
+    id: 6,
     name: 'unemployed',
     question:
       <FormattedMessage
@@ -196,7 +180,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 8,
+    id: 7,
     name: 'blindOrVisuallyImpaired',
     question:
       <FormattedMessage
@@ -216,7 +200,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 9,
+    id: 8,
     name: 'disabled',
     question:
       <FormattedMessage
@@ -231,7 +215,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 10,
+    id: 9,
     name: 'veteran',
     question:
       <FormattedMessage
@@ -246,7 +230,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 11,
+    id: 10,
     name: 'hasIncome',
     question:
       <FormattedMessage
@@ -279,7 +263,7 @@ const questions = [
     headerType: 'aboutYourself'
   },
   {
-    id: 12,
+    id: 11,
     name: 'hasExpenses',
     question:
       <FormattedMessage
@@ -312,7 +296,7 @@ const questions = [
     headerType: 'aboutHousehold'
   },
   {
-    id: 13,
+    id: 12,
     name: 'acuteHHConditions',
     question:
       <FormattedMessage
@@ -327,7 +311,7 @@ const questions = [
     headerType: 'aboutHousehold'
   },
   {
-    id: 14,
+    id: 13,
     name: 'hasBenefits',
     question:
       <FormattedMessage
@@ -361,6 +345,22 @@ const questions = [
       }
     }],
     headerType: 'aboutHousehold'
+  },
+  {
+    id: 14,
+    name: 'healthInsurance',
+    question:
+      <FormattedMessage
+        id='questions.healthInsurance'
+        defaultMessage='Which type(s) of health insurance do members of your household have? Check all that apply.' />,
+    componentDetails: {
+      componentType: 'BasicCheckboxGroup',
+      inputName: 'healthInsurance',
+      options: healthInsuranceOptions,
+      inputError: healthInsuranceHasError,
+      inputHelperText: displayHealthInsuranceHelperText
+    },
+    headerType: 'aboutYourself'
   },
   {
     id: 15,
