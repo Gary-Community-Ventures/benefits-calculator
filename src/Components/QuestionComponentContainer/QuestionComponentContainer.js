@@ -15,13 +15,14 @@ import AccordionsContainer from '../../Components/AccordionsContainer/Accordions
 import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
+import stepDirectory from '../../Assets/stepDirectory';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange,
   handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
   handleCheckboxChange }) => {
   let { id } = useParams();
   let numberId = Number(id);
-  const matchingQuestion = questions.find((question) => question.id === numberId);
+  const matchingQuestion = questions[numberId];
 
   const createHouseholdDataBlock = () => {
     return (
