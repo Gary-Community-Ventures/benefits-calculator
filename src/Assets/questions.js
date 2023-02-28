@@ -287,7 +287,6 @@ const questions = {
     headerType: 'aboutHousehold'
   },
   [stepDirectory.acuteHHConditions]: {
-    id: 12,
     name: 'acuteHHConditions',
     question:
       <FormattedMessage
@@ -349,7 +348,7 @@ const questions = {
       inputError: healthInsuranceHasError,
       inputHelperText: displayHealthInsuranceHelperText
     },
-    headerType: 'aboutYourself'
+    headerType: 'aboutHousehold'
   },
   [stepDirectory.householdSize]: {
     name: 'householdSize',
