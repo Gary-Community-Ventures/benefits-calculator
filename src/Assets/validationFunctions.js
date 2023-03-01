@@ -51,7 +51,7 @@ const radiofieldHasError = (radiofield) => {
 }
 
 const incomeStreamValueHasError = (valueInput) => {
-  return valueInput <= 0;
+  return Number(valueInput) <= 0;
 }
 
 const displayIncomeStreamValueHelperText = (valueInput) => {

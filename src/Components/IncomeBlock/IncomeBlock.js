@@ -100,12 +100,12 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
 
   const handleIncomeTextfieldChange = (event, index) => {
     const { value } = event.target;
-    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
+    const numberUpToEightDigitsLongRegex = /^\d{0,8}(?:\.\d{0,2})?$/;
 
     if (numberUpToEightDigitsLongRegex.test(value)) {
       const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
         if (i === index) {
-          return { ...incomeSourceData, incomeAmount: Math.round(Number(value)) }
+          return { ...incomeSourceData, incomeAmount: value }
         } else {
           return incomeSourceData;
         }
@@ -263,8 +263,11 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
      event.preventDefault();
    
      if(incomeStreamsAreValid(selectedMenuItem)) {
+      const incomes = selectedMenuItem.map((income) => {
+        return { ...income, incomeAmount: Number(income.incomeAmount) };
+      })
       //need to pass the id obtained from useParams in this component to the handler s.t. it can navigate to the next step
-      handleIncomeStreamsSubmit(selectedMenuItem, stepNumberId); 
+      handleIncomeStreamsSubmit(incomes, stepNumberId); 
     }
   }
 
