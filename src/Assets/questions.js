@@ -27,11 +27,11 @@ import countiesByZipcode from './countiesByZipcode';
 import signUpOptions from './signUpOptions';
 import healthInsuranceOptions from './healthInsuranceOptions';
 import acuteConditionOptions from './acuteConditionOptions';
+import stepDirectory from './stepDirectory';
 import { FormattedMessage } from 'react-intl';
 
-const questions = [
-  {
-    id: 2,
+const questions = {
+  [stepDirectory.age]: {
     name: 'age',
     question:
       <FormattedMessage
@@ -50,8 +50,7 @@ const questions = [
     },
     headerType: 'aboutYourself'
   },
-  {
-    id: 3,
+  [stepDirectory.zipcode]: {
     name: 'zipcode',
     question:
       <FormattedMessage
@@ -108,24 +107,7 @@ const questions = [
     }],
     headerType: 'aboutYourself'
   },
-  {
-    id: 4,
-    name: 'healthInsurance',
-    question:
-      <FormattedMessage
-        id='questions.healthInsurance'
-        defaultMessage='Which type(s) of health insurance do members of your household have? Check all that apply.' />,
-    componentDetails: {
-      componentType: 'BasicCheckboxGroup',
-      inputName: 'healthInsurance',
-      options: healthInsuranceOptions,
-      inputError: healthInsuranceHasError,
-      inputHelperText: displayHealthInsuranceHelperText
-    },
-    headerType: 'aboutYourself'
-  },
-  {
-    id: 5,
+  [stepDirectory.student]: {
     name: 'student',
     question:
       <FormattedMessage
@@ -150,10 +132,9 @@ const questions = [
         inputError: radiofieldHasError
       }
     }],
-    headerType: 'aboutYourself'
+      headerType: 'aboutYourself'
   },
-  {
-    id: 6,
+  [stepDirectory.pregnant]: {
     name: 'pregnant',
     question:
       <FormattedMessage
@@ -167,8 +148,7 @@ const questions = [
     },
     headerType: 'aboutYourself'
   },
-  {
-    id: 7,
+  [stepDirectory.unemployed]: {
     name: 'unemployed',
     question:
       <FormattedMessage
@@ -195,8 +175,7 @@ const questions = [
     }],
     headerType: 'aboutYourself'
   },
-  {
-    id: 8,
+  [stepDirectory.blindOrVisuallyImpaired]: {
     name: 'blindOrVisuallyImpaired',
     question:
       <FormattedMessage
@@ -215,8 +194,7 @@ const questions = [
     },
     headerType: 'aboutYourself'
   },
-  {
-    id: 9,
+  [stepDirectory.disabled]: {
     name: 'disabled',
     question:
       <FormattedMessage
@@ -230,8 +208,7 @@ const questions = [
     },
     headerType: 'aboutYourself'
   },
-  {
-    id: 10,
+  [stepDirectory.veteran]: {
     name: 'veteran',
     question:
       <FormattedMessage
@@ -245,8 +222,7 @@ const questions = [
     },
     headerType: 'aboutYourself'
   },
-  {
-    id: 11,
+  [stepDirectory.hasIncome]: {
     name: 'hasIncome',
     question:
       <FormattedMessage
@@ -278,8 +254,7 @@ const questions = [
     }],
     headerType: 'aboutYourself'
   },
-  {
-    id: 12,
+  [stepDirectory.hasExpenses]: {
     name: 'hasExpenses',
     question:
       <FormattedMessage
@@ -311,8 +286,7 @@ const questions = [
     }],
     headerType: 'aboutHousehold'
   },
-  {
-    id: 13,
+  [stepDirectory.acuteHHConditions]: {
     name: 'acuteHHConditions',
     question:
       <FormattedMessage
@@ -326,8 +300,7 @@ const questions = [
     },
     headerType: 'aboutHousehold'
   },
-  {
-    id: 14,
+  [stepDirectory.hasBenefits]: {
     name: 'hasBenefits',
     question:
       <FormattedMessage
@@ -362,8 +335,22 @@ const questions = [
     }],
     headerType: 'aboutHousehold'
   },
-  {
-    id: 15,
+  [stepDirectory.healthInsurance]: {
+    name: 'healthInsurance',
+    question:
+      <FormattedMessage
+        id='questions.healthInsurance'
+        defaultMessage='Which type(s) of health insurance do members of your household have? Check all that apply.' />,
+    componentDetails: {
+      componentType: 'BasicCheckboxGroup',
+      inputName: 'healthInsurance',
+      options: healthInsuranceOptions,
+      inputError: healthInsuranceHasError,
+      inputHelperText: displayHealthInsuranceHelperText
+    },
+    headerType: 'aboutHousehold'
+  },
+  [stepDirectory.householdSize]: {
     name: 'householdSize',
     question:
       <FormattedMessage
@@ -386,8 +373,7 @@ const questions = [
     },
     headerType: 'aboutHousehold'
   },
-  {
-    id: 16,
+  [stepDirectory.householdData]: {
     name: 'householdData',
     question:
       <FormattedMessage
@@ -400,8 +386,7 @@ const questions = [
     },
     headerType: 'householdData'
   },
-  {
-    id: 17,
+  [stepDirectory.householdAssets]: {
     name: 'householdAssets',
     question:
       <FormattedMessage
@@ -424,8 +409,7 @@ const questions = [
     },
     headerType: 'aboutHousehold'
   },
-  {
-    id: 18,
+  [stepDirectory.lastTaxFilingYear]: {
     name: 'lastTaxFilingYear',
     question:
       <FormattedMessage
@@ -462,8 +446,7 @@ const questions = [
     },
     headerType: 'aboutHousehold'
   },
-  {
-    id: 19,
+  [stepDirectory.referralSource]: {
     name: 'referralSource',
     question:
       <FormattedMessage
@@ -514,7 +497,7 @@ const questions = [
     }],
     headerType: 'aboutHousehold'
   },
-  { id: 20,
+  [stepDirectory.signUpInfo]: {
     name: 'signUpInfo',
     question:
       <FormattedMessage
@@ -539,6 +522,6 @@ const questions = [
     }],
     headerType: 'signUpInfo'
   }
-];
+};
 
 export default questions;

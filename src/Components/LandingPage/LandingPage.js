@@ -2,7 +2,7 @@ import { Card, CardContent, CardActions, Button, Typography } from '@mui/materia
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import questions from '../../Assets/questions';
+import stepDirectory from '../../Assets/stepDirectory';
 import './LandingPage.css';
 
 const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
@@ -12,13 +12,17 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
     clearLocalStorageFormDataAndResults();
   }, []);
 
+  const totalNumberOfQuestions = () => {
+    return Object.keys(stepDirectory).length + 2;
+  }
+
   return (
     <div className='benefits-form'>
       <p className='step-progress-title'>
         <FormattedMessage
           id='landingPage.step-header'
           defaultMessage='Step 0 of ' />
-          { questions.length + 2 }
+          { totalNumberOfQuestions() }
       </p>
       <h2 className='sub-header'>
         <FormattedMessage
