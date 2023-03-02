@@ -162,12 +162,26 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   }
   
   const createIncomeAmountTextfield = (incomeStreamName, incomeAmount, index) => {
+    let questionHeader;
+    if (selectedMenuItem[index].incomeFrequency === 'hourly') {
+			questionHeader = (
+				<FormattedMessage
+					id="incomeBlock.createIncomeAmountTextfield-hourly-questionLabel"
+					defaultMessage="What is your hourly rate: "
+				/>
+			);
+		} else {
+			questionHeader = (
+				<FormattedMessage
+					id="incomeBlock.createIncomeAmountTextfield-questionLabel"
+					defaultMessage="How much do you receive each pay period for: "
+				/>
+			);
+		}
     return (
       <div className='bottom-border'>
         <p className='question-label'>
-          <FormattedMessage 
-            id='incomeBlock.createIncomeAmountTextfield-questionLabel' 
-            defaultMessage='How much do you receive each pay period for: ' /> 
+          {questionHeader}
           {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
         </p>
         <div className='income-block-textfield'>

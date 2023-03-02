@@ -219,6 +219,7 @@
   "incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencySelectLabel": "Income Frequency",
   "incomeBlock.createFrequencyMenuItems-disabledSelectMenuItemText": "Select",
   "incomeBlock.createIncomeAmountTextfield-questionLabel": "How much do you receive each pay period for: ",
+  "incomeBlock.createIncomeAmountTextfield-hourly-questionLabel": "What is your hourly rate: ",
   "incomeBlock.createIncomeAmountTextfield-amountLabel": "Amount",
   "incomeBlock.createHoursWorkedTextfield-questionLabel": "How many hours do you work per week: ",
   "incomeBlock.createHoursWorkedTextfield-amountLabel": "Hours",
