@@ -50,6 +50,10 @@ const radiofieldHasError = (radiofield) => {
   return typeof radiofield !== 'boolean';
 }
 
+const hoursWorkedValueHasError = (valueInput) => {
+  return Number(valueInput) <= 0
+}
+
 const incomeStreamValueHasError = (valueInput) => {
   return Number(valueInput) <= 0;
 }
@@ -66,8 +70,13 @@ const displayIncomeStreamValueHelperText = (valueInput) => {
 
 const incomeStreamsAreValid = (incomeStreams) => {
   const allIncomeStreamsAreValid = incomeStreams.every(incomeSourceData => {
-    const { incomeStreamName, incomeAmount, incomeFrequency } = incomeSourceData;
-    return incomeStreamName.length > 0 && incomeAmount > 0 && incomeFrequency.length > 0;
+    const { incomeStreamName, incomeAmount, incomeFrequency, hoursPerWeek } = incomeSourceData;
+    return (
+			incomeStreamName.length > 0 &&
+			incomeAmount > 0 &&
+			hoursPerWeek > 0 &&
+			incomeFrequency.length > 0
+		);
   });
 
   //incomeStreams must have a non-zero length since this function is only called if
@@ -414,6 +423,7 @@ export {
   zipcodeHasError,
   displayZipcodeHelperText,
   radiofieldHasError,
+  hoursWorkedValueHasError,
   incomeStreamValueHasError,
   displayIncomeStreamValueHelperText,
   incomeStreamsAreValid,

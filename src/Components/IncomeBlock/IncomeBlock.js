@@ -5,7 +5,12 @@ import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { incomeStreamValueHasError, displayIncomeStreamValueHelperText, incomeStreamsAreValid } from '../../Assets/validationFunctions';
+import {
+	hoursWorkedValueHasError,
+  incomeStreamValueHasError,
+	displayIncomeStreamValueHelperText,
+	incomeStreamsAreValid,
+} from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import './IncomeBlock.css';
@@ -35,7 +40,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     {
       incomeStreamName: '', 
       incomeAmount: '',
-      incomeFrequency: ''
+      incomeFrequency: '',
+      hoursPerWeek: 0
     }
   ]);
 
@@ -185,6 +191,58 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     );
   }
 
+  const createHoursWorkedTextField = (incomeStreamName, hoursWorked, index) => {
+    const hoursWorkedChange = (event, index) => {
+			const { value } = event.target;
+			const numberUpToEightDigitsLongRegex = /^\d{0,3}$/;
+      console.log(numberUpToEightDigitsLongRegex.test(value));
+
+			if (numberUpToEightDigitsLongRegex.test(value)) {
+				const updatedSelectedMenuItems = selectedMenuItem.map(
+					(incomeSourceData, i) => {
+						if (i === index) {
+							return { ...incomeSourceData, hoursPerWeek: Number(value) };
+						} else {
+							return incomeSourceData;
+						}
+					}
+				);
+
+				setSelectedMenuItem(updatedSelectedMenuItems);
+			}
+		};
+		return (
+			<>
+				<p className="question-label">
+					<FormattedMessage
+						id="incomeBlock.createHoursWorkedTextfield-questionLabel"
+						defaultMessage="How many hours do you work per week: "
+					/>
+					{getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
+				</p>
+				<div className="income-block-textfield">
+					<StyledTextField
+						type="text"
+						value={hoursWorked}
+						label={
+							<FormattedMessage
+								id="incomeBlock.createHoursWorkedTextfield-amountLabel"
+								defaultMessage="Hours"
+							/>
+						}
+						onChange={(event) => {
+							hoursWorkedChange(event, index);
+						}}
+						variant="outlined"
+						required
+						error={hoursWorkedValueHasError(hoursWorked)}
+						helperText={displayIncomeStreamValueHelperText(hoursWorked)}
+					/>
+				</div>
+			</>
+		);
+	};
+
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     return (
       <div>
@@ -219,7 +277,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
 
   const createIncomeBlockQuestions = () => {
     return selectedMenuItem.map((incomeSourceData, index) => {
-      const { incomeStreamName, incomeAmount, incomeFrequency } = incomeSourceData;
+      const { incomeStreamName, incomeAmount, incomeFrequency, hoursPerWeek } =
+				incomeSourceData;
       const incomeStreamQuestion = 
         <p className='question-label'>
           <FormattedMessage 
@@ -227,18 +286,26 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
             defaultMessage='If you receive another type of income, select it below.' />
         </p>;
       return (
-        <div key={index}>
-          {index > 0 &&
-            <div className='delete-button-container'>
-              <StyledDeleteButton variant='contained' onClick={() => deleteIncomeBlock(index)}>x</StyledDeleteButton>
-            </div>
+				<div key={index}>
+					{index > 0 && (
+						<div className="delete-button-container">
+							<StyledDeleteButton
+								variant="contained"
+								onClick={() => deleteIncomeBlock(index)}
+							>
+								x
+							</StyledDeleteButton>
+						</div>
+					)}
+					{index > 0 && incomeStreamQuestion}
+					{createIncomeStreamsDropdownMenu(incomeStreamName, index)}
+					{createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+					{incomeFrequency === 'hourly' &&
+						createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)
           }
-          {index > 0 && incomeStreamQuestion}
-          {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
-          {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
-          {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
-        </div>
-      );
+					{createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+				</div>
+			);
     });
   }
 

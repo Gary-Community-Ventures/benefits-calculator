@@ -220,6 +220,8 @@
   "incomeBlock.createFrequencyMenuItems-disabledSelectMenuItemText": "Seleccionar",
   "incomeBlock.createIncomeAmountTextfield-questionLabel": "¿Cuánto recibe en cada período de pago por: ",
   "incomeBlock.createIncomeAmountTextfield-amountLabel": "Monto",
+  "incomeBlock.createHoursWorkedTextfield-questionLabel": "How many hours do you work per week: ",
+  "incomeBlock.createHoursWorkedTextfield-amountLabel": "Hours",
   "incomeBlock.return-error-message": "Seleccione e ingrese una respuesta en los tres campos",
   "incomeBlock.return-addIncomeButton": "Agregar otro ingreso",
   "expenseBlock.createExpenseBlockQuestions-questionLabel": "Si tiene otro gasto, seleccione de las opciones a continuación.",
