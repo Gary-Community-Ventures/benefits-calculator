@@ -265,6 +265,7 @@
   "frequencyOptions.weekly": "Semanal",
   "frequencyOptions.biweekly": "Cada 2 semanas",
   "frequencyOptions.monthly": "Cada mes",
+  "frequencyOptions.hourly": "Cada hora",
   "results.return-screenerIdLabel": "ID de cuestionario: ",
   "results.return-programsUpToLabel": " programas, hasta ",
   "results.return-perYearOrLabel": " por año o ",
