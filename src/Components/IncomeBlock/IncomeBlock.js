@@ -41,7 +41,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
       incomeStreamName: '', 
       incomeAmount: '',
       incomeFrequency: '',
-      hoursPerWeek: 0
+      hoursPerWeek: ''
     }
   ]);
 
@@ -93,8 +93,9 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
       if (i === index) {
         return { 
           incomeStreamName: event.target.value,
-          incomeAmount: 0, 
-          incomeFrequency: ''
+          incomeAmount: '',
+          incomeFrequency: '',
+          hoursPerWeek: ''
         }
       } else {
         return incomeSourceData;
@@ -209,13 +210,12 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     const hoursWorkedChange = (event, index) => {
 			const { value } = event.target;
 			const numberUpToEightDigitsLongRegex = /^\d{0,3}$/;
-      console.log(numberUpToEightDigitsLongRegex.test(value));
 
 			if (numberUpToEightDigitsLongRegex.test(value)) {
 				const updatedSelectedMenuItems = selectedMenuItem.map(
 					(incomeSourceData, i) => {
 						if (i === index) {
-							return { ...incomeSourceData, hoursPerWeek: Number(value) };
+							return { ...incomeSourceData, hoursPerWeek: value };
 						} else {
 							return incomeSourceData;
 						}
@@ -345,7 +345,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
    
      if(incomeStreamsAreValid(selectedMenuItem)) {
       const incomes = selectedMenuItem.map((income) => {
-        return { ...income, incomeAmount: Number(income.incomeAmount) };
+        return { ...income, incomeAmount: Number(income.incomeAmount), hoursPerWeek: Number(income.hoursPerWeek) };
       })
       //need to pass the id obtained from useParams in this component to the handler s.t. it can navigate to the next step
       handleIncomeStreamsSubmit(incomes, stepNumberId); 

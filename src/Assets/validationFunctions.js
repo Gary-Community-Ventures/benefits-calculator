@@ -73,8 +73,8 @@ const incomeStreamsAreValid = (incomeStreams) => {
     const { incomeStreamName, incomeAmount, incomeFrequency, hoursPerWeek } = incomeSourceData;
     return (
 			incomeStreamName.length > 0 &&
-			incomeAmount > 0 &&
-			hoursPerWeek > 0 &&
+			Number(incomeAmount) > 0 &&
+			Number(hoursPerWeek) > 0 &&
 			incomeFrequency.length > 0
 		);
   });
