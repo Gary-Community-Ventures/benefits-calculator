@@ -314,7 +314,7 @@ const Results = ({ formData }) => {
       count++;
       let dataGridChild = {
         id: count,
-        path: [results[i].name, '/Detail'],
+        path: [results[i].name, 'Detail'],
         name: results[i].description,
         value: '',
         type: '',
