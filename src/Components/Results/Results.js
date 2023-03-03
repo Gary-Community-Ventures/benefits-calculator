@@ -294,7 +294,7 @@ const Results = ({ formData }) => {
     for (let i = 0; i < results.length; i++) {
       let dataGridRow = {
 				id: count,
-				path: results[i].name,
+				path: [results[i].name],
 				name: results[i].name,
 				has_benefit: results[i].already_has,
 				value: results[i].estimated_value,
@@ -314,7 +314,7 @@ const Results = ({ formData }) => {
       count++;
       let dataGridChild = {
         id: count,
-        path: results[i].name + '/Detail',
+        path: [results[i].name, 'Detail'],
         name: results[i].description,
         value: '',
         type: '',
@@ -520,7 +520,7 @@ const Results = ({ formData }) => {
 				<DataGridPro
 					treeData
 					autoHeight
-					getTreeDataPath={(row) => row.path.split('/')}
+					getTreeDataPath={(row) => row.path}
 					groupingColDef={groupingColDef}
 					getRowHeight={() => 'auto'}
 					disableChildrenFiltering
