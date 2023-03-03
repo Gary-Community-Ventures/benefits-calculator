@@ -74,7 +74,7 @@ const incomeStreamsAreValid = (incomeStreams) => {
     return (
 			incomeStreamName.length > 0 &&
 			Number(incomeAmount) > 0 &&
-			Number(hoursPerWeek) > 0 &&
+			(incomeFrequency === 'hourly'? Number(hoursPerWeek) > 0 : true) &&
 			incomeFrequency.length > 0
 		);
   });
