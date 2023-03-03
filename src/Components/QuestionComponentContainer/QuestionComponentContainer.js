@@ -15,17 +15,18 @@ import AccordionsContainer from '../../Components/AccordionsContainer/Accordions
 import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
+import stepDirectory from '../../Assets/stepDirectory';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange,
   handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
   handleCheckboxChange }) => {
   let { id } = useParams();
   let numberId = Number(id);
-  const matchingQuestion = questions.find((question) => question.id === numberId);
+  const matchingQuestion = questions[numberId];
 
   const createHouseholdDataBlock = () => {
     return (
-      <div className='question-container' id={matchingQuestion.id}>
+      <div className='question-container' id={id}>
         <p className='question-label household-data-q-underline'>{matchingQuestion.question}</p>
         <HouseholdDataBlock
           formData={formData}
@@ -87,7 +88,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     const hasError = isHealthInsuranceQ && matchingQuestion.componentDetails.inputError(formData[matchingQuestion.name]);
 
     return (
-      <div className='question-container' id={matchingQuestion.id}>
+      <div className='question-container' id={id}>
         <p className='question-label'>{matchingQuestion.question}</p>
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
         {component}
@@ -266,6 +267,10 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     }
   };
 
+  const totalNumberOfQuestions = () => {
+    return Object.keys(stepDirectory).length + 2;
+  }
+
   return (
     <main className='benefits-form'>
       <p className='step-progress-title'>
@@ -276,7 +281,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         <FormattedMessage
           id='qcc.of-text'
           defaultMessage=' of ' />
-        {questions.length + 2}
+        {totalNumberOfQuestions()}
       </p>
       {renderHeaderAndSubheader()}
       {

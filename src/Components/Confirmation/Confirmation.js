@@ -17,6 +17,7 @@ import housingAndUtilities from '../../Assets/BenefitCategoryLists/housingAndUti
 import transportationBenefits from '../../Assets/BenefitCategoryLists/transportationBenefits';
 import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBenefits';
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
+import stepDirectory from '../../Assets/stepDirectory';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
@@ -43,7 +44,7 @@ const Confirmation = ({ formData }) => {
         <div key={i}>
           <p className='confirmation-label'>
             <b>⚫️ {allHouseholdRelations[i]}, { allHouseholdAges[i] }</b>
-            <Link to='/step-16' className='edit-link'>
+            <Link to={`/step-${stepDirectory.householdData}`} className='edit-link'>
               <FormattedMessage
                 id='confirmation.editLinkText'
                 defaultMessage='Edit' />
@@ -55,7 +56,7 @@ const Confirmation = ({ formData }) => {
                 id='confirmation.headOfHouseholdDataBlock-conditionsText'
                 defaultMessage='Conditions:' />
             </b>
-            <Link to='/step-16' className='edit-link'>
+            <Link to={`/step-${stepDirectory.householdData}`} className='edit-link'>
               <FormattedMessage
                 id='confirmation.editLinkText'
                 defaultMessage='Edit' />
@@ -68,7 +69,7 @@ const Confirmation = ({ formData }) => {
                 id='confirmation.headOfHouseholdDataBlock-incomeLabel'
                 defaultMessage='Income:' />
             </b>
-            <Link to='/step-16' className='edit-link'>
+            <Link to={`/step-${stepDirectory.householdData}`} className='edit-link'>
               <FormattedMessage
                 id='confirmation.editLinkText'
                 defaultMessage='Edit' />
@@ -97,7 +98,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-headOfHouseholdText'
               defaultMessage=' head of household' />
           </b>
-          <Link to='/step-2' className='edit-link'>
+          <Link to={`/step-${stepDirectory.age}`} className='edit-link'>
             <FormattedMessage
                 id='confirmation.editLinkText'
                 defaultMessage='Edit' />
@@ -109,7 +110,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-conditionsText'
               defaultMessage='Conditions:' />
           </b>
-          <Link to='/step-5' className='edit-link'>
+          <Link to={`/step-${stepDirectory.student}`} className='edit-link'>
             <FormattedMessage
               id='confirmation.editLinkText'
               defaultMessage='Edit' />
@@ -122,7 +123,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-incomeLabel'
               defaultMessage='Income:' />
           </b>
-          <Link to='/step-11' className='edit-link'>
+          <Link to={`/step-${stepDirectory.hasIncome}`} className='edit-link'>
             <FormattedMessage
               id='confirmation.editLinkText'
               defaultMessage='Edit' />
@@ -135,7 +136,7 @@ const Confirmation = ({ formData }) => {
               id='confirmation.headOfHouseholdDataBlock-expensesLabel'
               defaultMessage='Monthly Expenses:' />
           </b>
-          <Link to='/step-12' className='edit-link'>
+          <Link to={`/step-${stepDirectory.hasExpenses}`} className='edit-link'>
             <FormattedMessage
               id='confirmation.editLinkText'
               defaultMessage='Edit' />
@@ -266,7 +267,7 @@ const Confirmation = ({ formData }) => {
             defaultMessage='Your household: ' />
         </b>
         { householdSize } { householdSizeDescriptor }
-        <Link to='/step-15' className='edit-link'>
+        <Link to={`/step-${stepDirectory.householdSize}`} className='edit-link'>
           <FormattedMessage
             id='confirmation.editLinkText'
             defaultMessage='Edit' />
@@ -286,7 +287,7 @@ const Confirmation = ({ formData }) => {
               defaultMessage='Household resources: ' />
           </b>
           ${ Number(householdAssets).toLocaleString(2) }
-          <Link to='/step-17' className='edit-link'>
+          <Link to={`/step-${stepDirectory.householdAssets}`} className='edit-link'>
             <FormattedMessage
               id='confirmation.editLinkText'
               defaultMessage='Edit' />
@@ -311,7 +312,7 @@ const Confirmation = ({ formData }) => {
             defaultMessage='Last Tax Filing Year: ' />
         </b>
         {taxYearOptions[lastTaxFilingYear]}
-        <Link to='/step-18' className='edit-link'>
+        <Link to={`/step-${stepDirectory.lastTaxFilingYear}`} className='edit-link'>
           <FormattedMessage
             id='confirmation.editLinkText'
             defaultMessage='Edit' />
@@ -330,7 +331,7 @@ const Confirmation = ({ formData }) => {
             defaultMessage='Zip code: ' />
         </b>
         { zipcode }
-        <Link to='/step-3' className='edit-link'>
+        <Link to={`/step-${stepDirectory.zipcode}`} className='edit-link'>
           <FormattedMessage
             id='confirmation.editLinkText'
             defaultMessage='Edit' />
@@ -359,7 +360,7 @@ const Confirmation = ({ formData }) => {
             defaultMessage='Referral Source: ' />
         </b>
         { finalReferralSource }
-        <Link to='/step-19' className='edit-link'>
+        <Link to={`/step-${stepDirectory.referralSource}`} className='edit-link'>
           <FormattedMessage
             id='confirmation.editLinkText'
             defaultMessage='Edit' />
@@ -388,19 +389,19 @@ const Confirmation = ({ formData }) => {
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('benefits',
             'confirmation.displayAllFormData-currentHHBenefitsText',
-            'Household benefits:', '/step-14', allBenefitsList
+            'Household benefits:', `/step-${stepDirectory.hasBenefits}`, allBenefitsList
             )
           }
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('healthInsurance',
             'confirmation.displayAllFormData-healthInsurance',
-            'Household health insurance:', '/step-4', healthInsuranceOptions
+            'Household health insurance:', `/step-${stepDirectory.healthInsurance}`, healthInsuranceOptions
             )
           }
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('acuteHHConditions',
             'confirmation.displayAllFormData-acuteHHConditions',
-            'Immediate Needs:', '/step-13', acuteConditionOptions
+            'Immediate Needs:', `/step-${stepDirectory.acuteHHConditions}`, acuteConditionOptions
             )
           }
         <p className='confirmation-section-underline'></p>
@@ -475,17 +476,21 @@ const Confirmation = ({ formData }) => {
     );
   }
 
+  const totalNumberOfQuestions = () => {
+    return Object.keys(stepDirectory).length + 2;
+  }
+
   return (
     <div className='benefits-form'>
       <p className='step-progress-title'>
         <FormattedMessage
           id='confirmation.return-stepLabel'
           defaultMessage='Step ' />
-        { questions.length + 2 }
+        { totalNumberOfQuestions() }
         <FormattedMessage
           id='confirmation.return-ofLabel'
           defaultMessage=' of ' />
-        { questions.length + 2 }
+        { totalNumberOfQuestions() }
       </p>
       <h2 className='sub-header'>
         <FormattedMessage
@@ -503,7 +508,7 @@ const Confirmation = ({ formData }) => {
           <Button
             className='prev-button'
             onClick={() => {
-              navigate(`/step-${questions.length + 1}`);
+              navigate(`/step-${totalNumberOfQuestions() - 1}`);
             }}
             variant='contained'>
             <FormattedMessage
