@@ -118,4 +118,28 @@ describe ('English user flow input test', () => {
       .should("contain", `Step ${stepDirectory.zipcode} of ${Object.keys(stepDirectory).length + 2}`)
       .get('p').should("contain", 'Please enter a valid CO zip code')
   });
+
+  it('Income question happy path: When I click `Yes`, fill out all three income fields for salary and click on Continue I should be navigated to the next step', () => {
+    //url and step counter test runs first
+      cy.visit(`http://localhost:3000/step-${stepDirectory.hasIncome}`)
+      .url()
+      .should("contain", `http://localhost:3000/step-${stepDirectory.hasIncome}`)
+      .get('p[class="step-progress-title"]')
+      .should("contain", `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`)
+
+      .get('input[type="radio"]').should("have.value", 'true').first().click()
+      .get('div[aria-labelledby="income-type-label"]').click().get('li').eq(1).click()
+      .get('div[aria-labelledby="income-frequency-label income-frequency"]').click().get('li').eq(2).click()
+      .get('input[type="text"]').type('1000')
+
+      .get('button').should("contain", 'Add another income').first().click()
+      .get('div[aria-labelledby="income-type-label"]').click().get('li').eq(2).click()
+      .get('div[aria-labelledby="income-frequency-label income-frequency"]').eq(1).click().get('li').eq(2).click()
+      .get('input[type="text"]').eq(1).type('50')
+      .get('button').should("contain", 'Continue').eq(3).click()
+      .url()
+      .should("contain", `http://localhost:3000/step-${Number(stepDirectory.hasIncome) + 1}`)
+      .get('p[class="step-progress-title"]')
+      .should("contain", `Step ${stepDirectory.hasIncome + 1} of ${Object.keys(stepDirectory).length + 2}`)
+  });
 });
