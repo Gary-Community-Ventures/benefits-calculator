@@ -98,4 +98,24 @@ describe ('English user flow input test', () => {
       .should("contain", `Step ${stepDirectory.zipcode + 1} of ${Object.keys(stepDirectory).length + 2}`)
   });
 
+  it("Zipcode question sad path 1: When I enter my zipcode, don't select a county and click on Continue I should be on the same page", () => {
+      cy.visit(`http://localhost:3000/step-${stepDirectory.zipcode}`)
+      .get('input[id=":r0:"]')
+      .type('80211')
+      .get('button').eq(1).click()
+      .url()
+      .should("contain", `http://localhost:3000/step-${stepDirectory.zipcode}`)
+      .get('p[class="step-progress-title"]')
+      .should("contain", `Step ${stepDirectory.zipcode} of ${Object.keys(stepDirectory).length + 2}`)
+  });
+
+  it("Zipcode question sad path 2: When I just click on Continue I should be on the same page and see an error message", () => {
+      cy.visit(`http://localhost:3000/step-${stepDirectory.zipcode}`)
+      .get('button').eq(1).click()
+      .url()
+      .should("contain", `http://localhost:3000/step-${stepDirectory.zipcode}`)
+      .get('p[class="step-progress-title"]')
+      .should("contain", `Step ${stepDirectory.zipcode} of ${Object.keys(stepDirectory).length + 2}`)
+      .get('p').should("contain", 'Please enter a valid CO zip code')
+  });
 });
