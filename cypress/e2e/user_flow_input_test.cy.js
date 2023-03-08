@@ -142,4 +142,19 @@ describe ('English user flow input test', () => {
       .get('p[class="step-progress-title"]')
       .should("contain", `Step ${stepDirectory.hasIncome + 1} of ${Object.keys(stepDirectory).length + 2}`)
   });
+
+  it('Income question happy path 2: Removing an added income source', () => {
+      cy.visit(`http://localhost:3000/step-${stepDirectory.hasIncome}`)
+      .get('input[type="radio"]').should("have.value", 'true').first().click()
+      .get('div[aria-labelledby="income-type-label"]').click().get('li').eq(1).click()
+      .get('div[aria-labelledby="income-frequency-label income-frequency"]').click().get('li').eq(2).click()
+      .get('input[type="text"]').type('1000')
+
+      .get('button').should("contain", 'Add another income').first().click()
+      .get('div[aria-labelledby="income-type-label"]').click().get('li').eq(2).click()
+      .get('div[aria-labelledby="income-frequency-label income-frequency"]').eq(1).click().get('li').eq(2).click()
+      .get('input[type="text"]').eq(1).type('50')
+      .get('button').should("contain", 'x').first().click()
+      .get('p[class="question-label"]').contains('If you receive another type of income, select it below.').should('not.exist')
+  });
 });
