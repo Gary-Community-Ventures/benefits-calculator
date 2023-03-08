@@ -46,5 +46,21 @@ describe ('English user flow input test', () => {
       .get('p').should("contain", 'Please check the box below to continue.');
   });
 
+  it('Age question happy path: When I enter my age and click on Continue I should be navigated to the next step', () => {
+    //url and step counter test runs first
+      cy.visit(`http://localhost:3000/step-${stepDirectory.age}`)
+      .url()
+      .should("contain", `http://localhost:3000/step-${stepDirectory.age}`)
+      .get('p[class="step-progress-title"]')
+      .should("contain", `Step ${stepDirectory.age} of ${Object.keys(stepDirectory).length + 2}`)
+
+      .get('input[id=":r0:"]')
+      .type('31')
+      .get('button').eq(1).click()
+      .url()
+      .should("contain", `http://localhost:3000/step-${Number(stepDirectory.age) + 1}`)
+      .get('p[class="step-progress-title"]')
+      .should("contain", `Step ${stepDirectory.age + 1} of ${Object.keys(stepDirectory).length + 2}`)
+  });
 
 });
