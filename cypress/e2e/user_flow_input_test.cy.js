@@ -67,7 +67,15 @@ describe ('English user flow input test', () => {
     cy.visit(`http://localhost:3000/step-${stepDirectory.age}`)
       .get('button').eq(1).click()
       .get('p').should("contain", 'Please enter a valid age (13-130)');
+  });
 
+  it('Age question sad path 2: If I try to enter anything other than a number and click Continue I should see an error and the input should be empty', () => {
+    cy.visit(`http://localhost:3000/step-${stepDirectory.age}`)
+      .get('input[id=":r0:"]')
+      .type('not valid input')
+      .get('button').eq(1).click()
+      .get('p').should("contain", 'Please enter a valid age (13-130)')
+      .get('input[id=":r0:"]').should("contain", '');
   });
 
 
