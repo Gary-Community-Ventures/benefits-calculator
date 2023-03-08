@@ -170,4 +170,40 @@ describe ('English user flow input test', () => {
 
   });
 
+  it('Income question sad path 2: If I clicked \'Yes\', only selected my INCOME TYPE and pressed \'Continue\' I should see an error message', () => {
+      cy.visit(`http://localhost:3000/step-${stepDirectory.hasIncome}`)
+      .get('input[type="radio"]').should("have.value", 'true').first().click()
+      .get('div[aria-labelledby="income-type-label"]').click().get('li').eq(1).click()
+      .get('button').should("contain", 'Continue').eq(2).click()
+      .url()
+      .should("contain", `http://localhost:3000/step-${stepDirectory.hasIncome}`)
+      .get('p[class="step-progress-title"]')
+      .should("contain", `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`)
+      .get('div[role="alert"]').should("contain", 'Please select and enter a response for all three fields');
+  });
+
+  it('Income question sad path 3: If I clicked \'Yes\', only selected the FREQUENCY and pressed \'Continue\' I should see an error message', () => {
+      cy.visit(`http://localhost:3000/step-${stepDirectory.hasIncome}`)
+      .get('input[type="radio"]').should("have.value", 'true').first().click()
+      .get('div[aria-labelledby="income-frequency-label income-frequency"]').click().get('li').eq(2).click()
+      .get('button').should("contain", 'Continue').eq(2).click()
+      .url()
+      .should("contain", `http://localhost:3000/step-${stepDirectory.hasIncome}`)
+      .get('p[class="step-progress-title"]')
+      .should("contain", `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`)
+      .get('div[role="alert"]').should("contain", 'Please select and enter a response for all three fields');
+  });
+
+  it('Income question sad path 4: If I clicked \'Yes\', only selected the AMOUNT and pressed \'Continue\' I should see an error message', () => {
+      cy.visit(`http://localhost:3000/step-${stepDirectory.hasIncome}`)
+      .get('input[type="radio"]').should("have.value", 'true').first().click()
+      .get('input[type="text"]').type('1000')
+      .get('button').should("contain", 'Continue').eq(2).click()
+      .url()
+      .should("contain", `http://localhost:3000/step-${stepDirectory.hasIncome}`)
+      .get('p[class="step-progress-title"]')
+      .should("contain", `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`)
+      .get('div[role="alert"]').should("contain", 'Please select and enter a response for all three fields');
+  });
+
 });
