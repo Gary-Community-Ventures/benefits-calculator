@@ -39,5 +39,12 @@ describe ('English user flow input test', () => {
       .should("contain", 'Step 2 of 21');
   });
 
+  it('Sad path: When I just click on Continue button on the Disclaimer' +
+    ' I should see an error message', () => {
+      cy.visit('http://localhost:3000/step-1')
+      .get('button').eq(1).click()
+      .get('p').should("contain", 'Please check the box below to continue.');
+  });
+
 
 });
