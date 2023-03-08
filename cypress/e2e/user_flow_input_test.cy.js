@@ -78,5 +78,24 @@ describe ('English user flow input test', () => {
       .get('input[id=":r0:"]').should("contain", '');
   });
 
+  it('Zipcode question happy path: When I enter my zipcode, select a county and click on Continue I should be navigated to the next step', () => {
+    //url and step counter test runs first
+      cy.visit(`http://localhost:3000/step-${stepDirectory.zipcode}`)
+      .url()
+      .should("contain", `http://localhost:3000/step-${stepDirectory.zipcode}`)
+      .get('p[class="step-progress-title"]')
+      .should("contain", `Step ${stepDirectory.zipcode} of ${Object.keys(stepDirectory).length + 2}`)
+
+      .get('input[id=":r0:"]')
+      .type('80211')
+      .get('div[id="county-source-select"]')
+      .click()
+      .get('li').eq(1).click()
+      .get('button').eq(1).click()
+      .url()
+      .should("contain", `http://localhost:3000/step-${Number(stepDirectory.zipcode) + 1}`)
+      .get('p[class="step-progress-title"]')
+      .should("contain", `Step ${stepDirectory.zipcode + 1} of ${Object.keys(stepDirectory).length + 2}`)
+  });
 
 });
