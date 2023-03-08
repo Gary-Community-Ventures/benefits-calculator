@@ -157,4 +157,17 @@ describe ('English user flow input test', () => {
       .get('button').should("contain", 'x').first().click()
       .get('p[class="question-label"]').contains('If you receive another type of income, select it below.').should('not.exist')
   });
+
+  it('Income question sad path 1: If I clicked \'Yes\', did not enter any of the income fields and pressed \'Continue\' I should see an error message', () => {
+      cy.visit(`http://localhost:3000/step-${stepDirectory.hasIncome}`)
+      .get('input[type="radio"]').should("have.value", 'true').first().click()
+      .get('button').should("contain", 'Continue').eq(2).click()
+      .url()
+      .should("contain", `http://localhost:3000/step-${stepDirectory.hasIncome}`)
+      .get('p[class="step-progress-title"]')
+      .should("contain", `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`)
+      .get('div[role="alert"]').should("contain", 'Please select and enter a response for all three fields')
+
+  });
+
 });
