@@ -119,7 +119,7 @@ describe ('English user flow input test', () => {
       .get('p').should("contain", 'Please enter a valid CO zip code')
   });
 
-  it('Income question happy path: When I click `Yes`, fill out all three income fields for salary and click on Continue I should be navigated to the next step', () => {
+  it('Income question happy path: When I click `Yes`, fill out all three income fields for both of my income sources and click on Continue I should be navigated to the next step', () => {
     //url and step counter test runs first
       cy.visit(`http://localhost:3000/step-${stepDirectory.hasIncome}`)
       .url()
