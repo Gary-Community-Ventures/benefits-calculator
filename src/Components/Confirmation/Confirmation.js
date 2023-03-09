@@ -440,9 +440,9 @@ const Confirmation = ({ formData }) => {
 				<li key={incomeStream.incomeStreamName}>
 					{' '}
 					{getIncomeStreamNameLabel(incomeStream.incomeStreamName)}:{' '}
-					{incomeStream.hoursPerWeek > 0 &&
+					{incomeStream.hoursPerWeek > 0 && incomeStream.incomeFrequency === 'hourly' &&
 						`Average of ${incomeStream.hoursPerWeek} hours/week at `}
-					${Number(incomeStream.incomeAmount).toLocaleString(2)} /{' '}
+					${incomeStream.incomeAmount.toFixed(2)}/
 					{getIncomeStreamFrequencyLabel(incomeStream.incomeFrequency)}
 				</li>
 			);

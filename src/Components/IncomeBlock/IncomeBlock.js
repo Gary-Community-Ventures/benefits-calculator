@@ -107,9 +107,10 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
 
   const handleIncomeTextfieldChange = (event, index) => {
     const { value } = event.target;
-    const numberUpToEightDigitsLongRegex = /^\d{0,8}(?:\.\d{0,2})?$/;
+    // Income amount can be up to 8 digits long with 2 decimal places
+    const incomeAmountRegex = /^\d{0,8}(?:\.\d{0,2})?$/;
 
-    if (numberUpToEightDigitsLongRegex.test(value)) {
+    if (incomeAmountRegex.test(value)) {
       const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
         if (i === index) {
           return { ...incomeSourceData, incomeAmount: value }
@@ -335,7 +336,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
       {
         incomeStreamName: '', 
         incomeAmount: 0,
-        incomeFrequency: ''
+        incomeFrequency: '',
+        hoursPerWeek: ''
       }
     ]);
   }

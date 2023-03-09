@@ -119,21 +119,24 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   }
 
   const handleIncomeTextfieldChange = (event, index) => {
-    const { value } = event.target;
-    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
+		const { value } = event.target;
+		// Income amount can be up to 8 digits long with 2 decimal places
+    const incomeAmountRegex = /^\d{0,8}(?:\.\d{0,2})?$/;
 
-    if (numberUpToEightDigitsLongRegex.test(value)) {
-      const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
-        if (i === index) {
-          return { ...incomeSourceData, incomeAmount: value }
-        } else {
-          return incomeSourceData;
-        }
-      });
-      
-      setSelectedMenuItem(updatedSelectedMenuItems);
-    }
-  }
+		if (incomeAmountRegex.test(value)) {
+			const updatedSelectedMenuItems = selectedMenuItem.map(
+				(incomeSourceData, i) => {
+					if (i === index) {
+						return { ...incomeSourceData, incomeAmount: value };
+					} else {
+						return incomeSourceData;
+					}
+				}
+			);
+
+			setSelectedMenuItem(updatedSelectedMenuItems);
+		}
+	}
 
   const handleFrequencySelectChange = (event, index) => {
     const { value } = event.target; 
@@ -352,14 +355,14 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   const handleAddAdditionalIncomeSource = (event) => {
     event.preventDefault();
     setSelectedMenuItem([
-      ...selectedMenuItem,
-      {
-        incomeStreamName: '', 
-        incomeAmount: '',
-        incomeFrequency: '',
-        income: ''
-      }
-    ]);
+			...selectedMenuItem,
+			{
+				incomeStreamName: '',
+				incomeAmount: '',
+				incomeFrequency: '',
+				hoursPerWeek: '',
+			},
+		]);
   }
 
   return (
