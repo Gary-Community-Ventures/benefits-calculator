@@ -439,10 +439,11 @@ const Confirmation = ({ formData }) => {
 			return (
 				<li key={incomeStream.incomeStreamName}>
 					{' '}
-					{getIncomeStreamNameLabel(incomeStream.incomeStreamName)}: $
-					{Number(incomeStream.incomeAmount).toLocaleString(2)} /{' '}
+					{getIncomeStreamNameLabel(incomeStream.incomeStreamName)}:{' '}
+					{incomeStream.hoursPerWeek > 0 &&
+						`Average of ${incomeStream.hoursPerWeek} hours/week at `}
+					${Number(incomeStream.incomeAmount).toLocaleString(2)} /{' '}
 					{getIncomeStreamFrequencyLabel(incomeStream.incomeFrequency)}
-					{incomeStream.hoursPerWeek > 0 && (`, ${incomeStream.hoursPerWeek} per week`)}
 				</li>
 			);
 		});
