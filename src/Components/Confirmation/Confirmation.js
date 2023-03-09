@@ -435,9 +435,9 @@ const Confirmation = ({ formData }) => {
   }
 
   const listAllIncomeStreams = (memberIncomeStreams) => {
-		const mappedListItems = memberIncomeStreams.map((incomeStream) => {
+		const mappedListItems = memberIncomeStreams.map((incomeStream, index) => {
 			return (
-				<li key={incomeStream.incomeStreamName}>
+				<li key={incomeStream.incomeStreamName + index}>
 					{' '}
 					{getIncomeStreamNameLabel(incomeStream.incomeStreamName)}:{' '}
 					{incomeStream.hoursPerWeek > 0 && incomeStream.incomeFrequency === 'hourly' &&
