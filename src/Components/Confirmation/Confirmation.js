@@ -435,12 +435,20 @@ const Confirmation = ({ formData }) => {
   }
 
   const listAllIncomeStreams = (memberIncomeStreams) => {
-    const mappedListItems = memberIncomeStreams.map(incomeStream => {
-      return <li key={ incomeStream.incomeStreamName }> { getIncomeStreamNameLabel(incomeStream.incomeStreamName) }: ${ Number(incomeStream.incomeAmount).toLocaleString(2) } / { getIncomeStreamFrequencyLabel(incomeStream.incomeFrequency) }</li>
-    });
+		const mappedListItems = memberIncomeStreams.map((incomeStream) => {
+			return (
+				<li key={incomeStream.incomeStreamName}>
+					{' '}
+					{getIncomeStreamNameLabel(incomeStream.incomeStreamName)}: $
+					{Number(incomeStream.incomeAmount).toLocaleString(2)} /{' '}
+					{getIncomeStreamFrequencyLabel(incomeStream.incomeFrequency)}
+					{incomeStream.hoursPerWeek > 0 && (`, ${incomeStream.hoursPerWeek} per week`)}
+				</li>
+			);
+		});
 
-    return mappedListItems;
-  }
+		return mappedListItems;
+	};
 
   const listAllTruthyValues = (selectedOptions, relatedOptionsList) => {
     const mappedListItems = selectedOptions.map(option => {
