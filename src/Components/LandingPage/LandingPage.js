@@ -52,23 +52,25 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
 								defaultMessage="Some benefits are available only to household members who are U.S. citizens or immigrants who are qualified non-citizens. In some cases, even after someone obtains citizenship or qualified non-citizenship status, a waiting period or other conditions may apply. When you get to the end of this tool, you will have a chance to sort results so that you see only benefits that do not require a citizen or qualified non-citizen in the household."
 							/>
 						</li>
-						<p>
-							<FormattedMessage
-								id="landingPage.publicCharge"
-								defaultMessage="Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits on this site may affect their immigration status. For more information, please review the "
-							/>
-							<a
-								variant="contained"
-								target="_blank"
-								href="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
-								rel="noopener noreferrer"
-							>
+						<li>
+							<p>
 								<FormattedMessage
-									id="landingPage.publicChargeLink"
-									defaultMessage="Colorado Department of Human Services Public Charge Rule"
+									id="landingPage.publicCharge"
+									defaultMessage="Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits on this site may affect their immigration status. For more information, please review the "
 								/>
-							</a>
-						</p>
+								<a
+									variant="contained"
+									target="_blank"
+									href="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
+									rel="noopener noreferrer"
+								>
+									<FormattedMessage
+										id="landingPage.publicChargeLink"
+										defaultMessage="Colorado Department of Human Services Public Charge Rule"
+									/>
+								</a>
+							</p>
+						</li>
 						<li>
 							<FormattedMessage
 								id="landingPage.thirdBulletItem"
