@@ -1,6 +1,6 @@
 import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import stepDirectory from '../../Assets/stepDirectory';
 import './LandingPage.css';
