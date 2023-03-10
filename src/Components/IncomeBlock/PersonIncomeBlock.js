@@ -121,7 +121,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   const handleIncomeTextfieldChange = (event, index) => {
 		const { value } = event.target;
 		// Income amount can be up to 8 digits long with 2 decimal places. Can not start with a decimal
-    const incomeAmountRegex = /^\d{0,8}(?:(?<=\d)\.\d{0,2})?$/;
+    const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
 
 		if (incomeAmountRegex.test(value)) {
 			const updatedSelectedMenuItems = selectedMenuItem.map(
