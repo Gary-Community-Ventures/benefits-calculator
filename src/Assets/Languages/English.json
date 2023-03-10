@@ -284,7 +284,7 @@
   "results.displaySubheader-basedOnInformationText": "Based on the information you provided, we believe you are likely not eligible for the programs below:",
   "results.displaySubheader-sendResultsDescText": "To receive a copy of these results by email or text please click the email results button.",
   "results.resultsTable-benefitLabel": "Benefit",
-  "results.resultsTable-annualValueLabel": "Annual Value",
+  "results.resultsTable-annualValueLabel": "Estimated Annual Value",
   "results.resultsTable-timeToApply": "Time to Apply",
   "results.resultsTable-sorryNoProgramsWereFoundLabel": "Sorry, we were not able to find any programs for you based on the information that was provided.",
   "results.resultsRow-applyButton": "Apply",

@@ -284,7 +284,7 @@
   "results.displaySubheader-basedOnInformationText": "Según la información que nos proporcionó, creemos que posiblemente no sea elegible para los siguientes programas: ",
   "results.displaySubheader-sendResultsDescText": "Para recibir una copia de sus resultados por correo electrónico o mensaje de texto, haga clic en el botón de enviar resultados.",
   "results.resultsTable-benefitLabel": "Beneficio",
-  "results.resultsTable-annualValueLabel": "Valor anual",
+  "results.resultsTable-annualValueLabel": "Estimacíon del Valor Anual",
   "results.resultsTable-timeToApply": "Tiempo para aplicar",
   "results.resultsTable-sorryNoProgramsWereFoundLabel": "Lamentablemente no pudimos encontrar ningún programa para usted según la información que nos proporcionó.",
   "results.resultsRow-applyButton": "Solicitar",
