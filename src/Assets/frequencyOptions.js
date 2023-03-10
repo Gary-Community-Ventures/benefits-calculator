@@ -12,7 +12,11 @@ const frequencyOptions = {
   monthly: 
     <FormattedMessage 
       id='frequencyOptions.monthly' 
-      defaultMessage='Every month' />
+      defaultMessage='Every month' />,
+  hourly:
+    <FormattedMessage
+      id='frequencyOptions.hourly' 
+      defaultMessage='Hourly' />,
 };
 
 export default frequencyOptions;

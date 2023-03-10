@@ -2,7 +2,12 @@ import { FormattedMessage } from 'react-intl';
 import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from "@mui/material";
 import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { incomeStreamValueHasError, displayIncomeStreamValueHelperText, incomeStreamsAreValid } from '../../Assets/validationFunctions';
+import {
+	hoursWorkedValueHasError,
+	incomeStreamValueHasError,
+	displayIncomeStreamValueHelperText,
+	incomeStreamsAreValid,
+} from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import './IncomeBlock.css';
@@ -29,7 +34,8 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
     {
       incomeStreamName: '', 
       incomeAmount: '',
-      incomeFrequency: ''    
+      incomeFrequency: '',
+      hoursPerWeek: ''
     }
   ]);
 
@@ -100,8 +106,9 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
       if (i === index) {
         return { 
           incomeStreamName: event.target.value, 
-          incomeAmount: 0, 
-          incomeFrequency: ''
+          incomeAmount: '', 
+          incomeFrequency: '',
+          hoursPerWeek: ''
         }
       } else {
         return incomeSourceData;
@@ -112,21 +119,24 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   }
 
   const handleIncomeTextfieldChange = (event, index) => {
-    const { value } = event.target;
-    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
+		const { value } = event.target;
+		// Income amount can be up to 8 digits long with 2 decimal places. Can not start with a decimal
+    const incomeAmountRegex = /^\d{0,8}(?:(?<=\d)\.\d{0,2})?$/;
 
-    if (numberUpToEightDigitsLongRegex.test(value)) {
-      const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
-        if (i === index) {
-          return { ...incomeSourceData, incomeAmount: Math.round(Number(value)) }
-        } else {
-          return incomeSourceData;
-        }
-      });
-      
-      setSelectedMenuItem(updatedSelectedMenuItems);
-    }
-  }
+		if (incomeAmountRegex.test(value)) {
+			const updatedSelectedMenuItems = selectedMenuItem.map(
+				(incomeSourceData, i) => {
+					if (i === index) {
+						return { ...incomeSourceData, incomeAmount: value };
+					} else {
+						return incomeSourceData;
+					}
+				}
+			);
+
+			setSelectedMenuItem(updatedSelectedMenuItems);
+		}
+	}
 
   const handleFrequencySelectChange = (event, index) => {
     const { value } = event.target; 
@@ -167,14 +177,79 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
       </FormControl>
     );
   }
+
+  const createHoursWorkedTextField = (incomeStreamName, hoursWorked, index) => {
+		const hoursWorkedChange = (event, index) => {
+			const { value } = event.target;
+			const numberUpToEightDigitsLongRegex = /^\d{0,3}$/;
+
+			if (numberUpToEightDigitsLongRegex.test(value)) {
+				const updatedSelectedMenuItems = selectedMenuItem.map(
+					(incomeSourceData, i) => {
+						if (i === index) {
+							return { ...incomeSourceData, hoursPerWeek: value };
+						} else {
+							return incomeSourceData;
+						}
+					}
+				);
+
+				setSelectedMenuItem(updatedSelectedMenuItems);
+			}
+		};
+		return (
+			<>
+				<p className="question-label">
+					<FormattedMessage
+						id="personIncomeBlock.createHoursWorkedTextfield-questionLabel"
+						defaultMessage="How many hours do they work per week: "
+					/>
+					{getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
+				</p>
+				<div className="income-block-textfield">
+					<StyledTextField
+						type="text"
+						value={hoursWorked}
+						label={
+							<FormattedMessage
+								id="incomeBlock.createHoursWorkedTextfield-amountLabel"
+								defaultMessage="Hours"
+							/>
+						}
+						onChange={(event) => {
+							hoursWorkedChange(event, index);
+						}}
+						variant="outlined"
+						required
+						error={hoursWorkedValueHasError(hoursWorked)}
+						helperText={displayIncomeStreamValueHelperText(hoursWorked)}
+					/>
+				</div>
+			</>
+		);
+	};
   
   const createIncomeAmountTextfield = (incomeStreamName, incomeAmount, index) => {
+    let questionHeader;
+		if (selectedMenuItem[index].incomeFrequency === 'hourly') {
+			questionHeader = (
+				<FormattedMessage
+					id="personIncomeBlock.createIncomeAmountTextfield-hourly-questionLabel"
+					defaultMessage="What is their hourly rate: "
+				/>
+			);
+		} else {
+			questionHeader = (
+				<FormattedMessage
+					id="personIncomeBlock.createIncomeAmountTextfield-questionLabel"
+					defaultMessage="How much do they receive each pay period for: "
+				/>
+			);
+		}
     return (
       <div>
         <p className='question-label'>
-          <FormattedMessage 
-            id='personIncomeBlock.createIncomeAmountTextfield-questionLabel' 
-            defaultMessage='How much do they receive each pay period for this type of income: ' />
+          {questionHeader}
           {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
         </p>
         <div className='income-block-textfield'>
@@ -233,7 +308,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 
   const createIncomeBlockQuestions = () => {
     return selectedMenuItem.map((incomeSourceData, index) => {
-      const { incomeStreamName, incomeAmount, incomeFrequency } = incomeSourceData;
+      const { incomeStreamName, incomeAmount, incomeFrequency, hoursPerWeek } = incomeSourceData;
       const incomeStreamQuestion = 
         <p className='question-label'>
           <FormattedMessage 
@@ -250,6 +325,9 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
           {index > 0 && incomeStreamQuestion}
           {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
           {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+          {incomeFrequency === 'hourly' &&
+						createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)
+          }
           {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
         </div>
       );
@@ -277,13 +355,14 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   const handleAddAdditionalIncomeSource = (event) => {
     event.preventDefault();
     setSelectedMenuItem([
-      ...selectedMenuItem,
-      {
-        incomeStreamName: '', 
-        incomeAmount: 0,
-        incomeFrequency: ''      
-      }
-    ]);
+			...selectedMenuItem,
+			{
+				incomeStreamName: '',
+				incomeAmount: '',
+				incomeFrequency: '',
+				hoursPerWeek: '',
+			},
+		]);
   }
 
   return (

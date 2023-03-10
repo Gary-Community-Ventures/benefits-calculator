@@ -200,8 +200,9 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		return householdMemberBody.income_streams.map((incomeStream) => {
 			return {
 				type: incomeStream.incomeStreamName,
-				amount: incomeStream.incomeAmount,
+				amount: Number(incomeStream.incomeAmount),
 				frequency: incomeStream.incomeFrequency,
+				hours_worked: Number(incomeStream.hoursPerWeek) ?? null,
 				screen: householdMemberBody.screen,
 				household_member: householdMemberId,
 			};
