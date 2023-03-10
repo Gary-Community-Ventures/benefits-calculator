@@ -460,7 +460,7 @@ const Results = ({ formData }) => {
 		});
     const valueHeader = intl.formatMessage({
       id: 'results.resultsTable-annualValueLabel',
-      defaultMessage: 'Annual Value'
+      defaultMessage: 'Estimated Annual Value'
     })
     const appTimeHeader = intl.formatMessage({
       id: 'results.resultsTable-timeToApply',
