@@ -375,16 +375,11 @@ const questions = {
   },
   [stepDirectory.householdData]: {
     name: 'householdData',
-    question:
-      <FormattedMessage
-        id='questions.householdData'
-        defaultMessage='Tell us about the next person in your household.' />,
     componentDetails: {
       componentType: 'HouseholdDataBlock',
       ariaLabel: 'questions.householdData-ariaLabel',
       inputName: 'householdData'
-    },
-    headerType: 'householdData'
+    }
   },
   [stepDirectory.householdAssets]: {
     name: 'householdAssets',
