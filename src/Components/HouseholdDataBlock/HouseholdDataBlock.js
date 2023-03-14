@@ -23,7 +23,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const createHHMInitData = (householdSizeNum) => {
     const result = [];
-    for (let i = 0; i < householdSizeNum; i++) { 
+    for (let i = 0; i < householdSizeNum; i++) {
       result.push({
         age: '',
         relationshipToHH: ``,
@@ -39,6 +39,10 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         hasIncome: false,
         incomeStreams: []
       });
+
+      if (i === 0) {
+        result[i].relationshipToHH = 'headOfHousehold';
+      }
     }
     return result;
   }
