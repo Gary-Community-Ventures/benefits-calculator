@@ -112,6 +112,7 @@
   "householdDataBlock.createFMInputLabel-person": "Person ",
   "householdDataBlock.createFMInputLabel-age": " Age",
   "householdDataBlock.createAgeQuestion-how": "How old are they?",
+  "householdDataBlock.createAgeQuestion-how-headOfHH": "How old are you?",
   "householdDataBlock.createAgeQuestion-zero": "If your child is less than a year old, enter 0.",
   "householdDataBlock.createHOfHRelationQuestion-relation": "What is this person’s relationship to you?",
   "householdDataBlock.createDropdownCompProps-inputLabelText": "Relation",

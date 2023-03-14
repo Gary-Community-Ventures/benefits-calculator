@@ -133,22 +133,36 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       inputHelperText: displayHouseholdMemberAgeHelperText
     }
 
-    return (
-      <>
-        <p className='question-label'>
-          <FormattedMessage
-            id='householdDataBlock.createAgeQuestion-how'
-            defaultMessage='How old are they?' />
-        </p>
-        <p className='question-description'>
-          <FormattedMessage
-            id='householdDataBlock.createAgeQuestion-zero'
-            defaultMessage="If your child is less than a year old, enter 0." />
-        </p>
-        { createTextfield(ageTextfieldProps, personIndex) }
-        <p className='household-data-q-underline'></p>
-      </>
-    );
+    if (personIndex === 0) {
+      return (
+        <>
+          <p className='question-label'>
+            <FormattedMessage
+              id='householdDataBlock.createAgeQuestion-how-headOfHH'
+              defaultMessage='How old are you?' />
+          </p>
+          { createTextfield(ageTextfieldProps, personIndex) }
+          <p className='household-data-q-underline'></p>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <p className='question-label'>
+            <FormattedMessage
+              id='householdDataBlock.createAgeQuestion-how'
+              defaultMessage='How old are they?' />
+          </p>
+          <p className='question-description'>
+            <FormattedMessage
+              id='householdDataBlock.createAgeQuestion-zero'
+              defaultMessage="If your child is less than a year old, enter 0." />
+          </p>
+          { createTextfield(ageTextfieldProps, personIndex) }
+          <p className='household-data-q-underline'></p>
+        </>
+      );
+    }
   }
 
   const createTextfield = (componentInputProps, index) => {

@@ -112,6 +112,7 @@
   "householdDataBlock.createFMInputLabel-person": "Persona ",
   "householdDataBlock.createFMInputLabel-age": " Edad",
   "householdDataBlock.createAgeQuestion-how": "¿Qué edad tiene?",
+  "householdDataBlock.createAgeQuestion-how-headOfHH": "¿Cuántos años tiene usted?",
   "householdDataBlock.createAgeQuestion-zero": "Si su hijo/a tiene menos de un año, ingrese 0.",
   "householdDataBlock.createHOfHRelationQuestion-relation": "¿Qué parentesco tiene esta persona con usted?",
   "householdDataBlock.createDropdownCompProps-inputLabelText": "Parentesco",
