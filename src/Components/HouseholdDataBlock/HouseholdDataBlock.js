@@ -14,10 +14,10 @@ import { FormattedMessage } from 'react-intl';
 
 const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const { householdSize } = formData;
-  
+
   //# of blocks that will need to be created for each household member
-  //subtract 1 because we don't want to count the head of household
-  const remainingHHMNumber = Number(householdSize) - 1;
+  //this now includes the head of household
+  const remainingHHMNumber = Number(householdSize);
   const [page, setPage] = useState(0);
   let initialHouseholdData = [];
 
