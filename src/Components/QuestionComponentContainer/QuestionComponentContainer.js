@@ -16,6 +16,7 @@ import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 import stepDirectory from '../../Assets/stepDirectory';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange,
   handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
@@ -283,6 +284,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
           defaultMessage=' of ' />
         {totalNumberOfQuestions()}
       </p>
+      <ProgressBar step={id}/>
       {renderHeaderAndSubheader()}
       {
         ( matchingQuestion.componentDetails.componentType === 'Textfield' && createComponent(renderTextfieldComponent(matchingQuestion)) ) ||
@@ -293,7 +295,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
       }
     </main>
   );
-
 }
 
 export default QuestionComponentContainer;
