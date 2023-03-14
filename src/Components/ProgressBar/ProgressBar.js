@@ -6,9 +6,14 @@ const ProgressBar = ({ step }) => {
 	return (
 		<LinearProgress
 			sx={{
-				backgroundColor: '#ededed',
+				backgroundColor: '#d6d6d6c4',
+				border: '1px solid #00000052',
+				borderRadius: '500rem;',
+				height: '.5rem',
+				boxShadow: '1px 1px 4px rgb(0 0 0 / 0.4)',
 				'& .MuiLinearProgress-bar': {
 					backgroundColor: '#0096B0',
+					borderRadius: '500rem;',
 				},
 			}}
 			variant="determinate"

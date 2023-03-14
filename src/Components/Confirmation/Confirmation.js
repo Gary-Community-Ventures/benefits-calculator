@@ -492,6 +492,7 @@ const Confirmation = ({ formData }) => {
 
   return (
     <div className='benefits-form'>
+      <ProgressBar step={totalNumberOfQuestions()}/>
       <p className='step-progress-title'>
         <FormattedMessage
           id='confirmation.return-stepLabel'
@@ -502,7 +503,6 @@ const Confirmation = ({ formData }) => {
           defaultMessage=' of ' />
         { totalNumberOfQuestions() }
       </p>
-      <ProgressBar step={totalNumberOfQuestions()}/>
       <h2 className='sub-header'>
         <FormattedMessage
           id='confirmation.return-subheader'

@@ -274,6 +274,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
 
   return (
     <main className='benefits-form'>
+      <ProgressBar step={id}/>
       <p className='step-progress-title'>
         <FormattedMessage
           id='qcc.step-text'
@@ -284,7 +285,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
           defaultMessage=' of ' />
         {totalNumberOfQuestions()}
       </p>
-      <ProgressBar step={id}/>
       {renderHeaderAndSubheader()}
       {
         ( matchingQuestion.componentDetails.componentType === 'Textfield' && createComponent(renderTextfieldComponent(matchingQuestion)) ) ||
