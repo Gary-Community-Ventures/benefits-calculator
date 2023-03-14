@@ -10,9 +10,10 @@ const ProgressBar = ({ step }) => {
 				border: '1px solid #00000052',
 				borderRadius: '500rem;',
 				height: '.5rem',
-				boxShadow: '1px 1px 4px rgb(0 0 0 / 0.4)',
+				boxShadow: 'inset -1px 1px 3px rgb(0 0 0 / 0.3)',
 				'& .MuiLinearProgress-bar': {
-					backgroundColor: '#0096B0',
+					background:
+						'linear-gradient(90deg, hsla(189, 100%, 35%, 1) 0%, hsla(176, 56%, 55%, 1) 100%)',
 					borderRadius: '500rem;',
 				},
 			}}
