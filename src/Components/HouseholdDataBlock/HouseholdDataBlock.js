@@ -11,6 +11,7 @@ import HouseholdDataPreviousButton from '../PreviousButton/HouseholdDataPrevious
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { householdMemberAgeHasError, displayHouseholdMemberAgeHelperText } from '../../Assets/validationFunctions';
 import { FormattedMessage } from 'react-intl';
+import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const { householdSize } = formData;
@@ -206,12 +207,29 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       );
     } else {
       return (
-        <p className='question-label household-data-q-underline'>
-          <FormattedMessage
-            id='questions.householdData'
-            defaultMessage='Tell us about the next person in your household.'
-          />
-        </p>
+        <>
+          <h2 className='household-data-sub-header'>
+            <FormattedMessage
+              id='qcc.so-far-text'
+              defaultMessage="So far you've told us about:" />
+          </h2>
+          <h4 className='household-data-sub2-header'>
+            ⚫️
+            <FormattedMessage
+              id='qcc.you-text'
+              defaultMessage=' You, ' />
+            {state.householdData[0].age}
+            <FormattedMessage
+              id='qcc.hoh-text'
+              defaultMessage=' Head of household' />
+          </h4>
+          <p className='question-label household-data-q-underline'>
+            <FormattedMessage
+              id='questions.householdData'
+              defaultMessage='Tell us about the next person in your household.'
+            />
+          </p>
+        </>
       );
     }
   }
