@@ -194,6 +194,28 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     );
   }
 
+  const createQuestionHeader = (personIndex) => {
+    if (personIndex === 0) {
+      return (
+        <p className='question-label household-data-q-underline'>
+          <FormattedMessage
+            id='householdDataBlock.questionHeader'
+            defaultMessage='Tell us about yourself.'
+          />
+        </p>
+      );
+    } else {
+      return (
+        <p className='question-label household-data-q-underline'>
+          <FormattedMessage
+            id='questions.householdData'
+            defaultMessage='Tell us about the next person in your household.'
+          />
+        </p>
+      );
+    }
+  }
+
   const createPersonDataBlocks = () => {
     const personDataBlocks = state.householdData.map((personData, index) => {
       return (
