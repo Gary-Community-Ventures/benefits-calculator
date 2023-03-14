@@ -23,13 +23,4 @@ const ProgressBar = ({ step }) => {
 	);
 };
 
-const styles = (props) => ({
-	colorPrimary: {
-		backgroundColor: '#00695C',
-	},
-	barColorPrimary: {
-		backgroundColor: '#B2DFDB',
-	},
-});
-
 export default ProgressBar;
