@@ -314,9 +314,7 @@ const App = () => {
                 /> } />
             <Route
               path='/results/:id'
-              element={<Results
-                formData={formData}
-                /> } />
+              element={<Results/> } />
             <Route
               path='/email-results/:id'
               element={<EmailResults2

@@ -21,6 +21,7 @@ const Wrapper = (props) => {
 
   useEffect(() => {
     localStorage.setItem('language', locale)
+    locale === 'en-US' ? setMessages(English) : setMessages(Spanish);
   }, [locale])
 
   const selectLanguage = (event) => {

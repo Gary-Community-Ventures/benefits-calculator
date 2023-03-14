@@ -33,10 +33,11 @@ export const isNavigationKey = (key) =>
   key.indexOf('Page') === 0 ||
   key === ' ';
 
-const Results = ({ formData }) => {
+const Results = () => {
   const { id: screenerId } = useParams()
   const navigate = useNavigate();
   const locale = useContext(Context).locale;
+  const setLocale = useContext(Context).setLocale;
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const citizenToggleState = useState(false)
@@ -110,13 +111,16 @@ const Results = ({ formData }) => {
   }, [locale, results.rawResponse])
 
   const fetchResults = async () => {
-    const rawEligibilityResponse = await getEligibility(screenerId, locale);
-    setResults({
+		const rawEligibilityResponse = await getEligibility(screenerId, locale);
+		setLocale(
+			rawEligibilityResponse.default_language === 'en-us' ? 'en-US' : 'es'
+		);
+		setResults({
 			programs: [],
 			rawResponse: rawEligibilityResponse,
 			screenerId: rawEligibilityResponse.screen_id,
 		});
-  }
+	}
 
   const responseLanguage = () => {
     const { rawResponse } = results;
