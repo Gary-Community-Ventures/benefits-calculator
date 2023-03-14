@@ -7,7 +7,7 @@ const ProgressBar = ({ step }) => {
 		<LinearProgress
 			sx={{
 				backgroundColor: '#d6d6d6c4',
-				border: '1px solid #00000052',
+				border: '1px solid #B0B0B0',
 				borderRadius: '500rem;',
 				height: '.5rem',
 				boxShadow: 'inset -1px 1px 3px rgb(0 0 0 / 0.2)',
