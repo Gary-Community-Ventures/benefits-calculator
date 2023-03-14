@@ -286,7 +286,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const createDropdownCompProps = () => {
     const dropdownCompProps = {
       labelId:'relation-to-hh-label',
-      inputLabelText: 
+      inputLabelText:
         <FormattedMessage
           id='householdDataBlock.createDropdownCompProps-inputLabelText'
           defaultMessage='Relation' />,
@@ -295,7 +295,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         <FormattedMessage
           id='householdDataBlock.createDropdownCompProps-label'
           defaultMessage='Relation Type' />,
-      disabledSelectMenuItemText: 
+      disabledSelectMenuItemText:
         <FormattedMessage
           id='householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText'
           defaultMessage='Click to select relationship' />
@@ -306,13 +306,13 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const createRelationshipDropdownMenu = (index) => {
     return (
-      <DropdownMenu 
+      <DropdownMenu
         dropdownComponentProps={createDropdownCompProps()}
         options={relationshipOptions}
         setState={setState}
         state={state}
         index={index} />
-    ); 
+    );
   }
 
   const createConditionsCheckboxMenu = (index) => {
@@ -329,13 +329,13 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <>
         <p className='question-label'>
-          <FormattedMessage 
-            id='householdDataBlock.createConditionsQuestion-do-these-apply' 
+          <FormattedMessage
+            id='householdDataBlock.createConditionsQuestion-do-these-apply'
             defaultMessage='Do any of these apply to them?' />
         </p>
         <p className='question-description'>
-          <FormattedMessage 
-            id='householdDataBlock.createConditionsQuestion-pick' 
+          <FormattedMessage
+            id='householdDataBlock.createConditionsQuestion-pick'
             defaultMessage="It's OK to pick more than one." />
         </p>
         { createConditionsCheckboxMenu(index) }
@@ -353,11 +353,11 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <>
         <p className='question-label radio-question'>
-          <FormattedMessage 
-            id='householdDataBlock.createFTStudentRadioQuestion-questionLabel' 
+          <FormattedMessage
+            id='householdDataBlock.createFTStudentRadioQuestion-questionLabel'
             defaultMessage='Are they a full-time student?' />
         </p>
-        <HHDataRadiofield 
+        <HHDataRadiofield
           componentDetails={radiofieldProps}
           setState={setState}
           state={state}
@@ -376,11 +376,11 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <>
         <p className='question-label radio-question'>
-          <FormattedMessage 
-            id='householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel' 
+          <FormattedMessage
+            id='householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel'
             defaultMessage='Did they work in the last 18 months?' />
         </p>
-        <HHDataRadiofield 
+        <HHDataRadiofield
           componentDetails={radiofieldProps}
           setState={setState}
           state={state}
@@ -399,16 +399,16 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <>
         <p className='question-label radio-question'>
-          <FormattedMessage 
-            id='householdDataBlock.createIncomeRadioQuestion-questionLabel' 
+          <FormattedMessage
+            id='householdDataBlock.createIncomeRadioQuestion-questionLabel'
             defaultMessage='Does this individual in your household have significant income you have not already included?' />
         </p>
         <p className='question-description'>
-          <FormattedMessage 
-            id='householdDataBlock.createIncomeRadioQuestion-questionDescription' 
+          <FormattedMessage
+            id='householdDataBlock.createIncomeRadioQuestion-questionDescription'
             defaultMessage='This includes money from jobs, alimony, investments, or gifts.' />
         </p>
-        <HHDataRadiofield 
+        <HHDataRadiofield
           componentDetails={radiofieldProps}
           setState={setState}
           state={state}
@@ -418,10 +418,10 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   }
 
   const createPersonIncomeBlock = (index) => {
-    return ( 
+    return (
       <>
-        <PersonIncomeBlock 
-          personData={state.householdData[index]} 
+        <PersonIncomeBlock
+          personData={state.householdData[index]}
           setState={setState}
           state={state}
           personDataIndex={index} />
@@ -432,9 +432,9 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const displaySinglePersonDataPage = (currentPage) => {
     const allHouseholdDataBlockComponents = createPersonDataBlocks();
-    
+
     //this will only show the personDataBlock who's householdData index matches the currentPage
-    return allHouseholdDataBlockComponents[currentPage]; 
+    return allHouseholdDataBlockComponents[currentPage];
   }
 
   return (
