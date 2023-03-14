@@ -250,34 +250,42 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const createPersonDataBlocks = () => {
     const personDataBlocks = state.householdData.map((personData, index) => {
-      return (
-        <div key={index}>
-          { createAgeQuestion(index) }
-          { createHOfHRelationQuestion(index) } 
-          { createConditionsQuestion(index) } 
-          { personData.student && createFTStudentRadioQuestion(index) }
-          { personData.unemployed && createUnemployed18MosRadioQuestion(index) }
-          <p className='household-data-q-underline'></p>
-          { createIncomeRadioQuestion(index) }
-          <p className='household-data-q-underline'></p>
-          { personData.hasIncome && createPersonIncomeBlock(index) }
-          { state.error && <ErrorMessage error={state.error} /> }
-          <div className='question-buttons'>
-            <HouseholdDataPreviousButton 
-              page={page}
-              setPage={setPage}
-            />
-            <HouseholdDataContinueButton 
-              page={page}
-              setPage={setPage} 
-              remainingHHMNumber={remainingHHMNumber} 
-              handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-              setState={setState}
-              state={state}
-            />
+      if (index === 0) {
+        return (
+          <div key={index}>
+            { createQuestionHeader(index) }
+            { createAgeQuestion(index) }
+      } else {
+        return (
+          <div key={index}>
+            { createQuestionHeader(index) }
+            { createAgeQuestion(index) }
+            { createHOfHRelationQuestion(index) }
+            { createConditionsQuestion(index) }
+            { personData.student && createFTStudentRadioQuestion(index) }
+            { personData.unemployed && createUnemployed18MosRadioQuestion(index) }
+            <p className='household-data-q-underline'></p>
+            { createIncomeRadioQuestion(index) }
+            <p className='household-data-q-underline'></p>
+            { personData.hasIncome && createPersonIncomeBlock(index) }
+            { state.error && <ErrorMessage error={state.error} /> }
+            <div className='question-buttons'>
+              <HouseholdDataPreviousButton
+                page={page}
+                setPage={setPage}
+              />
+              <HouseholdDataContinueButton
+                page={page}
+                setPage={setPage}
+                remainingHHMNumber={remainingHHMNumber}
+                handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+                setState={setState}
+                state={state}
+              />
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
     });
 
     return personDataBlocks;
