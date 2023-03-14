@@ -57,13 +57,13 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     const newHHMembers = createHHMInitData(householdSizeDifference);
     initialHouseholdData = [...formData.householdData, ...newHHMembers];
   } else if (formData.householdData.length > remainingHHMNumber) {
-    //they've decreased the size of their household so we need to remove members 
+    //they've decreased the size of their household so we need to remove members
     //from the end of the formData.householdData array
     const householdSizeDifference = formData.householdData.length - remainingHHMNumber;
     const updatedHHMembers = formData.householdData.slice(0, formData.householdData.length - householdSizeDifference);
     initialHouseholdData = updatedHHMembers;
   }
-  
+
   const [state, setState] = useState({
     householdData: initialHouseholdData,
     wasSubmitted: false,
@@ -74,7 +74,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   state.householdData.forEach((personData) => {
     useEffectDependencies.push(...[personData.student, personData.unemployed, personData.hasIncome]);
   });
-  
+
   useEffect(() => {
     let updatedHouseholdData = [ ...state.householdData ];
 
@@ -111,11 +111,11 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const createFMInputLabel = (personIndex) => {
     return (
       <>
-        <FormattedMessage 
+        <FormattedMessage
           id='householdDataBlock.createFMInputLabel-person'
           defaultMessage='Person ' />
         {personIndex + 1}
-        <FormattedMessage 
+        <FormattedMessage
           id='householdDataBlock.createFMInputLabel-age'
           defaultMessage=' Age' />
       </>
@@ -125,7 +125,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const createAgeQuestion = (personIndex) => {
     const ageTextfieldProps = {
       inputType: 'text',
-      inputName: 'age', 
+      inputName: 'age',
       inputValue: state.householdData[personIndex].age,
       inputLabel: createFMInputLabel(personIndex),
       inputError: householdMemberAgeHasError,
@@ -140,8 +140,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
             defaultMessage='How old are they?' />
         </p>
         <p className='question-description'>
-          <FormattedMessage 
-            id='householdDataBlock.createAgeQuestion-zero' 
+          <FormattedMessage
+            id='householdDataBlock.createAgeQuestion-zero'
             defaultMessage="If your child is less than a year old, enter 0." />
         </p>
         { createTextfield(ageTextfieldProps, personIndex) }
@@ -152,10 +152,10 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const createTextfield = (componentInputProps, index) => {
     return (
-      <Textfield 
+      <Textfield
         componentDetails={componentInputProps}
         formData={state.householdData[index]}
-        handleTextfieldChange={handleTextfieldChange} 
+        handleTextfieldChange={handleTextfieldChange}
         index={index} />
     );
   }
