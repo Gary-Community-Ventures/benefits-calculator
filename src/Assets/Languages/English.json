@@ -188,6 +188,7 @@
   "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel": "Income Frequency",
   "personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem": "Select",
   "personIncomeBlock.createIncomeAmountTextfield-hourly-questionLabel": "What is their hourly rate: ",
+  "personIncomeBlock.createHoursWorkedTextfield-youQLabel": "How many hours do you work on average per week: ",
   "personIncomeBlock.createHoursWorkedTextfield-questionLabel": "How many hours do they work on average per week: ",
   "householdDataBlock.createExpenseRadioQuestion-ariaLabel": "has expenses",
   "householdDataBlock.createExpenseRadioQuestion-questionLabel": "Do they have any expenses",

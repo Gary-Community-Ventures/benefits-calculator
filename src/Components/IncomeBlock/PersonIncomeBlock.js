@@ -179,6 +179,14 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   }
 
   const createHoursWorkedTextField = (incomeStreamName, hoursWorked, index) => {
+    let formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-youQLabel';
+    let formattedMsgDefaultMsg = 'How many hours do you work per week: ';
+
+    if (personDataIndex !== 0) {
+      formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-questionLabel';
+      formattedMsgDefaultMsg = 'How many hours do they work per week: ';
+    }
+
 		const hoursWorkedChange = (event, index) => {
 			const { value } = event.target;
 			const numberUpToEightDigitsLongRegex = /^\d{0,3}$/;
@@ -197,12 +205,13 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 				setSelectedMenuItem(updatedSelectedMenuItems);
 			}
 		};
+
 		return (
 			<>
 				<p className="question-label">
 					<FormattedMessage
-						id="personIncomeBlock.createHoursWorkedTextfield-questionLabel"
-						defaultMessage="How many hours do they work per week: "
+						id={formattedMsgId}
+						defaultMessage={formattedMsgDefaultMsg}
 					/>
 					{getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
 				</p>
