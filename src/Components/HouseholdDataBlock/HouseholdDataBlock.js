@@ -257,6 +257,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
             { createAgeQuestion(index) }
             { createConditionsQuestion(index) }
             { personData.student && createFTStudentRadioQuestion(index) }
+            { personData.unemployed && createUnemployed18MosRadioQuestion(index) }
       } else {
         return (
           <div key={index}>
@@ -399,12 +400,20 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       value: state.householdData[index].unemployedWorkedInLast18Mos
     };
 
+    const formattedMsgId = (index === 0) ?
+      'householdDataBlock.createUnemployed18MosRadioQuestion-youQLabel'
+      : 'householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel';
+
+    const formattedMsgDefaultMsg = (index === 0) ?
+      'Did you work in the last 18 months?'
+      : 'Did they work in the last 18 months?';
+
     return (
       <>
         <p className='question-label radio-question'>
           <FormattedMessage
-            id='householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel'
-            defaultMessage='Did they work in the last 18 months?' />
+            id={formattedMsgId}
+            defaultMessage={formattedMsgDefaultMsg} />
         </p>
         <HHDataRadiofield
           componentDetails={radiofieldProps}
