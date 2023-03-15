@@ -1,8 +1,21 @@
+import {useState, useEffect} from 'react'
 import LinearProgress from '@mui/material/LinearProgress';
 import stepDirectory from '../../Assets/stepDirectory';
 
 const ProgressBar = ({ step }) => {
-  const totalSteps = Object.keys(stepDirectory).length + 2;
+	const previousStep = Math.max(step - 1, 0);
+	const [stepNumber, setStepNumber] = useState(previousStep)
+
+	useEffect(() => {
+		setStepNumber(stepNumber + 1)
+	}, [])
+
+	useEffect(() => {
+		setStepNumber(step);
+	}, [step])
+
+	const totalSteps = Object.keys(stepDirectory).length + 2;
+
 	return (
 		<LinearProgress
 			sx={{
@@ -18,7 +31,7 @@ const ProgressBar = ({ step }) => {
 				},
 			}}
 			variant="determinate"
-			value={(step / totalSteps) * 100}
+			value={(stepNumber / totalSteps) * 100}
 			className="progress-bar"
 		/>
 	);
