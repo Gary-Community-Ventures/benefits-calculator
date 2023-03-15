@@ -255,6 +255,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
           <div key={index}>
             { createQuestionHeader(index) }
             { createAgeQuestion(index) }
+            { createConditionsQuestion(index) }
       } else {
         return (
           <div key={index}>
@@ -334,12 +335,20 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   }
 
   const createConditionsQuestion = (index) => {
+    const formattedMsgId = (index === 0) ?
+      'householdDataBlock.createConditionsQuestion-do-these-apply-to-you'
+      : 'householdDataBlock.createConditionsQuestion-do-these-apply';
+
+    const formattedMsgDefaultMsg = (index === 0) ?
+      'Do any of these apply to you?'
+      : 'Do any of these apply to them?';
+
     return (
       <>
         <p className='question-label'>
           <FormattedMessage
-            id='householdDataBlock.createConditionsQuestion-do-these-apply'
-            defaultMessage='Do any of these apply to them?' />
+            id={formattedMsgId}
+            defaultMessage={formattedMsgDefaultMsg} />
         </p>
         <p className='question-description'>
           <FormattedMessage
