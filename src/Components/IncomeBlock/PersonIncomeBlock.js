@@ -365,12 +365,20 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 		]);
   }
 
+  const renderReturnStmtIdOrDefaultMsg = (index) => {
+    const [formattedMsgId, formattedMsgDefaultMsg] = (index === 0) ?
+      ['personIncomeBlock.return-youQLabel', 'What type of income have you had most recently?']
+    : ['personIncomeBlock.return-questionLabel', 'What type of income have they had most recently?'];
+
+    return [formattedMsgId, formattedMsgDefaultMsg];
+  }
+
   return (
     <>
       <p className='question-label radio-question'>
-        <FormattedMessage 
-          id='personIncomeBlock.return-questionLabel' 
-          defaultMessage='What type of income have they had most recently?' />
+        <FormattedMessage
+          id={(renderReturnStmtIdOrDefaultMsg(personDataIndex))[0]}
+          defaultMessage={(renderReturnStmtIdOrDefaultMsg(personDataIndex))[1]} />
       </p>
       <p className='question-description'>
         <FormattedMessage 

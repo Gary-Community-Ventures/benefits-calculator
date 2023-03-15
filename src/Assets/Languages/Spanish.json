@@ -153,6 +153,7 @@
   "householdDataBlock.createIncomeRadioQuestion-ariaLabel": "tiene ingresos",
   "householdDataBlock.createIncomeRadioQuestion-questionLabel": "¿Esta persona en su hogar tiene un ingreso significativo que aún no ha incluido?",
   "householdDataBlock.createIncomeRadioQuestion-questionDescription": "Esto incluye ingresos por concepto de trabajo, pensión alimenticia, inversiones o regalos.",
+  "personIncomeBlock.return-youQLabel": "¿Qué tipo de ingresos ha tenido usted recientemente?",
   "personIncomeBlock.return-questionLabel": "¿Qué tipo de ingresos ha percibido últimamente?",
   "personIncomeBlock.return-questionDescription": "Responda lo mejor que pueda. Podrá incluir tipos adicionales de ingresos. Cuantos más incluya, más precisos serán sus resultados.",
   "personIncomeBlock.return-addIncomeButton": "Agregar otro ingreso",
