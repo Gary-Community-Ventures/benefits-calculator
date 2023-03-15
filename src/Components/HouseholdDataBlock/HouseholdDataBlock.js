@@ -258,6 +258,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
             { createConditionsQuestion(index) }
             { personData.student && createFTStudentRadioQuestion(index) }
             { personData.unemployed && createUnemployed18MosRadioQuestion(index) }
+            <p className='household-data-q-underline'></p>
+            { createIncomeRadioQuestion(index) }
       } else {
         return (
           <div key={index}>
@@ -431,12 +433,20 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       value: state.householdData[index].hasIncome
     };
 
+    const formattedMsgId = (index === 0) ?
+      'questions.hasIncome'
+      : 'householdDataBlock.createIncomeRadioQuestion-questionLabel';
+
+    const formattedMsgDefaultMsg = (index === 0) ?
+      'Do you have an income?'
+      : 'Does this individual in your household have significant income you have not already included?';
+
     return (
       <>
         <p className='question-label radio-question'>
           <FormattedMessage
-            id='householdDataBlock.createIncomeRadioQuestion-questionLabel'
-            defaultMessage='Does this individual in your household have significant income you have not already included?' />
+            id={formattedMsgId}
+            defaultMessage={formattedMsgDefaultMsg} />
         </p>
         <p className='question-description'>
           <FormattedMessage
