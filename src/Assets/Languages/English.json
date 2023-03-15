@@ -182,6 +182,7 @@
   "personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel": "Income Type",
   "personIncomeBlock.createIncomeAmountTextfield-questionLabel": "How much do they receive each pay period for this type of income: ",
   "personIncomeBlock.createIncomeAmountTextfield-amountLabel": "Amount",
+  "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel": "How often do you receive this income: ",
   "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel": "How often do they receive this income: ",
   "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel": "Frequency",
   "personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel": "Income Frequency",

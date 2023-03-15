@@ -274,12 +274,19 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   }
 
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
+    let formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel';
+    let formattedMsgDefaultMsg = 'How often do you receive this income: ';
+    if (personDataIndex !== 0) {
+      formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel';
+      formattedMsgDefaultMsg = 'How often do they receive this income: ';
+    }
+
     return (
       <div>
         <p className='question-label'>
           <FormattedMessage
-            id='personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel'
-            defaultMessage='How often do they receive this income: ' />
+            id={formattedMsgId}
+            defaultMessage={formattedMsgDefaultMsg} />
             {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
         </p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
