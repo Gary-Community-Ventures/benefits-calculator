@@ -145,6 +145,7 @@
   "conditionOptions.veteran": "Are serving or have served in the U.S. Armed Forces, National Guard or Reserves",
   "conditionOptions.noneOfTheseApply": "None of these apply",
   "householdDataBlock.createFTStudentRadioQuestion-ariaLabel": "is a full-time student",
+  "householdDataBlock.createFTStudentRadioQuestion-youQLabel": "Are you a full-time student?",
   "householdDataBlock.createFTStudentRadioQuestion-questionLabel": "Are they a full-time student?",
   "householdDataBlock.createUnemployed18MosRadioQuestion-ariaLabel": "has worked in the past 18 months",
   "householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel": "Did they work in the last 18 months?",

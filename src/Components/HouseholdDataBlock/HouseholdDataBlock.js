@@ -256,6 +256,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
             { createQuestionHeader(index) }
             { createAgeQuestion(index) }
             { createConditionsQuestion(index) }
+            { personData.student && createFTStudentRadioQuestion(index) }
       } else {
         return (
           <div key={index}>
@@ -367,12 +368,20 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       value: state.householdData[index].studentFulltime
     };
 
+    const formattedMsgId = (index === 0) ?
+    'householdDataBlock.createFTStudentRadioQuestion-youQLabel'
+    : 'householdDataBlock.createFTStudentRadioQuestion-questionLabel';
+
+    const formattedMsgDefaultMsg = (index === 0) ?
+      'Are you a full-time student'
+      : 'Are they a full-time student?';
+
     return (
       <>
         <p className='question-label radio-question'>
           <FormattedMessage
-            id='householdDataBlock.createFTStudentRadioQuestion-questionLabel'
-            defaultMessage='Are they a full-time student?' />
+            id={formattedMsgId}
+            defaultMessage={formattedMsgDefaultMsg} />
         </p>
         <HHDataRadiofield
           componentDetails={radiofieldProps}

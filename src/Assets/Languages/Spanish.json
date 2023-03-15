@@ -145,6 +145,7 @@
   "conditionOptions.veteran": "Está sirviendo o ha servido en las Fuerzas Armadas de los EE. UU, Guardia Nacional o las Reservas",
   "conditionOptions.noneOfTheseApply": "Ninguna de las opciones anteriores",
   "householdDataBlock.createFTStudentRadioQuestion-ariaLabel": "es estudiante de tiempo completo",
+  "householdDataBlock.createFTStudentRadioQuestion-youQLabel": "¿Usted es un estudiante de tiempo completo?",
   "householdDataBlock.createFTStudentRadioQuestion-questionLabel": "¿Es estudiante de tiempo completo?",
   "householdDataBlock.createUnemployed18MosRadioQuestion-ariaLabel": "trabajó en los últimos 18 meses",
   "householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel": "¿Trabajó en los últimos 18 meses?",
