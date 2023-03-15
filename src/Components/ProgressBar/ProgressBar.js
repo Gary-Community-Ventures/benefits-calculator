@@ -7,10 +7,6 @@ const ProgressBar = ({ step }) => {
 	const [stepNumber, setStepNumber] = useState(previousStep)
 
 	useEffect(() => {
-		setStepNumber(stepNumber + 1)
-	}, [])
-
-	useEffect(() => {
 		setStepNumber(step);
 	}, [step])
 
