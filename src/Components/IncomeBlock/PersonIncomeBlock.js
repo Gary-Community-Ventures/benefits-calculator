@@ -343,11 +343,20 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   const createIncomeBlockQuestions = () => {
     return selectedMenuItem.map((incomeSourceData, index) => {
       const { incomeStreamName, incomeAmount, incomeFrequency, hoursPerWeek } = incomeSourceData;
+
+      let formattedMsgId = 'incomeBlock.createIncomeBlockQuestions-questionLabel';
+      let formattedMsgDefaultMsg = 'If you receive another type of income, select it below.';
+
+      if (personDataIndex !== 0) {
+        formattedMsgId = 'personIncomeBlock.createIncomeBlockQuestions-questionLabel';
+        formattedMsgDefaultMsg = 'If they receive another type of income, select it below.';
+      }
+
       const incomeStreamQuestion =
         <p className='question-label'>
           <FormattedMessage
-            id='personIncomeBlock.createIncomeBlockQuestions-questionLabel'
-            defaultMessage='If they receive another type of income, select it below.' />
+            id={formattedMsgId}
+            defaultMessage={formattedMsgDefaultMsg} />
         </p>;
       return (
         <div key={index}>
