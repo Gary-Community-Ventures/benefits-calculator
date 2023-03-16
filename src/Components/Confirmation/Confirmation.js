@@ -23,15 +23,6 @@ import './Confirmation.css';
 const Confirmation = ({ formData }) => {
   const navigate = useNavigate();
 
-  const displayAllHouseholdData = () => {
-    const { householdSize } = formData;
-    if (householdSize > 1) {
-      return displayAllMembersDataBlock();
-    } else {
-      return headOfHouseholdDataBlock();
-    }
-  }
-
   const displayAllMembersDataBlock = () => {
     const { householdData } = formData;
     const allHouseholdRelations = getAllHouseholdRelations();
