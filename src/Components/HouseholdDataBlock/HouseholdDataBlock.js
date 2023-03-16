@@ -260,6 +260,25 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
             { personData.unemployed && createUnemployed18MosRadioQuestion(index) }
             <p className='household-data-q-underline'></p>
             { createIncomeRadioQuestion(index) }
+            <p className='household-data-q-underline'></p>
+            { personData.hasIncome && createPersonIncomeBlock(index) }
+            { state.error && <ErrorMessage error={state.error} /> }
+            <div className='question-buttons'>
+              <HouseholdDataPreviousButton
+                page={page}
+                setPage={setPage}
+              />
+              <HouseholdDataContinueButton
+                page={page}
+                setPage={setPage}
+                remainingHHMNumber={remainingHHMNumber}
+                handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+                setState={setState}
+                state={state}
+              />
+            </div>
+          </div>
+        );
       } else {
         return (
           <div key={index}>
