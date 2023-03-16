@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import taxYearOptions from '../../Assets/taxYearOptions';
 import referralOptions from '../../Assets/referralOptions';
-import questions from '../../Assets/questions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import expenseOptions from '../../Assets/expenseOptions';
@@ -71,7 +70,7 @@ const Confirmation = ({ formData }) => {
       );
     });
 
-    return [headOfHouseholdDataBlock(), householdMemberDataBlocks];
+    return householdMemberDataBlocks;
   }
 
   const headOfHouseholdDataBlock = () => {
