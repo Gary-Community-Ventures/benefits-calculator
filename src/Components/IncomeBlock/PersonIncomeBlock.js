@@ -409,9 +409,13 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   }
 
   const renderReturnStmtIdOrDefaultMsg = (index) => {
-    const [formattedMsgId, formattedMsgDefaultMsg] = (index === 0) ?
-      ['personIncomeBlock.return-youQLabel', 'What type of income have you had most recently?']
-    : ['personIncomeBlock.return-questionLabel', 'What type of income have they had most recently?'];
+    let formattedMsgId = 'questions.hasIncome-a';
+    let formattedMsgDefaultMsg = 'What type of income have you had most recently?';
+
+    if (index !== 0) {
+      formattedMsgId = 'personIncomeBlock.return-questionLabel';
+      formattedMsgDefaultMsg = 'What type of income have they had most recently?';
+    }
 
     return [formattedMsgId, formattedMsgDefaultMsg];
   }
