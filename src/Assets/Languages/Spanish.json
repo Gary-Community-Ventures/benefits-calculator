@@ -34,7 +34,7 @@
   "questions.hasBenefits-description": "Por ejemplo, ¿Alguna persona en su hogar recibe beneficios públicos como asistencia alimentaria SNAP, ayuda CCCAP asistencia con los costos  de cuidado de niños, asistencia en efectivo TANF, o créditos fiscales con EITC?",
   "questions.hasBenefits-ariaLabel": "tiene beneficios",
   "questions.hasBenefits-a": "Díganos qué beneficios tiene actualmente su hogar.",
-  "questions.hasBenefits-a-description": "En la página de resultados, solo le mostraremos los nuevos beneficios para los que puede ser elegible.",
+  "questions.hasBenefits-a-description": "Esta información ayudará a garantizar que no le demos resultados de los beneficios que ya tiene.",
   "questions.hasBenefits-a-ariaLabel": "beneficios actuales",
   "questions.healthInsurance": "¿Qué tipo(s) de seguro médico tienen los miembros de su hogar? Marque todo lo que corresponda.",
   "questions.student": "¿Es estudiante?",

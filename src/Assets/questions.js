@@ -325,7 +325,7 @@ const questions = {
       questionDescription:
         <FormattedMessage
           id='questions.hasBenefits-a-description'
-          defaultMessage='We will only show you new benefits you may be eligible for on the results page.' />,
+          defaultMessage="This information will help ensure that we don't give you results for benefits you already have." />,
       name: 'benefits',
       componentDetails: {
         componentType: 'AccordionContainer',
