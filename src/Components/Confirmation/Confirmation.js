@@ -176,8 +176,12 @@ const Confirmation = ({ formData }) => {
 
   const getAllHouseholdRelations = () => {
     const { householdData } = formData;
-    const householdMembers = householdData.map(personData => {
-      return relationshipOptions[personData.relationshipToHH];
+    const householdMembers = householdData.map((personData, index) => {
+      if (index === 0) {
+        return 'Head of household';
+      } else {
+        return relationshipOptions[personData.relationshipToHH];
+      }
     });
 
     return householdMembers;
