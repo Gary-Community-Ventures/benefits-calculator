@@ -240,21 +240,39 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 
   const createIncomeAmountTextfield = (incomeStreamName, incomeAmount, index) => {
     let questionHeader;
+
 		if (selectedMenuItem[index].incomeFrequency === 'hourly') {
+      let hourlyFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
+      let hourlyFormattedMsgDefaultMsg = 'What is your hourly rate: ';
+
+      if (personDataIndex !== 0) {
+        hourlyFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
+        hourlyFormattedMsgDefaultMsg = 'What is their hourly rate: ';
+      }
+
 			questionHeader = (
 				<FormattedMessage
-					id="personIncomeBlock.createIncomeAmountTextfield-hourly-questionLabel"
-					defaultMessage="What is their hourly rate: "
+					id={hourlyFormattedMsgId}
+					defaultMessage={hourlyFormattedMsgDefaultMsg}
 				/>
 			);
 		} else {
+      let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
+      let payPeriodFormattedMsgDefaultMsg = 'How much do you receive each pay period for: ';
+
+      if (personDataIndex !== 0) {
+        payPeriodFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-questionLabel';
+        payPeriodFormattedMsgDefaultMsg = 'How much do they receive each pay period for: ';
+      }
+
 			questionHeader = (
 				<FormattedMessage
-					id="personIncomeBlock.createIncomeAmountTextfield-questionLabel"
-					defaultMessage="How much do they receive each pay period for: "
+					id={payPeriodFormattedMsgId}
+					defaultMessage={payPeriodFormattedMsgDefaultMsg}
 				/>
 			);
 		}
+
     return (
       <div>
         <p className='question-label'>
@@ -276,7 +294,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
             required
             error={incomeStreamValueHasError(selectedMenuItem[index].incomeAmount)}
             helperText={displayIncomeStreamValueHelperText(selectedMenuItem[index].incomeAmount)}
-            />
+          />
         </div>
       </div>
     );
