@@ -73,67 +73,23 @@ const Confirmation = ({ formData }) => {
     return householdMemberDataBlocks;
   }
 
-  const headOfHouseholdDataBlock = () => {
-    const { age, hasIncome, incomeStreams, hasExpenses, expenses } = formData;
+  const displayHouseholdExpenses = () => {
+    const { hasExpenses, expenses } = formData;
+
     return (
-      <div key='head-of-household-data-block'>
-        <p className='confirmation-label'>
-          <b>
-            ⚫️
-            <FormattedMessage
-              id='confirmation.headOfHouseholdDataBlock-youText'
-              defaultMessage=' You, ' />
-            { age },
-            <FormattedMessage
-              id='confirmation.headOfHouseholdDataBlock-headOfHouseholdText'
-              defaultMessage=' head of household' />
-          </b>
-          <Link to={`/step-${stepDirectory.age}`} className='edit-link'>
-            <FormattedMessage
-                id='confirmation.editLinkText'
-                defaultMessage='Edit' />
-          </Link>
-        </p>
-        <article className='confirmation-label'>
-          <b>
-            <FormattedMessage
-              id='confirmation.headOfHouseholdDataBlock-conditionsText'
-              defaultMessage='Conditions:' />
-          </b>
-          <Link to={`/step-${stepDirectory.student}`} className='edit-link'>
-            <FormattedMessage
-              id='confirmation.editLinkText'
-              defaultMessage='Edit' />
-          </Link>
-          { displayConditions(formData) }
-        </article>
-        <article className='confirmation-label'>
-          <b>
-            <FormattedMessage
-              id='confirmation.headOfHouseholdDataBlock-incomeLabel'
-              defaultMessage='Income:' />
-          </b>
-          <Link to={`/step-${stepDirectory.hasIncome}`} className='edit-link'>
-            <FormattedMessage
-              id='confirmation.editLinkText'
-              defaultMessage='Edit' />
-          </Link>
-          { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
-        </article>
-        <article className='confirmation-label'>
-          <b>
-            <FormattedMessage
-              id='confirmation.headOfHouseholdDataBlock-expensesLabel'
-              defaultMessage='Monthly Expenses:' />
-          </b>
-          <Link to={`/step-${stepDirectory.hasExpenses}`} className='edit-link'>
-            <FormattedMessage
-              id='confirmation.editLinkText'
-              defaultMessage='Edit' />
-          </Link>
-          { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul> }
-        </article>
-      </div>
+      <article className='confirmation-label'>
+        <b>
+          <FormattedMessage
+            id='confirmation.headOfHouseholdDataBlock-expensesLabel'
+            defaultMessage='Monthly Expenses:' />
+        </b>
+        <Link to={`/step-${stepDirectory.hasExpenses}`} className='edit-link'>
+          <FormattedMessage
+            id='confirmation.editLinkText'
+            defaultMessage='Edit' />
+        </Link>
+        { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul> }
+      </article>
     );
   }
 
