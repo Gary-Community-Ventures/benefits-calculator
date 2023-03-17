@@ -16,6 +16,7 @@ import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 import stepDirectory from '../../Assets/stepDirectory';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange,
   handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
@@ -252,6 +253,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
 
   return (
     <main className='benefits-form'>
+      <ProgressBar step={id}/>
       <p className='step-progress-title'>
         <FormattedMessage
           id='qcc.step-text'
@@ -272,7 +274,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
       }
     </main>
   );
-
 }
 
 export default QuestionComponentContainer;

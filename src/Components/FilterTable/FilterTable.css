@@ -1,10 +1,19 @@
+.click-off {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  z-index: 5;
+}
+
 .filterForm {
   box-sizing: border-box;
   display: block;
   position: absolute;
   border: 1px solid #b7b1b1;
   background: white;
-  z-index: 5;
+  z-index: 6;
   box-shadow: 1px 1px 10px rgb(0 0 0 / 0.4);
 }
 
@@ -18,6 +27,21 @@
 
 .filter-selection-container {
   margin: 1rem .5rem 0rem .5rem;
+}
+
+.close-container {
+  position: relative;
+  height: 1rem;
+  margin: .25rem;
+}
+
+.close {
+  position: absolute;
+  right: 0px;
+}
+
+.close:hover {
+  cursor: pointer;
 }
 
 .margin-bottom {

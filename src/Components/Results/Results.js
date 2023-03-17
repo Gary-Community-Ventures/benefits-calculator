@@ -33,10 +33,11 @@ export const isNavigationKey = (key) =>
   key.indexOf('Page') === 0 ||
   key === ' ';
 
-const Results = ({ formData }) => {
+const Results = () => {
   const { id: screenerId } = useParams()
   const navigate = useNavigate();
   const locale = useContext(Context).locale;
+  const setLocale = useContext(Context).setLocale;
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const citizenToggleState = useState(false)
@@ -110,13 +111,16 @@ const Results = ({ formData }) => {
   }, [locale, results.rawResponse])
 
   const fetchResults = async () => {
-    const rawEligibilityResponse = await getEligibility(screenerId, locale);
-    setResults({
+		const rawEligibilityResponse = await getEligibility(screenerId, locale);
+		setLocale(
+			rawEligibilityResponse.default_language === 'en-us' ? 'en-US' : 'es'
+		);
+		setResults({
 			programs: [],
 			rawResponse: rawEligibilityResponse,
 			screenerId: rawEligibilityResponse.screen_id,
 		});
-  }
+	}
 
   const responseLanguage = () => {
     const { rawResponse } = results;
@@ -202,24 +206,35 @@ const Results = ({ formData }) => {
         <>
           { navigators.map(navigator => {
             return (
-							<div className='navigator-container' key={navigator.name}>
-								<h2 className='navigator-header'>{navigator.name}</h2>
-								<p className='navigator-desc'>{navigator.description}</p>
+							<div className="navigator-container" key={navigator.name}>
+								<h2 className="navigator-header">{navigator.name}</h2>
+								<p className="navigator-desc">{navigator.description}</p>
 								{navigator.assistance_link && (
-									<h4 className='font-weight'>
+									<h4 className="font-weight">
 										Link:{' '}
 										<a
+											variant="contained"
+											target="_blank"
+											rel="noopener noreferrer"
 											href={navigator.assistance_link}
-											className='ineligibility-link navigator-info'
+											className="ineligibility-link navigator-info"
 										>
 											{navigator.assistance_link}
 										</a>
 									</h4>
 								)}
-								{navigator.email && <h4 className='font-weight'>Email: <span className="navigator-info">{navigator.email}</span></h4>}
+								{navigator.email && (
+									<h4 className="font-weight">
+										Email:{' '}
+										<span className="navigator-info">{navigator.email}</span>
+									</h4>
+								)}
 								{navigator.phone_number && (
-									<h4 className='font-weight'>
-										Phone Number: <span className="navigator-info">{formatPhoneNumber(navigator.phone_number)}</span>
+									<h4 className="font-weight">
+										Phone Number:{' '}
+										<span className="navigator-info">
+											{formatPhoneNumber(navigator.phone_number)}
+										</span>
 									</h4>
 								)}
 							</div>

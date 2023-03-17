@@ -12,7 +12,7 @@ import Header from './Components/Header/Header';
 import EmailResults2 from './Components/EmailResults/EmailResults2';
 import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
-import referralOptions from './Assets/referralOptions'
+import referralOptions from './Assets/referralOptions';
 import './App.css';
 // import { createDevFormData } from './Assets/devFormData';
 
@@ -311,9 +311,7 @@ const App = () => {
                 /> } />
             <Route
               path='/results/:id'
-              element={<Results
-                formData={formData}
-                /> } />
+              element={<Results/> } />
             <Route
               path='/email-results/:id'
               element={<EmailResults2
