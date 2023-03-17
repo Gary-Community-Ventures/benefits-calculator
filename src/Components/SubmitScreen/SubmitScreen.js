@@ -148,7 +148,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 				screensId
 			);
 		});
-		return [...otherHouseholdMembers];
+		return otherHouseholdMembers;
 	};
 
 	const getHouseholdMemberBody = (formData, relationshipToHH, screensId) => {
