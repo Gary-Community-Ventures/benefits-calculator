@@ -141,14 +141,14 @@ const SubmitScreen = ({ formData, setFormData }) => {
 	};
 
 	const getHouseholdMembersBodies = (formData, screensId) => {
-		const otherHouseholdMembers = formData.householdData.map((otherMember) => {
+		const householdMembers = formData.householdData.map((otherMember) => {
 			return getHouseholdMemberBody(
 				otherMember,
 				otherMember.relationshipToHH,
 				screensId
 			);
 		});
-		return otherHouseholdMembers;
+		return householdMembers;
 	};
 
 	const getHouseholdMemberBody = (formData, relationshipToHH, screensId) => {
