@@ -333,7 +333,8 @@ const Confirmation = ({ formData }) => {
     return (
       <>
         { displayHouseholdSizeSection() }
-        { displayAllHouseholdData() }
+        { displayAllMembersDataBlock() }
+        { displayHouseholdExpenses() }
         <p className='confirmation-section-underline'></p>
           { displayHouseholdAssetsSection() }
         <p className='confirmation-section-underline'></p>
