@@ -141,11 +141,6 @@ const SubmitScreen = ({ formData, setFormData }) => {
 	};
 
 	const getHouseholdMembersBodies = (formData, screensId) => {
-		const headOfHousehold = getHouseholdMemberBody(
-			formData,
-			'headOfHousehold',
-			screensId
-		);
 		const otherHouseholdMembers = formData.householdData.map((otherMember) => {
 			return getHouseholdMemberBody(
 				otherMember,
