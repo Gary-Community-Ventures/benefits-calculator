@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import taxYearOptions from '../../Assets/taxYearOptions';
 import referralOptions from '../../Assets/referralOptions';
-import questions from '../../Assets/questions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import expenseOptions from '../../Assets/expenseOptions';
@@ -23,15 +22,6 @@ import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
   const navigate = useNavigate();
-
-  const displayAllHouseholdData = () => {
-    const { householdSize } = formData;
-    if (householdSize > 1) {
-      return displayAllMembersDataBlock();
-    } else {
-      return headOfHouseholdDataBlock();
-    }
-  }
 
   const displayAllMembersDataBlock = () => {
     const { householdData } = formData;
@@ -81,70 +71,26 @@ const Confirmation = ({ formData }) => {
       );
     });
 
-    return [headOfHouseholdDataBlock(), householdMemberDataBlocks];
+    return householdMemberDataBlocks;
   }
 
-  const headOfHouseholdDataBlock = () => {
-    const { age, hasIncome, incomeStreams, hasExpenses, expenses } = formData;
+  const displayHouseholdExpenses = () => {
+    const { hasExpenses, expenses } = formData;
+
     return (
-      <div key='head-of-household-data-block'>
-        <p className='confirmation-label'>
-          <b>
-            ⚫️
-            <FormattedMessage
-              id='confirmation.headOfHouseholdDataBlock-youText'
-              defaultMessage=' You, ' />
-            { age },
-            <FormattedMessage
-              id='confirmation.headOfHouseholdDataBlock-headOfHouseholdText'
-              defaultMessage=' head of household' />
-          </b>
-          <Link to={`/step-${stepDirectory.age}`} className='edit-link'>
-            <FormattedMessage
-                id='confirmation.editLinkText'
-                defaultMessage='Edit' />
-          </Link>
-        </p>
-        <article className='confirmation-label'>
-          <b>
-            <FormattedMessage
-              id='confirmation.headOfHouseholdDataBlock-conditionsText'
-              defaultMessage='Conditions:' />
-          </b>
-          <Link to={`/step-${stepDirectory.student}`} className='edit-link'>
-            <FormattedMessage
-              id='confirmation.editLinkText'
-              defaultMessage='Edit' />
-          </Link>
-          { displayConditions(formData) }
-        </article>
-        <article className='confirmation-label'>
-          <b>
-            <FormattedMessage
-              id='confirmation.headOfHouseholdDataBlock-incomeLabel'
-              defaultMessage='Income:' />
-          </b>
-          <Link to={`/step-${stepDirectory.hasIncome}`} className='edit-link'>
-            <FormattedMessage
-              id='confirmation.editLinkText'
-              defaultMessage='Edit' />
-          </Link>
-          { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
-        </article>
-        <article className='confirmation-label'>
-          <b>
-            <FormattedMessage
-              id='confirmation.headOfHouseholdDataBlock-expensesLabel'
-              defaultMessage='Monthly Expenses:' />
-          </b>
-          <Link to={`/step-${stepDirectory.hasExpenses}`} className='edit-link'>
-            <FormattedMessage
-              id='confirmation.editLinkText'
-              defaultMessage='Edit' />
-          </Link>
-          { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul> }
-        </article>
-      </div>
+      <article className='confirmation-label'>
+        <b>
+          <FormattedMessage
+            id='confirmation.headOfHouseholdDataBlock-expensesLabel'
+            defaultMessage='Monthly household expenses:' />
+        </b>
+        <Link to={`/step-${stepDirectory.hasExpenses}`} className='edit-link'>
+          <FormattedMessage
+            id='confirmation.editLinkText'
+            defaultMessage='Edit' />
+        </Link>
+        { hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul> }
+      </article>
     );
   }
 
@@ -231,8 +177,12 @@ const Confirmation = ({ formData }) => {
 
   const getAllHouseholdRelations = () => {
     const { householdData } = formData;
-    const householdMembers = householdData.map(personData => {
-      return relationshipOptions[personData.relationshipToHH];
+    const householdMembers = householdData.map((personData, index) => {
+      if (index === 0) {
+        return 'Head of household';
+      } else {
+        return relationshipOptions[personData.relationshipToHH];
+      }
     });
 
     return householdMembers;
@@ -384,7 +334,9 @@ const Confirmation = ({ formData }) => {
     return (
       <>
         { displayHouseholdSizeSection() }
-        { displayAllHouseholdData() }
+        { displayAllMembersDataBlock() }
+        <p className='confirmation-section-underline'></p>
+        { displayHouseholdExpenses() }
         <p className='confirmation-section-underline'></p>
           { displayHouseholdAssetsSection() }
         <p className='confirmation-section-underline'></p>

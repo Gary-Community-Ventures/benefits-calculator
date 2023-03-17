@@ -1,24 +1,16 @@
 const stepDirectory = {
-  age: 2,
-  zipcode: 3,
-  student: 4,
-  pregnant: 5,
-  unemployed: 6,
-  blindOrVisuallyImpaired: 7,
-  disabled: 8,
-  veteran: 9,
-  hasIncome: 10,
-  hasExpenses: 11,
-  acuteHHConditions: 12,
-  hasBenefits: 13,
-  healthInsurance: 14,
+  zipcode: 2,
+  healthInsurance: 3,
   //the hhSize and hhData have to be consecutive
-  householdSize: 15,
-  householdData: 16,
-  householdAssets: 17,
-  lastTaxFilingYear: 18,
-  referralSource: 19,
-  signUpInfo: 20
+  householdSize: 4,
+  householdData: 5,
+  hasExpenses: 6,
+  householdAssets: 7,
+  lastTaxFilingYear: 8,
+  hasBenefits: 9,
+  acuteHHConditions: 10,
+  referralSource: 11,
+  signUpInfo: 12
 }
 
 export default stepDirectory;

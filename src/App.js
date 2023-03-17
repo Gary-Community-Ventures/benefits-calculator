@@ -237,9 +237,6 @@ const App = () => {
     if (!validateInputFunction(inputToBeValidated, formData)) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
         return;
-      } else if (questionName === 'householdSize' && householdSize === 1) { //if you're on the householdSize q and the value is 1
-        setFormData({ ...formData, householdData: [] });
-        navigate(`/step-${stepId + 2}`); //skip householdData question
       } else if (questionName === 'signUpInfo') {
         navigate('/confirm-information');
       } else { //you've indicated that you're householdSize is larger than 1

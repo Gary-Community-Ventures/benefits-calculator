@@ -1,6 +1,4 @@
 import {
-  ageHasError,
-  displayAgeHelperText,
   zipcodeHasError,
   displayZipcodeHelperText,
   radiofieldHasError,
@@ -9,7 +7,6 @@ import {
   householdAssetsHasError,
   displayHouseholdAssetsHelperText,
   lastTaxFilingYearHasError,
-  displayMissingTaxFilingYear,
   benefitsHasError,
   referralSourceHasError,
   displayReferralSourceHelperText,
@@ -20,7 +17,6 @@ import {
   displayHealthInsuranceHelperText,
   displayBenefitsHelperText
 } from './validationFunctions';
-import benefitOptions from './benefitOptions';
 import taxYearOptions from './taxYearOptions';
 import referralOptions from './referralOptions';
 import countiesByZipcode from './countiesByZipcode';
@@ -31,25 +27,6 @@ import stepDirectory from './stepDirectory';
 import { FormattedMessage } from 'react-intl';
 
 const questions = {
-  [stepDirectory.age]: {
-    name: 'age',
-    question:
-      <FormattedMessage
-        id='questions.age'
-        defaultMessage='How old are you?' />,
-    componentDetails: {
-      componentType: 'Textfield',
-      inputType: 'text',
-      inputName: 'age',
-      inputLabel:
-        <FormattedMessage
-          id='questions.age-inputLabel'
-          defaultMessage='Age' />,
-      inputError: ageHasError,
-      inputHelperText: displayAgeHelperText
-    },
-    headerType: 'aboutYourself'
-  },
   [stepDirectory.zipcode]: {
     name: 'zipcode',
     question:
@@ -107,234 +84,6 @@ const questions = {
     }],
     headerType: 'aboutYourself'
   },
-  [stepDirectory.student]: {
-    name: 'student',
-    question:
-      <FormattedMessage
-        id='questions.student'
-        defaultMessage='Are you a student?' />,
-    componentDetails: {
-      componentType: 'Radiofield',
-      ariaLabel: 'questions.student-ariaLabel',
-      inputName: 'student',
-      inputError: radiofieldHasError
-    },
-    followUpQuestions: [{
-      question:
-        <FormattedMessage
-          id='questions.student-a'
-          defaultMessage='Are you a full-time student?' />,
-      name: 'studentFulltime',
-      componentDetails: {
-        componentType: 'Radiofield',
-        ariaLabel: 'questions.student-a-ariaLabel',
-        inputName: 'studentFulltime',
-        inputError: radiofieldHasError
-      }
-    }],
-      headerType: 'aboutYourself'
-  },
-  [stepDirectory.pregnant]: {
-    name: 'pregnant',
-    question:
-      <FormattedMessage
-        id='questions.pregnant'
-        defaultMessage='Are you pregnant?' />,
-    componentDetails: {
-      componentType: 'Radiofield',
-      ariaLabel: 'questions.pregnant-ariaLabel',
-      inputName: 'pregnant',
-      inputError: radiofieldHasError
-    },
-    headerType: 'aboutYourself'
-  },
-  [stepDirectory.unemployed]: {
-    name: 'unemployed',
-    question:
-      <FormattedMessage
-        id='questions.unemployed'
-        defaultMessage='Are you currently unemployed?' />,
-    componentDetails: {
-      componentType: 'Radiofield',
-      ariaLabel: 'questions.unemployed-ariaLabel',
-      inputName: 'unemployed',
-      inputError: radiofieldHasError
-    },
-    followUpQuestions: [{
-      question:
-        <FormattedMessage
-          id='questions.unemployed-a'
-          defaultMessage='Did you work in the past 18 months?' />,
-      name: 'unemployedWorkedInLast18Mos',
-      componentDetails: {
-        componentType: 'Radiofield',
-        ariaLabel: 'questions.unemployed-a-ariaLabel',
-        inputName: 'unemployedWorkedInLast18Mos',
-        inputError: radiofieldHasError
-      }
-    }],
-    headerType: 'aboutYourself'
-  },
-  [stepDirectory.blindOrVisuallyImpaired]: {
-    name: 'blindOrVisuallyImpaired',
-    question:
-      <FormattedMessage
-        id='questions.blindOrVisuallyImpaired'
-        defaultMessage='Are you blind or visually impaired?' />,
-    questionDescription:
-      <FormattedMessage
-        id='questions.blindOrVisuallyImpaired-description'
-        defaultMessage='"Visually impaired" means you cannot correct your vision to a "normal" level.'
-        />,
-    componentDetails: {
-      componentType: 'Radiofield',
-      ariaLabel: 'questions.blindOrVisuallyImpaired-ariaLabel',
-      inputName: 'blindOrVisuallyImpaired',
-      inputError: radiofieldHasError
-    },
-    headerType: 'aboutYourself'
-  },
-  [stepDirectory.disabled]: {
-    name: 'disabled',
-    question:
-      <FormattedMessage
-        id='questions.disabled'
-        defaultMessage='Do you have any disabilities that make you unable to work now or in the future?' />,
-    componentDetails: {
-      componentType: 'Radiofield',
-      ariaLabel: 'questions.disabled-ariaLabel',
-      inputName: 'disabled',
-      inputError: radiofieldHasError
-    },
-    headerType: 'aboutYourself'
-  },
-  [stepDirectory.veteran]: {
-    name: 'veteran',
-    question:
-      <FormattedMessage
-        id='questions.veteran'
-        defaultMessage='Do you serve or have you served in the U.S. Armed Forces, National Guard or Reserves?' />,
-    componentDetails: {
-      componentType: 'Radiofield',
-      ariaLabel: 'questions.veteran-ariaLabel',
-      inputName: 'veteran',
-      inputError: radiofieldHasError
-    },
-    headerType: 'aboutYourself'
-  },
-  [stepDirectory.hasIncome]: {
-    name: 'hasIncome',
-    question:
-      <FormattedMessage
-        id='questions.hasIncome'
-        defaultMessage='Do you have an income?' />,
-    questionDescription:
-      <FormattedMessage
-        id='questions.hasIncome-description'
-        defaultMessage='Income is the money you earn or receive before deducting taxes.
-          This includes money from jobs, alimony, investments, or gifts. Enter income for yourself only.
-          You will have a chance to enter income for other household members later.' />,
-    componentDetails: {
-      componentType: 'Radiofield',
-      ariaLabel: 'questions.hasIncome-ariaLabel',
-      inputName: 'hasIncome',
-      inputError: radiofieldHasError
-    },
-    followUpQuestions: [{
-      question:
-        <FormattedMessage
-          id='questions.hasIncome-a'
-          defaultMessage='What type of income have you had most recently?' />,
-      name: 'incomeStreams',
-      componentDetails: {
-        componentType: 'IncomeBlock',
-        ariaLabel: 'questions.hasIncome-a-ariaLabel',
-        inputName: 'incomeStreams'
-      }
-    }],
-    headerType: 'aboutYourself'
-  },
-  [stepDirectory.hasExpenses]: {
-    name: 'hasExpenses',
-    question:
-      <FormattedMessage
-        id='questions.hasExpenses'
-        defaultMessage='Does your household have any expenses?' />,
-    questionDescription:
-      <FormattedMessage
-        id='questions.hasExpenses-description'
-        defaultMessage='Add up expenses for everyone who lives in your home.
-          This includes costs like child care, child support, rent, medical expenses, heating bills, and more.
-          We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits.' />,
-    componentDetails: {
-      componentType: 'Radiofield',
-      ariaLabel: 'questions.hasExpenses-ariaLabel',
-      inputName: 'hasExpenses',
-      inputError: radiofieldHasError
-    },
-    followUpQuestions: [{
-      question:
-        <FormattedMessage
-          id='questions.hasExpenses-a'
-          defaultMessage='What type of expense has your household had most recently?' />,
-      name: 'expenses',
-      componentDetails: {
-        componentType: 'ExpenseBlock',
-        ariaLabel: 'questions.hasExpenses-a-ariaLabel',
-        inputName: 'expenses'
-      }
-    }],
-    headerType: 'aboutHousehold'
-  },
-  [stepDirectory.acuteHHConditions]: {
-    name: 'acuteHHConditions',
-    question:
-      <FormattedMessage
-        id='questions.acuteHHConditions'
-        defaultMessage='Is anyone in your household in immediate need of help with any of the following?' />,
-    componentDetails: {
-      componentType: 'BasicCheckboxGroup',
-      inputName: 'acuteHHConditions',
-      options: acuteConditionOptions,
-      inputError: acuteHHConditionsHasError
-    },
-    headerType: 'aboutHousehold'
-  },
-  [stepDirectory.hasBenefits]: {
-    name: 'hasBenefits',
-    question:
-      <FormattedMessage
-        id='questions.hasBenefits'
-        defaultMessage='Does your household currently have any benefits?' />,
-    questionDescription:
-      <FormattedMessage
-        id='questions.hasBenefits-description'
-        defaultMessage='For example, does any person in your household receive public benefits like SNAP food assistance, CCCAP help with child care costs, TANF cash assistance, or tax credits like EITC?' />,
-    componentDetails: {
-      componentType: 'Radiofield',
-      ariaLabel: 'questions.hasBenefits-ariaLabel',
-      inputName: 'hasBenefits',
-      inputError: benefitsHasError,
-      inputHelperText: displayBenefitsHelperText
-    },
-    followUpQuestions: [{
-      question:
-        <FormattedMessage
-          id='questions.hasBenefits-a'
-          defaultMessage='Please tell us what benefits your household currently has.' />,
-      questionDescription:
-        <FormattedMessage
-          id='questions.hasBenefits-a-description'
-          defaultMessage='We will only show you new benefits you may be eligible for on the results page.' />,
-      name: 'benefits',
-      componentDetails: {
-        componentType: 'AccordionContainer',
-        ariaLabel: 'questions.hasBenefits-a-ariaLabel',
-        inputName: 'benefits'
-      }
-    }],
-    headerType: 'aboutHousehold'
-  },
   [stepDirectory.healthInsurance]: {
     name: 'healthInsurance',
     question:
@@ -375,16 +124,43 @@ const questions = {
   },
   [stepDirectory.householdData]: {
     name: 'householdData',
-    question:
-      <FormattedMessage
-        id='questions.householdData'
-        defaultMessage='Tell us about the next person in your household.' />,
     componentDetails: {
       componentType: 'HouseholdDataBlock',
       ariaLabel: 'questions.householdData-ariaLabel',
       inputName: 'householdData'
+    }
+  },
+  [stepDirectory.hasExpenses]: {
+    name: 'hasExpenses',
+    question:
+      <FormattedMessage
+        id='questions.hasExpenses'
+        defaultMessage='Does your household have any expenses?' />,
+    questionDescription:
+      <FormattedMessage
+        id='questions.hasExpenses-description'
+        defaultMessage='Add up expenses for everyone who lives in your home.
+          This includes costs like child care, child support, rent, medical expenses, heating bills, and more.
+          We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits.' />,
+    componentDetails: {
+      componentType: 'Radiofield',
+      ariaLabel: 'questions.hasExpenses-ariaLabel',
+      inputName: 'hasExpenses',
+      inputError: radiofieldHasError
     },
-    headerType: 'householdData'
+    followUpQuestions: [{
+      question:
+        <FormattedMessage
+          id='questions.hasExpenses-a'
+          defaultMessage='What type of expense has your household had most recently?' />,
+      name: 'expenses',
+      componentDetails: {
+        componentType: 'ExpenseBlock',
+        ariaLabel: 'questions.hasExpenses-a-ariaLabel',
+        inputName: 'expenses'
+      }
+    }],
+    headerType: 'aboutHousehold'
   },
   [stepDirectory.householdAssets]: {
     name: 'householdAssets',
@@ -443,6 +219,55 @@ const questions = {
             defaultMessage='Select a Tax Year' />
       },
       options: taxYearOptions
+    },
+    headerType: 'aboutHousehold'
+  },
+  [stepDirectory.hasBenefits]: {
+    name: 'hasBenefits',
+    question:
+      <FormattedMessage
+        id='questions.hasBenefits'
+        defaultMessage='Does your household currently have any benefits?' />,
+    questionDescription:
+      <FormattedMessage
+        id='questions.hasBenefits-description'
+        defaultMessage='For example, does any person in your household receive public benefits like SNAP food assistance, CCCAP help with child care costs, TANF cash assistance, or tax credits like EITC?' />,
+    componentDetails: {
+      componentType: 'Radiofield',
+      ariaLabel: 'questions.hasBenefits-ariaLabel',
+      inputName: 'hasBenefits',
+      inputError: benefitsHasError,
+      inputHelperText: displayBenefitsHelperText
+    },
+    followUpQuestions: [{
+      question:
+        <FormattedMessage
+          id='questions.hasBenefits-a'
+          defaultMessage='Please tell us what benefits your household currently has.' />,
+      questionDescription:
+        <FormattedMessage
+          id='questions.hasBenefits-a-description'
+          defaultMessage="This information will help ensure that we don't give you results for benefits you already have." />,
+      name: 'benefits',
+      componentDetails: {
+        componentType: 'AccordionContainer',
+        ariaLabel: 'questions.hasBenefits-a-ariaLabel',
+        inputName: 'benefits'
+      }
+    }],
+    headerType: 'aboutHousehold'
+  },
+  [stepDirectory.acuteHHConditions]: {
+    name: 'acuteHHConditions',
+    question:
+      <FormattedMessage
+        id='questions.acuteHHConditions'
+        defaultMessage='Is anyone in your household in immediate need of help with any of the following?' />,
+    componentDetails: {
+      componentType: 'BasicCheckboxGroup',
+      inputName: 'acuteHHConditions',
+      options: acuteConditionOptions,
+      inputError: acuteHHConditionsHasError
     },
     headerType: 'aboutHousehold'
   },

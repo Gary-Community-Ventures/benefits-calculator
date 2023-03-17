@@ -28,7 +28,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
   const createHouseholdDataBlock = () => {
     return (
       <div className='question-container' id={id}>
-        <p className='question-label household-data-q-underline'>{matchingQuestion.question}</p>
         <HouseholdDataBlock
           formData={formData}
           handleHouseholdDataSubmit={handleHouseholdDataSubmit} />
@@ -223,26 +222,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
             id='qcc.optional-sign-up-text'
             defaultMessage='Optional: Sign up for benefits updates and/or paid feedback opportunities' />
         </h2>
-      );
-    } else if (matchingQuestion.headerType === 'householdData') {
-      return (
-        <>
-          <h2 className='household-data-sub-header'>
-            <FormattedMessage
-              id='qcc.so-far-text'
-              defaultMessage='So far you’ve told us about:' />
-          </h2>
-          <h4 className='household-data-sub2-header'>
-            ⚫️
-            <FormattedMessage
-              id='qcc.you-text'
-              defaultMessage=' You, ' />
-            {formData.age}
-            <FormattedMessage
-              id='qcc.hoh-text'
-              defaultMessage=' Head of household' />
-          </h4>
-        </>
       );
     } else if (matchingQuestion.headerType === 'aboutYourself') {
       return (
