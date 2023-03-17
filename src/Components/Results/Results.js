@@ -206,24 +206,35 @@ const Results = () => {
         <>
           { navigators.map(navigator => {
             return (
-							<div className='navigator-container' key={navigator.name}>
-								<h2 className='navigator-header'>{navigator.name}</h2>
-								<p className='navigator-desc'>{navigator.description}</p>
+							<div className="navigator-container" key={navigator.name}>
+								<h2 className="navigator-header">{navigator.name}</h2>
+								<p className="navigator-desc">{navigator.description}</p>
 								{navigator.assistance_link && (
-									<h4 className='font-weight'>
+									<h4 className="font-weight">
 										Link:{' '}
 										<a
+											variant="contained"
+											target="_blank"
+											rel="noopener noreferrer"
 											href={navigator.assistance_link}
-											className='ineligibility-link navigator-info'
+											className="ineligibility-link navigator-info"
 										>
 											{navigator.assistance_link}
 										</a>
 									</h4>
 								)}
-								{navigator.email && <h4 className='font-weight'>Email: <span className="navigator-info">{navigator.email}</span></h4>}
+								{navigator.email && (
+									<h4 className="font-weight">
+										Email:{' '}
+										<span className="navigator-info">{navigator.email}</span>
+									</h4>
+								)}
 								{navigator.phone_number && (
-									<h4 className='font-weight'>
-										Phone Number: <span className="navigator-info">{formatPhoneNumber(navigator.phone_number)}</span>
+									<h4 className="font-weight">
+										Phone Number:{' '}
+										<span className="navigator-info">
+											{formatPhoneNumber(navigator.phone_number)}
+										</span>
 									</h4>
 								)}
 							</div>
