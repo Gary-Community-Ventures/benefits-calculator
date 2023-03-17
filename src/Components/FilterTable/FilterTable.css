@@ -32,6 +32,7 @@
 .close-container {
   position: relative;
   height: 1rem;
+  margin: .25rem;
 }
 
 .close {
