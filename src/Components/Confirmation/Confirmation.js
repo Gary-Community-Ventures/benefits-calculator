@@ -18,6 +18,7 @@ import transportationBenefits from '../../Assets/BenefitCategoryLists/transporta
 import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBenefits';
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
 import stepDirectory from '../../Assets/stepDirectory';
+import ProgressBar from '../ProgressBar/ProgressBar';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
@@ -491,6 +492,7 @@ const Confirmation = ({ formData }) => {
 
   return (
     <div className='benefits-form'>
+      <ProgressBar step={totalNumberOfQuestions()}/>
       <p className='step-progress-title'>
         <FormattedMessage
           id='confirmation.return-stepLabel'
