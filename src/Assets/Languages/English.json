@@ -270,7 +270,7 @@
   "confirmation.headOfHouseholdDataBlock-medicaidText": "Receiving Medicaid",
   "confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText": "Receiving disability-related Medicaid",
   "confirmation.headOfHouseholdDataBlock-incomeLabel": "Income:",
-  "confirmation.headOfHouseholdDataBlock-expensesLabel": "Monthly Expenses:",
+  "confirmation.headOfHouseholdDataBlock-expensesLabel": "Monthly household expenses:",
   "confirmation.displayAllFormData-currentHHBenefitsText": "Household benefits:",
   "confirmation.displayAllFormData-healthInsurance": "Household health insurance: ",
   "confirmation.displayAllFormData-acuteHHConditions": "Immediate Needs:",

@@ -81,7 +81,7 @@ const Confirmation = ({ formData }) => {
         <b>
           <FormattedMessage
             id='confirmation.headOfHouseholdDataBlock-expensesLabel'
-            defaultMessage='Monthly Expenses:' />
+            defaultMessage='Monthly household expenses:' />
         </b>
         <Link to={`/step-${stepDirectory.hasExpenses}`} className='edit-link'>
           <FormattedMessage
@@ -334,6 +334,7 @@ const Confirmation = ({ formData }) => {
       <>
         { displayHouseholdSizeSection() }
         { displayAllMembersDataBlock() }
+        <p className='confirmation-section-underline'></p>
         { displayHouseholdExpenses() }
         <p className='confirmation-section-underline'></p>
           { displayHouseholdAssetsSection() }
