@@ -24,6 +24,10 @@ const acuteConditionOptions = {
   loss:
     <FormattedMessage 
       id='acuteConditionOptions.loss' 
+      defaultMessage='Funeral, burial, or cremation costs' />,
+  familyPlanning:
+    <FormattedMessage
+      id='acuteConditionOptions.loss'
       defaultMessage='Funeral, burial, or cremation costs' />
 };
 
