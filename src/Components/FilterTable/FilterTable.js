@@ -16,9 +16,11 @@ const Filter = ({
 	eligibilityState,
 	categoryState,
 	citizenToggleState,
+	alreadyHasToggleState
 }) => {
 	const [showFilters, setShowFilter] = useState(false);
 	const [citizenshipToggle, setCitizenshipToggle] = citizenToggleState;
+	const [alreadyHasToggle, setAlreadyHasToggle] = alreadyHasToggleState;
 	const [eligibilitySelected, setEligibilitySelected] = eligibilityState;
 	const [categorySelected, setCategorySelected] = categoryState;
 
@@ -47,26 +49,10 @@ const Filter = ({
 				value: 'true',
 			},
 		};
-		const hasBenefitFilters = {
-			eligibleBenefits: {
-				id: 3,
-				columnField: 'has_benefit',
-				operatorValue: 'is',
-				value: 'false',
-			},
-			ineligibleBenefits: {
-				id: 3,
-				columnField: 'has_benefit',
-				operatorValue: 'is',
-				value: 'false',
-			},
-			alreadyHave: false,
-		};
 
 		setEligibilitySelected(event.target.value);
 		updateFilter(
 			{ name: 'eligible', filter: eligibilityFilters[event.target.value] },
-			{ name: 'hasBenefit', filter: hasBenefitFilters[event.target.value] }
 		);
 	};
 
@@ -87,7 +73,7 @@ const Filter = ({
 		setCategorySelected(event.target.value);
 	};
 
-	const handleCustomSwitchToggle = (event) => {
+	const handleCitizenToggle = (event) => {
 		// Filter out citizen benefits when toggle is on
 		// Filter out non-citizen benifits when toggle is off
 		if (event.target.checked) {
@@ -114,6 +100,26 @@ const Filter = ({
 		setCitizenshipToggle(event.target.checked);
 	};
 
+	const handleAlreadyHasToggle = (event) => {
+		if (event.target.checked) {
+			updateFilter({
+				name: 'hasBenefit',
+				filter: false,
+			});
+		} else {
+			updateFilter({
+				name: 'hasBenefit',
+				filter: {
+					id: 3,
+					columnField: 'has_benefit',
+					operatorValue: 'is',
+					value: 'false',
+				},
+			});
+		}
+		setAlreadyHasToggle(event.target.checked);
+	};
+
 	return (
 		<div className="filter">
 			<span className="filters-button" onClick={toggleFilterForm}>
@@ -127,24 +133,43 @@ const Filter = ({
 				<>
 					<div className="click-off" onClickCapture={toggleFilterForm}></div>
 					<div className="filterForm">
-						<div className='close-container'>
-							<CloseIcon onClick={toggleFilterForm} className="close"/>
+						<div className="close-container">
+							<CloseIcon onClick={toggleFilterForm} className="close" />
 						</div>
-						<FormControlLabel
-							className="toggle"
-							label={
-								<FormattedMessage
-									id="results.returnSignupCitizenFilter"
-									defaultMessage="Only show benefits that do not require a citizen or qualified non-citizen in the household"
-								/>
-							}
-							control={
-								<CustomSwitch
-									handleCustomSwitchToggle={handleCustomSwitchToggle}
-									checked={citizenshipToggle}
-								/>
-							}
-						/>
+						<div>
+							<FormControlLabel
+								className="toggle"
+								label={
+									<FormattedMessage
+										id="results.returnSignupCitizenFilter"
+										defaultMessage="Only show benefits that do not require a citizen or qualified non-citizen in the household"
+									/>
+								}
+								control={
+									<CustomSwitch
+										handleCustomSwitchToggle={handleCitizenToggle}
+										checked={citizenshipToggle}
+									/>
+								}
+							/>
+						</div>
+						<div>
+							<FormControlLabel
+								className="toggle"
+								label={
+									<FormattedMessage
+										id="filter.filterAlreadyHave"
+										defaultMessage="Benefits I Already Have"
+									/>
+								}
+								control={
+									<CustomSwitch
+										handleCustomSwitchToggle={handleAlreadyHasToggle}
+										checked={alreadyHasToggle}
+									/>
+								}
+							/>
+						</div>
 						<div className="filter-selection-container">
 							<FormControl className="full-width">
 								<FormLabel
@@ -185,19 +210,6 @@ const Filter = ({
 												<FormattedMessage
 													id="filter.filterInEligible"
 													defaultMessage="Ineligible"
-												/>
-											}
-										/>
-									</article>
-									<article className="radio-option">
-										<FormControlLabel
-											checked={eligibilitySelected === 'alreadyHave'}
-											value="alreadyHave"
-											control={<Radio />}
-											label={
-												<FormattedMessage
-													id="filter.filterAlreadyHave"
-													defaultMessage="Benefits I Already Have"
 												/>
 											}
 										/>
