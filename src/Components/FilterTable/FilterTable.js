@@ -159,7 +159,7 @@ const Filter = ({
 								label={
 									<FormattedMessage
 										id="filter.filterAlreadyHave"
-										defaultMessage="Benefits I Already Have"
+										defaultMessage="Include benefits that I already have"
 									/>
 								}
 								control={
