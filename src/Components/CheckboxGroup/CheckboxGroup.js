@@ -25,10 +25,11 @@ const CheckboxGroup = ({ options, state, setState, index }) => {
     const formControlLabels = optionKeys.map((optionKey) => {
       let label = optionList[optionKey];
       if (index !== 0 && optionKey === 'disabled') {
-        label = <FormattedMessage
-          id='checkboxGroup.disabledLabel'
-          defaultMessage='Have any disabilities that make them unable to work now or in the future'
-        />
+        label =
+          <FormattedMessage
+            id='checkboxGroup.disabledLabel'
+            defaultMessage='Have any disabilities that make them unable to work now or in the future'
+          />;
       }
 
       return (
