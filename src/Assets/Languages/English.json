@@ -142,6 +142,7 @@
   "conditionOptions.unemployed": "Unemployed",
   "conditionOptions.blindOrVisuallyImpaired": "Blind or visually impaired",
   "conditionOptions.disabled": "Have any disabilities that make you unable to work now or in the future",
+  "checkboxGroup.disabledLabel": "Have any disabilities that make them unable to work now or in the future",
   "conditionOptions.veteran": "Are serving or have served in the U.S. Armed Forces, National Guard or Reserves",
   "conditionOptions.noneOfTheseApply": "None of these apply",
   "householdDataBlock.createFTStudentRadioQuestion-ariaLabel": "is a full-time student",
