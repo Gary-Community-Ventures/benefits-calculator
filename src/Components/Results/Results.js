@@ -2,11 +2,12 @@ import { useEffect, useState, useContext, useRef } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails, Modal } from '@mui/material';
 import Filter from '../FilterTable/FilterTable.js'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
+import ShareIcon from '@mui/icons-material/Share';
 import Grid from '@mui/material/Grid';
 import {
 	DataGridPro,
@@ -19,6 +20,7 @@ import {
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
+import Share from '../Share/Share'
 import Toolbar from '@mui/material/Toolbar';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
@@ -39,6 +41,7 @@ const Results = () => {
   const locale = useContext(Context).locale;
   const setLocale = useContext(Context).setLocale;
   const intl = useIntl();
+  const [shareOpen, setShareOpen] = useState(false)
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const citizenToggleState = useState(false)
 	const eligibilityState = useState('eligibleBenefits');
@@ -250,25 +253,51 @@ const Results = () => {
 
   const displaySubheader = () => {
     return (
-      <>
-        <Grid xs={12} item={true}>
-          <Typography className='sub-header' variant='h6'>
-            {totalEligiblePrograms(results.programs)}
-            <FormattedMessage
-              id='results.return-programsUpToLabel'
-              defaultMessage=' programs, up to ' />
-            ${totalDollarAmount(results.programs).toLocaleString()}
-            <FormattedMessage
-              id='results.return-perYearOrLabel'
-              defaultMessage=' per year or ' />
-            ${Math.round(totalDollarAmount(results.programs)/12).toLocaleString()}
-            <FormattedMessage
-              id='results.return-perMonthLabel'
-              defaultMessage=' per month in cash or reduced expenses for you to consider' />
-          </Typography>
-        </Grid>
-      </>
-    );
+			<>
+				<Grid xs={10} item>
+					<Typography variant="h6">
+						{totalEligiblePrograms(results.programs)}
+						<FormattedMessage
+							id="results.return-programsUpToLabel"
+							defaultMessage=" programs, up to "
+						/>
+						${totalDollarAmount(results.programs).toLocaleString()}
+						<FormattedMessage
+							id="results.return-perYearOrLabel"
+							defaultMessage=" per year or "
+						/>
+						$
+						{Math.round(
+							totalDollarAmount(results.programs) / 12
+						).toLocaleString()}
+						<FormattedMessage
+							id="results.return-perMonthLabel"
+							defaultMessage=" per month in cash or reduced expenses for you to consider"
+						/>
+					</Typography>
+				</Grid>
+				<Grid xs={2} item className="share-button-container">
+					<Button
+            className="share-button"
+						variant="contained"
+						startIcon={<ShareIcon />}
+						onClick={() => {
+							setShareOpen(true);
+						}}
+					>
+						Share
+					</Button>
+					<Modal
+						open={shareOpen}
+						onClose={() => {
+							setShareOpen(false);
+						}}
+					>
+						<Share />
+					</Modal>
+				</Grid>
+			</>
+		);
   }
 
   const displayFooter = () => {
@@ -610,18 +639,19 @@ const Results = () => {
 
   const displayHeaderSection = () => {
     return (
-      <Grid container xs={12} item={true} sx={{mt: 2}} >
-        <Grid xs={12} item={true}>
-          <Typography className='body2'>
-            <FormattedMessage
-              id='results.return-screenerIdLabel'
-              defaultMessage='Screener ID: ' />
-            {results.screenerId}
-          </Typography>
-        </Grid>
-        { displaySubheader() }
-      </Grid>
-    );
+			<Grid container item xs={12} sx={{ mt: 2 }}>
+				<Grid xs={12} item={true}>
+					<Typography className="body2">
+						<FormattedMessage
+							id="results.return-screenerIdLabel"
+							defaultMessage="Screener ID: "
+						/>
+						{results.screenerId}
+					</Typography>
+				</Grid>
+				<Grid className="bottom-border" container item xs={12}>{displaySubheader()}</Grid>
+			</Grid>
+		);
   }
 
   const displayResultsFilterButtons = () => {

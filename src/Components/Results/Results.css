@@ -1,3 +1,12 @@
+.share-button-container {
+  text-align: right;
+  padding-bottom: .5rem;
+}
+
+.share-button {
+  width: fit-content;
+}
+
 .ineligibility-link {
   margin: 0;
   color: #0096B0;
@@ -60,7 +69,7 @@
 }
 
 .results-filter-button-grey {
-  background-color: #8d8d8d;
+  background-color: #8d8d8d !important;
 }
 
 .navigator-info {
