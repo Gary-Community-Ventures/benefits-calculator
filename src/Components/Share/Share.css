@@ -3,15 +3,26 @@ body {
   padding: 0 !important;
 }
 
+button {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
 .container {
   background-color: white;
   position: absolute;
+  width: 500px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 2rem;
   border: 1px solid black;
   border-radius: 1rem;
+}
+
+.header {
+  text-align: center;
 }
 
 .icons {
@@ -34,6 +45,7 @@ body {
   white-space: nowrap;
   max-width: 0px;
   transition: max-width 1s;
+  font-size: 16px;
 }
 
 .icon:hover {
@@ -64,11 +76,24 @@ body {
   color: white
 }
 
+.messenger {
+  background-color: #2196f3;
+  color: white;
+}
+
+.messenger-icon {
+  width: 24px;
+  height: 24px;
+}
+
 .copied {
   text-align: center;
 }
 
 @media (max-width: 600px) {
+  .container {
+    width: 80%;
+  }
   .icons {
     flex-direction: column;
   }

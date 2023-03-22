@@ -2,6 +2,7 @@ import {forwardRef, useState} from 'react'
 import {
 	EmailShareButton,
 	FacebookShareButton,
+	FacebookMessengerShareButton,
 	HatenaShareButton,
 	InstapaperShareButton,
 	LineShareButton,
@@ -19,6 +20,7 @@ import {
 	VKShareButton,
 	WhatsappShareButton,
 	WorkplaceShareButton,
+	FacebookMessengerIcon,
 } from 'react-share';
 import EmailIcon from '@mui/icons-material/Email';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -29,6 +31,7 @@ import './Share.css'
 
 const Share = forwardRef(() => {
   const shareUrl = 'https://screener.myfriendben.org/step-0?test=true';
+  const appId = '1268913277361574'
   const [copied, setCopied] = useState(false)
 
   const copyLink = () => {
@@ -52,7 +55,7 @@ const Share = forwardRef(() => {
 
 	return (
 		<div className="container">
-			<h2>Share MyFriendBen with a friend:</h2>
+			<h2 className="header">Share MyFriendBen with a friend:</h2>
 			<div className="icons">
 				<FacebookShareButton url={shareUrl}>
 					<Icon name="Facebook" color="facebook">
@@ -74,19 +77,20 @@ const Share = forwardRef(() => {
 						<WhatsAppIcon />
 					</Icon>
 				</WhatsappShareButton>
-				<span onClick={copyLink}>
+				<FacebookMessengerShareButton url={shareUrl} appId={appId}>
+					<Icon name="Messenger" color="messenger">
+						<FacebookMessengerIcon className="messenger-icon" />
+					</Icon>
+				</FacebookMessengerShareButton>
+				<button onClick={copyLink} className="button-no-format">
 					<Icon name="Copy Link" color="gray">
 						<LinkIcon />
 					</Icon>
-				</span>
+				</button>
 			</div>
-      { copied && (
-        <div className="copied">
-          Copied
-        </div>
-)}
+			{copied && <div className="copied">Copied</div>}
 		</div>
-	)
+	);
 });
 
 export default Share;
