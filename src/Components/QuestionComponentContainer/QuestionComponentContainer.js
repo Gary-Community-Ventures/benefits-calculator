@@ -8,7 +8,7 @@ import IncomeBlock from '../IncomeBlock/IncomeBlock';
 import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
-import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
+import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import SignUp from '../SignUp/SignUp';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import AccordionsContainer from '../../Components/AccordionsContainer/AccordionsContainer';
@@ -53,9 +53,9 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     );
   }
 
-  const renderBasicCheckboxGroup = (question) => {
+  const renderOptionCardGroup = (question) => {
     return (
-      <BasicCheckboxGroup
+      <OptionCardGroup
         stateVariable={question.componentDetails.inputName}
         options={question.componentDetails.options}
         state={formData}
@@ -269,7 +269,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         ( matchingQuestion.componentDetails.componentType === 'Textfield' && createComponent(renderTextfieldComponent(matchingQuestion)) ) ||
         ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createComponent(renderRadiofieldComponent(matchingQuestion)) ) ||
         ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() ) ||
-        ( matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' && createComponent(renderBasicCheckboxGroup(matchingQuestion)) ) ||
+        ( matchingQuestion.componentDetails.componentType === 'OptionCardGroup' && createComponent(renderOptionCardGroup(matchingQuestion)) ) ||
         ( matchingQuestion.componentDetails.componentType === 'BasicSelect' && createComponent(renderBasicSelectComponent(matchingQuestion)) )
       }
     </main>
