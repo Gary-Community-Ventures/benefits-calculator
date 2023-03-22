@@ -12,11 +12,12 @@ import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import SignUp from '../SignUp/SignUp';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import AccordionsContainer from '../../Components/AccordionsContainer/AccordionsContainer';
+import stepDirectory from '../../Assets/stepDirectory';
+import ProgressBar from '../ProgressBar/ProgressBar';
+import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
-import stepDirectory from '../../Assets/stepDirectory';
-import ProgressBar from '../ProgressBar/ProgressBar';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange,
   handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
@@ -54,13 +55,24 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
   }
 
   const renderBasicCheckboxGroup = (question) => {
-    return (
-      <BasicCheckboxGroup
-        stateVariable={question.componentDetails.inputName}
-        options={question.componentDetails.options}
-        state={formData}
-        setState={setFormData} />
-    );
+    if ((question.name === 'healthInsurance') || (question.name === 'acuteHHConditions')) {
+      return (
+        <OptionCardGroup
+          stateVariable={question.componentDetails.inputName}
+          options={question.componentDetails.options}
+          state={formData}
+          setState={setFormData}
+        />
+      );
+    } else {
+      return (
+        <BasicCheckboxGroup
+          stateVariable={question.componentDetails.inputName}
+          options={question.componentDetails.options}
+          state={formData}
+          setState={setFormData} />
+      );
+    }
   }
 
   const renderBasicSelectComponent = (question) => {
