@@ -321,8 +321,7 @@ const Confirmation = ({ formData }) => {
   }
 
   const refactorOptionsList = (options) => {
-    const newOptionsList = {...options};
-    return Object.keys(newOptionsList).reduce((acc, option) => {
+    return Object.keys(options).reduce((acc, option) => {
       acc[option] = options[option].formattedMessage;
       return acc;
     }, {});
