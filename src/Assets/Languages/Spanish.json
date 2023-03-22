@@ -356,7 +356,7 @@
   "healthInsuranceOptions.private": "Seguro médico privado",
   "healthInsuranceOptions.medicaid": "Seguro de salud público gratuito o de bajo costo a través de Health First Colorado (Medicaid)",
   "healthInsuranceOptions.medicare": "Seguro médico del estado (Medicare)",
-  "healthInsuranceOptions.chp": "Seguro de salud de bajo costo para niños pequeños y mujeres embarazadas a través de Child Health Plan Plus (CHP+)",
+  "healthInsuranceOptions.chp": "Seguro Child Health Plan Plus (CHP+) para niños y mujeres embarazadas",
   "healthInsuranceOptions.none": "Uno o más miembros del hogar no tienen seguro médico",
   "acuteConditionOptions.food": "Alimentos o comestibles",
   "acuteConditionOptions.babySupplies": "Pañales y otros suministros para bebés",
