@@ -26,6 +26,7 @@ const OptionCardGroup = ({ stateVariable, options, state, setState }) => {
       return (
         <CardActionArea
           key={index}
+          sx={{ width: '179px' }}
         >
           <Card
             className={state[stateVariable][optionKey] ? 'selected-option-card' : 'unselected-option-card'}
