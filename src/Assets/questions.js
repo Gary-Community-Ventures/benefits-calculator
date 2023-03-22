@@ -264,7 +264,7 @@ const questions = {
         id='questions.acuteHHConditions'
         defaultMessage='Is anyone in your household in immediate need of help with any of the following?' />,
     componentDetails: {
-      componentType: 'BasicCheckboxGroup',
+      componentType: 'OptionCardGroup',
       inputName: 'acuteHHConditions',
       options: acuteConditionOptions,
       inputError: acuteHHConditionsHasError
