@@ -15,7 +15,7 @@ const acuteConditionOptions = {
     image: cart
   },
   babySupplies: {
-    formattedMessage:  <FormattedMessage
+    formattedMessage: <FormattedMessage
       id='acuteConditionOptions.babySupplies'
       defaultMessage='Diapers and other baby supplies'
     />,
