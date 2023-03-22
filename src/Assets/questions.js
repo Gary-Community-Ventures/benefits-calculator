@@ -91,7 +91,7 @@ const questions = {
         id='questions.healthInsurance'
         defaultMessage='Which type(s) of health insurance do members of your household have? Check all that apply.' />,
     componentDetails: {
-      componentType: 'BasicCheckboxGroup',
+      componentType: 'OptionCardGroup',
       inputName: 'healthInsurance',
       options: healthInsuranceOptions,
       inputError: healthInsuranceHasError,
