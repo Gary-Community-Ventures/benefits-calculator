@@ -1,0 +1,22 @@
+.option-card-image {
+  display: flex;
+  justify-content: center;
+}
+
+.unselected-option-card.MuiPaper-root {
+  box-shadow: 0px 1px 5px 0px #00000040;
+}
+
+.selected-option-card.MuiPaper-root {
+  background-color: #e5f4f8;
+  border: 1.2px solid rgba(0, 150, 176, 0.7);
+  box-shadow: 0px 1px 5px 0px #00000040;
+}
+
+.option-card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 30px;
+  width: 806px;
+  margin-bottom: 1.5rem;
+}
