@@ -1,6 +1,6 @@
 .share-button-container {
-  text-align: right;
-  padding-bottom: .5rem;
+  text-align: center;
+  padding: 10px 0 2rem 0;
 }
 
 .ineligibility-link {
@@ -8,7 +8,7 @@
   color: #0096B0;
   -webkit-text-decoration: underline;
   text-decoration: underline;
-  text-decoration-color: rgba(25, 118, 210, 0.4);
+  text-decoration-color: #1976d266;
   font-size: 1rem;
 }
 
@@ -30,7 +30,7 @@
   position: relative;
   background-color: white;
   padding: 0rem 1rem 0rem 1rem;
-  box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+  box-shadow: #00000033 0px 2px 1px -1px, #00000024 0px 1px 1px 0px, #0000001f 0px 1px 3px 0px;
 }
 
 .top-right {
@@ -71,4 +71,10 @@
 .navigator-info {
   font-size: 0.875rem;
   font-weight: 400;
+}
+
+@media (min-width: 601px) {
+  #share-container {
+    display: none;
+  }
 }
