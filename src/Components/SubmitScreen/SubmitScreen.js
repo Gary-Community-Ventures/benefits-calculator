@@ -80,7 +80,6 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		} = formData;
 		const finalReferralSource =
 			otherSource !== '' ? otherSource : referralSource;
-		console.log(acuteHHConditions);
 		const screenBody = {
 			is_test: isTest,
 			external_id: externalID,
