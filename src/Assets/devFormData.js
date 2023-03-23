@@ -1,43 +1,45 @@
 export const createDevFormData = (searchParams) => {
   return {
 		isTest: true,
-		externalID: searchParams.get('externalid')
-			? searchParams.get('externalid')
-			: null,
+		externalID: '',
 		agreeToTermsOfService: false,
-		age: '33',
 		zipcode: '80204',
-		county: '',
+		county: 'Jefferson County',
 		startTime: new Date().toJSON(),
-		student: false,
-		studentFulltime: false,
-		pregnant: true,
-		unemployed: false,
-		unemployedWorkedInLast18Mos: true,
-		blindOrVisuallyImpaired: false,
-		disabled: false,
-		veteran: false,
-		hasIncome: true,
-		incomeStreams: [
-			{
-				incomeStreamName: 'wages',
-				incomeAmount: '29000',
-				incomeFrequency: 'yearly',
-			},
-		],
 		hasExpenses: true,
 		expenses: [
 			{
 				expenseSourceName: 'rent',
-				expenseAmount: '500',
+				expenseAmount: '3000',
 				expenseFrequency: 'monthly',
 			},
 		],
 		householdSize: '2',
 		householdData: [
 			{
+				age: '31',
+				relationshipToHH: 'headOfHousehold',
+				student: false,
+				studentFulltime: false,
+				pregnant: true,
+				unemployed: false,
+				unemployedWorkedInLast18Mos: false,
+				blindOrVisuallyImpaired: false,
+				disabled: false,
+				veteran: false,
+				noneOfTheseApply: false,
+				hasIncome: true,
+				incomeStreams: [
+					{
+						incomeStreamName: 'wages',
+						incomeAmount: '290',
+						incomeFrequency: 'monthly',
+					}
+				]
+			},
+			{
 				age: '3',
-				relationshipToHH: `child`,
+				relationshipToHH: 'child',
 				student: false,
 				studentFulltime: false,
 				pregnant: false,
@@ -48,17 +50,15 @@ export const createDevFormData = (searchParams) => {
 				veteran: false,
 				noneOfTheseApply: true,
 				hasIncome: false,
-				incomeStreams: [],
-				hasExpenses: false,
-				expenses: [],
-			},
+				incomeStreams: []
+			}
 		],
-		householdAssets: '1000',
-		relationship: 'headOfHousehold',
+		householdAssets: '0',
 		lastTaxFilingYear: '2021',
+		hasBenefits: false,
 		benefits: {
-			tanf: true,
-			wic: true,
+			tanf: false,
+			wic: false,
 			snap: false,
 			lifeline: false,
 			acp: false,
@@ -75,13 +75,15 @@ export const createDevFormData = (searchParams) => {
 			employer: false,
 			private: false,
 			medicaid: false,
+			medicare: false,
 			chp: false,
-			none: false,
+			none: true,
 		},
 		referralSource: 'gary',
+		referrerCode: '',
 		otherSource: '',
 		signUpInfo: {
-			email: 'testabc@gmail.com',
+			email: 'testabc7874@gmail.com',
 			phone: '',
 			firstName: 'Test',
 			lastName: 'Test',
@@ -90,15 +92,15 @@ export const createDevFormData = (searchParams) => {
 			commConsent: true,
 		},
 		urlSearchParams: null,
-		isBIAUser: isBIAUser,
+		isBIAUser: false,
 		acuteHHConditions: {
 			food: true,
-			babySupplies: false,
+			babySupplies: true,
 			housing: true,
-			support: false,
-			childDevelopment: false,
-			loss: false,
-			familyPlanning: false,
+			support: true,
+			childDevelopment: true,
+			loss: true,
+			familyPlanning: true,
 		},
 	};
 };
