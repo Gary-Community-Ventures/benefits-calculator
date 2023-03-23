@@ -1,4 +1,5 @@
 import {forwardRef, useState} from 'react'
+import {FormattedMessage, useIntl} from 'react-intl'
 import {
 	EmailShareButton,
 	FacebookShareButton,
@@ -16,9 +17,26 @@ import CheckIcon from '@mui/icons-material/Check';
 import './Share.css'
 
 const Share = forwardRef(() => {
-  const shareUrl = 'https://screener.myfriendben.org/step-0?test=true';
-  const appId = '1268913277361574'
   const [copied, setCopied] = useState(false)
+  const intl = useIntl();
+
+  const labels = {
+    email: intl.formatMessage({
+			id: 'results.share-email',
+      defaultMessage: 'Email'
+		}),
+    copyLink: intl.formatMessage({
+			id: 'results.share-copyLink',
+      defaultMessage: 'Copy Link'
+		}),
+    copied: intl.formatMessage({
+			id: 'results.share-copied',
+      defaultMessage: 'Copied'
+		}),
+  }
+
+  const shareUrl = 'https://screener.myfriendben.org/';
+  const appId = '1268913277361574'
 
   const iconSize = {fontSize: '1.3rem'}
 
@@ -43,7 +61,12 @@ const Share = forwardRef(() => {
 
 	return (
 		<div className="container">
-			<h3 className="header">Share MyFriendBen:</h3>
+			<h3 className="header">
+				<FormattedMessage
+					id="results.share-header"
+					defaultMessage="Share MyFriendBen with a friend:"
+				/>
+			</h3>
 			<div className="icons">
 				<div className="row-group">
 					<FacebookShareButton url={shareUrl}>
@@ -57,7 +80,7 @@ const Share = forwardRef(() => {
 						</Icon>
 					</TwitterShareButton>
 					<EmailShareButton url={shareUrl}>
-						<Icon name="Correo Electronico" color="gray">
+						<Icon name={labels.email} color="gray">
 							<EmailIcon sx={iconSize} />
 						</Icon>
 					</EmailShareButton>
@@ -74,7 +97,7 @@ const Share = forwardRef(() => {
 						</Icon>
 					</FacebookMessengerShareButton>
 					<button onClick={copyLink} className="button-no-format">
-						<Icon name={copied ? 'Copied' : 'Copy Link'} color="gray">
+						<Icon name={copied ? labels.copied : labels.copyLink} color="gray">
 							{copied ? (
 								<CheckIcon sx={iconSize} />
 							) : (

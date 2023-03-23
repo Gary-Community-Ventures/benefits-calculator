@@ -40,7 +40,6 @@ const Results = () => {
   const locale = useContext(Context).locale;
   const setLocale = useContext(Context).setLocale;
   const intl = useIntl();
-  const [shareOpen, setShareOpen] = useState(false)
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const citizenToggleState = useState(false)
 	const eligibilityState = useState('eligibleBenefits');
