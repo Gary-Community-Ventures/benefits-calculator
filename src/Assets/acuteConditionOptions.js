@@ -5,6 +5,7 @@ import home from './OptionCardIcons/home.png';
 import chat from './OptionCardIcons/chat.png';
 import stroller from './OptionCardIcons/stroller.png';
 import bill from './OptionCardIcons/bill.png';
+import pregnant from './OptionCardIcons/pregnant.png';
 
 const acuteConditionOptions = {
   food: {
@@ -48,6 +49,13 @@ const acuteConditionOptions = {
       defaultMessage='Funeral, burial, or cremation costs'
     />,
     image: bill
+  },
+  familyPlanning: {
+    formattedMessage: <FormattedMessage
+      id='acuteConditionOptions.familyPlanning'
+      defaultMessage='Family planning or birth control'
+    />,
+    image: pregnant
   }
 };
 

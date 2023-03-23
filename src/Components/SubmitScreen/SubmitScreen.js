@@ -80,7 +80,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		} = formData;
 		const finalReferralSource =
 			otherSource !== '' ? otherSource : referralSource;
-
+		console.log(acuteHHConditions);
 		const screenBody = {
 			is_test: isTest,
 			external_id: externalID,
@@ -131,6 +131,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			needs_mental_health_help: acuteHHConditions.support,
 			needs_child_dev_help: acuteHHConditions.childDevelopment,
 			needs_funeral_help: acuteHHConditions.loss,
+			needs_family_planning_help: acuteHHConditions.familyPlanning
 		};
 
 		if (userId !== 0 && userId !== false) {

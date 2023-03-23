@@ -112,7 +112,8 @@ const App = () => {
       housing: false,
       support: false,
       childDevelopment: false,
-      loss: false
+      loss: false,
+      familyPlanning: false,
     }
   };
 
