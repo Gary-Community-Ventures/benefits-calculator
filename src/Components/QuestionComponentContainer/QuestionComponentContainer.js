@@ -55,24 +55,23 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
   }
 
   const renderBasicCheckboxGroup = (question) => {
-    if ((question.name === 'healthInsurance') || (question.name === 'acuteHHConditions')) {
-      return (
-        <OptionCardGroup
-          stateVariable={question.componentDetails.inputName}
-          options={question.componentDetails.options}
-          state={formData}
-          setState={setFormData}
-        />
-      );
-    } else {
-      return (
-        <BasicCheckboxGroup
-          stateVariable={question.componentDetails.inputName}
-          options={question.componentDetails.options}
-          state={formData}
-          setState={setFormData} />
-      );
-    }
+    return (
+      <BasicCheckboxGroup
+        stateVariable={question.componentDetails.inputName}
+        options={question.componentDetails.options}
+        state={formData}
+        setState={setFormData} />
+    );
+  }
+
+  const renderOptionCardGroup = (question) => {
+    return (
+      <OptionCardGroup
+        stateVariable={question.componentDetails.inputName}
+        options={question.componentDetails.options}
+        state={formData}
+        setState={setFormData} />
+    );
   }
 
   const renderBasicSelectComponent = (question) => {
@@ -282,6 +281,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createComponent(renderRadiofieldComponent(matchingQuestion)) ) ||
         ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() ) ||
         ( matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' && createComponent(renderBasicCheckboxGroup(matchingQuestion)) ) ||
+        ( matchingQuestion.componentDetails.componentType === 'OptionCardGroup' && createComponent(renderOptionCardGroup(matchingQuestion)) ) ||
         ( matchingQuestion.componentDetails.componentType === 'BasicSelect' && createComponent(renderBasicSelectComponent(matchingQuestion)) )
       }
     </main>

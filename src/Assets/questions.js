@@ -91,7 +91,7 @@ const questions = {
         id='questions.healthInsurance'
         defaultMessage='Which type(s) of health insurance do members of your household have? Check all that apply.' />,
     componentDetails: {
-      componentType: 'BasicCheckboxGroup',
+      componentType: 'OptionCardGroup',
       inputName: 'healthInsurance',
       options: healthInsuranceOptions,
       inputError: healthInsuranceHasError,
@@ -264,7 +264,7 @@ const questions = {
         id='questions.acuteHHConditions'
         defaultMessage='Is anyone in your household in immediate need of help with any of the following?' />,
     componentDetails: {
-      componentType: 'BasicCheckboxGroup',
+      componentType: 'OptionCardGroup',
       inputName: 'acuteHHConditions',
       options: acuteConditionOptions,
       inputError: acuteHHConditionsHasError
