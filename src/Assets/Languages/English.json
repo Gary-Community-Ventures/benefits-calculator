@@ -307,7 +307,7 @@
   "filter.filterByEligibility": "Filter By Eligibility",
   "filter.filterEligible": "Eligible",
   "filter.filterInEligible": "Ineligible",
-  "filter.filterAlreadyHave": "Benefits I Already Have",
+  "filter.filterAlreadyHave": "Include benefits that I already have",
   "filter.filterByCategory": "Filter By Category",
   "filter.filterAllCategories": "All Categories",
   "results.displayResultsFilterButtons-benefitPrograms": "Benefit Programs",

@@ -40,7 +40,8 @@ const Results = () => {
   const setLocale = useContext(Context).setLocale;
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
-  const citizenToggleState = useState(false)
+  const citizenToggleState = useState(false);
+  const alreadyHasToggleState = useState(false);
 	const eligibilityState = useState('eligibleBenefits');
 	const categoryState = useState('All Categories');
 
@@ -515,6 +516,7 @@ const Results = () => {
 					eligibilityState={eligibilityState}
 					categoryState={categoryState}
           citizenToggleState={citizenToggleState}
+          alreadyHasToggleState={alreadyHasToggleState}
 				/>
 				{filt.category !== false && (
 					<Toolbar
