@@ -28,13 +28,13 @@ button {
 
 .icons {
 	display: flex;
-	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
 }
 
 .row-group {
 	margin-top: 0.4rem;
+  white-space: nowrap;
 }
 
 .icon {
@@ -43,7 +43,7 @@ button {
 	justify-content: center;
 	padding: 0.5rem;
 	border-radius: 1000rem;
-	margin: 0 .9rem 0 0;
+	margin: 0 .45rem 0 .45rem;
 }
 
 .icon-name {
@@ -84,10 +84,11 @@ button {
 	color: white;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 601px) {
   .icon {
-	margin: 0 .7rem 0 0;
+	  margin: 0 .35rem 0 .35rem;
   }
+
 	.icon:hover > .icon-name {
 		max-width: 130px;
 		margin-left: 0.3rem;
@@ -97,4 +98,14 @@ button {
 		max-width: 130px;
 		margin-left: 0.3rem;
 	}
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 80%;
+  }
+
+  .icons {
+    flex-wrap: wrap;
+  }
 }

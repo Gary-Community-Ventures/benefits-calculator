@@ -37,7 +37,7 @@ const Header = ({ formData }) => {
   return (
 		<AppBar position="sticky">
 			<Box sx={{ flexGrow: 1, mt: 1 }}>
-				<Grid container spacing={2}>
+				<Grid container spacing={2} flexDirection="column">
 					<Grid item xs={10}>
 						<Typography
 							variant="h4"

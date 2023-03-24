@@ -35,6 +35,7 @@
 
 .language-switcher .MuiInputBase-input {
   color: #2A2B2A;
+  display: none;
 }
 .language-switcher .MuiSelect-icon {
   color: #fff;
