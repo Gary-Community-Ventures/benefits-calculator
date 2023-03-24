@@ -37,20 +37,9 @@ const App = () => {
     isTest: isTest,
     externalID: externalId,
     agreeToTermsOfService: false,
-    age: '',
     zipcode: '',
     county: '',
     startTime: new Date().toJSON(),
-    student: false,
-    studentFulltime: false,
-    pregnant: false,
-    unemployed: false,
-    unemployedWorkedInLast18Mos: false,
-    blindOrVisuallyImpaired: false,
-    disabled: false,
-    veteran: false,
-    hasIncome: false,
-    incomeStreams: [],
     hasExpenses: false,
     expenses: [],
     householdSize: '',
@@ -112,7 +101,8 @@ const App = () => {
       housing: false,
       support: false,
       childDevelopment: false,
-      loss: false
+      loss: false,
+      familyPlanning: false,
     }
   };
 
@@ -135,18 +125,6 @@ const App = () => {
   useEffect(() => {
     const updatedFormData = { ...formData };
     const referralSourceIsNotOther = !(formData.referralSource === 'other');
-
-    if (formData.student === false) {
-      updatedFormData.studentFulltime = false;
-    }
-
-    if (formData.unemployed === false) {
-      updatedFormData.unemployedWorkedInLast18Mos = false;
-    }
-
-    if (formData.hasIncome === false) {
-      updatedFormData.incomeStreams = [];
-    }
 
     if (formData.hasExpenses === false) {
       updatedFormData.expenses = [];
@@ -174,8 +152,7 @@ const App = () => {
 
     setFormData(updatedFormData);
 
-  }, [formData.student, formData.unemployed, formData.hasIncome, formData.hasExpenses,
-    formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates,
+  }, [formData.hasExpenses,formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates,
     formData.hasBenefits]
   );
 
