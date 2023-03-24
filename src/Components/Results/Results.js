@@ -19,7 +19,7 @@ import {
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
-import Share from '../Share/Share'
+import Share from '../Share/Share';
 import Toolbar from '@mui/material/Toolbar';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
@@ -274,11 +274,11 @@ const Results = () => {
 						/>
 					</Typography>
 				</Grid>
-				<Grid xs={12} item>
+				{/* <Grid xs={12} item>
 					<Typography variant="h6" className="share-button-container">
 						<Share />
 					</Typography>
-				</Grid>
+				</Grid> */}
 			</>
 		);
   }

@@ -1,3 +1,19 @@
+body {
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+.container {
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+}
+
 button {
 	background: none;
 	border: none;
@@ -5,7 +21,7 @@ button {
 }
 
 .header {
-	text-align: left;
+	text-align: center;
 	font-size: large;
 	margin-bottom: 5px;
 }
@@ -14,7 +30,7 @@ button {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	justify-content: baseline;
+	justify-content: center;
 }
 
 .row-group {
