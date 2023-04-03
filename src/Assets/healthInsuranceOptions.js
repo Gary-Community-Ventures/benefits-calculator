@@ -24,7 +24,7 @@ const healthInsuranceOptions = {
   medicaid: {
     formattedMessage: <FormattedMessage
       id='healthInsuranceOptions.medicaid'
-      defaultMessage='Free or low-cost public health insurance through Health First Colorado (Medicaid)'
+      defaultMessage='Health First Colorado (Medicaid)'
     />,
     image: bill
   },
@@ -38,7 +38,7 @@ const healthInsuranceOptions = {
   chp: {
     formattedMessage: <FormattedMessage
       id='healthInsuranceOptions.chp'
-      defaultMessage='Child Health Plan Plus (CHP+) insurance for children and pregnant women'
+      defaultMessage='Child Health Plan Plus (CHP+)'
     />,
     image: teddyDoctor
   },
