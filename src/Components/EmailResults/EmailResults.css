@@ -5,9 +5,18 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 3rem;
-  border-radius: 3rem;
+  border:  1px solid black;
+  border-radius: 1rem;
 }
 
 .send {
   margin: 2rem;
+}
+
+@media (max-width: 600px) {
+  .email-results-container {
+    width: 90%;
+    max-height: 100vh;
+    overflow-y: scroll;
+  }
 }
