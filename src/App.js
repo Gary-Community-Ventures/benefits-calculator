@@ -328,15 +328,6 @@ const App = () => {
 						}
 					/>
 					<Route path="/results/:id" element={<Results />} />
-					<Route
-						path="/email-results/:id"
-						element={
-							<EmailResults
-								formData={formData}
-								handleTextfieldChange={handleTextfieldChange}
-							/>
-						}
-					/>
 					<Route path="*" element={<Navigate to="/step-0" replace />} />
 				</Routes>
 			</div>

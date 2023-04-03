@@ -283,38 +283,6 @@ const Results = () => {
 		);
   }
 
-  const displayFooter = () => {
-    return (
-      <>
-        <Grid container xs={12} item={true} sx={{mt: 2}} >
-          <Grid sm={10} item={true}>
-            <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
-              <FormattedMessage 
-                id='results.displaySubheader-sendResultsDescText' 
-                defaultMessage='To receive a copy of these results by email or text please click the email results button.' />
-            </Typography>
-          </Grid>
-          <Grid xs={12} item={true} sm={2} justifyContent='end'>
-            <Box justifyContent='end' display='flex'>
-              <Button
-                sx={{mb: 2, mt: 1}}
-                variant='contained'
-                endIcon={<SendIcon />}
-                onClick={() => {
-                  navigate(`/email-results/${screenerId}`);
-                }}
-                className='results-link'>
-                <FormattedMessage 
-                  id='results.return-sendResultsButton' 
-                  defaultMessage='Send Results' />
-              </Button>
-            </Box>
-          </Grid>
-        </Grid>
-      </>
-    );
-  }
-
   const DataGridRows = (results) => {
     let dgr = [];
     let count = 0;
@@ -691,7 +659,6 @@ const Results = () => {
                   />
                 }
               </Grid>
-              { displayFooter() }
             </>
           }
         </Grid>
