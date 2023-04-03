@@ -1,4 +1,4 @@
-import { AppBar, Typography, Box, MenuItem, FormControl, Select, Grid, Modal } from '@mui/material';
+import { AppBar, MenuItem, FormControl, Select, Modal } from '@mui/material';
 import { useContext, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper';
@@ -6,35 +6,41 @@ import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Share from '../Share/Share';
+import EmailResults from '../EmailResults/EmailResults';
 import MFBLogo from '../../Assets/logo.png';
 import BIAMFBLogo from '../../Assets/biamfbcombinedlogo.png';
 import './Header.css';
 
-const Header = ({ formData }) => {
-  const context = useContext(Context);
-  const navigate = useNavigate();
-  const { urlSearchParams, isBIAUser } = formData;
-  const location = useLocation();
-  const urlRegex = /^(\/results\/)(.+)$/;
-  const url = location.pathname.match(urlRegex);
-  const isResults = url !== null;
-  const screenUUID = url ? url[2]: undefined;
-	
-  const [openShare, setOpenShare] = useState(false);
+const Header = ({ formData, handleTextfieldChange }) => {
+	const context = useContext(Context);
+	const navigate = useNavigate();
+	const { urlSearchParams, isBIAUser } = formData;
+	const location = useLocation();
+	const urlRegex = /^(\/results\/)(.+)$/;
+	const url = location.pathname.match(urlRegex);
+	const isResults = url !== null;
+	const screenUUID = url ? url[2] : undefined;
 
-  const handleOpenShare = () => {
-    setOpenShare(true);
-  };
+	const [openShare, setOpenShare] = useState(false);
+	const [openEmailResults, setOpenEmailResults] = useState(false);
 
-  const handleCloseShare = () => {
-    setOpenShare(false);
-  };
-
-  const emailResults = () => {
-		navigate(`/email-results/${screenUUID}`);
+	const handleOpenShare = () => {
+		setOpenShare(true);
 	};
 
-  return (
+	const handleCloseShare = () => {
+		setOpenShare(false);
+	};
+
+	const handleOpenEmailResults = () => {
+		setOpenEmailResults(true);
+	};
+
+	const handleCloseEmailResults = () => {
+		setOpenEmailResults(false);
+	};
+
+	return (
 		<>
 			<AppBar
 				position="sticky"
@@ -69,21 +75,29 @@ const Header = ({ formData }) => {
 							<MenuItem value="es">Español</MenuItem>
 						</Select>
 					</FormControl>
-					<button className="icon-container" onClick={handleOpenShare} >
+					<button className="icon-container" onClick={handleOpenShare}>
 						<ShareIcon />
 					</button>
 					{isResults && (
-						<button className="icon-container" onClick={emailResults} >
+						<button className="icon-container" onClick={handleOpenEmailResults}>
 							<SaveAltIcon />
 						</button>
 					)}
 				</div>
 			</AppBar>
 			<Modal open={openShare} onClose={handleCloseShare}>
-				<Share />
+				<Share close={handleCloseShare} />
+			</Modal>
+			<Modal open={openEmailResults} onClose={handleCloseEmailResults}>
+				<EmailResults
+					formData={formData}
+					handleTextfieldChange={handleTextfieldChange}
+					screenId={screenUUID}
+					close={handleCloseEmailResults}
+				/>
 			</Modal>
 		</>
 	);
-}
+};
 
 export default Header;

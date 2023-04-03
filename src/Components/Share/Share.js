@@ -1,5 +1,5 @@
-import {forwardRef, useState} from 'react'
-import {FormattedMessage, useIntl} from 'react-intl'
+import { forwardRef, useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
 	EmailShareButton,
 	FacebookShareButton,
@@ -14,53 +14,64 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LinkIcon from '@mui/icons-material/Link';
 import CheckIcon from '@mui/icons-material/Check';
-import './Share.css'
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import './Share.css';
 
-const Share = forwardRef(() => {
-  const [copied, setCopied] = useState(false)
-  const intl = useIntl();
+const Share = forwardRef(({close}, ref) => {
+	const [copied, setCopied] = useState(false);
+	const intl = useIntl();
 
-  const labels = {
-    email: intl.formatMessage({
+	const labels = {
+		email: intl.formatMessage({
 			id: 'results.share-email',
-      defaultMessage: 'Email'
+			defaultMessage: 'Email',
 		}),
-    copyLink: intl.formatMessage({
+		copyLink: intl.formatMessage({
 			id: 'results.share-copyLink',
-      defaultMessage: 'Copy Link'
+			defaultMessage: 'Copy Link',
 		}),
-    copied: intl.formatMessage({
+		copied: intl.formatMessage({
 			id: 'results.share-copied',
-      defaultMessage: 'Copied'
+			defaultMessage: 'Copied',
 		}),
-  }
+	};
 
-  const shareUrl = 'https://screener.myfriendben.org/';
-  const appId = '1268913277361574'
+	const shareUrl = 'https://screener.myfriendben.org/';
+	const appId = '1268913277361574';
 
-  const iconSize = {fontSize: '1.3rem'}
+	const iconSize = { fontSize: '1.3rem' };
 
-  const copyLink = () => {
-    navigator.clipboard.writeText(shareUrl);
-    setCopied(true)
-    setTimeout(() => {
-      setCopied(false)
-    }, 5000)
-  }
+	const copyLink = () => {
+		navigator.clipboard.writeText(shareUrl);
+		setCopied(true);
+		setTimeout(() => {
+			setCopied(false);
+		}, 5000);
+	};
 
-  const Icon = ({name, children, color}) => {
-    return (
-			<span
-				className={`${color} icon`}
-			>
+	const Icon = ({ name, children, color }) => {
+		return (
+			<span className={`${color} icon`}>
 				{children}
 				<span className="icon-name">{name}</span>
 			</span>
 		);
-  }
+	};
 
 	return (
 		<div className="container">
+			<IconButton
+				aria-label="close"
+				onClick={close}
+				sx={{
+					position: 'absolute',
+					right: 0,
+					top: 0,
+				}}
+			>
+				<CloseIcon />
+			</IconButton>
 			<h3 className="header">
 				<FormattedMessage
 					id="results.share-header"

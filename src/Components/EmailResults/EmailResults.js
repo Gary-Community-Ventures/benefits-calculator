@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { FormattedMessage } from "react-intl";
 import {
 	emailHasError,
@@ -12,18 +12,16 @@ import {
 } from '../../Assets/validationFunctions';
 import { postMessage } from '../../apiCalls';
 import Textfield from "../Textfield/Textfield";
-import PreviousButton from "../PreviousButton/PreviousButton";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import { useParams } from "react-router-dom";
 import "./EmailResults.css";
 
-const EmailResults2 = ({ formData, handleTextfieldChange }) => {
+const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, close }, ref) => {
   const [state, setState] = useState({
     open: false,
     error: false,
     errorMessage: ''
   });
-  const { id: screenId } = useParams();
+  // const { id: screenId } = useParams();
 
 
   const createEmailTextfield = (type, errorType, errorMessage, inputLabelId) => {
@@ -120,7 +118,18 @@ const EmailResults2 = ({ formData, handleTextfieldChange }) => {
   }
 
   return (
-		<main className="benefits-form">
+		<div className="email-results-container">
+			<IconButton
+				aria-label="close"
+				onClick={close}
+				sx={{
+					position: 'absolute',
+					right: 8,
+					top: 8,
+				}}
+			>
+				<CloseIcon />
+			</IconButton>
 			<h2 className="sub-header">
 				<FormattedMessage
 					id="emailResults.displaySubheader-text"
@@ -140,45 +149,44 @@ const EmailResults2 = ({ formData, handleTextfieldChange }) => {
 				'signUp.createEmailTextfield-label'
 			)}
 			<Button
-        sx={{m: '.5rem'}}
+				sx={{ m: '.5rem' }}
 				variant="contained"
 				onClick={(event) => {
-          handleSubmit(event, 'emailScreen');
+					handleSubmit(event, 'emailScreen');
 				}}
 			>
 				<FormattedMessage
 					id="emailResults.return-sendButton"
 					defaultMessage="Send"
-          />
+				/>
 			</Button>
-      {state.error && displayErrorMessage(state.errorMessage)}
+			{state.error && displayErrorMessage(state.errorMessage)}
 			<article className="question-container question-label">
 				<FormattedMessage
 					id="emailResults.enert-phoneNumberLabel"
 					defaultMessage="Please enter or confirm your phone number:"
 				/>
 			</article>
-      {createEmailTextfield(
-        'phone',
-        phoneHasError,
-        displayPhoneHasErrorHelperText,
-        'signUp.createPhoneTextfield-label'
-      )}
-      <Button
-        sx={{m: '.5rem'}}
-        variant="contained"
-        onClick={(event) => {
-          handleSubmit(event, 'textScreen');
-        }}
-        >
-        <FormattedMessage
-          id="emailResults.return-sendButton"
-          defaultMessage="Send"
-          />
-      </Button>
-      {state.error && displayErrorMessage(state.errorMessage)}
+			{createEmailTextfield(
+				'phone',
+				phoneHasError,
+				displayPhoneHasErrorHelperText,
+				'signUp.createPhoneTextfield-label'
+			)}
+			<Button
+				sx={{ m: '.5rem' }}
+				variant="contained"
+				onClick={(event) => {
+					handleSubmit(event, 'textScreen');
+				}}
+			>
+				<FormattedMessage
+					id="emailResults.return-sendButton"
+					defaultMessage="Send"
+				/>
+			</Button>
+			{state.error && displayErrorMessage(state.errorMessage)}
 			<div className="question-buttons">
-				<PreviousButton formData={formData} />
 				<Snackbar
 					open={state.open}
 					autoHideDuration={6000}
@@ -186,7 +194,7 @@ const EmailResults2 = ({ formData, handleTextfieldChange }) => {
 					message={
 						<FormattedMessage
 							id="emailResults.return-signupCompleted"
-							defaultMessage="A copy of your results have been sent. Click the prev button to return to your results."
+							defaultMessage="A copy of your results have been sent."
 						/>
 					}
 					action={action}
@@ -194,7 +202,7 @@ const EmailResults2 = ({ formData, handleTextfieldChange }) => {
 					sx={{ mb: 4, mr: 2 }}
 				/>
 			</div>
-		</main>
+		</div>
 	);
-}
-export default EmailResults2;
+})
+export default EmailResults;
