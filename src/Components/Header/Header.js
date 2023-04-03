@@ -30,82 +30,59 @@ const Header = ({ formData }) => {
     setOpenShare(false);
   };
 
-  const EmailResults = () => {
+  const emailResults = () => {
 		navigate(`/email-results/${screenUUID}`);
 	};
 
   return (
-		<AppBar position="sticky">
-			<Box sx={{ flexGrow: 1, mt: 1 }}>
-				<Grid container spacing={2} flexDirection="column">
-					<Grid item xs={10}>
-						<Typography
-							variant="h4"
-							align="left"
-							onClick={() => navigate(`/step-0${urlSearchParams}`)}
+		<>
+			<AppBar
+				position="sticky"
+				id="nav-container"
+				sx={{ flexDirection: 'row' }}
+			>
+				<img
+					src={isBIAUser ? BIAMFBLogo : MFBLogo}
+					alt={
+						isBIAUser
+							? 'benefits in action and my friend ben logo'
+							: 'my friend ben logo'
+					}
+					className="logo"
+					onClick={() => navigate(`/step-0${urlSearchParams}`)}
+				/>
+				<div className="icon-wrapper">
+					<FormControl className="language-select">
+						<Select
+							labelId="select-language-label"
+							id="select-language"
+							value={context.locale}
+							label="Language"
+							onChange={context.selectLanguage}
+							aria-label="select a language"
+							IconComponent={LanguageIcon}
+							className="language-switcher"
+							variant="standard"
+							disableUnderline={true}
 						>
-							<img
-								src={isBIAUser ? BIAMFBLogo : MFBLogo}
-								alt={
-									isBIAUser
-										? 'benefits in action and my friend ben logo'
-										: 'my friend ben logo'
-								}
-								className="logo"
-							/>
-						</Typography>
-					</Grid>
-					<Grid item xs={2}>
-						<Box sx={{ flexGrow: 1 }}>
-							<Grid item={true} container spacing={2}>
-								<Grid item={true} xs={isResults ? 6 : 10}>
-									<FormControl fullWidth>
-										<Select
-											labelId="select-language-label"
-											id="select-language"
-											value={context.locale}
-											label="Language"
-											onChange={context.selectLanguage}
-											aria-label="select a language"
-											IconComponent={LanguageIcon}
-											className="language-switcher"
-											variant="standard"
-											disableUnderline={true}
-										>
-											<MenuItem value="en-US">English</MenuItem>
-											<MenuItem value="es">Español</MenuItem>
-										</Select>
-									</FormControl>
-								</Grid>
-								{isResults && (
-									<>
-										<Grid
-											item
-											xs={2}
-											className="share-icon-container"
-											onClick={handleOpenShare}
-										>
-											<ShareIcon />
-										</Grid>
-										<Modal open={openShare} onClose={handleCloseShare}>
-											<Share />
-										</Modal>
-										<Grid
-											item
-											xs={2}
-											className="share-icon-container"
-											onClick={EmailResults}
-										>
-											<SaveAltIcon />
-										</Grid>
-									</>
-								)}
-							</Grid>
-						</Box>
-					</Grid>
-				</Grid>
-			</Box>
-		</AppBar>
+							<MenuItem value="en-US">English</MenuItem>
+							<MenuItem value="es">Español</MenuItem>
+						</Select>
+					</FormControl>
+					<button className="icon-container" onClick={handleOpenShare} >
+						<ShareIcon />
+					</button>
+					{isResults && (
+						<button className="icon-container" onClick={emailResults} >
+							<SaveAltIcon />
+						</button>
+					)}
+				</div>
+			</AppBar>
+			<Modal open={openShare} onClose={handleCloseShare}>
+				<Share />
+			</Modal>
+		</>
 	);
 }
 
