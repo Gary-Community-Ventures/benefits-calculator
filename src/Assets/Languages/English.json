@@ -402,4 +402,5 @@
   "taxCreditBenefits.coeitc": "State tax credit: earned income (Colorado Earned Income Tax Credit/Expanded Earned Income Tax Credit)",
   "taxCreditBenefits.ctc": "Federal tax credit: child tax credit (Child Tax Credit)",
   "displayAnnualIncome.annual": " annually",
+  "listAllIncomeStreams.hoursPerWeek": " hours/week "
 }

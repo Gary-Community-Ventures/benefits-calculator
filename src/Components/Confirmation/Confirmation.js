@@ -1,6 +1,6 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@mui/material';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import taxYearOptions from '../../Assets/taxYearOptions';
 import referralOptions from '../../Assets/referralOptions';
@@ -22,6 +22,7 @@ import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
   const navigate = useNavigate();
+  const intl = useIntl();
 
   const displayAllMembersDataBlock = () => {
     const { householdData } = formData;
@@ -426,15 +427,21 @@ const Confirmation = ({ formData }) => {
 
   const listAllIncomeStreams = (memberIncomeStreams) => {
 		const mappedListItems = memberIncomeStreams.map((incomeStream, index) => {
+      const incomeStreamLabel = getIncomeStreamNameLabel(incomeStream.incomeStreamName);
+      const amount = formatToUSD(Number(incomeStream.incomeAmount));
+      const frequency = getIncomeStreamFrequencyLabel(incomeStream.incomeFrequency);
+      const annualAmount = displayAnnualIncome(incomeStream);
+      const hoursPerWeek = incomeStream.hoursPerWeek;
+      const translatedHrsPerWkText = intl.formatMessage({ id:'listAllIncomeStreams.hoursPerWeek'});
 			return (
-				<li key={incomeStream.incomeStreamName + index}>
-					{' '}
-					{getIncomeStreamNameLabel(incomeStream.incomeStreamName)}:{' '}
-					{incomeStream.hoursPerWeek > 0 && incomeStream.incomeFrequency === 'hourly' &&
-						`Average of ${incomeStream.hoursPerWeek} hours/week at `}
-					${Number(incomeStream.incomeAmount).toFixed(2)}{' '}
-					{getIncomeStreamFrequencyLabel(incomeStream.incomeFrequency)}
-				</li>
+        <li key={incomeStream.incomeStreamName + index}>
+          <p>{incomeStreamLabel}:</p>
+          { incomeStream.incomeFrequency === 'hourly' ?
+              <p>{amount} {frequency} ~{hoursPerWeek} {translatedHrsPerWkText} {annualAmount}</p>
+            :
+              <p>{amount} {frequency} {annualAmount}</p>
+          }
+      </li>
 			);
 		});
 
