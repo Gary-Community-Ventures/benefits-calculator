@@ -427,22 +427,22 @@ const Confirmation = ({ formData }) => {
 
   const listAllIncomeStreams = (memberIncomeStreams) => {
 		const mappedListItems = memberIncomeStreams.map((incomeStream, index) => {
-      const incomeStreamLabel = getIncomeStreamNameLabel(incomeStream.incomeStreamName);
-      const amount = formatToUSD(Number(incomeStream.incomeAmount));
-      const frequency = getIncomeStreamFrequencyLabel(incomeStream.incomeFrequency);
-      const annualAmount = displayAnnualIncome(incomeStream);
+      const incomeStreamName = getIncomeStreamNameLabel(incomeStream.incomeStreamName);
+      const incomeAmount = formatToUSD(Number(incomeStream.incomeAmount));
+      const incomeFrequency = getIncomeStreamFrequencyLabel(incomeStream.incomeFrequency);
       const hoursPerWeek = incomeStream.hoursPerWeek;
       const translatedHrsPerWkText = intl.formatMessage({ id:'listAllIncomeStreams.hoursPerWeek'});
+      const annualAmount = displayAnnualIncome(incomeStream);
 
       return (
         <li key={incomeStream.incomeStreamName + index}>
-          <p>{incomeStreamLabel}:</p>
+          <p>{ incomeStreamName }:</p>
           { incomeStream.incomeFrequency === 'hourly' ?
-              <p>{amount} {frequency} ~{hoursPerWeek} {translatedHrsPerWkText} {annualAmount}</p>
+              <p>{incomeAmount} {incomeFrequency} ~{hoursPerWeek} {translatedHrsPerWkText} {annualAmount}</p>
             :
-              <p>{amount} {frequency} {annualAmount}</p>
+              <p>{incomeAmount} {incomeFrequency} {annualAmount}</p>
           }
-      </li>
+        </li>
 			);
 		});
 
