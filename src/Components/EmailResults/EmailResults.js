@@ -119,6 +119,23 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 
   return (
 		<div className="email-results-container">
+			<div className="question-buttons">
+				<Snackbar
+					anchorOrigin={{ vertical: 'bottom', horizontal: 'right'}}
+					open={state.open}
+					autoHideDuration={6000}
+					onClose={handleClose}
+					message={
+						<FormattedMessage
+							id="emailResults.return-signupCompleted"
+							defaultMessage="A copy of your results have been sent."
+						/>
+					}
+					action={action}
+					severity="success"
+					sx={{ mb: -2 }}
+				/>
+			</div>
 			<IconButton
 				aria-label="close"
 				onClick={close}
@@ -185,23 +202,7 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 					defaultMessage="Send"
 				/>
 			</Button>
-			{state.error && displayErrorMessage(state.errorMessage)}
-			<div className="question-buttons">
-				<Snackbar
-					open={state.open}
-					autoHideDuration={6000}
-					onClose={handleClose}
-					message={
-						<FormattedMessage
-							id="emailResults.return-signupCompleted"
-							defaultMessage="A copy of your results have been sent."
-						/>
-					}
-					action={action}
-					severity="success"
-					sx={{ mb: 4, mr: 2 }}
-				/>
-			</div>
+			{state.error && displayErrorMessage(state.errorMessage)}	
 		</div>
 	);
 })
