@@ -240,19 +240,14 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
           <FormattedMessage
             id='qcc.tell-us-text'
             defaultMessage='Tell us a little more about yourself.' />
-          <h4 className='subheader-desc'>
-            <FormattedMessage
-              id='qcc.renderHeaderAndSubheader-subheader-desc'
-              defaultMessage="You will have an opportunity to tell us about other household members in future questions." />
-          </h4>
         </div>
       );
     } else if (matchingQuestion.headerType === 'aboutHousehold') {
       return (
         <div className='sub-header'>
           <FormattedMessage
-            id='qcc.tell-us-about-household-text'
-            defaultMessage='Tell us a little more about your household.' />
+            id='qcc.tell-us-text'
+            defaultMessage='Tell us about your household.' />
         </div>
       );
     }
