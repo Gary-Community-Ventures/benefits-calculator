@@ -433,7 +433,8 @@ const Confirmation = ({ formData }) => {
       const annualAmount = displayAnnualIncome(incomeStream);
       const hoursPerWeek = incomeStream.hoursPerWeek;
       const translatedHrsPerWkText = intl.formatMessage({ id:'listAllIncomeStreams.hoursPerWeek'});
-			return (
+
+      return (
         <li key={incomeStream.incomeStreamName + index}>
           <p>{incomeStreamLabel}:</p>
           { incomeStream.incomeFrequency === 'hourly' ?
