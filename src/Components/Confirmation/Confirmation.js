@@ -431,7 +431,7 @@ const Confirmation = ({ formData }) => {
       const incomeAmount = formatToUSD(Number(incomeStream.incomeAmount));
       const incomeFrequency = getIncomeStreamFrequencyLabel(incomeStream.incomeFrequency);
       const hoursPerWeek = incomeStream.hoursPerWeek;
-      const translatedHrsPerWkText = intl.formatMessage({ id:'listAllIncomeStreams.hoursPerWeek'});
+      const translatedHrsPerWkText = intl.formatMessage({ id:'listAllIncomeStreams.hoursPerWeek' });
       const annualAmount = displayAnnualIncome(incomeStream);
 
       return (
