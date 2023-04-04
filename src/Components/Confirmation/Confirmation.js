@@ -400,6 +400,30 @@ const Confirmation = ({ formData }) => {
   const formatToUSD = (num) => {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
   }
+
+  const displayAnnualIncome = (incomeStream) => {
+    const { incomeAmount, incomeFrequency, hoursPerWeek } = incomeStream;
+    const translatedAnnualText = intl.formatMessage({ id:'displayAnnualIncome.annual'});
+    let num = 0;
+
+    switch (incomeFrequency) {
+      case 'weekly':
+        num = Number(incomeAmount) * 52;
+        break;
+      case 'biweekly':
+        num = Number(incomeAmount) * 26;
+        break;
+      case 'monthly':
+        num = Number(incomeAmount) * 12;
+        break;
+      case 'hourly':
+        num = Number(incomeAmount) * Number(hoursPerWeek) * 52;
+        break;
+    }
+
+    return `(${formatToUSD(num)}` + translatedAnnualText + `)`;
+  }
+
   const listAllIncomeStreams = (memberIncomeStreams) => {
 		const mappedListItems = memberIncomeStreams.map((incomeStream, index) => {
 			return (
