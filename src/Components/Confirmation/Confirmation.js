@@ -397,6 +397,9 @@ const Confirmation = ({ formData }) => {
     return frequencyOptions[incomeFrequency];
   }
 
+  const formatToUSD = (num) => {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
+  }
   const listAllIncomeStreams = (memberIncomeStreams) => {
 		const mappedListItems = memberIncomeStreams.map((incomeStream, index) => {
 			return (
