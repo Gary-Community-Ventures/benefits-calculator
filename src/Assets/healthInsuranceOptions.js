@@ -1,30 +1,54 @@
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage } from 'react-intl';
+import bill from './OptionCardIcons/bill.png';
+import building from './OptionCardIcons/building.png';
+import padlock from './OptionCardIcons/padlock.png';
+import redX from './OptionCardIcons/redX.png';
+import teddyDoctor from './OptionCardIcons/teddyDoctor.png';
+import umbrella from './OptionCardIcons/umbrella.png';
 
 const healthInsuranceOptions = {
-  employer:
-    <FormattedMessage
+  employer: {
+    formattedMessage: <FormattedMessage
       id='healthInsuranceOptions.employer'
-      defaultMessage='Employer-provided health insurance' />,
-  private:
-    <FormattedMessage
+      defaultMessage='Employer-provided health insurance'
+    />,
+    image: building
+  },
+  private: {
+    formattedMessage: <FormattedMessage
       id='healthInsuranceOptions.private'
-      defaultMessage='Private health insurance' />,
-  medicaid:
-    <FormattedMessage
+      defaultMessage='Private health insurance'
+    />,
+    image: padlock
+  },
+  medicaid: {
+    formattedMessage: <FormattedMessage
       id='healthInsuranceOptions.medicaid'
-      defaultMessage='Free or low-cost public health insurance through Health First Colorado (Medicaid)' />,
-  medicare:
-    <FormattedMessage
+      defaultMessage='Free or low-cost public health insurance through Health First Colorado (Medicaid)'
+    />,
+    image: bill
+  },
+  medicare: {
+    formattedMessage: <FormattedMessage
       id='healthInsuranceOptions.medicare'
-      defaultMessage='Medicare' />,
-  chp:
-    <FormattedMessage
+      defaultMessage='Medicare'
+    />,
+    image: umbrella
+  },
+  chp: {
+    formattedMessage: <FormattedMessage
       id='healthInsuranceOptions.chp'
-      defaultMessage='Low-cost health insurance for children and pregnant women through Child Health Plan Plus (CHP+)' />,
-  none:
-    <FormattedMessage
+      defaultMessage='Child Health Plan Plus (CHP+) insurance for children and pregnant women'
+    />,
+    image: teddyDoctor
+  },
+  none: {
+    formattedMessage: <FormattedMessage
       id='healthInsuranceOptions.none'
-      defaultMessage='One or more household member(s) do not have health insurance' />
+      defaultMessage='One or more household member(s) do not have health insurance'
+    />,
+    image: redX
+  }
 }
 
 export default healthInsuranceOptions;

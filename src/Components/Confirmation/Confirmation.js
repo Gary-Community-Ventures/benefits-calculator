@@ -320,6 +320,13 @@ const Confirmation = ({ formData }) => {
     );
   }
 
+  const refactorOptionsList = (options) => {
+    return Object.keys(options).reduce((acc, option) => {
+      acc[option] = options[option].formattedMessage;
+      return acc;
+    }, {});
+  }
+
   const displayAllFormData = () => {
     const allBenefitsList = {
       ...cashAssistanceBenefits,
@@ -342,19 +349,22 @@ const Confirmation = ({ formData }) => {
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('benefits',
             'confirmation.displayAllFormData-currentHHBenefitsText',
-            'Household benefits:', `/step-${stepDirectory.hasBenefits}`, allBenefitsList
+            'Household benefits:', `/step-${stepDirectory.hasBenefits}`,
+            allBenefitsList
             )
           }
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('healthInsurance',
             'confirmation.displayAllFormData-healthInsurance',
-            'Household health insurance:', `/step-${stepDirectory.healthInsurance}`, healthInsuranceOptions
+            'Household health insurance:', `/step-${stepDirectory.healthInsurance}`,
+            refactorOptionsList(healthInsuranceOptions)
             )
           }
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('acuteHHConditions',
             'confirmation.displayAllFormData-acuteHHConditions',
-            'Immediate Needs:', `/step-${stepDirectory.acuteHHConditions}`, acuteConditionOptions
+            'Immediate Needs:', `/step-${stepDirectory.acuteHHConditions}`,
+            refactorOptionsList(acuteConditionOptions)
             )
           }
         <p className='confirmation-section-underline'></p>

@@ -1,7 +1,7 @@
-import { FormControlLabel, FormGroup, Checkbox, FormControl } from "@mui/material";
+import { FormControlLabel, FormGroup, Checkbox, FormControl } from '@mui/material';
+import { FormattedMessage } from 'react-intl';
 
 const CheckboxGroup = ({ options, state, setState, index }) => {
- 
   const handleCheckboxChange = (event) => {
     const { name } = event.target;
 
@@ -23,22 +23,31 @@ const CheckboxGroup = ({ options, state, setState, index }) => {
     const optionKeys = Object.keys(optionList);
 
     const formControlLabels = optionKeys.map((optionKey) => {
+      let label = optionList[optionKey];
+      if (index !== 0 && optionKey === 'disabled') {
+        label =
+          <FormattedMessage
+            id='checkboxGroup.disabledLabel'
+            defaultMessage='Have any disabilities that make them unable to work now or in the future'
+          />;
+      }
+
       return (
         <FormControlLabel
           sx={{ alignItems: 'flex-start', marginTop: `1rem` }}
           control={
-            <Checkbox 
-              checked={state.householdData[index][optionKey]} 
+            <Checkbox
+              checked={state.householdData[index][optionKey]}
               onChange={handleCheckboxChange}
-              name={optionKey} 
+              name={optionKey}
               sx={{ marginTop: -1 }} />
-          } 
-          label={optionList[optionKey]}
+          }
+          label={label}
           key={optionKey}
         />
       );
     });
-    
+
     return formControlLabels;
   }
 
