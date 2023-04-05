@@ -278,8 +278,8 @@ const Results = () => {
         <Grid container xs={12} item={true} sx={{mt: 2}} >
           <Grid sm={10} item={true}>
             <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
-              <FormattedMessage 
-                id='results.displaySubheader-sendResultsDescText' 
+              <FormattedMessage
+                id='results.displaySubheader-sendResultsDescText'
                 defaultMessage='To receive a copy of these results by email or text please click the email results button.' />
             </Typography>
           </Grid>
@@ -293,8 +293,8 @@ const Results = () => {
                   navigate(`/email-results/${screenerId}`);
                 }}
                 className='results-link'>
-                <FormattedMessage 
-                  id='results.return-sendResultsButton' 
+                <FormattedMessage
+                  id='results.return-sendResultsButton'
                   defaultMessage='Send Results' />
               </Button>
             </Box>
@@ -534,6 +534,14 @@ const Results = () => {
 						</span>
 					</Toolbar>
 				)}
+        {filt.category.value === 'Child Care, Preschool, and Youth' && (
+          <Typography variant='body2' sx={{ fontStyle: 'italic', py: '5px', pl: '9px' }}>
+            <FormattedMessage
+              id="benefitCategories.childCareHelperText"
+              defaultMessage="This amount is an estimate of the combined average value of the child care and preschool programs listed below. Your family may qualify for financial help or savings under more than one of these programs. If so, you may be able to combine program benefits to help pay for child care and preschool."
+            />
+          </Typography>
+        )}
 				<DataGridPro
 					treeData
 					autoHeight
