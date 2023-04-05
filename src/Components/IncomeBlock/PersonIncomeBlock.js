@@ -302,10 +302,10 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     let formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel';
-    let formattedMsgDefaultMsg = 'How often do you receive this income: ';
+    let formattedMsgDefaultMsg = 'How often are you paid this income: ';
     if (personDataIndex !== 0) {
       formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel';
-      formattedMsgDefaultMsg = 'How often do they receive this income: ';
+      formattedMsgDefaultMsg = 'How often are they paid this income: ';
     }
 
     return (
