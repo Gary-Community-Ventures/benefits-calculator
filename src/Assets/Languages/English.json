@@ -376,7 +376,7 @@
   "benefitCategories.transportation": "Transportation",
   "benefitCategories.healthCare": "Health Care",
   "benefitCategories.taxCredits": "Tax Credits",
-  "benefitCategories.childCareHelperText": "This amount is an estimate of the combined average value of the child care and preschool programs listed below. Your family may qualify for financial help or savings under more than one of these programs. If so, you may be able to combine program benefits to help pay for child care and preschool.",
+  "benefitCategories.childCareHelperText": "Do you wonder why the annual value of these programs may differ from the total values in your results? It's because this annual value is an estimate of the combined likely average value of child care and preschool programs you qualify for. Savings from programs may overlap. You may be able to combine benefits to help pay for child care and preschool.",
   "cashAssistanceBenefits.tanf": "Cash assistance and work support (Temporary Assistance for Needy Families (TANF/Colorado Works))",
   "cashAssistanceBenefits.ssi": "Federal cash assistance for individuals who are disabled, blind, or 65 years of age or older (Supplemental Security Income/SSI)",
   "cashAssistanceBenefits.andcs": "State cash assistance for individuals who are disabled and receiving SSI (Aid to the Needy Disabled - Colorado Supplement/AND-CS)",

@@ -538,7 +538,7 @@ const Results = () => {
           <Typography variant='body2' sx={{ fontStyle: 'italic', py: '5px', pl: '9px' }}>
             <FormattedMessage
               id="benefitCategories.childCareHelperText"
-              defaultMessage="This amount is an estimate of the combined average value of the child care and preschool programs listed below. Your family may qualify for financial help or savings under more than one of these programs. If so, you may be able to combine program benefits to help pay for child care and preschool."
+              defaultMessage="Do you wonder why the annual value of these programs may differ from the total values in your results? It's because this annual value is an estimate of the combined likely average value of child care and preschool programs you qualify for. Savings from programs may overlap. You may be able to combine benefits to help pay for child care and preschool."
             />
           </Typography>
         )}
