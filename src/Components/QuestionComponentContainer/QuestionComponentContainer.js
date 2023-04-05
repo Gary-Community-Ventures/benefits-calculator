@@ -243,13 +243,24 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         </div>
       );
     } else if (matchingQuestion.headerType === 'aboutHousehold') {
-      return (
-        <div className='sub-header'>
-          <FormattedMessage
-            id='qcc.tell-us-text'
-            defaultMessage='Tell us about your household.' />
-        </div>
+      if (matchingQuestion.name === 'hasBenefits') {
+        return (
+          <div className='sub-header'>
+            <FormattedMessage
+              id='qcc.tell-us-final-text'
+              defaultMessage='Tell us some final information about your household.' />
+          </div>
+        )
+      } else {
+        return (
+          <div className='sub-header'>
+            <FormattedMessage
+              id='qcc.tell-us-text'
+              defaultMessage='Tell us about your household.' />
+          </div>
       );
+      }
+
     }
   };
 
