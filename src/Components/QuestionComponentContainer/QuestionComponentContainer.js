@@ -243,7 +243,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         </div>
       );
     } else if (matchingQuestion.headerType === 'aboutHousehold') {
-      if (matchingQuestion.name === 'hasBenefits') {
+      if (matchingQuestion.name === 'hasBenefits' || matchingQuestion.name === 'acuteHHConditions') {
         return (
           <div className='sub-header'>
             <FormattedMessage
