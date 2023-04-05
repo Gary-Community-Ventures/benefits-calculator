@@ -251,6 +251,14 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
               defaultMessage='Tell us some final information about your household.' />
           </div>
         )
+      } else if (matchingQuestion.name === 'referralSource') {
+        return (
+          <div className='sub-header'>
+            <FormattedMessage
+              id='questions.referralSource'
+              defaultMessage='How did you hear about this screener?' />
+          </div>
+        )
       } else {
         return (
           <div className='sub-header'>

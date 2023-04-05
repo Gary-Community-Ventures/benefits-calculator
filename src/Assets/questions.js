@@ -269,10 +269,6 @@ const questions = {
   },
   [stepDirectory.referralSource]: {
     name: 'referralSource',
-    question:
-      <FormattedMessage
-        id='questions.referralSource'
-        defaultMessage='How did you hear about this screener?' />,
     componentDetails: {
       componentType: 'BasicSelect',
       inputName: 'referralSource',
