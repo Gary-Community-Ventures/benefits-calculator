@@ -41,7 +41,9 @@
     width: 56px;
   }
 
-  div.sub-header {
+  div.sub-header,
+  h2.sub-header,
+  .question-label.household-data-q-underline {
     font-size: 1.5rem;
   }
 
