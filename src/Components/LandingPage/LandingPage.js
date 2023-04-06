@@ -61,6 +61,7 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
 									defaultMessage="Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits on this site may affect their immigration status. For more information, please review the "
 								/>
 								<a
+									className="public-charge-link"
 									variant="contained"
 									target="_blank"
 									href="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
