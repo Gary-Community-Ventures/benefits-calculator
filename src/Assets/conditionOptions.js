@@ -4,7 +4,7 @@ const conditionOptions = {
   student:
     <FormattedMessage
       id='conditionOptions.student'
-      defaultMessage='Student' />,
+      defaultMessage='Student at a college, university, or other post-secondary institution' />,
   pregnant:
     <FormattedMessage
       id='conditionOptions.pregnant'

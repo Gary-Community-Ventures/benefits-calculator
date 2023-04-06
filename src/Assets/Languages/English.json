@@ -137,7 +137,7 @@
   "householdDataBlock.createConditionsQuestion-do-these-apply-to-you": "Do any of these apply to you?",
   "householdDataBlock.createConditionsQuestion-do-these-apply": "Do any of these apply to them?",
   "householdDataBlock.createConditionsQuestion-pick": "It's OK to pick more than one.",
-  "conditionOptions.student": "Student",
+  "conditionOptions.student": "Student at a college, university, or other post-secondary institution",
   "conditionOptions.pregnant": "Pregnant",
   "conditionOptions.unemployed": "Unemployed",
   "conditionOptions.blindOrVisuallyImpaired": "Blind or visually impaired",
