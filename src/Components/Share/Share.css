@@ -53,9 +53,6 @@ button {
 	max-width: 0px;
 	transition: max-width 1s, margin 0.3s;
 	font-size: 14px;
-}
-
-.icon:hover {
 	cursor: pointer;
 }
 

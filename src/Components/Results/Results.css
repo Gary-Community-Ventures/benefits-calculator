@@ -64,8 +64,8 @@
   font-weight: 500;
 }
 
-.results-filter-button-grey {
-  background-color: #8d8d8d !important;
+button.results-filter-button-grey {
+  background-color: #8d8d8d;
 }
 
 .navigator-info {
