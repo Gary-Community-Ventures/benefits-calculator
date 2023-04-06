@@ -173,7 +173,7 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 				}}
 			>
 				<FormattedMessage
-					id="emailResults.return-sendButton"
+					id="emailResults.sendButton"
 					defaultMessage="Send"
 				/>
 			</Button>
@@ -198,7 +198,7 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 				}}
 			>
 				<FormattedMessage
-					id="emailResults.return-sendButton"
+					id="emailResults.sendButton"
 					defaultMessage="Send"
 				/>
 			</Button>
