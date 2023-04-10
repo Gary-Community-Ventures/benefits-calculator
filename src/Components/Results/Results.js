@@ -19,6 +19,7 @@ import {
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
+import Share from '../Share/Share';
 import Toolbar from '@mui/material/Toolbar';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
@@ -251,57 +252,36 @@ const Results = () => {
 
   const displaySubheader = () => {
     return (
-      <>
-        <Grid xs={12} item={true}>
-          <Typography className='sub-header' variant='h6'>
-            {totalEligiblePrograms(results.programs)}
-            <FormattedMessage
-              id='results.return-programsUpToLabel'
-              defaultMessage=' programs, up to ' />
-            ${totalDollarAmount(results.programs).toLocaleString()}
-            <FormattedMessage
-              id='results.return-perYearOrLabel'
-              defaultMessage=' per year or ' />
-            ${Math.round(totalDollarAmount(results.programs)/12).toLocaleString()}
-            <FormattedMessage
-              id='results.return-perMonthLabel'
-              defaultMessage=' per month in cash or reduced expenses for you to consider' />
-          </Typography>
-        </Grid>
-      </>
-    );
-  }
-
-  const displayFooter = () => {
-    return (
-      <>
-        <Grid container xs={12} item={true} sx={{mt: 2}} >
-          <Grid sm={10} item={true}>
-            <Typography variant='body1' sx={{mt: 2}} className='remember-disclaimer-label'>
-              <FormattedMessage 
-                id='results.displaySubheader-sendResultsDescText' 
-                defaultMessage='To receive a copy of these results by email or text please click the email results button.' />
-            </Typography>
-          </Grid>
-          <Grid xs={12} item={true} sm={2} justifyContent='end'>
-            <Box justifyContent='end' display='flex'>
-              <Button
-                sx={{mb: 2, mt: 1}}
-                variant='contained'
-                endIcon={<SendIcon />}
-                onClick={() => {
-                  navigate(`/email-results/${screenerId}`);
-                }}
-                className='results-link'>
-                <FormattedMessage 
-                  id='results.return-sendResultsButton' 
-                  defaultMessage='Send Results' />
-              </Button>
-            </Box>
-          </Grid>
-        </Grid>
-      </>
-    );
+			<>
+				<Grid xs={12} item>
+					<Typography variant="h6" className="bottom-border">
+						{totalEligiblePrograms(results.programs)}
+						<FormattedMessage
+							id="results.return-programsUpToLabel"
+							defaultMessage=" programs, up to "
+						/>
+						${totalDollarAmount(results.programs).toLocaleString()}
+						<FormattedMessage
+							id="results.return-perYearOrLabel"
+							defaultMessage=" per year or "
+						/>
+						$
+						{Math.round(
+							totalDollarAmount(results.programs) / 12
+						).toLocaleString()}
+						<FormattedMessage
+							id="results.return-perMonthLabel"
+							defaultMessage=" per month in cash or reduced expenses for you to consider"
+						/>
+					</Typography>
+				</Grid>
+				{/* <Grid xs={12} item>
+					<Typography variant="h6" className="share-button-container">
+						<Share />
+					</Typography>
+				</Grid> */}
+			</>
+		);
   }
 
   const DataGridRows = (results) => {
@@ -612,18 +592,19 @@ const Results = () => {
 
   const displayHeaderSection = () => {
     return (
-      <Grid container xs={12} item={true} sx={{mt: 2}} >
-        <Grid xs={12} item={true}>
-          <Typography className='body2'>
-            <FormattedMessage
-              id='results.return-screenerIdLabel'
-              defaultMessage='Screener ID: ' />
-            {results.screenerId}
-          </Typography>
-        </Grid>
-        { displaySubheader() }
-      </Grid>
-    );
+			<Grid container item xs={12} sx={{ mt: 2 }}>
+				<Grid xs={12} item={true}>
+					<Typography className="body2">
+						<FormattedMessage
+							id="results.return-screenerIdLabel"
+							defaultMessage="Screener ID: "
+						/>
+						{results.screenerId}
+					</Typography>
+				</Grid>
+				<Grid container item xs={12}>{displaySubheader()}</Grid>
+			</Grid>
+		);
   }
 
   const displayResultsFilterButtons = () => {
@@ -680,7 +661,6 @@ const Results = () => {
                   />
                 }
               </Grid>
-              { displayFooter() }
             </>
           }
         </Grid>
