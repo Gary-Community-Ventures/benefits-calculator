@@ -240,21 +240,35 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
           <FormattedMessage
             id='qcc.tell-us-text'
             defaultMessage='Tell us a little more about yourself.' />
-          <h4 className='subheader-desc'>
-            <FormattedMessage
-              id='qcc.renderHeaderAndSubheader-subheader-desc'
-              defaultMessage="You will have an opportunity to tell us about other household members in future questions." />
-          </h4>
         </div>
       );
     } else if (matchingQuestion.headerType === 'aboutHousehold') {
-      return (
-        <div className='sub-header'>
-          <FormattedMessage
-            id='qcc.tell-us-about-household-text'
-            defaultMessage='Tell us a little more about your household.' />
-        </div>
+      if (matchingQuestion.name === 'hasBenefits' || matchingQuestion.name === 'acuteHHConditions') {
+        return (
+          <div className='sub-header'>
+            <FormattedMessage
+              id='qcc.tell-us-final-text'
+              defaultMessage='Tell us some final information about your household.' />
+          </div>
+        )
+      } else if (matchingQuestion.name === 'referralSource') {
+        return (
+          <div className='sub-header'>
+            <FormattedMessage
+              id='questions.referralSource'
+              defaultMessage='How did you hear about this screener?' />
+          </div>
+        )
+      } else {
+        return (
+          <div className='sub-header'>
+            <FormattedMessage
+              id='qcc.tell-us-text'
+              defaultMessage='Tell us about your household.' />
+          </div>
       );
+      }
+
     }
   };
 
