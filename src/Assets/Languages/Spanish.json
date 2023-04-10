@@ -381,6 +381,7 @@
   "benefitCategories.transportation": "Transporte",
   "benefitCategories.healthCare": "Cuidado de la Salud",
   "benefitCategories.taxCredits": "Créditos Fiscales",
+  "benefitCategories.childCareHelperText": "¿Se pregunta por qué el valor anual de estos programas puede diferir de los valores en total de sus resultados? Esto se debe a que este valor anual es una estimación del valor promedio probable combinado de los programas de cuidado infantil y preescolar para los que califican. Los ahorros de los programas pueden superponerse. Es Posible que pueda combinar los beneficios para ayudar a pagar el cuidado infantil y el preescolar. ",
   "cashAssistanceBenefits.tanf": "Asistencia en efectivo y apoyo laboral (Asistencia Temporal para Familias Necesitadas (TANF/Colorado Works))",
   "cashAssistanceBenefits.ssi": "Asistencia federal en efectivo para personas discapacitadas, ciegas o mayores de 65 años (Seguridad de Ingreso Suplementario/SSI)",
   "cashAssistanceBenefits.andcs": "Asistencia estatal en efectivo para personas discapacitadas que reciben SSI (Ayuda para discapacitados necesitados - Suplemento de Colorado/AND-CS)",

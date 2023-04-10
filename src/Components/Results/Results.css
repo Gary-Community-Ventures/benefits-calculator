@@ -73,6 +73,11 @@ button.results-filter-button-grey {
   font-weight: 400;
 }
 
+.child-care-helper-text {
+  font-style: italic;
+  padding: 5px 0 5px 9px;
+}
+
 @media (min-width: 601px) {
   #share-container {
     display: none;
