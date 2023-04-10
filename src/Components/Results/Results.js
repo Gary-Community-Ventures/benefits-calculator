@@ -520,7 +520,7 @@ const Results = () => {
 						</span>
 					</Toolbar>
 				)}
-        {filt.category.value === 'Child Care, Preschool, and Youth' && (
+        {(filt.category.value === 'Child Care, Preschool, and Youth' || filt.category.value === 'Cuidado de Niños, Preescolar y Jóvenes')  && (
           <Typography variant='body2' className='child-care-helper-text'>
             <FormattedMessage
               id="benefitCategories.childCareHelperText"
