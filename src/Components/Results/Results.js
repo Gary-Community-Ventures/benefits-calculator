@@ -535,7 +535,7 @@ const Results = () => {
 					</Toolbar>
 				)}
         {filt.category.value === 'Child Care, Preschool, and Youth' && (
-          <Typography variant='body2' sx={{ fontStyle: 'italic', py: '5px', pl: '9px' }}>
+          <Typography variant='body2' className='child-care-helper-text'>
             <FormattedMessage
               id="benefitCategories.childCareHelperText"
               defaultMessage="Do you wonder why the annual value of these programs may differ from the total values in your results? It's because this annual value is an estimate of the combined likely average value of child care and preschool programs you qualify for. Savings from programs may overlap. You may be able to combine benefits to help pay for child care and preschool."

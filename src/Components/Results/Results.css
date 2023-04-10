@@ -67,3 +67,8 @@
   font-size: 0.875rem;
   font-weight: 400;
 }
+
+.child-care-helper-text {
+  font-style: italic;
+  padding: 5px 0 5px 9px;
+}
