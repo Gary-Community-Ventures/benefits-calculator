@@ -9,7 +9,7 @@ import Confirmation from './Components/Confirmation/Confirmation';
 import SubmitScreen from './Components/SubmitScreen/SubmitScreen';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
-import EmailResults2 from './Components/EmailResults/EmailResults2';
+import EmailResults from './Components/EmailResults/EmailResults';
 import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
@@ -247,60 +247,69 @@ const App = () => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className='App'>
-        <CssBaseline />
-          <Header formData={formData} />
-          <Routes>
-            <Route
-              path='/'
-              element={<Navigate to={`/step-0${urlSearchParams}`} replace /> } />
-            <Route
-              path='/step-0'
-              element={<LandingPage
-                clearLocalStorageFormDataAndResults={clearLocalStorageFormDataAndResults} /> } />
-            <Route
-              path='/step-1'
-              element={<Disclaimer
-                formData={formData}
-                handleCheckboxChange={handleCheckboxChange} /> } />
-            <Route
-              path='/step-:id'
-              element={<QuestionComponentContainer
-                formData={formData}
-                handleTextfieldChange={handleTextfieldChange}
-                handleContinueSubmit={handleContinueSubmit}
-                handleRadioButtonChange={handleRadioButtonChange}
-                handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-                handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-                handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-                setFormData={setFormData}
-                handleCheckboxChange={handleCheckboxChange} /> } />
-            <Route
-              path='/confirm-information'
-              element={<Confirmation
-                formData={formData} /> } />
-            <Route
-              path='/submit-screen'
-              element={<SubmitScreen
-                formData={formData}
-                setFormData={setFormData}
-                /> } />
-            <Route
-              path='/results/:id'
-              element={<Results/> } />
-            <Route
-              path='/email-results/:id'
-              element={<EmailResults2
-                formData={formData}
-                handleTextfieldChange={handleTextfieldChange} /> } />
-            <Route
-              path='*'
-              element={<Navigate to='/step-0' replace /> } />
-          </Routes>
-      </div>
-    </ThemeProvider>
-  );
+		<ThemeProvider theme={theme}>
+			<div className="App">
+				<CssBaseline />
+				<Header
+					formData={formData}
+					handleTextfieldChange={handleTextfieldChange}
+				/>
+				<Routes>
+					<Route
+						path="/"
+						element={<Navigate to={`/step-0${urlSearchParams}`} replace />}
+					/>
+					<Route
+						path="/step-0"
+						element={
+							<LandingPage
+								clearLocalStorageFormDataAndResults={
+									clearLocalStorageFormDataAndResults
+								}
+							/>
+						}
+					/>
+					<Route
+						path="/step-1"
+						element={
+							<Disclaimer
+								formData={formData}
+								handleCheckboxChange={handleCheckboxChange}
+							/>
+						}
+					/>
+					<Route
+						path="/step-:id"
+						element={
+							<QuestionComponentContainer
+								formData={formData}
+								handleTextfieldChange={handleTextfieldChange}
+								handleContinueSubmit={handleContinueSubmit}
+								handleRadioButtonChange={handleRadioButtonChange}
+								handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
+								handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+								handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+								setFormData={setFormData}
+								handleCheckboxChange={handleCheckboxChange}
+							/>
+						}
+					/>
+					<Route
+						path="/confirm-information"
+						element={<Confirmation formData={formData} />}
+					/>
+					<Route
+						path="/submit-screen"
+						element={
+							<SubmitScreen formData={formData} setFormData={setFormData} />
+						}
+					/>
+					<Route path="/results/:id" element={<Results />} />
+					<Route path="*" element={<Navigate to="/step-0" replace />} />
+				</Routes>
+			</div>
+		</ThemeProvider>
+	);
 }
 
 export default App;

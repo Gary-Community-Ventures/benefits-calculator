@@ -231,7 +231,7 @@ const questions = {
     questionDescription:
       <FormattedMessage
         id='questions.hasBenefits-description'
-        defaultMessage='For example, does any person in your household receive public benefits like SNAP food assistance, CCCAP help with child care costs, TANF cash assistance, or tax credits like EITC?' />,
+        defaultMessage="This information will help make sure we don't give you results for benefits you already have." />,
     componentDetails: {
       componentType: 'Radiofield',
       ariaLabel: 'questions.hasBenefits-ariaLabel',
@@ -244,10 +244,6 @@ const questions = {
         <FormattedMessage
           id='questions.hasBenefits-a'
           defaultMessage='Please tell us what benefits your household currently has.' />,
-      questionDescription:
-        <FormattedMessage
-          id='questions.hasBenefits-a-description'
-          defaultMessage="This information will help ensure that we don't give you results for benefits you already have." />,
       name: 'benefits',
       componentDetails: {
         componentType: 'AccordionContainer',
@@ -273,10 +269,6 @@ const questions = {
   },
   [stepDirectory.referralSource]: {
     name: 'referralSource',
-    question:
-      <FormattedMessage
-        id='questions.referralSource'
-        defaultMessage='How did you hear about this screener?' />,
     componentDetails: {
       componentType: 'BasicSelect',
       inputName: 'referralSource',

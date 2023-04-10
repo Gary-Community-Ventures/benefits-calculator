@@ -1,6 +1,6 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@mui/material';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import taxYearOptions from '../../Assets/taxYearOptions';
 import referralOptions from '../../Assets/referralOptions';
@@ -22,6 +22,7 @@ import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
   const navigate = useNavigate();
+  const intl = useIntl();
 
   const displayAllMembersDataBlock = () => {
     const { householdData } = formData;
@@ -397,17 +398,51 @@ const Confirmation = ({ formData }) => {
     return frequencyOptions[incomeFrequency];
   }
 
+  const formatToUSD = (num) => {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
+  }
+
+  const displayAnnualIncome = (incomeStream) => {
+    const { incomeAmount, incomeFrequency, hoursPerWeek } = incomeStream;
+    const translatedAnnualText = intl.formatMessage({ id:'displayAnnualIncome.annual'});
+    let num = 0;
+
+    switch (incomeFrequency) {
+      case 'weekly':
+        num = Number(incomeAmount) * 52;
+        break;
+      case 'biweekly':
+        num = Number(incomeAmount) * 26;
+        break;
+      case 'monthly':
+        num = Number(incomeAmount) * 12;
+        break;
+      case 'hourly':
+        num = Number(incomeAmount) * Number(hoursPerWeek) * 52;
+        break;
+    }
+
+    return `(${formatToUSD(num)}` + translatedAnnualText + `)`;
+  }
+
   const listAllIncomeStreams = (memberIncomeStreams) => {
 		const mappedListItems = memberIncomeStreams.map((incomeStream, index) => {
-			return (
-				<li key={incomeStream.incomeStreamName + index}>
-					{' '}
-					{getIncomeStreamNameLabel(incomeStream.incomeStreamName)}:{' '}
-					{incomeStream.hoursPerWeek > 0 && incomeStream.incomeFrequency === 'hourly' &&
-						`Average of ${incomeStream.hoursPerWeek} hours/week at `}
-					${Number(incomeStream.incomeAmount).toFixed(2)}{' '}
-					{getIncomeStreamFrequencyLabel(incomeStream.incomeFrequency)}
-				</li>
+      const incomeStreamName = getIncomeStreamNameLabel(incomeStream.incomeStreamName);
+      const incomeAmount = formatToUSD(Number(incomeStream.incomeAmount));
+      const incomeFrequency = getIncomeStreamFrequencyLabel(incomeStream.incomeFrequency);
+      const hoursPerWeek = incomeStream.hoursPerWeek;
+      const translatedHrsPerWkText = intl.formatMessage({ id:'listAllIncomeStreams.hoursPerWeek' });
+      const annualAmount = displayAnnualIncome(incomeStream);
+
+      return (
+        <li key={incomeStream.incomeStreamName + index}>
+          <p>{ incomeStreamName }:</p>
+          { incomeStream.incomeFrequency === 'hourly' ?
+              <p>{incomeAmount} {incomeFrequency} ~{hoursPerWeek} {translatedHrsPerWkText} {annualAmount}</p>
+            :
+              <p>{incomeAmount} {incomeFrequency} {annualAmount}</p>
+          }
+        </li>
 			);
 		});
 

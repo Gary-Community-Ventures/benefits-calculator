@@ -21,3 +21,33 @@
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
+
+@media (max-width: 420px) {
+  div.option-card-container {
+    gap: 15px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-action-area.MuiButtonBase-root,
+  .unselected-option-card.MuiPaper-root,
+  .selected-option-card.MuiPaper-root {
+    width: 100%;
+    height: 135px;
+  }
+
+  .option-card-image {
+    height: 56px;
+    width: 56px;
+  }
+
+  div.sub-header,
+  h2.sub-header,
+  .question-label.household-data-q-underline {
+    font-size: 1.5rem;
+  }
+
+  p.question-label {
+    font-size: 1rem;
+  }
+}
