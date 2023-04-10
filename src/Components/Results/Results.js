@@ -142,16 +142,22 @@ const Results = () => {
 
   const categoryValues = (results) => {
 		const categoryValues = {};
+    let num_preschool_programs = 0;
 		for (let result of results) {
       if (categoryValues[result.category] === undefined) {
         categoryValues[result.category] = 0
       }
       if (filt.citizen.value.includes(result.legal_status_required)) {
 				categoryValues[result.category] += result.estimated_value;
+        if (result.category === 'Child Care, Preschool, and Youth') {
+          num_preschool_programs++
+        }
 			}
 		}
-		if (categoryValues['Child Care, Preschool, and Youth'] > 720) {
-			categoryValues['Child Care, Preschool, and Youth'] = 720;
+
+		const preschool_category = categoryValues['Child Care, Preschool, and Youth']
+		if (preschool_category > 8640 && num_preschool_programs > 1) {
+			categoryValues['Child Care, Preschool, and Youth'] = 8640;
 		}
 		return categoryValues;
 	};
