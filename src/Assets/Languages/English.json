@@ -275,10 +275,10 @@
   "confirmation.displayAllFormData-currentHHBenefitsText": "Household benefits:",
   "confirmation.displayAllFormData-healthInsurance": "Household health insurance: ",
   "confirmation.displayAllFormData-acuteHHConditions": "Immediate Needs:",
-  "frequencyOptions.weekly": "Every week",
-  "frequencyOptions.biweekly": "Every 2 weeks",
-  "frequencyOptions.monthly": "Every month",
-  "frequencyOptions.hourly": "Hourly",
+  "frequencyOptions.weekly": "every week",
+  "frequencyOptions.biweekly": "every 2 weeks",
+  "frequencyOptions.monthly": "every month",
+  "frequencyOptions.hourly": "hourly",
   "results.return-screenerIdLabel": "Screener ID: ",
   "results.return-programsUpToLabel": " programs, up to ",
   "results.return-perYearOrLabel": " per year or ",
@@ -405,5 +405,7 @@
   "healthCareBenefits.dentallowincseniors": "Low-cost dental care for people 60 years of age or older (Colorado Dental Health Program for Low-Income Seniors)",
   "taxCreditBenefits.eitc": "Federal tax credit: earned income (Earned Income Tax Credit)",
   "taxCreditBenefits.coeitc": "State tax credit: earned income (Colorado Earned Income Tax Credit/Expanded Earned Income Tax Credit)",
-  "taxCreditBenefits.ctc": "Federal tax credit: child tax credit (Child Tax Credit)"
+  "taxCreditBenefits.ctc": "Federal tax credit: child tax credit (Child Tax Credit)",
+  "displayAnnualIncome.annual": " annually",
+  "listAllIncomeStreams.hoursPerWeek": " hours/week "
 }
