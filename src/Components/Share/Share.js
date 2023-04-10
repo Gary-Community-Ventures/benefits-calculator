@@ -37,7 +37,7 @@ const Share = forwardRef(({close}, ref) => {
 		}),
 	};
 
-	const shareUrl = 'https://screener.myfriendben.org/';
+	const shareUrl = 'https://www.myfriendben.org/';
 	const appId = '1268913277361574';
 
 	const iconSize = { fontSize: '1.3rem' };
