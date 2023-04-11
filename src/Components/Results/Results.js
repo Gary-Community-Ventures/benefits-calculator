@@ -141,24 +141,31 @@ const Results = () => {
 	};
 
   const categoryValues = (results) => {
+    const preschoolPrograms = {
+      'Cuidado de Niños, Preescolar y Jóvenes': [0, 0],
+      'Child Care, Preschool, and Youth': [0, 0]
+    }
 		const categoryValues = {};
-    let num_preschool_programs = 0;
 		for (let result of results) {
       if (categoryValues[result.category] === undefined) {
-        categoryValues[result.category] = 0
+        categoryValues[result.category] = 0;
       }
       if (filt.citizen.value.includes(result.legal_status_required)) {
 				categoryValues[result.category] += result.estimated_value;
-        if (result.category === 'Child Care, Preschool, and Youth') {
-          num_preschool_programs++
+        if (Object.keys(preschoolPrograms).includes(result.category)) {
+          preschoolPrograms[result.category][0]++;
+          preschoolPrograms[result.category][1] += result.estimated_value;
         }
 			}
-		}
+    }
 
-		const preschool_category = categoryValues['Child Care, Preschool, and Youth']
-		if (preschool_category > 8640 && num_preschool_programs > 1) {
-			categoryValues['Child Care, Preschool, and Youth'] = 8640;
-		}
+    for (const category in preschoolPrograms) {
+      if (!Object.keys(preschoolPrograms).includes(category)) continue
+      if (preschoolPrograms[category][1] > 8640 && preschoolPrograms[category][0] > 1) {
+        categoryValues[category] = 8640;
+      }
+    }
+
 		return categoryValues;
 	};
 
@@ -281,11 +288,6 @@ const Results = () => {
 						/>
 					</Typography>
 				</Grid>
-				{/* <Grid xs={12} item>
-					<Typography variant="h6" className="share-button-container">
-						<Share />
-					</Typography>
-				</Grid> */}
 			</>
 		);
   }
@@ -484,50 +486,50 @@ const Results = () => {
       { field: 'category', headerName: 'Category', flex: 1 },
     ];
 
-    const allCategories = () => {
-      return results.reduce((acc, benefit) => {
-        if (!acc.includes(benefit.category)) {
-          acc = [...acc, benefit.category];
-        }
-        return acc
-      }, []);
-    }
+    const categories = results.reduce((acc, benefit) => {
+      if (!acc.includes(benefit.category)) {
+        acc = [...acc, benefit.category];
+      }
+      return acc
+    }, []);
 
     return (
 			<>
 				<Filter
 					filt={filt}
 					updateFilter={updateFilter}
-					categories={allCategories()}
+					categories={categories}
 					eligibilityState={eligibilityState}
 					categoryState={categoryState}
           citizenToggleState={citizenToggleState}
           alreadyHasToggleState={alreadyHasToggleState}
 				/>
 				{filt.category !== false && (
-					<Toolbar
-						sx={{ border: 1, backgroundColor: '#0096B0', color: 'white' }}
-					>
-						<span className="space-around border-right">
-							{filt.category.value}
-						</span>
-						<span className="space-around">
-							${totalDollarAmount(results, filt.category.value).toLocaleString()}{' '}
-							<FormattedMessage
-								id="results.perYear"
-								defaultMessage="Per Year"
-							/>
-						</span>
-					</Toolbar>
+          <>
+            <Toolbar
+              sx={{ border: 1, backgroundColor: '#0096B0', color: 'white' }}
+            >
+              <span className="space-around border-right">
+                {filt.category.value}
+              </span>
+              <span className="space-around">
+                ${totalDollarAmount(results, filt.category.value).toLocaleString()}{' '}
+                <FormattedMessage
+                  id="results.perYear"
+                  defaultMessage="Per Year"
+                />
+              </span>
+            </Toolbar>
+            {(filt.category.value === 'Child Care, Preschool, and Youth' || filt.category.value === 'Cuidado de Niños, Preescolar y Jóvenes')  && (
+              <Typography variant='body2' className='child-care-helper-text'>
+                <FormattedMessage
+                  id="benefitCategories.childCareHelperText"
+                  defaultMessage="Do you wonder why the annual value of these programs may differ from the total values in your results? It's because this annual value is an estimate of the combined likely average value of child care and preschool programs you qualify for. Savings from programs may overlap. You may be able to combine benefits to help pay for child care and preschool."
+                />
+              </Typography>
+            )}
+          </>
 				)}
-        {(filt.category.value === 'Child Care, Preschool, and Youth' || filt.category.value === 'Cuidado de Niños, Preescolar y Jóvenes')  && (
-          <Typography variant='body2' className='child-care-helper-text'>
-            <FormattedMessage
-              id="benefitCategories.childCareHelperText"
-              defaultMessage="Do you wonder why the annual value of these programs may differ from the total values in your results? It's because this annual value is an estimate of the combined likely average value of child care and preschool programs you qualify for. Savings from programs may overlap. You may be able to combine benefits to help pay for child care and preschool."
-            />
-          </Typography>
-        )}
 				<DataGridPro
 					treeData
 					autoHeight
