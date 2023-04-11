@@ -6,7 +6,6 @@ import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails
 import Filter from '../FilterTable/FilterTable.js'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
-import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
 import {
 	DataGridPro,
@@ -19,7 +18,6 @@ import {
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
-import Share from '../Share/Share';
 import Toolbar from '@mui/material/Toolbar';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
@@ -114,9 +112,6 @@ const Results = () => {
 
   const fetchResults = async () => {
 		const rawEligibilityResponse = await getEligibility(screenerId, locale);
-		setLocale(
-			rawEligibilityResponse.default_language === 'en-us' ? 'en-US' : 'es'
-		);
 		setResults({
 			programs: [],
 			rawResponse: rawEligibilityResponse,
