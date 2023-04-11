@@ -51,8 +51,8 @@ const Header = ({ formData, handleTextfieldChange }) => {
 					src={isBIAUser ? BIAMFBLogo : MFBLogo}
 					alt={
 						isBIAUser
-							? 'benefits in action and my friend ben logo'
-							: 'my friend ben logo'
+							? 'benefits in action and my friend ben logo home page button'
+							: 'my friend ben home page button'
 					}
 					className="logo"
 					onClick={() => navigate(`/step-0${urlSearchParams}`)}
@@ -75,20 +75,30 @@ const Header = ({ formData, handleTextfieldChange }) => {
 							<MenuItem value="es">Español</MenuItem>
 						</Select>
 					</FormControl>
-					<button className="icon-container" onClick={handleOpenShare}>
+					<button
+						aria-label="share"
+						className="icon-container"
+						onClick={handleOpenShare}>
 						<ShareIcon />
 					</button>
 					{isResults && (
-						<button className="icon-container" onClick={handleOpenEmailResults}>
+						<button
+							aria-label="email results"
+							className="icon-container"
+							onClick={handleOpenEmailResults}>
 							<SaveAltIcon />
 						</button>
 					)}
 				</div>
 			</AppBar>
-			<Modal open={openShare} onClose={handleCloseShare}>
+			<Modal
+				open={openShare}
+				onClose={handleCloseShare}>
 				<Share close={handleCloseShare} />
 			</Modal>
-			<Modal open={openEmailResults} onClose={handleCloseEmailResults}>
+			<Modal
+				open={openEmailResults}
+				onClose={handleCloseEmailResults}>
 				<EmailResults
 					formData={formData}
 					handleTextfieldChange={handleTextfieldChange}
