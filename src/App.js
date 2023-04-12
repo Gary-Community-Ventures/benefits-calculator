@@ -264,6 +264,10 @@ const App = () => {
             path="/confirm-information"
             element={<ProgressBar />}
           />
+          <Route
+            path="*"
+            element={<></>}
+          />
         </Routes>
 				<Routes>
 					<Route
