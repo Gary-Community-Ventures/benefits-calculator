@@ -1,4 +1,4 @@
-import { AppBar, MenuItem, FormControl, Select, Modal } from '@mui/material';
+import { AppBar, MenuItem, Select, Modal, Button } from '@mui/material';
 import { useContext, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper';
@@ -71,23 +71,35 @@ const Header = ({ formData, handleTextfieldChange }) => {
 					onClick={() => navigate(`/step-0${urlSearchParams}`)}
 				/>
 				<div className="icon-wrapper">
-					<FormControl className="language-select">
-						<Select
-							labelId="select-language-label"
-							id="select-language"
-							value={context.locale}
-							label="Language"
-							onChange={context.selectLanguage}
-							aria-label="select a language"
-							IconComponent={LanguageIcon}
-							className="language-switcher"
-							variant="standard"
-							disableUnderline={true}
-						>
-							<MenuItem value="en-US">English</MenuItem>
-							<MenuItem value="es">Español</MenuItem>
-						</Select>
-					</FormControl>
+					<Button
+						onClick={handleOpenLanguage}
+						sx={{ backgroundColor: '#2A2B2A', color: '#FFFFFF', width: '20px', minWidth: '20px', padding: '0', '&:hover': { backgroundColor: '#2A2B2A' } }}
+						role="menu"
+						aria-label="language menu button"
+						alt="language menu button"
+					>
+						<LanguageIcon
+							name='language menu button'
+							role="img"
+						/>
+					</Button>
+					<Select
+						labelId="select-language-label"
+						id="select-language"
+						value={context.locale}
+						label="Language"
+						onChange={handleLanguageChange}
+						aria-label="select a language"
+						className="language-switcher"
+						variant="standard"
+						disableUnderline={true}
+						open={isLanguageSelectOpen}
+						onOpen={handleOpenLanguage}
+						onClose={handleCloseLanguage}
+					>
+						<MenuItem value="en-US">English</MenuItem>
+						<MenuItem value="es">Español</MenuItem>
+					</Select>
 					<button
 						aria-label="share"
 						className="icon-container"
