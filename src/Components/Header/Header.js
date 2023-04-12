@@ -113,14 +113,14 @@ const Header = ({ formData, handleTextfieldChange }) => {
 						<MenuItem value="es">Español</MenuItem>
 					</Select>
 					<button
-						aria-label="share"
+						aria-label="share button"
 						className="icon-container"
 						onClick={handleOpenShare}>
 						<ShareIcon role="img"/>
 					</button>
 					{isResults && (
 						<button
-							aria-label="email results"
+							aria-label="email results button"
 							className="icon-container"
 							onClick={handleOpenEmailResults}>
 							<SaveAltIcon role="img"/>
