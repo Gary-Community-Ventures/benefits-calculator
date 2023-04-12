@@ -111,7 +111,7 @@ const Header = ({ formData, handleTextfieldChange }) => {
 						open={isLanguageSelectOpen}
 						onOpen={handleOpenLanguage}
 						onClose={handleCloseLanguage}
-						IconComponent={false}
+						IconComponent={hideDefaultCarrotIcon}
 						sx={{ minWidth: 0 }}
 					>
 						<MenuItem value="en-US">English</MenuItem>
