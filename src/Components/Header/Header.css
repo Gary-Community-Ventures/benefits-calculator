@@ -38,4 +38,9 @@
     align-items: baseline;
     height: 80px;
   }
+
+  #language-button {
+    top: 48px;
+    left: 18px;
+  }
 }

@@ -86,6 +86,7 @@ const Header = ({ formData, handleTextfieldChange }) => {
 						}}
 						aria-label="language menu button"
 						aria-busy="true"
+						id="language-button"
 					>
 						<LanguageIcon
 							name='language menu button'
