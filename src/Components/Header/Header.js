@@ -73,8 +73,17 @@ const Header = ({ formData, handleTextfieldChange }) => {
 				<div className="icon-wrapper">
 					<Button
 						onClick={handleOpenLanguage}
-						sx={{ backgroundColor: '#2A2B2A', color: '#FFFFFF', width: '20px', minWidth: '20px', padding: '0', '&:hover': { backgroundColor: '#2A2B2A' } }}
-						role="menu"
+						sx={{
+							backgroundColor: "#2A2B2A",
+							color: "#FFFFFF",
+							width: "20px",
+							minWidth: "20px",
+							padding: "0",
+							"&:hover": { backgroundColor: "#2A2B2A" },
+							position: "absolute",
+							top: "13px",
+							right: "98px"
+						}}
 						aria-label="language menu button"
 					>
 						<LanguageIcon
