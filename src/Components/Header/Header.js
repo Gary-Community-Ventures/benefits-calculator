@@ -76,7 +76,6 @@ const Header = ({ formData, handleTextfieldChange }) => {
 						sx={{ backgroundColor: '#2A2B2A', color: '#FFFFFF', width: '20px', minWidth: '20px', padding: '0', '&:hover': { backgroundColor: '#2A2B2A' } }}
 						role="menu"
 						aria-label="language menu button"
-						alt="language menu button"
 					>
 						<LanguageIcon
 							name='language menu button'
@@ -104,14 +103,14 @@ const Header = ({ formData, handleTextfieldChange }) => {
 						aria-label="share"
 						className="icon-container"
 						onClick={handleOpenShare}>
-						<ShareIcon />
+						<ShareIcon role="img"/>
 					</button>
 					{isResults && (
 						<button
 							aria-label="email results"
 							className="icon-container"
 							onClick={handleOpenEmailResults}>
-							<SaveAltIcon />
+							<SaveAltIcon role="img"/>
 						</button>
 					)}
 				</div>
