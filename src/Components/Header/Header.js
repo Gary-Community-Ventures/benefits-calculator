@@ -89,7 +89,7 @@ const Header = ({ formData, handleTextfieldChange }) => {
 						id="language-button"
 					>
 						<LanguageIcon
-							name='language menu button'
+							name="language menu button"
 							role="img"
 						/>
 					</Button>
@@ -106,6 +106,8 @@ const Header = ({ formData, handleTextfieldChange }) => {
 						open={isLanguageSelectOpen}
 						onOpen={handleOpenLanguage}
 						onClose={handleCloseLanguage}
+						IconComponent={false}
+						sx={{ minWidth: 0 }}
 					>
 						<MenuItem value="en-US">English</MenuItem>
 						<MenuItem value="es">Español</MenuItem>
