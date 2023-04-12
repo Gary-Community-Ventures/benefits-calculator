@@ -64,7 +64,7 @@ const Header = ({ formData, handleTextfieldChange }) => {
 					src={isBIAUser ? BIAMFBLogo : MFBLogo}
 					alt={
 						isBIAUser
-							? 'benefits in action and my friend ben logo home page button'
+							? 'benefits in action and my friend ben home page button'
 							: 'my friend ben home page button'
 					}
 					className="logo"
