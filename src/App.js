@@ -14,6 +14,7 @@ import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
 import './App.css';
+import ProgressBar from './Components/ProgressBar/ProgressBar';
 // import { createDevFormData } from './Assets/devFormData';
 
 const TRACKING_ID = "G-NZ9D1VLR0D";
@@ -254,6 +255,16 @@ const App = () => {
 					formData={formData}
 					handleTextfieldChange={handleTextfieldChange}
 				/>
+        <Routes>
+          <Route 
+            path="/step-:id"
+            element={<ProgressBar />}
+          />
+          <Route 
+            path="/confirm-information"
+            element={<ProgressBar />}
+          />
+        </Routes>
 				<Routes>
 					<Route
 						path="/"
