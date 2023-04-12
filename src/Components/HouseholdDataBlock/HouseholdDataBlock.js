@@ -112,11 +112,9 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const createFMInputLabel = (personIndex) => {
     if (personIndex === 0) {
       return (
-        <>
-          <FormattedMessage
-            id='householdDataBlock.createFMInputLabel-headOfHH'
-            defaultMessage='Your Age' />
-        </>
+        <FormattedMessage
+          id='householdDataBlock.createFMInputLabel-headOfHH'
+          defaultMessage='Your Age' />
       );
     } else {
       return (
