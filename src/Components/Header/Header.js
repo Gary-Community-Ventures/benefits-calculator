@@ -53,6 +53,10 @@ const Header = ({ formData, handleTextfieldChange }) => {
 		context.selectLanguage(event);
 	}
 
+	const hideDefaultCarrotIcon = () => {
+		return <p></p>;
+	}
+
 	return (
 		<>
 			<AppBar
