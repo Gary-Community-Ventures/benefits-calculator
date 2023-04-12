@@ -19,7 +19,6 @@ import {
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
-import Share from '../Share/Share';
 import Toolbar from '@mui/material/Toolbar';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
@@ -36,7 +35,6 @@ export const isNavigationKey = (key) =>
 
 const Results = () => {
   const { id: screenerId } = useParams()
-  const navigate = useNavigate();
   const locale = useContext(Context).locale;
   const setLocale = useContext(Context).setLocale;
   const intl = useIntl();
@@ -267,7 +265,7 @@ const Results = () => {
     return (
 			<>
 				<Grid xs={12} item>
-					<Typography variant="h6" className="bottom-border">
+          <h1 className="bottom-border program-value-header">
 						{totalEligiblePrograms(results.programs)}
 						<FormattedMessage
 							id="results.return-programsUpToLabel"
@@ -286,7 +284,7 @@ const Results = () => {
 							id="results.return-perMonthLabel"
 							defaultMessage=" per month in cash or reduced expenses for you to consider"
 						/>
-					</Typography>
+          </h1>
 				</Grid>
 			</>
 		);

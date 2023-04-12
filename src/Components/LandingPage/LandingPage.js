@@ -27,12 +27,12 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
 				/>
 				{totalNumberOfQuestions()}
 			</p>
-			<h2 className="sub-header">
+			<h1 className="sub-header">
 				<FormattedMessage
 					id="disclaimer.header"
 					defaultMessage="What you should know before we begin: "
 				/>
-			</h2>
+			</h1>
 			<Card variant="outlined">
 				<CardContent>
 					<Typography variant="body1">
