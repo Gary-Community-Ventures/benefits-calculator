@@ -2,6 +2,7 @@ import { useParams } from 'react-router'
 import { FormattedMessage } from 'react-intl';
 import LinearProgress from '@mui/material/LinearProgress';
 import stepDirectory from '../../Assets/stepDirectory';
+import './ProgressBar.css'
 
 const ProgressBar = () => {
 	const totalSteps = Object.keys(stepDirectory).length + 2;
@@ -9,13 +10,14 @@ const ProgressBar = () => {
 	step = step ?? totalSteps
 
 	return (
-		 <>
+		 <div className='progress-bar-container'>
 			<LinearProgress
 				sx={{
+					marginBottom: '5px',
 					backgroundColor: '#d6d6d6c4',
 					border: '1px solid #B0B0B0',
 					borderRadius: '500rem;',
-					height: '.5rem',
+					height: '1rem',
 					boxShadow: 'inset -1px 1px 3px rgb(0 0 0 / 0.2)',
 					'& .MuiLinearProgress-bar': {
 						background:
@@ -37,7 +39,7 @@ const ProgressBar = () => {
 					defaultMessage=' of ' />
 				{ totalSteps }
 			</p>
-		</>
+		</div>
 	);
 };
 
