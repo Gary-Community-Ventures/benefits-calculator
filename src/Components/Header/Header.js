@@ -23,6 +23,7 @@ const Header = ({ formData, handleTextfieldChange }) => {
 
 	const [openShare, setOpenShare] = useState(false);
 	const [openEmailResults, setOpenEmailResults] = useState(false);
+	const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
 
 	const handleOpenShare = () => {
 		setOpenShare(true);
