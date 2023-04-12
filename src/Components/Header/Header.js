@@ -75,7 +75,6 @@ const Header = ({ formData, handleTextfieldChange }) => {
 					onClick={() => navigate(`/step-0${urlSearchParams}`)}
 				/>
 				<div className="icon-wrapper">
-						IconComponent={hideDefaultCarrotIcon}
 					<Button
 						onClick={handleOpenLanguage}
 						sx={{
