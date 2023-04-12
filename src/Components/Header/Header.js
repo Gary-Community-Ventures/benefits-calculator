@@ -41,6 +41,18 @@ const Header = ({ formData, handleTextfieldChange }) => {
 		setOpenEmailResults(false);
 	};
 
+	const handleCloseLanguage = () => {
+    setIsLanguageSelectOpen(false);
+  };
+
+  const handleOpenLanguage = () => {
+    setIsLanguageSelectOpen(true);
+  };
+
+	const handleLanguageChange = (event) => {
+		context.selectLanguage(event);
+	}
+
 	return (
 		<>
 			<AppBar
