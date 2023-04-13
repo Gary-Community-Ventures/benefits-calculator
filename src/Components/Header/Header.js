@@ -104,14 +104,13 @@ const Header = ({ formData, handleTextfieldChange }) => {
 						label="Language"
 						onChange={handleLanguageChange}
 						aria-label="select a language"
-						className="language-switcher"
 						variant="standard"
 						disableUnderline={true}
 						open={isLanguageSelectOpen}
 						onOpen={handleOpenLanguage}
 						onClose={handleCloseLanguage}
 						IconComponent={hideDefaultCarrotIcon}
-						sx={{ minWidth: 0 }}
+						renderValue={() => context.locale === "en-US" ? "EN" : "ES"}
 					>
 						<MenuItem value="en-US">English</MenuItem>
 						<MenuItem value="es">Español</MenuItem>
