@@ -64,16 +64,19 @@ const Header = ({ formData, handleTextfieldChange }) => {
 				id="nav-container"
 				sx={{ flexDirection: 'row' }}
 			>
-				<img
-					src={isBIAUser ? BIAMFBLogo : MFBLogo}
-					alt={
-						isBIAUser
-							? 'benefits in action and my friend ben home page button'
-							: 'my friend ben home page button'
-					}
-					className="logo"
+				<a
 					onClick={() => navigate(`/step-0${urlSearchParams}`)}
-				/>
+				>
+					<img
+						src={isBIAUser ? BIAMFBLogo : MFBLogo}
+						alt={
+							isBIAUser
+								? 'benefits in action and my friend ben home page button'
+								: 'my friend ben home page button'
+						}
+						className="logo"
+					/>
+				</a>
 				<div className="icon-wrapper">
 					<Button
 						onClick={handleOpenLanguage}
