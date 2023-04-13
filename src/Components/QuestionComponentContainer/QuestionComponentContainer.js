@@ -100,7 +100,9 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
 
     return (
       <div className='question-container' id={id}>
-        <h2 className='question-label'>{matchingQuestion.question}</h2>
+        {matchingQuestion.name !== 'referralSource' &&
+          <h2 className='question-label'>{matchingQuestion.question}</h2>
+        }
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
         {component}
         {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && renderFollowUpQuestions()}
