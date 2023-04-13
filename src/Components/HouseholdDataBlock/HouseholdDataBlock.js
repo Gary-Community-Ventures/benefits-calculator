@@ -12,7 +12,6 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { householdMemberAgeHasError, displayHouseholdMemberAgeHelperText } from '../../Assets/validationFunctions';
 import { FormattedMessage } from 'react-intl';
 import './HouseholdDataBlock.css';
-import { useGridStatePersistence } from '@mui/x-data-grid/internals';
 
 const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const { householdSize } = formData;
@@ -23,9 +22,9 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const [page, setPage] = useState(0);
   let initialHouseholdData = [];
 
-  const createHHMInitData = (householdSizeNum) => {
+  const createHHMInitData = (remaining, current) => {
     const result = [];
-    for (let i = 0; i < householdSizeNum; i++) {
+    for (let i = 0; i < remaining - current; i++) {
       result.push({
         age: '',
         relationshipToHH: ``,
@@ -42,7 +41,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         incomeStreams: []
       });
 
-      if (i === 0) {
+      if (i === 0 && current === 0) {
         result[i].relationshipToHH = 'headOfHousehold';
       }
     }
@@ -55,8 +54,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   } else if (formData.householdData.length < remainingHHMNumber) {
     //they've added/increased the size of their household so we need to create objects
     //for each of the new members and add them to the existing formData.householdData
-    const householdSizeDifference = remainingHHMNumber - formData.householdData.length;
-    const newHHMembers = createHHMInitData(householdSizeDifference);
+    const newHHMembers = createHHMInitData(remainingHHMNumber, formData.householdData.length);
     initialHouseholdData = [...formData.householdData, ...newHHMembers];
   } else if (formData.householdData.length > remainingHHMNumber) {
     //they've decreased the size of their household so we need to remove members
