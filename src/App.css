@@ -33,14 +33,6 @@
   margin-bottom: 1rem;
 }
 
-.language-switcher .MuiInputBase-input {
-  color: rgba(0, 0, 0, 0);
-  width: 0;
-}
-
-.Mui-focused .MuiInput-input  {
-  background-color: rgba(0,0,0,0) !important;
-}
 
 .MuiDataGrid-columnHeaderTitle {
   overflow: visible !important;
