@@ -4,8 +4,8 @@
   flex-wrap: wrap;
   border: 1px solid black;
   border-radius: 10px;
-  padding: 1rem;
-  margin: 1rem;
+  padding: .7rem;
+  margin: .5rem;
   box-shadow: 1px 1px 10px rgb(0 0 0 / 0.4);
 }
 
@@ -23,14 +23,19 @@
 
 @media (max-width: 600px) {
   .member-added-container {
-    flex-direction: row;
-    align-items: center;
+    display: inline-block;
     padding: .5rem;
     margin: .5rem;
+    width: 90%;
+  }
+
+  .member-added-relationship {
+    display: inline;
+    padding-right: .5rem;
   }
   
   .member-added-age {
-    padding-left: 1rem;
+    display: inline-block;
   }
 
   .member-added-income {
