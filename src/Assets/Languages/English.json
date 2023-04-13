@@ -117,6 +117,7 @@
   "householdDataBlock.createDropdownCompProps-label": "Relation Type",
   "householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText": "Click to select relationship",
   "householdDataBlock.questionHeader": "Tell us about yourself.",
+  "relationshipOptions.yourself": "Yourself",
   "relationshipOptions.child": "Child",
   "relationshipOptions.fosterChild":  "Foster Child",
   "relationshipOptions.stepChild":  "Step-child",
