@@ -1,7 +1,44 @@
+.member-added-container {
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: .7rem;
+  margin: .5rem;
+  box-shadow: 1px 1px 10px rgb(0 0 0 / 0.4);
+}
+
+.member-added-relationship {
+  color: #037a93;
+}
+
 .radio-question {
   margin-top: 1rem;
 }
 
 .household-data-sub-header {
   margin-top: .5rem;
+}
+
+@media (max-width: 600px) {
+  .member-added-container {
+    display: inline-block;
+    padding: .5rem;
+    margin: .5rem;
+    width: 90%;
+  }
+
+  .member-added-relationship {
+    display: inline;
+    padding-right: .5rem;
+  }
+  
+  .member-added-age {
+    display: inline-block;
+  }
+
+  .member-added-income {
+    display: none;
+  }
 }

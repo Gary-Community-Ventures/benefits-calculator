@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import stepDirectory from '../../Assets/stepDirectory';
-import ProgressBar from '../ProgressBar/ProgressBar';
 import './LandingPage.css';
 
 const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
@@ -19,20 +18,12 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
 
   return (
 		<main className="benefits-form">
-			<ProgressBar step={0}/>
-			<p className="step-progress-title">
-				<FormattedMessage
-					id="landingPage.step-header"
-					defaultMessage="Step 0 of "
-				/>
-				{totalNumberOfQuestions()}
-			</p>
-			<h2 className="sub-header">
+			<h1 className="sub-header">
 				<FormattedMessage
 					id="disclaimer.header"
 					defaultMessage="What you should know before we begin: "
 				/>
-			</h2>
+			</h1>
 			<Card variant="outlined">
 				<CardContent>
 					<Typography variant="body1">

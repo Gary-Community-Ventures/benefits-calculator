@@ -208,13 +208,13 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 
 		return (
 			<>
-				<p className="question-label">
+				<h2 className="question-label">
 					<FormattedMessage
 						id={formattedMsgId}
 						defaultMessage={formattedMsgDefaultMsg}
 					/>
 					{getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
-				</p>
+				</h2>
 				<div className="income-block-textfield">
 					<StyledTextField
 						type="text"
@@ -275,10 +275,10 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 
     return (
       <div>
-        <p className='question-label'>
+        <h2 className='question-label'>
           {questionHeader}
           {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
-        </p>
+        </h2>
         <div className='income-block-textfield'>
           <StyledTextField
             type='text'
@@ -310,12 +310,12 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 
     return (
       <div>
-        <p className='question-label'>
+        <h2 className='question-label'>
           <FormattedMessage
             id={formattedMsgId}
             defaultMessage={formattedMsgDefaultMsg} />
             {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
-        </p>
+        </h2>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel if='income-frequency-label'>
           <FormattedMessage
@@ -353,11 +353,11 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
       }
 
       const incomeStreamQuestion =
-        <p className='question-label'>
+        <h2 className='question-label'>
           <FormattedMessage
             id={formattedMsgId}
             defaultMessage={formattedMsgDefaultMsg} />
-        </p>;
+        </h2>;
       return (
         <div key={index}>
           {index > 0 &&
@@ -422,11 +422,11 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 
   return (
     <>
-      <p className='question-label radio-question'>
+      <h2 className='question-label radio-question'>
         <FormattedMessage
           id={(renderReturnStmtIdOrDefaultMsg(personDataIndex))[0]}
           defaultMessage={(renderReturnStmtIdOrDefaultMsg(personDataIndex))[1]} />
-      </p>
+      </h2>
       <p className='question-description'>
         <FormattedMessage
           id='personIncomeBlock.return-questionDescription'

@@ -72,12 +72,12 @@ const Share = forwardRef(({close}, ref) => {
 			>
 				<CloseIcon />
 			</IconButton>
-			<h3 className="header">
+			<h2 className="share-header">
 				<FormattedMessage
 					id="results.share-header"
 					defaultMessage="Share MyFriendBen with a friend:"
 				/>
-			</h3>
+			</h2>
 			<div className="icons">
 				<div className="row-group">
 					<FacebookShareButton url={shareUrl}>
