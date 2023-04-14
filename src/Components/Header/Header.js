@@ -53,10 +53,6 @@ const Header = ({ formData, handleTextfieldChange }) => {
 		context.selectLanguage(event);
 	}
 
-	const hideDefaultCarrotIcon = () => {
-		return <p></p>;
-	}
-
 	return (
 		<>
 			<AppBar
@@ -78,24 +74,6 @@ const Header = ({ formData, handleTextfieldChange }) => {
 					/>
 				</a>
 				<div className="icon-wrapper">
-					<Button
-						onClick={handleOpenLanguage}
-						sx={{
-							backgroundColor: "#2A2B2A",
-							color: "#FFFFFF",
-							width: "20px",
-							minWidth: "20px",
-							padding: "0",
-							"&:hover": { backgroundColor: "#2A2B2A" }
-						}}
-						aria-label="language menu button"
-						aria-busy="true"
-					>
-						<LanguageIcon
-							name="language menu button"
-							role="img"
-						/>
-					</Button>
 					<Select
 						labelId="select-language-label"
 						id="select-language"
@@ -108,8 +86,9 @@ const Header = ({ formData, handleTextfieldChange }) => {
 						open={isLanguageSelectOpen}
 						onOpen={handleOpenLanguage}
 						onClose={handleCloseLanguage}
-						IconComponent={hideDefaultCarrotIcon}
+						IconComponent={LanguageIcon}
 						renderValue={() => context.locale === "en-US" ? "EN" : "ES"}
+						sx={{ "& .MuiSvgIcon-root": { right: "1.5rem", color: '#FFFFFF' } }}
 					>
 						<MenuItem value="en-US">English</MenuItem>
 						<MenuItem value="es">Español</MenuItem>
