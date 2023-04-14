@@ -13,7 +13,6 @@ import SignUp from '../SignUp/SignUp';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import AccordionsContainer from '../../Components/AccordionsContainer/AccordionsContainer';
 import stepDirectory from '../../Assets/stepDirectory';
-import ProgressBar from '../ProgressBar/ProgressBar';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
@@ -279,17 +278,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
 
   return (
     <main className='benefits-form'>
-      <ProgressBar step={id}/>
-      <p className='step-progress-title'>
-        <FormattedMessage
-          id='qcc.step-text'
-          defaultMessage='Step ' />
-        {id}
-        <FormattedMessage
-          id='qcc.of-text'
-          defaultMessage=' of ' />
-        {totalNumberOfQuestions()}
-      </p>
       {renderHeaderAndSubheader()}
       {
         ( matchingQuestion.componentDetails.componentType === 'Textfield' && createComponent(renderTextfieldComponent(matchingQuestion)) ) ||

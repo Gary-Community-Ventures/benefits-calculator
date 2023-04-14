@@ -104,6 +104,8 @@ const Results = () => {
   useEffect(() => {
     if (!firstUpdate.current) {
       responseLanguage();
+      updateFilter({name: 'category', filter: false})
+      categoryState[1]('All Categories')
     } else {
       firstUpdate.current = false;
     }
