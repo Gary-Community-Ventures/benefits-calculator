@@ -488,7 +488,7 @@ const Confirmation = ({ formData }) => {
   }
 
   return (
-    <div className='benefits-form'>
+    <main className='benefits-form'>
       <ProgressBar step={totalNumberOfQuestions()}/>
       <p className='step-progress-title'>
         <FormattedMessage
@@ -532,7 +532,7 @@ const Confirmation = ({ formData }) => {
           </Button>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

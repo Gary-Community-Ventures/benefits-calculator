@@ -29,7 +29,7 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
   }
 
   return (
-    <div className='benefits-form'>
+    <main className='benefits-form'>
       <ProgressBar step={1}/>
       <p className='step-progress-title'>
         <FormattedMessage
@@ -102,7 +102,7 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
               defaultMessage='Continue' />
         </Button>
       </CardActions>
-    </div>
+    </main>
   );
 }
 
