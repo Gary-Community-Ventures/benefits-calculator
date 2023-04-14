@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import stepDirectory from '../../Assets/stepDirectory';
+import './Disclaimer.css'
 
 const StyledTypography = styled(Typography)`
   color: #c6252b;
@@ -28,19 +29,19 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
   }
 
   return (
-    <div className='benefits-form'>
-      <h2 className='sub-header'>
+    <main className='benefits-form'>
+      <h1 className='sub-header'>
         <FormattedMessage
           id='disclaimer.header'
           defaultMessage='What you should know before we begin: ' />
-      </h2>
+      </h1>
       <Card variant='outlined'>
         <CardContent>
-          <Typography variant='h6'>
+          <h2 className="disclaimer-header">
             <FormattedMessage
               id='disclaimer.sub-header'
               defaultMessage='Gary Philanthropy Disclaimer' />
-          </Typography>
+          </h2>
           <Typography variant='body1'>
             <FormattedMessage
               id='disclaimer.body'
@@ -94,7 +95,7 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
               defaultMessage='Continue' />
         </Button>
       </CardActions>
-    </div>
+    </main>
   );
 }
 

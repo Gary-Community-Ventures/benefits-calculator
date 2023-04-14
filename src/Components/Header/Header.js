@@ -41,7 +41,7 @@ const Header = ({ formData, handleTextfieldChange }) => {
 	};
 
 	return (
-		<>
+		<nav>
 			<AppBar
 				position="sticky"
 				id="nav-container"
@@ -96,7 +96,7 @@ const Header = ({ formData, handleTextfieldChange }) => {
 					close={handleCloseEmailResults}
 				/>
 			</Modal>
-		</>
+		</nav>
 	);
 };
 

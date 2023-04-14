@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { IntlProvider } from 'react-intl';
 import Spanish from '../../Assets/Languages/Spanish.json';
 import English from '../../Assets/Languages/English.json';
-import { Language } from '@mui/icons-material';
 
 export const Context = React.createContext();
 
@@ -11,7 +10,7 @@ const Wrapper = (props) => {
   let defaultMessages = defaultLanguage === 'en-US' ? English: Spanish;
   const pathname = window.location.pathname;
   
-  if (pathname.includes('/es/')) {
+  if (pathname.includes('/es')) {
     defaultLanguage = 'es';
     defaultMessages = Spanish;
   }
