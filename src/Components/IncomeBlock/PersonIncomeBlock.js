@@ -121,7 +121,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 		// Income amount can be up to 8 digits long with 2 decimal places. Can not start with a decimal
     const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
 
-		if (incomeAmountRegex.test(value)) {
+		if (incomeAmountRegex.test(value) || value === '') {
 			const updatedSelectedMenuItems = selectedMenuItem.map(
 				(incomeSourceData, i) => {
 					if (i === index) {
