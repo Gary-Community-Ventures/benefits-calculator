@@ -71,10 +71,13 @@ const displayIncomeStreamValueHelperText = (valueInput) => {
 const incomeStreamsAreValid = (incomeStreams) => {
   const allIncomeStreamsAreValid = incomeStreams.every(incomeSourceData => {
     const { incomeStreamName, incomeAmount, incomeFrequency, hoursPerWeek } = incomeSourceData;
+
     return (
 			incomeStreamName.length > 0 &&
-			Number(incomeAmount) > 0 &&
-			(incomeFrequency === 'hourly'? Number(hoursPerWeek) > 0 : true) &&
+      (incomeAmount !== '' && Number(incomeAmount) > 0) &&
+	    (incomeFrequency === 'hourly' ?
+        (hoursPerWeek !== '' && Number(hoursPerWeek) > 0): true
+      ) &&
 			incomeFrequency.length > 0
 		);
   });
@@ -173,7 +176,7 @@ const personDataIsValid = (householdDataState, setHouseholdDataState, index) => 
   const matchingPersonData = householdDataState.householdData[index];
   const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired,
     disabled, veteran, noneOfTheseApply, hasIncome, incomeStreams } = matchingPersonData;
-
+  console.log(incomeStreamsAreValid(incomeStreams))
   if (Number(age) < 0 || age === '') {
     setHouseholdDataState({
       ...householdDataState,
