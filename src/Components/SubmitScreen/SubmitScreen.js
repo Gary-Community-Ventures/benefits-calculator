@@ -249,6 +249,6 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		}
 	};
 
-	return <Loading />;
+	return (<main><Loading /></main>);
 };
 export default SubmitScreen;
