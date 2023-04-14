@@ -1,4 +1,4 @@
-import { AppBar, MenuItem, Select, Modal, Button } from '@mui/material';
+import { AppBar, MenuItem, Select, Modal } from '@mui/material';
 import { useContext, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper';
