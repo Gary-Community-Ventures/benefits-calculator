@@ -18,14 +18,6 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
 
   return (
 		<main className="benefits-form">
-			<ProgressBar step={0}/>
-			<p className="step-progress-title">
-				<FormattedMessage
-					id="landingPage.step-header"
-					defaultMessage="Step 0 of "
-				/>
-				{totalNumberOfQuestions()}
-			</p>
 			<h1 className="sub-header">
 				<FormattedMessage
 					id="disclaimer.header"

@@ -256,13 +256,17 @@ const App = () => {
 					handleTextfieldChange={handleTextfieldChange}
 				/>
         <Routes>
-          <Route 
+          <Route
             path="/step-:id"
             element={<ProgressBar />}
           />
-          <Route 
+          <Route
             path="/confirm-information"
             element={<ProgressBar />}
+          />
+          <Route
+            path="*"
+            element={<></>}
           />
         </Routes>
 				<Routes>

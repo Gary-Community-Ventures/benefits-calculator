@@ -18,10 +18,6 @@ const SubmitScreen = ({ formData, setFormData }) => {
 	}, []);
 
 	const fetchResults = async () => {
-    if (formData.screenUUID !== undefined) {
-      navigate(`/confirm-information`);
-      return
-    }
 		let userId = 0;
 
 		if (formData.signUpInfo.sendOffers || formData.signUpInfo.sendUpdates) {
@@ -56,7 +52,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			}
 		}
     setFormData({ ...formData, screenUUID: screensResponse.uuid });
-    navigate(`/results/${screensResponse.uuid}`);
+    navigate(`/results/${screensResponse.uuid}`, { replace: true });
 	};
 
 	const getScreensBody = (formData, languageCode, userId) => {

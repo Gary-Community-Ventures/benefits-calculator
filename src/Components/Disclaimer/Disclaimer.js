@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import stepDirectory from '../../Assets/stepDirectory';
-import ProgressBar from '../ProgressBar/ProgressBar';
 import './Disclaimer.css'
 
 const StyledTypography = styled(Typography)`
@@ -31,13 +30,6 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
 
   return (
     <main className='benefits-form'>
-      <ProgressBar step={1}/>
-      <p className='step-progress-title'>
-        <FormattedMessage
-          id='disclaimer.step-header'
-          defaultMessage='Step 1 of ' />
-          { totalNumberOfQuestions() }
-      </p>
       <h1 className='sub-header'>
         <FormattedMessage
           id='disclaimer.header'
