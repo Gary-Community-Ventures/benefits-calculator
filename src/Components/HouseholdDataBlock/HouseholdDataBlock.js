@@ -110,17 +110,26 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   }, useEffectDependencies);
 
   const createFMInputLabel = (personIndex) => {
-    return (
-      <>
+    if (personIndex === 0) {
+      return (
         <FormattedMessage
-          id='householdDataBlock.createFMInputLabel-person'
-          defaultMessage='Person ' />
-        {personIndex + 1}
-        <FormattedMessage
-          id='householdDataBlock.createFMInputLabel-age'
-          defaultMessage=' Age' />
-      </>
-    );
+          id='householdDataBlock.createFMInputLabel-headOfHH'
+          defaultMessage='Your Age' />
+      );
+    } else {
+      return (
+        <>
+          <FormattedMessage
+            id='householdDataBlock.createFMInputLabel-person'
+            defaultMessage='Person ' />
+          {personIndex + 1}
+          <FormattedMessage
+            id='householdDataBlock.createFMInputLabel-age'
+            defaultMessage=' Age' />
+        </>
+      );
+    }
+
   }
 
   const createAgeQuestion = (personIndex) => {
