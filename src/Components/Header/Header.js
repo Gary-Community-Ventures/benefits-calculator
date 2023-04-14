@@ -1,4 +1,4 @@
-import { AppBar, MenuItem, FormControl, Select, Modal } from '@mui/material';
+import { AppBar, MenuItem, Select, Modal } from '@mui/material';
 import { useContext, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper';
@@ -23,6 +23,7 @@ const Header = ({ formData, handleTextfieldChange }) => {
 
 	const [openShare, setOpenShare] = useState(false);
 	const [openEmailResults, setOpenEmailResults] = useState(false);
+	const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
 
 	const handleOpenShare = () => {
 		setOpenShare(true);
@@ -40,6 +41,18 @@ const Header = ({ formData, handleTextfieldChange }) => {
 		setOpenEmailResults(false);
 	};
 
+	const handleCloseLanguage = () => {
+    setIsLanguageSelectOpen(false);
+  };
+
+  const handleOpenLanguage = () => {
+    setIsLanguageSelectOpen(true);
+  };
+
+	const handleLanguageChange = (event) => {
+		context.selectLanguage(event);
+	}
+
 	return (
 		<nav>
 			<AppBar
@@ -47,48 +60,63 @@ const Header = ({ formData, handleTextfieldChange }) => {
 				id="nav-container"
 				sx={{ flexDirection: 'row' }}
 			>
-				<img
-					src={isBIAUser ? BIAMFBLogo : MFBLogo}
-					alt={
-						isBIAUser
-							? 'benefits in action and my friend ben logo'
-							: 'my friend ben logo'
-					}
-					className="logo"
-					onClick={() => navigate(`/step-0${urlSearchParams}`)}
-				/>
+				<a
+					href={`/step-0${urlSearchParams}`}
+				>
+					<img
+						src={isBIAUser ? BIAMFBLogo : MFBLogo}
+						alt={
+							isBIAUser
+								? 'benefits in action and my friend ben home page button'
+								: 'my friend ben home page button'
+						}
+						className="logo"
+					/>
+				</a>
 				<div className="icon-wrapper">
-					<FormControl className="language-select">
-						<Select
-							labelId="select-language-label"
-							id="select-language"
-							value={context.locale}
-							label="Language"
-							onChange={context.selectLanguage}
-							aria-label="select a language"
-							IconComponent={LanguageIcon}
-							className="language-switcher"
-							variant="standard"
-							disableUnderline={true}
-						>
-							<MenuItem value="en-US">English</MenuItem>
-							<MenuItem value="es">Español</MenuItem>
-						</Select>
-					</FormControl>
-					<button className="icon-container" onClick={handleOpenShare}>
-						<ShareIcon />
+					<Select
+						labelId="select-language-label"
+						id="select-language"
+						value={context.locale}
+						label="Language"
+						onChange={handleLanguageChange}
+						aria-label="select a language"
+						variant="standard"
+						disableUnderline={true}
+						open={isLanguageSelectOpen}
+						onOpen={handleOpenLanguage}
+						onClose={handleCloseLanguage}
+						IconComponent={LanguageIcon}
+						renderValue={() => context.locale === "en-US" ? "EN" : "ES"}
+						sx={{ "& .MuiSvgIcon-root": { right: "1.5rem", color: '#FFFFFF' } }}
+					>
+						<MenuItem value="en-US">English</MenuItem>
+						<MenuItem value="es">Español</MenuItem>
+					</Select>
+					<button
+						className="icon-container"
+						onClick={handleOpenShare}
+						aria-label="share button">
+						<ShareIcon role="img"/>
 					</button>
 					{isResults && (
-						<button className="icon-container" onClick={handleOpenEmailResults}>
-							<SaveAltIcon />
+						<button
+							className="icon-container"
+							onClick={handleOpenEmailResults}
+							aria-label="email results button">
+							<SaveAltIcon role="img"/>
 						</button>
 					)}
 				</div>
 			</AppBar>
-			<Modal open={openShare} onClose={handleCloseShare}>
+			<Modal
+				open={openShare}
+				onClose={handleCloseShare}>
 				<Share close={handleCloseShare} />
 			</Modal>
-			<Modal open={openEmailResults} onClose={handleCloseEmailResults}>
+			<Modal
+				open={openEmailResults}
+				onClose={handleCloseEmailResults}>
 				<EmailResults
 					formData={formData}
 					handleTextfieldChange={handleTextfieldChange}

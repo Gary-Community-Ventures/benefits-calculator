@@ -33,21 +33,11 @@
   margin-bottom: 1rem;
 }
 
-.language-switcher .MuiInputBase-input {
-  text-indent: -9999px;
-  white-space: nowrap;
-  color: #2A2B2A;
-}
-.language-switcher .MuiSelect-icon {
-  color: #fff;
-}
-.Mui-focused .MuiInput-input  {
-  background-color: rgba(0,0,0,0) !important;
-}
+
 .MuiDataGrid-columnHeaderTitle {
-    overflow: visible !important;
-    line-height: 1.43rem !important;
-    white-space: normal !important;
+  overflow: visible !important;
+  line-height: 1.43rem !important;
+  white-space: normal !important;
 }
 
 /* text input label in a focus state */

@@ -1,7 +1,8 @@
 .logo {
   max-width: 175px;
-  max-height: 34px;
-  padding-left: 1rem;
+  max-height: 2rem;
+  margin-left: 1rem;
+  display: block;
 }
 
 #nav-container {
@@ -10,10 +11,6 @@
   justify-content: space-between;
   align-items: center;
   height: 50px;
-}
-
-.language-select {
-  display: inline-block;
 }
 
 .icon-wrapper {
@@ -31,11 +28,26 @@
   cursor: pointer;
 }
 
+#select-language {
+  padding: 0;
+  margin-left: 1.5rem;
+  color: white;
+  font-weight: 600;
+}
+
 @media (max-width: 400px) {
   #nav-container {
     flex-direction: column;
     justify-content: space-around;
     align-items: baseline;
     height: 80px;
+  }
+
+  .icon-wrapper {
+    margin-left: 1rem;
+  }
+
+  .logo {
+    margin: 0;
   }
 }
