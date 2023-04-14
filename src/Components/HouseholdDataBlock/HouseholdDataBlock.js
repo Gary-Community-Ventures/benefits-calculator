@@ -22,9 +22,9 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const [page, setPage] = useState(0);
   let initialHouseholdData = [];
 
-  const createHHMInitData = (householdSizeNum) => {
+  const createHHMInitData = (remaining, current) => {
     const result = [];
-    for (let i = 0; i < householdSizeNum; i++) {
+    for (let i = 0; i < remaining - current; i++) {
       result.push({
         age: '',
         relationshipToHH: ``,
@@ -41,7 +41,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         incomeStreams: []
       });
 
-      if (i === 0) {
+      if (i === 0 && current === 0) {
         result[i].relationshipToHH = 'headOfHousehold';
       }
     }
@@ -54,8 +54,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   } else if (formData.householdData.length < remainingHHMNumber) {
     //they've added/increased the size of their household so we need to create objects
     //for each of the new members and add them to the existing formData.householdData
-    const householdSizeDifference = remainingHHMNumber - formData.householdData.length;
-    const newHHMembers = createHHMInitData(householdSizeDifference);
+    const newHHMembers = createHHMInitData(remainingHHMNumber, formData.householdData.length);
     initialHouseholdData = [...formData.householdData, ...newHHMembers];
   } else if (formData.householdData.length > remainingHHMNumber) {
     //they've decreased the size of their household so we need to remove members
@@ -217,6 +216,46 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       </>
     );
   }
+  const createMembersAdded = (member, index) => {
+    let relationship = relationshipOptions[member.relationshipToHH];
+    if (relationship === undefined) {
+      relationship = <FormattedMessage
+        id="relationshipOptions.yourself"
+        defaultMessage="Yourself"
+      />
+   }
+    const age = member.age;
+    let income = 0;
+    for (const {incomeFrequency, incomeAmount, hoursPerWeek} of member.incomeStreams) {
+      let num = 0;
+      switch (incomeFrequency) {
+        case 'weekly':
+          num = Number(incomeAmount) * 52;
+          break;
+        case 'biweekly':
+          num = Number(incomeAmount) * 26;
+          break;
+        case 'monthly':
+          num = Number(incomeAmount) * 12;
+          break;
+        case 'hourly':
+          num = Number(incomeAmount) * Number(hoursPerWeek) * 52;
+          break;
+      }
+      income += Number(num);
+    }
+    if (index >= page) {
+      return;
+    } else {
+      return (
+        <span className="member-added-container" key={index}>
+          <h3 className="member-added-relationship">{relationship}:</h3>
+          <div className="member-added-age">Age: {age}</div>
+          <div className="member-added-income">Income: ${income} annually</div>
+        </span>
+      );
+    }
+  }
 
   const createQuestionHeader = (personIndex) => {
     if (personIndex === 0) {
@@ -230,31 +269,25 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       );
     } else {
       return (
-        <>
-          <h1 className='question-label household-data-q-underline'>
-            <FormattedMessage
-              id='questions.householdData'
-              defaultMessage='Tell us about the next person in your household.'
-            />
-          </h1>
-          <h2 className='household-data-sub-header'>
-            <FormattedMessage
-              id='qcc.so-far-text'
-              defaultMessage="So far you've told us about:" />
-          </h2>
-          <p className='household-data-sub2-header'>
-            ⚫️
-            <FormattedMessage
-              id='qcc.you-text'
-              defaultMessage=' You, ' />
-            {state.householdData[0].age}
-            <FormattedMessage
-              id='qcc.hoh-text'
-              defaultMessage=' Head of household' />
-          </p>
-          <div className='household-data-q-underline'></div>
-        </>
-      );
+				<>
+					<h1 className="question-label household-data-q-underline">
+						<FormattedMessage
+							id="questions.householdData"
+							defaultMessage="Tell us about the next person in your household."
+						/>
+					</h1>
+					<h2 className="household-data-sub-header">
+						<FormattedMessage
+							id="qcc.so-far-text"
+							defaultMessage="So far you've told us about:"
+						/>
+					</h2>
+					<div>
+						{state.householdData.map(createMembersAdded)}
+					</div>
+					<div className="household-data-q-underline"></div>
+				</>
+			);
     }
   }
 
