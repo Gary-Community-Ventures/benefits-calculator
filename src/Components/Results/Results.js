@@ -6,7 +6,6 @@ import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails
 import Filter from '../FilterTable/FilterTable.js'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
-import SendIcon from '@mui/icons-material/Send';
 import Grid from '@mui/material/Grid';
 import {
 	DataGridPro,
@@ -19,7 +18,6 @@ import {
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
-import Share from '../Share/Share';
 import Toolbar from '@mui/material/Toolbar';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
@@ -36,7 +34,6 @@ export const isNavigationKey = (key) =>
 
 const Results = () => {
   const { id: screenerId } = useParams()
-  const navigate = useNavigate();
   const locale = useContext(Context).locale;
   const setLocale = useContext(Context).setLocale;
   const intl = useIntl();
@@ -116,9 +113,6 @@ const Results = () => {
 
   const fetchResults = async () => {
 		const rawEligibilityResponse = await getEligibility(screenerId, locale);
-		setLocale(
-			rawEligibilityResponse.default_language === 'en-us' ? 'en-US' : 'es'
-		);
 		setResults({
 			programs: [],
 			rawResponse: rawEligibilityResponse,
@@ -269,7 +263,7 @@ const Results = () => {
     return (
 			<>
 				<Grid xs={12} item>
-					<Typography variant="h6" className="bottom-border">
+          <h1 className="bottom-border program-value-header">
 						{totalEligiblePrograms(results.programs)}
 						<FormattedMessage
 							id="results.return-programsUpToLabel"
@@ -288,7 +282,7 @@ const Results = () => {
 							id="results.return-perMonthLabel"
 							defaultMessage=" per month in cash or reduced expenses for you to consider"
 						/>
-					</Typography>
+          </h1>
 				</Grid>
 			</>
 		);
