@@ -100,7 +100,9 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
 
     return (
       <div className='question-container' id={id}>
-        <p className='question-label'>{matchingQuestion.question}</p>
+        {matchingQuestion.name !== 'referralSource' &&
+          <h2 className='question-label'>{matchingQuestion.question}</h2>
+        }
         {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
         {component}
         {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && renderFollowUpQuestions()}
@@ -138,19 +140,19 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     return followUpQuestions.map((followUp, index) => {
       if (followUp.componentDetails.componentType === 'Radiofield') {
         return <div className='question-container' key={index}>
-          <p className='question-label'>{followUp.question}</p>
+          <h2 className='question-label'>{followUp.question}</h2>
           {renderRadiofieldComponent(followUp)}
         </div>
       } else if (followUp.componentDetails.componentType === 'IncomeBlock') {
         return <div className='question-container' key={index}>
-          <p className='question-label'>{followUp.question}</p>
+          <h2 className='question-label'>{followUp.question}</h2>
           <IncomeBlock
             handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
             formData={formData} />
         </div>
       }  else if (followUp.componentDetails.componentType === 'ExpenseBlock') {
         return <div className='question-container' key={index}>
-          <p className='question-label'>{followUp.question}</p>
+          <h2 className='question-label'>{followUp.question}</h2>
           <ExpenseBlock
             handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
             formData={formData} />
@@ -158,7 +160,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
       } else if (followUp.componentDetails.componentType === 'Textfield') {
         return (
           <div className='question-container' key={index}>
-            <p className='question-label'>{followUp.question}</p>
+            <h2 className='question-label'>{followUp.question}</h2>
             <Textfield
               componentDetails={matchingQuestion.followUpQuestions[0].componentDetails}
               formData={formData}
@@ -169,14 +171,14 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
       } else if (followUp.componentDetails.componentType === 'BasicSelect') {
         return (
           <div className='question-container' key={index}>
-            <p className='question-label'>{followUp.question}</p>
+            <h2 className='question-label'>{followUp.question}</h2>
             {renderBasicSelectComponent(followUp)}
           </div>
         );
       } else if (followUp.componentDetails.componentType === 'SignUp') {
         return (
           <div className='question-container' key={index}>
-            <p className='question-label'>{followUp.question}</p>
+            <h2 className='question-label'>{followUp.question}</h2>
             <SignUp
               formData={formData}
               handleTextfieldChange={handleTextfieldChange}
@@ -189,7 +191,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
 
         return (
           <div className='question-container accordions-container' key={index}>
-            <p className='question-label'>{followUp.question}</p>
+            <h2 className='question-label'>{followUp.question}</h2>
             <p className='question-description'>{matchingQuestion.followUpQuestions[0].questionDescription}</p>
             <AccordionsContainer
               formData={formData}
@@ -228,47 +230,46 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
   const renderHeaderAndSubheader = () => {
     if (matchingQuestion.headerType === 'signUpInfo') {
       return (
-        <h2 className='sub-header'>
+        <h1 className='sub-header'>
           <FormattedMessage
             id='qcc.optional-sign-up-text'
             defaultMessage='Optional: Sign up for benefits updates and/or paid feedback opportunities' />
-        </h2>
+        </h1>
       );
     } else if (matchingQuestion.headerType === 'aboutYourself') {
       return (
-        <div className='sub-header'>
+        <h1 className='sub-header'>
           <FormattedMessage
             id='qcc.tell-us-text'
             defaultMessage='Tell us a little more about yourself.' />
-        </div>
+        </h1>
       );
     } else if (matchingQuestion.headerType === 'aboutHousehold') {
       if (matchingQuestion.name === 'hasBenefits' || matchingQuestion.name === 'acuteHHConditions') {
         return (
-          <div className='sub-header'>
+          <h1 className='sub-header'>
             <FormattedMessage
               id='qcc.tell-us-final-text'
               defaultMessage='Tell us some final information about your household.' />
-          </div>
+          </h1>
         )
       } else if (matchingQuestion.name === 'referralSource') {
         return (
-          <div className='sub-header'>
+          <h1 className='sub-header'>
             <FormattedMessage
               id='questions.referralSource'
               defaultMessage='How did you hear about this screener?' />
-          </div>
+          </h1>
         )
       } else {
         return (
-          <div className='sub-header'>
+          <h1 className='sub-header'>
             <FormattedMessage
               id='qcc.tell-us-text'
               defaultMessage='Tell us about your household.' />
-          </div>
+          </h1>
       );
       }
-
     }
   };
 

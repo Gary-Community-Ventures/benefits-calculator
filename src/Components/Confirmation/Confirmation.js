@@ -500,16 +500,16 @@ const Confirmation = ({ formData }) => {
           defaultMessage=' of ' />
         { totalNumberOfQuestions() }
       </p>
-      <h2 className='sub-header'>
+      <h1 className='sub-header'>
         <FormattedMessage
           id='confirmation.return-subheader'
           defaultMessage="Ok. Here's what we've got:" />
-      </h2>
-      <p className='question-label'>
+      </h1>
+      <h2 className='question-label'>
         <FormattedMessage
           id='confirmation.return-questionLabel'
           defaultMessage='Is all of your information correct?' />
-      </p>
+      </h2>
       <div className='confirmation-container'>
         { displayAllFormData() }
         <div className='prev-continue-results-buttons'>
