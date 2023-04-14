@@ -107,6 +107,7 @@
   "continueButton": "Continue",
   "radiofield.label-yes": "Yes",
   "radiofield.label-no": "No",
+  "householdDataBlock.createFMInputLabel-headOfHH": "Your Age",
   "householdDataBlock.createFMInputLabel-person": "Person ",
   "householdDataBlock.createFMInputLabel-age": " Age",
   "householdDataBlock.createAgeQuestion-how": "How old are they?",

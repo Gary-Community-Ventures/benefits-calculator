@@ -18,7 +18,7 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
   }
 
   return (
-		<div className="benefits-form">
+		<main className="benefits-form">
 			<ProgressBar step={0}/>
 			<p className="step-progress-title">
 				<FormattedMessage
@@ -93,7 +93,7 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
 					<FormattedMessage id="continue-button" defaultMessage="Continue" />
 				</Button>
 			</CardActions>
-		</div>
+		</main>
 	);
 }
 
