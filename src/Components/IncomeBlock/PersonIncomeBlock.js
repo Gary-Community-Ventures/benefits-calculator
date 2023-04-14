@@ -45,20 +45,18 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 
   useEffect(() => {
     let updatedSelectedMenuItem = [ ...selectedMenuItem ];
-    if (incomeStreamsAreValid(updatedSelectedMenuItem)) {
-      const updatedHouseholdData = state.householdData.map((personData, i) => {
-        if (i === personDataIndex) {
-          return {
-            ...personData,
-            incomeStreams: updatedSelectedMenuItem
-          };
-        } else {
-          return personData;
-        }
-      });
+    const updatedHouseholdData = state.householdData.map((personData, i) => {
+      if (i === personDataIndex) {
+        return {
+          ...personData,
+          incomeStreams: updatedSelectedMenuItem
+        };
+      } else {
+        return personData;
+      }
+    });
 
-      setState({...state, householdData: updatedHouseholdData});
-    }
+    setState({...state, householdData: updatedHouseholdData});
   }, [selectedMenuItem]);
 
   const createIncomeStreamsMenuItems = () => {
