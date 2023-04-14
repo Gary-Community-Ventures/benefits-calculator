@@ -65,7 +65,7 @@ const Header = ({ formData, handleTextfieldChange }) => {
 				sx={{ flexDirection: 'row' }}
 			>
 				<a
-					onClick={() => navigate(`/step-0${urlSearchParams}`)}
+					href={`/step-0${urlSearchParams}`}
 				>
 					<img
 						src={isBIAUser ? BIAMFBLogo : MFBLogo}
