@@ -23,7 +23,7 @@ const HouseholdDataContinueButton = ({ page, setPage, remainingHHMNumber, handle
         wasSubmitted: true,
         error: getPersonDataErrorMsg(state, page),
         errorIndex: page
-      })
+      });
     }
   }
 
