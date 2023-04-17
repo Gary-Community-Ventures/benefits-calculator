@@ -113,12 +113,11 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		return screenBody;
 	};
 
-	const getHouseholdMembersBodies = (formData, screensId) => {
+	const getHouseholdMembersBodies = (formData) => {
 		const householdMembers = formData.householdData.map((householdMember) => {
 			return getHouseholdMemberBody(
 				householdMember,
 				householdMember.relationshipToHH,
-				screensId
 			);
 		});
 		return householdMembers;
