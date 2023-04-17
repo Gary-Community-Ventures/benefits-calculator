@@ -320,7 +320,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
           { createIncomeRadioQuestion(index) }
           <p className='household-data-q-underline'></p>
           { personData.hasIncome && createPersonIncomeBlock(index) }
-          { state.error && <ErrorMessage error={state.error} /> }
+          { state.error && state.errorIndex === index && <ErrorMessage error={state.error} /> }
           <div className='question-buttons'>
             <HouseholdDataPreviousButton
               page={page}
