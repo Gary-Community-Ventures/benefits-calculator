@@ -120,7 +120,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		return householdMembers;
 	};
 
-	const getHouseholdMemberBody = (formData) => {
+	const getHouseholdMemberBody = (householdMemberData) => {
 		const {
 			relationshipToHH,
 			age,
@@ -135,9 +135,9 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			medicaid,
 			disabilityRelatedMedicaid,
 			hasIncome,
-		} = formData;
+		} = householdMemberData;
 
-		const incomes = getIncomeStreamsBodies(formData);
+		const incomes = getIncomeStreamsBodies(householdMemberData);
 
 		return {
 			relationship: relationshipToHH,
