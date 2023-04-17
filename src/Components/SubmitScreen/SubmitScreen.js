@@ -171,7 +171,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		});
 	};
 
-	const getExpensesBodies = (fromData) => {
+	const getExpensesBodies = (formData) => {
 		return formData.expenses.map((expense) => {
 			return {
 				type: expense.expenseSourceName,
