@@ -1,9 +1,6 @@
 import Loading from '../Loading/Loading';
 import {
 	postPartialParentScreen,
-	postHouseholdMemberData,
-	postHouseholdMemberIncomeStream,
-	postHouseholdMemberExpense,
 	postUser,
 } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
@@ -23,35 +20,9 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		if (formData.signUpInfo.sendOffers || formData.signUpInfo.sendUpdates) {
 			userId = await postUserSignUpInfo();
 		}
-		console.log(JSON.stringify(getScreensBody(formData, locale.toLowerCase(), userId)));
 
 		const screensBody = getScreensBody(formData, locale.toLowerCase(), userId);
 		const screensResponse = await postPartialParentScreen(screensBody);
-		// const householdMembersBodies = getHouseholdMembersBodies(
-		// 	formData,
-		// 	screensResponse.id
-		// );
-		// for (const householdMembersBody of householdMembersBodies) {
-		// 	const householdMembersResponse = await postHouseholdMemberData(
-		// 		householdMembersBody
-		// 	);
-
-		// 	const incomeStreamsBodies = getIncomeStreamsBodies(
-		// 		householdMembersBody,
-		// 		householdMembersResponse.id
-		// 	);
-		// 	for (const incomeStreamsBody of incomeStreamsBodies) {
-		// 		await postHouseholdMemberIncomeStream(incomeStreamsBody);
-		// 	}
-
-		// 	const expensesBodies = getExpensesBodies(
-		// 		householdMembersBody,
-		// 		householdMembersResponse.id
-		// 	);
-		// 	for (const expensesBody of expensesBodies) {
-		// 		await postHouseholdMemberExpense(expensesBody);
-		// 	}
-		// }
     setFormData({ ...formData, screenUUID: screensResponse.uuid });
     navigate(`/results/${screensResponse.uuid}`, { replace: true });
 	};
@@ -79,8 +50,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		const householdMembers = getHouseholdMembersBodies(formData)
 		const expenses = getExpensesBodies(formData)	
 
-		const finalReferralSource =
-			otherSource !== '' ? otherSource : referralSource;
+		const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 		const screenBody = {
 			is_test: isTest,
 			external_id: externalID,
@@ -154,7 +124,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		return householdMembers;
 	};
 
-	const getHouseholdMemberBody = (formData, relationshipToHH, screensId) => {
+	const getHouseholdMemberBody = (formData, relationshipToHH) => {
 		const {
 			age,
 			student,
@@ -173,7 +143,6 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		const incomes = getIncomeStreamsBodies(formData)
 
 		return {
-			// screen: screensId,
 			relationship: relationshipToHH,
 			age: Number(age),
 			student: student,
@@ -191,27 +160,23 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		};
 	};
 
-	const getIncomeStreamsBodies = (formData, householdMemberId) => {
-		return formData.incomeStreams.map((incomeStream) => {
+	const getIncomeStreamsBodies = (householdMemberData) => {
+		return householdMemberData.incomeStreams.map((incomeStream) => {
 			return {
 				type: incomeStream.incomeStreamName,
 				amount: Number(incomeStream.incomeAmount),
 				frequency: incomeStream.incomeFrequency,
 				hours_worked: Number(incomeStream.hoursPerWeek) ?? null,
-				// screen: householdMemberBody.screen,
-				// household_member: householdMemberId,
 			};
 		});
 	};
 
-	const getExpensesBodies = (fromData, householdMemberId) => {
+	const getExpensesBodies = (fromData) => {
 		return formData.expenses.map((expense) => {
 			return {
 				type: expense.expenseSourceName,
 				amount: expense.expenseAmount,
 				frequency: 'monthly',
-				// screen: householdMemberBody.screen,
-				// household_member: householdMemberId,
 			};
 		});
 	};
