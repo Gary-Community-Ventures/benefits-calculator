@@ -109,6 +109,15 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   }, useEffectDependencies);
 
   useEffect(() => {
+    if (state.wasSubmitted) {
+      setState({
+        ...state,
+        error: getPersonDataErrorMsg(state, page)
+      });
+    }
+  }, [state.householdData]);
+
+  useEffect(() => {
     setState({
       ...state,
       wasSubmitted: false
