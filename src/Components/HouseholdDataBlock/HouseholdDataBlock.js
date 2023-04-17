@@ -88,22 +88,11 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         personData.incomeStreams = [];
       }
 
-      if (personData.noneOfTheseApply === true) {
-        personData.student = false;
-        personData.studentFulltime = false;
-        personData.pregnant = false;
-        personData.unemployed = false;
-        personData.unemployedWorkedInLast18Mos = false;
-        personData.blindOrVisuallyImpaired = false;
-        personData.disabled = false;
-        personData.veteran = false;
-      }
-
       return personData;
     });
 
     setState({...state, householdData: updatedHouseholdData})
-  }, useEffectDependencies);
+  }, [state.householdData]);
 
   useEffect(() => {
     if (state.wasSubmitted) {
