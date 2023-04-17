@@ -108,6 +108,13 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     setState({...state, householdData: updatedHouseholdData})
   }, useEffectDependencies);
 
+  useEffect(() => {
+    setState({
+      ...state,
+      wasSubmitted: false
+    });
+  }, [page]);
+
   const createFMInputLabel = (personIndex) => {
     if (personIndex === 0) {
       return (
