@@ -1,6 +1,6 @@
 import Loading from '../Loading/Loading';
 import {
-	postPartialParentScreen,
+	postScreen,
 	postUser,
 } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
@@ -22,7 +22,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		}
 
 		const screensBody = getScreensBody(formData, locale.toLowerCase(), userId);
-		const screensResponse = await postPartialParentScreen(screensBody);
+		const screensResponse = await postScreen(screensBody);
     setFormData({ ...formData, screenUUID: screensResponse.uuid });
     navigate(`/results/${screensResponse.uuid}`, { replace: true });
 	};
