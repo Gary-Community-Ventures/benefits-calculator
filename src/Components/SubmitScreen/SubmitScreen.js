@@ -115,16 +115,14 @@ const SubmitScreen = ({ formData, setFormData }) => {
 
 	const getHouseholdMembersBodies = (formData) => {
 		const householdMembers = formData.householdData.map((householdMember) => {
-			return getHouseholdMemberBody(
-				householdMember,
-				householdMember.relationshipToHH,
-			);
+			return getHouseholdMemberBody(householdMember);
 		});
 		return householdMembers;
 	};
 
-	const getHouseholdMemberBody = (formData, relationshipToHH) => {
+	const getHouseholdMemberBody = (formData) => {
 		const {
+			relationshipToHH,
 			age,
 			student,
 			studentFulltime,
