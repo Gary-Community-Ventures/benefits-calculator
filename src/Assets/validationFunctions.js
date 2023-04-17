@@ -172,11 +172,21 @@ const displayHouseholdMemberAgeHelperText = (applicantAge) => {
   };
 }
 
-const personDataIsValid = (householdDataState, setHouseholdDataState, index) => {
+const personDataIsValid = (householdDataState, index) => {
   const matchingPersonData = householdDataState.householdData[index];
   const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired,
     disabled, veteran, noneOfTheseApply, hasIncome, incomeStreams } = matchingPersonData;
-  console.log(incomeStreamsAreValid(incomeStreams))
+
+  const ageIsInvalid = (Number(age) < 0 || age === '');
+  const relationshipToHHIsInvalid = (relationshipToHH === '');
+  const noneApplyIsInvalid = (noneOfTheseApply && [student, pregnant, unemployed,
+    blindOrVisuallyImpaired, disabled, veteran].some(cond => cond === true));
+  const noConditionWasSelected = ([student, pregnant, unemployed,
+    blindOrVisuallyImpaired, disabled, veteran, noneOfTheseApply].every(cond => cond === false));
+  const incomeIsInvalid = (hasIncome && incomeStreamsAreValid(incomeStreams) === false);
+
+  return !ageIsInvalid && !relationshipToHHIsInvalid && !noneApplyIsInvalid && !noConditionWasSelected && !incomeIsInvalid;
+}
   if (Number(age) < 0 || age === '') {
     setHouseholdDataState({
       ...householdDataState,
