@@ -40,7 +40,7 @@ const postMessage = (messageData) => {
     })
 }
 
-const postPartialParentScreen = (partialFormData) => {
+const postScreen = (partialFormData) => {
   return fetch(screensEndpoint, {
     method: 'POST',
     body: JSON.stringify(partialFormData),
@@ -73,7 +73,7 @@ const getEligibility = (screenerId, locale) => {
 }
 
 export {
-  postPartialParentScreen,
+  postScreen,
   postUser,
   postMessage,
   getEligibility,
