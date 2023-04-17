@@ -98,7 +98,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     if (state.wasSubmitted) {
       setState({
         ...state,
-        error: getPersonDataErrorMsg(state, page)
+        error: getPersonDataErrorMsg(state, page),
+        errorIndex: page
       });
     }
   }, [state.householdData]);

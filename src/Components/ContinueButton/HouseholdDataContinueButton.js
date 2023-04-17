@@ -20,8 +20,8 @@ const HouseholdDataContinueButton = ({ page, setPage, remainingHHMNumber, handle
     } else if (!personDataIsValid(state, page)) {
       setState({
         ...state,
-        error: getPersonDataErrorMsg(state, page),
         wasSubmitted: true,
+        error: getPersonDataErrorMsg(state, page),
         errorIndex: page
       })
     }
