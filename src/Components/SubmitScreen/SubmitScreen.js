@@ -47,8 +47,8 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			hasBenefits
 		} = formData;
 
-		const householdMembers = getHouseholdMembersBodies(formData)
-		const expenses = getExpensesBodies(formData)	
+		const householdMembers = getHouseholdMembersBodies(formData);
+		const expenses = getExpensesBodies(formData);	
 
 		const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 		const screenBody = {
@@ -139,7 +139,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			hasIncome,
 		} = formData;
 
-		const incomes = getIncomeStreamsBodies(formData)
+		const incomes = getIncomeStreamsBodies(formData);
 
 		return {
 			relationship: relationshipToHH,
