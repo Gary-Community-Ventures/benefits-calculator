@@ -233,6 +233,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       </>
     );
   }
+
   const createMembersAdded = (member, index) => {
     let relationship = relationshipOptions[member.relationshipToHH];
     if (relationship === undefined) {
@@ -240,7 +241,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         id="relationshipOptions.yourself"
         defaultMessage="Yourself"
       />
-   }
+    }
     const age = member.age;
     let income = 0;
     for (const {incomeFrequency, incomeAmount, hoursPerWeek} of member.incomeStreams) {
@@ -261,6 +262,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       }
       income += Number(num);
     }
+
     if (index >= page) {
       return;
     } else {
