@@ -9,15 +9,17 @@ const HouseholdDataContinueButton = ({ page, setPage, remainingHHMNumber, handle
 
   const handleContinue = (event) => {
     event.preventDefault();
-
-    if (personDataIsValid(state, page) && ((Number(page) + 1) === (Number(remainingHHMNumber)))) {
+    const validPersonData = personDataIsValid(state, page);
+    const lastHouseholdMember = ((Number(page) + 1) === (Number(remainingHHMNumber)));
+    
+    if (validPersonData && lastHouseholdMember) {
       //if this person's inputs are valid and we're at the last hh member then send the hhdata back up to App
       handleHouseholdDataSubmit(state.householdData, stepNumberId);
-    } else if (personDataIsValid(state, page)) { //we are not at the last page
+    } else if (validPersonData) { //we are not at the last page
       //validate the householdMember's data if it's valid then
       setPage(Number(page) + 1);
       window.scrollTo(0, 0);
-    } else if (!personDataIsValid(state, page)) {
+    } else if (!validPersonData) {
       setState({
         ...state,
         wasSubmitted: true,
