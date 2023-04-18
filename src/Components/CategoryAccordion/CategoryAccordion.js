@@ -15,7 +15,7 @@ const CategoryAccordion = ({ categoryName, categoryOptions, formData, setFormDat
         expandIcon={<ExpandMoreIcon style={{ color: '#ffffff', height: '28.8' }}/>}
         aria-controls="panel1a-content"
         id="panel1a-header"
-        sx={{ backgroundColor: '#0096B0' }}
+        sx={{ backgroundColor: '#037A93' }}
       >
         <Typography
           sx={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: '400' }}>
