@@ -210,9 +210,7 @@ const getPersonDataErrorMsg = (householdDataState, index) => {
       />
     );
 
-  } else if ( (noneOfTheseApply && student) || (noneOfTheseApply && pregnant) ||
-    (noneOfTheseApply && unemployed) || (noneOfTheseApply && blindOrVisuallyImpaired) ||
-    (noneOfTheseApply && disabled) || (noneOfTheseApply && veteran) ) {
+  } else if (noneOfTheseApply && (student || pregnant || unemployed || blindOrVisuallyImpaired || disabled || veteran)) {
     return (
       <FormattedMessage
         id='validation-helperText.hhMemberNoneApply'
