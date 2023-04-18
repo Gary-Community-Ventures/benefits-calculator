@@ -5,3 +5,18 @@
 Taking inspiration from AccessNYC, and connecting with PolicyEngine's API for benefits calculation, we built out a universal benefits screener with the goal to increase benefit participation rates by making key information - like dollar value and time to apply - more transparent, accessible, and accurate. The platform is currently live in Colorado and has been tested with over 40 benefits.
 
 This is the repository for the frontend JavaScript/React multi-step form that collects demographic information from a household that is then sent to the backend benefits API which calculates eligibility and estimated cash value. Our backend repository can be accessed [here](https://github.com/Gary-Community-Ventures/benefits-api).
+
+## Local Setup
+- `git clone` this repository
+- `cd benefits-calculator`
+- `npm install`
+- `touch .env`
+- In the .env file add `REACT_APP_API_KEY=` and paste in your API key from the [WordsAPI](https://rapidapi.com/dpventures/api/wordsapi)
+- `npm run dev` to start the app on localhost:3000
+
+## Technologies
+- React
+- React Router
+
+## Creators
+[Ivonne Hernandez](https://www.linkedin.com/in/ivonne-hernandez-107b0324/)
