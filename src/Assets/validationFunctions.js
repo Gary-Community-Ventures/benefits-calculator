@@ -74,12 +74,12 @@ const incomeStreamsAreValid = (incomeStreams) => {
 
     return (
 			incomeStreamName.length > 0 &&
-      incomeAmount !== '' && 
+      incomeAmount !== '' &&
       Number(incomeAmount) > 0 &&
       (
-        incomeFrequency !== 'hourly' || 
+        incomeFrequency !== 'hourly' ||
         (hoursPerWeek !== '' && Number(hoursPerWeek) > 0)
-       ) &&
+      ) &&
 			incomeFrequency.length > 0
 		);
   });
