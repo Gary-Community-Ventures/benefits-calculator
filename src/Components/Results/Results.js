@@ -33,7 +33,7 @@ export const isNavigationKey = (key) =>
   key === ' ';
 
 const Results = () => {
-  const { id: screenerId } = useParams()
+  const { uuid: screenerId } = useParams()
   const locale = useContext(Context).locale;
   const setLocale = useContext(Context).setLocale;
   const intl = useIntl();

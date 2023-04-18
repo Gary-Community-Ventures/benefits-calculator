@@ -1,6 +1,6 @@
 import { Button, Card, CardContent, CardActions, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
@@ -13,6 +13,7 @@ const StyledTypography = styled(Typography)`
 `;
 
 const Disclaimer = ({ formData, handleCheckboxChange }) => {
+  const { uuid } = useParams()
   const [buttonWasClicked, setButtonWasClicked] = useState(false);
   let navigate = useNavigate();
 
@@ -20,12 +21,8 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
     event.preventDefault();
     setButtonWasClicked(true);
     if (formData.agreeToTermsOfService === true) {
-      navigate('/step-2');
+      navigate(`/${uuid}/step-2`);
     }
-  }
-
-  const totalNumberOfQuestions = () => {
-    return Object.keys(stepDirectory).length + 2;
   }
 
   return (

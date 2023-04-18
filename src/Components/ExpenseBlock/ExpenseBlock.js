@@ -23,7 +23,7 @@ const StyledDeleteButton = styled(Button)({
 });
 
 const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
-  const { id } = useParams();
+  const { id, uuid } = useParams();
   const stepNumberId = Number(id);
 
   const [selectedMenuItem, setSelectedMenuItem] = useState(formData.expenses.length > 0 ? formData.expenses :
@@ -157,7 +157,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   const handleSaveAndContinue = (event) => {
     event.preventDefault();
     if(expenseSourcesAreValid(selectedMenuItem)) {
-      handleExpenseSourcesSubmit(selectedMenuItem, stepNumberId);
+      handleExpenseSourcesSubmit(selectedMenuItem, stepNumberId, uuid);
     }
   }
 

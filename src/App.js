@@ -9,12 +9,12 @@ import Confirmation from './Components/Confirmation/Confirmation';
 import SubmitScreen from './Components/SubmitScreen/SubmitScreen';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
-import EmailResults from './Components/EmailResults/EmailResults';
 import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
 import './App.css';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
+import stepDirectory from './Assets/stepDirectory';
 // import { createDevFormData } from './Assets/devFormData';
 
 const TRACKING_ID = "G-NZ9D1VLR0D";
@@ -32,6 +32,7 @@ const App = () => {
   const setReferrerSource = referrer === '' || referrer in referralOptions
   const isBIAUser = externalId !== null && referrer !== '';
   const theme = createTheme(styleOverrides);
+	const totalSteps = Object.keys(stepDirectory).length + 2;
 
   const initialFormData = {
     screenUUID: undefined,
@@ -207,7 +208,7 @@ const App = () => {
     setFormData({ ...formData, [name]: boolValue });
   }
 
-  const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, householdSize) => {
+  const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
     const isZipcodeQuestionAndCountyIsEmpty = (questionName === 'zipcode' && formData.county === '');
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '');
@@ -216,26 +217,26 @@ const App = () => {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
         return;
       } else if (questionName === 'signUpInfo') {
-        navigate('/confirm-information');
+        navigate(`/${uuid}/confirm-information`);
       } else { //you've indicated that you're householdSize is larger than 1
-        navigate(`/step-${stepId + 1}`);
+        navigate(`/${uuid}/step-${stepId + 1}`);
       }
     }
   }
 
-  const handleIncomeStreamsSubmit = (validatedIncomeStreams, stepId) => {
+  const handleIncomeStreamsSubmit = (validatedIncomeStreams, stepId, uuid) => {
     setFormData({ ...formData, incomeStreams: validatedIncomeStreams });
-    navigate(`/step-${stepId + 1}`);
+    navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
-  const handleExpenseSourcesSubmit = (validatedExpenseSources, stepId) => {
+  const handleExpenseSourcesSubmit = (validatedExpenseSources, stepId, uuid) => {
     setFormData({ ...formData, expenses: validatedExpenseSources });
-    navigate(`/step-${stepId + 1}`);
+    navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
-  const handleHouseholdDataSubmit = (validatedHouseholdData, stepId) => {
+  const handleHouseholdDataSubmit = (validatedHouseholdData, stepId, uuid) => {
     setFormData({ ...formData, householdData: validatedHouseholdData });
-    navigate(`/step-${stepId + 1}`);
+    navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
   const clearLocalStorageFormDataAndResults = () => {
@@ -257,12 +258,16 @@ const App = () => {
 				/>
         <Routes>
           <Route
-            path="/step-:id"
+            path="/step-0"
+            element={<ProgressBar step="0"/>}
+          />
+          <Route
+            path="/:uuid/step-:id"
             element={<ProgressBar />}
           />
           <Route
-            path="/confirm-information"
-            element={<ProgressBar />}
+            path="/:uuid/confirm-information"
+            element={<ProgressBar step={totalSteps}/>}
           />
           <Route
             path="*"
@@ -284,42 +289,59 @@ const App = () => {
 							/>
 						}
 					/>
-					<Route
-						path="/step-1"
-						element={
-							<Disclaimer
-								formData={formData}
-								handleCheckboxChange={handleCheckboxChange}
-							/>
-						}
-					/>
-					<Route
-						path="/step-:id"
-						element={
-							<QuestionComponentContainer
-								formData={formData}
-								handleTextfieldChange={handleTextfieldChange}
-								handleContinueSubmit={handleContinueSubmit}
-								handleRadioButtonChange={handleRadioButtonChange}
-								handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-								handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-								handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-								setFormData={setFormData}
-								handleCheckboxChange={handleCheckboxChange}
-							/>
-						}
-					/>
-					<Route
-						path="/confirm-information"
-						element={<Confirmation formData={formData} />}
-					/>
-					<Route
-						path="/submit-screen"
-						element={
-							<SubmitScreen formData={formData} setFormData={setFormData} />
-						}
-					/>
-					<Route path="/results/:id" element={<Results />} />
+          <Route path="results/:uuid" element={<Results />} />
+          <Route
+            path=":uuid"
+          >
+            <Route path="" element={<Navigate to="/step-0" replace />} />
+            <Route
+              path="step-0"
+              element={
+                <LandingPage
+                  clearLocalStorageFormDataAndResults={
+                    clearLocalStorageFormDataAndResults
+                  }
+                />
+              }
+            />
+              <Route
+              path="step-1"
+              element={
+                <Disclaimer
+                  formData={formData}
+                  handleCheckboxChange={handleCheckboxChange}
+                />
+              }
+            />
+            <Route
+              path="step-:id"
+              element={
+                <QuestionComponentContainer
+                  formData={formData}
+                  handleTextfieldChange={handleTextfieldChange}
+                  handleContinueSubmit={handleContinueSubmit}
+                  handleRadioButtonChange={handleRadioButtonChange}
+                  handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
+                  handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+                  handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+                  setFormData={setFormData}
+                  handleCheckboxChange={handleCheckboxChange}
+                />
+              }
+            />
+            <Route
+              path="confirm-information"
+              element={<Confirmation formData={formData} />}
+            />
+            <Route
+              path="submit-screen"
+              element={
+                <SubmitScreen formData={formData} setFormData={setFormData} />
+              }
+            />
+            <Route path="results" element={<Results />} />
+            <Route path="*" element={<Navigate to="/step-0" replace />} />
+          </Route>
 					<Route path="*" element={<Navigate to="/step-0" replace />} />
 				</Routes>
 			</div>

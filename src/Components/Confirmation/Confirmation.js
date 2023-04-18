@@ -1,4 +1,4 @@
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import relationshipOptions from '../../Assets/relationshipOptions';
@@ -20,6 +20,7 @@ import stepDirectory from '../../Assets/stepDirectory';
 import './Confirmation.css';
 
 const Confirmation = ({ formData }) => {
+  const { uuid } = useParams()
   const navigate = useNavigate();
   const intl = useIntl();
 
@@ -504,7 +505,7 @@ const Confirmation = ({ formData }) => {
           <Button
             className='prev-button'
             onClick={() => {
-              navigate(`/step-${totalNumberOfQuestions() - 1}`);
+              navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`);
             }}
             variant='contained'>
             <FormattedMessage
@@ -513,7 +514,7 @@ const Confirmation = ({ formData }) => {
           </Button>
           <Button
             variant='contained'
-            onClick={() => navigate('/submit-screen')}>
+            onClick={() => navigate(`/${uuid}/submit-screen`)}>
             <FormattedMessage
               id='continueButton'
               defaultMessage='Continue' />

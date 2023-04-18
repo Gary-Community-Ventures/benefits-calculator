@@ -24,7 +24,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		const screensBody = getScreensBody(formData, locale.toLowerCase(), userId);
 		const screensResponse = await postScreen(screensBody);
     setFormData({ ...formData, screenUUID: screensResponse.uuid });
-    navigate(`/results/${screensResponse.uuid}`, { replace: true });
+    navigate(`/${screensResponse.uuid}/results`, { replace: true });
 	};
 
 	const getScreensBody = (formData, languageCode, userId) => {

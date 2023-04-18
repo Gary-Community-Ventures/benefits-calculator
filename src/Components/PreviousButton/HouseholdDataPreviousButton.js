@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 const HouseholdDataPreviousButton = ({ page, setPage }) => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, uuid } = useParams();
   const stepNumberId = Number(id);
 
   const handlePrevious = (event) => {
@@ -12,7 +12,7 @@ const HouseholdDataPreviousButton = ({ page, setPage }) => {
     
     if (Number(page) === 0) { //we're at the first member's data block
       //so we just want to navigate back to step 13
-      navigate(`/step-${stepNumberId - 1}`);
+      navigate(`/${uuid}/step-${stepNumberId - 1}`);
     } else { 
       //go back to the previous member's data block
       setPage(Number(page) - 1);
