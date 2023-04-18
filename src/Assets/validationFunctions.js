@@ -179,15 +179,15 @@ const personDataIsValid = (householdDataState, index) => {
   const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired,
     disabled, veteran, noneOfTheseApply, hasIncome, incomeStreams } = matchingPersonData;
 
-  const ageIsInvalid = (Number(age) < 0 || age === '');
-  const relationshipToHHIsInvalid = (relationshipToHH === '');
-  const noneApplyIsInvalid = (noneOfTheseApply && [student, pregnant, unemployed,
-    blindOrVisuallyImpaired, disabled, veteran].some(cond => cond === true));
-  const noConditionWasSelected = ([student, pregnant, unemployed,
-    blindOrVisuallyImpaired, disabled, veteran, noneOfTheseApply].every(cond => cond === false));
-  const incomeIsInvalid = (hasIncome && incomeStreamsAreValid(incomeStreams) === false);
+  const ageIsValid = (Number(age) >= 0 && age !== '');
+  const relationshipToHHIsValid = (relationshipToHH !== '');
+  const noneApplyIsValid = (noneOfTheseApply && !student && !pregnant &&
+   !unemployed && !blindOrVisuallyImpaired && !disabled && !veteran) || !noneOfTheseApply;
+  const atLeastOneConditionWasSelected = (noneOfTheseApply || student || pregnant ||
+   unemployed || blindOrVisuallyImpaired || disabled || veteran);
+  const incomeIsValid = (hasIncome && incomeStreamsAreValid(incomeStreams)) || !hasIncome;
 
-  return !ageIsInvalid && !relationshipToHHIsInvalid && !noneApplyIsInvalid && !noConditionWasSelected && !incomeIsInvalid;
+  return ageIsValid && relationshipToHHIsValid && noneApplyIsValid && atLeastOneConditionWasSelected && incomeIsValid;
 }
 
 const getPersonDataErrorMsg = (householdDataState, index) => {
