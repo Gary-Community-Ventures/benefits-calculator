@@ -382,8 +382,8 @@ const Confirmation = ({ formData }) => {
   }
 
   const listAllExpenses = (memberExpenses) => {
-    const mappedExpenses = memberExpenses.map(expense => {
-      return <li key={ expense.expenseSourceName }> { getExpenseSourceLabel(expense.expenseSourceName) }: ${ Number(expense.expenseAmount).toLocaleString(2) } </li>
+    const mappedExpenses = memberExpenses.map((expense, index) => {
+      return <li key={ expense.expenseSourceName + index }> { getExpenseSourceLabel(expense.expenseSourceName) }: ${ Number(expense.expenseAmount).toLocaleString(2) } </li>
     });
 
     return mappedExpenses;

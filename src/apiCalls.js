@@ -2,9 +2,6 @@ const apiKey = "Token " + process.env.REACT_APP_API_KEY;
 const domain = process.env.REACT_APP_DOMAIN_URL;
 
 const screensEndpoint = `${domain}/api/screens/`;
-const householdsEndpoint = `${domain}/api/householdmembers/`;
-const incomeStreamsEndpoint = `${domain}/api/incomestreams/`;
-const expensesEndpoint = `${domain}/api/expenses/`;
 const userEndpoint = `${domain}/api/users/`;
 const messageEndpoint = `${domain}/api/messages/`;
 let eligibilityEndpoint = `${domain}/api/eligibility/`;
@@ -43,52 +40,10 @@ const postMessage = (messageData) => {
     })
 }
 
-const postPartialParentScreen = (partialFormData) => {
+const postScreen = (partialFormData) => {
   return fetch(screensEndpoint, {
     method: 'POST',
     body: JSON.stringify(partialFormData),
-    headers: header
-  })
-    .then(response => {
-      if(!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
-      return response.json();
-    })
-}
-
-const postHouseholdMemberData = (householdMemberData) => {
-  return fetch(householdsEndpoint, {
-    method: 'POST',
-    body: JSON.stringify(householdMemberData),
-    headers: header
-  })
-    .then(response => {
-      if(!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
-      return response.json();
-    })
-}
-
-const postHouseholdMemberIncomeStream = (singleIncomeStream) => {
-  return fetch(incomeStreamsEndpoint, {
-    method: 'POST',
-    body: JSON.stringify(singleIncomeStream),
-    headers: header
-  })
-    .then(response => {
-      if(!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
-      return response.json();
-    })
-}
-
-const postHouseholdMemberExpense = (singleExpense) => {
-  return fetch(expensesEndpoint, {
-    method: 'POST',
-    body: JSON.stringify(singleExpense),
     headers: header
   })
     .then(response => {
@@ -118,11 +73,8 @@ const getEligibility = (screenerId, locale) => {
 }
 
 export {
-  postPartialParentScreen,
+  postScreen,
   postUser,
   postMessage,
-  postHouseholdMemberData,
-  postHouseholdMemberIncomeStream,
-  postHouseholdMemberExpense,
   getEligibility,
 }
