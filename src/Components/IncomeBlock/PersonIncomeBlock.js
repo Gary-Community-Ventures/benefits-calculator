@@ -5,8 +5,7 @@ import { styled } from '@mui/material/styles';
 import {
 	hoursWorkedValueHasError,
 	incomeStreamValueHasError,
-	displayIncomeStreamValueHelperText,
-	incomeStreamsAreValid,
+	displayIncomeStreamValueHelperText
 } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
@@ -44,12 +43,11 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   }
 
   useEffect(() => {
-    let updatedSelectedMenuItem = [ ...selectedMenuItem ];
     const updatedHouseholdData = state.householdData.map((personData, i) => {
       if (i === personDataIndex) {
         return {
           ...personData,
-          incomeStreams: updatedSelectedMenuItem
+          incomeStreams: selectedMenuItem
         };
       } else {
         return personData;
