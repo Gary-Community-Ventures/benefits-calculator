@@ -157,7 +157,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   const createIncomeStreamsDropdownMenu = (incomeStreamName, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='income-type-label'>
+        <InputLabel id='income-type-label'>
           <FormattedMessage
             id='personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel'
             defaultMessage='Income Type' />
@@ -317,24 +317,24 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
             {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
         </h2>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='income-frequency-label'>
-          <FormattedMessage
-            id='personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel'
-            defaultMessage='Frequency' />
-        </InputLabel>
-        <StyledSelectfield
-          labelId='income-frequency-label'
-          id='income-frequency'
-          value={incomeFrequency}
-          name={incomeFrequency}
-          label={
+          <InputLabel id='income-frequency-label'>
             <FormattedMessage
-              id='personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel'
-              defaultMessage='Income Frequency' />
-          }
-          onChange={(event) => { handleFrequencySelectChange(event, index) }}>
-          {createFrequencyMenuItems()}
-        </StyledSelectfield>
+              id='personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel'
+              defaultMessage='Frequency' />
+          </InputLabel>
+          <StyledSelectfield
+            labelId='income-frequency-label'
+            id='income-frequency'
+            value={incomeFrequency}
+            name={incomeFrequency}
+            label={
+              <FormattedMessage
+                id='personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel'
+                defaultMessage='Income Frequency' />
+            }
+            onChange={(event) => { handleFrequencySelectChange(event, index) }}>
+            {createFrequencyMenuItems()}
+          </StyledSelectfield>
         </FormControl>
       </div>
     );
