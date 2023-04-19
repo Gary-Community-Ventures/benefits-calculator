@@ -34,6 +34,7 @@ const App = () => {
   const isBIAUser = externalId !== null && referrer !== '';
   const theme = createTheme(styleOverrides);
 	const totalSteps = Object.keys(stepDirectory).length + 2;
+  const [fetchedScreen, setFetchedScreen] = useState(false);
 
   const initialFormData = {
     screenUUID: undefined,
@@ -294,59 +295,68 @@ const App = () => {
           <Route
             path=":uuid"
           >
-            <Route path="" element={<Navigate to="/step-0" replace />} />
-            <Route
-              path="step-0"
-              element={
-                <LandingPage
-                  clearLocalStorageFormDataAndResults={
-                    clearLocalStorageFormDataAndResults
-                  }
-                />
-              }
-            />
+            { !fetchedScreen && (
               <Route
-              path="step-1"
-              element={
-                <FetchScreen 
-                  formData={formData}
-                  setFormData={setFormData}
-                  returnTo={(uuid) => `/${uuid}/step-2`}
-                />
-                // <Disclaimer
-                //   formData={formData}
-                //   handleCheckboxChange={handleCheckboxChange}
-                // />
-              }
-            />
-            <Route
-              path="step-:id"
-              element={
-                <QuestionComponentContainer
-                  formData={formData}
-                  handleTextfieldChange={handleTextfieldChange}
-                  handleContinueSubmit={handleContinueSubmit}
-                  handleRadioButtonChange={handleRadioButtonChange}
-                  handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-                  handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-                  handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-                  setFormData={setFormData}
-                  handleCheckboxChange={handleCheckboxChange}
-                />
-              }
-            />
-            <Route
-              path="confirm-information"
-              element={<Confirmation formData={formData} />}
-            />
-            <Route
-              path="submit-screen"
-              element={
-                <SubmitScreen formData={formData} setFormData={setFormData} />
-              }
-            />
-            <Route path="results" element={<Results />} />
-            <Route path="*" element={<Navigate to="/step-0" replace />} />
+                path="*"
+                element={
+                  <FetchScreen
+                    formData={formData}
+                    setFormData={setFormData}
+                    setFetchedScreen={setFetchedScreen}
+                  />
+                }
+              />
+            )}
+            { fetchedScreen && (<>
+              <Route path="" element={<Navigate to="/step-0" replace />} />
+              <Route
+                path="step-0"
+                element={
+                  <LandingPage
+                    clearLocalStorageFormDataAndResults={
+                      clearLocalStorageFormDataAndResults
+                    }
+                  />
+                }
+              />
+              <Route
+                path="step-1"
+                element={
+                  <Disclaimer
+                    formData={formData}
+                    handleCheckboxChange={handleCheckboxChange}
+                  />
+                }
+              />
+              <Route
+                path="step-:id"
+                element={
+                  <QuestionComponentContainer
+                    formData={formData}
+                    handleTextfieldChange={handleTextfieldChange}
+                    handleContinueSubmit={handleContinueSubmit}
+                    handleRadioButtonChange={handleRadioButtonChange}
+                    handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
+                    handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+                    handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+                    setFormData={setFormData}
+                    handleCheckboxChange={handleCheckboxChange}
+                  />
+                }
+              />
+              <Route
+                path="confirm-information"
+                element={<Confirmation formData={formData} />}
+              />
+              <Route
+                path="submit-screen"
+                element={
+                  <SubmitScreen formData={formData} setFormData={setFormData} />
+                }
+              />
+              <Route path="results" element={<Results />} />
+              <Route path="*" element={<Navigate to="/step-0" replace />} />
+            </>)}
           </Route>
 					<Route path="*" element={<Navigate to="/step-0" replace />} />
 				</Routes>

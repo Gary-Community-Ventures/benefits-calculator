@@ -2,19 +2,20 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getScreen } from '../../apiCalls';
 
-const FetchScreen = ({ formData, setFormData, returnTo }) => {
+const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 	const { uuid } = useParams();
 	const navigate = useNavigate();
 
 	const fetchScreen = async (uuid) => {
 		try {
 			const response = await getScreen(uuid);
-			console.log(response);
 			createFormData(response);
 		} catch (err) {
-			console.error(err);
+			navigate('/step-0');
+			return;
 		}
-		navigate(returnTo(uuid), {replace: true})
+		setFetchedScreen(true);
+		// navigate(returnTo(uuid), { replace: true });
 	};
 
 	const createFormData = (response) => {
@@ -83,14 +84,12 @@ const FetchScreen = ({ formData, setFormData, returnTo }) => {
 		for (const member of response.household_members) {
 			const incomes = [];
 			for (const income of member.income_streams) {
-				incomes.push(
-          {
-            incomeStreamName: income.type ?? '',
-            incomeAmount: income.amount ?? '',
-            incomeFrequency: income.frequency ?? '',
-            hoursPerWeek: income.hours_worked ?? '',
-          }
-        );
+				incomes.push({
+					incomeStreamName: income.type ?? '',
+					incomeAmount: income.amount ?? '',
+					incomeFrequency: income.frequency ?? '',
+					hoursPerWeek: income.hours_worked ?? '',
+				});
 			}
 			initialFormData.householdData.push({
 				age: member.age ?? '',
@@ -109,23 +108,25 @@ const FetchScreen = ({ formData, setFormData, returnTo }) => {
 			});
 		}
 
-    for (const expense of response.expenses) {
-      initialFormData.expenses.push(
-        {
-          expenseSourceName: expense.type ?? '', 
-          expenseAmount: expense.amount ?? ''
-        }
-      )
-    }
-		console.log(initialFormData);
-    setFormData({...formData, ...initialFormData})
+		for (const expense of response.expenses) {
+			initialFormData.expenses.push({
+				expenseSourceName: expense.type ?? '',
+				expenseAmount: expense.amount ?? '',
+			});
+		}
+		setFormData({ ...formData, ...initialFormData });
 	};
 
 	useEffect(() => {
 		fetchScreen(uuid);
 	}, []);
 
-	return <div>hello</div>;
+	return (
+		<h1>
+			If you can read this whole sentece, than something has gone horibly wrong
+			(or you are a really fast reader).
+		</h1>
+	);
 };
 
 export default FetchScreen;
