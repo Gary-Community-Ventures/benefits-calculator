@@ -1,10 +1,12 @@
 import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import './LandingPage.css';
 
 const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
+	let { uuid } = useParams();
+	uuid = uuid ?? 'uuid';
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,7 +75,7 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
 				<Button
 					variant="contained"
 					onClick={() => {
-						navigate('/uuid/step-1');
+						navigate(`/${uuid}/step-1`);
 					}}
 				>
 					<FormattedMessage id="continue-button" defaultMessage="Continue" />

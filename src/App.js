@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
 import ReactGA from "react-ga4";
+import FetchScreen from './Components/FetchScreen/FetchScreen';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
@@ -307,10 +308,15 @@ const App = () => {
               <Route
               path="step-1"
               element={
-                <Disclaimer
+                <FetchScreen 
                   formData={formData}
-                  handleCheckboxChange={handleCheckboxChange}
+                  setFormData={setFormData}
+                  returnTo={(uuid) => `/${uuid}/step-2`}
                 />
+                // <Disclaimer
+                //   formData={formData}
+                //   handleCheckboxChange={handleCheckboxChange}
+                // />
               }
             />
             <Route

@@ -40,6 +40,19 @@ const postMessage = (messageData) => {
     })
 }
 
+const getScreen = (uuid) => {
+  return fetch(screensEndpoint + uuid, {
+    method: 'GET',
+    headers: header
+  })
+    .then(response => {
+      if(!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+}
+
 const postScreen = (partialFormData) => {
   return fetch(screensEndpoint, {
     method: 'POST',
@@ -74,6 +87,7 @@ const getEligibility = (screenerId, locale) => {
 
 export {
   postScreen,
+  getScreen,
   postUser,
   postMessage,
   getEligibility,
