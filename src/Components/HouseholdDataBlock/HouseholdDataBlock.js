@@ -216,6 +216,11 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       </>
     );
   }
+
+  const formatToUSD = (num) => {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
+  }
+
   const createMembersAdded = (member, index) => {
     let relationship = relationshipOptions[member.relationshipToHH];
     if (relationship === undefined) {
@@ -262,7 +267,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
               id="householdDataBlock.member-income"
               defaultMessage="Income"
             />
-            : ${income}
+            : {formatToUSD(Number(income))}
             <FormattedMessage
               id="displayAnnualIncome.annual"
               defaultMessage=" annually"
