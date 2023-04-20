@@ -13,7 +13,6 @@ import './Header.css';
 
 const Header = ({ formData, handleTextfieldChange }) => {
 	const context = useContext(Context);
-	const navigate = useNavigate();
 	const { urlSearchParams, isBIAUser } = formData;
 	const location = useLocation();
 	const urlRegex = /^(\/results\/)(.+)$/;
@@ -53,6 +52,20 @@ const Header = ({ formData, handleTextfieldChange }) => {
 		context.selectLanguage(event);
 	}
 
+	const setRenderValue = () => {
+		const currentLocale = context.locale;
+		switch (currentLocale) {
+			case 'en-US':
+				return "EN";
+			case 'es':
+				return "ES";
+			case 'vi':
+				return "VI";
+			default:
+				return "EN";
+		}
+	}
+
 	return (
 		<nav>
 			<AppBar
@@ -87,11 +100,12 @@ const Header = ({ formData, handleTextfieldChange }) => {
 						onOpen={handleOpenLanguage}
 						onClose={handleCloseLanguage}
 						IconComponent={LanguageIcon}
-						renderValue={() => context.locale === "en-US" ? "EN" : "ES"}
+						renderValue={() => setRenderValue()}
 						sx={{ "& .MuiSvgIcon-root": { right: "1.5rem", color: '#FFFFFF' } }}
 					>
 						<MenuItem value="en-US">English</MenuItem>
 						<MenuItem value="es">Español</MenuItem>
+						<MenuItem value="vi">Tiếng Việt</MenuItem>
 					</Select>
 					<button
 						className="icon-container"
