@@ -107,6 +107,7 @@
   "continueButton": "Tiếp Tục",
   "radiofield.label-yes": "Có",
   "radiofield.label-no": "Không",
+  "householdDataBlock.createFMInputLabel-headOfHH": "Tuổi của bạn",
   "householdDataBlock.createFMInputLabel-person": "Người ",
   "householdDataBlock.createFMInputLabel-age": " Tuổi",
   "householdDataBlock.createAgeQuestion-how": "Họ bao nhiêu tuổi?",
