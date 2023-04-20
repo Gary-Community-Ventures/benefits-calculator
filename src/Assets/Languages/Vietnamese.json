@@ -118,6 +118,7 @@
   "householdDataBlock.createDropdownCompProps-label": "Loại Mối Quan Hệ",
   "householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText": "Nhấp vào để chọn mối quan hệ",
   "householdDataBlock.questionHeader": "Cho chúng tôi biết về quý vị.",
+  "householdDataBlock.member-income": "Thu nhập",
   "relationshipOptions.yourself": "Chính bạn",
   "relationshipOptions.child": "Con",
   "relationshipOptions.fosterChild": "Con Nuôi",

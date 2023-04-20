@@ -250,8 +250,24 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       return (
         <span className="member-added-container" key={index}>
           <h3 className="member-added-relationship">{relationship}:</h3>
-          <div className="member-added-age">Age: {age}</div>
-          <div className="member-added-income">Income: ${income} annually</div>
+          <div className="member-added-age">
+            <FormattedMessage
+              id="questions.age-inputLabel"
+              defaultMessage="Age"
+            />
+            : {age}
+          </div>
+          <div className="member-added-income">
+            <FormattedMessage
+              id="householdDataBlock.member-income"
+              defaultMessage="Income"
+            />
+            : ${income}
+            <FormattedMessage
+              id="displayAnnualIncome.annual"
+              defaultMessage=" annually"
+            />
+            </div>
         </span>
       );
     }
