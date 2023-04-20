@@ -13,6 +13,7 @@ import Header from './Components/Header/Header';
 import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
+import updateScreen from './Assets/updateScreen'
 import './App.css';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import stepDirectory from './Assets/stepDirectory';
@@ -212,6 +213,7 @@ const App = () => {
 
   const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
+    updateScreen(uuid, formData)
     const isZipcodeQuestionAndCountyIsEmpty = (questionName === 'zipcode' && formData.county === '');
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '');
 

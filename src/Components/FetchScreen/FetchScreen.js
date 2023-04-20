@@ -15,7 +15,6 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 			return;
 		}
 		setFetchedScreen(true);
-		// navigate(returnTo(uuid), { replace: true });
 	};
 
 	const createFormData = (response) => {
@@ -123,7 +122,7 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 
 	return (
 		<h1>
-			If you can read this whole sentece, than something has gone horibly wrong
+			If you can read this whole sentece than something has gone horibly wrong
 			(or you are a really fast reader).
 		</h1>
 	);

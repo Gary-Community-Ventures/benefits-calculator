@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
-import stepDirectory from '../../Assets/stepDirectory';
 import './Disclaimer.css'
 
 const StyledTypography = styled(Typography)`
