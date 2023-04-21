@@ -26,6 +26,7 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 			zipcode: response.zipcode ?? '',
 			county: response.county ?? '',
 			startTime: response.start_date ?? formData.startTime,
+			has_expenses: false,
 			expenses: [],
 			householdSize: response.household_size ?? '',
 			householdData: [],
@@ -80,6 +81,7 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 			},
 		};
 
+		let defaultRelationship = 'headOfHousehold'
 		for (const member of response.household_members) {
 			const incomes = [];
 			for (const income of member.income_streams) {
@@ -92,7 +94,7 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 			}
 			initialFormData.householdData.push({
 				age: member.age ?? '',
-				relationshipToHH: member.relationship ?? '',
+				relationshipToHH: member.relationship ? member.relationship : defaultRelationship,
 				student: response.student ?? false,
 				studentFulltime: response.student_full_time ?? false,
 				pregnant: response.pregnant ?? false,
@@ -105,9 +107,12 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 				hasIncome: response.has_income ?? false,
 				incomeStreams: incomes,
 			});
+			defaultRelationship = ''
 		}
 
 		for (const expense of response.expenses) {
+			console.log(expense);
+			initialFormData.has_expenses = true;
 			initialFormData.expenses.push({
 				expenseSourceName: expense.type ?? '',
 				expenseAmount: expense.amount ?? '',

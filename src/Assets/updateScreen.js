@@ -1,3 +1,6 @@
+import { putScreen } from '../apiCalls.js'
+
+
 const updateScreen = (uuid, formData) => {
 
 	const getScreensBody = (formData) => {
@@ -12,7 +15,7 @@ const updateScreen = (uuid, formData) => {
 			zipcode: formData.zipcode,
 			county: formData.county,
 			start_date: formData.startTime,
-			household_size: formData.householdSize,
+			household_size: formData.householdSize === ''? null: formData.householdSize,
 			household_members: householdMembers,
 			expenses: expenses,
 			household_assets: formData.householdAssets,
@@ -111,7 +114,8 @@ const updateScreen = (uuid, formData) => {
 		});
 	};
 
-  console.log(getScreensBody(formData));
+  console.log(JSON.stringify(getScreensBody(formData)));
+	console.log(putScreen(getScreensBody(formData), uuid));
 }
 
 export default updateScreen;

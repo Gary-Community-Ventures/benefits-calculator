@@ -67,6 +67,20 @@ const postScreen = (partialFormData) => {
     })
 }
 
+const putScreen = (partialFormData, uuid) => {
+  return fetch(screensEndpoint + uuid + '/', {
+    method: 'PUT',
+    body: JSON.stringify(partialFormData),
+    headers: header
+  })
+    .then(response => {
+      if(!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+}
+
 const getEligibility = (screenerId, locale) => {
   const headerWithLocale = {
     ...header,
@@ -88,6 +102,7 @@ const getEligibility = (screenerId, locale) => {
 export {
   postScreen,
   getScreen,
+  putScreen,
   postUser,
   postMessage,
   getEligibility,
