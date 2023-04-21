@@ -17,7 +17,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
   if (locale === "es") {
     privacyLink = "https://20208592.hs-sites.com/es/data-privacy-policy";
   } else if (locale === "vi") {
-    privacyLink = "https://20208592.hs-sites.com/vi/data-privacy-policy";
+    privacyLink = "https://www.myfriendben.org/vi/data-privacy-policy";
   }
 
   const createFirstNameTextfield = () => {
