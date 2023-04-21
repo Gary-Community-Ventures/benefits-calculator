@@ -119,6 +119,7 @@
   "householdDataBlock.createDropdownCompProps-label": "Tipo de parentesco",
   "householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText": "Haga clic para seleccionar un tipo de parentesco",
   "householdDataBlock.questionHeader": "Cuéntenos sobre usted.",
+  "householdDataBlock.member-income": "Ingresos",
   "relationshipOptions.yourself": "Usted",
   "relationshipOptions.child": "Hijo/a",
   "relationshipOptions.fosterChild": "Hijo/a adoptivo/a",

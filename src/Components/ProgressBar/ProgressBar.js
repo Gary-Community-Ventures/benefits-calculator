@@ -10,7 +10,7 @@ const ProgressBar = ({ step }) => {
 	step = step ?? id;
 
 	return (
-		 <div className='progress-bar-container'>
+		 <aside className='progress-bar-container'>
 			<LinearProgress
 				sx={{
 					marginBottom: '5px',
@@ -39,7 +39,7 @@ const ProgressBar = ({ step }) => {
 					defaultMessage=' of ' />
 				{ totalSteps }
 			</p>
-		</div>
+		</aside>
 	);
 };
 

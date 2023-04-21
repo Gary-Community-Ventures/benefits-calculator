@@ -9,7 +9,8 @@ import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
 import HouseholdDataPreviousButton from '../PreviousButton/HouseholdDataPreviousButton';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { householdMemberAgeHasError, displayHouseholdMemberAgeHelperText } from '../../Assets/validationFunctions';
+import { householdMemberAgeHasError, displayHouseholdMemberAgeHelperText,
+  getPersonDataErrorMsg } from '../../Assets/validationFunctions';
 import { FormattedMessage } from 'react-intl';
 import './HouseholdDataBlock.css';
 
@@ -67,7 +68,8 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const [state, setState] = useState({
     householdData: initialHouseholdData,
     wasSubmitted: false,
-    error: ''
+    error: '',
+    errorIndex: null
   });
 
   const useEffectDependencies = [];
@@ -105,8 +107,25 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       return personData;
     });
 
-    setState({...state, householdData: updatedHouseholdData})
+    setState({...state, householdData: updatedHouseholdData});
   }, useEffectDependencies);
+
+  useEffect(() => {
+    if (state.wasSubmitted) {
+      setState({
+        ...state,
+        error: getPersonDataErrorMsg(state, page),
+        errorIndex: page
+      });
+    }
+  }, [state.householdData]);
+
+  useEffect(() => {
+    setState({
+      ...state,
+      wasSubmitted: false
+    });
+  }, [page]);
 
   const createFMInputLabel = (personIndex) => {
     if (personIndex === 0) {
@@ -216,6 +235,11 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       </>
     );
   }
+
+  const formatToUSD = (num) => {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
+  }
+
   const createMembersAdded = (member, index) => {
     let relationship = relationshipOptions[member.relationshipToHH];
     if (relationship === undefined) {
@@ -223,7 +247,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         id="relationshipOptions.yourself"
         defaultMessage="Yourself"
       />
-   }
+    }
     const age = member.age;
     let income = 0;
     for (const {incomeFrequency, incomeAmount, hoursPerWeek} of member.incomeStreams) {
@@ -244,14 +268,31 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
       }
       income += Number(num);
     }
+
     if (index >= page) {
       return;
     } else {
       return (
         <span className="member-added-container" key={index}>
           <h3 className="member-added-relationship">{relationship}:</h3>
-          <div className="member-added-age">Age: {age}</div>
-          <div className="member-added-income">Income: ${income} annually</div>
+          <div className="member-added-age">
+            <FormattedMessage
+              id="questions.age-inputLabel"
+              defaultMessage="Age"
+            />
+            : {age}
+          </div>
+          <div className="member-added-income">
+            <FormattedMessage
+              id="householdDataBlock.member-income"
+              defaultMessage="Income"
+            />
+            : {formatToUSD(Number(income))}
+            <FormattedMessage
+              id="displayAnnualIncome.annual"
+              defaultMessage=" annually"
+            />
+            </div>
         </span>
       );
     }
@@ -305,7 +346,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
           { createIncomeRadioQuestion(index) }
           <p className='household-data-q-underline'></p>
           { personData.hasIncome && createPersonIncomeBlock(index) }
-          { state.error && <ErrorMessage error={state.error} /> }
+          { state.error && state.errorIndex === index && <ErrorMessage error={state.error} /> }
           <div className='question-buttons'>
             <HouseholdDataPreviousButton
               page={page}

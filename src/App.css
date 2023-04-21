@@ -17,7 +17,7 @@
 
 .step-progress-title {
   font-weight: 700;
-  color: #0096B0;
+  color: #037A93;
 }
 
 .sub-header {
@@ -42,12 +42,12 @@
 
 /* text input label in a focus state */
 .MuiInputLabel-root.MuiInputLabel-formControl.Mui-focused {
-  color: #0096B0;
+  color: #037A93;
 }
 
 /* text input outline in a focus state */
 .MuiOutlinedInput-root.MuiInputBase-formControl.Mui-focused .MuiOutlinedInput-notchedOutline.MuiOutlinedInput-notchedOutline {
-  border-color: #0096B0;
+  border-color: #037A93;
 }
 
 /* text input outline in an error state */
@@ -57,10 +57,14 @@
 
 /* text input outline in a default state */
 /* .MuiOutlinedInput-root.MuiInputBase-formControl .MuiOutlinedInput-notchedOutline.MuiOutlinedInput-notchedOutline {
-  border-color: #0096B0;
+  border-color: #037A93;
 } */
 
 .subheader-desc {
   font-weight: 400;
   font-size: 1rem;
+}
+
+.sign-up-data-privacy-link {
+  color: #037A93;
 }

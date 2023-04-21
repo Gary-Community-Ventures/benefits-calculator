@@ -139,7 +139,8 @@ const Results = () => {
   const categoryValues = (results) => {
     const preschoolPrograms = {
       'Cuidado de Niños, Preescolar y Jóvenes': [0, 0],
-      'Child Care, Preschool, and Youth': [0, 0]
+      'Child Care, Preschool, and Youth': [0, 0],
+      'Chăm Sóc Trẻ Em, Trẻ Mầm Non và Thanh Thiếu Niên': [0, 0]
     }
 		const categoryValues = {};
 		for (let result of results) {
@@ -503,7 +504,7 @@ const Results = () => {
 				{filt.category !== false && (
           <>
             <Toolbar
-              sx={{ border: 1, backgroundColor: '#0096B0', color: 'white' }}
+              sx={{ border: 1, backgroundColor: '#037A93', color: 'white' }}
             >
               <span className="space-around border-right">
                 {filt.category.value}

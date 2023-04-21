@@ -7,29 +7,31 @@ import Textfield from '../Textfield/Textfield';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { nameHasError, displayFirstNameHelperText, displayLastNameHelperText,
   emailHasError, displayEmailHelperText, phoneHasError, displayPhoneHasErrorHelperText,
-  signUpFormHasError, displaySignUpFormHelperText } 
+  signUpFormHasError, displaySignUpFormHelperText }
   from '../../Assets/validationFunctions';
 
 const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
   const locale = useContext(Context).locale.toLowerCase();
   let privacyLink = "https://20208592.hs-sites.com/en/data-privacy-policy?__hstc=144746475.066f707c0b490f88f5429b1856cf0908.1663037963489.1663086538117.1663095192641.3&__hssc=144746475.1.1663095192641&__hsfp=2418539872";
-  
-  if (locale == "es") {
+
+  if (locale === "es") {
     privacyLink = "https://20208592.hs-sites.com/es/data-privacy-policy";
+  } else if (locale === "vi") {
+    privacyLink = "https://www.myfriendben.org/vi/data-privacy-policy";
   }
 
   const createFirstNameTextfield = () => {
     const firstNameProps = {
       inputType: 'text',
       inputName: 'firstName',
-      inputLabel: 
-        <FormattedMessage 
-          id='signUp.createFirstNameTextfield-label' 
+      inputLabel:
+        <FormattedMessage
+          id='signUp.createFirstNameTextfield-label'
           defaultMessage='First Name' />,
       inputError: nameHasError,
       inputHelperText: displayFirstNameHelperText
     };
-  
+
     return createTextfield(firstNameProps);
   }
 
@@ -37,14 +39,14 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
     const lastNameProps = {
       inputType: 'text',
       inputName: 'lastName',
-      inputLabel: 
-        <FormattedMessage 
-          id='signUp.createLastNameTextfield-label' 
+      inputLabel:
+        <FormattedMessage
+          id='signUp.createLastNameTextfield-label'
           defaultMessage='Last Name' />,
       inputError: nameHasError,
       inputHelperText: displayLastNameHelperText
     };
-  
+
     return createTextfield(lastNameProps);
   }
 
@@ -52,35 +54,35 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
     const emailProps = {
       inputType: 'text',
       inputName: 'email',
-      inputLabel: 
-        <FormattedMessage 
-          id='signUp.createEmailTextfield-label' 
+      inputLabel:
+        <FormattedMessage
+          id='signUp.createEmailTextfield-label'
           defaultMessage='Email' />,
       inputError: emailHasError,
       inputHelperText: displayEmailHelperText
     };
 
-    return createTextfield(emailProps);  
+    return createTextfield(emailProps);
   }
 
   const createPhoneTextfield = () => {
     const phoneProps = {
       inputType: 'tel',
       inputName: 'phone',
-      inputLabel: 
-        <FormattedMessage 
-          id='signUp.createPhoneTextfield-label' 
+      inputLabel:
+        <FormattedMessage
+          id='signUp.createPhoneTextfield-label'
           defaultMessage='Cell Phone' />,
       inputError: phoneHasError,
       inputHelperText: displayPhoneHasErrorHelperText
     };
 
-    return createTextfield(phoneProps);  
+    return createTextfield(phoneProps);
   }
-  
+
   const createTextfield = (componentProps) => {
     return (
-      <Textfield 
+      <Textfield
         componentDetails={componentProps}
         formData={formData.signUpInfo}
         handleTextfieldChange={handleTextfieldChange}
@@ -99,22 +101,23 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
         <FormControlLabel
           sx={{mb: 1}}
           control={
-            <Checkbox 
-              checked={formData.signUpInfo.commConsent} 
+            <Checkbox
+              checked={formData.signUpInfo.commConsent}
               onChange={handleCheckboxChange}
-              name='commConsent' 
+              name='commConsent'
               required />
           }
           label={
             <div>
-              <FormattedMessage 
-                id='signUp.displayDisclosureSection-consentCheck1' 
+              <FormattedMessage
+                id='signUp.displayDisclosureSection-consentCheck1'
                 defaultMessage="I have read, understand, and agree to the terms of My Friend Ben's " />
               <FormattedMessage
                 id='emailResults.return-consentCheck'
                 defaultMessage="{linkVal}"
-                values={{ 
-                  linkVal: <a 
+                values={{
+                  linkVal: <a
+                  className='sign-up-data-privacy-link'
                   href={privacyLink}
                   target="_blank"
                   rel='noopener noreferrer'>
@@ -123,8 +126,8 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
                       defaultMessage='data privacy policy ' />
                     </a>
                 }} />
-              <FormattedMessage 
-                id='signUp.displayDisclosureSection-consentCheck4' 
+              <FormattedMessage
+                id='signUp.displayDisclosureSection-consentCheck4'
                 defaultMessage=" and consent to contact." />
             </div>
           }
@@ -134,13 +137,13 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
   }
 
   const displayErrorMessage = () => {
-    if (signUpFormHasError(formData.signUpInfo)) {   
+    if (signUpFormHasError(formData.signUpInfo)) {
       return (
         <ErrorMessage error={displaySignUpFormHelperText(formData.signUpInfo)} />
       );
     }
   }
-  
+
   return (
     <>
     <div className='bottom-border'>

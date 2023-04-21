@@ -9,7 +9,7 @@ const HouseholdDataPreviousButton = ({ page, setPage }) => {
 
   const handlePrevious = (event) => {
     event.preventDefault();
-    
+
     if (Number(page) === 0) { //we're at the first member's data block
       //so we just want to navigate back to step 13
       navigate(`/${uuid}/step-${stepNumberId - 1}`);
@@ -25,7 +25,7 @@ const HouseholdDataPreviousButton = ({ page, setPage }) => {
       className='prev-button'
       variant='contained'
       onClick={(event) => { handlePrevious(event) }}>
-      <FormattedMessage 
+      <FormattedMessage
         id='previousButton'
         defaultMessage='Prev' />
     </Button>
