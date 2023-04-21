@@ -139,7 +139,8 @@ const Results = () => {
   const categoryValues = (results) => {
     const preschoolPrograms = {
       'Cuidado de Niños, Preescolar y Jóvenes': [0, 0],
-      'Child Care, Preschool, and Youth': [0, 0]
+      'Child Care, Preschool, and Youth': [0, 0],
+      'Chăm Sóc Trẻ Em, Trẻ Mầm Non và Thanh Thiếu Niên': [0, 0]
     }
 		const categoryValues = {};
 		for (let result of results) {
