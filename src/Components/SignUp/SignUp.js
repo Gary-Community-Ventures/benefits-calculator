@@ -117,6 +117,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
                 defaultMessage="{linkVal}"
                 values={{
                   linkVal: <a
+                  className='sign-up-data-privacy-link'
                   href={privacyLink}
                   target="_blank"
                   rel='noopener noreferrer'>

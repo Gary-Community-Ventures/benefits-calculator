@@ -35,6 +35,10 @@
   font-weight: 600;
 }
 
+#select-language:focus-visible {
+  outline: -webkit-focus-ring-color auto 1px;
+}
+
 @media (max-width: 400px) {
   #nav-container {
     flex-direction: column;
