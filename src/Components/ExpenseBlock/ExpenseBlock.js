@@ -18,10 +18,6 @@ const StyledTextField = styled(TextField)({
   marginBottom: 20
 });
 
-const StyledDeleteButton = styled(Button)({
-  minWidth: 32
-});
-
 const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   const { id } = useParams();
   const stepNumberId = Number(id);
@@ -53,7 +49,13 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
         <div key={index}>
           {index > 0 &&
             <div className='delete-button-container'>
-              <StyledDeleteButton variant='contained' onClick={() => deleteExpenseBlock(index)}>x</StyledDeleteButton>
+              <Button
+                className='delete-button'
+                onClick={() => deleteExpenseBlock(index)}
+                variant='contained'
+              >
+                x
+              </Button>
             </div>
           }
           {index > 0 && expenseSourceQuestion}
