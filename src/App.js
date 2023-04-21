@@ -9,7 +9,6 @@ import Confirmation from './Components/Confirmation/Confirmation';
 import SubmitScreen from './Components/SubmitScreen/SubmitScreen';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
-import EmailResults from './Components/EmailResults/EmailResults';
 import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';

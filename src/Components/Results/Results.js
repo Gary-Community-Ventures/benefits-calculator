@@ -503,7 +503,7 @@ const Results = () => {
 				{filt.category !== false && (
           <>
             <Toolbar
-              sx={{ border: 1, backgroundColor: '#0096B0', color: 'white' }}
+              sx={{ border: 1, backgroundColor: '#037A93', color: 'white' }}
             >
               <span className="space-around border-right">
                 {filt.category.value}

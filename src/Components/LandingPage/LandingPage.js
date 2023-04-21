@@ -2,7 +2,6 @@ import { Card, CardContent, CardActions, Button, Typography } from '@mui/materia
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import stepDirectory from '../../Assets/stepDirectory';
 import './LandingPage.css';
 
 const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
@@ -11,10 +10,6 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
   useEffect(() => {
     clearLocalStorageFormDataAndResults();
   }, []);
-
-  const totalNumberOfQuestions = () => {
-    return Object.keys(stepDirectory).length + 2;
-  }
 
   return (
 		<main className="benefits-form">
