@@ -5,8 +5,7 @@ import { styled } from '@mui/material/styles';
 import {
 	hoursWorkedValueHasError,
 	incomeStreamValueHasError,
-	displayIncomeStreamValueHelperText,
-	incomeStreamsAreValid,
+	displayIncomeStreamValueHelperText
 } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
@@ -44,21 +43,18 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   }
 
   useEffect(() => {
-    let updatedSelectedMenuItem = [ ...selectedMenuItem ];
-    if (incomeStreamsAreValid(updatedSelectedMenuItem)) {
-      const updatedHouseholdData = state.householdData.map((personData, i) => {
-        if (i === personDataIndex) {
-          return {
-            ...personData,
-            incomeStreams: updatedSelectedMenuItem
-          };
-        } else {
-          return personData;
-        }
-      });
+    const updatedHouseholdData = state.householdData.map((personData, i) => {
+      if (i === personDataIndex) {
+        return {
+          ...personData,
+          incomeStreams: selectedMenuItem
+        };
+      } else {
+        return personData;
+      }
+    });
 
-      setState({...state, householdData: updatedHouseholdData});
-    }
+    setState({...state, householdData: updatedHouseholdData});
   }, [selectedMenuItem]);
 
   const createIncomeStreamsMenuItems = () => {
@@ -123,7 +119,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
 		// Income amount can be up to 8 digits long with 2 decimal places. Can not start with a decimal
     const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
 
-		if (incomeAmountRegex.test(value)) {
+		if (incomeAmountRegex.test(value) || value === '') {
 			const updatedSelectedMenuItems = selectedMenuItem.map(
 				(incomeSourceData, i) => {
 					if (i === index) {
