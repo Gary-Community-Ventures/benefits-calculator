@@ -99,7 +99,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   const createExpenseDropdownMenu = (expenseSourceName, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='expense-type-label'>
+        <InputLabel id='expense-type-label'>
           <FormattedMessage
             id='expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel'
             defaultMessage='Expense Type' />
