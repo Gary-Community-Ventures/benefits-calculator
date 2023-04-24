@@ -272,10 +272,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     }
   };
 
-  const totalNumberOfQuestions = () => {
-    return Object.keys(stepDirectory).length + 2;
-  }
-
   return (
     <main className='benefits-form'>
       {renderHeaderAndSubheader()}
