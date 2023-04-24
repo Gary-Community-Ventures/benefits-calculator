@@ -13,19 +13,13 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
 
   return (
 		<main className="benefits-form">
-			<h1
-				className="sub-header"
-				tabIndex="0"
-			>
+			<h1 className="sub-header">
 				<FormattedMessage
 					id="disclaimer.header"
 					defaultMessage="What you should know before we begin: "
 				/>
 			</h1>
-			<Card
-				variant="outlined"
-				tabIndex="0"
-			>
+			<Card variant="outlined">
 				<CardContent>
 					<Typography variant="body1">
 						<FormattedMessage
