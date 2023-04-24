@@ -42,7 +42,7 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 			householdData: [],
 			householdAssets: response.householdAssets ?? 0,
 			lastTaxFilingYear: response.last_tax_filing_year ?? '',
-			hasBenefits: response.has_benefits ?? false,
+			hasBenefits: response.has_benefits ?? 'preferNotToAnswer',
 			benefits: {
 				acp: response.has_acp ?? false,
 				andcs: response.has_andcs ?? false,

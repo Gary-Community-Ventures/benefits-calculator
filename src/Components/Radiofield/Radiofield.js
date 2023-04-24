@@ -11,7 +11,6 @@ const Radiofield = ({ componentDetails, formData, handleRadioButtonChange, prefe
   const { ariaLabel, inputName } = componentDetails;
   const intl = useIntl();
   const translatedAriaLabel = intl.formatMessage({ id: ariaLabel });
-  console.log(formData[inputName]);
   
   return (
     <div className='radiogroup-container'>

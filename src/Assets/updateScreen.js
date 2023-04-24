@@ -20,7 +20,7 @@ const updateScreen = (uuid, formData) => {
 			expenses: expenses,
 			household_assets: formData.householdAssets,
 			last_tax_filing_year: formData.lastTaxFilingYear,
-			has_benefits: formData.hasBenefits,
+			has_benefits: formData.hasBenefits ?? 'preferNotToAnswer',
 			has_acp: formData.benefits.acp,
 			has_andcs: formData.benefits.andcs,
 			has_cccap: formData.benefits.cccap,

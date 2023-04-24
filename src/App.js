@@ -51,7 +51,7 @@ const App = () => {
     householdData: [],
     householdAssets: 0,
     lastTaxFilingYear: '',
-    hasBenefits: false,
+    hasBenefits: 'preferNotToAnswer',
     benefits: {
       acp: false,
       andcs: false,
@@ -149,7 +149,7 @@ const App = () => {
       };
     }
 
-    if (formData.hasBenefits === false) {
+    if (formData.hasBenefits !== 'true') {
       updatedFormData.benefits = initialFormData.benefits;
     }
 

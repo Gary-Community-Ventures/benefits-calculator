@@ -385,9 +385,9 @@ const acuteHHConditionsHasError = (conditions) => {
 }
 
 const benefitsHasError = (hasBenefits, formData) => {
-  if (hasBenefits === false) {
+  if (hasBenefits !== 'true') {
     return false;
-  } else if (hasBenefits === true) {
+  } else if (hasBenefits === 'true') {
     const { benefits } = formData;
     const selectedAtLeastOneBenefit = Object.keys(benefits).some(benefit => formData.benefits[benefit] === true);
 
