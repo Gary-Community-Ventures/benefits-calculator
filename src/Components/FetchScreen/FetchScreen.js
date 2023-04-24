@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getScreen } from '../../apiCalls';
+import referralOptions from '../../Assets/referralOptions';
 
 const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 	const { uuid } = useParams();
@@ -18,6 +19,15 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 	};
 
 	const createFormData = (response) => {
+		let otherRefferer = '';
+		let referrer = response.referral_source;
+		if (!referrer) {
+			referrer = '';
+		} else if (!(referrer in referralOptions)) {
+			referrer = 'other';
+			otherRefferer = response.referral_source;
+		}
+
 		const initialFormData = {
 			screenUUID: response.uuid,
 			isTest: response.is_test ?? false,
@@ -26,7 +36,7 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 			zipcode: response.zipcode ?? '',
 			county: response.county ?? '',
 			startTime: response.start_date ?? formData.startTime,
-			has_expenses: false,
+			hasExpenses: false,
 			expenses: [],
 			householdSize: response.household_size ?? '',
 			householdData: [],
@@ -67,9 +77,9 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 				chp: response.has_chp_hi ?? false,
 				none: response.has_no_hi ?? false,
 			},
-			referralSource: response.referral_source,
+			referralSource: referrer,
 			referrerCode: response.referrer_code,
-			otherSource: response.referral_source ?? '',
+			otherSource: otherRefferer,
 			acuteHHConditions: {
 				food: response.needs_food ?? false,
 				babySupplies: response.needs_baby_supplies ?? false,
@@ -95,22 +105,22 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 			initialFormData.householdData.push({
 				age: member.age ?? '',
 				relationshipToHH: member.relationship ? member.relationship : defaultRelationship,
-				student: response.student ?? false,
-				studentFulltime: response.student_full_time ?? false,
-				pregnant: response.pregnant ?? false,
-				unemployed: response.unemployed ?? false,
-				unemployedWorkedInLast18Mos: response.worked_in_last_18_mos ?? false,
-				blindOrVisuallyImpaired: response.visually_impaired ?? false,
-				disabled: response.disabled ?? false,
-				veteran: response.veteran ?? false,
-				hasIncome: response.has_income ?? false,
+				student: member.student ?? false,
+				studentFulltime: member.student_full_time ?? false,
+				pregnant: member.pregnant ?? false,
+				unemployed: member.unemployed ?? false,
+				unemployedWorkedInLast18Mos: member.worked_in_last_18_mos ?? false,
+				blindOrVisuallyImpaired: member.visually_impaired ?? false,
+				disabled: member.disabled ?? false,
+				veteran: member.veteran ?? false,
+				hasIncome: member.has_income ?? false,
 				incomeStreams: incomes,
 			});
 			defaultRelationship = ''
 		}
 
 		for (const expense of response.expenses) {
-			initialFormData.has_expenses = true;
+			initialFormData.hasExpenses = true;
 			initialFormData.expenses.push({
 				expenseSourceName: expense.type ?? '',
 				expenseAmount: expense.amount ?? '',
