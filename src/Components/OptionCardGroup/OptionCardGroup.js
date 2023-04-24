@@ -1,9 +1,12 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography } from '@mui/material';
+import { useIntl } from 'react-intl';
 import './OptionCardGroup.css';
 
 const OptionCardGroup = ({ stateVariable, options, state, setState }) => {
+  const intl = useIntl();
+
   const handleCardClick = (option) => {
     const currentStateVariableObj = { ...state[stateVariable] };
     const currentOptions = Object.keys(currentStateVariableObj);
@@ -23,6 +26,7 @@ const OptionCardGroup = ({ stateVariable, options, state, setState }) => {
 
   const createOptionCards = () => {
     const optionCards = Object.keys(options).map((optionKey, index) => {
+      const translatedAriaLabel = intl.formatMessage({ id: options[optionKey].formattedMessage.props.id });
       return (
         <CardActionArea
           key={index}
@@ -39,7 +43,7 @@ const OptionCardGroup = ({ stateVariable, options, state, setState }) => {
             <div className="option-card-image">
               <img
                 src={options[optionKey].image}
-                alt={options[optionKey].formattedMessage}
+                alt={translatedAriaLabel}
               />
             </div>
             <CardContent sx={{ textAlign: 'center', padding: '.35rem' }}>
