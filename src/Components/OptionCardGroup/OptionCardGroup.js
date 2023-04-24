@@ -32,13 +32,13 @@ const OptionCardGroup = ({ stateVariable, options, state, setState }) => {
           key={index}
           sx={{ width: '179px' }}
           className='card-action-area'
+          onClick={() => {
+            handleCardClick(optionKey);
+          }}
         >
           <Card
             className={state[stateVariable][optionKey] ? 'selected-option-card' : 'unselected-option-card'}
             sx={{ width: '179px', height: '174px', display: 'grid', placeItems: 'center' }}
-            onClick={() => {
-              handleCardClick(optionKey);
-            }}
           >
             <div className="option-card-image">
               <img
