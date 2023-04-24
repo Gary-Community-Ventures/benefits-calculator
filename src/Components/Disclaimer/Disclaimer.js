@@ -30,12 +30,18 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
 
   return (
     <main className='benefits-form'>
-      <h1 className='sub-header'>
+      <h1
+        className='sub-header'
+        tabIndex="0"
+      >
         <FormattedMessage
           id='disclaimer.header'
           defaultMessage='What you should know before we begin: ' />
       </h1>
-      <Card variant='outlined'>
+      <Card
+        variant='outlined'
+        tabIndex="0"
+      >
         <CardContent>
           <h2 className="disclaimer-header">
             <FormattedMessage
