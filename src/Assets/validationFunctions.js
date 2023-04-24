@@ -176,24 +176,18 @@ const displayHouseholdMemberAgeHelperText = (applicantAge) => {
 
 const personDataIsValid = (householdDataState, index) => {
   const matchingPersonData = householdDataState.householdData[index];
-  const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired,
-    disabled, veteran, noneOfTheseApply, hasIncome, incomeStreams } = matchingPersonData;
+  const { age, relationshipToHH, hasIncome, incomeStreams } = matchingPersonData;
 
   const ageIsValid = (Number(age) >= 0 && age !== '');
   const relationshipToHHIsValid = (relationshipToHH !== '');
-  const noneApplyIsValid = (noneOfTheseApply && !student && !pregnant &&
-   !unemployed && !blindOrVisuallyImpaired && !disabled && !veteran) || !noneOfTheseApply;
-  const atLeastOneConditionWasSelected = (noneOfTheseApply || student || pregnant ||
-   unemployed || blindOrVisuallyImpaired || disabled || veteran);
   const incomeIsValid = (hasIncome && incomeStreamsAreValid(incomeStreams)) || !hasIncome;
 
-  return ageIsValid && relationshipToHHIsValid && noneApplyIsValid && atLeastOneConditionWasSelected && incomeIsValid;
+  return ageIsValid && relationshipToHHIsValid && incomeIsValid;
 }
 
 const getPersonDataErrorMsg = (householdDataState, index) => {
   const matchingPersonData = householdDataState.householdData[index];
-  const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired,
-    disabled, veteran, noneOfTheseApply, hasIncome, incomeStreams } = matchingPersonData;
+  const { age, relationshipToHH, hasIncome, incomeStreams } = matchingPersonData;
 
   if (Number(age) < 0 || age === '') {
     return (
@@ -207,21 +201,6 @@ const getPersonDataErrorMsg = (householdDataState, index) => {
       <FormattedMessage
         id='validation-helperText.hhMemberRelation'
         defaultMessage='Please select a relation option'
-      />
-    );
-
-  } else if (noneOfTheseApply && (student || pregnant || unemployed || blindOrVisuallyImpaired || disabled || veteran)) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.hhMemberNoneApply'
-        defaultMessage='Please deselect all other options if none of these conditions apply'
-      />
-    );
-  } else if (!student && !pregnant && !unemployed && !blindOrVisuallyImpaired && !disabled && !veteran && !noneOfTheseApply) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.noneApply'
-        defaultMessage="If none of these conditions apply please select 'None of these apply' "
       />
     );
   } else if (hasIncome && incomeStreamsAreValid(incomeStreams) === false) {

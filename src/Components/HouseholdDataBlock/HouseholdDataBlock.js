@@ -37,7 +37,6 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         blindOrVisuallyImpaired: false,
         disabled: false,
         veteran: false,
-        noneOfTheseApply: false,
         hasIncome: false,
         incomeStreams: []
       });
@@ -91,17 +90,6 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
       if (personData.hasIncome === false) {
         personData.incomeStreams = [];
-      }
-
-      if (personData.noneOfTheseApply === true) {
-        personData.student = false;
-        personData.studentFulltime = false;
-        personData.pregnant = false;
-        personData.unemployed = false;
-        personData.unemployedWorkedInLast18Mos = false;
-        personData.blindOrVisuallyImpaired = false;
-        personData.disabled = false;
-        personData.veteran = false;
       }
 
       return personData;

@@ -103,7 +103,6 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 				blindOrVisuallyImpaired: response.visually_impaired ?? false,
 				disabled: response.disabled ?? false,
 				veteran: response.veteran ?? false,
-				noneOfTheseApply: false,
 				hasIncome: response.has_income ?? false,
 				incomeStreams: incomes,
 			});
