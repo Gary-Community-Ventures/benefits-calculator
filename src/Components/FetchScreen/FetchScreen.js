@@ -110,7 +110,6 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 		}
 
 		for (const expense of response.expenses) {
-			console.log(expense);
 			initialFormData.has_expenses = true;
 			initialFormData.expenses.push({
 				expenseSourceName: expense.type ?? '',

@@ -1,5 +1,5 @@
 import { FormattedMessage } from "react-intl";
-import coZipcodes from "./coZipcodes";
+import countiesByZipcode from "./countiesByZipcode";
 
 const ageHasError = (applicantAge) => {
   // handleTextfieldChange prevents setting anything to formData that does not pass a number regex test
@@ -30,7 +30,7 @@ const zipcodeHasError = (zipcode) => {
   if (numberMustBeFiveDigitsLongRegex.test(zipcode)) {
     //this means that the zipcode input passed the regex test so we can just return false since there is no error
     //this additional test checks the zipcode input against all CO zipcodes
-    return !coZipcodes.includes(zipcode);
+    return !Object.keys(countiesByZipcode).includes(zipcode.toString());
   } else {
     return true;
   }
