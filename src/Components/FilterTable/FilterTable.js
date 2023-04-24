@@ -6,6 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
+import { Button } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { useState } from 'react';
 import './FilterTable.css';
@@ -122,13 +123,13 @@ const Filter = ({
 
 	return (
 		<div className="filter">
-			<span className="filters-button" onClick={toggleFilterForm}>
+			<Button className="filters-button" onClick={toggleFilterForm}>
 				<FilterListIcon sx={{ mr: '.5rem' }} />
 				<FormattedMessage
 					id="filter.filterByCategoryButton"
 					defaultMessage="Filters"
 				/>
-			</span>
+			</Button>
 			{showFilters && (
 				<>
 					<div className="click-off" onClickCapture={toggleFilterForm}></div>
