@@ -108,6 +108,7 @@
   "continueButton": "Continuar",
   "radiofield.label-yes": "Sí",
   "radiofield.label-no": "No",
+  "radiofield.label-preferNotToAnswer": "Prefiero no contestar",
   "householdDataBlock.createFMInputLabel-headOfHH": "Su Edad",
   "householdDataBlock.createFMInputLabel-person": "Persona ",
   "householdDataBlock.createFMInputLabel-age": " Edad",

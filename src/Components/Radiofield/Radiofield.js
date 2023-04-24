@@ -43,8 +43,8 @@ const Radiofield = ({ componentDetails, formData, handleRadioButtonChange, prefe
               control={<Radio />} 
               label={
                 <FormattedMessage 
-                  id='radiofield.label-no' 
-                  defaultMessage='No' />
+                  id='radiofield.label-preferNotToAnswer' 
+                  defaultMessage='Prefer not to answer' />
               }
             />
           )}
