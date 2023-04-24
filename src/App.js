@@ -209,6 +209,11 @@ const App = () => {
     setFormData({ ...formData, [name]: boolValue });
   }
 
+  const handleNoAnswerChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  }
+
   const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
     updateScreen(uuid, formData)
@@ -336,6 +341,7 @@ const App = () => {
                     handleTextfieldChange={handleTextfieldChange}
                     handleContinueSubmit={handleContinueSubmit}
                     handleRadioButtonChange={handleRadioButtonChange}
+                    handleNoAnswerChange={handleNoAnswerChange}
                     handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
                     handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
                     handleHouseholdDataSubmit={handleHouseholdDataSubmit}

@@ -12,14 +12,13 @@ import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import SignUp from '../SignUp/SignUp';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import AccordionsContainer from '../../Components/AccordionsContainer/AccordionsContainer';
-import stepDirectory from '../../Assets/stepDirectory';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange,
-  handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
+  handleNoAnswerChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
   handleCheckboxChange }) => {
   let { id } = useParams();
   let numberId = Number(id);
@@ -50,6 +49,16 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         componentDetails={question.componentDetails}
         formData={formData}
         handleRadioButtonChange={handleRadioButtonChange} />
+    );
+  }
+
+  const renderNoAnswerComponent = (question) => {
+    return (
+      <Radiofield
+        componentDetails={question.componentDetails}
+        formData={formData}
+        handleRadioButtonChange={handleNoAnswerChange}
+        preferNotToAnswer={true} />
     );
   }
 
@@ -121,6 +130,10 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     if (formData[inputName] === true) {
       // this case is for a radio button question where the user selected "yes"
       return true;
+    }
+    if (formData[inputName] === 'true') {
+      // this case is for a radio button with prefer not to answer where the use selected "yes"
+      return true
     }
     if (formData[inputName] === 'other') {
       // this case is for the referral source question where the user selected "other"
@@ -278,6 +291,7 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
       {
         ( matchingQuestion.componentDetails.componentType === 'Textfield' && createComponent(renderTextfieldComponent(matchingQuestion)) ) ||
         ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createComponent(renderRadiofieldComponent(matchingQuestion)) ) ||
+        ( matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' && createComponent(renderNoAnswerComponent(matchingQuestion)) ) ||
         ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() ) ||
         ( matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' && createComponent(renderBasicCheckboxGroup(matchingQuestion)) ) ||
         ( matchingQuestion.componentDetails.componentType === 'OptionCardGroup' && createComponent(renderOptionCardGroup(matchingQuestion)) ) ||
