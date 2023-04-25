@@ -9,6 +9,7 @@ import Share from '../Share/Share';
 import EmailResults from '../EmailResults/EmailResults';
 import MFBLogo from '../../Assets/logo.png';
 import BIAMFBLogo from '../../Assets/biamfbcombinedlogo.png';
+import FocusTrap from '@mui/base/FocusTrap';
 import './Header.css';
 
 const Header = ({ formData, handleTextfieldChange }) => {
@@ -125,17 +126,25 @@ const Header = ({ formData, handleTextfieldChange }) => {
 			</AppBar>
 			<Modal
 				open={openShare}
-				onClose={handleCloseShare}>
-				<Share close={handleCloseShare} />
+				onClose={handleCloseShare}
+				aria-labelledby="share-my-friend-ben-modal"
+			>
+				<Share
+					close={handleCloseShare}
+					id="share-my-friend-ben-modal"
+				/>
 			</Modal>
 			<Modal
 				open={openEmailResults}
-				onClose={handleCloseEmailResults}>
+				onClose={handleCloseEmailResults}
+				aria-labelledby="email-results-modal"
+			>
 				<EmailResults
 					formData={formData}
 					handleTextfieldChange={handleTextfieldChange}
 					screenId={screenUUID}
 					close={handleCloseEmailResults}
+					id="email-results-modal"
 				/>
 			</Modal>
 		</nav>
