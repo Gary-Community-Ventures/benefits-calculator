@@ -6,7 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
-import { Button } from '@mui/material';
+import { IconButton, Button } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { useState } from 'react';
 import './FilterTable.css';
@@ -134,8 +134,12 @@ const Filter = ({
 				<>
 					<div className="click-off" onClickCapture={toggleFilterForm}></div>
 					<div className="filterForm">
-						<div className="close-container">
-							<CloseIcon onClick={toggleFilterForm} className="close" />
+						<div className="close-button-container">
+							<IconButton
+								onClick={toggleFilterForm}
+							>
+								<CloseIcon className="close" />
+							</IconButton>
 						</div>
 						<div>
 							<FormControlLabel
