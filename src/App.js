@@ -16,9 +16,9 @@ import './App.css';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 // import { createDevFormData } from './Assets/devFormData';
 
-const TRACKING_ID = "G-NZ9D1VLR0D";
+const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
 ReactGA.initialize(TRACKING_ID);
-LicenseInfo.setLicenseKey('505464fa6deb7bd75c286bf36859d580Tz01MTQ5MyxFPTE2OTU4Mjk0NDQyMTEsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI=');
+LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
 const App = () => {
   const navigate = useNavigate();
