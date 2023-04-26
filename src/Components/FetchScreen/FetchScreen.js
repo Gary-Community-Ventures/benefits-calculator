@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getScreen } from '../../apiCalls';
 import referralOptions from '../../Assets/referralOptions';
 
-const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
+const FetchScreen = ({ formData, setFormData, setFetchedScreen }) => {
 	const { uuid } = useParams();
 	const navigate = useNavigate();
 
@@ -92,6 +92,7 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 				phone: '',
 				firstName: '',
 				lastName: '',
+				hasUser: response.user !== undefined,
 				sendOffers: response.user?.send_offers ?? false,
 				sendUpdates: response.user?.send_updates ?? false,
 				commConsent: false

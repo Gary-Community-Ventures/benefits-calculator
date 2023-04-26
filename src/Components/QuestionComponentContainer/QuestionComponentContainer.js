@@ -139,8 +139,10 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
       // this case is for the referral source question where the user selected "other"
       return true;
     }
-    if ((inputName === 'signUpInfo' && formData.signUpInfo.sendUpdates) ||
-      (inputName === 'signUpInfo' && formData.signUpInfo.sendOffers)) {
+    if ((inputName === 'signUpInfo' &&
+        (formData.signUpInfo.sendUpdates || formData.signUpInfo.sendOffers)) &&
+        !formData.signUpInfo.hasUser
+      ) {
       return true;
     }
 

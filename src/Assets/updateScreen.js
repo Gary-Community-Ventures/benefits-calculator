@@ -1,10 +1,13 @@
-import { putScreen, postScreen } from '../apiCalls.js'
+import { putScreen, postScreen, putUser, postUser } from '../apiCalls.js';
 
 const getScreensBody = (formData) => {
 	const householdMembers = getHouseholdMembersBodies(formData);
-	const expenses = getExpensesBodies(formData);	
+	const expenses = getExpensesBodies(formData);
 
-	const finalReferralSource = formData.otherSource !== '' ? formData.otherSource : formData.referralSource;
+	const finalReferralSource =
+		formData.otherSource !== ''
+			? formData.otherSource
+			: formData.referralSource;
 	const screenBody = {
 		is_test: formData.isTest,
 		external_id: formData.externalID,
@@ -12,7 +15,8 @@ const getScreensBody = (formData) => {
 		zipcode: formData.zipcode,
 		county: formData.county,
 		start_date: formData.startTime,
-		household_size: formData.householdSize === ''? null: formData.householdSize,
+		household_size:
+			formData.householdSize === '' ? null : formData.householdSize,
 		household_members: householdMembers,
 		expenses: expenses,
 		household_assets: formData.householdAssets,
@@ -54,7 +58,7 @@ const getScreensBody = (formData) => {
 		needs_mental_health_help: formData.acuteHHConditions.support,
 		needs_child_dev_help: formData.acuteHHConditions.childDevelopment,
 		needs_funeral_help: formData.acuteHHConditions.loss,
-		needs_family_planning_help: formData.acuteHHConditions.familyPlanning
+		needs_family_planning_help: formData.acuteHHConditions.familyPlanning,
 	};
 
 	return screenBody;
@@ -109,28 +113,48 @@ const getExpensesBodies = (formData) => {
 	});
 };
 
+const getUserBody = (formData, languageCode) => {
+	const {
+		email,
+		phone,
+		firstName,
+		lastName,
+		sendUpdates,
+		sendOffers,
+		commConsent,
+	} = formData.signUpInfo;
+	const phoneNumber = '+1' + phone;
+
+	const user = {
+		email_or_cell: email ? email : phoneNumber,
+		cell: phone ? phoneNumber : '',
+		email: email ? email : '',
+		first_name: firstName,
+		last_name: lastName,
+		tcpa_consent: commConsent,
+		language_code: languageCode,
+		send_offers: sendOffers,
+		send_updates: sendUpdates,
+	};
+
+	return user;
+};
+
 const updateScreen = (uuid, formData) => {
-	console.log(JSON.stringify(getScreensBody(formData)))
+	console.log(JSON.stringify(getScreensBody(formData)));
 	console.log(putScreen(getScreensBody(formData), uuid));
-}
+};
 
 const createScreen = (formData) => {
-	console.log(JSON.stringify(getScreensBody(formData)))
-	const uuid = postScreen(getScreensBody(formData))
+	console.log(JSON.stringify(getScreensBody(formData)));
+	const uuid = postScreen(getScreensBody(formData));
 	console.log(uuid);
-	return uuid
-}
-
-const updateUser = (uuid, formData) => {
-	if (formData.hasUser) {
-		// update user
-	} else {
-		// create user and add to screen
-	}
-}
-
-export {
-	updateScreen,
-	createScreen,
-	updateUser,
+	return uuid;
 };
+
+const updateUser = (uuid, formData, languageCode) => {
+	console.log(getUserBody(formData, languageCode));
+	putUser(getUserBody(formData, languageCode), uuid);
+};
+
+export { updateScreen, createScreen, updateUser };

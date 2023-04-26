@@ -307,8 +307,11 @@ const displayPhoneHasErrorHelperText = (phoneNumber) => {
 }
 
 const signUpFormHasError = (props) => {
-  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = props;
+  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent, hasUser } = props;
   const atLeastOneCheckboxSelectionWasMade = (sendUpdates === true) || (sendOffers === true);
+  if (hasUser === true) {
+    return false
+  }
 
   return (emailHasError(email)) || (phoneHasError(phone)) || (!email && !phone) || (!firstName) ||
     (!lastName) || (atLeastOneCheckboxSelectionWasMade === false) || (commConsent === false);

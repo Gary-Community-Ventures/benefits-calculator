@@ -85,6 +85,7 @@ export const createDevFormData = (searchParams) => {
 			phone: '',
 			firstName: 'Test',
 			lastName: 'Test',
+			hasUser: false,
 			sendOffers: true,
 			sendUpdates: false,
 			commConsent: true,

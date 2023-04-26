@@ -48,7 +48,7 @@ const Confirmation = ({ formData }) => {
                 id='confirmation.headOfHouseholdDataBlock-conditionsText'
                 defaultMessage='Conditions:' />
             </b>
-            <Link to={`/step-${stepDirectory.householdData}`} className='edit-link'>
+            <Link to={`/${uuid}/step-${stepDirectory.householdData}`} className='edit-link'>
               <FormattedMessage
                 id='confirmation.editLinkText'
                 defaultMessage='Edit' />
@@ -61,7 +61,7 @@ const Confirmation = ({ formData }) => {
                 id='confirmation.headOfHouseholdDataBlock-incomeLabel'
                 defaultMessage='Income:' />
             </b>
-            <Link to={`/step-${stepDirectory.householdData}`} className='edit-link'>
+            <Link to={`/${uuid}/step-${stepDirectory.householdData}`} className='edit-link'>
               <FormattedMessage
                 id='confirmation.editLinkText'
                 defaultMessage='Edit' />
@@ -85,7 +85,7 @@ const Confirmation = ({ formData }) => {
             id='confirmation.headOfHouseholdDataBlock-expensesLabel'
             defaultMessage='Monthly household expenses:' />
         </b>
-        <Link to={`/step-${stepDirectory.hasExpenses}`} className='edit-link'>
+        <Link to={`/${uuid}/step-${stepDirectory.hasExpenses}`} className='edit-link'>
           <FormattedMessage
             id='confirmation.editLinkText'
             defaultMessage='Edit' />
@@ -224,7 +224,7 @@ const Confirmation = ({ formData }) => {
             defaultMessage='Your household: ' />
         </b>
         { householdSize } { householdSizeDescriptor }
-        <Link to={`/step-${stepDirectory.householdSize}`} className='edit-link'>
+        <Link to={`/${uuid}/step-${stepDirectory.householdSize}`} className='edit-link'>
           <FormattedMessage
             id='confirmation.editLinkText'
             defaultMessage='Edit' />
@@ -244,7 +244,7 @@ const Confirmation = ({ formData }) => {
               defaultMessage='Household resources: ' />
           </b>
           ${ Number(householdAssets).toLocaleString(2) }
-          <Link to={`/step-${stepDirectory.householdAssets}`} className='edit-link'>
+          <Link to={`/${uuid}/step-${stepDirectory.householdAssets}`} className='edit-link'>
             <FormattedMessage
               id='confirmation.editLinkText'
               defaultMessage='Edit' />
@@ -269,7 +269,7 @@ const Confirmation = ({ formData }) => {
             defaultMessage='Last Tax Filing Year: ' />
         </b>
         {taxYearOptions[lastTaxFilingYear]}
-        <Link to={`/step-${stepDirectory.lastTaxFilingYear}`} className='edit-link'>
+        <Link to={`/${uuid}/step-${stepDirectory.lastTaxFilingYear}`} className='edit-link'>
           <FormattedMessage
             id='confirmation.editLinkText'
             defaultMessage='Edit' />
@@ -288,7 +288,7 @@ const Confirmation = ({ formData }) => {
             defaultMessage='Zip code: ' />
         </b>
         { zipcode }
-        <Link to={`/step-${stepDirectory.zipcode}`} className='edit-link'>
+        <Link to={`/${uuid}/step-${stepDirectory.zipcode}`} className='edit-link'>
           <FormattedMessage
             id='confirmation.editLinkText'
             defaultMessage='Edit' />
@@ -317,7 +317,7 @@ const Confirmation = ({ formData }) => {
             defaultMessage='Referral Source: ' />
         </b>
         { finalReferralSource }
-        <Link to={`/step-${stepDirectory.referralSource}`} className='edit-link'>
+        <Link to={`/${uuid}/step-${stepDirectory.referralSource}`} className='edit-link'>
           <FormattedMessage
             id='confirmation.editLinkText'
             defaultMessage='Edit' />

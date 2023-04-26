@@ -26,6 +26,19 @@ const postUser = (userData) => {
   });
 }
 
+const putUser = (userData, uuid) => {
+  return fetch(userEndpoint + uuid + '/', {
+    method: 'PUT',
+    body: JSON.stringify(userData),
+    headers: header
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('A user with this email or phone number already exists in our system.');
+    }
+  });
+}
+
 const postMessage = (messageData) => {
   return fetch(messageEndpoint, {
     method: 'POST',
@@ -104,6 +117,7 @@ export {
   getScreen,
   putScreen,
   postUser,
+  putUser,
   postMessage,
   getEligibility,
 }

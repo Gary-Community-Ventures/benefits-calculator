@@ -1,7 +1,8 @@
 import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
+import { Context } from './Components/Wrapper/Wrapper.js'
 import ReactGA from "react-ga4";
 import FetchScreen from './Components/FetchScreen/FetchScreen';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
@@ -13,7 +14,7 @@ import Header from './Components/Header/Header';
 import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
-import { updateScreen } from './Assets/updateScreen'
+import { updateScreen, updateUser } from './Assets/updateScreen'
 import './App.css';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import stepDirectory from './Assets/stepDirectory';
@@ -36,6 +37,7 @@ const App = () => {
   const theme = createTheme(styleOverrides);
 	const totalSteps = Object.keys(stepDirectory).length + 2;
   const [fetchedScreen, setFetchedScreen] = useState(false);
+  const locale = useContext(Context).locale
 
   const initialFormData = {
     screenUUID: undefined,
@@ -92,6 +94,7 @@ const App = () => {
       phone: '',
       firstName: '',
       lastName: '',
+      hasUser: false,
       sendOffers: false,
       sendUpdates: false,
       commConsent: false
@@ -143,6 +146,7 @@ const App = () => {
         phone: '',
         firstName: '',
         lastName: '',
+        hasUser: formData.signUpInfo.hasUser,
         sendOffers: false,
         sendUpdates: false,
         commConsent: false
@@ -156,7 +160,7 @@ const App = () => {
     setFormData(updatedFormData);
 
   }, [formData.hasExpenses,formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates,
-    formData.hasBenefits]
+    formData.hasBenefits, formData.sendOffers]
   );
 
   useEffect(() => {
@@ -216,7 +220,6 @@ const App = () => {
 
   const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
-    updateScreen(uuid, formData)
     const isZipcodeQuestionAndCountyIsEmpty = (questionName === 'zipcode' && formData.county === '');
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '');
 
@@ -224,8 +227,10 @@ const App = () => {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
         return;
       } else if (questionName === 'signUpInfo') {
+        updateUser(uuid, formData, locale.toLowerCase())
         navigate(`/${uuid}/confirm-information`);
       } else { //you've indicated that you're householdSize is larger than 1
+        updateScreen(uuid, formData)
         navigate(`/${uuid}/step-${stepId + 1}`);
       }
     }
