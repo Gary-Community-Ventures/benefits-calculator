@@ -2,12 +2,25 @@ import { Card, CardContent, CardActions, Button, Typography } from '@mui/materia
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { createScreen } from '../../Assets/updateScreen.js'
 import './LandingPage.css';
 
-const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
+const LandingPage = ({ formData, setFetchedScreen, clearLocalStorageFormDataAndResults }) => {
 	let { uuid } = useParams();
-	uuid = uuid ?? 'uuid';
+
   const navigate = useNavigate();
+	const handleContinue = async () => {
+		if (uuid) {
+			navigate(`/${uuid}/step-1`);
+		} else {
+			// create screen
+			const response = await createScreen(formData)
+			// don't refetch screen
+			setFetchedScreen(true);
+			// navigate to screen
+			navigate(`/${response.uuid}/step-1`);
+		}
+	}
 
   useEffect(() => {
     clearLocalStorageFormDataAndResults();
@@ -74,9 +87,7 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
 			<CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
 				<Button
 					variant="contained"
-					onClick={() => {
-						navigate(`/${uuid}/step-1`);
-					}}
+					onClick={handleContinue}
 				>
 					<FormattedMessage id="continue-button" defaultMessage="Continue" />
 				</Button>

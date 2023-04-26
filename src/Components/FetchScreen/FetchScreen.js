@@ -87,6 +87,15 @@ const FetchScreen = ({ formData, setFormData, returnTo, setFetchedScreen }) => {
 				loss: response.needs_funeral_help ?? false,
 				familyPlanning: response.needs_family_planning_help ?? false,
 			},
+			signUpInfo: {
+				email: '',
+				phone: '',
+				firstName: '',
+				lastName: '',
+				sendOffers: response.user?.send_offers ?? false,
+				sendUpdates: response.user?.send_updates ?? false,
+				commConsent: false
+			},
 		};
 
 		let defaultRelationship = 'headOfHousehold'

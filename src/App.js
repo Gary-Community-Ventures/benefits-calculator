@@ -13,7 +13,7 @@ import Header from './Components/Header/Header';
 import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
-import updateScreen from './Assets/updateScreen'
+import { updateScreen } from './Assets/updateScreen'
 import './App.css';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import stepDirectory from './Assets/stepDirectory';
@@ -290,6 +290,8 @@ const App = () => {
 						path="/step-0"
 						element={
 							<LandingPage
+                formData={formData}
+                setFetchedScreen={setFetchedScreen}
 								clearLocalStorageFormDataAndResults={
 									clearLocalStorageFormDataAndResults
 								}
@@ -318,6 +320,8 @@ const App = () => {
                 path="step-0"
                 element={
                   <LandingPage
+                    formData={formData}
+                    setFetchedScreen={setFetchedScreen}
                     clearLocalStorageFormDataAndResults={
                       clearLocalStorageFormDataAndResults
                     }
@@ -353,12 +357,6 @@ const App = () => {
               <Route
                 path="confirm-information"
                 element={<Confirmation formData={formData} />}
-              />
-              <Route
-                path="submit-screen"
-                element={
-                  <SubmitScreen formData={formData} setFormData={setFormData} />
-                }
               />
               <Route path="results" element={<Results />} />
               <Route path="*" element={<Navigate to="/step-0" replace />} />

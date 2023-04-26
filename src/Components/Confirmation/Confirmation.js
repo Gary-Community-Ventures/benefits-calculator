@@ -519,7 +519,7 @@ const Confirmation = ({ formData }) => {
           </Button>
           <Button
             variant='contained'
-            onClick={() => navigate(`/${uuid}/submit-screen`)}>
+            onClick={() => navigate(`/${uuid}/results`)}>
             <FormattedMessage
               id='continueButton'
               defaultMessage='Continue' />
