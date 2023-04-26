@@ -6,6 +6,10 @@ const referralOptions = {
   jeffcoPP: 'Jeffco Prosperity Partners',
   projectWorthmore: 'Project Worthmore',
   bia: 'Benefits in Action',
+  testOrProspect:
+    <FormattedMessage
+      id='referralOptions.testOrProspect'
+      defaultMessage='Test or Prospective Partner' />,
   searchEngine:
     <FormattedMessage
       id='referralOptions.searchEngine'
