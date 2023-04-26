@@ -20,6 +20,11 @@ const childCareBenefits = {
     <FormattedMessage
       id='childCareBenefits.mydenver'
       defaultMessage='Reduced-cost youth programs (MY Denver Card)'
+    />,
+  upk:
+    <FormattedMessage
+      id='childCareBenefits.upk'
+      defaultMessage='Universal Pre-K'
     />
 };
 
