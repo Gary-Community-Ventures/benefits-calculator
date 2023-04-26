@@ -405,9 +405,10 @@
   "healthCareBenefits.reproductivehealth": "Ngừa thai miễn phí (Chương Trình Chăm Sóc Sức Khỏe Sinh Sản)",
   "healthCareBenefits.familyplanning": "Quyền lợi kế hoạch hóa gia đình miễn phí (Dịch Vụ Kế Hoạch Hóa Gia Đình)",
   "healthCareBenefits.dentallowincseniors": "Chăm sóc nha khoa chi phí thấp cho người từ 60 tuổi trở lên (Chương Trình Sức Khỏe Nha Khoa Colorado dành cho Người Cao Tuổi có Thu Nhập Thấp)",
-  "taxCreditBenefits.eitc": "Tín thuế liên bang: thu nhập kiếm được (Tín Thuế Thu Nhập Kiếm Được)",
-  "taxCreditBenefits.coeitc": "Tín thuế tiểu bang: thu nhập kiếm được (Tín Thuế Thu Nhập Kiếm Được của Colorado/Tín Thuế Thu Nhập Kiếm Được Mở Rộng)",
-  "taxCreditBenefits.ctc": "Tín thuế liên bang: tín thuế trẻ em (Tín Thuế Trẻ Em)",
+  "taxCreditBenefits.eitc": "Tín dụng thuế liên bang: Thu nhập kiếm được",
+  "taxCreditBenefits.ctc": "Tín dụng thuế liên bang: Tín dụng thuế dành cho trẻ em",
+  "taxCreditBenefits.coeitc": "Tín dụng thuế của tiểu bang: Thu nhập kiếm được",
+  "taxCreditBenefits.coctc": "Tín dụng thuế của tiểu bang: Tín dụng thuế dành cho trẻ em",
   "displayAnnualIncome.annual": " hàng năm",
   "listAllIncomeStreams.hoursPerWeek": " giờ/tuần "
 }
