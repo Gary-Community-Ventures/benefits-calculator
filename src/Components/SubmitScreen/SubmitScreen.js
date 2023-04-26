@@ -48,7 +48,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		} = formData;
 
 		const householdMembers = getHouseholdMembersBodies(formData);
-		const expenses = getExpensesBodies(formData);	
+		const expenses = getExpensesBodies(formData);
 
 		const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 		const screenBody = {
@@ -68,6 +68,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			has_acp: benefits.acp,
 			has_andcs: benefits.andcs,
 			has_cccap: benefits.cccap,
+			has_coctc: benefits.coctc,
 			has_coeitc: benefits.coeitc,
 			has_chs: benefits.coheadstart,
 			has_cpcr: benefits.coPropTaxRentHeatCreditRebate,
@@ -88,6 +89,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			has_snap: benefits.snap,
 			has_ssi: benefits.ssi,
 			has_tanf: benefits.tanf,
+			has_upk: benefits.upk,
 			has_wic: benefits.wic,
 			has_employer_hi: healthInsurance.employer,
 			has_private_hi: healthInsurance.private,
