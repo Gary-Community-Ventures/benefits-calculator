@@ -23,8 +23,8 @@ const childCareBenefits = {
     />,
   upk:
     <FormattedMessage
-      id='childCareBenefits.upk'
-      defaultMessage='Universal Pre-K'
+      id='childCareBenefits.univpresc'
+      defaultMessage='Free preschool (Universal Preschool Colorado)'
     />
 };
 
