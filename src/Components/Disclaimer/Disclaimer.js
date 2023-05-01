@@ -4,12 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
+import { updateScreen } from '../../Assets/updateScreen';
 import './Disclaimer.css'
 
-const StyledTypography = styled(Typography)`
+const StyledTypography = styled(Typography)(`
   color: #c6252b;
   height: 24px;
-`;
+`);
 
 const Disclaimer = ({ formData, handleCheckboxChange }) => {
   const { uuid } = useParams()
@@ -20,6 +21,7 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
     event.preventDefault();
     setButtonWasClicked(true);
     if (formData.agreeToTermsOfService === true) {
+      updateScreen(uuid, formData);
       navigate(`/${uuid}/step-2`);
     }
   }

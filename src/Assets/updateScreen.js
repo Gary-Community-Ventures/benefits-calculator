@@ -141,14 +141,11 @@ const getUserBody = (formData, languageCode) => {
 };
 
 const updateScreen = (uuid, formData) => {
-	console.log(JSON.stringify(getScreensBody(formData)));
-	console.log(putScreen(getScreensBody(formData), uuid));
+	putScreen(getScreensBody(formData), uuid);
 };
 
 const createScreen = (formData) => {
-	console.log(JSON.stringify(getScreensBody(formData)));
 	const uuid = postScreen(getScreensBody(formData));
-	console.log(uuid);
 	return uuid;
 };
 

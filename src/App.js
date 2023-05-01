@@ -224,17 +224,23 @@ const App = () => {
   }
 
   const handleIncomeStreamsSubmit = (validatedIncomeStreams, stepId, uuid) => {
-    setFormData({ ...formData, incomeStreams: validatedIncomeStreams });
+    const updatedFormData = { ...formData, incomeStreams: validatedIncomeStreams };
+    updateScreen(uuid, updatedFormData);
+    setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
   const handleExpenseSourcesSubmit = (validatedExpenseSources, stepId, uuid) => {
-    setFormData({ ...formData, expenses: validatedExpenseSources });
+    const updatedFormData = { ...formData, expenses: validatedExpenseSources };
+    updateScreen(uuid, updatedFormData);
+    setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
   const handleHouseholdDataSubmit = (validatedHouseholdData, stepId, uuid) => {
-    setFormData({ ...formData, householdData: validatedHouseholdData });
+    const updatedFormData = { ...formData, householdData: validatedHouseholdData };
+    updateScreen(uuid, updatedFormData);
+    setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   }
 

@@ -1,7 +1,6 @@
 import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
 import { createScreen } from '../../Assets/updateScreen.js'
 import './LandingPage.css';
 
