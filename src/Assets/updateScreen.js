@@ -152,9 +152,20 @@ const createScreen = (formData) => {
 	return uuid;
 };
 
-const updateUser = (uuid, formData, languageCode) => {
-	console.log(getUserBody(formData, languageCode));
-	putUser(getUserBody(formData, languageCode), uuid);
+const updateUser = async (uuid, formData, setFormData, languageCode) => {
+	const userBody = getUserBody(formData, languageCode);
+	if (!formData.signUpInfo.hasUser && userBody.email_or_cell === '+1') {
+		return;
+	}
+	try {
+		await putUser(userBody, uuid);
+	} catch (err) {
+		return;
+	}
+	setFormData({
+		...formData,
+		signUpInfo: { ...formData.signUpInfo, hasUser: true },
+	});
 };
 
 export { updateScreen, createScreen, updateUser };

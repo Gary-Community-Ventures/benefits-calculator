@@ -5,9 +5,8 @@ const ResultsError = () => {
 
   return (
     <main>
-      <h1>Looks like something went wrong</h1>
-      <h2>Make sure that you have completed all the questions on the screen.</h2>
-      <h3>If it continues not to work please contact [insert Brian's phone number]</h3>
+      <h1>Oops! Looks like something went wrong</h1>
+      <p>We're sorry. We are having </p>
       <button onClick={() => {navigate(`/${uuid}/confirm-information`)}}>Go back to screen</button>
     </main>
   )

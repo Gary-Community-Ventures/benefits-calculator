@@ -227,7 +227,7 @@ const App = () => {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
         return;
       } else if (questionName === 'signUpInfo') {
-        updateUser(uuid, formData, locale.toLowerCase())
+        updateUser(uuid, formData, setFormData, locale.toLowerCase())
         navigate(`/${uuid}/confirm-information`);
       } else { //you've indicated that you're householdSize is larger than 1
         updateScreen(uuid, formData)
