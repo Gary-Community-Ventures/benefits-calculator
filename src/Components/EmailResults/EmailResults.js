@@ -28,20 +28,20 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
     const emailProps = {
       inputType: 'text',
       inputName: type,
-      inputLabel: 
-        <FormattedMessage 
-          id={ inputLabelId } 
+      inputLabel:
+        <FormattedMessage
+          id={ inputLabelId }
           defaultMessage='Email' />,
       inputError: errorType,
       inputHelperText: errorMessage
     };
 
-    return createTextfield(emailProps);  
+    return createTextfield(emailProps);
   }
 
   const createTextfield = (componentProps) => {
     return (
-      <Textfield 
+      <Textfield
         componentDetails={componentProps}
         formData={formData.signUpInfo}
         handleTextfieldChange={handleTextfieldChange}
@@ -66,12 +66,12 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
       sendType = { phone, type };
       validInput = phoneHasError(phone) === false && phone !== '';
     }
-    
+
     if (validInput) {
-      setState({ 
-        ...state, 
-        error: false, 
-        errorMessage: '' 
+      setState({
+        ...state,
+        error: false,
+        errorMessage: ''
       });
 
       try {
@@ -82,17 +82,17 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
         await postMessage(message);
         //^^ if the user's email already exists in our system this function will throw an error =>
         //we won't be able to get the uid from results because of the error exception
-        
-        setState({ 
-          ...state, 
-          open: true 
+
+        setState({
+          ...state,
+          open: true
         });
 
       } catch (error) {
         setState({
-          ...state, 
-          error: true, 
-          errorMessage: error.message 
+          ...state,
+          error: true,
+          errorMessage: error.message
         });
       }
     }
@@ -150,13 +150,13 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 			<h2 className="sub-header">
 				<FormattedMessage
 					id="emailResults.displaySubheader-text"
-					defaultMessage="Send me a copy of my results"
+					defaultMessage="Save my results"
 				/>
 			</h2>
 			<article className="question-container question-label">
 				<FormattedMessage
 					id="emailResults.enter-emailLabel"
-					defaultMessage="Please enter or confirm your email address:"
+					defaultMessage="Email my results link"
 				/>
 			</article>
 			{createEmailTextfield(
@@ -180,8 +180,8 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 			{state.error && displayErrorMessage(state.errorMessage)}
 			<article className="question-container question-label">
 				<FormattedMessage
-					id="emailResults.enert-phoneNumberLabel"
-					defaultMessage="Please enter or confirm your phone number:"
+					id="emailResults.enter-phoneNumberLabel"
+					defaultMessage="Text my results link"
 				/>
 			</article>
 			{createEmailTextfield(
@@ -202,7 +202,7 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 					defaultMessage="Send"
 				/>
 			</Button>
-			{state.error && displayErrorMessage(state.errorMessage)}	
+			{state.error && displayErrorMessage(state.errorMessage)}
 		</div>
 	);
 })
