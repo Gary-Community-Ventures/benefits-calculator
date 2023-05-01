@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { createScreen } from '../../Assets/updateScreen.js'
 import './LandingPage.css';
 
-const LandingPage = ({ formData, setFetchedScreen, clearLocalStorageFormDataAndResults }) => {
+const LandingPage = ({ formData, setFetchedScreen }) => {
 	let { uuid } = useParams();
 
   const navigate = useNavigate();
@@ -21,10 +21,6 @@ const LandingPage = ({ formData, setFetchedScreen, clearLocalStorageFormDataAndR
 			navigate(`/${response.uuid}/step-1`);
 		}
 	}
-
-  useEffect(() => {
-    clearLocalStorageFormDataAndResults();
-  }, []);
 
   return (
 		<main className="benefits-form">

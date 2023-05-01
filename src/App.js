@@ -112,16 +112,7 @@ const App = () => {
     }
   };
 
-  const getCurrentState = () => {
-    const localStorageFormData = localStorage.getItem('formData');
-    if (localStorageFormData === null) {
-      return initialFormData;
-    } else {
-      return JSON.parse(localStorageFormData);
-    }
-  }
-
-  const [formData, setFormData] = useState(getCurrentState());
+  const [formData, setFormData] = useState(initialFormData);
   // const [formData, setFormData] = useState(createDevFormData(searchParams));
 
   useEffect(() => {
@@ -162,10 +153,6 @@ const App = () => {
   }, [formData.hasExpenses,formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates,
     formData.hasBenefits, formData.sendOffers]
   );
-
-  useEffect(() => {
-    localStorage.setItem('formData', JSON.stringify(formData));
-  }, [formData]);
 
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
@@ -251,15 +238,6 @@ const App = () => {
     navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
-  const clearLocalStorageFormDataAndResults = () => {
-    localStorage.clear();
-    //the setTimeout function was added in order to make sure that you don't clear and
-    //set the formData and results at the same time
-    setTimeout(() => {
-      setFormData(initialFormData);
-    }, '100');
-  }
-
   return (
 		<ThemeProvider theme={theme}>
 			<div className="App">
@@ -297,9 +275,6 @@ const App = () => {
 							<LandingPage
                 formData={formData}
                 setFetchedScreen={setFetchedScreen}
-								clearLocalStorageFormDataAndResults={
-									clearLocalStorageFormDataAndResults
-								}
 							/>
 						}
 					/>
@@ -327,9 +302,6 @@ const App = () => {
                   <LandingPage
                     formData={formData}
                     setFetchedScreen={setFetchedScreen}
-                    clearLocalStorageFormDataAndResults={
-                      clearLocalStorageFormDataAndResults
-                    }
                   />
                 }
               />
