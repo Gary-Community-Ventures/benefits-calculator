@@ -6,10 +6,11 @@ const stepDirectory = {
   householdData: 5,
   hasExpenses: 6,
   householdAssets: 7,
-  hasBenefits: 8,
-  acuteHHConditions: 9,
-  referralSource: 10,
-  signUpInfo: 11
+  lastTaxFilingYear: 8,
+  hasBenefits: 9,
+  acuteHHConditions: 10,
+  referralSource: 11,
+  signUpInfo: 12
 }
 
 export default stepDirectory;
