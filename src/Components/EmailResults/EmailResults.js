@@ -133,7 +133,10 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 	const displayCopyResults = () => {
 		return (
 			<div className="copy-results-container">
-				<IconButton onClick={copyLink}>
+				<IconButton
+					onClick={copyLink}
+					sx={{ padding: '0px', marginRight: '.5rem' }}
+				>
 					{copied ?
 						<CheckIcon sx={{ fontSize: '1.75rem' }} />
 					 :
