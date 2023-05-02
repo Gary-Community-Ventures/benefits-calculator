@@ -37,7 +37,6 @@ const Results = () => {
   const { uuid: screenerId } = useParams()
   const navigate = useNavigate()
   const locale = useContext(Context).locale;
-  const setLocale = useContext(Context).setLocale;
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const citizenToggleState = useState(false);
@@ -132,6 +131,9 @@ const Results = () => {
 
   const responseLanguage = () => {
     const { rawResponse } = results;
+    if (rawResponse.programs === undefined) {
+      return
+    }
 		const languageCode = locale.toLowerCase();
 		const eligibilityResponse = rawResponse.programs[languageCode];
 		const programs = eligibilityResponse
