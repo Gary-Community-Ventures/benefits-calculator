@@ -2,6 +2,8 @@ import { Button } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import LinkIcon from '@mui/icons-material/Link';
+import CheckIcon from '@mui/icons-material/Check';
 import { useState, forwardRef } from "react";
 import { FormattedMessage } from "react-intl";
 import {
@@ -16,6 +18,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import "./EmailResults.css";
 
 const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, close }, ref) => {
+	const [copied, setCopied] = useState(false);
   const [state, setState] = useState({
     open: false,
     error: false,
@@ -117,6 +120,36 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
     );
   }
 
+
+	const copyLink = () => {
+		const { screenUUID } = formData;
+		navigator.clipboard.writeText(`https://www.myfriendben.org/results/${screenUUID}`);
+		setCopied(true);
+		setTimeout(() => {
+			setCopied(false);
+		}, 2000);
+	};
+
+	const displayCopyResults = () => {
+		return (
+			<div className="copy-results-container">
+				<article className="copy-results-text">
+					<FormattedMessage
+						id='emailResults.copy-results-text'
+						defaultMessage='Copy my results link'
+					/>
+				</article>
+				<IconButton onClick={copyLink}>
+					{copied ?
+						<CheckIcon sx={{ fontSize: '1.75rem' }} />
+					 :
+						<LinkIcon sx={{ fontSize: '1.75rem' }} />
+					}
+				</IconButton>
+			</div>
+		);
+	}
+
   return (
 		<div className="email-results-container">
 			<div className="question-buttons">
@@ -153,6 +186,7 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 					defaultMessage="Save my results"
 				/>
 			</h2>
+			{ displayCopyResults() }
 			<article className="question-container question-label">
 				<FormattedMessage
 					id="emailResults.enter-emailLabel"
