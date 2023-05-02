@@ -133,12 +133,6 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 	const displayCopyResults = () => {
 		return (
 			<div className="copy-results-container">
-				<article className="copy-results-text">
-					<FormattedMessage
-						id='emailResults.copy-results-text'
-						defaultMessage='Copy my results link'
-					/>
-				</article>
 				<IconButton onClick={copyLink}>
 					{copied ?
 						<CheckIcon sx={{ fontSize: '1.75rem' }} />
@@ -146,6 +140,12 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 						<LinkIcon sx={{ fontSize: '1.75rem' }} />
 					}
 				</IconButton>
+				<article className="copy-results-text">
+					<FormattedMessage
+						id='emailResults.copy-results-text'
+						defaultMessage='Copy my results link'
+					/>
+				</article>
 			</div>
 		);
 	}
