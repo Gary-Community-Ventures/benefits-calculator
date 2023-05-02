@@ -8,7 +8,6 @@ import FetchScreen from './Components/FetchScreen/FetchScreen';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
-import SubmitScreen from './Components/SubmitScreen/SubmitScreen';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
 import LandingPage from './Components/LandingPage/LandingPage';
