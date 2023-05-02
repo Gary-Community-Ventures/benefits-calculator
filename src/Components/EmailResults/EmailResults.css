@@ -13,6 +13,19 @@
   margin: 2rem;
 }
 
+.copy-results-text {
+  color: #037A93;
+  font-weight: 500;
+  font-size: 22px;
+  margin-right: .5rem;
+}
+
+.copy-results-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
 @media (max-width: 600px) {
   .email-results-container {
     width: 90%;
