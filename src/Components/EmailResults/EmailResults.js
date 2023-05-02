@@ -205,6 +205,7 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 				onClick={(event) => {
 					handleSubmit(event, 'emailScreen');
 				}}
+				id="send-button"
 			>
 				<FormattedMessage
 					id="emailResults.sendButton"
@@ -230,6 +231,7 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 				onClick={(event) => {
 					handleSubmit(event, 'textScreen');
 				}}
+				id="send-button"
 			>
 				<FormattedMessage
 					id="emailResults.sendButton"
