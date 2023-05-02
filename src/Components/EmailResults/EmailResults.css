@@ -26,10 +26,24 @@
   margin-bottom: 1rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 790px) {
   .email-results-container {
     width: 90%;
-    max-height: 100vh;
-    overflow-y: scroll;
+    padding: 1.5rem;
+  }
+
+  .copy-results-text, article.question-container.question-label {
+    font-size: 1.25rem;
+  }
+
+  div.MuiFormControl-root {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 385px) {
+  #send-button.MuiButton-root {
+    margin: 0;
+    margin-bottom: .5rem;
   }
 }
