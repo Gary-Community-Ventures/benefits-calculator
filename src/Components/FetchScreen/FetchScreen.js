@@ -92,7 +92,7 @@ const FetchScreen = ({ formData, setFormData, setFetchedScreen }) => {
 				phone: '',
 				firstName: '',
 				lastName: '',
-				hasUser: response.user !== undefined,
+				hasUser: Boolean(response.user),
 				sendOffers: response.user?.send_offers ?? false,
 				sendUpdates: response.user?.send_updates ?? false,
 				commConsent: false
