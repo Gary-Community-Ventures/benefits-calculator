@@ -58,15 +58,17 @@ const UrgentNeedsRow = ({ rowProps }) => {
                     </span>
                   </h4>
                 }
-                <Button
-                  variant='contained'
-                  target='_blank'
-                  href={rowProps.link}
-                  sx={{marginTop: '1rem'}}>
-                  <FormattedMessage
-                    id='urgentNeedsTable.visit-website-button'
-                    defaultMessage='Visit website' />
-                </Button>
+                {rowProps.link && (
+                  <Button
+                    variant='contained'
+                    target='_blank'
+                    href={rowProps.link}
+                    sx={{marginTop: '1rem'}}>
+                    <FormattedMessage
+                      id='urgentNeedsTable.visit-website-button'
+                      defaultMessage='Visit website' />
+                  </Button>
+                )}
               </Box>
             </Collapse>
           </TableCell>
