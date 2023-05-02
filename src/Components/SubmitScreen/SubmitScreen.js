@@ -37,7 +37,6 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			startTime,
 			isTest,
 			externalID,
-			lastTaxFilingYear,
 			benefits,
 			healthInsurance,
 			referralSource,
@@ -48,7 +47,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		} = formData;
 
 		const householdMembers = getHouseholdMembersBodies(formData);
-		const expenses = getExpensesBodies(formData);	
+		const expenses = getExpensesBodies(formData);
 
 		const finalReferralSource = otherSource !== '' ? otherSource : referralSource;
 		const screenBody = {
@@ -62,7 +61,6 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			household_members: householdMembers,
 			expenses: expenses,
 			household_assets: householdAssets,
-			last_tax_filing_year: lastTaxFilingYear,
 			request_language_code: languageCode,
 			has_benefits: hasBenefits,
 			has_acp: benefits.acp,
