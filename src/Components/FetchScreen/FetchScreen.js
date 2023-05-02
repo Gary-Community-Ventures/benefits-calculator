@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getScreen } from '../../apiCalls';
 import referralOptions from '../../Assets/referralOptions';
+import loading from '../../Assets/loading-icon.png';
+import './FetchScreen.css'
 
 const FetchScreen = ({ formData, setFormData, setFetchedScreen }) => {
 	const { uuid } = useParams();
@@ -142,10 +144,13 @@ const FetchScreen = ({ formData, setFormData, setFetchedScreen }) => {
 	}, []);
 
 	return (
-		<h1>
-			If you can read this whole sentece than something has gone horibly wrong
-			(or you are a really fast reader).
-		</h1>
+		<main className="fetch-screen-loading-container">
+			<img
+				className='loading-image'
+				src={loading}
+				alt='loading-icon'
+			/>
+		</ main>
 	);
 };
 

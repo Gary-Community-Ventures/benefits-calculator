@@ -82,6 +82,10 @@ button.results-filter-button-grey {
   padding: 5px 0 5px 9px;
 }
 
+button.back-to-screen-button {
+  margin: 1rem;
+}
+
 @media (min-width: 601px) {
   #share-container {
     display: none;

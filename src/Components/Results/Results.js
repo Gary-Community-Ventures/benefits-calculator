@@ -688,6 +688,15 @@ const Results = () => {
                   />
                 }
               </Grid>
+              <Button
+                className="back-to-screen-button" onClick={() => {navigate(`/${screenerId}/confirm-information`)}}
+                variant='contained'
+              >
+                <FormattedMessage 
+                  id="results.returnToScreenButton"
+                  defaultMessage="Edit Screener Responses"
+                />
+              </Button>
             </>
           )}
         </Grid>
