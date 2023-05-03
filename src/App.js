@@ -216,7 +216,7 @@ const App = () => {
         updateUser(uuid, formData, setFormData, locale.toLowerCase())
         navigate(`/${uuid}/confirm-information`);
       } else { //you've indicated that you're householdSize is larger than 1
-        updateScreen(uuid, formData)
+        updateScreen(uuid, formData, locale.toLowerCase())
         navigate(`/${uuid}/step-${stepId + 1}`);
       }
     }
@@ -224,21 +224,21 @@ const App = () => {
 
   const handleIncomeStreamsSubmit = (validatedIncomeStreams, stepId, uuid) => {
     const updatedFormData = { ...formData, incomeStreams: validatedIncomeStreams };
-    updateScreen(uuid, updatedFormData);
+    updateScreen(uuid, updatedFormData, locale.toLowerCase());
     setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
   const handleExpenseSourcesSubmit = (validatedExpenseSources, stepId, uuid) => {
     const updatedFormData = { ...formData, expenses: validatedExpenseSources };
-    updateScreen(uuid, updatedFormData);
+    updateScreen(uuid, updatedFormData, locale.toLowerCase());
     setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
   const handleHouseholdDataSubmit = (validatedHouseholdData, stepId, uuid) => {
     const updatedFormData = { ...formData, householdData: validatedHouseholdData };
-    updateScreen(uuid, updatedFormData);
+    updateScreen(uuid, updatedFormData, locale.toLowerCase());
     setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   }
