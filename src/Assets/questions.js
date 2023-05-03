@@ -82,7 +82,7 @@ const questions = {
         options: countiesByZipcode
       }
     }],
-    headerType: 'aboutYourself'
+    headerType: 'aboutHousehold'
   },
   [stepDirectory.healthInsurance]: {
     name: 'healthInsurance',
