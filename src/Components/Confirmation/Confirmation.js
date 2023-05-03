@@ -2,6 +2,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import relationshipOptions from '../../Assets/relationshipOptions';
+import taxYearOptions from '../../Assets/taxYearOptions';
 import referralOptions from '../../Assets/referralOptions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
@@ -257,6 +258,25 @@ const Confirmation = ({ formData }) => {
     );
   }
 
+  const displayLastTaxFilingYearSection = () => {
+    const { lastTaxFilingYear } = formData;
+    return (
+      <article className='confirmation-label'>
+        <b>
+          <FormattedMessage
+            id='confirmation.displayAllFormData-lastTaxFilingYear'
+            defaultMessage='Last Tax Filing Year: ' />
+        </b>
+        {taxYearOptions[lastTaxFilingYear]}
+        <Link to={`/step-${stepDirectory.lastTaxFilingYear}`} className='edit-link'>
+          <FormattedMessage
+            id='confirmation.editLinkText'
+            defaultMessage='Edit' />
+        </Link>
+      </article>
+    );
+  }
+
   const displayZipcodeSection = () => {
     const { zipcode, county } = formData;
     return (
@@ -352,6 +372,8 @@ const Confirmation = ({ formData }) => {
             refactorOptionsList(acuteConditionOptions)
             )
           }
+        <p className='confirmation-section-underline'></p>
+          { displayLastTaxFilingYearSection() }
         <p className='confirmation-section-underline'></p>
           { displayReferralSourceSection() }
         <p className='confirmation-section-underline'></p>

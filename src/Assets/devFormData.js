@@ -54,6 +54,7 @@ export const createDevFormData = (searchParams) => {
 			}
 		],
 		householdAssets: '0',
+		lastTaxFilingYear: '2021',
 		hasBenefits: false,
 		benefits: {
 			tanf: false,

@@ -45,6 +45,7 @@ const App = () => {
     householdSize: '',
     householdData: [],
     householdAssets: 0,
+    lastTaxFilingYear: '',
     hasBenefits: false,
     benefits: {
       acp: false,
