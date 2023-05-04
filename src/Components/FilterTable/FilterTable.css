@@ -11,6 +11,7 @@
   box-sizing: border-box;
   display: block;
   position: absolute;
+  right: 0px;
   border: 1px solid #b7b1b1;
   background: white;
   z-index: 6;
