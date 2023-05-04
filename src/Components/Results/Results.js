@@ -624,6 +624,8 @@ const Results = () => {
   }
 
   const displayResultsFilterButtons = () => {
+    const hasImmediateNeedsPrograms = results.rawResponse.urgent_needs.es.length > 0;
+
     return (
       <div>
         <Button
@@ -641,21 +643,23 @@ const Results = () => {
             defaultMessage='Benefit Programs'
           />
         </Button>
-        <Button
-          className={ filterResultsButton === 'urgentNeeds' ? 'results-link'
-            : 'results-filter-button-grey'
-          }
-          onClick={() => {
-            setFilterResultsButton('urgentNeeds');
-          }}
-          sx={{mt: 1, mb: 1, p:.8, fontSize:'.8rem',}}
-          variant='contained'
-          >
-          <FormattedMessage
-            id='results.displayResultsFilterButtons-urgentNeedsResources'
-            defaultMessage='Immediate Needs'
-          />
-        </Button>
+        { hasImmediateNeedsPrograms &&
+          <Button
+            className={ filterResultsButton === 'urgentNeeds' ? 'results-link'
+              : 'results-filter-button-grey'
+            }
+            onClick={() => {
+              setFilterResultsButton('urgentNeeds');
+            }}
+            sx={{mt: 1, mb: 1, p:.8, fontSize:'.8rem',}}
+            variant='contained'
+            >
+            <FormattedMessage
+              id='results.displayResultsFilterButtons-urgentNeedsResources'
+              defaultMessage='Immediate Needs'
+            />
+          </Button>
+        }
       </div>
     );
   }
