@@ -492,15 +492,18 @@ const Results = () => {
 
     return (
 			<>
-				<Filter
-					filt={filt}
-					updateFilter={updateFilter}
-					categories={categories}
-					eligibilityState={eligibilityState}
-					categoryState={categoryState}
-          citizenToggleState={citizenToggleState}
-          alreadyHasToggleState={alreadyHasToggleState}
-				/>
+        <div className='filters-container'>
+          { displayResultsFilterButtons() }
+				  <Filter
+				  	filt={filt}
+				  	updateFilter={updateFilter}
+				  	categories={categories}
+				  	eligibilityState={eligibilityState}
+				  	categoryState={categoryState}
+            citizenToggleState={citizenToggleState}
+            alreadyHasToggleState={alreadyHasToggleState}
+				  />
+        </div>
 				{filt.category !== false && (
           <>
             <Toolbar
@@ -665,8 +668,8 @@ const Results = () => {
             <>
               { displayHeaderSection() }
               <Grid xs={12} item={true}>
-                { displayResultsFilterButtons() }
                 { filterResultsButton === 'benefits' && DataGridTable(results.programs)}
+                { filterResultsButton === 'urgentNeeds' && displayResultsFilterButtons()}
                 { filterResultsButton === 'urgentNeeds' &&
                   <UrgentNeedsTable
                     urgentNeedsPrograms={results.rawResponse.urgent_needs}
