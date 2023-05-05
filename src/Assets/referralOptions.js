@@ -9,7 +9,7 @@ const referralOptions = {
   testOrProspect:
     <FormattedMessage
       id='referralOptions.testOrProspect'
-      defaultMessage='Test or Prospective Partner' />,
+      defaultMessage='Test / Prospective Partner' />,
   searchEngine:
     <FormattedMessage
       id='referralOptions.searchEngine'
