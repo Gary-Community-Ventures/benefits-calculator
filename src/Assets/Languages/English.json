@@ -401,8 +401,8 @@
   "childCareBenefits.cccap": "Help with child care costs (Colorado Child Care Assistance Program/CCCAP)",
   "childCareBenefits.denverpresc": "Tuition credits for Denver preschoolers (Denver Preschool Program)",
   "childCareBenefits.coheadstart": "Free early child care and preschool (Colorado Head Start)",
-  "childCareBenefits.univpresc": "Free preschool (Universal Preschool Colorado)",
   "childCareBenefits.mydenver": "Reduced-cost youth programs (MY Denver Card)",
+  "childCareBenefits.univpresc": "Free preschool (Universal Preschool Colorado)",
   "housingAndUtilities.acp": "Home internet discount (Affordable Connectivity Program)",
   "housingAndUtilities.lifeline": "Phone or internet discount (Lifeline Phone/Internet Service)",
   "housingAndUtilities.leap": "Help with winter heating bills (Low-Income Energy Assistance Program/LEAP)",
@@ -412,8 +412,9 @@
   "healthCareBenefits.familyplanning": "Free family planning benefits (Family Planning Services)",
   "healthCareBenefits.dentallowincseniors": "Low-cost dental care for people 60 years of age or older (Colorado Dental Health Program for Low-Income Seniors)",
   "taxCreditBenefits.eitc": "Federal tax credit: earned income (Earned Income Tax Credit)",
-  "taxCreditBenefits.coeitc": "State tax credit: earned income (Colorado Earned Income Tax Credit/Expanded Earned Income Tax Credit)",
   "taxCreditBenefits.ctc": "Federal tax credit: child tax credit (Child Tax Credit)",
+  "taxCreditBenefits.coeitc": "State tax credit: earned income (Colorado Earned Income Tax Credit/Expanded Earned Income Tax Credit)",
+  "taxCreditBenefits.coctc": "State tax credit: Colorado child tax credit",
   "displayAnnualIncome.annual": " annually",
   "listAllIncomeStreams.hoursPerWeek": " hours/week "
 }

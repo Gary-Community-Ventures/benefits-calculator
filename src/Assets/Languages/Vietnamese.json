@@ -401,8 +401,8 @@
   "childCareBenefits.cccap": "Hỗ trợ chi phí trông trẻ (Chương Trình Trợ Cấp Trông Trẻ Colorado/CCCAP)",
   "childCareBenefits.denverpresc": "Tín dụng học phí cho học sinh mầm non Denver (Chương Trình Mầm Non Denver)",
   "childCareBenefits.coheadstart": "Trông trẻ sớm và mầm non miễn phí (Colorado Head Start)",
-  "childCareBenefits.univpresc": "Trường mầm non miễn phí (Universal Preschool Colorado)",
   "childCareBenefits.mydenver": "Các chương trình giảm chi phí dành cho thanh thiếu niên (Thẻ MY Denver)",
+  "childCareBenefits.univpresc": "Trường mầm non miễn phí (Universal Preschool Colorado)",
   "housingAndUtilities.acp": "Giảm giá internet tại nhà (Chương Trình Kết Nối Giá Cả Phải Chăng)",
   "housingAndUtilities.lifeline": "Giảm giá điện thoại hoặc internet (Dịch Vụ Điện Thoại/Internet Lifeline)",
   "housingAndUtilities.leap": "Trợ giúp về hóa đơn sưởi mùa đông (Chương Trình Trợ Cấp Năng Lượng cho Người có Thu Nhập Thấp/LEAP)",
@@ -411,9 +411,10 @@
   "healthCareBenefits.reproductivehealth": "Ngừa thai miễn phí (Chương Trình Chăm Sóc Sức Khỏe Sinh Sản)",
   "healthCareBenefits.familyplanning": "Quyền lợi kế hoạch hóa gia đình miễn phí (Dịch Vụ Kế Hoạch Hóa Gia Đình)",
   "healthCareBenefits.dentallowincseniors": "Chăm sóc nha khoa chi phí thấp cho người từ 60 tuổi trở lên (Chương Trình Sức Khỏe Nha Khoa Colorado dành cho Người Cao Tuổi có Thu Nhập Thấp)",
-  "taxCreditBenefits.eitc": "Tín thuế liên bang: thu nhập kiếm được (Tín Thuế Thu Nhập Kiếm Được)",
-  "taxCreditBenefits.coeitc": "Tín thuế tiểu bang: thu nhập kiếm được (Tín Thuế Thu Nhập Kiếm Được của Colorado/Tín Thuế Thu Nhập Kiếm Được Mở Rộng)",
-  "taxCreditBenefits.ctc": "Tín thuế liên bang: tín thuế trẻ em (Tín Thuế Trẻ Em)",
+  "taxCreditBenefits.eitc": "Tín dụng thuế liên bang: Thu nhập kiếm được (EITC)",
+  "taxCreditBenefits.ctc": "Tín dụng thuế liên bang: Tín dụng thuế dành cho trẻ em (CTC)",
+  "taxCreditBenefits.coeitc": "Tín dụng thuế của tiểu bang: Thu nhập kiếm được (COEITC)",
+  "taxCreditBenefits.coctc": "Tín dụng thuế của tiểu bang: Tín dụng thuế dành cho trẻ em (COCTC)",
   "displayAnnualIncome.annual": " hàng năm",
   "listAllIncomeStreams.hoursPerWeek": " giờ/tuần "
 }

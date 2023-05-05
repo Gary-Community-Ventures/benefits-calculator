@@ -57,6 +57,7 @@ const App = () => {
       acp: false,
       andcs: false,
       cccap: false,
+      coctc: false,
       coeitc: false,
       coheadstart: false,
       coPropTaxRentHeatCreditRebate: false,
@@ -75,6 +76,7 @@ const App = () => {
       snap: false,
       ssi: false,
       tanf: false,
+      upk: false,
       wic: false
     },
     healthInsurance: {

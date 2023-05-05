@@ -403,8 +403,8 @@
   "childCareBenefits.cccap": "Ayuda con los costos de cuidado infantil (Programa de asistencia para el cuidado infantil de Colorado/CCCAP)",
   "childCareBenefits.denverpresc": "Créditos de matrícula para niños en edad preescolar de Denver (Programa preescolar de Denver)",
   "childCareBenefits.coheadstart": "Cuidado infantil y preescolar gratuitos (Colorado Head Start)",
-  "childCareBenefits.univpresc": "Preescolar gratuito (Universal Preschool Colorado)",
   "childCareBenefits.mydenver": "Programas para jóvenes de costo reducido (MY Denver Card)",
+  "childCareBenefits.univpresc": "Preescolar gratuito (Universal Preschool Colorado)",
   "housingAndUtilities.acp": "Descuento de Internet residencial (Programa de conectividad asequible)",
   "housingAndUtilities.lifeline": "Descuento de teléfono o Internet (servicio de Internet/teléfono de Lifeline)",
   "housingAndUtilities.leap": "Ayuda con las facturas de calefacción de invierno (Programa de asistencia de energía para personas de bajos ingresos/LEAP)",
@@ -413,9 +413,10 @@
   "healthCareBenefits.reproductivehealth": "Control de la natalidad gratuito (Programa de Atención de la Salud Reproductiva)",
   "healthCareBenefits.familyplanning": "Beneficios gratuitos de planificación familiar (Servicios de planificación familiar)",
   "healthCareBenefits.dentallowincseniors": "Atención dental de bajo costo para personas mayores de 60 años (Programa de salud dental de Colorado para personas mayores de bajos ingresos)",
-  "taxCreditBenefits.eitc": "Crédito fiscal federal: ingreso del trabajo (Crédito fiscal por ingreso del trabajo)",
-  "taxCreditBenefits.coeitc": "Crédito fiscal estatal: ingresos del trabajo (Crédito fiscal por ingresos del trabajo de Colorado/Crédito fiscal por ingresos del trabajo ampliado)",
-  "taxCreditBenefits.ctc": "Crédito fiscal federal: crédito fiscal por hijos (crédito fiscal por hijos)",
+  "taxCreditBenefits.eitc": "Crédito fiscal federal: por ingresos del trabajo (EITC)",
+  "taxCreditBenefits.ctc": "Crédito fiscal federal: crédito tributario por hijos (CTC)",
+  "taxCreditBenefits.coeitc": "Crédito fiscal estatal: por ingresos del trabajo (COEITC)",
+  "taxCreditBenefits.coctc": "Crédito fiscal estatal: crédito tributario por hijos (COCTC)",
   "displayAnnualIncome.annual": " anualmente",
   "listAllIncomeStreams.hoursPerWeek": " horas/semana "
 }
