@@ -26,6 +26,19 @@ const postUser = (userData) => {
   });
 }
 
+const putUser = (userData, uuid) => {
+  return fetch(userEndpoint + uuid + '/', {
+    method: 'PUT',
+    body: JSON.stringify(userData),
+    headers: header
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('A user with this email or phone number already exists in our system.');
+    }
+  });
+}
+
 const postMessage = (messageData) => {
   return fetch(messageEndpoint, {
     method: 'POST',
@@ -40,9 +53,36 @@ const postMessage = (messageData) => {
     })
 }
 
+const getScreen = (uuid) => {
+  return fetch(screensEndpoint + uuid, {
+    method: 'GET',
+    headers: header
+  })
+    .then(response => {
+      if(!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+}
+
 const postScreen = (partialFormData) => {
   return fetch(screensEndpoint, {
     method: 'POST',
+    body: JSON.stringify(partialFormData),
+    headers: header
+  })
+    .then(response => {
+      if(!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+}
+
+const putScreen = (partialFormData, uuid) => {
+  return fetch(screensEndpoint + uuid + '/', {
+    method: 'PUT',
     body: JSON.stringify(partialFormData),
     headers: header
   })
@@ -74,7 +114,10 @@ const getEligibility = (screenerId, locale) => {
 
 export {
   postScreen,
+  getScreen,
+  putScreen,
   postUser,
+  putUser,
   postMessage,
   getEligibility,
 }

@@ -18,6 +18,7 @@ import {
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
+import ResultsError from '../ResultsError/ResultsError';
 import Toolbar from '@mui/material/Toolbar';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
@@ -33,9 +34,9 @@ export const isNavigationKey = (key) =>
   key === ' ';
 
 const Results = () => {
-  const { id: screenerId } = useParams()
+  const { uuid: screenerId } = useParams()
+  const navigate = useNavigate()
   const locale = useContext(Context).locale;
-  const setLocale = useContext(Context).setLocale;
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const citizenToggleState = useState(false);
@@ -47,7 +48,7 @@ const Results = () => {
     programs: [],
     rawResponse: {},
     screenerId: 0,
-    isLoading: true,
+    loadingState: 'loading',
   };
 
   const [results, setResults] = useState(initialResults);
@@ -112,7 +113,15 @@ const Results = () => {
   }, [locale, results.rawResponse])
 
   const fetchResults = async () => {
-		const rawEligibilityResponse = await getEligibility(screenerId, locale);
+    let rawEligibilityResponse;
+    try {
+        rawEligibilityResponse = await getEligibility(screenerId, locale);
+    } catch (error) {
+      setResults({
+        ...results,
+        loadingState: 'error'
+      });
+    }
 		setResults({
 			programs: [],
 			rawResponse: rawEligibilityResponse,
@@ -122,6 +131,9 @@ const Results = () => {
 
   const responseLanguage = () => {
     const { rawResponse } = results;
+    if (rawResponse.programs === undefined) {
+      return
+    }
 		const languageCode = locale.toLowerCase();
 		const eligibilityResponse = rawResponse.programs[languageCode];
 		const programs = eligibilityResponse
@@ -132,7 +144,7 @@ const Results = () => {
 		setResults({
       ...results,
 			programs: programs,
-			isLoading: false
+			loadingState: 'done'
     });
 	};
 
@@ -492,15 +504,18 @@ const Results = () => {
 
     return (
 			<>
-				<Filter
-					filt={filt}
-					updateFilter={updateFilter}
-					categories={categories}
-					eligibilityState={eligibilityState}
-					categoryState={categoryState}
-          citizenToggleState={citizenToggleState}
-          alreadyHasToggleState={alreadyHasToggleState}
-				/>
+        <div className='filters-container'>
+          { displayResultsFilterButtons() }
+				  <Filter
+				  	filt={filt}
+				  	updateFilter={updateFilter}
+				  	categories={categories}
+				  	eligibilityState={eligibilityState}
+				  	categoryState={categoryState}
+            citizenToggleState={citizenToggleState}
+            alreadyHasToggleState={alreadyHasToggleState}
+				  />
+        </div>
 				{filt.category !== false && (
           <>
             <Toolbar
@@ -621,38 +636,44 @@ const Results = () => {
   }
 
   const displayResultsFilterButtons = () => {
+    const hasImmediateNeedsPrograms = results.rawResponse.urgent_needs.es.length > 0;
+
     return (
       <div>
-        <Button
-          className={ filterResultsButton === 'benefits' ? 'results-link'
-            : 'results-filter-button-grey'
-          }
-          onClick={() => {
-            setFilterResultsButton('benefits');
-          }}
-          sx={{mt: 1, mr: .5, mb: 1, p:.8, fontSize:'.8rem'}}
-          variant='contained'
-          >
-          <FormattedMessage
-            id='results.displayResultsFilterButtons-benefitPrograms'
-            defaultMessage='Benefit Programs'
-          />
-        </Button>
-        <Button
-          className={ filterResultsButton === 'urgentNeeds' ? 'results-link'
-            : 'results-filter-button-grey'
-          }
-          onClick={() => {
-            setFilterResultsButton('urgentNeeds');
-          }}
-          sx={{mt: 1, mb: 1, p:.8, fontSize:'.8rem',}}
-          variant='contained'
-          >
-          <FormattedMessage
-            id='results.displayResultsFilterButtons-urgentNeedsResources'
-            defaultMessage='Immediate Needs'
-          />
-        </Button>
+        { hasImmediateNeedsPrograms &&
+        <>
+          <Button
+            className={ filterResultsButton === 'benefits' ? 'results-link'
+              : 'results-filter-button-grey'
+            }
+            onClick={() => {
+              setFilterResultsButton('benefits');
+            }}
+            sx={{mt: 1, mr: .5, mb: 1, p:.8, fontSize:'.8rem'}}
+            variant='contained'
+            >
+            <FormattedMessage
+              id='results.displayResultsFilterButtons-benefitPrograms'
+              defaultMessage='Benefit Programs'
+            />
+          </Button>
+            <Button
+              className={ filterResultsButton === 'urgentNeeds' ? 'results-link'
+                : 'results-filter-button-grey'
+              }
+              onClick={() => {
+                setFilterResultsButton('urgentNeeds');
+              }}
+              sx={{mt: 1, mb: 1, p:.8, fontSize:'.8rem',}}
+              variant='contained'
+              >
+              <FormattedMessage
+                id='results.displayResultsFilterButtons-urgentNeedsResources'
+                defaultMessage='Immediate Needs'
+              />
+            </Button>
+        </>
+        }
       </div>
     );
   }
@@ -661,12 +682,14 @@ const Results = () => {
     <main className='benefits-form'>
       <div className='results-container'>
         <Grid container spacing={2}>
-          { results.isLoading ? <Loading /> :
+          { results.loadingState === 'loading' && <Loading /> }
+          { results.loadingState === 'error' && <ResultsError /> }
+          { results.loadingState === 'done' && (
             <>
               { displayHeaderSection() }
               <Grid xs={12} item={true}>
-                { displayResultsFilterButtons() }
                 { filterResultsButton === 'benefits' && DataGridTable(results.programs)}
+                { filterResultsButton === 'urgentNeeds' && displayResultsFilterButtons()}
                 { filterResultsButton === 'urgentNeeds' &&
                   <UrgentNeedsTable
                     urgentNeedsPrograms={results.rawResponse.urgent_needs}
@@ -674,8 +697,17 @@ const Results = () => {
                   />
                 }
               </Grid>
+              <Button
+                className="back-to-screen-button" onClick={() => {navigate(`/${screenerId}/confirm-information`)}}
+                variant='contained'
+              >
+                <FormattedMessage 
+                  id="results.returnToScreenButton"
+                  defaultMessage="Edit Screener Responses"
+                />
+              </Button>
             </>
-          }
+          )}
         </Grid>
       </div>
     </main>

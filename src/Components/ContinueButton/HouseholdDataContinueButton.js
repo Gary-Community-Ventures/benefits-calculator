@@ -4,7 +4,7 @@ import { getPersonDataErrorMsg, personDataIsValid } from '../../Assets/validatio
 import { useParams } from 'react-router-dom';
 
 const HouseholdDataContinueButton = ({ page, setPage, remainingHHMNumber, handleHouseholdDataSubmit, setState, state }) => {
-  const { id } = useParams();
+  const { id, uuid } = useParams();
   const stepNumberId = Number(id);
 
   const handleContinue = (event) => {
@@ -14,7 +14,7 @@ const HouseholdDataContinueButton = ({ page, setPage, remainingHHMNumber, handle
     
     if (validPersonData && lastHouseholdMember) {
       //if this person's inputs are valid and we're at the last hh member then send the hhdata back up to App
-      handleHouseholdDataSubmit(state.householdData, stepNumberId);
+      handleHouseholdDataSubmit(state.householdData, stepNumberId, uuid);
     } else if (validPersonData) { //we are not at the last page
       //validate the householdMember's data if it's valid then
       setPage(Number(page) + 1);

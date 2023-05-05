@@ -82,7 +82,7 @@ const questions = {
         options: countiesByZipcode
       }
     }],
-    headerType: 'aboutYourself'
+    headerType: 'aboutHousehold'
   },
   [stepDirectory.healthInsurance]: {
     name: 'healthInsurance',
@@ -233,7 +233,7 @@ const questions = {
         id='questions.hasBenefits-description'
         defaultMessage="This information will help make sure we don't give you results for benefits you already have." />,
     componentDetails: {
-      componentType: 'Radiofield',
+      componentType: 'PreferNotToAnswer',
       ariaLabel: 'questions.hasBenefits-ariaLabel',
       inputName: 'hasBenefits',
       inputError: benefitsHasError,

@@ -6,15 +6,20 @@ const taxCreditBenefits = {
       id='taxCreditBenefits.eitc'
       defaultMessage='Federal tax credit: earned income (Earned Income Tax Credit)'
     />,
+  ctc:
+    <FormattedMessage
+    id='taxCreditBenefits.ctc'
+    defaultMessage='Federal tax credit: child tax credit (Child Tax Credit)'
+    />,
   coeitc:
     <FormattedMessage
       id='taxCreditBenefits.coeitc'
       defaultMessage='State tax credit: earned income (Colorado Earned Income Tax Credit/Expanded Earned Income Tax Credit)'
     />,
-  ctc:
+  coctc:
     <FormattedMessage
-      id='taxCreditBenefits.ctc'
-      defaultMessage='Federal tax credit: child tax credit (Child Tax Credit)'
+      id='taxCreditBenefits.coctc'
+      defaultMessage='State tax credit: Colorado child tax credit'
     />
 };
 
