@@ -17,31 +17,27 @@
   box-shadow: 1px 1px 10px rgb(0 0 0 / 0.4);
 }
 
-.filters-button {
+.filters-button.MuiButton-root {
   color: #037A93;
   display: flex;
   align-items: center;
   padding: .5rem;
   cursor: pointer;
+  background-color: white;
+}
+
+.filters-button.MuiButton-root:hover {
+  background-color: white;
 }
 
 .filter-selection-container {
   margin: 1rem .5rem 0rem .5rem;
 }
 
-.close-container {
-  position: relative;
-  height: 1rem;
-  margin: .25rem;
-}
-
-.close {
-  position: absolute;
-  right: 0px;
-}
-
-.close:hover {
-  cursor: pointer;
+.close-button-container {
+  display: flex;
+  justify-content: end;
+  width: 100%;
 }
 
 .margin-bottom {

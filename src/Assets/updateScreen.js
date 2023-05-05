@@ -1,6 +1,6 @@
-import { putScreen, postScreen, putUser, postUser } from '../apiCalls.js';
+import { putScreen, postScreen, putUser } from '../apiCalls.js';
 
-const getScreensBody = (formData) => {
+const getScreensBody = (formData, languageCode) => {
 	const householdMembers = getHouseholdMembersBodies(formData);
 	const expenses = getExpensesBodies(formData);
 
@@ -21,6 +21,7 @@ const getScreensBody = (formData) => {
 		expenses: expenses,
 		household_assets: formData.householdAssets,
 		last_tax_filing_year: formData.lastTaxFilingYear,
+		request_language_code: languageCode,
 		has_benefits: formData.hasBenefits ?? 'preferNotToAnswer',
 		has_acp: formData.benefits.acp,
 		has_andcs: formData.benefits.andcs,
@@ -140,8 +141,8 @@ const getUserBody = (formData, languageCode) => {
 	return user;
 };
 
-const updateScreen = (uuid, formData) => {
-	putScreen(getScreensBody(formData), uuid);
+const updateScreen = (uuid, formData, languageCode) => {
+	putScreen(getScreensBody(formData, languageCode), uuid);
 };
 
 const createScreen = (formData) => {

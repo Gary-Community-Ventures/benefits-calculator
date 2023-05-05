@@ -19,9 +19,9 @@ import ProgressBar from './Components/ProgressBar/ProgressBar';
 import stepDirectory from './Assets/stepDirectory';
 // import { createDevFormData } from './Assets/devFormData';
 
-const TRACKING_ID = "G-NZ9D1VLR0D";
+const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
 ReactGA.initialize(TRACKING_ID);
-LicenseInfo.setLicenseKey('505464fa6deb7bd75c286bf36859d580Tz01MTQ5MyxFPTE2OTU4Mjk0NDQyMTEsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI=');
+LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
 const App = () => {
   const navigate = useNavigate();
@@ -216,7 +216,7 @@ const App = () => {
         updateUser(uuid, formData, setFormData, locale.toLowerCase())
         navigate(`/${uuid}/confirm-information`);
       } else { //you've indicated that you're householdSize is larger than 1
-        updateScreen(uuid, formData)
+        updateScreen(uuid, formData, locale.toLowerCase())
         navigate(`/${uuid}/step-${stepId + 1}`);
       }
     }
@@ -224,21 +224,21 @@ const App = () => {
 
   const handleIncomeStreamsSubmit = (validatedIncomeStreams, stepId, uuid) => {
     const updatedFormData = { ...formData, incomeStreams: validatedIncomeStreams };
-    updateScreen(uuid, updatedFormData);
+    updateScreen(uuid, updatedFormData, locale.toLowerCase());
     setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
   const handleExpenseSourcesSubmit = (validatedExpenseSources, stepId, uuid) => {
     const updatedFormData = { ...formData, expenses: validatedExpenseSources };
-    updateScreen(uuid, updatedFormData);
+    updateScreen(uuid, updatedFormData, locale.toLowerCase());
     setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
   const handleHouseholdDataSubmit = (validatedHouseholdData, stepId, uuid) => {
     const updatedFormData = { ...formData, householdData: validatedHouseholdData };
-    updateScreen(uuid, updatedFormData);
+    updateScreen(uuid, updatedFormData, locale.toLowerCase());
     setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   }

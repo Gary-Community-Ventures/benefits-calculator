@@ -1,7 +1,8 @@
 import { Button, Card, CardContent, CardActions, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper.js'
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { updateScreen } from '../../Assets/updateScreen';
@@ -16,12 +17,13 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
   const { uuid } = useParams()
   const [buttonWasClicked, setButtonWasClicked] = useState(false);
   let navigate = useNavigate();
+  const locale = useContext(Context).locale
 
   const handleContinueButtonClick = (event) => {
     event.preventDefault();
     setButtonWasClicked(true);
     if (formData.agreeToTermsOfService === true) {
-      updateScreen(uuid, formData);
+      updateScreen(uuid, formData, locale.toLowerCase());
       navigate(`/${uuid}/step-2`);
     }
   }

@@ -12,11 +12,8 @@ const LandingPage = ({ formData, setFetchedScreen }) => {
 		if (uuid) {
 			navigate(`/${uuid}/step-1`);
 		} else {
-			// create screen
 			const response = await createScreen(formData)
-			// don't refetch screen
 			setFetchedScreen(true);
-			// navigate to screen
 			navigate(`/${response.uuid}/step-1`);
 		}
 	}

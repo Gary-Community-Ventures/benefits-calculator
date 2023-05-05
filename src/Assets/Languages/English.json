@@ -339,6 +339,7 @@
   "benefitOptions.cccap": "Help with child care costs (Colorado Child Care Assistance Program)",
   "benefitOptions.mydenver": "Reduced-cost youth programs (MY Denver Card)",
   "benefitOptions.leap": "Help with winter heating bills (LEAP)",
+  "referralOptions.testOrProspect": "Test or Prospective Partner",
   "referralOptions.searchEngine": "Google or other search engine",
   "referralOptions.other": "Other",
   "signUpOptions.sendUpdates": "Please notify me when new benefits become available that I am likely eligible for based on the information I have provided.",
