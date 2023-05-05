@@ -26,6 +26,10 @@
   margin-bottom: 1rem;
 }
 
+.button-and-text {
+  display: flex;
+}
+
 @media (max-width: 790px) {
   .email-results-container {
     width: 90%;

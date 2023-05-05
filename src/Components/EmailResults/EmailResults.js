@@ -122,8 +122,7 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 
 
 	const copyLink = () => {
-		const { screenUUID } = formData;
-		navigator.clipboard.writeText(`https://www.myfriendben.org/results/${screenUUID}`);
+		navigator.clipboard.writeText(window.location.href);
 		setCopied(true);
 		setTimeout(() => {
 			setCopied(false);
@@ -133,22 +132,19 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 	const displayCopyResults = () => {
 		return (
 			<div className="copy-results-container">
-				<IconButton
-					onClick={copyLink}
-					sx={{ padding: '0px', marginRight: '.5rem' }}
-				>
+				<button onClick={copyLink} className="button-and-text">
 					{copied ?
-						<CheckIcon sx={{ fontSize: '1.75rem' }} />
-					 :
-						<LinkIcon sx={{ fontSize: '1.75rem' }} />
+						<CheckIcon sx={{ fontSize: '1.75rem', mr: '.5rem' }} />
+					:
+						<LinkIcon sx={{ fontSize: '1.75rem', mr: '.5rem'  }} />
 					}
-				</IconButton>
-				<article className="copy-results-text">
-					<FormattedMessage
-						id='emailResults.copy-results-text'
-						defaultMessage='Copy my results link'
-					/>
-				</article>
+					<article className="copy-results-text">
+						<FormattedMessage
+							id='emailResults.copy-results-text'
+							defaultMessage='Copy my results link'
+						/>
+					</article>
+				</button>
 			</div>
 		);
 	}
