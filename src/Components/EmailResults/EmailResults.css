@@ -13,10 +13,41 @@
   margin: 2rem;
 }
 
-@media (max-width: 600px) {
+.copy-results-text {
+  color: #037A93;
+  font-weight: 500;
+  font-size: 22px;
+  margin-right: .5rem;
+}
+
+.copy-results-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.button-and-text {
+  display: flex;
+}
+
+@media (max-width: 790px) {
   .email-results-container {
     width: 90%;
-    max-height: 100vh;
-    overflow-y: scroll;
+    padding: 1.5rem;
+  }
+
+  .copy-results-text, article.question-container.question-label {
+    font-size: 1.25rem;
+  }
+
+  div.MuiFormControl-root {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 385px) {
+  #send-button.MuiButton-root {
+    margin: 0;
+    margin-bottom: .5rem;
   }
 }

@@ -2,6 +2,8 @@ import { Button } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import LinkIcon from '@mui/icons-material/Link';
+import CheckIcon from '@mui/icons-material/Check';
 import { useState, forwardRef } from "react";
 import { FormattedMessage } from "react-intl";
 import {
@@ -16,6 +18,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import "./EmailResults.css";
 
 const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, close }, ref) => {
+	const [copied, setCopied] = useState(false);
   const [state, setState] = useState({
     open: false,
     error: false,
@@ -28,20 +31,20 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
     const emailProps = {
       inputType: 'text',
       inputName: type,
-      inputLabel: 
-        <FormattedMessage 
-          id={ inputLabelId } 
+      inputLabel:
+        <FormattedMessage
+          id={ inputLabelId }
           defaultMessage='Email' />,
       inputError: errorType,
       inputHelperText: errorMessage
     };
 
-    return createTextfield(emailProps);  
+    return createTextfield(emailProps);
   }
 
   const createTextfield = (componentProps) => {
     return (
-      <Textfield 
+      <Textfield
         componentDetails={componentProps}
         formData={formData.signUpInfo}
         handleTextfieldChange={handleTextfieldChange}
@@ -66,12 +69,12 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
       sendType = { phone, type };
       validInput = phoneHasError(phone) === false && phone !== '';
     }
-    
+
     if (validInput) {
-      setState({ 
-        ...state, 
-        error: false, 
-        errorMessage: '' 
+      setState({
+        ...state,
+        error: false,
+        errorMessage: ''
       });
 
       try {
@@ -82,17 +85,17 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
         await postMessage(message);
         //^^ if the user's email already exists in our system this function will throw an error =>
         //we won't be able to get the uid from results because of the error exception
-        
-        setState({ 
-          ...state, 
-          open: true 
+
+        setState({
+          ...state,
+          open: true
         });
 
       } catch (error) {
         setState({
-          ...state, 
-          error: true, 
-          errorMessage: error.message 
+          ...state,
+          error: true,
+          errorMessage: error.message
         });
       }
     }
@@ -116,6 +119,35 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
       <ErrorMessage error={errorMessage} />
     );
   }
+
+
+	const copyLink = () => {
+		navigator.clipboard.writeText(window.location.href);
+		setCopied(true);
+		setTimeout(() => {
+			setCopied(false);
+		}, 2000);
+	};
+
+	const displayCopyResults = () => {
+		return (
+			<div className="copy-results-container">
+				<button onClick={copyLink} className="button-and-text">
+					{copied ?
+						<CheckIcon sx={{ fontSize: '1.75rem', mr: '.5rem' }} />
+					:
+						<LinkIcon sx={{ fontSize: '1.75rem', mr: '.5rem'  }} />
+					}
+					<article className="copy-results-text">
+						<FormattedMessage
+							id='emailResults.copy-results-text'
+							defaultMessage='Copy my results link'
+						/>
+					</article>
+				</button>
+			</div>
+		);
+	}
 
   return (
 		<div className="email-results-container">
@@ -150,13 +182,14 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 			<h2 className="sub-header">
 				<FormattedMessage
 					id="emailResults.displaySubheader-text"
-					defaultMessage="Send me a copy of my results"
+					defaultMessage="Save my results"
 				/>
 			</h2>
+			{ displayCopyResults() }
 			<article className="question-container question-label">
 				<FormattedMessage
 					id="emailResults.enter-emailLabel"
-					defaultMessage="Please enter or confirm your email address:"
+					defaultMessage="Email my results link"
 				/>
 			</article>
 			{createEmailTextfield(
@@ -171,6 +204,7 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 				onClick={(event) => {
 					handleSubmit(event, 'emailScreen');
 				}}
+				id="send-button"
 			>
 				<FormattedMessage
 					id="emailResults.sendButton"
@@ -180,8 +214,8 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 			{state.error && displayErrorMessage(state.errorMessage)}
 			<article className="question-container question-label">
 				<FormattedMessage
-					id="emailResults.enert-phoneNumberLabel"
-					defaultMessage="Please enter or confirm your phone number:"
+					id="emailResults.enter-phoneNumberLabel"
+					defaultMessage="Text my results link"
 				/>
 			</article>
 			{createEmailTextfield(
@@ -196,13 +230,14 @@ const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, cl
 				onClick={(event) => {
 					handleSubmit(event, 'textScreen');
 				}}
+				id="send-button"
 			>
 				<FormattedMessage
 					id="emailResults.sendButton"
 					defaultMessage="Send"
 				/>
 			</Button>
-			{state.error && displayErrorMessage(state.errorMessage)}	
+			{state.error && displayErrorMessage(state.errorMessage)}
 		</div>
 	);
 })
