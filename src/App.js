@@ -51,7 +51,6 @@ const App = () => {
     householdSize: '',
     householdData: [],
     householdAssets: 0,
-    lastTaxFilingYear: '',
     hasBenefits: 'preferNotToAnswer',
     benefits: {
       acp: false,

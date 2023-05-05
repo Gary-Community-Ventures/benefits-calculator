@@ -6,7 +6,6 @@ import {
   displayHouseholdSizeHelperText,
   householdAssetsHasError,
   displayHouseholdAssetsHelperText,
-  lastTaxFilingYearHasError,
   benefitsHasError,
   referralSourceHasError,
   displayReferralSourceHelperText,
@@ -182,43 +181,6 @@ const questions = {
           defaultMessage='Dollar Amount' />,
       inputError: householdAssetsHasError,
       inputHelperText: displayHouseholdAssetsHelperText
-    },
-    headerType: 'aboutHousehold'
-  },
-  [stepDirectory.lastTaxFilingYear]: {
-    name: 'lastTaxFilingYear',
-    question:
-      <FormattedMessage
-        id='questions.lastTaxFilingYear'
-        defaultMessage='What was the last year you filed taxes for?' />,
-    questionDescription:
-      <FormattedMessage
-        id='questions.lastTaxFilingYear-description'
-        defaultMessage='The most recent year you can file taxes for is 2022.' />,
-    componentDetails: {
-      componentType: 'BasicSelect',
-      inputName: 'lastTaxFilingYear',
-      inputError: lastTaxFilingYearHasError,
-      componentProperties: {
-        labelId: 'tax-year-select-label',
-        inputLabelText:
-          <FormattedMessage
-            id='qcc.createTaxDropdownMenu-label'
-            defaultMessage='Tax year'
-          />,
-        id:'tax-year-select',
-        value: 'lastTaxFilingYear',
-        label:
-          <FormattedMessage
-            id='qcc.createTaxDropdownMenu-label'
-            defaultMessage='Tax year'
-          />,
-        disabledSelectMenuItemText:
-          <FormattedMessage
-            id='qcc.createTaxDropdownMenu-disabledSelectMenuItemText'
-            defaultMessage='Select a Tax Year' />
-      },
-      options: taxYearOptions
     },
     headerType: 'aboutHousehold'
   },

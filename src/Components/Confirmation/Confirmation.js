@@ -374,8 +374,6 @@ const Confirmation = ({ formData }) => {
             )
           }
         <p className='confirmation-section-underline'></p>
-          { displayLastTaxFilingYearSection() }
-        <p className='confirmation-section-underline'></p>
           { displayReferralSourceSection() }
         <p className='confirmation-section-underline'></p>
           { displayZipcodeSection() }
