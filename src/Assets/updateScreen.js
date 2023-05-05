@@ -20,7 +20,6 @@ const getScreensBody = (formData, languageCode) => {
 		household_members: householdMembers,
 		expenses: expenses,
 		household_assets: formData.householdAssets,
-		last_tax_filing_year: formData.lastTaxFilingYear,
 		request_language_code: languageCode,
 		has_benefits: formData.hasBenefits ?? 'preferNotToAnswer',
 		has_acp: formData.benefits.acp,
