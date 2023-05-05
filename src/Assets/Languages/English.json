@@ -161,7 +161,7 @@
   "personIncomeBlock.return-addIncomeButton": "Add another income",
   "personIncomeBlock.createMenuItems-disabledSelectMenuItem": "Select",
   "incomeOptions.wages": "Wages, salaries, tips",
-  "incomeOptions.selfEmployment": "Self-employment Income",
+  "incomeOptions.selfEmployment": "Income from freelance, independent contractor, or self-employment work",
   "incomeOptions.unemployment": "Unemployment Benefits",
   "incomeOptions.cashAssistance": "Cash Assistance Grant",
   "incomeOptions.childSupport": "Child Support (Received)",
