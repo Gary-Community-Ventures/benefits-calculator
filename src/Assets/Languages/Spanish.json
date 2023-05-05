@@ -407,10 +407,10 @@
   "healthCareBenefits.reproductivehealth": "Control de la natalidad gratuito (Programa de Atención de la Salud Reproductiva)",
   "healthCareBenefits.familyplanning": "Beneficios gratuitos de planificación familiar (Servicios de planificación familiar)",
   "healthCareBenefits.dentallowincseniors": "Atención dental de bajo costo para personas mayores de 60 años (Programa de salud dental de Colorado para personas mayores de bajos ingresos)",
-  "taxCreditBenefits.eitc": "Crédito fiscal federal: por ingresos del trabajo",
-  "taxCreditBenefits.ctc": "Crédito fiscal federal: crédito tributario por hijos",
-  "taxCreditBenefits.coeitc": "Crédito fiscal estatal: por ingresos del trabajo",
-  "taxCreditBenefits.coctc": "Crédito fiscal estatal: crédito tributario por hijos",
+  "taxCreditBenefits.eitc": "Crédito fiscal federal: por ingresos del trabajo (EITC)",
+  "taxCreditBenefits.ctc": "Crédito fiscal federal: crédito tributario por hijos (CTC)",
+  "taxCreditBenefits.coeitc": "Crédito fiscal estatal: por ingresos del trabajo (COEITC)",
+  "taxCreditBenefits.coctc": "Crédito fiscal estatal: crédito tributario por hijos (COCTC)",
   "displayAnnualIncome.annual": " anualmente",
   "listAllIncomeStreams.hoursPerWeek": " horas/semana "
 }
