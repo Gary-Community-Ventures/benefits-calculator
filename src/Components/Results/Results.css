@@ -94,7 +94,7 @@ button.results-filter-button-grey {
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 501px) {
   .filters-container {
     flex-direction: column;
     align-items: start;
