@@ -15,7 +15,7 @@ const Header = ({ formData, handleTextfieldChange }) => {
 	const context = useContext(Context);
 	const { urlSearchParams, isBIAUser } = formData;
 	const location = useLocation();
-	const urlRegex = /^(?:(?:\/results)\/(.+))|(?:(.+)(?:\/results))\/?$/;
+	const urlRegex = /^\/(?:\/results\/(.+)|(.+)\/results)\/?$/;
 	const url = location.pathname.match(urlRegex);
 	const isResults = url !== null;
 	const screenUUID = url ? url[2] ?? url[1] : undefined;
