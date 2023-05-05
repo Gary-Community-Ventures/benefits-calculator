@@ -1,5 +1,5 @@
 import { FormattedMessage } from "react-intl";
-import coZipcodes from "./coZipcodes";
+import countiesByZipcode from "./countiesByZipcode";
 
 const ageHasError = (applicantAge) => {
   // handleTextfieldChange prevents setting anything to formData that does not pass a number regex test
@@ -30,7 +30,7 @@ const zipcodeHasError = (zipcode) => {
   if (numberMustBeFiveDigitsLongRegex.test(zipcode)) {
     //this means that the zipcode input passed the regex test so we can just return false since there is no error
     //this additional test checks the zipcode input against all CO zipcodes
-    return !coZipcodes.includes(zipcode);
+    return !Object.keys(countiesByZipcode).includes(zipcode.toString());
   } else {
     return true;
   }
@@ -176,24 +176,18 @@ const displayHouseholdMemberAgeHelperText = (applicantAge) => {
 
 const personDataIsValid = (householdDataState, index) => {
   const matchingPersonData = householdDataState.householdData[index];
-  const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired,
-    disabled, veteran, noneOfTheseApply, hasIncome, incomeStreams } = matchingPersonData;
+  const { age, relationshipToHH, hasIncome, incomeStreams } = matchingPersonData;
 
   const ageIsValid = (Number(age) >= 0 && age !== '');
   const relationshipToHHIsValid = (relationshipToHH !== '');
-  const noneApplyIsValid = (noneOfTheseApply && !student && !pregnant &&
-   !unemployed && !blindOrVisuallyImpaired && !disabled && !veteran) || !noneOfTheseApply;
-  const atLeastOneConditionWasSelected = (noneOfTheseApply || student || pregnant ||
-   unemployed || blindOrVisuallyImpaired || disabled || veteran);
   const incomeIsValid = (hasIncome && incomeStreamsAreValid(incomeStreams)) || !hasIncome;
 
-  return ageIsValid && relationshipToHHIsValid && noneApplyIsValid && atLeastOneConditionWasSelected && incomeIsValid;
+  return ageIsValid && relationshipToHHIsValid && incomeIsValid;
 }
 
 const getPersonDataErrorMsg = (householdDataState, index) => {
   const matchingPersonData = householdDataState.householdData[index];
-  const { age, relationshipToHH, student, pregnant, unemployed, blindOrVisuallyImpaired,
-    disabled, veteran, noneOfTheseApply, hasIncome, incomeStreams } = matchingPersonData;
+  const { age, relationshipToHH, hasIncome, incomeStreams } = matchingPersonData;
 
   if (Number(age) < 0 || age === '') {
     return (
@@ -207,21 +201,6 @@ const getPersonDataErrorMsg = (householdDataState, index) => {
       <FormattedMessage
         id='validation-helperText.hhMemberRelation'
         defaultMessage='Please select a relation option'
-      />
-    );
-
-  } else if (noneOfTheseApply && (student || pregnant || unemployed || blindOrVisuallyImpaired || disabled || veteran)) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.hhMemberNoneApply'
-        defaultMessage='Please deselect all other options if none of these conditions apply'
-      />
-    );
-  } else if (!student && !pregnant && !unemployed && !blindOrVisuallyImpaired && !disabled && !veteran && !noneOfTheseApply) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.noneApply'
-        defaultMessage="If none of these conditions apply please select 'None of these apply' "
       />
     );
   } else if (hasIncome && incomeStreamsAreValid(incomeStreams) === false) {
@@ -328,8 +307,11 @@ const displayPhoneHasErrorHelperText = (phoneNumber) => {
 }
 
 const signUpFormHasError = (props) => {
-  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = props;
+  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent, hasUser } = props;
   const atLeastOneCheckboxSelectionWasMade = (sendUpdates === true) || (sendOffers === true);
+  if (hasUser === true) {
+    return false
+  }
 
   return (emailHasError(email)) || (phoneHasError(phone)) || (!email && !phone) || (!firstName) ||
     (!lastName) || (atLeastOneCheckboxSelectionWasMade === false) || (commConsent === false);
@@ -406,9 +388,9 @@ const acuteHHConditionsHasError = (conditions) => {
 }
 
 const benefitsHasError = (hasBenefits, formData) => {
-  if (hasBenefits === false) {
+  if (hasBenefits !== 'true') {
     return false;
-  } else if (hasBenefits === true) {
+  } else if (hasBenefits === 'true') {
     const { benefits } = formData;
     const selectedAtLeastOneBenefit = Object.keys(benefits).some(benefit => formData.benefits[benefit] === true);
 

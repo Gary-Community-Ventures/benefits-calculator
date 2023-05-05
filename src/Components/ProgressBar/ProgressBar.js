@@ -4,10 +4,10 @@ import LinearProgress from '@mui/material/LinearProgress';
 import stepDirectory from '../../Assets/stepDirectory';
 import './ProgressBar.css'
 
-const ProgressBar = () => {
+const ProgressBar = ({ step }) => {
 	const totalSteps = Object.keys(stepDirectory).length + 2;
-  let { id: step } = useParams();
-	step = step ?? totalSteps
+  let { id } = useParams();
+	step = step ?? id;
 
 	return (
 		 <aside className='progress-bar-container'>

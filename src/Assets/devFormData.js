@@ -27,7 +27,6 @@ export const createDevFormData = (searchParams) => {
 				blindOrVisuallyImpaired: false,
 				disabled: false,
 				veteran: false,
-				noneOfTheseApply: false,
 				hasIncome: true,
 				incomeStreams: [
 					{
@@ -48,7 +47,6 @@ export const createDevFormData = (searchParams) => {
 				blindOrVisuallyImpaired: false,
 				disabled: false,
 				veteran: false,
-				noneOfTheseApply: true,
 				hasIncome: false,
 				incomeStreams: []
 			}
@@ -87,6 +85,7 @@ export const createDevFormData = (searchParams) => {
 			phone: '',
 			firstName: 'Test',
 			lastName: 'Test',
+			hasUser: false,
 			sendOffers: true,
 			sendUpdates: false,
 			commConsent: true,

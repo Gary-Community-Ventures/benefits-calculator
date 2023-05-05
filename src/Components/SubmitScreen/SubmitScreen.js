@@ -24,7 +24,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
 		const screensBody = getScreensBody(formData, locale.toLowerCase(), userId);
 		const screensResponse = await postScreen(screensBody);
     setFormData({ ...formData, screenUUID: screensResponse.uuid });
-    navigate(`/results/${screensResponse.uuid}`, { replace: true });
+    navigate(`/${screensResponse.uuid}/results`, { replace: true });
 	};
 
 	const getScreensBody = (formData, languageCode, userId) => {
@@ -77,13 +77,11 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			has_ede: benefits.ede,
 			has_eitc: benefits.eitc,
 			has_erc: benefits.erc,
-			has_fps: benefits.familyplanning,
 			has_lifeline: benefits.lifeline,
 			has_leap: benefits.leap,
 			has_mydenver: benefits.mydenver,
 			has_nslp: benefits.nslp,
 			has_oap: benefits.oap,
-			has_rhc: benefits.reproductivehealth,
 			has_rtdlive: benefits.rtdlive,
 			has_snap: benefits.snap,
 			has_ssi: benefits.ssi,

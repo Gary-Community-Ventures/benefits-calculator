@@ -1,19 +1,22 @@
 import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
+import { Context } from './Components/Wrapper/Wrapper.js'
 import ReactGA from "react-ga4";
+import FetchScreen from './Components/FetchScreen/FetchScreen';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
-import SubmitScreen from './Components/SubmitScreen/SubmitScreen';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
 import LandingPage from './Components/LandingPage/LandingPage';
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
+import { updateScreen, updateUser } from './Assets/updateScreen'
 import './App.css';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
+import stepDirectory from './Assets/stepDirectory';
 // import { createDevFormData } from './Assets/devFormData';
 
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
@@ -31,6 +34,9 @@ const App = () => {
   const setReferrerSource = referrer === '' || referrer in referralOptions
   const isBIAUser = externalId !== null && referrer !== '';
   const theme = createTheme(styleOverrides);
+	const totalSteps = Object.keys(stepDirectory).length + 2;
+  const [fetchedScreen, setFetchedScreen] = useState(false);
+  const locale = useContext(Context).locale
 
   const initialFormData = {
     screenUUID: undefined,
@@ -46,7 +52,7 @@ const App = () => {
     householdData: [],
     householdAssets: 0,
     lastTaxFilingYear: '',
-    hasBenefits: false,
+    hasBenefits: 'preferNotToAnswer',
     benefits: {
       acp: false,
       andcs: false,
@@ -60,13 +66,11 @@ const App = () => {
       ede: false,
       eitc: false,
       erc: false,
-      familyplanning: false,
       lifeline: false,
       leap: false,
       mydenver: false,
       nslp: false,
       oap: false,
-      reproductivehealth: false,
       rtdlive: false,
       snap: false,
       ssi: false,
@@ -89,6 +93,7 @@ const App = () => {
       phone: '',
       firstName: '',
       lastName: '',
+      hasUser: false,
       sendOffers: false,
       sendUpdates: false,
       commConsent: false
@@ -106,16 +111,7 @@ const App = () => {
     }
   };
 
-  const getCurrentState = () => {
-    const localStorageFormData = localStorage.getItem('formData');
-    if (localStorageFormData === null) {
-      return initialFormData;
-    } else {
-      return JSON.parse(localStorageFormData);
-    }
-  }
-
-  const [formData, setFormData] = useState(getCurrentState());
+  const [formData, setFormData] = useState(initialFormData);
   // const [formData, setFormData] = useState(createDevFormData(searchParams));
 
   useEffect(() => {
@@ -140,25 +136,22 @@ const App = () => {
         phone: '',
         firstName: '',
         lastName: '',
+        hasUser: formData.signUpInfo.hasUser,
         sendOffers: false,
         sendUpdates: false,
         commConsent: false
       };
     }
 
-    if (formData.hasBenefits === false) {
+    if (formData.hasBenefits !== 'true') {
       updatedFormData.benefits = initialFormData.benefits;
     }
 
     setFormData(updatedFormData);
 
   }, [formData.hasExpenses,formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates,
-    formData.hasBenefits]
+    formData.hasBenefits, formData.sendOffers]
   );
-
-  useEffect(() => {
-    localStorage.setItem('formData', JSON.stringify(formData));
-  }, [formData]);
 
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
@@ -206,7 +199,12 @@ const App = () => {
     setFormData({ ...formData, [name]: boolValue });
   }
 
-  const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, householdSize) => {
+  const handleNoAnswerChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  }
+
+  const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
     const isZipcodeQuestionAndCountyIsEmpty = (questionName === 'zipcode' && formData.county === '');
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '');
@@ -215,35 +213,34 @@ const App = () => {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
         return;
       } else if (questionName === 'signUpInfo') {
-        navigate('/confirm-information');
+        updateUser(uuid, formData, setFormData, locale.toLowerCase())
+        navigate(`/${uuid}/confirm-information`);
       } else { //you've indicated that you're householdSize is larger than 1
-        navigate(`/step-${stepId + 1}`);
+        updateScreen(uuid, formData, locale.toLowerCase())
+        navigate(`/${uuid}/step-${stepId + 1}`);
       }
     }
   }
 
-  const handleIncomeStreamsSubmit = (validatedIncomeStreams, stepId) => {
-    setFormData({ ...formData, incomeStreams: validatedIncomeStreams });
-    navigate(`/step-${stepId + 1}`);
+  const handleIncomeStreamsSubmit = (validatedIncomeStreams, stepId, uuid) => {
+    const updatedFormData = { ...formData, incomeStreams: validatedIncomeStreams };
+    updateScreen(uuid, updatedFormData, locale.toLowerCase());
+    setFormData(updatedFormData);
+    navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
-  const handleExpenseSourcesSubmit = (validatedExpenseSources, stepId) => {
-    setFormData({ ...formData, expenses: validatedExpenseSources });
-    navigate(`/step-${stepId + 1}`);
+  const handleExpenseSourcesSubmit = (validatedExpenseSources, stepId, uuid) => {
+    const updatedFormData = { ...formData, expenses: validatedExpenseSources };
+    updateScreen(uuid, updatedFormData, locale.toLowerCase());
+    setFormData(updatedFormData);
+    navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
-  const handleHouseholdDataSubmit = (validatedHouseholdData, stepId) => {
-    setFormData({ ...formData, householdData: validatedHouseholdData });
-    navigate(`/step-${stepId + 1}`);
-  }
-
-  const clearLocalStorageFormDataAndResults = () => {
-    localStorage.clear();
-    //the setTimeout function was added in order to make sure that you don't clear and
-    //set the formData and results at the same time
-    setTimeout(() => {
-      setFormData(initialFormData);
-    }, '100');
+  const handleHouseholdDataSubmit = (validatedHouseholdData, stepId, uuid) => {
+    const updatedFormData = { ...formData, householdData: validatedHouseholdData };
+    updateScreen(uuid, updatedFormData, locale.toLowerCase());
+    setFormData(updatedFormData);
+    navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
   return (
@@ -256,12 +253,16 @@ const App = () => {
 				/>
         <Routes>
           <Route
-            path="/step-:id"
+            path="/step-0"
+            element={<ProgressBar step="0"/>}
+          />
+          <Route
+            path="/:uuid/step-:id"
             element={<ProgressBar />}
           />
           <Route
-            path="/confirm-information"
-            element={<ProgressBar />}
+            path="/:uuid/confirm-information"
+            element={<ProgressBar step={totalSteps}/>}
           />
           <Route
             path="*"
@@ -277,48 +278,72 @@ const App = () => {
 						path="/step-0"
 						element={
 							<LandingPage
-								clearLocalStorageFormDataAndResults={
-									clearLocalStorageFormDataAndResults
-								}
+                formData={formData}
+                setFetchedScreen={setFetchedScreen}
 							/>
 						}
 					/>
-					<Route
-						path="/step-1"
-						element={
-							<Disclaimer
-								formData={formData}
-								handleCheckboxChange={handleCheckboxChange}
-							/>
-						}
-					/>
-					<Route
-						path="/step-:id"
-						element={
-							<QuestionComponentContainer
-								formData={formData}
-								handleTextfieldChange={handleTextfieldChange}
-								handleContinueSubmit={handleContinueSubmit}
-								handleRadioButtonChange={handleRadioButtonChange}
-								handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-								handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-								handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-								setFormData={setFormData}
-								handleCheckboxChange={handleCheckboxChange}
-							/>
-						}
-					/>
-					<Route
-						path="/confirm-information"
-						element={<Confirmation formData={formData} />}
-					/>
-					<Route
-						path="/submit-screen"
-						element={
-							<SubmitScreen formData={formData} setFormData={setFormData} />
-						}
-					/>
-					<Route path="/results/:id" element={<Results />} />
+          <Route path="results/:uuid" element={<Results />} />
+          <Route
+            path=":uuid"
+          >
+            { !fetchedScreen && (
+              <Route
+                path="*"
+                element={
+                  <FetchScreen
+                    formData={formData}
+                    setFormData={setFormData}
+                    setFetchedScreen={setFetchedScreen}
+                  />
+                }
+              />
+            )}
+            { fetchedScreen && (<>
+              <Route path="" element={<Navigate to="/step-0" replace />} />
+              <Route
+                path="step-0"
+                element={
+                  <LandingPage
+                    formData={formData}
+                    setFetchedScreen={setFetchedScreen}
+                  />
+                }
+              />
+              <Route
+                path="step-1"
+                element={
+                  <Disclaimer
+                    formData={formData}
+                    handleCheckboxChange={handleCheckboxChange}
+                  />
+                }
+              />
+              <Route
+                path="step-:id"
+                element={
+                  <QuestionComponentContainer
+                    formData={formData}
+                    handleTextfieldChange={handleTextfieldChange}
+                    handleContinueSubmit={handleContinueSubmit}
+                    handleRadioButtonChange={handleRadioButtonChange}
+                    handleNoAnswerChange={handleNoAnswerChange}
+                    handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
+                    handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+                    handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+                    setFormData={setFormData}
+                    handleCheckboxChange={handleCheckboxChange}
+                  />
+                }
+              />
+              <Route
+                path="confirm-information"
+                element={<Confirmation formData={formData} />}
+              />
+              <Route path="results" element={<Results />} />
+              <Route path="*" element={<Navigate to="/step-0" replace />} />
+            </>)}
+          </Route>
 					<Route path="*" element={<Navigate to="/step-0" replace />} />
 				</Routes>
 			</div>

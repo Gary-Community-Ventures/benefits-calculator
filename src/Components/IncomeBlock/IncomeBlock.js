@@ -29,7 +29,7 @@ const StyledDeleteButton = styled(Button)({
 });
 
 const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
-  const { id } = useParams();
+  const { id, uuid } = useParams();
   const stepNumberId = Number(id);
 
   //if there are any elements in state for incomeStreams create IncomeBlock components for those 
@@ -352,7 +352,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
         return { ...income, incomeAmount: Number(income.incomeAmount), hoursPerWeek: Number(income.hoursPerWeek) };
       })
       //need to pass the id obtained from useParams in this component to the handler s.t. it can navigate to the next step
-      handleIncomeStreamsSubmit(incomes, stepNumberId); 
+      handleIncomeStreamsSubmit(incomes, stepNumberId, uuid); 
     }
   }
 

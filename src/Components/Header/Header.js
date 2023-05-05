@@ -15,10 +15,10 @@ const Header = ({ formData, handleTextfieldChange }) => {
 	const context = useContext(Context);
 	const { urlSearchParams, isBIAUser } = formData;
 	const location = useLocation();
-	const urlRegex = /^(\/results\/)(.+)$/;
+	const urlRegex = /^(?:\/results)?\/(.+?)(?:\/results)?\/?$/;
 	const url = location.pathname.match(urlRegex);
 	const isResults = url !== null;
-	const screenUUID = url ? url[2] : undefined;
+	const screenUUID = url ? url[1] : undefined;
 
 	const [openShare, setOpenShare] = useState(false);
 	const [openEmailResults, setOpenEmailResults] = useState(false);

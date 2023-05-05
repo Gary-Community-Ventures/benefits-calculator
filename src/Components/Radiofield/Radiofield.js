@@ -7,7 +7,7 @@ const StyledFormControlLabel = styled(FormControlLabel)({
   marginLeft: -5
 });
 
-const Radiofield = ({ componentDetails, formData, handleRadioButtonChange }) => {
+const Radiofield = ({ componentDetails, formData, handleRadioButtonChange, preferNotToAnswer }) => {
   const { ariaLabel, inputName } = componentDetails;
   const intl = useIntl();
   const translatedAriaLabel = intl.formatMessage({ id: ariaLabel });
@@ -37,6 +37,17 @@ const Radiofield = ({ componentDetails, formData, handleRadioButtonChange }) => 
                 defaultMessage='No' />
             }
           />
+          { preferNotToAnswer && (
+            <StyledFormControlLabel 
+              value='preferNotToAnswer' 
+              control={<Radio />} 
+              label={
+                <FormattedMessage 
+                  id='radiofield.label-preferNotToAnswer' 
+                  defaultMessage='Prefer not to answer' />
+              }
+            />
+          )}
       </RadioGroup>
     </div>
   );
