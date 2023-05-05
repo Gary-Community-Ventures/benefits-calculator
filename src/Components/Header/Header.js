@@ -1,6 +1,6 @@
 import { AppBar, MenuItem, Select, Modal } from '@mui/material';
 import { useContext, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
@@ -15,10 +15,10 @@ const Header = ({ formData, handleTextfieldChange }) => {
 	const context = useContext(Context);
 	const { urlSearchParams, isBIAUser } = formData;
 	const location = useLocation();
-	const urlRegex = /^(\/results\/)(.+)$/;
+	const urlRegex = /^(?:\/results)?\/(.+?)(?:\/results)?\/?$/;
 	const url = location.pathname.match(urlRegex);
 	const isResults = url !== null;
-	const screenUUID = url ? url[2] : undefined;
+	const screenUUID = url ? url[1] : undefined;
 
 	const [openShare, setOpenShare] = useState(false);
 	const [openEmailResults, setOpenEmailResults] = useState(false);
@@ -125,17 +125,25 @@ const Header = ({ formData, handleTextfieldChange }) => {
 			</AppBar>
 			<Modal
 				open={openShare}
-				onClose={handleCloseShare}>
-				<Share close={handleCloseShare} />
+				onClose={handleCloseShare}
+				aria-labelledby="share-my-friend-ben-modal"
+			>
+				<Share
+					close={handleCloseShare}
+					id="share-my-friend-ben-modal"
+				/>
 			</Modal>
 			<Modal
 				open={openEmailResults}
-				onClose={handleCloseEmailResults}>
+				onClose={handleCloseEmailResults}
+				aria-labelledby="email-results-modal"
+			>
 				<EmailResults
 					formData={formData}
 					handleTextfieldChange={handleTextfieldChange}
 					screenId={screenUUID}
 					close={handleCloseEmailResults}
+					id="email-results-modal"
 				/>
 			</Modal>
 		</nav>

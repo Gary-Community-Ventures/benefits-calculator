@@ -6,10 +6,10 @@ import PreviousButton from "../PreviousButton/PreviousButton";
 import housingOptions from '../../Assets/housingOptions';
 import { FormattedMessage } from 'react-intl';
 
-const StyledTypography = styled(Typography)`
+const StyledTypography = styled(Typography)(`
   color: #c6252b;
   height: 1rem;
-`;
+`);
 
 const HousingBlock = ({ handleHousingSourcesSubmit, formData }) => {
   const [selectedMenuItems, setSelectedMenuItems] = useState(Object.keys(formData.housing).length > 0 ? formData.housing : {

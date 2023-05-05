@@ -1,0 +1,19 @@
+.error-container {
+  text-align: center;
+  width: 60%;
+  margin: auto;
+}
+
+svg.error-icon {
+  color: #037A93;
+  font-size: 60px;
+  margin: 3rem 0 1rem 0;
+}
+
+.error-header {
+  margin-bottom: 1rem;
+}
+
+button.error-button {
+  margin-top: 3rem;
+}

@@ -1,15 +1,22 @@
 import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { createScreen } from '../../Assets/updateScreen.js'
 import './LandingPage.css';
 
-const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
-  const navigate = useNavigate();
+const LandingPage = ({ formData, setFetchedScreen }) => {
+	let { uuid } = useParams();
 
-  useEffect(() => {
-    clearLocalStorageFormDataAndResults();
-  }, []);
+  const navigate = useNavigate();
+	const handleContinue = async () => {
+		if (uuid) {
+			navigate(`/${uuid}/step-1`);
+		} else {
+			const response = await createScreen(formData)
+			setFetchedScreen(true);
+			navigate(`/${response.uuid}/step-1`);
+		}
+	}
 
   return (
 		<main className="benefits-form">
@@ -72,9 +79,7 @@ const LandingPage = ({ clearLocalStorageFormDataAndResults }) => {
 			<CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
 				<Button
 					variant="contained"
-					onClick={() => {
-						navigate('/step-1');
-					}}
+					onClick={handleContinue}
 				>
 					<FormattedMessage id="continue-button" defaultMessage="Continue" />
 				</Button>

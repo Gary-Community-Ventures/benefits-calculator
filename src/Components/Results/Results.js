@@ -18,6 +18,7 @@ import {
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
+import ResultsError from '../ResultsError/ResultsError';
 import Toolbar from '@mui/material/Toolbar';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
@@ -33,9 +34,9 @@ export const isNavigationKey = (key) =>
   key === ' ';
 
 const Results = () => {
-  const { id: screenerId } = useParams()
+  const { uuid: screenerId } = useParams()
+  const navigate = useNavigate()
   const locale = useContext(Context).locale;
-  const setLocale = useContext(Context).setLocale;
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const citizenToggleState = useState(false);
@@ -47,7 +48,7 @@ const Results = () => {
     programs: [],
     rawResponse: {},
     screenerId: 0,
-    isLoading: true,
+    loadingState: 'loading',
   };
 
   const [results, setResults] = useState(initialResults);
@@ -112,7 +113,15 @@ const Results = () => {
   }, [locale, results.rawResponse])
 
   const fetchResults = async () => {
-		const rawEligibilityResponse = await getEligibility(screenerId, locale);
+    let rawEligibilityResponse;
+    try {
+        rawEligibilityResponse = await getEligibility(screenerId, locale);
+    } catch (error) {
+      setResults({
+        ...results,
+        loadingState: 'error'
+      });
+    }
 		setResults({
 			programs: [],
 			rawResponse: rawEligibilityResponse,
@@ -122,6 +131,9 @@ const Results = () => {
 
   const responseLanguage = () => {
     const { rawResponse } = results;
+    if (rawResponse.programs === undefined) {
+      return
+    }
 		const languageCode = locale.toLowerCase();
 		const eligibilityResponse = rawResponse.programs[languageCode];
 		const programs = eligibilityResponse
@@ -132,7 +144,7 @@ const Results = () => {
 		setResults({
       ...results,
 			programs: programs,
-			isLoading: false
+			loadingState: 'done'
     });
 	};
 
@@ -664,7 +676,9 @@ const Results = () => {
     <main className='benefits-form'>
       <div className='results-container'>
         <Grid container spacing={2}>
-          { results.isLoading ? <Loading /> :
+          { results.loadingState === 'loading' && <Loading /> }
+          { results.loadingState === 'error' && <ResultsError /> }
+          { results.loadingState === 'done' && (
             <>
               { displayHeaderSection() }
               <Grid xs={12} item={true}>
@@ -677,8 +691,17 @@ const Results = () => {
                   />
                 }
               </Grid>
+              <Button
+                className="back-to-screen-button" onClick={() => {navigate(`/${screenerId}/confirm-information`)}}
+                variant='contained'
+              >
+                <FormattedMessage 
+                  id="results.returnToScreenButton"
+                  defaultMessage="Edit Screener Responses"
+                />
+              </Button>
             </>
-          }
+          )}
         </Grid>
       </div>
     </main>
