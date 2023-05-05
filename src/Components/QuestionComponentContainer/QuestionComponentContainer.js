@@ -250,14 +250,6 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
             defaultMessage='Optional: Sign up for benefits updates and/or paid feedback opportunities' />
         </h1>
       );
-    } else if (matchingQuestion.headerType === 'aboutYourself') {
-      return (
-        <h1 className='sub-header'>
-          <FormattedMessage
-            id='qcc.tell-us-text'
-            defaultMessage='Tell us a little more about yourself.' />
-        </h1>
-      );
     } else if (matchingQuestion.headerType === 'aboutHousehold') {
       if (matchingQuestion.name === 'hasBenefits' || matchingQuestion.name === 'acuteHHConditions') {
         return (
