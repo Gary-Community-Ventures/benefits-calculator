@@ -628,37 +628,39 @@ const Results = () => {
 
     return (
       <div>
-        <Button
-          className={ filterResultsButton === 'benefits' ? 'results-link'
-            : 'results-filter-button-grey'
-          }
-          onClick={() => {
-            setFilterResultsButton('benefits');
-          }}
-          sx={{mt: 1, mr: .5, mb: 1, p:.8, fontSize:'.8rem'}}
-          variant='contained'
-          >
-          <FormattedMessage
-            id='results.displayResultsFilterButtons-benefitPrograms'
-            defaultMessage='Benefit Programs'
-          />
-        </Button>
         { hasImmediateNeedsPrograms &&
+        <>
           <Button
-            className={ filterResultsButton === 'urgentNeeds' ? 'results-link'
+            className={ filterResultsButton === 'benefits' ? 'results-link'
               : 'results-filter-button-grey'
             }
             onClick={() => {
-              setFilterResultsButton('urgentNeeds');
+              setFilterResultsButton('benefits');
             }}
-            sx={{mt: 1, mb: 1, p:.8, fontSize:'.8rem',}}
+            sx={{mt: 1, mr: .5, mb: 1, p:.8, fontSize:'.8rem'}}
             variant='contained'
             >
             <FormattedMessage
-              id='results.displayResultsFilterButtons-urgentNeedsResources'
-              defaultMessage='Immediate Needs'
+              id='results.displayResultsFilterButtons-benefitPrograms'
+              defaultMessage='Benefit Programs'
             />
           </Button>
+            <Button
+              className={ filterResultsButton === 'urgentNeeds' ? 'results-link'
+                : 'results-filter-button-grey'
+              }
+              onClick={() => {
+                setFilterResultsButton('urgentNeeds');
+              }}
+              sx={{mt: 1, mb: 1, p:.8, fontSize:'.8rem',}}
+              variant='contained'
+              >
+              <FormattedMessage
+                id='results.displayResultsFilterButtons-urgentNeedsResources'
+                defaultMessage='Immediate Needs'
+              />
+            </Button>
+        </>
         }
       </div>
     );
