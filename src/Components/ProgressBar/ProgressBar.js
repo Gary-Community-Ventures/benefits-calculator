@@ -28,6 +28,7 @@ const ProgressBar = ({ step }) => {
 				variant="determinate"
 				value={(step / totalSteps) * 100}
 				className="progress-bar"
+				aria-label='Progress Bar'
 			/>
 			<p className='step-progress-title'>
 				<FormattedMessage
