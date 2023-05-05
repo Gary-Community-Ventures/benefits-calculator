@@ -86,6 +86,7 @@ button.results-filter-button-grey {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
 
 button.back-to-screen-button {
   margin: 1rem;
