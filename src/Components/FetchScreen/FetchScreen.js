@@ -42,7 +42,7 @@ const FetchScreen = ({ formData, setFormData, setFetchedScreen }) => {
 			expenses: [],
 			householdSize: response.household_size ?? '',
 			householdData: [],
-			householdAssets: response.household_assets ?? 0,
+			householdAssets: Math.round(response.household_assets) ?? 0,
 			hasBenefits: response.has_benefits ?? 'preferNotToAnswer',
 			benefits: {
 				acp: response.has_acp ?? false,

@@ -129,6 +129,9 @@ const displayHouseholdSizeHelperText = (sizeOfHousehold) => {
 }
 
 const householdAssetsHasError = (householdAssets) => {
+  if (householdAssets === '') {
+    return true
+  }
   return householdAssets < 0;
 }
 
