@@ -9,6 +9,8 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
+import ReactGA from 'react-ga';
+import './UrgentNeedsRow.css'
 
 const UrgentNeedsRow = ({ rowProps }) => {
   const [open, setOpen] = useState(false);
@@ -59,15 +61,19 @@ const UrgentNeedsRow = ({ rowProps }) => {
                   </h4>
                 }
                 {rowProps.link && (
-                  <Button
-                    variant='contained'
-                    target='_blank'
-                    href={rowProps.link}
-                    sx={{marginTop: '1rem'}}>
-                    <FormattedMessage
-                      id='urgentNeedsTable.visit-website-button'
-                      defaultMessage='Visit website' />
-                  </Button>
+                  <ReactGA.OutboundLink
+                    className="margin-top-link"
+                    eventLabel={`Urgent Need Website for ${rowProps.name}`}
+                    to={rowProps.link}
+                    target="_blank"
+                    trackerNames={['main']}
+                  >
+                    <Button className="urgent-need-button">
+                      <FormattedMessage
+                        id='urgentNeedsTable.visit-website-button'
+                        defaultMessage='Visit website' />
+                    </Button>
+                  </ReactGA.OutboundLink>
                 )}
               </Box>
             </Collapse>
