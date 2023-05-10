@@ -355,7 +355,7 @@ const Results = () => {
       gridFilteredDescendantCountLookupSelector,
     );
     const [navListOpen, setNavListOpen] = useState(false)
-    const openNaveList = () => {setNavListOpen(!navListOpen)}
+    const openNavList = () => {setNavListOpen(!navListOpen)}
 
     const handleKeyDown: ButtonProps['onKeyDown'] = (event) => {
       if (event.key === ' ') {
@@ -411,7 +411,7 @@ const Results = () => {
           <Button
             variant='contained'
             target='_blank'
-            onClick={openNaveList}
+            onClick={openNavList}
             sx={{marginLeft: '5px'}}>
             <FormattedMessage
               id='results.resultsRow-applyWithAssistance'
@@ -420,7 +420,7 @@ const Results = () => {
         }
         { (row.navigators.length > 0 && navListOpen)  &&
           <div className='navigator-list'>
-            <CloseIcon onClick={openNaveList} className='top-right'/>
+            <CloseIcon onClick={openNavList} className='top-right'/>
             { displayNavigators(row.navigators) }
           </div>
         }
