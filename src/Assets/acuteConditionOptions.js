@@ -43,13 +43,6 @@ const acuteConditionOptions = {
     />,
     image: stroller
   },
-  loss: {
-    formattedMessage: <FormattedMessage
-      id='acuteConditionOptions.loss'
-      defaultMessage='Funeral, burial, or cremation costs'
-    />,
-    image: bill
-  },
   familyPlanning: {
     formattedMessage: <FormattedMessage
       id='acuteConditionOptions.familyPlanning'

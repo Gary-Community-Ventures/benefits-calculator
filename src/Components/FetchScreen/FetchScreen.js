@@ -85,7 +85,6 @@ const FetchScreen = ({ formData, setFormData, setFetchedScreen }) => {
 				housing: response.needs_housing_help ?? false,
 				support: response.needs_mental_health_help ?? false,
 				childDevelopment: response.needs_child_dev_help ?? false,
-				loss: response.needs_funeral_help ?? false,
 				familyPlanning: response.needs_family_planning_help ?? false,
 			},
 			signUpInfo: {

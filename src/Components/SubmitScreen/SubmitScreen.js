@@ -100,7 +100,6 @@ const SubmitScreen = ({ formData, setFormData }) => {
 			needs_housing_help: acuteHHConditions.housing,
 			needs_mental_health_help: acuteHHConditions.support,
 			needs_child_dev_help: acuteHHConditions.childDevelopment,
-			needs_funeral_help: acuteHHConditions.loss,
 			needs_family_planning_help: acuteHHConditions.familyPlanning
 		};
 
