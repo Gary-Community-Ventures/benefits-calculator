@@ -32,7 +32,7 @@ const App = () => {
   const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
   const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : '';
   const setReferrerSource = referrer === '' || referrer in referralOptions
-  const isBIAUser = externalId !== null && referrer !== '';
+  const isBIAUser = referrer !== '';
   const theme = createTheme(styleOverrides);
 	const totalSteps = Object.keys(stepDirectory).length + 2;
   const [fetchedScreen, setFetchedScreen] = useState(false);
