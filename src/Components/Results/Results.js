@@ -20,6 +20,7 @@ import Box from '@mui/material/Box';
 import Loading from '../Loading/Loading';
 import ResultsError from '../ResultsError/ResultsError';
 import Toolbar from '@mui/material/Toolbar';
+import ReactGA from 'react-ga'
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import {
   getEligibility,
@@ -236,15 +237,15 @@ const Results = () => {
 								{navigator.assistance_link && (
 									<h4 className="font-weight">
 										Link:{' '}
-										<a
-											variant="contained"
-											target="_blank"
-											rel="noopener noreferrer"
-											href={navigator.assistance_link}
+                    <ReactGA.OutboundLink
 											className="ineligibility-link navigator-info"
-										>
+                      eventLabel={`Apply With Assistance for ${navigator.name}`}
+                      to={navigator.assistance_link}
+                      target="_blank"
+                      trackerNames={['main']}
+                    >
 											{navigator.assistance_link}
-										</a>
+                    </ReactGA.OutboundLink>
 									</h4>
 								)}
 								{navigator.email && (
@@ -328,7 +329,7 @@ const Results = () => {
       let dataGridChild = {
         id: count,
         path: [results[i].name, 'Detail'],
-        name: results[i].description,
+        name: results[i].name,
         value: '',
         type: '',
         application_time: '',
@@ -355,7 +356,7 @@ const Results = () => {
       gridFilteredDescendantCountLookupSelector,
     );
     const [navListOpen, setNavListOpen] = useState(false)
-    const openNaveList = () => {setNavListOpen(!navListOpen)}
+    const openNavList = () => {setNavListOpen(!navListOpen)}
 
     const handleKeyDown: ButtonProps['onKeyDown'] = (event) => {
       if (event.key === ' ') {
@@ -399,19 +400,23 @@ const Results = () => {
               id='results.return-estimatedDeliveryTimeB'
               defaultMessage=' after completing the application.' />
           </Typography>
-          <Button
-            variant='contained'
-            target='_blank'
-            href={row.application_link}>
-            <FormattedMessage
-              id='results.resultsRow-applyButton'
-              defaultMessage='Apply' />
-          </Button>
+          <ReactGA.OutboundLink
+            eventLabel={`Apply to ${row.name}`}
+            to={row.application_link}
+            target="_blank"
+            trackerNames={['main']}
+          >
+            <Button className="apply-button">
+              <FormattedMessage
+                id='results.resultsRow-applyButton'
+                defaultMessage='Apply' />
+            </Button>
+          </ReactGA.OutboundLink>
         { (row.navigators.length > 0)  &&
           <Button
             variant='contained'
             target='_blank'
-            onClick={openNaveList}
+            onClick={openNavList}
             sx={{marginLeft: '5px'}}>
             <FormattedMessage
               id='results.resultsRow-applyWithAssistance'
@@ -420,7 +425,7 @@ const Results = () => {
         }
         { (row.navigators.length > 0 && navListOpen)  &&
           <div className='navigator-list'>
-            <CloseIcon onClick={openNaveList} className='top-right'/>
+            <CloseIcon onClick={openNavList} className='top-right'/>
             { displayNavigators(row.navigators) }
           </div>
         }

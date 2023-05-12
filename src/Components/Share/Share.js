@@ -16,9 +16,10 @@ import LinkIcon from '@mui/icons-material/Link';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import ReactGA from 'react-ga';
 import './Share.css';
 
-const Share = forwardRef(({close}, ref) => {
+const Share = forwardRef(({ close }, ref) => {
 	const [copied, setCopied] = useState(false);
 	const intl = useIntl();
 
@@ -59,6 +60,18 @@ const Share = forwardRef(({close}, ref) => {
 		);
 	};
 
+	const trackOutboundLinks = (label) => {
+		return () => {
+			ReactGA.outboundLink(
+				{
+					label: label,
+				},
+				() => {},
+				['main']
+			);
+		};
+	};
+
 	return (
 		<div className="container">
 			<IconButton
@@ -80,29 +93,29 @@ const Share = forwardRef(({close}, ref) => {
 			</h2>
 			<div className="icons">
 				<div className="row-group">
-					<FacebookShareButton url={shareUrl}>
+					<FacebookShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Facebook')}>
 						<Icon name="Facebook" color="facebook">
 							<FacebookIcon sx={iconSize} />
 						</Icon>
 					</FacebookShareButton>
-					<TwitterShareButton url={shareUrl}>
+					<TwitterShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Twitter')}>
 						<Icon name="Twitter" color="twitter">
 							<TwitterIcon sx={iconSize} />
 						</Icon>
 					</TwitterShareButton>
-					<EmailShareButton url={shareUrl}>
+					<EmailShareButton url={shareUrl} onClick={trackOutboundLinks('Share With Email')}>
 						<Icon name={labels.email} color="gray">
 							<EmailIcon sx={iconSize} />
 						</Icon>
 					</EmailShareButton>
 				</div>
 				<div className="row-group">
-					<WhatsappShareButton url={shareUrl}>
+					<WhatsappShareButton url={shareUrl} onClick={trackOutboundLinks('Share With WhatsApp')}>
 						<Icon name="WhatsApp" color="whatsApp">
 							<WhatsAppIcon sx={iconSize} />
 						</Icon>
 					</WhatsappShareButton>
-					<FacebookMessengerShareButton url={shareUrl} appId={appId}>
+					<FacebookMessengerShareButton url={shareUrl} appId={appId} onClick={trackOutboundLinks('Share With Facebook Messanger')}>
 						<Icon name="Messenger" color="messenger">
 							<FacebookMessengerIcon size={20.5} />
 						</Icon>

@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
 import { Context } from './Components/Wrapper/Wrapper.js'
-import ReactGA from "react-ga4";
+import ReactGA from "react-ga";
 import FetchScreen from './Components/FetchScreen/FetchScreen';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
@@ -20,7 +20,7 @@ import stepDirectory from './Assets/stepDirectory';
 // import { createDevFormData } from './Assets/devFormData';
 
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
-ReactGA.initialize(TRACKING_ID);
+ReactGA.initialize(TRACKING_ID, {name: 'main'});
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
 const App = () => {
