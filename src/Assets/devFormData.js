@@ -97,7 +97,6 @@ export const createDevFormData = (searchParams) => {
 			housing: true,
 			support: true,
 			childDevelopment: true,
-			loss: true,
 			familyPlanning: true,
 		},
 	};
