@@ -172,10 +172,14 @@ const App = () => {
       return;
     }
 
-    if (numberUpToEightDigitsLongRegex.test(value)) {
-      setFormData({ ...formData, [name]: Number(value) });
-    } else if (name === 'otherSource') {
+    if (name === 'otherSource') {
       setFormData({ ...formData, [name]: value });
+    } else if (numberUpToEightDigitsLongRegex.test(value)) {
+      if (value === '') {
+        setFormData({ ...formData, [name]: value });
+        return;
+      }
+      setFormData({ ...formData, [name]: Number(value) });
     }
   }
 
@@ -209,9 +213,10 @@ const App = () => {
     event.preventDefault();
     const isZipcodeQuestionAndCountyIsEmpty = (questionName === 'zipcode' && formData.county === '');
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '');
+    const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets === '';
 
     if (!validateInputFunction(inputToBeValidated, formData)) {
-      if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
+      if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
         return;
       } else if (questionName === 'signUpInfo') {
         updateUser(uuid, formData, setFormData, locale.toLowerCase())

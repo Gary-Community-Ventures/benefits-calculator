@@ -129,7 +129,7 @@ const displayHouseholdSizeHelperText = (sizeOfHousehold) => {
 }
 
 const householdAssetsHasError = (householdAssets) => {
-  return householdAssets < 0;
+  return householdAssets < 0 || householdAssets === '';
 }
 
 const displayHouseholdAssetsHelperText = (householdAssets) => {
