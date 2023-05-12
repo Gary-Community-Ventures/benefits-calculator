@@ -1,11 +1,12 @@
 import { Button } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import stepDirectory from '../../Assets/stepDirectory';
 
 const HouseholdDataPreviousButton = ({ page, setPage }) => {
   const navigate = useNavigate();
-  const { id, uuid } = useParams();
-  const stepNumberId = Number(id);
+  const { uuid } = useParams();
+  const stepNumberId = stepDirectory.householdData;
 
   const handlePrevious = (event) => {
     event.preventDefault();

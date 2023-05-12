@@ -11,6 +11,7 @@ import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
 import LandingPage from './Components/LandingPage/LandingPage';
+import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlock.js';
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
 import { updateScreen, updateUser } from './Assets/updateScreen'
@@ -317,6 +318,15 @@ const App = () => {
                   <Disclaimer
                     formData={formData}
                     handleCheckboxChange={handleCheckboxChange}
+                  />
+                }
+              />
+              <Route
+                path={`step-${stepDirectory.householdData}/:page`}
+                element={
+                  <HouseholdDataBlock
+                    formData={formData}
+                    handleHouseholdDataSubmit={handleHouseholdDataSubmit}
                   />
                 }
               />

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams, useNavigate }from 'react-router-dom';
 import Textfield from '../Textfield/Textfield';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
@@ -16,6 +17,8 @@ import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const { householdSize } = formData;
+  // const { uuid, step, page} = useParams();
+  const navigate = useNavigate();
 
   //# of blocks that will need to be created for each household member
   //this now includes the head of household

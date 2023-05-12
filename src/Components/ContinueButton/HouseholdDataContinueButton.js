@@ -2,10 +2,11 @@ import { Button } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { getPersonDataErrorMsg, personDataIsValid } from '../../Assets/validationFunctions';
 import { useParams } from 'react-router-dom';
+import stepDirectory from '../../Assets/stepDirectory';
 
 const HouseholdDataContinueButton = ({ page, setPage, remainingHHMNumber, handleHouseholdDataSubmit, setState, state }) => {
-  const { id, uuid } = useParams();
-  const stepNumberId = Number(id);
+  const { uuid } = useParams();
+  const stepNumberId = stepDirectory.householdData;
 
   const handleContinue = (event) => {
     event.preventDefault();
