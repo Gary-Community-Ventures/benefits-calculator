@@ -57,7 +57,6 @@ const getScreensBody = (formData, languageCode) => {
 		needs_housing_help: formData.acuteHHConditions.housing,
 		needs_mental_health_help: formData.acuteHHConditions.support,
 		needs_child_dev_help: formData.acuteHHConditions.childDevelopment,
-		needs_funeral_help: formData.acuteHHConditions.loss,
 		needs_family_planning_help: formData.acuteHHConditions.familyPlanning,
 	};
 

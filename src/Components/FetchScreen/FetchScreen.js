@@ -42,7 +42,7 @@ const FetchScreen = ({ formData, setFormData, setFetchedScreen }) => {
 			expenses: [],
 			householdSize: response.household_size ?? '',
 			householdData: [],
-			householdAssets: response.household_assets ?? 0,
+			householdAssets: Math.round(response.household_assets) ?? 0,
 			hasBenefits: response.has_benefits ?? 'preferNotToAnswer',
 			benefits: {
 				acp: response.has_acp ?? false,
@@ -85,7 +85,6 @@ const FetchScreen = ({ formData, setFormData, setFetchedScreen }) => {
 				housing: response.needs_housing_help ?? false,
 				support: response.needs_mental_health_help ?? false,
 				childDevelopment: response.needs_child_dev_help ?? false,
-				loss: response.needs_funeral_help ?? false,
 				familyPlanning: response.needs_family_planning_help ?? false,
 			},
 			signUpInfo: {

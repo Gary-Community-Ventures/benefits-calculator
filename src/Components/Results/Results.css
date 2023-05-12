@@ -88,6 +88,10 @@ button.results-filter-button-grey {
   align-items: center;
 }
 
+button.apply-button {
+  color: white;
+}
+
 button.back-to-screen-button {
   margin: 1rem;
 }

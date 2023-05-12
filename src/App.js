@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
 import { Context } from './Components/Wrapper/Wrapper.js'
-import ReactGA from "react-ga4";
+import ReactGA from "react-ga";
 import FetchScreen from './Components/FetchScreen/FetchScreen';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
@@ -21,7 +21,7 @@ import stepDirectory from './Assets/stepDirectory';
 // import { createDevFormData } from './Assets/devFormData';
 
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
-ReactGA.initialize(TRACKING_ID);
+ReactGA.initialize(TRACKING_ID, {name: 'main'});
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
 const App = () => {
@@ -33,7 +33,7 @@ const App = () => {
   const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
   const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : '';
   const setReferrerSource = referrer === '' || referrer in referralOptions
-  const isBIAUser = externalId !== null && referrer !== '';
+  const isBIAUser = referrer.toLocaleLowerCase() === 'bia';
   const theme = createTheme(styleOverrides);
 	const totalSteps = Object.keys(stepDirectory).length + 2;
   const [fetchedScreen, setFetchedScreen] = useState(false);
@@ -108,7 +108,6 @@ const App = () => {
       housing: false,
       support: false,
       childDevelopment: false,
-      loss: false,
       familyPlanning: false,
     }
   };
@@ -173,10 +172,14 @@ const App = () => {
       return;
     }
 
-    if (numberUpToEightDigitsLongRegex.test(value)) {
-      setFormData({ ...formData, [name]: Number(value) });
-    } else if (name === 'otherSource') {
+    if (name === 'otherSource') {
       setFormData({ ...formData, [name]: value });
+    } else if (numberUpToEightDigitsLongRegex.test(value)) {
+      if (value === '') {
+        setFormData({ ...formData, [name]: value });
+        return;
+      }
+      setFormData({ ...formData, [name]: Number(value) });
     }
   }
 
@@ -210,9 +213,10 @@ const App = () => {
     event.preventDefault();
     const isZipcodeQuestionAndCountyIsEmpty = (questionName === 'zipcode' && formData.county === '');
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty = (questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '');
+    const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets === '';
 
     if (!validateInputFunction(inputToBeValidated, formData)) {
-      if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty) {
+      if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
         return;
       } else if (questionName === 'signUpInfo') {
         updateUser(uuid, formData, setFormData, locale.toLowerCase())

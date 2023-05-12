@@ -2,6 +2,7 @@ import { Card, CardContent, CardActions, Button, Typography } from '@mui/materia
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createScreen } from '../../Assets/updateScreen.js'
+import ReactGA from 'react-ga'
 import './LandingPage.css';
 
 const LandingPage = ({ formData, setFetchedScreen }) => {
@@ -53,18 +54,18 @@ const LandingPage = ({ formData, setFetchedScreen }) => {
 									id="landingPage.publicCharge"
 									defaultMessage="Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits on this site may affect their immigration status. For more information, please review the "
 								/>
-								<a
+								<ReactGA.OutboundLink
 									className="public-charge-link"
-									variant="contained"
+									eventLabel="Public Charge"
+									to="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
 									target="_blank"
-									href="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
-									rel="noopener noreferrer"
+									trackerNames={['main']}
 								>
 									<FormattedMessage
 										id="landingPage.publicChargeLink"
 										defaultMessage="Colorado Department of Human Services Public Charge Rule"
 									/>
-								</a>
+								</ReactGA.OutboundLink>
 							</p>
 						</li>
 						<li>
