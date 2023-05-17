@@ -111,7 +111,7 @@ const FetchScreen = ({ formData, setFormData, setFetchedScreen }) => {
 				});
 			}
 			initialFormData.householdData.push({
-				age: member.age ?? '',
+				age: String(member.age) ?? '',
 				relationshipToHH: member.relationship ? member.relationship : defaultRelationship,
 				student: member.student ?? false,
 				studentFulltime: member.student_full_time ?? false,

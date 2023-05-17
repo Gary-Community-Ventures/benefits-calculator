@@ -1,22 +1,10 @@
 import { FormControlLabel, FormGroup, Checkbox, FormControl } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 
-const CheckboxGroup = ({ options, state, setState, index }) => {
+const CheckboxGroup = ({ options, householdData, setHouseholdData, index }) => {
   const handleCheckboxChange = (event) => {
-    const { name } = event.target;
-
-    const updatedHouseholdData = state.householdData.map((personData, i) => {
-      if (i === index) {
-        return {
-          ...personData,
-          [name]: !(state.householdData[index][name])
-        };
-      } else {
-        return personData;
-      }
-    });
-
-    setState({ ...state, householdData: updatedHouseholdData });
+    const { name, checked } = event.target;
+    setHouseholdData({...householdData, [name]: checked})
   }
 
   const createFormControlLabels = (optionList) => {
@@ -37,7 +25,7 @@ const CheckboxGroup = ({ options, state, setState, index }) => {
           sx={{ alignItems: 'flex-start', marginTop: `1rem` }}
           control={
             <Checkbox
-              checked={state.householdData[index][optionKey]}
+              checked={householdData[optionKey]}
               onChange={handleCheckboxChange}
               name={optionKey}
               sx={{ marginTop: -1 }} />

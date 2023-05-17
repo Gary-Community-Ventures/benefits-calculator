@@ -7,27 +7,15 @@ const StyledFormControlLabel = styled(FormControlLabel)({
   marginLeft: -5
 });
 
-const HHDataRadiofield = ({ componentDetails, state, setState, index }) => {
+const HHDataRadiofield = ({ componentDetails, householdData, setHouseholdData }) => {
   const { ariaLabel, inputName, value } = componentDetails;
   const intl = useIntl();
   const translatedAriaLabel = intl.formatMessage({ id: ariaLabel });
 
-  const handleRadioButtonChange = (event, index) => {
+  const handleRadioButtonChange = (event) => {
     const { name, value } = event.target;
     let boolValue = (value === 'true');
-
-    const updatedHouseholdData = state.householdData.map((personData, i) => {
-      if (i === index) {
-        return {
-          ...personData,
-          [name]: boolValue
-        };
-      } else {
-        return personData;
-      }
-    });
-
-    setState({...state, householdData: updatedHouseholdData});
+    setHouseholdData({...householdData, [name]: boolValue})
   }
 
   return (
@@ -36,7 +24,7 @@ const HHDataRadiofield = ({ componentDetails, state, setState, index }) => {
         aria-labelledby={translatedAriaLabel}
         name={inputName}
         value={value}
-        onChange={(event) => { handleRadioButtonChange(event, index) } }>
+        onChange={(event) => { handleRadioButtonChange(event) } }>
           <StyledFormControlLabel 
             value='true' 
             control={<Radio />} 

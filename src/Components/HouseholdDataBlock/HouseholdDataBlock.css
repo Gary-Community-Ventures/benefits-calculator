@@ -1,3 +1,7 @@
+.household-member-container {
+  margin: 1rem;
+}
+
 .member-added-container {
   display: inline-flex;
   flex-direction: column;
