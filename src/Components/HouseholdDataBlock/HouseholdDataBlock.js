@@ -5,11 +5,9 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
-import HouseholdDataContinueButton from '../ContinueButton/HouseholdDataContinueButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
-import HouseholdDataPreviousButton from '../PreviousButton/HouseholdDataPreviousButton';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { householdMemberAgeHasError, displayHouseholdMemberAgeHelperText,
   getPersonDataErrorMsg, personDataIsValid } from '../../Assets/validationFunctions';
