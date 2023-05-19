@@ -235,8 +235,9 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   }
 
   const createQuestionHeader = (personIndex) => {
+    let header
     if (personIndex === 1) {
-      return (
+      header = (
         <h1 className='question-label household-data-q-underline'>
           <FormattedMessage
             id='householdDataBlock.questionHeader'
@@ -245,27 +246,30 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         </h1>
       );
     } else {
-      return (
-				<>
+      header = (
 					<h1 className="question-label household-data-q-underline">
 						<FormattedMessage
 							id="questions.householdData"
 							defaultMessage="Tell us about the next person in your household."
 						/>
 					</h1>
-					<h2 className="household-data-sub-header">
-						<FormattedMessage
-							id="qcc.so-far-text"
-							defaultMessage="So far you've told us about:"
-						/>
-					</h2>
-					<div>
-						{formData.householdData.slice(0, page - 1).map(createMembersAdded)}
-					</div>
-					<div className="household-data-q-underline"></div>
-				</>
-			);
+      )
     }
+    return (
+      <>
+        {header}
+        <h2 className="household-data-sub-header">
+          <FormattedMessage
+            id="qcc.so-far-text"
+            defaultMessage="So far you've told us about:"
+          />
+        </h2>
+        <div>
+          {formData.householdData.map(createMembersAdded)}
+        </div>
+        <div className="household-data-q-underline"></div>
+      </>
+    )
   }
 
   const createDropdownCompProps = () => {
