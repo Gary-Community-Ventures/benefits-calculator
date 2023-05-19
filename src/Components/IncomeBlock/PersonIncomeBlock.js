@@ -24,11 +24,11 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 32
 });
 
-const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => {
+const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those
   //first by assigning them to the initial selectedMenuItem state
   //if not then create the initial income block questions
-  const [selectedMenuItem, setSelectedMenuItem] = useState(personData.incomeStreams.length > 0 ? personData.incomeStreams :
+  const [selectedMenuItem, setSelectedMenuItem] = useState(householdData.incomeStreams.length > 0 ? householdData.incomeStreams :
   [
     {
       incomeStreamName: '',
@@ -43,18 +43,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   }
 
   useEffect(() => {
-    const updatedHouseholdData = state.householdData.map((personData, i) => {
-      if (i === personDataIndex) {
-        return {
-          ...personData,
-          incomeStreams: selectedMenuItem
-        };
-      } else {
-        return personData;
-      }
-    });
-
-    setState({...state, householdData: updatedHouseholdData});
+    setHouseholdData({...householdData, incomeStreams: selectedMenuItem})
   }, [selectedMenuItem]);
 
   const createIncomeStreamsMenuItems = () => {
@@ -178,7 +167,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
     let formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-youQLabel';
     let formattedMsgDefaultMsg = 'How many hours do you work per week: ';
 
-    if (personDataIndex !== 0) {
+    if (page !== 0) {
       formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-questionLabel';
       formattedMsgDefaultMsg = 'How many hours do they work per week: ';
     }
@@ -241,7 +230,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
       let hourlyFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
       let hourlyFormattedMsgDefaultMsg = 'What is your hourly rate: ';
 
-      if (personDataIndex !== 0) {
+      if (page !== 0) {
         hourlyFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
         hourlyFormattedMsgDefaultMsg = 'What is their hourly rate: ';
       }
@@ -256,7 +245,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
       let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
       let payPeriodFormattedMsgDefaultMsg = 'How much do you receive each pay period for: ';
 
-      if (personDataIndex !== 0) {
+      if (page !== 0) {
         payPeriodFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-questionLabel';
         payPeriodFormattedMsgDefaultMsg = 'How much do they receive each pay period for: ';
       }
@@ -299,7 +288,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     let formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel';
     let formattedMsgDefaultMsg = 'How often are you paid this income: ';
-    if (personDataIndex !== 0) {
+    if (page !== 0) {
       formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel';
       formattedMsgDefaultMsg = 'How often are they paid this income: ';
     }
@@ -343,7 +332,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
       let formattedMsgId = 'incomeBlock.createIncomeBlockQuestions-questionLabel';
       let formattedMsgDefaultMsg = 'If you receive another type of income, select it below.';
 
-      if (personDataIndex !== 0) {
+      if (page !== 0) {
         formattedMsgId = 'personIncomeBlock.createIncomeBlockQuestions-questionLabel';
         formattedMsgDefaultMsg = 'If they receive another type of income, select it below.';
       }
@@ -377,8 +366,8 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
     const updatedSelectedMenuItems = selectedMenuItem.filter((incomeSourceData, index) => index !== selectedIndex );
     setSelectedMenuItem(updatedSelectedMenuItems);
 
-    const updatedHouseholdData = state.householdData.map((personData, i) => {
-      if (i === personDataIndex) {
+    const updatedHouseholdData = householdData.map((personData, i) => {
+      if (i === page) {
         return {
           ...personData,
           incomeStreams: updatedSelectedMenuItems
@@ -387,8 +376,7 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
         return personData;
       }
     });
-
-    setState({...state, householdData: updatedHouseholdData});
+    setHouseholdData(updatedHouseholdData)
   }
 
   const handleAddAdditionalIncomeSource = (event) => {
@@ -420,8 +408,8 @@ const PersonIncomeBlock = ({ personData, state, setState, personDataIndex }) => 
     <>
       <h2 className='question-label radio-question'>
         <FormattedMessage
-          id={(renderReturnStmtIdOrDefaultMsg(personDataIndex))[0]}
-          defaultMessage={(renderReturnStmtIdOrDefaultMsg(personDataIndex))[1]} />
+          id={(renderReturnStmtIdOrDefaultMsg(page))[0]}
+          defaultMessage={(renderReturnStmtIdOrDefaultMsg(page))[1]} />
       </h2>
       <p className='question-description'>
         <FormattedMessage

@@ -174,9 +174,8 @@ const displayHouseholdMemberAgeHelperText = (applicantAge) => {
   };
 }
 
-const personDataIsValid = (householdDataState, index) => {
-  const matchingPersonData = householdDataState.householdData[index];
-  const { age, relationshipToHH, hasIncome, incomeStreams } = matchingPersonData;
+const personDataIsValid = (householdDataState) => {
+  const { age, relationshipToHH, hasIncome, incomeStreams } = householdDataState;
 
   const ageIsValid = (Number(age) >= 0 && age !== '');
   const relationshipToHHIsValid = (relationshipToHH !== '');
@@ -185,9 +184,8 @@ const personDataIsValid = (householdDataState, index) => {
   return ageIsValid && relationshipToHHIsValid && incomeIsValid;
 }
 
-const getPersonDataErrorMsg = (householdDataState, index) => {
-  const matchingPersonData = householdDataState.householdData[index];
-  const { age, relationshipToHH, hasIncome, incomeStreams } = matchingPersonData;
+const getPersonDataErrorMsg = (householdDataState) => {
+  const { age, relationshipToHH, hasIncome, incomeStreams } = householdDataState;
 
   if (Number(age) < 0 || age === '') {
     return (

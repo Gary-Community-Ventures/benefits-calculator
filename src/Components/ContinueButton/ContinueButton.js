@@ -10,7 +10,7 @@ const ContinueButton = ({ handleContinueSubmit, inputError, formData, inputName,
     <Button
       variant='contained'
       onClick={(event) => {
-        handleContinueSubmit(event, inputError, formData[inputName], stepNumberId, questionName, uuid);
+        handleContinueSubmit(event, inputError, formData?.[inputName], stepNumberId, questionName, uuid);
       }}>
       <FormattedMessage 
         id='continueButton'

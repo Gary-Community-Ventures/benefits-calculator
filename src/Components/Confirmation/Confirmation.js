@@ -36,7 +36,7 @@ const Confirmation = ({ formData }) => {
         <div key={i}>
           <p className='confirmation-label'>
             <b>⚫️ {allHouseholdRelations[i]}, { allHouseholdAges[i] }</b>
-            <Link to={`/step-${stepDirectory.householdData}`} className='edit-link'>
+            <Link to={`/${uuid}/step-${stepDirectory.householdData}/${i + 1}`} className='edit-link'>
               <FormattedMessage
                 id='confirmation.editLinkText'
                 defaultMessage='Edit' />
@@ -48,11 +48,6 @@ const Confirmation = ({ formData }) => {
                 id='confirmation.headOfHouseholdDataBlock-conditionsText'
                 defaultMessage='Conditions:' />
             </b>
-            <Link to={`/${uuid}/step-${stepDirectory.householdData}`} className='edit-link'>
-              <FormattedMessage
-                id='confirmation.editLinkText'
-                defaultMessage='Edit' />
-            </Link>
             { displayConditions(personData) }
           </article>
           <article className='confirmation-label'>
@@ -61,11 +56,6 @@ const Confirmation = ({ formData }) => {
                 id='confirmation.headOfHouseholdDataBlock-incomeLabel'
                 defaultMessage='Income:' />
             </b>
-            <Link to={`/${uuid}/step-${stepDirectory.householdData}`} className='edit-link'>
-              <FormattedMessage
-                id='confirmation.editLinkText'
-                defaultMessage='Edit' />
-            </Link>
             { hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul> }
           </article>
         </div>
@@ -355,21 +345,21 @@ const Confirmation = ({ formData }) => {
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('benefits',
             'confirmation.displayAllFormData-currentHHBenefitsText',
-            'Household benefits:', `/step-${stepDirectory.hasBenefits}`,
+            'Household benefits:', `/${uuid}/step-${stepDirectory.hasBenefits}`,
             allBenefitsList
             )
           }
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('healthInsurance',
             'confirmation.displayAllFormData-healthInsurance',
-            'Household health insurance:', `/step-${stepDirectory.healthInsurance}`,
+            'Household health insurance:', `/${uuid}/step-${stepDirectory.healthInsurance}`,
             refactorOptionsList(healthInsuranceOptions)
             )
           }
         <p className='confirmation-section-underline'></p>
           { displayHHCheckboxSection('acuteHHConditions',
             'confirmation.displayAllFormData-acuteHHConditions',
-            'Immediate Needs:', `/step-${stepDirectory.acuteHHConditions}`,
+            'Immediate Needs:', `/${uuid}/step-${stepDirectory.acuteHHConditions}`,
             refactorOptionsList(acuteConditionOptions)
             )
           }

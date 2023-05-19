@@ -11,6 +11,7 @@ import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
 import LandingPage from './Components/LandingPage/LandingPage';
+import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlock.js';
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
 import { updateScreen, updateUser } from './Assets/updateScreen'
@@ -220,7 +221,13 @@ const App = () => {
       } else if (questionName === 'signUpInfo') {
         updateUser(uuid, formData, setFormData, locale.toLowerCase())
         navigate(`/${uuid}/confirm-information`);
-      } else { //you've indicated that you're householdSize is larger than 1
+      } else if (questionName === 'householdSize') {
+        const updatedHouseholdData = formData.householdData.slice(0, formData.householdSize);
+        const updatedFormData = {...formData, householdData: updatedHouseholdData}
+        updateScreen(uuid, updatedFormData, locale.toLowerCase())
+        setFormData(updatedFormData)
+        navigate(`/${uuid}/step-${stepId + 1}/1`)
+      } else {
         updateScreen(uuid, formData, locale.toLowerCase())
         navigate(`/${uuid}/step-${stepId + 1}`);
       }
@@ -241,8 +248,10 @@ const App = () => {
     navigate(`/${uuid}/step-${stepId + 1}`);
   }
 
-  const handleHouseholdDataSubmit = (validatedHouseholdData, stepId, uuid) => {
-    const updatedFormData = { ...formData, householdData: validatedHouseholdData };
+  const handleHouseholdDataSubmit = (memberData, stepId, uuid) => {
+    const updatedMembers = [...formData.householdData];
+    updatedMembers[stepId] = memberData;
+    const updatedFormData = { ...formData, householdData: updatedMembers };
     updateScreen(uuid, updatedFormData, locale.toLowerCase());
     setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
@@ -263,6 +272,10 @@ const App = () => {
           />
           <Route
             path="/:uuid/step-:id"
+            element={<ProgressBar />}
+          />
+          <Route
+            path="/:uuid/step-:id/:page"
             element={<ProgressBar />}
           />
           <Route
@@ -321,6 +334,16 @@ const App = () => {
                   <Disclaimer
                     formData={formData}
                     handleCheckboxChange={handleCheckboxChange}
+                  />
+                }
+              />
+              <Route
+                path={`step-${stepDirectory.householdData}/:page`}
+                element={
+                  <HouseholdDataBlock
+                    key={window.location.href}
+                    formData={formData}
+                    handleHouseholdDataSubmit={handleHouseholdDataSubmit}
                   />
                 }
               />

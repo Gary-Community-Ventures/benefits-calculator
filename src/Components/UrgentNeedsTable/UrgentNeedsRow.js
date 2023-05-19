@@ -10,7 +10,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import ReactGA from 'react-ga';
-import './UrgentNeedsRow.css'
+import './UrgentNeedsRow.css';
 
 const UrgentNeedsRow = ({ rowProps }) => {
   const [open, setOpen] = useState(false);
