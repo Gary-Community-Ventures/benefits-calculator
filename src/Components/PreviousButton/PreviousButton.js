@@ -18,8 +18,8 @@ const PreviousButton = ({ navFunction, formData }) => {
   const navigationFunction = navFunction ?? defaultNavigate;
 
   return (
-    <Button className='prev-button' onClick={navigationFunction} variant='contained'>
-      <FormattedMessage id='previousButton' defaultMessage='Prev' />
+    <Button className="prev-button" onClick={navigationFunction} variant="contained">
+      <FormattedMessage id="previousButton" defaultMessage="Prev" />
     </Button>
   );
 };

@@ -142,8 +142,8 @@ const FetchScreen = ({ formData, setFormData, setFetchedScreen }) => {
   }, []);
 
   return (
-    <main className='fetch-screen-loading-container'>
-      <img className='loading-image' src={loading} alt='loading-icon' />
+    <main className="fetch-screen-loading-container">
+      <img className="loading-image" src={loading} alt="loading-icon" />
     </main>
   );
 };

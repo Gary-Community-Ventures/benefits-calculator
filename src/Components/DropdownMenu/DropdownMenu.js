@@ -15,7 +15,7 @@ const DropdownMenu = ({ dropdownComponentProps, options, setHouseholdData, house
 
   const createMenuItems = (options) => {
     const disabledSelectMenuItem = (
-      <MenuItem value='disabled-select' key='disabled-select' disabled>
+      <MenuItem value="disabled-select" key="disabled-select" disabled>
         {disabledSelectMenuItemText}
       </MenuItem>
     );

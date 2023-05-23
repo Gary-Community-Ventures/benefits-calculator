@@ -22,17 +22,15 @@ const CategoryAccordion = ({
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon style={{ color: '#ffffff', height: '28.8' }} />}
-        aria-controls='panel1a-content'
-        id='panel1a-header'
+        aria-controls="panel1a-content"
+        id="panel1a-header"
         sx={{ backgroundColor: '#037A93' }}
       >
-        <Typography sx={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: '400' }}>
-          {categoryName}
-        </Typography>
+        <Typography sx={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: '400' }}>{categoryName}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <BasicCheckboxGroup
-          stateVariable='benefits'
+          stateVariable="benefits"
           options={categoryOptions}
           state={formData}
           setState={setFormData}

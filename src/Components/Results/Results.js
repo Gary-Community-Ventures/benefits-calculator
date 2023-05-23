@@ -2,14 +2,7 @@ import { useEffect, useState, useContext, useRef } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import {
-  Button,
-  Link,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from '@mui/material';
+import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import Filter from '../FilterTable/FilterTable.js';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
@@ -33,11 +26,7 @@ import { getEligibility } from '../../apiCalls';
 import './Results.css';
 
 export const isNavigationKey = (key) =>
-  key === 'Home' ||
-  key === 'End' ||
-  key.indexOf('Arrow') === 0 ||
-  key.indexOf('Page') === 0 ||
-  key === ' ';
+  key === 'Home' || key === 'End' || key.indexOf('Arrow') === 0 || key.indexOf('Page') === 0 || key === ' ';
 
 const Results = () => {
   const { uuid: screenerId } = useParams();
@@ -195,15 +184,9 @@ const Results = () => {
   const totalEligiblePrograms = (results) => {
     return results.reduce((total, program) => {
       if (program.estimated_value <= 0) return total;
-      if (
-        filt.citizen.value.includes('non-citizen') &&
-        program.legal_status_required !== 'citizen'
-      ) {
+      if (filt.citizen.value.includes('non-citizen') && program.legal_status_required !== 'citizen') {
         total += 1;
-      } else if (
-        filt.citizen.value.includes('citizen') &&
-        program.legal_status_required !== 'non-citizen'
-      ) {
+      } else if (filt.citizen.value.includes('citizen') && program.legal_status_required !== 'non-citizen') {
         total += 1;
       }
       return total;
@@ -238,17 +221,17 @@ const Results = () => {
           {navigators
             .map((navigator) => {
               return (
-                <div className='navigator-container' key={navigator.name}>
-                  <h2 className='navigator-header'>{navigator.name}</h2>
-                  <p className='navigator-desc'>{navigator.description}</p>
+                <div className="navigator-container" key={navigator.name}>
+                  <h2 className="navigator-header">{navigator.name}</h2>
+                  <p className="navigator-desc">{navigator.description}</p>
                   {navigator.assistance_link && (
-                    <h4 className='font-weight'>
+                    <h4 className="font-weight">
                       Link:{' '}
                       <ReactGA.OutboundLink
-                        className='ineligibility-link navigator-info'
+                        className="ineligibility-link navigator-info"
                         eventLabel={`Apply With Assistance for ${navigator.name}`}
                         to={navigator.assistance_link}
-                        target='_blank'
+                        target="_blank"
                         trackerNames={['main']}
                       >
                         {navigator.assistance_link}
@@ -256,16 +239,13 @@ const Results = () => {
                     </h4>
                   )}
                   {navigator.email && (
-                    <h4 className='font-weight'>
-                      Email: <span className='navigator-info'>{navigator.email}</span>
+                    <h4 className="font-weight">
+                      Email: <span className="navigator-info">{navigator.email}</span>
                     </h4>
                   )}
                   {navigator.phone_number && (
-                    <h4 className='font-weight'>
-                      Phone Number:{' '}
-                      <span className='navigator-info'>
-                        {formatPhoneNumber(navigator.phone_number)}
-                      </span>
+                    <h4 className="font-weight">
+                      Phone Number: <span className="navigator-info">{formatPhoneNumber(navigator.phone_number)}</span>
                     </h4>
                   )}
                 </div>
@@ -273,9 +253,7 @@ const Results = () => {
             })
             .reduce((accu, elem) => {
               //https://stackoverflow.com/questions/34034038/how-to-render-react-components-by-using-map-and-join/35840806#35840806
-              return accu === null
-                ? [elem]
-                : [...accu, <hr className='line-seperator' key='hr'></hr>, elem];
+              return accu === null ? [elem] : [...accu, <hr className="line-seperator" key="hr"></hr>, elem];
             }, null)}
         </>
       );
@@ -286,18 +264,15 @@ const Results = () => {
     return (
       <>
         <Grid xs={12} item>
-          <h1 className='bottom-border program-value-header'>
+          <h1 className="bottom-border program-value-header">
             {totalEligiblePrograms(results.programs)}
-            <FormattedMessage
-              id='results.return-programsUpToLabel'
-              defaultMessage=' programs, up to '
-            />
-            ${totalDollarAmount(results.programs).toLocaleString()}
-            <FormattedMessage id='results.return-perYearOrLabel' defaultMessage=' per year or ' />$
+            <FormattedMessage id="results.return-programsUpToLabel" defaultMessage=" programs, up to " />$
+            {totalDollarAmount(results.programs).toLocaleString()}
+            <FormattedMessage id="results.return-perYearOrLabel" defaultMessage=" per year or " />$
             {Math.round(totalDollarAmount(results.programs) / 12).toLocaleString()}
             <FormattedMessage
-              id='results.return-perMonthLabel'
-              defaultMessage=' per month in cash or reduced expenses for you to consider'
+              id="results.return-perMonthLabel"
+              defaultMessage=" per month in cash or reduced expenses for you to consider"
             />
           </h1>
         </Grid>
@@ -354,10 +329,7 @@ const Results = () => {
   const CustomGridTreeDataGroupingCell = (props) => {
     const { id, field, rowNode } = props;
     const apiRef = useGridApiContext();
-    const filteredDescendantCountLookup = useGridSelector(
-      apiRef,
-      gridFilteredDescendantCountLookupSelector,
-    );
+    const filteredDescendantCountLookup = useGridSelector(apiRef, gridFilteredDescendantCountLookupSelector);
     const [navListOpen, setNavListOpen] = useState(false);
     const openNavList = () => {
       setNavListOpen(!navListOpen);
@@ -389,61 +361,49 @@ const Results = () => {
           </Link>
         ) : (
           <Box sx={{ padding: 1 }}>
-            <Typography variant='body1' gutterBottom>
+            <Typography variant="body1" gutterBottom>
               {row.description}
             </Typography>
-            <Typography variant='body1' sx={{ fontStyle: 'italic', marginBottom: 2 }}>
+            <Typography variant="body1" sx={{ fontStyle: 'italic', marginBottom: 2 }}>
               <FormattedMessage
-                id='results.return-estimatedDeliveryTimeA'
-                defaultMessage='*On average people who are approved for this benefit start receiving it '
+                id="results.return-estimatedDeliveryTimeA"
+                defaultMessage="*On average people who are approved for this benefit start receiving it "
               />
               {row.delivery_time}
               <FormattedMessage
-                id='results.return-estimatedDeliveryTimeB'
-                defaultMessage=' after completing the application.'
+                id="results.return-estimatedDeliveryTimeB"
+                defaultMessage=" after completing the application."
               />
             </Typography>
             <ReactGA.OutboundLink
               eventLabel={`Apply to ${row.name}`}
               to={row.application_link}
-              target='_blank'
+              target="_blank"
               trackerNames={['main']}
             >
-              <Button className='apply-button'>
-                <FormattedMessage id='results.resultsRow-applyButton' defaultMessage='Apply' />
+              <Button className="apply-button">
+                <FormattedMessage id="results.resultsRow-applyButton" defaultMessage="Apply" />
               </Button>
             </ReactGA.OutboundLink>
             {row.navigators.length > 0 && (
-              <Button
-                variant='contained'
-                target='_blank'
-                onClick={openNavList}
-                sx={{ marginLeft: '5px' }}
-              >
-                <FormattedMessage
-                  id='results.resultsRow-applyWithAssistance'
-                  defaultMessage='Apply With Assistance'
-                />
+              <Button variant="contained" target="_blank" onClick={openNavList} sx={{ marginLeft: '5px' }}>
+                <FormattedMessage id="results.resultsRow-applyWithAssistance" defaultMessage="Apply With Assistance" />
               </Button>
             )}
             {row.navigators.length > 0 && navListOpen && (
-              <div className='navigator-list'>
-                <CloseIcon onClick={openNavList} className='top-right' />
+              <div className="navigator-list">
+                <CloseIcon onClick={openNavList} className="top-right" />
                 {displayNavigators(row.navigators)}
               </div>
             )}
             {(row.passed_tests.length > 0 || row.failed_tests.length > 0) && (
               <Accordion sx={{ m: 2 }}>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls='panel1a-content'
-                  id='panel1a-header'
-                >
-                  <Typography variant='body2'>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+                  <Typography variant="body2">
                     <Link>
                       <FormattedMessage
-                        id='results.resultsRow-expandForEligibilityLink'
-                        defaultMessage='Expand for eligibility details'
+                        id="results.resultsRow-expandForEligibilityLink"
+                        defaultMessage="Expand for eligibility details"
                       />
                     </Link>
                   </Typography>
@@ -519,7 +479,7 @@ const Results = () => {
 
     return (
       <>
-        <div className='filters-container'>
+        <div className="filters-container">
           {displayResultsFilterButtons()}
           <Filter
             filt={filt}
@@ -534,17 +494,17 @@ const Results = () => {
         {filt.category !== false && (
           <>
             <Toolbar sx={{ border: 1, backgroundColor: '#037A93', color: 'white' }}>
-              <span className='space-around border-right'>{filt.category.value}</span>
-              <span className='space-around'>
+              <span className="space-around border-right">{filt.category.value}</span>
+              <span className="space-around">
                 ${totalDollarAmount(results, filt.category.value).toLocaleString()}{' '}
-                <FormattedMessage id='results.perYear' defaultMessage='Per Year' />
+                <FormattedMessage id="results.perYear" defaultMessage="Per Year" />
               </span>
             </Toolbar>
             {(filt.category.value === 'Child Care, Preschool, and Youth' ||
               filt.category.value === 'Cuidado de Niños, Preescolar y Jóvenes') && (
-              <Typography variant='body2' className='child-care-helper-text'>
+              <Typography variant="body2" className="child-care-helper-text">
                 <FormattedMessage
-                  id='benefitCategories.childCareHelperText'
+                  id="benefitCategories.childCareHelperText"
                   defaultMessage="Do you wonder why the annual value of these programs may differ from the total values in your results? It's because this annual value is an estimate of the combined likely average value of child care and preschool programs you qualify for. Savings from programs may overlap. You may be able to combine benefits to help pay for child care and preschool."
                 />
               </Typography>
@@ -620,7 +580,7 @@ const Results = () => {
     return (
       <div>
         {formatted_value}
-        <Typography variant='body2' sx={{ fontStyle: 'italic' }}>
+        <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
           {row.type}
         </Typography>
       </div>
@@ -631,8 +591,8 @@ const Results = () => {
     return (
       <Grid container item xs={12} sx={{ mt: 2 }}>
         <Grid xs={12} item={true}>
-          <Typography className='body2'>
-            <FormattedMessage id='results.return-screenerIdLabel' defaultMessage='Screener ID: ' />
+          <Typography className="body2">
+            <FormattedMessage id="results.return-screenerIdLabel" defaultMessage="Screener ID: " />
             {results.screenerId}
           </Typography>
         </Grid>
@@ -651,35 +611,29 @@ const Results = () => {
         {hasImmediateNeedsPrograms && (
           <>
             <Button
-              className={
-                filterResultsButton === 'benefits' ? 'results-link' : 'results-filter-button-grey'
-              }
+              className={filterResultsButton === 'benefits' ? 'results-link' : 'results-filter-button-grey'}
               onClick={() => {
                 setFilterResultsButton('benefits');
               }}
               sx={{ mt: 1, mr: 0.5, mb: 1, p: 0.8, fontSize: '.8rem' }}
-              variant='contained'
+              variant="contained"
             >
               <FormattedMessage
-                id='results.displayResultsFilterButtons-benefitPrograms'
-                defaultMessage='Benefit Programs'
+                id="results.displayResultsFilterButtons-benefitPrograms"
+                defaultMessage="Benefit Programs"
               />
             </Button>
             <Button
-              className={
-                filterResultsButton === 'urgentNeeds'
-                  ? 'results-link'
-                  : 'results-filter-button-grey'
-              }
+              className={filterResultsButton === 'urgentNeeds' ? 'results-link' : 'results-filter-button-grey'}
               onClick={() => {
                 setFilterResultsButton('urgentNeeds');
               }}
               sx={{ mt: 1, mb: 1, p: 0.8, fontSize: '.8rem' }}
-              variant='contained'
+              variant="contained"
             >
               <FormattedMessage
-                id='results.displayResultsFilterButtons-urgentNeedsResources'
-                defaultMessage='Immediate Needs'
+                id="results.displayResultsFilterButtons-urgentNeedsResources"
+                defaultMessage="Immediate Needs"
               />
             </Button>
           </>
@@ -689,8 +643,8 @@ const Results = () => {
   };
 
   return (
-    <main className='benefits-form'>
-      <div className='results-container'>
+    <main className="benefits-form">
+      <div className="results-container">
         <Grid container spacing={2}>
           {results.loadingState === 'loading' && <Loading />}
           {results.loadingState === 'error' && <ResultsError />}
@@ -701,23 +655,17 @@ const Results = () => {
                 {filterResultsButton === 'benefits' && DataGridTable(results.programs)}
                 {filterResultsButton === 'urgentNeeds' && displayResultsFilterButtons()}
                 {filterResultsButton === 'urgentNeeds' && (
-                  <UrgentNeedsTable
-                    urgentNeedsPrograms={results.rawResponse.urgent_needs}
-                    locale={locale}
-                  />
+                  <UrgentNeedsTable urgentNeedsPrograms={results.rawResponse.urgent_needs} locale={locale} />
                 )}
               </Grid>
               <Button
-                className='back-to-screen-button'
+                className="back-to-screen-button"
                 onClick={() => {
                   navigate(`/${screenerId}/confirm-information`);
                 }}
-                variant='contained'
+                variant="contained"
               >
-                <FormattedMessage
-                  id='results.returnToScreenButton'
-                  defaultMessage='Edit Screener Responses'
-                />
+                <FormattedMessage id="results.returnToScreenButton" defaultMessage="Edit Screener Responses" />
               </Button>
             </>
           )}

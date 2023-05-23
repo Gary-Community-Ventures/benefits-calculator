@@ -2,8 +2,7 @@ const programs = {
   lifeline: {
     programSnapshot: 'Discount on your phone or internet service',
     programName: 'Lifeline',
-    programDescription:
-      'A monthly discount up to $9.25 on phone or internet service for eligible households.',
+    programDescription: 'A monthly discount up to $9.25 on phone or internet service for eligible households.',
     learnMoreLink: 'https://www.lifelinesupport.org/',
     applyButtonLink: 'https://nv.fcc.gov/lifeline?id=nv_flow&sp=ZmFsc2U%3D&ln=RW5nbGlzaA%3D%3D',
     dollarValue: '$9.25/month',
@@ -24,8 +23,7 @@ const programs = {
   snap: {
     programSnapshot: 'Money to buy food',
     programName: 'Supplemental Nutrition Assistance Program (SNAP)',
-    programDescription:
-      'SNAP benefits can help you feed your family with fresh and healthy groceries.',
+    programDescription: 'SNAP benefits can help you feed your family with fresh and healthy groceries.',
     learnMoreLink: 'https://cdhs.colorado.gov/snap',
     applyButtonLink: 'https://peak--coloradopeak.force.com/peak/s/peak-landing-page?language=en_US',
     dollarValue: '$250/month per household member',
@@ -35,8 +33,7 @@ const programs = {
   tanf: {
     programSnapshot: 'Cash assistance and work support',
     programName: 'Temporary Assistance for Needy Families (TANF/Colorado Works)',
-    programDescription:
-      'TANF provides cash assistance and work support through the Workforce Development Program.',
+    programDescription: 'TANF provides cash assistance and work support through the Workforce Development Program.',
     learnMoreLink: 'https://cdhs.colorado.gov/colorado-works',
     applyButtonLink: 'https://peak--coloradopeak.force.com/peak/s/peak-landing-page?language=en_US',
     dollarValue: '$400/month', //may change based on #of caretakers and children
@@ -48,8 +45,7 @@ const programs = {
     programName: 'Earned Income Tax Credit (EITC)',
     programDescription:
       'Tax credit worth up to $6,728 for low- to moderate-income workers and families, especially those with children.',
-    learnMoreLink:
-      'https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit-eitc',
+    learnMoreLink: 'https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit-eitc',
     applyButtonLink: 'https://www.irs.gov/filing/free-file-do-your-federal-taxes-for-free',
     dollarValue: '$2,135/year',
     estimatedDeliveryTime: 'X weeks',
@@ -77,14 +73,12 @@ const programs = {
     legalStatusRequired: false,
   },
   coERAP: {
-    programSnapshot:
-      'Rental assistance for tenants going through financial hardship as a result of COVID-19 ',
+    programSnapshot: 'Rental assistance for tenants going through financial hardship as a result of COVID-19 ',
     programName: 'Colorado Emergency Rental Assistance Program (ERAP) ',
     programDescription:
       'The Colorado Emergency Rental Assistance Program (ERAP) can help cover rent as far back as April 2020.',
     learnMoreLink: 'https://cdola.colorado.gov/rental-assistance-program',
-    applyButtonLink:
-      'https://cdola.colorado.gov/rental-assistance-information-and-applications-by-county-or-city',
+    applyButtonLink: 'https://cdola.colorado.gov/rental-assistance-information-and-applications-by-county-or-city',
     dollarValue: '$X/year',
     estimatedDeliveryTime: 'X weeks',
     legalStatusRequired: false,

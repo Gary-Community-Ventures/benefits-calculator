@@ -173,8 +173,7 @@ const SubmitScreen = ({ formData, setFormData }) => {
   };
 
   const postUserSignUpInfo = async () => {
-    const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } =
-      formData.signUpInfo;
+    const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = formData.signUpInfo;
     const lowerCaseLocale = locale.toLowerCase();
     const phoneNumber = '+1' + phone;
 

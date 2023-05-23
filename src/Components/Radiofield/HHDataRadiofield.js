@@ -19,7 +19,7 @@ const HHDataRadiofield = ({ componentDetails, householdData, setHouseholdData })
   };
 
   return (
-    <div className='radiogroup-container'>
+    <div className="radiogroup-container">
       <RadioGroup
         aria-labelledby={translatedAriaLabel}
         name={inputName}
@@ -29,14 +29,14 @@ const HHDataRadiofield = ({ componentDetails, householdData, setHouseholdData })
         }}
       >
         <StyledFormControlLabel
-          value='true'
+          value="true"
           control={<Radio />}
-          label={<FormattedMessage id='radiofield.label-yes' defaultMessage='Yes' />}
+          label={<FormattedMessage id="radiofield.label-yes" defaultMessage="Yes" />}
         />
         <StyledFormControlLabel
-          value='false'
+          value="false"
           control={<Radio />}
-          label={<FormattedMessage id='radiofield.label-no' defaultMessage='No' />}
+          label={<FormattedMessage id="radiofield.label-no" defaultMessage="No" />}
         />
       </RadioGroup>
     </div>

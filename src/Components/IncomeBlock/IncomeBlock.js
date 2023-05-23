@@ -54,11 +54,8 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
 
   const createIncomeStreamsMenuItems = () => {
     const disabledSelectMenuItem = (
-      <MenuItem value='select' key='disabled-select-value' disabled>
-        <FormattedMessage
-          id='incomeBlock.createMenuItems-disabledSelectMenuItemText'
-          defaultMessage='Select'
-        />
+      <MenuItem value="select" key="disabled-select-value" disabled>
+        <FormattedMessage id="incomeBlock.createMenuItems-disabledSelectMenuItemText" defaultMessage="Select" />
       </MenuItem>
     );
     const menuItemKeys = Object.keys(incomeOptions);
@@ -77,10 +74,10 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
 
   const createFrequencyMenuItems = () => {
     const disabledSelectMenuItem = (
-      <MenuItem value='select' key='disabled-frequency-select-value' disabled>
+      <MenuItem value="select" key="disabled-frequency-select-value" disabled>
         <FormattedMessage
-          id='incomeBlock.createFrequencyMenuItems-disabledSelectMenuItemText'
-          defaultMessage='Select'
+          id="incomeBlock.createFrequencyMenuItems-disabledSelectMenuItemText"
+          defaultMessage="Select"
         />
       </MenuItem>
     );
@@ -153,20 +150,20 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   const createIncomeStreamsDropdownMenu = (incomeStreamName, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='income-type-label'>
+        <InputLabel if="income-type-label">
           <FormattedMessage
-            id='incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeInputLabel'
-            defaultMessage='Income Type'
+            id="incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeInputLabel"
+            defaultMessage="Income Type"
           />
         </InputLabel>
         <StyledSelectfield
-          labelId='income-type-label'
+          labelId="income-type-label"
           id={incomeStreamName}
           value={incomeStreamName}
           label={
             <FormattedMessage
-              id='incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeSelectLabel'
-              defaultMessage='Income Type'
+              id="incomeBlock.createIncomeStreamsDropdownMenu-incomeTypeSelectLabel"
+              defaultMessage="Income Type"
             />
           }
           onChange={(event) => {
@@ -184,39 +181,36 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     if (selectedMenuItem[index].incomeFrequency === 'hourly') {
       questionHeader = (
         <FormattedMessage
-          id='incomeBlock.createIncomeAmountTextfield-hourly-questionLabel'
-          defaultMessage='What is your hourly rate: '
+          id="incomeBlock.createIncomeAmountTextfield-hourly-questionLabel"
+          defaultMessage="What is your hourly rate: "
         />
       );
     } else {
       questionHeader = (
         <FormattedMessage
-          id='incomeBlock.createIncomeAmountTextfield-questionLabel'
-          defaultMessage='How much do you receive each pay period for: '
+          id="incomeBlock.createIncomeAmountTextfield-questionLabel"
+          defaultMessage="How much do you receive each pay period for: "
         />
       );
     }
     return (
-      <div className='bottom-border'>
-        <p className='question-label'>
+      <div className="bottom-border">
+        <p className="question-label">
           {questionHeader}
           {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
         </p>
-        <div className='income-block-textfield'>
+        <div className="income-block-textfield">
           <StyledTextField
-            type='text'
+            type="text"
             name={incomeStreamName}
             value={incomeAmount}
             label={
-              <FormattedMessage
-                id='incomeBlock.createIncomeAmountTextfield-amountLabel'
-                defaultMessage='Amount'
-              />
+              <FormattedMessage id="incomeBlock.createIncomeAmountTextfield-amountLabel" defaultMessage="Amount" />
             }
             onChange={(event) => {
               handleIncomeTextfieldChange(event, index);
             }}
-            variant='outlined'
+            variant="outlined"
             required
             error={incomeStreamValueHasError(selectedMenuItem[index].incomeAmount)}
             helperText={displayIncomeStreamValueHelperText(selectedMenuItem[index].incomeAmount)}
@@ -245,27 +239,22 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     };
     return (
       <>
-        <p className='question-label'>
+        <p className="question-label">
           <FormattedMessage
-            id='incomeBlock.createHoursWorkedTextfield-questionLabel'
-            defaultMessage='How many hours do you work per week: '
+            id="incomeBlock.createHoursWorkedTextfield-questionLabel"
+            defaultMessage="How many hours do you work per week: "
           />
           {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
         </p>
-        <div className='income-block-textfield'>
+        <div className="income-block-textfield">
           <StyledTextField
-            type='text'
+            type="text"
             value={hoursWorked}
-            label={
-              <FormattedMessage
-                id='incomeBlock.createHoursWorkedTextfield-amountLabel'
-                defaultMessage='Hours'
-              />
-            }
+            label={<FormattedMessage id="incomeBlock.createHoursWorkedTextfield-amountLabel" defaultMessage="Hours" />}
             onChange={(event) => {
               hoursWorkedChange(event, index);
             }}
-            variant='outlined'
+            variant="outlined"
             required
             error={hoursWorkedValueHasError(hoursWorked)}
             helperText={displayIncomeStreamValueHelperText(hoursWorked)}
@@ -278,28 +267,28 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     return (
       <div>
-        <p className='question-label'>
+        <p className="question-label">
           <FormattedMessage
-            id='incomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel'
-            defaultMessage='How often do you receive this income: '
+            id="incomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel"
+            defaultMessage="How often do you receive this income: "
           />
           {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
         </p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel if='income-frequency-label'>
+          <InputLabel if="income-frequency-label">
             <FormattedMessage
-              id='incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencyLabel'
-              defaultMessage='Frequency'
+              id="incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencyLabel"
+              defaultMessage="Frequency"
             />
           </InputLabel>
           <StyledSelectfield
-            labelId='income-frequency-label'
-            id='income-frequency'
+            labelId="income-frequency-label"
+            id="income-frequency"
             value={incomeFrequency}
             label={
               <FormattedMessage
-                id='incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencySelectLabel'
-                defaultMessage='Income Frequency'
+                id="incomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFrequencySelectLabel"
+                defaultMessage="Income Frequency"
               />
             }
             onChange={(event) => {
@@ -317,18 +306,18 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
     return selectedMenuItem.map((incomeSourceData, index) => {
       const { incomeStreamName, incomeAmount, incomeFrequency, hoursPerWeek } = incomeSourceData;
       const incomeStreamQuestion = (
-        <p className='question-label'>
+        <p className="question-label">
           <FormattedMessage
-            id='incomeBlock.createIncomeBlockQuestions-questionLabel'
-            defaultMessage='If you receive another type of income, select it below.'
+            id="incomeBlock.createIncomeBlockQuestions-questionLabel"
+            defaultMessage="If you receive another type of income, select it below."
           />
         </p>
       );
       return (
         <div key={index}>
           {index > 0 && (
-            <div className='delete-button-container'>
-              <StyledDeleteButton variant='contained' onClick={() => deleteIncomeBlock(index)}>
+            <div className="delete-button-container">
+              <StyledDeleteButton variant="contained" onClick={() => deleteIncomeBlock(index)}>
                 x
               </StyledDeleteButton>
             </div>
@@ -336,8 +325,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
           {index > 0 && incomeStreamQuestion}
           {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
           {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
-          {incomeFrequency === 'hourly' &&
-            createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
+          {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
           {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
         </div>
       );
@@ -345,9 +333,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
   };
 
   const deleteIncomeBlock = (selectedIndex) => {
-    const updatedSelectedMenuItems = selectedMenuItem.filter(
-      (incomeSourceData, index) => index !== selectedIndex,
-    );
+    const updatedSelectedMenuItems = selectedMenuItem.filter((incomeSourceData, index) => index !== selectedIndex);
     setSelectedMenuItem(updatedSelectedMenuItems);
   };
 
@@ -387,27 +373,24 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
         <ErrorMessage
           error={
             <FormattedMessage
-              id='incomeBlock.return-error-message'
-              defaultMessage='Please select and enter a response for all three fields'
+              id="incomeBlock.return-error-message"
+              defaultMessage="Please select and enter a response for all three fields"
             />
           }
         />
       )}
-      <Button variant='contained' onClick={(event) => handleAddAdditionalIncomeSource(event)}>
-        <FormattedMessage
-          id='incomeBlock.return-addIncomeButton'
-          defaultMessage='Add another income'
-        />
+      <Button variant="contained" onClick={(event) => handleAddAdditionalIncomeSource(event)}>
+        <FormattedMessage id="incomeBlock.return-addIncomeButton" defaultMessage="Add another income" />
       </Button>
-      <div className='prev-save-continue-buttons'>
+      <div className="prev-save-continue-buttons">
         <PreviousButton formData={formData} />
         <Button
-          variant='contained'
+          variant="contained"
           onClick={(event) => {
             handleSaveAndContinue(event);
           }}
         >
-          <FormattedMessage id='continueButton' defaultMessage='Continue' />
+          <FormattedMessage id="continueButton" defaultMessage="Continue" />
         </Button>
       </div>
     </>

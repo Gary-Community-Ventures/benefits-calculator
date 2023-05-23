@@ -11,11 +11,7 @@ import {
 import { useState } from 'react';
 
 export const isNavigationKey = (key) =>
-  key === 'Home' ||
-  key === 'End' ||
-  key.indexOf('Arrow') === 0 ||
-  key.indexOf('Page') === 0 ||
-  key === ' ';
+  key === 'Home' || key === 'End' || key.indexOf('Arrow') === 0 || key.indexOf('Page') === 0 || key === ' ';
 
 const Table = () => {
   const [filt, setFilt] = useState([

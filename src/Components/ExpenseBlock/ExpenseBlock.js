@@ -46,10 +46,10 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
       const { expenseSourceName, expenseAmount } = expenseSourceData;
 
       const expenseSourceQuestion = (
-        <p className='question-label'>
+        <p className="question-label">
           <FormattedMessage
-            id='expenseBlock.createExpenseBlockQuestions-questionLabel'
-            defaultMessage='If you have another expense, select it below.'
+            id="expenseBlock.createExpenseBlockQuestions-questionLabel"
+            defaultMessage="If you have another expense, select it below."
           />
         </p>
       );
@@ -57,12 +57,8 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
       return (
         <div key={index}>
           {index > 0 && (
-            <div className='delete-button-container'>
-              <Button
-                className='delete-button'
-                onClick={() => deleteExpenseBlock(index)}
-                variant='contained'
-              >
+            <div className="delete-button-container">
+              <Button className="delete-button" onClick={() => deleteExpenseBlock(index)} variant="contained">
                 x
               </Button>
             </div>
@@ -77,29 +73,26 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
 
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
     return (
-      <div className='bottom-border'>
-        <p className='question-label'>
+      <div className="bottom-border">
+        <p className="question-label">
           <FormattedMessage
-            id='expenseBlock.createExpenseAmountTextfield-questionLabel'
-            defaultMessage='How much is this type of expense: '
+            id="expenseBlock.createExpenseAmountTextfield-questionLabel"
+            defaultMessage="How much is this type of expense: "
           />
           {getExpenseSourceLabel(selectedMenuItem[index].expenseSourceName)}?
         </p>
-        <div className='expense-block-textfield'>
+        <div className="expense-block-textfield">
           <StyledTextField
-            type='text'
+            type="text"
             name={expenseSourceName}
             value={expenseAmount}
             label={
-              <FormattedMessage
-                id='expenseBlock.createExpenseAmountTextfield-amountLabel'
-                defaultMessage='Amount'
-              />
+              <FormattedMessage id="expenseBlock.createExpenseAmountTextfield-amountLabel" defaultMessage="Amount" />
             }
             onChange={(event) => {
               handleExpenseTextfieldChange(event, index);
             }}
-            variant='outlined'
+            variant="outlined"
             required
             error={expenseSourceValueHasError(selectedMenuItem[index].expenseAmount)}
             helperText={displayExpenseSourceValueHelperText(selectedMenuItem[index].expenseAmount)}
@@ -112,20 +105,20 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   const createExpenseDropdownMenu = (expenseSourceName, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id='expense-type-label'>
+        <InputLabel id="expense-type-label">
           <FormattedMessage
-            id='expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel'
-            defaultMessage='Expense Type'
+            id="expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel"
+            defaultMessage="Expense Type"
           />
         </InputLabel>
         <StyledSelectfield
-          labelId='expense-type-label'
+          labelId="expense-type-label"
           id={expenseSourceName}
           value={expenseSourceName}
           label={
             <FormattedMessage
-              id='expenseBlock.createExpenseDropdownMenu-expenseTypeSelectLabel'
-              defaultMessage='Expense Type'
+              id="expenseBlock.createExpenseDropdownMenu-expenseTypeSelectLabel"
+              defaultMessage="Expense Type"
             />
           }
           onChange={(event) => {
@@ -140,11 +133,8 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
 
   const createExpenseMenuItems = () => {
     const disabledSelectMenuItem = (
-      <MenuItem value='select' key='disabled-select-value' disabled>
-        <FormattedMessage
-          id='expenseBlock.createExpenseMenuItems-disabledSelectMenuItemText'
-          defaultMessage='Select'
-        />
+      <MenuItem value="select" key="disabled-select-value" disabled>
+        <FormattedMessage id="expenseBlock.createExpenseMenuItems-disabledSelectMenuItemText" defaultMessage="Select" />
       </MenuItem>
     );
 
@@ -163,9 +153,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
   };
 
   const deleteExpenseBlock = (selectedIndex) => {
-    const updatedSelectedMenuItems = selectedMenuItem.filter(
-      (expenseSourceData, index) => index !== selectedIndex,
-    );
+    const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex);
     setSelectedMenuItem(updatedSelectedMenuItems);
   };
 
@@ -226,27 +214,24 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
         <ErrorMessage
           error={
             <FormattedMessage
-              id='expenseBlock.return-error-message'
-              defaultMessage='Please select and enter a response for all three fields'
+              id="expenseBlock.return-error-message"
+              defaultMessage="Please select and enter a response for all three fields"
             />
           }
         />
       )}
-      <Button variant='contained' onClick={(event) => handleAddAdditionalExpenseSource(event)}>
-        <FormattedMessage
-          id='expenseBlock.return-addExpenseButton'
-          defaultMessage='Add another expense'
-        />
+      <Button variant="contained" onClick={(event) => handleAddAdditionalExpenseSource(event)}>
+        <FormattedMessage id="expenseBlock.return-addExpenseButton" defaultMessage="Add another expense" />
       </Button>
-      <div className='prev-save-continue-buttons'>
+      <div className="prev-save-continue-buttons">
         <PreviousButton formData={formData} />
         <Button
-          variant='contained'
+          variant="contained"
           onClick={(event) => {
             handleSaveAndContinue(event);
           }}
         >
-          <FormattedMessage id='continueButton' defaultMessage='Continue' />
+          <FormattedMessage id="continueButton" defaultMessage="Continue" />
         </Button>
       </div>
     </>

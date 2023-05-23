@@ -9,25 +9,20 @@ import pregnant from './OptionCardIcons/pregnant.png';
 
 const acuteConditionOptions = {
   food: {
-    formattedMessage: (
-      <FormattedMessage id='acuteConditionOptions.food' defaultMessage='Food or groceries' />
-    ),
+    formattedMessage: <FormattedMessage id="acuteConditionOptions.food" defaultMessage="Food or groceries" />,
     image: cart,
   },
   babySupplies: {
     formattedMessage: (
-      <FormattedMessage
-        id='acuteConditionOptions.babySupplies'
-        defaultMessage='Diapers and other baby supplies'
-      />
+      <FormattedMessage id="acuteConditionOptions.babySupplies" defaultMessage="Diapers and other baby supplies" />
     ),
     image: diaper,
   },
   housing: {
     formattedMessage: (
       <FormattedMessage
-        id='acuteConditionOptions.housing'
-        defaultMessage='Emergency help paying mortgage, rent, or utilities'
+        id="acuteConditionOptions.housing"
+        defaultMessage="Emergency help paying mortgage, rent, or utilities"
       />
     ),
     image: home,
@@ -35,8 +30,8 @@ const acuteConditionOptions = {
   support: {
     formattedMessage: (
       <FormattedMessage
-        id='acuteConditionOptions.support'
-        defaultMessage='A challenge you or your child would like to talk about'
+        id="acuteConditionOptions.support"
+        defaultMessage="A challenge you or your child would like to talk about"
       />
     ),
     image: chat,
@@ -44,7 +39,7 @@ const acuteConditionOptions = {
   childDevelopment: {
     formattedMessage: (
       <FormattedMessage
-        id='acuteConditionOptions.childDevelopment'
+        id="acuteConditionOptions.childDevelopment"
         defaultMessage="Concern about your baby or toddler's development"
       />
     ),
@@ -52,10 +47,7 @@ const acuteConditionOptions = {
   },
   familyPlanning: {
     formattedMessage: (
-      <FormattedMessage
-        id='acuteConditionOptions.familyPlanning'
-        defaultMessage='Family planning or birth control'
-      />
+      <FormattedMessage id="acuteConditionOptions.familyPlanning" defaultMessage="Family planning or birth control" />
     ),
     image: pregnant,
   },

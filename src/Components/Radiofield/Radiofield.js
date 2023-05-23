@@ -13,7 +13,7 @@ const Radiofield = ({ componentDetails, formData, handleRadioButtonChange, prefe
   const translatedAriaLabel = intl.formatMessage({ id: ariaLabel });
 
   return (
-    <div className='radiogroup-container'>
+    <div className="radiogroup-container">
       <RadioGroup
         aria-labelledby={translatedAriaLabel}
         name={inputName}
@@ -21,25 +21,20 @@ const Radiofield = ({ componentDetails, formData, handleRadioButtonChange, prefe
         onChange={handleRadioButtonChange}
       >
         <StyledFormControlLabel
-          value='true'
+          value="true"
           control={<Radio />}
-          label={<FormattedMessage id='radiofield.label-yes' defaultMessage='Yes' />}
+          label={<FormattedMessage id="radiofield.label-yes" defaultMessage="Yes" />}
         />
         <StyledFormControlLabel
-          value='false'
+          value="false"
           control={<Radio />}
-          label={<FormattedMessage id='radiofield.label-no' defaultMessage='No' />}
+          label={<FormattedMessage id="radiofield.label-no" defaultMessage="No" />}
         />
         {preferNotToAnswer && (
           <StyledFormControlLabel
-            value='preferNotToAnswer'
+            value="preferNotToAnswer"
             control={<Radio />}
-            label={
-              <FormattedMessage
-                id='radiofield.label-preferNotToAnswer'
-                defaultMessage='Prefer not to answer'
-              />
-            }
+            label={<FormattedMessage id="radiofield.label-preferNotToAnswer" defaultMessage="Prefer not to answer" />}
           />
         )}
       </RadioGroup>

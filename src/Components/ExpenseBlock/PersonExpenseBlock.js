@@ -61,10 +61,10 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
     return selectedMenuItem.map((expenseSourceData, index) => {
       const { expenseSourceName, expenseAmount, expenseFrequency } = expenseSourceData;
       const expenseSourceQuestion = (
-        <p className='question-label'>
+        <p className="question-label">
           <FormattedMessage
-            id='personExpenseBlock.createExpenseBlockQuestions-questionLabel'
-            defaultMessage='If they have another expense, select it below.'
+            id="personExpenseBlock.createExpenseBlockQuestions-questionLabel"
+            defaultMessage="If they have another expense, select it below."
           />
         </p>
       );
@@ -72,8 +72,8 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
       return (
         <div key={index}>
           {index > 0 && (
-            <div className='delete-button-container'>
-              <StyledDeleteButton variant='contained' onClick={() => deleteExpenseBlock(index)}>
+            <div className="delete-button-container">
+              <StyledDeleteButton variant="contained" onClick={() => deleteExpenseBlock(index)}>
                 x
               </StyledDeleteButton>
             </div>
@@ -90,28 +90,28 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
     return (
       <div>
-        <p className='question-label'>
+        <p className="question-label">
           <FormattedMessage
-            id='personExpenseBlock.createExpenseAmountTextfield-questionLabel'
-            defaultMessage='How much is this type of expense: '
+            id="personExpenseBlock.createExpenseAmountTextfield-questionLabel"
+            defaultMessage="How much is this type of expense: "
           />
           {selectedMenuItem[index].expenseSourceLabel}?
         </p>
-        <div className='expense-block-textfield'>
+        <div className="expense-block-textfield">
           <StyledTextField
-            type='text'
+            type="text"
             name={expenseSourceName}
             value={expenseAmount}
             label={
               <FormattedMessage
-                id='personExpenseBlock.createExpenseAmountTextfield-expenseAmountTextfieldLabel'
-                defaultMessage='Amount'
+                id="personExpenseBlock.createExpenseAmountTextfield-expenseAmountTextfieldLabel"
+                defaultMessage="Amount"
               />
             }
             onChange={(event) => {
               handleExpenseTextfieldChange(event, index);
             }}
-            variant='outlined'
+            variant="outlined"
             required
             error={expenseSourceValueHasError(selectedMenuItem[index].expenseAmount)}
             helperText={displayExpenseSourceValueHelperText(selectedMenuItem[index].expenseAmount)}
@@ -124,20 +124,20 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
   const createExpenseDropdownMenu = (expenseSourceName, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel if='expense-type-label'>
+        <InputLabel if="expense-type-label">
           <FormattedMessage
-            id='personExpenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel'
-            defaultMessage='Expense Type'
+            id="personExpenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel"
+            defaultMessage="Expense Type"
           />
         </InputLabel>
         <StyledSelectfield
-          labelId='expense-type-label'
+          labelId="expense-type-label"
           id={expenseSourceName}
           value={expenseSourceName}
           label={
             <FormattedMessage
-              id='personExpenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel'
-              defaultMessage='Expense Type'
+              id="personExpenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel"
+              defaultMessage="Expense Type"
             />
           }
           onChange={(event) => {
@@ -153,29 +153,29 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
   const createExpenseFrequencyDropdownMenu = (expenseSourceFrequency, index) => {
     return (
       <div>
-        <p className='question-label'>
+        <p className="question-label">
           <FormattedMessage
-            id='personExpenseBlock.createExpenseFrequencyDropdownMenu-questionLabel'
-            defaultMessage='How often do they have this type of expense:'
+            id="personExpenseBlock.createExpenseFrequencyDropdownMenu-questionLabel"
+            defaultMessage="How often do they have this type of expense:"
           />
           {selectedMenuItem[index].expenseSourceLabel}?
         </p>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel if='expense-frequency-label'>
+          <InputLabel if="expense-frequency-label">
             <FormattedMessage
-              id='personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencyInputLabel'
-              defaultMessage='Frequency'
+              id="personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencyInputLabel"
+              defaultMessage="Frequency"
             />
           </InputLabel>
           <StyledSelectfield
-            labelId='expense-frequency-label'
-            id='expense-frequency'
+            labelId="expense-frequency-label"
+            id="expense-frequency"
             value={expenseSourceFrequency}
             name={expenseSourceFrequency}
             label={
               <FormattedMessage
-                id='personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel'
-                defaultMessage='Expense Frequency'
+                id="personExpenseBlock.createExpenseFrequencyDropdownMenu-expenseFrequencySelectLabel"
+                defaultMessage="Expense Frequency"
               />
             }
             onChange={(event) => {
@@ -191,10 +191,10 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
 
   const createExpenseFrequencyMenuItems = () => {
     const disabledSelectMenuItem = (
-      <MenuItem value='select' key='disabled-frequency-select-value' disabled>
+      <MenuItem value="select" key="disabled-frequency-select-value" disabled>
         <FormattedMessage
-          id='personExpenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText'
-          defaultMessage='Select'
+          id="personExpenseBlock.createExpenseFrequencyMenuItems-disabledSelectMenuItemText"
+          defaultMessage="Select"
         />
       </MenuItem>
     );
@@ -215,11 +215,8 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
 
   const createExpenseMenuItems = () => {
     const disabledSelectMenuItem = (
-      <MenuItem value='select' key='disabled-select-value' disabled>
-        <FormattedMessage
-          id='personExpenseBlock.createExpenseMenuItems-disabledSelect'
-          defaultMessage='Select'
-        />
+      <MenuItem value="select" key="disabled-select-value" disabled>
+        <FormattedMessage id="personExpenseBlock.createExpenseMenuItems-disabledSelect" defaultMessage="Select" />
       </MenuItem>
     );
     const menuItemKeys = Object.keys(expenseOptions);
@@ -237,9 +234,7 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
   };
 
   const deleteExpenseBlock = (selectedIndex) => {
-    const updatedSelectedMenuItems = selectedMenuItem.filter(
-      (expenseSourceData, index) => index !== selectedIndex,
-    );
+    const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex);
     setSelectedMenuItem(updatedSelectedMenuItems);
 
     const updatedHouseholdData = state.householdData.map((personData, i) => {
@@ -324,24 +319,21 @@ const PersonExpenseBlock = ({ personData, state, setState, personDataIndex }) =>
 
   return (
     <>
-      <p className='question-label radio-question'>
+      <p className="question-label radio-question">
         <FormattedMessage
-          id='personExpenseBlock.return-questionLabel'
-          defaultMessage='What type of expense have they had most recently?'
+          id="personExpenseBlock.return-questionLabel"
+          defaultMessage="What type of expense have they had most recently?"
         />
       </p>
-      <p className='question-description'>
+      <p className="question-description">
         <FormattedMessage
-          id='personExpenseBlock.return-questionDescription'
-          defaultMessage='Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be.'
+          id="personExpenseBlock.return-questionDescription"
+          defaultMessage="Answer the best you can. You will be able to include additional types of expenses. The more you include, the more accurate your results will be."
         />
       </p>
       {createExpenseBlockQuestions()}
-      <Button variant='contained' onClick={(event) => handleAddAdditionalExpenseSource(event)}>
-        <FormattedMessage
-          id='personExpenseBlock.return-addExpenseButton'
-          defaultMessage='Add another expense'
-        />
+      <Button variant="contained" onClick={(event) => handleAddAdditionalExpenseSource(event)}>
+        <FormattedMessage id="personExpenseBlock.return-addExpenseButton" defaultMessage="Add another expense" />
       </Button>
     </>
   );

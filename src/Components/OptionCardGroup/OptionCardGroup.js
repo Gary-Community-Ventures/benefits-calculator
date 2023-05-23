@@ -32,18 +32,16 @@ const OptionCardGroup = ({ stateVariable, options, state, setState }) => {
         <CardActionArea
           key={index}
           sx={{ width: '179px' }}
-          className='card-action-area'
+          className="card-action-area"
           onClick={() => {
             handleCardClick(optionKey);
           }}
         >
           <Card
-            className={
-              state[stateVariable][optionKey] ? 'selected-option-card' : 'unselected-option-card'
-            }
+            className={state[stateVariable][optionKey] ? 'selected-option-card' : 'unselected-option-card'}
             sx={{ width: '179px', height: '174px', display: 'grid', placeItems: 'center' }}
           >
-            <div className='option-card-image'>
+            <div className="option-card-image">
               <img src={options[optionKey].image} alt={translatedAriaLabel} />
             </div>
             <CardContent sx={{ textAlign: 'center', padding: '.35rem' }}>
@@ -56,7 +54,7 @@ const OptionCardGroup = ({ stateVariable, options, state, setState }) => {
 
     return optionCards;
   };
-  return <div className='option-card-container'>{createOptionCards()}</div>;
+  return <div className="option-card-container">{createOptionCards()}</div>;
 };
 
 export default OptionCardGroup;

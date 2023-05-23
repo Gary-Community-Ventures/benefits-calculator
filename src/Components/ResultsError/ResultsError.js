@@ -10,28 +10,25 @@ const ResultsError = () => {
 
   return (
     <main>
-      <div className='error-container'>
-        <ErrorIcon className='error-icon' />
-        <h1 className='error-header'>
-          <FormattedMessage
-            id='results-error.header'
-            defaultMessage='Oops! Looks like something went wrong.'
-          />
+      <div className="error-container">
+        <ErrorIcon className="error-icon" />
+        <h1 className="error-header">
+          <FormattedMessage id="results-error.header" defaultMessage="Oops! Looks like something went wrong." />
         </h1>
-        <p className='error-message'>
+        <p className="error-message">
           <FormattedMessage
-            id='results-error.message'
+            id="results-error.message"
             defaultMessage="We're sorry. We are having some trouble completing your request. Please make sure you have completed all of the questions on the screen and try again. If you are still unable to load your benefits results, please contact myfriendben@garycommunity.org."
           />
         </p>
         <Button
-          className='error-button'
+          className="error-button"
           onClick={() => {
             navigate(`/${uuid}/confirm-information`);
           }}
-          variant='contained'
+          variant="contained"
         >
-          <FormattedMessage id='results-error.button' defaultMessage='Back to Screener' />
+          <FormattedMessage id="results-error.button" defaultMessage="Back to Screener" />
         </Button>
       </div>
     </main>

@@ -32,9 +32,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
     const firstNameProps = {
       inputType: 'text',
       inputName: 'firstName',
-      inputLabel: (
-        <FormattedMessage id='signUp.createFirstNameTextfield-label' defaultMessage='First Name' />
-      ),
+      inputLabel: <FormattedMessage id="signUp.createFirstNameTextfield-label" defaultMessage="First Name" />,
       inputError: nameHasError,
       inputHelperText: displayFirstNameHelperText,
     };
@@ -46,9 +44,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
     const lastNameProps = {
       inputType: 'text',
       inputName: 'lastName',
-      inputLabel: (
-        <FormattedMessage id='signUp.createLastNameTextfield-label' defaultMessage='Last Name' />
-      ),
+      inputLabel: <FormattedMessage id="signUp.createLastNameTextfield-label" defaultMessage="Last Name" />,
       inputError: nameHasError,
       inputHelperText: displayLastNameHelperText,
     };
@@ -60,9 +56,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
     const emailProps = {
       inputType: 'text',
       inputName: 'email',
-      inputLabel: (
-        <FormattedMessage id='signUp.createEmailTextfield-label' defaultMessage='Email' />
-      ),
+      inputLabel: <FormattedMessage id="signUp.createEmailTextfield-label" defaultMessage="Email" />,
       inputError: emailHasError,
       inputHelperText: displayEmailHelperText,
     };
@@ -74,9 +68,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
     const phoneProps = {
       inputType: 'tel',
       inputName: 'phone',
-      inputLabel: (
-        <FormattedMessage id='signUp.createPhoneTextfield-label' defaultMessage='Cell Phone' />
-      ),
+      inputLabel: <FormattedMessage id="signUp.createPhoneTextfield-label" defaultMessage="Cell Phone" />,
       inputError: phoneHasError,
       inputHelperText: displayPhoneHasErrorHelperText,
     };
@@ -90,7 +82,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
         componentDetails={componentProps}
         formData={formData.signUpInfo}
         handleTextfieldChange={handleTextfieldChange}
-        index='0'
+        index="0"
       />
     );
   };
@@ -98,10 +90,10 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
   const displayDisclosureSection = () => {
     return (
       <>
-        <Typography variant='body1' sx={{ mt: '1rem' }} style={{ fontWeight: 600 }}>
+        <Typography variant="body1" sx={{ mt: '1rem' }} style={{ fontWeight: 600 }}>
           <FormattedMessage
-            id='signUp.displayDisclosureSection-consentText'
-            defaultMessage='By filling out this form, you agree to future contact from Gary Philanthropy or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication.'
+            id="signUp.displayDisclosureSection-consentText"
+            defaultMessage="By filling out this form, you agree to future contact from Gary Philanthropy or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication."
           />
         </Typography>
         <FormControlLabel
@@ -110,38 +102,38 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
             <Checkbox
               checked={formData.signUpInfo.commConsent}
               onChange={handleCheckboxChange}
-              name='commConsent'
+              name="commConsent"
               required
             />
           }
           label={
             <div>
               <FormattedMessage
-                id='signUp.displayDisclosureSection-consentCheck1'
+                id="signUp.displayDisclosureSection-consentCheck1"
                 defaultMessage="I have read, understand, and agree to the terms of My Friend Ben's "
               />
               <FormattedMessage
-                id='emailResults.return-consentCheck'
-                defaultMessage='{linkVal}'
+                id="emailResults.return-consentCheck"
+                defaultMessage="{linkVal}"
                 values={{
                   linkVal: (
                     <a
-                      className='sign-up-data-privacy-link'
+                      className="sign-up-data-privacy-link"
                       href={privacyLink}
-                      target='_blank'
-                      rel='noopener noreferrer'
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       <FormattedMessage
-                        id='signUp.displayDisclosureSection-consentCheckLink'
-                        defaultMessage='data privacy policy '
+                        id="signUp.displayDisclosureSection-consentCheckLink"
+                        defaultMessage="data privacy policy "
                       />
                     </a>
                   ),
                 }}
               />
               <FormattedMessage
-                id='signUp.displayDisclosureSection-consentCheck4'
-                defaultMessage=' and consent to contact.'
+                id="signUp.displayDisclosureSection-consentCheck4"
+                defaultMessage=" and consent to contact."
               />
             </div>
           }
@@ -158,7 +150,7 @@ const SignUp = ({ formData, handleTextfieldChange, handleCheckboxChange }) => {
 
   return (
     <>
-      <div className='bottom-border'>
+      <div className="bottom-border">
         <Grid xs={12} item marginTop={'1.5rem'}>
           {createFirstNameTextfield()}
           {createLastNameTextfield()}

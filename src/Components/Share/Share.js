@@ -55,7 +55,7 @@ const Share = forwardRef(function Share({ close }, ref) {
     return (
       <span className={`${color} icon`}>
         {children}
-        <span className='icon-name'>{name}</span>
+        <span className="icon-name">{name}</span>
       </span>
     );
   };
@@ -73,9 +73,9 @@ const Share = forwardRef(function Share({ close }, ref) {
   };
 
   return (
-    <div className='container'>
+    <div className="container">
       <IconButton
-        aria-label='close'
+        aria-label="close"
         onClick={close}
         sx={{
           position: 'absolute',
@@ -85,33 +85,30 @@ const Share = forwardRef(function Share({ close }, ref) {
       >
         <CloseIcon />
       </IconButton>
-      <h2 className='share-header'>
-        <FormattedMessage
-          id='results.share-header'
-          defaultMessage='Share MyFriendBen with a friend:'
-        />
+      <h2 className="share-header">
+        <FormattedMessage id="results.share-header" defaultMessage="Share MyFriendBen with a friend:" />
       </h2>
-      <div className='icons'>
-        <div className='row-group'>
+      <div className="icons">
+        <div className="row-group">
           <FacebookShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Facebook')}>
-            <Icon name='Facebook' color='facebook'>
+            <Icon name="Facebook" color="facebook">
               <FacebookIcon sx={iconSize} />
             </Icon>
           </FacebookShareButton>
           <TwitterShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Twitter')}>
-            <Icon name='Twitter' color='twitter'>
+            <Icon name="Twitter" color="twitter">
               <TwitterIcon sx={iconSize} />
             </Icon>
           </TwitterShareButton>
           <EmailShareButton url={shareUrl} onClick={trackOutboundLinks('Share With Email')}>
-            <Icon name={labels.email} color='gray'>
+            <Icon name={labels.email} color="gray">
               <EmailIcon sx={iconSize} />
             </Icon>
           </EmailShareButton>
         </div>
-        <div className='row-group'>
+        <div className="row-group">
           <WhatsappShareButton url={shareUrl} onClick={trackOutboundLinks('Share With WhatsApp')}>
-            <Icon name='WhatsApp' color='whatsApp'>
+            <Icon name="WhatsApp" color="whatsApp">
               <WhatsAppIcon sx={iconSize} />
             </Icon>
           </WhatsappShareButton>
@@ -120,12 +117,12 @@ const Share = forwardRef(function Share({ close }, ref) {
             appId={appId}
             onClick={trackOutboundLinks('Share With Facebook Messanger')}
           >
-            <Icon name='Messenger' color='messenger'>
+            <Icon name="Messenger" color="messenger">
               <FacebookMessengerIcon size={20.5} />
             </Icon>
           </FacebookMessengerShareButton>
-          <button onClick={copyLink} className='button-no-format'>
-            <Icon name={copied ? labels.copied : labels.copyLink} color='gray'>
+          <button onClick={copyLink} className="button-no-format">
+            <Icon name={copied ? labels.copied : labels.copyLink} color="gray">
               {copied ? <CheckIcon sx={iconSize} /> : <LinkIcon sx={iconSize} />}
             </Icon>
           </button>

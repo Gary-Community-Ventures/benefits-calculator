@@ -16,12 +16,7 @@ const displayAgeHelperText = (applicantAge) => {
   const minimumAge = 13;
   const maximumAge = 130;
   if (numberApplicantAge < minimumAge || numberApplicantAge > maximumAge) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.age'
-        defaultMessage='Please enter a valid age (13-130)'
-      />
-    );
+    return <FormattedMessage id="validation-helperText.age" defaultMessage="Please enter a valid age (13-130)" />;
   }
 };
 
@@ -39,12 +34,7 @@ const zipcodeHasError = (zipcode) => {
 
 const displayZipcodeHelperText = (zipcode) => {
   if (zipcodeHasError(zipcode)) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.zipcode'
-        defaultMessage='Please enter a valid CO zip code'
-      />
-    );
+    return <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />;
   }
 };
 
@@ -63,10 +53,7 @@ const incomeStreamValueHasError = (valueInput) => {
 const displayIncomeStreamValueHelperText = (valueInput) => {
   if (incomeStreamValueHasError(valueInput)) {
     return (
-      <FormattedMessage
-        id='validation-helperText.incomeValue'
-        defaultMessage='Please enter a number greater than 0'
-      />
+      <FormattedMessage id="validation-helperText.incomeValue" defaultMessage="Please enter a number greater than 0" />
     );
   }
 };
@@ -97,10 +84,7 @@ const expenseSourceValueHasError = (valueInput) => {
 const displayExpenseSourceValueHelperText = (valueInput) => {
   if (expenseSourceValueHasError(valueInput)) {
     return (
-      <FormattedMessage
-        id='validation-helperText.expenseValue'
-        defaultMessage='Please enter a number greater than 0'
-      />
+      <FormattedMessage id="validation-helperText.expenseValue" defaultMessage="Please enter a number greater than 0" />
     );
   }
 };
@@ -123,10 +107,7 @@ const displayHouseholdSizeHelperText = (sizeOfHousehold) => {
   const numValueInput = Number(sizeOfHousehold);
   return (
     (numValueInput <= 0 || numValueInput > 8) && (
-      <FormattedMessage
-        id='validation-helperText.householdSize'
-        defaultMessage='Number of People (max. 8)'
-      />
+      <FormattedMessage id="validation-helperText.householdSize" defaultMessage="Number of People (max. 8)" />
     )
   );
 };
@@ -137,21 +118,14 @@ const householdAssetsHasError = (householdAssets) => {
 
 const displayHouseholdAssetsHelperText = (householdAssets) => {
   if (householdAssetsHasError(householdAssets)) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.assets'
-        defaultMessage='Please enter 0 or a positive number.'
-      />
-    );
+    return <FormattedMessage id="validation-helperText.assets" defaultMessage="Please enter 0 or a positive number." />;
   }
 };
 
 const housingSourcesAreValid = (selectedHousing) => {
   const housingKeys = Object.keys(selectedHousing);
   const preferNotToSay = selectedHousing.preferNotToSay === true;
-  const atLeastOneOptionWasSelected = housingKeys.some(
-    (housingKey) => selectedHousing[housingKey] === true,
-  );
+  const atLeastOneOptionWasSelected = housingKeys.some((housingKey) => selectedHousing[housingKey] === true);
   if (preferNotToSay) {
     const numberOfTrues = Object.values(selectedHousing).filter((value) => value === true).length;
     return numberOfTrues === 1;
@@ -171,10 +145,7 @@ const displayHouseholdMemberAgeHelperText = (applicantAge) => {
 
   if (numberApplicantAge < 0) {
     return (
-      <FormattedMessage
-        id='validation-helperText.hHMemberAge'
-        defaultMessage='Please enter 0 or a positive number'
-      />
+      <FormattedMessage id="validation-helperText.hHMemberAge" defaultMessage="Please enter 0 or a positive number" />
     );
   }
 };
@@ -195,22 +166,19 @@ const getPersonDataErrorMsg = (householdDataState) => {
   if (Number(age) < 0 || age === '') {
     return (
       <FormattedMessage
-        id='validation-helperText.hhMemberAgeB'
+        id="validation-helperText.hhMemberAgeB"
         defaultMessage="Please enter 0 or a positive number for the household member's age"
       />
     );
   } else if (relationshipToHH === '') {
     return (
-      <FormattedMessage
-        id='validation-helperText.hhMemberRelation'
-        defaultMessage='Please select a relation option'
-      />
+      <FormattedMessage id="validation-helperText.hhMemberRelation" defaultMessage="Please select a relation option" />
     );
   } else if (hasIncome && incomeStreamsAreValid(incomeStreams) === false) {
     return (
       <FormattedMessage
-        id='validation-helperText.hhMemberIncome'
-        defaultMessage='Please select and enter a response for all three income fields'
+        id="validation-helperText.hhMemberIncome"
+        defaultMessage="Please select and enter a response for all three income fields"
       />
     );
   } else {
@@ -224,12 +192,7 @@ const emailHasError = (email) => {
 
 const displayEmailHelperText = (email) => {
   if (emailHasError(email)) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.email'
-        defaultMessage='Please enter a valid email address'
-      />
-    );
+    return <FormattedMessage id="validation-helperText.email" defaultMessage="Please enter a valid email address" />;
   }
 };
 
@@ -239,12 +202,7 @@ const lastTaxFilingYearHasError = (year) => {
 
 const displayMissingTaxFilingYear = (year) => {
   if (lastTaxFilingYearHasError(year)) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.lastTaxFilingYear'
-        defaultMessage='Please select a year'
-      />
-    );
+    return <FormattedMessage id="validation-helperText.lastTaxFilingYear" defaultMessage="Please select a year" />;
   }
 };
 
@@ -254,23 +212,13 @@ const referralSourceHasError = (referralSource) => {
 
 const displayReferralSourceHelperText = (source) => {
   if (referralSourceHasError(source)) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.referralSource'
-        defaultMessage='Please type in your source.'
-      />
-    );
+    return <FormattedMessage id="validation-helperText.referralSource" defaultMessage="Please type in your source." />;
   }
 };
 
 const displayMissingSelectHelperText = (source) => {
   if (referralSourceHasError(source)) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.selectOption'
-        defaultMessage='Please select an option.'
-      />
-    );
+    return <FormattedMessage id="validation-helperText.selectOption" defaultMessage="Please select an option." />;
   }
 };
 
@@ -280,23 +228,13 @@ const nameHasError = (name) => {
 
 const displayFirstNameHelperText = (firstName) => {
   if (nameHasError(firstName)) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.firstName'
-        defaultMessage='Please enter your first name'
-      />
-    );
+    return <FormattedMessage id="validation-helperText.firstName" defaultMessage="Please enter your first name" />;
   }
 };
 
 const displayLastNameHelperText = (lastName) => {
   if (nameHasError(lastName)) {
-    return (
-      <FormattedMessage
-        id='validation-helperText.lastName'
-        defaultMessage='Please enter your last name'
-      />
-    );
+    return <FormattedMessage id="validation-helperText.lastName" defaultMessage="Please enter your last name" />;
   }
 };
 
@@ -308,17 +246,13 @@ const phoneHasError = (phoneNumber) => {
 const displayPhoneHasErrorHelperText = (phoneNumber) => {
   if (phoneHasError(phoneNumber)) {
     return (
-      <FormattedMessage
-        id='validation-helperText.phoneNumber'
-        defaultMessage='Please enter a 10 digit phone number'
-      />
+      <FormattedMessage id="validation-helperText.phoneNumber" defaultMessage="Please enter a 10 digit phone number" />
     );
   }
 };
 
 const signUpFormHasError = (props) => {
-  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent, hasUser } =
-    props;
+  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent, hasUser } = props;
   const atLeastOneCheckboxSelectionWasMade = sendUpdates === true || sendOffers === true;
   if (hasUser === true) {
     return false;
@@ -339,8 +273,8 @@ const displayNoEmailOrPhoneHelperText = (email, phone) => {
   if (!email && !phone) {
     return (
       <FormattedMessage
-        id='validation-helperText.noEmailOrPhoneNumber'
-        defaultMessage='Please enter an email or phone number'
+        id="validation-helperText.noEmailOrPhoneNumber"
+        defaultMessage="Please enter an email or phone number"
       />
     );
   }
@@ -363,15 +297,15 @@ const displaySignUpFormHelperText = (props) => {
   } else if (atLeastOneCheckboxSelectionWasMade === false) {
     return (
       <FormattedMessage
-        id='validation-helperText.notificationSelection'
-        defaultMessage='Please select a notification option'
+        id="validation-helperText.notificationSelection"
+        defaultMessage="Please select a notification option"
       />
     );
   } else if (commConsent === false) {
     return (
       <FormattedMessage
-        id='validation-helperText.consentCheckbox'
-        defaultMessage='Please check the box above to sign up for the selected notifications'
+        id="validation-helperText.consentCheckbox"
+        defaultMessage="Please check the box above to sign up for the selected notifications"
       />
     );
   }
@@ -390,9 +324,7 @@ const signUpOptionsHaveError = (signUpInfo) => {
 
 const healthInsuranceHasError = (healthInsuranceSelections) => {
   const healthInsuranceKeys = Object.keys(healthInsuranceSelections);
-  const noOptionWasSelected = healthInsuranceKeys.every(
-    (option) => healthInsuranceSelections[option] === false,
-  );
+  const noOptionWasSelected = healthInsuranceKeys.every((option) => healthInsuranceSelections[option] === false);
   return noOptionWasSelected;
 };
 
@@ -400,7 +332,7 @@ const displayHealthInsuranceHelperText = (healthInsuranceSelections) => {
   if (healthInsuranceHasError(healthInsuranceSelections)) {
     return (
       <FormattedMessage
-        id='validation-helperText.healthInsurance'
+        id="validation-helperText.healthInsurance"
         defaultMessage='If none of these apply, please select "One or more household member(s) do not have health insurance"'
       />
     );
@@ -416,9 +348,7 @@ const benefitsHasError = (hasBenefits, formData) => {
     return false;
   } else if (hasBenefits === 'true') {
     const { benefits } = formData;
-    const selectedAtLeastOneBenefit = Object.keys(benefits).some(
-      (benefit) => formData.benefits[benefit] === true,
-    );
+    const selectedAtLeastOneBenefit = Object.keys(benefits).some((benefit) => formData.benefits[benefit] === true);
 
     //return the opposite since we're indicating whether or not there's an error
     return !selectedAtLeastOneBenefit;
@@ -429,7 +359,7 @@ const displayBenefitsHelperText = (hasBenefits, formData) => {
   if (benefitsHasError(hasBenefits, formData)) {
     return (
       <FormattedMessage
-        id='validation-helperText.benefits'
+        id="validation-helperText.benefits"
         defaultMessage='If your household does not receive any of these benefits, please select the "No" option above.'
       />
     );

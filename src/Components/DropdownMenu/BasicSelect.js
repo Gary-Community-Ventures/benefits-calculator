@@ -7,8 +7,7 @@ const StyledSelectfield = styled(Select)({
 });
 
 const BasicSelect = ({ componentProperties, setFormData, formData, options, formDataProperty }) => {
-  const { labelId, inputLabelText, id, value, label, disabledSelectMenuItemText } =
-    componentProperties;
+  const { labelId, inputLabelText, id, value, label, disabledSelectMenuItemText } = componentProperties;
 
   const handleBasicSelect = (event, formProperty) => {
     setFormData({ ...formData, [formProperty]: event.target.value });
@@ -16,7 +15,7 @@ const BasicSelect = ({ componentProperties, setFormData, formData, options, form
 
   const createMenuItems = () => {
     const disabledSelectMenuItem = (
-      <MenuItem value='disabled-select' key='disabled-select' disabled>
+      <MenuItem value="disabled-select" key="disabled-select" disabled>
         {disabledSelectMenuItemText}
       </MenuItem>
     );

@@ -85,21 +85,13 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
   const createFMInputLabel = (personIndex) => {
     if (personIndex === 1) {
-      return (
-        <FormattedMessage
-          id='householdDataBlock.createFMInputLabel-headOfHH'
-          defaultMessage='Your Age'
-        />
-      );
+      return <FormattedMessage id="householdDataBlock.createFMInputLabel-headOfHH" defaultMessage="Your Age" />;
     } else {
       return (
         <>
-          <FormattedMessage
-            id='householdDataBlock.createFMInputLabel-person'
-            defaultMessage='Person '
-          />
+          <FormattedMessage id="householdDataBlock.createFMInputLabel-person" defaultMessage="Person " />
           {personIndex}
-          <FormattedMessage id='householdDataBlock.createFMInputLabel-age' defaultMessage=' Age' />
+          <FormattedMessage id="householdDataBlock.createFMInputLabel-age" defaultMessage=" Age" />
         </>
       );
     }
@@ -118,33 +110,30 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     if (personIndex === 1) {
       return (
         <>
-          <h2 className='question-label'>
+          <h2 className="question-label">
             <FormattedMessage
-              id='householdDataBlock.createAgeQuestion-how-headOfHH'
-              defaultMessage='How old are you?'
+              id="householdDataBlock.createAgeQuestion-how-headOfHH"
+              defaultMessage="How old are you?"
             />
           </h2>
           {createTextField(ageTextfieldProps)}
-          <p className='household-data-q-underline'></p>
+          <p className="household-data-q-underline"></p>
         </>
       );
     } else {
       return (
         <>
-          <h2 className='question-label'>
-            <FormattedMessage
-              id='householdDataBlock.createAgeQuestion-how'
-              defaultMessage='How old are they?'
-            />
+          <h2 className="question-label">
+            <FormattedMessage id="householdDataBlock.createAgeQuestion-how" defaultMessage="How old are they?" />
           </h2>
-          <p className='question-description'>
+          <p className="question-description">
             <FormattedMessage
-              id='householdDataBlock.createAgeQuestion-zero'
-              defaultMessage='If your child is less than a year old, enter 0.'
+              id="householdDataBlock.createAgeQuestion-zero"
+              defaultMessage="If your child is less than a year old, enter 0."
             />
           </p>
           {createTextField(ageTextfieldProps)}
-          <p className='household-data-q-underline'></p>
+          <p className="household-data-q-underline"></p>
         </>
       );
     }
@@ -172,14 +161,14 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const createHOfHRelationQuestion = () => {
     return (
       <>
-        <h2 className='question-label'>
+        <h2 className="question-label">
           <FormattedMessage
-            id='householdDataBlock.createHOfHRelationQuestion-relation'
-            defaultMessage='What is this person’s relationship to you?'
+            id="householdDataBlock.createHOfHRelationQuestion-relation"
+            defaultMessage="What is this person’s relationship to you?"
           />
         </h2>
         {createRelationshipDropdownMenu()}
-        <p className='household-data-q-underline'></p>
+        <p className="household-data-q-underline"></p>
       </>
     );
   };
@@ -191,9 +180,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const createMembersAdded = (member, index) => {
     let relationship = relationshipOptions[member.relationshipToHH];
     if (relationship === undefined) {
-      relationship = (
-        <FormattedMessage id='relationshipOptions.yourself' defaultMessage='Yourself' />
-      );
+      relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
     }
     const age = member.age;
     let income = 0;
@@ -217,15 +204,15 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     }
 
     return (
-      <span className='member-added-container' key={index}>
-        <h3 className='member-added-relationship'>{relationship}:</h3>
-        <div className='member-added-age'>
-          <FormattedMessage id='questions.age-inputLabel' defaultMessage='Age' />: {age}
+      <span className="member-added-container" key={index}>
+        <h3 className="member-added-relationship">{relationship}:</h3>
+        <div className="member-added-age">
+          <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />: {age}
         </div>
-        <div className='member-added-income'>
-          <FormattedMessage id='householdDataBlock.member-income' defaultMessage='Income' />:{' '}
+        <div className="member-added-income">
+          <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income" />:{' '}
           {formatToUSD(Number(income))}
-          <FormattedMessage id='displayAnnualIncome.annual' defaultMessage=' annually' />
+          <FormattedMessage id="displayAnnualIncome.annual" defaultMessage=" annually" />
         </div>
       </span>
     );
@@ -235,19 +222,16 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     let header;
     if (personIndex === 1) {
       header = (
-        <h1 className='question-label household-data-q-underline'>
-          <FormattedMessage
-            id='householdDataBlock.questionHeader'
-            defaultMessage='Tell us about yourself.'
-          />
+        <h1 className="question-label household-data-q-underline">
+          <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
         </h1>
       );
     } else {
       header = (
-        <h1 className='question-label household-data-q-underline'>
+        <h1 className="question-label household-data-q-underline">
           <FormattedMessage
-            id='questions.householdData'
-            defaultMessage='Tell us about the next person in your household.'
+            id="questions.householdData"
+            defaultMessage="Tell us about the next person in your household."
           />
         </h1>
       );
@@ -255,11 +239,11 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <>
         {header}
-        <h2 className='household-data-sub-header'>
-          <FormattedMessage id='qcc.so-far-text' defaultMessage="So far you've told us about:" />
+        <h2 className="household-data-sub-header">
+          <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
         </h2>
         <div>{formData.householdData.map(createMembersAdded)}</div>
-        <div className='household-data-q-underline'></div>
+        <div className="household-data-q-underline"></div>
       </>
     );
   };
@@ -268,22 +252,14 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     const dropdownCompProps = {
       labelId: 'relation-to-hh-label',
       inputLabelText: (
-        <FormattedMessage
-          id='householdDataBlock.createDropdownCompProps-inputLabelText'
-          defaultMessage='Relation'
-        />
+        <FormattedMessage id="householdDataBlock.createDropdownCompProps-inputLabelText" defaultMessage="Relation" />
       ),
       id: 'relationship-select',
-      label: (
-        <FormattedMessage
-          id='householdDataBlock.createDropdownCompProps-label'
-          defaultMessage='Relation Type'
-        />
-      ),
+      label: <FormattedMessage id="householdDataBlock.createDropdownCompProps-label" defaultMessage="Relation Type" />,
       disabledSelectMenuItemText: (
         <FormattedMessage
-          id='householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText'
-          defaultMessage='Click to select relationship'
+          id="householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText"
+          defaultMessage="Click to select relationship"
         />
       ),
     };
@@ -319,17 +295,16 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         ? 'householdDataBlock.createConditionsQuestion-do-these-apply-to-you'
         : 'householdDataBlock.createConditionsQuestion-do-these-apply';
 
-    const formattedMsgDefaultMsg =
-      index === 1 ? 'Do any of these apply to you?' : 'Do any of these apply to them?';
+    const formattedMsgDefaultMsg = index === 1 ? 'Do any of these apply to you?' : 'Do any of these apply to them?';
 
     return (
       <>
-        <h2 className='question-label'>
+        <h2 className="question-label">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </h2>
-        <p className='question-description'>
+        <p className="question-description">
           <FormattedMessage
-            id='householdDataBlock.createConditionsQuestion-pick'
+            id="householdDataBlock.createConditionsQuestion-pick"
             defaultMessage="It's OK to pick more than one."
           />
         </p>
@@ -350,12 +325,11 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         ? 'householdDataBlock.createFTStudentRadioQuestion-youQLabel'
         : 'householdDataBlock.createFTStudentRadioQuestion-questionLabel';
 
-    const formattedMsgDefaultMsg =
-      index === 1 ? 'Are you a full-time student' : 'Are they a full-time student?';
+    const formattedMsgDefaultMsg = index === 1 ? 'Are you a full-time student' : 'Are they a full-time student?';
 
     return (
       <>
-        <h2 className='question-label radio-question'>
+        <h2 className="question-label radio-question">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </h2>
         <HHDataRadiofield
@@ -384,7 +358,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
     return (
       <>
-        <h2 className='question-label radio-question'>
+        <h2 className="question-label radio-question">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </h2>
         <HHDataRadiofield
@@ -404,9 +378,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     };
 
     const formattedMsgId =
-      index === 1
-        ? 'questions.hasIncome'
-        : 'householdDataBlock.createIncomeRadioQuestion-questionLabel';
+      index === 1 ? 'questions.hasIncome' : 'householdDataBlock.createIncomeRadioQuestion-questionLabel';
 
     const formattedMsgDefaultMsg =
       index === 1
@@ -415,13 +387,13 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
 
     return (
       <>
-        <h2 className='question-label radio-question'>
+        <h2 className="question-label radio-question">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </h2>
-        <p className='question-description'>
+        <p className="question-description">
           <FormattedMessage
-            id='householdDataBlock.createIncomeRadioQuestion-questionDescription'
-            defaultMessage='This includes money from jobs, alimony, investments, or gifts.'
+            id="householdDataBlock.createIncomeRadioQuestion-questionDescription"
+            defaultMessage="This includes money from jobs, alimony, investments, or gifts."
           />
         </p>
         <HHDataRadiofield
@@ -436,24 +408,13 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   const createPersonIncomeBlock = (index) => {
     return (
       <>
-        <PersonIncomeBlock
-          householdData={householdData}
-          setHouseholdData={setHouseholdData}
-          page={page}
-        />
-        <p className='household-data-q-underline'></p>
+        <PersonIncomeBlock householdData={householdData} setHouseholdData={setHouseholdData} page={page} />
+        <p className="household-data-q-underline"></p>
       </>
     );
   };
 
-  const handleContinueSubmit = (
-    event,
-    validateInputFunction,
-    inputToBeValidated,
-    stepId,
-    questionName,
-    uuid,
-  ) => {
+  const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
     const validPersonData = personDataIsValid(householdData);
     const lastHouseholdMember = page >= remainingHHMNumber;
@@ -479,7 +440,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
   };
 
   return (
-    <div className='household-member-container'>
+    <div className="household-member-container">
       <div>
         {createQuestionHeader(page)}
         {createAgeQuestion(page)}
@@ -487,12 +448,12 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         {createConditionsQuestion(page)}
         {householdData.student && createFTStudentRadioQuestion(page)}
         {householdData.unemployed && createUnemployed18MosRadioQuestion(page)}
-        <p className='household-data-q-underline'></p>
+        <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}
-        <p className='household-data-q-underline'></p>
+        <p className="household-data-q-underline"></p>
         {householdData.hasIncome && createPersonIncomeBlock(page)}
         {error !== '' && <ErrorMessage error={error} />}
-        <div className='question-buttons'>
+        <div className="question-buttons">
           <PreviousButton navFunction={handlePreviousSubmit} formData={formData} />
           <ContinueButton handleContinueSubmit={handleContinueSubmit} />
         </div>

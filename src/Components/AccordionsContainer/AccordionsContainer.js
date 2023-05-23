@@ -68,7 +68,7 @@ const AccordionsContainer = ({ formData, setFormData }) => {
     return categoryAccordions;
   };
 
-  return <div className='accordions-container'>{createAccordions(accordionsData)}</div>;
+  return <div className="accordions-container">{createAccordions(accordionsData)}</div>;
 };
 
 export default AccordionsContainer;

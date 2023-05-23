@@ -10,7 +10,7 @@ const ProgressBar = ({ step }) => {
   step = step ?? id;
 
   return (
-    <aside className='progress-bar-container'>
+    <aside className="progress-bar-container">
       <LinearProgress
         sx={{
           marginBottom: '5px',
@@ -20,20 +20,19 @@ const ProgressBar = ({ step }) => {
           height: '1rem',
           boxShadow: 'inset -1px 1px 3px rgb(0 0 0 / 0.2)',
           '& .MuiLinearProgress-bar': {
-            background:
-              'linear-gradient(90deg, hsla(189, 100%, 35%, 1) 0%, hsla(176, 56%, 55%, 1) 100%)',
+            background: 'linear-gradient(90deg, hsla(189, 100%, 35%, 1) 0%, hsla(176, 56%, 55%, 1) 100%)',
             borderRadius: '500rem;',
           },
         }}
-        variant='determinate'
+        variant="determinate"
         value={(step / totalSteps) * 100}
-        className='progress-bar'
-        aria-label='Progress Bar'
+        className="progress-bar"
+        aria-label="Progress Bar"
       />
-      <p className='step-progress-title'>
-        <FormattedMessage id='confirmation.return-stepLabel' defaultMessage='Step ' />
+      <p className="step-progress-title">
+        <FormattedMessage id="confirmation.return-stepLabel" defaultMessage="Step " />
         {step}
-        <FormattedMessage id='confirmation.return-ofLabel' defaultMessage=' of ' />
+        <FormattedMessage id="confirmation.return-ofLabel" defaultMessage=" of " />
         {totalSteps}
       </p>
     </aside>

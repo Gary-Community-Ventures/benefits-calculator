@@ -4,8 +4,7 @@ const getScreensBody = (formData, languageCode) => {
   const householdMembers = getHouseholdMembersBodies(formData);
   const expenses = getExpensesBodies(formData);
 
-  const finalReferralSource =
-    formData.otherSource !== '' ? formData.otherSource : formData.referralSource;
+  const finalReferralSource = formData.otherSource !== '' ? formData.otherSource : formData.referralSource;
   const screenBody = {
     is_test: formData.isTest,
     external_id: formData.externalID,
@@ -110,8 +109,7 @@ const getExpensesBodies = (formData) => {
 };
 
 const getUserBody = (formData, languageCode) => {
-  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } =
-    formData.signUpInfo;
+  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = formData.signUpInfo;
   const phoneNumber = '+1' + phone;
 
   const user = {

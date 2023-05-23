@@ -17,10 +17,7 @@ import Textfield from '../Textfield/Textfield';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import './EmailResults.css';
 
-const EmailResults = forwardRef(function EmailResults(
-  { formData, handleTextfieldChange, screenId, close },
-  ref,
-) {
+const EmailResults = forwardRef(function EmailResults({ formData, handleTextfieldChange, screenId, close }, ref) {
   const [copied, setCopied] = useState(false);
   const [state, setState] = useState({
     open: false,
@@ -33,7 +30,7 @@ const EmailResults = forwardRef(function EmailResults(
     const emailProps = {
       inputType: 'text',
       inputName: type,
-      inputLabel: <FormattedMessage id={inputLabelId} defaultMessage='Email' />,
+      inputLabel: <FormattedMessage id={inputLabelId} defaultMessage="Email" />,
       inputError: errorType,
       inputHelperText: errorMessage,
     };
@@ -47,7 +44,7 @@ const EmailResults = forwardRef(function EmailResults(
         componentDetails={componentProps}
         formData={formData.signUpInfo}
         handleTextfieldChange={handleTextfieldChange}
-        index='0'
+        index="0"
       />
     );
   };
@@ -102,8 +99,8 @@ const EmailResults = forwardRef(function EmailResults(
 
   const action = (
     <>
-      <IconButton size='small' aria-label='close' color='inherit' onClick={handleClose}>
-        <CloseIcon fontSize='small' />
+      <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+        <CloseIcon fontSize="small" />
       </IconButton>
     </>
   );
@@ -122,18 +119,15 @@ const EmailResults = forwardRef(function EmailResults(
 
   const displayCopyResults = () => {
     return (
-      <div className='copy-results-container'>
-        <button onClick={copyLink} className='button-and-text'>
+      <div className="copy-results-container">
+        <button onClick={copyLink} className="button-and-text">
           {copied ? (
             <CheckIcon sx={{ fontSize: '1.75rem', mr: '.5rem' }} />
           ) : (
             <LinkIcon sx={{ fontSize: '1.75rem', mr: '.5rem' }} />
           )}
-          <article className='copy-results-text'>
-            <FormattedMessage
-              id='emailResults.copy-results-text'
-              defaultMessage='Copy my results link'
-            />
+          <article className="copy-results-text">
+            <FormattedMessage id="emailResults.copy-results-text" defaultMessage="Copy my results link" />
           </article>
         </button>
       </div>
@@ -141,8 +135,8 @@ const EmailResults = forwardRef(function EmailResults(
   };
 
   return (
-    <div className='email-results-container'>
-      <div className='question-buttons'>
+    <div className="email-results-container">
+      <div className="question-buttons">
         <Snackbar
           anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
           open={state.open}
@@ -150,17 +144,17 @@ const EmailResults = forwardRef(function EmailResults(
           onClose={handleClose}
           message={
             <FormattedMessage
-              id='emailResults.return-signupCompleted'
-              defaultMessage='A copy of your results have been sent.'
+              id="emailResults.return-signupCompleted"
+              defaultMessage="A copy of your results have been sent."
             />
           }
           action={action}
-          severity='success'
+          severity="success"
           sx={{ mb: -2 }}
         />
       </div>
       <IconButton
-        aria-label='close'
+        aria-label="close"
         onClick={close}
         sx={{
           position: 'absolute',
@@ -170,41 +164,27 @@ const EmailResults = forwardRef(function EmailResults(
       >
         <CloseIcon />
       </IconButton>
-      <h2 className='sub-header'>
-        <FormattedMessage
-          id='emailResults.displaySubheader-text'
-          defaultMessage='Save my results'
-        />
+      <h2 className="sub-header">
+        <FormattedMessage id="emailResults.displaySubheader-text" defaultMessage="Save my results" />
       </h2>
       {displayCopyResults()}
-      <article className='question-container question-label'>
-        <FormattedMessage
-          id='emailResults.enter-emailLabel'
-          defaultMessage='Email my results link'
-        />
+      <article className="question-container question-label">
+        <FormattedMessage id="emailResults.enter-emailLabel" defaultMessage="Email my results link" />
       </article>
-      {createEmailTextfield(
-        'email',
-        emailHasError,
-        displayEmailHelperText,
-        'signUp.createEmailTextfield-label',
-      )}
+      {createEmailTextfield('email', emailHasError, displayEmailHelperText, 'signUp.createEmailTextfield-label')}
       <Button
         sx={{ m: '.5rem' }}
-        variant='contained'
+        variant="contained"
         onClick={(event) => {
           handleSubmit(event, 'emailScreen');
         }}
-        id='send-button'
+        id="send-button"
       >
-        <FormattedMessage id='emailResults.sendButton' defaultMessage='Send' />
+        <FormattedMessage id="emailResults.sendButton" defaultMessage="Send" />
       </Button>
       {state.error && displayErrorMessage(state.errorMessage)}
-      <article className='question-container question-label'>
-        <FormattedMessage
-          id='emailResults.enter-phoneNumberLabel'
-          defaultMessage='Text my results link'
-        />
+      <article className="question-container question-label">
+        <FormattedMessage id="emailResults.enter-phoneNumberLabel" defaultMessage="Text my results link" />
       </article>
       {createEmailTextfield(
         'phone',
@@ -214,13 +194,13 @@ const EmailResults = forwardRef(function EmailResults(
       )}
       <Button
         sx={{ m: '.5rem' }}
-        variant='contained'
+        variant="contained"
         onClick={(event) => {
           handleSubmit(event, 'textScreen');
         }}
-        id='send-button'
+        id="send-button"
       >
-        <FormattedMessage id='emailResults.sendButton' defaultMessage='Send' />
+        <FormattedMessage id="emailResults.sendButton" defaultMessage="Send" />
       </Button>
       {state.error && displayErrorMessage(state.errorMessage)}
     </div>

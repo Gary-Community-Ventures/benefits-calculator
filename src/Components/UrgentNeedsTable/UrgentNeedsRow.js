@@ -28,11 +28,11 @@ const UrgentNeedsRow = ({ rowProps }) => {
     <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell>
-          <IconButton aria-label='expand row' size='small' onClick={() => setOpen(!open)}>
+          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component='th' scope='row' align='left'>
+        <TableCell component="th" scope="row" align="left">
           {rowProps.name}
         </TableCell>
         <TableCell>{rowProps.type}</TableCell>
@@ -40,33 +40,27 @@ const UrgentNeedsRow = ({ rowProps }) => {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}></TableCell>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout='auto' unmountOnExit>
+          <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
-              <Typography variant='body2' gutterBottom component='div'>
+              <Typography variant="body2" gutterBottom component="div">
                 {rowProps.description}
               </Typography>
               {rowProps.phone_number && (
-                <h4 className='font-weight'>
-                  <FormattedMessage
-                    id='urgentNeedsRow.formatPhoneNumber'
-                    defaultMessage='Phone Number: '
-                  />
-                  <span className='navigator-info'>{formatPhoneNumber(rowProps.phone_number)}</span>
+                <h4 className="font-weight">
+                  <FormattedMessage id="urgentNeedsRow.formatPhoneNumber" defaultMessage="Phone Number: " />
+                  <span className="navigator-info">{formatPhoneNumber(rowProps.phone_number)}</span>
                 </h4>
               )}
               {rowProps.link && (
                 <ReactGA.OutboundLink
-                  className='margin-top-link'
+                  className="margin-top-link"
                   eventLabel={`Urgent Need Website for ${rowProps.name}`}
                   to={rowProps.link}
-                  target='_blank'
+                  target="_blank"
                   trackerNames={['main']}
                 >
-                  <Button className='urgent-need-button'>
-                    <FormattedMessage
-                      id='urgentNeedsTable.visit-website-button'
-                      defaultMessage='Visit website'
-                    />
+                  <Button className="urgent-need-button">
+                    <FormattedMessage id="urgentNeedsTable.visit-website-button" defaultMessage="Visit website" />
                   </Button>
                 </ReactGA.OutboundLink>
               )}

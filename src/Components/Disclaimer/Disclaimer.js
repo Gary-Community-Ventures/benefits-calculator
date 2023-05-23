@@ -1,12 +1,4 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  CardActions,
-  Typography,
-  FormControlLabel,
-  Checkbox,
-} from '@mui/material';
+import { Button, Card, CardContent, CardActions, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useContext } from 'react';
@@ -37,25 +29,19 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
   };
 
   return (
-    <main className='benefits-form'>
-      <h1 className='sub-header'>
-        <FormattedMessage
-          id='disclaimer.header'
-          defaultMessage='What you should know before we begin: '
-        />
+    <main className="benefits-form">
+      <h1 className="sub-header">
+        <FormattedMessage id="disclaimer.header" defaultMessage="What you should know before we begin: " />
       </h1>
-      <Card variant='outlined'>
+      <Card variant="outlined">
         <CardContent>
-          <h2 className='disclaimer-header'>
-            <FormattedMessage
-              id='disclaimer.sub-header'
-              defaultMessage='Gary Philanthropy Disclaimer'
-            />
+          <h2 className="disclaimer-header">
+            <FormattedMessage id="disclaimer.sub-header" defaultMessage="Gary Philanthropy Disclaimer" />
           </h2>
-          <Typography variant='body1'>
+          <Typography variant="body1">
             <FormattedMessage
-              id='disclaimer.body'
-              defaultMessage='This benefit calculator is a tool that recommends public benefits programs
+              id="disclaimer.body"
+              defaultMessage="This benefit calculator is a tool that recommends public benefits programs
               for you to consider based upon information you provide about your household and Gary Philanthropy’s
               (“Gary”) best understanding of publicly available information regarding benefits programs.
               Gary cannot guarantee eligibility or acceptance into any program. To enroll in a benefit,
@@ -68,42 +54,37 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
               By filling out this benefits calculator, you agree to future contact from Gary or our affiliates
               regarding your use of the benefits calculator or to offer additional programs that may be of interest
               to you and your family. Standard message and data costs may apply to these communications.
-              You may opt out of receiving these communications at any time through the opt-out link in the communication.'
+              You may opt out of receiving these communications at any time through the opt-out link in the communication."
             />
           </Typography>
         </CardContent>
       </Card>
-      <Typography color='text.secondary'>
+      <Typography color="text.secondary">
         <FormattedMessage
-          id='disclaimer.helper-text'
-          defaultMessage='Check the box below and then click the Continue button to get started.'
+          id="disclaimer.helper-text"
+          defaultMessage="Check the box below and then click the Continue button to get started."
         />
       </Typography>
       {(buttonWasClicked && formData.agreeToTermsOfService === false && (
         <StyledTypography>
-          <FormattedMessage
-            id='disclaimer.error'
-            defaultMessage='Please check the box below to continue.'
-          />
+          <FormattedMessage id="disclaimer.error" defaultMessage="Please check the box below to continue." />
         </StyledTypography>
       )) || <StyledTypography />}
       <FormControlLabel
-        control={
-          <Checkbox checked={formData.agreeToTermsOfService} onChange={handleCheckboxChange} />
-        }
+        control={<Checkbox checked={formData.agreeToTermsOfService} onChange={handleCheckboxChange} />}
         label={
           <FormattedMessage
-            id='disclaimer-label'
-            defaultMessage='I have read, understand, and agree to the terms of the Gary Disclaimer and consent to contact above.'
+            id="disclaimer-label"
+            defaultMessage="I have read, understand, and agree to the terms of the Gary Disclaimer and consent to contact above."
           />
         }
-        value='agreeToTermsOfService'
+        value="agreeToTermsOfService"
         sx={{ mt: '-.5rem' }}
       />
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <PreviousButton formData={formData} />
-        <Button variant='contained' onClick={(event) => handleContinueButtonClick(event)}>
-          <FormattedMessage id='continue-button' defaultMessage='Continue' />
+        <Button variant="contained" onClick={(event) => handleContinueButtonClick(event)}>
+          <FormattedMessage id="continue-button" defaultMessage="Continue" />
         </Button>
       </CardActions>
     </main>

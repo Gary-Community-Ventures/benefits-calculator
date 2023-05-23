@@ -1,13 +1,6 @@
 import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect, useContext } from 'react';
-import {
-  useNavigate,
-  useLocation,
-  Navigate,
-  Routes,
-  Route,
-  useSearchParams,
-} from 'react-router-dom';
+import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
 import { Context } from './Components/Wrapper/Wrapper.js';
 import ReactGA from 'react-ga';
@@ -220,28 +213,15 @@ const App = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleContinueSubmit = (
-    event,
-    validateInputFunction,
-    inputToBeValidated,
-    stepId,
-    questionName,
-    uuid,
-  ) => {
+  const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
     const isZipcodeQuestionAndCountyIsEmpty = questionName === 'zipcode' && formData.county === '';
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty =
-      questionName === 'referralSource' &&
-      formData.referralSource === 'other' &&
-      formData.otherSource === '';
+      questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '';
     const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets === '';
 
     if (!validateInputFunction(inputToBeValidated, formData)) {
-      if (
-        isZipcodeQuestionAndCountyIsEmpty ||
-        isReferralQuestionWithOtherAndOtherSourceIsEmpty ||
-        isEmptyAssets
-      ) {
+      if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
         return;
       } else if (questionName === 'signUpInfo') {
         updateUser(uuid, formData, setFormData, locale.toLowerCase());
@@ -284,48 +264,39 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className='App'>
+      <div className="App">
         <CssBaseline />
         <Header formData={formData} handleTextfieldChange={handleTextfieldChange} />
         <Routes>
-          <Route path='/step-0' element={<ProgressBar step='0' />} />
-          <Route path='/:uuid/step-:id' element={<ProgressBar />} />
-          <Route path='/:uuid/step-:id/:page' element={<ProgressBar />} />
-          <Route path='/:uuid/confirm-information' element={<ProgressBar step={totalSteps} />} />
-          <Route path='*' element={<></>} />
+          <Route path="/step-0" element={<ProgressBar step="0" />} />
+          <Route path="/:uuid/step-:id" element={<ProgressBar />} />
+          <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
+          <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
+          <Route path="*" element={<></>} />
         </Routes>
         <Routes>
-          <Route path='/' element={<Navigate to={`/step-0${urlSearchParams}`} replace />} />
-          <Route
-            path='/step-0'
-            element={<LandingPage formData={formData} setFetchedScreen={setFetchedScreen} />}
-          />
-          <Route path='results/:uuid' element={<Results />} />
-          <Route path=':uuid'>
+          <Route path="/" element={<Navigate to={`/step-0${urlSearchParams}`} replace />} />
+          <Route path="/step-0" element={<LandingPage formData={formData} setFetchedScreen={setFetchedScreen} />} />
+          <Route path="results/:uuid" element={<Results />} />
+          <Route path=":uuid">
             {!fetchedScreen && (
               <Route
-                path='*'
+                path="*"
                 element={
-                  <FetchScreen
-                    formData={formData}
-                    setFormData={setFormData}
-                    setFetchedScreen={setFetchedScreen}
-                  />
+                  <FetchScreen formData={formData} setFormData={setFormData} setFetchedScreen={setFetchedScreen} />
                 }
               />
             )}
             {fetchedScreen && (
               <>
-                <Route path='' element={<Navigate to='/step-0' replace />} />
+                <Route path="" element={<Navigate to="/step-0" replace />} />
                 <Route
-                  path='step-0'
+                  path="step-0"
                   element={<LandingPage formData={formData} setFetchedScreen={setFetchedScreen} />}
                 />
                 <Route
-                  path='step-1'
-                  element={
-                    <Disclaimer formData={formData} handleCheckboxChange={handleCheckboxChange} />
-                  }
+                  path="step-1"
+                  element={<Disclaimer formData={formData} handleCheckboxChange={handleCheckboxChange} />}
                 />
                 <Route
                   path={`step-${stepDirectory.householdData}/:page`}
@@ -338,7 +309,7 @@ const App = () => {
                   }
                 />
                 <Route
-                  path='step-:id'
+                  path="step-:id"
                   element={
                     <QuestionComponentContainer
                       formData={formData}
@@ -354,13 +325,13 @@ const App = () => {
                     />
                   }
                 />
-                <Route path='confirm-information' element={<Confirmation formData={formData} />} />
-                <Route path='results' element={<Results />} />
-                <Route path='*' element={<Navigate to='/step-0' replace />} />
+                <Route path="confirm-information" element={<Confirmation formData={formData} />} />
+                <Route path="results" element={<Results />} />
+                <Route path="*" element={<Navigate to="/step-0" replace />} />
               </>
             )}
           </Route>
-          <Route path='*' element={<Navigate to='/step-0' replace />} />
+          <Route path="*" element={<Navigate to="/step-0" replace />} />
         </Routes>
       </div>
     </ThemeProvider>

@@ -9,51 +9,37 @@ import umbrella from './OptionCardIcons/umbrella.png';
 const healthInsuranceOptions = {
   employer: {
     formattedMessage: (
-      <FormattedMessage
-        id='healthInsuranceOptions.employer'
-        defaultMessage='Employer-provided health insurance'
-      />
+      <FormattedMessage id="healthInsuranceOptions.employer" defaultMessage="Employer-provided health insurance" />
     ),
     image: building,
   },
   private: {
     formattedMessage: (
-      <FormattedMessage
-        id='healthInsuranceOptions.private'
-        defaultMessage='Private health insurance'
-      />
+      <FormattedMessage id="healthInsuranceOptions.private" defaultMessage="Private health insurance" />
     ),
     image: padlock,
   },
   medicaid: {
     formattedMessage: (
-      <FormattedMessage
-        id='healthInsuranceOptions.medicaid'
-        defaultMessage='Health First Colorado (Medicaid)'
-      />
+      <FormattedMessage id="healthInsuranceOptions.medicaid" defaultMessage="Health First Colorado (Medicaid)" />
     ),
     image: bill,
   },
   medicare: {
-    formattedMessage: (
-      <FormattedMessage id='healthInsuranceOptions.medicare' defaultMessage='Medicare' />
-    ),
+    formattedMessage: <FormattedMessage id="healthInsuranceOptions.medicare" defaultMessage="Medicare" />,
     image: umbrella,
   },
   chp: {
     formattedMessage: (
-      <FormattedMessage
-        id='healthInsuranceOptions.chp'
-        defaultMessage='Child Health Plan Plus (CHP+)'
-      />
+      <FormattedMessage id="healthInsuranceOptions.chp" defaultMessage="Child Health Plan Plus (CHP+)" />
     ),
     image: teddyDoctor,
   },
   none: {
     formattedMessage: (
       <FormattedMessage
-        id='healthInsuranceOptions.none'
-        defaultMessage='One or more household member(s) do not have health insurance'
+        id="healthInsuranceOptions.none"
+        defaultMessage="One or more household member(s) do not have health insurance"
       />
     ),
     image: redX,

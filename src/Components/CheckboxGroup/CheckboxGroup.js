@@ -15,8 +15,8 @@ const CheckboxGroup = ({ options, householdData, setHouseholdData, index }) => {
       if (index !== 0 && optionKey === 'disabled') {
         label = (
           <FormattedMessage
-            id='checkboxGroup.disabledLabel'
-            defaultMessage='Have any disabilities that make them unable to work now or in the future'
+            id="checkboxGroup.disabledLabel"
+            defaultMessage="Have any disabilities that make them unable to work now or in the future"
           />
         );
       }

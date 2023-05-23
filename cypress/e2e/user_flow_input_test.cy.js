@@ -2,9 +2,7 @@ import stepDirectory from '../../src/Assets/stepDirectory';
 
 describe('English user flow input test', () => {
   it('When I visit the MFB landing page I should see the step progression display Step 0 of 21', () => {
-    cy.visit('http://localhost:3000')
-      .get('p[class="step-progress-title"]')
-      .should('contain', 'Step 0 of 21');
+    cy.visit('http://localhost:3000').get('p[class="step-progress-title"]').should('contain', 'Step 0 of 21');
   });
 
   it(
@@ -55,18 +53,14 @@ describe('English user flow input test', () => {
     },
   );
 
-  it(
-    'Sad path: When I just click on Continue button on the Disclaimer' +
-      ' I should see an error message',
-    () => {
-      cy.visit('http://localhost:3000/step-1')
-        .get('button')
-        .eq(1)
-        .click()
-        .get('p')
-        .should('contain', 'Please check the box below to continue.');
-    },
-  );
+  it('Sad path: When I just click on Continue button on the Disclaimer' + ' I should see an error message', () => {
+    cy.visit('http://localhost:3000/step-1')
+      .get('button')
+      .eq(1)
+      .click()
+      .get('p')
+      .should('contain', 'Please check the box below to continue.');
+  });
 
   it('Age question happy path: When I enter my age and click on Continue I should be navigated to the next step', () => {
     //url and step counter test runs first
@@ -84,10 +78,7 @@ describe('English user flow input test', () => {
       .url()
       .should('contain', `http://localhost:3000/step-${Number(stepDirectory.age) + 1}`)
       .get('p[class="step-progress-title"]')
-      .should(
-        'contain',
-        `Step ${stepDirectory.age + 1} of ${Object.keys(stepDirectory).length + 2}`,
-      );
+      .should('contain', `Step ${stepDirectory.age + 1} of ${Object.keys(stepDirectory).length + 2}`);
   });
 
   it('Age question sad path 1: If I just click on the Continue button I should see an error', () => {
@@ -118,10 +109,7 @@ describe('English user flow input test', () => {
       .url()
       .should('contain', `http://localhost:3000/step-${stepDirectory.zipcode}`)
       .get('p[class="step-progress-title"]')
-      .should(
-        'contain',
-        `Step ${stepDirectory.zipcode} of ${Object.keys(stepDirectory).length + 2}`,
-      )
+      .should('contain', `Step ${stepDirectory.zipcode} of ${Object.keys(stepDirectory).length + 2}`)
 
       .get('input[id=":r0:"]')
       .type('80211')
@@ -136,10 +124,7 @@ describe('English user flow input test', () => {
       .url()
       .should('contain', `http://localhost:3000/step-${Number(stepDirectory.zipcode) + 1}`)
       .get('p[class="step-progress-title"]')
-      .should(
-        'contain',
-        `Step ${stepDirectory.zipcode + 1} of ${Object.keys(stepDirectory).length + 2}`,
-      );
+      .should('contain', `Step ${stepDirectory.zipcode + 1} of ${Object.keys(stepDirectory).length + 2}`);
   });
 
   it("Zipcode question sad path 1: When I enter my zipcode, don't select a county and click on Continue I should be on the same page", () => {
@@ -152,10 +137,7 @@ describe('English user flow input test', () => {
       .url()
       .should('contain', `http://localhost:3000/step-${stepDirectory.zipcode}`)
       .get('p[class="step-progress-title"]')
-      .should(
-        'contain',
-        `Step ${stepDirectory.zipcode} of ${Object.keys(stepDirectory).length + 2}`,
-      );
+      .should('contain', `Step ${stepDirectory.zipcode} of ${Object.keys(stepDirectory).length + 2}`);
   });
 
   it('Zipcode question sad path 2: When I just click on Continue I should be on the same page and see an error message', () => {
@@ -166,10 +148,7 @@ describe('English user flow input test', () => {
       .url()
       .should('contain', `http://localhost:3000/step-${stepDirectory.zipcode}`)
       .get('p[class="step-progress-title"]')
-      .should(
-        'contain',
-        `Step ${stepDirectory.zipcode} of ${Object.keys(stepDirectory).length + 2}`,
-      )
+      .should('contain', `Step ${stepDirectory.zipcode} of ${Object.keys(stepDirectory).length + 2}`)
       .get('p')
       .should('contain', 'Please enter a valid CO zip code');
   });
@@ -180,10 +159,7 @@ describe('English user flow input test', () => {
       .url()
       .should('contain', `http://localhost:3000/step-${stepDirectory.hasIncome}`)
       .get('p[class="step-progress-title"]')
-      .should(
-        'contain',
-        `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`,
-      )
+      .should('contain', `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`)
 
       .get('input[type="radio"]')
       .should('have.value', 'true')
@@ -227,10 +203,7 @@ describe('English user flow input test', () => {
       .url()
       .should('contain', `http://localhost:3000/step-${Number(stepDirectory.hasIncome) + 1}`)
       .get('p[class="step-progress-title"]')
-      .should(
-        'contain',
-        `Step ${stepDirectory.hasIncome + 1} of ${Object.keys(stepDirectory).length + 2}`,
-      );
+      .should('contain', `Step ${stepDirectory.hasIncome + 1} of ${Object.keys(stepDirectory).length + 2}`);
   });
 
   it('Income question happy path 2: Removing an added income source', () => {
@@ -292,10 +265,7 @@ describe('English user flow input test', () => {
       .url()
       .should('contain', `http://localhost:3000/step-${stepDirectory.hasIncome}`)
       .get('p[class="step-progress-title"]')
-      .should(
-        'contain',
-        `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`,
-      )
+      .should('contain', `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`)
       .get('div[role="alert"]')
       .should('contain', 'Please select and enter a response for all three fields');
   });
@@ -318,10 +288,7 @@ describe('English user flow input test', () => {
       .url()
       .should('contain', `http://localhost:3000/step-${stepDirectory.hasIncome}`)
       .get('p[class="step-progress-title"]')
-      .should(
-        'contain',
-        `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`,
-      )
+      .should('contain', `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`)
       .get('div[role="alert"]')
       .should('contain', 'Please select and enter a response for all three fields');
   });
@@ -344,10 +311,7 @@ describe('English user flow input test', () => {
       .url()
       .should('contain', `http://localhost:3000/step-${stepDirectory.hasIncome}`)
       .get('p[class="step-progress-title"]')
-      .should(
-        'contain',
-        `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`,
-      )
+      .should('contain', `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`)
       .get('div[role="alert"]')
       .should('contain', 'Please select and enter a response for all three fields');
   });
@@ -367,10 +331,7 @@ describe('English user flow input test', () => {
       .url()
       .should('contain', `http://localhost:3000/step-${stepDirectory.hasIncome}`)
       .get('p[class="step-progress-title"]')
-      .should(
-        'contain',
-        `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`,
-      )
+      .should('contain', `Step ${stepDirectory.hasIncome} of ${Object.keys(stepDirectory).length + 2}`)
       .get('div[role="alert"]')
       .should('contain', 'Please select and enter a response for all three fields');
   });
