@@ -174,6 +174,7 @@ const Confirmation = ({ formData }) => {
           <FormattedMessage
             id="qcc.hoh-text"
             defaultMessage="Head of household"
+            key={index}
           />
         );
       } else {

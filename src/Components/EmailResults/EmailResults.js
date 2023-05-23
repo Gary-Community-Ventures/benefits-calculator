@@ -17,7 +17,7 @@ import Textfield from "../Textfield/Textfield";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import "./EmailResults.css";
 
-const EmailResults = forwardRef(({ formData, handleTextfieldChange, screenId, close }, ref) => {
+const EmailResults = forwardRef(function EmailResults({ formData, handleTextfieldChange, screenId, close }, ref) {
 	const [copied, setCopied] = useState(false);
   const [state, setState] = useState({
     open: false,
