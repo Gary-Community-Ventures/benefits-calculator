@@ -8,7 +8,7 @@ export const Context = React.createContext();
 
 const Wrapper = (props) => {
   let defaultLanguage = localStorage.getItem('language') ?? 'en-US';
-  let defaultMessages = defaultLanguage === 'en-US' ? English: Spanish;
+  let defaultMessages = defaultLanguage === 'en-US' ? English : Spanish;
   const pathname = window.location.pathname;
 
   if (pathname.includes('/es')) {
@@ -23,7 +23,7 @@ const Wrapper = (props) => {
   const [messages, setMessages] = useState(defaultMessages);
 
   useEffect(() => {
-    localStorage.setItem('language', locale)
+    localStorage.setItem('language', locale);
     switch (locale) {
       case 'en-US':
         setMessages(English);
@@ -56,15 +56,15 @@ const Wrapper = (props) => {
       default:
         setMessages(English);
     }
-  }
+  };
 
   return (
-    <Context.Provider value={{ locale, setLocale, selectLanguage }} >
-      <IntlProvider locale={ locale } messages={ messages } defaultLocale={ locale }>
-        { props.children }
+    <Context.Provider value={{ locale, setLocale, selectLanguage }}>
+      <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
+        {props.children}
       </IntlProvider>
     </Context.Provider>
   );
-}
+};
 
 export default Wrapper;

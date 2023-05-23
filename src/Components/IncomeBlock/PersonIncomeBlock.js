@@ -1,11 +1,11 @@
 import { FormattedMessage } from 'react-intl';
-import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from "@mui/material";
+import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import {
-	hoursWorkedValueHasError,
-	incomeStreamValueHasError,
-	displayIncomeStreamValueHelperText
+  hoursWorkedValueHasError,
+  incomeStreamValueHasError,
+  displayIncomeStreamValueHelperText,
 } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
@@ -13,78 +13,86 @@ import './IncomeBlock.css';
 
 const StyledSelectfield = styled(Select)({
   marginBottom: 20,
-  minWidth: 200
+  minWidth: 200,
 });
 
 const StyledTextField = styled(TextField)({
-  marginBottom: 20
+  marginBottom: 20,
 });
 
 const StyledDeleteButton = styled(Button)({
-  minWidth: 32
+  minWidth: 32,
 });
 
 const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those
   //first by assigning them to the initial selectedMenuItem state
   //if not then create the initial income block questions
-  const [selectedMenuItem, setSelectedMenuItem] = useState(householdData.incomeStreams.length > 0 ? householdData.incomeStreams :
-  [
-    {
-      incomeStreamName: '',
-      incomeAmount: '',
-      incomeFrequency: '',
-      hoursPerWeek: ''
-    }
-  ]);
+  const [selectedMenuItem, setSelectedMenuItem] = useState(
+    householdData.incomeStreams.length > 0
+      ? householdData.incomeStreams
+      : [
+          {
+            incomeStreamName: '',
+            incomeAmount: '',
+            incomeFrequency: '',
+            hoursPerWeek: '',
+          },
+        ],
+  );
 
   const getIncomeStreamNameLabel = (incomeStreamName) => {
     return incomeOptions[incomeStreamName];
-  }
+  };
 
   useEffect(() => {
-    setHouseholdData({...householdData, incomeStreams: selectedMenuItem})
+    setHouseholdData({ ...householdData, incomeStreams: selectedMenuItem });
   }, [selectedMenuItem]);
 
   const createIncomeStreamsMenuItems = () => {
-    const disabledSelectMenuItem =
-      <MenuItem value='select' key='disabled-select-value' disabled>
-        <FormattedMessage
-        id='personIncomeBlock.createMenuItems-disabledSelectMenuItem'
-        defaultMessage='Select' />
-      </MenuItem>;
+    const disabledSelectMenuItem = (
+      <MenuItem value="select" key="disabled-select-value" disabled>
+        <FormattedMessage id="personIncomeBlock.createMenuItems-disabledSelectMenuItem" defaultMessage="Select" />
+      </MenuItem>
+    );
 
     const menuItemKeys = Object.keys(incomeOptions);
     const menuItemLabels = Object.values(incomeOptions);
 
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <MenuItem value={menuItemKey} key={menuItemKey}>{menuItemLabels[i]}</MenuItem>
+        <MenuItem value={menuItemKey} key={menuItemKey}>
+          {menuItemLabels[i]}
+        </MenuItem>
       );
     });
 
     return [disabledSelectMenuItem, menuItems];
-  }
+  };
 
   const createFrequencyMenuItems = () => {
-    const disabledSelectMenuItem =
-      <MenuItem value='select' key='disabled-frequency-select-value' disabled>
+    const disabledSelectMenuItem = (
+      <MenuItem value="select" key="disabled-frequency-select-value" disabled>
         <FormattedMessage
-          id='personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem'
-          defaultMessage='Select' />
-      </MenuItem>;
+          id="personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem"
+          defaultMessage="Select"
+        />
+      </MenuItem>
+    );
 
     const menuItemKeys = Object.keys(frequencyOptions);
     const menuItemLabels = Object.values(frequencyOptions);
 
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <MenuItem value={menuItemKey} key={menuItemKey}>{menuItemLabels[i]}</MenuItem>
+        <MenuItem value={menuItemKey} key={menuItemKey}>
+          {menuItemLabels[i]}
+        </MenuItem>
       );
     });
 
     return [disabledSelectMenuItem, menuItems];
-  }
+  };
 
   const handleIncomeStreamsSelectChange = (event, index) => {
     const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
@@ -93,35 +101,33 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
           incomeStreamName: event.target.value,
           incomeAmount: '',
           incomeFrequency: '',
-          hoursPerWeek: ''
-        }
+          hoursPerWeek: '',
+        };
       } else {
         return incomeSourceData;
       }
     });
 
     setSelectedMenuItem(updatedSelectedMenuItems);
-  }
+  };
 
   const handleIncomeTextfieldChange = (event, index) => {
-		const { value } = event.target;
-		// Income amount can be up to 8 digits long with 2 decimal places. Can not start with a decimal
+    const { value } = event.target;
+    // Income amount can be up to 8 digits long with 2 decimal places. Can not start with a decimal
     const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
 
-		if (incomeAmountRegex.test(value) || value === '') {
-			const updatedSelectedMenuItems = selectedMenuItem.map(
-				(incomeSourceData, i) => {
-					if (i === index) {
-						return { ...incomeSourceData, incomeAmount: value };
-					} else {
-						return incomeSourceData;
-					}
-				}
-			);
+    if (incomeAmountRegex.test(value) || value === '') {
+      const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
+        if (i === index) {
+          return { ...incomeSourceData, incomeAmount: value };
+        } else {
+          return incomeSourceData;
+        }
+      });
 
-			setSelectedMenuItem(updatedSelectedMenuItems);
-		}
-	}
+      setSelectedMenuItem(updatedSelectedMenuItems);
+    }
+  };
 
   const handleFrequencySelectChange = (event, index) => {
     const { value } = event.target;
@@ -129,39 +135,44 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
       if (i === index) {
         return {
           ...incomeSourceData,
-          incomeFrequency: value
-        }
+          incomeFrequency: value,
+        };
       } else {
         return incomeSourceData;
       }
     });
 
     setSelectedMenuItem(updatedSelectedMenuItems);
-  }
+  };
 
   const createIncomeStreamsDropdownMenu = (incomeStreamName, index) => {
     return (
       <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id='income-type-label'>
+        <InputLabel id="income-type-label">
           <FormattedMessage
-            id='personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel'
-            defaultMessage='Income Type' />
+            id="personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel"
+            defaultMessage="Income Type"
+          />
         </InputLabel>
         <StyledSelectfield
-          labelId='income-type-label'
+          labelId="income-type-label"
           id={incomeStreamName}
           value={incomeStreamName}
           label={
             <FormattedMessage
-            id='personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel'
-            defaultMessage='Income Type' />
+              id="personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel"
+              defaultMessage="Income Type"
+            />
           }
-          onChange={(event) => { handleIncomeStreamsSelectChange(event, index) }}>
+          onChange={(event) => {
+            handleIncomeStreamsSelectChange(event, index);
+          }}
+        >
           {createIncomeStreamsMenuItems()}
         </StyledSelectfield>
       </FormControl>
     );
-  }
+  };
 
   const createHoursWorkedTextField = (incomeStreamName, hoursWorked, index) => {
     let formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-youQLabel';
@@ -172,61 +183,51 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
       formattedMsgDefaultMsg = 'How many hours do they work per week: ';
     }
 
-		const hoursWorkedChange = (event, index) => {
-			const { value } = event.target;
-			const numberUpToEightDigitsLongRegex = /^\d{0,3}$/;
+    const hoursWorkedChange = (event, index) => {
+      const { value } = event.target;
+      const numberUpToEightDigitsLongRegex = /^\d{0,3}$/;
 
-			if (numberUpToEightDigitsLongRegex.test(value)) {
-				const updatedSelectedMenuItems = selectedMenuItem.map(
-					(incomeSourceData, i) => {
-						if (i === index) {
-							return { ...incomeSourceData, hoursPerWeek: value };
-						} else {
-							return incomeSourceData;
-						}
-					}
-				);
+      if (numberUpToEightDigitsLongRegex.test(value)) {
+        const updatedSelectedMenuItems = selectedMenuItem.map((incomeSourceData, i) => {
+          if (i === index) {
+            return { ...incomeSourceData, hoursPerWeek: value };
+          } else {
+            return incomeSourceData;
+          }
+        });
 
-				setSelectedMenuItem(updatedSelectedMenuItems);
-			}
-		};
+        setSelectedMenuItem(updatedSelectedMenuItems);
+      }
+    };
 
-		return (
-			<>
-				<h2 className="question-label">
-					<FormattedMessage
-						id={formattedMsgId}
-						defaultMessage={formattedMsgDefaultMsg}
-					/>
-					{getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
-				</h2>
-				<div className="income-block-textfield">
-					<StyledTextField
-						type="text"
-						value={hoursWorked}
-						label={
-							<FormattedMessage
-								id="incomeBlock.createHoursWorkedTextfield-amountLabel"
-								defaultMessage="Hours"
-							/>
-						}
-						onChange={(event) => {
-							hoursWorkedChange(event, index);
-						}}
-						variant="outlined"
-						required
-						error={hoursWorkedValueHasError(hoursWorked)}
-						helperText={displayIncomeStreamValueHelperText(hoursWorked)}
-					/>
-				</div>
-			</>
-		);
-	};
+    return (
+      <>
+        <h2 className="question-label">
+          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
+        </h2>
+        <div className="income-block-textfield">
+          <StyledTextField
+            type="text"
+            value={hoursWorked}
+            label={<FormattedMessage id="incomeBlock.createHoursWorkedTextfield-amountLabel" defaultMessage="Hours" />}
+            onChange={(event) => {
+              hoursWorkedChange(event, index);
+            }}
+            variant="outlined"
+            required
+            error={hoursWorkedValueHasError(hoursWorked)}
+            helperText={displayIncomeStreamValueHelperText(hoursWorked)}
+          />
+        </div>
+      </>
+    );
+  };
 
   const createIncomeAmountTextfield = (incomeStreamName, incomeAmount, index) => {
     let questionHeader;
 
-		if (selectedMenuItem[index].incomeFrequency === 'hourly') {
+    if (selectedMenuItem[index].incomeFrequency === 'hourly') {
       let hourlyFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
       let hourlyFormattedMsgDefaultMsg = 'What is your hourly rate: ';
 
@@ -235,13 +236,8 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
         hourlyFormattedMsgDefaultMsg = 'What is their hourly rate: ';
       }
 
-			questionHeader = (
-				<FormattedMessage
-					id={hourlyFormattedMsgId}
-					defaultMessage={hourlyFormattedMsgDefaultMsg}
-				/>
-			);
-		} else {
+      questionHeader = <FormattedMessage id={hourlyFormattedMsgId} defaultMessage={hourlyFormattedMsgDefaultMsg} />;
+    } else {
       let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
       let payPeriodFormattedMsgDefaultMsg = 'How much do you receive each pay period for: ';
 
@@ -250,32 +246,32 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
         payPeriodFormattedMsgDefaultMsg = 'How much do they receive each pay period for: ';
       }
 
-			questionHeader = (
-				<FormattedMessage
-					id={payPeriodFormattedMsgId}
-					defaultMessage={payPeriodFormattedMsgDefaultMsg}
-				/>
-			);
-		}
+      questionHeader = (
+        <FormattedMessage id={payPeriodFormattedMsgId} defaultMessage={payPeriodFormattedMsgDefaultMsg} />
+      );
+    }
 
     return (
       <div>
-        <h2 className='question-label'>
+        <h2 className="question-label">
           {questionHeader}
           {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
         </h2>
-        <div className='income-block-textfield'>
+        <div className="income-block-textfield">
           <StyledTextField
-            type='text'
+            type="text"
             name={incomeStreamName}
             value={incomeAmount}
             label={
               <FormattedMessage
-                id='personIncomeBlock.createIncomeAmountTextfield-amountLabel'
-                defaultMessage='Amount' />
+                id="personIncomeBlock.createIncomeAmountTextfield-amountLabel"
+                defaultMessage="Amount"
+              />
             }
-            onChange={(event) => {handleIncomeTextfieldChange(event, index)}}
-            variant='outlined'
+            onChange={(event) => {
+              handleIncomeTextfieldChange(event, index);
+            }}
+            variant="outlined"
             required
             error={incomeStreamValueHasError(selectedMenuItem[index].incomeAmount)}
             helperText={displayIncomeStreamValueHelperText(selectedMenuItem[index].incomeAmount)}
@@ -283,7 +279,7 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
         </div>
       </div>
     );
-  }
+  };
 
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     let formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel';
@@ -295,35 +291,38 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
 
     return (
       <div>
-        <h2 className='question-label'>
-          <FormattedMessage
-            id={formattedMsgId}
-            defaultMessage={formattedMsgDefaultMsg} />
-            {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
+        <h2 className="question-label">
+          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          {getIncomeStreamNameLabel(selectedMenuItem[index].incomeStreamName)}?
         </h2>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id='income-frequency-label'>
+          <InputLabel id="income-frequency-label">
             <FormattedMessage
-              id='personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel'
-              defaultMessage='Frequency' />
+              id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel"
+              defaultMessage="Frequency"
+            />
           </InputLabel>
           <StyledSelectfield
-            labelId='income-frequency-label'
-            id='income-frequency'
+            labelId="income-frequency-label"
+            id="income-frequency"
             value={incomeFrequency}
             name={incomeFrequency}
             label={
               <FormattedMessage
-                id='personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel'
-                defaultMessage='Income Frequency' />
+                id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel"
+                defaultMessage="Income Frequency"
+              />
             }
-            onChange={(event) => { handleFrequencySelectChange(event, index) }}>
+            onChange={(event) => {
+              handleFrequencySelectChange(event, index);
+            }}
+          >
             {createFrequencyMenuItems()}
           </StyledSelectfield>
         </FormControl>
       </div>
     );
-  }
+  };
 
   const createIncomeBlockQuestions = () => {
     return selectedMenuItem.map((incomeSourceData, index) => {
@@ -337,60 +336,59 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
         formattedMsgDefaultMsg = 'If they receive another type of income, select it below.';
       }
 
-      const incomeStreamQuestion =
-        <h2 className='question-label'>
-          <FormattedMessage
-            id={formattedMsgId}
-            defaultMessage={formattedMsgDefaultMsg} />
-        </h2>;
+      const incomeStreamQuestion = (
+        <h2 className="question-label">
+          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+        </h2>
+      );
       return (
         <div key={index}>
-          {index > 0 &&
-            <div className='delete-button-container'>
-              <StyledDeleteButton variant='contained' onClick={() => deleteIncomeBlock(index)}>x</StyledDeleteButton>
+          {index > 0 && (
+            <div className="delete-button-container">
+              <StyledDeleteButton variant="contained" onClick={() => deleteIncomeBlock(index)}>
+                x
+              </StyledDeleteButton>
             </div>
-          }
+          )}
           {index > 0 && incomeStreamQuestion}
           {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
           {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
-          {incomeFrequency === 'hourly' &&
-						createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)
-          }
+          {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
           {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
         </div>
       );
     });
-  }
+  };
 
   const deleteIncomeBlock = (selectedIndex) => {
-    const updatedSelectedMenuItems = selectedMenuItem.filter((incomeSourceData, index) => index !== selectedIndex );
+    const updatedSelectedMenuItems = selectedMenuItem.filter((incomeSourceData, index) => index !== selectedIndex);
     setSelectedMenuItem(updatedSelectedMenuItems);
 
     const updatedHouseholdData = householdData.map((personData, i) => {
       if (i === page) {
         return {
           ...personData,
-          incomeStreams: updatedSelectedMenuItems
+          incomeStreams: updatedSelectedMenuItems,
         };
       } else {
         return personData;
       }
     });
-    setHouseholdData(updatedHouseholdData)
-  }
+    setHouseholdData(updatedHouseholdData);
+  };
 
   const handleAddAdditionalIncomeSource = (event) => {
     event.preventDefault();
     setSelectedMenuItem([
-			...selectedMenuItem,
-			{
-				incomeStreamName: '',
-				incomeAmount: '',
-				incomeFrequency: '',
-				hoursPerWeek: '',
-			},
-		]);
-  }
+      ...selectedMenuItem,
+      {
+        incomeStreamName: '',
+        incomeAmount: '',
+        incomeFrequency: '',
+        hoursPerWeek: '',
+      },
+    ]);
+  };
 
   const renderReturnStmtIdOrDefaultMsg = (index) => {
     let formattedMsgId = 'questions.hasIncome-a';
@@ -402,30 +400,28 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
     }
 
     return [formattedMsgId, formattedMsgDefaultMsg];
-  }
+  };
 
   return (
     <>
-      <h2 className='question-label radio-question'>
+      <h2 className="question-label radio-question">
         <FormattedMessage
-          id={(renderReturnStmtIdOrDefaultMsg(page))[0]}
-          defaultMessage={(renderReturnStmtIdOrDefaultMsg(page))[1]} />
+          id={renderReturnStmtIdOrDefaultMsg(page)[0]}
+          defaultMessage={renderReturnStmtIdOrDefaultMsg(page)[1]}
+        />
       </h2>
-      <p className='question-description'>
+      <p className="question-description">
         <FormattedMessage
-          id='personIncomeBlock.return-questionDescription'
-          defaultMessage='Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be.' />
+          id="personIncomeBlock.return-questionDescription"
+          defaultMessage="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
+        />
       </p>
       {createIncomeBlockQuestions()}
-      <Button
-        variant='contained'
-        onClick={(event) => handleAddAdditionalIncomeSource(event)} >
-          <FormattedMessage
-            id='personIncomeBlock.return-addIncomeButton'
-            defaultMessage='Add another income' />
+      <Button variant="contained" onClick={(event) => handleAddAdditionalIncomeSource(event)}>
+        <FormattedMessage id="personIncomeBlock.return-addIncomeButton" defaultMessage="Add another income" />
       </Button>
     </>
   );
-}
+};
 
 export default PersonIncomeBlock;

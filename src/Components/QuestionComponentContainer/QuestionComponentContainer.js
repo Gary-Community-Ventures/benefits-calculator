@@ -17,40 +17,49 @@ import questions from '../../Assets/questions';
 import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleContinueSubmit, handleRadioButtonChange,
-  handleNoAnswerChange, handleIncomeStreamsSubmit, handleExpenseSourcesSubmit, handleHouseholdDataSubmit, setFormData,
-  handleCheckboxChange }) => {
+const QuestionComponentContainer = ({
+  formData,
+  handleTextfieldChange,
+  handleContinueSubmit,
+  handleRadioButtonChange,
+  handleNoAnswerChange,
+  handleIncomeStreamsSubmit,
+  handleExpenseSourcesSubmit,
+  handleHouseholdDataSubmit,
+  setFormData,
+  handleCheckboxChange,
+}) => {
   let { id } = useParams();
   let numberId = Number(id);
   const matchingQuestion = questions[numberId];
 
   const createHouseholdDataBlock = () => {
     return (
-      <div className='question-container' id={id}>
-        <HouseholdDataBlock
-          formData={formData}
-          handleHouseholdDataSubmit={handleHouseholdDataSubmit} />
+      <div className="question-container" id={id}>
+        <HouseholdDataBlock formData={formData} handleHouseholdDataSubmit={handleHouseholdDataSubmit} />
       </div>
     );
-  }
+  };
 
   const renderTextfieldComponent = (question) => {
     return (
       <Textfield
         componentDetails={question.componentDetails}
         formData={formData}
-        handleTextfieldChange={handleTextfieldChange} />
+        handleTextfieldChange={handleTextfieldChange}
+      />
     );
-  }
+  };
 
   const renderRadiofieldComponent = (question) => {
     return (
       <Radiofield
         componentDetails={question.componentDetails}
         formData={formData}
-        handleRadioButtonChange={handleRadioButtonChange} />
+        handleRadioButtonChange={handleRadioButtonChange}
+      />
     );
-  }
+  };
 
   const renderNoAnswerComponent = (question) => {
     return (
@@ -58,9 +67,10 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         componentDetails={question.componentDetails}
         formData={formData}
         handleRadioButtonChange={handleNoAnswerChange}
-        preferNotToAnswer={true} />
+        preferNotToAnswer={true}
+      />
     );
-  }
+  };
 
   const renderBasicCheckboxGroup = (question) => {
     return (
@@ -68,9 +78,10 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         stateVariable={question.componentDetails.inputName}
         options={question.componentDetails.options}
         state={formData}
-        setState={setFormData} />
+        setState={setFormData}
+      />
     );
-  }
+  };
 
   const renderOptionCardGroup = (question) => {
     return (
@@ -78,14 +89,16 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         stateVariable={question.componentDetails.inputName}
         options={question.componentDetails.options}
         state={formData}
-        setState={setFormData} />
+        setState={setFormData}
+      />
     );
-  }
+  };
 
   const renderBasicSelectComponent = (question) => {
-    const finalOptions = question.componentDetails.inputName === 'county'
-      ? question.componentDetails.options[formData.zipcode]
-      : question.componentDetails.options;
+    const finalOptions =
+      question.componentDetails.inputName === 'county'
+        ? question.componentDetails.options[formData.zipcode]
+        : question.componentDetails.options;
 
     return (
       <BasicSelect
@@ -93,9 +106,10 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         setFormData={setFormData}
         formData={formData}
         options={finalOptions}
-        formDataProperty={question.componentDetails.inputName} />
+        formDataProperty={question.componentDetails.inputName}
+      />
     );
-  }
+  };
 
   const createComponent = (component) => {
     const inputName = matchingQuestion.componentDetails.inputName;
@@ -103,22 +117,24 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     const hasFollowUpQuestions = followUpQuestions && followUpQuestions.length > 0;
     // this is specifically for step 5 error handling
     const isHealthInsuranceQ = matchingQuestion.name === 'healthInsurance';
-    const helperText = isHealthInsuranceQ && matchingQuestion.componentDetails.inputHelperText(formData[matchingQuestion.name]);
-    const hasError = isHealthInsuranceQ && matchingQuestion.componentDetails.inputError(formData[matchingQuestion.name]);
+    const helperText =
+      isHealthInsuranceQ && matchingQuestion.componentDetails.inputHelperText(formData[matchingQuestion.name]);
+    const hasError =
+      isHealthInsuranceQ && matchingQuestion.componentDetails.inputError(formData[matchingQuestion.name]);
 
     return (
-      <div className='question-container' id={id}>
-        {matchingQuestion.name !== 'referralSource' &&
-          <h2 className='question-label'>{matchingQuestion.question}</h2>
-        }
-        {matchingQuestion.questionDescription && <p className='question-description'>{matchingQuestion.questionDescription}</p>}
+      <div className="question-container" id={id}>
+        {matchingQuestion.name !== 'referralSource' && <h2 className="question-label">{matchingQuestion.question}</h2>}
+        {matchingQuestion.questionDescription && (
+          <p className="question-description">{matchingQuestion.questionDescription}</p>
+        )}
         {component}
         {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && renderFollowUpQuestions()}
         {isHealthInsuranceQ && hasError && <ErrorMessage error={helperText} />}
         {createPreviousAndContinueButtons(matchingQuestion)}
       </div>
     );
-  }
+  };
 
   const shouldRenderFollowUpQuestions = (hasFollowUpQuestions, inputName) => {
     if (!hasFollowUpQuestions) {
@@ -133,16 +149,17 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     }
     if (formData[inputName] === 'true') {
       // this case is for a radio button with prefer not to answer where the use selected "yes"
-      return true
+      return true;
     }
     if (formData[inputName] === 'other') {
       // this case is for the referral source question where the user selected "other"
       return true;
     }
-    if ((inputName === 'signUpInfo' &&
-        (formData.signUpInfo.sendUpdates || formData.signUpInfo.sendOffers)) &&
-        !formData.signUpInfo.hasUser
-      ) {
+    if (
+      inputName === 'signUpInfo' &&
+      (formData.signUpInfo.sendUpdates || formData.signUpInfo.sendOffers) &&
+      !formData.signUpInfo.hasUser
+    ) {
       return true;
     }
 
@@ -153,50 +170,54 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
     const { followUpQuestions } = matchingQuestion;
     return followUpQuestions.map((followUp, index) => {
       if (followUp.componentDetails.componentType === 'Radiofield') {
-        return <div className='question-container' key={index}>
-          <h2 className='question-label'>{followUp.question}</h2>
-          {renderRadiofieldComponent(followUp)}
-        </div>
+        return (
+          <div className="question-container" key={index}>
+            <h2 className="question-label">{followUp.question}</h2>
+            {renderRadiofieldComponent(followUp)}
+          </div>
+        );
       } else if (followUp.componentDetails.componentType === 'IncomeBlock') {
-        return <div className='question-container' key={index}>
-          <h2 className='question-label'>{followUp.question}</h2>
-          <IncomeBlock
-            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-            formData={formData} />
-        </div>
-      }  else if (followUp.componentDetails.componentType === 'ExpenseBlock') {
-        return <div className='question-container' key={index}>
-          <h2 className='question-label'>{followUp.question}</h2>
-          <ExpenseBlock
-            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-            formData={formData} />
-        </div>
+        return (
+          <div className="question-container" key={index}>
+            <h2 className="question-label">{followUp.question}</h2>
+            <IncomeBlock handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} formData={formData} />
+          </div>
+        );
+      } else if (followUp.componentDetails.componentType === 'ExpenseBlock') {
+        return (
+          <div className="question-container" key={index}>
+            <h2 className="question-label">{followUp.question}</h2>
+            <ExpenseBlock handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} formData={formData} />
+          </div>
+        );
       } else if (followUp.componentDetails.componentType === 'Textfield') {
         return (
-          <div className='question-container' key={index}>
-            <h2 className='question-label'>{followUp.question}</h2>
+          <div className="question-container" key={index}>
+            <h2 className="question-label">{followUp.question}</h2>
             <Textfield
               componentDetails={matchingQuestion.followUpQuestions[0].componentDetails}
               formData={formData}
               handleTextfieldChange={handleTextfieldChange}
-              index='0' />
+              index="0"
+            />
           </div>
         );
       } else if (followUp.componentDetails.componentType === 'BasicSelect') {
         return (
-          <div className='question-container' key={index}>
-            <h2 className='question-label'>{followUp.question}</h2>
+          <div className="question-container" key={index}>
+            <h2 className="question-label">{followUp.question}</h2>
             {renderBasicSelectComponent(followUp)}
           </div>
         );
       } else if (followUp.componentDetails.componentType === 'SignUp') {
         return (
-          <div className='question-container' key={index}>
-            <h2 className='question-label'>{followUp.question}</h2>
+          <div className="question-container" key={index}>
+            <h2 className="question-label">{followUp.question}</h2>
             <SignUp
               formData={formData}
               handleTextfieldChange={handleTextfieldChange}
-              handleCheckboxChange={handleCheckboxChange} />
+              handleCheckboxChange={handleCheckboxChange}
+            />
           </div>
         );
       } else if (followUp.componentDetails.componentType === 'AccordionContainer') {
@@ -204,19 +225,16 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
         const errorText = matchingQuestion.componentDetails.inputHelperText(formData.hasBenefits, formData);
 
         return (
-          <div className='question-container accordions-container' key={index}>
-            <h2 className='question-label'>{followUp.question}</h2>
-            <p className='question-description'>{matchingQuestion.followUpQuestions[0].questionDescription}</p>
-            <AccordionsContainer
-              formData={formData}
-              setFormData={setFormData}
-            />
-            { hasError && <ErrorMessage error={errorText} /> }
+          <div className="question-container accordions-container" key={index}>
+            <h2 className="question-label">{followUp.question}</h2>
+            <p className="question-description">{matchingQuestion.followUpQuestions[0].questionDescription}</p>
+            <AccordionsContainer formData={formData} setFormData={setFormData} />
+            {hasError && <ErrorMessage error={errorText} />}
           </div>
         );
       }
     });
-  }
+  };
 
   const createPreviousAndContinueButtons = (question) => {
     //render normal button block if the question isn't the income or expense question OR
@@ -228,71 +246,74 @@ const QuestionComponentContainer = ({ formData, handleTextfieldChange, handleCon
 
     if (isNotIncomeAndNotExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
-        <div className='question-buttons'>
+        <div className="question-buttons">
           <PreviousButton formData={formData} questionName={question.name} />
           <ContinueButton
             handleContinueSubmit={handleContinueSubmit}
             inputError={matchingQuestion.componentDetails.inputError}
             formData={formData}
             inputName={matchingQuestion.componentDetails.inputName}
-            questionName={matchingQuestion.name} />
+            questionName={matchingQuestion.name}
+          />
         </div>
       );
     }
-  }
+  };
 
   const renderHeaderAndSubheader = () => {
     if (matchingQuestion.headerType === 'signUpInfo') {
       return (
-        <h1 className='sub-header'>
+        <h1 className="sub-header">
           <FormattedMessage
-            id='qcc.optional-sign-up-text'
-            defaultMessage='Optional: Sign up for benefits updates and/or paid feedback opportunities' />
+            id="qcc.optional-sign-up-text"
+            defaultMessage="Optional: Sign up for benefits updates and/or paid feedback opportunities"
+          />
         </h1>
       );
     } else if (matchingQuestion.headerType === 'aboutHousehold') {
       if (matchingQuestion.name === 'hasBenefits' || matchingQuestion.name === 'acuteHHConditions') {
         return (
-          <h1 className='sub-header'>
+          <h1 className="sub-header">
             <FormattedMessage
-              id='qcc.tell-us-final-text'
-              defaultMessage='Tell us some final information about your household.' />
+              id="qcc.tell-us-final-text"
+              defaultMessage="Tell us some final information about your household."
+            />
           </h1>
-        )
+        );
       } else if (matchingQuestion.name === 'referralSource') {
         return (
-          <h1 className='sub-header'>
-            <FormattedMessage
-              id='questions.referralSource'
-              defaultMessage='How did you hear about this screener?' />
+          <h1 className="sub-header">
+            <FormattedMessage id="questions.referralSource" defaultMessage="How did you hear about this screener?" />
           </h1>
-        )
+        );
       } else {
         return (
-          <h1 className='sub-header'>
-            <FormattedMessage
-              id='qcc.tell-us-text'
-              defaultMessage='Tell us about your household.' />
+          <h1 className="sub-header">
+            <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us about your household." />
           </h1>
-      );
+        );
       }
     }
   };
 
   return (
-    <main className='benefits-form'>
+    <main className="benefits-form">
       {renderHeaderAndSubheader()}
-      {
-        ( matchingQuestion.componentDetails.componentType === 'Textfield' && createComponent(renderTextfieldComponent(matchingQuestion)) ) ||
-        ( matchingQuestion.componentDetails.componentType === 'Radiofield' && createComponent(renderRadiofieldComponent(matchingQuestion)) ) ||
-        ( matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' && createComponent(renderNoAnswerComponent(matchingQuestion)) ) ||
-        ( matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock() ) ||
-        ( matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' && createComponent(renderBasicCheckboxGroup(matchingQuestion)) ) ||
-        ( matchingQuestion.componentDetails.componentType === 'OptionCardGroup' && createComponent(renderOptionCardGroup(matchingQuestion)) ) ||
-        ( matchingQuestion.componentDetails.componentType === 'BasicSelect' && createComponent(renderBasicSelectComponent(matchingQuestion)) )
-      }
+      {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
+        createComponent(renderTextfieldComponent(matchingQuestion))) ||
+        (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
+          createComponent(renderRadiofieldComponent(matchingQuestion))) ||
+        (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
+          createComponent(renderNoAnswerComponent(matchingQuestion))) ||
+        (matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock()) ||
+        (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
+          createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
+        (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
+          createComponent(renderOptionCardGroup(matchingQuestion))) ||
+        (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
+          createComponent(renderBasicSelectComponent(matchingQuestion)))}
     </main>
   );
-}
+};
 
 export default QuestionComponentContainer;

@@ -2,11 +2,11 @@ import { Button, Card, CardContent, CardActions, Typography, FormControlLabel, C
 import { styled } from '@mui/material/styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper.js'
+import { Context } from '../Wrapper/Wrapper.js';
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { updateScreen } from '../../Assets/updateScreen';
-import './Disclaimer.css'
+import './Disclaimer.css';
 
 const StyledTypography = styled(Typography)(`
   color: #c6252b;
@@ -14,10 +14,10 @@ const StyledTypography = styled(Typography)(`
 `);
 
 const Disclaimer = ({ formData, handleCheckboxChange }) => {
-  const { uuid } = useParams()
+  const { uuid } = useParams();
   const [buttonWasClicked, setButtonWasClicked] = useState(false);
   let navigate = useNavigate();
-  const locale = useContext(Context).locale
+  const locale = useContext(Context).locale;
 
   const handleContinueButtonClick = (event) => {
     event.preventDefault();
@@ -26,26 +26,22 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
       updateScreen(uuid, formData, locale.toLowerCase());
       navigate(`/${uuid}/step-2`);
     }
-  }
+  };
 
   return (
-    <main className='benefits-form'>
-      <h1 className='sub-header'>
-        <FormattedMessage
-          id='disclaimer.header'
-          defaultMessage='What you should know before we begin: ' />
+    <main className="benefits-form">
+      <h1 className="sub-header">
+        <FormattedMessage id="disclaimer.header" defaultMessage="What you should know before we begin: " />
       </h1>
-      <Card variant='outlined'>
+      <Card variant="outlined">
         <CardContent>
           <h2 className="disclaimer-header">
-            <FormattedMessage
-              id='disclaimer.sub-header'
-              defaultMessage='Gary Philanthropy Disclaimer' />
+            <FormattedMessage id="disclaimer.sub-header" defaultMessage="Gary Philanthropy Disclaimer" />
           </h2>
-          <Typography variant='body1'>
+          <Typography variant="body1">
             <FormattedMessage
-              id='disclaimer.body'
-              defaultMessage='This benefit calculator is a tool that recommends public benefits programs
+              id="disclaimer.body"
+              defaultMessage="This benefit calculator is a tool that recommends public benefits programs
               for you to consider based upon information you provide about your household and Gary Philanthropy’s
               (“Gary”) best understanding of publicly available information regarding benefits programs.
               Gary cannot guarantee eligibility or acceptance into any program. To enroll in a benefit,
@@ -58,45 +54,41 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
               By filling out this benefits calculator, you agree to future contact from Gary or our affiliates
               regarding your use of the benefits calculator or to offer additional programs that may be of interest
               to you and your family. Standard message and data costs may apply to these communications.
-              You may opt out of receiving these communications at any time through the opt-out link in the communication.' />
+              You may opt out of receiving these communications at any time through the opt-out link in the communication."
+            />
           </Typography>
         </CardContent>
       </Card>
-      <Typography
-        color='text.secondary'>
-          <FormattedMessage
-            id='disclaimer.helper-text'
-            defaultMessage='Check the box below and then click the Continue button to get started.'
-          />
+      <Typography color="text.secondary">
+        <FormattedMessage
+          id="disclaimer.helper-text"
+          defaultMessage="Check the box below and then click the Continue button to get started."
+        />
       </Typography>
-      { buttonWasClicked && formData.agreeToTermsOfService === false &&
+      {(buttonWasClicked && formData.agreeToTermsOfService === false && (
         <StyledTypography>
-          <FormattedMessage
-            id='disclaimer.error'
-            defaultMessage='Please check the box below to continue.' />
+          <FormattedMessage id="disclaimer.error" defaultMessage="Please check the box below to continue." />
         </StyledTypography>
-      ||
-        <StyledTypography />
-      }
+      )) || <StyledTypography />}
       <FormControlLabel
         control={<Checkbox checked={formData.agreeToTermsOfService} onChange={handleCheckboxChange} />}
-        label={<FormattedMessage
-          id='disclaimer-label'
-          defaultMessage='I have read, understand, and agree to the terms of the Gary Disclaimer and consent to contact above.' />}
-        value='agreeToTermsOfService'
-        sx={{ mt: '-.5rem' }}/>
+        label={
+          <FormattedMessage
+            id="disclaimer-label"
+            defaultMessage="I have read, understand, and agree to the terms of the Gary Disclaimer and consent to contact above."
+          />
+        }
+        value="agreeToTermsOfService"
+        sx={{ mt: '-.5rem' }}
+      />
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <PreviousButton formData={formData} />
-        <Button
-          variant='contained'
-          onClick={(event) => handleContinueButtonClick(event)} >
-            <FormattedMessage
-              id='continue-button'
-              defaultMessage='Continue' />
+        <Button variant="contained" onClick={(event) => handleContinueButtonClick(event)}>
+          <FormattedMessage id="continue-button" defaultMessage="Continue" />
         </Button>
       </CardActions>
     </main>
   );
-}
+};
 
 export default Disclaimer;

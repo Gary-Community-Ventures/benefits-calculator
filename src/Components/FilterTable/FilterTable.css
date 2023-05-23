@@ -19,10 +19,10 @@
 }
 
 .filters-button.MuiButton-root {
-  color: #037A93;
+  color: #037a93;
   display: flex;
   align-items: center;
-  padding: .5rem;
+  padding: 0.5rem;
   cursor: pointer;
   background-color: white;
 }
@@ -32,7 +32,7 @@
 }
 
 .filter-selection-container {
-  margin: 1rem .5rem 0rem .5rem;
+  margin: 1rem 0.5rem 0rem 0.5rem;
 }
 
 .close-button-container {
@@ -50,12 +50,12 @@
 }
 
 .toggle {
-  padding-left: .5rem;
+  padding-left: 0.5rem;
 }
 
 .radio-option {
   border: 1px solid #b7b1b1;
-  margin: .25rem 0 .25rem 0;
+  margin: 0.25rem 0 0.25rem 0;
   border-radius: 1rem;
-  padding-left: .25rem;
+  padding-left: 0.25rem;
 }

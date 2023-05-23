@@ -9,7 +9,7 @@ const stepDirectory = {
   hasBenefits: 8,
   acuteHHConditions: 9,
   referralSource: 10,
-  signUpInfo: 11
-}
+  signUpInfo: 11,
+};
 
 export default stepDirectory;

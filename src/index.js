@@ -12,7 +12,7 @@ root.render(
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </Wrapper>
+  </Wrapper>,
 );
 
 // If you want to start measuring performance in your app, pass a function

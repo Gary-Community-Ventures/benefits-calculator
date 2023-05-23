@@ -8,15 +8,14 @@ const ContinueButton = ({ handleContinueSubmit, inputError, formData, inputName,
 
   return (
     <Button
-      variant='contained'
+      variant="contained"
       onClick={(event) => {
         handleContinueSubmit(event, inputError, formData?.[inputName], stepNumberId, questionName, uuid);
-      }}>
-      <FormattedMessage 
-        id='continueButton'
-        defaultMessage='Continue' />
+      }}
+    >
+      <FormattedMessage id="continueButton" defaultMessage="Continue" />
     </Button>
   );
-}
+};
 
 export default ContinueButton;
