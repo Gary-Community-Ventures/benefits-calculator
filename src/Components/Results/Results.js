@@ -266,7 +266,7 @@ const Results = () => {
 						);
           }).reduce((accu, elem) => {
 						//https://stackoverflow.com/questions/34034038/how-to-render-react-components-by-using-map-and-join/35840806#35840806
-						return accu === null ? [elem] : [...accu, <hr className='line-seperator'></hr>, elem];
+						return accu === null ? [elem] : [...accu, <hr className='line-seperator' key='hr'></hr>, elem];
 					}, null)}
         </>
       );
@@ -348,7 +348,7 @@ const Results = () => {
     return dgr;
   }
 
-  const CustomGridTreeDataGroupingCell = (props: GridRenderCellParams) => {
+  const CustomGridTreeDataGroupingCell = (props) => {
     const { id, field, rowNode } = props;
     const apiRef = useGridApiContext();
     const filteredDescendantCountLookup = useGridSelector(
@@ -358,7 +358,7 @@ const Results = () => {
     const [navListOpen, setNavListOpen] = useState(false)
     const openNavList = () => {setNavListOpen(!navListOpen)}
 
-    const handleKeyDown: ButtonProps['onKeyDown'] = (event) => {
+    const handleKeyDown = (event) => {
       if (event.key === ' ') {
         event.stopPropagation();
       }
@@ -367,7 +367,7 @@ const Results = () => {
       }
     };
 
-    const handleClick: ButtonProps['onClick'] = (event) => {
+    const handleClick = (event) => {
       apiRef.current.setRowChildrenExpansion(id, !rowNode.childrenExpanded);
       apiRef.current.setCellFocus(id, field);
       event.stopPropagation();
@@ -455,7 +455,7 @@ const Results = () => {
     );
   }
 
-  const groupingColDef: DataGridProProps['groupingColDef'] = {
+  const groupingColDef = {
     headerName: 'Benefit',
     flex: 1,
     colSpan: ({ row }) => {
@@ -470,7 +470,7 @@ const Results = () => {
   };
 
   const DataGridTable = (results) => {
-    const rows: GridRowsProp = DataGridRows(results);
+    const rows = DataGridRows(results);
 
     const nameHeader = intl.formatMessage({
 			id: 'results.resultsTable-timeToApply',
@@ -485,7 +485,7 @@ const Results = () => {
       defaultMessage: 'Time to Apply'
     })
 
-    const columns: GridColDef[] = [
+    const columns = [
       { field: 'name', headerName: nameHeader, flex: 1 },
       { field: 'value', headerName: valueHeader, flex: 1, valueFormatter: benefitValueFormatter, renderCell: benefitValueRender },
       { field: 'type', headerName: 'Type', flex: 1 },
@@ -706,7 +706,7 @@ const Results = () => {
                 className="back-to-screen-button" onClick={() => {navigate(`/${screenerId}/confirm-information`)}}
                 variant='contained'
               >
-                <FormattedMessage 
+                <FormattedMessage
                   id="results.returnToScreenButton"
                   defaultMessage="Edit Screener Responses"
                 />

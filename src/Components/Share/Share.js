@@ -19,7 +19,7 @@ import IconButton from '@mui/material/IconButton';
 import ReactGA from 'react-ga';
 import './Share.css';
 
-const Share = forwardRef(({ close }, ref) => {
+const Share = forwardRef(function Share({ close }, ref) {
 	const [copied, setCopied] = useState(false);
 	const intl = useIntl();
 
