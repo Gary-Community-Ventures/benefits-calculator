@@ -12,14 +12,18 @@ const CustomBlueSwitch = styled(Switch)(({ theme }) => ({
     backgroundColor: '#037A93',
   },
   '.MuiSwitch-thumb': {
-    boxShadow: '0px 0px 5px 0px rgb(1 1 1 / 80%), 0px 1px 1px 0px rgb(0 0 0 / 10%), 0px 1px 1px 0px rgb(0 0 0 / 12%)'
-  }
+    boxShadow:
+      '0px 0px 5px 0px rgb(1 1 1 / 80%), 0px 1px 1px 0px rgb(0 0 0 / 10%), 0px 1px 1px 0px rgb(0 0 0 / 12%)',
+  },
 }));
 
 const CustomSwitch = ({ handleCustomSwitchToggle, checked }) => {
   return (
-    <CustomBlueSwitch onChange={(event) => handleCustomSwitchToggle(event)} checked={checked ?? false} />
+    <CustomBlueSwitch
+      onChange={(event) => handleCustomSwitchToggle(event)}
+      checked={checked ?? false}
+    />
   );
-}
+};
 
 export default CustomSwitch;

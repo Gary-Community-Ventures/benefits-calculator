@@ -9,47 +9,56 @@ import pregnant from './OptionCardIcons/pregnant.png';
 
 const acuteConditionOptions = {
   food: {
-    formattedMessage: <FormattedMessage
-      id='acuteConditionOptions.food'
-      defaultMessage='Food or groceries'
-    />,
-    image: cart
+    formattedMessage: (
+      <FormattedMessage id='acuteConditionOptions.food' defaultMessage='Food or groceries' />
+    ),
+    image: cart,
   },
   babySupplies: {
-    formattedMessage: <FormattedMessage
-      id='acuteConditionOptions.babySupplies'
-      defaultMessage='Diapers and other baby supplies'
-    />,
-    image: diaper
+    formattedMessage: (
+      <FormattedMessage
+        id='acuteConditionOptions.babySupplies'
+        defaultMessage='Diapers and other baby supplies'
+      />
+    ),
+    image: diaper,
   },
   housing: {
-    formattedMessage: <FormattedMessage
-      id='acuteConditionOptions.housing'
-      defaultMessage='Emergency help paying mortgage, rent, or utilities'
-    />,
-    image: home
+    formattedMessage: (
+      <FormattedMessage
+        id='acuteConditionOptions.housing'
+        defaultMessage='Emergency help paying mortgage, rent, or utilities'
+      />
+    ),
+    image: home,
   },
   support: {
-    formattedMessage: <FormattedMessage
-      id='acuteConditionOptions.support'
-      defaultMessage="A challenge you or your child would like to talk about"
-    />,
-    image: chat
+    formattedMessage: (
+      <FormattedMessage
+        id='acuteConditionOptions.support'
+        defaultMessage='A challenge you or your child would like to talk about'
+      />
+    ),
+    image: chat,
   },
   childDevelopment: {
-    formattedMessage: <FormattedMessage
-      id='acuteConditionOptions.childDevelopment'
-      defaultMessage="Concern about your baby or toddler's development"
-    />,
-    image: stroller
+    formattedMessage: (
+      <FormattedMessage
+        id='acuteConditionOptions.childDevelopment'
+        defaultMessage="Concern about your baby or toddler's development"
+      />
+    ),
+    image: stroller,
   },
   familyPlanning: {
-    formattedMessage: <FormattedMessage
-      id='acuteConditionOptions.familyPlanning'
-      defaultMessage='Family planning or birth control'
-    />,
-    image: pregnant
-  }
+    formattedMessage: (
+      <FormattedMessage
+        id='acuteConditionOptions.familyPlanning'
+        defaultMessage='Family planning or birth control'
+      />
+    ),
+    image: pregnant,
+  },
 };
 
 export default acuteConditionOptions;

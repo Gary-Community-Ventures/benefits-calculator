@@ -1,6 +1,6 @@
 .program-value-header {
   margin: 0;
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: 500;
   font-size: 1.25rem;
   line-height: 1.6;
@@ -9,7 +9,7 @@
 
 .ineligibility-link {
   margin: 0;
-  color: #037A93;
+  color: #037a93;
   -webkit-text-decoration: underline;
   text-decoration: underline;
   text-decoration-color: #1976d266;
@@ -53,7 +53,7 @@
   line-height: 1.5rem;
 }
 
-.navigator-header{
+.navigator-header {
   font-size: 1rem;
   font-weight: 500;
   padding-top: 1rem;
@@ -61,7 +61,7 @@
 
 .navigator-desc {
   font-style: italic;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .font-weight {

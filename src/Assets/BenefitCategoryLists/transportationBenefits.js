@@ -1,11 +1,12 @@
 import { FormattedMessage } from 'react-intl';
 
 const transportationBenefits = {
-  rtdlive:
+  rtdlive: (
     <FormattedMessage
       id='transportationBenefits.rtdlive'
       defaultMessage='Discounted RTD fares (RTD LiVE)'
     />
+  ),
 };
 
 export default transportationBenefits;

@@ -11,48 +11,48 @@ const styleOverrides = {
         root: {
           // Some CSS
           backgroundColor: primaryBlueColor,
-          ":hover": {
-            backgroundColor: primaryGreenColor
-          }
+          ':hover': {
+            backgroundColor: primaryGreenColor,
+          },
         },
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: primaryBlackColor
-        }
-      }
+          backgroundColor: primaryBlackColor,
+        },
+      },
     },
     MuiCheckbox: {
       styleOverrides: {
         root: {
-          "&.Mui-checked": {
-            color: primaryBlueColor
-          }
-        }
-      }
+          '&.Mui-checked': {
+            color: primaryBlueColor,
+          },
+        },
+      },
     },
     MuiRadio: {
       styleOverrides: {
         root: {
-          "&.Mui-checked": {
-            color: primaryBlueColor
-          }
-        }
-      }
+          '&.Mui-checked': {
+            color: primaryBlueColor,
+          },
+        },
+      },
     },
     MuiLink: {
       styleOverrides: {
         root: {
           color: primaryBlueColor,
-          "&:hover": {
-            color: primaryGreenColor
-          }
-        }
-      }
-    }
-  }
+          '&:hover': {
+            color: primaryGreenColor,
+          },
+        },
+      },
+    },
+  },
 };
 
 export default styleOverrides;

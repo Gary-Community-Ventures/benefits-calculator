@@ -7,10 +7,12 @@ const taxYearOptions = {
   2020: '2020',
   2021: '2021',
   2022: '2022',
-  noRecentFiling: 
-    <FormattedMessage 
-      id='taxYearOptions.noRecentFiling' 
-      defaultMessage='I have not filed taxes in the last 5 years' />
+  noRecentFiling: (
+    <FormattedMessage
+      id='taxYearOptions.noRecentFiling'
+      defaultMessage='I have not filed taxes in the last 5 years'
+    />
+  ),
 };
 
 export default taxYearOptions;

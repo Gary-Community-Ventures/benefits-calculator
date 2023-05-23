@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 
 const StyledTextField = styled(TextField)({
   marginBottom: 20,
-  marginRight: '1rem'
+  marginRight: '1rem',
 });
 
 const Textfield = ({ componentDetails, formData, handleTextfieldChange, index }) => {
@@ -11,18 +11,21 @@ const Textfield = ({ componentDetails, formData, handleTextfieldChange, index })
 
   return (
     <>
-      <StyledTextField 
+      <StyledTextField
         type={inputType}
         name={inputName}
         value={formData[inputName]}
         label={inputLabel}
-        onChange={(event) => {handleTextfieldChange(event, index)}}
+        onChange={(event) => {
+          handleTextfieldChange(event, index);
+        }}
         variant='outlined'
         required
         error={inputError(formData[inputName])}
-        helperText={inputHelperText(formData[inputName])} />
+        helperText={inputHelperText(formData[inputName])}
+      />
     </>
   );
-}
+};
 
 export default Textfield;

@@ -5,7 +5,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 3rem;
-  border:  1px solid black;
+  border: 1px solid black;
   border-radius: 1rem;
 }
 
@@ -14,10 +14,10 @@
 }
 
 .copy-results-text {
-  color: #037A93;
+  color: #037a93;
   font-weight: 500;
   font-size: 22px;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .copy-results-container {
@@ -36,7 +36,8 @@
     padding: 1.5rem;
   }
 
-  .copy-results-text, article.question-container.question-label {
+  .copy-results-text,
+  article.question-container.question-label {
     font-size: 1.25rem;
   }
 
@@ -48,6 +49,6 @@
 @media (max-width: 385px) {
   #send-button.MuiButton-root {
     margin: 0;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 }

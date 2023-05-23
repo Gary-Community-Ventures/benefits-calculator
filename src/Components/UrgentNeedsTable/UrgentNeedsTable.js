@@ -13,18 +13,18 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
 
   return (
     <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
+      <Table aria-label='collapsible table'>
         <TableHead>
           <TableRow>
             <TableCell></TableCell>
             <TableCell align='left'>
-              <FormattedMessage 
+              <FormattedMessage
                 id='urgentNeedsTable.resources-columnHeader'
-                defaultMessage='Resources' 
+                defaultMessage='Resources'
               />
             </TableCell>
             <TableCell align='left'>
-              <FormattedMessage 
+              <FormattedMessage
                 id='urgentNeedsTable.typeOfResource-columnHeader'
                 defaultMessage='Type of Resource'
               />
@@ -39,6 +39,6 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
       </Table>
     </TableContainer>
   );
-}
+};
 
 export default UrgentNeedsTable;

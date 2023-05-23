@@ -1,4 +1,4 @@
-import benefitCategories from "../../Assets/benefitCategories";
+import benefitCategories from '../../Assets/benefitCategories';
 import cashAssistanceBenefits from '../../Assets/BenefitCategoryLists/cashAssistanceBenefits';
 import foodAndNutritionBenefits from '../../Assets/BenefitCategoryLists/foodAndNutritionBenefits';
 import childCareBenefits from '../../Assets/BenefitCategoryLists/childCareBenefits';
@@ -6,7 +6,7 @@ import housingAndUtilities from '../../Assets/BenefitCategoryLists/housingAndUti
 import transportationBenefits from '../../Assets/BenefitCategoryLists/transportationBenefits';
 import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBenefits';
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
-import CategoryAccordion from "../CategoryAccordion/CategoryAccordion";
+import CategoryAccordion from '../CategoryAccordion/CategoryAccordion';
 import { useState } from 'react';
 import './AccordionsContainer.css';
 
@@ -20,32 +20,32 @@ const AccordionsContainer = ({ formData, setFormData }) => {
   const accordionsData = [
     {
       categoryName: benefitCategories.cash,
-      categoryOptions: cashAssistanceBenefits
+      categoryOptions: cashAssistanceBenefits,
     },
     {
       categoryName: benefitCategories.foodAndNutrition,
-      categoryOptions: foodAndNutritionBenefits
+      categoryOptions: foodAndNutritionBenefits,
     },
     {
       categoryName: benefitCategories.childCare,
-      categoryOptions: childCareBenefits
+      categoryOptions: childCareBenefits,
     },
     {
       categoryName: benefitCategories.housingAndUtilities,
-      categoryOptions: housingAndUtilities
+      categoryOptions: housingAndUtilities,
     },
     {
       categoryName: benefitCategories.transportation,
-      categoryOptions: transportationBenefits
+      categoryOptions: transportationBenefits,
     },
     {
       categoryName: benefitCategories.healthCare,
-      categoryOptions: healthCareBenefits
+      categoryOptions: healthCareBenefits,
     },
     {
       categoryName: benefitCategories.taxCredits,
-      categoryOptions: taxCreditBenefits
-    }
+      categoryOptions: taxCreditBenefits,
+    },
   ];
 
   const createAccordions = (accordionsInfo) => {
@@ -66,13 +66,9 @@ const AccordionsContainer = ({ formData, setFormData }) => {
     });
 
     return categoryAccordions;
-  }
+  };
 
-  return (
-    <div className='accordions-container'>
-      { createAccordions(accordionsData) }
-    </div>
-  );
-}
+  return <div className='accordions-container'>{createAccordions(accordionsData)}</div>;
+};
 
 export default AccordionsContainer;

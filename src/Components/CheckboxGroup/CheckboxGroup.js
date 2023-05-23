@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl';
 const CheckboxGroup = ({ options, householdData, setHouseholdData, index }) => {
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
-    setHouseholdData({...householdData, [name]: checked})
-  }
+    setHouseholdData({ ...householdData, [name]: checked });
+  };
 
   const createFormControlLabels = (optionList) => {
     const optionKeys = Object.keys(optionList);
@@ -13,11 +13,12 @@ const CheckboxGroup = ({ options, householdData, setHouseholdData, index }) => {
     const formControlLabels = optionKeys.map((optionKey) => {
       let label = optionList[optionKey];
       if (index !== 0 && optionKey === 'disabled') {
-        label =
+        label = (
           <FormattedMessage
             id='checkboxGroup.disabledLabel'
             defaultMessage='Have any disabilities that make them unable to work now or in the future'
-          />;
+          />
+        );
       }
 
       return (
@@ -28,7 +29,8 @@ const CheckboxGroup = ({ options, householdData, setHouseholdData, index }) => {
               checked={householdData[optionKey]}
               onChange={handleCheckboxChange}
               name={optionKey}
-              sx={{ marginTop: -1 }} />
+              sx={{ marginTop: -1 }}
+            />
           }
           label={label}
           key={optionKey}
@@ -37,15 +39,13 @@ const CheckboxGroup = ({ options, householdData, setHouseholdData, index }) => {
     });
 
     return formControlLabels;
-  }
+  };
 
   return (
     <FormControl>
-      <FormGroup>
-        {createFormControlLabels(options)}
-      </FormGroup>
+      <FormGroup>{createFormControlLabels(options)}</FormGroup>
     </FormControl>
   );
-}
+};
 
 export default CheckboxGroup;
