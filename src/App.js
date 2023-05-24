@@ -18,7 +18,6 @@ import { updateScreen, updateUser } from './Assets/updateScreen';
 import './App.css';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import stepDirectory from './Assets/stepDirectory';
-// import { createDevFormData } from './Assets/devFormData';
 
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
 ReactGA.initialize(TRACKING_ID, { name: 'main' });
