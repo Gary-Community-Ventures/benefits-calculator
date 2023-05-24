@@ -91,7 +91,7 @@ const App = () => {
     referrerCode: referrer,
     otherSource: setReferrerSource ? '' : referrer,
     signUpInfo: {
-        email: '',
+      email: '',
       phone: '',
       firstName: '',
       lastName: '',
