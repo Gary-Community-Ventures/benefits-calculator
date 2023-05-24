@@ -11,8 +11,9 @@ import MFBLogo from '../../Assets/logo.png';
 import BIAMFBLogo from '../../Assets/biamfbcombinedlogo.png';
 import './Header.css';
 
-const Header = ({ formData, handleTextfieldChange }) => {
+const Header = ({ handleTextfieldChange }) => {
   const context = useContext(Context);
+  const { formData } = context;
   const { urlSearchParams, isBIAUser } = formData;
   const location = useLocation();
   const urlRegex = /^\/(?:\/results\/(.+)|(.+)\/results)\/?$/;
@@ -112,7 +113,6 @@ const Header = ({ formData, handleTextfieldChange }) => {
       </Modal>
       <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-labelledby="email-results-modal">
         <EmailResults
-          formData={formData}
           handleTextfieldChange={handleTextfieldChange}
           screenId={screenUUID}
           close={handleCloseEmailResults}

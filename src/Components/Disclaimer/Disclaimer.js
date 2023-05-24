@@ -13,11 +13,11 @@ const StyledTypography = styled(Typography)(`
   height: 24px;
 `);
 
-const Disclaimer = ({ formData, handleCheckboxChange }) => {
+const Disclaimer = ({ handleCheckboxChange }) => {
   const { uuid } = useParams();
   const [buttonWasClicked, setButtonWasClicked] = useState(false);
   let navigate = useNavigate();
-  const locale = useContext(Context).locale;
+  const { locale, formData } = useContext(Context);
 
   const handleContinueButtonClick = (event) => {
     event.preventDefault();
@@ -82,7 +82,7 @@ const Disclaimer = ({ formData, handleCheckboxChange }) => {
         sx={{ mt: '-.5rem' }}
       />
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
-        <PreviousButton formData={formData} />
+        <PreviousButton />
         <Button variant="contained" onClick={(event) => handleContinueButtonClick(event)}>
           <FormattedMessage id="continue-button" defaultMessage="Continue" />
         </Button>

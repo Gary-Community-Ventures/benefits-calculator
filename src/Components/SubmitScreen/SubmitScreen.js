@@ -4,8 +4,8 @@ import { Context } from '../Wrapper/Wrapper';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SubmitScreen = ({ formData, setFormData }) => {
-  const locale = useContext(Context).locale;
+const SubmitScreen = () => {
+  const { locale, formData, setFormData } = useContext(Context);
   const navigate = useNavigate();
   useEffect(() => {
     fetchResults();

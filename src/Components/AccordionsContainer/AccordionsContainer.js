@@ -10,7 +10,7 @@ import CategoryAccordion from '../CategoryAccordion/CategoryAccordion';
 import { useState } from 'react';
 import './AccordionsContainer.css';
 
-const AccordionsContainer = ({ formData, setFormData }) => {
+const AccordionsContainer = () => {
   const [expanded, setExpanded] = useState(false);
 
   const handleAccordionSelectChange = (panel) => (event, isExpanded) => {
@@ -55,8 +55,6 @@ const AccordionsContainer = ({ formData, setFormData }) => {
           <CategoryAccordion
             categoryName={accordionData.categoryName}
             categoryOptions={accordionData.categoryOptions}
-            formData={formData}
-            setFormData={setFormData}
             handleAccordionSelectChange={handleAccordionSelectChange}
             expanded={expanded}
             index={index}

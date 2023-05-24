@@ -1,10 +1,13 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography } from '@mui/material';
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import { useIntl } from 'react-intl';
 import './OptionCardGroup.css';
 
-const OptionCardGroup = ({ stateVariable, options, state, setState }) => {
+const OptionCardGroup = ({ stateVariable, options }) => {
+  const { formData: state, setFormData: setState } = useContext(Context);
   const intl = useIntl();
 
   const handleCardClick = (option) => {

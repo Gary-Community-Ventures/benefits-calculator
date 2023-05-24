@@ -38,82 +38,7 @@ const App = () => {
   const totalSteps = Object.keys(stepDirectory).length + 2;
   const [fetchedScreen, setFetchedScreen] = useState(false);
   const locale = useContext(Context).locale;
-
-  const initialFormData = {
-    screenUUID: undefined,
-    isTest: isTest,
-    externalID: externalId,
-    agreeToTermsOfService: false,
-    zipcode: '',
-    county: '',
-    startTime: new Date().toJSON(),
-    hasExpenses: false,
-    expenses: [],
-    householdSize: '',
-    householdData: [],
-    householdAssets: 0,
-    hasBenefits: 'preferNotToAnswer',
-    benefits: {
-      acp: false,
-      andcs: false,
-      cccap: false,
-      coctc: false,
-      coeitc: false,
-      coheadstart: false,
-      coPropTaxRentHeatCreditRebate: false,
-      ctc: false,
-      dentallowincseniors: false,
-      denverpresc: false,
-      ede: false,
-      eitc: false,
-      erc: false,
-      lifeline: false,
-      leap: false,
-      mydenver: false,
-      nslp: false,
-      oap: false,
-      rtdlive: false,
-      snap: false,
-      ssi: false,
-      tanf: false,
-      upk: false,
-      wic: false,
-    },
-    healthInsurance: {
-      employer: false,
-      private: false,
-      medicaid: false,
-      medicare: false,
-      chp: false,
-      none: false,
-    },
-    referralSource: setReferrerSource ? referrer : 'other',
-    referrerCode: referrer,
-    otherSource: setReferrerSource ? '' : referrer,
-    signUpInfo: {
-      email: '',
-      phone: '',
-      firstName: '',
-      lastName: '',
-      hasUser: false,
-      sendOffers: false,
-      sendUpdates: false,
-      commConsent: false,
-    },
-    urlSearchParams: urlSearchParams,
-    isBIAUser: isBIAUser,
-    acuteHHConditions: {
-      food: false,
-      babySupplies: false,
-      housing: false,
-      support: false,
-      childDevelopment: false,
-      familyPlanning: false,
-    },
-  };
-
-  const [formData, setFormData] = useState(initialFormData);
-  // const [formData, setFormData] = useState(createDevFormData(searchParams));
+  const { formData, setFormData } = useContext(Context);
 
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
@@ -145,7 +70,9 @@ const App = () => {
     }
 
     if (formData.hasBenefits !== 'true') {
-      updatedFormData.benefits = initialFormData.benefits;
+      for (const benefit in formData.benefits) {
+        updatedFormData.benefits[benefit] = false;
+      }
     }
 
     setFormData(updatedFormData);
@@ -157,6 +84,20 @@ const App = () => {
     formData.hasBenefits,
     formData.sendOffers,
   ]);
+
+  useEffect(() => {
+    // overrides setFormData above on first render
+    setFormData({
+      ...formData,
+      isTest: isTest,
+      externalID: externalId,
+      referralSource: setReferrerSource ? referrer : 'other',
+      referrerCode: referrer,
+      otherSource: setReferrerSource ? '' : referrer,
+      urlSearchParams: urlSearchParams,
+      isBIAUser: isBIAUser,
+    });
+  }, []);
 
   const handleTextfieldChange = (event) => {
     const { name, value } = event.target;
@@ -266,7 +207,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <CssBaseline />
-        <Header formData={formData} handleTextfieldChange={handleTextfieldChange} />
+        <Header handleTextfieldChange={handleTextfieldChange} />
         <Routes>
           <Route path="/step-0" element={<ProgressBar step="0" />} />
           <Route path="/:uuid/step-:id" element={<ProgressBar />} />
@@ -276,34 +217,20 @@ const App = () => {
         </Routes>
         <Routes>
           <Route path="/" element={<Navigate to={`/step-0${urlSearchParams}`} replace />} />
-          <Route path="/step-0" element={<LandingPage formData={formData} setFetchedScreen={setFetchedScreen} />} />
+          <Route path="/step-0" element={<LandingPage setFetchedScreen={setFetchedScreen} />} />
           <Route path="results/:uuid" element={<Results />} />
           <Route path=":uuid">
-            {!fetchedScreen && (
-              <Route
-                path="*"
-                element={
-                  <FetchScreen formData={formData} setFormData={setFormData} setFetchedScreen={setFetchedScreen} />
-                }
-              />
-            )}
+            {!fetchedScreen && <Route path="*" element={<FetchScreen setFetchedScreen={setFetchedScreen} />} />}
             {fetchedScreen && (
               <>
                 <Route path="" element={<Navigate to="/step-0" replace />} />
-                <Route
-                  path="step-0"
-                  element={<LandingPage formData={formData} setFetchedScreen={setFetchedScreen} />}
-                />
-                <Route
-                  path="step-1"
-                  element={<Disclaimer formData={formData} handleCheckboxChange={handleCheckboxChange} />}
-                />
+                <Route path="step-0" element={<LandingPage setFetchedScreen={setFetchedScreen} />} />
+                <Route path="step-1" element={<Disclaimer handleCheckboxChange={handleCheckboxChange} />} />
                 <Route
                   path={`step-${stepDirectory.householdData}/:page`}
                   element={
                     <HouseholdDataBlock
                       key={window.location.href}
-                      formData={formData}
                       handleHouseholdDataSubmit={handleHouseholdDataSubmit}
                     />
                   }
@@ -312,7 +239,6 @@ const App = () => {
                   path="step-:id"
                   element={
                     <QuestionComponentContainer
-                      formData={formData}
                       handleTextfieldChange={handleTextfieldChange}
                       handleContinueSubmit={handleContinueSubmit}
                       handleRadioButtonChange={handleRadioButtonChange}
@@ -320,12 +246,11 @@ const App = () => {
                       handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
                       handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
                       handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-                      setFormData={setFormData}
                       handleCheckboxChange={handleCheckboxChange}
                     />
                   }
                 />
-                <Route path="confirm-information" element={<Confirmation formData={formData} />} />
+                <Route path="confirm-information" element={<Confirmation />} />
                 <Route path="results" element={<Results />} />
                 <Route path="*" element={<Navigate to="/step-0" replace />} />
               </>

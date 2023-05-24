@@ -1,11 +1,14 @@
 import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper.js';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createScreen } from '../../Assets/updateScreen.js';
 import ReactGA from 'react-ga';
 import './LandingPage.css';
 
-const LandingPage = ({ formData, setFetchedScreen }) => {
+const LandingPage = ({ setFetchedScreen }) => {
+  const { formData } = useContext(Context);
   let { uuid } = useParams();
 
   const navigate = useNavigate();

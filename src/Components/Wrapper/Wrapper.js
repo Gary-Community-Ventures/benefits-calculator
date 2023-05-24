@@ -58,9 +58,89 @@ const Wrapper = (props) => {
     }
   };
 
+  const initialFormData = {
+    isTest: undefined,
+    externalID: undefined,
+    agreeToTermsOfService: false,
+    zipcode: '',
+    county: '',
+    startTime: new Date().toJSON(),
+    hasExpenses: false,
+    expenses: [],
+    householdSize: '',
+    householdData: [],
+    householdAssets: 0,
+    hasBenefits: 'preferNotToAnswer',
+    benefits: {
+      acp: false,
+      andcs: false,
+      cccap: false,
+      coctc: false,
+      coeitc: false,
+      coheadstart: false,
+      coPropTaxRentHeatCreditRebate: false,
+      ctc: false,
+      dentallowincseniors: false,
+      denverpresc: false,
+      ede: false,
+      eitc: false,
+      erc: false,
+      lifeline: false,
+      leap: false,
+      mydenver: false,
+      nslp: false,
+      oap: false,
+      rtdlive: false,
+      snap: false,
+      ssi: false,
+      tanf: false,
+      upk: false,
+      wic: false,
+    },
+    healthInsurance: {
+      employer: false,
+      private: false,
+      medicaid: false,
+      medicare: false,
+      chp: false,
+      none: false,
+    },
+    referralSource: undefined,
+    referrerCode: undefined,
+    otherSource: undefined,
+    signUpInfo: {
+      email: '',
+      phone: '',
+      firstName: '',
+      lastName: '',
+      hasUser: false,
+      sendOffers: false,
+      sendUpdates: false,
+      commConsent: false,
+    },
+    urlSearchParams: '',
+    isBIAUser: false,
+    acuteHHConditions: {
+      food: false,
+      babySupplies: false,
+      housing: false,
+      support: false,
+      childDevelopment: false,
+      familyPlanning: false,
+    },
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
+
   return (
-    <Context.Provider value={{ locale, setLocale, selectLanguage }}>
-      <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
+    <Context.Provider value={{ locale, setLocale, selectLanguage, formData, setFormData }}>
+      <IntlProvider
+        locale={locale}
+        messages={messages}
+        defaultLocale={locale}
+        formData={formData}
+        setFormData={setFormData}
+      >
         {props.children}
       </IntlProvider>
     </Context.Provider>

@@ -1,6 +1,7 @@
 import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -22,7 +23,8 @@ const StyledTextField = styled(TextField)({
   marginBottom: 20,
 });
 
-const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
+const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
+  const { formData } = useContext(Context);
   const { id, uuid } = useParams();
   const stepNumberId = Number(id);
 
@@ -224,7 +226,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, formData }) => {
         <FormattedMessage id="expenseBlock.return-addExpenseButton" defaultMessage="Add another expense" />
       </Button>
       <div className="prev-save-continue-buttons">
-        <PreviousButton formData={formData} />
+        <PreviousButton />
         <Button
           variant="contained"
           onClick={(event) => {
