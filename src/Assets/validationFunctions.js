@@ -1,5 +1,25 @@
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import countiesByZipcode from './countiesByZipcode';
+
+function useErrorController(hasErrorFunc, messageFunc) {
+  const [hasError, setHasError] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const showError = hasError && isSubmitted;
+
+  const updateError = (value, formData) => {
+    const updatedHasError = hasErrorFunc(value, formData);
+    setHasError(updatedHasError);
+    return updatedHasError;
+  };
+
+  const message = (value, formData) => {
+    return messageFunc(value, formData);
+  };
+
+  return { hasError, showError, setIsSubmitted, updateError, message };
+}
 
 const ageHasError = (applicantAge) => {
   // handleTextfieldChange prevents setting anything to formData that does not pass a number regex test
@@ -367,6 +387,7 @@ const displayBenefitsHelperText = (hasBenefits, formData) => {
 };
 
 export {
+  useErrorController,
   ageHasError,
   displayAgeHelperText,
   zipcodeHasError,

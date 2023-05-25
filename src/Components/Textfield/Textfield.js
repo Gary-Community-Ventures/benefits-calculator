@@ -6,8 +6,8 @@ const StyledTextField = styled(TextField)({
   marginRight: '1rem',
 });
 
-const Textfield = ({ componentDetails, data, handleTextfieldChange, index }) => {
-  const { inputType, inputName, inputLabel, inputError, inputHelperText } = componentDetails;
+const Textfield = ({ componentDetails, data, handleTextfieldChange, index, errorController }) => {
+  const { inputType, inputName, inputLabel } = componentDetails;
 
   return (
     <>
@@ -17,12 +17,13 @@ const Textfield = ({ componentDetails, data, handleTextfieldChange, index }) => 
         value={data[inputName]}
         label={inputLabel}
         onChange={(event) => {
+          errorController.updateError(event.target.value);
           handleTextfieldChange(event, index);
         }}
         variant="outlined"
         required
-        error={inputError(data[inputName])}
-        helperText={inputHelperText(data[inputName])}
+        error={errorController.showError}
+        helperText={errorController.message(data[inputName])}
       />
     </>
   );

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
@@ -16,7 +16,7 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import AccordionsContainer from '../../Components/AccordionsContainer/AccordionsContainer';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import questions from '../../Assets/questions';
-import { zipcodeHasError } from '../../Assets/validationFunctions';
+import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({
@@ -29,10 +29,14 @@ const QuestionComponentContainer = ({
   handleHouseholdDataSubmit,
   handleCheckboxChange,
 }) => {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   let { id } = useParams();
   let numberId = Number(id);
   const matchingQuestion = questions[numberId];
+  const errorController = useErrorController(
+    matchingQuestion.componentDetails.inputError,
+    matchingQuestion.componentDetails.inputHelperText,
+  );
 
   const createHouseholdDataBlock = () => {
     return (
@@ -46,6 +50,7 @@ const QuestionComponentContainer = ({
     return (
       <Textfield
         componentDetails={question.componentDetails}
+        errorController={errorController}
         data={formData}
         handleTextfieldChange={handleTextfieldChange}
       />
@@ -72,7 +77,7 @@ const QuestionComponentContainer = ({
     return (
       <BasicCheckboxGroup
         stateVariable={question.componentDetails.inputName}
-        options={question.componentDetails.options}
+        options={matchingQuestion.componentDetails.options}
       />
     );
   };
@@ -81,7 +86,7 @@ const QuestionComponentContainer = ({
     return (
       <OptionCardGroup
         stateVariable={question.componentDetails.inputName}
-        options={question.componentDetails.options}
+        options={matchingQuestion.componentDetails.options}
       />
     );
   };
@@ -121,7 +126,7 @@ const QuestionComponentContainer = ({
         {component}
         {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && renderFollowUpQuestions()}
         {isHealthInsuranceQ && hasError && <ErrorMessage error={helperText} />}
-        {createPreviousAndContinueButtons(matchingQuestion)}
+        {createPreviousAndContinueButtons()}
       </div>
     );
   };
@@ -222,21 +227,23 @@ const QuestionComponentContainer = ({
     });
   };
 
-  const createPreviousAndContinueButtons = (question) => {
+  const createPreviousAndContinueButtons = () => {
     //render normal button block if the question isn't the income or expense question OR
     //if the user doesn't have an income/expenses at all,
     //otherwise these buttons will be created in the IncomeBlock/ExpenseBlock components
-    const isNotIncomeAndNotExpenseQ = question.name !== 'hasIncome' && question.name !== 'hasExpenses';
-    const hasFalsyIncome = question.name === 'hasIncome' && formData[question.componentDetails.inputName] === false;
-    const hasFalsyExpense = question.name === 'hasExpenses' && formData[question.componentDetails.inputName] === false;
+    const isNotIncomeAndNotExpenseQ = matchingQuestion.name !== 'hasIncome' && matchingQuestion.name !== 'hasExpenses';
+    const hasFalsyIncome =
+      matchingQuestion.name === 'hasIncome' && formData[matchingQuestion.componentDetails.inputName] === false;
+    const hasFalsyExpense =
+      matchingQuestion.name === 'hasExpenses' && formData[matchingQuestion.componentDetails.inputName] === false;
 
     if (isNotIncomeAndNotExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className="question-buttons">
-          <PreviousButton questionName={question.name} />
+          <PreviousButton questionName={matchingQuestion.name} />
           <ContinueButton
             handleContinueSubmit={handleContinueSubmit}
-            inputError={matchingQuestion.componentDetails.inputError}
+            errorController={errorController}
             inputName={matchingQuestion.componentDetails.inputName}
             questionName={matchingQuestion.name}
           />

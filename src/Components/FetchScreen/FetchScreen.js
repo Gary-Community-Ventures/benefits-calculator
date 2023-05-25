@@ -135,7 +135,7 @@ const FetchScreen = ({ setFetchedScreen }) => {
       initialFormData.hasExpenses = true;
       initialFormData.expenses.push({
         expenseSourceName: expense.type ?? '',
-        expenseAmount: expense.amount ?? '',
+        expenseAmount: Math.round(expense.amount) ?? '',
       });
     }
     setFormData({ ...formData, ...initialFormData });
