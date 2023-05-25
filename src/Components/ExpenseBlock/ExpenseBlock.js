@@ -1,11 +1,12 @@
 import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import {
+  useErrorController,
   expenseSourceValueHasError,
   displayExpenseSourceValueHelperText,
   expenseSourcesAreValid,
@@ -23,10 +24,14 @@ const StyledTextField = styled(TextField)({
   marginBottom: 20,
 });
 
-const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
+const ExpenseBlock = ({ handleExpenseSourcesSubmit, submitted }) => {
   const { formData } = useContext(Context);
   const { id, uuid } = useParams();
   const stepNumberId = Number(id);
+  const amountErrorController = useErrorController(expenseSourceValueHasError, displayExpenseSourceValueHelperText);
+  useEffect(() => {
+    amountErrorController.setIsSubmitted(submitted);
+  }, [submitted]);
 
   const [selectedMenuItem, setSelectedMenuItem] = useState(
     formData.expenses.length > 0
@@ -92,12 +97,13 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
               <FormattedMessage id="expenseBlock.createExpenseAmountTextfield-amountLabel" defaultMessage="Amount" />
             }
             onChange={(event) => {
+              amountErrorController.updateError(event.target.value);
               handleExpenseTextfieldChange(event, index);
             }}
             variant="outlined"
             required
-            error={expenseSourceValueHasError(selectedMenuItem[index].expenseAmount)}
-            helperText={displayExpenseSourceValueHelperText(selectedMenuItem[index].expenseAmount)}
+            error={amountErrorController.showError}
+            helperText={amountErrorController.message(selectedMenuItem[index].expenseAmount)}
           />
         </div>
       </div>
@@ -170,8 +176,9 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
     ]);
   };
 
-  const handleSaveAndContinue = (event) => {
+  const handleSaveAndContinue = (event, amountErrorController) => {
     event.preventDefault();
+    amountErrorController.setIsSubmitted(true);
     if (expenseSourcesAreValid(selectedMenuItem)) {
       handleExpenseSourcesSubmit(selectedMenuItem, stepNumberId, uuid);
     }
@@ -230,7 +237,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
         <Button
           variant="contained"
           onClick={(event) => {
-            handleSaveAndContinue(event);
+            handleSaveAndContinue(event, amountErrorController);
           }}
         >
           <FormattedMessage id="continueButton" defaultMessage="Continue" />

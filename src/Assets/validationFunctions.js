@@ -18,7 +18,7 @@ function useErrorController(hasErrorFunc, messageFunc) {
     return messageFunc(value, formData);
   };
 
-  return { hasError, showError, setIsSubmitted, updateError, message };
+  return { hasError, showError, isSubmitted, setIsSubmitted, updateError, message };
 }
 
 const ageHasError = (applicantAge) => {
@@ -98,7 +98,7 @@ const incomeStreamsAreValid = (incomeStreams) => {
 };
 
 const expenseSourceValueHasError = (valueInput) => {
-  return valueInput <= 0;
+  return valueInput <= 0 || valueInput === '';
 };
 
 const displayExpenseSourceValueHelperText = (valueInput) => {

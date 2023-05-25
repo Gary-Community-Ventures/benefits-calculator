@@ -8,13 +8,13 @@ import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import IncomeBlock from '../IncomeBlock/IncomeBlock';
 import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
-import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import SignUp from '../SignUp/SignUp';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import AccordionsContainer from '../../Components/AccordionsContainer/AccordionsContainer';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
+import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import questions from '../../Assets/questions';
 import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
@@ -26,7 +26,6 @@ const QuestionComponentContainer = ({
   handleNoAnswerChange,
   handleIncomeStreamsSubmit,
   handleExpenseSourcesSubmit,
-  handleHouseholdDataSubmit,
   handleCheckboxChange,
 }) => {
   const { formData } = useContext(Context);
@@ -37,14 +36,6 @@ const QuestionComponentContainer = ({
     matchingQuestion.componentDetails.inputError,
     matchingQuestion.componentDetails.inputHelperText,
   );
-
-  const createHouseholdDataBlock = () => {
-    return (
-      <div className="question-container" id={id}>
-        <HouseholdDataBlock handleHouseholdDataSubmit={handleHouseholdDataSubmit} />
-      </div>
-    );
-  };
 
   const renderTextfieldComponent = (question) => {
     return (
@@ -92,11 +83,6 @@ const QuestionComponentContainer = ({
   };
 
   const renderBasicSelectComponent = (question) => {
-    const finalOptions =
-      question.componentDetails.inputName === 'county'
-        ? question.componentDetails.options[formData.zipcode]
-        : question.componentDetails.options;
-
     return (
       <BasicSelect
         componentProperties={question.componentDetails.componentProperties}
@@ -124,7 +110,17 @@ const QuestionComponentContainer = ({
           <p className="question-description">{matchingQuestion.questionDescription}</p>
         )}
         {component}
-        {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && renderFollowUpQuestions()}
+        {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && (
+          <FollowUpQuestions
+            matchingQuestion={matchingQuestion}
+            submitted={errorController.isSubmitted}
+            formData={formData}
+            handleCheckboxChange={handleCheckboxChange}
+            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
+            handleTextfieldChange={handleTextfieldChange}
+          />
+        )}
         {isHealthInsuranceQ && hasError && <ErrorMessage error={helperText} />}
         {createPreviousAndContinueButtons()}
       </div>
@@ -297,7 +293,6 @@ const QuestionComponentContainer = ({
           createComponent(renderRadiofieldComponent(matchingQuestion))) ||
         (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
           createComponent(renderNoAnswerComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock()) ||
         (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
           createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
         (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
