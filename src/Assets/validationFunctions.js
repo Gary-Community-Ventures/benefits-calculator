@@ -156,14 +156,15 @@ const housingSourcesAreValid = (selectedHousing) => {
 };
 
 const householdMemberAgeHasError = (applicantAge) => {
+  if (applicantAge === '') {
+    return true;
+  }
   const numberApplicantAge = Number(applicantAge);
   return numberApplicantAge < 0;
 };
 
 const displayHouseholdMemberAgeHelperText = (applicantAge) => {
-  const numberApplicantAge = Number(applicantAge);
-
-  if (numberApplicantAge < 0) {
+  if (householdMemberAgeHasError(applicantAge)) {
     return (
       <FormattedMessage id="validation-helperText.hHMemberAge" defaultMessage="Please enter 0 or a positive number" />
     );

@@ -14,6 +14,7 @@ import {
   displayHouseholdMemberAgeHelperText,
   getPersonDataErrorMsg,
   personDataIsValid,
+  useErrorController,
 } from '../../Assets/validationFunctions';
 import { FormattedMessage } from 'react-intl';
 import './HouseholdDataBlock.css';
@@ -32,6 +33,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const setPage = (page) => {
     navigate(`/${uuid}/step-${step}/${page}`);
   };
+  const ageErrorController = useErrorController(householdMemberAgeHasError, displayHouseholdMemberAgeHelperText);
 
   const initialHouseholdData = formData.householdData[page - 1] ?? {
     age: '',
@@ -105,8 +107,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       inputName: 'age',
       inputValue: householdData.age,
       inputLabel: createFMInputLabel(personIndex),
-      inputError: householdMemberAgeHasError,
-      inputHelperText: displayHouseholdMemberAgeHelperText,
     };
 
     if (personIndex === 1) {
@@ -118,7 +118,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
               defaultMessage="How old are you?"
             />
           </h2>
-          {createTextField(ageTextfieldProps)}
+          {createTextField(ageTextfieldProps, ageErrorController)}
           <p className="household-data-q-underline"></p>
         </>
       );
@@ -134,17 +134,18 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
               defaultMessage="If your child is less than a year old, enter 0."
             />
           </p>
-          {createTextField(ageTextfieldProps)}
+          {createTextField(ageTextfieldProps, ageErrorController)}
           <p className="household-data-q-underline"></p>
         </>
       );
     }
   };
 
-  const createTextField = (componentInputProps) => {
+  const createTextField = (componentInputProps, errorController) => {
     return (
       <Textfield
         componentDetails={componentInputProps}
+        errorController={errorController}
         data={householdData}
         handleTextfieldChange={handleTextfieldChange}
       />
@@ -418,6 +419,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
+    ageErrorController.setIsSubmitted(true);
+    ageErrorController.updateError(householdData.age);
     const validPersonData = personDataIsValid(householdData);
     const lastHouseholdMember = page >= remainingHHMNumber;
 
