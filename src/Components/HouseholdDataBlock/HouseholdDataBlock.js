@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Textfield from '../Textfield/Textfield';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
@@ -19,8 +19,10 @@ import { FormattedMessage } from 'react-intl';
 import './HouseholdDataBlock.css';
 import stepDirectory from '../../Assets/stepDirectory';
 import PreviousButton from '../PreviousButton/PreviousButton';
+import { Context } from '../Wrapper/Wrapper';
 
-const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
+const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
+  const { formData } = useContext(Context);
   const { householdSize } = formData;
   const remainingHHMNumber = Number(householdSize);
   let { uuid, page } = useParams();
@@ -143,7 +145,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
     return (
       <Textfield
         componentDetails={componentInputProps}
-        formData={householdData}
+        data={householdData}
         handleTextfieldChange={handleTextfieldChange}
       />
     );
@@ -454,7 +456,7 @@ const HouseholdDataBlock = ({ formData, handleHouseholdDataSubmit }) => {
         {householdData.hasIncome && createPersonIncomeBlock(page)}
         {error !== '' && <ErrorMessage error={error} />}
         <div className="question-buttons">
-          <PreviousButton navFunction={handlePreviousSubmit} formData={formData} />
+          <PreviousButton navFunction={handlePreviousSubmit} />
           <ContinueButton handleContinueSubmit={handleContinueSubmit} />
         </div>
       </div>

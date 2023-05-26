@@ -17,9 +17,12 @@ import transportationBenefits from '../../Assets/BenefitCategoryLists/transporta
 import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBenefits';
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
 import stepDirectory from '../../Assets/stepDirectory';
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import './Confirmation.css';
 
-const Confirmation = ({ formData }) => {
+const Confirmation = () => {
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();
   const intl = useIntl();

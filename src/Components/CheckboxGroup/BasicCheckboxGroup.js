@@ -1,6 +1,9 @@
 import { FormControlLabel, FormGroup, Checkbox, FormControl } from '@mui/material';
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 
-const BasicCheckboxGroup = ({ stateVariable, options, state, setState }) => {
+const BasicCheckboxGroup = ({ stateVariable, options }) => {
+  const { formData: state, setFormData: setState } = useContext(Context);
   const handleCheckboxChange = (event) => {
     const { name } = event.target;
 

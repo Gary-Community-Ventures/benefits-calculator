@@ -4,7 +4,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import LinkIcon from '@mui/icons-material/Link';
 import CheckIcon from '@mui/icons-material/Check';
-import { useState, forwardRef } from 'react';
+import { useState, forwardRef, useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
 import {
   emailHasError,
@@ -17,7 +18,8 @@ import Textfield from '../Textfield/Textfield';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import './EmailResults.css';
 
-const EmailResults = forwardRef(function EmailResults({ formData, handleTextfieldChange, screenId, close }, ref) {
+const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, screenId, close }, ref) {
+  const { formData } = useContext(Context);
   const [copied, setCopied] = useState(false);
   const [state, setState] = useState({
     open: false,
@@ -42,7 +44,7 @@ const EmailResults = forwardRef(function EmailResults({ formData, handleTextfiel
     return (
       <Textfield
         componentDetails={componentProps}
-        formData={formData.signUpInfo}
+        data={formData.signUpInfo}
         handleTextfieldChange={handleTextfieldChange}
         index="0"
       />

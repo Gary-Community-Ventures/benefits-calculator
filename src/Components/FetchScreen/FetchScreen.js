@@ -1,11 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getScreen } from '../../apiCalls';
 import referralOptions from '../../Assets/referralOptions';
 import loading from '../../Assets/loading-icon.png';
 import './FetchScreen.css';
+import { Context } from '../Wrapper/Wrapper';
 
-const FetchScreen = ({ formData, setFormData, setFetchedScreen }) => {
+const FetchScreen = ({ setFetchedScreen }) => {
+  const { formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();
 
@@ -67,6 +69,8 @@ const FetchScreen = ({ formData, setFormData, setFetchedScreen }) => {
         ssi: response.has_ssi ?? false,
         tanf: response.has_tanf ?? false,
         wic: response.has_wic ?? false,
+        upk: response.has_upk ?? false,
+        coctc: response.has_coctc ?? false,
       },
       healthInsurance: {
         employer: response.has_employer_hi ?? false,

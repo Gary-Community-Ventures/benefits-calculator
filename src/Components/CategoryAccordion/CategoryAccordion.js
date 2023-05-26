@@ -5,15 +5,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 
-const CategoryAccordion = ({
-  categoryName,
-  categoryOptions,
-  formData,
-  setFormData,
-  handleAccordionSelectChange,
-  expanded,
-  index,
-}) => {
+const CategoryAccordion = ({ categoryName, categoryOptions, handleAccordionSelectChange, expanded, index }) => {
   return (
     <Accordion
       expanded={expanded === index}
@@ -29,12 +21,7 @@ const CategoryAccordion = ({
         <Typography sx={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: '400' }}>{categoryName}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <BasicCheckboxGroup
-          stateVariable="benefits"
-          options={categoryOptions}
-          state={formData}
-          setState={setFormData}
-        />
+        <BasicCheckboxGroup stateVariable="benefits" options={categoryOptions} />
       </AccordionDetails>
     </Accordion>
   );

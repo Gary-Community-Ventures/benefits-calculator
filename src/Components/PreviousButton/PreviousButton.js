@@ -1,9 +1,12 @@
 import { Button } from '@mui/material';
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import stepDirectory from '../../Assets/stepDirectory';
 
-const PreviousButton = ({ navFunction, formData }) => {
+const PreviousButton = ({ navFunction }) => {
+  const { formData } = useContext(Context);
   const { id, uuid } = useParams();
   let stepNumberId = Number(id);
   if (!stepNumberId) stepNumberId = 1;

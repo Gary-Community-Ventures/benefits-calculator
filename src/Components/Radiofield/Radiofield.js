@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import { FormControlLabel, RadioGroup, Radio } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -7,7 +9,8 @@ const StyledFormControlLabel = styled(FormControlLabel)({
   marginLeft: -5,
 });
 
-const Radiofield = ({ componentDetails, formData, handleRadioButtonChange, preferNotToAnswer }) => {
+const Radiofield = ({ componentDetails, handleRadioButtonChange, preferNotToAnswer }) => {
+  const { formData } = useContext(Context);
   const { ariaLabel, inputName } = componentDetails;
   const intl = useIntl();
   const translatedAriaLabel = intl.formatMessage({ id: ariaLabel });

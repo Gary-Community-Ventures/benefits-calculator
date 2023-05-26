@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import Radiofield from '../Radiofield/Radiofield';
@@ -18,7 +20,6 @@ import { zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({
-  formData,
   handleTextfieldChange,
   handleContinueSubmit,
   handleRadioButtonChange,
@@ -26,9 +27,9 @@ const QuestionComponentContainer = ({
   handleIncomeStreamsSubmit,
   handleExpenseSourcesSubmit,
   handleHouseholdDataSubmit,
-  setFormData,
   handleCheckboxChange,
 }) => {
+  const { formData, setFormData } = useContext(Context);
   let { id } = useParams();
   let numberId = Number(id);
   const matchingQuestion = questions[numberId];
@@ -36,7 +37,7 @@ const QuestionComponentContainer = ({
   const createHouseholdDataBlock = () => {
     return (
       <div className="question-container" id={id}>
-        <HouseholdDataBlock formData={formData} handleHouseholdDataSubmit={handleHouseholdDataSubmit} />
+        <HouseholdDataBlock handleHouseholdDataSubmit={handleHouseholdDataSubmit} />
       </div>
     );
   };
@@ -45,7 +46,7 @@ const QuestionComponentContainer = ({
     return (
       <Textfield
         componentDetails={question.componentDetails}
-        formData={formData}
+        data={formData}
         handleTextfieldChange={handleTextfieldChange}
       />
     );
@@ -53,11 +54,7 @@ const QuestionComponentContainer = ({
 
   const renderRadiofieldComponent = (question) => {
     return (
-      <Radiofield
-        componentDetails={question.componentDetails}
-        formData={formData}
-        handleRadioButtonChange={handleRadioButtonChange}
-      />
+      <Radiofield componentDetails={question.componentDetails} handleRadioButtonChange={handleRadioButtonChange} />
     );
   };
 
@@ -65,7 +62,6 @@ const QuestionComponentContainer = ({
     return (
       <Radiofield
         componentDetails={question.componentDetails}
-        formData={formData}
         handleRadioButtonChange={handleNoAnswerChange}
         preferNotToAnswer={true}
       />
@@ -77,8 +73,6 @@ const QuestionComponentContainer = ({
       <BasicCheckboxGroup
         stateVariable={question.componentDetails.inputName}
         options={question.componentDetails.options}
-        state={formData}
-        setState={setFormData}
       />
     );
   };
@@ -88,8 +82,6 @@ const QuestionComponentContainer = ({
       <OptionCardGroup
         stateVariable={question.componentDetails.inputName}
         options={question.componentDetails.options}
-        state={formData}
-        setState={setFormData}
       />
     );
   };
@@ -103,8 +95,6 @@ const QuestionComponentContainer = ({
     return (
       <BasicSelect
         componentProperties={question.componentDetails.componentProperties}
-        setFormData={setFormData}
-        formData={formData}
         options={finalOptions}
         formDataProperty={question.componentDetails.inputName}
       />
@@ -180,14 +170,14 @@ const QuestionComponentContainer = ({
         return (
           <div className="question-container" key={index}>
             <h2 className="question-label">{followUp.question}</h2>
-            <IncomeBlock handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} formData={formData} />
+            <IncomeBlock handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} />
           </div>
         );
       } else if (followUp.componentDetails.componentType === 'ExpenseBlock') {
         return (
           <div className="question-container" key={index}>
             <h2 className="question-label">{followUp.question}</h2>
-            <ExpenseBlock handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} formData={formData} />
+            <ExpenseBlock handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} />
           </div>
         );
       } else if (followUp.componentDetails.componentType === 'Textfield') {
@@ -196,7 +186,7 @@ const QuestionComponentContainer = ({
             <h2 className="question-label">{followUp.question}</h2>
             <Textfield
               componentDetails={matchingQuestion.followUpQuestions[0].componentDetails}
-              formData={formData}
+              data={formData}
               handleTextfieldChange={handleTextfieldChange}
               index="0"
             />
@@ -213,11 +203,7 @@ const QuestionComponentContainer = ({
         return (
           <div className="question-container" key={index}>
             <h2 className="question-label">{followUp.question}</h2>
-            <SignUp
-              formData={formData}
-              handleTextfieldChange={handleTextfieldChange}
-              handleCheckboxChange={handleCheckboxChange}
-            />
+            <SignUp handleTextfieldChange={handleTextfieldChange} handleCheckboxChange={handleCheckboxChange} />
           </div>
         );
       } else if (followUp.componentDetails.componentType === 'AccordionContainer') {
@@ -228,7 +214,7 @@ const QuestionComponentContainer = ({
           <div className="question-container accordions-container" key={index}>
             <h2 className="question-label">{followUp.question}</h2>
             <p className="question-description">{matchingQuestion.followUpQuestions[0].questionDescription}</p>
-            <AccordionsContainer formData={formData} setFormData={setFormData} />
+            <AccordionsContainer />
             {hasError && <ErrorMessage error={errorText} />}
           </div>
         );
@@ -247,11 +233,10 @@ const QuestionComponentContainer = ({
     if (isNotIncomeAndNotExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className="question-buttons">
-          <PreviousButton formData={formData} questionName={question.name} />
+          <PreviousButton questionName={question.name} />
           <ContinueButton
             handleContinueSubmit={handleContinueSubmit}
             inputError={matchingQuestion.componentDetails.inputError}
-            formData={formData}
             inputName={matchingQuestion.componentDetails.inputName}
             questionName={matchingQuestion.name}
           />

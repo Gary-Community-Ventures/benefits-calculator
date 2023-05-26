@@ -1,6 +1,7 @@
 import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
@@ -28,7 +29,8 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 32,
 });
 
-const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
+const IncomeBlock = ({ handleIncomeStreamsSubmit }) => {
+  const { formData } = useContext(Context);
   const { id, uuid } = useParams();
   const stepNumberId = Number(id);
 
@@ -383,7 +385,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit, formData }) => {
         <FormattedMessage id="incomeBlock.return-addIncomeButton" defaultMessage="Add another income" />
       </Button>
       <div className="prev-save-continue-buttons">
-        <PreviousButton formData={formData} />
+        <PreviousButton />
         <Button
           variant="contained"
           onClick={(event) => {
