@@ -409,7 +409,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   };
 
   const createPersonIncomeBlock = (submitted) => {
-    console.log(submitted);
     return (
       <>
         <PersonIncomeBlock

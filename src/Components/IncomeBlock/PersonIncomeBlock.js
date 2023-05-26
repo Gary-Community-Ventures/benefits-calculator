@@ -28,7 +28,6 @@ const StyledDeleteButton = styled(Button)({
 const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted }) => {
   const hoursErrorController = useErrorController(hoursWorkedValueHasError, displayIncomeStreamValueHelperText);
   const amountErrorController = useErrorController(incomeStreamValueHasError, displayIncomeStreamValueHelperText);
-  console.log(householdData.incomeStreams);
   useEffect(() => {
     hoursErrorController.setIsSubmitted(submitted);
     amountErrorController.setIsSubmitted(submitted);

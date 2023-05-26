@@ -9,8 +9,6 @@ import './OptionCardGroup.css';
 const OptionCardGroup = ({ stateVariable, options, errorController }) => {
   const { formData: state, setFormData: setState } = useContext(Context);
   const intl = useIntl();
-  console.log(errorController.hasError);
-  console.log(errorController.showError);
 
   const handleCardClick = (option) => {
     const currentStateVariableObj = { ...state[stateVariable] };

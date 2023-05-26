@@ -109,13 +109,13 @@ const displayExpenseSourceValueHelperText = (valueInput) => {
   }
 };
 
-const expenseSourcesAreValid = (expenses) => {
-  const allExpensesAreValid = expenses.every((expenseSourceData) => {
+const expenseSourcesHaveError = (expenses) => {
+  const expensesHasError = expenses.some((expenseSourceData) => {
     const { expenseSourceName, expenseAmount } = expenseSourceData;
-    return expenseSourceName.length > 0 && expenseAmount > 0;
+    return expenseSourceName === '' || expenseAmount === '' || expenseAmount <= 0;
   });
 
-  return allExpensesAreValid;
+  return expensesHasError;
 };
 
 const householdSizeHasError = (sizeOfHousehold) => {
@@ -387,7 +387,7 @@ export {
   incomeStreamsAreValid,
   expenseSourceValueHasError,
   displayExpenseSourceValueHelperText,
-  expenseSourcesAreValid,
+  expenseSourcesHaveError,
   householdSizeHasError,
   displayHouseholdSizeHelperText,
   householdAssetsHasError,

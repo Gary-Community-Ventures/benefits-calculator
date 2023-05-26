@@ -9,7 +9,7 @@ import {
   useErrorController,
   expenseSourceValueHasError,
   displayExpenseSourceValueHelperText,
-  expenseSourcesAreValid,
+  expenseSourcesHaveError,
 } from '../../Assets/validationFunctions';
 import expenseOptions from '../../Assets/expenseOptions';
 import PreviousButton from '../PreviousButton/PreviousButton';
@@ -24,14 +24,12 @@ const StyledTextField = styled(TextField)({
   marginBottom: 20,
 });
 
-const ExpenseBlock = ({ handleExpenseSourcesSubmit, submitted }) => {
+const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   const { formData } = useContext(Context);
   const { id, uuid } = useParams();
   const stepNumberId = Number(id);
+  const expensesErrorController = useErrorController(expenseSourcesHaveError, undefined);
   const amountErrorController = useErrorController(expenseSourceValueHasError, displayExpenseSourceValueHelperText);
-  useEffect(() => {
-    amountErrorController.setIsSubmitted(submitted);
-  }, [submitted]);
 
   const [selectedMenuItem, setSelectedMenuItem] = useState(
     formData.expenses.length > 0
@@ -176,10 +174,12 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, submitted }) => {
     ]);
   };
 
-  const handleSaveAndContinue = (event, amountErrorController) => {
+  const handleSaveAndContinue = (event) => {
     event.preventDefault();
+    const hasError = expensesErrorController.updateError(selectedMenuItem);
+    expensesErrorController.setIsSubmitted(true);
     amountErrorController.setIsSubmitted(true);
-    if (expenseSourcesAreValid(selectedMenuItem)) {
+    if (!hasError) {
       handleExpenseSourcesSubmit(selectedMenuItem, stepNumberId, uuid);
     }
   };
@@ -219,7 +219,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, submitted }) => {
   return (
     <>
       {createExpenseBlockQuestions()}
-      {!expenseSourcesAreValid(selectedMenuItem) && (
+      {expensesErrorController.showError && (
         <ErrorMessage
           error={
             <FormattedMessage
@@ -237,7 +237,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit, submitted }) => {
         <Button
           variant="contained"
           onClick={(event) => {
-            handleSaveAndContinue(event, amountErrorController);
+            handleSaveAndContinue(event);
           }}
         >
           <FormattedMessage id="continueButton" defaultMessage="Continue" />
