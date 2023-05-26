@@ -438,7 +438,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       setPage(page + 1);
     } else if (!validPersonData) {
       setWasSubmitted(true);
-      setError();
+      setError(getPersonDataErrorMsg(householdData));
     }
   };
 

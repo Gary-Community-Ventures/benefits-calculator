@@ -77,6 +77,7 @@ const QuestionComponentContainer = ({
     return (
       <OptionCardGroup
         stateVariable={question.componentDetails.inputName}
+        errorController={errorController}
         options={matchingQuestion.componentDetails.options}
       />
     );
@@ -98,10 +99,6 @@ const QuestionComponentContainer = ({
     const hasFollowUpQuestions = followUpQuestions && followUpQuestions.length > 0;
     // this is specifically for step 5 error handling
     const isHealthInsuranceQ = matchingQuestion.name === 'healthInsurance';
-    const helperText =
-      isHealthInsuranceQ && matchingQuestion.componentDetails.inputHelperText(formData[matchingQuestion.name]);
-    const hasError =
-      isHealthInsuranceQ && matchingQuestion.componentDetails.inputError(formData[matchingQuestion.name]);
 
     return (
       <div className="question-container" id={id}>
@@ -121,7 +118,9 @@ const QuestionComponentContainer = ({
             handleTextfieldChange={handleTextfieldChange}
           />
         )}
-        {isHealthInsuranceQ && hasError && <ErrorMessage error={helperText} />}
+        {isHealthInsuranceQ && errorController.showError && (
+          <ErrorMessage error={errorController.message(formData[matchingQuestion.name])} />
+        )}
         {createPreviousAndContinueButtons()}
       </div>
     );

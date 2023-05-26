@@ -6,9 +6,11 @@ import { Context } from '../Wrapper/Wrapper';
 import { useIntl } from 'react-intl';
 import './OptionCardGroup.css';
 
-const OptionCardGroup = ({ stateVariable, options }) => {
+const OptionCardGroup = ({ stateVariable, options, errorController }) => {
   const { formData: state, setFormData: setState } = useContext(Context);
   const intl = useIntl();
+  console.log(errorController.hasError);
+  console.log(errorController.showError);
 
   const handleCardClick = (option) => {
     const currentStateVariableObj = { ...state[stateVariable] };
@@ -23,6 +25,7 @@ const OptionCardGroup = ({ stateVariable, options }) => {
       return acc;
     }, {});
 
+    errorController.updateError(updatedStateVariableObj);
     setState({ ...state, [stateVariable]: updatedStateVariableObj });
   };
 

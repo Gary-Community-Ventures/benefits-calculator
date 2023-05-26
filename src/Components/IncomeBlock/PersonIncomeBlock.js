@@ -28,6 +28,7 @@ const StyledDeleteButton = styled(Button)({
 const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted }) => {
   const hoursErrorController = useErrorController(hoursWorkedValueHasError, displayIncomeStreamValueHelperText);
   const amountErrorController = useErrorController(incomeStreamValueHasError, displayIncomeStreamValueHelperText);
+  console.log(householdData.incomeStreams);
   useEffect(() => {
     hoursErrorController.setIsSubmitted(submitted);
     amountErrorController.setIsSubmitted(submitted);
@@ -373,17 +374,10 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
     const updatedSelectedMenuItems = selectedMenuItem.filter((incomeSourceData, index) => index !== selectedIndex);
     setSelectedMenuItem(updatedSelectedMenuItems);
 
-    const updatedHouseholdData = householdData.map((personData, i) => {
-      if (i === page) {
-        return {
-          ...personData,
-          incomeStreams: updatedSelectedMenuItems,
-        };
-      } else {
-        return personData;
-      }
+    setHouseholdData({
+      ...householdData,
+      incomeStreams: updatedSelectedMenuItems,
     });
-    setHouseholdData(updatedHouseholdData);
   };
 
   const handleAddAdditionalIncomeSource = (event) => {
