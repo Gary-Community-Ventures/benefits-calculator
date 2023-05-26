@@ -408,10 +408,16 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     );
   };
 
-  const createPersonIncomeBlock = (index) => {
+  const createPersonIncomeBlock = (submitted) => {
+    console.log(submitted);
     return (
       <>
-        <PersonIncomeBlock householdData={householdData} setHouseholdData={setHouseholdData} page={page} />
+        <PersonIncomeBlock
+          householdData={householdData}
+          setHouseholdData={setHouseholdData}
+          page={page}
+          submitted={submitted}
+        />
         <p className="household-data-q-underline"></p>
       </>
     );
@@ -456,7 +462,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}
         <p className="household-data-q-underline"></p>
-        {householdData.hasIncome && createPersonIncomeBlock(page)}
+        {householdData.hasIncome && createPersonIncomeBlock(ageErrorController.isSubmitted)}
         {error !== '' && <ErrorMessage error={error} />}
         <div className="question-buttons">
           <PreviousButton navFunction={handlePreviousSubmit} />

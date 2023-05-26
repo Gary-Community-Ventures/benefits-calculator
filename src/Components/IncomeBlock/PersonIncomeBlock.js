@@ -3,6 +3,7 @@ import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from '@m
 import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import {
+  useErrorController,
   hoursWorkedValueHasError,
   incomeStreamValueHasError,
   displayIncomeStreamValueHelperText,
@@ -24,7 +25,13 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 32,
 });
 
-const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
+const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted }) => {
+  const hoursErrorController = useErrorController(hoursWorkedValueHasError, displayIncomeStreamValueHelperText);
+  const amountErrorController = useErrorController(incomeStreamValueHasError, displayIncomeStreamValueHelperText);
+  useEffect(() => {
+    hoursErrorController.setIsSubmitted(submitted);
+    amountErrorController.setIsSubmitted(submitted);
+  }, [submitted]);
   //if there are any elements in state for incomeStreams create IncomeBlock components for those
   //first by assigning them to the initial selectedMenuItem state
   //if not then create the initial income block questions
@@ -212,12 +219,13 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
             value={hoursWorked}
             label={<FormattedMessage id="incomeBlock.createHoursWorkedTextfield-amountLabel" defaultMessage="Hours" />}
             onChange={(event) => {
+              hoursErrorController.updateError(event.target.value);
               hoursWorkedChange(event, index);
             }}
             variant="outlined"
             required
-            error={hoursWorkedValueHasError(hoursWorked)}
-            helperText={displayIncomeStreamValueHelperText(hoursWorked)}
+            error={hoursErrorController.showError}
+            helperText={hoursErrorController.message(hoursWorked)}
           />
         </div>
       </>
@@ -269,12 +277,13 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page }) => {
               />
             }
             onChange={(event) => {
+              amountErrorController.updateError(event.target.value);
               handleIncomeTextfieldChange(event, index);
             }}
             variant="outlined"
             required
-            error={incomeStreamValueHasError(selectedMenuItem[index].incomeAmount)}
-            helperText={displayIncomeStreamValueHelperText(selectedMenuItem[index].incomeAmount)}
+            error={amountErrorController.showError}
+            helperText={amountErrorController.message(selectedMenuItem[index].incomeAmount)}
           />
         </div>
       </div>
