@@ -9,8 +9,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import Grid from '@mui/material/Grid';
 import {
   DataGridPro,
-  GridRowsProp,
-  DataGridProProps,
   useGridSelector,
   useGridApiContext,
   gridFilteredDescendantCountLookupSelector,
