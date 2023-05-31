@@ -604,13 +604,15 @@ const Results = () => {
 
   const displayBenefitAndImmedNeedsBtns = () => {
     const hasImmediateNeedsPrograms = results.rawResponse.urgent_needs.es.length > 0;
+    const benefitBtnClass = filterResultsButton === 'benefits' ? 'results-link' : 'results-filter-button-grey';
+    const immediateNeedsBtnClass = filterResultsButton === 'urgentNeeds' ? 'results-link' : 'results-filter-button-grey';
 
     return (
       <div>
         {hasImmediateNeedsPrograms && (
           <>
             <Button
-              className={filterResultsButton === 'benefits' ? 'results-link' : 'results-filter-button-grey'}
+              className={benefitBtnClass}
               onClick={() => {
                 setFilterResultsButton('benefits');
               }}
@@ -623,7 +625,7 @@ const Results = () => {
               />
             </Button>
             <Button
-              className={filterResultsButton === 'urgentNeeds' ? 'results-link' : 'results-filter-button-grey'}
+              className={immediateNeedsBtnClass}
               onClick={() => {
                 setFilterResultsButton('urgentNeeds');
               }}
