@@ -603,42 +603,37 @@ const Results = () => {
   };
 
   const displayBenefitAndImmedNeedsBtns = () => {
-    const hasImmediateNeedsPrograms = results.rawResponse.urgent_needs.es.length > 0;
     const benefitBtnClass = filterResultsButton === 'benefits' ? 'results-link' : 'results-filter-button-grey';
     const immediateNeedsBtnClass = filterResultsButton === 'urgentNeeds' ? 'results-link' : 'results-filter-button-grey';
 
     return (
       <div>
-        {hasImmediateNeedsPrograms && (
-          <>
-            <Button
-              className={benefitBtnClass}
-              onClick={() => {
-                setFilterResultsButton('benefits');
-              }}
-              sx={{ mt: 1, mr: 0.5, mb: 1, p: 0.8, fontSize: '.8rem' }}
-              variant="contained"
-            >
-              <FormattedMessage
-                id="results.displayResultsFilterButtons-benefitPrograms"
-                defaultMessage="Benefit Programs"
-              />
-            </Button>
-            <Button
-              className={immediateNeedsBtnClass}
-              onClick={() => {
-                setFilterResultsButton('urgentNeeds');
-              }}
-              sx={{ mt: 1, mb: 1, p: 0.8, fontSize: '.8rem' }}
-              variant="contained"
-            >
-              <FormattedMessage
-                id="results.displayResultsFilterButtons-urgentNeedsResources"
-                defaultMessage="Immediate Needs"
-              />
-            </Button>
-          </>
-        )}
+        <Button
+          className={benefitBtnClass}
+          onClick={() => {
+            setFilterResultsButton('benefits');
+          }}
+          sx={{ mt: 1, mr: 0.5, mb: 1, p: 0.8, fontSize: '.8rem' }}
+          variant="contained"
+        >
+          <FormattedMessage
+            id="results.displayResultsFilterButtons-benefitPrograms"
+            defaultMessage="Benefit Programs"
+          />
+        </Button>
+        <Button
+          className={immediateNeedsBtnClass}
+          onClick={() => {
+            setFilterResultsButton('urgentNeeds');
+          }}
+          sx={{ mt: 1, mb: 1, p: 0.8, fontSize: '.8rem' }}
+          variant="contained"
+        >
+          <FormattedMessage
+            id="results.displayResultsFilterButtons-urgentNeedsResources"
+            defaultMessage="Immediate Needs"
+          />
+        </Button>
       </div>
     );
   };
