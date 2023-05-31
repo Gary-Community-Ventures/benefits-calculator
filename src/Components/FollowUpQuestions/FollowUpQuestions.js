@@ -82,19 +82,22 @@ const FollowUpQuestions = ({
       return (
         <div className="question-container" key={index}>
           <h2 className="question-label">{followUp.question}</h2>
-          <SignUp handleTextfieldChange={handleTextfieldChange} handleCheckboxChange={handleCheckboxChange} />
+          <SignUp
+            handleTextfieldChange={handleTextfieldChange}
+            handleCheckboxChange={handleCheckboxChange}
+            submitted={errorController.isSubmitted}
+          />
         </div>
       );
     } else if (followUp.componentDetails.componentType === 'AccordionContainer') {
-      const hasError = matchingQuestion.componentDetails.inputError(formData.hasBenefits, formData);
-      const errorText = matchingQuestion.componentDetails.inputHelperText(formData.hasBenefits, formData);
-
       return (
         <div className="question-container accordions-container" key={index}>
           <h2 className="question-label">{followUp.question}</h2>
           <p className="question-description">{matchingQuestion.followUpQuestions[0].questionDescription}</p>
-          <AccordionsContainer />
-          {hasError && <ErrorMessage error={errorText} />}
+          <AccordionsContainer errorController={errorController} />
+          {errorController.showError && (
+            <ErrorMessage error={errorController.message(formData.hasBenefits, formData)} />
+          )}
         </div>
       );
     }

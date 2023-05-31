@@ -16,7 +16,6 @@ import {
   displayHealthInsuranceHelperText,
   displayBenefitsHelperText,
 } from './validationFunctions';
-import taxYearOptions from './taxYearOptions';
 import referralOptions from './referralOptions';
 import countiesByZipcode from './countiesByZipcode';
 import signUpOptions from './signUpOptions';
@@ -230,6 +229,7 @@ const questions = {
       componentType: 'BasicSelect',
       inputName: 'referralSource',
       inputError: referralSourceHasError,
+      inputHelperText: displayReferralSourceHelperText,
       componentProperties: {
         labelId: 'referral-source-select-label',
         inputLabelText: <FormattedMessage id="qcc.createReferralDropdownMenu-label" defaultMessage="Referral Source" />,

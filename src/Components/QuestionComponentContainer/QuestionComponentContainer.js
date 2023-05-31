@@ -6,13 +6,9 @@ import Radiofield from '../Radiofield/Radiofield';
 import Textfield from '../Textfield/Textfield';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
-import IncomeBlock from '../IncomeBlock/IncomeBlock';
-import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
-import SignUp from '../SignUp/SignUp';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import AccordionsContainer from '../../Components/AccordionsContainer/AccordionsContainer';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import questions from '../../Assets/questions';
@@ -87,7 +83,7 @@ const QuestionComponentContainer = ({
     return (
       <BasicSelect
         componentProperties={question.componentDetails.componentProperties}
-        options={finalOptions}
+        options={question.componentDetails.options}
         formDataProperty={question.componentDetails.inputName}
       />
     );

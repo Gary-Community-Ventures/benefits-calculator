@@ -63,11 +63,15 @@ const radiofieldHasError = (radiofield) => {
 };
 
 const hoursWorkedValueHasError = (valueInput) => {
-  return Number(valueInput) <= 0;
+  console.log(0);
+  const numberUpToEightDigitsLongRegex = /^\d{0,3}$/;
+  return Number(valueInput) <= 0 && (numberUpToEightDigitsLongRegex.test(valueInput) || valueInput === '');
 };
 
 const incomeStreamValueHasError = (valueInput) => {
-  return Number(valueInput) <= 0;
+  const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
+
+  return Number(valueInput) <= 0 && (incomeAmountRegex.test(valueInput) || valueInput === '');
 };
 
 const displayIncomeStreamValueHelperText = (valueInput) => {

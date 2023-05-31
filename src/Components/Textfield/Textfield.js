@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import { TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -8,6 +9,10 @@ const StyledTextField = styled(TextField)({
 
 const Textfield = ({ componentDetails, data, handleTextfieldChange, index, errorController }) => {
   const { inputType, inputName, inputLabel } = componentDetails;
+  const valueRef = useRef('');
+  useEffect(() => {
+    console.log(errorController.updateError(valueRef.current.value));
+  }, [valueRef.current.value]);
 
   return (
     <>
@@ -17,9 +22,9 @@ const Textfield = ({ componentDetails, data, handleTextfieldChange, index, error
         value={data[inputName]}
         label={inputLabel}
         onChange={(event) => {
-          errorController.updateError(event.target.value);
           handleTextfieldChange(event, index);
         }}
+        inputRef={valueRef}
         variant="outlined"
         required
         error={errorController.showError}

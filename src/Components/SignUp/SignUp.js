@@ -2,7 +2,7 @@ import { Typography, FormControlLabel, Checkbox } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Textfield from '../Textfield/Textfield';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import {
@@ -15,9 +15,10 @@ import {
   displayPhoneHasErrorHelperText,
   signUpFormHasError,
   displaySignUpFormHelperText,
+  useErrorController,
 } from '../../Assets/validationFunctions';
 
-const SignUp = ({ handleTextfieldChange, handleCheckboxChange }) => {
+const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   const context = useContext(Context);
   const locale = context.locale.toLowerCase();
   const { formData } = context;
@@ -29,6 +30,29 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange }) => {
   } else if (locale === 'vi') {
     privacyLink = 'https://www.myfriendben.org/vi/data-privacy-policy';
   }
+  const sighnUpErrorController = useErrorController(signUpFormHasError, displaySignUpFormHelperText);
+  const firstNameErrorController = useErrorController(nameHasError, displayFirstNameHelperText);
+  const lastNameErrorController = useErrorController(nameHasError, displayLastNameHelperText);
+  const emailErrorController = useErrorController(emailHasError, displayEmailHelperText);
+  const phoneErrorController = useErrorController(phoneHasError, displayPhoneHasErrorHelperText);
+
+  useEffect(() => {
+    sighnUpErrorController.setIsSubmitted(submitted);
+    firstNameErrorController.setIsSubmitted(submitted);
+    lastNameErrorController.setIsSubmitted(submitted);
+    emailErrorController.setIsSubmitted(submitted);
+    phoneErrorController.setIsSubmitted(submitted);
+  }, [submitted]);
+
+  useEffect(() => {
+    sighnUpErrorController.updateError(formData.signUpInfo);
+  }, [
+    firstNameErrorController.hasError,
+    lastNameErrorController.hasError,
+    emailErrorController.hasError,
+    phoneErrorController.hasError,
+    formData.signUpInfo.commConsent,
+  ]);
 
   const createFirstNameTextfield = () => {
     const firstNameProps = {
@@ -39,7 +63,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange }) => {
       inputHelperText: displayFirstNameHelperText,
     };
 
-    return createTextfield(firstNameProps);
+    return createTextfield(firstNameProps, firstNameErrorController);
   };
 
   const createLastNameTextfield = () => {
@@ -51,7 +75,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange }) => {
       inputHelperText: displayLastNameHelperText,
     };
 
-    return createTextfield(lastNameProps);
+    return createTextfield(lastNameProps, lastNameErrorController);
   };
 
   const createEmailTextfield = () => {
@@ -63,7 +87,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange }) => {
       inputHelperText: displayEmailHelperText,
     };
 
-    return createTextfield(emailProps);
+    return createTextfield(emailProps, emailErrorController);
   };
 
   const createPhoneTextfield = () => {
@@ -75,16 +99,17 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange }) => {
       inputHelperText: displayPhoneHasErrorHelperText,
     };
 
-    return createTextfield(phoneProps);
+    return createTextfield(phoneProps, phoneErrorController);
   };
 
-  const createTextfield = (componentProps) => {
+  const createTextfield = (componentProps, errorController) => {
     return (
       <Textfield
         componentDetails={componentProps}
         data={formData.signUpInfo}
         handleTextfieldChange={handleTextfieldChange}
         index="0"
+        errorController={errorController}
       />
     );
   };
@@ -145,8 +170,8 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange }) => {
   };
 
   const displayErrorMessage = () => {
-    if (signUpFormHasError(formData.signUpInfo)) {
-      return <ErrorMessage error={displaySignUpFormHelperText(formData.signUpInfo)} />;
+    if (sighnUpErrorController.showError) {
+      return <ErrorMessage error={sighnUpErrorController.message(formData.signUpInfo)} />;
     }
   };
 
