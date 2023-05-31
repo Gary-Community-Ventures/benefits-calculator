@@ -3,7 +3,7 @@ import { Context } from '../Wrapper/Wrapper';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import Filter from '../FilterTable/FilterTable.js';
+import FilterTable from '../FilterTable/FilterTable.js';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 import Grid from '@mui/material/Grid';
@@ -479,7 +479,7 @@ const Results = () => {
       <>
         <div className="filters-container">
           {displayResultsFilterButtons()}
-          <Filter
+          <FilterTable
             filt={filt}
             updateFilter={updateFilter}
             categories={categories}

@@ -11,7 +11,7 @@ import { FormattedMessage } from 'react-intl';
 import { useState } from 'react';
 import './FilterTable.css';
 
-const Filter = ({
+const FilterTable = ({
   updateFilter,
   categories,
   eligibilityState,
@@ -225,4 +225,4 @@ const Filter = ({
   );
 };
 
-export default Filter;
+export default FilterTable;
