@@ -11,7 +11,7 @@ const Textfield = ({ componentDetails, data, handleTextfieldChange, index, error
   const { inputType, inputName, inputLabel } = componentDetails;
   const valueRef = useRef('');
   useEffect(() => {
-    console.log(errorController.updateError(valueRef.current.value));
+    errorController.updateError(valueRef.current.value);
   }, [valueRef.current.value]);
 
   return (

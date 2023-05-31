@@ -63,7 +63,6 @@ const radiofieldHasError = (radiofield) => {
 };
 
 const hoursWorkedValueHasError = (valueInput) => {
-  console.log(0);
   const numberUpToEightDigitsLongRegex = /^\d{0,3}$/;
   return Number(valueInput) <= 0 && (numberUpToEightDigitsLongRegex.test(valueInput) || valueInput === '');
 };
