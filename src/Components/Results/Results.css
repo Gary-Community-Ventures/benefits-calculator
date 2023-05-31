@@ -82,12 +82,6 @@ button.results-filter-button-grey {
   padding: 5px 0 5px 9px;
 }
 
-.filters-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 button.apply-button {
   color: white;
 }
@@ -96,15 +90,25 @@ button.back-to-screen-button {
   margin: 1rem;
 }
 
+.filter-button-container {
+  border: 1px solid rgba(224, 224, 224, 1);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+}
+
+.MuiButton-root.filter-button {
+  border-radius: 3rem;
+  font-size: 12.8px;
+}
+
+.MuiButton-root.filter-button.citizen, .MuiButton-root.filter-button.other {
+  margin-right: .5rem;
+}
+
 @media (min-width: 601px) {
   #share-container {
     display: none;
-  }
-}
-
-@media (max-width: 501px) {
-  .filters-container {
-    flex-direction: column;
-    align-items: start;
   }
 }
