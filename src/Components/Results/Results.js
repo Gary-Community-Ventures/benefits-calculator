@@ -479,7 +479,7 @@ const Results = () => {
     return (
       <>
         <div className="filters-container">
-          {displayResultsFilterButtons()}
+          {displayBenefitAndImmedNeedsBtns()}
           <FilterTable
             filt={filt}
             updateFilter={updateFilter}
@@ -602,7 +602,7 @@ const Results = () => {
     );
   };
 
-  const displayResultsFilterButtons = () => {
+  const displayBenefitAndImmedNeedsBtns = () => {
     const hasImmediateNeedsPrograms = results.rawResponse.urgent_needs.es.length > 0;
 
     return (
@@ -652,7 +652,7 @@ const Results = () => {
               {displayHeaderSection()}
               <Grid xs={12} item={true}>
                 {filterResultsButton === 'benefits' && DataGridTable(results.programs)}
-                {filterResultsButton === 'urgentNeeds' && displayResultsFilterButtons()}
+                {filterResultsButton === 'urgentNeeds' && displayBenefitAndImmedNeedsBtns()}
                 {filterResultsButton === 'urgentNeeds' && (
                   <UrgentNeedsTable urgentNeedsPrograms={results.rawResponse.urgent_needs} locale={locale} />
                 )}
