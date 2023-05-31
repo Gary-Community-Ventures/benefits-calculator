@@ -112,3 +112,9 @@ button.back-to-screen-button {
     display: none;
   }
 }
+
+@media (max-width: 420px) {
+  .MuiButton-root.filter-button {
+    font-size: 11.8px;
+  }
+}
