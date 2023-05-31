@@ -654,7 +654,6 @@ const Results = () => {
               <Grid xs={12} item={true}>
                 {hasUrgentNeeds() && displayBenefitAndImmedNeedsBtns()}
                 {filterResultsButton === 'benefits' && DataGridTable(results.programs)}
-                {filterResultsButton === 'urgentNeeds' && displayBenefitAndImmedNeedsBtns()}
                 {filterResultsButton === 'urgentNeeds' && (
                   <UrgentNeedsTable urgentNeedsPrograms={results.rawResponse.urgent_needs} locale={locale} />
                 )}
