@@ -34,8 +34,8 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
     const updatedSelectedMenuItems = allExpensesData.map((expenseSourceData, i) => {
       if (i === index) {
         return {
+          ...expenseSourceData,
           expenseSourceName: event.target.value,
-          expenseAmount: 0,
         };
       } else {
         return expenseSourceData;
