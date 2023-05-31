@@ -638,6 +638,10 @@ const Results = () => {
     );
   };
 
+  const hasUrgentNeeds = () => {
+    return results.rawResponse.urgent_needs.es.length > 0;
+  }
+
   return (
     <main className="benefits-form">
       <div className="results-container">
@@ -648,6 +652,7 @@ const Results = () => {
             <>
               {displayHeaderSection()}
               <Grid xs={12} item={true}>
+                {hasUrgentNeeds() && displayBenefitAndImmedNeedsBtns()}
                 {filterResultsButton === 'benefits' && DataGridTable(results.programs)}
                 {filterResultsButton === 'urgentNeeds' && displayBenefitAndImmedNeedsBtns()}
                 {filterResultsButton === 'urgentNeeds' && (
