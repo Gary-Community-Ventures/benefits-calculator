@@ -76,7 +76,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
           error={
             <FormattedMessage
               id="expenseBlock.return-error-message"
-              defaultMessage="Please select and enter a response for all three fields"
+              defaultMessage="Please select and enter a response for all expense fields"
             />
           }
         />

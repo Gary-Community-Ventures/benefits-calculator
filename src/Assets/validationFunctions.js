@@ -189,7 +189,7 @@ const getPersonDataErrorMsg = (householdDataState) => {
     return (
       <FormattedMessage
         id="validation-helperText.hhMemberIncome"
-        defaultMessage="Please select and enter a response for all three income fields"
+        defaultMessage="Please select and enter a response for all income fields"
       />
     );
   } else {
