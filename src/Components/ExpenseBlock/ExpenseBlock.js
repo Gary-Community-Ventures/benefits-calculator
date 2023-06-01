@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import ExpenseQuestion from './ExpenseQuesion';
+import ExpenseQuestion from './ExpenseQuestion';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { useErrorController, expenseSourcesHaveError } from '../../Assets/validationFunctions';
 import PreviousButton from '../PreviousButton/PreviousButton';
