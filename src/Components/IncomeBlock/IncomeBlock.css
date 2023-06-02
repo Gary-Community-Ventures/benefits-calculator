@@ -3,6 +3,10 @@
   justify-content: flex-end;
 }
 
+.delete-button {
+  font-size: 30px;
+}
+
 .income-block-question-buttons {
   display: flex;
   justify-content: space-evenly;

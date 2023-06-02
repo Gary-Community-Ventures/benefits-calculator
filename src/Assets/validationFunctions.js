@@ -1,5 +1,25 @@
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import countiesByZipcode from './countiesByZipcode';
+
+function useErrorController(hasErrorFunc, messageFunc) {
+  const [hasError, setHasError] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const showError = hasError && isSubmitted;
+
+  const updateError = (value, formData) => {
+    const updatedHasError = hasErrorFunc(value, formData);
+    setHasError(updatedHasError);
+    return updatedHasError;
+  };
+
+  const message = (value, formData) => {
+    return messageFunc(value, formData);
+  };
+
+  return { hasError, showError, isSubmitted, setIsSubmitted, updateError, message };
+}
 
 const ageHasError = (applicantAge) => {
   // handleTextfieldChange prevents setting anything to formData that does not pass a number regex test
@@ -43,11 +63,14 @@ const radiofieldHasError = (radiofield) => {
 };
 
 const hoursWorkedValueHasError = (valueInput) => {
-  return Number(valueInput) <= 0;
+  const numberUpToEightDigitsLongRegex = /^\d{0,3}$/;
+  return Number(valueInput) <= 0 && (numberUpToEightDigitsLongRegex.test(valueInput) || valueInput === '');
 };
 
 const incomeStreamValueHasError = (valueInput) => {
-  return Number(valueInput) <= 0;
+  const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
+
+  return Number(valueInput) <= 0 && (incomeAmountRegex.test(valueInput) || valueInput === '');
 };
 
 const displayIncomeStreamValueHelperText = (valueInput) => {
@@ -78,7 +101,7 @@ const incomeStreamsAreValid = (incomeStreams) => {
 };
 
 const expenseSourceValueHasError = (valueInput) => {
-  return valueInput <= 0;
+  return valueInput <= 0 || valueInput === '';
 };
 
 const displayExpenseSourceValueHelperText = (valueInput) => {
@@ -89,13 +112,13 @@ const displayExpenseSourceValueHelperText = (valueInput) => {
   }
 };
 
-const expenseSourcesAreValid = (expenses) => {
-  const allExpensesAreValid = expenses.every((expenseSourceData) => {
+const expenseSourcesHaveError = (expenses) => {
+  const expensesHasError = expenses.some((expenseSourceData) => {
     const { expenseSourceName, expenseAmount } = expenseSourceData;
-    return expenseSourceName.length > 0 && expenseAmount > 0;
+    return expenseSourceName === '' || expenseAmount === '' || expenseAmount <= 0;
   });
 
-  return allExpensesAreValid;
+  return expensesHasError;
 };
 
 const householdSizeHasError = (sizeOfHousehold) => {
@@ -122,28 +145,16 @@ const displayHouseholdAssetsHelperText = (householdAssets) => {
   }
 };
 
-const housingSourcesAreValid = (selectedHousing) => {
-  const housingKeys = Object.keys(selectedHousing);
-  const preferNotToSay = selectedHousing.preferNotToSay === true;
-  const atLeastOneOptionWasSelected = housingKeys.some((housingKey) => selectedHousing[housingKey] === true);
-  if (preferNotToSay) {
-    const numberOfTrues = Object.values(selectedHousing).filter((value) => value === true).length;
-    return numberOfTrues === 1;
-  } else if (atLeastOneOptionWasSelected) {
-    // preferNotToSay = false && at least one other option was selected
+const householdMemberAgeHasError = (applicantAge) => {
+  if (applicantAge === '') {
     return true;
   }
-};
-
-const householdMemberAgeHasError = (applicantAge) => {
   const numberApplicantAge = Number(applicantAge);
   return numberApplicantAge < 0;
 };
 
 const displayHouseholdMemberAgeHelperText = (applicantAge) => {
-  const numberApplicantAge = Number(applicantAge);
-
-  if (numberApplicantAge < 0) {
+  if (householdMemberAgeHasError(applicantAge)) {
     return (
       <FormattedMessage id="validation-helperText.hHMemberAge" defaultMessage="Please enter 0 or a positive number" />
     );
@@ -178,7 +189,7 @@ const getPersonDataErrorMsg = (householdDataState) => {
     return (
       <FormattedMessage
         id="validation-helperText.hhMemberIncome"
-        defaultMessage="Please select and enter a response for all three income fields"
+        defaultMessage="Please select and enter a response for all income fields"
       />
     );
   } else {
@@ -187,7 +198,7 @@ const getPersonDataErrorMsg = (householdDataState) => {
 };
 
 const emailHasError = (email) => {
-  return email !== '' && !/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email);
+  return !/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email);
 };
 
 const displayEmailHelperText = (email) => {
@@ -240,7 +251,7 @@ const displayLastNameHelperText = (lastName) => {
 
 const phoneHasError = (phoneNumber) => {
   const digitizedPhone = phoneNumber.replace(/\D/g, '');
-  return phoneNumber !== '' && digitizedPhone.length !== 10;
+  return digitizedPhone.length !== 10;
 };
 
 const displayPhoneHasErrorHelperText = (phoneNumber) => {
@@ -259,8 +270,8 @@ const signUpFormHasError = (props) => {
   }
 
   return (
-    emailHasError(email) ||
-    phoneHasError(phone) ||
+    (emailHasError(email) && email !== '') ||
+    (phoneHasError(phone) && phone !== '') ||
     (!email && !phone) ||
     !firstName ||
     !lastName ||
@@ -367,6 +378,7 @@ const displayBenefitsHelperText = (hasBenefits, formData) => {
 };
 
 export {
+  useErrorController,
   ageHasError,
   displayAgeHelperText,
   zipcodeHasError,
@@ -378,12 +390,11 @@ export {
   incomeStreamsAreValid,
   expenseSourceValueHasError,
   displayExpenseSourceValueHelperText,
-  expenseSourcesAreValid,
+  expenseSourcesHaveError,
   householdSizeHasError,
   displayHouseholdSizeHelperText,
   householdAssetsHasError,
   displayHouseholdAssetsHelperText,
-  housingSourcesAreValid,
   householdMemberAgeHasError,
   displayHouseholdMemberAgeHelperText,
   personDataIsValid,

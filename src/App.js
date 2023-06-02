@@ -153,14 +153,16 @@ const App = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
+  const handleContinueSubmit = (event, errorController, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
+    errorController.setIsSubmitted(true);
+    const hasError = errorController.updateError(inputToBeValidated, formData);
     const isZipcodeQuestionAndCountyIsEmpty = questionName === 'zipcode' && formData.county === '';
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty =
       questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '';
     const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets === '';
 
-    if (!validateInputFunction(inputToBeValidated, formData)) {
+    if (!hasError) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
         return;
       } else if (questionName === 'signUpInfo') {
@@ -238,6 +240,7 @@ const App = () => {
                   path="step-:id"
                   element={
                     <QuestionComponentContainer
+                      key={window.location.href}
                       handleTextfieldChange={handleTextfieldChange}
                       handleContinueSubmit={handleContinueSubmit}
                       handleRadioButtonChange={handleRadioButtonChange}

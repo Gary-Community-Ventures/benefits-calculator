@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 
-const ContinueButton = ({ handleContinueSubmit, inputError, inputName, questionName }) => {
+const ContinueButton = ({ handleContinueSubmit, errorController, inputName, questionName }) => {
   const { formData } = useContext(Context);
   let { id, uuid } = useParams();
   let stepNumberId = Number(id);
@@ -13,7 +13,7 @@ const ContinueButton = ({ handleContinueSubmit, inputError, inputName, questionN
     <Button
       variant="contained"
       onClick={(event) => {
-        handleContinueSubmit(event, inputError, formData?.[inputName], stepNumberId, questionName, uuid);
+        handleContinueSubmit(event, errorController, formData?.[inputName], stepNumberId, questionName, uuid);
       }}
     >
       <FormattedMessage id="continueButton" defaultMessage="Continue" />
