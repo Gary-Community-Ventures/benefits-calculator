@@ -1,32 +1,19 @@
-import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { useState, useContext } from 'react';
+import { Button } from '@mui/material';
+import { useState, useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import ExpenseQuestion from './ExpenseQuestion';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import {
-  expenseSourceValueHasError,
-  displayExpenseSourceValueHelperText,
-  expenseSourcesAreValid,
-} from '../../Assets/validationFunctions';
-import expenseOptions from '../../Assets/expenseOptions';
+import { useErrorController, expenseSourcesHaveError } from '../../Assets/validationFunctions';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import './ExpenseBlock.css';
-
-const StyledSelectfield = styled(Select)({
-  marginBottom: 20,
-  minWidth: 200,
-});
-
-const StyledTextField = styled(TextField)({
-  marginBottom: 20,
-});
 
 const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   const { formData } = useContext(Context);
   const { id, uuid } = useParams();
   const stepNumberId = Number(id);
+  const expensesErrorController = useErrorController(expenseSourcesHaveError, undefined);
 
   const [selectedMenuItem, setSelectedMenuItem] = useState(
     formData.expenses.length > 0
@@ -39,124 +26,26 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
         ],
   );
 
-  const getExpenseSourceLabel = (expenseSourceName) => {
-    return expenseOptions[expenseSourceName];
+  const deleteExpenseBlock = (selectedIndex) => {
+    const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex);
+    setSelectedMenuItem(updatedSelectedMenuItems);
+    expensesErrorController.updateError(updatedSelectedMenuItems);
   };
 
   const createExpenseBlockQuestions = () => {
     return selectedMenuItem.map((expenseSourceData, index) => {
-      const { expenseSourceName, expenseAmount } = expenseSourceData;
-
-      const expenseSourceQuestion = (
-        <p className="question-label">
-          <FormattedMessage
-            id="expenseBlock.createExpenseBlockQuestions-questionLabel"
-            defaultMessage="If you have another expense, select it below."
-          />
-        </p>
-      );
-
       return (
-        <div key={index}>
-          {index > 0 && (
-            <div className="delete-button-container">
-              <Button className="delete-button" onClick={() => deleteExpenseBlock(index)} variant="contained">
-                x
-              </Button>
-            </div>
-          )}
-          {index > 0 && expenseSourceQuestion}
-          {createExpenseDropdownMenu(expenseSourceName, index)}
-          {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
-        </div>
+        <ExpenseQuestion
+          expenseData={expenseSourceData}
+          allExpensesData={selectedMenuItem}
+          setAllExpenses={setSelectedMenuItem}
+          deleteExpenseBlock={deleteExpenseBlock}
+          index={index}
+          submitted={expensesErrorController.isSubmitted}
+          key={index}
+        />
       );
     });
-  };
-
-  const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
-    return (
-      <div className="bottom-border">
-        <p className="question-label">
-          <FormattedMessage
-            id="expenseBlock.createExpenseAmountTextfield-questionLabel"
-            defaultMessage="How much is this type of expense: "
-          />
-          {getExpenseSourceLabel(selectedMenuItem[index].expenseSourceName)}?
-        </p>
-        <div className="expense-block-textfield">
-          <StyledTextField
-            type="text"
-            name={expenseSourceName}
-            value={expenseAmount}
-            label={
-              <FormattedMessage id="expenseBlock.createExpenseAmountTextfield-amountLabel" defaultMessage="Amount" />
-            }
-            onChange={(event) => {
-              handleExpenseTextfieldChange(event, index);
-            }}
-            variant="outlined"
-            required
-            error={expenseSourceValueHasError(selectedMenuItem[index].expenseAmount)}
-            helperText={displayExpenseSourceValueHelperText(selectedMenuItem[index].expenseAmount)}
-          />
-        </div>
-      </div>
-    );
-  };
-
-  const createExpenseDropdownMenu = (expenseSourceName, index) => {
-    return (
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="expense-type-label">
-          <FormattedMessage
-            id="expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel"
-            defaultMessage="Expense Type"
-          />
-        </InputLabel>
-        <StyledSelectfield
-          labelId="expense-type-label"
-          id={expenseSourceName}
-          value={expenseSourceName}
-          label={
-            <FormattedMessage
-              id="expenseBlock.createExpenseDropdownMenu-expenseTypeSelectLabel"
-              defaultMessage="Expense Type"
-            />
-          }
-          onChange={(event) => {
-            handleSelectChange(event, index);
-          }}
-        >
-          {createExpenseMenuItems()}
-        </StyledSelectfield>
-      </FormControl>
-    );
-  };
-
-  const createExpenseMenuItems = () => {
-    const disabledSelectMenuItem = (
-      <MenuItem value="select" key="disabled-select-value" disabled>
-        <FormattedMessage id="expenseBlock.createExpenseMenuItems-disabledSelectMenuItemText" defaultMessage="Select" />
-      </MenuItem>
-    );
-
-    const menuItemKeys = Object.keys(expenseOptions);
-    const menuItemLabels = Object.values(expenseOptions);
-
-    const menuItems = menuItemKeys.map((menuItemKey, i) => {
-      return (
-        <MenuItem value={menuItemKey} key={menuItemKey}>
-          {menuItemLabels[i]}
-        </MenuItem>
-      );
-    });
-
-    return [disabledSelectMenuItem, menuItems];
-  };
-
-  const deleteExpenseBlock = (selectedIndex) => {
-    const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex);
-    setSelectedMenuItem(updatedSelectedMenuItems);
   };
 
   const handleAddAdditionalExpenseSource = (event) => {
@@ -172,52 +61,22 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
 
   const handleSaveAndContinue = (event) => {
     event.preventDefault();
-    if (expenseSourcesAreValid(selectedMenuItem)) {
+    const hasError = expensesErrorController.updateError(selectedMenuItem);
+    expensesErrorController.setIsSubmitted(true);
+    if (!hasError) {
       handleExpenseSourcesSubmit(selectedMenuItem, stepNumberId, uuid);
-    }
-  };
-
-  const handleSelectChange = (event, index) => {
-    const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
-      if (i === index) {
-        return {
-          expenseSourceName: event.target.value,
-          expenseAmount: 0,
-        };
-      } else {
-        return expenseSourceData;
-      }
-    });
-
-    setSelectedMenuItem(updatedSelectedMenuItems);
-  };
-
-  const handleExpenseTextfieldChange = (event, index) => {
-    const { value } = event.target;
-    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
-
-    if (numberUpToEightDigitsLongRegex.test(value)) {
-      const updatedSelectedMenuItems = selectedMenuItem.map((expenseSourceData, i) => {
-        if (i === index) {
-          return { ...expenseSourceData, expenseAmount: Math.round(Number(value)) };
-        } else {
-          return expenseSourceData;
-        }
-      });
-
-      setSelectedMenuItem(updatedSelectedMenuItems);
     }
   };
 
   return (
     <>
       {createExpenseBlockQuestions()}
-      {!expenseSourcesAreValid(selectedMenuItem) && (
+      {expensesErrorController.showError && (
         <ErrorMessage
           error={
             <FormattedMessage
               id="expenseBlock.return-error-message"
-              defaultMessage="Please select and enter a response for all three fields"
+              defaultMessage="Please select and enter a response for all expense fields"
             />
           }
         />

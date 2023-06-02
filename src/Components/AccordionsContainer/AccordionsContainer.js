@@ -7,13 +7,20 @@ import transportationBenefits from '../../Assets/BenefitCategoryLists/transporta
 import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBenefits';
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
 import CategoryAccordion from '../CategoryAccordion/CategoryAccordion';
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import './AccordionsContainer.css';
 
-const AccordionsContainer = () => {
+const AccordionsContainer = ({ errorController }) => {
+  const { formData } = useContext(Context);
   const [expanded, setExpanded] = useState(false);
 
+  useEffect(() => {
+    errorController.updateError(formData.hasBenefits, formData);
+  }, [expanded]);
+
   const handleAccordionSelectChange = (panel) => (event, isExpanded) => {
+    errorController.updateError(formData.hasBenefits, formData);
     setExpanded(isExpanded ? panel : false);
   };
 

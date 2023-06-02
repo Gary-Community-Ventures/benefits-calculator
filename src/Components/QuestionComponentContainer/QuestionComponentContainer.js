@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
@@ -6,17 +6,13 @@ import Radiofield from '../Radiofield/Radiofield';
 import Textfield from '../Textfield/Textfield';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
-import IncomeBlock from '../IncomeBlock/IncomeBlock';
-import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
-import HouseholdDataBlock from '../HouseholdDataBlock/HouseholdDataBlock';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
-import SignUp from '../SignUp/SignUp';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import AccordionsContainer from '../../Components/AccordionsContainer/AccordionsContainer';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
+import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import questions from '../../Assets/questions';
-import { zipcodeHasError } from '../../Assets/validationFunctions';
+import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({
@@ -26,26 +22,22 @@ const QuestionComponentContainer = ({
   handleNoAnswerChange,
   handleIncomeStreamsSubmit,
   handleExpenseSourcesSubmit,
-  handleHouseholdDataSubmit,
   handleCheckboxChange,
 }) => {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   let { id } = useParams();
   let numberId = Number(id);
   const matchingQuestion = questions[numberId];
-
-  const createHouseholdDataBlock = () => {
-    return (
-      <div className="question-container" id={id}>
-        <HouseholdDataBlock handleHouseholdDataSubmit={handleHouseholdDataSubmit} />
-      </div>
-    );
-  };
+  const errorController = useErrorController(
+    matchingQuestion.componentDetails.inputError,
+    matchingQuestion.componentDetails.inputHelperText,
+  );
 
   const renderTextfieldComponent = (question) => {
     return (
       <Textfield
         componentDetails={question.componentDetails}
+        errorController={errorController}
         data={formData}
         handleTextfieldChange={handleTextfieldChange}
       />
@@ -72,7 +64,7 @@ const QuestionComponentContainer = ({
     return (
       <BasicCheckboxGroup
         stateVariable={question.componentDetails.inputName}
-        options={question.componentDetails.options}
+        options={matchingQuestion.componentDetails.options}
       />
     );
   };
@@ -81,21 +73,17 @@ const QuestionComponentContainer = ({
     return (
       <OptionCardGroup
         stateVariable={question.componentDetails.inputName}
-        options={question.componentDetails.options}
+        errorController={errorController}
+        options={matchingQuestion.componentDetails.options}
       />
     );
   };
 
   const renderBasicSelectComponent = (question) => {
-    const finalOptions =
-      question.componentDetails.inputName === 'county'
-        ? question.componentDetails.options[formData.zipcode]
-        : question.componentDetails.options;
-
     return (
       <BasicSelect
         componentProperties={question.componentDetails.componentProperties}
-        options={finalOptions}
+        options={question.componentDetails.options}
         formDataProperty={question.componentDetails.inputName}
       />
     );
@@ -107,10 +95,6 @@ const QuestionComponentContainer = ({
     const hasFollowUpQuestions = followUpQuestions && followUpQuestions.length > 0;
     // this is specifically for step 5 error handling
     const isHealthInsuranceQ = matchingQuestion.name === 'healthInsurance';
-    const helperText =
-      isHealthInsuranceQ && matchingQuestion.componentDetails.inputHelperText(formData[matchingQuestion.name]);
-    const hasError =
-      isHealthInsuranceQ && matchingQuestion.componentDetails.inputError(formData[matchingQuestion.name]);
 
     return (
       <div className="question-container" id={id}>
@@ -119,9 +103,21 @@ const QuestionComponentContainer = ({
           <p className="question-description">{matchingQuestion.questionDescription}</p>
         )}
         {component}
-        {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && renderFollowUpQuestions()}
-        {isHealthInsuranceQ && hasError && <ErrorMessage error={helperText} />}
-        {createPreviousAndContinueButtons(matchingQuestion)}
+        {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && (
+          <FollowUpQuestions
+            matchingQuestion={matchingQuestion}
+            submitted={errorController.isSubmitted}
+            formData={formData}
+            handleCheckboxChange={handleCheckboxChange}
+            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
+            handleTextfieldChange={handleTextfieldChange}
+          />
+        )}
+        {isHealthInsuranceQ && errorController.showError && (
+          <ErrorMessage error={errorController.message(formData[matchingQuestion.name])} />
+        )}
+        {createPreviousAndContinueButtons()}
       </div>
     );
   };
@@ -156,87 +152,23 @@ const QuestionComponentContainer = ({
     return false;
   };
 
-  const renderFollowUpQuestions = () => {
-    const { followUpQuestions } = matchingQuestion;
-    return followUpQuestions.map((followUp, index) => {
-      if (followUp.componentDetails.componentType === 'Radiofield') {
-        return (
-          <div className="question-container" key={index}>
-            <h2 className="question-label">{followUp.question}</h2>
-            {renderRadiofieldComponent(followUp)}
-          </div>
-        );
-      } else if (followUp.componentDetails.componentType === 'IncomeBlock') {
-        return (
-          <div className="question-container" key={index}>
-            <h2 className="question-label">{followUp.question}</h2>
-            <IncomeBlock handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} />
-          </div>
-        );
-      } else if (followUp.componentDetails.componentType === 'ExpenseBlock') {
-        return (
-          <div className="question-container" key={index}>
-            <h2 className="question-label">{followUp.question}</h2>
-            <ExpenseBlock handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} />
-          </div>
-        );
-      } else if (followUp.componentDetails.componentType === 'Textfield') {
-        return (
-          <div className="question-container" key={index}>
-            <h2 className="question-label">{followUp.question}</h2>
-            <Textfield
-              componentDetails={matchingQuestion.followUpQuestions[0].componentDetails}
-              data={formData}
-              handleTextfieldChange={handleTextfieldChange}
-              index="0"
-            />
-          </div>
-        );
-      } else if (followUp.componentDetails.componentType === 'BasicSelect') {
-        return (
-          <div className="question-container" key={index}>
-            <h2 className="question-label">{followUp.question}</h2>
-            {renderBasicSelectComponent(followUp)}
-          </div>
-        );
-      } else if (followUp.componentDetails.componentType === 'SignUp') {
-        return (
-          <div className="question-container" key={index}>
-            <h2 className="question-label">{followUp.question}</h2>
-            <SignUp handleTextfieldChange={handleTextfieldChange} handleCheckboxChange={handleCheckboxChange} />
-          </div>
-        );
-      } else if (followUp.componentDetails.componentType === 'AccordionContainer') {
-        const hasError = matchingQuestion.componentDetails.inputError(formData.hasBenefits, formData);
-        const errorText = matchingQuestion.componentDetails.inputHelperText(formData.hasBenefits, formData);
-
-        return (
-          <div className="question-container accordions-container" key={index}>
-            <h2 className="question-label">{followUp.question}</h2>
-            <p className="question-description">{matchingQuestion.followUpQuestions[0].questionDescription}</p>
-            <AccordionsContainer />
-            {hasError && <ErrorMessage error={errorText} />}
-          </div>
-        );
-      }
-    });
-  };
-
-  const createPreviousAndContinueButtons = (question) => {
+  const createPreviousAndContinueButtons = () => {
     //render normal button block if the question isn't the income or expense question OR
     //if the user doesn't have an income/expenses at all,
     //otherwise these buttons will be created in the IncomeBlock/ExpenseBlock components
-    const isNotIncomeAndNotExpenseQ = question.name !== 'hasIncome' && question.name !== 'hasExpenses';
-    const hasFalsyIncome = question.name === 'hasIncome' && formData[question.componentDetails.inputName] === false;
-    const hasFalsyExpense = question.name === 'hasExpenses' && formData[question.componentDetails.inputName] === false;
+    const isNotIncomeAndNotExpenseQ = matchingQuestion.name !== 'hasIncome' && matchingQuestion.name !== 'hasExpenses';
+    const hasFalsyIncome =
+      matchingQuestion.name === 'hasIncome' && formData[matchingQuestion.componentDetails.inputName] === false;
+    const hasFalsyExpense =
+      matchingQuestion.name === 'hasExpenses' && formData[matchingQuestion.componentDetails.inputName] === false;
 
     if (isNotIncomeAndNotExpenseQ || hasFalsyIncome || hasFalsyExpense) {
       return (
         <div className="question-buttons">
-          <PreviousButton questionName={question.name} />
+          <PreviousButton questionName={matchingQuestion.name} />
           <ContinueButton
             handleContinueSubmit={handleContinueSubmit}
-            inputError={matchingQuestion.componentDetails.inputError}
+            errorController={errorController}
             inputName={matchingQuestion.componentDetails.inputName}
             questionName={matchingQuestion.name}
           />
@@ -290,7 +222,6 @@ const QuestionComponentContainer = ({
           createComponent(renderRadiofieldComponent(matchingQuestion))) ||
         (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
           createComponent(renderNoAnswerComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'HouseholdDataBlock' && createHouseholdDataBlock()) ||
         (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
           createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
         (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&

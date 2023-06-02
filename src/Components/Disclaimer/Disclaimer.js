@@ -10,7 +10,7 @@ import './Disclaimer.css';
 
 const StyledTypography = styled(Typography)(`
   color: #c6252b;
-  height: 24px;
+  height: auto;
 `);
 
 const Disclaimer = ({ handleCheckboxChange }) => {
