@@ -198,7 +198,7 @@ const getPersonDataErrorMsg = (householdDataState) => {
 };
 
 const emailHasError = (email) => {
-  return email !== '' && !/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email);
+  return !/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email);
 };
 
 const displayEmailHelperText = (email) => {
@@ -251,7 +251,7 @@ const displayLastNameHelperText = (lastName) => {
 
 const phoneHasError = (phoneNumber) => {
   const digitizedPhone = phoneNumber.replace(/\D/g, '');
-  return phoneNumber !== '' && digitizedPhone.length !== 10;
+  return digitizedPhone.length !== 10;
 };
 
 const displayPhoneHasErrorHelperText = (phoneNumber) => {
