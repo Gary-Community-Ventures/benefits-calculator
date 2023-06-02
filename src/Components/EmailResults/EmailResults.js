@@ -26,6 +26,7 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
     open: false,
     error: false,
     errorMessage: '',
+    snackbarMessage: '',
   });
   const emailErrorController = useErrorController(emailHasError, displayEmailHelperText);
   const phoneErrorController = useErrorController(phoneHasError, displayPhoneHasErrorHelperText);
@@ -63,12 +64,25 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
 
     let sendType;
     let validInput;
+    let snackbarMessage;
     if (type === 'emailScreen') {
       sendType = { email, type };
       validInput = emailHasError(email) === false && email !== '';
+      snackbarMessage = (
+        <FormattedMessage
+          id="emailResults.return-signupCompleted-email"
+          defaultMessage="A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder."
+        />
+      );
     } else if (type === 'textScreen') {
       sendType = { phone, type };
       validInput = phoneHasError(phone) === false && phone !== '';
+      snackbarMessage = (
+        <FormattedMessage
+          id="emailResults.return-signupCompleted"
+          defaultMessage="A copy of your results have been sent."
+        />
+      );
     }
 
     if (validInput) {
@@ -90,6 +104,7 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
         setState({
           ...state,
           open: true,
+          snackbarMessage: snackbarMessage,
         });
       } catch (error) {
         setState({
@@ -146,15 +161,10 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
           open={state.open}
           autoHideDuration={6000}
           onClose={handleClose}
-          message={
-            <FormattedMessage
-              id="emailResults.return-signupCompleted"
-              defaultMessage="A copy of your results have been sent."
-            />
-          }
+          message={state.snackbarMessage}
           action={action}
           severity="success"
-          sx={{ mb: -2 }}
+          sx={{ mb: -2, flexWrap: 'nowrap' }}
         />
       </div>
       <IconButton

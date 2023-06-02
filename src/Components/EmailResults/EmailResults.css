@@ -30,6 +30,10 @@
   display: flex;
 }
 
+div.MuiPaper-root {
+  flex-wrap: nowrap;
+}
+
 @media (max-width: 790px) {
   .email-results-container {
     width: 90%;
