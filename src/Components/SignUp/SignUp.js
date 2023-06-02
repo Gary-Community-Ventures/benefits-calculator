@@ -33,8 +33,12 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   const sighnUpErrorController = useErrorController(signUpFormHasError, displaySignUpFormHelperText);
   const firstNameErrorController = useErrorController(nameHasError, displayFirstNameHelperText);
   const lastNameErrorController = useErrorController(nameHasError, displayLastNameHelperText);
-  const emailErrorController = useErrorController(emailHasError, displayEmailHelperText);
-  const phoneErrorController = useErrorController(phoneHasError, displayPhoneHasErrorHelperText);
+  const emailErrorController = useErrorController((email) => {
+    emailHasError(email) && email !== '';
+  }, displayEmailHelperText);
+  const phoneErrorController = useErrorController((phone) => {
+    phoneHasError(phone) && phone !== '';
+  }, displayPhoneHasErrorHelperText);
 
   useEffect(() => {
     sighnUpErrorController.setIsSubmitted(submitted);

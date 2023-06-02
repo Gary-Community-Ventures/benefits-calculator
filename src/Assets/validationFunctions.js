@@ -270,8 +270,8 @@ const signUpFormHasError = (props) => {
   }
 
   return (
-    emailHasError(email) ||
-    phoneHasError(phone) ||
+    (emailHasError(email) && email !== '') ||
+    (phoneHasError(phone) && phone !== '') ||
     (!email && !phone) ||
     !firstName ||
     !lastName ||
