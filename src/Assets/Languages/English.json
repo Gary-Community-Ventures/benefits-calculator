@@ -357,6 +357,7 @@
   "emailResults.enter-phoneNumberLabel": "Text my results link",
   "emailResults.sendButton": "Send",
   "emailResults.return-signupCompleted": "A copy of your results has been sent.",
+  "emailResults.return-signupCompleted-email": "A copy of your results has been sent. If you do not see the email in your inbox, please check your spam folder.",
   "emailResults.copy-results-text": "Copy my results link",
   "landingPage.step-header": "Step 0 of ",
   "landingPage.body": "MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:",

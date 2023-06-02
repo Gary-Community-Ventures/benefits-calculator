@@ -359,6 +359,7 @@
   "emailResults.enter-phoneNumberLabel": "Enviar un mensaje de texto con el enlace de mis resultados",
   "emailResults.sendButton": "Enviar",
   "emailResults.return-signupCompleted": "Se ha enviado una copia de sus resultados.",
+  "emailResults.return-signupCompleted-email": "Se ha enviado una copia de sus resultados. Si no ve el correo electrónico en su bandeja de entrada, verifique su carpeta de correo no deseado.",
   "emailResults.copy-results-text": "Copiar mi enlace de resultados",
   "landingPage.step-header": "Paso 0 de ",
   "landingPage.body": "MyFriendBen es una herramienta que puede ayudarle a determinar los beneficios para los que probablemente sea elegible. Esto es lo que debe saber antes de comenzar:",
