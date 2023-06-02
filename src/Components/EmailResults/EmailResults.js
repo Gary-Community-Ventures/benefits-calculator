@@ -104,6 +104,7 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
         setState({
           ...state,
           open: true,
+          error: false,
           snackbarMessage: snackbarMessage,
         });
       } catch (error) {
