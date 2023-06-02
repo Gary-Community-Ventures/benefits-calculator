@@ -12,6 +12,7 @@ import {
   displayEmailHelperText,
   phoneHasError,
   displayPhoneHasErrorHelperText,
+  useErrorController,
 } from '../../Assets/validationFunctions';
 import { postMessage } from '../../apiCalls';
 import Textfield from '../Textfield/Textfield';
@@ -26,24 +27,25 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
     error: false,
     errorMessage: '',
   });
+  const emailErrorController = useErrorController(emailHasError, displayEmailHelperText);
+  const phoneErrorController = useErrorController(phoneHasError, displayPhoneHasErrorHelperText);
   // const { id: screenId } = useParams();
 
-  const createEmailTextfield = (type, errorType, errorMessage, inputLabelId) => {
+  const createEmailTextfield = (type, errorController, inputLabelId) => {
     const emailProps = {
       inputType: 'text',
       inputName: type,
       inputLabel: <FormattedMessage id={inputLabelId} defaultMessage="Email" />,
-      inputError: errorType,
-      inputHelperText: errorMessage,
     };
 
-    return createTextfield(emailProps);
+    return createTextfield(emailProps, errorController);
   };
 
-  const createTextfield = (componentProps) => {
+  const createTextfield = (componentProps, errorController) => {
     return (
       <Textfield
         componentDetails={componentProps}
+        errorController={errorController}
         data={formData.signUpInfo}
         handleTextfieldChange={handleTextfieldChange}
         index="0"
@@ -173,11 +175,12 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
       <article className="question-container question-label">
         <FormattedMessage id="emailResults.enter-emailLabel" defaultMessage="Email my results link" />
       </article>
-      {createEmailTextfield('email', emailHasError, displayEmailHelperText, 'signUp.createEmailTextfield-label')}
+      {createEmailTextfield('email', emailErrorController, 'signUp.createEmailTextfield-label')}
       <Button
         sx={{ m: '.5rem' }}
         variant="contained"
         onClick={(event) => {
+          emailErrorController.setIsSubmitted(true);
           handleSubmit(event, 'emailScreen');
         }}
         id="send-button"
@@ -188,16 +191,12 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
       <article className="question-container question-label">
         <FormattedMessage id="emailResults.enter-phoneNumberLabel" defaultMessage="Text my results link" />
       </article>
-      {createEmailTextfield(
-        'phone',
-        phoneHasError,
-        displayPhoneHasErrorHelperText,
-        'signUp.createPhoneTextfield-label',
-      )}
+      {createEmailTextfield('phone', phoneErrorController, 'signUp.createPhoneTextfield-label')}
       <Button
         sx={{ m: '.5rem' }}
         variant="contained"
         onClick={(event) => {
+          phoneErrorController.setIsSubmitted(true);
           handleSubmit(event, 'textScreen');
         }}
         id="send-button"
