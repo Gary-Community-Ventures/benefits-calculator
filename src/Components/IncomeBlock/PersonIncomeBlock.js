@@ -56,11 +56,11 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
     ]);
   };
 
-  const renderReturnStmtIdOrDefaultMsg = (index) => {
+  const renderReturnStmtIdOrDefaultMsg = (page) => {
     let formattedMsgId = 'questions.hasIncome-a';
     let formattedMsgDefaultMsg = 'What type of income have you had most recently?';
 
-    if (index !== 0) {
+    if (page !== 1) {
       formattedMsgId = 'personIncomeBlock.return-questionLabel';
       formattedMsgDefaultMsg = 'What type of income have they had most recently?';
     }

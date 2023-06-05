@@ -174,7 +174,7 @@ const IncomeQuestion = ({
     let formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-youQLabel';
     let formattedMsgDefaultMsg = 'How many hours do you work per week: ';
 
-    if (page !== 0) {
+    if (page !== 1) {
       formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-questionLabel';
       formattedMsgDefaultMsg = 'How many hours do they work per week: ';
     }
@@ -228,7 +228,7 @@ const IncomeQuestion = ({
       let hourlyFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
       let hourlyFormattedMsgDefaultMsg = 'What is your hourly rate: ';
 
-      if (page !== 0) {
+      if (page !== 1) {
         hourlyFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
         hourlyFormattedMsgDefaultMsg = 'What is their hourly rate: ';
       }
@@ -238,7 +238,7 @@ const IncomeQuestion = ({
       let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
       let payPeriodFormattedMsgDefaultMsg = 'How much do you receive each pay period for: ';
 
-      if (page !== 0) {
+      if (page !== 1) {
         payPeriodFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-questionLabel';
         payPeriodFormattedMsgDefaultMsg = 'How much do they receive each pay period for: ';
       }
@@ -278,7 +278,7 @@ const IncomeQuestion = ({
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     let formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel';
     let formattedMsgDefaultMsg = 'How often are you paid this income: ';
-    if (page !== 0) {
+    if (page !== 1) {
       formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel';
       formattedMsgDefaultMsg = 'How often are they paid this income: ';
     }
@@ -333,7 +333,7 @@ const IncomeQuestion = ({
   let formattedMsgId = 'incomeBlock.createIncomeBlockQuestions-questionLabel';
   let formattedMsgDefaultMsg = 'If you receive another type of income, select it below.';
 
-  if (page !== 0) {
+  if (page !== 1) {
     formattedMsgId = 'personIncomeBlock.createIncomeBlockQuestions-questionLabel';
     formattedMsgDefaultMsg = 'If they receive another type of income, select it below.';
   }
