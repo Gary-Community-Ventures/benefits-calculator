@@ -31,6 +31,10 @@ const FilterSection = () => {
     setCitizenshipPopover({ ...citizenshipPopover, anchorEl: null });
   }
 
+  const handleOtherPopoverClose = () => {
+    setOtherPopover({ ...otherPopover, anchorEl: null });
+  }
+
   return (
     <div className='filter-button-container'>
       <FilterListIcon sx={{ mr: '.5rem', color: '#037A93' }} />
@@ -62,6 +66,18 @@ const FilterSection = () => {
       >
         Other
       </Button>
+      <Popover
+        id='otherPopover'
+        open={Boolean(otherPopover.anchorEl)}
+        onClose={handleOtherPopoverClose}
+        anchorEl={otherPopover.anchorEl}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        {otherPopover.child}
+      </Popover>
       <Button
         id='reset'
         variant='contained'
