@@ -3,8 +3,11 @@ import { Context } from '../Wrapper/Wrapper';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import FilterSection from '../FilterSection/FilterSection';
 import FilterTable from '../FilterTable/FilterTable.js';
-import FilterListIcon from '@mui/icons-material/FilterList';
+import ResultsError from '../ResultsError/ResultsError';
+import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
+import Loading from '../Loading/Loading';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 import Grid from '@mui/material/Grid';
@@ -16,11 +19,8 @@ import {
   GridLinkOperator,
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
-import Loading from '../Loading/Loading';
-import ResultsError from '../ResultsError/ResultsError';
 import Toolbar from '@mui/material/Toolbar';
 import ReactGA from 'react-ga';
-import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import { getEligibility } from '../../apiCalls';
 import './Results.css';
 
@@ -480,8 +480,8 @@ const Results = () => {
     return (
       <>
         <div className="filters-container">
-          {displayFilterButtons()}
-          <FilterTable
+          {<FilterSection />}
+          {/* <FilterTable
             filt={filt}
             updateFilter={updateFilter}
             categories={categories}
@@ -489,7 +489,7 @@ const Results = () => {
             categoryState={categoryState}
             citizenToggleState={citizenToggleState}
             alreadyHasToggleState={alreadyHasToggleState}
-          />
+          /> */}
         </div>
         {filt.category !== false && (
           <>
@@ -641,38 +641,6 @@ const Results = () => {
 
   const hasUrgentNeeds = () => {
     return results.rawResponse.urgent_needs.es.length > 0;
-  }
-
-  const displayFilterButtons = () => {
-    return (
-      <div className='filter-button-container'>
-        <FilterListIcon sx={{ mr: '.5rem', color: '#037A93' }} />
-        <Button
-          id='citizenshipOpen'
-          variant='contained'
-          className='filter-button citizen'
-          onClick={(event) => handleFilterButton(event)}
-        >
-          Citizenship
-        </Button>
-        <Button
-          id='otherOpen'
-          variant='contained'
-          className='filter-button other'
-          onClick={(event) => handleFilterButton(event)}
-        >
-          Other
-        </Button>
-        <Button
-          id='resetOpen'
-          variant='contained'
-          className='filter-button'
-          onClick={(event) => handleFilterButton(event)}
-        >
-          Reset
-        </Button>
-      </div>
-    );
   }
 
   return (
