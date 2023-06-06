@@ -16,12 +16,9 @@ const FilterTable = ({
   categories,
   eligibilityState,
   categoryState,
-  citizenToggleState,
   alreadyHasToggleState,
 }) => {
-  const [showFilters, setShowFilter] = useState(false);
-  const [citizenshipToggle, setCitizenshipToggle] = citizenToggleState;
-  const [alreadyHasToggle, setAlreadyHasToggle] = alreadyHasToggleState;
+  const [showFilters, setShowFilter] = useState(false);  const [alreadyHasToggle, setAlreadyHasToggle] = alreadyHasToggleState;
   const [eligibilitySelected, setEligibilitySelected] = eligibilityState;
   const [categorySelected, setCategorySelected] = categoryState;
 
@@ -72,33 +69,6 @@ const FilterTable = ({
     setCategorySelected(event.target.value);
   };
 
-  const handleCitizenToggle = (event) => {
-    // Filter out citizen benefits when toggle is on
-    // Filter out non-citizen benifits when toggle is off
-    if (event.target.checked) {
-      updateFilter({
-        name: 'citizen',
-        filter: {
-          id: 1,
-          columnField: 'citizenship',
-          operatorValue: 'isAnyOf',
-          value: ['non-citizen', 'none'],
-        },
-      });
-    } else {
-      updateFilter({
-        name: 'citizen',
-        filter: {
-          id: 1,
-          columnField: 'citizenship',
-          operatorValue: 'isAnyOf',
-          value: ['citizen', 'none'],
-        },
-      });
-    }
-    setCitizenshipToggle(event.target.checked);
-  };
-
   const handleAlreadyHasToggle = (event) => {
     if (event.target.checked) {
       updateFilter({
@@ -133,18 +103,6 @@ const FilterTable = ({
               <IconButton onClick={toggleFilterForm}>
                 <CloseIcon className="close" />
               </IconButton>
-            </div>
-            <div>
-              <FormControlLabel
-                className="toggle"
-                label={
-                  <FormattedMessage
-                    id="results.returnSignupCitizenFilter"
-                    defaultMessage="Only show benefits that do not require a citizen or qualified non-citizen in the household"
-                  />
-                }
-                control={<CustomSwitch handleCustomSwitchToggle={handleCitizenToggle} checked={citizenshipToggle} />}
-              />
             </div>
             <div>
               <FormControlLabel
