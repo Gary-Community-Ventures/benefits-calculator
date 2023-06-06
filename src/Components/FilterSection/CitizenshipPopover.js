@@ -1,9 +1,9 @@
-import { Popover } from "@mui/material";
+import CitizenshipSwitch from "../CustomSwitch/CitizenshipSwitch";
 
-const CitizenshipPopover = () => {
+const CitizenshipPopover = ({ updateFilter }) => {
   return (
     <div>
-      Add toggle here
+      <CitizenshipSwitch updateFilter={updateFilter} />
     </div>
   );
 }

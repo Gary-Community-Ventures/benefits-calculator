@@ -6,10 +6,10 @@ import Popover from '@mui/material/Popover';
 import { Button } from '@mui/material';
 import './FilterSection.css';
 
-const FilterSection = () => {
+const FilterSection = ({ updateFilter }) => {
   const [citizenshipPopover, setCitizenshipPopover] = useState({
     anchorEl: null,
-    child: <CitizenshipPopover/>
+    child: <CitizenshipPopover updateFilter={updateFilter} />
   });
 
   const [otherPopover, setOtherPopover] = useState({

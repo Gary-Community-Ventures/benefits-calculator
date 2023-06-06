@@ -479,7 +479,7 @@ const Results = () => {
     return (
       <>
         <div className="filters-container">
-          {<FilterSection />}
+          {<FilterSection updateFilter={updateFilter} />}
           {/* <FilterTable
             filt={filt}
             updateFilter={updateFilter}
