@@ -18,13 +18,9 @@ const FilterTable = ({
   categoryState,
   alreadyHasToggleState,
 }) => {
-  const [showFilters, setShowFilter] = useState(false);  const [alreadyHasToggle, setAlreadyHasToggle] = alreadyHasToggleState;
   const [eligibilitySelected, setEligibilitySelected] = eligibilityState;
   const [categorySelected, setCategorySelected] = categoryState;
-
-  const toggleFilterForm = (event) => {
-    setShowFilter(!showFilters);
-  };
+  const [alreadyHasToggle, setAlreadyHasToggle] = alreadyHasToggleState;
 
   const eligibilityFilterChange = (event) => {
     const eligibilityFilters = {
