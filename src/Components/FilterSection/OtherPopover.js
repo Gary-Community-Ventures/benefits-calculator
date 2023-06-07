@@ -1,7 +1,22 @@
-const OtherPopover = () => {
+import FilterTable from "../FilterTable/FilterTable";
+
+const OtherPopover = ({
+  updateFilter,
+  categories,
+  eligibilityState,
+  categoryState,
+  alreadyHasToggleState
+ }) => {
+
   return (
     <div>
-      Add category/eligibility filters here
+      <FilterTable
+        updateFilter={updateFilter}
+        categories={categories}
+        eligibilityState={eligibilityState}
+        categoryState={categoryState}
+        alreadyHasToggleState={alreadyHasToggleState}
+      />
     </div>
   );
 }
