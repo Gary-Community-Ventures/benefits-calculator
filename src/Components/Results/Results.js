@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import FilterSection from '../FilterSection/FilterSection';
-import FilterTable from '../FilterTable/FilterTable.js';
 import ResultsError from '../ResultsError/ResultsError';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import Loading from '../Loading/Loading';
@@ -479,15 +478,14 @@ const Results = () => {
     return (
       <>
         <div className="filters-container">
-          {<FilterSection updateFilter={updateFilter} />}
-          {/* <FilterTable
-            filt={filt}
+          {<FilterSection
             updateFilter={updateFilter}
             categories={categories}
             eligibilityState={eligibilityState}
             categoryState={categoryState}
             alreadyHasToggleState={alreadyHasToggleState}
-          /> */}
+          />
+          }
         </div>
         {filt.category !== false && (
           <>
