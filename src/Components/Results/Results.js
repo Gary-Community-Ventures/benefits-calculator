@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useRef } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -90,16 +90,9 @@ const Results = () => {
     fetchResults();
   }, []);
 
-  const firstUpdate = useRef(true);
   useEffect(() => {
-    if (!firstUpdate.current) {
-      responseLanguage();
-      updateFilter({ name: 'category', filter: false });
-      categoryState[1]('All Categories'); //this resets the category filter when user selects a diff lang.
-      //Otherwise it'll look for that literal category str and throw an err b/c it won't find it in that exact lang.
-    } else {
-      firstUpdate.current = false;
-    }
+    responseLanguage();
+    updateFilter({ name: 'category', filter: false });
   }, [locale, results.rawResponse]);
 
   const fetchResults = async () => {
