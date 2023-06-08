@@ -587,39 +587,6 @@ const Results = () => {
     );
   };
 
-  const resetAllFilters = () => {
-    updateFilter(
-      { name: 'category', filter: false },
-      {
-        name: 'eligible',
-        filter: {
-          id: 2,
-          columnField: 'eligible',
-          operatorValue: 'is',
-          value: 'true',
-        },
-      },
-      {
-        name: 'hasBenefit',
-        filter: {
-          id: 3,
-          columnField: 'has_benefit',
-          operatorValue: 'is',
-          value: 'false',
-        },
-      },
-      {
-        name: 'citizen',
-        filter: {
-          id: 1,
-          columnField: 'citizenship',
-          operatorValue: 'isAnyOf',
-          value: ['citizen', 'none'],
-        },
-      },
-    );
-  }
-
   const displayBenefitAndImmedNeedsBtns = () => {
     const benefitBtnClass = filterResultsButton === 'benefits' ? 'results-link' : 'results-filter-button-grey';
     const immediateNeedsBtnClass =
@@ -644,7 +611,6 @@ const Results = () => {
           className={immediateNeedsBtnClass}
           onClick={() => {
             setFilterResultsButton('urgentNeeds');
-            resetAllFilters();
           }}
           sx={{ mt: 1, mb: 1, p: 0.8, fontSize: '.8rem' }}
           variant="contained"
