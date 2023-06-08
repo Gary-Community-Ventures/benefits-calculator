@@ -471,7 +471,7 @@ const Results = () => {
           {<FilterSection
             updateFilter={updateFilter}
             categories={categories}
-          />
+            resetAllFilters={resetAllFilters} />
           }
         </div>
         {filt.category !== false && (
@@ -586,9 +586,43 @@ const Results = () => {
     );
   };
 
+  const resetAllFilters = () => {
+    updateFilter(
+      { name: 'category', filter: false },
+      {
+        name: 'eligible',
+        filter: {
+          id: 2,
+          columnField: 'eligible',
+          operatorValue: 'is',
+          value: 'true',
+        },
+      },
+      {
+        name: 'hasBenefit',
+        filter: {
+          id: 3,
+          columnField: 'has_benefit',
+          operatorValue: 'is',
+          value: 'false',
+        },
+      },
+      {
+        name: 'citizen',
+        filter: {
+          id: 1,
+          columnField: 'citizenship',
+          operatorValue: 'isAnyOf',
+          value: ['citizen', 'none'],
+        },
+      },
+    );
+  }
+
   const displayBenefitAndImmedNeedsBtns = () => {
     const benefitBtnClass = filterResultsButton === 'benefits' ? 'results-link' : 'results-filter-button-grey';
-    const immediateNeedsBtnClass = filterResultsButton === 'urgentNeeds' ? 'results-link' : 'results-filter-button-grey';
+    const immediateNeedsBtnClass =
+      filterResultsButton === 'urgentNeeds' ? 'results-link' : 'results-filter-button-grey';
 
     return (
       <div>
@@ -609,6 +643,7 @@ const Results = () => {
           className={immediateNeedsBtnClass}
           onClick={() => {
             setFilterResultsButton('urgentNeeds');
+            resetAllFilters();
           }}
           sx={{ mt: 1, mb: 1, p: 0.8, fontSize: '.8rem' }}
           variant="contained"
@@ -624,7 +659,7 @@ const Results = () => {
 
   const hasUrgentNeeds = () => {
     return results.rawResponse.urgent_needs.es.length > 0;
-  }
+  };
 
   return (
     <main className="benefits-form">
