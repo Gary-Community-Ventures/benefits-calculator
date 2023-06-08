@@ -5,15 +5,16 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
 import { FormattedMessage } from 'react-intl';
+import { useState } from 'react';
 import './FilterTable.css';
 
 const FilterTable = ({
   updateFilter,
   categories,
 }) => {
-  const [eligibilitySelected, setEligibilitySelected] = eligibilityState;
-  const [categorySelected, setCategorySelected] = categoryState;
-  const [alreadyHasToggle, setAlreadyHasToggle] = alreadyHasToggleState;
+  const [selectedEligibility, setSelectedEligibility] = useState('eligibleBenefits');
+  const [alreadyHasToggle, setAlreadyHasToggle] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('All Categories');
 
   const eligibilityFilterChange = (event) => {
     const eligibilityFilters = {
