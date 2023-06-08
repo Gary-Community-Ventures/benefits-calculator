@@ -46,6 +46,11 @@ const FilterSection = ({ updateFilter, categories, citizenToggleState, categoryS
           },
         },
       );
+      
+      citizenToggleState[1](false);
+      categoryState[1]('All Categories');
+      eligibilityState[1]('eligibleBenefits');
+      alreadyHasToggleState[1](false);
     }
   };
 
