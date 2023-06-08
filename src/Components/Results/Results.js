@@ -33,6 +33,7 @@ const Results = () => {
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const citizenToggleState = useState(false);
+  const categoryState = useState('All Categories');
 
   const initialResults = {
     programs: [],
@@ -472,7 +473,8 @@ const Results = () => {
           {<FilterSection
             updateFilter={updateFilter}
             categories={categories}
-            citizenToggleState={citizenToggleState} />
+            citizenToggleState={citizenToggleState}
+            categoryState={categoryState}/>
           }
         </div>
         {filt.category !== false && (

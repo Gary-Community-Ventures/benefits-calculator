@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import CitizenshipPopover from './CitizenshipPopover';
-import OtherPopover from './OtherPopover';
+import FilterTable from '../FilterTable/FilterTable';
 import Popover from '@mui/material/Popover';
 import { Button } from '@mui/material';
 import './FilterSection.css';
 
-const FilterSection = ({ updateFilter, categories, citizenToggleState }) => {
+const FilterSection = ({ updateFilter, categories, citizenToggleState, categoryState }) => {
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState(null);
   const [otherPopoverAnchor, setOtherPopoverAnchor] = useState(null);
 
@@ -98,7 +98,11 @@ const FilterSection = ({ updateFilter, categories, citizenToggleState }) => {
           horizontal: 'left',
         }}
       >
-        <OtherPopover updateFilter={updateFilter} categories={categories} />
+        <FilterTable
+          updateFilter={updateFilter}
+          categories={categories}
+          categoryState={categoryState}
+        />
       </Popover>
       <Button id="reset" variant="contained" className="filter-button" onClick={(event) => handleButtonClick(event)}>
         Reset

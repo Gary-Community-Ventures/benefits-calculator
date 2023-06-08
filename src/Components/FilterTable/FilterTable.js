@@ -8,10 +8,10 @@ import { FormattedMessage } from 'react-intl';
 import { useState } from 'react';
 import './FilterTable.css';
 
-const FilterTable = ({ updateFilter, categories }) => {
+const FilterTable = ({ updateFilter, categories, categoryState }) => {
+  const [selectedCategory, setSelectedCategory] = categoryState;
   const [selectedEligibility, setSelectedEligibility] = useState('eligibleBenefits');
   const [alreadyHasToggle, setAlreadyHasToggle] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('All Categories');
 
   const eligibilityFilterChange = (event) => {
     const eligibilityFilters = {
