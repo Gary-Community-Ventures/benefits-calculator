@@ -6,7 +6,7 @@ import Popover from '@mui/material/Popover';
 import { Button } from '@mui/material';
 import './FilterSection.css';
 
-const FilterSection = ({ updateFilter, categories, citizenToggleState, categoryState }) => {
+const FilterSection = ({ updateFilter, categories, citizenToggleState, categoryState, eligibilityState }) => {
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState(null);
   const [otherPopoverAnchor, setOtherPopoverAnchor] = useState(null);
 
@@ -102,6 +102,7 @@ const FilterSection = ({ updateFilter, categories, citizenToggleState, categoryS
           updateFilter={updateFilter}
           categories={categories}
           categoryState={categoryState}
+          eligibilityState={eligibilityState}
         />
       </Popover>
       <Button id="reset" variant="contained" className="filter-button" onClick={(event) => handleButtonClick(event)}>
