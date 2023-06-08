@@ -6,10 +6,7 @@ import Popover from '@mui/material/Popover';
 import { Button } from '@mui/material';
 import './FilterSection.css';
 
-const FilterSection = ({
-  updateFilter,
-  categories
- }) => {
+const FilterSection = ({ updateFilter, categories }) => {
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState(null);
 
   const [otherPopoverAnchor, setOtherPopoverAnchor] = useState(null);
@@ -20,31 +17,60 @@ const FilterSection = ({
     } else if (event.target.id === 'other') {
       setOtherPopoverAnchor(event.currentTarget);
     } else if (event.target.id === 'reset') {
-      console.log('add reset functionality here');
+      updateFilter(
+        { name: 'category', filter: false },
+        {
+          name: 'eligible',
+          filter: {
+            id: 2,
+            columnField: 'eligible',
+            operatorValue: 'is',
+            value: 'true',
+          },
+        },
+        {
+          name: 'hasBenefit',
+          filter: {
+            id: 3,
+            columnField: 'has_benefit',
+            operatorValue: 'is',
+            value: 'false',
+          },
+        },
+        {
+          name: 'citizen',
+          filter: {
+            id: 1,
+            columnField: 'citizenship',
+            operatorValue: 'isAnyOf',
+            value: ['citizen', 'none'],
+          },
+        },
+      );
     }
-  }
+  };
 
   const handleCitizenshipPopoverClose = () => {
     setCitizenshipPopoverAnchor(null);
-  }
+  };
 
   const handleOtherPopoverClose = () => {
     setOtherPopoverAnchor(null);
-  }
+  };
 
   return (
-    <div className='filter-button-container'>
+    <div className="filter-button-container">
       <FilterListIcon sx={{ mr: '.5rem', color: '#037A93' }} />
       <Button
-        id='citizenship'
-        variant='contained'
-        className='filter-button citizen'
+        id="citizenship"
+        variant="contained"
+        className="filter-button citizen"
         onClick={(event) => handleButtonClick(event)}
       >
         Citizenship
       </Button>
       <Popover
-        id='citizenshipPopover'
+        id="citizenshipPopover"
         open={Boolean(citizenshipPopoverAnchor)}
         onClose={handleCitizenshipPopoverClose}
         anchorEl={citizenshipPopoverAnchor}
@@ -56,15 +82,15 @@ const FilterSection = ({
         <CitizenshipPopover updateFilter={updateFilter} />
       </Popover>
       <Button
-        id='other'
-        variant='contained'
-        className='filter-button other'
+        id="other"
+        variant="contained"
+        className="filter-button other"
         onClick={(event) => handleButtonClick(event)}
       >
         Other
       </Button>
       <Popover
-        id='otherPopover'
+        id="otherPopover"
         open={Boolean(otherPopoverAnchor)}
         onClose={handleOtherPopoverClose}
         anchorEl={otherPopoverAnchor}
@@ -73,21 +99,13 @@ const FilterSection = ({
           horizontal: 'left',
         }}
       >
-        <OtherPopover
-          updateFilter={updateFilter}
-          categories={categories}
-        />
+        <OtherPopover updateFilter={updateFilter} categories={categories} />
       </Popover>
-      <Button
-        id='reset'
-        variant='contained'
-        className='filter-button'
-        onClick={(event) => handleButtonClick(event)}
-      >
+      <Button id="reset" variant="contained" className="filter-button" onClick={(event) => handleButtonClick(event)}>
         Reset
       </Button>
     </div>
   );
-}
+};
 
 export default FilterSection;
