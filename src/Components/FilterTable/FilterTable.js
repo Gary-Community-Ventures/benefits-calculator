@@ -5,7 +5,6 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
 import { FormattedMessage } from 'react-intl';
-import { useState } from 'react';
 import './FilterTable.css';
 
 const FilterTable = ({ updateFilter, categories, categoryState, eligibilityState, alreadyHasToggleState }) => {
@@ -103,7 +102,7 @@ const FilterTable = ({ updateFilter, categories, categoryState, eligibilityState
   };
 
   return (
-    <>
+    <div className='popover'>
       <div>
         <FormControl className="full-width">
           <FormLabel id="benefit-category" sx={{ color: '#000000', fontWeight: 500 }}>
@@ -154,7 +153,7 @@ const FilterTable = ({ updateFilter, categories, categoryState, eligibilityState
           control={<CustomSwitch handleCustomSwitchToggle={handleAlreadyHasToggle} checked={alreadyHasToggle} />}
         />
       </div>
-    </>
+    </div>
   );
 };
 

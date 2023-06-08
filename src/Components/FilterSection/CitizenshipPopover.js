@@ -34,18 +34,16 @@ const CitizenshipPopover = ({ updateFilter, citizenToggleState }) => {
   };
 
   return (
-    <div>
-      <FormControlLabel
-        className="toggle"
-        label={
-          <FormattedMessage
-            id="results.returnSignupCitizenFilter"
-            defaultMessage="Only show benefits that do not require a citizen or qualified non-citizen in the household"
-          />
-        }
-        control={<CustomSwitch handleCustomSwitchToggle={handleCitizenToggle} checked={citizenshipToggle} />}
-      />
-    </div>
+    <FormControlLabel
+      className="popover"
+      label={
+        <FormattedMessage
+          id="results.returnSignupCitizenFilter"
+          defaultMessage="Only show benefits that do not require a citizen or qualified non-citizen in the household"
+        />
+      }
+      control={<CustomSwitch handleCustomSwitchToggle={handleCitizenToggle} checked={citizenshipToggle} />}
+    />
   );
 };
 
