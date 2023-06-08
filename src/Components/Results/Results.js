@@ -32,9 +32,6 @@ const Results = () => {
   const locale = useContext(Context).locale;
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
-  const alreadyHasToggleState = useState(false);
-  const eligibilityState = useState('eligibleBenefits');
-  const categoryState = useState('All Categories');
 
   const initialResults = {
     programs: [],
@@ -474,9 +471,6 @@ const Results = () => {
           {<FilterSection
             updateFilter={updateFilter}
             categories={categories}
-            eligibilityState={eligibilityState}
-            categoryState={categoryState}
-            alreadyHasToggleState={alreadyHasToggleState}
           />
           }
         </div>
