@@ -10,38 +10,26 @@ const FilterSection = ({
   updateFilter,
   categories
  }) => {
-  const [citizenshipPopover, setCitizenshipPopover] = useState({
-    anchorEl: null,
-    child: <CitizenshipPopover updateFilter={updateFilter} />
-  });
+  const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState(null);
 
-  const [otherPopover, setOtherPopover] = useState({
-    anchorEl: null,
-    child: <OtherPopover
-      updateFilter={updateFilter}
-      categories={categories}
-      eligibilityState={eligibilityState}
-      categoryState={categoryState}
-      alreadyHasToggleState={alreadyHasToggleState}
-    />
-  });
+  const [otherPopoverAnchor, setOtherPopoverAnchor] = useState(null);
 
   const handleButtonClick = (event) => {
     if (event.target.id === 'citizenship') {
-      setCitizenshipPopover({ ...citizenshipPopover, anchorEl: event.currentTarget });
+      setCitizenshipPopoverAnchor(event.currentTarget);
     } else if (event.target.id === 'other') {
-      setOtherPopover({ ...otherPopover, anchorEl: event.currentTarget });
+      setOtherPopoverAnchor(event.currentTarget);
     } else if (event.target.id === 'reset') {
       console.log('add reset functionality here');
     }
   }
 
   const handleCitizenshipPopoverClose = () => {
-    setCitizenshipPopover({ ...citizenshipPopover, anchorEl: null });
+    setCitizenshipPopoverAnchor(null);
   }
 
   const handleOtherPopoverClose = () => {
-    setOtherPopover({ ...otherPopover, anchorEl: null });
+    setOtherPopoverAnchor(null);
   }
 
   return (
@@ -57,15 +45,15 @@ const FilterSection = ({
       </Button>
       <Popover
         id='citizenshipPopover'
-        open={Boolean(citizenshipPopover.anchorEl)}
+        open={Boolean(citizenshipPopoverAnchor)}
         onClose={handleCitizenshipPopoverClose}
-        anchorEl={citizenshipPopover.anchorEl}
+        anchorEl={citizenshipPopoverAnchor}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
         }}
       >
-        {citizenshipPopover.child}
+        <CitizenshipPopover updateFilter={updateFilter} />
       </Popover>
       <Button
         id='other'
@@ -77,15 +65,18 @@ const FilterSection = ({
       </Button>
       <Popover
         id='otherPopover'
-        open={Boolean(otherPopover.anchorEl)}
+        open={Boolean(otherPopoverAnchor)}
         onClose={handleOtherPopoverClose}
-        anchorEl={otherPopover.anchorEl}
+        anchorEl={otherPopoverAnchor}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
         }}
       >
-        {otherPopover.child}
+        <OtherPopover
+          updateFilter={updateFilter}
+          categories={categories}
+        />
       </Popover>
       <Button
         id='reset'
