@@ -38,7 +38,7 @@ const FilterTable = ({
       },
     };
 
-    setEligibilitySelected(event.target.value);
+    setSelectedEligibility(event.target.value);
     updateFilter({ name: 'eligible', filter: eligibilityFilters[event.target.value] });
   };
 
@@ -56,7 +56,7 @@ const FilterTable = ({
         },
       });
     }
-    setCategorySelected(event.target.value);
+    setSelectedCategory(event.target.value);
   };
 
   const handleAlreadyHasToggle = (event) => {
