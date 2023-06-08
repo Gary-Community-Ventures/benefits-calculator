@@ -79,34 +79,31 @@ const FilterTable = ({
     setAlreadyHasToggle(event.target.checked);
   };
 
-  return (
-    <>
-      <div>
-        <FormControl className="full-width">
-          <FormLabel id="benefit-category" sx={{ color: '#000000', fontWeight: 500 }}>
-            <FormattedMessage id="filter.filterByCategory" defaultMessage="Filter By Category" />
-          </FormLabel>
-          <RadioGroup aria-labelledby="benefit-category" name="benefit-category" onChange={categoryFilterChange}>
-            <article className="radio-option">
-              <FormControlLabel
-                checked={categorySelected === 'All Categories'}
-                value="All Categories"
-                control={<Radio />}
-                label={<FormattedMessage id="filter.filterAllCategories" defaultMessage="All Categories" />}
-              />
-            </article>
-            {categories.map((category) => {
-              return (
-                <article className="radio-option" key={category}>
-                  <FormControlLabel
-                    checked={categorySelected === category}
-                    value={category}
-                    control={<Radio />}
-                    label={category}
-                  />
-                </article>
-              );
-            })}
+  const renderCategoryRadioOptions = () => {
+    const allCategoriesRadioOption = (
+      <article className="radio-option" key='All Categories'>
+        <FormControlLabel
+          checked={selectedCategory === 'All Categories'}
+          value="All Categories"
+          control={<Radio />}
+          label={<FormattedMessage id="filter.filterAllCategories" defaultMessage="All Categories" />}
+        />
+      </article>
+    );
+    const otherRadioOptions = categories.map((category) => {
+      return (
+        <article className="radio-option" key={category}>
+          <FormControlLabel
+            checked={selectedCategory === category}
+            value={category}
+            control={<Radio />}
+            label={category}
+          />
+        </article>
+      );
+    });
+    return [allCategoriesRadioOption, ...otherRadioOptions];
+  }
           </RadioGroup>
         </FormControl>
       </div>
