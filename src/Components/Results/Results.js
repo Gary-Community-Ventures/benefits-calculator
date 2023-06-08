@@ -35,6 +35,7 @@ const Results = () => {
   const citizenToggleState = useState(false);
   const categoryState = useState('All Categories');
   const eligibilityState = useState('eligibleBenefits');
+  const alreadyHasToggleState = useState(false);
 
   const initialResults = {
     programs: [],
@@ -477,6 +478,7 @@ const Results = () => {
             citizenToggleState={citizenToggleState}
             categoryState={categoryState}
             eligibilityState={eligibilityState}
+            alreadyHasToggleState={alreadyHasToggleState}
           />
           }
         </div>
