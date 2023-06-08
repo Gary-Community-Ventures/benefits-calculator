@@ -472,14 +472,15 @@ const Results = () => {
     return (
       <>
         <div className="filters-container">
-          {<FilterSection
-            updateFilter={updateFilter}
-            categories={categories}
-            citizenToggleState={citizenToggleState}
-            categoryState={categoryState}
-            eligibilityState={eligibilityState}
-            alreadyHasToggleState={alreadyHasToggleState}
-          />
+          {
+            <FilterSection
+              updateFilter={updateFilter}
+              categories={categories}
+              citizenToggleState={citizenToggleState}
+              categoryState={categoryState}
+              eligibilityState={eligibilityState}
+              alreadyHasToggleState={alreadyHasToggleState}
+            />
           }
         </div>
         {filt.category !== false && (
