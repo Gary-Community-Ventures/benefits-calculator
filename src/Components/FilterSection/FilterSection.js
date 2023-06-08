@@ -6,7 +6,7 @@ import Popover from '@mui/material/Popover';
 import { Button } from '@mui/material';
 import './FilterSection.css';
 
-const FilterSection = ({ updateFilter, categories }) => {
+const FilterSection = ({ updateFilter, categories, resetAllFilters }) => {
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState(null);
   const [otherPopoverAnchor, setOtherPopoverAnchor] = useState(null);
 
@@ -16,36 +16,7 @@ const FilterSection = ({ updateFilter, categories }) => {
     } else if (event.target.id === 'other') {
       setOtherPopoverAnchor(event.currentTarget);
     } else if (event.target.id === 'reset') {
-      updateFilter(
-        { name: 'category', filter: false },
-        {
-          name: 'eligible',
-          filter: {
-            id: 2,
-            columnField: 'eligible',
-            operatorValue: 'is',
-            value: 'true',
-          },
-        },
-        {
-          name: 'hasBenefit',
-          filter: {
-            id: 3,
-            columnField: 'has_benefit',
-            operatorValue: 'is',
-            value: 'false',
-          },
-        },
-        {
-          name: 'citizen',
-          filter: {
-            id: 1,
-            columnField: 'citizenship',
-            operatorValue: 'isAnyOf',
-            value: ['citizen', 'none'],
-          },
-        },
-      );
+      resetAllFilters();
     }
   };
 
