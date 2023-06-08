@@ -32,6 +32,7 @@ const Results = () => {
   const locale = useContext(Context).locale;
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
+  const citizenToggleState = useState(false);
 
   const initialResults = {
     programs: [],
@@ -471,7 +472,7 @@ const Results = () => {
           {<FilterSection
             updateFilter={updateFilter}
             categories={categories}
-            resetAllFilters={resetAllFilters} />
+            citizenToggleState={citizenToggleState} />
           }
         </div>
         {filt.category !== false && (

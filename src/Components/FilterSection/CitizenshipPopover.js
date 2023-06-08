@@ -3,8 +3,8 @@ import CustomSwitch from '../CustomSwitch/CustomSwitch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useState } from 'react';
 
-const CitizenshipPopover = ({ updateFilter }) => {
-  const [citizenshipToggle, setCitizenshipToggle] = useState(false);
+const CitizenshipPopover = ({ updateFilter, citizenToggleState }) => {
+  const [citizenshipToggle, setCitizenshipToggle] = citizenToggleState;
 
   const handleCitizenToggle = (event) => {
     // Filter out citizen benefits when toggle is on
