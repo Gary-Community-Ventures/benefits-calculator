@@ -10,9 +10,6 @@ import './FilterTable.css';
 const FilterTable = ({
   updateFilter,
   categories,
-  eligibilityState,
-  categoryState,
-  alreadyHasToggleState,
 }) => {
   const [eligibilitySelected, setEligibilitySelected] = eligibilityState;
   const [categorySelected, setCategorySelected] = categoryState;

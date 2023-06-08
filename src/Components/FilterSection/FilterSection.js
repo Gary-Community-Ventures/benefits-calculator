@@ -8,10 +8,7 @@ import './FilterSection.css';
 
 const FilterSection = ({
   updateFilter,
-  categories,
-  eligibilityState,
-  categoryState,
-  alreadyHasToggleState,
+  categories
  }) => {
   const [citizenshipPopover, setCitizenshipPopover] = useState({
     anchorEl: null,
