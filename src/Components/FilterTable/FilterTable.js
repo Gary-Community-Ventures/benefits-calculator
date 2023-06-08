@@ -104,6 +104,16 @@ const FilterTable = ({
     });
     return [allCategoriesRadioOption, ...otherRadioOptions];
   }
+
+  return (
+    <>
+      <div>
+        <FormControl className="full-width">
+          <FormLabel id="benefit-category" sx={{ color: '#000000', fontWeight: 500 }}>
+            <FormattedMessage id="filter.filterByCategory" defaultMessage="Filter By Category" />
+          </FormLabel>
+          <RadioGroup aria-labelledby="benefit-category" name="benefit-category" onChange={categoryFilterChange}>
+            {renderCategoryRadioOptions()}
           </RadioGroup>
         </FormControl>
       </div>
@@ -115,13 +125,13 @@ const FilterTable = ({
           <RadioGroup
             aria-labelledby="benefit-eligibility"
             defaultValue="eligibleBenefits"
-            value={eligibilitySelected}
+            value={selectedEligibility}
             name="benefit-eligibility"
             onChange={eligibilityFilterChange}
           >
             <article className="radio-option">
               <FormControlLabel
-                checked={eligibilitySelected === 'eligibleBenefits'}
+                checked={selectedEligibility === 'eligibleBenefits'}
                 value="eligibleBenefits"
                 control={<Radio />}
                 label={<FormattedMessage id="filter.filterEligible" defaultMessage="Eligible" />}
@@ -129,7 +139,7 @@ const FilterTable = ({
             </article>
             <article className="radio-option">
               <FormControlLabel
-                checked={eligibilitySelected === 'ineligibleBenefits'}
+                checked={selectedEligibility === 'ineligibleBenefits'}
                 value="ineligibleBenefits"
                 control={<Radio />}
                 label={<FormattedMessage id="filter.filterInEligible" defaultMessage="Ineligible" />}
