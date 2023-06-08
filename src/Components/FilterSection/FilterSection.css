@@ -11,8 +11,9 @@
   font-size: 12.8px;
 }
 
-.MuiButton-root.filter-button.citizen, .MuiButton-root.filter-button.other {
-  margin-right: .5rem;
+.MuiButton-root.filter-button.citizen,
+.MuiButton-root.filter-button.other {
+  margin-right: 0.5rem;
 }
 
 @media (max-width: 420px) {

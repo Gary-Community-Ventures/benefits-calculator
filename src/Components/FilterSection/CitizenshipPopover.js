@@ -47,6 +47,6 @@ const CitizenshipPopover = ({ updateFilter }) => {
       />
     </div>
   );
-}
+};
 
 export default CitizenshipPopover;

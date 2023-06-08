@@ -8,10 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import { useState } from 'react';
 import './FilterTable.css';
 
-const FilterTable = ({
-  updateFilter,
-  categories,
-}) => {
+const FilterTable = ({ updateFilter, categories }) => {
   const [selectedEligibility, setSelectedEligibility] = useState('eligibleBenefits');
   const [alreadyHasToggle, setAlreadyHasToggle] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
@@ -81,7 +78,7 @@ const FilterTable = ({
 
   const renderCategoryRadioOptions = () => {
     const allCategoriesRadioOption = (
-      <article className="radio-option" key='All Categories'>
+      <article className="radio-option" key="All Categories">
         <FormControlLabel
           checked={selectedCategory === 'All Categories'}
           value="All Categories"
@@ -103,7 +100,7 @@ const FilterTable = ({
       );
     });
     return [allCategoriesRadioOption, ...otherRadioOptions];
-  }
+  };
 
   return (
     <>
@@ -152,10 +149,7 @@ const FilterTable = ({
         <FormControlLabel
           className="toggle"
           label={
-            <FormattedMessage
-              id="filter.filterAlreadyHave"
-              defaultMessage="Include benefits that I already have"
-            />
+            <FormattedMessage id="filter.filterAlreadyHave" defaultMessage="Include benefits that I already have" />
           }
           control={<CustomSwitch handleCustomSwitchToggle={handleAlreadyHasToggle} checked={alreadyHasToggle} />}
         />

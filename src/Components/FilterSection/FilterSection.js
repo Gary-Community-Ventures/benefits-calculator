@@ -8,7 +8,6 @@ import './FilterSection.css';
 
 const FilterSection = ({ updateFilter, categories }) => {
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState(null);
-
   const [otherPopoverAnchor, setOtherPopoverAnchor] = useState(null);
 
   const handleButtonClick = (event) => {
