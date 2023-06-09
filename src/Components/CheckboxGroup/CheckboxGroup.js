@@ -12,7 +12,7 @@ const CheckboxGroup = ({ options, householdData, setHouseholdData, index }) => {
 
     const formControlLabels = optionKeys.map((optionKey) => {
       let label = optionList[optionKey];
-      if (index !== 0 && optionKey === 'disabled') {
+      if (index !== 1 && optionKey === 'disabled') {
         label = (
           <FormattedMessage
             id="checkboxGroup.disabledLabel"
