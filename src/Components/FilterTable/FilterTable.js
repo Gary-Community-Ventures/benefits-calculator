@@ -102,7 +102,7 @@ const FilterTable = ({ updateFilter, categories, categoryState, eligibilityState
   };
 
   return (
-    <div className='popover'>
+    <div className="popover">
       <div>
         <FormControl className="full-width">
           <FormLabel id="benefit-category" sx={{ color: '#000000', fontWeight: 500 }}>
