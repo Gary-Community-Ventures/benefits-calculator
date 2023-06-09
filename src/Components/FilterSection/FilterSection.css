@@ -7,8 +7,16 @@
 }
 
 .MuiButton-root.filter-button {
+  background-color: #ffffff;
+  border: 2px solid rgba(0, 150, 176);
   border-radius: 3rem;
+  box-sizing: border-box;
+  color: #2a2b2a;
   font-size: 12.8px;
+}
+
+.MuiButton-root.filter-button:hover {
+  background-color: #e5f4f8;
 }
 
 .MuiButton-root.filter-button.citizen,
