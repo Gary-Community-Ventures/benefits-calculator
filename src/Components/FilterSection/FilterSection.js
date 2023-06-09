@@ -3,6 +3,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import CitizenshipPopover from './CitizenshipPopover';
 import FilterTable from '../FilterTable/FilterTable';
 import Popover from '@mui/material/Popover';
+import { FormattedMessage } from 'react-intl';
 import { Button } from '@mui/material';
 import './FilterSection.css';
 
@@ -78,7 +79,7 @@ const FilterSection = ({
         className="filter-button citizen"
         onClick={(event) => handleButtonClick(event)}
       >
-        Citizenship
+        <FormattedMessage id="filterSection.citizenship" defaultMessage="Citizenship" />
       </Button>
       <Popover
         id="citizenshipPopover"
@@ -98,7 +99,7 @@ const FilterSection = ({
         className="filter-button other"
         onClick={(event) => handleButtonClick(event)}
       >
-        Other
+        <FormattedMessage id="filterSection.other" defaultMessage="Other" />
       </Button>
       <Popover
         id="otherPopover"
@@ -119,7 +120,7 @@ const FilterSection = ({
         />
       </Popover>
       <Button id="reset" variant="contained" className="filter-button" onClick={(event) => handleButtonClick(event)}>
-        Reset
+        <FormattedMessage id="filterSection.reset" defaultMessage="Reset" />
       </Button>
     </div>
   );
