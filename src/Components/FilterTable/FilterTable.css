@@ -49,8 +49,8 @@
   width: 100%;
 }
 
-.toggle {
-  padding-left: 0.5rem;
+.popover {
+  padding: 0.5rem;
 }
 
 .radio-option {

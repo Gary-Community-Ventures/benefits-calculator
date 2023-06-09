@@ -1,27 +1,25 @@
-import { useEffect, useState, useContext, useRef } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import Filter from '../FilterTable/FilterTable.js';
+import FilterSection from '../FilterSection/FilterSection';
+import ResultsError from '../ResultsError/ResultsError';
+import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
+import Loading from '../Loading/Loading';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 import Grid from '@mui/material/Grid';
 import {
   DataGridPro,
-  GridRowsProp,
-  DataGridProProps,
   useGridSelector,
   useGridApiContext,
   gridFilteredDescendantCountLookupSelector,
   GridLinkOperator,
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
-import Loading from '../Loading/Loading';
-import ResultsError from '../ResultsError/ResultsError';
 import Toolbar from '@mui/material/Toolbar';
 import ReactGA from 'react-ga';
-import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import { getEligibility } from '../../apiCalls';
 import './Results.css';
 
@@ -35,9 +33,9 @@ const Results = () => {
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const citizenToggleState = useState(false);
-  const alreadyHasToggleState = useState(false);
-  const eligibilityState = useState('eligibleBenefits');
   const categoryState = useState('All Categories');
+  const eligibilityState = useState('eligibleBenefits');
+  const alreadyHasToggleState = useState(false);
 
   const initialResults = {
     programs: [],
@@ -93,15 +91,9 @@ const Results = () => {
     fetchResults();
   }, []);
 
-  const firstUpdate = useRef(true);
   useEffect(() => {
-    if (!firstUpdate.current) {
-      responseLanguage();
-      updateFilter({ name: 'category', filter: false });
-      categoryState[1]('All Categories');
-    } else {
-      firstUpdate.current = false;
-    }
+    responseLanguage();
+    updateFilter({ name: 'category', filter: false });
   }, [locale, results.rawResponse]);
 
   const fetchResults = async () => {
@@ -480,16 +472,16 @@ const Results = () => {
     return (
       <>
         <div className="filters-container">
-          {displayResultsFilterButtons()}
-          <Filter
-            filt={filt}
-            updateFilter={updateFilter}
-            categories={categories}
-            eligibilityState={eligibilityState}
-            categoryState={categoryState}
-            citizenToggleState={citizenToggleState}
-            alreadyHasToggleState={alreadyHasToggleState}
-          />
+          {
+            <FilterSection
+              updateFilter={updateFilter}
+              categories={categories}
+              citizenToggleState={citizenToggleState}
+              categoryState={categoryState}
+              eligibilityState={eligibilityState}
+              alreadyHasToggleState={alreadyHasToggleState}
+            />
+          }
         </div>
         {filt.category !== false && (
           <>
@@ -603,43 +595,45 @@ const Results = () => {
     );
   };
 
-  const displayResultsFilterButtons = () => {
-    const hasImmediateNeedsPrograms = results.rawResponse.urgent_needs.es.length > 0;
+  const displayBenefitAndImmedNeedsBtns = () => {
+    const benefitBtnClass = filterResultsButton === 'benefits' ? 'results-link' : 'results-filter-button-grey';
+    const immediateNeedsBtnClass =
+      filterResultsButton === 'urgentNeeds' ? 'results-link' : 'results-filter-button-grey';
 
     return (
       <div>
-        {hasImmediateNeedsPrograms && (
-          <>
-            <Button
-              className={filterResultsButton === 'benefits' ? 'results-link' : 'results-filter-button-grey'}
-              onClick={() => {
-                setFilterResultsButton('benefits');
-              }}
-              sx={{ mt: 1, mr: 0.5, mb: 1, p: 0.8, fontSize: '.8rem' }}
-              variant="contained"
-            >
-              <FormattedMessage
-                id="results.displayResultsFilterButtons-benefitPrograms"
-                defaultMessage="Benefit Programs"
-              />
-            </Button>
-            <Button
-              className={filterResultsButton === 'urgentNeeds' ? 'results-link' : 'results-filter-button-grey'}
-              onClick={() => {
-                setFilterResultsButton('urgentNeeds');
-              }}
-              sx={{ mt: 1, mb: 1, p: 0.8, fontSize: '.8rem' }}
-              variant="contained"
-            >
-              <FormattedMessage
-                id="results.displayResultsFilterButtons-urgentNeedsResources"
-                defaultMessage="Immediate Needs"
-              />
-            </Button>
-          </>
-        )}
+        <Button
+          className={benefitBtnClass}
+          onClick={() => {
+            setFilterResultsButton('benefits');
+          }}
+          sx={{ mt: 1, mr: 0.5, mb: 1, p: 0.8, fontSize: '.8rem' }}
+          variant="contained"
+        >
+          <FormattedMessage
+            id="results.displayResultsFilterButtons-benefitPrograms"
+            defaultMessage="Benefit Programs"
+          />
+        </Button>
+        <Button
+          className={immediateNeedsBtnClass}
+          onClick={() => {
+            setFilterResultsButton('urgentNeeds');
+          }}
+          sx={{ mt: 1, mb: 1, p: 0.8, fontSize: '.8rem' }}
+          variant="contained"
+        >
+          <FormattedMessage
+            id="results.displayResultsFilterButtons-urgentNeedsResources"
+            defaultMessage="Immediate Needs"
+          />
+        </Button>
       </div>
     );
+  };
+
+  const hasUrgentNeeds = () => {
+    return results.rawResponse.urgent_needs.es.length > 0;
   };
 
   return (
@@ -652,8 +646,8 @@ const Results = () => {
             <>
               {displayHeaderSection()}
               <Grid xs={12} item={true}>
+                {hasUrgentNeeds() && displayBenefitAndImmedNeedsBtns()}
                 {filterResultsButton === 'benefits' && DataGridTable(results.programs)}
-                {filterResultsButton === 'urgentNeeds' && displayResultsFilterButtons()}
                 {filterResultsButton === 'urgentNeeds' && (
                   <UrgentNeedsTable urgentNeedsPrograms={results.rawResponse.urgent_needs} locale={locale} />
                 )}

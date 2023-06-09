@@ -418,5 +418,8 @@
   "taxCreditBenefits.coeitc": "Tín dụng thuế của tiểu bang: Thu nhập kiếm được (COEITC)",
   "taxCreditBenefits.coctc": "Tín dụng thuế của tiểu bang: Tín dụng thuế dành cho trẻ em (COCTC)",
   "displayAnnualIncome.annual": " hàng năm",
-  "listAllIncomeStreams.hoursPerWeek": " giờ/tuần "
+  "listAllIncomeStreams.hoursPerWeek": " giờ/tuần ",
+  "filterSection.citizenship": "Quyền công dân",
+  "filterSection.other": "Khác",
+  "filterSection.reset": "Đặt lại"
 }

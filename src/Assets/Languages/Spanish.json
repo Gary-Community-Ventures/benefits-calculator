@@ -420,5 +420,8 @@
   "taxCreditBenefits.coeitc": "Crédito fiscal estatal: por ingresos del trabajo (COEITC)",
   "taxCreditBenefits.coctc": "Crédito fiscal estatal: crédito tributario por hijos (COCTC)",
   "displayAnnualIncome.annual": " anualmente",
-  "listAllIncomeStreams.hoursPerWeek": " horas/semana "
+  "listAllIncomeStreams.hoursPerWeek": " horas/semana ",
+  "filterSection.citizenship": "Ciudadanía",
+  "filterSection.other": "Otro",
+  "filterSection.reset": "Restablecer"
 }
