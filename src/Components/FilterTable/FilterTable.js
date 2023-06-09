@@ -6,6 +6,7 @@ import FormLabel from '@mui/material/FormLabel';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
 import { FormattedMessage } from 'react-intl';
 import './FilterTable.css';
+import { useEffect } from 'react';
 
 const FilterTable = ({ updateFilter, categories, categoryState, eligibilityState, alreadyHasToggleState }) => {
   const [selectedCategory, setSelectedCategory] = categoryState;
