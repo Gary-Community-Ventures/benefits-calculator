@@ -396,7 +396,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         <p className="question-description">
           <FormattedMessage
             id="householdDataBlock.createIncomeRadioQuestion-questionDescription"
-            defaultMessage="This includes money from jobs, alimony, investments, or gifts."
+            defaultMessage="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
           />
         </p>
         <HHDataRadiofield
