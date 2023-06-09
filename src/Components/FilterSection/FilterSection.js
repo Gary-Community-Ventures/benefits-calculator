@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import CitizenshipPopover from './CitizenshipPopover';
-import FilterTable from '../FilterTable/FilterTable';
+import FilterTable from './OtherPopover';
 import Popover from '@mui/material/Popover';
 import { FormattedMessage } from 'react-intl';
 import { Button } from '@mui/material';
@@ -18,12 +18,13 @@ const FilterSection = ({
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState(null);
   const [otherPopoverAnchor, setOtherPopoverAnchor] = useState(null);
 
-  let otherActive;
+  const [otherActive, setOtherActive] = useState(false);
   useEffect(() => {
-    otherActive =
+    setOtherActive(
       categoryState[0] !== 'All Categories' ||
-      eligibilityState[0] !== 'eligibleBenefits' ||
-      alreadyHasToggleState[0] !== false;
+        eligibilityState[0] !== 'eligibleBenefits' ||
+        alreadyHasToggleState[0] !== false,
+    );
   }, [categoryState[0], eligibilityState[0], alreadyHasToggleState[0]]);
 
   const handleCitizenButtonClick = (event) => {
@@ -131,7 +132,7 @@ const FilterSection = ({
           alreadyHasToggleState={alreadyHasToggleState}
         />
       </Popover>
-      <Button id="reset" variant="contained" className="filter-button" onClick={handleResetButtonClick}>
+      <Button id="reset" variant="contained" className="reset-button" onClick={handleResetButtonClick}>
         <FormattedMessage id="filterSection.reset" defaultMessage="Reset" />
       </Button>
     </div>
