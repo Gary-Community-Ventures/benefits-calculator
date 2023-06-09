@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import CitizenshipPopover from './CitizenshipPopover';
-import FilterTable from './OtherPopover';
+import OtherPopover from './OtherPopover';
 import Popover from '@mui/material/Popover';
 import { FormattedMessage } from 'react-intl';
 import { Button } from '@mui/material';
@@ -124,7 +124,7 @@ const FilterSection = ({
           horizontal: 'left',
         }}
       >
-        <FilterTable
+        <OtherPopover
           updateFilter={updateFilter}
           categories={categories}
           categoryState={categoryState}
