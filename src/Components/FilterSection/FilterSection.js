@@ -24,6 +24,7 @@ const FilterSection = ({
     } else if (event.target.id === 'other') {
       setOtherPopoverAnchor(event.currentTarget);
     } else if (event.target.id === 'reset') {
+      //this resets the actual table filters
       updateFilter(
         { name: 'category', filter: false },
         {
@@ -55,6 +56,7 @@ const FilterSection = ({
         },
       );
 
+      //this resets the radio buttons
       citizenToggleState[1](false);
       categoryState[1]('All Categories');
       eligibilityState[1]('eligibleBenefits');
