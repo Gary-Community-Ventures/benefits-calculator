@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import CitizenshipPopover from './CitizenshipPopover';
 import FilterTable from '../FilterTable/FilterTable';
@@ -17,6 +17,14 @@ const FilterSection = ({
 }) => {
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState(null);
   const [otherPopoverAnchor, setOtherPopoverAnchor] = useState(null);
+
+  let otherActive;
+  useEffect(() => {
+    otherActive =
+      categoryState[0] !== 'All Categories' ||
+      eligibilityState[0] !== 'eligibleBenefits' ||
+      alreadyHasToggleState[0] !== false;
+  }, [categoryState[0], eligibilityState[0], alreadyHasToggleState[0]]);
 
   const handleCitizenButtonClick = (event) => {
     setCitizenshipPopoverAnchor(event.currentTarget);
@@ -80,7 +88,7 @@ const FilterSection = ({
       <Button
         id="citizenship"
         variant="contained"
-        className="filter-button citizen"
+        className={(citizenToggleState[0] && 'active-filter') + ' filter-button citizen'}
         onClick={(event) => handleCitizenButtonClick(event)}
       >
         <FormattedMessage id="filterSection.citizenship" defaultMessage="Citizenship" />
@@ -100,7 +108,7 @@ const FilterSection = ({
       <Button
         id="other"
         variant="contained"
-        className="filter-button other"
+        className={(otherActive && 'active-filter') + ' filter-button other'}
         onClick={(event) => handleOtherButtonClick(event)}
       >
         <FormattedMessage id="filterSection.other" defaultMessage="Other" />
