@@ -18,50 +18,52 @@ const FilterSection = ({
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState(null);
   const [otherPopoverAnchor, setOtherPopoverAnchor] = useState(null);
 
-  const handleButtonClick = (event) => {
-    if (event.target.id === 'citizenship') {
-      setCitizenshipPopoverAnchor(event.currentTarget);
-    } else if (event.target.id === 'other') {
-      setOtherPopoverAnchor(event.currentTarget);
-    } else if (event.target.id === 'reset') {
-      //this resets the actual table filters
-      updateFilter(
-        { name: 'category', filter: false },
-        {
-          name: 'eligible',
-          filter: {
-            id: 2,
-            columnField: 'eligible',
-            operatorValue: 'is',
-            value: 'true',
-          },
-        },
-        {
-          name: 'hasBenefit',
-          filter: {
-            id: 3,
-            columnField: 'has_benefit',
-            operatorValue: 'is',
-            value: 'false',
-          },
-        },
-        {
-          name: 'citizen',
-          filter: {
-            id: 1,
-            columnField: 'citizenship',
-            operatorValue: 'isAnyOf',
-            value: ['citizen', 'none'],
-          },
-        },
-      );
+  const handleCitizenButtonClick = (event) => {
+    setCitizenshipPopoverAnchor(event.currentTarget);
+  };
 
-      //this resets the radio buttons
-      citizenToggleState[1](false);
-      categoryState[1]('All Categories');
-      eligibilityState[1]('eligibleBenefits');
-      alreadyHasToggleState[1](false);
-    }
+  const handleOtherButtonClick = (event) => {
+    setOtherPopoverAnchor(event.currentTarget);
+  };
+
+  const handleResetButtonClick = () => {
+    //this resets the actual table filters
+    updateFilter(
+      { name: 'category', filter: false },
+      {
+        name: 'eligible',
+        filter: {
+          id: 2,
+          columnField: 'eligible',
+          operatorValue: 'is',
+          value: 'true',
+        },
+      },
+      {
+        name: 'hasBenefit',
+        filter: {
+          id: 3,
+          columnField: 'has_benefit',
+          operatorValue: 'is',
+          value: 'false',
+        },
+      },
+      {
+        name: 'citizen',
+        filter: {
+          id: 1,
+          columnField: 'citizenship',
+          operatorValue: 'isAnyOf',
+          value: ['citizen', 'none'],
+        },
+      },
+    );
+
+    //this resets the radio buttons
+    citizenToggleState[1](false);
+    categoryState[1]('All Categories');
+    eligibilityState[1]('eligibleBenefits');
+    alreadyHasToggleState[1](false);
   };
 
   const handleCitizenshipPopoverClose = () => {
@@ -79,7 +81,7 @@ const FilterSection = ({
         id="citizenship"
         variant="contained"
         className="filter-button citizen"
-        onClick={(event) => handleButtonClick(event)}
+        onClick={(event) => handleCitizenButtonClick(event)}
       >
         <FormattedMessage id="filterSection.citizenship" defaultMessage="Citizenship" />
       </Button>
@@ -99,7 +101,7 @@ const FilterSection = ({
         id="other"
         variant="contained"
         className="filter-button other"
-        onClick={(event) => handleButtonClick(event)}
+        onClick={(event) => handleOtherButtonClick(event)}
       >
         <FormattedMessage id="filterSection.other" defaultMessage="Other" />
       </Button>
@@ -121,7 +123,7 @@ const FilterSection = ({
           alreadyHasToggleState={alreadyHasToggleState}
         />
       </Popover>
-      <Button id="reset" variant="contained" className="filter-button" onClick={(event) => handleButtonClick(event)}>
+      <Button id="reset" variant="contained" className="filter-button" onClick={handleResetButtonClick}>
         <FormattedMessage id="filterSection.reset" defaultMessage="Reset" />
       </Button>
     </div>
