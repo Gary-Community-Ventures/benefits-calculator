@@ -5,9 +5,9 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
 import { FormattedMessage } from 'react-intl';
-import './FilterTable.css';
+import './OtherPopover.css';
 
-const FilterTable = ({ updateFilter, categories, categoryState, eligibilityState, alreadyHasToggleState }) => {
+const OtherPopover = ({ updateFilter, categories, categoryState, eligibilityState, alreadyHasToggleState }) => {
   const [selectedCategory, setSelectedCategory] = categoryState;
   const [selectedEligibility, setSelectedEligibility] = eligibilityState;
   const [alreadyHasToggle, setAlreadyHasToggle] = alreadyHasToggleState;
@@ -157,4 +157,4 @@ const FilterTable = ({ updateFilter, categories, categoryState, eligibilityState
   );
 };
 
-export default FilterTable;
+export default OtherPopover;

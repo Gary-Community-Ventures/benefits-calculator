@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import CitizenshipPopover from './CitizenshipPopover';
-import FilterTable from '../FilterTable/FilterTable';
+import OtherPopover from './OtherPopover';
 import Popover from '@mui/material/Popover';
 import { FormattedMessage } from 'react-intl';
 import { Button } from '@mui/material';
@@ -17,6 +17,15 @@ const FilterSection = ({
 }) => {
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState(null);
   const [otherPopoverAnchor, setOtherPopoverAnchor] = useState(null);
+
+  const [otherActive, setOtherActive] = useState(false);
+  useEffect(() => {
+    setOtherActive(
+      categoryState[0] !== 'All Categories' ||
+        eligibilityState[0] !== 'eligibleBenefits' ||
+        alreadyHasToggleState[0] !== false,
+    );
+  }, [categoryState[0], eligibilityState[0], alreadyHasToggleState[0]]);
 
   const handleCitizenButtonClick = (event) => {
     setCitizenshipPopoverAnchor(event.currentTarget);
@@ -80,7 +89,7 @@ const FilterSection = ({
       <Button
         id="citizenship"
         variant="contained"
-        className="filter-button citizen"
+        className={(citizenToggleState[0] && 'active-filter') + ' filter-button citizen'}
         onClick={(event) => handleCitizenButtonClick(event)}
       >
         <FormattedMessage id="filterSection.citizenship" defaultMessage="Citizenship" />
@@ -100,7 +109,7 @@ const FilterSection = ({
       <Button
         id="other"
         variant="contained"
-        className="filter-button other"
+        className={(otherActive && 'active-filter') + ' filter-button other'}
         onClick={(event) => handleOtherButtonClick(event)}
       >
         <FormattedMessage id="filterSection.other" defaultMessage="Other" />
@@ -115,7 +124,7 @@ const FilterSection = ({
           horizontal: 'left',
         }}
       >
-        <FilterTable
+        <OtherPopover
           updateFilter={updateFilter}
           categories={categories}
           categoryState={categoryState}
@@ -123,7 +132,7 @@ const FilterSection = ({
           alreadyHasToggleState={alreadyHasToggleState}
         />
       </Popover>
-      <Button id="reset" variant="contained" className="filter-button" onClick={handleResetButtonClick}>
+      <Button id="reset" variant="contained" className="reset-button" onClick={handleResetButtonClick}>
         <FormattedMessage id="filterSection.reset" defaultMessage="Reset" />
       </Button>
     </div>
