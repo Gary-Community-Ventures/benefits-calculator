@@ -483,20 +483,20 @@ const Confirmation = () => {
       </h2>
       <div className="confirmation-container">
         {displayAllFormData()}
-        <div className="prev-continue-results-buttons">
-          <Button
-            className="prev-button"
-            onClick={() => {
-              navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`);
-            }}
-            variant="contained"
-          >
-            <FormattedMessage id="previousButton" defaultMessage="Prev" />
-          </Button>
-          <Button variant="contained" onClick={() => navigate(`/${uuid}/results`)}>
-            <FormattedMessage id="continueButton" defaultMessage="Continue" />
-          </Button>
-        </div>
+      </div>
+      <div className="prev-continue-results-buttons confirmation">
+        <Button
+          className="prev-button"
+          onClick={() => {
+            navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`);
+          }}
+          variant="contained"
+        >
+          <FormattedMessage id="previousButton" defaultMessage="Prev" />
+        </Button>
+        <Button variant="contained" onClick={() => navigate(`/${uuid}/results`)}>
+          <FormattedMessage id="continueButton" defaultMessage="Continue" />
+        </Button>
       </div>
     </main>
   );
