@@ -59,7 +59,7 @@ const Confirmation = () => {
               <FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />
             </b>
             {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
-            {hasIncome === false && <FormattedMessage id='confirmation.none' defaultMessage=" None" />}
+            {hasIncome === false && <FormattedMessage id='confirmation.noIncome' defaultMessage=" None" />}
           </article>
         </div>
       );

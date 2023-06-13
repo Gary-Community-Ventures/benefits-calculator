@@ -278,6 +278,7 @@
   "confirmation.displayAllFormData-healthInsurance": "Bảo hiểm y tế hộ gia đình: ",
   "confirmation.displayAllFormData-acuteHHConditions": "Nhu Cầu Ngay:",
   "confirmation.none": " Không có",
+  "confirmation.noIncome": " Không có",
   "frequencyOptions.weekly": "hàng tuần",
   "frequencyOptions.biweekly": "2 tuần một lần",
   "frequencyOptions.monthly": "hàng tháng",
