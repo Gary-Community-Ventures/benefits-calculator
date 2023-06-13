@@ -478,9 +478,6 @@ const Confirmation = () => {
       <h1 className="sub-header">
         <FormattedMessage id="confirmation.return-subheader" defaultMessage="Ok. Here's what we've got:" />
       </h1>
-      <h2 className="question-label">
-        <FormattedMessage id="confirmation.return-questionLabel" defaultMessage="Is all of your information correct?" />
-      </h2>
       <div className="confirmation-container">
         {displayAllFormData()}
       </div>
