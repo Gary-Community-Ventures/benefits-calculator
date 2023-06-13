@@ -19,6 +19,7 @@ import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefi
 import stepDirectory from '../../Assets/stepDirectory';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
+import Grid from '@mui/material/Grid';
 import EditIcon from '@mui/icons-material/Edit';
 import HomeIcon from '@mui/icons-material/Home';
 import './Confirmation.css';
@@ -266,29 +267,31 @@ const Confirmation = () => {
     const { zipcode, county } = formData;
     return (
       <article className="confirmation-label">
-        {/* <div className='icon-container'>
-        </div> */}
-        <HomeIcon className='home-icon' />
-        <div className='text-container'>
-          <p className='section-title'>
-            <FormattedMessage id="confirmation.residenceInfo" defaultMessage="Residence Information" />
-          </p>
-          <p className='section-p'>
-            <b>
-              <FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />
-            </b>
-            {zipcode}
-          </p>
-          <p className='section-p'>
-            <b>
-              <FormattedMessage id="confirmation.displayAllFormData-countyText" defaultMessage="County: " />
-            </b>
-            {county}
-          </p>
-        </div>
-        <div className='edit-icon'>
-          <EditIcon onClick={() => navigate(`/${uuid}/step-${stepDirectory.zipcode}`)} />
-        </div>
+        <Grid container spacing={1}>
+          <Grid item xs={2}>
+            <HomeIcon className='home-icon' />
+          </Grid>
+          <Grid item xs={8}>
+            <p className='section-title'>
+              <FormattedMessage id="confirmation.residenceInfo" defaultMessage="Residence Information" />
+            </p>
+            <p className='section-p'>
+              <b>
+                <FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />
+              </b>
+              {zipcode}
+            </p>
+            <p className='section-p'>
+              <b>
+                <FormattedMessage id="confirmation.displayAllFormData-countyText" defaultMessage="County: " />
+              </b>
+              {county}
+            </p>
+          </Grid>
+          <Grid item xs={2} display="flex" justifyContent="flex-end">
+            <EditIcon onClick={() => navigate(`/${uuid}/step-${stepDirectory.zipcode}`)} />
+          </Grid>
+        </Grid>
       </article>
     );
   };
