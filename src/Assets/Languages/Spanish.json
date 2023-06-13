@@ -279,6 +279,7 @@
   "confirmation.displayAllFormData-currentHHBenefitsText": "Beneficios del hogar:",
   "confirmation.displayAllFormData-healthInsurance": "Seguro medico en el hogar:",
   "confirmation.displayAllFormData-acuteHHConditions": "Necesidades inmediatas:",
+  "confirmation.none": " Ninguna",
   "frequencyOptions.weekly": "cada semana",
   "frequencyOptions.biweekly": "cada 2 semanas",
   "frequencyOptions.monthly": "cada mes",

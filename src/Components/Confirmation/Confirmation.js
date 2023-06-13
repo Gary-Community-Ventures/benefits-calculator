@@ -96,79 +96,80 @@ const Confirmation = () => {
       blindOrVisuallyImpaired,
       disabled,
       veteran,
-      medicaid,
-      disabilityRelatedMedicaid,
     } = userData;
 
-    return (
-      <ul>
-        {studentFulltime && (
-          <li>
-            <FormattedMessage
-              id="confirmation.headOfHouseholdDataBlock-studentFulltimeText"
-              defaultMessage="Full-time student"
-            />
-          </li>
-        )}
-        {student && studentFulltime === false && (
-          <li>
-            <FormattedMessage id="confirmation.headOfHouseholdDataBlock-studentText" defaultMessage="Student" />
-          </li>
-        )}
-        {pregnant && (
-          <li>
-            <FormattedMessage id="confirmation.headOfHouseholdDataBlock-pregnantText" defaultMessage="Pregnant" />
-          </li>
-        )}
-        {unemployedWorkedInLast18Mos && (
-          <li>
-            <FormattedMessage
-              id="confirmation.headOfHouseholdDataBlock-unemployed18MosText"
-              defaultMessage="Unemployed, worked in the last 18 months"
-            />
-          </li>
-        )}
-        {unemployed && unemployedWorkedInLast18Mos === false && (
-          <li>
-            <FormattedMessage id="confirmation.headOfHouseholdDataBlock-unemployedText" defaultMessage="Unemployed" />
-          </li>
-        )}
-        {blindOrVisuallyImpaired && (
-          <li>
-            <FormattedMessage
-              id="confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText"
-              defaultMessage="Blind or visually impaired"
-            />
-          </li>
-        )}
-        {disabled && (
-          <li>
-            <FormattedMessage id="confirmation.headOfHouseholdDataBlock-disabledText" defaultMessage="Disabled" />
-          </li>
-        )}
-        {veteran && (
-          <li>
-            <FormattedMessage id="confirmation.headOfHouseholdDataBlock-veteranText" defaultMessage="Veteran" />
-          </li>
-        )}
-        {medicaid && (
-          <li>
-            <FormattedMessage
-              id="confirmation.headOfHouseholdDataBlock-medicaidText"
-              defaultMessage="Receiving Medicaid"
-            />
-          </li>
-        )}
-        {disabilityRelatedMedicaid && (
-          <li>
-            <FormattedMessage
-              id="confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText"
-              defaultMessage="Receiving disability-related Medicaid "
-            />
-          </li>
-        )}
-      </ul>
-    );
+    const iterableConditions = [
+      student,
+      studentFulltime,
+      pregnant,
+      unemployed,
+      unemployedWorkedInLast18Mos,
+      blindOrVisuallyImpaired,
+      disabled,
+      veteran
+    ];
+
+    const hasAnyConditions = iterableConditions.some(condition => condition === true);
+
+    if (hasAnyConditions === false) {
+      return (
+        <FormattedMessage id='confirmation.none' defaultMessage=" None" />
+      );
+    } else {
+      return (
+        <ul>
+          {studentFulltime && (
+            <li>
+              <FormattedMessage
+                id="confirmation.headOfHouseholdDataBlock-studentFulltimeText"
+                defaultMessage="Full-time student"
+              />
+            </li>
+          )}
+          {student && studentFulltime === false && (
+            <li>
+              <FormattedMessage id="confirmation.headOfHouseholdDataBlock-studentText" defaultMessage="Student" />
+            </li>
+          )}
+          {pregnant && (
+            <li>
+              <FormattedMessage id="confirmation.headOfHouseholdDataBlock-pregnantText" defaultMessage="Pregnant" />
+            </li>
+          )}
+          {unemployedWorkedInLast18Mos && (
+            <li>
+              <FormattedMessage
+                id="confirmation.headOfHouseholdDataBlock-unemployed18MosText"
+                defaultMessage="Unemployed, worked in the last 18 months"
+              />
+            </li>
+          )}
+          {unemployed && unemployedWorkedInLast18Mos === false && (
+            <li>
+              <FormattedMessage id="confirmation.headOfHouseholdDataBlock-unemployedText" defaultMessage="Unemployed" />
+            </li>
+          )}
+          {blindOrVisuallyImpaired && (
+            <li>
+              <FormattedMessage
+                id="confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText"
+                defaultMessage="Blind or visually impaired"
+              />
+            </li>
+          )}
+          {disabled && (
+            <li>
+              <FormattedMessage id="confirmation.headOfHouseholdDataBlock-disabledText" defaultMessage="Disabled" />
+            </li>
+          )}
+          {veteran && (
+            <li>
+              <FormattedMessage id="confirmation.headOfHouseholdDataBlock-veteranText" defaultMessage="Veteran" />
+            </li>
+          )}
+        </ul>
+      );
+    }
   };
 
   const getAllHouseholdRelations = () => {
