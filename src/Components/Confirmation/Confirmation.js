@@ -266,33 +266,31 @@ const Confirmation = () => {
   const displayZipcodeSection = () => {
     const { zipcode, county } = formData;
     return (
-      <article className="confirmation-label">
-        <Grid container spacing={1}>
-          <Grid item xs={2}>
-            <HomeIcon className='home-icon' />
-          </Grid>
-          <Grid item xs={8}>
-            <p className='section-title'>
-              <FormattedMessage id="confirmation.residenceInfo" defaultMessage="Residence Information" />
-            </p>
-            <p className='section-p'>
-              <b>
-                <FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />
-              </b>
-              {zipcode}
-            </p>
-            <p className='section-p'>
-              <b>
-                <FormattedMessage id="confirmation.displayAllFormData-countyText" defaultMessage="County: " />
-              </b>
-              {county}
-            </p>
-          </Grid>
-          <Grid item xs={2} display="flex" justifyContent="flex-end">
-            <EditIcon onClick={() => navigate(`/${uuid}/step-${stepDirectory.zipcode}`)} />
-          </Grid>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          <HomeIcon className='home-icon' />
         </Grid>
-      </article>
+        <Grid item xs={8}>
+          <p className='section-title'>
+            <FormattedMessage id="confirmation.residenceInfo" defaultMessage="Residence Information" />
+          </p>
+          <p className='section-p'>
+            <b>
+              <FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />
+            </b>
+            {zipcode}
+          </p>
+          <p className='section-p'>
+            <b>
+              <FormattedMessage id="confirmation.displayAllFormData-countyText" defaultMessage="County: " />
+            </b>
+            {county}
+          </p>
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <EditIcon onClick={() => navigate(`/${uuid}/step-${stepDirectory.zipcode}`)} />
+        </Grid>
+      </Grid>
     );
   };
 
@@ -459,29 +457,34 @@ const Confirmation = () => {
 
   const listAllTruthyValues = (selectedOptions, relatedOptionsList) => {
     const mappedListItems = selectedOptions.map((option) => {
-      return <li key={option}> {relatedOptionsList[option]} </li>;
+      return <p key={option}> {relatedOptionsList[option]} </p>;
     });
 
     return mappedListItems;
   };
 
-  const displayHHCheckboxSection = (stateVariableName, fMessageId, fMessageDefaultMsg, linkTo, optionsList) => {
+  const displayHHCheckboxSection = (stateVariableName, fMessageId, fMessageDefaultMsg, linkTo, optionsList, iconComp) => {
     const stateVariableObj = formData[stateVariableName];
     const stateVariableKeys = Object.keys(stateVariableObj);
     const truthyOptions = stateVariableKeys.filter((key) => stateVariableObj[key]);
 
     return (
-      <>
-        <article className="confirmation-label">
-          <b>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          {iconComp}
+        </Grid>
+        <Grid item xs={8}>
+          <p className='section-title'>
             <FormattedMessage id={fMessageId} defaultMessage={fMessageDefaultMsg} />
-          </b>
-          <Link to={linkTo} className="edit-link">
-            <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-          </Link>
-          <ul>{listAllTruthyValues(truthyOptions, optionsList)}</ul>
-        </article>
-      </>
+          </p>
+          <article className='section-p'>
+            {listAllTruthyValues(truthyOptions, optionsList)}
+          </article>
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <EditIcon onClick={() => navigate(linkTo)} />
+        </Grid>
+      </Grid>
     );
   };
 
