@@ -1,6 +1,7 @@
 .confirmation-label,
 .confirmation-label-description {
-  margin-bottom: 1rem;
+  display: flex;
+  width: 100%;
 }
 
 .edit-link {
@@ -16,4 +17,42 @@
   margin-bottom: 24px;
   padding-bottom: 24px;
   border-bottom: 1px solid #505c66;
+}
+
+.confirmation-container {
+  background-color: #d3f2f0;
+  border-radius: 2rem;
+  display: block;
+  margin: 2rem 8rem 2rem 8rem;
+  padding: 2rem;
+}
+
+.prev-continue-results-buttons.confirmation {
+  margin-left: 7rem;
+}
+
+.edit-icon:hover {
+  cursor: pointer;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.section-p {
+  line-height: 2rem;
+}
+
+.text-container {
+  flex: 9;
+}
+
+.MuiSvgIcon-root.home-icon {
+  color: #2A2B2A;
+  flex: 1;
+  height: 3rem;
+  width: 3rem;
+  align-self: flex-start;
 }

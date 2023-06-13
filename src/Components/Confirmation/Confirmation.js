@@ -19,6 +19,8 @@ import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefi
 import stepDirectory from '../../Assets/stepDirectory';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
+import EditIcon from '@mui/icons-material/Edit';
+import HomeIcon from '@mui/icons-material/Home';
 import './Confirmation.css';
 
 const Confirmation = () => {
@@ -264,18 +266,29 @@ const Confirmation = () => {
     const { zipcode, county } = formData;
     return (
       <article className="confirmation-label">
-        <b>
-          <FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />
-        </b>
-        {zipcode}
-        <Link to={`/${uuid}/step-${stepDirectory.zipcode}`} className="edit-link">
-          <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-        </Link>
-        <br></br>
-        <b>
-          <FormattedMessage id="confirmation.displayAllFormData-countyText" defaultMessage="County: " />
-        </b>
-        {county}
+        {/* <div className='icon-container'>
+        </div> */}
+        <HomeIcon className='home-icon' />
+        <div className='text-container'>
+          <p className='section-title'>
+            <FormattedMessage id="confirmation.residenceInfo" defaultMessage="Residence Information" />
+          </p>
+          <p className='section-p'>
+            <b>
+              <FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />
+            </b>
+            {zipcode}
+          </p>
+          <p className='section-p'>
+            <b>
+              <FormattedMessage id="confirmation.displayAllFormData-countyText" defaultMessage="County: " />
+            </b>
+            {county}
+          </p>
+        </div>
+        <div className='edit-icon'>
+          <EditIcon onClick={() => navigate(`/${uuid}/step-${stepDirectory.zipcode}`)} />
+        </div>
       </article>
     );
   };
@@ -321,6 +334,8 @@ const Confirmation = () => {
 
     return (
       <>
+        {displayZipcodeSection()}
+        <p className="confirmation-section-underline"></p>
         {displayHouseholdSizeSection()}
         {displayAllMembersDataBlock()}
         <p className="confirmation-section-underline"></p>
@@ -353,8 +368,6 @@ const Confirmation = () => {
         )}
         <p className="confirmation-section-underline"></p>
         {displayReferralSourceSection()}
-        <p className="confirmation-section-underline"></p>
-        {displayZipcodeSection()}
       </>
     );
   };
