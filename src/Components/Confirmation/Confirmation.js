@@ -22,6 +22,9 @@ import { Context } from '../Wrapper/Wrapper';
 import Grid from '@mui/material/Grid';
 import EditIcon from '@mui/icons-material/Edit';
 import HomeIcon from '@mui/icons-material/Home';
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+import ChecklistIcon from '@mui/icons-material/Checklist';
+import FoodBankIcon from '@mui/icons-material/FoodBank';
 import './Confirmation.css';
 
 const Confirmation = () => {
@@ -337,6 +340,15 @@ const Confirmation = () => {
       <>
         {displayZipcodeSection()}
         <p className="confirmation-section-underline"></p>
+        {displayHHCheckboxSection(
+          'healthInsurance',
+          'confirmation.displayAllFormData-healthInsurance',
+          'Household health insurance:',
+          `/${uuid}/step-${stepDirectory.healthInsurance}`,
+          refactorOptionsList(healthInsuranceOptions),
+          <MedicalServicesIcon className='home-icon' />
+        )}
+        <p className="confirmation-section-underline"></p>
         {displayHouseholdSizeSection()}
         {displayAllMembersDataBlock()}
         <p className="confirmation-section-underline"></p>
@@ -350,14 +362,7 @@ const Confirmation = () => {
           'Household benefits:',
           `/${uuid}/step-${stepDirectory.hasBenefits}`,
           allBenefitsList,
-        )}
-        <p className="confirmation-section-underline"></p>
-        {displayHHCheckboxSection(
-          'healthInsurance',
-          'confirmation.displayAllFormData-healthInsurance',
-          'Household health insurance:',
-          `/${uuid}/step-${stepDirectory.healthInsurance}`,
-          refactorOptionsList(healthInsuranceOptions),
+          <ChecklistIcon className='home-icon' />
         )}
         <p className="confirmation-section-underline"></p>
         {displayHHCheckboxSection(
@@ -366,6 +371,7 @@ const Confirmation = () => {
           'Immediate Needs:',
           `/${uuid}/step-${stepDirectory.acuteHHConditions}`,
           refactorOptionsList(acuteConditionOptions),
+          <FoodBankIcon className='home-icon' />
         )}
         <p className="confirmation-section-underline"></p>
         {displayReferralSourceSection()}
