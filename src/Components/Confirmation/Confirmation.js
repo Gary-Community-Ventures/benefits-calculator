@@ -28,6 +28,7 @@ import FoodBankIcon from '@mui/icons-material/FoodBank';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonIcon from '@mui/icons-material/Person';
 import PaymentsIcon from '@mui/icons-material/Payments';
+import SavingsIcon from '@mui/icons-material/Savings';
 import './Confirmation.css';
 
 const Confirmation = () => {
@@ -257,26 +258,31 @@ const Confirmation = () => {
   const displayHouseholdAssetsSection = () => {
     const { householdAssets } = formData;
     return (
-      <>
-        <article className="confirmation-label">
-          <b>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          <SavingsIcon className='home-icon' />
+        </Grid>
+        <Grid item xs={8}>
+          <p className='section-title'>
             <FormattedMessage
-              id="confirmation.displayAllFormData-householdResourcesText"
-              defaultMessage="Household resources: "
-            />
-          </b>
-          ${Number(householdAssets).toLocaleString(2)}
-          <Link to={`/${uuid}/step-${stepDirectory.householdAssets}`} className="edit-link">
-            <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-          </Link>
-        </article>
-        <p className="confirmation-label-description">
-          <FormattedMessage
-            id="confirmation.displayAllFormData-householdResourcesDescription"
-            defaultMessage="This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds."
-          />
-        </p>
-      </>
+                id="confirmation.displayAllFormData-householdResourcesText"
+                defaultMessage="Household resources"
+              />
+          </p>
+          <article className='section-p'>
+            ${Number(householdAssets).toLocaleString(2)}
+            <i>
+              <FormattedMessage
+                id="confirmation.displayAllFormData-householdResourcesDescription"
+                defaultMessage="(This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.)"
+              />
+            </i>
+          </article>
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <EditIcon onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdAssets}`)} />
+        </Grid>
+      </Grid>
     );
   };
 
