@@ -38,3 +38,33 @@
   height: 4rem;
   width: 4rem;
 }
+
+@media (max-width: 630px) {
+  .confirmation-container {
+    margin: 0;
+  }
+
+  .MuiSvgIcon-root.home-icon {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+
+  .section-p {
+    font-size: .75rem;
+    line-height: 1.25rem;
+  }
+
+  h1.sub-header {
+    font-size: 1.5rem;
+  }
+
+  .prev-continue-results-buttons.confirmation {
+    margin: 1rem 0 0 0;
+    display: flex;
+    justify-content: center;
+  }
+}
