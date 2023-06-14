@@ -343,7 +343,7 @@ const Confirmation = () => {
         {displayHHCheckboxSection(
           'healthInsurance',
           'confirmation.displayAllFormData-healthInsurance',
-          'Household health insurance:',
+          'Household Insurance',
           `/${uuid}/step-${stepDirectory.healthInsurance}`,
           refactorOptionsList(healthInsuranceOptions),
           <MedicalServicesIcon className='home-icon' />
