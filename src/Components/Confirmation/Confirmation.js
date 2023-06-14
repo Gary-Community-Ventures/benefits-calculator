@@ -368,7 +368,7 @@ const Confirmation = () => {
         {displayHHCheckboxSection(
           'acuteHHConditions',
           'confirmation.displayAllFormData-acuteHHConditions',
-          'Immediate Needs:',
+          'Immediate Needs',
           `/${uuid}/step-${stepDirectory.acuteHHConditions}`,
           refactorOptionsList(acuteConditionOptions),
           <FoodBankIcon className='home-icon' />

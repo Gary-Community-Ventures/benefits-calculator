@@ -276,7 +276,7 @@
   "confirmation.headOfHouseholdDataBlock-expensesLabel": "Monthly household expenses:",
   "confirmation.displayAllFormData-currentHHBenefitsText": "Current Household Benefits",
   "confirmation.displayAllFormData-healthInsurance": "Household Insurance",
-  "confirmation.displayAllFormData-acuteHHConditions": "Immediate Needs:",
+  "confirmation.displayAllFormData-acuteHHConditions": "Immediate Needs",
   "confirmation.none": " None",
   "confirmation.confirmation.noIncome": " None",
   "confirmation.residenceInfo": "Residence Information",
