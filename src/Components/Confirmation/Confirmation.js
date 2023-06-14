@@ -181,19 +181,26 @@ const Confirmation = () => {
 
     if (studentFulltime) {
       conditions.push(getFormattedMessageString("confirmation.headOfHouseholdDataBlock-studentFulltimeText"));
-    } if (student && studentFulltime === false) {
+    }
+    if (student && studentFulltime === false) {
       conditions.push(getFormattedMessageString("confirmation.headOfHouseholdDataBlock-studentText"));
-    } if (pregnant) {
+    }
+    if (pregnant) {
       conditions.push(getFormattedMessageString("confirmation.headOfHouseholdDataBlock-pregnantText"));
-    } if (unemployedWorkedInLast18Mos) {
+    }
+    if (unemployedWorkedInLast18Mos) {
       conditions.push(getFormattedMessageString("confirmation.headOfHouseholdDataBlock-unemployed18MosText"));
-    } if (unemployed && unemployedWorkedInLast18Mos === false ) {
+    }
+    if (unemployed && unemployedWorkedInLast18Mos === false ) {
       conditions.push(getFormattedMessageString("confirmation.headOfHouseholdDataBlock-unemployedText"));
-    } if (blindOrVisuallyImpaired) {
+    }
+    if (blindOrVisuallyImpaired) {
       conditions.push(getFormattedMessageString("confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText"));
-    } if (disabled) {
+    }
+    if (disabled) {
       conditions.push(getFormattedMessageString("confirmation.headOfHouseholdDataBlock-disabledText"));
-    } if (veteran) {
+    }
+    if (veteran) {
       conditions.push(getFormattedMessageString("confirmation.headOfHouseholdDataBlock-veteranText"));
     }
 
