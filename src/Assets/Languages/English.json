@@ -258,7 +258,7 @@
   "confirmation.displayAllFormData-zipcodeText": "Zip code: ",
   "confirmation.displayAllFormData-countyText": "County: ",
   "confirmation.displayAllFormData-lastTaxFilingYear": "Last Tax Filing Year: ",
-  "confirmation.displayAllFormData-referralSourceText": "Referral Source: ",
+  "confirmation.displayAllFormData-referralSourceText": "Referral Source",
   "confirmation.headOfHouseholdDataBlock-youText": " You, ",
   "confirmation.headOfHouseholdDataBlock-headOfHouseholdText": " head of household",
   "confirmation.headOfHouseholdDataBlock-conditionsText": "Conditions:",

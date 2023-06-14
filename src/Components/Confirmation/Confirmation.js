@@ -29,6 +29,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import PersonIcon from '@mui/icons-material/Person';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import SavingsIcon from '@mui/icons-material/Savings';
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import './Confirmation.css';
 
 const Confirmation = () => {
@@ -341,18 +342,25 @@ const Confirmation = () => {
     const finalReferralSource = referralSource !== 'other' ? referralSourceLabel : otherSource;
 
     return (
-      <article className="confirmation-label">
-        <b>
-          <FormattedMessage
-            id="confirmation.displayAllFormData-referralSourceText"
-            defaultMessage="Referral Source: "
-          />
-        </b>
-        {finalReferralSource}
-        <Link to={`/${uuid}/step-${stepDirectory.referralSource}`} className="edit-link">
-          <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-        </Link>
-      </article>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          <ConnectWithoutContactIcon className='home-icon flip-horizontally' />
+        </Grid>
+        <Grid item xs={8}>
+          <p className='section-title'>
+            <FormattedMessage
+              id="confirmation.displayAllFormData-referralSourceText"
+              defaultMessage="Referral Source"
+            />
+          </p>
+          <article className='section-p'>
+          {finalReferralSource}
+          </article>
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <EditIcon onClick={() => navigate(`/${uuid}/step-${stepDirectory.referralSource}`)} />
+        </Grid>
+      </Grid>
     );
   };
 

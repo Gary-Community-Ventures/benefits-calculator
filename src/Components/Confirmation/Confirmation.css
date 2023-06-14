@@ -29,6 +29,10 @@
   line-height: 2rem;
 }
 
+.flip-horizontally {
+  transform: scaleX(-1);
+}
+
 .MuiSvgIcon-root.home-icon {
   color: #2A2B2A;
   height: 4rem;

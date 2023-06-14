@@ -260,7 +260,7 @@
   "confirmation.displayAllFormData-zipcodeText": "Código postal: ",
   "confirmation.displayAllFormData-countyText": "Condado: ",
   "confirmation.displayAllFormData-lastTaxFilingYear": "Último año de declaración de impuestos: ",
-  "confirmation.displayAllFormData-referralSourceText": "Fuente de referencia: ",
+  "confirmation.displayAllFormData-referralSourceText": "Fuente de referencia",
   "confirmation.headOfHouseholdDataBlock-youText": " Usted, ",
   "confirmation.headOfHouseholdDataBlock-headOfHouseholdText": " jefe de hogar",
   "confirmation.headOfHouseholdDataBlock-conditionsText": "Condiciones:",

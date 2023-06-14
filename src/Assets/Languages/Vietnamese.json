@@ -258,7 +258,7 @@
   "confirmation.displayAllFormData-zipcodeText": "Mã zip: ",
   "confirmation.displayAllFormData-countyText": "Quận: ",
   "confirmation.displayAllFormData-lastTaxFilingYear": "Năm Khai Thuế Gần Đây Nhất: ",
-  "confirmation.displayAllFormData-referralSourceText": "Nguồn Giới Thiệu: ",
+  "confirmation.displayAllFormData-referralSourceText": "Nguồn Giới Thiệu",
   "confirmation.headOfHouseholdDataBlock-youText": " Quý vị, ",
   "confirmation.headOfHouseholdDataBlock-headOfHouseholdText": " chủ hộ",
   "confirmation.headOfHouseholdDataBlock-conditionsText": "Điều kiện:",
