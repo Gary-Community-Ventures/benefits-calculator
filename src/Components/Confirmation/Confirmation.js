@@ -359,7 +359,7 @@ const Confirmation = () => {
         {displayHHCheckboxSection(
           'benefits',
           'confirmation.displayAllFormData-currentHHBenefitsText',
-          'Household benefits:',
+          'Current Household Benefits:',
           `/${uuid}/step-${stepDirectory.hasBenefits}`,
           allBenefitsList,
           <ChecklistIcon className='home-icon' />

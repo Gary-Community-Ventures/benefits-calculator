@@ -274,7 +274,7 @@
   "confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText": "Receiving disability-related Medicaid",
   "confirmation.headOfHouseholdDataBlock-incomeLabel": "Income:",
   "confirmation.headOfHouseholdDataBlock-expensesLabel": "Monthly household expenses:",
-  "confirmation.displayAllFormData-currentHHBenefitsText": "Household benefits:",
+  "confirmation.displayAllFormData-currentHHBenefitsText": "Current Household Benefits",
   "confirmation.displayAllFormData-healthInsurance": "Household Insurance",
   "confirmation.displayAllFormData-acuteHHConditions": "Immediate Needs:",
   "confirmation.none": " None",
