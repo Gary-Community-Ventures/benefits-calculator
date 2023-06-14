@@ -25,7 +25,7 @@ const QuestionComponentContainer = ({
   handleCheckboxChange,
 }) => {
   const { formData } = useContext(Context);
-  let { id } = useParams();
+  let { id, uuid } = useParams();
   let numberId = Number(id);
   const matchingQuestion = questions[numberId];
   const errorController = useErrorController(

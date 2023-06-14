@@ -1,5 +1,5 @@
 import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.js';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -21,6 +21,17 @@ const LandingPage = ({ setFetchedScreen }) => {
       navigate(`/${response.uuid}/step-1`);
     }
   };
+  useEffect(() => {
+    const continueOnEnter = (event) => {
+      if (event.key === 'Enter') {
+        handleContinue();
+      }
+    };
+    document.addEventListener('keyup', continueOnEnter);
+    return () => {
+      document.removeEventListener('keyup', continueOnEnter); // remove event listener on onmount
+    };
+  });
 
   return (
     <main className="benefits-form">
