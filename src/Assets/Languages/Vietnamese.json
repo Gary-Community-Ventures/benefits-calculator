@@ -17,7 +17,7 @@
   "qcc.tell-us-final-text": "Hãy cho chúng tôi biết một số thông tin cuối cùng về hộ gia đình của quý vị.",
   "qcc.so-far-text": "Cho đến nay quý vị đã cho chúng tôi biết về:",
   "qcc.you-text": " Quý vị, ",
-  "qcc.hoh-text": " Chủ hộ",
+  "qcc.hoh-text": "Chủ hộ (Bạn)",
   "qcc.createTaxDropdownMenu-label": "Năm Khai Thuế",
   "qcc.createTaxDropdownMenu-disabledSelectMenuItemText": "Chọn một Năm Khai Thuế",
   "qcc.createReferralDropdownMenu-label": "Nguồn Giới Thiệu",

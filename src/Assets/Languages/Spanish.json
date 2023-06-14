@@ -18,7 +18,7 @@
   "qcc.tell-us-about-household-text": "Cuéntenos un poco más sobre su hogar.",
   "qcc.so-far-text": "Hasta ahora, nos compartió lo siguiente:",
   "qcc.you-text": " Usted, ",
-  "qcc.hoh-text": " Jefe de hogar",
+  "qcc.hoh-text": "Jefe/Jefa de hogar (usted)",
   "qcc.createTaxDropdownMenu-label": "Año fiscal",
   "qcc.createTaxDropdownMenu-disabledSelectMenuItemText": "Seleccione un año fiscal",
   "qcc.createReferralDropdownMenu-label": "Fuente de referencia",

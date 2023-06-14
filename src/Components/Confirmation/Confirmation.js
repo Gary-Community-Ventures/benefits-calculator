@@ -204,7 +204,7 @@ const Confirmation = () => {
     const { householdData } = formData;
     const householdMembers = householdData.map((personData, index) => {
       if (index === 0) {
-        return <FormattedMessage id="qcc.hoh-text" defaultMessage="Head of household" key={index} />;
+        return <FormattedMessage id="qcc.hoh-text" defaultMessage="Head of Household (You)" key={index} />;
       } else {
         return relationshipOptions[personData.relationshipToHH];
       }

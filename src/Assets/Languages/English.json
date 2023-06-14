@@ -17,7 +17,7 @@
   "qcc.tell-us-final-text": "Tell us some final information about your household.",
   "qcc.so-far-text": "So far you’ve told us about:",
   "qcc.you-text": " You, ",
-  "qcc.hoh-text": " Head of household",
+  "qcc.hoh-text": "Head of Household (You)",
   "qcc.createTaxDropdownMenu-label": "Tax Year",
   "qcc.createTaxDropdownMenu-disabledSelectMenuItemText": "Select a Tax Year",
   "qcc.createReferralDropdownMenu-label": "Referral Source",
