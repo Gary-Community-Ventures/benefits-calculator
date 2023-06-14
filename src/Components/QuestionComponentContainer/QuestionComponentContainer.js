@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
