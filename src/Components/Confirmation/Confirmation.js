@@ -70,6 +70,14 @@ const Confirmation = () => {
                 </b>
                 {displayConditions(personData)}
               </p>
+              <article className='section-p'>
+                <b>
+                  <FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />
+                    {" "}
+                </b>
+                {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
+                {hasIncome === false && <FormattedMessage id='confirmation.noIncome' defaultMessage=" None" />}
+              </article>
             </Grid>
           </Grid>
           <p className="confirmation-section-underline"></p>
@@ -92,6 +100,7 @@ const Confirmation = () => {
         //     </b>
         //     {displayConditions(personData)}
         //   </article>
+
         //   <article className="confirmation-label">
         //     <b>
         //       <FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />
@@ -485,15 +494,15 @@ const Confirmation = () => {
 
       return (
         <li key={incomeStream.incomeStreamName + index}>
-          <p>{incomeStreamName}:</p>
+          <b>{incomeStreamName}: </b>
           {incomeStream.incomeFrequency === 'hourly' ? (
-            <p>
+            <>
               {incomeAmount} {incomeFrequency} ~{hoursPerWeek} {translatedHrsPerWkText} {annualAmount}
-            </p>
+            </>
           ) : (
-            <p>
+            <>
               {incomeAmount} {incomeFrequency} {annualAmount}
-            </p>
+            </>
           )}
         </li>
       );
