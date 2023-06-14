@@ -27,6 +27,7 @@ import ChecklistIcon from '@mui/icons-material/Checklist';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonIcon from '@mui/icons-material/Person';
+import PaymentsIcon from '@mui/icons-material/Payments';
 import './Confirmation.css';
 
 const Confirmation = () => {
@@ -95,18 +96,23 @@ const Confirmation = () => {
     const { hasExpenses, expenses } = formData;
 
     return (
-      <article className="confirmation-label">
-        <b>
-          <FormattedMessage
-            id="confirmation.headOfHouseholdDataBlock-expensesLabel"
-            defaultMessage="Monthly household expenses:"
-          />
-        </b>
-        <Link to={`/${uuid}/step-${stepDirectory.hasExpenses}`} className="edit-link">
-          <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-        </Link>
-        {hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul>}
-      </article>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          <PaymentsIcon className='home-icon' />
+        </Grid>
+        <Grid item xs={8}>
+          <p className='section-title'>
+            <FormattedMessage
+              id="confirmation.headOfHouseholdDataBlock-expensesLabel"
+              defaultMessage="Monthly Household Expenses"
+            />
+          </p>
+          {hasExpenses && expenses.length > 0 && listAllExpenses(expenses)}
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <EditIcon onClick={() => navigate(`/${uuid}/step-${stepDirectory.hasExpenses}`)} />
+        </Grid>
+      </Grid>
     );
   };
 
@@ -412,10 +418,11 @@ const Confirmation = () => {
   const listAllExpenses = (memberExpenses) => {
     const mappedExpenses = memberExpenses.map((expense, index) => {
       return (
-        <li key={expense.expenseSourceName + index}>
+        <article key={expense.expenseSourceName + index} className='section-p'>
           {' '}
-          {getExpenseSourceLabel(expense.expenseSourceName)}: {formatToUSD(Number(expense.expenseAmount))}{' '}
-        </li>
+          <b>{getExpenseSourceLabel(expense.expenseSourceName)}: </b>
+          {formatToUSD(Number(expense.expenseAmount))}{' '}
+        </article>
       );
     });
 
