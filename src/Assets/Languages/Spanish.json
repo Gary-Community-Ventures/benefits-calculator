@@ -253,7 +253,7 @@
   "confirmation.return-questionLabel": "¿Toda su información es correcta?",
   "confirmation.displayAllFormData-personLabel": "persona",
   "confirmation.displayAllFormData-peopleLabel": "personas",
-  "confirmation.displayAllFormData-yourHouseholdLabel": "Su hogar: ",
+  "confirmation.displayAllFormData-yourHouseholdLabel": "Miembros del hogar",
   "confirmation.editLinkText": "Editar",
   "confirmation.displayAllFormData-householdResourcesText": "Recursos del hogar: ",
   "confirmation.displayAllFormData-householdResourcesDescription": "Se trata de efectivo en mano, cuentas de cheques o ahorros, acciones, bonos o fondos mutuales de inversión.",

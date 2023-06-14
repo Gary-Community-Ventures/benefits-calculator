@@ -25,6 +25,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
+import PeopleIcon from '@mui/icons-material/People';
 import './Confirmation.css';
 
 const Confirmation = () => {
@@ -204,21 +205,34 @@ const Confirmation = () => {
   const displayHouseholdSizeSection = () => {
     const { householdSize } = formData;
     const householdSizeDescriptor =
-      householdSize === 1 ? (
-        <FormattedMessage id="confirmation.displayAllFormData-personLabel" defaultMessage="person" />
+    householdSize === 1 ? (
+      <FormattedMessage id="confirmation.displayAllFormData-personLabel" defaultMessage="person" />
       ) : (
         <FormattedMessage id="confirmation.displayAllFormData-peopleLabel" defaultMessage="people" />
-      );
+        );
+    const linkTo = `/${uuid}/step-${stepDirectory.householdSize}`;
+
     return (
-      <article className="confirmation-label">
-        <b>
-          <FormattedMessage id="confirmation.displayAllFormData-yourHouseholdLabel" defaultMessage="Your household: " />
-        </b>
-        {householdSize} {householdSizeDescriptor}
-        <Link to={`/${uuid}/step-${stepDirectory.householdSize}`} className="edit-link">
-          <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-        </Link>
-      </article>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          <PeopleIcon className='home-icon'/>
+        </Grid>
+        <Grid item xs={8}>
+          <p className='section-title'>
+            <FormattedMessage id="confirmation.displayAllFormData-yourHouseholdLabel" defaultMessage="Household Members" />
+          </p>
+          <article className='section-p'>
+            <b>
+              <FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size" />
+              {": "}
+            </b>
+            {householdSize} {householdSizeDescriptor}
+          </article>
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <EditIcon onClick={() => navigate(linkTo)} />
+        </Grid>
+      </Grid>
     );
   };
 
@@ -350,6 +364,7 @@ const Confirmation = () => {
         )}
         <p className="confirmation-section-underline"></p>
         {displayHouseholdSizeSection()}
+        <p className="confirmation-section-underline"></p>
         {displayAllMembersDataBlock()}
         <p className="confirmation-section-underline"></p>
         {displayHouseholdExpenses()}
