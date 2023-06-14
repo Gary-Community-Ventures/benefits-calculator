@@ -53,14 +53,14 @@ const Confirmation = () => {
               <p className='section-title'>
                 {allHouseholdRelations[i]}
               </p>
-              <p className='section-p'>
+              <article className='section-p'>
                 <b>
                 <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />
                 {": "}
                 </b>
                 {allHouseholdAges[i]}
-              </p>
-              <p className='section-p'>
+              </article>
+              <article className='section-p'>
                 <b>
                   <FormattedMessage
                     id="confirmation.headOfHouseholdDataBlock-conditionsText"
@@ -69,46 +69,22 @@ const Confirmation = () => {
                   {" "}
                 </b>
                 {displayConditions(personData)}
-              </p>
+              </article>
               <article className='section-p'>
                 <b>
                   <FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />
-                    {" "}
+                  {" "}
                 </b>
                 {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
                 {hasIncome === false && <FormattedMessage id='confirmation.noIncome' defaultMessage=" None" />}
               </article>
             </Grid>
+            <Grid item xs={2} display="flex" justifyContent="flex-end">
+              <EditIcon onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdData}/${i + 1}`)} />
+            </Grid>
           </Grid>
           <p className="confirmation-section-underline"></p>
         </div>
-        // <div key={i}>
-        //   <p className="confirmation-label">
-        //     <b>
-        //       ⚫️ {allHouseholdRelations[i]}, {allHouseholdAges[i]}
-        //     </b>
-        //     <Link to={`/${uuid}/step-${stepDirectory.householdData}/${i + 1}`} className="edit-link">
-        //       <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-        //     </Link>
-        //   </p>
-        //   <article className="confirmation-label">
-        //     <b>
-        //       <FormattedMessage
-        //         id="confirmation.headOfHouseholdDataBlock-conditionsText"
-        //         defaultMessage="Conditions:"
-        //       />
-        //     </b>
-        //     {displayConditions(personData)}
-        //   </article>
-
-        //   <article className="confirmation-label">
-        //     <b>
-        //       <FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />
-        //     </b>
-        //     {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
-        //     {hasIncome === false && <FormattedMessage id='confirmation.noIncome' defaultMessage=" None" />}
-        //   </article>
-        // </div>
       );
     });
 
