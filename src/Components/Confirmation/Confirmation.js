@@ -79,7 +79,10 @@ const Confirmation = () => {
               </article>
             </Grid>
             <Grid item xs={2} display="flex" justifyContent="flex-end">
-              <EditIcon className='edit-icon' onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdData}/${i + 1}`)} />
+              <EditIcon
+                className="edit-icon"
+                onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdData}/${i + 1}`)}
+              />
             </Grid>
           </Grid>
           <p className="confirmation-section-underline"></p>
@@ -108,7 +111,7 @@ const Confirmation = () => {
           {hasExpenses && expenses.length > 0 && listAllExpenses(expenses)}
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <EditIcon className='edit-icon' onClick={() => navigate(`/${uuid}/step-${stepDirectory.hasExpenses}`)} />
+          <EditIcon className="edit-icon" onClick={() => navigate(`/${uuid}/step-${stepDirectory.hasExpenses}`)} />
         </Grid>
       </Grid>
     );
@@ -252,7 +255,7 @@ const Confirmation = () => {
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <EditIcon className='edit-icon' onClick={() => navigate(linkTo)} />
+          <EditIcon className="edit-icon" onClick={() => navigate(linkTo)} />
         </Grid>
       </Grid>
     );
@@ -283,7 +286,7 @@ const Confirmation = () => {
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <EditIcon className='edit-icon' onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdAssets}`)} />
+          <EditIcon className="edit-icon" onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdAssets}`)} />
         </Grid>
       </Grid>
     );
@@ -332,7 +335,7 @@ const Confirmation = () => {
           </p>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <EditIcon className='edit-icon' onClick={() => navigate(`/${uuid}/step-${stepDirectory.zipcode}`)} />
+          <EditIcon className="edit-icon" onClick={() => navigate(`/${uuid}/step-${stepDirectory.zipcode}`)} />
         </Grid>
       </Grid>
     );
@@ -358,7 +361,7 @@ const Confirmation = () => {
           <article className="section-p">{finalReferralSource}</article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <EditIcon className='edit-icon' onClick={() => navigate(`/${uuid}/step-${stepDirectory.referralSource}`)} />
+          <EditIcon className="edit-icon" onClick={() => navigate(`/${uuid}/step-${stepDirectory.referralSource}`)} />
         </Grid>
       </Grid>
     );
@@ -510,7 +513,12 @@ const Confirmation = () => {
 
   const listAllTruthyValues = (selectedOptions, relatedOptionsList) => {
     const mappedListItems = selectedOptions.map((option) => {
-      return <p key={option} className='bottom-margin'> {relatedOptionsList[option]} </p>;
+      return (
+        <p key={option} className="bottom-margin">
+          {' '}
+          {relatedOptionsList[option]}{' '}
+        </p>
+      );
     });
 
     return mappedListItems;
@@ -527,6 +535,7 @@ const Confirmation = () => {
     const stateVariableObj = formData[stateVariableName];
     const stateVariableKeys = Object.keys(stateVariableObj);
     const truthyOptions = stateVariableKeys.filter((key) => stateVariableObj[key]);
+    const hasAnyTruthyOptions = stateVariableKeys.some((key) => stateVariableObj[key]);
 
     return (
       <Grid container spacing={1}>
@@ -537,10 +546,16 @@ const Confirmation = () => {
           <p className="section-title">
             <FormattedMessage id={fMessageId} defaultMessage={fMessageDefaultMsg} />
           </p>
-          <article className="section-p">{listAllTruthyValues(truthyOptions, optionsList)}</article>
+          {hasAnyTruthyOptions ? (
+            <article className="section-p">{listAllTruthyValues(truthyOptions, optionsList)}</article>
+          ) : (
+            <p className="section-p">
+              <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />
+            </p>
+          )}
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <EditIcon className='edit-icon' onClick={() => navigate(linkTo)} />
+          <EditIcon className="edit-icon" onClick={() => navigate(linkTo)} />
         </Grid>
       </Grid>
     );

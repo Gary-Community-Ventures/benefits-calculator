@@ -34,7 +34,7 @@
 }
 
 .bottom-margin {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .MuiSvgIcon-root.home-icon {
@@ -71,6 +71,6 @@
   }
 
   .bottom-margin {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 }
