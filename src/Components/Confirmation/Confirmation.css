@@ -33,6 +33,10 @@
   transform: scaleX(-1);
 }
 
+.bottom-margin {
+  margin-bottom: .5rem;
+}
+
 .MuiSvgIcon-root.home-icon {
   color: #2a2b2a;
   height: 4rem;
