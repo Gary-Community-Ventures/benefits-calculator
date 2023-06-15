@@ -510,7 +510,7 @@ const Confirmation = () => {
 
   const listAllTruthyValues = (selectedOptions, relatedOptionsList) => {
     const mappedListItems = selectedOptions.map((option) => {
-      return <p key={option}> {relatedOptionsList[option]} </p>;
+      return <p key={option} className='bottom-margin'> {relatedOptionsList[option]} </p>;
     });
 
     return mappedListItems;
