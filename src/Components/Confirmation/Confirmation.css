@@ -12,7 +12,7 @@
 }
 
 .prev-continue-results-buttons.confirmation {
-  margin-left: 7rem;
+  margin-left: 10%;
 }
 
 .edit-icon:hover {
@@ -64,8 +64,6 @@
 
   .prev-continue-results-buttons.confirmation {
     margin: 1rem 0 0 0;
-    display: flex;
-    justify-content: center;
   }
 
   .bottom-margin {
