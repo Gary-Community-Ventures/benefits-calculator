@@ -1,19 +1,76 @@
-.confirmation-label,
-.confirmation-label-description {
-  margin-bottom: 1rem;
-}
-
-.edit-link {
-  padding-left: 0.5rem;
-  color: #037a93;
-}
-
-.edit-link:hover {
-  color: #4ecdc4;
-}
-
 .confirmation-section-underline {
   margin-bottom: 24px;
   padding-bottom: 24px;
   border-bottom: 1px solid #505c66;
+}
+
+.confirmation-container {
+  background-color: #d3f2f0;
+  border-radius: 2rem;
+  margin: 2rem 10% 2rem 10%;
+  padding: 2rem;
+}
+
+.prev-continue-results-buttons.confirmation {
+  margin-left: 10%;
+}
+
+.edit-icon:hover {
+  cursor: pointer;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.section-p {
+  line-height: 2rem;
+}
+
+.flip-horizontally {
+  transform: scaleX(-1);
+}
+
+.bottom-margin {
+  margin-bottom: 0.5rem;
+}
+
+.MuiSvgIcon-root.home-icon {
+  color: #2a2b2a;
+  height: 4rem;
+  width: 4rem;
+}
+
+@media (max-width: 630px) {
+  .confirmation-container {
+    margin: 0;
+  }
+
+  .MuiSvgIcon-root.home-icon {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+
+  .section-p {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+  }
+
+  h1.sub-header {
+    font-size: 1.5rem;
+  }
+
+  .prev-continue-results-buttons.confirmation {
+    margin: 1rem 0 0 0;
+  }
+
+  .bottom-margin {
+    margin-bottom: 0.5rem;
+  }
 }

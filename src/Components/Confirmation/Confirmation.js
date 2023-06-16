@@ -19,6 +19,17 @@ import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefi
 import stepDirectory from '../../Assets/stepDirectory';
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
+import Grid from '@mui/material/Grid';
+import EditIcon from '@mui/icons-material/Edit';
+import HomeIcon from '@mui/icons-material/Home';
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+import ChecklistIcon from '@mui/icons-material/Checklist';
+import FoodBankIcon from '@mui/icons-material/FoodBank';
+import PeopleIcon from '@mui/icons-material/People';
+import PersonIcon from '@mui/icons-material/Person';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import SavingsIcon from '@mui/icons-material/Savings';
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import './Confirmation.css';
 
 const Confirmation = () => {
@@ -49,29 +60,44 @@ const Confirmation = () => {
 
       return (
         <div key={i}>
-          <p className="confirmation-label">
-            <b>
-              ⚫️ {allHouseholdRelations[i]}, {allHouseholdAges[i]}
-            </b>
-            <Link to={`/${uuid}/step-${stepDirectory.householdData}/${i + 1}`} className="edit-link">
-              <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-            </Link>
-          </p>
-          <article className="confirmation-label">
-            <b>
-              <FormattedMessage
-                id="confirmation.headOfHouseholdDataBlock-conditionsText"
-                defaultMessage="Conditions:"
+          <Grid container spacing={1}>
+            <Grid item xs={2}>
+              <PersonIcon className="home-icon" />
+            </Grid>
+            <Grid item xs={8}>
+              <p className="section-title">{allHouseholdRelations[i]}</p>
+              <article className="section-p">
+                <b>
+                  <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />
+                  {': '}
+                </b>
+                {allHouseholdAges[i]}
+              </article>
+              <article className="section-p">
+                <b>
+                  <FormattedMessage
+                    id="confirmation.headOfHouseholdDataBlock-conditionsText"
+                    defaultMessage="Conditions:"
+                  />{' '}
+                </b>
+                {displayConditions(personData)}
+              </article>
+              <article className="section-p">
+                <b>
+                  <FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />{' '}
+                </b>
+                {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
+                {hasIncome === false && <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />}
+              </article>
+            </Grid>
+            <Grid item xs={2} display="flex" justifyContent="flex-end">
+              <EditIcon
+                className="edit-icon"
+                onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdData}/${i + 1}`)}
               />
-            </b>
-            {displayConditions(personData)}
-          </article>
-          <article className="confirmation-label">
-            <b>
-              <FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />
-            </b>
-            {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
-          </article>
+            </Grid>
+          </Grid>
+          <p className="confirmation-section-underline"></p>
         </div>
       );
     });
@@ -83,19 +109,28 @@ const Confirmation = () => {
     const { hasExpenses, expenses } = formData;
 
     return (
-      <article className="confirmation-label">
-        <b>
-          <FormattedMessage
-            id="confirmation.headOfHouseholdDataBlock-expensesLabel"
-            defaultMessage="Monthly household expenses:"
-          />
-        </b>
-        <Link to={`/${uuid}/step-${stepDirectory.hasExpenses}`} className="edit-link">
-          <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-        </Link>
-        {hasExpenses && expenses.length > 0 && <ul> {listAllExpenses(expenses)} </ul>}
-      </article>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          <PaymentsIcon className="home-icon" />
+        </Grid>
+        <Grid item xs={8}>
+          <p className="section-title">
+            <FormattedMessage
+              id="confirmation.headOfHouseholdDataBlock-expensesLabel"
+              defaultMessage="Monthly Household Expenses"
+            />
+          </p>
+          {hasExpenses && expenses.length > 0 && listAllExpenses(expenses)}
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <EditIcon className="edit-icon" onClick={() => navigate(`/${uuid}/step-${stepDirectory.hasExpenses}`)} />
+        </Grid>
+      </Grid>
     );
+  };
+
+  const getFormattedMessageString = (id) => {
+    return intl.formatMessage({ id: id });
   };
 
   const displayConditions = (userData) => {
@@ -108,86 +143,82 @@ const Confirmation = () => {
       blindOrVisuallyImpaired,
       disabled,
       veteran,
-      medicaid,
-      disabilityRelatedMedicaid,
     } = userData;
 
-    return (
-      <ul>
-        {studentFulltime && (
-          <li>
-            <FormattedMessage
-              id="confirmation.headOfHouseholdDataBlock-studentFulltimeText"
-              defaultMessage="Full-time student"
-            />
-          </li>
-        )}
-        {student && studentFulltime === false && (
-          <li>
-            <FormattedMessage id="confirmation.headOfHouseholdDataBlock-studentText" defaultMessage="Student" />
-          </li>
-        )}
-        {pregnant && (
-          <li>
-            <FormattedMessage id="confirmation.headOfHouseholdDataBlock-pregnantText" defaultMessage="Pregnant" />
-          </li>
-        )}
-        {unemployedWorkedInLast18Mos && (
-          <li>
-            <FormattedMessage
-              id="confirmation.headOfHouseholdDataBlock-unemployed18MosText"
-              defaultMessage="Unemployed, worked in the last 18 months"
-            />
-          </li>
-        )}
-        {unemployed && unemployedWorkedInLast18Mos === false && (
-          <li>
-            <FormattedMessage id="confirmation.headOfHouseholdDataBlock-unemployedText" defaultMessage="Unemployed" />
-          </li>
-        )}
-        {blindOrVisuallyImpaired && (
-          <li>
-            <FormattedMessage
-              id="confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText"
-              defaultMessage="Blind or visually impaired"
-            />
-          </li>
-        )}
-        {disabled && (
-          <li>
-            <FormattedMessage id="confirmation.headOfHouseholdDataBlock-disabledText" defaultMessage="Disabled" />
-          </li>
-        )}
-        {veteran && (
-          <li>
-            <FormattedMessage id="confirmation.headOfHouseholdDataBlock-veteranText" defaultMessage="Veteran" />
-          </li>
-        )}
-        {medicaid && (
-          <li>
-            <FormattedMessage
-              id="confirmation.headOfHouseholdDataBlock-medicaidText"
-              defaultMessage="Receiving Medicaid"
-            />
-          </li>
-        )}
-        {disabilityRelatedMedicaid && (
-          <li>
-            <FormattedMessage
-              id="confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText"
-              defaultMessage="Receiving disability-related Medicaid "
-            />
-          </li>
-        )}
-      </ul>
-    );
+    const iterableConditions = [
+      student,
+      studentFulltime,
+      pregnant,
+      unemployed,
+      unemployedWorkedInLast18Mos,
+      blindOrVisuallyImpaired,
+      disabled,
+      veteran,
+    ];
+
+    const hasAnyConditions = iterableConditions.some((condition) => condition === true);
+
+    if (hasAnyConditions === false) {
+      return <FormattedMessage id="confirmation.none" defaultMessage=" None" />;
+    } else {
+      return getConditionsStringWithCommas(
+        student,
+        studentFulltime,
+        pregnant,
+        unemployed,
+        unemployedWorkedInLast18Mos,
+        blindOrVisuallyImpaired,
+        disabled,
+        veteran,
+      );
+    }
+  };
+
+  const getConditionsStringWithCommas = (
+    student,
+    studentFulltime,
+    pregnant,
+    unemployed,
+    unemployedWorkedInLast18Mos,
+    blindOrVisuallyImpaired,
+    disabled,
+    veteran,
+  ) => {
+    const conditions = [];
+
+    if (studentFulltime) {
+      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-studentFulltimeText'));
+    }
+    if (student && studentFulltime === false) {
+      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-studentText'));
+    }
+    if (pregnant) {
+      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-pregnantText'));
+    }
+    if (unemployedWorkedInLast18Mos) {
+      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-unemployed18MosText'));
+    }
+    if (unemployed && unemployedWorkedInLast18Mos === false) {
+      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-unemployedText'));
+    }
+    if (blindOrVisuallyImpaired) {
+      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText'));
+    }
+    if (disabled) {
+      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-disabledText'));
+    }
+    if (veteran) {
+      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-veteranText'));
+    }
+
+    return conditions.join(', ');
   };
 
   const getAllHouseholdRelations = () => {
     const { householdData } = formData;
     const householdMembers = householdData.map((personData, index) => {
       if (index === 0) {
-        return <FormattedMessage id="qcc.hoh-text" defaultMessage="Head of household" key={index} />;
+        return <FormattedMessage id="qcc.hoh-text" defaultMessage="Head of Household (You)" key={index} />;
       } else {
         return relationshipOptions[personData.relationshipToHH];
       }
@@ -213,42 +244,63 @@ const Confirmation = () => {
       ) : (
         <FormattedMessage id="confirmation.displayAllFormData-peopleLabel" defaultMessage="people" />
       );
+    const linkTo = `/${uuid}/step-${stepDirectory.householdSize}`;
+
     return (
-      <article className="confirmation-label">
-        <b>
-          <FormattedMessage id="confirmation.displayAllFormData-yourHouseholdLabel" defaultMessage="Your household: " />
-        </b>
-        {householdSize} {householdSizeDescriptor}
-        <Link to={`/${uuid}/step-${stepDirectory.householdSize}`} className="edit-link">
-          <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-        </Link>
-      </article>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          <PeopleIcon className="home-icon" />
+        </Grid>
+        <Grid item xs={8}>
+          <p className="section-title">
+            <FormattedMessage
+              id="confirmation.displayAllFormData-yourHouseholdLabel"
+              defaultMessage="Household Members"
+            />
+          </p>
+          <article className="section-p">
+            <b>
+              <FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size" />
+              {': '}
+            </b>
+            {householdSize} {householdSizeDescriptor}
+          </article>
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <EditIcon className="edit-icon" onClick={() => navigate(linkTo)} />
+        </Grid>
+      </Grid>
     );
   };
 
   const displayHouseholdAssetsSection = () => {
     const { householdAssets } = formData;
     return (
-      <>
-        <article className="confirmation-label">
-          <b>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          <SavingsIcon className="home-icon" />
+        </Grid>
+        <Grid item xs={8}>
+          <p className="section-title">
             <FormattedMessage
               id="confirmation.displayAllFormData-householdResourcesText"
-              defaultMessage="Household resources: "
+              defaultMessage="Household resources"
             />
-          </b>
-          ${Number(householdAssets).toLocaleString(2)}
-          <Link to={`/${uuid}/step-${stepDirectory.householdAssets}`} className="edit-link">
-            <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-          </Link>
-        </article>
-        <p className="confirmation-label-description">
-          <FormattedMessage
-            id="confirmation.displayAllFormData-householdResourcesDescription"
-            defaultMessage="This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds."
-          />
-        </p>
-      </>
+          </p>
+          <article className="section-p">
+            ${Number(householdAssets).toLocaleString(2)}
+            <i>
+              <FormattedMessage
+                id="confirmation.displayAllFormData-householdResourcesDescription"
+                defaultMessage="(This is cash on hand, checking or saving accounts, stocks, bonds or mutual funds.)"
+              />
+            </i>
+          </article>
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <EditIcon className="edit-icon" onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdAssets}`)} />
+        </Grid>
+      </Grid>
     );
   };
 
@@ -273,20 +325,31 @@ const Confirmation = () => {
   const displayZipcodeSection = () => {
     const { zipcode, county } = formData;
     return (
-      <article className="confirmation-label">
-        <b>
-          <FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />
-        </b>
-        {zipcode}
-        <Link to={`/${uuid}/step-${stepDirectory.zipcode}`} className="edit-link">
-          <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-        </Link>
-        <br></br>
-        <b>
-          <FormattedMessage id="confirmation.displayAllFormData-countyText" defaultMessage="County: " />
-        </b>
-        {county}
-      </article>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          <HomeIcon className="home-icon" />
+        </Grid>
+        <Grid item xs={8}>
+          <p className="section-title">
+            <FormattedMessage id="confirmation.residenceInfo" defaultMessage="Residence Information" />
+          </p>
+          <p className="section-p">
+            <b>
+              <FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />
+            </b>
+            {zipcode}
+          </p>
+          <p className="section-p">
+            <b>
+              <FormattedMessage id="confirmation.displayAllFormData-countyText" defaultMessage="County: " />
+            </b>
+            {county}
+          </p>
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <EditIcon className="edit-icon" onClick={() => navigate(`/${uuid}/step-${stepDirectory.zipcode}`)} />
+        </Grid>
+      </Grid>
     );
   };
 
@@ -296,18 +359,23 @@ const Confirmation = () => {
     const finalReferralSource = referralSource !== 'other' ? referralSourceLabel : otherSource;
 
     return (
-      <article className="confirmation-label">
-        <b>
-          <FormattedMessage
-            id="confirmation.displayAllFormData-referralSourceText"
-            defaultMessage="Referral Source: "
-          />
-        </b>
-        {finalReferralSource}
-        <Link to={`/${uuid}/step-${stepDirectory.referralSource}`} className="edit-link">
-          <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-        </Link>
-      </article>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          <ConnectWithoutContactIcon className="home-icon flip-horizontally" />
+        </Grid>
+        <Grid item xs={8}>
+          <p className="section-title">
+            <FormattedMessage
+              id="confirmation.displayAllFormData-referralSourceText"
+              defaultMessage="Referral Source"
+            />
+          </p>
+          <article className="section-p">{finalReferralSource}</article>
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <EditIcon className="edit-icon" onClick={() => navigate(`/${uuid}/step-${stepDirectory.referralSource}`)} />
+        </Grid>
+      </Grid>
     );
   };
 
@@ -331,9 +399,20 @@ const Confirmation = () => {
 
     return (
       <>
-        {displayHouseholdSizeSection()}
-        {displayAllMembersDataBlock()}
+        {displayZipcodeSection()}
         <p className="confirmation-section-underline"></p>
+        {displayHHCheckboxSection(
+          'healthInsurance',
+          'confirmation.displayAllFormData-healthInsurance',
+          'Household Insurance',
+          `/${uuid}/step-${stepDirectory.healthInsurance}`,
+          refactorOptionsList(healthInsuranceOptions),
+          <MedicalServicesIcon className="home-icon" />,
+        )}
+        <p className="confirmation-section-underline"></p>
+        {displayHouseholdSizeSection()}
+        <p className="confirmation-section-underline"></p>
+        {displayAllMembersDataBlock()}
         {displayHouseholdExpenses()}
         <p className="confirmation-section-underline"></p>
         {displayHouseholdAssetsSection()}
@@ -341,30 +420,22 @@ const Confirmation = () => {
         {displayHHCheckboxSection(
           'benefits',
           'confirmation.displayAllFormData-currentHHBenefitsText',
-          'Household benefits:',
+          'Current Household Benefits:',
           `/${uuid}/step-${stepDirectory.hasBenefits}`,
           allBenefitsList,
-        )}
-        <p className="confirmation-section-underline"></p>
-        {displayHHCheckboxSection(
-          'healthInsurance',
-          'confirmation.displayAllFormData-healthInsurance',
-          'Household health insurance:',
-          `/${uuid}/step-${stepDirectory.healthInsurance}`,
-          refactorOptionsList(healthInsuranceOptions),
+          <ChecklistIcon className="home-icon" />,
         )}
         <p className="confirmation-section-underline"></p>
         {displayHHCheckboxSection(
           'acuteHHConditions',
           'confirmation.displayAllFormData-acuteHHConditions',
-          'Immediate Needs:',
+          'Immediate Needs',
           `/${uuid}/step-${stepDirectory.acuteHHConditions}`,
           refactorOptionsList(acuteConditionOptions),
+          <FoodBankIcon className="home-icon" />,
         )}
         <p className="confirmation-section-underline"></p>
         {displayReferralSourceSection()}
-        <p className="confirmation-section-underline"></p>
-        {displayZipcodeSection()}
       </>
     );
   };
@@ -376,10 +447,11 @@ const Confirmation = () => {
   const listAllExpenses = (memberExpenses) => {
     const mappedExpenses = memberExpenses.map((expense, index) => {
       return (
-        <li key={expense.expenseSourceName + index}>
+        <article key={expense.expenseSourceName + index} className="section-p">
           {' '}
-          {getExpenseSourceLabel(expense.expenseSourceName)}: {formatToUSD(Number(expense.expenseAmount))}{' '}
-        </li>
+          <b>{getExpenseSourceLabel(expense.expenseSourceName)}: </b>
+          {formatToUSD(Number(expense.expenseAmount))}{' '}
+        </article>
       );
     });
 
@@ -434,15 +506,15 @@ const Confirmation = () => {
 
       return (
         <li key={incomeStream.incomeStreamName + index}>
-          <p>{incomeStreamName}:</p>
+          <b>{incomeStreamName}: </b>
           {incomeStream.incomeFrequency === 'hourly' ? (
-            <p>
+            <>
               {incomeAmount} {incomeFrequency} ~{hoursPerWeek} {translatedHrsPerWkText} {annualAmount}
-            </p>
+            </>
           ) : (
-            <p>
+            <>
               {incomeAmount} {incomeFrequency} {annualAmount}
-            </p>
+            </>
           )}
         </li>
       );
@@ -453,29 +525,51 @@ const Confirmation = () => {
 
   const listAllTruthyValues = (selectedOptions, relatedOptionsList) => {
     const mappedListItems = selectedOptions.map((option) => {
-      return <li key={option}> {relatedOptionsList[option]} </li>;
+      return (
+        <p key={option} className="bottom-margin">
+          {' '}
+          {relatedOptionsList[option]}{' '}
+        </p>
+      );
     });
 
     return mappedListItems;
   };
 
-  const displayHHCheckboxSection = (stateVariableName, fMessageId, fMessageDefaultMsg, linkTo, optionsList) => {
+  const displayHHCheckboxSection = (
+    stateVariableName,
+    fMessageId,
+    fMessageDefaultMsg,
+    linkTo,
+    optionsList,
+    iconComp,
+  ) => {
     const stateVariableObj = formData[stateVariableName];
     const stateVariableKeys = Object.keys(stateVariableObj);
     const truthyOptions = stateVariableKeys.filter((key) => stateVariableObj[key]);
+    const hasAnyTruthyOptions = stateVariableKeys.some((key) => stateVariableObj[key]);
 
     return (
-      <>
-        <article className="confirmation-label">
-          <b>
+      <Grid container spacing={1}>
+        <Grid item xs={2}>
+          {iconComp}
+        </Grid>
+        <Grid item xs={8}>
+          <p className="section-title">
             <FormattedMessage id={fMessageId} defaultMessage={fMessageDefaultMsg} />
-          </b>
-          <Link to={linkTo} className="edit-link">
-            <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-          </Link>
-          <ul>{listAllTruthyValues(truthyOptions, optionsList)}</ul>
-        </article>
-      </>
+          </p>
+          {hasAnyTruthyOptions ? (
+            <article className="section-p">{listAllTruthyValues(truthyOptions, optionsList)}</article>
+          ) : (
+            <p className="section-p">
+              <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />
+            </p>
+          )}
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <EditIcon className="edit-icon" onClick={() => navigate(linkTo)} />
+        </Grid>
+      </Grid>
     );
   };
 
@@ -488,25 +582,20 @@ const Confirmation = () => {
       <h1 className="sub-header">
         <FormattedMessage id="confirmation.return-subheader" defaultMessage="Ok. Here's what we've got:" />
       </h1>
-      <h2 className="question-label">
-        <FormattedMessage id="confirmation.return-questionLabel" defaultMessage="Is all of your information correct?" />
-      </h2>
-      <div className="confirmation-container">
-        {displayAllFormData()}
-        <div className="prev-continue-results-buttons">
-          <Button
-            className="prev-button"
-            onClick={() => {
-              navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`);
-            }}
-            variant="contained"
-          >
-            <FormattedMessage id="previousButton" defaultMessage="Prev" />
-          </Button>
-          <Button variant="contained" onClick={() => navigate(`/${uuid}/results`)}>
-            <FormattedMessage id="continueButton" defaultMessage="Continue" />
-          </Button>
-        </div>
+      <div className="confirmation-container">{displayAllFormData()}</div>
+      <div className="prev-continue-results-buttons confirmation">
+        <Button
+          className="prev-button"
+          onClick={() => {
+            navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`);
+          }}
+          variant="contained"
+        >
+          <FormattedMessage id="previousButton" defaultMessage="Prev" />
+        </Button>
+        <Button variant="contained" onClick={() => navigate(`/${uuid}/results`)}>
+          <FormattedMessage id="continueButton" defaultMessage="Continue" />
+        </Button>
       </div>
     </main>
   );
