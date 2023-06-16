@@ -15,6 +15,18 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   const stepNumberId = Number(id);
   const expensesErrorController = useErrorController(expenseSourcesHaveError, undefined);
 
+  useEffect(() => {
+    const continueOnEnter = (event) => {
+      if (event.key === 'Enter') {
+        handleSaveAndContinue(event);
+      }
+    };
+    document.addEventListener('keyup', continueOnEnter);
+    return () => {
+      document.removeEventListener('keyup', continueOnEnter); // remove event listener on onmount
+    };
+  });
+
   const [selectedMenuItem, setSelectedMenuItem] = useState(
     formData.expenses.length > 0
       ? formData.expenses
