@@ -94,6 +94,7 @@ const Results = () => {
   useEffect(() => {
     responseLanguage();
     updateFilter({ name: 'category', filter: false });
+    categoryState[1]('All Categories');
   }, [locale, results.rawResponse]);
 
   const fetchResults = async () => {

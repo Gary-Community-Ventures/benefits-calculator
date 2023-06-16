@@ -95,3 +95,9 @@ button.back-to-screen-button {
     display: none;
   }
 }
+
+@media (max-width: 420px) {
+  h1.bottom-border.program-value-header {
+    font-size: 1rem;
+  }
+}

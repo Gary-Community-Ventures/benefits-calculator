@@ -155,7 +155,7 @@
   "householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel": "Họ có việc làm trong 18 tháng qua không?",
   "householdDataBlock.createIncomeRadioQuestion-ariaLabel": "có thu nhập",
   "householdDataBlock.createIncomeRadioQuestion-questionLabel": "Người này trong hộ gia đình của quý vị có thu nhập đáng kể mà quý vị chưa liệt kê vào không?",
-  "householdDataBlock.createIncomeRadioQuestion-questionDescription": "Số tiền này bao gồm tiền từ việc làm, tiền cấp dưỡng, đầu tư hoặc quà tặng.",
+  "householdDataBlock.createIncomeRadioQuestion-questionDescription": "Số tiền này bao gồm tiền từ việc làm, tiền cấp dưỡng, đầu tư hoặc quà tặng. Thu nhập là số tiền kiếm được hoặc nhận được trước khi khấu trừ thuế.",
   "personIncomeBlock.return-questionLabel": "Họ có loại thu nhập nào gần đây nhất?",
   "personIncomeBlock.return-questionDescription": "Trả lời đúng nhất quý vị có thể. Quý vị sẽ có thể liệt kê các loại thu nhập khác. Quý vị càng liệt kê nhiều, kết quả của quý vị sẽ càng chính xác.",
   "personIncomeBlock.return-addIncomeButton": "Thêm thu nhập khác",
