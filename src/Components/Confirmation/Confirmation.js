@@ -120,7 +120,11 @@ const Confirmation = () => {
               defaultMessage="Monthly Household Expenses"
             />
           </p>
-          {hasExpenses && expenses.length > 0 && listAllExpenses(expenses)}
+          {hasExpenses && expenses.length > 0 ? (
+            listAllExpenses(expenses)
+          ) : (
+            <FormattedMessage id="confirmation.none" defaultMessage=" None" />
+          )}
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <EditIcon className="edit-icon" onClick={() => navigate(`/${uuid}/step-${stepDirectory.hasExpenses}`)} />
