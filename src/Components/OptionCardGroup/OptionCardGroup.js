@@ -40,6 +40,11 @@ const OptionCardGroup = ({ stateVariable, options, errorController }) => {
           onClick={() => {
             handleCardClick(optionKey);
           }}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+            }
+          }}
         >
           <Card
             className={state[stateVariable][optionKey] ? 'selected-option-card' : 'unselected-option-card'}

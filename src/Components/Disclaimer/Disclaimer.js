@@ -1,7 +1,7 @@
 import { Button, Card, CardContent, CardActions, Typography, FormControlLabel, Checkbox } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.js';
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
@@ -27,6 +27,18 @@ const Disclaimer = ({ handleCheckboxChange }) => {
       navigate(`/${uuid}/step-2`);
     }
   };
+
+  useEffect(() => {
+    const continueOnEnter = (event) => {
+      if (event.key === 'Enter') {
+        handleContinueButtonClick(event);
+      }
+    };
+    document.addEventListener('keyup', continueOnEnter);
+    return () => {
+      document.removeEventListener('keyup', continueOnEnter); // remove event listener on onmount
+    };
+  });
 
   return (
     <main className="benefits-form">

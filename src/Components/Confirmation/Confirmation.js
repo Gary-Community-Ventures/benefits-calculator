@@ -17,7 +17,7 @@ import transportationBenefits from '../../Assets/BenefitCategoryLists/transporta
 import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBenefits';
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
 import stepDirectory from '../../Assets/stepDirectory';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import './Confirmation.css';
 
@@ -26,6 +26,18 @@ const Confirmation = () => {
   const { uuid } = useParams();
   const navigate = useNavigate();
   const intl = useIntl();
+
+  useEffect(() => {
+    const continueOnEnter = (event) => {
+      if (event.key === 'Enter') {
+        navigate(`/${uuid}/results`);
+      }
+    };
+    document.addEventListener('keyup', continueOnEnter);
+    return () => {
+      document.removeEventListener('keyup', continueOnEnter); // remove event listener on onmount
+    };
+  });
 
   const displayAllMembersDataBlock = () => {
     const { householdData } = formData;
