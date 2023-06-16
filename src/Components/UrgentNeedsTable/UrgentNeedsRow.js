@@ -9,7 +9,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import './UrgentNeedsRow.css';
 
 const UrgentNeedsRow = ({ rowProps }) => {
@@ -52,17 +52,34 @@ const UrgentNeedsRow = ({ rowProps }) => {
                 </h4>
               )}
               {rowProps.link && (
-                <ReactGA.OutboundLink
+                <a
                   className="margin-top-link"
-                  eventLabel={`Urgent Need Website for ${rowProps.name}`}
-                  to={rowProps.link}
+                  href={rowProps.link}
                   target="_blank"
-                  trackerNames={['main']}
+                  rel="noreferrer"
+                  onContextMenu={() => {
+                    setTimeout(() => {
+                      ReactGA.event({
+                        category: 'outbound link',
+                        action: 'urgent need link',
+                        label: `Urgent Need Website for ${rowProps.name}`,
+                      });
+                    });
+                  }}
+                  onClick={() => {
+                    setTimeout(() => {
+                      ReactGA.event({
+                        category: 'outbound link',
+                        action: 'urgent need link',
+                        label: `Urgent Need Website for ${rowProps.name}`,
+                      });
+                    });
+                  }}
                 >
                   <Button className="urgent-need-button">
                     <FormattedMessage id="urgentNeedsTable.visit-website-button" defaultMessage="Visit website" />
                   </Button>
-                </ReactGA.OutboundLink>
+                </a>
               )}
             </Box>
           </Collapse>

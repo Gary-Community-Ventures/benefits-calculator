@@ -19,7 +19,7 @@ import {
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import { getEligibility } from '../../apiCalls';
 import './Results.css';
 
@@ -219,15 +219,23 @@ const Results = () => {
                   {navigator.assistance_link && (
                     <h4 className="font-weight">
                       Link:{' '}
-                      <ReactGA.OutboundLink
+                      <a
                         className="ineligibility-link navigator-info"
-                        eventLabel={`Apply With Assistance for ${navigator.name}`}
-                        to={navigator.assistance_link}
+                        href={navigator.assistance_link}
                         target="_blank"
-                        trackerNames={['main']}
+                        rel="noreferrer"
+                        onClick={() => {
+                          setTimeout(() => {
+                            ReactGA.event({
+                              category: 'outbound link',
+                              action: 'navigator link',
+                              label: `Apply With Assistance for ${navigator.name}`,
+                            });
+                          });
+                        }}
                       >
                         {navigator.assistance_link}
-                      </ReactGA.OutboundLink>
+                      </a>
                     </h4>
                   )}
                   {navigator.email && (
@@ -367,16 +375,20 @@ const Results = () => {
                 defaultMessage=" after completing the application."
               />
             </Typography>
-            <ReactGA.OutboundLink
-              eventLabel={`Apply to ${row.name}`}
-              to={row.application_link}
+            <a
+              href={row.application_link}
               target="_blank"
-              trackerNames={['main']}
+              rel="noreferrer"
+              onClick={() => {
+                setTimeout(() => {
+                  ReactGA.event({ category: 'outbound link', action: 'program link', label: `Apply to ${row.name}` });
+                });
+              }}
             >
               <Button className="apply-button">
                 <FormattedMessage id="results.resultsRow-applyButton" defaultMessage="Apply" />
               </Button>
-            </ReactGA.OutboundLink>
+            </a>
             {row.navigators.length > 0 && (
               <Button variant="contained" target="_blank" onClick={openNavList} sx={{ marginLeft: '5px' }}>
                 <FormattedMessage id="results.resultsRow-applyWithAssistance" defaultMessage="Apply With Assistance" />
