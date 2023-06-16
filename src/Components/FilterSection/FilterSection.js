@@ -132,7 +132,7 @@ const FilterSection = ({
           alreadyHasToggleState={alreadyHasToggleState}
         />
       </Popover>
-      <Button id="reset" variant="contained" className="reset-button" onClick={handleResetButtonClick}>
+      <Button id="reset" variant="text" className="reset-button" onClick={handleResetButtonClick}>
         <FormattedMessage id="filterSection.reset" defaultMessage="Reset" />
       </Button>
     </div>

@@ -10,6 +10,8 @@ button.MuiButton-root.reset-button {
   padding: 0.25rem;
   border-radius: 3rem;
   font-size: 12.8px;
+  color:#037A93;
+  background-color: #ffffff;
 }
 
 button.MuiButton-root.filter-button {
