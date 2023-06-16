@@ -16,7 +16,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import './Share.css';
 
 const Share = forwardRef(function Share({ close }, ref) {
@@ -62,13 +62,11 @@ const Share = forwardRef(function Share({ close }, ref) {
 
   const trackOutboundLinks = (label) => {
     return () => {
-      ReactGA.outboundLink(
-        {
-          label: label,
-        },
-        () => {},
-        ['main'],
-      );
+      ReactGA.event({
+        category: 'outbound link',
+        action: 'share link click',
+        label: label,
+      });
     };
   };
 
