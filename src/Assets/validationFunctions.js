@@ -121,6 +121,17 @@ const expenseSourcesHaveError = (expenses) => {
   return expensesHasError;
 };
 
+const displayExpensesHelperText = (expenses) => {
+  if (expenseSourcesHaveError(expenses)) {
+    return (
+      <FormattedMessage
+        id="expenseBlock.return-error-message"
+        defaultMessage="Please select and enter a response for all expense fields"
+      />
+    );
+  }
+};
+
 const householdSizeHasError = (sizeOfHousehold) => {
   const numValueInput = Number(sizeOfHousehold);
   return numValueInput <= 0 || numValueInput > 8;
@@ -391,6 +402,7 @@ export {
   expenseSourceValueHasError,
   displayExpenseSourceValueHelperText,
   expenseSourcesHaveError,
+  displayExpensesHelperText,
   householdSizeHasError,
   displayHouseholdSizeHelperText,
   householdAssetsHasError,
