@@ -229,12 +229,14 @@ const displayMissingTaxFilingYear = (year) => {
 };
 
 const referralSourceHasError = (referralSource) => {
-  return referralSource === '';
+  return !referralSource;
 };
 
 const displayReferralSourceHelperText = (source) => {
   if (referralSourceHasError(source)) {
-    return <FormattedMessage id="validation-helperText.referralSource" defaultMessage="Please type in your source." />;
+    return (
+      <FormattedMessage id="validation-helperText.referralSource" defaultMessage="Please select a referral source." />
+    );
   }
 };
 
