@@ -29,7 +29,6 @@ const FollowUpQuestions = ({
     errorController.setIsSubmitted(submitted);
   }, [submitted]);
 
-
   return followUpQuestions.map((followUp, index) => {
     if (followUp.componentDetails.componentType === 'Radiofield') {
       return (

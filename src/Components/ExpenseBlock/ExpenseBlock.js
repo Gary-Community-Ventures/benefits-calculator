@@ -42,6 +42,10 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
         ],
   );
 
+  useEffect(() => {
+    expensesErrorController.updateError(selectedMenuItem, formData);
+  }, [selectedMenuItem]);
+
   const deleteExpenseBlock = (selectedIndex) => {
     const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex);
     setSelectedMenuItem(updatedSelectedMenuItems);
