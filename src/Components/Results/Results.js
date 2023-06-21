@@ -262,8 +262,16 @@ const Results = () => {
   };
 
   const displaySubheader = () => {
-    return (
-      <>
+    if (!totalEligiblePrograms(results.programs)) {
+      return (
+        <Grid xs={12} item>
+          <h1 className="bottom-border program-value-header">
+            <FormattedMessage id="results.displaySubheader-noResults" defaultMessage="No Benefits Results Found" />
+          </h1>
+        </Grid>
+      );
+    } else {
+      return (
         <Grid xs={12} item>
           <h1 className="bottom-border program-value-header">
             {totalEligiblePrograms(results.programs)}
@@ -277,8 +285,8 @@ const Results = () => {
             />
           </h1>
         </Grid>
-      </>
-    );
+      );
+    }
   };
 
   const DataGridRows = (results) => {

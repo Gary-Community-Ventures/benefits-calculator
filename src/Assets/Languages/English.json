@@ -328,6 +328,7 @@
   "results.displayResultsFilterButtons-urgentNeedsResources": "Immediate Needs",
   "loading.return-loadingText": "Please wait while we gather your results...",
   "results.displaySubheader-loadingDisclaimerText": "Remember that we can't guarantee eligibility, but based on the information you provided, we believe you are likely eligible for the following programs.",
+  "results.displaySubheader-noResults": "No Benefits Results Found",
   "taxYearOptions.noRecentFiling": "I have not filed taxes in the last 5 years",
   "benefitOptions.tanf": "Cash assistance and work support (Temporary Assistance for Needy Families (TANF/Colorado Works))",
   "benefitOptions.wic": "Food and breastfeeding assistance (Special Supplemental Nutrition Program for Women, Infants, and Children (WIC))",
