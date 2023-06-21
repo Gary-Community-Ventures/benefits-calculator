@@ -19,14 +19,16 @@ const FollowUpQuestions = ({
   handleTextfieldChange,
   handleRadioButtonChange,
 }) => {
+  const { followUpQuestions } = matchingQuestion;
   const errorController = useErrorController(
     matchingQuestion.componentDetails.inputError,
     matchingQuestion.componentDetails.inputHelperText,
   );
+
   useEffect(() => {
     errorController.setIsSubmitted(submitted);
   }, [submitted]);
-  const { followUpQuestions } = matchingQuestion;
+
 
   return followUpQuestions.map((followUp, index) => {
     if (followUp.componentDetails.componentType === 'Radiofield') {
@@ -75,6 +77,7 @@ const FollowUpQuestions = ({
             componentProperties={followUp.componentDetails.componentProperties}
             options={finalOptions}
             formDataProperty={followUp.componentDetails.inputName}
+            errorController={errorController}
           />
         </div>
       );

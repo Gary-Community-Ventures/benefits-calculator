@@ -85,6 +85,7 @@ const QuestionComponentContainer = ({
         componentProperties={question.componentDetails.componentProperties}
         options={question.componentDetails.options}
         formDataProperty={question.componentDetails.inputName}
+        errorController={errorController}
       />
     );
   };
