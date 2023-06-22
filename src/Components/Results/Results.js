@@ -435,7 +435,10 @@ const Results = () => {
   };
 
   const groupingColDef = {
-    headerName: 'Benefit',
+    headerName: intl.formatMessage({
+      id: 'results.resultsTable-benefitLabel',
+      defaultMessage: 'Benefit',
+    }),
     flex: 1,
     colSpan: ({ row }) => {
       if (row.path.indexOf('Detail') !== -1) {
@@ -451,7 +454,7 @@ const Results = () => {
     const rows = DataGridRows(results);
 
     const nameHeader = intl.formatMessage({
-      id: 'results.resultsTable-timeToApply',
+      id: 'results.resultsTable-benefitLabel',
       defaultMessage: 'Benefit',
     });
     const valueHeader = intl.formatMessage({
