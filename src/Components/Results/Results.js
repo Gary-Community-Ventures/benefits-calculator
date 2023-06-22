@@ -7,6 +7,7 @@ import FilterSection from '../FilterSection/FilterSection';
 import ResultsError from '../ResultsError/ResultsError';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import Loading from '../Loading/Loading';
+import CustomNoResultsOverlay from '../CustomNoResultsOverlay/CustomNoResultsOverlay';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 import Grid from '@mui/material/Grid';
@@ -567,6 +568,9 @@ const Results = () => {
                 category: false,
               },
             },
+          }}
+          components={{
+            NoResultsOverlay: CustomNoResultsOverlay,
           }}
         />
       </>
