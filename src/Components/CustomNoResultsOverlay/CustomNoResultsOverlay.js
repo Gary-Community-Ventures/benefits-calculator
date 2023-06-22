@@ -1,5 +1,5 @@
 import { FormattedMessage } from 'react-intl';
-import './CustomNoRowsOverlay.css';
+import './CustomNoResultsOverlay.css';
 
 const CustomNoRowsOverlay = () => {
   return (
