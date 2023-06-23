@@ -5,7 +5,11 @@ import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ExpenseQuestion from './ExpenseQuestion';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { useErrorController, expenseSourcesHaveError } from '../../Assets/validationFunctions';
+import {
+  useErrorController,
+  expenseSourcesHaveError,
+  displayExpensesHelperText,
+} from '../../Assets/validationFunctions';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import './ExpenseBlock.css';
 
@@ -13,7 +17,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   const { formData } = useContext(Context);
   const { id, uuid } = useParams();
   const stepNumberId = Number(id);
-  const expensesErrorController = useErrorController(expenseSourcesHaveError, undefined);
+  const expensesErrorController = useErrorController(expenseSourcesHaveError, displayExpensesHelperText);
 
   useEffect(() => {
     const continueOnEnter = (event) => {
@@ -37,6 +41,10 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
           },
         ],
   );
+
+  useEffect(() => {
+    expensesErrorController.updateError(selectedMenuItem, formData);
+  }, [selectedMenuItem]);
 
   const deleteExpenseBlock = (selectedIndex) => {
     const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex);
@@ -83,16 +91,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   return (
     <>
       {createExpenseBlockQuestions()}
-      {expensesErrorController.showError && (
-        <ErrorMessage
-          error={
-            <FormattedMessage
-              id="expenseBlock.return-error-message"
-              defaultMessage="Please select and enter a response for all expense fields"
-            />
-          }
-        />
-      )}
+      {expensesErrorController.showError && <ErrorMessage error={expensesErrorController.message(selectedMenuItem)} />}
       <Button variant="contained" onClick={(event) => handleAddAdditionalExpenseSource(event)}>
         <FormattedMessage id="expenseBlock.return-addExpenseButton" defaultMessage="Add another expense" />
       </Button>

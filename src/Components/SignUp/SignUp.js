@@ -30,7 +30,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   } else if (locale === 'vi') {
     privacyLink = 'https://www.myfriendben.org/vi/data-privacy-policy';
   }
-  const sighnUpErrorController = useErrorController(signUpFormHasError, displaySignUpFormHelperText);
+  const signUpErrorController = useErrorController(signUpFormHasError, displaySignUpFormHelperText);
   const firstNameErrorController = useErrorController(nameHasError, displayFirstNameHelperText);
   const lastNameErrorController = useErrorController(nameHasError, displayLastNameHelperText);
   const emailErrorController = useErrorController((email) => {
@@ -41,7 +41,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   }, displayPhoneHasErrorHelperText);
 
   useEffect(() => {
-    sighnUpErrorController.setIsSubmitted(submitted);
+    signUpErrorController.setIsSubmitted(submitted);
     firstNameErrorController.setIsSubmitted(submitted);
     lastNameErrorController.setIsSubmitted(submitted);
     emailErrorController.setIsSubmitted(submitted);
@@ -49,7 +49,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   }, [submitted]);
 
   useEffect(() => {
-    sighnUpErrorController.updateError(formData.signUpInfo);
+    signUpErrorController.updateError(formData.signUpInfo);
   }, [
     firstNameErrorController.hasError,
     lastNameErrorController.hasError,
@@ -174,8 +174,8 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   };
 
   const displayErrorMessage = () => {
-    if (sighnUpErrorController.showError) {
-      return <ErrorMessage error={sighnUpErrorController.message(formData.signUpInfo)} />;
+    if (signUpErrorController.showError) {
+      return <ErrorMessage error={signUpErrorController.message(formData.signUpInfo)} />;
     }
   };
 

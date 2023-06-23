@@ -95,7 +95,7 @@
   "validation-helperText.hhMemberExpense": "Please select and enter a response for all three expense fields",
   "validation-helperText.email": "Please enter a valid email address",
   "validation-helperText.lastTaxFilingYear": "*Please select a year",
-  "validation-helperText.referralSource": "Please type in your source.",
+  "validation-helperText.referralSource": "Please select a referral source.",
   "validation-helperText.phoneNumber": "Please enter a 10 digit phone number",
   "validation-helperText.firstName": "Please enter your first name",
   "validation-helperText.lastName": "Please enter your last name",
