@@ -85,6 +85,7 @@ const QuestionComponentContainer = ({
         componentProperties={question.componentDetails.componentProperties}
         options={question.componentDetails.options}
         formDataProperty={question.componentDetails.inputName}
+        errorController={errorController}
       />
     );
   };
@@ -93,12 +94,12 @@ const QuestionComponentContainer = ({
     const inputName = matchingQuestion.componentDetails.inputName;
     const { followUpQuestions } = matchingQuestion;
     const hasFollowUpQuestions = followUpQuestions && followUpQuestions.length > 0;
-    // this is specifically for step 5 error handling
-    const isHealthInsuranceQ = matchingQuestion.name === 'healthInsurance';
+    // this is specifically for health & referral q error handling
+    const isHealthOrReferralSourceQuestion = inputName === 'healthInsurance' || inputName === 'referralSource';
 
     return (
       <div className="question-container" id={id}>
-        {matchingQuestion.name !== 'referralSource' && <h2 className="question-label">{matchingQuestion.question}</h2>}
+        {<h2 className="question-label">{matchingQuestion.question}</h2>}
         {matchingQuestion.questionDescription && (
           <p className="question-description">{matchingQuestion.questionDescription}</p>
         )}
@@ -114,8 +115,8 @@ const QuestionComponentContainer = ({
             handleTextfieldChange={handleTextfieldChange}
           />
         )}
-        {isHealthInsuranceQ && errorController.showError && (
-          <ErrorMessage error={errorController.message(formData[matchingQuestion.name])} />
+        {isHealthOrReferralSourceQuestion && errorController.showError && (
+          <ErrorMessage error={errorController.message(formData[inputName])} />
         )}
         {createPreviousAndContinueButtons()}
       </div>

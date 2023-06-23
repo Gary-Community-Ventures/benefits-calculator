@@ -95,7 +95,7 @@
   "validation-helperText.hhMemberExpense": "Vui lòng chọn và nhập câu trả lời cho cả ba trường chi phí",
   "validation-helperText.email": "Vui lòng nhập địa chỉ email hợp lệ",
   "validation-helperText.lastTaxFilingYear": "*Vui lòng chọn một năm",
-  "validation-helperText.referralSource": "Vui lòng nhập nguồn của quý vị.",
+  "validation-helperText.referralSource": "Vui lòng chọn một nguồn giới thiệu.",
   "validation-helperText.phoneNumber": "Vui lòng nhập số điện thoại gồm 10 chữ số",
   "validation-helperText.firstName": "Vui lòng nhập tên của quý vị",
   "validation-helperText.lastName": "Vui lòng nhập họ của quý vị",

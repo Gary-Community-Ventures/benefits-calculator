@@ -8,12 +8,13 @@ const StyledSelectfield = styled(Select)({
   minWidth: 200,
 });
 
-const BasicSelect = ({ componentProperties, options, formDataProperty }) => {
+const BasicSelect = ({ componentProperties, options, formDataProperty, errorController }) => {
   const { formData, setFormData } = useContext(Context);
   const { labelId, inputLabelText, id, value, label, disabledSelectMenuItemText } = componentProperties;
 
   const handleBasicSelect = (event, formProperty) => {
     setFormData({ ...formData, [formProperty]: event.target.value });
+    errorController.updateError(event.target.value, formData);
   };
 
   const createMenuItems = () => {
