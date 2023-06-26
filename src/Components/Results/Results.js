@@ -7,7 +7,7 @@ import FilterSection from '../FilterSection/FilterSection';
 import ResultsError from '../ResultsError/ResultsError';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import Loading from '../Loading/Loading';
-import CustomNoResultsOverlay from '../CustomNoResultsOverlay/CustomNoResultsOverlay';
+import NoResultsTable from '../NoResultsTable/NoResultsTable';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 import Grid from '@mui/material/Grid';
@@ -660,6 +660,14 @@ const Results = () => {
   const hasUrgentNeeds = () => {
     return results.rawResponse.urgent_needs.es.length > 0;
   };
+
+  const renderDataGridOrNoResultsTable = () => {
+    if (totalEligiblePrograms(results.programs)) {
+      return DataGridTable(results.programs);
+    } else {
+      return <NoResultsTable />;
+    }
+  }
 
   return (
     <main className="benefits-form">
