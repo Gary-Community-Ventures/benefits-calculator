@@ -572,9 +572,6 @@ const Results = () => {
               },
             },
           }}
-          components={{
-            NoResultsOverlay: CustomNoResultsOverlay,
-          }}
         />
       </>
     );
