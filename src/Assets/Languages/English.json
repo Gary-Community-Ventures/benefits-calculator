@@ -426,7 +426,7 @@
   "filterSection.citizenship": "Citizenship",
   "filterSection.other": "Other",
   "filterSection.reset": "Reset",
-  "customNoRowsOverlay.p-One": "It looks like you may not qualify for benefits included in MyFriendBen at this time. If you indicated need for an immediate resource, please click on the “Immediate Needs” tab.",
-  "customNoRowsOverlay.p-Two": "For additional resources, visit ",
-  "customNoRowsOverlay.p-Three": " to chat with someone online or on the phone to get the resources you’re looking for."
+  "noResults.p-One": "It looks like you may not qualify for benefits included in MyFriendBen at this time. If you indicated need for an immediate resource, please click on the “Immediate Needs” tab.",
+  "noResults.p-Two": "For additional resources, visit ",
+  "noResults.p-Three": " to chat with someone online or on the phone to get the resources you’re looking for."
 }
