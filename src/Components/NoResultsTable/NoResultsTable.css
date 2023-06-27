@@ -1,12 +1,14 @@
 .ineligibility-link.navigator-info {
   font-weight: 900;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .no-results-content-container {
   text-align: center;
   margin: 3rem 0.5rem 3rem 0.5rem;
   line-height: 1.25rem;
+  font-size: 14px;
+  color: #2A2B2A;
 }
 
 .noResults-p {
