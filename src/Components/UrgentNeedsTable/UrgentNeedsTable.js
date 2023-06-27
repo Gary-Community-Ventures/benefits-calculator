@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper';
 import TableFooter from '@mui/material/TableFooter';
 import UrgentNeedsRow from './UrgentNeedsRow';
 import { FormattedMessage } from 'react-intl';
+import './UrgentNeedsTable.css';
 
 const UrgentNeedsTable = ({ urgentNeedsPrograms, locale, totalEligiblePrograms }) => {
   const finalUrgentNeedsPrograms = urgentNeedsPrograms[locale.toLowerCase()];
@@ -15,7 +16,7 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale, totalEligiblePrograms }
   const displayFooter = () => {
     if (urgentNeedsPrograms.es.length) {
       return (
-        <article className="no-results-content-container">
+        <article className="urgentNeedsTableFooter">
           <p className="noResults-p">
             <FormattedMessage id="noResults.p-Two" defaultMessage="For additional resources, visit " />
             <a
@@ -35,7 +36,7 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale, totalEligiblePrograms }
       );
     } else {
       return (
-        <article className="no-results-content-container">
+        <article className="urgentNeedsTableFooter">
           <p className="noResults-p">
             <FormattedMessage
               id="noResultsOrUrgentNeeds.p-One"
