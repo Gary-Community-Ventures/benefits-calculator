@@ -657,10 +657,6 @@ const Results = () => {
     );
   };
 
-  const hasUrgentNeeds = () => {
-    return results.rawResponse.urgent_needs.es.length > 0;
-  };
-
   const renderDataGridOrNoResultsTable = () => {
     if (totalEligiblePrograms(results.programs)) {
       return DataGridTable(results.programs);
