@@ -663,7 +663,7 @@ const Results = () => {
     } else {
       return <NoResultsTable />;
     }
-  }
+  };
 
   return (
     <main className="benefits-form">
@@ -678,7 +678,11 @@ const Results = () => {
                 {displayBenefitAndImmedNeedsBtns()}
                 {filterResultsButton === 'benefits' && renderDataGridOrNoResultsTable()}
                 {filterResultsButton === 'urgentNeeds' && (
-                  <UrgentNeedsTable urgentNeedsPrograms={results.rawResponse.urgent_needs} locale={locale} />
+                  <UrgentNeedsTable
+                    urgentNeedsPrograms={results.rawResponse.urgent_needs}
+                    locale={locale}
+                    totalEligiblePrograms={totalEligiblePrograms(results.programs)}
+                  />
                 )}
               </Grid>
               <Button
