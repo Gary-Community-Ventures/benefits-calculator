@@ -428,5 +428,6 @@
   "filterSection.reset": "Đặt lại",
   "noResults.p-One": "Có vẻ như bạn có thể không đủ điều kiện cho các lợi ích được bao gồm trong MyFriendBen vào thời điểm này. Nếu bạn cho biết cần một tài nguyên ngay lập tức, vui lòng nhấp vào tab Immediate Needs.",
   "noResults.p-Two": "Để có thêm tài nguyên, hãy truy cập ",
-  "noResults.p-Three": " để trò chuyện với ai đó trực tuyến hoặc trên điện thoại để có được các tài nguyên mà bạn đang tìm kiếm."
+  "noResults.p-Three": " để trò chuyện với ai đó trực tuyến hoặc trên điện thoại để có được các tài nguyên mà bạn đang tìm kiếm.",
+  "noResultsOrUrgentNeeds.p-One": "Có vẻ như anh không chỉ ra bất kỳ nhu cầu khẩn cấp nào."
 }

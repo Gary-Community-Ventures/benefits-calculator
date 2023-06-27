@@ -5,11 +5,62 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import TableFooter from '@mui/material/TableFooter';
 import UrgentNeedsRow from './UrgentNeedsRow';
 import { FormattedMessage } from 'react-intl';
 
-const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
+const UrgentNeedsTable = ({ urgentNeedsPrograms, locale, totalEligiblePrograms }) => {
   const finalUrgentNeedsPrograms = urgentNeedsPrograms[locale.toLowerCase()];
+
+  const displayFooter = () => {
+    if (urgentNeedsPrograms.es.length) {
+      return (
+        <article className="no-results-content-container">
+          <p className="noResults-p">
+            <FormattedMessage id="noResults.p-Two" defaultMessage="For additional resources, visit " />
+            <a
+              className="ineligibility-link navigator-info"
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.211colorado.org/"
+            >
+              Colorado 2-1-1
+            </a>
+            <FormattedMessage
+              id="noResults.p-Three"
+              defaultMessage=" to chat with someone online or on the phone to get the resources you’re looking for."
+            />
+          </p>
+        </article>
+      );
+    } else {
+      return (
+        <article className="no-results-content-container">
+          <p className="noResults-p">
+            <FormattedMessage
+              id="noResultsOrUrgentNeeds.p-One"
+              defaultMessage="It looks like you didn’t indicate any immediate needs."
+            />
+          </p>
+          <p className="noResults-p">
+            <FormattedMessage id="noResults.p-Two" defaultMessage="For additional resources, visit " />
+            <a
+              className="ineligibility-link navigator-info"
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.211colorado.org/"
+            >
+              Colorado 2-1-1
+            </a>
+            <FormattedMessage
+              id="noResults.p-Three"
+              defaultMessage=" to chat with someone online or on the phone to get the resources you’re looking for."
+            />
+          </p>
+        </article>
+      );
+    }
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -30,6 +81,13 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
             <UrgentNeedsRow key={row.name} rowProps={row} />
           ))}
         </TableBody>
+        {!totalEligiblePrograms && (
+          <TableFooter>
+            <TableRow>
+              <TableCell colSpan={3}>{displayFooter()}</TableCell>
+            </TableRow>
+          </TableFooter>
+        )}
       </Table>
     </TableContainer>
   );

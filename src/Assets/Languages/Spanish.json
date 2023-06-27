@@ -430,5 +430,6 @@
   "filterSection.reset": "Restablecer",
   "noResults.p-One": "Parece que no es posible que califique para los beneficios incluidos en MyFriendBen en este momento. Si indico la necesidad de recursos inmediatamente, haga clic en lance de “Necesidades inmediatas”.",
   "noResults.p-Two": "Para recursos adicionales, visite ",
-  "noResults.p-Three": " para hablar con alguien en línea o por teléfono para obtener los recursos que está buscando."
+  "noResults.p-Three": " para hablar con alguien en línea o por teléfono para obtener los recursos que está buscando.",
+  "noResultsOrUrgentNeeds.p-One": "Parece que usted no indicó ninguna necesidad inmediata."
 }
