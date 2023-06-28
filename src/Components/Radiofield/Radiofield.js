@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormControlLabel, RadioGroup, Radio } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { FormattedMessage, useIntl } from 'react-intl';

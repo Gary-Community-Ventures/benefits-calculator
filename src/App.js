@@ -2,7 +2,7 @@ import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
-import { Context } from './Components/Wrapper/Wrapper.js';
+import { Context } from './Components/Wrapper/Wrapper.tsx';
 import ReactGA from 'react-ga4';
 import FetchScreen from './Components/FetchScreen/FetchScreen';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
@@ -36,8 +36,7 @@ const App = () => {
   const theme = createTheme(styleOverrides);
   const totalSteps = Object.keys(stepDirectory).length + 2;
   const [fetchedScreen, setFetchedScreen] = useState(false);
-  const locale = useContext(Context).locale;
-  const { formData, setFormData } = useContext(Context);
+  const { locale, formData, setFormData } = useContext(Context);
 
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);

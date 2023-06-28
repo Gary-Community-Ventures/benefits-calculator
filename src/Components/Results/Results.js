@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
@@ -29,7 +29,7 @@ export const isNavigationKey = (key) =>
 const Results = () => {
   const { uuid: screenerId } = useParams();
   const navigate = useNavigate();
-  const locale = useContext(Context).locale;
+  const { locale } = useContext(Context);
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const citizenToggleState = useState(false);

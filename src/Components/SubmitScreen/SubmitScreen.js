@@ -1,6 +1,6 @@
 import Loading from '../Loading/Loading';
 import { postScreen, postUser } from '../../apiCalls';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 

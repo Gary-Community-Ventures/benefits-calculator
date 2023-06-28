@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import LinkIcon from '@mui/icons-material/Link';
 import CheckIcon from '@mui/icons-material/Check';
 import { useState, forwardRef, useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import {
   emailHasError,

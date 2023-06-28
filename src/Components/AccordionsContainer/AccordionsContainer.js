@@ -8,7 +8,7 @@ import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBene
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
 import CategoryAccordion from '../CategoryAccordion/CategoryAccordion';
 import { useState, useEffect, useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import './AccordionsContainer.css';
 
 const AccordionsContainer = ({ errorController }) => {

@@ -1,7 +1,7 @@
 import { AppBar, MenuItem, Select, Modal } from '@mui/material';
 import { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';

@@ -1,7 +1,7 @@
 import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState, useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';

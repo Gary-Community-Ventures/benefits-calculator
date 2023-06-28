@@ -2,7 +2,7 @@ import { Button, Card, CardContent, CardActions, Typography, FormControlLabel, C
 import { styled } from '@mui/material/styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
-import { Context } from '../Wrapper/Wrapper.js';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { updateScreen } from '../../Assets/updateScreen';

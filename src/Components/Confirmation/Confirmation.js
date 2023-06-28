@@ -18,7 +18,7 @@ import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBene
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
 import stepDirectory from '../../Assets/stepDirectory';
 import { useContext, useEffect } from 'react';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import Grid from '@mui/material/Grid';
 import EditIcon from '@mui/icons-material/Edit';
 import HomeIcon from '@mui/icons-material/Home';

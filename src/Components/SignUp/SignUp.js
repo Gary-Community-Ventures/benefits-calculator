@@ -1,7 +1,7 @@
 import { Typography, FormControlLabel, Checkbox } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { FormattedMessage } from 'react-intl';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
 import Textfield from '../Textfield/Textfield';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
