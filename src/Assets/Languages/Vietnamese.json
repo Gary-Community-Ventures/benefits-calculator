@@ -328,6 +328,7 @@
   "results.displayResultsFilterButtons-urgentNeedsResources": "Nhu Cầu Ngay",
   "loading.return-loadingText": "Xin vui lòng chờ trong khi chúng tôi thu thập kết quả của quý vị...",
   "results.displaySubheader-loadingDisclaimerText": "Hãy nhớ rằng chúng tôi không thể đảm bảo tính đủ điều kiện, nhưng dựa trên thông tin quý vị cung cấp, chúng tôi tin rằng quý vị có khả năng đủ điều kiện tham gia các chương trình sau đây.",
+  "results.displaySubheader-noResults": "Không tìm thấy kết quả lợi ích",
   "taxYearOptions.noRecentFiling": "Tôi đã không nộp thuế trong 5 năm qua",
   "benefitOptions.tanf": "Trợ cấp tiền mặt và hỗ trợ việc làm (Trợ Cấp Tạm Thời Cho Các Gia Đình Nghèo Khó (TANF/Colorado Works))",
   "benefitOptions.wic": "Trợ cấp thực phẩm và nuôi con bằng sữa mẹ (Chương Trình Dinh Dưỡng Bổ Sung Đặc Biệt dành cho Phụ Nữ, Trẻ Sơ Sinh và Trẻ Em (WIC))",
@@ -424,5 +425,9 @@
   "listAllIncomeStreams.hoursPerWeek": " giờ/tuần ",
   "filterSection.citizenship": "Quyền công dân",
   "filterSection.other": "Khác",
-  "filterSection.reset": "Đặt lại"
+  "filterSection.reset": "Đặt lại",
+  "noResults.p-One": "Có vẻ như bạn có thể không đủ điều kiện cho các lợi ích được bao gồm trong MyFriendBen vào thời điểm này. Nếu bạn cho biết cần một tài nguyên ngay lập tức, vui lòng nhấp vào tab Immediate Needs.",
+  "noResults.p-Two": "Để có thêm tài nguyên, hãy truy cập ",
+  "noResults.p-Three": " để trò chuyện với ai đó trực tuyến hoặc trên điện thoại để có được các tài nguyên mà bạn đang tìm kiếm.",
+  "noResultsOrUrgentNeeds.p-One": "Có vẻ như anh không chỉ ra bất kỳ nhu cầu khẩn cấp nào."
 }

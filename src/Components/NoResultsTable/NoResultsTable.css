@@ -1,0 +1,16 @@
+.ineligibility-link.navigator-info {
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.no-results-content-container {
+  text-align: center;
+  margin: 3rem 0.5rem;
+  line-height: 1.25rem;
+  font-size: 14px;
+  color: #2a2b2a;
+}
+
+.noResults-p {
+  margin: 1rem;
+}
