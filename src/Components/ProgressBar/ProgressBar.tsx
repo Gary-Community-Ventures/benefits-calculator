@@ -2,9 +2,15 @@ import { useParams } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import LinearProgress from '@mui/material/LinearProgress';
 import stepDirectory from '../../Assets/stepDirectory';
+import { FC } from 'react';
+import React from 'react';
 import './ProgressBar.css';
 
-const ProgressBar = ({ step }) => {
+interface Props {
+  step: number;
+}
+
+const ProgressBar: FC<Props> = ({ step }) => {
   const totalSteps = Object.keys(stepDirectory).length + 2;
   let { id } = useParams();
   step = step ?? id;
