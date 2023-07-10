@@ -1,3 +1,4 @@
+import React from 'react';
 import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
@@ -15,9 +16,9 @@ import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlo
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
 import { updateScreen, updateUser } from './Assets/updateScreen';
-import './App.css';
-import ProgressBar from './Components/ProgressBar/ProgressBar';
+import ProgressBar from './Components/ProgressBar/ProgressBar.tsx';
 import stepDirectory from './Assets/stepDirectory';
+import './App.css';
 
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
 ReactGA.initialize(TRACKING_ID, { name: 'main' });
@@ -28,11 +29,11 @@ const App = () => {
   const location = useLocation();
   const urlSearchParams = location.search;
   const [searchParams] = useSearchParams();
-  const isTest = searchParams.get('test') ? searchParams.get('test') : false;
-  const externalId = searchParams.get('externalid') ? searchParams.get('externalid') : null;
+  const isTest = searchParams.get('test') ? true : false;
+  const externalId = searchParams.get('externalid') ? Number(searchParams.get('externalid')) : undefined;
   const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : '';
-  const setReferrerSource = referrer === '' || referrer in referralOptions;
-  const isBIAUser = referrer.toLocaleLowerCase() === 'bia';
+  const setReferrerSource = referrer in referralOptions ? referrer : '';
+  const isBIAUser = referrer !== null && referrer.toLocaleLowerCase() === 'bia';
   const theme = createTheme(styleOverrides);
   const totalSteps = Object.keys(stepDirectory).length + 2;
   const [fetchedScreen, setFetchedScreen] = useState(false);
@@ -80,7 +81,7 @@ const App = () => {
     formData.signUpInfo.sendOffers,
     formData.signUpInfo.sendUpdates,
     formData.hasBenefits,
-    formData.sendOffers,
+    formData.signUpInfo,
   ]);
 
   useEffect(() => {
@@ -159,7 +160,7 @@ const App = () => {
     const isZipcodeQuestionAndCountyIsEmpty = questionName === 'zipcode' && formData.county === '';
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty =
       questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '';
-    const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets === '';
+    const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets === 0;
 
     if (!hasError) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
@@ -209,9 +210,9 @@ const App = () => {
         <CssBaseline />
         <Header handleTextfieldChange={handleTextfieldChange} />
         <Routes>
-          <Route path="/step-0" element={<ProgressBar step="0" />} />
-          <Route path="/:uuid/step-:id" element={<ProgressBar />} />
-          <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
+          <Route path="/step-0" element={<ProgressBar step={0} />} />
+          <Route path="/:uuid/step-:id" element={<ProgressBar step={totalSteps} />} />
+          <Route path="/:uuid/step-:id/:page" element={<ProgressBar step={totalSteps} />} />
           <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
           <Route path="*" element={<></>} />
         </Routes>
