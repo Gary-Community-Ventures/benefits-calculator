@@ -2,18 +2,22 @@ import { useParams } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import LinearProgress from '@mui/material/LinearProgress';
 import stepDirectory from '../../Assets/stepDirectory';
-import { FC } from 'react';
 import React from 'react';
 import './ProgressBar.css';
 
-interface Props {
-  step: number;
+interface ProgressBarProps {
+  step?: number;
 }
 
-const ProgressBar: FC<Props> = ({ step }) => {
+const ProgressBar = ({ step }: ProgressBarProps) => {
   const totalSteps = Object.keys(stepDirectory).length + 2;
-  let { id } = useParams();
-  step = step ?? id;
+  const { id } = useParams();
+  let stepValue: number = 0;
+  if (step !== undefined) {
+    stepValue = step;
+  } else if (id !== undefined) {
+    stepValue = Number(id);
+  }
 
   return (
     <aside className="progress-bar-container">
@@ -31,13 +35,13 @@ const ProgressBar: FC<Props> = ({ step }) => {
           },
         }}
         variant="determinate"
-        value={(step / totalSteps) * 100}
+        value={(stepValue / totalSteps) * 100}
         className="progress-bar"
         aria-label="Progress Bar"
       />
       <p className="step-progress-title">
         <FormattedMessage id="confirmation.return-stepLabel" defaultMessage="Step " />
-        {step}
+        {stepValue}
         <FormattedMessage id="confirmation.return-ofLabel" defaultMessage=" of " />
         {totalSteps}
       </p>
