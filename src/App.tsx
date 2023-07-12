@@ -247,7 +247,6 @@ const App = () => {
                       handleNoAnswerChange={handleNoAnswerChange}
                       handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
                       handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-                      handleHouseholdDataSubmit={handleHouseholdDataSubmit}
                       handleCheckboxChange={handleCheckboxChange}
                     />
                   }
