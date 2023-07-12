@@ -218,7 +218,7 @@ const App = () => {
           <Route path="/step-0" element={<ProgressBar step={0} />} />
           <Route path="/:uuid/step-:id" element={<ProgressBar />} />
           <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
-          <Route path="/:uuid/confirm-information" element={<ProgressBar step={12} />} />
+          <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
           <Route path="*" element={<></>} />
         </Routes>
         <Routes>
