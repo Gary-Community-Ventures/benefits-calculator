@@ -31,8 +31,8 @@ const App = () => {
   const [searchParams] = useSearchParams();
   const isTest = searchParams.get('test') ? true : false;
   const externalId = searchParams.get('externalid') ? Number(searchParams.get('externalid')) : undefined;
-  const referrer = searchParams.get('referrer') ? searchParams.get('referrer') : '';
-  const setReferrerSource = referrer in referralOptions ? referrer : '';
+  const referrer = searchParams.get('referrer') !== null ? searchParams.get('referrer') as string : '';
+  const referrerSource = referrer in referralOptions ? referrer : '';
   const isBIAUser = referrer !== null && referrer.toLocaleLowerCase() === 'bia';
   const theme = createTheme(styleOverrides);
   const totalSteps = Object.keys(stepDirectory).length + 2;
@@ -86,13 +86,18 @@ const App = () => {
 
   useEffect(() => {
     // overrides setFormData above on first render
+    let referrerCode: number | undefined = Number(referrer);
+    if (isNaN(referrerCode)) {
+      referrerCode = undefined;
+    }
+
     setFormData({
       ...formData,
       isTest: isTest,
       externalID: externalId,
-      referralSource: setReferrerSource ? referrer : 'other',
-      referrerCode: referrer,
-      otherSource: setReferrerSource ? '' : referrer,
+      referralSource: referrerSource,
+      referrerCode: referrerCode,
+      otherSource: referrerSource ? '' : referrer,
       urlSearchParams: urlSearchParams,
       isBIAUser: isBIAUser,
     });
@@ -160,7 +165,7 @@ const App = () => {
     const isZipcodeQuestionAndCountyIsEmpty = questionName === 'zipcode' && formData.county === '';
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty =
       questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '';
-    const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets === 0;
+    const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets < 0;
 
     if (!hasError) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
@@ -211,9 +216,9 @@ const App = () => {
         <Header handleTextfieldChange={handleTextfieldChange} />
         <Routes>
           <Route path="/step-0" element={<ProgressBar step={0} />} />
-          <Route path="/:uuid/step-:id" element={<ProgressBar step={totalSteps} />} />
-          <Route path="/:uuid/step-:id/:page" element={<ProgressBar step={totalSteps} />} />
-          <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
+          <Route path="/:uuid/step-:id" element={<ProgressBar />} />
+          <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
+          <Route path="/:uuid/confirm-information" element={<ProgressBar step={12} />} />
           <Route path="*" element={<></>} />
         </Routes>
         <Routes>
