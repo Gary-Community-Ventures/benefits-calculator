@@ -31,7 +31,7 @@ const App = () => {
   const [searchParams] = useSearchParams();
   const isTest = searchParams.get('test') ? true : false;
   const externalId = searchParams.get('externalid') ? Number(searchParams.get('externalid')) : undefined;
-  const referrer = searchParams.get('referrer') !== null ? searchParams.get('referrer') as string : '';
+  const referrer = searchParams.get('referrer') !== null ? (searchParams.get('referrer') as string) : '';
   const referrerSource = referrer in referralOptions ? referrer : '';
   const isBIAUser = referrer !== null && referrer.toLocaleLowerCase() === 'bia';
   const theme = createTheme(styleOverrides);

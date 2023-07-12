@@ -1,6 +1,6 @@
 export interface Expense {
   expenseSourceName: string;
-  expenseAmount: string,
+  expenseAmount: string;
 }
 
 export interface IncomeStream {
@@ -22,7 +22,7 @@ export interface HouseholdData {
   disabled: boolean;
   veteran: boolean;
   hasIncome: boolean;
-  incomeStreams: IncomeStream[],
+  incomeStreams: IncomeStream[];
 }
 
 export interface Benefits {
@@ -101,5 +101,5 @@ export interface FormData {
   signUpInfo: SignUpInfo;
   urlSearchParams: string;
   isBIAUser: boolean;
-  acuteHHConditions: AcuteHHConditions,
+  acuteHHConditions: AcuteHHConditions;
 }

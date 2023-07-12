@@ -1,5 +1,5 @@
-import { ChangeEvent } from "react";
-import { FormData } from "./FormData";
+import { ChangeEvent } from 'react';
+import { FormData } from './FormData';
 
 export interface WrapperContext {
   locale: string;
