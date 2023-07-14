@@ -139,7 +139,7 @@
   "householdDataBlock.createConditionsQuestion-do-these-apply-to-you": "Có bất kỳ phát biểu nào trong số này đúng với quý vị không?",
   "householdDataBlock.createConditionsQuestion-do-these-apply": "Có bất kỳ phát biểu nào trong số này đúng với họ không?",
   "householdDataBlock.createConditionsQuestion-pick": "Quý vị có thể chọn nhiều hơn một lựa chọn.",
-  "conditionOptions.student": "Sinh viên tại một trường cao đẳng, đại học hoặc tổ chức sau trung học khác",
+  "conditionOptions.student": "Sinh viên hoặc sinh viên tương lai tại một trường cao đẳng, đại học hoặc tổ chức sau trung học khác",
   "conditionOptions.pregnant": "Có thai",
   "conditionOptions.unemployed": "Thất nghiệp",
   "conditionOptions.blindOrVisuallyImpaired": "Mù hoặc khiếm thị",
