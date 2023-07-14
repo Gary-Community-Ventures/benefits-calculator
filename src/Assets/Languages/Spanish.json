@@ -140,7 +140,7 @@
   "householdDataBlock.createConditionsQuestion-do-these-apply-to-you": "¿Alguno de estos se aplica a usted?",
   "householdDataBlock.createConditionsQuestion-do-these-apply": "¿Cuál de las siguientes opciones corresponde?",
   "householdDataBlock.createConditionsQuestion-pick": "Puede elegir más de una opcion.",
-  "conditionOptions.student": "Estudiante posible estudiante en un colegio, universidad o otra institución postsecundaria",
+  "conditionOptions.student": "Estudiante o futuro estudiante en un colegio, universidad o otra institución postsecundaria",
   "conditionOptions.pregnant": "Embarazada",
   "conditionOptions.unemployed": "Sin empleo",
   "conditionOptions.blindOrVisuallyImpaired": "Ciego o con problemas de visión",
