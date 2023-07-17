@@ -84,6 +84,7 @@ const Disclaimer = ({ handleCheckboxChange }) => {
       )) || <StyledTypography />}
       <FormControlLabel
         control={<Checkbox checked={formData.agreeToTermsOfService} onChange={handleCheckboxChange} />}
+        onClick={handleCheckboxChange}
         label={
           <FormattedMessage
             id="disclaimer-label"
