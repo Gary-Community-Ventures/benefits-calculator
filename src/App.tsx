@@ -3,6 +3,7 @@ import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
+// @ts-ignore
 import { Context } from './Components/Wrapper/Wrapper.tsx';
 import ReactGA from 'react-ga4';
 import FetchScreen from './Components/FetchScreen/FetchScreen';
@@ -16,15 +17,18 @@ import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlo
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
 import { updateScreen, updateUser } from './Assets/updateScreen';
+// @ts-ignore
 import ProgressBar from './Components/ProgressBar/ProgressBar.tsx';
 import stepDirectory from './Assets/stepDirectory';
 import './App.css';
+import { FixMeLater } from './Types/fixLater.js';
+import { Expense, HouseholdData, IncomeStream } from './Types/FormData.js';
 
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
 if (TRACKING_ID === undefined) {
   throw new Error('TRACKING_ID is not set');
 }
-ReactGA.initialize(TRACKING_ID, { name: 'main' });
+ReactGA.initialize(TRACKING_ID);
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
 const App = () => {
@@ -73,6 +77,7 @@ const App = () => {
 
     if (formData.hasBenefits !== 'true') {
       for (const benefit in formData.benefits) {
+        // @ts-ignore
         updatedFormData.benefits[benefit] = false;
       }
     }
@@ -145,6 +150,7 @@ const App = () => {
       setFormData({ ...formData, signUpInfo: updatedSignUpInfo });
       return;
     } else {
+      // @ts-ignore
       setFormData({ ...formData, [value]: !formData[value] });
     }
   };
@@ -162,8 +168,8 @@ const App = () => {
 
   const handleContinueSubmit = (
     event: Event,
-    errorController,
-    inputToBeValidated,
+    errorController: FixMeLater,
+    inputToBeValidated: FixMeLater,
     stepId: number,
     questionName: string,
     uuid: string,
@@ -183,7 +189,7 @@ const App = () => {
         updateUser(uuid, formData, setFormData, locale.toLowerCase());
         navigate(`/${uuid}/confirm-information`);
       } else if (questionName === 'householdSize') {
-        const updatedHouseholdData = formData.householdData.slice(0, formData.householdSize);
+        const updatedHouseholdData = formData.householdData.slice(0, Number(formData.householdSize));
         const updatedFormData = { ...formData, householdData: updatedHouseholdData };
         updateScreen(uuid, updatedFormData, locale.toLowerCase());
         setFormData(updatedFormData);
@@ -195,21 +201,21 @@ const App = () => {
     }
   };
 
-  const handleIncomeStreamsSubmit = (validatedIncomeStreams, stepId, uuid) => {
+  const handleIncomeStreamsSubmit = (validatedIncomeStreams: IncomeStream[], stepId: number, uuid: string) => {
     const updatedFormData = { ...formData, incomeStreams: validatedIncomeStreams };
     updateScreen(uuid, updatedFormData, locale.toLowerCase());
     setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   };
 
-  const handleExpenseSourcesSubmit = (validatedExpenseSources, stepId, uuid) => {
+  const handleExpenseSourcesSubmit = (validatedExpenseSources: Expense[], stepId: number, uuid: string) => {
     const updatedFormData = { ...formData, expenses: validatedExpenseSources };
     updateScreen(uuid, updatedFormData, locale.toLowerCase());
     setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   };
 
-  const handleHouseholdDataSubmit = (memberData, stepId, uuid) => {
+  const handleHouseholdDataSubmit = (memberData: HouseholdData, stepId: number, uuid: string) => {
     const updatedMembers = [...formData.householdData];
     updatedMembers[stepId] = memberData;
     const updatedFormData = { ...formData, householdData: updatedMembers };
