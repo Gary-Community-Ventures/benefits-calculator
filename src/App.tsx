@@ -160,7 +160,7 @@ const App = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleContinueSubmit = (event: Event, errorController, inputToBeValidated, stepId, questionName, uuid) => {
+  const handleContinueSubmit = (event: Event, errorController, inputToBeValidated, stepId: number, questionName: string, uuid: string) => {
     event.preventDefault();
     errorController.setIsSubmitted(true);
     const hasError = errorController.updateError(inputToBeValidated, formData);
