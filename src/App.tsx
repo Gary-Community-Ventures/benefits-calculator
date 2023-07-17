@@ -106,8 +106,8 @@ const App = () => {
     });
   }, []);
 
-  const handleTextfieldChange = (event) => {
-    const { name, value } = event.target;
+  const handleTextfieldChange = (event: Event) => {
+    const { name, value } = event.target as HTMLInputElement;
     const numberUpToEightDigitsLongRegex = /^\d{0,8}$/; //for zipcode
     const numberUpToTenDigitsLongRegex = /^\d{0,10}$/; //for phone number
     const isFirstLastOrEmail = name === 'firstName' || name === 'lastName' || name === 'email';
@@ -135,10 +135,9 @@ const App = () => {
     }
   };
 
-  const handleCheckboxChange = (event) => {
+  const handleCheckboxChange = (event: Event) => {
     //the value is the name of the formData property for everything except the commConsent
-    const { value } = event.target;
-    const { name } = event.target;
+    const { value, name } = event.target as HTMLInputElement;
 
     if (name === 'commConsent') {
       const updatedCommConsent = !formData.signUpInfo.commConsent;
@@ -156,12 +155,12 @@ const App = () => {
     setFormData({ ...formData, [name]: boolValue });
   };
 
-  const handleNoAnswerChange = (event) => {
-    const { name, value } = event.target;
+  const handleNoAnswerChange = (event: Event) => {
+    const { name, value } = event.target as HTMLInputElement;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleContinueSubmit = (event, errorController, inputToBeValidated, stepId, questionName, uuid) => {
+  const handleContinueSubmit = (event: Event, errorController, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
     errorController.setIsSubmitted(true);
     const hasError = errorController.updateError(inputToBeValidated, formData);
