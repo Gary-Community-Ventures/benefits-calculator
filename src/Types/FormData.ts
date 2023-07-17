@@ -81,8 +81,8 @@ export interface AcuteHHConditions {
 }
 
 export interface FormData {
-  isTest: boolean | undefined;
-  externalID: number | undefined;
+  isTest?: boolean;
+  externalID?: number;
   agreeToTermsOfService: boolean;
   zipcode: string;
   county: string;
@@ -95,9 +95,9 @@ export interface FormData {
   hasBenefits: string;
   benefits: Benefits;
   healthInsurance: HealthInsurance;
-  referralSource: string | undefined;
-  referrerCode: number | undefined;
-  otherSource: string | undefined;
+  referralSource?: string;
+  referrerCode?: number;
+  otherSource?: string;
   signUpInfo: SignUpInfo;
   urlSearchParams: string;
   isBIAUser: boolean;
