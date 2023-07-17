@@ -89,7 +89,7 @@ export interface FormData {
   startTime: string;
   hasExpenses: boolean;
   expenses: Expense[];
-  householdSize: number;
+  householdSize: string;
   householdData: HouseholdData[];
   householdAssets: number;
   hasBenefits: string;
