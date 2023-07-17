@@ -21,6 +21,9 @@ import stepDirectory from './Assets/stepDirectory';
 import './App.css';
 
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
+if (TRACKING_ID === undefined) {
+  throw new Error('TRACKING_ID is not set');
+}
 ReactGA.initialize(TRACKING_ID, { name: 'main' });
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
