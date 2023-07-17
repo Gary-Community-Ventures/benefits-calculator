@@ -150,8 +150,8 @@ const App = () => {
     }
   };
 
-  const handleRadioButtonChange = (event) => {
-    const { name, value } = event.target;
+  const handleRadioButtonChange = (event: Event) => {
+    const { name, value } = event.target as HTMLInputElement;
     let boolValue = value === 'true';
     setFormData({ ...formData, [name]: boolValue });
   };
