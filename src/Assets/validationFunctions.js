@@ -58,6 +58,9 @@ const displayZipcodeHelperText = (zipcode) => {
   }
 };
 
+/**
+ * @deprecated
+ */
 const radiofieldHasError = (radiofield) => {
   return typeof radiofield !== 'boolean';
 };
@@ -363,7 +366,7 @@ const displayHealthInsuranceHelperText = (healthInsuranceSelections) => {
   }
 };
 
-const acuteHHConditionsHasError = (conditions) => {
+const acuteHHConditionsHasError = () => {
   return false;
 };
 

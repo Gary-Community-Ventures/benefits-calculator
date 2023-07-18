@@ -19,8 +19,8 @@ import { updateScreen, updateUser } from './Assets/updateScreen';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import stepDirectory from './Assets/stepDirectory';
 import './App.css';
-import { FixMeLater } from './Types/fixLater.js';
-import { Expense, HouseholdData, IncomeStream } from './Types/FormData.js';
+import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
+import { useErrorController } from './Assets/validationFunctions';
 
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
 if (TRACKING_ID === undefined) {
@@ -165,8 +165,8 @@ const App = () => {
 
   const handleContinueSubmit = (
     event: Event,
-    errorController: FixMeLater,
-    inputToBeValidated: FixMeLater,
+    errorController: ReturnType<typeof useErrorController>, // update this when validationFunctions is converted to typescript
+    inputToBeValidated: string | number | Expense[] | SignUpInfo | HealthInsurance,
     stepId: number,
     questionName: string,
     uuid: string,
