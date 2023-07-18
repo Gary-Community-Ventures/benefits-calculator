@@ -3,8 +3,7 @@ import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
-// @ts-ignore
-import { Context } from './Components/Wrapper/Wrapper.tsx';
+import { Context } from './Components/Wrapper/Wrapper';
 import ReactGA from 'react-ga4';
 import FetchScreen from './Components/FetchScreen/FetchScreen';
 import Disclaimer from './Components/Disclaimer/Disclaimer';
@@ -17,8 +16,7 @@ import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlo
 import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
 import { updateScreen, updateUser } from './Assets/updateScreen';
-// @ts-ignore
-import ProgressBar from './Components/ProgressBar/ProgressBar.tsx';
+import ProgressBar from './Components/ProgressBar/ProgressBar';
 import stepDirectory from './Assets/stepDirectory';
 import './App.css';
 import { FixMeLater } from './Types/fixLater.js';
