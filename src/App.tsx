@@ -89,7 +89,6 @@ const App = () => {
     formData.signUpInfo.sendOffers,
     formData.signUpInfo.sendUpdates,
     formData.hasBenefits,
-    formData.signUpInfo,
   ]);
 
   useEffect(() => {
