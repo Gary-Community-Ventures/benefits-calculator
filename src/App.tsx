@@ -1,4 +1,3 @@
-import React from 'react';
 import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';

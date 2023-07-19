@@ -19,7 +19,7 @@
 .ineligibility-link:hover {
   text-decoration-color: inherit;
   cursor: pointer;
-  color: #4ecdc4;
+  color: var(--secondary-color);
 }
 
 .space-around {

@@ -1,25 +1,45 @@
 import { useState } from 'react';
 
-interface ITheme {
+export interface ITheme {
   primaryColor: string;
   secondaryColor: string;
+  cssVariables: { '--primary-color': string; '--secondary-color': string };
 }
 
-const themes: { [key: string]: ITheme } = {
+interface IThemes {
+  default: ITheme;
+  twoOneOne: ITheme;
+}
+
+const themes: IThemes = {
   default: {
     primaryColor: '#037A93',
-    secondaryColor: '#4ecdc4',
+    secondaryColor: '#4ECDC4',
+    cssVariables: {
+      '--primary-color': '#037A93',
+      '--secondary-color': '4ECDC4',
+    },
   },
   twoOneOne: {
     primaryColor: '#005191',
     secondaryColor: '#539ED0',
+    cssVariables: {
+      '--primary-color': '#005191',
+      '--secondary-color': '#539ED0',
+    },
   },
 };
 
-function useStyle(initialStyle: string) {
-  const [style, setStyle] = useState(initialStyle);
+export type StyleReturn = [ITheme, React.Dispatch<React.SetStateAction<'default' | 'twoOneOne'>>, keyof IThemes];
 
-  const theme = themes[style];
+export default function useStyle(initialStyle: keyof IThemes): StyleReturn {
+  const [themeName, setTheme] = useState(initialStyle);
 
-  return { theme: theme, setStyle: setStyle };
+  const theme = themes[themeName];
+
+  for (const [key, value] of Object.entries(theme.cssVariables)) {
+    document.documentElement.style.setProperty(key, value);
+  }
+
+  return [theme, setTheme, themeName];
 }
