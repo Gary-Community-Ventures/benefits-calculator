@@ -223,6 +223,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const createQuestionHeader = (personIndex) => {
     let header;
+    const headOfHHInfoWasEntered = formData.householdData[0];
+
     if (personIndex === 1) {
       header = (
         <h1 className="question-label household-data-q-underline">
@@ -242,11 +244,15 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <>
         {header}
-        <h2 className="household-data-sub-header">
-          <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
-        </h2>
-        <div>{formData.householdData.map(createMembersAdded)}</div>
-        <div className="household-data-q-underline"></div>
+        {headOfHHInfoWasEntered && (
+          <>
+            <h2 className="household-data-sub-header">
+              <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
+            </h2>
+            <div>{formData.householdData.map(createMembersAdded)}</div>
+            <div className="household-data-q-underline"></div>
+          </>
+        )}
       </>
     );
   };
@@ -422,7 +428,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     );
   };
 
-  const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
+  const handleContinueSubmit = (event, uuid) => {
     event.preventDefault();
     ageErrorController.setIsSubmitted(true);
     ageErrorController.updateError(householdData.age);
