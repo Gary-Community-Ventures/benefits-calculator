@@ -223,7 +223,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const createQuestionHeader = (personIndex) => {
     let header;
-    const headOfHHInfoWasEntered = formData.householdData.length >= 1 ;
+    const headOfHHInfoWasEntered = formData.householdData.length >= 1;
 
     if (personIndex === 1) {
       header = (
@@ -428,7 +428,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     );
   };
 
-  const handleContinueSubmit = (event, uuid) => {
+  const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
     ageErrorController.setIsSubmitted(true);
     ageErrorController.updateError(householdData.age);
