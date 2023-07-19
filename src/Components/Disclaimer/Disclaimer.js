@@ -71,14 +71,14 @@ const Disclaimer = ({ handleCheckboxChange }) => {
           </Typography>
         </CardContent>
       </Card>
-      <Typography color="text.secondary">
+      <Typography color="text.secondary" className="top-bottom-margin">
         <FormattedMessage
           id="disclaimer.helper-text"
           defaultMessage="Check the box below and then click the Continue button to get started."
         />
       </Typography>
       {(buttonWasClicked && formData.agreeToTermsOfService === false && (
-        <StyledTypography>
+        <StyledTypography className="top-bottom-margin">
           <FormattedMessage id="disclaimer.error" defaultMessage="Please check the box below to continue." />
         </StyledTypography>
       )) || <StyledTypography />}
@@ -91,7 +91,6 @@ const Disclaimer = ({ handleCheckboxChange }) => {
           />
         }
         value="agreeToTermsOfService"
-        sx={{ mt: '-.5rem' }}
       />
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <PreviousButton />
