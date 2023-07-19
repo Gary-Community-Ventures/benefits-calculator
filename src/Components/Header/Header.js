@@ -70,7 +70,7 @@ const Header = ({ handleTextfieldChange }) => {
   return (
     <nav>
       <AppBar position="sticky" id="nav-container" sx={{ flexDirection: 'row' }}>
-        <a href={`/step-0${urlSearchParams}`}>
+        <a href={`/step-0${urlSearchParams}`} className="home-link">
           <img
             src={isBIAUser ? BIAMFBLogo : MFBLogo}
             alt={isBIAUser ? 'benefits in action and my friend ben home page button' : 'my friend ben home page button'}

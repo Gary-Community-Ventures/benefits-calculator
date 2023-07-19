@@ -1,7 +1,13 @@
+.home-link {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
 .logo {
   max-width: 175px;
   max-height: 2rem;
-  margin-left: 1rem;
+  margin: 0 10%;
   display: block;
 }
 
@@ -40,18 +46,7 @@
 }
 
 @media (max-width: 400px) {
-  #nav-container {
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: baseline;
-    height: 80px;
-  }
-
-  .icon-wrapper {
-    margin-left: 1rem;
-  }
-
   .logo {
-    margin: 0;
+    width: 80%;
   }
 }
