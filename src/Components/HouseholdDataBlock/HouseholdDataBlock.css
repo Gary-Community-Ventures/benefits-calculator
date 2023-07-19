@@ -14,7 +14,7 @@
 }
 
 .member-added-relationship {
-  color: #037a93;
+  color: var(--primary-color);
 }
 
 .radio-question {
