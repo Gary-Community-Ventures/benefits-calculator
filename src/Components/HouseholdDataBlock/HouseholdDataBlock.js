@@ -223,7 +223,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const createQuestionHeader = (personIndex) => {
     let header;
-    const headOfHHInfoWasEntered = formData.householdData[0];
+    const headOfHHInfoWasEntered = formData.householdData.length >= 1 ;
 
     if (personIndex === 1) {
       header = (
