@@ -139,7 +139,7 @@
   "householdDataBlock.createConditionsQuestion-do-these-apply-to-you": "Do any of these apply to you?",
   "householdDataBlock.createConditionsQuestion-do-these-apply": "Do any of these apply to them?",
   "householdDataBlock.createConditionsQuestion-pick": "It's OK to pick more than one.",
-  "conditionOptions.student": "Student at a college, university, or other post-secondary institution",
+  "conditionOptions.student": "Student or prospective student at a college, university, or other post-secondary institution",
   "conditionOptions.pregnant": "Pregnant",
   "conditionOptions.unemployed": "Unemployed",
   "conditionOptions.blindOrVisuallyImpaired": "Blind or visually impaired",
@@ -328,6 +328,7 @@
   "results.displayResultsFilterButtons-urgentNeedsResources": "Immediate Needs",
   "loading.return-loadingText": "Please wait while we gather your results...",
   "results.displaySubheader-loadingDisclaimerText": "Remember that we can't guarantee eligibility, but based on the information you provided, we believe you are likely eligible for the following programs.",
+  "results.displaySubheader-noResults": "No Benefits Results Found",
   "taxYearOptions.noRecentFiling": "I have not filed taxes in the last 5 years",
   "benefitOptions.tanf": "Cash assistance and work support (Temporary Assistance for Needy Families (TANF/Colorado Works))",
   "benefitOptions.wic": "Food and breastfeeding assistance (Special Supplemental Nutrition Program for Women, Infants, and Children (WIC))",
@@ -424,5 +425,9 @@
   "listAllIncomeStreams.hoursPerWeek": " hours/week ",
   "filterSection.citizenship": "Citizenship",
   "filterSection.other": "Other",
-  "filterSection.reset": "Reset"
+  "filterSection.reset": "Reset",
+  "noResults.p-One": "It looks like you may not qualify for benefits included in MyFriendBen at this time. If you indicated need for an immediate resource, please click on the “Immediate Needs” tab.",
+  "noResults.p-Two": "For additional resources, visit ",
+  "noResults.p-Three": " to chat with someone online or on the phone to get the resources you’re looking for.",
+  "noResultsOrUrgentNeeds.p-One": "It looks like you didn’t indicate any immediate needs."
 }

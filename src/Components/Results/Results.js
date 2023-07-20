@@ -7,6 +7,7 @@ import FilterSection from '../FilterSection/FilterSection';
 import ResultsError from '../ResultsError/ResultsError';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import Loading from '../Loading/Loading';
+import NoResultsTable from '../NoResultsTable/NoResultsTable';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 import Grid from '@mui/material/Grid';
@@ -262,8 +263,16 @@ const Results = () => {
   };
 
   const displaySubheader = () => {
-    return (
-      <>
+    if (!totalEligiblePrograms(results.programs)) {
+      return (
+        <Grid xs={12} item>
+          <h1 className="bottom-border program-value-header">
+            <FormattedMessage id="results.displaySubheader-noResults" defaultMessage="No Benefits Results Found" />
+          </h1>
+        </Grid>
+      );
+    } else {
+      return (
         <Grid xs={12} item>
           <h1 className="bottom-border program-value-header">
             {totalEligiblePrograms(results.programs)}
@@ -277,8 +286,8 @@ const Results = () => {
             />
           </h1>
         </Grid>
-      </>
-    );
+      );
+    }
   };
 
   const DataGridRows = (results) => {
@@ -426,7 +435,10 @@ const Results = () => {
   };
 
   const groupingColDef = {
-    headerName: 'Benefit',
+    headerName: intl.formatMessage({
+      id: 'results.resultsTable-benefitLabel',
+      defaultMessage: 'Benefit',
+    }),
     flex: 1,
     colSpan: ({ row }) => {
       if (row.path.indexOf('Detail') !== -1) {
@@ -442,7 +454,7 @@ const Results = () => {
     const rows = DataGridRows(results);
 
     const nameHeader = intl.formatMessage({
-      id: 'results.resultsTable-timeToApply',
+      id: 'results.resultsTable-benefitLabel',
       defaultMessage: 'Benefit',
     });
     const valueHeader = intl.formatMessage({
@@ -645,8 +657,12 @@ const Results = () => {
     );
   };
 
-  const hasUrgentNeeds = () => {
-    return results.rawResponse.urgent_needs.es.length > 0;
+  const renderDataGridOrNoResultsTable = () => {
+    if (totalEligiblePrograms(results.programs)) {
+      return DataGridTable(results.programs);
+    } else {
+      return <NoResultsTable />;
+    }
   };
 
   return (
@@ -659,10 +675,14 @@ const Results = () => {
             <>
               {displayHeaderSection()}
               <Grid xs={12} item={true}>
-                {hasUrgentNeeds() && displayBenefitAndImmedNeedsBtns()}
-                {filterResultsButton === 'benefits' && DataGridTable(results.programs)}
+                {displayBenefitAndImmedNeedsBtns()}
+                {filterResultsButton === 'benefits' && renderDataGridOrNoResultsTable()}
                 {filterResultsButton === 'urgentNeeds' && (
-                  <UrgentNeedsTable urgentNeedsPrograms={results.rawResponse.urgent_needs} locale={locale} />
+                  <UrgentNeedsTable
+                    urgentNeedsPrograms={results.rawResponse.urgent_needs}
+                    locale={locale}
+                    totalEligiblePrograms={totalEligiblePrograms(results.programs)}
+                  />
                 )}
               </Grid>
               <Button
