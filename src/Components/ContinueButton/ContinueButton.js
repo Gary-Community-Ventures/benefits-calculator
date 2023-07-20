@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useContext, useEffect } from 'react';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 
 const ContinueButton = ({ handleContinueSubmit, errorController, inputName, questionName }) => {
   const { formData } = useContext(Context);

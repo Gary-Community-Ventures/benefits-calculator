@@ -58,6 +58,9 @@ const displayZipcodeHelperText = (zipcode) => {
   }
 };
 
+/**
+ * @deprecated
+ */
 const radiofieldHasError = (radiofield) => {
   return typeof radiofield !== 'boolean';
 };
@@ -147,7 +150,7 @@ const displayHouseholdSizeHelperText = (sizeOfHousehold) => {
 };
 
 const householdAssetsHasError = (householdAssets) => {
-  return householdAssets < 0 || householdAssets === '';
+  return householdAssets < 0;
 };
 
 const displayHouseholdAssetsHelperText = (householdAssets) => {
@@ -363,7 +366,7 @@ const displayHealthInsuranceHelperText = (healthInsuranceSelections) => {
   }
 };
 
-const acuteHHConditionsHasError = (conditions) => {
+const acuteHHConditionsHasError = () => {
   return false;
 };
 

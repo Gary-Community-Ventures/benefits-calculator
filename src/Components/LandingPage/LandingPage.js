@@ -1,6 +1,6 @@
 import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
 import { useContext, useEffect } from 'react';
-import { Context } from '../Wrapper/Wrapper.js';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createScreen } from '../../Assets/updateScreen.js';

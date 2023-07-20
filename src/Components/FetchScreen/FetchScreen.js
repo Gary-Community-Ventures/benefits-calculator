@@ -4,7 +4,7 @@ import { getScreen } from '../../apiCalls';
 import referralOptions from '../../Assets/referralOptions';
 import loading from '../../Assets/loading-icon.png';
 import './FetchScreen.css';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 
 const FetchScreen = ({ setFetchedScreen }) => {
   const { formData, setFormData } = useContext(Context);

@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { useState, useContext, useEffect } from 'react';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ExpenseQuestion from './ExpenseQuestion';

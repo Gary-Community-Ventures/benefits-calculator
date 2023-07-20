@@ -20,7 +20,7 @@ import { FormattedMessage } from 'react-intl';
 import './HouseholdDataBlock.css';
 import stepDirectory from '../../Assets/stepDirectory';
 import PreviousButton from '../PreviousButton/PreviousButton';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);

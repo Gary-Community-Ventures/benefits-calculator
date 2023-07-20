@@ -278,7 +278,7 @@
   "confirmation.displayAllFormData-healthInsurance": "Household Insurance",
   "confirmation.displayAllFormData-acuteHHConditions": "Immediate Needs",
   "confirmation.none": " None",
-  "confirmation.confirmation.noIncome": " None",
+  "confirmation.noIncome": " None",
   "confirmation.residenceInfo": "Residence Information",
   "frequencyOptions.weekly": "every week",
   "frequencyOptions.biweekly": "every 2 weeks",

@@ -1,7 +1,7 @@
 import { FormControl, Select, MenuItem, InputLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper.tsx';
 
 const StyledSelectfield = styled(Select)({
   marginBottom: 20,
