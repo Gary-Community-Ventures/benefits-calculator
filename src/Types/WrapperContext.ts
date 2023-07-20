@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import { FormData } from './FormData';
 import { ITheme } from '../Assets/styleController';
 
@@ -9,4 +8,5 @@ export interface WrapperContext {
   formData: FormData;
   setFormData: (formData: FormData) => void;
   theme: ITheme;
+  styleOverride: any;
 }

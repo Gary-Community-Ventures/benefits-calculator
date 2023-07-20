@@ -12,7 +12,6 @@ import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
 import LandingPage from './Components/LandingPage/LandingPage';
 import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlock.js';
-import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
 import { updateScreen, updateUser } from './Assets/updateScreen';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
@@ -38,10 +37,14 @@ const App = () => {
   const referrer = searchParams.get('referrer') !== null ? (searchParams.get('referrer') as string) : '';
   const referrerSource = referrer in referralOptions ? referrer : '';
   const isBIAUser = referrer !== null && referrer.toLocaleLowerCase() === 'bia';
-  const theme = createTheme(styleOverrides);
   const totalSteps = Object.keys(stepDirectory).length + 2;
   const [fetchedScreen, setFetchedScreen] = useState(false);
-  const { locale, formData, setFormData } = useContext(Context);
+  const { locale, formData, setFormData, styleOverride } = useContext(Context);
+  const [theme, setTheme] = useState(createTheme(styleOverride));
+
+  useEffect(() => {
+    setTheme(createTheme(styleOverride));
+  }, [styleOverride]);
 
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);

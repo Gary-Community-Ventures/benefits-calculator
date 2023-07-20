@@ -30,9 +30,68 @@ const themes: IThemes = {
   },
 };
 
-export type StyleReturn = [ITheme, React.Dispatch<React.SetStateAction<'default' | 'twoOneOne'>>, keyof IThemes];
+type ThemeReturnType = [ITheme, React.Dispatch<React.SetStateAction<'default' | 'twoOneOne'>>, any];
 
-export default function useStyle(initialStyle: keyof IThemes): StyleReturn {
+function generateMuiOverides(theme: ITheme) {
+  const blueColor = theme.primaryColor;
+  const greenColor = theme.secondaryColor;
+  const blackColor = '#2A2B2A';
+
+  return {
+    components: {
+      // Name of the component
+      MuiButton: {
+        styleOverrides: {
+          // Name of the slot
+          root: {
+            // Some CSS
+            backgroundColor: blueColor,
+            ':hover': {
+              backgroundColor: greenColor,
+            },
+          },
+        },
+      },
+      MuiAppBar: {
+        styleOverrides: {
+          root: {
+            backgroundColor: blackColor,
+          },
+        },
+      },
+      MuiCheckbox: {
+        styleOverrides: {
+          root: {
+            '&.Mui-checked': {
+              color: blueColor,
+            },
+          },
+        },
+      },
+      MuiRadio: {
+        styleOverrides: {
+          root: {
+            '&.Mui-checked': {
+              color: blueColor,
+            },
+          },
+        },
+      },
+      MuiLink: {
+        styleOverrides: {
+          root: {
+            color: blueColor,
+            '&:hover': {
+              color: greenColor,
+            },
+          },
+        },
+      },
+    },
+  };
+}
+
+export default function useStyle(initialStyle: keyof IThemes): ThemeReturnType {
   const [themeName, setTheme] = useState(initialStyle);
 
   const theme = themes[themeName];
@@ -41,5 +100,7 @@ export default function useStyle(initialStyle: keyof IThemes): StyleReturn {
     document.documentElement.style.setProperty(key, value);
   }
 
-  return [theme, setTheme, themeName];
+  const styleOverrides = generateMuiOverides(theme);
+
+  return [theme, setTheme, styleOverrides];
 }

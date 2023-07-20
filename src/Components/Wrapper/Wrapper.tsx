@@ -87,7 +87,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   let defaultMessages: Language = defaultLanguage === 'en-US' ? English : Spanish;
   const pathname = window.location.pathname;
 
-  const [theme, setTheme, themeName] = useStyle('twoOneOne');
+  const [theme, setTheme, styleOverride] = useStyle('twoOneOne');
 
   if (pathname.includes('/es')) {
     defaultLanguage = 'es';
@@ -140,7 +140,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
   return (
-    <Context.Provider value={{ locale, setLocale, selectLanguage, formData, setFormData, theme }}>
+    <Context.Provider value={{ locale, setLocale, selectLanguage, formData, setFormData, theme, styleOverride }}>
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
         {props.children}
       </IntlProvider>
