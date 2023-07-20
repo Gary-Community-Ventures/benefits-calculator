@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from '@mui/material';
+import { FormControl, Select, MenuItem, InputLabel, Button } from '@mui/material';
 import {
   useErrorController,
   hoursWorkedValueHasError,

@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { useState } from 'react';
 
 const CitizenshipPopover = ({ updateFilter, citizenToggleState }) => {
   const [citizenshipToggle, setCitizenshipToggle] = citizenToggleState;
