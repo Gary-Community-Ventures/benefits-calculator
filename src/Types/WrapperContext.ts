@@ -8,5 +8,6 @@ export interface WrapperContext {
   formData: FormData;
   setFormData: (formData: FormData) => void;
   theme: ITheme;
+  setTheme: React.Dispatch<React.SetStateAction<'default' | 'twoOneOne'>>;
   styleOverride: any;
 }

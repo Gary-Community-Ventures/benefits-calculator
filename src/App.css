@@ -7,6 +7,7 @@
   margin: 0 auto 20px auto;
   justify-content: center;
   padding: 1rem;
+  max-width: var(--main-max-width);
 }
 
 @media only screen and (max-device-width: 600px) {

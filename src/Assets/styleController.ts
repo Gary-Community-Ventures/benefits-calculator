@@ -3,7 +3,12 @@ import { useState } from 'react';
 export interface ITheme {
   primaryColor: string;
   secondaryColor: string;
-  cssVariables: { '--primary-color': string; '--secondary-color': string };
+  cssVariables: {
+    '--primary-color': string;
+    '--secondary-color': string;
+    '--main-max-width': string;
+    'font-size': string;
+  };
 }
 
 interface IThemes {
@@ -18,6 +23,8 @@ const themes: IThemes = {
     cssVariables: {
       '--primary-color': '#037A93',
       '--secondary-color': '4ECDC4',
+      '--main-max-width': '99999rem',
+      'font-size': '16px',
     },
   },
   twoOneOne: {
@@ -26,6 +33,8 @@ const themes: IThemes = {
     cssVariables: {
       '--primary-color': '#005191',
       '--secondary-color': '#539ED0',
+      '--main-max-width': '1310px',
+      'font-size': '18px',
     },
   },
 };
@@ -38,6 +47,11 @@ function generateMuiOverides(theme: ITheme) {
   const blackColor = '#2A2B2A';
 
   return {
+    palette: {
+      primary: {
+        main: blueColor,
+      },
+    },
     components: {
       // Name of the component
       MuiButton: {

@@ -140,7 +140,9 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
   return (
-    <Context.Provider value={{ locale, setLocale, selectLanguage, formData, setFormData, theme, styleOverride }}>
+    <Context.Provider
+      value={{ locale, setLocale, selectLanguage, formData, setFormData, theme, setTheme, styleOverride }}
+    >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
         {props.children}
       </IntlProvider>

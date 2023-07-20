@@ -22,7 +22,7 @@ const StyledDeleteButton = styled(Button)({
   height: '40px',
   minWidth: 0,
   padding: 0,
-  fontSize: '20px',
+  fontSize: '1.25rem',
 });
 
 const IncomeQuestion = ({

@@ -96,7 +96,7 @@ export interface FormData {
   benefits: Benefits;
   healthInsurance: HealthInsurance;
   referralSource?: string;
-  referrerCode?: number;
+  referrerCode?: string;
   otherSource?: string;
   signUpInfo: SignUpInfo;
   urlSearchParams: string;

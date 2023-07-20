@@ -9,7 +9,7 @@
 button.MuiButton-root.reset-button {
   padding: 0.25rem;
   border-radius: 3rem;
-  font-size: 12.8px;
+  font-size: 0.8rem;
   color: var(--primary-color);
   background-color: #ffffff;
 }
@@ -20,13 +20,13 @@ button.MuiButton-root.filter-button {
   padding: calc(0.25rem + 1px);
   border-radius: 3rem;
   color: #2a2b2a;
-  font-size: 12.8px;
+  font-size: 0.8rem;
 }
 
 button.MuiButton-root.active-filter {
   background-color: #e5f4f8;
   padding: calc(0.25rem + 0px);
-  border: 2px solid rgba(0, 150, 176);
+  border: 2px solid var(--primary-color);
 }
 
 .MuiButton-root.filter-button.citizen,
@@ -36,6 +36,6 @@ button.MuiButton-root.active-filter {
 
 @media (max-width: 420px) {
   .MuiButton-root.filter-button {
-    font-size: 11.8px;
+    font-size: 0.738rem;
   }
 }
