@@ -87,7 +87,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   let defaultMessages: Language = defaultLanguage === 'en-US' ? English : Spanish;
   const pathname = window.location.pathname;
 
-  const [theme, setTheme, styleOverride] = useStyle('twoOneOne');
+  const [theme, setTheme, styleOverride] = useStyle('default');
 
   if (pathname.includes('/es')) {
     defaultLanguage = 'es';

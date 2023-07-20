@@ -58,9 +58,6 @@ const displayZipcodeHelperText = (zipcode) => {
   }
 };
 
-/**
- * @deprecated
- */
 const radiofieldHasError = (radiofield) => {
   return typeof radiofield !== 'boolean';
 };
