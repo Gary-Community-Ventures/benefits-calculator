@@ -15,6 +15,10 @@
   margin-left: 10%;
 }
 
+.MuiSvgIcon-root.edit-icon {
+  color: #2a2b2a;
+}
+
 .edit-icon:hover {
   cursor: pointer;
 }
@@ -41,6 +45,10 @@
   color: #2a2b2a;
   height: 4rem;
   width: 4rem;
+}
+
+.MuiSvgIcon-root.edit-button {
+  color: #2a2b2a;
 }
 
 @media (max-width: 630px) {
