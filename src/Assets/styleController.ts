@@ -6,6 +6,7 @@ export interface ITheme {
   cssVariables: {
     '--primary-color': string;
     '--secondary-color': string;
+    '--confirmation-background': string;
     '--main-max-width': string;
     'font-size': string;
   };
@@ -23,6 +24,7 @@ const themes: IThemes = {
     cssVariables: {
       '--primary-color': '#037A93',
       '--secondary-color': '4ECDC4',
+      '--confirmation-background': '#D3F2F0',
       '--main-max-width': '99999rem',
       'font-size': '16px',
     },
@@ -33,6 +35,7 @@ const themes: IThemes = {
     cssVariables: {
       '--primary-color': '#005191',
       '--secondary-color': '#539ED0',
+      '--confirmation-background': '#D4E7F2',
       '--main-max-width': '1310px',
       'font-size': '18px',
     },
