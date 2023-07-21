@@ -47,10 +47,6 @@
   width: 4rem;
 }
 
-.MuiSvgIcon-root.edit-button {
-  color: #2a2b2a;
-}
-
 @media (max-width: 630px) {
   .confirmation-container {
     margin: 0;
