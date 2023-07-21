@@ -30,7 +30,7 @@ export const isNavigationKey = (key) =>
 const Results = () => {
   const { uuid: screenerId } = useParams();
   const navigate = useNavigate();
-  const { locale } = useContext(Context);
+  const { locale, theme } = useContext(Context);
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const citizenToggleState = useState(false);
@@ -510,7 +510,7 @@ const Results = () => {
         </div>
         {filt.category !== false && (
           <>
-            <Toolbar sx={{ border: 1, backgroundColor: '#037A93', color: 'white' }}>
+            <Toolbar sx={{ border: 1, backgroundColor: theme.primaryColor, color: 'white' }}>
               <span className="space-around border-right">{filt.category.value}</span>
               <span className="space-around">
                 ${totalDollarAmount(results, filt.category.value).toLocaleString()}{' '}

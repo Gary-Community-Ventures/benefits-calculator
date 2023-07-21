@@ -2,7 +2,8 @@ import { useParams } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import LinearProgress from '@mui/material/LinearProgress';
 import stepDirectory from '../../Assets/stepDirectory';
-import React from 'react';
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import './ProgressBar.css';
 
 interface ProgressBarProps {
@@ -10,6 +11,7 @@ interface ProgressBarProps {
 }
 
 const ProgressBar = ({ step }: ProgressBarProps) => {
+  const { theme } = useContext(Context);
   const totalSteps = Object.keys(stepDirectory).length + 2;
   const { id } = useParams();
   let stepValue: number = 0;
@@ -19,21 +21,23 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
     stepValue = Number(id);
   }
 
+  const progressBarStyles = {
+    marginBottom: '5px',
+    backgroundColor: '#d6d6d6c4',
+    border: '1px solid #B0B0B0',
+    borderRadius: '500rem;',
+    height: '1rem',
+    boxShadow: 'inset -1px 1px 3px rgb(0 0 0 / 0.2)',
+    '& .MuiLinearProgress-bar': {
+      background: `linear-gradient(90deg, ${theme.primaryColor} 0%, ${theme.secondaryColor} 100%)`,
+      borderRadius: '500rem;',
+    },
+  };
+
   return (
     <aside className="progress-bar-container">
       <LinearProgress
-        sx={{
-          marginBottom: '5px',
-          backgroundColor: '#d6d6d6c4',
-          border: '1px solid #B0B0B0',
-          borderRadius: '500rem;',
-          height: '1rem',
-          boxShadow: 'inset -1px 1px 3px rgb(0 0 0 / 0.2)',
-          '& .MuiLinearProgress-bar': {
-            background: 'linear-gradient(90deg, hsla(189, 100%, 35%, 1) 0%, hsla(176, 56%, 55%, 1) 100%)',
-            borderRadius: '500rem;',
-          },
-        }}
+        sx={progressBarStyles}
         variant="determinate"
         value={(stepValue / totalSteps) * 100}
         className="progress-bar"

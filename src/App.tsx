@@ -1,4 +1,3 @@
-import React from 'react';
 import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
@@ -13,7 +12,6 @@ import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
 import LandingPage from './Components/LandingPage/LandingPage';
 import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlock.js';
-import styleOverrides from './Assets/styleOverrides';
 import referralOptions from './Assets/referralOptions';
 import { updateScreen, updateUser } from './Assets/updateScreen';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
@@ -39,10 +37,19 @@ const App = () => {
   const referrer = searchParams.get('referrer') !== null ? (searchParams.get('referrer') as string) : '';
   const referrerSource = referrer in referralOptions ? referrer : '';
   const isBIAUser = referrer !== null && referrer.toLocaleLowerCase() === 'bia';
-  const theme = createTheme(styleOverrides);
   const totalSteps = Object.keys(stepDirectory).length + 2;
   const [fetchedScreen, setFetchedScreen] = useState(false);
-  const { locale, formData, setFormData } = useContext(Context);
+  const { locale, formData, setFormData, styleOverride, setTheme: changeTheme } = useContext(Context);
+  const [theme, setTheme] = useState(createTheme(styleOverride));
+
+  useEffect(() => {
+    const theme = formData.referrerCode === '211co' ? 'twoOneOne' : 'default';
+    changeTheme(theme);
+  }, [formData.referrerCode]);
+
+  useEffect(() => {
+    setTheme(createTheme(styleOverride));
+  }, [styleOverride]);
 
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
@@ -90,18 +97,12 @@ const App = () => {
   ]);
 
   useEffect(() => {
-    // overrides setFormData above on first render
-    let referrerCode: number | undefined = Number(referrer);
-    if (isNaN(referrerCode)) {
-      referrerCode = undefined;
-    }
-
     setFormData({
       ...formData,
       isTest: isTest,
       externalID: externalId,
       referralSource: referrerSource,
-      referrerCode: referrerCode,
+      referrerCode: referrer,
       otherSource: referrerSource ? '' : referrer,
       urlSearchParams: urlSearchParams,
       isBIAUser: isBIAUser,

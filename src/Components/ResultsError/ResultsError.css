@@ -5,8 +5,8 @@
 }
 
 svg.error-icon {
-  color: #037a93;
-  font-size: 60px;
+  color: var(--primary-color);
+  font-size: 4rem;
   margin: 3rem 0 1rem 0;
 }
 

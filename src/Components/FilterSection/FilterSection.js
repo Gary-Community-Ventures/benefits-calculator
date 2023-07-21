@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import CitizenshipPopover from './CitizenshipPopover';
 import OtherPopover from './OtherPopover';
@@ -15,6 +16,7 @@ const FilterSection = ({
   eligibilityState,
   alreadyHasToggleState,
 }) => {
+  const { theme } = useContext(Context);
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState(null);
   const [otherPopoverAnchor, setOtherPopoverAnchor] = useState(null);
 
@@ -85,7 +87,7 @@ const FilterSection = ({
 
   return (
     <div className="filter-button-container">
-      <FilterListIcon sx={{ mr: '.5rem', color: '#037A93' }} />
+      <FilterListIcon sx={{ mr: '.5rem', color: theme.primaryColor }} />
       <Button
         id="citizenship"
         variant="contained"

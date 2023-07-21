@@ -9,7 +9,7 @@
 
 .ineligibility-link {
   margin: 0;
-  color: #037a93;
+  color: var(--primary-color);
   -webkit-text-decoration: underline;
   text-decoration: underline;
   text-decoration-color: #1976d266;
@@ -19,7 +19,7 @@
 .ineligibility-link:hover {
   text-decoration-color: inherit;
   cursor: pointer;
-  color: #4ecdc4;
+  color: var(--secondary-color);
 }
 
 .space-around {

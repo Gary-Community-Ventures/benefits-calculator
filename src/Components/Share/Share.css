@@ -22,7 +22,7 @@ button {
 
 .share-header {
   text-align: center;
-  font-size: large;
+  font-size: 1.1rem;
   margin-bottom: 5px;
 }
 
@@ -52,7 +52,7 @@ button {
   margin-left: 0;
   max-width: 0px;
   transition: max-width 1s, margin 0.3s;
-  font-size: 14px;
+  font-size: 0.88rem;
   cursor: pointer;
 }
 

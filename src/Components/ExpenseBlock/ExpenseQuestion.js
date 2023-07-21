@@ -1,5 +1,5 @@
 import { FormattedMessage } from 'react-intl';
-import { FormControl, Select, MenuItem, InputLabel, TextField, Button } from '@mui/material';
+import { FormControl, Select, MenuItem, InputLabel, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import expenseOptions from '../../Assets/expenseOptions';
 import {
@@ -20,7 +20,7 @@ const StyledDeleteButton = styled(Button)({
   height: '40px',
   minWidth: 0,
   padding: 0,
-  fontSize: '20px',
+  fontSize: '1.25rem',
 });
 
 const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteExpenseBlock, index, submitted }) => {

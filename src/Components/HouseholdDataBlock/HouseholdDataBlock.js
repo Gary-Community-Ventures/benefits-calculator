@@ -456,7 +456,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   };
 
   return (
-    <div className="household-member-container">
+    <main className="benefits-form">
       <div>
         {createQuestionHeader(page)}
         {createAgeQuestion(page)}
@@ -474,7 +474,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           <ContinueButton handleContinueSubmit={handleContinueSubmit} />
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

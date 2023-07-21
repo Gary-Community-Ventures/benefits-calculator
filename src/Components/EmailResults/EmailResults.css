@@ -14,9 +14,9 @@
 }
 
 .copy-results-text {
-  color: #037a93;
+  color: var(--primary-color);
   font-weight: 500;
-  font-size: 22px;
+  font-size: 1.375rem;
   margin-right: 0.5rem;
 }
 

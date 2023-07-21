@@ -1,4 +1,5 @@
 import React, { useEffect, useState, PropsWithChildren } from 'react';
+import useStyle from '../../Assets/styleController';
 import { IntlProvider } from 'react-intl';
 import Spanish from '../../Assets/Languages/Spanish.json';
 import English from '../../Assets/Languages/English.json';
@@ -79,18 +80,14 @@ const initialFormData: FormData = {
   },
 };
 
-export const Context = React.createContext<WrapperContext>({
-  locale: 'en-US',
-  setLocale: (locale) => {},
-  selectLanguage: (event) => {},
-  formData: initialFormData,
-  setFormData: (formData) => {},
-});
+export const Context = React.createContext<WrapperContext>({} as WrapperContext);
 
 const Wrapper = (props: PropsWithChildren<{}>) => {
   let defaultLanguage = localStorage.getItem('language') ?? 'en-US';
   let defaultMessages: Language = defaultLanguage === 'en-US' ? English : Spanish;
   const pathname = window.location.pathname;
+
+  const [theme, setTheme, styleOverride] = useStyle('default');
 
   if (pathname.includes('/es')) {
     defaultLanguage = 'es';
@@ -143,7 +140,9 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
   return (
-    <Context.Provider value={{ locale, setLocale, selectLanguage, formData, setFormData }}>
+    <Context.Provider
+      value={{ locale, setLocale, selectLanguage, formData, setFormData, theme, setTheme, styleOverride }}
+    >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
         {props.children}
       </IntlProvider>

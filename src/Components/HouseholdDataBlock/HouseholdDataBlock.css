@@ -1,7 +1,3 @@
-.household-member-container {
-  margin: 1rem;
-}
-
 .member-added-container {
   display: inline-flex;
   flex-direction: column;
@@ -14,7 +10,7 @@
 }
 
 .member-added-relationship {
-  color: #037a93;
+  color: var(--primary-color);
 }
 
 .radio-question {

@@ -35,7 +35,7 @@ const OptionCardGroup = ({ stateVariable, options, errorController }) => {
       return (
         <CardActionArea
           key={index}
-          sx={{ width: '179px' }}
+          sx={{ width: '11.25rem' }}
           className="card-action-area"
           onClick={() => {
             handleCardClick(optionKey);
@@ -48,7 +48,7 @@ const OptionCardGroup = ({ stateVariable, options, errorController }) => {
         >
           <Card
             className={state[stateVariable][optionKey] ? 'selected-option-card' : 'unselected-option-card'}
-            sx={{ width: '179px', height: '174px', display: 'grid', placeItems: 'center' }}
+            sx={{ width: '11.25rem', height: '11.25rem', display: 'grid', placeItems: 'center' }}
           >
             <div className="option-card-image">
               <img src={options[optionKey].image} alt={translatedAriaLabel} />

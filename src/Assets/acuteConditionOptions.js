@@ -4,7 +4,6 @@ import diaper from './OptionCardIcons/diaper.png';
 import home from './OptionCardIcons/home.png';
 import chat from './OptionCardIcons/chat.png';
 import stroller from './OptionCardIcons/stroller.png';
-import bill from './OptionCardIcons/bill.png';
 import pregnant from './OptionCardIcons/pregnant.png';
 
 const acuteConditionOptions = {

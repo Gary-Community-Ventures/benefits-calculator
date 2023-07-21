@@ -1,3 +1,10 @@
+:root {
+  --primary-color: #037a93;
+  --seconday-color: #4ecdc4;
+  --main-max-width: 999999rem;
+  font-size: 16px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',

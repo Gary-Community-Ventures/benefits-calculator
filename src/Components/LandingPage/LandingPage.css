@@ -4,5 +4,5 @@
 }
 
 .public-charge-link {
-  color: #037493;
+  color: var(--primary-color);
 }

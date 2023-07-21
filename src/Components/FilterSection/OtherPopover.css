@@ -19,7 +19,7 @@
 }
 
 .filters-button.MuiButton-root {
-  color: #037a93;
+  color: var(--primary-color);
   display: flex;
   align-items: center;
   padding: 0.5rem;

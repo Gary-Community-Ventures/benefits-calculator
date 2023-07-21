@@ -7,6 +7,7 @@
   margin: 0 auto 20px auto;
   justify-content: center;
   padding: 1rem;
+  max-width: var(--main-max-width);
 }
 
 @media only screen and (max-device-width: 600px) {
@@ -17,7 +18,7 @@
 
 .step-progress-title {
   font-weight: 700;
-  color: #037a93;
+  color: var(--primary-color);
 }
 
 .sub-header {
@@ -41,13 +42,13 @@
 
 /* text input label in a focus state */
 .MuiInputLabel-root.MuiInputLabel-formControl.Mui-focused {
-  color: #037a93;
+  color: var(--primary-color);
 }
 
 /* text input outline in a focus state */
 .MuiOutlinedInput-root.MuiInputBase-formControl.Mui-focused
   .MuiOutlinedInput-notchedOutline.MuiOutlinedInput-notchedOutline {
-  border-color: #037a93;
+  border-color: var(--primary-color);
 }
 
 /* text input outline in an error state */
@@ -66,5 +67,5 @@
 }
 
 .sign-up-data-privacy-link {
-  color: #037a93;
+  color: var(--primary-color);
 }
