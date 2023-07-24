@@ -1,0 +1,10 @@
+.cobranded-logo {
+  margin-left: 0.5rem;
+  max-width: 15.625rem;
+}
+
+@media (max-width: 500px) {
+  .cobranded-logo {
+    width: 70%;
+  }
+}
