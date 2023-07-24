@@ -429,5 +429,11 @@
   "noResults.p-One": "Parece que no es posible que califique para los beneficios incluidos en MyFriendBen en este momento. Si indico la necesidad de recursos inmediatamente, haga clic en lance de “Necesidades inmediatas”.",
   "noResults.p-Two": "Para recursos adicionales, visite ",
   "noResults.p-Three": " para hablar con alguien en línea o por teléfono para obtener los recursos que está buscando.",
-  "noResultsOrUrgentNeeds.p-One": "Parece que usted no indicó ninguna necesidad inmediata."
+  "noResultsOrUrgentNeeds.p-One": "Parece que usted no indicó ninguna necesidad inmediata.",
+  "TwoOneOneHeader.aboutUs": "ACERCA DE NOSOTROS",
+  "TwoOneOneHeader.support": "SOPORTE",
+  "TwoOneOneHeader.agencies": "AGENCIAS DE LA COMUNIDAD",
+  "TwoOneOneHeader.resources": "BUSCAR RECURSOS",
+  "TwoOneOneHeader.chat": "CHAT",
+  "TwoOneOneHeader.login": "INICIAR SESIÓN"
 }
