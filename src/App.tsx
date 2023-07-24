@@ -10,6 +10,7 @@ import QuestionComponentContainer from './Components/QuestionComponentContainer/
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
 import Header from './Components/Header/Header';
+import TwoOneOneHeader from './Components/TwoOneOneComponents/TwoOneOneHeader/TwoOneOneHeader';
 import LandingPage from './Components/LandingPage/LandingPage';
 import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlock.js';
 import referralOptions from './Assets/referralOptions';
@@ -226,7 +227,11 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <CssBaseline />
-        <Header handleTextfieldChange={handleTextfieldChange} />
+        {formData.referrerCode === '211co' ? (
+          <TwoOneOneHeader />
+        ) : (
+          <Header handleTextfieldChange={handleTextfieldChange} />
+        )}
         <Routes>
           <Route path="/step-0" element={<ProgressBar step={0} />} />
           <Route path="/:uuid/step-:id" element={<ProgressBar />} />
