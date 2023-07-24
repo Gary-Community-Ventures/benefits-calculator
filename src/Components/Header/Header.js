@@ -15,6 +15,7 @@ const Header = ({ handleTextfieldChange }) => {
   const context = useContext(Context);
   const { formData } = context;
   const { urlSearchParams, isBIAUser } = formData;
+
   const location = useLocation();
   const urlRegex = /^\/(?:\/results\/(.+)|(.+)\/results)\/?$/;
   const url = location.pathname.match(urlRegex);
