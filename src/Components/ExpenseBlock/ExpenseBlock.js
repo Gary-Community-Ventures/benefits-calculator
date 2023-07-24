@@ -43,7 +43,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   );
 
   useEffect(() => {
-    expensesErrorController.updateError(selectedMenuItem, formData);
+    expensesErrorController.updateError(selectedMenuItem);
   }, [selectedMenuItem]);
 
   const deleteExpenseBlock = (selectedIndex) => {

@@ -127,7 +127,6 @@ const questions = {
       componentType: 'Radiofield',
       ariaLabel: 'questions.hasExpenses-ariaLabel',
       inputName: 'hasExpenses',
-      inputError: radiofieldHasError,
     },
     followUpQuestions: [
       {
@@ -186,7 +185,6 @@ const questions = {
       componentType: 'PreferNotToAnswer',
       ariaLabel: 'questions.hasBenefits-ariaLabel',
       inputName: 'hasBenefits',
-      inputError: benefitsHasError,
       inputHelperText: displayBenefitsHelperText,
     },
     followUpQuestions: [

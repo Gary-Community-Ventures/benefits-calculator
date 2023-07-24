@@ -1,27 +1,28 @@
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import countiesByZipcode from './countiesByZipcode';
+import { ErrorController, ValidationFunction, MessageFunction, VerifiableInput } from '../Types/ErrorController';
 
-function useErrorController(hasErrorFunc, messageFunc) {
+function useErrorController(hasErrorFunc: ValidationFunction<VerifiableInput>, messageFunc: MessageFunction): ErrorController {
   const [hasError, setHasError] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const showError = hasError && isSubmitted;
 
-  const updateError = (value, formData) => {
-    const updatedHasError = hasErrorFunc(value, formData);
+  const updateError: ValidationFunction<VerifiableInput> = (value: VerifiableInput) => {
+    const updatedHasError = hasErrorFunc(value);
     setHasError(updatedHasError);
     return updatedHasError;
   };
 
-  const message = (value, formData) => {
+  const message: MessageFunction = (value, formData) => {
     return messageFunc(value, formData);
   };
 
   return { hasError, showError, isSubmitted, setIsSubmitted, updateError, message };
 }
 
-const ageHasError = (applicantAge) => {
+const ageHasError: ValidationFunction<string | number> = (applicantAge: string | number) => {
   // handleTextfieldChange prevents setting anything to formData that does not pass a number regex test
   // so applicantAge will always be initiated as a string and converted to a number once it passes the regex test
   const numberApplicantAge = Number(applicantAge);
@@ -31,7 +32,7 @@ const ageHasError = (applicantAge) => {
   return numberApplicantAge < minimumAge || numberApplicantAge > maximumAge;
 };
 
-const displayAgeHelperText = (applicantAge) => {
+const displayAgeHelperText = (applicantAge: string) => {
   const numberApplicantAge = Number(applicantAge);
   const minimumAge = 13;
   const maximumAge = 130;
@@ -40,10 +41,10 @@ const displayAgeHelperText = (applicantAge) => {
   }
 };
 
-const zipcodeHasError = (zipcode) => {
+const zipcodeHasError: ValidationFunction<string | number> = (zipcode) => {
   //the zipcode input must have digits [0-9] and be exactly 5 digits long
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
-  if (numberMustBeFiveDigitsLongRegex.test(zipcode)) {
+  if (numberMustBeFiveDigitsLongRegex.test(zipcode.toString())) {
     //this means that the zipcode input passed the regex test so we can just return false since there is no error
     //this additional test checks the zipcode input against all CO zipcodes
     return !Object.keys(countiesByZipcode).includes(zipcode.toString());
@@ -52,12 +53,15 @@ const zipcodeHasError = (zipcode) => {
   }
 };
 
-const displayZipcodeHelperText = (zipcode) => {
+const displayZipcodeHelperText = (zipcode: string | number) => {
   if (zipcodeHasError(zipcode)) {
     return <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />;
   }
 };
 
+/**
+ * @deprecated
+ */
 const radiofieldHasError = (radiofield) => {
   return typeof radiofield !== 'boolean';
 };
@@ -367,26 +371,18 @@ const acuteHHConditionsHasError = () => {
   return false;
 };
 
-const benefitsHasError = (hasBenefits, formData) => {
-  if (hasBenefits !== 'true') {
-    return false;
-  } else if (hasBenefits === 'true') {
+const displayBenefitsHelperText = (hasBenefits, formData) => {
+  if (hasBenefits === 'true') {
     const { benefits } = formData;
     const selectedAtLeastOneBenefit = Object.keys(benefits).some((benefit) => formData.benefits[benefit] === true);
-
-    //return the opposite since we're indicating whether or not there's an error
-    return !selectedAtLeastOneBenefit;
-  }
-};
-
-const displayBenefitsHelperText = (hasBenefits, formData) => {
-  if (benefitsHasError(hasBenefits, formData)) {
-    return (
-      <FormattedMessage
-        id="validation-helperText.benefits"
-        defaultMessage='If your household does not receive any of these benefits, please select the "No" option above.'
-      />
-    );
+    if (!selectedAtLeastOneBenefit) {
+      return (
+        <FormattedMessage
+          id="validation-helperText.benefits"
+          defaultMessage='If your household does not receive any of these benefits, please select the "No" option above.'
+        />
+      );
+    }
   }
 };
 
