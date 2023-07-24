@@ -2,6 +2,8 @@ import { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { AppBar, MenuItem, Select, Modal, Link } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 import { Context } from '../../Wrapper/Wrapper';
 import twoOneOneMFBLogo from '../../../Assets/twoOneOneMFBLogo.png';
 import twoOneOneLinks from '../../../Assets/twoOneOneLinks';
@@ -24,7 +26,6 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   const url = location.pathname.match(urlRegex);
   const isResults = url !== null;
   const screenUUID = url ? url[2] ?? url[1] : undefined;
-
 
   const [openShare, setOpenShare] = useState(false);
   const [openEmailResults, setOpenEmailResults] = useState(false);
@@ -72,7 +73,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
     }
   };
 
-  const createAllHeaderLinks = () => {
+  const create211Links = () => {
     const mappedLinks = twoOneOneLinks.map((link, index) => {
       return (
         <Link
@@ -81,8 +82,8 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
           target="_blank"
           rel="noreferrer"
           aria-label={link.ariaLabel}
+          className="twoOneOneMenuLink"
           key={link.defaultMsg + index}
-          className='twoOneOneMenuLink'
         >
           <FormattedMessage id={link.formattedMsgId} defaultMessage={link.name} />
         </Link>
@@ -94,52 +95,64 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
 
   return (
     <nav>
-      <AppBar position="sticky" id="nav-container" sx={{ flexDirection: 'row', backgroundColor: '#FFFFFF' }}>
-        <a href={`/step-0${urlSearchParams}`} className="home-link">
-          <img src={twoOneOneMFBLogo} alt="211 and my friend ben home page button" className="logo cobranded-logo" />
-        </a>
-        {createAllHeaderLinks()}
-        <div className="icon-wrapper">
-          <Select
-            labelId="select-language-label"
-            id='twoOneOne-select-language'
-            value={context.locale}
-            label="Language"
-            onChange={handleLanguageChange}
-            aria-label="select a language"
-            variant="standard"
-            disableUnderline={true}
-            open={isLanguageSelectOpen}
-            onOpen={handleOpenLanguage}
-            onClose={handleCloseLanguage}
-            IconComponent={LanguageIcon}
-            renderValue={() => setRenderValue()}
-            sx={{ '& .MuiSvgIcon-root': { right: '1.5rem', color: '#005191' } }}
+      <AppBar position="sticky" id="nav-container" sx={{ backgroundColor: '#FFFFFF', padding: '0 1rem' }}>
+        <Box>
+          <a href={`/step-0${urlSearchParams}`}>
+            <img src={twoOneOneMFBLogo} alt="211 and my friend ben home page button" className="cobranded-logo" />
+          </a>
+        </Box>
+        <Stack direction="row">
+          <Stack direction="row" gap="1rem" alignItems="center">
+            {create211Links()}
+          </Stack>
+          <Stack direction="row" sx={{ marginLeft: '3rem' }}>
+            <Select
+              labelId="select-language-label"
+              id="twoOneOne-select-language"
+              value={context.locale}
+              label="Language"
+              onChange={handleLanguageChange}
+              aria-label="select a language"
+              variant="standard"
+              disableUnderline={true}
+              open={isLanguageSelectOpen}
+              onOpen={handleOpenLanguage}
+              onClose={handleCloseLanguage}
+              IconComponent={LanguageIcon}
+              renderValue={() => setRenderValue()}
+              sx={{ '& .MuiSvgIcon-root': { right: '1.5rem', color: '#005191' } }}
             >
-            <MenuItem value="en-US" sx={{color: '#005191'}}>English</MenuItem>
-            <MenuItem value="es" sx={{color: '#005191'}}>Español</MenuItem>
-            <MenuItem value="vi" sx={{color: '#005191'}}>Tiếng Việt</MenuItem>
-          </Select>
-          <button className="icon-container" onClick={handleOpenShare} aria-label="share button">
-            <ShareIcon role="img" />
-          </button>
-          {/* {isResults && ( */}
-            <button className="icon-container" onClick={handleOpenEmailResults} aria-label="email results button">
-              <SaveAltIcon role="img" />
+              <MenuItem value="en-US" sx={{ color: '#005191' }}>
+                English
+              </MenuItem>
+              <MenuItem value="es" sx={{ color: '#005191' }}>
+                Español
+              </MenuItem>
+              <MenuItem value="vi" sx={{ color: '#005191' }}>
+                Tiếng Việt
+              </MenuItem>
+            </Select>
+            <button className="icon-container" onClick={handleOpenShare} aria-label="share button">
+              <ShareIcon role="img" />
             </button>
-          {/* )} */}
-        </div>
-        <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
-          <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
-        </Modal>
-        <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-labelledby="email-results-modal">
-          <EmailResults
-            handleTextfieldChange={handleTextfieldChange}
-            screenId={screenUUID}
-            close={handleCloseEmailResults}
-            id="email-results-modal"
+            {isResults && (
+              <button className="icon-container" onClick={handleOpenEmailResults} aria-label="email results button">
+                <SaveAltIcon role="img" />
+              </button>
+            )}
+          </Stack>
+          <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
+            <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
+          </Modal>
+          <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-labelledby="email-results-modal">
+            <EmailResults
+              handleTextfieldChange={handleTextfieldChange}
+              screenId={screenUUID}
+              close={handleCloseEmailResults}
+              id="email-results-modal"
             />
-        </Modal>
+          </Modal>
+        </Stack>
       </AppBar>
     </nav>
   );

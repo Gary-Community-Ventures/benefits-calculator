@@ -1,19 +1,20 @@
 .cobranded-logo {
-  margin-left: 0.5rem;
   max-width: 15.625rem;
+  max-height: 2rem;
+  display: block;
 }
 
 .MuiTypography-root.MuiLink-root.twoOneOneMenuLink {
   font-weight: 600;
-  font-size: 0.813rem;
+  font-size: 13px;
 }
 
 #twoOneOne-select-language {
   padding: 0;
   color: #005191;
   font-weight: 600;
-  font-size: 0.813rem;
-  margin-left: 1rem;
+  font-size: 0.79rem;
+  margin-left: 13px;
 }
 
 #twoOneOne-select-language:focus-visible {
