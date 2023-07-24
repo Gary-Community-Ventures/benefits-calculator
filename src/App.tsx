@@ -228,7 +228,7 @@ const App = () => {
       <div className="App">
         <CssBaseline />
         {formData.referrerCode === '211co' ? (
-          <TwoOneOneHeader handleTextfieldChange={handleTextfieldChange}/>
+          <TwoOneOneHeader handleTextfieldChange={handleTextfieldChange} />
         ) : (
           <Header handleTextfieldChange={handleTextfieldChange} />
         )}
