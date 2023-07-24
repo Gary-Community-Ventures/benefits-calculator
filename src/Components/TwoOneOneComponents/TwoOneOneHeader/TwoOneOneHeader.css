@@ -8,6 +8,22 @@
   font-size: 0.813rem;
 }
 
+#twoOneOne-select-language {
+  padding: 0;
+  color: #005191;
+  font-weight: 600;
+  font-size: 0.813rem;
+  margin-left: 1rem;
+}
+
+#twoOneOne-select-language:focus-visible {
+  outline: -webkit-focus-ring-color auto 1px;
+}
+
+.icon-container {
+  color: #005191;
+}
+
 @media (max-width: 500px) {
   .cobranded-logo {
     width: 70%;
