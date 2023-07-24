@@ -3,6 +3,11 @@
   max-width: 15.625rem;
 }
 
+.MuiTypography-root.MuiLink-root.twoOneOneMenuLink {
+  font-weight: 600;
+  font-size: 0.813rem;
+}
+
 @media (max-width: 500px) {
   .cobranded-logo {
     width: 70%;
