@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { AppBar, MenuItem, Select, Modal, Link } from '@mui/material';
+import { AppBar, MenuItem, Select, Modal, Link, IconButton } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import { Context } from '../../Wrapper/Wrapper';
@@ -132,13 +132,17 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
                 Tiếng Việt
               </MenuItem>
             </Select>
-            <button className="icon-container" onClick={handleOpenShare} aria-label="share button">
+            <IconButton color="primary" onClick={handleOpenShare} aria-label="share button">
               <ShareIcon role="img" />
-            </button>
+            </IconButton>
             {isResults && (
-              <button className="icon-container" onClick={handleOpenEmailResults} aria-label="email results button">
+              <IconButton
+                onClick={handleOpenEmailResults}
+                aria-label="email results button"
+                color="primary"
+              >
                 <SaveAltIcon role="img" />
-              </button>
+              </IconButton>
             )}
           </Stack>
           <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
