@@ -91,7 +91,10 @@ const Confirmation = () => {
               </article>
             </Grid>
             <Grid item xs={2} display="flex" justifyContent="flex-end">
-              <button onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdData}/${i + 1}`)}>
+              <button
+                aria-label="edit household member"
+                onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdData}/${i + 1}`)}
+              >
                 <EditIcon className="edit-icon" />
               </button>
             </Grid>
@@ -126,7 +129,7 @@ const Confirmation = () => {
           )}
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button onClick={() => navigate(`/${uuid}/step-${stepDirectory.hasExpenses}`)}>
+          <button aria-label="edit expenses" onClick={() => navigate(`/${uuid}/step-${stepDirectory.hasExpenses}`)}>
             <EditIcon className="edit-icon" />
           </button>
         </Grid>
@@ -272,7 +275,7 @@ const Confirmation = () => {
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button onClick={() => navigate(linkTo)}>
+          <button aria-label="edit household size" onClick={() => navigate(linkTo)}>
             <EditIcon className="edit-icon" />
           </button>
         </Grid>
@@ -305,7 +308,10 @@ const Confirmation = () => {
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdAssets}`)}>
+          <button
+            aria-label="edit household assets"
+            onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdAssets}`)}
+          >
             <EditIcon className="edit-icon" />
           </button>
         </Grid>
@@ -356,7 +362,7 @@ const Confirmation = () => {
           </p>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button onClick={() => navigate(`/${uuid}/step-${stepDirectory.zipcode}`)}>
+          <button aria-label="edit zipcode" onClick={() => navigate(`/${uuid}/step-${stepDirectory.zipcode}`)}>
             <EditIcon className="edit-icon" />
           </button>
         </Grid>
@@ -384,7 +390,10 @@ const Confirmation = () => {
           <article className="section-p">{finalReferralSource}</article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button onClick={() => navigate(`/${uuid}/step-${stepDirectory.referralSource}`)}>
+          <button
+            aria-label="edit referral source"
+            onClick={() => navigate(`/${uuid}/step-${stepDirectory.referralSource}`)}
+          >
             <EditIcon className="edit-icon" />
           </button>
         </Grid>
@@ -421,6 +430,7 @@ const Confirmation = () => {
           `/${uuid}/step-${stepDirectory.healthInsurance}`,
           refactorOptionsList(healthInsuranceOptions),
           <MedicalServicesIcon className="home-icon" />,
+          'edit health insurance',
         )}
         <p className="confirmation-section-underline"></p>
         {displayHouseholdSizeSection()}
@@ -437,6 +447,7 @@ const Confirmation = () => {
           `/${uuid}/step-${stepDirectory.hasBenefits}`,
           allBenefitsList,
           <ChecklistIcon className="home-icon" />,
+          'edit current benefits',
         )}
         <p className="confirmation-section-underline"></p>
         {displayHHCheckboxSection(
@@ -556,6 +567,7 @@ const Confirmation = () => {
     linkTo,
     optionsList,
     iconComp,
+    ariaLabel,
   ) => {
     const stateVariableObj = formData[stateVariableName];
     const stateVariableKeys = Object.keys(stateVariableObj);
@@ -580,7 +592,7 @@ const Confirmation = () => {
           )}
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button onClick={() => navigate(linkTo)}>
+          <button aria-label={ariaLabel} onClick={() => navigate(linkTo)}>
             <EditIcon className="edit-icon" />
           </button>
         </Grid>
