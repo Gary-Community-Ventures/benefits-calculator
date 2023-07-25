@@ -12,5 +12,5 @@ export interface ErrorController {
   isSubmitted: boolean;
   setIsSubmitted: (isSubmitted: boolean) => void;
   updateError: ValidationFunction<VerifiableInput>;
-  message: MessageFunction;
+  message: MessageFunction<VerifiableInput>;
 }

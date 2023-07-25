@@ -2,15 +2,7 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import countiesByZipcode from './countiesByZipcode';
 import type { ErrorController, ValidationFunction, MessageFunction, VerifiableInput } from '../Types/ErrorController';
-import type {
-  FormData,
-  Expense,
-  HealthInsurance,
-  HouseholdData,
-  IncomeStream,
-  SignUpInfo,
-  Benefits,
-} from '../Types/FormData';
+import type { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo, Benefits } from '../Types/FormData';
 
 function useErrorController(
   hasErrorFunc: ValidationFunction<VerifiableInput>,

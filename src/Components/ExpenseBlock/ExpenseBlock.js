@@ -43,13 +43,13 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   );
 
   useEffect(() => {
-    expensesErrorController.updateError(selectedMenuItem);
+    expensesErrorController.updateError(selectedMenuItem, formData);
   }, [selectedMenuItem]);
 
   const deleteExpenseBlock = (selectedIndex) => {
     const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex);
     setSelectedMenuItem(updatedSelectedMenuItems);
-    expensesErrorController.updateError(updatedSelectedMenuItems);
+    expensesErrorController.updateError(updatedSelectedMenuItems, formData);
   };
 
   const createExpenseBlockQuestions = () => {

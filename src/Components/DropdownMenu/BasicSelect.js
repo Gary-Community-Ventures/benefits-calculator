@@ -14,7 +14,7 @@ const BasicSelect = ({ componentProperties, options, formDataProperty, errorCont
 
   const handleBasicSelect = (event, formProperty) => {
     setFormData({ ...formData, [formProperty]: event.target.value });
-    errorController.updateError(event.target.value);
+    errorController.updateError(event.target.value, formData);
   };
 
   const createMenuItems = () => {

@@ -16,11 +16,11 @@ const AccordionsContainer = ({ errorController }) => {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    errorController.updateError(formData.hasBenefits);
+    errorController.updateError(formData.hasBenefits, formData);
   }, [expanded]);
 
   const handleAccordionSelectChange = (panel) => (event, isExpanded) => {
-    errorController.updateError(formData.hasBenefits);
+    errorController.updateError(formData.hasBenefits, formData);
     setExpanded(isExpanded ? panel : false);
   };
 
