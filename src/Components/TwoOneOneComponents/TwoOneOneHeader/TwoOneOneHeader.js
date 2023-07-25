@@ -31,6 +31,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   const [openShare, setOpenShare] = useState(false);
   const [openEmailResults, setOpenEmailResults] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const handleOpenShare = () => {
     setOpenShare(true);
