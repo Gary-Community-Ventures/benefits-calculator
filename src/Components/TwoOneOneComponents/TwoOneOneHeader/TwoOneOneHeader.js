@@ -61,6 +61,10 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
     context.selectLanguage(event);
   };
 
+  const handleOpenMenu = () => {
+    setOpenMenu(!openMenu);
+  };
+
   const setRenderValue = () => {
     const currentLocale = context.locale;
     switch (currentLocale) {
