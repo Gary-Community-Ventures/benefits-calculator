@@ -120,7 +120,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
               onClose={handleCloseLanguage}
               IconComponent={LanguageIcon}
               renderValue={() => setRenderValue()}
-              sx={{ '& .MuiSvgIcon-root': { right: '1.5rem', color: '#005191' } }}
+              sx={{ '& .MuiSvgIcon-root': { right: '1.25rem', color: '#005191' } }}
             >
               <MenuItem value="en-US" sx={{ color: '#005191' }}>
                 English
