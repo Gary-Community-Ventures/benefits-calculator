@@ -10,6 +10,7 @@ import twoOneOneLinks from '../../../Assets/twoOneOneLinks';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import MenuIcon from '@mui/icons-material/Menu';
 import Share from '../../Share/Share';
 import EmailResults from '../../EmailResults/EmailResults';
 import './TwoOneOneHeader.css';
@@ -93,6 +94,13 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
     return mappedLinks;
   };
 
+  const displayHamburgerMenuIcon = () => {
+    return (
+      <IconButton edge="end" color="primary" aria-label="open menu" onClick={handleOpenMenu}>
+        <MenuIcon />
+      </IconButton>
+    );
+  };
   return (
     <nav>
       <AppBar position="sticky" id="nav-container" sx={{ backgroundColor: '#FFFFFF', padding: '0 1rem' }}>
@@ -136,14 +144,11 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
               <ShareIcon role="img" />
             </IconButton>
             {isResults && (
-              <IconButton
-                onClick={handleOpenEmailResults}
-                aria-label="email results button"
-                color="primary"
-              >
+              <IconButton onClick={handleOpenEmailResults} aria-label="email results button" color="primary">
                 <SaveAltIcon role="img" />
               </IconButton>
             )}
+            {displayHamburgerMenuIcon()}
           </Stack>
           <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
             <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
