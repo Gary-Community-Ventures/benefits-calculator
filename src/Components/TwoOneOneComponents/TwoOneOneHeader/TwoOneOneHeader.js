@@ -11,6 +11,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import MenuIcon from '@mui/icons-material/Menu';
+import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
 import EmailResults from '../../EmailResults/EmailResults';
 import './TwoOneOneHeader.css';
@@ -106,6 +107,17 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
       </IconButton>
     );
   };
+
+  const displayHamburgerMenu = () => {
+    return (
+      <Drawer anchor="right" variant="temporary" open={openMenu} onClose={handleOpenMenu}>
+        <Stack gap="1rem" alignItems="end" sx={{ margin: '1rem' }}>
+          {create211Links()}
+        </Stack>
+      </Drawer>
+    );
+  };
+
   return (
     <nav>
       <AppBar position="sticky" id="nav-container" sx={{ backgroundColor: '#FFFFFF', padding: '0 1rem' }}>
@@ -154,6 +166,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
               </IconButton>
             )}
             {displayHamburgerMenuIcon()}
+            {displayHamburgerMenu()}
           </Stack>
           <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
             <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
