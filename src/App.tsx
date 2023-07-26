@@ -17,6 +17,7 @@ import referralOptions from './Assets/referralOptions';
 import { updateScreen, updateUser } from './Assets/updateScreen';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import stepDirectory from './Assets/stepDirectory';
+import Box from '@mui/material/Box';
 import './App.css';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
 import { useErrorController } from './Assets/validationFunctions';
@@ -232,56 +233,58 @@ const App = () => {
         ) : (
           <Header handleTextfieldChange={handleTextfieldChange} />
         )}
-        <Routes>
-          <Route path="/step-0" element={<ProgressBar step={0} />} />
-          <Route path="/:uuid/step-:id" element={<ProgressBar />} />
-          <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
-          <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
-          <Route path="*" element={<></>} />
-        </Routes>
-        <Routes>
-          <Route path="/" element={<Navigate to={`/step-0${urlSearchParams}`} replace />} />
-          <Route path="/step-0" element={<LandingPage setFetchedScreen={setFetchedScreen} />} />
-          <Route path="results/:uuid" element={<Results />} />
-          <Route path=":uuid">
-            {!fetchedScreen && <Route path="*" element={<FetchScreen setFetchedScreen={setFetchedScreen} />} />}
-            {fetchedScreen && (
-              <>
-                <Route path="" element={<Navigate to="/step-0" replace />} />
-                <Route path="step-0" element={<LandingPage setFetchedScreen={setFetchedScreen} />} />
-                <Route path="step-1" element={<Disclaimer handleCheckboxChange={handleCheckboxChange} />} />
-                <Route
-                  path={`step-${stepDirectory.householdData}/:page`}
-                  element={
-                    <HouseholdDataBlock
-                      key={window.location.href}
-                      handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-                    />
-                  }
-                />
-                <Route
-                  path="step-:id"
-                  element={
-                    <QuestionComponentContainer
-                      key={window.location.href}
-                      handleTextfieldChange={handleTextfieldChange}
-                      handleContinueSubmit={handleContinueSubmit}
-                      handleRadioButtonChange={handleRadioButtonChange}
-                      handleNoAnswerChange={handleNoAnswerChange}
-                      handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-                      handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-                      handleCheckboxChange={handleCheckboxChange}
-                    />
-                  }
-                />
-                <Route path="confirm-information" element={<Confirmation />} />
-                <Route path="results" element={<Results />} />
-                <Route path="*" element={<Navigate to="/step-0" replace />} />
-              </>
-            )}
-          </Route>
-          <Route path="*" element={<Navigate to="/step-0" replace />} />
-        </Routes>
+        <Box className='main-max-width'>
+          <Routes>
+            <Route path="/step-0" element={<ProgressBar step={0} />} />
+            <Route path="/:uuid/step-:id" element={<ProgressBar />} />
+            <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
+            <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
+            <Route path="*" element={<></>} />
+          </Routes>
+          <Routes>
+            <Route path="/" element={<Navigate to={`/step-0${urlSearchParams}`} replace />} />
+            <Route path="/step-0" element={<LandingPage setFetchedScreen={setFetchedScreen} />} />
+            <Route path="results/:uuid" element={<Results />} />
+            <Route path=":uuid">
+              {!fetchedScreen && <Route path="*" element={<FetchScreen setFetchedScreen={setFetchedScreen} />} />}
+              {fetchedScreen && (
+                <>
+                  <Route path="" element={<Navigate to="/step-0" replace />} />
+                  <Route path="step-0" element={<LandingPage setFetchedScreen={setFetchedScreen} />} />
+                  <Route path="step-1" element={<Disclaimer handleCheckboxChange={handleCheckboxChange} />} />
+                  <Route
+                    path={`step-${stepDirectory.householdData}/:page`}
+                    element={
+                      <HouseholdDataBlock
+                        key={window.location.href}
+                        handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+                      />
+                    }
+                  />
+                  <Route
+                    path="step-:id"
+                    element={
+                      <QuestionComponentContainer
+                        key={window.location.href}
+                        handleTextfieldChange={handleTextfieldChange}
+                        handleContinueSubmit={handleContinueSubmit}
+                        handleRadioButtonChange={handleRadioButtonChange}
+                        handleNoAnswerChange={handleNoAnswerChange}
+                        handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
+                        handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+                        handleCheckboxChange={handleCheckboxChange}
+                      />
+                    }
+                  />
+                  <Route path="confirm-information" element={<Confirmation />} />
+                  <Route path="results" element={<Results />} />
+                  <Route path="*" element={<Navigate to="/step-0" replace />} />
+                </>
+              )}
+            </Route>
+            <Route path="*" element={<Navigate to="/step-0" replace />} />
+          </Routes>
+        </Box>
       </div>
     </ThemeProvider>
   );
