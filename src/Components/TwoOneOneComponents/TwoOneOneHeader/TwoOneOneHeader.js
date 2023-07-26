@@ -163,9 +163,9 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
                 <ShareIcon role="img" />
               </IconButton>
               {isResults && (
-              <IconButton onClick={handleOpenEmailResults} aria-label="email results button" color="primary">
-                <SaveAltIcon role="img" />
-              </IconButton>
+                <IconButton onClick={handleOpenEmailResults} aria-label="email results button" color="primary">
+                  <SaveAltIcon role="img" />
+                </IconButton>
               )}
               {displayHamburgerMenuIcon()}
               {displayHamburgerMenu()}
