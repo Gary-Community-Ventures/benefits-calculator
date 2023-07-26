@@ -103,7 +103,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
 
   const displayHamburgerMenuIcon = () => {
     return (
-      <IconButton edge="end" color="primary" aria-label="open menu" onClick={handleOpenMenu}>
+      <IconButton edge="end" color="primary" aria-label="open menu" onClick={handleOpenMenu} className="hamburger-icon">
         <MenuIcon />
       </IconButton>
     );
@@ -129,7 +129,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
             </a>
           </Box>
           <Stack direction="row">
-            <Stack direction="row" gap="1rem" alignItems="center">
+            <Stack direction="row" gap="1rem" alignItems="center" className="twoOneOne-desktop-links">
               {create211Links()}
             </Stack>
             <Stack direction="row" sx={{ marginLeft: '3rem' }}>
@@ -163,9 +163,9 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
                 <ShareIcon role="img" />
               </IconButton>
               {isResults && (
-                <IconButton onClick={handleOpenEmailResults} aria-label="email results button" color="primary">
-                  <SaveAltIcon role="img" />
-                </IconButton>
+              <IconButton onClick={handleOpenEmailResults} aria-label="email results button" color="primary">
+                <SaveAltIcon role="img" />
+              </IconButton>
               )}
               {displayHamburgerMenuIcon()}
               {displayHamburgerMenu()}
@@ -179,7 +179,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
                 screenId={screenUUID}
                 close={handleCloseEmailResults}
                 id="email-results-modal"
-                />
+              />
             </Modal>
           </Stack>
         </AppBar>

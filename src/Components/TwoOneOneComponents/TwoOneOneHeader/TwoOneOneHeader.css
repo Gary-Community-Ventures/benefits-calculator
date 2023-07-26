@@ -21,6 +21,20 @@
   outline: -webkit-focus-ring-color auto 1px;
 }
 
+button.hamburger-icon {
+  display: none;
+}
+
+@media (max-width: 1250px) {
+  button.hamburger-icon {
+    display: flex;
+  }
+
+  div.twoOneOne-desktop-links {
+    display: none;
+  }
+}
+
 @media (max-width: 500px) {
   .cobranded-logo {
     width: 70%;
