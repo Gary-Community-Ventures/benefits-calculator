@@ -9,6 +9,7 @@ import Share from '../Share/Share';
 import EmailResults from '../EmailResults/EmailResults';
 import MFBLogo from '../../Assets/logo.png';
 import BIAMFBLogo from '../../Assets/biamfbcombinedlogo.png';
+import Paper from '@mui/material/Paper';
 import './Header.css';
 
 const Header = ({ handleTextfieldChange }) => {
@@ -70,56 +71,58 @@ const Header = ({ handleTextfieldChange }) => {
 
   return (
     <nav>
-      <AppBar position="sticky" id="nav-container" sx={{ flexDirection: 'row' }}>
-        <a href={`/step-0${urlSearchParams}`} className="home-link">
-          <img
-            src={isBIAUser ? BIAMFBLogo : MFBLogo}
-            alt={isBIAUser ? 'benefits in action and my friend ben home page button' : 'my friend ben home page button'}
-            className="logo"
-          />
-        </a>
-        <div className="icon-wrapper">
-          <Select
-            labelId="select-language-label"
-            id="select-language"
-            value={context.locale}
-            label="Language"
-            onChange={handleLanguageChange}
-            aria-label="select a language"
-            variant="standard"
-            disableUnderline={true}
-            open={isLanguageSelectOpen}
-            onOpen={handleOpenLanguage}
-            onClose={handleCloseLanguage}
-            IconComponent={LanguageIcon}
-            renderValue={() => setRenderValue()}
-            sx={{ '& .MuiSvgIcon-root': { right: '1.5rem', color: '#FFFFFF' } }}
-          >
-            <MenuItem value="en-US">English</MenuItem>
-            <MenuItem value="es">Español</MenuItem>
-            <MenuItem value="vi">Tiếng Việt</MenuItem>
-          </Select>
-          <button className="icon-container" onClick={handleOpenShare} aria-label="share button">
-            <ShareIcon role="img" />
-          </button>
-          {isResults && (
-            <button className="icon-container" onClick={handleOpenEmailResults} aria-label="email results button">
-              <SaveAltIcon role="img" />
+      <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#2A2B2A'}} square={true}>
+        <AppBar position="sticky" id="nav-container" elevation={0} sx={{ backgroundColor: '#2A2B2A' }}>
+          <a href={`/step-0${urlSearchParams}`} className="home-link">
+            <img
+              src={isBIAUser ? BIAMFBLogo : MFBLogo}
+              alt={isBIAUser ? 'benefits in action and my friend ben home page button' : 'my friend ben home page button'}
+              className="logo"
+            />
+          </a>
+          <div className="icon-wrapper">
+            <Select
+              labelId="select-language-label"
+              id="select-language"
+              value={context.locale}
+              label="Language"
+              onChange={handleLanguageChange}
+              aria-label="select a language"
+              variant="standard"
+              disableUnderline={true}
+              open={isLanguageSelectOpen}
+              onOpen={handleOpenLanguage}
+              onClose={handleCloseLanguage}
+              IconComponent={LanguageIcon}
+              renderValue={() => setRenderValue()}
+              sx={{ '& .MuiSvgIcon-root': { right: '1.5rem', color: '#FFFFFF' } }}
+            >
+              <MenuItem value="en-US">English</MenuItem>
+              <MenuItem value="es">Español</MenuItem>
+              <MenuItem value="vi">Tiếng Việt</MenuItem>
+            </Select>
+            <button className="icon-container" onClick={handleOpenShare} aria-label="share button">
+              <ShareIcon role="img" />
             </button>
-          )}
-        </div>
-      </AppBar>
-      <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
-        <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
-      </Modal>
-      <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-labelledby="email-results-modal">
-        <EmailResults
-          handleTextfieldChange={handleTextfieldChange}
-          screenId={screenUUID}
-          close={handleCloseEmailResults}
-          id="email-results-modal"
-        />
-      </Modal>
+            {isResults && (
+              <button className="icon-container" onClick={handleOpenEmailResults} aria-label="email results button">
+                <SaveAltIcon role="img" />
+              </button>
+            )}
+          </div>
+        </AppBar>
+        <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
+          <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
+        </Modal>
+        <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-labelledby="email-results-modal">
+          <EmailResults
+            handleTextfieldChange={handleTextfieldChange}
+            screenId={screenUUID}
+            close={handleCloseEmailResults}
+            id="email-results-modal"
+          />
+        </Modal>
+      </Paper>
     </nav>
   );
 };
