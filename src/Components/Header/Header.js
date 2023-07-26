@@ -71,12 +71,14 @@ const Header = ({ handleTextfieldChange }) => {
 
   return (
     <nav>
-      <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#2A2B2A'}} square={true}>
+      <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#2A2B2A' }} square={true}>
         <AppBar position="sticky" id="nav-container" elevation={0} sx={{ backgroundColor: '#2A2B2A' }}>
           <a href={`/step-0${urlSearchParams}`} className="home-link">
             <img
               src={isBIAUser ? BIAMFBLogo : MFBLogo}
-              alt={isBIAUser ? 'benefits in action and my friend ben home page button' : 'my friend ben home page button'}
+              alt={
+                isBIAUser ? 'benefits in action and my friend ben home page button' : 'my friend ben home page button'
+              }
               className="logo"
             />
           </a>

@@ -233,7 +233,7 @@ const App = () => {
         ) : (
           <Header handleTextfieldChange={handleTextfieldChange} />
         )}
-        <Box className='main-max-width'>
+        <Box className="main-max-width">
           <Routes>
             <Route path="/step-0" element={<ProgressBar step={0} />} />
             <Route path="/:uuid/step-:id" element={<ProgressBar />} />
