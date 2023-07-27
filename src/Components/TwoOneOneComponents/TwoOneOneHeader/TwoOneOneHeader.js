@@ -111,7 +111,19 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
 
   const displayHamburgerMenu = () => {
     return (
-      <Drawer anchor="right" variant="temporary" open={openMenu} onClose={handleOpenMenu}>
+      <Drawer
+        anchor="right"
+        variant="temporary"
+        open={openMenu}
+        onClose={handleOpenMenu}
+        sx={{
+          zIndex: 1000,
+          [`& .MuiDrawer-paper`]: {
+            pt: 9,
+            width: '100%',
+          },
+        }}
+      >
         <Stack gap="1rem" alignItems="end" sx={{ margin: '1rem' }}>
           {create211Links()}
         </Stack>
