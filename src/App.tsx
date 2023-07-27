@@ -13,14 +13,15 @@ import Header from './Components/Header/Header';
 import TwoOneOneHeader from './Components/TwoOneOneComponents/TwoOneOneHeader/TwoOneOneHeader';
 import LandingPage from './Components/LandingPage/LandingPage';
 import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlock.js';
+import ProgressBar from './Components/ProgressBar/ProgressBar';
+import TwoOneOneFooter from './Components/TwoOneOneComponents/TwoOneOneFooter/TwoOneOneFooter';
 import referralOptions from './Assets/referralOptions';
 import { updateScreen, updateUser } from './Assets/updateScreen';
-import ProgressBar from './Components/ProgressBar/ProgressBar';
 import stepDirectory from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
-import './App.css';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
 import { useErrorController } from './Assets/validationFunctions';
+import './App.css';
 
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
 if (TRACKING_ID === undefined) {
@@ -285,6 +286,7 @@ const App = () => {
             <Route path="*" element={<Navigate to="/step-0" replace />} />
           </Routes>
         </Box>
+        {formData.referrerCode === '211co' && <TwoOneOneFooter />}
       </div>
     </ThemeProvider>
   );

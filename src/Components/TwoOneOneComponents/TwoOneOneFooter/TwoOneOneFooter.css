@@ -1,0 +1,22 @@
+.twoOneOne-font {
+  color: #505050;
+  font-family: 'league-gothic', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 550;
+  letter-spacing: 1px;
+  line-height: 1.1em;
+}
+
+.font-color {
+  color: #505050;
+}
+
+.twoOneOne-footer-icon {
+  width: 150px;
+  height: 130px;
+  color: #005191;
+}
+
+.font-weight {
+  font-weight: 700;
+}
