@@ -13,8 +13,8 @@ function useErrorController(
 
   const showError = hasError && isSubmitted;
 
-  const updateError: ValidationFunction<VerifiableInput> = (value: VerifiableInput) => {
-    const updatedHasError = hasErrorFunc(value);
+  const updateError: ValidationFunction<VerifiableInput> = (value, formData) => {
+    const updatedHasError = hasErrorFunc(value, formData);
     setHasError(updatedHasError);
     return updatedHasError;
   };
@@ -26,7 +26,7 @@ function useErrorController(
   return { hasError, showError, isSubmitted, setIsSubmitted, updateError, message };
 }
 
-const ageHasError: ValidationFunction<string | number> = (applicantAge: string | number) => {
+const ageHasError: ValidationFunction<string | number> = (applicantAge) => {
   // handleTextfieldChange prevents setting anything to formData that does not pass a number regex test
   // so applicantAge will always be initiated as a string and converted to a number once it passes the regex test
   const numberApplicantAge = Number(applicantAge);

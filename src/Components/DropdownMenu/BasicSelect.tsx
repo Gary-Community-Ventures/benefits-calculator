@@ -1,18 +1,31 @@
-import { FormControl, Select, MenuItem, InputLabel } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { FormControl, Select, MenuItem, InputLabel, FormHelperText, SelectChangeEvent } from '@mui/material';
 import { useContext } from 'react';
+// @ts-ignore
 import { Context } from '../Wrapper/Wrapper.tsx';
+import type { ErrorController } from '../../Types/ErrorController.js';
+import type { FormData } from '../../Types/FormData.js';
 
-const StyledSelectfield = styled(Select)({
-  marginBottom: 20,
-  minWidth: 200,
-});
+interface ComponentProperties {
+  labelId: string;
+  inputLabelText: any;
+  id: string;
+  value: string;
+  label: any;
+  disabledSelectMenuItemText: any;
+}
 
-const BasicSelect = ({ componentProperties, options, formDataProperty, errorController }) => {
-  const { formData, setFormData } = useContext(Context);
+interface BasicSelectProps {
+  componentProperties: ComponentProperties;
+  options: { [key: string]: string };
+  formDataProperty: string;
+  errorController: ErrorController;
+}
+
+const BasicSelect = ({ componentProperties, options, formDataProperty, errorController }: BasicSelectProps) => {
+  const { formData, setFormData }: { formData: FormData; setFormData: any } = useContext(Context);
   const { labelId, inputLabelText, id, value, label, disabledSelectMenuItemText } = componentProperties;
 
-  const handleBasicSelect = (event, formProperty) => {
+  const handleBasicSelect = (event: SelectChangeEvent<any>, formProperty: string) => {
     setFormData({ ...formData, [formProperty]: event.target.value });
     errorController.updateError(event.target.value, formData);
   };
@@ -39,7 +52,7 @@ const BasicSelect = ({ componentProperties, options, formDataProperty, errorCont
     return [disabledSelectMenuItem, dropdownMenuItems];
   };
 
-  const sortNumbersDescendingThenStringsLastWithoutSorting = (a, z) => {
+  const sortNumbersDescendingThenStringsLastWithoutSorting = (a: number | string, z: number | string) => {
     //instructions on how to compare elements when they're being sorted
     if (isNaN(Number(a)) || isNaN(Number(z))) {
       return 0; // if either key is string, keep original order
@@ -53,11 +66,12 @@ const BasicSelect = ({ componentProperties, options, formDataProperty, errorCont
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }}>
+    <FormControl sx={{ mt: 1, minWidth: 210 }} error={errorController.showError}>
       <InputLabel id={labelId}>{inputLabelText}</InputLabel>
-      <StyledSelectfield
+      <Select
         labelId={labelId}
         id={id}
+        // @ts-ignore
         value={formData[value]}
         label={label}
         onChange={(event) => {
@@ -65,7 +79,11 @@ const BasicSelect = ({ componentProperties, options, formDataProperty, errorCont
         }}
       >
         {createMenuItems()}
-      </StyledSelectfield>
+      </Select>
+      {errorController.showError && (
+        // @ts-ignore
+        <FormHelperText>{errorController.message(formData[formDataProperty], formData)}</FormHelperText>
+      )}
     </FormControl>
   );
 };
