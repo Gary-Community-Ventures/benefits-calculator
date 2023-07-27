@@ -133,6 +133,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   const displayHamburgerMenu = () => {
     return (
       <Drawer
+        className="hamburger-drawer"
         anchor="right"
         variant="temporary"
         open={openMenu}
@@ -140,8 +141,11 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
         sx={{
           zIndex: 1000,
           [`& .MuiDrawer-paper`]: {
-            pt: 9,
+            mt: '50px',
             width: '100%',
+            boxShadow: `inset 0px 2px 4px -1px rgba(0,0,0,0.2),
+                        inset 0px 4px 5px 0px rgba(0,0,0,0.14),
+                        inset 0px 1px 10px 0px rgba(0,0,0,0.12)`,
           },
         }}
       >
