@@ -14,6 +14,7 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
+import CloseIcon from '@mui/icons-material/Close';
 import EmailResults from '../../EmailResults/EmailResults';
 import './TwoOneOneHeader.css';
 
@@ -102,11 +103,31 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   };
 
   const displayHamburgerMenuIcon = () => {
-    return (
-      <IconButton edge="end" color="primary" aria-label="open menu" onClick={handleOpenMenu} className="hamburger-icon">
-        <MenuIcon />
-      </IconButton>
-    );
+    if (openMenu) {
+      return (
+        <IconButton
+          edge="end"
+          color="primary"
+          aria-label="open menu"
+          onClick={handleOpenMenu}
+          className="hamburger-icon"
+        >
+          <CloseIcon />
+        </IconButton>
+      );
+    } else {
+      return (
+        <IconButton
+          edge="end"
+          color="primary"
+          aria-label="open menu"
+          onClick={handleOpenMenu}
+          className="hamburger-icon"
+        >
+          <MenuIcon />
+        </IconButton>
+      );
+    }
   };
 
   const displayHamburgerMenu = () => {
