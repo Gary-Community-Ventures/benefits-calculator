@@ -141,11 +141,16 @@ const TwoOneOneFooter = () => {
       <Stack direction="row" gap="1rem" className="stack-container second-paragraph">
         {displaySecondParagraph()}
       </Stack>
-      {/* <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#f5f5f5', padding: '1rem 0' }} square={true}>
-        <Stack direction="row" gap="1rem" id="nav-container" alignItems="center">
-          <Box sx={{ fontStyle: 'italic' }}></Box>
+      <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef', padding: '1rem 1rem' }} square={true}>
+        <Stack direction="row" className="twoOneOne-font stack-container copyright-container">
+          <Typography>© Copyright 2-1-1 Colorado</Typography>
+          <Stack direction="row">
+            <Typography>2-1-1 Terms of Service |&nbsp;</Typography>
+            <Typography>2-1-1 Privacy Policy |&nbsp;</Typography>
+            <Typography>MyFriendBen Privacy Policy</Typography>
+          </Stack>
         </Stack>
-      </Paper> */}
+      </Paper>
     </>
   );
 };
