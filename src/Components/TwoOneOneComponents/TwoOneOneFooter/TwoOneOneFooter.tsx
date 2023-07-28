@@ -46,11 +46,11 @@ const TwoOneOneFooter = () => {
             color="primary"
             sx={{ display: 'inline-block' }}
           >
-            Dial 2-1-1
-          </Link>{' '}
+            Dial 2-1-1&nbsp;
+          </Link>
           <Typography className="font-color" sx={{ display: 'inline-block' }}>
-            or
-          </Typography>{' '}
+            or&nbsp;
+          </Typography>
           <Link
             href="tel:866-760-6489"
             underline="none"
@@ -77,9 +77,9 @@ const TwoOneOneFooter = () => {
             Text
           </Typography>
           <Typography className="font-color" sx={{ display: 'inline-block' }}>
-            Text your
-          </Typography>{' '}
-          <strong className="font-color">ZIP CODE</strong> <Typography className="font-color">to</Typography>{' '}
+            Text&nbsp;
+          </Typography>
+          <strong className="font-color">ZIP CODE</strong> <Typography className="font-color">to&nbsp;</Typography>
           <Link
             href="sms:898211"
             underline="none"
@@ -116,12 +116,12 @@ const TwoOneOneFooter = () => {
         2-1-1 Colorado is committed to helping Colorado citizens connect with the services they need. Whether by phone
         or internet, our goal is to present accurate, well-organized and easy-to-find information from state and local
         health and human services programs. We accomplish this through the work of our four Area Information Centers
-        across the state. No matter where you live in Colorado, you can dial 2-1-1 and find information about
-        resources in your local community. Whether you need help finding food or housing, child care, crisis
-        counseling or substance abuse treatment, one number is all you need to know.
+        across the state. No matter where you live in Colorado, you can dial 2-1-1 and find information about resources
+        in your local community. Whether you need help finding food or housing, child care, crisis counseling or
+        substance abuse treatment, one number is all you need to know.
       </Typography>
     );
-  }
+  };
 
   return (
     <>
