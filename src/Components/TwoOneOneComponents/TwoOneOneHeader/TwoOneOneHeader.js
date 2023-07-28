@@ -20,7 +20,7 @@ import './TwoOneOneHeader.css';
 
 const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-0
-  const { formData } = useContext(Context);
+  const { formData, locale, selectLanguage } = useContext(Context);
 
   //this is for the results icon to conditionally show up
   const location = useLocation();
@@ -59,7 +59,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   };
 
   const handleLanguageChange = (event) => {
-    context.selectLanguage(event);
+    selectLanguage(event);
   };
 
   const handleOpenMenu = () => {
@@ -67,7 +67,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   };
 
   const setRenderValue = () => {
-    const currentLocale = context.locale;
+    const currentLocale = locale;
     switch (currentLocale) {
       case 'en-US':
         return 'EN';
@@ -171,7 +171,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
               <Select
                 labelId="select-language-label"
                 id="twoOneOne-select-language"
-                value={context.locale}
+                value={locale}
                 label="Language"
                 onChange={handleLanguageChange}
                 aria-label="select a language"
