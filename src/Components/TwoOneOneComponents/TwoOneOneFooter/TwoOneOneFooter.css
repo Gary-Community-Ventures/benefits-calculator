@@ -5,6 +5,7 @@
   font-weight: 550;
   letter-spacing: 1px;
   line-height: 1.1em;
+  word-spacing: 1px;
 }
 
 .font-color {
@@ -22,3 +23,11 @@
 }
 
 .stack-container {
+  max-width: var(--main-max-width);
+  margin: auto;
+}
+
+.getHelp-text {
+  padding-top: 25px;
+  margin-bottom: 2.5rem;
+}
