@@ -3,8 +3,17 @@
   font-family: 'league-gothic', Helvetica, Arial, sans-serif;
   font-size: 1rem;
   font-weight: 550;
-  letter-spacing: 1px;
   line-height: 1.1em;
+  word-spacing: 1px;
+}
+
+.MuiTypography-root.icon-header {
+  color: #505050;
+  font-family: 'league-gothic', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 550;
+  line-height: 1.1em;
+  margin-bottom: 17.6px;
   word-spacing: 1px;
 }
 

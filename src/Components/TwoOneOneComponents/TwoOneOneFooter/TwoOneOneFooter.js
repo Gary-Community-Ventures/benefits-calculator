@@ -11,7 +11,7 @@ const TwoOneOneFooter = () => {
       <Stack direction="row" gap="1rem">
         <img src={chatIcon} className="twoOneOne-footer-icon" alt="chat with a 2-1-1 navigator" />
         <Box>
-          <Typography variant="h6" className="twoOneOne-font">Chat</Typography>
+          <Typography variant="h6" className="icon-header">Chat</Typography>
           <Link
             href="https://home-c27.incontact.com/inContact/ChatClient/ChatClientPatron.aspx?poc=f927e51b-f96e-477b-9052-088d1fbcdc8f&bu=4594486"
             underline="none"
@@ -32,7 +32,7 @@ const TwoOneOneFooter = () => {
       <Stack direction="row" gap="1rem">
         <img src={dialIcon} className="twoOneOne-footer-icon" alt="talk to a 2-1-1 navigator via phone" />
         <Box>
-          <Typography variant="h6" className="twoOneOne-font">Dial</Typography>
+          <Typography variant="h6" className="icon-header">Dial</Typography>
           <Link
             href="tel:211"
             underline="none"
@@ -40,10 +40,13 @@ const TwoOneOneFooter = () => {
             rel="noreferrer"
             aria-label="2-1-1 dial link"
             color="primary"
+            sx={{display: 'inline-block'}}
           >
             Dial 2-1-1
           </Link>
-          <Typography className="font-color">or</Typography>
+          {" "}
+          <Typography className="font-color" sx={{display: 'inline-block'}}>or</Typography>
+          {" "}
           <Link
             href="tel:866-760-6489"
             underline="none"
@@ -51,10 +54,11 @@ const TwoOneOneFooter = () => {
             rel="noreferrer"
             aria-label="2-1-1 dial link"
             color="primary"
+            sx={{display: 'inline-block'}}
           >
             (866) 760-6489
           </Link>
-          <Typography className="font-color"> toll free </Typography>
+          <Typography className="font-color">toll free</Typography>
         </Box>
     </Stack>
     );
@@ -65,10 +69,13 @@ const TwoOneOneFooter = () => {
       <Stack direction="row" gap="1rem">
         <img src={textIcon} className="twoOneOne-footer-icon" alt="text with a 2-1-1 navigator" />
         <Box>
-          <Typography variant="h6" className="twoOneOne-font">Text</Typography>
-          <Typography className="font-color">Text your</Typography>
+          <Typography variant="h6" className="icon-header">Text</Typography>
+          <Typography className="font-color" sx={{display: 'inline-block'}}>Text your</Typography>
+          {" "}
           <strong className="font-color">ZIP CODE</strong>
+          {" "}
           <Typography className="font-color">to</Typography>
+          {" "}
           <Link
             href="sms:898211"
             underline="none"
@@ -80,7 +87,7 @@ const TwoOneOneFooter = () => {
           >
             898-211*
           </Link>
-          <Typography marginTop={'1rem'} className="font-color">*Standard message and data rates may apply.</Typography>
+          <Typography sx={{marginTop: '1rem', maxWidth: '190px'}} className="font-color">*Standard message and data rates may apply.</Typography>
         </Box>
       </Stack>
     );
