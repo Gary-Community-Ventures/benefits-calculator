@@ -425,4 +425,10 @@ export interface Language extends Record<string, string> {
   'filterSection.citizenship': string;
   'filterSection.other': string;
   'filterSection.reset': string;
+  'TwoOneOneHeader.aboutUs': string;
+  'TwoOneOneHeader.support': string;
+  'TwoOneOneHeader.agencies': string;
+  'TwoOneOneHeader.resources': string;
+  'TwoOneOneHeader.chat': string;
+  'TwoOneOneHeader.login': string;
 }

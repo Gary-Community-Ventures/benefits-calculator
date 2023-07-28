@@ -1,0 +1,50 @@
+.cobranded-logo {
+  max-width: 15.625rem;
+  max-height: 2rem;
+  display: block;
+}
+
+.MuiTypography-root.MuiLink-root.twoOneOneMenuLink {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+#twoOneOne-select-language {
+  padding: 0;
+  color: #005191;
+  font-weight: 600;
+  font-size: 0.79rem;
+  margin-left: 13px;
+}
+
+#twoOneOne-select-language:focus-visible {
+  outline: -webkit-focus-ring-color auto 1px;
+}
+
+button.hamburger-icon {
+  display: none;
+}
+
+.hamburger-drawer {
+  display: none;
+}
+
+@media (max-width: 1250px) {
+  button.hamburger-icon {
+    display: flex;
+  }
+
+  .hamburger-drawer {
+    display: block;
+  }
+
+  div.twoOneOne-desktop-links {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .cobranded-logo {
+    width: 70%;
+  }
+}

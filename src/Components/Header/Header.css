@@ -7,7 +7,6 @@
 .logo {
   max-width: 175px;
   max-height: 2rem;
-  margin: 0 10%;
   display: block;
 }
 
@@ -17,6 +16,9 @@
   justify-content: space-between;
   align-items: center;
   height: 50px;
+  max-width: var(--main-max-width);
+  margin: auto;
+  padding: 0 1rem;
 }
 
 .icon-wrapper {
