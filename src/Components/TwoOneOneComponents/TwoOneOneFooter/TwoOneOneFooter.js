@@ -88,15 +88,13 @@ const TwoOneOneFooter = () => {
   return (
     <>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef' }} square={true}>
-        <Stack direction="row" gap="1rem" id="nav-container">
-          <Typography variant="h6" className="twoOneOne-font">
-            Not finding what you are looking for? Try these other ways to get help:
-          </Typography>
-          <Stack direction="row" gap="1rem" id="nav-container">
-            {displayChatStack()}
-            {displayDialStack()}
-            {displayTextStack()}
-          </Stack>
+        <Stack direction="row" className='twoOneOne-font stack-container getHelp-text'>
+          Not finding what you are looking for? Try these other ways to get help:
+        </Stack>
+        <Stack direction="row" gap="1rem" className='stack-container'>
+          {displayDialStack()}
+          {displayTextStack()}
+          {displayChatStack()}
         </Stack>
       </Paper>
       {/* <Paper elevation={0} sx={{ width: '100%', height: '238px', backgroundColor: '#fffff' }} square={true}>
