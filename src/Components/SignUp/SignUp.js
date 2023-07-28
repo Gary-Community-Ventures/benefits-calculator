@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
 import Textfield from '../Textfield/Textfield';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import {
   nameHasError,
   displayFirstNameHelperText,
@@ -113,7 +112,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
         data={formData.signUpInfo}
         handleTextfieldChange={handleTextfieldChange}
         index="0"
-        errorController={errorController}
+        submitted={errorController.isSubmitted}
       />
     );
   };
@@ -173,12 +172,6 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
     );
   };
 
-  const displayErrorMessage = () => {
-    if (signUpErrorController.showError) {
-      return <ErrorMessage error={signUpErrorController.message(formData.signUpInfo)} />;
-    }
-  };
-
   return (
     <>
       <div className="bottom-border">
@@ -196,9 +189,6 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
           {displayDisclosureSection()}
         </Grid>
       </div>
-      <Grid xs={12} item>
-        {displayErrorMessage()}
-      </Grid>
     </>
   );
 };

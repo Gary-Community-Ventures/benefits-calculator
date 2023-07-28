@@ -91,7 +91,6 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   return (
     <>
       {createExpenseBlockQuestions()}
-      {expensesErrorController.showError && <ErrorMessage error={expensesErrorController.message(selectedMenuItem)} />}
       <Button variant="contained" onClick={(event) => handleAddAdditionalExpenseSource(event)}>
         <FormattedMessage id="expenseBlock.return-addExpenseButton" defaultMessage="Add another expense" />
       </Button>

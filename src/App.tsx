@@ -174,7 +174,7 @@ const App = () => {
   ) => {
     event.preventDefault();
     errorController.setIsSubmitted(true);
-    const hasError = errorController.updateError(inputToBeValidated);
+    const hasError = errorController.updateError(inputToBeValidated, formData);
     const isZipcodeQuestionAndCountyIsEmpty = questionName === 'zipcode' && formData.county === '';
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty =
       questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '';

@@ -15,6 +15,10 @@ import {
   getPersonDataErrorMsg,
   personDataIsValid,
   useErrorController,
+  ageHasError,
+  displayAgeHelperText,
+  selectHasError,
+  relationTypeHelperText,
 } from '../../Assets/validationFunctions';
 import { FormattedMessage } from 'react-intl';
 import './HouseholdDataBlock.css';
@@ -107,6 +111,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       inputName: 'age',
       inputValue: householdData.age,
       inputLabel: createFMInputLabel(personIndex),
+      inputError: householdMemberAgeHasError,
+      inputHelperText: displayHouseholdMemberAgeHelperText,
     };
 
     if (personIndex === 1) {
@@ -145,7 +151,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <Textfield
         componentDetails={componentInputProps}
-        errorController={errorController}
+        submitted={errorController.isSubmitted}
         data={householdData}
         handleTextfieldChange={handleTextfieldChange}
       />
@@ -273,16 +279,23 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       ),
     };
 
-    return dropdownCompProps;
+    const details = {
+      componentProperties: dropdownCompProps,
+      inputError: selectHasError,
+      inputHelperText: relationTypeHelperText,
+    };
+
+    return details;
   };
 
   const createRelationshipDropdownMenu = () => {
     return (
       <DropdownMenu
-        dropdownComponentProps={createDropdownCompProps()}
+        componentDetails={createDropdownCompProps()}
         options={relationshipOptions}
         setHouseholdData={setHouseholdData}
         householdData={householdData}
+        submitted={ageErrorController.isSubmitted}
       />
     );
   };
@@ -468,7 +481,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         {createIncomeRadioQuestion(page)}
         <p className="household-data-q-underline"></p>
         {householdData.hasIncome && createPersonIncomeBlock(ageErrorController.isSubmitted)}
-        {error !== '' && <ErrorMessage error={error} />}
         <div className="question-buttons">
           <PreviousButton navFunction={handlePreviousSubmit} />
           <ContinueButton handleContinueSubmit={handleContinueSubmit} />

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Radiofield from '../Radiofield/Radiofield';
 import IncomeBlock from '../IncomeBlock/IncomeBlock';
 import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
@@ -6,11 +5,9 @@ import Textfield from '../Textfield/Textfield';
 import SignUp from '../SignUp/SignUp';
 import AccordionsContainer from '../AccordionsContainer/AccordionsContainer';
 import BasicSelect from '../DropdownMenu/BasicSelect';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { useErrorController } from '../../Assets/validationFunctions';
 
 const FollowUpQuestions = ({
-  matchingQuestion,
+  followUpQuestions,
   submitted,
   formData,
   handleCheckboxChange,
@@ -19,16 +16,6 @@ const FollowUpQuestions = ({
   handleTextfieldChange,
   handleRadioButtonChange,
 }) => {
-  const { followUpQuestions } = matchingQuestion;
-  const errorController = useErrorController(
-    matchingQuestion.componentDetails.inputError,
-    matchingQuestion.componentDetails.inputHelperText,
-  );
-
-  useEffect(() => {
-    errorController.setIsSubmitted(submitted);
-  }, [submitted]);
-
   return followUpQuestions.map((followUp, index) => {
     if (followUp.componentDetails.componentType === 'Radiofield') {
       return (
@@ -56,8 +43,8 @@ const FollowUpQuestions = ({
         <div className="question-container" key={index}>
           <h2 className="question-label">{followUp.question}</h2>
           <Textfield
-            componentDetails={matchingQuestion.followUpQuestions[0].componentDetails}
-            errorController={errorController}
+            componentDetails={followUp.componentDetails}
+            submitted={submitted}
             data={formData}
             handleTextfieldChange={handleTextfieldChange}
             index="0"
@@ -73,10 +60,10 @@ const FollowUpQuestions = ({
         <div className="question-container" key={index}>
           <h2 className="question-label">{followUp.question}</h2>
           <BasicSelect
-            componentProperties={followUp.componentDetails.componentProperties}
+            componentDetails={followUp.componentDetails}
             options={finalOptions}
             formDataProperty={followUp.componentDetails.inputName}
-            errorController={errorController}
+            submitted={submitted}
           />
         </div>
       );
@@ -87,7 +74,7 @@ const FollowUpQuestions = ({
           <SignUp
             handleTextfieldChange={handleTextfieldChange}
             handleCheckboxChange={handleCheckboxChange}
-            submitted={errorController.isSubmitted}
+            submitted={submitted}
           />
         </div>
       );
@@ -95,11 +82,8 @@ const FollowUpQuestions = ({
       return (
         <div className="question-container accordions-container" key={index}>
           <h2 className="question-label">{followUp.question}</h2>
-          <p className="question-description">{matchingQuestion.followUpQuestions[0].questionDescription}</p>
-          <AccordionsContainer errorController={errorController} />
-          {errorController.showError && (
-            <ErrorMessage error={errorController.message(formData.hasBenefits, formData)} />
-          )}
+          <p className="question-description">{followUp.questionDescription}</p>
+          <AccordionsContainer followUp={followUp} submitted={submitted} />
         </div>
       );
     }

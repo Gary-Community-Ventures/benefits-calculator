@@ -7,11 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { updateScreen } from '../../Assets/updateScreen';
 import './Disclaimer.css';
-
-const StyledTypography = styled(Typography)(`
-  color: #c6252b;
-  height: auto;
-`);
+import ErrorMessageWrapper from '../ErrorMessage/ErrorWrapper.tsx';
 
 const Disclaimer = ({ handleCheckboxChange }) => {
   const { uuid } = useParams();
@@ -77,13 +73,14 @@ const Disclaimer = ({ handleCheckboxChange }) => {
           defaultMessage="Check the box below and then click the Continue button to get started."
         />
       </Typography>
-      {(buttonWasClicked && formData.agreeToTermsOfService === false && (
-        <StyledTypography className="top-bottom-margin">
-          <FormattedMessage id="disclaimer.error" defaultMessage="Please check the box below to continue." />
-        </StyledTypography>
-      )) || <StyledTypography />}
       <FormControlLabel
-        control={<Checkbox checked={formData.agreeToTermsOfService} onChange={handleCheckboxChange} />}
+        control={
+          <Checkbox
+            checked={formData.agreeToTermsOfService}
+            onChange={handleCheckboxChange}
+            sx={buttonWasClicked && !formData.agreeToTermsOfService ? { color: '#c6252b' } : {}}
+          />
+        }
         onClick={handleCheckboxChange}
         label={
           <FormattedMessage
@@ -93,6 +90,11 @@ const Disclaimer = ({ handleCheckboxChange }) => {
         }
         value="agreeToTermsOfService"
       />
+      {buttonWasClicked && formData.agreeToTermsOfService === false && (
+        <ErrorMessageWrapper fontSize="1.2rem">
+          <FormattedMessage id="disclaimer.error" defaultMessage="Please check the box below to continue." />
+        </ErrorMessageWrapper>
+      )}
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <PreviousButton />
         <Button variant="contained" onClick={(event) => handleContinueButtonClick(event)}>

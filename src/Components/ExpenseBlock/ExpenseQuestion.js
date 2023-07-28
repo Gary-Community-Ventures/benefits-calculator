@@ -1,17 +1,18 @@
 import { FormattedMessage } from 'react-intl';
-import { FormControl, Select, MenuItem, InputLabel, Button } from '@mui/material';
+import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import expenseOptions from '../../Assets/expenseOptions';
 import {
   useErrorController,
   expenseSourceValueHasError,
   displayExpenseSourceValueHelperText,
+  selectHasError,
+  expenseTypeHelperText,
 } from '../../Assets/validationFunctions';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Textfield from '../Textfield/Textfield';
 
 const StyledSelectfield = styled(Select)({
-  marginBottom: 20,
   minWidth: 200,
 });
 
@@ -24,10 +25,14 @@ const StyledDeleteButton = styled(Button)({
 });
 
 const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteExpenseBlock, index, submitted }) => {
-  const amountErrorController = useErrorController(expenseSourceValueHasError, displayExpenseSourceValueHelperText);
+  const expenseTypeErrorController = useErrorController(selectHasError, expenseTypeHelperText);
 
   useEffect(() => {
-    amountErrorController.setIsSubmitted(submitted);
+    expenseTypeErrorController.updateError(expenseSourceName);
+  }, []);
+
+  useEffect(() => {
+    expenseTypeErrorController.setIsSubmitted(submitted);
   }, [submitted]);
 
   const handleSelectChange = (event, index) => {
@@ -41,6 +46,8 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
         return expenseSourceData;
       }
     });
+
+    expenseTypeErrorController.updateError(event.target.value);
 
     setAllExpenses(updatedSelectedMenuItems);
   };
@@ -91,6 +98,8 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
     inputType: 'text',
     inputLabel: <FormattedMessage id="expenseBlock.createExpenseAmountTextfield-amountLabel" defaultMessage="Amount" />,
     inputName: 'expenseAmount',
+    inputError: expenseSourceValueHasError,
+    inputHelperText: displayExpenseSourceValueHelperText,
   };
 
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
@@ -109,7 +118,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
             data={expenseData}
             handleTextfieldChange={handleExpenseTextfieldChange}
             index={index}
-            errorController={amountErrorController}
+            submitted={submitted}
           />
         </div>
       </div>
@@ -118,7 +127,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
 
   const createExpenseDropdownMenu = (expenseSourceName, index) => {
     return (
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <FormControl sx={{ m: 1, minWidth: 120 }} error={expenseTypeErrorController.showError}>
         <InputLabel id="expense-type-label">
           <FormattedMessage
             id="expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel"
@@ -141,6 +150,9 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
         >
           {createExpenseMenuItems()}
         </StyledSelectfield>
+        {expenseTypeErrorController.showError && (
+          <FormHelperText>{expenseTypeErrorController.message()}</FormHelperText>
+        )}
       </FormControl>
     );
   };

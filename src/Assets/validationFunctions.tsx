@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import countiesByZipcode from './countiesByZipcode';
 import type { ErrorController, ValidationFunction, MessageFunction, VerifiableInput } from '../Types/ErrorController';
 import type { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo, Benefits } from '../Types/FormData';
+import ErrorMessageWrapper from '../Components/ErrorMessage/ErrorWrapper';
 
 function useErrorController(
   hasErrorFunc: ValidationFunction<VerifiableInput>,
@@ -41,7 +42,11 @@ const displayAgeHelperText: MessageFunction<string> = (applicantAge) => {
   const minimumAge = 13;
   const maximumAge = 130;
   if (numberApplicantAge < minimumAge || numberApplicantAge > maximumAge) {
-    return <FormattedMessage id="validation-helperText.age" defaultMessage="Please enter a valid age (13-130)" />;
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="validation-helperText.age" defaultMessage="Please enter a valid age (13-130)" />
+      </ErrorMessageWrapper>
+    );
   }
 };
 
@@ -59,7 +64,11 @@ const zipcodeHasError: ValidationFunction<string | number> = (zipcode) => {
 
 const displayZipcodeHelperText: MessageFunction<string | number> = (zipcode) => {
   if (zipcodeHasError(zipcode)) {
-    return <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />;
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />
+      </ErrorMessageWrapper>
+    );
   }
 };
 const radiofieldHasError: ValidationFunction<any> = (radiofield) => {
@@ -71,6 +80,14 @@ const hoursWorkedValueHasError: ValidationFunction<string> = (valueInput) => {
   return Number(valueInput) <= 0 && (numberUpToEightDigitsLongRegex.test(valueInput) || valueInput === '');
 };
 
+const hoursWorkedHelperText: MessageFunction<string> = (valueInput) => {
+  if (hoursWorkedValueHasError(valueInput)) {
+    return (
+      <ErrorMessageWrapper fontSize="1rem">do not forget to update this error message!!!!!!!!!!</ErrorMessageWrapper>
+    );
+  }
+};
+
 const incomeStreamValueHasError: ValidationFunction<string> = (valueInput) => {
   const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
 
@@ -80,7 +97,12 @@ const incomeStreamValueHasError: ValidationFunction<string> = (valueInput) => {
 const displayIncomeStreamValueHelperText: MessageFunction<string> = (valueInput) => {
   if (incomeStreamValueHasError(valueInput)) {
     return (
-      <FormattedMessage id="validation-helperText.incomeValue" defaultMessage="Please enter a number greater than 0" />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage
+          id="validation-helperText.incomeValue"
+          defaultMessage="Please enter a number greater than 0"
+        />
+      </ErrorMessageWrapper>
     );
   }
 };
@@ -111,7 +133,12 @@ const expenseSourceValueHasError: ValidationFunction<string | number> = (valueIn
 const displayExpenseSourceValueHelperText: MessageFunction<string | number> = (valueInput) => {
   if (expenseSourceValueHasError(valueInput)) {
     return (
-      <FormattedMessage id="validation-helperText.expenseValue" defaultMessage="Please enter a number greater than 0" />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage
+          id="validation-helperText.expenseValue"
+          defaultMessage="Please enter a number greater than 0"
+        />
+      </ErrorMessageWrapper>
     );
   }
 };
@@ -128,10 +155,12 @@ const expenseSourcesHaveError: ValidationFunction<Expense[]> = (expenses) => {
 const displayExpensesHelperText: MessageFunction<Expense[]> = (expenses) => {
   if (expenseSourcesHaveError(expenses)) {
     return (
-      <FormattedMessage
-        id="expenseBlock.return-error-message"
-        defaultMessage="Please select and enter a response for all expense fields"
-      />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage
+          id="expenseBlock.return-error-message"
+          defaultMessage="Please select and enter a response for all expense fields"
+        />
+      </ErrorMessageWrapper>
     );
   }
 };
@@ -145,7 +174,9 @@ const displayHouseholdSizeHelperText: MessageFunction<string> = (sizeOfHousehold
   const numValueInput = Number(sizeOfHousehold);
   return (
     (numValueInput <= 0 || numValueInput > 8) && (
-      <FormattedMessage id="validation-helperText.householdSize" defaultMessage="Number of People (max. 8)" />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="validation-helperText.householdSize" defaultMessage="Number of People (max. 8)" />
+      </ErrorMessageWrapper>
     )
   );
 };
@@ -156,7 +187,11 @@ const householdAssetsHasError: ValidationFunction<string> = (householdAssets) =>
 
 const displayHouseholdAssetsHelperText: MessageFunction<string> = (householdAssets) => {
   if (householdAssetsHasError(householdAssets)) {
-    return <FormattedMessage id="validation-helperText.assets" defaultMessage="Please enter 0 or a positive number." />;
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="validation-helperText.assets" defaultMessage="Please enter 0 or a positive number." />
+      </ErrorMessageWrapper>
+    );
   }
 };
 
@@ -171,7 +206,9 @@ const householdMemberAgeHasError: ValidationFunction<string> = (applicantAge) =>
 const displayHouseholdMemberAgeHelperText: MessageFunction<string> = (applicantAge) => {
   if (householdMemberAgeHasError(applicantAge)) {
     return (
-      <FormattedMessage id="validation-helperText.hHMemberAge" defaultMessage="Please enter 0 or a positive number" />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="validation-helperText.hHMemberAge" defaultMessage="Please enter 0 or a positive number" />
+      </ErrorMessageWrapper>
     );
   }
 };
@@ -191,21 +228,30 @@ const getPersonDataErrorMsg: MessageFunction<HouseholdData> = (householdDataStat
 
   if (Number(age) < 0 || age === '') {
     return (
-      <FormattedMessage
-        id="validation-helperText.hhMemberAgeB"
-        defaultMessage="Please enter 0 or a positive number for the household member's age"
-      />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage
+          id="validation-helperText.hhMemberAgeB"
+          defaultMessage="Please enter 0 or a positive number for the household member's age"
+        />
+      </ErrorMessageWrapper>
     );
   } else if (relationshipToHH === '') {
     return (
-      <FormattedMessage id="validation-helperText.hhMemberRelation" defaultMessage="Please select a relation option" />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage
+          id="validation-helperText.hhMemberRelation"
+          defaultMessage="Please select a relation option"
+        />
+      </ErrorMessageWrapper>
     );
   } else if (hasIncome && incomeStreamsAreValid(incomeStreams) === false) {
     return (
-      <FormattedMessage
-        id="validation-helperText.hhMemberIncome"
-        defaultMessage="Please select and enter a response for all income fields"
-      />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage
+          id="validation-helperText.hhMemberIncome"
+          defaultMessage="Please select and enter a response for all income fields"
+        />
+      </ErrorMessageWrapper>
     );
   } else {
     return '';
@@ -218,25 +264,35 @@ const emailHasError: ValidationFunction<string> = (email) => {
 
 const displayEmailHelperText: MessageFunction<string> = (email) => {
   if (emailHasError(email)) {
-    return <FormattedMessage id="validation-helperText.email" defaultMessage="Please enter a valid email address" />;
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="validation-helperText.email" defaultMessage="Please enter a valid email address" />
+      </ErrorMessageWrapper>
+    );
   }
 };
 
-const referralSourceHasError: ValidationFunction<string> = (referralSource) => {
+const selectHasError: ValidationFunction<string> = (referralSource) => {
   return !referralSource;
 };
 
 const displayReferralSourceHelperText: MessageFunction<string> = (source) => {
-  if (referralSourceHasError(source)) {
+  if (selectHasError(source)) {
     return (
-      <FormattedMessage id="validation-helperText.referralSource" defaultMessage="Please select a referral source." />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="validation-helperText.referralSource" defaultMessage="Please select a referral source." />
+      </ErrorMessageWrapper>
     );
   }
 };
 
 const displayMissingSelectHelperText: MessageFunction<string> = (source) => {
-  if (referralSourceHasError(source)) {
-    return <FormattedMessage id="validation-helperText.selectOption" defaultMessage="Please select an option." />;
+  if (selectHasError(source)) {
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="validation-helperText.selectOption" defaultMessage="Please select an option." />
+      </ErrorMessageWrapper>
+    );
   }
 };
 
@@ -246,13 +302,21 @@ const nameHasError: ValidationFunction<string> = (name) => {
 
 const displayFirstNameHelperText: MessageFunction<string> = (firstName) => {
   if (nameHasError(firstName)) {
-    return <FormattedMessage id="validation-helperText.firstName" defaultMessage="Please enter your first name" />;
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="validation-helperText.firstName" defaultMessage="Please enter your first name" />
+      </ErrorMessageWrapper>
+    );
   }
 };
 
 const displayLastNameHelperText: MessageFunction<string> = (lastName) => {
   if (nameHasError(lastName)) {
-    return <FormattedMessage id="validation-helperText.lastName" defaultMessage="Please enter your last name" />;
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="validation-helperText.lastName" defaultMessage="Please enter your last name" />
+      </ErrorMessageWrapper>
+    );
   }
 };
 
@@ -264,7 +328,12 @@ const phoneHasError: ValidationFunction<string> = (phoneNumber) => {
 const displayPhoneHasErrorHelperText: MessageFunction<string> = (phoneNumber) => {
   if (phoneHasError(phoneNumber)) {
     return (
-      <FormattedMessage id="validation-helperText.phoneNumber" defaultMessage="Please enter a 10 digit phone number" />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage
+          id="validation-helperText.phoneNumber"
+          defaultMessage="Please enter a 10 digit phone number"
+        />
+      </ErrorMessageWrapper>
     );
   }
 };
@@ -290,10 +359,12 @@ const signUpFormHasError: ValidationFunction<SignUpInfo> = (props) => {
 const displayNoEmailOrPhoneHelperText = (email: string, phone: string) => {
   if (!email && !phone) {
     return (
-      <FormattedMessage
-        id="validation-helperText.noEmailOrPhoneNumber"
-        defaultMessage="Please enter an email or phone number"
-      />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage
+          id="validation-helperText.noEmailOrPhoneNumber"
+          defaultMessage="Please enter an email or phone number"
+        />
+      </ErrorMessageWrapper>
     );
   }
 };
@@ -314,17 +385,21 @@ const displaySignUpFormHelperText: MessageFunction<SignUpInfo> = (props) => {
     return displayNoEmailOrPhoneHelperText(email, phone);
   } else if (atLeastOneCheckboxSelectionWasMade === false) {
     return (
-      <FormattedMessage
-        id="validation-helperText.notificationSelection"
-        defaultMessage="Please select a notification option"
-      />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage
+          id="validation-helperText.notificationSelection"
+          defaultMessage="Please select a notification option"
+        />
+      </ErrorMessageWrapper>
     );
   } else if (commConsent === false) {
     return (
-      <FormattedMessage
-        id="validation-helperText.consentCheckbox"
-        defaultMessage="Please check the box above to sign up for the selected notifications"
-      />
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage
+          id="validation-helperText.consentCheckbox"
+          defaultMessage="Please check the box above to sign up for the selected notifications"
+        />
+      </ErrorMessageWrapper>
     );
   }
 };
@@ -351,10 +426,12 @@ const healthInsuranceHasError: ValidationFunction<HealthInsurance> = (healthInsu
 const displayHealthInsuranceHelperText: MessageFunction<HealthInsurance> = (healthInsuranceSelections) => {
   if (healthInsuranceHasError(healthInsuranceSelections)) {
     return (
-      <FormattedMessage
-        id="validation-helperText.healthInsurance"
-        defaultMessage='If none of these apply, please select "One or more household member(s) do not have health insurance"'
-      />
+      <ErrorMessageWrapper fontSize="1.5rem">
+        <FormattedMessage
+          id="validation-helperText.healthInsurance"
+          defaultMessage='If none of these apply, please select "One or more household member(s) do not have health insurance"'
+        />
+      </ErrorMessageWrapper>
     );
   }
 };
@@ -382,12 +459,36 @@ const benefitsHasError: ValidationFunction<string> = (hasBenefits, formData) => 
 const displayBenefitsHelperText: MessageFunction<string> = (hasBenefits, formData) => {
   if (benefitsHasError(hasBenefits, formData)) {
     return (
-      <FormattedMessage
-        id="validation-helperText.benefits"
-        defaultMessage='If your household does not receive any of these benefits, please select the "No" option above.'
-      />
+      <ErrorMessageWrapper fontSize="1.5rem">
+        <FormattedMessage
+          id="validation-helperText.benefits"
+          defaultMessage='If your household does not receive any of these benefits, please select the "No" option above.'
+        />
+      </ErrorMessageWrapper>
     );
   }
+};
+
+const countySelectHelperText: MessageFunction<string> = () => {
+  return (
+    <ErrorMessageWrapper fontSize="1rem">Please remember to replace this with the right language</ErrorMessageWrapper>
+  );
+};
+
+const expenseTypeHelperText: MessageFunction<string> = () => {
+  return <ErrorMessageWrapper fontSize="1rem">DONT FORGET TO PUT IN TRANSLATIONS!!!!!!!!</ErrorMessageWrapper>;
+};
+
+const relationTypeHelperText: MessageFunction<string> = () => {
+  return <ErrorMessageWrapper fontSize="1rem">REpLacE tHiS TExt</ErrorMessageWrapper>;
+};
+
+const incomeStreamHelperText: MessageFunction<string> = () => {
+  return <ErrorMessageWrapper fontSize="1rem">FIX THIS</ErrorMessageWrapper>;
+};
+
+const incomeFrequencyHelperText: MessageFunction<string> = () => {
+  return <ErrorMessageWrapper fontSize="1rem">AHHHHHHHHHHHHHH</ErrorMessageWrapper>;
 };
 
 export {
@@ -398,6 +499,7 @@ export {
   displayZipcodeHelperText,
   radiofieldHasError,
   hoursWorkedValueHasError,
+  hoursWorkedHelperText,
   incomeStreamValueHasError,
   displayIncomeStreamValueHelperText,
   incomeStreamsAreValid,
@@ -414,7 +516,7 @@ export {
   personDataIsValid,
   emailHasError,
   displayEmailHelperText,
-  referralSourceHasError,
+  selectHasError,
   displayReferralSourceHelperText,
   displayMissingSelectHelperText,
   nameHasError,
@@ -431,4 +533,9 @@ export {
   benefitsHasError,
   displayBenefitsHelperText,
   getPersonDataErrorMsg,
+  countySelectHelperText,
+  expenseTypeHelperText,
+  relationTypeHelperText,
+  incomeStreamHelperText,
+  incomeFrequencyHelperText,
 };

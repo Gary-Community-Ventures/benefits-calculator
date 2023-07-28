@@ -1,9 +1,11 @@
 import { FormControl, Select, MenuItem, InputLabel, FormHelperText, SelectChangeEvent } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 // @ts-ignore
 import { Context } from '../Wrapper/Wrapper.tsx';
-import type { ErrorController } from '../../Types/ErrorController.js';
+import type { ErrorController, MessageFunction, ValidationFunction } from '../../Types/ErrorController.js';
 import type { FormData } from '../../Types/FormData.js';
+// @ts-ignore
+import { useErrorController } from '../../Assets/validationFunctions.tsx';
 
 interface ComponentProperties {
   labelId: string;
@@ -14,16 +16,35 @@ interface ComponentProperties {
   disabledSelectMenuItemText: any;
 }
 
-interface BasicSelectProps {
+interface ComponentDetails {
   componentProperties: ComponentProperties;
+  inputError: ValidationFunction<any>;
+  inputHelperText: MessageFunction<any>;
+}
+
+interface BasicSelectProps {
+  componentDetails: ComponentDetails;
   options: { [key: string]: string };
   formDataProperty: string;
   errorController: ErrorController;
+  submitted: boolean;
 }
 
-const BasicSelect = ({ componentProperties, options, formDataProperty, errorController }: BasicSelectProps) => {
+const BasicSelect = ({ componentDetails, options, formDataProperty, submitted }: BasicSelectProps) => {
   const { formData, setFormData }: { formData: FormData; setFormData: any } = useContext(Context);
+  const { componentProperties, inputError, inputHelperText } = componentDetails;
   const { labelId, inputLabelText, id, value, label, disabledSelectMenuItemText } = componentProperties;
+
+  const errorController = useErrorController(inputError, inputHelperText);
+
+  useEffect(() => {
+    // @ts-ignore
+    errorController.updateError(formData[value]);
+  }, []);
+
+  useEffect(() => {
+    errorController.setIsSubmitted(submitted);
+  }, [submitted]);
 
   const handleBasicSelect = (event: SelectChangeEvent<any>, formProperty: string) => {
     setFormData({ ...formData, [formProperty]: event.target.value });
@@ -66,7 +87,7 @@ const BasicSelect = ({ componentProperties, options, formDataProperty, errorCont
   };
 
   return (
-    <FormControl sx={{ mt: 1, minWidth: 210 }} error={errorController.showError}>
+    <FormControl sx={{ mt: 1, mb: 2, minWidth: 210 }} error={errorController.showError}>
       <InputLabel id={labelId}>{inputLabelText}</InputLabel>
       <Select
         labelId={labelId}
