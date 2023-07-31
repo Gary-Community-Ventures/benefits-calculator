@@ -16,6 +16,7 @@ import {
   displayHealthInsuranceHelperText,
   displayBenefitsHelperText,
   countySelectHelperText,
+  otherReferalSourceHelperText,
 } from './validationFunctions';
 import referralOptions from './referralOptions';
 import countiesByZipcode from './countiesByZipcode';
@@ -260,7 +261,7 @@ const questions = {
             <FormattedMessage id="questions.referralSource-a-inputLabel" defaultMessage="Other referral source" />
           ),
           inputError: selectHasError,
-          inputHelperText: displayReferralSourceHelperText,
+          inputHelperText: otherReferalSourceHelperText,
         },
       },
     ],

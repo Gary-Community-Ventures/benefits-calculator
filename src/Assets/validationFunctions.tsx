@@ -44,7 +44,7 @@ const displayAgeHelperText: MessageFunction<string> = (applicantAge) => {
   if (numberApplicantAge < minimumAge || numberApplicantAge > maximumAge) {
     return (
       <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="validation-helperText.age" defaultMessage="Please enter a valid age (13-130)" />
+        <FormattedMessage id="errorMessage-age" defaultMessage="Please enter your age" />
       </ErrorMessageWrapper>
     );
   }
@@ -83,7 +83,9 @@ const hoursWorkedValueHasError: ValidationFunction<string> = (valueInput) => {
 const hoursWorkedHelperText: MessageFunction<string> = (valueInput) => {
   if (hoursWorkedValueHasError(valueInput)) {
     return (
-      <ErrorMessageWrapper fontSize="1rem">do not forget to update this error message!!!!!!!!!!</ErrorMessageWrapper>
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="errorMessage-greaterThanZero" defaultMessage="Please enter a number greater than 0" />
+      </ErrorMessageWrapper>
     );
   }
 };
@@ -98,10 +100,7 @@ const displayIncomeStreamValueHelperText: MessageFunction<string> = (valueInput)
   if (incomeStreamValueHasError(valueInput)) {
     return (
       <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage
-          id="validation-helperText.incomeValue"
-          defaultMessage="Please enter a number greater than 0"
-        />
+        <FormattedMessage id="errorMessage-greaterThanZero" defaultMessage="Please enter a number greater than 0" />
       </ErrorMessageWrapper>
     );
   }
@@ -134,10 +133,7 @@ const displayExpenseSourceValueHelperText: MessageFunction<string | number> = (v
   if (expenseSourceValueHasError(valueInput)) {
     return (
       <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage
-          id="validation-helperText.expenseValue"
-          defaultMessage="Please enter a number greater than 0"
-        />
+        <FormattedMessage id="errorMessage-greaterThanZero" defaultMessage="Please enter a number greater than 0" />
       </ErrorMessageWrapper>
     );
   }
@@ -175,7 +171,10 @@ const displayHouseholdSizeHelperText: MessageFunction<string> = (sizeOfHousehold
   return (
     (numValueInput <= 0 || numValueInput > 8) && (
       <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="validation-helperText.householdSize" defaultMessage="Number of People (max. 8)" />
+        <FormattedMessage
+          id="errorMessage-numberOfHHMembers"
+          defaultMessage="Please enter the number of people in your household (max. 8)"
+        />
       </ErrorMessageWrapper>
     )
   );
@@ -207,7 +206,10 @@ const displayHouseholdMemberAgeHelperText: MessageFunction<string> = (applicantA
   if (householdMemberAgeHasError(applicantAge)) {
     return (
       <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="validation-helperText.hHMemberAge" defaultMessage="Please enter 0 or a positive number" />
+        <FormattedMessage
+          id="errorMessage-HHMemberAge"
+          defaultMessage="Please enter 0 or a positive number for the household member's age"
+        />
       </ErrorMessageWrapper>
     );
   }
@@ -238,10 +240,7 @@ const getPersonDataErrorMsg: MessageFunction<HouseholdData> = (householdDataStat
   } else if (relationshipToHH === '') {
     return (
       <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage
-          id="validation-helperText.hhMemberRelation"
-          defaultMessage="Please select a relation option"
-        />
+        <FormattedMessage id="errorMessage-HHMemberRelationship" defaultMessage="Please select a relationship" />
       </ErrorMessageWrapper>
     );
   } else if (hasIncome && incomeStreamsAreValid(incomeStreams) === false) {
@@ -471,24 +470,50 @@ const displayBenefitsHelperText: MessageFunction<string> = (hasBenefits, formDat
 
 const countySelectHelperText: MessageFunction<string> = () => {
   return (
-    <ErrorMessageWrapper fontSize="1rem">Please remember to replace this with the right language</ErrorMessageWrapper>
+    <ErrorMessageWrapper fontSize="1rem">
+      <FormattedMessage id="errorMessage-county" defaultMessage="Please Select a county" />
+    </ErrorMessageWrapper>
   );
 };
 
 const expenseTypeHelperText: MessageFunction<string> = () => {
-  return <ErrorMessageWrapper fontSize="1rem">DONT FORGET TO PUT IN TRANSLATIONS!!!!!!!!</ErrorMessageWrapper>;
+  return (
+    <ErrorMessageWrapper fontSize="1rem">
+      <FormattedMessage id="errorMessage-expenseType" defaultMessage="Please select an expense type" />
+    </ErrorMessageWrapper>
+  );
 };
 
 const relationTypeHelperText: MessageFunction<string> = () => {
-  return <ErrorMessageWrapper fontSize="1rem">REpLacE tHiS TExt</ErrorMessageWrapper>;
+  return (
+    <ErrorMessageWrapper fontSize="1rem">
+      <FormattedMessage id="errorMessage-HHMemberRelationship" defaultMessage="Please select a relationship" />
+    </ErrorMessageWrapper>
+  );
 };
 
 const incomeStreamHelperText: MessageFunction<string> = () => {
-  return <ErrorMessageWrapper fontSize="1rem">FIX THIS</ErrorMessageWrapper>;
+  return (
+    <ErrorMessageWrapper fontSize="1rem">
+      <FormattedMessage id="errorMessage-incomeType" defaultMessage="Please select an income type" />
+    </ErrorMessageWrapper>
+  );
 };
 
 const incomeFrequencyHelperText: MessageFunction<string> = () => {
-  return <ErrorMessageWrapper fontSize="1rem">AHHHHHHHHHHHHHH</ErrorMessageWrapper>;
+  return (
+    <ErrorMessageWrapper fontSize="1rem">
+      <FormattedMessage id="errorMessage-incomeFrequency" defaultMessage="Please select a frequency" />
+    </ErrorMessageWrapper>
+  );
+};
+
+const otherReferalSourceHelperText: MessageFunction<string> = () => {
+  return (
+    <ErrorMessageWrapper fontSize="1rem">
+      <FormattedMessage id="errorMessage-otherReferralSource" defaultMessage="Please type in your referral source" />
+    </ErrorMessageWrapper>
+  );
 };
 
 export {
@@ -538,4 +563,5 @@ export {
   relationTypeHelperText,
   incomeStreamHelperText,
   incomeFrequencyHelperText,
+  otherReferalSourceHelperText,
 };

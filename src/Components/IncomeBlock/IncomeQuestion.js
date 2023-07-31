@@ -179,7 +179,7 @@ const IncomeQuestion = ({
         >
           {createIncomeStreamsMenuItems()}
         </StyledSelectfield>
-        {incomeFrequencyErrorController.showError && (
+        {incomeStreamErrorController.showError && (
           <FormHelperText>{incomeStreamErrorController.message()}</FormHelperText>
         )}
       </FormControl>
