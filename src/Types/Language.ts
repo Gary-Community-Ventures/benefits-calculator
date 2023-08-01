@@ -431,4 +431,9 @@ export interface Language extends Record<string, string> {
   'TwoOneOneHeader.resources': string;
   'TwoOneOneHeader.chat': string;
   'TwoOneOneHeader.login': string;
+
+  'footer-copyright': string;
+  'footer-terms-of-service-link': string;
+  'footer-twoOneOne-privacy': string;
+  'footer-twoOneOne-mfb': string;
 }

@@ -435,5 +435,10 @@
   "TwoOneOneHeader.agencies": "COMMUNITY AGENCIES",
   "TwoOneOneHeader.resources": "SEARCH RESOURCES",
   "TwoOneOneHeader.chat": "CHAT",
-  "TwoOneOneHeader.login": "LOGIN"
+  "TwoOneOneHeader.login": "LOGIN",
+
+  "footer-copyright": "© Copyright 2-1-1 Colorado",
+  "footer-terms-of-service-link": "2-1-1 Terms of Service |",
+  "footer-twoOneOne-privacy": "2-1-1 Privacy Policy |",
+  "footer-twoOneOne-mfb": "MyFriendBen Privacy Policy"
 }

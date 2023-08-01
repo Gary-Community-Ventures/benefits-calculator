@@ -144,7 +144,9 @@ const TwoOneOneFooter = () => {
       </Stack>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef', padding: '1rem 1rem' }} square={true}>
         <Stack direction="row" className="twoOneOne-font stack-container copyright-container">
-          <Typography className="privacy-policy-links">© Copyright 2-1-1 Colorado</Typography>
+          <Typography className="privacy-policy-links">
+            <FormattedMessage id="footer-copyright" defaultMessage="© Copyright 2-1-1 Colorado" />
+          </Typography>
           <Stack direction="row">
             <Link
               href="https://www.211colorado.org/terms-of-service/"
@@ -154,8 +156,9 @@ const TwoOneOneFooter = () => {
               aria-label="2-1-1 terms of service"
               className="privacy-policy-links"
             >
-              <FormattedMessage id="footer-terms-of-service-link" defaultMessage="2-1-1 Terms of Service |&nbsp;" />
+              <FormattedMessage id="footer-terms-of-service-link" defaultMessage="2-1-1 Terms of Service |" />
             </Link>
+            &nbsp;
             <Link
               href="https://www.211colorado.org/privacy-policy/"
               underline="none"
@@ -164,8 +167,9 @@ const TwoOneOneFooter = () => {
               aria-label="2-1-1 terms of service"
               className="privacy-policy-links"
             >
-              <FormattedMessage id="footer-twoOneOne-privacy" defaultMessage="2-1-1 Privacy Policy |&nbsp;" />
+              <FormattedMessage id="footer-twoOneOne-privacy" defaultMessage="2-1-1 Privacy Policy |" />
             </Link>
+            &nbsp;
             <Link
               href="https://www.myfriendben.org/en/data-privacy-policy"
               underline="none"
