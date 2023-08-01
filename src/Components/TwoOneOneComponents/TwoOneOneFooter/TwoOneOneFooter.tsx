@@ -187,7 +187,7 @@ const TwoOneOneFooter = () => {
 
   return (
     <>
-      <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef' }} square={true}>
+      <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef', marginTop: '3.875rem' }} square={true}>
         <Box className="twoOneOne-font flexIntoRow getHelp-text">
           <FormattedMessage
             id="footer-header"
