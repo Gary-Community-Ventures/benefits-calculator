@@ -31,7 +31,7 @@
   font-weight: 700;
 }
 
-.stack-container {
+.flexIntoRow {
   max-width: var(--main-max-width);
   margin: auto;
   padding: 0 1rem;
@@ -39,7 +39,7 @@
   flex-direction: row;
 }
 
-.stack-links {
+.flexLinksIntoRow {
   display: flex;
   flex-direction: row;
 }
@@ -84,7 +84,7 @@
 }
 
 @media (max-width: 870px) {
-  .stack-container, .stack-links {
+  .flexIntoRow, .flexLinksIntoRow {
     flex-direction: column;
     align-items: start;
   }

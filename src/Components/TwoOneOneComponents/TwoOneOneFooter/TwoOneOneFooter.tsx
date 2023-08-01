@@ -143,11 +143,11 @@ const TwoOneOneFooter = () => {
 
   const displayCopyrightPolicySection = () => {
     return (
-      <Box className="twoOneOne-font stack-container copyright-container">
+      <Box className="twoOneOne-font flexIntoRow copyright-container">
         <Typography className="privacy-policy-links">
           <FormattedMessage id="footer-copyright" defaultMessage="© Copyright 2-1-1 Colorado" />
         </Typography>
-        <Box className="stack-links">
+        <Box className="flexLinksIntoRow">
           <Link
             href="https://www.211colorado.org/terms-of-service/"
             underline="none"
@@ -188,22 +188,22 @@ const TwoOneOneFooter = () => {
   return (
     <>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef' }} square={true}>
-        <Box className="twoOneOne-font stack-container getHelp-text">
+        <Box className="twoOneOne-font flexIntoRow getHelp-text">
           <FormattedMessage
             id="footer-header"
             defaultMessage="Not finding what you are looking for? Try these other ways to get help:"
           />
         </Box>
-        <Box gap="1rem" className="stack-container icon-section">
+        <Box gap="1rem" className="flexIntoRow icon-section">
           {displayDialStack()}
           {displayTextStack()}
           {displayChatStack()}
         </Box>
       </Paper>
-      <Box className="stack-container footer-paragraph first-paragraph">
+      <Box className="flexIntoRow footer-paragraph first-paragraph">
         {displayFirstParagraph()}
       </Box>
-      <Box className="stack-container footer-paragraph second-paragraph">
+      <Box className="flexIntoRow footer-paragraph second-paragraph">
         {displaySecondParagraph()}
       </Box>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef', padding: '1rem 1rem' }} square={true}>
