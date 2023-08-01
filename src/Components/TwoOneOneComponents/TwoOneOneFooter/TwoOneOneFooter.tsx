@@ -52,7 +52,7 @@ const TwoOneOneFooter = () => {
           </Link>
           &nbsp;
           <Typography className="font-color" sx={{ display: 'inline-block' }}>
-            <FormattedMessage id="footer-or-text" defaultMessage=" or " />
+            <FormattedMessage id="footer-or-text" defaultMessage=" or" />
             &nbsp;
           </Typography>
           <Link
@@ -157,8 +157,8 @@ const TwoOneOneFooter = () => {
             className="privacy-policy-links"
           >
             <FormattedMessage id="footer-terms-of-service-link" defaultMessage="2-1-1 Terms of Service |" />
+            &nbsp;
           </Link>
-          &nbsp;
           <Link
             href="https://www.211colorado.org/privacy-policy/"
             underline="none"
@@ -168,8 +168,8 @@ const TwoOneOneFooter = () => {
             className="privacy-policy-links"
           >
             <FormattedMessage id="footer-twoOneOne-privacy" defaultMessage="2-1-1 Privacy Policy |" />
+            &nbsp;
           </Link>
-          &nbsp;
           <Link
             href="https://www.myfriendben.org/en/data-privacy-policy"
             underline="none"
