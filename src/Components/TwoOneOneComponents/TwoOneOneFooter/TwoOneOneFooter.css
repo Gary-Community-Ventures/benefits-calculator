@@ -85,7 +85,8 @@
 }
 
 @media (max-width: 870px) {
-  .flexIntoRow, .flexLinksIntoRow {
+  .flexIntoRow,
+  .flexLinksIntoRow {
     flex-direction: column;
     align-items: start;
   }

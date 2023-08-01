@@ -200,12 +200,8 @@ const TwoOneOneFooter = () => {
           {displayChatStack()}
         </Box>
       </Paper>
-      <Box className="flexIntoRow footer-paragraph first-paragraph">
-        {displayFirstParagraph()}
-      </Box>
-      <Box className="flexIntoRow footer-paragraph second-paragraph">
-        {displaySecondParagraph()}
-      </Box>
+      <Box className="flexIntoRow footer-paragraph first-paragraph">{displayFirstParagraph()}</Box>
+      <Box className="flexIntoRow footer-paragraph second-paragraph">{displaySecondParagraph()}</Box>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef', padding: '1rem 1rem' }} square={true}>
         {displayCopyrightPolicySection()}
       </Paper>
