@@ -431,6 +431,7 @@ export interface Language extends Record<string, string> {
   'TwoOneOneHeader.resources': string;
   'TwoOneOneHeader.chat': string;
   'TwoOneOneHeader.login': string;
+  'footer-header': string;
 
   'footer-first-paragraph': string;
   'footer-second-paragraph': string;

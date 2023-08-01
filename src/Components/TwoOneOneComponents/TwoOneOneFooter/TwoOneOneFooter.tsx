@@ -127,11 +127,58 @@ const TwoOneOneFooter = () => {
     );
   };
 
+  const displayCopyrightPolicySection = () => {
+    return (
+      <Stack direction="row" className="twoOneOne-font stack-container copyright-container">
+        <Typography className="privacy-policy-links">
+          <FormattedMessage id="footer-copyright" defaultMessage="© Copyright 2-1-1 Colorado" />
+        </Typography>
+        <Stack direction="row">
+          <Link
+            href="https://www.211colorado.org/terms-of-service/"
+            underline="none"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="2-1-1 terms of service"
+            className="privacy-policy-links"
+          >
+            <FormattedMessage id="footer-terms-of-service-link" defaultMessage="2-1-1 Terms of Service |" />
+          </Link>
+          &nbsp;
+          <Link
+            href="https://www.211colorado.org/privacy-policy/"
+            underline="none"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="2-1-1 terms of service"
+            className="privacy-policy-links"
+          >
+            <FormattedMessage id="footer-twoOneOne-privacy" defaultMessage="2-1-1 Privacy Policy |" />
+          </Link>
+          &nbsp;
+          <Link
+            href="https://www.myfriendben.org/en/data-privacy-policy"
+            underline="none"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="2-1-1 terms of service"
+            className="privacy-policy-links"
+          >
+            <FormattedMessage id="footer-twoOneOne-mfb" defaultMessage="MyFriendBen Privacy Policy" />
+          </Link>
+        </Stack>
+      </Stack>
+    );
+  };
+
   return (
     <>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef' }} square={true}>
         <Stack direction="row" className="twoOneOne-font stack-container getHelp-text">
-          Not finding what you are looking for? Try these other ways to get help:
+          <FormattedMessage
+            id="footer-header"
+            defaultMessage="Not finding what you are looking for? Try these other ways to get help:"
+          />
         </Stack>
         <Stack direction="row" gap="1rem" className="stack-container icon-section">
           {displayDialStack()}
@@ -146,45 +193,7 @@ const TwoOneOneFooter = () => {
         {displaySecondParagraph()}
       </Stack>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef', padding: '1rem 1rem' }} square={true}>
-        <Stack direction="row" className="twoOneOne-font stack-container copyright-container">
-          <Typography className="privacy-policy-links">
-            <FormattedMessage id="footer-copyright" defaultMessage="© Copyright 2-1-1 Colorado" />
-          </Typography>
-          <Stack direction="row">
-            <Link
-              href="https://www.211colorado.org/terms-of-service/"
-              underline="none"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="2-1-1 terms of service"
-              className="privacy-policy-links"
-            >
-              <FormattedMessage id="footer-terms-of-service-link" defaultMessage="2-1-1 Terms of Service |" />
-            </Link>
-            &nbsp;
-            <Link
-              href="https://www.211colorado.org/privacy-policy/"
-              underline="none"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="2-1-1 terms of service"
-              className="privacy-policy-links"
-            >
-              <FormattedMessage id="footer-twoOneOne-privacy" defaultMessage="2-1-1 Privacy Policy |" />
-            </Link>
-            &nbsp;
-            <Link
-              href="https://www.myfriendben.org/en/data-privacy-policy"
-              underline="none"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="2-1-1 terms of service"
-              className="privacy-policy-links"
-            >
-              <FormattedMessage id="footer-twoOneOne-mfb" defaultMessage="MyFriendBen Privacy Policy" />
-            </Link>
-          </Stack>
-        </Stack>
+        {displayCopyrightPolicySection()}
       </Paper>
     </>
   );
