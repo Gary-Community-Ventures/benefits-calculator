@@ -432,6 +432,7 @@ export interface Language extends Record<string, string> {
   'TwoOneOneHeader.chat': string;
   'TwoOneOneHeader.login': string;
 
+  'footer-second-paragraph': string;
   'footer-copyright': string;
   'footer-terms-of-service-link': string;
   'footer-twoOneOne-privacy': string;

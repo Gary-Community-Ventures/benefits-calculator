@@ -114,12 +114,15 @@ const TwoOneOneFooter = () => {
   const displaySecondParagraph = () => {
     return (
       <Typography>
-        2-1-1 Colorado is committed to helping Colorado citizens connect with the services they need. Whether by phone
+        <FormattedMessage
+          id="footer-second-paragraph"
+          defaultMessage="2-1-1 Colorado is committed to helping Colorado citizens connect with the services they need. Whether by phone
         or internet, our goal is to present accurate, well-organized and easy-to-find information from state and local
         health and human services programs. We accomplish this through the work of our four Area Information Centers
         across the state. No matter where you live in Colorado, you can dial 2-1-1 and find information about resources
         in your local community. Whether you need help finding food or housing, child care, crisis counseling or
-        substance abuse treatment, one number is all you need to know.
+        substance abuse treatment, one number is all you need to know."
+        />
       </Typography>
     );
   };
