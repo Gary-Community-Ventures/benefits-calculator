@@ -103,10 +103,10 @@ const TwoOneOneFooter = () => {
   const displayFirstParagraph = () => {
     return (
       <Typography>
-        Services found within search results may involve eligibility criteria. Please contact the resource directly to
-        find out more information about how to obtain these services. This site contains links to other sites. All of
-        the information provided is believed to be accurate and reliable. However, 2-1-1 Colorado assumes no
-        responsibility for any errors appearing, nor for the use of the information provided.
+        <FormattedMessage
+          id="footer-first-paragraph"
+          defaultMessage="Services found within search results may involve eligibility criteria. Please contact the resource directly to find out more information about how to obtain these services. This site contains links to other sites. All of the information provided is believed to be accurate and reliable. However, 2-1-1 Colorado assumes no responsibility for any errors appearing, nor for the use of the information provided."
+        />
       </Typography>
     );
   };
