@@ -71,3 +71,7 @@
   font-size: 0.68rem;
   font-family: 'league-gothic', Helvetica, Arial, sans-serif;
 }
+
+.displayInline {
+  display: inline;
+}

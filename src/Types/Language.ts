@@ -435,6 +435,9 @@ export interface Language extends Record<string, string> {
   'footer-dial-text': string;
   'footer-or-text': string;
   'footer-tollFree-text': string;
+  'footer-text-text': string;
+  'footer-to-text': string;
+  'footer-standardMsg-text': string;
 
   'footer-first-paragraph': string;
   'footer-second-paragraph': string;

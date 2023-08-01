@@ -80,12 +80,18 @@ const TwoOneOneFooter = () => {
         <img src={textIcon} className="twoOneOne-footer-icon" alt="text with a 2-1-1 navigator" />
         <Box>
           <Typography variant="h6" className="icon-header">
-            Text
+            <FormattedMessage id="footer-text-text" defaultMessage="Text " />
           </Typography>
-          <Typography className="font-color" sx={{ display: 'inline-block' }}>
-            Text&nbsp;
+          <Typography className="font-color displayInline">
+            <FormattedMessage id="footer-text-text" defaultMessage="Text" />
           </Typography>
-          <strong className="font-color">ZIP CODE</strong> <Typography className="font-color">to&nbsp;</Typography>
+          &nbsp;
+          <strong className="font-color">ZIP CODE</strong>
+          &nbsp;
+          <Typography className="font-color displayInline">
+            <FormattedMessage id="footer-to-text" defaultMessage="to" />
+          </Typography>
+          &nbsp;
           <Link
             href="sms:898211"
             underline="none"
@@ -98,7 +104,10 @@ const TwoOneOneFooter = () => {
             898-211*
           </Link>
           <Typography sx={{ marginTop: '1rem' }} className="font-color">
-            *Standard message and data rates may apply.
+            <FormattedMessage
+              id="footer-standardMsg-text"
+              defaultMessage="*Standard message and data rates may apply."
+            />
           </Typography>
         </Box>
       </Stack>
