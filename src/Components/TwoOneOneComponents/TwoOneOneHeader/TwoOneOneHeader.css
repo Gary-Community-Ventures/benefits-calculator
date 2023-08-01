@@ -25,9 +25,17 @@ button.hamburger-icon {
   display: none;
 }
 
+.hamburger-drawer {
+  display: none;
+}
+
 @media (max-width: 1250px) {
   button.hamburger-icon {
     display: flex;
+  }
+
+  .hamburger-drawer {
+    display: block;
   }
 
   div.twoOneOne-desktop-links {
