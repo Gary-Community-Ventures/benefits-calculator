@@ -13,7 +13,7 @@ const TwoOneOneFooter = () => {
         <img src={chatIcon} className="twoOneOne-footer-icon" alt="chat with a 2-1-1 navigator" />
         <Box>
           <Typography variant="h6" className="icon-header">
-            Chat
+            <FormattedMessage id="footer-chat-text" defaultMessage="Chat" />
           </Typography>
           <Link
             href="https://home-c27.incontact.com/inContact/ChatClient/ChatClientPatron.aspx?poc=f927e51b-f96e-477b-9052-088d1fbcdc8f&bu=4594486"
@@ -23,7 +23,7 @@ const TwoOneOneFooter = () => {
             aria-label="2-1-1 chat link"
             color="primary"
           >
-            Click to live chat with a 2-1-1 Navigator
+            <FormattedMessage id="footer-liveChat-text" defaultMessage="Click to live chat with a 2-1-1 Navigator" />
           </Link>
         </Box>
       </Stack>

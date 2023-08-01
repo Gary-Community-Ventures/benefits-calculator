@@ -438,7 +438,8 @@ export interface Language extends Record<string, string> {
   'footer-text-text': string;
   'footer-to-text': string;
   'footer-standardMsg-text': string;
-
+  'footer-chat-text': string;
+  'footer-liveChat-text': string;
   'footer-first-paragraph': string;
   'footer-second-paragraph': string;
   'footer-copyright': string;
