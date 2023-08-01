@@ -36,7 +36,7 @@ const TwoOneOneFooter = () => {
         <img src={dialIcon} className="twoOneOne-footer-icon" alt="talk to a 2-1-1 navigator via phone" />
         <Box>
           <Typography variant="h6" className="icon-header">
-            Dial
+            <FormattedMessage id="footer-dial-text" defaultMessage="Dial" />
           </Typography>
           <Link
             href="tel:211"
@@ -47,10 +47,13 @@ const TwoOneOneFooter = () => {
             color="primary"
             sx={{ display: 'inline-block' }}
           >
-            Dial 2-1-1&nbsp;
+            <FormattedMessage id="footer-dial-text" defaultMessage="Dial " />
+            2-1-1
           </Link>
+          &nbsp;
           <Typography className="font-color" sx={{ display: 'inline-block' }}>
-            or&nbsp;
+            <FormattedMessage id="footer-or-text" defaultMessage=" or " />
+            &nbsp;
           </Typography>
           <Link
             href="tel:866-760-6489"
@@ -63,7 +66,9 @@ const TwoOneOneFooter = () => {
           >
             (866) 760-6489
           </Link>
-          <Typography className="font-color">toll free</Typography>
+          <Typography className="font-color">
+            <FormattedMessage id="footer-tollFree-text" defaultMessage="toll free" />
+          </Typography>
         </Box>
       </Stack>
     );
