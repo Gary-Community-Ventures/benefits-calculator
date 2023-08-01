@@ -35,6 +35,13 @@
   max-width: var(--main-max-width);
   margin: auto;
   padding: 0 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.stack-links {
+  display: flex;
+  flex-direction: row;
 }
 
 .getHelp-text {
@@ -74,4 +81,11 @@
 
 .displayInline {
   display: inline;
+}
+
+@media (max-width: 870px) {
+  .stack-container, .stack-links {
+    flex-direction: column;
+    align-items: start;
+  }
 }
