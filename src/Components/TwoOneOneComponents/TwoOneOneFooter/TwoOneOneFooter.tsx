@@ -194,7 +194,7 @@ const TwoOneOneFooter = () => {
             defaultMessage="Not finding what you are looking for? Try these other ways to get help:"
           />
         </Box>
-        <Box gap="1rem" className="flexIntoRow icon-section">
+        <Box className="flexIntoRow icon-section">
           {displayDialStack()}
           {displayTextStack()}
           {displayChatStack()}
