@@ -5,6 +5,7 @@ import home from './OptionCardIcons/home.png';
 import chat from './OptionCardIcons/chat.png';
 import stroller from './OptionCardIcons/stroller.png';
 import pregnant from './OptionCardIcons/pregnant.png';
+import briefcase from './OptionCardIcons/briefcase.png';
 
 const acuteConditionOptions = {
   food: {
@@ -50,6 +51,13 @@ const acuteConditionOptions = {
     ),
     image: pregnant,
   },
+  jobResources: {
+    formattedMessage: (
+      <FormattedMessage id="acuteConditionOptions.jobResources" defaultMessage="Finding a job" />
+    ),
+    image: briefcase,
+  },
+
 };
 
 export default acuteConditionOptions;

@@ -383,6 +383,8 @@
   "acuteConditionOptions.childDevelopment": "Concern about your baby or toddler's development",
   "acuteConditionOptions.loss": "Funeral, burial, or cremation costs",
   "acuteConditionOptions.familyPlanning": "Family planning or birth control",
+  "acuteConditionOptions.jobResources": "Finding a job",
+
   "urgentNeedsTable.visit-website-button": "Visit website",
   "urgentNeedsTable.resources-columnHeader": "Resources",
   "urgentNeedsTable.typeOfResource-columnHeader": "Type of Resource",
