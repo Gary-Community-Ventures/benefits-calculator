@@ -100,7 +100,7 @@ export const createDevFormData = (searchParams) => {
       familyPlanning: true,
       jobResources: true,
       dentalCare: true,
-      legalServices: true
+      legalServices: true,
     },
   };
 };
