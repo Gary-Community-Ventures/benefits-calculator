@@ -90,4 +90,8 @@
     flex-direction: column;
     align-items: start;
   }
+
+  .MuiPaper-root.paper-container {
+    margin-top: 5.4375rem;
+  }
 }
