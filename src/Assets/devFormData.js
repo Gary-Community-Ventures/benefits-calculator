@@ -98,6 +98,7 @@ export const createDevFormData = (searchParams) => {
       support: true,
       childDevelopment: true,
       familyPlanning: true,
+      jobResources: true
     },
   };
 };
