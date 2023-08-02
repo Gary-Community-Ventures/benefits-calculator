@@ -77,6 +77,7 @@ const initialFormData: FormData = {
     support: false,
     childDevelopment: false,
     familyPlanning: false,
+    jobResources: false
   },
 };
 
