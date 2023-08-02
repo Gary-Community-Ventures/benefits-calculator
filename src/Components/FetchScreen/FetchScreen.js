@@ -92,7 +92,7 @@ const FetchScreen = ({ setFetchedScreen }) => {
         familyPlanning: response.needs_family_planning_help ?? false,
         jobResources: response.needs_job_resources ?? false,
         dentalCare: response.needs_dental_care ?? false,
-
+        legalServices: response.needs_legal_services ?? false,
       },
       signUpInfo: {
         email: '',

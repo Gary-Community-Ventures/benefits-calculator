@@ -79,6 +79,7 @@ const initialFormData: FormData = {
     familyPlanning: false,
     jobResources: false,
     dentalCare: false,
+    legalServices: false,
   },
 };
 

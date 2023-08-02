@@ -80,6 +80,7 @@ export interface AcuteHHConditions {
   familyPlanning: boolean;
   jobResources: boolean;
   dentalCare: boolean;
+  legalServices: boolean;
 }
 
 export interface FormData {
