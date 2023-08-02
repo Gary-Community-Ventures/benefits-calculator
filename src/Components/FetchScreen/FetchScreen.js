@@ -91,6 +91,7 @@ const FetchScreen = ({ setFetchedScreen }) => {
         childDevelopment: response.needs_child_dev_help ?? false,
         familyPlanning: response.needs_family_planning_help ?? false,
         jobResources: response.needs_job_resources ?? false,
+        dentalCare: response.needs_dental_care ?? false,
 
       },
       signUpInfo: {

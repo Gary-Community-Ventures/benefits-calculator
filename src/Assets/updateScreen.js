@@ -56,7 +56,8 @@ const getScreensBody = (formData, languageCode) => {
     needs_mental_health_help: formData.acuteHHConditions.support,
     needs_child_dev_help: formData.acuteHHConditions.childDevelopment,
     needs_family_planning_help: formData.acuteHHConditions.familyPlanning,
-    needs_job_resources: formData.acuteHHConditions.jobResources
+    needs_job_resources: formData.acuteHHConditions.jobResources,
+    needs_dental_care: formData.acuteHHConditions.dentalCare
   };
 
   return screenBody;

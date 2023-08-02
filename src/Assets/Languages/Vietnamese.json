@@ -384,7 +384,8 @@
   "acuteConditionOptions.loss": "Chi phí tang lễ, chôn cất hoặc hỏa táng",
   "acuteConditionOptions.familyPlanning": "Kế hoạch hóa gia đình hoặc ngừa thai",
   "acuteConditionOptions.jobResources": "Tìm việc",
-
+  "acuteConditionOptions.dentalCare": "Chăm sóc nha khoa chi phí thấp",
+  
   "urgentNeedsTable.visit-website-button": "Truy cập trang web",
   "urgentNeedsTable.resources-columnHeader": "Nguồn Lực",
   "urgentNeedsTable.typeOfResource-columnHeader": "Loại Nguồn Lực",

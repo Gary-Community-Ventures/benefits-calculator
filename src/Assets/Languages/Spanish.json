@@ -384,6 +384,8 @@
   "acuteConditionOptions.loss": "Costos de funeral, entierro o cremación",
   "acuteConditionOptions.familyPlanning": "Planificación familiar o control de natalidad",
   "acuteConditionOptions.jobResources": "Encontrar trabajo",
+  "acuteConditionOptions.dentalCare": "Atención dental de bajo costo",
+  
   "urgentNeedsTable.visit-website-button": "Visite el sitio web",
   "urgentNeedsTable.resources-columnHeader": "Recursos",
   "urgentNeedsTable.typeOfResource-columnHeader": "Tipo de Recurso",

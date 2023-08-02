@@ -277,7 +277,6 @@ export interface Language extends Record<string, string> {
   'confirmation.displayAllFormData-currentHHBenefitsText': string;
   'confirmation.displayAllFormData-healthInsurance': string;
   'confirmation.displayAllFormData-acuteHHConditions': string;
-  
   'confirmation.none': string;
   'confirmation.noIncome': string;
   'confirmation.residenceInfo': string;
@@ -384,6 +383,7 @@ export interface Language extends Record<string, string> {
   'acuteConditionOptions.loss': string;
   'acuteConditionOptions.familyPlanning': string;
   'acuteConditionOptions.jobResources': string;
+  'acuteConditionOptions.dentalCare': string;
 
 
   'urgentNeedsTable.visit-website-button': string;

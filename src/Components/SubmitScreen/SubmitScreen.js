@@ -98,7 +98,8 @@ const SubmitScreen = () => {
       needs_mental_health_help: acuteHHConditions.support,
       needs_child_dev_help: acuteHHConditions.childDevelopment,
       needs_family_planning_help: acuteHHConditions.familyPlanning,
-      needs_job_resources: formData.acuteHHConditions.jobResources
+      needs_job_resources: formData.acuteHHConditions.jobResources,
+      needs_dental_care: formData.acuteHHConditions.dentalCare,
     };
 
     if (userId !== 0 && userId !== false) {

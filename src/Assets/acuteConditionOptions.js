@@ -6,6 +6,7 @@ import chat from './OptionCardIcons/chat.png';
 import stroller from './OptionCardIcons/stroller.png';
 import pregnant from './OptionCardIcons/pregnant.png';
 import briefcase from './OptionCardIcons/briefcase.png';
+import dentistry from './OptionCardIcons/dentistry.png';
 
 const acuteConditionOptions = {
   food: {
@@ -56,6 +57,12 @@ const acuteConditionOptions = {
       <FormattedMessage id="acuteConditionOptions.jobResources" defaultMessage="Finding a job" />
     ),
     image: briefcase,
+  },
+  dentalCare: {
+    formattedMessage: (
+      <FormattedMessage id="acuteConditionOptions.dentalCare" defaultMessage="Low-cost dental care" />
+    ),
+    image: dentistry,
   },
 
 };

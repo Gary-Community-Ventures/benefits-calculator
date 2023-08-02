@@ -79,6 +79,7 @@ export interface AcuteHHConditions {
   childDevelopment: boolean;
   familyPlanning: boolean;
   jobResources: boolean;
+  dentalCare: boolean;
 }
 
 export interface FormData {
