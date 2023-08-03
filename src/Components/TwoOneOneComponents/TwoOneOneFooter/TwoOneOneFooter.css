@@ -1,0 +1,100 @@
+.twoOneOne-font {
+  color: #505050;
+  font-family: 'league-gothic', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 550;
+  line-height: 1.1em;
+  word-spacing: 1px;
+}
+
+.MuiTypography-root.icon-header {
+  color: #505050;
+  font-family: 'league-gothic', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 550;
+  line-height: 1.1em;
+  margin-bottom: 1rem;
+  word-spacing: 1px;
+}
+
+.font-color {
+  color: #505050;
+}
+
+.twoOneOne-footer-icon {
+  max-width: 150px;
+  height: 130px;
+  color: #005191;
+}
+
+.font-weight {
+  font-weight: 700;
+}
+
+.flexIntoRow {
+  max-width: var(--main-max-width);
+  margin: auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.flexLinksIntoRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.getHelp-text {
+  padding-top: 3rem;
+  margin-bottom: 2.5rem;
+}
+
+.icon-section {
+  padding-bottom: 3rem;
+}
+
+.footer-paragraph {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.first-paragraph {
+  font-style: italic;
+  padding-top: 1rem;
+}
+
+.second-paragraph {
+  padding-bottom: 1rem;
+}
+
+.copyright-container {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.MuiTypography-root.privacy-policy-links {
+  color: #6b6b6b;
+  font-weight: 500;
+  font-size: 0.68rem;
+  font-family: 'league-gothic', Helvetica, Arial, sans-serif;
+}
+
+.displayInline {
+  display: inline;
+}
+
+@media (max-width: 870px) {
+  .flexIntoRow,
+  .flexLinksIntoRow {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .MuiPaper-root.paper-container {
+    margin-top: 5.4375rem;
+  }
+
+  .icon-section {
+    gap: 3rem;
+  }
+}

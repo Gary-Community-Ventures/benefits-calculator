@@ -5,6 +5,9 @@ import home from './OptionCardIcons/home.png';
 import chat from './OptionCardIcons/chat.png';
 import stroller from './OptionCardIcons/stroller.png';
 import pregnant from './OptionCardIcons/pregnant.png';
+import briefcase from './OptionCardIcons/briefcase.png';
+import dentistry from './OptionCardIcons/dentistry.png';
+import gavel from './OptionCardIcons/gavel.png';
 
 const acuteConditionOptions = {
   food: {
@@ -49,6 +52,23 @@ const acuteConditionOptions = {
       <FormattedMessage id="acuteConditionOptions.familyPlanning" defaultMessage="Family planning or birth control" />
     ),
     image: pregnant,
+  },
+  jobResources: {
+    formattedMessage: <FormattedMessage id="acuteConditionOptions.jobResources" defaultMessage="Finding a job" />,
+    image: briefcase,
+  },
+  dentalCare: {
+    formattedMessage: <FormattedMessage id="acuteConditionOptions.dentalCare" defaultMessage="Low-cost dental care" />,
+    image: dentistry,
+  },
+  legalServices: {
+    formattedMessage: (
+      <FormattedMessage
+        id="acuteConditionOptions.legalServices"
+        defaultMessage="Free or low-cost help with civil legal needs"
+      />
+    ),
+    image: gavel,
   },
 };
 
