@@ -431,7 +431,7 @@
   "noResults.p-Three": " para hablar con alguien en línea o por teléfono para obtener los recursos que está buscando.",
   "noResultsOrUrgentNeeds.p-One": "Parece que usted no indicó ninguna necesidad inmediata.",
   "errorMessage-county": "Seleccione un condado",
-  "errorMessage-numberOfHHMembers": "Ingrese el número de personas en su hogar (Max. 8)",
+  "errorMessage-numberOfHHMembers": "Ingrese el número de personas en su hogar (max. 8)",
   "errorMessage-age": "Por favor ingrese su edad",
   "errorMessage-incomeType": "Seleccione un tipo de ingreso",
   "errorMessage-incomeFrequency": "Por favor selecciona la frecuencia",
