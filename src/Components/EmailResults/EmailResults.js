@@ -12,7 +12,7 @@ import {
   displayEmailHelperText,
   phoneHasError,
   displayPhoneHasErrorHelperText,
-} from '../../Assets/validationFunctions';
+} from '../../Assets/validationFunctions.tsx';
 import { postMessage } from '../../apiCalls';
 import Textfield from '../Textfield/Textfield';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';

@@ -20,7 +20,9 @@ import stepDirectory from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import './App.css';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
-import { useErrorController } from './Assets/validationFunctions';
+// @ts-ignore
+import { useErrorController } from './Assets/validationFunctions.tsx';
+import './App.css';
 
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
 if (TRACKING_ID === undefined) {

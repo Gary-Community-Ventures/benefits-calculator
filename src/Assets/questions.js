@@ -17,7 +17,7 @@ import {
   displayBenefitsHelperText,
   countySelectHelperText,
   otherReferalSourceHelperText,
-} from './validationFunctions';
+} from './validationFunctions.tsx';
 import referralOptions from './referralOptions';
 import countiesByZipcode from './countiesByZipcode';
 import signUpOptions from './signUpOptions';

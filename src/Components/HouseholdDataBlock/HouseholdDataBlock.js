@@ -18,7 +18,7 @@ import {
   displayAgeHelperText,
   selectHasError,
   relationTypeHelperText,
-} from '../../Assets/validationFunctions';
+} from '../../Assets/validationFunctions.tsx';
 import { FormattedMessage } from 'react-intl';
 import './HouseholdDataBlock.css';
 import stepDirectory from '../../Assets/stepDirectory';

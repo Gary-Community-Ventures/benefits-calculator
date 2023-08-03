@@ -8,7 +8,7 @@ import {
   displayExpenseSourceValueHelperText,
   selectHasError,
   expenseTypeHelperText,
-} from '../../Assets/validationFunctions';
+} from '../../Assets/validationFunctions.tsx';
 import { useEffect, useRef } from 'react';
 import Textfield from '../Textfield/Textfield';
 

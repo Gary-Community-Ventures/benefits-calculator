@@ -15,7 +15,7 @@ import {
   signUpFormHasError,
   displaySignUpFormHelperText,
   useErrorController,
-} from '../../Assets/validationFunctions';
+} from '../../Assets/validationFunctions.tsx';
 
 const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   const context = useContext(Context);
