@@ -51,7 +51,6 @@
 
 .icon-section {
   padding-bottom: 3rem;
-  gap: 3rem;
 }
 
 .footer-paragraph {
@@ -93,5 +92,9 @@
 
   .MuiPaper-root.paper-container {
     margin-top: 5.4375rem;
+  }
+
+  .icon-section {
+    gap: 3rem;
   }
 }
