@@ -5,7 +5,6 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import {
   hoursWorkedValueHasError,
   incomeStreamValueHasError,
@@ -15,6 +14,7 @@ import {
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import './IncomeBlock.css';
+import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 
 const StyledSelectfield = styled(Select)({
   marginBottom: 20,
@@ -372,14 +372,14 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit }) => {
     <>
       {createIncomeBlockQuestions()}
       {!incomeStreamsAreValid(selectedMenuItem) && (
-        <ErrorMessage
-          error={
+        <ErrorMessageWrapper fontSize="2rem">
+          {
             <FormattedMessage
               id="incomeBlock.return-error-message"
               defaultMessage="Please select and enter a response for all three fields"
             />
           }
-        />
+        </ErrorMessageWrapper>
       )}
       <Button variant="contained" onClick={(event) => handleAddAdditionalIncomeSource(event)}>
         <FormattedMessage id="incomeBlock.return-addIncomeButton" defaultMessage="Add another income" />

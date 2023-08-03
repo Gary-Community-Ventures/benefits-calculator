@@ -8,7 +8,6 @@ import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import questions from '../../Assets/questions';
@@ -37,9 +36,9 @@ const QuestionComponentContainer = ({
     return (
       <Textfield
         componentDetails={question.componentDetails}
-        errorController={errorController}
         data={formData}
         handleTextfieldChange={handleTextfieldChange}
+        submitted={errorController.isSubmitted}
       />
     );
   };
@@ -82,10 +81,10 @@ const QuestionComponentContainer = ({
   const renderBasicSelectComponent = (question) => {
     return (
       <BasicSelect
-        componentProperties={question.componentDetails.componentProperties}
+        componentDetails={question.componentDetails}
         options={question.componentDetails.options}
         formDataProperty={question.componentDetails.inputName}
-        errorController={errorController}
+        submitted={errorController.isSubmitted}
       />
     );
   };
@@ -95,7 +94,7 @@ const QuestionComponentContainer = ({
     const { followUpQuestions } = matchingQuestion;
     const hasFollowUpQuestions = followUpQuestions && followUpQuestions.length > 0;
     // this is specifically for health & referral q error handling
-    const isHealthOrReferralSourceQuestion = inputName === 'healthInsurance' || inputName === 'referralSource';
+    const isHealthQuestion = inputName === 'healthInsurance';
 
     return (
       <div className="question-container" id={id}>
@@ -106,7 +105,7 @@ const QuestionComponentContainer = ({
         {component}
         {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && (
           <FollowUpQuestions
-            matchingQuestion={matchingQuestion}
+            followUpQuestions={matchingQuestion.followUpQuestions}
             submitted={errorController.isSubmitted}
             formData={formData}
             handleCheckboxChange={handleCheckboxChange}
@@ -115,9 +114,7 @@ const QuestionComponentContainer = ({
             handleTextfieldChange={handleTextfieldChange}
           />
         )}
-        {isHealthOrReferralSourceQuestion && errorController.showError && (
-          <ErrorMessage error={errorController.message(formData[inputName])} />
-        )}
+        {isHealthQuestion && errorController.showError && errorController.message(formData[inputName])}
         {createPreviousAndContinueButtons()}
       </div>
     );

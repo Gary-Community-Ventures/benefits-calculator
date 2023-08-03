@@ -4,7 +4,6 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ExpenseQuestion from './ExpenseQuestion';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import {
   useErrorController,
   expenseSourcesHaveError,
@@ -49,7 +48,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   const deleteExpenseBlock = (selectedIndex) => {
     const updatedSelectedMenuItems = selectedMenuItem.filter((expenseSourceData, index) => index !== selectedIndex);
     setSelectedMenuItem(updatedSelectedMenuItems);
-    expensesErrorController.updateError(updatedSelectedMenuItems);
+    expensesErrorController.updateError(updatedSelectedMenuItems, formData);
   };
 
   const createExpenseBlockQuestions = () => {
@@ -91,7 +90,6 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   return (
     <>
       {createExpenseBlockQuestions()}
-      {expensesErrorController.showError && <ErrorMessage error={expensesErrorController.message(selectedMenuItem)} />}
       <Button variant="contained" onClick={(event) => handleAddAdditionalExpenseSource(event)}>
         <FormattedMessage id="expenseBlock.return-addExpenseButton" defaultMessage="Add another expense" />
       </Button>

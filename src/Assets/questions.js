@@ -7,7 +7,7 @@ import {
   householdAssetsHasError,
   displayHouseholdAssetsHelperText,
   benefitsHasError,
-  referralSourceHasError,
+  selectHasError,
   displayReferralSourceHelperText,
   displayMissingSelectHelperText,
   signUpOptionsHaveError,
@@ -15,6 +15,8 @@ import {
   acuteHHConditionsHasError,
   displayHealthInsuranceHelperText,
   displayBenefitsHelperText,
+  countySelectHelperText,
+  otherReferalSourceHelperText,
 } from './validationFunctions';
 import referralOptions from './referralOptions';
 import countiesByZipcode from './countiesByZipcode';
@@ -45,8 +47,8 @@ const questions = {
           inputType: 'text',
           inputName: 'county',
           inputLabel: <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />,
-          inputError: referralSourceHasError,
-          inputHelperText: displayMissingSelectHelperText,
+          inputError: selectHasError,
+          inputHelperText: countySelectHelperText,
           componentProperties: {
             labelId: 'county-select-label',
             inputLabelText: <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />,
@@ -202,6 +204,8 @@ const questions = {
           componentType: 'AccordionContainer',
           ariaLabel: 'questions.hasBenefits-a-ariaLabel',
           inputName: 'benefits',
+          inputError: benefitsHasError,
+          inputHelperText: displayBenefitsHelperText,
         },
       },
     ],
@@ -228,7 +232,7 @@ const questions = {
     componentDetails: {
       componentType: 'BasicSelect',
       inputName: 'referralSource',
-      inputError: referralSourceHasError,
+      inputError: selectHasError,
       inputHelperText: displayReferralSourceHelperText,
       componentProperties: {
         labelId: 'referral-source-select-label',
@@ -256,8 +260,8 @@ const questions = {
           inputLabel: (
             <FormattedMessage id="questions.referralSource-a-inputLabel" defaultMessage="Other referral source" />
           ),
-          inputError: referralSourceHasError,
-          inputHelperText: displayReferralSourceHelperText,
+          inputError: selectHasError,
+          inputHelperText: otherReferalSourceHelperText,
         },
       },
     ],

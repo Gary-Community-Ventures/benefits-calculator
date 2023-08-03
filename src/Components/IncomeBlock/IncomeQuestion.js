@@ -1,19 +1,22 @@
 import { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import { FormControl, Select, MenuItem, InputLabel, Button } from '@mui/material';
+import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
 import {
   useErrorController,
   hoursWorkedValueHasError,
+  hoursWorkedHelperText,
   incomeStreamValueHasError,
   displayIncomeStreamValueHelperText,
+  selectHasError,
+  incomeStreamHelperText,
+  incomeFrequencyHelperText,
 } from '../../Assets/validationFunctions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import Textfield from '../Textfield/Textfield';
 
 const StyledSelectfield = styled(Select)({
-  marginBottom: 20,
   minWidth: 200,
 });
 
@@ -37,10 +40,20 @@ const IncomeQuestion = ({
 }) => {
   const hoursErrorController = useErrorController(hoursWorkedValueHasError, displayIncomeStreamValueHelperText);
   const amountErrorController = useErrorController(incomeStreamValueHasError, displayIncomeStreamValueHelperText);
+  const incomeStreamErrorController = useErrorController(selectHasError, incomeStreamHelperText);
+  const incomeFrequencyErrorController = useErrorController(selectHasError, incomeFrequencyHelperText);
+
   useEffect(() => {
     hoursErrorController.setIsSubmitted(submitted);
     amountErrorController.setIsSubmitted(submitted);
+    incomeStreamErrorController.setIsSubmitted(submitted);
+    incomeFrequencyErrorController.setIsSubmitted(submitted);
   }, [submitted]);
+
+  useEffect(() => {
+    incomeStreamErrorController.updateError(incomeStreamName);
+    incomeFrequencyErrorController.updateError(incomeFrequency);
+  });
 
   const getIncomeStreamNameLabel = (incomeStreamName) => {
     return incomeOptions[incomeStreamName];
@@ -143,7 +156,7 @@ const IncomeQuestion = ({
 
   const createIncomeStreamsDropdownMenu = (incomeStreamName, index) => {
     return (
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <FormControl sx={{ m: 1, minWidth: 120 }} error={incomeStreamErrorController.showError}>
         <InputLabel id="income-type-label">
           <FormattedMessage
             id="personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel"
@@ -166,6 +179,9 @@ const IncomeQuestion = ({
         >
           {createIncomeStreamsMenuItems()}
         </StyledSelectfield>
+        {incomeStreamErrorController.showError && (
+          <FormHelperText>{incomeStreamErrorController.message()}</FormHelperText>
+        )}
       </FormControl>
     );
   };
@@ -200,6 +216,8 @@ const IncomeQuestion = ({
       inputType: 'text',
       inputLabel: <FormattedMessage id="incomeBlock.createHoursWorkedTextfield-amountLabel" defaultMessage="Hours" />,
       inputName: 'hoursPerWeek',
+      inputError: hoursWorkedValueHasError,
+      inputHelperText: hoursWorkedHelperText,
     };
 
     return (
@@ -214,7 +232,7 @@ const IncomeQuestion = ({
             data={currentIncomeSource}
             handleTextfieldChange={hoursWorkedChange}
             index={index}
-            errorController={hoursErrorController}
+            submitted={hoursErrorController.isSubmitted}
           />
         </div>
       </>
@@ -254,6 +272,8 @@ const IncomeQuestion = ({
         <FormattedMessage id="personIncomeBlock.createIncomeAmountTextfield-amountLabel" defaultMessage="Amount" />
       ),
       inputName: 'incomeAmount',
+      inputError: incomeStreamValueHasError,
+      inputHelperText: displayIncomeStreamValueHelperText,
     };
 
     return (
@@ -268,7 +288,7 @@ const IncomeQuestion = ({
             data={currentIncomeSource}
             handleTextfieldChange={handleIncomeTextfieldChange}
             index={index}
-            errorController={amountErrorController}
+            submitted={amountErrorController.isSubmitted}
           />
         </div>
       </div>
@@ -289,7 +309,7 @@ const IncomeQuestion = ({
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
           {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}?
         </h2>
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <FormControl sx={{ m: 1, minWidth: 120 }} error={incomeFrequencyErrorController.showError}>
           <InputLabel id="income-frequency-label">
             <FormattedMessage
               id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel"
@@ -313,6 +333,9 @@ const IncomeQuestion = ({
           >
             {createFrequencyMenuItems()}
           </StyledSelectfield>
+          {incomeFrequencyErrorController.showError && (
+            <FormHelperText>{incomeFrequencyErrorController.message()}</FormHelperText>
+          )}
         </FormControl>
       </div>
     );

@@ -10,10 +10,20 @@ import CategoryAccordion from '../CategoryAccordion/CategoryAccordion';
 import { useState, useEffect, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import './AccordionsContainer.css';
+import { useErrorController } from '../../Assets/validationFunctions';
 
-const AccordionsContainer = ({ errorController }) => {
+const AccordionsContainer = ({ followUp, submitted }) => {
   const { formData } = useContext(Context);
   const [expanded, setExpanded] = useState(false);
+
+  const errorController = useErrorController(
+    followUp.componentDetails.inputError,
+    followUp.componentDetails.inputHelperText,
+  );
+
+  useEffect(() => {
+    errorController.setIsSubmitted(submitted);
+  }, [submitted]);
 
   useEffect(() => {
     errorController.updateError(formData.hasBenefits, formData);
@@ -73,7 +83,12 @@ const AccordionsContainer = ({ errorController }) => {
     return categoryAccordions;
   };
 
-  return <div className="accordions-container">{createAccordions(accordionsData)}</div>;
+  return (
+    <>
+      <div className="accordions-container">{createAccordions(accordionsData)}</div>
+      {errorController.showError && errorController.message(formData.hasBenefits, formData)}
+    </>
+  );
 };
 
 export default AccordionsContainer;
