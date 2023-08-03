@@ -439,5 +439,11 @@
   "errorMessage-HHMemberAge": "Please enter a number 0 or greater",
   "errorMessage-HHMemberRelationship": "Please select a relationship",
   "errorMessage-expenseType": "Please select an expense type",
-  "errorMessage-otherReferralSource": "Please type in your referral source"
+  "errorMessage-otherReferralSource": "Please type in your referral source",
+  "TwoOneOneHeader.aboutUs": "ABOUT US",
+  "TwoOneOneHeader.support": "SUPPORT",
+  "TwoOneOneHeader.agencies": "COMMUNITY AGENCIES",
+  "TwoOneOneHeader.resources": "SEARCH RESOURCES",
+  "TwoOneOneHeader.chat": "CHAT",
+  "TwoOneOneHeader.login": "LOGIN"
 }

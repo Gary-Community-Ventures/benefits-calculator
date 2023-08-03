@@ -25,7 +25,7 @@ const themes: IThemes = {
       '--primary-color': '#037A93',
       '--secondary-color': '4ECDC4',
       '--confirmation-background': '#D3F2F0',
-      '--main-max-width': '99999rem',
+      '--main-max-width': '1310px',
       'font-size': '16px',
     },
   },

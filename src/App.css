@@ -69,3 +69,8 @@
 .sign-up-data-privacy-link {
   color: var(--primary-color);
 }
+
+.main-max-width {
+  max-width: var(--main-max-width);
+  margin: auto;
+}

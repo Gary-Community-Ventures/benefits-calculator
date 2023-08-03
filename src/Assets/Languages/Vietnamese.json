@@ -439,5 +439,11 @@
   "errorMessage-HHMemberAge": "Vui lòng nhập một số 0 hoặc lớn hơn",
   "errorMessage-HHMemberRelationship": "Vui lòng chọn một mối quan hệ",
   "errorMessage-expenseType": "Vui lòng chọn một loại chi phí",
-  "errorMessage-otherReferralSource": "Vui lòng nhập nguồn giới thiệu của bạn"
+  "errorMessage-otherReferralSource": "Vui lòng nhập nguồn giới thiệu của bạn",
+  "TwoOneOneHeader.aboutUs": "GIỚI THIỆU VỀ CHÚNG TÔI",
+  "TwoOneOneHeader.support": "HỖ TRỢ",
+  "TwoOneOneHeader.agencies": "CƠ QUAN CỘNG ĐỒNG",
+  "TwoOneOneHeader.resources": "TÌM KIẾM TÀI NGUYÊN",
+  "TwoOneOneHeader.chat": "TRÒ CHUYỆN",
+  "TwoOneOneHeader.login": "ĐĂNG NHẬP"
 }

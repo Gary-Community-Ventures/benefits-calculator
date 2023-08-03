@@ -439,5 +439,11 @@
   "errorMessage-HHMemberAge": "Por favor ingrese un numero 0 o mayor",
   "errorMessage-HHMemberRelationship": "Por favor seleccione un relación",
   "errorMessage-expenseType": "Por favor seleccione el tipo de gasto",
-  "errorMessage-otherReferralSource": "Por favor escriba su fuente de referencia"
+  "errorMessage-otherReferralSource": "Por favor escriba su fuente de referencia",
+  "TwoOneOneHeader.aboutUs": "ACERCA DE NOSOTROS",
+  "TwoOneOneHeader.support": "SOPORTE",
+  "TwoOneOneHeader.agencies": "AGENCIAS DE LA COMUNIDAD",
+  "TwoOneOneHeader.resources": "BUSCAR RECURSOS",
+  "TwoOneOneHeader.chat": "CHAT",
+  "TwoOneOneHeader.login": "INICIAR SESIÓN"
 }
