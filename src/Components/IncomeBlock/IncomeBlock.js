@@ -14,7 +14,7 @@ import {
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import './IncomeBlock.css';
-import ErrorMessageWrapper from '../ErrorMessage/ErrorWrapper';
+import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 
 const StyledSelectfield = styled(Select)({
   marginBottom: 20,

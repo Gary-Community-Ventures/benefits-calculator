@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import countiesByZipcode from './countiesByZipcode';
 import type { ErrorController, ValidationFunction, MessageFunction, VerifiableInput } from '../Types/ErrorController';
 import type { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo, Benefits } from '../Types/FormData';
-import ErrorMessageWrapper from '../Components/ErrorMessage/ErrorWrapper';
+import ErrorMessageWrapper from '../Components/ErrorMessage/ErrorMessageWrapper';
 
 function useErrorController(
   hasErrorFunc: ValidationFunction<VerifiableInput>,

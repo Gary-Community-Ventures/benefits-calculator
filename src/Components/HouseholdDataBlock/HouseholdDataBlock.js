@@ -8,7 +8,6 @@ import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import {
   householdMemberAgeHasError,
   displayHouseholdMemberAgeHelperText,

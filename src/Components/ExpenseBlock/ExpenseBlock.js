@@ -4,7 +4,6 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import ExpenseQuestion from './ExpenseQuestion';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import {
   useErrorController,
   expenseSourcesHaveError,

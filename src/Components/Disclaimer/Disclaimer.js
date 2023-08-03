@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { updateScreen } from '../../Assets/updateScreen';
 import './Disclaimer.css';
-import ErrorMessageWrapper from '../ErrorMessage/ErrorWrapper.tsx';
+import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 
 const Disclaimer = ({ handleCheckboxChange }) => {
   const { uuid } = useParams();
