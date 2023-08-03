@@ -90,6 +90,9 @@ const FetchScreen = ({ setFetchedScreen }) => {
         support: response.needs_mental_health_help ?? false,
         childDevelopment: response.needs_child_dev_help ?? false,
         familyPlanning: response.needs_family_planning_help ?? false,
+        jobResources: response.needs_job_resources ?? false,
+        dentalCare: response.needs_dental_care ?? false,
+        legalServices: response.needs_legal_services ?? false,
       },
       signUpInfo: {
         email: '',

@@ -382,6 +382,9 @@ export interface Language extends Record<string, string> {
   'acuteConditionOptions.childDevelopment': string;
   'acuteConditionOptions.loss': string;
   'acuteConditionOptions.familyPlanning': string;
+  'acuteConditionOptions.jobResources': string;
+  'acuteConditionOptions.dentalCare': string;
+  'acuteConditionOptions.legalServices': string;
   'urgentNeedsTable.visit-website-button': string;
   'urgentNeedsTable.resources-columnHeader': string;
   'urgentNeedsTable.typeOfResource-columnHeader': string;
