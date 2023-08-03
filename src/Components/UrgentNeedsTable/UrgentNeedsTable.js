@@ -25,7 +25,7 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale, totalEligiblePrograms }
               rel="noreferrer"
               href="https://www.211colorado.org/"
             >
-              Colorado 2-1-1
+              2-1-1 Colorado
             </a>
             <FormattedMessage
               id="noResults.p-Three"
@@ -51,7 +51,7 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale, totalEligiblePrograms }
               rel="noreferrer"
               href="https://www.211colorado.org/"
             >
-              Colorado 2-1-1
+              2-1-1 Colorado
             </a>
             <FormattedMessage
               id="noResults.p-Three"
