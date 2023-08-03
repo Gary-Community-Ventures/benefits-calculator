@@ -434,4 +434,19 @@ export interface Language extends Record<string, string> {
   'TwoOneOneHeader.resources': string;
   'TwoOneOneHeader.chat': string;
   'TwoOneOneHeader.login': string;
+  'footer-header': string;
+  'footer-dial-text': string;
+  'footer-or-text': string;
+  'footer-tollFree-text': string;
+  'footer-text-text': string;
+  'footer-to-text': string;
+  'footer-standardMsg-text': string;
+  'footer-chat-text': string;
+  'footer-liveChat-text': string;
+  'footer-first-paragraph': string;
+  'footer-second-paragraph': string;
+  'footer-copyright': string;
+  'footer-terms-of-service-link': string;
+  'footer-twoOneOne-privacy': string;
+  'footer-twoOneOne-mfb': string;
 }

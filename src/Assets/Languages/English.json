@@ -438,5 +438,20 @@
   "TwoOneOneHeader.agencies": "COMMUNITY AGENCIES",
   "TwoOneOneHeader.resources": "SEARCH RESOURCES",
   "TwoOneOneHeader.chat": "CHAT",
-  "TwoOneOneHeader.login": "LOGIN"
+  "TwoOneOneHeader.login": "LOGIN",
+  "footer-header": "Not finding what you are looking for? Try these other ways to get help:",
+  "footer-dial-text": "Dial ",
+  "footer-or-text": " or",
+  "footer-tollFree-text": "toll free",
+  "footer-text-text": "Text",
+  "footer-to-text": "to",
+  "footer-standardMsg-text": "*Standard message and data rates may apply.",
+  "footer-chat-text": "Chat",
+  "footer-liveChat-text": "Click to live chat with a 2-1-1 Navigator",
+  "footer-first-paragraph": "Services found within search results may involve eligibility criteria. Please contact the resource directly to find out more information about how to obtain these services. This site contains links to other sites. All of the information provided is believed to be accurate and reliable. However, 2-1-1 Colorado assumes no responsibility for any errors appearing, nor for the use of the information provided.",
+  "footer-second-paragraph": "2-1-1 Colorado is committed to helping Colorado citizens connect with the services they need. Whether by phone or internet, our goal is to present accurate, well-organized and easy-to-find information from state and local health and human services programs. We accomplish this through the work of our four Area Information Centers across the state. No matter where you live in Colorado, you can dial 2-1-1 and find information about resources in your local community. Whether you need help finding food or housing, child care, crisis counseling or substance abuse treatment, one number is all you need to know.",
+  "footer-copyright": "© Copyright 2-1-1 Colorado",
+  "footer-terms-of-service-link": "2-1-1 Terms of Service |",
+  "footer-twoOneOne-privacy": "2-1-1 Privacy Policy |",
+  "footer-twoOneOne-mfb": "MyFriendBen Privacy Policy"
 }
