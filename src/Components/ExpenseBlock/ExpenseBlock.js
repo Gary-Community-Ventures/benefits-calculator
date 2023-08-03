@@ -8,7 +8,7 @@ import {
   useErrorController,
   expenseSourcesHaveError,
   displayExpensesHelperText,
-} from '../../Assets/validationFunctions';
+} from '../../Assets/validationFunctions.tsx';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import './ExpenseBlock.css';
 

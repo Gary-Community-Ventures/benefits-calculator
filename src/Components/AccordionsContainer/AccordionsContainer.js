@@ -10,7 +10,7 @@ import CategoryAccordion from '../CategoryAccordion/CategoryAccordion';
 import { useState, useEffect, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import './AccordionsContainer.css';
-import { useErrorController } from '../../Assets/validationFunctions';
+import { useErrorController } from '../../Assets/validationFunctions.tsx';
 
 const AccordionsContainer = ({ followUp, submitted }) => {
   const { formData } = useContext(Context);

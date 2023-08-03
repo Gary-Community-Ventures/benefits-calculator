@@ -10,7 +10,7 @@ import {
   incomeStreamValueHasError,
   displayIncomeStreamValueHelperText,
   incomeStreamsAreValid,
-} from '../../Assets/validationFunctions';
+} from '../../Assets/validationFunctions.tsx';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import './IncomeBlock.css';

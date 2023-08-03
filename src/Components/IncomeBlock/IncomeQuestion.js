@@ -11,7 +11,7 @@ import {
   selectHasError,
   incomeStreamHelperText,
   incomeFrequencyHelperText,
-} from '../../Assets/validationFunctions';
+} from '../../Assets/validationFunctions.tsx';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import Textfield from '../Textfield/Textfield';

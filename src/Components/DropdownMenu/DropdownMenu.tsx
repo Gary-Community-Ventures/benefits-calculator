@@ -2,7 +2,8 @@ import { FormControl, MenuItem, InputLabel, Select, SelectChangeEvent, FormHelpe
 import { useEffect } from 'react';
 import type { ValidationFunction, MessageFunction } from '../../Types/ErrorController';
 import type { HouseholdData } from '../../Types/FormData';
-import { useErrorController } from '../../Assets/validationFunctions';
+// @ts-ignore
+import { useErrorController } from '../../Assets/validationFunctions.tsx';
 
 interface ComponentProperties {
   labelId: string;

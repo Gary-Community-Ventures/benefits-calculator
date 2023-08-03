@@ -11,7 +11,7 @@ import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import questions from '../../Assets/questions';
-import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions';
+import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({
