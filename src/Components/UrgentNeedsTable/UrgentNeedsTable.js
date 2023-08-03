@@ -10,7 +10,7 @@ import UrgentNeedsRow from './UrgentNeedsRow';
 import { FormattedMessage } from 'react-intl';
 import './UrgentNeedsTable.css';
 
-const UrgentNeedsTable = ({ urgentNeedsPrograms, locale, totalEligiblePrograms }) => {
+const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
   const finalUrgentNeedsPrograms = urgentNeedsPrograms[locale.toLowerCase()];
 
   const displayFooter = () => {
@@ -82,13 +82,11 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale, totalEligiblePrograms }
             <UrgentNeedsRow key={row.name} rowProps={row} />
           ))}
         </TableBody>
-        {!totalEligiblePrograms && (
-          <TableFooter>
-            <TableRow>
-              <TableCell colSpan={3}>{displayFooter()}</TableCell>
-            </TableRow>
-          </TableFooter>
-        )}
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={3}>{displayFooter()}</TableCell>
+          </TableRow>
+        </TableFooter>
       </Table>
     </TableContainer>
   );
