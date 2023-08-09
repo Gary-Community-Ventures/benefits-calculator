@@ -146,8 +146,6 @@ const Confirmation = () => {
       student,
       studentFulltime,
       pregnant,
-      unemployed,
-      unemployedWorkedInLast18Mos,
       blindOrVisuallyImpaired,
       disabled,
       veteran,
@@ -157,8 +155,6 @@ const Confirmation = () => {
       student,
       studentFulltime,
       pregnant,
-      unemployed,
-      unemployedWorkedInLast18Mos,
       blindOrVisuallyImpaired,
       disabled,
       veteran,
@@ -173,8 +169,6 @@ const Confirmation = () => {
         student,
         studentFulltime,
         pregnant,
-        unemployed,
-        unemployedWorkedInLast18Mos,
         blindOrVisuallyImpaired,
         disabled,
         veteran,
@@ -186,8 +180,6 @@ const Confirmation = () => {
     student,
     studentFulltime,
     pregnant,
-    unemployed,
-    unemployedWorkedInLast18Mos,
     blindOrVisuallyImpaired,
     disabled,
     veteran,
@@ -202,12 +194,6 @@ const Confirmation = () => {
     }
     if (pregnant) {
       conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-pregnantText'));
-    }
-    if (unemployedWorkedInLast18Mos) {
-      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-unemployed18MosText'));
-    }
-    if (unemployed && unemployedWorkedInLast18Mos === false) {
-      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-unemployedText'));
     }
     if (blindOrVisuallyImpaired) {
       conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText'));

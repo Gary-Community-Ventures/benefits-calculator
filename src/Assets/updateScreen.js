@@ -80,8 +80,6 @@ const getHouseholdMemberBody = (householdMemberData) => {
     student: householdMemberData.student,
     student_full_time: householdMemberData.studentFulltime,
     pregnant: householdMemberData.pregnant,
-    unemployed: householdMemberData.unemployed,
-    worked_in_last_18_mos: householdMemberData.unemployedWorkedInLast18Mos,
     visually_impaired: householdMemberData.blindOrVisuallyImpaired,
     disabled: householdMemberData.disabled,
     veteran: householdMemberData.veteran,

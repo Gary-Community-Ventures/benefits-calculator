@@ -41,10 +41,6 @@ export interface Language extends Record<string, string> {
   'questions.student-a-ariaLabel': string;
   'questions.pregnant': string;
   'questions.pregnant-ariaLabel': string;
-  'questions.unemployed': string;
-  'questions.unemployed-ariaLabel': string;
-  'questions.unemployed-a': string;
-  'questions.unemployed-a-ariaLabel': string;
   'questions.blindOrVisuallyImpaired': string;
   'questions.blindOrVisuallyImpaired-description': string;
   'questions.blindOrVisuallyImpaired-ariaLabel': string;
@@ -149,9 +145,6 @@ export interface Language extends Record<string, string> {
   'householdDataBlock.createFTStudentRadioQuestion-ariaLabel': string;
   'householdDataBlock.createFTStudentRadioQuestion-youQLabel': string;
   'householdDataBlock.createFTStudentRadioQuestion-questionLabel': string;
-  'householdDataBlock.createUnemployed18MosRadioQuestion-ariaLabel': string;
-  'householdDataBlock.createUnemployed18MosRadioQuestion-youQLabel': string;
-  'householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel': string;
   'householdDataBlock.createIncomeRadioQuestion-ariaLabel': string;
   'householdDataBlock.createIncomeRadioQuestion-questionLabel': string;
   'householdDataBlock.createIncomeRadioQuestion-questionDescription': string;
@@ -264,8 +257,6 @@ export interface Language extends Record<string, string> {
   'confirmation.headOfHouseholdDataBlock-studentFulltimeText': string;
   'confirmation.headOfHouseholdDataBlock-studentText': string;
   'confirmation.headOfHouseholdDataBlock-pregnantText': string;
-  'confirmation.headOfHouseholdDataBlock-unemployed18MosText': string;
-  'confirmation.headOfHouseholdDataBlock-unemployedText': string;
   'confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText': string;
   'confirmation.headOfHouseholdDataBlock-disabledText': string;
   'confirmation.headOfHouseholdDataBlock-veteranText': string;

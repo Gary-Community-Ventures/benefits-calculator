@@ -44,8 +44,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     student: false,
     studentFulltime: false,
     pregnant: false,
-    unemployed: false,
-    unemployedWorkedInLast18Mos: false,
     blindOrVisuallyImpaired: false,
     disabled: false,
     veteran: false,
@@ -64,16 +62,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       updatedHouseholdData.studentFulltime = false;
     }
 
-    if (updatedHouseholdData.unemployed === false) {
-      updatedHouseholdData.unemployedWorkedInLast18Mos = false;
-    }
-
     if (updatedHouseholdData.hasIncome === false) {
       updatedHouseholdData.incomeStreams = [];
     }
 
     setHouseholdData(updatedHouseholdData);
-  }, [householdData.student, householdData.unemployed, householdData.hasIncome]);
+  }, [householdData.student, householdData.hasIncome]);
 
   useEffect(() => {
     if (wasSubmitted) {
@@ -362,35 +356,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     );
   };
 
-  const createUnemployed18MosRadioQuestion = (index) => {
-    const radiofieldProps = {
-      ariaLabel: 'householdDataBlock.createUnemployed18MosRadioQuestion-ariaLabel',
-      inputName: 'unemployedWorkedInLast18Mos',
-      value: householdData.unemployedWorkedInLast18Mos,
-    };
-
-    const formattedMsgId =
-      index === 1
-        ? 'householdDataBlock.createUnemployed18MosRadioQuestion-youQLabel'
-        : 'householdDataBlock.createUnemployed18MosRadioQuestion-questionLabel';
-
-    const formattedMsgDefaultMsg =
-      index === 1 ? 'Did you work in the last 18 months?' : 'Did they work in the last 18 months?';
-
-    return (
-      <>
-        <h2 className="question-label radio-question">
-          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-        </h2>
-        <HHDataRadiofield
-          componentDetails={radiofieldProps}
-          setHouseholdData={setHouseholdData}
-          householdData={householdData}
-        />
-      </>
-    );
-  };
-
   const createIncomeRadioQuestion = (index) => {
     const radiofieldProps = {
       ariaLabel: 'householdDataBlock.createIncomeRadioQuestion-ariaLabel',
@@ -475,7 +440,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         {page !== 1 && createHOfHRelationQuestion()}
         {createConditionsQuestion(page)}
         {householdData.student && createFTStudentRadioQuestion(page)}
-        {householdData.unemployed && createUnemployed18MosRadioQuestion(page)}
         <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}
         <p className="household-data-q-underline"></p>
