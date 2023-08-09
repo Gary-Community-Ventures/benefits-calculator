@@ -20,10 +20,10 @@ import {
   relationTypeHelperText,
 } from '../../Assets/validationFunctions.tsx';
 import { FormattedMessage } from 'react-intl';
-import './HouseholdDataBlock.css';
 import stepDirectory from '../../Assets/stepDirectory';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { Context } from '../Wrapper/Wrapper.tsx';
+import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -212,7 +212,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
 
     return (
-      <span className="member-added-container" key={index}>
+      <span className="member-added-container" key={index} tabIndex={0}>
         <h3 className="member-added-relationship">{relationship}:</h3>
         <div className="member-added-age">
           <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />: {age}
