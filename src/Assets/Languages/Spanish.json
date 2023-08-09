@@ -141,7 +141,6 @@
   "householdDataBlock.createConditionsQuestion-pick": "Puede elegir más de una opcion.",
   "conditionOptions.student": "Estudiante o futuro estudiante en un colegio, universidad o otra institución postsecundaria",
   "conditionOptions.pregnant": "Embarazada",
-  "conditionOptions.unemployed": "Sin empleo",
   "conditionOptions.blindOrVisuallyImpaired": "Ciego o con problemas de visión",
   "conditionOptions.disabled": "Tiene alguna discapacidad que le imposibilite trabajar ahora o en el futuro",
   "checkboxGroup.disabledLabel": "Tiene alguna discapacidad que los haga incapaces de trabajar ahora o en el futuro",

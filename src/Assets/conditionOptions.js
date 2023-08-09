@@ -8,7 +8,6 @@ const conditionOptions = {
     />
   ),
   pregnant: <FormattedMessage id="conditionOptions.pregnant" defaultMessage="Pregnant" />,
-  unemployed: <FormattedMessage id="conditionOptions.unemployed" defaultMessage="Unemployed" />,
   blindOrVisuallyImpaired: (
     <FormattedMessage id="conditionOptions.blindOrVisuallyImpaired" defaultMessage="Blind or visually impaired" />
   ),

@@ -141,7 +141,6 @@ export interface Language extends Record<string, string> {
   'householdDataBlock.createConditionsQuestion-pick': string;
   'conditionOptions.student': string;
   'conditionOptions.pregnant': string;
-  'conditionOptions.unemployed': string;
   'conditionOptions.blindOrVisuallyImpaired': string;
   'conditionOptions.disabled': string;
   'checkboxGroup.disabledLabel': string;

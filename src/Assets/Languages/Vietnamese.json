@@ -141,7 +141,6 @@
   "householdDataBlock.createConditionsQuestion-pick": "Quý vị có thể chọn nhiều hơn một lựa chọn.",
   "conditionOptions.student": "Sinh viên hoặc sinh viên tương lai tại một trường cao đẳng, đại học hoặc tổ chức sau trung học khác",
   "conditionOptions.pregnant": "Có thai",
-  "conditionOptions.unemployed": "Thất nghiệp",
   "conditionOptions.blindOrVisuallyImpaired": "Mù hoặc khiếm thị",
   "conditionOptions.disabled": "Bị bất kỳ tình trạng khuyết tật nào khiến quý vị không thể làm việc bây giờ hoặc trong tương lai",
   "checkboxGroup.disabledLabel": "Bị bất kỳ tình trạng khuyết tật nào khiến họ không thể làm việc bây giờ hoặc trong tương lai",

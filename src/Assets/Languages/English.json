@@ -141,7 +141,6 @@
   "householdDataBlock.createConditionsQuestion-pick": "It's OK to pick more than one.",
   "conditionOptions.student": "Student or prospective student at a college, university, or other post-secondary institution",
   "conditionOptions.pregnant": "Pregnant",
-  "conditionOptions.unemployed": "Unemployed",
   "conditionOptions.blindOrVisuallyImpaired": "Blind or visually impaired",
   "conditionOptions.disabled": "Have any disabilities that make you unable to work now or in the future",
   "checkboxGroup.disabledLabel": "Have any disabilities that make them unable to work now or in the future",
