@@ -212,7 +212,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
 
     return (
-      <span className="member-added-container" key={index} tabIndex={0}>
+      <article className="member-added-container" key={index}>
         <h3 className="member-added-relationship">{relationship}:</h3>
         <div className="member-added-age">
           <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />: {age}
@@ -222,7 +222,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           {formatToUSD(Number(income))}
           <FormattedMessage id="displayAnnualIncome.annual" defaultMessage=" annually" />
         </div>
-      </span>
+      </article>
     );
   };
 
