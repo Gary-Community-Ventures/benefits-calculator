@@ -365,6 +365,7 @@ export interface Language extends Record<string, string> {
   'landingPage.step-header': string;
   'landingPage.body': string;
   'landingPage.firstBulletItem': string;
+  'landingPage.secondBulletItem': string;
   'landingPage.publicCharge': string;
   'landingPage.publicChargeLink': string;
   'landingPage.thirdBulletItem': string;
