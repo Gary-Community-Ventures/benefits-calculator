@@ -367,7 +367,6 @@ export interface Language extends Record<string, string> {
   'landingPage.firstBulletItem': string;
   'landingPage.publicCharge': string;
   'landingPage.publicChargeLink': string;
-  'landingPage.thirdBulletItem': string;
   'healthInsuranceOptions.employer': string;
   'healthInsuranceOptions.private': string;
   'healthInsuranceOptions.medicaid': string;

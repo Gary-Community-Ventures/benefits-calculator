@@ -77,12 +77,6 @@ const LandingPage = ({ setFetchedScreen }) => {
                 </a>
               </p>
             </li>
-            <li>
-              {/* <FormattedMessage
-                id="landingPage.thirdBulletItem"
-                defaultMessage="We take data security seriously. We collect the minimum data we need to provide you with accurate results. The screener never requires personal identifiable information such as first and last name or address. You may opt in to providing this information in order to receive paid opportunities for feedback, or future notifications about benefits that you are likely eligible for."
-              /> */}
-            </li>
           </ul>
         </CardContent>
       </Card>
