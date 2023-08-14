@@ -50,13 +50,7 @@ const LandingPage = ({ setFetchedScreen }) => {
             <li>
               <FormattedMessage
                 id="landingPage.firstBulletItem"
-                defaultMessage="This tool cannot guarantee eligibility. You will need to apply for benefits to get a final decision."
-              />
-            </li>
-            <li>
-              <FormattedMessage
-                id="landingPage.secondBulletItem"
-                defaultMessage="Some benefits are available only to household members who are U.S. citizens or immigrants who are qualified non-citizens. In some cases, even after someone obtains citizenship or qualified non-citizenship status, a waiting period or other conditions may apply. When you get to the end of this tool, you will have a chance to sort results so that you see only benefits that do not require a citizen or qualified non-citizen in the household."
+                defaultMessage="MyFriendBen only provides estimates of what you may qualify for. You should not rely on these estimates. You must confirm your final eligibility and benefit amount with the proper agency or other decision maker."
               />
             </li>
             <li>
@@ -84,10 +78,10 @@ const LandingPage = ({ setFetchedScreen }) => {
               </p>
             </li>
             <li>
-              <FormattedMessage
+              {/* <FormattedMessage
                 id="landingPage.thirdBulletItem"
                 defaultMessage="We take data security seriously. We collect the minimum data we need to provide you with accurate results. The screener never requires personal identifiable information such as first and last name or address. You may opt in to providing this information in order to receive paid opportunities for feedback, or future notifications about benefits that you are likely eligible for."
-              />
+              /> */}
             </li>
           </ul>
         </CardContent>
