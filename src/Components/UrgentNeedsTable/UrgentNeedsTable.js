@@ -10,7 +10,7 @@ import UrgentNeedsRow from './UrgentNeedsRow';
 import { FormattedMessage } from 'react-intl';
 import './UrgentNeedsTable.css';
 
-const UrgentNeedsTable = ({ urgentNeedsPrograms, locale, totalEligiblePrograms }) => {
+const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
   const finalUrgentNeedsPrograms = urgentNeedsPrograms[locale.toLowerCase()];
 
   const displayFooter = () => {
@@ -25,7 +25,7 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale, totalEligiblePrograms }
               rel="noreferrer"
               href="https://www.211colorado.org/"
             >
-              Colorado 2-1-1
+              2-1-1 Colorado
             </a>
             <FormattedMessage
               id="noResults.p-Three"
@@ -51,7 +51,7 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale, totalEligiblePrograms }
               rel="noreferrer"
               href="https://www.211colorado.org/"
             >
-              Colorado 2-1-1
+              2-1-1 Colorado
             </a>
             <FormattedMessage
               id="noResults.p-Three"
@@ -82,13 +82,11 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale, totalEligiblePrograms }
             <UrgentNeedsRow key={row.name} rowProps={row} />
           ))}
         </TableBody>
-        {!totalEligiblePrograms && (
-          <TableFooter>
-            <TableRow>
-              <TableCell colSpan={3}>{displayFooter()}</TableCell>
-            </TableRow>
-          </TableFooter>
-        )}
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={3}>{displayFooter()}</TableCell>
+          </TableRow>
+        </TableFooter>
       </Table>
     </TableContainer>
   );

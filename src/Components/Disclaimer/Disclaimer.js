@@ -92,7 +92,7 @@ const Disclaimer = ({ handleCheckboxChange }) => {
       />
       {buttonWasClicked && formData.agreeToTermsOfService === false && (
         <ErrorMessageWrapper fontSize="1.2rem">
-          <FormattedMessage id="disclaimer.error" defaultMessage="Please check the box below to continue." />
+          <FormattedMessage id="disclaimer.error" defaultMessage="Please check the box to continue." />
         </ErrorMessageWrapper>
       )}
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>

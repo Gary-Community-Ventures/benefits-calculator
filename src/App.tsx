@@ -113,6 +113,10 @@ const App = () => {
     });
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   const handleTextfieldChange = (event: Event) => {
     const { name, value } = event.target as HTMLInputElement;
     const numberUpToEightDigitsLongRegex = /^\d{0,8}$/; //for zipcode
