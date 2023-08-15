@@ -58,6 +58,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+  }, [wasSubmitted]);
+
+  useEffect(() => {
     const updatedHouseholdData = { ...householdData };
 
     if (updatedHouseholdData.student === false) {
@@ -82,7 +86,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   }, [householdData, wasSubmitted]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
     if (isNaN(page) || page < 1 || page >= lastMemberPage) {
       navigate(`/${uuid}/step-${step}/${lastMemberPage}`);
