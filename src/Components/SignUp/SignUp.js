@@ -40,11 +40,11 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   }, displayPhoneHasErrorHelperText);
 
   useEffect(() => {
-    signUpErrorController.setIsSubmitted(submitted);
-    firstNameErrorController.setIsSubmitted(submitted);
-    lastNameErrorController.setIsSubmitted(submitted);
-    emailErrorController.setIsSubmitted(submitted);
-    phoneErrorController.setIsSubmitted(submitted);
+    signUpErrorController.setTimesSubmitted(submitted);
+    firstNameErrorController.setTimesSubmitted(submitted);
+    lastNameErrorController.setTimesSubmitted(submitted);
+    emailErrorController.setTimesSubmitted(submitted);
+    phoneErrorController.setTimesSubmitted(submitted);
   }, [submitted]);
 
   useEffect(() => {
@@ -112,7 +112,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
         data={formData.signUpInfo}
         handleTextfieldChange={handleTextfieldChange}
         index="0"
-        submitted={errorController.isSubmitted}
+        submitted={errorController.timesSubmitted}
       />
     );
   };

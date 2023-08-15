@@ -177,7 +177,7 @@ const App = () => {
     uuid: string,
   ) => {
     event.preventDefault();
-    errorController.setIsSubmitted(true);
+    errorController.incrementSubmitted();
     const hasError = errorController.updateError(inputToBeValidated, formData);
     const isZipcodeQuestionAndCountyIsEmpty = questionName === 'zipcode' && formData.county === '';
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty =

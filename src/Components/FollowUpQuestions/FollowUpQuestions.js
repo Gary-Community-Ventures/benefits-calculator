@@ -5,6 +5,7 @@ import Textfield from '../Textfield/Textfield';
 import SignUp from '../SignUp/SignUp';
 import AccordionsContainer from '../AccordionsContainer/AccordionsContainer';
 import BasicSelect from '../DropdownMenu/BasicSelect';
+import { useState, useEffect } from 'react';
 
 const FollowUpQuestions = ({
   followUpQuestions,
@@ -16,6 +17,9 @@ const FollowUpQuestions = ({
   handleTextfieldChange,
   handleRadioButtonChange,
 }) => {
+  const [initialSubmitted, setInitialSubmitted] = useState(submitted);
+  const followUpSubmitted = submitted - initialSubmitted;
+
   return followUpQuestions.map((followUp, index) => {
     if (followUp.componentDetails.componentType === 'Radiofield') {
       return (
@@ -44,7 +48,7 @@ const FollowUpQuestions = ({
           <h2 className="question-label">{followUp.question}</h2>
           <Textfield
             componentDetails={followUp.componentDetails}
-            submitted={submitted}
+            submitted={followUpSubmitted}
             data={formData}
             handleTextfieldChange={handleTextfieldChange}
             index="0"
@@ -63,7 +67,7 @@ const FollowUpQuestions = ({
             componentDetails={followUp.componentDetails}
             options={finalOptions}
             formDataProperty={followUp.componentDetails.inputName}
-            submitted={submitted}
+            submitted={followUpSubmitted}
           />
         </div>
       );
@@ -74,7 +78,7 @@ const FollowUpQuestions = ({
           <SignUp
             handleTextfieldChange={handleTextfieldChange}
             handleCheckboxChange={handleCheckboxChange}
-            submitted={submitted}
+            submitted={followUpSubmitted}
           />
         </div>
       );
@@ -83,7 +87,7 @@ const FollowUpQuestions = ({
         <div className="question-container accordions-container" key={index}>
           <h2 className="question-label">{followUp.question}</h2>
           <p className="question-description">{followUp.questionDescription}</p>
-          <AccordionsContainer followUp={followUp} submitted={submitted} />
+          <AccordionsContainer followUp={followUp} submitted={followUpSubmitted} />
         </div>
       );
     }

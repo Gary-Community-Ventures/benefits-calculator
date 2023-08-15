@@ -44,10 +44,10 @@ const IncomeQuestion = ({
   const incomeFrequencyErrorController = useErrorController(selectHasError, incomeFrequencyHelperText);
 
   useEffect(() => {
-    hoursErrorController.setIsSubmitted(submitted);
-    amountErrorController.setIsSubmitted(submitted);
-    incomeStreamErrorController.setIsSubmitted(submitted);
-    incomeFrequencyErrorController.setIsSubmitted(submitted);
+    hoursErrorController.setTimesSubmitted(submitted);
+    amountErrorController.setTimesSubmitted(submitted);
+    incomeStreamErrorController.setTimesSubmitted(submitted);
+    incomeFrequencyErrorController.setTimesSubmitted(submitted);
   }, [submitted]);
 
   useEffect(() => {
@@ -232,7 +232,7 @@ const IncomeQuestion = ({
             data={currentIncomeSource}
             handleTextfieldChange={hoursWorkedChange}
             index={index}
-            submitted={hoursErrorController.isSubmitted}
+            submitted={hoursErrorController.timesSubmitted}
           />
         </div>
       </>
@@ -288,7 +288,7 @@ const IncomeQuestion = ({
             data={currentIncomeSource}
             handleTextfieldChange={handleIncomeTextfieldChange}
             index={index}
-            submitted={amountErrorController.isSubmitted}
+            submitted={amountErrorController.timesSubmitted}
           />
         </div>
       </div>

@@ -24,7 +24,7 @@ interface BasicSelectProps {
   options: { [key: string]: string };
   householdData: HouseholdData;
   setHouseholdData: any;
-  submitted: boolean;
+  submitted: number;
 }
 
 const DropdownMenu = ({ componentDetails, options, setHouseholdData, householdData, submitted }: BasicSelectProps) => {
@@ -38,7 +38,7 @@ const DropdownMenu = ({ componentDetails, options, setHouseholdData, householdDa
   }, []);
 
   useEffect(() => {
-    errorController.setIsSubmitted(submitted);
+    errorController.setTimesSubmitted(submitted);
   }, [submitted]);
 
   const handleSelectChange = (event: SelectChangeEvent) => {
