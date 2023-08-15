@@ -43,7 +43,7 @@ const BasicSelect = ({ componentDetails, options, formDataProperty, submitted }:
   }, []);
 
   useEffect(() => {
-    errorController.setTimesSubmitted(submitted);
+    errorController.setSubmittedCount(submitted);
   }, [submitted]);
 
   const handleBasicSelect = (event: SelectChangeEvent<any>, formProperty: string) => {

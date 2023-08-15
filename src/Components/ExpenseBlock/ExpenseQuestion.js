@@ -32,7 +32,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   }, []);
 
   useEffect(() => {
-    expenseTypeErrorController.setTimesSubmitted(submitted);
+    expenseTypeErrorController.setSubmittedCount(submitted);
   }, [submitted]);
 
   const handleSelectChange = (event, index) => {

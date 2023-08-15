@@ -38,7 +38,7 @@ const DropdownMenu = ({ componentDetails, options, setHouseholdData, householdDa
   }, []);
 
   useEffect(() => {
-    errorController.setTimesSubmitted(submitted);
+    errorController.setSubmittedCount(submitted);
   }, [submitted]);
 
   const handleSelectChange = (event: SelectChangeEvent) => {

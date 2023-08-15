@@ -9,9 +9,9 @@ export type MessageFunction<T> = (value: T, formData?: FormData) => any;
 export interface ErrorController {
   hasError: boolean;
   showError: boolean;
-  timesSubmitted: number;
+  submittedCount: number;
   incrementSubmitted: () => void;
-  setTimesSubmitted: (timesSubmitted: number) => void;
+  setSubmittedCount: (submittedCount: number) => void;
   updateError: ValidationFunction<VerifiableInput>;
   message: MessageFunction<VerifiableInput>;
 }

@@ -60,7 +60,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
           setAllExpenses={setSelectedMenuItem}
           deleteExpenseBlock={deleteExpenseBlock}
           index={index}
-          submitted={expensesErrorController.timesSubmitted}
+          submitted={expensesErrorController.submittedCount}
           key={index}
         />
       );

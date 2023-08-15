@@ -150,7 +150,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <Textfield
         componentDetails={componentInputProps}
-        submitted={errorController.timesSubmitted}
+        submitted={errorController.submittedCount}
         data={householdData}
         handleTextfieldChange={handleTextfieldChange}
       />
@@ -294,7 +294,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         options={relationshipOptions}
         setHouseholdData={setHouseholdData}
         householdData={householdData}
-        submitted={ageErrorController.timesSubmitted}
+        submitted={ageErrorController.submittedCount}
       />
     );
   };
@@ -479,7 +479,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}
         <p className="household-data-q-underline"></p>
-        {householdData.hasIncome && createPersonIncomeBlock(ageErrorController.timesSubmitted)}
+        {householdData.hasIncome && createPersonIncomeBlock(ageErrorController.submittedCount)}
         <div className="question-buttons">
           <PreviousButton navFunction={handlePreviousSubmit} />
           <ContinueButton handleContinueSubmit={handleContinueSubmit} />

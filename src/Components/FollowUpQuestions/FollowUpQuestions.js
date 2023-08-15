@@ -17,8 +17,8 @@ const FollowUpQuestions = ({
   handleTextfieldChange,
   handleRadioButtonChange,
 }) => {
-  const [initialSubmitted, setInitialSubmitted] = useState(submitted);
-  const followUpSubmitted = submitted - initialSubmitted;
+  const [initialSubmittedCount, setInitialSubmitted] = useState(submitted);
+  const followUpSubmitted = submitted - initialSubmittedCount;
 
   return followUpQuestions.map((followUp, index) => {
     if (followUp.componentDetails.componentType === 'Radiofield') {
