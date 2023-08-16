@@ -5,7 +5,6 @@ import { LicenseInfo } from '@mui/x-license-pro';
 import { Context } from './Components/Wrapper/Wrapper';
 import ReactGA from 'react-ga4';
 import FetchScreen from './Components/FetchScreen/FetchScreen';
-import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
@@ -241,23 +240,30 @@ const App = () => {
         )}
         <Box className="main-max-width">
           <Routes>
-            <Route path="/step-0" element={<ProgressBar step={0} />} />
+            <Route path="/step-1" element={<ProgressBar step={1} />} />
             <Route path="/:uuid/step-:id" element={<ProgressBar />} />
             <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
             <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
             <Route path="*" element={<></>} />
           </Routes>
           <Routes>
-            <Route path="/" element={<Navigate to={`/step-0${urlSearchParams}`} replace />} />
-            <Route path="/step-0" element={<LandingPage setFetchedScreen={setFetchedScreen} />} />
+            <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
+            <Route
+              path="/step-1"
+              element={<LandingPage setFetchedScreen={setFetchedScreen} handleCheckboxChange={handleCheckboxChange} />}
+            />
             <Route path="results/:uuid" element={<Results />} />
             <Route path=":uuid">
               {!fetchedScreen && <Route path="*" element={<FetchScreen setFetchedScreen={setFetchedScreen} />} />}
               {fetchedScreen && (
                 <>
-                  <Route path="" element={<Navigate to="/step-0" replace />} />
-                  <Route path="step-0" element={<LandingPage setFetchedScreen={setFetchedScreen} />} />
-                  <Route path="step-1" element={<Disclaimer handleCheckboxChange={handleCheckboxChange} />} />
+                  <Route path="" element={<Navigate to="/step-1" replace />} />
+                  <Route
+                    path="step-1"
+                    element={
+                      <LandingPage setFetchedScreen={setFetchedScreen} handleCheckboxChange={handleCheckboxChange} />
+                    }
+                  />
                   <Route
                     path={`step-${stepDirectory.householdData}/:page`}
                     element={
@@ -284,11 +290,11 @@ const App = () => {
                   />
                   <Route path="confirm-information" element={<Confirmation />} />
                   <Route path="results" element={<Results />} />
-                  <Route path="*" element={<Navigate to="/step-0" replace />} />
+                  <Route path="*" element={<Navigate to="/step-1" replace />} />
                 </>
               )}
             </Route>
-            <Route path="*" element={<Navigate to="/step-0" replace />} />
+            <Route path="*" element={<Navigate to="/step-1" replace />} />
           </Routes>
         </Box>
         {formData.referrerCode === '211co' && <TwoOneOneFooter />}

@@ -16,7 +16,7 @@ const FetchScreen = ({ setFetchedScreen }) => {
       const response = await getScreen(uuid);
       createFormData(response);
     } catch (err) {
-      navigate('/step-0');
+      navigate('/step-1');
       return;
     }
     setFetchedScreen(true);
