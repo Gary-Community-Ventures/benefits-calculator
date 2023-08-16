@@ -1,4 +1,14 @@
-import { Card, CardContent, CardActions, Button, Typography, FormControlLabel, Checkbox, Box } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  Typography,
+  FormControlLabel,
+  Checkbox,
+  Box,
+  Link,
+} from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
@@ -8,7 +18,7 @@ import ReactGA from 'react-ga4';
 import './LandingPage.css';
 
 const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
-  const { formData } = useContext(Context);
+  const { formData, locale } = useContext(Context);
   let { uuid } = useParams();
   const navigate = useNavigate();
   const [wasSubmitted, setWasSubmitted] = useState(false);
@@ -37,6 +47,46 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
       document.removeEventListener('keyup', continueOnEnter); // remove event listener on onmount
     };
   });
+
+  const getAllLinksForCheckbox = () => {
+    switch (locale) {
+      case 'en-US': return {
+        privacyPolicyLink:'https://www.myfriendben.org/en/data-privacy-policy',
+        addTermsConsentToContact: 'https://www.myfriendben.org/en/additional-terms-and-consent-to-contact'
+      }
+      case 'es': return {
+        privacyPolicyLink:'https://www.myfriendben.org/es/data-privacy-policy',
+        addTermsConsentToContact: 'https://www.myfriendben.org/es/additional-terms-and-consent-to-contact'
+      }
+      case 'vi': return {
+        privacyPolicyLink:'https://www.myfriendben.org/vi/data-privacy-policy',
+        addTermsConsentToContact: 'https://www.myfriendben.org/vi/additional-terms-and-consent-to-contact'
+      }
+    }
+  }
+
+  const createCheckboxLabel = () => {
+    return (
+      <>
+        <FormattedMessage
+          id="disclaimer-label"
+          defaultMessage="By proceeding, you confirm that you have read and agree to the "
+        />
+        <Link to={getAllLinksForCheckbox().privacyPolicyLink} target="_blank" rel="noopener noreferrer">
+          <FormattedMessage
+            id="landingPage-policyText"
+            defaultMessage="Privacy Policy,"
+          />
+        </Link>&nbsp;
+        <Link to={getAllLinksForCheckbox.addTermsConsentToContact} target="_blank" rel="noopener noreferrer">
+          <FormattedMessage
+            id="landingPage-additionalTerms"
+            defaultMessage="Additional Terms, and Consent to Contact"
+          />
+        </Link>
+      </>
+    );
+  };
 
   return (
     <main className="benefits-form">
@@ -94,13 +144,8 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
               sx={wasSubmitted && formData.agreeToTermsOfService === false ? { color: '#c6252b' } : {}}
             />
           }
-          onClick={handleCheckboxChange}
-          label={
-            <FormattedMessage
-              id="disclaimer-label"
-              defaultMessage="I have read, understand, and agree to the terms of the Gary Disclaimer and consent to contact above."
-            />
-          }
+          // onClick={handleCheckboxChange}
+          label={createCheckboxLabel()}
           value="agreeToTermsOfService"
         />
       </Box>
