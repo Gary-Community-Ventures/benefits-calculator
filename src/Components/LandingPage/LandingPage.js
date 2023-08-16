@@ -48,7 +48,7 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
     };
   });
 
-  const getAllLinksForCheckbox = () => {
+  const getLinksForCheckbox = () => {
     switch (locale) {
       case 'en-US': return {
         privacyPolicyLink:'https://www.myfriendben.org/en/data-privacy-policy',
@@ -72,13 +72,13 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
         />
-        <Link to={getAllLinksForCheckbox().privacyPolicyLink} target="_blank" rel="noopener noreferrer">
+        <Link to={getLinksForCheckbox().privacyPolicyLink} target="_blank" rel="noopener noreferrer">
           <FormattedMessage
             id="landingPage-policyText"
             defaultMessage="Privacy Policy,"
           />
         </Link>&nbsp;
-        <Link to={getAllLinksForCheckbox.addTermsConsentToContact} target="_blank" rel="noopener noreferrer">
+        <Link to={getLinksForCheckbox().addTermsConsentToContact} target="_blank" rel="noopener noreferrer">
           <FormattedMessage
             id="landingPage-additionalTerms"
             defaultMessage="Additional Terms, and Consent to Contact"
