@@ -57,7 +57,7 @@ const LandingPage = ({ setFetchedScreen }) => {
               <p>
                 <FormattedMessage
                   id="landingPage.publicCharge"
-                  defaultMessage="Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits on this site may affect their immigration status. For more information, please review the "
+                  defaultMessage="Some benefits are available to Non-U.S. citizens. Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits may affect their immigration status. For more information, please review the "
                 />
                 <a
                   className="public-charge-link"
@@ -72,7 +72,7 @@ const LandingPage = ({ setFetchedScreen }) => {
                 >
                   <FormattedMessage
                     id="landingPage.publicChargeLink"
-                    defaultMessage="Colorado Department of Human Services Public Charge Rule"
+                    defaultMessage="Colorado Department of Human Services Public Charge Rule."
                   />
                 </a>
               </p>
