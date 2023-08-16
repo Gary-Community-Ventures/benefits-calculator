@@ -167,7 +167,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
             <Stack direction="row" gap="1rem" alignItems="center" className="twoOneOne-desktop-links">
               {create211Links()}
             </Stack>
-            <Stack direction="row" sx={{ marginLeft: '3rem' }}>
+            <Stack direction="row" sx={{ marginLeft: '3rem' }} className="twoOneOne-remove-leftMargin">
               <Select
                 labelId="select-language-label"
                 id="twoOneOne-select-language"

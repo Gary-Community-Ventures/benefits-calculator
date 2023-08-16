@@ -45,6 +45,10 @@ button.hamburger-icon {
 
 @media (max-width: 500px) {
   .cobranded-logo {
-    width: 70%;
+    width: 75%;
+  }
+
+  div.twoOneOne-remove-leftMargin {
+    margin-left: 0;
   }
 }
