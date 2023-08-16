@@ -1,5 +1,5 @@
-import { Card, CardContent, CardActions, Button, Typography } from '@mui/material';
-import { useContext, useEffect } from 'react';
+import { Card, CardContent, CardActions, Button, Typography, FormControlLabel, Checkbox, Box } from '@mui/material';
+import { useContext, useEffect, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -7,20 +7,25 @@ import { createScreen } from '../../Assets/updateScreen.js';
 import ReactGA from 'react-ga4';
 import './LandingPage.css';
 
-const LandingPage = ({ setFetchedScreen }) => {
+const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
   const { formData } = useContext(Context);
   let { uuid } = useParams();
-
   const navigate = useNavigate();
+  const [wasSubmitted, setWasSubmitted] = useState(false);
+
   const handleContinue = async () => {
-    if (uuid) {
-      navigate(`/${uuid}/step-1`);
-    } else {
-      const response = await createScreen(formData);
-      setFetchedScreen(true);
-      navigate(`/${response.uuid}/step-1`);
+    setWasSubmitted(true);
+    if (formData.agreeToTermsOfService) {
+      if (uuid) {
+        navigate(`/${uuid}/step-2`);
+      } else {
+        const response = await createScreen(formData);
+        setFetchedScreen(true);
+        navigate(`/${response.uuid}/step-2`);
+      }
     }
   };
+
   useEffect(() => {
     const continueOnEnter = (event) => {
       if (event.key === 'Enter') {
@@ -80,10 +85,31 @@ const LandingPage = ({ setFetchedScreen }) => {
           </ul>
         </CardContent>
       </Card>
+      <Box>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={formData.agreeToTermsOfService}
+              onChange={handleCheckboxChange}
+              sx={wasSubmitted && formData.agreeToTermsOfService === false ? { color: '#c6252b' } : {}}
+            />
+          }
+          onClick={handleCheckboxChange}
+          label={
+            <FormattedMessage
+              id="disclaimer-label"
+              defaultMessage="I have read, understand, and agree to the terms of the Gary Disclaimer and consent to contact above."
+            />
+          }
+          value="agreeToTermsOfService"
+        />
+      </Box>
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
-        <Button variant="contained" onClick={handleContinue}>
-          <FormattedMessage id="continue-button" defaultMessage="Continue" />
-        </Button>
+        <Box>
+          <Button variant="contained" onClick={handleContinue}>
+            <FormattedMessage id="continue-button" defaultMessage="Continue" />
+          </Button>
+        </Box>
       </CardActions>
     </main>
   );
