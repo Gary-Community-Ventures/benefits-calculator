@@ -50,20 +50,23 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
 
   const getLinksForCheckbox = () => {
     switch (locale) {
-      case 'en-US': return {
-        privacyPolicyLink:'https://www.myfriendben.org/en/data-privacy-policy',
-        addTermsConsentToContact: 'https://www.myfriendben.org/en/additional-terms-and-consent-to-contact'
-      }
-      case 'es': return {
-        privacyPolicyLink:'https://www.myfriendben.org/es/data-privacy-policy',
-        addTermsConsentToContact: 'https://www.myfriendben.org/es/additional-terms-and-consent-to-contact'
-      }
-      case 'vi': return {
-        privacyPolicyLink:'https://www.myfriendben.org/vi/data-privacy-policy',
-        addTermsConsentToContact: 'https://www.myfriendben.org/vi/additional-terms-and-consent-to-contact'
-      }
+      case 'en-US':
+        return {
+          privacyPolicyLink: 'https://www.myfriendben.org/en/data-privacy-policy',
+          addTermsConsentToContact: 'https://www.myfriendben.org/en/additional-terms-and-consent-to-contact',
+        };
+      case 'es':
+        return {
+          privacyPolicyLink: 'https://www.myfriendben.org/es/data-privacy-policy',
+          addTermsConsentToContact: 'https://www.myfriendben.org/es/additional-terms-and-consent-to-contact',
+        };
+      case 'vi':
+        return {
+          privacyPolicyLink: 'https://www.myfriendben.org/vi/data-privacy-policy',
+          addTermsConsentToContact: 'https://www.myfriendben.org/vi/additional-terms-and-consent-to-contact',
+        };
     }
-  }
+  };
 
   const createCheckboxLabel = () => {
     return (
@@ -72,13 +75,11 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
         />
-        <Link to={getLinksForCheckbox().privacyPolicyLink} target="_blank" rel="noopener noreferrer">
-          <FormattedMessage
-            id="landingPage-policyText"
-            defaultMessage="Privacy Policy,"
-          />
-        </Link>&nbsp;
-        <Link to={getLinksForCheckbox().addTermsConsentToContact} target="_blank" rel="noopener noreferrer">
+        <Link href={getLinksForCheckbox().privacyPolicyLink} target="_blank" rel="noopener noreferrer">
+          <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy," />
+        </Link>
+        &nbsp;
+        <Link href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" rel="noopener noreferrer">
           <FormattedMessage
             id="landingPage-additionalTerms"
             defaultMessage="Additional Terms, and Consent to Contact"
@@ -144,7 +145,7 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
               sx={wasSubmitted && formData.agreeToTermsOfService === false ? { color: '#c6252b' } : {}}
             />
           }
-          // onClick={handleCheckboxChange}
+          onClick={handleCheckboxChange}
           label={createCheckboxLabel()}
           value="agreeToTermsOfService"
         />
