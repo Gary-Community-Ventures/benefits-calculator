@@ -106,7 +106,7 @@ const App = () => {
       ...formData,
       isTest: isTest,
       externalID: externalId,
-      referralSource: isOtherSource ? 'other' : referrerSource,
+      referralSource: isOtherSource && referrer ? 'other' : referrerSource,
       referrerCode: referrer,
       otherSource: isOtherSource ? referrer : '',
       urlSearchParams: urlSearchParams,
