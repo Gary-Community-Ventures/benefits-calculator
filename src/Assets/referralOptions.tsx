@@ -6,6 +6,7 @@ const referralOptions = {
   cedp: 'Community Economic Defense Project (CEDP)',
   auroraCC: 'Aurora Community Connection',
   jeffcoPP: 'Jeffco Prosperity Partners',
+  jeffcoHS: 'Jeffco Human Services',
   jeffcoCYFAP: 'Jeffco CYFAP',
   projectWorthmore: 'Project Worthmore',
   bia: 'Benefits in Action',
