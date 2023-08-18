@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useContext, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import {
   EmailShareButton,
@@ -18,9 +18,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import ReactGA from 'react-ga4';
 import './Share.css';
+import { Context } from '../Wrapper/Wrapper';
 
 const Share = forwardRef(function Share({ close }, ref) {
   const [copied, setCopied] = useState(false);
+  const { formData } = useContext(Context);
   const intl = useIntl();
 
   const labels = {
@@ -38,7 +40,8 @@ const Share = forwardRef(function Share({ close }, ref) {
     }),
   };
 
-  const shareUrl = 'https://www.myfriendben.org/';
+  const twoOneOneShareUrl = 'https://screener.myfriendben.org?referrer=211co';
+  const shareUrl = formData.referrerCode === '211co' ? twoOneOneShareUrl : 'https://www.myfriendben.org/';
   const appId = '1268913277361574';
 
   const iconSize = { fontSize: '1.3rem' };

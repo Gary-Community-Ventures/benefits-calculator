@@ -38,7 +38,7 @@ const QuestionComponentContainer = ({
         componentDetails={question.componentDetails}
         data={formData}
         handleTextfieldChange={handleTextfieldChange}
-        submitted={errorController.isSubmitted}
+        submitted={errorController.submittedCount}
       />
     );
   };
@@ -84,7 +84,7 @@ const QuestionComponentContainer = ({
         componentDetails={question.componentDetails}
         options={question.componentDetails.options}
         formDataProperty={question.componentDetails.inputName}
-        submitted={errorController.isSubmitted}
+        submitted={errorController.submittedCount}
       />
     );
   };
@@ -106,7 +106,7 @@ const QuestionComponentContainer = ({
         {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && (
           <FollowUpQuestions
             followUpQuestions={matchingQuestion.followUpQuestions}
-            submitted={errorController.isSubmitted}
+            submitted={errorController.submittedCount}
             formData={formData}
             handleCheckboxChange={handleCheckboxChange}
             handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}

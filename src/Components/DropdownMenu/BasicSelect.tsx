@@ -27,7 +27,7 @@ interface BasicSelectProps {
   options: { [key: string]: string };
   formDataProperty: string;
   errorController: ErrorController;
-  submitted: boolean;
+  submitted: number;
 }
 
 const BasicSelect = ({ componentDetails, options, formDataProperty, submitted }: BasicSelectProps) => {
@@ -43,7 +43,7 @@ const BasicSelect = ({ componentDetails, options, formDataProperty, submitted }:
   }, []);
 
   useEffect(() => {
-    errorController.setIsSubmitted(submitted);
+    errorController.setSubmittedCount(submitted);
   }, [submitted]);
 
   const handleBasicSelect = (event: SelectChangeEvent<any>, formProperty: string) => {

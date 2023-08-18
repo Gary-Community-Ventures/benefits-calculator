@@ -150,7 +150,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <Textfield
         componentDetails={componentInputProps}
-        submitted={errorController.isSubmitted}
+        submitted={errorController.submittedCount}
         data={householdData}
         handleTextfieldChange={handleTextfieldChange}
       />
@@ -294,7 +294,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         options={relationshipOptions}
         setHouseholdData={setHouseholdData}
         householdData={householdData}
-        submitted={ageErrorController.isSubmitted}
+        submitted={ageErrorController.submittedCount}
       />
     );
   };
@@ -442,7 +442,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
-    ageErrorController.setIsSubmitted(true);
+    ageErrorController.incrementSubmitted();
     ageErrorController.updateError(householdData.age);
     const validPersonData = personDataIsValid(householdData);
     const lastHouseholdMember = page >= remainingHHMNumber;
@@ -479,7 +479,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}
         <p className="household-data-q-underline"></p>
-        {householdData.hasIncome && createPersonIncomeBlock(ageErrorController.isSubmitted)}
+        {householdData.hasIncome && createPersonIncomeBlock(ageErrorController.submittedCount)}
         <div className="question-buttons">
           <PreviousButton navFunction={handlePreviousSubmit} />
           <ContinueButton handleContinueSubmit={handleContinueSubmit} />

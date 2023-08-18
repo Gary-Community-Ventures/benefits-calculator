@@ -10,9 +10,13 @@ function useErrorController(
   messageFunc: MessageFunction<any>,
 ): ErrorController {
   const [hasError, setHasError] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedCount, setSubmittedCount] = useState(0);
 
-  const showError = hasError && isSubmitted;
+  const showError = hasError && submittedCount > 0;
+
+  const incrementSubmitted = () => {
+    setSubmittedCount(submittedCount + 1);
+  };
 
   const updateError: ValidationFunction<VerifiableInput> = (value, formData) => {
     const updatedHasError = hasErrorFunc(value, formData);
@@ -24,7 +28,7 @@ function useErrorController(
     return messageFunc(value, formData);
   };
 
-  return { hasError, showError, isSubmitted, setIsSubmitted, updateError, message };
+  return { hasError, showError, submittedCount, incrementSubmitted, setSubmittedCount, updateError, message };
 }
 
 const ageHasError: ValidationFunction<string | number> = (applicantAge) => {
