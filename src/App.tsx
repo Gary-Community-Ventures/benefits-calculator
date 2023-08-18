@@ -101,13 +101,14 @@ const App = () => {
   ]);
 
   useEffect(() => {
+    const isOtherSource = referrerSource === '';
     setFormData({
       ...formData,
       isTest: isTest,
       externalID: externalId,
-      referralSource: referrerSource,
+      referralSource: isOtherSource ? 'other' : referrerSource,
       referrerCode: referrer,
-      otherSource: referrerSource ? '' : referrer,
+      otherSource: isOtherSource ? referrer : '',
       urlSearchParams: urlSearchParams,
       isBIAUser: isBIAUser,
     });
