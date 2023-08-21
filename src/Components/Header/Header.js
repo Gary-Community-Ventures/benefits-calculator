@@ -9,13 +9,14 @@ import Share from '../Share/Share';
 import EmailResults from '../EmailResults/EmailResults';
 import MFBLogo from '../../Assets/logo.png';
 import BIAMFBLogo from '../../Assets/biamfbcombinedlogo.png';
+import JHSAMFBLogo from '../../Assets/JeffcoAssets/jeffcobrand.png';
 import Paper from '@mui/material/Paper';
 import './Header.css';
 
 const Header = ({ handleTextfieldChange }) => {
   const context = useContext(Context);
   const { formData } = context;
-  const { urlSearchParams, isBIAUser } = formData;
+  const { urlSearchParams, referralSource } = formData;
 
   const location = useLocation();
   const urlRegex = /^\/(?:\/results\/(.+)|(.+)\/results)\/?$/;
@@ -69,16 +70,36 @@ const Header = ({ handleTextfieldChange }) => {
     }
   };
 
+  const getLogoSource = (refSource) => {
+    switch (refSource) {
+      case 'bia':
+        return BIAMFBLogo;
+      case 'jeffcohs':
+        return JHSAMFBLogo;
+      default:
+        return MFBLogo;
+    }
+  }
+
+  const getAltText = (refSource) => {
+    switch (refSource) {
+      case 'bia':
+        return 'benefits in action and my friend ben home page button';
+      case 'jeffcohs':
+        return 'jeffco human services and my friend ben home page button';
+      default:
+        return 'my friend ben home page button';
+    }
+  }
+
   return (
     <nav>
       <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#2A2B2A' }} square={true}>
         <AppBar position="sticky" id="nav-container" elevation={0} sx={{ backgroundColor: '#2A2B2A' }}>
           <a href={`/step-1${urlSearchParams}`} className="home-link">
             <img
-              src={isBIAUser ? BIAMFBLogo : MFBLogo}
-              alt={
-                isBIAUser ? 'benefits in action and my friend ben home page button' : 'my friend ben home page button'
-              }
+              src={getLogoSource(referralSource)}
+              alt={getAltText(referralSource)}
               className="logo"
             />
           </a>
