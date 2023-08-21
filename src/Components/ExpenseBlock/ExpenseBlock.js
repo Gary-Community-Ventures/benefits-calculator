@@ -60,7 +60,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
           setAllExpenses={setSelectedMenuItem}
           deleteExpenseBlock={deleteExpenseBlock}
           index={index}
-          submitted={expensesErrorController.isSubmitted}
+          submitted={expensesErrorController.submittedCount}
           key={index}
         />
       );
@@ -81,7 +81,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   const handleSaveAndContinue = (event) => {
     event.preventDefault();
     const hasError = expensesErrorController.updateError(selectedMenuItem);
-    expensesErrorController.setIsSubmitted(true);
+    expensesErrorController.incrementSubmitted();
     if (!hasError) {
       handleExpenseSourcesSubmit(selectedMenuItem, stepNumberId, uuid);
     }

@@ -100,13 +100,14 @@ const App = () => {
   ]);
 
   useEffect(() => {
+    const isOtherSource = referrerSource === '';
     setFormData({
       ...formData,
       isTest: isTest,
       externalID: externalId,
-      referralSource: referrerSource,
+      referralSource: isOtherSource && referrer ? 'other' : referrerSource,
       referrerCode: referrer,
-      otherSource: referrerSource ? '' : referrer,
+      otherSource: isOtherSource ? referrer : '',
       urlSearchParams: urlSearchParams,
       isBIAUser: isBIAUser,
     });
@@ -180,7 +181,7 @@ const App = () => {
     uuid: string,
   ) => {
     event.preventDefault();
-    errorController.setIsSubmitted(true);
+    errorController.incrementSubmitted();
     const hasError = errorController.updateError(inputToBeValidated, formData);
     const isZipcodeQuestionAndCountyIsEmpty = questionName === 'zipcode' && formData.county === '';
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty =

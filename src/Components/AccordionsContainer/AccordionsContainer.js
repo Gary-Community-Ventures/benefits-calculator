@@ -22,7 +22,7 @@ const AccordionsContainer = ({ followUp, submitted }) => {
   );
 
   useEffect(() => {
-    errorController.setIsSubmitted(submitted);
+    errorController.setSubmittedCount(submitted);
   }, [submitted]);
 
   useEffect(() => {

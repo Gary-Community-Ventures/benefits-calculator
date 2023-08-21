@@ -9,7 +9,7 @@ import {
   selectHasError,
   expenseTypeHelperText,
 } from '../../Assets/validationFunctions.tsx';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import Textfield from '../Textfield/Textfield';
 
 const StyledSelectfield = styled(Select)({
@@ -32,7 +32,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   }, []);
 
   useEffect(() => {
-    expenseTypeErrorController.setIsSubmitted(submitted);
+    expenseTypeErrorController.setSubmittedCount(submitted);
   }, [submitted]);
 
   const handleSelectChange = (event, index) => {
