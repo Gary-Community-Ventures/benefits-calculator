@@ -69,7 +69,6 @@ const initialFormData: FormData = {
     commConsent: false,
   },
   urlSearchParams: '',
-  isBIAUser: false,
   acuteHHConditions: {
     food: false,
     babySupplies: false,

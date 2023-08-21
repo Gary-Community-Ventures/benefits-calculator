@@ -90,7 +90,6 @@ export const createDevFormData = (searchParams) => {
       commConsent: true,
     },
     urlSearchParams: null,
-    isBIAUser: false,
     acuteHHConditions: {
       food: true,
       babySupplies: true,

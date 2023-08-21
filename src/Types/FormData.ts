@@ -103,6 +103,5 @@ export interface FormData {
   otherSource?: string;
   signUpInfo: SignUpInfo;
   urlSearchParams: string;
-  isBIAUser: boolean;
   acuteHHConditions: AcuteHHConditions;
 }

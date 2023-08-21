@@ -39,7 +39,6 @@ const App = () => {
   const externalId = searchParams.get('externalid') ? Number(searchParams.get('externalid')) : undefined;
   const referrer = searchParams.get('referrer') !== null ? (searchParams.get('referrer') as string) : '';
   const referrerSource = referrer in referralOptions ? referrer : '';
-  const isBIAUser = referrer !== null && referrer.toLocaleLowerCase() === 'bia';
   const totalSteps = Object.keys(stepDirectory).length + 2;
   const [fetchedScreen, setFetchedScreen] = useState(false);
   const { locale, formData, setFormData, styleOverride, setTheme: changeTheme } = useContext(Context);
@@ -109,7 +108,6 @@ const App = () => {
       referrerCode: referrer,
       otherSource: isOtherSource ? referrer : '',
       urlSearchParams: urlSearchParams,
-      isBIAUser: isBIAUser,
     });
   }, []);
 
