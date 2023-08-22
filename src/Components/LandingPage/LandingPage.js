@@ -15,6 +15,7 @@ import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createScreen } from '../../Assets/updateScreen.js';
 import ReactGA from 'react-ga4';
+import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 import './LandingPage.css';
 
 const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
@@ -149,6 +150,11 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
           label={createCheckboxLabel()}
           value="agreeToTermsOfService"
         />
+        {wasSubmitted && formData.agreeToTermsOfService === false && (
+          <ErrorMessageWrapper fontSize="1.2rem">
+            <FormattedMessage id="disclaimer.error" defaultMessage="Please check the box to continue." />
+          </ErrorMessageWrapper>
+        )}
       </Box>
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <Box>
