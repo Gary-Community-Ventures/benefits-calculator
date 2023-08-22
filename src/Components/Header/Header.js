@@ -79,7 +79,7 @@ const Header = ({ handleTextfieldChange }) => {
       default:
         return MFBLogo;
     }
-  }
+  };
 
   const getAltText = (refSource) => {
     switch (refSource) {
@@ -90,18 +90,14 @@ const Header = ({ handleTextfieldChange }) => {
       default:
         return 'my friend ben home page button';
     }
-  }
+  };
 
   return (
     <nav>
       <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#2A2B2A' }} square={true}>
         <AppBar position="sticky" id="nav-container" elevation={0} sx={{ backgroundColor: '#2A2B2A' }}>
           <a href={`/step-1${urlSearchParams}`} className="home-link">
-            <img
-              src={getLogoSource(referralSource)}
-              alt={getAltText(referralSource)}
-              className="logo"
-            />
+            <img src={getLogoSource(referralSource)} alt={getAltText(referralSource)} className="logo" />
           </a>
           <div className="icon-wrapper">
             <Select
