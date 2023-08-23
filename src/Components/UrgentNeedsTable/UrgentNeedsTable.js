@@ -9,9 +9,20 @@ import TableFooter from '@mui/material/TableFooter';
 import UrgentNeedsRow from './UrgentNeedsRow';
 import { FormattedMessage } from 'react-intl';
 import './UrgentNeedsTable.css';
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 
 const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
   const finalUrgentNeedsPrograms = urgentNeedsPrograms[locale.toLowerCase()];
+  const { formData } = useContext(Context);
+
+  let link;
+  if (formData.referrerCode === '211co') {
+    link =
+      'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=whitelabel&utm_id=211mfb';
+  } else {
+    link = 'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=organic&utm_id=211mfb';
+  }
 
   const displayFooter = () => {
     if (urgentNeedsPrograms.es.length) {
@@ -19,12 +30,7 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
         <article className="urgentNeedsTableFooter">
           <p className="noResults-p">
             <FormattedMessage id="noResults.p-Two" defaultMessage="For additional resources, visit " />
-            <a
-              className="ineligibility-link navigator-info"
-              target="_blank"
-              rel="noreferrer"
-              href="https://www.211colorado.org/"
-            >
+            <a className="ineligibility-link navigator-info" target="_blank" rel="noreferrer" href={link}>
               2-1-1 Colorado
             </a>
             <FormattedMessage
@@ -45,12 +51,7 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
           </p>
           <p className="noResults-p">
             <FormattedMessage id="noResults.p-Two" defaultMessage="For additional resources, visit " />
-            <a
-              className="ineligibility-link navigator-info"
-              target="_blank"
-              rel="noreferrer"
-              href="https://www.211colorado.org/"
-            >
+            <a className="ineligibility-link navigator-info" target="_blank" rel="noreferrer" href={link}>
               2-1-1 Colorado
             </a>
             <FormattedMessage
