@@ -15,11 +15,11 @@ import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlo
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import TwoOneOneFooter from './Components/TwoOneOneComponents/TwoOneOneFooter/TwoOneOneFooter';
 import referralOptions from './Assets/referralOptions';
+import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
 import { updateScreen, updateUser } from './Assets/updateScreen';
 import stepDirectory from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
-// @ts-ignore
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import './App.css';
 
@@ -247,6 +247,9 @@ const App = () => {
           </Routes>
           <Routes>
             <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
+            {formData.referralSource === 'jeffcohs' && (
+              <Route path="step-0" element={<JeffcoLandingPage setFetchedScreen={setFetchedScreen} />} />
+            )}
             <Route
               path="/step-1"
               element={<LandingPage setFetchedScreen={setFetchedScreen} handleCheckboxChange={handleCheckboxChange} />}
