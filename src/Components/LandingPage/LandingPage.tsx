@@ -9,28 +9,49 @@ import {
   Box,
   Link,
 } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createScreen } from '../../Assets/updateScreen.js';
+import {
+  useErrorController,
+  displayAgreeToTermsErrorMessage,
+  termsOfServiceHasError,
+} from '../../Assets/validationFunctions.tsx';
 import ReactGA from 'react-ga4';
-import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 import './LandingPage.css';
 
 interface LandingPageProps {
   setFetchedScreen: React.Dispatch<React.SetStateAction<boolean>>;
-  handleCheckboxChange: (event:React.FormEvent<HTMLInputElement>) => void;
+  handleCheckboxChange: (event: React.FormEvent<HTMLInputElement>) => void;
 }
 
 const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProps) => {
   const { formData, locale } = useContext(Context);
   let { uuid } = useParams();
   const navigate = useNavigate();
-  const [wasSubmitted, setWasSubmitted] = useState(false);
+  const errorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
+
+  useEffect(() => {
+    const continueOnEnter = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        handleContinue();
+      }
+    };
+    document.addEventListener('keyup', continueOnEnter);
+    return () => {
+      document.removeEventListener('keyup', continueOnEnter); // remove event listener on onmount
+    };
+  });
+
+  useEffect(() => {
+    errorController.updateError(formData.agreeToTermsOfService);
+  }, [formData.agreeToTermsOfService]);
 
   const handleContinue = async () => {
-    setWasSubmitted(true);
+    errorController.updateError(formData.agreeToTermsOfService);
+    errorController.incrementSubmitted();
     if (formData.agreeToTermsOfService) {
       if (uuid) {
         navigate(`/${uuid}/step-2`);
@@ -41,18 +62,6 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
       }
     }
   };
-
-  useEffect(() => {
-    const continueOnEnter = (event:KeyboardEvent) => {
-      if (event.key === 'Enter') {
-        handleContinue();
-      }
-    };
-    document.addEventListener('keyup', continueOnEnter);
-    return () => {
-      document.removeEventListener('keyup', continueOnEnter); // remove event listener on onmount
-    };
-  });
 
   const getLinksForCheckbox = () => {
     switch (locale) {
@@ -148,17 +157,13 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
             <Checkbox
               checked={formData.agreeToTermsOfService}
               onChange={handleCheckboxChange}
-              sx={wasSubmitted && formData.agreeToTermsOfService === false ? { color: '#c6252b' } : {}}
+              sx={errorController.showError && formData.agreeToTermsOfService === false ? { color: '#c6252b' } : {}}
             />
           }
           label={createCheckboxLabel()}
           value="agreeToTermsOfService"
         />
-        {wasSubmitted && formData.agreeToTermsOfService === false && (
-          <ErrorMessageWrapper fontSize="1.2rem">
-            <FormattedMessage id="disclaimer.error" defaultMessage="Please check the box to continue." />
-          </ErrorMessageWrapper>
-        )}
+        {errorController.showError && errorController.message(null)}
       </Box>
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <Box>
