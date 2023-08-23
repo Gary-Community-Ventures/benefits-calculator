@@ -18,7 +18,12 @@ import ReactGA from 'react-ga4';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 import './LandingPage.css';
 
-const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
+interface LandingPageProps {
+  setFetchedScreen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleCheckboxChange: () => void;
+}
+
+const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProps) => {
   const { formData, locale } = useContext(Context);
   let { uuid } = useParams();
   const navigate = useNavigate();
@@ -38,7 +43,7 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
   };
 
   useEffect(() => {
-    const continueOnEnter = (event) => {
+    const continueOnEnter = (event:KeyboardEvent) => {
       if (event.key === 'Enter') {
         handleContinue();
       }
@@ -76,11 +81,11 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }) => {
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
         />
-        <Link href={getLinksForCheckbox().privacyPolicyLink} target="_blank" rel="noopener noreferrer">
+        <Link href={getLinksForCheckbox()?.privacyPolicyLink} target="_blank" rel="noopener noreferrer">
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy," />
         </Link>
         &nbsp;
-        <Link href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" rel="noopener noreferrer">
+        <Link href={getLinksForCheckbox()?.addTermsConsentToContact} target="_blank" rel="noopener noreferrer">
           <FormattedMessage
             id="landingPage-additionalTerms"
             defaultMessage="Additional Terms, and Consent to Contact"
