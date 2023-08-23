@@ -151,7 +151,6 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
               sx={wasSubmitted && formData.agreeToTermsOfService === false ? { color: '#c6252b' } : {}}
             />
           }
-          onClick={handleCheckboxChange}
           label={createCheckboxLabel()}
           value="agreeToTermsOfService"
         />
