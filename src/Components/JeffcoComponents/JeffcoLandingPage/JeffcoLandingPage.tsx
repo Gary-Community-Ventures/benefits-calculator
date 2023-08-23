@@ -26,7 +26,7 @@ const JeffcoLandingPage = ({ setFetchedScreen }: JeffcoLandingPageProps) => {
       navigate(`/${response.uuid}/step-1`);
     }
   };
-  
+
   return (
     <main className="benefits-form">
       <Stack className="jeffco-content-container" gap={'2rem'}>
