@@ -248,7 +248,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
             {formData.referralSource === 'jeffcohs' && (
-              <Route path="step-0" element={<JeffcoLandingPage setFetchedScreen={setFetchedScreen} />} />
+              <Route path="/step-0" element={<JeffcoLandingPage setFetchedScreen={setFetchedScreen} />} />
             )}
             <Route
               path="/step-1"
