@@ -449,4 +449,6 @@ export interface Language extends Record<string, string> {
   'footer-terms-of-service-link': string;
   'footer-twoOneOne-privacy': string;
   'footer-twoOneOne-mfb': string;
+  'jeffcoLandingPage-text': string;
+  'jeffco-getStarted-button': string;
 }
