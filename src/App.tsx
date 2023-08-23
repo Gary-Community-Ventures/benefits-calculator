@@ -239,7 +239,7 @@ const App = () => {
         )}
         <Box className="main-max-width">
           <Routes>
-            {formData.referralSource !== 'jeffcohs' && <Route path="/step-1" element={<ProgressBar step={1} />} />}
+            <Route path="/step-1" element={<ProgressBar step={1} />} />
             <Route path="/:uuid/step-:id" element={<ProgressBar />} />
             <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
             <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
