@@ -20,7 +20,7 @@ import './LandingPage.css';
 
 interface LandingPageProps {
   setFetchedScreen: React.Dispatch<React.SetStateAction<boolean>>;
-  handleCheckboxChange: (event:Event) => void;
+  handleCheckboxChange: (event:React.FormEvent<HTMLInputElement>) => void;
 }
 
 const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProps) => {

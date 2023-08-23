@@ -144,7 +144,7 @@ const App = () => {
     }
   };
 
-  const handleCheckboxChange = (event: Event) => {
+  const handleCheckboxChange = (event: React.FormEvent<HTMLInputElement>) => {
     //the value is the name of the formData property for everything except the commConsent
     const { value, name } = event.target as HTMLInputElement;
 
