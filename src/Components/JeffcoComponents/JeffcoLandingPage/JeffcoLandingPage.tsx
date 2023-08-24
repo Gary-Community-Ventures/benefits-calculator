@@ -14,11 +14,11 @@ const JeffcoLandingPage = () => {
   useEffect(() => {
     setTimeout(() => {
       setFormData({ ...formData, immutableReferrer: 'jeffcohs' });
-    })
+    });
   }, []);
 
   const handleGetStarted = () => {
-    navigate("/step-1?referrer=jeffcohs");
+    navigate('/step-1?referrer=jeffcohs');
   };
 
   return (
