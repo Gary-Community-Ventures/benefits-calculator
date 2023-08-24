@@ -247,7 +247,7 @@ const App = () => {
           </Routes>
           <Routes>
             <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
-            <Route path="/jeffcohs" element={<JeffcoLandingPage setFetchedScreen={setFetchedScreen} />} />
+            <Route path="/jeffcohs" element={<JeffcoLandingPage />} />
             <Route
               path="/step-1"
               element={<LandingPage setFetchedScreen={setFetchedScreen} handleCheckboxChange={handleCheckboxChange} />}
