@@ -18,7 +18,7 @@ const JeffcoLandingPage = () => {
   }, []);
 
   const handleGetStarted = () => {
-    navigate("/step-1");
+    navigate("/step-1?referrer=jeffcohs");
   };
 
   return (
