@@ -159,7 +159,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
       <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#FFFFFF' }} square={true}>
         <AppBar position="sticky" id="nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
           <Box>
-            <a href={`/step-1?referrer=${formData.referrerCode}`}>
+            <a href={`/step-1?referrer=${formData.immutableReferrer}`}>
               <img src={twoOneOneMFBLogo} alt="211 and my friend ben logo" className="cobranded-logo" />
             </a>
           </Box>

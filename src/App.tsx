@@ -45,9 +45,9 @@ const App = () => {
   const [theme, setTheme] = useState(createTheme(styleOverride));
 
   useEffect(() => {
-    const theme = formData.referrerCode === '211co' ? 'twoOneOne' : 'default';
+    const theme = formData.immutableReferrer === '211co' ? 'twoOneOne' : 'default';
     changeTheme(theme);
-  }, [formData.referrerCode]);
+  }, [formData.immutableReferrer]);
 
   useEffect(() => {
     setTheme(createTheme(styleOverride));
@@ -105,7 +105,7 @@ const App = () => {
       isTest: isTest,
       externalID: externalId,
       referralSource: isOtherSource && referrer ? 'other' : referrerSource,
-      referrerCode: referrer,
+      immutableReferrer: referrer,
       otherSource: isOtherSource ? referrer : '',
       urlSearchParams: urlSearchParams,
     });
@@ -232,7 +232,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <CssBaseline />
-        {formData.referrerCode === '211co' ? (
+        {formData.immutableReferrer === '211co' ? (
           <TwoOneOneHeader handleTextfieldChange={handleTextfieldChange} />
         ) : (
           <Header handleTextfieldChange={handleTextfieldChange} />
@@ -247,9 +247,7 @@ const App = () => {
           </Routes>
           <Routes>
             <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
-            {formData.referralSource === 'jeffcohs' && (
-              <Route path="/step-0" element={<JeffcoLandingPage setFetchedScreen={setFetchedScreen} />} />
-            )}
+            <Route path="/jeffcohs" element={<JeffcoLandingPage setFetchedScreen={setFetchedScreen} />} />
             <Route
               path="/step-1"
               element={<LandingPage setFetchedScreen={setFetchedScreen} handleCheckboxChange={handleCheckboxChange} />}
@@ -299,7 +297,7 @@ const App = () => {
             <Route path="*" element={<Navigate to="/step-1" replace />} />
           </Routes>
         </Box>
-        {formData.referrerCode === '211co' && <TwoOneOneFooter />}
+        {formData.immutableReferrer === '211co' && <TwoOneOneFooter />}
       </div>
     </ThemeProvider>
   );

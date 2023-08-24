@@ -77,7 +77,7 @@ export const createDevFormData = (searchParams) => {
       none: true,
     },
     referralSource: 'gary',
-    referrerCode: '',
+    immutableReferrer: '',
     otherSource: '',
     signUpInfo: {
       email: 'testabc7874@gmail.com',

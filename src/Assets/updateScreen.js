@@ -49,7 +49,7 @@ const getScreensBody = (formData, languageCode) => {
     has_chp_hi: formData.healthInsurance.chp,
     has_no_hi: formData.healthInsurance.none,
     referral_source: finalReferralSource,
-    referrer_code: formData.referrerCode,
+    referrer_code: formData.immutableReferrer,
     needs_food: formData.acuteHHConditions.food,
     needs_baby_supplies: formData.acuteHHConditions.babySupplies,
     needs_housing_help: formData.acuteHHConditions.housing,

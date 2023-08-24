@@ -16,7 +16,7 @@ import './Header.css';
 const Header = ({ handleTextfieldChange }) => {
   const context = useContext(Context);
   const { formData } = context;
-  const { urlSearchParams, referralSource } = formData;
+  const { immutableReferrer } = formData;
 
   const location = useLocation();
   const urlRegex = /^\/(?:\/results\/(.+)|(.+)\/results)\/?$/;
@@ -96,8 +96,8 @@ const Header = ({ handleTextfieldChange }) => {
     <nav>
       <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#2A2B2A' }} square={true}>
         <AppBar position="sticky" id="nav-container" elevation={0} sx={{ backgroundColor: '#2A2B2A' }}>
-          <a href={`/step-1${urlSearchParams}`} className="home-link">
-            <img src={getLogoSource(referralSource)} alt={getAltText(referralSource)} className="logo" />
+          <a href={`/step-1?referrer=${immutableReferrer}`} className="home-link">
+            <img src={getLogoSource(immutableReferrer)} alt={getAltText(immutableReferrer)} className="logo" />
           </a>
           <div className="icon-wrapper">
             <Select

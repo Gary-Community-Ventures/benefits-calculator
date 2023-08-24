@@ -56,7 +56,7 @@ const initialFormData: FormData = {
     none: false,
   },
   referralSource: undefined,
-  referrerCode: undefined,
+  immutableReferrer: undefined,
   otherSource: undefined,
   signUpInfo: {
     email: '',
