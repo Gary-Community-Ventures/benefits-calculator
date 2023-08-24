@@ -1,30 +1,24 @@
-import { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Context } from '../../Wrapper/Wrapper.tsx';
-import { createScreen } from '../../../Assets/updateScreen';
+import { useNavigate } from 'react-router-dom';
 import jeffcolandingpage from '../../../Assets/JeffcoAssets/jeffcolandingpage.png';
 import Stack from '@mui/material/Stack';
 import { Typography, Button } from '@mui/material';
+import { useContext, useEffect } from 'react';
+import { Context } from '../../Wrapper/Wrapper';
 import './JeffcoLandingPage.css';
 
-interface JeffcoLandingPageProps {
-  setFetchedScreen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const JeffcoLandingPage = ({ setFetchedScreen }: JeffcoLandingPageProps) => {
-  const { formData } = useContext(Context);
+const JeffcoLandingPage = () => {
   const navigate = useNavigate();
-  let { uuid } = useParams();
+  const { formData, setFormData } = useContext(Context);
 
-  const handleGetStarted = async () => {
-    if (uuid) {
-      navigate(`/${uuid}/step-1`);
-    } else {
-      const response = await createScreen(formData);
-      setFetchedScreen(true);
-      navigate(`/${response.uuid}/step-1`);
-    }
+  useEffect(() => {
+    setTimeout(() => {
+      setFormData({ ...formData, immutableReferrer: 'jeffcohs' });
+    })
+  }, []);
+
+  const handleGetStarted = () => {
+    navigate("/step-1");
   };
 
   return (
