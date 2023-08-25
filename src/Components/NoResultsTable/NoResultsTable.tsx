@@ -27,7 +27,7 @@ const NoResultsTable = () => {
         <p className="noResults-p">
           <FormattedMessage id="noResults.p-Two" defaultMessage="For additional resources, visit " />
           <a className="ineligibility-link navigator-info" target="_blank" rel="noreferrer" href={link}>
-            Colorado 2-1-1
+            2-1-1 Colorado
           </a>
           <FormattedMessage
             id="noResults.p-Three"
