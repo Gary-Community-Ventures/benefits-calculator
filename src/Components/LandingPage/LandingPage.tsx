@@ -157,7 +157,7 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
             <Checkbox
               checked={formData.agreeToTermsOfService}
               onChange={handleCheckboxChange}
-              sx={errorController.showError && formData.agreeToTermsOfService === false ? { color: '#c6252b' } : {}}
+              sx={errorController.showError ? { color: '#c6252b' } : {}}
             />
           }
           label={createCheckboxLabel()}
