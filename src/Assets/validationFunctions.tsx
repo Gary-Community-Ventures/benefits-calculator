@@ -518,7 +518,7 @@ const otherReferalSourceHelperText: MessageFunction<string> = () => {
   );
 };
 
-const termsOfServiceHasError: ValidationFunction<boolean> = (isChecked: boolean): boolean => {
+const termsOfServiceHasError: ValidationFunction<boolean> = (isChecked) => {
   return !isChecked;
 };
 
