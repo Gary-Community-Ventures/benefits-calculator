@@ -36,7 +36,8 @@ const App = () => {
   const urlSearchParams = location.search;
   const [searchParams] = useSearchParams();
   const isTest = searchParams.get('test') ? true : false;
-  const externalId = searchParams.get('externalid') ? Number(searchParams.get('externalid')) : undefined;
+  const rawExternalId = searchParams.get('externalid');
+  const externalId = rawExternalId !== null ? rawExternalId : undefined;
   const referrer = searchParams.get('referrer') !== null ? (searchParams.get('referrer') as string) : '';
   const referrerSource = referrer in referralOptions ? referrer : '';
   const totalSteps = Object.keys(stepDirectory).length + 2;
