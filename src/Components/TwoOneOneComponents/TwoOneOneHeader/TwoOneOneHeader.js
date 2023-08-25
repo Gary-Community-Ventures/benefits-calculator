@@ -21,6 +21,7 @@ import './TwoOneOneHeader.css';
 const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
   const { formData, locale, selectLanguage } = useContext(Context);
+  const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
 
   //this is for the results icon to conditionally show up
   const location = useLocation();
@@ -159,7 +160,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
       <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#FFFFFF' }} square={true}>
         <AppBar position="sticky" id="nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
           <Box>
-            <a href={`/step-1?referrer=${formData.immutableReferrer}`}>
+            <a href={`/step-1${queryString}`}>
               <img src={twoOneOneMFBLogo} alt="211 and my friend ben logo" className="cobranded-logo" />
             </a>
           </Box>
