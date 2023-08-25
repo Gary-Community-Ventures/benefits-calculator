@@ -20,10 +20,10 @@ import {
   relationTypeHelperText,
 } from '../../Assets/validationFunctions.tsx';
 import { FormattedMessage } from 'react-intl';
-import './HouseholdDataBlock.css';
 import stepDirectory from '../../Assets/stepDirectory';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { Context } from '../Wrapper/Wrapper.tsx';
+import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -56,6 +56,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+  }, [wasSubmitted]);
+
+  useEffect(() => {
     const updatedHouseholdData = { ...householdData };
 
     if (updatedHouseholdData.student === false) {
@@ -76,7 +80,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   }, [householdData, wasSubmitted]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
     if (isNaN(page) || page < 1 || page >= lastMemberPage) {
       navigate(`/${uuid}/step-${step}/${lastMemberPage}`);
@@ -144,7 +147,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <Textfield
         componentDetails={componentInputProps}
-        submitted={errorController.isSubmitted}
+        submitted={errorController.submittedCount}
         data={householdData}
         handleTextfieldChange={handleTextfieldChange}
       />
@@ -206,7 +209,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
 
     return (
-      <span className="member-added-container" key={index}>
+      <article className="member-added-container" key={index}>
         <h3 className="member-added-relationship">{relationship}:</h3>
         <div className="member-added-age">
           <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />: {age}
@@ -216,7 +219,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           {formatToUSD(Number(income))}
           <FormattedMessage id="displayAnnualIncome.annual" defaultMessage=" annually" />
         </div>
-      </span>
+      </article>
     );
   };
 
@@ -288,7 +291,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         options={relationshipOptions}
         setHouseholdData={setHouseholdData}
         householdData={householdData}
-        submitted={ageErrorController.isSubmitted}
+        submitted={ageErrorController.submittedCount}
       />
     );
   };
@@ -407,7 +410,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
-    ageErrorController.setIsSubmitted(true);
+    ageErrorController.incrementSubmitted();
     ageErrorController.updateError(householdData.age);
     const validPersonData = personDataIsValid(householdData);
     const lastHouseholdMember = page >= remainingHHMNumber;
@@ -443,7 +446,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}
         <p className="household-data-q-underline"></p>
-        {householdData.hasIncome && createPersonIncomeBlock(ageErrorController.isSubmitted)}
+        {householdData.hasIncome && createPersonIncomeBlock(ageErrorController.submittedCount)}
         <div className="question-buttons">
           <PreviousButton navFunction={handlePreviousSubmit} />
           <ContinueButton handleContinueSubmit={handleContinueSubmit} />

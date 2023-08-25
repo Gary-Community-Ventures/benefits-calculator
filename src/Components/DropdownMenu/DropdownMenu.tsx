@@ -2,7 +2,6 @@ import { FormControl, MenuItem, InputLabel, Select, SelectChangeEvent, FormHelpe
 import { useEffect } from 'react';
 import type { ValidationFunction, MessageFunction } from '../../Types/ErrorController';
 import type { HouseholdData } from '../../Types/FormData';
-// @ts-ignore
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 
 interface ComponentProperties {
@@ -24,7 +23,7 @@ interface BasicSelectProps {
   options: { [key: string]: string };
   householdData: HouseholdData;
   setHouseholdData: any;
-  submitted: boolean;
+  submitted: number;
 }
 
 const DropdownMenu = ({ componentDetails, options, setHouseholdData, householdData, submitted }: BasicSelectProps) => {
@@ -38,7 +37,7 @@ const DropdownMenu = ({ componentDetails, options, setHouseholdData, householdDa
   }, []);
 
   useEffect(() => {
-    errorController.setIsSubmitted(submitted);
+    errorController.setSubmittedCount(submitted);
   }, [submitted]);
 
   const handleSelectChange = (event: SelectChangeEvent) => {

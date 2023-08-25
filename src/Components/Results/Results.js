@@ -678,11 +678,7 @@ const Results = () => {
                 {displayBenefitAndImmedNeedsBtns()}
                 {filterResultsButton === 'benefits' && renderDataGridOrNoResultsTable()}
                 {filterResultsButton === 'urgentNeeds' && (
-                  <UrgentNeedsTable
-                    urgentNeedsPrograms={results.rawResponse.urgent_needs}
-                    locale={locale}
-                    totalEligiblePrograms={totalEligiblePrograms(results.programs)}
-                  />
+                  <UrgentNeedsTable urgentNeedsPrograms={results.rawResponse.urgent_needs} locale={locale} />
                 )}
               </Grid>
               <Button

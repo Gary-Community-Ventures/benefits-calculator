@@ -12,7 +12,7 @@ const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submi
   const { inputType, inputName, inputLabel, inputError, inputHelperText } = componentDetails;
   const errorController = useErrorController(inputError, inputHelperText);
   useEffect(() => {
-    errorController.setIsSubmitted(submitted);
+    errorController.setSubmittedCount(submitted);
   }, [submitted]);
 
   const valueRef = useRef('');

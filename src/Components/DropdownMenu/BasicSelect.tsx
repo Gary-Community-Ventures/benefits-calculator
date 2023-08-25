@@ -1,10 +1,8 @@
 import { FormControl, Select, MenuItem, InputLabel, FormHelperText, SelectChangeEvent } from '@mui/material';
 import { useContext, useEffect } from 'react';
-// @ts-ignore
 import { Context } from '../Wrapper/Wrapper.tsx';
 import type { ErrorController, MessageFunction, ValidationFunction } from '../../Types/ErrorController.js';
 import type { FormData } from '../../Types/FormData.js';
-// @ts-ignore
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 
 interface ComponentProperties {
@@ -27,7 +25,7 @@ interface BasicSelectProps {
   options: { [key: string]: string };
   formDataProperty: string;
   errorController: ErrorController;
-  submitted: boolean;
+  submitted: number;
 }
 
 const BasicSelect = ({ componentDetails, options, formDataProperty, submitted }: BasicSelectProps) => {
@@ -43,7 +41,7 @@ const BasicSelect = ({ componentDetails, options, formDataProperty, submitted }:
   }, []);
 
   useEffect(() => {
-    errorController.setIsSubmitted(submitted);
+    errorController.setSubmittedCount(submitted);
   }, [submitted]);
 
   const handleBasicSelect = (event: SelectChangeEvent<any>, formProperty: string) => {

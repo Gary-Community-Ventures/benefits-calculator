@@ -16,7 +16,7 @@ const FetchScreen = ({ setFetchedScreen }) => {
       const response = await getScreen(uuid);
       createFormData(response);
     } catch (err) {
-      navigate('/step-0');
+      navigate('/step-1');
       return;
     }
     setFetchedScreen(true);
@@ -81,7 +81,7 @@ const FetchScreen = ({ setFetchedScreen }) => {
         none: response.has_no_hi ?? false,
       },
       referralSource: referrer,
-      referrerCode: response.referrer_code,
+      immutableReferrer: response.referrer_code,
       otherSource: otherRefferer,
       acuteHHConditions: {
         food: response.needs_food ?? false,

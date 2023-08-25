@@ -5,16 +5,17 @@ import type { ErrorController, ValidationFunction, MessageFunction, VerifiableIn
 import type { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo, Benefits } from '../Types/FormData';
 import ErrorMessageWrapper from '../Components/ErrorMessage/ErrorMessageWrapper';
 
-function useErrorController(
-  hasErrorFunc: ValidationFunction<VerifiableInput>,
-  messageFunc: MessageFunction<any>,
-): ErrorController {
+function useErrorController(hasErrorFunc: ValidationFunction<any>, messageFunc: MessageFunction<any>): ErrorController {
   const [hasError, setHasError] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedCount, setSubmittedCount] = useState(0);
 
-  const showError = hasError && isSubmitted;
+  const showError = hasError && submittedCount > 0;
 
-  const updateError: ValidationFunction<VerifiableInput> = (value, formData) => {
+  const incrementSubmitted = () => {
+    setSubmittedCount(submittedCount + 1);
+  };
+
+  const updateError: ValidationFunction<any> = (value, formData) => {
     const updatedHasError = hasErrorFunc(value, formData);
     setHasError(updatedHasError);
     return updatedHasError;
@@ -24,7 +25,7 @@ function useErrorController(
     return messageFunc(value, formData);
   };
 
-  return { hasError, showError, isSubmitted, setIsSubmitted, updateError, message };
+  return { hasError, showError, submittedCount, incrementSubmitted, setSubmittedCount, updateError, message };
 }
 
 const ageHasError: ValidationFunction<string | number> = (applicantAge) => {
@@ -71,6 +72,7 @@ const displayZipcodeHelperText: MessageFunction<string | number> = (zipcode) => 
     );
   }
 };
+
 const radiofieldHasError: ValidationFunction<any> = (radiofield) => {
   return typeof radiofield !== 'boolean';
 };
@@ -516,6 +518,18 @@ const otherReferalSourceHelperText: MessageFunction<string> = () => {
   );
 };
 
+const termsOfServiceHasError: ValidationFunction<boolean> = (isChecked) => {
+  return !isChecked;
+};
+
+const displayAgreeToTermsErrorMessage: MessageFunction<null> = () => {
+  return (
+    <ErrorMessageWrapper fontSize="1rem">
+      <FormattedMessage id="disclaimer.error" defaultMessage="Please check the box to continue." />
+    </ErrorMessageWrapper>
+  );
+};
+
 export {
   useErrorController,
   ageHasError,
@@ -564,4 +578,6 @@ export {
   incomeStreamHelperText,
   incomeFrequencyHelperText,
   otherReferalSourceHelperText,
+  termsOfServiceHasError,
+  displayAgreeToTermsErrorMessage,
 };
