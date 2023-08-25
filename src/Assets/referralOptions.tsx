@@ -7,7 +7,6 @@ const referralOptions = {
   auroraCC: 'Aurora Community Connection',
   jeffcoPP: 'Jeffco Prosperity Partners',
   jeffcoHS: 'Jeffco Human Services',
-  jeffcoCYFAP: 'Jeffco CYFAP',
   projectWorthmore: 'Project Worthmore',
   bia: 'Benefits in Action',
   mcoa: 'MCOA at Anschutz',

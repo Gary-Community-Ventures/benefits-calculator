@@ -19,8 +19,9 @@ import EmailResults from '../../EmailResults/EmailResults';
 import './TwoOneOneHeader.css';
 
 const TwoOneOneHeader = ({ handleTextfieldChange }) => {
-  //this is so that when the users click on the cobranded logo, they're navigated back to step-0
+  //this is so that when the users click on the cobranded logo, they're navigated back to step-1
   const { formData, locale, selectLanguage } = useContext(Context);
+  const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
 
   //this is for the results icon to conditionally show up
   const location = useLocation();
@@ -159,7 +160,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
       <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#FFFFFF' }} square={true}>
         <AppBar position="sticky" id="nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
           <Box>
-            <a href={`/step-0?referrer=${formData.referrerCode}`}>
+            <a href={`/step-1${queryString}`}>
               <img src={twoOneOneMFBLogo} alt="211 and my friend ben logo" className="cobranded-logo" />
             </a>
           </Box>
@@ -167,7 +168,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
             <Stack direction="row" gap="1rem" alignItems="center" className="twoOneOne-desktop-links">
               {create211Links()}
             </Stack>
-            <Stack direction="row" sx={{ marginLeft: '3rem' }}>
+            <Stack direction="row" sx={{ marginLeft: '3rem' }} className="twoOneOne-remove-leftMargin">
               <Select
                 labelId="select-language-label"
                 id="twoOneOne-select-language"

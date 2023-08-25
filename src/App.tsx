@@ -5,7 +5,6 @@ import { LicenseInfo } from '@mui/x-license-pro';
 import { Context } from './Components/Wrapper/Wrapper';
 import ReactGA from 'react-ga4';
 import FetchScreen from './Components/FetchScreen/FetchScreen';
-import Disclaimer from './Components/Disclaimer/Disclaimer';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
@@ -16,11 +15,11 @@ import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlo
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import TwoOneOneFooter from './Components/TwoOneOneComponents/TwoOneOneFooter/TwoOneOneFooter';
 import referralOptions from './Assets/referralOptions';
+import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
 import { updateScreen, updateUser } from './Assets/updateScreen';
 import stepDirectory from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
-// @ts-ignore
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import './App.css';
 
@@ -40,16 +39,15 @@ const App = () => {
   const externalId = searchParams.get('externalid') ? Number(searchParams.get('externalid')) : undefined;
   const referrer = searchParams.get('referrer') !== null ? (searchParams.get('referrer') as string) : '';
   const referrerSource = referrer in referralOptions ? referrer : '';
-  const isBIAUser = referrer !== null && referrer.toLocaleLowerCase() === 'bia';
   const totalSteps = Object.keys(stepDirectory).length + 2;
   const [fetchedScreen, setFetchedScreen] = useState(false);
   const { locale, formData, setFormData, styleOverride, setTheme: changeTheme } = useContext(Context);
   const [theme, setTheme] = useState(createTheme(styleOverride));
 
   useEffect(() => {
-    const theme = formData.referrerCode === '211co' ? 'twoOneOne' : 'default';
+    const theme = formData.immutableReferrer === '211co' ? 'twoOneOne' : 'default';
     changeTheme(theme);
-  }, [formData.referrerCode]);
+  }, [formData.immutableReferrer]);
 
   useEffect(() => {
     setTheme(createTheme(styleOverride));
@@ -107,10 +105,9 @@ const App = () => {
       isTest: isTest,
       externalID: externalId,
       referralSource: isOtherSource && referrer ? 'other' : referrerSource,
-      referrerCode: referrer,
+      immutableReferrer: referrer,
       otherSource: isOtherSource ? referrer : '',
       urlSearchParams: urlSearchParams,
-      isBIAUser: isBIAUser,
     });
   }, []);
 
@@ -147,7 +144,7 @@ const App = () => {
     }
   };
 
-  const handleCheckboxChange = (event: Event) => {
+  const handleCheckboxChange = (event: React.FormEvent<HTMLInputElement>) => {
     //the value is the name of the formData property for everything except the commConsent
     const { value, name } = event.target as HTMLInputElement;
 
@@ -235,30 +232,38 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <CssBaseline />
-        {formData.referrerCode === '211co' ? (
+        {formData.immutableReferrer === '211co' ? (
           <TwoOneOneHeader handleTextfieldChange={handleTextfieldChange} />
         ) : (
           <Header handleTextfieldChange={handleTextfieldChange} />
         )}
         <Box className="main-max-width">
           <Routes>
-            <Route path="/step-0" element={<ProgressBar step={0} />} />
+            <Route path="/step-1" element={<ProgressBar step={1} />} />
             <Route path="/:uuid/step-:id" element={<ProgressBar />} />
             <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
             <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
             <Route path="*" element={<></>} />
           </Routes>
           <Routes>
-            <Route path="/" element={<Navigate to={`/step-0${urlSearchParams}`} replace />} />
-            <Route path="/step-0" element={<LandingPage setFetchedScreen={setFetchedScreen} />} />
+            <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
+            <Route path="/jeffcohs" element={<JeffcoLandingPage />} />
+            <Route
+              path="/step-1"
+              element={<LandingPage setFetchedScreen={setFetchedScreen} handleCheckboxChange={handleCheckboxChange} />}
+            />
             <Route path="results/:uuid" element={<Results />} />
             <Route path=":uuid">
               {!fetchedScreen && <Route path="*" element={<FetchScreen setFetchedScreen={setFetchedScreen} />} />}
               {fetchedScreen && (
                 <>
-                  <Route path="" element={<Navigate to="/step-0" replace />} />
-                  <Route path="step-0" element={<LandingPage setFetchedScreen={setFetchedScreen} />} />
-                  <Route path="step-1" element={<Disclaimer handleCheckboxChange={handleCheckboxChange} />} />
+                  <Route path="" element={<Navigate to="/step-1" replace />} />
+                  <Route
+                    path="step-1"
+                    element={
+                      <LandingPage setFetchedScreen={setFetchedScreen} handleCheckboxChange={handleCheckboxChange} />
+                    }
+                  />
                   <Route
                     path={`step-${stepDirectory.householdData}/:page`}
                     element={
@@ -285,14 +290,14 @@ const App = () => {
                   />
                   <Route path="confirm-information" element={<Confirmation />} />
                   <Route path="results" element={<Results />} />
-                  <Route path="*" element={<Navigate to="/step-0" replace />} />
+                  <Route path="*" element={<Navigate to="/step-1" replace />} />
                 </>
               )}
             </Route>
-            <Route path="*" element={<Navigate to="/step-0" replace />} />
+            <Route path="*" element={<Navigate to="/step-1" replace />} />
           </Routes>
         </Box>
-        {formData.referrerCode === '211co' && <TwoOneOneFooter />}
+        {formData.immutableReferrer === '211co' && <TwoOneOneFooter />}
       </div>
     </ThemeProvider>
   );

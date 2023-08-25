@@ -1,6 +1,6 @@
 import { Expense, FormData, HealthInsurance, SignUpInfo } from './FormData';
 
-export type VerifiableInput = string | number | Expense[] | SignUpInfo | HealthInsurance;
+export type VerifiableInput = Partial<string | number | boolean | null | Expense[] | SignUpInfo | HealthInsurance>;
 
 export type ValidationFunction<T> = (value: T, formData?: FormData) => boolean;
 

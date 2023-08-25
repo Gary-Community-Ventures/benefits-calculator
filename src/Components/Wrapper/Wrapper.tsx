@@ -56,7 +56,7 @@ const initialFormData: FormData = {
     none: false,
   },
   referralSource: undefined,
-  referrerCode: undefined,
+  immutableReferrer: undefined,
   otherSource: undefined,
   signUpInfo: {
     email: '',
@@ -69,7 +69,6 @@ const initialFormData: FormData = {
     commConsent: false,
   },
   urlSearchParams: '',
-  isBIAUser: false,
   acuteHHConditions: {
     food: false,
     babySupplies: false,

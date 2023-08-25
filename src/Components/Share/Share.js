@@ -41,7 +41,7 @@ const Share = forwardRef(function Share({ close }, ref) {
   };
 
   const twoOneOneShareUrl = 'https://screener.myfriendben.org?referrer=211co';
-  const shareUrl = formData.referrerCode === '211co' ? twoOneOneShareUrl : 'https://www.myfriendben.org/';
+  const shareUrl = formData.immutableReferrer === '211co' ? twoOneOneShareUrl : 'https://www.myfriendben.org/';
   const appId = '1268913277361574';
 
   const iconSize = { fontSize: '1.3rem' };

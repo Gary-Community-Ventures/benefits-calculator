@@ -1,10 +1,8 @@
 import { FormControl, Select, MenuItem, InputLabel, FormHelperText, SelectChangeEvent } from '@mui/material';
 import { useContext, useEffect } from 'react';
-// @ts-ignore
 import { Context } from '../Wrapper/Wrapper.tsx';
 import type { ErrorController, MessageFunction, ValidationFunction } from '../../Types/ErrorController.js';
 import type { FormData } from '../../Types/FormData.js';
-// @ts-ignore
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 
 interface ComponentProperties {

@@ -365,10 +365,10 @@ export interface Language extends Record<string, string> {
   'landingPage.step-header': string;
   'landingPage.body': string;
   'landingPage.firstBulletItem': string;
-  'landingPage.secondBulletItem': string;
   'landingPage.publicCharge': string;
   'landingPage.publicChargeLink': string;
-  'landingPage.thirdBulletItem': string;
+  'landingPage-policyText': string;
+  'landingPage-additionalTerms': string;
   'healthInsuranceOptions.employer': string;
   'healthInsuranceOptions.private': string;
   'healthInsuranceOptions.medicaid': string;
@@ -449,4 +449,6 @@ export interface Language extends Record<string, string> {
   'footer-terms-of-service-link': string;
   'footer-twoOneOne-privacy': string;
   'footer-twoOneOne-mfb': string;
+  'jeffcoLandingPage-text': string;
+  'jeffco-getStarted-button': string;
 }

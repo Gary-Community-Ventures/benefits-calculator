@@ -77,7 +77,7 @@ export const createDevFormData = (searchParams) => {
       none: true,
     },
     referralSource: 'gary',
-    referrerCode: '',
+    immutableReferrer: '',
     otherSource: '',
     signUpInfo: {
       email: 'testabc7874@gmail.com',
@@ -90,7 +90,6 @@ export const createDevFormData = (searchParams) => {
       commConsent: true,
     },
     urlSearchParams: null,
-    isBIAUser: false,
     acuteHHConditions: {
       food: true,
       babySupplies: true,
