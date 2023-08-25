@@ -91,15 +91,13 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
         />
         <Link href={getLinksForCheckbox().privacyPolicyLink} target="_blank" rel="noopener noreferrer">
-          <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy," />
+          <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
         </Link>
-        &nbsp;
+        <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />
         <Link href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" rel="noopener noreferrer">
-          <FormattedMessage
-            id="landingPage-additionalTerms"
-            defaultMessage="Additional Terms, and Consent to Contact"
-          />
+          <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
         </Link>
+        .
       </>
     );
   };
@@ -143,9 +141,10 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
                 >
                   <FormattedMessage
                     id="landingPage.publicChargeLink"
-                    defaultMessage="Colorado Department of Human Services Public Charge Rule."
+                    defaultMessage="Colorado Department of Human Services Public Charge Rule"
                   />
                 </a>
+                .
               </p>
             </li>
           </ul>

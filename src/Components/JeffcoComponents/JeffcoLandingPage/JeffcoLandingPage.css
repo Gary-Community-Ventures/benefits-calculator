@@ -1,14 +1,22 @@
 .jeffco-landing-pg-logo {
-  height: 40%;
-  width: 40%;
+  height: 30%;
+  width: 30%;
 }
 
 .jeffco-content-container {
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 }
 
 .MuiTypography-root.jeffco-text {
   text-align: center;
   font-weight: 401;
+}
+
+@media (max-width: 650px) {
+  .jeffco-landing-pg-logo {
+    height: 60%;
+    width: 60%;
+  }
 }
