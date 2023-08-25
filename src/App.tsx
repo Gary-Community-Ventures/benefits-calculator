@@ -254,7 +254,12 @@ const App = () => {
             />
             <Route path="results/:uuid" element={<Results />} />
             <Route path=":uuid">
-              {!fetchedScreen && <Route path="*" element={<FetchScreen setFetchedScreen={setFetchedScreen} />} />}
+              {!fetchedScreen && (
+                <>
+                  <Route path="" element={<FetchScreen setFetchedScreen={setFetchedScreen} />} />
+                  <Route path="*" element={<FetchScreen setFetchedScreen={setFetchedScreen} />} />
+                </>
+              )}
               {fetchedScreen && (
                 <>
                   <Route path="" element={<Navigate to="/step-1" replace />} />
@@ -294,7 +299,7 @@ const App = () => {
                 </>
               )}
             </Route>
-            <Route path="*" element={<Navigate to="/step-1" replace />} />
+            <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
           </Routes>
         </Box>
         {formData.immutableReferrer === '211co' && <TwoOneOneFooter />}
