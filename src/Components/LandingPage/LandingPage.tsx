@@ -93,12 +93,9 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
         <Link href={getLinksForCheckbox().privacyPolicyLink} target="_blank" rel="noopener noreferrer">
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
         </Link>
-        &nbsp;
+        <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />
         <Link href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" rel="noopener noreferrer">
-          <FormattedMessage
-            id="landingPage-additionalTerms"
-            defaultMessage="and Additional Terms & Consent to Contact"
-          />
+          <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
         </Link>
       </>
     );
