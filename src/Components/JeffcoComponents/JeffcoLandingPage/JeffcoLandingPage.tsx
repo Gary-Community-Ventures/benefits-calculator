@@ -13,12 +13,12 @@ const JeffcoLandingPage = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setFormData({ ...formData, immutableReferrer: 'jeffcohs' });
+      setFormData({ ...formData, immutableReferrer: 'jeffcoHS' });
     });
   }, []);
 
   const handleGetStarted = () => {
-    navigate('/step-1?referrer=jeffcohs');
+    navigate('/step-1?referrer=jeffcoHS');
   };
 
   return (

@@ -74,7 +74,7 @@ const Header = ({ handleTextfieldChange }) => {
     switch (refSource) {
       case 'bia':
         return BIAMFBLogo;
-      case 'jeffcohs':
+      case 'jeffcoHS':
         return JHSAMFBLogo;
       default:
         return MFBLogo;
@@ -85,7 +85,7 @@ const Header = ({ handleTextfieldChange }) => {
     switch (refSource) {
       case 'bia':
         return 'benefits in action and my friend ben home page button';
-      case 'jeffcohs':
+      case 'jeffcoHS':
         return 'jeffco human services and my friend ben home page button';
       default:
         return 'my friend ben home page button';
