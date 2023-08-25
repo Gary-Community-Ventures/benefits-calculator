@@ -97,6 +97,7 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
         <Link href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" rel="noopener noreferrer">
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
         </Link>
+        .
       </>
     );
   };
@@ -143,6 +144,7 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
                     defaultMessage="Colorado Department of Human Services Public Charge Rule"
                   />
                 </a>
+                .
               </p>
             </li>
           </ul>
