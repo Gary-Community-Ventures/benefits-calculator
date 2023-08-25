@@ -9,7 +9,7 @@ const NoResultsTable = () => {
   const { formData } = useContext(Context);
 
   let link: string;
-  if (formData.referrerCode === '211co') {
+  if (formData.immutableReferrer === '211co') {
     link =
       'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=whitelabel&utm_id=211mfb';
   } else {
