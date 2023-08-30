@@ -16,9 +16,9 @@ import LinkIcon from '@mui/icons-material/Link';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-import ReactGA from 'react-ga4';
 import './Share.css';
 import { Context } from '../Wrapper/Wrapper';
+import dataLayerPush from '../../Assets/analytics';
 
 const Share = forwardRef(function Share({ close }, ref) {
   const [copied, setCopied] = useState(false);
@@ -65,7 +65,7 @@ const Share = forwardRef(function Share({ close }, ref) {
 
   const trackOutboundLinks = (label) => {
     return () => {
-      ReactGA.event({
+      dataLayerPush({
         category: 'outbound link',
         action: 'share link click',
         label: label,
