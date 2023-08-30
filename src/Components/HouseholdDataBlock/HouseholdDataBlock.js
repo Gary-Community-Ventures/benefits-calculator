@@ -88,7 +88,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   useEffect(() => {
     const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
     if (isNaN(page) || page < 1 || page >= lastMemberPage) {
-      navigate(`/${uuid}/step-${step}/${lastMemberPage}`);
+      navigate(`/${uuid}/step-${step}/${lastMemberPage}`, { replace: true });
       return;
     }
   }, []);

@@ -3,7 +3,6 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
 import { Context } from './Components/Wrapper/Wrapper';
-import ReactGA from 'react-ga4';
 import FetchScreen from './Components/FetchScreen/FetchScreen';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
@@ -22,12 +21,8 @@ import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import './App.css';
+import dataLayerPush from './Assets/analytics.ts';
 
-const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
-if (TRACKING_ID === undefined) {
-  throw new Error('TRACKING_ID is not set');
-}
-ReactGA.initialize(TRACKING_ID);
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
 const App = () => {
@@ -55,8 +50,8 @@ const App = () => {
   }, [styleOverride]);
 
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, [location]);
+    dataLayerPush({ url: window.location.pathname + window.location.search });
+  }, [location.pathname]);
 
   useEffect(() => {
     const updatedFormData = { ...formData };

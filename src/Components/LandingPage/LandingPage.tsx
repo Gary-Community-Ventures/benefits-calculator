@@ -19,8 +19,8 @@ import {
   displayAgreeToTermsErrorMessage,
   termsOfServiceHasError,
 } from '../../Assets/validationFunctions.tsx';
-import ReactGA from 'react-ga4';
 import './LandingPage.css';
+import dataLayerPush from '../../Assets/analytics.ts';
 
 interface LandingPageProps {
   setFetchedScreen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -134,9 +134,7 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => {
-                    setTimeout(() => {
-                      ReactGA.event({ category: 'outbound link', action: 'share link click' });
-                    });
+                    dataLayerPush({ category: 'outbound link', action: 'share link click' });
                   }}
                 >
                   <FormattedMessage

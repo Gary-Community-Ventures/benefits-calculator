@@ -20,9 +20,9 @@ import {
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import ReactGA from 'react-ga4';
 import { getEligibility } from '../../apiCalls';
 import './Results.css';
+import dataLayerPush from '../../Assets/analytics.ts';
 
 export const isNavigationKey = (key) =>
   key === 'Home' || key === 'End' || key.indexOf('Arrow') === 0 || key.indexOf('Page') === 0 || key === ' ';
@@ -227,12 +227,10 @@ const Results = () => {
                         target="_blank"
                         rel="noreferrer"
                         onClick={() => {
-                          setTimeout(() => {
-                            ReactGA.event({
-                              category: 'outbound link',
-                              action: 'navigator link',
-                              label: `Apply With Assistance for ${navigator.name}`,
-                            });
+                          dataLayerPush({
+                            category: 'outbound link',
+                            action: 'navigator link',
+                            label: `Apply With Assistance for ${navigator.name}`,
                           });
                         }}
                       >
@@ -390,9 +388,7 @@ const Results = () => {
               target="_blank"
               rel="noreferrer"
               onClick={() => {
-                setTimeout(() => {
-                  ReactGA.event({ category: 'outbound link', action: 'program link', label: `Apply to ${row.name}` });
-                });
+                dataLayerPush({ category: 'outbound link', action: 'program link', label: `Apply to ${row.name}` });
               }}
             >
               <Button className="apply-button">
