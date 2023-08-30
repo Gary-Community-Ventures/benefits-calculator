@@ -59,6 +59,7 @@ const UrgentNeedsRow = ({ rowProps }) => {
                   rel="noreferrer"
                   onClick={() => {
                     dataLayerPush({
+                      event: 'Urgent Need Link',
                       category: 'outbound link',
                       action: 'urgent need link',
                       label: `Urgent Need Website for ${rowProps.name}`,

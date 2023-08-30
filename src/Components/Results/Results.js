@@ -228,6 +228,7 @@ const Results = () => {
                         rel="noreferrer"
                         onClick={() => {
                           dataLayerPush({
+                            event: 'Navigator Link',
                             category: 'outbound link',
                             action: 'navigator link',
                             label: `Apply With Assistance for ${navigator.name}`,
@@ -388,7 +389,12 @@ const Results = () => {
               target="_blank"
               rel="noreferrer"
               onClick={() => {
-                dataLayerPush({ category: 'outbound link', action: 'program link', label: `Apply to ${row.name}` });
+                dataLayerPush({
+                  event: 'Program Link',
+                  category: 'outbound link',
+                  action: 'program link',
+                  label: `Apply to ${row.name}`,
+                });
               }}
             >
               <Button className="apply-button">
