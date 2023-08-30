@@ -125,7 +125,6 @@ const FetchScreen = ({ setFetchedScreen }) => {
         pregnant: member.pregnant ?? false,
         blindOrVisuallyImpaired: member.visually_impaired ?? false,
         disabled: member.disabled ?? false,
-        veteran: member.veteran ?? false,
         hasIncome: member.has_income ?? false,
         incomeStreams: incomes,
       });

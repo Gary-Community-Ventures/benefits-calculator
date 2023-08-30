@@ -47,8 +47,6 @@ export interface Language extends Record<string, string> {
   'questions.blindOrVisuallyImpaired-ariaLabel': string;
   'questions.disabled': string;
   'questions.disabled-ariaLabel': string;
-  'questions.veteran': string;
-  'questions.veteran-ariaLabel': string;
   'questions.hasIncome': string;
   'questions.hasIncome-description': string;
   'questions.hasIncome-ariaLabel': string;
@@ -141,7 +139,6 @@ export interface Language extends Record<string, string> {
   'conditionOptions.blindOrVisuallyImpaired': string;
   'conditionOptions.disabled': string;
   'checkboxGroup.disabledLabel': string;
-  'conditionOptions.veteran': string;
   'conditionOptions.noneOfTheseApply': string;
   'householdDataBlock.createFTStudentRadioQuestion-ariaLabel': string;
   'householdDataBlock.createFTStudentRadioQuestion-youQLabel': string;
@@ -260,7 +257,6 @@ export interface Language extends Record<string, string> {
   'confirmation.headOfHouseholdDataBlock-pregnantText': string;
   'confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText': string;
   'confirmation.headOfHouseholdDataBlock-disabledText': string;
-  'confirmation.headOfHouseholdDataBlock-veteranText': string;
   'confirmation.headOfHouseholdDataBlock-medicaidText': string;
   'confirmation.headOfHouseholdDataBlock-disabilityRelatedMedicaidText': string;
   'confirmation.headOfHouseholdDataBlock-incomeLabel': string;

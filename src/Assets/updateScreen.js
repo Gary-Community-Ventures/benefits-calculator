@@ -82,7 +82,6 @@ const getHouseholdMemberBody = (householdMemberData) => {
     pregnant: householdMemberData.pregnant,
     visually_impaired: householdMemberData.blindOrVisuallyImpaired,
     disabled: householdMemberData.disabled,
-    veteran: householdMemberData.veteran,
     medicaid: householdMemberData.medicaid,
     disability_medicaid: householdMemberData.disabilityRelatedMedicaid,
     has_income: householdMemberData.hasIncome,

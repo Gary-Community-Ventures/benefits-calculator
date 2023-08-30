@@ -148,7 +148,6 @@ const Confirmation = () => {
       pregnant,
       blindOrVisuallyImpaired,
       disabled,
-      veteran,
     } = userData;
 
     const iterableConditions = [
@@ -157,7 +156,6 @@ const Confirmation = () => {
       pregnant,
       blindOrVisuallyImpaired,
       disabled,
-      veteran,
     ];
 
     const hasAnyConditions = iterableConditions.some((condition) => condition === true);
@@ -171,7 +169,6 @@ const Confirmation = () => {
         pregnant,
         blindOrVisuallyImpaired,
         disabled,
-        veteran,
       );
     }
   };
@@ -182,7 +179,6 @@ const Confirmation = () => {
     pregnant,
     blindOrVisuallyImpaired,
     disabled,
-    veteran,
   ) => {
     const conditions = [];
 
@@ -200,9 +196,6 @@ const Confirmation = () => {
     }
     if (disabled) {
       conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-disabledText'));
-    }
-    if (veteran) {
-      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-veteranText'));
     }
 
     return conditions.join(', ');

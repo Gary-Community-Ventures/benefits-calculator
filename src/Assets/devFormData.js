@@ -24,7 +24,6 @@ export const createDevFormData = (searchParams) => {
         pregnant: true,
         blindOrVisuallyImpaired: false,
         disabled: false,
-        veteran: false,
         hasIncome: true,
         incomeStreams: [
           {
@@ -42,7 +41,6 @@ export const createDevFormData = (searchParams) => {
         pregnant: false,
         blindOrVisuallyImpaired: false,
         disabled: false,
-        veteran: false,
         hasIncome: false,
         incomeStreams: [],
       },

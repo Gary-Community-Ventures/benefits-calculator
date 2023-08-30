@@ -17,12 +17,6 @@ const conditionOptions = {
       defaultMessage="Have any disabilities that make you unable to work now or in the future"
     />
   ),
-  veteran: (
-    <FormattedMessage
-      id="conditionOptions.veteran"
-      defaultMessage="Are serving or have served in the U.S. Armed Forces, National Guard or Reserves"
-    />
-  ),
 };
 
 export default conditionOptions;

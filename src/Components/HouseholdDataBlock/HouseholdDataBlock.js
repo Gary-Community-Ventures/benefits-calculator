@@ -46,7 +46,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     pregnant: false,
     blindOrVisuallyImpaired: false,
     disabled: false,
-    veteran: false,
     hasIncome: false,
     incomeStreams: [],
   };
