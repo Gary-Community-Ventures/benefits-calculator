@@ -42,7 +42,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     age: '',
     relationshipToHH: page === 1 ? 'headOfHousehold' : '',
     student: false,
-    studentFulltime: false,
     pregnant: false,
     blindOrVisuallyImpaired: false,
     disabled: false,
@@ -61,16 +60,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   useEffect(() => {
     const updatedHouseholdData = { ...householdData };
 
-    if (updatedHouseholdData.student === false) {
-      updatedHouseholdData.studentFulltime = false;
-    }
-
     if (updatedHouseholdData.hasIncome === false) {
       updatedHouseholdData.incomeStreams = [];
     }
 
     setHouseholdData(updatedHouseholdData);
-  }, [householdData.student, householdData.hasIncome]);
+  }, [householdData.hasIncome]);
 
   useEffect(() => {
     if (wasSubmitted) {
@@ -330,34 +325,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     );
   };
 
-  const createFTStudentRadioQuestion = (index) => {
-    const radiofieldProps = {
-      ariaLabel: 'householdDataBlock.createFTStudentRadioQuestion-ariaLabel',
-      inputName: 'studentFulltime',
-      value: householdData.studentFulltime,
-    };
-
-    const formattedMsgId =
-      index === 1
-        ? 'householdDataBlock.createFTStudentRadioQuestion-youQLabel'
-        : 'householdDataBlock.createFTStudentRadioQuestion-questionLabel';
-
-    const formattedMsgDefaultMsg = index === 1 ? 'Are you a full-time student' : 'Are they a full-time student?';
-
-    return (
-      <>
-        <h2 className="question-label radio-question">
-          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-        </h2>
-        <HHDataRadiofield
-          componentDetails={radiofieldProps}
-          setHouseholdData={setHouseholdData}
-          householdData={householdData}
-        />
-      </>
-    );
-  };
-
   const createIncomeRadioQuestion = (index) => {
     const radiofieldProps = {
       ariaLabel: 'householdDataBlock.createIncomeRadioQuestion-ariaLabel',
@@ -441,7 +408,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         {createAgeQuestion(page)}
         {page !== 1 && createHOfHRelationQuestion()}
         {createConditionsQuestion(page)}
-        {householdData.student && createFTStudentRadioQuestion(page)}
         <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}
         <p className="household-data-q-underline"></p>

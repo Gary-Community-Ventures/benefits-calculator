@@ -144,7 +144,6 @@ const Confirmation = () => {
   const displayConditions = (userData) => {
     const {
       student,
-      studentFulltime,
       pregnant,
       blindOrVisuallyImpaired,
       disabled,
@@ -152,7 +151,6 @@ const Confirmation = () => {
 
     const iterableConditions = [
       student,
-      studentFulltime,
       pregnant,
       blindOrVisuallyImpaired,
       disabled,
@@ -165,7 +163,6 @@ const Confirmation = () => {
     } else {
       return getConditionsStringWithCommas(
         student,
-        studentFulltime,
         pregnant,
         blindOrVisuallyImpaired,
         disabled,
@@ -175,17 +172,13 @@ const Confirmation = () => {
 
   const getConditionsStringWithCommas = (
     student,
-    studentFulltime,
     pregnant,
     blindOrVisuallyImpaired,
     disabled,
   ) => {
     const conditions = [];
 
-    if (studentFulltime) {
-      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-studentFulltimeText'));
-    }
-    if (student && studentFulltime === false) {
+    if (student) {
       conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-studentText'));
     }
     if (pregnant) {

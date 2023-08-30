@@ -14,7 +14,6 @@ export interface HouseholdData {
   age: string;
   relationshipToHH: string;
   student: boolean;
-  studentFulltime: boolean;
   pregnant: boolean;
   blindOrVisuallyImpaired: boolean;
   disabled: boolean;

@@ -121,7 +121,6 @@ const FetchScreen = ({ setFetchedScreen }) => {
         age: String(member.age) ?? '',
         relationshipToHH: member.relationship ? member.relationship : defaultRelationship,
         student: member.student ?? false,
-        studentFulltime: member.student_full_time ?? false,
         pregnant: member.pregnant ?? false,
         blindOrVisuallyImpaired: member.visually_impaired ?? false,
         disabled: member.disabled ?? false,

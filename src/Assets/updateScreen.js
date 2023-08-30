@@ -78,7 +78,6 @@ const getHouseholdMemberBody = (householdMemberData) => {
     relationship: householdMemberData.relationshipToHH,
     age: Number(householdMemberData.age),
     student: householdMemberData.student,
-    student_full_time: householdMemberData.studentFulltime,
     pregnant: householdMemberData.pregnant,
     visually_impaired: householdMemberData.blindOrVisuallyImpaired,
     disabled: householdMemberData.disabled,
