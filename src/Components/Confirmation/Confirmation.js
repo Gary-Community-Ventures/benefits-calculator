@@ -142,40 +142,20 @@ const Confirmation = () => {
   };
 
   const displayConditions = (userData) => {
-    const {
-      student,
-      pregnant,
-      blindOrVisuallyImpaired,
-      disabled,
-    } = userData;
+    const { student, pregnant, blindOrVisuallyImpaired, disabled } = userData;
 
-    const iterableConditions = [
-      student,
-      pregnant,
-      blindOrVisuallyImpaired,
-      disabled,
-    ];
+    const iterableConditions = [student, pregnant, blindOrVisuallyImpaired, disabled];
 
     const hasAnyConditions = iterableConditions.some((condition) => condition === true);
 
     if (hasAnyConditions === false) {
       return <FormattedMessage id="confirmation.none" defaultMessage=" None" />;
     } else {
-      return getConditionsStringWithCommas(
-        student,
-        pregnant,
-        blindOrVisuallyImpaired,
-        disabled,
-      );
+      return getConditionsStringWithCommas(student, pregnant, blindOrVisuallyImpaired, disabled);
     }
   };
 
-  const getConditionsStringWithCommas = (
-    student,
-    pregnant,
-    blindOrVisuallyImpaired,
-    disabled,
-  ) => {
+  const getConditionsStringWithCommas = (student, pregnant, blindOrVisuallyImpaired, disabled) => {
     const conditions = [];
 
     if (student) {
