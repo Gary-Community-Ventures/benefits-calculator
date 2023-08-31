@@ -48,8 +48,11 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
 
   useEffect(() => {
     privacyErrorController.updateError(formData.agreeToTermsOfService);
+  }, [formData.agreeToTermsOfService]);
+
+  useEffect(() => {
     ageErrorController.updateError(formData.is13OrOlder);
-  }, [formData.agreeToTermsOfService, formData.is13OrOlder]);
+  }, [formData.is13OrOlder]);
 
   const handleContinue = async () => {
     privacyErrorController.updateError(formData.agreeToTermsOfService);
@@ -106,10 +109,6 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
         .
       </>
     );
-  };
-
-  const createAgeCheckboxLabel = () => {
-    return <FormattedMessage id="disclaimer-label-age" defaultMessage="I confirm I am 13 years of age or older." />;
   };
 
   return (
@@ -182,7 +181,9 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
                 sx={ageErrorController.showError ? { color: '#c6252b' } : {}}
               />
             }
-            label={createAgeCheckboxLabel()}
+            label={
+              <FormattedMessage id="disclaimer-label-age" defaultMessage="I confirm I am 13 years of age or older." />
+            }
             value="is13OrOlder"
           />
         </Box>
