@@ -5,20 +5,29 @@ import Stack from '@mui/material/Stack';
 import { Typography, Button } from '@mui/material';
 import { useContext, useEffect } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
+import referralOptions from '../../../Assets/referralOptions';
 import './JeffcoLandingPage.css';
 
-const JeffcoLandingPage = () => {
+type Props = { referrer: string };
+const JeffcoLandingPage = ({ referrer }: Props) => {
   const navigate = useNavigate();
   const { formData, setFormData } = useContext(Context);
 
   useEffect(() => {
     setTimeout(() => {
-      setFormData({ ...formData, immutableReferrer: 'jeffcoHS' });
+      const referrerSource = referrer in referralOptions ? referrer : 'other';
+      const otherSource = referrerSource === 'other' ? referrer : '';
+      setFormData({
+        ...formData,
+        immutableReferrer: referrer,
+        referralSource: referrerSource,
+        otherSource: otherSource,
+      });
     });
-  }, []);
+  }, [referrer]);
 
   const handleGetStarted = () => {
-    navigate('/step-1?referrer=jeffcoHS');
+    navigate(`/step-1?referrer=${referrer}`);
   };
 
   return (

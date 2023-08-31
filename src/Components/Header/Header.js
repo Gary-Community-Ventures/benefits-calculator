@@ -77,6 +77,8 @@ const Header = ({ handleTextfieldChange }) => {
         return BIAMFBLogo;
       case 'jeffcoHS':
         return JHSAMFBLogo;
+      case 'jeffcoHSCM':
+        return JHSAMFBLogo;
       default:
         return MFBLogo;
     }
@@ -88,13 +90,15 @@ const Header = ({ handleTextfieldChange }) => {
         return 'benefits in action and my friend ben home page button';
       case 'jeffcoHS':
         return 'jeffco human services and my friend ben home page button';
+      case 'jeffcoHSCM':
+        return 'jeffco human services and my friend ben home page button';
       default:
         return 'my friend ben home page button';
     }
   };
 
   const getLogoClassName = (refSource) => {
-    if (refSource === 'jeffcoHS') {
+    if (refSource === 'jeffcoHS' || refSource === 'jeffcoHSCM') {
       return 'jeffcoLogo';
     } else {
       return 'logo';
