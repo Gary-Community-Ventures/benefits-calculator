@@ -50,7 +50,10 @@ const App = () => {
   }, [styleOverride]);
 
   useEffect(() => {
-    dataLayerPush({ url: window.location.pathname + window.location.search });
+    dataLayerPush({
+      event: 'Page Change',
+      url: window.location.pathname + window.location.search,
+    });
   }, [location.pathname]);
 
   useEffect(() => {
