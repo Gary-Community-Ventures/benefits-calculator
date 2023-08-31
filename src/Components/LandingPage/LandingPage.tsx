@@ -31,7 +31,8 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
   const { formData, locale } = useContext(Context);
   let { uuid } = useParams();
   const navigate = useNavigate();
-  const errorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
+  const privacyErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
+  const ageErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
 
   useEffect(() => {
     const continueOnEnter = (event: KeyboardEvent) => {
@@ -46,13 +47,18 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
   });
 
   useEffect(() => {
-    errorController.updateError(formData.agreeToTermsOfService);
-  }, [formData.agreeToTermsOfService]);
+    privacyErrorController.updateError(formData.agreeToTermsOfService);
+    ageErrorController.updateError(formData.is13OrOlder);
+  }, [formData.agreeToTermsOfService, formData.is13OrOlder]);
 
   const handleContinue = async () => {
-    errorController.updateError(formData.agreeToTermsOfService);
-    errorController.incrementSubmitted();
-    if (formData.agreeToTermsOfService) {
+    privacyErrorController.updateError(formData.agreeToTermsOfService);
+    ageErrorController.updateError(formData.is13OrOlder);
+
+    privacyErrorController.incrementSubmitted();
+    ageErrorController.incrementSubmitted();
+
+    if (formData.agreeToTermsOfService && formData.is13OrOlder) {
       if (uuid) {
         navigate(`/${uuid}/step-2`);
       } else {
@@ -158,27 +164,27 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
             <Checkbox
               checked={formData.agreeToTermsOfService}
               onChange={handleCheckboxChange}
-              sx={errorController.showError ? { color: '#c6252b' } : {}}
+              sx={privacyErrorController.showError ? { color: '#c6252b' } : {}}
             />
           }
           label={createCheckboxLabel()}
           value="agreeToTermsOfService"
         />
-        {errorController.showError && errorController.message(null)}
+        {privacyErrorController.showError && privacyErrorController.message(null)}
         <Box>
           <FormControlLabel
             control={
               <Checkbox
                 checked={formData.is13OrOlder}
                 onChange={handleCheckboxChange}
-                sx={errorController.showError ? { color: '#c6252b' } : {}}
+                sx={ageErrorController.showError ? { color: '#c6252b' } : {}}
               />
             }
             label={createAgeCheckboxLabel()}
             value="is13OrOlder"
           />
-          {/* {errorController.showError && errorController.message(null)} */}
         </Box>
+        {ageErrorController.showError && ageErrorController.message(null)}
       </Box>
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <Box>
