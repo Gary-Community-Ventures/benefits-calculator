@@ -158,20 +158,22 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
           </ul>
         </CardContent>
       </Card>
-      <Box>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={formData.agreeToTermsOfService}
-              onChange={handleCheckboxChange}
-              sx={privacyErrorController.showError ? { color: '#c6252b' } : {}}
-            />
-          }
-          label={createCheckboxLabel()}
-          value="agreeToTermsOfService"
-        />
-        {privacyErrorController.showError && privacyErrorController.message(null)}
+      <Box sx={{ mt: '.5rem' }}>
         <Box>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={formData.agreeToTermsOfService}
+                onChange={handleCheckboxChange}
+                sx={privacyErrorController.showError ? { color: '#c6252b' } : {}}
+              />
+            }
+            label={createCheckboxLabel()}
+            value="agreeToTermsOfService"
+          />
+          {privacyErrorController.showError && privacyErrorController.message(null)}
+        </Box>
+        <Box sx={{ mt: '.5rem' }}>
           <FormControlLabel
             control={
               <Checkbox
