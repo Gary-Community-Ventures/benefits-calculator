@@ -51,6 +51,7 @@ const SubmitScreen = () => {
       is_test: isTest,
       external_id: externalID,
       agree_to_tos: agreeToTermsOfService,
+      is_13_or_older: formData.is13OrOlder,
       zipcode: zipcode,
       county: county,
       start_date: startTime,

@@ -9,6 +9,7 @@ const getScreensBody = (formData, languageCode) => {
     is_test: formData.isTest,
     external_id: formData.externalID,
     agree_to_tos: formData.agreeToTermsOfService,
+    is_13_or_older: formData.is13OrOlder,
     zipcode: formData.zipcode,
     county: formData.county,
     start_date: formData.startTime,
