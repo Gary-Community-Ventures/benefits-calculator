@@ -102,6 +102,10 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
     );
   };
 
+  const createAgeCheckboxLabel = () => {
+    return <FormattedMessage id="disclaimer-label-age" defaultMessage="I confirm I am 13 years of age or older." />;
+  };
+
   return (
     <main className="benefits-form">
       <h1 className="sub-header">
@@ -161,6 +165,20 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
           value="agreeToTermsOfService"
         />
         {errorController.showError && errorController.message(null)}
+        <Box>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={formData.is13OrOlder}
+                onChange={handleCheckboxChange}
+                sx={errorController.showError ? { color: '#c6252b' } : {}}
+              />
+            }
+            label={createAgeCheckboxLabel()}
+            value="is13OrOlder"
+          />
+          {/* {errorController.showError && errorController.message(null)} */}
+        </Box>
       </Box>
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <Box>
