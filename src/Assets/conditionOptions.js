@@ -8,7 +8,6 @@ const conditionOptions = {
     />
   ),
   pregnant: <FormattedMessage id="conditionOptions.pregnant" defaultMessage="Pregnant" />,
-  unemployed: <FormattedMessage id="conditionOptions.unemployed" defaultMessage="Unemployed" />,
   blindOrVisuallyImpaired: (
     <FormattedMessage id="conditionOptions.blindOrVisuallyImpaired" defaultMessage="Blind or visually impaired" />
   ),
@@ -16,12 +15,6 @@ const conditionOptions = {
     <FormattedMessage
       id="conditionOptions.disabled"
       defaultMessage="Have any disabilities that make you unable to work now or in the future"
-    />
-  ),
-  veteran: (
-    <FormattedMessage
-      id="conditionOptions.veteran"
-      defaultMessage="Are serving or have served in the U.S. Armed Forces, National Guard or Reserves"
     />
   ),
 };

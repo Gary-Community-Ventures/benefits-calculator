@@ -50,7 +50,10 @@ const App = () => {
   }, [styleOverride]);
 
   useEffect(() => {
-    dataLayerPush({ url: window.location.pathname + window.location.search });
+    dataLayerPush({
+      event: 'Page Change',
+      url: window.location.pathname + window.location.search,
+    });
   }, [location.pathname]);
 
   useEffect(() => {
@@ -243,7 +246,8 @@ const App = () => {
           </Routes>
           <Routes>
             <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
-            <Route path="/jeffcohs" element={<JeffcoLandingPage />} />
+            <Route path="/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
+            <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
             <Route
               path="/step-1"
               element={<LandingPage setFetchedScreen={setFetchedScreen} handleCheckboxChange={handleCheckboxChange} />}

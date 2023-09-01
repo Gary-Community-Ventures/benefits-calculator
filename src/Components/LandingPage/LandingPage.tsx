@@ -143,7 +143,11 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => {
-                    dataLayerPush({ category: 'outbound link', action: 'share link click' });
+                    dataLayerPush({
+                      event: 'Public Charge Link',
+                      category: 'outbound link',
+                      action: 'public charge link click',
+                    });
                   }}
                 >
                   <FormattedMessage

@@ -14,13 +14,9 @@ export interface HouseholdData {
   age: string;
   relationshipToHH: string;
   student: boolean;
-  studentFulltime: boolean;
   pregnant: boolean;
-  unemployed: boolean;
-  unemployedWorkedInLast18Mos: boolean;
   blindOrVisuallyImpaired: boolean;
   disabled: boolean;
-  veteran: boolean;
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
 }
