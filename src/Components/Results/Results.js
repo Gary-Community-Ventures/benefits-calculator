@@ -228,10 +228,10 @@ const Results = () => {
                         rel="noreferrer"
                         onClick={() => {
                           dataLayerPush({
-                            event: 'Navigator Link',
-                            category: 'outbound link',
+                            event: 'navigator',
                             action: 'navigator link',
-                            label: `Apply With Assistance for ${navigator.name}`,
+                            resource: `Apply With Assistance for ${navigator.name}`,
+                            resource_name: navigator.name,
                           });
                         }}
                       >
@@ -390,10 +390,10 @@ const Results = () => {
               rel="noreferrer"
               onClick={() => {
                 dataLayerPush({
-                  event: 'Program Link',
-                  category: 'outbound link',
+                  event: 'program',
                   action: 'program link',
-                  label: `Apply to ${row.name}`,
+                  resource: `Apply to ${row.name}`,
+                  resource_name: row.name,
                 });
               }}
             >
