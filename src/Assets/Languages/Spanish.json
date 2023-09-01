@@ -289,7 +289,7 @@
   "results-error.message": "Lo lamentamos. Estamos teniendo algunos problemas para completar su solicitud. Asegúrese de haber completado todas las preguntas en la pantalla y vuelva a intentarlo. Si aún no puede cargar los resultados de sus beneficios, comuníquese con myfriendben@garycommuity.org",
   "results-error.button": "Volver a la calculadora",
   "results.return-screenerIdLabel": "ID de cuestionario: ",
-  "results.return-programsUpToLabel": " programas, hasta ",
+  "results.return-programsUpToLabel": " programas con un valor estimado de ",
   "results.return-perYearOrLabel": " por año o ",
   "results.return-perMonthLabel": " por mes en efectivo o gastos reducidos para que usted considere",
   "results.share": "Compartir",
