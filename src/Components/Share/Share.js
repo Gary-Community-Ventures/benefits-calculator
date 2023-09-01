@@ -66,8 +66,7 @@ const Share = forwardRef(function Share({ close }, ref) {
   const trackOutboundLinks = (label) => {
     return () => {
       dataLayerPush({
-        event: 'Share Link',
-        category: 'outbound link',
+        event: 'media_share',
         action: 'share link click',
         label: label,
       });

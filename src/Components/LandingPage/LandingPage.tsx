@@ -135,8 +135,7 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
                   rel="noreferrer"
                   onClick={() => {
                     dataLayerPush({
-                      event: 'Public Charge Link',
-                      category: 'outbound link',
+                      event: 'public_charge',
                       action: 'public charge link click',
                     });
                   }}
