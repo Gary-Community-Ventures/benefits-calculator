@@ -12,6 +12,7 @@ const initialFormData: FormData = {
   isTest: undefined,
   externalID: undefined,
   agreeToTermsOfService: false,
+  is13OrOlder: false,
   zipcode: '',
   county: '',
   startTime: new Date().toJSON(),

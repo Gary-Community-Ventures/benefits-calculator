@@ -8,6 +8,7 @@ export interface Language extends Record<string, string> {
   'disclaimer.helper-text': string;
   'disclaimer.error': string;
   'disclaimer-label': string;
+  'disclaimer-label-age': string;
   'landingPage-and-text': string;
   'startOver-button': string;
   'continue-button': string;

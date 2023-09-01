@@ -37,6 +37,7 @@ const FetchScreen = ({ setFetchedScreen }) => {
       isTest: response.is_test ?? false,
       externalID: response.external_id,
       agreeToTermsOfService: response.agree_to_tos ?? false,
+      is13OrOlder: response.is_13_or_older ?? false,
       zipcode: response.zipcode ?? '',
       county: response.county ?? '',
       startTime: response.start_date ?? formData.startTime,

@@ -83,6 +83,7 @@ export interface FormData {
   isTest?: boolean;
   externalID?: string;
   agreeToTermsOfService: boolean;
+  is13OrOlder: boolean;
   zipcode: string;
   county: string;
   startTime: string;
