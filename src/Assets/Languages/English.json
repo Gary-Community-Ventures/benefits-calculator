@@ -270,7 +270,7 @@
   "results-error.message": "We're sorry. We are having some trouble completing your request. Please make sure you have completed all of the questions on the screen and try again. If you are still unable to load your benefits results, please contact myfriendben@garycommunity.org.",
   "results-error.button": "Back to Screener",
   "results.return-screenerIdLabel": "Screener ID: ",
-  "results.return-programsUpToLabel": " programs, up to ",
+  "results.return-programsUpToLabel": " programs with an estimated value of ",
   "results.return-perYearOrLabel": " per year or ",
   "results.return-perMonthLabel": " per month in cash or reduced expenses for you to consider",
   "results.share": "Share",

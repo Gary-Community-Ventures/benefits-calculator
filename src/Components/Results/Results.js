@@ -275,8 +275,11 @@ const Results = () => {
         <Grid xs={12} item>
           <h1 className="bottom-border program-value-header">
             {totalEligiblePrograms(results.programs)}
-            <FormattedMessage id="results.return-programsUpToLabel" defaultMessage=" programs, up to " />$
-            {totalDollarAmount(results.programs).toLocaleString()}
+            <FormattedMessage
+              id="results.return-programsUpToLabel"
+              defaultMessage=" programs with an estimated value of "
+            />
+            ${totalDollarAmount(results.programs).toLocaleString()}
             <FormattedMessage id="results.return-perYearOrLabel" defaultMessage=" per year or " />$
             {Math.round(totalDollarAmount(results.programs) / 12).toLocaleString()}
             <FormattedMessage
