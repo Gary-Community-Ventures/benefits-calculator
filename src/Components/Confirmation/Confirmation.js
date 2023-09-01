@@ -142,81 +142,33 @@ const Confirmation = () => {
   };
 
   const displayConditions = (userData) => {
-    const {
-      student,
-      studentFulltime,
-      pregnant,
-      unemployed,
-      unemployedWorkedInLast18Mos,
-      blindOrVisuallyImpaired,
-      disabled,
-      veteran,
-    } = userData;
+    const { student, pregnant, blindOrVisuallyImpaired, disabled } = userData;
 
-    const iterableConditions = [
-      student,
-      studentFulltime,
-      pregnant,
-      unemployed,
-      unemployedWorkedInLast18Mos,
-      blindOrVisuallyImpaired,
-      disabled,
-      veteran,
-    ];
+    const iterableConditions = [student, pregnant, blindOrVisuallyImpaired, disabled];
 
     const hasAnyConditions = iterableConditions.some((condition) => condition === true);
 
     if (hasAnyConditions === false) {
       return <FormattedMessage id="confirmation.none" defaultMessage=" None" />;
     } else {
-      return getConditionsStringWithCommas(
-        student,
-        studentFulltime,
-        pregnant,
-        unemployed,
-        unemployedWorkedInLast18Mos,
-        blindOrVisuallyImpaired,
-        disabled,
-        veteran,
-      );
+      return getConditionsStringWithCommas(student, pregnant, blindOrVisuallyImpaired, disabled);
     }
   };
 
-  const getConditionsStringWithCommas = (
-    student,
-    studentFulltime,
-    pregnant,
-    unemployed,
-    unemployedWorkedInLast18Mos,
-    blindOrVisuallyImpaired,
-    disabled,
-    veteran,
-  ) => {
+  const getConditionsStringWithCommas = (student, pregnant, blindOrVisuallyImpaired, disabled) => {
     const conditions = [];
 
-    if (studentFulltime) {
-      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-studentFulltimeText'));
-    }
-    if (student && studentFulltime === false) {
+    if (student) {
       conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-studentText'));
     }
     if (pregnant) {
       conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-pregnantText'));
-    }
-    if (unemployedWorkedInLast18Mos) {
-      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-unemployed18MosText'));
-    }
-    if (unemployed && unemployedWorkedInLast18Mos === false) {
-      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-unemployedText'));
     }
     if (blindOrVisuallyImpaired) {
       conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText'));
     }
     if (disabled) {
       conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-disabledText'));
-    }
-    if (veteran) {
-      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-veteranText'));
     }
 
     return conditions.join(', ');
