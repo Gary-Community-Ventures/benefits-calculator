@@ -31,6 +31,7 @@ const OptionCardGroup = ({ stateVariable, options, errorController }) => {
     const optionCards = Object.keys(options).map((optionKey, index) => {
       const translatedAriaLabel = intl.formatMessage({
         id: options[optionKey].formattedMessage.props.id,
+        defaultMessage: options[optionKey].formattedMessage.props.defaultMessage,
       });
       return (
         <CardActionArea

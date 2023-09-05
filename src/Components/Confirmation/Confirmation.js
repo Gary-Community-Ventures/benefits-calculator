@@ -137,10 +137,6 @@ const Confirmation = () => {
     );
   };
 
-  const getFormattedMessageString = (id) => {
-    return intl.formatMessage({ id: id });
-  };
-
   const displayConditions = (userData) => {
     const { student, pregnant, blindOrVisuallyImpaired, disabled } = userData;
 
@@ -159,16 +155,19 @@ const Confirmation = () => {
     const conditions = [];
 
     if (student) {
-      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-studentText'));
+      conditions.push({ id: 'confirmation.headOfHouseholdDataBlock-studentText', defaultMessage: 'Student' });
     }
     if (pregnant) {
-      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-pregnantText'));
+      conditions.push({ id: 'confirmation.headOfHouseholdDataBlock-pregnantText', defaultMessage: 'Pregnant' });
     }
     if (blindOrVisuallyImpaired) {
-      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText'));
+      conditions.push({
+        id: 'confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText',
+        defaultMessage: 'Blind or visually impaired',
+      });
     }
     if (disabled) {
-      conditions.push(getFormattedMessageString('confirmation.headOfHouseholdDataBlock-disabledText'));
+      conditions.push({ id: 'confirmation.headOfHouseholdDataBlock-disabledText', defaultMessage: 'Disabled' });
     }
 
     return conditions.join(', ');
@@ -448,7 +447,7 @@ const Confirmation = () => {
 
   const displayAnnualIncome = (incomeStream) => {
     const { incomeAmount, incomeFrequency, hoursPerWeek } = incomeStream;
-    const translatedAnnualText = intl.formatMessage({ id: 'displayAnnualIncome.annual' });
+    const translatedAnnualText = intl.formatMessage({ id: 'displayAnnualIncome.annual', defaultMessage: ' annually' });
     let num = 0;
 
     switch (incomeFrequency) {
@@ -477,6 +476,7 @@ const Confirmation = () => {
       const hoursPerWeek = incomeStream.hoursPerWeek;
       const translatedHrsPerWkText = intl.formatMessage({
         id: 'listAllIncomeStreams.hoursPerWeek',
+        defaultMessage: ' hours/week ',
       });
       const annualAmount = displayAnnualIncome(incomeStream);
 

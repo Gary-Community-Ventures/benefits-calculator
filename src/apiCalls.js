@@ -1,6 +1,7 @@
 const apiKey = 'Token ' + process.env.REACT_APP_API_KEY;
 const domain = process.env.REACT_APP_DOMAIN_URL;
 
+const translationsEndpoint = `${domain}/translations/`;
 const screensEndpoint = `${domain}/api/screens/`;
 const userEndpoint = `${domain}/api/users/`;
 const messageEndpoint = `${domain}/api/messages/`;
@@ -10,6 +11,18 @@ const header = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
   Authorization: apiKey,
+};
+
+const getTranslations = () => {
+  return fetch(translationsEndpoint, {
+    method: 'GET',
+    headers: header,
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(`${response.status} ${response.statusText}`);
+    }
+    return response.json();
+  });
 };
 
 const postUser = (userData) => {
@@ -105,4 +118,4 @@ const getEligibility = (screenerId, locale) => {
   });
 };
 
-export { postScreen, getScreen, putScreen, postUser, putUser, postMessage, getEligibility };
+export { getTranslations, postScreen, getScreen, putScreen, postUser, putUser, postMessage, getEligibility };
