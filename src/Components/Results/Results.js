@@ -339,27 +339,12 @@ const Results = () => {
   };
 
   const CustomGridTreeDataGroupingCell = (props) => {
-    const { id, field, rowNode } = props;
+    const { id, rowNode } = props;
     const apiRef = useGridApiContext();
     const filteredDescendantCountLookup = useGridSelector(apiRef, gridFilteredDescendantCountLookupSelector);
     const [navListOpen, setNavListOpen] = useState(false);
     const openNavList = () => {
       setNavListOpen(!navListOpen);
-    };
-
-    const handleKeyDown = (event) => {
-      if (event.key === ' ') {
-        event.stopPropagation();
-      }
-      if (isNavigationKey(event.key) && !event.shiftKey) {
-        apiRef.current.publishEvent('cellNavigationKeyDown', props, event);
-      }
-    };
-
-    const handleClick = (event) => {
-      apiRef.current.setRowChildrenExpansion(id, !rowNode.childrenExpanded);
-      apiRef.current.setCellFocus(id, field);
-      event.stopPropagation();
     };
 
     let row = apiRef.current.getRow(id);
@@ -368,9 +353,7 @@ const Results = () => {
     return (
       <div>
         {filteredDescendantCount > 0 ? (
-          <Link onClick={handleClick} onKeyDown={handleKeyDown} tabIndex={-1}>
-            {row.name}
-          </Link>
+          row.name
         ) : (
           <Box sx={{ padding: 1 }}>
             <Typography variant="body1" gutterBottom>
