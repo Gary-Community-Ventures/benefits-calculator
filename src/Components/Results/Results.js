@@ -490,7 +490,7 @@ const Results = () => {
       return acc;
     }, []);
 
-    const CustomDetailPanelToggle = (props: Pick<GridRenderCellParams, 'id' | 'value'>) => {
+    const CustomDetailPanelToggle = (props: Pick<GridRenderCellParams, 'id' | 'value'| 'field' | 'rowNode'>) => {
       const { id, value: isExpanded, field, rowNode } = props;
       const apiRef = useGridApiContext();
 
@@ -508,6 +508,7 @@ const Results = () => {
         apiRef.current.setCellFocus(id, field);
         event.stopPropagation();
       };
+      console.log(isExpanded)
 
       return (
         <IconButton
