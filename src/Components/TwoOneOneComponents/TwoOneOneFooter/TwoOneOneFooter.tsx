@@ -12,7 +12,7 @@ const TwoOneOneFooter = () => {
       <Stack direction="row" gap="1rem">
         <img src={chatIcon} className="twoOneOne-footer-icon" alt="chat with a 2-1-1 navigator" />
         <Box>
-          <Typography variant="h6" className="icon-header">
+          <Typography variant="h2" className="icon-header">
             <FormattedMessage id="footer-chat-text" defaultMessage="Chat" />
           </Typography>
           <Link
@@ -35,7 +35,7 @@ const TwoOneOneFooter = () => {
       <Stack direction="row" gap="1rem">
         <img src={dialIcon} className="twoOneOne-footer-icon" alt="talk to a 2-1-1 navigator via phone" />
         <Box>
-          <Typography variant="h6" className="icon-header">
+          <Typography variant="h2" className="icon-header">
             <FormattedMessage id="footer-dial-text" defaultMessage="Dial" />
           </Typography>
           <Link
@@ -79,7 +79,7 @@ const TwoOneOneFooter = () => {
       <Stack direction="row" gap="1rem">
         <img src={textIcon} className="twoOneOne-footer-icon" alt="text with a 2-1-1 navigator" />
         <Box>
-          <Typography variant="h6" className="icon-header">
+          <Typography variant="h2" className="icon-header">
             <FormattedMessage id="footer-text-text" defaultMessage="Text " />
           </Typography>
           <Typography className="font-color displayInline">
