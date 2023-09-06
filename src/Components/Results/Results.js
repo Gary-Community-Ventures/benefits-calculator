@@ -492,7 +492,7 @@ const Results = () => {
       return acc;
     }, []);
 
-    const CustomDetailPanelToggle = (props: Pick<GridRenderCellParams, 'id' | 'field' | 'rowNode'>) => {
+    const CustomDetailPanelToggle = (props) => {
       const { id, field, rowNode } = props;
       const apiRef = useGridApiContext();
 
