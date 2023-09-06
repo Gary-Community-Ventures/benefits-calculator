@@ -508,19 +508,18 @@ const Results = () => {
         apiRef.current.setCellFocus(id, field);
         event.stopPropagation();
       };
-      console.log(isExpanded)
 
       return (
         <IconButton
-          size="small"
+          color="primary"
           tabIndex={-1}
-          aria-label={isExpanded ? 'Close' : 'Open'}
+          aria-label={rowNode.childrenExpanded ? 'Close' : 'Open'}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
         >
           <ExpandMoreIcon
             sx={{
-              transform: `rotateZ(${isExpanded ? 180 : 0}deg)`,
+              transform: `rotateZ(${rowNode.childrenExpanded ? 180 : 0}deg)`,
               transition: (theme) =>
                 theme.transitions.create('transform', {
                   duration: theme.transitions.duration.shortest,
