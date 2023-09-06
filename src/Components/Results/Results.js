@@ -477,7 +477,7 @@ const Results = () => {
       { field: 'category', headerName: 'Category', flex: 1 },
       {
         field: 'toggle',
-        headerName: 'Toggle',
+        headerName: '',
         flex: 1,
         renderCell: (params) => (
           <CustomDetailPanelToggle id={params.id} field={params.field} rowNode={params.rowNode} />
@@ -492,7 +492,7 @@ const Results = () => {
       return acc;
     }, []);
 
-    const CustomDetailPanelToggle = (props: Pick<GridRenderCellParams, 'id'| 'field' | 'rowNode'>) => {
+    const CustomDetailPanelToggle = (props: Pick<GridRenderCellParams, 'id' | 'field' | 'rowNode'>) => {
       const { id, field, rowNode } = props;
       const apiRef = useGridApiContext();
 
@@ -523,7 +523,7 @@ const Results = () => {
           {rowNode.childrenExpanded ? <RemoveIcon /> : <AddIcon />}
         </IconButton>
       );
-    }
+    };
 
     return (
       <>
@@ -533,7 +533,7 @@ const Results = () => {
               updateFilter={updateFilter}
               categories={categories}
               citizenToggleState={citizenToggleState}
-            categoryState={categoryState}
+              categoryState={categoryState}
               eligibilityState={eligibilityState}
               alreadyHasToggleState={alreadyHasToggleState}
             />
