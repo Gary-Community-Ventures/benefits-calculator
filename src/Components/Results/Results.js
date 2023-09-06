@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails, IconButton } from '@mui/material';
 import FilterSection from '../FilterSection/FilterSection';
 import ResultsError from '../ResultsError/ResultsError';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
@@ -490,6 +490,14 @@ const Results = () => {
       { field: 'eligible', headerName: 'Eligible', flex: 1, type: 'boolean' },
       { field: 'has_benefit', headerName: 'Has Benefit', flex: 1, type: 'boolean' },
       { field: 'category', headerName: 'Category', flex: 1 },
+      {
+        field: 'toggle',
+        headerName: 'Toggle',
+        flex: 1,
+        renderCell: (params) => (
+          <CustomDetailPanelToggle id={params.id} value={params.value} field={params.field} rowNode={params.rowNode} />
+        ),
+      },
     ];
 
     const categories = results.reduce((acc, benefit) => {
