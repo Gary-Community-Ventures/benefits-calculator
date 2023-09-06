@@ -499,6 +499,47 @@ const Results = () => {
       return acc;
     }, []);
 
+    const CustomDetailPanelToggle = (props: Pick<GridRenderCellParams, 'id' | 'value'>) => {
+      const { id, value: isExpanded, field, rowNode } = props;
+      const apiRef = useGridApiContext();
+
+      const handleKeyDown = (event) => {
+        if (event.key === ' ') {
+          event.stopPropagation();
+        }
+        if (isNavigationKey(event.key) && !event.shiftKey) {
+          apiRef.current.publishEvent('cellNavigationKeyDown', props, event);
+        }
+      };
+
+      const handleClick = (event) => {
+        apiRef.current.setRowChildrenExpansion(id, !rowNode.childrenExpanded);
+        apiRef.current.setCellFocus(id, field);
+        event.stopPropagation();
+      };
+
+      return (
+        <IconButton
+          size="small"
+          tabIndex={-1}
+          aria-label={isExpanded ? 'Close' : 'Open'}
+          onClick={handleClick}
+          onKeyDown={handleKeyDown}
+        >
+          <ExpandMoreIcon
+            sx={{
+              transform: `rotateZ(${isExpanded ? 180 : 0}deg)`,
+              transition: (theme) =>
+                theme.transitions.create('transform', {
+                  duration: theme.transitions.duration.shortest,
+                }),
+            }}
+            fontSize="inherit"
+          />
+        </IconButton>
+      );
+    }
+
     return (
       <>
         <div className="filters-container">
