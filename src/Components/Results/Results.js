@@ -516,10 +516,11 @@ const Results = () => {
       return (
         <IconButton
           color="primary"
-          tabIndex={-1}
+          tabIndex={0}
           aria-label={rowNode.childrenExpanded ? 'Close' : 'Open'}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
+          variant="contained"
         >
           {rowNode.childrenExpanded ? <RemoveIcon /> : <AddIcon />}
         </IconButton>
@@ -534,7 +535,7 @@ const Results = () => {
               updateFilter={updateFilter}
               categories={categories}
               citizenToggleState={citizenToggleState}
-              categoryState={categoryState}
+            categoryState={categoryState}
               eligibilityState={eligibilityState}
               alreadyHasToggleState={alreadyHasToggleState}
             />
