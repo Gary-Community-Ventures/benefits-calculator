@@ -186,7 +186,7 @@ const TwoOneOneFooter = () => {
   };
 
   return (
-    <>
+    <footer>
       <Paper
         elevation={0}
         sx={{ width: '100%', backgroundColor: '#efefef', marginTop: '7rem' }}
@@ -210,7 +210,7 @@ const TwoOneOneFooter = () => {
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef', padding: '1rem 1rem' }} square={true}>
         {displayCopyrightPolicySection()}
       </Paper>
-    </>
+    </footer>
   );
 };
 
