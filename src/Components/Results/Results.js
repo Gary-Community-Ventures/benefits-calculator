@@ -497,12 +497,10 @@ const Results = () => {
       const apiRef = useGridApiContext();
 
       const handleKeyDown = (event) => {
-        console.log('in here')
         if (event.key === ' ') {
           event.stopPropagation();
         }
         if (isNavigationKey(event.key) && !event.shiftKey) {
-          console.log('in here');
           apiRef.current.publishEvent('cellNavigationKeyDown', props, event);
         }
       };
