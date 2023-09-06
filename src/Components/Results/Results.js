@@ -518,7 +518,6 @@ const Results = () => {
           aria-label={rowNode.childrenExpanded ? 'Close' : 'Open'}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
-          variant="contained"
         >
           {rowNode.childrenExpanded ? <RemoveIcon /> : <AddIcon />}
         </IconButton>
