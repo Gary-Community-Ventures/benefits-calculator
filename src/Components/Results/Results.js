@@ -10,6 +10,8 @@ import Loading from '../Loading/Loading';
 import NoResultsTable from '../NoResultsTable/NoResultsTable';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import Grid from '@mui/material/Grid';
 import {
   DataGridPro,
@@ -517,16 +519,7 @@ const Results = () => {
           onClick={handleClick}
           onKeyDown={handleKeyDown}
         >
-          <ExpandMoreIcon
-            sx={{
-              transform: `rotateZ(${rowNode.childrenExpanded ? 180 : 0}deg)`,
-              transition: (theme) =>
-                theme.transitions.create('transform', {
-                  duration: theme.transitions.duration.shortest,
-                }),
-            }}
-            fontSize="inherit"
-          />
+          {rowNode.childrenExpanded ? <RemoveIcon /> : <AddIcon />}
         </IconButton>
       );
     }
