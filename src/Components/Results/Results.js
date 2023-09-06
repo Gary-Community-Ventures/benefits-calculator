@@ -480,7 +480,7 @@ const Results = () => {
         headerName: 'Toggle',
         flex: 1,
         renderCell: (params) => (
-          <CustomDetailPanelToggle id={params.id} value={params.value} field={params.field} rowNode={params.rowNode} />
+          <CustomDetailPanelToggle id={params.id} field={params.field} rowNode={params.rowNode} />
         ),
       },
     ];
@@ -492,15 +492,17 @@ const Results = () => {
       return acc;
     }, []);
 
-    const CustomDetailPanelToggle = (props: Pick<GridRenderCellParams, 'id' | 'value'| 'field' | 'rowNode'>) => {
-      const { id, value: isExpanded, field, rowNode } = props;
+    const CustomDetailPanelToggle = (props: Pick<GridRenderCellParams, 'id'| 'field' | 'rowNode'>) => {
+      const { id, field, rowNode } = props;
       const apiRef = useGridApiContext();
 
       const handleKeyDown = (event) => {
+        console.log('in here')
         if (event.key === ' ') {
           event.stopPropagation();
         }
         if (isNavigationKey(event.key) && !event.shiftKey) {
+          console.log('in here');
           apiRef.current.publishEvent('cellNavigationKeyDown', props, event);
         }
       };
