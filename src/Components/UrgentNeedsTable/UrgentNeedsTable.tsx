@@ -11,12 +11,15 @@ import { FormattedMessage } from 'react-intl';
 import './UrgentNeedsTable.css';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
+import { UrgentNeed } from '../../Types/Results';
 
-const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
-  const finalUrgentNeedsPrograms = urgentNeedsPrograms[locale.toLowerCase()];
+type UrgentNeedTableProps = {
+  urgentNeedsPrograms: UrgentNeed[];
+};
+const UrgentNeedsTable = ({ urgentNeedsPrograms }: UrgentNeedTableProps) => {
   const { formData } = useContext(Context);
 
-  let link;
+  let link: string;
   if (formData.immutableReferrer === '211co') {
     link =
       'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=whitelabel&utm_id=211mfb';
@@ -25,7 +28,7 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
   }
 
   const displayFooter = () => {
-    if (urgentNeedsPrograms.es.length) {
+    if (urgentNeedsPrograms.length) {
       return (
         <article className="urgentNeedsTableFooter">
           <p className="noResults-p">
@@ -79,8 +82,8 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {finalUrgentNeedsPrograms.map((row) => (
-            <UrgentNeedsRow key={row.name} rowProps={row} />
+          {urgentNeedsPrograms.map((row) => (
+            <UrgentNeedsRow key={row.name.label} urgentNeed={row} />
           ))}
         </TableBody>
         <TableFooter>

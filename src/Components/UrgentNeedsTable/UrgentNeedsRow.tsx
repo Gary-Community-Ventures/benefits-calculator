@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
@@ -11,11 +11,16 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import './UrgentNeedsRow.css';
 import dataLayerPush from '../../Assets/analytics';
+import { UrgentNeed } from '../../Types/Results';
 
-const UrgentNeedsRow = ({ rowProps }) => {
+type UrgentNeedsRowProps = {
+  urgentNeed: UrgentNeed;
+};
+const UrgentNeedsRow = ({ urgentNeed }: UrgentNeedsRowProps) => {
   const [open, setOpen] = useState(false);
+  const intl = useIntl();
 
-  const formatPhoneNumber = (phoneNumberString) => {
+  const formatPhoneNumber = (phoneNumberString: string) => {
     const cleaned = ('' + phoneNumberString).replace(/\D/g, '');
     const match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
     if (match) {
@@ -33,9 +38,11 @@ const UrgentNeedsRow = ({ rowProps }) => {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row" align="left">
-          {rowProps.name}
+          <FormattedMessage id={urgentNeed.name.label} defaultMessage={urgentNeed.name.default_message} />
         </TableCell>
-        <TableCell>{rowProps.type}</TableCell>
+        <TableCell>
+          <FormattedMessage id={urgentNeed.type.label} defaultMessage={urgentNeed.type.default_message} />
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}></TableCell>
@@ -43,26 +50,32 @@ const UrgentNeedsRow = ({ rowProps }) => {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
               <Typography variant="body2" gutterBottom component="div">
-                {rowProps.description}
+                <FormattedMessage
+                  id={urgentNeed.description.label}
+                  defaultMessage={urgentNeed.description.default_message}
+                />
               </Typography>
-              {rowProps.phone_number && (
+              {urgentNeed.phone_number && (
                 <h4 className="font-weight">
                   <FormattedMessage id="urgentNeedsRow.formatPhoneNumber" defaultMessage="Phone Number: " />
-                  <span className="navigator-info">{formatPhoneNumber(rowProps.phone_number)}</span>
+                  <span className="navigator-info">{formatPhoneNumber(urgentNeed.phone_number)}</span>
                 </h4>
               )}
-              {rowProps.link && (
+              {urgentNeed.link.default_message !== null && urgentNeed.link.default_message.length > 0 && (
                 <a
                   className="margin-top-link"
-                  href={rowProps.link}
+                  href={intl.formatMessage({
+                    id: urgentNeed.link.label,
+                    defaultMessage: urgentNeed.link.default_message,
+                  })}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => {
                     dataLayerPush({
                       event: 'urgent_need',
                       action: 'urgent need link',
-                      resource: `Urgent Need Website for ${rowProps.name}`,
-                      resource_name: rowProps.name,
+                      resource: `Urgent Need Website for ${urgentNeed.name.default_message}`,
+                      resource_name: urgentNeed.name.default_message,
                     });
                   }}
                 >

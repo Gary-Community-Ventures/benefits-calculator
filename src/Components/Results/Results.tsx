@@ -3,9 +3,9 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import FilterSection from '../FilterSection/FilterSection.js';
+import FilterSection from '../FilterSection/FilterSection';
 import ResultsError from '../ResultsError/ResultsError.js';
-import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable.js';
+import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
 import Loading from '../Loading/Loading.js';
 import NoResultsTable from '../NoResultsTable/NoResultsTable.tsx';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -34,6 +34,16 @@ import {
   Translation,
   UrgentNeed,
 } from '../../Types/Results.ts';
+
+export type UpdateFilterArg =
+  | {
+      name: 'citizen' | 'eligible';
+      filter: GridFilterItem;
+    }
+  | {
+      name: 'hasBenefit' | 'category';
+      filter: GridFilterItem | false;
+    };
 
 export const isNavigationKey = (key: string) =>
   key === 'Home' || key === 'End' || key.indexOf('Arrow') === 0 || key.indexOf('Page') === 0 || key === ' ';
@@ -104,15 +114,6 @@ const Results = () => {
     return filters;
   };
 
-  type UpdateFilterArg =
-    | {
-        name: 'citizen' | 'eligible';
-        filter: GridFilterItem;
-      }
-    | {
-        name: 'hasBenefit' | 'category';
-        filter: GridFilterItem | false;
-      };
   const updateFilter = function (...args: UpdateFilterArg[]) {
     const newFilter = { ...filt };
     for (let i = 0; i < args.length; i++) {
@@ -129,11 +130,6 @@ const Results = () => {
   useEffect(() => {
     fetchResults();
   }, []);
-
-  useEffect(() => {
-    updateFilter({ name: 'category', filter: false });
-    categoryState[1]('All Categories');
-  }, [locale]);
 
   const fetchResults = async () => {
     let rawEligibilityResponse: EligibilityResults;
@@ -158,17 +154,17 @@ const Results = () => {
     });
   };
 
-  const preschoolProgramCategoryLabel = 'i dont know yet';
+  const preschoolProgramCategory = 'Cuidado de Niños, Preescolar y Jóvenes';
   const categoryValues = (programs: Program[]) => {
     const preschoolPrograms = [0, 0];
     const categoryValues: { [key: string]: number } = {};
     for (let program of programs) {
-      if (categoryValues[program.category.label] === undefined) {
-        categoryValues[program.category.label] = 0;
+      if (categoryValues[program.category.default_message] === undefined) {
+        categoryValues[program.category.default_message] = 0;
       }
       if (filt.citizen.value.includes(program.legal_status_required)) {
-        categoryValues[program.category.label] += program.estimated_value;
-        if (preschoolProgramCategoryLabel == program.category.label) {
+        categoryValues[program.category.default_message] += program.estimated_value;
+        if (preschoolProgramCategory == program.category.default_message) {
           preschoolPrograms[0]++;
           preschoolPrograms[1] += program.estimated_value;
         }
@@ -267,8 +263,8 @@ const Results = () => {
                           dataLayerPush({
                             event: 'navigator',
                             action: 'navigator link',
-                            resource: `Apply With Assistance for ${navigator.name}`,
-                            resource_name: navigator.name,
+                            resource: `Apply With Assistance for ${navigator.name.default_message}`,
+                            resource_name: navigator.name.default_message,
                           });
                         }}
                       >
@@ -347,7 +343,7 @@ const Results = () => {
     application_link: Translation;
     passed_tests: TestMessage[];
     failed_tests: TestMessage[];
-    category: Translation;
+    category: string;
     navigators: ProgramNavigator[];
     citizenship: string;
     eligible: boolean;
@@ -368,7 +364,7 @@ const Results = () => {
         application_link: programs[i].apply_button_link,
         passed_tests: programs[i].passed_tests,
         failed_tests: programs[i].failed_tests,
-        category: programs[i].category,
+        category: programs[i].category.default_message,
         navigators: programs[i].navigators,
         citizenship: programs[i].legal_status_required,
         eligible: programs[i].eligible,
@@ -388,7 +384,7 @@ const Results = () => {
         application_link: programs[i].apply_button_link,
         passed_tests: programs[i].passed_tests,
         failed_tests: programs[i].failed_tests,
-        category: programs[i].category,
+        category: programs[i].category.default_message,
         navigators: programs[i].navigators,
         eligible: programs[i].eligible,
       };
@@ -566,7 +562,7 @@ const Results = () => {
     ];
 
     const categories = programs.reduce((acc: { defaultMessage: string; label: string }[], benefit) => {
-      if (!acc.some((category) => category.label === benefit.category.label)) {
+      if (!acc.some((category) => category.defaultMessage === benefit.category.default_message)) {
         acc = [...acc, { defaultMessage: benefit.category.default_message, label: benefit.category.label }];
       }
       return acc;
@@ -595,7 +591,8 @@ const Results = () => {
                 <FormattedMessage id="results.perYear" defaultMessage="Per Year" />
               </span>
             </Toolbar>
-            {filt.category.value === categories.find((cat) => cat.label === '')?.defaultMessage && (
+            {filt.category.value ===
+              categories.find((cat) => cat.label === preschoolProgramCategory)?.defaultMessage && (
               <Typography variant="body2" className="child-care-helper-text">
                 <FormattedMessage
                   id="benefitCategories.childCareHelperText"
@@ -754,7 +751,7 @@ const Results = () => {
                 {displayBenefitAndImmedNeedsBtns()}
                 {filterResultsButton === 'benefits' && renderDataGridOrNoResultsTable()}
                 {filterResultsButton === 'urgentNeeds' && (
-                  <UrgentNeedsTable urgentNeedsPrograms={results.urgentNeeds} locale={locale} />
+                  <UrgentNeedsTable urgentNeedsPrograms={results.urgentNeeds} />
                 )}
               </Grid>
               <Button
