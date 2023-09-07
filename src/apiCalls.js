@@ -1,7 +1,7 @@
 const apiKey = 'Token ' + process.env.REACT_APP_API_KEY;
 const domain = process.env.REACT_APP_DOMAIN_URL;
 
-const translationsEndpoint = `${domain}/translations/`;
+const translationsEndpoint = `${domain}/api/translations/`;
 const screensEndpoint = `${domain}/api/screens/`;
 const userEndpoint = `${domain}/api/users/`;
 const messageEndpoint = `${domain}/api/messages/`;
