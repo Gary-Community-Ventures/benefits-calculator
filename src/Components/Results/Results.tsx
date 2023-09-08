@@ -2,7 +2,15 @@ import { useEffect, useState, useContext, KeyboardEvent, MouseEvent } from 'reac
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import {
+  Button,
+  Link,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  typographyClasses,
+} from '@mui/material';
 import FilterSection from '../FilterSection/FilterSection';
 import ResultsError from '../ResultsError/ResultsError.js';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
@@ -210,9 +218,20 @@ const Results = () => {
     if (tests.length) {
       return (
         <>
-          {tests.map((testResult) => {
-            // fix later
-            return <li key={testResult}>{testResult}</li>;
+          {tests.map((messageParts, i) => {
+            return (
+              <li key={i}>
+                {messageParts.reduce((acc: string, part) => {
+                  let newPart: string;
+                  if (typeof part === 'string') {
+                    newPart = part;
+                  } else {
+                    newPart = intl.formatMessage({ id: part.label, defaultMessage: part.default_message });
+                  }
+                  return acc + newPart;
+                }, '')}
+              </li>
+            );
           })}
         </>
       );

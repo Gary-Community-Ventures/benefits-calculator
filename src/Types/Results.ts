@@ -4,7 +4,7 @@ export type Translation = {
 };
 
 // fix later
-export type TestMessage = string;
+export type TestMessage = (string | Translation)[];
 
 export type ProgramNavigator = {
   id: number;
