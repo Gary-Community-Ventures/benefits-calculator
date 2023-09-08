@@ -2,12 +2,11 @@ import { useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getScreen } from '../../apiCalls';
 import referralOptions from '../../Assets/referralOptions';
-import loading from '../../Assets/loading-icon.png';
-import './FetchScreen.css';
 import { Context } from '../Wrapper/Wrapper.tsx';
+import LoadingPage from '../LoadingPage/LoadingPage.tsx';
 
-const FetchScreen = ({ setFetchedScreen }) => {
-  const { formData, setFormData } = useContext(Context);
+const FetchScreen = () => {
+  const { formData, setFormData, screenDoneLoading } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();
 
@@ -19,7 +18,7 @@ const FetchScreen = ({ setFetchedScreen }) => {
       navigate('/step-1');
       return;
     }
-    setFetchedScreen(true);
+    screenDoneLoading();
   };
 
   const createFormData = (response) => {
@@ -145,11 +144,7 @@ const FetchScreen = ({ setFetchedScreen }) => {
     fetchScreen(uuid);
   }, []);
 
-  return (
-    <main className="fetch-screen-loading-container">
-      <img className="loading-image" src={loading} alt="loading-icon" />
-    </main>
-  );
+  return <LoadingPage />;
 };
 
 export default FetchScreen;

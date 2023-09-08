@@ -87,7 +87,22 @@ const initialFormData: FormData = {
 export const Context = React.createContext<WrapperContext>({} as WrapperContext);
 
 const Wrapper = (props: PropsWithChildren<{}>) => {
+  const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
+  const [screenLoading, setScreenLoading] = useState<boolean>(true);
+  const [pageIsLoading, setPageIsLoading] = useState<boolean>(true);
+
+  const screenDoneLoading = () => {
+    setScreenLoading(false);
+  };
+
+  useEffect(() => {
+    if (!screenLoading && !translationsLoading) {
+      setPageIsLoading(false);
+    }
+  }, [screenLoading, translationsLoading]);
+
   let [translations, setTranslations] = useState<{ [key: string]: Language }>({});
+
   useEffect(() => {
     getTranslations().then((value) => {
       setTranslations(value);
@@ -109,6 +124,9 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
   useEffect(() => {
     localStorage.setItem('language', locale);
+    if (Object.keys(translations).length > 0) {
+      setTranslationsLoading(false);
+    }
     for (const lang of Object.keys(translations)) {
       if (locale.toLocaleLowerCase() === lang) {
         setMessages(translations[lang]);
@@ -128,7 +146,18 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
   return (
     <Context.Provider
-      value={{ locale, setLocale, selectLanguage, formData, setFormData, theme, setTheme, styleOverride }}
+      value={{
+        locale,
+        setLocale,
+        selectLanguage,
+        formData,
+        setFormData,
+        theme,
+        setTheme,
+        styleOverride,
+        pageIsLoading,
+        screenDoneLoading,
+      }}
     >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
         {props.children}
