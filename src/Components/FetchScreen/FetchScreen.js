@@ -141,8 +141,14 @@ const FetchScreen = () => {
   };
 
   useEffect(() => {
+    // https://stackoverflow.com/questions/20041051/how-to-judge-a-string-is-uuid-type
+    const uuidRegx = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+    if (!uuid.match(uuidRegx)) {
+      screenDoneLoading();
+      return;
+    }
     fetchScreen(uuid);
-  }, []);
+  }, [uuid]);
 
   return <LoadingPage />;
 };
