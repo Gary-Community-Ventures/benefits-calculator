@@ -478,7 +478,7 @@ const Results = () => {
       {
         field: 'toggle',
         headerName: '',
-        flex: 1,
+        flex: 0.25,
         renderCell: (params) => (
           <CustomDetailPanelToggle id={params.id} field={params.field} rowNode={params.rowNode} />
         ),
