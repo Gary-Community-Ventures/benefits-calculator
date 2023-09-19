@@ -1,5 +1,6 @@
 import { FormData } from './FormData';
 import { ITheme } from '../Assets/styleController';
+import { ReferrerData } from '../Components/Referrer/referrerHook';
 
 export interface WrapperContext {
   locale: string;
@@ -10,4 +11,5 @@ export interface WrapperContext {
   theme: ITheme;
   setTheme: React.Dispatch<React.SetStateAction<'default' | 'twoOneOne'>>;
   styleOverride: any;
+  getReferrer: (id: keyof ReferrerData) => any;
 }

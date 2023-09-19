@@ -20,9 +20,9 @@ import './Share.css';
 import { Context } from '../Wrapper/Wrapper';
 import dataLayerPush from '../../Assets/analytics';
 
-const Share = forwardRef(function Share({ close }, ref) {
+const Share = forwardRef(function Share({ close }) {
   const [copied, setCopied] = useState(false);
-  const { formData } = useContext(Context);
+  const { getReferrer } = useContext(Context);
   const intl = useIntl();
 
   const labels = {
@@ -40,8 +40,8 @@ const Share = forwardRef(function Share({ close }, ref) {
     }),
   };
 
-  const twoOneOneShareUrl = 'https://screener.myfriendben.org?referrer=211co';
-  const shareUrl = formData.immutableReferrer === '211co' ? twoOneOneShareUrl : 'https://www.myfriendben.org/';
+  const shareUrl = getReferrer('shareLink');
+
   const appId = '1268913277361574';
 
   const iconSize = { fontSize: '1.3rem' };

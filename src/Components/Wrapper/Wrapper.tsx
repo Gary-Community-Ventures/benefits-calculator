@@ -7,6 +7,7 @@ import Vietnamese from '../../Assets/Languages/Vietnamese.json';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { Language } from '../../Types/Language';
 import { FormData } from '../../Types/FormData';
+import useReferrer from '../Referrer/referrerHook';
 
 const initialFormData: FormData = {
   isTest: undefined,
@@ -141,10 +142,15 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   };
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
+  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer);
+
+  useEffect(() => {
+    setReferrer(formData.immutableReferrer);
+  }, [formData.immutableReferrer]);
 
   return (
     <Context.Provider
-      value={{ locale, setLocale, selectLanguage, formData, setFormData, theme, setTheme, styleOverride }}
+      value={{ locale, setLocale, selectLanguage, formData, setFormData, theme, setTheme, styleOverride, getReferrer }}
     >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
         {props.children}

@@ -14,15 +14,7 @@ import { Context } from '../Wrapper/Wrapper';
 
 const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
   const finalUrgentNeedsPrograms = urgentNeedsPrograms[locale.toLowerCase()];
-  const { formData } = useContext(Context);
-
-  let link;
-  if (formData.immutableReferrer === '211co') {
-    link =
-      'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=whitelabel&utm_id=211mfb';
-  } else {
-    link = 'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=organic&utm_id=211mfb';
-  }
+  const { getReferrer } = useContext(Context);
 
   const displayFooter = () => {
     if (urgentNeedsPrograms.es.length) {
@@ -30,7 +22,12 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
         <article className="urgentNeedsTableFooter">
           <p className="noResults-p">
             <FormattedMessage id="noResults.p-Two" defaultMessage="For additional resources, visit " />
-            <a className="ineligibility-link navigator-info" target="_blank" rel="noreferrer" href={link}>
+            <a
+              className="ineligibility-link navigator-info"
+              target="_blank"
+              rel="noreferrer"
+              href={getReferrer('twoOneOneLink')}
+            >
               2-1-1 Colorado
             </a>
             <FormattedMessage

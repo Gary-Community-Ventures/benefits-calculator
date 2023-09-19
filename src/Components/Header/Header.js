@@ -7,17 +7,12 @@ import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Share from '../Share/Share';
 import EmailResults from '../EmailResults/EmailResults';
-import MFBLogo from '../../Assets/logo.png';
-import BIAMFBLogo from '../../Assets/biamfbcombinedlogo.png';
-import JHSAMFBLogo from '../../Assets/JeffcoAssets/jeffcobrand.png';
-import VELogo from '../../Assets/VillageExchange/villageExchangeLogo.png';
 import Paper from '@mui/material/Paper';
 import './Header.css';
 
 const Header = ({ handleTextfieldChange }) => {
   const context = useContext(Context);
-  const { formData } = context;
-  const { immutableReferrer } = formData;
+  const { formData, getReferrer } = context;
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
 
   const location = useLocation();
@@ -72,52 +67,12 @@ const Header = ({ handleTextfieldChange }) => {
     }
   };
 
-  const getLogoSource = (refSource) => {
-    switch (refSource) {
-      case 'bia':
-        return BIAMFBLogo;
-      case 'jeffcoHS':
-        return JHSAMFBLogo;
-      case 'jeffcoHSCM':
-        return JHSAMFBLogo;
-      case 'villageExchange':
-        return VELogo;
-      default:
-        return MFBLogo;
-    }
-  };
-
-  const getAltText = (refSource) => {
-    switch (refSource) {
-      case 'bia':
-        return 'benefits in action and my friend ben home page button';
-      case 'jeffcoHS':
-        return 'jeffco human services and my friend ben home page button';
-      case 'jeffcoHSCM':
-        return 'jeffco human services and my friend ben home page button';
-      default:
-        return 'my friend ben home page button';
-    }
-  };
-
-  const getLogoClassName = (refSource) => {
-    if (refSource === 'jeffcoHS' || refSource === 'jeffcoHSCM' || refSource === 'villageExchange') {
-      return 'big-logo logo';
-    } else {
-      return 'logo';
-    }
-  };
-
   return (
     <nav>
       <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#2A2B2A' }} square={true}>
         <AppBar position="sticky" id="nav-container" elevation={0} sx={{ backgroundColor: '#2A2B2A' }}>
           <a href={`/step-1${queryString}`} className="home-link">
-            <img
-              src={getLogoSource(immutableReferrer)}
-              alt={getAltText(immutableReferrer)}
-              className={getLogoClassName(immutableReferrer)}
-            />
+            <img src={getReferrer('logoSource')} alt={getReferrer('logoAlt')} className={getReferrer('logoClass')} />
           </a>
           <div className="icon-wrapper">
             <Select

@@ -22,6 +22,7 @@ import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } fro
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import './App.css';
 import dataLayerPush from './Assets/analytics.ts';
+import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx';
 
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
@@ -37,12 +38,11 @@ const App = () => {
   const referrerSource = referrer in referralOptions ? referrer : '';
   const totalSteps = Object.keys(stepDirectory).length + 2;
   const [fetchedScreen, setFetchedScreen] = useState(false);
-  const { locale, formData, setFormData, styleOverride, setTheme: changeTheme } = useContext(Context);
+  const { locale, formData, setFormData, styleOverride, setTheme: changeTheme, getReferrer } = useContext(Context);
   const [theme, setTheme] = useState(createTheme(styleOverride));
 
   useEffect(() => {
-    const theme = formData.immutableReferrer === '211co' ? 'twoOneOne' : 'default';
-    changeTheme(theme);
+    changeTheme(getReferrer('theme'));
   }, [formData.immutableReferrer]);
 
   useEffect(() => {
@@ -231,11 +231,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <CssBaseline />
-        {formData.immutableReferrer === '211co' ? (
-          <TwoOneOneHeader handleTextfieldChange={handleTextfieldChange} />
-        ) : (
-          <Header handleTextfieldChange={handleTextfieldChange} />
-        )}
+        <BrandedHeader handleTextFieldChange={handleTextfieldChange} />
         <Box className="main-max-width">
           <Routes>
             <Route path="/step-1" element={<ProgressBar step={1} />} />
@@ -302,7 +298,7 @@ const App = () => {
             <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
           </Routes>
         </Box>
-        {formData.immutableReferrer === '211co' && <TwoOneOneFooter />}
+        <BrandedFooter />
       </div>
     </ThemeProvider>
   );
