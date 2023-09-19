@@ -151,23 +151,47 @@ const Confirmation = () => {
     }
   };
 
+  const getFormattedMessageString = (fMObj) => {
+    return intl.formatMessage({ id: fMObj.id, defaultMessage: fMObj.defaultMessage });
+  };
+
   const getConditionsStringWithCommas = (student, pregnant, blindOrVisuallyImpaired, disabled) => {
     const conditions = [];
 
     if (student) {
-      conditions.push({ id: 'confirmation.headOfHouseholdDataBlock-studentText', defaultMessage: 'Student' });
+      conditions.push(
+        getFormattedMessageString({
+          id: 'confirmation.headOfHouseholdDataBlock-studentText',
+          defaultMessage: 'Student',
+        }),
+      );
     }
+
     if (pregnant) {
-      conditions.push({ id: 'confirmation.headOfHouseholdDataBlock-pregnantText', defaultMessage: 'Pregnant' });
+      conditions.push(
+        getFormattedMessageString({
+          id: 'confirmation.headOfHouseholdDataBlock-pregnantText',
+          defaultMessage: 'Pregnant',
+        }),
+      );
     }
+
     if (blindOrVisuallyImpaired) {
-      conditions.push({
-        id: 'confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText',
-        defaultMessage: 'Blind or visually impaired',
-      });
+      conditions.push(
+        getFormattedMessageString({
+          id: 'confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText',
+          defaultMessage: 'Blind or visually impaired',
+        }),
+      );
     }
+
     if (disabled) {
-      conditions.push({ id: 'confirmation.headOfHouseholdDataBlock-disabledText', defaultMessage: 'Disabled' });
+      conditions.push(
+        getFormattedMessageString({
+          id: 'confirmation.headOfHouseholdDataBlock-disabledText',
+          defaultMessage: 'Disabled',
+        }),
+      );
     }
 
     return conditions.join(', ');
