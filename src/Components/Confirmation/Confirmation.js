@@ -335,26 +335,33 @@ const Confirmation = () => {
     const referralSourceLabel = referralOptions[referralSource];
     const finalReferralSource = referralSource !== 'other' ? referralSourceLabel : otherSource;
 
+    if (formData.immutableReferrer) {
+      return <></>;
+    }
+
     return (
-      <Grid container spacing={1}>
-        <Grid item xs={2}>
-          <ConnectWithoutContactIcon className="home-icon flip-horizontally" />
+      <>
+        <p className="confirmation-section-underline"></p>
+        <Grid container spacing={1}>
+          <Grid item xs={2}>
+            <ConnectWithoutContactIcon className="home-icon flip-horizontally" />
+          </Grid>
+          <Grid item xs={8}>
+            <p className="section-title">
+              <FormattedMessage
+                id="confirmation.displayAllFormData-referralSourceText"
+                defaultMessage="Referral Source"
+              />
+            </p>
+            <article className="section-p">{finalReferralSource}</article>
+          </Grid>
+          <Grid item xs={2} display="flex" justifyContent="flex-end">
+            <button aria-label="edit referral source" onClick={() => navigate(getQuestionUrl('referralSource'))}>
+              <EditIcon className="edit-icon" />
+            </button>
+          </Grid>
         </Grid>
-        <Grid item xs={8}>
-          <p className="section-title">
-            <FormattedMessage
-              id="confirmation.displayAllFormData-referralSourceText"
-              defaultMessage="Referral Source"
-            />
-          </p>
-          <article className="section-p">{finalReferralSource}</article>
-        </Grid>
-        <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label="edit referral source" onClick={() => navigate(getQuestionUrl('referralSource'))}>
-            <EditIcon className="edit-icon" />
-          </button>
-        </Grid>
-      </Grid>
+      </>
     );
   };
 
@@ -415,7 +422,6 @@ const Confirmation = () => {
           refactorOptionsList(acuteConditionOptions),
           <FoodBankIcon className="home-icon" />,
         )}
-        <p className="confirmation-section-underline"></p>
         {displayReferralSourceSection()}
       </>
     );
