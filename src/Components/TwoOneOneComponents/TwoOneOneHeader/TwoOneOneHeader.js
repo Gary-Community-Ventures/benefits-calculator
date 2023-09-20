@@ -93,7 +93,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
           className="twoOneOneMenuLink"
           key={link.defaultMsg + index}
         >
-          <FormattedMessage id={link.formattedMsgId} defaultMessage={link.name} />
+          <FormattedMessage id={link.formattedMsgId} defaultMessage={link.defaultMsg} />
         </Link>
       );
     });
