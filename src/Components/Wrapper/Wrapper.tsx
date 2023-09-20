@@ -1,9 +1,6 @@
 import React, { useEffect, useState, PropsWithChildren } from 'react';
 import useStyle from '../../Assets/styleController';
 import { IntlProvider } from 'react-intl';
-import Spanish from '../../Assets/Languages/Spanish.json';
-import English from '../../Assets/Languages/English.json';
-import Vietnamese from '../../Assets/Languages/Vietnamese.json';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { Language } from '../../Types/Language';
 import { FormData } from '../../Types/FormData';
@@ -163,7 +160,8 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         styleOverride,
         pageIsLoading,
         screenDoneLoading,
-     , getReferrer }}
+        getReferrer,
+      }}
     >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
         {props.children}

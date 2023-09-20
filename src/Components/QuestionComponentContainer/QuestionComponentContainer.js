@@ -10,9 +10,9 @@ import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
-import questions from '../../Assets/questions';
 import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
 import './QuestionComponentContainer.css';
+import { getQuestion } from '../../Assets/stepDirectory.ts';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -25,8 +25,7 @@ const QuestionComponentContainer = ({
 }) => {
   const { formData } = useContext(Context);
   let { id } = useParams();
-  let numberId = Number(id);
-  const matchingQuestion = questions[numberId];
+  let matchingQuestion = getQuestion(+id);
   const errorController = useErrorController(
     matchingQuestion.componentDetails.inputError,
     matchingQuestion.componentDetails.inputHelperText,

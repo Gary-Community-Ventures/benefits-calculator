@@ -18,15 +18,9 @@ type UrgentNeedTableProps = {
 };
 
 const UrgentNeedsTable = ({ urgentNeedsPrograms }: UrgentNeedTableProps) => {
-  const { formData } = useContext(Context);
+  const { getReferrer } = useContext(Context);
 
-  let link: string;
-  if (formData.immutableReferrer === '211co') {
-    link =
-      'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=whitelabel&utm_id=211mfb';
-  } else {
-    link = 'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=organic&utm_id=211mfb';
-  }
+  const link = getReferrer('twoOneOneLink');
 
   const displayFooter = () => {
     if (urgentNeedsPrograms.length) {

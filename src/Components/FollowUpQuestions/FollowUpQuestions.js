@@ -5,7 +5,7 @@ import Textfield from '../Textfield/Textfield';
 import SignUp from '../SignUp/SignUp';
 import AccordionsContainer from '../AccordionsContainer/AccordionsContainer';
 import BasicSelect from '../DropdownMenu/BasicSelect';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const FollowUpQuestions = ({
   followUpQuestions,

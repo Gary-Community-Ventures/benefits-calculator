@@ -13,7 +13,7 @@ import ProgressBar from './Components/ProgressBar/ProgressBar';
 import referralOptions from './Assets/referralOptions';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
 import { updateScreen, updateUser } from './Assets/updateScreen';
-import stepDirectory from './Assets/stepDirectory';
+import { getStepDirectory, startingQuestionNumer, getStepNumber } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
 import { useErrorController } from './Assets/validationFunctions.tsx';
@@ -34,7 +34,6 @@ const App = () => {
   const externalId = rawExternalId !== null ? rawExternalId : undefined;
   const referrer = searchParams.get('referrer') !== null ? (searchParams.get('referrer') as string) : '';
   const referrerSource = referrer in referralOptions ? referrer : '';
-  const totalSteps = Object.keys(stepDirectory).length + 2;
   const {
     locale,
     formData,
@@ -44,10 +43,14 @@ const App = () => {
     pageIsLoading,
     getReferrer,
   } = useContext(Context);
+  const [totalSteps, setTotalSteps] = useState(
+    getStepDirectory(formData.immutableReferrer).length + startingQuestionNumer,
+  );
   const [theme, setTheme] = useState(createTheme(styleOverride));
 
   useEffect(() => {
     changeTheme(getReferrer('theme'));
+    setTotalSteps(getStepDirectory(formData.immutableReferrer).length + startingQuestionNumer);
   }, [formData.immutableReferrer]);
 
   useEffect(() => {
@@ -271,7 +274,7 @@ const App = () => {
               <Route path="" element={<Navigate to="/step-1" replace />} />
               <Route path="step-1" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
               <Route
-                path={`step-${stepDirectory.householdData}/:page`}
+                path={`step-${getStepNumber('householdData', formData.immutableReferrer)}/:page`}
                 element={
                   <HouseholdDataBlock
                     key={window.location.href}

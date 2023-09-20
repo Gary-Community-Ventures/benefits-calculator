@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import stepDirectory from '../../Assets/stepDirectory';
+import { getStepNumber, startingQuestionNumer } from '../../Assets/stepDirectory';
 
 const PreviousButton = ({ navFunction }) => {
   const { formData } = useContext(Context);
@@ -12,8 +12,10 @@ const PreviousButton = ({ navFunction }) => {
   if (!stepNumberId) stepNumberId = 1;
   const navigate = useNavigate();
   const defaultNavigate = () => {
-    if (+id === stepDirectory.householdData + 1) {
-      navigate(`/${uuid}/step-${stepDirectory.householdData}/${formData.householdData.length}`);
+    if (+id === getStepNumber('householdData', formData.immutableReferrer) + 1) {
+      navigate(
+        `/${uuid}/step-${getStepNumber('householdData', formData.immutableReferrer)}/${formData.householdData.length}`,
+      );
       return;
     }
     navigate(`/${uuid}/step-${stepNumberId - 1}`);

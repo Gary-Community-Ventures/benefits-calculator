@@ -20,7 +20,7 @@ import './Share.css';
 import { Context } from '../Wrapper/Wrapper';
 import dataLayerPush from '../../Assets/analytics';
 
-const Share = forwardRef(function Share({ close }) {
+const Share = forwardRef(function Share({ close }, ref) {
   const [copied, setCopied] = useState(false);
   const { getReferrer } = useContext(Context);
   const intl = useIntl();
