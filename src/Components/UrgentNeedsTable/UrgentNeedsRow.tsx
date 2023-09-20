@@ -16,6 +16,7 @@ import { UrgentNeed } from '../../Types/Results';
 type UrgentNeedsRowProps = {
   urgentNeed: UrgentNeed;
 };
+
 const UrgentNeedsRow = ({ urgentNeed }: UrgentNeedsRowProps) => {
   const [open, setOpen] = useState(false);
   const intl = useIntl();

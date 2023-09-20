@@ -16,6 +16,7 @@ import { UrgentNeed } from '../../Types/Results';
 type UrgentNeedTableProps = {
   urgentNeedsPrograms: UrgentNeed[];
 };
+
 const UrgentNeedsTable = ({ urgentNeedsPrograms }: UrgentNeedTableProps) => {
   const { formData } = useContext(Context);
 
