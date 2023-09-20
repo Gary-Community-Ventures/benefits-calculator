@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, MouseEvent } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import CitizenshipPopover from './CitizenshipPopover';
@@ -7,7 +7,17 @@ import Popover from '@mui/material/Popover';
 import { FormattedMessage } from 'react-intl';
 import { Button } from '@mui/material';
 import './FilterSection.css';
+import { UpdateFilterArg } from '../Results/Results';
 
+type StateType<T> = [T, React.Dispatch<React.SetStateAction<T>>];
+type FilterProps = {
+  updateFilter: (...args: UpdateFilterArg[]) => void;
+  categories: { defaultMessage: string; label: string }[];
+  citizenToggleState: StateType<boolean>;
+  categoryState: StateType<string>;
+  eligibilityState: StateType<string>;
+  alreadyHasToggleState: StateType<boolean>;
+};
 const FilterSection = ({
   updateFilter,
   categories,
@@ -15,10 +25,10 @@ const FilterSection = ({
   categoryState,
   eligibilityState,
   alreadyHasToggleState,
-}) => {
+}: FilterProps) => {
   const { theme } = useContext(Context);
-  const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState(null);
-  const [otherPopoverAnchor, setOtherPopoverAnchor] = useState(null);
+  const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState<null | Element>(null);
+  const [otherPopoverAnchor, setOtherPopoverAnchor] = useState<null | Element>(null);
 
   const [otherActive, setOtherActive] = useState(false);
   useEffect(() => {
@@ -28,14 +38,6 @@ const FilterSection = ({
         alreadyHasToggleState[0] !== false,
     );
   }, [categoryState[0], eligibilityState[0], alreadyHasToggleState[0]]);
-
-  const handleCitizenButtonClick = (event) => {
-    setCitizenshipPopoverAnchor(event.currentTarget);
-  };
-
-  const handleOtherButtonClick = (event) => {
-    setOtherPopoverAnchor(event.currentTarget);
-  };
 
   const handleResetButtonClick = () => {
     //this resets the actual table filters
@@ -92,7 +94,9 @@ const FilterSection = ({
         id="citizenship"
         variant="contained"
         className={(citizenToggleState[0] && 'active-filter') + ' filter-button citizen'}
-        onClick={(event) => handleCitizenButtonClick(event)}
+        onClick={(event) => {
+          setCitizenshipPopoverAnchor(event.currentTarget);
+        }}
       >
         <FormattedMessage id="filterSection.citizenship" defaultMessage="Citizenship" />
       </Button>
@@ -112,7 +116,9 @@ const FilterSection = ({
         id="other"
         variant="contained"
         className={(otherActive && 'active-filter') + ' filter-button other'}
-        onClick={(event) => handleOtherButtonClick(event)}
+        onClick={(event) => {
+          setOtherPopoverAnchor(event.currentTarget);
+        }}
       >
         <FormattedMessage id="filterSection.other" defaultMessage="Other" />
       </Button>

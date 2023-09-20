@@ -10,6 +10,7 @@ import EmailResults from '../EmailResults/EmailResults';
 import MFBLogo from '../../Assets/logo.png';
 import BIAMFBLogo from '../../Assets/biamfbcombinedlogo.png';
 import JHSAMFBLogo from '../../Assets/JeffcoAssets/jeffcobrand.png';
+import VELogo from '../../Assets/VillageExchange/villageExchangeLogo.png';
 import Paper from '@mui/material/Paper';
 import './Header.css';
 
@@ -79,6 +80,8 @@ const Header = ({ handleTextfieldChange }) => {
         return JHSAMFBLogo;
       case 'jeffcoHSCM':
         return JHSAMFBLogo;
+      case 'villageExchange':
+        return VELogo;
       default:
         return MFBLogo;
     }
@@ -98,8 +101,8 @@ const Header = ({ handleTextfieldChange }) => {
   };
 
   const getLogoClassName = (refSource) => {
-    if (refSource === 'jeffcoHS' || refSource === 'jeffcoHSCM') {
-      return 'jeffcoLogo';
+    if (refSource === 'jeffcoHS' || refSource === 'jeffcoHSCM' || refSource === 'villageExchange') {
+      return 'big-logo logo';
     } else {
       return 'logo';
     }
