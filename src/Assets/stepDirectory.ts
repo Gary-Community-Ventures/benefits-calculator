@@ -28,9 +28,8 @@ const referrerStepDirectory: QuestionNames[] = [
 ];
 
 export function getStepDirectory(referrer: string | undefined) {
-  if (referrer !== undefined) {
-    console.log(0);
-
+  if (referrer) {
+    // if referrer is not undefinded or '' skip the referrer question
     return referrerStepDirectory;
   }
   return defaultStepDirectory;

@@ -25,7 +25,7 @@ const QuestionComponentContainer = ({
 }) => {
   const { formData } = useContext(Context);
   let { id } = useParams();
-  let matchingQuestion = getQuestion(+id);
+  let matchingQuestion = getQuestion(+id, formData.immutableReferrer);
   const errorController = useErrorController(
     matchingQuestion.componentDetails.inputError,
     matchingQuestion.componentDetails.inputHelperText,
