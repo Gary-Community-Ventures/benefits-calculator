@@ -22,6 +22,7 @@ import {
   GridRenderCellParams,
   GridValueFormatterParams,
   GridFilterItem,
+  GridAlignment,
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -560,9 +561,9 @@ const Results = () => {
         field: 'toggle',
         headerName: '',
         flex: 0.15,
-        align: 'right',
-        renderCell: (params) => (
-          <CustomDetailPanelToggle id={params.id} field={params.field} rowNode={params.rowNode} />
+        align: 'right' as GridAlignment,
+        renderCell: (params: GridRenderCellParams) => (
+          <CustomDetailPanelToggle {...params} id={params.id} field={params.field} rowNode={params.rowNode} />
         ),
       },
     ];
@@ -574,7 +575,7 @@ const Results = () => {
       return acc;
     }, []);
 
-    const CustomDetailPanelToggle = (props) => {
+    const CustomDetailPanelToggle = (props: GridRenderCellParams) => {
       const { id, field, rowNode } = props;
       const apiRef = useGridApiContext();
 
@@ -594,6 +595,7 @@ const Results = () => {
       };
 
       return (
+        // @ts-ignore
         <IconButton
           color="primary"
           tabIndex={0}
