@@ -9,7 +9,6 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  typographyClasses,
   IconButton,
 } from '@mui/material';
 import FilterSection from '../FilterSection/FilterSection';
