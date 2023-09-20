@@ -11,23 +11,30 @@ import { FormattedMessage } from 'react-intl';
 import './UrgentNeedsTable.css';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
+import { UrgentNeed } from '../../Types/Results';
 
-const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
-  const finalUrgentNeedsPrograms = urgentNeedsPrograms[locale.toLowerCase()];
-  const { getReferrer } = useContext(Context);
+type UrgentNeedTableProps = {
+  urgentNeedsPrograms: UrgentNeed[];
+};
+
+const UrgentNeedsTable = ({ urgentNeedsPrograms }: UrgentNeedTableProps) => {
+  const { formData } = useContext(Context);
+
+  let link: string;
+  if (formData.immutableReferrer === '211co') {
+    link =
+      'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=whitelabel&utm_id=211mfb';
+  } else {
+    link = 'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=organic&utm_id=211mfb';
+  }
 
   const displayFooter = () => {
-    if (urgentNeedsPrograms.es.length) {
+    if (urgentNeedsPrograms.length) {
       return (
         <article className="urgentNeedsTableFooter">
           <p className="noResults-p">
             <FormattedMessage id="noResults.p-Two" defaultMessage="For additional resources, visit " />
-            <a
-              className="ineligibility-link navigator-info"
-              target="_blank"
-              rel="noreferrer"
-              href={getReferrer('twoOneOneLink')}
-            >
+            <a className="ineligibility-link navigator-info" target="_blank" rel="noreferrer" href={link}>
               2-1-1 Colorado
             </a>
             <FormattedMessage
@@ -76,8 +83,8 @@ const UrgentNeedsTable = ({ urgentNeedsPrograms, locale }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {finalUrgentNeedsPrograms.map((row) => (
-            <UrgentNeedsRow key={row.name} rowProps={row} />
+          {urgentNeedsPrograms.map((row) => (
+            <UrgentNeedsRow key={row.name.label} urgentNeed={row} />
           ))}
         </TableBody>
         <TableFooter>

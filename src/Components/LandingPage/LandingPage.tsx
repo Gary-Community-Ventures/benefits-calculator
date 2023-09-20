@@ -23,12 +23,11 @@ import './LandingPage.css';
 import dataLayerPush from '../../Assets/analytics.ts';
 
 interface LandingPageProps {
-  setFetchedScreen: React.Dispatch<React.SetStateAction<boolean>>;
   handleCheckboxChange: (event: React.FormEvent<HTMLInputElement>) => void;
 }
 
-const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProps) => {
-  const { formData, locale } = useContext(Context);
+const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
+  const { formData, locale, screenDoneLoading } = useContext(Context);
   let { uuid } = useParams();
   const navigate = useNavigate();
   const privacyErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
@@ -66,7 +65,7 @@ const LandingPage = ({ setFetchedScreen, handleCheckboxChange }: LandingPageProp
         navigate(`/${uuid}/step-2`);
       } else {
         const response = await createScreen(formData);
-        setFetchedScreen(true);
+        screenDoneLoading();
         navigate(`/${response.uuid}/step-2`);
       }
     }

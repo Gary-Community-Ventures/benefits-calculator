@@ -11,5 +11,7 @@ export interface WrapperContext {
   theme: ITheme;
   setTheme: React.Dispatch<React.SetStateAction<'default' | 'twoOneOne'>>;
   styleOverride: any;
+  pageIsLoading: boolean;
+  screenDoneLoading: () => void;
   getReferrer: (id: keyof ReferrerData) => any;
 }

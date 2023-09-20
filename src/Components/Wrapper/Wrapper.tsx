@@ -7,6 +7,7 @@ import Vietnamese from '../../Assets/Languages/Vietnamese.json';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { Language } from '../../Types/Language';
 import { FormData } from '../../Types/FormData';
+import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
 
 const initialFormData: FormData = {
@@ -87,58 +88,59 @@ const initialFormData: FormData = {
 export const Context = React.createContext<WrapperContext>({} as WrapperContext);
 
 const Wrapper = (props: PropsWithChildren<{}>) => {
+  const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
+  const [screenLoading, setScreenLoading] = useState<boolean>(true);
+  const [pageIsLoading, setPageIsLoading] = useState<boolean>(true);
+
+  const screenDoneLoading = () => {
+    setScreenLoading(false);
+  };
+
+  useEffect(() => {
+    if (!screenLoading && !translationsLoading) {
+      setPageIsLoading(false);
+    }
+  }, [screenLoading, translationsLoading]);
+
+  let [translations, setTranslations] = useState<{ [key: string]: Language }>({});
+
+  useEffect(() => {
+    getTranslations().then((value) => {
+      setTranslations(value);
+    });
+  }, []);
   let defaultLanguage = localStorage.getItem('language') ?? 'en-US';
-  let defaultMessages: Language = defaultLanguage === 'en-US' ? English : Spanish;
   const pathname = window.location.pathname;
 
   const [theme, setTheme, styleOverride] = useStyle('default');
 
   if (pathname.includes('/es')) {
     defaultLanguage = 'es';
-    defaultMessages = Spanish;
   } else if (pathname.includes('/vi')) {
     defaultLanguage = 'vi';
-    defaultMessages = Vietnamese;
   }
 
   const [locale, setLocale] = useState(defaultLanguage);
-  const [messages, setMessages] = useState(defaultMessages);
+  const [messages, setMessages] = useState({});
 
   useEffect(() => {
     localStorage.setItem('language', locale);
-    switch (locale) {
-      case 'en-US':
-        setMessages(English);
-        break;
-      case 'es':
-        setMessages(Spanish);
-        break;
-      case 'vi':
-        setMessages(Vietnamese);
-        break;
-      default:
-        setMessages(English);
+    if (Object.keys(translations).length > 0) {
+      setTranslationsLoading(false);
     }
-  }, [locale]);
+    for (const lang of Object.keys(translations)) {
+      if (locale.toLocaleLowerCase() === lang) {
+        setMessages(translations[lang]);
+        return;
+      }
+    }
+    setMessages(translations['en-us'] ?? {});
+  }, [locale, translations]);
 
   const selectLanguage = (event: Event) => {
     const target = event.target as HTMLInputElement;
     const newLocale = target.value;
     setLocale(newLocale);
-
-    switch (newLocale) {
-      case 'en-US':
-        setMessages(English);
-        break;
-      case 'es':
-        setMessages(Spanish);
-        break;
-      case 'vi':
-        setMessages(Vietnamese);
-        break;
-      default:
-        setMessages(English);
-    }
   };
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
@@ -150,7 +152,18 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
   return (
     <Context.Provider
-      value={{ locale, setLocale, selectLanguage, formData, setFormData, theme, setTheme, styleOverride, getReferrer }}
+      value={{
+        locale,
+        setLocale,
+        selectLanguage,
+        formData,
+        setFormData,
+        theme,
+        setTheme,
+        styleOverride,
+        pageIsLoading,
+        screenDoneLoading,
+     , getReferrer }}
     >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
         {props.children}
