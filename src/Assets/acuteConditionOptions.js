@@ -24,7 +24,7 @@ const acuteConditionOptions = {
     formattedMessage: (
       <FormattedMessage
         id="acuteConditionOptions.housing"
-        defaultMessage="Emergency help paying mortgage, rent, or utilities"
+        defaultMessage="Help with managing your mortgage, rent, or utilities"
       />
     ),
     image: home,
