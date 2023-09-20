@@ -13,7 +13,7 @@ const Radiofield = ({ componentDetails, handleRadioButtonChange, preferNotToAnsw
   const { formData } = useContext(Context);
   const { ariaLabel, inputName } = componentDetails;
   const intl = useIntl();
-  const translatedAriaLabel = intl.formatMessage({ id: ariaLabel });
+  const translatedAriaLabel = intl.formatMessage({ id: ariaLabel, defaultMessage: inputName });
 
   return (
     <div className="radiogroup-container">

@@ -20,6 +20,7 @@ import stepDirectory from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
 import { useErrorController } from './Assets/validationFunctions.tsx';
+import LoadingPage from './Components/LoadingPage/LoadingPage.tsx';
 import './App.css';
 import dataLayerPush from './Assets/analytics.ts';
 
@@ -36,8 +37,7 @@ const App = () => {
   const referrer = searchParams.get('referrer') !== null ? (searchParams.get('referrer') as string) : '';
   const referrerSource = referrer in referralOptions ? referrer : '';
   const totalSteps = Object.keys(stepDirectory).length + 2;
-  const [fetchedScreen, setFetchedScreen] = useState(false);
-  const { locale, formData, setFormData, styleOverride, setTheme: changeTheme } = useContext(Context);
+  const { locale, formData, setFormData, styleOverride, setTheme: changeTheme, pageIsLoading } = useContext(Context);
   const [theme, setTheme] = useState(createTheme(styleOverride));
 
   useEffect(() => {
@@ -227,6 +227,22 @@ const App = () => {
     navigate(`/${uuid}/step-${stepId + 1}`);
   };
 
+  if (pageIsLoading) {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Routes>
+          <Route path=":uuid">
+            <Route path="" element={<FetchScreen />} />
+            <Route path="*" element={<FetchScreen />} />
+          </Route>
+          <Route path="" element={<LoadingPage />} />
+          <Route path="*" element={<LoadingPage />} />
+        </Routes>
+      </ThemeProvider>
+    );
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
@@ -248,56 +264,38 @@ const App = () => {
             <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
             <Route path="/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
             <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
-            <Route
-              path="/step-1"
-              element={<LandingPage setFetchedScreen={setFetchedScreen} handleCheckboxChange={handleCheckboxChange} />}
-            />
+            <Route path="/step-1" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
             <Route path="results/:uuid" element={<Results />} />
             <Route path=":uuid">
-              {!fetchedScreen && (
-                <>
-                  <Route path="" element={<FetchScreen setFetchedScreen={setFetchedScreen} />} />
-                  <Route path="*" element={<FetchScreen setFetchedScreen={setFetchedScreen} />} />
-                </>
-              )}
-              {fetchedScreen && (
-                <>
-                  <Route path="" element={<Navigate to="/step-1" replace />} />
-                  <Route
-                    path="step-1"
-                    element={
-                      <LandingPage setFetchedScreen={setFetchedScreen} handleCheckboxChange={handleCheckboxChange} />
-                    }
+              <Route path="" element={<Navigate to="/step-1" replace />} />
+              <Route path="step-1" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
+              <Route
+                path={`step-${stepDirectory.householdData}/:page`}
+                element={
+                  <HouseholdDataBlock
+                    key={window.location.href}
+                    handleHouseholdDataSubmit={handleHouseholdDataSubmit}
                   />
-                  <Route
-                    path={`step-${stepDirectory.householdData}/:page`}
-                    element={
-                      <HouseholdDataBlock
-                        key={window.location.href}
-                        handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-                      />
-                    }
+                }
+              />
+              <Route
+                path="step-:id"
+                element={
+                  <QuestionComponentContainer
+                    key={window.location.href}
+                    handleTextfieldChange={handleTextfieldChange}
+                    handleContinueSubmit={handleContinueSubmit}
+                    handleRadioButtonChange={handleRadioButtonChange}
+                    handleNoAnswerChange={handleNoAnswerChange}
+                    handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
+                    handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+                    handleCheckboxChange={handleCheckboxChange}
                   />
-                  <Route
-                    path="step-:id"
-                    element={
-                      <QuestionComponentContainer
-                        key={window.location.href}
-                        handleTextfieldChange={handleTextfieldChange}
-                        handleContinueSubmit={handleContinueSubmit}
-                        handleRadioButtonChange={handleRadioButtonChange}
-                        handleNoAnswerChange={handleNoAnswerChange}
-                        handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-                        handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-                        handleCheckboxChange={handleCheckboxChange}
-                      />
-                    }
-                  />
-                  <Route path="confirm-information" element={<Confirmation />} />
-                  <Route path="results" element={<Results />} />
-                  <Route path="*" element={<Navigate to="/step-1" replace />} />
-                </>
-              )}
+                }
+              />
+              <Route path="confirm-information" element={<Confirmation />} />
+              <Route path="results" element={<Results />} />
+              <Route path="*" element={<Navigate to="/step-1" replace />} />
             </Route>
             <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
           </Routes>

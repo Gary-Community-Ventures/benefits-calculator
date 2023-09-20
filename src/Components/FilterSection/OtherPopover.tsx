@@ -1,3 +1,4 @@
+import type { ChangeEvent } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -5,14 +6,29 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
 import { FormattedMessage } from 'react-intl';
+import { UpdateFilterArg } from '../Results/Results';
 import './OtherPopover.css';
 
-const OtherPopover = ({ updateFilter, categories, categoryState, eligibilityState, alreadyHasToggleState }) => {
+type StateType<T> = [T, React.Dispatch<React.SetStateAction<T>>];
+type FilterProps = {
+  updateFilter: (...args: UpdateFilterArg[]) => void;
+  categories: { defaultMessage: string; label: string }[];
+  categoryState: StateType<string>;
+  eligibilityState: StateType<string>;
+  alreadyHasToggleState: StateType<boolean>;
+};
+const OtherPopover = ({
+  updateFilter,
+  categories,
+  categoryState,
+  eligibilityState,
+  alreadyHasToggleState,
+}: FilterProps) => {
   const [selectedCategory, setSelectedCategory] = categoryState;
   const [selectedEligibility, setSelectedEligibility] = eligibilityState;
   const [alreadyHasToggle, setAlreadyHasToggle] = alreadyHasToggleState;
 
-  const eligibilityFilterChange = (event) => {
+  const eligibilityFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
     const eligibilityFilters = {
       eligibleBenefits: {
         id: 2,
@@ -34,11 +50,12 @@ const OtherPopover = ({ updateFilter, categories, categoryState, eligibilityStat
       },
     };
 
-    setSelectedEligibility(event.target.value);
-    updateFilter({ name: 'eligible', filter: eligibilityFilters[event.target.value] });
+    const eligibilityFilterValue = event.target.value as 'eligibleBenefits' | 'ineligibleBenefits' | 'alreadyHave';
+    setSelectedEligibility(eligibilityFilterValue);
+    updateFilter({ name: 'eligible', filter: eligibilityFilters[eligibilityFilterValue] });
   };
 
-  const categoryFilterChange = (event) => {
+  const categoryFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value === 'All Categories') {
       updateFilter({ name: 'category', filter: false });
     } else {
@@ -55,7 +72,7 @@ const OtherPopover = ({ updateFilter, categories, categoryState, eligibilityStat
     setSelectedCategory(event.target.value);
   };
 
-  const handleAlreadyHasToggle = (event) => {
+  const handleAlreadyHasToggle = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       updateFilter({
         name: 'hasBenefit',
@@ -88,12 +105,12 @@ const OtherPopover = ({ updateFilter, categories, categoryState, eligibilityStat
     );
     const otherRadioOptions = categories.map((category) => {
       return (
-        <article className="radio-option" key={category}>
+        <article className="radio-option" key={category.defaultMessage}>
           <FormControlLabel
-            checked={selectedCategory === category}
-            value={category}
+            checked={selectedCategory === category.defaultMessage}
+            value={category.defaultMessage}
             control={<Radio />}
-            label={category}
+            label={<FormattedMessage defaultMessage={category.defaultMessage} id={category.label} />}
           />
         </article>
       );
