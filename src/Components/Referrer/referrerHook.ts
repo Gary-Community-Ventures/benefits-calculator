@@ -56,8 +56,8 @@ const referrerData: ReferrerData = {
 export default function useReferrer(referrerCode?: string) {
   const [referrer, setReferrer] = useState<string | undefined>(referrerCode);
 
-  function getReferrer(id: keyof ReferrerData) {
-    return referrerData[id][referrer ?? 'default'] ?? referrerData[id]['default'];
+  function getReferrer(key: keyof ReferrerData) {
+    return referrerData[key][referrer ?? 'default'] ?? referrerData[key]['default'];
   }
 
   return { getReferrer, setReferrer };
