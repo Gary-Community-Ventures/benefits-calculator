@@ -13,9 +13,8 @@ export const BrandedHeader = ({ handleTextFieldChange }: HeaderProps) => {
 
   if (formData.immutableReferrer === '211co') {
     return <TwoOneOneHeader handleTextfieldChange={handleTextFieldChange} />;
-  } else {
-    return <Header handleTextfieldChange={handleTextFieldChange} />;
   }
+  return <Header handleTextfieldChange={handleTextFieldChange} />;
 };
 
 export const BrandedFooter = () => {
@@ -23,7 +22,6 @@ export const BrandedFooter = () => {
 
   if (formData.immutableReferrer === '211co') {
     return <TwoOneOneFooter />;
-  } else {
-    return <></>;
   }
+  return <></>;
 };
