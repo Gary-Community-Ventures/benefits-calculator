@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import LinearProgress from '@mui/material/LinearProgress';
-import { getStepDirectory, startingQuestionNumer } from '../../Assets/stepDirectory';
+import { getStepDirectory, startingQuestionNumber } from '../../Assets/stepDirectory';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import './ProgressBar.css';
@@ -12,7 +12,7 @@ interface ProgressBarProps {
 
 const ProgressBar = ({ step }: ProgressBarProps) => {
   const { theme, formData } = useContext(Context);
-  const totalSteps = getStepDirectory(formData.immutableReferrer).length + startingQuestionNumer;
+  const totalSteps = getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber;
   const { id } = useParams();
   let stepValue: number = 0;
   if (step !== undefined) {

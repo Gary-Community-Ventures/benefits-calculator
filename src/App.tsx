@@ -13,7 +13,7 @@ import ProgressBar from './Components/ProgressBar/ProgressBar';
 import referralOptions from './Assets/referralOptions';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
 import { updateScreen, updateUser } from './Assets/updateScreen';
-import { getStepDirectory, startingQuestionNumer, getStepNumber } from './Assets/stepDirectory';
+import { getStepDirectory, startingQuestionNumber, getStepNumber } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
 import { useErrorController } from './Assets/validationFunctions.tsx';
@@ -43,14 +43,12 @@ const App = () => {
     pageIsLoading,
     getReferrer,
   } = useContext(Context);
-  const [totalSteps, setTotalSteps] = useState(
-    getStepDirectory(formData.immutableReferrer).length + startingQuestionNumer,
-  );
+  const [totalSteps, setTotalSteps] = useState(getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber);
   const [theme, setTheme] = useState(createTheme(styleOverride));
 
   useEffect(() => {
     changeTheme(getReferrer('theme'));
-    setTotalSteps(getStepDirectory(formData.immutableReferrer).length + startingQuestionNumer);
+    setTotalSteps(getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber)
   }, [formData.immutableReferrer]);
 
   useEffect(() => {

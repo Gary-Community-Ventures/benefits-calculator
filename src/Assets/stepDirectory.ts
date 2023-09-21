@@ -1,6 +1,6 @@
 import questions, { type QuestionNames } from './questions';
 
-export const startingQuestionNumer = 2;
+export const startingQuestionNumber = 2;
 const defaultStepDirectory: QuestionNames[] = [
   'zipcode',
   'healthInsurance',
@@ -42,10 +42,10 @@ export function getStepNumber(name: QuestionNames, referrer: string | undefined)
     throw new Error('Step does not exist for this referrer');
   }
 
-  return stepNumber + startingQuestionNumer;
+  return stepNumber + startingQuestionNumber;
 }
 
 export function getQuestion(stepNumber: number, referrer: string | undefined) {
-  const stepName = getStepDirectory(referrer)[stepNumber - startingQuestionNumer];
+  const stepName = getStepDirectory(referrer)[stepNumber - startingQuestionNumber];
   return questions[stepName];
 }
