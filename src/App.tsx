@@ -43,12 +43,14 @@ const App = () => {
     pageIsLoading,
     getReferrer,
   } = useContext(Context);
-  const [totalSteps, setTotalSteps] = useState(getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber);
+  const [totalSteps, setTotalSteps] = useState(
+    getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber,
+  );
   const [theme, setTheme] = useState(createTheme(styleOverride));
 
   useEffect(() => {
     changeTheme(getReferrer('theme'));
-    setTotalSteps(getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber)
+    setTotalSteps(getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber);
   }, [formData.immutableReferrer]);
 
   useEffect(() => {
