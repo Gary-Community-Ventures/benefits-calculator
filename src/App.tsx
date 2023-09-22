@@ -49,7 +49,10 @@ const App = () => {
   const [theme, setTheme] = useState(createTheme(styleOverride));
 
   useEffect(() => {
-    changeTheme(getReferrer('theme'));
+    changeTheme(getReferrer('theme') as 'default' | 'twoOneOne');
+  }, [getReferrer('theme')]);
+
+  useEffect(() => {
     setTotalSteps(getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber);
   }, [formData.immutableReferrer]);
 
