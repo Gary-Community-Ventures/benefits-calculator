@@ -12,6 +12,7 @@ import { getTranslations } from '../../apiCalls';
 const initialFormData: FormData = {
   isTest: undefined,
   externalID: undefined,
+  language: 'en-us',
   agreeToTermsOfService: false,
   is13OrOlder: false,
   zipcode: '',
