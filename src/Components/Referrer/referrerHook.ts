@@ -21,7 +21,7 @@ export type ReferrerData = {
 const referrerData: ReferrerData = {
   theme: {
     default: 'default',
-    '221co': '211co',
+    '211co': 'twoOneOne',
   },
   logoSource: {
     default: MFBLogo,
