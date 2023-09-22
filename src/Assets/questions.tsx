@@ -21,7 +21,7 @@ import referralOptions from './referralOptions.tsx';
 import countiesByZipcode from './countiesByZipcode.js';
 import signUpOptions from './signUpOptions.js';
 import healthInsuranceOptions from './healthInsuranceOptions.js';
-import acuteConditionOptions from './acuteConditionOptions.js';
+import acuteConditionOptions from './acuteConditionOptions';
 import { FormattedMessage } from 'react-intl';
 
 export type QuestionNames =
