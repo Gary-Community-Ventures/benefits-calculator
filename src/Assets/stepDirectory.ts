@@ -24,6 +24,7 @@ const referrerStepDirectory: QuestionNames[] = [
   'householdAssets',
   'hasBenefits',
   'acuteHHConditions',
+  'referralSource',
   'signUpInfo',
 ];
 
