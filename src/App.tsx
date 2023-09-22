@@ -7,24 +7,21 @@ import FetchScreen from './Components/FetchScreen/FetchScreen';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
-import Header from './Components/Header/Header';
-import TwoOneOneHeader from './Components/TwoOneOneComponents/TwoOneOneHeader/TwoOneOneHeader';
 import LandingPage from './Components/LandingPage/LandingPage';
 import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlock.js';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
-import TwoOneOneFooter from './Components/TwoOneOneComponents/TwoOneOneFooter/TwoOneOneFooter';
 import referralOptions from './Assets/referralOptions';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
 import LoadingPage from './Components/LoadingPage/LoadingPage.tsx';
 import SelectLanguagePage from './Components/SelectLanguagePage/SelectLanguagePage.tsx';
-import stepDirectory from './Assets/stepDirectory';
 import { updateScreen, updateUser } from './Assets/updateScreen';
+import { getStepDirectory, startingQuestionNumber, getStepNumber } from './Assets/stepDirectory';
+import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
+import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx';
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
-import Box from '@mui/material/Box';
 import './App.css';
-
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
 const App = () => {
@@ -37,13 +34,26 @@ const App = () => {
   const externalId = rawExternalId !== null ? rawExternalId : undefined;
   const referrer = searchParams.get('referrer') !== null ? (searchParams.get('referrer') as string) : '';
   const referrerSource = referrer in referralOptions ? referrer : '';
-  const totalSteps = Object.keys(stepDirectory).length + 2;
-  const { locale, formData, setFormData, styleOverride, setTheme: changeTheme, pageIsLoading } = useContext(Context);
+  const {
+    locale,
+    formData,
+    setFormData,
+    styleOverride,
+    setTheme: changeTheme,
+    pageIsLoading,
+    getReferrer,
+  } = useContext(Context);
+  const [totalSteps, setTotalSteps] = useState(
+    getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber,
+  );
   const [theme, setTheme] = useState(createTheme(styleOverride));
 
   useEffect(() => {
-    const theme = formData.immutableReferrer === '211co' ? 'twoOneOne' : 'default';
-    changeTheme(theme);
+    changeTheme(getReferrer('theme') as 'default' | 'twoOneOne');
+  }, [getReferrer('theme')]);
+
+  useEffect(() => {
+    setTotalSteps(getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber);
   }, [formData.immutableReferrer]);
 
   useEffect(() => {
@@ -242,70 +252,65 @@ const App = () => {
         </Routes>
       </ThemeProvider>
     );
-  } else {
-    return (
-      <ThemeProvider theme={theme}>
-        <div className="App">
-          <CssBaseline />
-          {formData.immutableReferrer === '211co' ? (
-            <TwoOneOneHeader handleTextfieldChange={handleTextfieldChange} />
-          ) : (
-            <Header handleTextfieldChange={handleTextfieldChange} />
-          )}
-          <Box className="main-max-width">
-            <Routes>
-              <Route path="/step-1" element={<ProgressBar step={1} />} />
-              <Route path="/:uuid/step-:id" element={<ProgressBar />} />
-              <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
-              <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
-              <Route path="*" element={<></>} />
-            </Routes>
-            <Routes>
-              <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
-              <Route path="/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
-              <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
-              <Route path="/step-0" element={<SelectLanguagePage />} />
-              <Route path="/step-1" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
-              <Route path="results/:uuid" element={<Results />} />
-              <Route path=":uuid">
-                <Route path="" element={<Navigate to="/step-1" replace />} />
-                <Route path="step-1" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
-                <Route
-                  path={`step-${stepDirectory.householdData}/:page`}
-                  element={
-                    <HouseholdDataBlock
-                      key={window.location.href}
-                      handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-                    />
-                  }
-                />
-                <Route
-                  path="step-:id"
-                  element={
-                    <QuestionComponentContainer
-                      key={window.location.href}
-                      handleTextfieldChange={handleTextfieldChange}
-                      handleContinueSubmit={handleContinueSubmit}
-                      handleRadioButtonChange={handleRadioButtonChange}
-                      handleNoAnswerChange={handleNoAnswerChange}
-                      handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-                      handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-                      handleCheckboxChange={handleCheckboxChange}
-                    />
-                  }
-                />
-                <Route path="confirm-information" element={<Confirmation />} />
-                <Route path="results" element={<Results />} />
-                <Route path="*" element={<Navigate to="/step-1" replace />} />
-              </Route>
-              <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
-            </Routes>
-          </Box>
-          {formData.immutableReferrer === '211co' && <TwoOneOneFooter />}
-        </div>
-      </ThemeProvider>
-    );
   }
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <CssBaseline />
+        <BrandedHeader handleTextFieldChange={handleTextfieldChange} />
+        <Box className="main-max-width">
+          <Routes>
+            <Route path="/step-1" element={<ProgressBar step={1} />} />
+            <Route path="/:uuid/step-:id" element={<ProgressBar />} />
+            <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
+            <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
+            <Route path="*" element={<></>} />
+          </Routes>
+          <Routes>
+            <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
+            <Route path="/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
+            <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
+            <Route path="/step-1" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
+            <Route path="results/:uuid" element={<Results />} />
+            <Route path=":uuid">
+              <Route path="" element={<Navigate to="/step-1" replace />} />
+              <Route path="step-1" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
+              <Route
+                path={`step-${getStepNumber('householdData', formData.immutableReferrer)}/:page`}
+                element={
+                  <HouseholdDataBlock
+                    key={window.location.href}
+                    handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+                  />
+                }
+              />
+              <Route
+                path="step-:id"
+                element={
+                  <QuestionComponentContainer
+                    key={window.location.href}
+                    handleTextfieldChange={handleTextfieldChange}
+                    handleContinueSubmit={handleContinueSubmit}
+                    handleRadioButtonChange={handleRadioButtonChange}
+                    handleNoAnswerChange={handleNoAnswerChange}
+                    handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
+                    handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+                    handleCheckboxChange={handleCheckboxChange}
+                  />
+                }
+              />
+              <Route path="confirm-information" element={<Confirmation />} />
+              <Route path="results" element={<Results />} />
+              <Route path="*" element={<Navigate to="/step-1" replace />} />
+            </Route>
+            <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
+          </Routes>
+        </Box>
+        <BrandedFooter />
+      </div>
+    </ThemeProvider>
+  );
 };
 
 export default App;

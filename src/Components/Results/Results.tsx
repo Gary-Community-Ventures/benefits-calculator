@@ -2,15 +2,7 @@ import { useEffect, useState, useContext, KeyboardEvent, MouseEvent } from 'reac
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import {
-  Button,
-  Link,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  typographyClasses,
-} from '@mui/material';
+import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails, IconButton } from '@mui/material';
 import FilterSection from '../FilterSection/FilterSection';
 import ResultsError from '../ResultsError/ResultsError.js';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
@@ -18,6 +10,8 @@ import Loading from '../Loading/Loading.js';
 import NoResultsTable from '../NoResultsTable/NoResultsTable.tsx';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import Grid from '@mui/material/Grid';
 import {
   DataGridPro,
@@ -28,6 +22,7 @@ import {
   GridRenderCellParams,
   GridValueFormatterParams,
   GridFilterItem,
+  GridAlignment,
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -414,7 +409,7 @@ const Results = () => {
   };
 
   const CustomGridTreeDataGroupingCell = (props: GridRenderCellParams<DataRow>) => {
-    const { id, field, rowNode } = props;
+    const { id, rowNode } = props;
     const apiRef = useGridApiContext();
     const filteredDescendantCountLookup = useGridSelector(apiRef, gridFilteredDescendantCountLookupSelector);
     const [navListOpen, setNavListOpen] = useState(false);
@@ -422,33 +417,17 @@ const Results = () => {
       setNavListOpen(!navListOpen);
     };
 
-    const handleKeyDown = (event: KeyboardEvent<HTMLAnchorElement>) => {
-      if (event.key === ' ') {
-        event.stopPropagation();
-      }
-      if (isNavigationKey(event.key) && !event.shiftKey) {
-        apiRef.current.publishEvent('cellNavigationKeyDown', props, event);
-      }
-    };
-
-    const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-      apiRef.current.setRowChildrenExpansion(id, !rowNode.childrenExpanded);
-      apiRef.current.setCellFocus(id, field);
-      event.stopPropagation();
-    };
-
     let row = apiRef.current.getRow<DataRow>(id);
     if (row === null) {
       return <></>;
     }
+
     const filteredDescendantCount = filteredDescendantCountLookup[rowNode.id] ?? 0;
 
     return (
       <div>
         {filteredDescendantCount > 0 ? (
-          <Link onClick={handleClick} onKeyDown={handleKeyDown} tabIndex={-1}>
-            <FormattedMessage defaultMessage={row.name.default_message} id={row.name.label} />
-          </Link>
+          <FormattedMessage defaultMessage={row.name.default_message} id={row.name.label} />
         ) : (
           <Box sx={{ padding: 1 }}>
             <Typography variant="body1" gutterBottom>
@@ -578,6 +557,15 @@ const Results = () => {
       { field: 'eligible', headerName: 'Eligible', flex: 1, type: 'boolean' },
       { field: 'has_benefit', headerName: 'Has Benefit', flex: 1, type: 'boolean' },
       { field: 'category', headerName: 'Category', flex: 1 },
+      {
+        field: 'toggle',
+        headerName: '',
+        flex: 0.15,
+        align: 'right' as GridAlignment,
+        renderCell: (params: GridRenderCellParams) => (
+          <CustomDetailPanelToggle {...params} id={params.id} field={params.field} rowNode={params.rowNode} />
+        ),
+      },
     ];
 
     const categories = programs.reduce((acc: { defaultMessage: string; label: string }[], benefit) => {
@@ -586,6 +574,39 @@ const Results = () => {
       }
       return acc;
     }, []);
+
+    const CustomDetailPanelToggle = (props: GridRenderCellParams) => {
+      const { id, field, rowNode } = props;
+      const apiRef = useGridApiContext();
+
+      const handleKeyDown = (event: KeyboardEvent<HTMLAnchorElement>) => {
+        if (event.key === ' ') {
+          event.stopPropagation();
+        }
+        if (isNavigationKey(event.key) && !event.shiftKey) {
+          apiRef.current.publishEvent('cellNavigationKeyDown', props, event);
+        }
+      };
+
+      const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+        apiRef.current.setRowChildrenExpansion(id, !rowNode.childrenExpanded);
+        apiRef.current.setCellFocus(id, field);
+        event.stopPropagation();
+      };
+
+      return (
+        // @ts-ignore
+        <IconButton
+          color="primary"
+          tabIndex={0}
+          aria-label={rowNode.childrenExpanded ? 'Close' : 'Open'}
+          onClick={handleClick}
+          onKeyDown={handleKeyDown}
+        >
+          {rowNode.childrenExpanded ? <RemoveIcon /> : <AddIcon />}
+        </IconButton>
+      );
+    };
 
     return (
       <>
