@@ -1,13 +1,11 @@
 import React, { useEffect, useState, PropsWithChildren } from 'react';
 import useStyle from '../../Assets/styleController';
 import { IntlProvider } from 'react-intl';
-import Spanish from '../../Assets/Languages/Spanish.json';
-import English from '../../Assets/Languages/English.json';
-import Vietnamese from '../../Assets/Languages/Vietnamese.json';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { Language } from '../../Types/Language';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
+import useReferrer from '../Referrer/referrerHook';
 
 const initialFormData: FormData = {
   isTest: undefined,
@@ -143,6 +141,11 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   };
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
+  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer);
+
+  useEffect(() => {
+    setReferrer(formData.immutableReferrer);
+  }, [formData.immutableReferrer]);
 
   return (
     <Context.Provider
@@ -157,6 +160,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         styleOverride,
         pageIsLoading,
         screenDoneLoading,
+        getReferrer,
       }}
     >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>

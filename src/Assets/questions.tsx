@@ -9,7 +9,6 @@ import {
   benefitsHasError,
   selectHasError,
   displayReferralSourceHelperText,
-  displayMissingSelectHelperText,
   signUpOptionsHaveError,
   healthInsuranceHasError,
   acuteHHConditionsHasError,
@@ -18,16 +17,27 @@ import {
   countySelectHelperText,
   otherReferalSourceHelperText,
 } from './validationFunctions.tsx';
-import referralOptions from './referralOptions';
-import countiesByZipcode from './countiesByZipcode';
-import signUpOptions from './signUpOptions';
-import healthInsuranceOptions from './healthInsuranceOptions';
-import acuteConditionOptions from './acuteConditionOptions';
-import stepDirectory from './stepDirectory';
+import referralOptions from './referralOptions.tsx';
+import countiesByZipcode from './countiesByZipcode.js';
+import signUpOptions from './signUpOptions.js';
+import healthInsuranceOptions from './healthInsuranceOptions.js';
+import acuteConditionOptions from './acuteConditionOptions.js';
 import { FormattedMessage } from 'react-intl';
 
+export type QuestionNames =
+  | 'zipcode'
+  | 'healthInsurance'
+  | 'householdSize'
+  | 'householdData'
+  | 'hasExpenses'
+  | 'householdAssets'
+  | 'hasBenefits'
+  | 'acuteHHConditions'
+  | 'referralSource'
+  | 'signUpInfo';
+
 const questions = {
-  [stepDirectory.zipcode]: {
+  zipcode: {
     name: 'zipcode',
     question: <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />,
     componentDetails: {
@@ -65,7 +75,7 @@ const questions = {
     ],
     headerType: 'aboutHousehold',
   },
-  [stepDirectory.healthInsurance]: {
+  healthInsurance: {
     name: 'healthInsurance',
     question: (
       <FormattedMessage
@@ -82,7 +92,7 @@ const questions = {
     },
     headerType: 'aboutHousehold',
   },
-  [stepDirectory.householdSize]: {
+  householdSize: {
     name: 'householdSize',
     question: (
       <FormattedMessage
@@ -106,7 +116,7 @@ const questions = {
     },
     headerType: 'aboutHousehold',
   },
-  [stepDirectory.householdData]: {
+  householdData: {
     name: 'householdData',
     componentDetails: {
       componentType: 'HouseholdDataBlock',
@@ -114,7 +124,7 @@ const questions = {
       inputName: 'householdData',
     },
   },
-  [stepDirectory.hasExpenses]: {
+  hasExpenses: {
     name: 'hasExpenses',
     question: <FormattedMessage id="questions.hasExpenses" defaultMessage="Does your household have any expenses?" />,
     questionDescription: (
@@ -149,7 +159,7 @@ const questions = {
     ],
     headerType: 'aboutHousehold',
   },
-  [stepDirectory.householdAssets]: {
+  householdAssets: {
     name: 'householdAssets',
     question: (
       <FormattedMessage
@@ -173,7 +183,7 @@ const questions = {
     },
     headerType: 'aboutHousehold',
   },
-  [stepDirectory.hasBenefits]: {
+  hasBenefits: {
     name: 'hasBenefits',
     question: (
       <FormattedMessage id="questions.hasBenefits" defaultMessage="Does your household currently have any benefits?" />
@@ -211,7 +221,7 @@ const questions = {
     ],
     headerType: 'aboutHousehold',
   },
-  [stepDirectory.acuteHHConditions]: {
+  acuteHHConditions: {
     name: 'acuteHHConditions',
     question: (
       <FormattedMessage
@@ -227,7 +237,7 @@ const questions = {
     },
     headerType: 'aboutHousehold',
   },
-  [stepDirectory.referralSource]: {
+  referralSource: {
     name: 'referralSource',
     componentDetails: {
       componentType: 'BasicSelect',
@@ -267,7 +277,7 @@ const questions = {
     ],
     headerType: 'aboutHousehold',
   },
-  [stepDirectory.signUpInfo]: {
+  signUpInfo: {
     name: 'signUpInfo',
     question: (
       <FormattedMessage id="questions.signUpInfo" defaultMessage="What would you like us to contact you about?" />

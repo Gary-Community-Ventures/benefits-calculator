@@ -16,7 +16,7 @@ import housingAndUtilities from '../../Assets/BenefitCategoryLists/housingAndUti
 import transportationBenefits from '../../Assets/BenefitCategoryLists/transportationBenefits';
 import healthCareBenefits from '../../Assets/BenefitCategoryLists/healthCareBenefits';
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/taxCreditBenefits';
-import stepDirectory from '../../Assets/stepDirectory';
+import { getStepDirectory, getStepNumber, startingQuestionNumber } from '../../Assets/stepDirectory';
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Grid from '@mui/material/Grid';
@@ -37,6 +37,12 @@ const Confirmation = () => {
   const { uuid } = useParams();
   const navigate = useNavigate();
   const intl = useIntl();
+
+  const getQuestionUrl = (name) => {
+    const stepNumber = getStepNumber(name, formData.immutableReferrer);
+
+    return `/${uuid}/step-${stepNumber}`;
+  };
 
   useEffect(() => {
     const continueOnEnter = (event) => {
@@ -93,7 +99,7 @@ const Confirmation = () => {
             <Grid item xs={2} display="flex" justifyContent="flex-end">
               <button
                 aria-label="edit household member"
-                onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdData}/${i + 1}`)}
+                onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`)}
               >
                 <EditIcon className="edit-icon" />
               </button>
@@ -129,7 +135,7 @@ const Confirmation = () => {
           )}
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label="edit expenses" onClick={() => navigate(`/${uuid}/step-${stepDirectory.hasExpenses}`)}>
+          <button aria-label="edit expenses" onClick={() => navigate(getQuestionUrl('hasExpenses'))}>
             <EditIcon className="edit-icon" />
           </button>
         </Grid>
@@ -227,7 +233,7 @@ const Confirmation = () => {
       ) : (
         <FormattedMessage id="confirmation.displayAllFormData-peopleLabel" defaultMessage="people" />
       );
-    const linkTo = `/${uuid}/step-${stepDirectory.householdSize}`;
+    const linkTo = getQuestionUrl('householdSize');
 
     return (
       <Grid container spacing={1}>
@@ -283,32 +289,11 @@ const Confirmation = () => {
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button
-            aria-label="edit household assets"
-            onClick={() => navigate(`/${uuid}/step-${stepDirectory.householdAssets}`)}
-          >
+          <button aria-label="edit household assets" onClick={() => navigate(getQuestionUrl('householdAssets'))}>
             <EditIcon className="edit-icon" />
           </button>
         </Grid>
       </Grid>
-    );
-  };
-
-  const displayLastTaxFilingYearSection = () => {
-    const { lastTaxFilingYear } = formData;
-    return (
-      <article className="confirmation-label">
-        <b>
-          <FormattedMessage
-            id="confirmation.displayAllFormData-lastTaxFilingYear"
-            defaultMessage="Last Tax Filing Year: "
-          />
-        </b>
-        {taxYearOptions[lastTaxFilingYear]}
-        <Link to={`/${uuid}/step-${stepDirectory.lastTaxFilingYear}`} className="edit-link">
-          <FormattedMessage id="confirmation.editLinkText" defaultMessage="Edit" />
-        </Link>
-      </article>
     );
   };
 
@@ -337,7 +322,7 @@ const Confirmation = () => {
           </p>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label="edit zipcode" onClick={() => navigate(`/${uuid}/step-${stepDirectory.zipcode}`)}>
+          <button aria-label="edit zipcode" onClick={() => navigate(getQuestionUrl('zipcode'))}>
             <EditIcon className="edit-icon" />
           </button>
         </Grid>
@@ -350,29 +335,33 @@ const Confirmation = () => {
     const referralSourceLabel = referralOptions[referralSource];
     const finalReferralSource = referralSource !== 'other' ? referralSourceLabel : otherSource;
 
+    if (formData.immutableReferrer) {
+      return <></>;
+    }
+
     return (
-      <Grid container spacing={1}>
-        <Grid item xs={2}>
-          <ConnectWithoutContactIcon className="home-icon flip-horizontally" />
+      <>
+        <p className="confirmation-section-underline"></p>
+        <Grid container spacing={1}>
+          <Grid item xs={2}>
+            <ConnectWithoutContactIcon className="home-icon flip-horizontally" />
+          </Grid>
+          <Grid item xs={8}>
+            <p className="section-title">
+              <FormattedMessage
+                id="confirmation.displayAllFormData-referralSourceText"
+                defaultMessage="Referral Source"
+              />
+            </p>
+            <article className="section-p">{finalReferralSource}</article>
+          </Grid>
+          <Grid item xs={2} display="flex" justifyContent="flex-end">
+            <button aria-label="edit referral source" onClick={() => navigate(getQuestionUrl('referralSource'))}>
+              <EditIcon className="edit-icon" />
+            </button>
+          </Grid>
         </Grid>
-        <Grid item xs={8}>
-          <p className="section-title">
-            <FormattedMessage
-              id="confirmation.displayAllFormData-referralSourceText"
-              defaultMessage="Referral Source"
-            />
-          </p>
-          <article className="section-p">{finalReferralSource}</article>
-        </Grid>
-        <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button
-            aria-label="edit referral source"
-            onClick={() => navigate(`/${uuid}/step-${stepDirectory.referralSource}`)}
-          >
-            <EditIcon className="edit-icon" />
-          </button>
-        </Grid>
-      </Grid>
+      </>
     );
   };
 
@@ -402,7 +391,7 @@ const Confirmation = () => {
           'healthInsurance',
           'confirmation.displayAllFormData-healthInsurance',
           'Household Insurance',
-          `/${uuid}/step-${stepDirectory.healthInsurance}`,
+          getQuestionUrl('healthInsurance'),
           refactorOptionsList(healthInsuranceOptions),
           <MedicalServicesIcon className="home-icon" />,
           'edit health insurance',
@@ -419,7 +408,7 @@ const Confirmation = () => {
           'benefits',
           'confirmation.displayAllFormData-currentHHBenefitsText',
           'Current Household Benefits:',
-          `/${uuid}/step-${stepDirectory.hasBenefits}`,
+          getQuestionUrl('hasBenefits'),
           allBenefitsList,
           <ChecklistIcon className="home-icon" />,
           'edit current benefits',
@@ -429,11 +418,10 @@ const Confirmation = () => {
           'acuteHHConditions',
           'confirmation.displayAllFormData-acuteHHConditions',
           'Immediate Needs',
-          `/${uuid}/step-${stepDirectory.acuteHHConditions}`,
+          getQuestionUrl('acuteHHConditions'),
           refactorOptionsList(acuteConditionOptions),
           <FoodBankIcon className="home-icon" />,
         )}
-        <p className="confirmation-section-underline"></p>
         {displayReferralSourceSection()}
       </>
     );
@@ -577,7 +565,7 @@ const Confirmation = () => {
   };
 
   const totalNumberOfQuestions = () => {
-    return Object.keys(stepDirectory).length + 2;
+    return getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber;
   };
 
   return (

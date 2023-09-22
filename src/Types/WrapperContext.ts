@@ -1,5 +1,6 @@
 import { FormData } from './FormData';
 import { ITheme } from '../Assets/styleController';
+import { ReferrerData } from '../Components/Referrer/referrerHook';
 
 export interface WrapperContext {
   locale: string;
@@ -12,4 +13,5 @@ export interface WrapperContext {
   styleOverride: any;
   pageIsLoading: boolean;
   screenDoneLoading: () => void;
+  getReferrer: (id: keyof ReferrerData) => string;
 }

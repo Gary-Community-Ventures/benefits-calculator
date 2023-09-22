@@ -14,13 +14,11 @@ import {
   getPersonDataErrorMsg,
   personDataIsValid,
   useErrorController,
-  ageHasError,
-  displayAgeHelperText,
   selectHasError,
   relationTypeHelperText,
 } from '../../Assets/validationFunctions.tsx';
 import { FormattedMessage } from 'react-intl';
-import stepDirectory from '../../Assets/stepDirectory';
+import { getStepNumber } from '../../Assets/stepDirectory';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import './HouseholdDataBlock.css';
@@ -31,7 +29,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const remainingHHMNumber = Number(householdSize);
   let { uuid, page } = useParams();
   page = parseInt(page);
-  const step = stepDirectory.householdData;
+  const step = getStepNumber('householdData');
   const navigate = useNavigate();
   const setPage = (page) => {
     navigate(`/${uuid}/step-${step}/${page}`);
