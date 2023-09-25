@@ -49,10 +49,6 @@ const Header = ({ handleTextfieldChange }) => {
     setIsLanguageSelectOpen(true);
   };
 
-  const handleLanguageChange = (event) => {
-    context.selectLanguage(event);
-  };
-
   const setRenderValue = () => {
     const currentLocale = context.locale;
     switch (currentLocale) {
@@ -80,7 +76,7 @@ const Header = ({ handleTextfieldChange }) => {
               id="select-language"
               value={context.locale}
               label="Language"
-              onChange={handleLanguageChange}
+              onChange={(event) => context.selectLanguage(event)}
               aria-label="select a language"
               variant="standard"
               disableUnderline={true}
