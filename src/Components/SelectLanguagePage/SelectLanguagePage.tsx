@@ -30,20 +30,28 @@ const SelectLanguagePage = () => {
   };
 
   return (
-    <FormControl>
-      <InputLabel id="language-select-label">
-        <FormattedMessage id="selectLang.text" defaultMessage="Language" />
-      </InputLabel>
-      <Select
-        labelId="language-select-label"
-        id="language-select"
-        value={context.locale}
-        label={<FormattedMessage id="selectLang.text" defaultMessage="Language" />}
-        onChange={(event: SelectChangeEvent<string>) => context.selectLanguage(event)}
-      >
-        {createMenuItems(languageOptions, 'selectLang.disabledSelectMenuItemText', 'Select a language')}
-      </Select>
-    </FormControl>
+    <main className="benefits-form">
+      <h1 className="sub-header">
+        <FormattedMessage
+          id="selectLanguage.header"
+          defaultMessage="Before you begin, what is your preferred language?"
+        />
+      </h1>
+      <FormControl>
+        <InputLabel id="language-select-label">
+          <FormattedMessage id="selectLang.text" defaultMessage="Language" />
+        </InputLabel>
+        <Select
+          labelId="language-select-label"
+          id="language-select"
+          value={context.locale}
+          label={<FormattedMessage id="selectLang.text" defaultMessage="Language" />}
+          onChange={(event: SelectChangeEvent<string>) => context.selectLanguage(event)}
+        >
+          {createMenuItems(languageOptions, 'selectLang.disabledSelectMenuItemText', 'Select a language')}
+        </Select>
+      </FormControl>
+    </main>
   );
 }
 
