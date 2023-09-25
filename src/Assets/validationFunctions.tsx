@@ -530,20 +530,6 @@ const displayAgreeToTermsErrorMessage: MessageFunction<null> = () => {
   );
 };
 
-const languageSelectHasError: ValidationFunction<string> = (language) => {
-  return !language;
-}
-
-const displayLanguageHasErrorText: MessageFunction<string> = (language) => {
-  if (languageSelectHasError(language)) {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="validation-helperText.language" defaultMessage="Please select a language." />
-      </ErrorMessageWrapper>
-    );
-  }
-};
-
 export {
   useErrorController,
   ageHasError,
@@ -594,6 +580,4 @@ export {
   otherReferalSourceHelperText,
   termsOfServiceHasError,
   displayAgreeToTermsErrorMessage,
-  languageSelectHasError,
-  displayLanguageHasErrorText,
 };
