@@ -3,7 +3,7 @@ import { ITheme } from '../Assets/styleController';
 import { ReferrerData } from '../Components/Referrer/referrerHook';
 
 export interface WrapperContext {
-  locale: string;
+  locale: string; 
   setLocale: (locale: string) => void;
   selectLanguage: (event: Event) => void;
   formData: FormData;

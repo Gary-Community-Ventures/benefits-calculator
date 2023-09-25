@@ -10,7 +10,6 @@ import useReferrer from '../Referrer/referrerHook';
 const initialFormData: FormData = {
   isTest: undefined,
   externalID: undefined,
-  language: 'en-us',
   agreeToTermsOfService: false,
   is13OrOlder: false,
   zipcode: '',
@@ -107,7 +106,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
       setTranslations(value);
     });
   }, []);
-  let defaultLanguage = localStorage.getItem('language') ?? 'en-US';
+  let defaultLanguage = localStorage.getItem('language') ?? 'en-us';
   const pathname = window.location.pathname;
 
   const [theme, setTheme, styleOverride] = useStyle('default');
