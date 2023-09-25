@@ -268,14 +268,14 @@ const App = () => {
             <Route path="*" element={<></>} />
           </Routes>
           <Routes>
-            <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
+            <Route path="/" element={<Navigate to={`/step-0${urlSearchParams}`} replace />} />
             <Route path="/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
             <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
             <Route path="/step-0" element={<SelectLanguagePage />} />
             <Route path="/step-1" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
             <Route path="results/:uuid" element={<Results />} />
             <Route path=":uuid">
-              <Route path="" element={<Navigate to="/step-1" replace />} />
+              <Route path="" element={<Navigate to="/step-0" replace />} />
               <Route path="step-1" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
               <Route
                 path={`step-${getStepNumber('householdData', formData.immutableReferrer)}/:page`}
@@ -303,9 +303,9 @@ const App = () => {
               />
               <Route path="confirm-information" element={<Confirmation />} />
               <Route path="results" element={<Results />} />
-              <Route path="*" element={<Navigate to="/step-1" replace />} />
+              <Route path="*" element={<Navigate to="/step-0" replace />} />
             </Route>
-            <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
+            <Route path="*" element={<Navigate to={`/step-0${urlSearchParams}`} replace />} />
           </Routes>
         </Box>
         <BrandedFooter />
