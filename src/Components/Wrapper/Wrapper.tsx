@@ -6,6 +6,7 @@ import { Language } from '../../Types/Language';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
+import languageOptions from '../../Assets/languageOptions';
 
 const initialFormData: FormData = {
   isTest: undefined,
@@ -111,11 +112,11 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
   const [theme, setTheme, styleOverride] = useStyle('default');
 
-  if (pathname.includes('/es')) {
-    defaultLanguage = 'es';
-  } else if (pathname.includes('/vi')) {
-    defaultLanguage = 'vi';
-  }
+  Object.keys(languageOptions).forEach((key) => {
+    if (pathname.includes(`/${key}`)) {
+      defaultLanguage = key;
+    }
+  });
 
   const [locale, setLocale] = useState(defaultLanguage);
   const [messages, setMessages] = useState({});
