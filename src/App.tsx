@@ -271,6 +271,7 @@ const App = () => {
             <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
             <Route path="/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
             <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
+            <Route path="/step-0" element={<SelectLanguagePage />} />
             <Route path="/step-1" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
             <Route path="results/:uuid" element={<Results />} />
             <Route path=":uuid">
