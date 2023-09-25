@@ -7,6 +7,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Share from '../Share/Share';
 import EmailResults from '../EmailResults/EmailResults';
+import languageOptions from '../../Assets/languageOptions.tsx';
 import Paper from '@mui/material/Paper';
 import './Header.css';
 
@@ -63,6 +64,21 @@ const Header = ({ handleTextfieldChange }) => {
     }
   };
 
+  const createMenuItems = (optionList) => {
+    const menuItemKeys = Object.keys(optionList);
+    const menuItemLabels = Object.values(optionList);
+
+    const dropdownMenuItems = menuItemKeys.map((option, i) => {
+      return (
+        <MenuItem value={option} key={option}>
+          {menuItemLabels[i]}
+        </MenuItem>
+      );
+    });
+
+    return dropdownMenuItems;
+  };
+
   return (
     <nav>
       <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#2A2B2A' }} square={true}>
@@ -87,9 +103,7 @@ const Header = ({ handleTextfieldChange }) => {
               renderValue={() => setRenderValue()}
               sx={{ '& .MuiSvgIcon-root': { right: '1.5rem', color: '#FFFFFF' } }}
             >
-              <MenuItem value="en-US">English</MenuItem>
-              <MenuItem value="es">Español</MenuItem>
-              <MenuItem value="vi">Tiếng Việt</MenuItem>
+              {createMenuItems(languageOptions, 'selectLang.disabledSelectMenuItemText', 'Select a language')}
             </Select>
             <button className="icon-container" onClick={handleOpenShare} aria-label="share button">
               <ShareIcon role="img" />
