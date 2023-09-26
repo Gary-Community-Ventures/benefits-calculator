@@ -8,6 +8,8 @@ import languageOptions from '../../Assets/languageOptions.tsx';
 
 const SelectLanguagePage = () => {
   const context = useContext(Context);
+  const { formData } = context;
+  const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const navigate = useNavigate();
 
   const createMenuItems = (optionList:Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
@@ -65,7 +67,7 @@ const SelectLanguagePage = () => {
         </Select>
       </FormControl>
       <Box sx={{ mt: '1rem' }}>
-        <Button variant="contained" onClick={() => navigate('/step-1')}>
+        <Button variant="contained" onClick={() => navigate(`/step-2${queryString}`)}>
           <FormattedMessage id="continueButton" defaultMessage="Continue" />
         </Button>
       </Box>
