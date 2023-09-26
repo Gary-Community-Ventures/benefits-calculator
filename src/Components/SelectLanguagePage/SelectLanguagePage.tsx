@@ -1,5 +1,5 @@
 
-import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent, Button } from "@mui/material";
+import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent, Button, Box } from "@mui/material";
 import { FormattedMessage } from "react-intl";
 import { Context } from "../Wrapper/Wrapper.tsx";
 import { useContext, useEffect } from "react";
@@ -64,11 +64,11 @@ const SelectLanguagePage = () => {
           {createMenuItems(languageOptions, 'selectLang.disabledSelectMenuItemText', 'Select a language')}
         </Select>
       </FormControl>
-      <div className="question-buttons">
+      <Box sx={{ mt: '1rem' }}>
         <Button variant="contained" onClick={() => navigate('/step-1')}>
           <FormattedMessage id="continueButton" defaultMessage="Continue" />
         </Button>
-      </div>
+      </Box>
     </main>
   );
 }
