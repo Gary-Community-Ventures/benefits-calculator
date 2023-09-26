@@ -35,7 +35,7 @@ const SelectLanguagePage = () => {
   useEffect(() => {
     const continueOnEnter = (event:Event) => {
       if (event.key === 'Enter') {
-        navigate(`/${uuid}/results`);
+        navigate(`/step-2${queryString}`);
       }
     };
     document.addEventListener('keyup', continueOnEnter);
