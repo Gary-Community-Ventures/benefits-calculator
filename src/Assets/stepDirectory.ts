@@ -1,6 +1,6 @@
 import questions, { type QuestionNames } from './questions';
 
-export const startingQuestionNumber = 2;
+export const startingQuestionNumber = 3;
 const defaultStepDirectory: QuestionNames[] = [
   'zipcode',
   'healthInsurance',
