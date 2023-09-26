@@ -1,13 +1,14 @@
 
-import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent } from "@mui/material";
-// import { languageSelectHasError, displayLanguageHasErrorText, useErrorController } from "../../Assets/validationFunctions.tsx";
+import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent, Button } from "@mui/material";
 import { FormattedMessage } from "react-intl";
-import languageOptions from '../../Assets/languageOptions.tsx';
 import { Context } from "../Wrapper/Wrapper.tsx";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import languageOptions from '../../Assets/languageOptions.tsx';
 
 const SelectLanguagePage = () => {
   const context = useContext(Context);
+  const navigate = useNavigate();
 
   const createMenuItems = (optionList:Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
     const disabledSelectMenuItem = (
@@ -49,7 +50,7 @@ const SelectLanguagePage = () => {
           defaultMessage="Before you begin, what is your preferred language?"
         />
       </h1>
-      <FormControl>
+      <FormControl sx={{ width: '150px' }}>
         <InputLabel id="language-select-label">
           <FormattedMessage id="selectLang.text" defaultMessage="Language" />
         </InputLabel>
@@ -63,6 +64,11 @@ const SelectLanguagePage = () => {
           {createMenuItems(languageOptions, 'selectLang.disabledSelectMenuItemText', 'Select a language')}
         </Select>
       </FormControl>
+      <div className="question-buttons">
+        <Button variant="contained" onClick={() => navigate('/step-1')}>
+          <FormattedMessage id="continueButton" defaultMessage="Continue" />
+        </Button>
+      </div>
     </main>
   );
 }
