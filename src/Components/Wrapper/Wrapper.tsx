@@ -112,9 +112,9 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
   const [theme, setTheme, styleOverride] = useStyle('default');
 
-  Object.keys(languageOptions).forEach((key) => {
-    if (pathname.includes(`/${key}`)) {
-      defaultLanguage = key;
+  Object.keys(languageOptions).forEach((lang) => {
+    if (pathname.includes(`/${lang}`)) {
+      defaultLanguage = lang;
     }
   });
 
