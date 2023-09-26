@@ -103,7 +103,7 @@ const Header = ({ handleTextfieldChange }) => {
               renderValue={() => setRenderValue()}
               sx={{ '& .MuiSvgIcon-root': { right: '1.5rem', color: '#FFFFFF' } }}
             >
-              {createMenuItems(languageOptions, 'selectLang.disabledSelectMenuItemText', 'Select a language')}
+              {createMenuItems(languageOptions)}
             </Select>
             <button className="icon-container" onClick={handleOpenShare} aria-label="share button">
               <ShareIcon role="img" />
