@@ -156,20 +156,20 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
     );
   };
 
-    const createMenuItems = (optionList) => {
-      const menuItemKeys = Object.keys(optionList);
-      const menuItemLabels = Object.values(optionList);
+  const createMenuItems = (optionList) => {
+    const menuItemKeys = Object.keys(optionList);
+    const menuItemLabels = Object.values(optionList);
 
-      const dropdownMenuItems = menuItemKeys.map((option, i) => {
-        return (
-          <MenuItem value={option} key={option} sx={{ color: '#005191' }}>
-            {menuItemLabels[i]}
-          </MenuItem>
-        );
-      });
+    const dropdownMenuItems = menuItemKeys.map((option, i) => {
+      return (
+        <MenuItem value={option} key={option} sx={{ color: '#005191' }}>
+          {menuItemLabels[i]}
+        </MenuItem>
+      );
+    });
 
-      return dropdownMenuItems;
-    };
+    return dropdownMenuItems;
+  };
 
   return (
     <nav>

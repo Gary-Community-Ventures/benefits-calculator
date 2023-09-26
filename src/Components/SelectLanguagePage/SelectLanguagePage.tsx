@@ -1,9 +1,8 @@
-
-import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent, Button, Box } from "@mui/material";
-import { FormattedMessage } from "react-intl";
-import { Context } from "../Wrapper/Wrapper.tsx";
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent, Button, Box } from '@mui/material';
+import { FormattedMessage } from 'react-intl';
+import { Context } from '../Wrapper/Wrapper.tsx';
+import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import languageOptions from '../../Assets/languageOptions.tsx';
 
 const SelectLanguagePage = () => {
@@ -12,7 +11,7 @@ const SelectLanguagePage = () => {
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const navigate = useNavigate();
 
-  const createMenuItems = (optionList:Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
+  const createMenuItems = (optionList: Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
     const disabledSelectMenuItem = (
       <MenuItem value="disabled-select" key="disabled-select" disabled>
         <FormattedMessage id={disabledFMId} defaultMessage={disabledFMDefault} />
@@ -33,7 +32,7 @@ const SelectLanguagePage = () => {
   };
 
   useEffect(() => {
-    const continueOnEnter = (event:Event) => {
+    const continueOnEnter = (event: Event) => {
       if (event.key === 'Enter') {
         navigate(`/step-2${queryString}`);
       }
@@ -73,6 +72,6 @@ const SelectLanguagePage = () => {
       </Box>
     </main>
   );
-}
+};
 
 export default SelectLanguagePage;
