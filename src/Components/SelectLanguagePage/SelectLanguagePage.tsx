@@ -29,6 +29,18 @@ const SelectLanguagePage = () => {
     return [disabledSelectMenuItem, dropdownMenuItems];
   };
 
+  useEffect(() => {
+    const continueOnEnter = (event:Event) => {
+      if (event.key === 'Enter') {
+        navigate(`/${uuid}/results`);
+      }
+    };
+    document.addEventListener('keyup', continueOnEnter);
+    return () => {
+      document.removeEventListener('keyup', continueOnEnter); // remove event listener on onmount
+    };
+  });
+
   return (
     <main className="benefits-form">
       <h1 className="sub-header">
