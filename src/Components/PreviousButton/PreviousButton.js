@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { getStepNumber, startingQuestionNumber } from '../../Assets/stepDirectory';
+import { getStepNumber } from '../../Assets/stepDirectory';
 
 const PreviousButton = ({ navFunction }) => {
   const { formData } = useContext(Context);
