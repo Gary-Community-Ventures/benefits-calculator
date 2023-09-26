@@ -29,10 +29,9 @@ interface LandingPageProps {
 
 const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   const { formData, locale, screenDoneLoading } = useContext(Context);
+  const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   let { uuid } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
-  const urlSearchParams = location.search;
   const privacyErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
   const ageErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
 
@@ -65,11 +64,11 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
 
     if (formData.agreeToTermsOfService && formData.is13OrOlder) {
       if (uuid) {
-        navigate(`/${uuid}/step-2`);
+        navigate(`/${uuid}/step-3`);
       } else {
         const response = await createScreen(formData);
         screenDoneLoading();
-        navigate(`/${response.uuid}/step-2`);
+        navigate(`/${response.uuid}/step-3`);
       }
     }
   };
@@ -196,7 +195,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       </Box>
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <Box>
-          <PreviousButton navFunction={() => navigate(`/step-0${urlSearchParams}`)} />
+          <PreviousButton navFunction={() => navigate(`/step-1${queryString}`)} />
           <Button variant="contained" onClick={handleContinue}>
             <FormattedMessage id="continue-button" defaultMessage="Continue" />
           </Button>
