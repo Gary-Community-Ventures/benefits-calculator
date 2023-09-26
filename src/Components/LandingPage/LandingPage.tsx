@@ -12,7 +12,7 @@ import {
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { createScreen } from '../../Assets/updateScreen.js';
 import {
   useErrorController,
@@ -21,6 +21,7 @@ import {
 } from '../../Assets/validationFunctions.tsx';
 import './LandingPage.css';
 import dataLayerPush from '../../Assets/analytics.ts';
+import PreviousButton from '../PreviousButton/PreviousButton.js';
 
 interface LandingPageProps {
   handleCheckboxChange: (event: React.FormEvent<HTMLInputElement>) => void;
@@ -30,6 +31,8 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   const { formData, locale, screenDoneLoading } = useContext(Context);
   let { uuid } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const urlSearchParams = location.search;
   const privacyErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
   const ageErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
 
@@ -193,6 +196,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       </Box>
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <Box>
+          <PreviousButton navFunction={() => navigate(`/step-0${urlSearchParams}`)} />
           <Button variant="contained" onClick={handleContinue}>
             <FormattedMessage id="continue-button" defaultMessage="Continue" />
           </Button>
