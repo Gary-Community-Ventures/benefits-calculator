@@ -26,7 +26,6 @@ const SelectLanguagePage = () => {
       );
     });
 
-
     return [disabledSelectMenuItem, dropdownMenuItems];
   };
 
@@ -38,7 +37,7 @@ const SelectLanguagePage = () => {
     };
     document.addEventListener('keyup', continueOnEnter);
     return () => {
-      document.removeEventListener('keyup', continueOnEnter); // remove event listener on onmount
+      document.removeEventListener('keyup', continueOnEnter); // remove event listener on unmount
     };
   });
 
