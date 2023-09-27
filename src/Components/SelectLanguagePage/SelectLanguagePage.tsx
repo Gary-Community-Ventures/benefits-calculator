@@ -33,7 +33,7 @@ const SelectLanguagePage = () => {
 
   useEffect(() => {
     const continueOnEnter = (event: KeyboardEvent) => {
-      if ((event.key) === 'Enter') {
+      if (event.key === 'Enter') {
         navigate(`/step-2${queryString}`);
       }
     };

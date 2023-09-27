@@ -157,13 +157,12 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   };
 
   const createMenuItems = (optionList) => {
-    const menuItemKeys = Object.keys(optionList);
-    const menuItemLabels = Object.values(optionList);
+    const menuItemKeyLabelPairArr = Object.entries(optionList);
 
-    const dropdownMenuItems = menuItemKeys.map((option, i) => {
+    const dropdownMenuItems = menuItemKeyLabelPairArr.map((key) => {
       return (
-        <MenuItem value={option} key={option} sx={{ color: '#005191' }}>
-          {menuItemLabels[i]}
+        <MenuItem value={key[0]} key={key[0]} sx={{ color: '#005191' }}>
+          {key[1]}
         </MenuItem>
       );
     });
