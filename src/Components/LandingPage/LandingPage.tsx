@@ -22,6 +22,7 @@ import {
 import './LandingPage.css';
 import dataLayerPush from '../../Assets/analytics.ts';
 import PreviousButton from '../PreviousButton/PreviousButton.js';
+import { startingQuestionNumber } from '../../Assets/stepDirectory.ts';
 
 interface LandingPageProps {
   handleCheckboxChange: (event: React.FormEvent<HTMLInputElement>) => void;
@@ -64,11 +65,11 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
 
     if (formData.agreeToTermsOfService && formData.is13OrOlder) {
       if (uuid) {
-        navigate(`/${uuid}/step-3`);
+        navigate(`/${uuid}/step-${startingQuestionNumber}`);
       } else {
         const response = await createScreen(formData);
         screenDoneLoading();
-        navigate(`/${response.uuid}/step-3`);
+        navigate(`/${response.uuid}/step-${startingQuestionNumber}`);
       }
     }
   };
