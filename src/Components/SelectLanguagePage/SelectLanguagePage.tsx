@@ -17,16 +17,16 @@ const SelectLanguagePage = () => {
         <FormattedMessage id={disabledFMId} defaultMessage={disabledFMDefault} />
       </MenuItem>
     );
-    const menuItemKeys = Object.keys(optionList);
-    const menuItemLabels = Object.values(optionList);
+    const menuItemKeyLabelPairArr = Object.entries(optionList);
 
-    const dropdownMenuItems = menuItemKeys.map((option, i) => {
+    const dropdownMenuItems = menuItemKeyLabelPairArr.map((key) => {
       return (
-        <MenuItem value={option} key={option}>
-          {menuItemLabels[i]}
+        <MenuItem value={key[0]} key={key[0]}>
+          {key[1]}
         </MenuItem>
       );
     });
+
 
     return [disabledSelectMenuItem, dropdownMenuItems];
   };
