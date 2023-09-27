@@ -6,8 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import languageOptions from '../../Assets/languageOptions.tsx';
 
 const SelectLanguagePage = () => {
-  const context = useContext(Context);
-  const { formData } = context;
+  const { formData } = useContext(Context);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const navigate = useNavigate();
 
