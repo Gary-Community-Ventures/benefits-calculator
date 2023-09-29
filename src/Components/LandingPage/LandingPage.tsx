@@ -116,7 +116,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   return (
     <main className="benefits-form">
       <h1 className="sub-header">
-        <FormattedMessage id="disclaimer.header" defaultMessage="What you should know before we begin: " />
+        <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
       </h1>
       <Card variant="outlined">
         <CardContent>
