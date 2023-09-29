@@ -16,6 +16,7 @@ import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
 import CloseIcon from '@mui/icons-material/Close';
 import EmailResults from '../../EmailResults/EmailResults';
+import languageOptions from '../../../Assets/languageOptions';
 import './TwoOneOneHeader.css';
 
 const TwoOneOneHeader = ({ handleTextfieldChange }) => {
@@ -155,6 +156,20 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
     );
   };
 
+  const createMenuItems = (optionList) => {
+    const menuItemKeyLabelPairArr = Object.entries(optionList);
+
+    const dropdownMenuItems = menuItemKeyLabelPairArr.map((key) => {
+      return (
+        <MenuItem value={key[0]} key={key[0]} sx={{ color: '#005191' }}>
+          {key[1]}
+        </MenuItem>
+      );
+    });
+
+    return dropdownMenuItems;
+  };
+
   return (
     <nav>
       <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#FFFFFF' }} square={true}>
@@ -185,15 +200,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
                 renderValue={() => setRenderValue()}
                 sx={{ '& .MuiSvgIcon-root': { right: '1.25rem', color: '#005191' } }}
               >
-                <MenuItem value="en-US" sx={{ color: '#005191' }}>
-                  English
-                </MenuItem>
-                <MenuItem value="es" sx={{ color: '#005191' }}>
-                  Español
-                </MenuItem>
-                <MenuItem value="vi" sx={{ color: '#005191' }}>
-                  Tiếng Việt
-                </MenuItem>
+                {createMenuItems(languageOptions)}
               </Select>
               <IconButton color="primary" onClick={handleOpenShare} aria-label="share button">
                 <ShareIcon role="img" />

@@ -21,6 +21,8 @@ import {
 } from '../../Assets/validationFunctions.tsx';
 import './LandingPage.css';
 import dataLayerPush from '../../Assets/analytics.ts';
+import PreviousButton from '../PreviousButton/PreviousButton.js';
+import { startingQuestionNumber } from '../../Assets/stepDirectory.ts';
 
 interface LandingPageProps {
   handleCheckboxChange: (event: React.FormEvent<HTMLInputElement>) => void;
@@ -28,6 +30,7 @@ interface LandingPageProps {
 
 const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   const { formData, locale, screenDoneLoading } = useContext(Context);
+  const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   let { uuid } = useParams();
   const navigate = useNavigate();
   const privacyErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
@@ -62,11 +65,11 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
 
     if (formData.agreeToTermsOfService && formData.is13OrOlder) {
       if (uuid) {
-        navigate(`/${uuid}/step-2`);
+        navigate(`/${uuid}/step-${startingQuestionNumber}`);
       } else {
         const response = await createScreen(formData);
         screenDoneLoading();
-        navigate(`/${response.uuid}/step-2`);
+        navigate(`/${response.uuid}/step-${startingQuestionNumber}`);
       }
     }
   };
@@ -193,6 +196,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       </Box>
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <Box>
+          <PreviousButton navFunction={() => navigate(`/step-1${queryString}`)} />
           <Button variant="contained" onClick={handleContinue}>
             <FormattedMessage id="continue-button" defaultMessage="Continue" />
           </Button>

@@ -7,6 +7,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Share from '../Share/Share';
 import EmailResults from '../EmailResults/EmailResults';
+import languageOptions from '../../Assets/languageOptions.tsx';
 import Paper from '@mui/material/Paper';
 import './Header.css';
 
@@ -49,10 +50,6 @@ const Header = ({ handleTextfieldChange }) => {
     setIsLanguageSelectOpen(true);
   };
 
-  const handleLanguageChange = (event) => {
-    context.selectLanguage(event);
-  };
-
   const setRenderValue = () => {
     const currentLocale = context.locale;
     switch (currentLocale) {
@@ -65,6 +62,20 @@ const Header = ({ handleTextfieldChange }) => {
       default:
         return 'EN';
     }
+  };
+
+  const createMenuItems = (optionList) => {
+    const menuItemKeyLabelPairArr = Object.entries(optionList);
+
+    const dropdownMenuItems = menuItemKeyLabelPairArr.map((key) => {
+      return (
+        <MenuItem value={key[0]} key={key[0]}>
+          {key[1]}
+        </MenuItem>
+      );
+    });
+
+    return dropdownMenuItems;
   };
 
   return (
@@ -80,7 +91,7 @@ const Header = ({ handleTextfieldChange }) => {
               id="select-language"
               value={context.locale}
               label="Language"
-              onChange={handleLanguageChange}
+              onChange={(event) => context.selectLanguage(event)}
               aria-label="select a language"
               variant="standard"
               disableUnderline={true}
@@ -91,9 +102,7 @@ const Header = ({ handleTextfieldChange }) => {
               renderValue={() => setRenderValue()}
               sx={{ '& .MuiSvgIcon-root': { right: '1.5rem', color: '#FFFFFF' } }}
             >
-              <MenuItem value="en-US">English</MenuItem>
-              <MenuItem value="es">Español</MenuItem>
-              <MenuItem value="vi">Tiếng Việt</MenuItem>
+              {createMenuItems(languageOptions)}
             </Select>
             <button className="icon-container" onClick={handleOpenShare} aria-label="share button">
               <ShareIcon role="img" />
