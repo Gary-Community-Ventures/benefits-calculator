@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import languageOptions from '../../Assets/languageOptions.tsx';
 
 const SelectLanguagePage = () => {
-  const { formData } = useContext(Context);
+  const { formData, locale, selectLanguage } = useContext(Context);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const navigate = useNavigate();
 
@@ -56,10 +56,10 @@ const SelectLanguagePage = () => {
         <Select
           labelId="language-select-label"
           id="language-select"
-          value={context.locale}
+          value={locale}
           label={<FormattedMessage id="selectLang.text" defaultMessage="Language" />}
           //@ts-ignore
-          onChange={(event: SelectChangeEvent<string>) => context.selectLanguage(event)}
+          onChange={(event: SelectChangeEvent<string>) => selectLanguage(event)}
         >
           {createMenuItems(languageOptions, 'selectLang.disabledSelectMenuItemText', 'Select a language')}
         </Select>
