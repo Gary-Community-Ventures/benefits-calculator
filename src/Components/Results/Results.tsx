@@ -56,7 +56,7 @@ const Results = () => {
   const navigate = useNavigate();
   const { locale, theme } = useContext(Context);
   const intl = useIntl();
-  const [filterResultsButton, setFilterResultsButton] = useState('benefits');
+  const [benefitOrImmedNeedsBtn, setBenefitOrImmedNeedsBtn] = useState('benefits');
   const citizenToggleState = useState(false);
   const categoryState = useState('All Categories');
   const eligibilityState = useState('eligibleBenefits');
@@ -734,16 +734,16 @@ const Results = () => {
   };
 
   const displayBenefitAndImmedNeedsBtns = () => {
-    const benefitBtnClass = filterResultsButton === 'benefits' ? 'results-link' : 'results-filter-button-grey';
+    const benefitBtnClass = benefitOrImmedNeedsBtn === 'benefits' ? 'results-link' : 'results-filter-button-grey';
     const immediateNeedsBtnClass =
-      filterResultsButton === 'urgentNeeds' ? 'results-link' : 'results-filter-button-grey';
+      benefitOrImmedNeedsBtn === 'urgentNeeds' ? 'results-link' : 'results-filter-button-grey';
 
     return (
       <div>
         <Button
           className={benefitBtnClass}
           onClick={() => {
-            setFilterResultsButton('benefits');
+            setBenefitOrImmedNeedsBtn('benefits');
           }}
           sx={{ mt: 1, mr: 0.5, mb: 1, p: 0.8, fontSize: '.8rem' }}
           variant="contained"
@@ -756,7 +756,7 @@ const Results = () => {
         <Button
           className={immediateNeedsBtnClass}
           onClick={() => {
-            setFilterResultsButton('urgentNeeds');
+            setBenefitOrImmedNeedsBtn('urgentNeeds');
           }}
           sx={{ mt: 1, mb: 1, p: 0.8, fontSize: '.8rem' }}
           variant="contained"
@@ -789,8 +789,8 @@ const Results = () => {
               {displayHeaderSection()}
               <Grid xs={12} item={true}>
                 {displayBenefitAndImmedNeedsBtns()}
-                {filterResultsButton === 'benefits' && renderDataGridOrNoResultsTable()}
-                {filterResultsButton === 'urgentNeeds' && (
+                {benefitOrImmedNeedsBtn === 'benefits' && renderDataGridOrNoResultsTable()}
+                {benefitOrImmedNeedsBtn === 'urgentNeeds' && (
                   <UrgentNeedsTable urgentNeedsPrograms={results.urgentNeeds} />
                 )}
               </Grid>
