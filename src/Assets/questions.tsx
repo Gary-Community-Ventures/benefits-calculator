@@ -239,6 +239,9 @@ const questions = {
   },
   referralSource: {
     name: 'referralSource',
+    question: (
+      <FormattedMessage id="questions.referralSource-subheader" defaultMessage="How did you hear about MyFriendBen?" />
+    ),
     componentDetails: {
       componentType: 'BasicSelect',
       inputName: 'referralSource',
