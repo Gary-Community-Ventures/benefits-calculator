@@ -130,6 +130,17 @@ const Results = () => {
     setFilt(newFilter);
   };
 
+  const [allFilters, setAllFilters] = useState({
+    non_citizen: false,
+    citizen: false,
+    green_card: false,
+    refugee: false,
+    gc_5plus: false,
+    gc_18plus_no5: false,
+    gc_under18_no5: false,
+    gc_under19_pregnant_no5: false,
+  });
+
   useEffect(() => {
     fetchResults();
   }, []);
