@@ -197,7 +197,7 @@ const QuestionComponentContainer = ({
       } else if (matchingQuestion.name === 'referralSource') {
         return (
           <h1 className="sub-header">
-            <FormattedMessage id="questions.referralSource" defaultMessage="How did you hear about this screener?" />
+            <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />
           </h1>
         );
       } else {
