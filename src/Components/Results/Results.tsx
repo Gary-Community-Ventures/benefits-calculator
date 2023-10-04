@@ -643,54 +643,56 @@ const Results = () => {
             )}
           </>
         )}
-        {visibleRowCount === 0 ? <NoResultsTable /> :
-          <DataGridPro
-            treeData
-            autoHeight
-            getTreeDataPath={(row) => row.path}
-            groupingColDef={groupingColDef}
-            getRowHeight={() => 'auto'}
-            disableChildrenFiltering
-            disableColumnFilter
-            hideFooter={true}
-            rows={rows}
-            columns={columns}
-            filterModel={{
-              items: filtList(filt),
-              linkOperator: GridLinkOperator.And,
-            }}
-            sx={{
-              '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': {
-                py: '8px',
+        <DataGridPro
+          treeData
+          autoHeight
+          getTreeDataPath={(row) => row.path}
+          groupingColDef={groupingColDef}
+          getRowHeight={() => 'auto'}
+          disableChildrenFiltering
+          disableColumnFilter
+          hideFooter={true}
+          rows={rows}
+          columns={columns}
+          filterModel={{
+            items: filtList(filt),
+            linkOperator: GridLinkOperator.And,
+          }}
+          sx={{
+            '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': {
+              py: '8px',
+            },
+            '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': {
+              py: '15px',
+            },
+            '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': {
+              py: '22px',
+            },
+            '& .MuiDataGrid-main > div:nth-of-type(1)': {
+              zIndex: 999,
+            },
+          }}
+          initialState={{
+            columns: {
+              columnVisibilityModel: {
+                citizenship: false,
+                delivery_time: false,
+                type: false,
+                name: false,
+                description: false,
+                application_link: false,
+                passed_tests: false,
+                failed_tests: false,
+                navigators: false,
+                eligible: false,
+                has_benefit: false,
+                category: false,
               },
-              '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': {
-                py: '15px',
-              },
-              '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': {
-                py: '22px',
-              },
-            }}
-            initialState={{
-              columns: {
-                columnVisibilityModel: {
-                  citizenship: false,
-                  delivery_time: false,
-                  type: false,
-                  name: false,
-                  description: false,
-                  application_link: false,
-                  passed_tests: false,
-                  failed_tests: false,
-                  navigators: false,
-                  eligible: false,
-                  has_benefit: false,
-                  category: false,
-                },
-              },
-            }}
-            apiRef={apiRef}
-          />
-        }
+            },
+          }}
+          apiRef={apiRef}
+          components={{ NoResultsOverlay: NoResultsTable }}
+        />
       </>
     );
   };
