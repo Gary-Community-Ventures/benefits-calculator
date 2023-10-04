@@ -88,8 +88,8 @@ const Results = () => {
     citizen: {
       id: 1,
       columnField: 'citizenship',
-      operatorValue: 'isAnyOf',
-      value: ['citizen', 'none'],
+      operatorValue: 'contains',
+      value: 'citizen',
     },
     eligible: {
       id: 2,
@@ -165,7 +165,8 @@ const Results = () => {
       if (categoryValues[program.category.default_message] === undefined) {
         categoryValues[program.category.default_message] = 0;
       }
-      if (filt.citizen.value.includes(program.legal_status_required)) {
+
+      if (program.legal_status_required.includes(filt.citizen.value)) {
         categoryValues[program.category.default_message] += program.estimated_value;
         if (preschoolProgramCategory == program.category.default_message) {
           preschoolPrograms[0]++;
@@ -200,11 +201,13 @@ const Results = () => {
   const totalEligiblePrograms = (programs: Program[]) => {
     return programs.reduce((total, program) => {
       if (program.estimated_value <= 0) return total;
-      if (filt.citizen.value.includes('non-citizen') && program.legal_status_required !== 'citizen') {
-        total += 1;
-      } else if (filt.citizen.value.includes('citizen') && program.legal_status_required !== 'non-citizen') {
+
+      const isEligibleForNonCitizenPrograms = filt.citizen.value === 'non_citizen' && !program.legal_status_required.includes('citizen');
+      const isEligibleForCitizenPrograms  = filt.citizen.value === 'citizen' && !program.legal_status_required.includes('non_citizen');
+      if (isEligibleForNonCitizenPrograms || isEligibleForCitizenPrograms) {
         total += 1;
       }
+
       return total;
     }, 0);
   };

@@ -66,8 +66,8 @@ const FilterSection = ({
         filter: {
           id: 1,
           columnField: 'citizenship',
-          operatorValue: 'isAnyOf',
-          value: ['citizen', 'none'],
+          operatorValue: 'contains',
+          value: 'citizen',
         },
       },
     );
