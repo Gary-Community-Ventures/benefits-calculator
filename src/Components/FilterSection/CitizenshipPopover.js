@@ -14,8 +14,8 @@ const CitizenshipPopover = ({ updateFilter, citizenToggleState }) => {
         filter: {
           id: 1,
           columnField: 'citizenship',
-          operatorValue: 'isAnyOf',
-          value: ['non-citizen', 'none'],
+          operatorValue: 'contains',
+          value: 'non_citizen',
         },
       });
     } else {
@@ -24,8 +24,8 @@ const CitizenshipPopover = ({ updateFilter, citizenToggleState }) => {
         filter: {
           id: 1,
           columnField: 'citizenship',
-          operatorValue: 'isAnyOf',
-          value: ['citizen', 'none'],
+          operatorValue: 'contains',
+          value: 'citizen',
         },
       });
     }
