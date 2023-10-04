@@ -23,6 +23,8 @@ import {
   GridValueFormatterParams,
   GridFilterItem,
   GridAlignment,
+  gridVisibleRowCountSelector,
+  useGridApiRef,
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -106,6 +108,15 @@ const Results = () => {
     category: false,
   });
 
+  const [visibleRowCount, setVisibleRowCount] = useState(1);
+  const apiRef = useGridApiRef();
+
+  useEffect(() => {
+    if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
+      setVisibleRowCount(gridVisibleRowCountSelector(apiRef));
+    }
+  }, [results, filt]);
+
   const filtList = (filt: FilterState) => {
     const filters: GridFilterItem[] = [filt.citizen, filt.eligible];
     if (filt.hasBenefit !== false) {
@@ -121,6 +132,7 @@ const Results = () => {
     const newFilter = { ...filt };
     for (let i = 0; i < args.length; i++) {
       let filter = args[i];
+      //remove this if/else
       if ('citizen' === filter.name || 'eligible' === filter.name) {
         newFilter[filter.name] = filter.filter;
       } else {
@@ -196,20 +208,6 @@ const Results = () => {
       total += valuesByCategory[name];
     }
     return total;
-  };
-
-  const totalEligiblePrograms = (programs: Program[]) => {
-    return programs.reduce((total, program) => {
-      if (program.estimated_value <= 0) return total;
-
-      const isEligibleForNonCitizenPrograms = filt.citizen.value === 'non_citizen' && !program.legal_status_required.includes('citizen');
-      const isEligibleForCitizenPrograms  = filt.citizen.value === 'citizen' && !program.legal_status_required.includes('non_citizen');
-      if (isEligibleForNonCitizenPrograms || isEligibleForCitizenPrograms) {
-        total += 1;
-      }
-
-      return total;
-    }, 0);
   };
 
   const displayTestResults = (tests: TestMessage[]) => {
@@ -318,7 +316,7 @@ const Results = () => {
   };
 
   const displaySubheader = () => {
-    if (!totalEligiblePrograms(results.programs)) {
+    if (visibleRowCount === 0) {
       return (
         <Grid xs={12} item>
           <h1 className="bottom-border program-value-header">
@@ -330,7 +328,7 @@ const Results = () => {
       return (
         <Grid xs={12} item>
           <h1 className="bottom-border program-value-header">
-            {totalEligiblePrograms(results.programs)}
+            {visibleRowCount}
             <FormattedMessage
               id="results.return-programsUpToLabel"
               defaultMessage=" programs with an estimated value of "
@@ -645,51 +643,54 @@ const Results = () => {
             )}
           </>
         )}
-        <DataGridPro
-          treeData
-          autoHeight
-          getTreeDataPath={(row) => row.path}
-          groupingColDef={groupingColDef}
-          getRowHeight={() => 'auto'}
-          disableChildrenFiltering
-          disableColumnFilter
-          hideFooter={true}
-          rows={rows}
-          columns={columns}
-          filterModel={{
-            items: filtList(filt),
-            linkOperator: GridLinkOperator.And,
-          }}
-          sx={{
-            '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': {
-              py: '8px',
-            },
-            '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': {
-              py: '15px',
-            },
-            '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': {
-              py: '22px',
-            },
-          }}
-          initialState={{
-            columns: {
-              columnVisibilityModel: {
-                citizenship: false,
-                delivery_time: false,
-                type: false,
-                name: false,
-                description: false,
-                application_link: false,
-                passed_tests: false,
-                failed_tests: false,
-                navigators: false,
-                eligible: false,
-                has_benefit: false,
-                category: false,
+        {visibleRowCount === 0 ? <NoResultsTable /> :
+          <DataGridPro
+            treeData
+            autoHeight
+            getTreeDataPath={(row) => row.path}
+            groupingColDef={groupingColDef}
+            getRowHeight={() => 'auto'}
+            disableChildrenFiltering
+            disableColumnFilter
+            hideFooter={true}
+            rows={rows}
+            columns={columns}
+            filterModel={{
+              items: filtList(filt),
+              linkOperator: GridLinkOperator.And,
+            }}
+            sx={{
+              '&.MuiDataGrid-root--densityCompact .MuiDataGrid-cell': {
+                py: '8px',
               },
-            },
-          }}
-        />
+              '&.MuiDataGrid-root--densityStandard .MuiDataGrid-cell': {
+                py: '15px',
+              },
+              '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': {
+                py: '22px',
+              },
+            }}
+            initialState={{
+              columns: {
+                columnVisibilityModel: {
+                  citizenship: false,
+                  delivery_time: false,
+                  type: false,
+                  name: false,
+                  description: false,
+                  application_link: false,
+                  passed_tests: false,
+                  failed_tests: false,
+                  navigators: false,
+                  eligible: false,
+                  has_benefit: false,
+                  category: false,
+                },
+              },
+            }}
+            apiRef={apiRef}
+          />
+        }
       </>
     );
   };
@@ -773,14 +774,6 @@ const Results = () => {
     );
   };
 
-  const renderDataGridOrNoResultsTable = () => {
-    if (totalEligiblePrograms(results.programs)) {
-      return DataGridTable(results.programs);
-    } else {
-      return <NoResultsTable />;
-    }
-  };
-
   return (
     <main className="benefits-form">
       <div className="results-container">
@@ -792,7 +785,7 @@ const Results = () => {
               {displayHeaderSection()}
               <Grid xs={12} item={true}>
                 {displayBenefitAndImmedNeedsBtns()}
-                {filterResultsButton === 'benefits' && renderDataGridOrNoResultsTable()}
+                {filterResultsButton === 'benefits' && DataGridTable(results.programs)}
                 {filterResultsButton === 'urgentNeeds' && (
                   <UrgentNeedsTable urgentNeedsPrograms={results.urgentNeeds} />
                 )}
