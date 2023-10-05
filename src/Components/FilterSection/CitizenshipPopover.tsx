@@ -1,8 +1,8 @@
-import { FormattedMessage } from 'react-intl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Checkbox } from '@mui/material';
 import { GridFilterItem, GridFilterOperator } from '@mui/x-data-grid';
 import { UpdateFilterArg } from '../Results/Results';
+import citizenshipFilterFormControlLabels from '../../Assets/citizenshipFilterFormControlLabels';
 
 export const citizenshipFilterOperators: GridFilterOperator[] = [
   {
@@ -63,14 +63,12 @@ const CitizenshipPopover = ({
     setCitizenshipFilterIsChecked(updatedCitizenshipFilterIsChecked);
   };
 
-  // todo: add FormattedMessage for FormControlLabel label
-
   return Object.keys(citizenshipFilterIsChecked).map((citizenshipType) => {
     return (
       <FormControlLabel
         key={citizenshipType}
         className="popover"
-        label={citizenshipType}
+        label={citizenshipFilterFormControlLabels[citizenshipType]}
         control={
           <Checkbox
             checked={citizenshipFilterIsChecked[citizenshipType]}
