@@ -39,6 +39,7 @@ import {
   Translation,
   UrgentNeed,
 } from '../../Types/Results.ts';
+import { citizenshipFilterOperators } from '../FilterSection/CitizenshipPopover.tsx';
 
 export type UpdateFilterArg =
   | {
@@ -59,7 +60,16 @@ const Results = () => {
   const { locale, theme } = useContext(Context);
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
-  const citizenToggleState = useState(false);
+  const [citizenshipFilterIsChecked, setCitizenshipFilterIsChecked] = useState<Record<string, boolean>>({
+    non_citizen: false,
+    citizen: true,
+    green_card: false,
+    refugee: false,
+    gc_5plus: false,
+    gc_18plus_no5: false,
+    gc_under18_no5: false,
+    gc_under19_pregnant_no5: false,
+  });
   const categoryState = useState('All Categories');
   const eligibilityState = useState('eligibleBenefits');
   const alreadyHasToggleState = useState(false);
@@ -87,11 +97,12 @@ const Results = () => {
     category: GridFilterItem | false;
   };
   const [filt, setFilt] = useState<FilterState>({
+    //https://v5.mui.com/x/react-data-grid/filtering/#create-a-custom-operator
     citizen: {
       id: 1,
       columnField: 'citizenship',
-      operatorValue: 'contains',
-      value: 'citizen',
+      operatorValue: 'customCitizenshipOperator',
+      value: ['citizen'],
     },
     eligible: {
       id: 2,
@@ -112,6 +123,10 @@ const Results = () => {
   const apiRef = useGridApiRef();
 
   useEffect(() => {
+    //use the visible row count so that we don't have to calculate the total eligible programs
+    //because doing so would require rewriting all of DGPro's filtering logic
+    //but the mui docs say that if you try to reference apiRef before the datagrid is rendered then it'll crash the app
+    //hence the if statements prevent us from accessing the apiRef before it's ready
     if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
       setVisibleRowCount(gridVisibleRowCountSelector(apiRef));
     }
@@ -551,7 +566,7 @@ const Results = () => {
         },
       },
       { field: 'delivery_time', headerName: 'Delivery Time', flex: 1 },
-      { field: 'citizenship', headerName: 'Citizenship Requirements', flex: 1 },
+      { field: 'citizenship', headerName: 'Citizenship Requirements', flex: 1, filterOperators: citizenshipFilterOperators },
       { field: 'application_link', headerName: 'Application Link', flex: 1 },
       { field: 'passed_tests', headerName: 'Passed Tests', flex: 1 },
       { field: 'failed_tests', headerName: 'Passed Tests', flex: 1 },
@@ -616,7 +631,8 @@ const Results = () => {
             <FilterSection
               updateFilter={updateFilter}
               categories={categories}
-              citizenToggleState={citizenToggleState}
+              citizenshipFilterIsChecked={citizenshipFilterIsChecked}
+              setCitizenshipFilterIsChecked={setCitizenshipFilterIsChecked}
               categoryState={categoryState}
               eligibilityState={eligibilityState}
               alreadyHasToggleState={alreadyHasToggleState}
@@ -668,7 +684,7 @@ const Results = () => {
             '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': {
               py: '22px',
             },
-            '& .MuiDataGrid-main > div:nth-of-type(1)': {
+            '& .MuiDataGrid-main > div:nth-of-type(1)': { //allows the link in the NoResultsOverlay to be clickable
               zIndex: 999,
             },
           }}
@@ -691,7 +707,7 @@ const Results = () => {
             },
           }}
           apiRef={apiRef}
-          components={{ NoResultsOverlay: NoResultsTable }}
+          components={{ NoResultsOverlay: NoResultsTable }} //fixes filters disappearing when there are no results
         />
       </>
     );

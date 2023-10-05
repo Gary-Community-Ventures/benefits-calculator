@@ -13,7 +13,8 @@ type StateType<T> = [T, React.Dispatch<React.SetStateAction<T>>];
 type FilterProps = {
   updateFilter: (...args: UpdateFilterArg[]) => void;
   categories: { defaultMessage: string; label: string }[];
-  citizenToggleState: StateType<boolean>;
+  citizenshipFilterIsChecked: Record<string, boolean>;
+  setCitizenshipFilterIsChecked: (citizenshipFilterState: Record<string, boolean>) => void;
   categoryState: StateType<string>;
   eligibilityState: StateType<string>;
   alreadyHasToggleState: StateType<boolean>;
@@ -21,7 +22,8 @@ type FilterProps = {
 const FilterSection = ({
   updateFilter,
   categories,
-  citizenToggleState,
+  citizenshipFilterIsChecked,
+  setCitizenshipFilterIsChecked,
   categoryState,
   eligibilityState,
   alreadyHasToggleState,
@@ -66,14 +68,23 @@ const FilterSection = ({
         filter: {
           id: 1,
           columnField: 'citizenship',
-          operatorValue: 'contains',
-          value: 'citizen',
+          operatorValue: 'customCitizenshipOperator',
+          value: ['citizen'],
         },
       },
     );
 
     //this resets the radio buttons
-    citizenToggleState[1](false);
+    setCitizenshipFilterIsChecked({
+      non_citizen: false,
+      citizen: true,
+      green_card: false,
+      refugee: false,
+      gc_5plus: false,
+      gc_18plus_no5: false,
+      gc_under18_no5: false,
+      gc_under19_pregnant_no5: false,
+    });
     categoryState[1]('All Categories');
     eligibilityState[1]('eligibleBenefits');
     alreadyHasToggleState[1](false);
@@ -87,13 +98,19 @@ const FilterSection = ({
     setOtherPopoverAnchor(null);
   };
 
+  const isSomeCitizenshipFilterChecked = () => {
+    return Object.values(citizenshipFilterIsChecked).some((citizenshipFilterIsChecked) => {
+      return citizenshipFilterIsChecked === true;
+    });
+  };
+
   return (
     <div className="filter-button-container">
       <FilterListIcon sx={{ mr: '.5rem', color: theme.primaryColor }} />
       <Button
         id="citizenship"
         variant="contained"
-        className={(citizenToggleState[0] && 'active-filter') + ' filter-button citizen'}
+        className={(isSomeCitizenshipFilterChecked() && 'active-filter') + ' filter-button citizen'}
         onClick={(event) => {
           setCitizenshipPopoverAnchor(event.currentTarget);
         }}
@@ -110,7 +127,11 @@ const FilterSection = ({
           horizontal: 'left',
         }}
       >
-        <CitizenshipPopover updateFilter={updateFilter} citizenToggleState={citizenToggleState} />
+        <CitizenshipPopover
+          updateFilter={updateFilter}
+          citizenshipFilterIsChecked={citizenshipFilterIsChecked}
+          setCitizenshipFilterIsChecked={setCitizenshipFilterIsChecked}
+        />
       </Popover>
       <Button
         id="other"
