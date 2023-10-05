@@ -1,5 +1,5 @@
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { Checkbox } from '@mui/material';
+import { Checkbox, Stack } from '@mui/material';
 import { GridFilterItem, GridFilterOperator } from '@mui/x-data-grid';
 import { UpdateFilterArg } from '../Results/Results';
 import citizenshipFilterFormControlLabels from '../../Assets/citizenshipFilterFormControlLabels';
@@ -63,7 +63,7 @@ const CitizenshipPopover = ({
     setCitizenshipFilterIsChecked(updatedCitizenshipFilterIsChecked);
   };
 
-  return Object.keys(citizenshipFilterIsChecked).map((citizenshipType) => {
+  const citizenshipCheckboxFilters =  Object.keys(citizenshipFilterIsChecked).map((citizenshipType) => {
     return (
       <FormControlLabel
         key={citizenshipType}
@@ -78,6 +78,8 @@ const CitizenshipPopover = ({
       />
     );
   });
+
+  return <Stack>{citizenshipCheckboxFilters}</Stack>;
 };
 
 export default CitizenshipPopover;
