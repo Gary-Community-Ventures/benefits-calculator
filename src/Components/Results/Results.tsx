@@ -25,6 +25,7 @@ import {
   GridAlignment,
   gridVisibleRowCountSelector,
   useGridApiRef,
+  gridVisibleSortedRowEntriesSelector,
 } from '@mui/x-data-grid-pro';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -120,6 +121,7 @@ const Results = () => {
   });
 
   const [visibleRowCount, setVisibleRowCount] = useState(1);
+  const [totalEligibleDollarValue, setTotalEligibleDollarValue] = useState(0);
   const apiRef = useGridApiRef();
 
   useEffect(() => {
@@ -129,6 +131,11 @@ const Results = () => {
     //hence the if statements prevent us from accessing the apiRef before it's ready
     if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
       setVisibleRowCount(gridVisibleRowCountSelector(apiRef));
+
+      const updatedTotalEligibleDollarValue = gridVisibleSortedRowEntriesSelector(apiRef).reduce((acc, row)=> {
+        return acc += row.model.value.value;
+      }, 0);
+      setTotalEligibleDollarValue(updatedTotalEligibleDollarValue);
     }
   }, [results, filt]);
 
@@ -211,18 +218,6 @@ const Results = () => {
     }
 
     return categoryValues;
-  };
-
-  const totalDollarAmount = (programs: Program[], category?: string) => {
-    const valuesByCategory = categoryValues(programs);
-    if (category) {
-      return valuesByCategory[category];
-    }
-    let total = 0;
-    for (let name in valuesByCategory) {
-      total += valuesByCategory[name];
-    }
-    return total;
   };
 
   const displayTestResults = (tests: TestMessage[]) => {
@@ -348,9 +343,9 @@ const Results = () => {
               id="results.return-programsUpToLabel"
               defaultMessage=" programs with an estimated value of "
             />
-            ${totalDollarAmount(results.programs).toLocaleString()}
+            ${totalEligibleDollarValue.toLocaleString()}
             <FormattedMessage id="results.return-perYearOrLabel" defaultMessage=" per year or " />$
-            {Math.round(totalDollarAmount(results.programs) / 12).toLocaleString()}
+            {Math.round(totalEligibleDollarValue / 12).toLocaleString()}
             <FormattedMessage
               id="results.return-perMonthLabel"
               defaultMessage=" per month in cash or reduced expenses for you to consider"
@@ -566,7 +561,12 @@ const Results = () => {
         },
       },
       { field: 'delivery_time', headerName: 'Delivery Time', flex: 1 },
-      { field: 'citizenship', headerName: 'Citizenship Requirements', flex: 1, filterOperators: citizenshipFilterOperators },
+      {
+        field: 'citizenship',
+        headerName: 'Citizenship Requirements',
+        flex: 1,
+        filterOperators: citizenshipFilterOperators,
+      },
       { field: 'application_link', headerName: 'Application Link', flex: 1 },
       { field: 'passed_tests', headerName: 'Passed Tests', flex: 1 },
       { field: 'failed_tests', headerName: 'Passed Tests', flex: 1 },
@@ -644,7 +644,7 @@ const Results = () => {
             <Toolbar sx={{ border: 1, backgroundColor: theme.primaryColor, color: 'white' }}>
               <span className="space-around border-right">{filt.category.value}</span>
               <span className="space-around">
-                ${totalDollarAmount(programs, filt.category.value).toLocaleString()}{' '}
+                ${totalEligibleDollarValue.toLocaleString()}{' '}
                 <FormattedMessage id="results.perYear" defaultMessage="Per Year" />
               </span>
             </Toolbar>
@@ -684,7 +684,8 @@ const Results = () => {
             '&.MuiDataGrid-root--densityComfortable .MuiDataGrid-cell': {
               py: '22px',
             },
-            '& .MuiDataGrid-main > div:nth-of-type(1)': { //allows the link in the NoResultsOverlay to be clickable
+            '& .MuiDataGrid-main > div:nth-of-type(1)': {
+              //allows the link in the NoResultsOverlay to be clickable
               zIndex: 999,
             },
           }}
