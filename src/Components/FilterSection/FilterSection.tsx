@@ -126,6 +126,7 @@ const FilterSection = ({
           vertical: 'bottom',
           horizontal: 'left',
         }}
+        sx={{ position: 'absolute' }}
       >
         <CitizenshipPopover
           updateFilter={updateFilter}
@@ -152,6 +153,7 @@ const FilterSection = ({
           vertical: 'bottom',
           horizontal: 'left',
         }}
+        sx={{ position: 'absolute' }}
       >
         <OtherPopover
           updateFilter={updateFilter}
