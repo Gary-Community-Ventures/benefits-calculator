@@ -13,3 +13,18 @@
 .noResults-p {
   margin: 1rem;
 }
+
+@media (max-width: 700px) {
+  .noResults-p {
+    font-size: 12px;
+    margin: .1rem;
+  }
+
+  .no-results-content-container{
+    line-height: 1rem;
+  }
+
+  .ineligibility-link.navigator-info {
+    font-size: 12px;
+  }
+}
