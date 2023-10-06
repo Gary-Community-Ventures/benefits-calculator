@@ -132,8 +132,8 @@ const Results = () => {
     if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
       setVisibleRowCount(gridVisibleRowCountSelector(apiRef));
 
-      const updatedTotalEligibleDollarValue = gridVisibleSortedRowEntriesSelector(apiRef).reduce((acc, row)=> {
-        return acc += row.model.value.value;
+      const updatedTotalEligibleDollarValue = gridVisibleSortedRowEntriesSelector(apiRef).reduce((acc, row) => {
+        return (acc += row.model.value.value);
       }, 0);
       setTotalEligibleDollarValue(updatedTotalEligibleDollarValue);
     }

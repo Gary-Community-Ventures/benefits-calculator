@@ -63,7 +63,7 @@ const CitizenshipPopover = ({
     setCitizenshipFilterIsChecked(updatedCitizenshipFilterIsChecked);
   };
 
-  const citizenshipCheckboxFilters =  Object.keys(citizenshipFilterIsChecked).map((citizenshipType) => {
+  const citizenshipCheckboxFilters = Object.keys(citizenshipFilterIsChecked).map((citizenshipType) => {
     return (
       <FormControlLabel
         key={citizenshipType}
