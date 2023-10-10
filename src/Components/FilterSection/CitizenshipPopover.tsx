@@ -46,7 +46,10 @@ const CitizenshipPopover = ({
   const handleFilterSelect = (citizenshipType: CitizenLabels) => {
     const isChecked = citizenshipFilterIsChecked[citizenshipType];
 
-    const updatedCitizenshipFilterIsChecked: Record<CitizenLabels, boolean> = { ...citizenshipFilterIsChecked, [citizenshipType]: !isChecked };
+    const updatedCitizenshipFilterIsChecked: Record<CitizenLabels, boolean> = {
+      ...citizenshipFilterIsChecked,
+      [citizenshipType]: !isChecked,
+    };
     const typedUpdatedCitizenshipFilterIsChecked = Object.keys(updatedCitizenshipFilterIsChecked) as CitizenLabels[];
     const selectedCitizenshipFilters = typedUpdatedCitizenshipFilterIsChecked.filter((citizenshipType) => {
       return updatedCitizenshipFilterIsChecked[citizenshipType];

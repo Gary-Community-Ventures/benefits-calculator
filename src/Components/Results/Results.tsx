@@ -43,7 +43,6 @@ import {
 import { citizenshipFilterOperators } from '../FilterSection/CitizenshipPopover.tsx';
 import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 
-
 export type UpdateFilterArg =
   | {
       name: 'citizen' | 'eligible';
