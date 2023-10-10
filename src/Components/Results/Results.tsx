@@ -41,6 +41,8 @@ import {
   UrgentNeed,
 } from '../../Types/Results.ts';
 import { citizenshipFilterOperators } from '../FilterSection/CitizenshipPopover.tsx';
+import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
+
 
 export type UpdateFilterArg =
   | {
@@ -61,7 +63,7 @@ const Results = () => {
   const { locale, theme } = useContext(Context);
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
-  const [citizenshipFilterIsChecked, setCitizenshipFilterIsChecked] = useState<Record<string, boolean>>({
+  const [citizenshipFilterIsChecked, setCitizenshipFilterIsChecked] = useState<Record<CitizenLabels, boolean>>({
     non_citizen: false,
     citizen: true,
     green_card: false,

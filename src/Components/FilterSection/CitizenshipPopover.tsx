@@ -3,6 +3,7 @@ import { Checkbox, Stack } from '@mui/material';
 import { GridFilterItem, GridFilterOperator } from '@mui/x-data-grid';
 import { UpdateFilterArg } from '../Results/Results';
 import citizenshipFilterFormControlLabels from '../../Assets/citizenshipFilterFormControlLabels';
+import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 
 export const citizenshipFilterOperators: GridFilterOperator[] = [
   {
@@ -33,8 +34,8 @@ export const citizenshipFilterOperators: GridFilterOperator[] = [
 
 type CitizenshipPopoverProps = {
   updateFilter: (...args: UpdateFilterArg[]) => void;
-  citizenshipFilterIsChecked: Record<string, boolean>;
-  setCitizenshipFilterIsChecked: (citizenshipFilterState: Record<string, boolean>) => void;
+  citizenshipFilterIsChecked: Record<CitizenLabels, boolean>;
+  setCitizenshipFilterIsChecked: (citizenshipFilterState: Record<CitizenLabels, boolean>) => void;
 };
 
 const CitizenshipPopover = ({
@@ -42,11 +43,12 @@ const CitizenshipPopover = ({
   citizenshipFilterIsChecked,
   setCitizenshipFilterIsChecked,
 }: CitizenshipPopoverProps) => {
-  const handleFilterSelect = (citizenshipType: string) => {
+  const handleFilterSelect = (citizenshipType: CitizenLabels) => {
     const isChecked = citizenshipFilterIsChecked[citizenshipType];
 
-    const updatedCitizenshipFilterIsChecked = { ...citizenshipFilterIsChecked, [citizenshipType]: !isChecked };
-    const selectedCitizenshipFilters = Object.keys(updatedCitizenshipFilterIsChecked).filter((citizenshipType) => {
+    const updatedCitizenshipFilterIsChecked: Record<CitizenLabels, boolean> = { ...citizenshipFilterIsChecked, [citizenshipType]: !isChecked };
+    const typedUpdatedCitizenshipFilterIsChecked = Object.keys(updatedCitizenshipFilterIsChecked) as CitizenLabels[];
+    const selectedCitizenshipFilters = typedUpdatedCitizenshipFilterIsChecked.filter((citizenshipType) => {
       return updatedCitizenshipFilterIsChecked[citizenshipType];
     });
 
@@ -63,7 +65,8 @@ const CitizenshipPopover = ({
     setCitizenshipFilterIsChecked(updatedCitizenshipFilterIsChecked);
   };
 
-  const citizenshipCheckboxFilters = Object.keys(citizenshipFilterIsChecked).map((citizenshipType) => {
+  const typedCitizenshipFilterIsChecked = Object.keys(citizenshipFilterIsChecked) as CitizenLabels[];
+  const citizenshipCheckboxFilters = typedCitizenshipFilterIsChecked.map((citizenshipType) => {
     return (
       <FormControlLabel
         key={citizenshipType}

@@ -8,13 +8,14 @@ import { FormattedMessage } from 'react-intl';
 import { Button } from '@mui/material';
 import './FilterSection.css';
 import { UpdateFilterArg } from '../Results/Results';
+import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 
 type StateType<T> = [T, React.Dispatch<React.SetStateAction<T>>];
 type FilterProps = {
   updateFilter: (...args: UpdateFilterArg[]) => void;
   categories: { defaultMessage: string; label: string }[];
-  citizenshipFilterIsChecked: Record<string, boolean>;
-  setCitizenshipFilterIsChecked: (citizenshipFilterState: Record<string, boolean>) => void;
+  citizenshipFilterIsChecked: Record<CitizenLabels, boolean>;
+  setCitizenshipFilterIsChecked: (citizenshipFilterState: Record<CitizenLabels, boolean>) => void;
   categoryState: StateType<string>;
   eligibilityState: StateType<string>;
   alreadyHasToggleState: StateType<boolean>;
