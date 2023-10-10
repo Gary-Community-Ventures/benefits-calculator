@@ -17,16 +17,12 @@ export const citizenshipFilterOperators: GridFilterOperator[] = [
       return (params): boolean => {
         // params.value is the value of the columnField in the DataRow
         // so `programs[i].legal_status_required` for the citizenship column
-        let legalStatusRequiredOfProgramContainsAnyFilterValue = false;
         const selectedFilters = filterItem.value;
         const legalStatusRequired = params.value;
 
-        selectedFilters.forEach((citizenshipType: string) => {
-          if (legalStatusRequired.includes(citizenshipType)) {
-            legalStatusRequiredOfProgramContainsAnyFilterValue = true;
-          }
+        return selectedFilters.some((citizenshipType: string) => {
+          return legalStatusRequired.includes(citizenshipType);
         });
-        return legalStatusRequiredOfProgramContainsAnyFilterValue;
       };
     },
   },
