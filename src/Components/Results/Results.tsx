@@ -154,12 +154,8 @@ const Results = () => {
     const newFilter = { ...filt };
     for (let i = 0; i < args.length; i++) {
       let filter = args[i];
-      //remove this if/else
-      if ('citizen' === filter.name || 'eligible' === filter.name) {
-        newFilter[filter.name] = filter.filter;
-      } else {
-        newFilter[filter.name] = filter.filter;
-      }
+      //@ts-ignore
+      newFilter[filter.name] = filter.filter;
     }
     setFilt(newFilter);
   };
