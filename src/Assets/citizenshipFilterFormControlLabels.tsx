@@ -1,16 +1,26 @@
 import { FormattedMessage } from 'react-intl';
 
+export type CitizenLabels =
+  | 'citizen'
+  | 'non_citizen'
+  | 'green_card'
+  | 'refugee'
+  | 'gc_5plus'
+  | 'gc_18plus_no5'
+  | 'gc_under18_no5'
+  | 'gc_under19_pregnant_no5';
+
 const citizenshipFilterFormControlLabels = {
-  non_citizen: (
-    <FormattedMessage
-      id="citizenshipFCtrlLabel-non_citizen"
-      defaultMessage="Show benefits that do not require citizenship or lawful U.S. presence"
-    />
-  ),
   citizen: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-citizen"
       defaultMessage="Show benefits that require citizenship or lawful U.S. presence"
+    />
+  ),
+  non_citizen: (
+    <FormattedMessage
+      id="citizenshipFCtrlLabel-non_citizen"
+      defaultMessage="Show benefits that do not require citizenship or lawful U.S. presence"
     />
   ),
   green_card: (
