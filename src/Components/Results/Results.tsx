@@ -157,7 +157,7 @@ const Results = () => {
     });
   };
 
-  const preschoolProgramCategory = 'Cuidado de Niños, Preescolar y Jóvenes';
+  const preschoolProgramCategory = 'Child Care, Youth, and Education';
   const categoryValues = (programs: Program[]) => {
     const preschoolPrograms = [0, 0];
     const categoryValues: { [key: string]: number } = {};
@@ -608,6 +608,14 @@ const Results = () => {
       );
     };
 
+    const currentCategory = categories.find((cat) => {
+      if (filt.category === false) {
+        return false;
+      }
+
+      return cat.defaultMessage === filt.category.value;
+    });
+
     return (
       <>
         <div className="filters-container">
@@ -622,17 +630,19 @@ const Results = () => {
             />
           }
         </div>
-        {filt.category !== false && (
+        {currentCategory && (
           <>
             <Toolbar sx={{ border: 1, backgroundColor: theme.primaryColor, color: 'white' }}>
-              <span className="space-around border-right">{filt.category.value}</span>
+              <span className="space-around border-right">
+                <FormattedMessage id={currentCategory.label} defaultMessage={currentCategory.defaultMessage} />
+              </span>
               <span className="space-around">
-                ${totalDollarAmount(programs, filt.category.value).toLocaleString()}{' '}
+                ${totalDollarAmount(programs, currentCategory.defaultMessage).toLocaleString()}{' '}
                 <FormattedMessage id="results.perYear" defaultMessage="Per Year" />
               </span>
             </Toolbar>
-            {filt.category.value ===
-              categories.find((cat) => cat.label === preschoolProgramCategory)?.defaultMessage && (
+            {currentCategory.defaultMessage ===
+              categories.find((cat) => cat.defaultMessage === preschoolProgramCategory)?.defaultMessage && (
               <Typography variant="body2" className="child-care-helper-text">
                 <FormattedMessage
                   id="benefitCategories.childCareHelperText"
