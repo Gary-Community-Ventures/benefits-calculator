@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
 export type CitizenLabels =
-  | 'citizen'
   | 'non_citizen'
   | 'green_card'
   | 'refugee'

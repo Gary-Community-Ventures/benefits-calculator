@@ -64,7 +64,6 @@ const Results = () => {
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const [citizenshipFilterIsChecked, setCitizenshipFilterIsChecked] = useState<Record<CitizenLabels, boolean>>({
     non_citizen: false,
-    citizen: true,
     green_card: false,
     refugee: false,
     gc_5plus: false,

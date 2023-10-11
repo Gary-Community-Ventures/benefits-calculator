@@ -78,7 +78,6 @@ const FilterSection = ({
     //this resets the radio buttons
     setCitizenshipFilterIsChecked({
       non_citizen: false,
-      citizen: true,
       green_card: false,
       refugee: false,
       gc_5plus: false,
