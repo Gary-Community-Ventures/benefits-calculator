@@ -1,3 +1,4 @@
+import { FormattedMessage } from 'react-intl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Checkbox, Stack } from '@mui/material';
 import { GridFilterItem, GridFilterOperator } from '@mui/x-data-grid';
@@ -81,7 +82,14 @@ const CitizenshipPopover = ({
     );
   });
 
-  return <Stack>{citizenshipCheckboxFilters}</Stack>;
+  return (
+    <Stack>
+      <Stack sx={{ color: '#000000', fontWeight: 500, mt: '.5rem', ml: '.5rem' }}>
+        <FormattedMessage id="citizenshipPopover.showBenefits" defaultMessage="Show benefits available to:" />
+      </Stack>
+      {citizenshipCheckboxFilters}
+    </Stack>
+  );
 };
 
 export default CitizenshipPopover;
