@@ -40,6 +40,14 @@ const CitizenshipPopover = ({
   citizenshipFilterIsChecked,
   setCitizenshipFilterIsChecked,
 }: CitizenshipPopoverProps) => {
+  const hasAtLeastOneCitizenshipFilter = (currentCitizenshipFilters: Record<CitizenLabels, boolean>) => {
+    const citizenshipFilterValues = Object.values(currentCitizenshipFilters);
+
+    return citizenshipFilterValues.some((citizenshipFilterValue) => {
+      return citizenshipFilterValue === true;
+    });
+  };
+
   const handleFilterSelect = (citizenshipType: CitizenLabels) => {
     const isChecked = citizenshipFilterIsChecked[citizenshipType];
 
