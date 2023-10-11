@@ -60,15 +60,28 @@ const CitizenshipPopover = ({
       return updatedCitizenshipFilterIsChecked[citizenshipType];
     });
 
-    updateFilter({
-      name: 'citizen',
-      filter: {
-        id: 1,
-        columnField: 'citizenship',
-        operatorValue: 'customCitizenshipOperator',
-        value: selectedCitizenshipFilters,
-      },
-    });
+    if (hasAtLeastOneCitizenshipFilter(updatedCitizenshipFilterIsChecked)) {
+      updateFilter({
+        name: 'citizen',
+        filter: {
+          id: 1,
+          columnField: 'citizenship',
+          operatorValue: 'customCitizenshipOperator',
+          value: selectedCitizenshipFilters,
+        },
+      });
+    } else {
+      // set the citizenship filter back to the default
+      updateFilter({
+        name: 'citizen',
+        filter: {
+          id: 1,
+          columnField: 'citizenship',
+          operatorValue: 'customCitizenshipOperator',
+          value: ['citizen'],
+        },
+      });
+    }
 
     setCitizenshipFilterIsChecked(updatedCitizenshipFilterIsChecked);
   };
