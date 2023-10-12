@@ -107,11 +107,7 @@ const CitizenshipPopover = ({
     if (citizenshipFilters.green_card) {
       const allCitizenshipCheckboxes = typedCitizenshipFilterIsChecked.map((citizenshipType) => {
         //here we need to add an sx prop to indent them if they're the gc_filters
-        const isGreenCardSubCitizenshipType =
-          citizenshipType === 'gc_5plus' ||
-          citizenshipType === 'gc_18plus_no5' ||
-          citizenshipType === 'gc_under18_no5' ||
-          citizenshipType === 'gc_under19_pregnant_no5';
+        const isGreenCardSubCitizenshipType = ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5','gc_under19_pregnant_no5'].includes(citizenshipType);
 
         return (
           <FormControlLabel
@@ -152,11 +148,11 @@ const CitizenshipPopover = ({
   };
 
   return (
-    <Stack sx={{ padding: '0.5rem' }}>
-      <Stack sx={{ color: '#000000', fontWeight: 500, mt: '.5rem', ml: '.5rem' }}>
+    <Stack sx={{ padding: '0.5rem', gap: '0.25rem', ml: '0.5rem' }}>
+      <Stack sx={{ color: '#000000', fontWeight: 500, mt: '.5rem' }}>
         <FormattedMessage id="citizenshipPopover.showBenefits" defaultMessage="Show benefits available to:" />
       </Stack>
-      <Stack sx={{ ml: '.5rem' }}>{renderCitizenshipFilters(citizenshipFilterIsChecked)}</Stack>
+      <Stack>{renderCitizenshipFilters(citizenshipFilterIsChecked)}</Stack>
     </Stack>
   );
 };
