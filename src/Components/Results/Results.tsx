@@ -120,8 +120,8 @@ const Results = () => {
     category: false,
   });
 
-  const [visibleRowCount, setVisibleRowCount] = useState(1);
-  const [totalEligibleDollarValue, setTotalEligibleDollarValue] = useState(0);
+  const [citizenshipRowCount, setCitizenshipRowCount] = useState(1);
+  const [totalCitizenshipDollarValue, setTotalCitizenshipDollarValue] = useState(0);
   const apiRef = useGridApiRef();
 
   useEffect(() => {
@@ -139,8 +139,8 @@ const Results = () => {
       }
     });
 
-    setVisibleRowCount(count);
-    setTotalEligibleDollarValue(dollarAmount);
+    setCitizenshipRowCount(count);
+    setTotalCitizenshipDollarValue(dollarAmount);
   }, [results, filt]);
 
   const filtList = (filt: FilterState) => {
@@ -326,7 +326,7 @@ const Results = () => {
   };
 
   const displaySubheader = () => {
-    if (visibleRowCount === 0) {
+    if (citizenshipRowCount === 0) {
       return (
         <Grid xs={12} item>
           <h1 className="bottom-border program-value-header">
@@ -338,14 +338,14 @@ const Results = () => {
       return (
         <Grid xs={12} item>
           <h1 className="bottom-border program-value-header">
-            {visibleRowCount}
+            {citizenshipRowCount}
             <FormattedMessage
               id="results.return-programsUpToLabel"
               defaultMessage=" programs with an estimated value of "
             />
-            ${totalEligibleDollarValue.toLocaleString()}
+            ${totalCitizenshipDollarValue.toLocaleString()}
             <FormattedMessage id="results.return-perYearOrLabel" defaultMessage=" per year or " />$
-            {Math.round(totalEligibleDollarValue / 12).toLocaleString()}
+            {Math.round(totalCitizenshipDollarValue / 12).toLocaleString()}
             <FormattedMessage
               id="results.return-perMonthLabel"
               defaultMessage=" per month in cash or reduced expenses for you to consider"
@@ -370,7 +370,7 @@ const Results = () => {
     failed_tests: TestMessage[];
     category: string;
     navigators: ProgramNavigator[];
-    citizenship: string;
+    citizenship: string[];
     eligible: boolean;
   };
   const DataGridRows = (programs: Program[]): DataRow[] => {
@@ -405,7 +405,7 @@ const Results = () => {
         application_time: programs[i].estimated_application_time,
         delivery_time: programs[i].estimated_delivery_time,
         description: programs[i].description,
-        citizenship: '',
+        citizenship: [],
         application_link: programs[i].apply_button_link,
         passed_tests: programs[i].passed_tests,
         failed_tests: programs[i].failed_tests,
@@ -654,7 +654,7 @@ const Results = () => {
                 <FormattedMessage id={currentCategory.label} defaultMessage={currentCategory.defaultMessage} />
               </span>
               <span className="space-around">
-                ${totalEligibleDollarValue.toLocaleString()}{' '}
+                ${totalCitizenshipDollarValue.toLocaleString()}{' '}
                 <FormattedMessage id="results.perYear" defaultMessage="Per Year" />
               </span>
             </Toolbar>
