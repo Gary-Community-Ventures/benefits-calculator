@@ -103,52 +103,53 @@ const CitizenshipPopover = ({
 
   const typedCitizenshipFilterIsChecked = Object.keys(citizenshipFilterIsChecked) as CitizenLabels[];
 
+  const renderMainAndSubFilters = (citizenshipFilters: Record<CitizenLabels, boolean>) => {
+    return typedCitizenshipFilterIsChecked.map((citizenshipType) => {
+      //here we need to add an sx prop to indent them if they're the gc_filters
+      const isGreenCardSubCitizenshipType = [
+        'gc_5plus',
+        'gc_18plus_no5',
+        'gc_under18_no5',
+        'gc_under19_pregnant_no5',
+      ].includes(citizenshipType);
+
+      return (
+        <FormControlLabel
+          key={citizenshipType}
+          className={isGreenCardSubCitizenshipType ? 'gc-subcitizen-indentation' : ''}
+          label={citizenshipFilterFormControlLabels[citizenshipType]}
+          control={
+            <Checkbox
+              checked={citizenshipFilters[citizenshipType]}
+              onChange={() => handleFilterSelect(citizenshipType)}
+            />
+          }
+        />
+      );
+    });
+  };
+
+  const renderMainFilters = (citizenshipFilters: Record<CitizenLabels, boolean>) => {
+    //green_card is false
+    const initialThreeFilters = ['non_citizen', 'green_card', 'refugee'] as CitizenLabels[];
+    return initialThreeFilters.map((initialFilter) => {
+      return (
+        <FormControlLabel
+          key={initialFilter}
+          label={citizenshipFilterFormControlLabels[initialFilter]}
+          control={
+            <Checkbox checked={citizenshipFilters[initialFilter]} onChange={() => handleFilterSelect(initialFilter)} />
+          }
+        />
+      );
+    });
+  };
+
   const renderCitizenshipFilters = (citizenshipFilters: Record<CitizenLabels, boolean>) => {
     if (citizenshipFilters.green_card) {
-      const allCitizenshipCheckboxes = typedCitizenshipFilterIsChecked.map((citizenshipType) => {
-        //here we need to add an sx prop to indent them if they're the gc_filters
-        const isGreenCardSubCitizenshipType = [
-          'gc_5plus',
-          'gc_18plus_no5',
-          'gc_under18_no5',
-          'gc_under19_pregnant_no5',
-        ].includes(citizenshipType);
-
-        return (
-          <FormControlLabel
-            key={citizenshipType}
-            className={isGreenCardSubCitizenshipType ? 'gc-subcitizen-indentation' : ''}
-            label={citizenshipFilterFormControlLabels[citizenshipType]}
-            control={
-              <Checkbox
-                checked={citizenshipFilters[citizenshipType]}
-                onChange={() => handleFilterSelect(citizenshipType)}
-              />
-            }
-          />
-        );
-      });
-
-      return allCitizenshipCheckboxes;
+      return renderMainAndSubFilters(citizenshipFilters);
     } else {
-      //green_card is false
-      const initialThreeFilters = ['non_citizen', 'green_card', 'refugee'] as CitizenLabels[];
-      const initialCitizenshipCheckboxes = initialThreeFilters.map((initialFilter) => {
-        return (
-          <FormControlLabel
-            key={initialFilter}
-            label={citizenshipFilterFormControlLabels[initialFilter]}
-            control={
-              <Checkbox
-                checked={citizenshipFilters[initialFilter]}
-                onChange={() => handleFilterSelect(initialFilter)}
-              />
-            }
-          />
-        );
-      });
-
-      return initialCitizenshipCheckboxes;
+      return renderMainFilters(citizenshipFilters);
     }
   };
 
