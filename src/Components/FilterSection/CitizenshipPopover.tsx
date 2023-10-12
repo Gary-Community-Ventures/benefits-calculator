@@ -109,7 +109,7 @@ const CitizenshipPopover = ({
       return allCitizenshipCheckboxes;
     } else {
       //green_card is false
-      const initialThreeFilters = ['non_citizen', 'green_card', 'refugee'];
+      const initialThreeFilters = ['non_citizen', 'green_card', 'refugee'] as CitizenLabels[];
       const initialCitizenshipCheckboxes = initialThreeFilters.map((initialFilter) => {
         return (
           <FormControlLabel
