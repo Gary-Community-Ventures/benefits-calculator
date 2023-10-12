@@ -25,12 +25,6 @@ const cashAssistanceBenefits = {
       defaultMessage="State cash assistance for individuals 60 years of age or older (Old Age Pension/OAP)"
     />
   ),
-  coPropTaxRentHeatCreditRebate: (
-    <FormattedMessage
-      id="cashAssistanceBenefits.coPropTaxRentHeatCreditRebate"
-      defaultMessage="Cash to pay property tax, rent, and heat bills (Colorado Property Tax/Rent/Heat Credit Rebate)"
-    />
-  ),
 };
 
 export default cashAssistanceBenefits;
