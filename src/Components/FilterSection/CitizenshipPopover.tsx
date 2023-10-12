@@ -5,6 +5,7 @@ import { GridFilterItem, GridFilterOperator } from '@mui/x-data-grid';
 import { UpdateFilterArg } from '../Results/Results';
 import citizenshipFilterFormControlLabels from '../../Assets/citizenshipFilterFormControlLabels';
 import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
+import './CitizenshipPopover.css';
 
 export const citizenshipFilterOperators: GridFilterOperator[] = [
   {
@@ -91,10 +92,17 @@ const CitizenshipPopover = ({
   const renderCitizenshipFilters = (citizenshipFilters: Record<CitizenLabels, boolean>) => {
     if (citizenshipFilters.green_card) {
       const allCitizenshipCheckboxes = typedCitizenshipFilterIsChecked.map((citizenshipType) => {
+        //here we need to add an sx prop to indent them if they're the gc_filters
+        const isGreenCardSubCitizenshipType =
+          citizenshipType === 'gc_5plus' ||
+          citizenshipType === 'gc_18plus_no5' ||
+          citizenshipType === 'gc_under18_no5' ||
+          citizenshipType === 'gc_under19_pregnant_no5';
+
         return (
           <FormControlLabel
             key={citizenshipType}
-            className="popover"
+            className={isGreenCardSubCitizenshipType ? 'gc-subcitizen-indentation' : ''}
             label={citizenshipFilterFormControlLabels[citizenshipType]}
             control={
               <Checkbox
@@ -114,7 +122,6 @@ const CitizenshipPopover = ({
         return (
           <FormControlLabel
             key={initialFilter}
-            className="popover"
             label={citizenshipFilterFormControlLabels[initialFilter]}
             control={
               <Checkbox
@@ -131,11 +138,11 @@ const CitizenshipPopover = ({
   };
 
   return (
-    <Stack>
+    <Stack sx={{ padding: '0.5rem' }}>
       <Stack sx={{ color: '#000000', fontWeight: 500, mt: '.5rem', ml: '.5rem' }}>
         <FormattedMessage id="citizenshipPopover.showBenefits" defaultMessage="Show benefits available to:" />
       </Stack>
-      {renderCitizenshipFilters(citizenshipFilterIsChecked)}
+      <Stack sx={{ ml: '.5rem' }}>{renderCitizenshipFilters(citizenshipFilterIsChecked)}</Stack>
     </Stack>
   );
 };
