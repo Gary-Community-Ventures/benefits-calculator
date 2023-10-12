@@ -135,7 +135,7 @@ const CitizenshipPopover = ({
       <Stack sx={{ color: '#000000', fontWeight: 500, mt: '.5rem', ml: '.5rem' }}>
         <FormattedMessage id="citizenshipPopover.showBenefits" defaultMessage="Show benefits available to:" />
       </Stack>
-      {citizenshipCheckboxFilters}
+      {renderCitizenshipFilters(citizenshipFilterIsChecked)}
     </Stack>
   );
 };
