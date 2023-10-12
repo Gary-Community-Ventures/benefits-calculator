@@ -21,7 +21,9 @@ import { FormattedMessage } from 'react-intl';
 import { getStepNumber } from '../../Assets/stepDirectory';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { Context } from '../Wrapper/Wrapper.tsx';
+import EditIcon from '@mui/icons-material/Edit';
 import './HouseholdDataBlock.css';
+import { IconButton } from '@mui/material';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -201,8 +203,19 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
 
     return (
-      <article className="member-added-container" key={index}>
-        <h3 className="member-added-relationship">{relationship}:</h3>
+      <article className={`member-added-container ${index + 1 === page ? 'current-household-member' : ''}`} key={index}>
+        <div className="household-member-header">
+          <h3 className="member-added-relationship">{relationship}:</h3>
+          <div className="household-member-edit-button">
+            <IconButton
+              onClick={() => {
+                navigate(`/${uuid}/step-${step}/${index + 1}`);
+              }}
+            >
+              <EditIcon />
+            </IconButton>
+          </div>
+        </div>
         <div className="member-added-age">
           <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />: {age}
         </div>
