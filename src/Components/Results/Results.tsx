@@ -23,7 +23,6 @@ import {
   GridValueFormatterParams,
   GridFilterItem,
   GridAlignment,
-  gridVisibleRowCountSelector,
   useGridApiRef,
   gridVisibleSortedRowEntriesSelector,
 } from '@mui/x-data-grid-pro';
@@ -122,6 +121,7 @@ const Results = () => {
 
   const [citizenshipRowCount, setCitizenshipRowCount] = useState(1);
   const [totalCitizenshipDollarValue, setTotalCitizenshipDollarValue] = useState(0);
+  const [totalVisibleRowDollarValue, setTotalVisibleRowDollarValue] = useState(0);
   const apiRef = useGridApiRef();
 
   useEffect(() => {
@@ -138,9 +138,15 @@ const Results = () => {
         dollarAmount += program.estimated_value;
       }
     });
-
     setCitizenshipRowCount(count);
     setTotalCitizenshipDollarValue(dollarAmount);
+
+    if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
+      const updatedTotalEligibleDollarValue = gridVisibleSortedRowEntriesSelector(apiRef).reduce((acc, row) => {
+        return (acc += row.model.value.value);
+      }, 0);
+      setTotalVisibleRowDollarValue(updatedTotalEligibleDollarValue);
+    }
   }, [results, filt]);
 
   const filtList = (filt: FilterState) => {
@@ -654,7 +660,7 @@ const Results = () => {
                 <FormattedMessage id={currentCategory.label} defaultMessage={currentCategory.defaultMessage} />
               </span>
               <span className="space-around">
-                ${totalCitizenshipDollarValue.toLocaleString()}{' '}
+                ${totalVisibleRowDollarValue.toLocaleString()}{' '}
                 <FormattedMessage id="results.perYear" defaultMessage="Per Year" />
               </span>
             </Toolbar>
