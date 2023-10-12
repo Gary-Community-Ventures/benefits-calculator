@@ -17,12 +17,6 @@ const citizenshipFilterFormControlLabels = {
     />
   ),
   green_card: <FormattedMessage id="citizenshipFCtrlLabel-green_card" defaultMessage="Green card holders" />,
-  refugee: (
-    <FormattedMessage
-      id="citizenshipFCtrlLabel-refugee"
-      defaultMessage="Refugees or asylees (special rules or waiting periods may apply)"
-    />
-  ),
   gc_5plus: <FormattedMessage id="citizenshipFCtrlLabel-gc_5plus" defaultMessage="ONLY after 5+ years in the U.S." />,
   gc_18plus_no5: (
     <FormattedMessage
@@ -40,6 +34,12 @@ const citizenshipFilterFormControlLabels = {
     <FormattedMessage
       id="citizenshipFCtrlLabel-gc_under19_pregnant_no5"
       defaultMessage="for health care benefits - younger than 19 or pregnant without a 5-year waiting period"
+    />
+  ),
+  refugee: (
+    <FormattedMessage
+      id="citizenshipFCtrlLabel-refugee"
+      defaultMessage="Refugees or asylees (special rules or waiting periods may apply)"
     />
   ),
 };
