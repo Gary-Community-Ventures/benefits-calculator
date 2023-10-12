@@ -107,7 +107,12 @@ const CitizenshipPopover = ({
     if (citizenshipFilters.green_card) {
       const allCitizenshipCheckboxes = typedCitizenshipFilterIsChecked.map((citizenshipType) => {
         //here we need to add an sx prop to indent them if they're the gc_filters
-        const isGreenCardSubCitizenshipType = ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5','gc_under19_pregnant_no5'].includes(citizenshipType);
+        const isGreenCardSubCitizenshipType = [
+          'gc_5plus',
+          'gc_18plus_no5',
+          'gc_under18_no5',
+          'gc_under19_pregnant_no5',
+        ].includes(citizenshipType);
 
         return (
           <FormControlLabel
