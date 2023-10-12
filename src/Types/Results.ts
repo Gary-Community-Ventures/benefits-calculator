@@ -28,7 +28,7 @@ export type Program = {
   value_type: Translation;
   learn_more_link: Translation;
   apply_button_link: Translation;
-  legal_status_required: string;
+  legal_status_required: string[];
   category: Translation;
   eligible: boolean;
   failed_tests: TestMessage[];

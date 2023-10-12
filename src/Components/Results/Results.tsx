@@ -125,18 +125,22 @@ const Results = () => {
   const apiRef = useGridApiRef();
 
   useEffect(() => {
-    //use the visible row count so that we don't have to calculate the total eligible programs
-    //because doing so would require rewriting all of DGPro's filtering logic
-    //but the mui docs say that if you try to reference apiRef before the datagrid is rendered then it'll crash the app
-    //hence the if statements prevent us from accessing the apiRef before it's ready
-    if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
-      setVisibleRowCount(gridVisibleRowCountSelector(apiRef));
+    let count = 0;
+    let dollarAmount = 0;
+    const eligiblePrograms = results.programs.filter((program) => program.eligible);
+    eligiblePrograms.forEach((program) => {
+      const hasOverlap = program.legal_status_required.some((legalStatusType) => {
+        return filt.citizen.value.includes(legalStatusType);
+      });
 
-      const updatedTotalEligibleDollarValue = gridVisibleSortedRowEntriesSelector(apiRef).reduce((acc, row) => {
-        return (acc += row.model.value.value);
-      }, 0);
-      setTotalEligibleDollarValue(updatedTotalEligibleDollarValue);
-    }
+      if (hasOverlap) {
+        count += 1;
+        dollarAmount += program.estimated_value;
+      }
+    });
+
+    setVisibleRowCount(count);
+    setTotalEligibleDollarValue(dollarAmount);
   }, [results, filt]);
 
   const filtList = (filt: FilterState) => {
