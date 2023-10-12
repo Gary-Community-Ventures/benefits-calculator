@@ -52,15 +52,28 @@ const CitizenshipPopover = ({
   const handleFilterSelect = (citizenshipType: CitizenLabels) => {
     const isChecked = citizenshipFilterIsChecked[citizenshipType];
 
-    const updatedCitizenshipFilterIsChecked: Record<CitizenLabels, boolean> = {
+    let updatedCitizenshipFilterIsChecked: Record<CitizenLabels, boolean> = {
       ...citizenshipFilterIsChecked,
       [citizenshipType]: !isChecked,
     };
+
+    if (citizenshipType === 'green_card') {
+      // if the citizenshipType is `green_card`, then set green_card and all the gc_options to true or false
+      // i.e. green_card and all the gc_options should be the same when citizenshipType is `green_card`
+      updatedCitizenshipFilterIsChecked = {
+        ...updatedCitizenshipFilterIsChecked,
+        gc_5plus: !isChecked,
+        gc_18plus_no5: !isChecked,
+        gc_under18_no5: !isChecked,
+        gc_under19_pregnant_no5: !isChecked,
+      };
+    }
     const typedUpdatedCitizenshipFilterIsChecked = Object.keys(updatedCitizenshipFilterIsChecked) as CitizenLabels[];
     const selectedCitizenshipFilters = typedUpdatedCitizenshipFilterIsChecked.filter((citizenshipType) => {
       return updatedCitizenshipFilterIsChecked[citizenshipType];
     });
 
+    //update the MUI filter that is being passed to the citizenship column
     if (hasAtLeastOneCitizenshipFilter(updatedCitizenshipFilterIsChecked)) {
       updateFilter({
         name: 'citizen',
@@ -84,6 +97,7 @@ const CitizenshipPopover = ({
       });
     }
 
+    //update citizenshipFilterIsChecked state
     setCitizenshipFilterIsChecked(updatedCitizenshipFilterIsChecked);
   };
 
