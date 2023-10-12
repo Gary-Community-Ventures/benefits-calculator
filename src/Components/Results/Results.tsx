@@ -65,11 +65,11 @@ const Results = () => {
   const [citizenshipFilterIsChecked, setCitizenshipFilterIsChecked] = useState<Record<CitizenLabels, boolean>>({
     non_citizen: false,
     green_card: false,
-    refugee: false,
     gc_5plus: false,
     gc_18plus_no5: false,
     gc_under18_no5: false,
     gc_under19_pregnant_no5: false,
+    refugee: false,
   });
   const categoryState = useState('All Categories');
   const eligibilityState = useState('eligibleBenefits');

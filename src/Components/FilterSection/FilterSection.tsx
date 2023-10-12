@@ -79,11 +79,11 @@ const FilterSection = ({
     setCitizenshipFilterIsChecked({
       non_citizen: false,
       green_card: false,
-      refugee: false,
       gc_5plus: false,
       gc_18plus_no5: false,
       gc_under18_no5: false,
       gc_under19_pregnant_no5: false,
+      refugee: false,
     });
     categoryState[1]('All Categories');
     eligibilityState[1]('eligibleBenefits');
