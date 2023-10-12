@@ -87,21 +87,48 @@ const CitizenshipPopover = ({
   };
 
   const typedCitizenshipFilterIsChecked = Object.keys(citizenshipFilterIsChecked) as CitizenLabels[];
-  const citizenshipCheckboxFilters = typedCitizenshipFilterIsChecked.map((citizenshipType) => {
-    return (
-      <FormControlLabel
-        key={citizenshipType}
-        className="popover"
-        label={citizenshipFilterFormControlLabels[citizenshipType]}
-        control={
-          <Checkbox
-            checked={citizenshipFilterIsChecked[citizenshipType]}
-            onChange={() => handleFilterSelect(citizenshipType)}
+
+  const renderCitizenshipFilters = (citizenshipFilters: Record<CitizenLabels, boolean>) => {
+    if (citizenshipFilters.green_card) {
+      const allCitizenshipCheckboxes = typedCitizenshipFilterIsChecked.map((citizenshipType) => {
+        return (
+          <FormControlLabel
+            key={citizenshipType}
+            className="popover"
+            label={citizenshipFilterFormControlLabels[citizenshipType]}
+            control={
+              <Checkbox
+                checked={citizenshipFilters[citizenshipType]}
+                onChange={() => handleFilterSelect(citizenshipType)}
+              />
+            }
           />
-        }
-      />
-    );
-  });
+        );
+      });
+
+      return allCitizenshipCheckboxes;
+    } else {
+      //green_card is false
+      const initialThreeFilters = ['non_citizen', 'green_card', 'refugee'];
+      const initialCitizenshipCheckboxes = initialThreeFilters.map((initialFilter) => {
+        return (
+          <FormControlLabel
+            key={initialFilter}
+            className="popover"
+            label={citizenshipFilterFormControlLabels[initialFilter]}
+            control={
+              <Checkbox
+                checked={citizenshipFilters[initialFilter]}
+                onChange={() => handleFilterSelect(initialFilter)}
+              />
+            }
+          />
+        );
+      });
+
+      return initialCitizenshipCheckboxes;
+    }
+  };
 
   return (
     <Stack>
