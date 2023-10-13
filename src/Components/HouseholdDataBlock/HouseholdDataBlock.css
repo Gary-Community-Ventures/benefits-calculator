@@ -2,10 +2,21 @@
   display: inline-flex;
   flex-direction: column;
   flex-wrap: wrap;
-  border: 1px solid black;
+  outline: 1px solid black;
   border-radius: 10px;
   padding: 0.7rem;
   margin: 0.5rem;
+  position: relative;
+}
+
+.household-member-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.current-household-member {
+  outline: 3px solid var(--primary-color);
   box-shadow: 1px 1px 10px rgb(0 0 0 / 0.4);
 }
 
