@@ -156,7 +156,7 @@ const Results = () => {
 
       //this is only to cap the totalVisibleRowDollarValue for preschool
       const typedFiltCategory = filt.category as GridFilterItem;
-      if (typedFiltCategory.value === 'Child Care, Preschool, and Youth' && updatedTotalEligibleDollarValue > 8640) {
+      if (typedFiltCategory.value === preschoolProgramCategory && updatedTotalEligibleDollarValue > 8640) {
         setTotalVisibleRowDollarValue(8640);
         return;
       }
@@ -213,7 +213,7 @@ const Results = () => {
     });
   };
 
-  const preschoolProgramCategory = 'Child Care, Preschool, and Youth';
+  const preschoolProgramCategory = 'Child Care, Youth, and Education';
   const categoryValues = (programs: Program[]) => {
     const preschoolPrograms = { numOfPreSchoolPrograms: 0, totalEstVal: 0 }; //i=0 => num of preschool prog, i=1 => prog.est.value
     const categoryValues: { [key: string]: number } = {};
