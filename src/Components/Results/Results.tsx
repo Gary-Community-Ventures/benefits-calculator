@@ -126,8 +126,8 @@ const Results = () => {
 
   useEffect(() => {
     let count = 0;
-    let dollarAmount = 0;
     const eligiblePrograms = results.programs.filter((program) => program.eligible);
+
     eligiblePrograms.forEach((program) => {
       const hasOverlap = program.legal_status_required.some((legalStatusType) => {
         return filt.citizen.value.includes(legalStatusType);
@@ -135,11 +135,17 @@ const Results = () => {
 
       if (hasOverlap) {
         count += 1;
-        dollarAmount += program.estimated_value;
       }
     });
+
+    //used this instead of the real total to take into account the preschool category value cap at 8640
+    const categoryValuesArray = Object.values(categoryValues(eligiblePrograms));
+    const cappedCatValuesTotalDollarAmount = categoryValuesArray.reduce((acc, categoryAmt) => {
+      return acc += categoryAmt;
+    }, 0);
+
     setCitizenshipRowCount(count);
-    setTotalCitizenshipDollarValue(dollarAmount);
+    setTotalCitizenshipDollarValue(cappedCatValuesTotalDollarAmount);
 
     if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
       const updatedTotalEligibleDollarValue = gridVisibleSortedRowEntriesSelector(apiRef).reduce((acc, row) => {
@@ -223,7 +229,7 @@ const Results = () => {
     if (preschoolPrograms.totalEstVal > 8640 && preschoolPrograms.numOfPreSchoolPrograms > 1) {
       categoryValues[preschoolProgramCategory] = 8640;
     }
-    
+
     return categoryValues;
   };
 
