@@ -142,7 +142,7 @@ const Results = () => {
     //used this instead of the real total to take into account the preschool category value cap at 8640
     const categoryValuesArray = Object.values(categoryValues(eligiblePrograms));
     const cappedCatValuesTotalDollarAmount = categoryValuesArray.reduce((acc, categoryAmt) => {
-      return acc += categoryAmt;
+      return (acc += categoryAmt);
     }, 0);
 
     setCitizenshipRowCount(count);
@@ -215,7 +215,7 @@ const Results = () => {
 
   const preschoolProgramCategory = 'Child Care, Preschool, and Youth';
   const categoryValues = (programs: Program[]) => {
-    const preschoolPrograms = { numOfPreSchoolPrograms: 0, totalEstVal: 0}; //i=0 => num of preschool prog, i=1 => prog.est.value
+    const preschoolPrograms = { numOfPreSchoolPrograms: 0, totalEstVal: 0 }; //i=0 => num of preschool prog, i=1 => prog.est.value
     const categoryValues: { [key: string]: number } = {};
     for (let program of programs) {
       //add this category to the categoryValues dictionary if the key doesn't already exist
