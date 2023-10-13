@@ -23,7 +23,6 @@ import {
   GridValueFormatterParams,
   GridFilterItem,
   GridAlignment,
-  gridVisibleRowCountSelector,
   useGridApiRef,
   gridVisibleSortedRowEntriesSelector,
 } from '@mui/x-data-grid-pro';
@@ -64,13 +63,12 @@ const Results = () => {
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const [citizenshipFilterIsChecked, setCitizenshipFilterIsChecked] = useState<Record<CitizenLabels, boolean>>({
     non_citizen: false,
-    citizen: true,
     green_card: false,
-    refugee: false,
     gc_5plus: false,
     gc_18plus_no5: false,
     gc_under18_no5: false,
     gc_under19_pregnant_no5: false,
+    refugee: false,
   });
   const categoryState = useState('All Categories');
   const eligibilityState = useState('eligibleBenefits');
@@ -121,22 +119,49 @@ const Results = () => {
     category: false,
   });
 
-  const [visibleRowCount, setVisibleRowCount] = useState(1);
-  const [totalEligibleDollarValue, setTotalEligibleDollarValue] = useState(0);
+  const [citizenshipRowCount, setCitizenshipRowCount] = useState(1);
+  const [totalCitizenshipDollarValue, setTotalCitizenshipDollarValue] = useState(0);
+  const [totalVisibleRowDollarValue, setTotalVisibleRowDollarValue] = useState(0);
   const apiRef = useGridApiRef();
 
   useEffect(() => {
-    //use the visible row count so that we don't have to calculate the total eligible programs
-    //because doing so would require rewriting all of DGPro's filtering logic
-    //but the mui docs say that if you try to reference apiRef before the datagrid is rendered then it'll crash the app
-    //hence the if statements prevent us from accessing the apiRef before it's ready
-    if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
-      setVisibleRowCount(gridVisibleRowCountSelector(apiRef));
+    let count = 0;
+    const eligiblePrograms = results.programs.filter((program) => program.eligible);
 
+    //this will calculate the number of eligible programs/rows
+    eligiblePrograms.forEach((program) => {
+      const hasOverlap = program.legal_status_required.some((legalStatusType) => {
+        return filt.citizen.value.includes(legalStatusType);
+      });
+
+      if (hasOverlap) {
+        count += 1;
+      }
+    });
+
+    //used this instead of the real total to take into account the preschool category value cap at 8640
+    const categoryValuesArray = Object.values(categoryValues(eligiblePrograms));
+    const cappedCatValuesTotalDollarAmount = categoryValuesArray.reduce((acc, categoryAmt) => {
+      return (acc += categoryAmt);
+    }, 0);
+
+    setCitizenshipRowCount(count);
+    setTotalCitizenshipDollarValue(cappedCatValuesTotalDollarAmount);
+
+    //this is for the category header
+    if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
       const updatedTotalEligibleDollarValue = gridVisibleSortedRowEntriesSelector(apiRef).reduce((acc, row) => {
         return (acc += row.model.value.value);
       }, 0);
-      setTotalEligibleDollarValue(updatedTotalEligibleDollarValue);
+
+      //this is only to cap the totalVisibleRowDollarValue for preschool
+      const typedFiltCategory = filt.category as GridFilterItem;
+      if (typedFiltCategory.value === preschoolProgramCategory && updatedTotalEligibleDollarValue > 8640) {
+        setTotalVisibleRowDollarValue(8640);
+        return;
+      }
+
+      setTotalVisibleRowDollarValue(updatedTotalEligibleDollarValue);
     }
   }, [results, filt]);
 
@@ -190,28 +215,29 @@ const Results = () => {
 
   const preschoolProgramCategory = 'Child Care, Youth, and Education';
   const categoryValues = (programs: Program[]) => {
-    const preschoolPrograms = [0, 0];
+    const preschoolPrograms = { numOfPreSchoolPrograms: 0, totalEstVal: 0 }; //i=0 => num of preschool prog, i=1 => prog.est.value
     const categoryValues: { [key: string]: number } = {};
     for (let program of programs) {
+      //add this category to the categoryValues dictionary if the key doesn't already exist
       if (categoryValues[program.category.default_message] === undefined) {
         categoryValues[program.category.default_message] = 0;
       }
 
-      if (program.legal_status_required.includes(filt.citizen.value)) {
+      const hasOverlap = program.legal_status_required.some((status) => {
+        return filt.citizen.value.includes(status);
+      });
+
+      if (hasOverlap) {
         categoryValues[program.category.default_message] += program.estimated_value;
-        if (preschoolProgramCategory == program.category.default_message) {
-          preschoolPrograms[0]++;
-          preschoolPrograms[1] += program.estimated_value;
+        if (program.category.default_message === preschoolProgramCategory) {
+          preschoolPrograms.numOfPreSchoolPrograms++;
+          preschoolPrograms.totalEstVal += program.estimated_value;
         }
       }
     }
 
-    for (const category in preschoolPrograms) {
-      if (Object.keys(preschoolPrograms).includes(category)) {
-        if (preschoolPrograms[1] > 8640 && preschoolPrograms[0] > 1) {
-          categoryValues[category] = 8640;
-        }
-      }
+    if (preschoolPrograms.totalEstVal > 8640 && preschoolPrograms.numOfPreSchoolPrograms > 1) {
+      categoryValues[preschoolProgramCategory] = 8640;
     }
 
     return categoryValues;
@@ -323,7 +349,7 @@ const Results = () => {
   };
 
   const displaySubheader = () => {
-    if (visibleRowCount === 0) {
+    if (citizenshipRowCount === 0) {
       return (
         <Grid xs={12} item>
           <h1 className="bottom-border program-value-header">
@@ -335,14 +361,14 @@ const Results = () => {
       return (
         <Grid xs={12} item>
           <h1 className="bottom-border program-value-header">
-            {visibleRowCount}
+            {citizenshipRowCount}
             <FormattedMessage
               id="results.return-programsUpToLabel"
               defaultMessage=" programs with an estimated value of "
             />
-            ${totalEligibleDollarValue.toLocaleString()}
+            ${totalCitizenshipDollarValue.toLocaleString()}
             <FormattedMessage id="results.return-perYearOrLabel" defaultMessage=" per year or " />$
-            {Math.round(totalEligibleDollarValue / 12).toLocaleString()}
+            {Math.round(totalCitizenshipDollarValue / 12).toLocaleString()}
             <FormattedMessage
               id="results.return-perMonthLabel"
               defaultMessage=" per month in cash or reduced expenses for you to consider"
@@ -367,7 +393,7 @@ const Results = () => {
     failed_tests: TestMessage[];
     category: string;
     navigators: ProgramNavigator[];
-    citizenship: string;
+    citizenship: string[];
     eligible: boolean;
   };
   const DataGridRows = (programs: Program[]): DataRow[] => {
@@ -402,7 +428,7 @@ const Results = () => {
         application_time: programs[i].estimated_application_time,
         delivery_time: programs[i].estimated_delivery_time,
         description: programs[i].description,
-        citizenship: '',
+        citizenship: [],
         application_link: programs[i].apply_button_link,
         passed_tests: programs[i].passed_tests,
         failed_tests: programs[i].failed_tests,
@@ -651,7 +677,7 @@ const Results = () => {
                 <FormattedMessage id={currentCategory.label} defaultMessage={currentCategory.defaultMessage} />
               </span>
               <span className="space-around">
-                ${totalEligibleDollarValue.toLocaleString()}{' '}
+                ${totalVisibleRowDollarValue.toLocaleString()}{' '}
                 <FormattedMessage id="results.perYear" defaultMessage="Per Year" />
               </span>
             </Toolbar>
