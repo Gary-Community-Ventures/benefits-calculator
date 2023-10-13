@@ -131,7 +131,7 @@ const CitizenshipPopover = ({
 
   const renderMainFilters = (citizenshipFilters: Record<CitizenLabels, boolean>) => {
     //green_card is false
-    const initialThreeFilters = ['non_citizen', 'green_card', 'refugee'] as CitizenLabels[];
+    const initialThreeFilters: CitizenLabels[] = ['non_citizen', 'green_card', 'refugee'];
     return initialThreeFilters.map((initialFilter) => {
       return (
         <FormControlLabel
