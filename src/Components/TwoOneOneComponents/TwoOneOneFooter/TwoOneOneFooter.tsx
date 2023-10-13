@@ -16,7 +16,7 @@ const TwoOneOneFooter = () => {
             <FormattedMessage id="footer-chat-text" defaultMessage="Chat" />
           </Typography>
           <Link
-            href="https://home-c27.incontact.com/inContact/ChatClient/ChatClientPatron.aspx?poc=f927e51b-f96e-477b-9052-088d1fbcdc8f&bu=4594486"
+            href="https://www.211colorado.org/chat/#english"
             underline="none"
             target="_blank"
             rel="noreferrer"

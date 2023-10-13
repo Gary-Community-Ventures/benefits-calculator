@@ -8,12 +8,14 @@ import { FormattedMessage } from 'react-intl';
 import { Button } from '@mui/material';
 import './FilterSection.css';
 import { UpdateFilterArg } from '../Results/Results';
+import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 
 type StateType<T> = [T, React.Dispatch<React.SetStateAction<T>>];
 type FilterProps = {
   updateFilter: (...args: UpdateFilterArg[]) => void;
   categories: { defaultMessage: string; label: string }[];
-  citizenToggleState: StateType<boolean>;
+  citizenshipFilterIsChecked: Record<CitizenLabels, boolean>;
+  setCitizenshipFilterIsChecked: (citizenshipFilterState: Record<CitizenLabels, boolean>) => void;
   categoryState: StateType<string>;
   eligibilityState: StateType<string>;
   alreadyHasToggleState: StateType<boolean>;
@@ -21,7 +23,8 @@ type FilterProps = {
 const FilterSection = ({
   updateFilter,
   categories,
-  citizenToggleState,
+  citizenshipFilterIsChecked,
+  setCitizenshipFilterIsChecked,
   categoryState,
   eligibilityState,
   alreadyHasToggleState,
@@ -66,14 +69,22 @@ const FilterSection = ({
         filter: {
           id: 1,
           columnField: 'citizenship',
-          operatorValue: 'isAnyOf',
-          value: ['citizen', 'none'],
+          operatorValue: 'customCitizenshipOperator',
+          value: ['citizen'],
         },
       },
     );
 
     //this resets the radio buttons
-    citizenToggleState[1](false);
+    setCitizenshipFilterIsChecked({
+      non_citizen: false,
+      green_card: false,
+      gc_5plus: false,
+      gc_18plus_no5: false,
+      gc_under18_no5: false,
+      gc_under19_pregnant_no5: false,
+      refugee: false,
+    });
     categoryState[1]('All Categories');
     eligibilityState[1]('eligibleBenefits');
     alreadyHasToggleState[1](false);
@@ -87,13 +98,19 @@ const FilterSection = ({
     setOtherPopoverAnchor(null);
   };
 
+  const isSomeCitizenshipFilterChecked = () => {
+    return Object.values(citizenshipFilterIsChecked).some((citizenshipFilterIsChecked) => {
+      return citizenshipFilterIsChecked === true;
+    });
+  };
+
   return (
     <div className="filter-button-container">
       <FilterListIcon sx={{ mr: '.5rem', color: theme.primaryColor }} />
       <Button
         id="citizenship"
         variant="contained"
-        className={(citizenToggleState[0] && 'active-filter') + ' filter-button citizen'}
+        className={(isSomeCitizenshipFilterChecked() && 'active-filter') + ' filter-button citizen'}
         onClick={(event) => {
           setCitizenshipPopoverAnchor(event.currentTarget);
         }}
@@ -109,8 +126,13 @@ const FilterSection = ({
           vertical: 'bottom',
           horizontal: 'left',
         }}
+        sx={{ position: 'absolute' }}
       >
-        <CitizenshipPopover updateFilter={updateFilter} citizenToggleState={citizenToggleState} />
+        <CitizenshipPopover
+          updateFilter={updateFilter}
+          citizenshipFilterIsChecked={citizenshipFilterIsChecked}
+          setCitizenshipFilterIsChecked={setCitizenshipFilterIsChecked}
+        />
       </Popover>
       <Button
         id="other"
@@ -131,6 +153,7 @@ const FilterSection = ({
           vertical: 'bottom',
           horizontal: 'left',
         }}
+        sx={{ position: 'absolute' }}
       >
         <OtherPopover
           updateFilter={updateFilter}
