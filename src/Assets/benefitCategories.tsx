@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 const benefitCategories = {
   cash: <FormattedMessage id="benefitCategories.cash" defaultMessage="Cash Assistance" />,
   foodAndNutrition: <FormattedMessage id="benefitCategories.foodAndNutrition" defaultMessage="Food and Nutrition" />,
-  childCare: <FormattedMessage id="benefitCategories.childCare" defaultMessage="Child Care, Preschool, and Youth" />,
+  childCare: <FormattedMessage id="benefitCategories.childCare" defaultMessage="Child Care, Youth, and Education" />,
   housingAndUtilities: (
     <FormattedMessage id="benefitCategories.housingAndUtilities" defaultMessage="Housing and Utilities" />
   ),
