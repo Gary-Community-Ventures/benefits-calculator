@@ -202,8 +202,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       income += Number(num);
     }
 
+    const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
+
     return (
-      <article className={`member-added-container ${index + 1 === page ? 'current-household-member' : ''}`} key={index}>
+      <article className={containerClassName} key={index}>
         <div className="household-member-header">
           <h3 className="member-added-relationship">{relationship}:</h3>
           <div className="household-member-edit-button">
