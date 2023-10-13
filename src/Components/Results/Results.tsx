@@ -128,6 +128,7 @@ const Results = () => {
     let count = 0;
     const eligiblePrograms = results.programs.filter((program) => program.eligible);
 
+    //this will calculate the number of eligible programs/rows
     eligiblePrograms.forEach((program) => {
       const hasOverlap = program.legal_status_required.some((legalStatusType) => {
         return filt.citizen.value.includes(legalStatusType);
@@ -147,10 +148,19 @@ const Results = () => {
     setCitizenshipRowCount(count);
     setTotalCitizenshipDollarValue(cappedCatValuesTotalDollarAmount);
 
+    //this is for the category header
     if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
       const updatedTotalEligibleDollarValue = gridVisibleSortedRowEntriesSelector(apiRef).reduce((acc, row) => {
         return (acc += row.model.value.value);
       }, 0);
+
+      //this is only to cap the totalVisibleRowDollarValue for preschool
+      const typedFiltCategory = filt.category as GridFilterItem;
+      if (typedFiltCategory.value === 'Child Care, Preschool, and Youth' && updatedTotalEligibleDollarValue > 8640) {
+        setTotalVisibleRowDollarValue(8640);
+        return;
+      }
+
       setTotalVisibleRowDollarValue(updatedTotalEligibleDollarValue);
     }
   }, [results, filt]);
@@ -203,7 +213,7 @@ const Results = () => {
     });
   };
 
-  const preschoolProgramCategory = 'Child Care, Youth, and Education';
+  const preschoolProgramCategory = 'Child Care, Preschool, and Youth';
   const categoryValues = (programs: Program[]) => {
     const preschoolPrograms = { numOfPreSchoolPrograms: 0, totalEstVal: 0}; //i=0 => num of preschool prog, i=1 => prog.est.value
     const categoryValues: { [key: string]: number } = {};
