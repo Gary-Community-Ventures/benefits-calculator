@@ -40,8 +40,10 @@ export interface Benefits {
   mydenver: boolean;
   nslp: boolean;
   oap: boolean;
+  pell: boolean;
   rtdlive: boolean;
   snap: boolean;
+  ssdi: boolean;
   ssi: boolean;
   tanf: boolean;
   upk: boolean;
