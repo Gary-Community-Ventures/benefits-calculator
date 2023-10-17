@@ -120,7 +120,10 @@ const Results = () => {
   });
 
   const [citizenshipRowCount, setCitizenshipRowCount] = useState(1);
-  const [totalCitizenshipDollarValue, setTotalCitizenshipDollarValue] = useState(0);
+  const [totalCitizenshipDollarValue, setTotalCitizenshipDollarValue] = useState({
+    cashOrReducedExpenses: 0,
+    taxCredits: 0
+  });
   const [totalVisibleRowDollarValue, setTotalVisibleRowDollarValue] = useState(0);
   const apiRef = useGridApiRef();
 
