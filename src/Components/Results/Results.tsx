@@ -385,13 +385,13 @@ const Results = () => {
               id="results.return-programsUpToLabel"
               defaultMessage=" programs with an estimated value of "
             />
-            ${totalCitizenshipDollarValue.toLocaleString()}
-            <FormattedMessage id="results.return-perYearOrLabel" defaultMessage=" per year or " />$
-            {Math.round(totalCitizenshipDollarValue / 12).toLocaleString()}
+            ${Math.round(totalCitizenshipDollarValue.cashOrReducedExpenses / 12).toLocaleString()}
             <FormattedMessage
               id="results.return-perMonthLabel"
-              defaultMessage=" per month in cash or reduced expenses for you to consider"
+              defaultMessage=" monthly in cash or reduced expenses, and "
             />
+            ${Math.round(totalCitizenshipDollarValue.taxCredits).toLocaleString()}
+            <FormattedMessage id="results.return-taxCredits" defaultMessage=" in tax credits for you to consider " />
           </h1>
         </Grid>
       );
