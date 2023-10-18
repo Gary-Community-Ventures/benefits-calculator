@@ -688,7 +688,7 @@ const Results = () => {
               </span>
             </Toolbar>
             {currentCategory.defaultMessage ===
-              categories.find((cat) => cat.defaultMessage === preschoolProgramCategory)?.defaultMessage && (
+              categories.find((cat) => cat.defaultMessage === preschoolProgramCategoryString)?.defaultMessage && (
               <Typography variant="body2" className="child-care-helper-text">
                 <FormattedMessage
                   id="benefitCategories.childCareHelperText"
