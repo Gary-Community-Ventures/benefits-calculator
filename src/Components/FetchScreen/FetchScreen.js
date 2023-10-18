@@ -64,7 +64,7 @@ const FetchScreen = () => {
         mydenver: response.has_mydenver ?? false,
         nslp: response.has_nslp ?? false,
         oap: response.has_oap ?? false,
-        pell: response.has_pell ?? false,
+        pell: response.has_pell_grant ?? false,
         rtdlive: response.has_rtdlive ?? false,
         snap: response.has_snap ?? false,
         ssdi: response.has_ssdi ?? false,
