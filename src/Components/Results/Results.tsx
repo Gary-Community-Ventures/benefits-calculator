@@ -122,7 +122,7 @@ const Results = () => {
   const [citizenshipRowCount, setCitizenshipRowCount] = useState(1);
   const [totalCitizenshipDollarValue, setTotalCitizenshipDollarValue] = useState({
     cashOrReducedExpenses: 0,
-    taxCredits: 0
+    taxCredits: 0,
   });
   const [totalVisibleRowDollarValue, setTotalVisibleRowDollarValue] = useState(0);
   const apiRef = useGridApiRef();
@@ -144,24 +144,27 @@ const Results = () => {
 
     //used categoryValues(eligiblePrograms) instead of the real total to take into account the preschool category value cap at 8640
     const allCategoriesAndValuesObjCappedForPreschool = categoryValues(eligiblePrograms);
-    const totalCashAndTaxCreditValues = Object.entries(allCategoriesAndValuesObjCappedForPreschool).reduce((acc, categoryAndValueArr) => {
-      const categoryName = categoryAndValueArr[0];
-      const categoryValue = categoryAndValueArr[1];
-      const taxCreditsCategoryString = 'Tax Credits';
+    const totalCashAndTaxCreditValues = Object.entries(allCategoriesAndValuesObjCappedForPreschool).reduce(
+      (acc, categoryAndValueArr) => {
+        const categoryName = categoryAndValueArr[0];
+        const categoryValue = categoryAndValueArr[1];
+        const taxCreditsCategoryString = 'Tax Credits';
 
-      if (categoryName === taxCreditsCategoryString) {
-        acc.taxCredits += categoryValue;
-      } else {
-        acc.cashOrReducedExp += categoryValue;
-      }
+        if (categoryName === taxCreditsCategoryString) {
+          acc.taxCredits += categoryValue;
+        } else {
+          acc.cashOrReducedExp += categoryValue;
+        }
 
-      return acc;
-    }, {cashOrReducedExp: 0, taxCredits: 0});
+        return acc;
+      },
+      { cashOrReducedExp: 0, taxCredits: 0 },
+    );
 
     setCitizenshipRowCount(count);
     setTotalCitizenshipDollarValue({
       cashOrReducedExpenses: totalCashAndTaxCreditValues.cashOrReducedExp,
-      taxCredits: totalCashAndTaxCreditValues.taxCredits
+      taxCredits: totalCashAndTaxCreditValues.taxCredits,
     });
 
     //this is for the category header
