@@ -385,7 +385,6 @@ export interface Language extends Record<string, string> {
   'cashAssistanceBenefits.oap': string;
   'cashAssistanceBenefits.coPropTaxRentHeatCreditRebate': string;
   'cashAssistanceBenefits.ssdi': string;
-  'cashAssistanceBenefits.pell': string;
   'foodAndNutritionBenefits.snap': string;
   'foodAndNutritionBenefits.wic': string;
   'foodAndNutritionBenefits.nslp': string;
@@ -395,6 +394,7 @@ export interface Language extends Record<string, string> {
   'childCareBenefits.coheadstart': string;
   'childCareBenefits.mydenver': string;
   'childCareBenefits.univpresc': string;
+  'childCareBenefits.pell': string;
   'housingAndUtilities.acp': string;
   'housingAndUtilities.lifeline': string;
   'housingAndUtilities.leap': string;

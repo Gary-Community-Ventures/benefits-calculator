@@ -31,12 +31,6 @@ const cashAssistanceBenefits = {
       defaultMessage="Social security benefit for people with disabilities (Social Security Disability Insurance/SSDI)"
     />
   ),
-  pell: (
-    <FormattedMessage
-      id="cashAssistanceBenefits.pell"
-      defaultMessage="Federal grant to finance college costs (Pell Grant)"
-    />
-  ),
 };
 
 export default cashAssistanceBenefits;
