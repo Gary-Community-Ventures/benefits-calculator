@@ -216,9 +216,9 @@ const Results = () => {
     });
   };
 
-  const preschoolProgramCategory = 'Child Care, Youth, and Education';
+  const preschoolProgramCategoryString = 'Child Care, Youth, and Education';
   const categoryValues = (programs: Program[]) => {
-    const preschoolPrograms = { numOfPreSchoolPrograms: 0, totalEstVal: 0 }; //i=0 => num of preschool prog, i=1 => prog.est.value
+    const preschoolPrograms = { numOfPreSchoolPrograms: 0, totalEstVal: 0 };
     const categoryValues: { [key: string]: number } = {};
     for (let program of programs) {
       //add this category to the categoryValues dictionary if the key doesn't already exist
@@ -231,8 +231,11 @@ const Results = () => {
       });
 
       if (hasOverlap) {
+        //we add that program's est value to its corresponding categoryValues key
         categoryValues[program.category.default_message] += program.estimated_value;
-        if (program.category.default_message === preschoolProgramCategory) {
+
+        //if the program is a preschoolProgram, we also add it to the preschoolPrograms separately
+        if (program.category.default_message === preschoolProgramCategoryString) {
           preschoolPrograms.numOfPreSchoolPrograms++;
           preschoolPrograms.totalEstVal += program.estimated_value;
         }
@@ -240,7 +243,7 @@ const Results = () => {
     }
 
     if (preschoolPrograms.totalEstVal > 8640 && preschoolPrograms.numOfPreSchoolPrograms > 1) {
-      categoryValues[preschoolProgramCategory] = 8640;
+      categoryValues[preschoolProgramCategoryString] = 8640;
     }
 
     return categoryValues;
