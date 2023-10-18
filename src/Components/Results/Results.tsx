@@ -142,14 +142,27 @@ const Results = () => {
       }
     });
 
-    //used this instead of the real total to take into account the preschool category value cap at 8640
-    const categoryValuesArray = Object.values(categoryValues(eligiblePrograms));
-    const cappedCatValuesTotalDollarAmount = categoryValuesArray.reduce((acc, categoryAmt) => {
-      return (acc += categoryAmt);
-    }, 0);
+    //used categoryValues(eligiblePrograms) instead of the real total to take into account the preschool category value cap at 8640
+    const allCategoriesAndValuesObjCappedForPreschool = categoryValues(eligiblePrograms);
+    const totalCashAndTaxCreditValues = Object.entries(allCategoriesAndValuesObjCappedForPreschool).reduce((acc, categoryAndValueArr) => {
+      const categoryName = categoryAndValueArr[0];
+      const categoryValue = categoryAndValueArr[1];
+      const taxCreditsCategoryString = 'Tax Credits';
+
+      if (categoryName === taxCreditsCategoryString) {
+        acc.taxCredits += categoryValue;
+      } else {
+        acc.cashOrReducedExp += categoryValue;
+      }
+
+      return acc;
+    }, {cashOrReducedExp: 0, taxCredits: 0});
 
     setCitizenshipRowCount(count);
-    setTotalCitizenshipDollarValue(cappedCatValuesTotalDollarAmount);
+    setTotalCitizenshipDollarValue({
+      cashOrReducedExpenses: totalCashAndTaxCreditValues.cashOrReducedExp,
+      taxCredits: totalCashAndTaxCreditValues.taxCredits
+    });
 
     //this is for the category header
     if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
@@ -159,7 +172,7 @@ const Results = () => {
 
       //this is only to cap the totalVisibleRowDollarValue for preschool
       const typedFiltCategory = filt.category as GridFilterItem;
-      if (typedFiltCategory.value === preschoolProgramCategory && updatedTotalEligibleDollarValue > 8640) {
+      if (typedFiltCategory.value === preschoolProgramCategoryString && updatedTotalEligibleDollarValue > 8640) {
         setTotalVisibleRowDollarValue(8640);
         return;
       }
