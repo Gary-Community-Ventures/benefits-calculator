@@ -120,7 +120,10 @@ const Results = () => {
   });
 
   const [citizenshipRowCount, setCitizenshipRowCount] = useState(1);
-  const [totalCitizenshipDollarValue, setTotalCitizenshipDollarValue] = useState(0);
+  const [totalCitizenshipDollarValue, setTotalCitizenshipDollarValue] = useState({
+    cashOrReducedExpenses: 0,
+    taxCredits: 0,
+  });
   const [totalVisibleRowDollarValue, setTotalVisibleRowDollarValue] = useState(0);
   const apiRef = useGridApiRef();
 
@@ -139,14 +142,30 @@ const Results = () => {
       }
     });
 
-    //used this instead of the real total to take into account the preschool category value cap at 8640
-    const categoryValuesArray = Object.values(categoryValues(eligiblePrograms));
-    const cappedCatValuesTotalDollarAmount = categoryValuesArray.reduce((acc, categoryAmt) => {
-      return (acc += categoryAmt);
-    }, 0);
+    //used categoryValues(eligiblePrograms) instead of the real total to take into account the preschool category value cap at 8640
+    const allCategoriesAndValuesObjCappedForPreschool = categoryValues(eligiblePrograms);
+    const totalCashAndTaxCreditValues = Object.entries(allCategoriesAndValuesObjCappedForPreschool).reduce(
+      (acc, categoryAndValueArr) => {
+        const categoryName = categoryAndValueArr[0];
+        const categoryValue = categoryAndValueArr[1];
+        const taxCreditsCategoryString = 'Tax Credits';
+
+        if (categoryName === taxCreditsCategoryString) {
+          acc.taxCredits += categoryValue;
+        } else {
+          acc.cashOrReducedExp += categoryValue;
+        }
+
+        return acc;
+      },
+      { cashOrReducedExp: 0, taxCredits: 0 },
+    );
 
     setCitizenshipRowCount(count);
-    setTotalCitizenshipDollarValue(cappedCatValuesTotalDollarAmount);
+    setTotalCitizenshipDollarValue({
+      cashOrReducedExpenses: totalCashAndTaxCreditValues.cashOrReducedExp,
+      taxCredits: totalCashAndTaxCreditValues.taxCredits,
+    });
 
     //this is for the category header
     if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
@@ -156,7 +175,7 @@ const Results = () => {
 
       //this is only to cap the totalVisibleRowDollarValue for preschool
       const typedFiltCategory = filt.category as GridFilterItem;
-      if (typedFiltCategory.value === preschoolProgramCategory && updatedTotalEligibleDollarValue > 8640) {
+      if (typedFiltCategory.value === preschoolProgramCategoryString && updatedTotalEligibleDollarValue > 8640) {
         setTotalVisibleRowDollarValue(8640);
         return;
       }
@@ -213,9 +232,9 @@ const Results = () => {
     });
   };
 
-  const preschoolProgramCategory = 'Child Care, Youth, and Education';
+  const preschoolProgramCategoryString = 'Child Care, Youth, and Education';
   const categoryValues = (programs: Program[]) => {
-    const preschoolPrograms = { numOfPreSchoolPrograms: 0, totalEstVal: 0 }; //i=0 => num of preschool prog, i=1 => prog.est.value
+    const preschoolPrograms = { numOfPreSchoolPrograms: 0, totalEstVal: 0 };
     const categoryValues: { [key: string]: number } = {};
     for (let program of programs) {
       //add this category to the categoryValues dictionary if the key doesn't already exist
@@ -228,8 +247,11 @@ const Results = () => {
       });
 
       if (hasOverlap) {
+        //we add that program's est value to its corresponding categoryValues key
         categoryValues[program.category.default_message] += program.estimated_value;
-        if (program.category.default_message === preschoolProgramCategory) {
+
+        //if the program is a preschoolProgram, we also add it to the preschoolPrograms separately
+        if (program.category.default_message === preschoolProgramCategoryString) {
           preschoolPrograms.numOfPreSchoolPrograms++;
           preschoolPrograms.totalEstVal += program.estimated_value;
         }
@@ -237,7 +259,7 @@ const Results = () => {
     }
 
     if (preschoolPrograms.totalEstVal > 8640 && preschoolPrograms.numOfPreSchoolPrograms > 1) {
-      categoryValues[preschoolProgramCategory] = 8640;
+      categoryValues[preschoolProgramCategoryString] = 8640;
     }
 
     return categoryValues;
@@ -366,13 +388,13 @@ const Results = () => {
               id="results.return-programsUpToLabel"
               defaultMessage=" programs with an estimated value of "
             />
-            ${totalCitizenshipDollarValue.toLocaleString()}
-            <FormattedMessage id="results.return-perYearOrLabel" defaultMessage=" per year or " />$
-            {Math.round(totalCitizenshipDollarValue / 12).toLocaleString()}
+            ${Math.round(totalCitizenshipDollarValue.cashOrReducedExpenses / 12).toLocaleString()}
             <FormattedMessage
               id="results.return-perMonthLabel"
-              defaultMessage=" per month in cash or reduced expenses for you to consider"
+              defaultMessage=" monthly in cash or reduced expenses, and "
             />
+            ${Math.round(totalCitizenshipDollarValue.taxCredits).toLocaleString()}
+            <FormattedMessage id="results.return-taxCredits" defaultMessage=" in tax credits for you to consider " />
           </h1>
         </Grid>
       );
@@ -682,7 +704,7 @@ const Results = () => {
               </span>
             </Toolbar>
             {currentCategory.defaultMessage ===
-              categories.find((cat) => cat.defaultMessage === preschoolProgramCategory)?.defaultMessage && (
+              categories.find((cat) => cat.defaultMessage === preschoolProgramCategoryString)?.defaultMessage && (
               <Typography variant="body2" className="child-care-helper-text">
                 <FormattedMessage
                   id="benefitCategories.childCareHelperText"
