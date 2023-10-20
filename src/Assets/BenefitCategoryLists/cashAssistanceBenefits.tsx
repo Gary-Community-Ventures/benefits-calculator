@@ -25,6 +25,12 @@ const cashAssistanceBenefits = {
       defaultMessage="State cash assistance for individuals 60 years of age or older (Old Age Pension/OAP)"
     />
   ),
+  ssdi: (
+    <FormattedMessage
+      id="cashAssistanceBenefits.ssdi"
+      defaultMessage="Social security benefit for people with disabilities (Social Security Disability Insurance/SSDI)"
+    />
+  ),
 };
 
 export default cashAssistanceBenefits;

@@ -25,6 +25,12 @@ const childCareBenefits = {
   upk: (
     <FormattedMessage id="childCareBenefits.univpresc" defaultMessage="Free preschool (Universal Preschool Colorado)" />
   ),
+  pell: (
+    <FormattedMessage
+      id="childCareBenefits.pell"
+      defaultMessage="Federal grant to finance college costs (Pell Grant)"
+    />
+  ),
 };
 
 export default childCareBenefits;
