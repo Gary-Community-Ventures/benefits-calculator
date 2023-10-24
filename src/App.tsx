@@ -274,7 +274,7 @@ const App = () => {
             <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
             <Route path="/step-1" element={<SelectLanguagePage />} />
             <Route path="/step-2" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
-            <Route path="results/:uuid" element={<Results />} />
+            <Route path="results/:uuid" element={<Results handleTextFieldChange={handleTextfieldChange} />} />
             <Route path=":uuid">
               <Route path="" element={<Navigate to="/step-1" replace />} />
               <Route path="step-1" element={<SelectLanguagePage />} />
@@ -304,7 +304,7 @@ const App = () => {
                 }
               />
               <Route path="confirm-information" element={<Confirmation />} />
-              <Route path="results" element={<Results />} />
+              <Route path="results" element={<Results handleTextFieldChange={handleTextfieldChange} />} />
               <Route path="*" element={<Navigate to="/step-1" replace />} />
             </Route>
             <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />

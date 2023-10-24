@@ -2,7 +2,16 @@ import { useEffect, useState, useContext, KeyboardEvent, MouseEvent } from 'reac
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, Link, Typography, Accordion, AccordionSummary, AccordionDetails, IconButton } from '@mui/material';
+import {
+  Button,
+  Link,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  IconButton,
+  Modal,
+} from '@mui/material';
 import FilterSection from '../FilterSection/FilterSection';
 import ResultsError from '../ResultsError/ResultsError.js';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
@@ -41,6 +50,7 @@ import {
 } from '../../Types/Results.ts';
 import { citizenshipFilterOperators } from '../FilterSection/CitizenshipPopover.tsx';
 import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
+import EmailResults from '../EmailResults/EmailResults';
 
 export type UpdateFilterArg =
   | {
@@ -55,7 +65,11 @@ export type UpdateFilterArg =
 export const isNavigationKey = (key: string) =>
   key === 'Home' || key === 'End' || key.indexOf('Arrow') === 0 || key.indexOf('Page') === 0 || key === ' ';
 
-const Results = () => {
+type ResultsProps = {
+  handleTextFieldChange: (event: Event) => void;
+};
+
+const Results = ({ handleTextFieldChange }: ResultsProps) => {
   const { uuid: screenerId } = useParams();
   const navigate = useNavigate();
   const { locale, theme } = useContext(Context);
@@ -73,6 +87,7 @@ const Results = () => {
   const categoryState = useState('All Categories');
   const eligibilityState = useState('eligibleBenefits');
   const alreadyHasToggleState = useState(false);
+  const [sendResultsOpen, setSendResultsOpen] = useState(false);
 
   type ResultsState = {
     programs: Program[];
@@ -798,14 +813,28 @@ const Results = () => {
   const displayHeaderSection = () => {
     return (
       <Grid container item xs={12} sx={{ mt: 2 }}>
-        <Grid xs={12} item={true}>
-          <Typography className="body2">
-            <FormattedMessage id="results.return-screenerIdLabel" defaultMessage="Screener ID: " />
-            {results.screenerId}
-          </Typography>
-        </Grid>
         <Grid container item xs={12}>
           {displaySubheader()}
+        </Grid>
+        <Grid xs={12} item={true}>
+          <h2 className="results-instuctions">
+            <FormattedMessage
+              id="results.instructions"
+              defaultMessage="For more information on each benefit, click the arrow to expand for details. To send a copy of your results
+            to yourself and/or a navigator, click"
+            />{' '}
+            <button
+              className="open-share-button"
+              type="button"
+              onClick={(event) => {
+                event.preventDefault();
+                setSendResultsOpen(true);
+              }}
+            >
+              <FormattedMessage id="programs.openSendResultsButton" defaultMessage="here" />
+            </button>
+            .
+          </h2>
         </Grid>
       </Grid>
     );
@@ -873,10 +902,31 @@ const Results = () => {
               >
                 <FormattedMessage id="results.returnToScreenButton" defaultMessage="Edit Screener Responses" />
               </Button>
+              <Grid xs={12} item={true}>
+                <FormattedMessage id="results.return-screenerIdLabel" defaultMessage="Screener ID: " />
+                {results.screenerId}
+              </Grid>
             </>
           )}
         </Grid>
       </div>
+      {screenerId && (
+        <Modal
+          open={sendResultsOpen}
+          onClose={() => {
+            setSendResultsOpen(false);
+          }}
+          aria-labelledby="email-results-modal"
+        >
+          <EmailResults
+            handleTextfieldChange={handleTextFieldChange}
+            screenId={screenerId}
+            close={() => {
+              setSendResultsOpen(false);
+            }}
+          />
+        </Modal>
+      )}
     </main>
   );
 };

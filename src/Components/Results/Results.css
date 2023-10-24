@@ -7,6 +7,19 @@
   letter-spacing: 0.0075em;
 }
 
+.results-instuctions {
+  font-style: normal;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.open-share-button {
+  font-size: 1rem;
+  color: var(--primary-color);
+  cursor: pointer;
+  /* font-weight: bold; */
+}
+
 .ineligibility-link {
   margin: 0;
   color: var(--primary-color);
