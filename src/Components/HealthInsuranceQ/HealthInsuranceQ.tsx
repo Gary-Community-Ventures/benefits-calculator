@@ -7,7 +7,7 @@ import { HouseholdData, HealthInsurance } from "../../Types/FormData";
 import '../OptionCardGroup/OptionCardGroup.css';
 
 interface HealthInsuranceProps {
-  hhMemberIndex: Number;
+  hhMemberIndex: number;
   householdMemberData: HouseholdData;
   setHouseholdMemberData: (householdMemberData: HouseholdData) => void;
 }
@@ -16,7 +16,7 @@ const HealthInsuranceQ = ({ hhMemberIndex, householdMemberData, setHouseholdMemb
   const { healthInsurance } = householdMemberData;
   const intl = useIntl();
 
-  const displayQuestion = (page: Number) => {
+  const displayQuestion = (page: number) => {
     if (page === 1) {
       return (
         <h2 className="question-label">
@@ -54,18 +54,21 @@ const HealthInsuranceQ = ({ hhMemberIndex, householdMemberData, setHouseholdMemb
     setHouseholdMemberData({ ...hhMemberData, healthInsurance: updatedHHMInsurance });
   };
 
-  const displayHealthInsuranceOptionCards = (healthCareOptions: HealthInsuranceOptions, householdMemberIns: HealthInsurance) => {
+  const displayHealthInsuranceOptionCards = (
+    healthCareOptions: HealthInsuranceOptions,
+    householdMemberIns: HealthInsurance,
+    hhMemberIndex: number,
+  ) => {
     const optionCards = Object.keys(healthCareOptions).map((key, index) => {
       const optionKey = key as keyof HealthInsuranceOptions;
       const translatedAriaLabel = intl.formatMessage({
         id: healthCareOptions[optionKey].formattedMessage.props.id,
-        defaultMessage:
-          healthCareOptions[optionKey].formattedMessage.props.defaultMessage,
+        defaultMessage: healthCareOptions[optionKey].formattedMessage.props.defaultMessage,
       });
 
       return (
         <CardActionArea
-          key={index}
+          key={hhMemberIndex + index}
           sx={{ width: '11.25rem' }}
           className="card-action-area"
           onClick={() => {
@@ -99,7 +102,7 @@ const HealthInsuranceQ = ({ hhMemberIndex, householdMemberData, setHouseholdMemb
     <Stack>
       {displayQuestion(hhMemberIndex)}
       <div className="option-card-container">
-        {displayHealthInsuranceOptionCards(healthInsuranceOptions, healthInsurance)}
+        {displayHealthInsuranceOptionCards(healthInsuranceOptions, healthInsurance, hhMemberIndex)}
       </div>
     </Stack>
   );
