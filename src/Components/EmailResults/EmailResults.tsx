@@ -6,20 +6,41 @@ import LinkIcon from '@mui/icons-material/Link';
 import CheckIcon from '@mui/icons-material/Check';
 import { useState, forwardRef, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
   emailHasError,
   displayEmailHelperText,
   phoneHasError,
   displayPhoneHasErrorHelperText,
 } from '../../Assets/validationFunctions.tsx';
-import { postMessage } from '../../apiCalls';
-import Textfield from '../Textfield/Textfield';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { postMessage } from '../../apiCalls.js';
+import Textfield from '../Textfield/Textfield.js';
+import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
 import './EmailResults.css';
+import type { MessageFunction, ValidationFunction } from '../../Types/ErrorController.ts';
 
-const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, screenId, close }, ref) {
+type EmailResultsProps = {
+  handleTextfieldChange: (event: Event) => void;
+  screenId: string;
+  close: () => void;
+};
+
+type SendType = 'emailScreen' | 'textScreen';
+
+type TextFieldProps = {
+  inputType: string;
+  inputName: string;
+  inputLabel: string;
+  inputError: ValidationFunction<string>;
+  inputHelperText: MessageFunction<string>;
+};
+
+const EmailResults = forwardRef(function EmailResults(
+  { handleTextfieldChange, screenId, close }: EmailResultsProps,
+  ref,
+) {
   const { formData } = useContext(Context);
+  const intl = useIntl();
   const [copied, setCopied] = useState(false);
   const [state, setState] = useState({
     open: false,
@@ -30,11 +51,17 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [phoneSubmitted, setPhoneSubmitted] = useState(false);
 
-  const createEmailTextfield = (type, errorController, inputLabelId, hasError, helperText) => {
-    const emailProps = {
+  const createEmailTextfield = (
+    type: string,
+    errorController: boolean,
+    inputLabelId: string,
+    hasError: ValidationFunction<string>,
+    helperText: MessageFunction<string>,
+  ) => {
+    const emailProps: TextFieldProps = {
       inputType: 'text',
       inputName: type,
-      inputLabel: <FormattedMessage id={inputLabelId} defaultMessage="Email" />,
+      inputLabel: intl.formatMessage({ id: inputLabelId, defaultMessage: 'Email' }),
       inputError: hasError,
       inputHelperText: helperText,
     };
@@ -42,7 +69,7 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
     return createTextfield(emailProps, errorController);
   };
 
-  const createTextfield = (componentProps, submitted) => {
+  const createTextfield = (componentProps: TextFieldProps, submitted: boolean) => {
     return (
       <Textfield
         componentDetails={componentProps}
@@ -58,31 +85,28 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
     setState({ ...state, open: false });
   };
 
-  const handleSubmit = async (event, type) => {
+  const handleSubmit = async (type: SendType) => {
     const { signUpInfo } = formData;
     const { email, phone } = signUpInfo;
 
-    let sendType;
-    let validInput;
-    let snackbarMessage;
+    let sendType: { email?: string; phone?: string; type: string } = { type: 'none' };
+    let validInput: boolean = false;
+    let snackbarMessage: string = '';
     if (type === 'emailScreen') {
       sendType = { email, type };
       validInput = emailHasError(email) === false && email !== '';
-      snackbarMessage = (
-        <FormattedMessage
-          id="emailResults.return-signupCompleted-email"
-          defaultMessage="A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder."
-        />
-      );
+      snackbarMessage = intl.formatMessage({
+        id: 'emailResults.return-signupCompleted-email',
+        defaultMessage:
+          'A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder.',
+      });
     } else if (type === 'textScreen') {
       sendType = { phone, type };
       validInput = phoneHasError(phone) === false && phone !== '';
-      snackbarMessage = (
-        <FormattedMessage
-          id="emailResults.return-signupCompleted"
-          defaultMessage="A copy of your results have been sent."
-        />
-      );
+      snackbarMessage = intl.formatMessage({
+        id: 'emailResults.return-signupCompleted',
+        defaultMessage: 'A copy of your results have been sent.',
+      });
     }
 
     if (validInput) {
@@ -108,11 +132,13 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
           snackbarMessage: snackbarMessage,
         });
       } catch (error) {
-        setState({
-          ...state,
-          error: true,
-          errorMessage: error.message,
-        });
+        if (error instanceof Error) {
+          setState({
+            ...state,
+            error: true,
+            errorMessage: error.message,
+          });
+        }
       }
     }
   };
@@ -125,7 +151,7 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
     </>
   );
 
-  const displayErrorMessage = (errorMessage) => {
+  const displayErrorMessage = (errorMessage: string) => {
     return <ErrorMessage error={errorMessage} />;
   };
 
@@ -164,7 +190,6 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
           onClose={handleClose}
           message={state.snackbarMessage}
           action={action}
-          severity="success"
           sx={{ mb: -2, flexWrap: 'nowrap' }}
         />
       </div>
@@ -198,7 +223,7 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
         variant="contained"
         onClick={(event) => {
           setEmailSubmitted(true);
-          handleSubmit(event, 'emailScreen');
+          handleSubmit('emailScreen');
         }}
         id="send-button"
       >
@@ -220,7 +245,7 @@ const EmailResults = forwardRef(function EmailResults({ handleTextfieldChange, s
         variant="contained"
         onClick={(event) => {
           setPhoneSubmitted(true);
-          handleSubmit(event, 'textScreen');
+          handleSubmit('textScreen');
         }}
         id="send-button"
       >
