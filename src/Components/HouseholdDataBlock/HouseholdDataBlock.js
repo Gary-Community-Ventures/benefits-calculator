@@ -22,8 +22,8 @@ import { getStepNumber } from '../../Assets/stepDirectory';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import EditIcon from '@mui/icons-material/Edit';
-import './HouseholdDataBlock.css';
 import { IconButton } from '@mui/material';
+import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -47,6 +47,14 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     disabled: false,
     hasIncome: false,
     incomeStreams: [],
+    healthInsurance: {
+      employer: false,
+      private: false,
+      medicaid: false,
+      medicare: false,
+      chp: false,
+      none: false,
+    },
   };
 
   const [householdData, setHouseholdData] = useState(initialHouseholdData);
