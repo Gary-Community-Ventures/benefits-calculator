@@ -5,8 +5,16 @@ import padlock from './OptionCardIcons/padlock.png';
 import redX from './OptionCardIcons/redX.png';
 import teddyDoctor from './OptionCardIcons/teddyDoctor.png';
 import umbrella from './OptionCardIcons/umbrella.png';
+import { HealthInsurance } from '../Types/FormData';
 
-const healthInsuranceOptions = {
+export type HealthInsuranceOptions = {
+  [Property in keyof HealthInsurance]: {
+    formattedMessage: JSX.Element;
+    image: string;
+  };
+};
+
+const healthInsuranceOptions: HealthInsuranceOptions = {
   employer: {
     formattedMessage: (
       <FormattedMessage id="healthInsuranceOptions.employer" defaultMessage="Employer-provided health insurance" />
