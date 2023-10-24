@@ -441,7 +441,9 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       <div>
         {createQuestionHeader(page)}
         {createAgeQuestion(page)}
+        {page === 1 && displayHealthInsuranceQuestion(page, householdData, setHouseholdData)}
         {page !== 1 && createHOfHRelationQuestion()}
+        {page !== 1 && displayHealthInsuranceQuestion(page, householdData, setHouseholdData)}
         {createConditionsQuestion(page)}
         <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}
