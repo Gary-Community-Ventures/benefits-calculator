@@ -5,6 +5,7 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
+import HealthInsuranceQ from '../HealthInsuranceQ/HealthInsuranceQ.tsx';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
@@ -421,6 +422,19 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       setPage(page - 1);
     }
   };
+
+  const displayHealthInsuranceQuestion = (page, hhMemberData, setHHMemberData) => {
+    return (
+      <>
+        <HealthInsuranceQ
+          hhMemberIndex={page}
+          householdMemberData={hhMemberData}
+          setHouseholdMemberData={setHHMemberData}
+        />
+        <p className="household-data-q-underline"></p>
+      </>
+    );
+  }
 
   return (
     <main className="benefits-form">
