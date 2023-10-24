@@ -831,7 +831,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
                 setSendResultsOpen(true);
               }}
             >
-              <FormattedMessage id="programs.openSendResultsButton" defaultMessage="here" />
+              <FormattedMessage id="results.openSendResultsButton" defaultMessage="here" />
             </button>
             .
           </h2>
