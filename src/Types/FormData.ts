@@ -19,7 +19,7 @@ export interface HouseholdData {
   disabled: boolean;
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
-  healthInsurance: string;
+  healthInsurance: HealthInsurance;
 }
 
 export interface Benefits {
@@ -49,6 +49,15 @@ export interface Benefits {
   tanf: boolean;
   upk: boolean;
   wic: boolean;
+}
+
+export interface HealthInsurance {
+  employer: boolean;
+  private: boolean;
+  medicaid: boolean;
+  medicare: boolean;
+  chp: boolean;
+  none: boolean;
 }
 
 export interface SignUpInfo {
