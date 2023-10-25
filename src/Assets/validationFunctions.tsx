@@ -218,13 +218,14 @@ const displayHouseholdMemberAgeHelperText: MessageFunction<string> = (applicantA
 };
 
 const personDataIsValid: ValidationFunction<HouseholdData> = (householdDataState) => {
-  const { age, relationshipToHH, hasIncome, incomeStreams } = householdDataState;
+  const { age, relationshipToHH, hasIncome, incomeStreams, healthInsurance } = householdDataState;
 
   const ageIsValid = Number(age) >= 0 && age !== '';
   const relationshipToHHIsValid = relationshipToHH !== '';
   const incomeIsValid = (hasIncome && incomeStreamsAreValid(incomeStreams)) || !hasIncome;
+  const healthInsuranceIsValid = healthInsuranceDataIsValid(healthInsurance);
 
-  return ageIsValid && relationshipToHHIsValid && incomeIsValid;
+  return ageIsValid && relationshipToHHIsValid && incomeIsValid && healthInsuranceIsValid;
 };
 
 const getPersonDataErrorMsg: MessageFunction<HouseholdData> = (householdDataState) => {
