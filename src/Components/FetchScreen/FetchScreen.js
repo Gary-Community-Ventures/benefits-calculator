@@ -101,6 +101,15 @@ const FetchScreen = () => {
     };
 
     let defaultRelationship = 'headOfHousehold';
+    const initialHHMHealthInsurance = {
+      employer: false,
+      private: false,
+      medicaid: false,
+      medicare: false,
+      chp: false,
+      none: false,
+    };
+
     for (const member of response.household_members) {
       const incomes = [];
       for (const income of member.income_streams) {
@@ -111,6 +120,7 @@ const FetchScreen = () => {
           hoursPerWeek: income.hours_worked ?? '',
         });
       }
+
       initialFormData.householdData.push({
         age: String(member.age) ?? '',
         relationshipToHH: member.relationship ? member.relationship : defaultRelationship,
@@ -120,6 +130,7 @@ const FetchScreen = () => {
         disabled: member.disabled ?? false,
         hasIncome: member.has_income ?? false,
         incomeStreams: incomes,
+        healthInsurance: member.health_insurance ?? initialHHMHealthInsurance,
       });
       defaultRelationship = '';
     }

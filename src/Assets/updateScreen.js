@@ -72,16 +72,15 @@ const getHouseholdMemberBody = (householdMemberData) => {
   const incomes = getIncomeStreamsBodies(householdMemberData);
 
   return {
-    relationship: householdMemberData.relationshipToHH,
     age: Number(householdMemberData.age),
+    relationship: householdMemberData.relationshipToHH,
     student: householdMemberData.student,
     pregnant: householdMemberData.pregnant,
     visually_impaired: householdMemberData.blindOrVisuallyImpaired,
     disabled: householdMemberData.disabled,
-    medicaid: householdMemberData.medicaid,
-    disability_medicaid: householdMemberData.disabilityRelatedMedicaid,
     has_income: householdMemberData.hasIncome,
     income_streams: incomes,
+    health_insurance: householdMemberData.healthInsurance,
   };
 };
 
