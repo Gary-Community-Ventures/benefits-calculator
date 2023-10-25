@@ -229,7 +229,7 @@ const personDataIsValid: ValidationFunction<HouseholdData> = (householdDataState
 };
 
 const getPersonDataErrorMsg: MessageFunction<HouseholdData> = (householdDataState) => {
-  const { age, relationshipToHH, hasIncome, incomeStreams } = householdDataState;
+  const { age, relationshipToHH, hasIncome, incomeStreams, healthInsurance } = householdDataState;
 
   if (Number(age) < 0 || age === '') {
     return (
@@ -255,8 +255,26 @@ const getPersonDataErrorMsg: MessageFunction<HouseholdData> = (householdDataStat
         />
       </ErrorMessageWrapper>
     );
-  } else {
-    return '';
+  } else if (healthInsuranceDataIsValid(healthInsurance) === false) {
+    if (healthInsurance.none === true) { //then they chose none and another option
+      return (
+        <ErrorMessageWrapper fontSize="1rem">
+          <FormattedMessage
+            id="validation-helperText.hhMemberInsuranceNone"
+            defaultMessage="Please do not select any other options if you/they do not have health insurance"
+          />
+        </ErrorMessageWrapper>
+      );
+    } else { //they haven't selected an option
+      return (
+        <ErrorMessageWrapper fontSize="1rem">
+          <FormattedMessage
+            id="validation-helperText.hhMemberInsurance"
+            defaultMessage="Please select at least one health insurance option"
+          />
+        </ErrorMessageWrapper>
+      );
+    }
   }
 };
 
