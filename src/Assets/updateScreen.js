@@ -80,7 +80,7 @@ const getHouseholdMemberBody = (householdMemberData) => {
     disabled: householdMemberData.disabled,
     has_income: householdMemberData.hasIncome,
     income_streams: incomes,
-    health_insurance: householdMemberData.healthInsurance,
+    insurance: householdMemberData.healthInsurance,
   };
 };
 

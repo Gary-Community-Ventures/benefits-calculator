@@ -130,7 +130,7 @@ const FetchScreen = () => {
         disabled: member.disabled ?? false,
         hasIncome: member.has_income ?? false,
         incomeStreams: incomes,
-        healthInsurance: member.health_insurance ?? initialHHMHealthInsurance,
+        healthInsurance: member.insurance ?? initialHHMHealthInsurance,
       });
       defaultRelationship = '';
     }
