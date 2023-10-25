@@ -32,8 +32,6 @@ const App = () => {
   const isTest = searchParams.get('test') ? true : false;
   const rawExternalId = searchParams.get('externalid');
   const externalId = rawExternalId !== null ? rawExternalId : undefined;
-  const referrer = searchParams.get('referrer') !== null ? (searchParams.get('referrer') as string) : '';
-  const referrerSource = referrer in referralOptions ? referrer : '';
   const {
     locale,
     formData,
@@ -109,12 +107,18 @@ const App = () => {
   ]);
 
   useEffect(() => {
-    const isOtherSource = referrerSource === '';
+    const referrerParam = searchParams.get('referrer');
+    const utmParam = searchParams.get('utm_source');
+
+    // use referrer if there is a referrer, otherwise use utm source
+    const referrer = referrerParam ?? utmParam ?? '';
+    const isOtherSource = !(referrer in referralOptions);
+
     setFormData({
       ...formData,
       isTest: isTest,
       externalID: externalId,
-      referralSource: isOtherSource && referrer ? 'other' : referrerSource,
+      referralSource: isOtherSource && referrer !== '' ? 'other' : referrer,
       immutableReferrer: referrer,
       otherSource: isOtherSource ? referrer : '',
       urlSearchParams: urlSearchParams,
