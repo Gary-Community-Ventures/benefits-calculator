@@ -260,6 +260,18 @@ const getPersonDataErrorMsg: MessageFunction<HouseholdData> = (householdDataStat
   }
 };
 
+const healthInsuranceDataIsValid: ValidationFunction<HealthInsurance> = (hhMemberHealthInsData) => {
+  const numOfTrueValues = Object.values(hhMemberHealthInsData).filter(healthInsuranceValue => healthInsuranceValue === true).length;
+
+  if (hhMemberHealthInsData.none === true) {
+    const onlyNoneWasSelected = numOfTrueValues === 1;
+    return onlyNoneWasSelected;
+  } else {
+    const atLeastOneOptionWasSelected = numOfTrueValues > 0;
+    return atLeastOneOptionWasSelected;
+  }
+}
+
 const emailHasError: ValidationFunction<string> = (email) => {
   return !/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email);
 };
