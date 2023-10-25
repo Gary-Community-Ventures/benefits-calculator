@@ -101,9 +101,7 @@ const HealthInsuranceQ = ({ hhMemberIndex, householdMemberData, setHouseholdMemb
   return (
     <Stack>
       {displayQuestion(hhMemberIndex)}
-      <div className="option-card-container">
-        {displayHealthInsuranceOptionCards(healthInsuranceOptions, healthInsurance, hhMemberIndex)}
-      </div>
+      {displayHealthInsuranceOptionCards(healthInsuranceOptions, healthInsurance, hhMemberIndex)}
     </Stack>
   );
 };
