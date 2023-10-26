@@ -295,6 +295,10 @@ const healthInsuranceDataIsValid: ValidationFunction<HealthInsurance> = (hhMembe
   }
 }
 
+const healthInsuranceDataHasError: ValidationFunction<HealthInsurance> = (hhMemberHealthInsData: HealthInsurance) => {
+  return !healthInsuranceDataIsValid(hhMemberHealthInsData);
+};
+
 const emailHasError: ValidationFunction<string> = (email) => {
   return !/^.+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email);
 };
@@ -616,4 +620,6 @@ export {
   otherReferalSourceHelperText,
   termsOfServiceHasError,
   displayAgreeToTermsErrorMessage,
+  healthInsuranceDataHasError,
+  getHealthInsuranceError,
 };
