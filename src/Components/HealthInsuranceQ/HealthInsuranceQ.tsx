@@ -1,18 +1,25 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { CardActionArea, Typography, Stack } from '@mui/material';
+import { CardActionArea, Typography, Stack, FormHelperText } from '@mui/material';
 import { FormattedMessage, useIntl } from "react-intl";
 import healthInsuranceOptions, { HealthInsuranceOptions } from "../../Assets/healthInsuranceOptions";
 import { HouseholdData, HealthInsurance } from "../../Types/FormData";
+import { ErrorController } from '../../Types/ErrorController';
 import '../OptionCardGroup/OptionCardGroup.css';
 
 interface HealthInsuranceProps {
   hhMemberIndex: number;
   householdMemberData: HouseholdData;
   setHouseholdMemberData: (householdMemberData: HouseholdData) => void;
+  healthInsuranceErrorController: ErrorController;
 }
 
-const HealthInsuranceQ = ({ hhMemberIndex, householdMemberData, setHouseholdMemberData }: HealthInsuranceProps) => {
+const HealthInsuranceQ = ({
+  hhMemberIndex,
+  householdMemberData,
+  setHouseholdMemberData,
+  healthInsuranceErrorController,
+}: HealthInsuranceProps) => {
   const { healthInsurance } = householdMemberData;
   const intl = useIntl();
 
@@ -102,6 +109,9 @@ const HealthInsuranceQ = ({ hhMemberIndex, householdMemberData, setHouseholdMemb
     <Stack>
       {displayQuestion(hhMemberIndex)}
       {displayHealthInsuranceOptionCards(healthInsuranceOptions, healthInsurance, hhMemberIndex)}
+      {healthInsuranceErrorController.hasError && (
+        <FormHelperText>{healthInsuranceErrorController.message(healthInsurance)}</FormHelperText>
+      )}
     </Stack>
   );
 };
