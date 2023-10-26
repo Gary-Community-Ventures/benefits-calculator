@@ -12,7 +12,8 @@ import conditionOptions from '../../Assets/conditionOptions';
 import {
   householdMemberAgeHasError,
   displayHouseholdMemberAgeHelperText,
-  getPersonDataErrorMsg,
+  healthInsuranceDataHasError,
+  getHealthInsuranceError,
   personDataIsValid,
   useErrorController,
   selectHasError,
@@ -38,6 +39,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     navigate(`/${uuid}/step-${step}/${page}`);
   };
   const ageErrorController = useErrorController(householdMemberAgeHasError, displayHouseholdMemberAgeHelperText);
+  const healthInsuranceErrorController = useErrorController(healthInsuranceDataHasError, getHealthInsuranceError);
 
   const initialHouseholdData = formData.householdData[page - 1] ?? {
     age: '',
@@ -400,6 +402,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     event.preventDefault();
     ageErrorController.incrementSubmitted();
     ageErrorController.updateError(householdData.age);
+    healthInsuranceErrorController.incrementSubmitted();
+
     const validPersonData = personDataIsValid(householdData);
     const lastHouseholdMember = page >= remainingHHMNumber;
 
@@ -411,7 +415,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       setPage(page + 1);
     } else if (!validPersonData) {
       setWasSubmitted(true);
-      setError(getPersonDataErrorMsg(householdData));
+      healthInsuranceErrorController.updateError(householdData.healthInsurance);
     }
   };
 
@@ -430,6 +434,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           hhMemberIndex={page}
           householdMemberData={hhMemberData}
           setHouseholdMemberData={setHHMemberData}
+          healthInsuranceErrorController={healthInsuranceErrorController}
         />
         <p className="household-data-q-underline"></p>
       </>
