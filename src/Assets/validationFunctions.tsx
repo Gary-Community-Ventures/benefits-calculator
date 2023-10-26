@@ -229,7 +229,7 @@ const personDataIsValid: ValidationFunction<HouseholdData> = (householdDataState
 };
 
 const getPersonDataErrorMsg: MessageFunction<HouseholdData> = (householdDataState) => {
-  const { age, relationshipToHH, hasIncome, incomeStreams, healthInsurance } = householdDataState;
+  const { age, relationshipToHH, hasIncome, incomeStreams } = householdDataState;
 
   if (Number(age) < 0 || age === '') {
     return (
@@ -255,8 +255,13 @@ const getPersonDataErrorMsg: MessageFunction<HouseholdData> = (householdDataStat
         />
       </ErrorMessageWrapper>
     );
-  } else if (healthInsuranceDataIsValid(healthInsurance) === false) {
-    if (healthInsurance.none === true) { //then they chose none and another option
+  }
+};
+
+const getHealthInsuranceError: MessageFunction<HealthInsurance> = (healthInsurance: HealthInsurance) => {
+  if (healthInsuranceDataIsValid(healthInsurance) === false) {
+    if (healthInsurance.none === true) {
+      //then they chose none and another option
       return (
         <ErrorMessageWrapper fontSize="1rem">
           <FormattedMessage
