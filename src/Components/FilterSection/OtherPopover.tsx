@@ -5,6 +5,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import CustomSwitch from '../CustomSwitch/CustomSwitch';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 import { FormattedMessage } from 'react-intl';
 import { UpdateFilterArg } from '../Results/Results';
 import './OtherPopover.css';
@@ -16,6 +18,7 @@ type FilterProps = {
   categoryState: StateType<string>;
   eligibilityState: StateType<string>;
   alreadyHasToggleState: StateType<boolean>;
+  close: () => void;
 };
 const OtherPopover = ({
   updateFilter,
@@ -23,6 +26,7 @@ const OtherPopover = ({
   categoryState,
   eligibilityState,
   alreadyHasToggleState,
+  close,
 }: FilterProps) => {
   const [selectedCategory, setSelectedCategory] = categoryState;
   const [selectedEligibility, setSelectedEligibility] = eligibilityState;
@@ -122,7 +126,7 @@ const OtherPopover = ({
     <div className="popover">
       <div>
         <FormControl className="full-width">
-          <FormLabel id="benefit-category" sx={{ color: '#000000', fontWeight: 500 }}>
+          <FormLabel id="benefit-category" sx={{ color: '#000000', fontWeight: 500, mr: '1rem' }}>
             <FormattedMessage id="filter.filterByCategory" defaultMessage="Filter By Category" />
           </FormLabel>
           <RadioGroup aria-labelledby="benefit-category" name="benefit-category" onChange={categoryFilterChange}>
@@ -170,6 +174,17 @@ const OtherPopover = ({
           control={<CustomSwitch handleCustomSwitchToggle={handleAlreadyHasToggle} checked={alreadyHasToggle} />}
         />
       </div>
+      <IconButton
+        aria-label="close"
+        onClick={close}
+        sx={{
+          position: 'absolute',
+          right: 0,
+          top: 0,
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
     </div>
   );
 };

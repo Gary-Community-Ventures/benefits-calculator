@@ -1,5 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 import { Checkbox, Stack } from '@mui/material';
 import { GridFilterItem, GridFilterOperator } from '@mui/x-data-grid';
 import { UpdateFilterArg } from '../Results/Results';
@@ -34,12 +36,14 @@ type CitizenshipPopoverProps = {
   updateFilter: (...args: UpdateFilterArg[]) => void;
   citizenshipFilterIsChecked: Record<CitizenLabels, boolean>;
   setCitizenshipFilterIsChecked: (citizenshipFilterState: Record<CitizenLabels, boolean>) => void;
+  close: () => void;
 };
 
 const CitizenshipPopover = ({
   updateFilter,
   citizenshipFilterIsChecked,
   setCitizenshipFilterIsChecked,
+  close,
 }: CitizenshipPopoverProps) => {
   const hasAtLeastOneCitizenshipFilter = (currentCitizenshipFilters: Record<CitizenLabels, boolean>) => {
     const citizenshipFilterValues = Object.values(currentCitizenshipFilters);
@@ -155,7 +159,25 @@ const CitizenshipPopover = ({
 
   return (
     <Stack sx={{ padding: '0.5rem', gap: '0.25rem', ml: '0.5rem' }}>
-      <Stack sx={{ color: '#000000', fontWeight: 500, mt: '.5rem' }}>
+      <IconButton
+        aria-label="close"
+        onClick={close}
+        sx={{
+          position: 'absolute',
+          right: 0,
+          top: 0,
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
+      <Stack
+        sx={{
+          color: '#000000',
+          fontWeight: 500,
+          mt: '.5rem',
+          mr: '1rem',
+        }}
+      >
         <FormattedMessage id="citizenshipPopover.showBenefits" defaultMessage="Show benefits available to:" />
       </Stack>
       <Stack>{renderCitizenshipFilters(citizenshipFilterIsChecked)}</Stack>

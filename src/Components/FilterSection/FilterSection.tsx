@@ -132,6 +132,7 @@ const FilterSection = ({
           updateFilter={updateFilter}
           citizenshipFilterIsChecked={citizenshipFilterIsChecked}
           setCitizenshipFilterIsChecked={setCitizenshipFilterIsChecked}
+          close={handleCitizenshipPopoverClose}
         />
       </Popover>
       <Button
@@ -161,6 +162,7 @@ const FilterSection = ({
           categoryState={categoryState}
           eligibilityState={eligibilityState}
           alreadyHasToggleState={alreadyHasToggleState}
+          close={handleOtherPopoverClose}
         />
       </Popover>
       <Button id="reset" variant="text" className="reset-button" onClick={handleResetButtonClick}>
