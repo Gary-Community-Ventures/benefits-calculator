@@ -3,7 +3,7 @@ const languageOptions: Record<Language, string> = {
   'en-us': 'English',
   es: 'Español',
   vi: 'Tiếng Việt',
-  fr: 'française',
+  fr: 'Française',
   am: 'አማርኛ',
 };
 
