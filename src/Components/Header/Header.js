@@ -52,16 +52,7 @@ const Header = ({ handleTextfieldChange }) => {
 
   const setRenderValue = () => {
     const currentLocale = context.locale;
-    switch (currentLocale) {
-      case 'en-US':
-        return 'EN';
-      case 'es':
-        return 'ES';
-      case 'vi':
-        return 'VI';
-      default:
-        return 'EN';
-    }
+    return currentLocale.slice(0, 2).toLocaleUpperCase();
   };
 
   const createMenuItems = (optionList) => {
