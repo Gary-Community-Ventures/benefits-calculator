@@ -68,10 +68,19 @@ const HealthInsuranceQ = ({
   ) => {
     const optionCards = Object.keys(healthCareOptions).map((key, index) => {
       const optionKey = key as keyof HealthInsuranceOptions;
-      const translatedAriaLabel = intl.formatMessage({
+      let translatedAriaLabel = intl.formatMessage({
         id: healthCareOptions[optionKey].formattedMessage.props.id,
         defaultMessage: healthCareOptions[optionKey].formattedMessage.props.defaultMessage,
       });
+
+      const youDoNotHaveHealthInsuranceFM = intl.formatMessage({
+        id: 'healthInsuranceOptions.none-you',
+        defaultMessage: 'You do not have health insurance',
+      });
+
+      if (hhMemberIndex === 1 && key === 'none') {
+        translatedAriaLabel = youDoNotHaveHealthInsuranceFM;
+      }
 
       return (
         <CardActionArea
