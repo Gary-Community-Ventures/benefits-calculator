@@ -85,7 +85,7 @@ const BasicSelect = ({ componentDetails, options, formDataProperty, submitted }:
   };
 
   return (
-    <FormControl sx={{ mt: 1, mb: 2, minWidth: 210 }} error={errorController.showError}>
+    <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errorController.showError}>
       <InputLabel id={labelId}>{inputLabelText}</InputLabel>
       <Select
         labelId={labelId}
@@ -96,6 +96,7 @@ const BasicSelect = ({ componentDetails, options, formDataProperty, submitted }:
         onChange={(event) => {
           handleBasicSelect(event, formDataProperty);
         }}
+        sx={{ maxWidth: '100%' }}
       >
         {createMenuItems()}
       </Select>

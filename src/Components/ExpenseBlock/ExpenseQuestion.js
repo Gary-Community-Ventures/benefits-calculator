@@ -14,6 +14,7 @@ import Textfield from '../Textfield/Textfield';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
+  maxWidth: '100%',
 });
 
 const StyledDeleteButton = styled(Button)({
@@ -127,7 +128,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
 
   const createExpenseDropdownMenu = (expenseSourceName, index) => {
     return (
-      <FormControl sx={{ m: 1, minWidth: 120 }} error={expenseTypeErrorController.showError}>
+      <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={expenseTypeErrorController.showError}>
         <InputLabel id="expense-type-label">
           <FormattedMessage
             id="expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel"
