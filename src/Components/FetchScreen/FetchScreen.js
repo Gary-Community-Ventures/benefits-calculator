@@ -102,12 +102,15 @@ const FetchScreen = () => {
 
     let defaultRelationship = 'headOfHousehold';
     const initialHHMHealthInsurance = {
+      none: false,
       employer: false,
       private: false,
       medicaid: false,
       medicare: false,
       chp: false,
-      none: false,
+      emergency_medicaid: false,
+      family_planning: false,
+      dont_know: false,
     };
 
     for (const member of response.household_members) {
@@ -120,7 +123,7 @@ const FetchScreen = () => {
           hoursPerWeek: income.hours_worked ?? '',
         });
       }
-
+      console.log(`member.insurance:`, member.insurance);
       initialFormData.householdData.push({
         age: String(member.age) ?? '',
         relationshipToHH: member.relationship ? member.relationship : defaultRelationship,

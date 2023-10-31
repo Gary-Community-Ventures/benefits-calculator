@@ -52,12 +52,15 @@ export interface Benefits {
 }
 
 export interface HealthInsurance {
+  none: boolean;
   employer: boolean;
   private: boolean;
   medicaid: boolean;
   medicare: boolean;
   chp: boolean;
-  none: boolean;
+  dont_know: boolean;
+  emergency_medicaid: boolean;
+  family_planning: boolean;
 }
 
 export interface SignUpInfo {

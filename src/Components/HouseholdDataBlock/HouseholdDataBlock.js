@@ -51,12 +51,15 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     hasIncome: false,
     incomeStreams: [],
     healthInsurance: {
+      none: false,
       employer: false,
       private: false,
       medicaid: false,
       medicare: false,
       chp: false,
-      none: false,
+      emergency_medicaid: false,
+      family_planning: false,
+      dont_know: false,
     },
   };
 
