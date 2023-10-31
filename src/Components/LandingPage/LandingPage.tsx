@@ -67,7 +67,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       if (uuid) {
         navigate(`/${uuid}/step-${startingQuestionNumber}`);
       } else {
-        const response = await createScreen(formData);
+        const response = await createScreen(formData, locale);
         screenDoneLoading();
         navigate(`/${response.uuid}/step-${startingQuestionNumber}`);
       }

@@ -1,6 +1,8 @@
+import { FormData, HouseholdData } from '../Types/FormData.js';
 import { putScreen, postScreen, putUser } from '../apiCalls.js';
+import { Language } from './languageOptions.js';
 
-const getScreensBody = (formData, languageCode) => {
+const getScreensBody = (formData: FormData, languageCode: Language) => {
   const householdMembers = getHouseholdMembersBodies(formData);
   const expenses = getExpensesBodies(formData);
 
@@ -67,14 +69,14 @@ const getScreensBody = (formData, languageCode) => {
   return screenBody;
 };
 
-const getHouseholdMembersBodies = (formData) => {
+const getHouseholdMembersBodies = (formData: FormData) => {
   const householdMembers = formData.householdData.map((householdMember) => {
     return getHouseholdMemberBody(householdMember);
   });
   return householdMembers;
 };
 
-const getHouseholdMemberBody = (householdMemberData) => {
+const getHouseholdMemberBody = (householdMemberData: HouseholdData) => {
   const incomes = getIncomeStreamsBodies(householdMemberData);
 
   return {
@@ -84,14 +86,12 @@ const getHouseholdMemberBody = (householdMemberData) => {
     pregnant: householdMemberData.pregnant,
     visually_impaired: householdMemberData.blindOrVisuallyImpaired,
     disabled: householdMemberData.disabled,
-    medicaid: householdMemberData.medicaid,
-    disability_medicaid: householdMemberData.disabilityRelatedMedicaid,
     has_income: householdMemberData.hasIncome,
     income_streams: incomes,
   };
 };
 
-const getIncomeStreamsBodies = (householdMemberData) => {
+const getIncomeStreamsBodies = (householdMemberData: HouseholdData) => {
   return householdMemberData.incomeStreams.map((incomeStream) => {
     return {
       type: incomeStream.incomeStreamName,
@@ -102,7 +102,7 @@ const getIncomeStreamsBodies = (householdMemberData) => {
   });
 };
 
-const getExpensesBodies = (formData) => {
+const getExpensesBodies = (formData: FormData) => {
   return formData.expenses.map((expense) => {
     return {
       type: expense.expenseSourceName,
@@ -112,7 +112,7 @@ const getExpensesBodies = (formData) => {
   });
 };
 
-const getUserBody = (formData, languageCode) => {
+const getUserBody = (formData: FormData, languageCode: Language) => {
   const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = formData.signUpInfo;
   const phoneNumber = '+1' + phone;
 
@@ -131,16 +131,21 @@ const getUserBody = (formData, languageCode) => {
   return user;
 };
 
-const updateScreen = (uuid, formData, languageCode) => {
+const updateScreen = (uuid: string, formData: FormData, languageCode: Language) => {
   putScreen(getScreensBody(formData, languageCode), uuid);
 };
 
-const createScreen = (formData) => {
-  const uuid = postScreen(getScreensBody(formData));
+const createScreen = (formData: FormData, languageCode: Language) => {
+  const uuid = postScreen(getScreensBody(formData, languageCode));
   return uuid;
 };
 
-const updateUser = async (uuid, formData, setFormData, languageCode) => {
+const updateUser = async (
+  uuid: string,
+  formData: FormData,
+  setFormData: (formData: FormData) => void,
+  languageCode: Language,
+) => {
   const userBody = getUserBody(formData, languageCode);
   if (!formData.signUpInfo.hasUser && userBody.email_or_cell === '+1') {
     return;
