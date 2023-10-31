@@ -2,7 +2,6 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import relationshipOptions from '../../Assets/relationshipOptions';
-import taxYearOptions from '../../Assets/taxYearOptions';
 import referralOptions from '../../Assets/referralOptions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
