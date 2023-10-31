@@ -18,9 +18,9 @@ import {
   otherReferalSourceHelperText,
 } from './validationFunctions.tsx';
 import referralOptions from './referralOptions.tsx';
-import countiesByZipcode from './countiesByZipcode.js';
-import signUpOptions from './signUpOptions.js';
-import healthInsuranceOptions from './healthInsuranceOptions.js';
+import countiesByZipcode from './countiesByZipcode.tsx';
+import signUpOptions from './signUpOptions.tsx';
+import healthInsuranceOptions from './healthInsuranceOptions.tsx';
 import acuteConditionOptions from './acuteConditionOptions';
 import { FormattedMessage } from 'react-intl';
 

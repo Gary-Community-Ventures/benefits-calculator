@@ -13,7 +13,7 @@ import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
-import { createScreen } from '../../Assets/updateScreen.js';
+import { createScreen } from '../../Assets/updateScreen.ts';
 import {
   useErrorController,
   displayAgreeToTermsErrorMessage,

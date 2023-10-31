@@ -14,7 +14,7 @@ import referralOptions from './Assets/referralOptions';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
 import LoadingPage from './Components/LoadingPage/LoadingPage.tsx';
 import SelectLanguagePage from './Components/SelectLanguagePage/SelectLanguagePage.tsx';
-import { updateScreen, updateUser } from './Assets/updateScreen';
+import { updateScreen, updateUser } from './Assets/updateScreen.ts';
 import { getStepDirectory, startingQuestionNumber, getStepNumber } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
