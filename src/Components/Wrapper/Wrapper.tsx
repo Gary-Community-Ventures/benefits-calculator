@@ -147,10 +147,12 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const selectLanguage = (event: Event) => {
     const target = event.target as HTMLInputElement;
     const newLocale = target.value;
-    if (languages.some((lang) => lang === newLocale)) {
+
+    if (languages.every((lang) => lang !== newLocale)) {
       setLocale('en-us');
       return;
     }
+
     setLocale(newLocale as Language);
   };
 
