@@ -32,13 +32,13 @@ const healthInsuranceOptions: HealthInsuranceOptions = {
   },
   private: {
     formattedMessage: (
-      <FormattedMessage id="healthInsuranceOptions.private" defaultMessage="Private health insurance" />
+      <FormattedMessage id="healthInsuranceOptions.private" defaultMessage="Private (non-employer) health insurance" />
     ),
     image: padlock,
   },
   medicaid: {
     formattedMessage: (
-      <FormattedMessage id="healthInsuranceOptions.medicaid" defaultMessage="Health First Colorado (Medicaid)" />
+      <FormattedMessage id="healthInsuranceOptions.medicaid" defaultMessage="Health First Colorado (Full Medicaid)" />
     ),
     image: bill,
   },
