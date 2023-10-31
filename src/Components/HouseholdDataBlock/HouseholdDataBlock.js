@@ -62,7 +62,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const [householdData, setHouseholdData] = useState(initialHouseholdData);
   const [wasSubmitted, setWasSubmitted] = useState(false);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
@@ -77,12 +76,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     setHouseholdData(updatedHouseholdData);
   }, [householdData.hasIncome]);
-
-  useEffect(() => {
-    if (wasSubmitted) {
-      setError(getPersonDataErrorMsg(householdData));
-    }
-  }, [householdData, wasSubmitted]);
 
   useEffect(() => {
     const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
