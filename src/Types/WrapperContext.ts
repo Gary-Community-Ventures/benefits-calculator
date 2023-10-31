@@ -5,7 +5,6 @@ import { Language } from '../Assets/languageOptions';
 
 export interface WrapperContext {
   locale: Language;
-  setLocale: (locale: Language) => void;
   selectLanguage: (event: Event) => void;
   formData: FormData;
   setFormData: (formData: FormData) => void;

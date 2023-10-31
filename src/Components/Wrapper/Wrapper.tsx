@@ -167,7 +167,6 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
     <Context.Provider
       value={{
         locale,
-        setLocale,
         selectLanguage,
         formData,
         setFormData,
