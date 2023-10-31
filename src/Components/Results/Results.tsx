@@ -50,7 +50,7 @@ import {
 } from '../../Types/Results.ts';
 import { citizenshipFilterOperators } from '../FilterSection/CitizenshipPopover.tsx';
 import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
-import EmailResults from '../EmailResults/EmailResults';
+import EmailResults from '../EmailResults/EmailResults.tsx';
 
 export type UpdateFilterArg =
   | {
