@@ -74,8 +74,8 @@ const HealthInsuranceQ = ({
       });
 
       const youDoNotHaveHealthInsuranceFM = intl.formatMessage({
-        id: 'healthInsuranceOptions.none-you',
-        defaultMessage: 'You do not have health insurance',
+        id: 'healthInsuranceOptions.none-I',
+        defaultMessage: 'I do not have health insurance',
       });
 
       if (hhMemberIndex === 1 && key === 'none') {
