@@ -61,7 +61,7 @@ const Confirmation = () => {
     const allHouseholdAges = getAllHouseholdAges();
 
     const householdMemberDataBlocks = householdData.map((personData, i) => {
-      const { hasIncome, incomeStreams } = personData;
+      const { hasIncome, incomeStreams, healthInsurance } = personData;
 
       return (
         <div key={i}>
@@ -94,6 +94,7 @@ const Confirmation = () => {
                 {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
                 {hasIncome === false && <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />}
               </article>
+              { displayHHMHealthInsuranceSection(healthInsurance) }
             </Grid>
             <Grid item xs={2} display="flex" justifyContent="flex-end">
               <button
@@ -112,7 +113,7 @@ const Confirmation = () => {
     return householdMemberDataBlocks;
   };
 
-  const displayHealthInsuranceSection = (hHMemberHealthInsurance) => {
+  const displayHHMHealthInsuranceSection = (hHMemberHealthInsurance) => {
     return (
       <article className="section-p">
         <b>
