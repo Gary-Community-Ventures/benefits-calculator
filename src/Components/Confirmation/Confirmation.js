@@ -400,16 +400,6 @@ const Confirmation = () => {
       <>
         {displayZipcodeSection()}
         <p className="confirmation-section-underline"></p>
-        {displayHHCheckboxSection(
-          'healthInsurance',
-          'confirmation.displayAllFormData-healthInsurance',
-          'Household Insurance',
-          getQuestionUrl('healthInsurance'),
-          refactorOptionsList(healthInsuranceOptions),
-          <MedicalServicesIcon className="home-icon" />,
-          'edit health insurance',
-        )}
-        <p className="confirmation-section-underline"></p>
         {displayHouseholdSizeSection()}
         <p className="confirmation-section-underline"></p>
         {displayAllMembersDataBlock()}
