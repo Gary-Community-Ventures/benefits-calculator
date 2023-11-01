@@ -8,9 +8,13 @@ import healthCareBenefits from './categories/healthCareBenefits.tsx';
 import taxCreditBenefits from './categories/taxCreditBenefits.tsx';
 import type { FormattedMessageType } from '../../Types/Questions.ts';
 
+export type CategoryOptions = {
+  [key: string]: FormattedMessageType;
+};
+
 export type BenefitAccordion = {
   categoryName: FormattedMessageType;
-  categoryOptions: { [key: string]: FormattedMessageType };
+  categoryOptions: CategoryOptions;
 };
 
 const benefitAccordions: BenefitAccordion[] = [

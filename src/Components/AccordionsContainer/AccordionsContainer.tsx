@@ -1,5 +1,5 @@
 import accordionsData, { BenefitAccordion } from '../../Assets/BenefitCategoryLists/benefitAccordions.ts';
-import CategoryAccordion from '../CategoryAccordion/CategoryAccordion.js';
+import CategoryAccordion from '../CategoryAccordion/CategoryAccordion.tsx';
 import { useState, useEffect, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import './AccordionsContainer.css';
@@ -25,11 +25,6 @@ const AccordionsContainer = ({ componentDetails, submitted }: Props) => {
     errorController.updateError(formData.hasBenefits, formData);
   }, [expanded]);
 
-  const handleAccordionSelectChange = (panel: number) => (event: Event, isExpanded: boolean) => {
-    errorController.updateError(formData.hasBenefits, formData);
-    setExpanded(isExpanded ? panel : false);
-  };
-
   const createAccordions = (accordionsInfo: BenefitAccordion[]) => {
     const categoryAccordions = accordionsInfo.map((accordionData, index) => {
       return (
@@ -37,7 +32,7 @@ const AccordionsContainer = ({ componentDetails, submitted }: Props) => {
           <CategoryAccordion
             categoryName={accordionData.categoryName}
             categoryOptions={accordionData.categoryOptions}
-            handleAccordionSelectChange={handleAccordionSelectChange}
+            setExpanded={setExpanded}
             expanded={expanded}
             index={index}
           />

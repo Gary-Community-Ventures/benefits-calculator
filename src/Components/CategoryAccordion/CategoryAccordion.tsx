@@ -6,13 +6,25 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
+import { CategoryOptions } from '../../Assets/BenefitCategoryLists/benefitAccordions';
+import { FormattedMessageType } from '../../Types/Questions';
 
-const CategoryAccordion = ({ categoryName, categoryOptions, handleAccordionSelectChange, expanded, index }) => {
+type Props = {
+  categoryName: FormattedMessageType;
+  categoryOptions: CategoryOptions;
+  setExpanded: (index: boolean | number) => void;
+  expanded: number | boolean;
+  index: number;
+};
+
+const CategoryAccordion = ({ categoryName, categoryOptions, setExpanded, expanded, index }: Props) => {
   const { theme } = useContext(Context);
   return (
     <Accordion
       expanded={expanded === index}
-      onChange={handleAccordionSelectChange(index)}
+      onChange={(event, isExpanded) => {
+        setExpanded(isExpanded ? index : false);
+      }}
       sx={{ marginBottom: '.25rem' }}
     >
       <AccordionSummary
