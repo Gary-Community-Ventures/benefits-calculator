@@ -123,7 +123,7 @@ const FetchScreen = () => {
           hoursPerWeek: income.hours_worked ?? '',
         });
       }
-   
+
       initialFormData.householdData.push({
         age: String(member.age) ?? '',
         relationshipToHH: member.relationship ? member.relationship : defaultRelationship,

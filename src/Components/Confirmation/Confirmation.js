@@ -94,7 +94,7 @@ const Confirmation = () => {
                 {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
                 {hasIncome === false && <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />}
               </article>
-              { displayHHMHealthInsuranceSection(healthInsurance) }
+              {displayHHMHealthInsuranceSection(healthInsurance)}
             </Grid>
             <Grid item xs={2} display="flex" justifyContent="flex-end">
               <button
@@ -125,7 +125,7 @@ const Confirmation = () => {
         {displayHealthInsurance(hHMemberHealthInsurance)}
       </article>
     );
-  }
+  };
 
   const displayHouseholdExpenses = () => {
     const { hasExpenses, expenses } = formData;
@@ -583,24 +583,23 @@ const Confirmation = () => {
       const formattedMessageProp = healthInsuranceOptions[filteredHHMInsEntry[0]].formattedMessage.props;
       const translatedAriaLabel = intl.formatMessage({ ...formattedMessageProp });
 
-      if ((allOtherSelectedOptions.length - 1) === index) { //we're at the last element in the array => don't include the comma
+      if (allOtherSelectedOptions.length - 1 === index) {
+        //we're at the last element in the array => don't include the comma
         return (acc += translatedAriaLabel);
-      } else { //include a comma to separate each string
+      } else {
+        //include a comma to separate each string
         return (acc += translatedAriaLabel + ', ');
       }
-    }, "");
-
+    }, '');
 
     if (selectedDontKnow) {
-      return (
-        <>{healthInsuranceOptions.dont_know.formattedMessage}</>
-      );
+      return <>{healthInsuranceOptions.dont_know.formattedMessage}</>;
     } else if (selectedNone) {
       return <>{healthInsuranceOptions.none.formattedMessage}</>;
     } else {
       return <>{allOtherSelectedOptionsString}</>;
     }
-  }
+  };
 
   return (
     <main className="benefits-form">

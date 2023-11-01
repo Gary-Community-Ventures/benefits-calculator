@@ -435,7 +435,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         <p className="household-data-q-underline"></p>
       </>
     );
-  }
+  };
 
   return (
     <main className="benefits-form">
