@@ -13,9 +13,9 @@ import {
   Modal,
 } from '@mui/material';
 import FilterSection from '../FilterSection/FilterSection';
-import ResultsError from '../ResultsError/ResultsError.js';
+import ResultsError from '../ResultsError/ResultsError.tsx';
 import UrgentNeedsTable from '../UrgentNeedsTable/UrgentNeedsTable';
-import Loading from '../Loading/Loading.js';
+import Loading from '../Loading/Loading.tsx';
 import NoResultsTable from '../NoResultsTable/NoResultsTable.tsx';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';

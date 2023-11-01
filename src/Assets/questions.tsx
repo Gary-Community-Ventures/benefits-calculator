@@ -24,18 +24,6 @@ import healthInsuranceOptions from './healthInsuranceOptions.tsx';
 import acuteConditionOptions from './acuteConditionOptions';
 import { FormattedMessage } from 'react-intl';
 
-export type QuestionNames =
-  | 'zipcode'
-  | 'healthInsurance'
-  | 'householdSize'
-  | 'householdData'
-  | 'hasExpenses'
-  | 'householdAssets'
-  | 'hasBenefits'
-  | 'acuteHHConditions'
-  | 'referralSource'
-  | 'signUpInfo';
-
 const questions = {
   zipcode: {
     name: 'zipcode',

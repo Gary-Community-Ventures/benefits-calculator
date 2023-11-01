@@ -1,4 +1,5 @@
-import questions, { type QuestionNames } from './questions';
+import questions from './questions';
+import type { QuestionNames } from '../Types/Questions';
 
 export const startingQuestionNumber = 3;
 const defaultStepDirectory: QuestionNames[] = [
