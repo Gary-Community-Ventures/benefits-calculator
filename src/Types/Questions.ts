@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { MessageFunction, ValidationFunction } from './ErrorController';
 import { SignUpInfo } from './FormData';
 
-export type QuestionNames =
+export type QuestionName =
   | 'zipcode'
   | 'healthInsurance'
   | 'householdSize'
@@ -93,7 +93,7 @@ export type PreferNotToAnswerDetails = {
   inputHelperText: MessageFunction<string>;
 };
 
-export type AccordionCOntainerDetails = {
+export type AccordionContainerDetails = {
   componentType: 'AccordionContainer';
   ariaLabel: string;
   inputName: string;
@@ -124,7 +124,7 @@ export type ComponentDetails =
   | RadioFieldDetails
   | ExpenseBlockDetails
   | PreferNotToAnswerDetails
-  | AccordionCOntainerDetails
+  | AccordionContainerDetails
   | BasicCheckboxGroupDetails
   | SignUpDetails;
 

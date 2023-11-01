@@ -87,7 +87,7 @@ const FollowUpQuestions = ({
         <div className="question-container accordions-container" key={index}>
           <h2 className="question-label">{followUp.question}</h2>
           <p className="question-description">{followUp.questionDescription}</p>
-          <AccordionsContainer followUp={followUp} submitted={followUpSubmitted} />
+          <AccordionsContainer componentDetails={followUp.componentDetails} submitted={followUpSubmitted} />
         </div>
       );
     }
