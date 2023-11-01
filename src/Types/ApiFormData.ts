@@ -1,5 +1,87 @@
 import { Language } from '../Assets/languageOptions';
 
+export type ApiInsuranceReadOnly = {
+  household_member: number;
+};
+
+export type ApiInsurance = {
+  dont_know: boolean;
+  none: boolean;
+  employer: boolean;
+  private: boolean;
+  chp: boolean;
+  medicaid: boolean;
+  medicare: boolean;
+  emergency_medicaid: boolean;
+  family_planning: boolean;
+};
+
+export type ApiIncomeReadOnly = {
+  screen: number;
+  household_member: number;
+  id: number;
+};
+
+export type ApiIncome = {
+  type: string | null;
+  amount: number | null;
+  frequency: string | null;
+  hours_worked: number | null;
+};
+
+export type ApiHouseholdMemberReadOnly = {
+  screen: number;
+  id: number;
+  income_streams: ApiIncomeReadOnly[];
+  insurance: ApiInsuranceReadOnly;
+};
+
+export type ApiHouseholdMember = {
+  relationship: string | null;
+  age: number | null;
+  student: boolean | null;
+  student_full_time: boolean | null;
+  pregnant: boolean | null;
+  unemployed: boolean | null;
+  worked_in_last_18_mos: boolean | null;
+  visually_impaired: boolean | null;
+  disabled: boolean | null;
+  veteran: boolean | null;
+  medicaid: boolean | null;
+  disability_medicaid: boolean | null;
+  has_income: boolean | null;
+  income_streams: ApiIncome[];
+  insurance: ApiInsurance;
+};
+
+export type ApiExpenseReadOnly = {
+  screen: number;
+  household_member: number;
+  id: number;
+};
+
+export type ApiExpense = {
+  type: string | null;
+  amount: number | null;
+  frequency: string | null;
+};
+
+export type ApiUserWriteOnly = {
+  id: number;
+  cell: string | null;
+  email: string | null;
+  first_name: string | null;
+  last_name: string | null;
+  email_or_cell: string | null;
+  language_code: Language | null;
+  tcpa_consent: boolean;
+};
+
+export type ApiUser = {
+  send_offers: boolean;
+  send_updates: boolean;
+};
+
 export type ApiFormDataReadOnly = {
   id: number;
   uuid: string;
@@ -76,86 +158,4 @@ export type ApiFormData = {
   needs_job_resources: boolean | null;
   needs_dental_care: boolean | null;
   needs_legal_services: boolean | null;
-};
-
-export type ApiIncomeReadOnly = {
-  screen: number;
-  household_member: number;
-  id: number;
-};
-
-export type ApiIncome = {
-  type: string | null;
-  amount: number | null;
-  frequency: string | null;
-  hours_worked: number | null;
-};
-
-export type ApiHouseholdMemberReadOnly = {
-  screen: number;
-  id: number;
-  income_streams: ApiIncomeReadOnly[];
-  insurance: ApiInsuranceReadOnly;
-};
-
-export type ApiHouseholdMember = {
-  relationship: string | null;
-  age: number | null;
-  student: boolean | null;
-  student_full_time: boolean | null;
-  pregnant: boolean | null;
-  unemployed: boolean | null;
-  worked_in_last_18_mos: boolean | null;
-  visually_impaired: boolean | null;
-  disabled: boolean | null;
-  veteran: boolean | null;
-  medicaid: boolean | null;
-  disability_medicaid: boolean | null;
-  has_income: boolean | null;
-  income_streams: ApiIncomeReadOnly[];
-  insurance: ApiInsurance;
-};
-
-export type ApiInsuranceReadOnly = {
-  household_member: number;
-};
-
-export type ApiInsurance = {
-  dont_know: boolean;
-  none: boolean;
-  employer: boolean;
-  private: boolean;
-  chp: boolean;
-  medicaid: boolean;
-  medicare: boolean;
-  emergency_medicaid: boolean;
-  family_planning: boolean;
-};
-
-export type ApiExpenseReadOnly = {
-  screen: number;
-  household_member: number;
-  id: number;
-};
-
-export type ApiExpense = {
-  type: string | null;
-  amount: number | null;
-  frequency: string | null;
-};
-
-export type ApiUserWriteOnly = {
-  id: number;
-  cell: string | null;
-  email: string | null;
-  first_name: string | null;
-  last_name: string | null;
-  email_or_cell: string | null;
-  language_code: Language | null;
-  tcpa_consent: boolean;
-};
-
-export type ApiUser = {
-  send_offers: boolean;
-  send_updates: boolean;
 };

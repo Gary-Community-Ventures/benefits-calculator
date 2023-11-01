@@ -4,7 +4,7 @@ import { getScreen } from '../../apiCalls.js';
 import referralOptions from '../../Assets/referralOptions.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LoadingPage from '../LoadingPage/LoadingPage.tsx';
-import type { ApiFormData } from '../../Types/ApiFormData.ts';
+import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData.ts';
 import type { FormData } from '../../Types/FormData.ts';
 
 const FetchScreen = () => {
@@ -23,20 +23,20 @@ const FetchScreen = () => {
     screenDoneLoading();
   };
 
-  const createFormData = (response: ApiFormData) => {
+  const createFormData = (response: ApiFormDataReadOnly & ApiFormData) => {
     let otherRefferer = '';
     let referrer = response.referral_source;
     if (!referrer) {
       referrer = '';
     } else if (!(referrer in referralOptions)) {
       referrer = 'other';
-      otherRefferer = response.referral_source;
+      otherRefferer = referrer;
     }
 
     const initialFormData: FormData = {
       ...formData,
       isTest: response.is_test ?? false,
-      externalID: response.external_id,
+      externalID: response.external_id ?? undefined,
       agreeToTermsOfService: response.agree_to_tos ?? false,
       is13OrOlder: response.is_13_or_older ?? false,
       zipcode: response.zipcode ?? '',
@@ -46,7 +46,7 @@ const FetchScreen = () => {
       expenses: [],
       householdSize: String(response.household_size) ?? '',
       householdData: [],
-      householdAssets: Math.round(response.household_assets) ?? 0,
+      householdAssets: Math.round(response.household_assets ?? 0),
       hasBenefits: response.has_benefits ?? 'preferNotToAnswer',
       benefits: {
         acp: response.has_acp ?? false,
@@ -85,7 +85,7 @@ const FetchScreen = () => {
         none: response.has_no_hi ?? false,
       },
       referralSource: referrer,
-      immutableReferrer: response.referrer_code,
+      immutableReferrer: response.referrer_code ?? undefined,
       otherSource: otherRefferer,
       acuteHHConditions: {
         food: response.needs_food ?? false,
@@ -138,10 +138,10 @@ const FetchScreen = () => {
       initialFormData.hasExpenses = true;
       initialFormData.expenses.push({
         expenseSourceName: expense.type ?? '',
-        expenseAmount: String(Math.round(expense.amount)) ?? '',
+        expenseAmount: expense.amount ? String(Math.round(expense.amount)) : '',
       });
     }
-    setFormData({ ...formData, ...initialFormData });
+    setFormData({ ...initialFormData });
   };
 
   useEffect(() => {
