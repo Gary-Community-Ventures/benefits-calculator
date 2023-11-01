@@ -112,6 +112,20 @@ const Confirmation = () => {
     return householdMemberDataBlocks;
   };
 
+  const displayHealthInsuranceSection = (hHMemberHealthInsurance) => {
+    return (
+      <article className="section-p">
+        <b>
+          <FormattedMessage
+            id="confirmation.headOfHouseholdDataBlock-healthInsuranceText"
+            defaultMessage="Health Insurance: "
+          />{' '}
+        </b>
+        {displayHealthInsurance(hHMemberHealthInsurance)}
+      </article>
+    );
+  }
+
   const displayHouseholdExpenses = () => {
     const { hasExpenses, expenses } = formData;
 
