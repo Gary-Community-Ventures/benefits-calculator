@@ -1,16 +1,18 @@
 import { useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getScreen } from '../../apiCalls';
-import referralOptions from '../../Assets/referralOptions';
+import { getScreen } from '../../apiCalls.js';
+import referralOptions from '../../Assets/referralOptions.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LoadingPage from '../LoadingPage/LoadingPage.tsx';
+import type { ApiFormData } from '../../Types/ApiFormData.ts';
+import type { FormData } from '../../Types/FormData.ts';
 
 const FetchScreen = () => {
   const { formData, setFormData, screenDoneLoading } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();
 
-  const fetchScreen = async (uuid) => {
+  const fetchScreen = async (uuid: string) => {
     try {
       const response = await getScreen(uuid);
       createFormData(response);
@@ -21,7 +23,7 @@ const FetchScreen = () => {
     screenDoneLoading();
   };
 
-  const createFormData = (response) => {
+  const createFormData = (response: ApiFormData) => {
     let otherRefferer = '';
     let referrer = response.referral_source;
     if (!referrer) {
@@ -31,8 +33,8 @@ const FetchScreen = () => {
       otherRefferer = response.referral_source;
     }
 
-    const initialFormData = {
-      screenUUID: response.uuid,
+    const initialFormData: FormData = {
+      ...formData,
       isTest: response.is_test ?? false,
       externalID: response.external_id,
       agreeToTermsOfService: response.agree_to_tos ?? false,
@@ -42,7 +44,7 @@ const FetchScreen = () => {
       startTime: response.start_date ?? formData.startTime,
       hasExpenses: false,
       expenses: [],
-      householdSize: response.household_size ?? '',
+      householdSize: String(response.household_size) ?? '',
       householdData: [],
       householdAssets: Math.round(response.household_assets) ?? 0,
       hasBenefits: response.has_benefits ?? 'preferNotToAnswer',
@@ -114,9 +116,9 @@ const FetchScreen = () => {
       for (const income of member.income_streams) {
         incomes.push({
           incomeStreamName: income.type ?? '',
-          incomeAmount: income.amount ?? '',
+          incomeAmount: String(income.amount) ?? '',
           incomeFrequency: income.frequency ?? '',
-          hoursPerWeek: income.hours_worked ?? '',
+          hoursPerWeek: String(income.hours_worked) ?? '',
         });
       }
       initialFormData.householdData.push({
@@ -136,7 +138,7 @@ const FetchScreen = () => {
       initialFormData.hasExpenses = true;
       initialFormData.expenses.push({
         expenseSourceName: expense.type ?? '',
-        expenseAmount: Math.round(expense.amount) ?? '',
+        expenseAmount: String(Math.round(expense.amount)) ?? '',
       });
     }
     setFormData({ ...formData, ...initialFormData });
@@ -145,7 +147,7 @@ const FetchScreen = () => {
   useEffect(() => {
     // https://stackoverflow.com/questions/20041051/how-to-judge-a-string-is-uuid-type
     const uuidRegx = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
-    if (!uuid.match(uuidRegx)) {
+    if (uuid === undefined || !uuid.match(uuidRegx)) {
       screenDoneLoading();
       return;
     }
