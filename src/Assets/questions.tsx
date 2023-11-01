@@ -23,8 +23,9 @@ import signUpOptions from './signUpOptions.tsx';
 import healthInsuranceOptions from './healthInsuranceOptions.tsx';
 import acuteConditionOptions from './acuteConditionOptions';
 import { FormattedMessage } from 'react-intl';
+import type { QuestionNames, Question } from '../Types/Questions.ts';
 
-const questions = {
+const questions: Record<QuestionNames, Question> = {
   zipcode: {
     name: 'zipcode',
     question: <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />,
@@ -232,6 +233,7 @@ const questions = {
     ),
     componentDetails: {
       componentType: 'BasicSelect',
+      inputType: 'text',
       inputName: 'referralSource',
       inputError: selectHasError,
       inputHelperText: displayReferralSourceHelperText,
@@ -281,6 +283,7 @@ const questions = {
     },
     followUpQuestions: [
       {
+        name: 'emailOrCell',
         question: (
           <FormattedMessage id="questions.signUpInfo-a" defaultMessage="Please provide your contact info below: " />
         ),

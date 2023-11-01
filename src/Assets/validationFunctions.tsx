@@ -416,7 +416,7 @@ const signUpOptionsHaveError: ValidationFunction<SignUpInfo> = (signUpInfo) => {
   }
 };
 
-const healthInsuranceHasError: ValidationFunction<HealthInsurance> = (healthInsuranceSelections) => {
+const healthInsuranceHasError: ValidationFunction<{ [key: string]: boolean }> = (healthInsuranceSelections) => {
   const healthInsuranceKeys = Object.keys(healthInsuranceSelections);
   const noOptionWasSelected = healthInsuranceKeys.every(
     (option) => healthInsuranceSelections[option as keyof HealthInsurance] === false,
@@ -424,7 +424,7 @@ const healthInsuranceHasError: ValidationFunction<HealthInsurance> = (healthInsu
   return noOptionWasSelected;
 };
 
-const displayHealthInsuranceHelperText: MessageFunction<HealthInsurance> = (healthInsuranceSelections) => {
+const displayHealthInsuranceHelperText: MessageFunction<{ [key: string]: boolean }> = (healthInsuranceSelections) => {
   if (healthInsuranceHasError(healthInsuranceSelections)) {
     return (
       <ErrorMessageWrapper fontSize="1.5rem">
