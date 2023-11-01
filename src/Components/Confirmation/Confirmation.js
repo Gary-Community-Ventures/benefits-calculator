@@ -581,6 +581,36 @@ const Confirmation = () => {
     return getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber;
   };
 
+  const displayHealthInsurance = (hHMemberHealthInsurance) => {
+    const selectedDontKnow = hHMemberHealthInsurance.dont_know === true;
+    const selectedNone = hHMemberHealthInsurance.none === true;
+    const allOtherSelectedOptions = Object.entries(hHMemberHealthInsurance).filter(
+      (hHMemberInsEntry) => hHMemberInsEntry[1] === true,
+    );
+
+    const allOtherSelectedOptionsString = allOtherSelectedOptions.reduce((acc, filteredHHMInsEntry, index) => {
+      const formattedMessageProp = healthInsuranceOptions[filteredHHMInsEntry[0]].formattedMessage.props;
+      const translatedAriaLabel = intl.formatMessage({ ...formattedMessageProp });
+
+      if ((allOtherSelectedOptions.length - 1) === index) { //we're at the last element in the array => don't include the comma
+        return (acc += translatedAriaLabel);
+      } else { //include a comma to separate each string
+        return (acc += translatedAriaLabel + ', ');
+      }
+    }, "");
+
+
+    if (selectedDontKnow) {
+      return (
+        <p>{healthInsuranceOptions.dont_know.formattedMessage}</p>
+      );
+    } else if (selectedNone) {
+      return <p>{healthInsuranceOptions.none.formattedMessage}</p>;
+    } else {
+      return <p>{allOtherSelectedOptionsString}</p>;
+    }
+  }
+
   return (
     <main className="benefits-form">
       <h1 className="sub-header">
