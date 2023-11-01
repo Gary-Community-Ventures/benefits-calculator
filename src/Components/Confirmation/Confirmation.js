@@ -593,12 +593,12 @@ const Confirmation = () => {
 
     if (selectedDontKnow) {
       return (
-        <p>{healthInsuranceOptions.dont_know.formattedMessage}</p>
+        <>{healthInsuranceOptions.dont_know.formattedMessage}</>
       );
     } else if (selectedNone) {
-      return <p>{healthInsuranceOptions.none.formattedMessage}</p>;
+      return <>{healthInsuranceOptions.none.formattedMessage}</>;
     } else {
-      return <p>{allOtherSelectedOptionsString}</p>;
+      return <>{allOtherSelectedOptionsString}</>;
     }
   }
 
