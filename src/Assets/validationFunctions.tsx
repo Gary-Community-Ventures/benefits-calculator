@@ -270,6 +270,16 @@ const getHealthInsuranceError: MessageFunction<HealthInsurance> = (healthInsuran
           />
         </ErrorMessageWrapper>
       );
+    } else if (healthInsurance.dont_know === true) {
+      //then they chose dont_know and another option
+      return(
+        <ErrorMessageWrapper fontSize="1rem">
+          <FormattedMessage
+            id="validation-helperText.hhMemberInsuranceDontKnow"
+            defaultMessage="Please do not select any other options if you/they don't know"
+          />
+        </ErrorMessageWrapper>
+      );
     } else { //they haven't selected an option
       return (
         <ErrorMessageWrapper fontSize="1rem">
@@ -286,9 +296,9 @@ const getHealthInsuranceError: MessageFunction<HealthInsurance> = (healthInsuran
 const healthInsuranceDataIsValid: ValidationFunction<HealthInsurance> = (hhMemberHealthInsData) => {
   const numOfTrueValues = Object.values(hhMemberHealthInsData).filter(healthInsuranceValue => healthInsuranceValue === true).length;
 
-  if (hhMemberHealthInsData.none === true) {
-    const onlyNoneWasSelected = numOfTrueValues === 1;
-    return onlyNoneWasSelected;
+  if (hhMemberHealthInsData.none === true || hhMemberHealthInsData.dont_know === true) {
+    //check here to ensure that that is the ONLY option that was selected via numOfTrueValues
+    return numOfTrueValues === 1;
   } else {
     const atLeastOneOptionWasSelected = numOfTrueValues > 0;
     return atLeastOneOptionWasSelected;
