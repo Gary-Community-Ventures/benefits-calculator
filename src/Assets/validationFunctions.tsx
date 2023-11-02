@@ -218,13 +218,14 @@ const displayHouseholdMemberAgeHelperText: MessageFunction<string> = (applicantA
 };
 
 const personDataIsValid: ValidationFunction<HouseholdData> = (householdDataState) => {
-  const { age, relationshipToHH, hasIncome, incomeStreams } = householdDataState;
+  const { age, relationshipToHH, hasIncome, incomeStreams, healthInsurance } = householdDataState;
 
   const ageIsValid = Number(age) >= 0 && age !== '';
   const relationshipToHHIsValid = relationshipToHH !== '';
   const incomeIsValid = (hasIncome && incomeStreamsAreValid(incomeStreams)) || !hasIncome;
+  const healthInsuranceIsValid = healthInsuranceDataIsValid(healthInsurance);
 
-  return ageIsValid && relationshipToHHIsValid && incomeIsValid;
+  return ageIsValid && relationshipToHHIsValid && incomeIsValid && healthInsuranceIsValid;
 };
 
 const getPersonDataErrorMsg: MessageFunction<HouseholdData> = (householdDataState) => {
@@ -254,9 +255,61 @@ const getPersonDataErrorMsg: MessageFunction<HouseholdData> = (householdDataStat
         />
       </ErrorMessageWrapper>
     );
-  } else {
-    return '';
   }
+};
+
+const getHealthInsuranceError: MessageFunction<HealthInsurance> = (healthInsurance: HealthInsurance) => {
+  if (healthInsuranceDataIsValid(healthInsurance) === false) {
+    if (healthInsurance.none === true) {
+      //then they chose none and another option
+      return (
+        <ErrorMessageWrapper fontSize="1rem">
+          <FormattedMessage
+            id="validation-helperText.hhMemberInsuranceNone"
+            defaultMessage="Please do not select any other options if you/they do not have health insurance"
+          />
+        </ErrorMessageWrapper>
+      );
+    } else if (healthInsurance.dont_know === true) {
+      //then they chose dont_know and another option
+      return (
+        <ErrorMessageWrapper fontSize="1rem">
+          <FormattedMessage
+            id="validation-helperText.hhMemberInsuranceDontKnow"
+            defaultMessage="Please do not select any other options if you/they don't know"
+          />
+        </ErrorMessageWrapper>
+      );
+    } else {
+      //they haven't selected an option
+      return (
+        <ErrorMessageWrapper fontSize="1rem">
+          <FormattedMessage
+            id="validation-helperText.hhMemberInsurance"
+            defaultMessage="Please select at least one health insurance option"
+          />
+        </ErrorMessageWrapper>
+      );
+    }
+  }
+};
+
+const healthInsuranceDataIsValid: ValidationFunction<HealthInsurance> = (hhMemberHealthInsData) => {
+  const numOfTrueValues = Object.values(hhMemberHealthInsData).filter(
+    (healthInsuranceValue) => healthInsuranceValue === true,
+  ).length;
+
+  if (hhMemberHealthInsData.none === true || hhMemberHealthInsData.dont_know === true) {
+    //check here to ensure that that is the ONLY option that was selected via numOfTrueValues
+    return numOfTrueValues === 1;
+  } else {
+    const atLeastOneOptionWasSelected = numOfTrueValues > 0;
+    return atLeastOneOptionWasSelected;
+  }
+};
+
+const healthInsuranceDataHasError: ValidationFunction<HealthInsurance> = (hhMemberHealthInsData: HealthInsurance) => {
+  return !healthInsuranceDataIsValid(hhMemberHealthInsData);
 };
 
 const emailHasError: ValidationFunction<string> = (email) => {
@@ -580,4 +633,6 @@ export {
   otherReferalSourceHelperText,
   termsOfServiceHasError,
   displayAgreeToTermsErrorMessage,
+  healthInsuranceDataHasError,
+  getHealthInsuranceError,
 };

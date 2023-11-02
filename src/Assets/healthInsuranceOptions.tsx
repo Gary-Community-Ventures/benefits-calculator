@@ -5,8 +5,25 @@ import padlock from './OptionCardIcons/padlock.png';
 import redX from './OptionCardIcons/redX.png';
 import teddyDoctor from './OptionCardIcons/teddyDoctor.png';
 import umbrella from './OptionCardIcons/umbrella.png';
+import dontKnow from './OptionCardIcons/dont_know.png';
+import emergencyMedicaid from './OptionCardIcons/emergency_medicaid.png';
+import familyPlanning from './OptionCardIcons/family_planning.png';
+import { HealthInsurance } from '../Types/FormData';
 
-const healthInsuranceOptions = {
+export type HealthInsuranceOptions = {
+  [Property in keyof HealthInsurance]: {
+    formattedMessage: JSX.Element;
+    image: string;
+  };
+};
+
+const healthInsuranceOptions: HealthInsuranceOptions = {
+  none: {
+    formattedMessage: (
+      <FormattedMessage id="healthInsuranceOptions.none-they" defaultMessage="They do not have health insurance" />
+    ),
+    image: redX,
+  },
   employer: {
     formattedMessage: (
       <FormattedMessage id="healthInsuranceOptions.employer" defaultMessage="Employer-provided health insurance" />
@@ -15,13 +32,13 @@ const healthInsuranceOptions = {
   },
   private: {
     formattedMessage: (
-      <FormattedMessage id="healthInsuranceOptions.private" defaultMessage="Private health insurance" />
+      <FormattedMessage id="healthInsuranceOptions.private" defaultMessage="Private (non-employer) health insurance" />
     ),
     image: padlock,
   },
   medicaid: {
     formattedMessage: (
-      <FormattedMessage id="healthInsuranceOptions.medicaid" defaultMessage="Health First Colorado (Medicaid)" />
+      <FormattedMessage id="healthInsuranceOptions.medicaid" defaultMessage="Health First Colorado (Full Medicaid)" />
     ),
     image: bill,
   },
@@ -35,14 +52,24 @@ const healthInsuranceOptions = {
     ),
     image: teddyDoctor,
   },
-  none: {
+  emergency_medicaid: {
     formattedMessage: (
       <FormattedMessage
-        id="healthInsuranceOptions.none"
-        defaultMessage="One or more household member(s) do not have health insurance"
+        id="healthInsuranceOptions.emergency_medicaid"
+        defaultMessage="Emergency Medicaid / Reproductive Health"
       />
     ),
-    image: redX,
+    image: emergencyMedicaid,
+  },
+  family_planning: {
+    formattedMessage: (
+      <FormattedMessage id="healthInsuranceOptions.family_planning" defaultMessage="Family Planning Limited Medicaid" />
+    ),
+    image: familyPlanning,
+  },
+  dont_know: {
+    formattedMessage: <FormattedMessage id="healthInsuranceOptions.dont_know" defaultMessage="Don't Know" />,
+    image: dontKnow,
   },
 };
 

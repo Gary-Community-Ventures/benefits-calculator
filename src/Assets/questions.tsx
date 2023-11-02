@@ -10,9 +10,7 @@ import {
   selectHasError,
   displayReferralSourceHelperText,
   signUpOptionsHaveError,
-  healthInsuranceHasError,
   acuteHHConditionsHasError,
-  displayHealthInsuranceHelperText,
   displayBenefitsHelperText,
   countySelectHelperText,
   otherReferalSourceHelperText,
@@ -20,7 +18,6 @@ import {
 import referralOptions from './referralOptions.tsx';
 import countiesByZipcode from './countiesByZipcode.tsx';
 import signUpOptions from './signUpOptions.tsx';
-import healthInsuranceOptions from './healthInsuranceOptions.tsx';
 import acuteConditionOptions from './acuteConditionOptions';
 import { FormattedMessage } from 'react-intl';
 import type { QuestionName, Question } from '../Types/Questions.ts';
@@ -62,23 +59,6 @@ const questions: Record<QuestionName, Question> = {
         },
       },
     ],
-    headerType: 'aboutHousehold',
-  },
-  healthInsurance: {
-    name: 'healthInsurance',
-    question: (
-      <FormattedMessage
-        id="questions.healthInsurance"
-        defaultMessage="Which type(s) of health insurance do members of your household have? Check all that apply."
-      />
-    ),
-    componentDetails: {
-      componentType: 'OptionCardGroup',
-      inputName: 'healthInsurance',
-      options: healthInsuranceOptions,
-      inputError: healthInsuranceHasError,
-      inputHelperText: displayHealthInsuranceHelperText,
-    },
     headerType: 'aboutHousehold',
   },
   householdSize: {

@@ -5,13 +5,15 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
+import HealthInsuranceQ from '../HealthInsuranceQ/HealthInsuranceQ.tsx';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
 import {
   householdMemberAgeHasError,
   displayHouseholdMemberAgeHelperText,
-  getPersonDataErrorMsg,
+  healthInsuranceDataHasError,
+  getHealthInsuranceError,
   personDataIsValid,
   useErrorController,
   selectHasError,
@@ -22,8 +24,8 @@ import { getStepNumber } from '../../Assets/stepDirectory';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import EditIcon from '@mui/icons-material/Edit';
-import './HouseholdDataBlock.css';
 import { IconButton } from '@mui/material';
+import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -37,6 +39,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     navigate(`/${uuid}/step-${step}/${page}`);
   };
   const ageErrorController = useErrorController(householdMemberAgeHasError, displayHouseholdMemberAgeHelperText);
+  const healthInsuranceErrorController = useErrorController(healthInsuranceDataHasError, getHealthInsuranceError);
 
   const initialHouseholdData = formData.householdData[page - 1] ?? {
     age: '',
@@ -47,11 +50,21 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     disabled: false,
     hasIncome: false,
     incomeStreams: [],
+    healthInsurance: {
+      none: false,
+      employer: false,
+      private: false,
+      medicaid: false,
+      medicare: false,
+      chp: false,
+      emergency_medicaid: false,
+      family_planning: false,
+      dont_know: false,
+    },
   };
 
   const [householdData, setHouseholdData] = useState(initialHouseholdData);
   const [wasSubmitted, setWasSubmitted] = useState(false);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
@@ -66,12 +79,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     setHouseholdData(updatedHouseholdData);
   }, [householdData.hasIncome]);
-
-  useEffect(() => {
-    if (wasSubmitted) {
-      setError(getPersonDataErrorMsg(householdData));
-    }
-  }, [householdData, wasSubmitted]);
 
   useEffect(() => {
     const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
@@ -391,6 +398,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     event.preventDefault();
     ageErrorController.incrementSubmitted();
     ageErrorController.updateError(householdData.age);
+    healthInsuranceErrorController.incrementSubmitted();
+
     const validPersonData = personDataIsValid(householdData);
     const lastHouseholdMember = page >= remainingHHMNumber;
 
@@ -402,7 +411,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       setPage(page + 1);
     } else if (!validPersonData) {
       setWasSubmitted(true);
-      setError(getPersonDataErrorMsg(householdData));
+      healthInsuranceErrorController.updateError(householdData.healthInsurance);
     }
   };
 
@@ -414,12 +423,28 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
   };
 
+  const displayHealthInsuranceQuestion = (page, hhMemberData, setHHMemberData) => {
+    return (
+      <>
+        <HealthInsuranceQ
+          hhMemberIndex={page}
+          householdMemberData={hhMemberData}
+          setHouseholdMemberData={setHHMemberData}
+          healthInsuranceErrorController={healthInsuranceErrorController}
+        />
+        <p className="household-data-q-underline"></p>
+      </>
+    );
+  };
+
   return (
     <main className="benefits-form">
       <div>
         {createQuestionHeader(page)}
         {createAgeQuestion(page)}
+        {page === 1 && displayHealthInsuranceQuestion(page, householdData, setHouseholdData)}
         {page !== 1 && createHOfHRelationQuestion()}
+        {page !== 1 && displayHealthInsuranceQuestion(page, householdData, setHouseholdData)}
         {createConditionsQuestion(page)}
         <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}

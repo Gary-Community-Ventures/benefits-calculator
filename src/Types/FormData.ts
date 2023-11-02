@@ -19,6 +19,7 @@ export interface HouseholdData {
   disabled: boolean;
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
+  healthInsurance: HealthInsurance;
 }
 
 export interface Benefits {
@@ -51,13 +52,17 @@ export interface Benefits {
 }
 
 export interface HealthInsurance {
+  none: boolean;
   employer: boolean;
   private: boolean;
   medicaid: boolean;
   medicare: boolean;
   chp: boolean;
-  none: boolean;
+  dont_know: boolean;
+  emergency_medicaid: boolean;
+  family_planning: boolean;
 }
+
 export interface SignUpInfo {
   email: string;
   phone: string;
@@ -96,7 +101,6 @@ export interface FormData {
   householdAssets: number;
   hasBenefits: string;
   benefits: Benefits;
-  healthInsurance: HealthInsurance;
   referralSource?: string;
   immutableReferrer?: string;
   otherSource?: string;

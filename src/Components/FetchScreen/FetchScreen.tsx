@@ -76,14 +76,6 @@ const FetchScreen = () => {
         upk: response.has_upk ?? false,
         coctc: response.has_coctc ?? false,
       },
-      healthInsurance: {
-        employer: response.has_employer_hi ?? false,
-        private: response.has_private_hi ?? false,
-        medicaid: response.has_medicaid_hi ?? false,
-        medicare: response.has_medicare_hi ?? false,
-        chp: response.has_chp_hi ?? false,
-        none: response.has_no_hi ?? false,
-      },
       referralSource: referrer,
       immutableReferrer: response.referrer_code ?? undefined,
       otherSource: otherRefferer,
@@ -111,6 +103,18 @@ const FetchScreen = () => {
     };
 
     let defaultRelationship = 'headOfHousehold';
+    const initialHHMHealthInsurance = {
+      none: false,
+      employer: false,
+      private: false,
+      medicaid: false,
+      medicare: false,
+      chp: false,
+      emergency_medicaid: false,
+      family_planning: false,
+      dont_know: false,
+    };
+
     for (const member of response.household_members) {
       const incomes = [];
       for (const income of member.income_streams) {
@@ -121,6 +125,7 @@ const FetchScreen = () => {
           hoursPerWeek: String(income.hours_worked) ?? '',
         });
       }
+
       initialFormData.householdData.push({
         age: String(member.age) ?? '',
         relationshipToHH: member.relationship ? member.relationship : defaultRelationship,
@@ -130,6 +135,7 @@ const FetchScreen = () => {
         disabled: member.disabled ?? false,
         hasIncome: member.has_income ?? false,
         incomeStreams: incomes,
+        healthInsurance: member.insurance ?? initialHHMHealthInsurance,
       });
       defaultRelationship = '';
     }

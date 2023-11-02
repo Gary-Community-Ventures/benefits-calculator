@@ -55,12 +55,6 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     has_wic: formData.benefits.wic,
     has_upk: formData.benefits.upk,
     has_coctc: formData.benefits.coctc,
-    has_employer_hi: formData.healthInsurance.employer,
-    has_private_hi: formData.healthInsurance.private,
-    has_medicaid_hi: formData.healthInsurance.medicaid,
-    has_medicare_hi: formData.healthInsurance.medicare,
-    has_chp_hi: formData.healthInsurance.chp,
-    has_no_hi: formData.healthInsurance.none,
     referral_source: finalReferralSource ?? null,
     referrer_code: formData.immutableReferrer ?? null,
     needs_food: formData.acuteHHConditions.food,
@@ -88,14 +82,15 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
   const incomes = getIncomeStreamsBodies(householdMemberData);
 
   return {
-    relationship: householdMemberData.relationshipToHH,
     age: Number(householdMemberData.age),
+    relationship: householdMemberData.relationshipToHH,
     student: householdMemberData.student,
     pregnant: householdMemberData.pregnant,
     visually_impaired: householdMemberData.blindOrVisuallyImpaired,
     disabled: householdMemberData.disabled,
     has_income: householdMemberData.hasIncome,
     income_streams: incomes,
+    insurance: householdMemberData.healthInsurance,
   };
 };
 
