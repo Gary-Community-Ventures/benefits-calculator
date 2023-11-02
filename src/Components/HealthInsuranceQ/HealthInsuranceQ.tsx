@@ -1,27 +1,37 @@
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack, FormHelperText } from '@mui/material';
-import { FormattedMessage, useIntl } from 'react-intl';
 import healthInsuranceOptions, { HealthInsuranceOptions } from '../../Assets/healthInsuranceOptions';
 import { HouseholdData, HealthInsurance } from '../../Types/FormData';
-import { ErrorController } from '../../Types/ErrorController';
+import { useErrorController, healthInsuranceDataHasError, getHealthInsuranceError } from '../../Assets/validationFunctions';
 import '../OptionCardGroup/OptionCardGroup.css';
 
 interface HealthInsuranceProps {
   hhMemberIndex: number;
   householdMemberData: HouseholdData;
   setHouseholdMemberData: (householdMemberData: HouseholdData) => void;
-  healthInsuranceErrorController: ErrorController;
+  submitted: number;
 }
 
 const HealthInsuranceQ = ({
   hhMemberIndex,
   householdMemberData,
   setHouseholdMemberData,
-  healthInsuranceErrorController,
+  submitted
 }: HealthInsuranceProps) => {
   const { healthInsurance } = householdMemberData;
+  const healthInsuranceErrorController = useErrorController(healthInsuranceDataHasError, getHealthInsuranceError);
   const intl = useIntl();
+
+  useEffect(() => {
+    healthInsuranceErrorController.setSubmittedCount(submitted);
+  }, [submitted]);
+
+  useEffect(() => {
+    healthInsuranceErrorController.updateError(healthInsurance);
+  });
 
   const displayQuestion = (page: number) => {
     if (page === 1) {
@@ -111,7 +121,7 @@ const HealthInsuranceQ = ({
     <Stack>
       {displayQuestion(hhMemberIndex)}
       {displayHealthInsuranceOptionCards(healthInsuranceOptions, healthInsurance, hhMemberIndex)}
-      {healthInsuranceErrorController.hasError && (
+      {healthInsuranceErrorController.showError && (
         <FormHelperText>{healthInsuranceErrorController.message(healthInsurance)}</FormHelperText>
       )}
     </Stack>
