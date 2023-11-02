@@ -74,10 +74,10 @@ const HealthInsuranceQ = ({
       if (hhMemberIndex === 1 && key === 'none') {
         translatedAriaLabel = youDoNotHaveHealthInsuranceFM;
       }
-
+      
       return (
         <CardActionArea
-          key={hhMemberIndex + index}
+          key={hhMemberIndex + 'key' + index}
           sx={{ width: '11.25rem' }}
           className="card-action-area"
           onClick={() => {
