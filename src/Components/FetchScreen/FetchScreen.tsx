@@ -44,7 +44,7 @@ const FetchScreen = () => {
       startTime: response.start_date ?? formData.startTime,
       hasExpenses: false,
       expenses: [],
-      householdSize: String(response.household_size) ?? '',
+      householdSize: String(response.household_size ?? ''),
       householdData: [],
       householdAssets: Math.round(response.household_assets ?? 0),
       hasBenefits: response.has_benefits ?? 'preferNotToAnswer',
