@@ -4,7 +4,6 @@ import { SignUpInfo } from './FormData';
 
 export type QuestionName =
   | 'zipcode'
-  | 'healthInsurance'
   | 'householdSize'
   | 'householdData'
   | 'hasExpenses'
