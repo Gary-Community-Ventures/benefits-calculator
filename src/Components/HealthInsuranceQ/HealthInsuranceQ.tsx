@@ -46,19 +46,12 @@ const HealthInsuranceQ = ({
   };
 
   const handleCardClick = (optionName: keyof HealthInsuranceOptions, hhMemberData: HouseholdData) => {
-    const currentHHMInsurance: HealthInsurance = { ...healthInsurance };
-    const currentHealthInsOptionKeys = Object.keys(currentHHMInsurance) as (keyof HealthInsurance)[];
+    const updatedHealthInsuranceOption = !hhMemberData.healthInsurance[optionName];
 
-    const updatedHHMInsurance = currentHealthInsOptionKeys.reduce((acc, key) => {
-      if (optionName === key) {
-        acc[key] = !currentHHMInsurance[key];
-      } else {
-        acc[key] = currentHHMInsurance[key];
-      }
-      return acc;
-    }, {} as HealthInsurance);
-
-    setHouseholdMemberData({ ...hhMemberData, healthInsurance: updatedHHMInsurance });
+    setHouseholdMemberData({
+      ...hhMemberData,
+      healthInsurance: { ...hhMemberData.healthInsurance, [optionName]: updatedHealthInsuranceOption },
+    });
   };
 
   const displayHealthInsuranceOptionCards = (
