@@ -51,7 +51,7 @@ export type ApiHouseholdMember = {
   disability_medicaid?: boolean | null;
   has_income: boolean | null;
   income_streams: ApiIncome[];
-  // insurance: ApiInsurance;
+  insurance: ApiInsurance;
 };
 
 export type ApiExpenseReadOnly = {
@@ -145,12 +145,12 @@ export type ApiFormData = {
   has_upk: boolean | null;
   has_ssdi: boolean | null;
   has_pell_grant: boolean | null;
-  has_employer_hi: boolean | null;
-  has_private_hi: boolean | null;
-  has_medicaid_hi: boolean | null;
-  has_medicare_hi: boolean | null;
-  has_chp_hi: boolean | null;
-  has_no_hi: boolean | null;
+  has_employer_hi?: boolean | null;
+  has_private_hi?: boolean | null;
+  has_medicaid_hi?: boolean | null;
+  has_medicare_hi?: boolean | null;
+  has_chp_hi?: boolean | null;
+  has_no_hi?: boolean | null;
   needs_food: boolean | null;
   needs_baby_supplies: boolean | null;
   needs_housing_help: boolean | null;
