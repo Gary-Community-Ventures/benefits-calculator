@@ -5,7 +5,11 @@ import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack, FormHelperText } from '@mui/material';
 import healthInsuranceOptions, { HealthInsuranceOptions } from '../../Assets/healthInsuranceOptions';
 import { HouseholdData, HealthInsurance } from '../../Types/FormData';
-import { useErrorController, healthInsuranceDataHasError, getHealthInsuranceError } from '../../Assets/validationFunctions';
+import {
+  useErrorController,
+  healthInsuranceDataHasError,
+  getHealthInsuranceError,
+} from '../../Assets/validationFunctions';
 import '../OptionCardGroup/OptionCardGroup.css';
 
 interface HealthInsuranceProps {
@@ -19,7 +23,7 @@ const HealthInsuranceQ = ({
   hhMemberIndex,
   householdMemberData,
   setHouseholdMemberData,
-  submitted
+  submitted,
 }: HealthInsuranceProps) => {
   const { healthInsurance } = householdMemberData;
   const healthInsuranceErrorController = useErrorController(healthInsuranceDataHasError, getHealthInsuranceError);
