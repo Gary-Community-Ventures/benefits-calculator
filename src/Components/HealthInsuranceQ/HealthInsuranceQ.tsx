@@ -74,7 +74,7 @@ const HealthInsuranceQ = ({
       if (hhMemberIndex === 1 && key === 'none') {
         translatedAriaLabel = youDoNotHaveHealthInsuranceFM;
       }
-      
+
       return (
         <CardActionArea
           key={hhMemberIndex + 'key' + index}
