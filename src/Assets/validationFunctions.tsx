@@ -228,36 +228,6 @@ const personDataIsValid: ValidationFunction<HouseholdData> = (householdDataState
   return ageIsValid && relationshipToHHIsValid && incomeIsValid && healthInsuranceIsValid;
 };
 
-const getPersonDataErrorMsg: MessageFunction<HouseholdData> = (householdDataState) => {
-  const { age, relationshipToHH, hasIncome, incomeStreams } = householdDataState;
-
-  if (Number(age) < 0 || age === '') {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage
-          id="validation-helperText.hhMemberAgeB"
-          defaultMessage="Please enter 0 or a positive number for the household member's age"
-        />
-      </ErrorMessageWrapper>
-    );
-  } else if (relationshipToHH === '') {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="errorMessage-HHMemberRelationship" defaultMessage="Please select a relationship" />
-      </ErrorMessageWrapper>
-    );
-  } else if (hasIncome && incomeStreamsAreValid(incomeStreams) === false) {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage
-          id="validation-helperText.hhMemberIncome"
-          defaultMessage="Please select and enter a response for all income fields"
-        />
-      </ErrorMessageWrapper>
-    );
-  }
-};
-
 const getHealthInsuranceError: MessageFunction<HealthInsurance> = (healthInsurance: HealthInsurance) => {
   if (healthInsuranceDataIsValid(healthInsurance) === false) {
     if (healthInsurance.none === true) {
@@ -624,7 +594,6 @@ export {
   acuteHHConditionsHasError,
   benefitsHasError,
   displayBenefitsHelperText,
-  getPersonDataErrorMsg,
   countySelectHelperText,
   expenseTypeHelperText,
   relationTypeHelperText,

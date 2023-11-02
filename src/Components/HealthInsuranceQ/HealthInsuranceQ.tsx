@@ -1,27 +1,41 @@
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack, FormHelperText } from '@mui/material';
-import { FormattedMessage, useIntl } from 'react-intl';
 import healthInsuranceOptions, { HealthInsuranceOptions } from '../../Assets/healthInsuranceOptions.tsx';
 import { HouseholdData, HealthInsurance } from '../../Types/FormData';
-import { ErrorController } from '../../Types/ErrorController';
+import {
+  useErrorController,
+  healthInsuranceDataHasError,
+  getHealthInsuranceError,
+} from '../../Assets/validationFunctions';
 import '../OptionCardGroup/OptionCardGroup.css';
 
 interface HealthInsuranceProps {
   hhMemberIndex: number;
   householdMemberData: HouseholdData;
   setHouseholdMemberData: (householdMemberData: HouseholdData) => void;
-  healthInsuranceErrorController: ErrorController;
+  submitted: number;
 }
 
 const HealthInsuranceQ = ({
   hhMemberIndex,
   householdMemberData,
   setHouseholdMemberData,
-  healthInsuranceErrorController,
+  submitted,
 }: HealthInsuranceProps) => {
   const { healthInsurance } = householdMemberData;
+  const healthInsuranceErrorController = useErrorController(healthInsuranceDataHasError, getHealthInsuranceError);
   const intl = useIntl();
+
+  useEffect(() => {
+    healthInsuranceErrorController.setSubmittedCount(submitted);
+  }, [submitted]);
+
+  useEffect(() => {
+    healthInsuranceErrorController.updateError(healthInsurance);
+  });
 
   const displayQuestion = (page: number) => {
     if (page === 1) {
@@ -46,19 +60,12 @@ const HealthInsuranceQ = ({
   };
 
   const handleCardClick = (optionName: keyof HealthInsuranceOptions, hhMemberData: HouseholdData) => {
-    const currentHHMInsurance: HealthInsurance = { ...healthInsurance };
-    const currentHealthInsOptionKeys = Object.keys(currentHHMInsurance) as (keyof HealthInsurance)[];
+    const updatedHealthInsuranceOption = !hhMemberData.healthInsurance[optionName];
 
-    const updatedHHMInsurance = currentHealthInsOptionKeys.reduce((acc, key) => {
-      if (optionName === key) {
-        acc[key] = !currentHHMInsurance[key];
-      } else {
-        acc[key] = currentHHMInsurance[key];
-      }
-      return acc;
-    }, {} as HealthInsurance);
-
-    setHouseholdMemberData({ ...hhMemberData, healthInsurance: updatedHHMInsurance });
+    setHouseholdMemberData({
+      ...hhMemberData,
+      healthInsurance: { ...hhMemberData.healthInsurance, [optionName]: updatedHealthInsuranceOption },
+    });
   };
 
   const displayHealthInsuranceOptionCards = (
@@ -84,7 +91,7 @@ const HealthInsuranceQ = ({
 
       return (
         <CardActionArea
-          key={hhMemberIndex + index}
+          key={hhMemberIndex + 'key' + index}
           sx={{ width: '11.25rem' }}
           className="card-action-area"
           onClick={() => {
@@ -118,7 +125,7 @@ const HealthInsuranceQ = ({
     <Stack>
       {displayQuestion(hhMemberIndex)}
       {displayHealthInsuranceOptionCards(healthInsuranceOptions, healthInsurance, hhMemberIndex)}
-      {healthInsuranceErrorController.hasError && (
+      {healthInsuranceErrorController.showError && (
         <FormHelperText>{healthInsuranceErrorController.message(healthInsurance)}</FormHelperText>
       )}
     </Stack>
