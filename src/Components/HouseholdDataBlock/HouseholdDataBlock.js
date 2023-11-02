@@ -13,7 +13,6 @@ import {
   householdMemberAgeHasError,
   displayHouseholdMemberAgeHelperText,
   personDataIsValid,
-  useErrorController,
   selectHasError,
   relationTypeHelperText,
 } from '../../Assets/validationFunctions.tsx';
@@ -36,7 +35,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const setPage = (page) => {
     navigate(`/${uuid}/step-${step}/${page}`);
   };
-  const ageErrorController = useErrorController(householdMemberAgeHasError, displayHouseholdMemberAgeHelperText);
+  const [submittedCount, setSubmittedCount] = useState(0);
 
   const initialHouseholdData = formData.householdData[page - 1] ?? {
     age: '',
@@ -118,7 +117,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
               defaultMessage="How old are you?"
             />
           </h2>
-          {createTextField(ageTextfieldProps, ageErrorController)}
+          {createTextField(ageTextfieldProps, submittedCount)}
           <p className="household-data-q-underline"></p>
         </>
       );
@@ -134,18 +133,18 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
               defaultMessage="If your child is less than a year old, enter 0."
             />
           </p>
-          {createTextField(ageTextfieldProps, ageErrorController)}
+          {createTextField(ageTextfieldProps, submittedCount)}
           <p className="household-data-q-underline"></p>
         </>
       );
     }
   };
 
-  const createTextField = (componentInputProps, errorController) => {
+  const createTextField = (componentInputProps, submittedCount) => {
     return (
       <Textfield
         componentDetails={componentInputProps}
-        submitted={errorController.submittedCount}
+        submitted={submittedCount}
         data={householdData}
         handleTextfieldChange={handleTextfieldChange}
       />
@@ -302,7 +301,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         options={relationshipOptions}
         setHouseholdData={setHouseholdData}
         householdData={householdData}
-        submitted={ageErrorController.submittedCount}
+        submitted={submittedCount}
       />
     );
   };
@@ -393,8 +392,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
-    ageErrorController.incrementSubmitted();
-    ageErrorController.updateError(householdData.age);
+    setSubmittedCount(submittedCount + 1);
 
     const validPersonData = personDataIsValid(householdData);
     const lastHouseholdMember = page >= remainingHHMNumber;
@@ -425,7 +423,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           hhMemberIndex={page}
           householdMemberData={hhMemberData}
           setHouseholdMemberData={setHHMemberData}
-          submitted={ageErrorController.submittedCount}
+          submitted={submittedCount}
         />
         <p className="household-data-q-underline"></p>
       </>
@@ -444,7 +442,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}
         <p className="household-data-q-underline"></p>
-        {householdData.hasIncome && createPersonIncomeBlock(ageErrorController.submittedCount)}
+        {householdData.hasIncome && createPersonIncomeBlock(submittedCount)}
         <div className="question-buttons">
           <PreviousButton navFunction={handlePreviousSubmit} />
           <ContinueButton handleContinueSubmit={handleContinueSubmit} />
