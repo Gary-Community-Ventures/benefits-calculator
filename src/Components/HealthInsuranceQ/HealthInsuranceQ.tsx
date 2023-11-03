@@ -111,7 +111,7 @@ const HealthInsuranceQ = ({
               <img src={healthCareOptions[optionKey].image} alt={translatedAriaLabel} />
             </div>
             <CardContent sx={{ textAlign: 'center', padding: '.35rem' }}>
-              <Typography>{healthCareOptions[optionKey].formattedMessage}</Typography>
+              <Typography>{translatedAriaLabel}</Typography>
             </CardContent>
           </Card>
         </CardActionArea>
