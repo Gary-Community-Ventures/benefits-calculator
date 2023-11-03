@@ -18,6 +18,7 @@ import Textfield from '../Textfield/Textfield';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
+  maxWidth: '100%',
 });
 
 const StyledDeleteButton = styled(Button)({
@@ -156,7 +157,7 @@ const IncomeQuestion = ({
 
   const createIncomeStreamsDropdownMenu = (incomeStreamName, index) => {
     return (
-      <FormControl sx={{ m: 1, minWidth: 120 }} error={incomeStreamErrorController.showError}>
+      <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeStreamErrorController.showError}>
         <InputLabel id="income-type-label">
           <FormattedMessage
             id="personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel"
@@ -309,7 +310,7 @@ const IncomeQuestion = ({
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
           {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}?
         </h2>
-        <FormControl sx={{ m: 1, minWidth: 120 }} error={incomeFrequencyErrorController.showError}>
+        <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeFrequencyErrorController.showError}>
           <InputLabel id="income-frequency-label">
             <FormattedMessage
               id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel"
