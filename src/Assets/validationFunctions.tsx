@@ -228,16 +228,26 @@ const personDataIsValid: ValidationFunction<HouseholdData> = (householdDataState
   return ageIsValid && relationshipToHHIsValid && incomeIsValid && healthInsuranceIsValid;
 };
 
-const getHealthInsuranceError: MessageFunction<HealthInsurance> = (healthInsurance: HealthInsurance) => {
+const getHealthInsuranceError: MessageFunction<{ index: number; healthInsurance: HealthInsurance }> = ({
+  index,
+  healthInsurance,
+}) => {
   if (healthInsuranceDataIsValid(healthInsurance) === false) {
     if (healthInsurance.none === true) {
       //then they chose none and another option
       return (
         <ErrorMessageWrapper fontSize="1rem">
-          <FormattedMessage
-            id="validation-helperText.hhMemberInsuranceNone"
-            defaultMessage="Please do not select any other options if you/they do not have health insurance"
-          />
+          {index === 1 ? (
+            <FormattedMessage
+              id="validation-helperText.hhMemberInsuranceNone-you"
+              defaultMessage="Please do not select any other options if you do not have health insurance"
+            />
+          ) : (
+            <FormattedMessage
+              id="validation-helperText.hhMemberInsuranceNone-they"
+              defaultMessage="Please do not select any other options if they do not have health insurance"
+            />
+          )}
         </ErrorMessageWrapper>
       );
     } else if (healthInsurance.dont_know === true) {
@@ -246,7 +256,7 @@ const getHealthInsuranceError: MessageFunction<HealthInsurance> = (healthInsuran
         <ErrorMessageWrapper fontSize="1rem">
           <FormattedMessage
             id="validation-helperText.hhMemberInsuranceDontKnow"
-            defaultMessage="Please do not select any other options if you/they don't know"
+            defaultMessage="Please do not select any other options if you don't know"
           />
         </ErrorMessageWrapper>
       );

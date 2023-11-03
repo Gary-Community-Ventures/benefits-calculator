@@ -126,7 +126,9 @@ const HealthInsuranceQ = ({
       {displayQuestion(hhMemberIndex)}
       {displayHealthInsuranceOptionCards(healthInsuranceOptions, healthInsurance, hhMemberIndex)}
       {healthInsuranceErrorController.showError && (
-        <FormHelperText>{healthInsuranceErrorController.message(healthInsurance)}</FormHelperText>
+        <FormHelperText>
+          {healthInsuranceErrorController.message({ index: hhMemberIndex, healthInsurance: healthInsurance })}
+        </FormHelperText>
       )}
     </Stack>
   );
