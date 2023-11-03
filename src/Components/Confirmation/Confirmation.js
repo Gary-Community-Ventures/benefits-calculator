@@ -2,7 +2,6 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import relationshipOptions from '../../Assets/relationshipOptions';
-import taxYearOptions from '../../Assets/taxYearOptions';
 import referralOptions from '../../Assets/referralOptions';
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
@@ -62,7 +61,7 @@ const Confirmation = () => {
     const allHouseholdAges = getAllHouseholdAges();
 
     const householdMemberDataBlocks = householdData.map((personData, i) => {
-      const { hasIncome, incomeStreams } = personData;
+      const { hasIncome, incomeStreams, healthInsurance } = personData;
 
       return (
         <div key={i}>
@@ -95,6 +94,7 @@ const Confirmation = () => {
                 {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
                 {hasIncome === false && <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />}
               </article>
+              {displayHHMHealthInsuranceSection(healthInsurance)}
             </Grid>
             <Grid item xs={2} display="flex" justifyContent="flex-end">
               <button
@@ -111,6 +111,20 @@ const Confirmation = () => {
     });
 
     return householdMemberDataBlocks;
+  };
+
+  const displayHHMHealthInsuranceSection = (hHMemberHealthInsurance) => {
+    return (
+      <article className="section-p">
+        <b>
+          <FormattedMessage
+            id="confirmation.headOfHouseholdDataBlock-healthInsuranceText"
+            defaultMessage="Health Insurance: "
+          />{' '}
+        </b>
+        {displayHealthInsurance(hHMemberHealthInsurance)}
+      </article>
+    );
   };
 
   const displayHouseholdExpenses = () => {
@@ -387,16 +401,6 @@ const Confirmation = () => {
       <>
         {displayZipcodeSection()}
         <p className="confirmation-section-underline"></p>
-        {displayHHCheckboxSection(
-          'healthInsurance',
-          'confirmation.displayAllFormData-healthInsurance',
-          'Household Insurance',
-          getQuestionUrl('healthInsurance'),
-          refactorOptionsList(healthInsuranceOptions),
-          <MedicalServicesIcon className="home-icon" />,
-          'edit health insurance',
-        )}
-        <p className="confirmation-section-underline"></p>
         {displayHouseholdSizeSection()}
         <p className="confirmation-section-underline"></p>
         {displayAllMembersDataBlock()}
@@ -566,6 +570,35 @@ const Confirmation = () => {
 
   const totalNumberOfQuestions = () => {
     return getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber;
+  };
+
+  const displayHealthInsurance = (hHMemberHealthInsurance) => {
+    const selectedDontKnow = hHMemberHealthInsurance.dont_know === true;
+    const selectedNone = hHMemberHealthInsurance.none === true;
+    const allOtherSelectedOptions = Object.entries(hHMemberHealthInsurance).filter(
+      (hHMemberInsEntry) => hHMemberInsEntry[1] === true,
+    );
+
+    const allOtherSelectedOptionsString = allOtherSelectedOptions.reduce((acc, filteredHHMInsEntry, index) => {
+      const formattedMessageProp = healthInsuranceOptions[filteredHHMInsEntry[0]].formattedMessage.props;
+      const translatedAriaLabel = intl.formatMessage({ ...formattedMessageProp });
+
+      if (allOtherSelectedOptions.length - 1 === index) {
+        //we're at the last element in the array => don't include the comma
+        return (acc += translatedAriaLabel);
+      } else {
+        //include a comma to separate each string
+        return (acc += translatedAriaLabel + ', ');
+      }
+    }, '');
+
+    if (selectedDontKnow) {
+      return <>{healthInsuranceOptions.dont_know.formattedMessage}</>;
+    } else if (selectedNone) {
+      return <>{healthInsuranceOptions.none.formattedMessage}</>;
+    } else {
+      return <>{allOtherSelectedOptionsString}</>;
+    }
   };
 
   return (

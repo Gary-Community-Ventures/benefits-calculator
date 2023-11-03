@@ -3,7 +3,6 @@ import questions, { type QuestionNames } from './questions';
 export const startingQuestionNumber = 3;
 const defaultStepDirectory: QuestionNames[] = [
   'zipcode',
-  'healthInsurance',
   //the hhSize and hhData have to be consecutive
   'householdSize',
   'householdData',
@@ -16,7 +15,6 @@ const defaultStepDirectory: QuestionNames[] = [
 ];
 const referrerStepDirectory: QuestionNames[] = [
   'zipcode',
-  'healthInsurance',
   //the hhSize and hhData have to be consecutive
   'householdSize',
   'householdData',
