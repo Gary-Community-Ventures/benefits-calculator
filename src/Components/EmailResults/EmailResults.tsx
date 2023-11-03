@@ -15,7 +15,7 @@ import {
 } from '../../Assets/validationFunctions.tsx';
 import { postMessage } from '../../apiCalls.js';
 import Textfield from '../Textfield/Textfield.js';
-import ErrorMessage from '../ErrorMessage/ErrorMessage.js';
+import ErrorMessage from '../ErrorMessage/ErrorMessage.tsx';
 import './EmailResults.css';
 import type { MessageFunction, ValidationFunction } from '../../Types/ErrorController.ts';
 

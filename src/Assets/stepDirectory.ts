@@ -1,7 +1,8 @@
-import questions, { type QuestionNames } from './questions';
+import questions from './questions';
+import type { QuestionName } from '../Types/Questions';
 
 export const startingQuestionNumber = 3;
-const defaultStepDirectory: QuestionNames[] = [
+const defaultStepDirectory: QuestionName[] = [
   'zipcode',
   //the hhSize and hhData have to be consecutive
   'householdSize',
@@ -13,7 +14,7 @@ const defaultStepDirectory: QuestionNames[] = [
   'referralSource',
   'signUpInfo',
 ];
-const referrerStepDirectory: QuestionNames[] = [
+const referrerStepDirectory: QuestionName[] = [
   'zipcode',
   //the hhSize and hhData have to be consecutive
   'householdSize',
@@ -34,7 +35,7 @@ export function getStepDirectory(referrer: string | undefined) {
   return defaultStepDirectory;
 }
 
-export function getStepNumber(name: QuestionNames, referrer: string | undefined) {
+export function getStepNumber(name: QuestionName, referrer: string | undefined) {
   const stepNumber = getStepDirectory(referrer).findIndex((question) => question === name);
 
   if (stepNumber === -1) {

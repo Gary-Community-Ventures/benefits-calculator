@@ -14,7 +14,7 @@ import referralOptions from './Assets/referralOptions';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
 import LoadingPage from './Components/LoadingPage/LoadingPage.tsx';
 import SelectLanguagePage from './Components/SelectLanguagePage/SelectLanguagePage.tsx';
-import { updateScreen, updateUser } from './Assets/updateScreen';
+import { updateScreen, updateUser } from './Assets/updateScreen.ts';
 import { getStepDirectory, startingQuestionNumber, getStepNumber } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
@@ -204,16 +204,16 @@ const App = () => {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
         return;
       } else if (questionName === 'signUpInfo') {
-        updateUser(uuid, formData, setFormData, locale.toLowerCase());
+        updateUser(uuid, formData, setFormData, locale);
         navigate(`/${uuid}/confirm-information`);
       } else if (questionName === 'householdSize') {
         const updatedHouseholdData = formData.householdData.slice(0, Number(formData.householdSize));
         const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-        updateScreen(uuid, updatedFormData, locale.toLowerCase());
+        updateScreen(uuid, updatedFormData, locale);
         setFormData(updatedFormData);
         navigate(`/${uuid}/step-${stepId + 1}/1`);
       } else {
-        updateScreen(uuid, formData, locale.toLowerCase());
+        updateScreen(uuid, formData, locale);
         navigate(`/${uuid}/step-${stepId + 1}`);
       }
     }
@@ -221,14 +221,14 @@ const App = () => {
 
   const handleIncomeStreamsSubmit = (validatedIncomeStreams: IncomeStream[], stepId: number, uuid: string) => {
     const updatedFormData = { ...formData, incomeStreams: validatedIncomeStreams };
-    updateScreen(uuid, updatedFormData, locale.toLowerCase());
+    updateScreen(uuid, updatedFormData, locale);
     setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   };
 
   const handleExpenseSourcesSubmit = (validatedExpenseSources: Expense[], stepId: number, uuid: string) => {
     const updatedFormData = { ...formData, expenses: validatedExpenseSources };
-    updateScreen(uuid, updatedFormData, locale.toLowerCase());
+    updateScreen(uuid, updatedFormData, locale);
     setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   };
@@ -237,7 +237,7 @@ const App = () => {
     const updatedMembers = [...formData.householdData];
     updatedMembers[stepId] = memberData;
     const updatedFormData = { ...formData, householdData: updatedMembers };
-    updateScreen(uuid, updatedFormData, locale.toLowerCase());
+    updateScreen(uuid, updatedFormData, locale);
     setFormData(updatedFormData);
     navigate(`/${uuid}/step-${stepId + 1}`);
   };

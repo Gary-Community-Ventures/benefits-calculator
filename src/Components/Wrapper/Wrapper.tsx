@@ -2,11 +2,10 @@ import React, { useEffect, useState, PropsWithChildren } from 'react';
 import useStyle from '../../Assets/styleController';
 import { IntlProvider } from 'react-intl';
 import { WrapperContext } from '../../Types/WrapperContext';
-import { Language } from '../../Types/Language';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
-import languageOptions from '../../Assets/languageOptions';
+import languageOptions, { Language } from '../../Assets/languageOptions';
 
 const initialFormData: FormData = {
   isTest: undefined,
@@ -94,33 +93,41 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
     }
   }, [screenLoading, translationsLoading]);
 
-  let [translations, setTranslations] = useState<{ [key: string]: Language }>({});
+  let [translations, setTranslations] = useState<Record<Language, { [key: string]: string }> | undefined>(undefined);
 
   useEffect(() => {
     getTranslations().then((value) => {
       setTranslations(value);
     });
   }, []);
-  let defaultLanguage = localStorage.getItem('language') ?? 'en-us';
+  let defaultLanguage = (localStorage.getItem('language') ?? 'en-us') as Language;
   const pathname = window.location.pathname;
 
   const [theme, setTheme, styleOverride] = useStyle('default');
 
-  Object.keys(languageOptions).forEach((lang) => {
+  const languages = Object.keys(languageOptions) as Language[];
+  languages.forEach((lang: Language) => {
     if (pathname.includes(`/${lang}`)) {
       defaultLanguage = lang;
     }
   });
 
-  const [locale, setLocale] = useState(defaultLanguage);
+  const [locale, setLocale] = useState<Language>(defaultLanguage);
   const [messages, setMessages] = useState({});
 
   useEffect(() => {
-    localStorage.setItem('language', locale);
-    if (Object.keys(translations).length > 0) {
+    if (translations) {
+      localStorage.setItem('language', locale);
+    }
+
+    if (translations === undefined) {
+      setMessages({});
+      return;
+    } else {
       setTranslationsLoading(false);
     }
-    for (const lang of Object.keys(translations)) {
+
+    for (const lang of Object.keys(translations) as Language[]) {
       if (locale.toLocaleLowerCase() === lang) {
         setMessages(translations[lang]);
         return;
@@ -132,7 +139,13 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const selectLanguage = (event: Event) => {
     const target = event.target as HTMLInputElement;
     const newLocale = target.value;
-    setLocale(newLocale);
+
+    if (languages.every((lang) => lang !== newLocale)) {
+      setLocale('en-us');
+      return;
+    }
+
+    setLocale(newLocale as Language);
   };
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
@@ -146,7 +159,6 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
     <Context.Provider
       value={{
         locale,
-        setLocale,
         selectLanguage,
         formData,
         setFormData,

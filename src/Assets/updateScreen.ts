@@ -1,19 +1,29 @@
+import {
+  ApiExpense,
+  ApiFormData,
+  ApiHouseholdMember,
+  ApiIncome,
+  ApiUser,
+  ApiUserWriteOnly,
+} from '../Types/ApiFormData.js';
+import { FormData, HouseholdData } from '../Types/FormData.js';
 import { putScreen, postScreen, putUser } from '../apiCalls.js';
+import { Language } from './languageOptions.js';
 
-const getScreensBody = (formData, languageCode) => {
+const getScreensBody = (formData: FormData, languageCode: Language) => {
   const householdMembers = getHouseholdMembersBodies(formData);
   const expenses = getExpensesBodies(formData);
 
   const finalReferralSource = formData.otherSource !== '' ? formData.otherSource : formData.referralSource;
-  const screenBody = {
-    is_test: formData.isTest,
-    external_id: formData.externalID,
+  const screenBody: ApiFormData = {
+    is_test: formData.isTest ?? false,
+    external_id: formData.externalID ?? null,
     agree_to_tos: formData.agreeToTermsOfService,
     is_13_or_older: formData.is13OrOlder,
     zipcode: formData.zipcode,
     county: formData.county,
     start_date: formData.startTime,
-    household_size: formData.householdSize === '' ? null : formData.householdSize,
+    household_size: formData.householdSize === '' ? null : Number(formData.householdSize),
     household_members: householdMembers,
     expenses: expenses,
     household_assets: formData.householdAssets,
@@ -45,8 +55,8 @@ const getScreensBody = (formData, languageCode) => {
     has_wic: formData.benefits.wic,
     has_upk: formData.benefits.upk,
     has_coctc: formData.benefits.coctc,
-    referral_source: finalReferralSource,
-    referrer_code: formData.immutableReferrer,
+    referral_source: finalReferralSource ?? null,
+    referrer_code: formData.immutableReferrer ?? null,
     needs_food: formData.acuteHHConditions.food,
     needs_baby_supplies: formData.acuteHHConditions.babySupplies,
     needs_housing_help: formData.acuteHHConditions.housing,
@@ -61,14 +71,14 @@ const getScreensBody = (formData, languageCode) => {
   return screenBody;
 };
 
-const getHouseholdMembersBodies = (formData) => {
+const getHouseholdMembersBodies = (formData: FormData): ApiHouseholdMember[] => {
   const householdMembers = formData.householdData.map((householdMember) => {
     return getHouseholdMemberBody(householdMember);
   });
   return householdMembers;
 };
 
-const getHouseholdMemberBody = (householdMemberData) => {
+const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHouseholdMember => {
   const incomes = getIncomeStreamsBodies(householdMemberData);
 
   return {
@@ -84,7 +94,7 @@ const getHouseholdMemberBody = (householdMemberData) => {
   };
 };
 
-const getIncomeStreamsBodies = (householdMemberData) => {
+const getIncomeStreamsBodies = (householdMemberData: HouseholdData): ApiIncome[] => {
   return householdMemberData.incomeStreams.map((incomeStream) => {
     return {
       type: incomeStream.incomeStreamName,
@@ -95,21 +105,21 @@ const getIncomeStreamsBodies = (householdMemberData) => {
   });
 };
 
-const getExpensesBodies = (formData) => {
+const getExpensesBodies = (formData: FormData): ApiExpense[] => {
   return formData.expenses.map((expense) => {
     return {
       type: expense.expenseSourceName,
-      amount: expense.expenseAmount,
+      amount: expense.expenseAmount === '' ? 0 : Number(expense.expenseAmount),
       frequency: 'monthly',
     };
   });
 };
 
-const getUserBody = (formData, languageCode) => {
+const getUserBody = (formData: FormData, languageCode: Language): ApiUser & ApiUserWriteOnly => {
   const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = formData.signUpInfo;
   const phoneNumber = '+1' + phone;
 
-  const user = {
+  const user: ApiUser & ApiUserWriteOnly = {
     email_or_cell: email ? email : phoneNumber,
     cell: phone ? phoneNumber : '',
     email: email ? email : '',
@@ -124,16 +134,21 @@ const getUserBody = (formData, languageCode) => {
   return user;
 };
 
-const updateScreen = (uuid, formData, languageCode) => {
+const updateScreen = (uuid: string, formData: FormData, languageCode: Language) => {
   putScreen(getScreensBody(formData, languageCode), uuid);
 };
 
-const createScreen = (formData) => {
-  const uuid = postScreen(getScreensBody(formData));
+const createScreen = (formData: FormData, languageCode: Language) => {
+  const uuid = postScreen(getScreensBody(formData, languageCode));
   return uuid;
 };
 
-const updateUser = async (uuid, formData, setFormData, languageCode) => {
+const updateUser = async (
+  uuid: string,
+  formData: FormData,
+  setFormData: (formData: FormData) => void,
+  languageCode: Language,
+) => {
   const userBody = getUserBody(formData, languageCode);
   if (!formData.signUpInfo.hasUser && userBody.email_or_cell === '+1') {
     return;

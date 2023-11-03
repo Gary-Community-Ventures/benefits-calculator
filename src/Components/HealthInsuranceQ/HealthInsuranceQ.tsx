@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack, FormHelperText } from '@mui/material';
-import healthInsuranceOptions, { HealthInsuranceOptions } from '../../Assets/healthInsuranceOptions';
+import healthInsuranceOptions, { HealthInsuranceOptions } from '../../Assets/healthInsuranceOptions.tsx';
 import { HouseholdData, HealthInsurance } from '../../Types/FormData';
 import {
   useErrorController,
