@@ -84,7 +84,7 @@ const HealthInsuranceQ = ({
         id: 'healthInsuranceOptions.none-I',
         defaultMessage: 'I do not have health insurance',
       });
-      
+
       if (hhMemberIndex === 1 && key === 'none') {
         translatedAriaLabel = youDoNotHaveHealthInsuranceFM;
       }
