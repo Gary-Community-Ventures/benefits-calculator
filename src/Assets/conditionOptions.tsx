@@ -22,7 +22,7 @@ const conditionOptions = {
       id="conditionOptions.longTermDisability"
       defaultMessage="Any medical or developmental condition that has lasted, or is expected to last, more than 12 months"
     />
-  )
+  ),
 };
 
 export default conditionOptions;
