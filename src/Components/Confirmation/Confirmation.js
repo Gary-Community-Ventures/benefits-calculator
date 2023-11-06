@@ -158,16 +158,16 @@ const Confirmation = () => {
   };
 
   const displayConditions = (userData) => {
-    const { student, pregnant, blindOrVisuallyImpaired, disabled } = userData;
+    const { student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability } = userData;
 
-    const iterableConditions = [student, pregnant, blindOrVisuallyImpaired, disabled];
+    const iterableConditions = [student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability];
 
     const hasAnyConditions = iterableConditions.some((condition) => condition === true);
 
     if (hasAnyConditions === false) {
       return <FormattedMessage id="confirmation.none" defaultMessage=" None" />;
     } else {
-      return getConditionsStringWithCommas(student, pregnant, blindOrVisuallyImpaired, disabled);
+      return getConditionsStringWithCommas(student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability);
     }
   };
 
@@ -175,7 +175,7 @@ const Confirmation = () => {
     return intl.formatMessage({ id: fMObj.id, defaultMessage: fMObj.defaultMessage });
   };
 
-  const getConditionsStringWithCommas = (student, pregnant, blindOrVisuallyImpaired, disabled) => {
+  const getConditionsStringWithCommas = (student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability) => {
     const conditions = [];
 
     if (student) {
@@ -210,6 +210,16 @@ const Confirmation = () => {
         getFormattedMessageString({
           id: 'confirmation.headOfHouseholdDataBlock-disabledText',
           defaultMessage: 'Disabled',
+        }),
+      );
+    }
+
+    if (longTermDisability) {
+      conditions.push(
+        getFormattedMessageString({
+          id: 'confirmation.longTermDisability',
+          defaultMessage:
+            'Has a medical or developmental condition that has lasted, or is expected to last, more than 12 months',
         }),
       );
     }
