@@ -88,6 +88,7 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
     pregnant: householdMemberData.pregnant,
     visually_impaired: householdMemberData.blindOrVisuallyImpaired,
     disabled: householdMemberData.disabled,
+    long_term_disability: householdMemberData.longTermDisability,
     has_income: householdMemberData.hasIncome,
     income_streams: incomes,
     insurance: householdMemberData.healthInsurance,

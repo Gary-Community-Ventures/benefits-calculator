@@ -17,6 +17,7 @@ export interface HouseholdData {
   pregnant: boolean;
   blindOrVisuallyImpaired: boolean;
   disabled: boolean;
+  longTermDisability: boolean;
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
   healthInsurance: HealthInsurance;
