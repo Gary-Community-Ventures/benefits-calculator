@@ -66,7 +66,7 @@ const DropdownMenu = ({ componentDetails, options, setHouseholdData, householdDa
   };
 
   return (
-    <FormControl sx={{ mt: 1, minWidth: 210 }} error={errorController.showError}>
+    <FormControl sx={{ mt: 1, minWidth: 210, maxWidth: '100%' }} error={errorController.showError}>
       <InputLabel id={labelId}>{inputLabelText}</InputLabel>
       <Select
         labelId={labelId}
@@ -76,6 +76,7 @@ const DropdownMenu = ({ componentDetails, options, setHouseholdData, householdDa
         onChange={(event: SelectChangeEvent) => {
           handleSelectChange(event);
         }}
+        sx={{ maxWidth: '100%' }}
       >
         {createMenuItems(options)}
       </Select>

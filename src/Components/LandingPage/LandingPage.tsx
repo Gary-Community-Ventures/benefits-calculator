@@ -13,7 +13,7 @@ import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
-import { createScreen } from '../../Assets/updateScreen.js';
+import { createScreen } from '../../Assets/updateScreen.ts';
 import {
   useErrorController,
   displayAgreeToTermsErrorMessage,
@@ -21,7 +21,7 @@ import {
 } from '../../Assets/validationFunctions.tsx';
 import './LandingPage.css';
 import dataLayerPush from '../../Assets/analytics.ts';
-import PreviousButton from '../PreviousButton/PreviousButton.js';
+import PreviousButton from '../PreviousButton/PreviousButton.tsx';
 import { startingQuestionNumber } from '../../Assets/stepDirectory.ts';
 
 interface LandingPageProps {
@@ -67,7 +67,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       if (uuid) {
         navigate(`/${uuid}/step-${startingQuestionNumber}`);
       } else {
-        const response = await createScreen(formData);
+        const response = await createScreen(formData, locale);
         screenDoneLoading();
         navigate(`/${response.uuid}/step-${startingQuestionNumber}`);
       }
@@ -85,6 +85,11 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
         return {
           privacyPolicyLink: 'https://www.myfriendben.org/vi/data-privacy-policy',
           addTermsConsentToContact: 'https://www.myfriendben.org/vi/additional-terms-and-consent-to-contact',
+        };
+      case 'fr':
+        return {
+          privacyPolicyLink: 'https://www.myfriendben.org/fr/data-privacy-policy',
+          addTermsConsentToContact: 'https://www.myfriendben.org/fr/additional-terms-and-consent-to-contact',
         };
       default:
         return {

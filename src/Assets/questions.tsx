@@ -10,33 +10,19 @@ import {
   selectHasError,
   displayReferralSourceHelperText,
   signUpOptionsHaveError,
-  healthInsuranceHasError,
   acuteHHConditionsHasError,
-  displayHealthInsuranceHelperText,
   displayBenefitsHelperText,
   countySelectHelperText,
   otherReferalSourceHelperText,
 } from './validationFunctions.tsx';
 import referralOptions from './referralOptions.tsx';
-import countiesByZipcode from './countiesByZipcode.js';
-import signUpOptions from './signUpOptions.js';
-import healthInsuranceOptions from './healthInsuranceOptions.js';
+import countiesByZipcode from './countiesByZipcode.tsx';
+import signUpOptions from './signUpOptions.tsx';
 import acuteConditionOptions from './acuteConditionOptions';
 import { FormattedMessage } from 'react-intl';
+import type { QuestionName, Question } from '../Types/Questions.ts';
 
-export type QuestionNames =
-  | 'zipcode'
-  | 'healthInsurance'
-  | 'householdSize'
-  | 'householdData'
-  | 'hasExpenses'
-  | 'householdAssets'
-  | 'hasBenefits'
-  | 'acuteHHConditions'
-  | 'referralSource'
-  | 'signUpInfo';
-
-const questions = {
+const questions: Record<QuestionName, Question> = {
   zipcode: {
     name: 'zipcode',
     question: <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />,
@@ -73,23 +59,6 @@ const questions = {
         },
       },
     ],
-    headerType: 'aboutHousehold',
-  },
-  healthInsurance: {
-    name: 'healthInsurance',
-    question: (
-      <FormattedMessage
-        id="questions.healthInsurance"
-        defaultMessage="Which type(s) of health insurance do members of your household have? Check all that apply."
-      />
-    ),
-    componentDetails: {
-      componentType: 'OptionCardGroup',
-      inputName: 'healthInsurance',
-      options: healthInsuranceOptions,
-      inputError: healthInsuranceHasError,
-      inputHelperText: displayHealthInsuranceHelperText,
-    },
     headerType: 'aboutHousehold',
   },
   householdSize: {
@@ -244,6 +213,7 @@ const questions = {
     ),
     componentDetails: {
       componentType: 'BasicSelect',
+      inputType: 'text',
       inputName: 'referralSource',
       inputError: selectHasError,
       inputHelperText: displayReferralSourceHelperText,
@@ -293,6 +263,7 @@ const questions = {
     },
     followUpQuestions: [
       {
+        name: 'emailOrCell',
         question: (
           <FormattedMessage id="questions.signUpInfo-a" defaultMessage="Please provide your contact info below: " />
         ),

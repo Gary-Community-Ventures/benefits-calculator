@@ -5,15 +5,14 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
+import HealthInsuranceQ from '../HealthInsuranceQ/HealthInsuranceQ.tsx';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import conditionOptions from '../../Assets/conditionOptions';
 import {
   householdMemberAgeHasError,
   displayHouseholdMemberAgeHelperText,
-  getPersonDataErrorMsg,
   personDataIsValid,
-  useErrorController,
   selectHasError,
   relationTypeHelperText,
 } from '../../Assets/validationFunctions.tsx';
@@ -22,8 +21,8 @@ import { getStepNumber } from '../../Assets/stepDirectory';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import EditIcon from '@mui/icons-material/Edit';
-import './HouseholdDataBlock.css';
 import { IconButton } from '@mui/material';
+import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -36,7 +35,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const setPage = (page) => {
     navigate(`/${uuid}/step-${step}/${page}`);
   };
-  const ageErrorController = useErrorController(householdMemberAgeHasError, displayHouseholdMemberAgeHelperText);
+  const [submittedCount, setSubmittedCount] = useState(0);
 
   const initialHouseholdData = formData.householdData[page - 1] ?? {
     age: '',
@@ -47,11 +46,21 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     disabled: false,
     hasIncome: false,
     incomeStreams: [],
+    healthInsurance: {
+      none: false,
+      employer: false,
+      private: false,
+      medicaid: false,
+      medicare: false,
+      chp: false,
+      emergency_medicaid: false,
+      family_planning: false,
+      dont_know: false,
+    },
   };
 
   const [householdData, setHouseholdData] = useState(initialHouseholdData);
   const [wasSubmitted, setWasSubmitted] = useState(false);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
@@ -66,12 +75,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     setHouseholdData(updatedHouseholdData);
   }, [householdData.hasIncome]);
-
-  useEffect(() => {
-    if (wasSubmitted) {
-      setError(getPersonDataErrorMsg(householdData));
-    }
-  }, [householdData, wasSubmitted]);
 
   useEffect(() => {
     const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
@@ -114,7 +117,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
               defaultMessage="How old are you?"
             />
           </h2>
-          {createTextField(ageTextfieldProps, ageErrorController)}
+          {createTextField(ageTextfieldProps, submittedCount)}
           <p className="household-data-q-underline"></p>
         </>
       );
@@ -130,18 +133,18 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
               defaultMessage="If your child is less than a year old, enter 0."
             />
           </p>
-          {createTextField(ageTextfieldProps, ageErrorController)}
+          {createTextField(ageTextfieldProps, submittedCount)}
           <p className="household-data-q-underline"></p>
         </>
       );
     }
   };
 
-  const createTextField = (componentInputProps, errorController) => {
+  const createTextField = (componentInputProps, submittedCount) => {
     return (
       <Textfield
         componentDetails={componentInputProps}
-        submitted={errorController.submittedCount}
+        submitted={submittedCount}
         data={householdData}
         handleTextfieldChange={handleTextfieldChange}
       />
@@ -298,7 +301,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         options={relationshipOptions}
         setHouseholdData={setHouseholdData}
         householdData={householdData}
-        submitted={ageErrorController.submittedCount}
+        submitted={submittedCount}
       />
     );
   };
@@ -389,8 +392,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
     event.preventDefault();
-    ageErrorController.incrementSubmitted();
-    ageErrorController.updateError(householdData.age);
+    setSubmittedCount(submittedCount + 1);
+
     const validPersonData = personDataIsValid(householdData);
     const lastHouseholdMember = page >= remainingHHMNumber;
 
@@ -402,7 +405,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       setPage(page + 1);
     } else if (!validPersonData) {
       setWasSubmitted(true);
-      setError(getPersonDataErrorMsg(householdData));
     }
   };
 
@@ -414,17 +416,33 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
   };
 
+  const displayHealthInsuranceQuestion = (page, hhMemberData, setHHMemberData) => {
+    return (
+      <>
+        <HealthInsuranceQ
+          hhMemberIndex={page}
+          householdMemberData={hhMemberData}
+          setHouseholdMemberData={setHHMemberData}
+          submitted={submittedCount}
+        />
+        <p className="household-data-q-underline"></p>
+      </>
+    );
+  };
+
   return (
     <main className="benefits-form">
       <div>
         {createQuestionHeader(page)}
         {createAgeQuestion(page)}
+        {page === 1 && displayHealthInsuranceQuestion(page, householdData, setHouseholdData)}
         {page !== 1 && createHOfHRelationQuestion()}
+        {page !== 1 && displayHealthInsuranceQuestion(page, householdData, setHouseholdData)}
         {createConditionsQuestion(page)}
         <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}
         <p className="household-data-q-underline"></p>
-        {householdData.hasIncome && createPersonIncomeBlock(ageErrorController.submittedCount)}
+        {householdData.hasIncome && createPersonIncomeBlock(submittedCount)}
         <div className="question-buttons">
           <PreviousButton navFunction={handlePreviousSubmit} />
           <ContinueButton handleContinueSubmit={handleContinueSubmit} />
