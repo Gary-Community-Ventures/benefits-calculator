@@ -21,6 +21,7 @@ import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } fro
 import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx';
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
+import pageTitleTags from './Assets/pageTitleTags.tsx';
 import './App.css';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
@@ -64,6 +65,20 @@ const App = () => {
       url: window.location.pathname + window.location.search,
     });
   }, [location.pathname]);
+
+  useEffect(() => {
+    const stepString = location.pathname.split('/').filter((string) => string.includes('step'))[0];
+    const isConfirmationPage = location.pathname.includes('confirm-information');
+    const isResultsPage = location.pathname.includes('results');
+
+    if (isConfirmationPage) {
+      document.title = pageTitleTags['confirm-information'];
+    } else if (isResultsPage) {
+      document.title = pageTitleTags['results'];
+    } else {
+      document.title = pageTitleTags[stepString];
+    }
+  }, [location]);
 
   useEffect(() => {
     const updatedFormData = { ...formData };
