@@ -15,7 +15,7 @@ import housingAndUtilities from '../../Assets/BenefitCategoryLists/categories/ho
 import transportationBenefits from '../../Assets/BenefitCategoryLists/categories/transportationBenefits';
 import healthCareBenefits from '../../Assets/BenefitCategoryLists/categories/healthCareBenefits';
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/categories/taxCreditBenefits';
-import { getStepDirectory, getStepNumber, startingQuestionNumber } from '../../Assets/stepDirectory';
+import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Grid from '@mui/material/Grid';
@@ -569,7 +569,7 @@ const Confirmation = () => {
   };
 
   const totalNumberOfQuestions = () => {
-    return getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber;
+    return getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
   };
 
   const displayHealthInsurance = (hHMemberHealthInsurance) => {

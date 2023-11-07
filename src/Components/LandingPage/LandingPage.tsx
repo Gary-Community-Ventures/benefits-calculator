@@ -22,7 +22,7 @@ import {
 import './LandingPage.css';
 import dataLayerPush from '../../Assets/analytics.ts';
 import PreviousButton from '../PreviousButton/PreviousButton.tsx';
-import { startingQuestionNumber } from '../../Assets/stepDirectory.ts';
+import { STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory.ts';
 
 interface LandingPageProps {
   handleCheckboxChange: (event: React.FormEvent<HTMLInputElement>) => void;
@@ -65,11 +65,11 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
 
     if (formData.agreeToTermsOfService && formData.is13OrOlder) {
       if (uuid) {
-        navigate(`/${uuid}/step-${startingQuestionNumber}`);
+        navigate(`/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
       } else {
         const response = await createScreen(formData, locale);
         screenDoneLoading();
-        navigate(`/${response.uuid}/step-${startingQuestionNumber}`);
+        navigate(`/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
       }
     }
   };
