@@ -29,8 +29,8 @@ const FetchScreen = () => {
     if (!referrer) {
       referrer = '';
     } else if (!(referrer in referralOptions)) {
-      referrer = 'other';
       otherRefferer = referrer;
+      referrer = 'other';
     }
 
     const initialFormData: FormData = {
