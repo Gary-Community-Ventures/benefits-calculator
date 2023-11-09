@@ -248,10 +248,14 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
   };
 
   const preschoolProgramCategoryString = 'Child Care, Youth, and Education';
-  const categoryValues = (programs: Program[]) => {
-    const preschoolPrograms = { numOfPreSchoolPrograms: 0, totalEstVal: 0 };
+
+  const renderAllCategoryValues = (programs: Program[]) => {
+    const childCareYouthEdPrograms = { childCareTotalEstVal: 0, youthAndEducationTotalEstVal: 0 };
     const categoryValues: { [key: string]: number } = {};
+
     for (let program of programs) {
+      const isPreschoolOrChildCareProgram = ['upk', 'dpp', 'chs', 'cccap'].includes(program.short_name);
+
       //add this category to the categoryValues dictionary if the key doesn't already exist
       if (categoryValues[program.category.default_message] === undefined) {
         categoryValues[program.category.default_message] = 0;
@@ -265,17 +269,21 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
         //we add that program's est value to its corresponding categoryValues key
         categoryValues[program.category.default_message] += program.estimated_value;
 
-        //if the program is a preschoolProgram, we also add it to the preschoolPrograms separately
-        if (program.category.default_message === preschoolProgramCategoryString) {
-          preschoolPrograms.numOfPreSchoolPrograms++;
-          preschoolPrograms.totalEstVal += program.estimated_value;
+        //if the program is a preschoolProgram, we also add it to the childCareYouthEdPrograms separately
+        if (isPreschoolOrChildCareProgram) {
+          childCareYouthEdPrograms.childCareTotalEstVal += program.estimated_value;
+        } else if (program.category.default_message === preschoolProgramCategoryString && isPreschoolOrChildCareProgram === false) {
+          childCareYouthEdPrograms.youthAndEducationTotalEstVal += program.estimated_value;
         }
       }
     }
 
-    if (preschoolPrograms.totalEstVal > 8640 && preschoolPrograms.numOfPreSchoolPrograms > 1) {
-      categoryValues[preschoolProgramCategoryString] = 8640;
+    if (childCareYouthEdPrograms.childCareTotalEstVal > 8640) {
+      childCareYouthEdPrograms.childCareTotalEstVal = 8640;
     }
+
+    categoryValues[preschoolProgramCategoryString] =
+      childCareYouthEdPrograms.childCareTotalEstVal + childCareYouthEdPrograms.youthAndEducationTotalEstVal;
 
     return categoryValues;
   };
