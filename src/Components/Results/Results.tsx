@@ -157,8 +157,8 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
       }
     });
 
-    //used categoryValues(eligiblePrograms) instead of the real total to take into account the preschool category value cap at 8640
-    const allCategoriesAndValuesObjCappedForPreschool = categoryValues(eligiblePrograms);
+    //used renderAllCategoryValues(eligiblePrograms) instead of the real total to take into account the preschool category value cap at 8640
+    const allCategoriesAndValuesObjCappedForPreschool = renderAllCategoryValues(eligiblePrograms);
     const totalCashAndTaxCreditValues = Object.entries(allCategoriesAndValuesObjCappedForPreschool).reduce(
       (acc, categoryAndValueArr) => {
         const categoryName = categoryAndValueArr[0];
@@ -190,8 +190,9 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
 
       //this is only to cap the totalVisibleRowDollarValue for preschool
       const typedFiltCategory = filt.category as GridFilterItem;
-      if (typedFiltCategory.value === preschoolProgramCategoryString && updatedTotalEligibleDollarValue > 8640) {
-        setTotalVisibleRowDollarValue(8640);
+      if (typedFiltCategory.value === preschoolProgramCategoryString) {
+        const preschoolCategoryDollarValue = renderAllCategoryValues(eligiblePrograms)[preschoolProgramCategoryString];
+        setTotalVisibleRowDollarValue(preschoolCategoryDollarValue);
         return;
       }
 
