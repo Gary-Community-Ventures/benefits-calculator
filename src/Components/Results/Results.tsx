@@ -157,7 +157,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
       }
     });
 
-    //used renderAllCategoryValues(eligiblePrograms) instead of the real total to take into account the preschool category value cap at 8640
+    //used renderAllCategoryValues(eligiblePrograms) instead of the real total to take into account the preschool/childCare category value cap at 8640
     const allCategoriesAndValuesObjCappedForPreschool = renderAllCategoryValues(eligiblePrograms);
     const totalCashAndTaxCreditValues = Object.entries(allCategoriesAndValuesObjCappedForPreschool).reduce(
       (acc, categoryAndValueArr) => {
@@ -190,9 +190,9 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
 
       //this is only to cap the totalVisibleRowDollarValue for preschool
       const typedFiltCategory = filt.category as GridFilterItem;
-      if (typedFiltCategory.value === preschoolProgramCategoryString) {
-        const preschoolCategoryDollarValue = renderAllCategoryValues(eligiblePrograms)[preschoolProgramCategoryString];
-        setTotalVisibleRowDollarValue(preschoolCategoryDollarValue);
+      if (typedFiltCategory.value === childCareYouthAndEducationCategoryString) {
+        const childCareYouthAndEducationDollarValue = renderAllCategoryValues(eligiblePrograms)[childCareYouthAndEducationCategoryString];
+        setTotalVisibleRowDollarValue(childCareYouthAndEducationDollarValue);
         return;
       }
 
@@ -248,7 +248,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
     });
   };
 
-  const preschoolProgramCategoryString = 'Child Care, Youth, and Education';
+  const childCareYouthAndEducationCategoryString = 'Child Care, Youth, and Education';
 
   const renderAllCategoryValues = (programs: Program[]) => {
     let childCareTotalEstVal = 0;
@@ -731,7 +731,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
               </span>
             </Toolbar>
             {currentCategory.defaultMessage ===
-              categories.find((cat) => cat.defaultMessage === preschoolProgramCategoryString)?.defaultMessage && (
+              categories.find((cat) => cat.defaultMessage === childCareYouthAndEducationCategoryString)?.defaultMessage && (
               <Typography variant="body2" className="child-care-helper-text">
                 <FormattedMessage
                   id="benefitCategories.childCareHelperText"
