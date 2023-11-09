@@ -251,7 +251,8 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
   const preschoolProgramCategoryString = 'Child Care, Youth, and Education';
 
   const renderAllCategoryValues = (programs: Program[]) => {
-    const childCareYouthEdPrograms = { childCareTotalEstVal: 0, youthAndEducationTotalEstVal: 0 };
+    let childCareTotalEstVal = 0;
+    let youthAndEducationTotalEstVal = 0;
     const categoryValues: { [key: string]: number } = {};
 
     for (let program of programs) {
@@ -270,21 +271,23 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
         //we add that program's est value to its corresponding categoryValues key
         categoryValues[program.category.default_message] += program.estimated_value;
 
-        //if the program is a preschoolProgram, we also add it to the childCareYouthEdPrograms separately
+        //if the program is in the preschoolProgramCategory, we also add it to the childCareTotalEstVal or youthAndEducationTotalEstVal separately
         if (isPreschoolOrChildCareProgram) {
-          childCareYouthEdPrograms.childCareTotalEstVal += program.estimated_value;
-        } else if (program.category.default_message === preschoolProgramCategoryString && isPreschoolOrChildCareProgram === false) {
-          childCareYouthEdPrograms.youthAndEducationTotalEstVal += program.estimated_value;
+          childCareTotalEstVal += program.estimated_value;
+        } else if (
+          program.category.default_message === childCareYouthAndEducationCategoryString &&
+          isPreschoolOrChildCareProgram === false
+        ) {
+          youthAndEducationTotalEstVal += program.estimated_value;
         }
       }
     }
 
-    if (childCareYouthEdPrograms.childCareTotalEstVal > 8640) {
-      childCareYouthEdPrograms.childCareTotalEstVal = 8640;
+    if (childCareTotalEstVal > 8640) {
+      childCareTotalEstVal = 8640;
     }
 
-    categoryValues[preschoolProgramCategoryString] =
-      childCareYouthEdPrograms.childCareTotalEstVal + childCareYouthEdPrograms.youthAndEducationTotalEstVal;
+    categoryValues[childCareYouthAndEducationCategoryString] = childCareTotalEstVal + youthAndEducationTotalEstVal;
 
     return categoryValues;
   };
