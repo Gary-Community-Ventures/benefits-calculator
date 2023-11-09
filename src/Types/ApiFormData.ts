@@ -40,9 +40,15 @@ export type ApiHouseholdMember = {
   age: number | null;
   relationship: string | null;
   student: boolean | null;
+  student_full_time?: boolean | null;
   pregnant: boolean | null;
+  unemployed?: boolean | null;
+  worked_in_last_18_mos?: boolean | null;
   visually_impaired: boolean | null;
   disabled: boolean | null;
+  veteran?: boolean | null;
+  medicaid?: boolean | null;
+  disability_medicaid?: boolean | null;
   long_term_disability: boolean | null;
   has_income: boolean | null;
   income_streams: ApiIncome[];
