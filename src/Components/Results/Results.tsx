@@ -191,7 +191,8 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
       //this is only to cap the totalVisibleRowDollarValue for preschool
       const typedFiltCategory = filt.category as GridFilterItem;
       if (typedFiltCategory.value === childCareYouthAndEducationCategoryString) {
-        const childCareYouthAndEducationDollarValue = renderAllCategoryValues(eligiblePrograms)[childCareYouthAndEducationCategoryString];
+        const childCareYouthAndEducationDollarValue =
+          renderAllCategoryValues(eligiblePrograms)[childCareYouthAndEducationCategoryString];
         setTotalVisibleRowDollarValue(childCareYouthAndEducationDollarValue);
         return;
       }
@@ -731,7 +732,8 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
               </span>
             </Toolbar>
             {currentCategory.defaultMessage ===
-              categories.find((cat) => cat.defaultMessage === childCareYouthAndEducationCategoryString)?.defaultMessage && (
+              categories.find((cat) => cat.defaultMessage === childCareYouthAndEducationCategoryString)
+                ?.defaultMessage && (
               <Typography variant="body2" className="child-care-helper-text">
                 <FormattedMessage
                   id="benefitCategories.childCareHelperText"
