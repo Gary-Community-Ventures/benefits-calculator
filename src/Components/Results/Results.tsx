@@ -335,7 +335,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
                   </p>
                   {navigator.assistance_link.default_message && (
                     <h4 className="font-weight">
-                      Link:{' '}
+                      <FormattedMessage id="navigator.linkLabel" defaultMessage="Link: " />
                       <a
                         className="ineligibility-link navigator-info"
                         href={intl.formatMessage({
@@ -362,7 +362,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
                   )}
                   {navigator.email.default_message && (
                     <h4 className="font-weight">
-                      Email:{' '}
+                      <FormattedMessage id="navigator.emailLabel" defaultMessage="Email: " />
                       <span className="navigator-info">
                         <FormattedMessage defaultMessage={navigator.email.default_message} id={navigator.email.label} />
                       </span>
@@ -370,7 +370,8 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
                   )}
                   {navigator.phone_number && (
                     <h4 className="font-weight">
-                      Phone Number: <span className="navigator-info">{formatPhoneNumber(navigator.phone_number)}</span>
+                      <FormattedMessage id="navigator.phoneLabel" defaultMessage="Phone Number: " />
+                      <span className="navigator-info">{formatPhoneNumber(navigator.phone_number)}</span>
                     </h4>
                   )}
                 </div>
