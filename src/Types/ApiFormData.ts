@@ -37,8 +37,8 @@ export type ApiHouseholdMemberReadOnly = {
 };
 
 export type ApiHouseholdMember = {
-  relationship: string | null;
   age: number | null;
+  relationship: string | null;
   student: boolean | null;
   student_full_time?: boolean | null;
   pregnant: boolean | null;
@@ -49,6 +49,7 @@ export type ApiHouseholdMember = {
   veteran?: boolean | null;
   medicaid?: boolean | null;
   disability_medicaid?: boolean | null;
+  long_term_disability: boolean | null;
   has_income: boolean | null;
   income_streams: ApiIncome[];
   insurance: ApiInsurance;

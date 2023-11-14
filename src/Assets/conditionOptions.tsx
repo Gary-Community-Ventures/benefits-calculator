@@ -17,6 +17,12 @@ const conditionOptions = {
       defaultMessage="Have any disabilities that make you unable to work now or in the future"
     />
   ),
+  longTermDisability: (
+    <FormattedMessage
+      id="conditionOptions.longTermDisability"
+      defaultMessage="Any medical or developmental condition that has lasted, or is expected to last, more than 12 months"
+    />
+  ),
 };
 
 export default conditionOptions;
