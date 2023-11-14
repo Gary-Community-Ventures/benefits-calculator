@@ -157,8 +157,8 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
       }
     });
 
-    //used categoryValues(eligiblePrograms) instead of the real total to take into account the preschool category value cap at 8640
-    const allCategoriesAndValuesObjCappedForPreschool = categoryValues(eligiblePrograms);
+    //used renderAllCategoryValues(eligiblePrograms) instead of the real total to take into account the preschool/childCare category value cap at 8640
+    const allCategoriesAndValuesObjCappedForPreschool = renderAllCategoryValues(eligiblePrograms);
     const totalCashAndTaxCreditValues = Object.entries(allCategoriesAndValuesObjCappedForPreschool).reduce(
       (acc, categoryAndValueArr) => {
         const categoryName = categoryAndValueArr[0];
@@ -190,8 +190,10 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
 
       //this is only to cap the totalVisibleRowDollarValue for preschool
       const typedFiltCategory = filt.category as GridFilterItem;
-      if (typedFiltCategory.value === preschoolProgramCategoryString && updatedTotalEligibleDollarValue > 8640) {
-        setTotalVisibleRowDollarValue(8640);
+      if (typedFiltCategory.value === childCareYouthAndEducationCategoryString) {
+        const childCareYouthAndEducationDollarValue =
+          renderAllCategoryValues(eligiblePrograms)[childCareYouthAndEducationCategoryString];
+        setTotalVisibleRowDollarValue(childCareYouthAndEducationDollarValue);
         return;
       }
 
@@ -247,11 +249,16 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
     });
   };
 
-  const preschoolProgramCategoryString = 'Child Care, Youth, and Education';
-  const categoryValues = (programs: Program[]) => {
-    const preschoolPrograms = { numOfPreSchoolPrograms: 0, totalEstVal: 0 };
+  const childCareYouthAndEducationCategoryString = 'Child Care, Youth, and Education';
+
+  const renderAllCategoryValues = (programs: Program[]) => {
+    let childCareTotalEstVal = 0;
+    let youthAndEducationTotalEstVal = 0;
     const categoryValues: { [key: string]: number } = {};
+
     for (let program of programs) {
+      const isPreschoolOrChildCareProgram = ['upk', 'dpp', 'chs', 'cccap'].includes(program.short_name);
+
       //add this category to the categoryValues dictionary if the key doesn't already exist
       if (categoryValues[program.category.default_message] === undefined) {
         categoryValues[program.category.default_message] = 0;
@@ -265,17 +272,23 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
         //we add that program's est value to its corresponding categoryValues key
         categoryValues[program.category.default_message] += program.estimated_value;
 
-        //if the program is a preschoolProgram, we also add it to the preschoolPrograms separately
-        if (program.category.default_message === preschoolProgramCategoryString) {
-          preschoolPrograms.numOfPreSchoolPrograms++;
-          preschoolPrograms.totalEstVal += program.estimated_value;
+        //if the program is in the preschoolProgramCategory, we also add it to the childCareTotalEstVal or youthAndEducationTotalEstVal separately
+        if (isPreschoolOrChildCareProgram) {
+          childCareTotalEstVal += program.estimated_value;
+        } else if (
+          program.category.default_message === childCareYouthAndEducationCategoryString &&
+          isPreschoolOrChildCareProgram === false
+        ) {
+          youthAndEducationTotalEstVal += program.estimated_value;
         }
       }
     }
 
-    if (preschoolPrograms.totalEstVal > 8640 && preschoolPrograms.numOfPreSchoolPrograms > 1) {
-      categoryValues[preschoolProgramCategoryString] = 8640;
+    if (childCareTotalEstVal > 8640) {
+      childCareTotalEstVal = 8640;
     }
+
+    categoryValues[childCareYouthAndEducationCategoryString] = childCareTotalEstVal + youthAndEducationTotalEstVal;
 
     return categoryValues;
   };
@@ -720,7 +733,8 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
               </span>
             </Toolbar>
             {currentCategory.defaultMessage ===
-              categories.find((cat) => cat.defaultMessage === preschoolProgramCategoryString)?.defaultMessage && (
+              categories.find((cat) => cat.defaultMessage === childCareYouthAndEducationCategoryString)
+                ?.defaultMessage && (
               <Typography variant="body2" className="child-care-helper-text">
                 <FormattedMessage
                   id="benefitCategories.childCareHelperText"
