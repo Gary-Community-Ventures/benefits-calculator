@@ -101,6 +101,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
     inputName: 'expenseAmount',
     inputError: expenseSourceValueHasError,
     inputHelperText: displayExpenseSourceValueHelperText,
+    dollarField: true,
   };
 
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {

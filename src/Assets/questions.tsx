@@ -149,6 +149,7 @@ const questions: Record<QuestionName, Question> = {
       inputLabel: <FormattedMessage id="questions.householdAssets-inputLabel" defaultMessage="Dollar Amount" />,
       inputError: householdAssetsHasError,
       inputHelperText: displayHouseholdAssetsHelperText,
+      dollarField: true,
     },
     headerType: 'aboutHousehold',
   },
