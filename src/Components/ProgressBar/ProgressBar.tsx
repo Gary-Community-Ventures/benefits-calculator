@@ -14,12 +14,9 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
   const { theme, formData } = useContext(Context);
   const totalSteps = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
   const { id } = useParams();
-  let stepValue: number = 0;
-  if (step !== undefined) {
-    stepValue = step;
-  } else if (id !== undefined) {
-    stepValue = Number(id);
-  }
+  
+  let stepValue = step || id || 0;
+  let progressPercentage: number = ((Number(stepValue) - 1) / totalSteps) * 100;
 
   const progressBarStyles = {
     marginBottom: '5px',
@@ -39,7 +36,7 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
       <LinearProgress
         sx={progressBarStyles}
         variant="determinate"
-        value={(stepValue / totalSteps) * 100}
+        value={progressPercentage}
         className="progress-bar"
         aria-label="Progress Bar"
       />
