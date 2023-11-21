@@ -625,7 +625,7 @@ const Confirmation = () => {
           }}
           variant="contained"
         >
-          <FormattedMessage id="previousButton" defaultMessage="Prev" />
+          <FormattedMessage id="previousButton" defaultMessage="< Back" />
         </Button>
         <Button variant="contained" onClick={() => navigate(`/${uuid}/results`)}>
           <FormattedMessage id="continueButton" defaultMessage="Continue" />
