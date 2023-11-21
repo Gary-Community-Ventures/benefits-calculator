@@ -13,6 +13,7 @@ import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
 import './QuestionComponentContainer.css';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
+import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper.tsx';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -96,26 +97,28 @@ const QuestionComponentContainer = ({
     const isHealthQuestion = inputName === 'healthInsurance';
 
     return (
-      <div className="question-container" id={id}>
-        {<h2 className="question-label">{matchingQuestion.question}</h2>}
-        {matchingQuestion.questionDescription && (
-          <p className="question-description">{matchingQuestion.questionDescription}</p>
-        )}
-        {component}
-        {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && (
-          <FollowUpQuestions
-            followUpQuestions={matchingQuestion.followUpQuestions}
-            submitted={errorController.submittedCount}
-            formData={formData}
-            handleCheckboxChange={handleCheckboxChange}
-            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-            handleTextfieldChange={handleTextfieldChange}
-          />
-        )}
-        {isHealthQuestion && errorController.showError && errorController.message(formData[inputName])}
-        {createPreviousAndContinueButtons()}
-      </div>
+      <SubHeaderWrapper>
+        <div className="question-container" id={id}>
+          {<h2 className="question-label">{matchingQuestion.question}</h2>}
+          {matchingQuestion.questionDescription && (
+            <p className="question-description">{matchingQuestion.questionDescription}</p>
+          )}
+          {component}
+          {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && (
+              <FollowUpQuestions
+                followUpQuestions={matchingQuestion.followUpQuestions}
+                submitted={errorController.submittedCount}
+                formData={formData}
+                handleCheckboxChange={handleCheckboxChange}
+                handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+                handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
+                handleTextfieldChange={handleTextfieldChange}
+              />
+          )}
+          {isHealthQuestion && errorController.showError && errorController.message(formData[inputName])}
+          {createPreviousAndContinueButtons()}
+        </div>
+      </SubHeaderWrapper>
     );
   };
 

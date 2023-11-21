@@ -15,6 +15,7 @@ import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import './IncomeBlock.css';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
+import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper.tsx';
 
 const StyledSelectfield = styled(Select)({
   marginBottom: 20,
@@ -65,9 +66,11 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit }) => {
 
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <MenuItem value={menuItemKey} key={menuItemKey}>
-          {menuItemLabels[i]}
-        </MenuItem>
+        <SubHeaderWrapper key={menuItemKey}>
+          <MenuItem value={menuItemKey} key={menuItemKey}>
+            {menuItemLabels[i]}
+          </MenuItem>
+        </SubHeaderWrapper>
       );
     });
 
@@ -182,17 +185,21 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit }) => {
     let questionHeader;
     if (selectedMenuItem[index].incomeFrequency === 'hourly') {
       questionHeader = (
-        <FormattedMessage
-          id="incomeBlock.createIncomeAmountTextfield-hourly-questionLabel"
-          defaultMessage="What is your hourly rate: "
-        />
+        <SubHeaderWrapper>
+          <FormattedMessage
+            id="incomeBlock.createIncomeAmountTextfield-hourly-questionLabel"
+            defaultMessage="What is your hourly rate: "
+          />
+        </SubHeaderWrapper>
       );
     } else {
       questionHeader = (
-        <FormattedMessage
-          id="incomeBlock.createIncomeAmountTextfield-questionLabel"
-          defaultMessage="How much do you receive each pay period for: "
-        />
+        <SubHeaderWrapper>
+          <FormattedMessage
+            id="incomeBlock.createIncomeAmountTextfield-questionLabel"
+            defaultMessage="How much do you receive each pay period for: "
+          />
+        </SubHeaderWrapper>         
       );
     }
     return (
@@ -309,10 +316,12 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit }) => {
       const { incomeStreamName, incomeAmount, incomeFrequency, hoursPerWeek } = incomeSourceData;
       const incomeStreamQuestion = (
         <p className="question-label">
-          <FormattedMessage
-            id="incomeBlock.createIncomeBlockQuestions-questionLabel"
-            defaultMessage="If you receive another type of income, select it below."
-          />
+          <SubHeaderWrapper>
+            <FormattedMessage
+              id="incomeBlock.createIncomeBlockQuestions-questionLabel"
+              defaultMessage="If you receive another type of income, select it below."
+            />
+          </SubHeaderWrapper>
         </p>
       );
       return (

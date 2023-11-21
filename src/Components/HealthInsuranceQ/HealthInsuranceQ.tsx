@@ -11,6 +11,7 @@ import {
   getHealthInsuranceError,
 } from '../../Assets/validationFunctions';
 import '../OptionCardGroup/OptionCardGroup.css';
+import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper.tsx';
 
 interface HealthInsuranceProps {
   hhMemberIndex: number;
@@ -41,19 +42,23 @@ const HealthInsuranceQ = ({
     if (page === 1) {
       return (
         <h2 className="question-label">
-          <FormattedMessage
-            id="questions.healthInsurance-you"
-            defaultMessage="Which type of health insurance do you have?"
-          />
+          <SubHeaderWrapper>
+            <FormattedMessage
+              id="questions.healthInsurance-you"
+              defaultMessage="Which type of health insurance do you have?"
+            />
+          </SubHeaderWrapper>
         </h2>
       );
     } else {
       return (
         <h2 className="question-label">
-          <FormattedMessage
-            id="questions.healthInsurance-they"
-            defaultMessage="What type of health insurance do they have?"
-          />
+          <SubHeaderWrapper>
+            <FormattedMessage
+              id="questions.healthInsurance-they"
+              defaultMessage="What type of health insurance do they have?"
+            />
+          </SubHeaderWrapper>
         </h2>
       );
     }

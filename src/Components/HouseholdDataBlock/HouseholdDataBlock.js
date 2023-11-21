@@ -23,6 +23,7 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import './HouseholdDataBlock.css';
+import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper.tsx';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -113,10 +114,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       return (
         <>
           <h2 className="question-label">
-            <FormattedMessage
-              id="householdDataBlock.createAgeQuestion-how-headOfHH"
-              defaultMessage="How old are you?"
-            />
+            <SubHeaderWrapper>
+              <FormattedMessage
+                id="householdDataBlock.createAgeQuestion-how-headOfHH"
+                defaultMessage="How old are you?"
+              />
+            </SubHeaderWrapper>
           </h2>
           {createTextField(ageTextfieldProps, submittedCount)}
           <p className="household-data-q-underline"></p>
@@ -126,7 +129,9 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       return (
         <>
           <h2 className="question-label">
-            <FormattedMessage id="householdDataBlock.createAgeQuestion-how" defaultMessage="How old are they?" />
+            <SubHeaderWrapper>
+              <FormattedMessage id="householdDataBlock.createAgeQuestion-how" defaultMessage="How old are they?" />
+            </SubHeaderWrapper>
           </h2>
           <p className="question-description">
             <FormattedMessage
@@ -165,10 +170,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <>
         <h2 className="question-label">
-          <FormattedMessage
-            id="householdDataBlock.createHOfHRelationQuestion-relation"
-            defaultMessage="What is this person’s relationship to you?"
-          />
+          <SubHeaderWrapper>
+            <FormattedMessage
+              id="householdDataBlock.createHOfHRelationQuestion-relation"
+              defaultMessage="What is this person’s relationship to you?"
+            />
+          </SubHeaderWrapper>
         </h2>
         {createRelationshipDropdownMenu()}
         <p className="household-data-q-underline"></p>
@@ -241,16 +248,20 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     if (personIndex === 1) {
       header = (
         <h1 className="question-label household-data-q-underline">
-          <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
+          <SubHeaderWrapper>
+            <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
+          </SubHeaderWrapper>
         </h1>
       );
     } else {
       header = (
         <h1 className="question-label household-data-q-underline">
-          <FormattedMessage
-            id="questions.householdData"
-            defaultMessage="Tell us about the next person in your household."
-          />
+          <SubHeaderWrapper>
+            <FormattedMessage
+              id="questions.householdData"
+              defaultMessage="Tell us about the next person in your household."
+            />
+          </SubHeaderWrapper>
         </h1>
       );
     }
@@ -260,7 +271,9 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         {headOfHHInfoWasEntered && (
           <>
             <h2 className="household-data-sub-header">
-              <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
+              <SubHeaderWrapper>
+                <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
+              </SubHeaderWrapper>
             </h2>
             <div>{formData.householdData.map(createMembersAdded)}</div>
             <div className="household-data-q-underline"></div>
@@ -329,7 +342,9 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <>
         <h2 className="question-label">
-          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          <SubHeaderWrapper>
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          </SubHeaderWrapper>
         </h2>
         <p className="question-description">
           <FormattedMessage
@@ -360,7 +375,9 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <>
         <h2 className="question-label radio-question">
-          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          <SubHeaderWrapper>
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          </SubHeaderWrapper>
         </h2>
         <p className="question-description">
           <FormattedMessage
