@@ -105,15 +105,15 @@ const QuestionComponentContainer = ({
           )}
           {component}
           {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && (
-              <FollowUpQuestions
-                followUpQuestions={matchingQuestion.followUpQuestions}
-                submitted={errorController.submittedCount}
-                formData={formData}
-                handleCheckboxChange={handleCheckboxChange}
-                handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-                handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-                handleTextfieldChange={handleTextfieldChange}
-              />
+            <FollowUpQuestions
+              followUpQuestions={matchingQuestion.followUpQuestions}
+              submitted={errorController.submittedCount}
+              formData={formData}
+              handleCheckboxChange={handleCheckboxChange}
+              handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+              handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
+              handleTextfieldChange={handleTextfieldChange}
+            />
           )}
           {isHealthQuestion && errorController.showError && errorController.message(formData[inputName])}
           {createPreviousAndContinueButtons()}

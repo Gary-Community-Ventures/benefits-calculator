@@ -25,7 +25,7 @@
   font-size: 2rem;
   font-weight: 700;
   font-family: 'Roboto', sans-serif;
-  color: #B85A27;
+  color: #b85a27;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #505c66;
@@ -76,7 +76,7 @@
   max-width: var(--main-max-width);
   margin: auto;
 }
-.secondary-heading{
+.secondary-heading {
   font-family: 'Roboto', sans-serif;
   color: #293457;
 }

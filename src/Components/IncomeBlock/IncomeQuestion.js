@@ -255,10 +255,11 @@ const IncomeQuestion = ({
         hourlyFormattedMsgDefaultMsg = 'What is their hourly rate: ';
       }
 
-      questionHeader = 
+      questionHeader = (
         <SubHeaderWrapper>
           <FormattedMessage id={hourlyFormattedMsgId} defaultMessage={hourlyFormattedMsgDefaultMsg} />
-        </SubHeaderWrapper>;
+        </SubHeaderWrapper>
+      );
     } else {
       let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
       let payPeriodFormattedMsgDefaultMsg = 'How much do you receive each pay period for: ';

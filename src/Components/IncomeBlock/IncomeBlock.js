@@ -199,7 +199,7 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit }) => {
             id="incomeBlock.createIncomeAmountTextfield-questionLabel"
             defaultMessage="How much do you receive each pay period for: "
           />
-        </SubHeaderWrapper>         
+        </SubHeaderWrapper>
       );
     }
     return (
