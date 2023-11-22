@@ -31,6 +31,13 @@
   border-bottom: 1px solid #505c66;
 }
 
+.sub-header-step-2 {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  color: #b85a27;
+}
+
 .bottom-border {
   border-bottom: 1px solid #2a2b2a;
   margin-bottom: 1rem;

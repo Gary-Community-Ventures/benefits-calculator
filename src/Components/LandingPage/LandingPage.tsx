@@ -106,11 +106,21 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
         />
-        <Link href={getLinksForCheckbox().privacyPolicyLink} target="_blank" rel="noopener noreferrer">
+        <Link
+          href={getLinksForCheckbox().privacyPolicyLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{ color: '#B85A27' }}
+        >
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
         </Link>
         <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />
-        <Link href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" rel="noopener noreferrer">
+        <Link
+          href={getLinksForCheckbox().addTermsConsentToContact}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{ color: '#B85A27' }}
+        >
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
         </Link>
         .
@@ -120,7 +130,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
 
   return (
     <main className="benefits-form">
-      <h1 className="sub-header">
+      <h1 className="sub-header-step-2">
         <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
       </h1>
       <Card variant="outlined">
@@ -168,36 +178,41 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
         </CardContent>
       </Card>
       <Box sx={{ mt: '.5rem' }}>
-        <Box>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={formData.agreeToTermsOfService}
-                onChange={handleCheckboxChange}
-                sx={privacyErrorController.showError ? { color: '#c6252b' } : {}}
+        <Card variant="outlined" sx={{ backgroundColor: '#FBF9FC' }}>
+          <CardContent>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={formData.agreeToTermsOfService}
+                  onChange={handleCheckboxChange}
+                  sx={privacyErrorController.showError ? { color: '#c6252b' } : {}}
+                />
+              }
+              label={createCheckboxLabel()}
+              value="agreeToTermsOfService"
+            />
+            {privacyErrorController.showError && privacyErrorController.message(null)}
+            <Box sx={{ mt: '.5rem' }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={formData.is13OrOlder}
+                    onChange={handleCheckboxChange}
+                    sx={ageErrorController.showError ? { color: '#c6252b' } : {}}
+                  />
+                }
+                label={
+                  <FormattedMessage
+                    id="disclaimer-label-age"
+                    defaultMessage="I confirm I am 13 years of age or older."
+                  />
+                }
+                value="is13OrOlder"
               />
-            }
-            label={createCheckboxLabel()}
-            value="agreeToTermsOfService"
-          />
-          {privacyErrorController.showError && privacyErrorController.message(null)}
-        </Box>
-        <Box sx={{ mt: '.5rem' }}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={formData.is13OrOlder}
-                onChange={handleCheckboxChange}
-                sx={ageErrorController.showError ? { color: '#c6252b' } : {}}
-              />
-            }
-            label={
-              <FormattedMessage id="disclaimer-label-age" defaultMessage="I confirm I am 13 years of age or older." />
-            }
-            value="is13OrOlder"
-          />
-        </Box>
-        {ageErrorController.showError && ageErrorController.message(null)}
+            </Box>
+            {ageErrorController.showError && ageErrorController.message(null)}
+          </CardContent>
+        </Card>
       </Box>
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <Box>
