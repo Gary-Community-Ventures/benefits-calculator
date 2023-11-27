@@ -101,7 +101,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
 
   const createCheckboxLabel = () => {
     return (
-      <div className='main-paragraph'>
+      <div className="main-paragraph">
         <FormattedMessage
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
@@ -136,22 +136,22 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       <Card variant="outlined">
         <CardContent>
           <Typography variant="body1">
-            <div className='main-paragraph'>
-            <FormattedMessage
-              id="landingPage.body"
-              defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:"
-            />
+            <div className="main-paragraph">
+              <FormattedMessage
+                id="landingPage.body"
+                defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:"
+              />
             </div>
           </Typography>
           <ul className="landing-page-list-container">
-            <li className='main-paragraph'>
+            <li className="main-paragraph">
               <FormattedMessage
                 id="landingPage.firstBulletItem"
                 defaultMessage="MyFriendBen only provides estimates of what you may qualify for. You should not rely on these estimates. You must confirm your final eligibility and benefit amount with the proper agency or other decision maker."
               />
             </li>
             <li>
-              <p className='main-paragraph'>
+              <p className="main-paragraph">
                 <FormattedMessage
                   id="landingPage.publicCharge"
                   defaultMessage="Some benefits are available to Non-U.S. citizens. Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits may affect their immigration status. For more information, please review the "
@@ -226,11 +226,11 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
                   />
                 }
                 label={
-                  <div className='main-paragraph'>
-                  <FormattedMessage
-                    id="disclaimer-label-age"
-                    defaultMessage="I confirm I am 13 years of age or older."
-                  />
+                  <div className="main-paragraph">
+                    <FormattedMessage
+                      id="disclaimer-label-age"
+                      defaultMessage="I confirm I am 13 years of age or older."
+                    />
                   </div>
                 }
                 value="is13OrOlder"
