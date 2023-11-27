@@ -34,8 +34,14 @@
 .sub-header-step-2 {
   font-size: 2rem;
   font-weight: 700;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
   color: #b85a27;
+}
+
+.main-paragraph {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-size: 1.1rem;
 }
 
 .bottom-border {
