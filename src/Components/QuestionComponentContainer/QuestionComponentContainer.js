@@ -200,6 +200,20 @@ const QuestionComponentContainer = ({
             <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />
           </h1>
         );
+      } else if (matchingQuestion.name === 'zipcode') {
+        return (
+          <>
+            <h1 className='deep-blue'>
+              <FormattedMessage
+                id="qcc.lets-get-started"
+                defaultMessage="LET'S GET STARTED!"
+              />
+            </h1>
+            <h2 className="sub-header">
+              <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us about your household." />
+            </h2>
+          </>
+        );
       } else {
         return (
           <h1 className="sub-header">
