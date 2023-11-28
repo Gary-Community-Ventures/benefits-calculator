@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { TextField } from '@mui/material';
+import { TextField, InputAdornment } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 
@@ -9,7 +9,7 @@ const StyledTextField = styled(TextField)({
 });
 
 const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submitted }) => {
-  const { inputType, inputName, inputLabel, inputError, inputHelperText } = componentDetails;
+  const { inputType, inputName, inputLabel, inputError, inputHelperText, dollarField } = componentDetails;
   const errorController = useErrorController(inputError, inputHelperText);
   useEffect(() => {
     errorController.setSubmittedCount(submitted);
@@ -34,6 +34,13 @@ const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submi
       required
       error={errorController.showError}
       helperText={errorController.showError && errorController.message(data[inputName])}
+      InputProps={
+        dollarField
+          ? {
+              startAdornment: <InputAdornment position="start">$</InputAdornment>,
+            }
+          : {}
+      }
     />
   );
 };
