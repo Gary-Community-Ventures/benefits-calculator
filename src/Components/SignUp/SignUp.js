@@ -123,7 +123,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
         <Typography variant="body1" sx={{ mt: '1rem' }} style={{ fontWeight: 600 }}>
           <FormattedMessage
             id="signUp.displayDisclosureSection-consentText"
-            defaultMessage="By filling out this form, you agree to future contact from Gary Philanthropy or our affiliates regarding your use of the benefits calculator or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication."
+            defaultMessage="By filling out this form, you agree to future contact from Gary Philanthropy or our affiliates regarding your use of MyFriendBen or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication."
           />
         </Typography>
         <FormControlLabel
@@ -140,7 +140,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
             <div>
               <FormattedMessage
                 id="signUp.displayDisclosureSection-consentCheck1"
-                defaultMessage="I have read, understand, and agree to the terms of My Friend Ben's "
+                defaultMessage="I have read, understand, and agree to the terms of MyFriendBen's "
               />
               <FormattedMessage
                 id="emailResults.return-consentCheck"
