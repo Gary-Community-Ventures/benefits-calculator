@@ -21,7 +21,6 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
   const progressBarStyles = {
     marginBottom: '5px',
     backgroundColor: '#FBF9FC',
-    border: '1px solid #B0B0B0',
     borderRadius: '500rem;',
     height: '1rem',
     boxShadow: 'inset -1px 1px 3px rgb(0 0 0 / 0.2)',
