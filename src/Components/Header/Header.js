@@ -52,7 +52,7 @@ const Header = ({ handleTextfieldChange }) => {
   };
 
   const setRenderValue = () => {
-    const currentLocale = (userLanguage in languageOptions) ? userLanguage : context.locale
+    const currentLocale = userLanguage in languageOptions ? userLanguage : context.locale;
     return currentLocale.slice(0, 2).toLocaleUpperCase();
   };
 
