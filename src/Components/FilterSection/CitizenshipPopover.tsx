@@ -111,6 +111,7 @@ const CitizenshipPopover = ({
           }
         />,
       );
+
       if (citizenshipFilters[parentLabel]) {
         children.forEach((label) => {
           filters.push(
