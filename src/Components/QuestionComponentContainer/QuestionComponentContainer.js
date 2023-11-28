@@ -10,6 +10,7 @@ import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
+import { Container } from '@mui/material';
 import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
 import './QuestionComponentContainer.css';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
@@ -26,6 +27,7 @@ const QuestionComponentContainer = ({
   const { formData } = useContext(Context);
   let { id } = useParams();
   let matchingQuestion = getQuestion(+id, formData.immutableReferrer);
+
   const errorController = useErrorController(
     matchingQuestion.componentDetails.inputError,
     matchingQuestion.componentDetails.inputHelperText,
@@ -175,56 +177,70 @@ const QuestionComponentContainer = ({
   };
 
   const renderHeaderAndSubheader = () => {
-    if (matchingQuestion.headerType === 'signUpInfo') {
-      return (
-        <h1 className="sub-header">
-          <FormattedMessage
-            id="qcc.optional-sign-up-text"
-            defaultMessage="Optional: Sign up for benefits updates and/or paid feedback opportunities"
-          />
-        </h1>
-      );
-    } else if (matchingQuestion.headerType === 'aboutHousehold') {
-      if (matchingQuestion.name === 'hasBenefits' || matchingQuestion.name === 'acuteHHConditions') {
+    const { headerType, name } = matchingQuestion;
+
+    switch (headerType) {
+      case 'signUpInfo':
         return (
           <h1 className="sub-header">
             <FormattedMessage
-              id="qcc.tell-us-final-text"
-              defaultMessage="Tell us some final information about your household."
+              id="qcc.optional-sign-up-text"
+              defaultMessage="Optional: Sign up for benefits updates and/or paid feedback opportunities"
             />
           </h1>
         );
-      } else if (matchingQuestion.name === 'referralSource') {
-        return (
-          <h1 className="sub-header">
-            <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />
-          </h1>
-        );
-      } else {
+      case 'aboutHousehold':
+        if (name === 'hasBenefits' || name === 'acuteHHConditions') {
+          return (
+            <h1 className="sub-header">
+              <FormattedMessage
+                id="qcc.tell-us-final-text"
+                defaultMessage="Tell us some final information about your household."
+              />
+            </h1>
+          );
+        } else if (name === 'zipcode') {
+          return (
+            <>
+              <h2 className="question-secondary-header">Let&#39;s Get Started!</h2>
+              <h1 className="question-header">
+                <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />
+              </h1>
+            </>
+          );
+        } else if (name === 'referralSource') {
+          return (
+            <h1 className="sub-header">
+              <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />
+            </h1>
+          );
+        }
+      default:
         return (
           <h1 className="sub-header">
             <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us about your household." />
           </h1>
         );
-      }
     }
   };
 
   return (
     <main className="benefits-form">
-      {renderHeaderAndSubheader()}
-      {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
-        createComponent(renderTextfieldComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
-          createComponent(renderRadiofieldComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
-          createComponent(renderNoAnswerComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
-          createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
-          createComponent(renderOptionCardGroup(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
-          createComponent(renderBasicSelectComponent(matchingQuestion)))}
+      <Container className="question-header-container">{renderHeaderAndSubheader()}</Container>
+      <Container>
+        {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
+          createComponent(renderTextfieldComponent(matchingQuestion))) ||
+          (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
+            createComponent(renderRadiofieldComponent(matchingQuestion))) ||
+          (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
+            createComponent(renderNoAnswerComponent(matchingQuestion))) ||
+          (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
+            createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
+          (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
+            createComponent(renderOptionCardGroup(matchingQuestion))) ||
+          (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
+            createComponent(renderBasicSelectComponent(matchingQuestion)))}
+      </Container>
     </main>
   );
 };
