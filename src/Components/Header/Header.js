@@ -81,7 +81,7 @@ const Header = ({ handleTextfieldChange }) => {
             <Select
               labelId="select-language-label"
               id="select-language"
-              value={userLanguage}
+              value={userLanguage in languageOptions ? userLanguage : context.locale}
               label="Language"
               onChange={(event) => context.selectLanguage(event)}
               aria-label="select a language"
