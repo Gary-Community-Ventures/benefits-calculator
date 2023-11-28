@@ -34,6 +34,31 @@
   margin-bottom: 1rem;
 }
 
+.navigation-button .back-button, .back-continue-buttons .back-button, .prev-continue-results-buttons .back-button, .prev-save-continue-buttons .back-button{
+  font-family: 'Open Sans';
+  color: #41528C;
+  background-color: transparent;
+  font-weight: 700;
+}
+
+.navigation-button .back-button:hover, .back-continue-buttons .back-button:hover, .prev-continue-results-buttons .back-button:hover, .prev-save-continue-buttons .back-button:hover{
+  background-color: transparent; 
+} 
+
+.navigation-button .continue-button, .back-continue-buttons .continue-button, .prev-continue-results-buttons .continue-button, .prev-save-continue-buttons .continue-button{
+  font-family: 'Open Sans';
+  background-color: #293457;
+  color: #FFFFFF;
+  border: 1px solid #000000;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.navigation-button .continue-button:hover, .back-continue-buttons .continue-button:hover, .prev-continue-results-buttons .continue-button:hover, .prev-save-continue-buttons .continue-button:hover{
+  background-color: #ECDEED; 
+  color: #293457;
+}
+
 .MuiDataGrid-columnHeaderTitle {
   overflow: visible !important;
   line-height: 1.43rem !important;

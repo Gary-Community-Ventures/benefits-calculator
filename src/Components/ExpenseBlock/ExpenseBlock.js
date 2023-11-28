@@ -34,11 +34,11 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
     formData.expenses.length > 0
       ? formData.expenses
       : [
-          {
-            expenseSourceName: '',
-            expenseAmount: '',
-          },
-        ],
+        {
+          expenseSourceName: '',
+          expenseAmount: '',
+        },
+      ],
   );
 
   useEffect(() => {
@@ -96,6 +96,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
       <div className="prev-save-continue-buttons">
         <PreviousButton />
         <Button
+          className="continue-button"
           variant="contained"
           onClick={(event) => {
             handleSaveAndContinue(event);

@@ -22,14 +22,17 @@ const ContinueButton = ({ handleContinueSubmit, errorController, inputName, ques
   });
 
   return (
-    <Button
-      variant="contained"
-      onClick={(event) => {
-        handleContinueSubmit(event, errorController, formData?.[inputName], stepNumberId, questionName, uuid);
-      }}
-    >
-      <FormattedMessage id="continueButton" defaultMessage="Continue" />
-    </Button>
+    <div className="navigation-button">
+      <Button
+        variant="contained"
+        className="continue-button"
+        onClick={(event) => {
+          handleContinueSubmit(event, errorController, formData?.[inputName], stepNumberId, questionName, uuid);
+        }}
+      >
+        <FormattedMessage id="continueButton" defaultMessage="Continue" />
+      </Button>
+    </div >
   );
 };
 
