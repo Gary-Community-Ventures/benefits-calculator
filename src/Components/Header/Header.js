@@ -25,6 +25,7 @@ const Header = ({ handleTextfieldChange }) => {
   const [openShare, setOpenShare] = useState(false);
   const [openEmailResults, setOpenEmailResults] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
+  const userLanguage = navigator.language?.toLocaleLowerCase();
 
   const handleOpenShare = () => {
     setOpenShare(true);
@@ -51,7 +52,7 @@ const Header = ({ handleTextfieldChange }) => {
   };
 
   const setRenderValue = () => {
-    const currentLocale = context.locale;
+    const currentLocale = (userLanguage in languageOptions) ? userLanguage : context.locale
     return currentLocale.slice(0, 2).toLocaleUpperCase();
   };
 
@@ -80,7 +81,7 @@ const Header = ({ handleTextfieldChange }) => {
             <Select
               labelId="select-language-label"
               id="select-language"
-              value={context.locale}
+              value={userLanguage}
               label="Language"
               onChange={(event) => context.selectLanguage(event)}
               aria-label="select a language"

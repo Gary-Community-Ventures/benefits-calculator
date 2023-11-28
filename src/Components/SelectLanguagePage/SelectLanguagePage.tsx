@@ -3,12 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import languageOptions from '../../Assets/languageOptions.tsx';
+import languageOptions, { Language } from '../../Assets/languageOptions.tsx';
 
 const SelectLanguagePage = () => {
   const { formData, locale, selectLanguage } = useContext(Context);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const navigate = useNavigate();
+  const userLanguage = navigator.language?.toLocaleLowerCase() as Language;
 
   const createMenuItems = (optionList: Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
     const disabledSelectMenuItem = (
@@ -56,7 +57,7 @@ const SelectLanguagePage = () => {
         <Select
           labelId="language-select-label"
           id="language-select"
-          value={locale}
+          value={userLanguage in languageOptions ? userLanguage : locale}
           label={<FormattedMessage id="selectLang.text" defaultMessage="Language" />}
           //@ts-ignore
           onChange={(event: SelectChangeEvent<string>) => selectLanguage(event)}
