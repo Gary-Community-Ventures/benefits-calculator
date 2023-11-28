@@ -44,19 +44,19 @@ const citizenshipFilterFormControlLabels: Record<CitizenLabels, FormattedMessage
   otherWithWorkPermission: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-other_work_permission"
-      defaultMessage="Other lawfully present noncitizens"
+      defaultMessage="with permission to live or work in the U.S. (other rules may apply)"
     />
   ),
   otherHealthCareUnder19: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-other_health_care_under19"
-      defaultMessage="Other lawfully present noncitizens"
+      defaultMessage="for health care benefits - younger than 19"
     />
   ),
   otherHealthCarePregnant: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-other_health_care_pregnant"
-      defaultMessage="Other lawfully present noncitizens"
+      defaultMessage="for health care benefits - pregnant"
     />
   ),
 };
