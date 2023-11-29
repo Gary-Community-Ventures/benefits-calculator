@@ -11,7 +11,7 @@
   min-width: 0;
 }
 
-.prev-save-continue-buttons{
+.prev-save-continue-buttons {
   display: flex;
   justify-content: space-between;
 }

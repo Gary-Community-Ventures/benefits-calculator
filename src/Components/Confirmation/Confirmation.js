@@ -626,7 +626,7 @@ const Confirmation = () => {
         >
           <FormattedMessage id="previousButton" defaultMessage="< Back" />
         </Button>
-        <Button variant="contained" className="continue-button" onClick={() => navigate(`/${uuid}/results`)} >
+        <Button variant="contained" className="continue-button" onClick={() => navigate(`/${uuid}/results`)}>
           <FormattedMessage id="continueButton" defaultMessage="Continue" />
         </Button>
       </div>

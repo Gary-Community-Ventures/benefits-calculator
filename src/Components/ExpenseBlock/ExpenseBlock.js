@@ -34,11 +34,11 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
     formData.expenses.length > 0
       ? formData.expenses
       : [
-        {
-          expenseSourceName: '',
-          expenseAmount: '',
-        },
-      ],
+          {
+            expenseSourceName: '',
+            expenseAmount: '',
+          },
+        ],
   );
 
   useEffect(() => {

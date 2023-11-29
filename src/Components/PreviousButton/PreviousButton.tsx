@@ -26,11 +26,9 @@ const PreviousButton = ({ navFunction }: Props) => {
   const navigationFunction = navFunction ?? defaultNavigate;
 
   return (
-    <div className="navigation-button">
-      <Button className="back-button" onClick={navigationFunction}>
-        <FormattedMessage id="previousButton" defaultMessage="< Back" />
-      </Button>
-    </div>
+    <Button className="nav-btn back-button" onClick={navigationFunction}>
+      <FormattedMessage id="previousButton" defaultMessage="< Back" />
+    </Button>
   );
 };
 
