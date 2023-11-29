@@ -31,6 +31,12 @@
   border-bottom: 1px solid #505c66;
 }
 
+.sub-header-language-select {
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+  margin-bottom: 1rem;
+}
+
 .bottom-border {
   border-bottom: 1px solid #2a2b2a;
   margin-bottom: 1rem;
