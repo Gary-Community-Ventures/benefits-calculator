@@ -25,17 +25,8 @@
   font-size: 2rem;
   font-weight: 700;
   font-family: 'Roboto', sans-serif;
-  color: #b85a27;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #505c66;
-}
-
-.sub-header-step-2 {
-  font-size: 2rem;
-  font-weight: 700;
-  font-family: 'Roboto Slab', sans-serif;
   color: var(--main-header-color);
+  margin-bottom: 1rem;
 }
 
 .main-paragraph {
