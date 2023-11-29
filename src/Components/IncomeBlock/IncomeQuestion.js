@@ -255,11 +255,7 @@ const IncomeQuestion = ({
         hourlyFormattedMsgDefaultMsg = 'What is their hourly rate: ';
       }
 
-      questionHeader = (
-        <SubHeaderWrapper>
-          <FormattedMessage id={hourlyFormattedMsgId} defaultMessage={hourlyFormattedMsgDefaultMsg} />
-        </SubHeaderWrapper>
-      );
+      questionHeader = <FormattedMessage id={hourlyFormattedMsgId} defaultMessage={hourlyFormattedMsgDefaultMsg} />;
     } else {
       let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
       let payPeriodFormattedMsgDefaultMsg = 'How much do you receive each pay period for: ';
@@ -270,9 +266,7 @@ const IncomeQuestion = ({
       }
 
       questionHeader = (
-        <SubHeaderWrapper>
-          <FormattedMessage id={payPeriodFormattedMsgId} defaultMessage={payPeriodFormattedMsgDefaultMsg} />
-        </SubHeaderWrapper>
+        <FormattedMessage id={payPeriodFormattedMsgId} defaultMessage={payPeriodFormattedMsgDefaultMsg} />
       );
     }
 
@@ -290,8 +284,7 @@ const IncomeQuestion = ({
       <div>
         <h2 className="question-label">
           {questionHeader}
-          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
-          <SubHeaderWrapper> ? </SubHeaderWrapper>
+          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}?
         </h2>
         <div className="income-block-textfield">
           <Textfield
@@ -317,11 +310,8 @@ const IncomeQuestion = ({
     return (
       <div>
         <h2 className="question-label">
-          <SubHeaderWrapper>
-            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-          </SubHeaderWrapper>
-          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
-          <SubHeaderWrapper> ? </SubHeaderWrapper>
+          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}?
         </h2>
         <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeFrequencyErrorController.showError}>
           <InputLabel id="income-frequency-label">
@@ -377,9 +367,7 @@ const IncomeQuestion = ({
 
   const incomeStreamQuestion = (
     <h2 className="question-label">
-      <SubHeaderWrapper>
-        <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-      </SubHeaderWrapper>
+      <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
     </h2>
   );
 

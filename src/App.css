@@ -24,7 +24,7 @@
 .sub-header {
   font-size: 2rem;
   font-weight: 700;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
   color: #b85a27;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
@@ -83,6 +83,6 @@
   margin: auto;
 }
 .secondary-heading {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
   color: #293457;
 }
