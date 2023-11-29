@@ -29,7 +29,7 @@ interface LandingPageProps {
 }
 
 const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
-  const { formData, locale, screenDoneLoading } = useContext(Context);
+  const { formData, locale, screenDoneLoading, theme } = useContext(Context);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   let { uuid } = useParams();
   const navigate = useNavigate();
@@ -110,7 +110,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
           href={getLinksForCheckbox().privacyPolicyLink}
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: '#B85A27' }}
+          sx={{ color: theme.terraCottaColor }}
         >
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
         </Link>
@@ -119,7 +119,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
           href={getLinksForCheckbox().addTermsConsentToContact}
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: '#B85A27' }}
+          sx={{ color: theme.terraCottaColor }}
         >
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
         </Link>
@@ -133,7 +133,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       <h1 className="sub-header-step-2">
         <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
       </h1>
-      <Card variant="outlined">
+      <Card variant="outlined" sx={{ backgroundColor: theme.lightPurpleBackground }}>
         <CardContent>
           <Typography variant="body1">
             <div className="main-paragraph">
@@ -180,25 +180,14 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
         </CardContent>
       </Card>
       <Box sx={{ mt: '.5rem' }}>
-        <Card variant="outlined" sx={{ backgroundColor: '#FBF9FC' }}>
+        <Card variant="outlined">
           <CardContent>
             <FormControlLabel
               control={
                 <Checkbox
                   checked={formData.agreeToTermsOfService}
                   onChange={handleCheckboxChange}
-                  sx={
-                    privacyErrorController.showError
-                      ? { color: '#c6252b' }
-                      : formData.agreeToTermsOfService
-                      ? {
-                          color: '#41528C',
-                          '&.Mui-checked': {
-                            color: '#41528C',
-                          },
-                        }
-                      : {}
-                  }
+                  sx={privacyErrorController.showError ? { color: '#c6252b' } : {}}
                 />
               }
               label={createCheckboxLabel()}
@@ -211,18 +200,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
                   <Checkbox
                     checked={formData.is13OrOlder}
                     onChange={handleCheckboxChange}
-                    sx={
-                      ageErrorController.showError
-                        ? { color: '#c6252b' }
-                        : formData.is13OrOlder
-                        ? {
-                            color: '#41528C',
-                            '&.Mui-checked': {
-                              color: '#41528C',
-                            },
-                          }
-                        : {}
-                    }
+                    sx={ageErrorController.showError ? { color: '#c6252b' } : {}}
                   />
                 }
                 label={

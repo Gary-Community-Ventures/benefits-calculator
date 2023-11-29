@@ -3,12 +3,16 @@ import { useState } from 'react';
 export interface ITheme {
   primaryColor: string;
   secondaryColor: string;
+  terraCottaColor: string;
+  lightPurpleBackground: string;
   cssVariables: {
     '--primary-color': string;
     '--secondary-color': string;
     '--confirmation-background': string;
     '--main-max-width': string;
     'font-size': string;
+    '--main-header-color': string;
+    '--light-purple-background': string;
   };
 }
 
@@ -21,23 +25,31 @@ const themes: IThemes = {
   default: {
     primaryColor: '#037A93',
     secondaryColor: '#4ECDC4',
+    terraCottaColor: '#B85A27',
+    lightPurpleBackground: '#FBF9FC',
     cssVariables: {
       '--primary-color': '#037A93',
       '--secondary-color': '4ECDC4',
       '--confirmation-background': '#D3F2F0',
       '--main-max-width': '1310px',
       'font-size': '16px',
+      '--main-header-color': '#B85A27',
+      '--light-purple-background': '#FBF9FC',
     },
   },
   twoOneOne: {
     primaryColor: '#005191',
     secondaryColor: '#539ED0',
+    terraCottaColor: '#B85A27',
+    lightPurpleBackground: '#FBF9FC',
     cssVariables: {
       '--primary-color': '#005191',
       '--secondary-color': '#539ED0',
       '--confirmation-background': '#D4E7F2',
       '--main-max-width': '1310px',
       'font-size': '18px',
+      '--main-header-color': '#B85A27',
+      '--light-purple-background': '#FBF9FC',
     },
   },
 };
@@ -48,6 +60,7 @@ function generateMuiOverides(theme: ITheme) {
   const blueColor = theme.primaryColor;
   const greenColor = theme.secondaryColor;
   const blackColor = '#2A2B2A';
+  const midBlue = '#41528C'
 
   return {
     palette: {
@@ -80,7 +93,7 @@ function generateMuiOverides(theme: ITheme) {
         styleOverrides: {
           root: {
             '&.Mui-checked': {
-              color: blueColor,
+              color: midBlue,
             },
           },
         },
