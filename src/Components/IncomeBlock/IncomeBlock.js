@@ -185,17 +185,17 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit }) => {
     let questionHeader;
     if (selectedMenuItem[index].incomeFrequency === 'hourly') {
       questionHeader = (
-          <FormattedMessage
-            id="incomeBlock.createIncomeAmountTextfield-hourly-questionLabel"
-            defaultMessage="What is your hourly rate: "
-          />
+        <FormattedMessage
+          id="incomeBlock.createIncomeAmountTextfield-hourly-questionLabel"
+          defaultMessage="What is your hourly rate: "
+        />
       );
     } else {
       questionHeader = (
-          <FormattedMessage
-            id="incomeBlock.createIncomeAmountTextfield-questionLabel"
-            defaultMessage="How much do you receive each pay period for: "
-          />
+        <FormattedMessage
+          id="incomeBlock.createIncomeAmountTextfield-questionLabel"
+          defaultMessage="How much do you receive each pay period for: "
+        />
       );
     }
     return (
@@ -312,10 +312,10 @@ const IncomeBlock = ({ handleIncomeStreamsSubmit }) => {
       const { incomeStreamName, incomeAmount, incomeFrequency, hoursPerWeek } = incomeSourceData;
       const incomeStreamQuestion = (
         <p className="question-label">
-            <FormattedMessage
-              id="incomeBlock.createIncomeBlockQuestions-questionLabel"
-              defaultMessage="If you receive another type of income, select it below."
-            />
+          <FormattedMessage
+            id="incomeBlock.createIncomeBlockQuestions-questionLabel"
+            defaultMessage="If you receive another type of income, select it below."
+          />
         </p>
       );
       return (
