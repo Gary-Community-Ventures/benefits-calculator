@@ -3,7 +3,6 @@ import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import IncomeQuestion from './IncomeQuestion';
 import './IncomeBlock.css';
-import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper';
 
 const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those

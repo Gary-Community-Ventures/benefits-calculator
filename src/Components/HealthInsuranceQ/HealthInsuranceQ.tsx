@@ -11,7 +11,6 @@ import {
   getHealthInsuranceError,
 } from '../../Assets/validationFunctions';
 import '../OptionCardGroup/OptionCardGroup.css';
-import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper.tsx';
 
 interface HealthInsuranceProps {
   hhMemberIndex: number;

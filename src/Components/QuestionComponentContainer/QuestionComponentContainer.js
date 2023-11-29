@@ -13,7 +13,6 @@ import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
 import './QuestionComponentContainer.css';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
-import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper.tsx';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
