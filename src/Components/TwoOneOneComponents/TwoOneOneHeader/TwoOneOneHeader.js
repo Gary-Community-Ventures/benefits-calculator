@@ -69,7 +69,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   };
 
   const setRenderValue = () => {
-    const currentLocale = context.locale;
+    const currentLocale = locale;
     return currentLocale.slice(0, 2).toLocaleUpperCase();
   };
 
