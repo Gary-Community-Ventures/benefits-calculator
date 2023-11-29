@@ -3,7 +3,6 @@ import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import IncomeQuestion from './IncomeQuestion';
 import './IncomeBlock.css';
-import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper';
 
 const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those
@@ -72,12 +71,10 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
   return (
     <>
       <h2 className="question-label radio-question">
-        <SubHeaderWrapper>
-          <FormattedMessage
-            id={renderReturnStmtIdOrDefaultMsg(page)[0]}
-            defaultMessage={renderReturnStmtIdOrDefaultMsg(page)[1]}
-          />
-        </SubHeaderWrapper>
+        <FormattedMessage
+          id={renderReturnStmtIdOrDefaultMsg(page)[0]}
+          defaultMessage={renderReturnStmtIdOrDefaultMsg(page)[1]}
+        />
       </h2>
       <p className="question-description">
         <FormattedMessage
