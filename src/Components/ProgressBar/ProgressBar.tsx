@@ -15,7 +15,7 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
   const totalSteps = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
   const { id } = useParams();
 
-  let stepValue = step || id || 0;
+  let stepValue = step ?? id ?? 0;
   let progressPercentage: number = ((Number(stepValue) - 1) / totalSteps) * 100;
 
   const progressBarStyles = {
