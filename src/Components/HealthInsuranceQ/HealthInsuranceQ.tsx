@@ -42,23 +42,19 @@ const HealthInsuranceQ = ({
     if (page === 1) {
       return (
         <h2 className="question-label">
-          <SubHeaderWrapper>
-            <FormattedMessage
-              id="questions.healthInsurance-you"
-              defaultMessage="Which type of health insurance do you have?"
-            />
-          </SubHeaderWrapper>
+          <FormattedMessage
+            id="questions.healthInsurance-you"
+            defaultMessage="Which type of health insurance do you have?"
+          />
         </h2>
       );
     } else {
       return (
         <h2 className="question-label">
-          <SubHeaderWrapper>
-            <FormattedMessage
-              id="questions.healthInsurance-they"
-              defaultMessage="What type of health insurance do they have?"
-            />
-          </SubHeaderWrapper>
+          <FormattedMessage
+            id="questions.healthInsurance-they"
+            defaultMessage="What type of health insurance do they have?"
+          />
         </h2>
       );
     }

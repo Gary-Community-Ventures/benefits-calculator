@@ -114,12 +114,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       return (
         <>
           <h2 className="question-label">
-            <SubHeaderWrapper>
-              <FormattedMessage
-                id="householdDataBlock.createAgeQuestion-how-headOfHH"
-                defaultMessage="How old are you?"
-              />
-            </SubHeaderWrapper>
+            <FormattedMessage
+              id="householdDataBlock.createAgeQuestion-how-headOfHH"
+              defaultMessage="How old are you?"
+            />
           </h2>
           {createTextField(ageTextfieldProps, submittedCount)}
           <p className="household-data-q-underline"></p>
@@ -129,9 +127,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       return (
         <>
           <h2 className="question-label">
-            <SubHeaderWrapper>
-              <FormattedMessage id="householdDataBlock.createAgeQuestion-how" defaultMessage="How old are they?" />
-            </SubHeaderWrapper>
+            <FormattedMessage id="householdDataBlock.createAgeQuestion-how" defaultMessage="How old are they?" />
           </h2>
           <p className="question-description">
             <FormattedMessage
@@ -170,12 +166,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <>
         <h2 className="question-label">
-          <SubHeaderWrapper>
-            <FormattedMessage
-              id="householdDataBlock.createHOfHRelationQuestion-relation"
-              defaultMessage="What is this person’s relationship to you?"
-            />
-          </SubHeaderWrapper>
+          <FormattedMessage
+            id="householdDataBlock.createHOfHRelationQuestion-relation"
+            defaultMessage="What is this person’s relationship to you?"
+          />
         </h2>
         {createRelationshipDropdownMenu()}
         <p className="household-data-q-underline"></p>
@@ -247,21 +241,17 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     if (personIndex === 1) {
       header = (
-        <h1 className="question-label household-data-q-underline">
-          <SubHeaderWrapper>
-            <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
-          </SubHeaderWrapper>
+        <h1 className="sub-header household-data-q-underline">
+          <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
         </h1>
       );
     } else {
       header = (
-        <h1 className="question-label household-data-q-underline">
-          <SubHeaderWrapper>
-            <FormattedMessage
-              id="questions.householdData"
-              defaultMessage="Tell us about the next person in your household."
-            />
-          </SubHeaderWrapper>
+        <h1 className="sub-header household-data-q-underline">
+          <FormattedMessage
+            id="questions.householdData"
+            defaultMessage="Tell us about the next person in your household."
+          />
         </h1>
       );
     }
@@ -342,9 +332,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <>
         <h2 className="question-label">
-          <SubHeaderWrapper>
-            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-          </SubHeaderWrapper>
+          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </h2>
         <p className="question-description">
           <FormattedMessage
@@ -375,9 +363,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <>
         <h2 className="question-label radio-question">
-          <SubHeaderWrapper>
-            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-          </SubHeaderWrapper>
+          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </h2>
         <p className="question-description">
           <FormattedMessage

@@ -72,12 +72,10 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
   return (
     <>
       <h2 className="question-label radio-question">
-        <SubHeaderWrapper>
-          <FormattedMessage
-            id={renderReturnStmtIdOrDefaultMsg(page)[0]}
-            defaultMessage={renderReturnStmtIdOrDefaultMsg(page)[1]}
-          />
-        </SubHeaderWrapper>
+        <FormattedMessage
+          id={renderReturnStmtIdOrDefaultMsg(page)[0]}
+          defaultMessage={renderReturnStmtIdOrDefaultMsg(page)[1]}
+        />
       </h2>
       <p className="question-description">
         <FormattedMessage
