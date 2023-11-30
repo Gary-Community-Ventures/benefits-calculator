@@ -4,6 +4,7 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { getStepNumber } from '../../Assets/stepDirectory.ts';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 
 type Props = {
   navFunction: () => void;
@@ -26,8 +27,13 @@ const PreviousButton = ({ navFunction }: Props) => {
   const navigationFunction = navFunction ?? defaultNavigate;
 
   return (
-    <Button className="nav-btn back-button" onClick={navigationFunction}>
-      <FormattedMessage id="previousButton" defaultMessage="< Back" />
+    <Button
+      variant="outlined"
+      className="nav-btn back-button"
+      onClick={navigationFunction}
+      startIcon={<NavigateBeforeIcon sx={{ mr: '-8px' }} />}
+    >
+      <FormattedMessage id="previousButton" defaultMessage="Back" />
     </Button>
   );
 };

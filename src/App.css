@@ -41,14 +41,17 @@
   font-family: 'Open Sans';
   color: #41528c;
   background-color: transparent;
-  font-weight: 700;
+  font-weight: bold;
+  border: none;
 }
 
 .nav-btn.back-button:hover,
 .back-continue-buttons .back-button:hover,
 .prev-continue-results-buttons .back-button:hover,
 .prev-save-continue-buttons .back-button:hover {
-  background-color: transparent;
+  background-color: #ecdeed;
+  border: none;
+  border-radius: 12px;
 }
 
 .nav-btn.continue-button,
@@ -60,7 +63,7 @@
   color: #ffffff;
   border: 1px solid #000000;
   border-radius: 12px;
-  font-weight: 700;
+  font-weight: bold;
 }
 
 .nav-btn.continue-button:hover,
