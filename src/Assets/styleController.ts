@@ -9,6 +9,9 @@ export interface ITheme {
     '--confirmation-background': string;
     '--main-max-width': string;
     'font-size': string;
+    '--main-header-color': string;
+    '--secondary-header-color': string;
+    '--black-paragraph-color': string;
   };
 }
 
@@ -27,6 +30,9 @@ const themes: IThemes = {
       '--confirmation-background': '#D3F2F0',
       '--main-max-width': '1310px',
       'font-size': '16px',
+      '--main-header-color': '#B85A27',
+      '--secondary-header-color': '#293457',
+      '--black-paragraph-color': "#000000",
     },
   },
   twoOneOne: {
@@ -38,6 +44,9 @@ const themes: IThemes = {
       '--confirmation-background': '#D4E7F2',
       '--main-max-width': '1310px',
       'font-size': '18px',
+      '--main-header-color': '#B85A27',
+      '--secondary-header-color': '#293457',
+      '--black-paragraph-color': "#000000",
     },
   },
 };

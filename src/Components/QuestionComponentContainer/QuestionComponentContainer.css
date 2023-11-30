@@ -24,7 +24,7 @@ h6 {
 
 p {
   font-family: 'Open Sans', sans-serif;
-  color: #000000;
+  color: var(--black-paragraph-color);
 }
 
 .question-header-container {
@@ -34,7 +34,7 @@ p {
 .question-header {
   font-family: 'Roboto Slab', serif;
   font-weight: bold;
-  color: #b85a27;
+  color: var(--main-header-color);
 }
 
 .question-secondary-header {
@@ -42,7 +42,7 @@ p {
   font-family: 'Roboto Slab', serif;
   font-weight: bold;
   text-transform: uppercase;
-  color: #293457;
+  color: var(--secondary-header-color);
 }
 
 .question-label {
