@@ -33,8 +33,8 @@ const IncomeQuestion = ({
   currentIncomeSource,
   allIncomeSources,
   setAllIncomeSources,
-  householdData,
-  setHouseholdData,
+  memberData,
+  setMemberData,
   index,
   page,
   submitted,
@@ -347,8 +347,8 @@ const IncomeQuestion = ({
     const updatedSelectedMenuItems = allIncomeSources.filter((incomeSourceData, index) => index !== selectedIndex);
     setAllIncomeSources(updatedSelectedMenuItems);
 
-    setHouseholdData({
-      ...householdData,
+    setMemberData({
+      ...memberData,
       incomeStreams: updatedSelectedMenuItems,
     });
   };

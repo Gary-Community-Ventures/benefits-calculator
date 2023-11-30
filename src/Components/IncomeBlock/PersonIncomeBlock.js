@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import IncomeQuestion from './IncomeQuestion';
 import './IncomeBlock.css';
 
-const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted }) => {
+const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those
   //first by assigning them to the initial selectedMenuItem state
   //if not then create the initial income block questions
   const [selectedMenuItem, setSelectedMenuItem] = useState(
-    householdData.incomeStreams.length > 0
-      ? householdData.incomeStreams
+    memberData.incomeStreams.length > 0
+      ? memberData.incomeStreams
       : [
           {
             incomeStreamName: '',
@@ -22,7 +22,7 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
   );
 
   useEffect(() => {
-    setHouseholdData({ ...householdData, incomeStreams: selectedMenuItem });
+    setMemberData({ ...memberData, incomeStreams: selectedMenuItem });
   }, [selectedMenuItem]);
 
   const createIncomeBlockQuestions = () => {
@@ -32,8 +32,8 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
           currentIncomeSource={incomeSourceData}
           allIncomeSources={selectedMenuItem}
           setAllIncomeSources={setSelectedMenuItem}
-          householdData={householdData}
-          setHouseholdData={setHouseholdData}
+          memberData={memberData}
+          setMemberData={setMemberData}
           index={index}
           page={page}
           submitted={submitted}

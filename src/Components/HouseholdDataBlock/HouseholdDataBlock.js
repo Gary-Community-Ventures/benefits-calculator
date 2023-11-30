@@ -37,7 +37,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   };
   const [submittedCount, setSubmittedCount] = useState(0);
 
-  const initialHouseholdData = formData.householdData[page - 1] ?? {
+  const initialMemberData = formData.householdData[page - 1] ?? {
     age: '',
     relationshipToHH: page === 1 ? 'headOfHousehold' : '',
     student: false,
@@ -60,7 +60,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     },
   };
 
-  const [householdData, setHouseholdData] = useState(initialHouseholdData);
+  const [memberData, setMemberData] = useState(initialMemberData);
   const [wasSubmitted, setWasSubmitted] = useState(false);
 
   useEffect(() => {
@@ -68,14 +68,14 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   }, [wasSubmitted]);
 
   useEffect(() => {
-    const updatedHouseholdData = { ...householdData };
+    const updatedMemberData = { ...memberData };
 
-    if (updatedHouseholdData.hasIncome === false) {
-      updatedHouseholdData.incomeStreams = [];
+    if (updatedMemberData.hasIncome === false) {
+      updatedMemberData.incomeStreams = [];
     }
 
-    setHouseholdData(updatedHouseholdData);
-  }, [householdData.hasIncome]);
+    setMemberData(updatedMemberData);
+  }, [memberData.hasIncome]);
 
   useEffect(() => {
     const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
@@ -103,7 +103,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     const ageTextfieldProps = {
       inputType: 'text',
       inputName: 'age',
-      inputValue: householdData.age,
+      inputValue: memberData.age,
       inputLabel: createFMInputLabel(personIndex),
       inputError: householdMemberAgeHasError,
       inputHelperText: displayHouseholdMemberAgeHelperText,
@@ -146,7 +146,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       <Textfield
         componentDetails={componentInputProps}
         submitted={submittedCount}
-        data={householdData}
+        data={memberData}
         handleTextfieldChange={handleTextfieldChange}
       />
     );
@@ -157,7 +157,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
 
     if (numberUpToEightDigitsLongRegex.test(value)) {
-      setHouseholdData({ ...householdData, age: value });
+      setMemberData({ ...memberData, age: value });
     }
   };
 
@@ -300,22 +300,30 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       <DropdownMenu
         componentDetails={createDropdownCompProps()}
         options={relationshipOptions}
-        setHouseholdData={setHouseholdData}
-        householdData={householdData}
+        setMemberData={setMemberData}
+        memberData={memberData}
         submitted={submittedCount}
       />
     );
   };
 
   const createConditionsCheckboxMenu = (index) => {
-    return (
-      <CheckboxGroup
-        options={conditionOptions}
-        householdData={householdData}
-        setHouseholdData={setHouseholdData}
-        index={index}
-      />
-    );
+
+    // return (
+    //   <CheckboxGroup
+    //     options={conditionOptions}
+    //     memberData={memberData}
+    //     setMemberData={setMemberData}
+    //     index={index}
+    //   />
+    // );
+    console.log(memberData)
+    // return (
+    //   <OptionCardGroup2
+    //     options={conditionOptions}
+    //     householdMemberData={}
+    //   />
+    // )
   };
 
   const createConditionsQuestion = (index) => {
@@ -346,7 +354,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     const radiofieldProps = {
       ariaLabel: 'householdDataBlock.createIncomeRadioQuestion-ariaLabel',
       inputName: 'hasIncome',
-      value: householdData.hasIncome,
+      value: memberData.hasIncome,
     };
 
     const formattedMsgId =
@@ -370,8 +378,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         </p>
         <HHDataRadiofield
           componentDetails={radiofieldProps}
-          setHouseholdData={setHouseholdData}
-          householdData={householdData}
+          memberData={memberData}
+          setMemberData={setMemberData}
         />
       </>
     );
@@ -381,8 +389,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <>
         <PersonIncomeBlock
-          householdData={householdData}
-          setHouseholdData={setHouseholdData}
+          memberData={memberData}
+          setMemberData={setMemberData}
           page={page}
           submitted={submitted}
         />
@@ -395,14 +403,14 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     event.preventDefault();
     setSubmittedCount(submittedCount + 1);
 
-    const validPersonData = personDataIsValid(householdData);
+    const validPersonData = personDataIsValid(memberData);
     const lastHouseholdMember = page >= remainingHHMNumber;
 
     if (validPersonData && lastHouseholdMember) {
-      handleHouseholdDataSubmit(householdData, page - 1, uuid);
+      handleHouseholdDataSubmit(memberData, page - 1, uuid);
       navigate(`/${uuid}/step-${step + 1}`);
     } else if (validPersonData) {
-      handleHouseholdDataSubmit(householdData, page - 1, uuid);
+      handleHouseholdDataSubmit(memberData, page - 1, uuid);
       setPage(page + 1);
     } else if (!validPersonData) {
       setWasSubmitted(true);
@@ -436,14 +444,14 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       <div>
         {createQuestionHeader(page)}
         {createAgeQuestion(page)}
-        {page === 1 && displayHealthInsuranceQuestion(page, householdData, setHouseholdData)}
+        {page === 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
         {page !== 1 && createHOfHRelationQuestion()}
-        {page !== 1 && displayHealthInsuranceQuestion(page, householdData, setHouseholdData)}
+        {page !== 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
         {createConditionsQuestion(page)}
         <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}
         <p className="household-data-q-underline"></p>
-        {householdData.hasIncome && createPersonIncomeBlock(submittedCount)}
+        {memberData.hasIncome && createPersonIncomeBlock(submittedCount)}
         <div className="question-buttons">
           <PreviousButton navFunction={handlePreviousSubmit} />
           <ContinueButton handleContinueSubmit={handleContinueSubmit} />
