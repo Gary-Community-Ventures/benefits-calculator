@@ -33,11 +33,11 @@ const referrerData: ReferrerData = {
     cch: CCHMFBLogo,
   },
   logoAlt: {
-    default: 'My Friend Ben home page button',
-    bia: 'Benefits in Action and My Friend Ben home page button',
-    jeffcoHS: 'Jeffco Human Services and My Friend Ben home page button',
-    jeffcoHSCM: 'Jeffco Human Services and My Friend Ben home page button',
-    cch: 'Colorado Coalition for the Homeless and My Friend Ben home page button',
+    default: 'MyFriendBen home page button',
+    bia: 'Benefits in Action and MyFriendBen home page button',
+    jeffcoHS: 'Jeffco Human Services and MyFriendBen home page button',
+    jeffcoHSCM: 'Jeffco Human Services and MyFriendBen home page button',
+    cch: 'Colorado Coalition for the Homeless and MyFriendBen home page button',
   },
   logoClass: {
     default: 'logo',
