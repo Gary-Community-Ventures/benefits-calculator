@@ -22,6 +22,7 @@ export type TextFieldDetails = {
   inputLabel: FormattedMessageType;
   inputError: ValidationFunction<string>;
   inputHelperText: MessageFunction<string>;
+  dollarField?: boolean;
 };
 
 type BasicSelectOptions =

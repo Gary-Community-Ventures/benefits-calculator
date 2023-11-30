@@ -72,7 +72,7 @@ const questions: Record<QuestionName, Question> = {
     questionDescription: (
       <FormattedMessage
         id="questions.householdSize-description"
-        defaultMessage="This is usually family members who you both live and share important resources with like food and bills."
+        defaultMessage="This is usually family members whom you live with and share important resources with like food and bills."
       />
     ),
     componentDetails: {
@@ -149,6 +149,7 @@ const questions: Record<QuestionName, Question> = {
       inputLabel: <FormattedMessage id="questions.householdAssets-inputLabel" defaultMessage="Dollar Amount" />,
       inputError: householdAssetsHasError,
       inputHelperText: displayHouseholdAssetsHelperText,
+      dollarField: true,
     },
     headerType: 'aboutHousehold',
   },

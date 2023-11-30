@@ -78,7 +78,7 @@ const App = () => {
     } else if (pageTitleTags[stepString]) {
       document.title = pageTitleTags[stepString];
     } else {
-      document.title = 'My Friend Ben';
+      document.title = 'MyFriendBen';
     }
   }, [location]);
 

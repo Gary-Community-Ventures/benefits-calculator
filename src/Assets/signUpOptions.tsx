@@ -10,7 +10,7 @@ const signUpOptions = {
   sendOffers: (
     <FormattedMessage
       id="signUpOptions.sendOffers"
-      defaultMessage="Please notify me when there are paid opportunities to provide feedback on this screener."
+      defaultMessage="Please notify me when there are paid opportunities to provide feedback on MyFriendBen."
     />
   ),
 };

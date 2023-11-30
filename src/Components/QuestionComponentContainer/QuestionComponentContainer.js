@@ -220,7 +220,7 @@ const QuestionComponentContainer = ({
       default:
         return (
           <h1 className="sub-header">
-            <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us about your household." />
+            <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us where you live." />
           </h1>
         );
     }
