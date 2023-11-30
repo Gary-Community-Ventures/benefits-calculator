@@ -32,7 +32,7 @@ const themes: IThemes = {
       'font-size': '16px',
       '--main-header-color': '#B85A27',
       '--secondary-header-color': '#293457',
-      '--black-paragraph-color': "#000000",
+      '--black-paragraph-color': '#000000',
     },
   },
   twoOneOne: {
@@ -46,7 +46,7 @@ const themes: IThemes = {
       'font-size': '18px',
       '--main-header-color': '#B85A27',
       '--secondary-header-color': '#293457',
-      '--black-paragraph-color': "#000000",
+      '--black-paragraph-color': '#000000',
     },
   },
 };
