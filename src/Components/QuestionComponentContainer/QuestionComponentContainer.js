@@ -202,9 +202,11 @@ const QuestionComponentContainer = ({
         } else if (name === 'zipcode') {
           return (
             <>
-              <h2 className="question-secondary-header">Let&#39;s Get Started!</h2>
+              <h2 className="question-secondary-header">
+                <FormattedMessage id="qcc.tell-us-text" defaultMessage="Let's Get Started!" />
+              </h2>
               <h1 className="question-header">
-                <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />
+                <FormattedMessage id="qcc.tell-us-text" defaultMessage="Just one more question!" />
               </h1>
             </>
           );
