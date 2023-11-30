@@ -133,90 +133,86 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       <h1 className="sub-header">
         <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
       </h1>
-      <Card variant="outlined" sx={{ backgroundColor: theme.lightPurpleBackground }}>
-        <CardContent>
-          <Typography variant="body1">
-            <div className="main-paragraph">
+      <CardContent sx={{ backgroundColor: theme.lightLavenderBackground }}>
+        <Typography variant="body1">
+          <div className="main-paragraph">
+            <FormattedMessage
+              id="landingPage.body"
+              defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:"
+            />
+          </div>
+        </Typography>
+        <ul className="landing-page-list-container">
+          <li className="main-paragraph">
+            <FormattedMessage
+              id="landingPage.firstBulletItem"
+              defaultMessage="MyFriendBen only provides estimates of what you may qualify for. You should not rely on these estimates. You must confirm your final eligibility and benefit amount with the proper agency or other decision maker."
+            />
+          </li>
+          <li>
+            <p className="main-paragraph">
               <FormattedMessage
-                id="landingPage.body"
-                defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:"
+                id="landingPage.publicCharge"
+                defaultMessage="Some benefits are available to Non-U.S. citizens. Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits may affect their immigration status. For more information, please review the "
               />
-            </div>
-          </Typography>
-          <ul className="landing-page-list-container">
-            <li className="main-paragraph">
-              <FormattedMessage
-                id="landingPage.firstBulletItem"
-                defaultMessage="MyFriendBen only provides estimates of what you may qualify for. You should not rely on these estimates. You must confirm your final eligibility and benefit amount with the proper agency or other decision maker."
-              />
-            </li>
-            <li>
-              <p className="main-paragraph">
+              <a
+                style={{ color: theme.terraCottaColor }}
+                href="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => {
+                  dataLayerPush({
+                    event: 'public_charge',
+                    action: 'public charge link click',
+                  });
+                }}
+              >
                 <FormattedMessage
-                  id="landingPage.publicCharge"
-                  defaultMessage="Some benefits are available to Non-U.S. citizens. Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits may affect their immigration status. For more information, please review the "
+                  id="landingPage.publicChargeLink"
+                  defaultMessage="Colorado Department of Human Services Public Charge Rule"
                 />
-                <a
-                  style={{ color: '#B85A27' }}
-                  href="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => {
-                    dataLayerPush({
-                      event: 'public_charge',
-                      action: 'public charge link click',
-                    });
-                  }}
-                >
-                  <FormattedMessage
-                    id="landingPage.publicChargeLink"
-                    defaultMessage="Colorado Department of Human Services Public Charge Rule"
-                  />
-                </a>
-                .
-              </p>
-            </li>
-          </ul>
-        </CardContent>
-      </Card>
+              </a>
+              .
+            </p>
+          </li>
+        </ul>
+      </CardContent>
       <Box sx={{ mt: '.5rem' }}>
-        <Card variant="outlined">
-          <CardContent>
+        <CardContent>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={formData.agreeToTermsOfService}
+                onChange={handleCheckboxChange}
+                sx={privacyErrorController.showError ? { color: '#c6252b' } : {}}
+              />
+            }
+            label={createCheckboxLabel()}
+            value="agreeToTermsOfService"
+          />
+          {privacyErrorController.showError && privacyErrorController.message(null)}
+          <Box sx={{ mt: '.5rem' }}>
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={formData.agreeToTermsOfService}
+                  checked={formData.is13OrOlder}
                   onChange={handleCheckboxChange}
-                  sx={privacyErrorController.showError ? { color: '#c6252b' } : {}}
+                  sx={ageErrorController.showError ? { color: '#c6252b' } : {}}
                 />
               }
-              label={createCheckboxLabel()}
-              value="agreeToTermsOfService"
-            />
-            {privacyErrorController.showError && privacyErrorController.message(null)}
-            <Box sx={{ mt: '.5rem' }}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={formData.is13OrOlder}
-                    onChange={handleCheckboxChange}
-                    sx={ageErrorController.showError ? { color: '#c6252b' } : {}}
+              label={
+                <div className="main-paragraph">
+                  <FormattedMessage
+                    id="disclaimer-label-age"
+                    defaultMessage="I confirm I am 13 years of age or older."
                   />
-                }
-                label={
-                  <div className="main-paragraph">
-                    <FormattedMessage
-                      id="disclaimer-label-age"
-                      defaultMessage="I confirm I am 13 years of age or older."
-                    />
-                  </div>
-                }
-                value="is13OrOlder"
-              />
-            </Box>
-            {ageErrorController.showError && ageErrorController.message(null)}
-          </CardContent>
-        </Card>
+                </div>
+              }
+              value="is13OrOlder"
+            />
+          </Box>
+          {ageErrorController.showError && ageErrorController.message(null)}
+        </CardContent>
       </Box>
       <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
         <Box>

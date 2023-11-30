@@ -4,7 +4,8 @@ export interface ITheme {
   primaryColor: string;
   secondaryColor: string;
   terraCottaColor: string;
-  lightPurpleBackground: string;
+  lightLavenderBackground: string;
+  midBlueColor: string;
   cssVariables: {
     '--primary-color': string;
     '--secondary-color': string;
@@ -12,7 +13,8 @@ export interface ITheme {
     '--main-max-width': string;
     'font-size': string;
     '--main-header-color': string;
-    '--light-purple-background': string;
+    '--light-lavender-background': string;
+    '--midBlue-color': string;
   };
 }
 
@@ -26,7 +28,8 @@ const themes: IThemes = {
     primaryColor: '#037A93',
     secondaryColor: '#4ECDC4',
     terraCottaColor: '#B85A27',
-    lightPurpleBackground: '#FBF9FC',
+    lightLavenderBackground: '#FBF9FC',
+    midBlueColor: '#41528C',
     cssVariables: {
       '--primary-color': '#037A93',
       '--secondary-color': '4ECDC4',
@@ -34,14 +37,16 @@ const themes: IThemes = {
       '--main-max-width': '1310px',
       'font-size': '16px',
       '--main-header-color': '#B85A27',
-      '--light-purple-background': '#FBF9FC',
+      '--light-lavender-background': '#FBF9FC',
+      '--midBlue-color': '#41528C',
     },
   },
   twoOneOne: {
     primaryColor: '#005191',
     secondaryColor: '#539ED0',
     terraCottaColor: '#B85A27',
-    lightPurpleBackground: '#FBF9FC',
+    lightLavenderBackground: '#FBF9FC',
+    midBlueColor: '#41528C',
     cssVariables: {
       '--primary-color': '#005191',
       '--secondary-color': '#539ED0',
@@ -49,7 +54,8 @@ const themes: IThemes = {
       '--main-max-width': '1310px',
       'font-size': '18px',
       '--main-header-color': '#B85A27',
-      '--light-purple-background': '#FBF9FC',
+      '--light-lavender-background': '#FBF9FC',
+      '--midBlue-color': '#41528C',
     },
   },
 };
@@ -60,7 +66,7 @@ function generateMuiOverides(theme: ITheme) {
   const blueColor = theme.primaryColor;
   const greenColor = theme.secondaryColor;
   const blackColor = '#2A2B2A';
-  const midBlue = '#41528C'
+  const midBlue = theme.midBlueColor;
 
   return {
     palette: {
