@@ -26,7 +26,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     household_size: formData.householdSize === '' ? null : Number(formData.householdSize),
     household_members: householdMembers,
     expenses: expenses,
-    household_assets: formData.householdAssets,
+    household_assets: formData.householdAssets ?? 0,
     request_language_code: languageCode,
     has_benefits: formData.hasBenefits ?? 'preferNotToAnswer',
     has_acp: formData.benefits.acp,
