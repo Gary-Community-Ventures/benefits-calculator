@@ -149,8 +149,8 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
               defaultMessage="MyFriendBen only provides estimates of what you may qualify for. You should not rely on these estimates. You must confirm your final eligibility and benefit amount with the proper agency or other decision maker."
             />
           </li>
-          <li>
-            <p className="main-paragraph">
+          <li className="main-paragraph">
+            <div>
               <FormattedMessage
                 id="landingPage.publicCharge"
                 defaultMessage="Some benefits are available to Non-U.S. citizens. Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits may affect their immigration status. For more information, please review the "
@@ -173,7 +173,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
                 />
               </a>
               .
-            </p>
+            </div>
           </li>
         </ul>
       </CardContent>
