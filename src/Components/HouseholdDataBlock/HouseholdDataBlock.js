@@ -44,6 +44,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     pregnant: false,
     blindOrVisuallyImpaired: false,
     disabled: false,
+    longTermDisability: false,
     hasIncome: false,
     incomeStreams: [],
     healthInsurance: {
@@ -333,7 +334,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         <p className="question-description">
           <FormattedMessage
             id="householdDataBlock.createConditionsQuestion-pick"
-            defaultMessage="It's OK to pick more than one."
+            defaultMessage="Choose all that apply."
           />
         </p>
         {createConditionsCheckboxMenu(index)}

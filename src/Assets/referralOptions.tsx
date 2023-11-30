@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 const referralOptions = {
   '211co': '2-1-1 Colorado',
   cedp: 'Community Economic Defense Project (CEDP)',
+  cch: 'Colorado Coalition for the Homeless',
   jeffcoHS: 'Jeffco Human Services',
   jeffcoPP: 'Jeffco Prosperity Partners',
   bia: 'Benefits in Action',

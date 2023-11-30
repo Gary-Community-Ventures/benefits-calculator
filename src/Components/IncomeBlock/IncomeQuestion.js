@@ -275,6 +275,7 @@ const IncomeQuestion = ({
       inputName: 'incomeAmount',
       inputError: incomeStreamValueHasError,
       inputHelperText: displayIncomeStreamValueHelperText,
+      dollarField: true,
     };
 
     return (

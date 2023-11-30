@@ -15,12 +15,13 @@ import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/J
 import LoadingPage from './Components/LoadingPage/LoadingPage.tsx';
 import SelectLanguagePage from './Components/SelectLanguagePage/SelectLanguagePage.tsx';
 import { updateScreen, updateUser } from './Assets/updateScreen.ts';
-import { getStepDirectory, startingQuestionNumber, getStepNumber } from './Assets/stepDirectory';
+import { getStepDirectory, STARTING_QUESTION_NUMBER, getStepNumber } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
 import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx';
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
+import pageTitleTags from './Assets/pageTitleTags.ts';
 import './App.css';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
@@ -42,7 +43,7 @@ const App = () => {
     getReferrer,
   } = useContext(Context);
   const [totalSteps, setTotalSteps] = useState(
-    getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber,
+    getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER,
   );
   const [theme, setTheme] = useState(createTheme(styleOverride));
 
@@ -51,7 +52,7 @@ const App = () => {
   }, [getReferrer('theme')]);
 
   useEffect(() => {
-    setTotalSteps(getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber);
+    setTotalSteps(getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER);
   }, [formData.immutableReferrer]);
 
   useEffect(() => {
@@ -64,6 +65,22 @@ const App = () => {
       url: window.location.pathname + window.location.search,
     });
   }, [location.pathname]);
+
+  useEffect(() => {
+    const stepString = location.pathname.split('/').filter((string) => string.includes('step'))[0];
+    const isConfirmationPage = location.pathname.includes('confirm-information');
+    const isResultsPage = location.pathname.includes('results');
+
+    if (isConfirmationPage) {
+      document.title = pageTitleTags['confirm-information'];
+    } else if (isResultsPage) {
+      document.title = pageTitleTags['results'];
+    } else if (pageTitleTags[stepString]) {
+      document.title = pageTitleTags[stepString];
+    } else {
+      document.title = 'MyFriendBen';
+    }
+  }, [location]);
 
   useEffect(() => {
     const updatedFormData = { ...formData };

@@ -29,8 +29,8 @@ const FetchScreen = () => {
     if (!referrer) {
       referrer = '';
     } else if (!(referrer in referralOptions)) {
-      referrer = 'other';
       otherRefferer = referrer;
+      referrer = 'other';
     }
 
     const initialFormData: FormData = {
@@ -133,6 +133,7 @@ const FetchScreen = () => {
         pregnant: member.pregnant ?? false,
         blindOrVisuallyImpaired: member.visually_impaired ?? false,
         disabled: member.disabled ?? false,
+        longTermDisability: member.long_term_disability ?? false,
         hasIncome: member.has_income ?? false,
         incomeStreams: incomes,
         healthInsurance: member.insurance ?? initialHHMHealthInsurance,

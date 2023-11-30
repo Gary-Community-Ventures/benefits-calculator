@@ -15,7 +15,7 @@ import housingAndUtilities from '../../Assets/BenefitCategoryLists/categories/ho
 import transportationBenefits from '../../Assets/BenefitCategoryLists/categories/transportationBenefits';
 import healthCareBenefits from '../../Assets/BenefitCategoryLists/categories/healthCareBenefits';
 import taxCreditBenefits from '../../Assets/BenefitCategoryLists/categories/taxCreditBenefits';
-import { getStepDirectory, getStepNumber, startingQuestionNumber } from '../../Assets/stepDirectory';
+import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Grid from '@mui/material/Grid';
@@ -158,16 +158,16 @@ const Confirmation = () => {
   };
 
   const displayConditions = (userData) => {
-    const { student, pregnant, blindOrVisuallyImpaired, disabled } = userData;
+    const { student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability } = userData;
 
-    const iterableConditions = [student, pregnant, blindOrVisuallyImpaired, disabled];
+    const iterableConditions = [student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability];
 
     const hasAnyConditions = iterableConditions.some((condition) => condition === true);
 
     if (hasAnyConditions === false) {
       return <FormattedMessage id="confirmation.none" defaultMessage=" None" />;
     } else {
-      return getConditionsStringWithCommas(student, pregnant, blindOrVisuallyImpaired, disabled);
+      return getConditionsStringWithCommas(student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability);
     }
   };
 
@@ -175,7 +175,7 @@ const Confirmation = () => {
     return intl.formatMessage({ id: fMObj.id, defaultMessage: fMObj.defaultMessage });
   };
 
-  const getConditionsStringWithCommas = (student, pregnant, blindOrVisuallyImpaired, disabled) => {
+  const getConditionsStringWithCommas = (student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability) => {
     const conditions = [];
 
     if (student) {
@@ -210,6 +210,16 @@ const Confirmation = () => {
         getFormattedMessageString({
           id: 'confirmation.headOfHouseholdDataBlock-disabledText',
           defaultMessage: 'Disabled',
+        }),
+      );
+    }
+
+    if (longTermDisability) {
+      conditions.push(
+        getFormattedMessageString({
+          id: 'confirmation.longTermDisability',
+          defaultMessage:
+            'Has a medical or developmental condition that has lasted, or is expected to last, more than 12 months',
         }),
       );
     }
@@ -569,7 +579,7 @@ const Confirmation = () => {
   };
 
   const totalNumberOfQuestions = () => {
-    return getStepDirectory(formData.immutableReferrer).length + startingQuestionNumber;
+    return getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
   };
 
   const displayHealthInsurance = (hHMemberHealthInsurance) => {
@@ -604,7 +614,7 @@ const Confirmation = () => {
   return (
     <main className="benefits-form">
       <h1 className="sub-header">
-        <FormattedMessage id="confirmation.return-subheader" defaultMessage="Ok. Here's what we've got:" />
+        <FormattedMessage id="confirmation.return-subheader" defaultMessage="Is all of your information correct?" />
       </h1>
       <div className="confirmation-container">{displayAllFormData()}</div>
       <div className="prev-continue-results-buttons confirmation">

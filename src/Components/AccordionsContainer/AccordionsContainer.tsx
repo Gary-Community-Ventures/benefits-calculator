@@ -15,6 +15,10 @@ const AccordionsContainer = ({ componentDetails, submitted }: Props) => {
   const { formData } = useContext(Context);
   const [expanded, setExpanded] = useState<boolean | number>(false);
 
+  useEffect(() => {
+    setExpanded(0);
+  }, []);
+
   const errorController = useErrorController(componentDetails.inputError, componentDetails.inputHelperText);
 
   useEffect(() => {
