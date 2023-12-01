@@ -13,6 +13,13 @@ export type CitizenLabels =
   | 'otherHealthCareUnder19'
   | 'otherHealthCarePregnant';
 
+export const filterNestedMap = new Map<CitizenLabels, CitizenLabels[]>([
+  ['non_citizen', []],
+  ['green_card', ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5']],
+  ['refugee', []],
+  ['other', ['otherWithWorkPermission', 'otherHealthCareUnder19', 'otherHealthCarePregnant']],
+]);
+
 const citizenshipFilterFormControlLabels: Record<CitizenLabels, FormattedMessageType> = {
   non_citizen: (
     <FormattedMessage
@@ -62,10 +69,3 @@ const citizenshipFilterFormControlLabels: Record<CitizenLabels, FormattedMessage
 };
 
 export default citizenshipFilterFormControlLabels;
-
-export const filterNestedMap = new Map<CitizenLabels, CitizenLabels[]>([
-  ['non_citizen', []],
-  ['green_card', ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5']],
-  ['refugee', []],
-  ['other', ['otherWithWorkPermission', 'otherHealthCareUnder19', 'otherHealthCarePregnant']],
-]);
