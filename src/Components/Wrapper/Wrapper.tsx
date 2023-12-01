@@ -100,7 +100,11 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
       setTranslations(value);
     });
   }, []);
-  let defaultLanguage = (localStorage.getItem('language') ?? 'en-us') as Language;
+  const defaultLanguage = (localStorage.getItem('language') ?? 'en-us') as Language;
+
+  let userLanguage = navigator.language.toLowerCase() as Language;
+  userLanguage = languageOptions[userLanguage] ? userLanguage : defaultLanguage;
+
   const pathname = window.location.pathname;
 
   const [theme, setTheme, styleOverride] = useStyle('default');
@@ -108,11 +112,11 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const languages = Object.keys(languageOptions) as Language[];
   languages.forEach((lang: Language) => {
     if (pathname.includes(`/${lang}`)) {
-      defaultLanguage = lang;
+      userLanguage = lang;
     }
   });
 
-  const [locale, setLocale] = useState<Language>(defaultLanguage);
+  const [locale, setLocale] = useState<Language>(userLanguage);
   const [messages, setMessages] = useState({});
 
   useEffect(() => {
