@@ -96,7 +96,6 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
       <div className="prev-save-continue-buttons">
         <PreviousButton />
         <Button
-          className="continue-button"
           variant="contained"
           onClick={(event) => {
             handleSaveAndContinue(event);

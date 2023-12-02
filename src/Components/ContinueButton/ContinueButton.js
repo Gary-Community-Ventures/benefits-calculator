@@ -24,7 +24,6 @@ const ContinueButton = ({ handleContinueSubmit, errorController, inputName, ques
   return (
     <Button
       variant="contained"
-      className="nav-btn continue-button"
       onClick={(event) => {
         handleContinueSubmit(event, errorController, formData?.[inputName], stepNumberId, questionName, uuid);
       }}

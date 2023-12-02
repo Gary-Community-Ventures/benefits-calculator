@@ -48,6 +48,8 @@ function generateMuiOverides(theme: ITheme) {
   const blueColor = theme.primaryColor;
   const greenColor = theme.secondaryColor;
   const blackColor = '#2A2B2A';
+  const deepBlueColor = '#293457';
+  const lavenderColor = '#ECDEED';
 
   return {
     palette: {
@@ -62,9 +64,14 @@ function generateMuiOverides(theme: ITheme) {
           // Name of the slot
           root: {
             // Some CSS
-            backgroundColor: blueColor,
+            backgroundColor: deepBlueColor,
+            border: '1px solid black',
+            borderRadius: '12px',
+            fontWeight: 'bold',
+            fontFamily: 'Open Sans',
             ':hover': {
-              backgroundColor: greenColor,
+              backgroundColor: lavenderColor,
+              color: deepBlueColor,
             },
           },
         },

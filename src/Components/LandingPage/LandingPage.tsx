@@ -201,7 +201,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       </Box>
       <div className="back-continue-buttons">
         <PreviousButton navFunction={() => navigate(`/step-1${queryString}`)} />
-        <Button variant="contained" className="continue-button" onClick={handleContinue}>
+        <Button variant="contained" onClick={handleContinue}>
           <FormattedMessage id="continue-button" defaultMessage="Continue" />
         </Button>
       </div>
