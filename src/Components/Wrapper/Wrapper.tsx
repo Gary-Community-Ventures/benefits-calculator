@@ -100,10 +100,15 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
       setTranslations(value);
     });
   }, []);
-  const defaultLanguage = (localStorage.getItem('language') ?? 'en-us') as Language;
+  let defaultLanguage = localStorage.getItem('language') as Language;
 
-  let userLanguage = navigator.language.toLowerCase() as Language;
-  userLanguage = languageOptions[userLanguage] ? userLanguage : defaultLanguage;
+  const userLanguage = navigator.language.toLowerCase() as Language;
+
+  const verifyLanguage = (language: Language) => {
+    return Object.keys(languageOptions).some((lang) => language.slice(0, 2) === lang) ? language.slice(0, 2) : 'en-us';
+  };
+
+  defaultLanguage = defaultLanguage ? defaultLanguage : (verifyLanguage(userLanguage) as Language);
 
   const pathname = window.location.pathname;
 
@@ -112,11 +117,11 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const languages = Object.keys(languageOptions) as Language[];
   languages.forEach((lang: Language) => {
     if (pathname.includes(`/${lang}`)) {
-      userLanguage = lang;
+      defaultLanguage = lang;
     }
   });
 
-  const [locale, setLocale] = useState<Language>(userLanguage);
+  const [locale, setLocale] = useState<Language>(defaultLanguage);
   const [messages, setMessages] = useState({});
 
   useEffect(() => {
