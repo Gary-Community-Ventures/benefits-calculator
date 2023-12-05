@@ -5,9 +5,9 @@ import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import OptionCardGroup2 from '../OptionCardGroup/OptionCardGroup2.tsx';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
-import HealthInsuranceQ from '../HealthInsuranceQ/HealthInsuranceQ.tsx';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import relationshipOptions from '../../Assets/relationshipOptions';
+import healthInsuranceOptions from '../../Assets/healthInsuranceOptions.tsx';
 import conditionOptions from '../../Assets/conditionOptions';
 import {
   householdMemberAgeHasError,
@@ -40,11 +40,13 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const initialMemberData = formData.householdData[page - 1] ?? {
     age: '',
     relationshipToHH: page === 1 ? 'headOfHousehold' : '',
-    student: false,
-    pregnant: false,
-    blindOrVisuallyImpaired: false,
-    disabled: false,
-    longTermDisability: false,
+    conditions: {
+      student: false,
+      pregnant: false,
+      blindOrVisuallyImpaired: false,
+      disabled: false,
+      longTermDisability: false,
+    },
     hasIncome: false,
     incomeStreams: [],
     healthInsurance: {
