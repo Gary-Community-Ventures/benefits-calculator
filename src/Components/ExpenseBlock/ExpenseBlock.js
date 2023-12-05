@@ -11,6 +11,7 @@ import {
 } from '../../Assets/validationFunctions.tsx';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import './ExpenseBlock.css';
+import AddIcon from '@mui/icons-material/Add';
 
 const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   const { formData } = useContext(Context);
@@ -90,7 +91,11 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   return (
     <>
       {createExpenseBlockQuestions()}
-      <Button variant="contained" onClick={(event) => handleAddAdditionalExpenseSource(event)}>
+      <Button
+        variant="contained"
+        onClick={(event) => handleAddAdditionalExpenseSource(event)}
+        startIcon={<AddIcon sx={{ fontSize: 'medium !important', mr: '-8px' }} />}
+      >
         <FormattedMessage id="expenseBlock.return-addExpenseButton" defaultMessage="Add another expense" />
       </Button>
       <div className="prev-save-continue-buttons">

@@ -106,7 +106,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
 
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
     return (
-      <div className="bottom-border">
+      <div>
         <p className="question-label">
           <FormattedMessage
             id="expenseBlock.createExpenseAmountTextfield-questionLabel"
@@ -171,7 +171,10 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   );
 
   return (
-    <div key={index}>
+    <div
+      key={index}
+      style={{ backgroundColor: index >= 1 && index % 2 !== 0 ? 'var(--light-lavender-background)' : '' }}
+    >
       {index > 0 && (
         <div className="delete-button-container">
           <StyledDeleteButton className="delete-button" onClick={() => deleteExpenseBlock(index)} variant="contained">
