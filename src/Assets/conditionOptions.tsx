@@ -1,5 +1,9 @@
 import { FormattedMessage } from 'react-intl';
-import pregnant from './OptionCardIcons/pregnant.png';
+import student from './OptionCardIcons/Conditions/student.png';
+import pregnant from './OptionCardIcons/Conditions/pregnant.png';
+import blindOrVisuallyImpaired from './OptionCardIcons/Conditions/blindOrVisuallyImpaired.png';
+import disabled from './OptionCardIcons/Conditions/disabled.png';
+import longTermDisability from './OptionCardIcons/Conditions/longTermDisability.png';
 
 const conditionOptions = {
   you: {
@@ -10,7 +14,7 @@ const conditionOptions = {
           defaultMessage="Student at a college, university, or other post-secondary institution like a job-training program."
         />
       ),
-      image: pregnant,
+      image: student,
     },
     pregnant: {
       formattedMessage: <FormattedMessage id="conditionOptions.pregnant" defaultMessage="Pregnant" />,
@@ -20,7 +24,7 @@ const conditionOptions = {
       formattedMessage: (
         <FormattedMessage id="conditionOptions.blindOrVisuallyImpaired" defaultMessage="Blind or visually impaired" />
       ),
-      image: pregnant,
+      image: blindOrVisuallyImpaired,
     },
     disabled: {
       formattedMessage: (
@@ -29,7 +33,7 @@ const conditionOptions = {
           defaultMessage="Have any disabilities that make you unable to work now or in the future"
         />
       ),
-      image: pregnant,
+      image: disabled,
     },
     longTermDisability: {
       formattedMessage: (
@@ -38,7 +42,7 @@ const conditionOptions = {
           defaultMessage="Any medical or developmental condition that has lasted, or is expected to last, more than 12 months"
         />
       ),
-      image: pregnant,
+      image: longTermDisability,
     },
   },
   them: {
@@ -49,7 +53,7 @@ const conditionOptions = {
           defaultMessage="Student at a college, university, or other post-secondary institution like a job-training program."
         />
       ),
-      image: pregnant,
+      image: student,
     },
     pregnant: {
       formattedMessage: <FormattedMessage id="conditionOptions.pregnant" defaultMessage="Pregnant" />,
@@ -59,7 +63,7 @@ const conditionOptions = {
       formattedMessage: (
         <FormattedMessage id="conditionOptions.blindOrVisuallyImpaired" defaultMessage="Blind or visually impaired" />
       ),
-      image: pregnant,
+      image: blindOrVisuallyImpaired,
     },
     disabled: {
       formattedMessage: (
@@ -68,7 +72,7 @@ const conditionOptions = {
           defaultMessage="Have any disabilities that make them unable to work now or in the future"
         />
       ),
-      image: pregnant,
+      image: disabled,
     },
     longTermDisability: {
       formattedMessage: (
@@ -77,7 +81,7 @@ const conditionOptions = {
           defaultMessage="Any medical or developmental condition that has lasted, or is expected to last, more than 12 months"
         />
       ),
-      image: pregnant,
+      image: longTermDisability,
     },
   },
 };
