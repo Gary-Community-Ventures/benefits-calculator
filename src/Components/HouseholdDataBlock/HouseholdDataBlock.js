@@ -337,7 +337,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         <p className="question-description">
           <FormattedMessage
             id="householdDataBlock.createConditionsQuestion-pick"
-            defaultMessage="It's OK to pick more than one."
+            defaultMessage="Choose all that apply."
           />
         </p>
         {createConditionsCheckboxMenu(index)}

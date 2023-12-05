@@ -1,5 +1,4 @@
 import Radiofield from '../Radiofield/Radiofield';
-import IncomeBlock from '../IncomeBlock/IncomeBlock';
 import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import Textfield from '../Textfield/Textfield';
 import SignUp from '../SignUp/SignUp';
@@ -13,7 +12,6 @@ const FollowUpQuestions = ({
   formData,
   handleCheckboxChange,
   handleExpenseSourcesSubmit,
-  handleIncomeStreamsSubmit,
   handleTextfieldChange,
   handleRadioButtonChange,
 }) => {
@@ -26,13 +24,6 @@ const FollowUpQuestions = ({
         <div className="question-container" key={index}>
           <h2 className="question-label">{followUp.question}</h2>
           <Radiofield componentDetails={followUp.componentDetails} handleRadioButtonChange={handleRadioButtonChange} />
-        </div>
-      );
-    } else if (followUp.componentDetails.componentType === 'IncomeBlock') {
-      return (
-        <div className="question-container" key={index}>
-          <h2 className="question-label">{followUp.question}</h2>
-          <IncomeBlock handleIncomeStreamsSubmit={handleIncomeStreamsSubmit} />
         </div>
       );
     } else if (followUp.componentDetails.componentType === 'ExpenseBlock') {

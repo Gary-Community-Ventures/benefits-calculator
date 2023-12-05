@@ -33,7 +33,7 @@ const JeffcoLandingPage = ({ referrer }: Props) => {
   return (
     <main className="benefits-form">
       <Stack className="jeffco-content-container" gap={'2rem'}>
-        <img src={jeffcolandingpage} alt="jeffco and my friend ben logo" className="jeffco-landing-pg-logo" />
+        <img src={jeffcolandingpage} alt="jeffco and myfriendben logo" className="jeffco-landing-pg-logo" />
         <Typography className="jeffco-text">
           <FormattedMessage
             id="jeffcoLandingPage-text"

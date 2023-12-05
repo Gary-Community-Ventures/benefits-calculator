@@ -70,16 +70,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
 
   const setRenderValue = () => {
     const currentLocale = locale;
-    switch (currentLocale) {
-      case 'en-US':
-        return 'EN';
-      case 'es':
-        return 'ES';
-      case 'vi':
-        return 'VI';
-      default:
-        return 'EN';
-    }
+    return currentLocale.slice(0, 2).toLocaleUpperCase();
   };
 
   const create211Links = () => {
@@ -176,7 +167,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
         <AppBar position="sticky" id="nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
           <Box>
             <a href={`/step-1${queryString}`}>
-              <img src={twoOneOneMFBLogo} alt="211 and my friend ben logo" className="cobranded-logo" />
+              <img src={twoOneOneMFBLogo} alt="211 and myfriendben logo" className="cobranded-logo" />
             </a>
           </Box>
           <Stack direction="row">

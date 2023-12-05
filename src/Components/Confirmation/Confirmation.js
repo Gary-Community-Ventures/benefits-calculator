@@ -614,7 +614,7 @@ const Confirmation = () => {
   return (
     <main className="benefits-form">
       <h1 className="sub-header">
-        <FormattedMessage id="confirmation.return-subheader" defaultMessage="Ok. Here's what we've got:" />
+        <FormattedMessage id="confirmation.return-subheader" defaultMessage="Is all of your information correct?" />
       </h1>
       <div className="confirmation-container">{displayAllFormData()}</div>
       <div className="prev-continue-results-buttons confirmation">
