@@ -79,6 +79,7 @@ function generateMuiOverides(theme: ITheme) {
   const darkTerraCottaColor = theme.secondaryColor;
   const blackColor = '#2A2B2A';
   const midBlue = theme.midBlueColor;
+  const lavenderColor = '#ECDEED';
 
   return {
     palette: {
@@ -94,8 +95,13 @@ function generateMuiOverides(theme: ITheme) {
           root: {
             // Some CSS
             backgroundColor: deepBlueColor,
+            border: '1px solid black',
+            borderRadius: '12px',
+            fontWeight: 'bold',
+            fontFamily: 'Open Sans',
             ':hover': {
-              backgroundColor: darkTerraCottaColor,
+              backgroundColor: lavenderColor,
+              color: deepBlueColor,
             },
           },
         },

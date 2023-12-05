@@ -92,7 +92,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
     <>
       {createExpenseBlockQuestions()}
       <Button
-        variant="contained"
+        className="nav-btn back-button"
         onClick={(event) => handleAddAdditionalExpenseSource(event)}
         startIcon={<AddIcon sx={{ fontSize: 'medium !important', mr: '-8px' }} />}
       >
