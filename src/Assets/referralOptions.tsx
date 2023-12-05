@@ -10,6 +10,7 @@ const referralOptions = {
   mcoa: 'MCOA at Anschutz',
   villageExchange: 'Village Exchange',
   frca: 'Family Resource Center Association',
+  lsg: "Let's Get Set",
   testOrProspect: <FormattedMessage id="referralOptions.testOrProspect" defaultMessage="Test / Prospective Partner" />,
   searchEngine: <FormattedMessage id="referralOptions.searchEngine" defaultMessage="Google or other search engine" />,
   other: <FormattedMessage id="referralOptions.other" defaultMessage="Other" />,
