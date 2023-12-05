@@ -436,6 +436,28 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     );
   };
 
+  const displayHealthCareQuestion = (page) => {
+    if (page === 1) {
+      return (
+        <h2 className="question-label">
+          <FormattedMessage
+            id="questions.healthInsurance-you"
+            defaultMessage="Which type of health insurance do you have?"
+          />
+        </h2>
+      );
+    } else {
+      return (
+        <h2 className="question-label">
+          <FormattedMessage
+            id="questions.healthInsurance-they"
+            defaultMessage="What type of health insurance do they have?"
+          />
+        </h2>
+      );
+    }
+  };
+
   return (
     <main className="benefits-form">
       <div>
