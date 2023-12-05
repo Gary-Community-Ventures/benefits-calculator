@@ -1,6 +1,8 @@
 .option-card-image {
   display: flex;
   justify-content: center;
+  height: 40px;
+  width: 40px;
 }
 
 .unselected-option-card.MuiPaper-root {
