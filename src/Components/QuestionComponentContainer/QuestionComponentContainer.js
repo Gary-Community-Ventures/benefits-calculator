@@ -8,11 +8,11 @@ import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
-import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
+import OptionCardGroup from '../OptionCardGroup/OptionCardGroup.tsx';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
-import './QuestionComponentContainer.css';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
+import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -23,7 +23,7 @@ const QuestionComponentContainer = ({
   handleExpenseSourcesSubmit,
   handleCheckboxChange,
 }) => {
-  const { formData } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   let { id } = useParams();
   let matchingQuestion = getQuestion(+id, formData.immutableReferrer);
   const errorController = useErrorController(
@@ -70,9 +70,10 @@ const QuestionComponentContainer = ({
   const renderOptionCardGroup = (question) => {
     return (
       <OptionCardGroup
-        stateVariable={question.componentDetails.inputName}
-        errorController={errorController}
         options={matchingQuestion.componentDetails.options}
+        stateVariable={question.componentDetails.inputName}
+        memberData={formData}
+        setMemberData={setFormData}
       />
     );
   };
