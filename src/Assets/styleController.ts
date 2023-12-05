@@ -3,6 +3,8 @@ import { useState } from 'react';
 export interface ITheme {
   primaryColor: string;
   secondaryColor: string;
+  terraCottaColor: string;
+  midBlueColor: string;
   secondaryBackgroundColor: string;
   creamColor: string;
   cssVariables: {
@@ -13,6 +15,8 @@ export interface ITheme {
     '--cream-color': string;
     '--main-max-width': string;
     'font-size': string;
+    '--main-header-color': string;
+    '--midBlue-color': string;
   };
 }
 
@@ -27,6 +31,8 @@ const themes: IThemes = {
     secondaryColor: '#B85A27',
     secondaryBackgroundColor: '#FBF9FC',
     creamColor: '#F9EFE6',
+    terraCottaColor: '#B85A27',
+    midBlueColor: '#41528C',
     cssVariables: {
       '--primary-color': '#293457',
       '--secondary-color': '#B85A27',
@@ -35,11 +41,15 @@ const themes: IThemes = {
       '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '16px',
+      '--main-header-color': '#B85A27',
+      '--midBlue-color': '#41528C',
     },
   },
   twoOneOne: {
     primaryColor: '#005191',
     secondaryColor: '#539ED0',
+    terraCottaColor: '#B85A27',
+    midBlueColor: '#41528C',
     secondaryBackgroundColor: '#FBF9FC',
     creamColor: '#F9EFE6',
     cssVariables: {
@@ -50,6 +60,8 @@ const themes: IThemes = {
       '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '18px',
+      '--main-header-color': '#B85A27',
+      '--midBlue-color': '#41528C',
     },
   },
 };
@@ -60,6 +72,7 @@ function generateMuiOverides(theme: ITheme) {
   const deepBlueColor = theme.primaryColor;
   const darkTerraCottaColor = theme.secondaryColor;
   const blackColor = '#2A2B2A';
+  const midBlue = theme.midBlueColor;
 
   return {
     palette: {
@@ -92,7 +105,7 @@ function generateMuiOverides(theme: ITheme) {
         styleOverrides: {
           root: {
             '&.Mui-checked': {
-              color: deepBlueColor,
+              color: midBlue,
             },
           },
         },
