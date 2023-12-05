@@ -309,15 +309,15 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     );
   };
 
-  const createConditionOptionCards = (index) => {
-    const handleConditionCardClick = (conditionName, memberData, setMemberData) => {
-      const updatedCondition = !memberData[conditionName];
+  const handleOptionCardClick = (optionName, stateVariable, memberData, setMemberData) => {
+    const updatedOption = !memberData[stateVariable][optionName];
+    const updatedStateVariable = { ...memberData[stateVariable], [optionName]: updatedOption };
 
-      setMemberData({
-        ...memberData,
-        [conditionName]: updatedCondition,
-      });
-    };
+    setMemberData({
+      ...memberData,
+      [stateVariable]: updatedStateVariable,
+    });
+  };
 
     return (
       <OptionCardGroup2
