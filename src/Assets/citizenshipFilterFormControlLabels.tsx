@@ -1,4 +1,5 @@
 import { FormattedMessage } from 'react-intl';
+import { FormattedMessageType } from '../Types/Questions';
 
 export type CitizenLabels =
   | 'non_citizen'
@@ -7,9 +8,19 @@ export type CitizenLabels =
   | 'gc_5plus'
   | 'gc_18plus_no5'
   | 'gc_under18_no5'
-  | 'gc_under19_pregnant_no5';
+  | 'other'
+  | 'otherWithWorkPermission'
+  | 'otherHealthCareUnder19'
+  | 'otherHealthCarePregnant';
 
-const citizenshipFilterFormControlLabels = {
+export const filterNestedMap = new Map<CitizenLabels, CitizenLabels[]>([
+  ['non_citizen', []],
+  ['green_card', ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5']],
+  ['refugee', []],
+  ['other', ['otherWithWorkPermission', 'otherHealthCareUnder19', 'otherHealthCarePregnant']],
+]);
+
+const citizenshipFilterFormControlLabels: Record<CitizenLabels, FormattedMessageType> = {
   non_citizen: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-non_citizen"
@@ -30,16 +41,29 @@ const citizenshipFilterFormControlLabels = {
       defaultMessage="younger than 18 without a 5-year waiting period"
     />
   ),
-  gc_under19_pregnant_no5: (
-    <FormattedMessage
-      id="citizenshipFCtrlLabel-gc_under19_pregnant_no5"
-      defaultMessage="for health care benefits - younger than 19 or pregnant without a 5-year waiting period"
-    />
-  ),
   refugee: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-refugee"
       defaultMessage="Refugees or asylees (special rules or waiting periods may apply)"
+    />
+  ),
+  other: <FormattedMessage id="citizenshipFCtrlLabel-other" defaultMessage="Other lawfully present noncitizens" />,
+  otherWithWorkPermission: (
+    <FormattedMessage
+      id="citizenshipFCtrlLabel-other_work_permission"
+      defaultMessage="with permission to live or work in the U.S. (other rules may apply)"
+    />
+  ),
+  otherHealthCareUnder19: (
+    <FormattedMessage
+      id="citizenshipFCtrlLabel-other_health_care_under19"
+      defaultMessage="for health care benefits - younger than 19"
+    />
+  ),
+  otherHealthCarePregnant: (
+    <FormattedMessage
+      id="citizenshipFCtrlLabel-other_health_care_pregnant"
+      defaultMessage="for health care benefits - pregnant"
     />
   ),
 };

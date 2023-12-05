@@ -81,8 +81,11 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
     gc_5plus: false,
     gc_18plus_no5: false,
     gc_under18_no5: false,
-    gc_under19_pregnant_no5: false,
     refugee: false,
+    other: false,
+    otherWithWorkPermission: false,
+    otherHealthCareUnder19: false,
+    otherHealthCarePregnant: false,
   });
   const categoryState = useState('All Categories');
   const eligibilityState = useState('eligibleBenefits');
