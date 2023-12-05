@@ -319,13 +319,15 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     });
   };
 
+  const createConditionOptionCards = (index) => {
     return (
       <OptionCardGroup2
         options={index === 1 ? conditionOptions.you : conditionOptions.them}
+        stateVariable="conditions"
         memberData={memberData}
         setMemberData={setMemberData}
         hhMemberIndex={index}
-        handleCardClick={handleConditionCardClick}
+        handleCardClick={handleOptionCardClick}
       />
     );
   };
