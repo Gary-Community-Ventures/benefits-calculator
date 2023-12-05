@@ -12,19 +12,25 @@ interface OptionCardGroupProps {
   stateVariable: string;
   setMemberData: (householdMemberData: HouseholdData) => void;
   hhMemberIndex?: number;
-  handleCardClick: any; //change?
-  errorController?: ErrorController;
 }
-const OptionCardGroup2 = ({
+const OptionCardGroup = ({
   options,
   stateVariable,
   memberData,
   setMemberData,
   hhMemberIndex,
-  handleCardClick,
-  errorController,
 }: OptionCardGroupProps) => {
   const intl = useIntl();
+
+  const handleOptionCardClick = (optionName: string, stateVariable: string, memberData: HouseholdData, setMemberData: (householdMemberData: HouseholdData) => void) => {
+    const updatedOption = !memberData[stateVariable][optionName];
+    const updatedStateVariable = { ...memberData[stateVariable], [optionName]: updatedOption };
+
+    setMemberData({
+      ...memberData,
+      [stateVariable]: updatedStateVariable,
+    });
+  };
 
   const displayOptionCards = (options: any, stateVariable, memberData: HouseholdData, hhMemberIndex: number) => {
     const optionCards = Object.keys(options).map((key, index) => {
@@ -40,7 +46,7 @@ const OptionCardGroup2 = ({
           sx={{ width: '11.25rem' }}
           className="card-action-area"
           onClick={() => {
-            handleCardClick(optionKey, stateVariable, memberData, setMemberData);
+            handleOptionCardClick(optionKey, stateVariable, memberData, setMemberData);
           }}
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
@@ -69,4 +75,4 @@ const OptionCardGroup2 = ({
   return <Stack>{displayOptionCards(options, stateVariable, memberData, hhMemberIndex || 0)}</Stack>;
 };
 
-export default OptionCardGroup2;
+export default OptionCardGroup;
