@@ -1,13 +1,13 @@
 import { FormattedMessage } from 'react-intl';
-import bill from './OptionCardIcons/bill.png';
-import building from './OptionCardIcons/building.png';
-import padlock from './OptionCardIcons/padlock.png';
-import redX from './OptionCardIcons/redX.png';
-import teddyDoctor from './OptionCardIcons/teddyDoctor.png';
-import umbrella from './OptionCardIcons/umbrella.png';
-import dontKnow from './OptionCardIcons/dont_know.png';
-import emergencyMedicaid from './OptionCardIcons/emergency_medicaid.png';
-import familyPlanning from './OptionCardIcons/family_planning.png';
+import chp from './OptionCardIcons/HealthInsurance/chp.png';
+import dont_know from './OptionCardIcons/HealthInsurance/dont_know.png';
+import emergency_medicaid from './OptionCardIcons/HealthInsurance/emergency_medicaid.png';
+import employer from './OptionCardIcons/HealthInsurance/employer.png';
+import family_planning from './OptionCardIcons/HealthInsurance/family_planning.png';
+import medicaid from './OptionCardIcons/HealthInsurance/medicaid.png';
+import medicare from './OptionCardIcons/HealthInsurance/medicare.png';
+import none from './OptionCardIcons/HealthInsurance/none.png';
+import privateInsurance from './OptionCardIcons/HealthInsurance/privateInsurance.png';
 import { HealthInsurance } from '../Types/FormData';
 
 export type HealthInsuranceOptions = {
@@ -23,13 +23,13 @@ const healthInsuranceOptions: HealthInsuranceOptions = {
       formattedMessage: (
         <FormattedMessage id="healthInsuranceOptions.none-I" defaultMessage="I do not have health insurance" />
       ),
-      image: redX,
+      image: none,
     },
     employer: {
       formattedMessage: (
         <FormattedMessage id="healthInsuranceOptions.employer" defaultMessage="Employer-provided health insurance" />
       ),
-      image: building,
+      image: employer,
     },
     private: {
       formattedMessage: (
@@ -38,23 +38,23 @@ const healthInsuranceOptions: HealthInsuranceOptions = {
           defaultMessage="Private (non-employer) health insurance"
         />
       ),
-      image: padlock,
+      image: privateInsurance,
     },
     medicaid: {
       formattedMessage: (
         <FormattedMessage id="healthInsuranceOptions.medicaid" defaultMessage="Health First Colorado (Full Medicaid)" />
       ),
-      image: bill,
+      image: medicaid,
     },
     medicare: {
       formattedMessage: <FormattedMessage id="healthInsuranceOptions.medicare" defaultMessage="Medicare" />,
-      image: umbrella,
+      image: medicare,
     },
     chp: {
       formattedMessage: (
         <FormattedMessage id="healthInsuranceOptions.chp" defaultMessage="Child Health Plan Plus (CHP+)" />
       ),
-      image: teddyDoctor,
+      image: chp,
     },
     emergency_medicaid: {
       formattedMessage: (
@@ -63,7 +63,7 @@ const healthInsuranceOptions: HealthInsuranceOptions = {
           defaultMessage="Emergency Medicaid / Reproductive Health"
         />
       ),
-      image: emergencyMedicaid,
+      image: emergency_medicaid,
     },
     family_planning: {
       formattedMessage: (
@@ -72,11 +72,11 @@ const healthInsuranceOptions: HealthInsuranceOptions = {
           defaultMessage="Family Planning Limited Medicaid"
         />
       ),
-      image: familyPlanning,
+      image: family_planning,
     },
     dont_know: {
       formattedMessage: <FormattedMessage id="healthInsuranceOptions.dont_know" defaultMessage="Don't Know" />,
-      image: dontKnow,
+      image: dont_know,
     },
   },
   them: {
@@ -84,13 +84,13 @@ const healthInsuranceOptions: HealthInsuranceOptions = {
       formattedMessage: (
         <FormattedMessage id="healthInsuranceOptions.none-they" defaultMessage="They do not have health insurance" />
       ),
-      image: redX,
+      image: none,
     },
     employer: {
       formattedMessage: (
         <FormattedMessage id="healthInsuranceOptions.employer" defaultMessage="Employer-provided health insurance" />
       ),
-      image: building,
+      image: employer,
     },
     private: {
       formattedMessage: (
@@ -99,23 +99,23 @@ const healthInsuranceOptions: HealthInsuranceOptions = {
           defaultMessage="Private (non-employer) health insurance"
         />
       ),
-      image: padlock,
+      image: privateInsurance,
     },
     medicaid: {
       formattedMessage: (
         <FormattedMessage id="healthInsuranceOptions.medicaid" defaultMessage="Health First Colorado (Full Medicaid)" />
       ),
-      image: bill,
+      image: medicaid,
     },
     medicare: {
       formattedMessage: <FormattedMessage id="healthInsuranceOptions.medicare" defaultMessage="Medicare" />,
-      image: umbrella,
+      image: medicare,
     },
     chp: {
       formattedMessage: (
         <FormattedMessage id="healthInsuranceOptions.chp" defaultMessage="Child Health Plan Plus (CHP+)" />
       ),
-      image: teddyDoctor,
+      image: chp,
     },
     emergency_medicaid: {
       formattedMessage: (
@@ -124,7 +124,7 @@ const healthInsuranceOptions: HealthInsuranceOptions = {
           defaultMessage="Emergency Medicaid / Reproductive Health"
         />
       ),
-      image: emergencyMedicaid,
+      image: emergency_medicaid,
     },
     family_planning: {
       formattedMessage: (
@@ -133,11 +133,11 @@ const healthInsuranceOptions: HealthInsuranceOptions = {
           defaultMessage="Family Planning Limited Medicaid"
         />
       ),
-      image: familyPlanning,
+      image: family_planning,
     },
     dont_know: {
       formattedMessage: <FormattedMessage id="healthInsuranceOptions.dont_know" defaultMessage="Don't Know" />,
-      image: dontKnow,
+      image: dont_know,
     },
   },
 };
