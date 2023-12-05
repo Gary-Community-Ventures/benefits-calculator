@@ -7,7 +7,7 @@ import ContinueButton from '../ContinueButton/ContinueButton';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import HealthInsuranceError from '../HealthInsuranceError/HealthInsuranceError.tsx';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
-import OptionCardGroup2 from '../OptionCardGroup/OptionCardGroup2.tsx';
+import OptionCardGroup from '../OptionCardGroup/OptionCardGroup.tsx';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import Textfield from '../Textfield/Textfield';
@@ -310,25 +310,14 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     );
   };
 
-  const handleOptionCardClick = (optionName, stateVariable, memberData, setMemberData) => {
-    const updatedOption = !memberData[stateVariable][optionName];
-    const updatedStateVariable = { ...memberData[stateVariable], [optionName]: updatedOption };
-
-    setMemberData({
-      ...memberData,
-      [stateVariable]: updatedStateVariable,
-    });
-  };
-
   const createConditionOptionCards = (index) => {
     return (
-      <OptionCardGroup2
+      <OptionCardGroup
         options={index === 1 ? conditionOptions.you : conditionOptions.them}
         stateVariable="conditions"
         memberData={memberData}
         setMemberData={setMemberData}
         hhMemberIndex={index}
-        handleCardClick={handleOptionCardClick}
       />
     );
   };
@@ -429,13 +418,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         <Stack>
           {displayHealthCareQuestion(page)}
           {
-            <OptionCardGroup2
+            <OptionCardGroup
               options={page === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
               stateVariable="healthInsurance"
               memberData={hhMemberData}
               setMemberData={setHHMemberData}
               hhMemberIndex={page}
-              handleCardClick={handleOptionCardClick}
             />
           }
           {

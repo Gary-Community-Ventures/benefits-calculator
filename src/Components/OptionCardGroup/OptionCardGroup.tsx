@@ -1,16 +1,15 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack } from '@mui/material';
-import { ErrorController } from '../../Types/ErrorController';
-import { HouseholdData } from '../../Types/FormData';
+import { HouseholdData, FormData } from '../../Types/FormData';
 import { useIntl } from 'react-intl';
 import './OptionCardGroup.css';
 
 interface OptionCardGroupProps {
-  options: any; //change?
-  memberData: HouseholdData;
+  options: any;
+  memberData: HouseholdData | FormData;
   stateVariable: string;
-  setMemberData: (householdMemberData: HouseholdData) => void;
+  setMemberData: (householdMemberData: HouseholdData | FormData) => void;
   hhMemberIndex?: number;
 }
 const OptionCardGroup = ({
@@ -22,7 +21,7 @@ const OptionCardGroup = ({
 }: OptionCardGroupProps) => {
   const intl = useIntl();
 
-  const handleOptionCardClick = (optionName: string, stateVariable: string, memberData: HouseholdData, setMemberData: (householdMemberData: HouseholdData) => void) => {
+  const handleOptionCardClick = (optionName: string, stateVariable: string, memberData: HouseholdData | FormData, setMemberData: (householdMemberData: HouseholdData | FormData) => void) => {
     const updatedOption = !memberData[stateVariable][optionName];
     const updatedStateVariable = { ...memberData[stateVariable], [optionName]: updatedOption };
 
