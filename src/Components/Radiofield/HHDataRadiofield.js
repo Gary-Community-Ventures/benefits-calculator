@@ -7,7 +7,7 @@ const StyledFormControlLabel = styled(FormControlLabel)({
   marginLeft: -5,
 });
 
-const HHDataRadiofield = ({ componentDetails, memberData, setMemberData}) => {
+const HHDataRadiofield = ({ componentDetails, memberData, setMemberData }) => {
   const { ariaLabel, inputName, value } = componentDetails;
   const intl = useIntl();
   const translatedAriaLabel = intl.formatMessage({ id: ariaLabel, defaultMessage: inputName });
