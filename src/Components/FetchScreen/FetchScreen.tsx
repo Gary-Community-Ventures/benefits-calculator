@@ -129,7 +129,7 @@ const FetchScreen = () => {
       initialFormData.householdData.push({
         age: String(member.age) ?? '',
         relationshipToHH: member.relationship ? member.relationship : defaultRelationship,
-        conditions: { //should we refactor this on the backend as well and redo this like healthInsurance?
+        conditions: {
           student: member.student ?? false,
           pregnant: member.pregnant ?? false,
           blindOrVisuallyImpaired: member.visually_impaired ?? false,
