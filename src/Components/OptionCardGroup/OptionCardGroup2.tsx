@@ -9,6 +9,7 @@ import './OptionCardGroup.css';
 interface OptionCardGroupProps {
   options: any; //change?
   memberData: HouseholdData;
+  stateVariable: string;
   setMemberData: (householdMemberData: HouseholdData) => void;
   hhMemberIndex?: number;
   handleCardClick: any; //change?
@@ -16,6 +17,7 @@ interface OptionCardGroupProps {
 }
 const OptionCardGroup2 = ({
   options,
+  stateVariable,
   memberData,
   setMemberData,
   hhMemberIndex,
@@ -24,7 +26,7 @@ const OptionCardGroup2 = ({
 }: OptionCardGroupProps) => {
   const intl = useIntl();
 
-  const displayOptionCards = (options: any, memberData: HouseholdData, hhMemberIndex: number) => {
+  const displayOptionCards = (options: any, stateVariable, memberData: HouseholdData, hhMemberIndex: number) => {
     const optionCards = Object.keys(options).map((key, index) => {
       const optionKey = key as typeof options;
       let translatedAriaLabel = intl.formatMessage({
@@ -38,7 +40,7 @@ const OptionCardGroup2 = ({
           sx={{ width: '11.25rem' }}
           className="card-action-area"
           onClick={() => {
-            handleCardClick(optionKey, memberData, setMemberData);
+            handleCardClick(optionKey, stateVariable, memberData, setMemberData);
           }}
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
@@ -47,7 +49,7 @@ const OptionCardGroup2 = ({
           }}
         >
           <Card
-            className={memberData[optionKey] ? 'selected-option-card' : 'unselected-option-card'}
+            className={memberData[stateVariable][optionKey] ? 'selected-option-card' : 'unselected-option-card'}
             sx={{ width: '11.25rem', height: '11.25rem', display: 'grid', placeItems: 'center' }}
           >
             <div className="option-card-image">
@@ -64,7 +66,7 @@ const OptionCardGroup2 = ({
     return <div className="option-card-container">{optionCards}</div>;
   };
 
-  return <Stack>{displayOptionCards(options, memberData, hhMemberIndex || 0)}</Stack>;
+  return <Stack>{displayOptionCards(options, stateVariable, memberData, hhMemberIndex || 0)}</Stack>;
 };
 
 export default OptionCardGroup2;
