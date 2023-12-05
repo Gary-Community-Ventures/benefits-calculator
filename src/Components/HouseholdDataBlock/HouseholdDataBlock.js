@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Textfield from '../Textfield/Textfield';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
-import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
+import OptionCardGroup2 from '../OptionCardGroup/OptionCardGroup2.tsx';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import HealthInsuranceQ from '../HealthInsuranceQ/HealthInsuranceQ.tsx';
@@ -307,23 +307,25 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     );
   };
 
-  const createConditionsCheckboxMenu = (index) => {
+  const createConditionOptionCards = (index) => {
+    const handleConditionCardClick = (conditionName, memberData, setMemberData) => {
+      const updatedCondition = !memberData[conditionName];
 
-    // return (
-    //   <CheckboxGroup
-    //     options={conditionOptions}
-    //     memberData={memberData}
-    //     setMemberData={setMemberData}
-    //     index={index}
-    //   />
-    // );
-    console.log(memberData)
-    // return (
-    //   <OptionCardGroup2
-    //     options={conditionOptions}
-    //     householdMemberData={}
-    //   />
-    // )
+      setMemberData({
+        ...memberData,
+        [conditionName]: updatedCondition,
+      });
+    };
+
+    return (
+      <OptionCardGroup2
+        options={index === 1 ? conditionOptions.you : conditionOptions.them}
+        memberData={memberData}
+        setMemberData={setMemberData}
+        hhMemberIndex={index}
+        handleCardClick={handleConditionCardClick}
+      />
+    );
   };
 
   const createConditionsQuestion = (index) => {
@@ -345,7 +347,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             defaultMessage="Choose all that apply."
           />
         </p>
-        {createConditionsCheckboxMenu(index)}
+        {createConditionOptionCards(index)}
       </>
     );
   };
@@ -376,11 +378,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             defaultMessage="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
           />
         </p>
-        <HHDataRadiofield
-          componentDetails={radiofieldProps}
-          memberData={memberData}
-          setMemberData={setMemberData}
-        />
+        <HHDataRadiofield componentDetails={radiofieldProps} memberData={memberData} setMemberData={setMemberData} />
       </>
     );
   };
@@ -388,12 +386,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const createPersonIncomeBlock = (submitted) => {
     return (
       <>
-        <PersonIncomeBlock
-          memberData={memberData}
-          setMemberData={setMemberData}
-          page={page}
-          submitted={submitted}
-        />
+        <PersonIncomeBlock memberData={memberData} setMemberData={setMemberData} page={page} submitted={submitted} />
         <p className="household-data-q-underline"></p>
       </>
     );
