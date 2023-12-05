@@ -1,24 +1,24 @@
 import { FormattedMessage } from 'react-intl';
-import cart from './OptionCardIcons/cart.png';
-import diaper from './OptionCardIcons/diaper.png';
-import home from './OptionCardIcons/home.png';
-import chat from './OptionCardIcons/chat.png';
-import stroller from './OptionCardIcons/stroller.png';
-import pregnant from './OptionCardIcons/pregnant.png';
-import briefcase from './OptionCardIcons/briefcase.png';
-import dentistry from './OptionCardIcons/dentistry.png';
-import gavel from './OptionCardIcons/gavel.png';
+import baby_supplies from './OptionCardIcons/AcuteConditions/baby_supplies.png';
+import child_development from './OptionCardIcons/AcuteConditions/child_development.png';
+import dental_care from './OptionCardIcons/AcuteConditions/dental_care.png';
+import family_planning from './OptionCardIcons/AcuteConditions/family_planning.png';
+import food from './OptionCardIcons/AcuteConditions/food.png';
+import housing from './OptionCardIcons/AcuteConditions/housing.png';
+import job_resources from './OptionCardIcons/AcuteConditions/job_resources.png';
+import legal_services from './OptionCardIcons/AcuteConditions/legal_services.png';
+import support from './OptionCardIcons/AcuteConditions/support.png';
 
 const acuteConditionOptions = {
   food: {
     formattedMessage: <FormattedMessage id="acuteConditionOptions.food" defaultMessage="Food or groceries" />,
-    image: cart,
+    image: food,
   },
   babySupplies: {
     formattedMessage: (
       <FormattedMessage id="acuteConditionOptions.babySupplies" defaultMessage="Diapers and other baby supplies" />
     ),
-    image: diaper,
+    image: baby_supplies,
   },
   housing: {
     formattedMessage: (
@@ -27,7 +27,7 @@ const acuteConditionOptions = {
         defaultMessage="Help with managing your mortgage, rent, or utilities"
       />
     ),
-    image: home,
+    image: housing,
   },
   support: {
     formattedMessage: (
@@ -36,7 +36,7 @@ const acuteConditionOptions = {
         defaultMessage="A challenge you or your child would like to talk about"
       />
     ),
-    image: chat,
+    image: support,
   },
   childDevelopment: {
     formattedMessage: (
@@ -45,21 +45,21 @@ const acuteConditionOptions = {
         defaultMessage="Concern about your baby or toddler's development"
       />
     ),
-    image: stroller,
+    image: child_development,
   },
   familyPlanning: {
     formattedMessage: (
       <FormattedMessage id="acuteConditionOptions.familyPlanning" defaultMessage="Family planning or birth control" />
     ),
-    image: pregnant,
+    image: family_planning,
   },
   jobResources: {
     formattedMessage: <FormattedMessage id="acuteConditionOptions.jobResources" defaultMessage="Finding a job" />,
-    image: briefcase,
+    image: job_resources,
   },
   dentalCare: {
     formattedMessage: <FormattedMessage id="acuteConditionOptions.dentalCare" defaultMessage="Low-cost dental care" />,
-    image: dentistry,
+    image: dental_care,
   },
   legalServices: {
     formattedMessage: (
@@ -68,7 +68,7 @@ const acuteConditionOptions = {
         defaultMessage="Free or low-cost help with civil legal needs"
       />
     ),
-    image: gavel,
+    image: legal_services,
   },
 };
 
