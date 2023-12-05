@@ -1,11 +1,16 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Textfield from '../Textfield/Textfield';
-import DropdownMenu from '../DropdownMenu/DropdownMenu';
-import OptionCardGroup2 from '../OptionCardGroup/OptionCardGroup2.tsx';
-import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
-import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
+import { FormattedMessage } from 'react-intl';
+import { IconButton, Stack } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 import ContinueButton from '../ContinueButton/ContinueButton';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
+import HealthInsuranceError from '../HealthInsuranceError/HealthInsuranceError.tsx';
+import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
+import OptionCardGroup2 from '../OptionCardGroup/OptionCardGroup2.tsx';
+import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
+import PreviousButton from '../PreviousButton/PreviousButton';
+import Textfield from '../Textfield/Textfield';
 import relationshipOptions from '../../Assets/relationshipOptions';
 import healthInsuranceOptions from '../../Assets/healthInsuranceOptions.tsx';
 import conditionOptions from '../../Assets/conditionOptions';
@@ -16,12 +21,8 @@ import {
   selectHasError,
   relationTypeHelperText,
 } from '../../Assets/validationFunctions.tsx';
-import { FormattedMessage } from 'react-intl';
 import { getStepNumber } from '../../Assets/stepDirectory';
-import PreviousButton from '../PreviousButton/PreviousButton';
 import { Context } from '../Wrapper/Wrapper.tsx';
-import EditIcon from '@mui/icons-material/Edit';
-import { IconButton } from '@mui/material';
 import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
@@ -425,12 +426,26 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const displayHealthInsuranceQuestion = (page, hhMemberData, setHHMemberData) => {
     return (
       <>
-        <HealthInsuranceQ
-          hhMemberIndex={page}
-          householdMemberData={hhMemberData}
-          setHouseholdMemberData={setHHMemberData}
-          submitted={submittedCount}
-        />
+        <Stack>
+          {displayHealthCareQuestion(page)}
+          {
+            <OptionCardGroup2
+              options={page === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
+              stateVariable="healthInsurance"
+              memberData={hhMemberData}
+              setMemberData={setHHMemberData}
+              hhMemberIndex={page}
+              handleCardClick={handleOptionCardClick}
+            />
+          }
+          {
+            <HealthInsuranceError
+              hhMemberInsurance={memberData.healthInsurance}
+              submitted={submittedCount}
+              hhMemberIndex={page}
+            />
+          }
+        </Stack>
         <p className="household-data-q-underline"></p>
       </>
     );
