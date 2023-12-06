@@ -133,7 +133,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       <h1 className="sub-header">
         <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
       </h1>
-      <CardContent sx={{ backgroundColor: theme.lightLavenderBackground }}>
+      <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }}>
         <Typography variant="body1">
           <div className="main-paragraph">
             <FormattedMessage
