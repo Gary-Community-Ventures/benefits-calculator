@@ -4,9 +4,9 @@
 }
 
 .checkmark {
-  height: 25px;
-  width: 25px;
-  margin-top: -25px;
+  height: 1.75rem;
+  width: 1.75rem;
+  margin: -2.25rem 0.5rem 0.5rem 0;
 }
 
 .unselected-option-card.MuiPaper-root {
@@ -55,4 +55,10 @@
   p.question-label {
     font-size: 1rem;
   }
+
+  .checkmark {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: -32px 0.5rem 0.5rem 0;
+}
 }
