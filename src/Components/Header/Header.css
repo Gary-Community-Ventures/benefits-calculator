@@ -42,9 +42,11 @@
 
 #select-language {
   padding: 0;
-  margin-left: 1.5rem;
+  margin-left: 0.25rem;
+  margin-right: 1.5rem;
   color: white;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 #select-language:focus-visible {
