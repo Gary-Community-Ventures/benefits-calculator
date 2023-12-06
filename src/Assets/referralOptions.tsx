@@ -12,6 +12,8 @@ const referralOptions = {
   frca: 'Family Resource Center Association',
   testOrProspect: <FormattedMessage id="referralOptions.testOrProspect" defaultMessage="Test / Prospective Partner" />,
   searchEngine: <FormattedMessage id="referralOptions.searchEngine" defaultMessage="Google or other search engine" />,
+  mail: <FormattedMessage id="referralOptions.mail" defaultMessage="Mail" />,
+  tv: <FormattedMessage id="referralOptions.tv" defaultMessage="TV" />,
   other: <FormattedMessage id="referralOptions.other" defaultMessage="Other" />,
 };
 
