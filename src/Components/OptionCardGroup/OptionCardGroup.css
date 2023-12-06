@@ -11,12 +11,10 @@
 
 .unselected-option-card.MuiPaper-root {
   background-color: #FFFFFF;
-  box-shadow: 0px 1px 5px 0px #00000040;
 }
 
 .selected-option-card.MuiPaper-root {
   background-color: #293457;
-  box-shadow: 0px 1px 5px 0px #6D6E71;
   color: #FFFFFF;
 }
 
