@@ -59,7 +59,7 @@ const OptionCardGroup = ({
             sx={{ display: 'flex', flexDirection: 'column', border: '.05px solid #6D6E71', height: '15rem' }}
           >
             <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>
-              <CardContent sx={{ textAlign: 'center', padding: '.15rem' }}>
+              <CardContent sx={{ textAlign: 'center' }}>
                 <img src={options[optionKey].image} alt={translatedAriaLabel} className="option-card-image" />
                 <Typography>{translatedAriaLabel}</Typography>
               </CardContent>
