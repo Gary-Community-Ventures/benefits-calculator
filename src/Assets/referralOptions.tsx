@@ -7,7 +7,6 @@ const referralOptions = {
   jeffcoHS: 'Jeffco Human Services',
   jeffcoPP: 'Jeffco Prosperity Partners',
   bia: 'Benefits in Action',
-  mcoa: 'MCOA at Anschutz',
   villageExchange: 'Village Exchange',
   frca: 'Family Resource Center Association',
   testOrProspect: <FormattedMessage id="referralOptions.testOrProspect" defaultMessage="Test / Prospective Partner" />,
