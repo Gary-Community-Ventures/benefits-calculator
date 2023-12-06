@@ -90,3 +90,7 @@
   font-family: 'Roboto Slab', sans-serif;
   color: #293457;
 }
+
+.question-background-color {
+  background-color: var(--secondary-background-color);
+}

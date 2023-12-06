@@ -171,10 +171,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   );
 
   return (
-    <div
-      key={index}
-      style={{ backgroundColor: index >= 1 && index % 2 !== 0 ? 'var(--light-lavender-background)' : '' }}
-    >
+    <div key={index} className={index % 2 === 0 ? 'question-background-color' : ''}>
       {index > 0 && (
         <div className="delete-button-container">
           <StyledDeleteButton className="delete-button" onClick={() => deleteExpenseBlock(index)} variant="contained">

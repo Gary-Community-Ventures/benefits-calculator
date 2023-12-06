@@ -29,7 +29,7 @@ const FollowUpQuestions = ({
     } else if (followUp.componentDetails.componentType === 'ExpenseBlock') {
       return (
         <div className="question-container" key={index}>
-          <h2 className="question-label">{followUp.question}</h2>
+          <h2 className="question-label question-background-color">{followUp.question}</h2>
           <ExpenseBlock handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} />
         </div>
       );
