@@ -43,7 +43,7 @@ const OptionCardGroup = ({
       return (
         <CardActionArea
           key={hhMemberIndex + 'key' + index}
-          sx={{ width: '12rem' }}
+          sx={{ width: '15rem' }}
           className="card-action-area"
           onClick={() => {
             handleOptionCardClick(optionKey, stateVariable, memberData, setMemberData);
@@ -56,7 +56,7 @@ const OptionCardGroup = ({
         >
           <Card
             className={memberData[stateVariable][optionKey] ? 'selected-option-card' : 'unselected-option-card'}
-            sx={{ display: 'flex', flexDirection: 'column', border: '.05px solid #6D6E71', height: '14rem' }}
+            sx={{ display: 'flex', flexDirection: 'column', border: '.05px solid #6D6E71', height: '15rem' }}
           >
             <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>
               <CardContent sx={{ textAlign: 'center', padding: '.15rem' }}>
