@@ -11,7 +11,7 @@ const conditionOptions = {
       formattedMessage: (
         <FormattedMessage
           id="conditionOptions.student"
-          defaultMessage="Student at a college, university, or other post-secondary institution like a job-training program."
+          defaultMessage="Student at a college, university, or other post-secondary institution like a job-training program"
         />
       ),
       image: student,
@@ -50,7 +50,7 @@ const conditionOptions = {
       formattedMessage: (
         <FormattedMessage
           id="conditionOptions.student"
-          defaultMessage="Student at a college, university, or other post-secondary institution like a job-training program."
+          defaultMessage="Student at a college, university, or other post-secondary institution like a job-training program"
         />
       ),
       image: student,
