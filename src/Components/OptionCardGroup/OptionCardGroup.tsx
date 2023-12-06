@@ -1,8 +1,9 @@
+import { useIntl } from 'react-intl';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack } from '@mui/material';
 import { HouseholdData, FormData } from '../../Types/FormData';
-import { useIntl } from 'react-intl';
+import checkmark from '../../Assets/OptionCardIcons/checkmark.png';
 import './OptionCardGroup.css';
 
 interface OptionCardGroupProps {
@@ -42,7 +43,7 @@ const OptionCardGroup = ({
       return (
         <CardActionArea
           key={hhMemberIndex + 'key' + index}
-          sx={{ width: '11.25rem' }}
+          sx={{ width: '12rem' }}
           className="card-action-area"
           onClick={() => {
             handleOptionCardClick(optionKey, stateVariable, memberData, setMemberData);
@@ -55,8 +56,14 @@ const OptionCardGroup = ({
         >
           <Card
             className={memberData[stateVariable][optionKey] ? 'selected-option-card' : 'unselected-option-card'}
-            sx={{ width: '11.25rem', height: '11.25rem', display: 'grid', placeItems: 'center' }}
+            sx={{ display: 'flex', flexDirection: 'column', border: '.05px solid #6D6E71', height: '14rem' }}
           >
+            <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>
+              <CardContent sx={{ textAlign: 'center', padding: '.15rem' }}>
+                <img src={options[optionKey].image} alt={translatedAriaLabel} className="option-card-image" />
+                <Typography>{translatedAriaLabel}</Typography>
+              </CardContent>
+            </Stack>
             {memberData[stateVariable][optionKey] && (
               <Stack direction="row" justifyContent="flex-end" alignItems="flex-end">
                 <img src={checkmark} alt="checked" className="checkmark" />
@@ -67,7 +74,7 @@ const OptionCardGroup = ({
       );
     });
 
-    return <div className="option-card-container">{optionCards}</div>;
+    return <div className="option-cards-container">{optionCards}</div>;
   };
 
   return <Stack>{displayOptionCards(options, stateVariable, memberData, hhMemberIndex || 0)}</Stack>;
