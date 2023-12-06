@@ -57,12 +57,11 @@ const OptionCardGroup = ({
             className={memberData[stateVariable][optionKey] ? 'selected-option-card' : 'unselected-option-card'}
             sx={{ width: '11.25rem', height: '11.25rem', display: 'grid', placeItems: 'center' }}
           >
-            <div className="option-card-image">
-              <img src={options[optionKey].image} alt={translatedAriaLabel} />
-            </div>
-            <CardContent sx={{ textAlign: 'center', padding: '.35rem' }}>
-              <Typography>{translatedAriaLabel}</Typography>
-            </CardContent>
+            {memberData[stateVariable][optionKey] && (
+              <Stack direction="row" justifyContent="flex-end" alignItems="flex-end">
+                <img src={checkmark} alt="checked" className="checkmark" />
+              </Stack>
+            )}
           </Card>
         </CardActionArea>
       );
