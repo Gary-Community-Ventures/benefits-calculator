@@ -94,7 +94,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
       <Button
         className="nav-btn back-button"
         onClick={(event) => handleAddAdditionalExpenseSource(event)}
-        startIcon={<AddIcon sx={{ fontSize: 'medium !important', mr: '-8px' }} />}
+        startIcon={<AddIcon sx={{ fontSize: 'medium !important', mr: '-0.5rem' }} />}
       >
         <FormattedMessage id="expenseBlock.return-addExpenseButton" defaultMessage="Add another expense" />
       </Button>

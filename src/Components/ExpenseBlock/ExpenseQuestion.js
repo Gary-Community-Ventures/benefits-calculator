@@ -15,6 +15,7 @@ import Textfield from '../Textfield/Textfield';
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
   maxWidth: '100%',
+  backgroundColor: 'white',
 });
 
 const StyledDeleteButton = styled(Button)({
