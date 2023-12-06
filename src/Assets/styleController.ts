@@ -6,7 +6,6 @@ export interface ITheme {
   terraCottaColor: string;
   midBlueColor: string;
   secondaryBackgroundColor: string;
-  lightLavenderBackground: string;
   creamColor: string;
   cssVariables: {
     '--primary-color': string;
@@ -16,7 +15,6 @@ export interface ITheme {
     '--cream-color': string;
     '--main-max-width': string;
     'font-size': string;
-    '--light-lavender-background': string;
     '--main-header-color': string;
     '--midBlue-color': string;
   };
@@ -35,7 +33,6 @@ const themes: IThemes = {
     creamColor: '#F9EFE6',
     terraCottaColor: '#B85A27',
     midBlueColor: '#41528C',
-    lightLavenderBackground: '#FBF9FC',
     cssVariables: {
       '--primary-color': '#293457',
       '--secondary-color': '#B85A27',
@@ -45,7 +42,6 @@ const themes: IThemes = {
       '--main-max-width': '1310px',
       'font-size': '16px',
       '--main-header-color': '#B85A27',
-      '--light-lavender-background': '#FBF9FC',
       '--midBlue-color': '#41528C',
     },
   },
@@ -55,7 +51,6 @@ const themes: IThemes = {
     terraCottaColor: '#B85A27',
     midBlueColor: '#41528C',
     secondaryBackgroundColor: '#FBF9FC',
-    lightLavenderBackground: '#FBF9FC',
     creamColor: '#F9EFE6',
     cssVariables: {
       '--primary-color': '#005191',
@@ -65,7 +60,6 @@ const themes: IThemes = {
       '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '18px',
-      '--light-lavender-background': '#FBF9FC',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
     },
