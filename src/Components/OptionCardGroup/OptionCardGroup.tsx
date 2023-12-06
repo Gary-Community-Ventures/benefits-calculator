@@ -77,7 +77,7 @@ const OptionCardGroup = ({
     return <div className="option-cards-container">{optionCards}</div>;
   };
 
-  return <Stack>{displayOptionCards(options, stateVariable, memberData, hhMemberIndex || 0)}</Stack>;
+  return <Stack sx={{ alignItems:"center" }}>{displayOptionCards(options, stateVariable, memberData, hhMemberIndex || 0)}</Stack>;
 };
 
 export default OptionCardGroup;
