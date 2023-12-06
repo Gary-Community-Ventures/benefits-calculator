@@ -20,11 +20,11 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
 
   const progressBarStyles = {
     marginBottom: '5px',
-    backgroundColor: '#FBF9FC',
+    backgroundColor: theme.secondaryBackgroundColor,
     borderRadius: '500rem;',
     height: '1rem',
     '& .MuiLinearProgress-bar': {
-      background: '#D6743F',
+      background: theme.terraCottaColor,
       borderRadius: '500rem;',
     },
   };
