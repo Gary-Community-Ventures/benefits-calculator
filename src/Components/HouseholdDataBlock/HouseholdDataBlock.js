@@ -378,10 +378,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const createPersonIncomeBlock = (submitted) => {
     return (
-      <>
-        <PersonIncomeBlock memberData={memberData} setMemberData={setMemberData} page={page} submitted={submitted} />
-        <p className="household-data-q-underline"></p>
-      </>
+      <PersonIncomeBlock memberData={memberData} setMemberData={setMemberData} page={page} submitted={submitted} />
     );
   };
 
@@ -468,8 +465,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         {page !== 1 && createHOfHRelationQuestion()}
         {page !== 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
         {createConditionsQuestion(page)}
-        {createIncomeRadioQuestion(page)}
-        {memberData.hasIncome && createPersonIncomeBlock(submittedCount)}
+        <Box className='pink-background-container'>
+          <Stack sx={{ margin: '3rem 0 3rem 0', padding: '3rem 0 3rem 0' }} className="pink-background">
+            {createIncomeRadioQuestion(page)}
+            {memberData.hasIncome && createPersonIncomeBlock(submittedCount)}
+          </Stack>
+        </Box>
         <div className="question-buttons">
           <PreviousButton navFunction={handlePreviousSubmit} />
           <ContinueButton handleContinueSubmit={handleContinueSubmit} />
