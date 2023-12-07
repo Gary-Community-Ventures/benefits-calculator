@@ -159,7 +159,7 @@ const Confirmation = () => {
   };
 
   const displayConditions = (userData) => {
-    const { student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability } = userData;
+    const { student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability } = userData.conditions;
 
     const iterableConditions = [student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability];
 
