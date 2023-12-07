@@ -60,6 +60,11 @@ export interface HealthInsurance {
   family_planning: boolean;
 }
 
+export interface HealthInsuranceOptionsList {
+  you: HealthInsurance;
+  them: HealthInsurance;
+}
+
 export interface SignUpInfo {
   email: string;
   phone: string;

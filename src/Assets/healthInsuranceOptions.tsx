@@ -8,13 +8,15 @@ import medicaid from './OptionCardIcons/HealthInsurance/medicaid.png';
 import medicare from './OptionCardIcons/HealthInsurance/medicare.png';
 import none from './OptionCardIcons/HealthInsurance/none.png';
 import privateInsurance from './OptionCardIcons/HealthInsurance/privateInsurance.png';
-import { HealthInsurance } from '../Types/FormData';
+import { HealthInsuranceOptionsList, HealthInsurance } from '../Types/FormData';
 
 export type HealthInsuranceOptions = {
-  [Property in keyof HealthInsurance]: {
-    formattedMessage: JSX.Element;
-    image: string;
-  };
+  [Property in keyof HealthInsuranceOptionsList]: {
+    [Property in keyof HealthInsurance]: {
+      formattedMessage: JSX.Element;
+      image: string;
+    };
+  }
 };
 
 const healthInsuranceOptions: HealthInsuranceOptions = {
