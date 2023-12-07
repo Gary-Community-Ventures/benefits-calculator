@@ -10,12 +10,12 @@
 }
 
 .unselected-option-card.MuiPaper-root {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .selected-option-card.MuiPaper-root {
   background-color: #293457;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .option-cards-container {
@@ -57,8 +57,8 @@
   }
 
   .checkmark {
-  height: 1.5rem;
-  width: 1.5rem;
-  margin: -32px 0.5rem 0.5rem 0;
-}
+    height: 1.5rem;
+    width: 1.5rem;
+    margin: -32px 0.5rem 0.5rem 0;
+  }
 }

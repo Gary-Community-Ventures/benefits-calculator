@@ -22,7 +22,12 @@ const OptionCardGroup = ({
 }: OptionCardGroupProps) => {
   const intl = useIntl();
 
-  const handleOptionCardClick = (optionName: string, stateVariable: string, memberData: HouseholdData | FormData, setMemberData: (householdMemberData: HouseholdData | FormData) => void) => {
+  const handleOptionCardClick = (
+    optionName: string,
+    stateVariable: string,
+    memberData: HouseholdData | FormData,
+    setMemberData: (householdMemberData: HouseholdData | FormData) => void,
+  ) => {
     const updatedOption = !memberData[stateVariable][optionName];
     const updatedStateVariable = { ...memberData[stateVariable], [optionName]: updatedOption };
 
@@ -87,7 +92,11 @@ const OptionCardGroup = ({
     return <div className="option-cards-container">{optionCards}</div>;
   };
 
-  return <Stack sx={{ alignItems:"center" }}>{displayOptionCards(options, stateVariable, memberData, hhMemberIndex || 0)}</Stack>;
+  return (
+    <Stack sx={{ alignItems: 'center' }}>
+      {displayOptionCards(options, stateVariable, memberData, hhMemberIndex || 0)}
+    </Stack>
+  );
 };
 
 export default OptionCardGroup;
