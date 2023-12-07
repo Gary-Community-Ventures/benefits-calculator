@@ -7,6 +7,7 @@ export interface ITheme {
   midBlueColor: string;
   secondaryBackgroundColor: string;
   creamColor: string;
+  hoverColor: string,
   cssVariables: {
     '--primary-color': string;
     '--secondary-color': string;
@@ -33,6 +34,7 @@ const themes: IThemes = {
     creamColor: '#F9EFE6',
     terraCottaColor: '#B85A27',
     midBlueColor: '#41528C',
+    hoverColor: '#ECDEED',
     cssVariables: {
       '--primary-color': '#293457',
       '--secondary-color': '#B85A27',
@@ -52,6 +54,7 @@ const themes: IThemes = {
     midBlueColor: '#41528C',
     secondaryBackgroundColor: '#FBF9FC',
     creamColor: '#F9EFE6',
+    hoverColor: '#ECDEED',
     cssVariables: {
       '--primary-color': '#005191',
       '--secondary-color': '#539ED0',
@@ -73,7 +76,7 @@ function generateMuiOverides(theme: ITheme) {
   const darkTerraCottaColor = theme.secondaryColor;
   const blackColor = '#2A2B2A';
   const midBlue = theme.midBlueColor;
-  const lavenderColor = '#ECDEED';
+  const lavenderColor = theme.hoverColor;
 
   return {
     palette: {
