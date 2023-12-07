@@ -62,6 +62,7 @@ const Confirmation = () => {
 
     const householdMemberDataBlocks = householdData.map((personData, i) => {
       const { hasIncome, incomeStreams, healthInsurance } = personData;
+      const hhMemberIndex = Number(i + 1);
 
       return (
         <div key={i}>
@@ -94,7 +95,7 @@ const Confirmation = () => {
                 {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
                 {hasIncome === false && <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />}
               </article>
-              {displayHHMHealthInsuranceSection(healthInsurance)}
+              {displayHHMHealthInsuranceSection(healthInsurance, hhMemberIndex)}
             </Grid>
             <Grid item xs={2} display="flex" justifyContent="flex-end">
               <button
@@ -113,7 +114,7 @@ const Confirmation = () => {
     return householdMemberDataBlocks;
   };
 
-  const displayHHMHealthInsuranceSection = (hHMemberHealthInsurance) => {
+  const displayHHMHealthInsuranceSection = (hHMemberHealthInsurance, hhMemberIndex) => {
     return (
       <article className="section-p">
         <b>
@@ -122,7 +123,7 @@ const Confirmation = () => {
             defaultMessage="Health Insurance: "
           />{' '}
         </b>
-        {displayHealthInsurance(hHMemberHealthInsurance)}
+        {displayHealthInsurance(hHMemberHealthInsurance, hhMemberIndex)}
       </article>
     );
   };
@@ -582,15 +583,17 @@ const Confirmation = () => {
     return getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
   };
 
-  const displayHealthInsurance = (hHMemberHealthInsurance) => {
+  const displayHealthInsurance = (hHMemberHealthInsurance, hhMemberIndex) => {
     const selectedDontKnow = hHMemberHealthInsurance.dont_know === true;
     const selectedNone = hHMemberHealthInsurance.none === true;
     const allOtherSelectedOptions = Object.entries(hHMemberHealthInsurance).filter(
       (hHMemberInsEntry) => hHMemberInsEntry[1] === true,
     );
+    const youVsThemHealthInsuranceOptions =
+      hhMemberIndex === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them;
 
     const allOtherSelectedOptionsString = allOtherSelectedOptions.reduce((acc, filteredHHMInsEntry, index) => {
-      const formattedMessageProp = healthInsuranceOptions[filteredHHMInsEntry[0]].formattedMessage.props;
+      const formattedMessageProp = youVsThemHealthInsuranceOptions[filteredHHMInsEntry[0]].formattedMessage.props;
       const translatedAriaLabel = intl.formatMessage({ ...formattedMessageProp });
 
       if (allOtherSelectedOptions.length - 1 === index) {
@@ -603,9 +606,9 @@ const Confirmation = () => {
     }, '');
 
     if (selectedDontKnow) {
-      return <>{healthInsuranceOptions.dont_know.formattedMessage}</>;
+      return <>{youVsThemHealthInsuranceOptions.dont_know.formattedMessage}</>;
     } else if (selectedNone) {
-      return <>{healthInsuranceOptions.none.formattedMessage}</>;
+      return <>{youVsThemHealthInsuranceOptions.none.formattedMessage}</>;
     } else {
       return <>{allOtherSelectedOptionsString}</>;
     }
