@@ -32,6 +32,22 @@
   margin-top: 0.5rem;
 }
 
+.pink-background-container {
+  position: relative;
+}
+
+/* this will make background extend to the edges of the screen */
+.pink-background:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: -100vw;
+  width: 300vw;
+  background: var(--secondary-background-color);
+  z-index: -1;
+}
+
 @media (max-width: 600px) {
   .member-added-container {
     display: inline-block;

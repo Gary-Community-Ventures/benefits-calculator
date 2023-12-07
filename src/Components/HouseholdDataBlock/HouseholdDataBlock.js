@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { IconButton, Stack } from '@mui/material';
+import { Box, IconButton, Stack, Paper } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
@@ -114,7 +114,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     if (personIndex === 1) {
       return (
-        <>
+        <Box sx={{ margin: '1rem 0 1rem 0'}}>
           <h2 className="question-label">
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-how-headOfHH"
@@ -122,8 +122,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             />
           </h2>
           {createTextField(ageTextfieldProps, submittedCount)}
-          <p className="household-data-q-underline"></p>
-        </>
+        </Box>
       );
     } else {
       return (
@@ -138,7 +137,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             />
           </p>
           {createTextField(ageTextfieldProps, submittedCount)}
-          <p className="household-data-q-underline"></p>
         </>
       );
     }
@@ -174,7 +172,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           />
         </h2>
         {createRelationshipDropdownMenu()}
-        <p className="household-data-q-underline"></p>
       </>
     );
   };
@@ -243,13 +240,13 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     if (personIndex === 1) {
       header = (
-        <h1 className="question-label household-data-q-underline">
+        <h1 className="question-label">
           <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
         </h1>
       );
     } else {
       header = (
-        <h1 className="question-label household-data-q-underline">
+        <h1 className="question-label">
           <FormattedMessage
             id="questions.householdData"
             defaultMessage="Tell us about the next person in your household."
@@ -266,7 +263,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
               <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
             </h2>
             <div>{formData.householdData.map(createMembersAdded)}</div>
-            <div className="household-data-q-underline"></div>
           </>
         )}
       </>
@@ -414,8 +410,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const displayHealthInsuranceQuestion = (page, hhMemberData, setHHMemberData) => {
     return (
-      <>
-        <Stack>
+      <Box className='pink-background-container'>
+        <Stack sx={{ margin: '3rem 0 3rem 0', padding: '3rem 0 3rem 0' }} className="pink-background">
           {displayHealthCareQuestion(page)}
           {
             <OptionCardGroup
@@ -434,8 +430,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             />
           }
         </Stack>
-        <p className="household-data-q-underline"></p>
-      </>
+      </Box>
     );
   };
 
@@ -470,9 +465,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         {page !== 1 && createHOfHRelationQuestion()}
         {page !== 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
         {createConditionsQuestion(page)}
-        <p className="household-data-q-underline"></p>
         {createIncomeRadioQuestion(page)}
-        <p className="household-data-q-underline"></p>
         {memberData.hasIncome && createPersonIncomeBlock(submittedCount)}
         <div className="question-buttons">
           <PreviousButton navFunction={handlePreviousSubmit} />

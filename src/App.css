@@ -3,6 +3,10 @@
   margin: 0%;
 }
 
+body, html {
+  overflow-x: hidden;
+}
+
 .benefits-form {
   margin: 0 auto 20px auto;
   justify-content: center;
