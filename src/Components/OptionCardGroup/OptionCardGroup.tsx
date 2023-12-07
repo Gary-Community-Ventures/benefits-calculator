@@ -8,18 +8,27 @@ import './OptionCardGroup.css';
 
 interface OptionCardGroupProps {
   options: any;
-  memberData: HouseholdData | FormData;
-  stateVariable: string;
-  setMemberData: (householdMemberData: HouseholdData | FormData) => void;
+  memberData: FormData;
+  stateVariable: keyof FormData;
+  setMemberData: (f: FormData) => void;
   hhMemberIndex?: number;
 }
+
+interface MemberGroupProps {
+  options: any;
+  memberData: HouseholdData;
+  stateVariable: keyof HouseholdData;
+  setMemberData: (h: HouseholdData) => void;
+  hhMemberIndex: number;
+}
+
 const OptionCardGroup = ({
   options,
   stateVariable,
   memberData,
   setMemberData,
   hhMemberIndex,
-}: OptionCardGroupProps) => {
+}: OptionCardGroupProps | MemberGroupProps) => {
   const intl = useIntl();
 
   const handleOptionCardClick = (
