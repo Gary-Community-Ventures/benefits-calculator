@@ -24,6 +24,9 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 0,
   padding: 0,
   fontSize: '1.25rem',
+  marginRight: '1rem',
+  marginTop: '1rem',
+  marginBottom: '-0.5rem',
 });
 
 const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteExpenseBlock, index, submitted }) => {
@@ -172,7 +175,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   );
 
   return (
-    <div key={index} className={index % 2 === 0 ? 'question-background-color' : ''}>
+    <div key={index} className={index % 2 === 0 ? 'question-background-lavender' : 'question-background-white'}>
       {index > 0 && (
         <div className="delete-button-container">
           <StyledDeleteButton className="delete-button" onClick={() => deleteExpenseBlock(index)} variant="contained">

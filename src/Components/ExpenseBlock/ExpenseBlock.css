@@ -5,12 +5,11 @@
 
 .expense-block-textfield {
   margin-left: 8px;
+  padding-bottom: 1rem;
 }
 
 .delete-button.MuiButton-root {
   min-width: 0;
-  margin-top: 1rem;
-  margin-right: 1rem;
 }
 
 @media (max-width: 420px) {

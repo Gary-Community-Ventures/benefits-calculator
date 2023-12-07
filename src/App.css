@@ -91,6 +91,12 @@
   color: #293457;
 }
 
-.question-background-color {
+.question-background-lavender {
   background-color: var(--secondary-background-color);
+  padding-left: 1rem;
+}
+
+.question-background-white {
+  background-color: white;
+  padding-left: 1rem;
 }
