@@ -7,7 +7,7 @@ export interface ITheme {
   midBlueColor: string;
   secondaryBackgroundColor: string;
   creamColor: string;
-  hoverColor: string,
+  hoverColor: string;
   cssVariables: {
     '--primary-color': string;
     '--secondary-color': string;
