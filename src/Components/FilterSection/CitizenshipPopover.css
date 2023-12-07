@@ -1,3 +1,7 @@
 .MuiFormControlLabel-root.gc-subcitizen-indentation {
   margin-left: 1.25rem;
 }
+
+.MuiFormControlLabel-label {
+  padding: 0.5rem 0;
+}

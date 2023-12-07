@@ -15,6 +15,7 @@ import {
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import Textfield from '../Textfield/Textfield';
+import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper.tsx';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
@@ -72,9 +73,11 @@ const IncomeQuestion = ({
 
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <MenuItem value={menuItemKey} key={menuItemKey}>
-          {menuItemLabels[i]}
-        </MenuItem>
+        <SubHeaderWrapper key={menuItemKey}>
+          <MenuItem value={menuItemKey} key={menuItemKey}>
+            {menuItemLabels[i]}
+          </MenuItem>
+        </SubHeaderWrapper>
       );
     });
 
