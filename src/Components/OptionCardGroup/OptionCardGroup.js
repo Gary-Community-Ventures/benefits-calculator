@@ -2,25 +2,8 @@ import { useIntl } from 'react-intl';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack } from '@mui/material';
-import { HouseholdData, FormData } from '../../Types/FormData';
 import checkmark from '../../Assets/OptionCardIcons/checkmark.png';
 import './OptionCardGroup.css';
-
-interface OptionCardGroupProps {
-  options: any;
-  memberData: FormData;
-  stateVariable: keyof FormData;
-  setMemberData: (f: FormData) => void;
-  hhMemberIndex?: number;
-}
-
-interface MemberGroupProps {
-  options: any;
-  memberData: HouseholdData;
-  stateVariable: keyof HouseholdData;
-  setMemberData: (h: HouseholdData) => void;
-  hhMemberIndex: number;
-}
 
 const OptionCardGroup = ({
   options,
@@ -28,14 +11,14 @@ const OptionCardGroup = ({
   memberData,
   setMemberData,
   hhMemberIndex,
-}: OptionCardGroupProps | MemberGroupProps) => {
+}) => {
   const intl = useIntl();
 
   const handleOptionCardClick = (
-    optionName: string,
-    stateVariable: string,
-    memberData: HouseholdData | FormData,
-    setMemberData: (householdMemberData: HouseholdData | FormData) => void,
+    optionName,
+    stateVariable,
+    memberData,
+    setMemberData,
   ) => {
     const updatedOption = !memberData[stateVariable][optionName];
     const updatedStateVariable = { ...memberData[stateVariable], [optionName]: updatedOption };
@@ -46,9 +29,9 @@ const OptionCardGroup = ({
     });
   };
 
-  const displayOptionCards = (options: any, stateVariable, memberData: HouseholdData, hhMemberIndex: number) => {
+  const displayOptionCards = (options, stateVariable, memberData, hhMemberIndex) => {
     const optionCards = Object.keys(options).map((key, index) => {
-      const optionKey = key as typeof options;
+      const optionKey = key;
       let translatedAriaLabel = intl.formatMessage({
         id: options[optionKey].formattedMessage.props.id,
         defaultMessage: options[optionKey].formattedMessage.props.defaultMessage,

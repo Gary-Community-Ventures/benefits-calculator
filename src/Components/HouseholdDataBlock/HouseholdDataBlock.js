@@ -7,7 +7,7 @@ import ContinueButton from '../ContinueButton/ContinueButton';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import HealthInsuranceError from '../HealthInsuranceError/HealthInsuranceError.tsx';
 import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
-import OptionCardGroup from '../OptionCardGroup/OptionCardGroup.tsx';
+import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import Textfield from '../Textfield/Textfield';
