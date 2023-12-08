@@ -72,7 +72,7 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
     <>
       <div className="section-container">
         <Box className="section">
-          <h2 className="question-label radio-question">
+          <h2 className="question-label">
             <FormattedMessage
               id={renderReturnStmtIdOrDefaultMsg(page)[0]}
               defaultMessage={renderReturnStmtIdOrDefaultMsg(page)[1]}

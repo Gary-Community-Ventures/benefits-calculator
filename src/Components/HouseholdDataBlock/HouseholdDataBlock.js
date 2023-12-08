@@ -361,9 +361,9 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         : 'Does this individual in your household have significant income you have not already included?';
 
     return (
-      <Box className="section-container">
+      <Box className="section-container" sx={{ paddingTop: '3rem' }}>
         <Box className="section">
-          <h2 className="question-label radio-question">
+          <h2 className="question-label">
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
           </h2>
           <p className="question-description">
