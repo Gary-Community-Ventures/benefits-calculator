@@ -24,6 +24,7 @@
   align-items: baseline;
   width: fit-content;
   font-style: bold;
+  margin-top: 1rem;
 }
 
 .add-another-income-button.MuiButton-root:hover {
