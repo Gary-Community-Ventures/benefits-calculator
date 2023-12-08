@@ -16,7 +16,7 @@ export type HealthInsuranceOptions = {
       formattedMessage: JSX.Element;
       image: string;
     };
-  }
+  };
 };
 
 const healthInsuranceOptions: HealthInsuranceOptions = {

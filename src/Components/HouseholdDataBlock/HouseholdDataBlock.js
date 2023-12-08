@@ -361,18 +361,20 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         : 'Does this individual in your household have significant income you have not already included?';
 
     return (
-      <>
-        <h2 className="question-label radio-question">
-          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-        </h2>
-        <p className="question-description">
-          <FormattedMessage
-            id="householdDataBlock.createIncomeRadioQuestion-questionDescription"
-            defaultMessage="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
-          />
-        </p>
-        <HHDataRadiofield componentDetails={radiofieldProps} memberData={memberData} setMemberData={setMemberData} />
-      </>
+      <Box className="section-container">
+        <Box className="section">
+          <h2 className="question-label radio-question">
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          </h2>
+          <p className="question-description">
+            <FormattedMessage
+              id="householdDataBlock.createIncomeRadioQuestion-questionDescription"
+              defaultMessage="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
+            />
+          </p>
+          <HHDataRadiofield componentDetails={radiofieldProps} memberData={memberData} setMemberData={setMemberData} />
+        </Box>
+      </Box>
     );
   };
 
@@ -465,8 +467,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         {page !== 1 && createHOfHRelationQuestion()}
         {page !== 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
         {createConditionsQuestion(page)}
-        <Box className="section-container">
-          <Stack sx={{ margin: '3rem 0 3rem 0', padding: '3rem 0 3rem 0' }} className="section">
+        <Box>
+          <Stack sx={{ margin: '3rem 0 3rem 0', padding: '3rem 0 3rem 0' }}>
             {createIncomeRadioQuestion(page)}
             {memberData.hasIncome && createPersonIncomeBlock(submittedCount)}
           </Stack>

@@ -1,5 +1,5 @@
 import { FormattedMessage } from 'react-intl';
-import { Button } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import IncomeQuestion from './IncomeQuestion';
 import './IncomeBlock.css';
@@ -70,21 +70,29 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
 
   return (
     <>
-      <h2 className="question-label radio-question">
-        <FormattedMessage
-          id={renderReturnStmtIdOrDefaultMsg(page)[0]}
-          defaultMessage={renderReturnStmtIdOrDefaultMsg(page)[1]}
-        />
-      </h2>
-      <p className="question-description">
-        <FormattedMessage
-          id="personIncomeBlock.return-questionDescription"
-          defaultMessage="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
-        />
-      </p>
+      <div className="section-container">
+        <Box className="section">
+          <h2 className="question-label radio-question">
+            <FormattedMessage
+              id={renderReturnStmtIdOrDefaultMsg(page)[0]}
+              defaultMessage={renderReturnStmtIdOrDefaultMsg(page)[1]}
+            />
+          </h2>
+          <p className="question-description">
+            <FormattedMessage
+              id="personIncomeBlock.return-questionDescription"
+              defaultMessage="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
+            />
+          </p>
+        </Box>
+      </div>
       {createIncomeBlockQuestions()}
-      <Button variant="contained" onClick={(event) => handleAddAdditionalIncomeSource(event)}>
-        <FormattedMessage id="personIncomeBlock.return-addIncomeButton" defaultMessage="Add another income" />
+      <Button
+        variant="text"
+        onClick={(event) => handleAddAdditionalIncomeSource(event)}
+        className="add-another-income-button"
+      >
+        <FormattedMessage id="personIncomeBlock.return-addIncomeButton" defaultMessage="+ Add another income" />
       </Button>
     </>
   );

@@ -16,3 +16,20 @@
 .income-block-textfield {
   margin-left: 8px;
 }
+
+.add-another-income-button.MuiButton-root {
+  color: #41528c;
+  background-color: #ffffff;
+  font-size: 1.125rem;
+  align-items: baseline;
+  width: fit-content;
+  font-style: bold;
+}
+
+.add-another-income-button.MuiButton-root:hover {
+  background-color: #ecdeed;
+}
+
+.income-question-padding {
+  padding-top: 1em;
+}

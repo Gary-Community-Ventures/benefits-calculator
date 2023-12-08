@@ -5,21 +5,10 @@ import { CardActionArea, Typography, Stack } from '@mui/material';
 import checkmark from '../../Assets/OptionCardIcons/checkmark.png';
 import './OptionCardGroup.css';
 
-const OptionCardGroup = ({
-  options,
-  stateVariable,
-  memberData,
-  setMemberData,
-  hhMemberIndex,
-}) => {
+const OptionCardGroup = ({ options, stateVariable, memberData, setMemberData, hhMemberIndex }) => {
   const intl = useIntl();
 
-  const handleOptionCardClick = (
-    optionName,
-    stateVariable,
-    memberData,
-    setMemberData,
-  ) => {
+  const handleOptionCardClick = (optionName, stateVariable, memberData, setMemberData) => {
     const updatedOption = !memberData[stateVariable][optionName];
     const updatedStateVariable = { ...memberData[stateVariable], [optionName]: updatedOption };
 

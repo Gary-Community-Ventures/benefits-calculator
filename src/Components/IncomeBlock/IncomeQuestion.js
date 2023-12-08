@@ -28,6 +28,7 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 0,
   padding: 0,
   fontSize: '1.25rem',
+  position: 'absolute',
 });
 
 const IncomeQuestion = ({
@@ -109,6 +110,7 @@ const IncomeQuestion = ({
   };
 
   const handleIncomeStreamsSelectChange = (event, index) => {
+    console.log(`in here`);
     const updatedSelectedMenuItems = allIncomeSources.map((incomeSourceData, i) => {
       if (i === index) {
         return {
@@ -373,19 +375,21 @@ const IncomeQuestion = ({
   );
 
   return (
-    <div key={index}>
-      {index > 0 && (
-        <div className="delete-button-container">
-          <StyledDeleteButton variant="contained" onClick={() => deleteIncomeBlock(index)}>
-            &#215;
-          </StyledDeleteButton>
-        </div>
-      )}
-      {index > 0 && incomeStreamQuestion}
-      {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
-      {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
-      {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
-      {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+    <div key={index} className="section-container income-question-padding">
+      <div className={index % 2 === 0 ? 'section' : ''}>
+        {index > 0 && (
+          <div className="delete-button-container">
+            <StyledDeleteButton variant="contained" onClick={() => deleteIncomeBlock(index)}>
+              &#215;
+            </StyledDeleteButton>
+          </div>
+        )}
+        {index > 0 && incomeStreamQuestion}
+        {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
+        {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+        {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
+        {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+      </div>
     </div>
   );
 };
