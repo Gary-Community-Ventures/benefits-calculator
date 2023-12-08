@@ -20,6 +20,7 @@ import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper.tsx';
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
   maxWidth: '100%',
+  backgroundColor: 'white',
 });
 
 const StyledDeleteButton = styled(Button)({
@@ -161,6 +162,7 @@ const IncomeQuestion = ({
   };
 
   const createIncomeStreamsDropdownMenu = (incomeStreamName, index) => {
+    //error in here
     return (
       <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeStreamErrorController.showError}>
         <InputLabel id="income-type-label">
