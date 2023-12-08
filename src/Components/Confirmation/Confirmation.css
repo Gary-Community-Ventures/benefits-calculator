@@ -5,10 +5,27 @@
 }
 
 .confirmation-container {
-  background-color: var(--confirmation-background);
-  border-radius: 2rem;
   margin: 2rem 10% 2rem 10%;
+}
+
+.confirmation-container > div {
+  background-color: var(--secondary-background-color);
   padding: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.confirmation-icon {
+  width: 4.75rem;
+  display: block;
+}
+
+.edit-button {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 1.5rem;
+  transform: translate(50%, -50%);
 }
 
 .prev-continue-results-buttons.confirmation {
@@ -50,6 +67,14 @@
 @media (max-width: 630px) {
   .confirmation-container {
     margin: 0;
+  }
+
+  .confirmation-icon {
+    width: 100%;
+  }
+
+  .edit-button {
+    width: 1rem;
   }
 
   .MuiSvgIcon-root.home-icon {

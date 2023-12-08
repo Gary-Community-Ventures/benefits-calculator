@@ -19,16 +19,15 @@ import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../..
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Grid from '@mui/material/Grid';
-import EditIcon from '@mui/icons-material/Edit';
-import HomeIcon from '@mui/icons-material/Home';
-import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
-import ChecklistIcon from '@mui/icons-material/Checklist';
-import FoodBankIcon from '@mui/icons-material/FoodBank';
-import PeopleIcon from '@mui/icons-material/People';
-import PersonIcon from '@mui/icons-material/Person';
-import PaymentsIcon from '@mui/icons-material/Payments';
-import SavingsIcon from '@mui/icons-material/Savings';
-import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
+import EditIcon from '../../Assets/edit.png';
+import ResidenceIcon from '../../Assets/residence.png';
+import IndividualsIcon from '../../Assets/individuals.png';
+import IndividualIcon from '../../Assets/individual.png';
+import ExpensesIcon from '../../Assets/expenses.png';
+import ResourcesIcon from '../../Assets/resources.png';
+import BenefitsIcon from '../../Assets/benefits.png';
+import ImmediateNeedsIcon from '../../Assets/immediate-needs.png';
+import ReferralSourceIcon from '../../Assets/referral-source.png';
 import './Confirmation.css';
 
 const Confirmation = () => {
@@ -64,49 +63,46 @@ const Confirmation = () => {
       const { hasIncome, incomeStreams, healthInsurance } = personData;
 
       return (
-        <div key={i}>
-          <Grid container spacing={1}>
-            <Grid item xs={2}>
-              <PersonIcon className="home-icon" />
-            </Grid>
-            <Grid item xs={8}>
-              <p className="section-title">{allHouseholdRelations[i]}</p>
-              <article className="section-p">
-                <b>
-                  <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />
-                  {': '}
-                </b>
-                {allHouseholdAges[i]}
-              </article>
-              <article className="section-p">
-                <b>
-                  <FormattedMessage
-                    id="confirmation.headOfHouseholdDataBlock-conditionsText"
-                    defaultMessage="Conditions:"
-                  />{' '}
-                </b>
-                {displayConditions(personData)}
-              </article>
-              <article className="section-p">
-                <b>
-                  <FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />{' '}
-                </b>
-                {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
-                {hasIncome === false && <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />}
-              </article>
-              {displayHHMHealthInsuranceSection(healthInsurance)}
-            </Grid>
-            <Grid item xs={2} display="flex" justifyContent="flex-end">
-              <button
-                aria-label="edit household member"
-                onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`)}
-              >
-                <EditIcon className="edit-icon" />
-              </button>
-            </Grid>
+        <Grid container key={i} spacing={1}>
+          <Grid item xs={2}>
+            <img src={IndividualIcon} className="confirmation-icon" alt="individual-icon"></img>
           </Grid>
-          <p className="confirmation-section-underline"></p>
-        </div>
+          <Grid item xs={8}>
+            <p className="section-title">{allHouseholdRelations[i]}</p>
+            <article className="section-p">
+              <b>
+                <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />
+                {': '}
+              </b>
+              {allHouseholdAges[i]}
+            </article>
+            <article className="section-p">
+              <b>
+                <FormattedMessage
+                  id="confirmation.headOfHouseholdDataBlock-conditionsText"
+                  defaultMessage="Conditions:"
+                />{' '}
+              </b>
+              {displayConditions(personData)}
+            </article>
+            <article className="section-p">
+              <b>
+                <FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />{' '}
+              </b>
+              {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
+              {hasIncome === false && <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />}
+            </article>
+            {displayHHMHealthInsuranceSection(healthInsurance)}
+          </Grid>
+          <Grid item xs={2} display="flex" justifyContent="flex-end">
+            <button
+              aria-label="edit household member"
+              onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`)}
+            >
+              <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
+            </button>
+          </Grid>
+        </Grid>
       );
     });
 
@@ -133,7 +129,7 @@ const Confirmation = () => {
     return (
       <Grid container spacing={1}>
         <Grid item xs={2}>
-          <PaymentsIcon className="home-icon" />
+          <img src={ExpensesIcon} className="confirmation-icon" alt="expenses-icon"></img>
         </Grid>
         <Grid item xs={8}>
           <p className="section-title">
@@ -150,7 +146,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label="edit expenses" onClick={() => navigate(getQuestionUrl('hasExpenses'))}>
-            <EditIcon className="edit-icon" />
+            <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
           </button>
         </Grid>
       </Grid>
@@ -262,7 +258,7 @@ const Confirmation = () => {
     return (
       <Grid container spacing={1}>
         <Grid item xs={2}>
-          <PeopleIcon className="home-icon" />
+          <img src={IndividualsIcon} className="confirmation-icon" alt="residence-icon"></img>
         </Grid>
         <Grid item xs={8}>
           <p className="section-title">
@@ -281,7 +277,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label="edit household size" onClick={() => navigate(linkTo)}>
-            <EditIcon className="edit-icon" />
+            <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
           </button>
         </Grid>
       </Grid>
@@ -293,7 +289,7 @@ const Confirmation = () => {
     return (
       <Grid container spacing={1}>
         <Grid item xs={2}>
-          <SavingsIcon className="home-icon" />
+          <img src={ResourcesIcon} className="confirmation-icon" alt="resources-icon"></img>
         </Grid>
         <Grid item xs={8}>
           <p className="section-title">
@@ -303,7 +299,7 @@ const Confirmation = () => {
             />
           </p>
           <article className="section-p">
-            ${Number(householdAssets).toLocaleString(2)}
+            {`$${Number(householdAssets).toLocaleString(2)} `}
             <i>
               <FormattedMessage
                 id="confirmation.displayAllFormData-householdResourcesDescription"
@@ -314,7 +310,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label="edit household assets" onClick={() => navigate(getQuestionUrl('householdAssets'))}>
-            <EditIcon className="edit-icon" />
+            <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
           </button>
         </Grid>
       </Grid>
@@ -326,7 +322,7 @@ const Confirmation = () => {
     return (
       <Grid container spacing={1}>
         <Grid item xs={2}>
-          <HomeIcon className="home-icon" />
+          <img src={ResidenceIcon} className="confirmation-icon" alt="residence-icon"></img>
         </Grid>
         <Grid item xs={8}>
           <p className="section-title">
@@ -347,7 +343,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label="edit zipcode" onClick={() => navigate(getQuestionUrl('zipcode'))}>
-            <EditIcon className="edit-icon" />
+            <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
           </button>
         </Grid>
       </Grid>
@@ -365,10 +361,9 @@ const Confirmation = () => {
 
     return (
       <>
-        <p className="confirmation-section-underline"></p>
         <Grid container spacing={1}>
           <Grid item xs={2}>
-            <ConnectWithoutContactIcon className="home-icon flip-horizontally" />
+            <img src={ReferralSourceIcon} className="confirmation-icon" alt="referral-source-icon"></img>
           </Grid>
           <Grid item xs={8}>
             <p className="section-title">
@@ -381,7 +376,7 @@ const Confirmation = () => {
           </Grid>
           <Grid item xs={2} display="flex" justifyContent="flex-end">
             <button aria-label="edit referral source" onClick={() => navigate(getQuestionUrl('referralSource'))}>
-              <EditIcon className="edit-icon" />
+              <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
             </button>
           </Grid>
         </Grid>
@@ -410,31 +405,26 @@ const Confirmation = () => {
     return (
       <>
         {displayZipcodeSection()}
-        <p className="confirmation-section-underline"></p>
         {displayHouseholdSizeSection()}
-        <p className="confirmation-section-underline"></p>
         {displayAllMembersDataBlock()}
         {displayHouseholdExpenses()}
-        <p className="confirmation-section-underline"></p>
         {displayHouseholdAssetsSection()}
-        <p className="confirmation-section-underline"></p>
         {displayHHCheckboxSection(
           'benefits',
           'confirmation.displayAllFormData-currentHHBenefitsText',
           'Current Household Benefits:',
           getQuestionUrl('hasBenefits'),
           allBenefitsList,
-          <ChecklistIcon className="home-icon" />,
+          <img src={BenefitsIcon} className="confirmation-icon" alt="benefits-icon"></img>,
           'edit current benefits',
         )}
-        <p className="confirmation-section-underline"></p>
         {displayHHCheckboxSection(
           'acuteHHConditions',
           'confirmation.displayAllFormData-acuteHHConditions',
           'Immediate Needs',
           getQuestionUrl('acuteHHConditions'),
           refactorOptionsList(acuteConditionOptions),
-          <FoodBankIcon className="home-icon" />,
+          <img src={ImmediateNeedsIcon} className="confirmation-icon" alt="immediate-needs-icon"></img>,
         )}
         {displayReferralSourceSection()}
       </>
@@ -571,7 +561,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label={ariaLabel} onClick={() => navigate(linkTo)}>
-            <EditIcon className="edit-icon" />
+            <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
           </button>
         </Grid>
       </Grid>
