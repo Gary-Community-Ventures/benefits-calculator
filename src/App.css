@@ -3,9 +3,9 @@
   margin: 0%;
 }
 
-body,
-html {
+#root {
   overflow-x: hidden;
+  position: relative;
 }
 
 .benefits-form {
