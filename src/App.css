@@ -91,12 +91,18 @@
   color: #293457;
 }
 
-.question-background-lavender {
-  background-color: var(--secondary-background-color);
-  padding-left: 1rem;
+/* the following background classes are needed in order to extend the background to the edges of the screen */
+.section-container {
+  position: relative;
 }
 
-.question-background-white {
-  background-color: white;
-  padding-left: 1rem;
+.section:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: -100vw;
+  width: 300vw;
+  background: var(--secondary-background-color);
+  z-index: -1;
 }

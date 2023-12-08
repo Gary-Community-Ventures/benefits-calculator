@@ -1,6 +1,7 @@
 .question-label {
   font-size: 1.375rem;
   font-weight: 700;
+  margin-bottom: 8px;
   font-family: 'Roboto Slab', sans-serif;
   color: #293457;
 }

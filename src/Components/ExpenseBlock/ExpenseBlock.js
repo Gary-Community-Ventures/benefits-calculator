@@ -12,6 +12,8 @@ import {
 import PreviousButton from '../PreviousButton/PreviousButton';
 import './ExpenseBlock.css';
 import AddIcon from '@mui/icons-material/Add';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   const { formData } = useContext(Context);
@@ -55,15 +57,19 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   const createExpenseBlockQuestions = () => {
     return selectedMenuItem.map((expenseSourceData, index) => {
       return (
-        <ExpenseQuestion
-          expenseData={expenseSourceData}
-          allExpensesData={selectedMenuItem}
-          setAllExpenses={setSelectedMenuItem}
-          deleteExpenseBlock={deleteExpenseBlock}
-          index={index}
-          submitted={expensesErrorController.submittedCount}
-          key={index}
-        />
+        <Box key={index} className="section-container">
+          <Stack sx={{ paddingBottom: '1rem' }} className={index % 2 === 0 ? 'section' : ''}>
+            <ExpenseQuestion
+              expenseData={expenseSourceData}
+              allExpensesData={selectedMenuItem}
+              setAllExpenses={setSelectedMenuItem}
+              deleteExpenseBlock={deleteExpenseBlock}
+              index={index}
+              submitted={expensesErrorController.submittedCount}
+              key={index}
+            />
+          </Stack>
+        </Box>
       );
     });
   };
