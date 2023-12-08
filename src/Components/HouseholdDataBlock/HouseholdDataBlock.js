@@ -115,7 +115,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     if (personIndex === 1) {
       return (
-        <Box sx={{ margin: '1rem 0 1rem 0'}}>
+        <Box sx={{ margin: '1rem 0 1rem 0' }}>
           <h2 className="question-label">
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-how-headOfHH"
@@ -410,8 +410,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const displayHealthInsuranceQuestion = (page, hhMemberData, setHHMemberData) => {
     return (
-      <Box className='pink-background-container'>
-        <Stack sx={{ margin: '3rem 0 3rem 0', padding: '3rem 0 3rem 0' }} className="pink-background">
+      <Box className="section-container">
+        <Stack sx={{ margin: '3rem 0 3rem 0', padding: '3rem 0 3rem 0' }} className="section">
           {displayHealthCareQuestion(page)}
           {
             <OptionCardGroup
@@ -465,8 +465,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         {page !== 1 && createHOfHRelationQuestion()}
         {page !== 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
         {createConditionsQuestion(page)}
-        <Box className='pink-background-container'>
-          <Stack sx={{ margin: '3rem 0 3rem 0', padding: '3rem 0 3rem 0' }} className="pink-background">
+        <Box className="section-container">
+          <Stack sx={{ margin: '3rem 0 3rem 0', padding: '3rem 0 3rem 0' }} className="section">
             {createIncomeRadioQuestion(page)}
             {memberData.hasIncome && createPersonIncomeBlock(submittedCount)}
           </Stack>

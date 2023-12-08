@@ -95,12 +95,12 @@ body, html {
   color: #293457;
 }
 
-/* the following pink-background classes are needed in order to extend a pink background to the edges of the screen */
-.pink-background-container {
+/* the following background classes are needed in order to extend the background to the edges of the screen */
+.section-container {
   position: relative;
 }
 
-.pink-background:before {
+.section:before {
   content: '';
   position: absolute;
   height: 100%;
