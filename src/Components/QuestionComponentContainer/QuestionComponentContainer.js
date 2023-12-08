@@ -175,39 +175,11 @@ const QuestionComponentContainer = ({
   };
 
   const renderHeaderAndSubheader = () => {
-    if (matchingQuestion.headerType === 'signUpInfo') {
-      return (
-        <h1 className="sub-header">
-          <FormattedMessage
-            id="qcc.optional-sign-up-text"
-            defaultMessage="Optional: Sign up for benefits updates and/or paid feedback opportunities"
-          />
-        </h1>
-      );
-    } else if (matchingQuestion.headerType === 'aboutHousehold') {
-      if (matchingQuestion.name === 'hasBenefits' || matchingQuestion.name === 'acuteHHConditions') {
-        return (
-          <h1 className="sub-header">
-            <FormattedMessage
-              id="qcc.tell-us-final-text"
-              defaultMessage="Tell us some final information about your household."
-            />
-          </h1>
-        );
-      } else if (matchingQuestion.name === 'referralSource') {
-        return (
-          <h1 className="sub-header">
-            <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />
-          </h1>
-        );
-      } else {
-        return (
-          <h1 className="sub-header">
-            <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us where you live." />
-          </h1>
-        );
-      }
+    if (matchingQuestion.header === undefined) {
+      return <></>;
     }
+
+    return <h1 className="sub-header">{matchingQuestion.header}</h1>;
   };
 
   return (
