@@ -371,7 +371,7 @@ const IncomeQuestion = ({
   }
 
   const incomeStreamQuestion = (
-    <h2 className="question-label">
+    <h2 className="question-label income-stream-q-padding">
       <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
     </h2>
   );
