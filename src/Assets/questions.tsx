@@ -72,7 +72,7 @@ const questions: Record<QuestionName, Question> = {
     questionDescription: (
       <FormattedMessage
         id="questions.householdSize-description"
-        defaultMessage="Your household includes yourself and the people who live with you and share resources like food and rent."
+        defaultMessage="This is usually family members whom you live with and share important resources with like food and bills."
       />
     ),
     componentDetails: {
