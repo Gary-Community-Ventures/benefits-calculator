@@ -114,7 +114,7 @@ function generateMuiOverides(theme: ITheme) {
         styleOverrides: {
           root: {
             '&.Mui-checked': {
-              color: deepBlueColor,
+              color: midBlue,
             },
           },
         },
