@@ -1,13 +1,13 @@
 import { FormattedMessage } from 'react-intl';
-import baby_supplies from './OptionCardIcons/AcuteConditions/baby_supplies.png';
-import child_development from './OptionCardIcons/AcuteConditions/child_development.png';
-import dental_care from './OptionCardIcons/AcuteConditions/dental_care.png';
-import family_planning from './OptionCardIcons/AcuteConditions/family_planning.png';
-import food from './OptionCardIcons/AcuteConditions/food.png';
-import housing from './OptionCardIcons/AcuteConditions/housing.png';
-import job_resources from './OptionCardIcons/AcuteConditions/job_resources.png';
-import legal_services from './OptionCardIcons/AcuteConditions/legal_services.png';
-import support from './OptionCardIcons/AcuteConditions/support.png';
+import baby_supplies from './OptionCardIcons/AcuteConditions/baby_supplies.svg';
+import child_development from './OptionCardIcons/AcuteConditions/child_development.svg';
+import dental_care from './OptionCardIcons/AcuteConditions/dental_care.svg';
+import family_planning from './OptionCardIcons/AcuteConditions/family_planning.svg';
+import food from './OptionCardIcons/AcuteConditions/food.svg';
+import housing from './OptionCardIcons/AcuteConditions/housing.svg';
+import job_resources from './OptionCardIcons/AcuteConditions/job_resources.svg';
+import legal_services from './OptionCardIcons/AcuteConditions/legal_services.svg';
+import support from './OptionCardIcons/AcuteConditions/support.svg';
 
 const acuteConditionOptions = {
   food: {

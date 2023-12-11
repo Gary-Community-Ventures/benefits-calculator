@@ -1,13 +1,13 @@
 import { FormattedMessage } from 'react-intl';
-import chp from './OptionCardIcons/HealthInsurance/chp.png';
-import dont_know from './OptionCardIcons/HealthInsurance/dont_know.png';
-import emergency_medicaid from './OptionCardIcons/HealthInsurance/emergency_medicaid.png';
-import employer from './OptionCardIcons/HealthInsurance/employer.png';
-import family_planning from './OptionCardIcons/HealthInsurance/family_planning.png';
-import medicaid from './OptionCardIcons/HealthInsurance/medicaid.png';
-import medicare from './OptionCardIcons/HealthInsurance/medicare.png';
-import none from './OptionCardIcons/HealthInsurance/none.png';
-import privateInsurance from './OptionCardIcons/HealthInsurance/privateInsurance.png';
+import chp from './OptionCardIcons/HealthInsurance/chp.svg';
+import dont_know from './OptionCardIcons/HealthInsurance/dont_know.svg';
+import emergency_medicaid from './OptionCardIcons/HealthInsurance/emergency_medicaid.svg';
+import employer from './OptionCardIcons/HealthInsurance/employer.svg';
+import family_planning from './OptionCardIcons/HealthInsurance/family_planning.svg';
+import medicaid from './OptionCardIcons/HealthInsurance/medicaid.svg';
+import medicare from './OptionCardIcons/HealthInsurance/medicare.svg';
+import none from './OptionCardIcons/HealthInsurance/none.svg';
+import privateInsurance from './OptionCardIcons/HealthInsurance/privateInsurance.svg';
 import { HealthInsuranceOptionsList, HealthInsurance } from '../Types/FormData';
 
 export type HealthInsuranceOptions = {

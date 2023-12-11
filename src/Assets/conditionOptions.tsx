@@ -1,9 +1,9 @@
 import { FormattedMessage } from 'react-intl';
-import student from './OptionCardIcons/Conditions/student.png';
-import pregnant from './OptionCardIcons/Conditions/pregnant.png';
-import blindOrVisuallyImpaired from './OptionCardIcons/Conditions/blindOrVisuallyImpaired.png';
-import disabled from './OptionCardIcons/Conditions/disabled.png';
-import longTermDisability from './OptionCardIcons/Conditions/longTermDisability.png';
+import student from './OptionCardIcons/Conditions/student.svg';
+import pregnant from './OptionCardIcons/Conditions/pregnant.svg';
+import blindOrVisuallyImpaired from './OptionCardIcons/Conditions/blindOrVisuallyImpaired.svg';
+import disabled from './OptionCardIcons/Conditions/disabled.svg';
+import longTermDisability from './OptionCardIcons/Conditions/longTermDisability.svg';
 
 const conditionOptions = {
   you: {

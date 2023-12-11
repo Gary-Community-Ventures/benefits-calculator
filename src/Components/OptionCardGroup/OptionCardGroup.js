@@ -2,7 +2,7 @@ import { useIntl } from 'react-intl';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack } from '@mui/material';
-import checkmark from '../../Assets/OptionCardIcons/checkmark.png';
+import checkmark from '../../Assets/OptionCardIcons/checkmark.svg';
 import './OptionCardGroup.css';
 
 const OptionCardGroup = ({ options, stateVariable, memberData, setMemberData, hhMemberIndex }) => {
