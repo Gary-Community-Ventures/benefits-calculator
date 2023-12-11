@@ -24,6 +24,7 @@
 .sub-header {
   font-size: 2rem;
   font-weight: 700;
+  line-height: normal;
   font-family: 'Roboto Slab', serif;
   color: var(--main-header-color);
   margin-bottom: 1rem;
