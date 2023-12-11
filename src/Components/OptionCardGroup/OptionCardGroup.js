@@ -2,7 +2,7 @@ import { useIntl } from 'react-intl';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack } from '@mui/material';
-import checkmark from '../../Assets/OptionCardIcons/checkmark.svg';
+import { ReactComponent as Checkmark } from '../../Assets/OptionCardIcons/checkmark.svg';
 import './OptionCardGroup.css';
 
 const OptionCardGroup = ({ options, stateVariable, memberData, setMemberData, hhMemberIndex }) => {
@@ -62,7 +62,7 @@ const OptionCardGroup = ({ options, stateVariable, memberData, setMemberData, hh
             </Stack>
             {memberData[stateVariable][optionKey] && (
               <Stack direction="row" justifyContent="flex-end" alignItems="flex-end">
-                <img src={checkmark} alt="checked" className="checkmark" />
+                <Checkmark alt="checked" className="checkmark" />
               </Stack>
             )}
           </Card>
