@@ -17,6 +17,7 @@ export interface ITheme {
     'font-size': string;
     '--main-header-color': string;
     '--midBlue-color': string;
+    '--optionCardIconFillColor': string;
   };
 }
 
@@ -43,6 +44,7 @@ const themes: IThemes = {
       'font-size': '16px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
+      '--optionCardIconFillColor': '#D6743F',
     },
   },
   twoOneOne: {
@@ -62,6 +64,7 @@ const themes: IThemes = {
       'font-size': '18px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
+      '--optionCardIconFillColor': '#D6743F',
     },
   },
 };

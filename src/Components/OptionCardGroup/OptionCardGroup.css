@@ -1,12 +1,14 @@
 .option-card-image {
   height: 70px;
   width: 70px;
+  fill: var(--optionCardIconFillColor);
 }
 
 .checkmark {
   height: 1.75rem;
   width: 1.75rem;
   margin: -2.25rem 0.5rem 0.5rem 0;
+  fill: var(--optionCardIconFillColor);
 }
 
 .unselected-option-card.MuiPaper-root {
