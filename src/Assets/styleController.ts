@@ -7,6 +7,7 @@ export interface ITheme {
   midBlueColor: string;
   secondaryBackgroundColor: string;
   creamColor: string;
+  brightOrangeColor: string;
   cssVariables: {
     '--primary-color': string;
     '--secondary-color': string;
@@ -17,6 +18,7 @@ export interface ITheme {
     'font-size': string;
     '--main-header-color': string;
     '--midBlue-color': string;
+    '--brightOrange-color': string;
   };
 }
 
@@ -33,6 +35,7 @@ const themes: IThemes = {
     creamColor: '#F9EFE6',
     terraCottaColor: '#B85A27',
     midBlueColor: '#41528C',
+    brightOrangeColor: '#DE7F43',
     cssVariables: {
       '--primary-color': '#293457',
       '--secondary-color': '#B85A27',
@@ -43,6 +46,7 @@ const themes: IThemes = {
       'font-size': '16px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
+      '--brightOrange-color': '#DE7F43',
     },
   },
   twoOneOne: {
@@ -52,6 +56,7 @@ const themes: IThemes = {
     midBlueColor: '#41528C',
     secondaryBackgroundColor: '#FBF9FC',
     creamColor: '#F9EFE6',
+    brightOrangeColor: '#DE7F43',
     cssVariables: {
       '--primary-color': '#005191',
       '--secondary-color': '#539ED0',
@@ -62,6 +67,7 @@ const themes: IThemes = {
       'font-size': '18px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
+      '--brightOrange-color': '#DE7F43',
     },
   },
 };

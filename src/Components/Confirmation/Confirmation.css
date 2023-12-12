@@ -21,12 +21,29 @@
   margin: auto;
 }
 
+svg.confirmation-icon path,
+svg.confirmation-icon circle {
+  stroke: var(--brightOrange-color);
+  fill: var(--brightOrange-color);
+}
+
+.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-2.css-1o7apob-MuiGrid-root.no-padding {
+  padding: 0;
+}
+
 .edit-button {
   position: absolute;
   top: 2rem;
   right: 2rem;
   width: 1.5rem;
   transform: translate(50%, -50%);
+}
+
+svg.edit-button path,
+svg.edit-button rect,
+svg.edit-button polygon {
+  stroke: var(--primary-color);
+  fill: var(--primary-color);
 }
 
 .prev-continue-results-buttons.confirmation {
