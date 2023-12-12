@@ -1,9 +1,9 @@
 import { FormattedMessage } from 'react-intl';
-import student from './OptionCardIcons/Conditions/student.svg';
-import pregnant from './OptionCardIcons/Conditions/pregnant.svg';
-import blindOrVisuallyImpaired from './OptionCardIcons/Conditions/blindOrVisuallyImpaired.svg';
-import disabled from './OptionCardIcons/Conditions/disabled.svg';
-import longTermDisability from './OptionCardIcons/Conditions/longTermDisability.svg';
+import { ReactComponent as Student } from './OptionCardIcons/Conditions/student.svg';
+import { ReactComponent as Pregnant } from './OptionCardIcons/Conditions/pregnant.svg';
+import { ReactComponent as BlindOrVisuallyImpaired } from './OptionCardIcons/Conditions/blindOrVisuallyImpaired.svg';
+import { ReactComponent as Disabled } from './OptionCardIcons/Conditions/disabled.svg';
+import { ReactComponent as LongTermDisability } from './OptionCardIcons/Conditions/longTermDisability.svg';
 
 const conditionOptions = {
   you: {
@@ -14,17 +14,17 @@ const conditionOptions = {
           defaultMessage="Student at a college, university, or other post-secondary institution like a job-training program"
         />
       ),
-      image: student,
+      icon: <Student className="option-card-icon" />,
     },
     pregnant: {
       formattedMessage: <FormattedMessage id="conditionOptions.pregnant" defaultMessage="Pregnant" />,
-      image: pregnant,
+      icon: <Pregnant className="option-card-icon" />,
     },
     blindOrVisuallyImpaired: {
       formattedMessage: (
         <FormattedMessage id="conditionOptions.blindOrVisuallyImpaired" defaultMessage="Blind or visually impaired" />
       ),
-      image: blindOrVisuallyImpaired,
+      icon: <BlindOrVisuallyImpaired className="option-card-icon" />,
     },
     disabled: {
       formattedMessage: (
@@ -33,7 +33,7 @@ const conditionOptions = {
           defaultMessage="Have any disabilities that make you unable to work now or in the future"
         />
       ),
-      image: disabled,
+      icon: <Disabled className="option-card-icon" />,
     },
     longTermDisability: {
       formattedMessage: (
@@ -42,7 +42,7 @@ const conditionOptions = {
           defaultMessage="Any medical or developmental condition that has lasted, or is expected to last, more than 12 months"
         />
       ),
-      image: longTermDisability,
+      icon: <LongTermDisability className="option-card-icon" />,
     },
   },
   them: {
@@ -53,17 +53,17 @@ const conditionOptions = {
           defaultMessage="Student at a college, university, or other post-secondary institution like a job-training program"
         />
       ),
-      image: student,
+      icon: <Student className="option-card-icon" />,
     },
     pregnant: {
       formattedMessage: <FormattedMessage id="conditionOptions.pregnant" defaultMessage="Pregnant" />,
-      image: pregnant,
+      icon: <Pregnant className="option-card-icon" />,
     },
     blindOrVisuallyImpaired: {
       formattedMessage: (
         <FormattedMessage id="conditionOptions.blindOrVisuallyImpaired" defaultMessage="Blind or visually impaired" />
       ),
-      image: blindOrVisuallyImpaired,
+      icon: <BlindOrVisuallyImpaired className="option-card-icon" />,
     },
     disabled: {
       formattedMessage: (
@@ -72,7 +72,7 @@ const conditionOptions = {
           defaultMessage="Have any disabilities that make them unable to work now or in the future"
         />
       ),
-      image: disabled,
+      icon: <Disabled className="option-card-icon" />,
     },
     longTermDisability: {
       formattedMessage: (
@@ -81,7 +81,7 @@ const conditionOptions = {
           defaultMessage="Any medical or developmental condition that has lasted, or is expected to last, more than 12 months"
         />
       ),
-      image: longTermDisability,
+      icon: <LongTermDisability className="option-card-icon" />,
     },
   },
 };
