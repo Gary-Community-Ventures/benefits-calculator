@@ -28,7 +28,10 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
     privacyLink = 'https://20208592.hs-sites.com/es/data-privacy-policy';
   } else if (locale === 'vi') {
     privacyLink = 'https://www.myfriendben.org/vi/data-privacy-policy';
+  } else if (locale === 'fr') {
+    privacyLink = 'https://www.myfriendben.org/fr/data-privacy-policy';
   }
+
   const signUpErrorController = useErrorController(signUpFormHasError, displaySignUpFormHelperText);
   const firstNameErrorController = useErrorController(nameHasError, displayFirstNameHelperText);
   const lastNameErrorController = useErrorController(nameHasError, displayLastNameHelperText);
