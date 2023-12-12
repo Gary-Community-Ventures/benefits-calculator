@@ -1,0 +1,41 @@
+.delete-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-button {
+  font-size: 1.875rem;
+}
+
+.income-block-question-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1.25rem;
+}
+
+.income-block-textfield {
+  margin-left: 8px;
+}
+
+.add-another-income-button.MuiButton-root {
+  color: var(--midBlue-color);
+  background-color: #ffffff;
+  font-size: 1.125rem;
+  align-items: baseline;
+  width: fit-content;
+  font-style: bold;
+  font-weight: 550;
+  margin-top: 1rem;
+}
+
+.add-another-income-button.MuiButton-root:hover {
+  background-color: #ecdeed;
+}
+
+.income-question-padding {
+  padding-top: 1em;
+}
+
+.income-stream-q-padding {
+  padding-right: 2em;
+}

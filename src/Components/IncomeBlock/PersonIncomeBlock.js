@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 import { Button, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import IncomeQuestion from './IncomeQuestion';
-import './IncomeBlock.css';
+import './PersonIncomeBlock.css';
 
 const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those
