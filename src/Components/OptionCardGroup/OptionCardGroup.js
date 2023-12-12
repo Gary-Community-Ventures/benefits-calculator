@@ -1,7 +1,7 @@
 import { useIntl } from 'react-intl';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { CardActionArea, Typography, Stack } from '@mui/material';
+import { CardActionArea, Typography, Stack, Box } from '@mui/material';
 import { ReactComponent as Checkmark } from '../../Assets/OptionCardIcons/checkmark.svg';
 import './OptionCardGroup.css';
 
@@ -56,7 +56,7 @@ const OptionCardGroup = ({ options, stateVariable, memberData, setMemberData, hh
           >
             <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>
               <CardContent sx={{ textAlign: 'center', padding: '0.5rem' }}>
-                <img src={options[optionKey].image} alt={translatedAriaLabel} className="option-card-image" />
+                <Box>{options[optionKey].icon}</Box>
                 <Typography>{translatedAriaLabel}</Typography>
               </CardContent>
             </Stack>
