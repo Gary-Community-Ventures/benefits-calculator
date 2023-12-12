@@ -3,15 +3,21 @@ import { useState } from 'react';
 export interface ITheme {
   primaryColor: string;
   secondaryColor: string;
+  terraCottaColor: string;
+  midBlueColor: string;
+  secondaryBackgroundColor: string;
+  creamColor: string;
+  hoverColor: string;
   cssVariables: {
     '--primary-color': string;
     '--secondary-color': string;
     '--confirmation-background': string;
+    '--secondary-background-color': string;
+    '--cream-color': string;
     '--main-max-width': string;
     'font-size': string;
     '--main-header-color': string;
-    '--secondary-header-color': string;
-    '--black-paragraph-color': string;
+    '--midBlue-color': string;
   };
 }
 
@@ -22,31 +28,43 @@ interface IThemes {
 
 const themes: IThemes = {
   default: {
-    primaryColor: '#037A93',
-    secondaryColor: '#4ECDC4',
+    primaryColor: '#293457',
+    secondaryColor: '#B85A27',
+    secondaryBackgroundColor: '#FBF9FC',
+    creamColor: '#F9EFE6',
+    terraCottaColor: '#B85A27',
+    midBlueColor: '#41528C',
+    hoverColor: '#ECDEED',
     cssVariables: {
-      '--primary-color': '#037A93',
-      '--secondary-color': '4ECDC4',
+      '--primary-color': '#293457',
+      '--secondary-color': '#B85A27',
       '--confirmation-background': '#D3F2F0',
+      '--secondary-background-color': '#FBF9FC',
+      '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '16px',
       '--main-header-color': '#B85A27',
-      '--secondary-header-color': '#293457',
-      '--black-paragraph-color': '#000000',
+      '--midBlue-color': '#41528C',
     },
   },
   twoOneOne: {
     primaryColor: '#005191',
     secondaryColor: '#539ED0',
+    terraCottaColor: '#B85A27',
+    midBlueColor: '#41528C',
+    secondaryBackgroundColor: '#FBF9FC',
+    creamColor: '#F9EFE6',
+    hoverColor: '#ECDEED',
     cssVariables: {
       '--primary-color': '#005191',
       '--secondary-color': '#539ED0',
       '--confirmation-background': '#D4E7F2',
+      '--secondary-background-color': '#FBF9FC',
+      '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '18px',
       '--main-header-color': '#B85A27',
-      '--secondary-header-color': '#293457',
-      '--black-paragraph-color': '#000000',
+      '--midBlue-color': '#41528C',
     },
   },
 };
@@ -54,14 +72,16 @@ const themes: IThemes = {
 type ThemeReturnType = [ITheme, React.Dispatch<React.SetStateAction<'default' | 'twoOneOne'>>, any];
 
 function generateMuiOverides(theme: ITheme) {
-  const blueColor = theme.primaryColor;
-  const greenColor = theme.secondaryColor;
+  const deepBlueColor = theme.primaryColor;
+  const darkTerraCottaColor = theme.secondaryColor;
   const blackColor = '#2A2B2A';
+  const midBlue = theme.midBlueColor;
+  const lavenderColor = theme.hoverColor;
 
   return {
     palette: {
       primary: {
-        main: blueColor,
+        main: deepBlueColor,
       },
     },
     components: {
@@ -71,9 +91,14 @@ function generateMuiOverides(theme: ITheme) {
           // Name of the slot
           root: {
             // Some CSS
-            backgroundColor: blueColor,
+            backgroundColor: deepBlueColor,
+            border: '1px solid black',
+            borderRadius: '12px',
+            fontWeight: 'bold',
+            fontFamily: 'Open Sans',
             ':hover': {
-              backgroundColor: greenColor,
+              backgroundColor: lavenderColor,
+              color: deepBlueColor,
             },
           },
         },
@@ -89,7 +114,7 @@ function generateMuiOverides(theme: ITheme) {
         styleOverrides: {
           root: {
             '&.Mui-checked': {
-              color: blueColor,
+              color: midBlue,
             },
           },
         },
@@ -98,7 +123,7 @@ function generateMuiOverides(theme: ITheme) {
         styleOverrides: {
           root: {
             '&.Mui-checked': {
-              color: blueColor,
+              color: deepBlueColor,
             },
           },
         },
@@ -106,9 +131,9 @@ function generateMuiOverides(theme: ITheme) {
       MuiLink: {
         styleOverrides: {
           root: {
-            color: blueColor,
+            color: deepBlueColor,
             '&:hover': {
-              color: greenColor,
+              color: darkTerraCottaColor,
             },
           },
         },

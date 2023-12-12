@@ -23,6 +23,7 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import './HouseholdDataBlock.css';
+import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper.tsx';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -240,13 +241,13 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     if (personIndex === 1) {
       header = (
-        <h1 className="question-label household-data-q-underline">
+        <h1 className="sub-header household-data-q-underline">
           <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
         </h1>
       );
     } else {
       header = (
-        <h1 className="question-label household-data-q-underline">
+        <h1 className="sub-header household-data-q-underline">
           <FormattedMessage
             id="questions.householdData"
             defaultMessage="Tell us about the next person in your household."
@@ -260,7 +261,9 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         {headOfHHInfoWasEntered && (
           <>
             <h2 className="household-data-sub-header">
-              <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
+              <SubHeaderWrapper>
+                <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
+              </SubHeaderWrapper>
             </h2>
             <div>{formData.householdData.map(createMembersAdded)}</div>
             <div className="household-data-q-underline"></div>
