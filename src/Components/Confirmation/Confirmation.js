@@ -19,15 +19,17 @@ import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../..
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Grid from '@mui/material/Grid';
-import EditIcon from '../../Assets/edit.png';
-import ResidenceIcon from '../../Assets/residence.png';
-import IndividualsIcon from '../../Assets/individuals.png';
-import IndividualIcon from '../../Assets/individual.png';
-import ExpensesIcon from '../../Assets/expenses.png';
-import ResourcesIcon from '../../Assets/resources.png';
-import BenefitsIcon from '../../Assets/benefits.png';
-import ImmediateNeedsIcon from '../../Assets/immediate-needs.png';
-import ReferralSourceIcon from '../../Assets/referral-source.png';
+
+import Edit from '../../Assets/edit.svg';
+import Residence from '../../Assets/residence.svg';
+import Household from '../../Assets/household.svg';
+import Head from '../../Assets/head.svg';
+import Expenses from '../../Assets/expenses.svg';
+import Resources from '../../Assets/resources.svg';
+import Benefits from '../../Assets/benefits.svg';
+import Immediate from '../../Assets/immediate.svg';
+import Referral from '../../Assets/referral.svg';
+
 import './Confirmation.css';
 
 const Confirmation = () => {
@@ -64,8 +66,8 @@ const Confirmation = () => {
 
       return (
         <Grid container key={i} spacing={1}>
-          <Grid item xs={2}>
-            <img src={IndividualIcon} className="confirmation-icon" alt="individual-icon"></img>
+          <Grid xs={2}>
+            <img src={Head} className="confirmation-icon" alt="head-icon"></img>
           </Grid>
           <Grid item xs={8}>
             <p className="section-title">{allHouseholdRelations[i]}</p>
@@ -99,7 +101,7 @@ const Confirmation = () => {
               aria-label="edit household member"
               onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`)}
             >
-              <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
+              <img src={Edit} className="edit-button" alt="edit-icon"></img>
             </button>
           </Grid>
         </Grid>
@@ -128,8 +130,8 @@ const Confirmation = () => {
 
     return (
       <Grid container spacing={1}>
-        <Grid item xs={2}>
-          <img src={ExpensesIcon} className="confirmation-icon" alt="expenses-icon"></img>
+        <Grid xs={2}>
+          <img src={Expenses} className="confirmation-icon" alt="expenses-icon"></img>
         </Grid>
         <Grid item xs={8}>
           <p className="section-title">
@@ -146,7 +148,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label="edit expenses" onClick={() => navigate(getQuestionUrl('hasExpenses'))}>
-            <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
+            <img src={Edit} className="edit-button" alt="edit-icon"></img>
           </button>
         </Grid>
       </Grid>
@@ -257,8 +259,8 @@ const Confirmation = () => {
 
     return (
       <Grid container spacing={1}>
-        <Grid item xs={2}>
-          <img src={IndividualsIcon} className="confirmation-icon" alt="residence-icon"></img>
+        <Grid xs={2}>
+          <img src={Household} className="confirmation-icon" alt="household-icon"></img>
         </Grid>
         <Grid item xs={8}>
           <p className="section-title">
@@ -277,7 +279,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label="edit household size" onClick={() => navigate(linkTo)}>
-            <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
+            <img src={Edit} className="edit-button" alt="edit-icon"></img>
           </button>
         </Grid>
       </Grid>
@@ -288,8 +290,8 @@ const Confirmation = () => {
     const { householdAssets } = formData;
     return (
       <Grid container spacing={1}>
-        <Grid item xs={2}>
-          <img src={ResourcesIcon} className="confirmation-icon" alt="resources-icon"></img>
+        <Grid xs={2}>
+          <img src={Resources} className="confirmation-icon" alt="resources-icon"></img>
         </Grid>
         <Grid item xs={8}>
           <p className="section-title">
@@ -310,7 +312,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label="edit household assets" onClick={() => navigate(getQuestionUrl('householdAssets'))}>
-            <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
+            <img src={Edit} className="edit-button" alt="edit-icon"></img>
           </button>
         </Grid>
       </Grid>
@@ -321,8 +323,8 @@ const Confirmation = () => {
     const { zipcode, county } = formData;
     return (
       <Grid container spacing={1}>
-        <Grid item xs={2}>
-          <img src={ResidenceIcon} className="confirmation-icon" alt="residence-icon"></img>
+        <Grid xs={2}>
+          <img src={Residence} className="confirmation-icon" alt="residence-icon"></img>
         </Grid>
         <Grid item xs={8}>
           <p className="section-title">
@@ -343,7 +345,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label="edit zipcode" onClick={() => navigate(getQuestionUrl('zipcode'))}>
-            <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
+            <img src={Edit} className="edit-button" alt="edit-icon"></img>
           </button>
         </Grid>
       </Grid>
@@ -362,8 +364,8 @@ const Confirmation = () => {
     return (
       <>
         <Grid container spacing={1}>
-          <Grid item xs={2}>
-            <img src={ReferralSourceIcon} className="confirmation-icon" alt="referral-source-icon"></img>
+          <Grid xs={2}>
+            <img src={Referral} className="confirmation-icon" alt="referral-icon"></img>
           </Grid>
           <Grid item xs={8}>
             <p className="section-title">
@@ -374,9 +376,9 @@ const Confirmation = () => {
             </p>
             <article className="section-p">{finalReferralSource}</article>
           </Grid>
-          <Grid item xs={2} display="flex" justifyContent="flex-end">
+          <Grid xs={2} display="flex" justifyContent="flex-end">
             <button aria-label="edit referral source" onClick={() => navigate(getQuestionUrl('referralSource'))}>
-              <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
+              <img src={Edit} className="edit-button" alt="edit-icon"></img>
             </button>
           </Grid>
         </Grid>
@@ -415,7 +417,7 @@ const Confirmation = () => {
           'Current Household Benefits:',
           getQuestionUrl('hasBenefits'),
           allBenefitsList,
-          <img src={BenefitsIcon} className="confirmation-icon" alt="benefits-icon"></img>,
+          <img src={Benefits} className="confirmation-icon" alt="benefits-icon"></img>,
           'edit current benefits',
         )}
         {displayHHCheckboxSection(
@@ -424,7 +426,7 @@ const Confirmation = () => {
           'Immediate Needs',
           getQuestionUrl('acuteHHConditions'),
           refactorOptionsList(acuteConditionOptions),
-          <img src={ImmediateNeedsIcon} className="confirmation-icon" alt="immediate-needs-icon"></img>,
+          <img src={Immediate} className="confirmation-icon" alt="immediate-icon"></img>,
         )}
         {displayReferralSourceSection()}
       </>
@@ -544,9 +546,7 @@ const Confirmation = () => {
 
     return (
       <Grid container spacing={1}>
-        <Grid item xs={2}>
-          {iconComp}
-        </Grid>
+        <Grid xs={2}>{iconComp}</Grid>
         <Grid item xs={8}>
           <p className="section-title">
             <FormattedMessage id={fMessageId} defaultMessage={fMessageDefaultMsg} />
@@ -561,7 +561,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label={ariaLabel} onClick={() => navigate(linkTo)}>
-            <img src={EditIcon} className="edit-button" alt="edit-icon"></img>
+            <img src={Edit} className="edit-button" alt="edit-icon"></img>
           </button>
         </Grid>
       </Grid>

@@ -18,6 +18,7 @@
 .confirmation-icon {
   width: 4.75rem;
   display: block;
+  margin: auto;
 }
 
 .edit-button {
