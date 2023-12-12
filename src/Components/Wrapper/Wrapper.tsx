@@ -100,7 +100,16 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
       setTranslations(value);
     });
   }, []);
-  let defaultLanguage = (localStorage.getItem('language') ?? 'en-us') as Language;
+  let defaultLanguage = localStorage.getItem('language') as Language;
+
+  const userLanguage = navigator.language.toLowerCase() as Language;
+
+  const verifyLanguage = (language: Language) => {
+    return Object.keys(languageOptions).some((lang) => language.slice(0, 2) === lang) ? language.slice(0, 2) : 'en-us';
+  };
+
+  defaultLanguage = defaultLanguage ? defaultLanguage : (verifyLanguage(userLanguage) as Language);
+
   const pathname = window.location.pathname;
 
   const [theme, setTheme, styleOverride] = useStyle('default');
