@@ -206,7 +206,7 @@ const QuestionComponentContainer = ({
                 <FormattedMessage id="qcc.tell-us-text" defaultMessage="Let's Get Started!" />
               </h2>
               <h1 className="question-header">
-                <FormattedMessage id="qcc.tell-us-text" defaultMessage="Just one more question!" />
+                <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us where you live." />
               </h1>
             </>
           );
@@ -220,7 +220,7 @@ const QuestionComponentContainer = ({
       default:
         return (
           <h1 className="sub-header">
-            <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us where you live." />
+            <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us about your household." />
           </h1>
         );
     }
