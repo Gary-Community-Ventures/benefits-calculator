@@ -1,6 +1,6 @@
 p {
   font-family: 'Open Sans', sans-serif;
-  color: var(--black-paragraph-color);
+  color: black;
 }
 
 .question-header-container {
