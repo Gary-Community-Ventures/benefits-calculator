@@ -15,7 +15,6 @@ import {
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import Textfield from '../Textfield/Textfield';
-import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper.tsx';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
@@ -75,11 +74,9 @@ const IncomeQuestion = ({
 
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <SubHeaderWrapper key={menuItemKey}>
-          <MenuItem value={menuItemKey} key={menuItemKey}>
-            {menuItemLabels[i]}
-          </MenuItem>
-        </SubHeaderWrapper>
+        <MenuItem value={menuItemKey} key={menuItemKey}>
+          {menuItemLabels[i]}
+        </MenuItem>
       );
     });
 
@@ -111,7 +108,6 @@ const IncomeQuestion = ({
   };
 
   const handleIncomeStreamsSelectChange = (event, index) => {
-    console.log(`in here`);
     const updatedSelectedMenuItems = allIncomeSources.map((incomeSourceData, i) => {
       if (i === index) {
         return {
@@ -162,7 +158,6 @@ const IncomeQuestion = ({
   };
 
   const createIncomeStreamsDropdownMenu = (incomeStreamName, index) => {
-    //error in here
     return (
       <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeStreamErrorController.showError}>
         <InputLabel id="income-type-label">
