@@ -11,6 +11,12 @@
   fill: var(--option-card-icon-fill-color);
 }
 
+.food-icon {
+  stroke: var(--option-card-icon-fill-color);
+  stroke-miterlimit: 10;
+  stroke-width: 5px;
+}
+
 .unselected-option-card.MuiPaper-root {
   background-color: #ffffff;
 }
