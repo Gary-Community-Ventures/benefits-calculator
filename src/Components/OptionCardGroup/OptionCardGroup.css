@@ -11,6 +11,7 @@
   fill: var(--option-card-icon-fill-color);
 }
 
+/* This css rule targets the svg class of the milk carton fill */
 .food-icon {
   stroke: var(--option-card-icon-fill-color);
   stroke-miterlimit: 10;
