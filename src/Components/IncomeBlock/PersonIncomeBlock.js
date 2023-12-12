@@ -56,7 +56,7 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
     ]);
   };
 
-  const renderReturnStmtIdOrDefaultMsg = (page) => {
+  const renderFollowUpIncomeQIdAndDefaultMsg = (page) => {
     let formattedMsgId = 'questions.hasIncome-a';
     let formattedMsgDefaultMsg = 'What type of income have you had most recently?';
 
@@ -74,8 +74,8 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
         <Box className="section">
           <h2 className="question-label">
             <FormattedMessage
-              id={renderReturnStmtIdOrDefaultMsg(page)[0]}
-              defaultMessage={renderReturnStmtIdOrDefaultMsg(page)[1]}
+              id={renderFollowUpIncomeQIdAndDefaultMsg(page)[0]}
+              defaultMessage={renderFollowUpIncomeQIdAndDefaultMsg(page)[1]}
             />
           </h2>
           <p className="question-description">
