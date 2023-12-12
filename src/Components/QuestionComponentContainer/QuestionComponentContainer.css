@@ -10,7 +10,7 @@ p {
 .question-header {
   font-family: 'Roboto Slab', serif;
   font-weight: bold;
-  color: var(--main-header-color);
+  color: var(--secondary-color);
 }
 
 .question-secondary-header {
@@ -18,14 +18,14 @@ p {
   font-family: 'Roboto Slab', serif;
   font-weight: bold;
   text-transform: uppercase;
-  color: var(--secondary-header-color);
+  color: var(--primary-color);
 }
 
 .question-label {
   font-size: 1.375rem;
   font-weight: 700;
   margin-bottom: 8px;
-  font-family: 'Roboto Slab', sans-serif;
+  font-family: 'Roboto Slab', serif;
   color: #293457;
 }
 
