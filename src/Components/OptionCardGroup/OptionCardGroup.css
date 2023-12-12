@@ -1,14 +1,14 @@
 .option-card-icon {
   height: 70px;
   width: 70px;
-  fill: var(--optionCardIconFillColor);
+  fill: var(--option-card-icon-fill-color);
 }
 
 .checkmark {
   height: 1.75rem;
   width: 1.75rem;
   margin: -2.25rem 0.5rem 0.5rem 0;
-  fill: var(--optionCardIconFillColor);
+  fill: var(--option-card-icon-fill-color);
 }
 
 .unselected-option-card.MuiPaper-root {
@@ -16,7 +16,7 @@
 }
 
 .selected-option-card.MuiPaper-root {
-  background-color: #293457;
+  background-color: var(--primary-color);
   color: #ffffff;
 }
 
