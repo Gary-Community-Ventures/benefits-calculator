@@ -221,8 +221,13 @@ const App = () => {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
         return;
       } else if (questionName === 'signUpInfo') {
-        updateUser(uuid, formData, setFormData, locale);
-        navigate(`/${uuid}/confirm-information`);
+        updateUser(uuid, formData, setFormData, locale)
+          .then(() => {
+            navigate(`/${uuid}/confirm-information`);
+          })
+          .catch(() => {
+            setFormData({ ...formData, signUpInfo: { ...formData.signUpInfo, serverError: true } });
+          });
       } else if (questionName === 'householdSize') {
         const updatedHouseholdData = formData.householdData.slice(0, Number(formData.householdSize));
         const updatedFormData = { ...formData, householdData: updatedHouseholdData };

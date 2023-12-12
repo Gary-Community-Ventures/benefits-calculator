@@ -12,9 +12,9 @@ import {
   displayEmailHelperText,
   phoneHasError,
   displayPhoneHasErrorHelperText,
-  signUpFormHasError,
-  displaySignUpFormHelperText,
   useErrorController,
+  signUpServerHasError,
+  signUpServerErrorHelperText,
 } from '../../Assets/validationFunctions.tsx';
 
 const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
@@ -32,7 +32,6 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
     privacyLink = 'https://www.myfriendben.org/fr/data-privacy-policy';
   }
 
-  const signUpErrorController = useErrorController(signUpFormHasError, displaySignUpFormHelperText);
   const firstNameErrorController = useErrorController(nameHasError, displayFirstNameHelperText);
   const lastNameErrorController = useErrorController(nameHasError, displayLastNameHelperText);
   const emailErrorController = useErrorController((email) => {
@@ -41,24 +40,19 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   const phoneErrorController = useErrorController((phone) => {
     phoneHasError(phone) && phone !== '';
   }, displayPhoneHasErrorHelperText);
+  const serverErrorController = useErrorController(signUpServerHasError, signUpServerErrorHelperText);
 
   useEffect(() => {
-    signUpErrorController.setSubmittedCount(submitted);
     firstNameErrorController.setSubmittedCount(submitted);
     lastNameErrorController.setSubmittedCount(submitted);
     emailErrorController.setSubmittedCount(submitted);
     phoneErrorController.setSubmittedCount(submitted);
+    serverErrorController.setSubmittedCount(submitted);
   }, [submitted]);
 
   useEffect(() => {
-    signUpErrorController.updateError(formData.signUpInfo);
-  }, [
-    firstNameErrorController.hasError,
-    lastNameErrorController.hasError,
-    emailErrorController.hasError,
-    phoneErrorController.hasError,
-    formData.signUpInfo.commConsent,
-  ]);
+    serverErrorController.updateError(formData.signUpInfo.serverError);
+  }, [formData.signUpInfo.serverError]);
 
   const createFirstNameTextfield = () => {
     const firstNameProps = {
@@ -191,6 +185,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
         <Grid xs={12} item marginBottom={'1rem'}>
           {displayDisclosureSection()}
         </Grid>
+        {serverErrorController.showError && serverErrorController.message(formData.signUpInfo.serverError)}
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import countiesByZipcode from './countiesByZipcode';
-import type { ErrorController, ValidationFunction, MessageFunction, VerifiableInput } from '../Types/ErrorController';
+import type { ErrorController, ValidationFunction, MessageFunction } from '../Types/ErrorController';
 import type { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo, Benefits } from '../Types/FormData';
 import ErrorMessageWrapper from '../Components/ErrorMessage/ErrorMessageWrapper';
 
@@ -372,8 +372,8 @@ const displayPhoneHasErrorHelperText: MessageFunction<string> = (phoneNumber) =>
   }
 };
 
-const signUpFormHasError: ValidationFunction<SignUpInfo> = (props) => {
-  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent, hasUser } = props;
+const signUpFormHasError: ValidationFunction<SignUpInfo & { serverError?: boolean }> = (props) => {
+  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent, hasUser, serverError } = props;
   const atLeastOneCheckboxSelectionWasMade = sendUpdates === true || sendOffers === true;
   if (hasUser === true) {
     return false;
@@ -386,7 +386,8 @@ const signUpFormHasError: ValidationFunction<SignUpInfo> = (props) => {
     !firstName ||
     !lastName ||
     atLeastOneCheckboxSelectionWasMade === false ||
-    commConsent === false
+    commConsent === false ||
+    serverError === true
   );
 };
 
@@ -403,39 +404,19 @@ const displayNoEmailOrPhoneHelperText = (email: string, phone: string) => {
   }
 };
 
-const displaySignUpFormHelperText: MessageFunction<SignUpInfo> = (props) => {
-  const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = props;
-  const atLeastOneCheckboxSelectionWasMade = sendUpdates === true || sendOffers === true;
+const signUpServerHasError: ValidationFunction<boolean | undefined> = (serverError) => {
+  return serverError === true;
+};
 
-  if (nameHasError(firstName)) {
-    return displayFirstNameHelperText(firstName);
-  } else if (nameHasError(lastName)) {
-    return displayLastNameHelperText(lastName);
-  } else if (emailHasError(email)) {
-    return displayEmailHelperText(email);
-  } else if (phoneHasError(phone)) {
-    return displayPhoneHasErrorHelperText(phone);
-  } else if (!email && !phone) {
-    return displayNoEmailOrPhoneHelperText(email, phone);
-  } else if (atLeastOneCheckboxSelectionWasMade === false) {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage
-          id="validation-helperText.notificationSelection"
-          defaultMessage="Please select a notification option"
-        />
-      </ErrorMessageWrapper>
-    );
-  } else if (commConsent === false) {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage
-          id="validation-helperText.consentCheckbox"
-          defaultMessage="Please check the box above to sign up for the selected notifications"
-        />
-      </ErrorMessageWrapper>
-    );
-  }
+const signUpServerErrorHelperText: MessageFunction<SignUpInfo> = (props) => {
+  return (
+    <ErrorMessageWrapper fontSize="1.5rem">
+      <FormattedMessage
+        id="validation-helperText.serverError"
+        defaultMessage="It looks like there is an issue with your email adress. Please check that your email is valid. This error could also be caused by entering an email adress that is already in our system. If the error persists, remember that this question is optional, and will not affect your MyFriendBen results. You can skip this question by deselecting the boxes at the top of the page and pressing continue."
+      />
+    </ErrorMessageWrapper>
+  );
 };
 
 const signUpOptionsHaveError: ValidationFunction<SignUpInfo> = (signUpInfo) => {
@@ -597,7 +578,8 @@ export {
   phoneHasError,
   displayPhoneHasErrorHelperText,
   signUpFormHasError,
-  displaySignUpFormHelperText,
+  signUpServerHasError,
+  signUpServerErrorHelperText,
   signUpOptionsHaveError,
   healthInsuranceHasError,
   displayHealthInsuranceHelperText,
