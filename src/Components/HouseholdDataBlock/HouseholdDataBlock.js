@@ -24,7 +24,6 @@ import {
 import { getStepNumber } from '../../Assets/stepDirectory';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import './HouseholdDataBlock.css';
-import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper.tsx';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -260,10 +259,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         {header}
         {headOfHHInfoWasEntered && (
           <>
-            <h2 className="household-data-sub-header">
-              <SubHeaderWrapper>
-                <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
-              </SubHeaderWrapper>
+            <h2 className="household-data-sub-header secondary-heading">
+              <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
             </h2>
             <div>{formData.householdData.map(createMembersAdded)}</div>
           </>
