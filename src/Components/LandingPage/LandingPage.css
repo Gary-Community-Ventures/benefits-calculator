@@ -12,3 +12,10 @@
 .public-charge-link {
   color: var(--primary-color);
 }
+
+.back-continue-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-left: -0.5rem;
+}

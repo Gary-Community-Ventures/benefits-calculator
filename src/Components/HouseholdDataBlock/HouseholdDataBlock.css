@@ -32,6 +32,11 @@
   margin-top: 0.5rem;
 }
 
+.question-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media (max-width: 600px) {
   .member-added-container {
     display: inline-block;
