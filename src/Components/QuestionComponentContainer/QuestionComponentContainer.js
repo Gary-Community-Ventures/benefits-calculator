@@ -178,7 +178,9 @@ const QuestionComponentContainer = ({
   const renderHeaderAndSubheader = () => {
     return (
       <>
-        {matchingQuestion.subheader && <h2 className="question-secondary-header">{matchingQuestion.subheader}</h2>}
+        {matchingQuestion.subheader && (
+          <strong className="question-secondary-header">{matchingQuestion.subheader}</strong>
+        )}
         {matchingQuestion.header && <h1 className="sub-header">{matchingQuestion.header}</h1>}
       </>
     );
