@@ -90,7 +90,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   return (
     <>
       {createExpenseBlockQuestions()}
-      <Button variant="contained" onClick={(event) => handleAddAdditionalExpenseSource(event)}>
+      <Button variant="outlined" onClick={(event) => handleAddAdditionalExpenseSource(event)}>
         <FormattedMessage id="expenseBlock.return-addExpenseButton" defaultMessage="Add another expense" />
       </Button>
       <div className="prev-save-continue-buttons">

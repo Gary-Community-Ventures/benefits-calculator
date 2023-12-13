@@ -26,6 +26,7 @@ const QuestionComponentContainer = ({
   const { formData, setFormData } = useContext(Context);
   let { id } = useParams();
   let matchingQuestion = getQuestion(+id, formData.immutableReferrer);
+
   const errorController = useErrorController(
     matchingQuestion.componentDetails.inputError,
     matchingQuestion.componentDetails.inputHelperText,
@@ -176,39 +177,14 @@ const QuestionComponentContainer = ({
   };
 
   const renderHeaderAndSubheader = () => {
-    if (matchingQuestion.headerType === 'signUpInfo') {
-      return (
-        <h1 className="sub-header">
-          <FormattedMessage
-            id="qcc.optional-sign-up-text"
-            defaultMessage="Optional: Sign up for benefits updates and/or paid feedback opportunities"
-          />
-        </h1>
-      );
-    } else if (matchingQuestion.headerType === 'aboutHousehold') {
-      if (matchingQuestion.name === 'hasBenefits' || matchingQuestion.name === 'acuteHHConditions') {
-        return (
-          <h1 className="sub-header">
-            <FormattedMessage
-              id="qcc.tell-us-final-text"
-              defaultMessage="Tell us some final information about your household."
-            />
-          </h1>
-        );
-      } else if (matchingQuestion.name === 'referralSource') {
-        return (
-          <h1 className="sub-header">
-            <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />
-          </h1>
-        );
-      } else {
-        return (
-          <h1 className="sub-header">
-            <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us where you live." />
-          </h1>
-        );
-      }
-    }
+    return (
+      <>
+        {matchingQuestion.subheader && (
+          <strong className="question-secondary-header">{matchingQuestion.subheader}</strong>
+        )}
+        {matchingQuestion.header && <h1 className="sub-header">{matchingQuestion.header}</h1>}
+      </>
+    );
   };
 
   return (

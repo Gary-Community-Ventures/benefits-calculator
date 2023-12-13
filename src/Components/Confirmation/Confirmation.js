@@ -30,6 +30,7 @@ import PaymentsIcon from '@mui/icons-material/Payments';
 import SavingsIcon from '@mui/icons-material/Savings';
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import './Confirmation.css';
+import PreviousButton from '../PreviousButton/PreviousButton';
 
 const Confirmation = () => {
   const { formData } = useContext(Context);
@@ -621,15 +622,7 @@ const Confirmation = () => {
       </h1>
       <div className="confirmation-container">{displayAllFormData()}</div>
       <div className="prev-continue-results-buttons confirmation">
-        <Button
-          className="prev-button"
-          onClick={() => {
-            navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`);
-          }}
-          variant="contained"
-        >
-          <FormattedMessage id="previousButton" defaultMessage="Prev" />
-        </Button>
+        <PreviousButton navFunction={() => navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`)} />
         <Button variant="contained" onClick={() => navigate(`/${uuid}/results`)}>
           <FormattedMessage id="continueButton" defaultMessage="Continue" />
         </Button>
