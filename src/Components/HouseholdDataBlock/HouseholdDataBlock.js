@@ -246,7 +246,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       );
     } else {
       header = (
-        <h1 className="question-label sub-header">
+        <h1 className="sub-header question-label">
           <FormattedMessage
             id="questions.householdData"
             defaultMessage="Tell us about the next person in your household."
