@@ -3,21 +3,20 @@ import { useState } from 'react';
 export interface ITheme {
   primaryColor: string;
   secondaryColor: string;
-  terraCottaColor: string;
   midBlueColor: string;
   secondaryBackgroundColor: string;
   creamColor: string;
   hoverColor: string;
+  progressBarColor: string;
   cssVariables: {
     '--primary-color': string;
     '--secondary-color': string;
-    '--confirmation-background': string;
     '--secondary-background-color': string;
     '--cream-color': string;
     '--main-max-width': string;
     'font-size': string;
-    '--main-header-color': string;
-    '--midBlue-color': string;
+    '--heading-color': string;
+    '--question-label': string;
   };
 }
 
@@ -32,39 +31,37 @@ const themes: IThemes = {
     secondaryColor: '#B85A27',
     secondaryBackgroundColor: '#FBF9FC',
     creamColor: '#F9EFE6',
-    terraCottaColor: '#B85A27',
     midBlueColor: '#41528C',
     hoverColor: '#ECDEED',
+    progressBarColor: '#B85A27',
     cssVariables: {
       '--primary-color': '#293457',
       '--secondary-color': '#B85A27',
-      '--confirmation-background': '#D3F2F0',
       '--secondary-background-color': '#FBF9FC',
       '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '16px',
-      '--main-header-color': '#B85A27',
-      '--midBlue-color': '#41528C',
+      '--heading-color': '#B85A27',
+      '--question-label': '#293457',
     },
   },
   twoOneOne: {
     primaryColor: '#005191',
-    secondaryColor: '#539ED0',
-    terraCottaColor: '#B85A27',
-    midBlueColor: '#41528C',
-    secondaryBackgroundColor: '#FBF9FC',
+    secondaryColor: '#005191',
+    midBlueColor: '#005191',
+    secondaryBackgroundColor: '#EFEFEF',
     creamColor: '#F9EFE6',
     hoverColor: '#ECDEED',
+    progressBarColor: '#539ED0',
     cssVariables: {
       '--primary-color': '#005191',
-      '--secondary-color': '#539ED0',
-      '--confirmation-background': '#D4E7F2',
-      '--secondary-background-color': '#FBF9FC',
+      '--secondary-color': '#005191',
+      '--secondary-background-color': '#EFEFEF',
       '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '18px',
-      '--main-header-color': '#B85A27',
-      '--midBlue-color': '#41528C',
+      '--heading-color': '#000000',
+      '--question-label': '#000000',
     },
   },
 };
@@ -82,6 +79,9 @@ function generateMuiOverides(theme: ITheme) {
     palette: {
       primary: {
         main: deepBlueColor,
+      },
+      secondary: {
+        main: darkTerraCottaColor,
       },
     },
     components: {
@@ -123,7 +123,7 @@ function generateMuiOverides(theme: ITheme) {
         styleOverrides: {
           root: {
             '&.Mui-checked': {
-              color: midBlue,
+              color: deepBlueColor,
             },
           },
         },

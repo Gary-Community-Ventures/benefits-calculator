@@ -3,7 +3,7 @@
   font-weight: 700;
   margin-bottom: 8px;
   font-family: 'Roboto Slab', serif;
-  color: #293457;
+  color: var(--question-label);
 }
 
 .question-description {

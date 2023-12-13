@@ -5,7 +5,6 @@
 }
 
 .confirmation-container {
-  background-color: var(--confirmation-background);
   border-radius: 2rem;
   margin: 2rem 10% 2rem 10%;
   padding: 2rem;
