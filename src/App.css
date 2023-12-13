@@ -46,26 +46,6 @@
   margin-bottom: 1rem;
 }
 
-.nav-btn.back-button,
-.back-continue-buttons .back-button,
-.prev-continue-results-buttons .back-button,
-.prev-save-continue-buttons .back-button {
-  font-family: 'Open Sans';
-  color: #41528c;
-  background-color: transparent;
-  font-weight: bold;
-  border: none;
-}
-
-.nav-btn.back-button:hover,
-.back-continue-buttons .back-button:hover,
-.prev-continue-results-buttons .back-button:hover,
-.prev-save-continue-buttons .back-button:hover {
-  background-color: #ecdeed;
-  border: none;
-  border-radius: 12px;
-}
-
 .MuiDataGrid-columnHeaderTitle {
   overflow: visible !important;
   line-height: 1.43rem !important;

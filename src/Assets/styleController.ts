@@ -87,21 +87,37 @@ function generateMuiOverides(theme: ITheme) {
     components: {
       // Name of the component
       MuiButton: {
-        styleOverrides: {
-          // Name of the slot
-          root: {
-            // Some CSS
-            backgroundColor: deepBlueColor,
-            border: '1px solid black',
-            borderRadius: '12px',
-            fontWeight: 'bold',
-            fontFamily: 'Open Sans',
-            ':hover': {
-              backgroundColor: lavenderColor,
-              color: deepBlueColor,
+        variants: [
+          {
+            props: { variant: 'contained' },
+            style: {
+              backgroundColor: deepBlueColor,
+              border: '1px solid black',
+              borderRadius: '12px',
+              fontWeight: 'bold',
+              fontFamily: 'Open Sans',
+              ':hover': {
+                backgroundColor: lavenderColor,
+                color: deepBlueColor,
+              },
             },
           },
-        },
+          {
+            props: { variant: 'outlined' },
+            style: {
+              backgroundColor: 'transparent',
+              border: 'none',
+              borderRadius: '12px',
+              fontWeight: 'bold',
+              fontFamily: 'Open Sans',
+              ':hover': {
+                backgroundColor: lavenderColor,
+                color: deepBlueColor,
+                border: 'none',
+              },
+            },
+          },
+        ],
       },
       MuiAppBar: {
         styleOverrides: {

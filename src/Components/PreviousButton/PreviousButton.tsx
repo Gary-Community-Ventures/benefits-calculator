@@ -29,7 +29,7 @@ const PreviousButton = ({ navFunction }: Props) => {
   return (
     <Button
       variant="outlined"
-      className="nav-btn back-button"
+      className="backButton"
       onClick={navigationFunction}
       startIcon={<NavigateBeforeIcon sx={{ mr: '-8px' }} />}
     >
