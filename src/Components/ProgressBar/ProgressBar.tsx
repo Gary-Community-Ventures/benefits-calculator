@@ -24,7 +24,7 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
     borderRadius: '500rem;',
     height: '1rem',
     '& .MuiLinearProgress-bar': {
-      background: theme.secondaryColor,
+      background: theme.progressBarColor,
       borderRadius: '500rem;',
     },
   };
