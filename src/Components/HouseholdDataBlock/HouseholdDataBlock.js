@@ -114,7 +114,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     if (personIndex === 1) {
       return (
-        <Box sx={{ margin: '1rem 0' }}>
+        <Box sx={{ marginBottom: '1.5rem' }}>
           <h2 className="question-label">
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-how-headOfHH"
@@ -126,7 +126,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       );
     } else {
       return (
-        <>
+        <Box sx={{ marginBottom: '1.5rem' }}>
           <h2 className="question-label">
             <FormattedMessage id="householdDataBlock.createAgeQuestion-how" defaultMessage="How old are they?" />
           </h2>
@@ -137,7 +137,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             />
           </p>
           {createTextField(ageTextfieldProps, submittedCount)}
-        </>
+        </Box>
       );
     }
   };
@@ -164,7 +164,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const createHOfHRelationQuestion = () => {
     return (
-      <>
+      <Box sx={{ marginBottom: '1.5rem' }}>
         <h2 className="question-label">
           <FormattedMessage
             id="householdDataBlock.createHOfHRelationQuestion-relation"
@@ -172,7 +172,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           />
         </h2>
         {createRelationshipDropdownMenu()}
-      </>
+      </Box>
     );
   };
 
@@ -258,12 +258,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       <>
         {header}
         {headOfHHInfoWasEntered && (
-          <>
+          <Box sx={{ marginBottom: '1.5rem' }}>
             <h2 className="household-data-sub-header secondary-heading">
               <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
             </h2>
             <div>{formData.householdData.map(createMembersAdded)}</div>
-          </>
+          </Box>
         )}
       </>
     );
