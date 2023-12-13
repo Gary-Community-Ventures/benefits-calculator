@@ -327,7 +327,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     const formattedMsgDefaultMsg = index === 1 ? 'Do any of these apply to you?' : 'Do any of these apply to them?';
 
     return (
-      <>
+      <Box sx={{ margin: '3rem 0' }}>
         <h2 className="question-label">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </h2>
@@ -338,7 +338,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           />
         </p>
         {createConditionOptionCards(index)}
-      </>
+      </Box>
     );
   };
 
@@ -410,7 +410,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const displayHealthInsuranceQuestion = (page, hhMemberData, setHHMemberData) => {
     return (
       <Box className="section-container">
-        <Stack sx={{ margin: '3rem 0', padding: '3rem 0' }} className="section">
+        <Stack sx={{ padding: '3rem 0' }} className="section">
           {displayHealthCareQuestion(page)}
           {
             <OptionCardGroup
@@ -457,23 +457,21 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   return (
     <main className="benefits-form">
-      <div>
-        {createQuestionHeader(page)}
-        {createAgeQuestion(page)}
-        {page === 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
-        {page !== 1 && createHOfHRelationQuestion()}
-        {page !== 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
-        {createConditionsQuestion(page)}
-        <Box>
-          <Stack sx={{ margin: '3rem 0', padding: '3rem 0' }}>
-            {createIncomeRadioQuestion(page)}
-            {memberData.hasIncome && createPersonIncomeBlock(submittedCount)}
-          </Stack>
-        </Box>
-        <div className="question-buttons">
-          <PreviousButton navFunction={handlePreviousSubmit} />
-          <ContinueButton handleContinueSubmit={handleContinueSubmit} />
-        </div>
+      {createQuestionHeader(page)}
+      {createAgeQuestion(page)}
+      {page === 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
+      {page !== 1 && createHOfHRelationQuestion()}
+      {page !== 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
+      {createConditionsQuestion(page)}
+      <Box>
+        <Stack sx={{ margin: '3rem 0', padding: '3rem 0' }}>
+          {createIncomeRadioQuestion(page)}
+          {memberData.hasIncome && createPersonIncomeBlock(submittedCount)}
+        </Stack>
+      </Box>
+      <div className="question-buttons">
+        <PreviousButton navFunction={handlePreviousSubmit} />
+        <ContinueButton handleContinueSubmit={handleContinueSubmit} />
       </div>
     </main>
   );
