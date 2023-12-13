@@ -18,7 +18,7 @@ export interface ITheme {
     '--main-header-color': string;
     '--midBlue-color': string;
     '--option-card-icon-fill-color': string;
-    '--add-another-income-button-hover': string;
+    '--add-another-income-button-hover-color': string;
   };
 }
 
@@ -46,7 +46,7 @@ const themes: IThemes = {
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
       '--option-card-icon-fill-color': '#D6743F',
-      '--add-another-income-button-hover': '#ecdeed',
+      '--add-another-income-button-hover-color': '#ecdeed',
     },
   },
   twoOneOne: {
@@ -67,7 +67,7 @@ const themes: IThemes = {
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
       '--option-card-icon-fill-color': '#D6743F',
-      '--add-another-income-button-hover': '#ecdeed',
+      '--add-another-income-button-hover-color': '#ecdeed',
     },
   },
 };
