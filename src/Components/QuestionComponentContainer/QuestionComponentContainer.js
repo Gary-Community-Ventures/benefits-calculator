@@ -177,72 +177,28 @@ const QuestionComponentContainer = ({
   };
 
   const renderHeaderAndSubheader = () => {
-    const { headerType, name } = matchingQuestion;
-
-    switch (headerType) {
-      case 'signUpInfo':
-        return (
-          <h1 className="sub-header">
-            <FormattedMessage
-              id="qcc.optional-sign-up-text"
-              defaultMessage="Optional: Sign up for benefits updates and/or paid feedback opportunities"
-            />
-          </h1>
-        );
-      case 'aboutHousehold':
-        if (name === 'hasBenefits' || name === 'acuteHHConditions') {
-          return (
-            <h1 className="sub-header">
-              <FormattedMessage
-                id="qcc.tell-us-final-text"
-                defaultMessage="Tell us some final information about your household."
-              />
-            </h1>
-          );
-        } else if (name === 'zipcode') {
-          return (
-            <>
-              <h2 className="question-secondary-header">
-                <FormattedMessage id="qcc.tell-us-text" defaultMessage="Let's Get Started!" />
-              </h2>
-              <h1 className="question-header">
-                <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us where you live." />
-              </h1>
-            </>
-          );
-        } else if (name === 'referralSource') {
-          return (
-            <h1 className="sub-header">
-              <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />
-            </h1>
-          );
-        }
-      default:
-        return (
-          <h1 className="sub-header">
-            <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us about your household." />
-          </h1>
-        );
+    if (matchingQuestion.header === undefined) {
+      return <></>;
     }
+
+    return <h1 className="sub-header">{matchingQuestion.header}</h1>;
   };
 
   return (
     <main className="benefits-form">
-      <Container className="question-header-container">{renderHeaderAndSubheader()}</Container>
-      <Container>
-        {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
-          createComponent(renderTextfieldComponent(matchingQuestion))) ||
-          (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
-            createComponent(renderRadiofieldComponent(matchingQuestion))) ||
-          (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
-            createComponent(renderNoAnswerComponent(matchingQuestion))) ||
-          (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
-            createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
-          (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
-            createComponent(renderOptionCardGroup(matchingQuestion))) ||
-          (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
-            createComponent(renderBasicSelectComponent(matchingQuestion)))}
-      </Container>
+      {renderHeaderAndSubheader()}
+      {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
+        createComponent(renderTextfieldComponent(matchingQuestion))) ||
+        (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
+          createComponent(renderRadiofieldComponent(matchingQuestion))) ||
+        (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
+          createComponent(renderNoAnswerComponent(matchingQuestion))) ||
+        (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
+          createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
+        (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
+          createComponent(renderOptionCardGroup(matchingQuestion))) ||
+        (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
+          createComponent(renderBasicSelectComponent(matchingQuestion)))}
     </main>
   );
 };

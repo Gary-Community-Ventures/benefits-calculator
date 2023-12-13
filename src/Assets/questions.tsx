@@ -25,6 +25,7 @@ import type { QuestionName, Question } from '../Types/Questions.ts';
 const questions: Record<QuestionName, Question> = {
   zipcode: {
     name: 'zipcode',
+    header: <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us where you live." />,
     question: <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />,
     componentDetails: {
       componentType: 'Textfield',
@@ -59,10 +60,10 @@ const questions: Record<QuestionName, Question> = {
         },
       },
     ],
-    headerType: 'aboutHousehold',
   },
   householdSize: {
     name: 'householdSize',
+    header: <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />,
     question: (
       <FormattedMessage
         id="questions.householdSize"
@@ -83,7 +84,6 @@ const questions: Record<QuestionName, Question> = {
       inputError: householdSizeHasError,
       inputHelperText: displayHouseholdSizeHelperText,
     },
-    headerType: 'aboutHousehold',
   },
   householdData: {
     name: 'householdData',
@@ -95,6 +95,7 @@ const questions: Record<QuestionName, Question> = {
   },
   hasExpenses: {
     name: 'hasExpenses',
+    header: <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />,
     question: <FormattedMessage id="questions.hasExpenses" defaultMessage="Does your household have any expenses?" />,
     questionDescription: (
       <FormattedMessage
@@ -126,10 +127,10 @@ const questions: Record<QuestionName, Question> = {
         },
       },
     ],
-    headerType: 'aboutHousehold',
   },
   householdAssets: {
     name: 'householdAssets',
+    header: <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />,
     question: (
       <FormattedMessage
         id="questions.householdAssets"
@@ -151,10 +152,15 @@ const questions: Record<QuestionName, Question> = {
       inputHelperText: displayHouseholdAssetsHelperText,
       dollarField: true,
     },
-    headerType: 'aboutHousehold',
   },
   hasBenefits: {
     name: 'hasBenefits',
+    header: (
+      <FormattedMessage
+        id="qcc.tell-us-final-text"
+        defaultMessage="Tell us some final information about your household."
+      />
+    ),
     question: (
       <FormattedMessage id="questions.hasBenefits" defaultMessage="Does your household currently have any benefits?" />
     ),
@@ -189,10 +195,15 @@ const questions: Record<QuestionName, Question> = {
         },
       },
     ],
-    headerType: 'aboutHousehold',
   },
   acuteHHConditions: {
     name: 'acuteHHConditions',
+    header: (
+      <FormattedMessage
+        id="qcc.tell-us-final-text"
+        defaultMessage="Tell us some final information about your household."
+      />
+    ),
     question: (
       <FormattedMessage
         id="questions.acuteHHConditions"
@@ -205,10 +216,10 @@ const questions: Record<QuestionName, Question> = {
       options: acuteConditionOptions,
       inputError: acuteHHConditionsHasError,
     },
-    headerType: 'aboutHousehold',
   },
   referralSource: {
     name: 'referralSource',
+    header: <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />,
     question: (
       <FormattedMessage id="questions.referralSource-subheader" defaultMessage="How did you hear about MyFriendBen?" />
     ),
@@ -249,10 +260,15 @@ const questions: Record<QuestionName, Question> = {
         },
       },
     ],
-    headerType: 'aboutHousehold',
   },
   signUpInfo: {
     name: 'signUpInfo',
+    header: (
+      <FormattedMessage
+        id="qcc.optional-sign-up-text"
+        defaultMessage="Optional: Sign up for benefits updates and/or paid feedback opportunities"
+      />
+    ),
     question: (
       <FormattedMessage id="questions.signUpInfo" defaultMessage="What would you like us to contact you about?" />
     ),
@@ -275,7 +291,6 @@ const questions: Record<QuestionName, Question> = {
         },
       },
     ],
-    headerType: 'signUpInfo',
   },
 };
 
