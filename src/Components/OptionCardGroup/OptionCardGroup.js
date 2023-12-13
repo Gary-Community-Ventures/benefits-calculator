@@ -40,18 +40,7 @@ const OptionCardGroup = ({ options, stateVariable, memberData, setMemberData, hh
           }}
         >
           <Card
-            className={memberData[stateVariable][optionKey] ? 'selected-option-card' : 'unselected-option-card'}
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              border: '.05px solid #6D6E71',
-              boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.25)',
-              height: '15rem',
-              ':hover': {
-                backgroundColor: '#ECDEED',
-                color: '#1d1c1e',
-              },
-            }}
+            className={memberData[stateVariable][optionKey] ? 'option-card selected-option-card' : 'option-card'}
           >
             <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>
               <CardContent sx={{ textAlign: 'center', padding: '0.5rem' }}>
