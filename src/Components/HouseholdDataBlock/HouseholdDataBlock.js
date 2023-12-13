@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { Box, IconButton, Stack, Paper } from '@mui/material';
+import { Box, IconButton, Stack } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
@@ -114,7 +114,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     if (personIndex === 1) {
       return (
-        <Box sx={{ margin: '1rem 0 1rem 0' }}>
+        <Box sx={{ margin: '1rem 0' }}>
           <h2 className="question-label">
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-how-headOfHH"
@@ -410,7 +410,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const displayHealthInsuranceQuestion = (page, hhMemberData, setHHMemberData) => {
     return (
       <Box className="section-container">
-        <Stack sx={{ margin: '3rem 0 3rem 0', padding: '3rem 0 3rem 0' }} className="section">
+        <Stack sx={{ margin: '3rem 0', padding: '3rem 0' }} className="section">
           {displayHealthCareQuestion(page)}
           {
             <OptionCardGroup
@@ -465,7 +465,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         {page !== 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
         {createConditionsQuestion(page)}
         <Box>
-          <Stack sx={{ margin: '3rem 0 3rem 0', padding: '3rem 0 3rem 0' }}>
+          <Stack sx={{ margin: '3rem 0', padding: '3rem 0' }}>
             {createIncomeRadioQuestion(page)}
             {memberData.hasIncome && createPersonIncomeBlock(submittedCount)}
           </Stack>
