@@ -26,6 +26,7 @@ const QuestionComponentContainer = ({
   const { formData } = useContext(Context);
   let { id } = useParams();
   let matchingQuestion = getQuestion(+id, formData.immutableReferrer);
+
   const errorController = useErrorController(
     matchingQuestion.componentDetails.inputError,
     matchingQuestion.componentDetails.inputHelperText,
@@ -175,11 +176,14 @@ const QuestionComponentContainer = ({
   };
 
   const renderHeaderAndSubheader = () => {
-    if (matchingQuestion.header === undefined) {
-      return <></>;
-    }
-
-    return <h1 className="sub-header">{matchingQuestion.header}</h1>;
+    return (
+      <>
+        {matchingQuestion.subheader && (
+          <strong className="question-secondary-header">{matchingQuestion.subheader}</strong>
+        )}
+        {matchingQuestion.header && <h1 className="sub-header">{matchingQuestion.header}</h1>}
+      </>
+    );
   };
 
   return (
