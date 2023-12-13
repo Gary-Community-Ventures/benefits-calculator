@@ -96,7 +96,7 @@
   color: #293457;
 }
 
-/* the following background classes are needed in order to extend the background to the edges of the screen */
+/* the following section classes are needed in order to extend the background to the edges of the screen */
 .section-container {
   position: relative;
 }
