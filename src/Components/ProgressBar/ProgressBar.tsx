@@ -16,7 +16,7 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
   const { id } = useParams();
 
   let stepValue = step ?? id ?? 0;
-  let progressPercentage: number = ((Number(stepValue) - 1) / totalSteps) * 100;
+  let progressPercentage: number = stepValue === 1 ? 0 : ((Number(stepValue) - 1) / (totalSteps - 1)) * 100;
 
   const progressBarStyles = {
     marginBottom: '5px',
