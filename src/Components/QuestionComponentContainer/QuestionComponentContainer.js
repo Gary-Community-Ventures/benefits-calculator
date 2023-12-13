@@ -176,11 +176,12 @@ const QuestionComponentContainer = ({
   };
 
   const renderHeaderAndSubheader = () => {
-    if (matchingQuestion.header === undefined) {
-      return <></>;
-    }
-
-    return <h1 className="sub-header">{matchingQuestion.header}</h1>;
+    return (
+      <>
+        {matchingQuestion.subheader && <h2 className="question-secondary-header">{matchingQuestion.subheader}</h2>}
+        {matchingQuestion.header && <h1 className="sub-header">{matchingQuestion.header}</h1>}
+      </>
+    );
   };
 
   return (

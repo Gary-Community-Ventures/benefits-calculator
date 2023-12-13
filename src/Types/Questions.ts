@@ -134,5 +134,6 @@ export type Question = {
   questionDescription?: FormattedMessageType;
   componentDetails: ComponentDetails;
   header?: FormattedMessageType;
+  subheader?: FormattedMessageType;
   followUpQuestions?: Question[];
 };
