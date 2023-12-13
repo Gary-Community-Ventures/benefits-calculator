@@ -8,8 +8,13 @@ import { ReactComponent as Medicaid } from './OptionCardIcons/HealthInsurance/me
 import { ReactComponent as Medicare } from './OptionCardIcons/HealthInsurance/medicare.svg';
 import { ReactComponent as None } from './OptionCardIcons/HealthInsurance/none.svg';
 import { ReactComponent as PrivateInsurance } from './OptionCardIcons/HealthInsurance/privateInsurance.svg';
-import { HealthInsuranceOptionsList, HealthInsurance } from '../Types/FormData';
+import { HealthInsurance } from '../Types/FormData';
 import { ReactElement } from 'react';
+
+export type HealthInsuranceOptionsList = {
+  you: HealthInsurance;
+  them: HealthInsurance;
+};
 
 export type HealthInsuranceOptions = {
   [Property in keyof HealthInsuranceOptionsList]: {
