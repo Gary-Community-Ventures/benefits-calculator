@@ -37,11 +37,11 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
     formData.expenses.length > 0
       ? formData.expenses
       : [
-          {
-            expenseSourceName: '',
-            expenseAmount: '',
-          },
-        ],
+        {
+          expenseSourceName: '',
+          expenseAmount: '',
+        },
+      ],
   );
 
   useEffect(() => {
@@ -97,11 +97,8 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   return (
     <>
       {createExpenseBlockQuestions()}
-      <Button
-        className="nav-btn back-button"
-        onClick={(event) => handleAddAdditionalExpenseSource(event)}
-        startIcon={<AddIcon sx={{ fontSize: 'medium !important', mr: '-0.5rem' }} />}
-      >
+      <Button variant="outlined" onClick={(event) => handleAddAdditionalExpenseSource(event)}
+        startIcon={<AddIcon sx={{ fontSize: 'medium !important', mr: '-0.5rem' }} />}>
         <FormattedMessage id="expenseBlock.return-addExpenseButton" defaultMessage="Add another expense" />
       </Button>
       <div className="prev-save-continue-buttons">
