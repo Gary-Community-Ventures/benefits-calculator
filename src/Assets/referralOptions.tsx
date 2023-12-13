@@ -7,11 +7,13 @@ const referralOptions = {
   jeffcoHS: 'Jeffco Human Services',
   jeffcoPP: 'Jeffco Prosperity Partners',
   bia: 'Benefits in Action',
-  mcoa: 'MCOA at Anschutz',
   villageExchange: 'Village Exchange',
   frca: 'Family Resource Center Association',
   testOrProspect: <FormattedMessage id="referralOptions.testOrProspect" defaultMessage="Test / Prospective Partner" />,
   searchEngine: <FormattedMessage id="referralOptions.searchEngine" defaultMessage="Google or other search engine" />,
+  socialMedia: <FormattedMessage id="referralOptions.socialMedia" defaultMessage="Social Media" />,
+  mail: <FormattedMessage id="referralOptions.mail" defaultMessage="Mail" />,
+  tv: <FormattedMessage id="referralOptions.tv" defaultMessage="TV" />,
   other: <FormattedMessage id="referralOptions.other" defaultMessage="Other" />,
 };
 
