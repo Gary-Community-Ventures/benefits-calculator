@@ -464,7 +464,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       {page !== 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
       {createConditionsQuestion(page)}
       <Box>
-        <Stack sx={{ margin: '3rem 0', padding: '3rem 0' }}>
+        <Stack sx={{ margin: '3rem 0' }}>
           {createIncomeRadioQuestion(page)}
           {memberData.hasIncome && createPersonIncomeBlock(submittedCount)}
         </Stack>
