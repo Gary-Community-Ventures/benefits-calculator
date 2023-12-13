@@ -22,7 +22,7 @@ interface BasicSelectProps {
   componentDetails: ComponentDetails;
   options: { [key: string]: string };
   memberData: HouseholdData;
-  setMemberData: any;
+  setMemberData: (member: HouseholdData) => void;
   submitted: number;
 }
 
