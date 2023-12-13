@@ -214,14 +214,12 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
           {ageErrorController.showError && ageErrorController.message(null)}
         </CardContent>
       </Box>
-      <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
-        <Box>
-          <PreviousButton navFunction={() => navigate(`/step-1${queryString}`)} />
-          <Button variant="contained" onClick={handleContinue}>
-            <FormattedMessage id="continue-button" defaultMessage="Continue" />
-          </Button>
-        </Box>
-      </CardActions>
+      <div className="back-continue-buttons">
+        <PreviousButton navFunction={() => navigate(`/step-1${queryString}`)} />
+        <Button variant="contained" onClick={handleContinue}>
+          <FormattedMessage id="continue-button" defaultMessage="Continue" />
+        </Button>
+      </div>
     </main>
   );
 };
