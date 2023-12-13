@@ -15,9 +15,8 @@
 
 .open-share-button {
   font-size: 1rem;
-  color: var(--primary-color);
+  color: var(--secondary-color);
   cursor: pointer;
-  /* font-weight: bold; */
 }
 
 .ineligibility-link {

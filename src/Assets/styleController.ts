@@ -18,6 +18,7 @@ export interface ITheme {
     'font-size': string;
     '--main-header-color': string;
     '--midBlue-color': string;
+    '--hover-color': string;
   };
 }
 
@@ -45,6 +46,7 @@ const themes: IThemes = {
       'font-size': '16px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
+      '--hover-color': '#ECDEED',
     },
   },
   twoOneOne: {
@@ -65,6 +67,7 @@ const themes: IThemes = {
       'font-size': '18px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
+      '--hover-color': '#ECDEED',
     },
   },
 };
@@ -82,6 +85,9 @@ function generateMuiOverides(theme: ITheme) {
     palette: {
       primary: {
         main: deepBlueColor,
+      },
+      secondary: {
+        main: darkTerraCottaColor,
       },
     },
     components: {
