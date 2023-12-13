@@ -19,8 +19,7 @@ const OptionCardGroup = ({ options, stateVariable, memberData, setMemberData, hh
   };
 
   const displayOptionCards = (options, stateVariable, memberData, hhMemberIndex) => {
-    const optionCards = Object.keys(options).map((key, index) => {
-      const optionKey = key;
+    const optionCards = Object.keys(options).map((optionKey, index) => {
       let translatedAriaLabel = intl.formatMessage({
         id: options[optionKey].formattedMessage.props.id,
         defaultMessage: options[optionKey].formattedMessage.props.defaultMessage,
