@@ -10,7 +10,6 @@ import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
-import { Container } from '@mui/material';
 import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
 import './QuestionComponentContainer.css';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
