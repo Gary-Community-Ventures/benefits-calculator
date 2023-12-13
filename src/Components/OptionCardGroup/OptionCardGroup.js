@@ -39,9 +39,7 @@ const OptionCardGroup = ({ options, stateVariable, memberData, setMemberData, hh
             }
           }}
         >
-          <Card
-            className={memberData[stateVariable][optionKey] ? 'option-card selected-option-card' : 'option-card'}
-          >
+          <Card className={memberData[stateVariable][optionKey] ? 'option-card selected-option-card' : 'option-card'}>
             <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>
               <CardContent sx={{ textAlign: 'center', padding: '0.5rem' }}>
                 <Box>{options[optionKey].icon}</Box>
