@@ -3,6 +3,11 @@
   margin: 0%;
 }
 
+#root {
+  overflow-x: hidden;
+  position: relative;
+}
+
 .benefits-form {
   margin: 0 auto 20px auto;
   justify-content: center;
@@ -92,7 +97,7 @@
   color:black;
 }
 
-/* the following background classes are needed in order to extend the background to the edges of the screen */
+/* the following section classes are needed in order to extend the background to the edges of the screen */
 .section-container {
   position: relative;
 }
