@@ -7,6 +7,8 @@ export interface ITheme {
   secondaryBackgroundColor: string;
   creamColor: string;
   hoverColor: string;
+  outlineHoverBackgroundColor: string;
+  outlineHoverColor: string;
   progressBarColor: string;
   cssVariables: {
     '--primary-color': string;
@@ -33,6 +35,8 @@ const themes: IThemes = {
     creamColor: '#F9EFE6',
     midBlueColor: '#41528C',
     hoverColor: '#ECDEED',
+    outlineHoverColor: '#293457',
+    outlineHoverBackgroundColor: '#ECDEED',
     progressBarColor: '#D6743F',
     cssVariables: {
       '--primary-color': '#293457',
@@ -51,7 +55,9 @@ const themes: IThemes = {
     midBlueColor: '#005191',
     secondaryBackgroundColor: '#EFEFEF',
     creamColor: '#F9EFE6',
-    hoverColor: '#ECDEED',
+    hoverColor: '#FFFFFF',
+    outlineHoverBackgroundColor: '#005191',
+    outlineHoverColor: '#FFFFFF',
     progressBarColor: '#539ED0',
     cssVariables: {
       '--primary-color': '#005191',
@@ -111,8 +117,8 @@ function generateMuiOverides(theme: ITheme) {
               fontWeight: 'bold',
               fontFamily: 'Open Sans',
               ':hover': {
-                backgroundColor: lavenderColor,
-                color: deepBlueColor,
+                backgroundColor: theme.outlineHoverBackgroundColor,
+                color: theme.outlineHoverColor,
                 border: 'none',
               },
             },
