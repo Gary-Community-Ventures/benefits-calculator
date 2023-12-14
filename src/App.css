@@ -88,8 +88,8 @@
   margin: auto;
 }
 .secondary-heading {
-  font-family: 'Roboto Slab', sans-serif;
-  color: #293457;
+  font-family: 'Open Sans', sans-serif;
+  color:black;
 }
 
 /* the following background classes are needed in order to extend the background to the edges of the screen */
