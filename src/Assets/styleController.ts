@@ -14,6 +14,7 @@ export interface ITheme {
     '--confirmation-background': string;
     '--secondary-background-color': string;
     '--cream-color': string;
+    '--main-max-width': string;
     'font-size': string;
     '--main-header-color': string;
     '--midBlue-color': string;
