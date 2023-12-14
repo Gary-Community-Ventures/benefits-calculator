@@ -3,6 +3,11 @@
   margin: 0%;
 }
 
+#root {
+  overflow-x: hidden;
+  position: relative;
+}
+
 .benefits-form {
   margin: 0 auto 20px auto;
   justify-content: center;
@@ -24,9 +29,22 @@
 .sub-header {
   font-size: 2rem;
   font-weight: 700;
+  line-height: normal;
+  font-family: 'Roboto Slab', serif;
+  color: var(--main-header-color);
   margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #505c66;
+}
+
+.main-paragraph {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+.sub-header-language-select {
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+  margin-bottom: 1rem;
 }
 
 .bottom-border {
@@ -73,4 +91,24 @@
 .main-max-width {
   max-width: var(--main-max-width);
   margin: auto;
+}
+.secondary-heading {
+  font-family: 'Roboto Slab', sans-serif;
+  color: #293457;
+}
+
+/* the following section classes are needed in order to extend the background to the edges of the screen */
+.section-container {
+  position: relative;
+}
+
+.section:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: -100vw;
+  width: 300vw;
+  background: var(--secondary-background-color);
+  z-index: -1;
 }

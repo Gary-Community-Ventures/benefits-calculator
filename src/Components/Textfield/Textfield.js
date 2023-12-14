@@ -6,6 +6,7 @@ import { useErrorController } from '../../Assets/validationFunctions.tsx';
 const StyledTextField = styled(TextField)({
   marginBottom: 20,
   marginRight: '1rem',
+  backgroundColor: '#FFFFFF',
 });
 
 const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submitted }) => {

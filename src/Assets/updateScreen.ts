@@ -15,6 +15,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
   const expenses = getExpensesBodies(formData);
 
   const finalReferralSource = formData.otherSource !== '' ? formData.otherSource : formData.referralSource;
+
   const screenBody: ApiFormData = {
     is_test: formData.isTest ?? false,
     external_id: formData.externalID ?? null,
@@ -26,7 +27,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     household_size: formData.householdSize === '' ? null : Number(formData.householdSize),
     household_members: householdMembers,
     expenses: expenses,
-    household_assets: formData.householdAssets,
+    household_assets: formData.householdAssets || 0,
     request_language_code: languageCode,
     has_benefits: formData.hasBenefits ?? 'preferNotToAnswer',
     has_acp: formData.benefits.acp,
@@ -84,11 +85,11 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
   return {
     age: Number(householdMemberData.age),
     relationship: householdMemberData.relationshipToHH,
-    student: householdMemberData.student,
-    pregnant: householdMemberData.pregnant,
-    visually_impaired: householdMemberData.blindOrVisuallyImpaired,
-    disabled: householdMemberData.disabled,
-    long_term_disability: householdMemberData.longTermDisability,
+    student: householdMemberData.conditions.student,
+    pregnant: householdMemberData.conditions.pregnant,
+    visually_impaired: householdMemberData.conditions.blindOrVisuallyImpaired,
+    disabled: householdMemberData.conditions.disabled,
+    long_term_disability: householdMemberData.conditions.longTermDisability,
     has_income: householdMemberData.hasIncome,
     income_streams: incomes,
     insurance: householdMemberData.healthInsurance,
