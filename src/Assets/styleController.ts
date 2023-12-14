@@ -96,6 +96,9 @@ function generateMuiOverides(theme: ITheme) {
     components: {
       // Name of the component
       MuiButton: {
+        defaultProps: {
+          disableElevation: true,
+        },
         variants: [
           {
             props: { variant: 'contained' },
@@ -115,6 +118,7 @@ function generateMuiOverides(theme: ITheme) {
             props: { variant: 'outlined' },
             style: {
               backgroundColor: 'transparent',
+              color: midBlue,
               border: 'none',
               borderRadius: '12px',
               fontWeight: 'bold',
