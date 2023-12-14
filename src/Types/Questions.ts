@@ -56,12 +56,7 @@ export type BasicSelectDetails = {
 export type OptionCardGroupDetails = {
   componentType: 'OptionCardGroup';
   inputName: string;
-  options: {
-    [key: string]: {
-      formattedMessage: FormattedMessageType;
-      image: string;
-    };
-  };
+  options: any;
   inputError: ValidationFunction<{ [key: string]: boolean }>;
   inputHelperText?: MessageFunction<{ [key: string]: boolean }>;
 };
