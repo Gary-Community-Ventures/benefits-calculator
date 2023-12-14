@@ -3,6 +3,19 @@
   margin-top: 0.5rem;
 }
 
+.main-paragraph p {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
 .public-charge-link {
   color: var(--primary-color);
+}
+
+.back-continue-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-left: -0.5rem;
 }

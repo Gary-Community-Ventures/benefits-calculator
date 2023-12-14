@@ -7,7 +7,7 @@ export interface ITheme {
   midBlueColor: string;
   secondaryBackgroundColor: string;
   creamColor: string;
-  brightTerraCottaColor: string;
+  hoverColor: string;
   cssVariables: {
     '--primary-color': string;
     '--secondary-color': string;
@@ -18,7 +18,9 @@ export interface ITheme {
     'font-size': string;
     '--main-header-color': string;
     '--midBlue-color': string;
-    '--brightTerraCotta-color': string;
+    '--hover-color': string;
+    '--icon-color': string;
+    '--option-card-hover-font-color': string;
   };
 }
 
@@ -35,7 +37,7 @@ const themes: IThemes = {
     creamColor: '#F9EFE6',
     terraCottaColor: '#B85A27',
     midBlueColor: '#41528C',
-    brightTerraCottaColor: '#D6743F',
+    hoverColor: '#ECDEED',
     cssVariables: {
       '--primary-color': '#293457',
       '--secondary-color': '#B85A27',
@@ -46,7 +48,9 @@ const themes: IThemes = {
       'font-size': '16px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
-      '--brightTerraCotta-color': '#D6743F',
+      '--hover-color': '#ECDEED',
+      '--icon-color': '#D6743F',
+      '--option-card-hover-font-color': '#1D1C1E',
     },
   },
   twoOneOne: {
@@ -56,7 +60,7 @@ const themes: IThemes = {
     midBlueColor: '#41528C',
     secondaryBackgroundColor: '#FBF9FC',
     creamColor: '#F9EFE6',
-    brightTerraCottaColor: '#D6743F',
+    hoverColor: '#ECDEED',
     cssVariables: {
       '--primary-color': '#005191',
       '--secondary-color': '#539ED0',
@@ -67,7 +71,9 @@ const themes: IThemes = {
       'font-size': '18px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
-      '--brightTerraCotta-color': '#D6743F',
+      '--hover-color': '#ECDEED',
+      '--icon-color': '#D6743F',
+      '--option-card-hover-font-color': '#1D1C1E',
     },
   },
 };
@@ -79,6 +85,7 @@ function generateMuiOverides(theme: ITheme) {
   const darkTerraCottaColor = theme.secondaryColor;
   const blackColor = '#2A2B2A';
   const midBlue = theme.midBlueColor;
+  const lavenderColor = theme.hoverColor;
 
   return {
     palette: {
@@ -89,16 +96,37 @@ function generateMuiOverides(theme: ITheme) {
     components: {
       // Name of the component
       MuiButton: {
-        styleOverrides: {
-          // Name of the slot
-          root: {
-            // Some CSS
-            backgroundColor: deepBlueColor,
-            ':hover': {
-              backgroundColor: darkTerraCottaColor,
+        variants: [
+          {
+            props: { variant: 'contained' },
+            style: {
+              backgroundColor: deepBlueColor,
+              border: '1px solid black',
+              borderRadius: '12px',
+              fontWeight: 'bold',
+              fontFamily: 'Open Sans',
+              ':hover': {
+                backgroundColor: lavenderColor,
+                color: deepBlueColor,
+              },
             },
           },
-        },
+          {
+            props: { variant: 'outlined' },
+            style: {
+              backgroundColor: 'transparent',
+              border: 'none',
+              borderRadius: '12px',
+              fontWeight: 'bold',
+              fontFamily: 'Open Sans',
+              ':hover': {
+                backgroundColor: lavenderColor,
+                color: deepBlueColor,
+                border: 'none',
+              },
+            },
+          },
+        ],
       },
       MuiAppBar: {
         styleOverrides: {
@@ -120,7 +148,7 @@ function generateMuiOverides(theme: ITheme) {
         styleOverrides: {
           root: {
             '&.Mui-checked': {
-              color: deepBlueColor,
+              color: midBlue,
             },
           },
         },

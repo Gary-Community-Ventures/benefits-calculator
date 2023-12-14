@@ -133,6 +133,7 @@ export type Question = {
   question?: FormattedMessageType;
   questionDescription?: FormattedMessageType;
   componentDetails: ComponentDetails;
-  headerType?: string;
+  header?: FormattedMessageType;
+  subheader?: FormattedMessageType;
   followUpQuestions?: Question[];
 };

@@ -3,6 +3,11 @@
   margin: 0%;
 }
 
+#root {
+  overflow-x: hidden;
+  position: relative;
+}
+
 .benefits-form {
   margin: 0 auto 20px auto;
   justify-content: center;
@@ -24,7 +29,8 @@
 .sub-header {
   font-size: 2rem;
   font-weight: 700;
-  font-family: 'Roboto Slab', sans-serif;
+  line-height: normal;
+  font-family: 'Roboto Slab', serif;
   color: var(--main-header-color);
   margin-bottom: 1rem;
 }
@@ -89,4 +95,20 @@
 .secondary-heading {
   font-family: 'Roboto Slab', sans-serif;
   color: #293457;
+}
+
+/* the following section classes are needed in order to extend the background to the edges of the screen */
+.section-container {
+  position: relative;
+}
+
+.section:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: -100vw;
+  width: 300vw;
+  background: var(--secondary-background-color);
+  z-index: -1;
 }

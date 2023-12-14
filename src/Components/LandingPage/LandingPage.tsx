@@ -133,15 +133,15 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       <h1 className="sub-header">
         <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
       </h1>
-      <CardContent sx={{ backgroundColor: theme.lightLavenderBackground }}>
-        <Typography variant="body1">
-          <div className="main-paragraph">
+      <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }}>
+        <div className="main-paragraph">
+          <Typography variant="body1">
             <FormattedMessage
               id="landingPage.body"
               defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:"
             />
-          </div>
-        </Typography>
+          </Typography>
+        </div>
         <ul className="landing-page-list-container">
           <li className="main-paragraph">
             <FormattedMessage
@@ -214,14 +214,12 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
           {ageErrorController.showError && ageErrorController.message(null)}
         </CardContent>
       </Box>
-      <CardActions sx={{ mt: '1rem', ml: '-.5rem' }}>
-        <Box>
-          <PreviousButton navFunction={() => navigate(`/step-1${queryString}`)} />
-          <Button variant="contained" onClick={handleContinue}>
-            <FormattedMessage id="continue-button" defaultMessage="Continue" />
-          </Button>
-        </Box>
-      </CardActions>
+      <div className="back-continue-buttons">
+        <PreviousButton navFunction={() => navigate(`/step-1${queryString}`)} />
+        <Button variant="contained" onClick={handleContinue}>
+          <FormattedMessage id="continue-button" defaultMessage="Continue" />
+        </Button>
+      </div>
     </main>
   );
 };
