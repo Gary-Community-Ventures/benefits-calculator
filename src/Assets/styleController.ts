@@ -33,7 +33,7 @@ const themes: IThemes = {
     creamColor: '#F9EFE6',
     midBlueColor: '#41528C',
     hoverColor: '#ECDEED',
-    progressBarColor: '#B85A27',
+    progressBarColor: '#D6743F',
     cssVariables: {
       '--primary-color': '#293457',
       '--secondary-color': '#B85A27',
