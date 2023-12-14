@@ -5,9 +5,45 @@
 }
 
 .confirmation-container {
-  border-radius: 2rem;
   margin: 2rem 10% 2rem 10%;
+}
+
+.confirmation-container > div {
+  background-color: var(--secondary-background-color);
   padding: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.confirmation-icon {
+  width: 4.75rem;
+  display: block;
+  margin: auto;
+}
+
+svg.confirmation-icon path,
+svg.confirmation-icon circle {
+  stroke: var(--icon-color);
+  fill: var(--icon-color);
+}
+
+.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-2.css-1o7apob-MuiGrid-root.no-padding {
+  padding: 0;
+}
+
+.edit-button {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 1.5rem;
+  transform: translate(50%, -50%);
+}
+
+svg.edit-button path,
+svg.edit-button rect,
+svg.edit-button polygon {
+  stroke: var(--midBlue-color);
+  fill: var(--midBlue-color);
 }
 
 .prev-continue-results-buttons.confirmation {
@@ -15,14 +51,6 @@
   justify-content: space-between;
   margin-left: 10%;
   margin-right: 10%;
-}
-
-.MuiSvgIcon-root.edit-icon {
-  color: #2a2b2a;
-}
-
-.edit-icon:hover {
-  cursor: pointer;
 }
 
 .section-title {
@@ -52,6 +80,14 @@
 @media (max-width: 630px) {
   .confirmation-container {
     margin: 0;
+  }
+
+  .confirmation-icon {
+    width: 100%;
+  }
+
+  .edit-button {
+    width: 1rem;
   }
 
   .MuiSvgIcon-root.home-icon {
