@@ -18,6 +18,9 @@ export interface ITheme {
     'font-size': string;
     '--main-header-color': string;
     '--midBlue-color': string;
+    '--hover-color': string;
+    '--icon-color': string;
+    '--option-card-hover-font-color': string;
   };
 }
 
@@ -45,6 +48,9 @@ const themes: IThemes = {
       'font-size': '16px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
+      '--hover-color': '#ECDEED',
+      '--icon-color': '#D6743F',
+      '--option-card-hover-font-color': '#1D1C1E',
     },
   },
   twoOneOne: {
@@ -65,6 +71,9 @@ const themes: IThemes = {
       'font-size': '18px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
+      '--hover-color': '#ECDEED',
+      '--icon-color': '#D6743F',
+      '--option-card-hover-font-color': '#1D1C1E',
     },
   },
 };
