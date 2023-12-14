@@ -14,17 +14,12 @@ export interface ITheme {
     '--confirmation-background': string;
     '--secondary-background-color': string;
     '--cream-color': string;
-    '--main-max-width': string;
     'font-size': string;
     '--main-header-color': string;
     '--midBlue-color': string;
-    '--option-card-background-color': string;
-    '--option-card-hover-background-color': string;
+    '--hover-color': string;
+    '--icon-color': string;
     '--option-card-hover-font-color': string;
-    '--option-card-icon-fill-color': string;
-    '--selected-option-card-background-color': string;
-    '--selected-option-card-font-color': string;
-    '--add-another-income-button-hover-color': string;
   };
 }
 
@@ -52,13 +47,9 @@ const themes: IThemes = {
       'font-size': '16px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
-      '--option-card-background-color': '#FFFFFF',
-      '--option-card-hover-background-color': '#ECDEED',
+      '--hover-color': '#ECDEED',
+      '--icon-color': '#D6743F',
       '--option-card-hover-font-color': '#1D1C1E',
-      '--option-card-icon-fill-color': '#D6743F',
-      '--selected-option-card-background-color': '#293457',
-      '--selected-option-card-font-color': '#FFFFFF',
-      '--add-another-income-button-hover-color': '#ECDEED',
     },
   },
   twoOneOne: {
@@ -79,13 +70,9 @@ const themes: IThemes = {
       'font-size': '18px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
-      '--option-card-background-color': '#FFFFFF',
-      '--option-card-hover-background-color': '#ECDEED',
+      '--hover-color': '#ECDEED',
+      '--icon-color': '#D6743F',
       '--option-card-hover-font-color': '#1D1C1E',
-      '--option-card-icon-fill-color': '#D6743F',
-      '--selected-option-card-background-color': '#293457',
-      '--selected-option-card-font-color': '#FFFFFF',
-      '--add-another-income-button-hover-color': '#ECDEED',
     },
   },
 };

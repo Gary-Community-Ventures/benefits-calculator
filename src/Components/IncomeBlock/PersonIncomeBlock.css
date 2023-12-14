@@ -29,7 +29,7 @@
 }
 
 .add-another-income-button.MuiButton-root:hover {
-  background-color: var(--add-another-income-button-hover-color);
+  background-color: var(--hoverColor);
 }
 
 .income-question-padding {

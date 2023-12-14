@@ -25,6 +25,8 @@ const OptionCardGroup = ({ options, stateVariable, memberData, setMemberData, hh
         defaultMessage: options[optionKey].formattedMessage.props.defaultMessage,
       });
 
+      const isSelected = memberData[stateVariable][optionKey];
+
       return (
         <CardActionArea
           key={hhMemberIndex + 'key' + index}
@@ -39,11 +41,11 @@ const OptionCardGroup = ({ options, stateVariable, memberData, setMemberData, hh
             }
           }}
         >
-          <Card className={memberData[stateVariable][optionKey] ? 'option-card selected-option-card' : 'option-card'}>
+          <Card className={isSelected ? 'option-card selected-option-card' : 'option-card'}>
             <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>
               <CardContent sx={{ textAlign: 'center', padding: '0.5rem' }}>
                 <Box>{options[optionKey].icon}</Box>
-                <Typography>{translatedAriaLabel}</Typography>
+                <Typography className={isSelected ? 'option-card-text' : ''}>{translatedAriaLabel}</Typography>
               </CardContent>
             </Stack>
             {memberData[stateVariable][optionKey] && (
