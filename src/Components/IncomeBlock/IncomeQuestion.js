@@ -15,11 +15,11 @@ import {
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import Textfield from '../Textfield/Textfield';
-import { SubHeaderWrapper } from '../SubHeaderWrapper/SubHeaderWrapper.tsx';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
   maxWidth: '100%',
+  backgroundColor: '#FFFFFF',
 });
 
 const StyledDeleteButton = styled(Button)({
@@ -28,14 +28,15 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 0,
   padding: 0,
   fontSize: '1.25rem',
+  position: 'absolute',
 });
 
 const IncomeQuestion = ({
   currentIncomeSource,
   allIncomeSources,
   setAllIncomeSources,
-  householdData,
-  setHouseholdData,
+  memberData,
+  setMemberData,
   index,
   page,
   submitted,
@@ -73,11 +74,9 @@ const IncomeQuestion = ({
 
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
-        <SubHeaderWrapper key={menuItemKey}>
-          <MenuItem value={menuItemKey} key={menuItemKey}>
-            {menuItemLabels[i]}
-          </MenuItem>
-        </SubHeaderWrapper>
+        <MenuItem value={menuItemKey} key={menuItemKey}>
+          {menuItemLabels[i]}
+        </MenuItem>
       );
     });
 
@@ -350,8 +349,8 @@ const IncomeQuestion = ({
     const updatedSelectedMenuItems = allIncomeSources.filter((incomeSourceData, index) => index !== selectedIndex);
     setAllIncomeSources(updatedSelectedMenuItems);
 
-    setHouseholdData({
-      ...householdData,
+    setMemberData({
+      ...memberData,
       incomeStreams: updatedSelectedMenuItems,
     });
   };
@@ -367,25 +366,27 @@ const IncomeQuestion = ({
   }
 
   const incomeStreamQuestion = (
-    <h2 className="question-label">
+    <h2 className="question-label income-stream-q-padding">
       <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
     </h2>
   );
 
   return (
-    <div key={index}>
-      {index > 0 && (
-        <div className="delete-button-container">
-          <StyledDeleteButton variant="contained" onClick={() => deleteIncomeBlock(index)}>
-            &#215;
-          </StyledDeleteButton>
-        </div>
-      )}
-      {index > 0 && incomeStreamQuestion}
-      {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
-      {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
-      {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
-      {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+    <div key={index} className="section-container income-question-padding">
+      <div className={index % 2 === 0 ? 'section' : ''}>
+        {index > 0 && (
+          <div className="delete-button-container">
+            <StyledDeleteButton variant="contained" onClick={() => deleteIncomeBlock(index)}>
+              &#215;
+            </StyledDeleteButton>
+          </div>
+        )}
+        {index > 0 && incomeStreamQuestion}
+        {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
+        {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+        {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
+        {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+      </div>
     </div>
   );
 };
