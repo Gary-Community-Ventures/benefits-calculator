@@ -23,8 +23,8 @@
 
 svg.confirmation-icon path,
 svg.confirmation-icon circle {
-  stroke: var(--brightTerraCotta-color);
-  fill: var(--brightTerraCotta-color);
+  stroke: var(--icon-color);
+  fill: var(--icon-color);
 }
 
 .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-2.css-1o7apob-MuiGrid-root.no-padding {
@@ -42,8 +42,8 @@ svg.confirmation-icon circle {
 svg.edit-button path,
 svg.edit-button rect,
 svg.edit-button polygon {
-  stroke: var(--primary-color);
-  fill: var(--primary-color);
+  stroke: var(--midBlue-color);
+  fill: var(--midBlue-color);
 }
 
 .prev-continue-results-buttons.confirmation {
@@ -51,14 +51,6 @@ svg.edit-button polygon {
   justify-content: space-between;
   margin-left: 10%;
   margin-right: 10%;
-}
-
-.MuiSvgIcon-root.edit-icon {
-  color: #2a2b2a;
-}
-
-.edit-icon:hover {
-  cursor: pointer;
 }
 
 .section-title {
