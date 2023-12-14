@@ -91,3 +91,19 @@
   font-family: 'Roboto Slab', sans-serif;
   color: #293457;
 }
+
+/* the following background classes are needed in order to extend the background to the edges of the screen */
+.section-container {
+  position: relative;
+}
+
+.section:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: -100vw;
+  width: 300vw;
+  background: var(--secondary-background-color);
+  z-index: -1;
+}
