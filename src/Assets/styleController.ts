@@ -21,6 +21,7 @@ export interface ITheme {
     '--midBlue-color': string;
     '--hover-color': string;
     '--icon-color': string;
+    '--secondary-icon-color': string;
     '--option-card-hover-font-color': string;
   };
 }
@@ -52,14 +53,16 @@ const themes: IThemes = {
       '--midBlue-color': '#41528C',
       '--hover-color': '#ECDEED',
       '--icon-color': '#D6743F',
+      '--secondary-icon-color': '#D6743F',
       '--option-card-hover-font-color': '#1D1C1E',
     },
   },
+  // 539ed0
   twoOneOne: {
     primaryColor: '#005191',
     secondaryColor: '#005191',
     midBlueColor: '#005191',
-    secondaryBackgroundColor: '#EFEFEF',
+    secondaryBackgroundColor: '#F7F7F7',
     creamColor: '#F9EFE6',
     hoverColor: '#FFFFFF',
     outlineHoverBackgroundColor: '#005191',
@@ -68,14 +71,15 @@ const themes: IThemes = {
     cssVariables: {
       '--primary-color': '#005191',
       '--secondary-color': '#005191',
-      '--secondary-background-color': '#EFEFEF',
+      '--secondary-background-color': '#F7F7F7',
       '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '18px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
-      '--hover-color': '#ECDEED',
-      '--icon-color': '#D6743F',
+      '--hover-color': '#EFEFEF',
+      '--icon-color': '#ff443b',
+      '--secondary-icon-color': '#005191',
       '--option-card-hover-font-color': '#1D1C1E',
     },
   },
