@@ -17,8 +17,11 @@ export interface ITheme {
     '--cream-color': string;
     '--main-max-width': string;
     'font-size': string;
-    '--heading-color': string;
-    '--question-label': string;
+    '--main-header-color': string;
+    '--midBlue-color': string;
+    '--hover-color': string;
+    '--icon-color': string;
+    '--option-card-hover-font-color': string;
   };
 }
 
@@ -45,8 +48,11 @@ const themes: IThemes = {
       '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '16px',
-      '--heading-color': '#B85A27',
-      '--question-label': '#293457',
+      '--main-header-color': '#B85A27',
+      '--midBlue-color': '#41528C',
+      '--hover-color': '#ECDEED',
+      '--icon-color': '#D6743F',
+      '--option-card-hover-font-color': '#1D1C1E',
     },
   },
   twoOneOne: {
@@ -66,8 +72,11 @@ const themes: IThemes = {
       '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '18px',
-      '--heading-color': '#000000',
-      '--question-label': '#000000',
+      '--main-header-color': '#B85A27',
+      '--midBlue-color': '#41528C',
+      '--hover-color': '#ECDEED',
+      '--icon-color': '#D6743F',
+      '--option-card-hover-font-color': '#1D1C1E',
     },
   },
 };
@@ -93,6 +102,9 @@ function generateMuiOverides(theme: ITheme) {
     components: {
       // Name of the component
       MuiButton: {
+        defaultProps: {
+          disableElevation: true,
+        },
         variants: [
           {
             props: { variant: 'contained' },
@@ -112,6 +124,7 @@ function generateMuiOverides(theme: ITheme) {
             props: { variant: 'outlined' },
             style: {
               backgroundColor: 'transparent',
+              color: midBlue,
               border: 'none',
               borderRadius: '12px',
               fontWeight: 'bold',

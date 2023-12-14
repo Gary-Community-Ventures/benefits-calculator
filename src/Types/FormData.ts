@@ -13,11 +13,7 @@ export interface IncomeStream {
 export interface HouseholdData {
   age: string;
   relationshipToHH: string;
-  student: boolean;
-  pregnant: boolean;
-  blindOrVisuallyImpaired: boolean;
-  disabled: boolean;
-  longTermDisability: boolean;
+  conditions: Conditions;
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
   healthInsurance: HealthInsurance;
@@ -108,4 +104,12 @@ export interface FormData {
   signUpInfo: SignUpInfo;
   urlSearchParams: string;
   acuteHHConditions: AcuteHHConditions;
+}
+
+export interface Conditions {
+  student: boolean;
+  pregnant: boolean;
+  blindOrVisuallyImpaired: boolean;
+  disabled: boolean;
+  longTermDisability: boolean;
 }

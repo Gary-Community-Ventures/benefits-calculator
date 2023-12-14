@@ -16,16 +16,12 @@
 }
 
 .current-household-member {
-  outline: 3px solid var(--primary-color);
+  outline: 3px solid var(--secondary-color);
   box-shadow: 1px 1px 10px rgb(0 0 0 / 0.4);
 }
 
 .member-added-relationship {
   color: var(--primary-color);
-}
-
-.radio-question {
-  margin-top: 1rem;
 }
 
 .household-data-sub-header {
@@ -35,6 +31,7 @@
 .question-buttons {
   display: flex;
   justify-content: space-between;
+  margin-top: 1rem;
 }
 
 @media (max-width: 600px) {
