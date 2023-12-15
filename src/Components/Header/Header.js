@@ -66,8 +66,8 @@ const Header = ({ handleTextfieldChange }) => {
 
   return (
     <nav>
-      <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#2A2B2A' }} square={true}>
-        <AppBar position="sticky" id="nav-container" elevation={0} sx={{ backgroundColor: '#2A2B2A' }}>
+      <Paper className="header-full-width-container" square={true} elevation={0}>
+        <AppBar id="nav-container" position="sticky" elevation={0}>
           <a href={`/step-1${queryString}`} className="home-link">
             <img src={getReferrer('logoSource')} alt={getReferrer('logoAlt')} className={getReferrer('logoClass')} />
           </a>
