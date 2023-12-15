@@ -41,10 +41,10 @@ const referrerData: ReferrerData = {
   },
   logoClass: {
     default: 'logo',
-    jeffcoHS: 'big-logo logo',
-    jeffcoHSCM: 'big-logo logo',
-    villageExchange: 'big-logo logo',
-    cch: 'big-logo logo',
+    jeffcoHS: 'logo',
+    jeffcoHSCM: 'logo',
+    villageExchange: 'logo',
+    cch: 'logo',
   },
   twoOneOneLink: {
     default: 'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=organic&utm_id=211mfb',
