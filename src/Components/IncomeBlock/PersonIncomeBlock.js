@@ -91,7 +91,7 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
       <div>
         <Button
           variant="outlined"
-          onClick={(event) => handleAddAdditionalExpenseSource(event)}
+          onClick={(event) => handleAddAdditionalIncomeSource(event)}
           startIcon={<AddIcon sx={{ fontSize: 'medium !important', mr: '-0.5rem' }} />}
         >
           <FormattedMessage id="personIncomeBlock.return-addIncomeButton" defaultMessage="Add another income" />
