@@ -57,7 +57,6 @@ const themes: IThemes = {
       '--option-card-hover-font-color': '#1D1C1E',
     },
   },
-  // 539ed0
   twoOneOne: {
     primaryColor: '#005191',
     secondaryColor: '#005191',
