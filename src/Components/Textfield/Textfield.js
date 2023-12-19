@@ -6,7 +6,6 @@ import { useErrorController } from '../../Assets/validationFunctions.tsx';
 const StyledTextField = styled(TextField)({
   marginBottom: 20,
   marginRight: '1rem',
-  backgroundColor: '#FFFFFF',
 });
 
 const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submitted }) => {
@@ -36,11 +35,12 @@ const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submi
       error={errorController.showError}
       helperText={errorController.showError && errorController.message(data[inputName])}
       InputProps={
-        dollarField
+        (dollarField
           ? {
               startAdornment: <InputAdornment position="start">$</InputAdornment>,
             }
-          : {}
+          : {},
+        { sx: { backgroundColor: '#FFFFFF' } })
       }
     />
   );

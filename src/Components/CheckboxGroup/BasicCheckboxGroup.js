@@ -29,14 +29,9 @@ const BasicCheckboxGroup = ({ stateVariable, options }) => {
     const formControlLabels = optionKeys.map((optionKey) => {
       return (
         <FormControlLabel
-          sx={{ alignItems: 'flex-start', marginTop: `1rem` }}
+          sx={{ alignItems: 'center', marginTop: `1rem` }}
           control={
-            <Checkbox
-              checked={state[stateVariable][optionKey]}
-              onChange={handleCheckboxChange}
-              name={optionKey}
-              sx={{ marginTop: -1 }}
-            />
+            <Checkbox checked={state[stateVariable][optionKey]} onChange={handleCheckboxChange} name={optionKey} />
           }
           label={options[optionKey]}
           key={optionKey}

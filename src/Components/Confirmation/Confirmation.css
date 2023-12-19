@@ -23,8 +23,8 @@
 
 svg.confirmation-icon path,
 svg.confirmation-icon circle {
-  stroke: var(--icon-color);
-  fill: var(--icon-color);
+  stroke: var(--secondary-icon-color);
+  fill: var(--secondary-icon-color);
 }
 
 .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-2.css-1o7apob-MuiGrid-root.no-padding {

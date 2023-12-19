@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 import { Button, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
 import IncomeQuestion from './IncomeQuestion';
 import './PersonIncomeBlock.css';
 
@@ -87,13 +88,15 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
         </Box>
       </div>
       {createIncomeBlockQuestions()}
-      <Button
-        variant="text"
-        onClick={(event) => handleAddAdditionalIncomeSource(event)}
-        className="add-another-income-button"
-      >
-        <FormattedMessage id="personIncomeBlock.return-addIncomeButton" defaultMessage="+ Add another income" />
-      </Button>
+      <div>
+        <Button
+          variant="outlined"
+          onClick={(event) => handleAddAdditionalExpenseSource(event)}
+          startIcon={<AddIcon sx={{ fontSize: 'medium !important', mr: '-0.5rem' }} />}
+        >
+          <FormattedMessage id="personIncomeBlock.return-addIncomeButton" defaultMessage="Add another income" />
+        </Button>
+      </div>
     </>
   );
 };

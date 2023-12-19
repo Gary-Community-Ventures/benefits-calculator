@@ -3,15 +3,16 @@ import { useState } from 'react';
 export interface ITheme {
   primaryColor: string;
   secondaryColor: string;
-  terraCottaColor: string;
   midBlueColor: string;
   secondaryBackgroundColor: string;
   creamColor: string;
   hoverColor: string;
+  outlineHoverBackgroundColor: string;
+  outlineHoverColor: string;
+  progressBarColor: string;
   cssVariables: {
     '--primary-color': string;
     '--secondary-color': string;
-    '--confirmation-background': string;
     '--secondary-background-color': string;
     '--cream-color': string;
     '--main-max-width': string;
@@ -20,6 +21,7 @@ export interface ITheme {
     '--midBlue-color': string;
     '--hover-color': string;
     '--icon-color': string;
+    '--secondary-icon-color': string;
     '--option-card-hover-font-color': string;
   };
 }
@@ -35,13 +37,14 @@ const themes: IThemes = {
     secondaryColor: '#B85A27',
     secondaryBackgroundColor: '#FBF9FC',
     creamColor: '#F9EFE6',
-    terraCottaColor: '#B85A27',
     midBlueColor: '#41528C',
     hoverColor: '#ECDEED',
+    outlineHoverColor: '#293457',
+    outlineHoverBackgroundColor: '#ECDEED',
+    progressBarColor: '#D6743F',
     cssVariables: {
       '--primary-color': '#293457',
       '--secondary-color': '#B85A27',
-      '--confirmation-background': '#D3F2F0',
       '--secondary-background-color': '#FBF9FC',
       '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
@@ -50,29 +53,33 @@ const themes: IThemes = {
       '--midBlue-color': '#41528C',
       '--hover-color': '#ECDEED',
       '--icon-color': '#D6743F',
+      '--secondary-icon-color': '#D6743F',
       '--option-card-hover-font-color': '#1D1C1E',
     },
   },
+  // 539ed0
   twoOneOne: {
     primaryColor: '#005191',
-    secondaryColor: '#539ED0',
-    terraCottaColor: '#B85A27',
-    midBlueColor: '#41528C',
-    secondaryBackgroundColor: '#FBF9FC',
+    secondaryColor: '#005191',
+    midBlueColor: '#005191',
+    secondaryBackgroundColor: '#F7F7F7',
     creamColor: '#F9EFE6',
-    hoverColor: '#ECDEED',
+    hoverColor: '#FFFFFF',
+    outlineHoverBackgroundColor: '#005191',
+    outlineHoverColor: '#FFFFFF',
+    progressBarColor: '#539ED0',
     cssVariables: {
       '--primary-color': '#005191',
-      '--secondary-color': '#539ED0',
-      '--confirmation-background': '#D4E7F2',
-      '--secondary-background-color': '#FBF9FC',
+      '--secondary-color': '#005191',
+      '--secondary-background-color': '#F7F7F7',
       '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '18px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
-      '--hover-color': '#ECDEED',
-      '--icon-color': '#D6743F',
+      '--hover-color': '#EFEFEF',
+      '--icon-color': '#ff443b',
+      '--secondary-icon-color': '#005191',
       '--option-card-hover-font-color': '#1D1C1E',
     },
   },
@@ -91,6 +98,9 @@ function generateMuiOverides(theme: ITheme) {
     palette: {
       primary: {
         main: deepBlueColor,
+      },
+      secondary: {
+        main: darkTerraCottaColor,
       },
     },
     components: {
@@ -124,8 +134,8 @@ function generateMuiOverides(theme: ITheme) {
               fontWeight: 'bold',
               fontFamily: 'Open Sans',
               ':hover': {
-                backgroundColor: lavenderColor,
-                color: deepBlueColor,
+                backgroundColor: theme.outlineHoverBackgroundColor,
+                color: theme.outlineHoverColor,
                 border: 'none',
               },
             },
@@ -152,7 +162,7 @@ function generateMuiOverides(theme: ITheme) {
         styleOverrides: {
           root: {
             '&.Mui-checked': {
-              color: midBlue,
+              color: deepBlueColor,
             },
           },
         },
