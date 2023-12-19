@@ -44,11 +44,11 @@ const SelectLanguagePage = () => {
   return (
     <main className="benefits-form">
       <h1 className="sub-header">
-        <FormattedMessage
-          id="selectLanguage.header"
-          defaultMessage="Before you begin, what is your preferred language?"
-        />
+        <FormattedMessage id="selectLanguage.header" defaultMessage="Before you begin..." />
       </h1>
+      <h2 className="sub-header-language-select">
+        <FormattedMessage id="selectLanguage.subHeader" defaultMessage="What is your preferred language?" />
+      </h2>
       <FormControl sx={{ width: '150px' }}>
         <InputLabel id="language-select-label">
           <FormattedMessage id="selectLang.text" defaultMessage="Language" />
@@ -66,7 +66,7 @@ const SelectLanguagePage = () => {
       </FormControl>
       <Box sx={{ mt: '1rem' }}>
         <Button variant="contained" onClick={() => navigate(`/step-2${queryString}`)}>
-          <FormattedMessage id="continueButton" defaultMessage="Continue" />
+          <FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />
         </Button>
       </Box>
     </main>

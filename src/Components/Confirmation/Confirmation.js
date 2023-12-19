@@ -19,17 +19,18 @@ import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../..
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Grid from '@mui/material/Grid';
-import EditIcon from '@mui/icons-material/Edit';
-import HomeIcon from '@mui/icons-material/Home';
-import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
-import ChecklistIcon from '@mui/icons-material/Checklist';
-import FoodBankIcon from '@mui/icons-material/FoodBank';
-import PeopleIcon from '@mui/icons-material/People';
-import PersonIcon from '@mui/icons-material/Person';
-import PaymentsIcon from '@mui/icons-material/Payments';
-import SavingsIcon from '@mui/icons-material/Savings';
-import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
+import { ReactComponent as Edit } from '../../Assets/edit.svg';
+import { ReactComponent as Residence } from '../../Assets/residence.svg';
+import { ReactComponent as Household } from '../../Assets/household.svg';
+import { ReactComponent as Head } from '../../Assets/head.svg';
+import { ReactComponent as Expenses } from '../../Assets/expenses.svg';
+import { ReactComponent as Resources } from '../../Assets/resources.svg';
+import { ReactComponent as Benefits } from '../../Assets/benefits.svg';
+import { ReactComponent as Immediate } from '../../Assets/immediate.svg';
+import { ReactComponent as Referral } from '../../Assets/referral.svg';
 import './Confirmation.css';
+import PreviousButton from '../PreviousButton/PreviousButton';
+import { House } from '@mui/icons-material';
 
 const Confirmation = () => {
   const { formData } = useContext(Context);
@@ -62,58 +63,56 @@ const Confirmation = () => {
 
     const householdMemberDataBlocks = householdData.map((personData, i) => {
       const { hasIncome, incomeStreams, healthInsurance } = personData;
+      const hhMemberIndex = Number(i + 1);
 
       return (
-        <div key={i}>
-          <Grid container spacing={1}>
-            <Grid item xs={2}>
-              <PersonIcon className="home-icon" />
-            </Grid>
-            <Grid item xs={8}>
-              <p className="section-title">{allHouseholdRelations[i]}</p>
-              <article className="section-p">
-                <b>
-                  <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />
-                  {': '}
-                </b>
-                {allHouseholdAges[i]}
-              </article>
-              <article className="section-p">
-                <b>
-                  <FormattedMessage
-                    id="confirmation.headOfHouseholdDataBlock-conditionsText"
-                    defaultMessage="Conditions:"
-                  />{' '}
-                </b>
-                {displayConditions(personData)}
-              </article>
-              <article className="section-p">
-                <b>
-                  <FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />{' '}
-                </b>
-                {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
-                {hasIncome === false && <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />}
-              </article>
-              {displayHHMHealthInsuranceSection(healthInsurance)}
-            </Grid>
-            <Grid item xs={2} display="flex" justifyContent="flex-end">
-              <button
-                aria-label="edit household member"
-                onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`)}
-              >
-                <EditIcon className="edit-icon" />
-              </button>
-            </Grid>
+        <Grid container key={i} spacing={1}>
+          <Grid item className="no-padding" xs={2}>
+            <Head className="confirmation-icon" alt="head-icon" />
           </Grid>
-          <p className="confirmation-section-underline"></p>
-        </div>
+          <Grid item xs={8}>
+            <p className="section-title">{allHouseholdRelations[i]}</p>
+            <article className="section-p">
+              <b>
+                <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />
+                {': '}
+              </b>
+              {allHouseholdAges[i]}
+            </article>
+            <article className="section-p">
+              <b>
+                <FormattedMessage
+                  id="confirmation.headOfHouseholdDataBlock-conditionsText"
+                  defaultMessage="Conditions:"
+                />{' '}
+              </b>
+              {displayConditions(personData)}
+            </article>
+            <article className="section-p">
+              <b>
+                <FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />{' '}
+              </b>
+              {hasIncome && incomeStreams.length > 0 && <ul> {listAllIncomeStreams(incomeStreams)} </ul>}
+              {hasIncome === false && <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />}
+            </article>
+            {displayHHMHealthInsuranceSection(healthInsurance, hhMemberIndex)}
+          </Grid>
+          <Grid item xs={2} display="flex" justifyContent="flex-end">
+            <button
+              aria-label="edit household member"
+              onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`)}
+            >
+              <Edit className="edit-button" alt="edit-icon" />
+            </button>
+          </Grid>
+        </Grid>
       );
     });
 
     return householdMemberDataBlocks;
   };
 
-  const displayHHMHealthInsuranceSection = (hHMemberHealthInsurance) => {
+  const displayHHMHealthInsuranceSection = (hHMemberHealthInsurance, hhMemberIndex) => {
     return (
       <article className="section-p">
         <b>
@@ -122,7 +121,7 @@ const Confirmation = () => {
             defaultMessage="Health Insurance: "
           />{' '}
         </b>
-        {displayHealthInsurance(hHMemberHealthInsurance)}
+        {displayHealthInsurance(hHMemberHealthInsurance, hhMemberIndex)}
       </article>
     );
   };
@@ -132,8 +131,8 @@ const Confirmation = () => {
 
     return (
       <Grid container spacing={1}>
-        <Grid item xs={2}>
-          <PaymentsIcon className="home-icon" />
+        <Grid item className="no-padding" xs={2}>
+          <Expenses className="confirmation-icon" alt="expenses-icon" />
         </Grid>
         <Grid item xs={8}>
           <p className="section-title">
@@ -150,7 +149,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label="edit expenses" onClick={() => navigate(getQuestionUrl('hasExpenses'))}>
-            <EditIcon className="edit-icon" />
+            <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
       </Grid>
@@ -158,7 +157,7 @@ const Confirmation = () => {
   };
 
   const displayConditions = (userData) => {
-    const { student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability } = userData;
+    const { student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability } = userData.conditions;
 
     const iterableConditions = [student, pregnant, blindOrVisuallyImpaired, disabled, longTermDisability];
 
@@ -261,8 +260,8 @@ const Confirmation = () => {
 
     return (
       <Grid container spacing={1}>
-        <Grid item xs={2}>
-          <PeopleIcon className="home-icon" />
+        <Grid item className="no-padding" xs={2}>
+          <Household className="confirmation-icon" alt="household-icon" />
         </Grid>
         <Grid item xs={8}>
           <p className="section-title">
@@ -281,7 +280,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label="edit household size" onClick={() => navigate(linkTo)}>
-            <EditIcon className="edit-icon" />
+            <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
       </Grid>
@@ -293,7 +292,7 @@ const Confirmation = () => {
     return (
       <Grid container spacing={1}>
         <Grid item xs={2}>
-          <SavingsIcon className="home-icon" />
+          <Resources className="confirmation-icon" alt="resources-icon" />
         </Grid>
         <Grid item xs={8}>
           <p className="section-title">
@@ -303,7 +302,7 @@ const Confirmation = () => {
             />
           </p>
           <article className="section-p">
-            ${Number(householdAssets).toLocaleString(2)}
+            {`$${Number(householdAssets).toLocaleString(2)} `}
             <i>
               <FormattedMessage
                 id="confirmation.displayAllFormData-householdResourcesDescription"
@@ -314,7 +313,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label="edit household assets" onClick={() => navigate(getQuestionUrl('householdAssets'))}>
-            <EditIcon className="edit-icon" />
+            <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
       </Grid>
@@ -325,8 +324,8 @@ const Confirmation = () => {
     const { zipcode, county } = formData;
     return (
       <Grid container spacing={1}>
-        <Grid item xs={2}>
-          <HomeIcon className="home-icon" />
+        <Grid item className="no-padding" xs={2}>
+          <Residence className="confirmation-icon" alt="residence-icon" />
         </Grid>
         <Grid item xs={8}>
           <p className="section-title">
@@ -347,7 +346,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label="edit zipcode" onClick={() => navigate(getQuestionUrl('zipcode'))}>
-            <EditIcon className="edit-icon" />
+            <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
       </Grid>
@@ -365,10 +364,9 @@ const Confirmation = () => {
 
     return (
       <>
-        <p className="confirmation-section-underline"></p>
         <Grid container spacing={1}>
-          <Grid item xs={2}>
-            <ConnectWithoutContactIcon className="home-icon flip-horizontally" />
+          <Grid item className="no-padding" xs={2}>
+            <Referral className="confirmation-icon" alt="referral-icon" />,
           </Grid>
           <Grid item xs={8}>
             <p className="section-title">
@@ -381,7 +379,7 @@ const Confirmation = () => {
           </Grid>
           <Grid item xs={2} display="flex" justifyContent="flex-end">
             <button aria-label="edit referral source" onClick={() => navigate(getQuestionUrl('referralSource'))}>
-              <EditIcon className="edit-icon" />
+              <Edit className="edit-button" alt="edit-icon" />
             </button>
           </Grid>
         </Grid>
@@ -410,31 +408,26 @@ const Confirmation = () => {
     return (
       <>
         {displayZipcodeSection()}
-        <p className="confirmation-section-underline"></p>
         {displayHouseholdSizeSection()}
-        <p className="confirmation-section-underline"></p>
         {displayAllMembersDataBlock()}
         {displayHouseholdExpenses()}
-        <p className="confirmation-section-underline"></p>
         {displayHouseholdAssetsSection()}
-        <p className="confirmation-section-underline"></p>
         {displayHHCheckboxSection(
           'benefits',
           'confirmation.displayAllFormData-currentHHBenefitsText',
           'Current Household Benefits:',
           getQuestionUrl('hasBenefits'),
           allBenefitsList,
-          <ChecklistIcon className="home-icon" />,
+          <Benefits className="confirmation-icon" alt="benefits-icon" />,
           'edit current benefits',
         )}
-        <p className="confirmation-section-underline"></p>
         {displayHHCheckboxSection(
           'acuteHHConditions',
           'confirmation.displayAllFormData-acuteHHConditions',
           'Immediate Needs',
           getQuestionUrl('acuteHHConditions'),
           refactorOptionsList(acuteConditionOptions),
-          <FoodBankIcon className="home-icon" />,
+          <Immediate className="confirmation-icon" alt="immediate-icon" />,
         )}
         {displayReferralSourceSection()}
       </>
@@ -554,7 +547,7 @@ const Confirmation = () => {
 
     return (
       <Grid container spacing={1}>
-        <Grid item xs={2}>
+        <Grid item className="no-padding" xs={2}>
           {iconComp}
         </Grid>
         <Grid item xs={8}>
@@ -571,7 +564,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label={ariaLabel} onClick={() => navigate(linkTo)}>
-            <EditIcon className="edit-icon" />
+            <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
       </Grid>
@@ -582,15 +575,17 @@ const Confirmation = () => {
     return getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
   };
 
-  const displayHealthInsurance = (hHMemberHealthInsurance) => {
+  const displayHealthInsurance = (hHMemberHealthInsurance, hhMemberIndex) => {
     const selectedDontKnow = hHMemberHealthInsurance.dont_know === true;
     const selectedNone = hHMemberHealthInsurance.none === true;
     const allOtherSelectedOptions = Object.entries(hHMemberHealthInsurance).filter(
       (hHMemberInsEntry) => hHMemberInsEntry[1] === true,
     );
+    const youVsThemHealthInsuranceOptions =
+      hhMemberIndex === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them;
 
     const allOtherSelectedOptionsString = allOtherSelectedOptions.reduce((acc, filteredHHMInsEntry, index) => {
-      const formattedMessageProp = healthInsuranceOptions[filteredHHMInsEntry[0]].formattedMessage.props;
+      const formattedMessageProp = youVsThemHealthInsuranceOptions[filteredHHMInsEntry[0]].formattedMessage.props;
       const translatedAriaLabel = intl.formatMessage({ ...formattedMessageProp });
 
       if (allOtherSelectedOptions.length - 1 === index) {
@@ -603,9 +598,9 @@ const Confirmation = () => {
     }, '');
 
     if (selectedDontKnow) {
-      return <>{healthInsuranceOptions.dont_know.formattedMessage}</>;
+      return <>{youVsThemHealthInsuranceOptions.dont_know.formattedMessage}</>;
     } else if (selectedNone) {
-      return <>{healthInsuranceOptions.none.formattedMessage}</>;
+      return <>{youVsThemHealthInsuranceOptions.none.formattedMessage}</>;
     } else {
       return <>{allOtherSelectedOptionsString}</>;
     }
@@ -618,15 +613,7 @@ const Confirmation = () => {
       </h1>
       <div className="confirmation-container">{displayAllFormData()}</div>
       <div className="prev-continue-results-buttons confirmation">
-        <Button
-          className="prev-button"
-          onClick={() => {
-            navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`);
-          }}
-          variant="contained"
-        >
-          <FormattedMessage id="previousButton" defaultMessage="Prev" />
-        </Button>
+        <PreviousButton navFunction={() => navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`)} />
         <Button variant="contained" onClick={() => navigate(`/${uuid}/results`)}>
           <FormattedMessage id="continueButton" defaultMessage="Continue" />
         </Button>

@@ -1,0 +1,14 @@
+.back-to-screen-message {
+  background-color: var(--secondary-background-color);
+  padding: 1rem;
+  margin: 1rem 0;
+  font-weight: bold;
+  display: flex;
+  gap: 1rem;
+}
+
+.back-to-screen-message-button {
+  color: var(--secondary-color);
+  font-size: 1rem;
+  cursor: pointer;
+}

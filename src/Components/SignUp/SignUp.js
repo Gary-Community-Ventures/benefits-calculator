@@ -178,8 +178,6 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
         </Grid>
         <Grid xs={12} item>
           {createEmailTextfield()}
-        </Grid>
-        <Grid xs={12} item>
           {createPhoneTextfield()}
         </Grid>
         <Grid xs={12} item marginBottom={'1rem'}>

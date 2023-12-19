@@ -1,24 +1,24 @@
 import { FormattedMessage } from 'react-intl';
-import cart from './OptionCardIcons/cart.png';
-import diaper from './OptionCardIcons/diaper.png';
-import home from './OptionCardIcons/home.png';
-import chat from './OptionCardIcons/chat.png';
-import stroller from './OptionCardIcons/stroller.png';
-import pregnant from './OptionCardIcons/pregnant.png';
-import briefcase from './OptionCardIcons/briefcase.png';
-import dentistry from './OptionCardIcons/dentistry.png';
-import gavel from './OptionCardIcons/gavel.png';
+import { ReactComponent as Baby_supplies } from './OptionCardIcons/AcuteConditions/baby_supplies.svg';
+import { ReactComponent as Child_development } from './OptionCardIcons/AcuteConditions/child_development.svg';
+import { ReactComponent as Dental_care } from './OptionCardIcons/AcuteConditions/dental_care.svg';
+import { ReactComponent as Family_planning } from './OptionCardIcons/AcuteConditions/family_planning.svg';
+import { ReactComponent as Food } from './OptionCardIcons/AcuteConditions/food.svg';
+import { ReactComponent as Housing } from './OptionCardIcons/AcuteConditions/housing.svg';
+import { ReactComponent as Job_resources } from './OptionCardIcons/AcuteConditions/job_resources.svg';
+import { ReactComponent as Legal_services } from './OptionCardIcons/AcuteConditions/legal_services.svg';
+import { ReactComponent as Support } from './OptionCardIcons/AcuteConditions/support.svg';
 
 const acuteConditionOptions = {
   food: {
     formattedMessage: <FormattedMessage id="acuteConditionOptions.food" defaultMessage="Food or groceries" />,
-    image: cart,
+    icon: <Food className="option-card-icon" />,
   },
   babySupplies: {
     formattedMessage: (
       <FormattedMessage id="acuteConditionOptions.babySupplies" defaultMessage="Diapers and other baby supplies" />
     ),
-    image: diaper,
+    icon: <Baby_supplies className="option-card-icon" />,
   },
   housing: {
     formattedMessage: (
@@ -27,7 +27,7 @@ const acuteConditionOptions = {
         defaultMessage="Help with managing your mortgage, rent, or utilities"
       />
     ),
-    image: home,
+    icon: <Housing className="option-card-icon" />,
   },
   support: {
     formattedMessage: (
@@ -36,7 +36,7 @@ const acuteConditionOptions = {
         defaultMessage="A challenge you or your child would like to talk about"
       />
     ),
-    image: chat,
+    icon: <Support className="option-card-icon" />,
   },
   childDevelopment: {
     formattedMessage: (
@@ -45,21 +45,21 @@ const acuteConditionOptions = {
         defaultMessage="Concern about your baby or toddler's development"
       />
     ),
-    image: stroller,
+    icon: <Child_development className="option-card-icon" />,
   },
   familyPlanning: {
     formattedMessage: (
       <FormattedMessage id="acuteConditionOptions.familyPlanning" defaultMessage="Family planning or birth control" />
     ),
-    image: pregnant,
+    icon: <Family_planning className="option-card-icon" />,
   },
   jobResources: {
     formattedMessage: <FormattedMessage id="acuteConditionOptions.jobResources" defaultMessage="Finding a job" />,
-    image: briefcase,
+    icon: <Job_resources className="option-card-icon" />,
   },
   dentalCare: {
     formattedMessage: <FormattedMessage id="acuteConditionOptions.dentalCare" defaultMessage="Low-cost dental care" />,
-    image: dentistry,
+    icon: <Dental_care className="option-card-icon" />,
   },
   legalServices: {
     formattedMessage: (
@@ -68,7 +68,7 @@ const acuteConditionOptions = {
         defaultMessage="Free or low-cost help with civil legal needs"
       />
     ),
-    image: gavel,
+    icon: <Legal_services className="option-card-icon" />,
   },
 };
 

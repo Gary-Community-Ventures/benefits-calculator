@@ -44,10 +44,10 @@ const referrerData: ReferrerData = {
   },
   logoClass: {
     default: 'logo',
-    jeffcoHS: 'big-logo logo',
-    jeffcoHSCM: 'big-logo logo',
-    villageExchange: 'big-logo logo',
-    cch: 'big-logo logo',
+    jeffcoHS: 'logo',
+    jeffcoHSCM: 'logo',
+    villageExchange: 'logo',
+    cch: 'logo',
     lgs: 'logo',
   },
   twoOneOneLink: {

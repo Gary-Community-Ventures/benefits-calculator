@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
-import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import Radiofield from '../Radiofield/Radiofield';
 import Textfield from '../Textfield/Textfield';
@@ -11,8 +10,8 @@ import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
-import './QuestionComponentContainer.css';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
+import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -23,9 +22,10 @@ const QuestionComponentContainer = ({
   handleExpenseSourcesSubmit,
   handleCheckboxChange,
 }) => {
-  const { formData } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   let { id } = useParams();
   let matchingQuestion = getQuestion(+id, formData.immutableReferrer);
+
   const errorController = useErrorController(
     matchingQuestion.componentDetails.inputError,
     matchingQuestion.componentDetails.inputHelperText,
@@ -70,9 +70,10 @@ const QuestionComponentContainer = ({
   const renderOptionCardGroup = (question) => {
     return (
       <OptionCardGroup
-        stateVariable={question.componentDetails.inputName}
-        errorController={errorController}
         options={matchingQuestion.componentDetails.options}
+        stateVariable={question.componentDetails.inputName}
+        memberData={formData}
+        setMemberData={setFormData}
       />
     );
   };
@@ -175,11 +176,14 @@ const QuestionComponentContainer = ({
   };
 
   const renderHeaderAndSubheader = () => {
-    if (matchingQuestion.header === undefined) {
-      return <></>;
-    }
-
-    return <h1 className="sub-header">{matchingQuestion.header}</h1>;
+    return (
+      <>
+        {matchingQuestion.subheader && (
+          <strong className="question-secondary-header">{matchingQuestion.subheader}</strong>
+        )}
+        {matchingQuestion.header && <h1 className="sub-header">{matchingQuestion.header}</h1>}
+      </>
+    );
   };
 
   return (
