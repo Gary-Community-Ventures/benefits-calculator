@@ -155,11 +155,9 @@ const updateUser = async (
   if (!formData.signUpInfo.hasUser && userBody.email_or_cell === '+1') {
     return;
   }
-  try {
-    await putUser(userBody, uuid);
-  } catch (err) {
-    return;
-  }
+
+  await putUser(userBody, uuid);
+
   setFormData({
     ...formData,
     signUpInfo: { ...formData.signUpInfo, hasUser: true },

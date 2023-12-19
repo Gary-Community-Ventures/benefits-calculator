@@ -69,6 +69,7 @@ export interface SignUpInfo {
   sendOffers: boolean;
   sendUpdates: boolean;
   commConsent: boolean;
+  serverError?: boolean;
 }
 
 export interface AcuteHHConditions {
