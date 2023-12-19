@@ -208,16 +208,22 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
 
+    const handleEditSubmit = () => {
+      setSubmittedCount(submittedCount + 1);
+
+      const validPersonData = personDataIsValid(householdData);
+      if (validPersonData) {
+        handleHouseholdDataSubmit(householdData, page - 1, uuid);
+        navigate(`/${uuid}/step-${step}/${index + 1}`);
+      }
+    };
+
     return (
       <article className={containerClassName} key={index}>
         <div className="household-member-header">
           <h3 className="member-added-relationship">{relationship}:</h3>
           <div className="household-member-edit-button">
-            <IconButton
-              onClick={() => {
-                navigate(`/${uuid}/step-${step}/${index + 1}`);
-              }}
-            >
+            <IconButton onClick={handleEditSubmit}>
               <EditIcon />
             </IconButton>
           </div>
