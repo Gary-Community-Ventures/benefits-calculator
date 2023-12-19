@@ -18,6 +18,9 @@ export interface ITheme {
     'font-size': string;
     '--main-header-color': string;
     '--midBlue-color': string;
+    '--hover-color': string;
+    '--icon-color': string;
+    '--option-card-hover-font-color': string;
   };
 }
 
@@ -45,6 +48,9 @@ const themes: IThemes = {
       'font-size': '16px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
+      '--hover-color': '#ECDEED',
+      '--icon-color': '#D6743F',
+      '--option-card-hover-font-color': '#1D1C1E',
     },
   },
   twoOneOne: {
@@ -65,6 +71,9 @@ const themes: IThemes = {
       'font-size': '18px',
       '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
+      '--hover-color': '#ECDEED',
+      '--icon-color': '#D6743F',
+      '--option-card-hover-font-color': '#1D1C1E',
     },
   },
 };
@@ -90,21 +99,41 @@ function generateMuiOverides(theme: ITheme) {
     components: {
       // Name of the component
       MuiButton: {
-        styleOverrides: {
-          // Name of the slot
-          root: {
-            // Some CSS
-            backgroundColor: deepBlueColor,
-            border: '1px solid black',
-            borderRadius: '12px',
-            fontWeight: 'bold',
-            fontFamily: 'Open Sans',
-            ':hover': {
-              backgroundColor: lavenderColor,
-              color: deepBlueColor,
+        defaultProps: {
+          disableElevation: true,
+        },
+        variants: [
+          {
+            props: { variant: 'contained' },
+            style: {
+              backgroundColor: deepBlueColor,
+              border: '1px solid black',
+              borderRadius: '12px',
+              fontWeight: 'bold',
+              fontFamily: 'Open Sans',
+              ':hover': {
+                backgroundColor: lavenderColor,
+                color: deepBlueColor,
+              },
             },
           },
-        },
+          {
+            props: { variant: 'outlined' },
+            style: {
+              backgroundColor: 'transparent',
+              color: midBlue,
+              border: 'none',
+              borderRadius: '12px',
+              fontWeight: 'bold',
+              fontFamily: 'Open Sans',
+              ':hover': {
+                backgroundColor: lavenderColor,
+                color: deepBlueColor,
+                border: 'none',
+              },
+            },
+          },
+        ],
       },
       MuiAppBar: {
         styleOverrides: {
@@ -126,7 +155,7 @@ function generateMuiOverides(theme: ITheme) {
         styleOverrides: {
           root: {
             '&.Mui-checked': {
-              color: deepBlueColor,
+              color: midBlue,
             },
           },
         },

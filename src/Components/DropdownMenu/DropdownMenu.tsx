@@ -21,19 +21,19 @@ interface ComponentDetails {
 interface BasicSelectProps {
   componentDetails: ComponentDetails;
   options: { [key: string]: string };
-  householdData: HouseholdData;
-  setHouseholdData: any;
+  memberData: HouseholdData;
+  setMemberData: (member: HouseholdData) => void;
   submitted: number;
 }
 
-const DropdownMenu = ({ componentDetails, options, setHouseholdData, householdData, submitted }: BasicSelectProps) => {
+const DropdownMenu = ({ componentDetails, options, memberData, setMemberData, submitted }: BasicSelectProps) => {
   const { componentProperties, inputError, inputHelperText } = componentDetails;
   const { labelId, inputLabelText, id, label, disabledSelectMenuItemText } = componentProperties;
 
   const errorController = useErrorController(inputError, inputHelperText);
 
   useEffect(() => {
-    errorController.updateError(householdData.relationshipToHH);
+    errorController.updateError(memberData.relationshipToHH);
   }, []);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const DropdownMenu = ({ componentDetails, options, setHouseholdData, householdDa
   }, [submitted]);
 
   const handleSelectChange = (event: SelectChangeEvent) => {
-    setHouseholdData({ ...householdData, relationshipToHH: event.target.value });
+    setMemberData({ ...memberData, relationshipToHH: event.target.value });
     errorController.updateError(event.target.value);
   };
 
@@ -71,7 +71,7 @@ const DropdownMenu = ({ componentDetails, options, setHouseholdData, householdDa
       <Select
         labelId={labelId}
         id={id}
-        value={householdData.relationshipToHH}
+        value={memberData.relationshipToHH}
         label={label}
         onChange={(event: SelectChangeEvent) => {
           handleSelectChange(event);
@@ -81,7 +81,7 @@ const DropdownMenu = ({ componentDetails, options, setHouseholdData, householdDa
         {createMenuItems(options)}
       </Select>
       {errorController.showError && (
-        <FormHelperText>{errorController.message(householdData.relationshipToHH)}</FormHelperText>
+        <FormHelperText>{errorController.message(memberData.relationshipToHH)}</FormHelperText>
       )}
     </FormControl>
   );

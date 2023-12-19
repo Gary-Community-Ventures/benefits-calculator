@@ -66,7 +66,7 @@ const SelectLanguagePage = () => {
       </FormControl>
       <Box sx={{ mt: '1rem' }}>
         <Button variant="contained" onClick={() => navigate(`/step-2${queryString}`)}>
-          <FormattedMessage id="continueButton" defaultMessage="Get Started" />
+          <FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />
         </Button>
       </Box>
     </main>
