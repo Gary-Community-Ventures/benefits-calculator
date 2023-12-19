@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
-import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import Radiofield from '../Radiofield/Radiofield';
 import Textfield from '../Textfield/Textfield';
