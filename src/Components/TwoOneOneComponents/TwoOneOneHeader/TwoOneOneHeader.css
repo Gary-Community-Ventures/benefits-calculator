@@ -17,6 +17,16 @@
   margin-left: 13px;
 }
 
+#twoOneOne-nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--main-max-width);
+  margin: auto;
+  height: 100%;
+}
+
 #twoOneOne-select-language:focus-visible {
   outline: -webkit-focus-ring-color auto 1px;
 }

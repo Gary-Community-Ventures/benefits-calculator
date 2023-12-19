@@ -21,8 +21,8 @@
 }
 
 .option-card-icon {
-  height: 70px;
-  width: 70px;
+  height: 4.375rem;
+  width: 4.375rem;
   fill: var(--icon-color);
 }
 
@@ -37,21 +37,21 @@
 .food-icon {
   stroke: var(--icon-color);
   stroke-miterlimit: 10;
-  stroke-width: 5px;
+  stroke-width: 0.313rem;
 }
 
 .option-cards-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
-  max-width: 806px;
+  gap: 1.875rem;
+  max-width: 50.375rem;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
 @media (max-width: 420px) {
   div.option-cards-container {
-    gap: 15px;
+    gap: 0.938rem;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
   }
@@ -64,8 +64,8 @@
   }
 
   .option-card-image {
-    height: 56px;
-    width: 56px;
+    height: 3.5rem;
+    width: 3.5rem;
   }
 
   div.sub-header,

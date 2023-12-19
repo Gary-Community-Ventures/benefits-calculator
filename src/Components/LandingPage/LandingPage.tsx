@@ -110,7 +110,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
           href={getLinksForCheckbox().privacyPolicyLink}
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: theme.terraCottaColor }}
+          sx={{ color: theme.secondaryColor }}
         >
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
         </Link>
@@ -119,7 +119,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
           href={getLinksForCheckbox().addTermsConsentToContact}
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: theme.terraCottaColor }}
+          sx={{ color: theme.secondaryColor }}
         >
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
         </Link>
@@ -156,7 +156,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
                 defaultMessage="Some benefits are available to Non-U.S. citizens. Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits may affect their immigration status. For more information, please review the "
               />
               <a
-                style={{ color: theme.terraCottaColor }}
+                style={{ color: theme.secondaryColor }}
                 href="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
                 target="_blank"
                 rel="noreferrer"

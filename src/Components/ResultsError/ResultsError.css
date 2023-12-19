@@ -16,7 +16,7 @@ img.error-icon {
   font-size: 2rem;
   font-weight: 700;
   font-family: 'Roboto Slab', sans-serif;
-  color: var(--main-header-color);
+  color: var(--secondary-color);
   margin-bottom: 1rem;
 }
 
