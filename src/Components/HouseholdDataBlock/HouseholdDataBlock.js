@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, MouseEvent } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Textfield from '../Textfield/Textfield';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
@@ -22,6 +22,7 @@ import PreviousButton from '../PreviousButton/PreviousButton';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
+import { HelpBubbleIcon } from '../../Assets/helpBubbleIcon.tsx';
 import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
@@ -36,6 +37,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     navigate(`/${uuid}/step-${step}/${page}`);
   };
   const [submittedCount, setSubmittedCount] = useState(0);
+  const [showHelpText, setShowHelpText] = useState(false);
 
   const initialHouseholdData = formData.householdData[page - 1] ?? {
     age: '',
@@ -349,6 +351,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       value: householdData.hasIncome,
     };
 
+    const handleClick = () => {
+      setShowHelpText((setShow) => !setShow);
+    };
+
     const formattedMsgId =
       index === 1 ? 'questions.hasIncome' : 'householdDataBlock.createIncomeRadioQuestion-questionLabel';
 
@@ -361,12 +367,17 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       <>
         <h2 className="question-label radio-question">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          <IconButton onClick={handleClick} >
+            <HelpBubbleIcon/>
+          </IconButton>
         </h2>
-        <p className="question-description">
-          <FormattedMessage
-            id="householdDataBlock.createIncomeRadioQuestion-questionDescription"
-            defaultMessage="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
-          />
+        <p className="question-description help-text">
+          {showHelpText && (
+            <FormattedMessage
+              id="householdDataBlock.createIncomeRadioQuestion-questionDescription"
+              defaultMessage="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
+            />
+          )}
         </p>
         <HHDataRadiofield
           componentDetails={radiofieldProps}

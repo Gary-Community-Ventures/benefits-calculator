@@ -3,6 +3,8 @@ import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import IncomeQuestion from './IncomeQuestion';
 import './IncomeBlock.css';
+import { IconButton } from '@mui/material';
+import { HelpBubbleIcon } from '../../Assets/helpBubbleIcon.tsx';
 
 const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those
@@ -20,6 +22,8 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
           },
         ],
   );
+  const [showHelpText, setShowHelpText] = useState(false);
+
 
   useEffect(() => {
     setHouseholdData({ ...householdData, incomeStreams: selectedMenuItem });
@@ -67,6 +71,9 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
 
     return [formattedMsgId, formattedMsgDefaultMsg];
   };
+  const handleClick = () => {
+    setShowHelpText((setShow) => !setShow);
+  };
 
   return (
     <>
@@ -75,12 +82,18 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
           id={renderReturnStmtIdOrDefaultMsg(page)[0]}
           defaultMessage={renderReturnStmtIdOrDefaultMsg(page)[1]}
         />
+          <IconButton onClick={handleClick} >
+            <HelpBubbleIcon/>
+          </IconButton>
       </h2>
-      <p className="question-description">
+    
+
+      <p className="question-description help-text">
+      {showHelpText && (
         <FormattedMessage
           id="personIncomeBlock.return-questionDescription"
           defaultMessage="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
-        />
+        />)}
       </p>
       {createIncomeBlockQuestions()}
       <Button variant="contained" onClick={(event) => handleAddAdditionalIncomeSource(event)}>

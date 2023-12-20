@@ -22,6 +22,7 @@ const FollowUpQuestions = ({
     if (followUp.componentDetails.componentType === 'Radiofield') {
       return (
         <div className="question-container" key={index}>
+          
           <h2 className="question-label">{followUp.question}</h2>
           <Radiofield componentDetails={followUp.componentDetails} handleRadioButtonChange={handleRadioButtonChange} />
         </div>
@@ -29,6 +30,7 @@ const FollowUpQuestions = ({
     } else if (followUp.componentDetails.componentType === 'ExpenseBlock') {
       return (
         <div className="question-container" key={index}>
+          sasfasfasfas
           <h2 className="question-label">{followUp.question}</h2>
           <ExpenseBlock handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} />
         </div>
@@ -44,6 +46,7 @@ const FollowUpQuestions = ({
             handleTextfieldChange={handleTextfieldChange}
             index="0"
           />
+          
         </div>
       );
     } else if (followUp.componentDetails.componentType === 'BasicSelect') {

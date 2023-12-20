@@ -8,6 +8,11 @@
   margin-bottom: 1rem;
 }
 
+.help-text {
+  font-weight: 200;
+  color: #666;
+}
+
 .prev-button {
   margin-right: 2.25rem !important;
 }
