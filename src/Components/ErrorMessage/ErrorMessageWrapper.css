@@ -1,10 +1,10 @@
 .error-helper-text {
   display: flex;
-  align-items: center;
   color: #c6252b;
   margin-bottom: 0.5rem;
 }
 
 .error-message {
   margin-top: 2px;
+  font-family: 'Open Sans';
 }

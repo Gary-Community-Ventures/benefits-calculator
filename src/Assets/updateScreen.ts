@@ -85,11 +85,11 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
   return {
     age: Number(householdMemberData.age),
     relationship: householdMemberData.relationshipToHH,
-    student: householdMemberData.student,
-    pregnant: householdMemberData.pregnant,
-    visually_impaired: householdMemberData.blindOrVisuallyImpaired,
-    disabled: householdMemberData.disabled,
-    long_term_disability: householdMemberData.longTermDisability,
+    student: householdMemberData.conditions.student,
+    pregnant: householdMemberData.conditions.pregnant,
+    visually_impaired: householdMemberData.conditions.blindOrVisuallyImpaired,
+    disabled: householdMemberData.conditions.disabled,
+    long_term_disability: householdMemberData.conditions.longTermDisability,
     has_income: householdMemberData.hasIncome,
     income_streams: incomes,
     insurance: householdMemberData.healthInsurance,
@@ -155,11 +155,9 @@ const updateUser = async (
   if (!formData.signUpInfo.hasUser && userBody.email_or_cell === '+1') {
     return;
   }
-  try {
-    await putUser(userBody, uuid);
-  } catch (err) {
-    return;
-  }
+
+  await putUser(userBody, uuid);
+
   setFormData({
     ...formData,
     signUpInfo: { ...formData.signUpInfo, hasUser: true },

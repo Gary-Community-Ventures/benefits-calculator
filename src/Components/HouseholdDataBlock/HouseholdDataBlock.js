@@ -1,13 +1,18 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Textfield from '../Textfield/Textfield';
-import DropdownMenu from '../DropdownMenu/DropdownMenu';
-import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
-import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
-import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
-import HealthInsuranceQ from '../HealthInsuranceQ/HealthInsuranceQ.tsx';
+import { FormattedMessage } from 'react-intl';
+import { Box, IconButton, Stack } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 import ContinueButton from '../ContinueButton/ContinueButton';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
+import HealthInsuranceError from '../HealthInsuranceError/HealthInsuranceError.tsx';
+import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
+import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
+import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
+import PreviousButton from '../PreviousButton/PreviousButton';
+import Textfield from '../Textfield/Textfield';
 import relationshipOptions from '../../Assets/relationshipOptions';
+import healthInsuranceOptions from '../../Assets/healthInsuranceOptions.tsx';
 import conditionOptions from '../../Assets/conditionOptions';
 import {
   householdMemberAgeHasError,
@@ -16,12 +21,8 @@ import {
   selectHasError,
   relationTypeHelperText,
 } from '../../Assets/validationFunctions.tsx';
-import { FormattedMessage } from 'react-intl';
 import { getStepNumber } from '../../Assets/stepDirectory';
-import PreviousButton from '../PreviousButton/PreviousButton';
 import { Context } from '../Wrapper/Wrapper.tsx';
-import EditIcon from '@mui/icons-material/Edit';
-import { IconButton } from '@mui/material';
 import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
@@ -37,14 +38,16 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   };
   const [submittedCount, setSubmittedCount] = useState(0);
 
-  const initialHouseholdData = formData.householdData[page - 1] ?? {
+  const initialMemberData = formData.householdData[page - 1] ?? {
     age: '',
     relationshipToHH: page === 1 ? 'headOfHousehold' : '',
-    student: false,
-    pregnant: false,
-    blindOrVisuallyImpaired: false,
-    disabled: false,
-    longTermDisability: false,
+    conditions: {
+      student: false,
+      pregnant: false,
+      blindOrVisuallyImpaired: false,
+      disabled: false,
+      longTermDisability: false,
+    },
     hasIncome: false,
     incomeStreams: [],
     healthInsurance: {
@@ -60,7 +63,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     },
   };
 
-  const [householdData, setHouseholdData] = useState(initialHouseholdData);
+  const [memberData, setMemberData] = useState(initialMemberData);
   const [wasSubmitted, setWasSubmitted] = useState(false);
 
   useEffect(() => {
@@ -68,14 +71,14 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   }, [wasSubmitted]);
 
   useEffect(() => {
-    const updatedHouseholdData = { ...householdData };
+    const updatedMemberData = { ...memberData };
 
-    if (updatedHouseholdData.hasIncome === false) {
-      updatedHouseholdData.incomeStreams = [];
+    if (updatedMemberData.hasIncome === false) {
+      updatedMemberData.incomeStreams = [];
     }
 
-    setHouseholdData(updatedHouseholdData);
-  }, [householdData.hasIncome]);
+    setMemberData(updatedMemberData);
+  }, [memberData.hasIncome]);
 
   useEffect(() => {
     const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
@@ -103,7 +106,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     const ageTextfieldProps = {
       inputType: 'text',
       inputName: 'age',
-      inputValue: householdData.age,
+      inputValue: memberData.age,
       inputLabel: createFMInputLabel(personIndex),
       inputError: householdMemberAgeHasError,
       inputHelperText: displayHouseholdMemberAgeHelperText,
@@ -111,7 +114,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     if (personIndex === 1) {
       return (
-        <>
+        <Box sx={{ marginBottom: '1.5rem' }}>
           <h2 className="question-label">
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-how-headOfHH"
@@ -119,12 +122,11 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             />
           </h2>
           {createTextField(ageTextfieldProps, submittedCount)}
-          <p className="household-data-q-underline"></p>
-        </>
+        </Box>
       );
     } else {
       return (
-        <>
+        <Box sx={{ marginBottom: '1.5rem' }}>
           <h2 className="question-label">
             <FormattedMessage id="householdDataBlock.createAgeQuestion-how" defaultMessage="How old are they?" />
           </h2>
@@ -135,8 +137,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             />
           </p>
           {createTextField(ageTextfieldProps, submittedCount)}
-          <p className="household-data-q-underline"></p>
-        </>
+        </Box>
       );
     }
   };
@@ -146,7 +147,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       <Textfield
         componentDetails={componentInputProps}
         submitted={submittedCount}
-        data={householdData}
+        data={memberData}
         handleTextfieldChange={handleTextfieldChange}
       />
     );
@@ -157,13 +158,13 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
 
     if (numberUpToEightDigitsLongRegex.test(value)) {
-      setHouseholdData({ ...householdData, age: value });
+      setMemberData({ ...memberData, age: value });
     }
   };
 
   const createHOfHRelationQuestion = () => {
     return (
-      <>
+      <Box sx={{ marginBottom: '1.5rem' }}>
         <h2 className="question-label">
           <FormattedMessage
             id="householdDataBlock.createHOfHRelationQuestion-relation"
@@ -171,8 +172,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           />
         </h2>
         {createRelationshipDropdownMenu()}
-        <p className="household-data-q-underline"></p>
-      </>
+      </Box>
     );
   };
 
@@ -246,13 +246,13 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     if (personIndex === 1) {
       header = (
-        <h1 className="question-label household-data-q-underline">
+        <h1 className="sub-header question-label">
           <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
         </h1>
       );
     } else {
       header = (
-        <h1 className="question-label household-data-q-underline">
+        <h1 className="sub-header question-label">
           <FormattedMessage
             id="questions.householdData"
             defaultMessage="Tell us about the next person in your household."
@@ -264,13 +264,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       <>
         {header}
         {headOfHHInfoWasEntered && (
-          <>
-            <h2 className="household-data-sub-header">
+          <Box sx={{ marginBottom: '1.5rem' }}>
+            <h2 className="household-data-sub-header secondary-heading">
               <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
             </h2>
             <div>{formData.householdData.map(createMembersAdded)}</div>
-            <div className="household-data-q-underline"></div>
-          </>
+          </Box>
         )}
       </>
     );
@@ -306,20 +305,21 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       <DropdownMenu
         componentDetails={createDropdownCompProps()}
         options={relationshipOptions}
-        setHouseholdData={setHouseholdData}
-        householdData={householdData}
+        setMemberData={setMemberData}
+        memberData={memberData}
         submitted={submittedCount}
       />
     );
   };
 
-  const createConditionsCheckboxMenu = (index) => {
+  const createConditionOptionCards = (index) => {
     return (
-      <CheckboxGroup
-        options={conditionOptions}
-        householdData={householdData}
-        setHouseholdData={setHouseholdData}
-        index={index}
+      <OptionCardGroup
+        options={index === 1 ? conditionOptions.you : conditionOptions.them}
+        stateVariable="conditions"
+        memberData={memberData}
+        setMemberData={setMemberData}
+        hhMemberIndex={index}
       />
     );
   };
@@ -333,7 +333,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     const formattedMsgDefaultMsg = index === 1 ? 'Do any of these apply to you?' : 'Do any of these apply to them?';
 
     return (
-      <>
+      <Box sx={{ margin: '3rem 0' }}>
         <h2 className="question-label">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </h2>
@@ -343,8 +343,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             defaultMessage="Choose all that apply."
           />
         </p>
-        {createConditionsCheckboxMenu(index)}
-      </>
+        {createConditionOptionCards(index)}
+      </Box>
     );
   };
 
@@ -352,7 +352,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     const radiofieldProps = {
       ariaLabel: 'householdDataBlock.createIncomeRadioQuestion-ariaLabel',
       inputName: 'hasIncome',
-      value: householdData.hasIncome,
+      value: memberData.hasIncome,
     };
 
     const formattedMsgId =
@@ -364,36 +364,26 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         : 'Does this individual in your household have significant income you have not already included?';
 
     return (
-      <>
-        <h2 className="question-label radio-question">
-          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-        </h2>
-        <p className="question-description">
-          <FormattedMessage
-            id="householdDataBlock.createIncomeRadioQuestion-questionDescription"
-            defaultMessage="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
-          />
-        </p>
-        <HHDataRadiofield
-          componentDetails={radiofieldProps}
-          setHouseholdData={setHouseholdData}
-          householdData={householdData}
-        />
-      </>
+      <Box className="section-container" sx={{ paddingTop: '3rem' }}>
+        <Box className="section">
+          <h2 className="question-label">
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          </h2>
+          <p className="question-description">
+            <FormattedMessage
+              id="householdDataBlock.createIncomeRadioQuestion-questionDescription"
+              defaultMessage="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
+            />
+          </p>
+          <HHDataRadiofield componentDetails={radiofieldProps} memberData={memberData} setMemberData={setMemberData} />
+        </Box>
+      </Box>
     );
   };
 
   const createPersonIncomeBlock = (submitted) => {
     return (
-      <>
-        <PersonIncomeBlock
-          householdData={householdData}
-          setHouseholdData={setHouseholdData}
-          page={page}
-          submitted={submitted}
-        />
-        <p className="household-data-q-underline"></p>
-      </>
+      <PersonIncomeBlock memberData={memberData} setMemberData={setMemberData} page={page} submitted={submitted} />
     );
   };
 
@@ -401,14 +391,14 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     event.preventDefault();
     setSubmittedCount(submittedCount + 1);
 
-    const validPersonData = personDataIsValid(householdData);
+    const validPersonData = personDataIsValid(memberData);
     const lastHouseholdMember = page >= remainingHHMNumber;
 
     if (validPersonData && lastHouseholdMember) {
-      handleHouseholdDataSubmit(householdData, page - 1, uuid);
+      handleHouseholdDataSubmit(memberData, page - 1, uuid);
       navigate(`/${uuid}/step-${step + 1}`);
     } else if (validPersonData) {
-      handleHouseholdDataSubmit(householdData, page - 1, uuid);
+      handleHouseholdDataSubmit(memberData, page - 1, uuid);
       setPage(page + 1);
     } else if (!validPersonData) {
       setWasSubmitted(true);
@@ -425,35 +415,69 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const displayHealthInsuranceQuestion = (page, hhMemberData, setHHMemberData) => {
     return (
-      <>
-        <HealthInsuranceQ
-          hhMemberIndex={page}
-          householdMemberData={hhMemberData}
-          setHouseholdMemberData={setHHMemberData}
-          submitted={submittedCount}
-        />
-        <p className="household-data-q-underline"></p>
-      </>
+      <Box className="section-container">
+        <Stack sx={{ padding: '3rem 0' }} className="section">
+          {displayHealthCareQuestion(page)}
+          {
+            <OptionCardGroup
+              options={page === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
+              stateVariable="healthInsurance"
+              memberData={hhMemberData}
+              setMemberData={setHHMemberData}
+              hhMemberIndex={page}
+            />
+          }
+          {
+            <HealthInsuranceError
+              hhMemberInsurance={memberData.healthInsurance}
+              submitted={submittedCount}
+              hhMemberIndex={page}
+            />
+          }
+        </Stack>
+      </Box>
     );
+  };
+
+  const displayHealthCareQuestion = (page) => {
+    if (page === 1) {
+      return (
+        <h2 className="question-label">
+          <FormattedMessage
+            id="questions.healthInsurance-you"
+            defaultMessage="Which type of health insurance do you have?"
+          />
+        </h2>
+      );
+    } else {
+      return (
+        <h2 className="question-label">
+          <FormattedMessage
+            id="questions.healthInsurance-they"
+            defaultMessage="What type of health insurance do they have?"
+          />
+        </h2>
+      );
+    }
   };
 
   return (
     <main className="benefits-form">
-      <div>
-        {createQuestionHeader(page)}
-        {createAgeQuestion(page)}
-        {page === 1 && displayHealthInsuranceQuestion(page, householdData, setHouseholdData)}
-        {page !== 1 && createHOfHRelationQuestion()}
-        {page !== 1 && displayHealthInsuranceQuestion(page, householdData, setHouseholdData)}
-        {createConditionsQuestion(page)}
-        <p className="household-data-q-underline"></p>
-        {createIncomeRadioQuestion(page)}
-        <p className="household-data-q-underline"></p>
-        {householdData.hasIncome && createPersonIncomeBlock(submittedCount)}
-        <div className="question-buttons">
-          <PreviousButton navFunction={handlePreviousSubmit} />
-          <ContinueButton handleContinueSubmit={handleContinueSubmit} />
-        </div>
+      {createQuestionHeader(page)}
+      {createAgeQuestion(page)}
+      {page === 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
+      {page !== 1 && createHOfHRelationQuestion()}
+      {page !== 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
+      {createConditionsQuestion(page)}
+      <Box>
+        <Stack sx={{ margin: '3rem 0' }}>
+          {createIncomeRadioQuestion(page)}
+          {memberData.hasIncome && createPersonIncomeBlock(submittedCount)}
+        </Stack>
+      </Box>
+      <div className="question-buttons">
+        <PreviousButton navFunction={handlePreviousSubmit} />
+        <ContinueButton handleContinueSubmit={handleContinueSubmit} />
       </div>
     </main>
   );

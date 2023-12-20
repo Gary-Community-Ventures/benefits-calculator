@@ -51,6 +51,7 @@ import {
 import { citizenshipFilterOperators } from '../FilterSection/CitizenshipPopover.tsx';
 import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import EmailResults from '../EmailResults/EmailResults.tsx';
+import { BrandedResultsHeader } from '../Referrer/Referrer.tsx';
 
 export type UpdateFilterArg =
   | {
@@ -414,20 +415,11 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
     } else {
       return (
         <Grid xs={12} item>
-          <h1 className="bottom-border program-value-header">
-            {citizenshipRowCount}
-            <FormattedMessage
-              id="results.return-programsUpToLabel"
-              defaultMessage=" programs with an estimated value of "
-            />
-            ${Math.round(totalCitizenshipDollarValue.cashOrReducedExpenses / 12).toLocaleString()}
-            <FormattedMessage
-              id="results.return-perMonthLabel"
-              defaultMessage=" monthly in cash or reduced expenses, and "
-            />
-            ${Math.round(totalCitizenshipDollarValue.taxCredits).toLocaleString()}
-            <FormattedMessage id="results.return-taxCredits" defaultMessage=" in tax credits for you to consider " />
-          </h1>
+          <BrandedResultsHeader
+            programCount={citizenshipRowCount}
+            programsValue={totalCitizenshipDollarValue.cashOrReducedExpenses}
+            taxCreditsValue={totalCitizenshipDollarValue.taxCredits}
+          />
         </Grid>
       );
     }

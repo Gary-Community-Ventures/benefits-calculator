@@ -1,45 +1,39 @@
+import { useIntl } from 'react-intl';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { CardActionArea, Typography } from '@mui/material';
-import { useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper.tsx';
-import { useIntl } from 'react-intl';
+import { CardActionArea, Typography, Stack, Box } from '@mui/material';
+import { ReactComponent as Checkmark } from '../../Assets/OptionCardIcons/checkmark.svg';
 import './OptionCardGroup.css';
 
-const OptionCardGroup = ({ stateVariable, options, errorController }) => {
-  const { formData: state, setFormData: setState } = useContext(Context);
+const OptionCardGroup = ({ options, stateVariable, memberData, setMemberData, hhMemberIndex }) => {
   const intl = useIntl();
 
-  const handleCardClick = (option) => {
-    const currentStateVariableObj = { ...state[stateVariable] };
-    const currentOptions = Object.keys(currentStateVariableObj);
+  const handleOptionCardClick = (optionName, stateVariable, memberData, setMemberData) => {
+    const updatedOption = !memberData[stateVariable][optionName];
+    const updatedStateVariable = { ...memberData[stateVariable], [optionName]: updatedOption };
 
-    const updatedStateVariableObj = currentOptions.reduce((acc, key) => {
-      if (option === key) {
-        acc[key] = !currentStateVariableObj[key];
-      } else {
-        acc[key] = currentStateVariableObj[key];
-      }
-      return acc;
-    }, {});
-
-    errorController.updateError(updatedStateVariableObj);
-    setState({ ...state, [stateVariable]: updatedStateVariableObj });
+    setMemberData({
+      ...memberData,
+      [stateVariable]: updatedStateVariable,
+    });
   };
 
-  const createOptionCards = () => {
+  const displayOptionCards = (options, stateVariable, memberData, hhMemberIndex) => {
     const optionCards = Object.keys(options).map((optionKey, index) => {
-      const translatedAriaLabel = intl.formatMessage({
+      let translatedAriaLabel = intl.formatMessage({
         id: options[optionKey].formattedMessage.props.id,
         defaultMessage: options[optionKey].formattedMessage.props.defaultMessage,
       });
+
+      const isSelected = memberData[stateVariable][optionKey];
+
       return (
         <CardActionArea
-          key={index}
-          sx={{ width: '11.25rem' }}
+          key={hhMemberIndex + 'key' + index}
+          sx={{ width: '15rem' }}
           className="card-action-area"
           onClick={() => {
-            handleCardClick(optionKey);
+            handleOptionCardClick(optionKey, stateVariable, memberData, setMemberData);
           }}
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
@@ -47,24 +41,31 @@ const OptionCardGroup = ({ stateVariable, options, errorController }) => {
             }
           }}
         >
-          <Card
-            className={state[stateVariable][optionKey] ? 'selected-option-card' : 'unselected-option-card'}
-            sx={{ width: '11.25rem', height: '11.25rem', display: 'grid', placeItems: 'center' }}
-          >
-            <div className="option-card-image">
-              <img src={options[optionKey].image} alt={translatedAriaLabel} />
-            </div>
-            <CardContent sx={{ textAlign: 'center', padding: '.35rem' }}>
-              <Typography>{options[optionKey].formattedMessage}</Typography>
-            </CardContent>
+          <Card className={isSelected ? 'option-card selected-option-card' : 'option-card'}>
+            <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>
+              <CardContent sx={{ textAlign: 'center', padding: '0.5rem' }}>
+                <Box>{options[optionKey].icon}</Box>
+                <Typography className={isSelected ? 'option-card-text' : ''}>{translatedAriaLabel}</Typography>
+              </CardContent>
+            </Stack>
+            {memberData[stateVariable][optionKey] && (
+              <Stack direction="row" justifyContent="flex-end" alignItems="flex-end">
+                <Checkmark alt="checked" className="checkmark" />
+              </Stack>
+            )}
           </Card>
         </CardActionArea>
       );
     });
 
-    return optionCards;
+    return <div className="option-cards-container">{optionCards}</div>;
   };
-  return <div className="option-card-container">{createOptionCards()}</div>;
+
+  return (
+    <Stack sx={{ alignItems: 'center' }}>
+      {displayOptionCards(options, stateVariable, memberData, hhMemberIndex || 0)}
+    </Stack>
+  );
 };
 
 export default OptionCardGroup;

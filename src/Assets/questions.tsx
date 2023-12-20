@@ -25,7 +25,8 @@ import type { QuestionName, Question } from '../Types/Questions.ts';
 const questions: Record<QuestionName, Question> = {
   zipcode: {
     name: 'zipcode',
-    header: <FormattedMessage id="qcc.tell-us-text" defaultMessage="Tell us where you live." />,
+    header: <FormattedMessage id="qcc.zipcode-header" defaultMessage="Tell us where you live." />,
+    subheader: <FormattedMessage id="qcc.tell-us-text" defaultMessage="Let's Get Started!" />,
     question: <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />,
     componentDetails: {
       componentType: 'Textfield',

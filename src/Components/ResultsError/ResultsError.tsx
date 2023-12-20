@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import ErrorIcon from '@mui/icons-material/Error';
+import ErrorIcon from '../../Assets/error-icon.svg';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import './ResultsError.css';
@@ -11,7 +11,7 @@ const ResultsError = () => {
   return (
     <main>
       <div className="error-container">
-        <ErrorIcon className="error-icon" />
+        <img className="error-icon" src={ErrorIcon} />
         <h1 className="error-header">
           <FormattedMessage id="results-error.header" defaultMessage="Oops! Looks like something went wrong." />
         </h1>
