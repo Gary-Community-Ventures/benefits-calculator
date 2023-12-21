@@ -4,11 +4,11 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import CustomSwitch from '../CustomSwitch/CustomSwitch';
+import CustomSwitch from '../../CustomSwitch/CustomSwitch';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { FormattedMessage } from 'react-intl';
-import { UpdateFilterArg } from '../Results/Results';
+import { UpdateFilterArg } from '../Results';
 import './OtherPopover.css';
 
 type StateType<T> = [T, React.Dispatch<React.SetStateAction<T>>];
