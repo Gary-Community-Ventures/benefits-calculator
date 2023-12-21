@@ -7,8 +7,11 @@ import { getEligibility } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import { Navigate, useParams } from 'react-router-dom';
 import ResultsHeader from './Header/Header';
-import ProgramPage from './Programs/ProgramPage';
+import ProgramPage from './ProgramPage/ProgramPage';
 import ResultsTabs from './Tabs/Tabs';
+import Needs from './Needs/Needs';
+import Programs from './Programs/Programs';
+import MoreHelp from './MoreHelp/MoreHelp';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -83,6 +86,8 @@ const Results = ({ type }: ResultsProps) => {
       >
         <ResultsHeader type={type} />
         <ResultsTabs currentTab={type} />
+        {type === 'need' ? <Needs /> : <Programs />}
+        <MoreHelp />
       </ResultsContext.Provider>
     );
   } else {
