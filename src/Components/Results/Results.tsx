@@ -55,8 +55,8 @@ const Results = ({ type }: ResultsProps) => {
       setApiResults(rawEligibilityResponse);
     } catch (error) {
       setApiError(true);
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -80,6 +80,7 @@ const Results = ({ type }: ResultsProps) => {
         return program.legal_status_required.some((status) => filters.includes(status)) && program.eligible;
       }),
     );
+    setLoading(false);
   }, [filters, apiResults]);
 
   if (loading) {
