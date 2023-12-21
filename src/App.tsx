@@ -331,7 +331,8 @@ const App = () => {
               <Route path="confirm-information" element={<Confirmation />} />
               <Route path="results/benefits" element={<Results type="program" />} />
               <Route path="results/near-term-needs" element={<Results type="need" />} />
-              <Route path="results/benefits/:id" element={<Results type="program" />} />
+              <Route path="results/benefits/:programId" element={<Results type="program" />} />
+              <Route path="results/benefits/:programId/navigators" element={<Results type="navigator" />} />
               <Route path="*" element={<Navigate to="/step-1" replace />} />
             </Route>
             <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />

@@ -12,6 +12,7 @@ import ResultsTabs from './Tabs/Tabs';
 import Needs from './Needs/Needs';
 import Programs from './Programs/Programs';
 import MoreHelp from './MoreHelp/MoreHelp';
+import NavigatorPage from './NavigatorPage/NavigatorPage';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -21,7 +22,7 @@ type WrapperResultsContext = {
 };
 
 type ResultsProps = {
-  type: 'program' | 'need';
+  type: 'program' | 'need' | 'navigator';
 };
 
 export const ResultsContext = createContext<WrapperResultsContext | undefined>(undefined);
@@ -42,7 +43,7 @@ function findProgramById(programs: Program[], id: string) {
 
 const Results = ({ type }: ResultsProps) => {
   const { locale } = useContext(Context);
-  const { uuid, id } = useParams();
+  const { uuid, programId } = useParams();
 
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(false);
@@ -89,7 +90,7 @@ const Results = ({ type }: ResultsProps) => {
     );
   } else if (apiError) {
     return <ResultsError />;
-  } else if (id === undefined) {
+  } else if (programId === undefined && (type === 'program' || type === 'need')) {
     return (
       <ResultsContext.Provider
         value={{
@@ -105,15 +106,23 @@ const Results = ({ type }: ResultsProps) => {
         <MoreHelp />
       </ResultsContext.Provider>
     );
-  } else {
-    const program = findProgramById(programs, id);
-
-    if (program === undefined) {
-      return <Navigate to={`/${uuid}/results/benefits`} />;
-    }
-
-    return <ProgramPage program={program} />;
   }
+
+  if (programId === undefined) {
+    return <Navigate to={`/${uuid}/results/benefits`} />;
+  }
+
+  const program = findProgramById(programs, programId);
+
+  if (program === undefined) {
+    return <Navigate to={`/${uuid}/results/benefits`} />;
+  }
+
+  if (type === 'navigator') {
+    return <NavigatorPage navigators={program.navigators} />;
+  }
+
+  return <ProgramPage program={program} />;
 };
 
 export default Results;
