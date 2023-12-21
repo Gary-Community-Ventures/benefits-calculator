@@ -66,6 +66,21 @@ const Results = ({ type }: ResultsProps) => {
   const [programs, setPrograms] = useState<Program[]>([]);
   const [needs, setNeeds] = useState<UrgentNeed[]>([]);
 
+  useEffect(() => {
+    if (apiResults === undefined) {
+      setNeeds([]);
+      setPrograms([]);
+      return;
+    }
+
+    setNeeds(apiResults.urgent_needs);
+    setPrograms(
+      apiResults.programs.filter((program) => {
+        return program.legal_status_required.some((status) => filters.includes(status)) && program.eligible;
+      }),
+    );
+  }, [filters, apiResults]);
+
   if (loading) {
     return (
       <div className="results-loading-container">
