@@ -29,7 +29,6 @@ const ResultsHeader = ({ type }: ResultsHeaderProps) => {
   return (
     <>
       <Buttons />
-      <h1>{type}</h1>
       {type === 'need' ? <NeedsHeader /> : <ProgramsHeader />}
     </>
   );

@@ -11,9 +11,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   return (
     <div>
       <ResultsTranslate translation={program.name} />
-      <ResultsTranslate translation={program.estimated_delivery_time} />
-      <ResultsTranslate translation={program.estimated_application_time} />
-      <Link to={`/${uuid}/results/benefits/${program.program_id}`} />
+      <Link to={`/${uuid}/results/benefits/${program.program_id}`}>Apply</Link>
     </div>
   );
 };

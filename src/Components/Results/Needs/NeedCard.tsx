@@ -7,9 +7,9 @@ type NeedsCardProps = {
 
 const NeedCard = ({ need }: NeedsCardProps) => {
   return (
-    <>
+    <div>
       <ResultsTranslate translation={need.name} />
-    </>
+    </div>
   );
 };
 
