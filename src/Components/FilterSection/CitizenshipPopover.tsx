@@ -4,11 +4,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { Checkbox, Stack } from '@mui/material';
 import { GridFilterItem, GridFilterOperator } from '@mui/x-data-grid';
-import { UpdateFilterArg } from '../Results';
-import citizenshipFilterFormControlLabels, {
-  filterNestedMap,
-} from '../../../Assets/citizenshipFilterFormControlLabels';
-import type { CitizenLabels } from '../../../Assets/citizenshipFilterFormControlLabels';
+import { UpdateFilterArg } from '../Results/Results';
+import citizenshipFilterFormControlLabels, { filterNestedMap } from '../../Assets/citizenshipFilterFormControlLabels';
+import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import './CitizenshipPopover.css';
 
 export const citizenshipFilterOperators: GridFilterOperator[] = [

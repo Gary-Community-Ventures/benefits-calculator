@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, MouseEvent } from 'react';
-import { Context } from '../../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import CitizenshipPopover from './CitizenshipPopover';
 import OtherPopover from './OtherPopover';
@@ -7,8 +7,8 @@ import Popover from '@mui/material/Popover';
 import { FormattedMessage } from 'react-intl';
 import { Button } from '@mui/material';
 import './FilterSection.css';
-import { UpdateFilterArg } from '../Results';
-import type { CitizenLabels } from '../../../Assets/citizenshipFilterFormControlLabels';
+import { UpdateFilterArg } from '../Results/Results';
+import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 
 type StateType<T> = [T, React.Dispatch<React.SetStateAction<T>>];
 type FilterProps = {
