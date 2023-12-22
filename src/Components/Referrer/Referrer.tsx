@@ -12,7 +12,7 @@ type HeaderProps = {
 
 export const BrandedHeader = ({ handleTextFieldChange }: HeaderProps) => {
   const { formData } = useContext(Context);
-  
+
   if (formData.immutableReferrer === '211co') {
     return <TwoOneOneHeader handleTextfieldChange={handleTextFieldChange} />;
   }
@@ -21,11 +21,11 @@ export const BrandedHeader = ({ handleTextFieldChange }: HeaderProps) => {
 
 export const BrandedFooter = () => {
   const { formData } = useContext(Context);
-  
+
   if (formData.immutableReferrer === '211co') {
     return <TwoOneOneFooter />;
   }
-  return <Footer/>;
+  return <Footer />;
 };
 
 type ResultsHeaderProps = {
