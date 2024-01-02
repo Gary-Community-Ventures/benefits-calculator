@@ -9,12 +9,16 @@
   font-size: 13px;
 }
 
+.twoOneOne-globe-icon {
+  color: var(--primary-color);
+}
+
 #twoOneOne-select-language {
   padding: 0;
   color: #005191;
   font-weight: 600;
   font-size: 0.79rem;
-  margin-left: 13px;
+  /* margin-left: 13px; */
 }
 
 #twoOneOne-nav-container {
@@ -56,9 +60,5 @@ button.hamburger-icon {
 @media (max-width: 500px) {
   .cobranded-logo {
     width: 75%;
-  }
-
-  div.twoOneOne-remove-leftMargin {
-    margin-left: 0;
   }
 }
