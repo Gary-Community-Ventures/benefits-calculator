@@ -170,7 +170,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
               {create211Links()}
             </Stack>
             <Stack direction="row" gap=".25rem" alignItems="center">
-              <LanguageIcon className='twoOneOne-globe-icon' />
+              <LanguageIcon className="twoOneOne-globe-icon" />
               <Select
                 labelId="select-language-label"
                 id="twoOneOne-select-language"
@@ -183,6 +183,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
                 open={isLanguageSelectOpen}
                 onOpen={handleOpenLanguage}
                 onClose={handleCloseLanguage}
+                sx={{ '& .MuiSvgIcon-root': { color: '#005191' } }}
               >
                 {createMenuItems(languageOptions)}
               </Select>
