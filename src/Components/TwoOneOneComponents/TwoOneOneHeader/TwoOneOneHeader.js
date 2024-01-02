@@ -158,7 +158,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
 
   return (
     <nav>
-      <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#FFFFFF' }} square={true}>
+      <Paper elevation={4} square={true} className='twoOneOne-header-container'>
         <AppBar position="sticky" id="twoOneOne-nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
           <Box>
             <a href={`/step-1${queryString}`}>
