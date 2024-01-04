@@ -1,0 +1,17 @@
+.filter-section-container {
+  margin: 1rem 0 2rem 0;
+}
+.arrow-margin {
+  margin-left: 1rem;
+}
+
+.results-section-header {
+  font-size: 1.25rem;
+  color: var(--primary-color);
+}
+
+#citizenship {
+  background-color: #ffff;
+  color: var(--primary-color);
+  border-radius: 25px;
+}
