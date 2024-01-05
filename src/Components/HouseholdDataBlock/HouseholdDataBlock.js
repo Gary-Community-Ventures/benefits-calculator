@@ -211,9 +211,9 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     const handleEditSubmit = () => {
       setSubmittedCount(submittedCount + 1);
 
-      const validPersonData = personDataIsValid(householdData);
+      const validPersonData = personDataIsValid(memberData);
       if (validPersonData) {
-        handleHouseholdDataSubmit(householdData, page - 1, uuid);
+        handleHouseholdDataSubmit(memberData, page - 1, uuid);
         navigate(`/${uuid}/step-${step}/${index + 1}`);
       }
     };
