@@ -540,7 +540,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
                 });
               }}
             >
-              <Button className="apply-button">
+              <Button className="apply-button" variant="contained">
                 <FormattedMessage id="results.resultsRow-applyButton" defaultMessage="Apply" />
               </Button>
             </a>
