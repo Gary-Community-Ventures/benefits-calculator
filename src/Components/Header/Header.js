@@ -2,7 +2,7 @@ import { AppBar, MenuItem, Select, Modal } from '@mui/material';
 import { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper.tsx';
-import globeIcon from '../../Assets/global-icon.png';
+import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Share from '../Share/Share';
@@ -72,7 +72,7 @@ const Header = ({ handleTextfieldChange }) => {
             <img src={getReferrer('logoSource')} alt={getReferrer('logoAlt')} className={getReferrer('logoClass')} />
           </a>
           <div className="icon-wrapper">
-            <img src={globeIcon} alt="globe-icon" width={25}></img>
+            <LanguageIcon />
             <Select
               labelId="select-language-label"
               id="select-language"
