@@ -47,7 +47,7 @@ const Confirmation = () => {
   useEffect(() => {
     const continueOnEnter = (event) => {
       if (event.key === 'Enter') {
-        navigate(`/${uuid}/results`);
+        navigate(`/${uuid}/results/benefits`);
       }
     };
     document.addEventListener('keyup', continueOnEnter);
