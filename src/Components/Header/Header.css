@@ -49,6 +49,7 @@
   margin-right: 1.5rem;
   color: white;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 #select-language:focus-visible {
