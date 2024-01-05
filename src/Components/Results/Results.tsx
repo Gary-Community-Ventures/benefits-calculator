@@ -17,8 +17,8 @@ import NavigatorPage from './NavigatorPage/NavigatorPage';
 type WrapperResultsContext = {
   programs: Program[];
   needs: UrgentNeed[];
-  filters: string[];
-  setFilters: (newFilters: string[]) => void;
+  filtersChecked: string[];
+  setFiltersChecked: (newFiltersChecked: string[]) => void;
 };
 
 type ResultsProps = {
@@ -63,7 +63,7 @@ const Results = ({ type }: ResultsProps) => {
     fetchResults();
   }, []);
 
-  const [filters, setFilters] = useState<string[]>(['citizen']);
+  const [filtersChecked, setFiltersChecked] = useState<string[]>(['citizen']);
   const [programs, setPrograms] = useState<Program[]>([]);
   const [needs, setNeeds] = useState<UrgentNeed[]>([]);
 
@@ -77,11 +77,11 @@ const Results = ({ type }: ResultsProps) => {
     setNeeds(apiResults.urgent_needs);
     setPrograms(
       apiResults.programs.filter((program) => {
-        return program.legal_status_required.some((status) => filters.includes(status)) && program.eligible;
+        return program.legal_status_required.some((status) => filtersChecked.includes(status)) && program.eligible;
       }),
     );
     setLoading(false);
-  }, [filters, apiResults]);
+  }, [filtersChecked, apiResults]);
 
   if (loading) {
     return (
@@ -97,8 +97,8 @@ const Results = ({ type }: ResultsProps) => {
         value={{
           programs,
           needs,
-          filters,
-          setFilters,
+          filtersChecked,
+          setFiltersChecked,
         }}
       >
         <ResultsHeader type={type} />

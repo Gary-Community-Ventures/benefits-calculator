@@ -7,21 +7,21 @@ import { useState } from 'react';
 import './Filter.css';
 
 export const Filter = () => {
-  const { filters, setFilters } = useResultsContext();
+  const { filtersChecked, setFiltersChecked } = useResultsContext();
   // console.log({filters})
 
-  const [filterIsOpen, setFilterIsOpen] = useState(false);
+  const [citizenshipFilterIsOpen, setCitizenshipFilterIsOpen] = useState(false);
 
   const handleCitizenshipBtnClick = () => {
-    const updatedFilterIsOpenStatus = !filterIsOpen;
-    setFilterIsOpen(updatedFilterIsOpenStatus);
+    const updatedCitizenshipFilterIsOpen = !citizenshipFilterIsOpen;
+    setCitizenshipFilterIsOpen(updatedCitizenshipFilterIsOpen);
   }
 
   const displayCitizenshipButton = () => {
     return (
       <Button className="citizenship-button" variant="contained" onClick={handleCitizenshipBtnClick}>
         <FormattedMessage id="filterSection.citizenship" defaultMessage="CITIZENSHIP" />
-        {filterIsOpen ? (
+        {citizenshipFilterIsOpen ? (
           <KeyboardArrowDownIcon className="arrow-margin" />
         ) : (
           <KeyboardArrowRightIcon className="arrow-margin" />
@@ -32,11 +32,12 @@ export const Filter = () => {
 
   const displayResetFiltersButton = () => {
     return (
-      <Button className="reset-button" variant="contained" onClick={() => { setFilters(['citizen']) }}>
+      <Button className="reset-button" variant="contained" onClick={() => setFiltersChecked(['citizen']) }>
         <FormattedMessage id="filterSection.reset" defaultMessage="RESET FILTERS" />
       </Button>
     );
   }
+
   return (
     <div className="filter-section-container">
       <h2 className="results-section-header">
