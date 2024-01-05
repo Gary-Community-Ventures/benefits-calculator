@@ -12,15 +12,15 @@ export const Filter = () => {
 
   const [filterIsOpen, setFilterIsOpen] = useState(false);
 
-  const handleFilterClick = () => {
+  const handleCitizenshipBtnClick = () => {
     const updatedFilterIsOpenStatus = !filterIsOpen;
     setFilterIsOpen(updatedFilterIsOpenStatus);
   }
 
   const displayCitizenshipButton = () => {
     return (
-      <Button id="citizenship" variant="contained" onClick={handleFilterClick}>
-        <FormattedMessage id="filterSection.citizenship" defaultMessage="Citizenship" />
+      <Button className="citizenship-button" variant="contained" onClick={handleCitizenshipBtnClick}>
+        <FormattedMessage id="filterSection.citizenship" defaultMessage="CITIZENSHIP" />
         {filterIsOpen ? (
           <KeyboardArrowDownIcon className="arrow-margin" />
         ) : (
@@ -30,12 +30,20 @@ export const Filter = () => {
     );
   }
 
+  const displayResetFiltersButton = () => {
+    return (
+      <Button className="reset-button" variant="contained" onClick={() => { setFilters(['citizen']) }}>
+        <FormattedMessage id="filterSection.reset" defaultMessage="RESET FILTERS" />
+      </Button>
+    );
+  }
   return (
     <div className="filter-section-container">
       <h2 className="results-section-header">
         <FormattedMessage id="filterSection.header" defaultMessage="Filter Results By:" />
       </h2>
       {displayCitizenshipButton()}
+      {displayResetFiltersButton()}
     </div>
   );
 };

@@ -10,8 +10,15 @@
   color: var(--primary-color);
 }
 
-#citizenship {
+.citizenship-button.MuiButton-root {
   background-color: #ffff;
   color: var(--primary-color);
   border-radius: 25px;
+}
+
+.reset-button.MuiButton-root {
+  background-color: #ffff;
+  color: var(--primary-color);
+  border: none;
+  font-weight: 400;
 }
