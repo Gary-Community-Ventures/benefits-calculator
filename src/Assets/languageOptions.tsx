@@ -1,12 +1,12 @@
 export type Language = 'en-us' | 'es' | 'vi' | 'fr' | 'am' | 'so' | 'ru' | 'ne' | 'my' | 'zh';
 const languageOptions: Record<Language, string> = {
-  'en-us': 'ENGLISH',
-  es: 'ESPAÑOL',
-  vi: 'TIẾNG VIỆT',
-  fr: 'FRANÇAIS',
+  'en-us': 'English',
+  es: 'Español',
+  vi: 'Tiếng Việt',
+  fr: 'Français',
   am: 'አማርኛ',
-  so: 'SOOMAALI',
-  ru: 'РУССКИЙ',
+  so: 'Soomaali',
+  ru: 'Русский',
   ne: 'नेपाली',
   my: 'မြန်မာဘာသာစကား',
   zh: '汉语',
