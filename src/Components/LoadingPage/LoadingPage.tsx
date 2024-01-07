@@ -16,7 +16,10 @@ const LoadingPage = () => {
 
   return (
     <main className="loading-wrapper">
-      <img src={loading} alt="loading-icon" className="spinner"></img>
+      <>
+        {/* <input type="text" pattern='\d*'/> */}
+        <input type="text" pattern='[0-9]*' maxLength={5}/>
+      </>
     </main>
   );
 };

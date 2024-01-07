@@ -97,6 +97,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
       inputLabel: <FormattedMessage id="signUp.createPhoneTextfield-label" defaultMessage="Cell Phone" />,
       inputError: phoneHasError,
       inputHelperText: displayPhoneHasErrorHelperText,
+      numericField: true,
     };
 
     return createTextfield(phoneProps, phoneErrorController);

@@ -278,6 +278,7 @@ const IncomeQuestion = ({
       inputError: incomeStreamValueHasError,
       inputHelperText: displayIncomeStreamValueHelperText,
       dollarField: true,
+      numericField: true,
     };
 
     return (
@@ -293,6 +294,7 @@ const IncomeQuestion = ({
             handleTextfieldChange={handleIncomeTextfieldChange}
             index={index}
             submitted={amountErrorController.submittedCount}
+            numericField={true}
           />
         </div>
       </div>
