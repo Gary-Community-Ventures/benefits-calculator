@@ -30,7 +30,7 @@ const questions: Record<QuestionName, Question> = {
     question: <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />,
     componentDetails: {
       componentType: 'Textfield',
-      inputType: 'number',
+      inputType: 'text',
       inputName: 'zipcode',
       numericField: true,
       inputLabel: <FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />,
