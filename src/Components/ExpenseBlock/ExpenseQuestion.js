@@ -106,6 +106,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
     inputError: expenseSourceValueHasError,
     inputHelperText: displayExpenseSourceValueHelperText,
     dollarField: true,
+    numericField: true,
   };
 
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
@@ -116,7 +117,6 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
             id="expenseBlock.createExpenseAmountTextfield-questionLabel"
             defaultMessage="How much is this type of expense: "
           />
-          {/* numericField=true */}
         
           {getExpenseSourceLabel(allExpensesData[index].expenseSourceName)}?
         </p>

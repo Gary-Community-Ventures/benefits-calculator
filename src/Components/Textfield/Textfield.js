@@ -34,7 +34,9 @@ const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submi
       required
       error={errorController.showError}
       helperText={errorController.showError && errorController.message(data[inputName])}
-      inputProps={numericField ? { pattern: '[0-9]*' } : {}}
+      // inputProps={numericField ? { pattern: "^\$\d{1,3}(,\d{3})*(\.\d+)?$",inputMode: 'decimal ' } : {}} //screenshot 
+      // inputProps={numericField ? { pattern: '\d*',inputMode: 'decimal ' } : {}}
+      inputProps={numericField ? { pattern:  '[0-9]* .' ,inputMode: 'decimal' } : {}}
       InputProps={
         (dollarField
           ? {
