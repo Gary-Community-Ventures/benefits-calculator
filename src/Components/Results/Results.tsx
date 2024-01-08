@@ -63,7 +63,19 @@ const Results = ({ type }: ResultsProps) => {
     fetchResults();
   }, []);
 
-  const [filtersChecked, setFiltersChecked] = useState<string[]>(['citizen']);
+  const [filtersChecked, setFiltersChecked] = useState<{}>({
+    citizen: true,
+    non_citizen: false,
+    green_card: false,
+    refugee: false,
+    gc_5plus: false,
+    gc_18plus_no5: false,
+    gc_under18_no5: false,
+    other: false,
+    otherWithWorkPermission: false,
+    otherHealthCareUnder19: false,
+    otherHealthCarePregnant: false,
+  });
   const [programs, setPrograms] = useState<Program[]>([]);
   const [needs, setNeeds] = useState<UrgentNeed[]>([]);
 
