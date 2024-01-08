@@ -80,6 +80,12 @@ const Results = ({ type }: ResultsProps) => {
   const [needs, setNeeds] = useState<UrgentNeed[]>([]);
 
   useEffect(() => {
+    const filtersCheckedStrArr = Object.entries(filtersChecked)
+      .filter(filterKeyValPair => {
+        return filterKeyValPair[1];
+      })
+      .map(filteredKeyValPair => filteredKeyValPair[0]);
+
     if (apiResults === undefined) {
       setNeeds([]);
       setPrograms([]);
@@ -89,7 +95,9 @@ const Results = ({ type }: ResultsProps) => {
     setNeeds(apiResults.urgent_needs);
     setPrograms(
       apiResults.programs.filter((program) => {
-        return program.legal_status_required.some((status) => filtersChecked.includes(status)) && program.eligible;
+        return (
+          program.legal_status_required.some((status) => filtersCheckedStrArr.includes(status)) && program.eligible
+        );
       }),
     );
     setLoading(false);
