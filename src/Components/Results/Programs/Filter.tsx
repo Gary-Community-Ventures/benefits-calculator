@@ -46,23 +46,49 @@ export const Filter = () => {
   }
 
   const renderCitizenshipFilters = (citizenshipFCLabels: Record<CitizenLabels, FormattedMessageType>, filtersChecked) => {
+    const greenCardSubFilters = ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5'];
+    const otherSubFilters = ['otherWithWorkPermission', 'otherHealthCareUnder19', 'otherHealthCarePregnant'];
     const filters: JSX.Element[] = [];
 
     Object.entries(citizenshipFCLabels).forEach(citizenshipFCLEntry => {
       const citizenshipFCLKey = citizenshipFCLEntry[0];
       const citizenshipFCLabel = citizenshipFCLEntry[1];
-      filters.push(
-        <FormControlLabel
-          key={citizenshipFCLKey}
-          label={citizenshipFCLabel}
-          control={
-            <Checkbox
-              checked={filtersChecked[citizenshipFCLKey]}
-              onChange={() => handleFilterSelect(citizenshipFCLKey)}
-            />
-          }
-        />,
-      );
+      
+      const isAMainFilter =
+        !greenCardSubFilters.includes(citizenshipFCLKey) && !otherSubFilters.includes(citizenshipFCLKey);
+      const isSubfilterAndMainFilterIsChecked =
+        (greenCardSubFilters.includes(citizenshipFCLKey) && filtersChecked.green_card === true) ||
+        (otherSubFilters.includes(citizenshipFCLKey) && filtersChecked.other === true);
+
+      //if this is a main filter push it otherwise check to see if the main filter is truthy and then push it
+      if (isAMainFilter) {
+        filters.push(
+          <FormControlLabel
+            key={citizenshipFCLKey}
+            label={citizenshipFCLabel}
+            control={
+              <Checkbox
+                checked={filtersChecked[citizenshipFCLKey]}
+                onChange={() => handleFilterSelect(citizenshipFCLKey)}
+              />
+            }
+          />,
+        );
+      } else if (isSubfilterAndMainFilterIsChecked) {
+        filters.push(
+          <FormControlLabel
+            key={citizenshipFCLKey}
+            label={citizenshipFCLabel}
+            control={
+              <Checkbox
+                checked={filtersChecked[citizenshipFCLKey]}
+                onChange={() => handleFilterSelect(citizenshipFCLKey)}
+              />
+            }
+            className="gc-subcitizen-indentation"
+          />,
+        );
+      }
     });
 
     return filters;
