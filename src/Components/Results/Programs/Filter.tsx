@@ -23,7 +23,7 @@ export const Filter = () => {
 
   const handleFilterSelect = (selectedFilterStr: CitizenLabels) => {
     const updatedSelectedFilterValue = !filtersChecked[selectedFilterStr];
-    const greenCardSubFilters = ['refugee', 'gc_5plus', 'gc_18plus_no5', 'gc_under18_no5'];
+    const greenCardSubFilters = ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5'];
     const otherSubFilters = ['otherWithWorkPermission', 'otherHealthCareUnder19', 'otherHealthCarePregnant'];
 
     if (selectedFilterStr === 'green_card') {
