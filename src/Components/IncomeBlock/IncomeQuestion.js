@@ -221,8 +221,7 @@ const IncomeQuestion = ({
       inputName: 'hoursPerWeek',
       inputError: hoursWorkedValueHasError,
       inputHelperText: hoursWorkedHelperText,
-      numericField: true
-
+      numericField: true,
     };
 
     return (

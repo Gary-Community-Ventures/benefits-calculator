@@ -18,9 +18,9 @@ export type FormattedMessageType = ReactElement;
 export type TextFieldDetails = {
   componentType: 'Textfield';
   inputType: string;
-  inputMode?: string,
-  inputPattern?: string,
-  pattern?: string,
+  inputMode?: string;
+  inputPattern?: string;
+  pattern?: string;
   inputName: string;
   inputLabel: FormattedMessageType;
   inputError: ValidationFunction<string>;

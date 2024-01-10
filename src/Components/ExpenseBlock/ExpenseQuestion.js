@@ -117,7 +117,6 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
             id="expenseBlock.createExpenseAmountTextfield-questionLabel"
             defaultMessage="How much is this type of expense: "
           />
-        
           {getExpenseSourceLabel(allExpensesData[index].expenseSourceName)}?
         </p>
         <div className="expense-block-textfield">
