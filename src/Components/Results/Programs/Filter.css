@@ -1,5 +1,6 @@
 .filter-section-container {
   margin: 1rem 0 2rem 0;
+  padding-left: 1rem;
 }
 
 .arrow-margin {
@@ -33,8 +34,10 @@
   margin-left: 1rem;
 }
 
-.MuiPaper-root.MuiPopover-paper  {
+.MuiPaper-root.MuiPopover-paper {
   border-radius: 0 1.5625rem 1.5625rem 1.5625rem;
   width: 21rem;
   border: 1px solid var(--primary-color);
+  max-height: 300px;
+  overflow-y: scroll;
 }

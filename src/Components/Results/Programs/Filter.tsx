@@ -174,7 +174,7 @@ export const Filter = () => {
       <h2 className="results-section-header">
         <FormattedMessage id="filterSection.header" defaultMessage="Filter Results By:" />
       </h2>
-      <Stack direction='row'>
+      <Stack direction="row">
         {displayCitizenshipButton()}
         {displayResetFiltersButton()}
       </Stack>
