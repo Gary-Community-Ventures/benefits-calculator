@@ -1,3 +1,30 @@
 .results-loading-container {
   height: 80vh;
 }
+
+.MuiTabs-flexContainer.css-heg063-MuiTabs-flexContainer {
+  margin: 0.5rem 0.5rem 0 0.5rem;
+}
+
+.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.MuiTab-fullWidth {
+  color: var(--primary-color);
+  font-family: 'Open Sans', sans-serif;
+  background-color: #e6e7e8;
+  border-left: 2px solid var(--primary-color);
+  border-right: 2px solid var(--primary-color);
+}
+
+.MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.MuiTab-fullWidth.Mui-selected.css-1dcckyy-MuiButtonBase-root-MuiTab-root {
+  background-color: white;
+  border: none;
+}
+
+.MuiTabs-indicator.css-2kxjkg-MuiTabs-indicator {
+  display: none;
+}
+
+.results-tab-container {
+  border-bottom: 1px;
+  border-color: 'divider';
+  background-color: var(--primary-color);
+}
