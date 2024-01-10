@@ -108,6 +108,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       inputName: 'age',
       inputValue: memberData.age,
       inputLabel: createFMInputLabel(personIndex),
+      numericField: true,
       inputError: householdMemberAgeHasError,
       inputHelperText: displayHouseholdMemberAgeHelperText,
     };
