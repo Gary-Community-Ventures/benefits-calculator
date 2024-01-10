@@ -3,9 +3,9 @@ import './Footer.css';
 
 const Footer = () => {
   return (
-    <nav>
+    <footer>
       <Paper className="footer-full-width-container" square={true} elevation={0}></Paper>
-    </nav>
+    </footer>
   );
 };
 

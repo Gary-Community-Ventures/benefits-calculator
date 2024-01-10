@@ -2,6 +2,9 @@
   width: 100%;
   height: 5rem;
   background-color: var(--midBlue-color);
-  position: fixed;
+  position: fixed; 
   bottom: 0;
 }
+
+/* position: fixed; - footer stays on screen */
+/* position: absolute; - footer shown on screen after scroll */
