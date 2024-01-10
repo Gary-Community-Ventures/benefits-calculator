@@ -23,3 +23,13 @@
   border: none;
   font-weight: 400;
 }
+
+.subcategory-indentation.MuiFormControlLabel-root {
+  margin-left: 1rem;
+}
+
+.MuiPaper-root.MuiPopover-paper  {
+  border-radius: 0 1.5625rem 1.5625rem 1.5625rem;
+  width: 21rem;
+  border: 1px solid var(--primary-color);
+}
