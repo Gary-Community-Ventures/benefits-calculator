@@ -72,6 +72,7 @@ export const Filter = () => {
                 onChange={() => handleFilterSelect(citizenshipFCLKey)}
               />
             }
+            sx={{ verticalAlign: 'middle', display: 'inline-block' }}
           />,
         );
       } else if (isSubfilterAndMainFilterIsChecked) {
@@ -83,9 +84,11 @@ export const Filter = () => {
               <Checkbox
                 checked={filtersChecked[citizenshipFCLKey]}
                 onChange={() => handleFilterSelect(citizenshipFCLKey)}
+
               />
             }
-            className="gc-subcitizen-indentation"
+            className="subcategory-indentation"
+            sx={{ verticalAlign: 'middle', display: 'inline-block' }}
           />,
         );
       }
