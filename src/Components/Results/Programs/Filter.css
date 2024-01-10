@@ -14,7 +14,12 @@
 .citizenship-button.MuiButton-root {
   background-color: #ffff;
   color: var(--primary-color);
-  border-radius: 25px;
+  border-radius: 1.5625rem;
+}
+
+.flat-white-border-bottom.MuiButton-root {
+  border-radius: 1.5625rem 1.5625rem 0 0;
+  border-bottom: #ffff;
 }
 
 .reset-button.MuiButton-root {

@@ -1,4 +1,4 @@
-import { Button, Popover, Stack, Checkbox } from '@mui/material';
+import { Button, Popover, Stack, Checkbox, Box } from '@mui/material';
 import { useResultsContext } from '../Results';
 import { FormattedMessage } from 'react-intl';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -53,7 +53,7 @@ export const Filter = () => {
     Object.entries(citizenshipFCLabels).forEach(citizenshipFCLEntry => {
       const citizenshipFCLKey = citizenshipFCLEntry[0];
       const citizenshipFCLabel = citizenshipFCLEntry[1];
-      
+
       const isAMainFilter =
         !greenCardSubFilters.includes(citizenshipFCLKey) && !otherSubFilters.includes(citizenshipFCLKey);
       const isSubfilterAndMainFilterIsChecked =
@@ -100,11 +100,15 @@ export const Filter = () => {
 
   const displayCitizenshipPopover = () => {
     return (
-      <Stack sx={{ padding: '0.5rem', gap: '0.25rem', ml: '0.5rem' }}>
+      <Stack>
         <Popover
           id="citizenshipPopover"
           open={Boolean(citizenshipPopoverAnchor)}
-          onClose={() => setCitizenshipPopoverAnchor(null)}
+          onClose={() => {
+            const updatedCitizenshipFilterIsOpen = !citizenshipFilterIsOpen;
+            setCitizenshipPopoverAnchor(null);
+            setCitizenshipFilterIsOpen(updatedCitizenshipFilterIsOpen);
+          }}
           anchorEl={citizenshipPopoverAnchor}
           anchorOrigin={{
             vertical: 'bottom',
@@ -119,9 +123,16 @@ export const Filter = () => {
   }
 
   const displayCitizenshipButton = () => {
+    const citizenshipButtonClass = citizenshipFilterIsOpen
+      ? 'citizenship-button flat-white-border-bottom'
+      : 'citizenship-button';
     return (
-      <div>
-        <Button className="citizenship-button" variant="contained" onClick={(event) => handleCitizenshipBtnClick(event)}>
+      <Box>
+        <Button
+          className={citizenshipButtonClass}
+          variant="contained"
+          onClick={(event) => handleCitizenshipBtnClick(event)}
+        >
           <FormattedMessage id="filterSection.citizenship" defaultMessage="CITIZENSHIP" />
           {citizenshipFilterIsOpen ? (
             <KeyboardArrowDownIcon className="arrow-margin" />
@@ -130,7 +141,7 @@ export const Filter = () => {
           )}
         </Button>
         {displayCitizenshipPopover()}
-      </div>
+      </Box>
     );
   }
 
