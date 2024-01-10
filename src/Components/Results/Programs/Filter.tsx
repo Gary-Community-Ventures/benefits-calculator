@@ -91,7 +91,7 @@ export const Filter = () => {
       }
     });
 
-    return filters;
+    return <Stack sx={{ padding: '1rem' }}>{filters}</Stack>;
   };
 
 
