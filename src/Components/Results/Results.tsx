@@ -5,7 +5,7 @@ import Loading from './Loading/Loading';
 import { EligibilityResults, Program, UrgentNeed } from '../../Types/Results';
 import { getEligibility } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import ResultsHeader from './Header/Header';
 import Needs from './Needs/Needs';

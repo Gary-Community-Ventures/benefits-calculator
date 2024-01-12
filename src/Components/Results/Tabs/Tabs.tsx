@@ -1,4 +1,4 @@
-import { NavLink, Link, useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useResultsContext } from '../Results';
 import { Grid } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
