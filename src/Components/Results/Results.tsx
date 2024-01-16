@@ -104,7 +104,7 @@ const Results = ({ type }: ResultsProps) => {
       >
         <ResultsHeader type={type} />
 
-        <ResultsTabs currentTab={type} />
+        <ResultsTabs />
         <Grid container>
           <Grid item xs={12}>
             {type === 'need' ? <Needs /> : <Programs />}
