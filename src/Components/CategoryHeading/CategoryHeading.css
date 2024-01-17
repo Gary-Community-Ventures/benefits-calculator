@@ -1,0 +1,10 @@
+.category-heading-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.category-heading-icon {
+  height: 2rem;
+  width: 2rem;
+  fill: var(--icon-color);
+}
