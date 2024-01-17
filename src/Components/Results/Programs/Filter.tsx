@@ -72,7 +72,7 @@ export const Filter = () => {
                 onChange={() => handleFilterSelect(citizenshipFCLKey)}
               />
             }
-            sx={{ verticalAlign: 'middle', display: 'inline-block' }}
+            // sx={{ verticalAlign: 'middle', display: 'inline-block' }}
           />,
         );
       } else if (isSubfilterAndMainFilterIsChecked) {
@@ -88,7 +88,7 @@ export const Filter = () => {
               />
             }
             className="subcategory-indentation"
-            sx={{ verticalAlign: 'middle', display: 'inline-block' }}
+            sx={{ padding: '.5rem 0' }}
           />,
         );
       }

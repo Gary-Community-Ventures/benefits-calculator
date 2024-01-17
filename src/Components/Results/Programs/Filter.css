@@ -50,6 +50,7 @@
   border-radius: 0 1.5625rem 1.5625rem 1.5625rem;
   width: 21rem;
   border: 1px solid var(--primary-color);
+  box-shadow: none;
 }
 
 @media (max-width: 500px) {
