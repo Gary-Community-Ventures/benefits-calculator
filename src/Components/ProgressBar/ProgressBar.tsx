@@ -2,9 +2,10 @@ import { useParams } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import LinearProgress from '@mui/material/LinearProgress';
 import { getStepDirectory, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import './ProgressBar.css';
+import dataLayerPush from '../../Assets/analytics';
 
 interface ProgressBarProps {
   step?: number;
@@ -13,7 +14,11 @@ interface ProgressBarProps {
 const ProgressBar = ({ step }: ProgressBarProps) => {
   const { theme, formData } = useContext(Context);
   const totalSteps = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
-  const { id } = useParams();
+  const { id, uuid } = useParams();
+
+  useEffect(() => {
+    dataLayerPush({ user_id: uuid });
+  }, [uuid]);
 
   let stepValue = step ?? id ?? 0;
   let progressPercentage: number = ((Number(stepValue) - 1) / (totalSteps - 1)) * 100;
