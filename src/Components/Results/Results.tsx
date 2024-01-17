@@ -13,6 +13,7 @@ import Needs from './Needs/Needs';
 import Programs from './Programs/Programs';
 import MoreHelp from './MoreHelp/MoreHelp';
 import NavigatorPage from './NavigatorPage/NavigatorPage';
+import dataLayerPush from '../../Assets/analytics';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -48,6 +49,10 @@ const Results = ({ type }: ResultsProps) => {
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(false);
   const [apiResults, setApiResults] = useState<EligibilityResults | undefined>();
+
+  useEffect(() => {
+    dataLayerPush({ event: 'config', user_id: uuid });
+  }, [uuid]);
 
   const fetchResults = async () => {
     try {
