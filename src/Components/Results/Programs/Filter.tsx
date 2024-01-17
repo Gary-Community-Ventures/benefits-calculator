@@ -72,7 +72,6 @@ export const Filter = () => {
                 onChange={() => handleFilterSelect(citizenshipFCLKey)}
               />
             }
-            // sx={{ verticalAlign: 'middle', display: 'inline-block' }}
           />,
         );
       } else if (isSubfilterAndMainFilterIsChecked) {
