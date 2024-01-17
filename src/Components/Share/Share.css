@@ -1,6 +1,4 @@
 body {
-  /* DON'T DO THIS BECAUSE IT BREAKS THE POPOVER FUNCTIONALITY */
-  /* overflow: visible !important; */
   padding: 0 !important;
 }
 
