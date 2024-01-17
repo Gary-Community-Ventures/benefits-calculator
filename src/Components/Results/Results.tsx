@@ -41,6 +41,14 @@ function findProgramById(programs: Program[], id: string) {
   return programs.find((program) => String(program.program_id) === id);
 }
 
+export function calculateTaxCredits(programs: Program[], category: string) {
+  const taxCredit = programs.reduce((eachTaxCredit, program) => {
+    if (program.category.default_message === category) eachTaxCredit += program.estimated_value;
+    return eachTaxCredit;
+  }, 0);
+  return taxCredit;
+}
+
 const Results = ({ type }: ResultsProps) => {
   const { locale } = useContext(Context);
   const { uuid, programId } = useParams();
