@@ -8,3 +8,20 @@
   width: 2rem;
   fill: var(--icon-color);
 }
+
+.category-heading-container .box-left,
+.category-heading-container .box-right {
+  display: flex;
+  align-items: center;
+}
+
+.text-style {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--secondary-color);
+}
+
+.text-style.normal-weight {
+  font-weight: normal;
+}

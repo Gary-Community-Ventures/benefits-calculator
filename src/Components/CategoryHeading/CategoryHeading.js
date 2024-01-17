@@ -1,16 +1,8 @@
-import { Typography, Box } from '@mui/material';
-import { ReactComponent as Food } from './food.svg';
-import { ReactComponent as Housing } from './housing.svg';
-import { ReactComponent as HealthCare } from './healthcare.svg';
+import { ReactComponent as Food } from '../../Assets/CategoryHeadingIcons/food.svg';
+import { ReactComponent as Housing } from '../../Assets/CategoryHeadingIcons/housing.svg';
+import { ReactComponent as HealthCare } from '../../Assets/CategoryHeadingIcons/healthcare.svg';
 import benefitCategories from '../../Assets/BenefitCategoryLists/benefitCategories.tsx';
 import './CategoryHeading.css';
-
-const textStyle = {
-  fontFamily: 'Roboto Slab',
-  fontWeight: '700',
-  fontSize: '1.25rem',
-  color: '#B85A27',
-};
 
 const headingOptionsMappings = {
   housing: { icon: Housing, categoryName: benefitCategories.housingAndUtilities },
@@ -18,27 +10,22 @@ const headingOptionsMappings = {
   healthcare: { icon: HealthCare, categoryName: benefitCategories.healthCare },
 };
 
-const CategoryHeading = ({ iconKey, amount }) => {
-  const { icon: IconComponent, categoryName } = headingOptionsMappings[iconKey];
+const CategoryHeading = ({ headingType, amount }) => {
+  const { icon: IconComponent, categoryName } = headingOptionsMappings[headingType];
   const defaultMessage = categoryName?.props?.defaultMessage;
 
   return (
-    <Box className='category-heading-container'>
-      <Box display="flex" alignItems="center">
-        <div className="category-heading-icon">
+    <div className="category-heading-container">
+      <div className="box-left">
+        <div className="category-heading-icon" aria-label={`${defaultMessage} icon`}>
           <IconComponent />
         </div>
-        <Typography style={textStyle}>
-          {defaultMessage}
-        </Typography>
-      </Box>
-
-      <Box display="flex" alignItems="center" >
-        <Typography style={{ ...textStyle, fontWeight: 'normal' }}>
-          ${amount}/mo.
-        </Typography>
-      </Box>
-    </Box >
+        <span className="text-style">{defaultMessage}</span>
+      </div>
+      <div className="box-right">
+        <span className="text-style normal-weight">${amount}/mo.</span>
+      </div>
+    </div>
   );
 };
 
