@@ -2,6 +2,7 @@ import { Typography, Box } from '@mui/material';
 import { ReactComponent as Food } from './food.svg';
 import { ReactComponent as Housing } from './housing.svg';
 import { ReactComponent as HealthCare } from './healthcare.svg';
+import benefitCategories from '../../Assets/BenefitCategoryLists/benefitCategories.tsx';
 import './CategoryHeading.css';
 
 const textStyle = {
@@ -12,13 +13,15 @@ const textStyle = {
 };
 
 const headingOptionsMappings = {
-  housing: { icon: Housing, name: 'Housing and Utilities' },
-  food: { icon: Food, name: 'Food Benefits' },
-  healthcare: { icon: HealthCare, name: 'Medical Benefits' },
+  housing: { icon: Housing, categoryName: benefitCategories.housingAndUtilities },
+  food: { icon: Food, categoryName: benefitCategories.foodAndNutrition },
+  healthcare: { icon: HealthCare, categoryName: benefitCategories.healthCare },
 };
 
 const CategoryHeading = ({ iconKey, amount }) => {
-  const { icon: IconComponent, name } = headingOptionsMappings[iconKey];
+  const { icon: IconComponent, categoryName } = headingOptionsMappings[iconKey];
+  const defaultMessage = categoryName?.props?.defaultMessage;
+
   return (
     <Box className='category-heading-container'>
       <Box display="flex" alignItems="center">
@@ -26,7 +29,7 @@ const CategoryHeading = ({ iconKey, amount }) => {
           <IconComponent />
         </div>
         <Typography style={textStyle}>
-          {name}
+          {defaultMessage}
         </Typography>
       </Box>
 
