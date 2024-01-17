@@ -16,6 +16,7 @@
   background-color: #ffff;
   color: var(--primary-color);
   border-radius: 1.5625rem;
+  border: 1px solid var(--primary-color);
 }
 
 .flat-white-border-bottom.MuiButton-root {
