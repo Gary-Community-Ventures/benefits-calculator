@@ -52,6 +52,7 @@ import { citizenshipFilterOperators } from '../FilterSection/CitizenshipPopover.
 import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import EmailResults from '../EmailResults/EmailResults.tsx';
 import { BrandedResultsHeader } from '../Referrer/Referrer.tsx';
+import BackToScreen from '../BackToScreen/BackToScreen.tsx';
 
 export type UpdateFilterArg =
   | {
@@ -73,7 +74,7 @@ type ResultsProps = {
 const Results = ({ handleTextFieldChange }: ResultsProps) => {
   const { uuid: screenerId } = useParams();
   const navigate = useNavigate();
-  const { locale, theme } = useContext(Context);
+  const { locale, theme, formData } = useContext(Context);
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const [citizenshipFilterIsChecked, setCitizenshipFilterIsChecked] = useState<Record<CitizenLabels, boolean>>({
@@ -98,12 +99,14 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
     urgentNeeds: UrgentNeed[];
     screenerId: number;
     loadingState: 'loading' | 'error' | 'done';
+    missingPrograms: boolean;
   };
 
   const initialResults: ResultsState = {
     programs: [],
     urgentNeeds: [],
     screenerId: 0,
+    missingPrograms: false,
     loadingState: 'loading',
   };
 
@@ -250,6 +253,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
       urgentNeeds: rawEligibilityResponse.urgent_needs,
       screenerId: rawEligibilityResponse.screen_id,
       loadingState: 'done',
+      missingPrograms: rawEligibilityResponse.missing_programs,
     });
   };
 
@@ -896,6 +900,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
           {results.loadingState === 'done' && (
             <>
               {displayHeaderSection()}
+              {results.missingPrograms && formData.immutableReferrer === 'lgs' && <BackToScreen />}
               <Grid xs={12} item={true}>
                 {displayBenefitAndImmedNeedsBtns()}
                 {filterResultsButton === 'benefits' && DataGridTable(results.programs)}
