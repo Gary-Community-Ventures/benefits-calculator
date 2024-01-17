@@ -22,6 +22,17 @@
 .flat-white-border-bottom.MuiButton-root {
   border-radius: 1.5625rem 1.5625rem 0 0;
   border-bottom: #ffff;
+  background-color: #ffff;
+}
+
+.flat-white-border-bottom.MuiButton-root::after {
+  content: "";
+  height: 2px;
+  width: 10.0625rem;
+  background-color: #ffff;
+  z-index: 99999;
+  position: absolute;
+  bottom: 0;
 }
 
 .reset-button.MuiButton-root {

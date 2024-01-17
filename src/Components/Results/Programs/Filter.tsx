@@ -114,7 +114,7 @@ export const Filter = () => {
             vertical: 'bottom',
             horizontal: 'left',
           }}
-          sx={{ position: 'absolute' }}
+          transformOrigin={{ vertical: 2, horizontal: 0 }}
         >
           {renderCitizenshipFilters(citizenshipFilterFormControlLabels, filtersChecked)}
         </Popover>
