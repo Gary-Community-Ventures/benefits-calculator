@@ -17,7 +17,7 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
   const { id, uuid } = useParams();
 
   useEffect(() => {
-    dataLayerPush({ user_id: uuid });
+    dataLayerPush({ event: 'config', user_id: uuid });
   }, [uuid]);
 
   let stepValue = step ?? id ?? 0;

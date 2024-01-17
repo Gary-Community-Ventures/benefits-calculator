@@ -95,7 +95,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
   const [sendResultsOpen, setSendResultsOpen] = useState(false);
 
   useEffect(() => {
-    dataLayerPush({ user_id: screenerId });
+    dataLayerPush({ event: 'config', user_id: screenerId });
   }, [screenerId]);
 
   type ResultsState = {
