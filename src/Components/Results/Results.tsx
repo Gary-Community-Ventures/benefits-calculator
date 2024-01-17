@@ -41,12 +41,12 @@ function findProgramById(programs: Program[], id: string) {
   return programs.find((program) => String(program.program_id) === id);
 }
 
-export function calculateTaxCredits(programs: Program[], category: string) {
-  const taxCredit = programs.reduce((eachTaxCredit, program) => {
-    if (program.category.default_message === category) eachTaxCredit += program.estimated_value;
-    return eachTaxCredit;
+export function calculateTotalValue(programs: Program[], category: string) {
+  const totalValue = programs.reduce((eachValue, program) => {
+    if (program.category.default_message === category) eachValue += program.estimated_value;
+    return eachValue;
   }, 0);
-  return taxCredit;
+  return totalValue;
 }
 
 const Results = ({ type }: ResultsProps) => {

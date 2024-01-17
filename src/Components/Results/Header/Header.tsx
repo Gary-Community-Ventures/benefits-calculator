@@ -1,9 +1,7 @@
 import { CardContent } from '@mui/material';
-import { calculateTaxCredits, useResultsContext } from '../Results';
+import { calculateTotalValue, useResultsContext } from '../Results';
 import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper.tsx';
-import { Program } from '../../../Types/Results.ts';
-import { log } from 'console';
 
 type ResultsHeaderProps = {
   type: 'program' | 'need';
@@ -21,7 +19,7 @@ const Buttons = () => {
 const ProgramsHeader = () => {
   const { programs } = useResultsContext();
   const { theme } = useContext(Context);
-  const taxCredit = calculateTaxCredits(programs, 'Tax Credit');
+  const taxCredit = calculateTotalValue(programs, 'Tax Credit');
 
   const estimatedMonthlySavings = programs.reduce(
     (eachEstimatedMonthlySavings, program) => eachEstimatedMonthlySavings + program.estimated_value,
