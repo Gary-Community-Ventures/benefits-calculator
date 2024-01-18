@@ -6,14 +6,16 @@ import { EligibilityResults, Program, UrgentNeed } from '../../Types/Results';
 import { getEligibility } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import { Navigate, useParams } from 'react-router-dom';
+import { Grid } from '@mui/material';
 import ResultsHeader from './Header/Header';
-import ProgramPage from './ProgramPage/ProgramPage';
-import ResultsTabs from './Tabs/Tabs';
 import Needs from './Needs/Needs';
 import Programs from './Programs/Programs';
+import ProgramPage from './ProgramPage/ProgramPage';
+import ResultsTabs from './Tabs/Tabs';
 import MoreHelp from './MoreHelp/MoreHelp';
 import NavigatorPage from './NavigatorPage/NavigatorPage';
 import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
+import dataLayerPush from '../../Assets/analytics';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -49,6 +51,10 @@ const Results = ({ type }: ResultsProps) => {
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(false);
   const [apiResults, setApiResults] = useState<EligibilityResults | undefined>();
+
+  useEffect(() => {
+    dataLayerPush({ event: 'config', user_id: uuid });
+  }, [uuid]);
 
   const fetchResults = async () => {
     try {
@@ -134,8 +140,14 @@ const Results = ({ type }: ResultsProps) => {
         }}
       >
         <ResultsHeader type={type} />
-        <ResultsTabs currentTab={type} />
-        {type === 'need' ? <Needs /> : <Programs />}
+
+        <ResultsTabs />
+        <Grid container>
+          <Grid item xs={12}>
+            {type === 'need' ? <Needs /> : <Programs />}
+          </Grid>
+        </Grid>
+
         <MoreHelp />
       </ResultsContext.Provider>
     );
