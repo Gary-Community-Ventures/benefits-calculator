@@ -34,7 +34,6 @@ const initialFormData: FormData = {
     denverpresc: false,
     ede: false,
     eitc: false,
-    erc: false,
     lifeline: false,
     leap: false,
     mydenver: false,
