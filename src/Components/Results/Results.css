@@ -58,7 +58,12 @@
 }
 
 .filters-container {
-  padding: .75rem;
+  padding: 0.75rem;
+}
+
+.flex-direction-row {
+  display: flex;
+  flex-direction: row;
 }
 
 @media (max-width: 500px), (max-height: 700px) {

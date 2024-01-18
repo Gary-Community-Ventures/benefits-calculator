@@ -99,7 +99,7 @@ export const Filter = () => {
       }
     });
 
-    return <section className='filters-container'>{filters}</section>;
+    return <section className="filters-container">{filters}</section>;
   };
 
   const displayCitizenshipPopover = () => {
@@ -178,10 +178,10 @@ export const Filter = () => {
       <h2 className="results-section-header">
         <FormattedMessage id="filterSection.header" defaultMessage="Filter Results By:" />
       </h2>
-      <Stack direction="row">
+      <div className="flex-direction-row">
         {displayCitizenshipButton()}
         {displayResetFiltersButton()}
-      </Stack>
+      </div>
     </div>
   );
 };
