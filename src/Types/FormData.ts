@@ -32,7 +32,6 @@ export interface Benefits {
   denverpresc: boolean;
   ede: boolean;
   eitc: boolean;
-  erc: boolean;
   lifeline: boolean;
   leap: boolean;
   mydenver: boolean;

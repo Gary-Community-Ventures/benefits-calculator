@@ -41,7 +41,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     has_dpp: formData.benefits.denverpresc,
     has_ede: formData.benefits.ede,
     has_eitc: formData.benefits.eitc,
-    has_erc: formData.benefits.erc,
+    has_erc: null,
     has_lifeline: formData.benefits.lifeline,
     has_leap: formData.benefits.leap,
     has_mydenver: formData.benefits.mydenver,

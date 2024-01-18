@@ -60,7 +60,6 @@ const FetchScreen = () => {
         denverpresc: response.has_dpp ?? false,
         ede: response.has_ede ?? false,
         eitc: response.has_eitc ?? false,
-        erc: response.has_erc ?? false,
         lifeline: response.has_lifeline ?? false,
         leap: response.has_leap ?? false,
         mydenver: response.has_mydenver ?? false,
