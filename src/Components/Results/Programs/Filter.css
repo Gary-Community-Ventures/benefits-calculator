@@ -28,11 +28,13 @@
 .flat-white-border-bottom.MuiButton-root::after {
   content: "";
   height: 2px;
-  width: 10.0625rem;
+  width: 10.2425rem;
   background-color: #ffff;
   z-index: 99999;
   position: absolute;
   bottom: 0;
+  border-left: 1px solid var(--primary-color);
+  border-right: 1px solid var(--primary-color);
 }
 
 .reset-button.MuiButton-root {
