@@ -13,12 +13,13 @@ import Needs from './Needs/Needs';
 import Programs from './Programs/Programs';
 import MoreHelp from './MoreHelp/MoreHelp';
 import NavigatorPage from './NavigatorPage/NavigatorPage';
+import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 
 type WrapperResultsContext = {
   programs: Program[];
   needs: UrgentNeed[];
-  filtersChecked: string[];
-  setFiltersChecked: (newFiltersChecked: string[]) => void;
+  filtersChecked: Record<CitizenLabels, boolean>;
+  setFiltersChecked: (newFiltersChecked: Record<CitizenLabels, boolean>) => void;
 };
 
 type ResultsProps = {
@@ -63,7 +64,7 @@ const Results = ({ type }: ResultsProps) => {
     fetchResults();
   }, []);
 
-  const [filtersChecked, setFiltersChecked] = useState<{}>({
+  const [filtersChecked, setFiltersChecked] = useState<Record<string, boolean>>({
     citizen: true,
     non_citizen: false,
     green_card: false,
@@ -81,14 +82,14 @@ const Results = ({ type }: ResultsProps) => {
 
   useEffect(() => {
     const filtersCheckedStrArr = Object.entries(filtersChecked)
-      .filter(filterKeyValPair => {
+      .filter((filterKeyValPair) => {
         return filterKeyValPair[1];
       })
-      .map(filteredKeyValPair => filteredKeyValPair[0]);
+      .map((filteredKeyValPair) => filteredKeyValPair[0]);
 
     //if a filter is selected/truthy then remove citizen from the filtersCheckedStrArray and set citizen state to false
     if (filtersCheckedStrArr.includes('citizen') && filtersCheckedStrArr.length > 1) {
-      filtersCheckedStrArr.filter(filter => filter !== 'citizen');
+      filtersCheckedStrArr.filter((filter) => filter !== 'citizen');
       setFiltersChecked({ ...filtersChecked, citizen: false });
     }
 
@@ -96,7 +97,6 @@ const Results = ({ type }: ResultsProps) => {
     if (filtersCheckedStrArr.length === 0) {
       setFiltersChecked({ ...filtersChecked, citizen: true });
     }
-
 
     if (apiResults === undefined) {
       setNeeds([]);

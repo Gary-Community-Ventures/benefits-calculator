@@ -5,10 +5,9 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useState } from 'react';
-import { CitizenLabels } from '../../../Assets/citizenshipFilterFormControlLabels';
+import { CitizenLabelOptions, CitizenLabels } from '../../../Assets/citizenshipFilterFormControlLabels';
 import citizenshipFilterFormControlLabels from '../../../Assets/citizenshipFilterFormControlLabels';
 import { FormattedMessageType } from '../../../Types/Questions';
-import './Filter.css';
 
 export const Filter = () => {
   const [citizenshipFilterIsOpen, setCitizenshipFilterIsOpen] = useState(false);
@@ -23,8 +22,12 @@ export const Filter = () => {
 
   const handleFilterSelect = (selectedFilterStr: CitizenLabels) => {
     const updatedSelectedFilterValue = !filtersChecked[selectedFilterStr];
-    const greenCardSubFilters = ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5'];
-    const otherSubFilters = ['otherWithWorkPermission', 'otherHealthCareUnder19', 'otherHealthCarePregnant'];
+    const greenCardSubFilters: CitizenLabels[] = ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5'];
+    const otherSubFilters: CitizenLabels[] = [
+      'otherWithWorkPermission',
+      'otherHealthCareUnder19',
+      'otherHealthCarePregnant',
+    ];
 
     if (selectedFilterStr === 'green_card') {
       const updatedFiltersChecked = { ...filtersChecked };
@@ -43,15 +46,18 @@ export const Filter = () => {
     } else {
       setFiltersChecked({ ...filtersChecked, [selectedFilterStr]: updatedSelectedFilterValue });
     }
-  }
+  };
 
-  const renderCitizenshipFilters = (citizenshipFCLabels: Record<CitizenLabels, FormattedMessageType>, filtersChecked) => {
+  const renderCitizenshipFilters = (
+    citizenshipFCLabels: Record<CitizenLabelOptions, FormattedMessageType>,
+    filtersChecked: Record<CitizenLabels, boolean>,
+  ) => {
     const greenCardSubFilters = ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5'];
     const otherSubFilters = ['otherWithWorkPermission', 'otherHealthCareUnder19', 'otherHealthCarePregnant'];
     const filters: JSX.Element[] = [];
 
-    Object.entries(citizenshipFCLabels).forEach(citizenshipFCLEntry => {
-      const citizenshipFCLKey = citizenshipFCLEntry[0];
+    Object.entries(citizenshipFCLabels).forEach((citizenshipFCLEntry) => {
+      const citizenshipFCLKey = citizenshipFCLEntry[0] as CitizenLabelOptions;
       const citizenshipFCLabel = citizenshipFCLEntry[1];
 
       const isAMainFilter =
@@ -83,7 +89,6 @@ export const Filter = () => {
               <Checkbox
                 checked={filtersChecked[citizenshipFCLKey]}
                 onChange={() => handleFilterSelect(citizenshipFCLKey)}
-
               />
             }
             className="subcategory-indentation"
@@ -95,7 +100,6 @@ export const Filter = () => {
 
     return <Stack sx={{ padding: '1rem' }}>{filters}</Stack>;
   };
-
 
   const displayCitizenshipPopover = () => {
     return (
@@ -119,7 +123,7 @@ export const Filter = () => {
         </Popover>
       </Stack>
     );
-  }
+  };
 
   const displayCitizenshipButton = () => {
     const citizenshipButtonClass = citizenshipFilterIsOpen
@@ -142,7 +146,7 @@ export const Filter = () => {
         {displayCitizenshipPopover()}
       </Box>
     );
-  }
+  };
 
   const resetFilters = () => {
     setFiltersChecked({
@@ -158,15 +162,15 @@ export const Filter = () => {
       otherHealthCareUnder19: false,
       otherHealthCarePregnant: false,
     });
-  }
+  };
 
   const displayResetFiltersButton = () => {
     return (
-      <Button className="reset-button" variant="contained" onClick={resetFilters} >
+      <Button className="reset-button" variant="contained" onClick={resetFilters}>
         <FormattedMessage id="filterSection.reset" defaultMessage="RESET FILTERS" />
       </Button>
     );
-  }
+  };
 
   return (
     <div className="filter-section-container">
