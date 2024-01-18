@@ -46,6 +46,7 @@ export interface Benefits {
   tanf: boolean;
   upk: boolean;
   wic: boolean;
+  wap: boolean;
 }
 
 export interface HealthInsurance {
