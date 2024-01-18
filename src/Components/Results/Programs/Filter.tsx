@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { CitizenLabelOptions, CitizenLabels } from '../../../Assets/citizenshipFilterFormControlLabels';
 import citizenshipFilterFormControlLabels from '../../../Assets/citizenshipFilterFormControlLabels';
 import { FormattedMessageType } from '../../../Types/Questions';
+import '../Results.css';
 
 export const Filter = () => {
   const [citizenshipFilterIsOpen, setCitizenshipFilterIsOpen] = useState(false);
@@ -98,7 +99,7 @@ export const Filter = () => {
       }
     });
 
-    return <Stack sx={{ padding: '1rem' }}>{filters}</Stack>;
+    return <section className='filters-container'>{filters}</section>;
   };
 
   const displayCitizenshipPopover = () => {
@@ -118,7 +119,6 @@ export const Filter = () => {
             horizontal: 'left',
           }}
           transformOrigin={{ vertical: 2, horizontal: 0 }}
-          marginThreshold={0}
         >
           {renderCitizenshipFilters(citizenshipFilterFormControlLabels, filtersChecked)}
         </Popover>

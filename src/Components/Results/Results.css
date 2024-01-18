@@ -57,6 +57,10 @@
   box-shadow: none;
 }
 
+.filters-container {
+  padding: .75rem;
+}
+
 @media (max-width: 500px), (max-height: 700px) {
   .MuiPaper-root.MuiPopover-paper {
     max-height: 350px;
