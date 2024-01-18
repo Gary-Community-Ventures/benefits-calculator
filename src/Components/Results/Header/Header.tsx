@@ -34,13 +34,9 @@ const ProgramsHeader = () => {
           <div>Programs Found</div>
         </div>
         <div style={{ marginLeft: '15px' }}>
-          <div className="results-header-values">
-            ${Math.round(estimatedMonthlySavings / 12).toLocaleString()} <div className="info-circle">i</div>
-          </div>
+          <div className="results-header-values">${Math.round(estimatedMonthlySavings / 12).toLocaleString()}</div>
           <div className="results-header-label">Estimated Monthly Savings</div>
-          <div className="results-header-values">
-            ${taxCredit} <div className="info-circle">i</div>
-          </div>
+          <div className="results-header-values">${taxCredit}</div>
           <div className="results-header-label">Estimated Tax Credit</div>
         </div>
       </div>
