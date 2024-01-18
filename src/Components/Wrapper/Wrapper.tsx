@@ -116,7 +116,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
   const languages = Object.keys(languageOptions) as Language[];
   languages.forEach((lang: Language) => {
-    if (pathname.includes(`/${lang}`)) {
+    if (pathname.includes(`/${lang}/`)) {
       defaultLanguage = lang;
     }
   });

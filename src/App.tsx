@@ -300,7 +300,6 @@ const App = () => {
             <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
             <Route path="/step-1" element={<SelectLanguagePage />} />
             <Route path="/step-2" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
-            <Route path="results/:uuid" element={<Results handleTextFieldChange={handleTextfieldChange} />} />
             <Route path=":uuid">
               <Route path="" element={<Navigate to="/step-1" replace />} />
               <Route path="step-1" element={<SelectLanguagePage />} />
@@ -330,7 +329,11 @@ const App = () => {
                 }
               />
               <Route path="confirm-information" element={<Confirmation />} />
-              <Route path="results" element={<Results handleTextFieldChange={handleTextfieldChange} />} />
+              <Route path="results/benefits" element={<Results type="program" />} />
+              <Route path="results/near-term-needs" element={<Results type="need" />} />
+              <Route path="results/benefits/:programId" element={<Results type="program" />} />
+              <Route path="results/benefits/:programId/navigators" element={<Results type="navigator" />} />
+              <Route path="results" element={<Navigate to="benefits" />} />
               <Route path="*" element={<Navigate to="/step-1" replace />} />
             </Route>
             <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />

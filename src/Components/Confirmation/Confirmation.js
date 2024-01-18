@@ -614,7 +614,7 @@ const Confirmation = () => {
       <div className="confirmation-container">{displayAllFormData()}</div>
       <div className="prev-continue-results-buttons confirmation">
         <PreviousButton navFunction={() => navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`)} />
-        <Button variant="contained" onClick={() => navigate(`/${uuid}/results`)}>
+        <Button variant="contained" onClick={() => navigate(`/${uuid}/results/benefits`)}>
           <FormattedMessage id="continueButton" defaultMessage="Continue" />
         </Button>
       </div>

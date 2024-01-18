@@ -1,114 +1,30 @@
-.program-value-header {
-  margin: 0;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  font-weight: 500;
-  font-size: 1.25rem;
-  line-height: 1.6;
-  letter-spacing: 0.0075em;
+.results-loading-container {
+  height: 80vh;
 }
 
-.results-instuctions {
-  font-style: normal;
-  font-size: 1rem;
-  font-weight: normal;
+.results-tab-container {
+  background-color: var(--primary-color);
+  padding: 0.75rem 0.75rem 0 0.75rem;
 }
 
-.open-share-button {
-  font-size: 1rem;
-  color: var(--secondary-color);
-  cursor: pointer;
+.results-tab {
+  color: var(--primary-color);
+  font-family: 'Open Sans', sans-serif;
+  border-left: 2px solid var(--primary-color);
+  border-right: 2px solid var(--primary-color);
 }
 
-.ineligibility-link {
-  margin: 0;
-  color: var(--secondary-color);
-  -webkit-text-decoration: underline;
-  text-decoration: underline;
-  text-decoration-color: var(--secondary-color);
-  font-size: 1rem;
+.results-tab a {
+  width: 100%;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 1rem;
+  text-decoration: none;
+  background-color: #e6e7e8;
+  color: var(--primary-color);
 }
 
-.ineligibility-link:hover {
-  text-decoration-color: inherit;
-  cursor: pointer;
-}
-
-.space-around {
-  padding: 0px 5px 0px 5px;
-}
-
-.border-right {
-  border-right: 1px solid white;
-}
-
-.navigator-list {
-  position: relative;
+.results-tab a.active {
   background-color: white;
-  padding: 0rem 1rem 0rem 1rem;
-  box-shadow: #00000033 0px 2px 1px -1px, #00000024 0px 1px 1px 0px, #0000001f 0px 1px 3px 0px;
-}
-
-.top-right {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  cursor: pointer;
-}
-
-.line-seperator {
-  color: #505c66;
-}
-
-.navigator-container {
-  padding-bottom: 1rem;
-  line-height: 1.5rem;
-}
-
-.navigator-header {
-  font-size: 1rem;
-  font-weight: 500;
-  padding-top: 1rem;
-}
-
-.navigator-desc {
-  font-style: italic;
-  margin-bottom: 0.5rem;
-}
-
-.font-weight {
-  font-weight: 500;
-}
-
-button.results-filter-button-grey {
-  background-color: #8d8d8d;
-}
-
-.navigator-info {
-  font-size: 0.875rem;
-  font-weight: 400;
-}
-
-.child-care-helper-text {
-  font-style: italic;
-  padding: 5px 0 5px 9px;
-}
-
-button.apply-button {
-  color: white;
-}
-
-button.back-to-screen-button {
-  margin: 1rem;
-}
-
-@media (min-width: 601px) {
-  #share-container {
-    display: none;
-  }
-}
-
-@media (max-width: 420px) {
-  h1.bottom-border.program-value-header {
-    font-size: 1rem;
-  }
 }
