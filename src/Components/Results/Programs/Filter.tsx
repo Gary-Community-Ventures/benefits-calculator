@@ -1,13 +1,13 @@
-import { Button, Popover, Stack, Checkbox } from '@mui/material';
-import { useResultsContext } from '../Results';
-import { FormattedMessage } from 'react-intl';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { useResultsContext } from '../Results';
+import { Button, Popover, Checkbox } from '@mui/material';
 import { CitizenLabelOptions, CitizenLabels } from '../../../Assets/citizenshipFilterFormControlLabels';
 import citizenshipFilterFormControlLabels from '../../../Assets/citizenshipFilterFormControlLabels';
 import { FormattedMessageType } from '../../../Types/Questions';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import '../Results.css';
 
 export const Filter = () => {
