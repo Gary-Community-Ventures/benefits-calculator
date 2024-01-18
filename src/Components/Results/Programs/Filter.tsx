@@ -104,7 +104,7 @@ export const Filter = () => {
 
   const displayCitizenshipPopover = () => {
     return (
-      <Stack>
+      <section>
         <Popover
           id="citizenshipPopover"
           open={Boolean(citizenshipPopoverAnchor)}
@@ -122,7 +122,7 @@ export const Filter = () => {
         >
           {renderCitizenshipFilters(citizenshipFilterFormControlLabels, filtersChecked)}
         </Popover>
-      </Stack>
+      </section>
     );
   };
 
