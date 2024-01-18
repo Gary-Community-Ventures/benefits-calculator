@@ -90,7 +90,12 @@
 
 .main-max-width {
   max-width: var(--main-max-width);
-  margin: auto;
+  margin: 0 auto -5rem;
+  min-height: calc(100vh - 5rem);
+}
+
+.push {
+  height: 5rem;
 }
 .secondary-heading {
   font-family: 'Open Sans', sans-serif;
