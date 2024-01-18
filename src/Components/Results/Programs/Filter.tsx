@@ -1,4 +1,4 @@
-import { Button, Popover, Stack, Checkbox, Box } from '@mui/material';
+import { Button, Popover, Stack, Checkbox } from '@mui/material';
 import { useResultsContext } from '../Results';
 import { FormattedMessage } from 'react-intl';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -131,7 +131,7 @@ export const Filter = () => {
       ? 'citizenship-button flat-white-border-bottom'
       : 'citizenship-button';
     return (
-      <Box>
+      <section>
         <Button
           className={citizenshipButtonClass}
           variant="contained"
@@ -145,7 +145,7 @@ export const Filter = () => {
           )}
         </Button>
         {displayCitizenshipPopover()}
-      </Box>
+      </section>
     );
   };
 
