@@ -1,8 +1,8 @@
 import { Program } from '../../../Types/Results';
 import { useResultsContext } from '../Results';
-import ResultsTranslate from '../Translate/Translate';
 import Filter from './Filter';
 import ProgramCard from './ProgramCard';
+import CategoryHeading from '../CategoryHeading/CategoryHeading';
 
 const Programs = () => {
   const { programs } = useResultsContext();
@@ -24,9 +24,7 @@ const Programs = () => {
       {Object.entries(categories).map(([category, programs]) => {
         return (
           <div key={category}>
-            <h2>
-              <ResultsTranslate translation={programs[0].category} />
-            </h2>
+            <CategoryHeading headingType={programs[0].category} amount="200"></CategoryHeading>
             {programs.map((program, index) => {
               return <ProgramCard program={program} key={index} />;
             })}
