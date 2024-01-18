@@ -31,7 +31,7 @@
 
 .flat-white-border-bottom.MuiButton-root::after {
   content: '';
-  height: 3px;
+  height: 6px;
   width: 100%;
   background-color: #ffff;
   z-index: 99999;
@@ -57,7 +57,7 @@
   box-shadow: none;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 500px), (max-height: 700px) {
   .MuiPaper-root.MuiPopover-paper {
     max-height: 350px;
     overflow-y: scroll;
