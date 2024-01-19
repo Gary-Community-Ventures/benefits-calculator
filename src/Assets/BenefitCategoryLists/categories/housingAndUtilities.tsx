@@ -19,9 +19,9 @@ const housingAndUtilities = {
       defaultMessage="Help with winter heating bills (Low-Income Energy Assistance Program/LEAP)"
     />
   ),
-  wap: (
+  cowap: (
     <FormattedMessage
-      id="housingAndUtilities.wap"
+      id="housingAndUtilities.cowap"
       defaultMessage="Free home energy upgrades (Weatherization Assistance Program)"
     />
   ),

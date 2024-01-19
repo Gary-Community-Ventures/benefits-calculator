@@ -74,7 +74,7 @@ const FetchScreen = () => {
         wic: response.has_wic ?? false,
         upk: response.has_upk ?? false,
         coctc: response.has_coctc ?? false,
-        wap: response.has_wap ?? false,
+        cowap: response.has_cowap ?? false,
       },
       referralSource: referrer,
       immutableReferrer: response.referrer_code ?? undefined,
