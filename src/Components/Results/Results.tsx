@@ -94,6 +94,10 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
   const alreadyHasToggleState = useState(false);
   const [sendResultsOpen, setSendResultsOpen] = useState(false);
 
+  useEffect(() => {
+    dataLayerPush({ event: 'config', user_id: screenerId });
+  }, [screenerId]);
+
   type ResultsState = {
     programs: Program[];
     urgentNeeds: UrgentNeed[];
