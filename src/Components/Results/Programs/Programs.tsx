@@ -24,7 +24,7 @@ const Programs = () => {
       {Object.entries(categories).map(([category, programs]) => {
         return (
           <div key={category}>
-            <CategoryHeading headingType={programs[0].category} amount="200"></CategoryHeading>
+            <CategoryHeading headingType={programs[0].category} />
             {programs.map((program, index) => {
               return <ProgramCard program={program} key={index} />;
             })}

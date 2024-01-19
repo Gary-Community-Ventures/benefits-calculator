@@ -43,6 +43,14 @@ function findProgramById(programs: Program[], id: string) {
   return programs.find((program) => String(program.program_id) === id);
 }
 
+export function calculateTotalValue(programs: Program[], category: string) {
+  const totalValue = programs.reduce((eachValue, program) => {
+    if (program.category.default_message === category) eachValue += program.estimated_value;
+    return eachValue;
+  }, 0);
+  return totalValue;
+}
+
 const Results = ({ type }: ResultsProps) => {
   const { locale } = useContext(Context);
   const { uuid, programId } = useParams();

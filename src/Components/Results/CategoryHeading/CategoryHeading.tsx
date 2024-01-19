@@ -2,17 +2,23 @@ import { ReactComponent as Food } from '../../../Assets/CategoryHeadingIcons/foo
 import { ReactComponent as Housing } from '../../../Assets/CategoryHeadingIcons/housing.svg';
 import { ReactComponent as HealthCare } from '../../../Assets/CategoryHeadingIcons/healthcare.svg';
 import ResultsTranslate from '../Translate/Translate.tsx';
-import './CategoryHeading.css';
+import { calculateTotalValue, useResultsContext } from '../Results';
 
-const headingOptionsMappings = {
+const headingOptionsMappings: { [key: string]: { icon: React.ComponentType<any> } } = {
   'Housing and Utilities': { icon: Housing },
   'Food and Nutrition': { icon: Food },
   'Health Care': { icon: HealthCare },
   Transportation: { icon: HealthCare }, // placeholder icon
 };
 
-const CategoryHeading = ({ headingType, amount }) => {
+type CategoryHeadingProps = {
+  headingType: { default_message: string; label: string };
+};
+
+const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
+  const { programs } = useResultsContext();
   const { icon: IconComponent } = headingOptionsMappings[headingType.default_message];
+  const amount = calculateTotalValue(programs, headingType.default_message);
 
   return (
     <div className="category-heading-container">
@@ -20,12 +26,12 @@ const CategoryHeading = ({ headingType, amount }) => {
         <div className="category-heading-icon" aria-label={`${headingType.default_message} icon`}>
           <IconComponent />
         </div>
-        <h2 className="text-style">
+        <h2 className="category-heading-text-style">
           <ResultsTranslate translation={headingType} />
         </h2>
       </div>
       <div className="box-right">
-        <h2 className="text-style normal-weight">${amount}/mo.</h2>
+        <h2 className="category-heading-text-style normal-weight">${amount}/mo.</h2>
       </div>
     </div>
   );
