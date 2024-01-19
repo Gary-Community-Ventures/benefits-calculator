@@ -4,11 +4,11 @@ import { ReactComponent as HealthCare } from '../../../Assets/CategoryHeadingIco
 import ResultsTranslate from '../Translate/Translate.tsx';
 import { calculateTotalValue, useResultsContext } from '../Results';
 
-const headingOptionsMappings: { [key: string]: { icon: React.ComponentType<any> } } = {
-  'Housing and Utilities': { icon: Housing },
-  'Food and Nutrition': { icon: Food },
-  'Health Care': { icon: HealthCare },
-  Transportation: { icon: HealthCare }, // placeholder icon
+const headingOptionsMappings: { [key: string]: React.ComponentType<any> } = {
+  'Housing and Utilities': Housing,
+  'Food and Nutrition': Food,
+  'Health Care': HealthCare,
+  Transportation: HealthCare, // placeholder icon
 };
 
 type CategoryHeadingProps = {
@@ -17,7 +17,7 @@ type CategoryHeadingProps = {
 
 const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
   const { programs } = useResultsContext();
-  const { icon: IconComponent } = headingOptionsMappings[headingType.default_message];
+  const IconComponent = headingOptionsMappings[headingType.default_message];
   const amount = calculateTotalValue(programs, headingType.default_message);
 
   return (
