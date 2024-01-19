@@ -28,3 +28,50 @@
 .results-tab a.active {
   background-color: white;
 }
+
+.result-program-container {
+  border: 2px solid var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.result-program-container hr {
+  background-color: var(--secondary-color);
+  width: 98%;
+  margin: 0 auto;
+  height: 2px;
+  border: none;
+}
+
+.result-program-more-info {
+  display: block;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+}
+
+.result-program-more-info a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.8rem;
+  border-radius: 0.75rem;
+  float: right;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--primary-color);
+}
+
+.result-program-details {
+  display: inline-block;
+  font-weight: 100;
+  line-height: normal;
+  width: 50%;
+  padding: 1rem 2rem;
+}
+
+.result-program-details strong {
+  display: block;
+}
+
+.result-program-subheader {
+  font: Open Sans, sans-serif;
+}
