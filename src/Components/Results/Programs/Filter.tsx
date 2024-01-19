@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useResultsContext } from '../Results';
 import { Button, Popover, Checkbox } from '@mui/material';
@@ -14,6 +14,25 @@ export const Filter = () => {
   const [citizenshipFilterIsOpen, setCitizenshipFilterIsOpen] = useState(false);
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState<null | Element>(null);
   const { filtersChecked, setFiltersChecked } = useResultsContext();
+
+  useEffect(() => {
+    const filtersCheckedStrArr = Object.entries(filtersChecked)
+      .filter((filterKeyValPair) => {
+        return filterKeyValPair[1];
+      })
+      .map((filteredKeyValPair) => filteredKeyValPair[0]);
+      
+    //if a filter is selected/truthy then remove citizen from the filtersCheckedStrArray and set citizen state to false
+    if (filtersCheckedStrArr.includes('citizen') && filtersCheckedStrArr.length > 1) {
+      filtersCheckedStrArr.filter((filter) => filter !== 'citizen');
+      setFiltersChecked({ ...filtersChecked, citizen: false });
+    }
+
+    //if they deselect all of the filters then we want the filtersChecked to start with a truthy citizen value
+    if (filtersCheckedStrArr.length === 0) {
+      setFiltersChecked({ ...filtersChecked, citizen: true });
+    }
+  }, [filtersChecked]);
 
   const handleCitizenshipBtnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const updatedCitizenshipFilterIsOpen = !citizenshipFilterIsOpen;

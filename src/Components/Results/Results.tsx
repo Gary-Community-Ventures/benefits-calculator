@@ -70,7 +70,7 @@ const Results = ({ type }: ResultsProps) => {
     fetchResults();
   }, []);
 
-  const [filtersChecked, setFiltersChecked] = useState<Record<string, boolean>>({
+  const [filtersChecked, setFiltersChecked] = useState<Record<CitizenLabels, boolean>>({
     citizen: true,
     non_citizen: false,
     green_card: false,
@@ -92,17 +92,6 @@ const Results = ({ type }: ResultsProps) => {
         return filterKeyValPair[1];
       })
       .map((filteredKeyValPair) => filteredKeyValPair[0]);
-
-    //if a filter is selected/truthy then remove citizen from the filtersCheckedStrArray and set citizen state to false
-    if (filtersCheckedStrArr.includes('citizen') && filtersCheckedStrArr.length > 1) {
-      filtersCheckedStrArr.filter((filter) => filter !== 'citizen');
-      setFiltersChecked({ ...filtersChecked, citizen: false });
-    }
-
-    //if they deselect all of the filters then we want the filtersChecked to start with a truthy citizen value
-    if (filtersCheckedStrArr.length === 0) {
-      setFiltersChecked({ ...filtersChecked, citizen: true });
-    }
 
     if (apiResults === undefined) {
       setNeeds([]);
