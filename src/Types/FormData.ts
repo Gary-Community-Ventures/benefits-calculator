@@ -32,7 +32,6 @@ export interface Benefits {
   denverpresc: boolean;
   ede: boolean;
   eitc: boolean;
-  erc: boolean;
   lifeline: boolean;
   leap: boolean;
   mydenver: boolean;
@@ -46,6 +45,7 @@ export interface Benefits {
   tanf: boolean;
   upk: boolean;
   wic: boolean;
+  cowap: boolean;
 }
 
 export interface HealthInsurance {
