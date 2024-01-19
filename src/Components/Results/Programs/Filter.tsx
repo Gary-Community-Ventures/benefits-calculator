@@ -21,7 +21,7 @@ export const Filter = () => {
         return filterKeyValPair[1];
       })
       .map((filteredKeyValPair) => filteredKeyValPair[0]);
-      
+
     //if a filter is selected/truthy then remove citizen from the filtersCheckedStrArray and set citizen state to false
     if (filtersCheckedStrArr.includes('citizen') && filtersCheckedStrArr.length > 1) {
       filtersCheckedStrArr.filter((filter) => filter !== 'citizen');
@@ -35,8 +35,7 @@ export const Filter = () => {
   }, [filtersChecked]);
 
   const handleCitizenshipBtnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const updatedCitizenshipFilterIsOpen = !citizenshipFilterIsOpen;
-    setCitizenshipFilterIsOpen(updatedCitizenshipFilterIsOpen);
+    setCitizenshipFilterIsOpen(!citizenshipFilterIsOpen);
     setCitizenshipPopoverAnchor(event.currentTarget);
   };
 
