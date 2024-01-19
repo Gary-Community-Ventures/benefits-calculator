@@ -35,15 +35,15 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
 
       <div className="program-header">
         <div className="header-icon">
-          <div className="program-page-icon">
+          <div className="program-icon">
             <HealthCare />
           </div>
         </div>
 
         <div className="header-text">
-          <div className="secondary-color top">{program.name.default_message}</div>
+          <p className="top">{program.name.default_message}</p>
           <div className="divider"></div>
-          <div className="program-name bottom">{program.name_abbreviated}</div>
+          <h1 className="bottom">{program.name_abbreviated}</h1>
         </div>
       </div>
 
