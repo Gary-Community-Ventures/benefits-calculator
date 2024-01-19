@@ -8,7 +8,7 @@ type ProgramCardProps = {
 
 const ProgramCard = ({ program }: ProgramCardProps) => {
   const { uuid } = useParams();
-
+  console.log('program: ', program);
   return (
     <div>
       <ResultsTranslate translation={program.name} />

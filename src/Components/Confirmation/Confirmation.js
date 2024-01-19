@@ -366,7 +366,7 @@ const Confirmation = () => {
       <>
         <Grid container spacing={1}>
           <Grid item className="no-padding" xs={2}>
-            <Referral className="confirmation-icon" alt="referral-icon" />,
+            <Referral className="confirmation-icon" alt="referral-icon" />
           </Grid>
           <Grid item xs={8}>
             <p className="section-title">

@@ -1,0 +1,153 @@
+.program-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto Slab', serif;
+}
+
+.program-header {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 100px; */
+  /* height: 100vh; */
+}
+
+.header-icon {
+  /* width: 40%; */
+  align-items: flex-end;
+  display: flex;
+  justify-content: flex-end; 
+  margin-right: 0.5rem;
+}
+
+.program-page-icon {
+  height: 5rem;
+  width: 5rem;
+  fill: var(--main-header-color);
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* width: 60%; */
+}
+
+.top {
+  align-items: start;
+  height: 30%;
+}
+
+.bottom{
+  height: 70%;
+  font-weight: 700;
+  color: var(--primary-color)
+}
+
+.secondary-color{
+  color: var(--secondary-color);
+}
+
+.program-name{
+  font-size: large;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.divider {
+  margin: 5px 0;
+  border-bottom: 1px solid var(--main-header-color);
+  width: 100%;
+}
+
+.estimation{
+  background-color: var(--main-header-color);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.estimation-text{
+  color:white;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.left{
+  align-items: start;
+  width: 90%;
+  margin-right: 5rem;
+}
+
+.right{
+  align-items: end;
+  width: 10%;
+  margin-left: 5rem;
+  font-weight: 400;
+}
+
+.divider1{
+  margin: 5px 0;
+  border-bottom: 1px solid white;
+  width: 100%;
+}
+
+.help-button{
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 1rem;
+  text-align: center;
+  font-size: large;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.help-button a{
+  color: inherit;
+  text-decoration: inherit;
+}
+.help-button:hover {
+  background-color: white;
+  border: 1px solid black;
+  color: var(--primary-color);
+}
+
+.apply-button{
+  background-color: var(--main-header-color);
+  color: white;
+  border-radius: 1rem;
+  text-align: center;
+  font-size: large;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.apply-button a{
+  color: inherit;
+  text-decoration: inherit;
+}
+.apply-button:hover {
+  background-color: white;
+  border: 1px solid var(--main-header-color);
+  color: var(--main-header-color);
+}
+
+.required-docs{
+  border: 1px solid black;
+  text-align: center;
+}
+
+.required-docs-list{
+  text-align: left;
+}
