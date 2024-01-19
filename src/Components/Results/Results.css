@@ -95,7 +95,7 @@
 
 @media (max-width: 500px), (max-height: 700px) {
   .MuiPaper-root.MuiPopover-paper {
-    max-height: 350px;
+    max-height: 21.875rem;
     overflow-y: scroll;
   }
 }
