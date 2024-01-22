@@ -25,6 +25,12 @@ const housingAndUtilities = {
       defaultMessage="Free home energy upgrades (Weatherization Assistance Program)"
     />
   ),
+  ubp: (
+    <FormattedMessage
+      id="housingAndUtilities.ubp"
+      defaultMessage="Help paying utility bills (Colorado Utility Bill Help Program)"
+    />
+  ),
   coPropTaxRentHeatCreditRebate: (
     <FormattedMessage
       id="cashAssistanceBenefits.coPropTaxRentHeatCreditRebate"

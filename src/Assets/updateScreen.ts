@@ -53,6 +53,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     has_ssdi: formData.benefits.ssdi,
     has_ssi: formData.benefits.ssi,
     has_cowap: formData.benefits.cowap,
+    has_ubp: formData.benefits.ubp,
     has_tanf: formData.benefits.tanf,
     has_wic: formData.benefits.wic,
     has_upk: formData.benefits.upk,
