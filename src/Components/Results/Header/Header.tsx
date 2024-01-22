@@ -28,18 +28,22 @@ const ProgramsHeader = () => {
 
   return (
     <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }}>
-      <div className="results-header">
-        <div className="results-header-programs-count-text">
+      <header className="results-header">
+        <section className="results-header-programs-count-text">
           <div className="results-header-programs-count">{programs.length}</div>
           <div>Programs Found</div>
-        </div>
-        <div style={{ marginLeft: '15px' }}>
-          <div className="results-header-values">${Math.round(estimatedMonthlySavings / 12).toLocaleString()}</div>
-          <div className="results-header-label">Estimated Monthly Savings</div>
-          <div className="results-header-values">${taxCredit}</div>
-          <div className="results-header-label">Estimated Tax Credit</div>
-        </div>
-      </div>
+        </section>
+        <section className="column-row">
+          <section className="results-data-cell">
+            <div className="results-header-values">${Math.round(estimatedMonthlySavings / 12).toLocaleString()}</div>
+            <div className="results-header-label">Estimated Monthly Savings</div>
+          </section>
+          <section className="results-data-cell">
+            <div className="results-header-values">${taxCredit}</div>
+            <div className="results-header-label">Annual Tax Credit</div>
+          </section>
+        </section>
+      </header>
     </CardContent>
   );
 };
