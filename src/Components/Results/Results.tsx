@@ -12,7 +12,6 @@ import ResultsTabs from './Tabs/Tabs';
 import Needs from './Needs/Needs';
 import Programs from './Programs/Programs';
 import MoreHelp from './MoreHelp/MoreHelp';
-import NavigatorPage from './NavigatorPage/NavigatorPage';
 import dataLayerPush from '../../Assets/analytics';
 
 type WrapperResultsContext = {
@@ -23,7 +22,7 @@ type WrapperResultsContext = {
 };
 
 type ResultsProps = {
-  type: 'program' | 'need' | 'navigator';
+  type: 'program' | 'need';
 };
 
 export const ResultsContext = createContext<WrapperResultsContext | undefined>(undefined);
@@ -122,10 +121,6 @@ const Results = ({ type }: ResultsProps) => {
 
   if (program === undefined) {
     return <Navigate to={`/${uuid}/results/benefits`} />;
-  }
-
-  if (type === 'navigator') {
-    return <NavigatorPage navigators={program.navigators} />;
   }
 
   return <ProgramPage program={program} />;
