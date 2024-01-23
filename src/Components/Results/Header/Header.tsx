@@ -42,7 +42,7 @@ const Buttons = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
         <FormattedMessage id="results.save-results-btn" defaultMessage="SAVE MY RESULTS" />
         <SaveIcon className="save-icon" />
       </button>
-      <Modal open={openSaveModal} onClose={setOpenSaveModal} aria-labelledby="email-text-results-modal">
+      <Modal open={openSaveModal} aria-labelledby="email-text-results-modal">
         <EmailResults
           handleTextfieldChange={handleTextfieldChange}
           screenId={definedScreenerId}
