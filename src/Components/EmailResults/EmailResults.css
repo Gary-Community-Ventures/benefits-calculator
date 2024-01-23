@@ -6,6 +6,7 @@
   transform: translate(-50%, -50%);
   padding: 3rem;
   color: black;
+  font-family: Roboto Slab, serif;
 }
 
 .send {
@@ -15,7 +16,6 @@
 .copy-results-text {
   font-weight: bold;
   text-decoration: underline;
-  font-size: 1.25rem;
 }
 
 .copy-results-container {
@@ -24,8 +24,10 @@
 
 .copy-button-and-text {
   display: flex;
-  cursor: pointer;
   align-items: center;
+  font-family: Roboto Slab, serif;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .copy-button-and-text:hover {

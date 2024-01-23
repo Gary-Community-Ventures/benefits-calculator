@@ -202,7 +202,7 @@ const EmailResults = forwardRef(function EmailResults(
         <CloseIcon />
       </IconButton>
       {displayCopyResults()}
-      <article className="question-container question-label">
+      <article className="question-container">
         <FormattedMessage id="emailResults.enter-emailLabel" defaultMessage="Email my results link" />
       </article>
       {createEmailTextfield(
@@ -224,7 +224,7 @@ const EmailResults = forwardRef(function EmailResults(
         <FormattedMessage id="emailResults.sendButton" defaultMessage="Send" />
       </Button>
       {state.error && displayErrorMessage(state.errorMessage)}
-      <article className="question-container question-label">
+      <article className="question-container">
         <FormattedMessage id="emailResults.enter-phoneNumberLabel" defaultMessage="Text my results link" />
       </article>
       {createEmailTextfield(
