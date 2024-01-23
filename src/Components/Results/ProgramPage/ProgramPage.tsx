@@ -1,42 +1,42 @@
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
-import { ReactComponent as Food } from '../../../Assets/CategoryHeadingIcons/food.svg';
-import { ReactComponent as Housing } from '../../../Assets/CategoryHeadingIcons/housing.svg';
-import { ReactComponent as HealthCare } from '../../../Assets/CategoryHeadingIcons/healthcare.svg';
 import ResultsTranslate from '../Translate/Translate.tsx';
-import { calculateTotalValue, useResultsContext } from '../Results';
-import PreviousButton from '../../PreviousButton/PreviousButton.tsx';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import { Button } from '@mui/material';
-import { FormattedMessage } from 'react-intl';
 import './ProgramPage.css';
+import BackToResults from '../Buttons/BackToResults.tsx';
+import SaveResult from '../Buttons/SaveResult.tsx';
+import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
 
 type ProgramPageProps = {
   program: Program;
 };
 
-// const headingOptionsMappings: { [key: string]: { icon: React.ComponentType<any> } } = {
-//   'Housing and Utilities': { icon: Housing },
-//   'Food and Nutrition': { icon: Food },
-//   'Health Care': { icon: HealthCare },
-//   Transportation: { icon: HealthCare }, // placeholder icon
-// };
-
 const ProgramPage = ({ program }: ProgramPageProps) => {
   const { uuid, programId } = useParams();
-  // console.log('program: ', program);
+
+  type IconRendererProps = {
+    headingType: string;
+  };
+
+  const IconRenderer: React.FC<IconRendererProps> = ({ headingType }) => {
+    const IconComponent = headingOptionsMappings[headingType];
+
+    if (!IconComponent) {
+      return null;
+    }
+
+    return <IconComponent />;
+  };
 
   // //need to come back for estimated time value
   return (
     <div className="program-container">
-      <Button variant="outlined" onClick={() => {}} startIcon={<NavigateBeforeIcon sx={{ mr: '-8px' }} />}>
-        <FormattedMessage id="backToResultsButton" defaultMessage="Back to results" />
-      </Button>
-
+      <div className="back-to-results-button-container">
+        <BackToResults />
+      </div>
       <div className="program-header">
         <div className="header-icon">
           <div className="program-icon">
-            <HealthCare />
+            <IconRenderer headingType={program.category.default_message} />
           </div>
         </div>
 
@@ -52,19 +52,17 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <div className="left">Estimated Annual Value</div>
           <div className="right">${program.program_id}</div>
         </div>
-        <div className="divider1"></div>
         <div className="estimation-text">
           <div className="left">Estimated Time to Apply</div>
           <div className="right">{program.program_id} Min</div>
         </div>
-        <div className="divider1"></div>
       </div>
 
-      <div className="help-button">
+      <div className="button help-button">
         <Link to={`/${uuid}/results/benefits/${programId}/navigators`}>Get help</Link>
       </div>
-      <div className="apply-button">
-        <Link to={`/${uuid}/results/benefits/${programId}/navigators`}>Apply Now</Link>
+      <div className="button apply-button">
+        <Link to={program.apply_button_link.default_message}>Apply Now</Link>
       </div>
 
       <div className="required-docs">
@@ -74,7 +72,10 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <li>b</li>
         </div>
       </div>
-      <div className="apply-button">Save this results button</div>
+      <div className="program-description">
+        <ResultsTranslate translation={program.description} />
+      </div>
+      <SaveResult />
     </div>
   );
 };

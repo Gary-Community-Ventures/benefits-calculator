@@ -6,12 +6,19 @@
   font-family: 'Roboto Slab', serif;
 }
 
+.back-to-results-button-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start; 
+  width: 100%;
+}
+
 .program-header {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 .header-icon {
@@ -36,6 +43,7 @@
 }
 
 .top {
+  font-family: 'Open Sans', sans-serif;
   align-items: center;
   color: var(--secondary-color);
   height: 30%;
@@ -67,11 +75,13 @@
 
 .estimation-text {
   color: white;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   white-space: nowrap;
   width: 100%;
+  padding-bottom: 2px;
+  border-bottom: 1px solid white;
 }
 
 .left {
@@ -86,61 +96,119 @@
   font-weight: 400;
 }
 
-.divider1 {
-  margin: 5px 0;
-  border-bottom: 1px solid white;
-  width: 100%;
-}
-
-.help-button{
-  background-color: var(--primary-color);
-  color: white;
+.button {
   border-radius: 1.5rem;
   text-align: center;
+  margin-top: 2rem;
+  width: 30%;
+  white-space: nowrap;
+}
+
+/* .back-to-results-button {
+  background-color: var(--main-header-color);
+  color: 'white';
+  font-weight: 700;
+  font-size: small;
+  margin: '1rem 0';
+  width:fit-content;
+  border-radius: '1rem';
+} */
+
+.help-button {
+  background-color: var(--primary-color);
+  color: white;
   font-size: large;
   font-weight: 700;
-  margin-top: 2rem;
-  width:30%;
+  padding: 0 20px;
+
+  @media (max-width: 600px) {
+    width: 50%;
+  } 
 }
-.help-button a{
+
+.apply-button {
+  background-color: var(--main-header-color);
+  color: white;
+  font-size: x-large;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  padding: 5px 0;
+  
+  @media (max-width: 600px) {
+    width: 50%;
+    padding: 5px 15px;
+  } 
+}
+
+.save-button {
+  background-color: var(--main-header-color);
+  color: white;
+  font-size: x-small;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  padding: 5px 0;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.save-icon{
+  height: 15px;
+  width: 15px;
+  color: white;
+  margin-left: 5px;
+  filter: invert(1);
+}
+
+.button a {
   color: inherit;
   text-decoration: inherit;
 }
+
 .help-button:hover {
   background-color: white;
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
 }
 
-.apply-button{
-  background-color: var(--main-header-color);
-  color: white;
-  border-radius: 1rem;
-  text-align: center;
-  font-size: x-large;
-  font-weight: 700;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  width:30%;
-  border-radius: 1.5rem;
-}
-.apply-button a{
-  color: inherit;
-  text-decoration: inherit;
-}
 .apply-button:hover {
   background-color: white;
   border: 1px solid var(--main-header-color);
   color: var(--main-header-color);
 }
 
+.save-button:hover {
+  background-color: white !important;
+  color: var(--main-header-color) !important;
+  border: 1px solid var(--main-header-color) !important;
+}
+
+/* need to work on icon color when hovering */
+.save-button:hover .save-icon {
+  fill: var(--main-header-color);
+}
+
 .required-docs{
-  border: 1px solid black;
+  border: 1px solid var(--primary-color);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 .required-docs-list{
   text-align: left;
+  text-transform: uppercase;
+  list-style-type: square;
+  padding-left: 0.5rem;
+}
+
+.program-description{
+  width:30%;
 }

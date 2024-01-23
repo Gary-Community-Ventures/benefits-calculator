@@ -9,7 +9,7 @@ import ResultsTranslate from '../Translate/Translate.tsx';
 import { calculateTotalValue, useResultsContext } from '../Results';
 import { Translation } from '../../../Types/Results.ts';
 
-const headingOptionsMappings: { [key: string]: React.ComponentType } = {
+export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   'Housing and Utilities': Housing,
   'Food and Nutrition': Food,
   'Health Care': HealthCare,
