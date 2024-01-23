@@ -1,18 +1,26 @@
 import { ReactComponent as Food } from '../../../Assets/CategoryHeadingIcons/food.svg';
 import { ReactComponent as Housing } from '../../../Assets/CategoryHeadingIcons/housing.svg';
 import { ReactComponent as HealthCare } from '../../../Assets/CategoryHeadingIcons/healthcare.svg';
+import { ReactComponent as Transportation } from '../../../Assets/CategoryHeadingIcons/transportation.svg';
+import { ReactComponent as TaxCredits } from '../../../Assets/CategoryHeadingIcons/taxCredits.svg';
+import { ReactComponent as CashAssistance } from '../../../Assets/CategoryHeadingIcons/cashAssistant.svg';
+import { ReactComponent as ChildCareYouthEducation } from '../../../Assets/CategoryHeadingIcons/childCareYouthEducation.svg';
 import ResultsTranslate from '../Translate/Translate.tsx';
 import { calculateTotalValue, useResultsContext } from '../Results';
+import { Translation } from '../../../Types/Results.ts';
 
-const headingOptionsMappings: { [key: string]: React.ComponentType<any> } = {
+const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   'Housing and Utilities': Housing,
   'Food and Nutrition': Food,
   'Health Care': HealthCare,
-  Transportation: HealthCare, // placeholder icon
+  Transportation: Transportation,
+  'Tax Credits': TaxCredits,
+  'Cash Assistance': CashAssistance,
+  'Child Care, Youth, and Education': ChildCareYouthEducation,
 };
 
 type CategoryHeadingProps = {
-  headingType: { default_message: string; label: string };
+  headingType: Translation;
 };
 
 const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
