@@ -204,9 +204,6 @@ const EmailResults = forwardRef(function EmailResults(
       >
         <CloseIcon />
       </IconButton>
-      <h2 className="sub-header">
-        <FormattedMessage id="emailResults.displaySubheader-text" defaultMessage="Save my results" />
-      </h2>
       {displayCopyResults()}
       <article className="question-container question-label">
         <FormattedMessage id="emailResults.enter-emailLabel" defaultMessage="Email my results link" />
