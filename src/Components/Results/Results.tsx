@@ -23,6 +23,7 @@ type WrapperResultsContext = {
 
 type ResultsProps = {
   type: 'program' | 'need' | 'navigator';
+  handleTextfieldChange: (event: Event) => void;
 };
 
 export const ResultsContext = createContext<WrapperResultsContext | undefined>(undefined);
@@ -41,7 +42,7 @@ function findProgramById(programs: Program[], id: string) {
   return programs.find((program) => String(program.program_id) === id);
 }
 
-const Results = ({ type }: ResultsProps) => {
+const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   const { locale } = useContext(Context);
   const { uuid, programId } = useParams();
 
@@ -101,7 +102,7 @@ const Results = ({ type }: ResultsProps) => {
           setFilters,
         }}
       >
-        <ResultsHeader type={type} />
+        <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
         <ResultsTabs currentTab={type} />
         {type === 'need' ? <Needs /> : <Programs />}
         <MoreHelp />
