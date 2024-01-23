@@ -182,17 +182,14 @@ const EmailResults = forwardRef(function EmailResults(
 
   return (
     <div className="email-results-container">
-      <div className="question-buttons">
-        <Snackbar
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          open={state.open}
-          autoHideDuration={6000}
-          onClose={handleClose}
-          message={state.snackbarMessage}
-          action={action}
-          sx={{ mb: -2, flexWrap: 'nowrap' }}
-        />
-      </div>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        open={state.open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={state.snackbarMessage}
+        action={action}
+      />
       <IconButton
         aria-label="close"
         onClick={close}
