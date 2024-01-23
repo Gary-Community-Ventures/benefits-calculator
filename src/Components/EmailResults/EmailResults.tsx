@@ -166,7 +166,7 @@ const EmailResults = forwardRef(function EmailResults(
   const displayCopyResults = () => {
     return (
       <div className="copy-results-container">
-        <button onClick={copyLink} className="button-and-text">
+        <button onClick={copyLink} className="copy-button-and-text">
           {copied ? (
             <CheckIcon sx={{ fontSize: '1.75rem', mr: '.5rem' }} />
           ) : (

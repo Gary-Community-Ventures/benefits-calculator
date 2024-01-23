@@ -5,6 +5,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 3rem;
+  color: black;
 }
 
 .send {
@@ -12,21 +13,23 @@
 }
 
 .copy-results-text {
-  color: var(--primary-color);
-  font-weight: 500;
-  font-size: 1.375rem;
-  margin-right: 0.5rem;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 1.25rem;
 }
 
 .copy-results-container {
-  display: flex;
-  align-items: center;
   margin-bottom: 1rem;
 }
 
-.button-and-text {
+.copy-button-and-text {
   display: flex;
   cursor: pointer;
+  align-items: center;
+}
+
+.copy-button-and-text:hover {
+  color: var(--secondary-color);
 }
 
 div.MuiPaper-root {
@@ -37,11 +40,6 @@ div.MuiPaper-root {
   .email-results-container {
     width: 90%;
     padding: 1.5rem;
-  }
-
-  .copy-results-text,
-  article.question-container.question-label {
-    font-size: 1.25rem;
   }
 
   div.MuiFormControl-root {
