@@ -2,7 +2,6 @@ import { Button } from '@mui/material';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
-import '../ProgramPage/ProgramPage.css';
 
 const SaveResult = () => {
   return (

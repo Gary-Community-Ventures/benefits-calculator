@@ -1,15 +1,15 @@
-.program-container {
+.program-page-container {
   display: flex;
   flex-direction: column;
-  align-items:center;
-  justify-content:center;
+  align-items: center;
+  justify-content: center;
   font-family: 'Roboto Slab', serif;
 }
 
 .back-to-results-button-container {
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start; 
+  align-items: flex-start;
   width: 100%;
 }
 
@@ -39,17 +39,17 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 60%; 
+  width: 60%;
 }
 
-.top {
+.header-text-top {
   font-family: 'Open Sans', sans-serif;
   align-items: center;
   color: var(--secondary-color);
   height: 30%;
 }
 
-.bottom {
+.header-text-bottom {
   height: 70%;
   color: var(--primary-color);
   display: flex;
@@ -68,7 +68,7 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   justify-content: center;
   font-weight: 700;
 }
@@ -84,13 +84,13 @@
   border-bottom: 1px solid white;
 }
 
-.left {
+.estimation-text-left {
   float: left;
-  text-align: left; 
+  text-align: left;
   margin-right: 5rem;
 }
 
-.right {
+.estimation-text-right {
   text-align: right;
   margin-left: 5rem;
   font-weight: 400;
@@ -102,17 +102,8 @@
   margin-top: 2rem;
   width: 30%;
   white-space: nowrap;
+  min-width: max-content;
 }
-
-/* .back-to-results-button {
-  background-color: var(--main-header-color);
-  color: 'white';
-  font-weight: 700;
-  font-size: small;
-  margin: '1rem 0';
-  width:fit-content;
-  border-radius: '1rem';
-} */
 
 .help-button {
   background-color: var(--primary-color);
@@ -120,10 +111,6 @@
   font-size: large;
   font-weight: 700;
   padding: 0 20px;
-
-  @media (max-width: 600px) {
-    width: 50%;
-  } 
 }
 
 .apply-button {
@@ -133,11 +120,6 @@
   font-weight: 700;
   margin-bottom: 2rem;
   padding: 5px 0;
-  
-  @media (max-width: 600px) {
-    width: 50%;
-    padding: 5px 15px;
-  } 
 }
 
 .save-button {
@@ -154,7 +136,7 @@
   justify-content: center;
 }
 
-.save-icon{
+.save-icon {
   height: 15px;
   width: 15px;
   color: white;
@@ -185,12 +167,11 @@
   border: 1px solid var(--main-header-color) !important;
 }
 
-/* need to work on icon color when hovering */
 .save-button:hover .save-icon {
   fill: var(--main-header-color);
 }
 
-.required-docs{
+.required-docs {
   border: 1px solid var(--primary-color);
   text-align: center;
   display: flex;
@@ -199,16 +180,18 @@
   padding: 1rem;
   margin-bottom: 2rem;
   color: var(--primary-color);
-  font-weight: 700;
+  font-weight: 400;
 }
 
-.required-docs-list{
+.required-docs-list {
   text-align: left;
   text-transform: uppercase;
-  list-style-type: square;
-  padding-left: 0.5rem;
+  padding-left: 1rem;
 }
 
-.program-description{
-  width:30%;
+.program-description {
+  width: 30%;
+  @media (max-width: 600px) {
+    width: 50%;
+  }
 }

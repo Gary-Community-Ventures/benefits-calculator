@@ -2,7 +2,6 @@ import { Button } from '@mui/material';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
-import '../ProgramPage/ProgramPage.css';
 
 const BackToResults = () => {
   const navigate = useNavigate();

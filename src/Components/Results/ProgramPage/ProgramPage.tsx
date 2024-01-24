@@ -2,20 +2,20 @@ import { useNavigate, Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate.tsx';
 import './ProgramPage.css';
-import BackToResults from '../Buttons/BackToResults.tsx';
-import SaveResult from '../Buttons/SaveResult.tsx';
+import BackToResults from './BackToResults.tsx';
+import SaveResult from './SaveResult.tsx';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
 
 type ProgramPageProps = {
   program: Program;
 };
 
+type IconRendererProps = {
+  headingType: string;
+};
+
 const ProgramPage = ({ program }: ProgramPageProps) => {
   const { uuid, programId } = useParams();
-
-  type IconRendererProps = {
-    headingType: string;
-  };
 
   const IconRenderer: React.FC<IconRendererProps> = ({ headingType }) => {
     const IconComponent = headingOptionsMappings[headingType];
@@ -27,13 +27,13 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     return <IconComponent />;
   };
 
-  // //need to come back for estimated time value
   return (
-    <div className="program-container">
-      <div className="back-to-results-button-container">
+    <article className="program-page-container">
+      <section className="back-to-results-button-container">
         <BackToResults />
-      </div>
-      <div className="program-header">
+      </section>
+
+      <header className="program-header">
         <div className="header-icon">
           <div className="program-icon">
             <IconRenderer headingType={program.category.default_message} />
@@ -41,22 +41,26 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         </div>
 
         <div className="header-text">
-          <p className="top">{program.name.default_message}</p>
+          <p className="header-text-top">
+            <ResultsTranslate translation={program.name} />
+          </p>
           <div className="divider"></div>
-          <h1 className="bottom">{program.name_abbreviated}</h1>
+          <h1 className="header-text-bottom">{program.name_abbreviated}</h1>
         </div>
-      </div>
+      </header>
 
-      <div className="estimation">
+      <section className="estimation">
         <div className="estimation-text">
-          <div className="left">Estimated Annual Value</div>
-          <div className="right">${program.program_id}</div>
+          <div className="estimation-text-left">Estimated Annual Value</div>
+          <div className="estimation-text-right">${program.estimated_value}</div>
         </div>
         <div className="estimation-text">
-          <div className="left">Estimated Time to Apply</div>
-          <div className="right">{program.program_id} Min</div>
+          <div className="estimation-text-left">Estimated Time to Apply</div>
+          <div className="estimation-text-right">
+            <ResultsTranslate translation={program.estimated_application_time} />
+          </div>
         </div>
-      </div>
+      </section>
 
       <div className="button help-button">
         <Link to={`/${uuid}/results/benefits/${programId}/navigators`}>Get help</Link>
@@ -65,18 +69,24 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         <Link to={program.apply_button_link.default_message}>Apply Now</Link>
       </div>
 
-      <div className="required-docs">
-        <div>Required Documents Checklist</div>
-        <div className="required-docs-list">
+      <section className="required-docs">
+        <h3>Required Documents Checklist</h3>
+        <ul className="required-docs-list">
           <li>a</li>
           <li>b</li>
-        </div>
-      </div>
-      <div className="program-description">
+          <li>c</li>
+          {/* {program.documents.map((document, index) => (
+            <li key={index}>{document}</li>
+          ))} */}
+        </ul>
+      </section>
+
+      <section className="program-description">
         <ResultsTranslate translation={program.description} />
-      </div>
+      </section>
+
       <SaveResult />
-    </div>
+    </article>
   );
 };
 
