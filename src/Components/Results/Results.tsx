@@ -7,7 +7,7 @@ import { getEligibility } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import { Navigate, useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
-import ResultsHeader from './Header/Header';
+import ResultsHeader from './ResultsHeader/ResultsHeader';
 import Needs from './Needs/Needs';
 import Programs from './Programs/Programs';
 import ProgramPage from './ProgramPage/ProgramPage';
@@ -115,7 +115,6 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
           setFilters,
         }}
       >
-
         <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
         <ResultsTabs />
         {type === 'need' ? <Needs /> : <Programs />}
