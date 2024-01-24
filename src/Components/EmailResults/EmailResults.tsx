@@ -61,7 +61,7 @@ const EmailResults = forwardRef(function EmailResults(
     const emailProps: TextFieldProps = {
       inputType: 'text',
       inputName: type,
-      inputLabel: intl.formatMessage({ id: inputLabelId }),
+      inputLabel: intl.formatMessage({ id: inputLabelId, defaultMessage: 'Email my results' }),
       inputError: hasError,
       inputHelperText: helperText,
     };
