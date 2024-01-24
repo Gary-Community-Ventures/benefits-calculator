@@ -9,7 +9,7 @@
   color: #fff;
   background-color: var(--secondary-color);
   border-radius: 1.5625rem;
-  padding: 0.25rem 0.75rem;
+  padding: 0.05rem 0.75rem;
   font-weight: bold;
   font-size: 0.75rem;
   border: 1px solid var(--secondary-color);
@@ -28,11 +28,13 @@
   margin-bottom: 1px;
 }
 
-.MuiSvgIcon-root.save-icon {
+.save-icon {
   margin-left: 0.5rem;
+  height: 2rem;
+  width: 2rem;
 }
 
-.MuiSvgIcon-root.save-icon:hover {
+.results-back-save-buttons:hover .save-icon {
   fill: var(--secondary-color);
 }
 

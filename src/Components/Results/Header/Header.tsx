@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useResultsContext } from '../Results';
 import EmailResults from '../../EmailResults/EmailResults';
 import LeftArrowIcon from '@mui/icons-material/KeyboardArrowLeft';
-import SaveIcon from '@mui/icons-material/Save';
+import { ReactComponent as SaveIcon } from '../../../Assets/save.svg';
 import { Modal } from '@mui/material';
 import '../../Results/Results.css';
 
