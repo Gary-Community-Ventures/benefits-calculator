@@ -161,4 +161,30 @@
     font-weight: 400;
     color: var(--primary-color);
   }
+
+.category-heading-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.category-heading-icon {
+  height: 2rem;
+  width: 2rem;
+  fill: var(--icon-color);
+}
+
+.category-heading-container .box-left,
+.category-heading-container .box-right {
+  display: flex;
+  align-items: center;
+}
+
+.category-heading-text-style {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.category-heading-text-style.normal-weight {
+  font-weight: normal;
 }
