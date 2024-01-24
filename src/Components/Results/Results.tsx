@@ -6,13 +6,14 @@ import { EligibilityResults, Program, UrgentNeed } from '../../Types/Results';
 import { getEligibility } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import { Navigate, useParams } from 'react-router-dom';
+import { Grid } from '@mui/material';
 import ResultsHeader from './Header/Header';
-import ProgramPage from './ProgramPage/ProgramPage';
-import ResultsTabs from './Tabs/Tabs';
 import Needs from './Needs/Needs';
 import Programs from './Programs/Programs';
+import ProgramPage from './ProgramPage/ProgramPage';
+import ResultsTabs from './Tabs/Tabs';
 import MoreHelp from './MoreHelp/MoreHelp';
-import NavigatorPage from './NavigatorPage/NavigatorPage';
+import dataLayerPush from '../../Assets/analytics';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -42,6 +43,14 @@ function findProgramById(programs: Program[], id: string) {
   return programs.find((program) => String(program.program_id) === id);
 }
 
+export function calculateTotalValue(programs: Program[], category: string) {
+  const totalValue = programs.reduce((eachValue, program) => {
+    if (program.category.default_message === category) eachValue += program.estimated_value;
+    return eachValue;
+  }, 0);
+  return totalValue;
+}
+
 const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   const { locale } = useContext(Context);
   const { uuid, programId } = useParams();
@@ -49,6 +58,10 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(false);
   const [apiResults, setApiResults] = useState<EligibilityResults | undefined>();
+
+  useEffect(() => {
+    dataLayerPush({ event: 'config', user_id: uuid });
+  }, [uuid]);
 
   const fetchResults = async () => {
     try {
@@ -102,9 +115,15 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
           setFilters,
         }}
       >
+
         <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
-        <ResultsTabs currentTab={type} />
+        <ResultsTabs />
         {type === 'need' ? <Needs /> : <Programs />}
+        <Grid container>
+          <Grid item xs={12}>
+            {type === 'need' ? <Needs /> : <Programs />}
+          </Grid>
+        </Grid>
         <MoreHelp />
       </ResultsContext.Provider>
     );
@@ -118,10 +137,6 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
 
   if (program === undefined) {
     return <Navigate to={`/${uuid}/results/benefits`} />;
-  }
-
-  if (type === 'navigator') {
-    return <NavigatorPage navigators={program.navigators} />;
   }
 
   return <ProgramPage program={program} />;

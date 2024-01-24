@@ -2,6 +2,60 @@
   height: 80vh;
 }
 
+.results-tab-container {
+  background-color: var(--primary-color);
+  padding: 0.75rem 0.75rem 0 0.75rem;
+}
+
+.results-tab {
+  color: var(--primary-color);
+  font-family: 'Open Sans', sans-serif;
+  border-left: 2px solid var(--primary-color);
+  border-right: 2px solid var(--primary-color);
+}
+
+.results-tab a {
+  width: 100%;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 1rem;
+  text-decoration: none;
+  background-color: #e6e7e8;
+  color: var(--primary-color);
+}
+
+.results-tab a.active {
+  background-color: white;
+}
+
+.category-heading-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.category-heading-icon {
+  height: 2rem;
+  width: 2rem;
+  fill: var(--icon-color);
+}
+
+.category-heading-container .box-left,
+.category-heading-container .box-right {
+  display: flex;
+  align-items: center;
+}
+
+.category-heading-text-style {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.category-heading-text-style.normal-weight {
+  font-weight: normal;
+}
+
 .results-back-save-buttons {
   display: inline-flex;
   align-items: center;
