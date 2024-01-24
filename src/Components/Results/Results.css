@@ -161,6 +161,7 @@
     font-weight: 400;
     color: var(--primary-color);
   }
+}
 
 .category-heading-container {
   display: flex;
