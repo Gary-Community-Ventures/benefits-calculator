@@ -25,7 +25,14 @@ type CategoryHeadingProps = {
 
 const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
   const { programs } = useResultsContext();
-  const IconComponent = headingOptionsMappings[headingType.default_message];
+
+  let IconComponent = headingOptionsMappings[headingType.default_message];
+
+  if (IconComponent === undefined) {
+    // if there is a category not in the list of categories use a default icon
+    IconComponent = CashAssistance;
+  }
+
   const amount = calculateTotalValue(programs, headingType.default_message);
 
   return (
