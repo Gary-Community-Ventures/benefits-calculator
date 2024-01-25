@@ -6,7 +6,7 @@ type NavigatorCardProps = {
 };
 
 const NavigatorCard = ({ navigators }: NavigatorCardProps) => {
-  return navigators.map((navigator) => <ResultsTranslate translation={navigator.name} />);
+  return navigators.map((navigator, index) => <ResultsTranslate translation={navigator.name} key={index} />);
 };
 
 export default NavigatorCard;

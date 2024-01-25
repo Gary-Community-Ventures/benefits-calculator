@@ -7,6 +7,10 @@ import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
 import languageOptions, { Language } from '../../Assets/languageOptions';
 
+import { ApiConfig } from '../../Types/ApiFormData';
+
+import useGetConfig from '../Config/configHook';
+
 const initialFormData: FormData = {
   isTest: undefined,
   externalID: undefined,
@@ -79,19 +83,27 @@ const initialFormData: FormData = {
 export const Context = React.createContext<WrapperContext>({} as WrapperContext);
 
 const Wrapper = (props: PropsWithChildren<{}>) => {
+  const configResponse = useGetConfig();
+  const config = Array.isArray(configResponse.config) && configResponse.config[0]?.data;
+
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
   const [screenLoading, setScreenLoading] = useState<boolean>(true);
   const [pageIsLoading, setPageIsLoading] = useState<boolean>(true);
+  const [configIsLoading, setConfigIsLoading] = useState<boolean>(true);
 
   const screenDoneLoading = () => {
     setScreenLoading(false);
   };
 
   useEffect(() => {
-    if (!screenLoading && !translationsLoading) {
+    if (!screenLoading && !translationsLoading && !configIsLoading) {
       setPageIsLoading(false);
     }
-  }, [screenLoading, translationsLoading]);
+  }, [screenLoading, translationsLoading, configIsLoading]);
+
+  useEffect(() => {
+    setConfigIsLoading(false);
+  }, [config]);
 
   let [translations, setTranslations] = useState<Record<Language, { [key: string]: string }> | undefined>(undefined);
 
@@ -170,6 +182,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         locale,
         selectLanguage,
         formData,
+        config,
         setFormData,
         theme,
         setTheme,
