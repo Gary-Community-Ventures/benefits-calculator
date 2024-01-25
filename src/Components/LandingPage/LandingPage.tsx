@@ -30,7 +30,6 @@ interface LandingPageProps {
 
 const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   const { formData, locale, screenDoneLoading, theme, config } = useContext(Context);
-  console.log('contextConfig:', config);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   let { uuid } = useParams();
   const navigate = useNavigate();
