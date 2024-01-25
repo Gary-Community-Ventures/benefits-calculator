@@ -39,6 +39,10 @@ svg.confirmation-icon circle {
   transform: translate(50%, -50%);
 }
 
+.edit-button:hover {
+  cursor: pointer;
+}
+
 svg.edit-button path,
 svg.edit-button rect,
 svg.edit-button polygon {
