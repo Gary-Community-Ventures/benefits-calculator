@@ -202,7 +202,7 @@ const EmailResults = forwardRef(function EmailResults(
         <CloseIcon />
       </IconButton>
       {displayCopyResults()}
-      <div className='flex-direction-column'>
+      <div className="flex-direction-column">
         <article className="bottom-margin">
           <FormattedMessage id="emailResults.enter-emailLabel" defaultMessage="Email my results" />
         </article>
@@ -218,14 +218,14 @@ const EmailResults = forwardRef(function EmailResults(
             setEmailSubmitted(true);
             handleSubmit('emailScreen');
           }}
-          className='send-button'
+          className="send-button"
         >
           <FormattedMessage id="emailResults.sendButton" defaultMessage="Send" />
         </button>
         {state.error && displayErrorMessage(state.errorMessage)}
       </div>
 
-      <div className='flex-direction-column'>
+      <div className="flex-direction-column">
         <article className="bottom-margin">
           <FormattedMessage id="emailResults.enter-phoneNumberLabel" defaultMessage="Text my results" />
         </article>

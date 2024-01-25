@@ -84,7 +84,7 @@ const ProgramsHeader = () => {
       </header>
     </CardContent>
   );
-}
+};
 
 const NeedsHeader = () => {
   const { needs } = useResultsContext();
