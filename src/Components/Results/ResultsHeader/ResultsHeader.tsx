@@ -1,57 +1,15 @@
+import { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState, useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper.tsx';
 import { calculateTotalValue, useResultsContext } from '../Results';
-import EmailResults from '../../EmailResults/EmailResults';
-import LeftArrowIcon from '@mui/icons-material/KeyboardArrowLeft';
-import { ReactComponent as SaveIcon } from '../../../Assets/save.svg';
-import { Modal, CardContent } from '@mui/material';
+import { CardContent } from '@mui/material';
+import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
+import { useParams } from 'react-router-dom';
 import '../../Results/Results.css';
 
 type ResultsHeaderProps = {
   type: 'program' | 'need';
   handleTextfieldChange: (event: Event) => void;
-};
-
-const Buttons = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
-  const navigate = useNavigate();
-  const { uuid: screenerId } = useParams();
-  const [openSaveModal, setOpenSaveModal] = useState(false);
-  let definedScreenerId = '';
-  if (screenerId) {
-    definedScreenerId = screenerId;
-  }
-
-  return (
-    <div className="results-back-save-btn-container">
-      <button
-        className="results-back-save-buttons"
-        onClick={() => {
-          navigate(`/${screenerId}/confirm-information`);
-        }}
-        aria-label="back to screener button"
-      >
-        <LeftArrowIcon />
-        <FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO SCREENER" />
-      </button>
-      <button
-        className="results-back-save-buttons"
-        onClick={() => setOpenSaveModal(!openSaveModal)}
-        aria-label="save my results button"
-      >
-        <FormattedMessage id="results.save-results-btn" defaultMessage="SAVE MY RESULTS" />
-        <SaveIcon className="save-icon" />
-      </button>
-      <Modal open={openSaveModal} aria-labelledby="email-text-results-modal">
-        <EmailResults
-          handleTextfieldChange={handleTextfieldChange}
-          screenId={definedScreenerId}
-          close={() => setOpenSaveModal(!openSaveModal)}
-        />
-      </Modal>
-    </div>
-  );
 };
 
 const ProgramsHeader = () => {
@@ -93,9 +51,15 @@ const NeedsHeader = () => {
 };
 
 const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
+  const { uuid } = useParams();
+
   return (
     <>
-      <Buttons type={type} handleTextfieldChange={handleTextfieldChange} />
+      <BackAndSaveButtons
+        handleTextfieldChange={handleTextfieldChange}
+        navigateToLink={`/${uuid}/confirm-information`}
+        BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO SCREENER" />}
+      />
       {type === 'need' ? <NeedsHeader /> : <ProgramsHeader />}
     </>
   );
