@@ -51,6 +51,8 @@
   width: 21rem;
   border: 1px solid var(--primary-color);
   box-shadow: none;
+  box-sizing: content-box;
+  max-height: 50vh;
 }
 
 .filters-container {
