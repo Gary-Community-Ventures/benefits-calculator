@@ -97,6 +97,7 @@ export const Filter = () => {
                 onChange={() => handleFilterSelect(citizenshipFCLKey)}
               />
             }
+            className='vertical-align'
           />,
         );
       } else if (isSubfilterAndMainFilterIsChecked) {
@@ -110,7 +111,7 @@ export const Filter = () => {
                 onChange={() => handleFilterSelect(citizenshipFCLKey)}
               />
             }
-            className="subcategory-indentation"
+            className="subcategory-indentation vertical-align"
             sx={{ padding: '.5rem 0' }}
           />,
         );

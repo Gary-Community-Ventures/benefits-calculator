@@ -64,6 +64,17 @@
   flex-direction: row;
 }
 
+.MuiFormControlLabel-root.vertical-align {
+  vertical-align: top;
+  display: flex;
+  align-items: start;
+  padding: .5rem;
+}
+
+.MuiButtonBase-root.MuiCheckbox-root {
+  padding: 0 0.5rem;
+}
+
 @media (max-width: 500px), (max-height: 700px) {
   .MuiPaper-root.MuiPopover-paper {
     max-height: 24rem;
