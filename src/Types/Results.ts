@@ -35,6 +35,7 @@ export type Program = {
   passed_tests: TestMessage[];
   already_has: boolean;
   new: boolean;
+  low_confidence: boolean;
   navigators: ProgramNavigator[];
 };
 
