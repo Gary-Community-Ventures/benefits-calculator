@@ -258,11 +258,11 @@ const IncomeQuestion = ({
       questionHeader = <FormattedMessage id={hourlyFormattedMsgId} defaultMessage={hourlyFormattedMsgDefaultMsg} />;
     } else {
       let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
-      let payPeriodFormattedMsgDefaultMsg = 'How much do you receive each pay period for: ';
+      let payPeriodFormattedMsgDefaultMsg = 'How much do you receive before taxes each pay period for: ';
 
       if (page !== 1) {
         payPeriodFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-questionLabel';
-        payPeriodFormattedMsgDefaultMsg = 'How much do they receive each pay period for: ';
+        payPeriodFormattedMsgDefaultMsg = 'How much do they receive before taxes each pay period for: ';
       }
 
       questionHeader = (
