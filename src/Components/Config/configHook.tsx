@@ -17,16 +17,17 @@ async function getConfig() {
 }
 
 export default function useGetConfig() {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [config, setConfig] = useState<ApiConfig | undefined>();
+  const [configLoading, setLoading] = useState<boolean>(true);
+  const [configResponse, setConfigResponse] = useState<ApiConfig | undefined>();
 
   useEffect(() => {
-    getConfig().then((value) => {
+    getConfig().then((value: ApiConfig | undefined) => {
       // get data and set loading to false
-      setConfig(value);
+      const configData = Array.isArray(value) && value[0]?.data;
+      setConfigResponse(configData);
       setLoading(false);
     });
   }, []);
 
-  return { loading, config };
+  return { configLoading, configResponse };
 }
