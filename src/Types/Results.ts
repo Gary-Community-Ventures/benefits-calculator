@@ -36,6 +36,7 @@ export type Program = {
   already_has: boolean;
   new: boolean;
   navigators: ProgramNavigator[];
+  documents: Translation[];
 };
 
 export type UrgentNeed = {
