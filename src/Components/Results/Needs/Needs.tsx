@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useResultsContext } from '../Results';
 import NeedCard from './NeedCard';
 
