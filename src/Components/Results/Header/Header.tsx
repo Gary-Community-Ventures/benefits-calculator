@@ -1,4 +1,3 @@
-import CardContent from '@mui/material/CardContent';
 import { useResultsContext } from '../Results';
 import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
@@ -27,12 +26,12 @@ const NeedsHeader = () => {
   const { theme } = useContext(Context);
 
   return (
-    <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }}>
+    <div style={{ backgroundColor: theme.secondaryBackgroundColor, padding: '1rem' }}>
       <section className="results-needs-header">
         <div className="results-needs-header-programs">{needs.length}</div>
         <div className="results-needs-header-programs-text">Resources Found</div>
       </section>
-    </CardContent>
+    </div>
   );
 };
 
