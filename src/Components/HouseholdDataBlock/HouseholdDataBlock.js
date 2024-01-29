@@ -355,7 +355,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     const radiofieldProps = {
       ariaLabel: 'householdDataBlock.createIncomeRadioQuestion-ariaLabel',
       inputName: 'hasIncome',
-      value: householdData.hasIncome,
+      value: memberData.hasIncome,
     };
 
     const formattedMsgId =
