@@ -45,6 +45,7 @@ const initialFormData: FormData = {
     ssdi: false,
     ssi: false,
     cowap: false,
+    ubp: false,
     tanf: false,
     upk: false,
     wic: false,
