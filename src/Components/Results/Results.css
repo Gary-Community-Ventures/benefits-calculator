@@ -211,7 +211,7 @@
 
 .results-needs-header-programs-text {
   display: flex;
-  /* width: 33%; */
+  width: 8rem;
   font-size: large;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
