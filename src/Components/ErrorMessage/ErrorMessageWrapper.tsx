@@ -9,7 +9,7 @@ type Props = {
 export default function ErrorMessageWrapper({ children, fontSize }: Props) {
   return (
     <span className="error-helper-text">
-      <ErrorIcon sx={{ fontSize: fontSize, mr: '5px' }} />
+      <ErrorIcon sx={{ fontSize: fontSize, mr: '5px', mt: '.2em' }} />
       <span className="error-message">{children}</span>
     </span>
   );

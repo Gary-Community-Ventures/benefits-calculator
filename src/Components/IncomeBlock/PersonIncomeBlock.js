@@ -1,18 +1,19 @@
 import { FormattedMessage } from 'react-intl';
-import { Button } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
 import IncomeQuestion from './IncomeQuestion';
-import './IncomeBlock.css';
+import './PersonIncomeBlock.css';
 import { IconButton } from '@mui/material';
 import { HelpBubbleIcon } from '../../Assets/helpBubbleIcon.tsx';
 
-const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted }) => {
+const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those
   //first by assigning them to the initial selectedMenuItem state
   //if not then create the initial income block questions
   const [selectedMenuItem, setSelectedMenuItem] = useState(
-    householdData.incomeStreams.length > 0
-      ? householdData.incomeStreams
+    memberData.incomeStreams.length > 0
+      ? memberData.incomeStreams
       : [
           {
             incomeStreamName: '',
@@ -26,7 +27,7 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
 
 
   useEffect(() => {
-    setHouseholdData({ ...householdData, incomeStreams: selectedMenuItem });
+    setMemberData({ ...memberData, incomeStreams: selectedMenuItem });
   }, [selectedMenuItem]);
 
   const createIncomeBlockQuestions = () => {
@@ -36,8 +37,8 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
           currentIncomeSource={incomeSourceData}
           allIncomeSources={selectedMenuItem}
           setAllIncomeSources={setSelectedMenuItem}
-          householdData={householdData}
-          setHouseholdData={setHouseholdData}
+          memberData={memberData}
+          setMemberData={setMemberData}
           index={index}
           page={page}
           submitted={submitted}
@@ -60,7 +61,7 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
     ]);
   };
 
-  const renderReturnStmtIdOrDefaultMsg = (page) => {
+  const renderFollowUpIncomeQIdAndDefaultMsg = (page) => {
     let formattedMsgId = 'questions.hasIncome-a';
     let formattedMsgDefaultMsg = 'What type of income have you had most recently?';
 
@@ -77,28 +78,38 @@ const PersonIncomeBlock = ({ householdData, setHouseholdData, page, submitted })
 
   return (
     <>
-      <h2 className="question-label radio-question">
-        <FormattedMessage
-          id={renderReturnStmtIdOrDefaultMsg(page)[0]}
-          defaultMessage={renderReturnStmtIdOrDefaultMsg(page)[1]}
-        />
-          <IconButton onClick={handleClick} >
+      <div className="section-container">
+        <Box className="section">
+          <h2 className="question-label">
+            <FormattedMessage
+              id={renderFollowUpIncomeQIdAndDefaultMsg(page)[0]}
+              defaultMessage={renderFollowUpIncomeQIdAndDefaultMsg(page)[1]}
+            />
+              <IconButton onClick={handleClick} >
             <HelpBubbleIcon/>
           </IconButton>
       </h2>
-    
+        
 
       <p className="question-description help-text">
-      {showHelpText && (
+          {showHelpText && (
         <FormattedMessage
-          id="personIncomeBlock.return-questionDescription"
-          defaultMessage="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
-        />)}
-      </p>
+              id="personIncomeBlock.return-questionDescription"
+              defaultMessage="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
+            />)}
+          </p>
+        </Box>
+      </div>
       {createIncomeBlockQuestions()}
-      <Button variant="contained" onClick={(event) => handleAddAdditionalIncomeSource(event)}>
-        <FormattedMessage id="personIncomeBlock.return-addIncomeButton" defaultMessage="Add another income" />
-      </Button>
+      <div>
+        <Button
+          variant="outlined"
+          onClick={(event) => handleAddAdditionalIncomeSource(event)}
+          startIcon={<AddIcon sx={{ fontSize: 'medium !important', mr: '-0.5rem' }} />}
+        >
+          <FormattedMessage id="personIncomeBlock.return-addIncomeButton" defaultMessage="Add another income" />
+        </Button>
+      </div>
     </>
   );
 };

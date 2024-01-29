@@ -17,12 +17,16 @@ export type FormattedMessageType = ReactElement;
 
 export type TextFieldDetails = {
   componentType: 'Textfield';
-  inputType: 'text';
+  inputType: string;
+  inputMode?: string;
+  inputPattern?: string;
+  pattern?: string;
   inputName: string;
   inputLabel: FormattedMessageType;
   inputError: ValidationFunction<string>;
   inputHelperText: MessageFunction<string>;
   dollarField?: boolean;
+  numericField?: boolean;
 };
 
 type BasicSelectOptions =
@@ -56,12 +60,7 @@ export type BasicSelectDetails = {
 export type OptionCardGroupDetails = {
   componentType: 'OptionCardGroup';
   inputName: string;
-  options: {
-    [key: string]: {
-      formattedMessage: FormattedMessageType;
-      image: string;
-    };
-  };
+  options: any;
   inputError: ValidationFunction<{ [key: string]: boolean }>;
   inputHelperText?: MessageFunction<{ [key: string]: boolean }>;
 };
@@ -134,5 +133,6 @@ export type Question = {
   questionDescription?: FormattedMessageType;
   componentDetails: ComponentDetails;
   header?: FormattedMessageType;
+  subheader?: FormattedMessageType;
   followUpQuestions?: Question[];
 };

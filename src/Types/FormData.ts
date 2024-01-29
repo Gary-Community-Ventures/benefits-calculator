@@ -13,11 +13,7 @@ export interface IncomeStream {
 export interface HouseholdData {
   age: string;
   relationshipToHH: string;
-  student: boolean;
-  pregnant: boolean;
-  blindOrVisuallyImpaired: boolean;
-  disabled: boolean;
-  longTermDisability: boolean;
+  conditions: Conditions;
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
   healthInsurance: HealthInsurance;
@@ -36,7 +32,6 @@ export interface Benefits {
   denverpresc: boolean;
   ede: boolean;
   eitc: boolean;
-  erc: boolean;
   lifeline: boolean;
   leap: boolean;
   mydenver: boolean;
@@ -50,6 +45,8 @@ export interface Benefits {
   tanf: boolean;
   upk: boolean;
   wic: boolean;
+  cowap: boolean;
+  ubp: boolean;
 }
 
 export interface HealthInsurance {
@@ -73,6 +70,7 @@ export interface SignUpInfo {
   sendOffers: boolean;
   sendUpdates: boolean;
   commConsent: boolean;
+  serverError?: boolean;
 }
 
 export interface AcuteHHConditions {
@@ -108,4 +106,12 @@ export interface FormData {
   signUpInfo: SignUpInfo;
   urlSearchParams: string;
   acuteHHConditions: AcuteHHConditions;
+}
+
+export interface Conditions {
+  student: boolean;
+  pregnant: boolean;
+  blindOrVisuallyImpaired: boolean;
+  disabled: boolean;
+  longTermDisability: boolean;
 }

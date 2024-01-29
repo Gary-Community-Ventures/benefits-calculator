@@ -11,6 +11,11 @@
   min-width: 0;
 }
 
+.prev-save-continue-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media (max-width: 420px) {
   .delete-button.MuiButton-root {
     width: 1rem;

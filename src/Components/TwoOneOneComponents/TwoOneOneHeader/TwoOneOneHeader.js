@@ -68,11 +68,6 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
     setOpenMenu(!openMenu);
   };
 
-  const setRenderValue = () => {
-    const currentLocale = locale;
-    return currentLocale.slice(0, 2).toLocaleUpperCase();
-  };
-
   const create211Links = () => {
     const mappedLinks = twoOneOneLinks.map((link, index) => {
       return (
@@ -163,18 +158,19 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
 
   return (
     <nav>
-      <Paper elevation={4} sx={{ width: '100%', height: '50px', backgroundColor: '#FFFFFF' }} square={true}>
-        <AppBar position="sticky" id="nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
+      <Paper elevation={4} square={true} className="twoOneOne-header-container">
+        <AppBar position="sticky" id="twoOneOne-nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
           <Box>
             <a href={`/step-1${queryString}`}>
               <img src={twoOneOneMFBLogo} alt="211 and myfriendben logo" className="cobranded-logo" />
             </a>
           </Box>
-          <Stack direction="row">
+          <Stack direction="row" gap="1rem">
             <Stack direction="row" gap="1rem" alignItems="center" className="twoOneOne-desktop-links">
               {create211Links()}
             </Stack>
-            <Stack direction="row" sx={{ marginLeft: '3rem' }} className="twoOneOne-remove-leftMargin">
+            <Stack direction="row" gap=".25rem" alignItems="center">
+              <LanguageIcon className="twoOneOne-globe-icon" />
               <Select
                 labelId="select-language-label"
                 id="twoOneOne-select-language"
@@ -187,9 +183,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
                 open={isLanguageSelectOpen}
                 onOpen={handleOpenLanguage}
                 onClose={handleCloseLanguage}
-                IconComponent={LanguageIcon}
-                renderValue={() => setRenderValue()}
-                sx={{ '& .MuiSvgIcon-root': { right: '1.25rem', color: '#005191' } }}
+                sx={{ '& .MuiSvgIcon-root': { color: '#005191' } }}
               >
                 {createMenuItems(languageOptions)}
               </Select>

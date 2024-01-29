@@ -5,6 +5,8 @@ import SignUp from '../SignUp/SignUp';
 import AccordionsContainer from '../AccordionsContainer/AccordionsContainer';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import { useState } from 'react';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 const FollowUpQuestions = ({
   followUpQuestions,
@@ -30,8 +32,13 @@ const FollowUpQuestions = ({
     } else if (followUp.componentDetails.componentType === 'ExpenseBlock') {
       return (
         <div className="question-container" key={index}>
-          sasfasfasfas
-          <h2 className="question-label">{followUp.question}</h2>
+          <Box className="section-container">
+            <Stack className="section">
+              <h2 className="question-label section" style={{ paddingTop: '3rem' }}>
+                {followUp.question}
+              </h2>
+            </Stack>
+          </Box>
           <ExpenseBlock handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} />
         </div>
       );

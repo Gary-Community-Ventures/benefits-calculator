@@ -19,6 +19,7 @@ import Textfield from '../Textfield/Textfield';
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
   maxWidth: '100%',
+  backgroundColor: '#FFFFFF',
 });
 
 const StyledDeleteButton = styled(Button)({
@@ -27,14 +28,15 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 0,
   padding: 0,
   fontSize: '1.25rem',
+  position: 'absolute',
 });
 
 const IncomeQuestion = ({
   currentIncomeSource,
   allIncomeSources,
   setAllIncomeSources,
-  householdData,
-  setHouseholdData,
+  memberData,
+  setMemberData,
   index,
   page,
   submitted,
@@ -219,6 +221,7 @@ const IncomeQuestion = ({
       inputName: 'hoursPerWeek',
       inputError: hoursWorkedValueHasError,
       inputHelperText: hoursWorkedHelperText,
+      numericField: true,
     };
 
     return (
@@ -255,11 +258,11 @@ const IncomeQuestion = ({
       questionHeader = <FormattedMessage id={hourlyFormattedMsgId} defaultMessage={hourlyFormattedMsgDefaultMsg} />;
     } else {
       let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
-      let payPeriodFormattedMsgDefaultMsg = 'How much do you receive each pay period for: ';
+      let payPeriodFormattedMsgDefaultMsg = 'How much do you receive before taxes each pay period for: ';
 
       if (page !== 1) {
         payPeriodFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-questionLabel';
-        payPeriodFormattedMsgDefaultMsg = 'How much do they receive each pay period for: ';
+        payPeriodFormattedMsgDefaultMsg = 'How much do they receive before taxes each pay period for: ';
       }
 
       questionHeader = (
@@ -276,6 +279,7 @@ const IncomeQuestion = ({
       inputError: incomeStreamValueHasError,
       inputHelperText: displayIncomeStreamValueHelperText,
       dollarField: true,
+      numericField: true,
     };
 
     return (
@@ -291,6 +295,7 @@ const IncomeQuestion = ({
             handleTextfieldChange={handleIncomeTextfieldChange}
             index={index}
             submitted={amountErrorController.submittedCount}
+            numericField={true}
           />
         </div>
       </div>
@@ -347,8 +352,8 @@ const IncomeQuestion = ({
     const updatedSelectedMenuItems = allIncomeSources.filter((incomeSourceData, index) => index !== selectedIndex);
     setAllIncomeSources(updatedSelectedMenuItems);
 
-    setHouseholdData({
-      ...householdData,
+    setMemberData({
+      ...memberData,
       incomeStreams: updatedSelectedMenuItems,
     });
   };
@@ -364,25 +369,27 @@ const IncomeQuestion = ({
   }
 
   const incomeStreamQuestion = (
-    <h2 className="question-label">
+    <h2 className="question-label income-stream-q-padding">
       <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
     </h2>
   );
 
   return (
-    <div key={index}>
-      {index > 0 && (
-        <div className="delete-button-container">
-          <StyledDeleteButton variant="contained" onClick={() => deleteIncomeBlock(index)}>
-            &#215;
-          </StyledDeleteButton>
-        </div>
-      )}
-      {index > 0 && incomeStreamQuestion}
-      {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
-      {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
-      {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
-      {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+    <div key={index} className="section-container income-question-padding">
+      <div className={index % 2 === 0 ? 'section' : ''}>
+        {index > 0 && (
+          <div className="delete-button-container">
+            <StyledDeleteButton variant="contained" onClick={() => deleteIncomeBlock(index)}>
+              &#215;
+            </StyledDeleteButton>
+          </div>
+        )}
+        {index > 0 && incomeStreamQuestion}
+        {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
+        {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+        {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
+        {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+      </div>
     </div>
   );
 };

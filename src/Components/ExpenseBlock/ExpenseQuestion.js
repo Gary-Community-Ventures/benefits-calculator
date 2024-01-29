@@ -15,6 +15,7 @@ import Textfield from '../Textfield/Textfield';
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
   maxWidth: '100%',
+  backgroundColor: 'white',
 });
 
 const StyledDeleteButton = styled(Button)({
@@ -23,6 +24,9 @@ const StyledDeleteButton = styled(Button)({
   minWidth: 0,
   padding: 0,
   fontSize: '1.25rem',
+  marginRight: '1rem',
+  marginTop: '1rem',
+  marginBottom: '-0.5rem',
 });
 
 const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteExpenseBlock, index, submitted }) => {
@@ -102,11 +106,12 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
     inputError: expenseSourceValueHasError,
     inputHelperText: displayExpenseSourceValueHelperText,
     dollarField: true,
+    numericField: true,
   };
 
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
     return (
-      <div className="bottom-border">
+      <div>
         <p className="question-label">
           <FormattedMessage
             id="expenseBlock.createExpenseAmountTextfield-questionLabel"

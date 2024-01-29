@@ -21,7 +21,7 @@ import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } fro
 import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx';
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
-import pageTitleTags from './Assets/pageTitleTags.ts';
+import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
 import './App.css';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
@@ -67,7 +67,7 @@ const App = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    const stepString = location.pathname.split('/').filter((string) => string.includes('step'))[0];
+    const stepString = location.pathname.split('/').filter((string) => string.includes('step'))[0] as StepName;
     const isConfirmationPage = location.pathname.includes('confirm-information');
     const isResultsPage = location.pathname.includes('results');
 
@@ -221,8 +221,13 @@ const App = () => {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
         return;
       } else if (questionName === 'signUpInfo') {
-        updateUser(uuid, formData, setFormData, locale);
-        navigate(`/${uuid}/confirm-information`);
+        updateUser(uuid, formData, setFormData, locale)
+          .then(() => {
+            navigate(`/${uuid}/confirm-information`);
+          })
+          .catch(() => {
+            setFormData({ ...formData, signUpInfo: { ...formData.signUpInfo, serverError: true } });
+          });
       } else if (questionName === 'householdSize') {
         const updatedHouseholdData = formData.householdData.slice(0, Number(formData.householdSize));
         const updatedFormData = { ...formData, householdData: updatedHouseholdData };
@@ -330,7 +335,9 @@ const App = () => {
             </Route>
             <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
           </Routes>
+          <div className="push"></div>
         </Box>
+
         <BrandedFooter />
       </div>
     </ThemeProvider>

@@ -51,6 +51,8 @@ import {
 import { citizenshipFilterOperators } from '../FilterSection/CitizenshipPopover.tsx';
 import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import EmailResults from '../EmailResults/EmailResults.tsx';
+import { BrandedResultsHeader } from '../Referrer/Referrer.tsx';
+import BackToScreen from '../BackToScreen/BackToScreen.tsx';
 
 export type UpdateFilterArg =
   | {
@@ -72,7 +74,7 @@ type ResultsProps = {
 const Results = ({ handleTextFieldChange }: ResultsProps) => {
   const { uuid: screenerId } = useParams();
   const navigate = useNavigate();
-  const { locale, theme } = useContext(Context);
+  const { locale, theme, formData } = useContext(Context);
   const intl = useIntl();
   const [filterResultsButton, setFilterResultsButton] = useState('benefits');
   const [citizenshipFilterIsChecked, setCitizenshipFilterIsChecked] = useState<Record<CitizenLabels, boolean>>({
@@ -92,17 +94,23 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
   const alreadyHasToggleState = useState(false);
   const [sendResultsOpen, setSendResultsOpen] = useState(false);
 
+  useEffect(() => {
+    dataLayerPush({ event: 'config', user_id: screenerId });
+  }, [screenerId]);
+
   type ResultsState = {
     programs: Program[];
     urgentNeeds: UrgentNeed[];
     screenerId: number;
     loadingState: 'loading' | 'error' | 'done';
+    missingPrograms: boolean;
   };
 
   const initialResults: ResultsState = {
     programs: [],
     urgentNeeds: [],
     screenerId: 0,
+    missingPrograms: false,
     loadingState: 'loading',
   };
 
@@ -249,6 +257,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
       urgentNeeds: rawEligibilityResponse.urgent_needs,
       screenerId: rawEligibilityResponse.screen_id,
       loadingState: 'done',
+      missingPrograms: rawEligibilityResponse.missing_programs,
     });
   };
 
@@ -414,20 +423,11 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
     } else {
       return (
         <Grid xs={12} item>
-          <h1 className="bottom-border program-value-header">
-            {citizenshipRowCount}
-            <FormattedMessage
-              id="results.return-programsUpToLabel"
-              defaultMessage=" programs with an estimated value of "
-            />
-            ${Math.round(totalCitizenshipDollarValue.cashOrReducedExpenses / 12).toLocaleString()}
-            <FormattedMessage
-              id="results.return-perMonthLabel"
-              defaultMessage=" monthly in cash or reduced expenses, and "
-            />
-            ${Math.round(totalCitizenshipDollarValue.taxCredits).toLocaleString()}
-            <FormattedMessage id="results.return-taxCredits" defaultMessage=" in tax credits for you to consider " />
-          </h1>
+          <BrandedResultsHeader
+            programCount={citizenshipRowCount}
+            programsValue={totalCitizenshipDollarValue.cashOrReducedExpenses}
+            taxCreditsValue={totalCitizenshipDollarValue.taxCredits}
+          />
         </Grid>
       );
     }
@@ -548,7 +548,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
                 });
               }}
             >
-              <Button className="apply-button">
+              <Button className="apply-button" variant="contained">
                 <FormattedMessage id="results.resultsRow-applyButton" defaultMessage="Apply" />
               </Button>
             </a>
@@ -904,6 +904,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
           {results.loadingState === 'done' && (
             <>
               {displayHeaderSection()}
+              {results.missingPrograms && formData.immutableReferrer === 'lgs' && <BackToScreen />}
               <Grid xs={12} item={true}>
                 {displayBenefitAndImmedNeedsBtns()}
                 {filterResultsButton === 'benefits' && DataGridTable(results.programs)}

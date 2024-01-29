@@ -2,9 +2,10 @@ import { useParams } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import LinearProgress from '@mui/material/LinearProgress';
 import { getStepDirectory, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import './ProgressBar.css';
+import dataLayerPush from '../../Assets/analytics';
 
 interface ProgressBarProps {
   step?: number;
@@ -13,23 +14,22 @@ interface ProgressBarProps {
 const ProgressBar = ({ step }: ProgressBarProps) => {
   const { theme, formData } = useContext(Context);
   const totalSteps = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
-  const { id } = useParams();
-  let stepValue: number = 0;
-  if (step !== undefined) {
-    stepValue = step;
-  } else if (id !== undefined) {
-    stepValue = Number(id);
-  }
+  const { id, uuid } = useParams();
+
+  useEffect(() => {
+    dataLayerPush({ event: 'config', user_id: uuid });
+  }, [uuid]);
+
+  let stepValue = step ?? id ?? 0;
+  let progressPercentage: number = ((Number(stepValue) - 1) / (totalSteps - 1)) * 100;
 
   const progressBarStyles = {
     marginBottom: '5px',
     backgroundColor: '#d6d6d6c4',
-    border: '1px solid #B0B0B0',
     borderRadius: '500rem;',
     height: '1rem',
-    boxShadow: 'inset -1px 1px 3px rgb(0 0 0 / 0.2)',
     '& .MuiLinearProgress-bar': {
-      background: `linear-gradient(90deg, ${theme.primaryColor} 0%, ${theme.secondaryColor} 100%)`,
+      background: theme.progressBarColor,
       borderRadius: '500rem;',
     },
   };
@@ -39,7 +39,7 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
       <LinearProgress
         sx={progressBarStyles}
         variant="determinate"
-        value={(stepValue / totalSteps) * 100}
+        value={progressPercentage}
         className="progress-bar"
         aria-label="Progress Bar"
       />

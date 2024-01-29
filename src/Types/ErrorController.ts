@@ -6,7 +6,7 @@ export type VerifiableInput = Partial<
   | boolean
   | null
   | Expense[]
-  | SignUpInfo
+  | (SignUpInfo & { serverError: boolean })
   | HealthInsurance
   | { index: number; healthInsurance: HealthInsurance }
 >;

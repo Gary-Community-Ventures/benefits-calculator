@@ -80,7 +80,7 @@ const UrgentNeedsRow = ({ urgentNeed }: UrgentNeedsRowProps) => {
                     });
                   }}
                 >
-                  <Button className="urgent-need-button">
+                  <Button className="urgent-need-button" variant="contained">
                     <FormattedMessage id="urgentNeedsTable.visit-website-button" defaultMessage="Visit website" />
                   </Button>
                 </a>

@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid';
 import { Typography } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
-import loading from '../../Assets/loading-icon.png';
+import loading from '../../Assets/loading/loading-icon.png';
 import './Loading.css';
 
 const Loading = () => {
