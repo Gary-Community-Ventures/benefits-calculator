@@ -59,7 +59,15 @@ const IncomeQuestion = ({
   });
 
   const getIncomeStreamNameLabel = (incomeStreamName) => {
-    return incomeOptions[incomeStreamName];
+    return incomeStreamName ? (
+      <>
+        {'('}
+        {incomeOptions[incomeStreamName]}
+        {')?'}
+      </>
+    ) : (
+      '?'
+    );
   };
 
   const createIncomeStreamsMenuItems = () => {
@@ -191,11 +199,11 @@ const IncomeQuestion = ({
 
   const createHoursWorkedTextField = (incomeStreamName, hoursWorked, index) => {
     let formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-youQLabel';
-    let formattedMsgDefaultMsg = 'How many hours do you work per week: ';
+    let formattedMsgDefaultMsg = 'How many hours do you work per week ';
 
     if (page !== 1) {
       formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-questionLabel';
-      formattedMsgDefaultMsg = 'How many hours do they work per week: ';
+      formattedMsgDefaultMsg = 'How many hours do they work per week ';
     }
 
     const hoursWorkedChange = (event, index) => {
@@ -228,7 +236,7 @@ const IncomeQuestion = ({
       <>
         <h2 className="question-label">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}?
+          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
         </h2>
         <div className="income-block-textfield">
           <Textfield
@@ -248,21 +256,21 @@ const IncomeQuestion = ({
 
     if (allIncomeSources[index].incomeFrequency === 'hourly') {
       let hourlyFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
-      let hourlyFormattedMsgDefaultMsg = 'What is your hourly rate: ';
+      let hourlyFormattedMsgDefaultMsg = 'What is your hourly rate ';
 
       if (page !== 1) {
         hourlyFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
-        hourlyFormattedMsgDefaultMsg = 'What is their hourly rate: ';
+        hourlyFormattedMsgDefaultMsg = 'What is their hourly rate ';
       }
 
       questionHeader = <FormattedMessage id={hourlyFormattedMsgId} defaultMessage={hourlyFormattedMsgDefaultMsg} />;
     } else {
       let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
-      let payPeriodFormattedMsgDefaultMsg = 'How much do you receive each pay period for: ';
+      let payPeriodFormattedMsgDefaultMsg = 'How much do you receive each pay period for ';
 
       if (page !== 1) {
         payPeriodFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-questionLabel';
-        payPeriodFormattedMsgDefaultMsg = 'How much do they receive each pay period for: ';
+        payPeriodFormattedMsgDefaultMsg = 'How much do they receive each pay period for ';
       }
 
       questionHeader = (
@@ -286,7 +294,7 @@ const IncomeQuestion = ({
       <div>
         <h2 className="question-label">
           {questionHeader}
-          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}?
+          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
         </h2>
         <div className="income-block-textfield">
           <Textfield
@@ -304,17 +312,17 @@ const IncomeQuestion = ({
 
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     let formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel';
-    let formattedMsgDefaultMsg = 'How often are you paid this income: ';
+    let formattedMsgDefaultMsg = 'How often are you paid this income ';
     if (page !== 1) {
       formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel';
-      formattedMsgDefaultMsg = 'How often are they paid this income: ';
+      formattedMsgDefaultMsg = 'How often are they paid this income ';
     }
 
     return (
       <div>
         <h2 className="question-label">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}?
+          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
         </h2>
         <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeFrequencyErrorController.showError}>
           <InputLabel id="income-frequency-label">

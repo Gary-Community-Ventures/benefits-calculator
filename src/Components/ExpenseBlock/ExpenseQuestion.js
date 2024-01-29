@@ -96,7 +96,15 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   };
 
   const getExpenseSourceLabel = (expenseSourceName) => {
-    return expenseOptions[expenseSourceName];
+    return expenseSourceName ? (
+      <>
+        {'('}
+        {expenseOptions[expenseSourceName]}
+        {')?'}
+      </>
+    ) : (
+      '?'
+    );
   };
 
   const textfieldProps = {
@@ -115,9 +123,9 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
         <p className="question-label">
           <FormattedMessage
             id="expenseBlock.createExpenseAmountTextfield-questionLabel"
-            defaultMessage="How much is this type of expense: "
+            defaultMessage="How much is this type of expense "
           />
-          {getExpenseSourceLabel(allExpensesData[index].expenseSourceName)}?
+          {getExpenseSourceLabel(allExpensesData[index].expenseSourceName)}
         </p>
         <div className="expense-block-textfield">
           <Textfield
