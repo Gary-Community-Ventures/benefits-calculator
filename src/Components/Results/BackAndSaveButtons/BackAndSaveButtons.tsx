@@ -6,7 +6,7 @@ import LeftArrowIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { ReactComponent as SaveIcon } from '../../../Assets/save.svg';
 import { Modal } from '@mui/material';
 import { FormattedMessageType } from '../../../Types/Questions';
-import '../../Results/Results.css';
+import './BackAndSaveButtons.css';
 
 type BackAndSaveButtons = {
   handleTextfieldChange: (event: Event) => void;
@@ -32,16 +32,20 @@ const BackAndSaveButtons = ({ handleTextfieldChange, navigateToLink, BackToThisP
         }}
         aria-label="back to screener button"
       >
-        <LeftArrowIcon />
-        {BackToThisPageText}
+        <div className="btn-icon-text-container padding-right">
+          <LeftArrowIcon />
+          {BackToThisPageText}
+        </div>
       </button>
       <button
         className="results-back-save-buttons"
         onClick={() => setOpenSaveModal(!openSaveModal)}
         aria-label="save my results button"
       >
-        <FormattedMessage id="results.save-results-btn" defaultMessage="SAVE MY RESULTS" />
-        <SaveIcon className="save-icon" />
+        <div className="btn-icon-text-container padding-left">
+          <FormattedMessage id="results.save-results-btn" defaultMessage="SAVE MY RESULTS" />
+          <SaveIcon className="save-icon" />
+        </div>
       </button>
       <Modal open={openSaveModal} aria-labelledby="email-text-results-modal">
         <EmailResults
