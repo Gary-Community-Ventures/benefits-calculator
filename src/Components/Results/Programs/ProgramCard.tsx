@@ -21,13 +21,13 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
       </div>
       <hr />
       <div className="result-program-details">
-        <FormattedMessage id="results.estimated_application_time" defaultMessage="Application time" />
+        <FormattedMessage id="results.estimated_application_time" defaultMessage="Application Time: " />
         <strong>
           <ResultsTranslate translation={estimatedAppTime} />
         </strong>
       </div>
       <div className="result-program-details">
-        <FormattedMessage id="results.estimated_application_time" defaultMessage="Estimated Savings:" />
+        <FormattedMessage id="results.estimated_application_time" defaultMessage="Savings " />
         <strong>{`$${estimatedSavings}/mo`}</strong>
       </div>
     </div>
