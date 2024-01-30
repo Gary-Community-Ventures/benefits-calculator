@@ -12,12 +12,14 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
 
   const estimatedAppTime = program.estimated_application_time;
   const estimatedSavings = program.estimated_value;
+  const programName = program.name;
+  const programId = program.program_id;
 
   return (
     <div className="result-program-container">
       <div className="result-program-more-info">
-        <ResultsTranslate translation={program.name} />
-        <Link to={`/${uuid}/results/benefits/${program.program_id}`}>More Info</Link>
+        <ResultsTranslate translation={programName} />
+        <Link to={`/${uuid}/results/benefits/${programId}`}>More Info</Link>
       </div>
       <hr />
       <div className="result-program-details">
@@ -27,7 +29,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
         </strong>
       </div>
       <div className="result-program-details">
-        <FormattedMessage id="results.estimated_application_time" defaultMessage="Savings " />
+        <FormattedMessage id="results.estimated_application_time" defaultMessage="Estimated Savings " />
         <strong>{`$${estimatedSavings}/mo`}</strong>
       </div>
     </div>

@@ -245,7 +245,7 @@
   line-height: normal;
   font-family: 'Roboto Slab', serif;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   padding: 1rem 2rem;
 }
 
@@ -255,13 +255,14 @@
   font-size: 0.8rem;
   border-radius: 0.75rem;
   position: absolute;
-  top: 1.1rem;
+  top: 0.75rem;
   right: 3rem;
   padding: 0.5rem 0.75rem;
   background-color: var(--primary-color);
 }
 
 .result-program-details {
+  font-size: 0.9rem;
   display: inline-block;
   font-weight: 100;
   line-height: normal;
