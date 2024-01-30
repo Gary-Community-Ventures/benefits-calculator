@@ -38,7 +38,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     navigate(`/${uuid}/step-${step}/${page}`);
   };
   const [submittedCount, setSubmittedCount] = useState(0);
-  const [showHelpText, setShowHelpText] = useState(false);
 
   const initialMemberData = formData.householdData[page - 1] ?? {
     age: '',
