@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, MouseEvent } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Box, IconButton, Stack } from '@mui/material';
