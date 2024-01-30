@@ -189,3 +189,38 @@
 .category-heading-text-style.normal-weight {
   font-weight: normal;
 }
+
+.results-needs-header-background {
+  background-color: var(--secondary-background-color);
+  padding: 1rem;
+}
+
+.results-needs-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 7rem;
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  line-height: normal;
+}
+
+.results-needs-header-programs {
+  display: flex;
+  justify-content: center;
+  font-size: xxx-large;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+}
+
+.results-needs-header-programs-text {
+  display: flex;
+  width: 8rem;
+  font-size: large;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  margin: auto;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+}

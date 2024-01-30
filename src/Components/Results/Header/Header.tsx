@@ -1,7 +1,7 @@
 import { CardContent } from '@mui/material';
-import { calculateTotalValue, useResultsContext } from '../Results';
 import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper.tsx';
+import { calculateTotalValue, useResultsContext } from '../Results.tsx';
 
 type ResultsHeaderProps = {
   type: 'program' | 'need';
@@ -22,7 +22,8 @@ const ProgramsHeader = () => {
   const taxCredit = calculateTotalValue(programs, 'Tax Credit');
 
   const estimatedMonthlySavings = programs.reduce(
-    (eachEstimatedMonthlySavings, program) => eachEstimatedMonthlySavings + program.estimated_value,
+    (eachEstimatedMonthlySavings: number, program: { estimated_value: number }) =>
+      eachEstimatedMonthlySavings + program.estimated_value,
     0,
   );
 
@@ -50,8 +51,16 @@ const ProgramsHeader = () => {
 
 const NeedsHeader = () => {
   const { needs } = useResultsContext();
+  const { theme } = useContext(Context);
 
-  return <div>{needs.length}</div>;
+  return (
+    <div className="results-needs-header-background">
+      <section className="results-needs-header">
+        <div className="results-needs-header-programs">{needs.length}</div>
+        <div className="results-needs-header-programs-text">Resources Found</div>
+      </section>
+    </div>
+  );
 };
 
 const ResultsHeader = ({ type }: ResultsHeaderProps) => {
