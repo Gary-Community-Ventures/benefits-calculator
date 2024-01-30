@@ -13,7 +13,6 @@ import Programs from './Programs/Programs';
 import ProgramPage from './ProgramPage/ProgramPage';
 import ResultsTabs from './Tabs/Tabs';
 import MoreHelp from './MoreHelp/MoreHelp';
-import NavigatorPage from './NavigatorPage/NavigatorPage';
 import dataLayerPush from '../../Assets/analytics';
 
 type WrapperResultsContext = {
@@ -24,7 +23,7 @@ type WrapperResultsContext = {
 };
 
 type ResultsProps = {
-  type: 'program' | 'need' | 'navigator';
+  type: 'program' | 'need';
 };
 
 export const ResultsContext = createContext<WrapperResultsContext | undefined>(undefined);
@@ -41,6 +40,14 @@ export function useResultsContext() {
 
 function findProgramById(programs: Program[], id: string) {
   return programs.find((program) => String(program.program_id) === id);
+}
+
+export function calculateTotalValue(programs: Program[], category: string) {
+  const totalValue = programs.reduce((eachValue, program) => {
+    if (program.category.default_message === category) eachValue += program.estimated_value;
+    return eachValue;
+  }, 0);
+  return totalValue;
 }
 
 const Results = ({ type }: ResultsProps) => {
@@ -129,10 +136,6 @@ const Results = ({ type }: ResultsProps) => {
 
   if (program === undefined) {
     return <Navigate to={`/${uuid}/results/benefits`} />;
-  }
-
-  if (type === 'navigator') {
-    return <NavigatorPage navigators={program.navigators} />;
   }
 
   return <ProgramPage program={program} />;
