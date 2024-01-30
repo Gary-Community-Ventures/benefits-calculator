@@ -12,7 +12,7 @@ const referralOptions = {
   cch: 'Colorado Coalition for the Homeless',
   frca: 'Family Resource Center Association',
   jeffcoHS: 'Jeffco Human Services',
-  gac: "Get Ahead Colorado",
+  gac: 'Get Ahead Colorado',
   bia: 'Benefits in Action',
   villageExchange: 'Village Exchange',
   lgs: "Let's Get Set",

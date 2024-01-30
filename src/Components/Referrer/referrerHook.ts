@@ -43,7 +43,7 @@ const referrerData: ReferrerData = {
     jeffcoHSCM: 'Jeffco Human Services and MyFriendBen home page button',
     cch: 'Colorado Coalition for the Homeless and MyFriendBen home page button',
     lgs: "Let's Get Set home page button",
-    gac: "Get Ahead Colorado home page button"
+    gac: 'Get Ahead Colorado home page button',
   },
   logoClass: {
     default: 'logo',
