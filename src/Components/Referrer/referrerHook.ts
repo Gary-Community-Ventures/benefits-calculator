@@ -5,6 +5,7 @@ import JHSAMFBLogo from '../../Assets/JeffcoAssets/jeffcobrand.png';
 import VELogo from '../../Assets/VillageExchange/villageExchangeLogo.png';
 import CCHMFBLogo from '../../Assets/ColoradoCoalitionHomeless/cchcobrand.png';
 import LGSLogo from '../../Assets/LetsGetSet/lgsLogo.png';
+import GACLogo from '../../Assets/GetAheadColorado/gaclogo.png';
 
 type ReferrerOptions<T> = {
   default: T;
@@ -33,6 +34,7 @@ const referrerData: ReferrerData = {
     villageExchange: VELogo,
     cch: CCHMFBLogo,
     lgs: LGSLogo,
+    gac: GACLogo,
   },
   logoAlt: {
     default: 'MyFriendBen home page button',
@@ -41,6 +43,7 @@ const referrerData: ReferrerData = {
     jeffcoHSCM: 'Jeffco Human Services and MyFriendBen home page button',
     cch: 'Colorado Coalition for the Homeless and MyFriendBen home page button',
     lgs: "Let's Get Set home page button",
+    gac: "Get Ahead Colorado home page button"
   },
   logoClass: {
     default: 'logo',
@@ -49,6 +52,7 @@ const referrerData: ReferrerData = {
     villageExchange: 'logo',
     cch: 'logo',
     lgs: 'logo',
+    gac: 'logo',
   },
   twoOneOneLink: {
     default: 'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=organic&utm_id=211mfb',
