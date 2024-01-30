@@ -190,6 +190,11 @@
   font-weight: normal;
 }
 
+.results-needs-header-background {
+  background-color: var(--secondary-background-color);
+  padding: 1rem;
+}
+
 .results-needs-header {
   display: flex;
   flex-direction: column;
