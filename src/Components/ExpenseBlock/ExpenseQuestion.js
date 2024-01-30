@@ -97,7 +97,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
 
   const getExpenseSourceLabel = (expenseSourceName) => {
     if (expenseSourceName) {
-      return `(${expenseOptions[expenseSourceName]})?`;
+      return <>({expenseOptions[expenseSourceName]})?</>;
     }
 
     return '?';

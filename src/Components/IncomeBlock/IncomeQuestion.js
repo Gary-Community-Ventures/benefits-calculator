@@ -60,8 +60,9 @@ const IncomeQuestion = ({
 
   const getIncomeStreamNameLabel = (incomeStreamName) => {
     if (incomeStreamName) {
-      return `(${incomeOptions[incomeStreamName]})?`;
+      return <>({incomeOptions[incomeStreamName]})?</>;
     }
+
     return '?';
   };
 
