@@ -45,6 +45,7 @@ export type UrgentNeed = {
   description: Translation;
   link: Translation;
   type: Translation;
+  warning: Translation;
   phone_number: string;
 };
 
