@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import IncomeQuestion from './IncomeQuestion';
 import './PersonIncomeBlock.css';
 import { IconButton } from '@mui/material';
-import { HelpBubbleIcon } from '../../Assets/helpBubbleIcon.tsx';
+import { HelpBubbleIcon } from '../HelpBubbleIcon/helpBubbleIcon.tsx';
 
 const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those
@@ -24,7 +24,6 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
         ],
   );
   const [showHelpText, setShowHelpText] = useState(false);
-
 
   useEffect(() => {
     setMemberData({ ...memberData, incomeStreams: selectedMenuItem });
@@ -72,9 +71,6 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
 
     return [formattedMsgId, formattedMsgDefaultMsg];
   };
-  const handleClick = () => {
-    setShowHelpText((setShow) => !setShow);
-  };
 
   return (
     <>
@@ -85,18 +81,12 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
               id={renderFollowUpIncomeQIdAndDefaultMsg(page)[0]}
               defaultMessage={renderFollowUpIncomeQIdAndDefaultMsg(page)[1]}
             />
-              <IconButton onClick={handleClick} >
-            <HelpBubbleIcon/>
-          </IconButton>
-      </h2>
-        
-
-      <p className="question-description help-text">
-          {showHelpText && (
-        <FormattedMessage
+          </h2>
+          <p className="question-description help-text">
+            <FormattedMessage
               id="personIncomeBlock.return-questionDescription"
               defaultMessage="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
-            />)}
+            />
           </p>
         </Box>
       </div>

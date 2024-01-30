@@ -35,6 +35,8 @@ p {
 }
 
 .help-text {
+  font-family: 'Open Sans', serif;
+  font-size: 1rem;
   font-weight: 200;
   color: #666;
 }
