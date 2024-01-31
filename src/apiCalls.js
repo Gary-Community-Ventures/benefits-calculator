@@ -13,8 +13,8 @@ const header = {
   Authorization: apiKey,
 };
 
-const getTranslations = () => {
-  return fetch(translationsEndpoint, {
+const getTranslations = (lang) => {
+  return fetch(translationsEndpoint + `?lang=${lang}`, {
     method: 'GET',
     headers: header,
   }).then((response) => {
