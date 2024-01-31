@@ -40,7 +40,7 @@ export default function useGetConfig() {
           setConfigResponse(transformedOutput);
         }
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
       setLoading(false);
     });

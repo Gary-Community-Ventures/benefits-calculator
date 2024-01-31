@@ -82,8 +82,7 @@ const initialFormData: FormData = {
 export const Context = React.createContext<WrapperContext>({} as WrapperContext);
 
 const Wrapper = (props: PropsWithChildren<{}>) => {
-  const { configLoading, configResponse } = useGetConfig();
-  const config = configResponse;
+  const { configLoading, configResponse: config } = useGetConfig();
 
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
   const [screenLoading, setScreenLoading] = useState<boolean>(true);
