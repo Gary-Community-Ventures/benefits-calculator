@@ -32,7 +32,7 @@ export default function useGetConfig() {
   const [configResponse, setConfigResponse] = useState<Config | undefined>();
 
   useEffect(() => {
-    getConfig().then((value: ConfigApiResponse[] | undefined) => {
+    getConfig().then((value: ConfigApiResponse[]) => {
       // get data and set loading to false
       try {
         if (value !== undefined) {
