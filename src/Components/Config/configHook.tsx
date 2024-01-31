@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { configEndpoint, header } from '../../apiCalls';
 
-import { ConfigApiItem } from '../../Types/Config';
+import { ConfigApiResponse } from '../../Types/Config';
 import { Config } from '../../Types/Config';
 
-function transformConfigResponse(configResponse: ConfigApiItem[]): Config {
+function transformConfigResponse(configResponse: ConfigApiResponse[]): Config {
   const output: Config = {};
 
   configResponse.forEach((item) => {
@@ -32,12 +32,13 @@ export default function useGetConfig() {
   const [configResponse, setConfigResponse] = useState<Config | undefined>();
 
   useEffect(() => {
-    getConfig().then((value: Config | undefined) => {
+    getConfig().then((value: ConfigApiResponse[] | undefined) => {
       // get data and set loading to false
       try {
-        const configData = Array.isArray(value) && value[0]?.data;
-        const transformedOutput: Config = transformConfigResponse(configData);
-        setConfigResponse(transformedOutput);
+        if (value !== undefined) {
+          const transformedOutput: Config = transformConfigResponse(value);
+          setConfigResponse(transformedOutput);
+        }
       } catch (e) {
         console.log(e);
       }

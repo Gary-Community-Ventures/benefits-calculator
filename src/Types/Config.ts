@@ -1,8 +1,10 @@
 import { ApiIncome } from './ApiFormData';
 
-export interface ConfigApiItem {
+export interface ConfigApiResponse {
+  id: number;
   name: string;
-  data: number[] | Record<string, any>;
+  data: Record<string, any>; // defining as 'any' for now. should be redefined once API response model is finalized
+  active: boolean;
 }
 
 export type Config = Record<string, number[] | Record<string, any>>;
