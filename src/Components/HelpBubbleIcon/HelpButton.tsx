@@ -1,7 +1,7 @@
 import { IconButton } from '@mui/material';
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { HelpBubbleIcon } from './helpBubbleIcon.tsx';
+import { ReactComponent as HelpBubble } from '../../Assets/helpBubble.svg';
 
 const HelpButton = ({
   className,
@@ -11,7 +11,7 @@ const HelpButton = ({
 }: {
   className?: string;
   helpText: string;
-  helpId?: string;
+  helpId: string;
   isVisible: boolean;
 }) => {
   const [showHelpText, setShowHelpText] = useState(false);
@@ -24,7 +24,7 @@ const HelpButton = ({
     isVisible && (
       <>
         <IconButton onClick={handleClick}>
-          <HelpBubbleIcon />
+          <HelpBubble style={{ height: '20px', width: '20px' }} />
         </IconButton>
         <p className={`${className} question-description help-text`}>
           {showHelpText && <FormattedMessage id={helpId} defaultMessage={helpText} />}

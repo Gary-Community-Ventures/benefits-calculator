@@ -29,7 +29,7 @@ const CheckboxGroup = ({ options, householdData, setHouseholdData, index }) => {
               checked={householdData[optionKey]}
               onChange={handleCheckboxChange}
               name={optionKey}
-              sx={{ marginTop: -1 }} //remove this line to allign vetically all checkboxes and labels
+              sx={{ marginTop: -1 }}
             />
           }
           label={label}
