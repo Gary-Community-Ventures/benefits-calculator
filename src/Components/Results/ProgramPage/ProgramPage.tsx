@@ -87,14 +87,11 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       <section className="required-docs">
         <h3>Required Documents Checklist</h3>
         <ul className="required-docs-list">
-          <li>a</li>
-          <li>b</li>
-          <li>c</li>
-          {/* {program.documents.map((document, index) => (
+          {program.documents.map((document, index) => (
             <li key={index}>
               <ResultsTranslate translation={document} />
             </li>
-          ))} */}
+          ))}
         </ul>
       </section>
 
