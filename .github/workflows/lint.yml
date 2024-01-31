@@ -2,7 +2,7 @@ name: Lint
 
 on:
   # Trigger the workflow on pull request,
-  # but only for the main branch
+  # for the main and dev branches
   pull_request:
     branches:
       - main
