@@ -9,7 +9,6 @@ on:
 
 jobs:
   check_branch:
-    name: Check branch
     runs-on: ubuntu-latest
 
     steps:
