@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
+import { FormattedMessage } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate';
 
 type ProgramCardProps = {
@@ -9,10 +10,28 @@ type ProgramCardProps = {
 const ProgramCard = ({ program }: ProgramCardProps) => {
   const { uuid } = useParams();
 
+  const estimatedAppTime = program.estimated_application_time;
+  const estimatedSavings = program.estimated_value;
+  const programName = program.name;
+  const programId = program.program_id;
+
   return (
-    <div>
-      <ResultsTranslate translation={program.name} />
-      <Link to={`/${uuid}/results/benefits/${program.program_id}`}>Apply</Link>
+    <div className="result-program-container">
+      <div className="result-program-more-info">
+        <ResultsTranslate translation={programName} />
+        <Link to={`/${uuid}/results/benefits/${programId}`}>More Info</Link>
+      </div>
+      <hr />
+      <div className="result-program-details">
+        <FormattedMessage id="results.estimated_application_time" defaultMessage="Application Time: " />
+        <strong>
+          <ResultsTranslate translation={estimatedAppTime} />
+        </strong>
+      </div>
+      <div className="result-program-details">
+        <FormattedMessage id="results.estimated_application_time" defaultMessage="Estimated Savings: " />
+        <strong>{`$${estimatedSavings}/mo`}</strong>
+      </div>
     </div>
   );
 };

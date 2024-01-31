@@ -117,7 +117,7 @@ const Results = ({ type }: ResultsProps) => {
         <ResultsHeader type={type} />
 
         <ResultsTabs />
-        <Grid container>
+        <Grid container sx={{ p: 2 }}>
           <Grid item xs={12}>
             {type === 'need' ? <Needs /> : <Programs />}
           </Grid>
