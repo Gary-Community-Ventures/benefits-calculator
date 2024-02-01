@@ -284,7 +284,7 @@ const Confirmation = () => {
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button
             aria-label="edit household size"
-            onClick={() => navigate(linkTo, { state: { routedFromConfirmationPg: true } })}
+            onClick={() => navigate(linkTo)}
           >
             <Edit className="edit-button" alt="edit-icon" />
           </button>
