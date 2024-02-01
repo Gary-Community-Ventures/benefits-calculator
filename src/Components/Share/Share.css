@@ -3,6 +3,17 @@ body {
   padding: 0 !important;
 }
 
+button.share-close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+[dir='rtl'] button.share-close-button {
+  left: 0;
+  right: unset;
+}
+
 .container {
   background-color: white;
   position: absolute;
