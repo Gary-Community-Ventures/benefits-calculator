@@ -216,7 +216,9 @@ const App = () => {
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty =
       questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '';
     const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets < 0;
+    const isComingFromConfirmationPg = location.state ? location.state.routedFromConfirmationPg : false;
 
+    // console.log(location.state ?? location.state.routedFromConfirmationPg);
     if (!hasError) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
         return;
@@ -233,10 +235,12 @@ const App = () => {
         const updatedFormData = { ...formData, householdData: updatedHouseholdData };
         updateScreen(uuid, updatedFormData, locale);
         setFormData(updatedFormData);
-        navigate(`/${uuid}/step-${stepId + 1}/1`);
+        isComingFromConfirmationPg
+          ? navigate(`/${uuid}/confirm-information`)
+          : navigate(`/${uuid}/step-${stepId + 1}/1`);
       } else {
         updateScreen(uuid, formData, locale);
-        navigate(`/${uuid}/step-${stepId + 1}`);
+        isComingFromConfirmationPg ? navigate(`/${uuid}/confirm-information`) : navigate(`/${uuid}/step-${stepId + 1}`);
       }
     }
   };
