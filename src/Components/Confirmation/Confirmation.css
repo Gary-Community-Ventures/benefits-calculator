@@ -39,6 +39,11 @@ svg.confirmation-icon circle {
   transform: translate(50%, -50%);
 }
 
+[dir='rtl'] .edit-button {
+  left: 2rem;
+  right: unset;
+}
+
 svg.edit-button path,
 svg.edit-button rect,
 svg.edit-button polygon {

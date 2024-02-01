@@ -8,6 +8,10 @@
   position: relative;
 }
 
+[dir='rtl'] .rtl-mirror {
+  transform: scale(-1);
+}
+
 .benefits-form {
   margin: 0 auto 20px auto;
   justify-content: center;
