@@ -12,8 +12,8 @@ import Needs from './Needs/Needs';
 import Programs from './Programs/Programs';
 import ProgramPage from './ProgramPage/ProgramPage';
 import ResultsTabs from './Tabs/Tabs';
-import MoreHelp from './MoreHelp/MoreHelp';
 import dataLayerPush from '../../Assets/analytics';
+import HelpButton from '../211Button/211Button';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -122,8 +122,10 @@ const Results = ({ type }: ResultsProps) => {
             {type === 'need' ? <Needs /> : <Programs />}
           </Grid>
         </Grid>
-
-        <MoreHelp />
+        <div className="help-text-for-211-button">
+          <h2 className="text-center help-text-for-211-button-font">{`Can't find what you need?`}</h2>
+          <HelpButton />
+        </div>
       </ResultsContext.Provider>
     );
   }

@@ -1,0 +1,38 @@
+.button211 {
+  display: flex;
+  background-color: var(--primary-color);
+  border-radius: 1.8rem;
+  text-align: center;
+  line-height: 20px;
+  color: white !important;
+  align-items: center;
+  line-height: normal;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-decoration: none !important;
+  padding: 0.5rem 2rem;
+  margin: auto;
+}
+
+.button211:hover {
+  background-color: white;
+  color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color);
+}
+
+.hover-button:hover {
+  background-color: white !important;
+}
+
+.help-text-for-211-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.help-text-for-211-button-font {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1.75rem;
+}
