@@ -60,7 +60,13 @@ const IncomeQuestion = ({
 
   const getIncomeStreamNameLabel = (incomeStreamName) => {
     if (incomeStreamName) {
-      return <>({incomeOptions[incomeStreamName]})?</>;
+      return (
+        <>
+          {'('}
+          {incomeOptions[incomeStreamName]}
+          {')'}?
+        </>
+      );
     }
 
     return '?';
@@ -252,21 +258,21 @@ const IncomeQuestion = ({
 
     if (allIncomeSources[index].incomeFrequency === 'hourly') {
       let hourlyFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
-      let hourlyFormattedMsgDefaultMsg = 'What is your hourly rate';
+      let hourlyFormattedMsgDefaultMsg = 'What is your hourly rate ';
 
       if (page !== 1) {
         hourlyFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
-        hourlyFormattedMsgDefaultMsg = 'What is their hourly rate';
+        hourlyFormattedMsgDefaultMsg = 'What is their hourly rate ';
       }
 
       questionHeader = <FormattedMessage id={hourlyFormattedMsgId} defaultMessage={hourlyFormattedMsgDefaultMsg} />;
     } else {
       let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
-      let payPeriodFormattedMsgDefaultMsg = 'How much do you receive before taxes each pay period for';
+      let payPeriodFormattedMsgDefaultMsg = 'How much do you receive before taxes each pay period for ';
 
       if (page !== 1) {
         payPeriodFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-questionLabel';
-        payPeriodFormattedMsgDefaultMsg = 'How much do they receive before taxes each pay period for';
+        payPeriodFormattedMsgDefaultMsg = 'How much do they receive before taxes each pay period for ';
       }
 
       questionHeader = (
@@ -308,10 +314,10 @@ const IncomeQuestion = ({
 
   const createIncomeStreamFrequencyDropdownMenu = (incomeFrequency, index) => {
     let formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel';
-    let formattedMsgDefaultMsg = 'How often are you paid this income';
+    let formattedMsgDefaultMsg = 'How often are you paid this income ';
     if (page !== 1) {
       formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel';
-      formattedMsgDefaultMsg = 'How often are they paid this income';
+      formattedMsgDefaultMsg = 'How often are they paid this income ';
     }
 
     return (
