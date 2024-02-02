@@ -23,6 +23,10 @@
 .option-card-icon {
   height: 4.375rem;
   width: 4.375rem;
+}
+
+.option-card-icon > path,
+.option-card-icon > g > path {
   fill: var(--icon-color);
 }
 

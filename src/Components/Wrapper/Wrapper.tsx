@@ -95,16 +95,14 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   useEffect(() => {
     if (!screenLoading && !translationsLoading && !configLoading) {
       setPageIsLoading(false);
+      return;
     }
+
+    setPageIsLoading(true);
   }, [screenLoading, translationsLoading, configLoading]);
 
-  let [translations, setTranslations] = useState<Record<Language, { [key: string]: string }> | undefined>(undefined);
+  let [translations, setTranslations] = useState<{ Language: { [key: string]: string } } | {}>({});
 
-  useEffect(() => {
-    getTranslations().then((value) => {
-      setTranslations(value);
-    });
-  }, []);
   let defaultLanguage = localStorage.getItem('language') as Language;
 
   const userLanguage = navigator.language.toLowerCase() as Language;
@@ -130,23 +128,33 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const [messages, setMessages] = useState({});
 
   useEffect(() => {
-    if (translations) {
-      localStorage.setItem('language', locale);
+    if (locale in translations) {
+      return;
     }
 
-    if (translations === undefined) {
+    setTranslationsLoading(true);
+    getTranslations(locale).then((value) => {
+      setTranslations({ ...translations, ...value });
+    });
+  }, [locale]);
+
+  useEffect(() => {
+    localStorage.setItem('language', locale);
+
+    if (!(locale in translations)) {
       setMessages({});
       return;
-    } else {
-      setTranslationsLoading(false);
     }
+    setTranslationsLoading(false);
 
     for (const lang of Object.keys(translations) as Language[]) {
       if (locale.toLocaleLowerCase() === lang) {
+        // @ts-ignore
         setMessages(translations[lang]);
         return;
       }
     }
+    // @ts-ignore
     setMessages(translations['en-us'] ?? {});
   }, [locale, translations]);
 
