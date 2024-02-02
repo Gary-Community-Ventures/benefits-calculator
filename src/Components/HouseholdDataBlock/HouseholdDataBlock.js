@@ -24,6 +24,7 @@ import {
 import { getStepNumber } from '../../Assets/stepDirectory';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import './HouseholdDataBlock.css';
+import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -369,13 +370,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         <Box className="section">
           <h2 className="question-label">
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+            <HelpButton
+              isVisible={true}
+              helpText="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
+              helpId="householdDataBlock.createIncomeRadioQuestion-questionDescription"
+            ></HelpButton>
           </h2>
-          <p className="question-description">
-            <FormattedMessage
-              id="householdDataBlock.createIncomeRadioQuestion-questionDescription"
-              defaultMessage="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
-            />
-          </p>
           <HHDataRadiofield componentDetails={radiofieldProps} memberData={memberData} setMemberData={setMemberData} />
         </Box>
       </Box>

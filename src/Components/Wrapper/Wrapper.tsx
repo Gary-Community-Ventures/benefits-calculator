@@ -7,6 +7,8 @@ import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
 import languageOptions, { Language } from '../../Assets/languageOptions';
 
+import useGetConfig from '../Config/configHook';
+
 const initialFormData: FormData = {
   isTest: undefined,
   externalID: undefined,
@@ -80,6 +82,8 @@ const initialFormData: FormData = {
 export const Context = React.createContext<WrapperContext>({} as WrapperContext);
 
 const Wrapper = (props: PropsWithChildren<{}>) => {
+  const { configLoading, configResponse: config } = useGetConfig();
+
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
   const [screenLoading, setScreenLoading] = useState<boolean>(true);
   const [pageIsLoading, setPageIsLoading] = useState<boolean>(true);
@@ -89,13 +93,13 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   };
 
   useEffect(() => {
-    if (!screenLoading && !translationsLoading) {
+    if (!screenLoading && !translationsLoading && !configLoading) {
       setPageIsLoading(false);
       return;
     }
 
     setPageIsLoading(true);
-  }, [screenLoading, translationsLoading]);
+  }, [screenLoading, translationsLoading, configLoading]);
 
   let [translations, setTranslations] = useState<{ Language: { [key: string]: string } } | {}>({});
 
@@ -178,6 +182,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
       value={{
         locale,
         selectLanguage,
+        config,
         formData,
         setFormData,
         theme,
