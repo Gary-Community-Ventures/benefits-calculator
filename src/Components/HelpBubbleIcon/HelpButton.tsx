@@ -1,7 +1,7 @@
 import { IconButton } from '@mui/material';
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { ReactComponent as HelpBubble } from '../../Assets/helpBubble.svg';
+import { ReactComponent as HelpBubble } from '../../Assets/icons/helpBubble.svg';
 
 const HelpButton = ({
   className,
