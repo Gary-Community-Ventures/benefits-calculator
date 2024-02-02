@@ -201,11 +201,11 @@ const IncomeQuestion = ({
 
   const createHoursWorkedTextField = (incomeStreamName, hoursWorked, index) => {
     let formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-youQLabel';
-    let formattedMsgDefaultMsg = 'How many hours do you work per week';
+    let formattedMsgDefaultMsg = 'How many hours do you work per week ';
 
     if (page !== 1) {
       formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-questionLabel';
-      formattedMsgDefaultMsg = 'How many hours do they work per week';
+      formattedMsgDefaultMsg = 'How many hours do they work per week ';
     }
 
     const hoursWorkedChange = (event, index) => {
