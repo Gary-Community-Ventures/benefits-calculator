@@ -82,6 +82,16 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     setMemberData(updatedMemberData);
   }, [memberData.hasIncome]);
 
+  useEffect(() => {
+    //this useEffect solves for the unlikely scenario that the page number is greater than the HHSize or NaN,
+    //it routes the user back to the last valid HHM
+    const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
+    if (isNaN(page) || page < 1 || page > lastMemberPage) {
+      navigate(`/${uuid}/step-${step}/${lastMemberPage}`, { replace: true });
+      return;
+    }
+  }, []);
+
   const createFMInputLabel = (personIndex) => {
     if (personIndex === 1) {
       return <FormattedMessage id="householdDataBlock.createFMInputLabel-headOfHH" defaultMessage="Your Age" />;
