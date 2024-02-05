@@ -37,6 +37,7 @@ const Confirmation = () => {
   const { uuid } = useParams();
   const navigate = useNavigate();
   const intl = useIntl();
+  const locationState = { state: { routedFromConfirmationPg: true } };
 
   const getQuestionUrl = (name) => {
     const stepNumber = getStepNumber(name, formData.immutableReferrer);
@@ -101,7 +102,7 @@ const Confirmation = () => {
             <button
               aria-label="edit household member"
               onClick={() =>
-                navigate(getQuestionUrl('householdData') + `/${i + 1}`, { state: { routedFromConfirmationPg: true } })
+                navigate(getQuestionUrl('householdData') + `/${i + 1}`, locationState)
               }
             >
               <Edit className="edit-button" alt="edit-icon" />
@@ -152,7 +153,7 @@ const Confirmation = () => {
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button
             aria-label="edit expenses"
-            onClick={() => navigate(getQuestionUrl('hasExpenses'), { state: { routedFromConfirmationPg: true } })}
+            onClick={() => navigate(getQuestionUrl('hasExpenses'), locationState)}
           >
             <Edit className="edit-button" alt="edit-icon" />
           </button>
@@ -319,7 +320,7 @@ const Confirmation = () => {
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button
             aria-label="edit household assets"
-            onClick={() => navigate(getQuestionUrl('householdAssets'), { state: { routedFromConfirmationPg: true } })}
+            onClick={() => navigate(getQuestionUrl('householdAssets'), locationState)}
           >
             <Edit className="edit-button" alt="edit-icon" />
           </button>
@@ -355,7 +356,7 @@ const Confirmation = () => {
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button
             aria-label="edit zipcode"
-            onClick={() => navigate(getQuestionUrl('zipcode'), { state: { routedFromConfirmationPg: true } })}
+            onClick={() => navigate(getQuestionUrl('zipcode'), locationState)}
           >
             <Edit className="edit-button" alt="edit-icon" />
           </button>
@@ -391,7 +392,7 @@ const Confirmation = () => {
           <Grid item xs={2} display="flex" justifyContent="flex-end">
             <button
               aria-label="edit referral source"
-              onClick={() => navigate(getQuestionUrl('referralSource'), { state: { routedFromConfirmationPg: true } })}
+              onClick={() => navigate(getQuestionUrl('referralSource'), locationState)}
             >
               <Edit className="edit-button" alt="edit-icon" />
             </button>
@@ -579,7 +580,7 @@ const Confirmation = () => {
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button
             aria-label={ariaLabel}
-            onClick={() => navigate(linkTo, { state: { routedFromConfirmationPg: true } })}
+            onClick={() => navigate(linkTo, locationState)}
           >
             <Edit className="edit-button" alt="edit-icon" />
           </button>
