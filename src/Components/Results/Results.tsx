@@ -122,10 +122,7 @@ const Results = ({ type }: ResultsProps) => {
             {type === 'need' ? <Needs /> : <Programs />}
           </Grid>
         </Grid>
-        <div className="help-text-for-211-button">
-          <h2 className="text-center help-text-for-211-button-font">{`Can't find what you need?`}</h2>
-          <HelpButton />
-        </div>
+        <HelpButton />
       </ResultsContext.Provider>
     );
   }
