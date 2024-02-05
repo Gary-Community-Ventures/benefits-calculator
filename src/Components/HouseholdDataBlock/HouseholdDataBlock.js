@@ -82,14 +82,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     setMemberData(updatedMemberData);
   }, [memberData.hasIncome]);
 
-  useEffect(() => {
-    const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
-    if (isNaN(page) || page < 1 || page >= lastMemberPage) {
-      navigate(`/${uuid}/step-${step}/${lastMemberPage}`, { replace: true });
-      return;
-    }
-  }, []);
-
   const createFMInputLabel = (personIndex) => {
     if (personIndex === 1) {
       return <FormattedMessage id="householdDataBlock.createFMInputLabel-headOfHH" defaultMessage="Your Age" />;
