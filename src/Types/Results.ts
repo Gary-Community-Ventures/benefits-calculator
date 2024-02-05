@@ -30,6 +30,7 @@ export type Program = {
   apply_button_link: Translation;
   legal_status_required: string[];
   category: Translation;
+  warning: Translation;
   eligible: boolean;
   failed_tests: TestMessage[];
   passed_tests: TestMessage[];
@@ -45,6 +46,7 @@ export type UrgentNeed = {
   description: Translation;
   link: Translation;
   type: Translation;
+  warning: Translation;
   phone_number: string;
 };
 
