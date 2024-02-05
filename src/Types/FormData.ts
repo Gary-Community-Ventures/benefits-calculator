@@ -116,8 +116,8 @@ export interface Conditions {
   longTermDisability: boolean;
 }
 
-  export const isCustomTypedLocationState = (
-    locationState: unknown,
-  ): locationState is { routedFromConfirmationPg: boolean } => {
-    return typeof locationState === 'object' && locationState !== null && 'routedFromConfirmationPg' in locationState;
-  };
+export const isCustomTypedLocationState = (
+  locationState: unknown,
+): locationState is { routedFromConfirmationPg: boolean } => {
+  return typeof locationState === 'object' && locationState !== null && 'routedFromConfirmationPg' in locationState;
+};

@@ -100,7 +100,9 @@ const Confirmation = () => {
           <Grid item xs={2} display="flex" justifyContent="flex-end">
             <button
               aria-label="edit household member"
-              onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`, { state: { routedFromConfirmationPg: true } })}
+              onClick={() =>
+                navigate(getQuestionUrl('householdData') + `/${i + 1}`, { state: { routedFromConfirmationPg: true } })
+              }
             >
               <Edit className="edit-button" alt="edit-icon" />
             </button>
@@ -282,10 +284,7 @@ const Confirmation = () => {
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button
-            aria-label="edit household size"
-            onClick={() => navigate(linkTo)}
-          >
+          <button aria-label="edit household size" onClick={() => navigate(linkTo)}>
             <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>

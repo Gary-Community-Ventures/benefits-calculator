@@ -22,7 +22,7 @@ import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
 import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
-import { isCustomTypedLocationState } from './Types/FormData.js';
+import { isCustomTypedLocationState } from './Types/FormData.ts';
 import './App.css';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
@@ -217,7 +217,9 @@ const App = () => {
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty =
       questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '';
     const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets < 0;
-    const isComingFromConfirmationPg = isCustomTypedLocationState(location.state) ? location.state.routedFromConfirmationPg : false;
+    const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
+      ? location.state.routedFromConfirmationPg
+      : false;
 
     if (!hasError) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
@@ -253,7 +255,9 @@ const App = () => {
   };
 
   const handleExpenseSourcesSubmit = (validatedExpenseSources: Expense[], stepId: number, uuid: string) => {
-    const isComingFromConfirmationPg = isCustomTypedLocationState(location.state) ? location.state.routedFromConfirmationPg : false;
+    const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
+      ? location.state.routedFromConfirmationPg
+      : false;
     const updatedFormData = { ...formData, expenses: validatedExpenseSources };
     updateScreen(uuid, updatedFormData, locale);
     setFormData(updatedFormData);
