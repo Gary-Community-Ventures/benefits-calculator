@@ -13,7 +13,7 @@ import Programs from './Programs/Programs';
 import ProgramPage from './ProgramPage/ProgramPage';
 import ResultsTabs from './Tabs/Tabs';
 import dataLayerPush from '../../Assets/analytics';
-import HelpButton from '../211Button/211Button';
+import HelpButton from './211Button/211Button';
 
 type WrapperResultsContext = {
   programs: Program[];
