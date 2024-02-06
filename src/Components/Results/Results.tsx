@@ -12,14 +12,17 @@ import Needs from './Needs/Needs';
 import Programs from './Programs/Programs';
 import ProgramPage from './ProgramPage/ProgramPage';
 import ResultsTabs from './Tabs/Tabs';
+import MoreHelp from './MoreHelp/MoreHelp';
+import NavigatorPage from './NavigatorPage/NavigatorPage';
+import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
 
 type WrapperResultsContext = {
   programs: Program[];
   needs: UrgentNeed[];
-  filters: string[];
-  setFilters: (newFilters: string[]) => void;
+  filtersChecked: Record<CitizenLabels, boolean>;
+  setFiltersChecked: (newFiltersChecked: Record<CitizenLabels, boolean>) => void;
 };
 
 type ResultsProps = {
@@ -76,11 +79,29 @@ const Results = ({ type }: ResultsProps) => {
     fetchResults();
   }, []);
 
-  const [filters, setFilters] = useState<string[]>(['citizen']);
+  const [filtersChecked, setFiltersChecked] = useState<Record<CitizenLabels, boolean>>({
+    citizen: true,
+    non_citizen: false,
+    green_card: false,
+    refugee: false,
+    gc_5plus: false,
+    gc_18plus_no5: false,
+    gc_under18_no5: false,
+    other: false,
+    otherWithWorkPermission: false,
+    otherHealthCareUnder19: false,
+    otherHealthCarePregnant: false,
+  });
   const [programs, setPrograms] = useState<Program[]>([]);
   const [needs, setNeeds] = useState<UrgentNeed[]>([]);
 
   useEffect(() => {
+    const filtersCheckedStrArr = Object.entries(filtersChecked)
+      .filter((filterKeyValPair) => {
+        return filterKeyValPair[1];
+      })
+      .map((filteredKeyValPair) => filteredKeyValPair[0]);
+
     if (apiResults === undefined) {
       setNeeds([]);
       setPrograms([]);
@@ -90,11 +111,13 @@ const Results = ({ type }: ResultsProps) => {
     setNeeds(apiResults.urgent_needs);
     setPrograms(
       apiResults.programs.filter((program) => {
-        return program.legal_status_required.some((status) => filters.includes(status)) && program.eligible;
+        return (
+          program.legal_status_required.some((status) => filtersCheckedStrArr.includes(status)) && program.eligible
+        );
       }),
     );
     setLoading(false);
-  }, [filters, apiResults]);
+  }, [filtersChecked, apiResults]);
 
   if (loading) {
     return (
@@ -110,8 +133,8 @@ const Results = ({ type }: ResultsProps) => {
         value={{
           programs,
           needs,
-          filters,
-          setFilters,
+          filtersChecked,
+          setFiltersChecked,
         }}
       >
         <ResultsHeader type={type} />
