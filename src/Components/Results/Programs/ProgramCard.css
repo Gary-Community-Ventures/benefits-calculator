@@ -51,6 +51,18 @@
   font: Open Sans, sans-serif;
 }
 
+.new-program-flag {
+  display: flex;
+  font-weight: bold;
+  font-family: 'Roboto Slab', serif;
+  background-color: #00b213;
+  padding-left: 0.5rem;
+  color: #fff;
+  width: 6.5rem;
+  border-radius: 0 0 1rem 0;
+  font-size: 0.8rem;
+}
+
 @media (min-width: 775px) {
   .results-header-programs-count-text {
     height: 3rem;
