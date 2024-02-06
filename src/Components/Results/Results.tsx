@@ -140,7 +140,6 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
       >
         <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
         <ResultsTabs />
-        {type === 'need' ? <Needs /> : <Programs />}
         <Grid container sx={{ p: 2 }}>
           <Grid item xs={12}>
             {type === 'need' ? <Needs /> : <Programs />}
