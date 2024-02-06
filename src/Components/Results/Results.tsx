@@ -7,7 +7,7 @@ import { getEligibility } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import { Navigate, useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
-import ResultsHeader from './Header/Header';
+import ResultsHeader from './ResultsHeader/ResultsHeader';
 import Needs from './Needs/Needs';
 import Programs from './Programs/Programs';
 import ProgramPage from './ProgramPage/ProgramPage';
@@ -26,7 +26,8 @@ type WrapperResultsContext = {
 };
 
 type ResultsProps = {
-  type: 'program' | 'need';
+  type: 'program' | 'need' | 'navigator';
+  handleTextfieldChange: (event: Event) => void;
 };
 
 export const ResultsContext = createContext<WrapperResultsContext | undefined>(undefined);
@@ -53,7 +54,7 @@ export function calculateTotalValue(programs: Program[], category: string) {
   return totalValue;
 }
 
-const Results = ({ type }: ResultsProps) => {
+const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   const { locale } = useContext(Context);
   const { uuid, programId } = useParams();
 
@@ -137,9 +138,9 @@ const Results = ({ type }: ResultsProps) => {
           setFiltersChecked,
         }}
       >
-        <ResultsHeader type={type} />
-
+        <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
         <ResultsTabs />
+        {type === 'need' ? <Needs /> : <Programs />}
         <Grid container sx={{ p: 2 }}>
           <Grid item xs={12}>
             {type === 'need' ? <Needs /> : <Programs />}
