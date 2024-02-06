@@ -16,6 +16,7 @@ import MoreHelp from './MoreHelp/MoreHelp';
 import NavigatorPage from './NavigatorPage/NavigatorPage';
 import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
+import HelpButton from './211Button/211Button';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -139,13 +140,12 @@ const Results = ({ type }: ResultsProps) => {
         <ResultsHeader type={type} />
 
         <ResultsTabs />
-        <Grid container>
+        <Grid container sx={{ p: 2 }}>
           <Grid item xs={12}>
             {type === 'need' ? <Needs /> : <Programs />}
           </Grid>
         </Grid>
-
-        <MoreHelp />
+        <HelpButton />
       </ResultsContext.Provider>
     );
   }
