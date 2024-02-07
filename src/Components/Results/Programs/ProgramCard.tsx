@@ -10,21 +10,21 @@ type ProgramCardProps = {
 
 const ProgramCard = ({ program }: ProgramCardProps) => {
   const { uuid } = useParams();
-
   const estimatedAppTime = program.estimated_application_time;
   const estimatedSavings = program.estimated_value;
   const programName = program.name;
   const programId = program.program_id;
-  
+
   return (
     <div className="result-program-container">
-      {/* {program.new && <div className='new-program-flag'>hello</div>} */}
-      <div className='new-program-flag'>
-        <FormattedMessage id="results-new-benefit-flag" defaultMessage="New Benefit" />
-      </div>
+      {program.new && (
+        <div className="new-program-flag">
+          <FormattedMessage id="results-new-benefit-flag" defaultMessage="New Benefit" />
+        </div>
+      )}
       <div className="result-program-more-info">
-          <ResultsTranslate translation={programName} />
-          <Link to={`/${uuid}/results/benefits/${programId}`}>More Info</Link>
+        <ResultsTranslate translation={programName} />
+        <Link to={`/${uuid}/results/benefits/${programId}`}>More Info</Link>
       </div>
       <hr />
       <div className="result-program-details">
