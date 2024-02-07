@@ -97,7 +97,7 @@ export const Filter = () => {
                 onChange={() => handleFilterSelect(citizenshipFCLKey)}
               />
             }
-            className='vertical-align'
+            className="vertical-align"
           />,
         );
       } else if (isSubfilterAndMainFilterIsChecked) {
