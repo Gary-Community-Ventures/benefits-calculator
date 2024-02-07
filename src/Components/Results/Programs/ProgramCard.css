@@ -19,7 +19,7 @@
   font-family: 'Roboto Slab', serif;
   font-weight: 700;
   font-size: 1.25rem;
-  padding: 1rem 2rem;
+  padding: 1.25rem 2rem;
 }
 
 .result-program-more-info a {
@@ -52,7 +52,6 @@
 }
 
 .new-program-flag {
-  display: flex;
   font-weight: bold;
   font-family: 'Roboto Slab', serif;
   background-color: #00b213;
@@ -61,6 +60,9 @@
   width: 6.5rem;
   border-radius: 0 0 1rem 0;
   font-size: 0.8rem;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 @media (min-width: 775px) {
