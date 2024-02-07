@@ -1,19 +1,15 @@
 import { CardContent } from '@mui/material';
 import { useContext } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Context } from '../../Wrapper/Wrapper.tsx';
+import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
+import { useParams } from 'react-router-dom';
 import { calculateTotalValue, useResultsContext } from '../Results.tsx';
+import '../../Results/Results.css';
 
 type ResultsHeaderProps = {
   type: 'program' | 'need';
-};
-
-const Buttons = () => {
-  return (
-    <div>
-      <button>back to screen</button>
-      <button>send results</button>
-    </div>
-  );
+  handleTextfieldChange: (event: Event) => void;
 };
 
 const ProgramsHeader = () => {
@@ -63,10 +59,16 @@ const NeedsHeader = () => {
   );
 };
 
-const ResultsHeader = ({ type }: ResultsHeaderProps) => {
+const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
+  const { uuid } = useParams();
+
   return (
     <>
-      <Buttons />
+      <BackAndSaveButtons
+        handleTextfieldChange={handleTextfieldChange}
+        navigateToLink={`/${uuid}/confirm-information`}
+        BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO SCREENER" />}
+      />
       {type === 'need' ? <NeedsHeader /> : <ProgramsHeader />}
     </>
   );

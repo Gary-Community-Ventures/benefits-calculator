@@ -61,7 +61,7 @@ const EmailResults = forwardRef(function EmailResults(
     const emailProps: TextFieldProps = {
       inputType: 'text',
       inputName: type,
-      inputLabel: intl.formatMessage({ id: inputLabelId, defaultMessage: 'Email' }),
+      inputLabel: intl.formatMessage({ id: inputLabelId, defaultMessage: 'Email my results' }),
       inputError: hasError,
       inputHelperText: helperText,
     };
@@ -165,8 +165,8 @@ const EmailResults = forwardRef(function EmailResults(
 
   const displayCopyResults = () => {
     return (
-      <div className="copy-results-container">
-        <button onClick={copyLink} className="button-and-text">
+      <div className="bottom-margin">
+        <button onClick={copyLink} className="copy-button-and-text">
           {copied ? (
             <CheckIcon sx={{ fontSize: '1.75rem', mr: '.5rem' }} />
           ) : (
@@ -182,17 +182,14 @@ const EmailResults = forwardRef(function EmailResults(
 
   return (
     <div className="email-results-container">
-      <div className="question-buttons">
-        <Snackbar
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          open={state.open}
-          autoHideDuration={6000}
-          onClose={handleClose}
-          message={state.snackbarMessage}
-          action={action}
-          sx={{ mb: -2, flexWrap: 'nowrap' }}
-        />
-      </div>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        open={state.open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={state.snackbarMessage}
+        action={action}
+      />
       <IconButton
         aria-label="close"
         onClick={close}
@@ -204,54 +201,52 @@ const EmailResults = forwardRef(function EmailResults(
       >
         <CloseIcon />
       </IconButton>
-      <h2 className="sub-header">
-        <FormattedMessage id="emailResults.displaySubheader-text" defaultMessage="Save my results" />
-      </h2>
       {displayCopyResults()}
-      <article className="question-container question-label">
-        <FormattedMessage id="emailResults.enter-emailLabel" defaultMessage="Email my results link" />
-      </article>
-      {createEmailTextfield(
-        'email',
-        emailSubmitted,
-        'signUp.createEmailTextfield-label',
-        emailHasError,
-        displayEmailHelperText,
-      )}
-      <Button
-        sx={{ m: '.5rem' }}
-        variant="contained"
-        onClick={(event) => {
-          setEmailSubmitted(true);
-          handleSubmit('emailScreen');
-        }}
-        id="send-button"
-      >
-        <FormattedMessage id="emailResults.sendButton" defaultMessage="Send" />
-      </Button>
-      {state.error && displayErrorMessage(state.errorMessage)}
-      <article className="question-container question-label">
-        <FormattedMessage id="emailResults.enter-phoneNumberLabel" defaultMessage="Text my results link" />
-      </article>
-      {createEmailTextfield(
-        'phone',
-        phoneSubmitted,
-        'signUp.createPhoneTextfield-label',
-        phoneHasError,
-        displayPhoneHasErrorHelperText,
-      )}
-      <Button
-        sx={{ m: '.5rem' }}
-        variant="contained"
-        onClick={(event) => {
-          setPhoneSubmitted(true);
-          handleSubmit('textScreen');
-        }}
-        id="send-button"
-      >
-        <FormattedMessage id="emailResults.sendButton" defaultMessage="Send" />
-      </Button>
-      {state.error && displayErrorMessage(state.errorMessage)}
+      <div className="flex-direction-column">
+        <article className="bottom-margin">
+          <FormattedMessage id="emailResults.enter-emailLabel" defaultMessage="Email my results" />
+        </article>
+        {createEmailTextfield(
+          'email',
+          emailSubmitted,
+          'signUp.createEmailTextfield-label',
+          emailHasError,
+          displayEmailHelperText,
+        )}
+        <button
+          onClick={(event) => {
+            setEmailSubmitted(true);
+            handleSubmit('emailScreen');
+          }}
+          className="send-button"
+        >
+          <FormattedMessage id="emailResults.sendButton" defaultMessage="Send" />
+        </button>
+        {state.error && displayErrorMessage(state.errorMessage)}
+      </div>
+
+      <div className="flex-direction-column">
+        <article className="bottom-margin">
+          <FormattedMessage id="emailResults.enter-phoneNumberLabel" defaultMessage="Text my results" />
+        </article>
+        {createEmailTextfield(
+          'phone',
+          phoneSubmitted,
+          'signUp.createPhoneTextfield-label',
+          phoneHasError,
+          displayPhoneHasErrorHelperText,
+        )}
+        <button
+          onClick={(event) => {
+            setPhoneSubmitted(true);
+            handleSubmit('textScreen');
+          }}
+          className="send-button"
+        >
+          <FormattedMessage id="emailResults.sendButton" defaultMessage="Send" />
+        </button>
+        {state.error && displayErrorMessage(state.errorMessage)}
+      </div>
     </div>
   );
 });
