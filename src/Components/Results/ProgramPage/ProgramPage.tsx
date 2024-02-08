@@ -1,7 +1,9 @@
-import { useNavigate, Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate.tsx';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
+import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
+import { FormattedMessage } from 'react-intl';
 import './ProgramPage.css';
 
 type ProgramPageProps = {
@@ -23,11 +25,16 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     return <IconComponent />;
   };
 
+  const { uuid } = useParams();
+
   return (
     <article className="program-page-container">
       <section className="back-to-results-button-container">
-        <button>back to results</button> {/*  onClick={() => navigate(`/${uuid}/results/benefits`)} */}
-        <button>save this result</button>
+        <BackAndSaveButtons
+          handleTextfieldChange={() => {}}
+          navigateToLink={`/${uuid}/results/benefits`}
+          BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
+        />
       </section>
 
       <header className="program-header">
@@ -72,12 +79,14 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
             <li key={index} className="apply-info">
               <ResultsTranslate translation={info.name} />
               <address className="address-info">
-                <p>Address bla bla bla</p>
-                <a href={info.assistance_link.default_message}>Visit Website</a>
+                <p>Address info goes here</p> {/* replace with info.address */}
+                <a href={info.assistance_link.default_message}>
+                  <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
+                </a>
                 <br />
-                <a href={`mailto:${info.email}`}>{info.email.default_message}someone@somewhere.com</a>
+                <a href={`mailto:${info.email}`}>{info.email.default_message}</a>
                 <br />
-                <a href={`tel:${info.phone_number}`}>{info.phone_number}123.123.1233</a>
+                <a href={`tel:${info.phone_number}`}>{info.phone_number}</a>
               </address>
             </li>
           ))}
@@ -85,7 +94,9 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       </section>
 
       <section className="required-docs">
-        <h3>Required Documents Checklist</h3>
+        <h3>
+          <FormattedMessage id="results.required-documents-checklist" defaultMessage="Required Documents Checklist" />
+        </h3>
         <ul className="required-docs-list">
           {program.documents.map((document, index) => (
             <li key={index}>

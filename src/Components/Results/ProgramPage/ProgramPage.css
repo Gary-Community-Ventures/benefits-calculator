@@ -7,9 +7,7 @@
 }
 
 .back-to-results-button-container {
-  display: flex;
-  justify-content: space-between;
-  width: 35%;
+  width: 45%;
 }
 
 .program-header {
@@ -108,9 +106,6 @@
   font-weight: 700;
   padding: 3px 15px;
   margin-bottom: 2rem;
-  @media (min-width: 600px) {
-    padding: 3px 5rem;
-  }
 }
 
 .apply-online-button a {
@@ -196,7 +191,26 @@ address {
 .program-description {
   width: 30%;
   margin-bottom: 2rem;
-  @media (max-width: 600px) {
+}
+
+/* DESKTOP */
+@media (max-width: 950px) {
+  .back-to-results-button-container {
+    width: 60%;
+  }
+}
+
+/* TABLET */
+@media (max-width: 750px) {
+  .back-to-results-button-container {
+    width: 100%;
+  }
+
+  .apply-online-button {
+    padding: 3px 8rem;
+  }
+
+  .program-description {
     width: 50%;
   }
 }
