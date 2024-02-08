@@ -2,6 +2,7 @@ import { FormattedMessage } from 'react-intl';
 import { FormattedMessageType } from '../Types/Questions';
 
 export type CitizenLabels =
+  | 'citizen'
   | 'non_citizen'
   | 'green_card'
   | 'refugee'
@@ -13,14 +14,26 @@ export type CitizenLabels =
   | 'otherHealthCareUnder19'
   | 'otherHealthCarePregnant';
 
-export const filterNestedMap = new Map<CitizenLabels, CitizenLabels[]>([
+export type CitizenLabelOptions =
+  | 'non_citizen'
+  | 'green_card'
+  | 'refugee'
+  | 'gc_5plus'
+  | 'gc_18plus_no5'
+  | 'gc_under18_no5'
+  | 'other'
+  | 'otherWithWorkPermission'
+  | 'otherHealthCareUnder19'
+  | 'otherHealthCarePregnant';
+
+export const filterNestedMap = new Map<CitizenLabels, CitizenLabelOptions[]>([
   ['non_citizen', []],
   ['green_card', ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5']],
   ['refugee', []],
   ['other', ['otherWithWorkPermission', 'otherHealthCareUnder19', 'otherHealthCarePregnant']],
 ]);
 
-const citizenshipFilterFormControlLabels: Record<CitizenLabels, FormattedMessageType> = {
+const citizenshipFilterFormControlLabels: Record<CitizenLabelOptions, FormattedMessageType> = {
   non_citizen: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-non_citizen"

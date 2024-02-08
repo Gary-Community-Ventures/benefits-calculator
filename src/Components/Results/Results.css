@@ -50,285 +50,6 @@
   border: 1px solid var(--primary-color);
 }
 
-/* TABLET */
-@media (max-width: 700px) {
-  .results-header-programs-count-text {
-    width: 7rem;
-    height: 7rem;
-    background-color: var(--primary-color);
-    color: white;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    text-align: center;
-    padding-top: 0.75rem;
-    line-height: normal;
-    padding-bottom: 0.5rem;
-    margin-right: 1rem;
-  }
-
-  .column-row {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .results-header {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .results-header-programs-count {
-    font-size: xx-large;
-    font-weight: 700;
-    padding-bottom: 0.25rem;
-    font-family: 'Roboto Slab', serif;
-  }
-
-  .results-header-values {
-    font-family: 'Roboto Slab', serif;
-    font-weight: 700;
-    color: var(--primary-color);
-    border-bottom: 1.5px solid var(--primary-color);
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .results-header-label {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    color: var(--primary-color);
-  }
-
-  .results-header {
-    display: flex;
-    flex-direction: row;
-  }
-}
-
-/* DESKTOP */
-@media (min-width: 701px) {
-  .results-header-programs-count-text {
-    height: 3rem;
-    border-radius: 0.5rem;
-    background-color: var(--primary-color);
-    color: white;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin-right: 1rem;
-    display: flex;
-    align-items: center;
-  }
-
-  .results-data-cell {
-    display: flex;
-    flex-direction: column-reverse;
-    margin: 0.5rem 1rem;
-  }
-
-  .column-row {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .results-header {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .results-header-programs-count {
-    font-size: x-large;
-    font-weight: 700;
-    margin: auto;
-    font-family: 'Roboto Slab', serif;
-    display: flex;
-    margin-right: 0.5rem;
-  }
-
-  .results-header-values {
-    font-family: 'Roboto Slab', serif;
-    font-weight: 700;
-    color: var(--primary-color);
-    border-top: 1.5px solid var(--primary-color);
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .results-header-label {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    color: var(--primary-color);
-  }
-
-  .result-program-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-
-  .result-program-more-info {
-    width: 40%;
-    vertical-align: top;
-    line-height: normal;
-  }
-
-  .result-program-details {
-    font-weight: 400;
-    width: 20%;
-    vertical-align: text-bottom;
-    color: var(--midBlue-color);
-  }
-
-  .result-program-container hr {
-    display: none;
-  }
-
-  .result-program-more-info a {
-    position: absolute;
-    top: 1.1rem;
-    right: 3rem;
-    padding: 0.5rem 1rem;
-  }
-
-  .result-program-details strong {
-    display: inline-block;
-    color: var(--primary-color);
-  }
-}
-
-.info-circle {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-color: var(--primary-color);
-  border-radius: 50%;
-  text-align: center;
-  line-height: 20px;
-  color: white;
-  font-weight: bold;
-}
-
-.info-circle:hover {
-  background-color: transparent;
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-}
-
-/* TABLET */
-@media (max-width: 700px) {
-  .results-header-programs-count-text {
-    width: 7rem;
-    height: 7rem;
-    background-color: var(--primary-color);
-    color: white;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    text-align: center;
-    padding-top: 0.75rem;
-    line-height: normal;
-    padding-bottom: 0.5rem;
-    margin-right: 1rem;
-  }
-
-  .column-row {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .results-header {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .results-header-programs-count {
-    font-size: xx-large;
-    font-weight: 700;
-    padding-bottom: 0.25rem;
-    font-family: 'Roboto Slab', serif;
-  }
-
-  .results-header-values {
-    font-family: 'Roboto Slab', serif;
-    font-weight: 700;
-    color: var(--primary-color);
-    border-bottom: 1.5px solid var(--primary-color);
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .results-header-label {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    color: var(--primary-color);
-  }
-
-  .results-header {
-    display: flex;
-    flex-direction: row;
-  }
-}
-
-/* DESKTOP */
-@media (min-width: 701px) {
-  .results-header-programs-count-text {
-    height: 3rem;
-    border-radius: 0.5rem;
-    background-color: var(--primary-color);
-    color: white;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin-right: 1rem;
-    display: flex;
-    align-items: center;
-  }
-
-  .results-data-cell {
-    display: flex;
-    flex-direction: column-reverse;
-    margin: 0.5rem 1rem;
-  }
-
-  .column-row {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .results-header {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .results-header-programs-count {
-    font-size: x-large;
-    font-weight: 700;
-    margin: auto;
-    font-family: 'Roboto Slab', serif;
-    display: flex;
-    margin-right: 0.5rem;
-  }
-
-  .results-header-values {
-    font-family: 'Roboto Slab', serif;
-    font-weight: 700;
-    color: var(--primary-color);
-    border-top: 1.5px solid var(--primary-color);
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .results-header-label {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    color: var(--primary-color);
-  }
-}
-
 .category-heading-container {
   display: flex;
   justify-content: space-between;
@@ -442,4 +163,153 @@
 
 .result-program-subheader {
   font: Open Sans, sans-serif;
+}
+
+/* DESKTOP */
+@media (min-width: 701px) {
+  .results-header-programs-count-text {
+    height: 3rem;
+    border-radius: 0.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .results-data-cell {
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 0.5rem 1rem;
+  }
+
+  .column-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .results-header {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .results-header-programs-count {
+    font-size: x-large;
+    font-weight: 700;
+    margin: auto;
+    font-family: 'Roboto Slab', serif;
+    display: flex;
+    margin-right: 0.5rem;
+  }
+
+  .results-header-values {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    color: var(--primary-color);
+    border-top: 1.5px solid var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .results-header-label {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: var(--primary-color);
+  }
+
+  .result-program-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .result-program-more-info {
+    width: 40%;
+    vertical-align: top;
+    line-height: normal;
+  }
+
+  .result-program-details {
+    font-weight: 400;
+    width: 20%;
+    vertical-align: text-bottom;
+    color: var(--midBlue-color);
+  }
+
+  .result-program-container hr {
+    display: none;
+  }
+
+  .result-program-more-info a {
+    position: absolute;
+    top: 1.1rem;
+    right: 3rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .result-program-details strong {
+    display: inline-block;
+    color: var(--primary-color);
+  }
+}
+
+/* Please keep all media queries at the end of the file so that the styles cascade correctly */
+/* TABLET */
+@media (max-width: 700px) {
+  .results-header-programs-count-text {
+    width: 7rem;
+    height: 7rem;
+    background-color: var(--primary-color);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 0.75rem;
+    line-height: normal;
+    padding-bottom: 0.5rem;
+    margin-right: 1rem;
+  }
+
+  .column-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .results-header {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .results-header-programs-count {
+    font-size: xx-large;
+    font-weight: 700;
+    padding-bottom: 0.25rem;
+    font-family: 'Roboto Slab', serif;
+  }
+
+  .results-header-values {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    color: var(--primary-color);
+    border-bottom: 1.5px solid var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .results-header-label {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: var(--primary-color);
+  }
+
+  .results-header {
+    display: flex;
+    flex-direction: row;
+  }
 }
