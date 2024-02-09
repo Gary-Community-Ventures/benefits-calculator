@@ -950,5 +950,4 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
   );
 };
 
-console.log('hello');
 export default Results;
