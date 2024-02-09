@@ -13,6 +13,6 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "no-console": 1
+    "no-console": "error"
   }
 }
