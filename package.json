@@ -79,7 +79,17 @@
   },
   "husky": {
     "hooks": {
-        "pre-commit": "git add"
+      "pre-commit": "lint-staged"
     }
-}
+  },
+  "lint-staged": {
+    "concurrent": false,
+    "linters": {
+      "src/**/*.{js,jsx,ts,tsx}": [
+        "prettier --write",
+        "eslint --fix",
+        "git add"
+      ]
+    }
+  }
 }
