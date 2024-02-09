@@ -116,6 +116,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
 
   const [results, setResults] = useState<ResultsState>(initialResults);
 
+  console.log('Hello World');
   type FilterState = {
     citizen: GridFilterItem;
     eligible: GridFilterItem;
