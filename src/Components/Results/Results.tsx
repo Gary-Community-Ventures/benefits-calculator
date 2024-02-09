@@ -187,6 +187,7 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
       { cashOrReducedExp: 0, taxCredits: 0 },
     );
 console.log('hi');
+console.log('hi');
 
     setCitizenshipRowCount(count);
     setTotalCitizenshipDollarValue({
