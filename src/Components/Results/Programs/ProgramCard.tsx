@@ -19,7 +19,9 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
     <div className="result-program-container">
       <div className="result-program-more-info">
         <ResultsTranslate translation={programName} />
-        <Link to={`/${uuid}/results/benefits/${programId}`}>More Info</Link>
+        <Link to={`/${uuid}/results/benefits/${programId}`}>
+          <FormattedMessage id="more-info" defaultMessage="More Info" />
+        </Link>
       </div>
       <hr />
       <div className="result-program-details">

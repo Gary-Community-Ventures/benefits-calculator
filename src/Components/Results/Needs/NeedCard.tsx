@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { UrgentNeed } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate';
 import { acuteConditionResultMapping } from '../../../Assets/acuteConditionOptions';
@@ -29,22 +29,26 @@ const getIconAndDefaultMessage = (
 };
 
 const NeedCard = ({ need }: NeedsCardProps) => {
+  const intl = useIntl();
+
+  const needLink = need.link.default_message;
+  const translatedLink = intl.formatMessage({ id: need.link.label, defaultMessage: needLink });
+
   const needType = need.type.default_message;
   const urgentNeed = getIconAndDefaultMessage(needType, acuteConditionResultMapping);
-  const translateNeed = { default_message: urgentNeed.defaultMessage, label: urgentNeed.defaultMessage };
-  const needLink = need.link.default_message;
+
   return (
     <div className="result-program-container">
       <div className="result-resource-more-info">
         {urgentNeed.icon}
         <span>
-          <ResultsTranslate translation={translateNeed} />
+          <ResultsTranslate translation={need.type} />
           <strong>
             <ResultsTranslate translation={need.name} />
           </strong>
         </span>
-        <a className="resource-more-info" href={needLink} target="_blank" rel="noreferrer">
-          More Info
+        <a className="resource-more-info" href={translatedLink} target="_blank" rel="noreferrer">
+          <FormattedMessage id="more-info" defaultMessage="More Info" />
         </a>
       </div>
     </div>
