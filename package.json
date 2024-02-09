@@ -78,15 +78,9 @@
     "husky": "^9.0.10",
     "lint-staged": "^15.2.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "prettier --write",
-      "eslint --fix",
       "git add"
     ]
   }

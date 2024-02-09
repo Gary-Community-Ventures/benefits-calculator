@@ -48,8 +48,8 @@ import {
   Translation,
   UrgentNeed,
 } from '../../Types/Results.ts';
+import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels.tsx';
 import { citizenshipFilterOperators } from '../FilterSection/CitizenshipPopover.tsx';
-import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import EmailResults from '../EmailResults/EmailResults.tsx';
 import { BrandedResultsHeader } from '../Referrer/Referrer.tsx';
 import BackToScreen from '../BackToScreen/BackToScreen.tsx';
@@ -186,21 +186,12 @@ const Results = ({ handleTextFieldChange }: ResultsProps) => {
       },
       { cashOrReducedExp: 0, taxCredits: 0 },
     );
-console.log('hi');
-console.log('hi');
-console.log('hi');
-console.log('hi');
-console.log('hi');
-console.log('hi');
-console.log('hi');
-console.log('hi');
-console.log('hi');
 
-setCitizenshipRowCount(count);
-setTotalCitizenshipDollarValue({
-cashOrReducedExpenses: totalCashAndTaxCreditValues.cashOrReducedExp,
-taxCredits: totalCashAndTaxCreditValues.taxCredits,
-});
+    setCitizenshipRowCount(count);
+    setTotalCitizenshipDollarValue({
+      cashOrReducedExpenses: totalCashAndTaxCreditValues.cashOrReducedExp,
+      taxCredits: totalCashAndTaxCreditValues.taxCredits,
+    });
 
     //this is for the category header
     if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
