@@ -49,7 +49,7 @@ import {
   UrgentNeed,
 } from '../../Types/Results.ts';
 import { citizenshipFilterOperators } from '../FilterSection/CitizenshipPopover.tsx';
-import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels.tsx';
+import type { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import EmailResults from '../EmailResults/EmailResults.tsx';
 import { BrandedResultsHeader } from '../Referrer/Referrer.tsx';
 import BackToScreen from '../BackToScreen/BackToScreen.tsx';
