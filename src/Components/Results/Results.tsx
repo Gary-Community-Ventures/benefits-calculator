@@ -48,8 +48,8 @@ import {
   Translation,
   UrgentNeed,
 } from '../../Types/Results.ts';
-import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels.tsx';
 import { citizenshipFilterOperators } from '../FilterSection/CitizenshipPopover.tsx';
+import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels.tsx';
 import EmailResults from '../EmailResults/EmailResults.tsx';
 import { BrandedResultsHeader } from '../Referrer/Referrer.tsx';
 import BackToScreen from '../BackToScreen/BackToScreen.tsx';
