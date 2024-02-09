@@ -190,12 +190,13 @@ console.log('hi');
 console.log('hi');
 console.log('hi');
 console.log('hi');
+console.log('hi');
 
-    setCitizenshipRowCount(count);
-    setTotalCitizenshipDollarValue({
-      cashOrReducedExpenses: totalCashAndTaxCreditValues.cashOrReducedExp,
-      taxCredits: totalCashAndTaxCreditValues.taxCredits,
-    });
+setCitizenshipRowCount(count);
+setTotalCitizenshipDollarValue({
+cashOrReducedExpenses: totalCashAndTaxCreditValues.cashOrReducedExp,
+taxCredits: totalCashAndTaxCreditValues.taxCredits,
+});
 
     //this is for the category header
     if (apiRef && apiRef.current && Object.keys(apiRef.current).length) {
