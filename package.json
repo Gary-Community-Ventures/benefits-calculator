@@ -83,13 +83,6 @@
     }
   },
   "lint-staged": {
-    "concurrent": false,
-    "linters": {
-      "src/**/*.{js,jsx,ts,tsx}": [
-        "prettier --write",
-        "eslint --fix",
-        "git add"
-      ]
-    }
+    "*": "prettier --write"
   }
 }
