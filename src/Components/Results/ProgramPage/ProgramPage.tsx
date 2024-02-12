@@ -86,13 +86,13 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
               <li key={index} className="apply-info">
                 {info.name && <ResultsTranslate translation={info.name} />}
                 <div className="address-info">
-                  {info.assistance_link && (
+                  {info.assistance_link.default_message && (
                     <a href={info.assistance_link.default_message}>
                       <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
                       <br />
                     </a>
                   )}
-                  {info.email && (
+                  {info.email.default_message && (
                     <a href={`mailto:${info.email}`}>
                       <ResultsTranslate translation={info.email} />
                       <br />
