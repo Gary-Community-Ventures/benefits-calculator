@@ -55,11 +55,15 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
 
       <section className="estimation">
         <div className="estimation-text">
-          <div className="estimation-text-left">Estimated Annual Value</div>
+          <div className="estimation-text-left">
+            <FormattedMessage id="results.estimated-annual-value" defaultMessage="Estimated Annual Value" />
+          </div>
           <div className="estimation-text-right">${program.estimated_value}</div>
         </div>
         <div className="estimation-text">
-          <div className="estimation-text-left">Estimated Time to Apply</div>
+          <div className="estimation-text-left">
+            <FormattedMessage id="results.estimated-time-to-apply" defaultMessage="Estimated Time to Apply" />
+          </div>
           <div className="estimation-text-right">
             <ResultsTranslate translation={program.estimated_application_time} />
           </div>
@@ -68,44 +72,57 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
 
       <div className="apply-online-button">
         <Link to={program.apply_button_link.default_message} target="_blank" rel="noopener noreferrer">
-          Apply Online
+          <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
         </Link>
       </div>
 
-      <section className="apply-box">
-        <h3>Get Help Applying</h3>
-        <ul className="apply-box-list">
-          {program.navigators.map((info, index) => (
-            <li key={index} className="apply-info">
-              <ResultsTranslate translation={info.name} />
-              <address className="address-info">
-                <p>Address info goes here</p> {/* replace with info.address */}
-                <a href={info.assistance_link.default_message}>
-                  <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
-                </a>
-                <br />
-                <a href={`mailto:${info.email}`}>{info.email.default_message}</a>
-                <br />
-                <a href={`tel:${info.phone_number}`}>{info.phone_number}</a>
-              </address>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="required-docs">
-        <h3>
-          <FormattedMessage id="results.required-documents-checklist" defaultMessage="Required Documents Checklist" />
-        </h3>
-        <ul className="required-docs-list">
-          {program.documents.map((document, index) => (
-            <li key={index}>
-              <ResultsTranslate translation={document} />
-            </li>
-          ))}
-        </ul>
-      </section>
-
+      {program.navigators.length > 0 && (
+        <section className="apply-box">
+          <h3>
+            <FormattedMessage id="results.get-help-applying" defaultMessage="Get Help Applying" />
+          </h3>
+          <ul className="apply-box-list">
+            {program.navigators.map((info, index) => (
+              <li key={index} className="apply-info">
+                {info.name && <ResultsTranslate translation={info.name} />}
+                <div className="address-info">
+                  {info.assistance_link && (
+                    <a href={info.assistance_link.default_message}>
+                      <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
+                      <br />
+                    </a>
+                  )}
+                  {info.email && (
+                    <a href={`mailto:${info.email}`}>
+                      <ResultsTranslate translation={info.email} />
+                      <br />
+                    </a>
+                  )}
+                  {info.phone_number && (
+                    <a href={`tel:${info.phone_number}`}>
+                      <FormattedMessage id="results.phone-number" defaultMessage={info.phone_number} />
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {program.documents.length > 0 && (
+        <section className="required-docs">
+          <h3>
+            <FormattedMessage id="results.required-documents-checklist" defaultMessage="Required Documents Checklist" />
+          </h3>
+          <ul className="required-docs-list">
+            {program.documents.map((document, index) => (
+              <li key={index}>
+                <ResultsTranslate translation={document} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       <section className="program-description">
         <ResultsTranslate translation={program.description} />
       </section>

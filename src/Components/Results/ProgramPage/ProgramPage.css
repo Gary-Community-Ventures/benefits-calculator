@@ -55,14 +55,14 @@
 }
 
 .divider {
-  margin: 5px 0;
-  border-bottom: 1px solid var(--main-header-color);
-  width: 80%;
+  margin: 0.25rem 0;
+  border-bottom: 0.07rem solid var(--main-header-color);
+  width: 40%;
 }
 
 .estimation {
   background-color: var(--main-header-color);
-  padding: 10px;
+  padding: 0.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,8 +77,8 @@
   justify-content: space-between;
   white-space: nowrap;
   width: 100%;
-  padding-bottom: 2px;
-  border-bottom: 1px solid white;
+  padding-bottom: 0.2rem;
+  border-bottom: 0.07rem solid white;
 }
 
 .estimation-text-left {
@@ -104,7 +104,7 @@
   color: white;
   font-size: large;
   font-weight: 700;
-  padding: 3px 15px;
+  padding: 0.07rem 3rem;
   margin-bottom: 2rem;
 }
 
@@ -115,33 +115,30 @@
 
 .apply-online-button:hover {
   background-color: white;
-  border: 1px solid var(--primary-color);
+  border: 0.07rem solid var(--primary-color);
   color: var(--primary-color);
 }
 
 .apply-box {
-  border: 1px solid var(--primary-color);
+  border: 0.07rem solid var(--primary-color);
   background-color: var(--secondary-background-color);
-  display: flex;
-  flex-direction: column;
   height: fit-content;
   padding: 1rem 0;
   margin-bottom: 2rem;
   color: var(--primary-color);
   font-weight: 400;
   width: 25%;
-  min-width: 300px;
-  align-items: center;
+  min-width: 20rem;
+  text-align: center;
 }
 
 .apply-box-list {
   text-align: left;
-  padding: 0;
   list-style-type: none;
   font-size: small;
   font-family: 'Roboto Slab', serif;
   font-weight: 700;
-  margin-left: -6rem;
+  padding-left: 1rem;
 }
 
 .apply-box-list a {
@@ -153,7 +150,7 @@ li.apply-info {
   margin: 1rem 0;
 }
 
-address {
+.address-info {
   display: block;
   font-weight: 400;
   font-family: 'Open Sans', sans-serif;
@@ -166,7 +163,7 @@ address {
 }
 
 .required-docs {
-  border: 1px solid var(--primary-color);
+  border: 0.07rem solid var(--primary-color);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -202,6 +199,10 @@ address {
 
 /* TABLET */
 @media (max-width: 750px) {
+  .divider {
+    width: 70%;
+  }
+
   .back-to-results-button-container {
     width: 100%;
   }
