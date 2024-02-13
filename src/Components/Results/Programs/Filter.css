@@ -34,12 +34,17 @@
   bottom: 0;
 }
 
+.active-blue.MuiButton-root {
+  background-color: rgba(65, 82, 140, 0.14);
+}
+
 .reset-button.MuiButton-root {
   background-color: #ffff;
   color: var(--primary-color);
   border: none;
   font-weight: 400;
 }
+
 
 .subcategory-indentation.MuiFormControlLabel-root {
   margin-left: 1rem;
