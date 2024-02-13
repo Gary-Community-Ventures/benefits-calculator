@@ -32,7 +32,6 @@ export interface Benefits {
   denverpresc: boolean;
   ede: boolean;
   eitc: boolean;
-  erc: boolean;
   lifeline: boolean;
   leap: boolean;
   mydenver: boolean;
@@ -46,6 +45,8 @@ export interface Benefits {
   tanf: boolean;
   upk: boolean;
   wic: boolean;
+  cowap: boolean;
+  ubp: boolean;
 }
 
 export interface HealthInsurance {
@@ -114,3 +115,9 @@ export interface Conditions {
   disabled: boolean;
   longTermDisability: boolean;
 }
+
+export const isCustomTypedLocationState = (
+  locationState: unknown,
+): locationState is { routedFromConfirmationPg: boolean } => {
+  return typeof locationState === 'object' && locationState !== null && 'routedFromConfirmationPg' in locationState;
+};

@@ -1,0 +1,5 @@
+.MuiPaper-root.footer-full-width-container {
+  width: 100%;
+  height: 5rem;
+  background-color: var(--midBlue-color);
+}

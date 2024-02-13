@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import TwoOneOneFooter from '../TwoOneOneComponents/TwoOneOneFooter/TwoOneOneFooter';
 import TwoOneOneHeader from '../TwoOneOneComponents/TwoOneOneHeader/TwoOneOneHeader';
 import { FormattedMessage } from 'react-intl';
+import Footer from '../Footer/Footer';
 
 type HeaderProps = {
   handleTextFieldChange: (event: Event) => void;
@@ -24,7 +25,7 @@ export const BrandedFooter = () => {
   if (formData.immutableReferrer === '211co') {
     return <TwoOneOneFooter />;
   }
-  return <></>;
+  return <Footer />;
 };
 
 type ResultsHeaderProps = {
