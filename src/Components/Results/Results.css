@@ -165,6 +165,56 @@
   font: Open Sans, sans-serif;
 }
 
+/* Near-Term Resources */
+.result-resource-more-info {
+  width: 65%;
+  display: flex;
+  align-items: center;
+  line-height: normal;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 0.25rem;
+}
+
+.result-resource-more-info svg,
+.result-resource-more-info svg path.cls-1 {
+  max-width: 4.5rem;
+  width: 100%;
+  margin-right: 0.25rem;
+  fill: var(--secondary-color);
+}
+
+.result-resource-more-info span {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.result-resource-more-info span strong {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: block;
+  text-transform: capitalize;
+}
+
+.result-resource-more-info a.resource-more-info {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  text-decoration: none;
+  text-wrap: nowrap;
+  font-size: 0.8rem;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--primary-color);
+}
+
 /* DESKTOP */
 @media (min-width: 701px) {
   .results-header-programs-count-text {
