@@ -11,50 +11,40 @@ import { ReactComponent as Support } from './OptionCardIcons/AcuteConditions/sup
 
 export const acuteConditionResultMapping = {
   food: {
-    default_message: 'Food or groceries',
-    api_default_message: 'Food or Groceries',
-    icon: <Food className="option-card-icon" />,
+    api_default_message: 'Food or groceries',
+    icon: <Food />,
   },
   babySupplies: {
-    default_message: 'Baby Supplies',
-    api_default_message: 'Diapers and Other Baby Supplies',
-    icon: <Baby_supplies className="option-card-icon" />,
+    api_default_message: 'Baby Supplies',
+    icon: <Baby_supplies />,
   },
   housing: {
-    default_message: 'Managing housing costs',
-    api_default_message: 'Help with managing your mortgage, rent, or utilities',
-    icon: <Housing className="option-card-icon" />,
+    api_default_message: 'Managing housing costs',
+    icon: <Housing />,
   },
   support: {
-    default_message: 'Behavioral Health',
-    api_default_message:
-      'A challenge that you (or your child) have that you’d be interested in talking with someone outside your household about',
-    icon: <Support className="option-card-icon" />,
+    api_default_message: 'Behavioral Health',
+    icon: <Support />,
   },
   childDevelopment: {
-    default_message: "Child's Development",
-    api_default_message: 'Concern about your baby’s or toddler’s development',
-    icon: <Child_development className="option-card-icon" />,
+    api_default_message: "Child's Development",
+    icon: <Child_development />,
   },
   familyPlanning: {
-    default_message: 'Family planning',
-    api_default_message: 'Family planning or birth control',
-    icon: <Family_planning className="option-card-icon" />,
+    api_default_message: 'Family planning',
+    icon: <Family_planning />,
   },
   jobResources: {
-    default_message: 'Job Training',
-    api_default_message: 'Finding a job',
-    icon: <Job_resources className="option-card-icon" />,
+    api_default_message: 'Job Training',
+    icon: <Job_resources />,
   },
   dentalCare: {
-    default_message: 'Low-cost dental care',
     api_default_message: 'Low-cost dental care',
-    icon: <Dental_care className="option-card-icon" />,
+    icon: <Dental_care />,
   },
   legalServices: {
-    default_message: 'Civil legal needs',
-    api_default_message: 'Free or low-cost help with civil legal needs',
-    icon: <Legal_services className="option-card-icon" />,
+    api_default_message: 'Civil legal needs',
+    icon: <Legal_services />,
   },
 };
 
