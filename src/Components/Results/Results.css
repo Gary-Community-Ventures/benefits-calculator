@@ -23,7 +23,6 @@
   text-decoration: none;
   background-color: #e6e7e8;
   color: var(--primary-color);
-  border-radius: 2rem 2rem 0 0;
 }
 .text-center {
   text-align: center !important;
@@ -302,7 +301,7 @@
     display: flex;
     justify-content: space-between;
   }
-  
+
   .results-header-label {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
