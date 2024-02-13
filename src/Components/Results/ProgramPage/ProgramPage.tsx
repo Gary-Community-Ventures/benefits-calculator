@@ -87,16 +87,20 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                 {info.name && <ResultsTranslate translation={info.name} />}
                 <div className="address-info">
                   {info.assistance_link.default_message && (
-                    <a href={info.assistance_link.default_message}>
-                      <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
+                    <>
+                      <a href={info.assistance_link.default_message}>
+                        <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
+                      </a>
                       <br />
-                    </a>
+                    </>
                   )}
                   {info.email.default_message && (
-                    <a href={`mailto:${info.email}`}>
-                      <ResultsTranslate translation={info.email} />
+                    <>
+                      <a href={`mailto:${info.email}`}>
+                        <ResultsTranslate translation={info.email} />
+                      </a>
                       <br />
-                    </a>
+                    </>
                   )}
                   {info.phone_number && (
                     <a href={`tel:${info.phone_number}`}>
