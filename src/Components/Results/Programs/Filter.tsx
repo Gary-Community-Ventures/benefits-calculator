@@ -144,9 +144,11 @@ export const Filter = () => {
           id="citizenshipPopover"
           open={Boolean(citizenshipPopoverAnchor)}
           onClose={() => {
-            const updatedCitizenshipFilterIsOpen = !citizenshipFilterIsOpen;
+            const updatedCitButtonClass = citButtonClass.replace('flat-white-border-bottom', '');
+
             setCitizenshipPopoverAnchor(null);
-            setCitizenshipFilterIsOpen(updatedCitizenshipFilterIsOpen);
+            setCitizenshipFilterIsOpen(false);
+            setCitButtonClass(updatedCitButtonClass);
           }}
           anchorEl={citizenshipPopoverAnchor}
           anchorOrigin={{
