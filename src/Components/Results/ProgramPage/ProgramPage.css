@@ -10,22 +10,17 @@
   width: 100%;
 }
 
-.program-header {
+.program-icon-and-header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   width: 100%;
 }
 
 .header-icon-box {
-  align-items: center;
   display: flex;
-  justify-content: flex-end;
-  margin-right: 0.5rem;
-  width: 40%;
-}
-
-.header-icon {
+  justify-content: start;
+  align-items: center;
   height: 6rem;
   width: 6rem;
   fill: var(--main-header-color);
@@ -88,7 +83,6 @@
 
 .estimation-text-right {
   text-align: right;
-  margin-left: 5rem;
   font-weight: 400;
 }
 
@@ -197,5 +191,9 @@ li.apply-info {
 
   .program-description {
     width: 85%;
+  }
+
+  .program-icon-and-header {
+    justify-content: center;
   }
 }
