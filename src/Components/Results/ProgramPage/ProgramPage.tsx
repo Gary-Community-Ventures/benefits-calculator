@@ -4,6 +4,7 @@ import ResultsTranslate from '../Translate/Translate.tsx';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
 import { FormattedMessage } from 'react-intl';
+import { formatToUSD } from '../Results.tsx';
 import './ProgramPage.css';
 
 type ProgramPageProps = {
@@ -50,7 +51,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <div className="estimation-text-left">
             <FormattedMessage id="results.estimated-annual-value" defaultMessage="Estimated Annual Value" />
           </div>
-          <div className="estimation-text-right">${program.estimated_value}</div>
+          <div className="estimation-text-right">{formatToUSD(program.estimated_value)}</div>
         </div>
         <div className="estimation-text">
           <div className="estimation-text-left">
