@@ -32,7 +32,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
         </strong>
       </div>
       <div className="result-program-details">
-        <FormattedMessage id="results.estimated_application_time" defaultMessage="Estimated Savings: " />
+        <FormattedMessage id="program-card.estimated-savings" defaultMessage="Estimated Savings: " />
         <strong>
           {formatToUSD(estimatedMonthlySavings)}
           <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
