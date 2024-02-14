@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
+import { formatToUSD } from '../Results';
 import ResultsTranslate from '../Translate/Translate';
 
 type ProgramCardProps = {
@@ -14,10 +15,6 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   const estimatedMonthlySavings = program.estimated_value / 12;
   const programName = program.name;
   const programId = program.program_id;
-
-  const formatToUSD = (num: number) => {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
-  };
 
   return (
     <div className="result-program-container">
@@ -36,7 +33,10 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
       </div>
       <div className="result-program-details">
         <FormattedMessage id="results.estimated_application_time" defaultMessage="Estimated Savings: " />
-        <strong>{formatToUSD(estimatedMonthlySavings)}<FormattedMessage id="program-card-month-txt" defaultMessage="/month" /></strong>
+        <strong>
+          {formatToUSD(estimatedMonthlySavings)}
+          <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
+        </strong>
       </div>
     </div>
   );
