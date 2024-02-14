@@ -7,7 +7,7 @@
 }
 
 .back-to-results-button-container {
-  width: 45%;
+  width: 100%;
 }
 
 .program-header {
@@ -15,7 +15,6 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 1rem 0;
 }
 
 .header-icon-box {
@@ -190,21 +189,10 @@ li.apply-info {
   margin-bottom: 2rem;
 }
 
-/* DESKTOP */
-@media (max-width: 950px) {
-  .back-to-results-button-container {
-    width: 60%;
-  }
-}
-
 /* TABLET */
 @media (max-width: 750px) {
   .divider {
     width: 70%;
-  }
-
-  .back-to-results-button-container {
-    width: 100%;
   }
 
   .program-description {
