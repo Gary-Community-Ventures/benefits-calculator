@@ -11,9 +11,13 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   const { uuid } = useParams();
 
   const estimatedAppTime = program.estimated_application_time;
-  const estimatedSavings = program.estimated_value;
+  const estimatedMonthlySavings = program.estimated_value / 12;
   const programName = program.name;
   const programId = program.program_id;
+
+  const formatToUSD = (num: number) => {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
+  };
 
   return (
     <div className="result-program-container">
@@ -32,7 +36,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
       </div>
       <div className="result-program-details">
         <FormattedMessage id="results.estimated_application_time" defaultMessage="Estimated Savings: " />
-        <strong>{`$${estimatedSavings}/mo`}</strong>
+        <strong>{formatToUSD(estimatedMonthlySavings)}<FormattedMessage id="program-card-month-txt" defaultMessage="/month" /></strong>
       </div>
     </div>
   );
