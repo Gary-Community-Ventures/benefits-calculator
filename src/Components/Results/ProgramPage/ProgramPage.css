@@ -81,7 +81,7 @@
 
 .estimation-text-left {
   text-align: left;
-  margin-right: 1rem;
+  margin-right: 5rem;
 }
 
 .apply-online-button {
@@ -188,16 +188,16 @@ li.apply-info {
 
 /* TABLET */
 @media (max-width: 750px) {
-  .divider {
-    width: 70%;
-  }
-
   .program-description {
     width: 85%;
   }
 
   .program-icon-and-header {
     justify-content: center;
+  }
+
+  .header-text {
+    width: fit-content;
   }
 
   .icon-header-est-values {
@@ -207,5 +207,6 @@ li.apply-info {
 
   .estimation-text-left {
     text-wrap: wrap;
+    margin: 0;
   }
 }
