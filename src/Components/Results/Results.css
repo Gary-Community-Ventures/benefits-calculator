@@ -19,7 +19,7 @@
   display: block;
   text-align: center;
   text-transform: uppercase;
-  padding: 1rem;
+  padding: 0.5rem;
   text-decoration: none;
   background-color: #e6e7e8;
   color: var(--primary-color);
@@ -271,6 +271,10 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     color: var(--primary-color);
+  }
+
+  .results-tab a {
+    padding: 1rem;
   }
 
   .result-program-container {
