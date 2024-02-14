@@ -23,6 +23,7 @@
   text-decoration: none;
   background-color: #e6e7e8;
   color: var(--primary-color);
+  border-radius: 3rem 3rem 0 0;
 }
 .text-center {
   text-align: center !important;
