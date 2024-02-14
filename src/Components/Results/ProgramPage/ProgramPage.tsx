@@ -73,8 +73,10 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
         />
       </section>
-      {displayIconAndHeader(program)}
-      {displayEstimatedValueAndTime(program)}
+      <div className="icon-header-est-values">
+        {displayIconAndHeader(program)}
+        {displayEstimatedValueAndTime(program)}
+      </div>
 
       <div className="apply-online-button">
         <Link to={program.apply_button_link.default_message} target="_blank" rel="noopener noreferrer">

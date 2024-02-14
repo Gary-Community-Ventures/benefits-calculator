@@ -13,7 +13,7 @@
 .program-icon-and-header {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: end;
   width: 100%;
 }
 
@@ -30,7 +30,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 60%;
+  width: 100%;
+  margin-right: 1rem;
 }
 
 .header-text-top {
@@ -38,6 +39,7 @@
   align-items: center;
   color: var(--secondary-color);
   height: 30%;
+  text-wrap: nowrap;
 }
 
 .header-text-bottom {
@@ -46,12 +48,13 @@
   display: flex;
   align-items: center;
   text-transform: capitalize;
+  text-wrap: nowrap;
 }
 
 .divider {
   margin: 0.25rem 0;
   border-bottom: 0.07rem solid var(--main-header-color);
-  width: 40%;
+  width: 100%;
 }
 
 .estimation {
@@ -77,8 +80,8 @@
 }
 
 .estimation-text-left {
-  float: left;
   text-align: left;
+  margin-right: 1rem;
 }
 
 .apply-online-button {
@@ -178,6 +181,11 @@ li.apply-info {
   margin-bottom: 2rem;
 }
 
+.icon-header-est-values {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 /* TABLET */
 @media (max-width: 750px) {
   .divider {
@@ -190,5 +198,14 @@ li.apply-info {
 
   .program-icon-and-header {
     justify-content: center;
+  }
+
+  .icon-header-est-values {
+    display: block;
+    width: 100%;
+  }
+
+  .estimation-text-left {
+    text-wrap: wrap;
   }
 }
