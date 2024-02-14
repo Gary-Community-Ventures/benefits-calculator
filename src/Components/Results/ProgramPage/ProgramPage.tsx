@@ -15,6 +15,7 @@ type IconRendererProps = {
 };
 
 const ProgramPage = ({ program }: ProgramPageProps) => {
+  const { uuid } = useParams();
   const IconRenderer: React.FC<IconRendererProps> = ({ headingType }) => {
     const IconComponent = headingOptionsMappings[headingType];
 
@@ -25,25 +26,12 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     return <IconComponent />;
   };
 
-  const { uuid } = useParams();
-
-  return (
-    <article className="program-page-container">
-      <section className="back-to-results-button-container">
-        <BackAndSaveButtons
-          handleTextfieldChange={() => {}}
-          navigateToLink={`/${uuid}/results/benefits`}
-          BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
-        />
-      </section>
-
-      <header className="program-header">
+  const displayIconAndHeader = (program:Program) => {
+    return (
+      <header className="program-icon-and-header">
         <div className="header-icon-box">
-          <div className="header-icon">
-            <IconRenderer headingType={program.category.default_message} />
-          </div>
+          <IconRenderer headingType={program.category.default_message} />
         </div>
-
         <div className="header-text">
           <p className="header-text-top">
             <ResultsTranslate translation={program.category} />
@@ -52,7 +40,11 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <h1 className="header-text-bottom">{program.name_abbreviated}</h1>
         </div>
       </header>
+    );
+  };
 
+  const displayEstimatedValueAndTime = (program: Program) => {
+    return (
       <section className="estimation">
         <div className="estimation-text">
           <div className="estimation-text-left">
@@ -69,6 +61,20 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           </div>
         </div>
       </section>
+    );
+  }
+
+  return (
+    <article className="program-page-container">
+      <section className="back-to-results-button-container">
+        <BackAndSaveButtons
+          handleTextfieldChange={() => {}}
+          navigateToLink={`/${uuid}/results/benefits`}
+          BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
+        />
+      </section>
+      {displayIconAndHeader(program)}
+      {displayEstimatedValueAndTime(program)}
 
       <div className="apply-online-button">
         <Link to={program.apply_button_link.default_message} target="_blank" rel="noopener noreferrer">
