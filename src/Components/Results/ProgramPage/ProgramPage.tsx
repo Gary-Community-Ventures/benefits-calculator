@@ -48,18 +48,18 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     return (
       <section className="estimation">
         <div className="estimation-text">
-          <div className="estimation-text-left">
+          <article className="estimation-text-left">
             <FormattedMessage id="results.estimated-annual-value" defaultMessage="Estimated Annual Value" />
-          </div>
-          <div className="estimation-text-right">{formatToUSD(program.estimated_value)}</div>
+          </article>
+          <article className="estimation-text-right slim-text">{formatToUSD(program.estimated_value)}</article>
         </div>
         <div className="estimation-text">
-          <div className="estimation-text-left">
+          <article className="estimation-text-left">
             <FormattedMessage id="results.estimated-time-to-apply" defaultMessage="Estimated Time to Apply" />
-          </div>
-          <div>
+          </article>
+          <article className="slim-text">
             <ResultsTranslate translation={program.estimated_application_time} />
-          </div>
+          </article>
         </div>
       </section>
     );
@@ -78,13 +78,12 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         {displayIconAndHeader(program)}
         {displayEstimatedValueAndTime(program)}
       </div>
+      <div className="apply-online-button">
+        <Link to={program.apply_button_link.default_message} target="_blank" rel="noopener noreferrer">
+          <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
+        </Link>
+      </div>
       <div className="content-width">
-        <div className="apply-online-button">
-          <Link to={program.apply_button_link.default_message} target="_blank" rel="noopener noreferrer">
-            <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
-          </Link>
-        </div>
-
         {program.navigators.length > 0 && (
           <section className="apply-box">
             <h3 className="content-header">

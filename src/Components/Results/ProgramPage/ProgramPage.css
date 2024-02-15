@@ -49,6 +49,7 @@
   align-items: center;
   text-transform: capitalize;
   text-wrap: nowrap;
+  font-size: 2rem;
 }
 
 .divider {
@@ -95,6 +96,7 @@
   font-weight: 700;
   padding: 0.25rem 3rem;
   margin-bottom: 2rem;
+  width: 19rem;
 }
 
 .apply-online-button a {
@@ -187,6 +189,10 @@ li.apply-info {
 
 .content-header {
   font-size: 1.25rem;
+}
+
+.slim-text {
+  font-weight: 400;
 }
 
 /* TABLET */
