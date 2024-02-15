@@ -24,7 +24,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   };
   const ConditonalWrapper: React.FC<ConditonalWrapperProps> = ({ condition, wrapper, children }) =>
     condition ? wrapper(children) : children;
-  const isMobile = size.width ? (size.width < 500 ? true : false) : false;
+  const isMobile = size.width ? (size.width <= 700 ? true : false) : false;
 
   return (
     <div className="result-program-container">
@@ -39,8 +39,8 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
           {isMobile && (
             <div className="result-program-more-info-button">
               <Link to={`/${uuid}/results/benefits/${programId}`}>
-          <FormattedMessage id="more-info" defaultMessage="More Info" />
-        </Link>
+                <FormattedMessage id="more-info" defaultMessage="More Info" />
+              </Link>
             </div>
           )}
         </>

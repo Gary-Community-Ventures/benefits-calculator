@@ -410,6 +410,14 @@
     line-height: normal;
     color: #293457;
   }
+
+  .mobile-button-show-hide a {
+    display: none;
+  }
+
+  .result-program-details-wrapper {
+    width: 100%;
+  }
 }
 
 /* MOBILE */
