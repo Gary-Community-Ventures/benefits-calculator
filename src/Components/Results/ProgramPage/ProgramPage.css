@@ -88,14 +88,12 @@
   border-radius: 1.5rem;
   text-align: center;
   margin-top: 2rem;
-  width: 30%;
-  white-space: nowrap;
-  min-width: max-content;
+  width: 75%;
   background-color: var(--primary-color);
   color: white;
   font-size: large;
   font-weight: 700;
-  padding: 0.07rem 3rem;
+  padding: 0.25rem 3rem;
   margin-bottom: 2rem;
 }
 
@@ -118,7 +116,7 @@
   margin-bottom: 2rem;
   color: var(--primary-color);
   font-weight: 400;
-  width: 25%;
+  width: 75%;
   min-width: 20rem;
   text-align: center;
 }
@@ -158,11 +156,11 @@ li.apply-info {
   text-align: center;
   display: flex;
   flex-direction: column;
-  height: fit-content;
   padding: 1rem;
   margin-bottom: 2rem;
   color: var(--primary-color);
   font-weight: 400;
+  width: 75%;
 }
 
 .required-docs-list {
@@ -177,7 +175,7 @@ li.apply-info {
 }
 
 .program-description {
-  width: 30%;
+  width: 75%;
   margin-bottom: 2rem;
 }
 
@@ -208,5 +206,9 @@ li.apply-info {
   .estimation-text-left {
     text-wrap: wrap;
     margin: 0;
+  }
+
+  .apply-box, .required-docs {
+    width: 85%;
   }
 }
