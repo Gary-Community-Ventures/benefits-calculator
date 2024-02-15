@@ -1,17 +1,18 @@
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
-import WarningIcon from '@mui/icons-material/Warning';
+import { ReactComponent as WarningIcon } from '../../Assets/icons/warning.svg';
 import './BackToScreen.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import dataLayerPush from '../../Assets/analytics.ts';
 
 const BackToScreen = () => {
-  const { theme } = useContext(Context);
   const { uuid } = useParams();
+  const { formData } = useContext(Context);
   const navigate = useNavigate();
   return (
     <div className="back-to-screen-message">
-      <WarningIcon color="secondary" />
+      <WarningIcon className="back-to-screen-warning-icon" />
       <p>
         <FormattedMessage
           id="backToScreen.message"
@@ -21,6 +22,7 @@ const BackToScreen = () => {
           className="back-to-screen-message-button"
           onClick={(event) => {
             event.preventDefault();
+            dataLayerPush({ event: 'Back To Screen', referrer: formData.immutableReferrer });
             navigate(`/${uuid}/step-1`);
           }}
         >

@@ -9,12 +9,24 @@
   font-size: 13px;
 }
 
+.twoOneOne-globe-icon {
+  color: var(--primary-color);
+}
+
+.twoOneOne-header-container {
+  background-color: #ffffff;
+  height: 5rem;
+  padding: 0 0.5rem;
+  width: 100%;
+}
+
 #twoOneOne-select-language {
   padding: 0;
   color: #005191;
   font-weight: 600;
-  font-size: 0.79rem;
-  margin-left: 13px;
+  font-size: 0.8125rem;
+  margin-right: 1.5rem;
+  text-transform: uppercase;
 }
 
 #twoOneOne-nav-container {
@@ -55,10 +67,6 @@ button.hamburger-icon {
 
 @media (max-width: 500px) {
   .cobranded-logo {
-    width: 75%;
-  }
-
-  div.twoOneOne-remove-leftMargin {
-    margin-left: 0;
+    width: 90%;
   }
 }

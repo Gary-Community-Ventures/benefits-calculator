@@ -38,7 +38,9 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
           </div>
           {isMobile && (
             <div className="result-program-more-info-button">
-              <Link to={`/${uuid}/results/benefits/${programId}`}>More Info</Link>
+              <Link to={`/${uuid}/results/benefits/${programId}`}>
+          <FormattedMessage id="more-info" defaultMessage="More Info" />
+        </Link>
             </div>
           )}
         </>
