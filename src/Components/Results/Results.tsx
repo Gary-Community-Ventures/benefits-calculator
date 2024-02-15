@@ -12,8 +12,6 @@ import Needs from './Needs/Needs';
 import Programs from './Programs/Programs';
 import ProgramPage from './ProgramPage/ProgramPage';
 import ResultsTabs from './Tabs/Tabs';
-import MoreHelp from './MoreHelp/MoreHelp';
-import NavigatorPage from './NavigatorPage/NavigatorPage';
 import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
