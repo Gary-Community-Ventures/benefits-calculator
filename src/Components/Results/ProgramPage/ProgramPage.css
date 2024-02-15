@@ -88,10 +88,9 @@
   border-radius: 1.5rem;
   text-align: center;
   margin-top: 2rem;
-  width: 75%;
   background-color: var(--primary-color);
   color: white;
-  font-size: large;
+  font-size: 1.25rem;
   font-weight: 700;
   padding: 0.25rem 3rem;
   margin-bottom: 2rem;
@@ -116,8 +115,6 @@
   margin-bottom: 2rem;
   color: var(--primary-color);
   font-weight: 400;
-  width: 75%;
-  min-width: 20rem;
   text-align: center;
 }
 
@@ -160,7 +157,6 @@ li.apply-info {
   margin-bottom: 2rem;
   color: var(--primary-color);
   font-weight: 400;
-  width: 75%;
 }
 
 .required-docs-list {
@@ -175,7 +171,6 @@ li.apply-info {
 }
 
 .program-description {
-  width: 75%;
   margin-bottom: 2rem;
 }
 
@@ -184,12 +179,12 @@ li.apply-info {
   justify-content: space-evenly;
 }
 
+.content-width {
+  width: 75%;
+}
+
 /* TABLET */
 @media (max-width: 750px) {
-  .program-description {
-    width: 85%;
-  }
-
   .program-icon-and-header {
     justify-content: center;
   }
@@ -206,9 +201,5 @@ li.apply-info {
   .estimation-text-left {
     text-wrap: wrap;
     margin: 0;
-  }
-
-  .apply-box, .required-docs {
-    width: 85%;
   }
 }

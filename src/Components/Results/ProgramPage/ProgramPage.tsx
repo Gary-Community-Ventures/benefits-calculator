@@ -78,67 +78,68 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         {displayIconAndHeader(program)}
         {displayEstimatedValueAndTime(program)}
       </div>
+      <div className="content-width">
+        <div className="apply-online-button">
+          <Link to={program.apply_button_link.default_message} target="_blank" rel="noopener noreferrer">
+            <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
+          </Link>
+        </div>
 
-      <div className="apply-online-button">
-        <Link to={program.apply_button_link.default_message} target="_blank" rel="noopener noreferrer">
-          <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
-        </Link>
+        {program.navigators.length > 0 && (
+          <section className="apply-box">
+            <h3>
+              <FormattedMessage id="results.get-help-applying" defaultMessage="Get Help Applying" />
+            </h3>
+            <ul className="apply-box-list">
+              {program.navigators.map((info, index) => (
+                <li key={index} className="apply-info">
+                  {info.name && <ResultsTranslate translation={info.name} />}
+                  <div className="address-info">
+                    {info.assistance_link.default_message && (
+                      <>
+                        <a href={info.assistance_link.default_message}>
+                          <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
+                        </a>
+                        <br />
+                      </>
+                    )}
+                    {info.email.default_message && (
+                      <>
+                        <a href={`mailto:${info.email}`}>
+                          <ResultsTranslate translation={info.email} />
+                        </a>
+                        <br />
+                      </>
+                    )}
+                    {info.phone_number && (
+                      <a href={`tel:${info.phone_number}`}>
+                        <FormattedMessage id="results.phone-number" defaultMessage={info.phone_number} />
+                      </a>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+        {program.documents.length > 0 && (
+          <section className="required-docs">
+            <h3>
+              <FormattedMessage id="results.required-documents-checklist" defaultMessage="Required Documents Checklist" />
+            </h3>
+            <ul className="required-docs-list">
+              {program.documents.map((document, index) => (
+                <li key={index}>
+                  <ResultsTranslate translation={document} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+        <section className="program-description">
+          <ResultsTranslate translation={program.description} />
+        </section>
       </div>
-
-      {program.navigators.length > 0 && (
-        <section className="apply-box">
-          <h3>
-            <FormattedMessage id="results.get-help-applying" defaultMessage="Get Help Applying" />
-          </h3>
-          <ul className="apply-box-list">
-            {program.navigators.map((info, index) => (
-              <li key={index} className="apply-info">
-                {info.name && <ResultsTranslate translation={info.name} />}
-                <div className="address-info">
-                  {info.assistance_link.default_message && (
-                    <>
-                      <a href={info.assistance_link.default_message}>
-                        <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
-                      </a>
-                      <br />
-                    </>
-                  )}
-                  {info.email.default_message && (
-                    <>
-                      <a href={`mailto:${info.email}`}>
-                        <ResultsTranslate translation={info.email} />
-                      </a>
-                      <br />
-                    </>
-                  )}
-                  {info.phone_number && (
-                    <a href={`tel:${info.phone_number}`}>
-                      <FormattedMessage id="results.phone-number" defaultMessage={info.phone_number} />
-                    </a>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-      {program.documents.length > 0 && (
-        <section className="required-docs">
-          <h3>
-            <FormattedMessage id="results.required-documents-checklist" defaultMessage="Required Documents Checklist" />
-          </h3>
-          <ul className="required-docs-list">
-            {program.documents.map((document, index) => (
-              <li key={index}>
-                <ResultsTranslate translation={document} />
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-      <section className="program-description">
-        <ResultsTranslate translation={program.description} />
-      </section>
     </article>
   );
 };
