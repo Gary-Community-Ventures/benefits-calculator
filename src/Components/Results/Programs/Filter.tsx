@@ -40,15 +40,13 @@ export const Filter = () => {
       setFiltersChecked({ ...filtersChecked, citizen: true });
       setCitButtonClass('citizenship-button flat-white-border-bottom');
     }
-
   }, [filtersChecked]);
-
 
   useEffect(() => {
     if (citizenshipFilterIsOpen) {
       setCitButtonClass(citButtonClass + ' flat-white-border-bottom');
     }
-  }, [citizenshipFilterIsOpen])
+  }, [citizenshipFilterIsOpen]);
 
   const handleCitizenshipBtnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setCitizenshipFilterIsOpen(!citizenshipFilterIsOpen);
@@ -113,7 +111,7 @@ export const Filter = () => {
                 onChange={() => handleFilterSelect(citizenshipFCLKey)}
               />
             }
-            className='vertical-align'
+            className="vertical-align"
           />,
         );
       } else if (isSubfilterAndMainFilterIsChecked) {
@@ -166,11 +164,7 @@ export const Filter = () => {
   const displayCitizenshipButton = () => {
     return (
       <section>
-        <Button
-          className={citButtonClass}
-          variant="contained"
-          onClick={(event) => handleCitizenshipBtnClick(event)}
-        >
+        <Button className={citButtonClass} variant="contained" onClick={(event) => handleCitizenshipBtnClick(event)}>
           <FormattedMessage id="filterSection.citizenship" defaultMessage="CITIZENSHIP" />
           {citizenshipFilterIsOpen ? (
             <KeyboardArrowDownIcon className="arrow-margin" />

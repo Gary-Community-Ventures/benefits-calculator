@@ -45,7 +45,6 @@
   font-weight: 400;
 }
 
-
 .subcategory-indentation.MuiFormControlLabel-root {
   margin-left: 1rem;
 }
@@ -71,7 +70,7 @@
 .MuiFormControlLabel-root.vertical-align {
   display: flex;
   align-items: start;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .MuiButtonBase-root.MuiCheckbox-root {
