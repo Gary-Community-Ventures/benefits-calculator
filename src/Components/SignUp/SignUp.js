@@ -149,7 +149,6 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
                       className="sign-up-data-privacy-link"
                       href={privacyLink}
                       target="_blank"
-                      rel="noopener noreferrer"
                     >
                       <FormattedMessage
                         id="signUp.displayDisclosureSection-consentCheckLink"

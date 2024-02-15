@@ -19,7 +19,6 @@ const TwoOneOneFooter = () => {
             href="https://www.211colorado.org/chat/#english"
             underline="none"
             target="_blank"
-            rel="noreferrer"
             aria-label="2-1-1 chat link"
             color="primary"
           >
@@ -42,7 +41,6 @@ const TwoOneOneFooter = () => {
             href="tel:211"
             underline="none"
             target="_blank"
-            rel="noreferrer"
             aria-label="2-1-1 dial link"
             color="primary"
             sx={{ display: 'inline-block' }}
@@ -59,7 +57,6 @@ const TwoOneOneFooter = () => {
             href="tel:866-760-6489"
             underline="none"
             target="_blank"
-            rel="noreferrer"
             aria-label="2-1-1 dial link"
             color="primary"
             sx={{ display: 'inline-block' }}
@@ -96,7 +93,6 @@ const TwoOneOneFooter = () => {
             href="sms:898211"
             underline="none"
             target="_blank"
-            rel="noreferrer"
             aria-label="2-1-1 chat link"
             color="primary"
             className="font-weight"
@@ -152,7 +148,6 @@ const TwoOneOneFooter = () => {
             href="https://www.211colorado.org/terms-of-service/"
             underline="none"
             target="_blank"
-            rel="noreferrer"
             aria-label="2-1-1 terms of service"
             className="privacy-policy-links"
           >
@@ -163,7 +158,6 @@ const TwoOneOneFooter = () => {
             href="https://www.211colorado.org/privacy-policy/"
             underline="none"
             target="_blank"
-            rel="noreferrer"
             aria-label="2-1-1 terms of service"
             className="privacy-policy-links"
           >
@@ -174,7 +168,6 @@ const TwoOneOneFooter = () => {
             href="https://www.myfriendben.org/en/data-privacy-policy"
             underline="none"
             target="_blank"
-            rel="noreferrer"
             aria-label="2-1-1 terms of service"
             className="privacy-policy-links"
           >

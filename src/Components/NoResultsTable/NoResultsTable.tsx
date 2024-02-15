@@ -21,7 +21,6 @@ const NoResultsTable = () => {
         <a
           className="ineligibility-link navigator-info"
           target="_blank"
-          rel="noreferrer"
           href={getReferrer('twoOneOneLink')}
         >
           2-1-1 Colorado

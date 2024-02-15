@@ -79,9 +79,9 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         {displayEstimatedValueAndTime(program)}
       </div>
       <div className="apply-online-button">
-        <Link to={program.apply_button_link.default_message} target="_blank" rel="noopener noreferrer">
+        <a href={program.apply_button_link.default_message} target="_blank">
           <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
-        </Link>
+        </a>
       </div>
       <div className="content-width">
         {program.navigators.length > 0 && (
@@ -96,7 +96,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                   <div className="address-info">
                     {info.assistance_link.default_message && (
                       <>
-                        <a href={info.assistance_link.default_message}>
+                        <a href={info.assistance_link.default_message} target="_blank">
                           <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
                         </a>
                         <br />
