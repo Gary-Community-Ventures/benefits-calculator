@@ -87,7 +87,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
 
         {program.navigators.length > 0 && (
           <section className="apply-box">
-            <h3>
+            <h3 className="content-header">
               <FormattedMessage id="results.get-help-applying" defaultMessage="Get Help Applying" />
             </h3>
             <ul className="apply-box-list">
@@ -124,8 +124,11 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         )}
         {program.documents.length > 0 && (
           <section className="required-docs">
-            <h3>
-              <FormattedMessage id="results.required-documents-checklist" defaultMessage="Required Documents Checklist" />
+            <h3 className="content-header">
+              <FormattedMessage
+                id="results.required-documents-checklist"
+                defaultMessage="Required Documents Checklist"
+              />
             </h3>
             <ul className="required-docs-list">
               {program.documents.map((document, index) => (
