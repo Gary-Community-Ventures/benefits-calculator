@@ -106,11 +106,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
         />
-        <Link
-          href={getLinksForCheckbox().privacyPolicyLink}
-          target="_blank"
-          sx={{ color: theme.secondaryColor }}
-        >
+        <Link href={getLinksForCheckbox().privacyPolicyLink} target="_blank" sx={{ color: theme.secondaryColor }}>
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
         </Link>
         <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />

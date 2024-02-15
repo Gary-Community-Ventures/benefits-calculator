@@ -27,7 +27,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     return <IconComponent />;
   };
 
-  const displayIconAndHeader = (program:Program) => {
+  const displayIconAndHeader = (program: Program) => {
     return (
       <header className="program-icon-and-header">
         <div className="header-icon-box">
@@ -63,7 +63,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         </div>
       </section>
     );
-  }
+  };
 
   return (
     <article className="program-page-container">
