@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate';
+import { useWindowSize } from '@uidotdev/usehooks';
 
 type ProgramCardProps = {
   program: Program;
@@ -9,29 +10,65 @@ type ProgramCardProps = {
 
 const ProgramCard = ({ program }: ProgramCardProps) => {
   const { uuid } = useParams();
+  const size = useWindowSize();
 
   const estimatedAppTime = program.estimated_application_time;
   const estimatedSavings = program.estimated_value;
   const programName = program.name;
   const programId = program.program_id;
 
+  type ConditonalWrapperProps = {
+    children: React.ReactElement;
+    condition: boolean;
+    wrapper: (children: React.ReactElement) => JSX.Element;
+  };
+  const ConditonalWrapper: React.FC<ConditonalWrapperProps> = ({ condition, wrapper, children }) =>
+    condition ? wrapper(children) : children;
+  const isMobile = size.width ? (size.width < 500 ? true : false) : false;
+
   return (
     <div className="result-program-container">
-      <div className="result-program-more-info">
-        <ResultsTranslate translation={programName} />
-        <Link to={`/${uuid}/results/benefits/${programId}`}>More Info</Link>
-      </div>
+      <ConditonalWrapper
+        condition={isMobile}
+        wrapper={(children) => <div className="result-program-more-info-wrapper">{children}</div>}
+      >
+        <>
+          <div className="result-program-more-info">
+            <ResultsTranslate translation={programName} />
+          </div>
+          {isMobile && (
+            <div className="result-program-more-info-button">
+              <Link to={`/${uuid}/results/benefits/${programId}`}>More Info</Link>
+            </div>
+          )}
+        </>
+      </ConditonalWrapper>
       <hr />
-      <div className="result-program-details">
-        <FormattedMessage id="results.estimated_application_time" defaultMessage="Application Time: " />
-        <strong>
-          <ResultsTranslate translation={estimatedAppTime} />
-        </strong>
+      <div className="result-program-details-wrapper">
+        <div className="result-program-details">
+          <div className="result-program-details-box">
+            <FormattedMessage id="results.estimated_application_time" defaultMessage="Application Time: " />
+          </div>
+          <div className="result-program-details-box">
+            <strong>
+              <ResultsTranslate translation={estimatedAppTime} />
+            </strong>
+          </div>
+        </div>
+        <div className="result-program-details">
+          <div className="result-program-details-box">
+            <FormattedMessage id="results.estimated_application_time" defaultMessage="Estimated Savings: " />
+          </div>
+          <div className="result-program-details-box">
+            <strong>{`$${estimatedSavings}/mo`}</strong>
+          </div>
+        </div>
       </div>
-      <div className="result-program-details">
-        <FormattedMessage id="results.estimated_application_time" defaultMessage="Estimated Savings: " />
-        <strong>{`$${estimatedSavings}/mo`}</strong>
-      </div>
+      {!isMobile && (
+        <div className="result-program-more-info-button">
+          <Link to={`/${uuid}/results/benefits/${programId}`}>More Info</Link>
+        </div>
+      )}
     </div>
   );
 };

@@ -114,7 +114,6 @@
 }
 
 .result-program-container {
-  position: relative;
   border: 2px solid var(--secondary-color);
   margin-bottom: 1rem;
 }
@@ -135,27 +134,49 @@
   font-weight: 700;
   font-size: 1.25rem;
   padding: 1rem 2rem;
+  color: #293457;
 }
 
-.result-program-more-info a {
+.result-program-more-info-button {
+  line-height: normal;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: auto;
+  color: #293457;
+}
+
+.result-program-more-info-button a {
+  display: flex;
   color: white;
   text-decoration: none;
   font-size: 0.8rem;
   border-radius: 0.75rem;
-  position: absolute;
-  top: 0.75rem;
-  right: 3rem;
   padding: 0.5rem 0.75rem;
   background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.result-program-details-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 45%;
 }
 
 .result-program-details {
   font-size: 0.9rem;
-  display: inline-block;
+  flex-grow: 1;
+  flex-direction: column;
   font-weight: 100;
   line-height: normal;
   width: 50%;
   padding: 1rem 2rem;
+  color: #293457;
+}
+
+.result-program-details-box {
+  display: flex;
 }
 
 .result-program-details strong {
@@ -164,6 +185,18 @@
 
 .result-program-subheader {
   font: Open Sans, sans-serif;
+}
+
+.result-program-more-info-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.result-program-more-info-button a:hover {
+  background-color: white;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 0.75rem;
 }
 
 /* DESKTOP */
@@ -225,7 +258,6 @@
   }
 
   .result-program-container {
-    position: relative;
     display: flex;
     align-items: center;
   }
@@ -234,6 +266,7 @@
     width: 40%;
     vertical-align: top;
     line-height: normal;
+    color: #293457;
   }
 
   .result-program-details {
@@ -248,9 +281,6 @@
   }
 
   .result-program-more-info a {
-    position: absolute;
-    top: 1.1rem;
-    right: 3rem;
     padding: 0.5rem 1rem;
   }
 
@@ -258,11 +288,15 @@
     display: inline-block;
     color: var(--primary-color);
   }
+
+  .desktop-tablet-button-show-hide a {
+    display: none;
+  }
 }
 
 /* Please keep all media queries at the end of the file so that the styles cascade correctly */
 /* TABLET */
-@media (max-width: 700px) {
+@media only screen and (min-width: 451px) and (max-width: 700px) {
   .results-header-programs-count-text {
     width: 7rem;
     height: 7rem;
@@ -302,7 +336,83 @@
     display: flex;
     justify-content: space-between;
   }
-  
+
+  .results-header-label {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: var(--primary-color);
+  }
+
+  .results-header {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .result-program-more-info-button-show-hide {
+    display: none;
+  }
+
+  .desktop-tablet-button-show-hide a {
+    display: none;
+  }
+  .result-program-more-info {
+    width: 20%;
+    vertical-align: top;
+    line-height: normal;
+    color: #293457;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 450px) {
+  .mobile-button-show-hide a {
+    display: none;
+  }
+
+  .result-program-details-wrapper {
+    width: 100%;
+  }
+
+  .results-header-programs-count-text {
+    width: 7rem;
+    height: 7rem;
+    background-color: var(--primary-color);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 0.75rem;
+    line-height: normal;
+    padding-bottom: 0.5rem;
+    margin-right: 1rem;
+  }
+
+  .column-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .results-header {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .results-header-programs-count {
+    font-size: xx-large;
+    font-weight: 700;
+    padding-bottom: 0.25rem;
+    font-family: 'Roboto Slab', serif;
+  }
+
+  .results-header-values {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    color: var(--primary-color);
+    border-bottom: 1.5px solid var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+  }
+
   .results-header-label {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
