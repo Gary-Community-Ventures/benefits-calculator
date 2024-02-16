@@ -11,7 +11,6 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   const { uuid } = useParams();
 
   const windowWidth = window.innerWidth;
-
   const estimatedAppTime = program.estimated_application_time;
   const estimatedSavings = program.estimated_value;
   const programName = program.name;
