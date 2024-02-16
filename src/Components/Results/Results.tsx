@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import './Results.css';
 import ResultsError from './ResultsError/ResultsError';
 import Loading from './Loading/Loading';
 import { EligibilityResults, Program, UrgentNeed } from '../../Types/Results';
@@ -15,6 +14,7 @@ import ResultsTabs from './Tabs/Tabs';
 import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
+import './Results.css';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -45,10 +45,15 @@ function findProgramById(programs: Program[], id: string) {
 }
 
 export function calculateTotalValue(programs: Program[], category: string) {
-  const totalValue = programs.reduce((eachValue, program) => {
+  let totalValue = programs.reduce((eachValue, program) => {
     if (program.category.default_message === category) eachValue += program.estimated_value;
     return eachValue;
   }, 0);
+
+  if (category === 'Child Care, Youth, and Education' && totalValue > 8640) {
+    totalValue = 8640;
+  }
+  
   return totalValue;
 }
 
