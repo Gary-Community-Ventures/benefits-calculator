@@ -2,7 +2,6 @@ import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate';
-import { useWindowSize } from '@uidotdev/usehooks';
 
 type ProgramCardProps = {
   program: Program;
@@ -10,7 +9,8 @@ type ProgramCardProps = {
 
 const ProgramCard = ({ program }: ProgramCardProps) => {
   const { uuid } = useParams();
-  const size = useWindowSize();
+
+  const windowWidth = window.innerWidth;
 
   const estimatedAppTime = program.estimated_application_time;
   const estimatedSavings = program.estimated_value;
@@ -24,7 +24,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   };
   const ConditonalWrapper: React.FC<ConditonalWrapperProps> = ({ condition, wrapper, children }) =>
     condition ? wrapper(children) : children;
-  const isMobile = size.width ? (size.width <= 700 ? true : false) : false;
+  const isMobile = windowWidth ? (windowWidth <= 700 ? true : false) : false;
 
   return (
     <div className="result-program-container">
@@ -68,7 +68,9 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
       </div>
       {!isMobile && (
         <div className="result-program-more-info-button">
-          <Link to={`/${uuid}/results/benefits/${programId}`}>More Info</Link>
+          <Link to={`/${uuid}/results/benefits/${programId}`}>
+            <FormattedMessage id="more-info" defaultMessage="More Info" />
+          </Link>
         </div>
       )}
     </div>

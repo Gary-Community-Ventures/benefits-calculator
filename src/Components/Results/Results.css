@@ -133,7 +133,7 @@
   font-weight: 700;
   font-size: 1.25rem;
   padding: 1rem 2rem;
-  color: #293457;
+  color: var(--primary-color);
 }
 
 .result-program-more-info-button {
@@ -142,7 +142,7 @@
   font-weight: 700;
   font-size: 1.25rem;
   margin: auto;
-  color: #293457;
+  color: var(--primary-color);
 }
 
 .result-program-more-info-button a {
@@ -171,7 +171,7 @@
   line-height: normal;
   width: 50%;
   padding: 1rem 2rem;
-  color: #293457;
+  color: var(--primary-color);
 }
 
 .result-program-details-box {
@@ -315,7 +315,6 @@
     width: 40%;
     vertical-align: top;
     line-height: normal;
-    color: #293457;
   }
 
   .result-program-details {
@@ -408,7 +407,6 @@
     width: 20%;
     vertical-align: top;
     line-height: normal;
-    color: #293457;
   }
 
   .mobile-button-show-hide a {
