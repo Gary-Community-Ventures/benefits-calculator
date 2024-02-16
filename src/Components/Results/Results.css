@@ -24,7 +24,7 @@
   text-decoration: none;
   background-color: #e6e7e8;
   color: var(--primary-color);
-  border-radius: 2rem 2rem 0 0;
+  border-radius: 1rem 1rem 0 0;
 }
 
 .results-tab a.active {
