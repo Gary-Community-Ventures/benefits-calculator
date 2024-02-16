@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import ErrorIcon from '../../Assets/icons/error-icon.svg';
+import ErrorIcon from '../../../Assets/icons/error-icon.svg';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import './ResultsError.css';

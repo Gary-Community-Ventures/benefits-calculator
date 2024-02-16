@@ -1,0 +1,64 @@
+.results-back-save-buttons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: var(--secondary-color);
+  border-radius: 1.5625rem;
+  padding: 0.05rem 0.75rem;
+  font-weight: bold;
+  font-size: 0.75rem;
+  border: 1px solid var(--secondary-color);
+}
+
+.results-back-save-buttons:hover {
+  color: var(--secondary-color);
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.results-back-save-btn-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 1px;
+}
+
+.save-icon {
+  margin-left: 0.5rem;
+  height: 2rem;
+  width: 2rem;
+}
+
+.results-back-save-buttons:hover .save-icon {
+  fill: var(--secondary-color);
+}
+
+.btn-icon-text-container {
+  display: flex;
+  align-items: center;
+}
+
+.padding-right {
+  padding-right: 0.5rem;
+}
+
+.padding-left {
+  padding-left: 0.5rem;
+}
+
+@media (max-width: 500px) {
+  .results-back-save-btn-container {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .save-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  .results-back-save-buttons {
+    padding: 0.05rem 0.5rem;
+  }
+}

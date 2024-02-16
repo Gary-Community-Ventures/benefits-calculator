@@ -18,12 +18,7 @@ const NoResultsTable = () => {
       </p>
       <p className="noResults-p">
         <FormattedMessage id="noResults.p-Two" defaultMessage="For additional resources, visit " />
-        <a
-          className="ineligibility-link navigator-info"
-          target="_blank"
-          rel="noreferrer"
-          href={getReferrer('twoOneOneLink')}
-        >
+        <a className="ineligibility-link navigator-info" target="_blank" href={getReferrer('twoOneOneLink')}>
           2-1-1 Colorado
         </a>
         <FormattedMessage
