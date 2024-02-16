@@ -53,23 +53,27 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-}
-
-.category-heading-column {
-  flex: 0 0 100%;
-  min-width: 0;
-  text-align: left;
+  justify-content: space-between;
 }
 
 .category-heading-icon {
   display: inline-flex;
 }
 
-.category-heading-column,
 .category-heading-column svg {
   display: inline-flex;
   width: 2.5rem;
   fill: var(--icon-color);
+}
+
+.category-heading-column {
+  min-width: 0;
+  max-width: 100%;
+  width: fit-content;
+  text-align: left;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1rem;
 }
 
 .category-heading-text-style {
