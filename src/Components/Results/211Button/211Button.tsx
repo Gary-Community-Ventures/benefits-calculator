@@ -4,8 +4,8 @@ import './211Button.css';
 const HelpButton = () => {
   return (
     <div className="help-text-for-211-button">
-      <h2 className="text-center help-text-for-211-button-font">{`Can't find what you need?`}</h2>
-      <div>
+      <h2 className="help-text-for-211-button-font">{`Can't find what you need?`}</h2>
+      <div className="hover-button">
         <a
           href="https://www.211colorado.org/"
           className="button211"
