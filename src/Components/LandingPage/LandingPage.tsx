@@ -106,19 +106,13 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
         />
-        <Link
-          href={getLinksForCheckbox().privacyPolicyLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{ color: theme.secondaryColor }}
-        >
+        <Link href={getLinksForCheckbox().privacyPolicyLink} target="_blank" sx={{ color: theme.secondaryColor }}>
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
         </Link>
         <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />
         <Link
           href={getLinksForCheckbox().addTermsConsentToContact}
           target="_blank"
-          rel="noopener noreferrer"
           sx={{ color: theme.secondaryColor }}
         >
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
@@ -159,7 +153,6 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
                 style={{ color: theme.secondaryColor }}
                 href="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
                 target="_blank"
-                rel="noreferrer"
                 onClick={() => {
                   dataLayerPush({
                     event: 'public_charge',

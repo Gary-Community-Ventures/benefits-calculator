@@ -47,7 +47,7 @@ const NeedCard = ({ need }: NeedsCardProps) => {
             <ResultsTranslate translation={need.name} />
           </strong>
         </span>
-        <a className="resource-more-info" href={translatedLink} target="_blank" rel="noreferrer">
+        <a className="resource-more-info" href={translatedLink} target="_blank">
           <FormattedMessage id="more-info" defaultMessage="More Info" />
         </a>
       </div>

@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
+import { formatToUSD } from '../Results';
 import ResultsTranslate from '../Translate/Translate';
 import './ProgramCard.css';
 
@@ -11,7 +12,7 @@ type ProgramCardProps = {
 const ProgramCard = ({ program }: ProgramCardProps) => {
   const { uuid } = useParams();
   const estimatedAppTime = program.estimated_application_time;
-  const estimatedSavings = program.estimated_value;
+  const estimatedMonthlySavings = program.estimated_value / 12;
   const programName = program.name;
   const programId = program.program_id;
 
@@ -36,8 +37,11 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
         </strong>
       </div>
       <div className="result-program-details">
-        <FormattedMessage id="results.estimated_application_time" defaultMessage="Estimated Savings: " />
-        <strong>{`$${estimatedSavings}/mo`}</strong>
+        <FormattedMessage id="program-card.estimated-savings" defaultMessage="Estimated Savings: " />
+        <strong>
+          {formatToUSD(estimatedMonthlySavings)}
+          <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
+        </strong>
       </div>
     </div>
   );

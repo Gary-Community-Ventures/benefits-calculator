@@ -80,10 +80,24 @@
     align-items: center;
   }
 
+  .category-heading-column {
+    flex: 1;
+  }
+
+  h2.category-heading-text-style.normal-weight {
+    display: block;
+    text-align: right;
+    width: 100%;
+  }
+
   .results-data-cell {
     display: flex;
     flex-direction: column-reverse;
     margin: 0.5rem 1rem;
+  }
+
+  .result-program-container:last-child {
+    margin-bottom: 3rem;
   }
 
   .column-row {

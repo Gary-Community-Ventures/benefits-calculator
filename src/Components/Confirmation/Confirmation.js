@@ -101,9 +101,7 @@ const Confirmation = () => {
           <Grid item xs={2} display="flex" justifyContent="flex-end">
             <button
               aria-label="edit household member"
-              onClick={() =>
-                navigate(getQuestionUrl('householdData') + `/${i + 1}`, locationState)
-              }
+              onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`, locationState)}
             >
               <Edit className="edit-button" alt="edit-icon" />
             </button>
@@ -151,10 +149,7 @@ const Confirmation = () => {
           )}
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button
-            aria-label="edit expenses"
-            onClick={() => navigate(getQuestionUrl('hasExpenses'), locationState)}
-          >
+          <button aria-label="edit expenses" onClick={() => navigate(getQuestionUrl('hasExpenses'), locationState)}>
             <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
@@ -354,10 +349,7 @@ const Confirmation = () => {
           </p>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button
-            aria-label="edit zipcode"
-            onClick={() => navigate(getQuestionUrl('zipcode'), locationState)}
-          >
+          <button aria-label="edit zipcode" onClick={() => navigate(getQuestionUrl('zipcode'), locationState)}>
             <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
@@ -578,10 +570,7 @@ const Confirmation = () => {
           )}
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button
-            aria-label={ariaLabel}
-            onClick={() => navigate(linkTo, locationState)}
-          >
+          <button aria-label={ariaLabel} onClick={() => navigate(linkTo, locationState)}>
             <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
