@@ -55,4 +55,5 @@ export type EligibilityResults = {
   urgent_needs: UrgentNeed[];
   screen_id: number;
   default_language: string;
+  missing_programs: boolean;
 };

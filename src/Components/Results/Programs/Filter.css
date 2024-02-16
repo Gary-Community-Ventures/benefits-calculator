@@ -1,6 +1,5 @@
 .filter-section-container {
-  margin: 1rem 0 2rem 0;
-  padding-left: 1rem;
+  margin-bottom: 2rem;
 }
 
 .arrow-margin {
@@ -33,6 +32,10 @@
   z-index: 99999;
   position: absolute;
   bottom: 0;
+}
+
+.active-blue.MuiButton-root {
+  background-color: rgba(65, 82, 140, 0.14);
 }
 
 .reset-button.MuiButton-root {

@@ -32,6 +32,7 @@ const questions: Record<QuestionName, Question> = {
       componentType: 'Textfield',
       inputType: 'text',
       inputName: 'zipcode',
+      numericField: true,
       inputLabel: <FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />,
       inputError: zipcodeHasError,
       inputHelperText: displayZipcodeHelperText,
@@ -84,6 +85,7 @@ const questions: Record<QuestionName, Question> = {
       inputLabel: <FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size" />,
       inputError: householdSizeHasError,
       inputHelperText: displayHouseholdSizeHelperText,
+      numericField: true,
     },
   },
   householdData: {
@@ -152,6 +154,7 @@ const questions: Record<QuestionName, Question> = {
       inputError: householdAssetsHasError,
       inputHelperText: displayHouseholdAssetsHelperText,
       dollarField: true,
+      numericField: true,
     },
   },
   hasBenefits: {

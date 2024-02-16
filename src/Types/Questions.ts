@@ -17,12 +17,16 @@ export type FormattedMessageType = ReactElement;
 
 export type TextFieldDetails = {
   componentType: 'Textfield';
-  inputType: 'text';
+  inputType: string;
+  inputMode?: string;
+  inputPattern?: string;
+  pattern?: string;
   inputName: string;
   inputLabel: FormattedMessageType;
   inputError: ValidationFunction<string>;
   inputHelperText: MessageFunction<string>;
   dollarField?: boolean;
+  numericField?: boolean;
 };
 
 type BasicSelectOptions =

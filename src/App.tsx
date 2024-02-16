@@ -22,6 +22,7 @@ import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
 import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
+import { isCustomTypedLocationState } from './Types/FormData.ts';
 import './App.css';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
@@ -216,6 +217,9 @@ const App = () => {
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty =
       questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '';
     const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets < 0;
+    const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
+      ? location.state.routedFromConfirmationPg
+      : false;
 
     if (!hasError) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
@@ -233,10 +237,12 @@ const App = () => {
         const updatedFormData = { ...formData, householdData: updatedHouseholdData };
         updateScreen(uuid, updatedFormData, locale);
         setFormData(updatedFormData);
-        navigate(`/${uuid}/step-${stepId + 1}/1`);
+        isComingFromConfirmationPg
+          ? navigate(`/${uuid}/confirm-information`)
+          : navigate(`/${uuid}/step-${stepId + 1}/1`);
       } else {
         updateScreen(uuid, formData, locale);
-        navigate(`/${uuid}/step-${stepId + 1}`);
+        isComingFromConfirmationPg ? navigate(`/${uuid}/confirm-information`) : navigate(`/${uuid}/step-${stepId + 1}`);
       }
     }
   };
@@ -249,10 +255,13 @@ const App = () => {
   };
 
   const handleExpenseSourcesSubmit = (validatedExpenseSources: Expense[], stepId: number, uuid: string) => {
+    const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
+      ? location.state.routedFromConfirmationPg
+      : false;
     const updatedFormData = { ...formData, expenses: validatedExpenseSources };
     updateScreen(uuid, updatedFormData, locale);
     setFormData(updatedFormData);
-    navigate(`/${uuid}/step-${stepId + 1}`);
+    isComingFromConfirmationPg ? navigate(`/${uuid}/confirm-information`) : navigate(`/${uuid}/step-${stepId + 1}`);
   };
 
   const handleHouseholdDataSubmit = (memberData: HouseholdData, stepId: number, uuid: string) => {
@@ -261,7 +270,6 @@ const App = () => {
     const updatedFormData = { ...formData, householdData: updatedMembers };
     updateScreen(uuid, updatedFormData, locale);
     setFormData(updatedFormData);
-    navigate(`/${uuid}/step-${stepId + 1}`);
   };
 
   if (pageIsLoading) {
@@ -349,7 +357,9 @@ const App = () => {
             </Route>
             <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
           </Routes>
+          <div className="push"></div>
         </Box>
+
         <BrandedFooter />
       </div>
     </ThemeProvider>

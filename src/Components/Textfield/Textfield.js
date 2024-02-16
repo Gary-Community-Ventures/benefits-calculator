@@ -9,7 +9,7 @@ const StyledTextField = styled(TextField)({
 });
 
 const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submitted }) => {
-  const { inputType, inputName, inputLabel, inputError, inputHelperText, dollarField } = componentDetails;
+  const { inputType, inputName, inputLabel, inputError, inputHelperText, dollarField, numericField } = componentDetails;
   const errorController = useErrorController(inputError, inputHelperText);
   useEffect(() => {
     errorController.setSubmittedCount(submitted);
@@ -34,6 +34,7 @@ const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submi
       required
       error={errorController.showError}
       helperText={errorController.showError && errorController.message(data[inputName])}
+      inputProps={numericField ? { pattern: '[0-9]* .', inputMode: 'decimal' } : {}}
       InputProps={
         (dollarField
           ? {

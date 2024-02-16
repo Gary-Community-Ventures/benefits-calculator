@@ -19,10 +19,16 @@ const housingAndUtilities = {
       defaultMessage="Help with winter heating bills (Low-Income Energy Assistance Program/LEAP)"
     />
   ),
-  erc: (
+  cowap: (
     <FormattedMessage
-      id="housingAndUtilities.erc"
-      defaultMessage="Free home energy upgrades (Energy Resource Center)"
+      id="housingAndUtilities.cowap"
+      defaultMessage="Free home energy upgrades (Weatherization Assistance Program)"
+    />
+  ),
+  ubp: (
+    <FormattedMessage
+      id="housingAndUtilities.ubp"
+      defaultMessage="Help paying utility bills (Colorado Utility Bill Help Program)"
     />
   ),
   coPropTaxRentHeatCreditRebate: (
