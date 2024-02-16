@@ -120,7 +120,7 @@
 }
 
 /* TABLET */
-@media (max-width: 700px) {
+@media (max-width: 775px) {
   .results-header-programs-count-text {
     width: 7rem;
     height: 7rem;
