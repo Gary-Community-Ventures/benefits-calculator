@@ -53,7 +53,7 @@ export function calculateTotalValue(programs: Program[], category: string) {
   if (category === 'Child Care, Youth, and Education' && totalValue > 8640) {
     totalValue = 8640;
   }
-  
+
   return totalValue;
 }
 
