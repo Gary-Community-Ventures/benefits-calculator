@@ -249,7 +249,7 @@
 }
 
 /* DESKTOP */
-@media (min-width: 701px) {
+@media (min-width: 769px) {
   .results-header-programs-count-text {
     height: 3rem;
     border-radius: 0.5rem;
@@ -336,15 +336,11 @@
     display: inline-block;
     color: var(--primary-color);
   }
-
-  .desktop-tablet-button-show-hide a {
-    display: none;
-  }
 }
 
 /* Please keep all media queries at the end of the file so that the styles cascade correctly */
 /* TABLET */
-@media only screen and (min-width: 451px) and (max-width: 700px) {
+@media only screen and (min-width: 481px) and (max-width: 768px) {
   .results-header-programs-count-text {
     width: 7rem;
     height: 7rem;
@@ -396,21 +392,10 @@
     flex-direction: row;
   }
 
-  .result-program-more-info-button-show-hide {
-    display: none;
-  }
-
-  .desktop-tablet-button-show-hide a {
-    display: none;
-  }
   .result-program-more-info {
     width: 20%;
     vertical-align: top;
     line-height: normal;
-  }
-
-  .mobile-button-show-hide a {
-    display: none;
   }
 
   .result-program-details-wrapper {
@@ -419,11 +404,7 @@
 }
 
 /* MOBILE */
-@media (max-width: 450px) {
-  .mobile-button-show-hide a {
-    display: none;
-  }
-
+@media (max-width: 480px) {
   .result-program-details-wrapper {
     width: 100%;
   }

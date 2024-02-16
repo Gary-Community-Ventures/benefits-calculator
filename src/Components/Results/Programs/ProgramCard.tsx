@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate';
+import { useEffect, useState } from 'react';
 
 type ProgramCardProps = {
   program: Program;
@@ -15,6 +16,28 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   const estimatedSavings = program.estimated_value;
   const programName = program.name;
   const programId = program.program_id;
+  const [size, setSize] = useState(windowWidth);
+
+  useEffect(() => {
+    function handleResize() {
+      setSize(window.innerWidth);
+    }
+    // Attach the event listener to the window object
+    window.addEventListener('resize', handleResize);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const isMobile = size < 769 ? true : false;
+
+  useEffect(() => {
+    setSize(windowWidth);
+    console.log(size);
+  }, []);
+  console.log(windowWidth);
 
   type ConditonalWrapperProps = {
     children: React.ReactElement;
@@ -23,8 +46,6 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   };
   const ConditonalWrapper: React.FC<ConditonalWrapperProps> = ({ condition, wrapper, children }) =>
     condition ? wrapper(children) : children;
-  const isMobile = windowWidth ? (windowWidth <= 700 ? true : false) : false;
-
   return (
     <div className="result-program-container">
       <ConditonalWrapper
