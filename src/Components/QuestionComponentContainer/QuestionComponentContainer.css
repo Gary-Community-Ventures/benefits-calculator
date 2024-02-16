@@ -34,6 +34,13 @@ p {
   font-family: 'Open Sans', serif;
 }
 
+.help-text {
+  font-family: 'Open Sans', serif;
+  font-size: 1rem;
+  font-weight: 200;
+  color: black;
+}
+
 .prev-button {
   margin-right: 2.25rem !important;
 }

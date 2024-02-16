@@ -5,16 +5,17 @@ const translationsEndpoint = `${domain}/api/translations/`;
 const screensEndpoint = `${domain}/api/screens/`;
 const userEndpoint = `${domain}/api/users/`;
 const messageEndpoint = `${domain}/api/messages/`;
+export const configEndpoint = `${domain}/api/configuration/`;
 let eligibilityEndpoint = `${domain}/api/eligibility/`;
 
-const header = {
+export const header = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
   Authorization: apiKey,
 };
 
-const getTranslations = () => {
-  return fetch(translationsEndpoint, {
+const getTranslations = (lang) => {
+  return fetch(translationsEndpoint + `?lang=${lang}`, {
     method: 'GET',
     headers: header,
   }).then((response) => {

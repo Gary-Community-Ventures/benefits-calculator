@@ -12,3 +12,10 @@
   font-size: 1rem;
   cursor: pointer;
 }
+
+.back-to-screen-warning-icon {
+  min-width: 2rem;
+  min-height: 2rem;
+  width: 2rem;
+  height: 2rem;
+}

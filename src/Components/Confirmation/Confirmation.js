@@ -19,15 +19,15 @@ import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../..
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Grid from '@mui/material/Grid';
-import { ReactComponent as Edit } from '../../Assets/edit.svg';
-import { ReactComponent as Residence } from '../../Assets/residence.svg';
-import { ReactComponent as Household } from '../../Assets/household.svg';
-import { ReactComponent as Head } from '../../Assets/head.svg';
-import { ReactComponent as Expenses } from '../../Assets/expenses.svg';
-import { ReactComponent as Resources } from '../../Assets/resources.svg';
-import { ReactComponent as Benefits } from '../../Assets/benefits.svg';
-import { ReactComponent as Immediate } from '../../Assets/immediate.svg';
-import { ReactComponent as Referral } from '../../Assets/referral.svg';
+import { ReactComponent as Edit } from '../../Assets/icons/edit.svg';
+import { ReactComponent as Residence } from '../../Assets/icons/residence.svg';
+import { ReactComponent as Household } from '../../Assets/icons/household.svg';
+import { ReactComponent as Head } from '../../Assets/icons/head.svg';
+import { ReactComponent as Expenses } from '../../Assets/icons/expenses.svg';
+import { ReactComponent as Resources } from '../../Assets/icons/resources.svg';
+import { ReactComponent as Benefits } from '../../Assets/icons/benefits.svg';
+import { ReactComponent as Immediate } from '../../Assets/icons/immediate.svg';
+import { ReactComponent as Referral } from '../../Assets/icons/referral.svg';
 import './Confirmation.css';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { House } from '@mui/icons-material';
@@ -37,6 +37,7 @@ const Confirmation = () => {
   const { uuid } = useParams();
   const navigate = useNavigate();
   const intl = useIntl();
+  const locationState = { state: { routedFromConfirmationPg: true } };
 
   const getQuestionUrl = (name) => {
     const stepNumber = getStepNumber(name, formData.immutableReferrer);
@@ -100,7 +101,7 @@ const Confirmation = () => {
           <Grid item xs={2} display="flex" justifyContent="flex-end">
             <button
               aria-label="edit household member"
-              onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`)}
+              onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`, locationState)}
             >
               <Edit className="edit-button" alt="edit-icon" />
             </button>
@@ -148,7 +149,7 @@ const Confirmation = () => {
           )}
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label="edit expenses" onClick={() => navigate(getQuestionUrl('hasExpenses'))}>
+          <button aria-label="edit expenses" onClick={() => navigate(getQuestionUrl('hasExpenses'), locationState)}>
             <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
@@ -312,7 +313,10 @@ const Confirmation = () => {
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label="edit household assets" onClick={() => navigate(getQuestionUrl('householdAssets'))}>
+          <button
+            aria-label="edit household assets"
+            onClick={() => navigate(getQuestionUrl('householdAssets'), locationState)}
+          >
             <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
@@ -345,7 +349,7 @@ const Confirmation = () => {
           </p>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label="edit zipcode" onClick={() => navigate(getQuestionUrl('zipcode'))}>
+          <button aria-label="edit zipcode" onClick={() => navigate(getQuestionUrl('zipcode'), locationState)}>
             <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
@@ -378,7 +382,10 @@ const Confirmation = () => {
             <article className="section-p">{finalReferralSource}</article>
           </Grid>
           <Grid item xs={2} display="flex" justifyContent="flex-end">
-            <button aria-label="edit referral source" onClick={() => navigate(getQuestionUrl('referralSource'))}>
+            <button
+              aria-label="edit referral source"
+              onClick={() => navigate(getQuestionUrl('referralSource'), locationState)}
+            >
               <Edit className="edit-button" alt="edit-icon" />
             </button>
           </Grid>
@@ -563,7 +570,7 @@ const Confirmation = () => {
           )}
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label={ariaLabel} onClick={() => navigate(linkTo)}>
+          <button aria-label={ariaLabel} onClick={() => navigate(linkTo, locationState)}>
             <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
