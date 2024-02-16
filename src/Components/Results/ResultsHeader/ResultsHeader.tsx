@@ -69,7 +69,7 @@ const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
         navigateToLink={`/${uuid}/confirm-information`}
         BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO SCREENER" />}
       />
-      {type === 'need' ? <NeedsHeader /> : <ProgramsHeader />}
+      <div className="results-header-container">{type === 'need' ? <NeedsHeader /> : <ProgramsHeader />}</div>
     </>
   );
 };

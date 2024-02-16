@@ -21,6 +21,7 @@ type WrapperResultsContext = {
   needs: UrgentNeed[];
   filtersChecked: Record<CitizenLabels, boolean>;
   setFiltersChecked: (newFiltersChecked: Record<CitizenLabels, boolean>) => void;
+  missingPrograms: boolean;
 };
 
 type ResultsProps = {
@@ -103,6 +104,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   });
   const [programs, setPrograms] = useState<Program[]>([]);
   const [needs, setNeeds] = useState<UrgentNeed[]>([]);
+  const [missingPrograms, setMissingPrograms] = useState(false);
 
   useEffect(() => {
     const filtersCheckedStrArr = Object.entries(filtersChecked)
@@ -114,6 +116,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     if (apiResults === undefined) {
       setNeeds([]);
       setPrograms([]);
+      setMissingPrograms(false);
       return;
     }
 
@@ -125,6 +128,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
         );
       }),
     );
+    setMissingPrograms(apiResults.missing_programs);
     setLoading(false);
   }, [filtersChecked, apiResults]);
 
@@ -144,6 +148,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
           needs,
           filtersChecked,
           setFiltersChecked,
+          missingPrograms,
         }}
       >
         <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />

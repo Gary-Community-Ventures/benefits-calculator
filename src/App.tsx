@@ -353,6 +353,7 @@ const App = () => {
                 path="results/benefits/:programId/navigators"
                 element={<Results type="navigator" handleTextfieldChange={handleTextfieldChange} />}
               />
+              <Route path="results" element={<Navigate to="benefits" replace />} />
               <Route path="*" element={<Navigate to="/step-1" replace />} />
             </Route>
             <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
