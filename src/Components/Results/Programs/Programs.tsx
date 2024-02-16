@@ -3,9 +3,13 @@ import { useResultsContext } from '../Results';
 import Filter from './Filter';
 import ProgramCard from './ProgramCard';
 import CategoryHeading from '../CategoryHeading/CategoryHeading';
+import { useContext } from 'react';
+import { Context } from '../../Wrapper/Wrapper';
+import BackToScreen from '../../BackToScreen/BackToScreen';
 
 const Programs = () => {
-  const { programs } = useResultsContext();
+  const { formData } = useContext(Context);
+  const { programs, missingPrograms } = useResultsContext();
 
   const categories = programs.reduce((acc: { [key: string]: Program[] }, program) => {
     const category = program.category.default_message;
@@ -20,6 +24,7 @@ const Programs = () => {
 
   return (
     <>
+      {formData.immutableReferrer === 'lgs' && missingPrograms && <BackToScreen />}
       <Filter />
       {Object.entries(categories).map(([category, programs]) => {
         return (
