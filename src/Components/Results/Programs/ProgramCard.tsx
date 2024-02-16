@@ -3,6 +3,7 @@ import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
 import { formatToUSD } from '../Results';
 import ResultsTranslate from '../Translate/Translate';
+import './ProgramCard.css';
 
 type ProgramCardProps = {
   program: Program;
@@ -10,7 +11,6 @@ type ProgramCardProps = {
 
 const ProgramCard = ({ program }: ProgramCardProps) => {
   const { uuid } = useParams();
-
   const estimatedAppTime = program.estimated_application_time;
   const estimatedMonthlySavings = program.estimated_value / 12;
   const programName = program.name;
@@ -18,6 +18,11 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
 
   return (
     <div className="result-program-container">
+      {program.new && (
+        <div className="new-program-flag">
+          <FormattedMessage id="results-new-benefit-flag" defaultMessage="New Benefit" />
+        </div>
+      )}
       <div className="result-program-more-info">
         <ResultsTranslate translation={programName} />
         <Link to={`/${uuid}/results/benefits/${programId}`}>

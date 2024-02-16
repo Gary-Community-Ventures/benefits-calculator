@@ -30,7 +30,10 @@
 }
 
 .help-text-for-211-button-font {
+  display: flex;
+  justify-content: center;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 1.75rem;
+  margin-bottom: 0.5rem;
 }

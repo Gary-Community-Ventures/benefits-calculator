@@ -38,7 +38,7 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
 
   return (
     <div className="category-heading-container">
-      <div className="box-left">
+      <div className="category-heading-column">
         <div className="category-heading-icon" aria-label={`${headingType.default_message} icon`}>
           <IconComponent />
         </div>
