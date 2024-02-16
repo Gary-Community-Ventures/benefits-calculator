@@ -89,6 +89,14 @@
   font-weight: normal;
 }
 
+.results-header-container {
+  height: 9rem;
+}
+
+.results-header {
+  height: 7rem;
+}
+
 .results-needs-header-background {
   background-color: var(--secondary-background-color);
   padding: 1rem;
