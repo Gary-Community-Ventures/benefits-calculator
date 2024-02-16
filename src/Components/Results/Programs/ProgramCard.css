@@ -65,6 +65,11 @@
   left: 0;
 }
 
+h1.header-text-bottom {
+  font-size: 1.5rem;
+  text-wrap: wrap;
+}
+
 @media (min-width: 775px) {
   .results-header-programs-count-text {
     height: 3rem;
