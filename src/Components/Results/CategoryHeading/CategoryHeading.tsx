@@ -5,9 +5,10 @@ import { ReactComponent as Transportation } from '../../../Assets/CategoryHeadin
 import { ReactComponent as TaxCredits } from '../../../Assets/CategoryHeadingIcons/taxCredits.svg';
 import { ReactComponent as CashAssistance } from '../../../Assets/CategoryHeadingIcons/cashAssistant.svg';
 import { ReactComponent as ChildCareYouthEducation } from '../../../Assets/CategoryHeadingIcons/childCareYouthEducation.svg';
-import ResultsTranslate from '../Translate/Translate.tsx';
-import { calculateTotalValue, useResultsContext } from '../Results';
+import { calculateTotalValue, formatToUSD, useResultsContext } from '../Results';
 import { Translation } from '../../../Types/Results.ts';
+import { FormattedMessage } from 'react-intl';
+import ResultsTranslate from '../Translate/Translate.tsx';
 
 export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   'Housing and Utilities': Housing,
@@ -33,11 +34,11 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
     IconComponent = CashAssistance;
   }
 
-  const amount = calculateTotalValue(programs, headingType.default_message);
+  const monthlyCategoryAmt = calculateTotalValue(programs, headingType.default_message) / 12;
 
   return (
     <div className="category-heading-container">
-      <div className="box-left">
+      <div className="category-heading-column">
         <div className="category-heading-icon" aria-label={`${headingType.default_message} icon`}>
           <IconComponent />
         </div>
@@ -46,7 +47,10 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
         </h2>
       </div>
       <div className="box-right">
-        <h2 className="category-heading-text-style normal-weight">${amount}/mo.</h2>
+        <h2 className="category-heading-text-style normal-weight">
+          {formatToUSD(monthlyCategoryAmt)}
+          <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
+        </h2>
       </div>
     </div>
   );

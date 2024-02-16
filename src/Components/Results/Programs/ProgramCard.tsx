@@ -1,8 +1,10 @@
 import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
+import { formatToUSD } from '../Results';
 import ResultsTranslate from '../Translate/Translate';
 import { useEffect, useState } from 'react';
+import './ProgramCard.css';
 
 type ProgramCardProps = {
   program: Program;
@@ -13,7 +15,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
 
   const windowWidth = window.innerWidth;
   const estimatedAppTime = program.estimated_application_time;
-  const estimatedSavings = program.estimated_value;
+  const estimatedMonthlySavings = program.estimated_value / 12;
   const programName = program.name;
   const programId = program.program_id;
   const [size, setSize] = useState(windowWidth);
@@ -48,6 +50,11 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
     condition ? wrapper(children) : children;
   return (
     <div className="result-program-container">
+      {program.new && (
+        <div className="new-program-flag">
+          <FormattedMessage id="results-new-benefit-flag" defaultMessage="New Benefit" />
+        </div>
+      )}
       <ConditonalWrapper
         condition={isMobile}
         wrapper={(children) => <div className="result-program-more-info-wrapper">{children}</div>}
@@ -79,10 +86,13 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
         </div>
         <div className="result-program-details">
           <div className="result-program-details-box">
-            <FormattedMessage id="results.estimated_application_time" defaultMessage="Estimated Savings: " />
+            <FormattedMessage id="program-card.estimated-savings" defaultMessage="Estimated Savings: " />
           </div>
           <div className="result-program-details-box">
-            <strong>{`$${estimatedSavings}/mo`}</strong>
+            <strong>
+          {formatToUSD(estimatedMonthlySavings)}
+          <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
+        </strong>
           </div>
         </div>
       </div>

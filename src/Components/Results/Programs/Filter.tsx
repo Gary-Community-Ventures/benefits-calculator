@@ -14,6 +14,7 @@ export const Filter = () => {
   const [citizenshipFilterIsOpen, setCitizenshipFilterIsOpen] = useState(false);
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState<null | Element>(null);
   const { filtersChecked, setFiltersChecked } = useResultsContext();
+  const [citButtonClass, setCitButtonClass] = useState('citizenship-button');
 
   useEffect(() => {
     const filtersCheckedStrArr = Object.entries(filtersChecked)
@@ -23,16 +24,29 @@ export const Filter = () => {
       .map((filteredKeyValPair) => filteredKeyValPair[0]);
 
     //if a filter is selected/truthy then remove citizen from the filtersCheckedStrArray and set citizen state to false
+    //and add the active-blue css class to the citizenshipButtonClass
     if (filtersCheckedStrArr.includes('citizen') && filtersCheckedStrArr.length > 1) {
       filtersCheckedStrArr.filter((filter) => filter !== 'citizen');
       setFiltersChecked({ ...filtersChecked, citizen: false });
+      setCitButtonClass(citButtonClass + ' active-blue');
     }
 
     //if they deselect all of the filters then we want the filtersChecked to start with a truthy citizen value
-    if (filtersCheckedStrArr.length === 0) {
+    //and the default citButtonClass
+    if (filtersCheckedStrArr.length === 0 && !citizenshipFilterIsOpen) {
       setFiltersChecked({ ...filtersChecked, citizen: true });
+      setCitButtonClass('citizenship-button');
+    } else if (filtersCheckedStrArr.length === 0 && citizenshipFilterIsOpen) {
+      setFiltersChecked({ ...filtersChecked, citizen: true });
+      setCitButtonClass('citizenship-button flat-white-border-bottom');
     }
   }, [filtersChecked]);
+
+  useEffect(() => {
+    if (citizenshipFilterIsOpen) {
+      setCitButtonClass(citButtonClass + ' flat-white-border-bottom');
+    }
+  }, [citizenshipFilterIsOpen]);
 
   const handleCitizenshipBtnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setCitizenshipFilterIsOpen(!citizenshipFilterIsOpen);
@@ -128,9 +142,11 @@ export const Filter = () => {
           id="citizenshipPopover"
           open={Boolean(citizenshipPopoverAnchor)}
           onClose={() => {
-            const updatedCitizenshipFilterIsOpen = !citizenshipFilterIsOpen;
+            const updatedCitButtonClass = citButtonClass.replace('flat-white-border-bottom', '');
+
             setCitizenshipPopoverAnchor(null);
-            setCitizenshipFilterIsOpen(updatedCitizenshipFilterIsOpen);
+            setCitizenshipFilterIsOpen(false);
+            setCitButtonClass(updatedCitButtonClass);
           }}
           anchorEl={citizenshipPopoverAnchor}
           anchorOrigin={{
@@ -146,16 +162,9 @@ export const Filter = () => {
   };
 
   const displayCitizenshipButton = () => {
-    const citizenshipButtonClass = citizenshipFilterIsOpen
-      ? 'citizenship-button flat-white-border-bottom'
-      : 'citizenship-button';
     return (
       <section>
-        <Button
-          className={citizenshipButtonClass}
-          variant="contained"
-          onClick={(event) => handleCitizenshipBtnClick(event)}
-        >
+        <Button className={citButtonClass} variant="contained" onClick={(event) => handleCitizenshipBtnClick(event)}>
           <FormattedMessage id="filterSection.citizenship" defaultMessage="CITIZENSHIP" />
           {citizenshipFilterIsOpen ? (
             <KeyboardArrowDownIcon className="arrow-margin" />
@@ -182,6 +191,8 @@ export const Filter = () => {
       otherHealthCareUnder19: false,
       otherHealthCarePregnant: false,
     });
+
+    setCitButtonClass('citizenship-button');
   };
 
   const displayResetFiltersButton = () => {

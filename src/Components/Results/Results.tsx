@@ -52,9 +52,14 @@ export function calculateTotalValue(programs: Program[], category: string) {
   return totalValue;
 }
 
+export const formatToUSD = (num: number) => {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
+};
+
 const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
-  const { locale } = useContext(Context);
+  const { locale, formData } = useContext(Context);
   const { uuid, programId } = useParams();
+  const is211Co = formData.immutableReferrer === '211co';
 
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(false);
@@ -143,7 +148,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
             {type === 'need' ? <Needs /> : <Programs />}
           </Grid>
         </Grid>
-        <HelpButton />
+        {!is211Co && <HelpButton />}
       </ResultsContext.Provider>
     );
   }
