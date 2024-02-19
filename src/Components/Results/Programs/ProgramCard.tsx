@@ -13,11 +13,11 @@ type ProgramCardProps = {
 const ProgramCard = ({ program }: ProgramCardProps) => {
   const { uuid } = useParams();
 
-  const windowWidth = window.innerWidth;
   const estimatedAppTime = program.estimated_application_time;
   const estimatedMonthlySavings = program.estimated_value / 12;
   const programName = program.name;
   const programId = program.program_id;
+  const windowWidth = window.innerWidth;
   const [size, setSize] = useState(windowWidth);
 
   useEffect(() => {
@@ -34,12 +34,6 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   }, []);
 
   const isMobile = size < 769 ? true : false;
-
-  useEffect(() => {
-    setSize(windowWidth);
-    console.log(size);
-  }, []);
-  console.log(windowWidth);
 
   type ConditonalWrapperProps = {
     children: React.ReactElement;
@@ -90,9 +84,9 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
           </div>
           <div className="result-program-details-box">
             <strong>
-          {formatToUSD(estimatedMonthlySavings)}
-          <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
-        </strong>
+              {formatToUSD(estimatedMonthlySavings)}
+              <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
+            </strong>
           </div>
         </div>
       </div>
