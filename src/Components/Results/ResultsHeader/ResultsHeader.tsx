@@ -14,7 +14,7 @@ type ResultsHeaderProps = {
 
 const ProgramsHeader = () => {
   const { programs } = useResultsContext();
-  const { theme } = useContext(Context);
+  const { theme, formData } = useContext(Context);
   const taxCredit = calculateTotalValue(programs, 'Tax Credits');
 
   const estimatedMonthlySavings = programs.reduce(
@@ -35,10 +35,12 @@ const ProgramsHeader = () => {
             <div className="results-header-values">${Math.round(estimatedMonthlySavings / 12).toLocaleString()}</div>
             <div className="results-header-label">Estimated Monthly Savings</div>
           </section>
-          <section className="results-data-cell">
-            <div className="results-header-values">${taxCredit}</div>
-            <div className="results-header-label">Annual Tax Credit</div>
-          </section>
+          {formData.immutableReferrer !== 'lgs' && (
+            <section className="results-data-cell">
+              <div className="results-header-values">${taxCredit}</div>
+              <div className="results-header-label">Annual Tax Credit</div>
+            </section>
+          )}
         </section>
       </header>
     </CardContent>
