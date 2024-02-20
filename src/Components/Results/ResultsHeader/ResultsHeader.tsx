@@ -6,6 +6,7 @@ import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
 import { useParams } from 'react-router-dom';
 import { calculateTotalValue, useResultsContext } from '../Results.tsx';
 import '../../Results/Results.css';
+import { TAX_CREDIT_CATEGORY } from '../../../Assets/resultsConstants.ts';
 
 type ResultsHeaderProps = {
   type: 'program' | 'need';
@@ -15,7 +16,7 @@ type ResultsHeaderProps = {
 const ProgramsHeader = () => {
   const { programs } = useResultsContext();
   const { theme, formData } = useContext(Context);
-  const taxCredit = calculateTotalValue(programs, 'Tax Credits');
+  const taxCredit = calculateTotalValue(programs, TAX_CREDIT_CATEGORY);
 
   const categoriesCalculated = new Set();
   let estimatedMonthlySavings = 0;
@@ -32,17 +33,23 @@ const ProgramsHeader = () => {
       <header className="results-header">
         <section className="results-header-programs-count-text">
           <div className="results-header-programs-count">{programs.length}</div>
-          <div>Programs Found</div>
+          <div>
+            <FormattedMessage id="results.header-programsFound" defaultMessage="Programs Found" />
+          </div>
         </section>
         <section className="column-row">
           <section className="results-data-cell">
             <div className="results-header-values">${Math.round(estimatedMonthlySavings / 12).toLocaleString()}</div>
-            <div className="results-header-label">Estimated Monthly Savings</div>
+            <div className="results-header-label">
+              <FormattedMessage id="results.header-monthlyValue" defaultMessage="Estimated Monthly Savings" />
+            </div>
           </section>
           {formData.immutableReferrer !== 'lgs' && (
             <section className="results-data-cell">
               <div className="results-header-values">${taxCredit}</div>
-              <div className="results-header-label">Annual Tax Credit</div>
+              <div className="results-header-label">
+                <FormattedMessage id="results.header-taxCredits" defaultMessage="Annual Tax Credit" />
+              </div>
             </section>
           )}
         </section>
@@ -53,7 +60,6 @@ const ProgramsHeader = () => {
 
 const NeedsHeader = () => {
   const { needs } = useResultsContext();
-  const { theme } = useContext(Context);
 
   return (
     <div className="results-needs-header-background">

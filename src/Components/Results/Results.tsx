@@ -15,6 +15,7 @@ import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
 import './Results.css';
+import { PRESCHOOL_CATEGORY } from '../../Assets/resultsConstants';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -51,7 +52,7 @@ export function calculateTotalValue(programs: Program[], category: string) {
     return eachValue;
   }, 0);
 
-  if (category === 'Child Care, Youth, and Education' && totalValue > 8640) {
+  if (category === PRESCHOOL_CATEGORY && totalValue > 8640) {
     totalValue = 8640;
   }
 
