@@ -15,7 +15,7 @@ type ResultsHeaderProps = {
 const ProgramsHeader = () => {
   const { programs } = useResultsContext();
   const { theme } = useContext(Context);
-  const taxCredit = calculateTotalValue(programs, 'Tax Credit');
+  const taxCredit = calculateTotalValue(programs, 'Tax Credits');
 
   const estimatedMonthlySavings = programs.reduce(
     (eachEstimatedMonthlySavings: number, program: { estimated_value: number }) =>
