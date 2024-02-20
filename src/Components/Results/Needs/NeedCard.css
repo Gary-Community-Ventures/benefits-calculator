@@ -14,7 +14,7 @@
   max-width: 4.5rem;
   width: 100%;
   margin-right: 0.25rem;
-  fill: var(--secondary-color);
+  fill: var(--icon-color);
 }
 
 .result-resource-more-info span {
