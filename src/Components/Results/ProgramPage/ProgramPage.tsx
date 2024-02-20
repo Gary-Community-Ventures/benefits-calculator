@@ -38,7 +38,9 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
             <ResultsTranslate translation={program.category} />
           </p>
           <div className="divider"></div>
-          <h1 className="header-text-bottom">{program.name_abbreviated}</h1>
+          <h1 className="header-text-bottom">
+            <ResultsTranslate translation={program.name} />
+          </h1>
         </div>
       </header>
     );

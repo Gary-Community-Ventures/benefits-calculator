@@ -2,6 +2,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { UrgentNeed } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate';
 import { acuteConditionResultMapping } from '../../../Assets/acuteConditionOptions';
+import './NeedCard.css';
 
 type NeedsCardProps = {
   need: UrgentNeed;
