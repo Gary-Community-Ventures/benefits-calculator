@@ -17,11 +17,15 @@ const ProgramsHeader = () => {
   const { theme, formData } = useContext(Context);
   const taxCredit = calculateTotalValue(programs, 'Tax Credits');
 
-  const estimatedMonthlySavings = programs.reduce(
-    (eachEstimatedMonthlySavings: number, program: { estimated_value: number }) =>
-      eachEstimatedMonthlySavings + program.estimated_value,
-    0,
-  );
+  const categoriesCalculated = new Set();
+  let estimatedMonthlySavings = 0;
+  for (const program of programs) {
+    const category = program.category.default_message;
+    if (!categoriesCalculated.has(category)) {
+      estimatedMonthlySavings += calculateTotalValue(programs, category);
+      categoriesCalculated.add(category);
+    }
+  }
 
   return (
     <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }}>
