@@ -9,6 +9,7 @@ import { calculateTotalValue, formatToUSD, useResultsContext } from '../Results'
 import { Translation } from '../../../Types/Results.ts';
 import { FormattedMessage } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate.tsx';
+import { PRESCHOOL_CATEGORY } from '../../../Assets/resultsConstants.ts';
 
 export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   'Housing and Utilities': Housing,
@@ -54,7 +55,7 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
           </h2>
         </div>
       </div>
-      {headingType.default_message === 'Child Care, Youth, and Education' && (
+      {headingType.default_message === PRESCHOOL_CATEGORY && (
         <p className="child-care-warning-text">
           <FormattedMessage
             id="benefitCategories.childCareHelperText"

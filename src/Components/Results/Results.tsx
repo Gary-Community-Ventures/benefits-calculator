@@ -15,7 +15,7 @@ import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
 import './Results.css';
-import { PRESCHOOL_CATEGORY } from '../../Assets/resultsConstants';
+import { PRESCHOOL_CATEGORY, PRESCHOOL_MAX_VALUE, PRESCHOOL_PROGRAMS_ABBR } from '../../Assets/resultsConstants';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -47,16 +47,25 @@ function findProgramById(programs: Program[], id: string) {
 }
 
 export function calculateTotalValue(programs: Program[], category: string) {
-  let totalValue = programs.reduce((eachValue, program) => {
-    if (program.category.default_message === category) eachValue += program.estimated_value;
-    return eachValue;
-  }, 0);
+  let total = 0;
+  let preschoolTotal = 0;
+  for (const program of programs) {
+    if (program.category.default_message !== category) {
+      continue;
+    }
 
-  if (category === PRESCHOOL_CATEGORY && totalValue > 8640) {
-    totalValue = 8640;
+    if (PRESCHOOL_PROGRAMS_ABBR.includes(program.name_abbreviated)) {
+      preschoolTotal += program.estimated_value;
+    } else {
+      total += program.estimated_value;
+    }
   }
 
-  return totalValue;
+  if (preschoolTotal > PRESCHOOL_MAX_VALUE) {
+    preschoolTotal = PRESCHOOL_MAX_VALUE;
+  }
+
+  return total + preschoolTotal;
 }
 
 export const formatToUSD = (num: number) => {
