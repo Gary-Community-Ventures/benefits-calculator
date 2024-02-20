@@ -4,26 +4,31 @@ import { ConfigApiResponse } from '../../Types/Config';
 import { Config } from '../../Types/Config';
 import { FormattedMessage } from 'react-intl';
 
-// Recursive function
-function transformItem(item: any): any {
+// Recursively transform any object that has _label, and _default_message as keys into a FormattedMessage
+function transformItem(item: unknown): any {
+  type Item = {
+    _label: string;
+    _default_message: string;
+  };
+
   if (typeof item !== 'object' || item === null) {
     return item;
   }
 
-  if (item.hasOwnProperty('_label')) {
-    return <FormattedMessage id={item._label} defaultMessage={item._default_message} />;
+  if (item.hasOwnProperty('_label') && item.hasOwnProperty('_default_message')) {
+    const { _label, _default_message } = item as Item;
+    return <FormattedMessage id={_label} defaultMessage={_default_message} />;
   }
 
   const config: Config = {};
   for (const key in item) {
     if (item.hasOwnProperty(key)) {
-      config[key] = transformItem(item[key]);
+      config[key] = transformItem((item as any)[key]);
     }
   }
   return config;
 }
 
-// Main function with recursion
 function transformConfigResponse(configResponse: ConfigApiResponse[]): Config {
   const output: Config = {};
 
