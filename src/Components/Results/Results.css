@@ -60,9 +60,12 @@
   display: inline-flex;
 }
 
-.category-heading-column svg {
+.category-heading-icon svg {
   display: inline-flex;
   width: 2.5rem;
+}
+
+.category-heading-icon svg path {
   fill: var(--icon-color);
 }
 
