@@ -26,10 +26,10 @@
 
 .flat-white-border-bottom.MuiButton-root::after {
   content: '';
-  height: 6px;
+  height: 2px;
   width: 100%;
   background-color: #ffff;
-  z-index: 99999;
+  z-index: 10000;
   position: absolute;
   bottom: 0;
 }

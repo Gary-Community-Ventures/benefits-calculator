@@ -16,6 +16,7 @@
 
 .results-tab a {
   width: 100%;
+  height: 100%;
   display: block;
   text-align: center;
   text-transform: uppercase;
@@ -23,7 +24,7 @@
   text-decoration: none;
   background-color: #e6e7e8;
   color: var(--primary-color);
-  border-radius: 2rem 2rem 0 0;
+  border-radius: 1rem 1rem 0 0;
 }
 
 .results-tab a.active {
@@ -52,23 +53,30 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-}
-
-.category-heading-column {
-  flex: 0 0 100%;
-  min-width: 0;
-  text-align: left;
+  justify-content: space-between;
 }
 
 .category-heading-icon {
   display: inline-flex;
 }
 
-.category-heading-column,
-.category-heading-column svg {
+.category-heading-icon svg {
   display: inline-flex;
   width: 2.5rem;
+}
+
+.category-heading-icon svg path {
   fill: var(--icon-color);
+}
+
+.category-heading-column {
+  min-width: 0;
+  max-width: 100%;
+  width: fit-content;
+  text-align: left;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1rem;
 }
 
 .category-heading-text-style {
@@ -82,6 +90,14 @@
 
 .category-heading-text-style.normal-weight {
   font-weight: normal;
+}
+
+.results-header-container {
+  height: 9rem;
+}
+
+.results-header {
+  height: 7rem;
 }
 
 .results-needs-header-background {
@@ -117,6 +133,13 @@
   margin: auto;
   margin-top: -0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.child-care-warning-text {
+  background-color: var(--secondary-background-color);
+  font-size: 1.25rem;
+  color: var(--primary-color);
+  padding: 0.5rem;
 }
 
 .result-program-container {
@@ -263,7 +286,7 @@
 }
 
 /* DESKTOP */
-@media (min-width: 769px) {
+@media (min-width: 775px) {
   .results-header-programs-count-text {
     height: 3rem;
     border-radius: 0.5rem;
@@ -354,7 +377,7 @@
 
 /* Please keep all media queries at the end of the file so that the styles cascade correctly */
 /* TABLET */
-@media only screen and (min-width: 481px) and (max-width: 768px) {
+@media only screen and (min-width: 481px) and (max-width: 775px) {
   .results-header-programs-count-text {
     width: 7rem;
     height: 7rem;

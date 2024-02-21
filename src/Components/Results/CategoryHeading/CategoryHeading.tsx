@@ -9,6 +9,7 @@ import { calculateTotalValue, formatToUSD, useResultsContext } from '../Results'
 import { Translation } from '../../../Types/Results.ts';
 import { FormattedMessage } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate.tsx';
+import { PRESCHOOL_CATEGORY } from '../../../Assets/resultsConstants.ts';
 
 export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   'Housing and Utilities': Housing,
@@ -37,21 +38,31 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
   const monthlyCategoryAmt = calculateTotalValue(programs, headingType.default_message) / 12;
 
   return (
-    <div className="category-heading-container">
-      <div className="category-heading-column">
-        <div className="category-heading-icon" aria-label={`${headingType.default_message} icon`}>
-          <IconComponent />
+    <div>
+      <div className="category-heading-container">
+        <div className="category-heading-column">
+          <div className="category-heading-icon" aria-label={`${headingType.default_message} icon`}>
+            <IconComponent />
+          </div>
+          <h2 className="category-heading-text-style">
+            <ResultsTranslate translation={headingType} />
+          </h2>
         </div>
-        <h2 className="category-heading-text-style">
-          <ResultsTranslate translation={headingType} />
-        </h2>
+        <div className="box-right">
+          <h2 className="category-heading-text-style normal-weight">
+            {formatToUSD(monthlyCategoryAmt)}
+            <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
+          </h2>
+        </div>
       </div>
-      <div className="box-right">
-        <h2 className="category-heading-text-style normal-weight">
-          {formatToUSD(monthlyCategoryAmt)}
-          <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
-        </h2>
-      </div>
+      {headingType.default_message === PRESCHOOL_CATEGORY && (
+        <p className="child-care-warning-text">
+          <FormattedMessage
+            id="benefitCategories.childCareHelperText"
+            defaultMessage="This monthly value is an estimate of the combined average value of child care and preschool programs. Savings from programs may overlap."
+          />
+        </p>
+      )}
     </div>
   );
 };

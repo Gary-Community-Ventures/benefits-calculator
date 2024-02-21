@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import './Results.css';
 import ResultsError from './ResultsError/ResultsError';
 import Loading from './Loading/Loading';
 import { EligibilityResults, Program, UrgentNeed } from '../../Types/Results';
@@ -15,12 +14,15 @@ import ResultsTabs from './Tabs/Tabs';
 import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
+import './Results.css';
+import { PRESCHOOL_CATEGORY, PRESCHOOL_MAX_VALUE, PRESCHOOL_PROGRAMS_ABBR } from '../../Assets/resultsConstants';
 
 type WrapperResultsContext = {
   programs: Program[];
   needs: UrgentNeed[];
   filtersChecked: Record<CitizenLabels, boolean>;
   setFiltersChecked: (newFiltersChecked: Record<CitizenLabels, boolean>) => void;
+  missingPrograms: boolean;
 };
 
 type ResultsProps = {
@@ -45,11 +47,25 @@ function findProgramById(programs: Program[], id: string) {
 }
 
 export function calculateTotalValue(programs: Program[], category: string) {
-  const totalValue = programs.reduce((eachValue, program) => {
-    if (program.category.default_message === category) eachValue += program.estimated_value;
-    return eachValue;
-  }, 0);
-  return totalValue;
+  let total = 0;
+  let preschoolTotal = 0;
+  for (const program of programs) {
+    if (program.category.default_message !== category) {
+      continue;
+    }
+
+    if (PRESCHOOL_PROGRAMS_ABBR.includes(program.name_abbreviated)) {
+      preschoolTotal += program.estimated_value;
+    } else {
+      total += program.estimated_value;
+    }
+  }
+
+  if (preschoolTotal > PRESCHOOL_MAX_VALUE) {
+    preschoolTotal = PRESCHOOL_MAX_VALUE;
+  }
+
+  return total + preschoolTotal;
 }
 
 export const formatToUSD = (num: number) => {
@@ -98,6 +114,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   });
   const [programs, setPrograms] = useState<Program[]>([]);
   const [needs, setNeeds] = useState<UrgentNeed[]>([]);
+  const [missingPrograms, setMissingPrograms] = useState(false);
 
   useEffect(() => {
     const filtersCheckedStrArr = Object.entries(filtersChecked)
@@ -109,6 +126,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     if (apiResults === undefined) {
       setNeeds([]);
       setPrograms([]);
+      setMissingPrograms(false);
       return;
     }
 
@@ -120,6 +138,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
         );
       }),
     );
+    setMissingPrograms(apiResults.missing_programs);
     setLoading(false);
   }, [filtersChecked, apiResults]);
 
@@ -139,6 +158,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
           needs,
           filtersChecked,
           setFiltersChecked,
+          missingPrograms,
         }}
       >
         <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
