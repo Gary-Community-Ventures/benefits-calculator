@@ -196,7 +196,7 @@ li.apply-info {
 }
 
 /* TABLET */
-@media (max-width: 750px) {
+@media (max-width: 775px) {
   .program-icon-and-header {
     justify-content: center;
   }
