@@ -18,11 +18,13 @@ const ProgramsHeader = () => {
   const { theme, formData } = useContext(Context);
   const taxCredit = calculateTotalValue(programs, TAX_CREDIT_CATEGORY);
 
-  const categoriesCalculated = new Set();
+  // don't add tax credits to total value
+  const categoriesCalculated = new Set([TAX_CREDIT_CATEGORY]);
   let estimatedMonthlySavings = 0;
   for (const program of programs) {
     const category = program.category.default_message;
     if (!categoriesCalculated.has(category)) {
+      // use calculate total value to account for preschool cap
       estimatedMonthlySavings += calculateTotalValue(programs, category);
       categoriesCalculated.add(category);
     }
