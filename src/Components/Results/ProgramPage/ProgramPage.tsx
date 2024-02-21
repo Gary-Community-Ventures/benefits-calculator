@@ -112,11 +112,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                         <br />
                       </>
                     )}
-                    {info.phone_number && (
-                      <a href={`tel:${info.phone_number}`}>
-                        <FormattedMessage id="results.phone-number" defaultMessage={info.phone_number} />
-                      </a>
-                    )}
+                    {info.phone_number && <a href={`tel:${info.phone_number}`}>{info.phone_number}</a>}
                   </div>
                 </li>
               ))}
