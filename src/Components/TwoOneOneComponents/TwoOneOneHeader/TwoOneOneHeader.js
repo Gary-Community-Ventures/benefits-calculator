@@ -75,7 +75,6 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
           href={link.href}
           underline="none"
           target="_blank"
-          rel="noreferrer"
           aria-label={link.ariaLabel}
           className="twoOneOneMenuLink"
           key={link.defaultMsg + index}

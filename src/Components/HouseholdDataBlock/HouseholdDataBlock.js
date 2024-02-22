@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { Box, IconButton, Stack } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
@@ -23,6 +23,7 @@ import {
 } from '../../Assets/validationFunctions.tsx';
 import { getStepNumber } from '../../Assets/stepDirectory';
 import { Context } from '../Wrapper/Wrapper.tsx';
+import { isCustomTypedLocationState } from '../../Types/FormData.ts';
 import './HouseholdDataBlock.css';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 
@@ -34,6 +35,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   page = parseInt(page);
   const step = getStepNumber('householdData');
   const navigate = useNavigate();
+  const location = useLocation();
   const setPage = (page) => {
     navigate(`/${uuid}/step-${step}/${page}`);
   };
@@ -82,8 +84,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   }, [memberData.hasIncome]);
 
   useEffect(() => {
+    //this useEffect solves for the unlikely scenario that the page number is greater than the HHSize or NaN,
+    //it routes the user back to the last valid HHM
     const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
-    if (isNaN(page) || page < 1 || page >= lastMemberPage) {
+    if (isNaN(page) || page < 1 || page > lastMemberPage) {
       navigate(`/${uuid}/step-${step}/${lastMemberPage}`, { replace: true });
       return;
     }
@@ -389,13 +393,20 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   };
 
   const handleContinueSubmit = (event, validateInputFunction, inputToBeValidated, stepId, questionName, uuid) => {
+    const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
+      ? location.state.routedFromConfirmationPg
+      : false;
+
     event.preventDefault();
     setSubmittedCount(submittedCount + 1);
 
     const validPersonData = personDataIsValid(memberData);
     const lastHouseholdMember = page >= remainingHHMNumber;
 
-    if (validPersonData && lastHouseholdMember) {
+    if (validPersonData && isComingFromConfirmationPg) {
+      handleHouseholdDataSubmit(memberData, page - 1, uuid);
+      navigate(`/${uuid}/confirm-information`);
+    } else if (validPersonData && lastHouseholdMember) {
       handleHouseholdDataSubmit(memberData, page - 1, uuid);
       navigate(`/${uuid}/step-${step + 1}`);
     } else if (validPersonData) {
