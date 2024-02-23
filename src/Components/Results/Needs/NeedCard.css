@@ -51,7 +51,7 @@
 }
 
 .need-card-container {
-  border: 1px solid var(--secondary-color);
+  border: 2px solid var(--secondary-color);
   margin-bottom: 1rem;
   padding: 1rem;
 }
