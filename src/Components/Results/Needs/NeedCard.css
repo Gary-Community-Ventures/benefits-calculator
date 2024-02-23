@@ -40,7 +40,8 @@
   font-family: 'Roboto Slab', serif;
 }
 
-.more-info-btn:hover, .visit-website-btn:hover {
+.more-info-btn:hover,
+.visit-website-btn:hover {
   color: var(--primary-color);
   background-color: #fff;
   cursor: pointer;
@@ -82,6 +83,7 @@
 .visit-website-btn-container {
   display: flex;
   justify-content: center;
+  min-height: 35px;
 }
 
 .visit-website-btn {
