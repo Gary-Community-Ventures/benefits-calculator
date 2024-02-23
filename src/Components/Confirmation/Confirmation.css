@@ -39,6 +39,10 @@ svg.confirmation-icon circle {
   transform: translate(50%, -50%);
 }
 
+.edit-button:hover {
+  cursor: pointer;
+}
+
 [dir='rtl'] .edit-button {
   left: 2rem;
   right: unset;

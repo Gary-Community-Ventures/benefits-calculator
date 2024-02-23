@@ -19,7 +19,6 @@ const referralOptions = {
   testOrProspect: <FormattedMessage id="referralOptions.testOrProspect" defaultMessage="Test / Prospective Partner" />,
   searchEngine: <FormattedMessage id="referralOptions.searchEngine" defaultMessage="Google or other search engine" />,
   socialMedia: <FormattedMessage id="referralOptions.socialMedia" defaultMessage="Social Media" />,
-  mail: <FormattedMessage id="referralOptions.mail" defaultMessage="Mail" />,
   other: <FormattedMessage id="referralOptions.other" defaultMessage="Other" />,
 };
 
