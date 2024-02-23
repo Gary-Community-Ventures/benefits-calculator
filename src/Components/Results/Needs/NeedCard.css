@@ -40,8 +40,15 @@
   font-family: 'Roboto Slab', serif;
 }
 
+.more-info-btn:hover, .visit-website-btn:hover {
+  color: var(--primary-color);
+  background-color: #fff;
+  cursor: pointer;
+  border: 1px solid var(--primary-color);
+}
+
 .need-card-container {
-  border: 2px solid var(--secondary-color);
+  border: 1px solid var(--secondary-color);
   margin-bottom: 1rem;
   padding: 1rem;
 }
