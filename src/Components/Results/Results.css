@@ -222,6 +222,18 @@
   color: var(--primary-color);
   padding: 0.5rem;
 }
+/* the following two result-program styles are for the more-info buttons on the long-term pg */
+.result-program-more-info-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.result-program-more-info-button a:hover {
+  background-color: white;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 0.75rem;
+}
 
 /* DESKTOP */
 @media (min-width: 775px) {
