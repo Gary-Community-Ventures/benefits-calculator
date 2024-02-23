@@ -57,7 +57,7 @@ const NeedCard = ({ need }: NeedsCardProps) => {
           </span>
         </div>
         <button
-          className={infoIsOpen ? "more-info-btn-open" : "more-info-btn"}
+          className={infoIsOpen ? 'more-info-btn-open' : 'more-info-btn'}
           onClick={() => {
             setInfoIsOpen(!infoIsOpen);
           }}
