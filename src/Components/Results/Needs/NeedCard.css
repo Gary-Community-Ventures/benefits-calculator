@@ -28,7 +28,7 @@
   text-transform: capitalize;
 }
 
-.more-info-btn {
+.more-info-btn, .more-info-btn-open {
   color: white;
   text-wrap: nowrap;
   font-size: 0.8rem;
@@ -41,7 +41,7 @@
 }
 
 .more-info-btn:hover,
-.visit-website-btn:hover {
+.visit-website-btn:hover , .more-info-btn-open {
   color: var(--primary-color);
   background-color: #fff;
   cursor: pointer;
