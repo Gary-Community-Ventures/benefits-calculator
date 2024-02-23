@@ -36,7 +36,6 @@
   padding: 0.5rem 0.75rem;
   background-color: var(--primary-color);
   height: 80%;
-  margin: 1rem;
   font-weight: 700;
   font-family: 'Roboto Slab', serif;
 }
@@ -44,6 +43,7 @@
 .need-card-container {
   border: 2px solid var(--secondary-color);
   margin-bottom: 1rem;
+  padding: 1rem;
 }
 
 .header-and-button-divider {
@@ -52,8 +52,45 @@
   align-items: center;
 }
 
+.more-info-container {
+  display: flex;
+}
 
-@media (max-width:500px) {
+.need-desc-paragraph {
+  margin-bottom: 1rem;
+}
+
+.phone-number {
+  color: var(--secondary-color);
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.phone-number:hover {
+  text-decoration: underline;
+}
+
+.visit-website-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.visit-website-btn {
+  color: white;
+  text-wrap: nowrap;
+  font-size: 0.8rem;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--primary-color);
+  height: 80%;
+  font-weight: 700;
+  font-family: 'Roboto Slab', serif;
+  width: 9rem;
+}
+
+@media (max-width: 500px) {
   .result-resource-more-info span strong {
     font-size: 1rem;
   }
