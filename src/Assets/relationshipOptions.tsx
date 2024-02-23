@@ -2,7 +2,9 @@ import { FormattedMessage } from 'react-intl';
 
 const relationshipOptions = {
   child: <FormattedMessage id="relationshipOptions.child" defaultMessage="Child" />,
-  fosterChild: <FormattedMessage id="relationshipOptions.fosterChild" defaultMessage="Foster Child" />,
+  fosterChild: (
+    <FormattedMessage id="relationshipOptions.fosterChildOrKinshipChild" defaultMessage="Foster Child / Kinship Care" />
+  ),
   stepChild: <FormattedMessage id="relationshipOptions.stepChild" defaultMessage="Step-child" />,
   grandChild: <FormattedMessage id="relationshipOptions.grandChild" defaultMessage="Grandchild" />,
   spouse: <FormattedMessage id="relationshipOptions.spouse" defaultMessage="Spouse" />,
