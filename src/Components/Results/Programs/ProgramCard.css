@@ -63,6 +63,22 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 100;
+}
+
+.low-confidence-flag {
+  font-weight: bold;
+  font-family: 'Roboto Slab', serif;
+  background-color: var(--hover-color);
+  padding-left: 1rem;
+  color: var(--primary-color);
+  width: 8rem;
+  border-radius: 0 0 0.75rem 0;
+  font-size: 0.8125rem;
+  position: absolute;
+  top: 0;
+  left: 88px;
+  z-index: 99
 }
 
 h1.header-text-bottom {

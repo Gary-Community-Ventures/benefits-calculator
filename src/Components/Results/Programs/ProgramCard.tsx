@@ -49,6 +49,11 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
           <FormattedMessage id="results-new-benefit-flag" defaultMessage="New Benefit" />
         </div>
       )}
+      {program.low_confidence && (
+        <div className="low-confidence-flag" style={{left:`${program.new ? "88px" : "0"} `}}>
+          <FormattedMessage id="results-low-confidence-flag" defaultMessage="Low Confidence" />
+        </div>
+      )}
       <ConditonalWrapper
         condition={isMobile}
         wrapper={(children) => <div className="result-program-more-info-wrapper">{children}</div>}
