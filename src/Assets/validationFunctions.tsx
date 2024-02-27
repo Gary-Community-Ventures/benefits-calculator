@@ -269,7 +269,6 @@ const healthInsuranceDataIsValid: ValidationFunction<HealthInsurance> = (hhMembe
     (healthInsuranceValue) => healthInsuranceValue === true,
   ).length;
 
-  // if (hhMemberHealthInsData.none === true || hhMemberHealthInsData.dont_know === true) {
   if (hhMemberHealthInsData.none === true) {
     //check here to ensure that that is the ONLY option that was selected via numOfTrueValues
     return numOfTrueValues === 1;
