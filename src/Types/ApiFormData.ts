@@ -5,7 +5,6 @@ export type ApiInsuranceReadOnly = {
 };
 
 export type ApiInsurance = {
-  dont_know: boolean;
   none: boolean;
   employer: boolean;
   private: boolean;
@@ -14,6 +13,7 @@ export type ApiInsurance = {
   medicare: boolean;
   emergency_medicaid: boolean;
   family_planning: boolean;
+  va: boolean;
 };
 
 export type ApiIncomeReadOnly = {

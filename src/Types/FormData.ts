@@ -56,9 +56,9 @@ export interface HealthInsurance {
   medicaid: boolean;
   medicare: boolean;
   chp: boolean;
-  dont_know: boolean;
   emergency_medicaid: boolean;
   family_planning: boolean;
+  va: boolean;
 }
 
 export interface SignUpInfo {
