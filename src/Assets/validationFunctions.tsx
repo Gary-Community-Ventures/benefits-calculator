@@ -250,16 +250,6 @@ const getHealthInsuranceError: MessageFunction<{ index: number; healthInsurance:
           )}
         </ErrorMessageWrapper>
       );
-    } else if (healthInsurance.dont_know === true) {
-      //then they chose dont_know and another option
-      return (
-        <ErrorMessageWrapper fontSize="1rem">
-          <FormattedMessage
-            id="validation-helperText.hhMemberInsuranceDontKnow"
-            defaultMessage="Please do not select any other options if you don't know"
-          />
-        </ErrorMessageWrapper>
-      );
     } else {
       //they haven't selected an option
       return (
@@ -279,7 +269,8 @@ const healthInsuranceDataIsValid: ValidationFunction<HealthInsurance> = (hhMembe
     (healthInsuranceValue) => healthInsuranceValue === true,
   ).length;
 
-  if (hhMemberHealthInsData.none === true || hhMemberHealthInsData.dont_know === true) {
+  // if (hhMemberHealthInsData.none === true || hhMemberHealthInsData.dont_know === true) {
+  if (hhMemberHealthInsData.none === true) {
     //check here to ensure that that is the ONLY option that was selected via numOfTrueValues
     return numOfTrueValues === 1;
   } else {

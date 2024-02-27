@@ -583,7 +583,6 @@ const Confirmation = () => {
   };
 
   const displayHealthInsurance = (hHMemberHealthInsurance, hhMemberIndex) => {
-    const selectedDontKnow = hHMemberHealthInsurance.dont_know === true;
     const selectedNone = hHMemberHealthInsurance.none === true;
     const allOtherSelectedOptions = Object.entries(hHMemberHealthInsurance).filter(
       (hHMemberInsEntry) => hHMemberInsEntry[1] === true,
@@ -604,9 +603,7 @@ const Confirmation = () => {
       }
     }, '');
 
-    if (selectedDontKnow) {
-      return <>{youVsThemHealthInsuranceOptions.dont_know.formattedMessage}</>;
-    } else if (selectedNone) {
+    if (selectedNone) {
       return <>{youVsThemHealthInsuranceOptions.none.formattedMessage}</>;
     } else {
       return <>{allOtherSelectedOptionsString}</>;
