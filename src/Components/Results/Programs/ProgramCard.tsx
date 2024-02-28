@@ -50,7 +50,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
         </div>
       )}
       {program.low_confidence && (
-        <div className="low-confidence-flag" style={{left:`${program.new ? "88px" : "0"} `}}>
+        <div className="low-confidence-flag" style={{ left: `${program.new ? '5.5rem' : '0'} ` }}>
           <FormattedMessage id="results-low-confidence-flag" defaultMessage="Low Confidence" />
         </div>
       )}
