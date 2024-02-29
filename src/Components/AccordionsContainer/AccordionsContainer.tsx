@@ -6,13 +6,45 @@ import './AccordionsContainer.css';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { AccordionContainerDetails } from '../../Types/Questions.ts';
 
+import { Config } from '../../Types/Config.ts';
+import { FormattedMessageType } from '../../Types/Questions.ts';
+import { CategoryOptions } from '../../Assets/BenefitCategoryLists/benefitAccordions.ts';
+
 type Props = {
   componentDetails: AccordionContainerDetails;
   submitted: number;
 };
 
+// transforms config benefits and returns array of accordion object array
+const formatCategoryBenefits = (categoryBenefits: Config['category_benefits']): BenefitAccordion[] => {
+  return Object.entries(categoryBenefits).map(([categoryKey, categoryValue]) => {
+    const categoryName: FormattedMessageType = categoryValue.category_name;
+    const categoryOptions: CategoryOptions = Object.entries(categoryValue.benefits).reduce(
+      (options, [benefitKey, benefitValue]) => {
+        const benefitMessage: FormattedMessageType = (benefitValue as Record<string, FormattedMessageType>).message;
+        options[benefitKey] = benefitMessage;
+        return options;
+      },
+      {} as CategoryOptions,
+    );
+
+    return {
+      categoryName,
+      categoryOptions,
+    };
+  });
+};
+
 const AccordionsContainer = ({ componentDetails, submitted }: Props) => {
-  const { formData } = useContext(Context);
+  const { formData, config } = useContext(Context);
+  let formattedBenefits: BenefitAccordion[] = [];
+
+  if (config) {
+    formattedBenefits = formatCategoryBenefits(config.category_benefits);
+  } else {
+    console.error('Error: config or category_benefits is undefined.');
+  }
+
   const [expanded, setExpanded] = useState<boolean | number>(false);
 
   useEffect(() => {
@@ -49,7 +81,7 @@ const AccordionsContainer = ({ componentDetails, submitted }: Props) => {
 
   return (
     <>
-      <div className="accordions-container">{createAccordions(accordionsData)}</div>
+      <div className="accordions-container">{createAccordions(formattedBenefits)}</div>
       {errorController.showError && errorController.message(formData.hasBenefits, formData)}
     </>
   );
