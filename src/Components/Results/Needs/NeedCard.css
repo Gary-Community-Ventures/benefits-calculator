@@ -39,6 +39,7 @@
   height: 80%;
   font-weight: 700;
   font-family: 'Roboto Slab', serif;
+  border: 1px solid var(--primary-color);
 }
 
 .more-info-btn:hover,
@@ -98,7 +99,7 @@
   height: 80%;
   font-weight: 700;
   font-family: 'Roboto Slab', serif;
-  width: 9rem;
+  border: 1px solid var(--primary-color);
 }
 
 @media (max-width: 500px) {
