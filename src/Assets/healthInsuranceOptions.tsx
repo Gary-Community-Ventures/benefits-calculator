@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 import { ReactComponent as Chp } from './OptionCardIcons/HealthInsurance/chp.svg';
-import { ReactComponent as Dont_know } from './OptionCardIcons/HealthInsurance/dont_know.svg';
+import { ReactComponent as VA } from './OptionCardIcons/HealthInsurance/va.svg';
 import { ReactComponent as Emergency_medicaid } from './OptionCardIcons/HealthInsurance/emergency_medicaid.svg';
 import { ReactComponent as Employer } from './OptionCardIcons/HealthInsurance/employer.svg';
 import { ReactComponent as Family_planning } from './OptionCardIcons/HealthInsurance/family_planning.svg';
@@ -29,7 +29,10 @@ const healthInsuranceOptions: HealthInsuranceOptions = {
   you: {
     none: {
       formattedMessage: (
-        <FormattedMessage id="healthInsuranceOptions.none-I" defaultMessage="I do not have health insurance" />
+        <FormattedMessage
+          id="healthInsuranceOptions.none-dont-know-I"
+          defaultMessage="I don't have or know if I have health insurance"
+        />
       ),
       icon: <None className="option-card-icon" />,
     },
@@ -82,15 +85,18 @@ const healthInsuranceOptions: HealthInsuranceOptions = {
       ),
       icon: <Family_planning className="option-card-icon" />,
     },
-    dont_know: {
-      formattedMessage: <FormattedMessage id="healthInsuranceOptions.dont_know" defaultMessage="Don't Know" />,
-      icon: <Dont_know className="option-card-icon" />,
+    va: {
+      formattedMessage: <FormattedMessage id="healthInsuranceOptions.va" defaultMessage="VA health care benefits" />,
+      icon: <VA className="option-card-icon" />,
     },
   },
   them: {
     none: {
       formattedMessage: (
-        <FormattedMessage id="healthInsuranceOptions.none-they" defaultMessage="They do not have health insurance" />
+        <FormattedMessage
+          id="healthInsuranceOptions.none-dont-know-they"
+          defaultMessage="They don't have or know if they have health insurance"
+        />
       ),
       icon: <None className="option-card-icon" />,
     },
@@ -143,9 +149,9 @@ const healthInsuranceOptions: HealthInsuranceOptions = {
       ),
       icon: <Family_planning className="option-card-icon" />,
     },
-    dont_know: {
-      formattedMessage: <FormattedMessage id="healthInsuranceOptions.dont_know" defaultMessage="Don't Know" />,
-      icon: <Dont_know className="option-card-icon" />,
+    va: {
+      formattedMessage: <FormattedMessage id="healthInsuranceOptions.va" defaultMessage="VA health care benefits" />,
+      icon: <VA className="option-card-icon" />,
     },
   },
 };

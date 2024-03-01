@@ -62,7 +62,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       chp: false,
       emergency_medicaid: false,
       family_planning: false,
-      dont_know: false,
+      va: false,
     },
   };
 

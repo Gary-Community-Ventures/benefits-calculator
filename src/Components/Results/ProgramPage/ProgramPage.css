@@ -13,13 +13,13 @@
 .program-icon-and-header {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   width: 100%;
 }
 
 .header-icon-box {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   height: 6rem;
   width: 6rem;

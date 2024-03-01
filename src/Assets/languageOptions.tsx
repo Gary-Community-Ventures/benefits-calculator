@@ -1,4 +1,4 @@
-export type Language = 'en-us' | 'es' | 'vi' | 'fr' | 'am' | 'so' | 'ru' | 'ne' | 'my' | 'zh';
+export type Language = 'en-us' | 'es' | 'vi' | 'fr' | 'am' | 'so' | 'ru' | 'ne' | 'my' | 'zh' | 'ar';
 const languageOptions: Record<Language, string> = {
   'en-us': 'English',
   es: 'Español',
@@ -10,6 +10,9 @@ const languageOptions: Record<Language, string> = {
   ne: 'नेपाली',
   my: 'မြန်မာဘာသာစကား',
   zh: '汉语',
+  ar: 'عربي',
 };
+
+export const rightToLeftLanguages = ['ar'];
 
 export default languageOptions;
