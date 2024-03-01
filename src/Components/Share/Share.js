@@ -75,15 +75,7 @@ const Share = forwardRef(function Share({ close }, ref) {
 
   return (
     <div className="container">
-      <IconButton
-        aria-label="close"
-        onClick={close}
-        sx={{
-          position: 'absolute',
-          right: 0,
-          top: 0,
-        }}
-      >
+      <IconButton aria-label="close" onClick={close} className="share-close-button">
         <CloseIcon />
       </IconButton>
       <h2 className="share-header">

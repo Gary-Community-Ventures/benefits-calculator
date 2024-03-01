@@ -27,7 +27,11 @@ const PreviousButton = ({ navFunction }: Props) => {
   const navigationFunction = navFunction ?? defaultNavigate;
 
   return (
-    <Button variant="outlined" onClick={navigationFunction} startIcon={<NavigateBeforeIcon sx={{ mr: '-8px' }} />}>
+    <Button
+      variant="outlined"
+      onClick={navigationFunction}
+      startIcon={<NavigateBeforeIcon sx={{ mr: '-8px' }} className="rtl-mirror" />}
+    >
       <FormattedMessage id="previousButton" defaultMessage="Back" />
     </Button>
   );

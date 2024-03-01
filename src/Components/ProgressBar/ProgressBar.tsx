@@ -40,7 +40,7 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
         sx={progressBarStyles}
         variant="determinate"
         value={progressPercentage}
-        className="progress-bar"
+        className="progress-bar rtl-mirror"
         aria-label="Progress Bar"
       />
       <p className="step-progress-title">
