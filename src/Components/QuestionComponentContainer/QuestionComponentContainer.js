@@ -22,7 +22,8 @@ const QuestionComponentContainer = ({
   handleExpenseSourcesSubmit,
   handleCheckboxChange,
 }) => {
-  const { formData, setFormData } = useContext(Context);
+  const { config, formData, setFormData } = useContext(Context);
+  const { counties_by_zipcode: countiesByZipcode } = config;
   let { id } = useParams();
   let matchingQuestion = getQuestion(+id, formData.immutableReferrer);
 
@@ -125,7 +126,7 @@ const QuestionComponentContainer = ({
       return false;
     }
     if (inputName === 'zipcode') {
-      return !zipcodeHasError(formData.zipcode);
+      return !zipcodeHasError(formData.zipcode, undefined, countiesByZipcode);
     }
     if (formData[inputName] === true) {
       // this case is for a radio button question where the user selected "yes"

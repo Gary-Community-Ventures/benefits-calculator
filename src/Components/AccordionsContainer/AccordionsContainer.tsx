@@ -1,14 +1,12 @@
-import accordionsData, { BenefitAccordion } from '../../Assets/BenefitCategoryLists/benefitAccordions.ts';
-import CategoryAccordion from '../CategoryAccordion/CategoryAccordion.tsx';
 import { useState, useEffect, useContext } from 'react';
+import { BenefitAccordion, CategoryOptions } from '../../Assets/BenefitCategoryLists/benefitAccordions.ts';
+import CategoryAccordion from '../CategoryAccordion/CategoryAccordion.tsx';
+import { Config } from '../../Types/Config.ts';
+import { FormattedMessageType } from '../../Types/Questions.ts';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import './AccordionsContainer.css';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { AccordionContainerDetails } from '../../Types/Questions.ts';
-
-import { Config } from '../../Types/Config.ts';
-import { FormattedMessageType } from '../../Types/Questions.ts';
-import { CategoryOptions } from '../../Assets/BenefitCategoryLists/benefitAccordions.ts';
 
 type Props = {
   componentDetails: AccordionContainerDetails;

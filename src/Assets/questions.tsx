@@ -16,7 +16,6 @@ import {
   otherReferalSourceHelperText,
 } from './validationFunctions.tsx';
 import referralOptions from './referralOptions.tsx';
-import countiesByZipcode from './countiesByZipcode.tsx';
 import signUpOptions from './signUpOptions.tsx';
 import acuteConditionOptions from './acuteConditionOptions';
 import { FormattedMessage } from 'react-intl';
@@ -58,7 +57,6 @@ const questions: Record<QuestionName, Question> = {
               <FormattedMessage id="questions.zipcode-a-disabledSelectMenuItemText" defaultMessage="Select a county" />
             ),
           },
-          options: countiesByZipcode,
         },
       },
     ],

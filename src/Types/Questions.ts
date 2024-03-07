@@ -46,7 +46,7 @@ export type BasicSelectDetails = {
   inputLabel?: FormattedMessageType;
   inputError: ValidationFunction<string>;
   inputHelperText: MessageFunction<string>;
-  options: BasicSelectOptions;
+  options?: BasicSelectOptions;
   componentProperties: {
     labelId: string;
     inputLabelText: FormattedMessageType;

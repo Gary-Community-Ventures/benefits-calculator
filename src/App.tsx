@@ -35,6 +35,7 @@ const App = () => {
   const rawExternalId = searchParams.get('externalid');
   const externalId = rawExternalId !== null ? rawExternalId : undefined;
   const {
+    config,
     locale,
     formData,
     setFormData,
@@ -43,6 +44,9 @@ const App = () => {
     pageIsLoading,
     getReferrer,
   } = useContext(Context);
+  let countiesByZipcode = {};
+  if (config) countiesByZipcode = config.counties_by_zipcode;
+
   const [totalSteps, setTotalSteps] = useState(
     getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER,
   );
@@ -212,7 +216,7 @@ const App = () => {
   ) => {
     event.preventDefault();
     errorController.incrementSubmitted();
-    const hasError = errorController.updateError(inputToBeValidated, formData);
+    const hasError = errorController.updateError(inputToBeValidated, formData, countiesByZipcode);
     const isZipcodeQuestionAndCountyIsEmpty = questionName === 'zipcode' && formData.county === '';
     const isReferralQuestionWithOtherAndOtherSourceIsEmpty =
       questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '';

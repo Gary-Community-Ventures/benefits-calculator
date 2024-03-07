@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import countiesByZipcode from './countiesByZipcode';
 import type { ErrorController, ValidationFunction, MessageFunction } from '../Types/ErrorController';
-import type { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo, Benefits } from '../Types/FormData';
+import type {
+  Expense,
+  HealthInsurance,
+  HouseholdData,
+  IncomeStream,
+  SignUpInfo,
+  Benefits,
+  FormData,
+} from '../Types/FormData';
 import ErrorMessageWrapper from '../Components/ErrorMessage/ErrorMessageWrapper';
 
 function useErrorController(hasErrorFunc: ValidationFunction<any>, messageFunc: MessageFunction<any>): ErrorController {
@@ -15,14 +22,14 @@ function useErrorController(hasErrorFunc: ValidationFunction<any>, messageFunc: 
     setSubmittedCount(submittedCount + 1);
   };
 
-  const updateError: ValidationFunction<any> = (value, formData) => {
-    const updatedHasError = hasErrorFunc(value, formData);
+  const updateError: ValidationFunction<any> = (value, formData, countiesByZipcode) => {
+    const updatedHasError = hasErrorFunc(value, formData, countiesByZipcode);
     setHasError(updatedHasError);
     return updatedHasError;
   };
 
-  const message: MessageFunction<any> = (value, formData) => {
-    return messageFunc(value, formData);
+  const message: MessageFunction<any> = (value: string, formData: FormData | undefined, countiesByZipcode) => {
+    return messageFunc(value, formData, countiesByZipcode);
   };
 
   return { hasError, showError, submittedCount, incrementSubmitted, setSubmittedCount, updateError, message };
@@ -51,20 +58,24 @@ const displayAgeHelperText: MessageFunction<string> = (applicantAge) => {
   }
 };
 
-const zipcodeHasError: ValidationFunction<string | number> = (zipcode) => {
+const zipcodeHasError: ValidationFunction<string | number> = (zipcode, formData, countiesByZipcode) => {
   //the zipcode input must have digits [0-9] and be exactly 5 digits long
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
   if (numberMustBeFiveDigitsLongRegex.test(zipcode.toString())) {
     //this means that the zipcode input passed the regex test so we can just return false since there is no error
     //this additional test checks the zipcode input against all CO zipcodes
-    return !Object.keys(countiesByZipcode).includes(zipcode.toString());
+    if (countiesByZipcode) {
+      return !Object.keys(countiesByZipcode).includes(zipcode.toString());
+    }
+    // If countiesByZipcode is undefined, return false (assuming no error)
+    return true;
   } else {
     return true;
   }
 };
 
-const displayZipcodeHelperText: MessageFunction<string | number> = (zipcode) => {
-  if (zipcodeHasError(zipcode)) {
+const displayZipcodeHelperText: MessageFunction<string | number> = (zipcode, formData, countiesByZipcode) => {
+  if (zipcodeHasError(zipcode, undefined, countiesByZipcode)) {
     return (
       <ErrorMessageWrapper fontSize="1rem">
         <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />
