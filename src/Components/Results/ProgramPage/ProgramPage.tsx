@@ -6,6 +6,8 @@ import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
 import { FormattedMessage } from 'react-intl';
 import { formatToUSD } from '../Results.tsx';
 import './ProgramPage.css';
+import BackToScreen from '../../BackToScreen/BackToScreen.tsx';
+import WarningMessage from '../../WarningComponent/WarningMessage.tsx';
 
 type ProgramPageProps = {
   program: Program;
@@ -80,6 +82,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         {displayIconAndHeader(program)}
         {displayEstimatedValueAndTime(program)}
       </div>
+      {program.warning.default_message && <WarningMessage message={program.warning.default_message} />}
       <div className="apply-online-button">
         <a href={program.apply_button_link.default_message} target="_blank">
           <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
