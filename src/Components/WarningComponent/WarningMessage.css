@@ -4,7 +4,7 @@
   font-weight: bold;
   display: flex;
   gap: 1rem;
-  border:  1px solid #978398;
+  border: 1px solid #978398;
   border-radius: 0.5rem;
   background-color: var(--hover-color);
   align-items: center;

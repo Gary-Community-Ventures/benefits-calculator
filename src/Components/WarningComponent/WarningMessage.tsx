@@ -3,19 +3,15 @@ import { ReactComponent as WarningIcon } from '../../Assets/icons/warning.svg';
 import './WarningMessage.css';
 
 type WarningMessageProps = {
-  message : string;
-}
+  message: string;
+};
 
-const WarningMessage = ({message} : WarningMessageProps) => {
-
+const WarningMessage = ({ message }: WarningMessageProps) => {
   return (
     <div className="warning-message">
       <WarningIcon className="warning-icon" />
       <p>
-        <FormattedMessage
-          id="Warning.message"
-          defaultMessage={message}
-        />
+        <FormattedMessage id="Warning.message" defaultMessage={message} />
       </p>
     </div>
   );
