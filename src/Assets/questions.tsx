@@ -15,9 +15,6 @@ import {
   countySelectHelperText,
   otherReferalSourceHelperText,
 } from './validationFunctions.tsx';
-import referralOptions from './referralOptions.tsx';
-import signUpOptions from './signUpOptions.tsx';
-import acuteConditionOptions from './acuteConditionOptions';
 import { FormattedMessage } from 'react-intl';
 import type { QuestionName, Question } from '../Types/Questions.ts';
 
@@ -215,7 +212,6 @@ const questions: Record<QuestionName, Question> = {
     componentDetails: {
       componentType: 'OptionCardGroup',
       inputName: 'acuteHHConditions',
-      options: acuteConditionOptions,
       inputError: acuteHHConditionsHasError,
     },
   },
@@ -244,7 +240,6 @@ const questions: Record<QuestionName, Question> = {
           />
         ),
       },
-      options: referralOptions,
     },
     followUpQuestions: [
       {
@@ -277,7 +272,6 @@ const questions: Record<QuestionName, Question> = {
     componentDetails: {
       componentType: 'BasicCheckboxGroup',
       inputName: 'signUpInfo',
-      options: signUpOptions,
       inputError: signUpOptionsHaveError,
     },
     followUpQuestions: [

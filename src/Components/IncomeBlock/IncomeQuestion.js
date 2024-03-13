@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
@@ -12,8 +13,6 @@ import {
   incomeStreamHelperText,
   incomeFrequencyHelperText,
 } from '../../Assets/validationFunctions.tsx';
-import incomeOptions from '../../Assets/incomeOptions';
-import frequencyOptions from '../../Assets/frequencyOptions';
 import Textfield from '../Textfield/Textfield';
 
 const StyledSelectfield = styled(Select)({
@@ -41,10 +40,13 @@ const IncomeQuestion = ({
   page,
   submitted,
 }) => {
+  const { config } = useContext(Context);
   const hoursErrorController = useErrorController(hoursWorkedValueHasError, displayIncomeStreamValueHelperText);
   const amountErrorController = useErrorController(incomeStreamValueHasError, displayIncomeStreamValueHelperText);
   const incomeStreamErrorController = useErrorController(selectHasError, incomeStreamHelperText);
   const incomeFrequencyErrorController = useErrorController(selectHasError, incomeFrequencyHelperText);
+
+  const { frequency_options: frequencyOptions, income_options: incomeOptions = {} } = config ?? {};
 
   useEffect(() => {
     hoursErrorController.setSubmittedCount(submitted);
@@ -63,7 +65,7 @@ const IncomeQuestion = ({
       return (
         <>
           {'('}
-          {incomeOptions[incomeStreamName]}
+          {incomeOptions[incomeStreamName].message}
           {')'}?
         </>
       );
@@ -85,7 +87,7 @@ const IncomeQuestion = ({
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
         <MenuItem value={menuItemKey} key={menuItemKey}>
-          {menuItemLabels[i]}
+          {menuItemLabels[i].message}
         </MenuItem>
       );
     });
@@ -109,7 +111,7 @@ const IncomeQuestion = ({
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
         <MenuItem value={menuItemKey} key={menuItemKey}>
-          {menuItemLabels[i]}
+          {menuItemLabels[i].message}
         </MenuItem>
       );
     });

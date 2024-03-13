@@ -60,7 +60,7 @@ export type BasicSelectDetails = {
 export type OptionCardGroupDetails = {
   componentType: 'OptionCardGroup';
   inputName: string;
-  options: any;
+  options?: any;
   inputError: ValidationFunction<{ [key: string]: boolean }>;
   inputHelperText?: MessageFunction<{ [key: string]: boolean }>;
 };
@@ -103,7 +103,7 @@ export type AccordionContainerDetails = {
 export type BasicCheckboxGroupDetails = {
   componentType: 'BasicCheckboxGroup';
   inputName: string;
-  options: {
+  options?: {
     [key: string]: FormattedMessageType;
   };
   inputError: ValidationFunction<SignUpInfo>;

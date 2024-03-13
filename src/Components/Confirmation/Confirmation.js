@@ -1,13 +1,6 @@
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
-import relationshipOptions from '../../Assets/relationshipOptions';
-import referralOptions from '../../Assets/referralOptions';
-import incomeOptions from '../../Assets/incomeOptions';
-import frequencyOptions from '../../Assets/frequencyOptions';
-import expenseOptions from '../../Assets/expenseOptions';
-import healthInsuranceOptions from '../../Assets/healthInsuranceOptions.tsx';
-import acuteConditionOptions from '../../Assets/acuteConditionOptions';
 import cashAssistanceBenefits from '../../Assets/BenefitCategoryLists/categories/cashAssistanceBenefits.tsx';
 import foodAndNutritionBenefits from '../../Assets/BenefitCategoryLists/categories/foodAndNutritionBenefits';
 import childCareBenefits from '../../Assets/BenefitCategoryLists/categories/childCareBenefits';
@@ -30,14 +23,23 @@ import { ReactComponent as Immediate } from '../../Assets/icons/immediate.svg';
 import { ReactComponent as Referral } from '../../Assets/icons/referral.svg';
 import './Confirmation.css';
 import PreviousButton from '../PreviousButton/PreviousButton';
-import { House } from '@mui/icons-material';
 
 const Confirmation = () => {
-  const { formData } = useContext(Context);
+  const { config, formData } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();
   const intl = useIntl();
   const locationState = { state: { routedFromConfirmationPg: true } };
+
+  const {
+    acute_condition_options: acuteConditionOptions = {},
+    expense_options: expenseOptions = {},
+    frequency_options: frequencyOptions = {},
+    health_insurance_options: healthInsuranceOptions = {},
+    income_options: incomeOptions = {},
+    referral_options: referralOptions = {},
+    relationship_options: relationshipOptions = {},
+  } = config ?? {};
 
   const getQuestionUrl = (name) => {
     const stepNumber = getStepNumber(name, formData.immutableReferrer);
@@ -233,7 +235,7 @@ const Confirmation = () => {
       if (index === 0) {
         return <FormattedMessage id="qcc.hoh-text" defaultMessage="Head of Household (You)" key={index} />;
       } else {
-        return relationshipOptions[personData.relationshipToHH];
+        return relationshipOptions[personData.relationshipToHH].message;
       }
     });
 
@@ -359,7 +361,11 @@ const Confirmation = () => {
 
   const displayReferralSourceSection = () => {
     const { referralSource, otherSource } = formData;
-    const referralSourceLabel = referralOptions[referralSource];
+    const referralSourceLabel =
+      typeof referralOptions[referralSource] === 'object'
+        ? referralOptions[referralSource].message
+        : referralOptions[referralSource];
+
     const finalReferralSource = referralSource !== 'other' ? referralSourceLabel : otherSource;
 
     if (formData.immutableReferrer) {
@@ -442,7 +448,7 @@ const Confirmation = () => {
   };
 
   const getExpenseSourceLabel = (expenseSourceName) => {
-    return expenseOptions[expenseSourceName];
+    return expenseOptions[expenseSourceName].message;
   };
 
   const listAllExpenses = (memberExpenses) => {
@@ -460,11 +466,11 @@ const Confirmation = () => {
   };
 
   const getIncomeStreamNameLabel = (incomeStreamName) => {
-    return incomeOptions[incomeStreamName];
+    return incomeOptions[incomeStreamName].message;
   };
 
   const getIncomeStreamFrequencyLabel = (incomeFrequency) => {
-    return frequencyOptions[incomeFrequency];
+    return frequencyOptions[incomeFrequency].message;
   };
 
   const formatToUSD = (num) => {
@@ -584,7 +590,7 @@ const Confirmation = () => {
 
   const displayHealthInsurance = (hHMemberHealthInsurance, hhMemberIndex) => {
     const selectedDontKnow = hHMemberHealthInsurance.dont_know === true;
-    const selectedNone = hHMemberHealthInsurance.none === true;
+    const selectedNone = hHMemberHealthInsurance.none.message === true;
     const allOtherSelectedOptions = Object.entries(hHMemberHealthInsurance).filter(
       (hHMemberInsEntry) => hHMemberInsEntry[1] === true,
     );

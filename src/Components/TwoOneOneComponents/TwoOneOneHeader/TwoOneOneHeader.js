@@ -16,12 +16,12 @@ import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
 import CloseIcon from '@mui/icons-material/Close';
 import EmailResults from '../../EmailResults/EmailResults';
-import languageOptions from '../../../Assets/languageOptions';
 import './TwoOneOneHeader.css';
 
 const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
-  const { formData, locale, selectLanguage } = useContext(Context);
+  const { config, formData, locale, selectLanguage } = useContext(Context);
+  const { language_options: languageOptions = {} } = config ?? {};
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
 
   //this is for the results icon to conditionally show up

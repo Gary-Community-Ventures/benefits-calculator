@@ -8,7 +8,7 @@ import {
 } from '../Types/ApiFormData.js';
 import { FormData, HouseholdData } from '../Types/FormData.js';
 import { putScreen, postScreen, putUser } from '../apiCalls.js';
-import { Language } from './languageOptions.js';
+import { Language } from '../Types/Language.js';
 
 const getScreensBody = (formData: FormData, languageCode: Language) => {
   const householdMembers = getHouseholdMembersBodies(formData);

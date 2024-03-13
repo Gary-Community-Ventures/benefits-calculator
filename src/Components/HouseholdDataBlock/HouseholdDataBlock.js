@@ -11,9 +11,6 @@ import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import Textfield from '../Textfield/Textfield';
-import relationshipOptions from '../../Assets/relationshipOptions';
-import healthInsuranceOptions from '../../Assets/healthInsuranceOptions.tsx';
-import conditionOptions from '../../Assets/conditionOptions';
 import {
   householdMemberAgeHasError,
   displayHouseholdMemberAgeHelperText,
@@ -28,9 +25,12 @@ import './HouseholdDataBlock.css';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
-  const { formData } = useContext(Context);
+  const { config, formData } = useContext(Context);
+  const { health_insurance_options: healthInsuranceOptions = {}, relationship_options: relationshipOptions = {} } =
+    config ?? {};
   const { householdSize } = formData;
   const remainingHHMNumber = Number(householdSize);
+  const { condition_options: conditionOptions = {} } = config ?? {};
   let { uuid, page } = useParams();
   page = parseInt(page);
   const step = getStepNumber('householdData');
@@ -188,9 +188,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const createMembersAdded = (member, index) => {
     let relationship = relationshipOptions[member.relationshipToHH];
-    if (relationship === undefined) {
-      relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
-    }
+    relationship =
+      relationship === undefined ? (
+        <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />
+      ) : (
+        relationship.message
+      );
     const age = member.age;
     let income = 0;
     for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {

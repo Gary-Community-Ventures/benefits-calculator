@@ -23,7 +23,12 @@ const QuestionComponentContainer = ({
   handleCheckboxChange,
 }) => {
   const { config, formData, setFormData } = useContext(Context);
-  const { counties_by_zipcode: countiesByZipcode } = config;
+  const {
+    acute_condition_options: acuteConditionOptions,
+    counties_by_zipcode: countiesByZipcode,
+    referral_options: referralOptions,
+    sign_up_options: signUpOptions,
+  } = config ?? {};
   let { id } = useParams();
   let matchingQuestion = getQuestion(+id, formData.immutableReferrer);
 
@@ -60,6 +65,8 @@ const QuestionComponentContainer = ({
   };
 
   const renderBasicCheckboxGroup = (question) => {
+    if (question.name === 'signUpInfo')
+      return <BasicCheckboxGroup stateVariable={question.componentDetails.inputName} options={signUpOptions} />;
     return (
       <BasicCheckboxGroup
         stateVariable={question.componentDetails.inputName}
@@ -69,6 +76,16 @@ const QuestionComponentContainer = ({
   };
 
   const renderOptionCardGroup = (question) => {
+    if (question.name === 'acuteHHConditions')
+      return (
+        <OptionCardGroup
+          options={acuteConditionOptions}
+          stateVariable={question.componentDetails.inputName}
+          memberData={formData}
+          setMemberData={setFormData}
+        />
+      );
+
     return (
       <OptionCardGroup
         options={matchingQuestion.componentDetails.options}
@@ -80,6 +97,15 @@ const QuestionComponentContainer = ({
   };
 
   const renderBasicSelectComponent = (question) => {
+    if (question.name === 'referralSource')
+      return (
+        <BasicSelect
+          componentDetails={question.componentDetails}
+          options={referralOptions}
+          formDataProperty={question.componentDetails.inputName}
+          submitted={errorController.submittedCount}
+        />
+      );
     return (
       <BasicSelect
         componentDetails={question.componentDetails}

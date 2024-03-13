@@ -1,7 +1,8 @@
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import expenseOptions from '../../Assets/expenseOptions';
 import {
   useErrorController,
   expenseSourceValueHasError,
@@ -30,7 +31,10 @@ const StyledDeleteButton = styled(Button)({
 });
 
 const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteExpenseBlock, index, submitted }) => {
+  const { config } = useContext(Context);
   const expenseTypeErrorController = useErrorController(selectHasError, expenseTypeHelperText);
+
+  const { expense_options: expenseOptions = {} } = config ?? {};
 
   useEffect(() => {
     expenseTypeErrorController.updateError(expenseSourceName);
@@ -87,7 +91,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
         <MenuItem value={menuItemKey} key={menuItemKey}>
-          {menuItemLabels[i]}
+          {menuItemLabels[i].message}
         </MenuItem>
       );
     });
@@ -100,7 +104,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
       return (
         <>
           {'('}
-          {expenseOptions[expenseSourceName]}
+          {expenseOptions[expenseSourceName].message}
           {')'}?
         </>
       );

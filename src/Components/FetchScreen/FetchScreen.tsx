@@ -1,14 +1,14 @@
 import { useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getScreen } from '../../apiCalls.js';
-import referralOptions from '../../Assets/referralOptions.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LoadingPage from '../LoadingPage/LoadingPage.tsx';
 import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData.ts';
 import type { FormData } from '../../Types/FormData.ts';
 
 const FetchScreen = () => {
-  const { formData, setFormData, screenDoneLoading } = useContext(Context);
+  const { config, formData, setFormData, screenDoneLoading } = useContext(Context);
+  const { referral_options: referralOptions } = config ?? {};
   const { uuid } = useParams();
   const navigate = useNavigate();
 

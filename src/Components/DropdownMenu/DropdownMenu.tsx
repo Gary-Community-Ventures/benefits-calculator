@@ -45,7 +45,7 @@ const DropdownMenu = ({ componentDetails, options, memberData, setMemberData, su
     errorController.updateError(event.target.value);
   };
 
-  const createMenuItems = (options: { [key: string]: string }) => {
+  const createMenuItems = (options: { [key: string]: string | any }) => {
     const disabledSelectMenuItem = (
       <MenuItem value="disabled-select" key="disabled-select" disabled>
         {disabledSelectMenuItemText}
@@ -55,6 +55,12 @@ const DropdownMenu = ({ componentDetails, options, memberData, setMemberData, su
     const menuItemLabels = Object.values(options);
 
     const dropdownMenuItems = menuItemKeys.map((option, i) => {
+      if (typeof menuItemLabels[i] === 'object')
+        return (
+          <MenuItem value={option} key={option}>
+            {menuItemLabels[i].message}
+          </MenuItem>
+        );
       return (
         <MenuItem value={option} key={option}>
           {menuItemLabels[i]}

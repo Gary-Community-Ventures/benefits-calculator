@@ -1,4 +1,4 @@
-import { Language } from '../Assets/languageOptions';
+import { Language } from './Language';
 
 export type ApiInsuranceReadOnly = {
   household_member: number;
