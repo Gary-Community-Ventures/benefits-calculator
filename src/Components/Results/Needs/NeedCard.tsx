@@ -67,14 +67,16 @@ const NeedCard = ({ need }: NeedsCardProps) => {
       </div>
       {infoIsOpen && (
         <>
-          <article className="need-desc-paragraph">{translatedNeedDesc}</article>
-          <a href={`tel:${need.phone_number}`} className="phone-number">
-            {need.phone_number && need.phone_number}
-          </a>
+          <p className="need-desc-paragraph">{translatedNeedDesc}</p>
+          {need.phone_number && (
+            <a href={`tel:${need.phone_number}`} className="phone-number">
+              {need.phone_number}
+            </a>
+          )}
           <div className="visit-website-btn-container">
-            <button onClick={() => window.open(translatedLink, '_blank')} className="visit-website-btn">
+            <a onClick={() => window.open(translatedLink, '_blank')} className="visit-website-btn">
               <FormattedMessage id="visit-website-btn" defaultMessage="Visit Website" />
-            </button>
+            </a>
           </div>
         </>
       )}

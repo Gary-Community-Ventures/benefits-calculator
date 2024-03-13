@@ -603,9 +603,7 @@ const Confirmation = () => {
       }
     }, '');
 
-    if (selectedDontKnow) {
-      return <>{youVsThemHealthInsuranceOptions.dont_know.formattedMessage}</>;
-    } else if (selectedNone) {
+    if (selectedNone) {
       return <>{youVsThemHealthInsuranceOptions.none.formattedMessage}</>;
     } else {
       return <>{allOtherSelectedOptionsString}</>;

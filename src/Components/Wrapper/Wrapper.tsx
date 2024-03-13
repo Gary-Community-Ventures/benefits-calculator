@@ -5,7 +5,7 @@ import { WrapperContext } from '../../Types/WrapperContext';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
-import { Language } from '../../Types/Language';
+import { Language, rightToLeftLanguages } from '../../Types/Language';
 
 import useGetConfig from '../Config/configHook';
 
@@ -158,6 +158,15 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
     // @ts-ignore
     setMessages(translations['en-us'] ?? {});
   }, [locale, translations]);
+
+  useEffect(() => {
+    if (rightToLeftLanguages.includes(locale)) {
+      document.documentElement.setAttribute('dir', 'rtl');
+      return;
+    }
+
+    document.documentElement.removeAttribute('dir');
+  }, [locale]);
 
   const selectLanguage = (event: Event) => {
     const target = event.target as HTMLInputElement;
