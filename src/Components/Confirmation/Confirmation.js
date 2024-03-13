@@ -1,13 +1,6 @@
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
-import cashAssistanceBenefits from '../../Assets/BenefitCategoryLists/categories/cashAssistanceBenefits.tsx';
-import foodAndNutritionBenefits from '../../Assets/BenefitCategoryLists/categories/foodAndNutritionBenefits';
-import childCareBenefits from '../../Assets/BenefitCategoryLists/categories/childCareBenefits';
-import housingAndUtilities from '../../Assets/BenefitCategoryLists/categories/housingAndUtilities';
-import transportationBenefits from '../../Assets/BenefitCategoryLists/categories/transportationBenefits';
-import healthCareBenefits from '../../Assets/BenefitCategoryLists/categories/healthCareBenefits';
-import taxCreditBenefits from '../../Assets/BenefitCategoryLists/categories/taxCreditBenefits';
 import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
@@ -33,10 +26,11 @@ const Confirmation = () => {
 
   const {
     acute_condition_options: acuteConditionOptions = {},
+    category_benefits: categoryBenefits = {},
     expense_options: expenseOptions = {},
+    income_options: incomeOptions = {},
     frequency_options: frequencyOptions = {},
     health_insurance_options: healthInsuranceOptions = {},
-    income_options: incomeOptions = {},
     referral_options: referralOptions = {},
     relationship_options: relationshipOptions = {},
   } = config ?? {};
@@ -409,13 +403,12 @@ const Confirmation = () => {
 
   const displayAllFormData = () => {
     const allBenefitsList = {
-      ...cashAssistanceBenefits,
-      ...foodAndNutritionBenefits,
-      ...childCareBenefits,
-      ...housingAndUtilities,
-      ...transportationBenefits,
-      ...healthCareBenefits,
-      ...taxCreditBenefits,
+      ...categoryBenefits.cash.benefits,
+      ...categoryBenefits.childCare.benefits,
+      ...categoryBenefits.foodAndNutrition.benefits,
+      ...categoryBenefits.healthCare.benefits,
+      ...categoryBenefits.housingAndUtilities.benefits,
+      ...categoryBenefits.transportation.benefits,
     };
 
     return (
@@ -536,7 +529,7 @@ const Confirmation = () => {
       return (
         <p key={option} className="bottom-margin">
           {' '}
-          {relatedOptionsList[option]}{' '}
+          {relatedOptionsList[option].message}{' '}
         </p>
       );
     });
