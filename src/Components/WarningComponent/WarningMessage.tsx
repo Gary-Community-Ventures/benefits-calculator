@@ -1,9 +1,10 @@
-import { FormattedMessage } from 'react-intl';
 import { ReactComponent as WarningIcon } from '../../Assets/icons/warning.svg';
 import './WarningMessage.css';
+import ResultsTranslate from '../Results/Translate/Translate';
+import { Translation } from '../../Types/Results';
 
 type WarningMessageProps = {
-  message: string;
+  message: Translation;
 };
 
 const WarningMessage = ({ message }: WarningMessageProps) => {
@@ -11,7 +12,7 @@ const WarningMessage = ({ message }: WarningMessageProps) => {
     <div className="warning-message">
       <WarningIcon className="warning-icon" />
       <p>
-        <FormattedMessage id="Warning.message" defaultMessage={message} />
+        <ResultsTranslate translation={message} />
       </p>
     </div>
   );
