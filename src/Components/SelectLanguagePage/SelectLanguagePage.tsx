@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Language from '@mui/icons-material/Language';
 
 const SelectLanguagePage = () => {
   const { config, formData, locale, selectLanguage } = useContext(Context);

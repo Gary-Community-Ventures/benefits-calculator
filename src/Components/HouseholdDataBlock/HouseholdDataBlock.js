@@ -192,7 +192,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       relationship === undefined ? (
         <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />
       ) : (
-        relationship.message
+        <FormattedMessage id="relationshipOptions.yourself" defaultMessage={relationship.message} />
       );
     const age = member.age;
     let income = 0;
