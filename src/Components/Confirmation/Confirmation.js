@@ -529,7 +529,7 @@ const Confirmation = () => {
       return (
         <p key={option} className="bottom-margin">
           {' '}
-          {relatedOptionsList[option].message}{' '}
+          {relatedOptionsList[option].message ?? relatedOptionsList[option].props.defaultMessage}{' '}
         </p>
       );
     });

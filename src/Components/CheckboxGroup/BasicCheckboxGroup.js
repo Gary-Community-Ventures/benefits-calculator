@@ -35,7 +35,7 @@ const BasicCheckboxGroup = ({ stateVariable, options }) => {
             control={
               <Checkbox checked={state[stateVariable][optionKey]} onChange={handleCheckboxChange} name={optionKey} />
             }
-            label={options[optionKey].message}
+            label={options[optionKey].message ?? options[optionKey].props.defaultMessage}
             key={optionKey}
           />
         );
