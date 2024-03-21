@@ -103,7 +103,6 @@ const questions: Record<QuestionName, Question> = {
     header: <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />,
     question: (
       <>
-        {' '}
         <FormattedMessage id="questions.hasExpenses" defaultMessage="Does your household have any expenses?" />{' '}
         <HelpButton
           isVisible={true}
