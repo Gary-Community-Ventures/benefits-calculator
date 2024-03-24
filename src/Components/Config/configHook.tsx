@@ -42,20 +42,20 @@ function transformItem(item: unknown): any {
   };
 
   type OptionItem = {
-    message: Item;
+    _label: string;
+    _default_message: string;
     icon: IconItem;
   };
 
   if (typeof item !== 'object' || item === null) return item;
 
-  if (item.hasOwnProperty('_label') && item.hasOwnProperty('_default_message')) {
+  if (item.hasOwnProperty('_label') && item.hasOwnProperty('_default_message') && !item.hasOwnProperty('icon')) {
     const { _label, _default_message } = item as Item;
     return <FormattedMessage id={_label} defaultMessage={_default_message} />;
   }
 
-  if (item.hasOwnProperty('icon') && item.hasOwnProperty('message')) {
-    const { message, icon } = item as OptionItem;
-    const { _label, _default_message } = message as Item;
+  if (item.hasOwnProperty('icon')) {
+    const { _label, _default_message, icon } = item as OptionItem;
 
     let iconComponent;
     switch (icon._name) {

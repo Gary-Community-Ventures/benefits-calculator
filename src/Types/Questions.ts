@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { JSXElementConstructor, ReactElement } from 'react';
 import { MessageFunction, ValidationFunction } from './ErrorController';
 import { SignUpInfo } from './FormData';
 
@@ -13,7 +13,7 @@ export type QuestionName =
   | 'referralSource'
   | 'signUpInfo';
 
-export type FormattedMessageType = ReactElement;
+export type FormattedMessageType = ReactElement<any, string | JSXElementConstructor<any>>;
 
 export type TextFieldDetails = {
   componentType: 'Textfield';

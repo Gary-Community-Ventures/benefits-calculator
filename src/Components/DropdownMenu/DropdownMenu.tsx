@@ -55,12 +55,6 @@ const DropdownMenu = ({ componentDetails, options, memberData, setMemberData, su
     const menuItemLabels = Object.values(options);
 
     const dropdownMenuItems = menuItemKeys.map((option, i) => {
-      if (typeof menuItemLabels[i] === 'object')
-        return (
-          <MenuItem value={option} key={option}>
-            {menuItemLabels[i].message}
-          </MenuItem>
-        );
       return (
         <MenuItem value={option} key={option}>
           {menuItemLabels[i]}

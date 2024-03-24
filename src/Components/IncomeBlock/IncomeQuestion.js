@@ -65,7 +65,7 @@ const IncomeQuestion = ({
       return (
         <>
           {'('}
-          {incomeOptions[incomeStreamName].message}
+          {incomeOptions[incomeStreamName]}
           {')'}?
         </>
       );
@@ -87,7 +87,7 @@ const IncomeQuestion = ({
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
         <MenuItem value={menuItemKey} key={menuItemKey}>
-          {menuItemLabels[i].message}
+          {menuItemLabels[i]}
         </MenuItem>
       );
     });
@@ -111,7 +111,7 @@ const IncomeQuestion = ({
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
         <MenuItem value={menuItemKey} key={menuItemKey}>
-          {menuItemLabels[i].message}
+          {menuItemLabels[i]}
         </MenuItem>
       );
     });

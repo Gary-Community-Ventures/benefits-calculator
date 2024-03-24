@@ -91,7 +91,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
     const menuItems = menuItemKeys.map((menuItemKey, i) => {
       return (
         <MenuItem value={menuItemKey} key={menuItemKey}>
-          {menuItemLabels[i].message}
+          {menuItemLabels[i]}
         </MenuItem>
       );
     });
@@ -104,7 +104,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
       return (
         <>
           {'('}
-          {expenseOptions[expenseSourceName].message}
+          {expenseOptions[expenseSourceName]}
           {')'}?
         </>
       );

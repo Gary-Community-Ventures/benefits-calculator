@@ -19,7 +19,8 @@ const formatCategoryBenefits = (categoryBenefits: Config['category_benefits']): 
     const categoryName: FormattedMessageType = categoryValue.category_name;
     const categoryOptions: CategoryOptions = Object.entries(categoryValue.benefits).reduce(
       (options, [benefitKey, benefitValue]) => {
-        const benefitMessage: FormattedMessageType = (benefitValue as Record<string, FormattedMessageType>).message;
+        const benefitMessage: FormattedMessageType = benefitValue as FormattedMessageType;
+
         options[benefitKey] = benefitMessage;
         return options;
       },

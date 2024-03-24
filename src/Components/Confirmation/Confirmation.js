@@ -229,7 +229,7 @@ const Confirmation = () => {
       if (index === 0) {
         return <FormattedMessage id="qcc.hoh-text" defaultMessage="Head of Household (You)" key={index} />;
       } else {
-        return relationshipOptions[personData.relationshipToHH].message;
+        return relationshipOptions[personData.relationshipToHH];
       }
     });
 
@@ -357,7 +357,7 @@ const Confirmation = () => {
     const { referralSource, otherSource } = formData;
     const referralSourceLabel =
       typeof referralOptions[referralSource] === 'object'
-        ? referralOptions[referralSource].message
+        ? referralOptions[referralSource]
         : referralOptions[referralSource];
 
     const finalReferralSource = referralSource !== 'other' ? referralSourceLabel : otherSource;
@@ -441,7 +441,7 @@ const Confirmation = () => {
   };
 
   const getExpenseSourceLabel = (expenseSourceName) => {
-    return expenseOptions[expenseSourceName].message;
+    return expenseOptions[expenseSourceName];
   };
 
   const listAllExpenses = (memberExpenses) => {
@@ -459,11 +459,11 @@ const Confirmation = () => {
   };
 
   const getIncomeStreamNameLabel = (incomeStreamName) => {
-    return incomeOptions[incomeStreamName].message;
+    return incomeOptions[incomeStreamName];
   };
 
   const getIncomeStreamFrequencyLabel = (incomeFrequency) => {
-    return frequencyOptions[incomeFrequency].message;
+    return frequencyOptions[incomeFrequency];
   };
 
   const formatToUSD = (num) => {
@@ -529,7 +529,7 @@ const Confirmation = () => {
       return (
         <p key={option} className="bottom-margin">
           {' '}
-          {relatedOptionsList[option].message ?? relatedOptionsList[option].props.defaultMessage}{' '}
+          {relatedOptionsList[option]}{' '}
         </p>
       );
     });
@@ -583,7 +583,7 @@ const Confirmation = () => {
 
   const displayHealthInsurance = (hHMemberHealthInsurance, hhMemberIndex) => {
     const selectedDontKnow = hHMemberHealthInsurance.dont_know === true;
-    const selectedNone = hHMemberHealthInsurance.none.message === true;
+    const selectedNone = hHMemberHealthInsurance.none === true;
     const allOtherSelectedOptions = Object.entries(hHMemberHealthInsurance).filter(
       (hHMemberInsEntry) => hHMemberInsEntry[1] === true,
     );

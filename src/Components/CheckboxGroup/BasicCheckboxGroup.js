@@ -27,19 +27,6 @@ const BasicCheckboxGroup = ({ stateVariable, options }) => {
     const optionKeys = Object.keys(options);
 
     const formControlLabels = optionKeys.map((optionKey) => {
-      // checks for transformed config formatted messages
-      if (typeof options[optionKey] === 'object')
-        return (
-          <FormControlLabel
-            sx={{ alignItems: 'center', marginTop: `1rem` }}
-            control={
-              <Checkbox checked={state[stateVariable][optionKey]} onChange={handleCheckboxChange} name={optionKey} />
-            }
-            label={options[optionKey].message ?? options[optionKey].props.defaultMessage}
-            key={optionKey}
-          />
-        );
-
       return (
         <FormControlLabel
           sx={{ alignItems: 'center', marginTop: `1rem` }}

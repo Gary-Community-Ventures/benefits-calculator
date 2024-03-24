@@ -65,7 +65,7 @@ const BasicSelect = ({ componentDetails, options, formDataProperty, submitted }:
       if (typeof menuItemLabels[i] === 'object' && menuItemLabels[i])
         return (
           <MenuItem value={option} key={option}>
-            {menuItemLabels[i].message}
+            {menuItemLabels[i]}
           </MenuItem>
         );
 
