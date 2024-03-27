@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import { configEndpoint, header } from '../../apiCalls';
 import { ConfigApiResponse } from '../../Types/Config';
 import { Config } from '../../Types/Config';
@@ -172,7 +173,7 @@ async function getConfig() {
   });
 }
 
-export default function useGetConfig() {
+export function useGetConfig() {
   const [configLoading, setLoading] = useState<boolean>(true);
   const [configResponse, setConfigResponse] = useState<Config | undefined>();
 
@@ -192,4 +193,21 @@ export default function useGetConfig() {
   }, []);
 
   return { configLoading, configResponse };
+}
+
+export function useConfig(names: string[]) {
+  const { config } = useContext(Context);
+
+  // Return a default value or fallback object
+  if (config === undefined) return {};
+
+  const configValues: { [key: string]: any } = {};
+
+  names.forEach((name) => {
+    if (config[name] === undefined) throw new Error(`'${name}' does not exist in the config`);
+
+    configValues[name] = config[name];
+  });
+
+  return configValues;
 }

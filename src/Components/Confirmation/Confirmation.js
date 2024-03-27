@@ -3,6 +3,7 @@ import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
 import { useContext, useEffect } from 'react';
+import { useConfig } from '../Config/configHooks.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Grid from '@mui/material/Grid';
 import { ReactComponent as Edit } from '../../Assets/icons/edit.svg';
@@ -18,7 +19,7 @@ import './Confirmation.css';
 import PreviousButton from '../PreviousButton/PreviousButton';
 
 const Confirmation = () => {
-  const { config, formData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();
   const intl = useIntl();
@@ -33,7 +34,16 @@ const Confirmation = () => {
     health_insurance_options: healthInsuranceOptions = {},
     referral_options: referralOptions = {},
     relationship_options: relationshipOptions = {},
-  } = config ?? {};
+  } = useConfig([
+    'acute_condition_options',
+    'category_benefits',
+    'expense_options',
+    'income_options',
+    'frequency_options',
+    'health_insurance_options',
+    'referral_options',
+    'relationship_options',
+  ]);
 
   const getQuestionUrl = (name) => {
     const stepNumber = getStepNumber(name, formData.immutableReferrer);

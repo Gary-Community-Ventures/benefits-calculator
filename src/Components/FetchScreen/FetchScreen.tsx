@@ -1,5 +1,6 @@
 import { useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useConfig } from '../Config/configHooks.tsx';
 import { getScreen } from '../../apiCalls.js';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LoadingPage from '../LoadingPage/LoadingPage.tsx';
@@ -7,8 +8,8 @@ import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData.t
 import type { FormData } from '../../Types/FormData.ts';
 
 const FetchScreen = () => {
-  const { config, formData, setFormData, screenDoneLoading } = useContext(Context);
-  const { referral_options: referralOptions } = config ?? {};
+  const { formData, setFormData, screenDoneLoading } = useContext(Context);
+  const { referral_options: referralOptions } = useConfig(['language_options']);
   const { uuid } = useParams();
   const navigate = useNavigate();
 

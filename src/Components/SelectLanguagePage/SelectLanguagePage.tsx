@@ -1,3 +1,4 @@
+import { useConfig } from '../Config/configHooks.tsx';
 import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent, Button, Box } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper.tsx';
@@ -5,8 +6,9 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SelectLanguagePage = () => {
-  const { config, formData, locale, selectLanguage } = useContext(Context);
-  const { language_options: languageOptions = {} as Record<string, string> } = config ?? {};
+  const { formData, locale, selectLanguage } = useContext(Context);
+  const { language_options: languageOptions } = useConfig(['language_options']);
+
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const navigate = useNavigate();
 

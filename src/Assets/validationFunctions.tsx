@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { Context } from '../Components/Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
 import type { ErrorController, ValidationFunction, MessageFunction } from '../Types/ErrorController';
 import type {
@@ -13,6 +14,9 @@ import type {
 import ErrorMessageWrapper from '../Components/ErrorMessage/ErrorMessageWrapper';
 
 function useErrorController(hasErrorFunc: ValidationFunction<any>, messageFunc: MessageFunction<any>): ErrorController {
+  const { config } = useContext(Context);
+  const { counties_by_zipcode: countiesByZipcode } = config || {};
+
   const [hasError, setHasError] = useState(false);
   const [submittedCount, setSubmittedCount] = useState(0);
 
@@ -22,13 +26,13 @@ function useErrorController(hasErrorFunc: ValidationFunction<any>, messageFunc: 
     setSubmittedCount(submittedCount + 1);
   };
 
-  const updateError: ValidationFunction<any> = (value, formData, countiesByZipcode) => {
+  const updateError: ValidationFunction<any> = (value, formData) => {
     const updatedHasError = hasErrorFunc(value, formData, countiesByZipcode);
     setHasError(updatedHasError);
     return updatedHasError;
   };
 
-  const message: MessageFunction<any> = (value: string, formData: FormData | undefined, countiesByZipcode) => {
+  const message: MessageFunction<any> = (value: string, formData: FormData | undefined) => {
     return messageFunc(value, formData, countiesByZipcode);
   };
 

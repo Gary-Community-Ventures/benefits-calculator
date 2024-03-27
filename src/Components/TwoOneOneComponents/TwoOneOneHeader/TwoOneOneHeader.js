@@ -5,6 +5,7 @@ import { AppBar, MenuItem, Select, Modal, Link, IconButton } from '@mui/material
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import { useConfig } from '../../Config/configHooks';
 import { Context } from '../../Wrapper/Wrapper';
 import twoOneOneMFBLogo from '../../../Assets/TwoOneOneAssets/twoOneOneMFBLogo.png';
 import twoOneOneLinks from '../../../Assets/TwoOneOneAssets/twoOneOneLinks';
@@ -21,7 +22,7 @@ import './TwoOneOneHeader.css';
 const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
   const { config, formData, locale, selectLanguage } = useContext(Context);
-  const { language_options: languageOptions = {} } = config ?? {};
+  const { languageOptions } = useConfig(['language_options']);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
 
   //this is for the results icon to conditionally show up

@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import { useConfig } from '../Config/configHooks.tsx';
 import { Box, IconButton, Stack } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import ContinueButton from '../ContinueButton/ContinueButton';
@@ -26,11 +27,13 @@ import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { config, formData } = useContext(Context);
-  const { health_insurance_options: healthInsuranceOptions = {}, relationship_options: relationshipOptions = {} } =
-    config ?? {};
+  const {
+    condition_options: conditionOptions,
+    health_insurance_options: healthInsuranceOptions = {},
+    relationship_options: relationshipOptions = {},
+  } = useConfig(['condition_options', 'health_insurance_options', 'relationship_options']);
   const { householdSize } = formData;
   const remainingHHMNumber = Number(householdSize);
-  const { condition_options: conditionOptions = {} } = config ?? {};
   let { uuid, page } = useParams();
   page = parseInt(page);
   const step = getStepNumber('householdData');

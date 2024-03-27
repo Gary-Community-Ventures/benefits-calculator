@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useConfig } from '../Config/configHooks.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
@@ -34,7 +35,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   const { config } = useContext(Context);
   const expenseTypeErrorController = useErrorController(selectHasError, expenseTypeHelperText);
 
-  const { expense_options: expenseOptions = {} } = config ?? {};
+  const { expense_options: expenseOptions = {} } = useConfig(['expense_options']);
 
   useEffect(() => {
     expenseTypeErrorController.updateError(expenseSourceName);

@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import { useConfig } from '../Config/configHooks.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
@@ -46,7 +47,10 @@ const IncomeQuestion = ({
   const incomeStreamErrorController = useErrorController(selectHasError, incomeStreamHelperText);
   const incomeFrequencyErrorController = useErrorController(selectHasError, incomeFrequencyHelperText);
 
-  const { frequency_options: frequencyOptions, income_options: incomeOptions = {} } = config ?? {};
+  const { frequency_options: frequencyOptions, income_options: incomeOptions = {} } = useConfig([
+    'frequency_options',
+    'income_options',
+  ]);
 
   useEffect(() => {
     hoursErrorController.setSubmittedCount(submitted);

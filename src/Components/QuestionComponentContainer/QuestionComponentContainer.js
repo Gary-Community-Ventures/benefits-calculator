@@ -1,6 +1,7 @@
 import { useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper.tsx';
 import { useParams } from 'react-router-dom';
+import { useConfig } from '../Config/configHooks.tsx';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import Radiofield from '../Radiofield/Radiofield';
 import Textfield from '../Textfield/Textfield';
 import PreviousButton from '../PreviousButton/PreviousButton';
@@ -22,13 +23,13 @@ const QuestionComponentContainer = ({
   handleExpenseSourcesSubmit,
   handleCheckboxChange,
 }) => {
-  const { config, formData, setFormData } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const {
     acute_condition_options: acuteConditionOptions,
     counties_by_zipcode: countiesByZipcode,
     referral_options: referralOptions,
     sign_up_options: signUpOptions,
-  } = config ?? {};
+  } = useConfig(['acute_condition_options', 'counties_by_zipcode', 'referral_options', 'sign_up_options']);
   let { id } = useParams();
   let matchingQuestion = getQuestion(+id, formData.immutableReferrer);
 

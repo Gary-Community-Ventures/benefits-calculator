@@ -1,4 +1,5 @@
 import React, { useEffect, useState, PropsWithChildren } from 'react';
+import { useConfig } from '../Config/configHooks';
 import useStyle from '../../Assets/styleController';
 import { IntlProvider } from 'react-intl';
 import { WrapperContext } from '../../Types/WrapperContext';
@@ -7,7 +8,7 @@ import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
 import { Language, rightToLeftLanguages } from '../../Types/Language';
 
-import useGetConfig from '../Config/configHook';
+import { useGetConfig } from '../Config/configHooks';
 
 const initialFormData: FormData = {
   isTest: undefined,
