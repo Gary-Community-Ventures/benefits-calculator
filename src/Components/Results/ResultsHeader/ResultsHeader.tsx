@@ -48,7 +48,7 @@ const ProgramsHeader = () => {
           </section>
           {formData.immutableReferrer !== 'lgs' && (
             <section className="results-data-cell">
-              <div className="results-header-values">${taxCredit}</div>
+              <div className="results-header-values">${taxCredit.toLocaleString()}</div>
               <div className="results-header-label">
                 <FormattedMessage id="results.header-taxCredits" defaultMessage="Annual Tax Credit" />
               </div>
