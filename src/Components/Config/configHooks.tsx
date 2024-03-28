@@ -29,25 +29,112 @@ import { ReactComponent as Job_resources } from '../../Assets/OptionCardIcons/Ac
 import { ReactComponent as Legal_services } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
 import { ReactComponent as Support } from '../../Assets/OptionCardIcons/AcuteConditions/support.svg';
 
+type Item = {
+  _label: string;
+  _default_message: string;
+};
+
+type IconItem = {
+  _classname: string;
+  _name: string;
+};
+
+type OptionItem = {
+  _label: string;
+  _default_message: string;
+  icon: IconItem;
+};
+
+// Transforms objects with icon key to return Icon ReactComponent
+function transformItemIcon(item: unknown): any {
+  const { _label, _default_message, icon } = item as OptionItem;
+
+  let iconComponent;
+  switch (icon._name) {
+    // Acute Conditions
+    case 'Baby_supplies':
+      iconComponent = <Baby_supplies className={icon._classname} />;
+      break;
+    case 'Child_development':
+      iconComponent = <Child_development className={icon._classname} />;
+      break;
+    case 'Dental_care':
+      iconComponent = <Dental_care className={icon._classname} />;
+      break;
+    case 'Food':
+      iconComponent = <Food className={icon._classname} />;
+      break;
+    case 'Housing':
+      iconComponent = <Housing className={icon._classname} />;
+      break;
+    case 'Job_resources':
+      iconComponent = <Job_resources className={icon._classname} />;
+      break;
+    case 'Legal_services':
+      iconComponent = <Legal_services className={icon._classname} />;
+      break;
+    case 'Support':
+      iconComponent = <Support className={icon._classname} />;
+      break;
+    // Conditions
+    case 'BlindOrVisuallyImpaired':
+      iconComponent = <BlindOrVisuallyImpaired className={icon._classname} />;
+      break;
+    case 'Disabled':
+      iconComponent = <Disabled className={icon._classname} />;
+      break;
+    case 'LongTermDisability':
+      iconComponent = <LongTermDisability className={icon._classname} />;
+      break;
+    case 'Pregnant':
+      iconComponent = <Pregnant className={icon._classname} />;
+      break;
+    case 'Student':
+      iconComponent = <Student className={icon._classname} />;
+      break;
+    // Health Insurance
+    case 'Chp':
+      iconComponent = <Chp className={icon._classname} />;
+      break;
+    case 'Dont_know':
+      iconComponent = <Dont_know className={icon._classname} />;
+      break;
+    case 'Emergency_medicaid':
+      iconComponent = <Emergency_medicaid className={icon._classname} />;
+      break;
+    case 'Employer':
+      iconComponent = <Employer className={icon._classname} />;
+      break;
+    case 'Family_planning':
+      iconComponent = <Family_planning className={icon._classname} />;
+      break;
+    case 'Medicaid':
+      iconComponent = <Medicaid className={icon._classname} />;
+      break;
+    case 'Medicare':
+      iconComponent = <Medicare className={icon._classname} />;
+      break;
+    case 'None':
+      iconComponent = <None className={icon._classname} />;
+      break;
+    case 'PrivateInsurance':
+      iconComponent = <PrivateInsurance className={icon._classname} />;
+      break;
+    // Needs a generic catch-all
+    default:
+      iconComponent = <LongTermDisability className="option-card-icon" />;
+      break;
+  }
+
+  return {
+    formattedMessage: <FormattedMessage id={_label} defaultMessage={_default_message} />,
+    icon: iconComponent,
+  };
+}
+
 // Recursively transform any object that has _label && _default_message as keys into a FormattedMessage
 // and convert icon object into ReactComponent
 function transformItem(item: unknown): any {
-  type Item = {
-    _label: string;
-    _default_message: string;
-  };
-
-  type IconItem = {
-    _classname: string;
-    _name: string;
-  };
-
-  type OptionItem = {
-    _label: string;
-    _default_message: string;
-    icon: IconItem;
-  };
-
   if (typeof item !== 'object' || item === null) return item;
 
   if (item.hasOwnProperty('_label') && item.hasOwnProperty('_default_message') && !item.hasOwnProperty('icon')) {
@@ -56,89 +143,9 @@ function transformItem(item: unknown): any {
   }
 
   if (item.hasOwnProperty('icon')) {
-    const { _label, _default_message, icon } = item as OptionItem;
+    const iconItem = transformItemIcon(item);
 
-    let iconComponent;
-    switch (icon._name) {
-      // Acute Conditions
-      case 'Baby_supplies':
-        iconComponent = <Baby_supplies className={icon._classname} />;
-        break;
-      case 'Child_development':
-        iconComponent = <Child_development className={icon._classname} />;
-        break;
-      case 'Dental_care':
-        iconComponent = <Dental_care className={icon._classname} />;
-        break;
-      case 'Food':
-        iconComponent = <Food className={icon._classname} />;
-        break;
-      case 'Housing':
-        iconComponent = <Housing className={icon._classname} />;
-        break;
-      case 'Job_resources':
-        iconComponent = <Job_resources className={icon._classname} />;
-        break;
-      case 'Legal_services':
-        iconComponent = <Legal_services className={icon._classname} />;
-        break;
-      case 'Support':
-        iconComponent = <Support className={icon._classname} />;
-        break;
-      // Conditions
-      case 'BlindOrVisuallyImpaired':
-        iconComponent = <BlindOrVisuallyImpaired className={icon._classname} />;
-        break;
-      case 'Disabled':
-        iconComponent = <Disabled className={icon._classname} />;
-        break;
-      case 'LongTermDisability':
-        iconComponent = <LongTermDisability className={icon._classname} />;
-        break;
-      case 'Pregnant':
-        iconComponent = <Pregnant className={icon._classname} />;
-        break;
-      case 'Student':
-        iconComponent = <Student className={icon._classname} />;
-        break;
-      // Health Insurance
-      case 'Chp':
-        iconComponent = <Chp className={icon._classname} />;
-        break;
-      case 'Dont_know':
-        iconComponent = <Dont_know className={icon._classname} />;
-        break;
-      case 'Emergency_medicaid':
-        iconComponent = <Emergency_medicaid className={icon._classname} />;
-        break;
-      case 'Employer':
-        iconComponent = <Employer className={icon._classname} />;
-        break;
-      case 'Family_planning':
-        iconComponent = <Family_planning className={icon._classname} />;
-        break;
-      case 'Medicaid':
-        iconComponent = <Medicaid className={icon._classname} />;
-        break;
-      case 'Medicare':
-        iconComponent = <Medicare className={icon._classname} />;
-        break;
-      case 'None':
-        iconComponent = <None className={icon._classname} />;
-        break;
-      case 'PrivateInsurance':
-        iconComponent = <PrivateInsurance className={icon._classname} />;
-        break;
-      // Needs a generic catch-all
-      default:
-        iconComponent = <LongTermDisability className="option-card-icon" />;
-        break;
-    }
-
-    return {
-      formattedMessage: <FormattedMessage id={_label} defaultMessage={_default_message} />,
-      icon: iconComponent,
-    };
+    return iconItem;
   }
 
   const config: Config = {};
