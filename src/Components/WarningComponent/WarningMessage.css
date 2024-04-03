@@ -1,0 +1,21 @@
+.warning-message {
+  padding: 1rem;
+  margin: 1rem 0;
+  font-weight: bold;
+  display: flex;
+  gap: 1rem;
+  border: 1px solid #978398;
+  border-radius: 0.5rem;
+  background-color: var(--hover-color);
+  align-items: center;
+  width: 75%;
+}
+
+.warning-icon,
+.warning-icon path {
+  min-width: 2rem;
+  min-height: 2rem;
+  width: 2rem;
+  height: 2rem;
+  fill: #ff0000;
+}
