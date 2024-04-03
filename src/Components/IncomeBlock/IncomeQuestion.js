@@ -41,16 +41,13 @@ const IncomeQuestion = ({
   page,
   submitted,
 }) => {
-  const { config } = useContext(Context);
   const hoursErrorController = useErrorController(hoursWorkedValueHasError, displayIncomeStreamValueHelperText);
   const amountErrorController = useErrorController(incomeStreamValueHasError, displayIncomeStreamValueHelperText);
   const incomeStreamErrorController = useErrorController(selectHasError, incomeStreamHelperText);
   const incomeFrequencyErrorController = useErrorController(selectHasError, incomeFrequencyHelperText);
 
-  const { frequency_options: frequencyOptions, income_options: incomeOptions = {} } = useConfig([
-    'frequency_options',
-    'income_options',
-  ]);
+  const frequencyOptions = useConfig('frequency_options');
+  const incomeOptions = useConfig('income_options');
 
   useEffect(() => {
     hoursErrorController.setSubmittedCount(submitted);

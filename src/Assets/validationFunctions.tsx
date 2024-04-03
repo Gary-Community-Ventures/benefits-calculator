@@ -15,7 +15,6 @@ import ErrorMessageWrapper from '../Components/ErrorMessage/ErrorMessageWrapper'
 
 function useErrorController(hasErrorFunc: ValidationFunction<any>, messageFunc: MessageFunction<any>): ErrorController {
   const { config } = useContext(Context);
-  const { counties_by_zipcode: countiesByZipcode } = config || {};
 
   const [hasError, setHasError] = useState(false);
   const [submittedCount, setSubmittedCount] = useState(0);
@@ -27,13 +26,13 @@ function useErrorController(hasErrorFunc: ValidationFunction<any>, messageFunc: 
   };
 
   const updateError: ValidationFunction<any> = (value, formData) => {
-    const updatedHasError = hasErrorFunc(value, formData, countiesByZipcode);
+    const updatedHasError = hasErrorFunc(value, formData, config);
     setHasError(updatedHasError);
     return updatedHasError;
   };
 
   const message: MessageFunction<any> = (value: string, formData: FormData | undefined) => {
-    return messageFunc(value, formData, countiesByZipcode);
+    return messageFunc(value, formData, config);
   };
 
   return { hasError, showError, submittedCount, incrementSubmitted, setSubmittedCount, updateError, message };
@@ -62,7 +61,8 @@ const displayAgeHelperText: MessageFunction<string> = (applicantAge) => {
   }
 };
 
-const zipcodeHasError: ValidationFunction<string | number> = (zipcode, formData, countiesByZipcode) => {
+const zipcodeHasError: ValidationFunction<string | number> = (zipcode, formData, config) => {
+  let { counties_by_zipcode: countiesByZipcode } = config ?? {};
   //the zipcode input must have digits [0-9] and be exactly 5 digits long
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
   if (numberMustBeFiveDigitsLongRegex.test(zipcode.toString())) {
@@ -78,7 +78,8 @@ const zipcodeHasError: ValidationFunction<string | number> = (zipcode, formData,
   }
 };
 
-const displayZipcodeHelperText: MessageFunction<string | number> = (zipcode, formData, countiesByZipcode) => {
+const displayZipcodeHelperText: MessageFunction<string | number> = (zipcode, formData, config) => {
+  let { counties_by_zipcode: countiesByZipcode } = config ?? {};
   if (zipcodeHasError(zipcode, undefined, countiesByZipcode)) {
     return (
       <ErrorMessageWrapper fontSize="1rem">

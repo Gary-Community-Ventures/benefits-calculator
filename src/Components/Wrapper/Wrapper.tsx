@@ -1,5 +1,4 @@
 import React, { useEffect, useState, PropsWithChildren } from 'react';
-import { useConfig } from '../Config/configHooks';
 import useStyle from '../../Assets/styleController';
 import { IntlProvider } from 'react-intl';
 import { WrapperContext } from '../../Types/WrapperContext';

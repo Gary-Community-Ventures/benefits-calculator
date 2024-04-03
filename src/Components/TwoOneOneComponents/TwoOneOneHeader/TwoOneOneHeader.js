@@ -22,7 +22,7 @@ import './TwoOneOneHeader.css';
 const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
   const { config, formData, locale, selectLanguage } = useContext(Context);
-  const { languageOptions } = useConfig(['language_options']);
+  const languageOptions = useConfig('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
 
   //this is for the results icon to conditionally show up

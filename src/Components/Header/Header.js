@@ -14,7 +14,7 @@ import './Header.css';
 const Header = ({ handleTextfieldChange }) => {
   const context = useContext(Context);
   const { formData, getReferrer } = context;
-  const { language_options: languageOptions } = useConfig(['language_options']);
+  const languageOptions = useConfig('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
 
   const location = useLocation();

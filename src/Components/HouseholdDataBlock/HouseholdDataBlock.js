@@ -26,12 +26,10 @@ import './HouseholdDataBlock.css';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
-  const { config, formData } = useContext(Context);
-  const {
-    condition_options: conditionOptions,
-    health_insurance_options: healthInsuranceOptions = {},
-    relationship_options: relationshipOptions = {},
-  } = useConfig(['condition_options', 'health_insurance_options', 'relationship_options']);
+  const { formData } = useContext(Context);
+  const conditionOptions = useConfig('condition_options');
+  const healthInsuranceOptions = useConfig('health_insurance_options');
+  const relationshipOptions = useConfig('relationship_options');
   const { householdSize } = formData;
   const remainingHHMNumber = Number(householdSize);
   let { uuid, page } = useParams();

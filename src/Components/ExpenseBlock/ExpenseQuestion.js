@@ -35,7 +35,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   const { config } = useContext(Context);
   const expenseTypeErrorController = useErrorController(selectHasError, expenseTypeHelperText);
 
-  const { expense_options: expenseOptions = {} } = useConfig(['expense_options']);
+  const expenseOptions = useConfig('expense_options');
 
   useEffect(() => {
     expenseTypeErrorController.updateError(expenseSourceName);

@@ -202,19 +202,11 @@ export function useGetConfig() {
   return { configLoading, configResponse };
 }
 
-export function useConfig(names: string[]) {
+export function useConfig(name: string) {
   const { config } = useContext(Context);
-
   // Return a default value or fallback object
   if (config === undefined) return {};
 
-  const configValues: { [key: string]: any } = {};
-
-  names.forEach((name) => {
-    if (config[name] === undefined) throw new Error(`'${name}' does not exist in the config`);
-
-    configValues[name] = config[name];
-  });
-
-  return configValues;
+  if (config[name] === undefined) throw new Error(`'${name}' does not exist in the config`);
+  return config[name];
 }

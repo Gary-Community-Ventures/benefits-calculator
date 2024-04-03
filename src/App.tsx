@@ -3,7 +3,6 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
 import { Context } from './Components/Wrapper/Wrapper';
-import { useConfig } from './Components/Config/configHooks.tsx';
 import FetchScreen from './Components/FetchScreen/FetchScreen';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';

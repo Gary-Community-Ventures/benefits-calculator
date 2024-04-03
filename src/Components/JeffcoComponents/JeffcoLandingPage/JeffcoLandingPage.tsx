@@ -12,7 +12,7 @@ type Props = { referrer: string };
 const JeffcoLandingPage = ({ referrer }: Props) => {
   const navigate = useNavigate();
   const { formData, setFormData } = useContext(Context);
-  const { referral_options: referralOptions } = useConfig(['language_options']);
+  const referralOptions = useConfig('referral_options');
 
   useEffect(() => {
     setTimeout(() => {

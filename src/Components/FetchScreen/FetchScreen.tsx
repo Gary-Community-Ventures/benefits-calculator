@@ -9,7 +9,7 @@ import type { FormData } from '../../Types/FormData.ts';
 
 const FetchScreen = () => {
   const { formData, setFormData, screenDoneLoading } = useContext(Context);
-  const { referral_options: referralOptions } = useConfig(['language_options']);
+  const referralOptions = useConfig('referral_options');
   const { uuid } = useParams();
   const navigate = useNavigate();
 

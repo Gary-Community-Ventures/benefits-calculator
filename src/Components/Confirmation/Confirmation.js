@@ -25,25 +25,14 @@ const Confirmation = () => {
   const intl = useIntl();
   const locationState = { state: { routedFromConfirmationPg: true } };
 
-  const {
-    acute_condition_options: acuteConditionOptions = {},
-    category_benefits: categoryBenefits = {},
-    expense_options: expenseOptions = {},
-    income_options: incomeOptions = {},
-    frequency_options: frequencyOptions = {},
-    health_insurance_options: healthInsuranceOptions = {},
-    referral_options: referralOptions = {},
-    relationship_options: relationshipOptions = {},
-  } = useConfig([
-    'acute_condition_options',
-    'category_benefits',
-    'expense_options',
-    'income_options',
-    'frequency_options',
-    'health_insurance_options',
-    'referral_options',
-    'relationship_options',
-  ]);
+  const acuteConditionOptions = useConfig('acute_condition_options');
+  const categoryBenefits = useConfig('category_benefits');
+  const expenseOptions = useConfig('expense_options');
+  const incomeOptions = useConfig('income_options');
+  const frequencyOptions = useConfig('frequency_options');
+  const healthInsuranceOptions = useConfig('health_insurance_options');
+  const referralOptions = useConfig('referral_options');
+  const relationshipOptions = useConfig('relationship_options');
 
   const getQuestionUrl = (name) => {
     const stepNumber = getStepNumber(name, formData.immutableReferrer);
