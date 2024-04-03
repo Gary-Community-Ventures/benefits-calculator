@@ -81,7 +81,7 @@ const acuteConditionOptions = {
     formattedMessage: (
       <FormattedMessage
         id="acuteConditionOptions.childDevelopment"
-        defaultMessage="Concern about your baby or toddler's development"
+        defaultMessage="Concern about your child's development"
       />
     ),
     icon: <Child_development className="option-card-icon" />,
