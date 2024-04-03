@@ -375,7 +375,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           <h2 className="question-label">
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
             <HelpButton
-              isVisible={true}
               helpText="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
               helpId="householdDataBlock.createIncomeRadioQuestion-questionDescription"
             ></HelpButton>
