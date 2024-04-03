@@ -80,7 +80,6 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
               defaultMessage={renderFollowUpIncomeQIdAndDefaultMsg(page)[1]}
             />
             <HelpButton
-              isVisible={true}
               helpText="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
               helpId="personIncomeBlock.return-questionDescription"
             />

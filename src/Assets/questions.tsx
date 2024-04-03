@@ -74,7 +74,6 @@ const questions: Record<QuestionName, Question> = {
           defaultMessage="Including you, how many people are in your household?"
         />
         <HelpButton
-          isVisible={true}
           helpText="This is usually family members who you both live and share important resources with like food and bills."
           helpId="questions.householdSize-helpText"
         ></HelpButton>
@@ -105,7 +104,6 @@ const questions: Record<QuestionName, Question> = {
       <>
         <FormattedMessage id="questions.hasExpenses" defaultMessage="Does your household have any expenses?" />{' '}
         <HelpButton
-          isVisible={true}
           helpText="Add up expenses for everyone who lives in your home. This includes costs like child care, child support, rent, medical expenses, heating bills, and more. We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits."
           helpId="questions.hasExpenses-description"
         />
@@ -141,10 +139,9 @@ const questions: Record<QuestionName, Question> = {
       <>
         <FormattedMessage
           id="questions.householdAssets"
-          defaultMessage="How much does your whole household have right now in:"
+          defaultMessage="How much does your whole household have right now in cash, checking or savings accounts, stocks, bonds, or mutual funds?"
         />
         <HelpButton
-          isVisible={true}
           helpText="In some cases, eligibility for benefits may be affected if your household owns other valuable assets such as a car or life insurance policy."
           helpId="questions.householdAssets-description"
         />
@@ -176,7 +173,6 @@ const questions: Record<QuestionName, Question> = {
           defaultMessage="Does your household currently have any benefits?"
         />
         <HelpButton
-          isVisible={true}
           helpText="This information will help make sure we don't give you results for benefits you already have."
           helpId="questions.hasBenefits-description"
         />

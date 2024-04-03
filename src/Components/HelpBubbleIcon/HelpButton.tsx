@@ -7,12 +7,10 @@ const HelpButton = ({
   className,
   helpText,
   helpId,
-  isVisible,
 }: {
   className?: string;
   helpText: string;
   helpId: string;
-  isVisible: boolean;
 }) => {
   const [showHelpText, setShowHelpText] = useState(false);
 
@@ -21,7 +19,6 @@ const HelpButton = ({
   };
 
   return (
-    isVisible && (
       <>
         <IconButton onClick={handleClick}>
           <HelpBubble style={{ height: '20px', width: '20px' }} />
@@ -31,7 +28,6 @@ const HelpButton = ({
         </p>
       </>
     )
-  );
 };
 
 export default HelpButton;
