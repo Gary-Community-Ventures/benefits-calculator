@@ -36,15 +36,14 @@ const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submi
       helperText={errorController.showError && errorController.message(data[inputName])}
       inputProps={numericField ? { pattern: '[0-9]* .', inputMode: 'decimal' } : {}}
       InputProps={
-        (dollarField
+        dollarField
           ? {
               startAdornment: <InputAdornment position="start">$</InputAdornment>,
+              sx: { backgroundColor: '#FFFFFF' },
             }
-          : {},
-        { sx: { backgroundColor: '#FFFFFF' } })
+          : { sx: { backgroundColor: '#FFFFFF' } }
       }
     />
   );
 };
-
 export default Textfield;
