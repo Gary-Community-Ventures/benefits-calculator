@@ -483,6 +483,9 @@ const Confirmation = () => {
       case 'biweekly':
         num = Number(incomeAmount) * 26;
         break;
+      case 'semimonthly':
+        num = Number(incomeAmount) * 24;
+        break;
       case 'monthly':
         num = Number(incomeAmount) * 12;
         break;
