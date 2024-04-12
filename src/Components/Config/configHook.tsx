@@ -65,6 +65,7 @@ export default function useGetConfig() {
           setConfigResponse(transformedOutput);
         }
       } catch (e) {
+        // eslint-disable-next-line
         console.error(e);
       }
       setLoading(false);
