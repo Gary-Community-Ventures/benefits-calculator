@@ -125,8 +125,8 @@ const getUserBody = (formData: FormData, languageCode: Language): ApiUser & ApiU
 
   const user: ApiUser & ApiUserWriteOnly = {
     email_or_cell: email ? email : phoneNumber,
-    cell: phone ? phoneNumber : '',
-    email: email ? email : '',
+    cell: phone ? phoneNumber : null,
+    email: email ? email : null,
     first_name: firstName,
     last_name: lastName,
     tcpa_consent: commConsent,
