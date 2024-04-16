@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check branch
-        if: github.base_ref == 'main' && github.head_ref != 'dev'
+        if: github.base_ref == 'dev' && github.head_ref != 'feat/dev-branch-workflow'
         run: |
           echo "ERROR: You can only merge the dev branch into main."
           exit 1
