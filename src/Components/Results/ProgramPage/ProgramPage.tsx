@@ -98,7 +98,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                 <li key={index} className="apply-info">
                   {navigator.name && <ResultsTranslate translation={navigator.name} />}
                   <div className="address-info">
-                  {navigator.description && <ResultsTranslate translation={navigator.description} />}
+                    {navigator.description && <ResultsTranslate translation={navigator.description} />}
                     {navigator.assistance_link.default_message && (
                       <div>
                         <a href={navigator.assistance_link.default_message} target="_blank">
