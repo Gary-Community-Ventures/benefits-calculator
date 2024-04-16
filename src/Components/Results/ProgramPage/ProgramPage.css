@@ -130,8 +130,8 @@
   padding-left: 1rem;
 }
 
-.email-link,
-.phone-link {
+.apply-box-list a {
+  color: inherit;
   text-decoration: none;
 }
 
