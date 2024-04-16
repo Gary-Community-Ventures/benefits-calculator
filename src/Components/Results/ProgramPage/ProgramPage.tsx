@@ -108,13 +108,17 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                     )}
                     {info.email.default_message && (
                       <>
-                        <a href={`mailto:${info.email}`}>
+                        <a href={`mailto:${info.email}`} className="email-link">
                           <ResultsTranslate translation={info.email} />
                         </a>
                         <br />
                       </>
                     )}
-                    {info.phone_number && <a href={`tel:${info.phone_number}`}>{info.phone_number}</a>}
+                    {info.phone_number && (
+                      <a href={`tel:${info.phone_number}`} className="phone-link">
+                        {info.phone_number}
+                      </a>
+                    )}
                   </div>
                 </li>
               ))}
