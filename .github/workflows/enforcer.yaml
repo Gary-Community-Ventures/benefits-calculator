@@ -6,7 +6,7 @@ on:
 jobs:
   check_branch:
     if: github.base_ref == 'dev' && github.head_ref != 'feat/dev-branch-workflow-asdf'
-    name: Throw error for non dev branch into main
+    name: Check branch
     runs-on: ubuntu-latest
     steps:
       - name: Throw error
