@@ -9,7 +9,6 @@ jobs:
     name: Check branch
     runs-on: ubuntu-latest
     steps:
-      - name: Throw error
-        run: echo "ERROR You can only merge the dev branch into main."
-      - name: Exit with unsuccessful termination
-        run: exit 1
+      - name: Throw error and exit
+        run: |
+          echo "ERROR You can only merge the dev branch into main." && exit 1
