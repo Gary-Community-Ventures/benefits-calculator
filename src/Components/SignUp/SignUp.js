@@ -1,7 +1,7 @@
 import { Typography, FormControlLabel, Checkbox } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { FormattedMessage } from 'react-intl';
-import { Context } from '../Wrapper/Wrapper.tsx';
+import { Context } from '../Wrapper/Wrapper';
 import { useContext, useEffect } from 'react';
 import Textfield from '../Textfield/Textfield';
 import {
@@ -15,12 +15,12 @@ import {
   useErrorController,
   signUpServerHasError,
   signUpServerErrorHelperText,
-} from '../../Assets/validationFunctions.tsx';
+} from '../../Assets/validationFunctions';
 
 const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   const context = useContext(Context);
   const locale = context.locale.toLowerCase();
-  const { formData } = context;
+  const { formData, setFormData } = context;
   let privacyLink =
     'https://20208592.hs-sites.com/en/data-privacy-policy?__hstc=144746475.066f707c0b490f88f5429b1856cf0908.1663037963489.1663086538117.1663095192641.3&__hssc=144746475.1.1663095192641&__hsfp=2418539872';
 
@@ -53,6 +53,10 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   useEffect(() => {
     serverErrorController.updateError(formData.signUpInfo.serverError);
   }, [formData.signUpInfo.serverError]);
+
+  useEffect(() => {
+    setFormData({ ...formData, signUpInfo: { ...formData.signUpInfo, serverError: false } });
+  }, [formData.signUpInfo.email, formData.signUpInfo.phone]);
 
   const createFirstNameTextfield = () => {
     const firstNameProps = {
