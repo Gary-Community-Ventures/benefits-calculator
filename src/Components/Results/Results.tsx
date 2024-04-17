@@ -132,13 +132,15 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
 
     setNeeds(apiResults.urgent_needs);
     setPrograms(
-      apiResults.programs.filter((program) => {
-        return (
-          program.legal_status_required.some((status) => filtersCheckedStrArr.includes(status)) && program.eligible
-        );
-      }).filter((program) => {
-        return !program.already_has
-      }),
+      apiResults.programs
+        .filter((program) => {
+          return (
+            program.legal_status_required.some((status) => filtersCheckedStrArr.includes(status)) && program.eligible
+          );
+        })
+        .filter((program) => {
+          return !program.already_has;
+        }),
     );
     setMissingPrograms(apiResults.missing_programs);
     setLoading(false);
