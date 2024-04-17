@@ -1,6 +1,5 @@
 .cobranded-logo {
-  max-width: 15.625rem;
-  max-height: 2rem;
+  max-width: 20rem;
   display: block;
 }
 
@@ -37,6 +36,7 @@
   max-width: var(--main-max-width);
   margin: auto;
   height: 100%;
+  padding: 0 1rem;
 }
 
 #twoOneOne-select-language:focus-visible {
@@ -65,7 +65,7 @@ button.hamburger-icon {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 650px) {
   .cobranded-logo {
     width: 90%;
   }
