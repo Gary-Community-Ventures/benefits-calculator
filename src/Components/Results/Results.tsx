@@ -15,7 +15,7 @@ import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
 import './Results.css';
-import { PRESCHOOL_CATEGORY, PRESCHOOL_MAX_VALUE, PRESCHOOL_PROGRAMS_ABBR } from '../../Assets/resultsConstants';
+import { PRESCHOOL_MAX_VALUE, PRESCHOOL_PROGRAMS_ABBR } from '../../Assets/resultsConstants';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -136,6 +136,8 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
         return (
           program.legal_status_required.some((status) => filtersCheckedStrArr.includes(status)) && program.eligible
         );
+      }).filter((program) => {
+        return !program.already_has
       }),
     );
     setMissingPrograms(apiResults.missing_programs);
