@@ -12,6 +12,7 @@
   font-family: 'Open Sans', sans-serif;
   border-left: 2px solid var(--primary-color);
   border-right: 2px solid var(--primary-color);
+  font-weight: bold;
 }
 
 .results-tab a {
