@@ -206,6 +206,9 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         case 'biweekly':
           num = Number(incomeAmount) * 26;
           break;
+        case 'semimonthly':
+          num = Number(incomeAmount) * 24;
+          break;
         case 'monthly':
           num = Number(incomeAmount) * 12;
           break;
@@ -379,7 +382,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           <h2 className="question-label">
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
             <HelpButton
-              isVisible={true}
               helpText="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
               helpId="householdDataBlock.createIncomeRadioQuestion-questionDescription"
             ></HelpButton>
