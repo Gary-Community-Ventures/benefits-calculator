@@ -1,4 +1,4 @@
-import { JSXElementConstructor, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { MessageFunction, ValidationFunction } from './ErrorController';
 import { SignUpInfo } from './FormData';
 
@@ -13,7 +13,7 @@ export type QuestionName =
   | 'referralSource'
   | 'signUpInfo';
 
-export type FormattedMessageType = ReactElement<any, string | JSXElementConstructor<any>>;
+export type FormattedMessageType = ReactElement;
 
 export type TextFieldDetails = {
   componentType: 'Textfield';
@@ -46,7 +46,7 @@ export type BasicSelectDetails = {
   inputLabel?: FormattedMessageType;
   inputError: ValidationFunction<string>;
   inputHelperText: MessageFunction<string>;
-  options?: BasicSelectOptions;
+  options: BasicSelectOptions;
   componentProperties: {
     labelId: string;
     inputLabelText: FormattedMessageType;
@@ -60,7 +60,7 @@ export type BasicSelectDetails = {
 export type OptionCardGroupDetails = {
   componentType: 'OptionCardGroup';
   inputName: string;
-  options?: any;
+  options: any;
   inputError: ValidationFunction<{ [key: string]: boolean }>;
   inputHelperText?: MessageFunction<{ [key: string]: boolean }>;
 };
@@ -103,7 +103,7 @@ export type AccordionContainerDetails = {
 export type BasicCheckboxGroupDetails = {
   componentType: 'BasicCheckboxGroup';
   inputName: string;
-  options?: {
+  options: {
     [key: string]: FormattedMessageType;
   };
   inputError: ValidationFunction<SignUpInfo>;

@@ -1,7 +1,7 @@
 import { FormData } from './FormData';
 import { ITheme } from '../Assets/styleController';
 import { ReferrerData } from '../Components/Referrer/referrerHook';
-import { Language } from './Language';
+import { Language } from '../Assets/languageOptions';
 import { Config } from './Config';
 
 export interface WrapperContext {

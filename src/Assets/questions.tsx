@@ -15,6 +15,10 @@ import {
   countySelectHelperText,
   otherReferalSourceHelperText,
 } from './validationFunctions.tsx';
+import referralOptions from './referralOptions.tsx';
+import countiesByZipcode from './countiesByZipcode.tsx';
+import signUpOptions from './signUpOptions.tsx';
+import acuteConditionOptions from './acuteConditionOptions';
 import { FormattedMessage } from 'react-intl';
 import type { QuestionName, Question } from '../Types/Questions.ts';
 import HelpButton from '../Components/HelpBubbleIcon/HelpButton.tsx';
@@ -55,6 +59,7 @@ const questions: Record<QuestionName, Question> = {
               <FormattedMessage id="questions.zipcode-a-disabledSelectMenuItemText" defaultMessage="Select a county" />
             ),
           },
+          options: countiesByZipcode,
         },
       },
     ],
@@ -216,6 +221,7 @@ const questions: Record<QuestionName, Question> = {
     componentDetails: {
       componentType: 'OptionCardGroup',
       inputName: 'acuteHHConditions',
+      options: acuteConditionOptions,
       inputError: acuteHHConditionsHasError,
     },
   },
@@ -244,6 +250,7 @@ const questions: Record<QuestionName, Question> = {
           />
         ),
       },
+      options: referralOptions,
     },
     followUpQuestions: [
       {
@@ -276,6 +283,7 @@ const questions: Record<QuestionName, Question> = {
     componentDetails: {
       componentType: 'BasicCheckboxGroup',
       inputName: 'signUpInfo',
+      options: signUpOptions,
       inputError: signUpOptionsHaveError,
     },
     followUpQuestions: [

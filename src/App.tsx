@@ -10,6 +10,7 @@ import Results from './Components/Results/Results';
 import LandingPage from './Components/LandingPage/LandingPage';
 import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlock.js';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
+import referralOptions from './Assets/referralOptions';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
 import LoadingPage from './Components/LoadingPage/LoadingPage.tsx';
 import SelectLanguagePage from './Components/SelectLanguagePage/SelectLanguagePage.tsx';
@@ -34,7 +35,6 @@ const App = () => {
   const rawExternalId = searchParams.get('externalid');
   const externalId = rawExternalId !== null ? rawExternalId : undefined;
   const {
-    config,
     locale,
     formData,
     setFormData,
@@ -43,9 +43,6 @@ const App = () => {
     pageIsLoading,
     getReferrer,
   } = useContext(Context);
-
-  const { referral_options: referralOptions = {} } = config ?? {};
-
   const [totalSteps, setTotalSteps] = useState(
     getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER,
   );

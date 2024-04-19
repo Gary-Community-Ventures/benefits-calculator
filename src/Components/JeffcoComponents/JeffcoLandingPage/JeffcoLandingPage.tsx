@@ -1,18 +1,17 @@
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
-import { useConfig } from '../../Config/configHooks';
 import jeffcolandingpage from '../../../Assets/JeffcoAssets/jeffcolandingpage.png';
 import Stack from '@mui/material/Stack';
 import { Typography, Button } from '@mui/material';
 import { useContext, useEffect } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
+import referralOptions from '../../../Assets/referralOptions';
 import './JeffcoLandingPage.css';
 
 type Props = { referrer: string };
 const JeffcoLandingPage = ({ referrer }: Props) => {
   const navigate = useNavigate();
   const { formData, setFormData } = useContext(Context);
-  const referralOptions = useConfig('referral_options');
 
   useEffect(() => {
     setTimeout(() => {

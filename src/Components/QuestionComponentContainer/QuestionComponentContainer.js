@@ -1,7 +1,6 @@
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { useConfig } from '../Config/configHooks.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
+import { useParams } from 'react-router-dom';
 import Radiofield from '../Radiofield/Radiofield';
 import Textfield from '../Textfield/Textfield';
 import PreviousButton from '../PreviousButton/PreviousButton';
@@ -23,11 +22,7 @@ const QuestionComponentContainer = ({
   handleExpenseSourcesSubmit,
   handleCheckboxChange,
 }) => {
-  const { config, formData, setFormData } = useContext(Context);
-  const acuteConditionOptions = useConfig('acute_condition_options');
-  const countiesByZipcode = useConfig('counties_by_zipcode');
-  const referralOptions = useConfig('referral_options');
-  const signUpOptions = useConfig('sign_up_options');
+  const { formData, setFormData } = useContext(Context);
   let { id } = useParams();
   let matchingQuestion = getQuestion(+id, formData.immutableReferrer);
 
@@ -64,8 +59,6 @@ const QuestionComponentContainer = ({
   };
 
   const renderBasicCheckboxGroup = (question) => {
-    if (question.name === 'signUpInfo')
-      return <BasicCheckboxGroup stateVariable={question.componentDetails.inputName} options={signUpOptions} />;
     return (
       <BasicCheckboxGroup
         stateVariable={question.componentDetails.inputName}
@@ -75,16 +68,6 @@ const QuestionComponentContainer = ({
   };
 
   const renderOptionCardGroup = (question) => {
-    if (question.name === 'acuteHHConditions')
-      return (
-        <OptionCardGroup
-          options={acuteConditionOptions}
-          stateVariable={question.componentDetails.inputName}
-          memberData={formData}
-          setMemberData={setFormData}
-        />
-      );
-
     return (
       <OptionCardGroup
         options={matchingQuestion.componentDetails.options}
@@ -96,15 +79,6 @@ const QuestionComponentContainer = ({
   };
 
   const renderBasicSelectComponent = (question) => {
-    if (question.name === 'referralSource')
-      return (
-        <BasicSelect
-          componentDetails={question.componentDetails}
-          options={referralOptions}
-          formDataProperty={question.componentDetails.inputName}
-          submitted={errorController.submittedCount}
-        />
-      );
     return (
       <BasicSelect
         componentDetails={question.componentDetails}
@@ -151,7 +125,7 @@ const QuestionComponentContainer = ({
       return false;
     }
     if (inputName === 'zipcode') {
-      return !zipcodeHasError(formData.zipcode, undefined, config);
+      return !zipcodeHasError(formData.zipcode);
     }
     if (formData[inputName] === true) {
       // this case is for a radio button question where the user selected "yes"

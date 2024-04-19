@@ -1,9 +1,7 @@
-import { useContext } from 'react';
-import { useConfig } from '../Config/configHooks.tsx';
-import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import expenseOptions from '../../Assets/expenseOptions';
 import {
   useErrorController,
   expenseSourceValueHasError,
@@ -32,10 +30,7 @@ const StyledDeleteButton = styled(Button)({
 });
 
 const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteExpenseBlock, index, submitted }) => {
-  const { config } = useContext(Context);
   const expenseTypeErrorController = useErrorController(selectHasError, expenseTypeHelperText);
-
-  const expenseOptions = useConfig('expense_options');
 
   useEffect(() => {
     expenseTypeErrorController.updateError(expenseSourceName);

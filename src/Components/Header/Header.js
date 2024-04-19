@@ -1,20 +1,19 @@
 import { AppBar, MenuItem, Select, Modal } from '@mui/material';
 import { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useConfig } from '../Config/configHooks.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Share from '../Share/Share';
 import EmailResults from '../EmailResults/EmailResults';
+import languageOptions from '../../Assets/languageOptions.tsx';
 import Paper from '@mui/material/Paper';
 import './Header.css';
 
 const Header = ({ handleTextfieldChange }) => {
   const context = useContext(Context);
   const { formData, getReferrer } = context;
-  const languageOptions = useConfig('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
 
   const location = useLocation();

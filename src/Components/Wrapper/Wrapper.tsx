@@ -5,9 +5,9 @@ import { WrapperContext } from '../../Types/WrapperContext';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
-import { Language, rightToLeftLanguages } from '../../Types/Language';
+import languageOptions, { Language, rightToLeftLanguages } from '../../Assets/languageOptions';
 
-import { useGetConfig } from '../Config/configHooks';
+import useGetConfig from '../Config/configHook';
 
 const initialFormData: FormData = {
   isTest: undefined,
@@ -83,7 +83,6 @@ export const Context = React.createContext<WrapperContext>({} as WrapperContext)
 
 const Wrapper = (props: PropsWithChildren<{}>) => {
   const { configLoading, configResponse: config } = useGetConfig();
-  const { language_options: languageOptions = {} } = config ?? {};
 
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
   const [screenLoading, setScreenLoading] = useState<boolean>(true);

@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { useConfig } from '../Config/configHooks.tsx';
 import { Box, IconButton, Stack } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import ContinueButton from '../ContinueButton/ContinueButton';
@@ -12,6 +11,9 @@ import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import Textfield from '../Textfield/Textfield';
+import relationshipOptions from '../../Assets/relationshipOptions';
+import healthInsuranceOptions from '../../Assets/healthInsuranceOptions.tsx';
+import conditionOptions from '../../Assets/conditionOptions';
 import {
   householdMemberAgeHasError,
   displayHouseholdMemberAgeHelperText,
@@ -27,9 +29,6 @@ import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
-  const conditionOptions = useConfig('condition_options');
-  const healthInsuranceOptions = useConfig('health_insurance_options');
-  const relationshipOptions = useConfig('relationship_options');
   const { householdSize } = formData;
   const remainingHHMNumber = Number(householdSize);
   let { uuid, page } = useParams();
@@ -189,12 +188,9 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const createMembersAdded = (member, index) => {
     let relationship = relationshipOptions[member.relationshipToHH];
-    relationship =
-      relationship === undefined ? (
-        <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />
-      ) : (
-        <FormattedMessage id="relationshipOptions.yourself" defaultMessage={relationship} />
-      );
+    if (relationship === undefined) {
+      relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
+    }
     const age = member.age;
     let income = 0;
     for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {
