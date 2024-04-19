@@ -189,7 +189,8 @@ li.apply-info {
   font-weight: 400;
 }
 
-.email-link, .phone-link {
+.email-link,
+.phone-link {
   text-decoration: none;
 }
 
