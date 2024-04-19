@@ -31,7 +31,7 @@ const ProgramsHeader = () => {
   }
 
   return (
-    <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }}>
+    <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor, padding: '1rem' }}>
       <header className="results-header">
         <section className="results-header-programs-count-text">
           <div className="results-header-programs-count">{programs.length}</div>
