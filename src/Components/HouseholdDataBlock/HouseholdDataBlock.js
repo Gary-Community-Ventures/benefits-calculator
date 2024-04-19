@@ -192,9 +192,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     relationship =
       relationship === undefined ? (
         <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />
-      ) : (
-        <FormattedMessage id="relationshipOptions.yourself" defaultMessage={relationship} />
-      );
+      ) : relationship;
     const age = member.age;
     let income = 0;
     for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {
