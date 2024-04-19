@@ -130,11 +130,6 @@
   padding: 0 1rem;
 }
 
-.apply-box-list a {
-  color: inherit;
-  text-decoration: none;
-}
-
 li.apply-info {
   margin: 1rem 0;
 }
@@ -192,6 +187,10 @@ li.apply-info {
 
 .slim-text {
   font-weight: 400;
+}
+
+.email-link, .phone-link {
+  text-decoration: none;
 }
 
 /* TABLET */
