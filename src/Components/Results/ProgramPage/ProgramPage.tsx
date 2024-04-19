@@ -131,7 +131,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
             <h3 className="content-header">
               <FormattedMessage
                 id="results.required-documents-checklist"
-                defaultMessage="Required Documents Checklist"
+                defaultMessage="Required Key Documents Checklist"
               />
             </h3>
             <ul className="required-docs-list">
