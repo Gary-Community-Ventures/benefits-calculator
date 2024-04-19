@@ -15,6 +15,7 @@ import {
 import incomeOptions from '../../Assets/incomeOptions';
 import frequencyOptions from '../../Assets/frequencyOptions';
 import Textfield from '../Textfield/Textfield';
+import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
@@ -325,6 +326,10 @@ const IncomeQuestion = ({
         <h2 className="question-label">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
           {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
+          <HelpButton
+            helpText='"Every 2 weeks" means you get paid every other week. "Twice a month" means you get paid two times a month on the same dates each month.'
+            helpId="personIncomeBlock.income-freq-help-text"
+          />
         </h2>
         <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeFrequencyErrorController.showError}>
           <InputLabel id="income-frequency-label">
