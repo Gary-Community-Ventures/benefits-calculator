@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { useConfig } from '../Config/configHooks.tsx';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
@@ -12,8 +14,6 @@ import {
   incomeStreamHelperText,
   incomeFrequencyHelperText,
 } from '../../Assets/validationFunctions.tsx';
-import incomeOptions from '../../Assets/incomeOptions';
-import frequencyOptions from '../../Assets/frequencyOptions';
 import Textfield from '../Textfield/Textfield';
 
 const StyledSelectfield = styled(Select)({
@@ -45,6 +45,9 @@ const IncomeQuestion = ({
   const amountErrorController = useErrorController(incomeStreamValueHasError, displayIncomeStreamValueHelperText);
   const incomeStreamErrorController = useErrorController(selectHasError, incomeStreamHelperText);
   const incomeFrequencyErrorController = useErrorController(selectHasError, incomeFrequencyHelperText);
+
+  const frequencyOptions = useConfig('frequency_options');
+  const incomeOptions = useConfig('income_options');
 
   useEffect(() => {
     hoursErrorController.setSubmittedCount(submitted);

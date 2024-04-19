@@ -1,22 +1,9 @@
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
-import relationshipOptions from '../../Assets/relationshipOptions';
-import referralOptions from '../../Assets/referralOptions';
-import incomeOptions from '../../Assets/incomeOptions';
-import frequencyOptions from '../../Assets/frequencyOptions';
-import expenseOptions from '../../Assets/expenseOptions';
-import healthInsuranceOptions from '../../Assets/healthInsuranceOptions.tsx';
-import acuteConditionOptions from '../../Assets/acuteConditionOptions';
-import cashAssistanceBenefits from '../../Assets/BenefitCategoryLists/categories/cashAssistanceBenefits.tsx';
-import foodAndNutritionBenefits from '../../Assets/BenefitCategoryLists/categories/foodAndNutritionBenefits';
-import childCareBenefits from '../../Assets/BenefitCategoryLists/categories/childCareBenefits';
-import housingAndUtilities from '../../Assets/BenefitCategoryLists/categories/housingAndUtilities';
-import transportationBenefits from '../../Assets/BenefitCategoryLists/categories/transportationBenefits';
-import healthCareBenefits from '../../Assets/BenefitCategoryLists/categories/healthCareBenefits';
-import taxCreditBenefits from '../../Assets/BenefitCategoryLists/categories/taxCreditBenefits';
 import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
 import { useContext, useEffect } from 'react';
+import { useConfig } from '../Config/configHooks.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Grid from '@mui/material/Grid';
 import { ReactComponent as Edit } from '../../Assets/icons/edit.svg';
@@ -30,7 +17,6 @@ import { ReactComponent as Immediate } from '../../Assets/icons/immediate.svg';
 import { ReactComponent as Referral } from '../../Assets/icons/referral.svg';
 import './Confirmation.css';
 import PreviousButton from '../PreviousButton/PreviousButton';
-import { House } from '@mui/icons-material';
 
 const Confirmation = () => {
   const { formData } = useContext(Context);
@@ -38,6 +24,15 @@ const Confirmation = () => {
   const navigate = useNavigate();
   const intl = useIntl();
   const locationState = { state: { routedFromConfirmationPg: true } };
+
+  const acuteConditionOptions = useConfig('acute_condition_options');
+  const categoryBenefits = useConfig('category_benefits');
+  const expenseOptions = useConfig('expense_options');
+  const incomeOptions = useConfig('income_options');
+  const frequencyOptions = useConfig('frequency_options');
+  const healthInsuranceOptions = useConfig('health_insurance_options');
+  const referralOptions = useConfig('referral_options');
+  const relationshipOptions = useConfig('relationship_options');
 
   const getQuestionUrl = (name) => {
     const stepNumber = getStepNumber(name, formData.immutableReferrer);
@@ -359,7 +354,11 @@ const Confirmation = () => {
 
   const displayReferralSourceSection = () => {
     const { referralSource, otherSource } = formData;
-    const referralSourceLabel = referralOptions[referralSource];
+    const referralSourceLabel =
+      typeof referralOptions[referralSource] === 'object'
+        ? referralOptions[referralSource]
+        : referralOptions[referralSource];
+
     const finalReferralSource = referralSource !== 'other' ? referralSourceLabel : otherSource;
 
     if (formData.immutableReferrer) {
@@ -403,13 +402,12 @@ const Confirmation = () => {
 
   const displayAllFormData = () => {
     const allBenefitsList = {
-      ...cashAssistanceBenefits,
-      ...foodAndNutritionBenefits,
-      ...childCareBenefits,
-      ...housingAndUtilities,
-      ...transportationBenefits,
-      ...healthCareBenefits,
-      ...taxCreditBenefits,
+      ...categoryBenefits.cash.benefits,
+      ...categoryBenefits.childCare.benefits,
+      ...categoryBenefits.foodAndNutrition.benefits,
+      ...categoryBenefits.healthCare.benefits,
+      ...categoryBenefits.housingAndUtilities.benefits,
+      ...categoryBenefits.transportation.benefits,
     };
 
     return (
@@ -586,6 +584,7 @@ const Confirmation = () => {
   };
 
   const displayHealthInsurance = (hHMemberHealthInsurance, hhMemberIndex) => {
+    const selectedDontKnow = hHMemberHealthInsurance.dont_know === true;
     const selectedNone = hHMemberHealthInsurance.none === true;
     const allOtherSelectedOptions = Object.entries(hHMemberHealthInsurance).filter(
       (hHMemberInsEntry) => hHMemberInsEntry[1] === true,
