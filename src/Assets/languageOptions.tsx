@@ -9,7 +9,7 @@ const languageOptions: Record<Language, string> = {
   ru: 'Русский',
   ne: 'नेपाली',
   my: 'မြန်မာဘာသာစကား',
-  zh: '汉语',
+  zh: '中文',
   ar: 'عربي',
 };
 
