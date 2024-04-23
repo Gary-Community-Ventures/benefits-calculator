@@ -332,7 +332,7 @@ const IncomeQuestion = ({
           />
         </h2>
         <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeFrequencyErrorController.showError}>
-          <InputLabel id='income-frequency-label'>
+          <InputLabel id="income-frequency-label">
             <FormattedMessage
               id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel"
               defaultMessage="Frequency"
