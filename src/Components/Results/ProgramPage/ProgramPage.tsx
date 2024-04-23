@@ -94,27 +94,32 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
               <FormattedMessage id="results.get-help-applying" defaultMessage="Get Help Applying" />
             </h3>
             <ul className="apply-box-list">
-              {program.navigators.map((info, index) => (
+              {program.navigators.map((navigator, index) => (
                 <li key={index} className="apply-info">
-                  {info.name && <ResultsTranslate translation={info.name} />}
+                  {navigator.name && <ResultsTranslate translation={navigator.name} />}
                   <div className="address-info">
-                    {info.assistance_link.default_message && (
-                      <>
-                        <a href={info.assistance_link.default_message} target="_blank">
+                    {navigator.description && <ResultsTranslate translation={navigator.description} />}
+                    {navigator.assistance_link.default_message && (
+                      <div>
+                        <a href={navigator.assistance_link.default_message} target="_blank">
                           <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
                         </a>
-                        <br />
-                      </>
+                      </div>
                     )}
-                    {info.email.default_message && (
-                      <>
-                        <a href={`mailto:${info.email}`}>
-                          <ResultsTranslate translation={info.email} />
+                    {navigator.email.default_message && (
+                      <div>
+                        <a href={`mailto:${navigator.email}`} className="email-link">
+                          <ResultsTranslate translation={navigator.email} />
                         </a>
-                        <br />
-                      </>
+                      </div>
                     )}
-                    {info.phone_number && <a href={`tel:${info.phone_number}`}>{info.phone_number}</a>}
+                    {navigator.phone_number && (
+                      <div>
+                        <a href={`tel:${navigator.phone_number}`} className="phone-link">
+                          {navigator.phone_number}
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </li>
               ))}
@@ -126,7 +131,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
             <h3 className="content-header">
               <FormattedMessage
                 id="results.required-documents-checklist"
-                defaultMessage="Required Documents Checklist"
+                defaultMessage="Required Key Documents Checklist"
               />
             </h3>
             <ul className="required-docs-list">

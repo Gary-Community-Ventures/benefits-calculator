@@ -33,6 +33,9 @@
   height: 1.75rem;
   width: 1.75rem;
   margin: -2.25rem 0.5rem 0.5rem 0;
+}
+
+.cls-checkmark-fill {
   fill: var(--icon-color);
 }
 

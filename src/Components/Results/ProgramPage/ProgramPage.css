@@ -127,12 +127,7 @@
   font-size: 1rem;
   font-family: 'Roboto Slab', serif;
   font-weight: 700;
-  padding-left: 1rem;
-}
-
-.apply-box-list a {
-  color: inherit;
-  text-decoration: none;
+  padding: 0 1rem;
 }
 
 li.apply-info {
@@ -143,7 +138,6 @@ li.apply-info {
   display: block;
   font-weight: 400;
   font-family: 'Open Sans', sans-serif;
-  font-style: normal;
 }
 
 .address-info a {
@@ -193,6 +187,11 @@ li.apply-info {
 
 .slim-text {
   font-weight: 400;
+}
+
+.email-link,
+.phone-link {
+  text-decoration: none;
 }
 
 /* TABLET */
