@@ -160,7 +160,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
               />
               <FormattedMessage
                 id="signUp.displayDisclosureSection-consentCheck4"
-                defaultMessage=" and consent to contact."
+                defaultMessage=" and consent to contact. Additionally, a copy of your MyFriendBen results will automatically be sent to the email/phone number you provided."
               />
             </div>
           }
