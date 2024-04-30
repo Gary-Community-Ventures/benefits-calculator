@@ -1,5 +1,10 @@
 .more-help-container {
-  padding: 2rem;
+  padding: 1rem;
+}
+
+.back-button {
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .underline-header-container {

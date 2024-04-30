@@ -1,5 +1,6 @@
 import { FormattedMessage } from 'react-intl';
-import BackAndSaveButtons from '../Results/BackAndSaveButtons/BackAndSaveButtons';
+import { useNavigate, useParams } from 'react-router-dom';
+import LeftArrowIcon from '@mui/icons-material/KeyboardArrowLeft';
 import './MoreHelp.css';
 
 type Resource = {
@@ -23,6 +24,9 @@ const MoreHelp = () => {
       link: 'https://maps.cofamilycenters.org',
     },
   ];
+
+  const { uuid } = useParams();
+  const navigate = useNavigate();
 
   const displayResources = (resources: Resource[]) => {
     return resources.map((resource) => {
@@ -49,6 +53,18 @@ const MoreHelp = () => {
 
   return (
     <div className="more-help-container">
+      <button
+        className="results-back-save-buttons back-button"
+        onClick={() => {
+          navigate(`/${uuid}/results/benefits`);
+        }}
+        aria-label="back to screener button"
+      >
+        <div className="btn-icon-text-container padding-right">
+          <LeftArrowIcon />
+          <FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />
+        </div>
+      </button>
       <div className="underline-header-container">
         <h1 className="more-help-header">
           <FormattedMessage id="moreHelp.header" defaultMessage="Other Resources Near You" />
