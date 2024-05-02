@@ -146,6 +146,17 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     setLoading(false);
   }, [filtersChecked, apiResults]);
 
+  const renderProgramsNeedsOrHelp = (type: 'program' | 'need' | 'help') => {
+    switch (type) {
+      case 'need':
+        return <Needs />;
+      case 'program':
+        return <Programs />;
+      case 'help':
+        return <MoreHelp />;
+    }
+  };
+
   if (loading) {
     return (
       <div className="results-loading-container">
