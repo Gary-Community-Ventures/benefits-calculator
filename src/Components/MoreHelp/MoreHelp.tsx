@@ -1,6 +1,4 @@
 import { FormattedMessage } from 'react-intl';
-import { useNavigate, useParams } from 'react-router-dom';
-import LeftArrowIcon from '@mui/icons-material/KeyboardArrowLeft';
 import './MoreHelp.css';
 
 type Resource = {
@@ -24,9 +22,6 @@ const MoreHelp = () => {
       link: 'https://maps.cofamilycenters.org',
     },
   ];
-
-  const { uuid } = useParams();
-  const navigate = useNavigate();
 
   const displayResources = (resources: Resource[]) => {
     return resources.map((resource) => {
