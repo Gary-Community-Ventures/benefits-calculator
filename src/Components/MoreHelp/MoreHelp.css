@@ -1,5 +1,5 @@
 .more-help-container {
-  padding: 1rem;
+  padding: 1rem 0;
 }
 
 .back-button {
@@ -32,10 +32,11 @@
   font-style: italic;
 }
 
-.resource-link,
-.resource-phone {
+.resource-link, .resource-phone {
   color: var(--icon-color);
-  font-weight: bold;
-  text-decoration: none;
   display: block;
+}
+
+.resource-phone {
+  text-decoration: none;
 }
