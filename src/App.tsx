@@ -19,7 +19,6 @@ import { getStepDirectory, STARTING_QUESTION_NUMBER, getStepNumber } from './Ass
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
 import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx';
-import MoreHelp from './Components/MoreHelp/MoreHelp.tsx';
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
 import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
@@ -354,7 +353,10 @@ const App = () => {
                 path="results/benefits/:programId/navigators"
                 element={<Results type="navigator" handleTextfieldChange={handleTextfieldChange} />}
               />
-              <Route path="results/more-help" element={<MoreHelp />} />
+              <Route
+                path="results/more-help"
+                element={<Results type="help" handleTextfieldChange={handleTextfieldChange} />}
+              />
               <Route path="results" element={<Navigate to="benefits" replace />} />
               <Route path="*" element={<Navigate to="/step-1" replace />} />
             </Route>
