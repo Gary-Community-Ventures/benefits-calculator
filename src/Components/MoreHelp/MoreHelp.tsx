@@ -42,7 +42,7 @@ const MoreHelp = () => {
             </a>
           )}
           {resource.phone && (
-            <a href={resource.phone} className="resource-phone" target="_blank">
+            <a href={`tel:${resource.phone}`} className="resource-phone" target="_blank">
               {resource.phone}
             </a>
           )}
