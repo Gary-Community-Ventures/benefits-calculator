@@ -9,7 +9,7 @@ import '../../Results/Results.css';
 import { TAX_CREDIT_CATEGORY } from '../../../Assets/resultsConstants.ts';
 
 type ResultsHeaderProps = {
-  type: 'program' | 'need';
+  type: 'program' | 'need' | 'help';
   handleTextfieldChange: (event: Event) => void;
 };
 
@@ -90,10 +90,10 @@ const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
     <>
       <BackAndSaveButtons
         handleTextfieldChange={handleTextfieldChange}
-        navigateToLink={`/${uuid}/confirm-information`}
+        navigateToLink={getNavLink(type)}
         BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO SCREENER" />}
       />
-      <div className="results-header-container">{type === 'need' ? <NeedsHeader /> : <ProgramsHeader />}</div>
+      {type !== 'help' && <div className="results-header-container">{type === 'need' ? <NeedsHeader /> : <ProgramsHeader />}</div>}
     </>
   );
 };
