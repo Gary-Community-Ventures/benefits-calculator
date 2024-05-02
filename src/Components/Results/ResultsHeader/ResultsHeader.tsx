@@ -78,6 +78,14 @@ const NeedsHeader = () => {
 const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
   const { uuid } = useParams();
 
+  const getNavLink = (type: 'program' | 'need' | 'help') => {
+    if (type === 'help') {
+      return `/${uuid}/results/benefits`;
+    } else {
+      return `/${uuid}/confirm-information`;
+    }
+  };
+
   return (
     <>
       <BackAndSaveButtons
