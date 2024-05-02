@@ -14,6 +14,7 @@ import ResultsTabs from './Tabs/Tabs';
 import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
+import MoreHelp from '../MoreHelp/MoreHelp';
 import './Results.css';
 import { PRESCHOOL_MAX_VALUE, PRESCHOOL_PROGRAMS_ABBR } from '../../Assets/resultsConstants';
 
@@ -26,7 +27,7 @@ type WrapperResultsContext = {
 };
 
 type ResultsProps = {
-  type: 'program' | 'need' | 'navigator';
+  type: 'program' | 'need' | 'navigator' | 'help';
   handleTextfieldChange: (event: Event) => void;
 };
 
@@ -165,7 +166,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     );
   } else if (apiError) {
     return <ResultsError />;
-  } else if (programId === undefined && (type === 'program' || type === 'need')) {
+  } else if (programId === undefined && (type === 'program' || type === 'need' || type === 'help')) {
     return (
       <ResultsContext.Provider
         value={{
@@ -177,13 +178,13 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
         }}
       >
         <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
-        <ResultsTabs />
+        {type !== 'help' && <ResultsTabs />}
         <Grid container sx={{ p: 2 }}>
           <Grid item xs={12}>
-            {type === 'need' ? <Needs /> : <Programs />}
+            {renderProgramsNeedsOrHelp(type)}
           </Grid>
         </Grid>
-        {!is211Co && <HelpButton />}
+        {type !== 'help' && !is211Co && <HelpButton />}
       </ResultsContext.Provider>
     );
   }
