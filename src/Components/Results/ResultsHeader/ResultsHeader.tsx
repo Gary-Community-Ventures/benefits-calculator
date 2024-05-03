@@ -9,7 +9,7 @@ import '../../Results/Results.css';
 import { TAX_CREDIT_CATEGORY } from '../../../Assets/resultsConstants.ts';
 
 type ResultsHeaderProps = {
-  type: 'program' | 'need' | 'help';
+  type: 'program' | 'need';
   handleTextfieldChange: (event: Event) => void;
 };
 
@@ -78,22 +78,14 @@ const NeedsHeader = () => {
 const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
   const { uuid } = useParams();
 
-  const getNavLink = (type: 'program' | 'need' | 'help') => {
-    if (type === 'help') {
-      return `/${uuid}/results/benefits`;
-    } else {
-      return `/${uuid}/confirm-information`;
-    }
-  };
-
   return (
     <>
       <BackAndSaveButtons
         handleTextfieldChange={handleTextfieldChange}
-        navigateToLink={getNavLink(type)}
+        navigateToLink={`/${uuid}/confirm-information`}
         BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO SCREENER" />}
       />
-      {type !== 'help' && <div className="results-header-container">{type === 'need' ? <NeedsHeader /> : <ProgramsHeader />}</div>}
+      <div className="results-header-container">{type === 'need' ? <NeedsHeader /> : <ProgramsHeader />}</div>
     </>
   );
 };
