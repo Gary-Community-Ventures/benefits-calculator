@@ -15,8 +15,10 @@ import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
 import MoreHelp from '../MoreHelp/MoreHelp';
-import './Results.css';
 import { PRESCHOOL_MAX_VALUE, PRESCHOOL_PROGRAMS_ABBR } from '../../Assets/resultsConstants';
+import BackAndSaveButtons from './BackAndSaveButtons/BackAndSaveButtons';
+import { FormattedMessage } from 'react-intl';
+import './Results.css';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -147,17 +149,6 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     setLoading(false);
   }, [filtersChecked, apiResults]);
 
-  const renderProgramsNeedsOrHelp = (type: 'program' | 'need' | 'help') => {
-    switch (type) {
-      case 'need':
-        return <Needs />;
-      case 'program':
-        return <Programs />;
-      case 'help':
-        return <MoreHelp />;
-    }
-  };
-
   if (loading) {
     return (
       <div className="results-loading-container">
@@ -166,7 +157,21 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     );
   } else if (apiError) {
     return <ResultsError />;
-  } else if (programId === undefined && (type === 'program' || type === 'need' || type === 'help')) {
+  } else if (programId === undefined && type === 'help') {
+    return (
+      <Grid container>
+        <Grid item xs={12}>
+        <BackAndSaveButtons
+          handleTextfieldChange={handleTextfieldChange}
+          navigateToLink={`/${uuid}/results/benefits`}
+          BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO RESULTS" />}
+        />
+        <MoreHelp />
+        </Grid>
+      </Grid>
+    );
+
+  } else if (programId === undefined && (type === 'program' || type === 'need')) {
     return (
       <ResultsContext.Provider
         value={{
@@ -178,13 +183,13 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
         }}
       >
         <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
-        {type !== 'help' && <ResultsTabs />}
+        <ResultsTabs />
         <Grid container sx={{ p: 2 }}>
           <Grid item xs={12}>
-            {renderProgramsNeedsOrHelp(type)}
+            {type === 'need' ? <Needs /> : <Programs />}
           </Grid>
         </Grid>
-        {type !== 'help' && !is211Co && <HelpButton />}
+        {!is211Co && <HelpButton />}
       </ResultsContext.Provider>
     );
   }
