@@ -161,16 +161,15 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     return (
       <Grid container>
         <Grid item xs={12}>
-        <BackAndSaveButtons
-          handleTextfieldChange={handleTextfieldChange}
-          navigateToLink={`/${uuid}/results/benefits`}
-          BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO RESULTS" />}
-        />
-        <MoreHelp />
+          <BackAndSaveButtons
+            handleTextfieldChange={handleTextfieldChange}
+            navigateToLink={`/${uuid}/results/benefits`}
+            BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO RESULTS" />}
+          />
+          <MoreHelp />
         </Grid>
       </Grid>
     );
-
   } else if (programId === undefined && (type === 'program' || type === 'need')) {
     return (
       <ResultsContext.Provider

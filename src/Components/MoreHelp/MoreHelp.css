@@ -32,7 +32,8 @@
   font-style: italic;
 }
 
-.resource-link, .resource-phone {
+.resource-link,
+.resource-phone {
   color: var(--icon-color);
   display: block;
 }
