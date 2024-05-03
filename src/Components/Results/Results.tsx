@@ -164,7 +164,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
           <BackAndSaveButtons
             handleTextfieldChange={handleTextfieldChange}
             navigateToLink={`/${uuid}/results/benefits`}
-            BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO RESULTS" />}
+            BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
           />
           <MoreHelp />
         </Grid>
