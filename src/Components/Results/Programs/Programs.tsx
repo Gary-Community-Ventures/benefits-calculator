@@ -27,10 +27,13 @@ const Programs = () => {
       {formData.immutableReferrer === 'lgs' && missingPrograms && <BackToScreen />}
       <Filter />
       {Object.entries(categories).map(([category, programs]) => {
+        const sortedPrograms = programs.sort(
+          (programA, programB) => programB.estimated_value - programA.estimated_value,
+        );
         return (
           <div key={category}>
             <CategoryHeading headingType={programs[0].category} />
-            {programs.map((program, index) => {
+            {sortedPrograms.map((program, index) => {
               return <ProgramCard program={program} key={index} />;
             })}
           </div>
