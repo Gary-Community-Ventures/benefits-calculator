@@ -14,8 +14,11 @@ import ResultsTabs from './Tabs/Tabs';
 import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
-import './Results.css';
+import MoreHelp from '../MoreHelp/MoreHelp';
 import { PRESCHOOL_MAX_VALUE, PRESCHOOL_PROGRAMS_ABBR } from '../../Assets/resultsConstants';
+import BackAndSaveButtons from './BackAndSaveButtons/BackAndSaveButtons';
+import { FormattedMessage } from 'react-intl';
+import './Results.css';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -26,7 +29,7 @@ type WrapperResultsContext = {
 };
 
 type ResultsProps = {
-  type: 'program' | 'need' | 'navigator';
+  type: 'program' | 'need' | 'navigator' | 'help';
   handleTextfieldChange: (event: Event) => void;
 };
 
@@ -154,6 +157,19 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     );
   } else if (apiError) {
     return <ResultsError />;
+  } else if (programId === undefined && type === 'help') {
+    return (
+      <Grid container>
+        <Grid item xs={12}>
+          <BackAndSaveButtons
+            handleTextfieldChange={handleTextfieldChange}
+            navigateToLink={`/${uuid}/results/benefits`}
+            BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO RESULTS" />}
+          />
+          <MoreHelp />
+        </Grid>
+      </Grid>
+    );
   } else if (programId === undefined && (type === 'program' || type === 'need')) {
     return (
       <ResultsContext.Provider

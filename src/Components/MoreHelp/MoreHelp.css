@@ -1,0 +1,43 @@
+.more-help-container {
+  padding: 1rem;
+}
+
+.back-button {
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.underline-header-container {
+  display: inline-block;
+  width: 100%;
+  border-bottom: 1px solid black;
+  margin-bottom: 1rem;
+}
+
+.more-help-header {
+  color: var(--primary-color);
+}
+
+.resource-card-article {
+  margin-bottom: 2rem;
+}
+
+.resource-header,
+.resource-desc {
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.resource-desc {
+  font-style: italic;
+}
+
+.resource-link,
+.resource-phone {
+  color: var(--icon-color);
+  display: block;
+}
+
+.resource-phone {
+  text-decoration: none;
+}
