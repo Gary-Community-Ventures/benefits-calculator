@@ -15,7 +15,6 @@ import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
 import MoreHelp from '../MoreHelp/MoreHelp';
-import { PRESCHOOL_MAX_VALUE, PRESCHOOL_PROGRAMS_ABBR } from '../../Assets/resultsConstants';
 import BackAndSaveButtons from './BackAndSaveButtons/BackAndSaveButtons';
 import { FormattedMessage } from 'react-intl';
 import './Results.css';
@@ -48,32 +47,6 @@ export function useResultsContext() {
 function findProgramById(programs: Program[], id: string) {
   return programs.find((program) => String(program.program_id) === id);
 }
-
-export function calculateTotalValue(programs: Program[], category: string) {
-  let total = 0;
-  let preschoolTotal = 0;
-  for (const program of programs) {
-    if (program.category.default_message !== category) {
-      continue;
-    }
-
-    if (PRESCHOOL_PROGRAMS_ABBR.includes(program.name_abbreviated)) {
-      preschoolTotal += program.estimated_value;
-    } else {
-      total += program.estimated_value;
-    }
-  }
-
-  if (preschoolTotal > PRESCHOOL_MAX_VALUE) {
-    preschoolTotal = PRESCHOOL_MAX_VALUE;
-  }
-
-  return total + preschoolTotal;
-}
-
-export const formatToUSD = (num: number) => {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
-};
 
 const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   const { locale, formData } = useContext(Context);

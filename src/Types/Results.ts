@@ -31,6 +31,7 @@ export type Program = {
   legal_status_required: string[];
   category: Translation;
   warning: Translation;
+  estimated_value_override: Translation;
   eligible: boolean;
   failed_tests: TestMessage[];
   passed_tests: TestMessage[];

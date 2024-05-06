@@ -1,10 +1,10 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate.tsx';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
 import { FormattedMessage } from 'react-intl';
-import { formatToUSD } from '../Results.tsx';
+import { formatToUSD } from '../FormattedValue';
 import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage.tsx';
 
