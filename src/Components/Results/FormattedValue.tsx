@@ -8,6 +8,10 @@ export function calculateTotalValue(programs: Program[], category: string) {
   let total = 0;
   let preschoolTotal = 0;
   for (const program of programs) {
+    if (program.estimated_value_override.default_message !== '') {
+      continue;
+    }
+
     if (program.category.default_message !== category) {
       continue;
     }
