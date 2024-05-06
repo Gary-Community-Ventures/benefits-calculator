@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
-import { programValue } from '../FormattedValue';
+import { formatMonthlyValue, programValue } from '../FormattedValue';
 import ResultsTranslate from '../Translate/Translate';
 import { useEffect, useState } from 'react';
 import './ProgramCard.css';
@@ -88,8 +88,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
           </div>
           <div className="result-program-details-box">
             <strong>
-              {programValue(program, true)}
-              <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
+              {formatMonthlyValue(program)}
             </strong>
           </div>
         </div>

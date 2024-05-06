@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { PRESCHOOL_MAX_VALUE, PRESCHOOL_PROGRAMS_ABBR } from '../../Assets/resultsConstants';
 import { Program } from '../../Types/Results';
 import ResultsTranslate from './Translate/Translate';
@@ -28,16 +30,26 @@ export const formatToUSD = (num: number) => {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
 };
 
-export const programValue = (program: Program, monthly: boolean = false) => {
-  if (program.estimated_value_override.default_message !== '') {
-    return <ResultsTranslate translation={program.estimated_value_override} />;
-  }
+const overrideValue = (func: (program: Program) => ReactNode) => {
+  /* eslint-disable react/display-name */
+  return (program: Program) => {
+    if (program.estimated_value_override.default_message !== '') {
+      return <ResultsTranslate translation={program.estimated_value_override} />;
+    }
 
-  let value = program.estimated_value;
-
-  if (monthly) {
-    value = value / 12;
-  }
-
-  return formatToUSD(value);
+    return func(program);
+  };
 };
+
+export const formatMonthlyValue = overrideValue((program: Program) => {
+  return (
+    <>
+      {formatToUSD(program.estimated_value / 12)}
+      <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
+    </>
+  );
+});
+
+export const formatYearlyValue = overrideValue((program: Program) => {
+  return <>{formatToUSD(program.estimated_value)}</>;
+});
