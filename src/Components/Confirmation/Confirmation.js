@@ -28,9 +28,8 @@ import { ReactComponent as Resources } from '../../Assets/icons/resources.svg';
 import { ReactComponent as Benefits } from '../../Assets/icons/benefits.svg';
 import { ReactComponent as Immediate } from '../../Assets/icons/immediate.svg';
 import { ReactComponent as Referral } from '../../Assets/icons/referral.svg';
-import './Confirmation.css';
 import PreviousButton from '../PreviousButton/PreviousButton';
-import { House } from '@mui/icons-material';
+import './Confirmation.css';
 
 const Confirmation = () => {
   const { formData } = useContext(Context);
@@ -38,6 +37,15 @@ const Confirmation = () => {
   const navigate = useNavigate();
   const intl = useIntl();
   const locationState = { state: { routedFromConfirmationPg: true } };
+  const editHHMemberAriaLabel = intl.formatMessage({ id: 'editHHMember.ariaText', defaultMessage: 'edit household member' });
+  const editExpensesAriaLabel = intl.formatMessage({ id: 'editExpenses.ariaText', defaultMessage: 'edit expenses' });
+  const editHHSizeAriaLabel = intl.formatMessage({ id: 'editHHSize.ariaText', defaultMessage: 'edit household size' });
+  const editHHAssetsAriaLabel = intl.formatMessage({ id: 'editHHAssets.ariaText', defaultMessage: 'edit household assets' });
+  const editZipcodeAriaLabel = intl.formatMessage({ id: 'editZipcode.ariaText', defaultMessage: 'edit zipcode' });
+  const editReferralSrcAriaLabel = intl.formatMessage({ id: 'editReferralSrc.ariaText', defaultMessage: 'edit referral source' });
+  const editCurrentBensAriaLabel = intl.formatMessage({ id: 'editCurrentBens.ariaText', defaultMessage: 'edit current benefits' });
+  const editImmedNeedsAriaLabel = intl.formatMessage({ id: 'editImmedNeeds.ariaText', defaultMessage: 'edit immediate needs' });
+
 
   const getQuestionUrl = (name) => {
     const stepNumber = getStepNumber(name, formData.immutableReferrer);
@@ -100,10 +108,10 @@ const Confirmation = () => {
           </Grid>
           <Grid item xs={2} display="flex" justifyContent="flex-end">
             <button
-              aria-label="edit household member"
+              aria-label={editHHMemberAriaLabel}
               onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`, locationState)}
             >
-              <Edit className="edit-button" alt="edit-icon" />
+              <Edit className="edit-button" alt="edit icon" />
             </button>
           </Grid>
         </Grid>
@@ -149,8 +157,8 @@ const Confirmation = () => {
           )}
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label="edit expenses" onClick={() => navigate(getQuestionUrl('hasExpenses'), locationState)}>
-            <Edit className="edit-button" alt="edit-icon" />
+          <button aria-label={editExpensesAriaLabel} onClick={() => navigate(getQuestionUrl('hasExpenses'), locationState)}>
+            <Edit className="edit-button" alt="edit icon" />
           </button>
         </Grid>
       </Grid>
@@ -280,8 +288,8 @@ const Confirmation = () => {
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label="edit household size" onClick={() => navigate(linkTo)}>
-            <Edit className="edit-button" alt="edit-icon" />
+          <button aria-label={editHHSizeAriaLabel} onClick={() => navigate(linkTo)}>
+            <Edit className="edit-button" alt="edit icon" />
           </button>
         </Grid>
       </Grid>
@@ -314,10 +322,10 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button
-            aria-label="edit household assets"
+            aria-label={editHHAssetsAriaLabel}
             onClick={() => navigate(getQuestionUrl('householdAssets'), locationState)}
           >
-            <Edit className="edit-button" alt="edit-icon" />
+            <Edit className="edit-button" alt="edit icon" />
           </button>
         </Grid>
       </Grid>
@@ -349,8 +357,8 @@ const Confirmation = () => {
           </p>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label="edit zipcode" onClick={() => navigate(getQuestionUrl('zipcode'), locationState)}>
-            <Edit className="edit-button" alt="edit-icon" />
+          <button aria-label={editZipcodeAriaLabel} onClick={() => navigate(getQuestionUrl('zipcode'), locationState)}>
+            <Edit className="edit-button" alt="edit icon" />
           </button>
         </Grid>
       </Grid>
@@ -383,10 +391,10 @@ const Confirmation = () => {
           </Grid>
           <Grid item xs={2} display="flex" justifyContent="flex-end">
             <button
-              aria-label="edit referral source"
+              aria-label={editReferralSrcAriaLabel}
               onClick={() => navigate(getQuestionUrl('referralSource'), locationState)}
             >
-              <Edit className="edit-button" alt="edit-icon" />
+              <Edit className="edit-button" alt="edit icon" />
             </button>
           </Grid>
         </Grid>
@@ -426,7 +434,7 @@ const Confirmation = () => {
           getQuestionUrl('hasBenefits'),
           allBenefitsList,
           <Benefits className="confirmation-icon" alt="benefits-icon" />,
-          'edit current benefits',
+          editCurrentBensAriaLabel,
         )}
         {displayHHCheckboxSection(
           'acuteHHConditions',
@@ -435,6 +443,7 @@ const Confirmation = () => {
           getQuestionUrl('acuteHHConditions'),
           refactorOptionsList(acuteConditionOptions),
           <Immediate className="confirmation-icon" alt="immediate-icon" />,
+          editImmedNeedsAriaLabel,
         )}
         {displayReferralSourceSection()}
       </>
@@ -574,7 +583,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button aria-label={ariaLabel} onClick={() => navigate(linkTo, locationState)}>
-            <Edit className="edit-button" alt="edit-icon" />
+            <Edit className="edit-button" alt="edit icon" />
           </button>
         </Grid>
       </Grid>
