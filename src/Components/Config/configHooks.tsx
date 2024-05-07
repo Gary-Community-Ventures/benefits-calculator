@@ -208,5 +208,14 @@ export function useConfig(name: string) {
   if (config === undefined) return {};
 
   if (config[name] === undefined) throw new Error(`'${name}' does not exist in the config`);
-  return config[name];
+
+  const configValue = config[name];
+
+  // Check if the config value is an object with a "0" key
+  if (typeof configValue === 'object' && configValue !== null && '0' in configValue) {
+    return configValue['0'];
+  } else {
+    // Return the config value as is
+    return configValue;
+  }
 }

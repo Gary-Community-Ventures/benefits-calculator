@@ -1,4 +1,3 @@
-import { FormattedMessage } from 'react-intl';
 import { ReactComponent as Baby_supplies } from './OptionCardIcons/AcuteConditions/baby_supplies.svg';
 import { ReactComponent as Child_development } from './OptionCardIcons/AcuteConditions/child_development.svg';
 import { ReactComponent as Dental_care } from './OptionCardIcons/AcuteConditions/dental_care.svg';
