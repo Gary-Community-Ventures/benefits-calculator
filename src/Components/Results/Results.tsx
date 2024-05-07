@@ -156,24 +156,26 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     return <ResultsError />;
   } else if (programId === undefined && (type === 'program' || type === 'need')) {
     return (
-      <ResultsContext.Provider
-        value={{
-          programs,
-          needs,
-          filtersChecked,
-          setFiltersChecked,
-          missingPrograms,
-        }}
-      >
-        <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
-        <ResultsTabs />
-        <Grid container sx={{ p: 2 }}>
-          <Grid item xs={12}>
-            {type === 'need' ? <Needs /> : <Programs />}
+      <main>
+        <ResultsContext.Provider
+          value={{
+            programs,
+            needs,
+            filtersChecked,
+            setFiltersChecked,
+            missingPrograms,
+          }}
+        >
+          <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
+          <ResultsTabs />
+          <Grid container sx={{ p: 2 }}>
+            <Grid item xs={12}>
+              {type === 'need' ? <Needs /> : <Programs />}
+            </Grid>
           </Grid>
-        </Grid>
-        {!is211Co && <HelpButton />}
-      </ResultsContext.Provider>
+          {!is211Co && <HelpButton />}
+        </ResultsContext.Provider>
+      </main>
     );
   }
 
