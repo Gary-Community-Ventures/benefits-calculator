@@ -90,9 +90,9 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       <div className="content-width">
         {program.navigators.length > 0 && (
           <section className="apply-box">
-            <h3 className="content-header">
+            <h2 className="content-header">
               <FormattedMessage id="results.get-help-applying" defaultMessage="Get Help Applying" />
-            </h3>
+            </h2>
             <ul className="apply-box-list">
               {program.navigators.map((navigator, index) => (
                 <li key={index} className="apply-info">
