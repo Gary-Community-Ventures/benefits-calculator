@@ -69,7 +69,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
   };
 
   return (
-    <article className="program-page-container">
+    <main className="program-page-container">
       <section className="back-to-results-button-container">
         <BackAndSaveButtons
           handleTextfieldChange={() => {}}
@@ -147,7 +147,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <ResultsTranslate translation={program.description} />
         </section>
       </div>
-    </article>
+    </main>
   );
 };
 
