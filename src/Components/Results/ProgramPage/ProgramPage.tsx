@@ -96,9 +96,17 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
             <ul className="apply-box-list">
               {program.navigators.map((navigator, index) => (
                 <li key={index} className="apply-info">
-                  {navigator.name && <ResultsTranslate translation={navigator.name} />}
+                  {navigator.name && (
+                    <p className="navigator-name">
+                      <ResultsTranslate translation={navigator.name} />
+                    </p>
+                  )}
                   <div className="address-info">
-                    {navigator.description && <ResultsTranslate translation={navigator.description} />}
+                    {navigator.description && (
+                      <p className="navigator-desc">
+                        <ResultsTranslate translation={navigator.description} />
+                      </p>
+                    )}
                     {navigator.assistance_link.default_message && (
                       <div>
                         <a

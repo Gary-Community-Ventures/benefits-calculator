@@ -183,6 +183,7 @@ li.apply-info {
 
 .content-header {
   font-size: 1.25rem;
+  color: var(--secondary-color)
 }
 
 .slim-text {
@@ -192,6 +193,16 @@ li.apply-info {
 .email-link,
 .phone-link {
   text-decoration: none;
+}
+
+.navigator-name {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  color: #293457;
+}
+
+.navigator-desc {
+  color: black;
 }
 
 /* TABLET */
