@@ -149,7 +149,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
                 defaultMessage="{linkVal}"
                 values={{
                   linkVal: (
-                    <a className="sign-up-data-privacy-link" href={privacyLink} target="_blank">
+                    <a className="link-color" href={privacyLink} target="_blank">
                       <FormattedMessage
                         id="signUp.displayDisclosureSection-consentCheckLink"
                         defaultMessage="data privacy policy "

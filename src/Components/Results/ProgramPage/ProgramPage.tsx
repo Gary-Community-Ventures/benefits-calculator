@@ -101,21 +101,33 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                     {navigator.description && <ResultsTranslate translation={navigator.description} />}
                     {navigator.assistance_link.default_message && (
                       <div>
-                        <a href={navigator.assistance_link.default_message} target="_blank">
+                        <a
+                          href={navigator.assistance_link.default_message}
+                          target="_blank"
+                          style={{ color: 'var(--link-color)' }}
+                        >
                           <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
                         </a>
                       </div>
                     )}
                     {navigator.email.default_message && (
                       <div>
-                        <a href={`mailto:${navigator.email}`} className="email-link">
+                        <a
+                          href={`mailto:${navigator.email}`}
+                          className="email-link"
+                          style={{ color: 'var(--link-color)' }}
+                        >
                           <ResultsTranslate translation={navigator.email} />
                         </a>
                       </div>
                     )}
                     {navigator.phone_number && (
                       <div>
-                        <a href={`tel:${navigator.phone_number}`} className="phone-link">
+                        <a
+                          href={`tel:${navigator.phone_number}`}
+                          className="phone-link"
+                          style={{ color: 'var(--link-color)' }}
+                        >
                           {navigator.phone_number}
                         </a>
                       </div>
