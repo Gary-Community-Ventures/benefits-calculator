@@ -14,6 +14,7 @@ type Category = {
 };
 
 function sortProgramsIntoCategories(programs: Program[]): Category[] {
+  // group programs by category
   const categories = programs.reduce((acc: Category[], program) => {
     const categoryName = program.category.default_message;
 
@@ -29,12 +30,14 @@ function sortProgramsIntoCategories(programs: Program[]): Category[] {
     return acc;
   }, []);
 
+  // sort categories by total category value in decending order
   categories.sort((a, b) => {
     return (
       calculateTotalValue(b.programs, b.name.default_message) - calculateTotalValue(a.programs, a.name.default_message)
     );
   });
 
+  // sort programs in each category by decending estimated value
   for (const category of categories) {
     category.programs.sort((a, b) => b.estimated_value - a.estimated_value);
   }
