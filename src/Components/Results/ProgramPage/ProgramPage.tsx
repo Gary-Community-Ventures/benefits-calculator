@@ -1,10 +1,10 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate.tsx';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
 import { FormattedMessage } from 'react-intl';
-import { formatToUSD } from '../Results.tsx';
+import { formatToUSD, formatYearlyValue } from '../FormattedValue';
 import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage.tsx';
 
@@ -54,7 +54,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <article className="estimation-text-left">
             <FormattedMessage id="results.estimated-annual-value" defaultMessage="Estimated Annual Value" />
           </article>
-          <article className="estimation-text-right slim-text">{formatToUSD(program.estimated_value)}</article>
+          <article className="estimation-text-right slim-text">{formatYearlyValue(program)}</article>
         </div>
         <div className="estimation-text">
           <article className="estimation-text-left">
