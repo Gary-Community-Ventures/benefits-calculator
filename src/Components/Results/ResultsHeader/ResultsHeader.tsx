@@ -4,7 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { Context } from '../../Wrapper/Wrapper.tsx';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
 import { useParams } from 'react-router-dom';
-import { calculateTotalValue, useResultsContext } from '../Results.tsx';
+import { useResultsContext } from '../Results.tsx';
+import { calculateTotalValue } from '../FormattedValue.tsx';
 import '../../Results/Results.css';
 import { TAX_CREDIT_CATEGORY } from '../../../Assets/resultsConstants.ts';
 

@@ -1,10 +1,10 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate.tsx';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
 import { FormattedMessage } from 'react-intl';
-import { formatToUSD } from '../Results.tsx';
+import { formatToUSD, formatYearlyValue } from '../FormattedValue';
 import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage.tsx';
 
@@ -54,7 +54,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <article className="estimation-text-left">
             <FormattedMessage id="results.estimated-annual-value" defaultMessage="Estimated Annual Value" />
           </article>
-          <article className="estimation-text-right slim-text">{formatToUSD(program.estimated_value)}</article>
+          <article className="estimation-text-right slim-text">{formatYearlyValue(program)}</article>
         </div>
         <div className="estimation-text">
           <article className="estimation-text-left">
@@ -82,6 +82,15 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         {displayEstimatedValueAndTime(program)}
       </div>
       {program.warning.default_message && <WarningMessage message={program.warning} />}
+      {program.multiple_tax_units && (
+        <WarningMessage
+          message={{
+            label: 'results.multiple_tax_units.warning',
+            default_message:
+              'There may be members of your household who are not part of your "tax household." Ask them to complete this tool to determine if they qualify for this benefit.',
+          }}
+        />
+      )}
       <div className="apply-online-button">
         <a href={program.apply_button_link.default_message} target="_blank">
           <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
