@@ -5,7 +5,8 @@ import { ReactComponent as Transportation } from '../../../Assets/CategoryHeadin
 import { ReactComponent as TaxCredits } from '../../../Assets/CategoryHeadingIcons/taxCredits.svg';
 import { ReactComponent as CashAssistance } from '../../../Assets/CategoryHeadingIcons/cashAssistant.svg';
 import { ReactComponent as ChildCareYouthEducation } from '../../../Assets/CategoryHeadingIcons/childCareYouthEducation.svg';
-import { calculateTotalValue, formatToUSD, useResultsContext } from '../Results';
+import { useResultsContext } from '../Results';
+import { calculateTotalValue, formatToUSD } from '../FormattedValue';
 import { Translation } from '../../../Types/Results.ts';
 import { FormattedMessage } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate.tsx';
