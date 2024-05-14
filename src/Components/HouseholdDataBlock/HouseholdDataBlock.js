@@ -41,7 +41,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   };
   const [submittedCount, setSubmittedCount] = useState(0);
   const intl = useIntl();
-  const editHHMemberAriaLabel = intl.formatMessage({ id: 'editHHMember.ariaText', defaultMessage: 'edit household member' });
+  const editHHMemberAriaLabel = intl.formatMessage({
+    id: 'editHHMember.ariaText',
+    defaultMessage: 'edit household member',
+  });
 
   const initialMemberData = formData.householdData[page - 1] ?? {
     age: '',

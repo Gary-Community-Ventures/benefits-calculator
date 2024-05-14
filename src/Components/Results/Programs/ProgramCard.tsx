@@ -87,9 +87,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
             <FormattedMessage id="program-card.estimated-savings" defaultMessage="Estimated Savings: " />
           </div>
           <div className="result-program-details-box">
-            <strong>
-              {formatMonthlyValue(program)}
-            </strong>
+            <strong>{formatMonthlyValue(program)}</strong>
           </div>
         </div>
       </div>
