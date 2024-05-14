@@ -132,7 +132,11 @@ export const Filter = () => {
       }
     });
 
-    return <section className="filters-container">{filters}</section>;
+    return (
+      <section className="filters-container" id="filter-modal">
+        {filters}
+      </section>
+    );
   };
 
   const displayCitizenshipPopover = () => {
@@ -154,6 +158,7 @@ export const Filter = () => {
             horizontal: 'left',
           }}
           transformOrigin={{ vertical: 2, horizontal: 0 }}
+          aria-labelledby="filter-modal"
         >
           {renderCitizenshipFilters(citizenshipFilterFormControlLabels, filtersChecked)}
         </Popover>
