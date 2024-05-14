@@ -8,6 +8,8 @@ import { FormattedMessageType } from '../../../Types/Questions';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 import './Filter.css';
 
 export const Filter = () => {
@@ -133,11 +135,19 @@ export const Filter = () => {
     });
 
     return (
-      <section className="filters-container" id="filter-modal">
+      <section className="filters-container" id="citizenship-filters-modal">
         {filters}
       </section>
     );
   };
+
+  const handleFilterClose = () => {
+     const updatedCitButtonClass = citButtonClass.replace('flat-white-border-bottom', '');
+
+     setCitizenshipPopoverAnchor(null);
+     setCitizenshipFilterIsOpen(false);
+     setCitButtonClass(updatedCitButtonClass);
+  }
 
   const displayCitizenshipPopover = () => {
     return (
@@ -145,21 +155,20 @@ export const Filter = () => {
         <Popover
           id="citizenshipPopover"
           open={Boolean(citizenshipPopoverAnchor)}
-          onClose={() => {
-            const updatedCitButtonClass = citButtonClass.replace('flat-white-border-bottom', '');
-
-            setCitizenshipPopoverAnchor(null);
-            setCitizenshipFilterIsOpen(false);
-            setCitButtonClass(updatedCitButtonClass);
-          }}
+          onClose={handleFilterClose}
           anchorEl={citizenshipPopoverAnchor}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',
           }}
           transformOrigin={{ vertical: 2, horizontal: 0 }}
-          aria-labelledby="filter-modal"
+          aria-labelledby="citizenship-filters-modal"
         >
+          <div className='filters-close-button'>
+            <IconButton size="small" aria-label="close citizenship filters" id="close-citizenship-filters-button" color="inherit" onClick={handleFilterClose}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </div>
           {renderCitizenshipFilters(citizenshipFilterFormControlLabels, filtersChecked)}
         </Popover>
       </section>
@@ -169,7 +178,12 @@ export const Filter = () => {
   const displayCitizenshipButton = () => {
     return (
       <section>
-        <Button className={citButtonClass} variant="contained" onClick={(event) => handleCitizenshipBtnClick(event)}>
+        <Button
+          className={citButtonClass}
+          variant="contained"
+          onClick={(event) => handleCitizenshipBtnClick(event)}
+          aria-label="citizenship filters"
+        >
           <FormattedMessage id="filterSection.citizenship" defaultMessage="CITIZENSHIP" />
           {citizenshipFilterIsOpen ? (
             <KeyboardArrowDownIcon className="arrow-margin" />
