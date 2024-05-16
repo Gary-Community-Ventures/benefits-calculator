@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { AppBar, MenuItem, Select, Modal, Link, IconButton } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -14,23 +13,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
 import CloseIcon from '@mui/icons-material/Close';
-import EmailResults from '../../EmailResults/EmailResults';
 import languageOptions from '../../../Assets/languageOptions';
 import './TwoOneOneHeader.css';
 
-const TwoOneOneHeader = ({ handleTextfieldChange }) => {
+const TwoOneOneHeader = () => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
   const { formData, locale, selectLanguage } = useContext(Context);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
 
-  //this is for the results icon to conditionally show up
-  const location = useLocation();
-  const urlRegex = /^\/(?:\/results\/(.+)|(.+)\/results)\/?$/;
-  const url = location.pathname.match(urlRegex);
-  const screenUUID = url ? url[2] ?? url[1] : undefined;
 
   const [openShare, setOpenShare] = useState(false);
-  const [openEmailResults, setOpenEmailResults] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -40,11 +32,6 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
 
   const handleCloseShare = () => {
     setOpenShare(false);
-  };
-
-
-  const handleCloseEmailResults = () => {
-    setOpenEmailResults(false);
   };
 
   const handleCloseLanguage = () => {
@@ -189,14 +176,6 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
             </Stack>
             <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
               <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
-            </Modal>
-            <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-labelledby="email-results-modal">
-              <EmailResults
-                handleTextfieldChange={handleTextfieldChange}
-                screenId={screenUUID}
-                close={handleCloseEmailResults}
-                id="email-results-modal"
-              />
             </Modal>
           </Stack>
         </AppBar>

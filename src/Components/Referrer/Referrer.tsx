@@ -6,17 +6,13 @@ import TwoOneOneHeader from '../TwoOneOneComponents/TwoOneOneHeader/TwoOneOneHea
 import { FormattedMessage } from 'react-intl';
 import Footer from '../Footer/Footer';
 
-type HeaderProps = {
-  handleTextFieldChange: (event: Event) => void;
-};
-
-export const BrandedHeader = ({ handleTextFieldChange }: HeaderProps) => {
+export const BrandedHeader = () => {
   const { formData } = useContext(Context);
 
   if (formData.immutableReferrer === '211co') {
-    return <TwoOneOneHeader handleTextfieldChange={handleTextFieldChange} />;
+    return <TwoOneOneHeader />;
   }
-  return <Header handleTextfieldChange={handleTextFieldChange} />;
+  return <Header />;
 };
 
 export const BrandedFooter = () => {

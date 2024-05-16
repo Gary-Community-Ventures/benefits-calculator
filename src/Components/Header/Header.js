@@ -1,17 +1,15 @@
 import { AppBar, MenuItem, Select, Modal } from '@mui/material';
 import { useContext, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import Share from '../Share/Share';
-import EmailResults from '../EmailResults/EmailResults';
 import languageOptions from '../../Assets/languageOptions.tsx';
 import Paper from '@mui/material/Paper';
 import TranslateAriaLabel from '../Results/Translate/TranslateAriaLabel.tsx';
 import './Header.css';
 
-const Header = ({ handleTextfieldChange }) => {
+const Header = () => {
   const context = useContext(Context);
   const { formData, getReferrer } = context;
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
@@ -25,13 +23,7 @@ const Header = ({ handleTextfieldChange }) => {
     defaultMsg: "share button"
   };
 
-  const location = useLocation();
-  const urlRegex = /^\/(?:\/results\/(.+)|(.+)\/results)\/?$/;
-  const url = location.pathname.match(urlRegex);
-  const screenUUID = url ? url[2] ?? url[1] : undefined;
-
   const [openShare, setOpenShare] = useState(false);
-  const [openEmailResults, setOpenEmailResults] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
 
   const handleOpenShare = () => {
@@ -42,9 +34,6 @@ const Header = ({ handleTextfieldChange }) => {
     setOpenShare(false);
   };
 
-  const handleCloseEmailResults = () => {
-    setOpenEmailResults(false);
-  };
 
   const handleCloseLanguage = () => {
     setIsLanguageSelectOpen(false);
@@ -105,14 +94,6 @@ const Header = ({ handleTextfieldChange }) => {
         </AppBar>
         <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
           <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
-        </Modal>
-        <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-labelledby="email-results-modal">
-          <EmailResults
-            handleTextfieldChange={handleTextfieldChange}
-            screenId={screenUUID}
-            close={handleCloseEmailResults}
-            id="email-results-modal"
-          />
         </Modal>
       </Paper>
     </nav>
