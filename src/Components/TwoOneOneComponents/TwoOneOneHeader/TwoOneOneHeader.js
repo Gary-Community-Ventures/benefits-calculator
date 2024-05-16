@@ -14,12 +14,29 @@ import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
 import CloseIcon from '@mui/icons-material/Close';
 import languageOptions from '../../../Assets/languageOptions';
+import TranslateAriaLabel from '../../Results/Translate/TranslateAriaLabel';
 import './TwoOneOneHeader.css';
 
 const TwoOneOneHeader = () => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
   const { formData, locale, selectLanguage } = useContext(Context);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
+  const selectLangAriaLabelProps = {
+    id: 'header.selectLang-AL',
+    defaultMsg: 'select a language',
+  };
+  const shareButtonAriaLabelProps = {
+    id: 'header.shareBtn-AL',
+    defaultMsg: 'share button',
+  };
+  const openMenuBtnAriaLabelProps = {
+    id: '211Header.openMenuBtn-AL',
+    defaultMsg: 'open menu',
+  };
+  const closeBtnAriaLabelProps = {
+    id: '211Header.closeMenuBtn-AL',
+    defaultMsg: 'close menu',
+  };
 
 
   const [openShare, setOpenShare] = useState(false);
@@ -75,7 +92,7 @@ const TwoOneOneHeader = () => {
         <IconButton
           edge="end"
           color="primary"
-          aria-label="open menu"
+          aria-label={TranslateAriaLabel(closeBtnAriaLabelProps)}
           onClick={handleOpenMenu}
           className="hamburger-icon"
         >
@@ -87,7 +104,7 @@ const TwoOneOneHeader = () => {
         <IconButton
           edge="end"
           color="primary"
-          aria-label="open menu"
+          aria-label={TranslateAriaLabel(openMenuBtnAriaLabelProps)}
           onClick={handleOpenMenu}
           className="hamburger-icon"
         >
@@ -158,7 +175,7 @@ const TwoOneOneHeader = () => {
                 value={locale}
                 label="Language"
                 onChange={handleLanguageChange}
-                aria-label="select a language"
+                aria-label={TranslateAriaLabel(selectLangAriaLabelProps)}
                 variant="standard"
                 disableUnderline={true}
                 open={isLanguageSelectOpen}
@@ -168,7 +185,7 @@ const TwoOneOneHeader = () => {
               >
                 {createMenuItems(languageOptions)}
               </Select>
-              <IconButton color="primary" onClick={handleOpenShare} aria-label="share button">
+              <IconButton color="primary" onClick={handleOpenShare} aria-label={TranslateAriaLabel(shareButtonAriaLabelProps)}>
                 <ShareIcon role="img" />
               </IconButton>
               {displayHamburgerMenuIcon()}
