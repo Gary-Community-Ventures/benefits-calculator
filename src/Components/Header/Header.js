@@ -9,12 +9,22 @@ import Share from '../Share/Share';
 import EmailResults from '../EmailResults/EmailResults';
 import languageOptions from '../../Assets/languageOptions.tsx';
 import Paper from '@mui/material/Paper';
+import TranslateAriaLabel from '../Results/Translate/TranslateAriaLabel.tsx';
 import './Header.css';
 
 const Header = ({ handleTextfieldChange }) => {
   const context = useContext(Context);
   const { formData, getReferrer } = context;
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
+  const selectLangAriaLabelProps = {
+    id: 'header.selectLang-AL',
+    defaultMsg: "select a language"
+  };
+
+  const shareButtonAriaLabelProps = {
+    id: 'header.shareBtn-AL',
+    defaultMsg: "share button"
+  };
 
   const location = useLocation();
   const urlRegex = /^\/(?:\/results\/(.+)|(.+)\/results)\/?$/;
@@ -80,7 +90,7 @@ const Header = ({ handleTextfieldChange }) => {
               value={context.locale}
               label="Language"
               onChange={(event) => context.selectLanguage(event)}
-              aria-label="select a language"
+              aria-label={TranslateAriaLabel(selectLangAriaLabelProps)}
               variant="standard"
               disableUnderline={true}
               open={isLanguageSelectOpen}
@@ -90,7 +100,11 @@ const Header = ({ handleTextfieldChange }) => {
             >
               {createMenuItems(languageOptions)}
             </Select>
-            <button className="icon-container" onClick={handleOpenShare} aria-label="share button">
+            <button
+              className="icon-container"
+              onClick={handleOpenShare}
+              aria-label={TranslateAriaLabel(shareButtonAriaLabelProps)}
+            >
               <ShareIcon role="img" />
             </button>
             {isResults && (
