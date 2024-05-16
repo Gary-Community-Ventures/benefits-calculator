@@ -125,7 +125,7 @@ const TwoOneOneHeader = () => {
         sx={{
           zIndex: 1000,
           [`& .MuiDrawer-paper`]: {
-            mt: '50px',
+            mt: '75px',
             width: '100%',
             boxShadow: `inset 0px 2px 4px -1px rgba(0,0,0,0.2),
                         inset 0px 4px 5px 0px rgba(0,0,0,0.14),
