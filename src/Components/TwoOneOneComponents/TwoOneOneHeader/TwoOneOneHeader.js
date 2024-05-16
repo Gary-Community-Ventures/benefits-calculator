@@ -10,7 +10,6 @@ import twoOneOneMFBLogo from '../../../Assets/TwoOneOneAssets/twoOneOneMFBLogo.p
 import twoOneOneLinks from '../../../Assets/TwoOneOneAssets/twoOneOneLinks';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
@@ -28,7 +27,6 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
   const location = useLocation();
   const urlRegex = /^\/(?:\/results\/(.+)|(.+)\/results)\/?$/;
   const url = location.pathname.match(urlRegex);
-  const isResults = url !== null;
   const screenUUID = url ? url[2] ?? url[1] : undefined;
 
   const [openShare, setOpenShare] = useState(false);
@@ -44,9 +42,6 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
     setOpenShare(false);
   };
 
-  const handleOpenEmailResults = () => {
-    setOpenEmailResults(true);
-  };
 
   const handleCloseEmailResults = () => {
     setOpenEmailResults(false);
@@ -189,11 +184,6 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
               <IconButton color="primary" onClick={handleOpenShare} aria-label="share button">
                 <ShareIcon role="img" />
               </IconButton>
-              {isResults && (
-                <IconButton onClick={handleOpenEmailResults} aria-label="email results button" color="primary">
-                  <SaveAltIcon role="img" />
-                </IconButton>
-              )}
               {displayHamburgerMenuIcon()}
               {displayHamburgerMenu()}
             </Stack>
