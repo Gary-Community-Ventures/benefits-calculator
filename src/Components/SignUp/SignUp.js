@@ -160,9 +160,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
                   ),
                 }}
               />
-              <FormattedMessage
-                id="signUp.and"
-                defaultMessage=" and " />
+              <FormattedMessage id="signUp.and" defaultMessage=" and " />
               <FormattedMessage
                 id="signUp.consentToContact4"
                 defaultMessage="{linkVal}"
