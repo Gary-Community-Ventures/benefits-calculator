@@ -197,15 +197,14 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
               {displayHamburgerMenuIcon()}
               {displayHamburgerMenu()}
             </Stack>
-            <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
-              <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
+            <Modal open={openShare} onClose={handleCloseShare} aria-label="share my friend ben modal">
+              <Share close={handleCloseShare} />
             </Modal>
-            <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-labelledby="email-results-modal">
+            <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-label="save my results modal">
               <EmailResults
                 handleTextfieldChange={handleTextfieldChange}
                 screenId={screenUUID}
                 close={handleCloseEmailResults}
-                id="email-results-modal"
               />
             </Modal>
           </Stack>
