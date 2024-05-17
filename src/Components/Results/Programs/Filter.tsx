@@ -135,7 +135,7 @@ export const Filter = () => {
     });
 
     return (
-      <section className="filters-container" id="citizenship-filters-modal">
+      <section className="filters-container">
         {filters}
       </section>
     );
@@ -162,10 +162,10 @@ export const Filter = () => {
             horizontal: 'left',
           }}
           transformOrigin={{ vertical: 2, horizontal: 0 }}
-          aria-labelledby="citizenship-filters-modal"
+          aria-label="citizenship filters modal"
         >
           <div className='filters-close-button'>
-            <IconButton size="small" aria-label="close citizenship filters" id="close-citizenship-filters-button" color="inherit" onClick={handleFilterClose}>
+            <IconButton size="small" aria-label="close citizenship filters" color="inherit" onClick={handleFilterClose}>
               <CloseIcon fontSize="small" />
             </IconButton>
           </div>
