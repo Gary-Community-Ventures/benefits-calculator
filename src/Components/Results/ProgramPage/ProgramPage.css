@@ -158,12 +158,11 @@ li.apply-info {
 
 .required-docs-list {
   text-align: left;
-  text-transform: uppercase;
   padding-left: 1rem;
   line-height: 1.5rem;
   padding-top: 0.5rem;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 400;
   font-family: 'Open Sans', sans-serif;
 }
 
