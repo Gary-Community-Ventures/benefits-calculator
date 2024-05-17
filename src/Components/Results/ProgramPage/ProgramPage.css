@@ -142,7 +142,7 @@ li.apply-info {
 
 .address-info a {
   font-family: 'Roboto Slab', serif;
-  color: var(--icon-color);
+  color: var(--midBlue-color);
 }
 
 .required-docs {
