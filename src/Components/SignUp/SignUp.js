@@ -24,6 +24,8 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   let privacyLink =
     'https://20208592.hs-sites.com/en/data-privacy-policy?__hstc=144746475.066f707c0b490f88f5429b1856cf0908.1663037963489.1663086538117.1663095192641.3&__hssc=144746475.1.1663095192641&__hsfp=2418539872';
 
+  const consentToContactLink = 'https://www.myfriendben.org/en/additional-terms-and-consent-to-contact';
+
   if (locale === 'es') {
     privacyLink = 'https://20208592.hs-sites.com/es/data-privacy-policy';
   } else if (locale === 'vi') {
@@ -158,9 +160,17 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
                   ),
                 }}
               />
+              <FormattedMessage id="signUp.and" defaultMessage=" and " />
               <FormattedMessage
-                id="signUp.displayDisclosureSection-consentCheck4"
-                defaultMessage=" and consent to contact."
+                id="signUp.consentToContact4"
+                defaultMessage="{linkVal}"
+                values={{
+                  linkVal: (
+                    <a className="link-color" href={consentToContactLink} target="_blank">
+                      <FormattedMessage id="signUp.consentToContact" defaultMessage=" consent to contact." />
+                    </a>
+                  ),
+                }}
               />
             </div>
           }
