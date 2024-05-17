@@ -47,8 +47,8 @@ const BackAndSaveButtons = ({ handleTextfieldChange, navigateToLink, BackToThisP
           <SaveIcon className="save-icon" />
         </div>
       </button>
-      <Modal open={openSaveModal} aria-labelledby="email-text-results-modal">
-        <div id="email-text-results-modal">
+      <Modal open={openSaveModal} aria-label="email-text-results-modal">
+        <div>
           <EmailResults
             handleTextfieldChange={handleTextfieldChange}
             screenId={definedScreenerId}
