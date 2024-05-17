@@ -134,20 +134,16 @@ export const Filter = () => {
       }
     });
 
-    return (
-      <section className="filters-container">
-        {filters}
-      </section>
-    );
+    return <section className="filters-container">{filters}</section>;
   };
 
   const handleFilterClose = () => {
-     const updatedCitButtonClass = citButtonClass.replace('flat-white-border-bottom', '');
+    const updatedCitButtonClass = citButtonClass.replace('flat-white-border-bottom', '');
 
-     setCitizenshipPopoverAnchor(null);
-     setCitizenshipFilterIsOpen(false);
-     setCitButtonClass(updatedCitButtonClass);
-  }
+    setCitizenshipPopoverAnchor(null);
+    setCitizenshipFilterIsOpen(false);
+    setCitButtonClass(updatedCitButtonClass);
+  };
 
   const displayCitizenshipPopover = () => {
     return (
@@ -164,7 +160,7 @@ export const Filter = () => {
           transformOrigin={{ vertical: 2, horizontal: 0 }}
           aria-label="citizenship filters modal"
         >
-          <div className='filters-close-button'>
+          <div className="filters-close-button">
             <IconButton size="small" aria-label="close citizenship filters" color="inherit" onClick={handleFilterClose}>
               <CloseIcon fontSize="small" />
             </IconButton>
