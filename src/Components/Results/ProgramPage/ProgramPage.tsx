@@ -121,7 +121,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                         <a
                           href={navigator.assistance_link.default_message}
                           target="_blank"
-                          style={{ color: 'var(--link-color)' }}
+                          style={{ color: 'var(--midBlue-color)' }}
                         >
                           <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
                         </a>
@@ -132,7 +132,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                         <a
                           href={`mailto:${navigator.email}`}
                           className="email-link"
-                          style={{ color: 'var(--link-color)' }}
+                          style={{ color: 'var(--midBlue-color)' }}
                         >
                           <ResultsTranslate translation={navigator.email} />
                         </a>
@@ -143,7 +143,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                         <a
                           href={`tel:${navigator.phone_number}`}
                           className="phone-link"
-                          style={{ color: 'var(--link-color)' }}
+                          style={{ color: 'var(--midBlue-color)' }}
                         >
                           {navigator.phone_number}
                         </a>

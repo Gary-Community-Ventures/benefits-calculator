@@ -23,7 +23,6 @@ export interface ITheme {
     '--icon-color': string;
     '--secondary-icon-color': string;
     '--option-card-hover-font-color': string;
-    '--link-color': string;
   };
 }
 
@@ -56,7 +55,6 @@ const themes: IThemes = {
       '--icon-color': '#D6743F',
       '--secondary-icon-color': '#D6743F',
       '--option-card-hover-font-color': '#1D1C1E',
-      '--link-color': '#41528C',
     },
   },
   twoOneOne: {
@@ -82,7 +80,6 @@ const themes: IThemes = {
       '--icon-color': '#ff443b',
       '--secondary-icon-color': '#005191',
       '--option-card-hover-font-color': '#1D1C1E',
-      '--link-color': '#41528C',
     },
   },
 };
