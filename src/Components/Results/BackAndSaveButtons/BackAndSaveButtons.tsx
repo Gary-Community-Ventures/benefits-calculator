@@ -48,13 +48,11 @@ const BackAndSaveButtons = ({ handleTextfieldChange, navigateToLink, BackToThisP
         </div>
       </button>
       <Modal open={openSaveModal} aria-label="email-text-results-modal">
-        <div>
-          <EmailResults
-            handleTextfieldChange={handleTextfieldChange}
-            screenId={definedScreenerId}
-            close={() => setOpenSaveModal(!openSaveModal)}
-          />
-        </div>
+        <EmailResults
+          handleTextfieldChange={handleTextfieldChange}
+          screenId={definedScreenerId}
+          close={() => setOpenSaveModal(!openSaveModal)}
+        />
       </Modal>
     </div>
   );
