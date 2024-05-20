@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Box, IconButton, Stack } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import ContinueButton from '../ContinueButton/ContinueButton';
@@ -24,8 +24,8 @@ import {
 import { getStepNumber } from '../../Assets/stepDirectory';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { isCustomTypedLocationState } from '../../Types/FormData.ts';
-import './HouseholdDataBlock.css';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
+import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -40,6 +40,11 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     navigate(`/${uuid}/step-${step}/${page}`);
   };
   const [submittedCount, setSubmittedCount] = useState(0);
+  const intl = useIntl();
+  const editHHMemberAriaLabel = intl.formatMessage({
+    id: 'editHHMember.ariaText',
+    defaultMessage: 'edit household member',
+  });
 
   const initialMemberData = formData.householdData[page - 1] ?? {
     age: '',
@@ -232,8 +237,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         <div className="household-member-header">
           <h3 className="member-added-relationship">{relationship}:</h3>
           <div className="household-member-edit-button">
-            <IconButton onClick={handleEditSubmit}>
-              <EditIcon />
+            <IconButton onClick={handleEditSubmit} aria-label={editHHMemberAriaLabel}>
+              <EditIcon alt="edit icon" />
             </IconButton>
           </div>
         </div>

@@ -191,8 +191,8 @@ const TwoOneOneHeader = () => {
               {displayHamburgerMenuIcon()}
               {displayHamburgerMenu()}
             </Stack>
-            <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
-              <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
+            <Modal open={openShare} onClose={handleCloseShare} aria-label="share my friend ben modal">
+              <Share close={handleCloseShare} />
             </Modal>
           </Stack>
         </AppBar>

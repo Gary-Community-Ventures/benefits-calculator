@@ -88,8 +88,8 @@
   font-size: 1rem;
 }
 
-.sign-up-data-privacy-link {
-  color: var(--primary-color);
+.link-color {
+  color: var(--midBlue-color);
 }
 
 .main-max-width {

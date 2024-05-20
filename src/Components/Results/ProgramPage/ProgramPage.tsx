@@ -69,7 +69,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
   };
 
   return (
-    <article className="program-page-container">
+    <main className="program-page-container">
       <section className="back-to-results-button-container">
         <BackAndSaveButtons
           handleTextfieldChange={() => {}}
@@ -99,32 +99,40 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       <div className="content-width">
         {program.navigators.length > 0 && (
           <section className="apply-box">
-            <h3 className="content-header">
+            <h2 className="content-header">
               <FormattedMessage id="results.get-help-applying" defaultMessage="Get Help Applying" />
-            </h3>
+            </h2>
             <ul className="apply-box-list">
               {program.navigators.map((navigator, index) => (
                 <li key={index} className="apply-info">
-                  {navigator.name && <ResultsTranslate translation={navigator.name} />}
+                  {navigator.name && (
+                    <p className="navigator-name">
+                      <ResultsTranslate translation={navigator.name} />
+                    </p>
+                  )}
                   <div className="address-info">
-                    {navigator.description && <ResultsTranslate translation={navigator.description} />}
+                    {navigator.description && (
+                      <p className="navigator-desc">
+                        <ResultsTranslate translation={navigator.description} />
+                      </p>
+                    )}
                     {navigator.assistance_link.default_message && (
                       <div>
-                        <a href={navigator.assistance_link.default_message} target="_blank">
+                        <a href={navigator.assistance_link.default_message} target="_blank" className="link-color">
                           <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
                         </a>
                       </div>
                     )}
                     {navigator.email.default_message && (
                       <div>
-                        <a href={`mailto:${navigator.email}`} className="email-link">
+                        <a href={`mailto:${navigator.email}`} className="link-color email-link">
                           <ResultsTranslate translation={navigator.email} />
                         </a>
                       </div>
                     )}
                     {navigator.phone_number && (
                       <div>
-                        <a href={`tel:${navigator.phone_number}`} className="phone-link">
+                        <a href={`tel:${navigator.phone_number}`} className="link-color phone-link">
                           {navigator.phone_number}
                         </a>
                       </div>
@@ -156,7 +164,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <ResultsTranslate translation={program.description} />
         </section>
       </div>
-    </article>
+    </main>
   );
 };
 
