@@ -37,6 +37,10 @@ const TwoOneOneHeader = () => {
     id: '211Header.closeMenuBtn-AL',
     defaultMsg: 'close menu',
   };
+  const shareMFBModalAriaLabelProps = {
+    id: 'header.shareMFBModal-AL',
+    defaultMsg: 'share my friend ben modal',
+  };
 
 
   const [openShare, setOpenShare] = useState(false);
@@ -191,7 +195,7 @@ const TwoOneOneHeader = () => {
               {displayHamburgerMenuIcon()}
               {displayHamburgerMenu()}
             </Stack>
-            <Modal open={openShare} onClose={handleCloseShare} aria-label="share my friend ben modal">
+            <Modal open={openShare} onClose={handleCloseShare} aria-label={TranslateAriaLabel(shareMFBModalAriaLabelProps)}>
               <Share close={handleCloseShare} />
             </Modal>
           </Stack>

@@ -17,10 +17,13 @@ const Header = () => {
     id: 'header.selectLang-AL',
     defaultMsg: "select a language"
   };
-
   const shareButtonAriaLabelProps = {
     id: 'header.shareBtn-AL',
     defaultMsg: "share button"
+  };
+  const shareMFBModalAriaLabelProps = {
+    id: 'header.shareMFBModal-AL',
+    defaultMsg: "share my friend ben modal"
   };
 
   const [openShare, setOpenShare] = useState(false);
@@ -92,8 +95,8 @@ const Header = () => {
             </button>
           </div>
         </AppBar>
-        <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
-          <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
+        <Modal open={openShare} onClose={handleCloseShare} aria-label={TranslateAriaLabel(shareMFBModalAriaLabelProps)}>
+          <Share close={handleCloseShare} />
         </Modal>
       </Paper>
     </nav>
