@@ -6,6 +6,7 @@ import LeftArrowIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { ReactComponent as SaveIcon } from '../../../Assets/save.svg';
 import { Modal } from '@mui/material';
 import { FormattedMessageType } from '../../../Types/Questions';
+import TranslateAriaLabel from '../Translate/TranslateAriaLabel';
 import './BackAndSaveButtons.css';
 
 type BackAndSaveButtons = {
@@ -22,6 +23,18 @@ const BackAndSaveButtons = ({ handleTextfieldChange, navigateToLink, BackToThisP
   if (screenerId) {
     definedScreenerId = screenerId;
   }
+  const backBtnALProps = {
+    id: 'backAndSaveBtns.backBtn',
+    defaultMsg: "back"
+  };
+  const saveMyResultsBtnALProps = {
+    id: 'backAndSaveBtns.saveMyResultsBtn',
+    defaultMsg: "save my results"
+  };
+  const emailResultsModalALProps = {
+    id: 'backAndSaveBtns.emailResultsModal',
+    defaultMsg: 'send me my results modal'
+  }
 
   return (
     <div className="results-back-save-btn-container">
@@ -30,7 +43,7 @@ const BackAndSaveButtons = ({ handleTextfieldChange, navigateToLink, BackToThisP
         onClick={() => {
           navigate(navigateToLink);
         }}
-        aria-label="back to screener button"
+        aria-label={TranslateAriaLabel(backBtnALProps)}
       >
         <div className="btn-icon-text-container padding-right">
           <LeftArrowIcon />
@@ -40,14 +53,14 @@ const BackAndSaveButtons = ({ handleTextfieldChange, navigateToLink, BackToThisP
       <button
         className="results-back-save-buttons"
         onClick={() => setOpenSaveModal(!openSaveModal)}
-        aria-label="save my results button"
+        aria-label={TranslateAriaLabel(saveMyResultsBtnALProps)}
       >
         <div className="btn-icon-text-container padding-left">
           <FormattedMessage id="results.save-results-btn" defaultMessage="SAVE MY RESULTS" />
           <SaveIcon className="save-icon" />
         </div>
       </button>
-      <Modal open={openSaveModal} aria-label="email-text-results-modal">
+      <Modal open={openSaveModal} aria-label={TranslateAriaLabel(emailResultsModalALProps)}>
         <EmailResults
           handleTextfieldChange={handleTextfieldChange}
           screenId={definedScreenerId}
