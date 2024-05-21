@@ -52,7 +52,7 @@ const EmailResults = forwardRef(function EmailResults(
   const [phoneSubmitted, setPhoneSubmitted] = useState(false);
   const closeAriaLabelProps = {
     id: 'emailResults.close-AL',
-    defaultMsg: "goodbye"
+    defaultMsg: 'goodbye',
   };
 
   const createEmailTextfield = (

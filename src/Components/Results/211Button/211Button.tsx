@@ -8,8 +8,8 @@ const HelpButton = () => {
   const { uuid } = useParams();
   const moreHelpALProps = {
     id: 'helpButton.AL',
-    defaultMsg: 'more help button'
-  }
+    defaultMsg: 'more help button',
+  };
 
   return (
     <div className="help-text-for-211-button">

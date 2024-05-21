@@ -76,7 +76,7 @@ const Share = forwardRef(function Share({ close }, ref) {
 
   const closeALProps = {
     id: 'share.close',
-    defaultMsg: 'close'
+    defaultMsg: 'close',
   };
 
   return (

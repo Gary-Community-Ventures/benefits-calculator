@@ -147,15 +147,15 @@ export const Filter = () => {
   };
   const citizenshipFiltersModalALProps = {
     id: 'filter.citFilterModal',
-    defaultMsg: 'citizenship filters modal'
+    defaultMsg: 'citizenship filters modal',
   };
   const closeCitFiltersALProps = {
     id: 'filter.closeCitFilter',
-    defaultMsg: 'close citizenship filters modal'
+    defaultMsg: 'close citizenship filters modal',
   };
   const citFiltersALProps = {
     id: 'filter.citFilters',
-    defaultMsg: 'citizenship filters'
+    defaultMsg: 'citizenship filters',
   };
 
   const displayCitizenshipPopover = () => {
@@ -174,7 +174,12 @@ export const Filter = () => {
           aria-label={TranslateAriaLabel(citizenshipFiltersModalALProps)}
         >
           <div className="filters-close-button">
-            <IconButton size="small" aria-label={TranslateAriaLabel(closeCitFiltersALProps)} color="inherit" onClick={handleFilterClose}>
+            <IconButton
+              size="small"
+              aria-label={TranslateAriaLabel(closeCitFiltersALProps)}
+              color="inherit"
+              onClick={handleFilterClose}
+            >
               <CloseIcon fontSize="small" />
             </IconButton>
           </div>

@@ -15,15 +15,15 @@ const Header = () => {
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
-    defaultMsg: "select a language"
+    defaultMsg: 'select a language',
   };
   const shareButtonAriaLabelProps = {
     id: 'header.shareBtn-AL',
-    defaultMsg: "share button"
+    defaultMsg: 'share button',
   };
   const shareMFBModalAriaLabelProps = {
     id: 'header.shareMFBModal-AL',
-    defaultMsg: "share my friend ben modal"
+    defaultMsg: 'share my friend ben modal',
   };
 
   const [openShare, setOpenShare] = useState(false);
@@ -36,7 +36,6 @@ const Header = () => {
   const handleCloseShare = () => {
     setOpenShare(false);
   };
-
 
   const handleCloseLanguage = () => {
     setIsLanguageSelectOpen(false);

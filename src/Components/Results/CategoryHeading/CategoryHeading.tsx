@@ -43,13 +43,17 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
     id: savedTranslation.props.translation.label,
     defaultMsg: savedTranslation.props.translation.default_message,
   };
-  const iconTranslation = TranslateAriaLabel({ id: 'categoryHeading.icon', defaultMsg: 'icon'})
+  const iconTranslation = TranslateAriaLabel({ id: 'categoryHeading.icon', defaultMsg: 'icon' });
 
   return (
     <div>
       <div className="category-heading-container">
         <div className="category-heading-column">
-          <div className="category-heading-icon" aria-label={`${TranslateAriaLabel(categoryImageAriaLabelProps)} ${iconTranslation}`} role="img">
+          <div
+            className="category-heading-icon"
+            aria-label={`${TranslateAriaLabel(categoryImageAriaLabelProps)} ${iconTranslation}`}
+            role="img"
+          >
             <IconComponent />
           </div>
           <h2 className="category-heading-text-style">

@@ -42,7 +42,6 @@ const TwoOneOneHeader = () => {
     defaultMsg: 'share my friend ben modal',
   };
 
-
   const [openShare, setOpenShare] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
@@ -189,13 +188,21 @@ const TwoOneOneHeader = () => {
               >
                 {createMenuItems(languageOptions)}
               </Select>
-              <IconButton color="primary" onClick={handleOpenShare} aria-label={TranslateAriaLabel(shareButtonAriaLabelProps)}>
+              <IconButton
+                color="primary"
+                onClick={handleOpenShare}
+                aria-label={TranslateAriaLabel(shareButtonAriaLabelProps)}
+              >
                 <ShareIcon role="img" />
               </IconButton>
               {displayHamburgerMenuIcon()}
               {displayHamburgerMenu()}
             </Stack>
-            <Modal open={openShare} onClose={handleCloseShare} aria-label={TranslateAriaLabel(shareMFBModalAriaLabelProps)}>
+            <Modal
+              open={openShare}
+              onClose={handleCloseShare}
+              aria-label={TranslateAriaLabel(shareMFBModalAriaLabelProps)}
+            >
               <Share close={handleCloseShare} />
             </Modal>
           </Stack>

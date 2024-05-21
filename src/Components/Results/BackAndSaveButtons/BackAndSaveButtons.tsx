@@ -25,16 +25,16 @@ const BackAndSaveButtons = ({ handleTextfieldChange, navigateToLink, BackToThisP
   }
   const backBtnALProps = {
     id: 'backAndSaveBtns.backBtn',
-    defaultMsg: "back"
+    defaultMsg: 'back',
   };
   const saveMyResultsBtnALProps = {
     id: 'backAndSaveBtns.saveMyResultsBtn',
-    defaultMsg: "save my results"
+    defaultMsg: 'save my results',
   };
   const emailResultsModalALProps = {
     id: 'backAndSaveBtns.emailResultsModal',
-    defaultMsg: 'send me my results modal'
-  }
+    defaultMsg: 'send me my results modal',
+  };
 
   return (
     <div className="results-back-save-btn-container">

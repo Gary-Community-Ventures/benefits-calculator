@@ -157,7 +157,10 @@ const Confirmation = () => {
           )}
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label={TranslateAriaLabel(editExpensesAriaLabelProps)} onClick={() => navigate(getQuestionUrl('hasExpenses'), locationState)}>
+          <button
+            aria-label={TranslateAriaLabel(editExpensesAriaLabelProps)}
+            onClick={() => navigate(getQuestionUrl('hasExpenses'), locationState)}
+          >
             <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
@@ -304,7 +307,7 @@ const Confirmation = () => {
     const { householdAssets } = formData;
     const editHHAssetsAriaLabelProps = {
       id: 'confirmation.hhAssets-AL',
-      defaultMsg: "edit household assets"
+      defaultMsg: 'edit household assets',
     };
 
     return (
@@ -456,7 +459,7 @@ const Confirmation = () => {
           getQuestionUrl('hasBenefits'),
           allBenefitsList,
           <Benefits className="confirmation-icon" alt="benefits-icon" />,
-          TranslateAriaLabel({ id:'confirmation.editCurrentBenefits-AL', defaultMsg: 'edit current benefits'}),
+          TranslateAriaLabel({ id: 'confirmation.editCurrentBenefits-AL', defaultMsg: 'edit current benefits' }),
         )}
         {displayHHCheckboxSection(
           'acuteHHConditions',
@@ -465,7 +468,7 @@ const Confirmation = () => {
           getQuestionUrl('acuteHHConditions'),
           refactorOptionsList(acuteConditionOptions),
           <Immediate className="confirmation-icon" alt="immediate-icon" />,
-          TranslateAriaLabel({ id: 'confirmation.editImmedNeeds-AL', defaultMsg: 'edit immediate needs'})
+          TranslateAriaLabel({ id: 'confirmation.editImmedNeeds-AL', defaultMsg: 'edit immediate needs' }),
         )}
         {displayReferralSourceSection()}
       </>
