@@ -45,6 +45,15 @@ type OptionItem = {
   icon: IconItem;
 };
 
+function isValidJson(json: string): boolean {
+  try {
+    JSON.parse(json);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // Transforms objects with icon key to return Icon ReactComponent
 function transformItemIcon(item: unknown): any {
   const { _label, _default_message, icon } = item as OptionItem;
@@ -157,14 +166,21 @@ function transformItem(item: unknown): any {
   return config;
 }
 
-function transformConfigResponse(configResponse: ConfigApiResponse[]): Config {
-  const output: Config = {};
+function transformConfigData(configData: ConfigApiResponse[]): Config {
+  const transformedConfig: Config = {};
 
-  configResponse.forEach((item) => {
-    output[item.name] = transformItem(item.data);
+  configData.forEach((item) => {
+    const { name, data } = item;
+    let configOptions = data;
+
+    if (typeof configOptions === 'string' && isValidJson(configOptions)) {
+      configOptions = JSON.parse(configOptions);
+    }
+
+    transformedConfig[name] = transformItem(configOptions);
   });
 
-  return output;
+  return transformedConfig;
 }
 
 async function getConfig() {
@@ -189,7 +205,7 @@ export function useGetConfig() {
       // get data and set loading to false
       try {
         if (value !== undefined) {
-          const transformedOutput: Config = transformConfigResponse(value);
+          const transformedOutput: Config = transformConfigData(value);
           setConfigResponse(transformedOutput);
         }
       } catch (e) {
@@ -204,18 +220,24 @@ export function useGetConfig() {
 
 export function useConfig(name: string) {
   const { config } = useContext(Context);
-  // Return a default value or fallback object
-  if (config === undefined) return {};
 
-  if (config[name] === undefined) throw new Error(`'${name}' does not exist in the config`);
+  if (config === undefined) {
+    return {};
+  }
 
-  const configValue = config[name];
+  if (config[name] === undefined) {
+    throw new Error(`'${name}' does not exist in the config`);
+  }
 
-  // Check if the config value is an object with a "0" key
+  let configValue = config[name];
+
+  if (typeof configValue === 'string' && isValidJson(configValue)) {
+    configValue = JSON.parse(configValue);
+  }
+
   if (typeof configValue === 'object' && configValue !== null && '0' in configValue) {
     return configValue['0'];
-  } else {
-    // Return the config value as is
-    return configValue;
   }
+
+  return configValue;
 }
