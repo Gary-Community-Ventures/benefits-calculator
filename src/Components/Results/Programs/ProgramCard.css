@@ -55,24 +55,23 @@
   font-weight: bold;
   font-family: 'Roboto Slab', serif;
   background-color: #00b213;
-  padding-left: 0.5rem;
+  padding: 0 0.5rem;
   color: #fff;
-  width: 6rem;
   border-radius: 0 0 0.75rem 0;
   font-size: 0.8125rem;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 100;
+  text-wrap: nowrap;
 }
 
 .low-confidence-flag {
   font-weight: bold;
   font-family: 'Roboto Slab', serif;
   background-color: var(--hover-color);
-  padding-left: 1rem;
+  padding: 0 0.5rem 0 1rem;
   color: var(--primary-color);
-  width: 8rem;
   border-radius: 0 0 0.75rem 0;
   font-size: 0.8125rem;
   position: absolute;
