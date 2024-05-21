@@ -11,6 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import './Filter.css';
+import TranslateAriaLabel from '../Translate/TranslateAriaLabel';
 
 export const Filter = () => {
   const [citizenshipFilterIsOpen, setCitizenshipFilterIsOpen] = useState(false);
@@ -144,6 +145,18 @@ export const Filter = () => {
     setCitizenshipFilterIsOpen(false);
     setCitButtonClass(updatedCitButtonClass);
   };
+  const citizenshipFiltersModalALProps = {
+    id: 'filter.citFilterModal',
+    defaultMsg: 'citizenship filters modal'
+  };
+  const closeCitFiltersALProps = {
+    id: 'filter.closeCitFilter',
+    defaultMsg: 'close citizenship filters modal'
+  };
+  const citFiltersALProps = {
+    id: 'filter.citFilters',
+    defaultMsg: 'citizenship filters'
+  };
 
   const displayCitizenshipPopover = () => {
     return (
@@ -158,10 +171,10 @@ export const Filter = () => {
             horizontal: 'left',
           }}
           transformOrigin={{ vertical: 2, horizontal: 0 }}
-          aria-label="citizenship filters modal"
+          aria-label={TranslateAriaLabel(citizenshipFiltersModalALProps)}
         >
           <div className="filters-close-button">
-            <IconButton size="small" aria-label="close citizenship filters" color="inherit" onClick={handleFilterClose}>
+            <IconButton size="small" aria-label={TranslateAriaLabel(closeCitFiltersALProps)} color="inherit" onClick={handleFilterClose}>
               <CloseIcon fontSize="small" />
             </IconButton>
           </div>
@@ -178,7 +191,7 @@ export const Filter = () => {
           className={citButtonClass}
           variant="contained"
           onClick={(event) => handleCitizenshipBtnClick(event)}
-          aria-label="citizenship filters"
+          aria-label={TranslateAriaLabel(citFiltersALProps)}
         >
           <FormattedMessage id="filterSection.citizenship" defaultMessage="CITIZENSHIP" />
           {citizenshipFilterIsOpen ? (
