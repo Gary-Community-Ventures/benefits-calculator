@@ -38,29 +38,6 @@ const Confirmation = () => {
   const navigate = useNavigate();
   const intl = useIntl();
   const locationState = { state: { routedFromConfirmationPg: true } };
-  const editHHMemberAriaLabel = intl.formatMessage({
-    id: 'editHHMember.ariaText',
-    defaultMessage: 'edit household member',
-  });
-  const editExpensesAriaLabel = intl.formatMessage({ id: 'editExpenses.ariaText', defaultMessage: 'edit expenses' });
-  const editHHSizeAriaLabel = intl.formatMessage({ id: 'editHHSize.ariaText', defaultMessage: 'edit household size' });
-  const editHHAssetsAriaLabel = intl.formatMessage({
-    id: 'editHHAssets.ariaText',
-    defaultMessage: 'edit household assets',
-  });
-  const editZipcodeAriaLabel = intl.formatMessage({ id: 'editZipcode.ariaText', defaultMessage: 'edit zipcode' });
-  const editReferralSrcAriaLabel = intl.formatMessage({
-    id: 'editReferralSrc.ariaText',
-    defaultMessage: 'edit referral source',
-  });
-  const editCurrentBensAriaLabel = intl.formatMessage({
-    id: 'editCurrentBens.ariaText',
-    defaultMessage: 'edit current benefits',
-  });
-  const editImmedNeedsAriaLabel = intl.formatMessage({
-    id: 'editImmedNeeds.ariaText',
-    defaultMessage: 'edit immediate needs',
-  });
 
   const getQuestionUrl = (name) => {
     const stepNumber = getStepNumber(name, formData.immutableReferrer);
