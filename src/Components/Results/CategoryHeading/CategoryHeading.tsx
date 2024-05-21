@@ -11,6 +11,7 @@ import { Translation } from '../../../Types/Results.ts';
 import { FormattedMessage } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate.tsx';
 import { PRESCHOOL_CATEGORY } from '../../../Assets/resultsConstants.ts';
+import TranslateAriaLabel from '../Translate/TranslateAriaLabel.tsx';
 
 export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   'Housing and Utilities': Housing,
@@ -37,12 +38,18 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
   }
 
   const monthlyCategoryAmt = calculateTotalValue(programs, headingType.default_message) / 12;
+  const savedTranslation = <ResultsTranslate translation={headingType} />;
+  const categoryImageAriaLabelProps = {
+    id: savedTranslation.props.translation.label,
+    defaultMsg: savedTranslation.props.translation.default_message,
+  };
+  const iconTranslation = TranslateAriaLabel({ id: 'categoryHeading.icon', defaultMsg: 'icon'})
 
   return (
     <div>
       <div className="category-heading-container">
         <div className="category-heading-column">
-          <div className="category-heading-icon" aria-label={`${headingType.default_message} icon`} role="img">
+          <div className="category-heading-icon" aria-label={`${TranslateAriaLabel(categoryImageAriaLabelProps)} ${iconTranslation}`} role="img">
             <IconComponent />
           </div>
           <h2 className="category-heading-text-style">
