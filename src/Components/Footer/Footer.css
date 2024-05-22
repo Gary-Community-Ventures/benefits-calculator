@@ -3,3 +3,29 @@
   height: 5rem;
   background-color: var(--midBlue-color);
 }
+
+.footer-content-container {
+  margin: auto;
+  max-width: var(--main-max-width);
+  padding: 2rem 1rem;
+}
+
+.footer-logo {
+  height: 2rem;
+}
+
+.address-container {
+  margin: .5rem 0;
+}
+
+.white-font {
+  color: #ffff;
+}
+
+.italicized {
+  font-style: italic;
+}
+
+.footer-link {
+  text-decoration: none;
+}

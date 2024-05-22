@@ -1,10 +1,36 @@
 import Paper from '@mui/material/Paper';
+import Share from '../Share/Share';
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
+import { FormattedMessage } from 'react-intl';
 import './Footer.css';
 
 const Footer = () => {
+    const context = useContext(Context);
+    const { getReferrer } = context;
+
   return (
     <footer>
-      <Paper className="footer-full-width-container" square={true} elevation={0}></Paper>
+      <Paper
+        elevation={0}
+        sx={{ width: '100%', backgroundColor: `var(--midBlue-color)`, marginTop: '5rem' }}
+        square={true}
+      >
+        <div className="footer-content-container">
+          <img src={getReferrer('logoSource')} alt={getReferrer('logoAlt')} className="logo footer-logo" />
+          <div className="address-container">
+            <p className="white-font">1705 17th St.</p>
+            <p className="white-font">Suite 200</p>
+            <p className="white-font">Denver, CO 80202</p>
+          </div>
+          <p className="white-font italicized">
+            <FormattedMessage id="footer-questions" defaultMessage="Questions? Contact" />
+          </p>
+          <a href="mailto:myfriendben@garycommunity.org" className="white-font italicized footer-link">
+            myfriendben@garycommunity.org
+          </a>
+        </div>
+      </Paper>
     </footer>
   );
 };
