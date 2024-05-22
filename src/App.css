@@ -98,9 +98,6 @@
   min-height: calc(100vh - 5rem);
 }
 
-.push {
-  height: 5rem;
-}
 .secondary-heading {
   font-family: 'Open Sans', sans-serif;
   color: black;
