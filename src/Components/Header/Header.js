@@ -3,9 +3,7 @@ import { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
-import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import Share from '../Share/Share';
 import EmailResults from '../EmailResults/EmailResults';
 import languageOptions from '../../Assets/languageOptions.tsx';
 import Paper from '@mui/material/Paper';
@@ -22,17 +20,8 @@ const Header = ({ handleTextfieldChange }) => {
   const isResults = url !== null;
   const screenUUID = url ? url[2] ?? url[1] : undefined;
 
-  const [openShare, setOpenShare] = useState(false);
   const [openEmailResults, setOpenEmailResults] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
-
-  const handleOpenShare = () => {
-    setOpenShare(true);
-  };
-
-  const handleCloseShare = () => {
-    setOpenShare(false);
-  };
 
   const handleOpenEmailResults = () => {
     setOpenEmailResults(true);
@@ -90,9 +79,6 @@ const Header = ({ handleTextfieldChange }) => {
             >
               {createMenuItems(languageOptions)}
             </Select>
-            <button className="icon-container" onClick={handleOpenShare} aria-label="share button">
-              <ShareIcon role="img" />
-            </button>
             {isResults && (
               <button className="icon-container" onClick={handleOpenEmailResults} aria-label="email results button">
                 <SaveAltIcon role="img" />
@@ -100,9 +86,6 @@ const Header = ({ handleTextfieldChange }) => {
             )}
           </div>
         </AppBar>
-        <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
-          <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
-        </Modal>
         <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-label="save my results modal">
           <EmailResults
             handleTextfieldChange={handleTextfieldChange}
