@@ -24,15 +24,15 @@ const BackAndSaveButtons = ({ handleTextfieldChange, navigateToLink, BackToThisP
     definedScreenerId = screenerId;
   }
   const backBtnALProps = {
-    id: 'backAndSaveBtns.backBtn',
+    id: 'backAndSaveBtns.backBtnAL',
     defaultMsg: 'back',
   };
   const saveMyResultsBtnALProps = {
-    id: 'backAndSaveBtns.saveMyResultsBtn',
+    id: 'backAndSaveBtns.saveMyResultsBtnAL',
     defaultMsg: 'save my results',
   };
   const emailResultsModalALProps = {
-    id: 'backAndSaveBtns.emailResultsModal',
+    id: 'backAndSaveBtns.emailResultsModalAL',
     defaultMsg: 'send me my results modal',
   };
 
