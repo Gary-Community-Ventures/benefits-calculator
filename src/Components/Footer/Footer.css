@@ -8,14 +8,13 @@
   margin: auto;
   max-width: var(--main-max-width);
   padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .footer-logo {
   height: 2rem;
-}
-
-.address-container {
-  margin: .5rem 0;
+  margin-bottom: 1rem;
 }
 
 .white-font {
@@ -24,6 +23,10 @@
 
 .italicized {
   font-style: italic;
+}
+
+.bottom-top-margin {
+  margin: 1rem 0;
 }
 
 .footer-link {

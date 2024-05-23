@@ -17,18 +17,20 @@ const Footer = () => {
         square={true}
       >
         <div className="footer-content-container">
-          <img src={getReferrer('logoSource')} alt={getReferrer('logoAlt')} className="logo footer-logo" />
-          <div className="address-container">
+          <div>
+            <img src={getReferrer('logoSource')} alt={getReferrer('logoAlt')} className="logo footer-logo" />
             <p className="white-font">1705 17th St.</p>
             <p className="white-font">Suite 200</p>
             <p className="white-font">Denver, CO 80202</p>
+            <div className='bottom-top-margin'>
+              <p className="white-font italicized">
+                <FormattedMessage id="footer-questions" defaultMessage="Questions? Contact" />
+              </p>
+              <a href="mailto:myfriendben@garycommunity.org" className="white-font italicized footer-link">
+                myfriendben@garycommunity.org
+              </a>
+            </div>
           </div>
-          <p className="white-font italicized">
-            <FormattedMessage id="footer-questions" defaultMessage="Questions? Contact" />
-          </p>
-          <a href="mailto:myfriendben@garycommunity.org" className="white-font italicized footer-link">
-            myfriendben@garycommunity.org
-          </a>
         </div>
       </Paper>
     </footer>
