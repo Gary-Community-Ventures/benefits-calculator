@@ -28,15 +28,15 @@ const Share = forwardRef(function Share({ close }, ref) {
 
   const labels = {
     email: intl.formatMessage({
-      id: 'results.share-email',
+      id: 'results.share-emailAL',
       defaultMessage: 'Email',
     }),
     copyLink: intl.formatMessage({
-      id: 'results.share-copyLink',
+      id: 'results.share-copyLinkAL',
       defaultMessage: 'Copy Link',
     }),
     copied: intl.formatMessage({
-      id: 'results.share-copied',
+      id: 'results.share-copiedAL',
       defaultMessage: 'Copied',
     }),
   };
@@ -75,7 +75,7 @@ const Share = forwardRef(function Share({ close }, ref) {
   };
 
   const closeALProps = {
-    id: 'share.close',
+    id: 'share.closeAL',
     defaultMsg: 'close',
   };
 
