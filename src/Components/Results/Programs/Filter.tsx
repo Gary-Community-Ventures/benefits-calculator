@@ -146,15 +146,15 @@ export const Filter = () => {
     setCitButtonClass(updatedCitButtonClass);
   };
   const citizenshipFiltersModalALProps = {
-    id: 'filter.citFilterModal',
+    id: 'filter.citFilterModalAL',
     defaultMsg: 'citizenship filters modal',
   };
   const closeCitFiltersALProps = {
-    id: 'filter.closeCitFilter',
+    id: 'filter.closeCitFilterAL',
     defaultMsg: 'close citizenship filters modal',
   };
   const citFiltersALProps = {
-    id: 'filter.citFilters',
+    id: 'filter.citFiltersAL',
     defaultMsg: 'citizenship filters',
   };
 
