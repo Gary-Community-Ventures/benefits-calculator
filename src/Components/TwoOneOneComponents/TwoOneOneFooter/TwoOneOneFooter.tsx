@@ -9,15 +9,15 @@ import './TwoOneOneFooter.css';
 
 const TwoOneOneFooter = () => {
   const twoOneOneChatALProps = {
-    id: 'twoOneOneFooter.chat',
+    id: 'twoOneOneFooter.chatAL',
     defaultMsg: '211 chat link',
   };
   const twoOneOneDialALProps = {
-    id: 'twoOneOneFooter.dial',
+    id: 'twoOneOneFooter.dialAL',
     defaultMsg: '211 dial link',
   };
   const twoOneOneTOSALProps = {
-    id: 'twoOneOneFooter.termsOfSvc',
+    id: 'twoOneOneFooter.termsOfSvcAL',
     defaultMsg: '211 terms of service',
   };
 
