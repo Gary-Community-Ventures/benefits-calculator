@@ -8,7 +8,7 @@ import './TwoOneOneFooter.css';
 
 const TwoOneOneFooter = () => {
   const intl = useIntl();
-  
+
   const twoOneOneChatALProps = {
     id: 'twoOneOneFooter.chatAL',
     defaultMsg: '211 chat link',
