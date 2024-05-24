@@ -1,12 +1,11 @@
 import { useParams } from 'react-router';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import LinearProgress from '@mui/material/LinearProgress';
 import { getStepDirectory, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
-import './ProgressBar.css';
 import dataLayerPush from '../../Assets/analytics';
-import TranslateAriaLabel from '../Results/Translate/TranslateAriaLabel';
+import './ProgressBar.css';
 
 interface ProgressBarProps {
   step?: number;
@@ -16,6 +15,8 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
   const { theme, formData } = useContext(Context);
   const totalSteps = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
   const { id, uuid } = useParams();
+  const intl = useIntl();
+  
   const progressBarTranslatedAL = {
     id: 'progressBar.ariaLabel',
     defaultMsg: 'progress bar',
@@ -46,7 +47,7 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
         variant="determinate"
         value={progressPercentage}
         className="progress-bar rtl-mirror"
-        aria-label={TranslateAriaLabel(progressBarTranslatedAL)}
+        aria-label={intl.formatMessage(progressBarTranslatedAL)}
       />
       <p className="step-progress-title">
         <FormattedMessage id="confirmation.return-stepLabel" defaultMessage="Step " />

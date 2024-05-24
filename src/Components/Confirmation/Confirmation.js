@@ -29,7 +29,6 @@ import { ReactComponent as Benefits } from '../../Assets/icons/benefits.svg';
 import { ReactComponent as Immediate } from '../../Assets/icons/immediate.svg';
 import { ReactComponent as Referral } from '../../Assets/icons/referral.svg';
 import PreviousButton from '../PreviousButton/PreviousButton';
-import TranslateAriaLabel from '../Results/Translate/TranslateAriaLabel.tsx';
 import './Confirmation.css';
 
 const Confirmation = () => {
@@ -104,7 +103,7 @@ const Confirmation = () => {
           </Grid>
           <Grid item xs={2} display="flex" justifyContent="flex-end">
             <button
-              aria-label={TranslateAriaLabel(editHHMAriaLabelProps)}
+              aria-label={intl.formatMessage(editHHMAriaLabelProps)}
               onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`, locationState)}
             >
               <Edit className="edit-button" alt="edit icon" />
@@ -158,7 +157,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button
-            aria-label={TranslateAriaLabel(editExpensesAriaLabelProps)}
+            aria-label={intl.formatMessage(editExpensesAriaLabelProps)}
             onClick={() => navigate(getQuestionUrl('hasExpenses'), locationState)}
           >
             <Edit className="edit-button" alt="edit-icon" />
@@ -295,7 +294,7 @@ const Confirmation = () => {
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label={TranslateAriaLabel(editHHSizeAriaLabelProps)} onClick={() => navigate(linkTo)}>
+          <button aria-label={intl.formatMessage(editHHSizeAriaLabelProps)} onClick={() => navigate(linkTo)}>
             <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
@@ -334,7 +333,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button
-            aria-label={TranslateAriaLabel(editHHAssetsAriaLabelProps)}
+            aria-label={intl.formatMessage(editHHAssetsAriaLabelProps)}
             onClick={() => navigate(getQuestionUrl('householdAssets'), locationState)}
           >
             <Edit className="edit-button" alt="edit icon" />
@@ -375,7 +374,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button
-            aria-label={TranslateAriaLabel(editZipAriaLabelProps)}
+            aria-label={intl.formatMessage(editZipAriaLabelProps)}
             onClick={() => navigate(getQuestionUrl('zipcode'), locationState)}
           >
             <Edit className="edit-button" alt="edit-icon" />
@@ -416,7 +415,7 @@ const Confirmation = () => {
           </Grid>
           <Grid item xs={2} display="flex" justifyContent="flex-end">
             <button
-              aria-label={TranslateAriaLabel(editReferralSrcAriaLabelProps)}
+              aria-label={intl.formatMessage(editReferralSrcAriaLabelProps)}
               onClick={() => navigate(getQuestionUrl('referralSource'), locationState)}
             >
               <Edit className="edit-button" alt="edit icon" />
@@ -459,7 +458,7 @@ const Confirmation = () => {
           getQuestionUrl('hasBenefits'),
           allBenefitsList,
           <Benefits className="confirmation-icon" alt="benefits-icon" />,
-          TranslateAriaLabel({ id: 'confirmation.editCurrentBenefits-AL', defaultMsg: 'edit current benefits' }),
+          intl.formatMessage({ id: 'confirmation.editCurrentBenefits-AL', defaultMsg: 'edit current benefits' }),
         )}
         {displayHHCheckboxSection(
           'acuteHHConditions',
@@ -468,7 +467,7 @@ const Confirmation = () => {
           getQuestionUrl('acuteHHConditions'),
           refactorOptionsList(acuteConditionOptions),
           <Immediate className="confirmation-icon" alt="immediate-icon" />,
-          TranslateAriaLabel({ id: 'confirmation.editImmedNeeds-AL', defaultMsg: 'edit immediate needs' }),
+          intl.formatMessage({ id: 'confirmation.editImmedNeeds-AL', defaultMsg: 'edit immediate needs' }),
         )}
         {displayReferralSourceSection()}
       </>

@@ -6,13 +6,15 @@ import ShareIcon from '@mui/icons-material/Share';
 import Share from '../Share/Share';
 import languageOptions from '../../Assets/languageOptions.tsx';
 import Paper from '@mui/material/Paper';
-import TranslateAriaLabel from '../Results/Translate/TranslateAriaLabel.tsx';
+import { useIntl } from 'react-intl';
 import './Header.css';
 
 const Header = () => {
   const context = useContext(Context);
   const { formData, getReferrer } = context;
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
+  const intl = useIntl();
+  
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
     defaultMsg: 'select a language',
@@ -75,7 +77,7 @@ const Header = () => {
               value={context.locale}
               label="Language"
               onChange={(event) => context.selectLanguage(event)}
-              aria-label={TranslateAriaLabel(selectLangAriaLabelProps)}
+              aria-label={intl.formatMessage(selectLangAriaLabelProps)}
               variant="standard"
               disableUnderline={true}
               open={isLanguageSelectOpen}
@@ -88,13 +90,13 @@ const Header = () => {
             <button
               className="icon-container"
               onClick={handleOpenShare}
-              aria-label={TranslateAriaLabel(shareButtonAriaLabelProps)}
+              aria-label={intl.formatMessage(shareButtonAriaLabelProps)}
             >
               <ShareIcon role="img" />
             </button>
           </div>
         </AppBar>
-        <Modal open={openShare} onClose={handleCloseShare} aria-label={TranslateAriaLabel(shareMFBModalAriaLabelProps)}>
+        <Modal open={openShare} onClose={handleCloseShare} aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}>
           <Share close={handleCloseShare} />
         </Modal>
       </Paper>

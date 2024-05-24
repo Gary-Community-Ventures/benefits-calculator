@@ -18,7 +18,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { Context } from '../Wrapper/Wrapper';
 import dataLayerPush from '../../Assets/analytics';
-import TranslateAriaLabel from '../Results/Translate/TranslateAriaLabel';
 import './Share.css';
 
 const Share = forwardRef(function Share({ close }, ref) {
@@ -81,7 +80,7 @@ const Share = forwardRef(function Share({ close }, ref) {
 
   return (
     <div className="container">
-      <IconButton aria-label={TranslateAriaLabel(closeALProps)} onClick={close} className="share-close-button">
+      <IconButton aria-label={intl.formatMessage(closeALProps)} onClick={close} className="share-close-button">
         <CloseIcon />
       </IconButton>
       <h2 className="share-header">

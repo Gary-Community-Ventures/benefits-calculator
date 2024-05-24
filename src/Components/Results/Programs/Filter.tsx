@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useResultsContext } from '../Results';
 import { Button, Popover, Checkbox } from '@mui/material';
 import { CitizenLabelOptions, CitizenLabels } from '../../../Assets/citizenshipFilterFormControlLabels';
@@ -11,13 +11,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import './Filter.css';
-import TranslateAriaLabel from '../Translate/TranslateAriaLabel';
 
 export const Filter = () => {
   const [citizenshipFilterIsOpen, setCitizenshipFilterIsOpen] = useState(false);
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState<null | Element>(null);
   const { filtersChecked, setFiltersChecked } = useResultsContext();
   const [citButtonClass, setCitButtonClass] = useState('citizenship-button');
+  const intl = useIntl();
 
   useEffect(() => {
     const filtersCheckedStrArr = Object.entries(filtersChecked)
@@ -171,12 +171,12 @@ export const Filter = () => {
             horizontal: 'left',
           }}
           transformOrigin={{ vertical: 2, horizontal: 0 }}
-          aria-label={TranslateAriaLabel(citizenshipFiltersModalALProps)}
+          aria-label={intl.formatMessage(citizenshipFiltersModalALProps)}
         >
           <div className="filters-close-button">
             <IconButton
               size="small"
-              aria-label={TranslateAriaLabel(closeCitFiltersALProps)}
+              aria-label={intl.formatMessage(closeCitFiltersALProps)}
               color="inherit"
               onClick={handleFilterClose}
             >
@@ -196,7 +196,7 @@ export const Filter = () => {
           className={citButtonClass}
           variant="contained"
           onClick={(event) => handleCitizenshipBtnClick(event)}
-          aria-label={TranslateAriaLabel(citFiltersALProps)}
+          aria-label={intl.formatMessage(citFiltersALProps)}
         >
           <FormattedMessage id="filterSection.citizenship" defaultMessage="CITIZENSHIP" />
           {citizenshipFilterIsOpen ? (

@@ -8,10 +8,9 @@ import { ReactComponent as ChildCareYouthEducation } from '../../../Assets/Categ
 import { useResultsContext } from '../Results';
 import { calculateTotalValue, formatToUSD } from '../FormattedValue';
 import { Translation } from '../../../Types/Results.ts';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate.tsx';
 import { PRESCHOOL_CATEGORY } from '../../../Assets/resultsConstants.ts';
-import TranslateAriaLabel from '../Translate/TranslateAriaLabel.tsx';
 
 export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   'Housing and Utilities': Housing,
@@ -29,6 +28,7 @@ type CategoryHeadingProps = {
 
 const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
   const { programs } = useResultsContext();
+  const intl = useIntl();
 
   let IconComponent = headingOptionsMappings[headingType.default_message];
 
@@ -43,7 +43,7 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
     id: savedTranslation.props.translation.label,
     defaultMsg: savedTranslation.props.translation.default_message,
   };
-  const iconTranslation = TranslateAriaLabel({ id: 'categoryHeading.icon', defaultMsg: 'icon' });
+  const iconTranslation = intl.formatMessage({ id: 'categoryHeading.icon', defaultMessage: 'icon' });
 
   return (
     <div>
@@ -51,7 +51,7 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
         <div className="category-heading-column">
           <div
             className="category-heading-icon"
-            aria-label={`${TranslateAriaLabel(categoryImageAriaLabelProps)} ${iconTranslation}`}
+            aria-label={`${intl.formatMessage(categoryImageAriaLabelProps)} ${iconTranslation}`}
             role="img"
           >
             <IconComponent />

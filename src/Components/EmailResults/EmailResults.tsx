@@ -16,7 +16,6 @@ import { postMessage } from '../../apiCalls.js';
 import Textfield from '../Textfield/Textfield.js';
 import ErrorMessage from '../ErrorMessage/ErrorMessage.tsx';
 import type { MessageFunction, ValidationFunction } from '../../Types/ErrorController.ts';
-import TranslateAriaLabel from '../Results/Translate/TranslateAriaLabel.tsx';
 import './EmailResults.css';
 
 type EmailResultsProps = {
@@ -151,7 +150,7 @@ const EmailResults = forwardRef(function EmailResults(
     <>
       <IconButton
         size="small"
-        aria-label={TranslateAriaLabel(closeAriaLabelProps)}
+        aria-label={intl.formatMessage(closeAriaLabelProps)}
         color="inherit"
         onClick={handleClose}
       >
@@ -200,7 +199,7 @@ const EmailResults = forwardRef(function EmailResults(
         action={action}
       />
       <IconButton
-        aria-label={TranslateAriaLabel(closeAriaLabelProps)}
+        aria-label={intl.formatMessage(closeAriaLabelProps)}
         onClick={close}
         sx={{
           position: 'absolute',

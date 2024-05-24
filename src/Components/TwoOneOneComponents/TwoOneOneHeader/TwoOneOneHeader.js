@@ -14,13 +14,14 @@ import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
 import CloseIcon from '@mui/icons-material/Close';
 import languageOptions from '../../../Assets/languageOptions';
-import TranslateAriaLabel from '../../Results/Translate/TranslateAriaLabel';
 import './TwoOneOneHeader.css';
 
 const TwoOneOneHeader = () => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
   const { formData, locale, selectLanguage } = useContext(Context);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
+  const intl = useIntl();
+  
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
     defaultMsg: 'select a language',
@@ -95,7 +96,7 @@ const TwoOneOneHeader = () => {
         <IconButton
           edge="end"
           color="primary"
-          aria-label={TranslateAriaLabel(closeBtnAriaLabelProps)}
+          aria-label={intl.formatMessage(closeBtnAriaLabelProps)}
           onClick={handleOpenMenu}
           className="hamburger-icon"
         >
@@ -107,7 +108,7 @@ const TwoOneOneHeader = () => {
         <IconButton
           edge="end"
           color="primary"
-          aria-label={TranslateAriaLabel(openMenuBtnAriaLabelProps)}
+          aria-label={intl.formatMessage(openMenuBtnAriaLabelProps)}
           onClick={handleOpenMenu}
           className="hamburger-icon"
         >
@@ -178,7 +179,7 @@ const TwoOneOneHeader = () => {
                 value={locale}
                 label="Language"
                 onChange={handleLanguageChange}
-                aria-label={TranslateAriaLabel(selectLangAriaLabelProps)}
+                aria-label={intl.formatMessage(selectLangAriaLabelProps)}
                 variant="standard"
                 disableUnderline={true}
                 open={isLanguageSelectOpen}
@@ -191,7 +192,7 @@ const TwoOneOneHeader = () => {
               <IconButton
                 color="primary"
                 onClick={handleOpenShare}
-                aria-label={TranslateAriaLabel(shareButtonAriaLabelProps)}
+                aria-label={intl.formatMessage(shareButtonAriaLabelProps)}
               >
                 <ShareIcon role="img" />
               </IconButton>
@@ -201,7 +202,7 @@ const TwoOneOneHeader = () => {
             <Modal
               open={openShare}
               onClose={handleCloseShare}
-              aria-label={TranslateAriaLabel(shareMFBModalAriaLabelProps)}
+              aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}
             >
               <Share close={handleCloseShare} />
             </Modal>
