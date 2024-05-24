@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { AppBar, MenuItem, Select, Modal, Link, IconButton } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -10,29 +9,41 @@ import twoOneOneMFBLogo from '../../../Assets/TwoOneOneAssets/twoOneOneMFBLogo.p
 import twoOneOneLinks from '../../../Assets/TwoOneOneAssets/twoOneOneLinks';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
 import CloseIcon from '@mui/icons-material/Close';
-import EmailResults from '../../EmailResults/EmailResults';
 import languageOptions from '../../../Assets/languageOptions';
 import './TwoOneOneHeader.css';
 
-const TwoOneOneHeader = ({ handleTextfieldChange }) => {
+const TwoOneOneHeader = () => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
   const { formData, locale, selectLanguage } = useContext(Context);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
+  const intl = useIntl();
 
-  //this is for the results icon to conditionally show up
-  const location = useLocation();
-  const urlRegex = /^\/(?:\/results\/(.+)|(.+)\/results)\/?$/;
-  const url = location.pathname.match(urlRegex);
-  const isResults = url !== null;
-  const screenUUID = url ? url[2] ?? url[1] : undefined;
+  const selectLangAriaLabelProps = {
+    id: 'header.selectLang-AL',
+    defaultMsg: 'select a language',
+  };
+  const shareButtonAriaLabelProps = {
+    id: 'header.shareBtn-AL',
+    defaultMsg: 'share button',
+  };
+  const openMenuBtnAriaLabelProps = {
+    id: '211Header.openMenuBtn-AL',
+    defaultMsg: 'open menu',
+  };
+  const closeBtnAriaLabelProps = {
+    id: '211Header.closeMenuBtn-AL',
+    defaultMsg: 'close menu',
+  };
+  const shareMFBModalAriaLabelProps = {
+    id: 'header.shareMFBModal-AL',
+    defaultMsg: 'share my friend ben modal',
+  };
 
   const [openShare, setOpenShare] = useState(false);
-  const [openEmailResults, setOpenEmailResults] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -42,14 +53,6 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
 
   const handleCloseShare = () => {
     setOpenShare(false);
-  };
-
-  const handleOpenEmailResults = () => {
-    setOpenEmailResults(true);
-  };
-
-  const handleCloseEmailResults = () => {
-    setOpenEmailResults(false);
   };
 
   const handleCloseLanguage = () => {
@@ -93,7 +96,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
         <IconButton
           edge="end"
           color="primary"
-          aria-label="open menu"
+          aria-label={intl.formatMessage(closeBtnAriaLabelProps)}
           onClick={handleOpenMenu}
           className="hamburger-icon"
         >
@@ -105,7 +108,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
         <IconButton
           edge="end"
           color="primary"
-          aria-label="open menu"
+          aria-label={intl.formatMessage(openMenuBtnAriaLabelProps)}
           onClick={handleOpenMenu}
           className="hamburger-icon"
         >
@@ -126,7 +129,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
         sx={{
           zIndex: 1000,
           [`& .MuiDrawer-paper`]: {
-            mt: '50px',
+            mt: '4.16rem',
             width: '100%',
             boxShadow: `inset 0px 2px 4px -1px rgba(0,0,0,0.2),
                         inset 0px 4px 5px 0px rgba(0,0,0,0.14),
@@ -176,7 +179,7 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
                 value={locale}
                 label="Language"
                 onChange={handleLanguageChange}
-                aria-label="select a language"
+                aria-label={intl.formatMessage(selectLangAriaLabelProps)}
                 variant="standard"
                 disableUnderline={true}
                 open={isLanguageSelectOpen}
@@ -186,26 +189,22 @@ const TwoOneOneHeader = ({ handleTextfieldChange }) => {
               >
                 {createMenuItems(languageOptions)}
               </Select>
-              <IconButton color="primary" onClick={handleOpenShare} aria-label="share button">
+              <IconButton
+                color="primary"
+                onClick={handleOpenShare}
+                aria-label={intl.formatMessage(shareButtonAriaLabelProps)}
+              >
                 <ShareIcon role="img" />
               </IconButton>
-              {isResults && (
-                <IconButton onClick={handleOpenEmailResults} aria-label="email results button" color="primary">
-                  <SaveAltIcon role="img" />
-                </IconButton>
-              )}
               {displayHamburgerMenuIcon()}
               {displayHamburgerMenu()}
             </Stack>
-            <Modal open={openShare} onClose={handleCloseShare} aria-label="share my friend ben modal">
+            <Modal
+              open={openShare}
+              onClose={handleCloseShare}
+              aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}
+            >
               <Share close={handleCloseShare} />
-            </Modal>
-            <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-label="save my results modal">
-              <EmailResults
-                handleTextfieldChange={handleTextfieldChange}
-                screenId={screenUUID}
-                close={handleCloseEmailResults}
-              />
             </Modal>
           </Stack>
         </AppBar>

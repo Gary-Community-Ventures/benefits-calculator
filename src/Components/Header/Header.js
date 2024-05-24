@@ -1,29 +1,34 @@
 import { AppBar, MenuItem, Select, Modal } from '@mui/material';
 import { useContext, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Share from '../Share/Share';
-import EmailResults from '../EmailResults/EmailResults';
 import languageOptions from '../../Assets/languageOptions.tsx';
 import Paper from '@mui/material/Paper';
+import { useIntl } from 'react-intl';
 import './Header.css';
 
-const Header = ({ handleTextfieldChange }) => {
+const Header = () => {
   const context = useContext(Context);
   const { formData, getReferrer } = context;
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
-
-  const location = useLocation();
-  const urlRegex = /^\/(?:\/results\/(.+)|(.+)\/results)\/?$/;
-  const url = location.pathname.match(urlRegex);
-  const isResults = url !== null;
-  const screenUUID = url ? url[2] ?? url[1] : undefined;
+  const intl = useIntl();
+  
+  const selectLangAriaLabelProps = {
+    id: 'header.selectLang-AL',
+    defaultMsg: 'select a language',
+  };
+  const shareButtonAriaLabelProps = {
+    id: 'header.shareBtn-AL',
+    defaultMsg: 'share button',
+  };
+  const shareMFBModalAriaLabelProps = {
+    id: 'header.shareMFBModal-AL',
+    defaultMsg: 'share my friend ben modal',
+  };
 
   const [openShare, setOpenShare] = useState(false);
-  const [openEmailResults, setOpenEmailResults] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
 
   const handleOpenShare = () => {
@@ -32,14 +37,6 @@ const Header = ({ handleTextfieldChange }) => {
 
   const handleCloseShare = () => {
     setOpenShare(false);
-  };
-
-  const handleOpenEmailResults = () => {
-    setOpenEmailResults(true);
-  };
-
-  const handleCloseEmailResults = () => {
-    setOpenEmailResults(false);
   };
 
   const handleCloseLanguage = () => {
@@ -80,7 +77,7 @@ const Header = ({ handleTextfieldChange }) => {
               value={context.locale}
               label="Language"
               onChange={(event) => context.selectLanguage(event)}
-              aria-label="select a language"
+              aria-label={intl.formatMessage(selectLangAriaLabelProps)}
               variant="standard"
               disableUnderline={true}
               open={isLanguageSelectOpen}
@@ -90,25 +87,17 @@ const Header = ({ handleTextfieldChange }) => {
             >
               {createMenuItems(languageOptions)}
             </Select>
-            <button className="icon-container" onClick={handleOpenShare} aria-label="share button">
+            <button
+              className="icon-container"
+              onClick={handleOpenShare}
+              aria-label={intl.formatMessage(shareButtonAriaLabelProps)}
+            >
               <ShareIcon role="img" />
             </button>
-            {isResults && (
-              <button className="icon-container" onClick={handleOpenEmailResults} aria-label="email results button">
-                <SaveAltIcon role="img" />
-              </button>
-            )}
           </div>
         </AppBar>
-        <Modal open={openShare} onClose={handleCloseShare} aria-labelledby="share-my-friend-ben-modal">
-          <Share close={handleCloseShare} id="share-my-friend-ben-modal" />
-        </Modal>
-        <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-label="save my results modal">
-          <EmailResults
-            handleTextfieldChange={handleTextfieldChange}
-            screenId={screenUUID}
-            close={handleCloseEmailResults}
-          />
+        <Modal open={openShare} onClose={handleCloseShare} aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}>
+          <Share close={handleCloseShare} />
         </Modal>
       </Paper>
     </nav>

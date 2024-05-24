@@ -1,12 +1,11 @@
 import React, { useEffect, useState, PropsWithChildren } from 'react';
 import useStyle from '../../Assets/styleController';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider, useIntl } from 'react-intl';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
 import languageOptions, { Language, rightToLeftLanguages } from '../../Assets/languageOptions';
-
 import useGetConfig from '../Config/configHook';
 
 const initialFormData: FormData = {

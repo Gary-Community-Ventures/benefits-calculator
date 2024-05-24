@@ -16,9 +16,9 @@ import LinkIcon from '@mui/icons-material/Link';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-import './Share.css';
 import { Context } from '../Wrapper/Wrapper';
 import dataLayerPush from '../../Assets/analytics';
+import './Share.css';
 
 const Share = forwardRef(function Share({ close }, ref) {
   const [copied, setCopied] = useState(false);
@@ -27,15 +27,15 @@ const Share = forwardRef(function Share({ close }, ref) {
 
   const labels = {
     email: intl.formatMessage({
-      id: 'results.share-email',
+      id: 'results.share-emailAL',
       defaultMessage: 'Email',
     }),
     copyLink: intl.formatMessage({
-      id: 'results.share-copyLink',
+      id: 'results.share-copyLinkAL',
       defaultMessage: 'Copy Link',
     }),
     copied: intl.formatMessage({
-      id: 'results.share-copied',
+      id: 'results.share-copiedAL',
       defaultMessage: 'Copied',
     }),
   };
@@ -73,9 +73,14 @@ const Share = forwardRef(function Share({ close }, ref) {
     };
   };
 
+  const closeALProps = {
+    id: 'share.closeAL',
+    defaultMsg: 'close',
+  };
+
   return (
     <div className="container">
-      <IconButton aria-label="close" onClick={close} className="share-close-button">
+      <IconButton aria-label={intl.formatMessage(closeALProps)} onClick={close} className="share-close-button">
         <CloseIcon />
       </IconButton>
       <h2 className="share-header">

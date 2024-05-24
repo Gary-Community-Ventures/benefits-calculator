@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useResultsContext } from '../Results';
 import { Button, Popover, Checkbox } from '@mui/material';
 import { CitizenLabelOptions, CitizenLabels } from '../../../Assets/citizenshipFilterFormControlLabels';
@@ -17,6 +17,7 @@ export const Filter = () => {
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState<null | Element>(null);
   const { filtersChecked, setFiltersChecked } = useResultsContext();
   const [citButtonClass, setCitButtonClass] = useState('citizenship-button');
+  const intl = useIntl();
 
   useEffect(() => {
     const filtersCheckedStrArr = Object.entries(filtersChecked)
@@ -144,6 +145,18 @@ export const Filter = () => {
     setCitizenshipFilterIsOpen(false);
     setCitButtonClass(updatedCitButtonClass);
   };
+  const citizenshipFiltersModalALProps = {
+    id: 'filter.citFilterModalAL',
+    defaultMsg: 'citizenship filters modal',
+  };
+  const closeCitFiltersALProps = {
+    id: 'filter.closeCitFilterAL',
+    defaultMsg: 'close citizenship filters modal',
+  };
+  const citFiltersALProps = {
+    id: 'filter.citFiltersAL',
+    defaultMsg: 'citizenship filters',
+  };
 
   const displayCitizenshipPopover = () => {
     return (
@@ -158,10 +171,15 @@ export const Filter = () => {
             horizontal: 'left',
           }}
           transformOrigin={{ vertical: 2, horizontal: 0 }}
-          aria-label="citizenship filters modal"
+          aria-label={intl.formatMessage(citizenshipFiltersModalALProps)}
         >
           <div className="filters-close-button">
-            <IconButton size="small" aria-label="close citizenship filters" color="inherit" onClick={handleFilterClose}>
+            <IconButton
+              size="small"
+              aria-label={intl.formatMessage(closeCitFiltersALProps)}
+              color="inherit"
+              onClick={handleFilterClose}
+            >
               <CloseIcon fontSize="small" />
             </IconButton>
           </div>
@@ -178,7 +196,7 @@ export const Filter = () => {
           className={citButtonClass}
           variant="contained"
           onClick={(event) => handleCitizenshipBtnClick(event)}
-          aria-label="citizenship filters"
+          aria-label={intl.formatMessage(citFiltersALProps)}
         >
           <FormattedMessage id="filterSection.citizenship" defaultMessage="CITIZENSHIP" />
           {citizenshipFilterIsOpen ? (

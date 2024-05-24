@@ -37,29 +37,6 @@ const Confirmation = () => {
   const navigate = useNavigate();
   const intl = useIntl();
   const locationState = { state: { routedFromConfirmationPg: true } };
-  const editHHMemberAriaLabel = intl.formatMessage({
-    id: 'editHHMember.ariaText',
-    defaultMessage: 'edit household member',
-  });
-  const editExpensesAriaLabel = intl.formatMessage({ id: 'editExpenses.ariaText', defaultMessage: 'edit expenses' });
-  const editHHSizeAriaLabel = intl.formatMessage({ id: 'editHHSize.ariaText', defaultMessage: 'edit household size' });
-  const editHHAssetsAriaLabel = intl.formatMessage({
-    id: 'editHHAssets.ariaText',
-    defaultMessage: 'edit household assets',
-  });
-  const editZipcodeAriaLabel = intl.formatMessage({ id: 'editZipcode.ariaText', defaultMessage: 'edit zipcode' });
-  const editReferralSrcAriaLabel = intl.formatMessage({
-    id: 'editReferralSrc.ariaText',
-    defaultMessage: 'edit referral source',
-  });
-  const editCurrentBensAriaLabel = intl.formatMessage({
-    id: 'editCurrentBens.ariaText',
-    defaultMessage: 'edit current benefits',
-  });
-  const editImmedNeedsAriaLabel = intl.formatMessage({
-    id: 'editImmedNeeds.ariaText',
-    defaultMessage: 'edit immediate needs',
-  });
 
   const getQuestionUrl = (name) => {
     const stepNumber = getStepNumber(name, formData.immutableReferrer);
@@ -87,6 +64,10 @@ const Confirmation = () => {
     const householdMemberDataBlocks = householdData.map((personData, i) => {
       const { hasIncome, incomeStreams, healthInsurance } = personData;
       const hhMemberIndex = Number(i + 1);
+      const editHHMAriaLabelProps = {
+        id: 'confirmation.hhMember-AL',
+        defaultMsg: 'edit household member',
+      };
 
       return (
         <Grid container key={i} spacing={1}>
@@ -122,7 +103,7 @@ const Confirmation = () => {
           </Grid>
           <Grid item xs={2} display="flex" justifyContent="flex-end">
             <button
-              aria-label={editHHMemberAriaLabel}
+              aria-label={intl.formatMessage(editHHMAriaLabelProps)}
               onClick={() => navigate(getQuestionUrl('householdData') + `/${i + 1}`, locationState)}
             >
               <Edit className="edit-button" alt="edit icon" />
@@ -151,6 +132,10 @@ const Confirmation = () => {
 
   const displayHouseholdExpenses = () => {
     const { hasExpenses, expenses } = formData;
+    const editExpensesAriaLabelProps = {
+      id: 'confirmation.expenses-AL',
+      defaultMsg: 'edit expenses',
+    };
 
     return (
       <Grid container spacing={1}>
@@ -172,10 +157,10 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button
-            aria-label={editExpensesAriaLabel}
+            aria-label={intl.formatMessage(editExpensesAriaLabelProps)}
             onClick={() => navigate(getQuestionUrl('hasExpenses'), locationState)}
           >
-            <Edit className="edit-button" alt="edit icon" />
+            <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
       </Grid>
@@ -283,6 +268,10 @@ const Confirmation = () => {
         <FormattedMessage id="confirmation.displayAllFormData-peopleLabel" defaultMessage="people" />
       );
     const linkTo = getQuestionUrl('householdSize');
+    const editHHSizeAriaLabelProps = {
+      id: 'confirmation.hhSize-AL',
+      defaultMsg: 'edit household size',
+    };
 
     return (
       <Grid container spacing={1}>
@@ -305,8 +294,8 @@ const Confirmation = () => {
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label={editHHSizeAriaLabel} onClick={() => navigate(linkTo)}>
-            <Edit className="edit-button" alt="edit icon" />
+          <button aria-label={intl.formatMessage(editHHSizeAriaLabelProps)} onClick={() => navigate(linkTo)}>
+            <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
       </Grid>
@@ -315,6 +304,11 @@ const Confirmation = () => {
 
   const displayHouseholdAssetsSection = () => {
     const { householdAssets } = formData;
+    const editHHAssetsAriaLabelProps = {
+      id: 'confirmation.hhAssets-AL',
+      defaultMsg: 'edit household assets',
+    };
+
     return (
       <Grid container spacing={1}>
         <Grid item xs={2}>
@@ -339,7 +333,7 @@ const Confirmation = () => {
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
           <button
-            aria-label={editHHAssetsAriaLabel}
+            aria-label={intl.formatMessage(editHHAssetsAriaLabelProps)}
             onClick={() => navigate(getQuestionUrl('householdAssets'), locationState)}
           >
             <Edit className="edit-button" alt="edit icon" />
@@ -351,6 +345,11 @@ const Confirmation = () => {
 
   const displayZipcodeSection = () => {
     const { zipcode, county } = formData;
+    const editZipAriaLabelProps = {
+      id: 'confirmation.zipcode-AL',
+      defaultMsg: 'edit zipcode',
+    };
+
     return (
       <Grid container spacing={1}>
         <Grid item className="no-padding" xs={2}>
@@ -374,8 +373,11 @@ const Confirmation = () => {
           </p>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
-          <button aria-label={editZipcodeAriaLabel} onClick={() => navigate(getQuestionUrl('zipcode'), locationState)}>
-            <Edit className="edit-button" alt="edit icon" />
+          <button
+            aria-label={intl.formatMessage(editZipAriaLabelProps)}
+            onClick={() => navigate(getQuestionUrl('zipcode'), locationState)}
+          >
+            <Edit className="edit-button" alt="edit-icon" />
           </button>
         </Grid>
       </Grid>
@@ -390,6 +392,11 @@ const Confirmation = () => {
     if (formData.immutableReferrer) {
       return <></>;
     }
+
+    const editReferralSrcAriaLabelProps = {
+      id: 'confirmation.referralSrc-AL',
+      defaultMsg: 'edit referral source',
+    };
 
     return (
       <>
@@ -408,7 +415,7 @@ const Confirmation = () => {
           </Grid>
           <Grid item xs={2} display="flex" justifyContent="flex-end">
             <button
-              aria-label={editReferralSrcAriaLabel}
+              aria-label={intl.formatMessage(editReferralSrcAriaLabelProps)}
               onClick={() => navigate(getQuestionUrl('referralSource'), locationState)}
             >
               <Edit className="edit-button" alt="edit icon" />
@@ -451,7 +458,7 @@ const Confirmation = () => {
           getQuestionUrl('hasBenefits'),
           allBenefitsList,
           <Benefits className="confirmation-icon" alt="benefits-icon" />,
-          editCurrentBensAriaLabel,
+          intl.formatMessage({ id: 'confirmation.editCurrentBenefits-AL', defaultMsg: 'edit current benefits' }),
         )}
         {displayHHCheckboxSection(
           'acuteHHConditions',
@@ -460,7 +467,7 @@ const Confirmation = () => {
           getQuestionUrl('acuteHHConditions'),
           refactorOptionsList(acuteConditionOptions),
           <Immediate className="confirmation-icon" alt="immediate-icon" />,
-          editImmedNeedsAriaLabel,
+          intl.formatMessage({ id: 'confirmation.editImmedNeeds-AL', defaultMsg: 'edit immediate needs' }),
         )}
         {displayReferralSourceSection()}
       </>
