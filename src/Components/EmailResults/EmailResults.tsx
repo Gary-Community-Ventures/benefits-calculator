@@ -15,8 +15,8 @@ import {
 import { postMessage } from '../../apiCalls.js';
 import Textfield from '../Textfield/Textfield.js';
 import ErrorMessage from '../ErrorMessage/ErrorMessage.tsx';
-import './EmailResults.css';
 import type { MessageFunction, ValidationFunction } from '../../Types/ErrorController.ts';
+import './EmailResults.css';
 
 type EmailResultsProps = {
   handleTextfieldChange: (event: Event) => void;
@@ -49,6 +49,10 @@ const EmailResults = forwardRef(function EmailResults(
   });
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [phoneSubmitted, setPhoneSubmitted] = useState(false);
+  const closeAriaLabelProps = {
+    id: 'emailResults.close-AL',
+    defaultMsg: 'close',
+  };
 
   const createEmailTextfield = (
     type: string,
@@ -144,7 +148,12 @@ const EmailResults = forwardRef(function EmailResults(
 
   const action = (
     <>
-      <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+      <IconButton
+        size="small"
+        aria-label={intl.formatMessage(closeAriaLabelProps)}
+        color="inherit"
+        onClick={handleClose}
+      >
         <CloseIcon fontSize="small" />
       </IconButton>
     </>
@@ -190,7 +199,7 @@ const EmailResults = forwardRef(function EmailResults(
         action={action}
       />
       <IconButton
-        aria-label="close"
+        aria-label={intl.formatMessage(closeAriaLabelProps)}
         onClick={close}
         sx={{
           position: 'absolute',

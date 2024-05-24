@@ -3,10 +3,25 @@ import Box from '@mui/material/Box';
 import chatIcon from '../../../Assets/TwoOneOneAssets/chatIcon.png';
 import dialIcon from '../../../Assets/TwoOneOneAssets/dialIcon.png';
 import textIcon from '../../../Assets/TwoOneOneAssets/textIcon.png';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import './TwoOneOneFooter.css';
 
 const TwoOneOneFooter = () => {
+  const intl = useIntl();
+
+  const twoOneOneChatALProps = {
+    id: 'twoOneOneFooter.chatAL',
+    defaultMsg: '211 chat link',
+  };
+  const twoOneOneDialALProps = {
+    id: 'twoOneOneFooter.dialAL',
+    defaultMsg: '211 dial link',
+  };
+  const twoOneOneTOSALProps = {
+    id: 'twoOneOneFooter.termsOfSvcAL',
+    defaultMsg: '211 terms of service',
+  };
+
   const displayChatStack = () => {
     return (
       <Stack direction="row" gap="1rem">
@@ -19,7 +34,7 @@ const TwoOneOneFooter = () => {
             href="https://www.211colorado.org/chat/#english"
             underline="none"
             target="_blank"
-            aria-label="2-1-1 chat link"
+            aria-label={intl.formatMessage(twoOneOneChatALProps)}
             color="primary"
           >
             <FormattedMessage id="footer-liveChat-text" defaultMessage="Click to live chat with a 2-1-1 Navigator" />
@@ -41,7 +56,7 @@ const TwoOneOneFooter = () => {
             href="tel:211"
             underline="none"
             target="_blank"
-            aria-label="2-1-1 dial link"
+            aria-label={intl.formatMessage(twoOneOneDialALProps)}
             color="primary"
             sx={{ display: 'inline-block' }}
           >
@@ -57,7 +72,7 @@ const TwoOneOneFooter = () => {
             href="tel:866-760-6489"
             underline="none"
             target="_blank"
-            aria-label="2-1-1 dial link"
+            aria-label={intl.formatMessage(twoOneOneDialALProps)}
             color="primary"
             sx={{ display: 'inline-block' }}
           >
@@ -93,7 +108,7 @@ const TwoOneOneFooter = () => {
             href="sms:898211"
             underline="none"
             target="_blank"
-            aria-label="2-1-1 chat link"
+            aria-label={intl.formatMessage(twoOneOneDialALProps)}
             color="primary"
             className="font-weight"
           >
@@ -148,7 +163,7 @@ const TwoOneOneFooter = () => {
             href="https://www.211colorado.org/terms-of-service/"
             underline="none"
             target="_blank"
-            aria-label="2-1-1 terms of service"
+            aria-label={intl.formatMessage(twoOneOneTOSALProps)}
             className="privacy-policy-links"
           >
             <FormattedMessage id="footer-terms-of-service-link" defaultMessage="2-1-1 Terms of Service |" />
@@ -158,7 +173,7 @@ const TwoOneOneFooter = () => {
             href="https://www.211colorado.org/privacy-policy/"
             underline="none"
             target="_blank"
-            aria-label="2-1-1 terms of service"
+            aria-label={intl.formatMessage(twoOneOneTOSALProps)}
             className="privacy-policy-links"
           >
             <FormattedMessage id="footer-twoOneOne-privacy" defaultMessage="2-1-1 Privacy Policy |" />
@@ -168,7 +183,7 @@ const TwoOneOneFooter = () => {
             href="https://www.myfriendben.org/en/data-privacy-policy"
             underline="none"
             target="_blank"
-            aria-label="2-1-1 terms of service"
+            aria-label={intl.formatMessage(twoOneOneTOSALProps)}
             className="privacy-policy-links"
           >
             <FormattedMessage id="footer-twoOneOne-mfb" defaultMessage="MyFriendBen Privacy Policy" />
