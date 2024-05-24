@@ -21,7 +21,7 @@ const TwoOneOneHeader = () => {
   const { formData, locale, selectLanguage } = useContext(Context);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
-  
+
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
     defaultMsg: 'select a language',
@@ -129,7 +129,7 @@ const TwoOneOneHeader = () => {
         sx={{
           zIndex: 1000,
           [`& .MuiDrawer-paper`]: {
-            mt: '75px',
+            mt: '4.16rem',
             width: '100%',
             boxShadow: `inset 0px 2px 4px -1px rgba(0,0,0,0.2),
                         inset 0px 4px 5px 0px rgba(0,0,0,0.14),
