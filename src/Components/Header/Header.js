@@ -14,7 +14,7 @@ const Header = () => {
   const { formData, getReferrer } = context;
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
-  
+
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
     defaultMsg: 'select a language',

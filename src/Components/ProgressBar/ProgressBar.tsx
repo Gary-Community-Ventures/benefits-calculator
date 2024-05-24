@@ -16,7 +16,7 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
   const totalSteps = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
   const { id, uuid } = useParams();
   const intl = useIntl();
-  
+
   const progressBarTranslatedAL = {
     id: 'progressBar.ariaLabel',
     defaultMsg: 'progress bar',

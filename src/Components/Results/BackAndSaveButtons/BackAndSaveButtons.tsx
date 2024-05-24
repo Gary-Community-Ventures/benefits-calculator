@@ -18,7 +18,7 @@ const BackAndSaveButtons = ({ handleTextfieldChange, navigateToLink, BackToThisP
   const navigate = useNavigate();
   const { uuid: screenerId } = useParams();
   const intl = useIntl();
-  
+
   const [openSaveModal, setOpenSaveModal] = useState(false);
   let definedScreenerId = '';
   if (screenerId) {
