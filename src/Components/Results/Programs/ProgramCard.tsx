@@ -1,9 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
-import { formatMonthlyValue, programValue } from '../FormattedValue';
+import { formatMonthlyValue } from '../FormattedValue';
 import ResultsTranslate from '../Translate/Translate';
 import { useEffect, useRef, useState } from 'react';
+import { useContext } from 'react';
+import { Context } from '../../Wrapper/Wrapper';
 import './ProgramCard.css';
 
 type ProgramCardProps = {
@@ -35,18 +37,18 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   const isMobile = size < 769 ? true : false;
 
   const newProgramFlagRef = useRef<HTMLDivElement | null>(null);
-  const [leftOffset, setLeftOffset] = useState('0');
   const [newProgramFlagWidth, setNewProgramFlagWidth] = useState<number>(0);
+
+  const { theme } = useContext(Context);
 
   useEffect(() => {
     if (program.new && newProgramFlagRef.current) {
       const width = newProgramFlagRef.current.offsetWidth;
-      const remWidth = width / 16;
-      const paddedWidth = remWidth - 0.5;
+      const fontSize = parseFloat(theme.cssVariables['font-size']);
+      const remWidth = width / fontSize;
       setNewProgramFlagWidth(remWidth);
-      setLeftOffset(`${paddedWidth}rem`);
     }
-  }, [program.new]);
+  }, [program.new, theme.cssVariables['font-size']]);
 
   type ConditonalWrapperProps = {
     children: React.ReactElement;
@@ -57,20 +59,22 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
     condition ? wrapper(children) : children;
   return (
     <div className="result-program-container">
-      {program.new && (
-        <div
-          className="new-program-flag"
-          ref={newProgramFlagRef}
-          style={{ width: newProgramFlagWidth > 0 ? `${newProgramFlagWidth}rem` : 'auto' }}
-        >
-          <FormattedMessage id="results-new-benefit-flag" defaultMessage="New Benefit" />
-        </div>
-      )}
-      {program.low_confidence && (
-        <div className="low-confidence-flag" style={{ left: program.new ? leftOffset : '0' }}>
-          <FormattedMessage id="results-low-confidence-flag" defaultMessage="Low Confidence" />
-        </div>
-      )}
+      <div className="result-program-flags-container">
+        {program.new && (
+          <div
+            className="new-program-flag"
+            ref={newProgramFlagRef}
+            style={{ width: newProgramFlagWidth > 0 ? `${newProgramFlagWidth}rem` : 'auto' }}
+          >
+            <FormattedMessage id="results-new-benefit-flag" defaultMessage="New Benefit" />
+          </div>
+        )}
+        {program.low_confidence && (
+          <div className="low-confidence-flag" style={{ marginLeft: program.new ? '-0.5rem' : '0' }}>
+            <FormattedMessage id="results-low-confidence-flag" defaultMessage="Low Confidence" />
+          </div>
+        )}
+      </div>
       <ConditonalWrapper
         condition={isMobile}
         wrapper={(children) => <div className="result-program-more-info-wrapper">{children}</div>}
