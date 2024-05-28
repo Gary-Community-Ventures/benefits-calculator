@@ -40,8 +40,6 @@ const Share = forwardRef(function Share({ close }, ref) {
 
   const shareUrl = getReferrer('shareLink');
 
-  const appId = '1268913277361574';
-
   const iconSize = { color: '#fff', fontSize: '2rem' };
 
   const copyLink = () => {
@@ -98,7 +96,7 @@ const Share = forwardRef(function Share({ close }, ref) {
             <WhatsAppIcon sx={iconSize} />
           </Icon>
         </WhatsappShareButton>
-        <LinkedinShareButton url={shareUrl} appId={appId} onClick={trackOutboundLinks('Share With LinkedIn')}>
+        <LinkedinShareButton url={shareUrl} onClick={trackOutboundLinks('Share With LinkedIn')}>
           <Icon>
             <LinkedInIcon sx={iconSize} />
           </Icon>
