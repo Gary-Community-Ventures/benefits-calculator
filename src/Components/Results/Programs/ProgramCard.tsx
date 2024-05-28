@@ -4,8 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import { formatMonthlyValue } from '../FormattedValue';
 import ResultsTranslate from '../Translate/Translate';
 import { useEffect, useRef, useState } from 'react';
-import { useContext } from 'react';
-import { Context } from '../../Wrapper/Wrapper';
 import './ProgramCard.css';
 
 type ProgramCardProps = {
@@ -36,20 +34,6 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
 
   const isMobile = size < 769 ? true : false;
 
-  const newProgramFlagRef = useRef<HTMLDivElement | null>(null);
-  const [newProgramFlagWidth, setNewProgramFlagWidth] = useState<number>(0);
-
-  const { theme } = useContext(Context);
-
-  useEffect(() => {
-    if (program.new && newProgramFlagRef.current) {
-      const width = newProgramFlagRef.current.offsetWidth;
-      const fontSize = parseFloat(theme.cssVariables['font-size']);
-      const remWidth = width / fontSize;
-      setNewProgramFlagWidth(remWidth);
-    }
-  }, [program.new, theme.cssVariables['font-size']]);
-
   type ConditonalWrapperProps = {
     children: React.ReactElement;
     condition: boolean;
@@ -61,11 +45,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
     <div className="result-program-container">
       <div className="result-program-flags-container">
         {program.new && (
-          <div
-            className="new-program-flag"
-            ref={newProgramFlagRef}
-            style={{ width: newProgramFlagWidth > 0 ? `${newProgramFlagWidth}rem` : 'auto' }}
-          >
+          <div className="new-program-flag">
             <FormattedMessage id="results-new-benefit-flag" defaultMessage="New Benefit" />
           </div>
         )}
