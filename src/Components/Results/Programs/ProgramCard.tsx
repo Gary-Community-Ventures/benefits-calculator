@@ -3,7 +3,7 @@ import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
 import { formatMonthlyValue } from '../FormattedValue';
 import ResultsTranslate from '../Translate/Translate';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './ProgramCard.css';
 
 type ProgramCardProps = {
