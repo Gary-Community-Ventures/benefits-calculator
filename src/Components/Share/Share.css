@@ -64,6 +64,7 @@ button {
   transition: max-width 1s, margin 0.3s;
   font-size: 0.88rem;
   cursor: pointer;
+  color: #fff;
 }
 
 .facebook {
@@ -89,6 +90,11 @@ button {
 .messenger {
   background-color: #2196f3;
   color: white;
+}
+
+.share-text-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
 @media (min-width: 601px) {
