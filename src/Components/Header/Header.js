@@ -1,35 +1,24 @@
-import { AppBar, MenuItem, Select, Modal } from '@mui/material';
+import { AppBar, MenuItem, Select } from '@mui/material';
 import { useContext, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import EmailResults from '../EmailResults/EmailResults';
 import languageOptions from '../../Assets/languageOptions.tsx';
 import Paper from '@mui/material/Paper';
+import { useIntl } from 'react-intl';
 import './Header.css';
 
-const Header = ({ handleTextfieldChange }) => {
+const Header = () => {
   const context = useContext(Context);
   const { formData, getReferrer } = context;
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
+  const intl = useIntl();
 
-  const location = useLocation();
-  const urlRegex = /^\/(?:\/results\/(.+)|(.+)\/results)\/?$/;
-  const url = location.pathname.match(urlRegex);
-  const isResults = url !== null;
-  const screenUUID = url ? url[2] ?? url[1] : undefined;
+  const selectLangAriaLabelProps = {
+    id: 'header.selectLang-AL',
+    defaultMsg: 'select a language',
+  };
 
-  const [openEmailResults, setOpenEmailResults] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
-
-  const handleOpenEmailResults = () => {
-    setOpenEmailResults(true);
-  };
-
-  const handleCloseEmailResults = () => {
-    setOpenEmailResults(false);
-  };
 
   const handleCloseLanguage = () => {
     setIsLanguageSelectOpen(false);
@@ -69,7 +58,7 @@ const Header = ({ handleTextfieldChange }) => {
               value={context.locale}
               label="Language"
               onChange={(event) => context.selectLanguage(event)}
-              aria-label="select a language"
+              aria-label={intl.formatMessage(selectLangAriaLabelProps)}
               variant="standard"
               disableUnderline={true}
               open={isLanguageSelectOpen}
@@ -79,20 +68,8 @@ const Header = ({ handleTextfieldChange }) => {
             >
               {createMenuItems(languageOptions)}
             </Select>
-            {isResults && (
-              <button className="icon-container" onClick={handleOpenEmailResults} aria-label="email results button">
-                <SaveAltIcon role="img" />
-              </button>
-            )}
           </div>
         </AppBar>
-        <Modal open={openEmailResults} onClose={handleCloseEmailResults} aria-label="save my results modal">
-          <EmailResults
-            handleTextfieldChange={handleTextfieldChange}
-            screenId={screenUUID}
-            close={handleCloseEmailResults}
-          />
-        </Modal>
       </Paper>
     </nav>
   );

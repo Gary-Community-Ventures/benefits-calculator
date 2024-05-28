@@ -292,7 +292,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <CssBaseline />
-        <BrandedHeader handleTextFieldChange={handleTextfieldChange} />
+        <BrandedHeader />
         <Box className="main-max-width">
           <Routes>
             <Route path="/step-1" element={<ProgressBar step={1} />} />
