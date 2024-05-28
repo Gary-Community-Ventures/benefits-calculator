@@ -50,9 +50,9 @@ const Share = forwardRef(function Share({ close }, ref) {
     }, 5000);
   };
 
-  const Icon = ({ children, color }) => {
+  const Icon = ({ children, name }) => {
     return (
-      <span className={`${color} icon`}>
+      <span className={`${name} icon`}>
         {children}
       </span>
     );
@@ -77,32 +77,32 @@ const Share = forwardRef(function Share({ close }, ref) {
       </div>
       <div className="row-group">
         <FacebookShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Facebook')}>
-          <Icon>
+          <Icon name="facebook">
             <FacebookIcon sx={iconSize} />
           </Icon>
         </FacebookShareButton>
         <TwitterShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Twitter')}>
-          <Icon>
+          <Icon name="twitter">
             <XIcon sx={iconSize} />
           </Icon>
         </TwitterShareButton>
         <EmailShareButton url={shareUrl} onClick={trackOutboundLinks('Share With Email')}>
-          <Icon>
+          <Icon name="email">
             <EmailIcon sx={iconSize} />
           </Icon>
         </EmailShareButton>
         <WhatsappShareButton url={shareUrl} onClick={trackOutboundLinks('Share With WhatsApp')}>
-          <Icon>
+          <Icon name="whatsApp">
             <WhatsAppIcon sx={iconSize} />
           </Icon>
         </WhatsappShareButton>
         <LinkedinShareButton url={shareUrl} onClick={trackOutboundLinks('Share With LinkedIn')}>
-          <Icon>
+          <Icon name="linkedIn">
             <LinkedInIcon sx={iconSize} />
           </Icon>
         </LinkedinShareButton>
         <button onClick={copyLink} className="button-no-format">
-          <Icon>{copied ? <CheckIcon sx={iconSize} /> : <LinkIcon sx={iconSize} />}</Icon>
+          <Icon name="link">{copied ? <CheckIcon sx={iconSize} /> : <LinkIcon sx={iconSize} />}</Icon>
         </button>
       </div>
     </div>

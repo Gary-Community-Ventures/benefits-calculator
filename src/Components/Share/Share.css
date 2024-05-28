@@ -67,31 +67,6 @@ button {
   color: #fff;
 }
 
-.facebook {
-  background-color: #3b5998;
-  color: white;
-}
-
-.twitter {
-  background-color: #00aced;
-  color: white;
-}
-
-.gray {
-  background-color: #686565;
-  color: white;
-}
-
-.whatsApp {
-  background-color: #25d366;
-  color: white;
-}
-
-.messenger {
-  background-color: #2196f3;
-  color: white;
-}
-
 .share-text-container {
   display: flex;
   justify-content: flex-end;
