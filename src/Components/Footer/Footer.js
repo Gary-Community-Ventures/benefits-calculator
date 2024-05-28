@@ -31,6 +31,9 @@ const Footer = () => {
               </a>
             </div>
           </div>
+          <div className='share-container'>
+            <Share />
+          </div>
         </div>
       </Paper>
     </footer>
