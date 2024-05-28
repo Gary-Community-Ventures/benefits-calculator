@@ -35,7 +35,7 @@
 
 .share-container {
   display: flex;
-  align-items: end;
+  align-items: flex-end;
 }
 
 .footer-policy-container {
