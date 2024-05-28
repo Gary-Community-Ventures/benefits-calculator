@@ -231,9 +231,5 @@ export function useConfig(name: string) {
 
   let configValue = config[name];
 
-  if (typeof configValue === 'string' && isValidJson(configValue)) {
-    configValue = JSON.parse(configValue);
-  }
-
   return configValue;
 }
