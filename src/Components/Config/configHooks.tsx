@@ -235,9 +235,5 @@ export function useConfig(name: string) {
     configValue = JSON.parse(configValue);
   }
 
-  if (typeof configValue === 'object' && configValue !== null && '0' in configValue) {
-    return configValue['0'];
-  }
-
   return configValue;
 }
