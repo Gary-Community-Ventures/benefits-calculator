@@ -87,7 +87,7 @@ const Share = forwardRef(function Share({ close }, ref) {
           </Icon>
         </TwitterShareButton>
         <EmailShareButton url={shareUrl} onClick={trackOutboundLinks('Share With Email')}>
-          <Icon name="email">
+          <Icon name={labels.email}>
             <EmailIcon sx={iconSize} />
           </Icon>
         </EmailShareButton>
@@ -101,8 +101,10 @@ const Share = forwardRef(function Share({ close }, ref) {
             <LinkedInIcon sx={iconSize} />
           </Icon>
         </LinkedinShareButton>
-        <button onClick={copyLink} className="button-no-format">
-          <Icon name="link">{copied ? <CheckIcon sx={iconSize} /> : <LinkIcon sx={iconSize} />}</Icon>
+        <button onClick={copyLink} className="button-no-format" aria-label={copied ? labels.copied : labels.copyLink}>
+          <Icon name={copied ? labels.copied : labels.copyLink}>
+            {copied ? <CheckIcon sx={iconSize} /> : <LinkIcon sx={iconSize} />}
+          </Icon>
         </button>
       </div>
     </div>
