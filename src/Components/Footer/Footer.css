@@ -48,3 +48,19 @@
   color: #fff;
   margin-bottom: 1rem;
 }
+
+@media (max-width: 700px) {
+  .footer-content-container {
+    flex-direction: column;
+    padding-bottom: 1rem;
+  }
+
+  .share-container {
+    margin-top: .5rem;
+  }
+
+  .footer-policy-container {
+    justify-content: flex-start;
+    padding-left: 1rem;
+  }
+}
