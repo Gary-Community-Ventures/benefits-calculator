@@ -22,7 +22,7 @@ const Footer = () => {
             <p className="white-font">1705 17th St.</p>
             <p className="white-font">Suite 200</p>
             <p className="white-font">Denver, CO 80202</p>
-            <div className='bottom-top-margin'>
+            <div className="bottom-top-margin">
               <p className="white-font italicized">
                 <FormattedMessage id="footer-questions" defaultMessage="Questions? Contact" />
               </p>
@@ -31,9 +31,14 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <div className='share-container'>
+          <div className="share-container">
             <Share />
           </div>
+        </div>
+        <div className='footer-policy-container'>
+          <a href='https://www.myfriendben.org/privacy-policy' target="_blank" className='policy-link'>
+            <FormattedMessage id="footer.privacyPolicy" defaultMessage="Privacy Policy" />
+          </a>
         </div>
       </Paper>
     </footer>

@@ -32,3 +32,19 @@
 .footer-link {
   text-decoration: none;
 }
+
+.share-container {
+  display: flex;
+  align-items: end;
+}
+
+.footer-policy-container {
+  display: flex;
+  justify-content: center;
+}
+
+.policy-link {
+  text-decoration: none;
+  color: #fff;
+  margin-bottom: 1rem;
+}
