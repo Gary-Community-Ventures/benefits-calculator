@@ -43,7 +43,6 @@ button {
 }
 
 .row-group {
-  margin-top: 0.4rem;
   white-space: nowrap;
 }
 
@@ -99,5 +98,9 @@ button {
 
    .icon {
     margin: 0 0.15rem;
+  }
+
+  .facebook.icon {
+    margin-left: -10px;
   }
 }
