@@ -18,7 +18,7 @@ import { Context } from '../Wrapper/Wrapper';
 import dataLayerPush from '../../Assets/analytics';
 import './Share.css';
 
-const Share = forwardRef(function Share({ close }, ref) {
+const Share = forwardRef(function Share() {
   const [copied, setCopied] = useState(false);
   const { getReferrer } = useContext(Context);
   const intl = useIntl();
@@ -66,11 +66,6 @@ const Share = forwardRef(function Share({ close }, ref) {
         label: label,
       });
     };
-  };
-
-  const closeALProps = {
-    id: 'share.closeAL',
-    defaultMsg: 'close',
   };
 
   return (
