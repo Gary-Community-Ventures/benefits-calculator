@@ -191,7 +191,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
   };
 
-  const createFormDataMemberCard = (member, index) => { //here
+  const createFormDataMemberCard = (member, index) => {
     let relationship = relationshipOptions[member.relationshipToHH];
     if (index === 0) {
       relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
@@ -237,11 +237,11 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
   };
 
-  const createPlaceholderMemberCard = ({relationshipToHH, age, income}, index, page) => {
+  const createPlaceholderMemberCard = ({ relationshipToHH, age, income }, index, page) => {
     let relationship = relationshipOptions[relationshipToHH];
 
     return createMemberCard(index, relationship, age, income, page);
-  }
+  };
 
   const createMemberCard = (index, relationship, age, income, page) => {
     const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
@@ -271,7 +271,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         </div>
       </article>
     );
-  }
+  };
 
   const createQHeaderAndHHMSummaries = (personIndex) => {
     let header;
@@ -302,6 +302,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       }
     }
 
+    //We want the active/current member's summary card to update synchronously as we change their information
+    //so we swap out the current one for the one we create using the memberData in state
     const summariesWActiveMemberCard = hHMemberSummaries.map((member, index) => {
       if (index === page - 1) {
         return createFormDataMemberCard(memberData, index);
