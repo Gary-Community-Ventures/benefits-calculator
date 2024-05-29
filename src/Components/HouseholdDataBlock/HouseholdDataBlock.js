@@ -30,7 +30,7 @@ import './HouseholdDataBlock.css';
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
   const { householdSize } = formData;
-  const remainingHHMNumber = Number(householdSize);
+  const hHSizeNumber = Number(householdSize);
   let { uuid, page } = useParams();
   page = parseInt(page);
   const step = getStepNumber('householdData');
@@ -191,7 +191,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
   };
 
-  const createMembersAdded = (member, index) => {
+  const createFormDataMemberCard = (member, index) => { //here
     let relationship = relationshipOptions[member.relationshipToHH];
     if (relationship === undefined) {
       relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
@@ -220,24 +220,39 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       income += Number(num);
     }
 
+    return createMemberCard(index, relationship, age, income, page);
+  };
+
+  const handleEditBtnSubmit = (memberIndex) => {
+    setSubmittedCount(submittedCount + 1);
+
+    const validPersonData = personDataIsValid(memberData);
+    if (validPersonData) {
+      handleHouseholdDataSubmit(memberData, page - 1, uuid);
+      navigate(`/${uuid}/step-${step}/${memberIndex + 1}`);
+    }
+  };
+
+  const createPlaceholderMemberCard = ({relationshipToHH, age, income}, index, page) => {
+    let relationship = relationshipOptions[relationshipToHH];
+
+    return createMemberCard(index, relationship, age, income, page);
+  }
+
+  const createMemberCard = (index, relationship, age, income, page) => {
     const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
-
-    const handleEditSubmit = () => {
-      setSubmittedCount(submittedCount + 1);
-
-      const validPersonData = personDataIsValid(memberData);
-      if (validPersonData) {
-        handleHouseholdDataSubmit(memberData, page - 1, uuid);
-        navigate(`/${uuid}/step-${step}/${index + 1}`);
-      }
-    };
 
     return (
       <article className={containerClassName} key={index}>
         <div className="household-member-header">
           <h3 className="member-added-relationship">{relationship}:</h3>
           <div className="household-member-edit-button">
-            <IconButton onClick={handleEditSubmit} aria-label={editHHMemberAriaLabel}>
+            <IconButton
+              onClick={() => {
+                handleEditBtnSubmit(index);
+              }}
+              aria-label={editHHMemberAriaLabel}
+            >
               <EditIcon alt="edit icon" />
             </IconButton>
           </div>
@@ -252,11 +267,23 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         </div>
       </article>
     );
-  };
+  }
 
   const createQuestionHeader = (personIndex) => {
     let header;
     const headOfHHInfoWasEntered = formData.householdData.length >= 1;
+
+    //hHMemberSummaries will have the length of members that have already been saved to formData
+    const hHMemberSummaries = [
+      ...formData.householdData.map((member, index) => {
+        return createFormDataMemberCard(member, index);
+      }),
+    ];
+
+    //TODO: create if statements
+    //if the index === page then use the memberData
+    //else if the member exists in householdData then use that info
+    //else use the boilerplate
 
     if (personIndex === 1) {
       header = (
@@ -274,6 +301,26 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         </h1>
       );
     }
+
+    //if the length of the hHMemberSummaries is less than the hHSizeNumber then we need to create placeholder cards
+    //for members whose info we don't yet have
+    if (hHMemberSummaries.length < hHSizeNumber) {
+      const nonPlaceholderCount = formData.householdData.length;
+      for (let i = nonPlaceholderCount; i < hHSizeNumber; i++) {
+        const householdMemberSummaryCard = createPlaceholderMemberCard(
+          {
+            relationshipToHH: 'relatedOther',
+            age: 0,
+            income: 0,
+          },
+          i,
+          page,
+        );
+        hHMemberSummaries.push(householdMemberSummaryCard);
+        // TODO: fix edit buttons
+      }
+    }
+
     return (
       <>
         {header}
@@ -282,7 +329,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             <h2 className="household-data-sub-header secondary-heading">
               <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
             </h2>
-            <div>{formData.householdData.map(createMembersAdded)}</div>
+            <div>{hHMemberSummaries}</div>
+            {/* bookmark 1 */}
           </Box>
         )}
       </>
@@ -408,7 +456,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     setSubmittedCount(submittedCount + 1);
 
     const validPersonData = personDataIsValid(memberData);
-    const lastHouseholdMember = page >= remainingHHMNumber;
+    const lastHouseholdMember = page >= hHSizeNumber;
 
     if (validPersonData && isComingFromConfirmationPg) {
       handleHouseholdDataSubmit(memberData, page - 1, uuid);
@@ -483,6 +531,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   return (
     <main className="benefits-form">
       {createQuestionHeader(page)}
+      {/* bookmark 2 */}
       {createAgeQuestion(page)}
       {page === 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
       {page !== 1 && createHOfHRelationQuestion()}
