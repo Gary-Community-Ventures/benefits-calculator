@@ -193,8 +193,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const createFormDataMemberCard = (member, index) => { //here
     let relationship = relationshipOptions[member.relationshipToHH];
-    if (relationship === undefined) {
+    if (index === 0) {
       relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
+    } else if (relationship === undefined && index !== 0) {
+      relationship = (
+        <FormattedMessage id="relationshipOptions.relatedOther" defaultMessage="Related in some other way" />
+      );
     }
     const age = member.age;
     let income = 0;
@@ -269,7 +273,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     );
   }
 
-  const createQuestionHeader = (personIndex) => {
+  const createQHeaderAndHHMSummaries = (personIndex) => {
     let header;
     const headOfHHInfoWasEntered = formData.householdData.length >= 1;
 
@@ -280,10 +284,31 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       }),
     ];
 
-    //TODO: create if statements
-    //if the index === page then use the memberData
-    //else if the member exists in householdData then use that info
-    //else use the boilerplate
+    //if the length of the hHMemberSummaries is less than the hHSizeNumber then we need to create placeholder cards
+    //for members whose info we don't yet have
+    if (hHMemberSummaries.length < hHSizeNumber) {
+      const nonPlaceholderCount = formData.householdData.length;
+      for (let i = nonPlaceholderCount; i < hHSizeNumber; i++) {
+        const householdMemberSummaryCard = createPlaceholderMemberCard(
+          {
+            relationshipToHH: 'relatedOther',
+            age: 0,
+            income: 0,
+          },
+          i,
+          page,
+        );
+        hHMemberSummaries.push(householdMemberSummaryCard);
+      }
+    }
+
+    const summariesWActiveMemberCard = hHMemberSummaries.map((member, index) => {
+      if (index === page - 1) {
+        return createFormDataMemberCard(memberData, index);
+      } else {
+        return member;
+      }
+    });
 
     if (personIndex === 1) {
       header = (
@@ -302,25 +327,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       );
     }
 
-    //if the length of the hHMemberSummaries is less than the hHSizeNumber then we need to create placeholder cards
-    //for members whose info we don't yet have
-    if (hHMemberSummaries.length < hHSizeNumber) {
-      const nonPlaceholderCount = formData.householdData.length;
-      for (let i = nonPlaceholderCount; i < hHSizeNumber; i++) {
-        const householdMemberSummaryCard = createPlaceholderMemberCard(
-          {
-            relationshipToHH: 'relatedOther',
-            age: 0,
-            income: 0,
-          },
-          i,
-          page,
-        );
-        hHMemberSummaries.push(householdMemberSummaryCard);
-        // TODO: fix edit buttons
-      }
-    }
-
     return (
       <>
         {header}
@@ -329,8 +335,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             <h2 className="household-data-sub-header secondary-heading">
               <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
             </h2>
-            <div>{hHMemberSummaries}</div>
-            {/* bookmark 1 */}
+            <div>{summariesWActiveMemberCard}</div>
           </Box>
         )}
       </>
@@ -530,7 +535,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   return (
     <main className="benefits-form">
-      {createQuestionHeader(page)}
+      {createQHeaderAndHHMSummaries(page)}
       {/* bookmark 2 */}
       {createAgeQuestion(page)}
       {page === 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
