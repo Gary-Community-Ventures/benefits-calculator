@@ -511,7 +511,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   return (
     <main className="benefits-form">
       {createQHeaderAndHHMSummaries(page)}
-      {/* bookmark 2 */}
       {createAgeQuestion(page)}
       {page === 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
       {page !== 1 && createHOfHRelationQuestion()}
