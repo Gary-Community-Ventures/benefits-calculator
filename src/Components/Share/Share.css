@@ -71,6 +71,10 @@ button {
   justify-content: flex-end;
 }
 
+.button-no-format:hover {
+  cursor: pointer;
+}
+
 @media (min-width: 601px) {
   .icon:hover > .icon-name {
     max-width: 130px;
