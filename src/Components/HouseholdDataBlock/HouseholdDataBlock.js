@@ -193,13 +193,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const createFormDataMemberCard = (member, index) => {
     let relationship = relationshipOptions[member.relationshipToHH];
-    if (index === 0) {
+    if (relationship === undefined) {
       relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
-    } else if (relationship === undefined && index !== 0) {
-      relationship = (
-        <FormattedMessage id="relationshipOptions.relatedOther" defaultMessage="Related in some other way" />
-      );
     }
+
     const age = member.age;
     let income = 0;
     for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {
