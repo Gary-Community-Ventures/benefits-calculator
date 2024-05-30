@@ -173,9 +173,8 @@ function transformConfigData(configData: ConfigApiResponse[]): Config {
     const { name, data } = item;
     let configOptions = data;
 
-    if (typeof configOptions === 'string' && isValidJson(configOptions)) {
-      configOptions = JSON.parse(configOptions);
-    }
+    // Parses json string to object
+    if (typeof configOptions === 'string' && isValidJson(configOptions)) configOptions = JSON.parse(configOptions);
 
     transformedConfig[name] = transformItem(configOptions);
   });
