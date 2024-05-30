@@ -237,12 +237,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
   };
 
-  const createPlaceholderMemberCard = ({ relationshipToHH, age, income }, index, page) => {
-    let relationship = relationshipOptions[relationshipToHH];
-
-    return createMemberCard(index, relationship, age, income, page);
-  };
-
   const createMemberCard = (index, relationship, age, income, page) => {
     const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
 
@@ -283,24 +277,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         return createFormDataMemberCard(member, index);
       }),
     ];
-
-    //if the length of the hHMemberSummaries is less than the hHSizeNumber then we need to create placeholder cards
-    //for members whose info we don't yet have
-    if (hHMemberSummaries.length < hHSizeNumber) {
-      const nonPlaceholderCount = formData.householdData.length;
-      for (let i = nonPlaceholderCount; i < hHSizeNumber; i++) {
-        const householdMemberSummaryCard = createPlaceholderMemberCard(
-          {
-            relationshipToHH: 'relatedOther',
-            age: 0,
-            income: 0,
-          },
-          i,
-          page,
-        );
-        hHMemberSummaries.push(householdMemberSummaryCard);
-      }
-    }
 
     //We want the active/current member's summary card to update synchronously as we change their information
     //so we swap out the current one for the one we create using the memberData in state
