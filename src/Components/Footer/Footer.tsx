@@ -6,16 +6,12 @@ import { FormattedMessage } from 'react-intl';
 import './Footer.css';
 
 const Footer = () => {
-    const context = useContext(Context);
-    const { getReferrer } = context;
+  const context = useContext(Context);
+  const { getReferrer } = context;
 
   return (
     <footer>
-      <Paper
-        elevation={0}
-        sx={{ width: '100%', backgroundColor: `var(--midBlue-color)` }}
-        square={true}
-      >
+      <Paper elevation={0} sx={{ width: '100%', backgroundColor: `var(--midBlue-color)` }} square={true}>
         <div className="footer-content-container">
           <div>
             <img src={getReferrer('logoSource')} alt={getReferrer('logoAlt')} className="logo footer-logo" />
@@ -35,8 +31,8 @@ const Footer = () => {
             <Share />
           </div>
         </div>
-        <div className='footer-policy-container'>
-          <a href='https://www.myfriendben.org/privacy-policy' target="_blank" className='policy-link'>
+        <div className="footer-policy-container">
+          <a href="https://www.myfriendben.org/privacy-policy" target="_blank" className="policy-link">
             <FormattedMessage id="footer.privacyPolicy" defaultMessage="Privacy Policy" />
           </a>
         </div>

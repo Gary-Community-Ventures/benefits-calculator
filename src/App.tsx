@@ -364,7 +364,7 @@ const App = () => {
           </Routes>
         </Box>
       </div>
-        <BrandedFooter />
+      <BrandedFooter />
     </ThemeProvider>
   );
 };
