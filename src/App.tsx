@@ -362,10 +362,9 @@ const App = () => {
             </Route>
             <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
           </Routes>
-          <div className="push"></div>
         </Box>
-        <BrandedFooter />
       </div>
+        <BrandedFooter />
     </ThemeProvider>
   );
 };

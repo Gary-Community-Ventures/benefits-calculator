@@ -10,10 +10,10 @@ const Footer = () => {
     const { getReferrer } = context;
 
   return (
-    <footer>
+    <footer className='footer-container'>
       <Paper
         elevation={0}
-        sx={{ width: '100%', backgroundColor: `var(--midBlue-color)`, marginTop: '5rem' }}
+        sx={{ width: '100%', backgroundColor: `var(--midBlue-color)` }}
         square={true}
       >
         <div className="footer-content-container">
