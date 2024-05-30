@@ -194,7 +194,7 @@ const TwoOneOneFooter = () => {
   };
 
   return (
-    <footer className='footer-container'>
+    <footer>
       <Paper
         elevation={0}
         sx={{ width: '100%', backgroundColor: '#efefef' }}
