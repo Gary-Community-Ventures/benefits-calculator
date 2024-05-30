@@ -1,4 +1,4 @@
-import { forwardRef, useState, useContext } from 'react';
+import { forwardRef, useState, useContext, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import {
   EmailShareButton,
@@ -50,15 +50,11 @@ const Share = forwardRef(function Share() {
     }, 5000);
   };
 
-  const Icon = ({ children, name }) => {
-    return (
-      <span className={`${name} icon`}>
-        {children}
-      </span>
-    );
+  const Icon = ({ name, children }: { name: string; children: ReactElement } ) => {
+    return <span className={`${name} icon`}>{children}</span>;
   };
 
-  const trackOutboundLinks = (label) => {
+  const trackOutboundLinks = (label:string) => {
     return () => {
       dataLayerPush({
         event: 'media_share',
