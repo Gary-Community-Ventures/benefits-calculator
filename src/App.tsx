@@ -364,7 +364,6 @@ const App = () => {
           </Routes>
           <div className="push"></div>
         </Box>
-
         <BrandedFooter />
       </div>
     </ThemeProvider>
