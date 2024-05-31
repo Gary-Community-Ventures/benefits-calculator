@@ -1,14 +1,13 @@
 import Paper from '@mui/material/Paper';
 import Share from '../Share/Share';
 import { useContext } from 'react';
-import { Context, theme } from '../Wrapper/Wrapper';
+import { Context } from '../Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
 import './Footer.css';
 
 const Footer = () => {
   const context = useContext(Context);
   const { getReferrer, theme } = context;
-  const { getReferrer } = context;
 
   return (
     <footer>
