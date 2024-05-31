@@ -7,11 +7,11 @@ import './Footer.css';
 
 const Footer = () => {
   const context = useContext(Context);
-  const { getReferrer } = context;
+  const { getReferrer, theme } = context;
 
   return (
     <footer>
-      <Paper elevation={0} sx={{ width: '100%', backgroundColor: `var(--midBlue-color)` }} square={true}>
+      <Paper elevation={0} sx={{ width: '100%', backgroundColor: theme.midBlueColor }} square={true}>
         <div className="footer-content-container">
           <div>
             <img src={getReferrer('logoSource')} alt={getReferrer('logoAlt')} className="logo footer-logo" />
