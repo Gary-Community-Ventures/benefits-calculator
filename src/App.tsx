@@ -290,7 +290,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <div className="app">
         <CssBaseline />
         <BrandedHeader />
         <Box className="main-max-width">

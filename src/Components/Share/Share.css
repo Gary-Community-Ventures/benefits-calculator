@@ -71,7 +71,7 @@ button {
   justify-content: flex-end;
 }
 
-.button-no-format:hover {
+.button-no-format {
   cursor: pointer;
 }
 
