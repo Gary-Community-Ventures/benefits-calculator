@@ -12,7 +12,9 @@ const referralOptions = {
   testOrProspect: <FormattedMessage id="referralOptions.testOrProspect" defaultMessage="Test / Prospective Partner" />,
   searchEngine: <FormattedMessage id="referralOptions.searchEngine" defaultMessage="Google or other search engine" />,
   socialMedia: <FormattedMessage id="referralOptions.socialMedia" defaultMessage="Social Media" />,
-  fircsummitresourcecenter: <FormattedMessage id="referralOptions.firc" defaultMessage="FIRC Summit Resource Center" />,
+  fircsummitresourcecenter: (
+    <FormattedMessage id="referralOptions.fircsummitresourcecenter" defaultMessage="FIRC Summit Resource Center" />
+  ),
   other: <FormattedMessage id="referralOptions.other" defaultMessage="Other" />,
 };
 
