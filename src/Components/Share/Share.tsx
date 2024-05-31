@@ -50,11 +50,11 @@ const Share = forwardRef(function Share() {
     }, 5000);
   };
 
-  const Icon = ({ name, children }: { name: string; children: ReactElement } ) => {
+  const Icon = ({ name, children }: { name: string; children: ReactElement }) => {
     return <span className={`${name} icon`}>{children}</span>;
   };
 
-  const trackOutboundLinks = (label:string) => {
+  const trackOutboundLinks = (label: string) => {
     return () => {
       dataLayerPush({
         event: 'media_share',
