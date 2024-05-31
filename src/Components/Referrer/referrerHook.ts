@@ -6,6 +6,7 @@ import VELogo from '../../Assets/VillageExchange/villageExchangeLogo.png';
 import CCHMFBLogo from '../../Assets/ColoradoCoalitionHomeless/cchcobrand.png';
 import LGSLogo from '../../Assets/LetsGetSet/lgsLogo.png';
 import GACLogo from '../../Assets/GetAheadColorado/gaclogo.png';
+import FIRCLogo from '../../Assets/FircCobrand/FIRCLogo.png';
 
 type ReferrerOptions<T> = {
   default: T;
@@ -35,6 +36,7 @@ const referrerData: ReferrerData = {
     cch: CCHMFBLogo,
     lgs: LGSLogo,
     gac: GACLogo,
+    fircsummitresourcecenter: FIRCLogo,
   },
   logoAlt: {
     default: 'MyFriendBen home page button',
@@ -44,6 +46,7 @@ const referrerData: ReferrerData = {
     cch: 'Colorado Coalition for the Homeless and MyFriendBen home page button',
     lgs: "Let's Get Set home page button",
     gac: 'Get Ahead Colorado home page button',
+    fircsummitresourcecenter: 'Firc Summit Resource Center',
   },
   logoClass: {
     default: 'logo',
@@ -53,6 +56,7 @@ const referrerData: ReferrerData = {
     cch: 'logo',
     lgs: 'logo',
     gac: 'logo',
+    fircsummitresourcecenter: 'logo',
   },
   twoOneOneLink: {
     default: 'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=organic&utm_id=211mfb',
