@@ -2,19 +2,25 @@ import Paper from '@mui/material/Paper';
 import Share from '../Share/Share';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import MFBLogo from '../../Assets/logo.png';
 import './Footer.css';
 
 const Footer = () => {
   const context = useContext(Context);
-  const { getReferrer, theme } = context;
+  const { theme } = context;
+  const intl = useIntl();
 
   return (
     <footer>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: theme.midBlueColor }} square={true}>
         <div className="footer-content-container">
           <div>
-            <img src={getReferrer('logoSource')} alt={getReferrer('logoAlt')} className="logo footer-logo" />
+            <img
+              src={MFBLogo}
+              alt={intl.formatMessage({ id: 'footer.logo.alt', defaultMessage: 'MFB Logo' })}
+              className="logo footer-logo"
+            />
             <p className="white-font">1705 17th St.</p>
             <p className="white-font">Suite 200</p>
             <p className="white-font">Denver, CO 80202</p>
