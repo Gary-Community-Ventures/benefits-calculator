@@ -1,7 +1,5 @@
 import {
-  Card,
   CardContent,
-  CardActions,
   Button,
   Typography,
   FormControlLabel,
@@ -78,18 +76,18 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
     switch (locale) {
       case 'es':
         return {
-          privacyPolicyLink: 'https://www.myfriendben.org/es/data-privacy-policy',
-          addTermsConsentToContact: 'https://www.myfriendben.org/es/additional-terms-and-consent-to-contact',
+          privacyPolicyLink: 'https://co.myfriendben.org/es/data-privacy-policy',
+          addTermsConsentToContact: 'https://co.myfriendben.org/es/additional-terms-and-consent-to-contact',
         };
       case 'vi':
         return {
-          privacyPolicyLink: 'https://www.myfriendben.org/vi/data-privacy-policy',
-          addTermsConsentToContact: 'https://www.myfriendben.org/vi/additional-terms-and-consent-to-contact',
+          privacyPolicyLink: 'https://co.myfriendben.org/vi/data-privacy-policy',
+          addTermsConsentToContact: 'https://co.myfriendben.org/vi/additional-terms-and-consent-to-contact',
         };
       case 'fr':
         return {
-          privacyPolicyLink: 'https://www.myfriendben.org/fr/data-privacy-policy',
-          addTermsConsentToContact: 'https://www.myfriendben.org/fr/additional-terms-and-consent-to-contact',
+          privacyPolicyLink: 'https://co.myfriendben.org/fr/data-privacy-policy',
+          addTermsConsentToContact: 'https://co.myfriendben.org/fr/additional-terms-and-consent-to-contact',
         };
       default:
         return {
