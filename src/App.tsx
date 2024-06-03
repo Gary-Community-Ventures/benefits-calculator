@@ -23,7 +23,7 @@ import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
 import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
 import { isCustomTypedLocationState } from './Types/FormData.ts';
-import CurrentCOBenefits from './Components/CurrentCOBenefits/CurrentCOBenefits.tsx';
+import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits.tsx';
 import './App.css';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
@@ -305,7 +305,7 @@ const App = () => {
           </Routes>
           <Routes>
             <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
-            <Route path='/colorado-benefits' element={<CurrentCOBenefits />}/>
+            <Route path='/current-benefits' element={<CurrentBenefits />}/>
             <Route path="/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
             <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
             <Route path="/step-1" element={<SelectLanguagePage />} />
