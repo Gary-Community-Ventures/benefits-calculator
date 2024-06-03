@@ -21,17 +21,15 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   const context = useContext(Context);
   const locale = context.locale.toLowerCase();
   const { formData, setFormData } = context;
-  let privacyLink =
-    'https://20208592.hs-sites.com/en/data-privacy-policy?__hstc=144746475.066f707c0b490f88f5429b1856cf0908.1663037963489.1663086538117.1663095192641.3&__hssc=144746475.1.1663095192641&__hsfp=2418539872';
-
-  const consentToContactLink = 'https://www.myfriendben.org/en/additional-terms-and-consent-to-contact';
+  let privacyLink = 'https://co.myfriendben.org/en/data-privacy-policy';
+  const consentToContactLink = 'https://co.myfriendben.org/en/additional-terms-and-consent-to-contact';
 
   if (locale === 'es') {
-    privacyLink = 'https://20208592.hs-sites.com/es/data-privacy-policy';
+    privacyLink = 'https://co.myfriendben.org/es/data-privacy-policy';
   } else if (locale === 'vi') {
-    privacyLink = 'https://www.myfriendben.org/vi/data-privacy-policy';
+    privacyLink = 'https://co.myfriendben.org/vi/data-privacy-policy';
   } else if (locale === 'fr') {
-    privacyLink = 'https://www.myfriendben.org/fr/data-privacy-policy';
+    privacyLink = 'https://co.myfriendben.org/fr/data-privacy-policy';
   }
 
   const firstNameErrorController = useErrorController(nameHasError, displayFirstNameHelperText);
