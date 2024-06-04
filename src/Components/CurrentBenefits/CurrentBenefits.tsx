@@ -48,6 +48,40 @@ const CurrentCOBenefits = () => {
       </div>
     );
   };
+
+  const displayProgramsByCategory = (programs: Program[], groupProgramsIntoCategories: () => void) => {
+    const programsSortedByCategories = groupProgramsIntoCategories(programs);
+
+    const categoryHeaderIconAndPrograms = Object.entries(programsSortedByCategories).map((entry, index) => {
+      const categoryPrograms = entry[1].programs;
+
+      const IconComponent = headingOptionsMappings[entry[0]];
+      return (
+        <div key={index} className='bottom-margin'>
+          <div className="category-heading-column">
+            <div
+              className="category-heading-icon"
+              aria-label={`${intl.formatMessage({id: entry[1].name.label })}`}
+              role="img"
+            >
+              <IconComponent />
+            </div>
+            <h2 className="category-heading-text-style">
+              <ResultsTranslate translation={entry[1].name} />
+            </h2>
+          </div>
+
+          <div className='programs-container'>
+            {categoryPrograms.map((program:Program, index:number) => {
+                return displayProgramSection(program, index);
+              })
+            }
+          </div>
+        </div>
+      );
+    });
+
+    return (<div>{categoryHeaderIconAndPrograms}</div>);
   };
 
   return (
@@ -61,10 +95,8 @@ const CurrentCOBenefits = () => {
       <h2 className="sub-header blue">
         <FormattedMessage id="currentCOBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
       </h2>
-      {allPrograms.map((program, index) => {
-        return renderProgram(program, index);
-      })}
-      <h2 className="sub-header blue">
+      {allPrograms.length && displayProgramsByCategory(allPrograms, groupProgramsIntoCategories)}
+      <h2 className="sub-header blue-header">
         <FormattedMessage id="currentCOBenefits.near-term-benefits" defaultMessage="NEAR-TERM BENEFITS" />
       </h2>
     </div>
