@@ -1,12 +1,4 @@
-import {
-  CardContent,
-  Button,
-  Typography,
-  FormControlLabel,
-  Checkbox,
-  Box,
-  Link,
-} from '@mui/material';
+import { CardContent, Button, Typography, FormControlLabel, Checkbox, Box, Link } from '@mui/material';
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
