@@ -11,6 +11,11 @@ type Program = {
   id: number;
 };
 
+type Category = {
+  name: string;
+  programs: Program[];
+}
+
 const CurrentCOBenefits = () => {
   const [allPrograms, setAllPrograms] = useState<Program[]>([]);
 
