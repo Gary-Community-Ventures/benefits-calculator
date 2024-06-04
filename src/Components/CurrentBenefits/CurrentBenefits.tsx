@@ -1,7 +1,15 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useState, useEffect } from 'react';
 import { getAllPrograms } from '../../apiCalls';
 import { Translation } from '../../Types/Results';
+import ResultsTranslate from '../Results/Translate/Translate';
+import { ReactComponent as Food } from '../../Assets/CategoryHeadingIcons/food.svg';
+import { ReactComponent as Housing } from '../../Assets/CategoryHeadingIcons/housing.svg';
+import { ReactComponent as HealthCare } from '../../Assets/CategoryHeadingIcons/healthcare.svg';
+import { ReactComponent as Transportation } from '../../Assets/CategoryHeadingIcons/transportation.svg';
+import { ReactComponent as TaxCredits } from '../../Assets/CategoryHeadingIcons/taxCredits.svg';
+import { ReactComponent as CashAssistance } from '../../Assets/CategoryHeadingIcons/cashAssistant.svg';
+import { ReactComponent as ChildCareYouthEducation } from '../../Assets/CategoryHeadingIcons/childCareYouthEducation.svg';
 import './CurrentBenefits.css';
 
 export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
@@ -28,6 +36,7 @@ type Category = {
 
 const CurrentCOBenefits = () => {
   const [allPrograms, setAllPrograms] = useState<Program[]>([]);
+  const intl = useIntl();
 
   useEffect(() => {
     getAllPrograms().then((response) => {
@@ -107,7 +116,7 @@ const CurrentCOBenefits = () => {
           defaultMessage="Government Benefits, Nonprofit Programs and Tax Credits in MyFriendBen"
         />
       </h1>
-      <h2 className="sub-header blue">
+      <h2 className="sub-header blue-header">
         <FormattedMessage id="currentCOBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
       </h2>
       {allPrograms.length && displayProgramsByCategory(allPrograms, groupProgramsIntoCategories)}

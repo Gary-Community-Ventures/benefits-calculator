@@ -2,6 +2,19 @@
   margin: 1rem;
 }
 
-.sub-header.blue {
-  color: var(--primary-color)
+.sub-header.blue-header {
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.current-benefits-program-name {
+  padding: 0;
+  color: var(--primary-color);
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.bottom-margin {
+  margin-bottom: 1rem;
 }
