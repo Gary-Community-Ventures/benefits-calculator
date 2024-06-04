@@ -171,10 +171,7 @@ function transformConfigData(configData: ConfigApiResponse[]): Config {
 
   configData.forEach((item) => {
     const { name, data } = item;
-    let configOptions = data;
-
-    // Parses json string to object
-    if (typeof configOptions === 'string' && isValidJson(configOptions)) configOptions = JSON.parse(configOptions);
+    const configOptions = data;
 
     transformedConfig[name] = transformItem(configOptions);
   });
