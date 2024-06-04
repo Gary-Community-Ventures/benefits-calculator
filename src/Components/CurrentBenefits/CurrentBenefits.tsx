@@ -20,8 +20,21 @@ const CurrentCOBenefits = () => {
     });
   }, []);
 
-  const renderProgram = (program: Program, index: number) => {
-    return <div key={index}>{program.name.default_message}</div>;
+  const groupProgramsIntoCategories = (programs: Program[]): Program => {
+    const programsGroupedByCategory = programs.reduce((acc: Category[], program) => {
+      const categoryName = program.category.default_message;
+
+      if (!acc[categoryName]) {
+        acc[categoryName] = { name: program.category, programs: [] };
+      }
+
+      acc[categoryName].programs.push(program);
+
+      return acc;
+    }, {});
+
+    return programsGroupedByCategory;
+  };
   };
 
   return (
