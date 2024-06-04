@@ -35,6 +35,19 @@ const CurrentCOBenefits = () => {
 
     return programsGroupedByCategory;
   };
+
+  const displayProgramSection = (program: Program, index: number) => {
+    return (
+      <div className="bottom-margin" key={index}>
+        <p className="current-benefits-program-name">
+          {program.name.default_message}
+        </p>
+        <p>
+          {<ResultsTranslate translation={program.website_description} />}
+        </p>
+      </div>
+    );
+  };
   };
 
   return (
