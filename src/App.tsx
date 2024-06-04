@@ -290,7 +290,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <div className="app">
         <CssBaseline />
         <BrandedHeader />
         <Box className="main-max-width">
@@ -362,11 +362,9 @@ const App = () => {
             </Route>
             <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
           </Routes>
-          <div className="push"></div>
         </Box>
-
-        <BrandedFooter />
       </div>
+      <BrandedFooter />
     </ThemeProvider>
   );
 };

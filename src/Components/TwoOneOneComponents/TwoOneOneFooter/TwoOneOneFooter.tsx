@@ -180,7 +180,7 @@ const TwoOneOneFooter = () => {
             &nbsp;
           </Link>
           <Link
-            href="https://www.myfriendben.org/en/data-privacy-policy"
+            href="https://co.myfriendben.org/en/data-privacy-policy"
             underline="none"
             target="_blank"
             aria-label={intl.formatMessage(twoOneOneTOSALProps)}
@@ -195,12 +195,7 @@ const TwoOneOneFooter = () => {
 
   return (
     <footer>
-      <Paper
-        elevation={0}
-        sx={{ width: '100%', backgroundColor: '#efefef', marginTop: '7rem' }}
-        className="paper-container"
-        square={true}
-      >
+      <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef' }} className="paper-container" square={true}>
         <Box className="twoOneOne-font flexIntoRow getHelp-text">
           <FormattedMessage
             id="footer-header"

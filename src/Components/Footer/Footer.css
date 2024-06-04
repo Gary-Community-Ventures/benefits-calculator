@@ -3,3 +3,64 @@
   height: 5rem;
   background-color: var(--midBlue-color);
 }
+
+.footer-content-container {
+  margin: auto;
+  max-width: var(--main-max-width);
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.white-font {
+  color: #ffffff;
+}
+
+.italicized {
+  font-style: italic;
+}
+
+.bottom-top-margin {
+  margin: 1rem 0;
+}
+
+.footer-link {
+  text-decoration: none;
+}
+
+.share-container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.footer-policy-container {
+  display: flex;
+  justify-content: center;
+}
+
+.policy-link {
+  text-decoration: none;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 700px) {
+  .footer-content-container {
+    flex-direction: column;
+    padding-bottom: 1rem;
+  }
+
+  .share-container {
+    margin-top: 0.5rem;
+  }
+
+  .footer-policy-container {
+    justify-content: flex-start;
+    padding-left: 1rem;
+  }
+}

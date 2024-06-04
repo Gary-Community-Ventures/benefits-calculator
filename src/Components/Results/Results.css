@@ -1,5 +1,5 @@
 .results-loading-container {
-  height: 80vh;
+  flex: 1;
 }
 
 .results-tab-container {
