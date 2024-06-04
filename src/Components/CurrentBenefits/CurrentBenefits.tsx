@@ -4,6 +4,16 @@ import { getAllPrograms } from '../../apiCalls';
 import { Translation } from '../../Types/Results';
 import './CurrentBenefits.css';
 
+export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
+  'Housing and Utilities': Housing,
+  'Food and Nutrition': Food,
+  'Health Care': HealthCare,
+  Transportation: Transportation,
+  'Tax Credits': TaxCredits,
+  'Cash Assistance': CashAssistance,
+  'Child Care, Youth, and Education': ChildCareYouthEducation,
+};
+
 type Program = {
   name: Translation;
   website_description: Translation;
