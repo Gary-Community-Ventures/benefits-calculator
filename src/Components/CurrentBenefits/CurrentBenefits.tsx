@@ -68,12 +68,12 @@ const CurrentCOBenefits = () => {
     });
   }, []);
 
-  const groupProgramsIntoCategories = (programs: Program[]): Program => {
+  const groupProgramsIntoCategories = (programs: Program[], typeOrCategoryField: 'type' | 'category'): Program => {
     const programsGroupedByCategory = programs.reduce((acc: Category[], program) => {
-      const categoryName = program.category.default_message;
+      const categoryName = program[typeOrCategoryField].default_message;
 
       if (!acc[categoryName]) {
-        acc[categoryName] = { name: program.category, programs: [] };
+        acc[categoryName] = { name: program[typeOrCategoryField], programs: [] };
       }
 
       acc[categoryName].programs.push(program);
