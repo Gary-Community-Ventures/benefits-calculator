@@ -27,3 +27,17 @@
 .header-and-programs-container {
   margin: 3rem 0;
 }
+
+@media (max-width: 700px) {
+  .co-benefits-container {
+    font-size: 1rem;
+  }
+  .co-benefits-header {
+    margin-top: 2rem;
+  }
+
+  .sub-header.long-near-term-header {
+    display: flex;
+    margin-bottom: 2rem;
+  }
+}
