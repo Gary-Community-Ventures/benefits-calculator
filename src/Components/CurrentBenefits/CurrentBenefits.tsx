@@ -21,7 +21,7 @@ import { ReactComponent as DentalCare } from '../../Assets/OptionCardIcons/Acute
 import { ReactComponent as LegalServices } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
 import './CurrentBenefits.css';
 
-export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
+export const iconCategoryMap: { [key: string]: React.ComponentType } = {
   'Housing and Utilities': Housing,
   'Food and Nutrition': Food,
   'Health Care': HealthCare,
@@ -29,6 +29,16 @@ export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   'Tax Credits': TaxCredits,
   'Cash Assistance': CashAssistance,
   'Child Care, Youth, and Education': ChildCareYouthEducation,
+  'Food or Groceries': FoodOrGroceries,
+  'Diapers': BabySupplies,
+  'Housing': Housing,
+  'Managing housing costs': ManagingHousingCosts,
+  'Behavioral health': BehavioralHealth,
+  "Child's development": ChildDevelopment,
+  'Family planning': FamilyPlanning,
+  'Job training': JobResources,
+  'Low-cost dental care': DentalCare,
+  'Civil legal needs': LegalServices,
 };
 
 type Program = {
