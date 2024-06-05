@@ -21,7 +21,52 @@ import { ReactComponent as DentalCare } from '../../Assets/OptionCardIcons/Acute
 import { ReactComponent as LegalServices } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
 import './CurrentBenefits.css';
 
-export const iconCategoryMap: { [key: string]: React.ComponentType } = {
+type CategoryName =
+  'Housing and Utilities' |
+  'Food and Nutrition' |
+  'Health Care' |
+  'Transportation' |
+  'Tax Credits' |
+  'Cash Assistance' |
+  'Child Care, Youth, and Education' |
+  'Food or Groceries' |
+  'Diapers' |
+  'Housing' |
+  'Managing housing costs' |
+  'Behavioral health' |
+  "Child's development" |
+  'Family planning' |
+  'Job training' |
+  'Low-cost dental care' |
+  'Civil legal needs';
+
+const isCategoryName = (maybeCategoryName: string | undefined): maybeCategoryName is CategoryName => {
+  if (!maybeCategoryName) {
+    return false;
+  }
+
+  return [
+    'Housing and Utilities',
+    'Food and Nutrition',
+    'Health Care',
+    'Transportation',
+    'Tax Credits',
+    'Cash Assistance',
+    'Child Care, Youth, and Education',
+    'Food or Groceries',
+    'Diapers',
+    'Housing',
+    'Managing housing costs',
+    'Behavioral health',
+    "Child's development",
+    'Family planning',
+    'Job training',
+    'Low-cost dental care',
+    'Civil legal needs',
+  ].includes(maybeCategoryName);
+};
+
+export const iconCategoryMap: Record<CategoryName, React.ComponentType> = {
   'Housing and Utilities': Housing,
   'Food and Nutrition': Food,
   'Health Care': HealthCare,
@@ -44,12 +89,13 @@ export const iconCategoryMap: { [key: string]: React.ComponentType } = {
 type Program = {
   name: Translation;
   website_description: Translation;
-  category: Translation;
+  category?: Translation;
   id: number;
+  type?: Translation;
 };
 
 type Category = {
-  name: string;
+  name: Translation;
   programs: Program[];
 };
 
