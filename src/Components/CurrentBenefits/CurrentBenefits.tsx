@@ -114,18 +114,31 @@ const CurrentCOBenefits = () => {
     });
   }, []);
 
-  const groupProgramsIntoCategories = (programs: Program[], typeOrCategoryField: 'type' | 'category'): Program => {
-    const programsGroupedByCategory = programs.reduce((acc: Category[], program) => {
-      const categoryName = program[typeOrCategoryField].default_message;
+  const groupProgramsIntoCategories = (
+    programs: Program[],
+    typeOrCategoryField: 'type' | 'category',
+  ): Record<CategoryName, Category> => {
+    //this actually returns an object with category name
+    const programsGroupedByCategory = programs.reduce((acc, program) => {
+      const programTypeOrCategory = program[typeOrCategoryField];
+      if (!programTypeOrCategory) {
+        throw new Error(`program.${typeOrCategoryField} is undefined`);
+      }
+
+      const categoryName = programTypeOrCategory.default_message;
+
+      if (!isCategoryName(categoryName)) {
+        throw new Error(`CategoryName ${categoryName} is invalid`);
+      }
 
       if (!acc[categoryName]) {
-        acc[categoryName] = { name: program[typeOrCategoryField], programs: [] };
+        acc[categoryName] = { name: programTypeOrCategory, programs: [] };
       }
 
       acc[categoryName].programs.push(program);
 
       return acc;
-    }, {});
+    }, {} as Record<CategoryName, Category>);
 
     return programsGroupedByCategory;
   };
