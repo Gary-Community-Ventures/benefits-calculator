@@ -138,24 +138,26 @@ const CurrentCOBenefits = () => {
     return <div>{categoryHeaderIconAndPrograms}</div>;
   };
 
-  return (
-    <div className="co-benefits-container">
-      <h1 className="sub-header">
-        <FormattedMessage
-          id="currentCOBenefits.pg-header"
-          defaultMessage="Government Benefits, Nonprofit Programs and Tax Credits in MyFriendBen"
-        />
-      </h1>
-      <h2 className="sub-header blue-header">
-        <FormattedMessage id="currentCOBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
-      </h2>
-      {allLongTermPrograms.length && displayProgramsByCategory(allLongTermPrograms, 'category', groupProgramsIntoCategories)}
-      <h2 className="sub-header blue-header">
-        <FormattedMessage id="currentCOBenefits.near-term-benefits" defaultMessage="NEAR-TERM BENEFITS" />
-      </h2>
-      {allNearTermPrograms.length && displayProgramsByCategory(allNearTermPrograms, 'type', groupProgramsIntoCategories)}
-    </div>
-  );
+  if (allLongTermPrograms.length && allNearTermPrograms.length) {
+    return (
+      <main className="co-benefits-container">
+        <h1 className="sub-header">
+          <FormattedMessage
+            id="currentCOBenefits.pg-header"
+            defaultMessage="Government Benefits, Nonprofit Programs and Tax Credits in MyFriendBen"
+          />
+        </h1>
+        <h2 className="sub-header blue-header">
+          <FormattedMessage id="currentCOBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
+        </h2>
+        {displayProgramsByCategory(allLongTermPrograms, 'category', groupProgramsIntoCategories)}
+        <h2 className="sub-header blue-header">
+          <FormattedMessage id="currentCOBenefits.near-term-benefits" defaultMessage="NEAR-TERM BENEFITS" />
+        </h2>
+        {displayProgramsByCategory(allNearTermPrograms, 'type', groupProgramsIntoCategories)}
+      </main>
+    );
+  }
 };
 
 export default CurrentCOBenefits;
