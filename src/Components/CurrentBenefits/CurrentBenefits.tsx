@@ -155,13 +155,15 @@ const CurrentCOBenefits = () => {
   const displayProgramsByCategory = (
     programs: Program[],
     typeOrCategoryField: 'type' | 'category',
-    groupProgramsIntoCategories: (programs: Program[]) => Program,
+    groupProgramsIntoCategories: (programs: Program[], typeOrCategoryField: 'type' | 'category') => Record<CategoryName, Category>,
   ) => {
     const programsSortedByCategories = groupProgramsIntoCategories(programs, typeOrCategoryField);
 
-    const categoryHeaderIconAndPrograms = Object.entries(programsSortedByCategories).map((entry, index) => {
-      const categoryPrograms = entry[1].programs;
-      const CategoryIcon = iconCategoryMap[entry[0]];
+    const categoryHeaderIconAndPrograms = Object.keys(programsSortedByCategories).map((key: string, index) => {
+      const categoryName = key as CategoryName;
+      const category = programsSortedByCategories[categoryName];
+      const { name, programs } = category;
+      const CategoryIcon = iconCategoryMap[categoryName];
 
       return (
         <div key={index} className="category-section-container">
@@ -169,19 +171,19 @@ const CurrentCOBenefits = () => {
             <div
               className="category-heading-icon"
               aria-label={intl.formatMessage({
-                id: entry[1].name.label,
-                defaultMessage: entry[1].name.default_message,
+                id: name.label,
+                defaultMessage: name.default_message,
               })}
               role="img"
             >
               <CategoryIcon />
             </div>
             <h2 className="category-heading-text-style">
-              <ResultsTranslate translation={entry[1].name} />
+              <ResultsTranslate translation={name} />
             </h2>
           </div>
           <div className="programs-container">
-            {categoryPrograms.map((program: Program, index: number) => {
+            {programs.map((program: Program, index: number) => {
               return displayProgramSection(program, index);
             })}
           </div>
