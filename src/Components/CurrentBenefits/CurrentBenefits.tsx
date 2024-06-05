@@ -22,23 +22,23 @@ import { ReactComponent as LegalServices } from '../../Assets/OptionCardIcons/Ac
 import './CurrentBenefits.css';
 
 type CategoryName =
-  'Housing and Utilities' |
-  'Food and Nutrition' |
-  'Health Care' |
-  'Transportation' |
-  'Tax Credits' |
-  'Cash Assistance' |
-  'Child Care, Youth, and Education' |
-  'Food or Groceries' |
-  'Diapers' |
-  'Housing' |
-  'Managing housing costs' |
-  'Behavioral health' |
-  "Child's development" |
-  'Family planning' |
-  'Job training' |
-  'Low-cost dental care' |
-  'Civil legal needs';
+  | 'Housing and Utilities'
+  | 'Food and Nutrition'
+  | 'Health Care'
+  | 'Transportation'
+  | 'Tax Credits'
+  | 'Cash Assistance'
+  | 'Child Care, Youth, and Education'
+  | 'Food or Groceries'
+  | 'Diapers'
+  | 'Housing'
+  | 'Managing housing costs'
+  | 'Behavioral health'
+  | "Child's development"
+  | 'Family planning'
+  | 'Job training'
+  | 'Low-cost dental care'
+  | 'Civil legal needs';
 
 const isCategoryName = (maybeCategoryName: string | undefined): maybeCategoryName is CategoryName => {
   if (!maybeCategoryName) {
@@ -155,7 +155,10 @@ const CurrentCOBenefits = () => {
   const displayProgramsByCategory = (
     programs: Program[],
     typeOrCategoryField: 'type' | 'category',
-    groupProgramsIntoCategories: (programs: Program[], typeOrCategoryField: 'type' | 'category') => Record<CategoryName, Category>,
+    groupProgramsIntoCategories: (
+      programs: Program[],
+      typeOrCategoryField: 'type' | 'category',
+    ) => Record<CategoryName, Category>,
   ) => {
     const programsSortedByCategories = groupProgramsIntoCategories(programs, typeOrCategoryField);
 
