@@ -97,39 +97,45 @@ const CurrentCOBenefits = () => {
     );
   };
 
-  const displayProgramsByCategory = (programs: Program[], groupProgramsIntoCategories: () => void) => {
-    const programsSortedByCategories = groupProgramsIntoCategories(programs);
+  const displayProgramsByCategory = (
+    programs: Program[],
+    typeOrCategoryField: 'type' | 'category',
+    groupProgramsIntoCategories: (programs: Program[]) => Program,
+  ) => {
+    const programsSortedByCategories = groupProgramsIntoCategories(programs, typeOrCategoryField);
+
 
     const categoryHeaderIconAndPrograms = Object.entries(programsSortedByCategories).map((entry, index) => {
       const categoryPrograms = entry[1].programs;
+      const CategoryIcon = iconCategoryMap[entry[0]];
 
-      const IconComponent = headingOptionsMappings[entry[0]];
-      return (
-        <div key={index} className='bottom-margin'>
-          <div className="category-heading-column">
-            <div
-              className="category-heading-icon"
-              aria-label={`${intl.formatMessage({id: entry[1].name.label })}`}
-              role="img"
-            >
-              <IconComponent />
+        return (
+          <div key={index} className="bottom-margin">
+            <div className="category-heading-column">
+              <div
+                className="category-heading-icon"
+                aria-label={intl.formatMessage({
+                  id: entry[1].name.label,
+                  defaultMessage: entry[1].name.default_message,
+                })}
+                role="img"
+              >
+                <CategoryIcon />
+              </div>
+              <h2 className="category-heading-text-style">
+                <ResultsTranslate translation={entry[1].name} />
+              </h2>
             </div>
-            <h2 className="category-heading-text-style">
-              <ResultsTranslate translation={entry[1].name} />
-            </h2>
-          </div>
-
-          <div className='programs-container'>
-            {categoryPrograms.map((program:Program, index:number) => {
+            <div className="programs-container">
+              {categoryPrograms.map((program: Program, index: number) => {
                 return displayProgramSection(program, index);
-              })
-            }
+              })}
+            </div>
           </div>
-        </div>
-      );
+        );
     });
 
-    return (<div>{categoryHeaderIconAndPrograms}</div>);
+    return <div>{categoryHeaderIconAndPrograms}</div>;
   };
 
   return (
