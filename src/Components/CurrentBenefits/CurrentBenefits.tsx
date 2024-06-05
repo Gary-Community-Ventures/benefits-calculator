@@ -10,6 +10,15 @@ import { ReactComponent as Transportation } from '../../Assets/CategoryHeadingIc
 import { ReactComponent as TaxCredits } from '../../Assets/CategoryHeadingIcons/taxCredits.svg';
 import { ReactComponent as CashAssistance } from '../../Assets/CategoryHeadingIcons/cashAssistant.svg';
 import { ReactComponent as ChildCareYouthEducation } from '../../Assets/CategoryHeadingIcons/childCareYouthEducation.svg';
+import { ReactComponent as FoodOrGroceries } from '../../Assets/OptionCardIcons/AcuteConditions/food.svg';
+import { ReactComponent as BabySupplies } from '../../Assets/OptionCardIcons/AcuteConditions/baby_supplies.svg';
+import { ReactComponent as ManagingHousingCosts } from '../../Assets/OptionCardIcons/AcuteConditions/housing.svg';
+import { ReactComponent as BehavioralHealth } from '../../Assets/OptionCardIcons/AcuteConditions/support.svg';
+import { ReactComponent as ChildDevelopment } from '../../Assets/OptionCardIcons/AcuteConditions/child_development.svg';
+import { ReactComponent as FamilyPlanning } from '../../Assets/OptionCardIcons/AcuteConditions/family_planning.svg';
+import { ReactComponent as JobResources } from '../../Assets/OptionCardIcons/AcuteConditions/job_resources.svg';
+import { ReactComponent as DentalCare } from '../../Assets/OptionCardIcons/AcuteConditions/dental_care.svg';
+import { ReactComponent as LegalServices } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
 import './CurrentBenefits.css';
 
 export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
