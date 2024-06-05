@@ -87,7 +87,7 @@ const CurrentCOBenefits = () => {
   const displayProgramSection = (program: Program, index: number) => {
     return (
       <div className="bottom-margin" key={index}>
-        <p className="current-benefits-program-name">
+        <p className="program-name">
           {program.name.default_message}
         </p>
         <p>
@@ -110,7 +110,7 @@ const CurrentCOBenefits = () => {
       const CategoryIcon = iconCategoryMap[entry[0]];
 
         return (
-          <div key={index} className="bottom-margin">
+          <div key={index} className="category-section-container">
             <div className="category-heading-column">
               <div
                 className="category-heading-icon"
@@ -141,20 +141,24 @@ const CurrentCOBenefits = () => {
   if (allLongTermPrograms.length && allNearTermPrograms.length) {
     return (
       <main className="co-benefits-container">
-        <h1 className="sub-header">
+        <h1 className="sub-header co-benefits-header">
           <FormattedMessage
             id="currentCOBenefits.pg-header"
             defaultMessage="Government Benefits, Nonprofit Programs and Tax Credits in MyFriendBen"
           />
         </h1>
-        <h2 className="sub-header blue-header">
-          <FormattedMessage id="currentCOBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
-        </h2>
-        {displayProgramsByCategory(allLongTermPrograms, 'category', groupProgramsIntoCategories)}
-        <h2 className="sub-header blue-header">
-          <FormattedMessage id="currentCOBenefits.near-term-benefits" defaultMessage="NEAR-TERM BENEFITS" />
-        </h2>
-        {displayProgramsByCategory(allNearTermPrograms, 'type', groupProgramsIntoCategories)}
+        <div className='header-and-programs-container'>
+          <h2 className="sub-header long-near-term-header">
+            <FormattedMessage id="currentCOBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
+          </h2>
+          {displayProgramsByCategory(allLongTermPrograms, 'category', groupProgramsIntoCategories)}
+        </div>
+        <div className='header-and-programs-container'>
+          <h2 className="sub-header long-near-term-header">
+            <FormattedMessage id="currentCOBenefits.near-term-benefits" defaultMessage="NEAR-TERM BENEFITS" />
+          </h2>
+          {displayProgramsByCategory(allNearTermPrograms, 'type', groupProgramsIntoCategories)}
+        </div>
       </main>
     );
   }
