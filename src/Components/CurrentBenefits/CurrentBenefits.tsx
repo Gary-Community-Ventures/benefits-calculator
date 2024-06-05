@@ -1,6 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useState, useEffect } from 'react';
-import { getAllPrograms } from '../../apiCalls';
+import { getAllLongTermPrograms, getAllNearTermPrograms } from '../../apiCalls';
 import { Translation } from '../../Types/Results';
 import ResultsTranslate from '../Results/Translate/Translate';
 import { ReactComponent as Food } from '../../Assets/CategoryHeadingIcons/food.svg';
@@ -149,10 +149,11 @@ const CurrentCOBenefits = () => {
       <h2 className="sub-header blue-header">
         <FormattedMessage id="currentCOBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
       </h2>
-      {allPrograms.length && displayProgramsByCategory(allPrograms, groupProgramsIntoCategories)}
+      {allLongTermPrograms.length && displayProgramsByCategory(allLongTermPrograms, 'category', groupProgramsIntoCategories)}
       <h2 className="sub-header blue-header">
         <FormattedMessage id="currentCOBenefits.near-term-benefits" defaultMessage="NEAR-TERM BENEFITS" />
       </h2>
+      {allNearTermPrograms.length && displayProgramsByCategory(allNearTermPrograms, 'type', groupProgramsIntoCategories)}
     </div>
   );
 };
