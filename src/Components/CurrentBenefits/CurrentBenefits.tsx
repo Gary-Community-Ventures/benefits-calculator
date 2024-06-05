@@ -54,12 +54,17 @@ type Category = {
 }
 
 const CurrentCOBenefits = () => {
-  const [allPrograms, setAllPrograms] = useState<Program[]>([]);
+  const [allLongTermPrograms, setAllLongTermPrograms] = useState<Program[]>([]);
+  const [allNearTermPrograms, setAllNearTermPrograms] = useState<Program[]>([]);
   const intl = useIntl();
 
   useEffect(() => {
-    getAllPrograms().then((response) => {
-      setAllPrograms(response);
+    getAllLongTermPrograms().then((response) => {
+      setAllLongTermPrograms(response);
+    });
+
+    getAllNearTermPrograms().then((response) => {
+      setAllNearTermPrograms(response);
     });
   }, []);
 
