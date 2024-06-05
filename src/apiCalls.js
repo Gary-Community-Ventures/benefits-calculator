@@ -130,7 +130,7 @@ const getAllLongTermPrograms = async () => {
     throw new Error(`${response.status} ${response.statusText}`);
   }
   return await response.json();
-}
+};
 
 const getAllNearTermPrograms = async () => {
   const response = await fetch(apiUrgentNeedsEndpoint, {
@@ -141,7 +141,7 @@ const getAllNearTermPrograms = async () => {
     throw new Error(`${response.status} ${response.statusText}`);
   }
   return await response.json();
-}
+};
 
 export {
   getTranslations,

@@ -30,8 +30,8 @@ export const iconCategoryMap: { [key: string]: React.ComponentType } = {
   'Cash Assistance': CashAssistance,
   'Child Care, Youth, and Education': ChildCareYouthEducation,
   'Food or Groceries': FoodOrGroceries,
-  'Diapers': BabySupplies,
-  'Housing': Housing,
+  Diapers: BabySupplies,
+  Housing: Housing,
   'Managing housing costs': ManagingHousingCosts,
   'Behavioral health': BehavioralHealth,
   "Child's development": ChildDevelopment,
@@ -51,7 +51,7 @@ type Program = {
 type Category = {
   name: string;
   programs: Program[];
-}
+};
 
 const CurrentCOBenefits = () => {
   const [allLongTermPrograms, setAllLongTermPrograms] = useState<Program[]>([]);
@@ -87,12 +87,8 @@ const CurrentCOBenefits = () => {
   const displayProgramSection = (program: Program, index: number) => {
     return (
       <div className="bottom-margin" key={index}>
-        <p className="program-name">
-          {program.name.default_message}
-        </p>
-        <p>
-          {<ResultsTranslate translation={program.website_description} />}
-        </p>
+        <p className="program-name">{program.name.default_message}</p>
+        <p>{<ResultsTranslate translation={program.website_description} />}</p>
       </div>
     );
   };
@@ -104,35 +100,34 @@ const CurrentCOBenefits = () => {
   ) => {
     const programsSortedByCategories = groupProgramsIntoCategories(programs, typeOrCategoryField);
 
-
     const categoryHeaderIconAndPrograms = Object.entries(programsSortedByCategories).map((entry, index) => {
       const categoryPrograms = entry[1].programs;
       const CategoryIcon = iconCategoryMap[entry[0]];
 
-        return (
-          <div key={index} className="category-section-container">
-            <div className="category-heading-column">
-              <div
-                className="category-heading-icon"
-                aria-label={intl.formatMessage({
-                  id: entry[1].name.label,
-                  defaultMessage: entry[1].name.default_message,
-                })}
-                role="img"
-              >
-                <CategoryIcon />
-              </div>
-              <h2 className="category-heading-text-style">
-                <ResultsTranslate translation={entry[1].name} />
-              </h2>
-            </div>
-            <div className="programs-container">
-              {categoryPrograms.map((program: Program, index: number) => {
-                return displayProgramSection(program, index);
+      return (
+        <div key={index} className="category-section-container">
+          <div className="category-heading-column">
+            <div
+              className="category-heading-icon"
+              aria-label={intl.formatMessage({
+                id: entry[1].name.label,
+                defaultMessage: entry[1].name.default_message,
               })}
+              role="img"
+            >
+              <CategoryIcon />
             </div>
+            <h2 className="category-heading-text-style">
+              <ResultsTranslate translation={entry[1].name} />
+            </h2>
           </div>
-        );
+          <div className="programs-container">
+            {categoryPrograms.map((program: Program, index: number) => {
+              return displayProgramSection(program, index);
+            })}
+          </div>
+        </div>
+      );
     });
 
     return <div>{categoryHeaderIconAndPrograms}</div>;
@@ -147,13 +142,13 @@ const CurrentCOBenefits = () => {
             defaultMessage="Government Benefits, Nonprofit Programs and Tax Credits in MyFriendBen"
           />
         </h1>
-        <div className='header-and-programs-container'>
+        <div className="header-and-programs-container">
           <h2 className="sub-header long-near-term-header">
             <FormattedMessage id="currentCOBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
           </h2>
           {displayProgramsByCategory(allLongTermPrograms, 'category', groupProgramsIntoCategories)}
         </div>
-        <div className='header-and-programs-container'>
+        <div className="header-and-programs-container">
           <h2 className="sub-header long-near-term-header">
             <FormattedMessage id="currentCOBenefits.near-term-benefits" defaultMessage="NEAR-TERM BENEFITS" />
           </h2>
