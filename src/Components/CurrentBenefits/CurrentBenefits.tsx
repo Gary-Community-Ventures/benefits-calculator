@@ -19,6 +19,7 @@ import { ReactComponent as FamilyPlanning } from '../../Assets/OptionCardIcons/A
 import { ReactComponent as JobResources } from '../../Assets/OptionCardIcons/AcuteConditions/job_resources.svg';
 import { ReactComponent as DentalCare } from '../../Assets/OptionCardIcons/AcuteConditions/dental_care.svg';
 import { ReactComponent as LegalServices } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
+import LoadingPage from '../LoadingPage/LoadingPage';
 import './CurrentBenefits.css';
 
 type CategoryName =
@@ -207,7 +208,7 @@ const CurrentCOBenefits = () => {
           />
         </h1>
         <div className="header-and-programs-container">
-          <h2 className="sub-header long-near-term-header">
+          <h2 className="long-near-term-header">
             <FormattedMessage id="currentCOBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
             {` (${allLongTermPrograms.length})`}
           </h2>
@@ -222,6 +223,8 @@ const CurrentCOBenefits = () => {
         </div>
       </main>
     );
+  } else {
+    return <LoadingPage />;
   }
 };
 
