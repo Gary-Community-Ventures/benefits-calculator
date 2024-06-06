@@ -49,7 +49,7 @@ const referrerData: ReferrerData = {
     lgs: "Let's Get Set home page button",
     gac: 'Get Ahead Colorado home page button',
     fircsummitresourcecenter: 'Firc Summit Resource Center',
-    coBenefits: 'MyFriendBen home page button'
+    coBenefits: 'MyFriendBen home page button',
   },
   logoClass: {
     default: 'logo',
