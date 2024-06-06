@@ -100,7 +100,7 @@ type Category = {
   programs: Program[];
 };
 
-const CurrentCOBenefits = () => {
+const CurrentBenefits = () => {
   const [allLongTermPrograms, setAllLongTermPrograms] = useState<Program[]>([]);
   const [allNearTermPrograms, setAllNearTermPrograms] = useState<Program[]>([]);
   const intl = useIntl();
@@ -228,4 +228,4 @@ const CurrentCOBenefits = () => {
   }
 };
 
-export default CurrentCOBenefits;
+export default CurrentBenefits;
