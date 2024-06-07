@@ -200,23 +200,23 @@ const CurrentBenefits = () => {
 
   if (allLongTermPrograms.length && allNearTermPrograms.length) {
     return (
-      <main className="co-benefits-container">
-        <h1 className="sub-header co-benefits-header">
+      <main className="current-benefits-container">
+        <h1 className="sub-header current-benefits-header">
           <FormattedMessage
-            id="currentCOBenefits.pg-header"
+            id="currentBenefits.pg-header"
             defaultMessage="Government Benefits, Nonprofit Programs and Tax Credits in MyFriendBen"
           />
         </h1>
         <div className="header-and-programs-container">
           <h2 className="long-near-term-header">
-            <FormattedMessage id="currentCOBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
+            <FormattedMessage id="currentBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
             {` (${allLongTermPrograms.length})`}
           </h2>
           {displayProgramsByCategory(allLongTermPrograms, 'category', groupProgramsIntoCategories)}
         </div>
         <div className="header-and-programs-container">
           <h2 className="long-near-term-header">
-            <FormattedMessage id="currentCOBenefits.near-term-benefits" defaultMessage="NEAR-TERM BENEFITS" />
+            <FormattedMessage id="currentBenefits.near-term-benefits" defaultMessage="NEAR-TERM BENEFITS" />
             {` (${allNearTermPrograms.length})`}
           </h2>
           {displayProgramsByCategory(allNearTermPrograms, 'type', groupProgramsIntoCategories)}
