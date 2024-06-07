@@ -31,13 +31,12 @@ type CategoryName =
   | 'Cash Assistance'
   | 'Child Care, Youth, and Education'
   | 'Food or Groceries'
-  | 'Diapers'
-  | 'Housing'
+  | 'Baby Supplies'
   | 'Managing housing costs'
   | 'Behavioral health'
   | "Child's development"
   | 'Family planning'
-  | 'Job training'
+  | 'Job resources'
   | 'Low-cost dental care'
   | 'Civil legal needs';
 
@@ -55,13 +54,12 @@ const isCategoryName = (maybeCategoryName: string | undefined): maybeCategoryNam
     'Cash Assistance',
     'Child Care, Youth, and Education',
     'Food or Groceries',
-    'Diapers',
-    'Housing',
+    'Baby Supplies',
     'Managing housing costs',
     'Behavioral health',
     "Child's development",
     'Family planning',
-    'Job training',
+    'Job resources',
     'Low-cost dental care',
     'Civil legal needs',
   ].includes(maybeCategoryName);
@@ -76,13 +74,12 @@ export const iconCategoryMap: Record<CategoryName, React.ComponentType> = {
   'Cash Assistance': CashAssistance,
   'Child Care, Youth, and Education': ChildCareYouthEducation,
   'Food or Groceries': FoodOrGroceries,
-  Diapers: BabySupplies,
-  Housing: Housing,
+  'Baby Supplies': BabySupplies,
   'Managing housing costs': ManagingHousingCosts,
   'Behavioral health': BehavioralHealth,
   "Child's development": ChildDevelopment,
   'Family planning': FamilyPlanning,
-  'Job training': JobResources,
+  'Job resources': JobResources,
   'Low-cost dental care': DentalCare,
   'Civil legal needs': LegalServices,
 };
