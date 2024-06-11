@@ -1,3 +1,5 @@
+import { cleanTranslationDefaultMessage } from './Types/ApiProgramCategories';
+
 const apiKey = 'Token ' + process.env.REACT_APP_API_KEY;
 const domain = process.env.REACT_APP_DOMAIN_URL;
 
