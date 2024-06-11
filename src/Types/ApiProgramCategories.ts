@@ -31,3 +31,9 @@ const alternateProgramTemplateCategories = [
     correctValue: 'Job resources'
   },
 ];
+
+const normalizeDefaultMessage = (defaultMessage: string): string => {
+    const whiteSpaceCommasApostropheOrHyphenMinusRegex = /\s|,|'|-/g;
+    return defaultMessage.toLowerCase()
+      .replaceAll(whiteSpaceCommasApostropheOrHyphenMinusRegex, '');
+};
