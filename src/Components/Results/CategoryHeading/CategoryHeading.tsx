@@ -5,9 +5,10 @@ import { ReactComponent as Transportation } from '../../../Assets/CategoryHeadin
 import { ReactComponent as TaxCredits } from '../../../Assets/CategoryHeadingIcons/taxCredits.svg';
 import { ReactComponent as CashAssistance } from '../../../Assets/CategoryHeadingIcons/cashAssistant.svg';
 import { ReactComponent as ChildCareYouthEducation } from '../../../Assets/CategoryHeadingIcons/childCareYouthEducation.svg';
-import { calculateTotalValue, formatToUSD, useResultsContext } from '../Results';
+import { useResultsContext } from '../Results';
+import { calculateTotalValue, formatToUSD } from '../FormattedValue';
 import { Translation } from '../../../Types/Results.ts';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate.tsx';
 import { PRESCHOOL_CATEGORY } from '../../../Assets/resultsConstants.ts';
 
@@ -27,6 +28,7 @@ type CategoryHeadingProps = {
 
 const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
   const { programs } = useResultsContext();
+  const intl = useIntl();
 
   let IconComponent = headingOptionsMappings[headingType.default_message];
 
@@ -36,12 +38,22 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
   }
 
   const monthlyCategoryAmt = calculateTotalValue(programs, headingType.default_message) / 12;
+  const savedTranslation = <ResultsTranslate translation={headingType} />;
+  const categoryImageAriaLabelProps = {
+    id: savedTranslation.props.translation.label,
+    defaultMsg: savedTranslation.props.translation.default_message,
+  };
+  const iconTranslation = intl.formatMessage({ id: 'categoryHeading.icon', defaultMessage: 'icon' });
 
   return (
     <div>
       <div className="category-heading-container">
         <div className="category-heading-column">
-          <div className="category-heading-icon" aria-label={`${headingType.default_message} icon`}>
+          <div
+            className="category-heading-icon"
+            aria-label={`${intl.formatMessage(categoryImageAriaLabelProps)} ${iconTranslation}`}
+            role="img"
+          >
             <IconComponent />
           </div>
           <h2 className="category-heading-text-style">

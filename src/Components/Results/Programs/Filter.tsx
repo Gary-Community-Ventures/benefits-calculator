@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useResultsContext } from '../Results';
 import { Button, Popover, Checkbox } from '@mui/material';
 import { CitizenLabelOptions, CitizenLabels } from '../../../Assets/citizenshipFilterFormControlLabels';
@@ -8,6 +8,8 @@ import { FormattedMessageType } from '../../../Types/Questions';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 import './Filter.css';
 
 export const Filter = () => {
@@ -15,6 +17,7 @@ export const Filter = () => {
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState<null | Element>(null);
   const { filtersChecked, setFiltersChecked } = useResultsContext();
   const [citButtonClass, setCitButtonClass] = useState('citizenship-button');
+  const intl = useIntl();
 
   useEffect(() => {
     const filtersCheckedStrArr = Object.entries(filtersChecked)
@@ -135,26 +138,51 @@ export const Filter = () => {
     return <section className="filters-container">{filters}</section>;
   };
 
+  const handleFilterClose = () => {
+    const updatedCitButtonClass = citButtonClass.replace('flat-white-border-bottom', '');
+
+    setCitizenshipPopoverAnchor(null);
+    setCitizenshipFilterIsOpen(false);
+    setCitButtonClass(updatedCitButtonClass);
+  };
+  const citizenshipFiltersModalALProps = {
+    id: 'filter.citFilterModalAL',
+    defaultMsg: 'citizenship filters modal',
+  };
+  const closeCitFiltersALProps = {
+    id: 'filter.closeCitFilterAL',
+    defaultMsg: 'close citizenship filters modal',
+  };
+  const citFiltersALProps = {
+    id: 'filter.citFiltersAL',
+    defaultMsg: 'citizenship filters',
+  };
+
   const displayCitizenshipPopover = () => {
     return (
       <section>
         <Popover
           id="citizenshipPopover"
           open={Boolean(citizenshipPopoverAnchor)}
-          onClose={() => {
-            const updatedCitButtonClass = citButtonClass.replace('flat-white-border-bottom', '');
-
-            setCitizenshipPopoverAnchor(null);
-            setCitizenshipFilterIsOpen(false);
-            setCitButtonClass(updatedCitButtonClass);
-          }}
+          onClose={handleFilterClose}
           anchorEl={citizenshipPopoverAnchor}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',
           }}
           transformOrigin={{ vertical: 2, horizontal: 0 }}
+          aria-label={intl.formatMessage(citizenshipFiltersModalALProps)}
         >
+          <div className="filters-close-button">
+            <IconButton
+              size="small"
+              aria-label={intl.formatMessage(closeCitFiltersALProps)}
+              color="inherit"
+              onClick={handleFilterClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </div>
           {renderCitizenshipFilters(citizenshipFilterFormControlLabels, filtersChecked)}
         </Popover>
       </section>
@@ -164,7 +192,12 @@ export const Filter = () => {
   const displayCitizenshipButton = () => {
     return (
       <section>
-        <Button className={citButtonClass} variant="contained" onClick={(event) => handleCitizenshipBtnClick(event)}>
+        <Button
+          className={citButtonClass}
+          variant="contained"
+          onClick={(event) => handleCitizenshipBtnClick(event)}
+          aria-label={intl.formatMessage(citFiltersALProps)}
+        >
           <FormattedMessage id="filterSection.citizenship" defaultMessage="CITIZENSHIP" />
           {citizenshipFilterIsOpen ? (
             <KeyboardArrowDownIcon className="arrow-margin" />

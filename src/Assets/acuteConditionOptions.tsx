@@ -34,7 +34,7 @@ export const acuteConditionResultMapping = {
     icon: <Family_planning />,
   },
   jobResources: {
-    api_default_message: 'Job Training',
+    api_default_message: 'Job resources',
     icon: <Job_resources />,
   },
   dentalCare: {

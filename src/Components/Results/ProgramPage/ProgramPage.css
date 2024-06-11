@@ -127,12 +127,7 @@
   font-size: 1rem;
   font-family: 'Roboto Slab', serif;
   font-weight: 700;
-  padding-left: 1rem;
-}
-
-.apply-box-list a {
-  color: inherit;
-  text-decoration: none;
+  padding: 0 1rem;
 }
 
 li.apply-info {
@@ -143,12 +138,11 @@ li.apply-info {
   display: block;
   font-weight: 400;
   font-family: 'Open Sans', sans-serif;
-  font-style: normal;
 }
 
 .address-info a {
   font-family: 'Roboto Slab', serif;
-  color: var(--icon-color);
+  color: var(--midBlue-color);
 }
 
 .required-docs {
@@ -164,12 +158,11 @@ li.apply-info {
 
 .required-docs-list {
   text-align: left;
-  text-transform: uppercase;
   padding-left: 1rem;
   line-height: 1.5rem;
   padding-top: 0.5rem;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 400;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -189,10 +182,26 @@ li.apply-info {
 
 .content-header {
   font-size: 1.25rem;
+  color: var(--secondary-color);
 }
 
 .slim-text {
   font-weight: 400;
+}
+
+.email-link,
+.phone-link {
+  text-decoration: none;
+}
+
+.navigator-name {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  color: #293457;
+}
+
+.navigator-desc {
+  color: black;
 }
 
 /* TABLET */

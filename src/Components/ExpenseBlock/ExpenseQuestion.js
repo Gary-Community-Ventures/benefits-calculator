@@ -1,6 +1,4 @@
-import { useContext } from 'react';
 import { useConfig } from '../Config/configHooks.tsx';
-import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -32,7 +30,6 @@ const StyledDeleteButton = styled(Button)({
 });
 
 const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteExpenseBlock, index, submitted }) => {
-  const { config } = useContext(Context);
   const expenseTypeErrorController = useErrorController(selectHasError, expenseTypeHelperText);
 
   const expenseOptions = useConfig('expense_options');
@@ -130,7 +127,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
         <p className="question-label">
           <FormattedMessage
             id="expenseBlock.createExpenseAmountTextfield-questionLabel"
-            defaultMessage="How much is this type of expense "
+            defaultMessage="How much is this expense every month "
           />
           {getExpenseSourceLabel(allExpensesData[index].expenseSourceName)}
         </p>

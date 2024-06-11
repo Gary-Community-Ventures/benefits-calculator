@@ -1,12 +1,11 @@
 import React, { useEffect, useState, PropsWithChildren } from 'react';
 import useStyle from '../../Assets/styleController';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider, useIntl } from 'react-intl';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
-import { Language, rightToLeftLanguages } from '../../Types/Language';
-
+import { Language } from '../../Types/Language';
 import { useGetConfig } from '../Config/configHooks';
 
 const initialFormData: FormData = {
@@ -84,6 +83,7 @@ export const Context = React.createContext<WrapperContext>({} as WrapperContext)
 const Wrapper = (props: PropsWithChildren<{}>) => {
   const { configLoading, configResponse: config } = useGetConfig();
   const { language_options: languageOptions = {} } = config ?? {};
+  const rightToLeftLanguages = ['ar'];
 
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
   const [screenLoading, setScreenLoading] = useState<boolean>(true);

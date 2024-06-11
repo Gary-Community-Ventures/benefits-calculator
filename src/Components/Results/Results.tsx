@@ -14,8 +14,10 @@ import ResultsTabs from './Tabs/Tabs';
 import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
+import MoreHelp from '../MoreHelp/MoreHelp';
+import BackAndSaveButtons from './BackAndSaveButtons/BackAndSaveButtons';
+import { FormattedMessage } from 'react-intl';
 import './Results.css';
-import { PRESCHOOL_MAX_VALUE, PRESCHOOL_PROGRAMS_ABBR } from '../../Assets/resultsConstants';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -26,7 +28,7 @@ type WrapperResultsContext = {
 };
 
 type ResultsProps = {
-  type: 'program' | 'need' | 'navigator';
+  type: 'program' | 'need' | 'navigator' | 'help';
   handleTextfieldChange: (event: Event) => void;
 };
 
@@ -45,32 +47,6 @@ export function useResultsContext() {
 function findProgramById(programs: Program[], id: string) {
   return programs.find((program) => String(program.program_id) === id);
 }
-
-export function calculateTotalValue(programs: Program[], category: string) {
-  let total = 0;
-  let preschoolTotal = 0;
-  for (const program of programs) {
-    if (program.category.default_message !== category) {
-      continue;
-    }
-
-    if (PRESCHOOL_PROGRAMS_ABBR.includes(program.name_abbreviated)) {
-      preschoolTotal += program.estimated_value;
-    } else {
-      total += program.estimated_value;
-    }
-  }
-
-  if (preschoolTotal > PRESCHOOL_MAX_VALUE) {
-    preschoolTotal = PRESCHOOL_MAX_VALUE;
-  }
-
-  return total + preschoolTotal;
-}
-
-export const formatToUSD = (num: number) => {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
-};
 
 const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   const { locale, formData } = useContext(Context);
@@ -154,26 +130,41 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     );
   } else if (apiError) {
     return <ResultsError />;
+  } else if (programId === undefined && type === 'help') {
+    return (
+      <Grid container>
+        <Grid item xs={12}>
+          <BackAndSaveButtons
+            handleTextfieldChange={handleTextfieldChange}
+            navigateToLink={`/${uuid}/results/benefits`}
+            BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
+          />
+          <MoreHelp />
+        </Grid>
+      </Grid>
+    );
   } else if (programId === undefined && (type === 'program' || type === 'need')) {
     return (
-      <ResultsContext.Provider
-        value={{
-          programs,
-          needs,
-          filtersChecked,
-          setFiltersChecked,
-          missingPrograms,
-        }}
-      >
-        <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
-        <ResultsTabs />
-        <Grid container sx={{ p: 2 }}>
-          <Grid item xs={12}>
-            {type === 'need' ? <Needs /> : <Programs />}
+      <main>
+        <ResultsContext.Provider
+          value={{
+            programs,
+            needs,
+            filtersChecked,
+            setFiltersChecked,
+            missingPrograms,
+          }}
+        >
+          <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
+          <ResultsTabs />
+          <Grid container sx={{ p: 2 }}>
+            <Grid item xs={12}>
+              {type === 'need' ? <Needs /> : <Programs />}
+            </Grid>
           </Grid>
-        </Grid>
-        {!is211Co && <HelpButton />}
-      </ResultsContext.Provider>
+          {!is211Co && <HelpButton />}
+        </ResultsContext.Provider>
+      </main>
     );
   }
 

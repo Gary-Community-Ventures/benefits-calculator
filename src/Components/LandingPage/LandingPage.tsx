@@ -1,14 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardActions,
-  Button,
-  Typography,
-  FormControlLabel,
-  Checkbox,
-  Box,
-  Link,
-} from '@mui/material';
+import { CardContent, Button, Typography, FormControlLabel, Checkbox, Box, Link } from '@mui/material';
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
@@ -78,23 +68,23 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
     switch (locale) {
       case 'es':
         return {
-          privacyPolicyLink: 'https://www.myfriendben.org/es/data-privacy-policy',
-          addTermsConsentToContact: 'https://www.myfriendben.org/es/additional-terms-and-consent-to-contact',
+          privacyPolicyLink: 'https://co.myfriendben.org/es/data-privacy-policy',
+          addTermsConsentToContact: 'https://co.myfriendben.org/es/additional-terms-and-consent-to-contact',
         };
       case 'vi':
         return {
-          privacyPolicyLink: 'https://www.myfriendben.org/vi/data-privacy-policy',
-          addTermsConsentToContact: 'https://www.myfriendben.org/vi/additional-terms-and-consent-to-contact',
+          privacyPolicyLink: 'https://co.myfriendben.org/vi/data-privacy-policy',
+          addTermsConsentToContact: 'https://co.myfriendben.org/vi/additional-terms-and-consent-to-contact',
         };
       case 'fr':
         return {
-          privacyPolicyLink: 'https://www.myfriendben.org/fr/data-privacy-policy',
-          addTermsConsentToContact: 'https://www.myfriendben.org/fr/additional-terms-and-consent-to-contact',
+          privacyPolicyLink: 'https://co.myfriendben.org/fr/data-privacy-policy',
+          addTermsConsentToContact: 'https://co.myfriendben.org/fr/additional-terms-and-consent-to-contact',
         };
       default:
         return {
-          privacyPolicyLink: 'https://www.myfriendben.org/en/data-privacy-policy',
-          addTermsConsentToContact: 'https://www.myfriendben.org/en/additional-terms-and-consent-to-contact',
+          privacyPolicyLink: 'https://co.myfriendben.org/en/data-privacy-policy',
+          addTermsConsentToContact: 'https://co.myfriendben.org/en/additional-terms-and-consent-to-contact',
         };
     }
   };
@@ -106,15 +96,11 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
         />
-        <Link href={getLinksForCheckbox().privacyPolicyLink} target="_blank" sx={{ color: theme.secondaryColor }}>
+        <Link href={getLinksForCheckbox().privacyPolicyLink} target="_blank" sx={{ color: theme.midBlueColor }}>
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
         </Link>
         <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />
-        <Link
-          href={getLinksForCheckbox().addTermsConsentToContact}
-          target="_blank"
-          sx={{ color: theme.secondaryColor }}
-        >
+        <Link href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" sx={{ color: theme.midBlueColor }}>
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
         </Link>
         .
@@ -150,7 +136,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
                 defaultMessage="Some benefits are available to Non-U.S. citizens. Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits may affect their immigration status. For more information, please review the "
               />
               <a
-                style={{ color: theme.secondaryColor }}
+                className="link-color"
                 href="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
                 target="_blank"
                 onClick={() => {

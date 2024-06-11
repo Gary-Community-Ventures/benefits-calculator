@@ -21,15 +21,15 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   const context = useContext(Context);
   const locale = context.locale.toLowerCase();
   const { formData, setFormData } = context;
-  let privacyLink =
-    'https://20208592.hs-sites.com/en/data-privacy-policy?__hstc=144746475.066f707c0b490f88f5429b1856cf0908.1663037963489.1663086538117.1663095192641.3&__hssc=144746475.1.1663095192641&__hsfp=2418539872';
+  let privacyLink = 'https://co.myfriendben.org/en/data-privacy-policy';
+  const consentToContactLink = 'https://co.myfriendben.org/en/additional-terms-and-consent-to-contact';
 
   if (locale === 'es') {
-    privacyLink = 'https://20208592.hs-sites.com/es/data-privacy-policy';
+    privacyLink = 'https://co.myfriendben.org/es/data-privacy-policy';
   } else if (locale === 'vi') {
-    privacyLink = 'https://www.myfriendben.org/vi/data-privacy-policy';
+    privacyLink = 'https://co.myfriendben.org/vi/data-privacy-policy';
   } else if (locale === 'fr') {
-    privacyLink = 'https://www.myfriendben.org/fr/data-privacy-policy';
+    privacyLink = 'https://co.myfriendben.org/fr/data-privacy-policy';
   }
 
   const firstNameErrorController = useErrorController(nameHasError, displayFirstNameHelperText);
@@ -125,7 +125,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
         <Typography variant="body1" sx={{ mt: '1rem' }} style={{ fontWeight: 600 }}>
           <FormattedMessage
             id="signUp.displayDisclosureSection-consentText"
-            defaultMessage="By filling out this form, you agree to future contact from Gary Philanthropy or our affiliates regarding your use of MyFriendBen or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication."
+            defaultMessage="By filling out this form, you agree to future contact from Gary Philanthropy or our affiliates regarding your use of MyFriendBen or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication. Additionally, a copy of your MyFriendBen results will automatically be sent to the email/phone number you provided."
           />
         </Typography>
         <FormControlLabel
@@ -149,7 +149,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
                 defaultMessage="{linkVal}"
                 values={{
                   linkVal: (
-                    <a className="sign-up-data-privacy-link" href={privacyLink} target="_blank">
+                    <a className="link-color" href={privacyLink} target="_blank">
                       <FormattedMessage
                         id="signUp.displayDisclosureSection-consentCheckLink"
                         defaultMessage="data privacy policy "
@@ -158,9 +158,17 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
                   ),
                 }}
               />
+              <FormattedMessage id="signUp.and" defaultMessage=" and " />
               <FormattedMessage
-                id="signUp.displayDisclosureSection-consentCheck4"
-                defaultMessage=" and consent to contact."
+                id="signUp.consentToContact4"
+                defaultMessage="{linkVal}"
+                values={{
+                  linkVal: (
+                    <a className="link-color" href={consentToContactLink} target="_blank">
+                      <FormattedMessage id="signUp.consentToContact" defaultMessage=" consent to contact." />
+                    </a>
+                  ),
+                }}
               />
             </div>
           }

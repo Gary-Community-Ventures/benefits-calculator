@@ -5,6 +5,8 @@ const translationsEndpoint = `${domain}/api/translations/`;
 const screensEndpoint = `${domain}/api/screens/`;
 const userEndpoint = `${domain}/api/users/`;
 const messageEndpoint = `${domain}/api/messages/`;
+const apiLongTermProgramsEndPoint = `${domain}/api/programs`;
+const apiUrgentNeedsEndpoint = `${domain}/api/urgent-needs`;
 export const configEndpoint = `${domain}/api/configuration/`;
 let eligibilityEndpoint = `${domain}/api/eligibility/`;
 
@@ -119,4 +121,37 @@ const getEligibility = (screenerId, locale) => {
   });
 };
 
-export { getTranslations, postScreen, getScreen, putScreen, postUser, putUser, postMessage, getEligibility };
+const getAllLongTermPrograms = async () => {
+  const response = await fetch(apiLongTermProgramsEndPoint, {
+    method: 'GET',
+    headers: header,
+  });
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+  return await response.json();
+};
+
+const getAllNearTermPrograms = async () => {
+  const response = await fetch(apiUrgentNeedsEndpoint, {
+    method: 'GET',
+    headers: header,
+  });
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+  return await response.json();
+};
+
+export {
+  getTranslations,
+  postScreen,
+  getScreen,
+  putScreen,
+  postUser,
+  putUser,
+  postMessage,
+  getEligibility,
+  getAllLongTermPrograms,
+  getAllNearTermPrograms,
+};

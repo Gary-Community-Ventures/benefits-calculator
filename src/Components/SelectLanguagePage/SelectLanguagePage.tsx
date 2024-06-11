@@ -1,8 +1,8 @@
-import { useConfig } from '../Config/configHooks.tsx';
 import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent, Button, Box } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
+import { useConfig } from '../Config/configHooks.tsx';
 import { useNavigate } from 'react-router-dom';
 
 const SelectLanguagePage = () => {
@@ -12,7 +12,7 @@ const SelectLanguagePage = () => {
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const navigate = useNavigate();
 
-  const createMenuItems = (optionList: Record<string, any>, disabledFMId: string, disabledFMDefault: string) => {
+  const createMenuItems = (optionList: Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
     const disabledSelectMenuItem = (
       <MenuItem value="disabled-select" key="disabled-select" disabled>
         <FormattedMessage id={disabledFMId} defaultMessage={disabledFMDefault} />

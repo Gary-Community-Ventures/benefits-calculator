@@ -22,6 +22,7 @@ import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
 import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
 import { isCustomTypedLocationState } from './Types/FormData.ts';
+import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits.tsx';
 import './App.css';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
@@ -293,9 +294,9 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <div className="app">
         <CssBaseline />
-        <BrandedHeader handleTextFieldChange={handleTextfieldChange} />
+        <BrandedHeader />
         <Box className="main-max-width">
           <Routes>
             <Route path="/step-1" element={<ProgressBar step={1} />} />
@@ -307,6 +308,7 @@ const App = () => {
           </Routes>
           <Routes>
             <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
+            <Route path="/current-benefits" element={<CurrentBenefits />} />
             <Route path="/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
             <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
             <Route path="/step-1" element={<SelectLanguagePage />} />
@@ -356,16 +358,18 @@ const App = () => {
                 path="results/benefits/:programId/navigators"
                 element={<Results type="navigator" handleTextfieldChange={handleTextfieldChange} />}
               />
+              <Route
+                path="results/more-help"
+                element={<Results type="help" handleTextfieldChange={handleTextfieldChange} />}
+              />
               <Route path="results" element={<Navigate to="benefits" replace />} />
               <Route path="*" element={<Navigate to="/step-1" replace />} />
             </Route>
             <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
           </Routes>
-          <div className="push"></div>
         </Box>
-
-        <BrandedFooter />
       </div>
+      <BrandedFooter />
     </ThemeProvider>
   );
 };

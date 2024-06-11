@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useConfig } from '../Config/configHooks.tsx';
 import { Box, IconButton, Stack } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
@@ -22,8 +22,8 @@ import {
 import { getStepNumber } from '../../Assets/stepDirectory';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { isCustomTypedLocationState } from '../../Types/FormData.ts';
-import './HouseholdDataBlock.css';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
+import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -31,7 +31,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const healthInsuranceOptions = useConfig('health_insurance_options');
   const relationshipOptions = useConfig('relationship_options');
   const { householdSize } = formData;
-  const remainingHHMNumber = Number(householdSize);
+  const hHSizeNumber = Number(householdSize);
   let { uuid, page } = useParams();
   page = parseInt(page);
   const step = getStepNumber('householdData');
@@ -41,6 +41,11 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     navigate(`/${uuid}/step-${step}/${page}`);
   };
   const [submittedCount, setSubmittedCount] = useState(0);
+  const intl = useIntl();
+  const editHHMemberAriaLabel = intl.formatMessage({
+    id: 'editHHMember.ariaText',
+    defaultMessage: 'edit household member',
+  });
 
   const initialMemberData = formData.householdData[page - 1] ?? {
     age: '',
@@ -187,14 +192,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
   };
 
-  const createMembersAdded = (member, index) => {
+  const createFormDataMemberCard = (member, index) => {
     let relationship = relationshipOptions[member.relationshipToHH];
-    relationship =
-      relationship === undefined ? (
-        <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />
-      ) : (
-        <FormattedMessage id="relationshipOptions.yourself" defaultMessage={relationship} />
-      );
+    if (relationship === undefined) {
+      relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
+    }
+
     const age = member.age;
     let income = 0;
     for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {
@@ -219,25 +222,34 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       income += Number(num);
     }
 
+    return createMemberCard(index, relationship, age, income, page);
+  };
+
+  const handleEditBtnSubmit = (memberIndex) => {
+    setSubmittedCount(submittedCount + 1);
+
+    const validPersonData = personDataIsValid(memberData);
+    if (validPersonData) {
+      handleHouseholdDataSubmit(memberData, page - 1, uuid);
+      navigate(`/${uuid}/step-${step}/${memberIndex + 1}`);
+    }
+  };
+
+  const createMemberCard = (index, relationship, age, income, page) => {
     const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
-
-    const handleEditSubmit = () => {
-      setSubmittedCount(submittedCount + 1);
-
-      const validPersonData = personDataIsValid(memberData);
-      if (validPersonData) {
-        handleHouseholdDataSubmit(memberData, page - 1, uuid);
-        navigate(`/${uuid}/step-${step}/${index + 1}`);
-      }
-    };
 
     return (
       <article className={containerClassName} key={index}>
         <div className="household-member-header">
           <h3 className="member-added-relationship">{relationship}:</h3>
           <div className="household-member-edit-button">
-            <IconButton onClick={handleEditSubmit}>
-              <EditIcon />
+            <IconButton
+              onClick={() => {
+                handleEditBtnSubmit(index);
+              }}
+              aria-label={editHHMemberAriaLabel}
+            >
+              <EditIcon alt="edit icon" />
             </IconButton>
           </div>
         </div>
@@ -253,9 +265,26 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     );
   };
 
-  const createQuestionHeader = (personIndex) => {
+  const createQHeaderAndHHMSummaries = (personIndex) => {
     let header;
     const headOfHHInfoWasEntered = formData.householdData.length >= 1;
+
+    //hHMemberSummaries will have the length of members that have already been saved to formData
+    const hHMemberSummaries = [
+      ...formData.householdData.map((member, index) => {
+        return createFormDataMemberCard(member, index);
+      }),
+    ];
+
+    //We want the active/current member's summary card to update synchronously as we change their information
+    //so we swap out the current one for the one we create using the memberData in state
+    const summariesWActiveMemberCard = hHMemberSummaries.map((member, index) => {
+      if (index === page - 1) {
+        return createFormDataMemberCard(memberData, index);
+      } else {
+        return member;
+      }
+    });
 
     if (personIndex === 1) {
       header = (
@@ -273,6 +302,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         </h1>
       );
     }
+
     return (
       <>
         {header}
@@ -281,7 +311,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             <h2 className="household-data-sub-header secondary-heading">
               <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
             </h2>
-            <div>{formData.householdData.map(createMembersAdded)}</div>
+            <div>{summariesWActiveMemberCard}</div>
           </Box>
         )}
       </>
@@ -407,7 +437,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     setSubmittedCount(submittedCount + 1);
 
     const validPersonData = personDataIsValid(memberData);
-    const lastHouseholdMember = page >= remainingHHMNumber;
+    const lastHouseholdMember = page >= hHSizeNumber;
 
     if (validPersonData && isComingFromConfirmationPg) {
       handleHouseholdDataSubmit(memberData, page - 1, uuid);
@@ -481,7 +511,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   return (
     <main className="benefits-form">
-      {createQuestionHeader(page)}
+      {createQHeaderAndHHMSummaries(page)}
       {createAgeQuestion(page)}
       {page === 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
       {page !== 1 && createHOfHRelationQuestion()}

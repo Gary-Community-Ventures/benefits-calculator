@@ -1,10 +1,10 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate.tsx';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
 import { FormattedMessage } from 'react-intl';
-import { formatToUSD } from '../Results.tsx';
+import { formatToUSD, formatYearlyValue } from '../FormattedValue';
 import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage.tsx';
 
@@ -54,7 +54,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <article className="estimation-text-left">
             <FormattedMessage id="results.estimated-annual-value" defaultMessage="Estimated Annual Value" />
           </article>
-          <article className="estimation-text-right slim-text">{formatToUSD(program.estimated_value)}</article>
+          <article className="estimation-text-right slim-text">{formatYearlyValue(program)}</article>
         </div>
         <div className="estimation-text">
           <article className="estimation-text-left">
@@ -69,7 +69,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
   };
 
   return (
-    <article className="program-page-container">
+    <main className="program-page-container">
       <section className="back-to-results-button-container">
         <BackAndSaveButtons
           handleTextfieldChange={() => {}}
@@ -82,6 +82,15 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         {displayEstimatedValueAndTime(program)}
       </div>
       {program.warning.default_message && <WarningMessage message={program.warning} />}
+      {program.multiple_tax_units && (
+        <WarningMessage
+          message={{
+            label: 'results.multiple_tax_units.warning',
+            default_message:
+              'There may be members of your household who are not part of your "tax household." Ask them to complete this tool to determine if they qualify for this benefit.',
+          }}
+        />
+      )}
       <div className="apply-online-button">
         <a href={program.apply_button_link.default_message} target="_blank">
           <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
@@ -90,31 +99,44 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       <div className="content-width">
         {program.navigators.length > 0 && (
           <section className="apply-box">
-            <h3 className="content-header">
+            <h2 className="content-header">
               <FormattedMessage id="results.get-help-applying" defaultMessage="Get Help Applying" />
-            </h3>
+            </h2>
             <ul className="apply-box-list">
-              {program.navigators.map((info, index) => (
+              {program.navigators.map((navigator, index) => (
                 <li key={index} className="apply-info">
-                  {info.name && <ResultsTranslate translation={info.name} />}
+                  {navigator.name && (
+                    <p className="navigator-name">
+                      <ResultsTranslate translation={navigator.name} />
+                    </p>
+                  )}
                   <div className="address-info">
-                    {info.assistance_link.default_message && (
-                      <>
-                        <a href={info.assistance_link.default_message} target="_blank">
+                    {navigator.description && (
+                      <p className="navigator-desc">
+                        <ResultsTranslate translation={navigator.description} />
+                      </p>
+                    )}
+                    {navigator.assistance_link.default_message && (
+                      <div>
+                        <a href={navigator.assistance_link.default_message} target="_blank" className="link-color">
                           <FormattedMessage id="results.visit-webiste" defaultMessage="Visit Website" />
                         </a>
-                        <br />
-                      </>
+                      </div>
                     )}
-                    {info.email.default_message && (
-                      <>
-                        <a href={`mailto:${info.email}`}>
-                          <ResultsTranslate translation={info.email} />
+                    {navigator.email.default_message && (
+                      <div>
+                        <a href={`mailto:${navigator.email}`} className="link-color email-link">
+                          <ResultsTranslate translation={navigator.email} />
                         </a>
-                        <br />
-                      </>
+                      </div>
                     )}
-                    {info.phone_number && <a href={`tel:${info.phone_number}`}>{info.phone_number}</a>}
+                    {navigator.phone_number && (
+                      <div>
+                        <a href={`tel:${navigator.phone_number}`} className="link-color phone-link">
+                          {navigator.phone_number}
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </li>
               ))}
@@ -126,7 +148,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
             <h3 className="content-header">
               <FormattedMessage
                 id="results.required-documents-checklist"
-                defaultMessage="Required Documents Checklist"
+                defaultMessage="Required Key Documents Checklist"
               />
             </h3>
             <ul className="required-docs-list">
@@ -142,7 +164,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <ResultsTranslate translation={program.description} />
         </section>
       </div>
-    </article>
+    </main>
   );
 };
 
