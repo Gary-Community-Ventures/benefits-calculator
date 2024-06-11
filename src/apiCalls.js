@@ -131,8 +131,15 @@ const getAllLongTermPrograms = async () => {
   if (!response.ok) {
     throw new Error(`${response.status} ${response.statusText}`);
   }
-  return await response.json();
-};
+
+  const programs = await response.json();
+  const programsWithNormalizedCategoryTranslations = programs.map(program => {
+    const categoryWithNormalizedDefaultMessage = cleanTranslationDefaultMessage(program.category);
+    return { ...program, category: categoryWithNormalizedDefaultMessage };
+  });
+
+  return programsWithNormalizedCategoryTranslations;
+}
 
 const getAllNearTermPrograms = async () => {
   const response = await fetch(apiUrgentNeedsEndpoint, {
