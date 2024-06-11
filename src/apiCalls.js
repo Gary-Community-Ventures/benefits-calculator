@@ -1,4 +1,4 @@
-import { cleanTranslationDefaultMessage } from './Types/ApiProgramCategories';
+import { cleanTranslationDefaultMessage } from './cleanAPICategoryTranslation';
 
 const apiKey = 'Token ' + process.env.REACT_APP_API_KEY;
 const domain = process.env.REACT_APP_DOMAIN_URL;
@@ -133,13 +133,13 @@ const getAllLongTermPrograms = async () => {
   }
 
   const programs = await response.json();
-  const programsWithNormalizedCategoryTranslations = programs.map(program => {
+  const programsWithNormalizedCategoryTranslations = programs.map((program) => {
     const categoryWithNormalizedDefaultMessage = cleanTranslationDefaultMessage(program.category);
     return { ...program, category: categoryWithNormalizedDefaultMessage };
   });
 
   return programsWithNormalizedCategoryTranslations;
-}
+};
 
 const getAllNearTermPrograms = async () => {
   const response = await fetch(apiUrgentNeedsEndpoint, {
@@ -151,7 +151,7 @@ const getAllNearTermPrograms = async () => {
   }
 
   const programs = await response.json();
-  const programsWithNormalizedCategoryTranslations = programs.map(program => {
+  const programsWithNormalizedCategoryTranslations = programs.map((program) => {
     const categoryWithNormalizedDefaultMessage = cleanTranslationDefaultMessage(program.type);
     return { ...program, type: categoryWithNormalizedDefaultMessage };
   });

@@ -1,4 +1,4 @@
-import { Translation } from "./Results";
+import { Translation } from './Types/Results';
 
 export const programTemplateCategories = [
   'Housing and Utilities',
@@ -22,22 +22,21 @@ export const programTemplateCategories = [
 const alternateProgramTemplateCategories = [
   {
     previousNormalizedValues: ['diapers'],
-    correctValue: 'Baby Supplies'
+    correctValue: 'Baby Supplies',
   },
- {
+  {
     previousNormalizedValues: ['housing'],
-    correctValue: 'Managing housing costs'
+    correctValue: 'Managing housing costs',
   },
- {
-    previousNormalizedValues:['jobtraining'],
-    correctValue: 'Job resources'
+  {
+    previousNormalizedValues: ['jobtraining'],
+    correctValue: 'Job resources',
   },
 ];
 
 const normalizeDefaultMessage = (defaultMessage: string): string => {
-    const whiteSpaceCommasApostropheOrHyphenMinusRegex = /\s|,|'|-/g;
-    return defaultMessage.toLowerCase()
-      .replaceAll(whiteSpaceCommasApostropheOrHyphenMinusRegex, '');
+  const whiteSpaceCommasApostropheOrHyphenMinusRegex = /\s|,|'|-/g;
+  return defaultMessage.toLowerCase().replaceAll(whiteSpaceCommasApostropheOrHyphenMinusRegex, '');
 };
 
 const findClosestMatchingDefaultMessage = (defaultMessage: string): string => {
