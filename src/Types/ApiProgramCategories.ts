@@ -16,3 +16,18 @@ export const programTemplateCategories = [
   'Low-cost dental care',
   'Civil legal needs',
 ];
+
+const alternateProgramTemplateCategories = [
+  {
+    previousNormalizedValues: ['diapers'],
+    correctValue: 'Baby Supplies'
+  },
+ {
+    previousNormalizedValues: ['housing'],
+    correctValue: 'Managing housing costs'
+  },
+ {
+    previousNormalizedValues:['jobtraining'],
+    correctValue: 'Job resources'
+  },
+];
