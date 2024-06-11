@@ -52,7 +52,7 @@ const referrerData: ReferrerData = {
     gac: 'Get Ahead Colorado home page button',
     fircsummitresourcecenter: 'Firc Summit Resource Center',
     coBenefits: 'MyFriendBen home page button',
-    dhs: 'Denver Human Services and MyFriendBen home page button'
+    dhs: 'Denver Human Services and MyFriendBen home page button',
   },
   logoClass: {
     default: 'logo',
