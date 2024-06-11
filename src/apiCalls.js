@@ -151,12 +151,12 @@ const getAllNearTermPrograms = async () => {
   }
 
   const programs = await response.json();
-  const programsWithNormalizedCategoryTranslations = programs.map((program) => {
+  const programsWithNormalizedTypeTranslations = programs.map((program) => {
     const categoryWithNormalizedDefaultMessage = cleanTranslationDefaultMessage(program.type);
     return { ...program, type: categoryWithNormalizedDefaultMessage };
   });
 
-  return programsWithNormalizedCategoryTranslations;
+  return programsWithNormalizedTypeTranslations;
 };
 
 export {
