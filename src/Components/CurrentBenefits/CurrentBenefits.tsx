@@ -103,11 +103,11 @@ const CurrentBenefits = () => {
   const intl = useIntl();
 
   useEffect(() => {
-    getAllLongTermPrograms().then((programs:Program[]) => {
+    getAllLongTermPrograms().then((programs: Program[]) => {
       setAllLongTermPrograms(programs);
     });
 
-    getAllNearTermPrograms().then((programs:Program[]) => {
+    getAllNearTermPrograms().then((programs: Program[]) => {
       setAllNearTermPrograms(programs);
     });
   }, []);
