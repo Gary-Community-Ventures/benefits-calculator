@@ -1,3 +1,5 @@
+import { Translation } from "./Results";
+
 export const programTemplateCategories = [
   'Housing and Utilities',
   'Food and Nutrition',
@@ -67,4 +69,13 @@ const findClosestMatchingDefaultMessage = (defaultMessage: string): string => {
     }
     return maybeClosestMatchingCategory.correctValue;
   }
+};
+
+export const cleanTranslationDefaultMessage = (translation: Translation) => {
+  const cleanDefaultMessage = findClosestMatchingDefaultMessage(translation.default_message);
+
+  return {
+    default_message: cleanDefaultMessage,
+    label: translation.label,
+  };
 };
