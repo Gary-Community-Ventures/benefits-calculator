@@ -103,12 +103,12 @@ const CurrentBenefits = () => {
   const intl = useIntl();
 
   useEffect(() => {
-    getAllLongTermPrograms().then((response) => {
-      setAllLongTermPrograms(response);
+    getAllLongTermPrograms().then((programs:Program[]) => {
+      setAllLongTermPrograms(programs);
     });
 
-    getAllNearTermPrograms().then((response) => {
-      setAllNearTermPrograms(response);
+    getAllNearTermPrograms().then((programs:Program[]) => {
+      setAllNearTermPrograms(programs);
     });
   }, []);
 
@@ -209,14 +209,14 @@ const CurrentBenefits = () => {
             <FormattedMessage id="currentBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
             {` (${allLongTermPrograms.length})`}
           </h2>
-          {displayProgramsByCategory(allLongTermPrograms, 'category', groupProgramsIntoCategories)}
+          {/* {displayProgramsByCategory(allLongTermPrograms, 'category', groupProgramsIntoCategories)} */}
         </div>
         <div className="header-and-programs-container">
           <h2 className="long-near-term-header">
             <FormattedMessage id="currentBenefits.near-term-benefits" defaultMessage="NEAR-TERM BENEFITS" />
             {` (${allNearTermPrograms.length})`}
           </h2>
-          {displayProgramsByCategory(allNearTermPrograms, 'type', groupProgramsIntoCategories)}
+          {/* {displayProgramsByCategory(allNearTermPrograms, 'type', groupProgramsIntoCategories)} */}
         </div>
       </main>
     );
