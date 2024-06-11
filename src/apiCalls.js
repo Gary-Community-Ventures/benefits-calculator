@@ -149,7 +149,14 @@ const getAllNearTermPrograms = async () => {
   if (!response.ok) {
     throw new Error(`${response.status} ${response.statusText}`);
   }
-  return await response.json();
+
+  const programs = await response.json();
+  const programsWithNormalizedCategoryTranslations = programs.map(program => {
+    const categoryWithNormalizedDefaultMessage = cleanTranslationDefaultMessage(program.type);
+    return { ...program, type: categoryWithNormalizedDefaultMessage };
+  });
+
+  return programsWithNormalizedCategoryTranslations;
 };
 
 export {
