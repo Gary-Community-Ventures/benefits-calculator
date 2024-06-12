@@ -35,8 +35,8 @@ const alternateProgramTemplateCategories = [
 ];
 
 const normalizeDefaultMessage = (defaultMessage: string): string => {
-  const whiteSpaceCommasApostropheOrHyphenMinusRegex = /\s|,|'|-/g;
-  return defaultMessage.toLowerCase().replaceAll(whiteSpaceCommasApostropheOrHyphenMinusRegex, '');
+  const whiteSpaceCommasApostropheHyphenMinusNumbersRegex = /\s|,|'|-|[0-9]/g;
+  return defaultMessage.toLowerCase().replaceAll(whiteSpaceCommasApostropheHyphenMinusNumbersRegex, '');
 };
 
 const findClosestMatchingDefaultMessage = (defaultMessage: string): string => {
@@ -50,12 +50,13 @@ const findClosestMatchingDefaultMessage = (defaultMessage: string): string => {
     return normalizeDefaultMessage(programTemplate) === normalizedDefaultMessage;
   });
 
-  // is the default message invalid because of whitespace, commas, apostrophes, or hyphens?
+  // is the default message invalid because of typos related to whitespace, comma, apostrophe,
+  // hyphen or number characters?
   if (maybeTheRightCategory) {
     return maybeTheRightCategory;
   } else {
     // is the default message invalid because it uses different wordings
-    // or does it have typos not related to whitespace, comma, apostrophe, or hyphen characters?
+    // or does it have typos not related to whitespace, comma, apostrophe, hyphen or number characters?
     const maybeClosestMatchingCategory = alternateProgramTemplateCategories.find((programTemplate) =>
       programTemplate.previousNormalizedValues.includes(normalizedDefaultMessage),
     );
