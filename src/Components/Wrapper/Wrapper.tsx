@@ -82,6 +82,7 @@ export const Context = React.createContext<WrapperContext>({} as WrapperContext)
 
 const Wrapper = (props: PropsWithChildren<{}>) => {
   const { configLoading, configResponse: config } = useGetConfig();
+  const { language_options: languageOptions = {} } = config ?? {};
 
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
   const [screenLoading, setScreenLoading] = useState<boolean>(true);

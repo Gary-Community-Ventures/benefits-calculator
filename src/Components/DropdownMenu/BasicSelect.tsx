@@ -22,7 +22,7 @@ interface ComponentDetails {
 
 interface BasicSelectProps {
   componentDetails: ComponentDetails;
-  options: { [key: string]: string };
+  options: { [key: string]: string | any };
   formDataProperty: string;
   errorController: ErrorController;
   submitted: number;
@@ -61,6 +61,14 @@ const BasicSelect = ({ componentDetails, options, formDataProperty, submitted }:
     menuItemLabels.sort((a, z) => sortNumbersDescendingThenStringsLastWithoutSorting(a, z));
 
     const dropdownMenuItems = menuItemKeys.map((option, i) => {
+      // checks for transformed config formatted messages
+      if (typeof menuItemLabels[i] === 'object' && menuItemLabels[i])
+        return (
+          <MenuItem value={option} key={option}>
+            {menuItemLabels[i]}
+          </MenuItem>
+        );
+
       return (
         <MenuItem value={option} key={option}>
           {menuItemLabels[i]}
