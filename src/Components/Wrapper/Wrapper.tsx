@@ -6,7 +6,7 @@ import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
 import languageOptions, { Language, rightToLeftLanguages } from '../../Assets/languageOptions';
-import useGetConfig from '../Config/configHook';
+import { useConfig, useGetConfig } from '../Config/configHook';
 
 const initialFormData: FormData = {
   isTest: undefined,

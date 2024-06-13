@@ -4,7 +4,7 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
 import languageOptions from '../../Assets/languageOptions.tsx';
 import { useLocation } from 'react-router-dom';
-import { useConfig } from '../Config/configHooks.tsx';
+import { useConfig } from '../Config/configHook.tsx';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Share from '../Share/Share';

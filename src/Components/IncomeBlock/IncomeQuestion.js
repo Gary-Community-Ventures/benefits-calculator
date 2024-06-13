@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { useConfig } from '../Config/configHooks.tsx';
+import { useConfig } from '../Config/configHook.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';

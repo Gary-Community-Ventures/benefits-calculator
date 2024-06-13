@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useConfig } from '../Config/configHooks.tsx';
+import { useConfig } from '../Config/configHook.tsx';
 import { Box, IconButton, Stack } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import ContinueButton from '../ContinueButton/ContinueButton';

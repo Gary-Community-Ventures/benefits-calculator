@@ -157,14 +157,17 @@ function transformItem(item: unknown): any {
   return config;
 }
 
-function transformConfigResponse(configResponse: ConfigApiResponse[]): Config {
-  const output: Config = {};
+function transformConfigData(configData: ConfigApiResponse[]): Config {
+  const transformedConfig: Config = {};
 
-  configResponse.forEach((item) => {
-    output[item.name] = transformItem(item.data);
+  configData.forEach((item) => {
+    const { name, data } = item;
+    const configOptions = data;
+
+    transformedConfig[name] = transformItem(configOptions);
   });
 
-  return output;
+  return transformedConfig;
 }
 
 async function getConfig() {
@@ -189,7 +192,7 @@ export function useGetConfig() {
       // get data and set loading to false
       try {
         if (value !== undefined) {
-          const transformedOutput: Config = transformConfigResponse(value);
+          const transformedOutput: Config = transformConfigData(value);
           setConfigResponse(transformedOutput);
         }
       } catch (e) {
@@ -204,9 +207,16 @@ export function useGetConfig() {
 
 export function useConfig(name: string) {
   const { config } = useContext(Context);
-  // Return a default value or fallback object
-  if (config === undefined) return {};
 
-  if (config[name] === undefined) throw new Error(`'${name}' does not exist in the config`);
-  return config[name];
+  if (config === undefined) {
+    return {};
+  }
+
+  if (config[name] === undefined) {
+    throw new Error(`'${name}' does not exist in the config`);
+  }
+
+  let configValue = config[name];
+
+  return configValue;
 }

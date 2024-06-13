@@ -4,7 +4,7 @@ import { AppBar, MenuItem, Select, Modal, Link, IconButton } from '@mui/material
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { useConfig } from '../../Config/configHooks';
+import { useConfig } from '../../Config/configHook';
 import { Context } from '../../Wrapper/Wrapper';
 import twoOneOneMFBLogo from '../../../Assets/TwoOneOneAssets/twoOneOneMFBLogo.png';
 import twoOneOneLinks from '../../../Assets/TwoOneOneAssets/twoOneOneLinks';

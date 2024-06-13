@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { useConfig } from '../Config/configHooks.tsx';
+import { useConfig } from '../Config/configHook.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Radiofield from '../Radiofield/Radiofield';
 import Textfield from '../Textfield/Textfield';

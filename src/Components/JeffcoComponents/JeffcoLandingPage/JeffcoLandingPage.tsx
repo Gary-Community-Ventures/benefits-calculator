@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
-import { useConfig } from '../../Config/configHooks';
+import { useConfig } from '../../Config/configHook';
 import jeffcolandingpage from '../../../Assets/JeffcoAssets/jeffcolandingpage.png';
 import Stack from '@mui/material/Stack';
 import { Typography, Button } from '@mui/material';

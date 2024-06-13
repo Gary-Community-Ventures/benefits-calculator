@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useConfig } from '../Config/configHooks.tsx';
+import { useConfig } from '../Config/configHook.tsx';
 import { getScreen } from '../../apiCalls.js';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LoadingPage from '../LoadingPage/LoadingPage.tsx';

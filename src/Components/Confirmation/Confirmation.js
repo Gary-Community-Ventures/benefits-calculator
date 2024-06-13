@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
 import { useContext, useEffect } from 'react';
-import { useConfig } from '../Config/configHooks.tsx';
+import { useConfig } from '../Config/configHook.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Grid from '@mui/material/Grid';
 import { ReactComponent as Edit } from '../../Assets/icons/edit.svg';
