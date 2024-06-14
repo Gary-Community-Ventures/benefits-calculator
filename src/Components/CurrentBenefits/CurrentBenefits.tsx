@@ -159,11 +159,13 @@ const CurrentBenefits = () => {
     ) => Record<CategoryName, Category>,
   ) => {
     const programsSortedByCategories = groupProgramsIntoCategories(programs, typeOrCategoryField);
+    console.log(programsSortedByCategories);
 
     const categoryHeaderIconAndPrograms = Object.keys(programsSortedByCategories).map((key: string, index) => {
       const categoryName = key as CategoryName;
       const category = programsSortedByCategories[categoryName];
       const { name, programs } = category;
+      console.log(name.default_message, name.label);
       const CategoryIcon = iconCategoryMap[categoryName];
 
       return (
@@ -180,6 +182,7 @@ const CurrentBenefits = () => {
               <CategoryIcon />
             </div>
             <h2 className="category-heading-text-style">
+              {/* {name.default_message} */}
               <ResultsTranslate translation={name} />
             </h2>
           </div>

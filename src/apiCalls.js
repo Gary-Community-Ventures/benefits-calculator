@@ -1,4 +1,4 @@
-import { cleanTranslationDefaultMessage } from './cleanAPICategoryTranslation';
+import { cleanTranslationDefaultMessage, cleanUpEnglishTranslations } from './cleanAPICategoryTranslation';
 
 const apiKey = 'Token ' + process.env.REACT_APP_API_KEY;
 const domain = process.env.REACT_APP_DOMAIN_URL;
@@ -18,16 +18,22 @@ export const header = {
   Authorization: apiKey,
 };
 
-const getTranslations = (lang) => {
-  return fetch(translationsEndpoint + `?lang=${lang}`, {
+const getTranslations = async (lang) => {
+  const response = await fetch(translationsEndpoint + `?lang=${lang}`, {
     method: 'GET',
     headers: header,
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error(`${response.status} ${response.statusText}`);
-    }
-    return response.json();
   });
+
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+
+  const translations = await response.json();
+  // console.log(translations)
+  const translationsWithNormalizedCategoryAndTypeValues = cleanUpEnglishTranslations(translations["en-us"]);
+  // translations['en-us']['program.ubp_144-category'] = 'Housing and Utilities';
+
+  return translationsWithNormalizedCategoryAndTypeValues;
 };
 
 const postUser = (userData) => {
