@@ -27,7 +27,7 @@ export const acuteConditionResultMapping = {
     icon: <Support />,
   },
   childDevelopment: {
-    api_default_message: "Child's Development",
+    api_default_message: "Child's development",
     icon: <Child_development />,
   },
   familyPlanning: {

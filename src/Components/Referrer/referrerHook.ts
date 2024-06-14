@@ -8,6 +8,7 @@ import LGSLogo from '../../Assets/LetsGetSet/lgsLogo.png';
 import GACLogo from '../../Assets/GetAheadColorado/gaclogo.png';
 import FIRCLogo from '../../Assets/FircCobrand/FIRCLogo.png';
 import COMFBLogo from '../../Assets/colorado-mfb-logo.png';
+import DHSMFBLogo from '../../Assets/DenverHumanServices/denverHSLogo.png';
 
 type ReferrerOptions<T> = {
   default: T;
@@ -39,6 +40,7 @@ const referrerData: ReferrerData = {
     gac: GACLogo,
     fircsummitresourcecenter: FIRCLogo,
     coBenefits: COMFBLogo,
+    dhs: DHSMFBLogo,
   },
   logoAlt: {
     default: 'MyFriendBen home page button',
@@ -50,6 +52,7 @@ const referrerData: ReferrerData = {
     gac: 'Get Ahead Colorado home page button',
     fircsummitresourcecenter: 'Firc Summit Resource Center',
     coBenefits: 'MyFriendBen home page button',
+    dhs: 'Denver Human Services and MyFriendBen home page button',
   },
   logoClass: {
     default: 'logo',
