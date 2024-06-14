@@ -179,13 +179,11 @@ async function getConfig() {
     if (!response.ok) {
       throw new Error(`${response.status} ${response.statusText}`);
     }
-    return response.json().then(val => {
-      console.log(val);
-      return val.map(config => {
-      return {...config, data: JSON.parse(config.data)}
-      })
-      
-    })
+    return response.json().then((val) => {
+      return val.map((config: any) => {
+        return { ...config, data: JSON.parse(config.data) };
+      });
+    });
   });
 }
 
