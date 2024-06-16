@@ -45,6 +45,15 @@ type OptionItem = {
   icon: IconItem;
 };
 
+function isValidJson(json: string): boolean {
+  try {
+    JSON.parse(json);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // Transforms objects with icon key to return Icon ReactComponent
 function transformItemIcon(item: unknown): any {
   const { _label, _default_message, icon } = item as OptionItem;
