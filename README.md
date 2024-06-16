@@ -29,9 +29,6 @@ Set environment variables:
   
     - App id for google analytics 
     
-  - REACT_APP_MUI_LICENSE_KEY [optional] 
-  
-    - Key for React MUI. If not included there will be a water mark on the table in the results page.
    
   Run server: `npm run dev`
 
