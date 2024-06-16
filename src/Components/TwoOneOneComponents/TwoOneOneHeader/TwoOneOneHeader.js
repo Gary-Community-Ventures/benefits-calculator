@@ -20,7 +20,7 @@ import './TwoOneOneHeader.css';
 
 const TwoOneOneHeader = () => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
-  const { config, formData, locale, selectLanguage } = useContext(Context);
+  const { formData, locale, selectLanguage } = useContext(Context);
   const languageOptions = useConfig('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
