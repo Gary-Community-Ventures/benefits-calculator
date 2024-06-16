@@ -23,6 +23,7 @@ import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
 import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
 import { isCustomTypedLocationState } from './Types/FormData.ts';
+import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits.tsx';
 import './App.css';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
@@ -290,7 +291,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <div className="app">
         <CssBaseline />
         <BrandedHeader />
         <Box className="main-max-width">
@@ -304,6 +305,7 @@ const App = () => {
           </Routes>
           <Routes>
             <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
+            <Route path="/current-benefits" element={<CurrentBenefits />} />
             <Route path="/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
             <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
             <Route path="/step-1" element={<SelectLanguagePage />} />
@@ -362,11 +364,9 @@ const App = () => {
             </Route>
             <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
           </Routes>
-          <div className="push"></div>
         </Box>
-
-        <BrandedFooter />
       </div>
+      <BrandedFooter />
     </ThemeProvider>
   );
 };

@@ -1,9 +1,7 @@
-import { AppBar, MenuItem, Select, Modal } from '@mui/material';
+import { AppBar, MenuItem, Select } from '@mui/material';
 import { useContext, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
-import ShareIcon from '@mui/icons-material/Share';
-import Share from '../Share/Share';
 import languageOptions from '../../Assets/languageOptions.tsx';
 import Paper from '@mui/material/Paper';
 import { useIntl } from 'react-intl';
@@ -19,25 +17,8 @@ const Header = () => {
     id: 'header.selectLang-AL',
     defaultMsg: 'select a language',
   };
-  const shareButtonAriaLabelProps = {
-    id: 'header.shareBtn-AL',
-    defaultMsg: 'share button',
-  };
-  const shareMFBModalAriaLabelProps = {
-    id: 'header.shareMFBModal-AL',
-    defaultMsg: 'share my friend ben modal',
-  };
 
-  const [openShare, setOpenShare] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
-
-  const handleOpenShare = () => {
-    setOpenShare(true);
-  };
-
-  const handleCloseShare = () => {
-    setOpenShare(false);
-  };
 
   const handleCloseLanguage = () => {
     setIsLanguageSelectOpen(false);
@@ -87,18 +68,8 @@ const Header = () => {
             >
               {createMenuItems(languageOptions)}
             </Select>
-            <button
-              className="icon-container"
-              onClick={handleOpenShare}
-              aria-label={intl.formatMessage(shareButtonAriaLabelProps)}
-            >
-              <ShareIcon role="img" />
-            </button>
           </div>
         </AppBar>
-        <Modal open={openShare} onClose={handleCloseShare} aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}>
-          <Share close={handleCloseShare} />
-        </Modal>
       </Paper>
     </nav>
   );

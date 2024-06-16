@@ -1,3 +1,5 @@
+import { cleanTranslationDefaultMessage } from './cleanAPICategoryTranslation';
+
 const apiKey = 'Token ' + process.env.REACT_APP_API_KEY;
 const domain = process.env.REACT_APP_DOMAIN_URL;
 
@@ -5,6 +7,8 @@ const translationsEndpoint = `${domain}/api/translations/`;
 const screensEndpoint = `${domain}/api/screens/`;
 const userEndpoint = `${domain}/api/users/`;
 const messageEndpoint = `${domain}/api/messages/`;
+const apiLongTermProgramsEndPoint = `${domain}/api/programs`;
+const apiUrgentNeedsEndpoint = `${domain}/api/urgent-needs`;
 export const configEndpoint = `${domain}/api/configuration/`;
 let eligibilityEndpoint = `${domain}/api/eligibility/`;
 
@@ -119,4 +123,51 @@ const getEligibility = (screenerId, locale) => {
   });
 };
 
-export { getTranslations, postScreen, getScreen, putScreen, postUser, putUser, postMessage, getEligibility };
+const getAllLongTermPrograms = async () => {
+  const response = await fetch(apiLongTermProgramsEndPoint, {
+    method: 'GET',
+    headers: header,
+  });
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+
+  const programs = await response.json();
+  const programsWithNormalizedCategoryTranslations = programs.map((program) => {
+    const categoryWithNormalizedDefaultMessage = cleanTranslationDefaultMessage(program.category);
+    return { ...program, category: categoryWithNormalizedDefaultMessage };
+  });
+
+  return programsWithNormalizedCategoryTranslations;
+};
+
+const getAllNearTermPrograms = async () => {
+  const response = await fetch(apiUrgentNeedsEndpoint, {
+    method: 'GET',
+    headers: header,
+  });
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+
+  const programs = await response.json();
+  const programsWithNormalizedTypeTranslations = programs.map((program) => {
+    const categoryWithNormalizedDefaultMessage = cleanTranslationDefaultMessage(program.type);
+    return { ...program, type: categoryWithNormalizedDefaultMessage };
+  });
+
+  return programsWithNormalizedTypeTranslations;
+};
+
+export {
+  getTranslations,
+  postScreen,
+  getScreen,
+  putScreen,
+  postUser,
+  putUser,
+  postMessage,
+  getEligibility,
+  getAllLongTermPrograms,
+  getAllNearTermPrograms,
+};

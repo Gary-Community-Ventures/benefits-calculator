@@ -27,7 +27,7 @@ export const acuteConditionResultMapping = {
     icon: <Support />,
   },
   childDevelopment: {
-    api_default_message: "Child's Development",
+    api_default_message: "Child's development",
     icon: <Child_development />,
   },
   familyPlanning: {
@@ -35,7 +35,7 @@ export const acuteConditionResultMapping = {
     icon: <Family_planning />,
   },
   jobResources: {
-    api_default_message: 'Job Training',
+    api_default_message: 'Job resources',
     icon: <Job_resources />,
   },
   dentalCare: {
@@ -93,7 +93,7 @@ const acuteConditionOptions = {
     icon: <Family_planning className="option-card-icon" />,
   },
   jobResources: {
-    formattedMessage: <FormattedMessage id="acuteConditionOptions.jobResources" defaultMessage="Finding a job" />,
+    formattedMessage: <FormattedMessage id="acuteConditionOptions.jobResources" defaultMessage="Job resources" />,
     icon: <Job_resources className="option-card-icon" />,
   },
   dentalCare: {
