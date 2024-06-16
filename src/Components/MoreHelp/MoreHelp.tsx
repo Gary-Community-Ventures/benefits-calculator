@@ -1,33 +1,45 @@
 import { FormattedMessage } from 'react-intl';
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper.tsx';
 import './MoreHelp.css';
 
 type Resource = {
-  name: string;
-  description?: string;
+  name: JSX.Element;
+  description?: JSX.Element;
   link?: string;
-  phone?: string;
+  phone?: JSX.Element;
 };
 
 const MoreHelp = () => {
+  const { config } = useContext(Context);
+  const { more_help } = config ?? {};
   const resources: Resource[] = [
     {
-      name: '2-1-1 Colorado',
-      link: 'https://www.211colorado.org',
-      phone: 'Dial 2-1-1 or 866.760.6489',
+      name: <FormattedMessage id="moreHelp.resource_name" defaultMessage="2-1-1 Colorado" />,
+      link: more_help?.resource211Link,
+      phone: (
+        <a href={more_help?.resourcePhone} className="resource-phone" target="_blank">
+          <FormattedMessage id="moreHelp.resource_phone" defaultMessage="Dial 2-1-1 or 866.760.6489" />
+        </a>
+      ),
     },
     {
-      name: 'Family Resource Center Association',
-      description:
-        'Your local family resource center may be able to connect you to other resources and support services. Visit a center near you.',
-      link: 'https://maps.cofamilycenters.org',
+      name: <FormattedMessage id="moreHelp.resource_FRCA-name" defaultMessage="Family Resource Center Association" />,
+      description: (
+        <FormattedMessage
+          id="moreHelp.resource_FRCA-description"
+          defaultMessage="Your local family resource center may be able to connect you to other resources and support services. Visit a center near you."
+        />
+      ),
+      link: more_help?.resourceFRCALink,
     },
   ];
 
   const displayResources = (resources: Resource[]) => {
-    return resources.map((resource) => {
+    return resources.map((resource, index) => {
       return (
-        <article key={resource.name} className="resource-card-article">
-          <h1 className="resource-header" key={resource.name}>
+        <article key={index} className="resource-card-article">
+          <h1 className="resource-header" key={index}>
             {resource.name}
           </h1>
           {resource.description && <p className="resource-desc">{resource.description}</p>}
@@ -36,11 +48,7 @@ const MoreHelp = () => {
               {resource.link}
             </a>
           )}
-          {resource.phone && (
-            <a href={`tel:${resource.phone}`} className="resource-phone" target="_blank">
-              {resource.phone}
-            </a>
-          )}
+          {resource.phone && <p className="resource-phone">{resource.phone}</p>}
         </article>
       );
     });

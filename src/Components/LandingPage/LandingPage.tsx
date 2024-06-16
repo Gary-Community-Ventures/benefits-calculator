@@ -19,13 +19,13 @@ interface LandingPageProps {
 }
 
 const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
-  const { formData, locale, screenDoneLoading, theme } = useContext(Context);
+  const { formData, locale, screenDoneLoading, theme, config } = useContext(Context);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   let { uuid } = useParams();
   const navigate = useNavigate();
   const privacyErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
   const ageErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
-
+  const { public_charge_rule } = config ?? {};
   useEffect(() => {
     const continueOnEnter = (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
@@ -137,8 +137,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
               />
               <a
                 className="link-color"
-                href="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
-                target="_blank"
+                href={public_charge_rule.link}
                 onClick={() => {
                   dataLayerPush({
                     event: 'public_charge',
