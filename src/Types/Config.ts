@@ -7,7 +7,8 @@ export interface ConfigApiResponse {
   active: boolean;
 }
 
-export type Config = Record<string, number[] | Record<string, any>>;
+export type ConfigValue = Record<string, any>;
+export type Config = Record<string, ConfigValue | Record<'0', ConfigValue>>;
 
 export type ApiExpenses = {
   expenseSourceName: string;
