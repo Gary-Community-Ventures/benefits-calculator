@@ -4,7 +4,8 @@ import Textfield from '../Textfield/Textfield';
 import SignUp from '../SignUp/SignUp';
 import AccordionsContainer from '../AccordionsContainer/AccordionsContainer';
 import BasicSelect from '../DropdownMenu/BasicSelect';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
@@ -17,6 +18,9 @@ const FollowUpQuestions = ({
   handleTextfieldChange,
   handleRadioButtonChange,
 }) => {
+  const { config } = useContext(Context);
+  const { counties_by_zipcode: countiesByZipcode } = config;
+
   const [initialSubmittedCount, setInitialSubmitted] = useState(submitted);
   const followUpSubmitted = submitted - initialSubmittedCount;
 
@@ -56,9 +60,7 @@ const FollowUpQuestions = ({
       );
     } else if (followUp.componentDetails.componentType === 'BasicSelect') {
       const finalOptions =
-        followUp.componentDetails.inputName === 'county'
-          ? followUp.componentDetails.options[formData.zipcode]
-          : followUp.componentDetails.options;
+        followUp.componentDetails.inputName === 'county' ? countiesByZipcode[formData.zipcode] : countiesByZipcode;
       return (
         <div className="question-container" key={index}>
           <h2 className="question-label">{followUp.question}</h2>

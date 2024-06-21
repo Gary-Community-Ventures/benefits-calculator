@@ -11,9 +11,17 @@ export type VerifiableInput = Partial<
   | { index: number; healthInsurance: HealthInsurance }
 >;
 
-export type ValidationFunction<T> = (value: T, formData?: FormData) => boolean;
+export type ValidationFunction<T> = (
+  value: T,
+  formData?: FormData,
+  countiesByZipcode?: Record<string, any> | undefined,
+) => boolean;
 
-export type MessageFunction<T> = (value: T, formData?: FormData) => any;
+export type MessageFunction<T> = (
+  value: T,
+  formData?: FormData,
+  countiesByZipcode?: Record<string, any> | undefined,
+) => any;
 
 export interface ErrorController {
   hasError: boolean;
