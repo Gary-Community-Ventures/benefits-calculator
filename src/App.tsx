@@ -24,6 +24,7 @@ import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
 import { isCustomTypedLocationState } from './Types/FormData.ts';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits.tsx';
 import './App.css';
+import { useConfig } from './Components/Config/configHook';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
 const App = () => {
@@ -35,7 +36,6 @@ const App = () => {
   const rawExternalId = searchParams.get('externalid');
   const externalId = rawExternalId !== null ? rawExternalId : undefined;
   const {
-    config,
     locale,
     formData,
     setFormData,
@@ -45,7 +45,7 @@ const App = () => {
     getReferrer,
   } = useContext(Context);
 
-  const { referral_options: referralOptions = {} } = config ?? {};
+  const referralOptions = useConfig('referral_options');
 
   const [totalSteps, setTotalSteps] = useState(
     getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER,
@@ -129,11 +129,14 @@ const App = () => {
   ]);
 
   useEffect(() => {
+    if (Object.keys(referralOptions).length === 0) {
+      return;
+    }
     const referrerParam = searchParams.get('referrer');
     const utmParam = searchParams.get('utm_source');
 
     // use referrer if there is a referrer, otherwise use utm source
-    const referrer = referrerParam ?? utmParam ?? '';
+    const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
     const isOtherSource = !(referrer in referralOptions);
 
     setFormData({
@@ -145,7 +148,7 @@ const App = () => {
       otherSource: isOtherSource ? referrer : '',
       urlSearchParams: urlSearchParams,
     });
-  }, []);
+  }, [referralOptions, formData.immutableReferrer]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
