@@ -21,9 +21,9 @@ const Footer = () => {
               alt={intl.formatMessage({ id: 'footer.logo.alt', defaultMessage: 'MFB Logo' })}
               className="logo footer-logo"
             />
-            <p className="white-font">1705 17th St.</p>
-            <p className="white-font">Suite 200</p>
-            <p className="white-font">Denver, CO 80202</p>
+            <p className="white-font">201 W Main St</p>
+            <p className="white-font">Suite 100</p>
+            <p className="white-font">Durham, NC 27701</p>
             <div className="bottom-top-margin">
               <p className="white-font italicized">
                 <FormattedMessage id="footer-questions" defaultMessage="Questions? Contact" />
