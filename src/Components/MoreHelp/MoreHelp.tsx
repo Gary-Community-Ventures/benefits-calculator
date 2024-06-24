@@ -11,16 +11,16 @@ type Resource = {
 const MoreHelp = () => {
   const resources: Resource[] = [
     {
-      name: '2-1-1 Colorado',
-      link: 'https://www.211colorado.org',
+      name: '2-1-1 North Carolina',
+      link: 'https://nc211.org/',
       phone: 'Dial 2-1-1 or 866.760.6489',
     },
-    {
-      name: 'Family Resource Center Association',
-      description:
-        'Your local family resource center may be able to connect you to other resources and support services. Visit a center near you.',
-      link: 'https://maps.cofamilycenters.org',
-    },
+    // {
+    //   name: 'Family Resource Center Association',
+    //   description:
+    //     'Your local family resource center may be able to connect you to other resources and support services. Visit a center near you.',
+    //   link: 'https://maps.cofamilycenters.org',
+    // },
   ];
 
   const displayResources = (resources: Resource[]) => {
