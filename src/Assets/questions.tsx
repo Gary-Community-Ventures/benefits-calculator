@@ -102,7 +102,7 @@ const questions: Record<QuestionName, Question> = {
     header: <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />,
     question: (
       <>
-        <div style={{ marginBottom: '-8px' }}>
+        <div style={{ marginBottom: '-16px' }}>
           <FormattedMessage id="questions.hasExpenses" defaultMessage="Does your household have any expenses?" />
           <HelpButton
             helpText="Add up expenses for everyone who lives in your home. This includes costs like child care, child support, rent, medical expenses, heating bills, and more. We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits."
