@@ -137,7 +137,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
               />
               <a
                 className="link-color"
-                href="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
+                href="https://www.ncjustice.org/publications/public-charge-the-law-has-changed/"
                 target="_blank"
                 onClick={() => {
                   dataLayerPush({
