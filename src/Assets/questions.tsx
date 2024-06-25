@@ -97,12 +97,20 @@ const questions: Record<QuestionName, Question> = {
     header: <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />,
     question: (
       <>
-        <FormattedMessage id="questions.hasExpenses" defaultMessage="Does your household have any expenses?" />{' '}
-        <HelpButton
-          helpText="Add up expenses for everyone who lives in your home. This includes costs like child care, child support, rent, medical expenses, heating bills, and more. We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits."
-          helpId="questions.hasExpenses-description"
-        />
+        <div style={{ marginBottom: '-16px' }}>
+          <FormattedMessage id="questions.hasExpenses" defaultMessage="Does your household have any expenses?" />
+          <HelpButton
+            helpText="Add up expenses for everyone who lives in your home. This includes costs like child care, child support, rent, medical expenses, heating bills, and more. We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits."
+            helpId="questions.hasExpenses-description"
+          />
+        </div>
       </>
+    ),
+    questionDescription: (
+      <FormattedMessage
+        id="questions.hasExpenses-description-additional"
+        defaultMessage="Expenses can affect benefits! We can be more accurate if you tell us key expenses like your rent or mortgage, utilities, and child care."
+      />
     ),
     componentDetails: {
       componentType: 'Radiofield',
