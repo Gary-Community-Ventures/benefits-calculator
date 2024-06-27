@@ -4,6 +4,7 @@ const referralOptions = {
   '211co': '2-1-1 Colorado',
   cedp: 'Community Economic Defense Project (CEDP)',
   cch: 'Colorado Coalition for the Homeless',
+  dhs: 'Denver Human Services',
   frca: 'Family Resource Center Association',
   jeffcoHS: 'Jeffco Human Services',
   gac: 'Get Ahead Colorado',

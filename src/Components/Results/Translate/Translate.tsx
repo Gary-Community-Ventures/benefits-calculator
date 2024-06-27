@@ -1,11 +1,11 @@
 import { FormattedMessage } from 'react-intl';
 import { Translation } from '../../../Types/Results';
 
-type TransalteProps = {
+type TranslateProps = {
   translation: Translation;
 };
 
-const ResultsTranslate = ({ translation }: TransalteProps) => {
+const ResultsTranslate = ({ translation }: TranslateProps) => {
   return <FormattedMessage id={translation.label} defaultMessage={translation.default_message} />;
 };
 

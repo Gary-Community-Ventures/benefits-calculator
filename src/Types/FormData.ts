@@ -48,6 +48,7 @@ export interface Benefits {
   cowap: boolean;
   ubp: boolean;
   nfp: boolean;
+  fatc: boolean;
 }
 
 export interface HealthInsurance {
