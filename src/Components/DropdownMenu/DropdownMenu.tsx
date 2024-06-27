@@ -45,7 +45,7 @@ const DropdownMenu = ({ componentDetails, options, memberData, setMemberData, su
     errorController.updateError(event.target.value);
   };
 
-  const createMenuItems = (options: { [key: string]: string | any }) => {
+  const createMenuItems = (options: { [key: string]: string }) => {
     const disabledSelectMenuItem = (
       <MenuItem value="disabled-select" key="disabled-select" disabled>
         {disabledSelectMenuItemText}

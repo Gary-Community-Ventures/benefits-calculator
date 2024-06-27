@@ -1,6 +1,6 @@
 import React, { useEffect, useState, PropsWithChildren } from 'react';
 import useStyle from '../../Assets/styleController';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider, useIntl } from 'react-intl';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
@@ -50,6 +50,7 @@ const initialFormData: FormData = {
     tanf: false,
     upk: false,
     wic: false,
+    nfp: false,
   },
   referralSource: undefined,
   immutableReferrer: undefined,
