@@ -67,7 +67,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^12.7.0",
+    "cypress": "^13.13.0",
     "eslint": "^8.41.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.8.0",
