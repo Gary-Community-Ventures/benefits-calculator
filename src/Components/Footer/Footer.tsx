@@ -18,8 +18,6 @@ const Footer = () => {
   const logoFooter = useConfig('MBF_logo');
   const stateLogo = Array.isArray(logoFooter) ? '' : logoFooter.state_code;
   const logoImage = getFooterLogo(stateLogo)
-  //console.log(typeof logoImage)
-  console.log(stateLogo, typeof stateLogo)
 
 
   return (
