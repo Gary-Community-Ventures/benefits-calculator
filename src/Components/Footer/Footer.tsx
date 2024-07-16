@@ -5,16 +5,15 @@ import { Context } from '../Wrapper/Wrapper';
 import { FormattedMessage, useIntl } from 'react-intl';
 import './Footer.css';
 import { useConfig } from '../Config/configHook';
-import { getFooterLogo } from '../../Shared/helperFunctions';
-import { States } from '../../Shared/state';
+import { getLogo } from '../../Shared/helperFunctions';
 
 
 const Footer = () => {
   const context = useContext(Context);
   const { theme } = context;
   const intl = useIntl();
-  const logoFooter = useConfig('MBF_logo');
-  const stateLogo = Array.isArray(logoFooter) ? '' : logoFooter.state_code;
+  const footerLogo = useConfig('MBF_logo');
+  const stateLogo = Array.isArray(footerLogo) ? '' : footerLogo.state_code;
 
   return (
     <footer>
@@ -22,7 +21,7 @@ const Footer = () => {
         <div className="footer-content-container">
           <div>
             <img
-              src={getFooterLogo(stateLogo)}
+              src={getLogo(stateLogo)}
               alt={intl.formatMessage({ id: 'footer.logo.alt', defaultMessage: 'MFB Logo' })}
               className="logo footer-logo"
             />
