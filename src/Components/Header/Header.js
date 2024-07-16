@@ -14,6 +14,15 @@ import { useIntl } from 'react-intl';
 import { getFooterLogo } from '../../Shared/helperFunctions';
 import './Header.css';
 
+export const getHeaderLogo = (state:States):string => {
+  switch(state){
+    case States.CO:
+      return MFBLogoCO;
+    case States.NC:
+      return MFBLogoNC
+  }
+}
+
 const Header = () => {
   const context = useContext(Context);
   const { formData, getReferrer } = context;
@@ -22,15 +31,7 @@ const Header = () => {
   const intl = useIntl();
   const headerLogo = useConfig('MBF_logo'); 
   const stateLogo = Array.isArray(headerLogo) ? '' : headerLogo.state_code;
-
-  export const getHeaderLogo = (state:States):string => {
-    switch(state){
-      case States.CO:
-        return MFBLogoCO;
-      case States.NC:
-        return MFBLogoNC
-    }
-  }
+  
 
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
