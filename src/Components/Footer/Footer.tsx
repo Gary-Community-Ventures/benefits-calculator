@@ -3,8 +3,6 @@ import Share from '../Share/Share';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { FormattedMessage, useIntl } from 'react-intl';
-// import MFBLogoCO from '../../Assets/co_logo_header.png'
-import MFBLogoNC from '../../Assets/nc_logo_header_white.png';
 import './Footer.css';
 import { useConfig } from '../Config/configHook';
 import { getFooterLogo } from '../../Shared/helperFunctions';
@@ -17,8 +15,6 @@ const Footer = () => {
   const intl = useIntl();
   const logoFooter = useConfig('MBF_logo');
   const stateLogo = Array.isArray(logoFooter) ? '' : logoFooter.state_code;
-  const logoImage = getFooterLogo(stateLogo)
-
 
   return (
     <footer>
@@ -26,7 +22,7 @@ const Footer = () => {
         <div className="footer-content-container">
           <div>
             <img
-              src={getFooterLogo(stateLogo as States)}
+              src={getFooterLogo(stateLogo)}
               alt={intl.formatMessage({ id: 'footer.logo.alt', defaultMessage: 'MFB Logo' })}
               className="logo footer-logo"
             />
