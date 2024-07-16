@@ -11,6 +11,7 @@ import Share from '../Share/Share';
 import EmailResults from '../EmailResults/EmailResults';
 import Paper from '@mui/material/Paper';
 import { useIntl } from 'react-intl';
+import { getFooterLogo } from '../../Shared/helperFunctions';
 import './Header.css';
 
 const Header = () => {
@@ -19,6 +20,17 @@ const Header = () => {
   const languageOptions = useConfig('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
+  const headerLogo = useConfig('MBF_logo'); 
+  const stateLogo = Array.isArray(headerLogo) ? '' : headerLogo.state_code;
+
+  export const getHeaderLogo = (state:States):string => {
+    switch(state){
+      case States.CO:
+        return MFBLogoCO;
+      case States.NC:
+        return MFBLogoNC
+    }
+  }
 
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
@@ -54,7 +66,7 @@ const Header = () => {
       <Paper className="header-full-width-container" square={true} elevation={0}>
         <AppBar id="nav-container" position="sticky" elevation={0}>
           <a href={`/step-1${queryString}`} className="home-link">
-            <img src={getReferrer('logoSource')} alt={getReferrer('logoAlt')} className={getReferrer('logoClass')} />
+            <img src={getHeaderLogo(stateLogo)} alt={getReferrer('logoAlt')} className={getReferrer('logoClass')} />
           </a>
           <div className="icon-wrapper">
             <LanguageIcon />

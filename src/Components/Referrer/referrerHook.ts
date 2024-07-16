@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import MFBLogo from '../../Assets/logo.png';
+import MFBLogo from '../../Assets/co_logo_header.png'
 import BIAMFBLogo from '../../Assets/biamfbcombinedlogo.png';
 import JHSAMFBLogo from '../../Assets/JeffcoAssets/jeffcobrand.png';
 import VELogo from '../../Assets/VillageExchange/villageExchangeLogo.png';
