@@ -61,33 +61,28 @@ const displayAgeHelperText: MessageFunction<string> = (applicantAge) => {
   }
 };
 
-const zipcodeHasError: ValidationFunction<string | number> = (zipcode, formData, config) => {
-  let { counties_by_zipcode: countiesByZipcode } = config ?? {};
-  //the zipcode input must have digits [0-9] and be exactly 5 digits long
-  const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
-  if (numberMustBeFiveDigitsLongRegex.test(zipcode.toString())) {
-    //this means that the zipcode input passed the regex test so we can just return false since there is no error
-    //this additional test checks the zipcode input against all CO zipcodes
-    if (countiesByZipcode) {
-      return !Object.keys(countiesByZipcode).includes(zipcode.toString());
-    }
-    // If countiesByZipcode is undefined, return false (assuming no error)
-    return true;
-  } else {
-    return true;
-  }
-};
+// const zipcodeHasError: ValidationFunction<string | number> = (zipcode, formData, config) => {
+//   let { counties_by_zipcode: countiesByZipcode } = config ?? {};
+//   //the zipcode input must have digits [0-9] and be exactly 5 digits long
+//   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
+//   if (numberMustBeFiveDigitsLongRegex.test(zipcode.toString())) {
+//     //this means that the zipcode input passed the regex test so we can just return false since there is no error
+//     //this additional test checks the zipcode input against all CO zipcodes
+//     if (countiesByZipcode) {
+//       return !Object.keys(countiesByZipcode).includes(zipcode.toString());
+//     }
+//     // If countiesByZipcode is undefined, return false (assuming no error)
+//     return true;
+//   } else {
+//     return true;
+//   }
+// };
 
-const displayZipcodeHelperText: MessageFunction<string | number> = (zipcode, formData, config) => {
-  let { counties_by_zipcode: countiesByZipcode } = config ?? {};
-  if (zipcodeHasError(zipcode, undefined, countiesByZipcode)) {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />
-      </ErrorMessageWrapper>
-    );
-  }
-};
+// const displayZipcodeHelperText: MessageFunction<string | number> = () => {
+//   return (
+//     <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />
+//   );
+// };
 
 const radiofieldHasError: ValidationFunction<any> = (radiofield) => {
   return typeof radiofield !== 'boolean';
@@ -184,33 +179,32 @@ const householdSizeHasError: ValidationFunction<string> = (sizeOfHousehold) => {
   return numValueInput <= 0 || numValueInput > 8;
 };
 
-const displayHouseholdSizeHelperText: MessageFunction<string> = (sizeOfHousehold) => {
-  const numValueInput = Number(sizeOfHousehold);
-  return (
-    (numValueInput <= 0 || numValueInput > 8) && (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage
-          id="errorMessage-numberOfHHMembers"
-          defaultMessage="Please enter the number of people in your household (max. 8)"
-        />
-      </ErrorMessageWrapper>
-    )
-  );
-};
+// const displayHouseholdSizeHelperText: MessageFunction<string> = (sizeOfHousehold) => {
+//   const numValueInput = Number(sizeOfHousehold);
+//   return (
+//     (numValueInput <= 0 || numValueInput > 8) && (
+//       <ErrorMessageWrapper fontSize="1rem">
+//         <FormattedMessage
+//           id="errorMessage-numberOfHHMembers"
+//           defaultMessage="Please enter the number of people in your household (max. 8)"
+//         />
+//       </ErrorMessageWrapper>
+//     )
+//   );
+// };
 
 const householdAssetsHasError: ValidationFunction<string> = (householdAssets) => {
   return Number(householdAssets) < 0;
 };
 
-const displayHouseholdAssetsHelperText: MessageFunction<string> = (householdAssets) => {
-  if (householdAssetsHasError(householdAssets)) {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="validation-helperText.assets" defaultMessage="Please enter 0 or a positive number." />
-      </ErrorMessageWrapper>
-    );
-  }
-};
+// const displayHouseholdAssetsHelperText: MessageFunction<string> = (householdAssets) => {
+//   if (householdAssetsHasError(householdAssets)) {
+//     return (
+//       <ErrorMessageWrapper fontSize="1rem">
+//       </ErrorMessageWrapper>
+//     );
+//   }
+// };
 
 const householdMemberAgeHasError: ValidationFunction<string> = (applicantAge) => {
   if (applicantAge === '') {
@@ -530,13 +524,13 @@ const incomeFrequencyHelperText: MessageFunction<string> = () => {
   );
 };
 
-const otherReferalSourceHelperText: MessageFunction<string> = () => {
-  return (
-    <ErrorMessageWrapper fontSize="1rem">
-      <FormattedMessage id="errorMessage-otherReferralSource" defaultMessage="Please type in your referral source" />
-    </ErrorMessageWrapper>
-  );
-};
+// const otherReferalSourceHelperText: MessageFunction<string> = () => {
+//   return (
+//     <ErrorMessageWrapper fontSize="1rem">
+//       <FormattedMessage id="errorMessage-otherReferralSource" defaultMessage="Please type in your referral source" />
+//     </ErrorMessageWrapper>
+//   );
+// };
 
 const termsOfServiceHasError: ValidationFunction<boolean> = (isChecked) => {
   return !isChecked;
@@ -554,8 +548,8 @@ export {
   useErrorController,
   ageHasError,
   displayAgeHelperText,
-  zipcodeHasError,
-  displayZipcodeHelperText,
+  // zipcodeHasError,
+  // displayZipcodeHelperText,
   radiofieldHasError,
   hoursWorkedValueHasError,
   hoursWorkedHelperText,
@@ -567,9 +561,9 @@ export {
   expenseSourcesHaveError,
   displayExpensesHelperText,
   householdSizeHasError,
-  displayHouseholdSizeHelperText,
+  // displayHouseholdSizeHelperText,
   householdAssetsHasError,
-  displayHouseholdAssetsHelperText,
+  // displayHouseholdAssetsHelperText,
   householdMemberAgeHasError,
   displayHouseholdMemberAgeHelperText,
   personDataIsValid,
@@ -597,7 +591,7 @@ export {
   relationTypeHelperText,
   incomeStreamHelperText,
   incomeFrequencyHelperText,
-  otherReferalSourceHelperText,
+  // otherReferalSourceHelperText,
   termsOfServiceHasError,
   displayAgreeToTermsErrorMessage,
   healthInsuranceDataHasError,

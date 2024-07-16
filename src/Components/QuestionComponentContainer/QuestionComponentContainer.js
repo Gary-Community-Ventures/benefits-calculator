@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useConfig } from '../Config/configHook.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Radiofield from '../Radiofield/Radiofield';
-import Textfield from '../Textfield/Textfield';
+import InputField from '../Textfield/InputField.tsx';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import BasicSelect from '../DropdownMenu/BasicSelect';
@@ -37,12 +37,14 @@ const QuestionComponentContainer = ({
   );
 
   const renderTextfieldComponent = (question) => {
+    const { inputName, inputLabel, inputHelperText, required } = question.componentDetails;
     return (
-      <Textfield
-        componentDetails={question.componentDetails}
-        data={formData}
-        handleTextfieldChange={handleTextfieldChange}
-        submitted={errorController.submittedCount}
+      <InputField
+        defaultValue={formData[inputName]}
+        name={inputName}
+        label={inputLabel}
+        helperText={inputHelperText}
+        required={required}
       />
     );
   };
@@ -150,9 +152,9 @@ const QuestionComponentContainer = ({
     if (!hasFollowUpQuestions) {
       return false;
     }
-    if (inputName === 'zipcode') {
-      return !zipcodeHasError(formData.zipcode, undefined, config);
-    }
+    // if (inputName === 'zipcode') {
+    //   return !zipcodeHasError(formData.zipcode, undefined, config);
+    // }
     if (formData[inputName] === true) {
       // this case is for a radio button question where the user selected "yes"
       return true;

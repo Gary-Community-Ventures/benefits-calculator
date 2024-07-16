@@ -23,10 +23,11 @@ export type TextFieldDetails = {
   pattern?: string;
   inputName: string;
   inputLabel: FormattedMessageType;
-  inputError: ValidationFunction<string>;
-  inputHelperText: MessageFunction<string>;
+  // inputError: ValidationFunction<string>;
+  inputHelperText: FormattedMessageType;
   dollarField?: boolean;
   numericField?: boolean;
+  required: boolean;
 };
 
 type BasicSelectOptions =
