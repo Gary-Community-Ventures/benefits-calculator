@@ -1,4 +1,5 @@
 import { Language } from '@mui/icons-material';
+import { englishToNepaliNumber } from 'nepali-number';
 import { ReactNode, useContext, useMemo } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
 
@@ -19,7 +20,7 @@ const languageOptions: Record<Language, string> = {
 
 export const rightToLeftLanguages = ['ar'];
 
-// Reorder a list of elements based on the selected locale
+// Reorder a list of elements based on the selected locale. A key might need to be added to the FormattedMessage.
 export function useReorderLanguage(text: ReactNode[], order: { [key in Language]?: number[] }) {
   const { locale } = useContext(Context);
 
@@ -36,6 +37,19 @@ export function useReorderLanguage(text: ReactNode[], order: { [key in Language]
 
     return localeText;
   }, [locale]);
+}
+
+// translate numbers. Currently only used for Nepali numbers. Will work with dollar values as well.
+export function useTranslateNumber() {
+  const { locale } = useContext(Context);
+
+  return (number: number | string) => {
+    if (locale === 'ne') {
+      return englishToNepaliNumber(number);
+    }
+
+    return String(number);
+  };
 }
 
 export default languageOptions;

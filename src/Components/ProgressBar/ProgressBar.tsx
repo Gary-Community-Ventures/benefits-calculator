@@ -6,7 +6,7 @@ import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import dataLayerPush from '../../Assets/analytics';
 import './ProgressBar.css';
-import { useReorderLanguage } from '../../Assets/languageOptions';
+import { useReorderLanguage, useTranslateNumber } from '../../Assets/languageOptions';
 
 interface ProgressBarProps {
   step?: number;
@@ -41,12 +41,13 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
     },
   };
 
+  const translateNumber = useTranslateNumber()
   const stepText = useReorderLanguage(
     [
       <FormattedMessage id="confirmation.return-stepLabel" defaultMessage="Step " key="0"/>,
-      stepValue,
+      translateNumber(stepValue),
       <FormattedMessage id="confirmation.return-ofLabel" defaultMessage=" of " key="1" />,
-      totalSteps,
+      translateNumber(totalSteps),
     ],
     { my: [0, 3, 2, 1] },
   );

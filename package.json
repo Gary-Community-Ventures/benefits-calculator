@@ -22,6 +22,7 @@
     "@types/node": "^20.3.2",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "nepali-number": "^1.0.3",
     "prettier": "^2.8.8",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
