@@ -1,11 +1,14 @@
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { FormData } from '../../Types/FormData';
-import { FormattedMessageType } from '../../Types/Questions';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { TextField } from '@mui/material';
-import { Context } from '../Wrapper/Wrapper';
 import { useContext } from 'react';
-import * as z from 'zod';
+import { useNavigate, useParams } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { FormattedMessageType } from '../../Types/Questions';
+import { Button, TextField } from '@mui/material';
+import { FormData } from '../../Types/FormData';
+import { Context } from '../Wrapper/Wrapper';
+import PreviousButton from '../PreviousButton/PreviousButton';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ZodType } from 'zod';
 
 type InputFieldProps = {
   defaultValue: string;
@@ -13,36 +16,30 @@ type InputFieldProps = {
   label: FormattedMessageType;
   helperText: FormattedMessageType;
   required: boolean;
+  inputSchema: ZodType<any, any, any>;
 };
 
-const schema = z.object({
-  zipcode: z.string().regex(/^\d{5}$/),
-  // and have to include that it's a part of a countiesByZipcode somehow
-  householdSize: z.string().max(8),
-  householdAssets: z.number(),
-  // otherSource: z.string()
-});
 
-const InputField = ({ defaultValue, name, label, helperText, required }: InputFieldProps) => {
+const InputField = ({ defaultValue, name, label, helperText, required, inputSchema }: InputFieldProps) => {
+  const { formData, setFormData } = useContext(Context);
+  const navigate = useNavigate();
+  const { uuid, id } = useParams();
+  const stepId = id? Number(id) : 1;
+
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
-
-  const { formData, setFormData } = useContext(Context);
-
-  console.log({ formData });
-
-  console.log(errors);
+  } = useForm<FormData>({ resolver: zodResolver(inputSchema) });
 
   const formSubmitHandler: SubmitHandler<FormData> = (data: FormData) => {
     //this is where we should store our values?
-
-    console.log(data);
-
+    // TODO: add validation function for the followup questions in the if stmt
+    // s.t. it doesn't go to the next question on submit
     if (!!errors[name] === false) {
-      setFormData({ ...formData, [name]: data });
+      console.log(`in here`)
+      setFormData({ ...formData, [name]: data[name] });
+      navigate(`/${uuid}/step-${stepId + 1}`);
     }
   };
 
@@ -63,10 +60,12 @@ const InputField = ({ defaultValue, name, label, helperText, required }: InputFi
           />
         )}
       />
-
-      {/* we should have a continue button tied to this one and create one for the HHDB completely separately */}
-
-      <input type="submit" />
+      <div className="question-buttons">
+        <PreviousButton />
+        <Button variant="contained" onClick={handleSubmit(formSubmitHandler)}>
+          <FormattedMessage id="continueButton" defaultMessage="Continue" />
+        </Button>
+      </div>
     </form>
   );
 };
