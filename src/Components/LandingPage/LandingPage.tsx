@@ -25,7 +25,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   const navigate = useNavigate();
   const privacyErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
   const ageErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
-  const { public_charge_rule } = config ?? {};
+  const acuteConditionOptions = useConfig('public_charge_rule');
   useEffect(() => {
     const continueOnEnter = (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
