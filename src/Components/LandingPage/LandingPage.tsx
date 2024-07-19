@@ -103,7 +103,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
         <Link href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" sx={{ color: theme.midBlueColor }}>
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
         </Link>
-        .
+        <FormattedMessage id="landingPage-disclaimer-lable-end" defaultMessage="." />
       </div>
     );
   };
