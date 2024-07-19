@@ -24,6 +24,7 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import { isCustomTypedLocationState } from '../../Types/FormData.ts';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 import './HouseholdDataBlock.css';
+import { useTranslateNumber } from '../../Assets/languageOptions';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -235,6 +236,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
   };
 
+  const translateNumber = useTranslateNumber()
   const createMemberCard = (index, relationship, age, income, page) => {
     const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
 
@@ -254,11 +256,11 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           </div>
         </div>
         <div className="member-added-age">
-          <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />: {age}
+          <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />: {translateNumber(age)}
         </div>
         <div className="member-added-income">
           <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income" />:{' '}
-          {formatToUSD(Number(income))}
+          {translateNumber(formatToUSD(Number(income)))}
           <FormattedMessage id="displayAnnualIncome.annual" defaultMessage=" annually" />
         </div>
       </article>

@@ -39,16 +39,20 @@ export function useReorderLanguage(text: ReactNode[], order: { [key in Language]
   }, [locale]);
 }
 
+export function translateNumber(number: number | string, locale: Language) {
+  if (locale === 'ne') {
+    return englishToNepaliNumber(number);
+  }
+
+  return String(number);
+}
+
 // translate numbers. Currently only used for Nepali numbers. Will work with dollar values as well.
 export function useTranslateNumber() {
   const { locale } = useContext(Context);
 
   return (number: number | string) => {
-    if (locale === 'ne') {
-      return englishToNepaliNumber(number);
-    }
-
-    return String(number);
+    return translateNumber(number, locale);
   };
 }
 

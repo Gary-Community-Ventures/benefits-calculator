@@ -17,6 +17,7 @@ import { ReactComponent as Immediate } from '../../Assets/icons/immediate.svg';
 import { ReactComponent as Referral } from '../../Assets/icons/referral.svg';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import './Confirmation.css';
+import { useTranslateNumber } from '../../Assets/languageOptions';
 
 const Confirmation = () => {
   const { formData } = useContext(Context);
@@ -24,6 +25,7 @@ const Confirmation = () => {
   const navigate = useNavigate();
   const intl = useIntl();
   const locationState = { state: { routedFromConfirmationPg: true } };
+  const translateNumber = useTranslateNumber();
 
   const acuteConditionOptions = useConfig('acute_condition_options');
   const categoryBenefits = useConfig('category_benefits');
@@ -77,7 +79,7 @@ const Confirmation = () => {
                 <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />
                 {': '}
               </b>
-              {allHouseholdAges[i]}
+              {translateNumber(allHouseholdAges[i])}
             </article>
             <article className="section-p">
               <b>
@@ -286,7 +288,7 @@ const Confirmation = () => {
               <FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size" />
               {': '}
             </b>
-            {householdSize} {householdSizeDescriptor}
+            {useTranslateNumber(householdSize)} {householdSizeDescriptor}
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
@@ -318,7 +320,7 @@ const Confirmation = () => {
             />
           </p>
           <article className="section-p">
-            {`$${Number(householdAssets).toLocaleString(2)} `}
+            {`$${translateNumber(Number(householdAssets).toLocaleString(2))} `}
             <i>
               <FormattedMessage
                 id="confirmation.displayAllFormData-householdResourcesDescription"
@@ -359,7 +361,7 @@ const Confirmation = () => {
             <b>
               <FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />
             </b>
-            {zipcode}
+            {translateNumber(zipcode)}
           </p>
           <p className="section-p">
             <b>
@@ -483,7 +485,7 @@ const Confirmation = () => {
         <article key={expense.expenseSourceName + index} className="section-p">
           {' '}
           <b>{getExpenseSourceLabel(expense.expenseSourceName)}: </b>
-          {formatToUSD(Number(expense.expenseAmount))}{' '}
+          {translateNumber(formatToUSD(Number(expense.expenseAmount)))}{' '}
         </article>
       );
     });
@@ -546,11 +548,12 @@ const Confirmation = () => {
           <b>{incomeStreamName}: </b>
           {incomeStream.incomeFrequency === 'hourly' ? (
             <>
-              {incomeAmount} {incomeFrequency} ~{hoursPerWeek} {translatedHrsPerWkText} {annualAmount}
+              {translateNumber(incomeAmount)} {incomeFrequency} ~{translateNumber(hoursPerWeek)}{' '}
+              {translatedHrsPerWkText} {translateNumber(annualAmount)}
             </>
           ) : (
             <>
-              {incomeAmount} {incomeFrequency} {annualAmount}
+              {translateNumber(incomeAmount)} {incomeFrequency} {translateNumber(annualAmount)}
             </>
           )}
         </li>
