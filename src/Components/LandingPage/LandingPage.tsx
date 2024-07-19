@@ -4,6 +4,7 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createScreen } from '../../Assets/updateScreen.ts';
+import { useConfig } from '../Config/configHook.tsx';
 import {
   useErrorController,
   displayAgreeToTermsErrorMessage,
@@ -25,7 +26,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   const navigate = useNavigate();
   const privacyErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
   const ageErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
-  const acuteConditionOptions = useConfig('public_charge_rule');
+  const publicChargeOption = useConfig('public_charge_rule');
   useEffect(() => {
     const continueOnEnter = (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
@@ -137,7 +138,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
               />
               <a
                 className="link-color"
-                href={public_charge_rule.link}
+                href={publicChargeOption.link}
                 onClick={() => {
                   dataLayerPush({
                     event: 'public_charge',

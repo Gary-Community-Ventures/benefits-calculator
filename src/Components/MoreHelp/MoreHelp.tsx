@@ -1,6 +1,5 @@
 import { FormattedMessage } from 'react-intl';
-import { useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper.tsx';
+import { useConfig } from '../Config/configHook.tsx';
 import './MoreHelp.css';
 
 type Resource = {
@@ -8,47 +7,38 @@ type Resource = {
   description?: JSX.Element;
   link?: string;
   phone?: JSX.Element;
+  label?: string;
 };
 
 const MoreHelp = () => {
-  const { config } = useContext(Context);
-  const { more_help } = config ?? {};
-  const resources: Resource[] = [
-    {
-      name: <FormattedMessage id="moreHelp.resource_name" defaultMessage="2-1-1 Colorado" />,
-      link: more_help?.resource211Link,
-      phone: (
-        <a href={more_help?.resourcePhone} className="resource-phone" target="_blank">
-          <FormattedMessage id="moreHelp.resource_phone" defaultMessage="Dial 2-1-1 or 866.760.6489" />
-        </a>
-      ),
-    },
-    {
-      name: <FormattedMessage id="moreHelp.resource_FRCA-name" defaultMessage="Family Resource Center Association" />,
-      description: (
-        <FormattedMessage
-          id="moreHelp.resource_FRCA-description"
-          defaultMessage="Your local family resource center may be able to connect you to other resources and support services. Visit a center near you."
-        />
-      ),
-      link: more_help?.resourceFRCALink,
-    },
-  ];
+  const { moreHelpOptions } = useConfig('more_help_options');
+  const resources: Resource[] = Object.values(moreHelpOptions);
 
   const displayResources = (resources: Resource[]) => {
     return resources.map((resource, index) => {
       return (
         <article key={index} className="resource-card-article">
           <h1 className="resource-header" key={index}>
-            {resource.name}
+            <FormattedMessage id={resource.name.props.id} defaultMessage={resource.name.props.defaultMessage} />
           </h1>
-          {resource.description && <p className="resource-desc">{resource.description}</p>}
+          {resource.description && (
+            <p className="resource-desc">
+              <FormattedMessage
+                id={resource.description.props.id}
+                defaultMessage={resource.description.props.defaultMessage}
+              />
+            </p>
+          )}
           {resource.link && (
             <a href={resource.link} className="resource-link" target="_blank">
               {resource.link}
             </a>
           )}
-          {resource.phone && <p className="resource-phone">{resource.phone}</p>}
+          {resource.phone && (
+            <p className="resource-phone">
+              <FormattedMessage id={resource.phone.props.id} defaultMessage={resource.phone.props.defaultMessage} />
+            </p>
+          )}
         </article>
       );
     });
