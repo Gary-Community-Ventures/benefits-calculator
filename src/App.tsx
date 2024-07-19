@@ -25,6 +25,7 @@ import { isCustomTypedLocationState } from './Types/FormData.ts';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits.tsx';
 import './App.css';
 import { useConfig } from './Components/Config/configHook';
+import { ZipcodeStep } from './Components/Steps/ZipcodeStep.tsx';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 
 const App = () => {
@@ -328,6 +329,10 @@ const App = () => {
                     handleHouseholdDataSubmit={handleHouseholdDataSubmit}
                   />
                 }
+              />
+              <Route
+                path="step-3"
+                element={<ZipcodeStep />}
               />
               <Route
                 path="step-:id"
