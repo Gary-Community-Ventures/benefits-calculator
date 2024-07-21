@@ -23,7 +23,7 @@ export type TextFieldDetails = {
   pattern?: string;
   inputName: string;
   inputLabel: FormattedMessageType;
-  // inputError: ValidationFunction<string>;
+  inputError: ValidationFunction<string>;
   inputHelperText: FormattedMessageType;
   dollarField?: boolean;
   numericField?: boolean;

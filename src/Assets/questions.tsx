@@ -1,8 +1,9 @@
 import {
-  // zipcodeHasError,
+  zipcodeHasError,
   radiofieldHasError,
-  // householdSizeHasError,
-  // householdAssetsHasError,
+  householdSizeHasError,
+  householdAssetsHasError,
+  displayZipcodeHelperText,
   benefitsHasError,
   selectHasError,
   displayReferralSourceHelperText,
@@ -10,6 +11,9 @@ import {
   acuteHHConditionsHasError,
   displayBenefitsHelperText,
   countySelectHelperText,
+  displayHouseholdSizeHelperText,
+  displayHouseholdAssetsHelperText,
+  otherReferalSourceHelperText,
 } from './validationFunctions.tsx';
 import { FormattedMessage } from 'react-intl';
 import type { QuestionName, Question } from '../Types/Questions.ts';
@@ -22,15 +26,13 @@ const questions: Record<QuestionName, Question> = {
     subheader: <FormattedMessage id="qcc.tell-us-text" defaultMessage="Let's Get Started!" />,
     question: <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />,
     componentDetails: {
-      componentType: 'Textfield',
+      componentType: 'Zipcode',
       inputType: 'text',
       inputName: 'zipcode',
       numericField: true,
       inputLabel: <FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />,
-      inputHelperText: (
-        <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />
-      ),
-      required: true,
+      inputError: zipcodeHasError,
+      // inputHelperText: displayZipcodeHelperText,
     },
     followUpQuestions: [
       {
@@ -77,15 +79,11 @@ const questions: Record<QuestionName, Question> = {
       inputType: 'text',
       inputName: 'householdSize',
       inputLabel: <FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size" />,
-      // inputError: householdSizeHasError,
-      inputHelperText: (
-        <FormattedMessage
-          id="errorMessage-numberOfHHMembers"
-          defaultMessage="Please enter the number of people in your household (max. 8)"
-        />
-      ),
+      inputError: householdSizeHasError,
+      inputHelperText: displayHouseholdSizeHelperText,
       numericField: true,
       required: true,
+
     },
   },
   householdData: {
@@ -159,10 +157,8 @@ const questions: Record<QuestionName, Question> = {
       inputType: 'text',
       inputName: 'householdAssets',
       inputLabel: <FormattedMessage id="questions.householdAssets-inputLabel" defaultMessage="Dollar Amount" />,
-      // inputError: householdAssetsHasError,
-      inputHelperText: (
-        <FormattedMessage id="validation-helperText.assets" defaultMessage="Please enter 0 or a positive number." />
-      ),
+      inputError: householdAssetsHasError,
+      inputHelperText: displayHouseholdAssetsHelperText,
       dollarField: true,
       numericField: true,
       required: true,
@@ -271,13 +267,8 @@ const questions: Record<QuestionName, Question> = {
           inputLabel: (
             <FormattedMessage id="questions.referralSource-a-inputLabel" defaultMessage="Other referral source" />
           ),
-          // inputError: selectHasError,
-          inputHelperText: (
-            <FormattedMessage
-              id="errorMessage-otherReferralSource"
-              defaultMessage="Please type in your referral source"
-            />
-          ),
+          inputError: selectHasError,
+          inputHelperText: otherReferalSourceHelperText,
           required: true,
         },
       },

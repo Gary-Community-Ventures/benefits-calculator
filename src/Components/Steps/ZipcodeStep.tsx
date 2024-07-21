@@ -1,26 +1,32 @@
-import { ReactNode, useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { FormattedMessageType } from '../../Types/Questions';
-import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material';
+import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { FormData } from '../../Types/FormData';
 import { Context } from '../Wrapper/Wrapper';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ZodType } from 'zod';
+import { updateScreen } from '../../Assets/updateScreen';
 import * as z from 'zod';
+import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 
-// interface ZipcodeStepProps {
-// }
+interface ZipcodeStepProps {
+  currentStepId: number;
+}
 
-export const ZipcodeStep = () => {
+export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
+  const { formData, locale, setFormData } = useContext(Context);
+  const navigate = useNavigate();
+  const { uuid } = useParams();
   const { config } = useContext(Context);
   const { counties_by_zipcode: countiesByZipcode } = config ?? {};
+  const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
 
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
   const zipcodeSchema = z.string().regex(numberMustBeFiveDigitsLongRegex);
-  const countySchema = z.string();
+  const countySchema = z.string().min(1);
   const formSchema = z.object({
     zipcode: zipcodeSchema,
     county: countySchema,
@@ -30,15 +36,30 @@ export const ZipcodeStep = () => {
     control,
     formState: { errors },
     handleSubmit,
+    setValue,
     watch,
-  } = useForm<FormData>({ resolver: zodResolver(formSchema) });
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      zipcode: formData.zipcode ?? '',
+      county: formData.county ?? '',
+    },
+  });
 
   const currentZipcodeValue = watch('zipcode');
   const doesZipcodeValuePassSchema = zipcodeSchema.safeParse(currentZipcodeValue).success;
   const shouldShowCountyInput = doesZipcodeValuePassSchema && Object.keys(countiesByZipcode).includes(currentZipcodeValue);
+  if (!shouldShowCountyInput) {
+    setValue('county', '');
+  }
 
-  const formSubmitHandler: SubmitHandler<FormData> = (data: FormData) => {
-    console.log(`in formSubmitHandler`)
+  const formSubmitHandler = async (zipCodeAndCountyData: FormData) => {
+    if (!!errors) {
+      const updatedFormData = {...formData, ...zipCodeAndCountyData}
+      setFormData(updatedFormData);
+      await updateScreen(uuid, updatedFormData, locale);
+      navigate(`/${uuid}/step-${currentStepId + 1}`);
+    }
   };
 
   const getZipcodeHelperText = (hasZipcodeErrors: boolean) => {
@@ -48,20 +69,7 @@ export const ZipcodeStep = () => {
     );
   }
 
-  const sortNumbersDescendingThenStringsLastWithoutSorting = (a: number | string, z: number | string) => {
-    //instructions on how to compare elements when they're being sorted
-    if (isNaN(Number(a)) || isNaN(Number(z))) {
-      return 0; // if either key is string, keep original order
-    } else if (Number(a) < Number(z)) {
-      return 1; // sort a after z
-    } else if (Number(a) > Number(z)) {
-      return -1; // sort z after a
-    } else {
-      return 0; // a === z, so keep original order
-    }
-  };
-
-  const createMenuItems = (disabledSelectMenuItemText, options) => {
+  const createMenuItems = (disabledSelectMenuItemText: FormattedMessageType, options: Record<string, string> ) => {
     const disabledSelectMenuItem = (
       <MenuItem value="disabled-select" key="disabled-select" disabled>
         {disabledSelectMenuItemText}
@@ -69,8 +77,6 @@ export const ZipcodeStep = () => {
     );
     const menuItemKeys = Object.keys(options);
     const menuItemLabels = Object.values(options);
-    menuItemKeys.sort((a, z) => sortNumbersDescendingThenStringsLastWithoutSorting(a, z));
-    menuItemLabels.sort((a, z) => sortNumbersDescendingThenStringsLastWithoutSorting(a, z));
 
     const dropdownMenuItems = menuItemKeys.map((option, i) => {
       // checks for transformed config formatted messages
@@ -91,38 +97,41 @@ export const ZipcodeStep = () => {
     return [disabledSelectMenuItem, dropdownMenuItems];
   };
 
+  const renderCountyHelperText = () => {
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="errorMessage-county" defaultMessage="Please Select a county" />
+      </ErrorMessageWrapper>
+    );
+  }
+  
   return (
-    <Stack>
-      <form onSubmit={handleSubmit(formSubmitHandler)}>
-        <Controller
-          name="zipcode"
-          control={control}
-          rules={{ required: true }}
-          defaultValue=""
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label={<FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />}
-              variant="outlined"
-              error={!!errors.zipcode}
-              helperText={getZipcodeHelperText(!!errors.zipcode)}
-            />
-          )}
-        />
-        {shouldShowCountyInput && (
-          <FormControl
-            sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
-            error={!!errors.county}
-          >
-            <InputLabel id="county">
-              <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />
-            </InputLabel>
-            <Controller
-              name="county"
-              control={control}
-              rules={{ required: true }}
-              defaultValue="disabled-select"
-              render={({ field }) => (
+    <form onSubmit={handleSubmit(formSubmitHandler)}>
+      <Controller
+        name="zipcode"
+        control={control}
+        rules={{ required: true, validate: () => 'something' }}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            label={<FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />}
+            variant="outlined"
+            error={!!errors.zipcode}
+            helperText={getZipcodeHelperText(!!errors.zipcode)}
+          />
+        )}
+      />
+      {shouldShowCountyInput && (
+        <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={!!errors.county}>
+          <InputLabel id="county">
+            <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />
+          </InputLabel>
+          <Controller
+            name="county"
+            control={control}
+            rules={{ required: true, validate: () => 'something' }}
+            render={({ field }) => (
+              <>
                 <Select
                   {...field}
                   labelId="county-select-label"
@@ -130,16 +139,25 @@ export const ZipcodeStep = () => {
                   label={<FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />}
                 >
                   {createMenuItems(
-                    <FormattedMessage id="questions.zipcode-a-disabledSelectMenuItemText" defaultMessage="Select a county" />,
-                    countiesByZipcode[watch('zipcode')]
+                    <FormattedMessage
+                      id="questions.zipcode-a-disabledSelectMenuItemText"
+                      defaultMessage="Select a county"
+                    />,
+                    countiesByZipcode[watch('zipcode')],
                   )}
                 </Select>
-              )}
-            />
-          </FormControl>
-        )}
-        <input type="submit" />
-      </form>
-    </Stack>
+                <FormHelperText>{!!errors.county && renderCountyHelperText()}</FormHelperText>
+              </>
+            )}
+          />
+        </FormControl>
+      )}
+      <div className="question-buttons">
+        <PreviousButton navFunction={backNavigationFunction} />
+        <Button variant="contained" onClick={handleSubmit(formSubmitHandler)}>
+          <FormattedMessage id="continueButton" defaultMessage="Continue" />
+        </Button>
+      </div>
+    </form>
   );
 };

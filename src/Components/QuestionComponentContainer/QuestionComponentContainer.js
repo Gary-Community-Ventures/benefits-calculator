@@ -12,7 +12,9 @@ import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
+import * as z from 'zod';
 import './QuestionComponentContainer.css';
+import { ZipcodeStep } from '../Steps/ZipcodeStep';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -231,6 +233,32 @@ const QuestionComponentContainer = ({
           createComponent(renderBasicSelectComponent(matchingQuestion)))}
     </main>
   );
+
+  switch (id) {
+    case '3':
+      return <ZipcodeStep currentStepId={Number(id)}/>;
+    default:
+      return (
+        <main className="benefits-form">
+          {renderHeaderAndSubheader()}
+          {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
+              createComponent(renderTextfieldComponent(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
+              createComponent(renderRadiofieldComponent(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
+              createComponent(renderNoAnswerComponent(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
+              createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
+              createComponent(renderOptionCardGroup(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
+              createComponent(renderBasicSelectComponent(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'Zipcode' &&
+              renderInputfield(matchingQuestion))}
+        </main>
+      );
+  }
+
 };
 
 export default QuestionComponentContainer;
