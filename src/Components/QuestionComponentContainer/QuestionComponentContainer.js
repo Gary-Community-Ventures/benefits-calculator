@@ -214,29 +214,12 @@ const QuestionComponentContainer = ({
     );
   };
 
-  return (
-    <main className="benefits-form">
-      {renderHeaderAndSubheader()}
-      {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
-        createComponent(renderTextfieldComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
-          createComponent(renderRadiofieldComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
-          createComponent(renderNoAnswerComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
-          createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
-          createComponent(renderOptionCardGroup(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
-          createComponent(renderBasicSelectComponent(matchingQuestion)))}
-    </main>
-  );
 
   switch (id) {
     case '3':
       return (
         <main className="benefits-form">
-          <ZipcodeStep currentStepId={Number(id)}/>
+          <ZipcodeStep currentStepId={Number(id)} />
         </main>
       );
     default:
