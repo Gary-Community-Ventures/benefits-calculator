@@ -30,9 +30,11 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
 
   const checkCountyIsValid = ({ zipcode, county }) => {
     const validCounties = countiesByZipcode[zipcode];
-    if (!Object.keys(validCounties).includes(county)) {
-      return false;
+
+    if (validCounties && Object.keys(validCounties).includes(county)) {
+      return true;
     }
+    return false;
   };
 
   const formSchema = z.object({
