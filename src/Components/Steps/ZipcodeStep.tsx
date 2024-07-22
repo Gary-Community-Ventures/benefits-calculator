@@ -37,10 +37,12 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
     return false;
   };
 
-  const formSchema = z.object({
-    zipcode: z.string().regex(numberMustBeFiveDigitsLongRegex),
-    county: z.string()
-  }).refine((data) => checkCountyIsValid(data), { message: 'invalid county', path: ['county'] });
+  const formSchema = z
+    .object({
+      zipcode: z.string().regex(numberMustBeFiveDigitsLongRegex),
+      county: z.string(),
+    })
+    .refine((data) => checkCountyIsValid(data), { message: 'invalid county', path: ['county'] });
 
   const {
     control,
@@ -56,11 +58,13 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
   });
 
   const currentZipcodeValue = watch('zipcode');
-  const shouldShowCountyInput = numberMustBeFiveDigitsLongRegex.test(currentZipcodeValue) && Object.keys(countiesByZipcode).includes(currentZipcodeValue);
+  const shouldShowCountyInput =
+    numberMustBeFiveDigitsLongRegex.test(currentZipcodeValue) &&
+    Object.keys(countiesByZipcode).includes(currentZipcodeValue);
 
   const formSubmitHandler = async (zipCodeAndCountyData: FormData) => {
     if (!!errors && uuid) {
-      const updatedFormData = {...formData, ...zipCodeAndCountyData}
+      const updatedFormData = { ...formData, ...zipCodeAndCountyData };
       setFormData(updatedFormData);
       await updateScreen(uuid, updatedFormData, locale);
       navigate(`/${uuid}/step-${currentStepId + 1}`);
@@ -69,12 +73,10 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
 
   const getZipcodeHelperText = (hasZipcodeErrors: boolean) => {
     if (!hasZipcodeErrors) return '';
-    return (
-      <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />
-    );
-  }
+    return <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />;
+  };
 
-  const createMenuItems = (disabledSelectMenuItemText: FormattedMessageType, options: Record<string, string> ) => {
+  const createMenuItems = (disabledSelectMenuItemText: FormattedMessageType, options: Record<string, string>) => {
     const disabledSelectMenuItem = (
       <MenuItem value="disabled-select" key="disabled-select" disabled>
         {disabledSelectMenuItemText}
@@ -108,7 +110,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
         <FormattedMessage id="errorMessage-county" defaultMessage="Please Select a county" />
       </ErrorMessageWrapper>
     );
-  }
+  };
 
   return (
     <div className="question-container" id={currentStepId.toString()}>

@@ -79,9 +79,7 @@ const zipcodeHasError: ValidationFunction<string | number> = (zipcode, formData,
 };
 
 const displayZipcodeHelperText: MessageFunction<string | number> = () => {
-  return (
-    <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />
-  );
+  return <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />;
 };
 
 const radiofieldHasError: ValidationFunction<any> = (radiofield) => {
@@ -199,10 +197,7 @@ const householdAssetsHasError: ValidationFunction<string> = (householdAssets) =>
 
 const displayHouseholdAssetsHelperText: MessageFunction<string> = (householdAssets) => {
   if (householdAssetsHasError(householdAssets)) {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-      </ErrorMessageWrapper>
-    );
+    return <ErrorMessageWrapper fontSize="1rem"></ErrorMessageWrapper>;
   }
 };
 

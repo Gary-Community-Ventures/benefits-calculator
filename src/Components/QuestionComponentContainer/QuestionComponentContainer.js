@@ -36,7 +36,6 @@ const QuestionComponentContainer = ({
     matchingQuestion.componentDetails.inputHelperText,
   );
 
-
   const renderTextfieldComponent = (question) => {
     return (
       <Textfield
@@ -211,7 +210,6 @@ const QuestionComponentContainer = ({
     );
   };
 
-
   switch (id) {
     case '3':
       return (
@@ -224,7 +222,7 @@ const QuestionComponentContainer = ({
         <main className="benefits-form">
           {renderHeaderAndSubheader()}
           {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
-              createComponent(renderTextfieldComponent(matchingQuestion))) ||
+            createComponent(renderTextfieldComponent(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
               createComponent(renderRadiofieldComponent(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
@@ -234,12 +232,10 @@ const QuestionComponentContainer = ({
             (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
               createComponent(renderOptionCardGroup(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
-              createComponent(renderBasicSelectComponent(matchingQuestion)))
-            }
+              createComponent(renderBasicSelectComponent(matchingQuestion)))}
         </main>
       );
   }
-
 };
 
 export default QuestionComponentContainer;

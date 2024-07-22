@@ -83,7 +83,6 @@ const questions: Record<QuestionName, Question> = {
       inputHelperText: displayHouseholdSizeHelperText,
       numericField: true,
       required: true,
-
     },
   },
   householdData: {
