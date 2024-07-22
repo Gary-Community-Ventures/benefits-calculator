@@ -11,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { updateScreen } from '../../Assets/updateScreen';
 import * as z from 'zod';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
+import { getQuestion } from '../../Assets/stepDirectory.ts';
 
 interface ZipcodeStepProps {
   currentStepId: number;
@@ -18,6 +19,7 @@ interface ZipcodeStepProps {
 
 export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
   const { formData, locale, setFormData } = useContext(Context);
+  const matchingQuestion = getQuestion(currentStepId, formData.immutableReferrer);
   const navigate = useNavigate();
   const { uuid } = useParams();
   const { config } = useContext(Context);
@@ -104,60 +106,69 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
       </ErrorMessageWrapper>
     );
   }
-  
+
   return (
-    <form onSubmit={handleSubmit(formSubmitHandler)}>
-      <Controller
-        name="zipcode"
-        control={control}
-        rules={{ required: true, validate: () => 'something' }}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label={<FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />}
-            variant="outlined"
-            error={!!errors.zipcode}
-            helperText={getZipcodeHelperText(!!errors.zipcode)}
-          />
-        )}
-      />
-      {shouldShowCountyInput && (
-        <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={!!errors.county}>
-          <InputLabel id="county">
-            <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />
-          </InputLabel>
-          <Controller
-            name="county"
-            control={control}
-            rules={{ required: true, validate: () => 'something' }}
-            render={({ field }) => (
-              <>
-                <Select
-                  {...field}
-                  labelId="county-select-label"
-                  id="county-source-select"
-                  label={<FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />}
-                >
-                  {createMenuItems(
-                    <FormattedMessage
-                      id="questions.zipcode-a-disabledSelectMenuItemText"
-                      defaultMessage="Select a county"
-                    />,
-                    countiesByZipcode[watch('zipcode')],
-                  )}
-                </Select>
-                <FormHelperText>{!!errors.county && renderCountyHelperText()}</FormHelperText>
-              </>
-            )}
-          />
-        </FormControl>
+    <div className="question-container" id={currentStepId.toString()}>
+      {<h2 className="question-label">{matchingQuestion.question}</h2>}
+      {matchingQuestion.questionDescription && (
+        <p className="question-description">{matchingQuestion.questionDescription}</p>
       )}
-      <div className="question-buttons">
-        <PreviousButton navFunction={backNavigationFunction} />
-        <Button variant="contained" onClick={handleSubmit(formSubmitHandler)}>
-          <FormattedMessage id="continueButton" defaultMessage="Continue" />
-        </Button>
-      </div>
-    </form>
+      <form onSubmit={handleSubmit(formSubmitHandler)}>
+        <Controller
+          name="zipcode"
+          control={control}
+          rules={{ required: true, validate: () => 'something' }}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label={<FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />}
+              variant="outlined"
+              error={!!errors.zipcode}
+              helperText={getZipcodeHelperText(!!errors.zipcode)}
+            />
+          )}
+        />
+        {shouldShowCountyInput && (
+          <div className="question-container">
+            <h2 className="question-label">{matchingQuestion.followUpQuestions[0].question}</h2>
+            <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={!!errors.county}>
+              <InputLabel id="county">
+                <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />
+              </InputLabel>
+              <Controller
+                name="county"
+                control={control}
+                rules={{ required: true, validate: () => 'something' }}
+                render={({ field }) => (
+                  <>
+                    <Select
+                      {...field}
+                      labelId="county-select-label"
+                      id="county-source-select"
+                      label={<FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />}
+                    >
+                      {createMenuItems(
+                        <FormattedMessage
+                          id="questions.zipcode-a-disabledSelectMenuItemText"
+                          defaultMessage="Select a county"
+                        />,
+                        countiesByZipcode[watch('zipcode')],
+                      )}
+                    </Select>
+                    <FormHelperText>{!!errors.county && renderCountyHelperText()}</FormHelperText>
+                  </>
+                )}
+              />
+            </FormControl>
+          </div>
+        )}
+        <div className="question-buttons">
+          <PreviousButton navFunction={backNavigationFunction} />
+          <Button variant="contained" onClick={handleSubmit(formSubmitHandler)}>
+            <FormattedMessage id="continueButton" defaultMessage="Continue" />
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
