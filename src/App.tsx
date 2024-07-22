@@ -138,14 +138,15 @@ const App = () => {
     // use referrer if there is a referrer, otherwise use utm source
     const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
     const isOtherSource = !(referrer in referralOptions);
+    const referrerSource = formData.referralSource || referrer;
 
     setFormData({
       ...formData,
       isTest: isTest,
       externalID: externalId,
-      referralSource: isOtherSource && referrer !== '' ? 'other' : referrer,
+      referralSource: isOtherSource && referrer !== '' ? 'other' : referrerSource,
       immutableReferrer: referrer,
-      otherSource: isOtherSource ? referrer : '',
+      otherSource: isOtherSource ? referrerSource : '',
       urlSearchParams: urlSearchParams,
     });
   }, [referralOptions, formData.immutableReferrer]);
