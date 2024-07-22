@@ -27,33 +27,34 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
   const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
 
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
-  const zipcodeSchema = z.string().regex(numberMustBeFiveDigitsLongRegex);
-  const countySchema = z.string().min(1);
+
+  const checkCountyIsValid = ({ zipcode, county }) => {
+    const validCounties = countiesByZipcode[zipcode];
+    if (!Object.keys(validCounties).includes(county)) {
+      return false;
+    }
+  };
+
   const formSchema = z.object({
-    zipcode: zipcodeSchema,
-    county: countySchema,
-  });
+    zipcode: z.string().regex(numberMustBeFiveDigitsLongRegex),
+    county: z.string()
+  }).refine((data) => checkCountyIsValid(data), { message: 'invalid county', path: ['county'] });
 
   const {
     control,
     formState: { errors },
     handleSubmit,
-    setValue,
     watch,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       zipcode: formData.zipcode ?? '',
-      county: formData.county ?? '',
+      county: formData.county ?? 'disabled-select',
     },
   });
 
   const currentZipcodeValue = watch('zipcode');
-  const doesZipcodeValuePassSchema = zipcodeSchema.safeParse(currentZipcodeValue).success;
-  const shouldShowCountyInput = doesZipcodeValuePassSchema && Object.keys(countiesByZipcode).includes(currentZipcodeValue);
-  if (!shouldShowCountyInput) {
-    setValue('county', '');
-  }
+  const shouldShowCountyInput = numberMustBeFiveDigitsLongRegex.test(currentZipcodeValue) && Object.keys(countiesByZipcode).includes(currentZipcodeValue);
 
   const formSubmitHandler = async (zipCodeAndCountyData: FormData) => {
     if (!!errors) {
@@ -117,7 +118,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
         <Controller
           name="zipcode"
           control={control}
-          rules={{ required: true, validate: () => 'something' }}
+          rules={{ required: true }}
           render={({ field }) => (
             <TextField
               {...field}
@@ -138,7 +139,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
               <Controller
                 name="county"
                 control={control}
-                rules={{ required: true, validate: () => 'something' }}
+                rules={{ required: true }}
                 render={({ field }) => (
                   <>
                     <Select
