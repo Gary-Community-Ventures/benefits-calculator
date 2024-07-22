@@ -237,9 +237,8 @@ const QuestionComponentContainer = ({
             (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
               createComponent(renderOptionCardGroup(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
-              createComponent(renderBasicSelectComponent(matchingQuestion))) ||
-            (matchingQuestion.componentDetails.componentType === 'Zipcode' &&
-              renderInputfield(matchingQuestion))}
+              createComponent(renderBasicSelectComponent(matchingQuestion)))
+            }
         </main>
       );
   }
