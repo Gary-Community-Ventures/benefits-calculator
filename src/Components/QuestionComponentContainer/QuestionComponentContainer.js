@@ -238,7 +238,7 @@ const QuestionComponentContainer = ({
     case '3':
       return (
         <main className="benefits-form">
-          <ZipcodeStep currentStepId={Number(id)}/>;
+          <ZipcodeStep currentStepId={Number(id)}/>
         </main>
       );
     default:
