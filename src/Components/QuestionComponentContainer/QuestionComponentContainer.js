@@ -10,11 +10,10 @@ import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
-import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
+import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
-import * as z from 'zod';
-import './QuestionComponentContainer.css';
 import { ZipcodeStep } from '../Steps/ZipcodeStep';
+import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -25,9 +24,8 @@ const QuestionComponentContainer = ({
   handleExpenseSourcesSubmit,
   handleCheckboxChange,
 }) => {
-  const { config, formData, setFormData } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const acuteConditionOptions = useConfig('acute_condition_options');
-  const countiesByZipcode = useConfig('counties_by_zipcode');
   const referralOptions = useConfig('referral_options');
   const signUpOptions = useConfig('sign_up_options');
   let { id } = useParams();
@@ -37,6 +35,7 @@ const QuestionComponentContainer = ({
     matchingQuestion.componentDetails.inputError,
     matchingQuestion.componentDetails.inputHelperText,
   );
+
 
   const renderTextfieldComponent = (question) => {
     return (
@@ -152,9 +151,7 @@ const QuestionComponentContainer = ({
     if (!hasFollowUpQuestions) {
       return false;
     }
-    // if (inputName === 'zipcode') {
-    //   return !zipcodeHasError(formData.zipcode, undefined, config);
-    // }
+
     if (formData[inputName] === true) {
       // this case is for a radio button question where the user selected "yes"
       return true;
