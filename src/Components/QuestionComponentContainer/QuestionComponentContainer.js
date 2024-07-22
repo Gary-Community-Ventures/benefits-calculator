@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useConfig } from '../Config/configHook.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Radiofield from '../Radiofield/Radiofield';
-import InputField from '../Textfield/InputField.tsx';
+import Textfield from '../Textfield/Textfield.js';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import BasicSelect from '../DropdownMenu/BasicSelect';
@@ -39,14 +39,12 @@ const QuestionComponentContainer = ({
   );
 
   const renderTextfieldComponent = (question) => {
-    const { inputName, inputLabel, inputHelperText, required } = question.componentDetails;
     return (
-      <InputField
-        defaultValue={formData[inputName]}
-        name={inputName}
-        label={inputLabel}
-        helperText={inputHelperText}
-        required={required}
+      <Textfield
+        componentDetails={question.componentDetails}
+        data={formData}
+        handleTextfieldChange={handleTextfieldChange}
+        submitted={errorController.submittedCount}
       />
     );
   };
