@@ -23,9 +23,9 @@ import dataLayerPush from './Assets/analytics.ts';
 import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
 import { isCustomTypedLocationState } from './Types/FormData.ts';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits.tsx';
-import './App.css';
 import { useConfig } from './Components/Config/configHook';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
+import './App.css';
 
 const App = () => {
   const navigate = useNavigate();
@@ -329,10 +329,6 @@ const App = () => {
                   />
                 }
               />
-              {/*<Route*/}
-              {/*  path="step-3"*/}
-              {/*  element={<ZipcodeStep />}*/}
-              {/*/>*/}
               <Route
                 path="step-:id"
                 element={
