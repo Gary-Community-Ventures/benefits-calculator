@@ -59,7 +59,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
   const shouldShowCountyInput = numberMustBeFiveDigitsLongRegex.test(currentZipcodeValue) && Object.keys(countiesByZipcode).includes(currentZipcodeValue);
 
   const formSubmitHandler = async (zipCodeAndCountyData: FormData) => {
-    if (!!errors) {
+    if (!!errors && uuid) {
       const updatedFormData = {...formData, ...zipCodeAndCountyData}
       setFormData(updatedFormData);
       await updateScreen(uuid, updatedFormData, locale);
@@ -131,7 +131,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
             />
           )}
         />
-        {shouldShowCountyInput && (
+        {shouldShowCountyInput && matchingQuestion.followUpQuestions?.length && (
           <div className="question-container">
             <h2 className="question-label">{matchingQuestion.followUpQuestions[0].question}</h2>
             <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={!!errors.county}>
