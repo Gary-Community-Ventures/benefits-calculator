@@ -61,23 +61,6 @@ const displayAgeHelperText: MessageFunction<string> = (applicantAge) => {
   }
 };
 
-const zipcodeHasError: ValidationFunction<string | number> = (zipcode, formData, config) => {
-  let { counties_by_zipcode: countiesByZipcode } = config ?? {};
-  //the zipcode input must have digits [0-9] and be exactly 5 digits long
-  const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
-  if (numberMustBeFiveDigitsLongRegex.test(zipcode.toString())) {
-    //this means that the zipcode input passed the regex test so we can just return false since there is no error
-    //this additional test checks the zipcode input against all CO zipcodes
-    if (countiesByZipcode) {
-      return !Object.keys(countiesByZipcode).includes(zipcode.toString());
-    }
-    // If countiesByZipcode is undefined, return false (assuming no error)
-    return true;
-  } else {
-    return true;
-  }
-};
-
 const radiofieldHasError: ValidationFunction<any> = (radiofield) => {
   return typeof radiofield !== 'boolean';
 };
@@ -539,7 +522,6 @@ export {
   useErrorController,
   ageHasError,
   displayAgeHelperText,
-  zipcodeHasError,
   radiofieldHasError,
   hoursWorkedValueHasError,
   hoursWorkedHelperText,
