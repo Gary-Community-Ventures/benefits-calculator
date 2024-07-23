@@ -20,6 +20,7 @@ interface ZipcodeStepProps {
 export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
   const { formData, locale, setFormData } = useContext(Context);
   const matchingQuestion = getQuestion(currentStepId, formData.immutableReferrer);
+  const requiredField = matchingQuestion.componentDetails.required;
   const navigate = useNavigate();
   const { uuid } = useParams();
   const { config } = useContext(Context);
@@ -122,7 +123,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
         <Controller
           name="zipcode"
           control={control}
-          rules={{ required: true }}
+          rules={{ required: requiredField }}
           render={({ field }) => (
             <TextField
               {...field}
@@ -143,7 +144,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
               <Controller
                 name="county"
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: requiredField }}
                 render={({ field }) => (
                   <>
                     <Select

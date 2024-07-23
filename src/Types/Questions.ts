@@ -36,6 +36,7 @@ export type ZipcodeStepDetails = {
   inputName: string;
   numericField: boolean;
   inputLabel: FormattedMessageType;
+  required: boolean;
 };
 
 type BasicSelectOptions =
@@ -53,9 +54,10 @@ export type BasicSelectDetails = {
   inputType: 'text';
   inputName: string;
   inputLabel?: FormattedMessageType;
-  inputError: ValidationFunction<string>;
-  inputHelperText: MessageFunction<string>;
+  inputError?: ValidationFunction<string>;
+  inputHelperText?: MessageFunction<string>;
   options?: BasicSelectOptions;
+  required?: boolean;
   componentProperties: {
     labelId: string;
     inputLabelText: FormattedMessageType;

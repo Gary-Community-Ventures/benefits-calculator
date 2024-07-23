@@ -29,6 +29,7 @@ const questions: Record<QuestionName, Question> = {
       inputName: 'zipcode',
       numericField: true,
       inputLabel: <FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />,
+      required: true
     },
     followUpQuestions: [
       {
@@ -39,8 +40,7 @@ const questions: Record<QuestionName, Question> = {
           inputType: 'text',
           inputName: 'county',
           inputLabel: <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />,
-          inputError: selectHasError,
-          inputHelperText: countySelectHelperText,
+          required: true,
           componentProperties: {
             labelId: 'county-select-label',
             inputLabelText: <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />,
