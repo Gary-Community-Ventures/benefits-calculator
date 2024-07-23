@@ -1,9 +1,7 @@
 import {
-  zipcodeHasError,
   radiofieldHasError,
   householdSizeHasError,
   householdAssetsHasError,
-  displayZipcodeHelperText,
   benefitsHasError,
   selectHasError,
   displayReferralSourceHelperText,
@@ -26,13 +24,11 @@ const questions: Record<QuestionName, Question> = {
     subheader: <FormattedMessage id="qcc.tell-us-text" defaultMessage="Let's Get Started!" />,
     question: <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />,
     componentDetails: {
-      componentType: 'Zipcode',
+      componentType: 'ZipcodeStep',
       inputType: 'text',
       inputName: 'zipcode',
       numericField: true,
       inputLabel: <FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />,
-      inputError: zipcodeHasError,
-      // inputHelperText: displayZipcodeHelperText,
     },
     followUpQuestions: [
       {
