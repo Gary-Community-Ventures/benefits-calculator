@@ -33,7 +33,7 @@ const MoreHelp = () => {
           )}
           {resource.phone && (
             <p className="resource-phone">
-              <FormattedMessage id={resource.phone.props.id} defaultMessage={resource.phone.props.defaultMessage} />
+              {resource.phone}
             </p>
           )}
         </article>
