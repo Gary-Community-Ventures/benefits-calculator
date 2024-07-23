@@ -140,6 +140,8 @@ const App = () => {
     const isOtherSource = !(referrer in referralOptions);
     const referrerSource = formData.referralSource || referrer;
 
+    // if the referrer source is not in the dropdown list than
+    // make the referrer "other" and fill in the other field
     setFormData({
       ...formData,
       isTest: isTest,
