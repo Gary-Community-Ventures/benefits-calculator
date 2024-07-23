@@ -24,7 +24,7 @@ export type TextFieldDetails = {
   inputName: string;
   inputLabel: FormattedMessageType;
   inputError: ValidationFunction<string>;
-  inputHelperText: FormattedMessageType;
+  inputHelperText: MessageFunction<string>;
   dollarField?: boolean;
   numericField?: boolean;
   required: boolean;
