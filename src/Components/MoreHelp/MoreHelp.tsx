@@ -23,10 +23,7 @@ const MoreHelp = () => {
           </h1>
           {resource.description && (
             <p className="resource-desc">
-              <FormattedMessage
-                id={resource.description.props.id}
-                defaultMessage={resource.description.props.defaultMessage}
-              />
+              {resource.description}
             </p>
           )}
           {resource.link && (
