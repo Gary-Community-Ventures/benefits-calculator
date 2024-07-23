@@ -32,7 +32,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
   const checkCountyIsValid = ({ zipcode, county }) => {
     const validCounties = countiesByZipcode[zipcode];
 
-    if (validCounties && Object.keys(validCounties).includes(county)) {
+    if (validCounties && county in validCounties) {
       return true;
     }
     return false;
