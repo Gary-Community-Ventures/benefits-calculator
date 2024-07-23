@@ -8,7 +8,6 @@ import {
   signUpOptionsHaveError,
   acuteHHConditionsHasError,
   displayBenefitsHelperText,
-  countySelectHelperText,
   displayHouseholdSizeHelperText,
   displayHouseholdAssetsHelperText,
   otherReferalSourceHelperText,
