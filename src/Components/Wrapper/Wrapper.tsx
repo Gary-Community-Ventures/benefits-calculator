@@ -198,6 +198,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         locale,
         selectLanguage,
         config,
+        configLoading,
         formData,
         setFormData,
         theme,

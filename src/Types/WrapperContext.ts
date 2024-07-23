@@ -8,6 +8,7 @@ export interface WrapperContext {
   selectLanguage: (event: Event) => void;
   formData: FormData;
   config: Config | undefined;
+  configLoading: boolean;
   setFormData: (formData: FormData) => void;
   theme: ITheme;
   setTheme: React.Dispatch<React.SetStateAction<'default' | 'twoOneOne'>>;
