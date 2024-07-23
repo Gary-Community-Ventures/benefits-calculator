@@ -11,6 +11,7 @@ import PreviousButton from '../PreviousButton/PreviousButton';
 import { updateScreen } from '../../Assets/updateScreen';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
+import { useConfig } from '../Config/configHook.tsx';
 import * as z from 'zod';
 
 interface ZipcodeStepProps {
@@ -23,11 +24,10 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
   const requiredField = matchingQuestion.componentDetails.required;
   const navigate = useNavigate();
   const { uuid } = useParams();
-  const { config } = useContext(Context);
-  const { counties_by_zipcode: countiesByZipcode } = config ?? {};
+  const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
+  const countiesByZipcode = useConfig('counties_by_zipcode');
   const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
 
-  const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
 
   const checkCountyIsValid = ({ zipcode, county }) => {
     const validCounties = countiesByZipcode[zipcode];
