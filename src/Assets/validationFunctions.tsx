@@ -78,10 +78,6 @@ const zipcodeHasError: ValidationFunction<string | number> = (zipcode, formData,
   }
 };
 
-const displayZipcodeHelperText: MessageFunction<string | number> = () => {
-  return <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />;
-};
-
 const radiofieldHasError: ValidationFunction<any> = (radiofield) => {
   return typeof radiofield !== 'boolean';
 };
@@ -544,7 +540,6 @@ export {
   ageHasError,
   displayAgeHelperText,
   zipcodeHasError,
-  displayZipcodeHelperText,
   radiofieldHasError,
   hoursWorkedValueHasError,
   hoursWorkedHelperText,
