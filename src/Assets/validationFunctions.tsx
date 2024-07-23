@@ -176,7 +176,11 @@ const householdAssetsHasError: ValidationFunction<string> = (householdAssets) =>
 
 const displayHouseholdAssetsHelperText: MessageFunction<string> = (householdAssets) => {
   if (householdAssetsHasError(householdAssets)) {
-    return <ErrorMessageWrapper fontSize="1rem"></ErrorMessageWrapper>;
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="validation-helperText.assets" defaultMessage="Please enter 0 or a positive number." />
+      </ErrorMessageWrapper>
+    );
   }
 };
 
