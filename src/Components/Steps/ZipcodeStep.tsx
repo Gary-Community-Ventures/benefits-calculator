@@ -20,27 +20,20 @@ interface ZipcodeStepProps {
 
 export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
   const { formData, locale, setFormData } = useContext(Context);
+  const { uuid } = useParams();
+  const navigate = useNavigate();
   const matchingQuestion = getQuestion(currentStepId, formData.immutableReferrer);
   const requiredField = matchingQuestion.componentDetails.required;
-  const navigate = useNavigate();
-  const { uuid } = useParams();
-  const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
+
   const countiesByZipcode = useConfig('counties_by_zipcode');
+  const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
+  const zipcodeSchema = z.string().regex(numberMustBeFiveDigitsLongRegex);
+
   const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
-
-
-  const checkCountyIsValid = ({ zipcode, county }) => {
-    const validCounties = countiesByZipcode[zipcode];
-
-    if (validCounties && county in validCounties) {
-      return true;
-    }
-    return false;
-  };
 
   const formSchema = z
     .object({
-      zipcode: z.string().regex(numberMustBeFiveDigitsLongRegex),
+      zipcode: zipcodeSchema,
       county: z.string(),
     })
     .refine((data) => checkCountyIsValid(data), { message: 'invalid county', path: ['county'] });
@@ -59,9 +52,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
   });
 
   const currentZipcodeValue = watch('zipcode');
-  const shouldShowCountyInput =
-    numberMustBeFiveDigitsLongRegex.test(currentZipcodeValue) &&
-    Object.keys(countiesByZipcode).includes(currentZipcodeValue);
+  const shouldShowCountyInput = zipcodeSchema.safeParse(currentZipcodeValue).success;
 
   const formSubmitHandler = async (zipCodeAndCountyData: FormData) => {
     if (!!errors && uuid) {
@@ -72,9 +63,13 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
     }
   };
 
-  const getZipcodeHelperText = (hasZipcodeErrors: boolean) => {
-    if (!hasZipcodeErrors) return '';
-    return <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />;
+  const checkCountyIsValid = ({ zipcode, county }) => {
+    const validCounties = countiesByZipcode[zipcode];
+
+    if (validCounties && county in validCounties) {
+      return true;
+    }
+    return false;
   };
 
   const createMenuItems = (disabledSelectMenuItemText: FormattedMessageType, options: Record<string, string>) => {
@@ -103,6 +98,11 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
     });
 
     return [disabledSelectMenuItem, dropdownMenuItems];
+  };
+
+  const getZipcodeHelperText = (hasZipcodeErrors: boolean) => {
+    if (!hasZipcodeErrors) return '';
+    return <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />;
   };
 
   const renderCountyHelperText = () => {
