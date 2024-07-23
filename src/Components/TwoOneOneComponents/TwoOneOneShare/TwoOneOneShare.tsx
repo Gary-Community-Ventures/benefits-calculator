@@ -14,13 +14,13 @@ import LinkIcon from '@mui/icons-material/Link';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
-import { Context } from '../Wrapper/Wrapper';
-import dataLayerPush from '../../Assets/analytics';
-import './Share.css';
+import { Context } from '../../Wrapper/Wrapper';
+import dataLayerPush from '../../../Assets/analytics';
 import { forwardRef, useState, useContext } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
+import '../../Share/Share.css';
 
-const Share = forwardRef(function Share({ close }, ref) {
+const TwoOneOneShare = forwardRef(function Share({ close }, ref) {
   const [copied, setCopied] = useState(false);
   const { getReferrer } = useContext(Context);
   const intl = useIntl();
@@ -117,4 +117,4 @@ const Share = forwardRef(function Share({ close }, ref) {
     </div>
   );
 });
-export default Share;
+export default TwoOneOneShare;
