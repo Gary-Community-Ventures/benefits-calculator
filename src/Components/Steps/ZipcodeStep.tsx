@@ -53,7 +53,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
 
   const currentZipcodeValue = watch('zipcode');
   const shouldShowCountyInput = zipcodeSchema.safeParse(currentZipcodeValue).success;
-
+  console.log(errors)
   const formSubmitHandler = async (zipCodeAndCountyData: FormData) => {
     if (!!errors && uuid) {
       const updatedFormData = { ...formData, ...zipCodeAndCountyData };
@@ -83,7 +83,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
 
     const dropdownMenuItems = menuItemKeys.map((option, i) => {
       // checks for transformed config formatted messages
-      if (typeof menuItemLabels[i] === 'object' && menuItemLabels[i])
+      if (typeof menuItemLabels[i] === 'object')
         return (
           <MenuItem value={option} key={option}>
             {menuItemLabels[i]}
