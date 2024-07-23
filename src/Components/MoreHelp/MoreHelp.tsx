@@ -19,7 +19,7 @@ const MoreHelp = () => {
       return (
         <article key={index} className="resource-card-article">
           <h1 className="resource-header" key={index}>
-            <FormattedMessage id={resource.name.props.id} defaultMessage={resource.name.props.defaultMessage} />
+            {resource.name}
           </h1>
           {resource.description && (
             <p className="resource-desc">
