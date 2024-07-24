@@ -172,17 +172,17 @@ const TwoOneOneHeader = () => {
                 <ShareIcon role="img" />
               </IconButton>
               {displayHamburgerMenuIcon()}
-              {displayHamburgerMenu()}
             </Stack>
             <Modal
               open={openShare}
               onClose={handleCloseShare}
               aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}
-            >
+              >
               <Share close={handleCloseShare} />
             </Modal>
           </Stack>
         </AppBar>
+        {openMenu && displayHamburgerMenu()}
       </Paper>
     </nav>
   );
