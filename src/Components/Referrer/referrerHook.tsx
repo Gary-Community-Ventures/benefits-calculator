@@ -9,6 +9,7 @@ import GACLogo from '../../Assets/GetAheadColorado/gaclogo.png';
 import FIRCLogo from '../../Assets/FircCobrand/FIRCLogo.png';
 import COMFBLogo from '../../Assets/colorado-mfb-logo.png';
 import DHSMFBLogo from '../../Assets/DenverHumanServices/denverHSLogo.png';
+import { FormattedMessage } from 'react-intl';
 
 type ReferrerOptions<T> = {
   default: T;
@@ -18,7 +19,7 @@ type ReferrerOptions<T> = {
 export type ReferrerData = {
   theme: ReferrerOptions<string>;
   logoSource: ReferrerOptions<string>;
-  logoAlt: ReferrerOptions<string>;
+  logoAlt: ReferrerOptions<{ id: string; defaultMessage: string }>;
   logoClass: ReferrerOptions<string>;
   twoOneOneLink: ReferrerOptions<string>;
   shareLink: ReferrerOptions<string>;
@@ -43,16 +44,29 @@ const referrerData: ReferrerData = {
     dhs: DHSMFBLogo,
   },
   logoAlt: {
-    default: 'MyFriendBen home page button',
-    bia: 'Benefits in Action and MyFriendBen home page button',
-    jeffcoHS: 'Jeffco Human Services and MyFriendBen home page button',
-    jeffcoHSCM: 'Jeffco Human Services and MyFriendBen home page button',
-    cch: 'Colorado Coalition for the Homeless and MyFriendBen home page button',
-    lgs: "Let's Get Set home page button",
-    gac: 'Get Ahead Colorado home page button',
-    fircsummitresourcecenter: 'Firc Summit Resource Center',
-    coBenefits: 'MyFriendBen home page button',
-    dhs: 'Denver Human Services and MyFriendBen home page button',
+    // FormattedMessage does not work.
+    default: { id: 'referrerHook.logoAlts.default', defaultMessage: 'MyFriendBen home page button' },
+    bia: { id: 'referrerHook.logoAlts.bia', defaultMessage: 'Benefits in Action and MyFriendBen home page button' },
+    jeffcoHS: {
+      id: 'referrerHook.logoAlts.jeffcoHS',
+      defaultMessage: 'Jeffco Human Services and MyFriendBen home page button',
+    },
+    jeffcoHSCM: {
+      id: 'referrerHook.logoAlts.jeffcoHSCM',
+      defaultMessage: 'Jeffco Human Services and MyFriendBen home page button',
+    },
+    cch: {
+      id: 'referrerHook.logoAlts.cch',
+      defaultMessage: 'Colorado Coalition for the Homeless and MyFriendBen home page button',
+    },
+    lgs: { id: 'referrerHook.logoAlts.lgs', defaultMessage: "Let's Get Set home page button" },
+    gac: { id: 'referrerHook.logoAlts.gac', defaultMessage: 'Get Ahead Colorado home page button' },
+    fircsummitresourcecenter: {
+      id: 'referrerHook.logoAlts.fircsummitresourcecenter',
+      defaultMessage: 'Firc Summit Resource Center',
+    },
+    coBenefits: { id: 'referrerHook.logoAlts.coBenefits', defaultMessage: 'MyFriendBen home page button' },
+    dhs: { id: 'referrerHook.logoAlts.dhs', defaultMessage: 'Denver Human Services and MyFriendBen home page button' },
   },
   logoClass: {
     default: 'logo',

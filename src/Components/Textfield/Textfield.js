@@ -1,5 +1,4 @@
-import { useContext, useRef, useEffect } from 'react';
-import { Context } from '../Wrapper/Wrapper.tsx';
+import { useRef, useEffect } from 'react';
 import { TextField, InputAdornment } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
@@ -10,9 +9,6 @@ const StyledTextField = styled(TextField)({
 });
 
 const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submitted }) => {
-  const { config } = useContext(Context);
-  const countiesByZipcode = config.counties_by_zipcode;
-
   const { inputType, inputName, inputLabel, inputError, inputHelperText, dollarField, numericField } = componentDetails;
   const errorController = useErrorController(inputError, inputHelperText);
   useEffect(() => {
@@ -21,7 +17,7 @@ const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submi
 
   const valueRef = useRef('');
   useEffect(() => {
-    errorController.updateError(valueRef.current.value, undefined, countiesByZipcode);
+    errorController.updateError(valueRef.current.value);
   }, [valueRef.current.value]);
 
   return (
@@ -37,7 +33,7 @@ const Textfield = ({ componentDetails, data, handleTextfieldChange, index, submi
       variant="outlined"
       required
       error={errorController.showError}
-      helperText={errorController.showError && errorController.message(data[inputName], undefined, countiesByZipcode)}
+      helperText={errorController.showError && errorController.message(data[inputName])}
       inputProps={numericField ? { pattern: '[0-9]* .', inputMode: 'decimal' } : {}}
       InputProps={
         dollarField

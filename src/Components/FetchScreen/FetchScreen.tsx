@@ -8,7 +8,7 @@ import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData.t
 import type { FormData } from '../../Types/FormData.ts';
 
 const FetchScreen = () => {
-  const { formData, setFormData, screenDoneLoading } = useContext(Context);
+  const { formData, setFormData, screenDoneLoading, configLoading } = useContext(Context);
   const referralOptions = useConfig('referral_options');
   const { uuid } = useParams();
   const navigate = useNavigate();
@@ -158,6 +158,9 @@ const FetchScreen = () => {
   };
 
   useEffect(() => {
+    if (configLoading) {
+      return;
+    }
     // https://stackoverflow.com/questions/20041051/how-to-judge-a-string-is-uuid-type
     const uuidRegx = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
     if (uuid === undefined || !uuid.match(uuidRegx)) {
@@ -165,7 +168,7 @@ const FetchScreen = () => {
       return;
     }
     fetchScreen(uuid);
-  }, [uuid]);
+  }, [uuid, configLoading]);
 
   return <LoadingPage />;
 };

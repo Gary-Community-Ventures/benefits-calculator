@@ -4,6 +4,7 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createScreen } from '../../Assets/updateScreen.ts';
+import { useConfig } from '../Config/configHook.tsx';
 import {
   useErrorController,
   displayAgreeToTermsErrorMessage,
@@ -19,13 +20,13 @@ interface LandingPageProps {
 }
 
 const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
-  const { formData, locale, screenDoneLoading, theme } = useContext(Context);
+  const { formData, locale, screenDoneLoading, theme, config } = useContext(Context);
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   let { uuid } = useParams();
   const navigate = useNavigate();
   const privacyErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
   const ageErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
-
+  const publicChargeOption = useConfig('public_charge_rule');
   useEffect(() => {
     const continueOnEnter = (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
@@ -137,8 +138,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
               />
               <a
                 className="link-color"
-                href="https://cdhs.colorado.gov/public-charge-rule-and-colorado-immigrants#:~:text=About%20public%20charge&text=The%20test%20looks%20at%20whether,affidavit%20of%20support%20or%20contract."
-                target="_blank"
+                href={publicChargeOption.link}
                 onClick={() => {
                   dataLayerPush({
                     event: 'public_charge',
@@ -194,7 +194,15 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
         </CardContent>
       </Box>
       <div className="back-continue-buttons">
-        <PreviousButton navFunction={() => navigate(`/step-1${queryString}`)} />
+        <PreviousButton
+          navFunction={() => {
+            if (uuid !== undefined) {
+              navigate(`/${uuid}/step-1${queryString}`);
+              return;
+            }
+            navigate(`/step-1${queryString}`);
+          }}
+        />
         <Button variant="contained" onClick={handleContinue}>
           <FormattedMessage id="continue-button" defaultMessage="Continue" />
         </Button>

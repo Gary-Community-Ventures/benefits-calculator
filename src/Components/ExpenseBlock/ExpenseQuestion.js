@@ -32,7 +32,6 @@ const StyledDeleteButton = styled(Button)({
 });
 
 const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteExpenseBlock, index, submitted }) => {
-  const { config } = useContext(Context);
   const expenseTypeErrorController = useErrorController(selectHasError, expenseTypeHelperText);
 
   const expenseOptions = useConfig('expense_options');

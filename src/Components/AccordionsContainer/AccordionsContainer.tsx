@@ -38,11 +38,8 @@ const AccordionsContainer = ({ componentDetails, submitted }: Props) => {
   const { formData, config } = useContext(Context);
   let formattedBenefits: BenefitAccordion[] = [];
 
-  if (config) {
-    formattedBenefits = formatCategoryBenefits(config.category_benefits);
-  } else {
-    console.error('Error: config or category_benefits is undefined.');
-  }
+  if (config) formattedBenefits = formatCategoryBenefits(config.category_benefits);
+  else console.error('Error: config or category_benefits is undefined.');
 
   const [expanded, setExpanded] = useState<boolean | number>(false);
 
