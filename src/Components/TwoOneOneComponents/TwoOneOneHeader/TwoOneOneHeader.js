@@ -14,8 +14,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
 import CloseIcon from '@mui/icons-material/Close';
-import languageOptions from '../../../Assets/languageOptions';
-import EmailResults from '../../EmailResults/EmailResults';
 import './TwoOneOneHeader.css';
 
 const TwoOneOneHeader = () => {
@@ -139,6 +137,7 @@ const TwoOneOneHeader = () => {
                         inset 0px 1px 10px 0px rgba(0,0,0,0.12)`,
           },
         }}
+        disableEnforceFocus
       >
         <Stack gap="1rem" alignItems="end" sx={{ margin: '1rem' }}>
           {create211Links()}
