@@ -56,7 +56,13 @@ button.hamburger-icon {
   }
 
   .hamburger-drawer {
-    display: block;
+    display: flex;
+    background-color: #fff;
+    position: relative;
+    z-index: 1;
+    margin: 1rem;
+    align-items: end;
+    gap: 1rem;
   }
 
   div.twoOneOne-desktop-links {
