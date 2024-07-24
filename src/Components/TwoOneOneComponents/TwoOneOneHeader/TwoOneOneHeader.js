@@ -109,27 +109,13 @@ const TwoOneOneHeader = () => {
 
   const displayHamburgerMenu = () => {
     return (
-      <Drawer
+      <Stack
         className="hamburger-drawer"
-        anchor="right"
-        variant="temporary"
         open={openMenu}
         onClose={handleOpenMenu}
-        sx={{
-          zIndex: 1000,
-          [`& .MuiDrawer-paper`]: {
-            mt: '4.16rem',
-            width: '100%',
-            boxShadow: `inset 0px 2px 4px -1px rgba(0,0,0,0.2),
-                        inset 0px 4px 5px 0px rgba(0,0,0,0.14),
-                        inset 0px 1px 10px 0px rgba(0,0,0,0.12)`,
-          },
-        }}
       >
-        <Stack gap="1rem" alignItems="end" sx={{ margin: '1rem' }}>
-          {create211Links()}
-        </Stack>
-      </Drawer>
+        {create211Links()}
+      </Stack>
     );
   };
 
