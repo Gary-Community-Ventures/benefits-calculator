@@ -12,7 +12,7 @@ const SelectLanguagePage = () => {
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const navigate = useNavigate();
 
-  const createMenuItems = (optionList: Record<string, any>, disabledFMId: string, disabledFMDefault: string) => {
+  const createMenuItems = (optionList: Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
     const disabledSelectMenuItem = (
       <MenuItem value="disabled-select" key="disabled-select" disabled>
         <FormattedMessage id={disabledFMId} defaultMessage={disabledFMDefault} />

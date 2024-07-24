@@ -1,45 +1,40 @@
 import { FormattedMessage } from 'react-intl';
+import { useConfig } from '../Config/configHook.tsx';
 import './MoreHelp.css';
 
 type Resource = {
-  name: string;
-  description?: string;
+  name: JSX.Element;
+  description?: JSX.Element;
   link?: string;
-  phone?: string;
+  phone?: JSX.Element;
+  label?: string;
 };
 
 const MoreHelp = () => {
-  const resources: Resource[] = [
-    {
-      name: '2-1-1 Colorado',
-      link: 'https://www.211colorado.org',
-      phone: 'Dial 2-1-1 or 866.760.6489',
-    },
-    {
-      name: 'Family Resource Center Association',
-      description:
-        'Your local family resource center may be able to connect you to other resources and support services. Visit a center near you.',
-      link: 'https://maps.cofamilycenters.org',
-    },
-  ];
+  const { moreHelpOptions } = useConfig('more_help_options');
+  const resources: Resource[] = Object.values(moreHelpOptions);
 
   const displayResources = (resources: Resource[]) => {
-    return resources.map((resource) => {
+    return resources.map((resource, index) => {
       return (
-        <article key={resource.name} className="resource-card-article">
-          <h1 className="resource-header" key={resource.name}>
+        <article key={index} className="resource-card-article">
+          <h1 className="resource-header" key={index}>
             {resource.name}
           </h1>
-          {resource.description && <p className="resource-desc">{resource.description}</p>}
+          {resource.description && (
+            <p className="resource-desc">
+              {resource.description}
+            </p>
+          )}
           {resource.link && (
             <a href={resource.link} className="resource-link" target="_blank">
               {resource.link}
             </a>
           )}
           {resource.phone && (
-            <a href={`tel:${resource.phone}`} className="resource-phone" target="_blank">
+            <p className="resource-phone">
               {resource.phone}
-            </a>
+            </p>
           )}
         </article>
       );
