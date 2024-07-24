@@ -92,31 +92,19 @@ const TwoOneOneHeader = () => {
   };
 
   const displayHamburgerMenuIcon = () => {
-    if (openMenu) {
-      return (
-        <IconButton
-          edge="end"
-          color="primary"
-          aria-label={intl.formatMessage(closeBtnAriaLabelProps)}
-          onClick={handleOpenMenu}
-          className="hamburger-icon"
-        >
-          <CloseIcon />
-        </IconButton>
-      );
-    } else {
-      return (
-        <IconButton
-          edge="end"
-          color="primary"
-          aria-label={intl.formatMessage(openMenuBtnAriaLabelProps)}
-          onClick={handleOpenMenu}
-          className="hamburger-icon"
-        >
-          <MenuIcon />
-        </IconButton>
-      );
-    }
+    return (
+      <IconButton
+        edge="end"
+        color="primary"
+        aria-label={
+          openMenu ? intl.formatMessage(closeBtnAriaLabelProps) : intl.formatMessage(openMenuBtnAriaLabelProps)
+        }
+        onClick={handleOpenMenu}
+        className="hamburger-icon"
+      >
+        {openMenu ? <CloseIcon /> : <MenuIcon />}
+      </IconButton>
+    );
   };
 
   const displayHamburgerMenu = () => {
@@ -137,7 +125,6 @@ const TwoOneOneHeader = () => {
                         inset 0px 1px 10px 0px rgba(0,0,0,0.12)`,
           },
         }}
-        disableEnforceFocus
       >
         <Stack gap="1rem" alignItems="end" sx={{ margin: '1rem' }}>
           {create211Links()}
