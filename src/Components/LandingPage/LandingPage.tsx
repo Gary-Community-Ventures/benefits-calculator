@@ -194,7 +194,15 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
         </CardContent>
       </Box>
       <div className="back-continue-buttons">
-        <PreviousButton navFunction={() => navigate(`/step-1${queryString}`)} />
+        <PreviousButton
+          navFunction={() => {
+            if (uuid !== undefined) {
+              navigate(`/${uuid}/step-1${queryString}`);
+              return;
+            }
+            navigate(`/step-1${queryString}`);
+          }}
+        />
         <Button variant="contained" onClick={handleContinue}>
           <FormattedMessage id="continue-button" defaultMessage="Continue" />
         </Button>
