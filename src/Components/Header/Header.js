@@ -43,13 +43,16 @@ const Header = () => {
     return dropdownMenuItems;
   };
 
-
   return (
     <nav>
       <Paper className="header-full-width-container" square={true} elevation={0}>
         <AppBar id="nav-container" position="sticky" elevation={0}>
           <a href={`/step-1${queryString}`} className="home-link">
-            <img src={getReferrer('logoSource')} alt={intl.formatMessage(getReferrer('logoAlt'))} className={getReferrer('logoClass')} />
+            <img
+              src={getReferrer('logoSource')}
+              alt={intl.formatMessage(getReferrer('logoAlt'))}
+              className={getReferrer('logoClass')}
+            />
           </a>
           <div className="icon-wrapper">
             <LanguageIcon />

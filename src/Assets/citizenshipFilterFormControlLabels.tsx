@@ -60,7 +60,12 @@ const citizenshipFilterFormControlLabels: Record<CitizenLabelOptions, FormattedM
       defaultMessage="Admitted refugees or asylees (special rules or waiting periods may apply)"
     />
   ),
-  other: <FormattedMessage id="citizenshipFCtrlLabel-other" defaultMessage="Other lawfully present noncitizens (includes DACA recipients)" />,
+  other: (
+    <FormattedMessage
+      id="citizenshipFCtrlLabel-other"
+      defaultMessage="Other lawfully present noncitizens (includes DACA recipients)"
+    />
+  ),
   otherWithWorkPermission: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-other_work_permission"

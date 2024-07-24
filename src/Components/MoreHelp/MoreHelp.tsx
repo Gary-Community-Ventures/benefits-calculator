@@ -21,21 +21,13 @@ const MoreHelp = () => {
           <h1 className="resource-header" key={index}>
             {resource.name}
           </h1>
-          {resource.description && (
-            <p className="resource-desc">
-              {resource.description}
-            </p>
-          )}
+          {resource.description && <p className="resource-desc">{resource.description}</p>}
           {resource.link && (
             <a href={resource.link} className="resource-link" target="_blank">
               {resource.link}
             </a>
           )}
-          {resource.phone && (
-            <p className="resource-phone">
-              {resource.phone}
-            </p>
-          )}
+          {resource.phone && <p className="resource-phone">{resource.phone}</p>}
         </article>
       );
     });
