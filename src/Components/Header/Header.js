@@ -2,13 +2,7 @@ import { AppBar, MenuItem, Select } from '@mui/material';
 import { useContext, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
-import languageOptions from '../../Assets/languageOptions.tsx';
-import { useLocation } from 'react-router-dom';
 import { useConfig } from '../Config/configHook.tsx';
-import ShareIcon from '@mui/icons-material/Share';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import Share from '../Share/Share';
-import EmailResults from '../EmailResults/EmailResults';
 import Paper from '@mui/material/Paper';
 import { useIntl } from 'react-intl';
 import './Header.css';
@@ -49,12 +43,13 @@ const Header = () => {
     return dropdownMenuItems;
   };
 
+
   return (
     <nav>
       <Paper className="header-full-width-container" square={true} elevation={0}>
         <AppBar id="nav-container" position="sticky" elevation={0}>
           <a href={`/step-1${queryString}`} className="home-link">
-            <img src={getReferrer('logoSource')} alt={getReferrer('logoAlt')} className={getReferrer('logoClass')} />
+            <img src={getReferrer('logoSource')} alt={intl.formatMessage(getReferrer('logoAlt'))} className={getReferrer('logoClass')} />
           </a>
           <div className="icon-wrapper">
             <LanguageIcon />

@@ -14,8 +14,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
 import CloseIcon from '@mui/icons-material/Close';
-import languageOptions from '../../../Assets/languageOptions';
-import EmailResults from '../../EmailResults/EmailResults';
 import './TwoOneOneHeader.css';
 
 const TwoOneOneHeader = () => {
@@ -44,6 +42,10 @@ const TwoOneOneHeader = () => {
   const shareMFBModalAriaLabelProps = {
     id: 'header.shareMFBModal-AL',
     defaultMsg: 'share my friend ben modal',
+  };
+  const logoAltText = {
+    id: '211Header.logo.alt',
+    defaultMsg: '211 and myfriendben logo',
   };
 
   const [openShare, setOpenShare] = useState(false);
@@ -167,7 +169,7 @@ const TwoOneOneHeader = () => {
         <AppBar position="sticky" id="twoOneOne-nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
           <Box>
             <a href={`/step-1${queryString}`}>
-              <img src={twoOneOneMFBLogo} alt="211 and myfriendben logo" className="cobranded-logo" />
+              <img src={twoOneOneMFBLogo} alt={intl.formatMessage(logoAltText)} className="cobranded-logo" />
             </a>
           </Box>
           <Stack direction="row" gap="1rem">
