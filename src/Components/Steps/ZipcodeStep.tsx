@@ -129,15 +129,15 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
               {...field}
               label={<FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />}
               variant="outlined"
-              error={!!errors.zipcode}
-              helperText={getZipcodeHelperText(!!errors.zipcode)}
+              error={errors.zipcode !== undefined}
+              helperText={getZipcodeHelperText(errors.zipcode !== undefined)}
             />
           )}
         />
         {shouldShowCountyInput && matchingQuestion.followUpQuestions?.length && (
           <div className="question-container">
             <h2 className="question-label">{matchingQuestion.followUpQuestions[0].question}</h2>
-            <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={!!errors.county}>
+            <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.county !== undefined}>
               <InputLabel id="county">
                 <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />
               </InputLabel>
@@ -161,7 +161,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
                         countiesByZipcode[watch('zipcode')],
                       )}
                     </Select>
-                    <FormHelperText>{!!errors.county && renderCountyHelperText()}</FormHelperText>
+                    <FormHelperText>{errors.county !== undefined && renderCountyHelperText()}</FormHelperText>
                   </>
                 )}
               />
