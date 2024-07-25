@@ -46,7 +46,7 @@ button.hamburger-icon {
   display: none;
 }
 
-.hamburger-drawer {
+#hamburger-drawer {
   display: none;
 }
 
@@ -55,7 +55,7 @@ button.hamburger-icon {
     display: flex;
   }
 
-  .hamburger-drawer {
+  #hamburger-drawer {
     display: flex;
     background-color: #fff;
     position: relative;
