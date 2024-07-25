@@ -12,8 +12,13 @@ const Footer = () => {
   const context = useContext(Context);
   const { theme } = context;
   const intl = useIntl();
-  const footerLogo = useConfig('MBF_logo');
-  const stateLogo = Array.isArray(footerLogo) ? '' : footerLogo.state_code;
+  const footerLogo: Record<string, any> = useConfig('MBF_logo');
+  const stateLogo = footerLogo.state_code;
+
+  const referrerData = useConfig('referrerData');
+  console.log("footerwrap")
+  console.log(referrerData);
+  console.log("footerwrap")
 
   return (
     <footer>
@@ -21,7 +26,7 @@ const Footer = () => {
         <div className="footer-content-container">
           <div>
             <img
-              src={getLogo(stateLogo)}
+              src={getLogo(Number(stateLogo))}
               alt={intl.formatMessage({ id: 'footer.logo.alt', defaultMessage: 'MFB Logo' })}
               className="logo footer-logo"
             />

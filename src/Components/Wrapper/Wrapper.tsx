@@ -6,7 +6,7 @@ import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
 import { Language } from '../../Types/Language';
-import { useGetConfig } from '../Config/configHook';
+import { useConfig, useGetConfig } from '../Config/configHook';
 
 const initialFormData: FormData = {
   isTest: undefined,
@@ -179,7 +179,12 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
     setLocale(newLocale as Language);
   };
-
+const referrerData =  useConfig('referrerData');
+console.log("wrapperwrap")
+console.log(referrerData)
+console.log("wrapperwrap")
+const footerLogo: Record<string, any> = useConfig('MBF_logo');
+console.log(footerLogo)
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer);
 

@@ -211,6 +211,9 @@ export function useGetConfig() {
 
 export function useConfig(name: string) {
   const { config } = useContext(Context);
+console.log("config", config);
+console.log(name);
+
 
   if (config === undefined) {
     return {};
