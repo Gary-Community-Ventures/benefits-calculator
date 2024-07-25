@@ -140,8 +140,8 @@ const TwoOneOneHeader = () => {
               <img src={twoOneOneMFBLogo} alt="211 and myfriendben logo" className="cobranded-logo" />
             </a>
           </Box>
-          <Stack direction="row" gap="1rem">
-            <Stack direction="row" gap="1rem" alignItems="center" className="twoOneOne-desktop-links">
+          <Stack direction="row" gap=".55rem">
+            <Stack direction="row" gap="0.55rem" alignItems="center" className="twoOneOne-desktop-links">
               {create211Links()}
             </Stack>
             <Stack direction="row" gap=".25rem" alignItems="center">
@@ -166,6 +166,7 @@ const TwoOneOneHeader = () => {
                 color="primary"
                 onClick={handleOpenShare}
                 aria-label={intl.formatMessage(shareButtonAriaLabelProps)}
+                sx={{ padding: '0' }}
               >
                 <ShareIcon role="img" />
               </IconButton>
