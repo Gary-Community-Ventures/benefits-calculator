@@ -55,7 +55,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
   const shouldShowCountyInput = zipcodeSchema.safeParse(currentZipcodeValue).success;
 
   const formSubmitHandler = async (zipCodeAndCountyData: FormData) => {
-    if (!!errors && uuid) {
+    if (uuid) {
       const updatedFormData = { ...formData, ...zipCodeAndCountyData };
       setFormData(updatedFormData);
       await updateScreen(uuid, updatedFormData, locale);
