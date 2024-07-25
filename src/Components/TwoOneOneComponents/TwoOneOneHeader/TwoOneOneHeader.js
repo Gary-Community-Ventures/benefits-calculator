@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AppBar, MenuItem, Select, Modal, Link, IconButton } from '@mui/material';
+import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -11,7 +12,6 @@ import twoOneOneLinks from '../../../Assets/TwoOneOneAssets/twoOneOneLinks';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import MenuIcon from '@mui/icons-material/Menu';
-import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
 import CloseIcon from '@mui/icons-material/Close';
 import './TwoOneOneHeader.css';
@@ -109,13 +109,11 @@ const TwoOneOneHeader = () => {
 
   const displayHamburgerMenu = () => {
     return (
-      <Stack
-        id="hamburger-drawer"
-        open={openMenu}
-        onClose={handleOpenMenu}
-      >
-        {create211Links()}
-      </Stack>
+      <ClickAwayListener onClickAway={handleOpenMenu}>
+        <Stack id="hamburger-drawer" open={openMenu} onClose={handleOpenMenu}>
+          {create211Links()}
+        </Stack>
+      </ClickAwayListener>
     );
   };
 
