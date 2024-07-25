@@ -176,7 +176,7 @@ const TwoOneOneHeader = () => {
               open={openShare}
               onClose={handleCloseShare}
               aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}
-              >
+            >
               <Share close={handleCloseShare} />
             </Modal>
           </Stack>
