@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { AppBar, MenuItem, Select, Modal, Link, IconButton } from '@mui/material';
-import { ClickAwayListener } from '@mui/base/ClickAwayListener';
+import { AppBar, MenuItem, Select, Modal, Link, IconButton, ClickAwayListener } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
