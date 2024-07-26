@@ -4,9 +4,11 @@ import ResultsTranslate from '../Translate/Translate.tsx';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
 import { FormattedMessage } from 'react-intl';
-import { formatToUSD, formatYearlyValue } from '../FormattedValue';
+import { formatYearlyValue } from '../FormattedValue';
 import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage.tsx';
+import { useContext } from 'react';
+import { Context } from '../../Wrapper/Wrapper';
 
 type ProgramPageProps = {
   program: Program;
@@ -18,6 +20,7 @@ type IconRendererProps = {
 
 const ProgramPage = ({ program }: ProgramPageProps) => {
   const { uuid } = useParams();
+  const { locale } = useContext(Context);
   const IconRenderer: React.FC<IconRendererProps> = ({ headingType }) => {
     const IconComponent = headingOptionsMappings[headingType];
 
@@ -54,7 +57,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <article className="estimation-text-left">
             <FormattedMessage id="results.estimated-annual-value" defaultMessage="Estimated Annual Value" />
           </article>
-          <article className="estimation-text-right slim-text">{formatYearlyValue(program)}</article>
+          <article className="estimation-text-right slim-text">{formatYearlyValue(program, locale)}</article>
         </div>
         <div className="estimation-text">
           <article className="estimation-text-left">

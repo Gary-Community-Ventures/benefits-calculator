@@ -11,6 +11,7 @@ import { Translation } from '../../../Types/Results.ts';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate.tsx';
 import { PRESCHOOL_CATEGORY } from '../../../Assets/resultsConstants.ts';
+import { useTranslateNumber } from '../../../Assets/languageOptions';
 
 export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   'Housing and Utilities': Housing,
@@ -29,6 +30,7 @@ type CategoryHeadingProps = {
 const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
   const { programs } = useResultsContext();
   const intl = useIntl();
+  const translateNumber = useTranslateNumber();
 
   let IconComponent = headingOptionsMappings[headingType.default_message];
 
@@ -62,7 +64,7 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
         </div>
         <div className="box-right">
           <h2 className="category-heading-text-style normal-weight">
-            {formatToUSD(monthlyCategoryAmt)}
+            {translateNumber(formatToUSD(monthlyCategoryAmt))}
             <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
           </h2>
         </div>

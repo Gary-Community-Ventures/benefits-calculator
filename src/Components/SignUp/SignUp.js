@@ -170,6 +170,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
                   ),
                 }}
               />
+              <FormattedMessage id="signUp.consentToContact5" defaultMessage="" />
             </div>
           }
         />
