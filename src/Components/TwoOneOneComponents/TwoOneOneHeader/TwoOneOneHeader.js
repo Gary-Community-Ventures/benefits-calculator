@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { AppBar, MenuItem, Select, Modal, Link, IconButton } from '@mui/material';
+import { AppBar, MenuItem, Select, Modal, Link, IconButton, ClickAwayListener } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -11,16 +11,13 @@ import twoOneOneLinks from '../../../Assets/TwoOneOneAssets/twoOneOneLinks';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import MenuIcon from '@mui/icons-material/Menu';
-import Drawer from '@mui/material/Drawer';
 import Share from '../../Share/Share';
 import CloseIcon from '@mui/icons-material/Close';
-import languageOptions from '../../../Assets/languageOptions';
-import EmailResults from '../../EmailResults/EmailResults';
 import './TwoOneOneHeader.css';
 
 const TwoOneOneHeader = () => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
-  const { config, formData, locale, selectLanguage } = useContext(Context);
+  const { formData, locale, selectLanguage } = useContext(Context);
   const languageOptions = useConfig('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
@@ -44,6 +41,10 @@ const TwoOneOneHeader = () => {
   const shareMFBModalAriaLabelProps = {
     id: 'header.shareMFBModal-AL',
     defaultMsg: 'share my friend ben modal',
+  };
+  const logoAltText = {
+    id: '211Header.logo.alt',
+    defaultMsg: '211 and myfriendben logo',
   };
 
   const [openShare, setOpenShare] = useState(false);
@@ -94,56 +95,28 @@ const TwoOneOneHeader = () => {
   };
 
   const displayHamburgerMenuIcon = () => {
-    if (openMenu) {
-      return (
-        <IconButton
-          edge="end"
-          color="primary"
-          aria-label={intl.formatMessage(closeBtnAriaLabelProps)}
-          onClick={handleOpenMenu}
-          className="hamburger-icon"
-        >
-          <CloseIcon />
-        </IconButton>
-      );
-    } else {
-      return (
-        <IconButton
-          edge="end"
-          color="primary"
-          aria-label={intl.formatMessage(openMenuBtnAriaLabelProps)}
-          onClick={handleOpenMenu}
-          className="hamburger-icon"
-        >
-          <MenuIcon />
-        </IconButton>
-      );
-    }
+    return (
+      <IconButton
+        edge="end"
+        color="primary"
+        aria-label={
+          openMenu ? intl.formatMessage(closeBtnAriaLabelProps) : intl.formatMessage(openMenuBtnAriaLabelProps)
+        }
+        onClick={handleOpenMenu}
+        className="hamburger-icon"
+      >
+        {openMenu ? <CloseIcon /> : <MenuIcon />}
+      </IconButton>
+    );
   };
 
   const displayHamburgerMenu = () => {
     return (
-      <Drawer
-        className="hamburger-drawer"
-        anchor="right"
-        variant="temporary"
-        open={openMenu}
-        onClose={handleOpenMenu}
-        sx={{
-          zIndex: 1000,
-          [`& .MuiDrawer-paper`]: {
-            mt: '4.16rem',
-            width: '100%',
-            boxShadow: `inset 0px 2px 4px -1px rgba(0,0,0,0.2),
-                        inset 0px 4px 5px 0px rgba(0,0,0,0.14),
-                        inset 0px 1px 10px 0px rgba(0,0,0,0.12)`,
-          },
-        }}
-      >
-        <Stack gap="1rem" alignItems="end" sx={{ margin: '1rem' }}>
+      <ClickAwayListener onClickAway={handleOpenMenu}>
+        <Stack id="hamburger-drawer" open={openMenu} onClose={handleOpenMenu}>
           {create211Links()}
         </Stack>
-      </Drawer>
+      </ClickAwayListener>
     );
   };
 
@@ -167,11 +140,11 @@ const TwoOneOneHeader = () => {
         <AppBar position="sticky" id="twoOneOne-nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
           <Box>
             <a href={`/step-1${queryString}`}>
-              <img src={twoOneOneMFBLogo} alt="211 and myfriendben logo" className="cobranded-logo" />
+              <img src={twoOneOneMFBLogo} alt={intl.formatMessage(logoAltText)} className="cobranded-logo" />
             </a>
           </Box>
-          <Stack direction="row" gap="1rem">
-            <Stack direction="row" gap="1rem" alignItems="center" className="twoOneOne-desktop-links">
+          <Stack direction="row" gap=".55rem">
+            <Stack direction="row" gap="0.55rem" alignItems="center" className="twoOneOne-desktop-links">
               {create211Links()}
             </Stack>
             <Stack direction="row" gap=".25rem" alignItems="center">
@@ -196,11 +169,11 @@ const TwoOneOneHeader = () => {
                 color="primary"
                 onClick={handleOpenShare}
                 aria-label={intl.formatMessage(shareButtonAriaLabelProps)}
+                sx={{ padding: '0' }}
               >
                 <ShareIcon role="img" />
               </IconButton>
               {displayHamburgerMenuIcon()}
-              {displayHamburgerMenu()}
             </Stack>
             <Modal
               open={openShare}
@@ -211,6 +184,7 @@ const TwoOneOneHeader = () => {
             </Modal>
           </Stack>
         </AppBar>
+        {openMenu && displayHamburgerMenu()}
       </Paper>
     </nav>
   );

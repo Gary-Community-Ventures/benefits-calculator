@@ -27,6 +27,16 @@ export type TextFieldDetails = {
   inputHelperText: MessageFunction<string>;
   dollarField?: boolean;
   numericField?: boolean;
+  required: boolean;
+};
+
+export type ZipcodeStepDetails = {
+  componentType: 'ZipcodeStep';
+  inputType: string;
+  inputName: string;
+  numericField: boolean;
+  inputLabel: FormattedMessageType;
+  required: boolean;
 };
 
 type BasicSelectOptions =
@@ -44,9 +54,10 @@ export type BasicSelectDetails = {
   inputType: 'text';
   inputName: string;
   inputLabel?: FormattedMessageType;
-  inputError: ValidationFunction<string>;
-  inputHelperText: MessageFunction<string>;
+  inputError?: ValidationFunction<string>;
+  inputHelperText?: MessageFunction<string>;
   options?: BasicSelectOptions;
+  required?: boolean;
   componentProperties: {
     labelId: string;
     inputLabelText: FormattedMessageType;
@@ -125,7 +136,8 @@ export type ComponentDetails =
   | PreferNotToAnswerDetails
   | AccordionContainerDetails
   | BasicCheckboxGroupDetails
-  | SignUpDetails;
+  | SignUpDetails
+  | ZipcodeStepDetails;
 
 export type Question = {
   name: string;

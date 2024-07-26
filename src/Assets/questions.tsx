@@ -1,18 +1,15 @@
 import {
-  zipcodeHasError,
-  displayZipcodeHelperText,
   radiofieldHasError,
   householdSizeHasError,
-  displayHouseholdSizeHelperText,
   householdAssetsHasError,
-  displayHouseholdAssetsHelperText,
   benefitsHasError,
   selectHasError,
   displayReferralSourceHelperText,
   signUpOptionsHaveError,
   acuteHHConditionsHasError,
   displayBenefitsHelperText,
-  countySelectHelperText,
+  displayHouseholdSizeHelperText,
+  displayHouseholdAssetsHelperText,
   otherReferalSourceHelperText,
 } from './validationFunctions.tsx';
 import { FormattedMessage } from 'react-intl';
@@ -26,13 +23,12 @@ const questions: Record<QuestionName, Question> = {
     subheader: <FormattedMessage id="qcc.tell-us-text" defaultMessage="Let's Get Started!" />,
     question: <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />,
     componentDetails: {
-      componentType: 'Textfield',
+      componentType: 'ZipcodeStep',
       inputType: 'text',
       inputName: 'zipcode',
       numericField: true,
       inputLabel: <FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />,
-      inputError: zipcodeHasError,
-      inputHelperText: displayZipcodeHelperText,
+      required: true,
     },
     followUpQuestions: [
       {
@@ -43,8 +39,7 @@ const questions: Record<QuestionName, Question> = {
           inputType: 'text',
           inputName: 'county',
           inputLabel: <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />,
-          inputError: selectHasError,
-          inputHelperText: countySelectHelperText,
+          required: true,
           componentProperties: {
             labelId: 'county-select-label',
             inputLabelText: <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />,
@@ -82,6 +77,7 @@ const questions: Record<QuestionName, Question> = {
       inputError: householdSizeHasError,
       inputHelperText: displayHouseholdSizeHelperText,
       numericField: true,
+      required: true,
     },
   },
   householdData: {
@@ -159,6 +155,7 @@ const questions: Record<QuestionName, Question> = {
       inputHelperText: displayHouseholdAssetsHelperText,
       dollarField: true,
       numericField: true,
+      required: true,
     },
   },
   hasBenefits: {
@@ -266,6 +263,7 @@ const questions: Record<QuestionName, Question> = {
           ),
           inputError: selectHasError,
           inputHelperText: otherReferalSourceHelperText,
+          required: true,
         },
       },
     ],

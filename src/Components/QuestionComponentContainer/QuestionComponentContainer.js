@@ -3,15 +3,16 @@ import { useParams } from 'react-router-dom';
 import { useConfig } from '../Config/configHook.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Radiofield from '../Radiofield/Radiofield';
-import Textfield from '../Textfield/Textfield';
+import Textfield from '../Textfield/Textfield.js';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
-import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
+import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
+import { ZipcodeStep } from '../Steps/ZipcodeStep';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({
@@ -23,9 +24,8 @@ const QuestionComponentContainer = ({
   handleExpenseSourcesSubmit,
   handleCheckboxChange,
 }) => {
-  const { config, formData, setFormData } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const acuteConditionOptions = useConfig('acute_condition_options');
-  const countiesByZipcode = useConfig('counties_by_zipcode');
   const referralOptions = useConfig('referral_options');
   const signUpOptions = useConfig('sign_up_options');
   let { id } = useParams();
@@ -150,9 +150,7 @@ const QuestionComponentContainer = ({
     if (!hasFollowUpQuestions) {
       return false;
     }
-    if (inputName === 'zipcode') {
-      return !zipcodeHasError(formData.zipcode, undefined, config);
-    }
+
     if (formData[inputName] === true) {
       // this case is for a radio button question where the user selected "yes"
       return true;
@@ -212,23 +210,32 @@ const QuestionComponentContainer = ({
     );
   };
 
-  return (
-    <main className="benefits-form">
-      {renderHeaderAndSubheader()}
-      {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
-        createComponent(renderTextfieldComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
-          createComponent(renderRadiofieldComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
-          createComponent(renderNoAnswerComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
-          createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
-          createComponent(renderOptionCardGroup(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
-          createComponent(renderBasicSelectComponent(matchingQuestion)))}
-    </main>
-  );
+  switch (id) {
+    case '3':
+      return (
+        <main className="benefits-form">
+          <ZipcodeStep currentStepId={Number(id)} />
+        </main>
+      );
+    default:
+      return (
+        <main className="benefits-form">
+          {renderHeaderAndSubheader()}
+          {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
+            createComponent(renderTextfieldComponent(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
+              createComponent(renderRadiofieldComponent(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
+              createComponent(renderNoAnswerComponent(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
+              createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
+              createComponent(renderOptionCardGroup(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
+              createComponent(renderBasicSelectComponent(matchingQuestion)))}
+        </main>
+      );
+  }
 };
 
 export default QuestionComponentContainer;
