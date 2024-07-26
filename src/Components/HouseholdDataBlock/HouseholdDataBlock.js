@@ -236,7 +236,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
   };
 
-  const translateNumber = useTranslateNumber()
+  const translateNumber = useTranslateNumber();
   const createMemberCard = (index, relationship, age, income, page) => {
     const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
 

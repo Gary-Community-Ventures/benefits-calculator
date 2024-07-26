@@ -27,7 +27,10 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
 
   const countiesByZipcode = useConfig('counties_by_zipcode');
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
-  const zipcodeSchema = z.string().regex(numberMustBeFiveDigitsLongRegex).refine((data) => data in countiesByZipcode);
+  const zipcodeSchema = z
+    .string()
+    .regex(numberMustBeFiveDigitsLongRegex)
+    .refine((data) => data in countiesByZipcode);
 
   const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
 

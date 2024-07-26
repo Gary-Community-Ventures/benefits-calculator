@@ -19,7 +19,7 @@ const ProgramsHeader = () => {
   const { programs } = useResultsContext();
   const { theme, formData } = useContext(Context);
   const taxCredit = calculateTotalValue(programs, TAX_CREDIT_CATEGORY);
-  const translateNumber = useTranslateNumber()
+  const translateNumber = useTranslateNumber();
 
   // don't add tax credits to total value
   const categoriesCalculated = new Set([TAX_CREDIT_CATEGORY]);
@@ -44,7 +44,9 @@ const ProgramsHeader = () => {
         </section>
         <section className="column-row">
           <section className="results-data-cell">
-            <div className="results-header-values">${translateNumber(Math.round(estimatedMonthlySavings / 12).toLocaleString())}</div>
+            <div className="results-header-values">
+              ${translateNumber(Math.round(estimatedMonthlySavings / 12).toLocaleString())}
+            </div>
             <div className="results-header-label">
               <FormattedMessage id="results.header-monthlyValue" defaultMessage="Estimated Monthly Savings" />
             </div>
