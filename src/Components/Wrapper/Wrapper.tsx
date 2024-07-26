@@ -51,6 +51,7 @@ const initialFormData: FormData = {
     upk: false,
     wic: false,
     nfp: false,
+    fatc: false,
   },
   referralSource: undefined,
   immutableReferrer: undefined,
