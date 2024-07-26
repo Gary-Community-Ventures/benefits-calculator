@@ -41,10 +41,10 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
     },
   };
 
-  const translateNumber = useTranslateNumber()
+  const translateNumber = useTranslateNumber();
   const stepText = useReorderLanguage(
     [
-      <FormattedMessage id="confirmation.return-stepLabel" defaultMessage="Step " key="0"/>,
+      <FormattedMessage id="confirmation.return-stepLabel" defaultMessage="Step " key="0" />,
       translateNumber(stepValue),
       <FormattedMessage id="confirmation.return-ofLabel" defaultMessage=" of " key="1" />,
       translateNumber(totalSteps),
@@ -61,9 +61,7 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
         className="progress-bar rtl-mirror"
         aria-label={intl.formatMessage(progressBarTranslatedAL)}
       />
-      <p className="step-progress-title">
-        {stepText}
-      </p>
+      <p className="step-progress-title">{stepText}</p>
     </aside>
   );
 };

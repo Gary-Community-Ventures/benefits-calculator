@@ -28,7 +28,7 @@ const questions: Record<QuestionName, Question> = {
       inputName: 'zipcode',
       numericField: true,
       inputLabel: <FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />,
-      required: true
+      required: true,
     },
     followUpQuestions: [
       {
