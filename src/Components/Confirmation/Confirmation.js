@@ -288,7 +288,7 @@ const Confirmation = () => {
               <FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size" />
               {': '}
             </b>
-            {useTranslateNumber(householdSize)} {householdSizeDescriptor}
+            {translateNumber(householdSize)} {householdSizeDescriptor}
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
