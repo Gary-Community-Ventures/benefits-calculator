@@ -165,12 +165,12 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
                 values={{
                   linkVal: (
                     <a className="link-color" href={consentToContactLink} target="_blank">
-                      <FormattedMessage id="signUp.consentToContact" defaultMessage=" consent to contact." />
+                      <FormattedMessage id="signUp.consentToContact" defaultMessage=" consent to contact" />
                     </a>
                   ),
                 }}
               />
-              <FormattedMessage id="signUp.consentToContact5" defaultMessage="" />
+              <FormattedMessage id="signUp.consentToContact5" defaultMessage="." />
             </div>
           }
         />

@@ -151,7 +151,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
                   defaultMessage="Colorado Department of Human Services Public Charge Rule"
                 />
               </a>
-              <FormattedMessage id="landingPage.publicCharge.afterLink" defaultMessage="" />.
+              <FormattedMessage id="landingPage.publicCharge.afterLink" defaultMessage="." />
             </div>
           </li>
         </ul>

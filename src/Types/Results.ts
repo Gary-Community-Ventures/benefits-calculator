@@ -1,3 +1,5 @@
+import { Language } from './Language';
+
 export type Translation = {
   default_message: string;
   label: string;
@@ -13,6 +15,7 @@ export type ProgramNavigator = {
   email: Translation;
   assistance_link: Translation;
   description: Translation;
+  languages: Language[];
 };
 
 export type Program = {
