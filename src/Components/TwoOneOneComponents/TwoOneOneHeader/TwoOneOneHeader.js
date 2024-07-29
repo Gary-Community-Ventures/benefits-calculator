@@ -11,8 +11,8 @@ import twoOneOneLinks from '../../../Assets/TwoOneOneAssets/twoOneOneLinks';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import MenuIcon from '@mui/icons-material/Menu';
-import Share from '../../Share/Share';
 import CloseIcon from '@mui/icons-material/Close';
+import TwoOneOneShare from '../TwoOneOneShare/TwoOneOneShare';
 import './TwoOneOneHeader.css';
 
 const TwoOneOneHeader = () => {
@@ -180,7 +180,7 @@ const TwoOneOneHeader = () => {
               onClose={handleCloseShare}
               aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}
             >
-              <Share close={handleCloseShare} />
+              <TwoOneOneShare close={handleCloseShare} />
             </Modal>
           </Stack>
         </AppBar>
