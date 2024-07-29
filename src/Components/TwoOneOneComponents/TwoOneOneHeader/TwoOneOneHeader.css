@@ -55,6 +55,11 @@ button.hamburger-icon {
     display: flex;
   }
 
+  body {
+   height: 100%;
+   overflow-y: hidden;
+  }
+
   #hamburger-drawer {
     display: flex;
     background-color: #fff;
