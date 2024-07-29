@@ -138,7 +138,10 @@ const App = () => {
     // use referrer if there is a referrer, otherwise use utm source
     const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
     const isOtherSource = !(referrer in referralOptions);
-    const referrerSource = formData.referralSource || referrer;
+    let referrerSource = formData.referralSource || referrer;
+    if (referrerSource === 'other') {
+      referrerSource = formData.otherSource ?? '';
+    }
 
     // if the referrer source is not in the dropdown list then
     // make the referrer "other" and fill in the other field
