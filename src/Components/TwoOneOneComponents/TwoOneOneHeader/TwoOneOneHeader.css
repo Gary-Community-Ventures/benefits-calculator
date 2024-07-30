@@ -65,7 +65,7 @@ button.hamburger-icon {
     position: relative;
     z-index: 1;
     padding: 1rem;
-    align-items: end;
+    align-items: flex-end;
     gap: 1rem;
     height: 100vh;
   }
