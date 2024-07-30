@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { AppBar, MenuItem, Select, Modal, Link, IconButton, ClickAwayListener } from '@mui/material';
+import { AppBar, MenuItem, Select, Modal, Link, IconButton, ClickAwayListener, Dialog, DialogContent } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -175,13 +175,14 @@ const TwoOneOneHeader = () => {
               </IconButton>
               {displayHamburgerMenuIcon()}
             </Stack>
-            <Modal
+            <Dialog
               open={openShare}
               onClose={handleCloseShare}
               aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}
+              sx={{ '& .MuiPaper-root': { borderRadius: '1rem' } }}
             >
               <TwoOneOneShare close={handleCloseShare} />
-            </Modal>
+            </Dialog>
           </Stack>
         </AppBar>
         {openMenu && displayHamburgerMenu()}
