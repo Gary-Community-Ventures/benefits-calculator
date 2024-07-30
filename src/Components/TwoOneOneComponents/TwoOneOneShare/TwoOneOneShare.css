@@ -1,7 +1,3 @@
-body {
-  padding: 0 !important;
-}
-
 button.share-close-button {
   position: absolute;
   right: 0;
@@ -14,7 +10,6 @@ button.share-close-button {
 }
 
 .container {
-  background-color: white;
   padding: 2rem;
 }
 
@@ -41,21 +36,7 @@ button {
   white-space: nowrap;
 }
 
-.icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  border-radius: 1000rem;
-  margin: 0 0.45rem 0 0.45rem;
-}
 .icon-name {
-  overflow: hidden;
-  white-space: nowrap;
-  margin-left: 0;
-  max-width: 0px;
-  transition: max-width 1s, margin 0.3s;
-  font-size: 0.88rem;
   cursor: pointer;
 }
 
@@ -82,25 +63,4 @@ button {
 .messenger {
   background-color: #2196f3;
   color: white;
-}
-
-@media (min-width: 601px) {
-  .icon {
-    margin: 0 0.35rem 0 0.35rem;
-  }
-
-  .icon:hover > .icon-name {
-    max-width: 130px;
-    margin-left: 0.3rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .container {
-    width: 80%;
-  }
-
-  .icons {
-    flex-wrap: wrap;
-  }
 }
