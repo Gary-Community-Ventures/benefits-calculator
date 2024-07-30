@@ -18,6 +18,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import { Context } from '../../Wrapper/Wrapper';
 import dataLayerPush from '../../../Assets/analytics';
+import { Stack } from '@mui/material';
 import './TwoOneOneShare.css';
 
 const TwoOneOneShare = forwardRef(function Share({ close }, ref) {
@@ -79,7 +80,7 @@ const TwoOneOneShare = forwardRef(function Share({ close }, ref) {
   };
 
   return (
-    <div className="container">
+    <Stack className="container">
       <IconButton aria-label={intl.formatMessage(closeALProps)} onClick={close} className="share-close-button">
         <CloseIcon />
       </IconButton>
@@ -126,7 +127,7 @@ const TwoOneOneShare = forwardRef(function Share({ close }, ref) {
           </button>
         </div>
       </div>
-    </div>
+    </Stack>
   );
 });
 
