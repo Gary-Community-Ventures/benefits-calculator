@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import {
   AppBar,
@@ -57,6 +57,15 @@ const TwoOneOneHeader = () => {
   const [openShare, setOpenShare] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+
+  //this will disable the scroll when the hamburgerMenu is open
+  useEffect(() => {
+    if (openMenu) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+  }, [openMenu])
 
   const handleOpenShare = () => {
     setOpenShare(true);
