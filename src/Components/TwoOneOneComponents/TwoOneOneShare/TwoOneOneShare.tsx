@@ -23,9 +23,9 @@ import './TwoOneOneShare.css';
 
 type TwoOneOneShareProps = {
   close: () => void;
-}
+};
 
-const TwoOneOneShare = ({close}:TwoOneOneShareProps) => {
+const TwoOneOneShare = ({ close }: TwoOneOneShareProps) => {
   const [copied, setCopied] = useState(false);
   const { getReferrer } = useContext(Context);
   const intl = useIntl();
@@ -68,7 +68,7 @@ const TwoOneOneShare = ({close}:TwoOneOneShareProps) => {
     );
   };
 
-  const trackOutboundLinks = (label:string) => {
+  const trackOutboundLinks = (label: string) => {
     return () => {
       dataLayerPush({
         event: 'media_share',
