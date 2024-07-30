@@ -123,7 +123,7 @@ const TwoOneOneHeader = () => {
   const displayHamburgerMenu = () => {
     return (
       <ClickAwayListener onClickAway={handleOpenMenu}>
-        <Stack id="hamburger-drawer" open={openMenu} onClose={handleOpenMenu}>
+        <Stack id="hamburger-drawer">
           {create211Links()}
         </Stack>
       </ClickAwayListener>
