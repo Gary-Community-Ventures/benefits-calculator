@@ -21,7 +21,11 @@ import dataLayerPush from '../../../Assets/analytics';
 import { Stack } from '@mui/material';
 import './TwoOneOneShare.css';
 
-const TwoOneOneShare = forwardRef(function Share({ close }, ref) {
+type TwoOneOneShareProps = {
+  close: () => void;
+}
+
+const TwoOneOneShare = ({close}:TwoOneOneShareProps) => {
   const [copied, setCopied] = useState(false);
   const { getReferrer } = useContext(Context);
   const intl = useIntl();
@@ -129,6 +133,6 @@ const TwoOneOneShare = forwardRef(function Share({ close }, ref) {
       </div>
     </Stack>
   );
-});
+};
 
 export default TwoOneOneShare;
