@@ -59,7 +59,7 @@ const TwoOneOneShare = forwardRef(function Share({ close }, ref) {
     return (
       <span className={`${color} icon`}>
         {children}
-        <span className="icon-name">{name}</span>
+        <span className="twoOneOne-icon-name">{name}</span>
       </span>
     );
   };
@@ -80,34 +80,34 @@ const TwoOneOneShare = forwardRef(function Share({ close }, ref) {
   };
 
   return (
-    <Stack className="container">
-      <IconButton aria-label={intl.formatMessage(closeALProps)} onClick={close} className="share-close-button">
+    <Stack className="twoOneOne-share-container">
+      <IconButton aria-label={intl.formatMessage(closeALProps)} onClick={close} className="twoOneOne-share-close">
         <CloseIcon />
       </IconButton>
-      <h2 className="share-header">
-        <FormattedMessage id="results.share-header" defaultMessage="Share MyFriendBen with a friend:" />
+      <h2 className="twoOneOne-share-header">
+        <FormattedMessage id="results.twoOneOne-share-header" defaultMessage="Share MyFriendBen with a friend:" />
       </h2>
-      <div className="icons">
-        <div className="row-group">
+      <div className="twoOneOne-share-icons">
+        <div className="twoOneOne-row-group">
           <FacebookShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Facebook')}>
-            <Icon name="Facebook" color="facebook">
+            <Icon name="Facebook" color="twoOneOne-fb">
               <FacebookIcon sx={iconSize} />
             </Icon>
           </FacebookShareButton>
           <TwitterShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Twitter')}>
-            <Icon name="Twitter" color="twitter">
+            <Icon name="Twitter" color="twoOneOne-twitter">
               <TwitterIcon sx={iconSize} />
             </Icon>
           </TwitterShareButton>
           <EmailShareButton url={shareUrl} onClick={trackOutboundLinks('Share With Email')}>
-            <Icon name={labels.email} color="gray">
+            <Icon name={labels.email} color="twoOneOne-gray">
               <EmailIcon sx={iconSize} />
             </Icon>
           </EmailShareButton>
         </div>
-        <div className="row-group">
+        <div className="twoOneOne-row-group">
           <WhatsappShareButton url={shareUrl} onClick={trackOutboundLinks('Share With WhatsApp')}>
-            <Icon name="WhatsApp" color="whatsApp">
+            <Icon name="WhatsApp" color="twoOneOne-whatsApp">
               <WhatsAppIcon sx={iconSize} />
             </Icon>
           </WhatsappShareButton>
@@ -116,12 +116,12 @@ const TwoOneOneShare = forwardRef(function Share({ close }, ref) {
             appId={appId}
             onClick={trackOutboundLinks('Share With Facebook Messanger')}
           >
-            <Icon name="Messenger" color="messenger">
+            <Icon name="Messenger" color="twoOneOne-messenger">
               <FacebookMessengerIcon size={20.5} />
             </Icon>
           </FacebookMessengerShareButton>
-          <button onClick={copyLink} className="button-no-format">
-            <Icon name={copied ? labels.copied : labels.copyLink} color="gray">
+          <button onClick={copyLink} className="copy-link-btn">
+            <Icon name={copied ? labels.copied : labels.copyLink} color="twoOneOne-gray">
               {copied ? <CheckIcon sx={iconSize} /> : <LinkIcon sx={iconSize} />}
             </Icon>
           </button>
