@@ -9,7 +9,6 @@ import {
   IconButton,
   ClickAwayListener,
   Dialog,
-  DialogContent,
 } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
