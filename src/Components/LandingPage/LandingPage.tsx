@@ -69,10 +69,17 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   };
 
   const getLinksForCheckbox = () => {
-    return {
-      privacyPolicyLink: privacyLink[locale],
-      addTermsConsentToContact: consentToContactLink[locale],
-    };
+    if (locale in privacyLink && locale in consentToContactLink) {
+      return {
+        privacyPolicyLink: privacyLink[locale],
+        addTermsConsentToContact: consentToContactLink[locale],
+      };
+    } else {
+      return {
+        privacyPolicyLink: privacyLink["en-us"],
+        addTermsConsentToContact: consentToContactLink["en-us"],
+      };
+    }
   };
 
   const createCheckboxLabel = () => {
