@@ -15,11 +15,6 @@ const Footer = () => {
   const footerLogo: Record<string, any> = useConfig('MBF_logo');
   const stateLogo = footerLogo.state_code;
 
-  const referrerData = useConfig('referrerData');
-  console.log("footerwrap")
-  console.log(referrerData);
-  console.log("footerwrap")
-
   return (
     <footer>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: theme.midBlueColor }} square={true}>

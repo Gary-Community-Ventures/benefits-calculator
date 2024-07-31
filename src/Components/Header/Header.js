@@ -4,7 +4,7 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
 import languageOptions from '../../Assets/languageOptions.tsx';
 import { useLocation } from 'react-router-dom';
-import { useConfig } from '../Config/configHook.tsx';
+import { useGetConfig, useConfig } from '../Config/configHook.tsx';
 import ShareIcon from '@mui/icons-material/Share';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Share from '../Share/Share';
@@ -12,17 +12,22 @@ import EmailResults from '../EmailResults/EmailResults';
 import Paper from '@mui/material/Paper';
 import { useIntl } from 'react-intl';
 import './Header.css';
-import { getLogo } from '../../Shared/helperFunctions.ts';
+import { getReferrerInfo } from '../../Shared/helperFunctions.ts';
+import MFBDefaultLogo from '../../Assets/Logos/mfb_default_logo_header.png';
+
 
 const Header = () => {
   const context = useContext(Context);
+  const { configLoading, configResponse: config } = useGetConfig();
+
+  console.log(config);
   const { formData, getReferrer } = context;
   const languageOptions = useConfig('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
-  // const headerLogo = useConfig('MBF_logo'); 
+  const defaultLogo = MFBDefaultLogo;
+  // const headerLogo = useConfig('MBF_logo');
   // const headerLogoByState = headerLogo.state_code
-  
 
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
@@ -52,13 +57,24 @@ const Header = () => {
 
     return dropdownMenuItems;
   };
+  console.log(getReferrer('logoSource'));
+  // console.log(config?.referrerData?.logoSource);
+  // console.log(getReferrerInfo(Number(config?.referrerData?.logoSource)));
+  // console.log(getReferrer('logoSource'));
+  // const logoReferrer = getReferrer('logoSource') !== undefined ? getReferrer('logoSource') : defaultLogo;
+  // console.log(logoReferrer);
+  const logoInfoArray = getReferrerInfo(Number(config?.referrerData?.logoSource));
+  const logoSource = logoInfoArray ? logoInfoArray[0] : defaultLogo;
+  console.log(logoSource);
+  const logoAlt = logoInfoArray ? logoInfoArray[1]: "default alt";
 
+  // console.log(reffererLogo)
   return (
     <nav>
       <Paper className="header-full-width-container" square={true} elevation={0}>
         <AppBar id="nav-container" position="sticky" elevation={0}>
           <a href={`/step-1${queryString}`} className="home-link">
-            <img src={getReferrer('logoSource')} alt={getReferrer('logoAlt')} className={getReferrer('logoClass')} />
+            <img src={logoSource} alt={logoAlt} className={getReferrer('logoClass')} />
           </a>
           <div className="icon-wrapper">
             <LanguageIcon />

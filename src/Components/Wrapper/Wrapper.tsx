@@ -4,9 +4,10 @@ import { IntlProvider } from 'react-intl';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
-import useReferrer from '../Referrer/referrerHook';
+import useReferrer, { ReferrerData } from '../Referrer/referrerHook';
 import { Language } from '../../Types/Language';
 import { useConfig, useGetConfig } from '../Config/configHook';
+import { coLogoAlt, coLogoSource } from '../Referrer/referrerLogoInfo';
 
 const initialFormData: FormData = {
   isTest: undefined,
@@ -50,6 +51,8 @@ const initialFormData: FormData = {
     tanf: false,
     upk: false,
     wic: false,
+    nfp: false,
+    fatc: false,
   },
   referralSource: undefined,
   immutableReferrer: undefined,
@@ -83,7 +86,32 @@ export const Context = React.createContext<WrapperContext>({} as WrapperContext)
 const Wrapper = (props: PropsWithChildren<{}>) => {
   const { configLoading, configResponse: config } = useGetConfig();
   const { language_options: languageOptions = {} } = config ?? {};
+  const {
+    referrerData: referrerData = {
+      theme: {
+        default: 'default',
+        '211': 'twoOneOne',
+      },
+      logoSource: coLogoSource,
+      logoAlt: coLogoAlt,
+      logoClass: {
+        default: 'logo',
+      },
+      twoOneOneLink: {
+        default:
+          'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=organic&utm_id=211mfb',
+        '211co':
+          'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=whitelabel&utm_id=211mfb',
+      },
+      shareLink: {
+        default: 'https://www.myfriendben.org/',
+        //probably just leave 211, without co ending
+        '211': 'https://screener.myfriendben.org?referrer=211co',
+      },
+    },
+  } = config ?? {};
   const rightToLeftLanguages = ['ar'];
+  // console.log('referrerData', referrerData);
 
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
   const [screenLoading, setScreenLoading] = useState<boolean>(true);
@@ -179,14 +207,13 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
     setLocale(newLocale as Language);
   };
-const referrerData =  useConfig('referrerData');
-console.log("wrapperwrap")
-console.log(referrerData)
-console.log("wrapperwrap")
-const footerLogo: Record<string, any> = useConfig('MBF_logo');
-console.log(footerLogo)
+
+  const footerLogo: Record<string, any> = useConfig('MBF_logo');
+  // console.log(footerLogo);
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer);
+  console.log('referrerData FROM WRAPPER', referrerData);
+
+  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer, referrerData as ReferrerData | undefined);
 
   useEffect(() => {
     setReferrer(formData.immutableReferrer);
