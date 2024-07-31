@@ -59,7 +59,7 @@ button.hamburger-icon {
     display: flex;
     background-color: #fff;
     position: relative;
-    z-index: 1;
+    z-index: 1000;
     padding: 1rem;
     align-items: flex-end;
     gap: 1rem;
