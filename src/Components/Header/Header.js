@@ -5,6 +5,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import { useConfig } from '../Config/configHook.tsx';
 import Paper from '@mui/material/Paper';
 import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import './Header.css';
 
 const Header = () => {
@@ -75,6 +76,14 @@ const Header = () => {
             </Select>
           </div>
         </AppBar>
+        {formData.frozen && (
+          <div className="header-frozen-message-container">
+            <FormattedMessage
+              id="header.frozen.message"
+              defaultMessage="This screen is frozen. Changes you make will not be saved."
+            />
+          </div>
+        )}
       </Paper>
     </nav>
   );

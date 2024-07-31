@@ -12,8 +12,7 @@
 
 .MuiPaper-root.header-full-width-container {
   width: 100%;
-  height: 5rem;
-  background-color: var(--primary-color);
+  height: 6.5rem;
 }
 
 #nav-container {
@@ -54,4 +53,11 @@
 
 #select-language:focus-visible {
   outline: -webkit-focus-ring-color auto 1px;
+}
+
+.header-frozen-message-container {
+  background-color: var(--hover-color);
+  text-align: center;
+  height:max-content;
+  font-weight: bold;
 }

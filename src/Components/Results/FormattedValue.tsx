@@ -18,7 +18,7 @@ export function calculateTotalValue(programs: Program[], category: string) {
       continue;
     }
 
-    if (PRESCHOOL_PROGRAMS_ABBR.includes(program.name_abbreviated)) {
+    if (PRESCHOOL_PROGRAMS_ABBR.includes(program.external_name)) {
       preschoolTotal += program.estimated_value;
     } else {
       total += program.estimated_value;

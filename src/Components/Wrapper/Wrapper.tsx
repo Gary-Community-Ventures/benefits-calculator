@@ -1,15 +1,16 @@
 import React, { useEffect, useState, PropsWithChildren } from 'react';
 import useStyle from '../../Assets/styleController';
-import { IntlProvider, useIntl } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
 import useReferrer from '../Referrer/referrerHook';
 import { Language } from '../../Types/Language';
-import { useConfig, useGetConfig } from '../Config/configHook';
+import { useGetConfig } from '../Config/configHook';
 
 const initialFormData: FormData = {
   isTest: undefined,
+  frozen: false,
   externalID: undefined,
   agreeToTermsOfService: false,
   is13OrOlder: false,
