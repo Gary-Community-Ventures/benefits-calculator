@@ -27,6 +27,7 @@ type WrapperResultsContext = {
   missingPrograms: boolean;
   isAdminView: boolean;
   validations: Validation[];
+  setValidations: (validations: Validation[]) => void;
 };
 
 type ResultsProps = {
@@ -167,6 +168,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
             missingPrograms,
             isAdminView,
             validations,
+            setValidations,
           }}
         >
           <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
@@ -192,7 +194,22 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     return <Navigate to={`/${uuid}/results/benefits`} />;
   }
 
-  return <ProgramPage program={program} />;
+  return (
+    <ResultsContext.Provider
+      value={{
+        programs,
+        needs,
+        filtersChecked,
+        setFiltersChecked,
+        missingPrograms,
+        isAdminView,
+        validations,
+        setValidations,
+      }}
+    >
+      <ProgramPage program={program} />
+    </ResultsContext.Provider>
+  );
 };
 
 export default Results;

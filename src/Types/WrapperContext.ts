@@ -3,6 +3,7 @@ import { ITheme } from '../Assets/styleController';
 import { ReferrerData } from '../Components/Referrer/referrerHook';
 import { Language } from '../Assets/languageOptions';
 import { Config } from './Config';
+
 export interface WrapperContext {
   locale: Language;
   selectLanguage: (event: Event) => void;
@@ -15,5 +16,7 @@ export interface WrapperContext {
   styleOverride: any;
   pageIsLoading: boolean;
   screenDoneLoading: () => void;
-  getReferrer: (id: keyof ReferrerData) => string;
+  getReferrer: (id: keyof ReferrerData) => any;
+  staffToken: string | undefined;
+  setStaffToken: (token: string | undefined) => void;
 }
