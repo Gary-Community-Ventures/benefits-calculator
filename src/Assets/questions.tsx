@@ -64,7 +64,7 @@ const questions: Record<QuestionName, Question> = {
           defaultMessage="Including you, how many people are in your household?"
         />
         <HelpButton
-          helpText="This is usually family members who you both live and share important resources with like food and bills."
+          helpText="If other adults 18 or older in your household file their own tax return, ask them to complete this tool to determine if they qualify for benefits. But even if you and your spouse file taxes separately, include your spouse in the household."
           helpId="questions.householdSize-helpText"
         ></HelpButton>
       </>

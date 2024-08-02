@@ -36,7 +36,7 @@ export function useReorderLanguage(text: ReactNode[], order: { [key in Language]
     }
 
     return localeText;
-  }, [locale]);
+  }, [locale, order]);
 }
 
 export function translateNumber(number: number | string, locale: Language) {

@@ -27,6 +27,9 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   const privacyErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
   const ageErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
   const publicChargeOption = useConfig('public_charge_rule');
+  const privacyLink = useConfig('privacy_policy');
+  const consentToContactLink = useConfig('consent_to_contact');
+
   useEffect(() => {
     const continueOnEnter = (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
@@ -66,27 +69,16 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   };
 
   const getLinksForCheckbox = () => {
-    switch (locale) {
-      case 'es':
-        return {
-          privacyPolicyLink: 'https://co.myfriendben.org/es/data-privacy-policy',
-          addTermsConsentToContact: 'https://co.myfriendben.org/es/additional-terms-and-consent-to-contact',
-        };
-      case 'vi':
-        return {
-          privacyPolicyLink: 'https://co.myfriendben.org/vi/data-privacy-policy',
-          addTermsConsentToContact: 'https://co.myfriendben.org/vi/additional-terms-and-consent-to-contact',
-        };
-      case 'fr':
-        return {
-          privacyPolicyLink: 'https://co.myfriendben.org/fr/data-privacy-policy',
-          addTermsConsentToContact: 'https://co.myfriendben.org/fr/additional-terms-and-consent-to-contact',
-        };
-      default:
-        return {
-          privacyPolicyLink: 'https://co.myfriendben.org/en/data-privacy-policy',
-          addTermsConsentToContact: 'https://co.myfriendben.org/en/additional-terms-and-consent-to-contact',
-        };
+    if (locale in privacyLink && locale in consentToContactLink) {
+      return {
+        privacyPolicyLink: privacyLink[locale],
+        addTermsConsentToContact: consentToContactLink[locale],
+      };
+    } else {
+      return {
+        privacyPolicyLink: privacyLink['en-us'],
+        addTermsConsentToContact: consentToContactLink['en-us'],
+      };
     }
   };
 
