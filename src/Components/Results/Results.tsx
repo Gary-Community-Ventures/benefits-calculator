@@ -1,10 +1,10 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import ResultsError from './ResultsError/ResultsError';
 import Loading from './Loading/Loading';
-import { EligibilityResults, Program, UrgentNeed } from '../../Types/Results';
+import { EligibilityResults, Program, UrgentNeed, Validation } from '../../Types/Results';
 import { getEligibility } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams, useSearchParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import ResultsHeader from './ResultsHeader/ResultsHeader';
 import Needs from './Needs/Needs';
@@ -25,6 +25,9 @@ type WrapperResultsContext = {
   filtersChecked: Record<CitizenLabels, boolean>;
   setFiltersChecked: (newFiltersChecked: Record<CitizenLabels, boolean>) => void;
   missingPrograms: boolean;
+  isAdminView: boolean;
+  validations: Validation[];
+  setValidations: (validations: Validation[]) => void;
 };
 
 type ResultsProps = {
@@ -48,10 +51,30 @@ function findProgramById(programs: Program[], id: string) {
   return programs.find((program) => String(program.program_id) === id);
 }
 
+export function findValidationForProgram(validations: Validation[], program: Program) {
+  return validations.find((validation) => validation.program_name === program.external_name);
+}
+
+function addAdminToLink(link: string, isAdmin: boolean) {
+  if (isAdmin) {
+    return link + '?admin=true';
+  }
+
+  return link;
+}
+
+export function useResultsLink(link: string) {
+  const { isAdminView } = useResultsContext();
+  return addAdminToLink(link, isAdminView);
+}
+
 const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   const { locale, formData } = useContext(Context);
   const { uuid, programId } = useParams();
   const is211Co = formData.immutableReferrer === '211co';
+
+  const [searchParams] = useSearchParams();
+  const isAdminView = useMemo(() => searchParams.get('admin') === 'true', [searchParams.get('admin')]);
 
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(false);
@@ -91,6 +114,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   const [programs, setPrograms] = useState<Program[]>([]);
   const [needs, setNeeds] = useState<UrgentNeed[]>([]);
   const [missingPrograms, setMissingPrograms] = useState(false);
+  const [validations, setValidations] = useState<Validation[]>([]);
 
   useEffect(() => {
     const filtersCheckedStrArr = Object.entries(filtersChecked)
@@ -103,6 +127,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
       setNeeds([]);
       setPrograms([]);
       setMissingPrograms(false);
+      setValidations([]);
       return;
     }
 
@@ -110,17 +135,18 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     setPrograms(
       apiResults.programs
         .filter((program) => {
-          return (
-            program.legal_status_required.some((status) => filtersCheckedStrArr.includes(status)) && program.eligible
+          return program.legal_status_required.some(
+            (status) => (filtersCheckedStrArr.includes(status) && program.eligible) || isAdminView,
           );
         })
         .filter((program) => {
-          return !program.already_has;
+          return !program.already_has || isAdminView;
         }),
     );
     setMissingPrograms(apiResults.missing_programs);
+    setValidations(apiResults.validations);
     setLoading(false);
-  }, [filtersChecked, apiResults]);
+  }, [filtersChecked, apiResults, isAdminView]);
 
   if (loading) {
     return (
@@ -136,7 +162,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
         <Grid item xs={12}>
           <BackAndSaveButtons
             handleTextfieldChange={handleTextfieldChange}
-            navigateToLink={`/${uuid}/results/benefits`}
+            navigateToLink={addAdminToLink(`/${uuid}/results/benefits`, isAdminView)}
             BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
           />
           <MoreHelp />
@@ -153,6 +179,9 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
             filtersChecked,
             setFiltersChecked,
             missingPrograms,
+            isAdminView,
+            validations,
+            setValidations,
           }}
         >
           <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
@@ -178,7 +207,22 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     return <Navigate to={`/${uuid}/results/benefits`} />;
   }
 
-  return <ProgramPage program={program} />;
+  return (
+    <ResultsContext.Provider
+      value={{
+        programs,
+        needs,
+        filtersChecked,
+        setFiltersChecked,
+        missingPrograms,
+        isAdminView,
+        validations,
+        setValidations,
+      }}
+    >
+      <ProgramPage program={program} />
+    </ResultsContext.Provider>
+  );
 };
 
 export default Results;

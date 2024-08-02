@@ -1,0 +1,21 @@
+.login-container {
+  border: 1px solid black;
+  padding: 1rem;
+  background-color: var(--hover-color);
+  background-color: var(--secondary-background-color);
+}
+
+.login-button {
+  border: 1px solid black;
+  cursor: pointer;
+  padding: 0.3rem;
+  font-weight: bold;
+  border-radius: 99999rem;
+  background-color: #ffffff;
+  margin-right: 1rem;
+}
+
+.login-button:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}

@@ -22,6 +22,7 @@ export type Program = {
   program_id: number;
   name: Translation;
   name_abbreviated: string;
+  external_name: string;
   estimated_value: number;
   estimated_delivery_time: Translation;
   estimated_application_time: Translation;
@@ -55,10 +56,20 @@ export type UrgentNeed = {
   phone_number: string;
 };
 
+export type Validation = {
+  id: number;
+  screen_uuid: string;
+  program_name: string;
+  eligible: boolean;
+  value: string;
+}
+
 export type EligibilityResults = {
   programs: Program[];
   urgent_needs: UrgentNeed[];
   screen_id: number;
   default_language: string;
   missing_programs: boolean;
+  validations: Validation[];
+  created_date: string;
 };

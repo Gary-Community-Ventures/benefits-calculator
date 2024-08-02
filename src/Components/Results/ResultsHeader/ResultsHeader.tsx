@@ -9,6 +9,7 @@ import { calculateTotalValue } from '../FormattedValue.tsx';
 import '../../Results/Results.css';
 import { TAX_CREDIT_CATEGORY } from '../../../Assets/resultsConstants.ts';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
+import Login from '../../Login/Login';
 
 type ResultsHeaderProps = {
   type: 'program' | 'need';
@@ -82,6 +83,8 @@ const NeedsHeader = () => {
 
 const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
   const { uuid } = useParams();
+  const { staffToken, setStaffToken } = useContext(Context);
+  const { isAdminView } = useResultsContext();
 
   return (
     <>
@@ -90,6 +93,7 @@ const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
         navigateToLink={`/${uuid}/confirm-information`}
         BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO SCREENER" />}
       />
+      {isAdminView && <Login setToken={setStaffToken} loggedIn={staffToken !== undefined} />}
       <div className="results-header-container">{type === 'need' ? <NeedsHeader /> : <ProgramsHeader />}</div>
     </>
   );

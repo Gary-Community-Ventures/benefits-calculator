@@ -1,5 +1,5 @@
-import { Program, Translation } from '../../../Types/Results';
-import { useResultsContext } from '../Results';
+import { Program, Translation, Validation } from '../../../Types/Results';
+import { findValidationForProgram, useResultsContext } from '../Results';
 import Filter from './Filter';
 import ProgramCard from './ProgramCard';
 import CategoryHeading from '../CategoryHeading/CategoryHeading';
@@ -16,8 +16,7 @@ type Category = {
 function sortProgramsIntoCategories(programs: Program[]): Category[] {
   // group programs by category
   const categories = programs.reduce((acc: Category[], program) => {
-    const categoryName = program.category.default_message;
-
+    let categoryName = program.category.default_message;
     let category = acc.find((cat) => cat.name.default_message === categoryName);
 
     if (category === undefined) {
@@ -45,6 +44,30 @@ function sortProgramsIntoCategories(programs: Program[]): Category[] {
   return categories;
 }
 
+const ValidationCategory = () => {
+  const { programs, isAdminView, validations } = useResultsContext();
+
+  const validationPrograms = useMemo(
+    () => programs.filter((program) => findValidationForProgram(validations, program) !== undefined),
+    [validations, programs],
+  );
+
+  if (!isAdminView || validationPrograms.length === 0) {
+    return null;
+  }
+
+  return (
+    <>
+      <CategoryHeading
+        headingType={{ label: 'programs.categories.validation.header', default_message: 'Validations' }}
+      />
+      {validationPrograms.map((program, index) => {
+        return <ProgramCard program={program} key={index} />;
+      })}
+    </>
+  );
+};
+
 const Programs = () => {
   const { formData } = useContext(Context);
   const { programs, missingPrograms } = useResultsContext();
@@ -55,6 +78,7 @@ const Programs = () => {
     <>
       {formData.immutableReferrer === 'lgs' && missingPrograms && <BackToScreen />}
       <Filter />
+      <ValidationCategory />
       {categories.map(({ name, programs }) => {
         return (
           <div key={name.default_message}>
