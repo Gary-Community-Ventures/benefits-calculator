@@ -1,13 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import {
-  AppBar,
-  MenuItem,
-  Select,
-  Link,
-  IconButton,
-  Dialog,
-} from '@mui/material';
+import { AppBar, MenuItem, Select, Link, IconButton, Dialog } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -61,11 +54,11 @@ const TwoOneOneHeader = () => {
   //this will disable the scroll when the hamburgerMenu is open
   useEffect(() => {
     if (openMenu) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "scroll";
+      document.body.style.overflow = 'scroll';
     }
-  }, [openMenu])
+  }, [openMenu]);
 
   const handleOpenShare = () => {
     setOpenShare(true);
@@ -127,11 +120,7 @@ const TwoOneOneHeader = () => {
   };
 
   const displayHamburgerMenu = () => {
-    return (
-      <Stack id="hamburger-drawer">
-        {create211Links()}
-      </Stack>
-    );
+    return <Stack id="hamburger-drawer">{create211Links()}</Stack>;
   };
 
   const createMenuItems = (optionList) => {

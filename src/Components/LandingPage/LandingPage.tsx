@@ -76,8 +76,8 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       };
     } else {
       return {
-        privacyPolicyLink: privacyLink["en-us"],
-        addTermsConsentToContact: consentToContactLink["en-us"],
+        privacyPolicyLink: privacyLink['en-us'],
+        addTermsConsentToContact: consentToContactLink['en-us'],
       };
     }
   };
