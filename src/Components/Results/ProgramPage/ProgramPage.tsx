@@ -4,12 +4,12 @@ import ResultsTranslate from '../Translate/Translate.tsx';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
 import { FormattedMessage } from 'react-intl';
-import { formatYearlyValue } from '../FormattedValue';
+import { formatYearlyValue, useFormatYearlyValue } from '../FormattedValue';
 import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage.tsx';
 import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
-import { findValidationForProgram, useResultsContext } from '../Results';
+import { findValidationForProgram, useResultsContext, useResultsLink } from '../Results';
 import { deleteValidation, postValidation } from '../../../apiCalls';
 
 type ProgramPageProps = {
@@ -87,6 +87,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       </header>
     );
   };
+  const value = useFormatYearlyValue(program);
 
   const displayEstimatedValueAndTime = (program: Program) => {
     return (
@@ -95,7 +96,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <article className="estimation-text-left">
             <FormattedMessage id="results.estimated-annual-value" defaultMessage="Estimated Annual Value" />
           </article>
-          <article className="estimation-text-right slim-text">{formatYearlyValue(program, locale)}</article>
+          <article className="estimation-text-right slim-text">{value}</article>
         </div>
         <div className="estimation-text">
           <article className="estimation-text-left">
@@ -109,12 +110,13 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     );
   };
 
+  const backLink = useResultsLink(`/${uuid}/results/benefits`);
   return (
     <main className="program-page-container">
       <section className="back-to-results-button-container">
         <BackAndSaveButtons
           handleTextfieldChange={() => {}}
-          navigateToLink={`/${uuid}/results/benefits`}
+          navigateToLink={backLink}
           BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
         />
       </section>
@@ -136,7 +138,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         <a className="apply-online-button" href={program.apply_button_link.default_message} target="_blank">
           <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
         </a>
-        {isAdminView && (
+        {isAdminView && staffToken !== undefined && (
           <button className="apply-online-button" onClick={toggleValidation}>
             {currentValidation === undefined ? (
               <FormattedMessage id="results.validations.button.add" defaultMessage="Create Validation" />

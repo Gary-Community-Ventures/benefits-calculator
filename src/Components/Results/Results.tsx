@@ -55,6 +55,19 @@ export function findValidationForProgram(validations: Validation[], program: Pro
   return validations.find((validation) => validation.program_name === program.external_name);
 }
 
+function addAdminToLink(link: string, isAdmin: boolean) {
+  if (isAdmin) {
+    return link + '?admin=true';
+  }
+
+  return link;
+}
+
+export function useResultsLink(link: string) {
+  const { isAdminView } = useResultsContext();
+  return addAdminToLink(link, isAdminView);
+}
+
 const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   const { locale, formData } = useContext(Context);
   const { uuid, programId } = useParams();
@@ -149,7 +162,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
         <Grid item xs={12}>
           <BackAndSaveButtons
             handleTextfieldChange={handleTextfieldChange}
-            navigateToLink={`/${uuid}/results/benefits`}
+            navigateToLink={addAdminToLink(`/${uuid}/results/benefits`, isAdminView)}
             BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
           />
           <MoreHelp />

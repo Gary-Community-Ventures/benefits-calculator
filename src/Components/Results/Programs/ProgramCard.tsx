@@ -1,12 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
-import { formatMonthlyValue } from '../FormattedValue';
+import { useFormatMonthlyValue } from '../FormattedValue';
 import ResultsTranslate from '../Translate/Translate';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './ProgramCard.css';
-import { Context } from '../../Wrapper/Wrapper';
-import { findValidationForProgram, useResultsContext } from '../Results';
+import { findValidationForProgram, useResultsContext, useResultsLink } from '../Results';
 
 type ProgramCardProps = {
   program: Program;
@@ -20,7 +19,6 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   const programId = program.program_id;
   const windowWidth = window.innerWidth;
   const [size, setSize] = useState(windowWidth);
-  const { locale } = useContext(Context);
   const { validations, isAdminView } = useResultsContext();
 
   useEffect(() => {
@@ -66,6 +64,9 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
     return className;
   }, [isAdminView, validations]);
 
+  const programPageLink = useResultsLink(`/${uuid}/results/benefits/${programId}`);
+  const value = useFormatMonthlyValue(program);
+
   return (
     <div className={containerClass}>
       <div className="result-program-flags-container">
@@ -90,7 +91,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
           </div>
           {isMobile && (
             <div className="result-program-more-info-button">
-              <Link to={`/${uuid}/results/benefits/${programId}`}>
+              <Link to={programPageLink}>
                 <FormattedMessage id="more-info" defaultMessage="More Info" />
               </Link>
             </div>
@@ -114,13 +115,13 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
             <FormattedMessage id="program-card.estimated-savings" defaultMessage="Estimated Savings: " />
           </div>
           <div className="result-program-details-box">
-            <strong>{formatMonthlyValue(program, locale)}</strong>
+            <strong>{value}</strong>
           </div>
         </div>
       </div>
       {!isMobile && (
         <div className="result-program-more-info-button">
-          <Link to={`/${uuid}/results/benefits/${programId}`}>
+          <Link to={programPageLink}>
             <FormattedMessage id="more-info" defaultMessage="More Info" />
           </Link>
         </div>
