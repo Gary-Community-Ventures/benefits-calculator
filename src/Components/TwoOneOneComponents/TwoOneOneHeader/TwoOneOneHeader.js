@@ -1,6 +1,13 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { AppBar, MenuItem, Select, Modal, Link, IconButton, ClickAwayListener } from '@mui/material';
+import {
+  AppBar,
+  MenuItem,
+  Select,
+  Link,
+  IconButton,
+  Dialog,
+} from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -11,8 +18,8 @@ import twoOneOneLinks from '../../../Assets/TwoOneOneAssets/twoOneOneLinks';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import MenuIcon from '@mui/icons-material/Menu';
-import Share from '../../Share/Share';
 import CloseIcon from '@mui/icons-material/Close';
+import TwoOneOneShare from '../TwoOneOneShare/TwoOneOneShare';
 import './TwoOneOneHeader.css';
 
 const TwoOneOneHeader = () => {
@@ -50,6 +57,15 @@ const TwoOneOneHeader = () => {
   const [openShare, setOpenShare] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+
+  //this will disable the scroll when the hamburgerMenu is open
+  useEffect(() => {
+    if (openMenu) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+  }, [openMenu])
 
   const handleOpenShare = () => {
     setOpenShare(true);
@@ -112,11 +128,9 @@ const TwoOneOneHeader = () => {
 
   const displayHamburgerMenu = () => {
     return (
-      <ClickAwayListener onClickAway={handleOpenMenu}>
-        <Stack id="hamburger-drawer" open={openMenu} onClose={handleOpenMenu}>
-          {create211Links()}
-        </Stack>
-      </ClickAwayListener>
+      <Stack id="hamburger-drawer">
+        {create211Links()}
+      </Stack>
     );
   };
 
@@ -175,13 +189,14 @@ const TwoOneOneHeader = () => {
               </IconButton>
               {displayHamburgerMenuIcon()}
             </Stack>
-            <Modal
+            <Dialog
               open={openShare}
               onClose={handleCloseShare}
               aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}
+              sx={{ '& .MuiPaper-root': { borderRadius: '1rem' } }}
             >
-              <Share close={handleCloseShare} />
-            </Modal>
+              <TwoOneOneShare close={handleCloseShare} />
+            </Dialog>
           </Stack>
         </AppBar>
         {openMenu && displayHamburgerMenu()}
