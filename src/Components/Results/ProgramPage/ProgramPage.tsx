@@ -22,7 +22,7 @@ type IconRendererProps = {
 
 const ProgramPage = ({ program }: ProgramPageProps) => {
   const { uuid } = useParams();
-  const { locale, staffToken } = useContext(Context);
+  const { formData, setFormData, staffToken } = useContext(Context);
   const { isAdminView, validations, setValidations } = useResultsContext();
   const IconRenderer: React.FC<IconRendererProps> = ({ headingType }) => {
     const IconComponent = headingOptionsMappings[headingType];
@@ -46,6 +46,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     try {
       const response = await postValidation(body, staffToken);
       setValidations([...validations, response]);
+      setFormData({ ...formData, frozen: true });
     } catch (error) {
       console.error(error);
     }
@@ -54,7 +55,11 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
   const removeValidation = async () => {
     try {
       await deleteValidation(currentValidation?.id, staffToken);
-      setValidations(validations.filter((validation) => validation.id !== currentValidation?.id));
+      const newValidations = validations.filter((validation) => validation.id !== currentValidation?.id);
+      setValidations(newValidations);
+      if (newValidations.length === 0) {
+        setFormData({ ...formData, frozen: false });
+      }
     } catch (error) {
       console.error(error);
     }
@@ -138,7 +143,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         <a className="apply-online-button" href={program.apply_button_link.default_message} target="_blank">
           <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
         </a>
-        {isAdminView && staffToken !== undefined && (
+        {isAdminView && staffToken !== undefined && formData.isTestData && (
           <button className="apply-online-button" onClick={toggleValidation}>
             {currentValidation === undefined ? (
               <FormattedMessage id="results.validations.button.add" defaultMessage="Create Validation" />

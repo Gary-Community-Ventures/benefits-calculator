@@ -1,5 +1,5 @@
 import { AppBar, MenuItem, Select } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
 import { useConfig } from '../Config/configHook.tsx';
@@ -44,9 +44,19 @@ const Header = () => {
     return dropdownMenuItems;
   };
 
+  const containerClass = useMemo(() => {
+    let className = 'header-full-width-container';
+
+    if (formData.frozen) {
+      className += ' frozen';
+    }
+
+    return className
+  }, [formData.frozen]);
+
   return (
     <nav>
-      <Paper className="header-full-width-container" square={true} elevation={0}>
+      <Paper className={containerClass} square={true} elevation={0}>
         <AppBar id="nav-container" position="sticky" elevation={0}>
           <a href={`/step-1${queryString}`} className="home-link">
             <img

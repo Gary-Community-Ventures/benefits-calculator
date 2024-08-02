@@ -37,6 +37,7 @@ const FetchScreen = () => {
     const initialFormData: FormData = {
       ...formData,
       isTest: response.is_test ?? false,
+      isTestData: response.is_test_data ?? false,
       frozen: response.frozen,
       externalID: response.external_id ?? undefined,
       agreeToTermsOfService: response.agree_to_tos ?? false,

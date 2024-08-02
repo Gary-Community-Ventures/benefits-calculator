@@ -89,6 +89,7 @@ export interface AcuteHHConditions {
 
 export interface FormData {
   isTest?: boolean;
+  isTestData?: boolean;
   frozen: boolean;
   externalID?: string;
   agreeToTermsOfService: boolean;

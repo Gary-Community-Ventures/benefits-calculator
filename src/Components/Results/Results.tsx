@@ -146,7 +146,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     setMissingPrograms(apiResults.missing_programs);
     setValidations(apiResults.validations);
     setLoading(false);
-  }, [filtersChecked, apiResults]);
+  }, [filtersChecked, apiResults, isAdminView]);
 
   if (loading) {
     return (
