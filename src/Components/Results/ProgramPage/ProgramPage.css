@@ -218,6 +218,7 @@ li.apply-info {
 .navigator-langs-container {
   display: flex;
   gap: 0.5rem;
+  margin: 0.25rem 0;
 }
 
 /* TABLET */
