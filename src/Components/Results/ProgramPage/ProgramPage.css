@@ -204,16 +204,20 @@ li.apply-info {
   color: black;
 }
 
-.navigator-spanish-flag {
+.navigator-lang-flag {
   align-items: center;
   background-color: #e9f8e5;
   display: flex;
   font-size: 0.8rem;
   font-weight: 500;
-  height: 0.5rem;
   justify-content: start;
   padding: 1rem;
-  width: 8.75rem;
+  width: fit-content;
+}
+
+.navigator-langs-container {
+  display: flex;
+  gap: 0.5rem;
 }
 
 /* TABLET */
