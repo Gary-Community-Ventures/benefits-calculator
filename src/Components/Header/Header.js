@@ -57,18 +57,12 @@ const Header = () => {
 
     return dropdownMenuItems;
   };
-  console.log(getReferrer('logoSource'));
-  // console.log(config?.referrerData?.logoSource);
-  // console.log(getReferrerInfo(Number(config?.referrerData?.logoSource)));
-  // console.log(getReferrer('logoSource'));
-  // const logoReferrer = getReferrer('logoSource') !== undefined ? getReferrer('logoSource') : defaultLogo;
-  // console.log(logoReferrer);
-  const logoInfoArray = getReferrerInfo(Number(config?.referrerData?.logoSource));
-  const logoSource = logoInfoArray ? logoInfoArray[0] : defaultLogo;
-  console.log(logoSource);
-  const logoAlt = logoInfoArray ? logoInfoArray[1]: "default alt";
 
-  // console.log(reffererLogo)
+  const referrer = formData.immutableReferrer ? formData.immutableReferrer : 'default';
+  const logoInfoArray = getReferrerInfo(Number(config?.referrerData?.logoSource));
+  const logoSource = logoInfoArray ? logoInfoArray[0][referrer] : defaultLogo;
+  const logoAlt = logoInfoArray ? logoInfoArray[1][referrer]: "default alt";
+
   return (
     <nav>
       <Paper className="header-full-width-container" square={true} elevation={0}>

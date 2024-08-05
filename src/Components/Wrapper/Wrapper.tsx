@@ -7,7 +7,7 @@ import { getTranslations } from '../../apiCalls';
 import useReferrer, { ReferrerData } from '../Referrer/referrerHook';
 import { Language } from '../../Types/Language';
 import { useConfig, useGetConfig } from '../Config/configHook';
-import { coLogoAlt, coLogoSource } from '../Referrer/referrerLogoInfo';
+import { coLogoAlt, coLogoSource, coShareLink, coTwoOneOneLink } from '../Referrer/referrerDataInfo';
 
 const initialFormData: FormData = {
   isTest: undefined,
@@ -90,28 +90,19 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
     referrerData: referrerData = {
       theme: {
         default: 'default',
-        '211': 'twoOneOne',
+        '211co': 'twoOneOne',
       },
       logoSource: coLogoSource,
       logoAlt: coLogoAlt,
       logoClass: {
         default: 'logo',
       },
-      twoOneOneLink: {
-        default:
-          'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=organic&utm_id=211mfb',
-        '211co':
-          'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=whitelabel&utm_id=211mfb',
-      },
-      shareLink: {
-        default: 'https://www.myfriendben.org/',
-        //probably just leave 211, without co ending
-        '211': 'https://screener.myfriendben.org?referrer=211co',
-      },
+      twoOneOneLink: coTwoOneOneLink,
+      shareLink: coShareLink,
     },
   } = config ?? {};
+
   const rightToLeftLanguages = ['ar'];
-  // console.log('referrerData', referrerData);
 
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
   const [screenLoading, setScreenLoading] = useState<boolean>(true);
@@ -213,7 +204,10 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   console.log('referrerData FROM WRAPPER', referrerData);
 
-  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer, referrerData as ReferrerData | undefined);
+  const { getReferrer, setReferrer } = useReferrer(
+    formData.immutableReferrer,
+    referrerData as ReferrerData | undefined,
+  );
 
   useEffect(() => {
     setReferrer(formData.immutableReferrer);

@@ -24,14 +24,6 @@ export const coLogoSource = {
   dhs: DHSMFBLogo,
 };
 
-export const ncLogoSource = {
-  default: MFBNCLogo
-}
-
-export const ncLogoAlt = {
-  default: 'MyFriendBen home page button',
-}
-
 export const coLogoAlt = {
   default: 'MyFriendBen home page button',
   bia: 'Benefits in Action and MyFriendBen home page button',
@@ -43,4 +35,23 @@ export const coLogoAlt = {
   fircsummitresourcecenter: 'Firc Summit Resource Center',
   coBenefits: 'MyFriendBen home page button',
   dhs: 'Denver Human Services and MyFriendBen home page button',
+};
+
+export const coTwoOneOneLink = {
+  default: 'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=organic&utm_id=211mfb',
+  '211co':
+    'https://www.211colorado.org/?utm_source=myfriendben&utm_medium=inlink&utm_campaign=whitelabel&utm_id=211mfb',
+};
+
+export const coShareLink = {
+  default: 'https://www.myfriendben.org/',
+  '211co': 'https://screener.myfriendben.org?referrer=211co',
+};
+
+export const ncLogoSource = {
+  default: MFBNCLogo,
+};
+
+export const ncLogoAlt = {
+  default: 'MyFriendBen home page button',
 };
