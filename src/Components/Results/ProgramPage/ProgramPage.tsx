@@ -77,7 +77,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         <FormattedMessage id="programPage.nav-spanish" defaultMessage="Spanish Available" />
       </p>
     );
-  }
+  };
 
   return (
     <main className="program-page-container">
@@ -121,7 +121,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                       <ResultsTranslate translation={navigator.name} />
                     </p>
                   )}
-                  {navigator.languages.includes("es") && (displaySpanishFlag())}
+                  {navigator.languages.includes('es') && displaySpanishFlag()}
                   <div className="address-info">
                     {navigator.description && (
                       <p className="navigator-desc">
