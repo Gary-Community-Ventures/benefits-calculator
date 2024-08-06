@@ -16,7 +16,7 @@ export type ReferrerData = {
 };
 
 
-export default function useReferrer(referrerCode?: string, referrerData?: ReferrerData | undefined) {
+export default function useReferrer(referrerCode?: string, referrerData?: ReferrerData ) {
   const [referrer, setReferrer] = useState<string | undefined>(referrerCode);
   
   function getReferrer(key: keyof ReferrerData) {

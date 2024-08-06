@@ -17,10 +17,13 @@ import CheckIcon from '@mui/icons-material/Check';
 import { Context } from '../Wrapper/Wrapper';
 import dataLayerPush from '../../Assets/analytics';
 import './Share.css';
+import { useConfig } from '../Config/configHook';
+import { getReferrerInfo } from '../../Shared/helperFunctions';
+import { coShareLink } from '../Referrer/referrerDataInfo';
 
 const Share = forwardRef(function Share() {
   const [copied, setCopied] = useState(false);
-  const { getReferrer } = useContext(Context);
+  const { formData, getReferrer } = useContext(Context);
   const intl = useIntl();
 
   const labels = {
@@ -37,13 +40,16 @@ const Share = forwardRef(function Share() {
       defaultMessage: 'Copied',
     }),
   };
+  const referrer = formData.immutableReferrer ? formData.immutableReferrer : 'default';
+  const getShareLinkfromConfig: Record<string, any> = useConfig('referrerData');
+  const getShareLinkArray: Record<string, any>[] = getReferrerInfo(Number(getShareLinkfromConfig?.shareLink)) ?? [coShareLink];
+  const shareLink = getShareLinkArray[3][referrer] ?? getShareLinkArray[3]['default'];
 
-  const shareUrl = getReferrer('shareLink');
 
   const iconSize = { color: '#fff', fontSize: '2rem' };
 
   const copyLink = () => {
-    navigator.clipboard.writeText(shareUrl);
+    navigator.clipboard.writeText(shareLink);    
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
@@ -72,27 +78,27 @@ const Share = forwardRef(function Share() {
         </p>
       </div>
       <div className="row-group">
-        <FacebookShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Facebook')}>
+        <FacebookShareButton url={shareLink} onClick={trackOutboundLinks('Share to Facebook')}>
           <Icon name="facebook">
             <FacebookIcon sx={iconSize} />
           </Icon>
         </FacebookShareButton>
-        <TwitterShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Twitter')}>
+        <TwitterShareButton url={shareLink} onClick={trackOutboundLinks('Share to Twitter')}>
           <Icon name="twitter">
             <XIcon sx={iconSize} />
           </Icon>
         </TwitterShareButton>
-        <EmailShareButton url={shareUrl} onClick={trackOutboundLinks('Share With Email')}>
+        <EmailShareButton url={shareLink} onClick={trackOutboundLinks('Share With Email')}>
           <Icon name={labels.email}>
             <EmailIcon sx={iconSize} />
           </Icon>
         </EmailShareButton>
-        <WhatsappShareButton url={shareUrl} onClick={trackOutboundLinks('Share With WhatsApp')}>
+        <WhatsappShareButton url={shareLink} onClick={trackOutboundLinks('Share With WhatsApp')}>
           <Icon name="whatsApp">
             <WhatsAppIcon sx={iconSize} />
           </Icon>
         </WhatsappShareButton>
-        <LinkedinShareButton url={shareUrl} onClick={trackOutboundLinks('Share With LinkedIn')}>
+        <LinkedinShareButton url={shareLink} onClick={trackOutboundLinks('Share With LinkedIn')}>
           <Icon name="linkedIn">
             <LinkedInIcon sx={iconSize} />
           </Icon>

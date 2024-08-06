@@ -199,14 +199,11 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
     setLocale(newLocale as Language);
   };
 
-  const footerLogo: Record<string, any> = useConfig('MBF_logo');
-  // console.log(footerLogo);
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  console.log('referrerData FROM WRAPPER', referrerData);
 
   const { getReferrer, setReferrer } = useReferrer(
     formData.immutableReferrer,
-    referrerData as ReferrerData | undefined,
+    referrerData as ReferrerData,
   );
 
   useEffect(() => {

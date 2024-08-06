@@ -2,32 +2,23 @@ import { AppBar, MenuItem, Select } from '@mui/material';
 import { useContext, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
-import languageOptions from '../../Assets/languageOptions.tsx';
-import { useLocation } from 'react-router-dom';
 import { useGetConfig, useConfig } from '../Config/configHook.tsx';
-import ShareIcon from '@mui/icons-material/Share';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import Share from '../Share/Share';
-import EmailResults from '../EmailResults/EmailResults';
 import Paper from '@mui/material/Paper';
 import { useIntl } from 'react-intl';
 import './Header.css';
 import { getReferrerInfo } from '../../Shared/helperFunctions.ts';
 import MFBDefaultLogo from '../../Assets/Logos/mfb_default_logo_header.png';
+import { coLogoAlt } from '../Referrer/referrerDataInfo.ts';
 
 
 const Header = () => {
   const context = useContext(Context);
   const { configLoading, configResponse: config } = useGetConfig();
-
-  console.log(config);
   const { formData, getReferrer } = context;
   const languageOptions = useConfig('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
   const defaultLogo = MFBDefaultLogo;
-  // const headerLogo = useConfig('MBF_logo');
-  // const headerLogoByState = headerLogo.state_code
 
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
@@ -61,7 +52,7 @@ const Header = () => {
   const referrer = formData.immutableReferrer ? formData.immutableReferrer : 'default';
   const logoInfoArray = getReferrerInfo(Number(config?.referrerData?.logoSource));
   const logoSource = logoInfoArray ? logoInfoArray[0][referrer] : defaultLogo;
-  const logoAlt = logoInfoArray ? logoInfoArray[1][referrer]: "default alt";
+  const logoAlt = logoInfoArray ? logoInfoArray[1][referrer]: coLogoAlt.default;
 
   return (
     <nav>
