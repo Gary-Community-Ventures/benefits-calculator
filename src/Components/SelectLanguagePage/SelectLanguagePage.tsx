@@ -3,16 +3,17 @@ import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent, Button, B
 import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const SelectLanguagePage = () => {
   const { formData, locale, selectLanguage } = useContext(Context);
   const languageOptions = useConfig('language_options');
+  const { uuid } = useParams();
 
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const navigate = useNavigate();
 
-  const createMenuItems = (optionList: Record<string, any>, disabledFMId: string, disabledFMDefault: string) => {
+  const createMenuItems = (optionList: Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
     const disabledSelectMenuItem = (
       <MenuItem value="disabled-select" key="disabled-select" disabled>
         <FormattedMessage id={disabledFMId} defaultMessage={disabledFMDefault} />
@@ -67,7 +68,16 @@ const SelectLanguagePage = () => {
         </Select>
       </FormControl>
       <Box sx={{ mt: '1rem' }}>
-        <Button variant="contained" onClick={() => navigate(`/step-2${queryString}`)}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            if (uuid !== undefined) {
+              navigate(`/${uuid}/step-2${queryString}`);
+              return;
+            }
+            navigate(`/step-2${queryString}`);
+          }}
+        >
           <FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />
         </Button>
       </Box>

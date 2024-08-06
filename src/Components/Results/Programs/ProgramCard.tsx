@@ -3,8 +3,10 @@ import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
 import { formatMonthlyValue } from '../FormattedValue';
 import ResultsTranslate from '../Translate/Translate';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './ProgramCard.css';
+import { useTranslateNumber } from '../../../Assets/languageOptions';
+import { Context } from '../../Wrapper/Wrapper';
 
 type ProgramCardProps = {
   program: Program;
@@ -18,6 +20,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   const programId = program.program_id;
   const windowWidth = window.innerWidth;
   const [size, setSize] = useState(windowWidth);
+  const { locale } = useContext(Context);
 
   useEffect(() => {
     function handleResize() {
@@ -89,7 +92,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
             <FormattedMessage id="program-card.estimated-savings" defaultMessage="Estimated Savings: " />
           </div>
           <div className="result-program-details-box">
-            <strong>{formatMonthlyValue(program)}</strong>
+            <strong>{formatMonthlyValue(program, locale)}</strong>
           </div>
         </div>
       </div>

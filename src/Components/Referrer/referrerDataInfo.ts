@@ -25,16 +25,29 @@ export const coLogoSource = {
 };
 
 export const coLogoAlt = {
-  default: 'MyFriendBen home page button',
-  bia: 'Benefits in Action and MyFriendBen home page button',
-  jeffcoHS: 'Jeffco Human Services and MyFriendBen home page button',
-  jeffcoHSCM: 'Jeffco Human Services and MyFriendBen home page button',
-  cch: 'Colorado Coalition for the Homeless and MyFriendBen home page button',
-  lgs: "Let's Get Set home page button",
-  gac: 'Get Ahead Colorado home page button',
-  fircsummitresourcecenter: 'Firc Summit Resource Center',
-  coBenefits: 'MyFriendBen home page button',
-  dhs: 'Denver Human Services and MyFriendBen home page button',
+  // FormattedMessage does not work.
+  default: { id: 'referrerHook.logoAlts.default', defaultMessage: 'MyFriendBen home page button' },
+  bia: { id: 'referrerHook.logoAlts.bia', defaultMessage: 'Benefits in Action and MyFriendBen home page button' },
+  jeffcoHS: {
+    id: 'referrerHook.logoAlts.jeffcoHS',
+    defaultMessage: 'Jeffco Human Services and MyFriendBen home page button',
+  },
+  jeffcoHSCM: {
+    id: 'referrerHook.logoAlts.jeffcoHSCM',
+    defaultMessage: 'Jeffco Human Services and MyFriendBen home page button',
+  },
+  cch: {
+    id: 'referrerHook.logoAlts.cch',
+    defaultMessage: 'Colorado Coalition for the Homeless and MyFriendBen home page button',
+  },
+  lgs: { id: 'referrerHook.logoAlts.lgs', defaultMessage: "Let's Get Set home page button" },
+  gac: { id: 'referrerHook.logoAlts.gac', defaultMessage: 'Get Ahead Colorado home page button' },
+  fircsummitresourcecenter: {
+    id: 'referrerHook.logoAlts.fircsummitresourcecenter',
+    defaultMessage: 'Firc Summit Resource Center',
+  },
+  coBenefits: { id: 'referrerHook.logoAlts.coBenefits', defaultMessage: 'MyFriendBen home page button' },
+  dhs: { id: 'referrerHook.logoAlts.dhs', defaultMessage: 'Denver Human Services and MyFriendBen home page button' },
 };
 
 export const coTwoOneOneLink = {

@@ -9,16 +9,16 @@ type ReferrerOptions<T> = {
 export type ReferrerData = {
   theme: ReferrerOptions<string>;
   logoSource: ReferrerOptions<string>;
-  logoAlt: ReferrerOptions<string>;
+  logoAlt: ReferrerOptions<{ id: string; defaultMessage: string }>;
   logoClass: ReferrerOptions<string>;
   twoOneOneLink: ReferrerOptions<string>;
   shareLink: ReferrerOptions<string>;
 };
 
 
-export default function useReferrer(referrerCode?: string, referrerData?: ReferrerData ) {
+export default function useReferrer(referrerCode?: string, referrerData?: ReferrerData) {
   const [referrer, setReferrer] = useState<string | undefined>(referrerCode);
-  
+
   function getReferrer(key: keyof ReferrerData) {
     return referrerData && (referrerData[key][referrer ?? 'default'] ?? referrerData[key]['default']);
   }

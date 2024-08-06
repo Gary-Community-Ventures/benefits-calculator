@@ -23,9 +23,9 @@ import dataLayerPush from './Assets/analytics.ts';
 import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
 import { isCustomTypedLocationState } from './Types/FormData.ts';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits.tsx';
-import './App.css';
 import { useConfig } from './Components/Config/configHook';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
+import './App.css';
 
 const App = () => {
   const navigate = useNavigate();
@@ -138,14 +138,20 @@ const App = () => {
     // use referrer if there is a referrer, otherwise use utm source
     const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
     const isOtherSource = !(referrer in referralOptions);
+    let referrerSource = formData.referralSource || referrer;
+    if (referrerSource === 'other') {
+      referrerSource = formData.otherSource ?? '';
+    }
 
+    // if the referrer source is not in the dropdown list then
+    // make the referrer "other" and fill in the other field
     setFormData({
       ...formData,
       isTest: isTest,
       externalID: externalId,
-      referralSource: isOtherSource && referrer !== '' ? 'other' : referrer,
+      referralSource: isOtherSource && referrer !== '' ? 'other' : referrerSource,
       immutableReferrer: referrer,
-      otherSource: isOtherSource ? referrer : '',
+      otherSource: isOtherSource ? referrerSource : '',
       urlSearchParams: urlSearchParams,
     });
   }, [referralOptions, formData.immutableReferrer]);

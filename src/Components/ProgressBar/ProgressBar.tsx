@@ -6,6 +6,7 @@ import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import dataLayerPush from '../../Assets/analytics';
 import './ProgressBar.css';
+import { useReorderLanguage, useTranslateNumber } from '../../Assets/languageOptions';
 
 interface ProgressBarProps {
   step?: number;
@@ -40,6 +41,17 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
     },
   };
 
+  const translateNumber = useTranslateNumber();
+  const stepText = useReorderLanguage(
+    [
+      <FormattedMessage id="confirmation.return-stepLabel" defaultMessage="Step " key="0" />,
+      translateNumber(stepValue),
+      <FormattedMessage id="confirmation.return-ofLabel" defaultMessage=" of " key="1" />,
+      translateNumber(totalSteps),
+    ],
+    { my: [0, 3, 2, 1] },
+  );
+
   return (
     <aside className="progress-bar-container">
       <LinearProgress
@@ -49,12 +61,7 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
         className="progress-bar rtl-mirror"
         aria-label={intl.formatMessage(progressBarTranslatedAL)}
       />
-      <p className="step-progress-title">
-        <FormattedMessage id="confirmation.return-stepLabel" defaultMessage="Step " />
-        {stepValue}
-        <FormattedMessage id="confirmation.return-ofLabel" defaultMessage=" of " />
-        {totalSteps}
-      </p>
+      <p className="step-progress-title">{stepText}</p>
     </aside>
   );
 };

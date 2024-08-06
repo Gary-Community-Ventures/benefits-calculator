@@ -1,6 +1,6 @@
 import React, { useEffect, useState, PropsWithChildren } from 'react';
 import useStyle from '../../Assets/styleController';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider, useIntl } from 'react-intl';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
@@ -53,6 +53,8 @@ const initialFormData: FormData = {
     wic: false,
     nfp: false,
     fatc: false,
+    nfp: false,
+    fatc: false,
   },
   referralSource: undefined,
   immutableReferrer: undefined,
@@ -86,6 +88,7 @@ export const Context = React.createContext<WrapperContext>({} as WrapperContext)
 const Wrapper = (props: PropsWithChildren<{}>) => {
   const { configLoading, configResponse: config } = useGetConfig();
   const { language_options: languageOptions = {} } = config ?? {};
+  const languages = Object.keys(languageOptions) as Language[];
   const {
     referrerData: referrerData = {
       theme: {
@@ -123,29 +126,33 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
   let [translations, setTranslations] = useState<{ Language: { [key: string]: string } } | {}>({});
 
-  let defaultLanguage = localStorage.getItem('language') as Language;
-
-  const userLanguage = navigator.language.toLowerCase() as Language;
-
-  const verifyLanguage = (language: Language) => {
-    return Object.keys(languageOptions).some((lang) => language.slice(0, 2) === lang) ? language.slice(0, 2) : 'en-us';
-  };
-
-  defaultLanguage = defaultLanguage ? defaultLanguage : (verifyLanguage(userLanguage) as Language);
-
-  const pathname = window.location.pathname;
-
   const [theme, setTheme, styleOverride] = useStyle('default');
-
-  const languages = Object.keys(languageOptions) as Language[];
-  languages.forEach((lang: Language) => {
-    if (pathname.includes(`/${lang}/`)) {
-      defaultLanguage = lang;
-    }
-  });
-
-  const [locale, setLocale] = useState<Language>(defaultLanguage);
+  const [locale, setLocale] = useState<Language>('en-us');
   const [messages, setMessages] = useState({});
+
+  useEffect(() => {
+    let defaultLanguage = localStorage.getItem('language') as Language;
+
+    const userLanguage = navigator.language.toLowerCase() as Language;
+
+    const verifyLanguage = (language: Language) => {
+      return Object.keys(languageOptions).some((lang) => language.slice(0, 2) === lang)
+        ? language.slice(0, 2)
+        : 'en-us';
+    };
+
+    defaultLanguage = defaultLanguage ? defaultLanguage : (verifyLanguage(userLanguage) as Language);
+
+    const pathname = window.location.pathname;
+
+    languages.forEach((lang: Language) => {
+      if (pathname.includes(`/${lang}/`)) {
+        defaultLanguage = lang;
+      }
+    });
+
+    setLocale(defaultLanguage);
+  }, [languages.length]);
 
   useEffect(() => {
     if (locale in translations) {
@@ -216,6 +223,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         locale,
         selectLanguage,
         config,
+        configLoading,
         formData,
         setFormData,
         theme,
