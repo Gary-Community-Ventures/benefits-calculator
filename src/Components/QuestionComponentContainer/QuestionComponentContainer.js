@@ -10,6 +10,7 @@ import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
+import QuestionHeaderAndDesc from '../QuestionHeaderAndDesc/QuestionHeaderAndDesc.tsx';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { ZipcodeStep } from '../Steps/ZipcodeStep';
@@ -124,10 +125,7 @@ const QuestionComponentContainer = ({
 
     return (
       <div className="question-container" id={id}>
-        {<h2 className="question-label">{matchingQuestion.question}</h2>}
-        {matchingQuestion.questionDescription && (
-          <p className="question-description">{matchingQuestion.questionDescription}</p>
-        )}
+        <QuestionHeaderAndDesc question={matchingQuestion.question} description={matchingQuestion.questionDescription} />
         {component}
         {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && (
           <FollowUpQuestions

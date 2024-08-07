@@ -11,7 +11,7 @@ const QuestionHeaderAndDesc = ({ question, description }: QuestionHeaderAndDescP
       <h2 className="question-label">{question}</h2>
       {description && <p className="question-description">{description}</p>}
     </>
-  );
+  ); 
 }
 
 export default QuestionHeaderAndDesc;
