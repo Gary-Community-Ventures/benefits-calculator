@@ -10,6 +10,7 @@ import { Context } from '../Wrapper/Wrapper';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { updateScreen } from '../../Assets/updateScreen';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
+import QuestionHeaderAndDesc from '../QuestionHeaderAndDesc/QuestionHeaderAndDesc.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { useConfig } from '../Config/configHook.tsx';
 import * as z from 'zod';
@@ -118,10 +119,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
 
   return (
     <div className="question-container" id={currentStepId.toString()}>
-      {<h2 className="question-label">{matchingQuestion.question}</h2>}
-      {matchingQuestion.questionDescription && (
-        <p className="question-description">{matchingQuestion.questionDescription}</p>
-      )}
+      <QuestionHeaderAndDesc question={matchingQuestion.question} description={matchingQuestion.questionDescription} />
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name="zipcode"
