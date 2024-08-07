@@ -14,10 +14,10 @@ import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { ZipcodeStep } from '../Steps/ZipcodeStep';
 import './QuestionComponentContainer.css';
-import QuestionLeadText from '../Titles/QuestionLeadText';
-import QuestionQuestion from '../Titles/QuestionQuestion';
-import QuestionDescription from '../Titles/QuestionDescription';
-import QuestionHeader from '../Titles/QuestionHeader';
+import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,

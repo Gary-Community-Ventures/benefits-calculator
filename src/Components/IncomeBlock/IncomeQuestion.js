@@ -16,7 +16,7 @@ import {
 } from '../../Assets/validationFunctions.tsx';
 import Textfield from '../Textfield/Textfield';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
-import QuestionQuestion from '../Titles/QuestionQuestion';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,

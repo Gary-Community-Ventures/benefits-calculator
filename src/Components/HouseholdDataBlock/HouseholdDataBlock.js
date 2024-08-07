@@ -25,9 +25,9 @@ import { isCustomTypedLocationState } from '../../Types/FormData.ts';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 import './HouseholdDataBlock.css';
 import { useTranslateNumber } from '../../Assets/languageOptions';
-import QuestionHeader from '../Titles/QuestionHeader';
-import QuestionQuestion from '../Titles/QuestionQuestion';
-import QuestionDescription from '../Titles/QuestionDescription';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import QuestionDescription from '../QuestionComponents/QuestionDescription';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);

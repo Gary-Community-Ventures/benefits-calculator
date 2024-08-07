@@ -21,7 +21,7 @@ import { ReactComponent as DentalCare } from '../../Assets/OptionCardIcons/Acute
 import { ReactComponent as LegalServices } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import './CurrentBenefits.css';
-import QuestionHeader from '../Titles/QuestionHeader';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
 
 type CategoryName =
   | 'Housing and Utilities'

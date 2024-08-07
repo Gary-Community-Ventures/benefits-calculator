@@ -8,8 +8,7 @@ import { useContext, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import QuestionQuestion from '../Titles/QuestionQuestion';
-import QuestionDescription from '../Titles/QuestionDescription';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 
 const FollowUpQuestions = ({
   followUpQuestions,

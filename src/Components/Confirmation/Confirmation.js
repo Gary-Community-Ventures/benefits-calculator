@@ -18,7 +18,7 @@ import { ReactComponent as Referral } from '../../Assets/icons/referral.svg';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import './Confirmation.css';
 import { useTranslateNumber } from '../../Assets/languageOptions';
-import QuestionHeader from '../Titles/QuestionHeader';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
 
 const Confirmation = () => {
   const { formData } = useContext(Context);

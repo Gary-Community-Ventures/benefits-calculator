@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import QuestionHeader from '../Titles/QuestionHeader';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
 
 const SelectLanguagePage = () => {
   const { formData, locale, selectLanguage } = useContext(Context);

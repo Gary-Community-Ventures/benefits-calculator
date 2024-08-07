@@ -11,7 +11,7 @@ import {
 } from '../../Assets/validationFunctions.tsx';
 import { useEffect } from 'react';
 import Textfield from '../Textfield/Textfield';
-import QuestionQuestion from '../Titles/QuestionQuestion';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,

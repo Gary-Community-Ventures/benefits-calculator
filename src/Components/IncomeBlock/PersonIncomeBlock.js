@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import IncomeQuestion from './IncomeQuestion';
 import HelpButton from '../../Components/HelpBubbleIcon/HelpButton.tsx';
 import './PersonIncomeBlock.css';
-import QuestionQuestion from '../Titles/QuestionQuestion';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 
 const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those

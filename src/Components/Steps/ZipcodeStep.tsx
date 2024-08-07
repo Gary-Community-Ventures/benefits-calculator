@@ -13,9 +13,10 @@ import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { useConfig } from '../Config/configHook.tsx';
 import * as z from 'zod';
-import QuestionHeader from '../Titles/QuestionHeader';
-import QuestionLeadText from '../Titles/QuestionLeadText';
-import QuestionQuestion from '../Titles/QuestionQuestion';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import { useGoToNextStep } from '../QuestionComponents/questionHooks';
 
 interface ZipcodeStepProps {
   currentStepId: number;
@@ -59,13 +60,14 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
 
   const currentZipcodeValue = watch('zipcode');
   const shouldShowCountyInput = zipcodeSchema.safeParse(currentZipcodeValue).success;
+  const nextStep = useGoToNextStep('zipcode');
 
   const formSubmitHandler = async (zipCodeAndCountyData: FormData) => {
     if (uuid) {
       const updatedFormData = { ...formData, ...zipCodeAndCountyData };
       setFormData(updatedFormData);
       await updateScreen(uuid, updatedFormData, locale);
-      navigate(`/${uuid}/step-${currentStepId + 1}`);
+      nextStep();
     }
   };
 

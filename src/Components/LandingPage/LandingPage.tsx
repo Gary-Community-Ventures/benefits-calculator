@@ -14,7 +14,7 @@ import './LandingPage.css';
 import dataLayerPush from '../../Assets/analytics.ts';
 import PreviousButton from '../PreviousButton/PreviousButton.tsx';
 import { STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory.ts';
-import QuestionHeader from '../Titles/QuestionHeader';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
 
 interface LandingPageProps {
   handleCheckboxChange: (event: React.FormEvent<HTMLInputElement>) => void;
