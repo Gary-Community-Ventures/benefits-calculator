@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Rating, Select, TextField } from '@mui/material';
 import { FormattedMessageType } from '../../Types/Questions';
 import { FormData } from '../../Types/FormData';
 import { Context } from '../Wrapper/Wrapper';
@@ -13,6 +13,9 @@ import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { useConfig } from '../Config/configHook.tsx';
 import * as z from 'zod';
+import QuestionHeader from '../Titles/QuestionHeader';
+import QuestionLeadText from '../Titles/QuestionLeadText';
+import QuestionQuestion from '../Titles/QuestionQuestion';
 
 interface ZipcodeStepProps {
   currentStepId: number;
@@ -117,11 +120,10 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
   };
 
   return (
-    <div className="question-container" id={currentStepId.toString()}>
-      {<h2 className="question-label">{matchingQuestion.question}</h2>}
-      {matchingQuestion.questionDescription && (
-        <p className="question-description">{matchingQuestion.questionDescription}</p>
-      )}
+    <div>
+      <QuestionLeadText>{matchingQuestion.subheader}</QuestionLeadText>
+      <QuestionHeader>{matchingQuestion.header}</QuestionHeader>
+      <QuestionQuestion>{matchingQuestion.question}</QuestionQuestion>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name="zipcode"
@@ -137,9 +139,9 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
             />
           )}
         />
-        {shouldShowCountyInput && matchingQuestion.followUpQuestions?.length && (
-          <div className="question-container">
-            <h2 className="question-label">{matchingQuestion.followUpQuestions[0].question}</h2>
+        {shouldShowCountyInput && (
+          <div>
+            <QuestionQuestion>{matchingQuestion.followUpQuestions[0].question}</QuestionQuestion>
             <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.county !== undefined}>
               <InputLabel id="county">
                 <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />

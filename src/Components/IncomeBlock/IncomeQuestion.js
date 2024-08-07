@@ -16,6 +16,7 @@ import {
 } from '../../Assets/validationFunctions.tsx';
 import Textfield from '../Textfield/Textfield';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
+import QuestionQuestion from '../Titles/QuestionQuestion';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
@@ -240,10 +241,10 @@ const IncomeQuestion = ({
 
     return (
       <>
-        <h2 className="question-label">
+        <QuestionQuestion>
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
           {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
-        </h2>
+        </QuestionQuestion>
         <div className="income-block-textfield">
           <Textfield
             componentDetails={textfieldProps}
@@ -298,10 +299,10 @@ const IncomeQuestion = ({
 
     return (
       <div>
-        <h2 className="question-label">
+        <QuestionQuestion>
           {questionHeader}
           {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
-        </h2>
+        </QuestionQuestion>
         <div className="income-block-textfield">
           <Textfield
             componentDetails={textfieldProps}
@@ -326,14 +327,14 @@ const IncomeQuestion = ({
 
     return (
       <div>
-        <h2 className="question-label">
+        <QuestionQuestion>
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
           {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
           <HelpButton
             helpText='"Every 2 weeks" means you get paid every other week. "Twice a month" means you get paid two times a month on the same dates each month.'
             helpId="personIncomeBlock.income-freq-help-text"
           />
-        </h2>
+        </QuestionQuestion>
         <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeFrequencyErrorController.showError}>
           <InputLabel id="income-frequency-label">
             <FormattedMessage
@@ -349,7 +350,7 @@ const IncomeQuestion = ({
             label={
               <FormattedMessage
                 id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel"
-                defaultMessage="Income Frequency"
+                defaultMessage="Frequency"
               />
             }
             onChange={(event) => {
@@ -387,9 +388,13 @@ const IncomeQuestion = ({
   }
 
   const incomeStreamQuestion = (
-    <h2 className="question-label income-stream-q-padding">
-      <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-    </h2>
+    <>
+      <QuestionQuestion>
+        <span className="income-stream-q-padding">
+          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+        </span>
+      </QuestionQuestion>
+    </>
   );
 
   return (

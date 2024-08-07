@@ -25,6 +25,9 @@ import { isCustomTypedLocationState } from '../../Types/FormData.ts';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 import './HouseholdDataBlock.css';
 import { useTranslateNumber } from '../../Assets/languageOptions';
+import QuestionHeader from '../Titles/QuestionHeader';
+import QuestionQuestion from '../Titles/QuestionQuestion';
+import QuestionDescription from '../Titles/QuestionDescription';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -128,27 +131,27 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     if (personIndex === 1) {
       return (
         <Box sx={{ marginBottom: '1.5rem' }}>
-          <h2 className="question-label">
+          <QuestionQuestion>
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-how-headOfHH"
               defaultMessage="How old are you?"
             />
-          </h2>
+          </QuestionQuestion>
           {createTextField(ageTextfieldProps, submittedCount)}
         </Box>
       );
     } else {
       return (
         <Box sx={{ marginBottom: '1.5rem' }}>
-          <h2 className="question-label">
+          <QuestionQuestion>
             <FormattedMessage id="householdDataBlock.createAgeQuestion-how" defaultMessage="How old are they?" />
-          </h2>
-          <p className="question-description">
+          </QuestionQuestion>
+          <QuestionDescription>
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-zero"
               defaultMessage="If your child is less than a year old, enter 0."
             />
-          </p>
+          </QuestionDescription>
           {createTextField(ageTextfieldProps, submittedCount)}
         </Box>
       );
@@ -178,12 +181,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const createHOfHRelationQuestion = () => {
     return (
       <Box sx={{ marginBottom: '1.5rem' }}>
-        <h2 className="question-label">
+        <QuestionQuestion>
           <FormattedMessage
             id="householdDataBlock.createHOfHRelationQuestion-relation"
             defaultMessage="What is this person’s relationship to you?"
           />
-        </h2>
+        </QuestionQuestion>
         {createRelationshipDropdownMenu()}
       </Box>
     );
@@ -290,18 +293,18 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     if (personIndex === 1) {
       header = (
-        <h1 className="sub-header question-label">
+        <QuestionHeader>
           <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
-        </h1>
+        </QuestionHeader>
       );
     } else {
       header = (
-        <h1 className="sub-header question-label">
+        <QuestionHeader>
           <FormattedMessage
             id="questions.householdData"
             defaultMessage="Tell us about the next person in your household."
           />
-        </h1>
+        </QuestionHeader>
       );
     }
 
@@ -379,15 +382,15 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     return (
       <Box sx={{ margin: '3rem 0' }}>
-        <h2 className="question-label">
+        <QuestionQuestion>
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-        </h2>
-        <p className="question-description">
+        </QuestionQuestion>
+        <QuestionDescription>
           <FormattedMessage
             id="householdDataBlock.createConditionsQuestion-pick"
             defaultMessage="Choose all that apply."
           />
-        </p>
+        </QuestionDescription>
         {createConditionOptionCards(index)}
       </Box>
     );
@@ -411,13 +414,13 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     return (
       <Box className="section-container" sx={{ paddingTop: '3rem' }}>
         <Box className="section">
-          <h2 className="question-label">
+          <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
             <HelpButton
               helpText="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
               helpId="householdDataBlock.createIncomeRadioQuestion-questionDescription"
-            ></HelpButton>
-          </h2>
+            />
+          </QuestionQuestion>
           <HHDataRadiofield componentDetails={radiofieldProps} memberData={memberData} setMemberData={setMemberData} />
         </Box>
       </Box>
@@ -492,21 +495,21 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const displayHealthCareQuestion = (page) => {
     if (page === 1) {
       return (
-        <h2 className="question-label">
+        <QuestionQuestion>
           <FormattedMessage
             id="questions.healthInsurance-you"
             defaultMessage="Which type of health insurance do you have?"
           />
-        </h2>
+        </QuestionQuestion>
       );
     } else {
       return (
-        <h2 className="question-label">
+        <QuestionQuestion>
           <FormattedMessage
             id="questions.healthInsurance-they"
             defaultMessage="What type of health insurance do they have?"
           />
-        </h2>
+        </QuestionQuestion>
       );
     }
   };
