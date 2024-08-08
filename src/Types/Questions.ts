@@ -139,9 +139,15 @@ export type ComponentDetails =
   | SignUpDetails
   | ZipcodeStepDetails;
 
+export type HelpButtonType = {
+  helpText: string;
+  helpId: string;
+}
+
 export type Question = {
   name: string;
   question?: FormattedMessageType;
+  helpButton?: HelpButtonType;
   questionDescription?: FormattedMessageType;
   componentDetails: ComponentDetails;
   header?: FormattedMessageType;

@@ -119,7 +119,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
 
   return (
     <div className="question-container" id={currentStepId.toString()}>
-      <QuestionHeaderAndDesc question={matchingQuestion.question} description={matchingQuestion.questionDescription} />
+      <QuestionHeaderAndDesc question={matchingQuestion.question} />
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name="zipcode"

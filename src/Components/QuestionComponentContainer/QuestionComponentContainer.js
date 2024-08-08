@@ -125,7 +125,12 @@ const QuestionComponentContainer = ({
 
     return (
       <div className="question-container" id={id}>
-        <QuestionHeaderAndDesc question={matchingQuestion.question} description={matchingQuestion.questionDescription} />
+        <QuestionHeaderAndDesc
+          question={matchingQuestion.question}
+          helpText={matchingQuestion.helpButton?.helpText}
+          helpId={matchingQuestion.helpButton?.helpId}
+          description={matchingQuestion.questionDescription}
+        />
         {component}
         {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && (
           <FollowUpQuestions

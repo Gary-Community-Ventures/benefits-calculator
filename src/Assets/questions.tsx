@@ -14,7 +14,6 @@ import {
 } from './validationFunctions.tsx';
 import { FormattedMessage } from 'react-intl';
 import type { QuestionName, Question } from '../Types/Questions.ts';
-import HelpButton from '../Components/HelpBubbleIcon/HelpButton.tsx';
 
 const questions: Record<QuestionName, Question> = {
   zipcode: {
@@ -58,17 +57,15 @@ const questions: Record<QuestionName, Question> = {
     name: 'householdSize',
     header: <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />,
     question: (
-      <>
-        <FormattedMessage
-          id="questions.householdSize"
-          defaultMessage="Including you, how many people are in your household?"
-        />
-        <HelpButton
-          helpText="If other adults 18 or older in your household file their own tax return, ask them to complete this tool to determine if they qualify for benefits. But even if you and your spouse file taxes separately, include your spouse in the household."
-          helpId="questions.householdSize-helpText"
-        ></HelpButton>
-      </>
+      <FormattedMessage
+        id="questions.householdSize"
+        defaultMessage="Including you, how many people are in your household?"
+      />
     ),
+    helpButton: {
+      helpText:"If other adults 18 or older in your household file their own tax return, ask them to complete this tool to determine if they qualify for benefits. But even if you and your spouse file taxes separately, include your spouse in the household.",
+      helpId:"questions.householdSize-helpText"
+    },
     componentDetails: {
       componentType: 'Textfield',
       inputType: 'text',
@@ -92,16 +89,14 @@ const questions: Record<QuestionName, Question> = {
     name: 'hasExpenses',
     header: <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />,
     question: (
-      <>
-        <div style={{ marginBottom: '-16px' }}>
-          <FormattedMessage id="questions.hasExpenses" defaultMessage="Does your household have any expenses?" />
-          <HelpButton
-            helpText="Add up expenses for everyone who lives in your home. This includes costs like child care, child support, rent, medical expenses, heating bills, and more. We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits."
-            helpId="questions.hasExpenses-description"
-          />
-        </div>
-      </>
+      <div style={{ marginBottom: '-16px' }}>
+        <FormattedMessage id="questions.hasExpenses" defaultMessage="Does your household have any expenses?" />
+      </div>
     ),
+    helpButton: {
+      helpText:"Add up expenses for everyone who lives in your home. This includes costs like child care, child support, rent, medical expenses, heating bills, and more. We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits.",
+      helpId:"questions.hasExpenses-description"
+    },
     questionDescription: (
       <FormattedMessage
         id="questions.hasExpenses-description-additional"
@@ -135,17 +130,15 @@ const questions: Record<QuestionName, Question> = {
     name: 'householdAssets',
     header: <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />,
     question: (
-      <>
         <FormattedMessage
           id="questions.householdAssets"
           defaultMessage="How much does your whole household have right now in cash, checking or savings accounts, stocks, bonds, or mutual funds?"
         />
-        <HelpButton
-          helpText="In some cases, eligibility for benefits may be affected if your household owns other valuable assets such as a car or life insurance policy."
-          helpId="questions.householdAssets-description"
-        />
-      </>
     ),
+    helpButton: {
+      helpText:"In some cases, eligibility for benefits may be affected if your household owns other valuable assets such as a car or life insurance policy.",
+      helpId:"questions.householdAssets-description"
+    },
     componentDetails: {
       componentType: 'Textfield',
       inputType: 'text',
@@ -167,17 +160,15 @@ const questions: Record<QuestionName, Question> = {
       />
     ),
     question: (
-      <>
         <FormattedMessage
           id="questions.hasBenefits"
           defaultMessage="Does your household currently have any benefits?"
         />
-        <HelpButton
-          helpText="This information will help make sure we don't give you results for benefits you already have."
-          helpId="questions.hasBenefits-description"
-        />
-      </>
     ),
+    helpButton: {
+      helpText:"This information will help make sure we don't give you results for benefits you already have.",
+      helpId:"questions.hasBenefits-description"
+    },
     componentDetails: {
       componentType: 'PreferNotToAnswer',
       ariaLabel: 'questions.hasBenefits-ariaLabel',
