@@ -18,6 +18,7 @@ import { ReactComponent as Referral } from '../../Assets/icons/referral.svg';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import './Confirmation.css';
 import { useTranslateNumber } from '../../Assets/languageOptions';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
 
 const Confirmation = () => {
   const { formData } = useContext(Context);
@@ -651,9 +652,9 @@ const Confirmation = () => {
 
   return (
     <main className="benefits-form">
-      <h1 className="sub-header">
+      <QuestionHeader>
         <FormattedMessage id="confirmation.return-subheader" defaultMessage="Is all of your information correct?" />
-      </h1>
+      </QuestionHeader>
       <div className="confirmation-container">{displayAllFormData()}</div>
       <div className="prev-continue-results-buttons confirmation">
         <PreviousButton navFunction={() => navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`)} />

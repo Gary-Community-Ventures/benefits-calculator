@@ -14,6 +14,7 @@ import './LandingPage.css';
 import dataLayerPush from '../../Assets/analytics.ts';
 import PreviousButton from '../PreviousButton/PreviousButton.tsx';
 import { STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory.ts';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
 
 interface LandingPageProps {
   handleCheckboxChange: (event: React.FormEvent<HTMLInputElement>) => void;
@@ -103,9 +104,9 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
 
   return (
     <main className="benefits-form">
-      <h1 className="sub-header">
+      <QuestionHeader>
         <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
-      </h1>
+      </QuestionHeader>
       <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }}>
         <div className="main-paragraph">
           <Typography variant="body1">

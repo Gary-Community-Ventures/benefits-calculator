@@ -5,6 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import IncomeQuestion from './IncomeQuestion';
 import HelpButton from '../../Components/HelpBubbleIcon/HelpButton.tsx';
 import './PersonIncomeBlock.css';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 
 const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
   //if there are any elements in state for incomeStreams create IncomeBlock components for those
@@ -74,7 +75,7 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
     <>
       <div className="section-container">
         <Box className="section">
-          <h2 className="question-label">
+          <QuestionQuestion>
             <FormattedMessage
               id={renderFollowUpIncomeQIdAndDefaultMsg(page)[0]}
               defaultMessage={renderFollowUpIncomeQIdAndDefaultMsg(page)[1]}
@@ -83,7 +84,7 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
               helpText="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
               helpId="personIncomeBlock.return-questionDescription"
             />
-          </h2>
+          </QuestionQuestion>
         </Box>
       </div>
       {createIncomeBlockQuestions()}
