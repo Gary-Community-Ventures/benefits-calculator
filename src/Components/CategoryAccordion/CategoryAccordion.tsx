@@ -19,6 +19,7 @@ type Props = {
 
 const CategoryAccordion = ({ categoryName, categoryOptions, setExpanded, expanded, index }: Props) => {
   const { theme } = useContext(Context);
+
   return (
     <Accordion
       expanded={expanded === index}

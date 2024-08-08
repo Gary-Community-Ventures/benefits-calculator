@@ -1,4 +1,4 @@
-import { FormControlLabel, FormGroup, Checkbox, FormControl } from '@mui/material';
+import { FormControlLabel, FormGroup, Checkbox, FormControl, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 
@@ -27,13 +27,25 @@ const BasicCheckboxGroup = ({ stateVariable, options }) => {
     const optionKeys = Object.keys(options);
 
     const formControlLabels = optionKeys.map((optionKey) => {
+      const splitLabel = options[optionKey].props.defaultMessage.split(':');
+      const programName = splitLabel[0];
+      const programDescription = splitLabel[1];
+      const createFormLabel = (name, description) => {
+        return (
+          <Typography>
+            <strong>{name}:</strong>
+            <span>{description}</span>
+          </Typography>
+        );
+      };
+
       return (
         <FormControlLabel
           sx={{ alignItems: 'center', marginTop: `1rem` }}
           control={
             <Checkbox checked={state[stateVariable][optionKey]} onChange={handleCheckboxChange} name={optionKey} />
           }
-          label={options[optionKey]}
+          label={createFormLabel(programName, programDescription)}
           key={optionKey}
         />
       );
