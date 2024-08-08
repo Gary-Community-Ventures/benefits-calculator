@@ -21,6 +21,7 @@ import { ReactComponent as DentalCare } from '../../Assets/OptionCardIcons/Acute
 import { ReactComponent as LegalServices } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import './CurrentBenefits.css';
+import QuestionHeader from '../Titles/QuestionHeader';
 
 type CategoryName =
   | 'Housing and Utilities'
@@ -198,12 +199,14 @@ const CurrentBenefits = () => {
   if (allLongTermPrograms.length && allNearTermPrograms.length) {
     return (
       <main className="current-benefits-container">
-        <h1 className="sub-header current-benefits-header">
-          <FormattedMessage
-            id="currentBenefits.pg-header"
-            defaultMessage="Government Benefits, Nonprofit Programs and Tax Credits in MyFriendBen"
-          />
-        </h1>
+        <QuestionHeader>
+          <div className="current-benefits-header">
+            <FormattedMessage
+              id="currentBenefits.pg-header"
+              defaultMessage="Government Benefits, Nonprofit Programs and Tax Credits in MyFriendBen"
+            />
+          </div>
+        </QuestionHeader>
         <div className="header-and-programs-container">
           <h2 className="long-near-term-header">
             <FormattedMessage id="currentBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
