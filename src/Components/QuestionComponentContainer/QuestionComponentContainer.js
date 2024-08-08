@@ -18,6 +18,7 @@ import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import { getStepNumber } from '../../Assets/stepDirectory';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -215,7 +216,7 @@ const QuestionComponentContainer = ({
   };
 
   switch (id) {
-    case '3':
+    case getStepNumber('zipcode', formData.immutableReferrer):
       return (
         <main className="benefits-form">
           <ZipcodeStep currentStepId={Number(id)} />

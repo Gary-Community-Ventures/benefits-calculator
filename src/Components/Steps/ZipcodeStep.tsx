@@ -17,15 +17,13 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { useGoToNextStep } from '../QuestionComponents/questionHooks';
+import { getStepNumber } from '../../Assets/stepDirectory';
 
-interface ZipcodeStepProps {
-  currentStepId: number;
-}
-
-export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
+export const ZipcodeStep = () => {
   const { formData, locale, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();
+  const currentStepId = getStepNumber('zipcode', formData.immutableReferrer);
   const matchingQuestion = getQuestion(currentStepId, formData.immutableReferrer);
   const requiredField = matchingQuestion.componentDetails.required;
 
