@@ -15,5 +15,5 @@ export interface WrapperContext {
   styleOverride: any;
   pageIsLoading: boolean;
   screenDoneLoading: () => void;
-  getReferrer: (id: keyof ReferrerData) => string;
+  getReferrer: (id: keyof ReferrerData) => string | undefined;
 }

@@ -4,9 +4,10 @@ import { IntlProvider, useIntl } from 'react-intl';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
-import useReferrer from '../Referrer/referrerHook';
+import useReferrer, { ReferrerData } from '../Referrer/referrerHook';
 import { Language } from '../../Types/Language';
 import { useConfig, useGetConfig } from '../Config/configHook';
+import { coLogoAlt, coLogoSource, coShareLink, coTwoOneOneLink } from '../Referrer/referrerDataInfo';
 
 const initialFormData: FormData = {
   isTest: undefined,
@@ -52,6 +53,8 @@ const initialFormData: FormData = {
     wic: false,
     nfp: false,
     fatc: false,
+    nfp: false,
+    fatc: false,
   },
   referralSource: undefined,
   immutableReferrer: undefined,
@@ -86,6 +89,22 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const { configLoading, configResponse: config } = useGetConfig();
   const { language_options: languageOptions = {} } = config ?? {};
   const languages = Object.keys(languageOptions) as Language[];
+  const {
+    referrerData: referrerData = {
+      theme: {
+        default: 'default',
+        '211co': 'twoOneOne',
+      },
+      logoSource: coLogoSource,
+      logoAlt: coLogoAlt,
+      logoClass: {
+        default: 'logo',
+      },
+      twoOneOneLink: coTwoOneOneLink,
+      shareLink: coShareLink,
+    },
+  } = config ?? {};
+
   const rightToLeftLanguages = ['ar'];
 
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
@@ -188,7 +207,11 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   };
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer);
+
+  const { getReferrer, setReferrer } = useReferrer(
+    formData.immutableReferrer,
+    referrerData as ReferrerData,
+  );
 
   useEffect(() => {
     setReferrer(formData.immutableReferrer);
