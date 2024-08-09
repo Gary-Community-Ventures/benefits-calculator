@@ -20,7 +20,7 @@ import './Share.css';
 
 const Share = forwardRef(function Share() {
   const [copied, setCopied] = useState(false);
-  const { formData, getReferrer } = useContext(Context);
+  const { getReferrer } = useContext(Context);
   const intl = useIntl();
 
   const labels = {
