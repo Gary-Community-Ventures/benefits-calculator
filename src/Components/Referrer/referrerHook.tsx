@@ -22,6 +22,10 @@ export default function useReferrer(referrerCode?: string, referrerData?: Referr
   const [referrer, setReferrer] = useState<string | undefined>(referrerCode);
 
   function getReferrer(key: keyof ReferrerData) {
+    if (referrerData && referrerData[key] === undefined) {
+      console.log(referrerData);
+      throw new Error(`${key} is not in referrerData`);
+    }
     return referrerData && (referrerData[key][referrer ?? 'default'] ?? referrerData[key]['default']);
   }
 
