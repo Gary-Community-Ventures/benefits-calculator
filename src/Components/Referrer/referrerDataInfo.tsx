@@ -28,7 +28,7 @@ const logoMap = {
 };
 
 
-type LogoSource = keyof typeof logoMap;
+export type LogoSource = keyof typeof logoMap;
 
 export const renderLogoSource = (
   sourceLabel: LogoSource,
