@@ -7,9 +7,7 @@ import Paper from '@mui/material/Paper';
 import { useIntl } from 'react-intl';
 import './Header.css';
 import { useLogo } from '../Referrer/useLogo.tsx';
-import { LogoSource, renderLogoSource } from '../Referrer/referrerDataInfo.tsx';
-import { MessageDescriptor } from '@formatjs/intl';
-import { get } from 'react-hook-form';
+
 
 const Header = () => {
   const context = useContext(Context);
