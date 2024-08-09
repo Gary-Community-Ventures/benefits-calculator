@@ -2,23 +2,22 @@ import { AppBar, MenuItem, Select } from '@mui/material';
 import { useContext, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
-import { useGetConfig, useConfig } from '../Config/configHook.tsx';
+import { useConfig } from '../Config/configHook.tsx';
 import Paper from '@mui/material/Paper';
 import { useIntl } from 'react-intl';
 import './Header.css';
-import { getReferrerInfo } from '../../Shared/helperFunctions.ts';
-import MFBDefaultLogo from '../../Assets/Logos/mfb_default_logo_header.png';
-import { coLogoAlt } from '../Referrer/referrerDataInfo.ts';
-
+import { useLogo } from '../Referrer/useLogo.tsx';
+import { LogoSource, renderLogoSource } from '../Referrer/referrerDataInfo.tsx';
+import { MessageDescriptor } from '@formatjs/intl';
+import { get } from 'react-hook-form';
 
 const Header = () => {
   const context = useContext(Context);
-  const { configLoading, configResponse: config } = useGetConfig();
   const { formData, getReferrer } = context;
   const languageOptions = useConfig('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
-  const defaultLogo = MFBDefaultLogo;
+  const logoClass = getReferrer('logoClass');
 
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
@@ -49,21 +48,12 @@ const Header = () => {
     return dropdownMenuItems;
   };
 
-  const referrer = formData.immutableReferrer ? formData.immutableReferrer : 'default';
-  const logoInfoArray = getReferrerInfo(Number(config?.referrerData?.logoSource));
-  const logoSource = logoInfoArray ? logoInfoArray[0][referrer] : defaultLogo;
-  const logoAlt = logoInfoArray ? logoInfoArray[1][referrer]: coLogoAlt.default;
-
   return (
     <nav>
       <Paper className="header-full-width-container" square={true} elevation={0}>
         <AppBar id="nav-container" position="sticky" elevation={0}>
           <a href={`/step-1${queryString}`} className="home-link">
-            <img
-              src={logoSource}
-              alt={intl.formatMessage(logoAlt)}
-              className={getReferrer('logoClass')}
-            />
+          {useLogo('logoSource', 'logoAlt',logoClass)}
           </a>
           <div className="icon-wrapper">
             <LanguageIcon />
