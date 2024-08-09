@@ -17,9 +17,6 @@ import CheckIcon from '@mui/icons-material/Check';
 import { Context } from '../Wrapper/Wrapper';
 import dataLayerPush from '../../Assets/analytics';
 import './Share.css';
-import { useConfig } from '../Config/configHook';
-import { getReferrerInfo } from '../../Shared/helperFunctions';
-import { coShareLink } from '../Referrer/referrerDataInfo';
 
 const Share = forwardRef(function Share() {
   const [copied, setCopied] = useState(false);
@@ -40,12 +37,8 @@ const Share = forwardRef(function Share() {
       defaultMessage: 'Copied',
     }),
   };
-  const referrer = formData.immutableReferrer ? formData.immutableReferrer : 'default';
-  const getShareLinkfromConfig: Record<string, any> = useConfig('referrerData');
-  const getShareLinkArray: Record<string, any>[] = getReferrerInfo(Number(getShareLinkfromConfig?.shareLink)) ?? [coShareLink];
-  const shareLink = getShareLinkArray[3][referrer] ?? getShareLinkArray[3]['default'];
 
-
+  const shareLink = getReferrer('shareLink') || 'default';
   const iconSize = { color: '#fff', fontSize: '2rem' };
 
   const copyLink = () => {
