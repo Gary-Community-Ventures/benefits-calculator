@@ -10,6 +10,8 @@ export type ReferrerData = {
   theme: ReferrerOptions<string>;
   logoSource: ReferrerOptions<string>;
   logoAlt: ReferrerOptions<{ id: string; defaultMessage: string }>;
+  logoFooterSource: ReferrerOptions<string>;
+  logoFooterAlt: ReferrerOptions<{ id: string; defaultMessage: string }>;
   logoClass: ReferrerOptions<string>;
   twoOneOneLink: ReferrerOptions<string>;
   shareLink: ReferrerOptions<string>;
