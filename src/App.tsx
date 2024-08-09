@@ -43,6 +43,7 @@ const App = () => {
     setTheme: changeTheme,
     pageIsLoading,
     getReferrer,
+    configLoading,
   } = useContext(Context);
 
   const referralOptions = useConfig('referral_options');
@@ -51,10 +52,10 @@ const App = () => {
     getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER,
   );
   const [theme, setTheme] = useState(createTheme(styleOverride));
-
+  const themeName = configLoading ? 'default' : getReferrer('theme')
   useEffect(() => {
-    changeTheme(getReferrer('theme') as 'default' | 'twoOneOne');
-  }, [getReferrer('theme')]);
+    changeTheme(themeName  as 'default' | 'twoOneOne');
+  }, [themeName]);
 
   useEffect(() => {
     setTotalSteps(getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER);
