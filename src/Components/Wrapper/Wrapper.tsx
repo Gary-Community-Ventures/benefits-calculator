@@ -90,19 +90,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const { language_options: languageOptions = {} } = config ?? {};
   const languages = Object.keys(languageOptions) as Language[];
   const {
-    referrerData: referrerData = {
-      theme: {
-        default: 'default',
-        '211co': 'twoOneOne',
-      },
-      logoSource: coLogoSource,
-      logoAlt: coLogoAlt,
-      logoClass: {
-        default: 'logo',
-      },
-      twoOneOneLink: coTwoOneOneLink,
-      shareLink: coShareLink,
-    },
+    referrerData: referrerData = {}
   } = config ?? {};
 
   const rightToLeftLanguages = ['ar'];
@@ -231,7 +219,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         styleOverride,
         pageIsLoading,
         screenDoneLoading,
-        getReferrer,
+        getReferrer: getReferrer as (id: keyof ReferrerData) => string,
       }}
     >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
