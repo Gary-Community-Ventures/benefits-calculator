@@ -32,3 +32,23 @@ export function useGoToNextStep(questionName: QuestionName, noRedirect: boolean 
     navigate(`/${uuid}/step-${stepNumber + 1}/${routeEnding}`);
   };
 }
+
+export function useQueryString() {
+  const { formData } = useContext(Context);
+  const query = new URLSearchParams();
+
+  if (formData.externalID !== undefined) {
+    query.append('externalid', formData.externalID);
+  }
+
+  if (formData.immutableReferrer !== undefined && formData.immutableReferrer !== '') {
+    query.append('referrer', formData.immutableReferrer);
+  }
+
+  let queryString = query.toString();
+  if (queryString !== '') {
+    queryString = '?' + queryString;
+  }
+
+  return queryString;
+}
