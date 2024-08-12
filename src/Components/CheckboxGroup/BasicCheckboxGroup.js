@@ -27,7 +27,10 @@ const BasicCheckboxGroup = ({ stateVariable, options }) => {
     const optionKeys = Object.keys(options);
 
     const formControlLabels = optionKeys.map((optionKey) => {
-      const splitLabel = options[optionKey].props.defaultMessage.split(':');
+      // const splitLabel = options[optionKey].props.defaultMessage.split(':');
+      // options = {tanf: <Format}
+
+
       const programName = splitLabel[0];
       const programDescription = splitLabel[1];
       const createFormLabel = (name, description) => {
