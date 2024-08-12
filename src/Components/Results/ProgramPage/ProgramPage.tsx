@@ -9,6 +9,7 @@ import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage.tsx';
 import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
+import { languageOptions, Language } from '../../../Assets/languageOptions.tsx';
 
 type ProgramPageProps = {
   program: Program;
@@ -71,6 +72,21 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     );
   };
 
+  const displayLanguageFlags = (navigatorLanguages: Language[]) => {
+    return (
+      <div className="navigator-langs-container">
+        {navigatorLanguages.map((lang) => {
+          return (
+            <p className="navigator-lang-flag" key={lang}>
+              {languageOptions[lang]}
+              <FormattedMessage id="programPage.lang-available" defaultMessage=" Available" />
+            </p>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
     <main className="program-page-container">
       <section className="back-to-results-button-container">
@@ -113,6 +129,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                       <ResultsTranslate translation={navigator.name} />
                     </p>
                   )}
+                  {navigator.languages && displayLanguageFlags(navigator.languages)}
                   <div className="address-info">
                     {navigator.description && (
                       <p className="navigator-desc">
