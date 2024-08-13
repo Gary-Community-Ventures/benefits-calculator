@@ -38,12 +38,11 @@ const Share = forwardRef(function Share() {
     }),
   };
 
-  const shareUrl = getReferrer('shareLink');
-
+  const shareUrl = getReferrer('shareLink') || 'default';
   const iconSize = { color: '#fff', fontSize: '2rem' };
 
   const copyLink = () => {
-    navigator.clipboard.writeText(shareUrl);
+    navigator.clipboard.writeText(shareUrl);    
     setCopied(true);
     setTimeout(() => {
       setCopied(false);

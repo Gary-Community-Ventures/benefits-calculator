@@ -1,12 +1,12 @@
 import React, { useEffect, useState, PropsWithChildren } from 'react';
 import useStyle from '../../Assets/styleController';
-import { IntlProvider, useIntl } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
-import useReferrer from '../Referrer/referrerHook';
+import useReferrer, { ReferrerData } from '../Referrer/referrerHook';
 import { Language } from '../../Types/Language';
-import { useConfig, useGetConfig } from '../Config/configHook';
+import { useGetConfig } from '../Config/configHook';
 
 const initialFormData: FormData = {
   isTest: undefined,
@@ -86,6 +86,10 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const { configLoading, configResponse: config } = useGetConfig();
   const { language_options: languageOptions = {} } = config ?? {};
   const languages = Object.keys(languageOptions) as Language[];
+  const {
+    referrer_data: referrerData = {}
+  } = config ?? {};
+
   const rightToLeftLanguages = ['ar'];
 
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
@@ -188,7 +192,11 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   };
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer);
+
+  const { getReferrer, setReferrer } = useReferrer(
+    formData.immutableReferrer,
+    referrerData as ReferrerData,
+  );
 
   useEffect(() => {
     setReferrer(formData.immutableReferrer);
@@ -208,7 +216,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         styleOverride,
         pageIsLoading,
         screenDoneLoading,
-        getReferrer,
+        getReferrer: getReferrer as (id: keyof ReferrerData) => string,
       }}
     >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
