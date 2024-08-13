@@ -8,7 +8,6 @@ import { useIntl } from 'react-intl';
 import './Header.css';
 import { useLogo } from '../Referrer/useLogo.tsx';
 
-
 const Header = () => {
   const context = useContext(Context);
   const { formData, getReferrer } = context;
@@ -51,7 +50,7 @@ const Header = () => {
       <Paper className="header-full-width-container" square={true} elevation={0}>
         <AppBar id="nav-container" position="sticky" elevation={0}>
           <a href={`/step-1${queryString}`} className="home-link">
-          {useLogo('logoSource', 'logoAlt',logoClass)}
+            {useLogo('logoSource', 'logoAlt', logoClass)}
           </a>
           <div className="icon-wrapper">
             <LanguageIcon />

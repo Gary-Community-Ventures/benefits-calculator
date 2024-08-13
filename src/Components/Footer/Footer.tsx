@@ -6,7 +6,6 @@ import { FormattedMessage } from 'react-intl';
 import './Footer.css';
 import { useLogo } from '../Referrer/useLogo';
 
-
 const Footer = () => {
   const context = useContext(Context);
   const { theme } = context;

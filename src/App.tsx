@@ -52,9 +52,9 @@ const App = () => {
     getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER,
   );
   const [theme, setTheme] = useState(createTheme(styleOverride));
-  const themeName = configLoading ? 'default' : getReferrer('theme')
+  const themeName = configLoading ? 'default' : getReferrer('theme');
   useEffect(() => {
-    changeTheme(themeName  as 'default' | 'twoOneOne');
+    changeTheme(themeName as 'default' | 'twoOneOne');
   }, [themeName]);
 
   useEffect(() => {

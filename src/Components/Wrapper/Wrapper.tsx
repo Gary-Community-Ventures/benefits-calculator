@@ -86,9 +86,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const { configLoading, configResponse: config } = useGetConfig();
   const { language_options: languageOptions = {} } = config ?? {};
   const languages = Object.keys(languageOptions) as Language[];
-  const {
-    referrer_data: referrerData = {}
-  } = config ?? {};
+  const { referrer_data: referrerData = {} } = config ?? {};
 
   const rightToLeftLanguages = ['ar'];
 
@@ -193,10 +191,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
-  const { getReferrer, setReferrer } = useReferrer(
-    formData.immutableReferrer,
-    referrerData as ReferrerData,
-  );
+  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer, referrerData as ReferrerData);
 
   useEffect(() => {
     setReferrer(formData.immutableReferrer);

@@ -11,7 +11,6 @@ import FIRCLogo from '../../Assets/FircCobrand/FIRCLogo.png';
 import COMFBLogo from '../../Assets/colorado-mfb-logo.png';
 import DHSMFBLogo from '../../Assets/DenverHumanServices/denverHSLogo.png';
 
-
 const logoMap = {
   MFB_COLogo: MFBCOLogo,
   MFB_NCLogo: MFBNCLogo,
@@ -27,14 +26,9 @@ const logoMap = {
   DHS_MFBLogo: DHSMFBLogo,
 };
 
-
 export type LogoSource = keyof typeof logoMap;
 
-export const renderLogoSource = (
-  sourceLabel: LogoSource,
-  logoAlt: string,
-  logoClass: string
-) => {
+export const renderLogoSource = (sourceLabel: LogoSource, logoAlt: string, logoClass: string) => {
   const logoSrc = logoMap[sourceLabel] || MFBDEFAULT;
   return <img src={logoSrc} alt={logoAlt} className={logoClass} />;
 };
