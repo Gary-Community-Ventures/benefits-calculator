@@ -6,8 +6,6 @@ import { QuestionName } from '../../Types/Questions';
 import { Context } from '../Wrapper/Wrapper';
 
 export function useShouldRedirectToConfirmation() {
-  // invoke this in the HHDB's continue button
-  //we don't want to use it for the back button
   const location = useLocation();
   return isCustomTypedLocationState(location.state);
 }
