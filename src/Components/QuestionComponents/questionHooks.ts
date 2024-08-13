@@ -5,16 +5,20 @@ import { isCustomTypedLocationState } from '../../Types/FormData';
 import { QuestionName } from '../../Types/Questions';
 import { Context } from '../Wrapper/Wrapper';
 
-// noRedirect will not reroute to the confirmation page
+export function useShouldRedirectToConfirmation() {
+  // invoke this in the HHDB's continue button
+  //we don't want to use it for the back button
+  const location = useLocation();
+  return isCustomTypedLocationState(location.state);
+}
+
 // routeEnding will be added to the end of the route when going to the next step
-export function useGoToNextStep(questionName: QuestionName, noRedirect: boolean = false, routeEnding: string = '') {
+export function useGoToNextStep(questionName: QuestionName, routeEnding: string = '') {
   const { uuid } = useParams();
   const { formData } = useContext(Context);
   const stepNumber = getStepNumber(questionName, formData.immutableReferrer);
   const totalStepCount = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
-  const location = useLocation();
-
-  const redirectToConfirmationPage = !noRedirect && isCustomTypedLocationState(location.state);
+  const redirectToConfirmationPage = useShouldRedirectToConfirmation();
 
   const navigate = useNavigate();
 
