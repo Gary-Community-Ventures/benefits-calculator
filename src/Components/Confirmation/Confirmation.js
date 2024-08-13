@@ -435,14 +435,20 @@ const Confirmation = () => {
   };
 
   const displayAllFormData = () => {
-    const allBenefitsList = {
-      ...categoryBenefits.cash.benefits,
-      ...categoryBenefits.childCare.benefits,
-      ...categoryBenefits.foodAndNutrition.benefits,
-      ...categoryBenefits.healthCare.benefits,
-      ...categoryBenefits.housingAndUtilities.benefits,
-      ...categoryBenefits.transportation.benefits,
-    };
+    // const allBenefitsList = {
+    //   ...categoryBenefits.cash.benefits,
+    //   ...categoryBenefits.childCare.benefits,
+    //   ...categoryBenefits.foodAndNutrition.benefits,
+    //   ...categoryBenefits.healthCare.benefits,
+    //   ...categoryBenefits.housingAndUtilities.benefits,
+    //   ...categoryBenefits.transportation.benefits,
+    // };
+
+
+    const allBenefitsList = Object.keys(categoryBenefits).reduce((acc, key) => {
+      return { ...acc, ...categoryBenefits[key].benefits };
+    }, {});
+
 
     return (
       <>
