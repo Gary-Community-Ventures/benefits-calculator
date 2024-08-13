@@ -24,6 +24,7 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 import { isCustomTypedLocationState } from '../../Types/FormData.ts';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 import './HouseholdDataBlock.css';
+import FeedbackButton from '../FeedbackButton/FeedbackButton.js';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -525,7 +526,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       </Box>
       <div className="question-buttons">
         <PreviousButton navFunction={handlePreviousSubmit} />
+        <div className='flex'>
+        <FeedbackButton />
         <ContinueButton handleContinueSubmit={handleContinueSubmit} />
+        </div>
       </div>
     </main>
   );

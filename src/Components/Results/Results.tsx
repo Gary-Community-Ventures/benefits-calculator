@@ -18,6 +18,7 @@ import MoreHelp from '../MoreHelp/MoreHelp';
 import BackAndSaveButtons from './BackAndSaveButtons/BackAndSaveButtons';
 import { FormattedMessage } from 'react-intl';
 import './Results.css';
+import FeedbackButton from '../FeedbackButton/FeedbackButton';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -163,6 +164,9 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
             </Grid>
           </Grid>
           {!is211Co && <HelpButton />}
+          <div className="question-buttons">
+          <FeedbackButton style={{display: 'flex', marginLeft:'auto', marginBottom: '1rem'}} />  
+          </div>
         </ResultsContext.Provider>
       </main>
     );
