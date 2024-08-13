@@ -11,7 +11,7 @@ export function useGoToNextStep(questionName: QuestionName, noRedirect: boolean 
   const { uuid } = useParams();
   const { formData } = useContext(Context);
   const stepNumber = getStepNumber(questionName, formData.immutableReferrer);
-  const totalStepCount = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
+  const totalStepCount = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER - 1;
   const location = useLocation();
 
   const redirectToConfirmationPage = !noRedirect && isCustomTypedLocationState(location.state);

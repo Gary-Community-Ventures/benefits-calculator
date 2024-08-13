@@ -1,0 +1,13 @@
+.ccig-landing-page-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+.ccig-landing-page-logo {
+  width: 60%;
+}
+
+.ccig-landing-page-text {
+  font-weight: bold;
+}

@@ -7,6 +7,7 @@ import { useContext, useMemo } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import BackToScreen from '../../BackToScreen/BackToScreen';
 import { calculateTotalValue } from '../FormattedValue';
+import { ResultsMessage } from '../../Referrer/Referrer';
 
 type Category = {
   name: Translation;
@@ -46,14 +47,13 @@ function sortProgramsIntoCategories(programs: Program[]): Category[] {
 }
 
 const Programs = () => {
-  const { formData } = useContext(Context);
-  const { programs, missingPrograms } = useResultsContext();
+  const { programs } = useResultsContext();
 
   const categories = useMemo(() => sortProgramsIntoCategories(programs), [programs]);
 
   return (
     <>
-      {formData.immutableReferrer === 'lgs' && missingPrograms && <BackToScreen />}
+      <ResultsMessage />
       <Filter />
       {categories.map(({ name, programs }) => {
         return (
