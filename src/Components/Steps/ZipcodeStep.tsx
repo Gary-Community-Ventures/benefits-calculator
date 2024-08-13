@@ -141,7 +141,7 @@ export const ZipcodeStep = () => {
         />
         {shouldShowCountyInput && (
           <div>
-            <QuestionQuestion>{matchingQuestion.followUpQuestions[0].question}</QuestionQuestion>
+            {matchingQuestion.followUpQuestions && <QuestionQuestion>{matchingQuestion.followUpQuestions[0].question}</QuestionQuestion>}
             <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.county !== undefined}>
               <InputLabel id="county">
                 <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />
