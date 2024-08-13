@@ -2,12 +2,14 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 2rem;
+  margin-top: 2rem;
+  gap: 1.5rem;
 }
 .ccig-landing-page-logo {
-  width: 60%;
+  width: 30%;
 }
 
 .ccig-landing-page-text {
-  font-weight: bold;
+  width: 100%;
+  text-align: start;
 }
