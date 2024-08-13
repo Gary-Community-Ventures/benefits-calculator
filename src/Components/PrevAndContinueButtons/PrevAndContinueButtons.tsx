@@ -1,7 +1,7 @@
-import { useNavigate, useParams } from "react-router-dom";
-import PreviousButton from "../PreviousButton/PreviousButton";
-import { Button } from "@mui/material";
-import { FormattedMessage } from "react-intl";
+import { useNavigate, useParams } from 'react-router-dom';
+import PreviousButton from '../PreviousButton/PreviousButton';
+import { Button } from '@mui/material';
+import { FormattedMessage } from 'react-intl';
 
 type PrevAndContinueButtonsProps = {
   currentStepId: number;

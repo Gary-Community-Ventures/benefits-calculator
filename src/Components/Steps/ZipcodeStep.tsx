@@ -33,7 +33,6 @@ export const ZipcodeStep = () => {
     .regex(numberMustBeFiveDigitsLongRegex)
     .refine((data) => data in countiesByZipcode);
 
-
   const formSchema = z
     .object({
       zipcode: zipcodeSchema,
