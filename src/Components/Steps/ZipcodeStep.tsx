@@ -175,7 +175,7 @@ export const ZipcodeStep = () => {
         )}
         <div className="question-buttons">
           <PreviousButton navFunction={backNavigationFunction} />
-          <Button variant="contained" onClick={handleSubmit(formSubmitHandler)}>
+          <Button variant="contained" type="submit">
             <FormattedMessage id="continueButton" defaultMessage="Continue" />
           </Button>
         </div>
