@@ -1,6 +1,5 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useConfig } from '../Config/configHook.tsx';
-import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
@@ -335,7 +334,7 @@ const IncomeQuestion = ({
             helpId="personIncomeBlock.income-freq-help-text"
           />
         </QuestionQuestion>
-        <FormControl sx={{ minWidth: 120, maxWidth: '100%' }} error={incomeFrequencyErrorController.showError}>
+        <FormControl error={incomeFrequencyErrorController.showError}>
           <InputLabel id="income-frequency-label">
             <FormattedMessage
               id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel"
@@ -397,24 +396,37 @@ const IncomeQuestion = ({
     </div>
   );
 
-  return (
-    <div key={index}>
-      <div className={index % 2 === 0 ? 'section' : ''}>
-        {index > 0 && (
+  if (index === 0) {
+    return (
+      <div key={index} className="section-container">
+        <div className="section">
+          {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
+          {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+          {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
+          {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="section-container">
+        <div key={index} className={index % 2 === 0 ? 'section' : ''}>
           <div className="delete-button-container">
             <StyledDeleteButton variant="contained" onClick={() => deleteIncomeBlock(index)}>
               &#215;
             </StyledDeleteButton>
           </div>
-        )}
-        {index > 0 && incomeStreamQuestion}
-        {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
-        {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
-        {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
-        {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+          <div>
+            {incomeStreamQuestion}
+            {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
+            {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+            {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
+            {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default IncomeQuestion;
