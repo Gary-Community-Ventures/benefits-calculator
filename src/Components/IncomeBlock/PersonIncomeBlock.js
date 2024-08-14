@@ -74,7 +74,7 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
   return (
     <>
       <div className="section-container">
-        <Box className="section">
+        <div className="section">
           <QuestionQuestion>
             <FormattedMessage
               id={renderFollowUpIncomeQIdAndDefaultMsg(page)[0]}
@@ -85,7 +85,7 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
               helpId="personIncomeBlock.return-questionDescription"
             />
           </QuestionQuestion>
-        </Box>
+        </div>
       </div>
       {createIncomeBlockQuestions()}
       <div>
