@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import { formatToUSD, formatYearlyValue } from '../FormattedValue';
 import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage.tsx';
+import FeedbackButton from '../../FeedbackButton/FeedbackButton.js';
 
 type ProgramPageProps = {
   program: Program;
@@ -163,6 +164,9 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         <section className="program-description">
           <ResultsTranslate translation={program.description} />
         </section>
+        <div className="question-buttons">
+          <FeedbackButton style={{display: 'flex', marginLeft:'auto', marginBottom: '1rem'}} />  
+        </div>
       </div>
     </main>
   );
