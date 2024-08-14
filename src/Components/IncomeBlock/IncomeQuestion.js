@@ -174,7 +174,7 @@ const IncomeQuestion = ({
 
   const createIncomeStreamsDropdownMenu = (incomeStreamName, index) => {
     return (
-      <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeStreamErrorController.showError}>
+      <FormControl sx={{ minWidth: 120, maxWidth: '100%' }} error={incomeStreamErrorController.showError}>
         <InputLabel id="income-type-label">
           <FormattedMessage
             id="personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel"
@@ -299,11 +299,12 @@ const IncomeQuestion = ({
 
     return (
       <div>
+        <div className='margin-bottom'>
         <QuestionQuestion>
           {questionHeader}
           {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
         </QuestionQuestion>
-        <div className="income-block-textfield">
+        </div>
           <Textfield
             componentDetails={textfieldProps}
             data={currentIncomeSource}
@@ -312,7 +313,6 @@ const IncomeQuestion = ({
             submitted={amountErrorController.submittedCount}
             numericField={true}
           />
-        </div>
       </div>
     );
   };
@@ -335,7 +335,7 @@ const IncomeQuestion = ({
             helpId="personIncomeBlock.income-freq-help-text"
           />
         </QuestionQuestion>
-        <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeFrequencyErrorController.showError}>
+        <FormControl sx={{ minWidth: 120, maxWidth: '100%' }} error={incomeFrequencyErrorController.showError}>
           <InputLabel id="income-frequency-label">
             <FormattedMessage
               id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel"
@@ -388,17 +388,17 @@ const IncomeQuestion = ({
   }
 
   const incomeStreamQuestion = (
-    <>
+    <div className='margin-bottom'>
       <QuestionQuestion>
         <span className="income-stream-q-padding">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </span>
       </QuestionQuestion>
-    </>
+    </div>
   );
 
   return (
-    <div key={index} className="section-container income-question-padding">
+    <div key={index}>
       <div className={index % 2 === 0 ? 'section' : ''}>
         {index > 0 && (
           <div className="delete-button-container">
