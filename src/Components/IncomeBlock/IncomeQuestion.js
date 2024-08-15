@@ -348,7 +348,7 @@ const IncomeQuestion = ({
             name={incomeFrequency}
             label={
               <FormattedMessage
-                id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel"
+                id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel"
                 defaultMessage="Frequency"
               />
             }
