@@ -16,6 +16,7 @@ import {
 import Textfield from '../Textfield/Textfield';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import CloseButton from '../CloseButton/CloseButton.tsx';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
@@ -414,9 +415,7 @@ const IncomeQuestion = ({
       <div className="section-container bottom-padding">
         <div key={index} className={index % 2 === 0 ? 'section' : ''}>
           <div className="delete-button-container">
-            <StyledDeleteButton variant="contained" onClick={() => deleteIncomeBlock(index)}>
-              &#215;
-            </StyledDeleteButton>
+            <CloseButton handleClose={() => deleteIncomeBlock(index)} />
           </div>
           <div>
             {incomeStreamQuestion}
