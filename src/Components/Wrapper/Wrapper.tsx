@@ -9,7 +9,7 @@ import { Language } from '../../Types/Language';
 import { useGetConfig } from '../Config/configHook';
 
 const initialFormData: FormData = {
-  isTest: undefined,
+  isTest: false,
   externalID: undefined,
   agreeToTermsOfService: false,
   is13OrOlder: false,

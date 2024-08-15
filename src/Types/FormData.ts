@@ -88,7 +88,7 @@ export interface AcuteHHConditions {
 }
 
 export interface FormData {
-  isTest?: boolean;
+  isTest: boolean;
   externalID?: string;
   agreeToTermsOfService: boolean;
   is13OrOlder: boolean;
