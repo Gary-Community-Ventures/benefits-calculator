@@ -13,10 +13,6 @@
   margin: 1.25rem;
 }
 
-.income-block-textfield {
-  margin-left: 8px;
-}
-
 .add-another-income-button.MuiButton-root {
   color: var(--midBlue-color);
   background-color: #ffffff;

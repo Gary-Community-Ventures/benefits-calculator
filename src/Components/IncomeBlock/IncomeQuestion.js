@@ -240,11 +240,13 @@ const IncomeQuestion = ({
 
     return (
       <>
-        <QuestionQuestion>
-          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
-        </QuestionQuestion>
-        <div className="income-block-textfield">
+        <div className='margin-bottom'>
+          <QuestionQuestion>
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+            {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
+          </QuestionQuestion>
+        </div>
+        <div>
           <Textfield
             componentDetails={textfieldProps}
             data={currentIncomeSource}
