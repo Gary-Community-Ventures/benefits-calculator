@@ -1,0 +1,11 @@
+.close-button {
+  margin: 1rem;
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.close-button:hover {
+  background-color: var(--hoverColor);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
