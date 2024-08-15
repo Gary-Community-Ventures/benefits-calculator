@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useConfig } from '../Config/configHook.tsx';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
+import { FormControl, Select, MenuItem, InputLabel, FormHelperText } from '@mui/material';
 import {
   useErrorController,
   hoursWorkedValueHasError,
