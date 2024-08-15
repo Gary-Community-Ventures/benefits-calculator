@@ -24,15 +24,6 @@ const StyledSelectfield = styled(Select)({
   backgroundColor: '#FFFFFF',
 });
 
-const StyledDeleteButton = styled(Button)({
-  width: '40px',
-  height: '40px',
-  minWidth: 0,
-  padding: 0,
-  fontSize: '1.25rem',
-  position: 'absolute',
-});
-
 const IncomeQuestion = ({
   currentIncomeSource,
   allIncomeSources,
