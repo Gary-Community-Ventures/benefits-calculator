@@ -400,7 +400,7 @@ const IncomeQuestion = ({
 
   if (index === 0) {
     return (
-      <div key={index} className="section-container">
+      <div key={index} className="section-container bottom-padding">
         <div className="section">
           {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
           {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
@@ -411,7 +411,7 @@ const IncomeQuestion = ({
     );
   } else {
     return (
-      <div className="section-container">
+      <div className="section-container bottom-padding">
         <div key={index} className={index % 2 === 0 ? 'section' : ''}>
           <div className="delete-button-container">
             <StyledDeleteButton variant="contained" onClick={() => deleteIncomeBlock(index)}>
