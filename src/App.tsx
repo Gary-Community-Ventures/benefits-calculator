@@ -136,7 +136,7 @@ const App = () => {
     const referrerParam = searchParams.get('referrer');
     const utmParam = searchParams.get('utm_source');
 
-    // use referrer if there is a referrer, otherwise use utm source
+    // referrer priority = stored referrer -> referrer param -> utm_source param -> ''
     const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
     const isOtherSource = !(referrer in referralOptions);
     let referrerSource = formData.referralSource || referrer;
