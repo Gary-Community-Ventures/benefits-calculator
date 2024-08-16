@@ -15,9 +15,8 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
   const { uuid } = useParams();
   const { formData } = useContext(Context);
   const stepNumber = getStepNumber(questionName, formData.immutableReferrer);
-  const totalStepCount = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
+  const totalStepCount = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER - 1;
   const redirectToConfirmationPage = useShouldRedirectToConfirmation();
-
   const navigate = useNavigate();
 
   return () => {
@@ -33,4 +32,24 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
 
     navigate(`/${uuid}/step-${stepNumber + 1}/${routeEnding}`);
   };
+}
+
+export function useQueryString() {
+  const { formData } = useContext(Context);
+  const query = new URLSearchParams();
+
+  if (formData.externalID !== undefined) {
+    query.append('externalid', formData.externalID);
+  }
+
+  if (formData.immutableReferrer !== undefined && formData.immutableReferrer !== '') {
+    query.append('referrer', formData.immutableReferrer);
+  }
+
+  let queryString = query.toString();
+  if (queryString !== '') {
+    queryString = '?' + queryString;
+  }
+
+  return queryString;
 }

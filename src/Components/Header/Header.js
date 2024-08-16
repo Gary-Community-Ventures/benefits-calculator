@@ -1,11 +1,13 @@
 import { AppBar, MenuItem, Select } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LanguageIcon from '@mui/icons-material/Language';
 import { useConfig } from '../Config/configHook.tsx';
 import Paper from '@mui/material/Paper';
 import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import './Header.css';
+import { useLogo } from '../Referrer/useLogo.tsx';
 
 const Header = () => {
   const context = useContext(Context);
@@ -13,6 +15,7 @@ const Header = () => {
   const languageOptions = useConfig('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
+  const logoClass = getReferrer('logoClass');
 
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
@@ -43,16 +46,22 @@ const Header = () => {
     return dropdownMenuItems;
   };
 
+  const containerClass = useMemo(() => {
+    let className = 'header-full-width-container';
+
+    if (formData.frozen) {
+      className += ' frozen';
+    }
+
+    return className
+  }, [formData.frozen]);
+
   return (
     <nav>
-      <Paper className="header-full-width-container" square={true} elevation={0}>
+      <Paper className={containerClass} square={true} elevation={0}>
         <AppBar id="nav-container" position="sticky" elevation={0}>
           <a href={`/step-1${queryString}`} className="home-link">
-            <img
-              src={getReferrer('logoSource')}
-              alt={intl.formatMessage(getReferrer('logoAlt'))}
-              className={getReferrer('logoClass')}
-            />
+            {useLogo('logoSource', 'logoAlt', logoClass)}
           </a>
           <div className="icon-wrapper">
             <LanguageIcon />
@@ -75,6 +84,14 @@ const Header = () => {
             </Select>
           </div>
         </AppBar>
+        {formData.frozen && (
+          <div className="header-frozen-message-container">
+            <FormattedMessage
+              id="header.frozen.message"
+              defaultMessage="This screen is frozen. Changes you make will not be saved."
+            />
+          </div>
+        )}
       </Paper>
     </nav>
   );
