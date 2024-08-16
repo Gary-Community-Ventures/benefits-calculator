@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,6 +22,7 @@ import { getStepNumber } from '../../Assets/stepDirectory';
 export const ZipcodeStep = () => {
   const { formData, locale, setFormData } = useContext(Context);
   const { uuid } = useParams();
+  const navigate = useNavigate();
   const currentStepId = getStepNumber('zipcode', formData.immutableReferrer);
   const matchingQuestion = getQuestion(currentStepId, formData.immutableReferrer);
   const requiredField = matchingQuestion.componentDetails.required;
@@ -172,7 +173,7 @@ export const ZipcodeStep = () => {
             </FormControl>
           </div>
         )}
-        <PrevAndContinueButtons currentStepId={currentStepId} />
+        <PrevAndContinueButtons backNavigationFunction={() => { navigate(`/${uuid}/step-${currentStepId - 1}`) }} />
       </form>
     </div>
   );

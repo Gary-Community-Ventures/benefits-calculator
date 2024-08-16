@@ -1,17 +1,12 @@
-import { useNavigate, useParams } from 'react-router-dom';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { Button } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 
 type PrevAndContinueButtonsProps = {
-  currentStepId: number;
+  backNavigationFunction: () => void;
 };
 
-const PrevAndContinueButtons = ({ currentStepId }: PrevAndContinueButtonsProps) => {
-  const { uuid } = useParams();
-  const navigate = useNavigate();
-  const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
-
+const PrevAndContinueButtons = ({ backNavigationFunction }: PrevAndContinueButtonsProps) => {
   return (
     <div className="question-buttons">
       <PreviousButton navFunction={backNavigationFunction} />
