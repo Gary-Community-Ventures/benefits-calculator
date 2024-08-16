@@ -62,7 +62,7 @@ export type Validation = {
   program_name: string;
   eligible: boolean;
   value: string;
-}
+};
 
 export type EligibilityResults = {
   programs: Program[];

@@ -12,7 +12,7 @@ const HelpButton = () => {
     defaultMsg: 'more help button',
   };
 
-  const moreHelpLink = useResultsLink(`/${uuid}/results/more-help`)
+  const moreHelpLink = useResultsLink(`/${uuid}/results/more-help`);
 
   return (
     <div className="help-text-for-211-button">
