@@ -27,8 +27,22 @@ const referrerStepDirectory: QuestionName[] = [
   'referralSource',
   'signUpInfo',
 ];
+const noSignUpStepDirectory: QuestionName[] = [
+  'zipcode',
+  //the hhSize and hhData have to be consecutive
+  'householdSize',
+  'householdData',
+  'hasExpenses',
+  'householdAssets',
+  'hasBenefits',
+  'acuteHHConditions',
+  'referralSource',
+];
 
 export function getStepDirectory(referrer: string | undefined) {
+  if (referrer === 'ccig') {
+    return noSignUpStepDirectory;
+  }
   if (referrer) {
     // if referrer is not undefinded or '' skip the referrer question
     return referrerStepDirectory;
