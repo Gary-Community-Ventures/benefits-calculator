@@ -26,6 +26,8 @@ export const ZipcodeStep = () => {
   const currentStepId = getStepNumber('zipcode', formData.immutableReferrer);
   const matchingQuestion = getQuestion(currentStepId, formData.immutableReferrer);
   const requiredField = matchingQuestion.componentDetails.required;
+  const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
+
 
   const countiesByZipcode = useConfig('counties_by_zipcode');
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
@@ -173,7 +175,7 @@ export const ZipcodeStep = () => {
             </FormControl>
           </div>
         )}
-        <PrevAndContinueButtons backNavigationFunction={() => { navigate(`/${uuid}/step-${currentStepId - 1}`) }} />
+        <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
     </div>
   );
