@@ -16,7 +16,6 @@ import { ReactComponent as Benefits } from '../../Assets/icons/benefits.svg';
 import { ReactComponent as Immediate } from '../../Assets/icons/immediate.svg';
 import { ReactComponent as Referral } from '../../Assets/icons/referral.svg';
 import PreviousButton from '../PreviousButton/PreviousButton';
-import FeedbackButton from '../FeedbackButton/FeedbackButton.js';
 import './Confirmation.css';
 
 const Confirmation = () => {
@@ -661,12 +660,9 @@ const Confirmation = () => {
       <div className="confirmation-container">{displayAllFormData()}</div>
       <div className="prev-continue-results-buttons confirmation">
         <PreviousButton navFunction={() => navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`)} />
-        <div className='flex'>
-        <FeedbackButton /> 
         <Button variant="contained" onClick={() => navigate(`/${uuid}/results/benefits`)}>
           <FormattedMessage id="continueButton" defaultMessage="Continue" />
         </Button>
-        </div>
       </div>
     </main>
   );

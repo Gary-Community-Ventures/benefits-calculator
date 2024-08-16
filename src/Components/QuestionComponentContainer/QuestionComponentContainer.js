@@ -13,7 +13,6 @@ import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
 import './QuestionComponentContainer.css';
-import FeedbackButton from '../FeedbackButton/FeedbackButton.js';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -191,15 +190,12 @@ const QuestionComponentContainer = ({
       return (
         <div className="question-buttons">
           <PreviousButton questionName={matchingQuestion.name} />
-          <div className='flex'>
-          <FeedbackButton />
           <ContinueButton
             handleContinueSubmit={handleContinueSubmit}
             errorController={errorController}
             inputName={matchingQuestion.componentDetails.inputName}
             questionName={matchingQuestion.name}
           />
-          </div>
         </div>
       );
     }

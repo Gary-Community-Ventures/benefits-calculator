@@ -12,7 +12,6 @@ import {
 import './LandingPage.css';
 import dataLayerPush from '../../Assets/analytics.ts';
 import PreviousButton from '../PreviousButton/PreviousButton.tsx';
-import FeedbackButton from '../FeedbackButton/FeedbackButton.js';
 import { STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory.ts';
 
 interface LandingPageProps {
@@ -196,12 +195,9 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       </Box>
       <div className="back-continue-buttons">
         <PreviousButton navFunction={() => navigate(`/step-1${queryString}`)} />
-        <div className='flex'>
-        <FeedbackButton />
         <Button variant="contained" onClick={handleContinue}>
           <FormattedMessage id="continue-button" defaultMessage="Continue" />
         </Button>
-      </div>
       </div>
     </main>
   );
