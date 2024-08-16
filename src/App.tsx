@@ -26,6 +26,7 @@ import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits.tsx';
 import { useConfig } from './Components/Config/configHook';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 import './App.css';
+import CcigLandingPage from './Components/CcigComponents/CcigLandingPage';
 
 const App = () => {
   const navigate = useNavigate();
@@ -43,6 +44,7 @@ const App = () => {
     setTheme: changeTheme,
     pageIsLoading,
     getReferrer,
+    configLoading,
   } = useContext(Context);
 
   const referralOptions = useConfig('referral_options');
@@ -51,10 +53,10 @@ const App = () => {
     getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER,
   );
   const [theme, setTheme] = useState(createTheme(styleOverride));
-
+  const themeName = configLoading ? 'default' : getReferrer('theme');
   useEffect(() => {
-    changeTheme(getReferrer('theme') as 'default' | 'twoOneOne');
-  }, [getReferrer('theme')]);
+    changeTheme(themeName as 'default' | 'twoOneOne');
+  }, [themeName]);
 
   useEffect(() => {
     setTotalSteps(getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER);
@@ -233,6 +235,9 @@ const App = () => {
     const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
       ? location.state.routedFromConfirmationPg
       : false;
+    const stepNumber = getStepNumber(questionName, formData.immutableReferrer);
+    const totalStepCount = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER - 1;
+    const isLastStep = stepNumber === totalStepCount;
 
     if (!hasError) {
       if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
@@ -255,7 +260,9 @@ const App = () => {
           : navigate(`/${uuid}/step-${stepId + 1}/1`);
       } else {
         updateScreen(uuid, formData, locale);
-        isComingFromConfirmationPg ? navigate(`/${uuid}/confirm-information`) : navigate(`/${uuid}/step-${stepId + 1}`);
+        isComingFromConfirmationPg || isLastStep
+          ? navigate(`/${uuid}/confirm-information`)
+          : navigate(`/${uuid}/step-${stepId + 1}`);
       }
     }
   };
@@ -320,6 +327,7 @@ const App = () => {
             <Route path="/current-benefits" element={<CurrentBenefits />} />
             <Route path="/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
             <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
+            <Route path="/ccig" element={<CcigLandingPage />} />
             <Route path="/step-1" element={<SelectLanguagePage />} />
             <Route path="/step-2" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
             <Route path=":uuid">

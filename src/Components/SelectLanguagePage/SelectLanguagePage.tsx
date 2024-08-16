@@ -4,13 +4,15 @@ import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import { useQueryString } from '../QuestionComponents/questionHooks';
 
 const SelectLanguagePage = () => {
-  const { formData, locale, selectLanguage } = useContext(Context);
+  const { locale, selectLanguage } = useContext(Context);
   const languageOptions = useConfig('language_options');
   const { uuid } = useParams();
 
-  const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
+  const queryString = useQueryString();
   const navigate = useNavigate();
 
   const createMenuItems = (optionList: Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
@@ -46,9 +48,9 @@ const SelectLanguagePage = () => {
 
   return (
     <main className="benefits-form">
-      <h1 className="sub-header">
+      <QuestionHeader>
         <FormattedMessage id="selectLanguage.header" defaultMessage="Before you begin..." />
-      </h1>
+      </QuestionHeader>
       <h2 className="sub-header-language-select">
         <FormattedMessage id="selectLanguage.subHeader" defaultMessage="What is your preferred language?" />
       </h2>

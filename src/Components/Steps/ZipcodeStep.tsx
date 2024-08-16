@@ -1,29 +1,32 @@
 import { useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { FormattedMessageType } from '../../Types/Questions';
 import { FormData } from '../../Types/FormData';
 import { Context } from '../Wrapper/Wrapper';
-import PreviousButton from '../PreviousButton/PreviousButton';
 import { updateScreen } from '../../Assets/updateScreen';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { useConfig } from '../Config/configHook.tsx';
 import * as z from 'zod';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons.tsx';
+import { useGoToNextStep } from '../QuestionComponents/questionHooks';
+import { getStepNumber } from '../../Assets/stepDirectory';
 
-interface ZipcodeStepProps {
-  currentStepId: number;
-}
-
-export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
+export const ZipcodeStep = () => {
   const { formData, locale, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();
+  const currentStepId = getStepNumber('zipcode', formData.immutableReferrer);
   const matchingQuestion = getQuestion(currentStepId, formData.immutableReferrer);
   const requiredField = matchingQuestion.componentDetails.required;
+  const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
 
   const countiesByZipcode = useConfig('counties_by_zipcode');
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
@@ -31,8 +34,6 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
     .string()
     .regex(numberMustBeFiveDigitsLongRegex)
     .refine((data) => data in countiesByZipcode);
-
-  const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
 
   const formSchema = z
     .object({
@@ -56,13 +57,14 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
 
   const currentZipcodeValue = watch('zipcode');
   const shouldShowCountyInput = zipcodeSchema.safeParse(currentZipcodeValue).success;
+  const nextStep = useGoToNextStep('zipcode');
 
   const formSubmitHandler = async (zipCodeAndCountyData: FormData) => {
     if (uuid) {
       const updatedFormData = { ...formData, ...zipCodeAndCountyData };
       setFormData(updatedFormData);
       await updateScreen(uuid, updatedFormData, locale);
-      navigate(`/${uuid}/step-${currentStepId + 1}`);
+      nextStep();
     }
   };
 
@@ -117,11 +119,10 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
   };
 
   return (
-    <div className="question-container" id={currentStepId.toString()}>
-      {<h2 className="question-label">{matchingQuestion.question}</h2>}
-      {matchingQuestion.questionDescription && (
-        <p className="question-description">{matchingQuestion.questionDescription}</p>
-      )}
+    <div>
+      <QuestionLeadText>{matchingQuestion.subheader}</QuestionLeadText>
+      <QuestionHeader>{matchingQuestion.header}</QuestionHeader>
+      <QuestionQuestion>{matchingQuestion.question}</QuestionQuestion>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name="zipcode"
@@ -137,9 +138,11 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
             />
           )}
         />
-        {shouldShowCountyInput && matchingQuestion.followUpQuestions?.length && (
-          <div className="question-container">
-            <h2 className="question-label">{matchingQuestion.followUpQuestions[0].question}</h2>
+        {shouldShowCountyInput && (
+          <div>
+            {matchingQuestion.followUpQuestions && (
+              <QuestionQuestion>{matchingQuestion.followUpQuestions[0].question}</QuestionQuestion>
+            )}
             <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.county !== undefined}>
               <InputLabel id="county">
                 <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />
@@ -171,12 +174,7 @@ export const ZipcodeStep = ({ currentStepId }: ZipcodeStepProps) => {
             </FormControl>
           </div>
         )}
-        <div className="question-buttons">
-          <PreviousButton navFunction={backNavigationFunction} />
-          <Button variant="contained" onClick={handleSubmit(formSubmitHandler)}>
-            <FormattedMessage id="continueButton" defaultMessage="Continue" />
-          </Button>
-        </div>
+        <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
     </div>
   );

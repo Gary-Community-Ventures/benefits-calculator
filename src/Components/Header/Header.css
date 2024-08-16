@@ -16,6 +16,10 @@
   background-color: var(--primary-color);
 }
 
+.MuiPaper-root.header-full-width-container.frozen {
+  height: 6.5rem;
+}
+
 #nav-container {
   display: flex;
   flex-direction: row;
@@ -54,4 +58,11 @@
 
 #select-language:focus-visible {
   outline: -webkit-focus-ring-color auto 1px;
+}
+
+.header-frozen-message-container {
+  background-color: var(--hover-color);
+  text-align: center;
+  height: max-content;
+  font-weight: bold;
 }
