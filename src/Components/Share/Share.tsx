@@ -38,8 +38,7 @@ const Share = forwardRef(function Share() {
     }),
   };
 
-  const shareUrl = getReferrer('shareLink');
-
+  const shareUrl = getReferrer('shareLink') || 'default';
   const iconSize = { color: '#fff', fontSize: '2rem' };
 
   const copyLink = () => {

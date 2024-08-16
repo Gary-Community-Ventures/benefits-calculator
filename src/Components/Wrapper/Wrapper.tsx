@@ -4,7 +4,7 @@ import { IntlProvider } from 'react-intl';
 import { WrapperContext } from '../../Types/WrapperContext';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
-import useReferrer from '../Referrer/referrerHook';
+import useReferrer, { ReferrerData } from '../Referrer/referrerHook';
 import { Language } from '../../Types/Language';
 import { useGetConfig } from '../Config/configHook';
 
@@ -87,6 +87,8 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const { configLoading, configResponse: config } = useGetConfig();
   const { language_options: languageOptions = {} } = config ?? {};
   const languages = Object.keys(languageOptions) as Language[];
+  const { referrer_data: referrerData = {} } = config ?? {};
+
   const rightToLeftLanguages = ['ar'];
 
   const [staffToken, setStaffToken] = useState<string | undefined>(undefined);
@@ -191,7 +193,8 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   };
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer);
+
+  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer, referrerData as ReferrerData);
 
   useEffect(() => {
     setReferrer(formData.immutableReferrer);
@@ -214,6 +217,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         getReferrer,
         staffToken,
         setStaffToken,
+        getReferrer: getReferrer as (id: keyof ReferrerData) => string,
       }}
     >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>

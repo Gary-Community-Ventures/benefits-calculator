@@ -1,6 +1,4 @@
-import { useContext } from 'react';
 import { useConfig } from '../Config/configHook.tsx';
-import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -13,6 +11,7 @@ import {
 } from '../../Assets/validationFunctions.tsx';
 import { useEffect } from 'react';
 import Textfield from '../Textfield/Textfield';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
@@ -126,13 +125,13 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
     return (
       <div>
-        <p className="question-label">
+        <QuestionQuestion>
           <FormattedMessage
             id="expenseBlock.createExpenseAmountTextfield-questionLabel"
             defaultMessage="How much is this expense every month "
           />
           {getExpenseSourceLabel(allExpensesData[index].expenseSourceName)}
-        </p>
+        </QuestionQuestion>
         <div className="expense-block-textfield">
           <Textfield
             componentDetails={textfieldProps}
@@ -181,12 +180,12 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   const { expenseSourceName, expenseAmount } = expenseData;
 
   const expenseSourceQuestion = (
-    <p className="question-label">
+    <QuestionQuestion>
       <FormattedMessage
         id="expenseBlock.createExpenseBlockQuestions-questionLabel"
         defaultMessage="If you have another expense, select it below."
       />
-    </p>
+    </QuestionQuestion>
   );
 
   return (

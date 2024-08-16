@@ -14,6 +14,11 @@ import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { ZipcodeStep } from '../Steps/ZipcodeStep';
 import './QuestionComponentContainer.css';
+import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import { getStepNumber } from '../../Assets/stepDirectory';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -123,10 +128,12 @@ const QuestionComponentContainer = ({
     const isHealthQuestion = inputName === 'healthInsurance';
 
     return (
-      <div className="question-container" id={id}>
-        {<h2 className="question-label">{matchingQuestion.question}</h2>}
+      <div>
+        <QuestionQuestion>{matchingQuestion.question}</QuestionQuestion>
         {matchingQuestion.questionDescription && (
-          <p className="question-description">{matchingQuestion.questionDescription}</p>
+          <>
+            <QuestionDescription>{matchingQuestion.questionDescription}</QuestionDescription>
+          </>
         )}
         {component}
         {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && (
@@ -202,16 +209,14 @@ const QuestionComponentContainer = ({
   const renderHeaderAndSubheader = () => {
     return (
       <>
-        {matchingQuestion.subheader && (
-          <strong className="question-secondary-header">{matchingQuestion.subheader}</strong>
-        )}
-        {matchingQuestion.header && <h1 className="sub-header">{matchingQuestion.header}</h1>}
+        {matchingQuestion.subheader && <QuestionLeadText>{matchingQuestion.subheader}</QuestionLeadText>}
+        {matchingQuestion.header && <QuestionHeader>{matchingQuestion.header}</QuestionHeader>}
       </>
     );
   };
 
-  switch (id) {
-    case '3':
+  switch (Number(id)) {
+    case getStepNumber('zipcode', formData.immutableReferrer):
       return (
         <main className="benefits-form">
           <ZipcodeStep currentStepId={Number(id)} />

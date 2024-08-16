@@ -206,6 +206,23 @@ li.apply-info {
   color: black;
 }
 
+.navigator-lang-flag {
+  align-items: center;
+  background-color: #e9f8e5;
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 500;
+  justify-content: start;
+  padding: 0.5rem 1rem;
+  width: fit-content;
+}
+
+.navigator-langs-container {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+}
+
 /* TABLET */
 @media (max-width: 775px) {
   .program-icon-and-header {
