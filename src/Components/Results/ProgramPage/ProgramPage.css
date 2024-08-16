@@ -212,7 +212,7 @@ li.apply-info {
   display: flex;
   font-size: 0.8rem;
   font-weight: 500;
-  justify-content: start;
+  justify-content: flex-start;
   padding: 0.5rem 1rem;
   width: fit-content;
 }
