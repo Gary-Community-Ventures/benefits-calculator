@@ -53,7 +53,7 @@ const Header = () => {
       className += ' frozen';
     }
 
-    return className
+    return className;
   }, [formData.frozen]);
 
   return (
