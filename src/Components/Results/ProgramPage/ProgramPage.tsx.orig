@@ -4,14 +4,17 @@ import ResultsTranslate from '../Translate/Translate.tsx';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
 import { FormattedMessage } from 'react-intl';
-import { useFormatYearlyValue } from '../FormattedValue';
+import { formatYearlyValue, useFormatYearlyValue } from '../FormattedValue';
 import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage.tsx';
 import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
+<<<<<<< HEAD
 import { findValidationForProgram, useResultsContext, useResultsLink } from '../Results';
 import { deleteValidation, postValidation } from '../../../apiCalls';
+=======
 import { languageOptions, Language } from '../../../Assets/languageOptions.tsx';
+>>>>>>> 33e401d78009d0448a84afc56fd4dd4af568883b
 
 type ProgramPageProps = {
   program: Program;
@@ -116,7 +119,9 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     );
   };
 
+<<<<<<< HEAD
   const backLink = useResultsLink(`/${uuid}/results/benefits`);
+=======
   const displayLanguageFlags = (navigatorLanguages: Language[]) => {
     return (
       <div className="navigator-langs-container">
@@ -132,6 +137,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     );
   };
 
+>>>>>>> 33e401d78009d0448a84afc56fd4dd4af568883b
   return (
     <main className="program-page-container">
       <section className="back-to-results-button-container">

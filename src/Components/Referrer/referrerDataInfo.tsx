@@ -10,6 +10,7 @@ import GACLogo from '../../Assets/GetAheadColorado/gaclogo.png';
 import FIRCLogo from '../../Assets/FircCobrand/FIRCLogo.png';
 import COMFBLogo from '../../Assets/colorado-mfb-logo.png';
 import DHSMFBLogo from '../../Assets/DenverHumanServices/denverHSLogo.png';
+import CCIGLogo from '../../Assets/CCIG/ccigLogo.png';
 
 const logoMap = {
   MFB_COLogo: MFBCOLogo,
@@ -24,6 +25,7 @@ const logoMap = {
   FIRC_Logo: FIRCLogo,
   CO_MFBLogo: COMFBLogo,
   DHS_MFBLogo: DHSMFBLogo,
+  CCIG_Logo: CCIGLogo,
 };
 
 export type LogoSource = keyof typeof logoMap;

@@ -219,7 +219,7 @@ const QuestionComponentContainer = ({
     case getStepNumber('zipcode', formData.immutableReferrer):
       return (
         <main className="benefits-form">
-          <ZipcodeStep currentStepId={Number(id)} />
+          <ZipcodeStep />
         </main>
       );
     default:

@@ -15,6 +15,7 @@ import dataLayerPush from '../../Assets/analytics.ts';
 import PreviousButton from '../PreviousButton/PreviousButton.tsx';
 import { STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory.ts';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import { useQueryString } from '../QuestionComponents/questionHooks';
 
 interface LandingPageProps {
   handleCheckboxChange: (event: React.FormEvent<HTMLInputElement>) => void;
@@ -22,7 +23,7 @@ interface LandingPageProps {
 
 const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   const { formData, locale, screenDoneLoading, theme } = useContext(Context);
-  const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
+  const queryString = useQueryString();
   let { uuid } = useParams();
   const navigate = useNavigate();
   const privacyErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);

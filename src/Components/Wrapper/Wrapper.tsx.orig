@@ -9,7 +9,7 @@ import { Language } from '../../Types/Language';
 import { useGetConfig } from '../Config/configHook';
 
 const initialFormData: FormData = {
-  isTest: false,
+  isTest: undefined,
   frozen: false,
   externalID: undefined,
   agreeToTermsOfService: false,
@@ -214,9 +214,13 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         styleOverride,
         pageIsLoading,
         screenDoneLoading,
+<<<<<<< HEAD
+        getReferrer,
         staffToken,
         setStaffToken,
+=======
         getReferrer: getReferrer as (id: keyof ReferrerData) => string,
+>>>>>>> 33e401d78009d0448a84afc56fd4dd4af568883b
       }}
     >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
