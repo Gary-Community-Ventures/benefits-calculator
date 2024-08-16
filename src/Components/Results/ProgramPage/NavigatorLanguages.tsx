@@ -1,4 +1,4 @@
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage } from 'react-intl';
 
 export const allNavigatorLanguages = {
   'en-us': <FormattedMessage id="navLanguage.en-us" defaultMessage="English" />,
