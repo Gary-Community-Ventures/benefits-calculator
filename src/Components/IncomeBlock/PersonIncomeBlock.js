@@ -72,7 +72,7 @@ const PersonIncomeBlock = ({ memberData, setMemberData, page, submitted }) => {
   };
 
   return (
-    <>
+    <> 
       <div className="section-container">
         <div className="section">
           <QuestionQuestion>

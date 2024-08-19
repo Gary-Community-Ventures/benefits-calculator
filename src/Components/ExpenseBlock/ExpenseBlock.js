@@ -10,10 +10,10 @@ import {
   displayExpensesHelperText,
 } from '../../Assets/validationFunctions.tsx';
 import PreviousButton from '../PreviousButton/PreviousButton';
-import './ExpenseBlock.css';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import './ExpenseBlock.css';
 
 const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   const { formData } = useContext(Context);
@@ -57,8 +57,8 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   const createExpenseBlockQuestions = () => {
     return selectedMenuItem.map((expenseSourceData, index) => {
       return (
-        <Box key={index} className="section-container">
-          <Stack sx={{ paddingBottom: '1rem' }} className={index % 2 === 0 ? 'section' : ''}>
+        <Box key={index} className="section-container bottom-padding-margin">
+          <Stack className={index % 2 === 0 ? 'section' : ''}>
             <ExpenseQuestion
               expenseData={expenseSourceData}
               allExpensesData={selectedMenuItem}
