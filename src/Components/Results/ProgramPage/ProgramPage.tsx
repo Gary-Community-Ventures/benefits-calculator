@@ -125,7 +125,6 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           return (
             <p className="navigator-lang-flag" key={lang}>
               {allNavigatorLanguages[lang]}
-              <FormattedMessage id="programPage.lang-available" defaultMessage=" Available" />
             </p>
           );
         })}
