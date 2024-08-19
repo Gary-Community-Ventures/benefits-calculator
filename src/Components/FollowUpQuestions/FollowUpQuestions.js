@@ -77,7 +77,9 @@ const FollowUpQuestions = ({
     } else if (followUp.componentDetails.componentType === 'SignUp') {
       return (
         <div key={index}>
-          <QuestionQuestion>{followUp.question}</QuestionQuestion>
+          <div className='follow-up-q-margin-top'>
+            <QuestionQuestion>{followUp.question}</QuestionQuestion>
+          </div>
           <SignUp
             handleTextfieldChange={handleTextfieldChange}
             handleCheckboxChange={handleCheckboxChange}
