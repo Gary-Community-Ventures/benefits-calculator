@@ -9,6 +9,7 @@ import { Context } from '../Wrapper/Wrapper';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import './FollowUpQuestions.css';
 
 const FollowUpQuestions = ({
   followUpQuestions,
@@ -37,8 +38,10 @@ const FollowUpQuestions = ({
       return (
         <div key={index}>
           <Box className="section-container">
-            <Stack className="section follow-up-expense-section">
-              <QuestionQuestion>{followUp.question}</QuestionQuestion>
+            <Stack className="section">
+              <div className='expense-padding-top'>
+                <QuestionQuestion>{followUp.question}</QuestionQuestion>
+              </div>
             </Stack>
           </Box>
           <ExpenseBlock handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} />
