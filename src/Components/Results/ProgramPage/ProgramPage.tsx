@@ -11,7 +11,8 @@ import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import { findValidationForProgram, useResultsContext, useResultsLink } from '../Results';
 import { deleteValidation, postValidation } from '../../../apiCalls';
-import { languageOptions, Language } from '../../../Assets/languageOptions.tsx';
+import { Language } from '../../../Assets/languageOptions.tsx';
+import { allNavigatorLanguages } from './NavigatorLanguages.tsx';
 
 type ProgramPageProps = {
   program: Program;
@@ -123,8 +124,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         {navigatorLanguages.map((lang) => {
           return (
             <p className="navigator-lang-flag" key={lang}>
-              {languageOptions[lang]}
-              <FormattedMessage id="programPage.lang-available" defaultMessage=" Available" />
+              {allNavigatorLanguages[lang]}
             </p>
           );
         })}

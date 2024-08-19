@@ -27,6 +27,7 @@ import { useConfig } from './Components/Config/configHook';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 import './App.css';
 import CcigLandingPage from './Components/CcigComponents/CcigLandingPage';
+import languageRouteWrapper from './Components/LanguageRouter/LanguageRouter';
 
 const App = () => {
   const navigate = useNavigate();
@@ -297,12 +298,16 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
-          <Route path=":uuid">
-            <Route path="" element={<FetchScreen />} />
-            <Route path="*" element={<FetchScreen />} />
-          </Route>
-          <Route path="" element={<LoadingPage />} />
-          <Route path="*" element={<LoadingPage />} />
+          {languageRouteWrapper(
+            <>
+              <Route path=":uuid">
+                <Route path="" element={<FetchScreen />} />
+                <Route path="*" element={<FetchScreen />} />
+              </Route>
+              <Route path="" element={<LoadingPage />} />
+              <Route path="*" element={<LoadingPage />} />
+            </>,
+          )}
         </Routes>
       </ThemeProvider>
     );
@@ -323,66 +328,70 @@ const App = () => {
             <Route path="*" element={<></>} />
           </Routes>
           <Routes>
-            <Route path="/" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
-            <Route path="/current-benefits" element={<CurrentBenefits />} />
-            <Route path="/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
-            <Route path="/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
-            <Route path="/ccig" element={<CcigLandingPage />} />
-            <Route path="/step-1" element={<SelectLanguagePage />} />
-            <Route path="/step-2" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
-            <Route path=":uuid">
-              <Route path="" element={<Navigate to="/step-1" replace />} />
-              <Route path="step-1" element={<SelectLanguagePage />} />
-              <Route path="step-2" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
-              <Route
-                path={`step-${getStepNumber('householdData', formData.immutableReferrer)}/:page`}
-                element={
-                  <HouseholdDataBlock
-                    key={window.location.href}
-                    handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+            {languageRouteWrapper(
+              <>
+                <Route path="" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
+                <Route path="current-benefits" element={<CurrentBenefits />} />
+                <Route path="jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
+                <Route path="jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
+                <Route path="ccig" element={<CcigLandingPage />} />
+                <Route path="step-1" element={<SelectLanguagePage />} />
+                <Route path="step-2" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
+                <Route path=":uuid">
+                  <Route path="" element={<Navigate to="/step-1" replace />} />
+                  <Route path="step-1" element={<SelectLanguagePage />} />
+                  <Route path="step-2" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
+                  <Route
+                    path={`step-${getStepNumber('householdData', formData.immutableReferrer)}/:page`}
+                    element={
+                      <HouseholdDataBlock
+                        key={window.location.href}
+                        handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+                      />
+                    }
                   />
-                }
-              />
-              <Route
-                path="step-:id"
-                element={
-                  <QuestionComponentContainer
-                    key={window.location.href}
-                    handleTextfieldChange={handleTextfieldChange}
-                    handleContinueSubmit={handleContinueSubmit}
-                    handleRadioButtonChange={handleRadioButtonChange}
-                    handleNoAnswerChange={handleNoAnswerChange}
-                    handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-                    handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-                    handleCheckboxChange={handleCheckboxChange}
+                  <Route
+                    path="step-:id"
+                    element={
+                      <QuestionComponentContainer
+                        key={window.location.href}
+                        handleTextfieldChange={handleTextfieldChange}
+                        handleContinueSubmit={handleContinueSubmit}
+                        handleRadioButtonChange={handleRadioButtonChange}
+                        handleNoAnswerChange={handleNoAnswerChange}
+                        handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
+                        handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
+                        handleCheckboxChange={handleCheckboxChange}
+                      />
+                    }
                   />
-                }
-              />
-              <Route path="confirm-information" element={<Confirmation />} />
-              <Route
-                path="results/benefits"
-                element={<Results type="program" handleTextfieldChange={handleTextfieldChange} />}
-              />
-              <Route
-                path="results/near-term-needs"
-                element={<Results type="need" handleTextfieldChange={handleTextfieldChange} />}
-              />
-              <Route
-                path="results/benefits/:programId"
-                element={<Results type="program" handleTextfieldChange={handleTextfieldChange} />}
-              />
-              <Route
-                path="results/benefits/:programId/navigators"
-                element={<Results type="navigator" handleTextfieldChange={handleTextfieldChange} />}
-              />
-              <Route
-                path="results/more-help"
-                element={<Results type="help" handleTextfieldChange={handleTextfieldChange} />}
-              />
-              <Route path="results" element={<Navigate to="benefits" replace />} />
-              <Route path="*" element={<Navigate to="/step-1" replace />} />
-            </Route>
-            <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
+                  <Route path="confirm-information" element={<Confirmation />} />
+                  <Route
+                    path="results/benefits"
+                    element={<Results type="program" handleTextfieldChange={handleTextfieldChange} />}
+                  />
+                  <Route
+                    path="results/near-term-needs"
+                    element={<Results type="need" handleTextfieldChange={handleTextfieldChange} />}
+                  />
+                  <Route
+                    path="results/benefits/:programId"
+                    element={<Results type="program" handleTextfieldChange={handleTextfieldChange} />}
+                  />
+                  <Route
+                    path="results/benefits/:programId/navigators"
+                    element={<Results type="navigator" handleTextfieldChange={handleTextfieldChange} />}
+                  />
+                  <Route
+                    path="results/more-help"
+                    element={<Results type="help" handleTextfieldChange={handleTextfieldChange} />}
+                  />
+                  <Route path="results" element={<Navigate to="benefits" replace />} />
+                  <Route path="*" element={<Navigate to="/step-1" replace />} />
+                </Route>
+                <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
+              </>,
+            )}
           </Routes>
         </Box>
       </div>
