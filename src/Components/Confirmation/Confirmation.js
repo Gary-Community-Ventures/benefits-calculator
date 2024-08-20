@@ -437,14 +437,9 @@ const Confirmation = () => {
   };
 
   const displayAllFormData = () => {
-    const allBenefitsList = {
-      ...categoryBenefits.cash.benefits,
-      ...categoryBenefits.childCare.benefits,
-      ...categoryBenefits.foodAndNutrition.benefits,
-      ...categoryBenefits.healthCare.benefits,
-      ...categoryBenefits.housingAndUtilities.benefits,
-      ...categoryBenefits.transportation.benefits,
-    };
+    const allBenefitsList = Object.values(categoryBenefits)
+      .map((category) => category?.benefits ?? {})
+      .reduce((acc, benefits) => ({ ...acc, ...benefits }), {});
 
     return (
       <>
