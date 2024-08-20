@@ -95,11 +95,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
         </Link>
         <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />
-        <Link
-          href={getLinksForCheckbox().addTermsConsentToContact}
-          target="_blank"
-          sx={{ color: theme.midBlueColor }}
-        >
+        <Link href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" sx={{ color: theme.midBlueColor }}>
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
         </Link>
         <FormattedMessage id="landingPage-disclaimer-lable-end" defaultMessage="." />
@@ -151,7 +147,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
         </ul>
       </CardContent>
       <Box sx={{ mt: '.5rem' }}>
-        <CardContent className='landing-pg-font'>
+        <CardContent className="landing-pg-font">
           <FormControlLabel
             control={
               <Checkbox

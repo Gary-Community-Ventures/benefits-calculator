@@ -39,7 +39,7 @@ const FollowUpQuestions = ({
         <div key={index}>
           <Box className="section-container">
             <Stack className="section">
-              <div className='expense-padding-top'>
+              <div className="expense-padding-top">
                 <QuestionQuestion>{followUp.question}</QuestionQuestion>
               </div>
             </Stack>
@@ -77,7 +77,7 @@ const FollowUpQuestions = ({
     } else if (followUp.componentDetails.componentType === 'SignUp') {
       return (
         <div key={index}>
-          <div className='follow-up-q-margin-top'>
+          <div className="follow-up-q-margin-top">
             <QuestionQuestion>{followUp.question}</QuestionQuestion>
           </div>
           <SignUp

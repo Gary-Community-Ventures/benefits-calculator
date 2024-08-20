@@ -232,7 +232,7 @@ const IncomeQuestion = ({
 
     return (
       <>
-        <div className='margin-bottom'>
+        <div className="margin-bottom">
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
             {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
@@ -292,20 +292,20 @@ const IncomeQuestion = ({
 
     return (
       <div>
-        <div className='margin-bottom'>
-        <QuestionQuestion>
-          {questionHeader}
-          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
-        </QuestionQuestion>
+        <div className="margin-bottom">
+          <QuestionQuestion>
+            {questionHeader}
+            {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
+          </QuestionQuestion>
         </div>
-          <Textfield
-            componentDetails={textfieldProps}
-            data={currentIncomeSource}
-            handleTextfieldChange={handleIncomeTextfieldChange}
-            index={index}
-            submitted={amountErrorController.submittedCount}
-            numericField={true}
-          />
+        <Textfield
+          componentDetails={textfieldProps}
+          data={currentIncomeSource}
+          handleTextfieldChange={handleIncomeTextfieldChange}
+          index={index}
+          submitted={amountErrorController.submittedCount}
+          numericField={true}
+        />
       </div>
     );
   };
@@ -381,7 +381,7 @@ const IncomeQuestion = ({
   }
 
   const incomeStreamQuestion = (
-    <div className='margin-bottom'>
+    <div className="margin-bottom">
       <QuestionQuestion>
         <span className="income-stream-q-padding">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />

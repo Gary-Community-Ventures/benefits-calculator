@@ -133,7 +133,7 @@ const App = () => {
     }
     const referrerParam = searchParams.get('referrer');
     const utmParam = searchParams.get('utm_source');
-    const testParam = searchParams.get('test') ? true : false
+    const testParam = searchParams.get('test') ? true : false;
     const externalIdParam = searchParams.get('externalid');
 
     // referrer priority = stored referrer -> referrer param -> utm_source param -> ''

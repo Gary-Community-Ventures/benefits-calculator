@@ -1,13 +1,13 @@
-import { IconButton } from "@mui/material";
+import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useIntl } from "react-intl";
+import { useIntl } from 'react-intl';
 import './CloseButton.css';
 
 type CloseButtonProps = {
   handleClose: () => void;
-}
+};
 
-const CloseButton = ({handleClose}: CloseButtonProps) => {
+const CloseButton = ({ handleClose }: CloseButtonProps) => {
   const intl = useIntl();
   const closeAriaLabelProps = {
     id: 'emailResults.close-AL',
@@ -27,6 +27,6 @@ const CloseButton = ({handleClose}: CloseButtonProps) => {
       </IconButton>
     </>
   );
-}
+};
 
 export default CloseButton;

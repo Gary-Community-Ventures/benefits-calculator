@@ -194,9 +194,9 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
         <div className="delete-button-container">
           <CloseButton handleClose={() => deleteExpenseBlock(index)} />
         </div>
-          {expenseSourceQuestion}
-          {createExpenseDropdownMenu(expenseSourceName, index)}
-          {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
+        {expenseSourceQuestion}
+        {createExpenseDropdownMenu(expenseSourceName, index)}
+        {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
       </div>
     );
   }
