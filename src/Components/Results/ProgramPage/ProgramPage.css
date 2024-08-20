@@ -223,6 +223,14 @@ li.apply-info {
   margin: 0.25rem 0;
 }
 
+.results-program-page-warning-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
 /* TABLET */
 @media (max-width: 775px) {
   .program-icon-and-header {
