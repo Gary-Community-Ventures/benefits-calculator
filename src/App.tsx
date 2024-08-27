@@ -34,9 +34,6 @@ const App = () => {
   const location = useLocation();
   const urlSearchParams = location.search;
   const [searchParams] = useSearchParams();
-  const isTest = searchParams.get('test') ? true : false;
-  const rawExternalId = searchParams.get('externalid');
-  const externalId = rawExternalId !== null ? rawExternalId : undefined;
   const {
     locale,
     formData,
@@ -137,14 +134,18 @@ const App = () => {
     }
     const referrerParam = searchParams.get('referrer');
     const utmParam = searchParams.get('utm_source');
+    const testParam = searchParams.get('test') ? true : false;
+    const externalIdParam = searchParams.get('externalid');
 
-    // use referrer if there is a referrer, otherwise use utm source
+    // referrer priority = stored referrer -> referrer param -> utm_source param -> ''
     const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
     const isOtherSource = !(referrer in referralOptions);
     let referrerSource = formData.referralSource || referrer;
     if (referrerSource === 'other') {
       referrerSource = formData.otherSource ?? '';
     }
+    const isTest = formData.isTest || testParam;
+    const externalId = formData.externalID ?? externalIdParam ?? undefined;
 
     // if the referrer source is not in the dropdown list then
     // make the referrer "other" and fill in the other field

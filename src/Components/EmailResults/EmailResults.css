@@ -55,10 +55,6 @@
   flex-direction: column;
 }
 
-div.MuiFormControl-root {
-  margin-bottom: 0.5rem;
-}
-
 @media (max-width: 790px) {
   .email-results-container {
     width: 90%;

@@ -45,6 +45,7 @@ export type Program = {
   navigators: ProgramNavigator[];
   documents: Translation[];
   multiple_tax_units: boolean;
+  warning_messages: Translation[];
 };
 
 export type UrgentNeed = {
