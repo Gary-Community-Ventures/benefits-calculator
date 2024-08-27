@@ -116,7 +116,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
     return (
       <div>
-        <div className="margin-bottom">
+        <div className="expense-margin-bottom">
           <QuestionQuestion>
             <FormattedMessage
               id="expenseBlock.createExpenseAmountTextfield-questionLabel"
