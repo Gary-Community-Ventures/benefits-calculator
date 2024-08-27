@@ -321,7 +321,7 @@ const IncomeQuestion = ({
 
     return (
       <div>
-        <div className='income-margin-bottom'>
+        <div className="income-margin-bottom">
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
             {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}

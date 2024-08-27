@@ -67,6 +67,9 @@ export const ZipcodeStep = () => {
       nextStep();
     }
   };
+  document.addEventListener('keyup', (e) => {
+    handleSubmit(formSubmitHandler)();
+  });
 
   const checkCountyIsValid = ({ zipcode, county }) => {
     const validCounties = countiesByZipcode[zipcode];
