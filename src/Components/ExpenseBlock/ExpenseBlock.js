@@ -57,7 +57,7 @@ const ExpenseBlock = ({ handleExpenseSourcesSubmit }) => {
   const createExpenseBlockQuestions = () => {
     return selectedMenuItem.map((expenseSourceData, index) => {
       return (
-        <Box key={index} className="section-container bottom-padding-margin">
+        <Box key={index} className="section-container expense-block-container">
           <Stack className={index % 2 === 0 ? 'section' : ''}>
             <ExpenseQuestion
               expenseData={expenseSourceData}
