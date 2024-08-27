@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useForm, Controller } from 'react-hook-form';
@@ -69,20 +69,6 @@ export const ZipcodeStep = () => {
   };
   document.addEventListener('keyup', (e) => {
     handleSubmit(formSubmitHandler)();
-  });
-
-  useEffect(() => {
-    const continueOnEnter = (event) => {
-      if (event.key === 'Enter') {
-        handleSubmit(formSubmitHandler)();
-      }
-    };
-
-    document.addEventListener('keyup', continueOnEnter);
-
-    return () => {
-      document.removeEventListener('keyup', continueOnEnter); // remove event listener on onmount
-    };
   });
 
   const checkCountyIsValid = ({ zipcode, county }) => {
