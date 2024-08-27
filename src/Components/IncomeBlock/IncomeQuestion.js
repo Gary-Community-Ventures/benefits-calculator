@@ -1,9 +1,8 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useConfig } from '../Config/configHook.tsx';
-import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
+import { FormControl, Select, MenuItem, InputLabel, FormHelperText } from '@mui/material';
 import {
   useErrorController,
   hoursWorkedValueHasError,
@@ -17,20 +16,13 @@ import {
 import Textfield from '../Textfield/Textfield';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import CloseButton from '../CloseButton/CloseButton.tsx';
+import '../IncomeBlock/PersonIncomeBlock.css';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
   maxWidth: '100%',
   backgroundColor: '#FFFFFF',
-});
-
-const StyledDeleteButton = styled(Button)({
-  width: '40px',
-  height: '40px',
-  minWidth: 0,
-  padding: 0,
-  fontSize: '1.25rem',
-  position: 'absolute',
 });
 
 const IncomeQuestion = ({
@@ -174,7 +166,7 @@ const IncomeQuestion = ({
 
   const createIncomeStreamsDropdownMenu = (incomeStreamName, index) => {
     return (
-      <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeStreamErrorController.showError}>
+      <FormControl sx={{ minWidth: 120, maxWidth: '100%' }} error={incomeStreamErrorController.showError}>
         <InputLabel id="income-type-label">
           <FormattedMessage
             id="personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel"
@@ -241,11 +233,13 @@ const IncomeQuestion = ({
 
     return (
       <>
-        <QuestionQuestion>
-          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
-        </QuestionQuestion>
-        <div className="income-block-textfield">
+        <div className="income-margin-bottom">
+          <QuestionQuestion>
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+            {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
+          </QuestionQuestion>
+        </div>
+        <div>
           <Textfield
             componentDetails={textfieldProps}
             data={currentIncomeSource}
@@ -299,20 +293,20 @@ const IncomeQuestion = ({
 
     return (
       <div>
-        <QuestionQuestion>
-          {questionHeader}
-          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
-        </QuestionQuestion>
-        <div className="income-block-textfield">
-          <Textfield
-            componentDetails={textfieldProps}
-            data={currentIncomeSource}
-            handleTextfieldChange={handleIncomeTextfieldChange}
-            index={index}
-            submitted={amountErrorController.submittedCount}
-            numericField={true}
-          />
+        <div className="income-textfield-margin-bottom">
+          <QuestionQuestion>
+            {questionHeader}
+            {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
+          </QuestionQuestion>
         </div>
+        <Textfield
+          componentDetails={textfieldProps}
+          data={currentIncomeSource}
+          handleTextfieldChange={handleIncomeTextfieldChange}
+          index={index}
+          submitted={amountErrorController.submittedCount}
+          numericField={true}
+        />
       </div>
     );
   };
@@ -327,15 +321,17 @@ const IncomeQuestion = ({
 
     return (
       <div>
-        <QuestionQuestion>
-          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
-          <HelpButton
-            helpText='"Every 2 weeks" means you get paid every other week. "Twice a month" means you get paid two times a month on the same dates each month.'
-            helpId="personIncomeBlock.income-freq-help-text"
-          />
-        </QuestionQuestion>
-        <FormControl sx={{ m: 1, minWidth: 120, maxWidth: '100%' }} error={incomeFrequencyErrorController.showError}>
+        <div className='income-margin-bottom'>
+          <QuestionQuestion>
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+            {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
+            <HelpButton
+              helpText='"Every 2 weeks" means you get paid every other week. "Twice a month" means you get paid two times a month on the same dates each month.'
+              helpId="personIncomeBlock.income-freq-help-text"
+            />
+          </QuestionQuestion>
+        </div>
+        <FormControl error={incomeFrequencyErrorController.showError}>
           <InputLabel id="income-frequency-label">
             <FormattedMessage
               id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel"
@@ -349,7 +345,7 @@ const IncomeQuestion = ({
             name={incomeFrequency}
             label={
               <FormattedMessage
-                id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-incomeFreqLabel"
+                id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel"
                 defaultMessage="Frequency"
               />
             }
@@ -388,33 +384,44 @@ const IncomeQuestion = ({
   }
 
   const incomeStreamQuestion = (
-    <>
+    <div className="income-margin-bottom">
       <QuestionQuestion>
         <span className="income-stream-q-padding">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </span>
       </QuestionQuestion>
-    </>
-  );
-
-  return (
-    <div key={index} className="section-container income-question-padding">
-      <div className={index % 2 === 0 ? 'section' : ''}>
-        {index > 0 && (
-          <div className="delete-button-container">
-            <StyledDeleteButton variant="contained" onClick={() => deleteIncomeBlock(index)}>
-              &#215;
-            </StyledDeleteButton>
-          </div>
-        )}
-        {index > 0 && incomeStreamQuestion}
-        {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
-        {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
-        {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
-        {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
-      </div>
     </div>
   );
+
+  if (index === 0) {
+    return (
+      <div key={index} className="section-container income-block-container">
+        <div className="section">
+          {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
+          {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+          {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
+          {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="section-container income-block-container">
+        <div key={index} className={index % 2 === 0 ? 'section' : ''}>
+          <div className="delete-button-container">
+            <CloseButton handleClose={() => deleteIncomeBlock(index)} />
+          </div>
+          <div>
+            {incomeStreamQuestion}
+            {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
+            {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
+            {incomeFrequency === 'hourly' && createHoursWorkedTextField(incomeStreamName, hoursPerWeek, index)}
+            {createIncomeAmountTextfield(incomeStreamName, incomeAmount, index)}
+          </div>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default IncomeQuestion;

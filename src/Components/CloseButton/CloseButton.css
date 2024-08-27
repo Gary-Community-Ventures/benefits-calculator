@@ -1,0 +1,11 @@
+.MuiButtonBase-root.close-button {
+  margin: 1rem;
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.MuiButtonBase-root.close-button:hover {
+  background-color: var(--hover-color);
+  color: var(--option-card-hover-font-color);
+  outline: 1px solid var(--primary-color);
+}

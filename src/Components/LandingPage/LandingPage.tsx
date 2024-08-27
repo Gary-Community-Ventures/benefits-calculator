@@ -1,4 +1,4 @@
-import { CardContent, Button, Typography, FormControlLabel, Checkbox, Box, Link } from '@mui/material';
+import { CardContent, Button, FormControlLabel, Checkbox, Box, Link } from '@mui/material';
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
@@ -10,12 +10,12 @@ import {
   displayAgreeToTermsErrorMessage,
   termsOfServiceHasError,
 } from '../../Assets/validationFunctions.tsx';
-import './LandingPage.css';
 import dataLayerPush from '../../Assets/analytics.ts';
 import PreviousButton from '../PreviousButton/PreviousButton.tsx';
 import { STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory.ts';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { useQueryString } from '../QuestionComponents/questionHooks';
+import './LandingPage.css';
 
 interface LandingPageProps {
   handleCheckboxChange: (event: React.FormEvent<HTMLInputElement>) => void;
@@ -86,7 +86,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
 
   const createCheckboxLabel = () => {
     return (
-      <div className="main-paragraph">
+      <div className="landing-pg-font">
         <FormattedMessage
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
@@ -108,23 +108,19 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
       <QuestionHeader>
         <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
       </QuestionHeader>
-      <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }}>
-        <div className="main-paragraph">
-          <Typography variant="body1">
-            <FormattedMessage
-              id="landingPage.body"
-              defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:"
-            />
-          </Typography>
-        </div>
+      <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }} className="landing-pg-font">
+        <FormattedMessage
+          id="landingPage.body"
+          defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:"
+        />
         <ul className="landing-page-list-container">
-          <li className="main-paragraph">
+          <li>
             <FormattedMessage
               id="landingPage.firstBulletItem"
               defaultMessage="MyFriendBen only provides estimates of what you may qualify for. You should not rely on these estimates. You must confirm your final eligibility and benefit amount with the proper agency or other decision maker."
             />
           </li>
-          <li className="main-paragraph">
+          <li>
             <div>
               <FormattedMessage
                 id="landingPage.publicCharge"
@@ -151,7 +147,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
         </ul>
       </CardContent>
       <Box sx={{ mt: '.5rem' }}>
-        <CardContent>
+        <CardContent className="landing-pg-font">
           <FormControlLabel
             control={
               <Checkbox
@@ -174,7 +170,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
                 />
               }
               label={
-                <div className="main-paragraph">
+                <div className="landing-pg-font">
                   <FormattedMessage
                     id="disclaimer-label-age"
                     defaultMessage="I confirm I am 13 years of age or older."
