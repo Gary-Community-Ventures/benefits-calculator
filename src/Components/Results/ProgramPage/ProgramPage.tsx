@@ -145,16 +145,11 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         {displayIconAndHeader(program)}
         {displayEstimatedValueAndTime(program)}
       </div>
-      {program.warning.default_message && <WarningMessage message={program.warning} />}
-      {program.multiple_tax_units && (
-        <WarningMessage
-          message={{
-            label: 'results.multiple_tax_units.warning',
-            default_message:
-              'There may be members of your household who are not part of your "tax household." Ask them to complete this tool to determine if they qualify for this benefit.',
-          }}
-        />
-      )}
+      <div className="results-program-page-warning-container">
+        {program.warning_messages.map((message, key) => {
+          return <WarningMessage message={message} key={key} />;
+        })}
+      </div>
       <div className="apply-button-container">
         <a className="apply-online-button" href={program.apply_button_link.default_message} target="_blank">
           <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
