@@ -36,11 +36,15 @@
   padding-right: 2em;
 }
 
-.margin-bottom {
-  margin-bottom: 1.5rem;
+.income-margin-bottom {
+  margin: 1rem 0;
 }
 
-.bottom-padding-margin {
+.income-textfield-margin-bottom {
+  margin: 1rem 0;
+}
+
+.income-block-container {
   padding: 0 0 2rem 0;
   margin-bottom: 1rem;
 }

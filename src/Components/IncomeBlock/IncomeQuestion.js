@@ -17,6 +17,7 @@ import Textfield from '../Textfield/Textfield';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import CloseButton from '../CloseButton/CloseButton.tsx';
+import '../IncomeBlock/PersonIncomeBlock.css';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
@@ -232,7 +233,7 @@ const IncomeQuestion = ({
 
     return (
       <>
-        <div className="margin-bottom">
+        <div className="income-margin-bottom">
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
             {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
@@ -292,7 +293,7 @@ const IncomeQuestion = ({
 
     return (
       <div>
-        <div className="margin-bottom">
+        <div className="income-textfield-margin-bottom">
           <QuestionQuestion>
             {questionHeader}
             {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
@@ -320,14 +321,16 @@ const IncomeQuestion = ({
 
     return (
       <div>
-        <QuestionQuestion>
-          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-          {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
-          <HelpButton
-            helpText='"Every 2 weeks" means you get paid every other week. "Twice a month" means you get paid two times a month on the same dates each month.'
-            helpId="personIncomeBlock.income-freq-help-text"
-          />
-        </QuestionQuestion>
+        <div className='income-margin-bottom'>
+          <QuestionQuestion>
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+            {getIncomeStreamNameLabel(allIncomeSources[index].incomeStreamName)}
+            <HelpButton
+              helpText='"Every 2 weeks" means you get paid every other week. "Twice a month" means you get paid two times a month on the same dates each month.'
+              helpId="personIncomeBlock.income-freq-help-text"
+            />
+          </QuestionQuestion>
+        </div>
         <FormControl error={incomeFrequencyErrorController.showError}>
           <InputLabel id="income-frequency-label">
             <FormattedMessage
@@ -381,7 +384,7 @@ const IncomeQuestion = ({
   }
 
   const incomeStreamQuestion = (
-    <div className="margin-bottom">
+    <div className="income-margin-bottom">
       <QuestionQuestion>
         <span className="income-stream-q-padding">
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
@@ -392,7 +395,7 @@ const IncomeQuestion = ({
 
   if (index === 0) {
     return (
-      <div key={index} className="section-container bottom-padding-margin">
+      <div key={index} className="section-container income-block-container">
         <div className="section">
           {createIncomeStreamsDropdownMenu(incomeStreamName, index)}
           {createIncomeStreamFrequencyDropdownMenu(incomeFrequency, index)}
@@ -403,7 +406,7 @@ const IncomeQuestion = ({
     );
   } else {
     return (
-      <div className="section-container bottom-padding-margin">
+      <div className="section-container income-block-container">
         <div key={index} className={index % 2 === 0 ? 'section' : ''}>
           <div className="delete-button-container">
             <CloseButton handleClose={() => deleteIncomeBlock(index)} />
