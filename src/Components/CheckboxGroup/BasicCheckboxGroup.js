@@ -1,6 +1,7 @@
 import { FormControlLabel, FormGroup, Checkbox, FormControl, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
+import { FormattedMessage } from 'react-intl';
 
 const BasicCheckboxGroup = ({ stateVariable, options }) => {
   const { formData: state, setFormData: setState } = useContext(Context);
@@ -27,17 +28,14 @@ const BasicCheckboxGroup = ({ stateVariable, options }) => {
     const optionKeys = Object.keys(options);
 
     const formControlLabels = optionKeys.map((optionKey) => {
-      // const splitLabel = options[optionKey].props.defaultMessage.split(':');
-      // options = {tanf: <Format}
+      const { id: nameId, defaultMessage: nameDefaultMsg } = options[optionKey].name.props;
+      const { id: descId, defaultMessage: descDefaultMsg } = options[optionKey].description.props;
 
-
-      const programName = splitLabel[0];
-      const programDescription = splitLabel[1];
-      const createFormLabel = (name, description) => {
+      const createFormLabel = (nameId, nameDefaultMsg, descId, descDefaultMsg) => {
         return (
           <Typography>
-            <strong>{name}:</strong>
-            <span>{description}</span>
+            <strong>{<FormattedMessage id={nameId} defaultMessage={nameDefaultMsg} />}: </strong>
+            <span>{<FormattedMessage id={descId} defaultMessage={descDefaultMsg} />}</span>
           </Typography>
         );
       };
@@ -48,7 +46,7 @@ const BasicCheckboxGroup = ({ stateVariable, options }) => {
           control={
             <Checkbox checked={state[stateVariable][optionKey]} onChange={handleCheckboxChange} name={optionKey} />
           }
-          label={createFormLabel(programName, programDescription)}
+          label={createFormLabel(nameId, nameDefaultMsg, descId, descDefaultMsg)}
           key={optionKey}
         />
       );
