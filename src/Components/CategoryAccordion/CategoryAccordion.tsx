@@ -3,7 +3,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import CurrentBenefitsCheckboxGroup  from '../CheckboxGroup/CurrentBenefitsCheckboxGroup';
+import CurrentBenefitsCheckboxGroup from '../CheckboxGroup/CurrentBenefitsCheckboxGroup';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { CategoryOptions } from '../../Assets/BenefitCategoryLists/benefitAccordions';
