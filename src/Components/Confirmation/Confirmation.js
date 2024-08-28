@@ -564,17 +564,33 @@ const Confirmation = () => {
     return mappedListItems;
   };
 
-  const listAllTruthyValues = (selectedOptions, relatedOptionsList) => {
-    const mappedListItems = selectedOptions.map((option) => {
-      return (
-        <p key={option} className="bottom-margin">
-          {' '}
-          {relatedOptionsList[option]}{' '}
-        </p>
-      );
-    });
+  const listAllTruthyValues = (selectedOptions, relatedOptionsList, stateVariableName) => {
+    if (stateVariableName === 'benefits') {
+      const mappedListItems = selectedOptions.map((option) => {
+        const { id: nameId, defaultMessage: nameDefaultMsg } = relatedOptionsList[option].name.props;
+        const { id: descId, defaultMessage: descDefaultMsg } = relatedOptionsList[option].description.props;
 
-    return mappedListItems;
+        return (
+          <p key={nameId} className="bottom-margin">
+            <strong>{<FormattedMessage id={nameId} defaultMessage={nameDefaultMsg} />}: </strong>
+            <span>{<FormattedMessage id={descId} defaultMessage={descDefaultMsg} />}</span>
+          </p>
+        );
+      });
+
+      return mappedListItems;
+    } else {
+      const mappedListItems = selectedOptions.map((option) => {
+        return (
+          <p key={option} className="bottom-margin">
+            {' '}
+            {relatedOptionsList[option]}{' '}
+          </p>
+        );
+      });
+
+      return mappedListItems;
+    }
   };
 
   const displayHHCheckboxSection = (
@@ -601,7 +617,9 @@ const Confirmation = () => {
             <FormattedMessage id={fMessageId} defaultMessage={fMessageDefaultMsg} />
           </p>
           {hasAnyTruthyOptions ? (
-            <article className="section-p">{listAllTruthyValues(truthyOptions, optionsList)}</article>
+            <article className="section-p">
+              {listAllTruthyValues(truthyOptions, optionsList, stateVariableName)}
+            </article>
           ) : (
             <p className="section-p">
               <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />
