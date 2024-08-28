@@ -1,10 +1,10 @@
-import { FormControlLabel, FormGroup, Checkbox, FormControl, Typography } from '@mui/material';
+import { FormControlLabel, FormGroup, Checkbox, FormControl } from '@mui/material';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
-import { FormattedMessage } from 'react-intl';
 
 const BasicCheckboxGroup = ({ stateVariable, options }) => {
   const { formData: state, setFormData: setState } = useContext(Context);
+
   const handleCheckboxChange = (event) => {
     const { name } = event.target;
 
@@ -28,25 +28,13 @@ const BasicCheckboxGroup = ({ stateVariable, options }) => {
     const optionKeys = Object.keys(options);
 
     const formControlLabels = optionKeys.map((optionKey) => {
-      const { id: nameId, defaultMessage: nameDefaultMsg } = options[optionKey].name.props;
-      const { id: descId, defaultMessage: descDefaultMsg } = options[optionKey].description.props;
-
-      const createFormLabel = (nameId, nameDefaultMsg, descId, descDefaultMsg) => {
-        return (
-          <Typography>
-            <strong>{<FormattedMessage id={nameId} defaultMessage={nameDefaultMsg} />}: </strong>
-            <span>{<FormattedMessage id={descId} defaultMessage={descDefaultMsg} />}</span>
-          </Typography>
-        );
-      };
-
       return (
         <FormControlLabel
-          sx={{ alignItems: 'center', marginTop: `1rem` }}
+          sx={{ alignItems: 'center', marginTop: '1rem' }}
           control={
             <Checkbox checked={state[stateVariable][optionKey]} onChange={handleCheckboxChange} name={optionKey} />
           }
-          label={createFormLabel(nameId, nameDefaultMsg, descId, descDefaultMsg)}
+          label={options[optionKey]}
           key={optionKey}
         />
       );
