@@ -1,44 +1,35 @@
 import { FormControlLabel, FormGroup, Checkbox, FormControl, Typography } from '@mui/material';
 import { ChangeEvent, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
-import { FormattedMessage } from 'react-intl';
+import { BenefitsList } from '../../Types/Questions.ts';
+import { Benefits } from '../../Types/FormData.ts';
 
 type CurrentBenefitsCheckboxGroupProps = {
-  stateVariable: string;
-  options: any;
+  options: BenefitsList;
 };
 
-const CurrentBenefitsCheckboxGroup = ({ stateVariable, options }: CurrentBenefitsCheckboxGroupProps) => {
+const CurrentBenefitsCheckboxGroup = ({ options }: CurrentBenefitsCheckboxGroupProps) => {
   const { formData: state, setFormData: setState } = useContext(Context);
+  const stateVariable = 'benefits';
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name } = event.target;
+    const name= event.target.name as keyof Benefits;
     const currentStateVariableObj = { ...state[stateVariable] };
-    const currentOptions = Object.keys(currentStateVariableObj);
-    const updatedStateVariableObj = currentOptions.reduce((acc, key) => {
-      if (name === key) {
-        acc[key] = !currentStateVariableObj[key];
-      } else {
-        acc[key] = currentStateVariableObj[key];
-      }
-      return acc;
-    }, {});
-
-    setState({ ...state, [stateVariable]: updatedStateVariableObj });
+    currentStateVariableObj[name] = !currentStateVariableObj[name];
+    setState({ ...state, [stateVariable]: currentStateVariableObj });
   };
 
-  const createFormControlLabels = (options) => {
-    const optionKeys = Object.keys(options);
+  const createFormControlLabels = (options: BenefitsList, ) => {
+    const optionKeys = Object.keys(options) as Array<keyof Benefits>;
 
     const formControlLabels = optionKeys.map((optionKey) => {
-      const { id: nameId, defaultMessage: nameDefaultMsg } = options[optionKey].name.props;
-      const { id: descId, defaultMessage: descDefaultMsg } = options[optionKey].description.props;
+      const option = options[optionKey];
 
-      const createFormLabel = (nameId: string, nameDefaultMsg: string, descId: string, descDefaultMsg: string) => {
+      const createFormLabel = () => {
         return (
           <Typography>
-            <strong>{<FormattedMessage id={nameId} defaultMessage={nameDefaultMsg} />}: </strong>
-            <span>{<FormattedMessage id={descId} defaultMessage={descDefaultMsg} />}</span>
+            <strong>{option.name}</strong>
+            <span>{option.description}</span>
           </Typography>
         );
       };
@@ -49,7 +40,7 @@ const CurrentBenefitsCheckboxGroup = ({ stateVariable, options }: CurrentBenefit
           control={
             <Checkbox checked={state[stateVariable][optionKey]} onChange={handleCheckboxChange} name={optionKey} />
           }
-          label={createFormLabel(nameId, nameDefaultMsg, descId, descDefaultMsg)}
+          label={createFormLabel()}
           key={optionKey}
         />
       );
