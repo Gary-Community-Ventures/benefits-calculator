@@ -6,12 +6,11 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CurrentBenefitsCheckboxGroup from '../CheckboxGroup/CurrentBenefitsCheckboxGroup';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
-import { CategoryOptions } from '../../Assets/BenefitCategoryLists/benefitAccordions';
-import { FormattedMessageType } from '../../Types/Questions';
+import { BenefitsList, FormattedMessageType } from '../../Types/Questions';
 
 type Props = {
   categoryName: FormattedMessageType;
-  categoryOptions: CategoryOptions;
+  categoryOptions: BenefitsList;
   setExpanded: (index: boolean | number) => void;
   expanded: number | boolean;
   index: number;
@@ -37,7 +36,7 @@ const CategoryAccordion = ({ categoryName, categoryOptions, setExpanded, expande
         <Typography sx={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: '400' }}>{categoryName}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <CurrentBenefitsCheckboxGroup stateVariable="benefits" options={categoryOptions} />
+        <CurrentBenefitsCheckboxGroup options={categoryOptions} />
       </AccordionDetails>
     </Accordion>
   );
