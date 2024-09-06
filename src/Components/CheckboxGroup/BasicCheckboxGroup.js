@@ -4,6 +4,7 @@ import { Context } from '../Wrapper/Wrapper.tsx';
 
 const BasicCheckboxGroup = ({ stateVariable, options }) => {
   const { formData: state, setFormData: setState } = useContext(Context);
+
   const handleCheckboxChange = (event) => {
     const { name } = event.target;
 

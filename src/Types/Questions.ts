@@ -148,3 +148,27 @@ export type Question = {
   subheader?: FormattedMessageType;
   followUpQuestions?: Question[];
 };
+
+export type Benefit = {
+  name: FormattedMessageType;
+  description: FormattedMessageType;
+};
+
+export type BenefitsList = {
+  [key: string]: Benefit;
+};
+
+export type Category = {
+  benefits: BenefitsList;
+  category_name: FormattedMessageType;
+};
+
+export type CategoryBenefits = {
+  cash: Category;
+  foodAndNutrition: Category;
+  childCare: Category;
+  housingAndUtilities: Category;
+  transportation: Category;
+  healthCare: Category;
+  taxCredits: Category;
+};
