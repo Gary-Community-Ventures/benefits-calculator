@@ -21,7 +21,7 @@ import { useTranslateNumber } from '../../Assets/languageOptions';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 
 const Confirmation = () => {
-  const { formData } = useContext(Context);
+  const { formData, locale } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();
   const intl = useIntl();
@@ -260,12 +260,22 @@ const Confirmation = () => {
 
   const displayHouseholdSizeSection = () => {
     const { householdSize } = formData;
-    const householdSizeDescriptor =
-      householdSize === 1 ? (
-        <FormattedMessage id="confirmation.displayAllFormData-personLabel" defaultMessage="person" />
-      ) : (
+    let householdSizeDescriptor = (
+      <FormattedMessage id="confirmation.displayAllFormData-personLabel" defaultMessage="person" />
+    );
+
+    if (householdSize >= 2) {
+      householdSizeDescriptor = (
         <FormattedMessage id="confirmation.displayAllFormData-peopleLabel" defaultMessage="people" />
       );
+      // Russian uses the singular of people for 1-4 people
+      if (householdSize <= 4 && locale === 'ru') {
+        householdSizeDescriptor = (
+          <FormattedMessage id="confirmation.displayAllFormData-personLabel" defaultMessage="person" />
+        );
+      }
+    }
+
     const linkTo = getQuestionUrl('householdSize');
     const editHHSizeAriaLabelProps = {
       id: 'confirmation.hhSize-AL',
