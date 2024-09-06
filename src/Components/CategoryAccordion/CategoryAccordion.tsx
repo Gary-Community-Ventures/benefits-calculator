@@ -3,15 +3,14 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
+import CurrentBenefitsCheckboxGroup from '../CheckboxGroup/CurrentBenefitsCheckboxGroup';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
-import { CategoryOptions } from '../../Assets/BenefitCategoryLists/benefitAccordions';
-import { FormattedMessageType } from '../../Types/Questions';
+import { BenefitsList, FormattedMessageType } from '../../Types/Questions';
 
 type Props = {
   categoryName: FormattedMessageType;
-  categoryOptions: CategoryOptions;
+  categoryOptions: BenefitsList;
   setExpanded: (index: boolean | number) => void;
   expanded: number | boolean;
   index: number;
@@ -19,6 +18,7 @@ type Props = {
 
 const CategoryAccordion = ({ categoryName, categoryOptions, setExpanded, expanded, index }: Props) => {
   const { theme } = useContext(Context);
+
   return (
     <Accordion
       expanded={expanded === index}
@@ -36,7 +36,7 @@ const CategoryAccordion = ({ categoryName, categoryOptions, setExpanded, expande
         <Typography sx={{ color: '#ffffff', fontSize: '1.2rem', fontWeight: '400' }}>{categoryName}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <BasicCheckboxGroup stateVariable="benefits" options={categoryOptions} />
+        <CurrentBenefitsCheckboxGroup options={categoryOptions} />
       </AccordionDetails>
     </Accordion>
   );

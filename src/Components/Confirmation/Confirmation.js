@@ -569,17 +569,29 @@ const Confirmation = () => {
     return mappedListItems;
   };
 
-  const listAllTruthyValues = (selectedOptions, relatedOptionsList) => {
-    const mappedListItems = selectedOptions.map((option) => {
-      return (
-        <p key={option} className="bottom-margin">
-          {' '}
-          {relatedOptionsList[option]}{' '}
-        </p>
-      );
-    });
+  const listAllTruthyValues = (selectedOptions, relatedOptionsList, stateVariableName) => {
+    if (stateVariableName === 'benefits') {
+      const mappedListItems = selectedOptions.map((option) => {
+        return (
+          <p key={relatedOptionsList[option].name.props.id} className="bottom-margin">
+            <strong>{relatedOptionsList[option].name}</strong>
+            <span>{relatedOptionsList[option].description}</span>
+          </p>
+        );
+      });
 
-    return mappedListItems;
+      return mappedListItems;
+    } else {
+      const mappedListItems = selectedOptions.map((option) => {
+        return (
+          <p key={option} className="bottom-margin">
+            {relatedOptionsList[option]}
+          </p>
+        );
+      });
+
+      return mappedListItems;
+    }
   };
 
   const displayHHCheckboxSection = (
@@ -606,7 +618,9 @@ const Confirmation = () => {
             <FormattedMessage id={fMessageId} defaultMessage={fMessageDefaultMsg} />
           </p>
           {hasAnyTruthyOptions ? (
-            <article className="section-p">{listAllTruthyValues(truthyOptions, optionsList)}</article>
+            <article className="section-p">
+              {listAllTruthyValues(truthyOptions, optionsList, stateVariableName)}
+            </article>
           ) : (
             <p className="section-p">
               <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />
