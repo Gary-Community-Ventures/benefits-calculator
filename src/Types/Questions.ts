@@ -154,14 +154,14 @@ export type Benefit = {
   description: FormattedMessageType;
 };
 
-export type BenefitsList ={
+export type BenefitsList = {
   [key: string]: Benefit;
-}
+};
 
 export type Category = {
   benefits: BenefitsList;
   category_name: FormattedMessageType;
-}
+};
 
 export type CategoryBenefits = {
   cash: Category;
@@ -171,4 +171,4 @@ export type CategoryBenefits = {
   transportation: Category;
   healthCare: Category;
   taxCredits: Category;
-}
+};

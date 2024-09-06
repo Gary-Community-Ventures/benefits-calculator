@@ -13,13 +13,13 @@ const CurrentBenefitsCheckboxGroup = ({ options }: CurrentBenefitsCheckboxGroupP
   const stateVariable = 'benefits';
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const name= event.target.name as keyof Benefits;
+    const name = event.target.name as keyof Benefits;
     const currentStateVariableObj = { ...state[stateVariable] };
     currentStateVariableObj[name] = !currentStateVariableObj[name];
     setState({ ...state, [stateVariable]: currentStateVariableObj });
   };
 
-  const createFormControlLabels = (options: BenefitsList, ) => {
+  const createFormControlLabels = (options: BenefitsList) => {
     const optionKeys = Object.keys(options) as Array<keyof Benefits>;
 
     const formControlLabels = optionKeys.map((optionKey) => {
