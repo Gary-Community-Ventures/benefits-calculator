@@ -567,13 +567,10 @@ const Confirmation = () => {
   const listAllTruthyValues = (selectedOptions, relatedOptionsList, stateVariableName) => {
     if (stateVariableName === 'benefits') {
       const mappedListItems = selectedOptions.map((option) => {
-        const { id: nameId, defaultMessage: nameDefaultMsg } = relatedOptionsList[option].name.props;
-        const { id: descId, defaultMessage: descDefaultMsg } = relatedOptionsList[option].description.props;
-
         return (
-          <p key={nameId} className="bottom-margin">
-            <strong>{<FormattedMessage id={nameId} defaultMessage={nameDefaultMsg} />}: </strong>
-            <span>{<FormattedMessage id={descId} defaultMessage={descDefaultMsg} />}</span>
+          <p key={relatedOptionsList[option].name.props.id} className="bottom-margin">
+            <strong>{relatedOptionsList[option].name}</strong>
+            <span>{relatedOptionsList[option].description}</span>
           </p>
         );
       });
@@ -583,8 +580,7 @@ const Confirmation = () => {
       const mappedListItems = selectedOptions.map((option) => {
         return (
           <p key={option} className="bottom-margin">
-            {' '}
-            {relatedOptionsList[option]}{' '}
+            {relatedOptionsList[option]}
           </p>
         );
       });
