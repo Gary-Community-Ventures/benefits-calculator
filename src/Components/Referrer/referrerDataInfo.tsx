@@ -1,16 +1,16 @@
 import MFBDEFAULT from '../../Assets/Logos/mfb_default_logo_header.png';
 import MFBCOLogo from '../../Assets/Logos/mfb_colorado_logo.png';
 import MFBNCLogo from '../../Assets/Logos/mfb_nc_logo.png';
-import BIAMFBLogo from '../../Assets/biamfbcombinedlogo.png';
-import JHSAMFBLogo from '../../Assets/JeffcoAssets/jeffcobrand.png';
-import VELogo from '../../Assets/VillageExchange/villageExchangeLogo.png';
-import CCHMFBLogo from '../../Assets/ColoradoCoalitionHomeless/cchcobrand.png';
-import LGSLogo from '../../Assets/LetsGetSet/lgsLogo.png';
-import GACLogo from '../../Assets/GetAheadColorado/gaclogo.png';
-import FIRCLogo from '../../Assets/FircCobrand/FIRCLogo.png';
+import BIAMFBLogo from '../../Assets/WhiteLabels/BIA/biamfbcombinedlogo.png';
+import JHSAMFBLogo from '../../Assets/WhiteLabels/JeffcoAssets/jeffcobrand.png';
+import VELogo from '../../Assets/WhiteLabels/VillageExchange/villageExchangeLogo.png';
+import CCHMFBLogo from '../../Assets/WhiteLabels/ColoradoCoalitionHomeless/cchcobrand.png';
+import LGSLogo from '../../Assets/WhiteLabels/LetsGetSet/lgsLogo.png';
+import GACLogo from '../../Assets/WhiteLabels/GetAheadColorado/gaclogo.png';
+import FIRCLogo from '../../Assets/WhiteLabels/FircCobrand/FIRCLogo.png';
 import COMFBLogo from '../../Assets/colorado-mfb-logo.png';
-import DHSMFBLogo from '../../Assets/DenverHumanServices/denverHSLogo.png';
-import CCIGLogo from '../../Assets/CCIG/ccigLogo.png';
+import DHSMFBLogo from '../../Assets/WhiteLabels/DenverHumanServices/denverHSLogo.png';
+import CCIGLogo from '../../Assets/WhiteLabels/CCIG/ccigLogo.png';
 
 const logoMap = {
   MFB_COLogo: MFBCOLogo,
