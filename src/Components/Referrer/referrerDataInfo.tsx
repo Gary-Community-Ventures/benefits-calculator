@@ -11,6 +11,7 @@ import FIRCLogo from '../../Assets/WhiteLabels/FircCobrand/FIRCLogo.png';
 import COMFBLogo from '../../Assets/colorado-mfb-logo.png';
 import DHSMFBLogo from '../../Assets/WhiteLabels/DenverHumanServices/denverHSLogo.png';
 import CCIGLogo from '../../Assets/WhiteLabels/CCIG/ccigLogo.png';
+// import ECMFBLogo from '../../Assets/WhiteLabels/EagleCounty/eagleCountyLogo.png';
 
 const logoMap = {
   MFB_COLogo: MFBCOLogo,
@@ -26,6 +27,7 @@ const logoMap = {
   CO_MFBLogo: COMFBLogo,
   DHS_MFBLogo: DHSMFBLogo,
   CCIG_Logo: CCIGLogo,
+  EC_MFBLogo: CCIGLogo,
 };
 
 export type LogoSource = keyof typeof logoMap;

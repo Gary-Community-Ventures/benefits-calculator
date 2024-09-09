@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router';
-import ccigLandingPageImage from '../../Assets/CCIG/ccigLandingPage.png';
+import ccigLandingPageImage from '../../Assets/WhiteLabels/CCIG/ccigLandingPage.png';
 import './CcigLandingPage.css';
 import { useQueryString } from '../QuestionComponents/questionHooks';
 
