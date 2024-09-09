@@ -55,7 +55,7 @@ const AccordionsContainer = ({ componentDetails, submitted }: Props) => {
 
   useEffect(() => {
     errorController.updateError(formData.hasBenefits, formData);
-  }, [expanded]);
+  }, [formData.hasBenefits, formData.benefits]);
 
   const createAccordions = (accordionsInfo: BenefitAccordion[]) => {
     const categoryAccordions = accordionsInfo.map((accordionData, index) => {
