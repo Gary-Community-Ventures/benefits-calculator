@@ -33,7 +33,6 @@ const logoMap = {
 export type LogoSource = keyof typeof logoMap;
 
 export const renderLogoSource = (sourceLabel: LogoSource, logoAlt: string, logoClass: string) => {
-  console.log({sourceLabel})
   const logoSrc = logoMap[sourceLabel] || MFBDEFAULT;
   return <img src={logoSrc} alt={logoAlt} className={logoClass} />;
 };
