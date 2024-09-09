@@ -1,9 +1,9 @@
 import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router';
-import ccigLandingPageImage from '../../Assets/WhiteLabels/CCIG/ccigLandingPage.png';
-import './CcigLandingPage.css';
+import ccigLandingPageImage from '../../Assets/COWhiteLabels/CCIG/ccigLandingPage.png';
 import { useQueryString } from '../QuestionComponents/questionHooks';
+import './CcigLandingPage.css';
 
 export default function CcigLandingPage() {
   const navigate = useNavigate();
