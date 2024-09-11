@@ -33,7 +33,6 @@ const PreviousButton = ({ navFunction }: Props) => {
       variant="outlined"
       onClick={navigationFunction}
       startIcon={<NavigateBeforeIcon sx={{ mr: '-8px' }} className="rtl-mirror" />}
-      tabIndex={2}
     >
       <FormattedMessage id="previousButton" defaultMessage="Back" />
     </Button>
