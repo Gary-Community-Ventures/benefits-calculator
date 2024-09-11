@@ -135,6 +135,7 @@ export const ZipcodeStep = () => {
               variant="outlined"
               error={errors.zipcode !== undefined}
               helperText={getZipcodeHelperText(errors.zipcode !== undefined)}
+              autoFocus
             />
           )}
         />
