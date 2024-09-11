@@ -1,6 +1,7 @@
 .feedback-container {
   display: flex;
   flex-direction: column;
+  justify-content: end;
   width: 18.75rem;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -8,9 +9,13 @@
   padding: 1rem;
   background-color: white;
   font-family: Arial, sans-serif;
-  position: fixed;
-  bottom: 23rem;
-  right: 5rem;
+
+}
+
+.feedback-container-wrapper{
+  display: flex;
+  justify-content: end;
+  margin-right: 5rem;
 }
 
 .feedback-header {
@@ -19,6 +24,8 @@
   font-weight: bold;
   margin-bottom: 0.75rem;
   font-family: 'Roboto Slab', serif;
+  display:flex;
+  justify-content: space-between;
 }
 
 .border-bottom {
@@ -47,12 +54,10 @@
 }
 
 .close-button{
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
   border: none;
   font-size: 16px;
   cursor: pointer;
   color: grey;
+  z-index: 1001;
+  margin-top: -0.5rem;
 }
