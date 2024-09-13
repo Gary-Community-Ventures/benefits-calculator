@@ -66,3 +66,9 @@
   height: max-content;
   font-weight: bold;
 }
+
+.eaglecounty-logo-size {
+  max-width: 90%;
+  max-height: 80%;
+  display: block;
+}
