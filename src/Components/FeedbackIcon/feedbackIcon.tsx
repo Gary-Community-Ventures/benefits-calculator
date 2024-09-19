@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {ReactComponent as FeedbackIconImage} from '../../Assets/icons/feedback.svg';
+import { ReactComponent as FeedbackIconImage } from '../../Assets/icons/feedback.svg';
 import './feedbackIcon.css';
 import FeedbackModal from './feedbackModal';
 

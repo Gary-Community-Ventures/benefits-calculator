@@ -14,10 +14,9 @@
   margin-bottom: -11rem; /* Adjust based on the height of the icon */
   right: 5rem;
   z-index: 1010;
-
 }
 
-.feedback-container-wrapper{
+.feedback-container-wrapper {
   display: flex;
   justify-content: end;
   margin-right: 5rem;
@@ -29,7 +28,7 @@
   font-weight: bold;
   margin-bottom: 0.75rem;
   font-family: 'Roboto Slab', serif;
-  display:flex;
+  display: flex;
   justify-content: space-between;
 }
 
@@ -58,7 +57,7 @@
   justify-content: space-between;
 }
 
-.close-button{
+.close-button {
   border: none;
   font-size: 1rem;
   cursor: pointer;
