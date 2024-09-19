@@ -4,11 +4,16 @@
   justify-content: end;
   width: 18.75rem;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   background-color: white;
   font-family: Arial, sans-serif;
+  /*  */
+  position: sticky;
+  margin-bottom: -11rem; /* Adjust based on the height of the icon */
+  right: 5rem;
+  z-index: 1010;
 
 }
 
@@ -55,7 +60,7 @@
 
 .close-button{
   border: none;
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
   color: grey;
   z-index: 1001;
