@@ -4,15 +4,9 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import Wrapper from './Components/Wrapper/Wrapper';
 import './index.css';
-import TagManager from 'react-gtm-module';
+import { initializeGTM } from './Assets/analytics';;
 
-const gtmId = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
-
-if (gtmId) {
-  TagManager.initialize({ gtmId });
-} else {
-  console.error('REACT_APP_GOOGLE_ANALYTICS_ID is not defined. Google Tag Manager will not be initialized.');
-}
+initializeGTM();
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
