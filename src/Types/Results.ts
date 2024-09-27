@@ -43,7 +43,6 @@ export type Program = {
   low_confidence: boolean;
   navigators: ProgramNavigator[];
   documents: Translation[];
-  multiple_tax_units: boolean;
   warning_messages: Translation[];
 };
 
