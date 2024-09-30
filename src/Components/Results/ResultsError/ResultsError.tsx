@@ -18,7 +18,7 @@ const ResultsError = () => {
         <p className="error-message">
           <FormattedMessage
             id="results-error.message"
-            defaultMessage="We're sorry. We are having some trouble completing your request. Please make sure you have completed all of the questions on the screen and try again. If you are still unable to load your benefits results, please contact myfriendben@garycommunity.org."
+            defaultMessage="We're sorry. We are having some trouble completing your request. Please make sure you have completed all of the questions on the screen and try again. If you are still unable to load your benefits results, please contact myfriendben@codethedream.org."
           />
         </p>
         <Button

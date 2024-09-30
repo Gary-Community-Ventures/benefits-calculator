@@ -28,8 +28,8 @@ const Footer = () => {
               <p className="white-font italicized">
                 <FormattedMessage id="footer-questions" defaultMessage="Questions? Contact" />
               </p>
-              <a href="mailto:myfriendben@garycommunity.org" className="white-font italicized footer-link">
-                myfriendben@garycommunity.org
+              <a href="mailto:myfriendben@codethedream.org" className="white-font italicized footer-link">
+                myfriendben@codethedream.org
               </a>
             </div>
           </div>
