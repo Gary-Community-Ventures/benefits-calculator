@@ -527,6 +527,8 @@ const Confirmation = () => {
       case 'monthly':
         num = Number(incomeAmount) * 12;
         break;
+      case 'yearly':
+        num = Number(incomeAmount);
       case 'hourly':
         num = Number(incomeAmount) * Number(hoursPerWeek) * 52;
         break;
@@ -546,17 +548,23 @@ const Confirmation = () => {
         defaultMessage: ' hours/week ',
       });
       const annualAmount = displayAnnualIncome(incomeStream);
+  
+      // Conditional logic extracted into variables
+      const isHourly = incomeStream.incomeFrequency === 'hourly';
+      const isYearly = incomeStream.incomeFrequency === 'yearly';
+      const displayedFrequency = isYearly ? 'annually' : incomeFrequency;
+      const showAnnualAmount = !isYearly && annualAmount;
 
       return (
         <li key={incomeStream.incomeStreamName + index}>
           <b>{incomeStreamName}: </b>
-          {incomeStream.incomeFrequency === 'hourly' ? (
+          {incomeAmount} {isHourly ? (
             <>
-              {incomeAmount} {incomeFrequency} ~{hoursPerWeek} {translatedHrsPerWkText} {annualAmount}
+              {incomeFrequency} ~{hoursPerWeek} {translatedHrsPerWkText} {annualAmount}
             </>
           ) : (
             <>
-              {incomeAmount} {incomeFrequency} {annualAmount}
+              {displayedFrequency} {showAnnualAmount && annualAmount}
             </>
           )}
         </li>
