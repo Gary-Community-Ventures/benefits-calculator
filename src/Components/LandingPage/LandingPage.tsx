@@ -83,8 +83,8 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
         };
       default:
         return {
-          privacyPolicyLink: 'https://co.myfriendben.org/en/data-privacy-policy',
-          addTermsConsentToContact: 'https://co.myfriendben.org/en/additional-terms-and-consent-to-contact',
+          privacyPolicyLink: 'https://bennc.org/privacy-policy/',
+          addTermsConsentToContact: ' https://bennc.org/additional-terms-and-consent-to-contact/',
         };
     }
   };

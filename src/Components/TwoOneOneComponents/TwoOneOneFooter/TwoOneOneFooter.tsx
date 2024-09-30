@@ -180,7 +180,7 @@ const TwoOneOneFooter = () => {
             &nbsp;
           </Link>
           <Link
-            href="https://co.myfriendben.org/en/data-privacy-policy"
+            href="https://bennc.org/privacy-policy/"
             underline="none"
             target="_blank"
             aria-label={intl.formatMessage(twoOneOneTOSALProps)}

@@ -21,8 +21,8 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   const context = useContext(Context);
   const locale = context.locale.toLowerCase();
   const { formData, setFormData } = context;
-  let privacyLink = 'https://co.myfriendben.org/en/data-privacy-policy';
-  const consentToContactLink = 'https://co.myfriendben.org/en/additional-terms-and-consent-to-contact';
+  let privacyLink = 'https://bennc.org/privacy-policy/';
+  const consentToContactLink = ' https://bennc.org/additional-terms-and-consent-to-contact/';
 
   if (locale === 'es') {
     privacyLink = 'https://co.myfriendben.org/es/data-privacy-policy';

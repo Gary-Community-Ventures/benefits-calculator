@@ -38,7 +38,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-policy-container">
-          <a href="https://co.myfriendben.org/en/data-privacy-policy" target="_blank" className="policy-link">
+          <a href="https://bennc.org/privacy-policy/" target="_blank" className="policy-link">
             <FormattedMessage id="footer.privacyPolicy" defaultMessage="Privacy Policy" />
           </a>
         </div>
