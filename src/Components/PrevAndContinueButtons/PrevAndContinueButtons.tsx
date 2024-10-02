@@ -4,14 +4,13 @@ import { FormattedMessageType } from '../../Types/Questions';
 
 type PrevAndContinueButtonsProps = {
   backNavigationFunction: () => void;
-  formContinueButtonFM: FormattedMessageType;
 };
 
-const PrevAndContinueButtons = ({ backNavigationFunction, formContinueButtonFM }: PrevAndContinueButtonsProps) => {
+const PrevAndContinueButtons = ({ backNavigationFunction }: PrevAndContinueButtonsProps) => {
   return (
     <div className="question-buttons">
       <PreviousButton navFunction={backNavigationFunction} />
-      <FormContinueButton formattedMessage={formContinueButtonFM} />
+      <FormContinueButton />
     </div>
   );
 };

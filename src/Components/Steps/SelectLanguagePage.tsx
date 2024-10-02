@@ -79,7 +79,7 @@ const SelectLanguagePage = () => {
             {createMenuItems(languageOptions, 'selectLang.disabledSelectMenuItemText', 'Select a language')}
           </Select>
         </FormControl>
-        <div style={{marginTop: '1rem'}}>
+        <div style={{ marginTop: '1rem' }}>
           <FormContinueButton>
             <FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />
           </FormContinueButton>
