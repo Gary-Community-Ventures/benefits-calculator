@@ -1,5 +1,5 @@
 import { useConfig } from '../Config/configHook.tsx';
-import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent, Box } from '@mui/material';
+import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
@@ -79,11 +79,11 @@ const SelectLanguagePage = () => {
             {createMenuItems(languageOptions, 'selectLang.disabledSelectMenuItemText', 'Select a language')}
           </Select>
         </FormControl>
-        <Box sx={{ mt: '1rem' }}>
-          <FormContinueButton
-            formattedMessage={<FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />}
-          />
-        </Box>
+        <div style={{marginTop: '1rem'}}>
+          <FormContinueButton>
+            <FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />
+          </FormContinueButton>
+        </div>
       </form>
     </main>
   );
