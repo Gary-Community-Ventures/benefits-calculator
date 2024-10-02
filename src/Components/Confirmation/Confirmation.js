@@ -1,4 +1,4 @@
-import { useNavigate, Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
@@ -17,13 +17,16 @@ import { ReactComponent as Immediate } from '../../Assets/icons/immediate.svg';
 import { ReactComponent as Referral } from '../../Assets/icons/referral.svg';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import './Confirmation.css';
+import { useTranslateNumber } from '../../Assets/languageOptions';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
 
 const Confirmation = () => {
-  const { formData } = useContext(Context);
+  const { formData, locale } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();
   const intl = useIntl();
   const locationState = { state: { routedFromConfirmationPg: true } };
+  const translateNumber = useTranslateNumber();
 
   const acuteConditionOptions = useConfig('acute_condition_options');
   const categoryBenefits = useConfig('category_benefits');
@@ -77,7 +80,7 @@ const Confirmation = () => {
                 <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />
                 {': '}
               </b>
-              {allHouseholdAges[i]}
+              {translateNumber(allHouseholdAges[i])}
             </article>
             <article className="section-p">
               <b>
@@ -257,12 +260,22 @@ const Confirmation = () => {
 
   const displayHouseholdSizeSection = () => {
     const { householdSize } = formData;
-    const householdSizeDescriptor =
-      householdSize === 1 ? (
-        <FormattedMessage id="confirmation.displayAllFormData-personLabel" defaultMessage="person" />
-      ) : (
+    let householdSizeDescriptor = (
+      <FormattedMessage id="confirmation.displayAllFormData-personLabel" defaultMessage="person" />
+    );
+
+    if (householdSize >= 2) {
+      householdSizeDescriptor = (
         <FormattedMessage id="confirmation.displayAllFormData-peopleLabel" defaultMessage="people" />
       );
+      // Russian uses the singular of people for 1-4 people
+      if (householdSize <= 4 && locale === 'ru') {
+        householdSizeDescriptor = (
+          <FormattedMessage id="confirmation.displayAllFormData-personLabel" defaultMessage="person" />
+        );
+      }
+    }
+
     const linkTo = getQuestionUrl('householdSize');
     const editHHSizeAriaLabelProps = {
       id: 'confirmation.hhSize-AL',
@@ -286,7 +299,7 @@ const Confirmation = () => {
               <FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size" />
               {': '}
             </b>
-            {householdSize} {householdSizeDescriptor}
+            {translateNumber(householdSize)} {householdSizeDescriptor}
           </article>
         </Grid>
         <Grid item xs={2} display="flex" justifyContent="flex-end">
@@ -318,7 +331,7 @@ const Confirmation = () => {
             />
           </p>
           <article className="section-p">
-            {`$${Number(householdAssets).toLocaleString(2)} `}
+            {`$${translateNumber(Number(householdAssets).toLocaleString(2))} `}
             <i>
               <FormattedMessage
                 id="confirmation.displayAllFormData-householdResourcesDescription"
@@ -359,7 +372,7 @@ const Confirmation = () => {
             <b>
               <FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />
             </b>
-            {zipcode}
+            {translateNumber(zipcode)}
           </p>
           <p className="section-p">
             <b>
@@ -434,20 +447,9 @@ const Confirmation = () => {
   };
 
   const displayAllFormData = () => {
-    // const allBenefitsList = {
-    //   ...categoryBenefits.cash.benefits,
-    //   ...categoryBenefits.childCare.benefits,
-    //   ...categoryBenefits.foodAndNutrition.benefits,
-    //   ...categoryBenefits.healthCare.benefits,
-    //   ...categoryBenefits.housingAndUtilities.benefits,
-    //   ...categoryBenefits.transportation.benefits,
-    // };
-
-
-    const allBenefitsList = Object.keys(categoryBenefits).reduce((acc, key) => {
-      return { ...acc, ...categoryBenefits[key].benefits };
-    }, {});
-
+    const allBenefitsList = Object.values(categoryBenefits)
+      .map((category) => category?.benefits ?? {})
+      .reduce((acc, benefits) => ({ ...acc, ...benefits }), {});
 
     return (
       <>
@@ -489,7 +491,7 @@ const Confirmation = () => {
         <article key={expense.expenseSourceName + index} className="section-p">
           {' '}
           <b>{getExpenseSourceLabel(expense.expenseSourceName)}: </b>
-          {formatToUSD(Number(expense.expenseAmount))}{' '}
+          {translateNumber(formatToUSD(Number(expense.expenseAmount)))}{' '}
         </article>
       );
     });
@@ -558,7 +560,7 @@ const Confirmation = () => {
       return (
         <li key={incomeStream.incomeStreamName + index}>
           <b>{incomeStreamName}: </b>
-          {incomeAmount} {isHourly ? (
+          {translateNumber(incomeAmount)} {isHourly ? (
             <>
               {incomeFrequency} ~{hoursPerWeek} {translatedHrsPerWkText} {annualAmount}
             </>
@@ -574,17 +576,29 @@ const Confirmation = () => {
     return mappedListItems;
   };
 
-  const listAllTruthyValues = (selectedOptions, relatedOptionsList) => {
-    const mappedListItems = selectedOptions.map((option) => {
-      return (
-        <p key={option} className="bottom-margin">
-          {' '}
-          {relatedOptionsList[option]}{' '}
-        </p>
-      );
-    });
+  const listAllTruthyValues = (selectedOptions, relatedOptionsList, stateVariableName) => {
+    if (stateVariableName === 'benefits') {
+      const mappedListItems = selectedOptions.map((option) => {
+        return (
+          <p key={relatedOptionsList[option].name.props.id} className="bottom-margin">
+            <strong>{relatedOptionsList[option].name}</strong>
+            <span>{relatedOptionsList[option].description}</span>
+          </p>
+        );
+      });
 
-    return mappedListItems;
+      return mappedListItems;
+    } else {
+      const mappedListItems = selectedOptions.map((option) => {
+        return (
+          <p key={option} className="bottom-margin">
+            {relatedOptionsList[option]}
+          </p>
+        );
+      });
+
+      return mappedListItems;
+    }
   };
 
   const displayHHCheckboxSection = (
@@ -611,7 +625,9 @@ const Confirmation = () => {
             <FormattedMessage id={fMessageId} defaultMessage={fMessageDefaultMsg} />
           </p>
           {hasAnyTruthyOptions ? (
-            <article className="section-p">{listAllTruthyValues(truthyOptions, optionsList)}</article>
+            <article className="section-p">
+              {listAllTruthyValues(truthyOptions, optionsList, stateVariableName)}
+            </article>
           ) : (
             <p className="section-p">
               <FormattedMessage id="confirmation.noIncome" defaultMessage=" None" />
@@ -662,9 +678,9 @@ const Confirmation = () => {
 
   return (
     <main className="benefits-form">
-      <h1 className="sub-header">
+      <QuestionHeader>
         <FormattedMessage id="confirmation.return-subheader" defaultMessage="Is all of your information correct?" />
-      </h1>
+      </QuestionHeader>
       <div className="confirmation-container">{displayAllFormData()}</div>
       <div className="prev-continue-results-buttons confirmation">
         <PreviousButton navFunction={() => navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`)} />

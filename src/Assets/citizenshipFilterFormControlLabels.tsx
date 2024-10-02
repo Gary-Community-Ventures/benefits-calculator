@@ -37,7 +37,7 @@ const citizenshipFilterFormControlLabels: Record<CitizenLabelOptions, FormattedM
   non_citizen: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-non_citizen"
-      defaultMessage="Individuals without lawful U.S. presence or citizenship (includes DACA recipients)"
+      defaultMessage="Individuals without lawful U.S. presence or citizenship"
     />
   ),
   green_card: <FormattedMessage id="citizenshipFCtrlLabel-green_card" defaultMessage="Green card holders" />,
@@ -60,7 +60,12 @@ const citizenshipFilterFormControlLabels: Record<CitizenLabelOptions, FormattedM
       defaultMessage="Admitted refugees or asylees (special rules or waiting periods may apply)"
     />
   ),
-  other: <FormattedMessage id="citizenshipFCtrlLabel-other" defaultMessage="Other lawfully present noncitizens" />,
+  other: (
+    <FormattedMessage
+      id="citizenshipFCtrlLabel-other"
+      defaultMessage="Other lawfully present noncitizens (includes DACA recipients)"
+    />
+  ),
   otherWithWorkPermission: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-other_work_permission"

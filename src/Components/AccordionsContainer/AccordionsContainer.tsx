@@ -38,11 +38,8 @@ const AccordionsContainer = ({ componentDetails, submitted }: Props) => {
   const { formData, config } = useContext(Context);
   let formattedBenefits: BenefitAccordion[] = [];
 
-  if (config) {
-    formattedBenefits = formatCategoryBenefits(config.category_benefits);
-  } else {
-    console.error('Error: config or category_benefits is undefined.');
-  }
+  if (config) formattedBenefits = formatCategoryBenefits(config.category_benefits);
+  else throw new Error('Error: config or category_benefits is undefined.');
 
   const [expanded, setExpanded] = useState<boolean | number>(false);
 
@@ -58,7 +55,7 @@ const AccordionsContainer = ({ componentDetails, submitted }: Props) => {
 
   useEffect(() => {
     errorController.updateError(formData.hasBenefits, formData);
-  }, [expanded]);
+  }, [formData.hasBenefits, formData.benefits]);
 
   const createAccordions = (accordionsInfo: BenefitAccordion[]) => {
     const categoryAccordions = accordionsInfo.map((accordionData, index) => {

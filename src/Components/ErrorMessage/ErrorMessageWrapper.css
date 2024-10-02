@@ -2,6 +2,7 @@
   display: flex;
   color: #c6252b;
   margin-bottom: 0.5rem;
+  align-items: center;
 }
 
 .error-message {

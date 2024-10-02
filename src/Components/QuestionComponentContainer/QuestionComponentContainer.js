@@ -3,16 +3,22 @@ import { useParams } from 'react-router-dom';
 import { useConfig } from '../Config/configHook.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Radiofield from '../Radiofield/Radiofield';
-import Textfield from '../Textfield/Textfield';
+import Textfield from '../Textfield/Textfield.js';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
-import { useErrorController, zipcodeHasError } from '../../Assets/validationFunctions.tsx';
+import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
+import { ZipcodeStep } from '../Steps/ZipcodeStep';
 import './QuestionComponentContainer.css';
+import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import { getStepNumber } from '../../Assets/stepDirectory';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -23,9 +29,8 @@ const QuestionComponentContainer = ({
   handleExpenseSourcesSubmit,
   handleCheckboxChange,
 }) => {
-  const { config, formData, setFormData } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const acuteConditionOptions = useConfig('acute_condition_options');
-  const countiesByZipcode = useConfig('counties_by_zipcode');
   const referralOptions = useConfig('referral_options');
   const signUpOptions = useConfig('sign_up_options');
   let { id } = useParams();
@@ -123,10 +128,12 @@ const QuestionComponentContainer = ({
     const isHealthQuestion = inputName === 'healthInsurance';
 
     return (
-      <div className="question-container" id={id}>
-        {<h2 className="question-label">{matchingQuestion.question}</h2>}
+      <div>
+        <QuestionQuestion>{matchingQuestion.question}</QuestionQuestion>
         {matchingQuestion.questionDescription && (
-          <p className="question-description">{matchingQuestion.questionDescription}</p>
+          <>
+            <QuestionDescription>{matchingQuestion.questionDescription}</QuestionDescription>
+          </>
         )}
         {component}
         {shouldRenderFollowUpQuestions(hasFollowUpQuestions, inputName) && (
@@ -150,9 +157,7 @@ const QuestionComponentContainer = ({
     if (!hasFollowUpQuestions) {
       return false;
     }
-    if (inputName === 'zipcode') {
-      return !zipcodeHasError(formData.zipcode, undefined, config);
-    }
+
     if (formData[inputName] === true) {
       // this case is for a radio button question where the user selected "yes"
       return true;
@@ -204,31 +209,38 @@ const QuestionComponentContainer = ({
   const renderHeaderAndSubheader = () => {
     return (
       <>
-        {matchingQuestion.subheader && (
-          <strong className="question-secondary-header">{matchingQuestion.subheader}</strong>
-        )}
-        {matchingQuestion.header && <h1 className="sub-header">{matchingQuestion.header}</h1>}
+        {matchingQuestion.subheader && <QuestionLeadText>{matchingQuestion.subheader}</QuestionLeadText>}
+        {matchingQuestion.header && <QuestionHeader>{matchingQuestion.header}</QuestionHeader>}
       </>
     );
   };
 
-  return (
-    <main className="benefits-form">
-      {renderHeaderAndSubheader()}
-      {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
-        createComponent(renderTextfieldComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
-          createComponent(renderRadiofieldComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
-          createComponent(renderNoAnswerComponent(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
-          createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
-          createComponent(renderOptionCardGroup(matchingQuestion))) ||
-        (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
-          createComponent(renderBasicSelectComponent(matchingQuestion)))}
-    </main>
-  );
+  switch (Number(id)) {
+    case getStepNumber('zipcode', formData.immutableReferrer):
+      return (
+        <main className="benefits-form">
+          <ZipcodeStep />
+        </main>
+      );
+    default:
+      return (
+        <main className="benefits-form">
+          {renderHeaderAndSubheader()}
+          {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
+            createComponent(renderTextfieldComponent(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
+              createComponent(renderRadiofieldComponent(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
+              createComponent(renderNoAnswerComponent(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
+              createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
+              createComponent(renderOptionCardGroup(matchingQuestion))) ||
+            (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
+              createComponent(renderBasicSelectComponent(matchingQuestion)))}
+        </main>
+      );
+  }
 };
 
 export default QuestionComponentContainer;

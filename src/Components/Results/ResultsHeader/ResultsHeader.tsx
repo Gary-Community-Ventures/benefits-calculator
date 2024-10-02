@@ -8,6 +8,8 @@ import { useResultsContext } from '../Results.tsx';
 import { calculateTotalValue } from '../FormattedValue.tsx';
 import '../../Results/Results.css';
 import { TAX_CREDIT_CATEGORY } from '../../../Assets/resultsConstants.ts';
+import { useTranslateNumber } from '../../../Assets/languageOptions';
+import Login from '../../Login/Login';
 
 type ResultsHeaderProps = {
   type: 'program' | 'need';
@@ -18,6 +20,7 @@ const ProgramsHeader = () => {
   const { programs } = useResultsContext();
   const { theme, formData } = useContext(Context);
   const taxCredit = calculateTotalValue(programs, TAX_CREDIT_CATEGORY);
+  const translateNumber = useTranslateNumber();
 
   // don't add tax credits to total value
   const categoriesCalculated = new Set([TAX_CREDIT_CATEGORY]);
@@ -35,21 +38,23 @@ const ProgramsHeader = () => {
     <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor, padding: '1rem' }}>
       <header className="results-header">
         <section className="results-header-programs-count-text">
-          <div className="results-header-programs-count">{programs.length}</div>
+          <div className="results-header-programs-count">{translateNumber(programs.length)}</div>
           <div>
             <FormattedMessage id="results.header-programsFound" defaultMessage="Programs Found" />
           </div>
         </section>
         <section className="column-row">
           <section className="results-data-cell">
-            <div className="results-header-values">${Math.round(estimatedMonthlySavings / 12).toLocaleString()}</div>
+            <div className="results-header-values">
+              ${translateNumber(Math.round(estimatedMonthlySavings / 12).toLocaleString())}
+            </div>
             <div className="results-header-label">
               <FormattedMessage id="results.header-monthlyValue" defaultMessage="Estimated Monthly Savings" />
             </div>
           </section>
           {formData.immutableReferrer !== 'lgs' && (
             <section className="results-data-cell">
-              <div className="results-header-values">${Math.round(taxCredit).toLocaleString()}</div>
+              <div className="results-header-values">${translateNumber(Math.round(taxCredit).toLocaleString())}</div>
               <div className="results-header-label">
                 <FormattedMessage id="results.header-taxCredits" defaultMessage="Annual Tax Credit" />
               </div>
@@ -78,6 +83,8 @@ const NeedsHeader = () => {
 
 const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
   const { uuid } = useParams();
+  const { staffToken, setStaffToken } = useContext(Context);
+  const { isAdminView } = useResultsContext();
 
   return (
     <>
@@ -86,6 +93,7 @@ const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
         navigateToLink={`/${uuid}/confirm-information`}
         BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO SCREENER" />}
       />
+      {isAdminView && <Login setToken={setStaffToken} loggedIn={staffToken !== undefined} />}
       <div className="results-header-container">{type === 'need' ? <NeedsHeader /> : <ProgramsHeader />}</div>
     </>
   );

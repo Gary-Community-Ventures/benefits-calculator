@@ -8,7 +8,7 @@ import {
 } from '../Types/ApiFormData.js';
 import { FormData, HouseholdData } from '../Types/FormData.js';
 import { putScreen, postScreen, putUser } from '../apiCalls.js';
-import { Language } from '../Types/Language.js';
+import { Language } from './languageOptions.js';
 
 const getScreensBody = (formData: FormData, languageCode: Language) => {
   const householdMembers = getHouseholdMembersBodies(formData);
@@ -48,6 +48,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     has_nslp: formData.benefits.nslp,
     has_oap: formData.benefits.oap,
     has_pell_grant: formData.benefits.pell,
+    has_nfp: formData.benefits.nfp,
     has_rtdlive: formData.benefits.rtdlive,
     has_snap: formData.benefits.snap,
     has_ssdi: formData.benefits.ssdi,
@@ -58,6 +59,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     has_wic: formData.benefits.wic,
     has_upk: formData.benefits.upk,
     has_coctc: formData.benefits.coctc,
+    has_fatc: formData.benefits.fatc,
     referral_source: finalReferralSource ?? null,
     referrer_code: formData.immutableReferrer ?? null,
     needs_food: formData.acuteHHConditions.food,

@@ -1,18 +1,21 @@
-import { CardContent, Button, Typography, FormControlLabel, Checkbox, Box, Link } from '@mui/material';
+import { CardContent, Button, FormControlLabel, Checkbox, Box, Link } from '@mui/material';
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createScreen } from '../../Assets/updateScreen.ts';
+import { useConfig } from '../Config/configHook.tsx';
 import {
   useErrorController,
   displayAgreeToTermsErrorMessage,
   termsOfServiceHasError,
 } from '../../Assets/validationFunctions.tsx';
-import './LandingPage.css';
 import dataLayerPush from '../../Assets/analytics.ts';
 import PreviousButton from '../PreviousButton/PreviousButton.tsx';
 import { STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory.ts';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import { useQueryString } from '../QuestionComponents/questionHooks';
+import './LandingPage.css';
 
 interface LandingPageProps {
   handleCheckboxChange: (event: React.FormEvent<HTMLInputElement>) => void;
@@ -20,11 +23,14 @@ interface LandingPageProps {
 
 const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   const { formData, locale, screenDoneLoading, theme } = useContext(Context);
-  const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
+  const queryString = useQueryString();
   let { uuid } = useParams();
   const navigate = useNavigate();
   const privacyErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
   const ageErrorController = useErrorController(termsOfServiceHasError, displayAgreeToTermsErrorMessage);
+  const publicChargeOption = useConfig('public_charge_rule');
+  const privacyLink = useConfig('privacy_policy');
+  const consentToContactLink = useConfig('consent_to_contact');
 
   useEffect(() => {
     const continueOnEnter = (event: KeyboardEvent) => {
@@ -65,33 +71,22 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
   };
 
   const getLinksForCheckbox = () => {
-    switch (locale) {
-      case 'es':
-        return {
-          privacyPolicyLink: 'https://co.myfriendben.org/es/data-privacy-policy',
-          addTermsConsentToContact: 'https://co.myfriendben.org/es/additional-terms-and-consent-to-contact',
-        };
-      case 'vi':
-        return {
-          privacyPolicyLink: 'https://co.myfriendben.org/vi/data-privacy-policy',
-          addTermsConsentToContact: 'https://co.myfriendben.org/vi/additional-terms-and-consent-to-contact',
-        };
-      case 'fr':
-        return {
-          privacyPolicyLink: 'https://co.myfriendben.org/fr/data-privacy-policy',
-          addTermsConsentToContact: 'https://co.myfriendben.org/fr/additional-terms-and-consent-to-contact',
-        };
-      default:
-        return {
-          privacyPolicyLink: 'https://bennc.org/privacy-policy/',
-          addTermsConsentToContact: ' https://bennc.org/additional-terms-and-consent-to-contact/',
-        };
+    if (locale in privacyLink && locale in consentToContactLink) {
+      return {
+        privacyPolicyLink: privacyLink[locale],
+        addTermsConsentToContact: consentToContactLink[locale],
+      };
+    } else {
+      return {
+        privacyPolicyLink: privacyLink['en-us'],
+        addTermsConsentToContact: consentToContactLink['en-us'],
+      };
     }
   };
 
   const createCheckboxLabel = () => {
     return (
-      <div className="main-paragraph">
+      <div className="landing-pg-font">
         <FormattedMessage
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
@@ -103,33 +98,29 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
         <Link href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" sx={{ color: theme.midBlueColor }}>
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
         </Link>
-        .
+        <FormattedMessage id="landingPage-disclaimer-lable-end" defaultMessage="." />
       </div>
     );
   };
 
   return (
     <main className="benefits-form">
-      <h1 className="sub-header">
+      <QuestionHeader>
         <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
-      </h1>
-      <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }}>
-        <div className="main-paragraph">
-          <Typography variant="body1">
-            <FormattedMessage
-              id="landingPage.body"
-              defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:"
-            />
-          </Typography>
-        </div>
+      </QuestionHeader>
+      <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }} className="landing-pg-font">
+        <FormattedMessage
+          id="landingPage.body"
+          defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:"
+        />
         <ul className="landing-page-list-container">
-          <li className="main-paragraph">
+          <li>
             <FormattedMessage
               id="landingPage.firstBulletItem"
               defaultMessage="MyFriendBen only provides estimates of what you may qualify for. You should not rely on these estimates. You must confirm your final eligibility and benefit amount with the proper agency or other decision maker."
             />
           </li>
-          <li className="main-paragraph">
+          <li>
             <div>
               <FormattedMessage
                 id="landingPage.publicCharge"
@@ -137,8 +128,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
               />
               <a
                 className="link-color"
-                href="https://www.ncjustice.org/publications/public-charge-the-law-has-changed/"
-                target="_blank"
+                href={publicChargeOption.link}
                 onClick={() => {
                   dataLayerPush({
                     event: 'public_charge',
@@ -151,13 +141,13 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
                   defaultMessage="Colorado Department of Human Services Public Charge Rule"
                 />
               </a>
-              .
+              <FormattedMessage id="landingPage.publicCharge.afterLink" defaultMessage="." />
             </div>
           </li>
         </ul>
       </CardContent>
       <Box sx={{ mt: '.5rem' }}>
-        <CardContent>
+        <CardContent className="landing-pg-font">
           <FormControlLabel
             control={
               <Checkbox
@@ -180,7 +170,7 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
                 />
               }
               label={
-                <div className="main-paragraph">
+                <div className="landing-pg-font">
                   <FormattedMessage
                     id="disclaimer-label-age"
                     defaultMessage="I confirm I am 13 years of age or older."
@@ -194,7 +184,15 @@ const LandingPage = ({ handleCheckboxChange }: LandingPageProps) => {
         </CardContent>
       </Box>
       <div className="back-continue-buttons">
-        <PreviousButton navFunction={() => navigate(`/step-1${queryString}`)} />
+        <PreviousButton
+          navFunction={() => {
+            if (uuid !== undefined) {
+              navigate(`/${uuid}/step-1${queryString}`);
+              return;
+            }
+            navigate(`/step-1${queryString}`);
+          }}
+        />
         <Button variant="contained" onClick={handleContinue}>
           <FormattedMessage id="continue-button" defaultMessage="Continue" />
         </Button>

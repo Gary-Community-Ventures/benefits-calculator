@@ -3,8 +3,10 @@ import { Context } from '../Wrapper/Wrapper';
 import Header from '../Header/Header';
 import TwoOneOneFooter from '../TwoOneOneComponents/TwoOneOneFooter/TwoOneOneFooter';
 import TwoOneOneHeader from '../TwoOneOneComponents/TwoOneOneHeader/TwoOneOneHeader';
-import { FormattedMessage } from 'react-intl';
 import Footer from '../Footer/Footer';
+import BackToScreen from '../BackToScreen/BackToScreen';
+import { useResultsContext } from '../Results/Results';
+import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
 
 export const BrandedHeader = () => {
   const { formData } = useContext(Context);
@@ -24,40 +26,17 @@ export const BrandedFooter = () => {
   return <Footer />;
 };
 
-type ResultsHeaderProps = {
-  programCount: number;
-  programsValue: number;
-  taxCreditsValue: number;
-};
-
-export const BrandedResultsHeader = ({ programsValue, taxCreditsValue, programCount }: ResultsHeaderProps) => {
+export const ResultsMessage = () => {
   const { formData } = useContext(Context);
+  const { missingPrograms } = useResultsContext();
 
-  if (formData.immutableReferrer === 'lgs') {
-    return (
-      <h1 className="bottom-border program-value-header">
-        {programCount}
-        <FormattedMessage
-          id="results.return-programsUpToLabel"
-          defaultMessage=" programs with an estimated value of "
-        />
-        ${Math.round(programsValue / 12).toLocaleString()}
-        <FormattedMessage
-          id="results.return-perMonthLabel_lsg"
-          defaultMessage=" monthly in cash or reduced expenses for you to consider"
-        />
-      </h1>
-    );
+  if (formData.immutableReferrer === 'lgs' && missingPrograms) {
+    return <BackToScreen />;
   }
 
-  return (
-    <h1 className="bottom-border program-value-header">
-      {programCount}
-      <FormattedMessage id="results.return-programsUpToLabel" defaultMessage=" programs with an estimated value of " />$
-      {Math.round(programsValue / 12).toLocaleString()}
-      <FormattedMessage id="results.return-perMonthLabel" defaultMessage=" monthly in cash or reduced expenses, and " />
-      ${Math.round(taxCreditsValue).toLocaleString()}
-      <FormattedMessage id="results.return-taxCredits" defaultMessage=" in tax credits for you to consider " />
-    </h1>
-  );
+  if (formData.immutableReferrer === 'ccig') {
+    return <CcigResultsMessage />;
+  }
+
+  return null;
 };

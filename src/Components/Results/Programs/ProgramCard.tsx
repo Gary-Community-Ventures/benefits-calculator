@@ -1,10 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
-import { formatMonthlyValue } from '../FormattedValue';
+import { useFormatMonthlyValue } from '../FormattedValue';
 import ResultsTranslate from '../Translate/Translate';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './ProgramCard.css';
+import { findValidationForProgram, useResultsContext, useResultsLink } from '../Results';
 
 type ProgramCardProps = {
   program: Program;
@@ -18,6 +19,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   const programId = program.program_id;
   const windowWidth = window.innerWidth;
   const [size, setSize] = useState(windowWidth);
+  const { validations, isAdminView } = useResultsContext();
 
   useEffect(() => {
     function handleResize() {
@@ -41,8 +43,32 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   };
   const ConditonalWrapper: React.FC<ConditonalWrapperProps> = ({ condition, wrapper, children }) =>
     condition ? wrapper(children) : children;
+
+  const containerClass = useMemo(() => {
+    let className = 'result-program-container';
+
+    const validation = findValidationForProgram(validations, program);
+
+    if (validation === undefined || !isAdminView) {
+      return className;
+    }
+
+    const passed = Number(validation.value) === program.estimated_value && validation.eligible === program.eligible;
+
+    if (passed) {
+      className += ' passed';
+    } else {
+      className += ' failed';
+    }
+
+    return className;
+  }, [isAdminView, validations]);
+
+  const programPageLink = useResultsLink(`/${uuid}/results/benefits/${programId}`);
+  const value = useFormatMonthlyValue(program);
+
   return (
-    <div className="result-program-container">
+    <div className={containerClass}>
       <div className="result-program-flags-container">
         {program.new && (
           <div className="new-program-flag">
@@ -65,7 +91,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
           </div>
           {isMobile && (
             <div className="result-program-more-info-button">
-              <Link to={`/${uuid}/results/benefits/${programId}`}>
+              <Link to={programPageLink}>
                 <FormattedMessage id="more-info" defaultMessage="More Info" />
               </Link>
             </div>
@@ -89,13 +115,13 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
             <FormattedMessage id="program-card.estimated-savings" defaultMessage="Estimated Savings: " />
           </div>
           <div className="result-program-details-box">
-            <strong>{formatMonthlyValue(program)}</strong>
+            <strong>{value}</strong>
           </div>
         </div>
       </div>
       {!isMobile && (
         <div className="result-program-more-info-button">
-          <Link to={`/${uuid}/results/benefits/${programId}`}>
+          <Link to={programPageLink}>
             <FormattedMessage id="more-info" defaultMessage="More Info" />
           </Link>
         </div>

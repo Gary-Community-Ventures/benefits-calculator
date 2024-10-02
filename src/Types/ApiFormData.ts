@@ -1,4 +1,4 @@
-import { Language } from './Language';
+import { Language } from '../Assets/languageOptions';
 
 export type ApiInsuranceReadOnly = {
   household_member: number;
@@ -88,6 +88,7 @@ export type ApiUser = {
 
 export type ApiFormDataReadOnly = {
   id: number;
+  frozen: boolean;
   uuid: string;
   submision_date: string | null;
   last_email_request_date: string | null;
@@ -148,6 +149,8 @@ export type ApiFormData = {
   has_cowap: boolean | null;
   has_ubp: boolean | null;
   has_pell_grant: boolean | null;
+  has_nfp: boolean | null;
+  has_fatc: boolean | null;
   has_employer_hi?: boolean | null;
   has_private_hi?: boolean | null;
   has_medicaid_hi?: boolean | null;

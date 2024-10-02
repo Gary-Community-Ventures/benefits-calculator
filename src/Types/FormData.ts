@@ -47,6 +47,8 @@ export interface Benefits {
   wic: boolean;
   cowap: boolean;
   ubp: boolean;
+  nfp: boolean;
+  fatc: boolean;
 }
 
 export interface HealthInsurance {
@@ -86,7 +88,9 @@ export interface AcuteHHConditions {
 }
 
 export interface FormData {
-  isTest?: boolean;
+  isTest: boolean;
+  isTestData?: boolean;
+  frozen: boolean;
   externalID?: string;
   agreeToTermsOfService: boolean;
   is13OrOlder: boolean;

@@ -1,18 +1,15 @@
 import {
-  zipcodeHasError,
-  displayZipcodeHelperText,
   radiofieldHasError,
   householdSizeHasError,
-  displayHouseholdSizeHelperText,
   householdAssetsHasError,
-  displayHouseholdAssetsHelperText,
   benefitsHasError,
   selectHasError,
   displayReferralSourceHelperText,
   signUpOptionsHaveError,
   acuteHHConditionsHasError,
   displayBenefitsHelperText,
-  countySelectHelperText,
+  displayHouseholdSizeHelperText,
+  displayHouseholdAssetsHelperText,
   otherReferalSourceHelperText,
 } from './validationFunctions.tsx';
 import { FormattedMessage } from 'react-intl';
@@ -26,13 +23,12 @@ const questions: Record<QuestionName, Question> = {
     subheader: <FormattedMessage id="qcc.tell-us-text" defaultMessage="Let's Get Started!" />,
     question: <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />,
     componentDetails: {
-      componentType: 'Textfield',
+      componentType: 'ZipcodeStep',
       inputType: 'text',
       inputName: 'zipcode',
       numericField: true,
       inputLabel: <FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />,
-      inputError: zipcodeHasError,
-      inputHelperText: displayZipcodeHelperText,
+      required: true,
     },
     followUpQuestions: [
       {
@@ -43,8 +39,7 @@ const questions: Record<QuestionName, Question> = {
           inputType: 'text',
           inputName: 'county',
           inputLabel: <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />,
-          inputError: selectHasError,
-          inputHelperText: countySelectHelperText,
+          required: true,
           componentProperties: {
             labelId: 'county-select-label',
             inputLabelText: <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />,
@@ -69,7 +64,7 @@ const questions: Record<QuestionName, Question> = {
           defaultMessage="Including you, how many people are in your household?"
         />
         <HelpButton
-          helpText="This is usually family members who you both live and share important resources with like food and bills."
+          helpText="If other adults 18 or older in your household file their own tax return, ask them to complete this tool to determine if they qualify for benefits. But even if you and your spouse file taxes separately, include your spouse in the household."
           helpId="questions.householdSize-helpText"
         ></HelpButton>
       </>
@@ -82,6 +77,7 @@ const questions: Record<QuestionName, Question> = {
       inputError: householdSizeHasError,
       inputHelperText: displayHouseholdSizeHelperText,
       numericField: true,
+      required: true,
     },
   },
   householdData: {
@@ -97,12 +93,20 @@ const questions: Record<QuestionName, Question> = {
     header: <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />,
     question: (
       <>
-        <FormattedMessage id="questions.hasExpenses" defaultMessage="Does your household have any expenses?" />{' '}
-        <HelpButton
-          helpText="Add up expenses for everyone who lives in your home. This includes costs like child care, child support, rent, medical expenses, heating bills, and more. We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits."
-          helpId="questions.hasExpenses-description"
-        />
+        <div style={{ marginBottom: '-16px' }}>
+          <FormattedMessage id="questions.hasExpenses" defaultMessage="Does your household have any expenses?" />
+          <HelpButton
+            helpText="Add up expenses for everyone who lives in your home. This includes costs like child care, child support, rent, medical expenses, heating bills, and more. We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits."
+            helpId="questions.hasExpenses-description"
+          />
+        </div>
       </>
+    ),
+    questionDescription: (
+      <FormattedMessage
+        id="questions.hasExpenses-description-additional"
+        defaultMessage="Expenses can affect benefits! We can be more accurate if you tell us key expenses like your rent or mortgage, utilities, and child care."
+      />
     ),
     componentDetails: {
       componentType: 'Radiofield',
@@ -151,6 +155,7 @@ const questions: Record<QuestionName, Question> = {
       inputHelperText: displayHouseholdAssetsHelperText,
       dollarField: true,
       numericField: true,
+      required: true,
     },
   },
   hasBenefits: {
@@ -258,6 +263,7 @@ const questions: Record<QuestionName, Question> = {
           ),
           inputError: selectHasError,
           inputHelperText: otherReferalSourceHelperText,
+          required: true,
         },
       },
     ],

@@ -8,7 +8,7 @@ import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData.t
 import type { FormData } from '../../Types/FormData.ts';
 
 const FetchScreen = () => {
-  const { formData, setFormData, screenDoneLoading } = useContext(Context);
+  const { formData, setFormData, screenDoneLoading, configLoading } = useContext(Context);
   const referralOptions = useConfig('referral_options');
   const { uuid } = useParams();
   const navigate = useNavigate();
@@ -37,6 +37,8 @@ const FetchScreen = () => {
     const initialFormData: FormData = {
       ...formData,
       isTest: response.is_test ?? false,
+      isTestData: response.is_test_data ?? false,
+      frozen: response.frozen,
       externalID: response.external_id ?? undefined,
       agreeToTermsOfService: response.agree_to_tos ?? false,
       is13OrOlder: response.is_13_or_older ?? false,
@@ -77,6 +79,8 @@ const FetchScreen = () => {
         coctc: response.has_coctc ?? false,
         cowap: response.has_cowap ?? false,
         ubp: response.has_ubp ?? false,
+        nfp: response.has_nfp ?? false,
+        fatc: response.has_fatc ?? false,
       },
       referralSource: referrer,
       immutableReferrer: response.referrer_code ?? undefined,
@@ -156,6 +160,9 @@ const FetchScreen = () => {
   };
 
   useEffect(() => {
+    if (configLoading) {
+      return;
+    }
     // https://stackoverflow.com/questions/20041051/how-to-judge-a-string-is-uuid-type
     const uuidRegx = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
     if (uuid === undefined || !uuid.match(uuidRegx)) {
@@ -163,7 +170,7 @@ const FetchScreen = () => {
       return;
     }
     fetchScreen(uuid);
-  }, [uuid]);
+  }, [uuid, configLoading]);
 
   return <LoadingPage />;
 };

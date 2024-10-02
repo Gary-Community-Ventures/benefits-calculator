@@ -1,4 +1,4 @@
-import { Typography, FormControlLabel, Checkbox } from '@mui/material';
+import { FormControlLabel, Checkbox } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper';
@@ -16,6 +16,7 @@ import {
   signUpServerHasError,
   signUpServerErrorHelperText,
 } from '../../Assets/validationFunctions';
+import './SignUp.css';
 
 const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   const context = useContext(Context);
@@ -122,14 +123,13 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   const displayDisclosureSection = () => {
     return (
       <>
-        <Typography variant="body1" sx={{ mt: '1rem' }} style={{ fontWeight: 600 }}>
+        <p className="bold-disclaimer-text">
           <FormattedMessage
             id="signUp.displayDisclosureSection-consentText"
             defaultMessage="By filling out this form, you agree to future contact from Gary Philanthropy or our affiliates regarding your use of MyFriendBen or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication. Additionally, a copy of your MyFriendBen results will automatically be sent to the email/phone number you provided."
           />
-        </Typography>
+        </p>
         <FormControlLabel
-          sx={{ mb: 1 }}
           control={
             <Checkbox
               checked={formData.signUpInfo.commConsent}
@@ -139,7 +139,7 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
             />
           }
           label={
-            <div>
+            <div className="sign-up-text">
               <FormattedMessage
                 id="signUp.displayDisclosureSection-consentCheck1"
                 defaultMessage="I have read, understand, and agree to the terms of MyFriendBen's "
@@ -165,11 +165,12 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
                 values={{
                   linkVal: (
                     <a className="link-color" href={consentToContactLink} target="_blank">
-                      <FormattedMessage id="signUp.consentToContact" defaultMessage=" consent to contact." />
+                      <FormattedMessage id="signUp.consentToContact" defaultMessage=" consent to contact" />
                     </a>
                   ),
                 }}
               />
+              <FormattedMessage id="signUp.consentToContact5" defaultMessage="." />
             </div>
           }
         />
@@ -180,15 +181,15 @@ const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   return (
     <>
       <div className="bottom-border">
-        <Grid xs={12} item marginTop={'1.5rem'}>
+        <Grid item marginTop={'1rem'}>
           {createFirstNameTextfield()}
           {createLastNameTextfield()}
         </Grid>
-        <Grid xs={12} item>
+        <Grid item>
           {createEmailTextfield()}
           {createPhoneTextfield()}
         </Grid>
-        <Grid xs={12} item marginBottom={'1rem'}>
+        <Grid item marginBottom={'1rem'}>
           {displayDisclosureSection()}
         </Grid>
         {serverErrorController.showError && serverErrorController.message(formData.signUpInfo.serverError)}

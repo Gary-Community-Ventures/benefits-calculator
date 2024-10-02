@@ -1,8 +1,8 @@
 import { Paper, Stack, Typography, Link } from '@mui/material';
 import Box from '@mui/material/Box';
-import chatIcon from '../../../Assets/TwoOneOneAssets/chatIcon.png';
-import dialIcon from '../../../Assets/TwoOneOneAssets/dialIcon.png';
-import textIcon from '../../../Assets/TwoOneOneAssets/textIcon.png';
+import chatIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/chatIcon.png';
+import dialIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/dialIcon.png';
+import textIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/textIcon.png';
 import { FormattedMessage, useIntl } from 'react-intl';
 import './TwoOneOneFooter.css';
 

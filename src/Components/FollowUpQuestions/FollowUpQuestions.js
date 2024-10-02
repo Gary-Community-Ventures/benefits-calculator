@@ -8,6 +8,8 @@ import { useContext, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import './FollowUpQuestions.css';
 
 const FollowUpQuestions = ({
   followUpQuestions,
@@ -27,19 +29,19 @@ const FollowUpQuestions = ({
   return followUpQuestions.map((followUp, index) => {
     if (followUp.componentDetails.componentType === 'Radiofield') {
       return (
-        <div className="question-container" key={index}>
-          <h2 className="question-label">{followUp.question}</h2>
+        <div key={index}>
+          <QuestionQuestion>{followUp.question}</QuestionQuestion>
           <Radiofield componentDetails={followUp.componentDetails} handleRadioButtonChange={handleRadioButtonChange} />
         </div>
       );
     } else if (followUp.componentDetails.componentType === 'ExpenseBlock') {
       return (
-        <div className="question-container" key={index}>
+        <div key={index}>
           <Box className="section-container">
             <Stack className="section">
-              <h2 className="question-label section" style={{ paddingTop: '3rem' }}>
-                {followUp.question}
-              </h2>
+              <div className="expense-padding-top">
+                <QuestionQuestion>{followUp.question}</QuestionQuestion>
+              </div>
             </Stack>
           </Box>
           <ExpenseBlock handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} />
@@ -47,8 +49,8 @@ const FollowUpQuestions = ({
       );
     } else if (followUp.componentDetails.componentType === 'Textfield') {
       return (
-        <div className="question-container" key={index}>
-          <h2 className="question-label">{followUp.question}</h2>
+        <div key={index}>
+          <QuestionQuestion>{followUp.question}</QuestionQuestion>
           <Textfield
             componentDetails={followUp.componentDetails}
             submitted={followUpSubmitted}
@@ -62,8 +64,8 @@ const FollowUpQuestions = ({
       const finalOptions =
         followUp.componentDetails.inputName === 'county' ? countiesByZipcode[formData.zipcode] : countiesByZipcode;
       return (
-        <div className="question-container" key={index}>
-          <h2 className="question-label">{followUp.question}</h2>
+        <div key={index}>
+          <QuestionQuestion>{followUp.question}</QuestionQuestion>
           <BasicSelect
             componentDetails={followUp.componentDetails}
             options={finalOptions}
@@ -74,8 +76,10 @@ const FollowUpQuestions = ({
       );
     } else if (followUp.componentDetails.componentType === 'SignUp') {
       return (
-        <div className="question-container" key={index}>
-          <h2 className="question-label">{followUp.question}</h2>
+        <div key={index}>
+          <div className="follow-up-q-margin-top">
+            <QuestionQuestion>{followUp.question}</QuestionQuestion>
+          </div>
           <SignUp
             handleTextfieldChange={handleTextfieldChange}
             handleCheckboxChange={handleCheckboxChange}
@@ -85,9 +89,8 @@ const FollowUpQuestions = ({
       );
     } else if (followUp.componentDetails.componentType === 'AccordionContainer') {
       return (
-        <div className="question-container accordions-container" key={index}>
-          <h2 className="question-label">{followUp.question}</h2>
-          <p className="question-description">{followUp.questionDescription}</p>
+        <div className="accordions-container" key={index}>
+          <QuestionQuestion>{followUp.question}</QuestionQuestion>
           <AccordionsContainer componentDetails={followUp.componentDetails} submitted={followUpSubmitted} />
         </div>
       );

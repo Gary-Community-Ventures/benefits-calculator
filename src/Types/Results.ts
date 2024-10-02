@@ -1,3 +1,5 @@
+import { Language } from './Language';
+
 export type Translation = {
   default_message: string;
   label: string;
@@ -13,12 +15,14 @@ export type ProgramNavigator = {
   email: Translation;
   assistance_link: Translation;
   description: Translation;
+  languages: Language[];
 };
 
 export type Program = {
   program_id: number;
   name: Translation;
   name_abbreviated: string;
+  external_name: string;
   estimated_value: number;
   estimated_delivery_time: Translation;
   estimated_application_time: Translation;
@@ -30,7 +34,6 @@ export type Program = {
   apply_button_link: Translation;
   legal_status_required: string[];
   category: Translation;
-  warning: Translation;
   estimated_value_override: Translation;
   eligible: boolean;
   failed_tests: TestMessage[];
@@ -40,7 +43,7 @@ export type Program = {
   low_confidence: boolean;
   navigators: ProgramNavigator[];
   documents: Translation[];
-  multiple_tax_units: boolean;
+  warning_messages: Translation[];
 };
 
 export type UrgentNeed = {
@@ -52,10 +55,20 @@ export type UrgentNeed = {
   phone_number: string;
 };
 
+export type Validation = {
+  id: number;
+  screen_uuid: string;
+  program_name: string;
+  eligible: boolean;
+  value: string;
+};
+
 export type EligibilityResults = {
   programs: Program[];
   urgent_needs: UrgentNeed[];
   screen_id: number;
   default_language: string;
   missing_programs: boolean;
+  validations: Validation[];
+  created_date: string;
 };

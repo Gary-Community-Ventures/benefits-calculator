@@ -10,7 +10,9 @@ const messageEndpoint = `${domain}/api/messages/`;
 const apiLongTermProgramsEndPoint = `${domain}/api/programs`;
 const apiUrgentNeedsEndpoint = `${domain}/api/urgent-needs`;
 export const configEndpoint = `${domain}/api/configuration/`;
-let eligibilityEndpoint = `${domain}/api/eligibility/`;
+const eligibilityEndpoint = `${domain}/api/eligibility/`;
+const validationEndpoint = `${domain}/api/validations/`;
+const authTokenEndpoint = `${domain}/api/auth-token/`;
 
 export const header = {
   Accept: 'application/json',
@@ -159,6 +161,66 @@ const getAllNearTermPrograms = async () => {
   return programsWithNormalizedTypeTranslations;
 };
 
+const postValidation = async (validationBody, key) => {
+  const staffHeader = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: 'Token ' + key,
+  };
+
+  return await fetch(validationEndpoint, {
+    method: 'POST',
+    headers: staffHeader,
+    body: JSON.stringify(validationBody),
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(`${response.status} ${response.statusText}`);
+    }
+    return response.json();
+  });
+};
+
+const deleteValidation = async (validationid, key) => {
+  const staffHeader = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: 'Token ' + key,
+  };
+
+  return await fetch(validationEndpoint + validationid, {
+    method: 'DELETE',
+    headers: staffHeader,
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error(`${response.status} ${response.statusText}`);
+    }
+  });
+};
+
+const getAuthToken = async (email, password) => {
+  const header = {
+    'Content-Type': 'application/json',
+  };
+
+  return await fetch(authTokenEndpoint, {
+    method: 'POST',
+    headers: header,
+    body: JSON.stringify({
+      username: email,
+      password: password,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then((response) => {
+      return response.token;
+    });
+};
+
 export {
   getTranslations,
   postScreen,
@@ -170,4 +232,7 @@ export {
   getEligibility,
   getAllLongTermPrograms,
   getAllNearTermPrograms,
+  postValidation,
+  deleteValidation,
+  getAuthToken,
 };

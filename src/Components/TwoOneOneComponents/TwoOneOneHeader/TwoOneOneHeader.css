@@ -5,7 +5,7 @@
 
 .MuiTypography-root.MuiLink-root.twoOneOneMenuLink {
   font-weight: 600;
-  font-size: 13px;
+  font-size: 0.7rem;
 }
 
 .twoOneOne-globe-icon {
@@ -46,17 +46,24 @@ button.hamburger-icon {
   display: none;
 }
 
-.hamburger-drawer {
+#hamburger-drawer {
   display: none;
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1280px) {
   button.hamburger-icon {
     display: flex;
   }
 
-  .hamburger-drawer {
-    display: block;
+  #hamburger-drawer {
+    display: flex;
+    background-color: #fff;
+    position: relative;
+    z-index: 1000;
+    padding: 1rem;
+    align-items: flex-end;
+    gap: 1rem;
+    height: 100vh;
   }
 
   div.twoOneOne-desktop-links {

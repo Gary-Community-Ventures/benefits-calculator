@@ -3,16 +3,19 @@ import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent, Button, B
 import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import { useQueryString } from '../QuestionComponents/questionHooks';
 
 const SelectLanguagePage = () => {
-  const { formData, locale, selectLanguage } = useContext(Context);
+  const { locale, selectLanguage } = useContext(Context);
   const languageOptions = useConfig('language_options');
+  const { uuid } = useParams();
 
-  const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
+  const queryString = useQueryString();
   const navigate = useNavigate();
 
-  const createMenuItems = (optionList: Record<string, any>, disabledFMId: string, disabledFMDefault: string) => {
+  const createMenuItems = (optionList: Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
     const disabledSelectMenuItem = (
       <MenuItem value="disabled-select" key="disabled-select" disabled>
         <FormattedMessage id={disabledFMId} defaultMessage={disabledFMDefault} />
@@ -45,9 +48,9 @@ const SelectLanguagePage = () => {
 
   return (
     <main className="benefits-form">
-      <h1 className="sub-header">
+      <QuestionHeader>
         <FormattedMessage id="selectLanguage.header" defaultMessage="Before you begin..." />
-      </h1>
+      </QuestionHeader>
       <h2 className="sub-header-language-select">
         <FormattedMessage id="selectLanguage.subHeader" defaultMessage="What is your preferred language?" />
       </h2>
@@ -67,7 +70,16 @@ const SelectLanguagePage = () => {
         </Select>
       </FormControl>
       <Box sx={{ mt: '1rem' }}>
-        <Button variant="contained" onClick={() => navigate(`/step-2${queryString}`)}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            if (uuid !== undefined) {
+              navigate(`/${uuid}/step-2${queryString}`);
+              return;
+            }
+            navigate(`/step-2${queryString}`);
+          }}
+        >
           <FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />
         </Button>
       </Box>

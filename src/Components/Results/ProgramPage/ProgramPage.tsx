@@ -4,9 +4,15 @@ import ResultsTranslate from '../Translate/Translate.tsx';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
 import { FormattedMessage } from 'react-intl';
-import { formatToUSD, formatYearlyValue } from '../FormattedValue';
+import { useFormatYearlyValue } from '../FormattedValue';
 import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage.tsx';
+import { useContext } from 'react';
+import { Context } from '../../Wrapper/Wrapper';
+import { findValidationForProgram, useResultsContext, useResultsLink } from '../Results';
+import { deleteValidation, postValidation } from '../../../apiCalls';
+import { Language } from '../../../Assets/languageOptions.tsx';
+import { allNavigatorLanguages } from './NavigatorLanguages.tsx';
 
 type ProgramPageProps = {
   program: Program;
@@ -18,6 +24,8 @@ type IconRendererProps = {
 
 const ProgramPage = ({ program }: ProgramPageProps) => {
   const { uuid } = useParams();
+  const { formData, setFormData, staffToken } = useContext(Context);
+  const { isAdminView, validations, setValidations } = useResultsContext();
   const IconRenderer: React.FC<IconRendererProps> = ({ headingType }) => {
     const IconComponent = headingOptionsMappings[headingType];
 
@@ -26,6 +34,46 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     }
 
     return <IconComponent />;
+  };
+  const currentValidation = findValidationForProgram(validations, program);
+
+  const saveValidation = async () => {
+    const body = {
+      screen_uuid: uuid,
+      program_name: program.external_name,
+      eligible: program.eligible,
+      value: program.estimated_value,
+    };
+
+    try {
+      const response = await postValidation(body, staffToken);
+      setValidations([...validations, response]);
+      setFormData({ ...formData, frozen: true });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const removeValidation = async () => {
+    try {
+      await deleteValidation(currentValidation?.id, staffToken);
+      const newValidations = validations.filter((validation) => validation.id !== currentValidation?.id);
+      setValidations(newValidations);
+      if (newValidations.length === 0) {
+        setFormData({ ...formData, frozen: false });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const toggleValidation = async () => {
+    if (currentValidation !== undefined) {
+      removeValidation();
+      return;
+    }
+
+    saveValidation();
   };
 
   const displayIconAndHeader = (program: Program) => {
@@ -46,6 +94,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       </header>
     );
   };
+  const value = useFormatYearlyValue(program);
 
   const displayEstimatedValueAndTime = (program: Program) => {
     return (
@@ -54,7 +103,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           <article className="estimation-text-left">
             <FormattedMessage id="results.estimated-annual-value" defaultMessage="Estimated Annual Value" />
           </article>
-          <article className="estimation-text-right slim-text">{formatYearlyValue(program)}</article>
+          <article className="estimation-text-right slim-text">{value}</article>
         </div>
         <div className="estimation-text">
           <article className="estimation-text-left">
@@ -68,12 +117,27 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     );
   };
 
+  const backLink = useResultsLink(`/${uuid}/results/benefits`);
+  const displayLanguageFlags = (navigatorLanguages: Language[]) => {
+    return (
+      <div className="navigator-langs-container">
+        {navigatorLanguages.map((lang) => {
+          return (
+            <p className="navigator-lang-flag" key={lang}>
+              {allNavigatorLanguages[lang]}
+            </p>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
     <main className="program-page-container">
       <section className="back-to-results-button-container">
         <BackAndSaveButtons
           handleTextfieldChange={() => {}}
-          navigateToLink={`/${uuid}/results/benefits`}
+          navigateToLink={backLink}
           BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
         />
       </section>
@@ -81,20 +145,24 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         {displayIconAndHeader(program)}
         {displayEstimatedValueAndTime(program)}
       </div>
-      {program.warning.default_message && <WarningMessage message={program.warning} />}
-      {program.multiple_tax_units && (
-        <WarningMessage
-          message={{
-            label: 'results.multiple_tax_units.warning',
-            default_message:
-              'There may be members of your household who are not part of your "tax household." Ask them to complete this tool to determine if they qualify for this benefit.',
-          }}
-        />
-      )}
-      <div className="apply-online-button">
-        <a href={program.apply_button_link.default_message} target="_blank">
+      <div className="results-program-page-warning-container">
+        {program.warning_messages.map((message, key) => {
+          return <WarningMessage message={message} key={key} />;
+        })}
+      </div>
+      <div className="apply-button-container">
+        <a className="apply-online-button" href={program.apply_button_link.default_message} target="_blank">
           <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
         </a>
+        {isAdminView && staffToken !== undefined && formData.isTestData && (
+          <button className="apply-online-button" onClick={toggleValidation}>
+            {currentValidation === undefined ? (
+              <FormattedMessage id="results.validations.button.add" defaultMessage="Create Validation" />
+            ) : (
+              <FormattedMessage id="results.validations.button.remove" defaultMessage="Remove Validation" />
+            )}
+          </button>
+        )}
       </div>
       <div className="content-width">
         {program.navigators.length > 0 && (
@@ -110,6 +178,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                       <ResultsTranslate translation={navigator.name} />
                     </p>
                   )}
+                  {navigator.languages && displayLanguageFlags(navigator.languages)}
                   <div className="address-info">
                     {navigator.description && (
                       <p className="navigator-desc">

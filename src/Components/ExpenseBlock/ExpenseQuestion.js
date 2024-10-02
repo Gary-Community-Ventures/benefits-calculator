@@ -1,6 +1,4 @@
-import { useContext } from 'react';
 import { useConfig } from '../Config/configHook.tsx';
-import { Context } from '../Wrapper/Wrapper.tsx';
 import { FormattedMessage } from 'react-intl';
 import { FormControl, Select, MenuItem, InputLabel, Button, FormHelperText } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -13,6 +11,9 @@ import {
 } from '../../Assets/validationFunctions.tsx';
 import { useEffect } from 'react';
 import Textfield from '../Textfield/Textfield';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import CloseButton from '../CloseButton/CloseButton.tsx';
+import './ExpenseBlock.css';
 
 const StyledSelectfield = styled(Select)({
   minWidth: 200,
@@ -20,19 +21,7 @@ const StyledSelectfield = styled(Select)({
   backgroundColor: 'white',
 });
 
-const StyledDeleteButton = styled(Button)({
-  width: '40px',
-  height: '40px',
-  minWidth: 0,
-  padding: 0,
-  fontSize: '1.25rem',
-  marginRight: '1rem',
-  marginTop: '1rem',
-  marginBottom: '-0.5rem',
-});
-
 const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteExpenseBlock, index, submitted }) => {
-  const { config } = useContext(Context);
   const expenseTypeErrorController = useErrorController(selectHasError, expenseTypeHelperText);
 
   const expenseOptions = useConfig('expense_options');
@@ -104,7 +93,7 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
     if (expenseSourceName) {
       return (
         <>
-          {'('}
+          {' ('}
           {expenseOptions[expenseSourceName]}
           {')'}?
         </>
@@ -127,13 +116,15 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   const createExpenseAmountTextfield = (expenseSourceName, expenseAmount, index) => {
     return (
       <div>
-        <p className="question-label">
-          <FormattedMessage
-            id="expenseBlock.createExpenseAmountTextfield-questionLabel"
-            defaultMessage="How much is this expense every month "
-          />
-          {getExpenseSourceLabel(allExpensesData[index].expenseSourceName)}
-        </p>
+        <div className="expense-margin-bottom">
+          <QuestionQuestion>
+            <FormattedMessage
+              id="expenseBlock.createExpenseAmountTextfield-questionLabel"
+              defaultMessage="How much is this expense every month "
+            />
+            {getExpenseSourceLabel(allExpensesData[index].expenseSourceName)}
+          </QuestionQuestion>
+        </div>
         <div className="expense-block-textfield">
           <Textfield
             componentDetails={textfieldProps}
@@ -182,28 +173,33 @@ const ExpenseQuestion = ({ expenseData, allExpensesData, setAllExpenses, deleteE
   const { expenseSourceName, expenseAmount } = expenseData;
 
   const expenseSourceQuestion = (
-    <p className="question-label">
+    <QuestionQuestion>
       <FormattedMessage
         id="expenseBlock.createExpenseBlockQuestions-questionLabel"
         defaultMessage="If you have another expense, select it below."
       />
-    </p>
+    </QuestionQuestion>
   );
 
-  return (
-    <div key={index}>
-      {index > 0 && (
+  if (index === 0) {
+    return (
+      <div key={index}>
+        {createExpenseDropdownMenu(expenseSourceName, index)}
+        {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
+      </div>
+    );
+  } else {
+    return (
+      <div key={index}>
         <div className="delete-button-container">
-          <StyledDeleteButton className="delete-button" onClick={() => deleteExpenseBlock(index)} variant="contained">
-            &#215;
-          </StyledDeleteButton>
+          <CloseButton handleClose={() => deleteExpenseBlock(index)} />
         </div>
-      )}
-      {index > 0 && expenseSourceQuestion}
-      {createExpenseDropdownMenu(expenseSourceName, index)}
-      {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
-    </div>
-  );
+        {expenseSourceQuestion}
+        {createExpenseDropdownMenu(expenseSourceName, index)}
+        {createExpenseAmountTextfield(expenseSourceName, expenseAmount, index)}
+      </div>
+    );
+  }
 };
 
 export default ExpenseQuestion;

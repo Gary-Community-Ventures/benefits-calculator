@@ -9,7 +9,7 @@ export default function dataLayerPush<T>(obj: T) {
 }
 
 export function initializeGTM() {
-  const gtmId = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
+  const gtmId = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
   if (gtmId) {
     TagManager.initialize({ gtmId });
   } else {
