@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import QuestionHeader from '../QuestionComponents/QuestionHeader';
-import { useQueryString } from '../QuestionComponents/questionHooks';
+import QuestionHeader from '../QuestionComponents/QuestionHeader.tsx';
+import { useQueryString } from '../QuestionComponents/questionHooks.ts';
 import FormContinueButton from '../ContinueButton/FormContinueButton.tsx';
 
 const SelectLanguagePage = () => {
@@ -53,7 +53,7 @@ const SelectLanguagePage = () => {
       return;
     }
     navigate(`/step-2${queryString}`);
-  }
+  };
 
   return (
     <main className="benefits-form">
@@ -80,7 +80,9 @@ const SelectLanguagePage = () => {
           </Select>
         </FormControl>
         <Box sx={{ mt: '1rem' }}>
-          <FormContinueButton formattedMessage={<FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />}/>
+          <FormContinueButton
+            formattedMessage={<FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />}
+          />
         </Box>
       </form>
     </main>
