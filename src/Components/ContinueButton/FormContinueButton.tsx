@@ -1,14 +1,10 @@
 import { Button } from '@mui/material';
-import { FormattedMessageType } from '../../Types/Questions';
+import { PropsWithChildren } from 'react';
 
-type FormContinueButtonProps = {
-  formattedMessage: FormattedMessageType;
-};
-
-const FormContinueButton = ({ formattedMessage }: FormContinueButtonProps) => {
+const FormContinueButton = ({ children }: PropsWithChildren) => {
   return (
     <Button variant="contained" type="submit">
-      {formattedMessage}
+      {children}
     </Button>
   );
 };
