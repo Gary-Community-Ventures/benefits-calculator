@@ -174,7 +174,10 @@ export const ZipcodeStep = () => {
             </FormControl>
           </div>
         )}
-        <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
+        <PrevAndContinueButtons
+          backNavigationFunction={backNavigationFunction}
+          formContinueButtonFM={<FormattedMessage id="continueButton" defaultMessage="Continue" />}
+        />
       </form>
     </div>
   );
