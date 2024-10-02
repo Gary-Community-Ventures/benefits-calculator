@@ -1,11 +1,12 @@
 import { useConfig } from '../Config/configHook.tsx';
-import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent, Button, Box } from '@mui/material';
+import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent, Box } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { useQueryString } from '../QuestionComponents/questionHooks';
+import FormContinueButton from '../ContinueButton/FormContinueButton.tsx';
 
 const SelectLanguagePage = () => {
   const { locale, selectLanguage } = useContext(Context);
@@ -79,12 +80,7 @@ const SelectLanguagePage = () => {
           </Select>
         </FormControl>
         <Box sx={{ mt: '1rem' }}>
-          <Button
-            variant="contained"
-            type="submit"
-          >
-            <FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />
-          </Button>
+          <FormContinueButton formattedMessage={<FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />}/>
         </Box>
       </form>
     </main>
