@@ -46,6 +46,14 @@ const SelectLanguagePage = () => {
     };
   });
 
+  const handleSubmit = () => {
+    if (uuid !== undefined) {
+      navigate(`/${uuid}/step-2${queryString}`);
+      return;
+    }
+    navigate(`/step-2${queryString}`);
+  }
+
   return (
     <main className="benefits-form">
       <QuestionHeader>
@@ -54,35 +62,31 @@ const SelectLanguagePage = () => {
       <h2 className="sub-header-language-select">
         <FormattedMessage id="selectLanguage.subHeader" defaultMessage="What is your preferred language?" />
       </h2>
-      <FormControl sx={{ width: '150px' }}>
-        <InputLabel id="language-select-label">
-          <FormattedMessage id="selectLang.text" defaultMessage="Language" />
-        </InputLabel>
-        <Select
-          labelId="language-select-label"
-          id="language-select"
-          value={locale}
-          label={<FormattedMessage id="selectLang.text" defaultMessage="Language" />}
-          //@ts-ignore
-          onChange={(event: SelectChangeEvent<string>) => selectLanguage(event)}
-        >
-          {createMenuItems(languageOptions, 'selectLang.disabledSelectMenuItemText', 'Select a language')}
-        </Select>
-      </FormControl>
-      <Box sx={{ mt: '1rem' }}>
-        <Button
-          variant="contained"
-          onClick={() => {
-            if (uuid !== undefined) {
-              navigate(`/${uuid}/step-2${queryString}`);
-              return;
-            }
-            navigate(`/step-2${queryString}`);
-          }}
-        >
-          <FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />
-        </Button>
-      </Box>
+      <form onSubmit={handleSubmit}>
+        <FormControl sx={{ width: '150px' }}>
+          <InputLabel id="language-select-label">
+            <FormattedMessage id="selectLang.text" defaultMessage="Language" />
+          </InputLabel>
+          <Select
+            labelId="language-select-label"
+            id="language-select"
+            value={locale}
+            label={<FormattedMessage id="selectLang.text" defaultMessage="Language" />}
+            //@ts-ignore
+            onChange={(event: SelectChangeEvent<string>) => selectLanguage(event)}
+          >
+            {createMenuItems(languageOptions, 'selectLang.disabledSelectMenuItemText', 'Select a language')}
+          </Select>
+        </FormControl>
+        <Box sx={{ mt: '1rem' }}>
+          <Button
+            variant="contained"
+            type="submit"
+          >
+            <FormattedMessage id="continueButton-getStarted" defaultMessage="Get Started" />
+          </Button>
+        </Box>
+      </form>
     </main>
   );
 };
