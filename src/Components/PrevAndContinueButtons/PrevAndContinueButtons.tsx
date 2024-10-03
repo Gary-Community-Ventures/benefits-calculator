@@ -1,6 +1,6 @@
 import PreviousButton from '../PreviousButton/PreviousButton';
-import { Button } from '@mui/material';
-import { FormattedMessage } from 'react-intl';
+import FormContinueButton from '../ContinueButton/FormContinueButton';
+import { FormattedMessageType } from '../../Types/Questions';
 
 type PrevAndContinueButtonsProps = {
   backNavigationFunction: () => void;
@@ -10,9 +10,7 @@ const PrevAndContinueButtons = ({ backNavigationFunction }: PrevAndContinueButto
   return (
     <div className="question-buttons">
       <PreviousButton navFunction={backNavigationFunction} />
-      <Button variant="contained" type="submit">
-        <FormattedMessage id="continueButton" defaultMessage="Continue" />
-      </Button>
+      <FormContinueButton />
     </div>
   );
 };

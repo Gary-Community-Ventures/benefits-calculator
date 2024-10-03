@@ -12,7 +12,7 @@ import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlo
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
 import LoadingPage from './Components/LoadingPage/LoadingPage.tsx';
-import SelectLanguagePage from './Components/SelectLanguagePage/SelectLanguagePage.tsx';
+import SelectLanguagePage from './Components/Steps/SelectLanguagePage.tsx';
 import { updateScreen, updateUser } from './Assets/updateScreen.ts';
 import { getStepDirectory, STARTING_QUESTION_NUMBER, getStepNumber } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
