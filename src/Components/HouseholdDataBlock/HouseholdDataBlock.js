@@ -12,13 +12,7 @@ import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import Textfield from '../Textfield/Textfield';
-import {
-  householdMemberAgeHasError,
-  displayHouseholdMemberAgeHelperText,
-  personDataIsValid,
-  selectHasError,
-  relationTypeHelperText,
-} from '../../Assets/validationFunctions.tsx';
+import { personDataIsValid, selectHasError, relationTypeHelperText } from '../../Assets/validationFunctions.tsx';
 import { getStepNumber } from '../../Assets/stepDirectory';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { isCustomTypedLocationState } from '../../Types/FormData.ts';
@@ -53,7 +47,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   });
 
   const initialMemberData = formData.householdData[page - 1] ?? {
-    age: '',
+    birthYear: undefined,
+    birthMonth: undefined,
     relationshipToHH: page === 1 ? 'headOfHousehold' : '',
     conditions: {
       student: false,
@@ -104,29 +99,14 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
   }, []);
 
-  const createFMInputLabel = (personIndex) => {
-    if (personIndex === 1) {
-      return <FormattedMessage id="householdDataBlock.createFMInputLabel-headOfHH" defaultMessage="Your Age" />;
-    } else {
-      return (
-        <>
-          <FormattedMessage id="householdDataBlock.createFMInputLabel-person" defaultMessage="Person " />
-          {personIndex}
-          <FormattedMessage id="householdDataBlock.createFMInputLabel-age" defaultMessage=" Age" />
-        </>
-      );
-    }
-  };
-
   const createAgeQuestion = (personIndex) => {
-    const ageTextfieldProps = {
-      inputType: 'text',
-      inputName: 'age',
-      inputValue: memberData.age,
-      inputLabel: createFMInputLabel(personIndex),
-      numericField: true,
-      inputError: householdMemberAgeHasError,
-      inputHelperText: displayHouseholdMemberAgeHelperText,
+    const birthMonth = memberData.birthMonth ?? null;
+    const birthYear = memberData.birthYear ?? null;
+    const setBirthMonth = (month) => {
+      setMemberData({ ...memberData, birthMonth: month ?? undefined });
+    };
+    const setBirthYear = (year) => {
+      setMemberData({ ...memberData, birthYear: year ?? undefined });
     };
 
     if (personIndex === 1) {
@@ -135,38 +115,35 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           <QuestionQuestion>
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-how-headOfHH"
-              defaultMessage="How old are you?"
+              defaultMessage="Please enter your month and year of birth"
             />
           </QuestionQuestion>
-          <AgeInput />
+          <AgeInput
+            birthMonth={birthMonth}
+            birthYear={birthYear}
+            setBirthMonth={setBirthMonth}
+            setBirthYear={setBirthYear}
+          />
         </Box>
       );
     } else {
       return (
         <Box sx={{ marginBottom: '1.5rem' }}>
           <QuestionQuestion>
-            <FormattedMessage id="householdDataBlock.createAgeQuestion-how" defaultMessage="How old are they?" />
-          </QuestionQuestion>
-          <QuestionDescription>
             <FormattedMessage
-              id="householdDataBlock.createAgeQuestion-zero"
-              defaultMessage="If your child is less than a year old, enter 0."
+              id="householdDataBlock.createAgeQuestion-how"
+              defaultMessage="Please enter their month and year of birth"
             />
-          </QuestionDescription>
+          </QuestionQuestion>
+          <AgeInput
+            birthMonth={birthMonth}
+            birthYear={birthYear}
+            setBirthMonth={setBirthMonth}
+            setBirthYear={setBirthYear}
+          />
         </Box>
       );
     }
-  };
-
-  const createTextField = (componentInputProps, submittedCount) => {
-    return (
-      <Textfield
-        componentDetails={componentInputProps}
-        submitted={submittedCount}
-        data={memberData}
-        handleTextfieldChange={handleTextfieldChange}
-      />
-    );
   };
 
   const handleTextfieldChange = (event) => {

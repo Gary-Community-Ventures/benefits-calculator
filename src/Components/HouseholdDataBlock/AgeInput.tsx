@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import AutoComplete from '../AutoComplete/AutoComplete';
+import './AgeInput.css';
 
 const MONTHS = {
   1: 'January',
@@ -27,19 +27,22 @@ const YEARS = Array.from({ length: MAX_AGE }, (_, i) => {
   return String(inputYear);
 });
 
-export default function AgeInput() {
-  const [birthMonth, setBirthMonth] = useState<number | null>(null);
-  const [birthYear, setBirthYear] = useState<number | null>(null);
+type Props = {
+  birthMonth: number | null;
+  birthYear: number | null;
+  setBirthMonth: (month: number | null) => void;
+  setBirthYear: (year: number | null) => void;
+};
 
+export default function AgeInput({ birthYear, birthMonth, setBirthMonth, setBirthYear }: Props) {
   return (
-    <div>
+    <div className="age-input-container">
       <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}>
         <InputLabel id="birth-month">
           <FormattedMessage id="ageInput.month.label" defaultMessage="Birth Month" />
         </InputLabel>
         <Select
           labelId="birth-month"
-          // @ts-ignore
           value={birthMonth ?? ''}
           label={<FormattedMessage id="ageInput.month.label" defaultMessage="Birth Month" />}
           onChange={(event) => {
