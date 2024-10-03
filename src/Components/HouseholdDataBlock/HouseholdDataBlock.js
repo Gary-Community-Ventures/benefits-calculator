@@ -28,6 +28,7 @@ import { useTranslateNumber } from '../../Assets/languageOptions';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import AgeInput from './AgeInput';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -137,7 +138,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
               defaultMessage="How old are you?"
             />
           </QuestionQuestion>
-          {createTextField(ageTextfieldProps, submittedCount)}
+          <AgeInput />
         </Box>
       );
     } else {
@@ -152,7 +153,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
               defaultMessage="If your child is less than a year old, enter 0."
             />
           </QuestionDescription>
-          {createTextField(ageTextfieldProps, submittedCount)}
         </Box>
       );
     }

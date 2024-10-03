@@ -12,6 +12,8 @@ export interface IncomeStream {
 
 export interface HouseholdData {
   age: string;
+  birthYear: number;
+  birthMonth: number;
   relationshipToHH: string;
   conditions: Conditions;
   hasIncome: boolean;

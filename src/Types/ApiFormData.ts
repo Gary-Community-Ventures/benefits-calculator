@@ -38,6 +38,8 @@ export type ApiHouseholdMemberReadOnly = {
 
 export type ApiHouseholdMember = {
   age: number | null;
+  birth_year: number | null;
+  birth_month: number | null;
   relationship: string | null;
   student: boolean | null;
   student_full_time?: boolean | null;

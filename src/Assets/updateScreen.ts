@@ -88,6 +88,9 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
 
   return {
     age: Number(householdMemberData.age),
+    // age: null,
+    // birth_year: 2022,
+    // birth_month: 10,
     relationship: householdMemberData.relationshipToHH,
     student: householdMemberData.conditions.student,
     pregnant: householdMemberData.conditions.pregnant,
