@@ -48,9 +48,10 @@ const Disclaimer = () => {
     setFormData(updatedFormData);
 
     if (uuid) {
+      await updateScreen(uuid, updatedFormData, locale);
       navigate(`/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
     } else {
-      const response = await createScreen(formData, locale);
+      const response = await createScreen(updatedFormData, locale);
       screenDoneLoading();
       navigate(`/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
     }
