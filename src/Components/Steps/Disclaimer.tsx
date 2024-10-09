@@ -2,33 +2,40 @@ import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory.ts';
 import { createScreen } from '../../Assets/updateScreen.ts';
-import { CardContent, Checkbox, FormControlLabel } from '@mui/material';
+import { CardContent, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import dataLayerPush from '../../Assets/analytics.ts';
 import QuestionHeader from '../QuestionComponents/QuestionHeader.tsx';
 import { useConfig } from '../Config/configHook.tsx';
 import '../LandingPage/LandingPage.css';
 
+const isTrue = (value: boolean) => {
+  return value;
+}
 
 const Disclaimer = () => {
-  const { formData, locale, screenDoneLoading, theme } = useContext(Context);
+  const { formData, setFormData, locale, screenDoneLoading, theme } = useContext(Context);
   let { uuid } = useParams();
   const navigate = useNavigate();
   const publicChargeOption = useConfig('public_charge_rule');
   const privacyLink = useConfig('privacy_policy');
   const consentToContactLink = useConfig('consent_to_contact');
-  const formSchema = z.object({ agreeToTermsOfService: z.boolean(), is13OrOlder: z.boolean()})
+  const formSchema = z.object({
+    agreeToTermsOfService: z.boolean().refine(isTrue),
+    is13OrOlder: z.boolean().refine(isTrue),
+  });
 
   const {
     control,
-    formState: { errors },
+    formState:{errors},
+    getValues,
     handleSubmit,
     watch,
-  } = useForm<FormData>({
+  } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       agreeToTermsOfService: formData.agreeToTermsOfService ?? false,
@@ -36,7 +43,10 @@ const Disclaimer = () => {
     },
   });
 
-  const formSubmitHandler = async (termsOfServiceAndAgeData: FormData) => {
+  const formSubmitHandler:SubmitHandler<z.infer<typeof formSchema>> = async (termsOfServiceAndAgeData) => {
+    const updatedFormData = { ...formData, ...termsOfServiceAndAgeData };
+    setFormData(updatedFormData);
+
     if (uuid) {
       navigate(`/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
     } else {
@@ -44,7 +54,7 @@ const Disclaimer = () => {
       screenDoneLoading();
       navigate(`/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
     }
-  }
+  };
 
   const renderCardContent = () => {
     return (
@@ -87,7 +97,7 @@ const Disclaimer = () => {
         </ul>
       </CardContent>
     );
-  }
+  };
 
   const getLinksForCheckbox = () => {
     if (locale in privacyLink && locale in consentToContactLink) {
@@ -103,24 +113,24 @@ const Disclaimer = () => {
     }
   };
 
-   const createCheckboxLabel = () => {
+  const createCheckboxLabel = () => {
     return (
       <div className="landing-pg-font">
         <FormattedMessage
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
         />
-        <Link href={getLinksForCheckbox().privacyPolicyLink} target="_blank" sx={{ color: theme.midBlueColor }}>
+        <Link to={getLinksForCheckbox().privacyPolicyLink} target="_blank" sx={{ color: theme.midBlueColor }}>
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
         </Link>
         <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />
-        <Link href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" sx={{ color: theme.midBlueColor }}>
+        <Link to={getLinksForCheckbox().addTermsConsentToContact} target="_blank" sx={{ color: theme.midBlueColor }}>
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
         </Link>
         <FormattedMessage id="landingPage-disclaimer-lable-end" defaultMessage="." />
       </div>
     );
-   };
+  };
 
   return (
     <main className="benefits-form">
@@ -129,33 +139,39 @@ const Disclaimer = () => {
       </QuestionHeader>
       {renderCardContent()}
       <form onSubmit={handleSubmit(formSubmitHandler)}>
-        
+        <Controller
+          name="agreeToTermsOfService"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <FormControlLabel
+              control={<Checkbox {...field} checked={getValues('agreeToTermsOfService')} />}
+              label={createCheckboxLabel()}
+            />
+          )}
+        />
+        <Controller
+          name="is13OrOlder"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <FormControlLabel
+              control={<Checkbox {...field} checked={getValues('is13OrOlder')} />}
+              label={
+                <div className="landing-pg-font">
+                  <FormattedMessage
+                    id="disclaimer-label-age"
+                    defaultMessage="I confirm I am 13 years of age or older."
+                  />
+                </div>
+              }
+            />
+          )}
+        />
+        <button type="submit">hello</button>
       </form>
     </main>
   );
-}
+};
 
 export default Disclaimer;
-
-
-{/* <div className="top-margin">
-  <Controller
-    name="agreeToTermsOfService"
-    control={control}
-    rules={{ required: true }}
-    render={({ field }) => (
-      <FormControlLabel
-        {...field}
-        control={
-          <Checkbox
-            checked={formData.agreeToTermsOfService}
-            // onChange={handleCheckboxChange}
-            // sx={privacyErrorController.showError ? { color: '#c6252b' } : {}}
-          />
-        }
-        label={createCheckboxLabel()}
-        value="agreeToTermsOfService"
-      />
-    )}
-  />
-</div>; */}
