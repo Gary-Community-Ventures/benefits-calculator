@@ -159,7 +159,7 @@ const Disclaimer = () => {
       </QuestionHeader>
       {renderDisclaimerText()}
       <form onSubmit={handleSubmit(formSubmitHandler)}>
-        <div className="checkbox-btn-container">
+        <div className="checkbox-container">
           <Controller
             name="agreeToTermsOfService"
             control={control}
