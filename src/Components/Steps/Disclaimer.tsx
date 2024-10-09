@@ -31,7 +31,7 @@ const Disclaimer = () => {
 
   const {
     control,
-    formState:{errors},
+    formState: {errors},
     getValues,
     handleSubmit,
     watch,
@@ -146,7 +146,8 @@ const Disclaimer = () => {
           render={({ field }) => (
             <FormControlLabel
               control={<Checkbox {...field} checked={getValues('agreeToTermsOfService')} />}
-              label={createCheckboxLabel()}
+              label={createAgreeTTSCheckboxLabel()}
+              className="top-margin"
             />
           )}
         />
@@ -165,6 +166,7 @@ const Disclaimer = () => {
                   />
                 </div>
               }
+              className="top-margin"
             />
           )}
         />
