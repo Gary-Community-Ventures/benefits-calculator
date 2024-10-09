@@ -1,0 +1,17 @@
+.landing-page-list-container {
+  padding-inline-start: 2rem;
+  margin-top: 0.5rem;
+}
+
+.landing-pg-font {
+  font-family: 'Open Sans';
+  font-weight: 400;
+}
+
+.top-margin {
+  margin-top: 1rem;
+}
+
+.checkbox-btn-container {
+  padding: 1rem;
+}
