@@ -5,12 +5,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory.ts';
-import { createScreen } from '../../Assets/updateScreen.ts';
+import { createScreen, updateScreen } from '../../Assets/updateScreen.ts';
 import { CardContent, Checkbox, FormControlLabel } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import dataLayerPush from '../../Assets/analytics.ts';
 import QuestionHeader from '../QuestionComponents/QuestionHeader.tsx';
 import { useConfig } from '../Config/configHook.tsx';
+import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 import '../LandingPage/LandingPage.css';
 
 const isTrue = (value: boolean) => {
@@ -34,7 +35,6 @@ const Disclaimer = () => {
     formState: {errors},
     getValues,
     handleSubmit,
-    watch,
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -57,7 +57,7 @@ const Disclaimer = () => {
     }
   };
 
-  const renderCardContent = () => {
+  const renderDisclaimerText = () => {
     return (
       <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }} className="landing-pg-font">
         <FormattedMessage
@@ -133,23 +133,40 @@ const Disclaimer = () => {
     );
   };
 
+  const renderCheckboxHelperText = () => {
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="disclaimer.error" defaultMessage="Please check the box to continue." />
+      </ErrorMessageWrapper>
+    );
+  };
+
   return (
     <main className="benefits-form">
       <QuestionHeader>
         <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
       </QuestionHeader>
-      {renderCardContent()}
+      {renderDisclaimerText()}
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name="agreeToTermsOfService"
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
-            <FormControlLabel
-              control={<Checkbox {...field} checked={getValues('agreeToTermsOfService')} />}
-              label={createAgreeTTSCheckboxLabel()}
-              className="top-margin"
-            />
+            <>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    {...field}
+                    checked={getValues('agreeToTermsOfService')}
+                    sx={errors.agreeToTermsOfService ? { color: '#c6252b' } : {}}
+                  />
+                }
+                label={createAgreeTTSCheckboxLabel()}
+                className="top-margin"
+              />
+              {errors.agreeToTermsOfService && renderCheckboxHelperText()}
+            </>
           )}
         />
         <Controller
@@ -157,20 +174,29 @@ const Disclaimer = () => {
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
-            <FormControlLabel
-              control={<Checkbox {...field} checked={getValues('is13OrOlder')} />}
-              label={
-                <div className="landing-pg-font">
-                  <FormattedMessage
-                    id="disclaimer-label-age"
-                    defaultMessage="I confirm I am 13 years of age or older."
+            <>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    {...field}
+                    checked={getValues('is13OrOlder')}
+                    sx={errors.is13OrOlder ? { color: '#c6252b' } : {}}
                   />
-                </div>
-              }
-              className="top-margin"
-            />
+                }
+                label={
+                  <div className="landing-pg-font">
+                    <FormattedMessage
+                      id="disclaimer-label-age"
+                      defaultMessage="I confirm I am 13 years of age or older."
+                    />
+                  </div>
+                }
+                className="top-margin"
+              />
+              {errors.is13OrOlder && renderCheckboxHelperText()}
+            </>
           )}
-        />
+          />
         <button type="submit">hello</button>
       </form>
     </main>
