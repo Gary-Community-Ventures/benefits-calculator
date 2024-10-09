@@ -12,6 +12,8 @@ import dataLayerPush from '../../Assets/analytics.ts';
 import QuestionHeader from '../QuestionComponents/QuestionHeader.tsx';
 import { useConfig } from '../Config/configHook.tsx';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
+import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons.tsx';
+import { useQueryString } from '../QuestionComponents/questionHooks.ts';
 import '../LandingPage/LandingPage.css';
 
 const isTrue = (value: boolean) => {
@@ -25,6 +27,15 @@ const Disclaimer = () => {
   const publicChargeOption = useConfig('public_charge_rule');
   const privacyLink = useConfig('privacy_policy');
   const consentToContactLink = useConfig('consent_to_contact');
+  const queryString = useQueryString();
+  const backNavigationFunction = () => {
+    if (uuid !== undefined) {
+      navigate(`/${uuid}/step-1${queryString}`);
+      return;
+    }
+    navigate(`/step-1${queryString}`);
+  };
+
   const formSchema = z.object({
     agreeToTermsOfService: z.boolean().refine(isTrue),
     is13OrOlder: z.boolean().refine(isTrue),
@@ -196,8 +207,8 @@ const Disclaimer = () => {
               {errors.is13OrOlder && renderCheckboxHelperText()}
             </>
           )}
-          />
-        <button type="submit">hello</button>
+        />
+        <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
     </main>
   );
