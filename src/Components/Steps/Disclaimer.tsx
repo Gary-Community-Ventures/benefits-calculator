@@ -3,10 +3,10 @@ import { Context } from '../Wrapper/Wrapper';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory.ts';
 import { createScreen } from '../../Assets/updateScreen.ts';
-import { CardContent, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel } from '@mui/material';
+import { CardContent, Checkbox, FormControlLabel } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import dataLayerPush from '../../Assets/analytics.ts';
 import QuestionHeader from '../QuestionComponents/QuestionHeader.tsx';
@@ -113,20 +113,20 @@ const Disclaimer = () => {
     }
   };
 
-  const createCheckboxLabel = () => {
+  const createAgreeTTSCheckboxLabel = () => {
     return (
       <div className="landing-pg-font">
         <FormattedMessage
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
         />
-        <Link to={getLinksForCheckbox().privacyPolicyLink} target="_blank" sx={{ color: theme.midBlueColor }}>
+        <a href={getLinksForCheckbox().privacyPolicyLink} target="_blank" className="link-color">
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
-        </Link>
+        </a>
         <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />
-        <Link to={getLinksForCheckbox().addTermsConsentToContact} target="_blank" sx={{ color: theme.midBlueColor }}>
+        <a href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" className="link-color">
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
-        </Link>
+        </a>
         <FormattedMessage id="landingPage-disclaimer-lable-end" defaultMessage="." />
       </div>
     );
