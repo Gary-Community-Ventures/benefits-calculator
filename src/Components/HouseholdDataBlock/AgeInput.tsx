@@ -1,5 +1,15 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
+import { useEffect, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
+import {
+  birthMonthErrorMessage,
+  birthMonthHasError,
+  birthMonthInvalidWithYearError,
+  birthMonthInvalidWithYearErrorMessage,
+  birthYearErrorMessage,
+  birthYearHasError,
+  useErrorController,
+} from '../../Assets/validationFunctions';
 import AutoComplete from '../AutoComplete/AutoComplete';
 import './AgeInput.css';
 
@@ -18,12 +28,12 @@ const MONTHS = {
   12: 'December',
 };
 
+const date = new Date();
+const CURRENT_YEAR = date.getFullYear();
+
 const MAX_AGE = 130;
 const YEARS = Array.from({ length: MAX_AGE }, (_, i) => {
-  const date = new Date();
-  const currentYear = date.getFullYear();
-
-  const inputYear = currentYear - i;
+  const inputYear = CURRENT_YEAR - i;
   return String(inputYear);
 });
 
@@ -32,12 +42,55 @@ type Props = {
   birthYear: number | null;
   setBirthMonth: (month: number | null) => void;
   setBirthYear: (year: number | null) => void;
+  submitted: number;
 };
 
-export default function AgeInput({ birthYear, birthMonth, setBirthMonth, setBirthYear }: Props) {
+export default function AgeInput({ birthYear, birthMonth, setBirthMonth, setBirthYear, submitted }: Props) {
+  const errorController = useErrorController(birthMonthInvalidWithYearError, birthMonthInvalidWithYearErrorMessage);
+  const birthMonthErrorController = useErrorController(birthMonthHasError, birthMonthErrorMessage);
+  const birthYearErrorController = useErrorController(birthYearHasError, birthYearErrorMessage);
+
+  useEffect(() => {
+    birthMonthErrorController.updateError(birthMonth);
+  }, [birthMonth]);
+
+  useEffect(() => {
+    birthYearErrorController.updateError(birthYear);
+  }, [birthYear]);
+
+  useEffect(() => {
+    if (birthMonth === null || birthYear === null) {
+      return;
+    }
+
+    // @ts-ignore the type is broken on this one.
+    errorController.updateError({ birthYear, birthMonth });
+  }, [birthYear, birthMonth]);
+
+  useEffect(() => {
+    birthMonthErrorController.setSubmittedCount(submitted);
+    birthYearErrorController.setSubmittedCount(submitted);
+    errorController.setSubmittedCount(submitted);
+  }, [submitted]);
+
+  const monthErrorMessage = useMemo(() => {
+    if (birthMonthErrorController.showError) {
+      return birthMonthErrorController.message(birthMonth);
+    }
+
+    if (errorController.showError) {
+      return errorController.message(null);
+    }
+
+    return null;
+  }, [birthMonthErrorController.showError, errorController.showError, birthMonth, birthYear]);
+
   return (
     <div className="age-input-container">
-      <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}>
+      <FormControl
+        sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
+        error={birthMonthErrorController.showError || errorController.showError}
+      >
         <InputLabel id="birth-month">
           <FormattedMessage id="ageInput.month.label" defaultMessage="Birth Month" />
         </InputLabel>
@@ -57,6 +110,7 @@ export default function AgeInput({ birthYear, birthMonth, setBirthMonth, setBirt
             );
           })}
         </Select>
+        {monthErrorMessage !== null && <FormHelperText>{monthErrorMessage}</FormHelperText>}
       </FormControl>
       <AutoComplete
         value={birthYear !== null ? String(birthYear) : null}
@@ -65,6 +119,8 @@ export default function AgeInput({ birthYear, birthMonth, setBirthMonth, setBirt
         }}
         options={YEARS}
         label={<FormattedMessage id="ageInput.year.label" defaultMessage="Birth Year" />}
+        showError={birthYearErrorController.showError}
+        errorMessage={birthYearErrorController.message(birthMonth)}
       />
     </div>
   );

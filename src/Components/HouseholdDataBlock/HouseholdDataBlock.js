@@ -11,7 +11,6 @@ import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import PreviousButton from '../PreviousButton/PreviousButton';
-import Textfield from '../Textfield/Textfield';
 import { personDataIsValid, selectHasError, relationTypeHelperText } from '../../Assets/validationFunctions.tsx';
 import { getStepNumber } from '../../Assets/stepDirectory';
 import { Context } from '../Wrapper/Wrapper.tsx';
@@ -123,6 +122,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             birthYear={birthYear}
             setBirthMonth={setBirthMonth}
             setBirthYear={setBirthYear}
+            submitted={submittedCount}
           />
         </Box>
       );
@@ -140,6 +140,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
             birthYear={birthYear}
             setBirthMonth={setBirthMonth}
             setBirthYear={setBirthYear}
+            submitted={submittedCount}
           />
         </Box>
       );
@@ -448,22 +449,18 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       <Box className="section-container">
         <Stack sx={{ padding: '3rem 0' }} className="section">
           {displayHealthCareQuestion(page)}
-          {
-            <OptionCardGroup
-              options={page === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
-              stateVariable="healthInsurance"
-              memberData={hhMemberData}
-              setMemberData={setHHMemberData}
-              hhMemberIndex={page}
-            />
-          }
-          {
-            <HealthInsuranceError
-              hhMemberInsurance={memberData.healthInsurance}
-              submitted={submittedCount}
-              hhMemberIndex={page}
-            />
-          }
+          <OptionCardGroup
+            options={page === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
+            stateVariable="healthInsurance"
+            memberData={hhMemberData}
+            setMemberData={setHHMemberData}
+            hhMemberIndex={page}
+          />
+          <HealthInsuranceError
+            hhMemberInsurance={memberData.healthInsurance}
+            submitted={submittedCount}
+            hhMemberIndex={page}
+          />
         </Stack>
       </Box>
     );
