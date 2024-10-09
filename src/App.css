@@ -100,7 +100,7 @@
 }
 
 .link-color:hover {
-  color: var(--secondary-color)
+  color: var(--secondary-color);
 }
 
 .main-max-width {
