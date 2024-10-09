@@ -99,6 +99,10 @@
   color: var(--midBlue-color);
 }
 
+.link-color:hover {
+  color: var(--secondary-color)
+}
+
 .main-max-width {
   max-width: var(--main-max-width);
   margin: 0 auto;
