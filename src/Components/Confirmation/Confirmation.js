@@ -19,6 +19,7 @@ import PreviousButton from '../PreviousButton/PreviousButton';
 import './Confirmation.css';
 import { useTranslateNumber } from '../../Assets/languageOptions';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import { calcAge } from '../HouseholdDataBlock/AgeInput';
 
 const Confirmation = () => {
   const { formData, locale } = useContext(Context);
@@ -77,10 +78,15 @@ const Confirmation = () => {
             <p className="section-title">{allHouseholdRelations[i]}</p>
             <article className="section-p">
               <b>
-                <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />
-                {': '}
+                <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age: " />
               </b>
               {translateNumber(allHouseholdAges[i])}
+            </article>
+            <article className="section-p">
+              <b>
+                <FormattedMessage id="confiramtion.member.birthYearMonth" defaultMessage="Birth Month/Year: " />
+              </b>
+              {translateNumber(personData.birthMonth) + '/' + translateNumber(personData.birthYear)}
             </article>
             <article className="section-p">
               <b>
@@ -252,7 +258,7 @@ const Confirmation = () => {
   const getAllHouseholdAges = () => {
     const { householdData } = formData;
     const householdMemberAges = householdData.map((personData) => {
-      return Number(personData.age);
+      return calcAge(personData.birthYear, personData.birthMonth);
     });
 
     return householdMemberAges;

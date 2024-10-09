@@ -21,7 +21,7 @@ import { useTranslateNumber } from '../../Assets/languageOptions';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
-import AgeInput from './AgeInput';
+import AgeInput, { calcAge } from './AgeInput';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -147,15 +147,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
   };
 
-  const handleTextfieldChange = (event) => {
-    const { value } = event.target;
-    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
-
-    if (numberUpToEightDigitsLongRegex.test(value)) {
-      setMemberData({ ...memberData, age: value });
-    }
-  };
-
   const createHOfHRelationQuestion = () => {
     return (
       <Box sx={{ marginBottom: '1.5rem' }}>
@@ -180,7 +171,11 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
     }
 
-    const age = member.age;
+    let age = calcAge(member.birthYear, member.birthMonth);
+    if (Number.isNaN(age)) {
+      age = 0;
+    }
+
     let income = 0;
     for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {
       let num = 0;
@@ -204,7 +199,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       income += Number(num);
     }
 
-    return createMemberCard(index, relationship, age, income, page);
+    return createMemberCard(index, relationship, member.birthYear, member.birthMonth, age, income, page);
   };
 
   const handleEditBtnSubmit = (memberIndex) => {
@@ -218,7 +213,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   };
 
   const translateNumber = useTranslateNumber();
-  const createMemberCard = (index, relationship, age, income, page) => {
+  const createMemberCard = (index, relationship, birthYear, birthMonth, age, income, page) => {
     const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
 
     return (
@@ -237,7 +232,14 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           </div>
         </div>
         <div className="member-added-age">
-          <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />: {translateNumber(age)}
+          <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age: " />
+          {translateNumber(age)}
+        </div>
+        <div className="member-added-age">
+          <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
+          {birthMonth !== undefined &&
+            birthYear !== undefined &&
+            translateNumber(birthMonth) + '/' + translateNumber(birthYear)}
         </div>
         <div className="member-added-income">
           <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income" />:{' '}

@@ -30,12 +30,22 @@ const MONTHS = {
 
 const date = new Date();
 const CURRENT_YEAR = date.getFullYear();
+// January is 0 for getMonth
+const CURRENT_MONTH = date.getMonth() + 1;
 
 const MAX_AGE = 130;
 const YEARS = Array.from({ length: MAX_AGE }, (_, i) => {
   const inputYear = CURRENT_YEAR - i;
   return String(inputYear);
 });
+
+export function calcAge(birthYear: number, birthMonth: number) {
+  if (CURRENT_MONTH >= birthMonth) {
+    return CURRENT_YEAR - birthYear;
+  }
+
+  return CURRENT_YEAR - birthYear - 1;
+}
 
 type Props = {
   birthMonth: number | null;
