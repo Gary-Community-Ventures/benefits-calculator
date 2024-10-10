@@ -133,7 +133,8 @@ const FetchScreen = () => {
       }
 
       initialFormData.householdData.push({
-        age: String(member.age) ?? '',
+        birthYear: member.birth_year ?? undefined,
+        birthMonth: member.birth_month ?? undefined,
         relationshipToHH: member.relationship ? member.relationship : defaultRelationship,
         conditions: {
           student: member.student ?? false,
