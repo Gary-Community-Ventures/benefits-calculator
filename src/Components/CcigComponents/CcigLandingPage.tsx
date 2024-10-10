@@ -20,20 +20,20 @@ export default function CcigLandingPage() {
         src={ccigLandingPageImage}
         alt={formatMessage({
           id: 'ccig.landingPage.image.alt',
-          defaultMessage: 'CCIG in partnership with myfriendben',
+          defaultMessage: 'CDIG in partnership with myfriendben',
         })}
         className="ccig-landing-page-logo"
       />
       <p className="ccig-landing-page-text">
         <FormattedMessage
           id="ccig.landingPage.text.1"
-          defaultMessage="Welcome to the final part of the application process for the Colorado Community Insight Group!"
+          defaultMessage="Welcome to the final part of the application process for the Colorado Design Insight Group!"
         />
       </p>
       <p className="ccig-landing-page-text">
         <FormattedMessage
           id="ccig.landingPage.text.2"
-          defaultMessage="Thank you again for your interest in joining CCIG. This last section of the application will help us learn more about your family demographics, income, and benefits that you have experience with. This information is helpful to help match you to insight sessions to improve programs, initiatives, and policies."
+          defaultMessage="Thank you again for your interest in joining CDIG. This last section of the application will help us learn more about your family demographics, income, and benefits that you have experience with. This information is helpful to help match you to insight sessions to improve programs, initiatives, and policies."
         />
       </p>
       <p className="ccig-landing-page-text">
@@ -51,7 +51,7 @@ export default function CcigLandingPage() {
       <p className="ccig-landing-page-text">
         <FormattedMessage
           id="ccig.landingPage.text.5"
-          defaultMessage="If you have any questions or need assistance, please email us at ccig@garycommunity.org."
+          defaultMessage="If you have any questions or need assistance, please email us at cdig@garycommunity.org."
         />
       </p>
       <Button variant="contained" onClick={handleGetStarted}>
