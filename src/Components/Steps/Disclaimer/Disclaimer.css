@@ -3,9 +3,11 @@
   margin-top: 0.5rem;
 }
 
-.landing-pg-font {
+.disclaimer-text-section {
   font-family: 'Open Sans';
   font-weight: 400;
+  background-color: var(--secondary-background-color);
+  padding: 1rem;
 }
 
 .top-margin {

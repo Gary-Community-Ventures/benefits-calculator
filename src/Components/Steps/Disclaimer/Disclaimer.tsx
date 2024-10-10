@@ -6,7 +6,7 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { STARTING_QUESTION_NUMBER } from '../../../Assets/stepDirectory.ts';
 import { createScreen, updateScreen } from '../../../Assets/updateScreen.ts';
-import { CardContent, Checkbox, FormControlLabel } from '@mui/material';
+import { Checkbox, FormControlLabel } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import dataLayerPush from '../../../Assets/analytics.ts';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader.tsx';
@@ -70,7 +70,7 @@ const Disclaimer = () => {
 
   const renderDisclaimerText = () => {
     return (
-      <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor }} className="landing-pg-font">
+      <section className="disclaimer-text-section">
         <FormattedMessage
           id="landingPage.body"
           defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:"
@@ -107,7 +107,7 @@ const Disclaimer = () => {
             </div>
           </li>
         </ul>
-      </CardContent>
+      </section>
     );
   };
 
