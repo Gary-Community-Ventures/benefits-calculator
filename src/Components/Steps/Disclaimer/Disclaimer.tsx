@@ -75,7 +75,7 @@ const Disclaimer = () => {
           id="landingPage.body"
           defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:"
         />
-        <ul className="landing-page-list-container">
+        <ul className="disclaimer-list-container">
           <li>
             <FormattedMessage
               id="landingPage.firstBulletItem"
@@ -127,7 +127,7 @@ const Disclaimer = () => {
 
   const createAgreeTTSCheckboxLabel = () => {
     return (
-      <div className="landing-pg-font">
+      <div className="disclaimer-font">
         <FormattedMessage
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
@@ -195,7 +195,7 @@ const Disclaimer = () => {
                     />
                   }
                   label={
-                    <div className="landing-pg-font">
+                    <div className="disclaimer-font">
                       <FormattedMessage
                         id="disclaimer-label-age"
                         defaultMessage="I confirm I am 13 years of age or older."

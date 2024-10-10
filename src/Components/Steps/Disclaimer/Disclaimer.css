@@ -1,6 +1,11 @@
-.landing-page-list-container {
+.disclaimer-list-container {
   padding-inline-start: 2rem;
   margin-top: 0.5rem;
+}
+
+.disclaimer-font {
+  font-family: 'Open Sans';
+  font-weight: 400;
 }
 
 .disclaimer-text-section {
