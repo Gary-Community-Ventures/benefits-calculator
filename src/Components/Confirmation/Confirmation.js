@@ -84,7 +84,7 @@ const Confirmation = () => {
             </article>
             <article className="section-p">
               <b>
-                <FormattedMessage id="confiramtion.member.birthYearMonth" defaultMessage="Birth Month/Year: " />
+                <FormattedMessage id="confirmation.member.birthYearMonth" defaultMessage="Birth Month/Year: " />
               </b>
               {translateNumber(personData.birthMonth) + '/' + translateNumber(personData.birthYear)}
             </article>
