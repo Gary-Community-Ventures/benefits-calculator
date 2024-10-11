@@ -7,7 +7,7 @@ import FetchScreen from './Components/FetchScreen/FetchScreen';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
-import LandingPage from './Components/LandingPage/LandingPage';
+import Disclaimer from './Components/Steps/Disclaimer/Disclaimer.tsx';
 import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlock.js';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
@@ -337,11 +337,11 @@ const App = () => {
                 <Route path="jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
                 <Route path="ccig" element={<CcigLandingPage />} />
                 <Route path="step-1" element={<SelectLanguagePage />} />
-                <Route path="step-2" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
+                <Route path="step-2" element={<Disclaimer />} />
                 <Route path=":uuid">
                   <Route path="" element={<Navigate to="/step-1" replace />} />
                   <Route path="step-1" element={<SelectLanguagePage />} />
-                  <Route path="step-2" element={<LandingPage handleCheckboxChange={handleCheckboxChange} />} />
+                  <Route path="step-2" element={<Disclaimer />} />
                   <Route
                     path={`step-${getStepNumber('householdData', formData.immutableReferrer)}/:page`}
                     element={
