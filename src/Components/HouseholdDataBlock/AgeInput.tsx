@@ -15,7 +15,7 @@ import './AgeInput.css';
 
 const MONTHS = {
   1: <FormattedMessage id="ageInput.months.january" defaultMessage="January" />,
-  2: <FormattedMessage id="ageInput.months.febuary" defaultMessage="Febuary" />,
+  2: <FormattedMessage id="ageInput.months.february" defaultMessage="February" />,
   3: <FormattedMessage id="ageInput.months.march" defaultMessage="March" />,
   4: <FormattedMessage id="ageInput.months.april" defaultMessage="April" />,
   5: <FormattedMessage id="ageInput.months.may" defaultMessage="May" />,
