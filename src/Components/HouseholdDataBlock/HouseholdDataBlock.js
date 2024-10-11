@@ -232,17 +232,23 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           </div>
         </div>
         <div className="member-added-age">
-          <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age: " />
+          <strong>
+            <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age: " />
+          </strong>
           {translateNumber(age)}
         </div>
         <div className="member-added-age">
-          <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
+          <strong>
+            <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
+          </strong>
           {birthMonth !== undefined &&
             birthYear !== undefined &&
-            translateNumber(birthMonth) + '/' + translateNumber(birthYear)}
+            translateNumber(String(birthMonth).padStart(2, '0')) + '/' + translateNumber(birthYear)}
         </div>
         <div className="member-added-income">
-          <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income" />:{' '}
+          <strong>
+            <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income" />:{' '}
+          </strong>
           {translateNumber(formatToUSD(Number(income)))}
           <FormattedMessage id="displayAnnualIncome.annual" defaultMessage=" annually" />
         </div>
