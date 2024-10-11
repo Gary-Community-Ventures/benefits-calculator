@@ -29,7 +29,7 @@ export default function AutoComplete({ options, label, value, setValue, showErro
         isOptionEqualToValue={(option, value) => option.label === value.label}
         options={autoCompleteOptions}
         value={autoCompleteValue}
-        onChange={(_, newValue) => {
+        onChange={(event, newValue) => {
           setValue(newValue?.label ?? null);
         }}
         renderInput={(params) => (
