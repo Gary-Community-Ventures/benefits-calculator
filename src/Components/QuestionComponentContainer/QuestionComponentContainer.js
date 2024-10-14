@@ -36,10 +36,9 @@ const QuestionComponentContainer = ({
   const signUpOptions = useConfig('sign_up_options');
   let { id } = useParams();
   let matchingQuestion = getQuestion(+id, formData.immutableReferrer);
-
   const errorController = useErrorController(
-    matchingQuestion.componentDetails.inputError,
-    matchingQuestion.componentDetails.inputHelperText,
+    matchingQuestion?.componentDetails.inputError,
+    matchingQuestion?.componentDetails.inputHelperText,
   );
 
   const renderTextfieldComponent = (question) => {
