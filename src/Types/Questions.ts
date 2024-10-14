@@ -3,7 +3,7 @@ import { MessageFunction, ValidationFunction } from './ErrorController';
 import { SignUpInfo } from './FormData';
 
 export type QuestionName =
-  'zipcode'
+  | 'zipcode'
   | 'householdSize'
   | 'householdData'
   | 'hasExpenses'

@@ -13,7 +13,7 @@ import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { ZipcodeStep } from '../Steps/ZipcodeStep';
-import  HouseholdSize from '../Steps/HouseholdSize';
+import HouseholdSize from '../Steps/HouseholdSize';
 import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
