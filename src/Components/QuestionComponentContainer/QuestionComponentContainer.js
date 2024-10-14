@@ -13,12 +13,13 @@ import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { ZipcodeStep } from '../Steps/ZipcodeStep';
-import './QuestionComponentContainer.css';
+import  HouseholdSize from '../Steps/HouseholdSize';
 import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { getStepNumber } from '../../Assets/stepDirectory';
+import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -220,6 +221,12 @@ const QuestionComponentContainer = ({
       return (
         <main className="benefits-form">
           <ZipcodeStep />
+        </main>
+      );
+    case getStepNumber('householdSize', formData.immutableReferrer):
+      return (
+        <main className="benefits-form">
+          <HouseholdSize />
         </main>
       );
     default:
