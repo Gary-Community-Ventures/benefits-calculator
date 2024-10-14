@@ -9,7 +9,6 @@ import { FormData } from '../../Types/FormData';
 import { Context } from '../Wrapper/Wrapper';
 import { updateScreen } from '../../Assets/updateScreen';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
-import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { useConfig } from '../Config/configHook.tsx';
 import * as z from 'zod';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
@@ -24,8 +23,6 @@ export const ZipcodeStep = () => {
   const { uuid } = useParams();
   const navigate = useNavigate();
   const currentStepId = getStepNumber('zipcode', formData.immutableReferrer);
-  const matchingQuestion = getQuestion(currentStepId, formData.immutableReferrer);
-  const requiredField = matchingQuestion.componentDetails.required;
   const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
 
   const countiesByZipcode = useConfig('counties_by_zipcode');
@@ -120,14 +117,20 @@ export const ZipcodeStep = () => {
 
   return (
     <div>
-      <QuestionLeadText>{matchingQuestion.subheader}</QuestionLeadText>
-      <QuestionHeader>{matchingQuestion.header}</QuestionHeader>
-      <QuestionQuestion>{matchingQuestion.question}</QuestionQuestion>
+      <QuestionLeadText>
+        <FormattedMessage id="qcc.tell-us-text" defaultMessage="Let's Get Started!" />
+      </QuestionLeadText>
+      <QuestionHeader>
+        <FormattedMessage id="qcc.zipcode-header" defaultMessage="Tell us where you live." />
+      </QuestionHeader>
+      <QuestionQuestion>
+        <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />
+      </QuestionQuestion>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name="zipcode"
           control={control}
-          rules={{ required: requiredField }}
+          rules={{ required: true }}
           render={({ field }) => (
             <TextField
               {...field}
@@ -140,9 +143,9 @@ export const ZipcodeStep = () => {
         />
         {shouldShowCountyInput && (
           <div>
-            {matchingQuestion.followUpQuestions && (
-              <QuestionQuestion>{matchingQuestion.followUpQuestions[0].question}</QuestionQuestion>
-            )}
+            <QuestionQuestion>
+              <FormattedMessage id="questions.zipcode-a" defaultMessage="Please select a county:" />,
+            </QuestionQuestion>
             <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.county !== undefined}>
               <InputLabel id="county">
                 <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />
@@ -150,7 +153,7 @@ export const ZipcodeStep = () => {
               <Controller
                 name="county"
                 control={control}
-                rules={{ required: requiredField }}
+                rules={{ required: true }}
                 render={({ field }) => (
                   <>
                     <Select
