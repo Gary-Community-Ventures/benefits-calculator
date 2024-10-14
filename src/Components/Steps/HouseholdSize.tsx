@@ -13,15 +13,15 @@ import PrevAndContinueButtons from "../PrevAndContinueButtons/PrevAndContinueBut
 import { useNavigate, useParams } from "react-router-dom";
 import { updateScreen } from "../../Assets/updateScreen";
 import { useGoToNextStep } from "../QuestionComponents/questionHooks";
+import HelpButton from "../HelpBubbleIcon/HelpButton";
 
 const HouseholdSize = () => {
   const { formData, setFormData, locale } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();
   const currentStepId = getStepNumber('householdSize', formData.immutableReferrer);
-  const matchingQuestion = getQuestion(currentStepId, formData.immutableReferrer);
   const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
-  const nextStep = useGoToNextStep('householdSize');
+  const nextStep = useGoToNextStep('householdSize', '1');
   const intl = useIntl();
   const requiredErrorProps = {
     id: "hhSize.requiredError",
@@ -60,8 +60,21 @@ const HouseholdSize = () => {
 
   return (
     <div>
-      <QuestionHeader>{matchingQuestion.header}</QuestionHeader>
-      <QuestionQuestion>{matchingQuestion.question}</QuestionQuestion>
+      <QuestionHeader>
+        <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />
+      </QuestionHeader>
+      <QuestionQuestion>
+        <>
+          <FormattedMessage
+            id="questions.householdSize"
+            defaultMessage="Including you, how many people are in your household?"
+          />
+          <HelpButton
+            helpText="If other adults 18 or older in your household file their own tax return, ask them to complete this tool to determine if they qualify for benefits. But even if you and your spouse file taxes separately, include your spouse in the household."
+            helpId="questions.householdSize-helpText"
+          ></HelpButton>
+        </>
+      </QuestionQuestion>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name="householdSize"
@@ -73,7 +86,10 @@ const HouseholdSize = () => {
               label={<FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size" />}
               variant="outlined"
               error={errors.householdSize !== undefined}
-              helperText={displayHouseholdSizeHelperText(errors.householdSize !== undefined, errors.householdSize?.message)}
+              helperText={displayHouseholdSizeHelperText(
+                errors.householdSize !== undefined,
+                errors.householdSize?.message,
+              )}
             />
           )}
         />
