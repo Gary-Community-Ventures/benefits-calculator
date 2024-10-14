@@ -6,7 +6,7 @@ import * as z from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod";
 import ErrorMessageWrapper from "../ErrorMessage/ErrorMessageWrapper";
 import { FormattedMessage, useIntl } from "react-intl";
-import { getQuestion, getStepNumber } from "../../Assets/stepDirectory";
+import { getStepNumber } from "../../Assets/stepDirectory";
 import QuestionHeader from "../QuestionComponents/QuestionHeader";
 import QuestionQuestion from "../QuestionComponents/QuestionQuestion";
 import PrevAndContinueButtons from "../PrevAndContinueButtons/PrevAndContinueButtons";
