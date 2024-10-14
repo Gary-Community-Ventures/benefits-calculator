@@ -1,11 +1,9 @@
-import { Program, Translation, Validation } from '../../../Types/Results';
+import { Program, Translation } from '../../../Types/Results';
 import { findValidationForProgram, useResultsContext } from '../Results';
 import Filter from './Filter';
 import ProgramCard from './ProgramCard';
 import CategoryHeading from '../CategoryHeading/CategoryHeading';
-import { useContext, useMemo } from 'react';
-import { Context } from '../../Wrapper/Wrapper';
-import BackToScreen from '../../BackToScreen/BackToScreen';
+import { useMemo } from 'react';
 import { calculateTotalValue } from '../FormattedValue';
 import { ResultsMessage } from '../../Referrer/Referrer';
 
