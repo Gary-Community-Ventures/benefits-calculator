@@ -7,7 +7,6 @@ const translationsEndpoint = `${domain}/api/translations/`;
 const screensEndpoint = `${domain}/api/screens/`;
 const userEndpoint = `${domain}/api/users/`;
 const messageEndpoint = `${domain}/api/messages/`;
-const apiLongTermProgramsEndPoint = `${domain}/api/programs`;
 const apiProgramCategoriesEndPoint = `${domain}/api/program_categories`;
 const apiUrgentNeedsEndpoint = `${domain}/api/urgent-needs`;
 export const configEndpoint = `${domain}/api/configuration/`;
@@ -137,17 +136,13 @@ const getAllLongTermPrograms = async () => {
 
   const data = await response.json();
 
-  const programs = [];
-
-  for (const category of data) {
-    for (const program of category.programs)
-      programs.push({
-        ...program,
-        category: category.name,
-      });
+  for (const category of Object.values(data)) {
+    category.programs = category.programs.map((program) => {
+      return { name: program.name, description: program.website_description };
+    });
   }
 
-  return programs;
+  return data;
 };
 
 const getAllNearTermPrograms = async () => {
@@ -162,10 +157,26 @@ const getAllNearTermPrograms = async () => {
   const programs = await response.json();
   const programsWithNormalizedTypeTranslations = programs.map((program) => {
     const categoryWithNormalizedDefaultMessage = cleanTranslationDefaultMessage(program.type);
-    return { ...program, type: categoryWithNormalizedDefaultMessage };
+    return { ...program, category: categoryWithNormalizedDefaultMessage };
   });
 
-  return programsWithNormalizedTypeTranslations;
+  const categoryMap = {};
+
+  for (const program of programsWithNormalizedTypeTranslations) {
+    const id = program.category.default_message;
+    if (!(id in categoryMap)) {
+      categoryMap[id] = { programs: [], name: program.category, icon: program.category.default_message };
+    }
+
+    categoryMap[id].programs.push({ name: program.name, description: program.website_description });
+  }
+
+  const categories = [];
+  for (const category of Object.values(categoryMap)) {
+    categories.push(category);
+  }
+
+  return categories;
 };
 
 const postValidation = async (validationBody, key) => {
