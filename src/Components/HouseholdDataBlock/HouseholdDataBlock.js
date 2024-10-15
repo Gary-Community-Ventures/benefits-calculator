@@ -256,8 +256,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     );
   };
 
-  const createQHeaderAndHHMSummaries = (personIndex) => {
-    let header;
+  const createHHMSummaries = () => {
     const headOfHHInfoWasEntered = formData.householdData.length >= 1;
 
     //hHMemberSummaries will have the length of members that have already been saved to formData
@@ -277,26 +276,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       }
     });
 
-    if (personIndex === 1) {
-      header = (
-        <QuestionHeader>
-          <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
-        </QuestionHeader>
-      );
-    } else {
-      header = (
-        <QuestionHeader>
-          <FormattedMessage
-            id="questions.householdData"
-            defaultMessage="Tell us about the next person in your household."
-          />
-        </QuestionHeader>
-      );
-    }
-
     return (
       <>
-        {header}
         {headOfHHInfoWasEntered && (
           <Box sx={{ marginBottom: '1.5rem' }}>
             <h2 className="household-data-sub-header secondary-heading">
@@ -498,7 +479,17 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   return (
     <main className="benefits-form">
-      {createQHeaderAndHHMSummaries(page)}
+      <QuestionHeader>
+        {page === 1 ? (
+          <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
+        ) : (
+          <FormattedMessage
+            id="questions.householdData"
+            defaultMessage="Tell us about the next person in your household."
+          />
+        )}
+      </QuestionHeader>
+      {createHHMSummaries()}
       {createAgeQuestion(page)}
       {page === 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
       {page !== 1 && createHOfHRelationQuestion()}
