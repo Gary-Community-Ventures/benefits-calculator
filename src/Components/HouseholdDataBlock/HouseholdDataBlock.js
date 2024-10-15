@@ -2,8 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useConfig } from '../Config/configHook.tsx';
-import { Box, IconButton, Stack } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
+import { Box, Stack } from '@mui/material';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import HealthInsuranceError from '../HealthInsuranceError/HealthInsuranceError.tsx';
@@ -16,12 +15,12 @@ import { getStepNumber } from '../../Assets/stepDirectory';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { isCustomTypedLocationState } from '../../Types/FormData.ts';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
-import './HouseholdDataBlock.css';
-import { useTranslateNumber } from '../../Assets/languageOptions';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
-import AgeInput, { calcAge } from './AgeInput';
+import AgeInput from './AgeInput';
+import HHMSummaryCards from '../Steps/HouseholdMembers/HHMSummaryCards.tsx';
+import './HouseholdDataBlock.css';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -39,11 +38,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     navigate(`/${uuid}/step-${step}/${page}`);
   };
   const [submittedCount, setSubmittedCount] = useState(0);
-  const intl = useIntl();
-  const editHHMemberAriaLabel = intl.formatMessage({
-    id: 'editHHMember.ariaText',
-    defaultMessage: 'edit household member',
-  });
 
   const initialMemberData = formData.householdData[page - 1] ?? {
     birthYear: undefined,
@@ -158,135 +152,6 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         </QuestionQuestion>
         {createRelationshipDropdownMenu()}
       </Box>
-    );
-  };
-
-  const formatToUSD = (num) => {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
-  };
-
-  const createFormDataMemberCard = (member, index) => {
-    let relationship = relationshipOptions[member.relationshipToHH];
-    if (relationship === undefined) {
-      relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
-    }
-
-    let age = calcAge(member.birthYear, member.birthMonth);
-    if (Number.isNaN(age)) {
-      age = 0;
-    }
-
-    let income = 0;
-    for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {
-      let num = 0;
-      switch (incomeFrequency) {
-        case 'weekly':
-          num = Number(incomeAmount) * 52;
-          break;
-        case 'biweekly':
-          num = Number(incomeAmount) * 26;
-          break;
-        case 'semimonthly':
-          num = Number(incomeAmount) * 24;
-          break;
-        case 'monthly':
-          num = Number(incomeAmount) * 12;
-          break;
-        case 'hourly':
-          num = Number(incomeAmount) * Number(hoursPerWeek) * 52;
-          break;
-      }
-      income += Number(num);
-    }
-
-    return createMemberCard(index, relationship, member.birthYear, member.birthMonth, age, income, page);
-  };
-
-  const handleEditBtnSubmit = (memberIndex) => {
-    setSubmittedCount(submittedCount + 1);
-
-    const validPersonData = personDataIsValid(memberData);
-    if (validPersonData) {
-      handleHouseholdDataSubmit(memberData, page - 1, uuid);
-      navigate(`/${uuid}/step-${step}/${memberIndex + 1}`);
-    }
-  };
-
-  const translateNumber = useTranslateNumber();
-  const createMemberCard = (index, relationship, birthYear, birthMonth, age, income, page) => {
-    const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
-
-    return (
-      <article className={containerClassName} key={index}>
-        <div className="household-member-header">
-          <h3 className="member-added-relationship">{relationship}:</h3>
-          <div className="household-member-edit-button">
-            <IconButton
-              onClick={() => {
-                handleEditBtnSubmit(index);
-              }}
-              aria-label={editHHMemberAriaLabel}
-            >
-              <EditIcon alt="edit icon" />
-            </IconButton>
-          </div>
-        </div>
-        <div className="member-added-age">
-          <strong>
-            <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age: " />
-          </strong>
-          {translateNumber(age)}
-        </div>
-        <div className="member-added-age">
-          <strong>
-            <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
-          </strong>
-          {birthMonth !== undefined &&
-            birthYear !== undefined &&
-            translateNumber(String(birthMonth).padStart(2, '0')) + '/' + translateNumber(birthYear)}
-        </div>
-        <div className="member-added-income">
-          <strong>
-            <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income" />:{' '}
-          </strong>
-          {translateNumber(formatToUSD(Number(income)))}
-          <FormattedMessage id="displayAnnualIncome.annual" defaultMessage=" annually" />
-        </div>
-      </article>
-    );
-  };
-
-  const createHHMSummaries = () => {
-    const headOfHHInfoWasEntered = formData.householdData.length >= 1;
-
-    //hHMemberSummaries will have the length of members that have already been saved to formData
-    const hHMemberSummaries = [
-      ...formData.householdData.map((member, index) => {
-        return createFormDataMemberCard(member, index);
-      }),
-    ];
-
-    //We want the active/current member's summary card to update synchronously as we change their information
-    //so we swap out the current one for the one we create using the memberData in state
-    const summariesWActiveMemberCard = hHMemberSummaries.map((member, index) => {
-      if (index === page - 1) {
-        return createFormDataMemberCard(memberData, index);
-      } else {
-        return member;
-      }
-    });
-
-    return (
-      <>
-        {headOfHHInfoWasEntered && (
-          <Box sx={{ marginBottom: '1.5rem' }}>
-            <h2 className="household-data-sub-header secondary-heading">
-              <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
-            </h2>
-            <div>{summariesWActiveMemberCard}</div>
-          </Box>
-        )}
-      </>
     );
   };
 
@@ -489,7 +354,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           />
         )}
       </QuestionHeader>
-      {createHHMSummaries()}
+      <HHMSummaryCards activeMemberData={memberData} page={page} />
       {createAgeQuestion(page)}
       {page === 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
       {page !== 1 && createHOfHRelationQuestion()}
