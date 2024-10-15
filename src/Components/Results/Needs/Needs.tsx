@@ -13,9 +13,13 @@ const Needs = () => {
     return 0;
   });
 
-  return needsSortedByCategory.map((need, index) => {
-    return <NeedCard need={need} key={index} />;
-  });
+  return (
+    <>
+      {needsSortedByCategory.map((need, index) => {
+        return <NeedCard need={need} key={index} />;
+      })}
+    </>
+  );
 };
 
 export default Needs;

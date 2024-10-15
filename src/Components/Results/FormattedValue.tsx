@@ -1,37 +1,67 @@
-import { ReactNode, useContext } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { translateNumber, useTranslateNumber } from '../../Assets/languageOptions';
-import { PRESCHOOL_MAX_VALUE, PRESCHOOL_PROGRAMS_ABBR } from '../../Assets/resultsConstants';
-import { Language } from '../../Types/Language';
-import { Program, Validation } from '../../Types/Results';
-import { Context } from '../Wrapper/Wrapper';
+import { ReactNode } from 'react';
+import { useIntl } from 'react-intl';
+import { useTranslateNumber } from '../../Assets/languageOptions';
+import { Program, ProgramCategory } from '../../Types/Results';
 import { findValidationForProgram, useResultsContext } from './Results';
 import ResultsTranslate from './Translate/Translate';
 
-export function calculateTotalValue(programs: Program[], category: string) {
-  let total = 0;
-  let preschoolTotal = 0;
-  for (const program of programs) {
+export function calculateTotalValue(category: ProgramCategory) {
+  // assume that none of the caps are overlapping
+  if (hasOverlappingCaps(category)) {
+    throw new Error(`"${category.name.default_message}" has overlapping program caps`);
+  }
+
+  let nonCapTotal = 0;
+  const capValues = Array.from({ length: category.caps.length }, () => 0);
+  for (const program of category.programs) {
     if (program.estimated_value_override.default_message !== '') {
       continue;
     }
 
-    if (program.category.default_message !== category) {
+    let isInCap = false;
+    for (let i = 0; i < category.caps.length; i++) {
+      const cap = category.caps[i];
+      if (cap.programs.includes(program.external_name)) {
+        capValues[i] += program.estimated_value;
+        isInCap = true;
+        break;
+      }
+    }
+
+    if (!isInCap) {
+      nonCapTotal += program.estimated_value;
+    }
+  }
+
+  let total = nonCapTotal;
+  for (let i = 0; i < category.caps.length; i++) {
+    const cap = category.caps[i];
+    const capValue = capValues[i];
+
+    if (capValue > cap.cap) {
+      total += cap.cap;
       continue;
     }
 
-    if (PRESCHOOL_PROGRAMS_ABBR.includes(program.external_name)) {
-      preschoolTotal += program.estimated_value;
-    } else {
-      total += program.estimated_value;
+    total += capValue;
+  }
+
+  return total;
+}
+
+function hasOverlappingCaps(category: ProgramCategory) {
+  const existingProgramCaps: string[] = [];
+
+  for (const cap of category.caps) {
+    for (const program in cap.programs) {
+      if (existingProgramCaps.includes(program)) {
+        return true;
+      }
+      existingProgramCaps.push(program);
     }
   }
 
-  if (preschoolTotal > PRESCHOOL_MAX_VALUE) {
-    preschoolTotal = PRESCHOOL_MAX_VALUE;
-  }
-
-  return total + preschoolTotal;
+  return false;
 }
 
 export const formatToUSD = (num: number) => {
