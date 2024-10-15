@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import ResultsError from './ResultsError/ResultsError';
 import Loading from './Loading/Loading';
-import { EligibilityResults, Program, UrgentNeed, Validation } from '../../Types/Results';
+import { EligibilityResults, Program, ProgramCategory, UrgentNeed, Validation } from '../../Types/Results';
 import { getEligibility } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import { Navigate, useParams, useSearchParams } from 'react-router-dom';
@@ -21,6 +21,7 @@ import './Results.css';
 
 type WrapperResultsContext = {
   programs: Program[];
+  programCategories: ProgramCategory[];
   needs: UrgentNeed[];
   filtersChecked: Record<CitizenLabels, boolean>;
   setFiltersChecked: (newFiltersChecked: Record<CitizenLabels, boolean>) => void;
@@ -47,8 +48,8 @@ export function useResultsContext() {
   return context;
 }
 
-function findProgramById(programs: Program[], id: string) {
-  return programs.find((program) => String(program.program_id) === id);
+function findProgramById(programs: Program[], id: number) {
+  return programs.find((program) => program.program_id === id);
 }
 
 export function findValidationForProgram(validations: Validation[], program: Program) {
@@ -86,7 +87,21 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
 
   const fetchResults = async () => {
     try {
-      const rawEligibilityResponse = (await getEligibility(uuid, locale)) as EligibilityResults;
+      const rawEligibilityResponse = await getEligibility(uuid, locale);
+
+      // replace the program id in the categories with the program
+      for (const category of rawEligibilityResponse.program_categories) {
+        category.programs = category.programs.map((programId: number) => {
+          const program = findProgramById(rawEligibilityResponse.programs, programId);
+
+          if (program === undefined) {
+            throw new Error(`program with id of "${programId}" does not exist`);
+          }
+
+          return program;
+        });
+      }
+
       setApiResults(rawEligibilityResponse);
     } catch (error) {
       setApiError(true);
@@ -112,36 +127,49 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     otherHealthCarePregnant: false,
   });
   const [programs, setPrograms] = useState<Program[]>([]);
+  const [programCategories, setProgramCategories] = useState<ProgramCategory[]>([]);
   const [needs, setNeeds] = useState<UrgentNeed[]>([]);
   const [missingPrograms, setMissingPrograms] = useState(false);
   const [validations, setValidations] = useState<Validation[]>([]);
 
-  useEffect(() => {
+  function showProgram(program: Program) {
+    // show all programs in the admin view
+    if (isAdminView) {
+      return true;
+    }
+
     const filtersCheckedStrArr = Object.entries(filtersChecked)
       .filter((filterKeyValPair) => {
         return filterKeyValPair[1];
       })
       .map((filteredKeyValPair) => filteredKeyValPair[0]);
 
+    const meetsLegalStatus = program.legal_status_required.some((status) => filtersCheckedStrArr.includes(status));
+    const isEligible = program.eligible;
+    const doesNotHave = !program.already_has;
+
+    return meetsLegalStatus && isEligible && doesNotHave;
+  }
+
+  useEffect(() => {
     if (apiResults === undefined) {
       setNeeds([]);
       setPrograms([]);
+      setProgramCategories([]);
       setMissingPrograms(false);
       setValidations([]);
       return;
     }
 
     setNeeds(apiResults.urgent_needs);
-    setPrograms(
-      apiResults.programs
-        .filter((program) => {
-          return program.legal_status_required.some(
-            (status) => (filtersCheckedStrArr.includes(status) && program.eligible) || isAdminView,
-          );
-        })
-        .filter((program) => {
-          return !program.already_has || isAdminView;
-        }),
+    setPrograms(apiResults.programs.filter(showProgram));
+    setProgramCategories(
+      apiResults.program_categories.map((category) => {
+        return {
+          ...category,
+          programs: category.programs.filter(showProgram),
+        };
+      }),
     );
     setMissingPrograms(apiResults.missing_programs);
     setValidations(apiResults.validations);
@@ -175,6 +203,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
         <ResultsContext.Provider
           value={{
             programs,
+            programCategories,
             needs,
             filtersChecked,
             setFiltersChecked,
@@ -201,7 +230,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     return <Navigate to={`/${uuid}/results/benefits`} />;
   }
 
-  const program = findProgramById(programs, programId);
+  const program = findProgramById(programs, Number(programId));
 
   if (program === undefined) {
     return <Navigate to={`/${uuid}/results/benefits`} />;
@@ -211,6 +240,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     <ResultsContext.Provider
       value={{
         programs,
+        programCategories,
         needs,
         filtersChecked,
         setFiltersChecked,
