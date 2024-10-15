@@ -56,7 +56,7 @@ export type ProgramCategory = {
   name: Translation;
   description: Translation;
   caps: ProgramCategoryCap[];
-  programs: Program[]
+  programs: Program[];
 };
 
 export type UrgentNeed = {
