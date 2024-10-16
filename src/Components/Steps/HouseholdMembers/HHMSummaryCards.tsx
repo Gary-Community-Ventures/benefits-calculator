@@ -6,10 +6,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import { calcAge } from '../../HouseholdDataBlock/AgeInput';
 import { useConfig } from '../../Config/configHook';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
-import { useParams } from 'react-router-dom';
+import { HouseholdData } from '../../../Types/FormData';
+import { FormattedMessageType } from '../../../Types/Questions';
 
 
-const HHMSummaries = ({activeMemberData, page}) => {
+const HHMSummaries = (activeMemberData: HouseholdData, page: number) => {
   const { formData } = useContext(Context);
   const relationshipOptions = useConfig('relationship_options');
   const headOfHHInfoWasEntered = formData.householdData.length >= 1;
@@ -20,34 +21,40 @@ const HHMSummaries = ({activeMemberData, page}) => {
     defaultMessage: 'edit household member',
   });
 
-  const handleEditBtnSubmit = () => {
+  const handleEditBtnSubmit = (memberIndex:number) => {
+    //TODO: once validated through zod, update this function
     // const validPersonData = personDataIsValid(memberData);
     // if (validPersonData) {
       // handleHouseholdDataSubmit(memberData, page - 1, uuid);
-      console.log(`will need to update formData and backend data`)
       // navigate(`/${uuid}/step-${step}/${memberIndex + 1}`);
     // }
   };
 
-  const formatToUSD = (num) => {
+  const formatToUSD = (num:number) => {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
   };
 
-  const createMemberCard = (index, relationship, birthYear, birthMonth, age, income, page) => {
-    const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
+  const createMemberCard = (memberIndex:number, memberData:HouseholdData, age: number, income: number, relationship_options:Record<string, FormattedMessageType>) => {
+    const { relationshipToHH, birthYear, birthMonth } = memberData;
+    const containerClassName = `member-added-container ${memberIndex + 1 === page ? 'current-household-member' : ''}`;
+
+    let relationship = relationship_options[relationshipToHH];
+    if (relationship === undefined) {
+      relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
+    }
 
     return (
-      <article className={containerClassName} key={index}>
+      <article className={containerClassName} key={memberIndex}>
         <div className="household-member-header">
           <h3 className="member-added-relationship">{relationship}:</h3>
           <div className="household-member-edit-button">
             <IconButton
               onClick={() => {
-                handleEditBtnSubmit(index);
+                handleEditBtnSubmit(memberIndex);
               }}
               aria-label={editHHMemberAriaLabel}
             >
-              <EditIcon alt="edit icon" />
+              <EditIcon  />
             </IconButton>
           </div>
         </div>
@@ -76,63 +83,61 @@ const HHMSummaries = ({activeMemberData, page}) => {
     );
   };
 
-  const createFormDataMemberCard = (member, index) => {
-    let relationship = relationshipOptions[member.relationshipToHH];
-    if (relationship === undefined) {
-      relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
-    }
+  const createFormDataMemberCard = ( memberIndex:number, member:HouseholdData, relationship_options:Record<string, FormattedMessageType>) => {
+    if (member.birthYear && member.birthMonth) {
+      let age = calcAge(member.birthYear, member.birthMonth);
 
-    let age = calcAge(member.birthYear, member.birthMonth);
-    if (Number.isNaN(age)) {
-      age = 0;
-    }
-
-    let income = 0;
-    for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {
-      let num = 0;
-      switch (incomeFrequency) {
-        case 'weekly':
-          num = Number(incomeAmount) * 52;
-          break;
-        case 'biweekly':
-          num = Number(incomeAmount) * 26;
-          break;
-        case 'semimonthly':
-          num = Number(incomeAmount) * 24;
-          break;
-        case 'monthly':
-          num = Number(incomeAmount) * 12;
-          break;
-        case 'hourly':
-          num = Number(incomeAmount) * Number(hoursPerWeek) * 52;
-          break;
+      if (Number.isNaN(age)) {
+        age = 0;
       }
-      income += Number(num);
-    }
 
-    return createMemberCard(index, relationship, member.birthYear, member.birthMonth, age, income, page);
+      let income = 0;
+      for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {
+        let num = 0;
+        switch (incomeFrequency) {
+          case 'weekly':
+            num = Number(incomeAmount) * 52;
+            break;
+          case 'biweekly':
+            num = Number(incomeAmount) * 26;
+            break;
+          case 'semimonthly':
+            num = Number(incomeAmount) * 24;
+            break;
+          case 'monthly':
+            num = Number(incomeAmount) * 12;
+            break;
+          case 'hourly':
+            num = Number(incomeAmount) * Number(hoursPerWeek) * 52;
+            break;
+        }
+        income += Number(num);
+      }
+
+      // return createMemberCard(memberIndex, relationship, member.birthYear, member.birthMonth, age, income, page);
+      return createMemberCard(memberIndex, member, age, income, relationship_options);
+    }
   };
 
   //hHMemberSummaries will have the length of members that have already been saved to formData
   const hHMemberSummaries = [
-    ...formData.householdData.map((member, index) => {
-      return createFormDataMemberCard(member, index);
+    ...formData.householdData.map((member, memberIndex) => {
+      return createFormDataMemberCard(memberIndex, member, relationshipOptions);
     }),
   ];
 
-  //TODO: this will require memberData from HHDB to be passed as a prop to this component, pass page to this component
   //We want the active/current member's summary card to update synchronously as we change their information
   //so we swap out the current one for the one we create using the memberData in state
-  const summariesWActiveMemberCard = hHMemberSummaries.map((member, index) => {
-    if (index === page - 1) {
-      return createFormDataMemberCard(activeMemberData, index);
+  const summariesWActiveMemberCard = hHMemberSummaries.map((member, memberIndex) => {
+    if (memberIndex === page - 1) {
+      return createFormDataMemberCard(memberIndex, activeMemberData, relationshipOptions);
     } else {
       return member;
     }
   });
 
   return (
-    <>
+    <article key={page}>
       {headOfHHInfoWasEntered && (
         <Box sx={{ marginBottom: '1.5rem' }}>
           <h2 className="household-data-sub-header secondary-heading">
@@ -141,7 +146,7 @@ const HHMSummaries = ({activeMemberData, page}) => {
           <div>{summariesWActiveMemberCard}</div>
         </Box>
       )}
-    </>
+    </article>
   );
 
 };
