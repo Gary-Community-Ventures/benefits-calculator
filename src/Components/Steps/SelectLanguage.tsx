@@ -8,7 +8,7 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader.tsx';
 import { useQueryString } from '../QuestionComponents/questionHooks.ts';
 import FormContinueButton from '../ContinueButton/FormContinueButton.tsx';
 
-const SelectLanguagePage = () => {
+const SelectLanguage = () => {
   const { locale, selectLanguage } = useContext(Context);
   const languageOptions = useConfig('language_options');
   const { uuid } = useParams();
@@ -89,4 +89,4 @@ const SelectLanguagePage = () => {
   );
 };
 
-export default SelectLanguagePage;
+export default SelectLanguage;

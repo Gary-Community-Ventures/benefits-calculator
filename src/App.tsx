@@ -12,7 +12,7 @@ import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlo
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
 import LoadingPage from './Components/LoadingPage/LoadingPage.tsx';
-import SelectLanguagePage from './Components/Steps/SelectLanguagePage.tsx';
+import SelectLanguage from './Components/Steps/SelectLanguage.tsx';
 import { updateScreen, updateUser } from './Assets/updateScreen.ts';
 import { getStepDirectory, STARTING_QUESTION_NUMBER, getStepNumber } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
@@ -336,11 +336,11 @@ const App = () => {
                 <Route path="jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
                 <Route path="jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
                 <Route path="ccig" element={<CcigLandingPage />} />
-                <Route path="step-1" element={<SelectLanguagePage />} />
+                <Route path="step-1" element={<SelectLanguage />} />
                 <Route path="step-2" element={<Disclaimer />} />
                 <Route path=":uuid">
                   <Route path="" element={<Navigate to="/step-1" replace />} />
-                  <Route path="step-1" element={<SelectLanguagePage />} />
+                  <Route path="step-1" element={<SelectLanguage />} />
                   <Route path="step-2" element={<Disclaimer />} />
                   <Route
                     path={`step-${getStepNumber('householdData', formData.immutableReferrer)}/:page`}

@@ -4,22 +4,22 @@ import { FormattedMessage } from 'react-intl';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import { FormattedMessageType } from '../../Types/Questions';
-import { FormData } from '../../Types/FormData';
-import { Context } from '../Wrapper/Wrapper';
-import { updateScreen } from '../../Assets/updateScreen';
+import { FormattedMessageType } from '../../Types/Questions.ts';
+import { FormData } from '../../Types/FormData.ts';
+import { Context } from '../Wrapper/Wrapper.tsx';
+import { updateScreen } from '../../Assets/updateScreen.ts';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { useConfig } from '../Config/configHook.tsx';
 import * as z from 'zod';
-import QuestionHeader from '../QuestionComponents/QuestionHeader';
-import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
-import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import QuestionHeader from '../QuestionComponents/QuestionHeader.tsx';
+import QuestionLeadText from '../QuestionComponents/QuestionLeadText.tsx';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion.tsx';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons.tsx';
-import { useGoToNextStep } from '../QuestionComponents/questionHooks';
-import { getStepNumber } from '../../Assets/stepDirectory';
+import { useGoToNextStep } from '../QuestionComponents/questionHooks.ts';
+import { getStepNumber } from '../../Assets/stepDirectory.ts';
 
-export const ZipcodeStep = () => {
+export const Zipcode = () => {
   const { formData, locale, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();

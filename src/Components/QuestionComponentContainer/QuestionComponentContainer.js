@@ -12,7 +12,7 @@ import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
-import { ZipcodeStep } from '../Steps/ZipcodeStep';
+import { Zipcode } from '../Steps/Zipcode.tsx';
 import './QuestionComponentContainer.css';
 import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
@@ -219,7 +219,7 @@ const QuestionComponentContainer = ({
     case getStepNumber('zipcode', formData.immutableReferrer):
       return (
         <main className="benefits-form">
-          <ZipcodeStep />
+          <Zipcode />
         </main>
       );
     default:
