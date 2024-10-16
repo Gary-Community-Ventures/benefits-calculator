@@ -354,7 +354,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           />
         )}
       </QuestionHeader>
-      <HHMSummaryCards activeMemberData={memberData} page={page} />
+      <HHMSummaryCards activeMemberData={memberData} page={page} formData={formData} />
+
       {createAgeQuestion(page)}
       {page === 1 && displayHealthInsuranceQuestion(page, memberData, setMemberData)}
       {page !== 1 && createHOfHRelationQuestion()}

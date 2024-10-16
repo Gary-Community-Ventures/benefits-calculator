@@ -6,12 +6,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import { calcAge } from '../../HouseholdDataBlock/AgeInput';
 import { useConfig } from '../../Config/configHook';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
-import { HouseholdData } from '../../../Types/FormData';
+import { FormData, HouseholdData } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
 
+type HHMSummariesProps = {
+  activeMemberData: HouseholdData;
+  page: number;
+  formData: FormData;
+}
 
-const HHMSummaries = (activeMemberData: HouseholdData, page: number) => {
-  const { formData } = useContext(Context);
+const HHMSummaries = ({activeMemberData, page, formData}: HHMSummariesProps) => {
   const relationshipOptions = useConfig('relationship_options');
   const headOfHHInfoWasEntered = formData.householdData.length >= 1;
   const translateNumber = useTranslateNumber();
