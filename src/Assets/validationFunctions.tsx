@@ -205,10 +205,75 @@ const displayHouseholdMemberAgeHelperText: MessageFunction<string> = (applicantA
   }
 };
 
-const personDataIsValid: ValidationFunction<HouseholdData> = (householdDataState) => {
-  const { age, relationshipToHH, hasIncome, incomeStreams, healthInsurance } = householdDataState;
+const date = new Date();
+const CURRENT_YEAR = date.getFullYear();
+// the getMonth method returns January as 0
+const CURRENT_MONTH = date.getMonth() + 1;
 
-  const ageIsValid = Number(age) >= 0 && age !== '';
+function birthMonthHasError(birthMonth: number | null) {
+  if (birthMonth === null) {
+    return true;
+  }
+
+  if (birthMonth < 1 || birthMonth > 12) {
+    return true;
+  }
+
+  return false;
+}
+
+function birthMonthErrorMessage() {
+  return (
+    <ErrorMessageWrapper fontSize="1rem">
+      <FormattedMessage id="ageInput.month.error" defaultMessage="Please enter a birth month." />
+    </ErrorMessageWrapper>
+  );
+}
+
+const MAX_AGE = 130;
+function birthYearHasError(birthYear: number | null) {
+  if (birthYear === null) {
+    return true;
+  }
+
+  if (birthYear > CURRENT_YEAR || birthYear < CURRENT_YEAR - MAX_AGE) {
+    return true;
+  }
+
+  return false;
+}
+
+function birthYearErrorMessage() {
+  return (
+    <ErrorMessageWrapper fontSize="1rem">
+      <FormattedMessage id="ageInput.year.error" defaultMessage="Please enter a birth year." />
+    </ErrorMessageWrapper>
+  );
+}
+
+function birthMonthInvalidWithYearErrorMessage() {
+  return (
+    <ErrorMessageWrapper fontSize="1rem">
+      <FormattedMessage id="ageInput.year.error" defaultMessage="This birth month is in the future" />
+    </ErrorMessageWrapper>
+  );
+}
+
+function birthMonthInvalidWithYearError({ birthYear, birthMonth }: { birthYear: number; birthMonth: number }) {
+  return birthYear === CURRENT_YEAR && birthMonth > CURRENT_MONTH;
+}
+
+const personDataIsValid: ValidationFunction<HouseholdData> = (householdDataState) => {
+  const { birthYear, birthMonth, relationshipToHH, hasIncome, incomeStreams, healthInsurance } = householdDataState;
+
+  if (birthMonth === undefined || birthYear === undefined) {
+    return false;
+  }
+
+  const ageIsValid =
+    !birthYearHasError(birthYear) &&
+    !birthMonthHasError(birthMonth) &&
+    !birthMonthInvalidWithYearError({ birthYear, birthMonth });
   const relationshipToHHIsValid = relationshipToHH !== '';
   const incomeIsValid = (hasIncome && incomeStreamsAreValid(incomeStreams)) || !hasIncome;
   const healthInsuranceIsValid = healthInsuranceDataIsValid(healthInsurance);
@@ -572,4 +637,10 @@ export {
   displayAgreeToTermsErrorMessage,
   healthInsuranceDataHasError,
   getHealthInsuranceError,
+  birthMonthHasError,
+  birthMonthErrorMessage,
+  birthYearHasError,
+  birthYearErrorMessage,
+  birthMonthInvalidWithYearError,
+  birthMonthInvalidWithYearErrorMessage,
 };

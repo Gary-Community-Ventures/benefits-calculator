@@ -11,14 +11,7 @@ import HHDataRadiofield from '../Radiofield/HHDataRadiofield';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import PreviousButton from '../PreviousButton/PreviousButton';
-import Textfield from '../Textfield/Textfield';
-import {
-  householdMemberAgeHasError,
-  displayHouseholdMemberAgeHelperText,
-  personDataIsValid,
-  selectHasError,
-  relationTypeHelperText,
-} from '../../Assets/validationFunctions.tsx';
+import { personDataIsValid, selectHasError, relationTypeHelperText } from '../../Assets/validationFunctions.tsx';
 import { getStepNumber } from '../../Assets/stepDirectory';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { isCustomTypedLocationState } from '../../Types/FormData.ts';
@@ -28,6 +21,7 @@ import { useTranslateNumber } from '../../Assets/languageOptions';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import AgeInput, { calcAge } from './AgeInput';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -52,7 +46,8 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   });
 
   const initialMemberData = formData.householdData[page - 1] ?? {
-    age: '',
+    birthYear: undefined,
+    birthMonth: undefined,
     relationshipToHH: page === 1 ? 'headOfHousehold' : '',
     conditions: {
       student: false,
@@ -103,29 +98,14 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     }
   }, []);
 
-  const createFMInputLabel = (personIndex) => {
-    if (personIndex === 1) {
-      return <FormattedMessage id="householdDataBlock.createFMInputLabel-headOfHH" defaultMessage="Your Age" />;
-    } else {
-      return (
-        <>
-          <FormattedMessage id="householdDataBlock.createFMInputLabel-person" defaultMessage="Person " />
-          {personIndex}
-          <FormattedMessage id="householdDataBlock.createFMInputLabel-age" defaultMessage=" Age" />
-        </>
-      );
-    }
-  };
-
   const createAgeQuestion = (personIndex) => {
-    const ageTextfieldProps = {
-      inputType: 'text',
-      inputName: 'age',
-      inputValue: memberData.age,
-      inputLabel: createFMInputLabel(personIndex),
-      numericField: true,
-      inputError: householdMemberAgeHasError,
-      inputHelperText: displayHouseholdMemberAgeHelperText,
+    const birthMonth = memberData.birthMonth ?? null;
+    const birthYear = memberData.birthYear ?? null;
+    const setBirthMonth = (month) => {
+      setMemberData({ ...memberData, birthMonth: month ?? undefined });
+    };
+    const setBirthYear = (year) => {
+      setMemberData({ ...memberData, birthYear: year ?? undefined });
     };
 
     if (personIndex === 1) {
@@ -134,47 +114,36 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           <QuestionQuestion>
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-how-headOfHH"
-              defaultMessage="How old are you?"
+              defaultMessage="Please enter your month and year of birth"
             />
           </QuestionQuestion>
-          {createTextField(ageTextfieldProps, submittedCount)}
+          <AgeInput
+            birthMonth={birthMonth}
+            birthYear={birthYear}
+            setBirthMonth={setBirthMonth}
+            setBirthYear={setBirthYear}
+            submitted={submittedCount}
+          />
         </Box>
       );
     } else {
       return (
         <Box sx={{ marginBottom: '1.5rem' }}>
           <QuestionQuestion>
-            <FormattedMessage id="householdDataBlock.createAgeQuestion-how" defaultMessage="How old are they?" />
-          </QuestionQuestion>
-          <QuestionDescription>
             <FormattedMessage
-              id="householdDataBlock.createAgeQuestion-zero"
-              defaultMessage="If your child is less than a year old, enter 0."
+              id="householdDataBlock.createAgeQuestion-how"
+              defaultMessage="Please enter their month and year of birth"
             />
-          </QuestionDescription>
-          {createTextField(ageTextfieldProps, submittedCount)}
+          </QuestionQuestion>
+          <AgeInput
+            birthMonth={birthMonth}
+            birthYear={birthYear}
+            setBirthMonth={setBirthMonth}
+            setBirthYear={setBirthYear}
+            submitted={submittedCount}
+          />
         </Box>
       );
-    }
-  };
-
-  const createTextField = (componentInputProps, submittedCount) => {
-    return (
-      <Textfield
-        componentDetails={componentInputProps}
-        submitted={submittedCount}
-        data={memberData}
-        handleTextfieldChange={handleTextfieldChange}
-      />
-    );
-  };
-
-  const handleTextfieldChange = (event) => {
-    const { value } = event.target;
-    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/;
-
-    if (numberUpToEightDigitsLongRegex.test(value)) {
-      setMemberData({ ...memberData, age: value });
     }
   };
 
@@ -202,7 +171,11 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
     }
 
-    const age = member.age;
+    let age = calcAge(member.birthYear, member.birthMonth);
+    if (Number.isNaN(age)) {
+      age = 0;
+    }
+
     let income = 0;
     for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {
       let num = 0;
@@ -226,7 +199,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       income += Number(num);
     }
 
-    return createMemberCard(index, relationship, age, income, page);
+    return createMemberCard(index, relationship, member.birthYear, member.birthMonth, age, income, page);
   };
 
   const handleEditBtnSubmit = (memberIndex) => {
@@ -240,7 +213,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   };
 
   const translateNumber = useTranslateNumber();
-  const createMemberCard = (index, relationship, age, income, page) => {
+  const createMemberCard = (index, relationship, birthYear, birthMonth, age, income, page) => {
     const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
 
     return (
@@ -259,10 +232,23 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           </div>
         </div>
         <div className="member-added-age">
-          <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age" />: {translateNumber(age)}
+          <strong>
+            <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age: " />
+          </strong>
+          {translateNumber(age)}
+        </div>
+        <div className="member-added-age">
+          <strong>
+            <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
+          </strong>
+          {birthMonth !== undefined &&
+            birthYear !== undefined &&
+            translateNumber(String(birthMonth).padStart(2, '0')) + '/' + translateNumber(birthYear)}
         </div>
         <div className="member-added-income">
-          <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income" />:{' '}
+          <strong>
+            <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income" />:{' '}
+          </strong>
           {translateNumber(formatToUSD(Number(income)))}
           <FormattedMessage id="displayAnnualIncome.annual" defaultMessage=" annually" />
         </div>
@@ -471,22 +457,18 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       <Box className="section-container">
         <Stack sx={{ padding: '3rem 0' }} className="section">
           {displayHealthCareQuestion(page)}
-          {
-            <OptionCardGroup
-              options={page === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
-              stateVariable="healthInsurance"
-              memberData={hhMemberData}
-              setMemberData={setHHMemberData}
-              hhMemberIndex={page}
-            />
-          }
-          {
-            <HealthInsuranceError
-              hhMemberInsurance={memberData.healthInsurance}
-              submitted={submittedCount}
-              hhMemberIndex={page}
-            />
-          }
+          <OptionCardGroup
+            options={page === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
+            stateVariable="healthInsurance"
+            memberData={hhMemberData}
+            setMemberData={setHHMemberData}
+            hhMemberIndex={page}
+          />
+          <HealthInsuranceError
+            hhMemberInsurance={memberData.healthInsurance}
+            submitted={submittedCount}
+            hhMemberIndex={page}
+          />
         </Stack>
       </Box>
     );
