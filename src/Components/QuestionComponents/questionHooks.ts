@@ -53,3 +53,12 @@ export function useQueryString() {
 
   return queryString;
 }
+
+export function useDefaultBackNavigationFunction(questionName:QuestionName) {
+  const { formData } = useContext(Context);
+  const { uuid } = useParams();
+  const navigate = useNavigate();
+  const currentStepId = getStepNumber(questionName, formData.immutableReferrer);
+
+  return () => navigate(`/${uuid}/step-${currentStepId - 1}`);
+}
