@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,15 +15,12 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons.tsx';
-import { useGoToNextStep } from '../QuestionComponents/questionHooks';
-import { getStepNumber } from '../../Assets/stepDirectory';
+import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
 
 export const ZipcodeStep = () => {
   const { formData, locale, setFormData } = useContext(Context);
   const { uuid } = useParams();
-  const navigate = useNavigate();
-  const currentStepId = getStepNumber('zipcode', formData.immutableReferrer);
-  const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
+  const backNavigationFunction = useDefaultBackNavigationFunction('zipcode');
 
   const countiesByZipcode = useConfig('counties_by_zipcode');
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;

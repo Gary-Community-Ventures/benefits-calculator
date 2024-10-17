@@ -6,21 +6,18 @@ import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { getStepNumber } from '../../Assets/stepDirectory';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { updateScreen } from '../../Assets/updateScreen';
-import { useGoToNextStep } from '../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
 import HelpButton from '../HelpBubbleIcon/HelpButton';
 
 const HouseholdSize = () => {
   const { formData, setFormData, locale } = useContext(Context);
   const { uuid } = useParams();
-  const navigate = useNavigate();
-  const currentStepId = getStepNumber('householdSize', formData.immutableReferrer);
-  const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}`);
+  const backNavigationFunction = useDefaultBackNavigationFunction('householdSize');
   const nextStep = useGoToNextStep('householdSize', '1');
   const intl = useIntl();
 
