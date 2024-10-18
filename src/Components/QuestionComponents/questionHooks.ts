@@ -54,7 +54,7 @@ export function useQueryString() {
   return queryString;
 }
 
-export function useDefaultBackNavigationFunction(questionName:QuestionName) {
+export function useDefaultBackNavigationFunction(questionName: QuestionName) {
   const { formData } = useContext(Context);
   const { uuid } = useParams();
   const navigate = useNavigate();

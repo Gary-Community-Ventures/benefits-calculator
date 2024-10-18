@@ -24,7 +24,14 @@ const HouseholdSize = () => {
   const formSchema = z.object({
     householdSize: z.coerce
       .number({
-        errorMap: () => {return {message: intl.formatMessage({id: "errorMessage-numberOfHHMembers", defaultMessage: "Please enter the number of people in your household (max. 8)" })}}
+        errorMap: () => {
+          return {
+            message: intl.formatMessage({
+              id: 'errorMessage-numberOfHHMembers',
+              defaultMessage: 'Please enter the number of people in your household (max. 8)',
+            }),
+          };
+        },
       })
       .positive()
       .lte(8),
