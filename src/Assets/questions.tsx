@@ -1,6 +1,5 @@
 import {
   radiofieldHasError,
-  householdSizeHasError,
   householdAssetsHasError,
   benefitsHasError,
   selectHasError,
@@ -8,7 +7,6 @@ import {
   signUpOptionsHaveError,
   acuteHHConditionsHasError,
   displayBenefitsHelperText,
-  displayHouseholdSizeHelperText,
   displayHouseholdAssetsHelperText,
   otherReferalSourceHelperText,
 } from './validationFunctions.tsx';
@@ -17,69 +15,6 @@ import type { QuestionName, Question } from '../Types/Questions.ts';
 import HelpButton from '../Components/HelpBubbleIcon/HelpButton.tsx';
 
 const questions: Record<QuestionName, Question> = {
-  zipcode: {
-    name: 'zipcode',
-    header: <FormattedMessage id="qcc.zipcode-header" defaultMessage="Tell us where you live." />,
-    subheader: <FormattedMessage id="qcc.tell-us-text" defaultMessage="Let's Get Started!" />,
-    question: <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />,
-    componentDetails: {
-      componentType: 'ZipcodeStep',
-      inputType: 'text',
-      inputName: 'zipcode',
-      numericField: true,
-      inputLabel: <FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />,
-      required: true,
-    },
-    followUpQuestions: [
-      {
-        question: <FormattedMessage id="questions.zipcode-a" defaultMessage="Please select a county:" />,
-        name: 'county',
-        componentDetails: {
-          componentType: 'BasicSelect',
-          inputType: 'text',
-          inputName: 'county',
-          inputLabel: <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />,
-          required: true,
-          componentProperties: {
-            labelId: 'county-select-label',
-            inputLabelText: <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />,
-            id: 'county-source-select',
-            value: 'county',
-            label: <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />,
-            disabledSelectMenuItemText: (
-              <FormattedMessage id="questions.zipcode-a-disabledSelectMenuItemText" defaultMessage="Select a county" />
-            ),
-          },
-        },
-      },
-    ],
-  },
-  householdSize: {
-    name: 'householdSize',
-    header: <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />,
-    question: (
-      <>
-        <FormattedMessage
-          id="questions.householdSize"
-          defaultMessage="Including you, how many people are in your household?"
-        />
-        <HelpButton
-          helpText="If other adults 18 or older in your household file their own tax return, ask them to complete this tool to determine if they qualify for benefits. But even if you and your spouse file taxes separately, include your spouse in the household."
-          helpId="questions.householdSize-helpText"
-        ></HelpButton>
-      </>
-    ),
-    componentDetails: {
-      componentType: 'Textfield',
-      inputType: 'text',
-      inputName: 'householdSize',
-      inputLabel: <FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size" />,
-      inputError: householdSizeHasError,
-      inputHelperText: displayHouseholdSizeHelperText,
-      numericField: true,
-      required: true,
-    },
-  },
   householdData: {
     name: 'householdData',
     componentDetails: {
