@@ -30,15 +30,6 @@ export type TextFieldDetails = {
   required: boolean;
 };
 
-export type ZipcodeStepDetails = {
-  componentType: 'ZipcodeStep';
-  inputType: string;
-  inputName: string;
-  numericField: boolean;
-  inputLabel: FormattedMessageType;
-  required: boolean;
-};
-
 type BasicSelectOptions =
   | {
       [key: number]: {
@@ -136,8 +127,7 @@ export type ComponentDetails =
   | PreferNotToAnswerDetails
   | AccordionContainerDetails
   | BasicCheckboxGroupDetails
-  | SignUpDetails
-  | ZipcodeStepDetails;
+  | SignUpDetails;
 
 export type Question = {
   name: string;
