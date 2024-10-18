@@ -49,11 +49,6 @@ const HouseholdSize = () => {
     }
   };
 
-  // const displayHouseholdSizeHelperText = (hasHouseholdSizeErrors: boolean, errorMessage: string | undefined) => {
-  //   if (!hasHouseholdSizeErrors) return '';
-  //   return <ErrorMessageWrapper fontSize="1rem">{errorMessage}</ErrorMessageWrapper>;
-  // };
-
   return (
     <div>
       <QuestionHeader>
