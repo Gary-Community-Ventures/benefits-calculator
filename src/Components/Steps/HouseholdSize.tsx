@@ -21,20 +21,10 @@ const HouseholdSize = () => {
   const nextStep = useGoToNextStep('householdSize', '1');
   const intl = useIntl();
 
-  const requiredErrorProps = {
-    id: 'hhSize.requiredError',
-    defaultMsg: 'Household size is required',
-  };
-  const invalidTypeErrorProps = {
-    id: 'hhSize.invalidTypeError',
-    defaultMsg: 'Household size must be a number',
-  };
-
   const formSchema = z.object({
     householdSize: z.coerce
       .number({
-        required_error: intl.formatMessage(requiredErrorProps),
-        invalid_type_error: intl.formatMessage(invalidTypeErrorProps),
+        errorMap: () => {return {message: intl.formatMessage({id: "errorMessage-numberOfHHMembers", defaultMessage: "Please enter the number of people in your household (max. 8)" })}}
       })
       .positive()
       .lte(8),
@@ -59,10 +49,10 @@ const HouseholdSize = () => {
     }
   };
 
-  const displayHouseholdSizeHelperText = (hasHouseholdSizeErrors: boolean, errorMessage: string | undefined) => {
-    if (!hasHouseholdSizeErrors) return '';
-    return <ErrorMessageWrapper fontSize="1rem">{errorMessage}</ErrorMessageWrapper>;
-  };
+  // const displayHouseholdSizeHelperText = (hasHouseholdSizeErrors: boolean, errorMessage: string | undefined) => {
+  //   if (!hasHouseholdSizeErrors) return '';
+  //   return <ErrorMessageWrapper fontSize="1rem">{errorMessage}</ErrorMessageWrapper>;
+  // };
 
   return (
     <div>
@@ -92,10 +82,7 @@ const HouseholdSize = () => {
               label={<FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size" />}
               variant="outlined"
               error={errors.householdSize !== undefined}
-              helperText={displayHouseholdSizeHelperText(
-                errors.householdSize !== undefined,
-                errors.householdSize?.message,
-              )}
+              helperText={errors.householdSize !== undefined && errors.householdSize?.message}
             />
           )}
         />
