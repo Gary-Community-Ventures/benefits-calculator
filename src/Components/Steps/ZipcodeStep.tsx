@@ -101,7 +101,7 @@ export const ZipcodeStep = () => {
 
   const getZipcodeHelperText = (hasZipcodeErrors: boolean) => {
     if (!hasZipcodeErrors) return '';
-    return <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid CO zip code" />;
+    return <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid zip code" />;
   };
 
   const renderCountyHelperText = () => {
