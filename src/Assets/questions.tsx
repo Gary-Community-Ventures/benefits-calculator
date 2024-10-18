@@ -15,14 +15,6 @@ import type { QuestionName, Question } from '../Types/Questions.ts';
 import HelpButton from '../Components/HelpBubbleIcon/HelpButton.tsx';
 
 const questions: Record<QuestionName, Question> = {
-  householdData: {
-    name: 'householdData',
-    componentDetails: {
-      componentType: 'HouseholdDataBlock',
-      ariaLabel: 'questions.householdData-ariaLabel',
-      inputName: 'householdData',
-    },
-  },
   hasExpenses: {
     name: 'hasExpenses',
     header: <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />,
