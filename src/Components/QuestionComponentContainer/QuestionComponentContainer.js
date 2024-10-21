@@ -13,6 +13,7 @@ import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { ZipcodeStep } from '../Steps/ZipcodeStep';
+import Expenses from '../Steps/Expenses.tsx';
 import HouseholdSize from '../Steps/HouseholdSize';
 import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
@@ -226,6 +227,12 @@ const QuestionComponentContainer = ({
       return (
         <main className="benefits-form">
           <HouseholdSize />
+        </main>
+      );
+    case getStepNumber('hasExpenses', formData.immutableReferrer):
+      return (
+        <main className="benefits-form">
+          <Expenses />
         </main>
       );
     default:
