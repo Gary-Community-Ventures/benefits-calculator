@@ -30,7 +30,7 @@ const Expenses = () => {
 
   // const expenseSchema =
   // const formSchema = z.object({ hasExpenses: z.boolean(), expenses: expenseSchema })
-  const formSchema = z.object({ hasExpenses: z.coerce.boolean() })
+  const formSchema = z.object({ hasExpenses: z.string().transform(value => value === 'true') })
 
   const { control, formState: { errors }, handleSubmit, watch } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,14 +39,13 @@ const Expenses = () => {
       // expenses: formData.expenses ?? []
     }
   })
+  const hasExpenses = watch('hasExpenses');
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (expensesObject) => {
     console.log({expensesObject})
     console.log(`in form submit handler`)
     if (uuid) {
       const updatedFormData = { ...formData, ...expensesObject };
-      console.log(updatedFormData);
-      // TODO: right now it's setting hasExpenses to true regardless of what was selected
       setFormData(updatedFormData);
       await updateScreen(uuid, updatedFormData, locale);
       nextStep();
