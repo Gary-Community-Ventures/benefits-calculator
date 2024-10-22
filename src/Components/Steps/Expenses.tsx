@@ -28,15 +28,22 @@ const Expenses = () => {
   const nextStep = useGoToNextStep('hasExpenses');
 
 
-  // const expenseSchema =
-  // const formSchema = z.object({ hasExpenses: z.boolean(), expenses: expenseSchema })
-  const formSchema = z.object({ hasExpenses: z.string().transform(value => value === 'true') })
+  const expenseSourceSchema = z.object({
+      expenseSourceName: z.string(),
+      expenseAmount: z.string()
+  });
+  const expenseSourcesSchema = z.array(expenseSourceSchema)
+  const hasExpensesSchema = z.string().transform((value) => value === 'true');
+  const formSchema = z.object({
+    hasExpenses: hasExpensesSchema,
+    expenses: expenseSourcesSchema,
+  });
 
   const { control, formState: { errors }, handleSubmit, watch } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       hasExpenses: formData.hasExpenses ?? false,
-      // expenses: formData.expenses ?? []
+      expenses: formData.expenses ?? []
     }
   })
   const hasExpenses = watch('hasExpenses');
