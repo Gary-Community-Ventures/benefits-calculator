@@ -104,7 +104,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
 
       setApiResults(rawEligibilityResponse);
     } catch (error) {
-      console.error(error)
+      console.error(error);
       setApiError(true);
       setLoading(false);
     }
