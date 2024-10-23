@@ -17,10 +17,15 @@ import CheckIcon from '@mui/icons-material/Check';
 import { Context } from '../Wrapper/Wrapper';
 import dataLayerPush from '../../Assets/analytics';
 import './Share.css';
+import { Button } from '@mui/material';
+import { useConfig } from '../Config/configHook';
+
 
 const Share = forwardRef(function Share() {
   const [copied, setCopied] = useState(false);
   const { getReferrer } = useContext(Context);
+  const { email, survey } = useConfig('feedback_links');
+  const surveyLink = survey;
   const intl = useIntl();
 
   const labels = {
@@ -49,6 +54,14 @@ const Share = forwardRef(function Share() {
     }, 5000);
   };
 
+  const onEmailClick = () => {
+    window.location.href = email;
+  };
+
+  const onSurveyClick = () => {
+    window.open(surveyLink,'_blank')
+  };
+
   const Icon = ({ name, children }: { name: string; children: ReactElement }) => {
     return <span className={`${name} icon`}>{children}</span>;
   };
@@ -65,6 +78,10 @@ const Share = forwardRef(function Share() {
 
   return (
     <div>
+      <div className='share-buttons-container'>
+        <Button variant="outlined" className='share-button-and-text share-button-contact-us' onClick={onEmailClick}> <FormattedMessage id="contactUsButton" defaultMessage="CONTACT US" /></Button>
+        <Button variant="outlined" className='share-button-and-text share-button-report-bug' onClick={onSurveyClick}> <FormattedMessage id="reportABugButton" defaultMessage="REPORT A BUG" /></Button>
+      </div>
       <div className="share-text-container">
         <p className="white-font">
           <FormattedMessage id="results.share-header" defaultMessage="Share MyFriendBen Via:" />

@@ -49,6 +49,37 @@ button {
   justify-content: flex-end;
 }
 
+.share-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  /* border-bottom: 1px solid #fff !important; */
+  border-bottom: 1px solid rgb(176, 175, 182) !important;
+  margin-left: 1rem !important;
+
+}
+
+.share-button-contact-us {
+  width: 10rem;
+}
+
+.share-button-report-bug {
+  width: 10rem;
+}
+
+.share-button-and-text {
+  color: #fff !important;
+  border: 1px solid #fff !important;
+}
+
+.share-button-and-text:hover {
+  color: var(--primary-color) !important;
+  background-color: var(--hover-color) !important;
+  /* border: 1px solid #fff !important; */
+}
+
 .button-no-format {
   cursor: pointer;
 }

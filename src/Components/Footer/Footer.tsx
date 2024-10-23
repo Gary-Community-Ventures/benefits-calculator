@@ -5,14 +5,12 @@ import { Context } from '../Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
 import './Footer.css';
 import { useLogo } from '../Referrer/useLogo';
-import FeedbackIcon from '../FeedbackIcon/feedbackIcon';
 
 const Footer = () => {
   const context = useContext(Context);
   const { theme } = context;
   return (
     <footer>
-      <FeedbackIcon />
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: theme.midBlueColor }} square={true}>
         <div className="footer-content-container">
           <div>
