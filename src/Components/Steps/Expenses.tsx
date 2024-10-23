@@ -3,7 +3,7 @@ import QuestionHeader from "../QuestionComponents/QuestionHeader";
 import HelpButton from "../HelpBubbleIcon/HelpButton";
 import QuestionQuestion from "../QuestionComponents/QuestionQuestion";
 import QuestionDescription from "../QuestionComponents/QuestionDescription";
-import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { Box, FormControlLabel, Radio, RadioGroup, Stack } from "@mui/material";
 import { Context } from "../Wrapper/Wrapper";
 import { useContext } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
@@ -46,10 +46,11 @@ const Expenses = () => {
       expenses: formData.expenses ?? []
     }
   })
-  const hasExpenses = watch('hasExpenses');
+  const watchHasExpenses = watch('hasExpenses')
+  const hasTruthyExpenses = watchHasExpenses === 'true' || watchHasExpenses === true;
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (expensesObject) => {
-    console.log({expensesObject})
+    // console.log({expensesObject})
     console.log(`in form submit handler`)
     if (uuid) {
       const updatedFormData = { ...formData, ...expensesObject };
@@ -85,23 +86,34 @@ const Expenses = () => {
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
-            <RadioGroup
-              {...field}
-              aria-labelledby={translatedAriaLabel}
-            >
+            <RadioGroup {...field} aria-labelledby={translatedAriaLabel}>
               <FormControlLabel
-                value="true"
+                value={true}
                 control={<Radio />}
                 label={<FormattedMessage id="radiofield.label-yes" defaultMessage="Yes" />}
               />
               <FormControlLabel
-                value="false"
+                value={false}
                 control={<Radio />}
                 label={<FormattedMessage id="radiofield.label-no" defaultMessage="No" />}
               />
             </RadioGroup>
           )}
         />
+        {hasTruthyExpenses && (
+          // TODO: try to use the current ExpenseBlock (createExpenseBlockQuestions)
+          <>
+            <QuestionQuestion>
+              <FormattedMessage
+                id="questions.hasExpenses-a"
+                defaultMessage="What type of expense has your household had most recently?"
+              />
+            </QuestionQuestion>
+            <Box className="section-container expense-block-container">
+              <Stack className="section"></Stack>
+            </Box>
+          </>
+        )}
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
     </div>
