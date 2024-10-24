@@ -49,6 +49,36 @@ button {
   justify-content: flex-end;
 }
 
+.feedback-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgb(176, 175, 182) !important;
+  margin-left: 1rem !important;
+
+}
+
+.contact-us-button {
+  width: 10rem;
+}
+
+.report-bug-button {
+  width: 10rem;
+}
+
+.feedback-button-and-text {
+  color: var(--hover-color)!important;
+  border: 1px solid var(--hover-color) !important;
+
+}
+
+.feedback-button-and-text:hover {
+  color: var(--primary-color) !important;
+  background-color: var(--hover-color) !important;
+}
+
 .button-no-format {
   cursor: pointer;
 }
