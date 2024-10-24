@@ -49,7 +49,7 @@ button {
   justify-content: flex-end;
 }
 
-.share-buttons-container {
+.feedback-buttons-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -60,21 +60,21 @@ button {
 
 }
 
-.share-button-contact-us {
+.contact-us-button {
   width: 10rem;
 }
 
-.share-button-report-bug {
+.report-bug-button {
   width: 10rem;
 }
 
-.share-button-and-text {
+.feedback-button-and-text {
   color: var(--hover-color)!important;
   border: 1px solid var(--hover-color) !important;
 
 }
 
-.share-button-and-text:hover {
+.feedback-button-and-text:hover {
   color: var(--primary-color) !important;
   background-color: var(--hover-color) !important;
 }

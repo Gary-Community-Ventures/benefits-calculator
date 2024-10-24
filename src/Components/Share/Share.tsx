@@ -78,9 +78,9 @@ const Share = forwardRef(function Share() {
 
   return (
     <div>
-      <div className='share-buttons-container'>
-        <Button variant="outlined" className='share-button-and-text share-button-contact-us' onClick={onEmailClick}> <FormattedMessage id="contactUsButton" defaultMessage="CONTACT US" /></Button>
-        <Button variant="outlined" className='share-button-and-text share-button-report-bug' onClick={onSurveyClick}> <FormattedMessage id="reportABugButton" defaultMessage="REPORT A BUG" /></Button>
+      <div className='feedback-buttons-container'>
+        <Button variant="outlined" className='feedback-button-and-text contact-us-button' onClick={onEmailClick}> <FormattedMessage id="contactUsButton" defaultMessage="CONTACT US" /></Button>
+        <Button variant="outlined" className='feedback-button-and-text report-bug-button' onClick={onSurveyClick}> <FormattedMessage id="reportABugButton" defaultMessage="REPORT A BUG" /></Button>
       </div>
       <div className="share-text-container">
         <p className="white-font">
