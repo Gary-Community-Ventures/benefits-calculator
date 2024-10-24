@@ -25,7 +25,7 @@ type IconRendererProps = {
 const ProgramPage = ({ program }: ProgramPageProps) => {
   const { uuid } = useParams();
   const { formData, setFormData, staffToken } = useContext(Context);
-  const { isAdminView, validations, setValidations } = useResultsContext();
+  const { isAdminView, validations, setValidations, programCategories } = useResultsContext();
   const IconRenderer: React.FC<IconRendererProps> = ({ headingType }) => {
     const IconComponent = headingOptionsMappings[headingType];
 
@@ -76,15 +76,29 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     saveValidation();
   };
 
+  const category = programCategories.find((category) => {
+    for (const categoryProgram of category.programs) {
+      if (categoryProgram.external_name === program.external_name) {
+        return true;
+      }
+    }
+
+    return false;
+  });
+
+  if (category === undefined) {
+    throw new Error(`program with external name "${program.external_name}" is not in a category`);
+  }
+
   const displayIconAndHeader = (program: Program) => {
     return (
       <header className="program-icon-and-header">
         <div className="header-icon-box">
-          <IconRenderer headingType={program.category.default_message} />
+          <IconRenderer headingType={category.icon} />
         </div>
         <div className="header-text">
           <p className="header-text-top">
-            <ResultsTranslate translation={program.category} />
+            <ResultsTranslate translation={category.name} />
           </p>
           <div className="divider"></div>
           <h1 className="header-text-bottom">
