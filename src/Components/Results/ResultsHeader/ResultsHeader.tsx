@@ -22,7 +22,7 @@ const ProgramsHeader = () => {
   const taxCreditsCategory = programCategories.find((category) => category.external_name === TAX_CREDIT_CATEGORY);
   let taxCredit = 0;
   if (taxCreditsCategory !== undefined) {
-    taxCredit = calculateTotalValue(programs, taxCreditsCategory);
+    taxCredit = calculateTotalValue(taxCreditsCategory);
   }
   const translateNumber = useTranslateNumber();
 
