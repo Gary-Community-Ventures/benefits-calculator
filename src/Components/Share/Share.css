@@ -70,6 +70,7 @@ button {
   border-radius: 0.75rem;
   font-weight: bold;
   font-size: 0.875rem;
+  text-decoration: none;
 }
 
 .feedback-button-and-text:hover {

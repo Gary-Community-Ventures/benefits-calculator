@@ -52,14 +52,6 @@ const Share = forwardRef(function Share() {
     }, 5000);
   };
 
-  const onEmailClick = () => {
-    window.location.href = email;
-  };
-
-  const onSurveyClick = () => {
-    window.open(surveyLink, '_blank');
-  };
-
   const Icon = ({ name, children }: { name: string; children: ReactElement }) => {
     return <span className={`${name} icon`}>{children}</span>;
   };
@@ -77,10 +69,10 @@ const Share = forwardRef(function Share() {
   return (
     <div>
       <div className="feedback-buttons-container">
-        <a className="feedback-button-and-text" onClick={onEmailClick}>
+        <a className="feedback-button-and-text" href={email}>
           <FormattedMessage id="contactUsButton" defaultMessage="CONTACT US" />
         </a>
-        <a className="feedback-button-and-text" onClick={onSurveyClick}>
+        <a className="feedback-button-and-text" href={surveyLink} target="_blank">
           <FormattedMessage id="reportABugButton" defaultMessage="REPORT A BUG" />
         </a>
       </div>
