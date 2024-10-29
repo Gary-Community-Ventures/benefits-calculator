@@ -52,7 +52,7 @@ export type Program = {
 
 export type ProgramDocument = {
   text: Translation;
-  link: Translation;
+  link_url: Translation;
   link_text: Translation;
 }
 

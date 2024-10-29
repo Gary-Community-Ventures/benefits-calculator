@@ -238,9 +238,9 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
               {program.documents.map((document, index) => (
                 <li key={index}>
                   {<ResultsTranslate translation={document.text} />}
-                  {document.link && document.link_text && (
+                  {document.link_url && document.link_text && (
                       <span className="required-docs-link">
-                        <a href={document.link.default_message} target="_blank" className="link-color">
+                        <a href={document.link_url.default_message} target="_blank" className="link-color">
                           <ResultsTranslate translation={document.link_text} />
                         </a>
                       </span>
