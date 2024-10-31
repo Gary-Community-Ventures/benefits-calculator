@@ -6,7 +6,7 @@ import QuestionDescription from "../QuestionComponents/QuestionDescription";
 import { Box, FormControlLabel, Radio, RadioGroup, Stack } from "@mui/material";
 import { Context } from "../Wrapper/Wrapper";
 import { useContext } from "react";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useForm, Controller, SubmitHandler, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from 'zod';
 import PrevAndContinueButtons from "../PrevAndContinueButtons/PrevAndContinueButtons";
@@ -39,19 +39,35 @@ const Expenses = () => {
     expenses: expenseSourcesSchema,
   });
 
-  const { control, formState: { errors }, handleSubmit, watch } = useForm<z.infer<typeof formSchema>>({
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    watch,
+    getValues
+  } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       hasExpenses: formData.hasExpenses ?? false,
-      expenses: formData.expenses ?? []
-    }
-  })
-  const watchHasExpenses = watch('hasExpenses')
+      expenses: formData.expenses ?? [
+        {
+          expenseSourceName: '',
+          expenseAmount: '',
+        },
+      ],
+    },
+  });
+  const watchHasExpenses = watch('hasExpenses');
+  // @ts-ignore
   const hasTruthyExpenses = watchHasExpenses === 'true' || watchHasExpenses === true;
+  const { fields, append, prepend, remove, move, insert } = useFieldArray({
+    control,
+    name: 'expenses'
+  })
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (expensesObject) => {
     // console.log({expensesObject})
-    console.log(`in form submit handler`)
+    // console.log(`in form submit handler`)
     if (uuid) {
       const updatedFormData = { ...formData, ...expensesObject };
       setFormData(updatedFormData);
@@ -101,17 +117,20 @@ const Expenses = () => {
           )}
         />
         {hasTruthyExpenses && (
-          // TODO: try to use the current ExpenseBlock (createExpenseBlockQuestions)
           <>
-            <QuestionQuestion>
-              <FormattedMessage
-                id="questions.hasExpenses-a"
-                defaultMessage="What type of expense has your household had most recently?"
-              />
-            </QuestionQuestion>
-            <Box className="section-container expense-block-container">
-              <Stack className="section"></Stack>
+            <Box className="section-container">
+              <Stack className="section">
+                <div className="expense-padding-top">
+                  <QuestionQuestion>
+                    <FormattedMessage
+                      id="questions.hasExpenses-a"
+                      defaultMessage="What type of expense has your household had most recently?"
+                    />
+                  </QuestionQuestion>
+                </div>
+              </Stack>
             </Box>
+
           </>
         )}
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
