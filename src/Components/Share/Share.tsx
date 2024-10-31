@@ -73,7 +73,7 @@ const Share = forwardRef(function Share() {
           <FormattedMessage id="contactUsButton" defaultMessage="CONTACT US" />
         </a>
         <a className="feedback-button-and-text" href={surveyLink} target="_blank">
-          <FormattedMessage id="reportABugButton" defaultMessage="REPORT A BUG" />
+          <FormattedMessage id="reportABugButton" defaultMessage="REPORT AN ISSUE" />
         </a>
       </div>
       <div className="share-text-container">
