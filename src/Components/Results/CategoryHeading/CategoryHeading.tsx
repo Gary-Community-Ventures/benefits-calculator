@@ -5,45 +5,41 @@ import { ReactComponent as Transportation } from '../../../Assets/CategoryHeadin
 import { ReactComponent as TaxCredits } from '../../../Assets/CategoryHeadingIcons/taxCredits.svg';
 import { ReactComponent as CashAssistance } from '../../../Assets/CategoryHeadingIcons/cashAssistant.svg';
 import { ReactComponent as ChildCareYouthEducation } from '../../../Assets/CategoryHeadingIcons/childCareYouthEducation.svg';
-import { useResultsContext } from '../Results';
 import { calculateTotalValue, formatToUSD } from '../FormattedValue';
-import { Translation } from '../../../Types/Results.ts';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate.tsx';
-import { PRESCHOOL_CATEGORY } from '../../../Assets/resultsConstants.ts';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
+import { ProgramCategory } from '../../../Types/Results';
 
 export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
-  'Housing and Utilities': Housing,
-  'Food and Nutrition': Food,
-  'Health Care': HealthCare,
-  Transportation: Transportation,
-  'Tax Credits': TaxCredits,
-  'Cash Assistance': CashAssistance,
-  'Child Care, Youth, and Education': ChildCareYouthEducation,
+  housing: Housing,
+  food: Food,
+  health_care: HealthCare,
+  transportation: Transportation,
+  tax_credit: TaxCredits,
+  cash: CashAssistance,
+  child_care: ChildCareYouthEducation,
 };
 
 type CategoryHeadingProps = {
-  headingType: Translation;
+  category: ProgramCategory;
 };
 
-const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
-  const { programs } = useResultsContext();
+const CategoryHeading = ({ category }: CategoryHeadingProps) => {
   const intl = useIntl();
   const translateNumber = useTranslateNumber();
 
-  let IconComponent = headingOptionsMappings[headingType.default_message];
+  let IconComponent = headingOptionsMappings[category.icon];
 
   if (IconComponent === undefined) {
     // if there is a category not in the list of categories use a default icon
     IconComponent = CashAssistance;
   }
 
-  const monthlyCategoryAmt = calculateTotalValue(programs, headingType.default_message) / 12;
-  const savedTranslation = <ResultsTranslate translation={headingType} />;
+  const monthlyCategoryAmt = calculateTotalValue(category) / 12;
   const categoryImageAriaLabelProps = {
-    id: savedTranslation.props.translation.label,
-    defaultMsg: savedTranslation.props.translation.default_message,
+    id: category.name.label,
+    defaultMsg: category.name.default_message,
   };
   const iconTranslation = intl.formatMessage({ id: 'categoryHeading.icon', defaultMessage: 'icon' });
 
@@ -59,7 +55,7 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
             <IconComponent />
           </div>
           <h2 className="category-heading-text-style">
-            <ResultsTranslate translation={headingType} />
+            <ResultsTranslate translation={category.name} />
           </h2>
         </div>
         <div className="box-right">
@@ -69,12 +65,9 @@ const CategoryHeading: React.FC<CategoryHeadingProps> = ({ headingType }) => {
           </h2>
         </div>
       </div>
-      {headingType.default_message === PRESCHOOL_CATEGORY && (
+      {category.description.default_message !== '' && (
         <p className="child-care-warning-text">
-          <FormattedMessage
-            id="benefitCategories.childCareHelperText"
-            defaultMessage="This monthly value is an estimate of the combined average value of child care and preschool programs. Savings from programs may overlap."
-          />
+          <ResultsTranslate translation={category.description} />
         </p>
       )}
     </div>

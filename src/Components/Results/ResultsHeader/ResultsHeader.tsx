@@ -17,21 +17,24 @@ type ResultsHeaderProps = {
 };
 
 const ProgramsHeader = () => {
-  const { programs } = useResultsContext();
+  const { programs, programCategories } = useResultsContext();
   const { theme, formData } = useContext(Context);
-  const taxCredit = calculateTotalValue(programs, TAX_CREDIT_CATEGORY);
+  const taxCreditsCategory = programCategories.find((category) => category.external_name === TAX_CREDIT_CATEGORY);
+  let taxCredit = 0;
+  if (taxCreditsCategory !== undefined) {
+    taxCredit = calculateTotalValue(taxCreditsCategory);
+  }
   const translateNumber = useTranslateNumber();
 
   // don't add tax credits to total value
-  const categoriesCalculated = new Set([TAX_CREDIT_CATEGORY]);
   let estimatedMonthlySavings = 0;
-  for (const program of programs) {
-    const category = program.category.default_message;
-    if (!categoriesCalculated.has(category)) {
-      // use calculate total value to account for preschool cap
-      estimatedMonthlySavings += calculateTotalValue(programs, category);
-      categoriesCalculated.add(category);
+  for (const category of programCategories) {
+    if (category.external_name === TAX_CREDIT_CATEGORY) {
+      continue;
     }
+
+    // use calculate total value to account for preschool cap
+    estimatedMonthlySavings += calculateTotalValue(category);
   }
 
   return (
