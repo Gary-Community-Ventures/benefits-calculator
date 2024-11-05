@@ -88,6 +88,31 @@ const Expenses = () => {
     }
   }
 
+    const createExpenseMenuItems = (expenseOptions: Record<string, FormattedMessageType>) => {
+      const disabledSelectMenuItem = (
+        <MenuItem value="select" key="disabled-select-value" disabled>
+          <FormattedMessage
+            id="expenseBlock.createExpenseMenuItems-disabledSelectMenuItemText"
+            defaultMessage="Select"
+          />
+        </MenuItem>
+      );
+
+      const menuItemKeys = Object.keys(expenseOptions);
+      const menuItemLabels = Object.values(expenseOptions);
+
+      const menuItems = menuItemKeys.map((menuItemKey, i) => {
+        return (
+          <MenuItem value={menuItemKey} key={menuItemKey}>
+            {menuItemLabels[i]}
+          </MenuItem>
+        );
+      });
+
+      return [disabledSelectMenuItem, menuItems];
+    };
+
+
   return (
     <div>
       <QuestionHeader>
