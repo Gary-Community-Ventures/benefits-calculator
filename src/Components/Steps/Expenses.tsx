@@ -55,10 +55,10 @@ const Expenses = () => {
   const watchHasExpenses = watch('hasExpenses');
   // @ts-ignore
   const hasTruthyExpenses = watchHasExpenses === 'true' || watchHasExpenses === true;
-  const { fields, append, prepend, remove, move, insert } = useFieldArray({
+  const { fields, append, prepend, remove, move, insert, replace } = useFieldArray({
     control,
     name: 'expenses'
-  })
+  });
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (expensesObject) => {
     // console.log({expensesObject})
