@@ -3,9 +3,9 @@ import QuestionHeader from "../QuestionComponents/QuestionHeader";
 import HelpButton from "../HelpBubbleIcon/HelpButton";
 import QuestionQuestion from "../QuestionComponents/QuestionQuestion";
 import QuestionDescription from "../QuestionComponents/QuestionDescription";
-import { Box, FormControlLabel, Radio, RadioGroup, Stack } from "@mui/material";
+import { Box, FormControl, FormControlLabel, FormHelperText, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack } from "@mui/material";
 import { Context } from "../Wrapper/Wrapper";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm, Controller, SubmitHandler, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from 'zod';
@@ -13,6 +13,9 @@ import PrevAndContinueButtons from "../PrevAndContinueButtons/PrevAndContinueBut
 import { useNavigate, useParams } from "react-router-dom";
 import { updateScreen } from "../../Assets/updateScreen";
 import { useGoToNextStep } from "../QuestionComponents/questionHooks";
+import { DevTool } from '@hookform/devtools';
+import { useConfig } from "../Config/configHook";
+import { FormattedMessageType } from "../../Types/Questions";
 
 const Expenses = () => {
   const { formData, setFormData, locale } = useContext(Context);
@@ -26,6 +29,7 @@ const Expenses = () => {
   });
   const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}/${formData.householdSize}`);
   const nextStep = useGoToNextStep('hasExpenses');
+  const expenseOptions = useConfig('expense_options');
 
 
   const expenseSourceSchema = z.object({
@@ -172,7 +176,7 @@ const Expenses = () => {
                 //TODO: expense amount textfield
                 <div key={field.id}>
                   {/* {error={errors.expenses !== undefined}} inside of the FormControl */}
-                  <FormControl sx={{ m: 1, minWidth: 210, maxWidth: '100%' }}>
+                  <FormControl sx={{ m: 1, minWidth: '13.125rem', maxWidth: '100%', backgroundColor: '#fff' }}>
                     <InputLabel id="expense-type-label">
                       <FormattedMessage
                         id="expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel"
@@ -210,6 +214,7 @@ const Expenses = () => {
         )}
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
+      <DevTool control={control} />
     </div>
   );
 }
