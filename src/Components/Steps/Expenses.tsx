@@ -49,12 +49,7 @@ const Expenses = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       hasExpenses: formData.hasExpenses ?? false,
-      expenses: formData.expenses ?? [
-        {
-          expenseSourceName: '',
-          expenseAmount: '',
-        },
-      ],
+      expenses: formData.expenses ?? [],
     },
   });
   const watchHasExpenses = watch('hasExpenses');
