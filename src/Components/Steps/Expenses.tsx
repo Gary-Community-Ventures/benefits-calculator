@@ -142,7 +142,45 @@ const Expenses = () => {
                 </div>
               </Stack>
             </Box>
-
+            {fields.map((field, index) => {
+              return (
+                //TODO: expense amount textfield
+                <div key={field.id}>
+                  {/* {error={errors.expenses !== undefined}} inside of the FormControl */}
+                  <FormControl sx={{ m: 1, minWidth: 210, maxWidth: '100%' }}>
+                    <InputLabel id="expense-type-label">
+                      <FormattedMessage
+                        id="expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel"
+                        defaultMessage="Expense Type"
+                      />
+                    </InputLabel>
+                    <Controller
+                      name={`expenses.${index}.expenseSourceName`}
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <>
+                          <Select
+                            {...field}
+                            labelId="expense-type-label"
+                            id={`expenses.${index}.expenseSourceName`}
+                            label={
+                              <FormattedMessage
+                                id="expenseBlock.createExpenseDropdownMenu-expenseTypeSelectLabel"
+                                defaultMessage="Expense Type"
+                              />
+                            }
+                          >
+                            {createExpenseMenuItems(expenseOptions)}
+                          </Select>
+                          {/* <FormHelperText>{errors.expenses !== undefined && renderExpensesHelperText()}</FormHelperText> */}
+                        </>
+                      )}
+                    />
+                  </FormControl>
+                </div>
+              );
+            })}
           </>
         )}
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
