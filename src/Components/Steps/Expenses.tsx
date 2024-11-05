@@ -60,6 +60,23 @@ const Expenses = () => {
     name: 'expenses'
   });
 
+  useEffect(() => {
+    const noExpensesAreListed = Number(getValues('expenses').length) === 0;
+    if (hasTruthyExpenses && noExpensesAreListed) {
+      append({
+        expenseSourceName: '',
+        expenseAmount: '',
+      });
+    }
+
+    if (!hasTruthyExpenses) {
+      // need to update the expenses
+      replace([]);
+      // unregister('expenses'); I don't think we need to use this because we still send an empty array
+    }
+
+  }, [getValues('hasExpenses')])
+
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (expensesObject) => {
     // console.log({expensesObject})
     // console.log(`in form submit handler`)
