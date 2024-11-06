@@ -17,10 +17,13 @@ import CheckIcon from '@mui/icons-material/Check';
 import { Context } from '../Wrapper/Wrapper';
 import dataLayerPush from '../../Assets/analytics';
 import './Share.css';
+import { useConfig } from '../Config/configHook';
 
 const Share = forwardRef(function Share() {
   const [copied, setCopied] = useState(false);
   const { getReferrer } = useContext(Context);
+  const { email, survey } = useConfig('feedback_links');
+  const surveyLink = survey;
   const intl = useIntl();
 
   const labels = {
@@ -65,6 +68,14 @@ const Share = forwardRef(function Share() {
 
   return (
     <div>
+      <div className="feedback-buttons-container">
+        <a className="feedback-button-and-text" href={email}>
+          <FormattedMessage id="contactUsButton" defaultMessage="CONTACT US" />
+        </a>
+        <a className="feedback-button-and-text" href={surveyLink} target="_blank">
+          <FormattedMessage id="reportABugButton" defaultMessage="REPORT AN ISSUE" />
+        </a>
+      </div>
       <div className="share-text-container">
         <p className="white-font">
           <FormattedMessage id="results.share-header" defaultMessage="Share MyFriendBen Via:" />
