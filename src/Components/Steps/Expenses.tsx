@@ -75,9 +75,7 @@ const Expenses = () => {
     }
 
     if (!hasTruthyExpenses) {
-      // need to update the expenses
       replace([]);
-      // unregister('expenses'); I don't think we need to use this because we still send an empty array
     }
 
   }, [getValues('hasExpenses')])
