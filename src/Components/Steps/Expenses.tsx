@@ -3,7 +3,7 @@ import QuestionHeader from "../QuestionComponents/QuestionHeader";
 import HelpButton from "../HelpBubbleIcon/HelpButton";
 import QuestionQuestion from "../QuestionComponents/QuestionQuestion";
 import QuestionDescription from "../QuestionComponents/QuestionDescription";
-import { Box, FormControl, FormControlLabel, FormHelperText, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack } from "@mui/material";
+import { Box, FormControl, FormControlLabel, FormHelperText, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, TextField } from "@mui/material";
 import { Context } from "../Wrapper/Wrapper";
 import { useContext, useEffect } from "react";
 import { useForm, Controller, SubmitHandler, useFieldArray } from "react-hook-form";
@@ -16,6 +16,7 @@ import { useGoToNextStep } from "../QuestionComponents/questionHooks";
 import { DevTool } from '@hookform/devtools';
 import { useConfig } from "../Config/configHook";
 import { FormattedMessageType } from "../../Types/Questions";
+import ErrorMessageWrapper from "../ErrorMessage/ErrorMessageWrapper";
 
 const Expenses = () => {
   const { formData, setFormData, locale } = useContext(Context);
@@ -194,7 +195,6 @@ const Expenses = () => {
             {fields.map((field, index) => {
               const selectedExpenseSource = watch('expenses')[index].expenseSourceName;
               return (
-                //TODO: expense amount textfield
                 <div key={field.id}>
                   <FormControl
                     sx={{ m: 1, minWidth: '13.125rem', maxWidth: '100%', backgroundColor: '#fff' }}
@@ -231,6 +231,42 @@ const Expenses = () => {
                       )}
                     />
                   </FormControl>
+                  <div className="expense-margin-bottom">
+                    <QuestionQuestion>
+                      <FormattedMessage
+                        id="expenseBlock.createExpenseAmountTextfield-questionLabel"
+                        defaultMessage="How much is this expense every month "
+                      />
+                      {getExpenseSourceLabel(expenseOptions, selectedExpenseSource)}
+                    </QuestionQuestion>
+                    <div className="expense-block-textfield">
+                      <Controller
+                        name={`expenses.${index}.expenseAmount`}
+                        control={control}
+                        render={({ field }) => (
+                          <TextField
+                            {...field}
+                            label={
+                              <FormattedMessage
+                                id="expenseBlock.createExpenseAmountTextfield-amountLabel"
+                                defaultMessage="Amount"
+                              />
+                            }
+                            variant="outlined"
+                            error={!!errors.expenses?.[index]?.expenseAmount}
+                            helperText={!!errors.expenses?.[index]?.expenseAmount &&
+                              <ErrorMessageWrapper fontSize="1rem">
+                                <FormattedMessage
+                                  id="errorMessage-greaterThanZero"
+                                  defaultMessage="Please enter a number greater than 0"
+                                />
+                              </ErrorMessageWrapper>
+                            }
+                          />
+                        )}
+                      />
+                    </div>
+                  </div>
                 </div>
               );
             })}
