@@ -196,9 +196,11 @@ const Expenses = () => {
               return (
                 //TODO: expense amount textfield
                 <div key={field.id}>
-                  {/* {error={errors.expenses !== undefined}} inside of the FormControl */}
-                  <FormControl sx={{ m: 1, minWidth: '13.125rem', maxWidth: '100%', backgroundColor: '#fff' }}>
-                    <InputLabel id="expense-type-label">
+                  <FormControl
+                    sx={{ m: 1, minWidth: '13.125rem', maxWidth: '100%', backgroundColor: '#fff' }}
+                    error={!!errors.expenses?.[index]?.expenseSourceName}
+                  >
+                    <InputLabel id={`expense-type-label-${index}`}>
                       <FormattedMessage
                         id="expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel"
                         defaultMessage="Expense Type"
@@ -207,12 +209,11 @@ const Expenses = () => {
                     <Controller
                       name={`expenses.${index}.expenseSourceName`}
                       control={control}
-                      rules={{ required: true }}
                       render={({ field }) => (
                         <>
                           <Select
                             {...field}
-                            labelId="expense-type-label"
+                            labelId={`expense-type-label-${index}`}
                             id={`expenses.${index}.expenseSourceName`}
                             label={
                               <FormattedMessage
@@ -223,7 +224,9 @@ const Expenses = () => {
                           >
                             {createExpenseMenuItems(expenseOptions)}
                           </Select>
-                          {/* <FormHelperText>{errors.expenses !== undefined && renderExpensesHelperText()}</FormHelperText> */}
+                          {!!errors.expenses?.[index]?.expenseSourceName && (
+                            <FormHelperText>{renderExpenseSourceHelperText()}</FormHelperText>
+                          )}
                         </>
                       )}
                     />
