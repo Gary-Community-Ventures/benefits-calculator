@@ -83,10 +83,9 @@ const Expenses = () => {
   }, [getValues('hasExpenses')])
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (expensesObject) => {
-    // console.log({expensesObject})
-    // console.log(`in form submit handler`)
+    const hasExpensesBoolean: boolean = expensesObject.hasExpenses === 'true';
     if (uuid) {
-      const updatedFormData = { ...formData, ...expensesObject };
+      const updatedFormData = { ...formData, ...expensesObject, hasExpenses: hasExpensesBoolean };
       setFormData(updatedFormData);
       await updateScreen(uuid, updatedFormData, locale);
       nextStep();
