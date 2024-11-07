@@ -192,6 +192,7 @@ const Expenses = () => {
               </Stack>
             </Box>
             {fields.map((field, index) => {
+              const selectedExpenseSource = watch('expenses')[index].expenseSourceName;
               return (
                 //TODO: expense amount textfield
                 <div key={field.id}>
