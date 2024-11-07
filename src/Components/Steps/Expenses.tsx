@@ -114,6 +114,14 @@ const Expenses = () => {
       return [disabledSelectMenuItem, menuItems];
     };
 
+  const renderExpenseSourceHelperText = () => {
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="errorMessage-expenseType" defaultMessage="Please select an expense type" />
+      </ErrorMessageWrapper>
+    );
+  }
+
 
   return (
     <div>
