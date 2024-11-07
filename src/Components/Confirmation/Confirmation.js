@@ -23,7 +23,7 @@ import { calcAge } from '../HouseholdDataBlock/AgeInput';
 
 const Confirmation = () => {
   const { formData, locale } = useContext(Context);
-  const { uuid } = useParams();
+  const { uuid, whiteLabel } = useParams();
   const navigate = useNavigate();
   const intl = useIntl();
   const locationState = { state: { routedFromConfirmationPg: true } };
@@ -41,13 +41,13 @@ const Confirmation = () => {
   const getQuestionUrl = (name) => {
     const stepNumber = getStepNumber(name, formData.immutableReferrer);
 
-    return `/${uuid}/step-${stepNumber}`;
+    return `/${whiteLabel}/${uuid}/step-${stepNumber}`;
   };
 
   useEffect(() => {
     const continueOnEnter = (event) => {
       if (event.key === 'Enter') {
-        navigate(`/${uuid}/results/benefits`);
+        navigate(`/${whiteLabel}/${uuid}/results/benefits`);
       }
     };
     document.addEventListener('keyup', continueOnEnter);
@@ -684,8 +684,8 @@ const Confirmation = () => {
       </QuestionHeader>
       <div className="confirmation-container">{displayAllFormData()}</div>
       <div className="prev-continue-results-buttons confirmation">
-        <PreviousButton navFunction={() => navigate(`/${uuid}/step-${totalNumberOfQuestions() - 1}`)} />
-        <Button variant="contained" onClick={() => navigate(`/${uuid}/results/benefits`)}>
+        <PreviousButton navFunction={() => navigate(`/${whiteLabel}/${uuid}/step-${totalNumberOfQuestions() - 1}`)} />
+        <Button variant="contained" onClick={() => navigate(`/${whiteLabel}/${uuid}/results/benefits`)}>
           <FormattedMessage id="continueButton" defaultMessage="Continue" />
         </Button>
       </div>

@@ -131,7 +131,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     );
   };
 
-  const backLink = useResultsLink(`/${uuid}/results/benefits`);
+  const backLink = useResultsLink(`results/benefits`);
   const displayLanguageFlags = (navigatorLanguages: Language[]) => {
     return (
       <div className="navigator-langs-container">

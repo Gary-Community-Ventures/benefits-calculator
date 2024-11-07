@@ -17,6 +17,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
   const finalReferralSource = formData.otherSource !== '' ? formData.otherSource : formData.referralSource;
 
   const screenBody: ApiFormData = {
+    white_label: formData.whiteLabel,
     is_test: formData.isTest ?? false,
     external_id: formData.externalID ?? null,
     agree_to_tos: formData.agreeToTermsOfService,

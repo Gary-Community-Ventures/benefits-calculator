@@ -12,7 +12,7 @@ export function useShouldRedirectToConfirmation() {
 
 // routeEnding will be added to the end of the route when going to the next step
 export function useGoToNextStep(questionName: QuestionName, routeEnding: string = '') {
-  const { uuid } = useParams();
+  const { whiteLabel, uuid } = useParams();
   const { formData } = useContext(Context);
   const stepNumber = getStepNumber(questionName, formData.immutableReferrer);
   const totalStepCount = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER - 1;
@@ -21,16 +21,16 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
 
   return () => {
     if (redirectToConfirmationPage) {
-      navigate(`/${uuid}/confirm-information`);
+      navigate(`/${whiteLabel}/${uuid}/confirm-information`);
       return;
     }
 
     if (stepNumber === totalStepCount) {
-      navigate(`/${uuid}/confirm-information`);
+      navigate(`/${whiteLabel}/${uuid}/confirm-information`);
       return;
     }
 
-    navigate(`/${uuid}/step-${stepNumber + 1}/${routeEnding}`);
+    navigate(`/${whiteLabel}/${uuid}/step-${stepNumber + 1}/${routeEnding}`);
   };
 }
 
@@ -56,9 +56,9 @@ export function useQueryString() {
 
 export function useDefaultBackNavigationFunction(questionName: QuestionName) {
   const { formData } = useContext(Context);
-  const { uuid } = useParams();
+  const { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
   const currentStepId = getStepNumber(questionName, formData.immutableReferrer);
 
-  return () => navigate(`/${uuid}/step-${currentStepId - 1}`);
+  return () => navigate(`/${whiteLabel}/${uuid}/step-${currentStepId - 1}`);
 }

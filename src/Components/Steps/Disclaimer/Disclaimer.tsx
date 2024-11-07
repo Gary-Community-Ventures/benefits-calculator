@@ -21,8 +21,8 @@ const isTrue = (value: boolean) => {
 };
 
 const Disclaimer = () => {
-  const { formData, setFormData, locale, screenDoneLoading, theme } = useContext(Context);
-  let { uuid } = useParams();
+  const { formData, setFormData, locale, screenDoneLoading } = useContext(Context);
+  let { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
   const publicChargeOption = useConfig('public_charge_rule');
   const privacyLink = useConfig('privacy_policy');
@@ -30,7 +30,7 @@ const Disclaimer = () => {
   const queryString = useQueryString();
   const backNavigationFunction = () => {
     if (uuid !== undefined) {
-      navigate(`/${uuid}/step-1${queryString}`);
+      navigate(`/${whiteLabel}/${uuid}/step-1${queryString}`);
       return;
     }
     navigate(`/step-1${queryString}`);
@@ -60,11 +60,12 @@ const Disclaimer = () => {
 
     if (uuid) {
       await updateScreen(uuid, updatedFormData, locale);
-      navigate(`/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
     } else {
       const response = await createScreen(updatedFormData, locale);
       screenDoneLoading();
-      navigate(`/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      // TODO: add step before this
+      navigate(`/co/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
     }
   };
 

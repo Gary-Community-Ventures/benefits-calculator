@@ -9,6 +9,7 @@ import { Language } from '../../Types/Language';
 import { useGetConfig } from '../Config/configHook';
 
 const initialFormData: FormData = {
+  whiteLabel: '',
   isTest: false,
   frozen: false,
   externalID: undefined,
@@ -19,7 +20,7 @@ const initialFormData: FormData = {
   startTime: new Date().toJSON(),
   hasExpenses: false,
   expenses: [],
-  householdSize: '',
+  householdSize: 0,
   householdData: [],
   householdAssets: 0,
   hasBenefits: 'preferNotToAnswer',

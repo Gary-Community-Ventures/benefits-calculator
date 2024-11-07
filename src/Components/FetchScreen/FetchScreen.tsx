@@ -1,5 +1,5 @@
-import { useEffect, useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useContext, useMemo } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useConfig } from '../Config/configHook.tsx';
 import { getScreen } from '../../apiCalls.js';
 import { Context } from '../Wrapper/Wrapper.tsx';
@@ -10,8 +10,26 @@ import type { FormData } from '../../Types/FormData.ts';
 const FetchScreen = () => {
   const { formData, setFormData, screenDoneLoading, configLoading } = useContext(Context);
   const referralOptions = useConfig('referral_options');
-  const { uuid } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
+  const { uuid: rawUuid, whiteLabel: rawWhiteLabel } = useParams();
+
+  const { uuid, whiteLabel } = useMemo(() => {
+    // https://stackoverflow.com/questions/20041051/how-to-judge-a-string-is-uuid-type
+    const uuidRegx = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+
+    if (rawUuid === undefined) {
+      return { uuid: undefined, whiteLabel: undefined };
+    }
+
+    if (rawWhiteLabel !== undefined && rawWhiteLabel.match(uuidRegx)) {
+      return { uuid: rawWhiteLabel, whiteLabel: undefined };
+    } else if (!rawUuid.match(uuidRegx)) {
+      return { uuid: undefined, whiteLabel: undefined };
+    }
+
+    return { uuid: rawUuid, whiteLabel: rawWhiteLabel };
+  }, [rawUuid, rawWhiteLabel]);
 
   const fetchScreen = async (uuid: string) => {
     try {
@@ -36,6 +54,7 @@ const FetchScreen = () => {
 
     const initialFormData: FormData = {
       ...formData,
+      whiteLabel: response.white_label,
       isTest: response.is_test ?? false,
       isTestData: response.is_test_data ?? false,
       frozen: response.frozen,
@@ -157,21 +176,26 @@ const FetchScreen = () => {
         expenseAmount: expense.amount ? String(Math.round(expense.amount)) : '',
       });
     }
+
     setFormData({ ...initialFormData });
+
+    if (whiteLabel === undefined) {
+      navigate(`/${initialFormData.whiteLabel}${location.pathname}`);
+    } else if (whiteLabel !== initialFormData.whiteLabel) {
+      navigate(location.pathname.replace(whiteLabel, initialFormData.whiteLabel));
+    }
   };
 
   useEffect(() => {
     if (configLoading) {
       return;
     }
-    // https://stackoverflow.com/questions/20041051/how-to-judge-a-string-is-uuid-type
-    const uuidRegx = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
-    if (uuid === undefined || !uuid.match(uuidRegx)) {
+    if (uuid === undefined) {
       screenDoneLoading();
       return;
     }
     fetchScreen(uuid);
-  }, [uuid, configLoading]);
+  }, [uuid, configLoading, whiteLabel]);
 
   return <LoadingPage />;
 };

@@ -89,6 +89,7 @@ export interface AcuteHHConditions {
 }
 
 export interface FormData {
+  whiteLabel: string;
   isTest: boolean;
   isTestData?: boolean;
   frozen: boolean;

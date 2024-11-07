@@ -9,9 +9,9 @@ import { useQueryString } from '../QuestionComponents/questionHooks.ts';
 import FormContinueButton from '../ContinueButton/FormContinueButton.tsx';
 
 const SelectLanguagePage = () => {
-  const { locale, selectLanguage } = useContext(Context);
+  const { locale, selectLanguage, formData } = useContext(Context);
   const languageOptions = useConfig('language_options');
-  const { uuid } = useParams();
+  const { whiteLabel, uuid } = useParams();
 
   const queryString = useQueryString();
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const SelectLanguagePage = () => {
 
   const handleSubmit = () => {
     if (uuid !== undefined) {
-      navigate(`/${uuid}/step-2${queryString}`);
+      navigate(`/${whiteLabel}/${uuid}/step-2${queryString}`);
       return;
     }
     navigate(`/step-2${queryString}`);

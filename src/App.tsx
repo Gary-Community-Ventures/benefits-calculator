@@ -247,7 +247,7 @@ const App = () => {
       } else if (questionName === 'signUpInfo') {
         updateUser(uuid, formData, setFormData, locale)
           .then(() => {
-            navigate(`/${uuid}/confirm-information`);
+            navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`);
           })
           .catch(() => {
             setFormData({ ...formData, signUpInfo: { ...formData.signUpInfo, serverError: true } });
@@ -258,13 +258,13 @@ const App = () => {
         updateScreen(uuid, updatedFormData, locale);
         setFormData(updatedFormData);
         isComingFromConfirmationPg
-          ? navigate(`/${uuid}/confirm-information`)
-          : navigate(`/${uuid}/step-${stepId + 1}/1`);
+          ? navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`)
+          : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}/1`);
       } else {
         updateScreen(uuid, formData, locale);
         isComingFromConfirmationPg || isLastStep
-          ? navigate(`/${uuid}/confirm-information`)
-          : navigate(`/${uuid}/step-${stepId + 1}`);
+          ? navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`)
+          : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
       }
     }
   };
@@ -273,7 +273,7 @@ const App = () => {
     const updatedFormData = { ...formData, incomeStreams: validatedIncomeStreams };
     updateScreen(uuid, updatedFormData, locale);
     setFormData(updatedFormData);
-    navigate(`/${uuid}/step-${stepId + 1}`);
+    navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
   };
 
   const handleExpenseSourcesSubmit = (validatedExpenseSources: Expense[], stepId: number, uuid: string) => {
@@ -283,7 +283,7 @@ const App = () => {
     const updatedFormData = { ...formData, expenses: validatedExpenseSources };
     updateScreen(uuid, updatedFormData, locale);
     setFormData(updatedFormData);
-    isComingFromConfirmationPg ? navigate(`/${uuid}/confirm-information`) : navigate(`/${uuid}/step-${stepId + 1}`);
+    isComingFromConfirmationPg ? navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`) : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
   };
 
   const handleHouseholdDataSubmit = (memberData: HouseholdData, stepId: number, uuid: string) => {
@@ -301,6 +301,10 @@ const App = () => {
         <Routes>
           {languageRouteWrapper(
             <>
+              <Route path=":whiteLabel/:uuid">
+                <Route path="" element={<FetchScreen />} />
+                <Route path="*" element={<FetchScreen />} />
+              </Route>
               <Route path=":uuid">
                 <Route path="" element={<FetchScreen />} />
                 <Route path="*" element={<FetchScreen />} />
@@ -323,9 +327,9 @@ const App = () => {
           <Routes>
             <Route path="/step-1" element={<ProgressBar step={1} />} />
             <Route path="/step-2" element={<ProgressBar step={2} />} />
-            <Route path="/:uuid/step-:id" element={<ProgressBar />} />
-            <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
-            <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
+            <Route path=":whiteLabel/:uuid/step-:id" element={<ProgressBar />} />
+            <Route path=":whiteLabel/:uuid/step-:id/:page" element={<ProgressBar />} />
+            <Route path=":whiteLabel/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
             <Route path="*" element={<></>} />
           </Routes>
           <Routes>
@@ -338,7 +342,7 @@ const App = () => {
                 <Route path="ccig" element={<CcigLandingPage />} />
                 <Route path="step-1" element={<SelectLanguagePage />} />
                 <Route path="step-2" element={<Disclaimer />} />
-                <Route path=":uuid">
+                <Route path=":whiteLabel/:uuid">
                   <Route path="" element={<Navigate to="/step-1" replace />} />
                   <Route path="step-1" element={<SelectLanguagePage />} />
                   <Route path="step-2" element={<Disclaimer />} />

@@ -12,7 +12,7 @@ type Props = {
 
 const PreviousButton = ({ navFunction }: Props) => {
   const { formData } = useContext(Context);
-  const { id, uuid } = useParams();
+  const { whiteLabel, id, uuid } = useParams();
   let stepNumberId = Number(id);
   if (!stepNumberId) stepNumberId = 1;
   const navigate = useNavigate();
@@ -20,10 +20,10 @@ const PreviousButton = ({ navFunction }: Props) => {
   const defaultNavigate = () => {
     const householdStep = getStepNumber('householdData', formData.immutableReferrer);
     if (id && +id === householdStep + 1) {
-      navigate(`/${uuid}/step-${householdStep}/${formData.householdData.length}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${householdStep}/${formData.householdData.length}`);
       return;
     }
-    navigate(`/${uuid}/step-${stepNumberId - 1}`);
+    navigate(`/${whiteLabel}/${uuid}/step-${stepNumberId - 1}`);
   };
 
   const navigationFunction = navFunction ?? defaultNavigate;
