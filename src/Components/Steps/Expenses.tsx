@@ -53,7 +53,7 @@ const Expenses = () => {
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      hasExpenses: formData.hasExpenses ?? false,
+      hasExpenses: formData.hasExpenses ? 'true' : 'false',
       expenses: formData.expenses ?? [],
     },
   });
