@@ -283,7 +283,9 @@ const App = () => {
     const updatedFormData = { ...formData, expenses: validatedExpenseSources };
     updateScreen(uuid, updatedFormData, locale);
     setFormData(updatedFormData);
-    isComingFromConfirmationPg ? navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`) : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
+    isComingFromConfirmationPg
+      ? navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`)
+      : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
   };
 
   const handleHouseholdDataSubmit = (memberData: HouseholdData, stepId: number, uuid: string) => {
