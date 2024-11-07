@@ -32,12 +32,13 @@ const Expenses = () => {
   const expenseOptions = useConfig('expense_options');
 
 
+  const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/
   const expenseSourceSchema = z.object({
-      expenseSourceName: z.string(),
-      expenseAmount: z.string()
+      expenseSourceName: z.string().min(1),
+      expenseAmount: z.string().regex(oneOrMoreDigitsButNotAllZero)
   });
   const expenseSourcesSchema = z.array(expenseSourceSchema)
-  const hasExpensesSchema = z.string().transform((value) => value === 'true');
+  const hasExpensesSchema = z.string().regex(/^true|false$/);
   const formSchema = z.object({
     hasExpenses: hasExpensesSchema,
     expenses: expenseSourcesSchema,
