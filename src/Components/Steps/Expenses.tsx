@@ -122,6 +122,20 @@ const Expenses = () => {
     );
   }
 
+  const getExpenseSourceLabel = (expenseOptions: Record<string, FormattedMessageType>, expenseSourceName:string) => {
+    if (expenseSourceName) {
+      return (
+        <>
+          {' ('}
+          {expenseOptions[expenseSourceName]}
+          {')'}?
+        </>
+      );
+    }
+
+    return '?';
+  };
+
 
   return (
     <div>
