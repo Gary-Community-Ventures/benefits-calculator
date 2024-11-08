@@ -239,12 +239,12 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                 <li key={index}>
                   {<ResultsTranslate translation={document.text} />}
                   {document.link_url.default_message && document.link_text.default_message && (
-                      <span className="required-docs-link">
-                        <a href={document.link_url.default_message} target="_blank" className="link-color">
-                          <ResultsTranslate translation={document.link_text} />
-                        </a>
-                      </span>
-                    )}
+                    <span className="required-docs-link">
+                      <a href={document.link_url.default_message} target="_blank" className="link-color">
+                        <ResultsTranslate translation={document.link_text} />
+                      </a>
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>

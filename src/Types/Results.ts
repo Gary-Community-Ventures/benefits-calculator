@@ -54,7 +54,7 @@ export type ProgramDocument = {
   text: Translation;
   link_url: Translation;
   link_text: Translation;
-}
+};
 
 export type ProgramCategory = {
   external_name: string;
