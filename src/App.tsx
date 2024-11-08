@@ -342,7 +342,6 @@ const App = () => {
             {languageRouteWrapper(
               <>
                 <Route path="" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
-                <Route path="current-benefits" element={<CurrentBenefits />} />
                 <Route path="jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
                 <Route path="jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
                 <Route path="ccig" element={<CcigLandingPage />} />
@@ -351,6 +350,7 @@ const App = () => {
                 <Route path=":whiteLabel/select-state" element={<SelectStatePage />} />
                 <Route path=":whiteLabel/step-1" element={<SelectLanguagePage />} />
                 <Route path=":whiteLabel/step-2" element={<Disclaimer />} />
+                <Route path=":whiteLabel/current-benefits" element={<CurrentBenefits />} />
                 <Route path=":whiteLabel/:uuid">
                   <Route path="" element={<Navigate to="/step-1" replace />} />
                   <Route path="step-1" element={<SelectLanguagePage />} />
