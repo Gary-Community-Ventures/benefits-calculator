@@ -8,11 +8,13 @@ import { useIntl } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import './Header.css';
 import { useLogo } from '../Referrer/useLogo.tsx';
+import { useParams } from 'react-router-dom';
 
 const Header = () => {
   const context = useContext(Context);
   const { formData, getReferrer } = context;
   const languageOptions = useConfig('language_options');
+  const {whiteLabel} = useParams()
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
   const logoClass = getReferrer('logoClass');

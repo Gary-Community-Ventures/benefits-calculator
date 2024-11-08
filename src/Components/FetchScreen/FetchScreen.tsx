@@ -43,6 +43,9 @@ const FetchScreen = () => {
   };
 
   const createFormData = (response: ApiFormDataReadOnly & ApiFormData) => {
+    // TODO: We should move this logic to the referrer question
+    // when we refactor it. This way we can wait to fetch
+    // the config until after we fetch the screen.
     let otherRefferer = '';
     let referrer = response.referral_source;
     if (!referrer) {

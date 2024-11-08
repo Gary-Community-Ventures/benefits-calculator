@@ -28,6 +28,7 @@ LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 import './App.css';
 import CcigLandingPage from './Components/CcigComponents/CcigLandingPage';
 import languageRouteWrapper from './Components/LanguageRouter/LanguageRouter';
+import SelectStatePage from './Components/Steps/SelectStatePage';
 
 const App = () => {
   const navigate = useNavigate();
@@ -327,8 +328,11 @@ const App = () => {
         <BrandedHeader />
         <Box className="main-max-width">
           <Routes>
-            <Route path="/step-1" element={<ProgressBar step={1} />} />
-            <Route path="/step-2" element={<ProgressBar step={2} />} />
+            <Route path="step-1" element={<ProgressBar step={1} />} />
+            <Route path=":whiteLabel/step-1" element={<ProgressBar step={1} />} />
+            <Route path="select-state" element={<ProgressBar step={1} />} />
+            <Route path=":whiteLabel/select-state" element={<ProgressBar step={1} />} />
+            <Route path=":whiteLabel/step-2" element={<ProgressBar step={2} />} />
             <Route path=":whiteLabel/:uuid/step-:id" element={<ProgressBar />} />
             <Route path=":whiteLabel/:uuid/step-:id/:page" element={<ProgressBar />} />
             <Route path=":whiteLabel/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
@@ -343,7 +347,10 @@ const App = () => {
                 <Route path="jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
                 <Route path="ccig" element={<CcigLandingPage />} />
                 <Route path="step-1" element={<SelectLanguagePage />} />
-                <Route path="step-2" element={<Disclaimer />} />
+                <Route path="select-state" element={<SelectStatePage />} />
+                <Route path=":whiteLabel/select-state" element={<SelectStatePage />} />
+                <Route path=":whiteLabel/step-1" element={<SelectLanguagePage />} />
+                <Route path=":whiteLabel/step-2" element={<Disclaimer />} />
                 <Route path=":whiteLabel/:uuid">
                   <Route path="" element={<Navigate to="/step-1" replace />} />
                   <Route path="step-1" element={<SelectLanguagePage />} />

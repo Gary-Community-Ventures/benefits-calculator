@@ -15,6 +15,7 @@ import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper.tsx';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons.tsx';
 import { useQueryString } from '../../QuestionComponents/questionHooks.ts';
 import './Disclaimer.css';
+import { STATES } from '../SelectStatePage';
 
 const isTrue = (value: boolean) => {
   return value;
@@ -33,7 +34,15 @@ const Disclaimer = () => {
       navigate(`/${whiteLabel}/${uuid}/step-1${queryString}`);
       return;
     }
-    navigate(`/step-1${queryString}`);
+
+    const stateCodes = Object.keys(STATES);
+
+    if (stateCodes.length > 1) {
+      navigate(`/select-state${queryString}`);
+      return;
+    }
+
+    navigate(`/${stateCodes[0]}/step-1${queryString}`);
   };
 
   const formSchema = z.object({
@@ -64,8 +73,7 @@ const Disclaimer = () => {
     } else {
       const response = await createScreen(updatedFormData, locale);
       screenDoneLoading();
-      // TODO: add step before this
-      navigate(`/co/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      navigate(`/${whiteLabel}/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
     }
   };
 

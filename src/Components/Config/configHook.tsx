@@ -28,6 +28,7 @@ import { ReactComponent as Housing } from '../../Assets/OptionCardIcons/AcuteCon
 import { ReactComponent as Job_resources } from '../../Assets/OptionCardIcons/AcuteConditions/job_resources.svg';
 import { ReactComponent as Legal_services } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
 import { ReactComponent as Support } from '../../Assets/OptionCardIcons/AcuteConditions/support.svg';
+import { useParams } from 'react-router-dom';
 
 type Item = {
   _label: string;
@@ -170,9 +171,9 @@ function transformConfigData(configData: ConfigApiResponse[]): Config {
   return transformedConfig;
 }
 
-async function getConfig() {
+async function getConfig(whiteLabel: string) {
   // fetch data
-  return fetch(configEndpoint, {
+  return fetch(configEndpoint + whiteLabel, {
     method: 'GET',
     headers: header,
   }).then((response) => {
@@ -187,12 +188,16 @@ async function getConfig() {
   });
 }
 
-export function useGetConfig() {
+export function useGetConfig(whiteLabel: string | undefined) {
   const [configLoading, setLoading] = useState<boolean>(true);
   const [configResponse, setConfigResponse] = useState<Config | undefined>();
 
   useEffect(() => {
-    getConfig().then((value: ConfigApiResponse[]) => {
+    if (whiteLabel === undefined || whiteLabel === '') {
+      return;
+    }
+
+    getConfig(whiteLabel).then((value: ConfigApiResponse[]) => {
       // get data and set loading to false
       try {
         if (value !== undefined) {
@@ -204,7 +209,7 @@ export function useGetConfig() {
       }
       setLoading(false);
     });
-  }, []);
+  }, [whiteLabel]);
 
   return { configLoading, configResponse };
 }

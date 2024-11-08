@@ -7,6 +7,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import QuestionHeader from '../QuestionComponents/QuestionHeader.tsx';
 import { useQueryString } from '../QuestionComponents/questionHooks.ts';
 import FormContinueButton from '../ContinueButton/FormContinueButton.tsx';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import { STATES } from './SelectStatePage';
 
 const SelectLanguagePage = () => {
   const { locale, selectLanguage, formData } = useContext(Context);
@@ -52,7 +54,20 @@ const SelectLanguagePage = () => {
       navigate(`/${whiteLabel}/${uuid}/step-2${queryString}`);
       return;
     }
-    navigate(`/step-2${queryString}`);
+
+    if (whiteLabel !== undefined) {
+      navigate(`/${whiteLabel}/step-2${queryString}`);
+      return;
+    }
+
+    const stateCodes = Object.keys(STATES);
+
+    if (stateCodes.length > 1) {
+      navigate(`/select-state${queryString}`);
+      return;
+    }
+
+    navigate(`/${stateCodes[0]}/step-2${queryString}`);
   };
 
   return (
@@ -60,9 +75,9 @@ const SelectLanguagePage = () => {
       <QuestionHeader>
         <FormattedMessage id="selectLanguage.header" defaultMessage="Before you begin..." />
       </QuestionHeader>
-      <h2 className="sub-header-language-select">
+      <QuestionQuestion>
         <FormattedMessage id="selectLanguage.subHeader" defaultMessage="What is your preferred language?" />
-      </h2>
+      </QuestionQuestion>
       <form onSubmit={handleSubmit}>
         <FormControl sx={{ width: '150px' }}>
           <InputLabel id="language-select-label">

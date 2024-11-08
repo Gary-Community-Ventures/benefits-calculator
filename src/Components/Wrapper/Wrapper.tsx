@@ -85,13 +85,6 @@ const initialFormData: FormData = {
 export const Context = React.createContext<WrapperContext>({} as WrapperContext);
 
 const Wrapper = (props: PropsWithChildren<{}>) => {
-  const { configLoading, configResponse: config } = useGetConfig();
-  const { language_options: languageOptions = {} } = config ?? {};
-  const languages = Object.keys(languageOptions) as Language[];
-  const { referrer_data: referrerData = {} } = config ?? {};
-
-  const rightToLeftLanguages = ['ar'];
-
   const [staffToken, setStaffToken] = useState<string | undefined>(undefined);
 
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
@@ -102,6 +95,20 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
     setScreenLoading(false);
   };
 
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+
+  useEffect(() => {
+    setReferrer(formData.immutableReferrer);
+  }, [formData.immutableReferrer]);
+
+  // TODO: figure out what to do here
+  const { configLoading, configResponse: config } = useGetConfig(screenLoading ? 'co' : formData.whiteLabel);
+  const { language_options: languageOptions = {} } = config ?? {};
+  const languages = Object.keys(languageOptions) as Language[];
+  const { referrer_data: referrerData = {} } = config ?? {};
+
+  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer, referrerData as ReferrerData);
+
   useEffect(() => {
     if (!screenLoading && !translationsLoading && !configLoading) {
       setPageIsLoading(false);
@@ -110,6 +117,8 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
     setPageIsLoading(true);
   }, [screenLoading, translationsLoading, configLoading]);
+
+  const rightToLeftLanguages = ['ar'];
 
   let [translations, setTranslations] = useState<{ Language: { [key: string]: string } } | {}>({});
 
@@ -192,14 +201,6 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
     setLocale(newLocale as Language);
   };
-
-  const [formData, setFormData] = useState<FormData>(initialFormData);
-
-  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer, referrerData as ReferrerData);
-
-  useEffect(() => {
-    setReferrer(formData.immutableReferrer);
-  }, [formData.immutableReferrer]);
 
   return (
     <Context.Provider
