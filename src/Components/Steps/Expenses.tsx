@@ -5,6 +5,7 @@ import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import {
   Box,
+  Button,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -25,11 +26,12 @@ import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueBut
 import { useNavigate, useParams } from 'react-router-dom';
 import { updateScreen } from '../../Assets/updateScreen';
 import { useGoToNextStep } from '../QuestionComponents/questionHooks';
-// import { DevTool } from '@hookform/devtools';
 import { useConfig } from '../Config/configHook';
 import { FormattedMessageType } from '../../Types/Questions';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import CloseButton from '../CloseButton/CloseButton';
+import AddIcon from '@mui/icons-material/Add';
+import '../ExpenseBlock/ExpenseBlock.css';
 
 const Expenses = () => {
   const { formData, setFormData, locale } = useContext(Context);
@@ -90,6 +92,7 @@ const Expenses = () => {
     if (!hasTruthyExpenses) {
       replace([]);
     }
+
   }, [getValues('hasExpenses')]);
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (expensesObject) => {
@@ -193,103 +196,111 @@ const Expenses = () => {
             </RadioGroup>
           )}
         />
-        {hasTruthyExpenses && (
-          <section>
-            {/* <div className="delete-button-container">
-              <CloseButton handleClose={() => remove()} />
-            </div> */}
-
-            {fields.map((field, index) => {
-              const selectedExpenseSource = watch('expenses')[index].expenseSourceName;
-              return (
-                <Box className="section-container" key={field.id}>
-                  <Stack className="section">
-                    <div className="expense-padding-top">
-                      <QuestionQuestion>
-                        <FormattedMessage
-                          id="questions.hasExpenses-a"
-                          defaultMessage="What type of expense has your household had most recently?"
-                        />
-                      </QuestionQuestion>
-                    </div>
-                  </Stack>
-                  <FormControl
-                    sx={{ m: 1, minWidth: '13.125rem', maxWidth: '100%', backgroundColor: '#fff' }}
-                    error={!!errors.expenses?.[index]?.expenseSourceName}
-                  >
-                    <InputLabel id={`expense-type-label-${index}`}>
-                      <FormattedMessage
-                        id="expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel"
-                        defaultMessage="Expense Type"
-                      />
-                    </InputLabel>
-                    <Controller
-                      name={`expenses.${index}.expenseSourceName`}
-                      control={control}
-                      render={({ field }) => (
-                        <>
-                          <Select
-                            {...field}
-                            labelId={`expense-type-label-${index}`}
-                            id={`expenses.${index}.expenseSourceName`}
-                            label={
-                              <FormattedMessage
-                                id="expenseBlock.createExpenseDropdownMenu-expenseTypeSelectLabel"
-                                defaultMessage="Expense Type"
-                              />
-                            }
-                          >
-                            {createExpenseMenuItems(expenseOptions)}
-                          </Select>
-                          {!!errors.expenses?.[index]?.expenseSourceName && (
-                            <FormHelperText>{renderExpenseSourceHelperText()}</FormHelperText>
-                          )}
-                        </>
-                      )}
-                    />
-                  </FormControl>
-                  <div className="expense-margin-bottom">
-                    <QuestionQuestion>
-                      <FormattedMessage
-                        id="expenseBlock.createExpenseAmountTextfield-questionLabel"
-                        defaultMessage="How much is this expense every month "
-                      />
-                      {getExpenseSourceLabel(expenseOptions, selectedExpenseSource)}
-                    </QuestionQuestion>
-                    <div className="expense-block-textfield">
-                      <Controller
-                        name={`expenses.${index}.expenseAmount`}
-                        control={control}
-                        render={({ field }) => (
-                          <TextField
-                            {...field}
-                            label={
-                              <FormattedMessage
-                                id="expenseBlock.createExpenseAmountTextfield-amountLabel"
-                                defaultMessage="Amount"
-                              />
-                            }
-                            variant="outlined"
-                            error={!!errors.expenses?.[index]?.expenseAmount}
-                            helperText={
-                              !!errors.expenses?.[index]?.expenseAmount && (
-                                <FormHelperText>{renderExpenseAmountHelperText()}</FormHelperText>
-                              )
-                            }
-                            sx={{ backgroundColor: '#fff' }}
+        {fields.map((field, index) => {
+          const selectedExpenseSource = watch('expenses')[index].expenseSourceName;
+          return (
+            <Box className="section-container" key={field.id}>
+              {index !== 0 &&
+                <div className="delete-button-container">
+                  <CloseButton handleClose={() => remove(index)} />
+                </div>
+              }
+              <Stack className="section">
+                <div className="expense-padding-top">
+                <QuestionQuestion>
+                  <FormattedMessage
+                    id="questions.hasExpenses-a"
+                    defaultMessage="What type of expense has your household had most recently?"
+                  />
+                </QuestionQuestion>
+                </div>
+              </Stack>
+              <FormControl
+                sx={{ m: 1, minWidth: '13.125rem', maxWidth: '100%' }}
+                error={!!errors.expenses?.[index]?.expenseSourceName}
+              >
+                <InputLabel id={`expense-type-label-${index}`}>
+                  <FormattedMessage
+                    id="expenseBlock.createExpenseDropdownMenu-expenseTypeInputLabel"
+                    defaultMessage="Expense Type"
+                  />
+                </InputLabel>
+                <Controller
+                  name={`expenses.${index}.expenseSourceName`}
+                  control={control}
+                  render={({ field }) => (
+                    <>
+                      <Select
+                        {...field}
+                        labelId={`expense-type-label-${index}`}
+                        id={`expenses.${index}.expenseSourceName`}
+                        label={
+                          <FormattedMessage
+                            id="expenseBlock.createExpenseDropdownMenu-expenseTypeSelectLabel"
+                            defaultMessage="Expense Type"
                           />
-                        )}
+                        }
+                      >
+                        {createExpenseMenuItems(expenseOptions)}
+                      </Select>
+                      {!!errors.expenses?.[index]?.expenseSourceName && (
+                        <FormHelperText>{renderExpenseSourceHelperText()}</FormHelperText>
+                      )}
+                    </>
+                  )}
+                />
+              </FormControl>
+              <div className="expense-margin-bottom">
+                <QuestionQuestion>
+                  <FormattedMessage
+                    id="expenseBlock.createExpenseAmountTextfield-questionLabel"
+                    defaultMessage="How much is this expense every month "
+                  />
+                  {getExpenseSourceLabel(expenseOptions, selectedExpenseSource)}
+                </QuestionQuestion>
+                <div className="expense-block-textfield">
+                  <Controller
+                    name={`expenses.${index}.expenseAmount`}
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label={
+                          <FormattedMessage
+                            id="expenseBlock.createExpenseAmountTextfield-amountLabel"
+                            defaultMessage="Amount"
+                          />
+                        }
+                        variant="outlined"
+                        error={!!errors.expenses?.[index]?.expenseAmount}
+                        helperText={
+                          !!errors.expenses?.[index]?.expenseAmount && (
+                            <FormHelperText>{renderExpenseAmountHelperText()}</FormHelperText>
+                          )
+                        }
                       />
-                    </div>
-                  </div>
-                </Box>
-              );
+                    )}
+                  />
+                </div>
+              </div>
+            </Box>
+          );
+        })}
+        {hasTruthyExpenses && (
+          <Button
+            variant="outlined"
+            onClick={() => append({
+              expenseSourceName: '',
+              expenseAmount: '',
             })}
-          </section>
+            startIcon={<AddIcon />}
+            type="button"
+          >
+            <FormattedMessage id="expenseBlock.return-addExpenseButton" defaultMessage="Add another expense" />
+          </Button>
         )}
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
-      {/* <DevTool control={control} /> */}
     </div>
   );
 };
