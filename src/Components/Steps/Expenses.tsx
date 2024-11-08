@@ -92,7 +92,6 @@ const Expenses = () => {
     if (!hasTruthyExpenses) {
       replace([]);
     }
-
   }, [getValues('hasExpenses')]);
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (expensesObject) => {
@@ -200,19 +199,19 @@ const Expenses = () => {
           const selectedExpenseSource = watch('expenses')[index].expenseSourceName;
           return (
             <Box className="section-container" key={field.id}>
-              {index !== 0 &&
+              {index !== 0 && (
                 <div className="delete-button-container">
                   <CloseButton handleClose={() => remove(index)} />
                 </div>
-              }
+              )}
               <Stack className="section">
                 <div className="expense-padding-top">
-                <QuestionQuestion>
-                  <FormattedMessage
-                    id="questions.hasExpenses-a"
-                    defaultMessage="What type of expense has your household had most recently?"
-                  />
-                </QuestionQuestion>
+                  <QuestionQuestion>
+                    <FormattedMessage
+                      id="questions.hasExpenses-a"
+                      defaultMessage="What type of expense has your household had most recently?"
+                    />
+                  </QuestionQuestion>
                 </div>
               </Stack>
               <FormControl
@@ -289,10 +288,12 @@ const Expenses = () => {
         {hasTruthyExpenses && (
           <Button
             variant="outlined"
-            onClick={() => append({
-              expenseSourceName: '',
-              expenseAmount: '',
-            })}
+            onClick={() =>
+              append({
+                expenseSourceName: '',
+                expenseAmount: '',
+              })
+            }
             startIcon={<AddIcon />}
             type="button"
           >
