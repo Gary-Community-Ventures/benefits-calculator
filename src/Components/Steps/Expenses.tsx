@@ -239,11 +239,12 @@ const Expenses = () => {
                             defaultMessage="Expense Type"
                           />
                         }
+                        sx={{ backgroundColor: '#fff' }}
                       >
                         {createExpenseMenuItems(expenseOptions)}
                       </Select>
                       {!!errors.expenses?.[index]?.expenseSourceName && (
-                        <FormHelperText>{renderExpenseSourceHelperText()}</FormHelperText>
+                        <FormHelperText sx={{ marginLeft: 0 }}>{renderExpenseSourceHelperText()}</FormHelperText>
                       )}
                     </>
                   )}
@@ -262,22 +263,23 @@ const Expenses = () => {
                     name={`expenses.${index}.expenseAmount`}
                     control={control}
                     render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={
-                          <FormattedMessage
-                            id="expenseBlock.createExpenseAmountTextfield-amountLabel"
-                            defaultMessage="Amount"
-                          />
-                        }
-                        variant="outlined"
-                        error={!!errors.expenses?.[index]?.expenseAmount}
-                        helperText={
-                          !!errors.expenses?.[index]?.expenseAmount && (
-                            <FormHelperText>{renderExpenseAmountHelperText()}</FormHelperText>
-                          )
-                        }
-                      />
+                      <>
+                        <TextField
+                          {...field}
+                          label={
+                            <FormattedMessage
+                              id="expenseBlock.createExpenseAmountTextfield-amountLabel"
+                              defaultMessage="Amount"
+                            />
+                          }
+                          variant="outlined"
+                          sx={{ backgroundColor: '#fff' }}
+                          error={!!errors.expenses?.[index]?.expenseAmount}
+                        />
+                        {!!errors.expenses?.[index]?.expenseAmount && (
+                          <FormHelperText sx={{ marginLeft: 0 }}>{renderExpenseAmountHelperText()}</FormHelperText>
+                        )}
+                      </>
                     )}
                   />
                 </div>
