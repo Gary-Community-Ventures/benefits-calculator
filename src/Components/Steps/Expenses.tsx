@@ -1,22 +1,35 @@
-import { FormattedMessage, useIntl } from "react-intl";
-import QuestionHeader from "../QuestionComponents/QuestionHeader";
-import HelpButton from "../HelpBubbleIcon/HelpButton";
-import QuestionQuestion from "../QuestionComponents/QuestionQuestion";
-import QuestionDescription from "../QuestionComponents/QuestionDescription";
-import { Box, FormControl, FormControlLabel, FormHelperText, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, TextField } from "@mui/material";
-import { Context } from "../Wrapper/Wrapper";
-import { useContext, useEffect } from "react";
-import { useForm, Controller, SubmitHandler, useFieldArray } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { FormattedMessage, useIntl } from 'react-intl';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import HelpButton from '../HelpBubbleIcon/HelpButton';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import {
+  Box,
+  FormControl,
+  FormControlLabel,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
+  Stack,
+  TextField,
+} from '@mui/material';
+import { Context } from '../Wrapper/Wrapper';
+import { useContext, useEffect } from 'react';
+import { useForm, Controller, SubmitHandler, useFieldArray } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import PrevAndContinueButtons from "../PrevAndContinueButtons/PrevAndContinueButtons";
-import { useNavigate, useParams } from "react-router-dom";
-import { updateScreen } from "../../Assets/updateScreen";
-import { useGoToNextStep } from "../QuestionComponents/questionHooks";
-import { DevTool } from '@hookform/devtools';
-import { useConfig } from "../Config/configHook";
-import { FormattedMessageType } from "../../Types/Questions";
-import ErrorMessageWrapper from "../ErrorMessage/ErrorMessageWrapper";
+import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
+import { useNavigate, useParams } from 'react-router-dom';
+import { updateScreen } from '../../Assets/updateScreen';
+import { useGoToNextStep } from '../QuestionComponents/questionHooks';
+// import { DevTool } from '@hookform/devtools';
+import { useConfig } from '../Config/configHook';
+import { FormattedMessageType } from '../../Types/Questions';
+import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
+import CloseButton from '../CloseButton/CloseButton';
 
 const Expenses = () => {
   const { formData, setFormData, locale } = useContext(Context);
@@ -32,13 +45,12 @@ const Expenses = () => {
   const nextStep = useGoToNextStep('hasExpenses');
   const expenseOptions = useConfig('expense_options');
 
-
-  const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/
+  const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
   const expenseSourceSchema = z.object({
-      expenseSourceName: z.string().min(1),
-      expenseAmount: z.string().regex(oneOrMoreDigitsButNotAllZero)
+    expenseSourceName: z.string().min(1),
+    expenseAmount: z.string().regex(oneOrMoreDigitsButNotAllZero),
   });
-  const expenseSourcesSchema = z.array(expenseSourceSchema)
+  const expenseSourcesSchema = z.array(expenseSourceSchema);
   const hasExpensesSchema = z.string().regex(/^true|false$/);
   const formSchema = z.object({
     hasExpenses: hasExpensesSchema,
@@ -50,7 +62,7 @@ const Expenses = () => {
     formState: { errors },
     handleSubmit,
     watch,
-    getValues
+    getValues,
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -63,7 +75,7 @@ const Expenses = () => {
   const hasTruthyExpenses = watchHasExpenses === 'true' || watchHasExpenses === true;
   const { fields, append, remove, insert, replace } = useFieldArray({
     control,
-    name: 'expenses'
+    name: 'expenses',
   });
 
   useEffect(() => {
@@ -78,8 +90,7 @@ const Expenses = () => {
     if (!hasTruthyExpenses) {
       replace([]);
     }
-
-  }, [getValues('hasExpenses')])
+  }, [getValues('hasExpenses')]);
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (expensesObject) => {
     const hasExpensesBoolean: boolean = expensesObject.hasExpenses === 'true';
@@ -89,37 +100,33 @@ const Expenses = () => {
       await updateScreen(uuid, updatedFormData, locale);
       nextStep();
     }
-  }
+  };
 
-    const createExpenseMenuItems = (expenseOptions: Record<string, FormattedMessageType>) => {
-      const disabledSelectMenuItem = (
-        <MenuItem value="select" key="disabled-select-value" disabled>
-          <FormattedMessage
-            id="expenseBlock.createExpenseMenuItems-disabledSelectMenuItemText"
-            defaultMessage="Select"
-          />
+  const createExpenseMenuItems = (expenseOptions: Record<string, FormattedMessageType>) => {
+    const disabledSelectMenuItem = (
+      <MenuItem value="select" key="disabled-select-value" disabled>
+        <FormattedMessage id="expenseBlock.createExpenseMenuItems-disabledSelectMenuItemText" defaultMessage="Select" />
+      </MenuItem>
+    );
+
+    const menuItemKeys = Object.keys(expenseOptions);
+    const menuItemLabels = Object.values(expenseOptions);
+
+    const menuItems = menuItemKeys.map((menuItemKey, i) => {
+      return (
+        <MenuItem value={menuItemKey} key={menuItemKey}>
+          {menuItemLabels[i]}
         </MenuItem>
       );
+    });
 
-      const menuItemKeys = Object.keys(expenseOptions);
-      const menuItemLabels = Object.values(expenseOptions);
+    return [disabledSelectMenuItem, menuItems];
+  };
 
-      const menuItems = menuItemKeys.map((menuItemKey, i) => {
-        return (
-          <MenuItem value={menuItemKey} key={menuItemKey}>
-            {menuItemLabels[i]}
-          </MenuItem>
-        );
-      });
-
-      return [disabledSelectMenuItem, menuItems];
-    };
-
-
-    const getExpenseSourceLabel = (expenseOptions: Record<string, FormattedMessageType>, expenseSourceName:string) => {
-      if (expenseSourceName) {
-        return (
-          <>
+  const getExpenseSourceLabel = (expenseOptions: Record<string, FormattedMessageType>, expenseSourceName: string) => {
+    if (expenseSourceName) {
+      return (
+        <>
           {' ('}
           {expenseOptions[expenseSourceName]}
           {')'}?
@@ -136,7 +143,7 @@ const Expenses = () => {
         <FormattedMessage id="errorMessage-expenseType" defaultMessage="Please select an expense type" />
       </ErrorMessageWrapper>
     );
-  }
+  };
 
   const renderExpenseAmountHelperText = () => {
     return (
@@ -144,7 +151,7 @@ const Expenses = () => {
         <FormattedMessage id="errorMessage-greaterThanZero" defaultMessage="Please enter a number greater than 0" />
       </ErrorMessageWrapper>
     );
-  }
+  };
 
   return (
     <div>
@@ -187,23 +194,25 @@ const Expenses = () => {
           )}
         />
         {hasTruthyExpenses && (
-          <>
-            <Box className="section-container">
-              <Stack className="section">
-                <div className="expense-padding-top">
-                  <QuestionQuestion>
-                    <FormattedMessage
-                      id="questions.hasExpenses-a"
-                      defaultMessage="What type of expense has your household had most recently?"
-                    />
-                  </QuestionQuestion>
-                </div>
-              </Stack>
-            </Box>
+          <section>
+            {/* <div className="delete-button-container">
+              <CloseButton handleClose={() => remove()} />
+            </div> */}
+
             {fields.map((field, index) => {
               const selectedExpenseSource = watch('expenses')[index].expenseSourceName;
               return (
-                <div key={field.id}>
+                <Box className="section-container" key={field.id}>
+                  <Stack className="section">
+                    <div className="expense-padding-top">
+                      <QuestionQuestion>
+                        <FormattedMessage
+                          id="questions.hasExpenses-a"
+                          defaultMessage="What type of expense has your household had most recently?"
+                        />
+                      </QuestionQuestion>
+                    </div>
+                  </Stack>
                   <FormControl
                     sx={{ m: 1, minWidth: '13.125rem', maxWidth: '100%', backgroundColor: '#fff' }}
                     error={!!errors.expenses?.[index]?.expenseSourceName}
@@ -262,24 +271,27 @@ const Expenses = () => {
                             }
                             variant="outlined"
                             error={!!errors.expenses?.[index]?.expenseAmount}
-                            helperText={!!errors.expenses?.[index]?.expenseAmount &&
-                              (<FormHelperText>{renderExpenseAmountHelperText()}</FormHelperText>)
+                            helperText={
+                              !!errors.expenses?.[index]?.expenseAmount && (
+                                <FormHelperText>{renderExpenseAmountHelperText()}</FormHelperText>
+                              )
                             }
+                            sx={{ backgroundColor: '#fff' }}
                           />
                         )}
                       />
                     </div>
                   </div>
-                </div>
+                </Box>
               );
             })}
-          </>
+          </section>
         )}
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </div>
   );
-}
+};
 
 export default Expenses;
