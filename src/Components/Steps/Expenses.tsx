@@ -204,7 +204,7 @@ const Expenses = () => {
                   <CloseButton handleClose={() => remove(index)} />
                 </div>
               )}
-              <Stack className="section">
+              <Stack className={index % 2 === 0 ? 'section' : ''}>
                 <div className="expense-padding-top">
                   <QuestionQuestion>
                     <FormattedMessage
