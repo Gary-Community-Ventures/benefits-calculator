@@ -46,8 +46,14 @@ export type Program = {
   new: boolean;
   low_confidence: boolean;
   navigators: ProgramNavigator[];
-  documents: Translation[];
+  documents: ProgramDocument[];
   warning_messages: Translation[];
+};
+
+export type ProgramDocument = {
+  text: Translation;
+  link_url: Translation;
+  link_text: Translation;
 };
 
 export type ProgramCategory = {

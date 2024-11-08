@@ -168,6 +168,10 @@ li.apply-info {
   font-family: 'Open Sans', sans-serif;
 }
 
+.required-docs-link {
+  padding-left: 0.25rem;
+}
+
 .program-description {
   margin-bottom: 2rem;
   font-size: 1rem;
