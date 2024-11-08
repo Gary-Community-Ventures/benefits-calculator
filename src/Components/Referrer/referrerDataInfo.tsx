@@ -12,6 +12,7 @@ import COMFBLogo from '../../Assets/States/CO/mfb-logo.png';
 import DHSMFBLogo from '../../Assets/States/CO/WhiteLabels/DenverHumanServices/denverHSLogo.png';
 import CCIGLogo from '../../Assets/States/CO/WhiteLabels/CCIG/ccigLogo.png';
 import ECMFBLogo from '../../Assets/States/CO/WhiteLabels/EagleCounty/ECMFBLogo.png';
+import ACHSMFBLogo from '../../Assets/States/CO/WhiteLabels/AdamsCountyHumanServices/achs.png';
 
 const logoMap = {
   MFB_COLogo: MFBCOLogo,
@@ -28,6 +29,7 @@ const logoMap = {
   DHS_MFBLogo: DHSMFBLogo,
   CCIG_Logo: CCIGLogo,
   EC_MFBLogo: ECMFBLogo,
+  ACHS_MFBLogo: ACHSMFBLogo,
 };
 
 export type LogoSource = keyof typeof logoMap;
