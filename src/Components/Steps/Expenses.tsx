@@ -61,7 +61,7 @@ const Expenses = () => {
   const watchHasExpenses = watch('hasExpenses');
   // @ts-ignore
   const hasTruthyExpenses = watchHasExpenses === 'true' || watchHasExpenses === true;
-  const { fields, append, prepend, remove, move, insert, replace } = useFieldArray({
+  const { fields, append, remove, insert, replace } = useFieldArray({
     control,
     name: 'expenses'
   });
@@ -115,18 +115,11 @@ const Expenses = () => {
       return [disabledSelectMenuItem, menuItems];
     };
 
-  const renderExpenseSourceHelperText = () => {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="errorMessage-expenseType" defaultMessage="Please select an expense type" />
-      </ErrorMessageWrapper>
-    );
-  }
 
-  const getExpenseSourceLabel = (expenseOptions: Record<string, FormattedMessageType>, expenseSourceName:string) => {
-    if (expenseSourceName) {
-      return (
-        <>
+    const getExpenseSourceLabel = (expenseOptions: Record<string, FormattedMessageType>, expenseSourceName:string) => {
+      if (expenseSourceName) {
+        return (
+          <>
           {' ('}
           {expenseOptions[expenseSourceName]}
           {')'}?
@@ -137,6 +130,21 @@ const Expenses = () => {
     return '?';
   };
 
+  const renderExpenseSourceHelperText = () => {
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="errorMessage-expenseType" defaultMessage="Please select an expense type" />
+      </ErrorMessageWrapper>
+    );
+  }
+
+  const renderExpenseAmountHelperText = () => {
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="errorMessage-greaterThanZero" defaultMessage="Please enter a number greater than 0" />
+      </ErrorMessageWrapper>
+    );
+  }
 
   return (
     <div>
@@ -255,12 +263,7 @@ const Expenses = () => {
                             variant="outlined"
                             error={!!errors.expenses?.[index]?.expenseAmount}
                             helperText={!!errors.expenses?.[index]?.expenseAmount &&
-                              <ErrorMessageWrapper fontSize="1rem">
-                                <FormattedMessage
-                                  id="errorMessage-greaterThanZero"
-                                  defaultMessage="Please enter a number greater than 0"
-                                />
-                              </ErrorMessageWrapper>
+                              (<FormHelperText>{renderExpenseAmountHelperText()}</FormHelperText>)
                             }
                           />
                         )}
