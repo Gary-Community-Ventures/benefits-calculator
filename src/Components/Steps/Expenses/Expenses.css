@@ -1,0 +1,15 @@
+.expense-section-container {
+  position: relative;
+  padding: 2rem 0 1rem 0;
+}
+
+.expense-section:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: -100vw;
+  width: 300vw;
+  background: var(--secondary-background-color);
+  z-index: -1;
+}
