@@ -206,21 +206,21 @@ const Expenses = () => {
                 </div>
               )}
               <Stack className={index % 2 === 0 ? 'expense-section' : ''}>
-                {/* <div className=""> */}
-                  <QuestionQuestion>
-                    {index === 0 ? (
+                <QuestionQuestion>
+                  {index === 0 ? (
+                    <div className='first-expense-q-padding'>
                       <FormattedMessage
                         id="questions.hasExpenses-a"
                         defaultMessage="What type of expense has your household had most recently?"
                       />
-                    ) : (
-                      <FormattedMessage
-                        id="expenseBlock.createExpenseBlockQuestions-questionLabel"
-                        defaultMessage="If you have another expense, select it below."
-                      />
-                    )}
-                  </QuestionQuestion>
-                {/* </div> */}
+                    </div>
+                  ) : (
+                    <FormattedMessage
+                      id="expenseBlock.createExpenseBlockQuestions-questionLabel"
+                      defaultMessage="If you have another expense, select it below."
+                    />
+                  )}
+                </QuestionQuestion>
               </Stack>
               <FormControl
                 sx={{ m: 1, minWidth: '13.125rem', maxWidth: '100%' }}
