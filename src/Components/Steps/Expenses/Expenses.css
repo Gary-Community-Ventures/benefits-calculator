@@ -22,3 +22,11 @@
 .expense-radiogroup-margin-bottom {
   margin-bottom: 1rem;
 }
+
+.expenses-q-and-help-button {
+  margin-bottom: -.5rem;
+}
+
+.help-text {
+  margin: 0;
+}
