@@ -208,10 +208,17 @@ const Expenses = () => {
               <Stack className={index % 2 === 0 ? 'section' : ''}>
                 <div className="expense-padding-top">
                   <QuestionQuestion>
-                    <FormattedMessage
-                      id="questions.hasExpenses-a"
-                      defaultMessage="What type of expense has your household had most recently?"
-                    />
+                    {index === 0 ? (
+                      <FormattedMessage
+                        id="questions.hasExpenses-a"
+                        defaultMessage="What type of expense has your household had most recently?"
+                      />
+                    ) : (
+                      <FormattedMessage
+                        id="expenseBlock.createExpenseBlockQuestions-questionLabel"
+                        defaultMessage="If you have another expense, select it below."
+                      />
+                    )}
                   </QuestionQuestion>
                 </div>
               </Stack>
