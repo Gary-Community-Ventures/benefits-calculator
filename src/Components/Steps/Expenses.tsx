@@ -9,6 +9,7 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Radio,
@@ -275,6 +276,10 @@ const Expenses = () => {
                           variant="outlined"
                           sx={{ backgroundColor: '#fff' }}
                           error={!!errors.expenses?.[index]?.expenseAmount}
+                          InputProps={{
+                            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                            sx: { backgroundColor: '#FFFFFF' },
+                          }}
                         />
                         {!!errors.expenses?.[index]?.expenseAmount && (
                           <FormHelperText sx={{ marginLeft: 0 }}>{renderExpenseAmountHelperText()}</FormHelperText>
