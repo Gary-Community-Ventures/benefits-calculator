@@ -76,7 +76,7 @@ const Expenses = () => {
   const watchHasExpenses = watch('hasExpenses');
   // @ts-ignore
   const hasTruthyExpenses = watchHasExpenses === 'true' || watchHasExpenses === true;
-  const { fields, append, remove, insert, replace } = useFieldArray({
+  const { fields, append, remove, replace } = useFieldArray({
     control,
     name: 'expenses',
   });
