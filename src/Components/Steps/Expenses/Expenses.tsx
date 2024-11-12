@@ -1,8 +1,8 @@
 import { FormattedMessage, useIntl } from 'react-intl';
-import QuestionHeader from '../QuestionComponents/QuestionHeader';
-import HelpButton from '../HelpBubbleIcon/HelpButton';
-import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
-import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import QuestionHeader from '../../QuestionComponents/QuestionHeader';
+import HelpButton from '../../HelpBubbleIcon/HelpButton';
+import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
+import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import {
   Box,
   Button,
@@ -18,21 +18,21 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../../Wrapper/Wrapper';
 import { useContext, useEffect } from 'react';
 import { useForm, Controller, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
+import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useNavigate, useParams } from 'react-router-dom';
-import { updateScreen } from '../../Assets/updateScreen';
-import { useGoToNextStep } from '../QuestionComponents/questionHooks';
-import { useConfig } from '../Config/configHook';
-import { FormattedMessageType } from '../../Types/Questions';
-import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
-import CloseButton from '../CloseButton/CloseButton';
+import { updateScreen } from '../../../Assets/updateScreen';
+import { useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useConfig } from '../../Config/configHook';
+import { FormattedMessageType } from '../../../Types/Questions';
+import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
+import CloseButton from '../../CloseButton/CloseButton';
 import AddIcon from '@mui/icons-material/Add';
-import '../ExpenseBlock/ExpenseBlock.css';
+import './Expenses.css';
 
 const Expenses = () => {
   const { formData, setFormData, locale } = useContext(Context);
@@ -199,14 +199,14 @@ const Expenses = () => {
         {fields.map((field, index) => {
           const selectedExpenseSource = watch('expenses')[index].expenseSourceName;
           return (
-            <Box className="section-container" key={field.id}>
+            <Box className="expense-section-container" key={field.id}>
               {index !== 0 && (
                 <div className="delete-button-container">
                   <CloseButton handleClose={() => remove(index)} />
                 </div>
               )}
-              <Stack className={index % 2 === 0 ? 'section' : ''}>
-                <div className="expense-padding-top">
+              <Stack className={index % 2 === 0 ? 'expense-section' : ''}>
+                {/* <div className=""> */}
                   <QuestionQuestion>
                     {index === 0 ? (
                       <FormattedMessage
@@ -220,7 +220,7 @@ const Expenses = () => {
                       />
                     )}
                   </QuestionQuestion>
-                </div>
+                {/* </div> */}
               </Stack>
               <FormControl
                 sx={{ m: 1, minWidth: '13.125rem', maxWidth: '100%' }}
