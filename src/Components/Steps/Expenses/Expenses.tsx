@@ -182,7 +182,7 @@ const Expenses = () => {
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
-            <RadioGroup {...field} aria-labelledby={translatedAriaLabel}>
+            <RadioGroup {...field} aria-labelledby={translatedAriaLabel} className='expense-radiogroup-margin-bottom'>
               <FormControlLabel
                 value={true}
                 control={<Radio />}
@@ -208,7 +208,7 @@ const Expenses = () => {
               <Stack className={index % 2 === 0 ? 'expense-section' : ''}>
                 <QuestionQuestion>
                   {index === 0 ? (
-                    <div className='first-expense-q-padding'>
+                    <div className="first-expense-q-padding">
                       <FormattedMessage
                         id="questions.hasExpenses-a"
                         defaultMessage="What type of expense has your household had most recently?"
