@@ -162,7 +162,7 @@ const Expenses = () => {
         <FormattedMessage id="qcc.about_household" defaultMessage="Tell us about your household" />
       </QuestionHeader>
       <QuestionQuestion>
-        <div className='expenses-q-and-help-button'>
+        <div className="expenses-q-and-help-button">
           <FormattedMessage id="questions.hasExpenses" defaultMessage="Does your household have any expenses?" />
           <HelpButton
             helpText="Add up expenses for everyone who lives in your home. This includes costs like child care, child support, rent, medical expenses, heating bills, and more. We will ask only about expenses that may affect benefits. We will not ask about expenses such as food since grocery bills do not affect benefits."
@@ -182,7 +182,7 @@ const Expenses = () => {
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
-            <RadioGroup {...field} aria-labelledby={translatedAriaLabel} className='expense-radiogroup-margin-bottom'>
+            <RadioGroup {...field} aria-labelledby={translatedAriaLabel} className="expense-radiogroup-margin-bottom">
               <FormControlLabel
                 value={true}
                 control={<Radio />}
