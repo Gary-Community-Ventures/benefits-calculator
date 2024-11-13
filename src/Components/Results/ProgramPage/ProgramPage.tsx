@@ -166,7 +166,11 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       </div>
       <div className="apply-button-container">
         <a className="apply-online-button" href={program.apply_button_link.default_message} target="_blank">
-          <FormattedMessage id={program.apply_button_description.label} defaultMessage="Apply Online" />
+          {program.apply_button_description.label !== "" ? (
+            <FormattedMessage id={program.apply_button_description.label} defaultMessage="Apply Online" />
+          ) : (
+            <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
+          )}
         </a>
         {isAdminView && staffToken !== undefined && formData.isTestData && (
           <button className="apply-online-button" onClick={toggleValidation}>
