@@ -35,7 +35,7 @@ const HouseholdMemberForm = () => {
   //     setPage(uuid, currentStepId, pageNumber - 1);
   //   }
   // };
-  // const nextStep = useGoToNextStep('householdData', '2');
+  const nextStep = useGoToNextStep('householdData', `${pageNumber + 1}`);
   // console.log(`${pageNumber + 1}`);
   const date = new Date();
   const CURRENT_YEAR = date.getFullYear();
