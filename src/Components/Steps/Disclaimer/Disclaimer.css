@@ -1,0 +1,24 @@
+.disclaimer-list-container {
+  padding-inline-start: 2rem;
+  margin-top: 0.5rem;
+}
+
+.disclaimer-font {
+  font-family: 'Open Sans';
+  font-weight: 400;
+}
+
+.disclaimer-text-section {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  background-color: var(--secondary-background-color);
+  padding: 1rem;
+}
+
+.top-margin {
+  margin-top: 1rem;
+}
+
+.checkbox-container {
+  padding: 1rem;
+}

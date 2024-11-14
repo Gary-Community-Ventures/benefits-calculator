@@ -2,7 +2,7 @@ import { FormControlLabel, Checkbox } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import Textfield from '../Textfield/Textfield';
 import {
   nameHasError,
@@ -17,21 +17,20 @@ import {
   signUpServerErrorHelperText,
 } from '../../Assets/validationFunctions';
 import './SignUp.css';
+import { useConfig } from '../Config/configHook';
 
 const SignUp = ({ handleTextfieldChange, handleCheckboxChange, submitted }) => {
   const context = useContext(Context);
   const locale = context.locale.toLowerCase();
   const { formData, setFormData } = context;
-  let privacyLink = 'https://bennc.org/privacy-policy/';
-  const consentToContactLink = ' https://bennc.org/additional-terms-and-consent-to-contact/';
+  const privacyLinks = useConfig('privacy_policy');
+  const consentToContactLinks = useConfig('consent_to_contact');
 
-  if (locale === 'es') {
-    privacyLink = 'https://co.myfriendben.org/es/data-privacy-policy';
-  } else if (locale === 'vi') {
-    privacyLink = 'https://co.myfriendben.org/vi/data-privacy-policy';
-  } else if (locale === 'fr') {
-    privacyLink = 'https://co.myfriendben.org/fr/data-privacy-policy';
-  }
+  const privacyLink = useMemo(() => privacyLinks[locale] ?? privacyLinks['en-us'], [locale, privacyLinks]);
+  const consentToContactLink = useMemo(
+    () => consentToContactLinks[locale] ?? consentToContactLinks['en-us'],
+    [locale, consentToContactLinks],
+  );
 
   const firstNameErrorController = useErrorController(nameHasError, displayFirstNameHelperText);
   const lastNameErrorController = useErrorController(nameHasError, displayLastNameHelperText);

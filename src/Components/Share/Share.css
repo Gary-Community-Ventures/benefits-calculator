@@ -49,6 +49,36 @@ button {
   justify-content: flex-end;
 }
 
+.feedback-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgb(176, 175, 182);
+  margin-left: 1rem;
+}
+
+.feedback-button-and-text {
+  color: var(--hover-color);
+  border: 1px solid var(--hover-color);
+  padding: 0.3125rem 1rem;
+  width: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.75rem;
+  font-weight: bold;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.feedback-button-and-text:hover {
+  color: var(--primary-color);
+  background-color: var(--hover-color);
+  border: 1px solid var(--hover-color);
+}
+
 .button-no-format {
   cursor: pointer;
 }

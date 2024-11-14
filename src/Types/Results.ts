@@ -18,6 +18,11 @@ export type ProgramNavigator = {
   languages: Language[];
 };
 
+export type ProgramCategoryCap = {
+  programs: string[];
+  cap: number;
+};
+
 export type Program = {
   program_id: number;
   name: Translation;
@@ -33,7 +38,6 @@ export type Program = {
   learn_more_link: Translation;
   apply_button_link: Translation;
   legal_status_required: string[];
-  category: Translation;
   estimated_value_override: Translation;
   eligible: boolean;
   failed_tests: TestMessage[];
@@ -42,8 +46,23 @@ export type Program = {
   new: boolean;
   low_confidence: boolean;
   navigators: ProgramNavigator[];
-  documents: Translation[];
+  documents: ProgramDocument[];
   warning_messages: Translation[];
+};
+
+export type ProgramDocument = {
+  text: Translation;
+  link_url: Translation;
+  link_text: Translation;
+};
+
+export type ProgramCategory = {
+  external_name: string;
+  icon: string;
+  name: Translation;
+  description: Translation;
+  caps: ProgramCategoryCap[];
+  programs: Program[];
 };
 
 export type UrgentNeed = {
@@ -65,6 +84,7 @@ export type Validation = {
 
 export type EligibilityResults = {
   programs: Program[];
+  program_categories: ProgramCategory[];
   urgent_needs: UrgentNeed[];
   screen_id: number;
   default_language: string;

@@ -11,7 +11,8 @@ export interface IncomeStream {
 }
 
 export interface HouseholdData {
-  age: string;
+  birthYear?: number;
+  birthMonth?: number;
   relationshipToHH: string;
   conditions: Conditions;
   hasIncome: boolean;
@@ -99,7 +100,7 @@ export interface FormData {
   startTime: string;
   hasExpenses: boolean;
   expenses: Expense[];
-  householdSize: string;
+  householdSize: number;
   householdData: HouseholdData[];
   householdAssets: number;
   hasBenefits: string;
