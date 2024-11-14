@@ -108,7 +108,6 @@ export interface FormData {
   benefits: Benefits;
   referralSource?: string;
   immutableReferrer?: string;
-  otherSource?: string;
   signUpInfo: SignUpInfo;
   urlSearchParams: string;
   acuteHHConditions: AcuteHHConditions;

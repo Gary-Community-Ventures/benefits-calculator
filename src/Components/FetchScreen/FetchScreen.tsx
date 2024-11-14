@@ -104,9 +104,8 @@ const FetchScreen = () => {
         nfp: response.has_nfp ?? false,
         fatc: response.has_fatc ?? false,
       },
-      referralSource: '', // FIXME:
+      referralSource: response.referral_source ?? undefined,
       immutableReferrer: response.referrer_code ?? undefined,
-      otherSource: '', // FIXME:
       acuteHHConditions: {
         food: response.needs_food ?? false,
         babySupplies: response.needs_baby_supplies ?? false,

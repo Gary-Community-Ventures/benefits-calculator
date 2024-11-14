@@ -402,16 +402,10 @@ const Confirmation = () => {
   };
 
   const displayReferralSourceSection = () => {
-    const { referralSource, otherSource } = formData;
-    const referralSourceLabel =
-      typeof referralOptions[referralSource] === 'object'
-        ? referralOptions[referralSource]
-        : referralOptions[referralSource];
+    let finalReferralSource = formData.referralSource;
 
-    const finalReferralSource = referralSource !== 'other' ? referralSourceLabel : otherSource;
-
-    if (formData.immutableReferrer) {
-      return <></>;
+    if (formData.referralSource in referralOptions) {
+      finalReferralSource = referralOptions[formData.referralSource];
     }
 
     const editReferralSrcAriaLabelProps = {

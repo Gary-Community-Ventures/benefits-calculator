@@ -46,8 +46,6 @@ const App = () => {
     getReferrer,
   } = useContext(Context);
 
-  const referralOptions = useConfig('referral_options', {});
-
   const [totalSteps, setTotalSteps] = useState(
     getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER,
   );
@@ -90,14 +88,9 @@ const App = () => {
 
   useEffect(() => {
     const updatedFormData = { ...formData };
-    const referralSourceIsNotOther = !(formData.referralSource === 'other');
 
     if (formData.hasExpenses === false) {
       updatedFormData.expenses = [];
-    }
-
-    if (referralSourceIsNotOther) {
-      updatedFormData.otherSource = '';
     }
 
     if (formData.signUpInfo.sendOffers === false && formData.signUpInfo.sendUpdates === false) {
@@ -137,11 +130,7 @@ const App = () => {
 
     // referrer priority = stored referrer -> referrer param -> utm_source param -> ''
     const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
-    const isOtherSource = !(referrer in referralOptions);
     let referrerSource = formData.referralSource || referrer;
-    if (referrerSource === 'other') {
-      referrerSource = formData.otherSource ?? '';
-    }
     const isTest = formData.isTest || testParam;
     const externalId = formData.externalID ?? externalIdParam ?? undefined;
 
@@ -151,12 +140,11 @@ const App = () => {
       ...formData,
       isTest: isTest,
       externalID: externalId,
-      referralSource: isOtherSource && referrer !== '' ? 'other' : referrerSource,
+      referralSource: referrerSource,
       immutableReferrer: referrer,
-      otherSource: isOtherSource ? referrerSource : '',
       urlSearchParams: urlSearchParams,
     });
-  }, [JSON.stringify(referralOptions), formData.immutableReferrer]);
+  }, [formData.immutableReferrer]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -180,9 +168,7 @@ const App = () => {
       return;
     }
 
-    if (name === 'otherSource') {
-      setFormData({ ...formData, [name]: value });
-    } else if (numberUpToEightDigitsLongRegex.test(value)) {
+    if (numberUpToEightDigitsLongRegex.test(value)) {
       if (value === '') {
         setFormData({ ...formData, [name]: value });
         return;
@@ -229,8 +215,6 @@ const App = () => {
     errorController.incrementSubmitted();
     const hasError = errorController.updateError(inputToBeValidated, formData);
     const isZipcodeQuestionAndCountyIsEmpty = questionName === 'zipcode' && formData.county === '';
-    const isReferralQuestionWithOtherAndOtherSourceIsEmpty =
-      questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '';
     const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets < 0;
     const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
       ? location.state.routedFromConfirmationPg
@@ -240,7 +224,7 @@ const App = () => {
     const isLastStep = stepNumber === totalStepCount;
 
     if (!hasError) {
-      if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
+      if (isZipcodeQuestionAndCountyIsEmpty || isEmptyAssets) {
         return;
       } else if (questionName === 'signUpInfo') {
         updateUser(uuid, formData, setFormData, locale)
