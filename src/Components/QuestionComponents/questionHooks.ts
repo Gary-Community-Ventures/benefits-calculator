@@ -30,6 +30,14 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
       return;
     }
 
+    if (questionName === 'householdData' && Number(routeEnding) <= formData.householdSize) {
+      navigate(`/${uuid}/step-${stepNumber}/${routeEnding}`);
+      return;
+    } else if (questionName === 'householdData') {
+      navigate(`/${uuid}/step-${stepNumber + 1}`);
+      return;
+    }
+
     navigate(`/${uuid}/step-${stepNumber + 1}/${routeEnding}`);
   };
 }
