@@ -28,6 +28,7 @@ LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 import './App.css';
 import CcigLandingPage from './Components/CcigComponents/CcigLandingPage';
 import languageRouteWrapper from './Components/LanguageRouter/LanguageRouter';
+import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm.tsx';
 
 const App = () => {
   const navigate = useNavigate();
@@ -345,10 +346,11 @@ const App = () => {
                   <Route
                     path={`step-${getStepNumber('householdData', formData.immutableReferrer)}/:page`}
                     element={
-                      <HouseholdDataBlock
-                        key={window.location.href}
-                        handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-                      />
+                      // <HouseholdDataBlock
+                      //   key={window.location.href}
+                      //   handleHouseholdDataSubmit={handleHouseholdDataSubmit}
+                      // />
+                      <HouseholdMemberForm />
                     }
                   />
                   <Route
