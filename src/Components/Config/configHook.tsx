@@ -188,12 +188,13 @@ async function getConfig(whiteLabel: string) {
   });
 }
 
-export function useGetConfig(whiteLabel: string | undefined) {
+export function useGetConfig(screenLoading: boolean, whiteLabel: string) {
   const [configLoading, setLoading] = useState<boolean>(true);
   const [configResponse, setConfigResponse] = useState<Config | undefined>();
 
   useEffect(() => {
-    if (whiteLabel === undefined || whiteLabel === '') {
+    setLoading(true);
+    if (screenLoading) {
       return;
     }
 
@@ -209,23 +210,23 @@ export function useGetConfig(whiteLabel: string | undefined) {
       }
       setLoading(false);
     });
-  }, [whiteLabel]);
+  }, [screenLoading, whiteLabel]);
 
   return { configLoading, configResponse };
 }
 
-export function useConfig(name: string) {
+export function useConfig<T>(name: string, defaultValue?: T): T {
   const { config } = useContext(Context);
 
-  if (config === undefined) {
-    return {};
+  if (config === undefined || config[name] === undefined) {
+    if (defaultValue !== undefined) {
+      return defaultValue;
+    }
+
+    throw new Error(
+      `'${name}' does not exist in the config. Consider using a defualt value if useConfig is used before the config is loaded.`,
+    );
   }
 
-  if (config[name] === undefined) {
-    throw new Error(`'${name}' does not exist in the config`);
-  }
-
-  let configValue = config[name];
-
-  return configValue;
+  return config[name] as T;
 }

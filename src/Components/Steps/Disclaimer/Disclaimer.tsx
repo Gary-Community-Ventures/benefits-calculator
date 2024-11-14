@@ -15,14 +15,13 @@ import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper.tsx';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons.tsx';
 import { useQueryString } from '../../QuestionComponents/questionHooks.ts';
 import './Disclaimer.css';
-import { STATES } from '../SelectStatePage';
 
 const isTrue = (value: boolean) => {
   return value;
 };
 
 const Disclaimer = () => {
-  const { formData, setFormData, locale, screenDoneLoading } = useContext(Context);
+  const { formData, setFormData, locale, setScreenLoading } = useContext(Context);
   let { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
   const publicChargeOption = useConfig('public_charge_rule');
@@ -35,14 +34,7 @@ const Disclaimer = () => {
       return;
     }
 
-    const stateCodes = Object.keys(STATES);
-
-    if (stateCodes.length > 1) {
-      navigate(`/select-state${queryString}`);
-      return;
-    }
-
-    navigate(`/${stateCodes[0]}/step-1${queryString}`);
+    navigate(`/${whiteLabel}/step-1${queryString}`);
   };
 
   const formSchema = z.object({
@@ -72,7 +64,7 @@ const Disclaimer = () => {
       navigate(`/${whiteLabel}/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
     } else {
       const response = await createScreen(updatedFormData, locale);
-      screenDoneLoading();
+      setScreenLoading(false);
       navigate(`/${whiteLabel}/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
     }
   };

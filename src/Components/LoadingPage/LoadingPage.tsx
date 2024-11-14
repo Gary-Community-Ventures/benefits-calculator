@@ -5,12 +5,12 @@ import { Context } from '../Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
 
 const LoadingPage = () => {
-  const { screenDoneLoading } = useContext(Context);
+  const { setScreenLoading } = useContext(Context);
   const { uuid } = useParams();
 
   useEffect(() => {
     if (uuid === undefined) {
-      screenDoneLoading();
+      setScreenLoading(false);
     }
   });
 

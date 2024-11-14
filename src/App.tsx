@@ -27,8 +27,9 @@ import { useConfig } from './Components/Config/configHook';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 import './App.css';
 import CcigLandingPage from './Components/CcigComponents/CcigLandingPage';
-import languageRouteWrapper from './Components/LanguageRouter/LanguageRouter';
+import languageRouteWrapper from './Components/RouterUtil/LanguageRouter';
 import SelectStatePage from './Components/Steps/SelectStatePage';
+import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
 
 const App = () => {
   const navigate = useNavigate();
@@ -43,16 +44,15 @@ const App = () => {
     setTheme: changeTheme,
     pageIsLoading,
     getReferrer,
-    configLoading,
   } = useContext(Context);
 
-  const referralOptions = useConfig('referral_options');
+  const referralOptions = useConfig('referral_options', {});
 
   const [totalSteps, setTotalSteps] = useState(
     getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER,
   );
   const [theme, setTheme] = useState(createTheme(styleOverride));
-  const themeName = configLoading ? 'default' : getReferrer('theme');
+  const themeName = getReferrer('theme', 'default');
   useEffect(() => {
     changeTheme(themeName as 'default' | 'twoOneOne');
   }, [themeName]);
@@ -130,9 +130,6 @@ const App = () => {
   ]);
 
   useEffect(() => {
-    if (Object.keys(referralOptions).length === 0) {
-      return;
-    }
     const referrerParam = searchParams.get('referrer');
     const utmParam = searchParams.get('utm_source');
     const testParam = searchParams.get('test') ? true : false;
@@ -159,7 +156,7 @@ const App = () => {
       otherSource: isOtherSource ? referrerSource : '',
       urlSearchParams: urlSearchParams,
     });
-  }, [referralOptions, formData.immutableReferrer]);
+  }, [JSON.stringify(referralOptions), formData.immutableReferrer]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -304,6 +301,9 @@ const App = () => {
         <Routes>
           {languageRouteWrapper(
             <>
+              <Route path="jeffcohs" element={<RedirectToWhiteLabel whiteLabel="co" />} />
+              <Route path="jeffcohscm" element={<RedirectToWhiteLabel whiteLabel="co" />} />
+              <Route path="ccig" element={<RedirectToWhiteLabel whiteLabel="co" />} />
               <Route path=":whiteLabel/:uuid">
                 <Route path="" element={<FetchScreen />} />
                 <Route path="*" element={<FetchScreen />} />
@@ -312,8 +312,8 @@ const App = () => {
                 <Route path="" element={<FetchScreen />} />
                 <Route path="*" element={<FetchScreen />} />
               </Route>
-              <Route path="" element={<LoadingPage />} />
-              <Route path="*" element={<LoadingPage />} />
+              <Route path="" element={<FetchScreen />} />
+              <Route path="*" element={<FetchScreen />} />
             </>,
           )}
         </Routes>
@@ -342,15 +342,14 @@ const App = () => {
             {languageRouteWrapper(
               <>
                 <Route path="" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
-                <Route path="jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
-                <Route path="jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
-                <Route path="ccig" element={<CcigLandingPage />} />
+                <Route path="co/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
+                <Route path="co/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
+                <Route path="co/ccig" element={<CcigLandingPage />} />
                 <Route path="step-1" element={<SelectLanguagePage />} />
                 <Route path="select-state" element={<SelectStatePage />} />
                 <Route path=":whiteLabel/select-state" element={<SelectStatePage />} />
                 <Route path=":whiteLabel/step-1" element={<SelectLanguagePage />} />
                 <Route path=":whiteLabel/step-2" element={<Disclaimer />} />
-                <Route path=":whiteLabel/current-benefits" element={<CurrentBenefits />} />
                 <Route path=":whiteLabel/:uuid">
                   <Route path="" element={<Navigate to="/step-1" replace />} />
                   <Route path="step-1" element={<SelectLanguagePage />} />

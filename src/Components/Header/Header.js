@@ -17,7 +17,15 @@ const Header = () => {
   const { whiteLabel } = useParams();
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
-  const logoClass = getReferrer('logoClass');
+  const logoClass = getReferrer('logoClass', 'logo');
+
+  const homeUrl = useMemo(() => {
+    if (whiteLabel === undefined) {
+      return `/step-1${queryString}`;
+    }
+
+    return `${whiteLabel}/step-1${queryString}`;
+  }, [whiteLabel]);
 
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
@@ -62,7 +70,7 @@ const Header = () => {
     <nav>
       <Paper className={containerClass} square={true} elevation={0}>
         <AppBar id="nav-container" position="sticky" elevation={0}>
-          <a href={`/step-1${queryString}`} className="home-link">
+          <a href={homeUrl} className="home-link">
             {useLogo('logoSource', 'logoAlt', logoClass)}
           </a>
           <div className="icon-wrapper">

@@ -11,7 +11,7 @@ import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { STATES } from './SelectStatePage';
 
 const SelectLanguagePage = () => {
-  const { locale, selectLanguage, formData } = useContext(Context);
+  const { locale, selectLanguage, formData, setFormData } = useContext(Context);
   const languageOptions = useConfig('language_options');
   const { whiteLabel, uuid } = useParams();
 
@@ -40,7 +40,7 @@ const SelectLanguagePage = () => {
   useEffect(() => {
     const continueOnEnter = (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
-        navigate(`/step-2${queryString}`);
+        handleSubmit(event);
       }
     };
     document.addEventListener('keyup', continueOnEnter);
@@ -49,7 +49,9 @@ const SelectLanguagePage = () => {
     };
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+
     if (uuid !== undefined) {
       navigate(`/${whiteLabel}/${uuid}/step-2${queryString}`);
       return;
@@ -62,12 +64,17 @@ const SelectLanguagePage = () => {
 
     const stateCodes = Object.keys(STATES);
 
-    if (stateCodes.length > 1) {
+    // FIXME:
+    if (stateCodes.length > 1 || true) {
       navigate(`/select-state${queryString}`);
       return;
     }
 
-    navigate(`/${stateCodes[0]}/step-2${queryString}`);
+    setFormData({ ...formData, whiteLabel: stateCodes[0] });
+    // wait for the new config to be loaded
+    setTimeout(() => {
+      navigate(`/${stateCodes[0]}/step-2${queryString}`);
+    });
   };
 
   return (

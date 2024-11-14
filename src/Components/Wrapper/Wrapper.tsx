@@ -7,9 +7,10 @@ import { getTranslations } from '../../apiCalls';
 import useReferrer, { ReferrerData } from '../Referrer/referrerHook';
 import { Language } from '../../Types/Language';
 import { useGetConfig } from '../Config/configHook';
+import { rightToLeftLanguages } from '../../Assets/languageOptions';
 
 const initialFormData: FormData = {
-  whiteLabel: '',
+  whiteLabel: '_default',
   isTest: false,
   frozen: false,
   externalID: undefined,
@@ -91,23 +92,19 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const [screenLoading, setScreenLoading] = useState<boolean>(true);
   const [pageIsLoading, setPageIsLoading] = useState<boolean>(true);
 
-  const screenDoneLoading = () => {
-    setScreenLoading(false);
-  };
-
   const [formData, setFormData] = useState<FormData>(initialFormData);
+
+  // TODO: figure out what to do here
+  const { configLoading, configResponse: config } = useGetConfig(screenLoading, formData.whiteLabel);
+  const { language_options: languageOptions = {} } = config ?? {};
+  const languages = Object.keys(languageOptions) as Language[];
+  const { referrer_data: referrerData = undefined } = config ?? {};
+
+  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer, referrerData as ReferrerData);
 
   useEffect(() => {
     setReferrer(formData.immutableReferrer);
   }, [formData.immutableReferrer]);
-
-  // TODO: figure out what to do here
-  const { configLoading, configResponse: config } = useGetConfig(screenLoading ? 'co' : formData.whiteLabel);
-  const { language_options: languageOptions = {} } = config ?? {};
-  const languages = Object.keys(languageOptions) as Language[];
-  const { referrer_data: referrerData = {} } = config ?? {};
-
-  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer, referrerData as ReferrerData);
 
   useEffect(() => {
     if (!screenLoading && !translationsLoading && !configLoading) {
@@ -117,8 +114,6 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
     setPageIsLoading(true);
   }, [screenLoading, translationsLoading, configLoading]);
-
-  const rightToLeftLanguages = ['ar'];
 
   let [translations, setTranslations] = useState<{ Language: { [key: string]: string } } | {}>({});
 
@@ -215,7 +210,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         setTheme,
         styleOverride,
         pageIsLoading,
-        screenDoneLoading,
+        setScreenLoading,
         staffToken,
         setStaffToken,
         getReferrer: getReferrer as (id: keyof ReferrerData) => string,

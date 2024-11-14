@@ -8,10 +8,14 @@ import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueBut
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { useContext } from 'react';
+import { Context } from '../Wrapper/Wrapper';
 
-export const STATES = { co: 'Colorado' };
+// This will get removed once NC is moved into the main server
+export const STATES = process.env.REACT_APP_STATE === 'CO' ? { co: 'Colorado' } : { nc: 'North Carolina' };
 
 const SelectStatePage = () => {
+  const { formData, setFormData } = useContext(Context);
   const { whiteLabel, uuid } = useParams();
 
   const queryString = useQueryString();
@@ -34,12 +38,16 @@ const SelectStatePage = () => {
   });
 
   const submitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ state }) => {
-    if (uuid !== undefined) {
-      navigate(`/${state}/${uuid}/step-2${queryString}`);
-      return;
-    }
+    setFormData({ ...formData, whiteLabel: state });
 
-    navigate(`/${state}/step-2${queryString}`);
+    // wait for the new config to be loaded
+    setTimeout(() => {
+      if (uuid !== undefined) {
+        navigate(`/${state}/${uuid}/step-2${queryString}`);
+      } else {
+        navigate(`/${state}/step-2${queryString}`);
+      }
+    });
   };
 
   const createMenuItems = (optionList: Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {

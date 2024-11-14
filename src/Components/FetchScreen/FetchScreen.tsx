@@ -1,6 +1,5 @@
 import { useEffect, useContext, useMemo } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useConfig } from '../Config/configHook.tsx';
 import { getScreen } from '../../apiCalls.js';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LoadingPage from '../LoadingPage/LoadingPage.tsx';
@@ -8,8 +7,7 @@ import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData.t
 import type { FormData } from '../../Types/FormData.ts';
 
 const FetchScreen = () => {
-  const { formData, setFormData, screenDoneLoading, configLoading } = useContext(Context);
-  const referralOptions = useConfig('referral_options');
+  const { formData, setFormData, setScreenLoading } = useContext(Context);
   const location = useLocation();
   const navigate = useNavigate();
   const { uuid: rawUuid, whiteLabel: rawWhiteLabel } = useParams();
@@ -19,13 +17,13 @@ const FetchScreen = () => {
     const uuidRegx = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
 
     if (rawUuid === undefined) {
-      return { uuid: undefined, whiteLabel: undefined };
+      return { uuid: undefined, whiteLabel: rawWhiteLabel };
     }
 
     if (rawWhiteLabel !== undefined && rawWhiteLabel.match(uuidRegx)) {
       return { uuid: rawWhiteLabel, whiteLabel: undefined };
     } else if (!rawUuid.match(uuidRegx)) {
-      return { uuid: undefined, whiteLabel: undefined };
+      return { uuid: undefined, whiteLabel: rawWhiteLabel };
     }
 
     return { uuid: rawUuid, whiteLabel: rawWhiteLabel };
@@ -36,24 +34,26 @@ const FetchScreen = () => {
       const response = await getScreen(uuid);
       createFormData(response);
     } catch (err) {
+      console.error(err);
       navigate('/step-1');
       return;
     }
-    screenDoneLoading();
+    setScreenLoading(false);
   };
 
   const createFormData = (response: ApiFormDataReadOnly & ApiFormData) => {
     // TODO: We should move this logic to the referrer question
     // when we refactor it. This way we can wait to fetch
     // the config until after we fetch the screen.
-    let otherRefferer = '';
-    let referrer = response.referral_source;
-    if (!referrer) {
-      referrer = '';
-    } else if (!(referrer in referralOptions)) {
-      otherRefferer = referrer;
-      referrer = 'other';
-    }
+    //
+    // let otherRefferer = '';
+    // let referrer = response.referral_source;
+    // if (!referrer) {
+    //   referrer = '';
+    // } else if (!(referrer in referralOptions)) {
+    //   otherRefferer = referrer;
+    //   referrer = 'other';
+    // }
 
     const initialFormData: FormData = {
       ...formData,
@@ -104,9 +104,9 @@ const FetchScreen = () => {
         nfp: response.has_nfp ?? false,
         fatc: response.has_fatc ?? false,
       },
-      referralSource: referrer,
+      referralSource: '', // FIXME:
       immutableReferrer: response.referrer_code ?? undefined,
-      otherSource: otherRefferer,
+      otherSource: '', // FIXME:
       acuteHHConditions: {
         food: response.needs_food ?? false,
         babySupplies: response.needs_baby_supplies ?? false,
@@ -190,15 +190,19 @@ const FetchScreen = () => {
   };
 
   useEffect(() => {
-    if (configLoading) {
-      return;
-    }
     if (uuid === undefined) {
-      screenDoneLoading();
+      // don't run immediately because it will be overriden by another setFormData in App.tsx
+      // WARN: This only works like 90% of the time. Will probably need to find another way.
+      setTimeout(() => {
+        if (whiteLabel !== undefined) {
+          setFormData({ ...formData, whiteLabel });
+        }
+        setScreenLoading(false);
+      }, 1);
       return;
     }
     fetchScreen(uuid);
-  }, [uuid, configLoading, whiteLabel]);
+  }, [uuid, whiteLabel]);
 
   return <LoadingPage />;
 };
