@@ -1,121 +1,159 @@
-import { FormattedMessage } from "react-intl";
-import QuestionHeader from "../../QuestionComponents/QuestionHeader";
-import HHMSummaryCards from "./HHMSummaryCards";
-import { useNavigate, useParams } from "react-router-dom";
-import { Context } from "../../Wrapper/Wrapper";
-import { useContext, useState } from "react";
-import { HouseholdData } from "../../../Types/FormData";
-import { Box } from "@mui/material";
-import AgeInput from "../../HouseholdDataBlock/AgeInput";
-import QuestionQuestion from "../../QuestionComponents/QuestionQuestion";
-import { getStepNumber } from "../../../Assets/stepDirectory";
+import { FormattedMessage } from 'react-intl';
+import QuestionHeader from '../../QuestionComponents/QuestionHeader';
+import HHMSummaryCards from './HHMSummaryCards';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Context } from '../../Wrapper/Wrapper';
+import { useContext, useState } from 'react';
+import { HouseholdData } from '../../../Types/FormData';
+import { Box, FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
+import AgeInput from '../../HouseholdDataBlock/AgeInput';
+import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
+import { getStepNumber } from '../../../Assets/stepDirectory';
 import '../../HouseholdDataBlock/HouseholdDataBlock.css';
-import * as z from "zod";
+import * as z from 'zod';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { updateScreen } from '../../../Assets/updateScreen';
+import { useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { MONTHS } from '../../HouseholdDataBlock/MONTHS';
+import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 
 const HouseholdMemberForm = () => {
-  const {formData, setFormData, locale} = useContext(Context);
+  const { formData, setFormData, locale } = useContext(Context);
   const { uuid, page } = useParams();
   const navigate = useNavigate();
   const pageNumber = Number(page);
   const currentStepId = getStepNumber('householdData', formData.immutableReferrer);
-  const backNavigationFunction = (uuid:string, currentStepId:number, pageNumber:number) => {
-    const setPage = (uuid:string, currentStepId:number, pageNumber:number) => {
-      navigate(`/${uuid}/step-${currentStepId}/${pageNumber}`);
-    };
+  // const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
+  //   const setPage = (uuid: string, currentStepId: number, pageNumber: number) => {
+  //     navigate(`/${uuid}/step-${currentStepId}/${pageNumber}`);
+  //   };
 
-    if (pageNumber <= 1) {
-      navigate(`/${uuid}/step-${currentStepId - 1}`);
-    } else {
-      setPage(uuid, currentStepId, pageNumber - 1);
-    }
-  };
-
-
-//TODO: 
+  //   if (pageNumber <= 1) {
+  //     navigate(`/${uuid}/step-${currentStepId - 1}`);
+  //   } else {
+  //     setPage(uuid, currentStepId, pageNumber - 1);
+  //   }
+  // };
+  // const nextStep = useGoToNextStep('householdData', '2');
+  // console.log(`${pageNumber + 1}`);
   const date = new Date();
   const CURRENT_YEAR = date.getFullYear();
   // the getMonth method returns January as 0
   const CURRENT_MONTH = date.getMonth() + 1;
   const MAX_AGE = 130;
   // birthYear > CURRENT_YEAR || birthYear < CURRENT_YEAR - MAX_AGE;
-
-  const formSchema = z.object({birthYear, birthMonth})
-
   //page => pageNumber
 
-  const initialMemberData = formData.householdData[pageNumber - 1] ?? {
-    birthYear: undefined,
-    birthMonth: undefined,
-    // relationshipToHH: pageNumber === 1 ? 'headOfHousehold' : '',
-    // conditions: {
-    //   student: false,
-    //   pregnant: false,
-    //   blindOrVisuallyImpaired: false,
-    //   disabled: false,
-    //   longTermDisability: false,
-    // },
-    // hasIncome: false,
-    // incomeStreams: [],
-    // healthInsurance: {
-    //   none: false,
-    //   employer: false,
-    //   private: false,
-    //   medicaid: false,
-    //   medicare: false,
-    //   chp: false,
-    //   emergency_medicaid: false,
-    //   family_planning: false,
-    //   va: false,
-    // },
+  const formSchema = z.object({
+    /*
+    z.string().min(1) validates that an option was selected.
+    The default value of birthMonth is '' when no option is selected.
+    The possible values that can be selected are '1', '2', ..., '12',
+    so if one of those options are selected,
+    then birthMonth would have a minimum string length of 1 which passes validation.
+    */
+    birthMonth: z.string().min(1),
+    // birthYear: z
+    //   .number()
+    //   .lte(CURRENT_YEAR)
+    //   .gte(CURRENT_YEAR - MAX_AGE),
+    // birthMonth: z.string().transform(value => value === '' ? null : value)
+  });
+
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    watch,
+    getValues,
+  } = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      birthMonth: formData.householdData[pageNumber]?.birthMonth ? String(formData.householdData[pageNumber]?.birthMonth) : '',
+      // birthYear: formData.householdData[pageNumber]?.birthYear ?? '',
+      // relationshipToHH: pageNumber === 1 ? 'headOfHousehold' : '',
+      // conditions: {
+      //   student: false,
+      //   pregnant: false,
+      //   blindOrVisuallyImpaired: false,
+      //   disabled: false,
+      //   longTermDisability: false,
+      // },
+      // hasIncome: false,
+      // incomeStreams: [],
+      // healthInsurance: {
+      //   none: false,
+      //   employer: false,
+      //   private: false,
+      //   medicaid: false,
+      //   medicare: false,
+      //   chp: false,
+      //   emergency_medicaid: false,
+      //   family_planning: false,
+      //   va: false,
+    },
+  });
+
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
+    if (uuid) {
+      const updatedFormData = { ...formData };
+      setFormData(updatedFormData);
+      await updateScreen(uuid, updatedFormData, locale);
+      nextStep();
+    }
   };
 
-  const [memberData, setMemberData] = useState<HouseholdData>(initialMemberData);
-
-  const createAgeQuestion = (personIndex:number) => {
-    const birthMonth = memberData.birthMonth ?? null;
-    const birthYear = memberData.birthYear ?? null;
-    const setBirthMonth = (month:number|null) => {
-      setMemberData({ ...memberData, birthMonth: month ?? undefined });
-    };
-    const setBirthYear = (year:number|null) => {
-      setMemberData({ ...memberData, birthYear: year ?? undefined });
-    };
-
-    if (personIndex === 1) {
-      return (
-        <Box sx={{ marginBottom: '1.5rem' }}>
-          <QuestionQuestion>
+  const createAgeQuestion = (personIndex: number) => {
+    return (
+      <Box sx={{ marginBottom: '1.5rem' }}>
+        <QuestionQuestion>
+          {personIndex === 1 ? (
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-how-headOfHH"
               defaultMessage="Please enter your month and year of birth"
             />
-          </QuestionQuestion>
-          <AgeInput
-            birthMonth={birthMonth}
-            birthYear={birthYear}
-            setBirthMonth={setBirthMonth}
-            setBirthYear={setBirthYear}
-          />
-        </Box>
-      );
-    } else {
-      return (
-        <Box sx={{ marginBottom: '1.5rem' }}>
-          <QuestionQuestion>
+          ) : (
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-how"
               defaultMessage="Please enter their month and year of birth"
             />
-          </QuestionQuestion>
-          <AgeInput
-            birthMonth={birthMonth}
-            birthYear={birthYear}
-            setBirthMonth={setBirthMonth}
-            setBirthYear={setBirthYear}
-          />
-        </Box>
-      );
-    }
+          )}
+        </QuestionQuestion>
+        <div className="age-input-container">
+          <FormControl
+            sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
+            error={!!errors.birthMonth}
+          >
+            <InputLabel id="birth-month">
+              <FormattedMessage id="ageInput.month.label" defaultMessage="Birth Month" />
+            </InputLabel>
+            <Controller
+              name="birthMonth"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <Select
+                    {...field}
+                    labelId="birth-month"
+                    label={<FormattedMessage id="ageInput.month.label" defaultMessage="Birth Month" />}
+                  >
+                    {Object.entries(MONTHS).map(([key, value]) => {
+                      return (
+                        <MenuItem value={String(key)} key={key}>
+                          {value}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                  {!!errors.birthMonth && <FormHelperText>error</FormHelperText>}
+                </>
+              )}
+            />
+          </FormControl>
+      </div>
+      </Box>
+    );
   };
 
   return (
@@ -130,12 +168,13 @@ const HouseholdMemberForm = () => {
           />
         )}
       </QuestionHeader>
-      <HHMSummaryCards activeMemberData={memberData} page={pageNumber} formData={formData} />
-      <form onSubmit={handleSubmit()}>
+      {/* <HHMSummaryCards activeMemberData={getValues()} page={pageNumber} formData={formData} /> */}
+      <form onSubmit={handleSubmit(formSubmitHandler)}>
         {createAgeQuestion(pageNumber)}
+        <PrevAndContinueButtons backNavigationFunction={() => backNavigationFunction(uuid, currentStepId, pageNumber)}/>
       </form>
     </main>
   );
-}
+};
 
 export default HouseholdMemberForm;
