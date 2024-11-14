@@ -13,9 +13,9 @@ type HHMSummariesProps = {
   activeMemberData: HouseholdData;
   page: number;
   formData: FormData;
-}
+};
 
-const HHMSummaries = ({activeMemberData, page, formData}: HHMSummariesProps) => {
+const HHMSummaries = ({ activeMemberData, page, formData }: HHMSummariesProps) => {
   const relationshipOptions = useConfig('relationship_options');
   const headOfHHInfoWasEntered = formData.householdData.length >= 1;
   const translateNumber = useTranslateNumber();
@@ -25,20 +25,26 @@ const HHMSummaries = ({activeMemberData, page, formData}: HHMSummariesProps) => 
     defaultMessage: 'edit household member',
   });
 
-  const handleEditBtnSubmit = (memberIndex:number) => {
+  const handleEditBtnSubmit = (memberIndex: number) => {
     //TODO: once validated through zod, update this function
     // const validPersonData = personDataIsValid(memberData);
     // if (validPersonData) {
-      // handleHouseholdDataSubmit(memberData, page - 1, uuid);
-      // navigate(`/${uuid}/step-${step}/${memberIndex + 1}`);
+    // handleHouseholdDataSubmit(memberData, page - 1, uuid);
+    // navigate(`/${uuid}/step-${step}/${memberIndex + 1}`);
     // }
   };
 
-  const formatToUSD = (num:number) => {
+  const formatToUSD = (num: number) => {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
   };
 
-  const createMemberCard = (memberIndex:number, memberData:HouseholdData, age: number, income: number, relationship_options:Record<string, FormattedMessageType>) => {
+  const createMemberCard = (
+    memberIndex: number,
+    memberData: HouseholdData,
+    age: number,
+    income: number,
+    relationship_options: Record<string, FormattedMessageType>,
+  ) => {
     const { relationshipToHH, birthYear, birthMonth } = memberData;
     const containerClassName = `member-added-container ${memberIndex + 1 === page ? 'current-household-member' : ''}`;
 
@@ -58,7 +64,7 @@ const HHMSummaries = ({activeMemberData, page, formData}: HHMSummariesProps) => 
               }}
               aria-label={editHHMemberAriaLabel}
             >
-              <EditIcon  />
+              <EditIcon />
             </IconButton>
           </div>
         </div>
@@ -87,7 +93,11 @@ const HHMSummaries = ({activeMemberData, page, formData}: HHMSummariesProps) => 
     );
   };
 
-  const createFormDataMemberCard = ( memberIndex:number, member:HouseholdData, relationship_options:Record<string, FormattedMessageType>) => {
+  const createFormDataMemberCard = (
+    memberIndex: number,
+    member: HouseholdData,
+    relationship_options: Record<string, FormattedMessageType>,
+  ) => {
     if (member.birthYear && member.birthMonth) {
       let age = calcAge(member.birthYear, member.birthMonth);
 
@@ -152,7 +162,6 @@ const HHMSummaries = ({activeMemberData, page, formData}: HHMSummariesProps) => 
       )}
     </article>
   );
-
 };
 
 export default HHMSummaries;
