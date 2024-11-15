@@ -37,6 +37,7 @@ export type Program = {
   value_type: Translation;
   learn_more_link: Translation;
   apply_button_link: Translation;
+  apply_button_description: Translation;
   legal_status_required: string[];
   estimated_value_override: Translation;
   eligible: boolean;
