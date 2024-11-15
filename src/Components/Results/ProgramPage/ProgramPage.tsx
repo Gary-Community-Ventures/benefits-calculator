@@ -169,7 +169,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
           {program.apply_button_description.default_message == "" ? (
             <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
           ) : (
-            <FormattedMessage id={program.apply_button_description.label} defaultMessage="Apply Online" />
+            <ResultsTranslate translation={program.apply_button_description} />
           )}
         </a>
         {isAdminView && staffToken !== undefined && formData.isTestData && (
