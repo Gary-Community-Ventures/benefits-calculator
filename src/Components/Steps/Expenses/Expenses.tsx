@@ -112,23 +112,19 @@ const Expenses = () => {
     );
 
     const menuItems = Object.entries(expenseOptions).map(([value, message]) => {
-     return (
-       <MenuItem value={value} key={value}>
-         {message}
-       </MenuItem>
-     );
-   });
+      return (
+        <MenuItem value={value} key={value}>
+          {message}
+        </MenuItem>
+      );
+    });
 
     return [disabledSelectMenuItem, menuItems];
   };
 
   const getExpenseSourceLabel = (expenseOptions: Record<string, FormattedMessageType>, expenseSourceName: string) => {
     if (expenseSourceName) {
-      return (
-        <>
-        {" "}({expenseSourceName})
-        </>
-      );
+      return <> ({expenseSourceName})</>;
     }
   };
 
@@ -176,12 +172,12 @@ const Expenses = () => {
           render={({ field }) => (
             <RadioGroup {...field} aria-labelledby={translatedAriaLabel} className="expense-radiogroup-margin-bottom">
               <FormControlLabel
-                value={"true"}
+                value={'true'}
                 control={<Radio />}
                 label={<FormattedMessage id="radiofield.label-yes" defaultMessage="Yes" />}
               />
               <FormControlLabel
-                value={"false"}
+                value={'false'}
                 control={<Radio />}
                 label={<FormattedMessage id="radiofield.label-no" defaultMessage="No" />}
               />

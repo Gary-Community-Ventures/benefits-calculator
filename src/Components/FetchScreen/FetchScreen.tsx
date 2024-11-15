@@ -45,7 +45,7 @@ const FetchScreen = () => {
       zipcode: response.zipcode ?? '',
       county: response.county ?? '',
       startTime: response.start_date ?? formData.startTime,
-      hasExpenses: response.expenses.length ? 'true': 'false',
+      hasExpenses: response.expenses.length ? 'true' : 'false',
       expenses: [],
       householdSize: String(response.household_size ?? ''),
       householdData: [],
