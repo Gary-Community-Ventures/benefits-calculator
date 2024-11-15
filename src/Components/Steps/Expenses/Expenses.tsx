@@ -126,9 +126,7 @@ const Expenses = () => {
     if (expenseSourceName) {
       return (
         <>
-          {' ('}
-          {expenseOptions[expenseSourceName]}
-          {')'}?
+        ({expenseOptions[expenseSourceName]})
         </>
       );
     }
