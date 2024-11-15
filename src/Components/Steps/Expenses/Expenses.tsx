@@ -46,7 +46,7 @@ const Expenses = () => {
   });
   const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}/${formData.householdSize}`);
   const nextStep = useGoToNextStep('hasExpenses');
-  const expenseOptions = useConfig('expense_options');
+  const expenseOptions = useConfig('expense_options') as Record<string, FormattedMessageType>;
 
   const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
   const expenseSourceSchema = z.object({
