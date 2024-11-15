@@ -166,7 +166,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       </div>
       <div className="apply-button-container">
         <a className="apply-online-button" href={program.apply_button_link.default_message} target="_blank">
-          {program.apply_button_description.default_message == "" ? (
+          {program.apply_button_description.default_message == '' ? (
             <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
           ) : (
             <ResultsTranslate translation={program.apply_button_description} />
