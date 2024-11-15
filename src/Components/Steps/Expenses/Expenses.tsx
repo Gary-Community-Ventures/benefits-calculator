@@ -70,7 +70,7 @@ const Expenses = () => {
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      hasExpenses: formData.hasExpenses ? 'true' : 'false',
+      hasExpenses: formData.hasExpenses === 'true' ? 'true' : 'false',
       expenses: formData.expenses ?? [],
     },
   });
@@ -126,7 +126,7 @@ const Expenses = () => {
     if (expenseSourceName) {
       return (
         <>
-        {" "}({expenseOptions[expenseSourceName]})
+        {" "}({expenseSourceName})
         </>
       );
     }
