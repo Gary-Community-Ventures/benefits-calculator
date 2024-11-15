@@ -42,19 +42,6 @@ const FetchScreen = () => {
   };
 
   const createFormData = (response: ApiFormDataReadOnly & ApiFormData) => {
-    // TODO: We should move this logic to the referrer question
-    // when we refactor it. This way we can wait to fetch
-    // the config until after we fetch the screen.
-    //
-    // let otherRefferer = '';
-    // let referrer = response.referral_source;
-    // if (!referrer) {
-    //   referrer = '';
-    // } else if (!(referrer in referralOptions)) {
-    //   otherRefferer = referrer;
-    //   referrer = 'other';
-    // }
-
     const initialFormData: FormData = {
       ...formData,
       whiteLabel: response.white_label,
@@ -191,7 +178,6 @@ const FetchScreen = () => {
   useEffect(() => {
     if (uuid === undefined) {
       // don't run immediately because it will be overriden by another setFormData in App.tsx
-      // WARN: This only works like 90% of the time. Will probably need to find another way.
       setTimeout(() => {
         if (whiteLabel !== undefined) {
           setFormData({ ...formData, whiteLabel });

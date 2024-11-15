@@ -93,7 +93,6 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
-  // TODO: figure out what to do here
   const { configLoading, configResponse: config } = useGetConfig(screenLoading, formData.whiteLabel);
   const { language_options: languageOptions = {} } = config ?? {};
   const languages = Object.keys(languageOptions) as Language[];
