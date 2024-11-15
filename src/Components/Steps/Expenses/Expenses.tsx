@@ -126,12 +126,10 @@ const Expenses = () => {
     if (expenseSourceName) {
       return (
         <>
-        ({expenseOptions[expenseSourceName]})
+        {" "}({expenseOptions[expenseSourceName]})
         </>
       );
     }
-
-    return '?';
   };
 
   const renderExpenseSourceHelperText = () => {
@@ -256,7 +254,7 @@ const Expenses = () => {
                 <QuestionQuestion>
                   <FormattedMessage
                     id="expenseBlock.createExpenseAmountTextfield-questionLabel"
-                    defaultMessage="How much is this expense every month "
+                    defaultMessage="How much is this expense every month?"
                   />
                   {getExpenseSourceLabel(expenseOptions, selectedExpenseSource)}
                 </QuestionQuestion>
