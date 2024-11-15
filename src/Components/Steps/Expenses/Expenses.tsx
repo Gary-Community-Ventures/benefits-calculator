@@ -59,6 +59,7 @@ const Expenses = () => {
     hasExpenses: hasExpensesSchema,
     expenses: expenseSourcesSchema,
   });
+  type FormSchema = z.infer<typeof formSchema>;
 
   const {
     control,
@@ -66,7 +67,7 @@ const Expenses = () => {
     handleSubmit,
     watch,
     getValues,
-  } = useForm<z.infer<typeof formSchema>>({
+  } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       hasExpenses: formData.hasExpenses ? 'true' : 'false',
@@ -95,7 +96,7 @@ const Expenses = () => {
     }
   }, [getValues('hasExpenses')]);
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (expensesObject) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async (expensesObject) => {
     const hasExpensesBoolean: boolean = expensesObject.hasExpenses === 'true';
     if (uuid) {
       const updatedFormData = { ...formData, ...expensesObject, hasExpenses: hasExpensesBoolean };
