@@ -64,8 +64,7 @@ const SelectLanguagePage = () => {
 
     const stateCodes = Object.keys(STATES);
 
-    // FIXME:
-    if (stateCodes.length > 1 || true) {
+    if (stateCodes.length > 1) {
       navigate(`/select-state${queryString}`);
       return;
     }
