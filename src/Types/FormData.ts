@@ -98,7 +98,7 @@ export interface FormData {
   zipcode: string;
   county: string;
   startTime: string;
-  hasExpenses: boolean;
+  hasExpenses: string;
   expenses: Expense[];
   householdSize: number;
   householdData: HouseholdData[];

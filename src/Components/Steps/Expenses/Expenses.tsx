@@ -76,7 +76,7 @@ const Expenses = () => {
   });
   const watchHasExpenses = watch('hasExpenses');
   // @ts-ignore
-  const hasTruthyExpenses = watchHasExpenses === 'true' || watchHasExpenses === true;
+  const hasTruthyExpenses = watchHasExpenses === 'true';
   const { fields, append, remove, replace } = useFieldArray({
     control,
     name: 'expenses',
@@ -97,9 +97,8 @@ const Expenses = () => {
   }, [getValues('hasExpenses')]);
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async (expensesObject) => {
-    const hasExpensesBoolean: boolean = expensesObject.hasExpenses === 'true';
     if (uuid) {
-      const updatedFormData = { ...formData, ...expensesObject, hasExpenses: hasExpensesBoolean };
+      const updatedFormData = { ...formData, ...expensesObject };
       setFormData(updatedFormData);
       await updateScreen(uuid, updatedFormData, locale);
       nextStep();
@@ -185,12 +184,12 @@ const Expenses = () => {
           render={({ field }) => (
             <RadioGroup {...field} aria-labelledby={translatedAriaLabel} className="expense-radiogroup-margin-bottom">
               <FormControlLabel
-                value={true}
+                value={"true"}
                 control={<Radio />}
                 label={<FormattedMessage id="radiofield.label-yes" defaultMessage="Yes" />}
               />
               <FormControlLabel
-                value={false}
+                value={"false"}
                 control={<Radio />}
                 label={<FormattedMessage id="radiofield.label-no" defaultMessage="No" />}
               />
