@@ -93,7 +93,7 @@ const Expenses = () => {
     if (!hasTruthyExpenses) {
       replace([]);
     }
-  }, [getValues('hasExpenses')]);
+  }, [watchHasExpenses]);
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async (expensesObject) => {
     if (uuid) {
