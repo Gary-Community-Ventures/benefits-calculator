@@ -12,7 +12,8 @@ import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 
 // This will get removed once NC is moved into the main server
-export const STATES = process.env.REACT_APP_STATE === 'CO' ? { co: 'Colorado' } : { nc: 'North Carolina' };
+export const STATES: { [key: string]: string } =
+  process.env.REACT_APP_STATE === 'CO' ? { co: 'Colorado' } : { nc: 'North Carolina' };
 
 const SelectStatePage = () => {
   const { formData, setFormData } = useContext(Context);
@@ -50,18 +51,17 @@ const SelectStatePage = () => {
     });
   };
 
-  const createMenuItems = (optionList: Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
+  const createMenuItems = () => {
     const disabledSelectMenuItem = (
       <MenuItem value="disabled-select" key="disabled-select" disabled>
-        <FormattedMessage id={disabledFMId} defaultMessage={disabledFMDefault} />
+        <FormattedMessage id="a" defaultMessage="Choose your state" />
       </MenuItem>
     );
-    const menuItemKeyLabelPairArr = Object.entries(optionList);
 
-    const dropdownMenuItems = menuItemKeyLabelPairArr.map((key) => {
+    const dropdownMenuItems = Object.entries(STATES).map(([value, message]) => {
       return (
-        <MenuItem value={key[0]} key={key[0]}>
-          {key[1]}
+        <MenuItem value={value} key={value}>
+          {message}
         </MenuItem>
       );
     });
@@ -78,20 +78,18 @@ const SelectStatePage = () => {
     navigate(`/step-1${queryString}`);
   };
 
-  // TODO: add language
-
   return (
     <main className="benefits-form">
       <QuestionHeader>
-        <FormattedMessage id="a" defaultMessage="Some message" />
+        <FormattedMessage id="stateStep.header" defaultMessage="Before you begin..." />
       </QuestionHeader>
       <QuestionQuestion>
-        <FormattedMessage id="a" defaultMessage="Another message" />
+        <FormattedMessage id="stateStep.header" defaultMessage="What is your state?" />
       </QuestionQuestion>
       <form onSubmit={handleSubmit(submitHandler)}>
         <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.state !== undefined}>
           <InputLabel>
-            <FormattedMessage id="a" defaultMessage="State" />
+            <FormattedMessage id="stateStep.placeholder" defaultMessage="State" />
           </InputLabel>
           <Controller
             name="state"
@@ -105,7 +103,7 @@ const SelectStatePage = () => {
                   id="county-source-select"
                   label={<FormattedMessage id="a" defaultMessage="State" />}
                 >
-                  {createMenuItems(STATES, 'a', 'Choose your state')}
+                  {createMenuItems()}
                 </Select>
                 <FormHelperText>{errors.state !== undefined && 'change me'}</FormHelperText>
               </>
