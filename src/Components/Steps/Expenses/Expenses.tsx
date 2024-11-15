@@ -111,16 +111,13 @@ const Expenses = () => {
       </MenuItem>
     );
 
-    const menuItemKeys = Object.keys(expenseOptions);
-    const menuItemLabels = Object.values(expenseOptions);
-
-    const menuItems = menuItemKeys.map((menuItemKey, i) => {
-      return (
-        <MenuItem value={menuItemKey} key={menuItemKey}>
-          {menuItemLabels[i]}
-        </MenuItem>
-      );
-    });
+    const menuItems = Object.entries(expenseOptions).map(([value, message]) => {
+     return (
+       <MenuItem value={value} key={value}>
+         {message}
+       </MenuItem>
+     );
+   });
 
     return [disabledSelectMenuItem, menuItems];
   };
