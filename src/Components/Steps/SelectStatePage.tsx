@@ -1,8 +1,8 @@
 import { FormControl, Select, InputLabel, MenuItem, FormHelperText } from '@mui/material';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
-import QuestionHeader from '../QuestionComponents/QuestionHeader.tsx';
-import { useQueryString } from '../QuestionComponents/questionHooks.ts';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import { useQueryString } from '../QuestionComponents/questionHooks';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
+import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 
 // This will get removed once NC is moved into the main server
 export const STATES: { [key: string]: string } =
@@ -22,16 +23,23 @@ const SelectStatePage = () => {
   const queryString = useQueryString();
   const navigate = useNavigate();
 
+  const { formatMessage } = useIntl();
+
   const formSchema = z.object({
-    // TODO: add error message
-    state: z.string().min(1),
+    state: z
+      .string({
+        errorMap: () => {
+          return { message: formatMessage({ id: 'stateStep.error', defaultMessage: 'Please select a state' }) };
+        },
+      })
+      .min(1),
   });
 
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<z.infer<typeof formSchema>>({
+  } = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       state: whiteLabel ?? '',
@@ -54,7 +62,7 @@ const SelectStatePage = () => {
   const createMenuItems = () => {
     const disabledSelectMenuItem = (
       <MenuItem value="disabled-select" key="disabled-select" disabled>
-        <FormattedMessage id="a" defaultMessage="Choose your state" />
+        <FormattedMessage id="selectState.disabledItem" defaultMessage="Choose your state" />
       </MenuItem>
     );
 
@@ -101,11 +109,15 @@ const SelectStatePage = () => {
                   {...field}
                   labelId="county-select-label"
                   id="county-source-select"
-                  label={<FormattedMessage id="a" defaultMessage="State" />}
+                  label={<FormattedMessage id="stateStep.placeholder" defaultMessage="State" />}
                 >
                   {createMenuItems()}
                 </Select>
-                <FormHelperText>{errors.state !== undefined && 'change me'}</FormHelperText>
+                {errors.state !== undefined && (
+                  <FormHelperText>
+                    <ErrorMessageWrapper fontSize="1rem">{errors.state.message}</ErrorMessageWrapper>
+                  </FormHelperText>
+                )}
               </>
             )}
           />
