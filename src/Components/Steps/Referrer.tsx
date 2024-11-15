@@ -61,7 +61,9 @@ export default function ReferralSourceStep() {
 
   type FormSchema = z.infer<typeof formSchema>;
 
-  const isOtherSource = !(formData.referralSource === undefined) && !(formData.referralSource in referralOptions);
+  const isOtherSource =
+    !(formData.referralSource === undefined || formData.referralSource === '') &&
+    !(formData.referralSource in referralOptions);
 
   const {
     control,
@@ -109,7 +111,7 @@ export default function ReferralSourceStep() {
   };
 
   return (
-    <div>
+    <main className="benefits-form">
       <QuestionHeader>
         <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />
       </QuestionHeader>
@@ -179,6 +181,6 @@ export default function ReferralSourceStep() {
         )}
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
-    </div>
+    </main>
   );
 }

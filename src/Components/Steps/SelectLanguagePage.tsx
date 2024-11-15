@@ -86,7 +86,7 @@ const SelectLanguagePage = () => {
         <FormattedMessage id="selectLanguage.subHeader" defaultMessage="What is your preferred language?" />
       </QuestionQuestion>
       <form onSubmit={handleSubmit}>
-        <FormControl sx={{ width: '150px' }}>
+        <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}>
           <InputLabel id="language-select-label">
             <FormattedMessage id="selectLang.text" defaultMessage="Language" />
           </InputLabel>
