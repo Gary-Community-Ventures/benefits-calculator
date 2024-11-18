@@ -37,6 +37,7 @@ export type Program = {
   value_type: Translation;
   learn_more_link: Translation;
   apply_button_link: Translation;
+  apply_button_description: Translation;
   legal_status_required: string[];
   estimated_value_override: Translation;
   eligible: boolean;
@@ -46,8 +47,14 @@ export type Program = {
   new: boolean;
   low_confidence: boolean;
   navigators: ProgramNavigator[];
-  documents: Translation[];
+  documents: ProgramDocument[];
   warning_messages: Translation[];
+};
+
+export type ProgramDocument = {
+  text: Translation;
+  link_url: Translation;
+  link_text: Translation;
 };
 
 export type ProgramCategory = {

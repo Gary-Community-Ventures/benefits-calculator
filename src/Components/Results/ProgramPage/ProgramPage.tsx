@@ -166,7 +166,11 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       </div>
       <div className="apply-button-container">
         <a className="apply-online-button" href={program.apply_button_link.default_message} target="_blank">
-          <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
+          {program.apply_button_description.default_message == '' ? (
+            <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
+          ) : (
+            <ResultsTranslate translation={program.apply_button_description} />
+          )}
         </a>
         {isAdminView && staffToken !== undefined && formData.isTestData && (
           <button className="apply-online-button" onClick={toggleValidation}>
@@ -237,7 +241,14 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
             <ul className="required-docs-list">
               {program.documents.map((document, index) => (
                 <li key={index}>
-                  <ResultsTranslate translation={document} />
+                  {<ResultsTranslate translation={document.text} />}
+                  {document.link_url.default_message && document.link_text.default_message && (
+                    <span className="required-docs-link">
+                      <a href={document.link_url.default_message} target="_blank" className="link-color">
+                        <ResultsTranslate translation={document.link_text} />
+                      </a>
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>

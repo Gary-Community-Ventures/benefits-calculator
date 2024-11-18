@@ -531,11 +531,13 @@ const Confirmation = () => {
       case 'monthly':
         num = Number(incomeAmount) * 12;
         break;
+      case 'yearly':
+        num = Number(incomeAmount);
+        break;
       case 'hourly':
         num = Number(incomeAmount) * Number(hoursPerWeek) * 52;
         break;
     }
-
     return `(${formatToUSD(num)}` + translatedAnnualText + `)`;
   };
 

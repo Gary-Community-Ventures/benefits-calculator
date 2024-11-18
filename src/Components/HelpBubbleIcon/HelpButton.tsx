@@ -16,9 +16,11 @@ const HelpButton = ({ className, helpText, helpId }: { className?: string; helpT
       <IconButton onClick={handleClick} aria-label={translatedAriaLabel}>
         <HelpBubble style={{ height: '20px', width: '20px' }} />
       </IconButton>
-      <p className={`${className} help-text`}>
-        {showHelpText && <FormattedMessage id={helpId} defaultMessage={helpText} />}
-      </p>
+      {showHelpText && (
+        <p className={`help-text ${className}`}>
+          <FormattedMessage id={helpId} defaultMessage={helpText} />
+        </p>
+      )}
     </>
   );
 };

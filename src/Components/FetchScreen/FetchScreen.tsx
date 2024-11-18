@@ -54,7 +54,7 @@ const FetchScreen = () => {
       zipcode: response.zipcode ?? '',
       county: response.county ?? '',
       startTime: response.start_date ?? formData.startTime,
-      hasExpenses: false,
+      hasExpenses: response.expenses.length ? 'true' : 'false',
       expenses: [],
       householdSize: String(response.household_size ?? ''),
       householdData: [],
@@ -159,7 +159,6 @@ const FetchScreen = () => {
     }
 
     for (const expense of response.expenses) {
-      initialFormData.hasExpenses = true;
       initialFormData.expenses.push({
         expenseSourceName: expense.type ?? '',
         expenseAmount: expense.amount ? String(Math.round(expense.amount)) : '',

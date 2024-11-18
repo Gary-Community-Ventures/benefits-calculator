@@ -1,0 +1,32 @@
+.expense-section-container {
+  position: relative;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.first-expense-q-padding {
+  padding-top: 2rem;
+}
+
+.expense-section:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: -100vw;
+  width: 300vw;
+  background: var(--secondary-background-color);
+  z-index: -1;
+}
+
+.expense-radiogroup-margin-bottom {
+  margin-bottom: 1rem;
+}
+
+.expenses-q-and-help-button {
+  margin-bottom: -0.5rem;
+}
+
+.help-text {
+  margin: 0;
+}

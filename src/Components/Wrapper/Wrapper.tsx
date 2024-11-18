@@ -19,7 +19,7 @@ const initialFormData: FormData = {
   zipcode: '',
   county: '',
   startTime: new Date().toJSON(),
-  hasExpenses: false,
+  hasExpenses: 'false',
   expenses: [],
   householdSize: 0,
   householdData: [],
