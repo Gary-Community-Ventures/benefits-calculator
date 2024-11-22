@@ -32,6 +32,7 @@ const HouseholdSize = () => {
           };
         },
       })
+      .int()
       .positive()
       .lte(8),
   });
