@@ -8,6 +8,18 @@
   margin: 2rem 10% 2rem 10%;
 }
 
+.confirmation-block-container {
+  background-color: var(--secondary-background-color);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  display: flex;
+}
+
+.confirmation-block-content {
+  flex-grow: 1;
+}
+
 .confirmation-container > div {
   background-color: var(--secondary-background-color);
   padding: 2rem;
@@ -17,8 +29,13 @@
 
 .confirmation-icon {
   width: 4.75rem;
-  display: block;
-  margin: auto;
+  margin: 2rem;
+}
+
+.confirmation-icon svg path,
+.confirmation-icon svg circle {
+  stroke: var(--secondary-icon-color);
+  fill: var(--secondary-icon-color);
 }
 
 svg.confirmation-icon path,

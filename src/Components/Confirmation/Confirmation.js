@@ -20,6 +20,7 @@ import './Confirmation.css';
 import { useTranslateNumber } from '../../Assets/languageOptions';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { calcAge } from '../HouseholdDataBlock/AgeInput';
+import ConfirmationBlock, { ConfirmationItem } from './ConfirmationBlock';
 
 const Confirmation = () => {
   const { formData, locale } = useContext(Context);
@@ -361,6 +362,32 @@ const Confirmation = () => {
     );
   };
 
+  const displayZipcodeSectionV2 = () => {
+    const { zipcode, county } = formData;
+    const editZipAriaLabelProps = {
+      id: 'confirmation.zipcode-AL',
+      defaultMsg: 'edit zipcode',
+    };
+
+    return (
+      <ConfirmationBlock
+        icon={<Residence alt="residence icon" />}
+        title={<FormattedMessage id="confirmation.residenceInfo" defaultMessage="Residence Information" />}
+        editAriaLabel={editZipAriaLabelProps}
+        stepName="zipcode"
+      >
+        <ConfirmationItem
+          label={<FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />}
+          value={translateNumber(zipcode)}
+        />
+        <ConfirmationItem
+          label={<FormattedMessage id="confirmation.displayAllFormData-countyText" defaultMessage="County: " />}
+          value={county}
+        />
+      </ConfirmationBlock>
+    );
+  };
+
   const displayZipcodeSection = () => {
     const { zipcode, county } = formData;
     const editZipAriaLabelProps = {
@@ -457,6 +484,7 @@ const Confirmation = () => {
     return (
       <>
         {displayZipcodeSection()}
+        {displayZipcodeSectionV2()}
         {displayHouseholdSizeSection()}
         {displayAllMembersDataBlock()}
         {displayHouseholdExpenses()}

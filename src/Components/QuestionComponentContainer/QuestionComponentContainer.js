@@ -39,7 +39,7 @@ const QuestionComponentContainer = ({
   let { id } = useParams();
   const questionName = useStepName(+id, formData.immutable_referrer);
   const matchingQuestion = questions[questionName];
-  console.log(questionName, matchingQuestion)
+  console.log(questionName, matchingQuestion);
   const errorController = useErrorController(
     matchingQuestion?.componentDetails.inputError,
     matchingQuestion?.componentDetails.inputHelperText,
