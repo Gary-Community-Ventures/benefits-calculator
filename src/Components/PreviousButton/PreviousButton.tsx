@@ -3,8 +3,8 @@ import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { getStepNumber } from '../../Assets/stepDirectory.ts';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import { useStepNumber } from '../../Assets/stepDirectory';
 
 type Props = {
   navFunction: () => void;
@@ -17,8 +17,9 @@ const PreviousButton = ({ navFunction }: Props) => {
   if (!stepNumberId) stepNumberId = 1;
   const navigate = useNavigate();
 
+  const householdStep = useStepNumber('householdData');
+
   const defaultNavigate = () => {
-    const householdStep = getStepNumber('householdData', formData.immutableReferrer);
     if (id && +id === householdStep + 1) {
       navigate(`/${whiteLabel}/${uuid}/step-${householdStep}/${formData.householdData.length}`);
       return;

@@ -11,7 +11,6 @@ import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
-import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { ZipcodeStep } from '../Steps/ZipcodeStep';
 import Expenses from '../Steps/Expenses/Expenses.tsx';
 import HouseholdSize from '../Steps/HouseholdSize';
@@ -19,9 +18,10 @@ import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
-import { getStepNumber } from '../../Assets/stepDirectory';
+import { useStepName } from '../../Assets/stepDirectory';
 import './QuestionComponentContainer.css';
 import ReferralSourceStep from '../Steps/Referrer';
+import questions from '../../Assets/questions';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -37,7 +37,9 @@ const QuestionComponentContainer = ({
   const referralOptions = useConfig('referral_options');
   const signUpOptions = useConfig('sign_up_options');
   let { id } = useParams();
-  let matchingQuestion = getQuestion(+id, formData.immutableReferrer);
+  const questionName = useStepName(+id, formData.immutable_referrer);
+  const matchingQuestion = questions[questionName];
+  console.log(questionName, matchingQuestion)
   const errorController = useErrorController(
     matchingQuestion?.componentDetails.inputError,
     matchingQuestion?.componentDetails.inputHelperText,
@@ -217,26 +219,26 @@ const QuestionComponentContainer = ({
     );
   };
 
-  switch (Number(id)) {
-    case getStepNumber('zipcode', formData.immutableReferrer):
+  switch (questionName) {
+    case 'zipcode':
       return (
         <main className="benefits-form">
           <ZipcodeStep />
         </main>
       );
-    case getStepNumber('householdSize', formData.immutableReferrer):
+    case 'householdSize':
       return (
         <main className="benefits-form">
           <HouseholdSize />
         </main>
       );
-    case getStepNumber('referralSource', formData.immutableReferrer):
+    case 'referralSource':
       return (
         <main className="benefits-form">
           <ReferralSourceStep />
         </main>
       );
-    case getStepNumber('hasExpenses', formData.immutableReferrer):
+    case 'hasExpenses':
       return (
         <main className="benefits-form">
           <Expenses />

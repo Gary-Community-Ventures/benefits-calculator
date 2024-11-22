@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import { FormattedMessage, useIntl } from 'react-intl';
 import LinearProgress from '@mui/material/LinearProgress';
-import { getStepDirectory, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
+import { STARTING_QUESTION_NUMBER, useStepDirectory } from '../../Assets/stepDirectory';
 import { useContext, useEffect } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import dataLayerPush from '../../Assets/analytics';
@@ -13,8 +13,9 @@ interface ProgressBarProps {
 }
 
 const ProgressBar = ({ step }: ProgressBarProps) => {
-  const { theme, formData } = useContext(Context);
-  const totalSteps = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
+  const { theme } = useContext(Context);
+  const stepDirectory = useStepDirectory();
+  const totalSteps = stepDirectory.length + STARTING_QUESTION_NUMBER;
   const { id, uuid } = useParams();
   const intl = useIntl();
 

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
+import { STARTING_QUESTION_NUMBER, useStepDirectory } from '../../Assets/stepDirectory';
 import { useContext, useEffect } from 'react';
 import { useConfig } from '../Config/configHook.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
@@ -39,7 +39,8 @@ const Confirmation = () => {
   const relationshipOptions = useConfig('relationship_options');
 
   const getQuestionUrl = (name) => {
-    const stepNumber = getStepNumber(name, formData.immutableReferrer);
+    // FIXME:
+    const stepNumber = 3;
 
     return `/${whiteLabel}/${uuid}/step-${stepNumber}`;
   };
@@ -640,9 +641,7 @@ const Confirmation = () => {
     );
   };
 
-  const totalNumberOfQuestions = () => {
-    return getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER;
-  };
+  const totalNumberOfQuestions = useStepDirectory().length + STARTING_QUESTION_NUMBER;
 
   const displayHealthInsurance = (hHMemberHealthInsurance, hhMemberIndex) => {
     const selectedDontKnow = hHMemberHealthInsurance.dont_know === true;
@@ -680,7 +679,7 @@ const Confirmation = () => {
       </QuestionHeader>
       <div className="confirmation-container">{displayAllFormData()}</div>
       <div className="prev-continue-results-buttons confirmation">
-        <PreviousButton navFunction={() => navigate(`/${whiteLabel}/${uuid}/step-${totalNumberOfQuestions() - 1}`)} />
+        <PreviousButton navFunction={() => navigate(`/${whiteLabel}/${uuid}/step-${totalNumberOfQuestions - 1}`)} />
         <Button variant="contained" onClick={() => navigate(`/${whiteLabel}/${uuid}/results/benefits`)}>
           <FormattedMessage id="continueButton" defaultMessage="Continue" />
         </Button>

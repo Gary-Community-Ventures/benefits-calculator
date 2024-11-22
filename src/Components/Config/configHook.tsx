@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { configEndpoint, header } from '../../apiCalls';
-import { ConfigApiResponse } from '../../Types/Config';
+import { ConfigApiResponse, ConfigValue } from '../../Types/Config';
 import { Config } from '../../Types/Config';
 import { FormattedMessage } from 'react-intl';
 
@@ -149,12 +149,23 @@ function transformItem(item: unknown): any {
     return iconItem;
   }
 
+  if (Array.isArray(item)) {
+    const array: ConfigValue[] = [];
+
+    for (const value of item) {
+      array.push(transformItem(value));
+    }
+
+    return array;
+  }
+
   const config: Config = {};
   for (const key in item) {
     if (item.hasOwnProperty(key)) {
       config[key] = transformItem((item as any)[key]);
     }
   }
+
   return config;
 }
 

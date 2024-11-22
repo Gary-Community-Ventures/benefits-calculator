@@ -12,7 +12,7 @@ type Resource = {
 
 const MoreHelp = () => {
   const { moreHelpOptions } = useConfig('more_help_options');
-  const resources: Resource[] = Object.values(moreHelpOptions);
+  const resources: Resource[] = moreHelpOptions;
 
   const displayResources = (resources: Resource[]) => {
     return resources.map((resource, index) => {

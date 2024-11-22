@@ -12,7 +12,7 @@ import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { personDataIsValid, selectHasError, relationTypeHelperText } from '../../Assets/validationFunctions.tsx';
-import { getStepNumber } from '../../Assets/stepDirectory';
+import { useStepNumber } from '../../Assets/stepDirectory';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { isCustomTypedLocationState } from '../../Types/FormData.ts';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
@@ -32,7 +32,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const hHSizeNumber = Number(householdSize);
   let { whiteLabel, uuid, page } = useParams();
   page = parseInt(page);
-  const step = getStepNumber('householdData');
+  const step = useStepNumber('householdData');
   const navigate = useNavigate();
   const location = useLocation();
   const setPage = (page) => {

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getStepDirectory, getStepNumber, STARTING_QUESTION_NUMBER } from '../../Assets/stepDirectory';
+import { STARTING_QUESTION_NUMBER, useStepDirectory, useStepNumber } from '../../Assets/stepDirectory';
 import { isCustomTypedLocationState } from '../../Types/FormData';
 import { QuestionName } from '../../Types/Questions';
 import { Context } from '../Wrapper/Wrapper';
@@ -13,9 +13,9 @@ export function useShouldRedirectToConfirmation() {
 // routeEnding will be added to the end of the route when going to the next step
 export function useGoToNextStep(questionName: QuestionName, routeEnding: string = '') {
   const { whiteLabel, uuid } = useParams();
-  const { formData } = useContext(Context);
-  const stepNumber = getStepNumber(questionName, formData.immutableReferrer);
-  const totalStepCount = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER - 1;
+  const stepNumber = useStepNumber(questionName);
+  const stepDirectory = useStepDirectory();
+  const totalStepCount = stepDirectory.length + STARTING_QUESTION_NUMBER - 1;
   const redirectToConfirmationPage = useShouldRedirectToConfirmation();
   const navigate = useNavigate();
 
@@ -55,10 +55,9 @@ export function useQueryString() {
 }
 
 export function useDefaultBackNavigationFunction(questionName: QuestionName) {
-  const { formData } = useContext(Context);
   const { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
-  const currentStepId = getStepNumber(questionName, formData.immutableReferrer);
+  const currentStepId = useStepNumber(questionName);
 
   return () => navigate(`/${whiteLabel}/${uuid}/step-${currentStepId - 1}`);
 }
