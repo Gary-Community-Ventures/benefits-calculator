@@ -21,6 +21,7 @@ import { useTranslateNumber } from '../../Assets/languageOptions';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { calcAge } from '../HouseholdDataBlock/AgeInput';
 import ConfirmationBlock, { ConfirmationItem } from './ConfirmationBlock';
+import STEP_CONFIRMATIONS from './ConfirmationSteps';
 
 const Confirmation = () => {
   const { formData, locale } = useContext(Context);
@@ -38,6 +39,7 @@ const Confirmation = () => {
   const healthInsuranceOptions = useConfig('health_insurance_options');
   const referralOptions = useConfig('referral_options');
   const relationshipOptions = useConfig('relationship_options');
+  const stepDirectory = useStepDirectory();
 
   const getQuestionUrl = (name) => {
     // FIXME:
@@ -362,32 +364,6 @@ const Confirmation = () => {
     );
   };
 
-  const displayZipcodeSectionV2 = () => {
-    const { zipcode, county } = formData;
-    const editZipAriaLabelProps = {
-      id: 'confirmation.zipcode-AL',
-      defaultMsg: 'edit zipcode',
-    };
-
-    return (
-      <ConfirmationBlock
-        icon={<Residence alt="residence icon" />}
-        title={<FormattedMessage id="confirmation.residenceInfo" defaultMessage="Residence Information" />}
-        editAriaLabel={editZipAriaLabelProps}
-        stepName="zipcode"
-      >
-        <ConfirmationItem
-          label={<FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />}
-          value={translateNumber(zipcode)}
-        />
-        <ConfirmationItem
-          label={<FormattedMessage id="confirmation.displayAllFormData-countyText" defaultMessage="County: " />}
-          value={county}
-        />
-      </ConfirmationBlock>
-    );
-  };
-
   const displayZipcodeSection = () => {
     const { zipcode, county } = formData;
     const editZipAriaLabelProps = {
@@ -483,8 +459,10 @@ const Confirmation = () => {
 
     return (
       <>
+        {stepDirectory.map((step) => {
+          return STEP_CONFIRMATIONS[step];
+        })}
         {displayZipcodeSection()}
-        {displayZipcodeSectionV2()}
         {displayHouseholdSizeSection()}
         {displayAllMembersDataBlock()}
         {displayHouseholdExpenses()}
@@ -672,7 +650,6 @@ const Confirmation = () => {
   const totalNumberOfQuestions = useStepDirectory().length + STARTING_QUESTION_NUMBER;
 
   const displayHealthInsurance = (hHMemberHealthInsurance, hhMemberIndex) => {
-    const selectedDontKnow = hHMemberHealthInsurance.dont_know === true;
     const selectedNone = hHMemberHealthInsurance.none === true;
     const allOtherSelectedOptions = Object.entries(hHMemberHealthInsurance).filter(
       (hHMemberInsEntry) => hHMemberInsEntry[1] === true,
@@ -681,7 +658,7 @@ const Confirmation = () => {
       hhMemberIndex === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them;
 
     const allOtherSelectedOptionsString = allOtherSelectedOptions.reduce((acc, filteredHHMInsEntry, index) => {
-      const formattedMessageProp = youVsThemHealthInsuranceOptions[filteredHHMInsEntry[0]].formattedMessage.props;
+      const formattedMessageProp = youVsThemHealthInsuranceOptions[filteredHHMInsEntry[0]].text.props;
       const translatedAriaLabel = intl.formatMessage({ ...formattedMessageProp });
 
       if (allOtherSelectedOptions.length - 1 === index) {

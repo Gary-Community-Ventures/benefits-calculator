@@ -1,7 +1,7 @@
 import { ReactComponent as Edit } from '../../Assets/icons/edit.svg';
 import { PropsWithChildren, ReactNode } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FormattedMessageType, QuestionName } from '../../Types/Questions';
+import { QuestionName } from '../../Types/Questions';
 import './Confirmation.css';
 import { useStepNumber } from '../../Assets/stepDirectory';
 import { MessageDescriptor, useIntl } from 'react-intl';
@@ -11,13 +11,23 @@ type ConfirmationBlockParams = PropsWithChildren<{
   title: ReactNode;
   stepName: QuestionName;
   editAriaLabel: MessageDescriptor;
+  noReturn?: boolean;
+  editUrlEnding?: string;
 }>;
 
-export default function ConfirmationBlock({ icon, title, stepName, editAriaLabel, children }: ConfirmationBlockParams) {
+export default function ConfirmationBlock({
+  icon,
+  title,
+  stepName,
+  editAriaLabel,
+  noReturn = false,
+  editUrlEnding = '',
+  children,
+}: ConfirmationBlockParams) {
   const { whiteLabel, uuid } = useParams();
   const { formatMessage } = useIntl();
   const stepNumber = useStepNumber(stepName);
-  const locationState = { routedFromConfirmationPg: true };
+  const locationState = noReturn ? undefined : { routedFromConfirmationPg: true };
 
   return (
     <div className="confirmation-block-container">
@@ -27,7 +37,7 @@ export default function ConfirmationBlock({ icon, title, stepName, editAriaLabel
         {children}
       </div>
       <Link
-        to={`/${whiteLabel}/${uuid}/step-${stepNumber}`}
+        to={`/${whiteLabel}/${uuid}/step-${stepNumber}/${editUrlEnding}`}
         state={locationState}
         className="edit-button"
         aria-label={formatMessage(editAriaLabel)}
@@ -46,9 +56,17 @@ type ConfirmationItemParams = {
 // be sure to include the ":" in the label
 export function ConfirmationItem({ label, value }: ConfirmationItemParams) {
   return (
-    <p className="section-p">
-      <strong>{label}</strong>
-      {value}
-    </p>
+    <div className="section-p">
+      <strong>{label}</strong> {value}
+    </div>
   );
+}
+
+export function formatToUSD(num: number, significantFigures: number = 2) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    // minimumFractionDigits: 0,
+    maximumFractionDigits: significantFigures,
+  }).format(num);
 }

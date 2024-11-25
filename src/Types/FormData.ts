@@ -1,3 +1,5 @@
+import { intersection } from 'zod';
+
 export interface Expense {
   expenseSourceName: string;
   expenseAmount: string;
@@ -52,7 +54,7 @@ export interface Benefits {
   fatc: boolean;
 }
 
-export interface HealthInsurance {
+export type HealthInsurance = {
   none: boolean;
   employer: boolean;
   private: boolean;
@@ -62,7 +64,7 @@ export interface HealthInsurance {
   emergency_medicaid: boolean;
   family_planning: boolean;
   va: boolean;
-}
+};
 
 export interface SignUpInfo {
   email: string;
