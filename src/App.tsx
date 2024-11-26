@@ -48,7 +48,7 @@ const App = () => {
   const totalSteps = stepDirectory.length + STARTING_QUESTION_NUMBER;
   const [theme, setTheme] = useState(createTheme(styleOverride));
   const themeName = getReferrer('theme', 'default');
-  const householdMemberStepNumber = useStepNumber('householdData');
+  const householdMemberStepNumber = useStepNumber('householdData', false);
   useEffect(() => {
     changeTheme(themeName as 'default' | 'twoOneOne');
   }, [themeName]);

@@ -1,6 +1,6 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { STARTING_QUESTION_NUMBER, useStepDirectory, useStepNumber } from '../../Assets/stepDirectory';
+import { STARTING_QUESTION_NUMBER, useStepDirectory, useStepName, useStepNumber } from '../../Assets/stepDirectory';
 import { isCustomTypedLocationState } from '../../Types/FormData';
 import { QuestionName } from '../../Types/Questions';
 import { Context } from '../Wrapper/Wrapper';
@@ -55,9 +55,19 @@ export function useQueryString() {
 }
 
 export function useDefaultBackNavigationFunction(questionName: QuestionName) {
+  const { formData } = useContext(Context);
   const { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
   const currentStepId = useStepNumber(questionName);
+  const prevStepName = useStepName(currentStepId - 1);
 
-  return () => navigate(`/${whiteLabel}/${uuid}/step-${currentStepId - 1}`);
+  const prevUrl = useMemo(() => {
+    if (prevStepName === 'householdData') {
+      return `/${whiteLabel}/${uuid}/step-${currentStepId - 1}/${formData.householdData.length}`;
+    }
+
+    return `/${whiteLabel}/${uuid}/step-${currentStepId - 1}`;
+  }, [prevStepName]);
+
+  return () => navigate(prevUrl);
 }

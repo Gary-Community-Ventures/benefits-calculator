@@ -8,24 +8,28 @@ export const STARTING_QUESTION_NUMBER = 3;
 export function useStepDirectory() {
   const { getReferrer } = useContext(Context);
 
-  const stepDirectory = getReferrer('stepDirectory', ['householdData', 'hasExpenses']) as QuestionName[];
+  const stepDirectory = getReferrer('stepDirectory', []) as QuestionName[];
 
   return stepDirectory;
 }
 
-export function useStepNumber(name: QuestionName) {
+export function useStepNumber(name: QuestionName, raise: boolean = true) {
   const stepDirectory = useStepDirectory();
 
   const stepNumber = stepDirectory.findIndex((question) => question === name);
 
   if (stepNumber === -1) {
-    throw new Error('Step does not exist for this referrer');
+    if (raise) {
+      throw new Error(`The "${name}" step does not exist for this referrer`);
+    }
+
+    return -1;
   }
 
   return stepNumber + STARTING_QUESTION_NUMBER;
 }
 
-export function useStepName(stepNumber: number) {
+export function useStepName(stepNumber: number): string | undefined {
   const stepDirectory = useStepDirectory();
 
   return stepDirectory[stepNumber - STARTING_QUESTION_NUMBER];

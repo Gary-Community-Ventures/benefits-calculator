@@ -17,7 +17,7 @@ const PreviousButton = ({ navFunction }: Props) => {
   if (!stepNumberId) stepNumberId = 1;
   const navigate = useNavigate();
 
-  const householdStep = useStepNumber('householdData');
+  const householdStep = useStepNumber('householdData', false);
 
   const defaultNavigate = () => {
     if (id && +id === householdStep + 1) {
