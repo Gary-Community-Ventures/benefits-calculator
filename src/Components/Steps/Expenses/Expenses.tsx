@@ -44,7 +44,7 @@ const Expenses = () => {
     id: 'questions.hasExpenses-ariaLabel',
     defaultMessage: 'has expenses',
   });
-  const backNavigationFunction = useDefaultBackNavigationFunction('hasExpenses')
+  const backNavigationFunction = useDefaultBackNavigationFunction('hasExpenses');
   const nextStep = useGoToNextStep('hasExpenses');
   const expenseOptions = useConfig('expense_options') as Record<string, FormattedMessageType>;
 
