@@ -1,18 +1,16 @@
-import { intersection } from 'zod';
-
-export interface Expense {
+export type Expense = {
   expenseSourceName: string;
   expenseAmount: string;
-}
+};
 
-export interface IncomeStream {
+export type IncomeStream = {
   incomeStreamName: string;
   incomeAmount: string;
   incomeFrequency: string;
   hoursPerWeek: string;
-}
+};
 
-export interface HouseholdData {
+export type HouseholdData = {
   birthYear?: number;
   birthMonth?: number;
   relationshipToHH: string;
@@ -20,9 +18,9 @@ export interface HouseholdData {
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
   healthInsurance: HealthInsurance;
-}
+};
 
-export interface Benefits {
+export type Benefits = {
   acp: boolean;
   andcs: boolean;
   cccap: boolean;
@@ -52,7 +50,7 @@ export interface Benefits {
   ubp: boolean;
   nfp: boolean;
   fatc: boolean;
-}
+};
 
 export type HealthInsurance = {
   none: boolean;
@@ -66,7 +64,7 @@ export type HealthInsurance = {
   va: boolean;
 };
 
-export interface SignUpInfo {
+export type SignUpInfo = {
   email: string;
   phone: string;
   firstName: string;
@@ -76,9 +74,9 @@ export interface SignUpInfo {
   sendUpdates: boolean;
   commConsent: boolean;
   serverError?: boolean;
-}
+};
 
-export interface AcuteHHConditions {
+export type AcuteHHConditions = {
   food: boolean;
   babySupplies: boolean;
   housing: boolean;
@@ -88,9 +86,9 @@ export interface AcuteHHConditions {
   jobResources: boolean;
   dentalCare: boolean;
   legalServices: boolean;
-}
+};
 
-export interface FormData {
+export type FormData = {
   whiteLabel: string;
   isTest: boolean;
   isTestData?: boolean;
@@ -113,15 +111,15 @@ export interface FormData {
   signUpInfo: SignUpInfo;
   urlSearchParams: string;
   acuteHHConditions: AcuteHHConditions;
-}
+};
 
-export interface Conditions {
+export type Conditions = {
   student: boolean;
   pregnant: boolean;
   blindOrVisuallyImpaired: boolean;
   disabled: boolean;
   longTermDisability: boolean;
-}
+};
 
 export const isCustomTypedLocationState = (
   locationState: unknown,

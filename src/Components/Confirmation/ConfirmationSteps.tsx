@@ -15,6 +15,7 @@ import { FormattedMessageType, QuestionName } from '../../Types/Questions';
 import { useConfig } from '../Config/configHook';
 import { calcAge } from '../HouseholdDataBlock/AgeInput';
 import { Conditions, IncomeStream, Benefits as BenefitsType } from '../../Types/FormData';
+import { resolveTripleslashReference } from 'typescript';
 
 function ZipCode() {
   const { formData } = useContext(Context);
@@ -352,7 +353,7 @@ function Expenses() {
 
   const allExpenses = () => {
     if (formData.expenses.length === 0) {
-      return <FormattedMessage id="confirmation.none" defaultMessage=" None" />;
+      return <FormattedMessage id="confirmation.none" defaultMessage="None" />;
     }
     const mappedExpenses = formData.expenses.map((expense, i) => {
       return (
@@ -456,14 +457,19 @@ function HasBenefits() {
       allBenefits = { ...allBenefits, ...category.benefits };
     }
 
-    return Object.entries(allBenefits)
+    const benefitsText = Object.entries(allBenefits)
       .filter(([name, _]) => {
-        console.log(name, formData.benefits[name as keyof BenefitsType]);
         return formData.benefits[name as keyof BenefitsType];
       })
       .map(([name, value]) => {
         return <ConfirmationItem label={value.name} value={value.description} key={name} />;
       });
+
+    if (benefitsText.length > 0) {
+      return benefitsText;
+    }
+
+    return <FormattedMessage id="confirmation.none" defaultMessage="None" />;
   };
 
   const editHasBenefitsAriaLabel = {
@@ -492,6 +498,82 @@ function HasBenefits() {
   );
 }
 
+function AcuteConditions() {
+  const { formData } = useContext(Context);
+  const { formatMessage } = useIntl();
+  const acuteConditionOptions = useConfig<IconAndFormattedMessageMap>('acute_condition_options');
+
+  const editAcuteConditionsAriaLabel = {
+    id: 'confirmation.acuteConditions.edit-AL',
+    defaultMessage: 'edit immediate needs',
+  };
+  const acuteConditionsIconAlt = {
+    id: 'confirmation.acuteConditions.icon-AL',
+    defaultMessage: 'immediate needs',
+  };
+
+  const formatedNeeds = () => {
+    const allNeeds = Object.entries(formData.acuteHHConditions).filter(([_, value]) => value === true);
+
+    if (allNeeds.length === 0) {
+      return <FormattedMessage id="confirmation.noIncome" defaultMessage="None" />;
+    }
+
+    return (
+      <ul className="confirmation-acute-need-list">
+        {allNeeds.map(([key, _]) => {
+          return <li key={key}>{acuteConditionOptions[key].text}</li>;
+        })}
+      </ul>
+    );
+  };
+
+  return (
+    <ConfirmationBlock
+      icon={<Immediate title={formatMessage(acuteConditionsIconAlt)} />}
+      title={
+        <FormattedMessage id="confirmation.displayAllFormData-acuteHHConditions" defaultMessage="Immediate Needs" />
+      }
+      editAriaLabel={editAcuteConditionsAriaLabel}
+      stepName="acuteHHConditions"
+    >
+      {formatedNeeds()}
+    </ConfirmationBlock>
+  );
+}
+
+function ReferralSource() {
+  const { formData } = useContext(Context);
+  const { formatMessage } = useIntl();
+  const referralOptions = useConfig<{ [key: string]: string | FormattedMessageType }>('referral_options');
+
+  if (formData.referralSource === undefined) {
+    return null;
+  }
+
+  const editReferralSourceAriaLabel = {
+    id: 'confirmation.referralSource.edit-AL',
+    defaultMessage: 'edit referral source',
+  };
+  const referralSourceIconAlt = {
+    id: 'confirmation.referralSource.icon-AL',
+    defaultMessage: 'referral source',
+  };
+
+  return (
+    <ConfirmationBlock
+      icon={<Referral title={formatMessage(referralSourceIconAlt)} />}
+      title={
+        <FormattedMessage id="confirmation.displayAllFormData-referralSourceText" defaultMessage="Referral Source" />
+      }
+      editAriaLabel={editReferralSourceAriaLabel}
+      stepName="referralSource"
+    >
+      {formData.referralSource in referralOptions ? referralOptions[formData.referralSource] : formData.referralSource}
+    </ConfirmationBlock>
+  );
+}
+
 const STEP_CONFIRMATIONS: Record<QuestionName, ReactNode | null> = {
   zipcode: <ZipCode key="zipcode" />,
   householdSize: <HouseholdSize key="householdSize" />,
@@ -499,8 +581,8 @@ const STEP_CONFIRMATIONS: Record<QuestionName, ReactNode | null> = {
   hasExpenses: <Expenses key="hasExpenses" />,
   householdAssets: <Assets key="householdAssets" />,
   hasBenefits: <HasBenefits key="hasBenefits" />,
-  acuteHHConditions: null,
-  referralSource: null,
+  acuteHHConditions: <AcuteConditions key="acuteHHConditions" />,
+  referralSource: <ReferralSource key="referralSource" />,
   signUpInfo: null,
 };
 

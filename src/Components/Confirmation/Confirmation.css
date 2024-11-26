@@ -68,6 +68,15 @@ svg.edit-button polygon {
   fill: var(--midBlue-color);
 }
 
+.confirmation-acute-need-list {
+  list-style-type: none;
+  padding: 0
+}
+
+.confirmation-acute-need-list > li {
+  margin-bottom: 1rem;
+}
+
 .prev-continue-results-buttons.confirmation {
   display: flex;
   justify-content: space-between;
