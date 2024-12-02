@@ -30,13 +30,13 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const relationshipOptions = useConfig('relationship_options');
   const { householdSize } = formData;
   const hHSizeNumber = Number(householdSize);
-  let { uuid, page } = useParams();
+  let { whiteLabel, uuid, page } = useParams();
   page = parseInt(page);
   const step = getStepNumber('householdData');
   const navigate = useNavigate();
   const location = useLocation();
   const setPage = (page) => {
-    navigate(`/${uuid}/step-${step}/${page}`);
+    navigate(`/${whiteLabel}/${uuid}/step-${step}/${page}`);
   };
   const [submittedCount, setSubmittedCount] = useState(0);
   const intl = useIntl();
@@ -93,7 +93,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     //it routes the user back to the last valid HHM
     const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
     if (isNaN(page) || page < 1 || page > lastMemberPage) {
-      navigate(`/${uuid}/step-${step}/${lastMemberPage}`, { replace: true });
+      navigate(`/${whiteLabel}/${uuid}/step-${step}/${lastMemberPage}`, { replace: true });
       return;
     }
   }, []);
@@ -208,7 +208,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     const validPersonData = personDataIsValid(memberData);
     if (validPersonData) {
       handleHouseholdDataSubmit(memberData, page - 1, uuid);
-      navigate(`/${uuid}/step-${step}/${memberIndex + 1}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${step}/${memberIndex + 1}`);
     }
   };
 
@@ -432,10 +432,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     if (validPersonData && isComingFromConfirmationPg) {
       handleHouseholdDataSubmit(memberData, page - 1, uuid);
-      navigate(`/${uuid}/confirm-information`);
+      navigate(`/${whiteLabel}/${uuid}/confirm-information`);
     } else if (validPersonData && lastHouseholdMember) {
       handleHouseholdDataSubmit(memberData, page - 1, uuid);
-      navigate(`/${uuid}/step-${step + 1}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${step + 1}`);
     } else if (validPersonData) {
       handleHouseholdDataSubmit(memberData, page - 1, uuid);
       setPage(page + 1);
@@ -446,7 +446,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const handlePreviousSubmit = () => {
     if (page <= 1) {
-      navigate(`/${uuid}/step-${step - 1}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${step - 1}`);
     } else {
       setPage(page - 1);
     }

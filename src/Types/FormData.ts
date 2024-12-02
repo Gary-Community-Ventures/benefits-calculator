@@ -89,6 +89,7 @@ export interface AcuteHHConditions {
 }
 
 export interface FormData {
+  whiteLabel: string;
   isTest: boolean;
   isTestData?: boolean;
   frozen: boolean;
@@ -107,7 +108,6 @@ export interface FormData {
   benefits: Benefits;
   referralSource?: string;
   immutableReferrer?: string;
-  otherSource?: string;
   signUpInfo: SignUpInfo;
   urlSearchParams: string;
   acuteHHConditions: AcuteHHConditions;

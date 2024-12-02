@@ -21,6 +21,7 @@ import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { getStepNumber } from '../../Assets/stepDirectory';
 import './QuestionComponentContainer.css';
+import ReferralSourceStep from '../Steps/Referrer';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -227,6 +228,12 @@ const QuestionComponentContainer = ({
       return (
         <main className="benefits-form">
           <HouseholdSize />
+        </main>
+      );
+    case getStepNumber('referralSource', formData.immutableReferrer):
+      return (
+        <main className="benefits-form">
+          <ReferralSourceStep />
         </main>
       );
     case getStepNumber('hasExpenses', formData.immutableReferrer):

@@ -7,8 +7,8 @@ const translationsEndpoint = `${domain}/api/translations/`;
 const screensEndpoint = `${domain}/api/screens/`;
 const userEndpoint = `${domain}/api/users/`;
 const messageEndpoint = `${domain}/api/messages/`;
-const apiProgramCategoriesEndPoint = `${domain}/api/program_categories`;
-const apiUrgentNeedsEndpoint = `${domain}/api/urgent-needs`;
+const apiProgramCategoriesEndPoint = `${domain}/api/program_categories/`;
+const apiUrgentNeedsEndpoint = `${domain}/api/urgent_needs/`;
 export const configEndpoint = `${domain}/api/configuration/`;
 const eligibilityEndpoint = `${domain}/api/eligibility/`;
 const validationEndpoint = `${domain}/api/validations/`;
@@ -125,8 +125,8 @@ const getEligibility = (screenerId, locale) => {
   });
 };
 
-const getAllLongTermPrograms = async () => {
-  const response = await fetch(apiProgramCategoriesEndPoint, {
+const getAllLongTermPrograms = async (whiteLabel) => {
+  const response = await fetch(apiProgramCategoriesEndPoint + whiteLabel, {
     method: 'GET',
     headers: header,
   });
@@ -145,8 +145,8 @@ const getAllLongTermPrograms = async () => {
   return data;
 };
 
-const getAllNearTermPrograms = async () => {
-  const response = await fetch(apiUrgentNeedsEndpoint, {
+const getAllNearTermPrograms = async (whiteLabel) => {
+  const response = await fetch(apiUrgentNeedsEndpoint + whiteLabel, {
     method: 'GET',
     headers: header,
   });

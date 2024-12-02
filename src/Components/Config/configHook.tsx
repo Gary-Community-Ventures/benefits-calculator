@@ -28,6 +28,7 @@ import { ReactComponent as Housing } from '../../Assets/OptionCardIcons/AcuteCon
 import { ReactComponent as Job_resources } from '../../Assets/OptionCardIcons/AcuteConditions/job_resources.svg';
 import { ReactComponent as Legal_services } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
 import { ReactComponent as Support } from '../../Assets/OptionCardIcons/AcuteConditions/support.svg';
+import { useParams } from 'react-router-dom';
 
 type Item = {
   _label: string;
@@ -170,9 +171,9 @@ function transformConfigData(configData: ConfigApiResponse[]): Config {
   return transformedConfig;
 }
 
-async function getConfig() {
+async function getConfig(whiteLabel: string) {
   // fetch data
-  return fetch(configEndpoint, {
+  return fetch(configEndpoint + whiteLabel, {
     method: 'GET',
     headers: header,
   }).then((response) => {
@@ -187,12 +188,17 @@ async function getConfig() {
   });
 }
 
-export function useGetConfig() {
+export function useGetConfig(screenLoading: boolean, whiteLabel: string) {
   const [configLoading, setLoading] = useState<boolean>(true);
   const [configResponse, setConfigResponse] = useState<Config | undefined>();
 
   useEffect(() => {
-    getConfig().then((value: ConfigApiResponse[]) => {
+    setLoading(true);
+    if (screenLoading) {
+      return;
+    }
+
+    getConfig(whiteLabel).then((value: ConfigApiResponse[]) => {
       // get data and set loading to false
       try {
         if (value !== undefined) {
@@ -204,23 +210,23 @@ export function useGetConfig() {
       }
       setLoading(false);
     });
-  }, []);
+  }, [screenLoading, whiteLabel]);
 
   return { configLoading, configResponse };
 }
 
-export function useConfig(name: string) {
+export function useConfig<T>(name: string, defaultValue?: T): T {
   const { config } = useContext(Context);
 
-  if (config === undefined) {
-    return {};
+  if (config === undefined || config[name] === undefined) {
+    if (defaultValue !== undefined) {
+      return defaultValue;
+    }
+
+    throw new Error(
+      `'${name}' does not exist in the config. Consider using a defualt value if useConfig is used before the config is loaded.`,
+    );
   }
 
-  if (config[name] === undefined) {
-    throw new Error(`'${name}' does not exist in the config`);
-  }
-
-  let configValue = config[name];
-
-  return configValue;
+  return config[name] as T;
 }
