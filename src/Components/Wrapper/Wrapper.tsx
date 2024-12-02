@@ -21,7 +21,7 @@ const initialFormData: FormData = {
   startTime: new Date().toJSON(),
   hasExpenses: 'false',
   expenses: [],
-  householdSize: 0,
+  householdSize: '',
   householdData: [],
   householdAssets: 0,
   hasBenefits: 'preferNotToAnswer',
