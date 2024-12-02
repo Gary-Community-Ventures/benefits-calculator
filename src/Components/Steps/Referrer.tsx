@@ -62,7 +62,8 @@ export default function ReferralSourceStep() {
   type FormSchema = z.infer<typeof formSchema>;
 
   const isOtherSource =
-    formData.referralSource !== undefined && formData.referralSource !== '' &&
+    formData.referralSource !== undefined &&
+    formData.referralSource !== '' &&
     !(formData.referralSource in referralOptions);
 
   const {
