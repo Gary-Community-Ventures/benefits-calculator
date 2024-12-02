@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import { useConfig } from '../Config/configHook.tsx';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import Radiofield from '../Radiofield/Radiofield';
@@ -22,6 +22,7 @@ import { useStepName } from '../../Assets/stepDirectory';
 import './QuestionComponentContainer.css';
 import ReferralSourceStep from '../Steps/Referrer';
 import questions from '../../Assets/questions';
+import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -39,7 +40,6 @@ const QuestionComponentContainer = ({
   let { id } = useParams();
   const questionName = useStepName(+id, formData.immutable_referrer);
   const matchingQuestion = questions[questionName];
-  console.log(questionName, matchingQuestion);
   const errorController = useErrorController(
     matchingQuestion?.componentDetails.inputError,
     matchingQuestion?.componentDetails.inputHelperText,
@@ -218,6 +218,10 @@ const QuestionComponentContainer = ({
       </>
     );
   };
+
+  useEffect(() => {
+    document.title = QUESTION_TITLES[questionName];
+  }, [questionName]);
 
   switch (questionName) {
     case 'zipcode':

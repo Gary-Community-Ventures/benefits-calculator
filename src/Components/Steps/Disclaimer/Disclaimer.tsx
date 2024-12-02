@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../../Wrapper/Wrapper.tsx';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,6 +15,7 @@ import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper.tsx';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons.tsx';
 import { useQueryString } from '../../QuestionComponents/questionHooks.ts';
 import './Disclaimer.css';
+import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 
 const isTrue = (value: boolean) => {
   return value;
@@ -36,6 +37,10 @@ const Disclaimer = () => {
 
     navigate(`/${whiteLabel}/step-1${queryString}`);
   };
+
+  useEffect(() => {
+    document.title = OTHER_PAGE_TITLES.disclaimer;
+  }, []);
 
   const formSchema = z.object({
     agreeToTermsOfService: z.boolean().refine(isTrue),

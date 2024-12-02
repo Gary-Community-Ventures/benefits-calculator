@@ -7,11 +7,16 @@ import PreviousButton from '../PreviousButton/PreviousButton';
 import './Confirmation.css';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import STEP_CONFIRMATIONS from './ConfirmationSteps';
+import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
 
 const Confirmation = () => {
   const { uuid, whiteLabel } = useParams();
   const navigate = useNavigate();
   const stepDirectory = useStepDirectory();
+
+  useEffect(() => {
+    document.title = OTHER_PAGE_TITLES.confirmation;
+  }, []);
 
   useEffect(() => {
     const continueOnEnter = (event) => {

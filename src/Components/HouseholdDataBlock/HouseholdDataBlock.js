@@ -22,6 +22,7 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import AgeInput, { calcAge } from './AgeInput';
+import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -44,6 +45,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     id: 'editHHMember.ariaText',
     defaultMessage: 'edit household member',
   });
+
+  useEffect(() => {
+    document.title = QUESTION_TITLES.householdData;
+  }, []);
 
   const initialMemberData = formData.householdData[page - 1] ?? {
     birthYear: undefined,

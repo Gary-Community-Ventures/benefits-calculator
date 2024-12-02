@@ -9,6 +9,7 @@ import { useQueryString } from '../QuestionComponents/questionHooks.ts';
 import FormContinueButton from '../ContinueButton/FormContinueButton.tsx';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { STATES } from './SelectStatePage';
+import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
 
 const SelectLanguagePage = () => {
   const { locale, selectLanguage, formData, setFormData } = useContext(Context);
@@ -17,6 +18,10 @@ const SelectLanguagePage = () => {
 
   const queryString = useQueryString();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = OTHER_PAGE_TITLES.language;
+  }, []);
 
   const createMenuItems = (optionList: Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
     const disabledSelectMenuItem = (

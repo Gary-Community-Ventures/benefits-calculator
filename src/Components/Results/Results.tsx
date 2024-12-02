@@ -18,6 +18,7 @@ import MoreHelp from '../MoreHelp/MoreHelp';
 import BackAndSaveButtons from './BackAndSaveButtons/BackAndSaveButtons';
 import { FormattedMessage } from 'react-intl';
 import './Results.css';
+import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -86,6 +87,10 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   useEffect(() => {
     dataLayerPush({ event: 'config', user_id: uuid });
   }, [uuid]);
+
+  useEffect(() => {
+    document.title = OTHER_PAGE_TITLES.results;
+  }, []);
 
   const fetchResults = async () => {
     try {

@@ -19,7 +19,7 @@ import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } fro
 import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx';
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
-import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
+import { OTHER_PAGE_TITLES } from './Assets/pageTitleTags.ts';
 import { isCustomTypedLocationState } from './Types/FormData.ts';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 import './App.css';
@@ -27,7 +27,6 @@ import CcigLandingPage from './Components/CcigComponents/CcigLandingPage';
 import languageRouteWrapper from './Components/RouterUtil/LanguageRouter';
 import SelectStatePage from './Components/Steps/SelectStatePage';
 import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
-import { QuestionName } from './Types/Questions';
 
 const App = () => {
   const navigate = useNavigate();
@@ -49,6 +48,7 @@ const App = () => {
   const [theme, setTheme] = useState(createTheme(styleOverride));
   const themeName = getReferrer('theme', 'default');
   const householdMemberStepNumber = useStepNumber('householdData', false);
+
   useEffect(() => {
     changeTheme(themeName as 'default' | 'twoOneOne');
   }, [themeName]);
@@ -65,20 +65,8 @@ const App = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    const stepString = location.pathname.split('/').filter((string) => string.includes('step'))[0] as StepName;
-    const isConfirmationPage = location.pathname.includes('confirm-information');
-    const isResultsPage = location.pathname.includes('results');
-
-    if (isConfirmationPage) {
-      document.title = pageTitleTags['confirm-information'];
-    } else if (isResultsPage) {
-      document.title = pageTitleTags['results'];
-    } else if (pageTitleTags[stepString]) {
-      document.title = pageTitleTags[stepString];
-    } else {
-      document.title = 'MyFriendBen';
-    }
-  }, [location]);
+    document.title = OTHER_PAGE_TITLES.default;
+  }, []);
 
   useEffect(() => {
     const updatedFormData = { ...formData };
