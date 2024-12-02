@@ -213,8 +213,6 @@ const App = () => {
     const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
       ? location.state.routedFromConfirmationPg
       : false;
-    // const stepNumber = stepNumbers[questionName];
-    // const totalStepCount = stepDirectory.length + STARTING_QUESTION_NUMBER - 1;
     const isLastStep = questionName === stepDirectory.at(-1);
 
     if (!hasError) {
