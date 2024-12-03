@@ -11,6 +11,7 @@ export interface IncomeStream {
 }
 
 export interface HouseholdData {
+  age?: number; // deprecated: used for historical screens only
   birthYear?: number;
   birthMonth?: number;
   relationshipToHH: string;

@@ -141,6 +141,7 @@ const FetchScreen = () => {
       }
 
       initialFormData.householdData.push({
+        age: member.age ?? undefined,
         birthYear: member.birth_year ?? undefined,
         birthMonth: member.birth_month ?? undefined,
         relationshipToHH: member.relationship ? member.relationship : defaultRelationship,
