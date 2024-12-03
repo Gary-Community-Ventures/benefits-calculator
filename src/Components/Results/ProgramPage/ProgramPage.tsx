@@ -25,7 +25,7 @@ type IconRendererProps = {
 const ProgramPage = ({ program }: ProgramPageProps) => {
   const { uuid } = useParams();
   const { formData, setFormData, staffToken } = useContext(Context);
-  const { isAdminView, validations, setValidations } = useResultsContext();
+  const { isAdminView, validations, setValidations, programCategories } = useResultsContext();
   const IconRenderer: React.FC<IconRendererProps> = ({ headingType }) => {
     const IconComponent = headingOptionsMappings[headingType];
 
@@ -76,15 +76,29 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     saveValidation();
   };
 
+  const category = programCategories.find((category) => {
+    for (const categoryProgram of category.programs) {
+      if (categoryProgram.external_name === program.external_name) {
+        return true;
+      }
+    }
+
+    return false;
+  });
+
+  if (category === undefined) {
+    throw new Error(`program with external name "${program.external_name}" is not in a category`);
+  }
+
   const displayIconAndHeader = (program: Program) => {
     return (
       <header className="program-icon-and-header">
         <div className="header-icon-box">
-          <IconRenderer headingType={program.category.default_message} />
+          <IconRenderer headingType={category.icon} />
         </div>
         <div className="header-text">
           <p className="header-text-top">
-            <ResultsTranslate translation={program.category} />
+            <ResultsTranslate translation={category.name} />
           </p>
           <div className="divider"></div>
           <h1 className="header-text-bottom">
@@ -117,7 +131,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     );
   };
 
-  const backLink = useResultsLink(`/${uuid}/results/benefits`);
+  const backLink = useResultsLink(`results/benefits`);
   const displayLanguageFlags = (navigatorLanguages: Language[]) => {
     return (
       <div className="navigator-langs-container">
@@ -152,7 +166,11 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       </div>
       <div className="apply-button-container">
         <a className="apply-online-button" href={program.apply_button_link.default_message} target="_blank">
-          <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
+          {program.apply_button_description.default_message == '' ? (
+            <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
+          ) : (
+            <ResultsTranslate translation={program.apply_button_description} />
+          )}
         </a>
         {isAdminView && staffToken !== undefined && formData.isTestData && (
           <button className="apply-online-button" onClick={toggleValidation}>
@@ -223,7 +241,14 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
             <ul className="required-docs-list">
               {program.documents.map((document, index) => (
                 <li key={index}>
-                  <ResultsTranslate translation={document} />
+                  {<ResultsTranslate translation={document.text} />}
+                  {document.link_url.default_message && document.link_text.default_message && (
+                    <span className="required-docs-link">
+                      <a href={document.link_url.default_message} target="_blank" className="link-color">
+                        <ResultsTranslate translation={document.link_text} />
+                      </a>
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>

@@ -4,7 +4,6 @@ import { Context } from '../Wrapper/Wrapper';
 import { useContext } from 'react';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import { FormattedMessage, useIntl } from 'react-intl';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
@@ -33,6 +32,7 @@ const HouseholdSize = () => {
           };
         },
       })
+      .int()
       .positive()
       .lte(8),
   });
@@ -47,9 +47,13 @@ const HouseholdSize = () => {
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (householdSizeData) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async ({ householdSize }) => {
     if (uuid) {
-      const updatedFormData = { ...formData, ...householdSizeData };
+      const updatedFormData = {
+        ...formData,
+        householdSize,
+        householdData: formData.householdData.slice(0, householdSize),
+      };
       setFormData(updatedFormData);
       await updateScreen(uuid, updatedFormData, locale);
       nextStep();

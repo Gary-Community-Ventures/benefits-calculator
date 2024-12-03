@@ -7,8 +7,8 @@ const translationsEndpoint = `${domain}/api/translations/`;
 const screensEndpoint = `${domain}/api/screens/`;
 const userEndpoint = `${domain}/api/users/`;
 const messageEndpoint = `${domain}/api/messages/`;
-const apiLongTermProgramsEndPoint = `${domain}/api/programs`;
-const apiUrgentNeedsEndpoint = `${domain}/api/urgent-needs`;
+const apiProgramCategoriesEndPoint = `${domain}/api/program_categories/`;
+const apiUrgentNeedsEndpoint = `${domain}/api/urgent_needs/`;
 export const configEndpoint = `${domain}/api/configuration/`;
 const eligibilityEndpoint = `${domain}/api/eligibility/`;
 const validationEndpoint = `${domain}/api/validations/`;
@@ -125,8 +125,8 @@ const getEligibility = (screenerId, locale) => {
   });
 };
 
-const getAllLongTermPrograms = async () => {
-  const response = await fetch(apiLongTermProgramsEndPoint, {
+const getAllLongTermPrograms = async (whiteLabel) => {
+  const response = await fetch(apiProgramCategoriesEndPoint + whiteLabel, {
     method: 'GET',
     headers: header,
   });
@@ -134,17 +134,19 @@ const getAllLongTermPrograms = async () => {
     throw new Error(`${response.status} ${response.statusText}`);
   }
 
-  const programs = await response.json();
-  const programsWithNormalizedCategoryTranslations = programs.map((program) => {
-    const categoryWithNormalizedDefaultMessage = cleanTranslationDefaultMessage(program.category);
-    return { ...program, category: categoryWithNormalizedDefaultMessage };
-  });
+  const data = await response.json();
 
-  return programsWithNormalizedCategoryTranslations;
+  for (const category of Object.values(data)) {
+    category.programs = category.programs.map((program) => {
+      return { name: program.name, description: program.website_description };
+    });
+  }
+
+  return data;
 };
 
-const getAllNearTermPrograms = async () => {
-  const response = await fetch(apiUrgentNeedsEndpoint, {
+const getAllNearTermPrograms = async (whiteLabel) => {
+  const response = await fetch(apiUrgentNeedsEndpoint + whiteLabel, {
     method: 'GET',
     headers: header,
   });
@@ -155,10 +157,26 @@ const getAllNearTermPrograms = async () => {
   const programs = await response.json();
   const programsWithNormalizedTypeTranslations = programs.map((program) => {
     const categoryWithNormalizedDefaultMessage = cleanTranslationDefaultMessage(program.type);
-    return { ...program, type: categoryWithNormalizedDefaultMessage };
+    return { ...program, category: categoryWithNormalizedDefaultMessage };
   });
 
-  return programsWithNormalizedTypeTranslations;
+  const categoryMap = {};
+
+  for (const program of programsWithNormalizedTypeTranslations) {
+    const id = program.category.default_message;
+    if (!(id in categoryMap)) {
+      categoryMap[id] = { programs: [], name: program.category, icon: program.category.default_message };
+    }
+
+    categoryMap[id].programs.push({ name: program.name, description: program.website_description });
+  }
+
+  const categories = [];
+  for (const category of Object.values(categoryMap)) {
+    categories.push(category);
+  }
+
+  return categories;
 };
 
 const postValidation = async (validationBody, key) => {

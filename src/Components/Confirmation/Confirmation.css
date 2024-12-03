@@ -8,6 +8,14 @@
   margin: 2rem 10% 2rem 10%;
 }
 
+.confirmation-block-container {
+  background-color: var(--secondary-background-color);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  display: flex;
+}
+
 .confirmation-container > div {
   background-color: var(--secondary-background-color);
   padding: 2rem;
@@ -16,9 +24,14 @@
 }
 
 .confirmation-icon {
-  width: 4.75rem;
-  display: block;
-  margin: auto;
+  min-width: 4.75rem;
+  margin: 2rem;
+}
+
+.confirmation-icon svg path,
+.confirmation-icon svg circle {
+  stroke: var(--secondary-icon-color);
+  fill: var(--secondary-icon-color);
 }
 
 svg.confirmation-icon path,
@@ -53,6 +66,15 @@ svg.edit-button rect,
 svg.edit-button polygon {
   stroke: var(--midBlue-color);
   fill: var(--midBlue-color);
+}
+
+.confirmation-acute-need-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.confirmation-acute-need-list > li {
+  margin-bottom: 1rem;
 }
 
 .prev-continue-results-buttons.confirmation {

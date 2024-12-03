@@ -11,23 +11,23 @@ import Disclaimer from './Components/Steps/Disclaimer/Disclaimer.tsx';
 import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlock.js';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
-import LoadingPage from './Components/LoadingPage/LoadingPage.tsx';
-import SelectLanguage from './Components/Steps/SelectLanguage.tsx';
+import SelectLanguagePage from './Components/Steps/SelectLanguage.tsx';
 import { updateScreen, updateUser } from './Assets/updateScreen.ts';
-import { getStepDirectory, STARTING_QUESTION_NUMBER, getStepNumber } from './Assets/stepDirectory';
+import { STARTING_QUESTION_NUMBER, useStepNumber, useStepDirectory } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
 import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx';
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
-import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
+import { OTHER_PAGE_TITLES } from './Assets/pageTitleTags.ts';
 import { isCustomTypedLocationState } from './Types/FormData.ts';
-import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits.tsx';
-import { useConfig } from './Components/Config/configHook';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 import './App.css';
 import CcigLandingPage from './Components/CcigComponents/CcigLandingPage';
-import languageRouteWrapper from './Components/LanguageRouter/LanguageRouter';
+import languageRouteWrapper from './Components/RouterUtil/LanguageRouter';
+import SelectStatePage from './Components/Steps/SelectStatePage';
+import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
+import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
 import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm.tsx';
 
 const App = () => {
@@ -46,20 +46,15 @@ const App = () => {
     configLoading,
   } = useContext(Context);
 
-  const referralOptions = useConfig('referral_options');
-
-  const [totalSteps, setTotalSteps] = useState(
-    getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER,
-  );
+  const stepDirectory = useStepDirectory();
+  const totalSteps = stepDirectory.length + STARTING_QUESTION_NUMBER;
   const [theme, setTheme] = useState(createTheme(styleOverride));
-  const themeName = configLoading ? 'default' : getReferrer('theme');
+  const themeName = getReferrer('theme', 'default');
+  const householdMemberStepNumber = useStepNumber('householdData', false);
+
   useEffect(() => {
     changeTheme(themeName as 'default' | 'twoOneOne');
   }, [themeName]);
-
-  useEffect(() => {
-    setTotalSteps(getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER);
-  }, [formData.immutableReferrer]);
 
   useEffect(() => {
     setTheme(createTheme(styleOverride));
@@ -73,31 +68,14 @@ const App = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    const stepString = location.pathname.split('/').filter((string) => string.includes('step'))[0] as StepName;
-    const isConfirmationPage = location.pathname.includes('confirm-information');
-    const isResultsPage = location.pathname.includes('results');
-
-    if (isConfirmationPage) {
-      document.title = pageTitleTags['confirm-information'];
-    } else if (isResultsPage) {
-      document.title = pageTitleTags['results'];
-    } else if (pageTitleTags[stepString]) {
-      document.title = pageTitleTags[stepString];
-    } else {
-      document.title = 'MyFriendBen';
-    }
-  }, [location]);
+    document.title = OTHER_PAGE_TITLES.default;
+  }, []);
 
   useEffect(() => {
     const updatedFormData = { ...formData };
-    const referralSourceIsNotOther = !(formData.referralSource === 'other');
 
     if (formData.hasExpenses === false) {
       updatedFormData.expenses = [];
-    }
-
-    if (referralSourceIsNotOther) {
-      updatedFormData.otherSource = '';
     }
 
     if (formData.signUpInfo.sendOffers === false && formData.signUpInfo.sendUpdates === false) {
@@ -130,9 +108,6 @@ const App = () => {
   ]);
 
   useEffect(() => {
-    if (Object.keys(referralOptions).length === 0) {
-      return;
-    }
     const referrerParam = searchParams.get('referrer');
     const utmParam = searchParams.get('utm_source');
     const testParam = searchParams.get('test') ? true : false;
@@ -140,11 +115,7 @@ const App = () => {
 
     // referrer priority = stored referrer -> referrer param -> utm_source param -> ''
     const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
-    const isOtherSource = !(referrer in referralOptions);
     let referrerSource = formData.referralSource || referrer;
-    if (referrerSource === 'other') {
-      referrerSource = formData.otherSource ?? '';
-    }
     const isTest = formData.isTest || testParam;
     const externalId = formData.externalID ?? externalIdParam ?? undefined;
 
@@ -154,12 +125,11 @@ const App = () => {
       ...formData,
       isTest: isTest,
       externalID: externalId,
-      referralSource: isOtherSource && referrer !== '' ? 'other' : referrerSource,
+      referralSource: referrerSource,
       immutableReferrer: referrer,
-      otherSource: isOtherSource ? referrerSource : '',
       urlSearchParams: urlSearchParams,
     });
-  }, [referralOptions, formData.immutableReferrer]);
+  }, [formData.immutableReferrer]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -183,9 +153,7 @@ const App = () => {
       return;
     }
 
-    if (name === 'otherSource') {
-      setFormData({ ...formData, [name]: value });
-    } else if (numberUpToEightDigitsLongRegex.test(value)) {
+    if (numberUpToEightDigitsLongRegex.test(value)) {
       if (value === '') {
         setFormData({ ...formData, [name]: value });
         return;
@@ -232,23 +200,19 @@ const App = () => {
     errorController.incrementSubmitted();
     const hasError = errorController.updateError(inputToBeValidated, formData);
     const isZipcodeQuestionAndCountyIsEmpty = questionName === 'zipcode' && formData.county === '';
-    const isReferralQuestionWithOtherAndOtherSourceIsEmpty =
-      questionName === 'referralSource' && formData.referralSource === 'other' && formData.otherSource === '';
     const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets < 0;
     const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
       ? location.state.routedFromConfirmationPg
       : false;
-    const stepNumber = getStepNumber(questionName, formData.immutableReferrer);
-    const totalStepCount = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER - 1;
-    const isLastStep = stepNumber === totalStepCount;
+    const isLastStep = questionName === stepDirectory.at(-1);
 
     if (!hasError) {
-      if (isZipcodeQuestionAndCountyIsEmpty || isReferralQuestionWithOtherAndOtherSourceIsEmpty || isEmptyAssets) {
+      if (isZipcodeQuestionAndCountyIsEmpty || isEmptyAssets) {
         return;
       } else if (questionName === 'signUpInfo') {
         updateUser(uuid, formData, setFormData, locale)
           .then(() => {
-            navigate(`/${uuid}/confirm-information`);
+            navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`);
           })
           .catch(() => {
             setFormData({ ...formData, signUpInfo: { ...formData.signUpInfo, serverError: true } });
@@ -259,13 +223,13 @@ const App = () => {
         updateScreen(uuid, updatedFormData, locale);
         setFormData(updatedFormData);
         isComingFromConfirmationPg
-          ? navigate(`/${uuid}/confirm-information`)
-          : navigate(`/${uuid}/step-${stepId + 1}/1`);
+          ? navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`)
+          : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}/1`);
       } else {
         updateScreen(uuid, formData, locale);
         isComingFromConfirmationPg || isLastStep
-          ? navigate(`/${uuid}/confirm-information`)
-          : navigate(`/${uuid}/step-${stepId + 1}`);
+          ? navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`)
+          : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
       }
     }
   };
@@ -274,7 +238,7 @@ const App = () => {
     const updatedFormData = { ...formData, incomeStreams: validatedIncomeStreams };
     updateScreen(uuid, updatedFormData, locale);
     setFormData(updatedFormData);
-    navigate(`/${uuid}/step-${stepId + 1}`);
+    navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
   };
 
   const handleExpenseSourcesSubmit = (validatedExpenseSources: Expense[], stepId: number, uuid: string) => {
@@ -284,7 +248,9 @@ const App = () => {
     const updatedFormData = { ...formData, expenses: validatedExpenseSources };
     updateScreen(uuid, updatedFormData, locale);
     setFormData(updatedFormData);
-    isComingFromConfirmationPg ? navigate(`/${uuid}/confirm-information`) : navigate(`/${uuid}/step-${stepId + 1}`);
+    isComingFromConfirmationPg
+      ? navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`)
+      : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
   };
 
   const handleHouseholdDataSubmit = (memberData: HouseholdData, stepId: number, uuid: string) => {
@@ -302,12 +268,19 @@ const App = () => {
         <Routes>
           {languageRouteWrapper(
             <>
+              <Route path="jeffcohs" element={<RedirectToWhiteLabel whiteLabel="co" />} />
+              <Route path="jeffcohscm" element={<RedirectToWhiteLabel whiteLabel="co" />} />
+              <Route path="ccig" element={<RedirectToWhiteLabel whiteLabel="co" />} />
+              <Route path=":whiteLabel/:uuid">
+                <Route path="" element={<FetchScreen />} />
+                <Route path="*" element={<FetchScreen />} />
+              </Route>
               <Route path=":uuid">
                 <Route path="" element={<FetchScreen />} />
                 <Route path="*" element={<FetchScreen />} />
               </Route>
-              <Route path="" element={<LoadingPage />} />
-              <Route path="*" element={<LoadingPage />} />
+              <Route path="" element={<FetchScreen />} />
+              <Route path="*" element={<FetchScreen />} />
             </>,
           )}
         </Routes>
@@ -322,29 +295,35 @@ const App = () => {
         <BrandedHeader />
         <Box className="main-max-width">
           <Routes>
-            <Route path="/step-1" element={<ProgressBar step={1} />} />
-            <Route path="/step-2" element={<ProgressBar step={2} />} />
-            <Route path="/:uuid/step-:id" element={<ProgressBar />} />
-            <Route path="/:uuid/step-:id/:page" element={<ProgressBar />} />
-            <Route path="/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
+            <Route path="step-1" element={<ProgressBar step={1} />} />
+            <Route path=":whiteLabel/step-1" element={<ProgressBar step={1} />} />
+            <Route path="select-state" element={<ProgressBar step={1} />} />
+            <Route path=":whiteLabel/select-state" element={<ProgressBar step={1} />} />
+            <Route path=":whiteLabel/step-2" element={<ProgressBar step={2} />} />
+            <Route path=":whiteLabel/:uuid/step-:id" element={<ProgressBar />} />
+            <Route path=":whiteLabel/:uuid/step-:id/:page" element={<ProgressBar />} />
+            <Route path=":whiteLabel/:uuid/confirm-information" element={<ProgressBar step={totalSteps} />} />
             <Route path="*" element={<></>} />
           </Routes>
           <Routes>
             {languageRouteWrapper(
               <>
                 <Route path="" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
-                <Route path="current-benefits" element={<CurrentBenefits />} />
-                <Route path="jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
-                <Route path="jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
-                <Route path="ccig" element={<CcigLandingPage />} />
-                <Route path="step-1" element={<SelectLanguage />} />
-                <Route path="step-2" element={<Disclaimer />} />
-                <Route path=":uuid">
+                <Route path="co/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
+                <Route path="co/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
+                <Route path="co/ccig" element={<CcigLandingPage />} />
+                <Route path="step-1" element={<SelectLanguagePage />} />
+                <Route path="select-state" element={<SelectStatePage />} />
+                <Route path=":whiteLabel/current-benefits" element={<CurrentBenefits />} />
+                <Route path=":whiteLabel/select-state" element={<SelectStatePage />} />
+                <Route path=":whiteLabel/step-1" element={<SelectLanguagePage />} />
+                <Route path=":whiteLabel/step-2" element={<Disclaimer />} />
+                <Route path=":whiteLabel/:uuid">
                   <Route path="" element={<Navigate to="/step-1" replace />} />
-                  <Route path="step-1" element={<SelectLanguage />} />
+                  <Route path="step-1" element={<SelectLanguagePage />} />
                   <Route path="step-2" element={<Disclaimer />} />
                   <Route
-                    path={`step-${getStepNumber('householdData', formData.immutableReferrer)}/:page`}
+                    path={`step-${householdMemberStepNumber}/:page`}
                     element={
                       // <HouseholdDataBlock
                       //   key={window.location.href}

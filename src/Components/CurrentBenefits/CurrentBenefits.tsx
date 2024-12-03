@@ -22,58 +22,17 @@ import { ReactComponent as LegalServices } from '../../Assets/OptionCardIcons/Ac
 import LoadingPage from '../LoadingPage/LoadingPage';
 import './CurrentBenefits.css';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import { useTranslateNumber } from '../../Assets/languageOptions';
+import { useParams } from 'react-router-dom';
 
-type CategoryName =
-  | 'Housing and Utilities'
-  | 'Food and Nutrition'
-  | 'Health Care'
-  | 'Transportation'
-  | 'Tax Credits'
-  | 'Cash Assistance'
-  | 'Child Care, Youth, and Education'
-  | 'Food or Groceries'
-  | 'Baby Supplies'
-  | 'Managing housing costs'
-  | 'Behavioral health'
-  | "Child's development"
-  | 'Family planning'
-  | 'Job resources'
-  | 'Low-cost dental care'
-  | 'Civil legal needs';
-
-const isCategoryName = (maybeCategoryName: string | undefined): maybeCategoryName is CategoryName => {
-  if (!maybeCategoryName) {
-    return false;
-  }
-
-  return [
-    'Housing and Utilities',
-    'Food and Nutrition',
-    'Health Care',
-    'Transportation',
-    'Tax Credits',
-    'Cash Assistance',
-    'Child Care, Youth, and Education',
-    'Food or Groceries',
-    'Baby Supplies',
-    'Managing housing costs',
-    'Behavioral health',
-    "Child's development",
-    'Family planning',
-    'Job resources',
-    'Low-cost dental care',
-    'Civil legal needs',
-  ].includes(maybeCategoryName);
-};
-
-export const iconCategoryMap: Record<CategoryName, React.ComponentType> = {
-  'Housing and Utilities': Housing,
-  'Food and Nutrition': Food,
-  'Health Care': HealthCare,
-  Transportation: Transportation,
-  'Tax Credits': TaxCredits,
-  'Cash Assistance': CashAssistance,
-  'Child Care, Youth, and Education': ChildCareYouthEducation,
+export const iconCategoryMap: { [key: string]: React.ComponentType } = {
+  housing: Housing,
+  food: Food,
+  health_care: HealthCare,
+  transportation: Transportation,
+  tax_credit: TaxCredits,
+  cash: CashAssistance,
+  child_care: ChildCareYouthEducation,
   'Food or Groceries': FoodOrGroceries,
   'Baby Supplies': BabySupplies,
   'Managing housing costs': ManagingHousingCosts,
@@ -87,85 +46,66 @@ export const iconCategoryMap: Record<CategoryName, React.ComponentType> = {
 
 type Program = {
   name: Translation;
-  website_description: Translation;
-  category?: Translation;
-  id: number;
-  type?: Translation;
+  description: Translation;
 };
 
 type Category = {
   name: Translation;
+  icon: string;
   programs: Program[];
 };
 
+function programCount(categories: Category[]) {
+  let count = 0;
+
+  for (const category of categories) {
+    count += category.programs.length;
+  }
+
+  return count;
+}
+
 const CurrentBenefits = () => {
-  const [allLongTermPrograms, setAllLongTermPrograms] = useState<Program[]>([]);
-  const [allNearTermPrograms, setAllNearTermPrograms] = useState<Program[]>([]);
+  const [programCategories, setProgramCategories] = useState<Category[]>([]);
+  const [urgentNeedCategories, setUrgentNeedCategories] = useState<Category[]>([]);
+  const [progamsLoaded, setProgramsLoaded] = useState(false);
+  const [urgentNeedsLoaded, setUrgentNeedsLoaded] = useState(false);
+  const { whiteLabel } = useParams();
   const intl = useIntl();
 
   useEffect(() => {
-    getAllLongTermPrograms().then((programs: Program[]) => {
-      setAllLongTermPrograms(programs);
+    getAllLongTermPrograms(whiteLabel).then((programs: Category[]) => {
+      setProgramCategories(programs);
+      setProgramsLoaded(true);
     });
 
-    getAllNearTermPrograms().then((programs: Program[]) => {
-      setAllNearTermPrograms(programs);
+    getAllNearTermPrograms(whiteLabel).then((urgentNeeds: Category[]) => {
+      setUrgentNeedCategories(urgentNeeds);
+      setUrgentNeedsLoaded(true);
     });
   }, []);
-
-  const groupProgramsIntoCategories = (
-    programs: Program[],
-    typeOrCategoryField: 'type' | 'category',
-  ): Record<CategoryName, Category> => {
-    //this actually returns an object with category name
-    const programsGroupedByCategory = programs.reduce((acc, program) => {
-      const programTypeOrCategory = program[typeOrCategoryField];
-      if (!programTypeOrCategory) {
-        throw new Error(`program.${typeOrCategoryField} is undefined`);
-      }
-
-      const categoryName = programTypeOrCategory.default_message;
-
-      if (!isCategoryName(categoryName)) {
-        throw new Error(`CategoryName ${categoryName} is invalid`);
-      }
-
-      if (!acc[categoryName]) {
-        acc[categoryName] = { name: programTypeOrCategory, programs: [] };
-      }
-
-      acc[categoryName].programs.push(program);
-
-      return acc;
-    }, {} as Record<CategoryName, Category>);
-
-    return programsGroupedByCategory;
-  };
 
   const displayProgramSection = (program: Program, index: number) => {
     return (
       <div className="bottom-margin" key={index}>
-        <p className="program-name">{program.name.default_message}</p>
-        <p>{<ResultsTranslate translation={program.website_description} />}</p>
+        <p className="program-name">
+          <ResultsTranslate translation={program.name} />
+        </p>
+        <p>
+          <ResultsTranslate translation={program.description} />
+        </p>
       </div>
     );
   };
 
-  const displayProgramsByCategory = (
-    programs: Program[],
-    typeOrCategoryField: 'type' | 'category',
-    groupProgramsIntoCategories: (
-      programs: Program[],
-      typeOrCategoryField: 'type' | 'category',
-    ) => Record<CategoryName, Category>,
-  ) => {
-    const programsSortedByCategories = groupProgramsIntoCategories(programs, typeOrCategoryField);
+  const displayProgramsByCategory = (categories: Category[]) => {
+    const categoryHeaderIconAndPrograms = Object.values(categories).map((category, index) => {
+      const { name, programs, icon } = category;
+      if (!(icon in iconCategoryMap)) {
+        throw new Error(`"${icon}" is not a valid icon name`);
+      }
 
-    const categoryHeaderIconAndPrograms = Object.keys(programsSortedByCategories).map((key: string, index) => {
-      const categoryName = key as CategoryName;
-      const category = programsSortedByCategories[categoryName];
-      const { name, programs } = category;
-      const CategoryIcon = iconCategoryMap[categoryName];
+      const CategoryIcon = iconCategoryMap[icon];
 
       return (
         <div key={index} className="category-section-container">
@@ -196,7 +136,9 @@ const CurrentBenefits = () => {
     return <div>{categoryHeaderIconAndPrograms}</div>;
   };
 
-  if (allLongTermPrograms.length && allNearTermPrograms.length) {
+  const translateNumber = useTranslateNumber();
+
+  if (progamsLoaded && urgentNeedsLoaded) {
     return (
       <main className="current-benefits-container">
         <QuestionHeader>
@@ -210,16 +152,16 @@ const CurrentBenefits = () => {
         <div className="header-and-programs-container">
           <h2 className="long-near-term-header">
             <FormattedMessage id="currentBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
-            {` (${allLongTermPrograms.length})`}
+            {` (${translateNumber(programCount(programCategories))})`}
           </h2>
-          {displayProgramsByCategory(allLongTermPrograms, 'category', groupProgramsIntoCategories)}
+          {displayProgramsByCategory(programCategories)}
         </div>
         <div className="header-and-programs-container">
           <h2 className="long-near-term-header">
             <FormattedMessage id="currentBenefits.near-term-benefits" defaultMessage="NEAR-TERM BENEFITS" />
-            {` (${allNearTermPrograms.length})`}
+            {` (${translateNumber(programCount(urgentNeedCategories))})`}
           </h2>
-          {displayProgramsByCategory(allNearTermPrograms, 'type', groupProgramsIntoCategories)}
+          {displayProgramsByCategory(urgentNeedCategories)}
         </div>
       </main>
     );

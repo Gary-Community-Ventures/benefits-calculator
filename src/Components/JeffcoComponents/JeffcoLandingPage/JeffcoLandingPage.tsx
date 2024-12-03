@@ -1,34 +1,27 @@
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
-import { useConfig } from '../../Config/configHook';
 import jeffcolandingpage from '../../../Assets/States/CO/WhiteLabels/JeffcoAssets/jeffcolandingpage.png';
 import Stack from '@mui/material/Stack';
 import { Typography, Button } from '@mui/material';
 import { useContext, useEffect } from 'react';
-import { Context } from '../../Wrapper/Wrapper';
 import './JeffcoLandingPage.css';
+import { useQueryString } from '../../QuestionComponents/questionHooks';
+import { Context } from '../../Wrapper/Wrapper';
 
 type Props = { referrer: string };
+
 const JeffcoLandingPage = ({ referrer }: Props) => {
-  const navigate = useNavigate();
   const { formData, setFormData } = useContext(Context);
-  const referralOptions = useConfig('referral_options');
+  const navigate = useNavigate();
+  const queryString = useQueryString();
 
   useEffect(() => {
-    setTimeout(() => {
-      const referrerSource = referrer in referralOptions ? referrer : 'other';
-      const otherSource = referrerSource === 'other' ? referrer : '';
-      setFormData({
-        ...formData,
-        immutableReferrer: referrer,
-        referralSource: referrerSource,
-        otherSource: otherSource,
-      });
-    });
-  }, [referrer]);
+    // this causes the screen to flash as the config needs to reload
+    setFormData({ ...formData, immutableReferrer: referrer });
+  }, []);
 
   const handleGetStarted = () => {
-    navigate(`/step-1?referrer=${referrer}`);
+    navigate(`/co/step-1${queryString}`);
   };
 
   return (

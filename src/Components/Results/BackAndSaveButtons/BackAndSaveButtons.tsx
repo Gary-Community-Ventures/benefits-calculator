@@ -7,7 +7,6 @@ import { ReactComponent as SaveIcon } from '../../../Assets/save.svg';
 import { Modal } from '@mui/material';
 import { FormattedMessageType } from '../../../Types/Questions';
 import './BackAndSaveButtons.css';
-import { useResultsLink } from '../Results';
 
 type BackAndSaveButtons = {
   handleTextfieldChange: (event: Event) => void;

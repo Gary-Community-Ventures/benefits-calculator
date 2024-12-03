@@ -8,7 +8,7 @@ import { HouseholdData } from '../../../Types/FormData';
 import { Box, FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
 import AgeInput from '../../HouseholdDataBlock/AgeInput';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
-import { getStepNumber } from '../../../Assets/stepDirectory';
+import { useStepNumber } from '../../../Assets/stepDirectory';
 import '../../HouseholdDataBlock/HouseholdDataBlock.css';
 import * as z from 'zod';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -23,7 +23,7 @@ const HouseholdMemberForm = () => {
   const { uuid, page } = useParams();
   const navigate = useNavigate();
   const pageNumber = Number(page);
-  const currentStepId = getStepNumber('householdData', formData.immutableReferrer);
+  const currentStepId = useStepNumber('householdData', formData.immutableReferrer);
   // const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
   //   const setPage = (uuid: string, currentStepId: number, pageNumber: number) => {
   //     navigate(`/${uuid}/step-${currentStepId}/${pageNumber}`);

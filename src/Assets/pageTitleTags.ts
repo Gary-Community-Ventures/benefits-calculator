@@ -1,32 +1,24 @@
-export type StepName =
-  | 'step-1'
-  | 'step-2'
-  | 'step-3'
-  | 'step-4'
-  | 'step-5'
-  | 'step-6'
-  | 'step-7'
-  | 'step-8'
-  | 'step-9'
-  | 'step-10'
-  | 'step-11'
-  | 'confirm-information'
-  | 'results';
+import { QuestionName } from '../Types/Questions';
 
-const pageTitleTags: Record<StepName, string> = {
-  'step-1': 'Preferred Language',
-  'step-2': 'Legal',
-  'step-3': 'Zip and County',
-  'step-4': 'Number of HH Members',
-  'step-5': 'Individual HH Member',
-  'step-6': 'Expenses',
-  'step-7': 'Assets',
-  'step-8': 'Existing Benefits',
-  'step-9': 'Near Term Help',
-  'step-10': 'Referral',
-  'step-11': 'Optional Sign Up',
-  'confirm-information': 'Confirmation',
-  results: 'Results',
+export const QUESTION_TITLES: Record<QuestionName, string> = {
+  zipcode: 'Zip and County',
+  householdSize: 'Number of Household Members',
+  householdData: 'Household Member',
+  hasExpenses: 'Expenses',
+  householdAssets: 'Assets',
+  hasBenefits: 'Existing Benefits',
+  acuteHHConditions: 'Near Term Help',
+  referralSource: 'Referral',
+  signUpInfo: 'Optional Sign Up',
 };
 
-export default pageTitleTags;
+export type OtherStepName = 'language' | 'disclaimer' | 'state' | 'confirmation' | 'results' | 'default';
+
+export const OTHER_PAGE_TITLES: Record<OtherStepName, string> = {
+  language: 'Preferred Language',
+  disclaimer: 'Legal',
+  state: 'State',
+  confirmation: 'Confirmation',
+  results: 'Results',
+  default: 'MyFriendBen',
+};

@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
 import { useFormatMonthlyValue } from '../FormattedValue';
@@ -12,8 +12,6 @@ type ProgramCardProps = {
 };
 
 const ProgramCard = ({ program }: ProgramCardProps) => {
-  const { uuid } = useParams();
-
   const estimatedAppTime = program.estimated_application_time;
   const programName = program.name;
   const programId = program.program_id;
@@ -64,7 +62,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
     return className;
   }, [isAdminView, validations]);
 
-  const programPageLink = useResultsLink(`/${uuid}/results/benefits/${programId}`);
+  const programPageLink = useResultsLink(`results/benefits/${programId}`);
   const value = useFormatMonthlyValue(program);
 
   return (

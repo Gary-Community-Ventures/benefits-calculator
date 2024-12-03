@@ -151,50 +151,6 @@ const questions: Record<QuestionName, Question> = {
       inputError: acuteHHConditionsHasError,
     },
   },
-  referralSource: {
-    name: 'referralSource',
-    header: <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />,
-    question: (
-      <FormattedMessage id="questions.referralSource-subheader" defaultMessage="How did you hear about MyFriendBen?" />
-    ),
-    componentDetails: {
-      componentType: 'BasicSelect',
-      inputType: 'text',
-      inputName: 'referralSource',
-      inputError: selectHasError,
-      inputHelperText: displayReferralSourceHelperText,
-      componentProperties: {
-        labelId: 'referral-source-select-label',
-        inputLabelText: <FormattedMessage id="qcc.createReferralDropdownMenu-label" defaultMessage="Referral Source" />,
-        id: 'referral-source-select',
-        value: 'referralSource',
-        label: <FormattedMessage id="qcc.createReferralDropdownMenu-label" defaultMessage="Referral Source" />,
-        disabledSelectMenuItemText: (
-          <FormattedMessage
-            id="qcc.createReferralDropdownMenu-disabledSelectMenuItemText"
-            defaultMessage="Select a source"
-          />
-        ),
-      },
-    },
-    followUpQuestions: [
-      {
-        question: <FormattedMessage id="questions.referralSource-a" defaultMessage="If other, please specify:" />,
-        name: 'otherSource',
-        componentDetails: {
-          componentType: 'Textfield',
-          inputType: 'text',
-          inputName: 'otherSource',
-          inputLabel: (
-            <FormattedMessage id="questions.referralSource-a-inputLabel" defaultMessage="Other referral source" />
-          ),
-          inputError: selectHasError,
-          inputHelperText: otherReferalSourceHelperText,
-          required: true,
-        },
-      },
-    ],
-  },
   signUpInfo: {
     name: 'signUpInfo',
     header: (

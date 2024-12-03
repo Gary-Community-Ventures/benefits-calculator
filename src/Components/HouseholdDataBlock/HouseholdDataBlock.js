@@ -11,17 +11,17 @@ import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { personDataIsValid, selectHasError, relationTypeHelperText } from '../../Assets/validationFunctions.tsx';
-import { getStepNumber } from '../../Assets/stepDirectory';
+import { useStepNumber } from '../../Assets/stepDirectory';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { isCustomTypedLocationState } from '../../Types/FormData.ts';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
-import AgeInput from './AgeInput';
+import AgeInput, { calcAge } from './AgeInput';
+import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
 import HHMSummaryCards from '../Steps/HouseholdMembers/HHMSummaryCards.tsx';
 import './HouseholdDataBlock.css';
-
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
   const conditionOptions = useConfig('condition_options');
@@ -29,15 +29,19 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const relationshipOptions = useConfig('relationship_options');
   const { householdSize } = formData;
   const hHSizeNumber = Number(householdSize);
-  let { uuid, page } = useParams();
+  let { whiteLabel, uuid, page } = useParams();
   page = parseInt(page);
-  const step = getStepNumber('householdData');
+  const step = useStepNumber('householdData');
   const navigate = useNavigate();
   const location = useLocation();
   const setPage = (page) => {
-    navigate(`/${uuid}/step-${step}/${page}`);
+    navigate(`/${whiteLabel}/${uuid}/step-${step}/${page}`);
   };
   const [submittedCount, setSubmittedCount] = useState(0);
+
+  useEffect(() => {
+    document.title = QUESTION_TITLES.householdData;
+  }, []);
 
   const initialMemberData = formData.householdData[page - 1] ?? {
     birthYear: undefined,
@@ -87,7 +91,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     //it routes the user back to the last valid HHM
     const lastMemberPage = Math.min(formData.householdData.length + 1, formData.householdSize);
     if (isNaN(page) || page < 1 || page > lastMemberPage) {
-      navigate(`/${uuid}/step-${step}/${lastMemberPage}`, { replace: true });
+      navigate(`/${whiteLabel}/${uuid}/step-${step}/${lastMemberPage}`, { replace: true });
       return;
     }
   }, []);
@@ -152,6 +156,154 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
         </QuestionQuestion>
         {createRelationshipDropdownMenu()}
       </Box>
+    );
+  };
+
+  const formatToUSD = (num) => {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
+  };
+
+  const createFormDataMemberCard = (member, index) => {
+    let relationship = relationshipOptions[member.relationshipToHH];
+    if (relationship === undefined) {
+      relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
+    }
+
+    let age = calcAge(member.birthYear, member.birthMonth);
+    if (Number.isNaN(age)) {
+      age = 0;
+    }
+
+    let income = 0;
+    for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {
+      let num = 0;
+      switch (incomeFrequency) {
+        case 'weekly':
+          num = Number(incomeAmount) * 52;
+          break;
+        case 'biweekly':
+          num = Number(incomeAmount) * 26;
+          break;
+        case 'semimonthly':
+          num = Number(incomeAmount) * 24;
+          break;
+        case 'monthly':
+          num = Number(incomeAmount) * 12;
+          break;
+        case 'hourly':
+          num = Number(incomeAmount) * Number(hoursPerWeek) * 52;
+          break;
+      }
+      income += Number(num);
+    }
+
+    return createMemberCard(index, relationship, member.birthYear, member.birthMonth, age, income, page);
+  };
+
+  const handleEditBtnSubmit = (memberIndex) => {
+    setSubmittedCount(submittedCount + 1);
+
+    const validPersonData = personDataIsValid(memberData);
+    if (validPersonData) {
+      handleHouseholdDataSubmit(memberData, page - 1, uuid);
+      navigate(`/${uuid}/step-${step}/${memberIndex + 1}`);
+    }
+  };
+
+  const translateNumber = useTranslateNumber();
+  const createMemberCard = (index, relationship, birthYear, birthMonth, age, income, page) => {
+    const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
+
+    return (
+      <article className={containerClassName} key={index}>
+        <div className="household-member-header">
+          <h3 className="member-added-relationship">{relationship}:</h3>
+          <div className="household-member-edit-button">
+            <IconButton
+              onClick={() => {
+                handleEditBtnSubmit(index);
+              }}
+              aria-label={editHHMemberAriaLabel}
+            >
+              <EditIcon alt="edit icon" />
+            </IconButton>
+          </div>
+        </div>
+        <div className="member-added-age">
+          <strong>
+            <FormattedMessage id="questions.age-inputLabel" defaultMessage="Age: " />
+          </strong>
+          {translateNumber(age)}
+        </div>
+        <div className="member-added-age">
+          <strong>
+            <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
+          </strong>
+          {birthMonth !== undefined &&
+            birthYear !== undefined &&
+            translateNumber(String(birthMonth).padStart(2, '0')) + '/' + translateNumber(birthYear)}
+        </div>
+        <div className="member-added-income">
+          <strong>
+            <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income" />:{' '}
+          </strong>
+          {translateNumber(formatToUSD(Number(income)))}
+          <FormattedMessage id="displayAnnualIncome.annual" defaultMessage=" annually" />
+        </div>
+      </article>
+    );
+  };
+
+  const createQHeaderAndHHMSummaries = (personIndex) => {
+    let header;
+    const headOfHHInfoWasEntered = formData.householdData.length >= 1;
+
+    //hHMemberSummaries will have the length of members that have already been saved to formData
+    const hHMemberSummaries = [
+      ...formData.householdData.map((member, index) => {
+        return createFormDataMemberCard(member, index);
+      }),
+    ];
+
+    //We want the active/current member's summary card to update synchronously as we change their information
+    //so we swap out the current one for the one we create using the memberData in state
+    const summariesWActiveMemberCard = hHMemberSummaries.map((member, index) => {
+      if (index === page - 1) {
+        return createFormDataMemberCard(memberData, index);
+      } else {
+        return member;
+      }
+    });
+
+    if (personIndex === 1) {
+      header = (
+        <QuestionHeader>
+          <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
+        </QuestionHeader>
+      );
+    } else {
+      header = (
+        <QuestionHeader>
+          <FormattedMessage
+            id="questions.householdData"
+            defaultMessage="Tell us about the next person in your household."
+          />
+        </QuestionHeader>
+      );
+    }
+
+    return (
+      <>
+        {header}
+        {headOfHHInfoWasEntered && (
+          <Box sx={{ marginBottom: '1.5rem' }}>
+            <h2 className="household-data-sub-header secondary-heading">
+              <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
+            </h2>
+            <div>{summariesWActiveMemberCard}</div>
+          </Box>
+        )}
+      </>
     );
   };
 
@@ -278,10 +430,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
     if (validPersonData && isComingFromConfirmationPg) {
       handleHouseholdDataSubmit(memberData, page - 1, uuid);
-      navigate(`/${uuid}/confirm-information`);
+      navigate(`/${whiteLabel}/${uuid}/confirm-information`);
     } else if (validPersonData && lastHouseholdMember) {
       handleHouseholdDataSubmit(memberData, page - 1, uuid);
-      navigate(`/${uuid}/step-${step + 1}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${step + 1}`);
     } else if (validPersonData) {
       handleHouseholdDataSubmit(memberData, page - 1, uuid);
       setPage(page + 1);
@@ -292,7 +444,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
 
   const handlePreviousSubmit = () => {
     if (page <= 1) {
-      navigate(`/${uuid}/step-${step - 1}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${step - 1}`);
     } else {
       setPage(page - 1);
     }

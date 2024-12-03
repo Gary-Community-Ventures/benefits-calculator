@@ -21,8 +21,8 @@ const OptionCardGroup = ({ options, stateVariable, memberData, setMemberData, hh
   const displayOptionCards = (options, stateVariable, memberData, hhMemberIndex) => {
     const optionCards = Object.keys(options).map((optionKey, index) => {
       let translatedAriaLabel = intl.formatMessage({
-        id: options[optionKey].formattedMessage.props.id,
-        defaultMessage: options[optionKey].formattedMessage.props.defaultMessage,
+        id: options[optionKey].text.props.id,
+        defaultMessage: options[optionKey].text.props.defaultMessage,
       });
 
       const isSelected = memberData[stateVariable][optionKey];

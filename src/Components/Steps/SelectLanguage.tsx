@@ -7,14 +7,21 @@ import { useNavigate, useParams } from 'react-router-dom';
 import QuestionHeader from '../QuestionComponents/QuestionHeader.tsx';
 import { useQueryString } from '../QuestionComponents/questionHooks.ts';
 import FormContinueButton from '../ContinueButton/FormContinueButton.tsx';
+import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
+import { STATES } from './SelectStatePage';
+import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
 
-const SelectLanguage = () => {
-  const { locale, selectLanguage } = useContext(Context);
+const SelectLanguagePage = () => {
+  const { locale, selectLanguage, formData, setFormData } = useContext(Context);
   const languageOptions = useConfig('language_options');
-  const { uuid } = useParams();
+  const { whiteLabel, uuid } = useParams();
 
   const queryString = useQueryString();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = OTHER_PAGE_TITLES.language;
+  }, []);
 
   const createMenuItems = (optionList: Record<string, string>, disabledFMId: string, disabledFMDefault: string) => {
     const disabledSelectMenuItem = (
@@ -38,7 +45,7 @@ const SelectLanguage = () => {
   useEffect(() => {
     const continueOnEnter = (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
-        navigate(`/step-2${queryString}`);
+        handleSubmit(event);
       }
     };
     document.addEventListener('keyup', continueOnEnter);
@@ -47,12 +54,31 @@ const SelectLanguage = () => {
     };
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+
     if (uuid !== undefined) {
-      navigate(`/${uuid}/step-2${queryString}`);
+      navigate(`/${whiteLabel}/${uuid}/step-2${queryString}`);
       return;
     }
-    navigate(`/step-2${queryString}`);
+
+    if (whiteLabel !== undefined) {
+      navigate(`/${whiteLabel}/step-2${queryString}`);
+      return;
+    }
+
+    const stateCodes = Object.keys(STATES);
+
+    if (stateCodes.length > 1) {
+      navigate(`/select-state${queryString}`);
+      return;
+    }
+
+    setFormData({ ...formData, whiteLabel: stateCodes[0] });
+    // wait for the new config to be loaded
+    setTimeout(() => {
+      navigate(`/${stateCodes[0]}/step-2${queryString}`);
+    });
   };
 
   return (
@@ -60,11 +86,11 @@ const SelectLanguage = () => {
       <QuestionHeader>
         <FormattedMessage id="selectLanguage.header" defaultMessage="Before you begin..." />
       </QuestionHeader>
-      <h2 className="sub-header-language-select">
+      <QuestionQuestion>
         <FormattedMessage id="selectLanguage.subHeader" defaultMessage="What is your preferred language?" />
-      </h2>
+      </QuestionQuestion>
       <form onSubmit={handleSubmit}>
-        <FormControl sx={{ width: '150px' }}>
+        <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}>
           <InputLabel id="language-select-label">
             <FormattedMessage id="selectLang.text" defaultMessage="Language" />
           </InputLabel>
@@ -89,4 +115,4 @@ const SelectLanguage = () => {
   );
 };
 
-export default SelectLanguage;
+export default SelectLanguagePage;
