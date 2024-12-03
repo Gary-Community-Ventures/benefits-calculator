@@ -27,6 +27,7 @@ import CcigLandingPage from './Components/CcigComponents/CcigLandingPage';
 import languageRouteWrapper from './Components/RouterUtil/LanguageRouter';
 import SelectStatePage from './Components/Steps/SelectStatePage';
 import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
+import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
 
 const App = () => {
   const navigate = useNavigate();
@@ -311,6 +312,7 @@ const App = () => {
                 <Route path="co/ccig" element={<CcigLandingPage />} />
                 <Route path="step-1" element={<SelectLanguagePage />} />
                 <Route path="select-state" element={<SelectStatePage />} />
+                <Route path=":whiteLabel/current-benefits" element={<CurrentBenefits />} />
                 <Route path=":whiteLabel/select-state" element={<SelectStatePage />} />
                 <Route path=":whiteLabel/step-1" element={<SelectLanguagePage />} />
                 <Route path=":whiteLabel/step-2" element={<Disclaimer />} />
