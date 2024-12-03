@@ -26,6 +26,7 @@ export const ZipcodeStep = () => {
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
   const zipcodeSchema = z
     .string()
+    .trim()
     .regex(numberMustBeFiveDigitsLongRegex)
     .refine((data) => data in countiesByZipcode);
 
@@ -50,7 +51,8 @@ export const ZipcodeStep = () => {
   });
 
   const currentZipcodeValue = watch('zipcode');
-  const shouldShowCountyInput = zipcodeSchema.safeParse(currentZipcodeValue).success;
+  const parsedZipCode = zipcodeSchema.safeParse(currentZipcodeValue);
+
   const nextStep = useGoToNextStep('zipcode');
 
   const formSubmitHandler = async (zipCodeAndCountyData: FormData) => {
@@ -138,7 +140,7 @@ export const ZipcodeStep = () => {
             />
           )}
         />
-        {shouldShowCountyInput && (
+        {parsedZipCode.success && (
           <div>
             <QuestionQuestion>
               <FormattedMessage id="questions.zipcode-a" defaultMessage="Please select a county:" />
@@ -164,7 +166,7 @@ export const ZipcodeStep = () => {
                           id="questions.zipcode-a-disabledSelectMenuItemText"
                           defaultMessage="Select a county"
                         />,
-                        countiesByZipcode[watch('zipcode')],
+                        countiesByZipcode[parsedZipCode.data],
                       )}
                     </Select>
                     <FormHelperText>{errors.county !== undefined && renderCountyHelperText()}</FormHelperText>
