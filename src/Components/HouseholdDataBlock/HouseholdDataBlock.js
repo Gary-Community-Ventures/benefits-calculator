@@ -12,7 +12,7 @@ import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import PersonIncomeBlock from '../IncomeBlock/PersonIncomeBlock';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import { personDataIsValid, selectHasError, relationTypeHelperText } from '../../Assets/validationFunctions.tsx';
-import { getStepNumber } from '../../Assets/stepDirectory';
+import { useStepNumber } from '../../Assets/stepDirectory';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { isCustomTypedLocationState } from '../../Types/FormData.ts';
 import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
@@ -22,6 +22,7 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import AgeInput, { calcAge } from './AgeInput';
+import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -32,7 +33,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const hHSizeNumber = Number(householdSize);
   let { whiteLabel, uuid, page } = useParams();
   page = parseInt(page);
-  const step = getStepNumber('householdData');
+  const step = useStepNumber('householdData');
   const navigate = useNavigate();
   const location = useLocation();
   const setPage = (page) => {
@@ -44,6 +45,10 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
     id: 'editHHMember.ariaText',
     defaultMessage: 'edit household member',
   });
+
+  useEffect(() => {
+    document.title = QUESTION_TITLES.householdData;
+  }, []);
 
   const initialMemberData = formData.householdData[page - 1] ?? {
     birthYear: undefined,

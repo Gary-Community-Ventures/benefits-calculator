@@ -11,19 +11,16 @@ import Disclaimer from './Components/Steps/Disclaimer/Disclaimer.tsx';
 import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlock.js';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
-import LoadingPage from './Components/LoadingPage/LoadingPage.tsx';
 import SelectLanguagePage from './Components/Steps/SelectLanguagePage.tsx';
 import { updateScreen, updateUser } from './Assets/updateScreen.ts';
-import { getStepDirectory, STARTING_QUESTION_NUMBER, getStepNumber } from './Assets/stepDirectory';
+import { STARTING_QUESTION_NUMBER, useStepNumber, useStepDirectory } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
 import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx';
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
-import pageTitleTags, { StepName } from './Assets/pageTitleTags.ts';
+import { OTHER_PAGE_TITLES } from './Assets/pageTitleTags.ts';
 import { isCustomTypedLocationState } from './Types/FormData.ts';
-import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits.tsx';
-import { useConfig } from './Components/Config/configHook';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 import './App.css';
 import CcigLandingPage from './Components/CcigComponents/CcigLandingPage';
@@ -46,18 +43,15 @@ const App = () => {
     getReferrer,
   } = useContext(Context);
 
-  const [totalSteps, setTotalSteps] = useState(
-    getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER,
-  );
+  const stepDirectory = useStepDirectory();
+  const totalSteps = stepDirectory.length + STARTING_QUESTION_NUMBER;
   const [theme, setTheme] = useState(createTheme(styleOverride));
   const themeName = getReferrer('theme', 'default');
+  const householdMemberStepNumber = useStepNumber('householdData', false);
+
   useEffect(() => {
     changeTheme(themeName as 'default' | 'twoOneOne');
   }, [themeName]);
-
-  useEffect(() => {
-    setTotalSteps(getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER);
-  }, [formData.immutableReferrer]);
 
   useEffect(() => {
     setTheme(createTheme(styleOverride));
@@ -71,20 +65,8 @@ const App = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    const stepString = location.pathname.split('/').filter((string) => string.includes('step'))[0] as StepName;
-    const isConfirmationPage = location.pathname.includes('confirm-information');
-    const isResultsPage = location.pathname.includes('results');
-
-    if (isConfirmationPage) {
-      document.title = pageTitleTags['confirm-information'];
-    } else if (isResultsPage) {
-      document.title = pageTitleTags['results'];
-    } else if (pageTitleTags[stepString]) {
-      document.title = pageTitleTags[stepString];
-    } else {
-      document.title = 'MyFriendBen';
-    }
-  }, [location]);
+    document.title = OTHER_PAGE_TITLES.default;
+  }, []);
 
   useEffect(() => {
     const updatedFormData = { ...formData };
@@ -219,9 +201,7 @@ const App = () => {
     const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
       ? location.state.routedFromConfirmationPg
       : false;
-    const stepNumber = getStepNumber(questionName, formData.immutableReferrer);
-    const totalStepCount = getStepDirectory(formData.immutableReferrer).length + STARTING_QUESTION_NUMBER - 1;
-    const isLastStep = stepNumber === totalStepCount;
+    const isLastStep = questionName === stepDirectory.at(-1);
 
     if (!hasError) {
       if (isZipcodeQuestionAndCountyIsEmpty || isEmptyAssets) {
@@ -339,7 +319,7 @@ const App = () => {
                   <Route path="step-1" element={<SelectLanguagePage />} />
                   <Route path="step-2" element={<Disclaimer />} />
                   <Route
-                    path={`step-${getStepNumber('householdData', formData.immutableReferrer)}/:page`}
+                    path={`step-${householdMemberStepNumber}/:page`}
                     element={
                       <HouseholdDataBlock
                         key={window.location.href}

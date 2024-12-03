@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { QuestionName } from '../../Types/Questions';
 
 type ReferrerOptions<T> = {
   default: T;
   [key: string]: T;
 };
 
-export type ReferrerDataValue = string | { id: string; defaultMessage: string };
+export type ReferrerDataValue = any;
 
 export type ReferrerData = {
   theme: ReferrerOptions<string>;
@@ -15,6 +16,7 @@ export type ReferrerData = {
   logoFooterAlt: ReferrerOptions<{ id: string; defaultMessage: string }>;
   logoClass: ReferrerOptions<string>;
   shareLink: ReferrerOptions<string>;
+  stepDirectory: ReferrerOptions<QuestionName[]>;
 };
 
 export default function useReferrer(referrerCode?: string, referrerData?: ReferrerData) {

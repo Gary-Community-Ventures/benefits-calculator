@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { configEndpoint, header } from '../../apiCalls';
-import { ConfigApiResponse } from '../../Types/Config';
+import { ConfigApiResponse, ConfigValue } from '../../Types/Config';
 import { Config } from '../../Types/Config';
 import { FormattedMessage } from 'react-intl';
 
@@ -37,21 +37,15 @@ type Item = {
 
 type IconItem = {
   _classname: string;
-  _name: string;
-};
-
-type OptionItem = {
-  _label: string;
-  _default_message: string;
-  icon: IconItem;
+  _icon: string;
 };
 
 // Transforms objects with icon key to return Icon ReactComponent
 function transformItemIcon(item: unknown): any {
-  const { _label, _default_message, icon } = item as OptionItem;
+  const icon = item as IconItem;
 
   let iconComponent;
-  switch (icon._name) {
+  switch (icon._icon) {
     // Acute Conditions
     case 'Baby_supplies':
       iconComponent = <Baby_supplies className={icon._classname} />;
@@ -127,10 +121,7 @@ function transformItemIcon(item: unknown): any {
       break;
   }
 
-  return {
-    formattedMessage: <FormattedMessage id={_label} defaultMessage={_default_message} />,
-    icon: iconComponent,
-  };
+  return iconComponent;
 }
 
 // Recursively transform any object that has _label && _default_message as keys into a FormattedMessage
@@ -138,15 +129,25 @@ function transformItemIcon(item: unknown): any {
 function transformItem(item: unknown): any {
   if (typeof item !== 'object' || item === null) return item;
 
-  if (item.hasOwnProperty('_label') && item.hasOwnProperty('_default_message') && !item.hasOwnProperty('icon')) {
+  if (item.hasOwnProperty('_label') && item.hasOwnProperty('_default_message')) {
     const { _label, _default_message } = item as Item;
     return <FormattedMessage id={_label} defaultMessage={_default_message} />;
   }
 
-  if (item.hasOwnProperty('icon')) {
+  if (item.hasOwnProperty('_icon') && item.hasOwnProperty('_classname')) {
     const iconItem = transformItemIcon(item);
 
     return iconItem;
+  }
+
+  if (Array.isArray(item)) {
+    const array: ConfigValue[] = [];
+
+    for (const value of item) {
+      array.push(transformItem(value));
+    }
+
+    return array;
   }
 
   const config: Config = {};
@@ -155,6 +156,7 @@ function transformItem(item: unknown): any {
       config[key] = transformItem((item as any)[key]);
     }
   }
+
   return config;
 }
 
