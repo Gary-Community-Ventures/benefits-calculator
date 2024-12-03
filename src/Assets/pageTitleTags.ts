@@ -2,8 +2,8 @@ import { QuestionName } from '../Types/Questions';
 
 export const QUESTION_TITLES: Record<QuestionName, string> = {
   zipcode: 'Zip and County',
-  householdSize: 'Number of HH Members',
-  householdData: 'Individual HH Member',
+  householdSize: 'Number of Household Members',
+  householdData: 'Household Member',
   hasExpenses: 'Expenses',
   householdAssets: 'Assets',
   hasBenefits: 'Existing Benefits',
