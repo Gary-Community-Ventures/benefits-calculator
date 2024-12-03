@@ -112,7 +112,7 @@ export default function ReferralSourceStep() {
   };
 
   return (
-    <main className="benefits-form">
+    <div>
       <QuestionHeader>
         <FormattedMessage id="questions.referralSource" defaultMessage="Just one more question!" />
       </QuestionHeader>
@@ -182,6 +182,6 @@ export default function ReferralSourceStep() {
         )}
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
-    </main>
+    </div>
   );
 }
