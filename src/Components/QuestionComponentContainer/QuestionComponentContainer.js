@@ -11,7 +11,6 @@ import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
-import { getQuestion } from '../../Assets/stepDirectory.ts';
 import { Zipcode } from '../Steps/Zipcode.tsx';
 import Expenses from '../Steps/Expenses/Expenses.tsx';
 import HouseholdSize from '../Steps/HouseholdSize';
@@ -20,10 +19,10 @@ import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { useStepName } from '../../Assets/stepDirectory';
-import './QuestionComponentContainer.css';
 import ReferralSourceStep from '../Steps/Referrer';
 import questions from '../../Assets/questions';
 import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
+import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -39,7 +38,7 @@ const QuestionComponentContainer = ({
   const referralOptions = useConfig('referral_options');
   const signUpOptions = useConfig('sign_up_options');
   let { id } = useParams();
-  const questionName = useStepName(+id, formData.immutable_referrer);
+  const questionName = useStepName(+id, formData.immutableReferrer);
   const matchingQuestion = questions[questionName];
   const errorController = useErrorController(
     matchingQuestion?.componentDetails.inputError,
