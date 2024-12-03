@@ -11,20 +11,22 @@ export function getCurrentMonthYear()
     CURRENT_YEAR
   }
 }
-export function calcAge(age: number, birthYear: number, birthMonth: number) {
 
+export function calcAge(age: number, birthYear: number, birthMonth: number) {
   const {
     CURRENT_MONTH,
     CURRENT_YEAR
   } = getCurrentMonthYear();
 
-  const hasBirthDate = birthYear !== undefined && birthMonth !== undefined;
+  const hasBirthDate = (birthYear !== undefined) && (birthMonth !== undefined);
   if(!hasBirthDate) {
     return age;
   }
+
   if (CURRENT_MONTH >= birthMonth) {
     return CURRENT_YEAR - birthYear;
   }
+
   return CURRENT_YEAR - birthYear - 1;
 }
 
