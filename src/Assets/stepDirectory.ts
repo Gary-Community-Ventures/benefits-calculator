@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
 
 export const STARTING_QUESTION_NUMBER = 3;
-// TODO: update pageTitleTags.ts
 
 export function useStepDirectory() {
   const { getReferrer } = useContext(Context);
