@@ -269,6 +269,14 @@ const App = () => {
               <Route path="jeffcohs" element={<RedirectToWhiteLabel whiteLabel="co" />} />
               <Route path="jeffcohscm" element={<RedirectToWhiteLabel whiteLabel="co" />} />
               <Route path="ccig" element={<RedirectToWhiteLabel whiteLabel="co" />} />
+              <Route
+                path="step-1"
+                element={
+                  <RedirectToWhiteLabel>
+                    <FetchScreen />
+                  </RedirectToWhiteLabel>
+                }
+              />
               <Route path=":whiteLabel/:uuid">
                 <Route path="" element={<FetchScreen />} />
                 <Route path="*" element={<FetchScreen />} />

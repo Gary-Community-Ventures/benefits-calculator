@@ -1,19 +1,19 @@
-import { useConfig } from '../Config/configHook.tsx';
+import { useConfig } from '../Config/configHook';
 import { FormControl, Select, InputLabel, MenuItem, SelectChangeEvent } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
-import { Context } from '../Wrapper/Wrapper.tsx';
+import { Context } from '../Wrapper/Wrapper';
 import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import QuestionHeader from '../QuestionComponents/QuestionHeader.tsx';
-import { useQueryString } from '../QuestionComponents/questionHooks.ts';
-import FormContinueButton from '../ContinueButton/FormContinueButton.tsx';
+import QuestionHeader from '../QuestionComponents/QuestionHeader';
+import { useQueryString } from '../QuestionComponents/questionHooks';
+import FormContinueButton from '../ContinueButton/FormContinueButton';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { STATES } from './SelectStatePage';
 import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
 
 const SelectLanguagePage = () => {
   const { locale, selectLanguage, formData, setFormData } = useContext(Context);
-  const languageOptions = useConfig('language_options');
+  const languageOptions = useConfig<{ [key: string]: string }>('language_options');
   const { whiteLabel, uuid } = useParams();
 
   const queryString = useQueryString();
