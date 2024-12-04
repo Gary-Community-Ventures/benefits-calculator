@@ -42,6 +42,17 @@ const HouseholdMemberForm = () => {
   // the getMonth method returns January as 0
   const CURRENT_MONTH = date.getMonth() + 1;
   const MAX_AGE = 130;
+  const YEARS = Array.from({ length: MAX_AGE }, (_, i) => {
+    const inputYear = CURRENT_YEAR - i;
+    return String(inputYear);
+  });
+
+  const autoCompleteOptions = useMemo(() => {
+    return YEARS.map((year) => {
+      return { label: String(year) };
+    });
+  }, [YEARS]);
+
   // birthYear > CURRENT_YEAR || birthYear < CURRENT_YEAR - MAX_AGE;
   //page => pageNumber
 
