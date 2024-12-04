@@ -104,6 +104,14 @@ const HouseholdMemberForm = () => {
     }
   };
 
+  const renderBirthMonthHelperText = () => {
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="ageInput.month.error" defaultMessage="Please enter a birth month." />
+      </ErrorMessageWrapper>
+    );
+  }
+
   const createAgeQuestion = (personIndex: number) => {
     return (
       <Box sx={{ marginBottom: '1.5rem' }}>
@@ -123,7 +131,7 @@ const HouseholdMemberForm = () => {
         <div className="age-input-container">
           <FormControl
             sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
-            error={!!errors.birthMonth}
+            error={errors.birthMonth !== undefined}
           >
             <InputLabel id="birth-month">
               <FormattedMessage id="ageInput.month.label" defaultMessage="Birth Month" />
@@ -146,7 +154,7 @@ const HouseholdMemberForm = () => {
                       );
                     })}
                   </Select>
-                  {!!errors.birthMonth && <FormHelperText>error</FormHelperText>}
+                  {errors.birthMonth !== undefined && <FormHelperText>{renderBirthMonthHelperText()}</FormHelperText>}
                 </>
               )}
             />
