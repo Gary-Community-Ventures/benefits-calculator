@@ -147,10 +147,7 @@ const HouseholdMemberForm = () => {
           )}
         </QuestionQuestion>
         <div className="age-input-container">
-          <FormControl
-            sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
-            error={errors.birthMonth !== undefined}
-          >
+          <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.birthMonth !== undefined}>
             <InputLabel id="birth-month">
               <FormattedMessage id="ageInput.month.label" defaultMessage="Birth Month" />
             </InputLabel>
