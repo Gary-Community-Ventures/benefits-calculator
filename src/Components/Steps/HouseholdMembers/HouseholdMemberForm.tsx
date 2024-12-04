@@ -65,11 +65,10 @@ const HouseholdMemberForm = () => {
     then birthMonth would have a minimum string length of 1 which passes validation.
     */
     birthMonth: z.string().min(1),
-    // birthYear: z
-    //   .number()
-    //   .lte(CURRENT_YEAR)
-    //   .gte(CURRENT_YEAR - MAX_AGE),
-    // birthMonth: z.string().transform(value => value === '' ? null : value)
+    birthYear: z.string().min(1),
+      // .number()
+      // .lte(CURRENT_YEAR)
+      // .gte(CURRENT_YEAR - MAX_AGE),
   });
 
   const {
@@ -82,7 +81,7 @@ const HouseholdMemberForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       birthMonth: formData.householdData[pageNumber]?.birthMonth ? String(formData.householdData[pageNumber]?.birthMonth) : '',
-      // birthYear: formData.householdData[pageNumber]?.birthYear ?? '',
+      birthYear: formData.householdData[pageNumber]?.birthYear ? String(formData.householdData[pageNumber]?.birthYear) : '',
       // relationshipToHH: pageNumber === 1 ? 'headOfHousehold' : '',
       // conditions: {
       //   student: false,
