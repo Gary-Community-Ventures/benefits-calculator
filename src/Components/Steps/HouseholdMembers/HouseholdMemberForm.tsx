@@ -46,9 +46,11 @@ const HouseholdMemberForm = () => {
     const inputYear = CURRENT_YEAR - i;
     return String(inputYear);
   });
+  // I added an empty string to the years array to fix the initial invalid Autocomplete value warning
+  const YEARSANDINITIALEMPTYSTR = ['', ...YEARS];
 
   const autoCompleteOptions = useMemo(() => {
-    return YEARS.map((year) => {
+    return YEARSANDINITIALEMPTYSTR.map((year) => {
       return { label: String(year) };
     });
   }, [YEARS]);
