@@ -123,6 +123,7 @@ export type ApiFormData = {
   has_tanf: boolean | null;
   has_wic: boolean | null;
   has_snap: boolean | null;
+  has_sunbucks: boolean | null;
   has_lifeline: boolean | null;
   has_acp: boolean | null;
   has_eitc: boolean | null;
