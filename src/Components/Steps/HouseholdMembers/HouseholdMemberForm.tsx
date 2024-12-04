@@ -122,6 +122,14 @@ const HouseholdMemberForm = () => {
     );
   }
 
+  const renderBirthYearHelperText = () => {
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="ageInput.year.error" defaultMessage="Please enter a birth year." />
+      </ErrorMessageWrapper>
+    );
+  }
+
   const createAgeQuestion = (personIndex: number) => {
     return (
       <Box sx={{ marginBottom: '1.5rem' }}>
