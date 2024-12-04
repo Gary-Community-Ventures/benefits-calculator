@@ -187,7 +187,7 @@ const HouseholdMemberForm = () => {
                     handleHomeEndKeys
                     isOptionEqualToValue={(option, value) => option.label === value.label}
                     options={autoCompleteOptions}
-                    getOptionLabel={(option) => option.label || ''}
+                    getOptionLabel={(option) => option.label ?? ''}
                     value={{ label: field.value }}
                     onChange={(_, newValue) => {
                       field.onChange(newValue?.label)
