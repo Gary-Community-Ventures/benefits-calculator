@@ -177,7 +177,39 @@ const HouseholdMemberForm = () => {
               )}
             />
           </FormControl>
-      </div>
+          <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.birthYear !== undefined}>
+            <Controller
+              name="birthYear"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <Autocomplete
+                    {...field}
+                    selectOnFocus
+                    clearOnBlur
+                    handleHomeEndKeys
+                    isOptionEqualToValue={(option, value) => option.label === value.label}
+                    options={autoCompleteOptions}
+                    getOptionLabel={(option) => option.label || ''}
+                    value={{ label: field.value }}
+                    onChange={(_, newValue) => {
+                      field.onChange(newValue?.label)
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label={<FormattedMessage id="ageInput.year.label" defaultMessage="Birth Year" />}
+                        variant="outlined"
+                        error={errors.birthYear !== undefined}
+                      />
+                    )}
+                  />
+                  {errors.birthYear !== undefined && <FormHelperText>{renderBirthYearHelperText()}</FormHelperText>}
+                </>
+              )}
+            />
+          </FormControl>
+        </div>
       </Box>
     );
   };
