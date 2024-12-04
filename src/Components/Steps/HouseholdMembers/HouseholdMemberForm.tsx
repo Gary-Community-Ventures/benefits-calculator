@@ -196,7 +196,6 @@ const HouseholdMemberForm = () => {
                       <TextField
                         {...params}
                         label={<FormattedMessage id="ageInput.year.label" defaultMessage="Birth Year" />}
-                        variant="outlined"
                         error={errors.birthYear !== undefined}
                       />
                     )}
