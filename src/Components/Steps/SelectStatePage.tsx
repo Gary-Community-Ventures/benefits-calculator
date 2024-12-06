@@ -92,7 +92,7 @@ const SelectStatePage = () => {
         <FormattedMessage id="stateStep.header" defaultMessage="Before you begin..." />
       </QuestionHeader>
       <QuestionQuestion>
-        <FormattedMessage id="stateStep.header" defaultMessage="What is your state?" />
+        <FormattedMessage id="stateStep.question" defaultMessage="What is your state?" />
       </QuestionQuestion>
       <form onSubmit={handleSubmit(submitHandler)}>
         <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.state !== undefined}>
