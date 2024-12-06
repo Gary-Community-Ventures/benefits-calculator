@@ -7,7 +7,28 @@ type Props = PropsWithChildren<{
 }>;
 
 const REFERRER_REDIRECT: { [key: string]: string | undefined } = {
+  bayaud: 'co',
   bia: 'co',
+  brightbytext: 'co',
+  cch: 'co',
+  ccig: 'co',
+  cedp: 'co',
+  frca: 'co',
+  ACTIONCenter: 'co',
+  jeffcoHS: 'co',
+  jeffcoHSCM: 'co',
+  '211co': 'co',
+  villageExchange: 'co',
+  achs: 'co',
+  arapahoectypublichealth: 'co',
+  denverhealth: 'co',
+  dhs: 'co',
+  DPSCommunityHubs: 'co',
+  fircsummitresourcecenter: 'co',
+  salud: 'co',
+  thegatheringplace: 'co',
+  childfirst: 'co',
+  eaglecounty: 'co',
 };
 
 export default function RedirectToWhiteLabel({ whiteLabel, children }: Props) {
