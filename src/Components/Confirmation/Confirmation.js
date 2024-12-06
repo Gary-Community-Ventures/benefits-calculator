@@ -19,7 +19,7 @@ import PreviousButton from '../PreviousButton/PreviousButton';
 import './Confirmation.css';
 import { useTranslateNumber } from '../../Assets/languageOptions';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
-import { calcAge, useFormatBirthMonthYear } from '../../Assets/age.tsx';
+import { calcAge, useFormatBirthMonthYear, hasBirthMonthYear } from '../../Assets/age.tsx';
 
 const Confirmation = () => {
   const { formData, locale } = useContext(Context);
@@ -58,7 +58,7 @@ const Confirmation = () => {
   });
 
   const displayAllMembersDataBlock = () => {
-
+    
     const formatBirthMonthYear = useFormatBirthMonthYear();
 
     const { householdData } = formData;
@@ -86,12 +86,14 @@ const Confirmation = () => {
               </b>
               {translateNumber(allHouseholdAges[i])}
             </article>
-            <article className="section-p">
-              <b>
-                <FormattedMessage id="confirmation.member.birthYearMonth" defaultMessage="Birth Month/Year: " />
-              </b>
-              {formatBirthMonthYear(personData.birthMonth, personData.birthYear)}
-            </article>
+            {hasBirthMonthYear(personData.birthYear, personData.birthMonth) && (
+              <article className="section-p">
+                <b>
+                  <FormattedMessage id="confirmation.member.birthYearMonth" defaultMessage="Birth Month/Year: " />
+                </b>
+                {formatBirthMonthYear(personData.birthMonth, personData.birthYear)}
+              </article>
+            )}
             <article className="section-p">
               <b>
                 <FormattedMessage

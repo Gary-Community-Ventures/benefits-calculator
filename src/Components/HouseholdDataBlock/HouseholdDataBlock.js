@@ -22,7 +22,7 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import AgeInput from './AgeInput';
-import {calcAge, useFormatBirthMonthYear} from '../../Assets/age.tsx';
+import { calcAge, hasBirthMonthYear, useFormatBirthMonthYear } from '../../Assets/age.tsx';
 
 const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   const { formData } = useContext(Context);
@@ -239,12 +239,14 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           </strong>
           {translateNumber(age)}
         </div>
-        <div className="member-added-age">
-          <strong>
-            <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
-          </strong>
-          {formatBirthMonthYear(birthMonth, birthYear)}
-        </div>
+        {hasBirthMonthYear(birthMonth, birthYear) && (
+          <div className="member-added-age">
+            <strong>
+              <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
+            </strong>
+            {formatBirthMonthYear(birthMonth, birthYear)}
+          </div>
+        )}
         <div className="member-added-income">
           <strong>
             <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income" />:{' '}
