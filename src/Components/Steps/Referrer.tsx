@@ -42,7 +42,7 @@ export default function ReferralSourceStep() {
           defaultMessage: 'Please select a referral source.',
         }),
       ),
-      otherReferrer: z.string(),
+      otherReferrer: z.string().trim(),
     })
     .refine((val) => val.referralSource !== 'other' || val.otherReferrer.length > 0, {
       message: formatMessage({

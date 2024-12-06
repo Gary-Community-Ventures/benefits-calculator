@@ -80,6 +80,7 @@ const FetchScreen = () => {
         pell: response.has_pell_grant ?? false,
         rtdlive: response.has_rtdlive ?? false,
         snap: response.has_snap ?? false,
+        sunbucks: response.has_sunbucks ?? false,
         ssdi: response.has_ssdi ?? false,
         ssi: response.has_ssi ?? false,
         tanf: response.has_tanf ?? false,

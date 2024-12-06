@@ -41,6 +41,7 @@ export type Benefits = {
   pell: boolean;
   rtdlive: boolean;
   snap: boolean;
+  sunbucks: boolean;
   ssdi: boolean;
   ssi: boolean;
   tanf: boolean;
