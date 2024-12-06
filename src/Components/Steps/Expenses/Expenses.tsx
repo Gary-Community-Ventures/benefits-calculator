@@ -37,8 +37,6 @@ import './Expenses.css';
 const Expenses = () => {
   const { formData, setFormData, locale } = useContext(Context);
   const { uuid, id } = useParams();
-  const currentStepId = Number(id);
-  const navigate = useNavigate();
   const intl = useIntl();
   const translatedAriaLabel = intl.formatMessage({
     id: 'questions.hasExpenses-ariaLabel',
@@ -51,7 +49,7 @@ const Expenses = () => {
   const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
   const expenseSourceSchema = z.object({
     expenseSourceName: z.string().min(1),
-    expenseAmount: z.string().regex(oneOrMoreDigitsButNotAllZero),
+    expenseAmount: z.string().trim().regex(oneOrMoreDigitsButNotAllZero),
   });
   const expenseSourcesSchema = z.array(expenseSourceSchema);
   const hasExpensesSchema = z.string().regex(/^true|false$/);
