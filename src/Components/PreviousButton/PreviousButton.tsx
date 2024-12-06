@@ -3,8 +3,8 @@ import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { getStepNumber } from '../../Assets/stepDirectory.ts';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import { useStepNumber } from '../../Assets/stepDirectory';
 
 type Props = {
   navFunction: () => void;
@@ -12,18 +12,19 @@ type Props = {
 
 const PreviousButton = ({ navFunction }: Props) => {
   const { formData } = useContext(Context);
-  const { id, uuid } = useParams();
+  const { whiteLabel, id, uuid } = useParams();
   let stepNumberId = Number(id);
   if (!stepNumberId) stepNumberId = 1;
   const navigate = useNavigate();
 
+  const householdStep = useStepNumber('householdData', false);
+
   const defaultNavigate = () => {
-    const householdStep = getStepNumber('householdData', formData.immutableReferrer);
     if (id && +id === householdStep + 1) {
-      navigate(`/${uuid}/step-${householdStep}/${formData.householdData.length}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${householdStep}/${formData.householdData.length}`);
       return;
     }
-    navigate(`/${uuid}/step-${stepNumberId - 1}`);
+    navigate(`/${whiteLabel}/${uuid}/step-${stepNumberId - 1}`);
   };
 
   const navigationFunction = navFunction ?? defaultNavigate;

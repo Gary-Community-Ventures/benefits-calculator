@@ -101,6 +101,7 @@ export type ApiFormDataReadOnly = {
 };
 
 export type ApiFormData = {
+  white_label: string;
   is_test: boolean;
   start_date: string;
   agree_to_tos: boolean | null;

@@ -23,6 +23,7 @@ import LoadingPage from '../LoadingPage/LoadingPage';
 import './CurrentBenefits.css';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { useTranslateNumber } from '../../Assets/languageOptions';
+import { useParams } from 'react-router-dom';
 
 export const iconCategoryMap: { [key: string]: React.ComponentType } = {
   housing: Housing,
@@ -69,15 +70,16 @@ const CurrentBenefits = () => {
   const [urgentNeedCategories, setUrgentNeedCategories] = useState<Category[]>([]);
   const [progamsLoaded, setProgramsLoaded] = useState(false);
   const [urgentNeedsLoaded, setUrgentNeedsLoaded] = useState(false);
+  const { whiteLabel } = useParams();
   const intl = useIntl();
 
   useEffect(() => {
-    getAllLongTermPrograms().then((programs: Category[]) => {
+    getAllLongTermPrograms(whiteLabel).then((programs: Category[]) => {
       setProgramCategories(programs);
       setProgramsLoaded(true);
     });
 
-    getAllNearTermPrograms().then((urgentNeeds: Category[]) => {
+    getAllNearTermPrograms(whiteLabel).then((urgentNeeds: Category[]) => {
       setUrgentNeedCategories(urgentNeeds);
       setUrgentNeedsLoaded(true);
     });

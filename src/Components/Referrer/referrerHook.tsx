@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { QuestionName } from '../../Types/Questions';
 
 type ReferrerOptions<T> = {
   default: T;
   [key: string]: T;
 };
+
+export type ReferrerDataValue = any;
 
 export type ReferrerData = {
   theme: ReferrerOptions<string>;
@@ -13,14 +16,18 @@ export type ReferrerData = {
   logoFooterAlt: ReferrerOptions<{ id: string; defaultMessage: string }>;
   logoClass: ReferrerOptions<string>;
   shareLink: ReferrerOptions<string>;
+  stepDirectory: ReferrerOptions<QuestionName[]>;
 };
 
 export default function useReferrer(referrerCode?: string, referrerData?: ReferrerData) {
   const [referrer, setReferrer] = useState<string | undefined>(referrerCode);
 
-  function getReferrer(key: keyof ReferrerData) {
+  function getReferrer(key: keyof ReferrerData, defaultValue?: ReferrerDataValue): ReferrerDataValue {
     if (referrerData === undefined) {
-      throw new Error('referrerData is not loaded yet');
+      if (defaultValue) {
+        return defaultValue;
+      }
+      throw new Error('referrerData is not loaded yet. Consider adding a default value.');
     }
     if (referrerData[key] === undefined) {
       throw new Error(`${key} is not in referrerData`);

@@ -1,17 +1,15 @@
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useResultsContext, useResultsLink } from '../Results';
 import { Grid } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 
 const ResultsTabs = () => {
-  const { uuid } = useParams();
-
   const { programs, needs } = useResultsContext();
   const translateNumber = useTranslateNumber();
 
-  const benefitsLink = useResultsLink(`/${uuid}/results/benefits`);
-  const needsLink = useResultsLink(`/${uuid}/results/near-term-needs`);
+  const benefitsLink = useResultsLink(`results/benefits`);
+  const needsLink = useResultsLink(`results/near-term-needs`);
   return (
     <Grid container className="results-tab-container">
       <Grid item xs={6} className="results-tab">

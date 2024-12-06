@@ -18,6 +18,7 @@ import MoreHelp from '../MoreHelp/MoreHelp';
 import BackAndSaveButtons from './BackAndSaveButtons/BackAndSaveButtons';
 import { FormattedMessage } from 'react-intl';
 import './Results.css';
+import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -66,12 +67,14 @@ function addAdminToLink(link: string, isAdmin: boolean) {
 
 export function useResultsLink(link: string) {
   const { isAdminView } = useResultsContext();
-  return addAdminToLink(link, isAdminView);
+  const { whiteLabel, uuid } = useParams();
+
+  return addAdminToLink(`/${whiteLabel}/${uuid}/${link}`, isAdminView);
 }
 
 const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   const { locale, formData } = useContext(Context);
-  const { uuid, programId } = useParams();
+  const { whiteLabel, uuid, programId } = useParams();
   const is211Co = formData.immutableReferrer === '211co';
 
   const [searchParams] = useSearchParams();
@@ -84,6 +87,10 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   useEffect(() => {
     dataLayerPush({ event: 'config', user_id: uuid });
   }, [uuid]);
+
+  useEffect(() => {
+    document.title = OTHER_PAGE_TITLES.results;
+  }, []);
 
   const fetchResults = async () => {
     try {
@@ -191,7 +198,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
         <Grid item xs={12}>
           <BackAndSaveButtons
             handleTextfieldChange={handleTextfieldChange}
-            navigateToLink={addAdminToLink(`/${uuid}/results/benefits`, isAdminView)}
+            navigateToLink={addAdminToLink(`/${whiteLabel}/${uuid}/results/benefits`, isAdminView)}
             BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
           />
           <MoreHelp />
@@ -228,13 +235,13 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   }
 
   if (programId === undefined) {
-    return <Navigate to={`/${uuid}/results/benefits`} />;
+    return <Navigate to={addAdminToLink(`/${whiteLabel}/${uuid}/results/benefits`, isAdminView)} />;
   }
 
   const program = findProgramById(programs, Number(programId));
 
   if (program === undefined) {
-    return <Navigate to={`/${uuid}/results/benefits`} />;
+    return <Navigate to={addAdminToLink(`/${whiteLabel}/${uuid}/results/benefits`, isAdminView)} />;
   }
 
   return (

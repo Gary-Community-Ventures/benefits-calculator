@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import { configEndpoint, header } from '../../apiCalls';
-import { ConfigApiResponse } from '../../Types/Config';
+import { ConfigApiResponse, ConfigValue } from '../../Types/Config';
 import { Config } from '../../Types/Config';
 import { FormattedMessage } from 'react-intl';
 
@@ -28,6 +28,7 @@ import { ReactComponent as Housing } from '../../Assets/OptionCardIcons/AcuteCon
 import { ReactComponent as Job_resources } from '../../Assets/OptionCardIcons/AcuteConditions/job_resources.svg';
 import { ReactComponent as Legal_services } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
 import { ReactComponent as Support } from '../../Assets/OptionCardIcons/AcuteConditions/support.svg';
+import { useParams } from 'react-router-dom';
 
 type Item = {
   _label: string;
@@ -36,21 +37,15 @@ type Item = {
 
 type IconItem = {
   _classname: string;
-  _name: string;
-};
-
-type OptionItem = {
-  _label: string;
-  _default_message: string;
-  icon: IconItem;
+  _icon: string;
 };
 
 // Transforms objects with icon key to return Icon ReactComponent
 function transformItemIcon(item: unknown): any {
-  const { _label, _default_message, icon } = item as OptionItem;
+  const icon = item as IconItem;
 
   let iconComponent;
-  switch (icon._name) {
+  switch (icon._icon) {
     // Acute Conditions
     case 'Baby_supplies':
       iconComponent = <Baby_supplies className={icon._classname} />;
@@ -126,10 +121,7 @@ function transformItemIcon(item: unknown): any {
       break;
   }
 
-  return {
-    formattedMessage: <FormattedMessage id={_label} defaultMessage={_default_message} />,
-    icon: iconComponent,
-  };
+  return iconComponent;
 }
 
 // Recursively transform any object that has _label && _default_message as keys into a FormattedMessage
@@ -137,15 +129,25 @@ function transformItemIcon(item: unknown): any {
 function transformItem(item: unknown): any {
   if (typeof item !== 'object' || item === null) return item;
 
-  if (item.hasOwnProperty('_label') && item.hasOwnProperty('_default_message') && !item.hasOwnProperty('icon')) {
+  if (item.hasOwnProperty('_label') && item.hasOwnProperty('_default_message')) {
     const { _label, _default_message } = item as Item;
     return <FormattedMessage id={_label} defaultMessage={_default_message} />;
   }
 
-  if (item.hasOwnProperty('icon')) {
+  if (item.hasOwnProperty('_icon') && item.hasOwnProperty('_classname')) {
     const iconItem = transformItemIcon(item);
 
     return iconItem;
+  }
+
+  if (Array.isArray(item)) {
+    const array: ConfigValue[] = [];
+
+    for (const value of item) {
+      array.push(transformItem(value));
+    }
+
+    return array;
   }
 
   const config: Config = {};
@@ -154,6 +156,7 @@ function transformItem(item: unknown): any {
       config[key] = transformItem((item as any)[key]);
     }
   }
+
   return config;
 }
 
@@ -170,9 +173,9 @@ function transformConfigData(configData: ConfigApiResponse[]): Config {
   return transformedConfig;
 }
 
-async function getConfig() {
+async function getConfig(whiteLabel: string) {
   // fetch data
-  return fetch(configEndpoint, {
+  return fetch(configEndpoint + whiteLabel, {
     method: 'GET',
     headers: header,
   }).then((response) => {
@@ -187,12 +190,17 @@ async function getConfig() {
   });
 }
 
-export function useGetConfig() {
+export function useGetConfig(screenLoading: boolean, whiteLabel: string) {
   const [configLoading, setLoading] = useState<boolean>(true);
   const [configResponse, setConfigResponse] = useState<Config | undefined>();
 
   useEffect(() => {
-    getConfig().then((value: ConfigApiResponse[]) => {
+    setLoading(true);
+    if (screenLoading) {
+      return;
+    }
+
+    getConfig(whiteLabel).then((value: ConfigApiResponse[]) => {
       // get data and set loading to false
       try {
         if (value !== undefined) {
@@ -204,23 +212,23 @@ export function useGetConfig() {
       }
       setLoading(false);
     });
-  }, []);
+  }, [screenLoading, whiteLabel]);
 
   return { configLoading, configResponse };
 }
 
-export function useConfig(name: string) {
+export function useConfig<T>(name: string, defaultValue?: T): T {
   const { config } = useContext(Context);
 
-  if (config === undefined) {
-    return {};
+  if (config === undefined || config[name] === undefined) {
+    if (defaultValue !== undefined) {
+      return defaultValue;
+    }
+
+    throw new Error(
+      `'${name}' does not exist in the config. Consider using a defualt value if useConfig is used before the config is loaded.`,
+    );
   }
 
-  if (config[name] === undefined) {
-    throw new Error(`'${name}' does not exist in the config`);
-  }
-
-  let configValue = config[name];
-
-  return configValue;
+  return config[name] as T;
 }

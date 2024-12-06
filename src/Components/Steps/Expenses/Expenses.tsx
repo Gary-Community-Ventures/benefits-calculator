@@ -26,7 +26,7 @@ import * as z from 'zod';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { updateScreen } from '../../../Assets/updateScreen';
-import { useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import { useConfig } from '../../Config/configHook';
 import { FormattedMessageType } from '../../../Types/Questions';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
@@ -44,7 +44,7 @@ const Expenses = () => {
     id: 'questions.hasExpenses-ariaLabel',
     defaultMessage: 'has expenses',
   });
-  const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}/${formData.householdSize}`);
+  const backNavigationFunction = useDefaultBackNavigationFunction('hasExpenses');
   const nextStep = useGoToNextStep('hasExpenses');
   const expenseOptions = useConfig('expense_options') as Record<string, FormattedMessageType>;
 

@@ -14,7 +14,7 @@ import CCIGLogo from '../../Assets/States/CO/WhiteLabels/CCIG/ccigLogo.png';
 import ECMFBLogo from '../../Assets/States/CO/WhiteLabels/EagleCounty/ECMFBLogo.png';
 import ACHSMFBLogo from '../../Assets/States/CO/WhiteLabels/AdamsCountyHumanServices/achs.png';
 
-const logoMap = {
+const logoMap: { [key: string]: string | undefined } = {
   MFB_COLogo: MFBCOLogo,
   MFB_NCLogo: MFBNCLogo,
   BIA_MFBLogo: BIAMFBLogo,
@@ -32,9 +32,7 @@ const logoMap = {
   ACHS_MFBLogo: ACHSMFBLogo,
 };
 
-export type LogoSource = keyof typeof logoMap;
-
-export const renderLogoSource = (sourceLabel: LogoSource, logoAlt: string, logoClass: string) => {
-  const logoSrc = logoMap[sourceLabel] || MFBDEFAULT;
+export const renderLogoSource = (sourceLabel: string, logoAlt: string, logoClass: string) => {
+  const logoSrc = logoMap[sourceLabel] ?? MFBDEFAULT;
   return <img src={logoSrc} alt={logoAlt} className={logoClass} />;
 };
