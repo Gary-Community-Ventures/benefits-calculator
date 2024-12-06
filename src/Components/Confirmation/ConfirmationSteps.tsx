@@ -1,4 +1,4 @@
-import { Component, FC, FunctionComponent, ReactNode, useContext, useMemo } from 'react';
+import { ReactNode, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import ConfirmationBlock, { ConfirmationItem, formatToUSD } from './ConfirmationBlock';
 import { ReactComponent as Residence } from '../../Assets/icons/residence.svg';
@@ -15,7 +15,6 @@ import { FormattedMessageType, QuestionName } from '../../Types/Questions';
 import { useConfig } from '../Config/configHook';
 import { calcAge } from '../HouseholdDataBlock/AgeInput';
 import { Conditions, IncomeStream, Benefits as BenefitsType } from '../../Types/FormData';
-import { resolveTripleslashReference } from 'typescript';
 
 function ZipCode() {
   const { formData } = useContext(Context);
@@ -395,7 +394,7 @@ function Assets() {
     defaultMessage: 'edit assets',
   };
   const assetsIconAlt = {
-    id: 'confirmation.expense.icon-AL',
+    id: 'confirmation.assets.icon-AL',
     defaultMessage: 'assets',
   };
 
@@ -473,11 +472,11 @@ function HasBenefits() {
   };
 
   const editHasBenefitsAriaLabel = {
-    id: 'confirmation.assets.edit-AL',
+    id: 'confirmation.currentBenefits.edit-AL',
     defaultMessage: 'edit benefits you already have',
   };
   const hasBenefitsIconAlt = {
-    id: 'confirmation.expense.icon-AL',
+    id: 'confirmation.currentBenefits.icon-AL',
     defaultMessage: 'benefits you already have',
   };
 
