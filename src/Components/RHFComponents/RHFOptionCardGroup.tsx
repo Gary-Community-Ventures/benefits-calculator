@@ -20,7 +20,7 @@ const RHFOptionCardGroup = ({ fields, control, setValue, name, options }) => {
 
   const handleOptionCardClick = (optionName:string) => {
     const updatedValue = !(fields[optionName]);
-    setValue(`${name}.${optionName}`, updatedValue);
+    setValue(`${name}.${optionName}`, updatedValue, { shouldValidate: true, shouldDirty: true });
   };
 
   const displayOptionCards = (options: Record<any, any>, name:string, values: Record<string, boolean>) => {
@@ -33,38 +33,31 @@ const RHFOptionCardGroup = ({ fields, control, setValue, name, options }) => {
       const isSelected = values[optionKey];
 
       return (
-        <Controller
-          control={control}
-          name={`${name}.${optionKey}`}
+        <CardActionArea
           key={`${name}-key-${index}`}
-          render={() => (
-            <CardActionArea
-              key={`${name}-key-${index}`}
-              sx={{ width: '15rem' }}
-              className="card-action-area"
-              onClick={() => handleOptionCardClick(optionKey)}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  event.preventDefault();
-                }
-              }}
-            >
-              <Card className={isSelected ? 'option-card selected-option-card' : 'option-card'}>
-                <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>
-                  <CardContent sx={{ textAlign: 'center', padding: '0.5rem' }}>
-                    <Box>{options[optionKey].icon}</Box>
-                    <Typography className={isSelected ? 'option-card-text' : ''}>{translatedAriaLabel}</Typography>
-                  </CardContent>
-                </Stack>
-                {isSelected && (
-                  <Stack direction="row" justifyContent="flex-end" alignItems="flex-end">
-                    <Checkmark className="checkmark" />
-                  </Stack>
-                )}
-              </Card>
-            </CardActionArea>
-          )}
-        />
+          sx={{ width: '15rem' }}
+          className="card-action-area"
+          onClick={() => handleOptionCardClick(optionKey)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+            }
+          }}
+        >
+          <Card className={isSelected ? 'option-card selected-option-card' : 'option-card'}>
+            <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>
+              <CardContent sx={{ textAlign: 'center', padding: '0.5rem' }}>
+                <Box>{options[optionKey].icon}</Box>
+                <Typography className={isSelected ? 'option-card-text' : ''}>{translatedAriaLabel}</Typography>
+              </CardContent>
+            </Stack>
+            {isSelected && (
+              <Stack direction="row" justifyContent="flex-end" alignItems="flex-end">
+                <Checkmark className="checkmark" />
+              </Stack>
+            )}
+          </Card>
+        </CardActionArea>
       );
     });
   };
