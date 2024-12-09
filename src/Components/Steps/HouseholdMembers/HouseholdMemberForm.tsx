@@ -79,11 +79,23 @@ const HouseholdMemberForm = () => {
     handleSubmit,
     watch,
     getValues,
+    setValue,
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      birthMonth: formData.householdData[pageNumber]?.birthMonth ? String(formData.householdData[pageNumber]?.birthMonth) : '',
-      birthYear: formData.householdData[pageNumber]?.birthYear ? String(formData.householdData[pageNumber]?.birthYear) : '',
+      birthMonth: householdMemberFormData?.birthMonth ? String(householdMemberFormData.birthMonth) : '',
+      birthYear: householdMemberFormData?.birthYear ? String(householdMemberFormData.birthYear) : '',
+      healthInsurance: householdMemberFormData?.healthInsurance ? householdMemberFormData.healthInsurance : {
+        none: false,
+        employer: false,
+        private: false,
+        medicaid: false,
+        medicare: false,
+        chp: false,
+        emergency_medicaid: false,
+        family_planning: false,
+        va: false,
+      },
       // relationshipToHH: pageNumber === 1 ? 'headOfHousehold' : '',
       // conditions: {
       //   student: false,
@@ -94,18 +106,9 @@ const HouseholdMemberForm = () => {
       // },
       // hasIncome: false,
       // incomeStreams: [],
-      // healthInsurance: {
-      //   none: false,
-      //   employer: false,
-      //   private: false,
-      //   medicaid: false,
-      //   medicare: false,
-      //   chp: false,
-      //   emergency_medicaid: false,
-      //   family_planning: false,
-      //   va: false,
-    },
-  });
+    }
+  })
+  const healthInsuranceFields = watch('healthInsurance');
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
     if (uuid) {
