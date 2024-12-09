@@ -132,6 +132,17 @@ const HouseholdMemberForm = () => {
     );
   }
 
+  const renderHealthInsuranceHelperText = () => {
+    return (
+      <ErrorMessageWrapper fontSize="1.5rem">
+        <FormattedMessage
+          id="validation-helperText.healthInsurance"
+          defaultMessage='If none of these apply, please select "One or more household member(s) do not have health insurance"'
+        />
+      </ErrorMessageWrapper>
+    );
+  }
+
   const createAgeQuestion = (personIndex: number) => {
     return (
       <Box sx={{ marginBottom: '1.5rem' }}>
