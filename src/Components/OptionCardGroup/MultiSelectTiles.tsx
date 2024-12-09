@@ -5,22 +5,22 @@ import { ReactComponent as Checkmark } from '../../Assets/OptionCardIcons/checkm
 import './MultiSelectTiles.css';
 import { useIntl } from 'react-intl';
 
-type Option = {
-  value: string;
+type Option<T = string | number> = {
+  value: T;
   text: FormattedMessageType;
   icon: ReactNode;
 };
 
-type TileProps = {
-  option: Option;
+type TileProps<T> = {
+  option: Option<T>;
   selected: boolean;
   onClick: () => void;
 };
 
-function Tile({ option, selected, onClick }: TileProps) {
+function Tile<T = string | number>({ option, selected, onClick }: TileProps<T>) {
   const { formatMessage } = useIntl();
   return (
-    <CardActionArea key={option.value} sx={{ width: '15rem' }} className="card-action-area" onClick={onClick}>
+    <CardActionArea sx={{ width: '15rem' }} className="card-action-area" onClick={onClick}>
       <Card className={selected ? 'option-card selected-option-card' : 'option-card'}>
         <div className="multi-select-card-container">
           <CardContent sx={{ textAlign: 'center', padding: '0.5rem' }}>
@@ -31,7 +31,7 @@ function Tile({ option, selected, onClick }: TileProps) {
         {selected && (
           <Stack direction="row" justifyContent="flex-end" alignItems="flex-end">
             <Checkmark
-              title={formatMessage({ id: 'multiSelect.checkmark.alt', description: 'checked' })}
+              title={formatMessage({ id: 'multiSelect.checkmark.alt', defaultMessage: 'checked' })}
               className="checkmark"
             />
           </Stack>
@@ -41,18 +41,18 @@ function Tile({ option, selected, onClick }: TileProps) {
   );
 }
 
-type MultiSelectTilesProps = {
-  options: Option[];
-  values: string[];
-  onChange: (value: string[]) => void;
+type MultiSelectTilesProps<T = string | number> = {
+  options: Option<T>[];
+  values: T[];
+  onChange: (value: T[]) => void;
 };
 
-function MultiSelectTiles({ options, values, onChange }: MultiSelectTilesProps) {
+function MultiSelectTiles<T = string | number>({ options, values, onChange }: MultiSelectTilesProps<T>) {
   return (
     <div className="multiselect-tiles-container">
-      {options.map((option) => {
+      {options.map((option, index) => {
         const onClick = () => {
-          let newValues: string[];
+          let newValues: T[];
           if (values.includes(option.value)) {
             newValues = values.filter((value) => value !== option.value);
           } else {
@@ -64,7 +64,7 @@ function MultiSelectTiles({ options, values, onChange }: MultiSelectTilesProps) 
 
         const selected = values.includes(option.value);
 
-        return <Tile option={option} onClick={onClick} key={option.value} selected={selected} />;
+        return <Tile option={option} onClick={onClick} key={index} selected={selected} />;
       })}
     </div>
   );

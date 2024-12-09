@@ -76,6 +76,17 @@ export type SignUpInfo = {
   serverError?: boolean;
 };
 
+export type AcuteHHConditionName =
+  | 'food'
+  | 'babySupplies'
+  | 'housing'
+  | 'support'
+  | 'childDevelopment'
+  | 'familyPlanning'
+  | 'jobResources'
+  | 'dentalCare'
+  | 'legalServices';
+
 export type AcuteHHConditions = {
   food: boolean;
   babySupplies: boolean;
