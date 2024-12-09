@@ -255,7 +255,6 @@ const HouseholdMemberForm = () => {
           {displayHealthCareQuestion(pageNumber)}
           <RHFOptionCardGroup
             fields={healthInsuranceFields}
-            control={control}
             setValue={setValue}
             name="healthInsurance"
             options={pageNumber === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
