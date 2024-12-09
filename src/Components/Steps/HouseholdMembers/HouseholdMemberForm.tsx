@@ -211,6 +211,29 @@ const HouseholdMemberForm = () => {
       </Box>
     );
   };
+
+  const displayHealthCareQuestion = (page:number) => {
+    if (page === 1) {
+      return (
+        <QuestionQuestion>
+          <FormattedMessage
+            id="questions.healthInsurance-you"
+            defaultMessage="Which type of health insurance do you have?"
+          />
+        </QuestionQuestion>
+      );
+    } else {
+      return (
+        <QuestionQuestion>
+          <FormattedMessage
+            id="questions.healthInsurance-they"
+            defaultMessage="What type of health insurance do they have?"
+          />
+        </QuestionQuestion>
+      );
+    }
+  };
+
   const displayHealthInsuranceQuestion = (pageNumber: number, healthInsuranceOptions: any) => {
     return (
       <Box className="section-container">
