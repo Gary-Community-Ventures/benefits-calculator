@@ -28,7 +28,7 @@ export function useStepNumber(name: QuestionName, raise: boolean = true) {
   return stepNumber + STARTING_QUESTION_NUMBER;
 }
 
-export function useStepName(stepNumber: number): string | undefined {
+export function useStepName(stepNumber: number): QuestionName | undefined {
   const stepDirectory = useStepDirectory();
 
   return stepDirectory[stepNumber - STARTING_QUESTION_NUMBER];
