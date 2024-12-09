@@ -48,9 +48,9 @@
 }
 
 @media (max-width: 38.125rem) {
-.multiselect-tiles-container {
-  padding: 0;
-}
+  .multiselect-tiles-container {
+    padding: 0;
+  }
 
   .card-action-area.MuiButtonBase-root,
   .option-card.MuiPaper-root,
