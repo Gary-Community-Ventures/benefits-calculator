@@ -24,7 +24,7 @@ const RHFOptionCardGroup = ({ fields, control, setValue, name, options }) => {
   };
 
   const displayOptionCards = (options: Record<any, any>, name:string, values: Record<string, boolean>) => {
-    return Object.keys(options).map((optionKey, index) => {
+    const optionCards = Object.keys(options).map((optionKey, index) => {
       const translatedAriaLabel = intl.formatMessage({
         id: options[optionKey].text.props.id,
         defaultMessage: options[optionKey].text.props.defaultMessage,
@@ -60,6 +60,8 @@ const RHFOptionCardGroup = ({ fields, control, setValue, name, options }) => {
         </CardActionArea>
       );
     });
+
+    return <div className="option-cards-container">{optionCards}</div>;
   };
 
   return <Stack sx={{ alignItems: 'center' }}>{fields && displayOptionCards(options, name, fields)}</Stack>;
