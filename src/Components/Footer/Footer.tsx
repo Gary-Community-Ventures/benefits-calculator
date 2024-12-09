@@ -9,9 +9,10 @@ import { useLogo } from '../Referrer/useLogo';
 
 const Footer = () => {
   const footerData = useConfig('footer_data');
-  const { address_one, address_two, city, state, zip_code, email, privacy_policy_link } = footerData;
   const context = useContext(Context);
+
   const { theme } = context;
+  const { address_one, address_two, city, state, zip_code, email, privacy_policy_link } = footerData;
   return (
     <footer>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: theme.midBlueColor }} square={true}>

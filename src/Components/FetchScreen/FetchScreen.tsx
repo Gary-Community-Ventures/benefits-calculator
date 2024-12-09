@@ -1,6 +1,5 @@
-import { useEffect, useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useConfig } from '../Config/configHook.tsx';
+import { useEffect, useContext, useMemo } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getScreen } from '../../apiCalls.js';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LoadingPage from '../LoadingPage/LoadingPage.tsx';
@@ -8,34 +7,44 @@ import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData.t
 import type { FormData } from '../../Types/FormData.ts';
 
 const FetchScreen = () => {
-  const { formData, setFormData, screenDoneLoading, configLoading } = useContext(Context);
-  const referralOptions = useConfig('referral_options');
-  const { uuid } = useParams();
+  const { formData, setFormData, setScreenLoading } = useContext(Context);
+  const location = useLocation();
   const navigate = useNavigate();
+  const { uuid: rawUuid, whiteLabel: rawWhiteLabel } = useParams();
+
+  const { uuid, whiteLabel } = useMemo(() => {
+    // https://stackoverflow.com/questions/20041051/how-to-judge-a-string-is-uuid-type
+    const uuidRegx = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+
+    if (rawUuid === undefined) {
+      return { uuid: undefined, whiteLabel: rawWhiteLabel };
+    }
+
+    if (rawWhiteLabel !== undefined && rawWhiteLabel.match(uuidRegx)) {
+      return { uuid: rawWhiteLabel, whiteLabel: undefined };
+    } else if (!rawUuid.match(uuidRegx)) {
+      return { uuid: undefined, whiteLabel: rawWhiteLabel };
+    }
+
+    return { uuid: rawUuid, whiteLabel: rawWhiteLabel };
+  }, [rawUuid, rawWhiteLabel]);
 
   const fetchScreen = async (uuid: string) => {
     try {
       const response = await getScreen(uuid);
       createFormData(response);
     } catch (err) {
+      console.error(err);
       navigate('/step-1');
       return;
     }
-    screenDoneLoading();
+    setScreenLoading(false);
   };
 
   const createFormData = (response: ApiFormDataReadOnly & ApiFormData) => {
-    let otherRefferer = '';
-    let referrer = response.referral_source;
-    if (!referrer) {
-      referrer = '';
-    } else if (!(referrer in referralOptions)) {
-      otherRefferer = referrer;
-      referrer = 'other';
-    }
-
     const initialFormData: FormData = {
       ...formData,
+      whiteLabel: response.white_label,
       isTest: response.is_test ?? false,
       isTestData: response.is_test_data ?? false,
       frozen: response.frozen,
@@ -71,6 +80,7 @@ const FetchScreen = () => {
         pell: response.has_pell_grant ?? false,
         rtdlive: response.has_rtdlive ?? false,
         snap: response.has_snap ?? false,
+        sunbucks: response.has_sunbucks ?? false,
         ssdi: response.has_ssdi ?? false,
         ssi: response.has_ssi ?? false,
         tanf: response.has_tanf ?? false,
@@ -82,9 +92,8 @@ const FetchScreen = () => {
         nfp: response.has_nfp ?? false,
         fatc: response.has_fatc ?? false,
       },
-      referralSource: referrer,
+      referralSource: response.referral_source ?? undefined,
       immutableReferrer: response.referrer_code ?? undefined,
-      otherSource: otherRefferer,
       acuteHHConditions: {
         food: response.needs_food ?? false,
         babySupplies: response.needs_baby_supplies ?? false,
@@ -157,21 +166,29 @@ const FetchScreen = () => {
         expenseAmount: expense.amount ? String(Math.round(expense.amount)) : '',
       });
     }
+
     setFormData({ ...initialFormData });
+
+    if (whiteLabel === undefined) {
+      navigate(`/${initialFormData.whiteLabel}${location.pathname}`);
+    } else if (whiteLabel !== initialFormData.whiteLabel) {
+      navigate(location.pathname.replace(whiteLabel, initialFormData.whiteLabel));
+    }
   };
 
   useEffect(() => {
-    if (configLoading) {
-      return;
-    }
-    // https://stackoverflow.com/questions/20041051/how-to-judge-a-string-is-uuid-type
-    const uuidRegx = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
-    if (uuid === undefined || !uuid.match(uuidRegx)) {
-      screenDoneLoading();
+    if (uuid === undefined) {
+      // don't run immediately because it will be overriden by another setFormData in App.tsx
+      setTimeout(() => {
+        if (whiteLabel !== undefined) {
+          setFormData({ ...formData, whiteLabel });
+        }
+        setScreenLoading(false);
+      }, 1);
       return;
     }
     fetchScreen(uuid);
-  }, [uuid, configLoading]);
+  }, [uuid, whiteLabel]);
 
   return <LoadingPage />;
 };

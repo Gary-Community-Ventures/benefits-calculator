@@ -1,6 +1,6 @@
 import { FormData } from './FormData';
 import { ITheme } from '../Assets/styleController';
-import { ReferrerData } from '../Components/Referrer/referrerHook';
+import { ReferrerData, ReferrerDataValue } from '../Components/Referrer/referrerHook';
 import { Language } from '../Assets/languageOptions';
 import { Config } from './Config';
 
@@ -15,8 +15,8 @@ export interface WrapperContext {
   setTheme: React.Dispatch<React.SetStateAction<'default' | 'twoOneOne'>>;
   styleOverride: any;
   pageIsLoading: boolean;
-  screenDoneLoading: () => void;
-  getReferrer: (id: keyof ReferrerData) => any;
+  setScreenLoading: (loading: boolean) => void;
+  getReferrer: (id: keyof ReferrerData, defaultValue?: ReferrerDataValue) => any;
   staffToken: string | undefined;
   setStaffToken: (token: string | undefined) => void;
 }

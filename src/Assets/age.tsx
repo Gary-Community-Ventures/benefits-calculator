@@ -17,10 +17,10 @@ export function hasBirthMonthYear(birthYear: number, birthMonth: number) {
   return hasBirthYear && hasBirthMonth;
 }
 
-export function calcAge(age: number, birthYear: number, birthMonth: number) {
+export function calcAge(age: number | undefined, birthYear: number, birthMonth: number) {
   const hasBirthDate = hasBirthMonthYear(birthYear, birthMonth);
   if (!hasBirthDate) {
-    return age;
+    return age ?? 0;
   }
 
   const { CURRENT_MONTH, CURRENT_YEAR } = getCurrentMonthYear();

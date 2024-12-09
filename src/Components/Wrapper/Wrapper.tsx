@@ -7,8 +7,10 @@ import { getTranslations } from '../../apiCalls';
 import useReferrer, { ReferrerData } from '../Referrer/referrerHook';
 import { Language } from '../../Types/Language';
 import { useGetConfig } from '../Config/configHook';
+import { rightToLeftLanguages } from '../../Assets/languageOptions';
 
 const initialFormData: FormData = {
+  whiteLabel: '_default',
   isTest: false,
   frozen: false,
   externalID: undefined,
@@ -56,7 +58,6 @@ const initialFormData: FormData = {
   },
   referralSource: undefined,
   immutableReferrer: undefined,
-  otherSource: undefined,
   signUpInfo: {
     email: '',
     phone: '',
@@ -84,22 +85,24 @@ const initialFormData: FormData = {
 export const Context = React.createContext<WrapperContext>({} as WrapperContext);
 
 const Wrapper = (props: PropsWithChildren<{}>) => {
-  const { configLoading, configResponse: config } = useGetConfig();
-  const { language_options: languageOptions = {} } = config ?? {};
-  const languages = Object.keys(languageOptions) as Language[];
-  const { referrer_data: referrerData = {} } = config ?? {};
-
-  const rightToLeftLanguages = ['ar'];
-
   const [staffToken, setStaffToken] = useState<string | undefined>(undefined);
 
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
   const [screenLoading, setScreenLoading] = useState<boolean>(true);
   const [pageIsLoading, setPageIsLoading] = useState<boolean>(true);
 
-  const screenDoneLoading = () => {
-    setScreenLoading(false);
-  };
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+
+  const { configLoading, configResponse: config } = useGetConfig(screenLoading, formData.whiteLabel);
+  const { language_options: languageOptions = {} } = config ?? {};
+  const languages = Object.keys(languageOptions) as Language[];
+  const { referrer_data: referrerData = undefined } = config ?? {};
+
+  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer, referrerData as ReferrerData);
+
+  useEffect(() => {
+    setReferrer(formData.immutableReferrer);
+  }, [formData.immutableReferrer]);
 
   useEffect(() => {
     if (!screenLoading && !translationsLoading && !configLoading) {
@@ -192,14 +195,6 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
     setLocale(newLocale as Language);
   };
 
-  const [formData, setFormData] = useState<FormData>(initialFormData);
-
-  const { getReferrer, setReferrer } = useReferrer(formData.immutableReferrer, referrerData as ReferrerData);
-
-  useEffect(() => {
-    setReferrer(formData.immutableReferrer);
-  }, [formData.immutableReferrer]);
-
   return (
     <Context.Provider
       value={{
@@ -213,7 +208,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         setTheme,
         styleOverride,
         pageIsLoading,
-        screenDoneLoading,
+        setScreenLoading,
         staffToken,
         setStaffToken,
         getReferrer: getReferrer as (id: keyof ReferrerData) => string,

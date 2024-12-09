@@ -8,13 +8,13 @@ import { FormattedMessageType } from '../../Types/Questions';
 import { FormData } from '../../Types/FormData';
 import { Context } from '../Wrapper/Wrapper';
 import { updateScreen } from '../../Assets/updateScreen';
-import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper.tsx';
-import { useConfig } from '../Config/configHook.tsx';
+import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
+import { useConfig } from '../Config/configHook';
 import * as z from 'zod';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
-import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons.tsx';
+import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
 
 export const ZipcodeStep = () => {
@@ -22,10 +22,21 @@ export const ZipcodeStep = () => {
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('zipcode');
 
-  const countiesByZipcode = useConfig('counties_by_zipcode');
+  const countiesByZipcode = useConfig<{ [key: string]: { [key: string]: string } }>('counties_by_zipcode');
+
+  const checkCountyIsValid = ({ zipcode, county }: { zipcode: string; county: string }) => {
+    const validCounties = countiesByZipcode[zipcode];
+
+    if (validCounties && county in validCounties) {
+      return true;
+    }
+    return false;
+  };
+
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
   const zipcodeSchema = z
     .string()
+    .trim()
     .regex(numberMustBeFiveDigitsLongRegex)
     .refine((data) => data in countiesByZipcode);
 
@@ -50,25 +61,17 @@ export const ZipcodeStep = () => {
   });
 
   const currentZipcodeValue = watch('zipcode');
-  const shouldShowCountyInput = zipcodeSchema.safeParse(currentZipcodeValue).success;
+  const parsedZipCode = zipcodeSchema.safeParse(currentZipcodeValue);
+
   const nextStep = useGoToNextStep('zipcode');
 
-  const formSubmitHandler = async (zipCodeAndCountyData: FormData) => {
+  const formSubmitHandler = (zipCodeAndCountyData: FormData) => {
     if (uuid) {
       const updatedFormData = { ...formData, ...zipCodeAndCountyData };
       setFormData(updatedFormData);
-      await updateScreen(uuid, updatedFormData, locale);
+      updateScreen(uuid, updatedFormData, locale);
       nextStep();
     }
-  };
-
-  const checkCountyIsValid = ({ zipcode, county }) => {
-    const validCounties = countiesByZipcode[zipcode];
-
-    if (validCounties && county in validCounties) {
-      return true;
-    }
-    return false;
   };
 
   const createMenuItems = (disabledSelectMenuItemText: FormattedMessageType, options: Record<string, string>) => {
@@ -138,7 +141,7 @@ export const ZipcodeStep = () => {
             />
           )}
         />
-        {shouldShowCountyInput && (
+        {parsedZipCode.success && (
           <div>
             <QuestionQuestion>
               <FormattedMessage id="questions.zipcode-a" defaultMessage="Please select a county:" />
@@ -164,7 +167,7 @@ export const ZipcodeStep = () => {
                           id="questions.zipcode-a-disabledSelectMenuItemText"
                           defaultMessage="Select a county"
                         />,
-                        countiesByZipcode[watch('zipcode')],
+                        countiesByZipcode[parsedZipCode.data],
                       )}
                     </Select>
                     <FormHelperText>{errors.county !== undefined && renderCountyHelperText()}</FormHelperText>

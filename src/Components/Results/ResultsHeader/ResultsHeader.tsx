@@ -85,7 +85,7 @@ const NeedsHeader = () => {
 };
 
 const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
-  const { uuid } = useParams();
+  const { whiteLabel, uuid } = useParams();
   const { staffToken, setStaffToken } = useContext(Context);
   const { isAdminView } = useResultsContext();
 
@@ -93,7 +93,7 @@ const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
     <>
       <BackAndSaveButtons
         handleTextfieldChange={handleTextfieldChange}
-        navigateToLink={`/${uuid}/confirm-information`}
+        navigateToLink={`/${whiteLabel}/${uuid}/confirm-information`}
         BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO SCREENER" />}
       />
       {isAdminView && <Login setToken={setStaffToken} loggedIn={staffToken !== undefined} />}

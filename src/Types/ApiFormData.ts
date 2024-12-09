@@ -102,6 +102,7 @@ export type ApiFormDataReadOnly = {
 };
 
 export type ApiFormData = {
+  white_label: string;
   is_test: boolean;
   start_date: string;
   agree_to_tos: boolean | null;
@@ -123,6 +124,7 @@ export type ApiFormData = {
   has_tanf: boolean | null;
   has_wic: boolean | null;
   has_snap: boolean | null;
+  has_sunbucks: boolean | null;
   has_lifeline: boolean | null;
   has_acp: boolean | null;
   has_eitc: boolean | null;

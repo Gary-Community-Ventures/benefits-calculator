@@ -1,17 +1,25 @@
 import { Button } from '@mui/material';
+import { useContext, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router';
 import ccigLandingPageImage from '../../Assets/States/CO/WhiteLabels/CCIG/ccigLandingPage.png';
 import { useQueryString } from '../QuestionComponents/questionHooks';
+import { Context } from '../Wrapper/Wrapper';
 import './CcigLandingPage.css';
 
 export default function CcigLandingPage() {
+  const { formData, setFormData } = useContext(Context);
   const navigate = useNavigate();
   const { formatMessage } = useIntl();
   const queryString = useQueryString();
 
+  useEffect(() => {
+    // this causes the screen to flash as the config needs to reload
+    setFormData({ ...formData, immutableReferrer: 'ccig' });
+  }, []);
+
   const handleGetStarted = () => {
-    navigate(`/step-1${queryString}`);
+    navigate(`/co/step-1${queryString}`);
   };
 
   return (

@@ -1,18 +1,16 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 import { useResultsLink } from '../Results';
 import './211Button.css';
 
 const HelpButton = () => {
-  const { uuid } = useParams();
   const intl = useIntl();
   const moreHelpALProps = {
     id: 'helpButton.AL',
     defaultMsg: 'more help button',
   };
 
-  const moreHelpLink = useResultsLink(`/${uuid}/results/more-help`);
+  const moreHelpLink = useResultsLink(`results/more-help`);
 
   return (
     <div className="help-text-for-211-button">

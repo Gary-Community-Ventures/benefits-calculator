@@ -14,9 +14,8 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
   const householdMembers = getHouseholdMembersBodies(formData);
   const expenses = getExpensesBodies(formData);
 
-  const finalReferralSource = formData.otherSource !== '' ? formData.otherSource : formData.referralSource;
-
   const screenBody: ApiFormData = {
+    white_label: formData.whiteLabel,
     is_test: formData.isTest ?? false,
     external_id: formData.externalID ?? null,
     agree_to_tos: formData.agreeToTermsOfService,
@@ -51,6 +50,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     has_nfp: formData.benefits.nfp,
     has_rtdlive: formData.benefits.rtdlive,
     has_snap: formData.benefits.snap,
+    has_sunbucks: formData.benefits.sunbucks,
     has_ssdi: formData.benefits.ssdi,
     has_ssi: formData.benefits.ssi,
     has_cowap: formData.benefits.cowap,
@@ -60,7 +60,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     has_upk: formData.benefits.upk,
     has_coctc: formData.benefits.coctc,
     has_fatc: formData.benefits.fatc,
-    referral_source: finalReferralSource ?? null,
+    referral_source: formData.referralSource ?? null,
     referrer_code: formData.immutableReferrer ?? null,
     needs_food: formData.acuteHHConditions.food,
     needs_baby_supplies: formData.acuteHHConditions.babySupplies,

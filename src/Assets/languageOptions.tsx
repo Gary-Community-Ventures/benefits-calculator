@@ -4,7 +4,7 @@ import { ReactNode, useContext, useMemo } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
 
 export type Language = 'en-us' | 'es' | 'vi' | 'fr' | 'am' | 'so' | 'ru' | 'ne' | 'my' | 'zh' | 'ar';
-export const languageOptions: Record<Language, string> = {
+export const LANGUAGE_OPTIONS: Record<Language, string> = {
   'en-us': 'English',
   es: 'Español',
   vi: 'Tiếng Việt',
@@ -56,4 +56,4 @@ export function useTranslateNumber() {
   };
 }
 
-export default languageOptions;
+export default LANGUAGE_OPTIONS;

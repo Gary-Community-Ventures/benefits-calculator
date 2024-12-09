@@ -26,7 +26,7 @@ import * as z from 'zod';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { updateScreen } from '../../../Assets/updateScreen';
-import { useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import { useConfig } from '../../Config/configHook';
 import { FormattedMessageType } from '../../../Types/Questions';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
@@ -37,21 +37,19 @@ import './Expenses.css';
 const Expenses = () => {
   const { formData, setFormData, locale } = useContext(Context);
   const { uuid, id } = useParams();
-  const currentStepId = Number(id);
-  const navigate = useNavigate();
   const intl = useIntl();
   const translatedAriaLabel = intl.formatMessage({
     id: 'questions.hasExpenses-ariaLabel',
     defaultMessage: 'has expenses',
   });
-  const backNavigationFunction = () => navigate(`/${uuid}/step-${currentStepId - 1}/${formData.householdSize}`);
+  const backNavigationFunction = useDefaultBackNavigationFunction('hasExpenses');
   const nextStep = useGoToNextStep('hasExpenses');
   const expenseOptions = useConfig('expense_options') as Record<string, FormattedMessageType>;
 
   const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
   const expenseSourceSchema = z.object({
     expenseSourceName: z.string().min(1),
-    expenseAmount: z.string().regex(oneOrMoreDigitsButNotAllZero),
+    expenseAmount: z.string().trim().regex(oneOrMoreDigitsButNotAllZero),
   });
   const expenseSourcesSchema = z.array(expenseSourceSchema);
   const hasExpensesSchema = z.string().regex(/^true|false$/);
