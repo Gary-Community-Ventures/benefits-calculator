@@ -23,6 +23,7 @@ const HouseholdMemberForm = () => {
   const { uuid, page } = useParams();
   const navigate = useNavigate();
   const pageNumber = Number(page);
+  const healthInsuranceOptions = useConfig('health_insurance_options');
   const currentStepId = useStepNumber('householdData', formData.immutableReferrer);
   // const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
   //   const setPage = (uuid: string, currentStepId: number, pageNumber: number) => {
@@ -67,10 +68,23 @@ const HouseholdMemberForm = () => {
     then birthMonth would have a minimum string length of 1 which passes validation.
     */
     birthMonth: z.string().min(1),
-    birthYear: z.string().min(1),
-      // .number()
-      // .lte(CURRENT_YEAR)
-      // .gte(CURRENT_YEAR - MAX_AGE),
+    healthInsurance: z
+      .object({
+        none: z.boolean(),
+        employer: z.boolean(),
+        private: z.boolean(),
+        medicaid: z.boolean(),
+        medicare: z.boolean(),
+        chp: z.boolean(),
+        emergency_medicaid: z.boolean(),
+        family_planning: z.boolean(),
+        va: z.boolean(),
+      })
+      .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
+        message: 'Please select at least one health insurance option.',
+        path: ['healthInsurance'],
+        //make sure that this only shows up for the person at this index
+      }),
   });
 
   const {
