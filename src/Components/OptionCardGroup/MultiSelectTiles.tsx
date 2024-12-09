@@ -1,6 +1,9 @@
-import { DetailedHTMLProps, HTMLAttributes, ReactNode, SelectHTMLAttributes, useEffect, useState } from 'react';
-import { Control, FieldValues, UseFormRegister } from 'react-hook-form';
+import { Card, CardActionArea, CardContent, Stack } from '@mui/material';
+import { ReactNode } from 'react';
 import { FormattedMessageType } from '../../Types/Questions';
+import { ReactComponent as Checkmark } from '../../Assets/OptionCardIcons/checkmark.svg';
+import './MultiSelectTiles.css';
+import { useIntl } from 'react-intl';
 
 type Option = {
   value: string;
@@ -15,72 +18,54 @@ type TileProps = {
 };
 
 function Tile({ option, selected, onClick }: TileProps) {
+  const { formatMessage } = useIntl();
   return (
-    <div>
-      <button type="button" onClick={onClick}>
-        {option.text} {String(selected)}
-      </button>
-    </div>
+    <CardActionArea key={option.value} sx={{ width: '15rem' }} className="card-action-area" onClick={onClick}>
+      <Card className={selected ? 'option-card selected-option-card' : 'option-card'}>
+        <div className="multi-select-card-container">
+          <CardContent sx={{ textAlign: 'center', padding: '0.5rem' }}>
+            <div>{option.icon}</div>
+            <div className={selected ? 'option-card-text' : ''}>{option.text}</div>
+          </CardContent>
+        </div>
+        {selected && (
+          <Stack direction="row" justifyContent="flex-end" alignItems="flex-end">
+            <Checkmark
+              title={formatMessage({ id: 'multiSelect.checkmark.alt', description: 'checked' })}
+              className="checkmark"
+            />
+          </Stack>
+        )}
+      </Card>
+    </CardActionArea>
   );
 }
 
 type MultiSelectTilesProps = {
   options: Option[];
-  selectProps: ReturnType<UseFormRegister<FieldValues>>;
+  values: string[];
+  onChange: (value: string[]) => void;
 };
 
-function MultiSelectTiles({ options, selectProps }: MultiSelectTilesProps) {
-  const [htmlSelect, setHtmlSelect] = useState<HTMLSelectElement | null>(null);
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(selectProps.value);
-
-  const onSelectChange = () => {
-    if (htmlSelect === null) {
-      return;
-    }
-
-    const newSelectedOptions: string[] = [];
-
-    for (let i = 0; i < htmlSelect.options.length; i++) {
-      const htmlOption = htmlSelect[i] as HTMLOptionElement;
-
-      if (htmlOption.selected) {
-        newSelectedOptions.push(htmlOption.value);
-      }
-    }
-
-    setSelectedOptions(newSelectedOptions);
-  };
-
-  useEffect(() => {
-    onSelectChange();
-  }, [htmlSelect]);
-
+function MultiSelectTiles({ options, values, onChange }: MultiSelectTilesProps) {
   return (
-    <div>
-      <select {...selectProps} multiple value={selectedOptions}>
-        {options.map((option) => {
-          return (
-            <option value={option.value} key={option.value}>
-              {option.text}
-            </option>
-          );
-        })}
-      </select>
-      <div className="multiselect-tiles-container">
-        {options.map((option) => {
-          const onClick = () => {
-            if (selectedOptions.includes(option.value)) {
-              setSelectedOptions(selectedOptions.filter((value) => value !== option.value));
-            } else {
-              setSelectedOptions([...selectedOptions, option.value]);
-            }
-          };
+    <div className="multiselect-tiles-container">
+      {options.map((option) => {
+        const onClick = () => {
+          let newValues: string[];
+          if (values.includes(option.value)) {
+            newValues = values.filter((value) => value !== option.value);
+          } else {
+            newValues = [...values, option.value];
+          }
 
-          const selected = selectedOptions.includes(option.value);
+          onChange(newValues);
+        };
 
-          return <Tile option={option} onClick={onClick} key={option.value} selected={selected} />;
-        })}
-      </div>
+        const selected = values.includes(option.value);
+
+        return <Tile option={option} onClick={onClick} key={option.value} selected={selected} />;
+      })}
     </div>
   );
 }
