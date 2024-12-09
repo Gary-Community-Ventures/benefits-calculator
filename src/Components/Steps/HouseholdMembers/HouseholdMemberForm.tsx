@@ -234,7 +234,7 @@ const HouseholdMemberForm = () => {
     }
   };
 
-  const displayHealthInsuranceQuestion = (pageNumber: number, healthInsuranceOptions: any) => {
+  const displayHealthInsuranceBlock = (pageNumber: number, healthInsuranceOptions: any) => {
     return (
       <Box className="section-container">
         <Stack sx={{ padding: '3rem 0' }} className="section">
@@ -268,6 +268,9 @@ const HouseholdMemberForm = () => {
       {/* <HHMSummaryCards activeMemberData={getValues()} page={pageNumber} formData={formData} /> */}
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         {createAgeQuestion(pageNumber)}
+
+        {pageNumber === 1 && displayHealthInsuranceBlock(pageNumber, healthInsuranceOptions)}
+
         <PrevAndContinueButtons backNavigationFunction={() => backNavigationFunction(uuid, currentStepId, pageNumber)}/>
       </form>
     </main>
