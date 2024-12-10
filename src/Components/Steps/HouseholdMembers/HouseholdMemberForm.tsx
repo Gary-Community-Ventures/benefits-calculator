@@ -110,6 +110,13 @@ const HouseholdMemberForm = () => {
         family_planning: false,
         va: false,
       },
+      conditions: {
+        student: false,
+        pregnant: false,
+        blindOrVisuallyImpaired: false,
+        disabled: false,
+        longTermDisability: false,
+      },
       // relationshipToHH: pageNumber === 1 ? 'headOfHousehold' : '',
       // conditions: {
       //   student: false,
