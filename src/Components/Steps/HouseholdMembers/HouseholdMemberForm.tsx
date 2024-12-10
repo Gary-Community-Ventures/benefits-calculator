@@ -3,9 +3,9 @@ import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import HHMSummaryCards from './HHMSummaryCards';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../../Wrapper/Wrapper';
-import { useContext, useState } from 'react';
-import { HouseholdData } from '../../../Types/FormData';
-import { Box, FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
+import { ReactNode, useContext, useMemo, useState } from 'react';
+import { Conditions, HealthInsurance, HouseholdData } from '../../../Types/FormData';
+import { Autocomplete, Box, FormControl, FormHelperText, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material';
 import AgeInput from '../../HouseholdDataBlock/AgeInput';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useStepNumber } from '../../../Assets/stepDirectory';
@@ -17,13 +17,23 @@ import { useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MONTHS } from '../../HouseholdDataBlock/MONTHS';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
+import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
+import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
+import { useConfig } from '../../Config/configHook';
+import QuestionDescription from '../../QuestionComponents/QuestionDescription';
+import { FormattedMessageType } from '../../../Types/Questions';
 
 const HouseholdMemberForm = () => {
   const { formData, setFormData, locale } = useContext(Context);
   const { uuid, page } = useParams();
   const navigate = useNavigate();
   const pageNumber = Number(page);
-  const healthInsuranceOptions = useConfig('health_insurance_options');
+  const currentMemberIndex = pageNumber - 1;
+  const householdMemberFormData = formData.householdData[currentMemberIndex];
+  const healthInsuranceOptions =
+    useConfig<Record<keyof HealthInsurance, { text: FormattedMessageType; icon: ReactNode }>>('health_insurance_options');
+  const conditionOptions =
+    useConfig<Record<keyof Conditions, { text: FormattedMessageType; icon: ReactNode }>>('condition_options');
   const currentStepId = useStepNumber('householdData', formData.immutableReferrer);
   // const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
   //   const setPage = (uuid: string, currentStepId: number, pageNumber: number) => {
@@ -137,6 +147,7 @@ const HouseholdMemberForm = () => {
     }
   })
   const healthInsuranceFields = watch('healthInsurance');
+  const conditionFields = watch('conditions')
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
     if (uuid) {
@@ -339,8 +350,9 @@ const HouseholdMemberForm = () => {
       {/* <HHMSummaryCards activeMemberData={getValues()} page={pageNumber} formData={formData} /> */}
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         {createAgeQuestion(pageNumber)}
-
         {pageNumber === 1 && displayHealthInsuranceBlock(pageNumber, healthInsuranceOptions)}
+        {displayConditionsQuestion(pageNumber, conditionOptions)}
+
 
         <PrevAndContinueButtons backNavigationFunction={() => backNavigationFunction(uuid, currentStepId, pageNumber)}/>
       </form>
