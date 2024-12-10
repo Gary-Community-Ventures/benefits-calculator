@@ -89,12 +89,7 @@ const App = () => {
       };
     }
     setFormData(updatedFormData);
-  }, [
-    formData.hasExpenses,
-    formData.referralSource,
-    formData.signUpInfo.sendOffers,
-    formData.signUpInfo.sendUpdates,
-  ]);
+  }, [formData.hasExpenses, formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates]);
 
   useEffect(() => {
     const referrerParam = searchParams.get('referrer');

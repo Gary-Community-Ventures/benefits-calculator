@@ -40,7 +40,7 @@ function CheckBoxAccordion<T = string>({ name, options, onExpand, expanded, valu
         id="panel1a-header"
         sx={{ backgroundColor: theme.primaryColor }}
       >
-        <span className='checkbox-accordion-title'>{name}</span>
+        <span className="checkbox-accordion-title">{name}</span>
       </AccordionSummary>
       <AccordionDetails>
         {options.map((option, index) => {
