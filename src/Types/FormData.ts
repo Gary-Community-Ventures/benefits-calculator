@@ -21,36 +21,7 @@ export type HouseholdData = {
 };
 
 export type Benefits = {
-  acp: boolean;
-  andcs: boolean;
-  cccap: boolean;
-  coctc: boolean;
-  coeitc: boolean;
-  coheadstart: boolean;
-  coPropTaxRentHeatCreditRebate: boolean;
-  ctc: boolean;
-  dentallowincseniors: boolean;
-  denverpresc: boolean;
-  ede: boolean;
-  eitc: boolean;
-  lifeline: boolean;
-  leap: boolean;
-  mydenver: boolean;
-  nslp: boolean;
-  oap: boolean;
-  pell: boolean;
-  rtdlive: boolean;
-  snap: boolean;
-  sunbucks: boolean;
-  ssdi: boolean;
-  ssi: boolean;
-  tanf: boolean;
-  upk: boolean;
-  wic: boolean;
-  cowap: boolean;
-  ubp: boolean;
-  nfp: boolean;
-  fatc: boolean;
+  [key: string]: boolean;
 };
 
 export type HealthInsurance = {
@@ -105,7 +76,7 @@ export type FormData = {
   householdSize: number;
   householdData: HouseholdData[];
   householdAssets: number;
-  hasBenefits: string;
+  hasBenefits: 'true' | 'false' | 'preferNotToAnswer';
   benefits: Benefits;
   referralSource?: string;
   immutableReferrer?: string;
