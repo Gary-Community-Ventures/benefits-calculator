@@ -279,6 +279,36 @@ const HouseholdMemberForm = () => {
     );
   };
 
+  const displayConditionsQuestion = (
+    index: number,
+    conditionOptions) => {
+    const formattedMsgId =
+      index === 1
+        ? 'householdDataBlock.createConditionsQuestion-do-these-apply-to-you'
+        : 'householdDataBlock.createConditionsQuestion-do-these-apply';
+
+    const formattedMsgDefaultMsg = index === 1 ? 'Do any of these apply to you?' : 'Do any of these apply to them?';
+
+    return (
+      <Box sx={{ margin: '3rem 0' }}>
+        <QuestionQuestion>
+          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+        </QuestionQuestion>
+        <QuestionDescription>
+          <FormattedMessage
+            id="householdDataBlock.createConditionsQuestion-pick"
+            defaultMessage="Choose all that apply."
+          />
+        </QuestionDescription>
+        <RHFOptionCardGroup
+          fields={conditionFields}
+          setValue={setValue}
+          name="conditions"
+          options={pageNumber === 1 ? conditionOptions.you : conditionOptions.them}
+        />
+      </Box>
+    );
+  };
 
   return (
     <main className="benefits-form">
