@@ -252,12 +252,9 @@ function HouseholdData() {
   };
 
   const householdMemberDataBlocks = householdData.map((member, i) => {
-    if (member.birthYear === undefined || member.birthMonth === undefined) {
-      throw new Error('Birth year and month are undefined');
-    }
 
     const { hasIncome, incomeStreams } = member;
-    const age = calcAge(member.age, member.birthYear, member.birthMonth);
+    const age = calcAge(member);
     let relationship: FormattedMessageType;
     if (i === 0) {
       relationship = <FormattedMessage id="qcc.hoh-text" defaultMessage="Head of Household (You)" />;
@@ -300,10 +297,10 @@ function HouseholdData() {
           label={<FormattedMessage id="questions.age-inputLabel" defaultMessage="Age:" />}
           value={translateNumber(age)}
         />
-        {hasBirthMonthYear(member.birthYear, member.birthMonth) && (
+        {hasBirthMonthYear(member) && (
         <ConfirmationItem
           label={<FormattedMessage id="confirmation.member.birthYearMonth" defaultMessage="Birth Month/Year:" />}
-          value={formatBirthMonthYear(member.birthMonth, member.birthYear)}
+          value={formatBirthMonthYear(member)}
         />
         )}
         <ConfirmationItem

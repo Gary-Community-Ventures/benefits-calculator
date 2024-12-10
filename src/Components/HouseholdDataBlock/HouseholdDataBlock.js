@@ -244,12 +244,12 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           </strong>
           {translateNumber(age)}
         </div>
-        {hasBirthMonthYear(birthMonth, birthYear) && (
+        {hasBirthMonthYear({birthMonth, birthYear}) && (
           <div className="member-added-age">
             <strong>
               <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
             </strong>
-            {formatBirthMonthYear(birthMonth, birthYear)}
+            {formatBirthMonthYear({birthMonth, birthYear})}
           </div>
         )}
         <div className="member-added-income">
