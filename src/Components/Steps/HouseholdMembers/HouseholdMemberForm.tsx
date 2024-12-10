@@ -293,7 +293,7 @@ const HouseholdMemberForm = () => {
         <Stack sx={{ padding: '3rem 0' }} className="section">
           {displayHealthCareQuestion(pageNumber)}
           <RHFOptionCardGroup
-            fields={healthInsuranceFields}
+            fields={watch('healthInsurance')}
             setValue={setValue}
             name="healthInsurance"
             options={pageNumber === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
@@ -305,14 +305,14 @@ const HouseholdMemberForm = () => {
   };
 
   const displayConditionsQuestion = (
-    index: number,
+    pageNumber: number,
     conditionOptions) => {
     const formattedMsgId =
-      index === 1
+      pageNumber === 1
         ? 'householdDataBlock.createConditionsQuestion-do-these-apply-to-you'
         : 'householdDataBlock.createConditionsQuestion-do-these-apply';
 
-    const formattedMsgDefaultMsg = index === 1 ? 'Do any of these apply to you?' : 'Do any of these apply to them?';
+    const formattedMsgDefaultMsg = pageNumber === 1 ? 'Do any of these apply to you?' : 'Do any of these apply to them?';
 
     return (
       <Box sx={{ margin: '3rem 0' }}>
@@ -326,7 +326,7 @@ const HouseholdMemberForm = () => {
           />
         </QuestionDescription>
         <RHFOptionCardGroup
-          fields={conditionFields}
+          fields={watch('conditions')}
           setValue={setValue}
           name="conditions"
           options={pageNumber === 1 ? conditionOptions.you : conditionOptions.them}
