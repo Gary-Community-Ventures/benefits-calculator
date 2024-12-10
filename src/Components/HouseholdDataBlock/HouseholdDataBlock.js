@@ -177,7 +177,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
     }
 
-    let age = calcAge(member.age, member.birthYear, member.birthMonth);
+    let age = calcAge(member);
     if (Number.isNaN(age)) {
       age = 0;
     }
