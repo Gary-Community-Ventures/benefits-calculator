@@ -85,6 +85,13 @@ const HouseholdMemberForm = () => {
         path: ['healthInsurance'],
         //make sure that this only shows up for the person at this index
       }),
+    conditions: z.object({
+      student: z.boolean(),
+      pregnant: z.boolean(),
+      blindOrVisuallyImpaired: z.boolean(),
+      disabled: z.boolean(),
+      longTermDisability: z.boolean(),
+    })
   });
 
   const {
