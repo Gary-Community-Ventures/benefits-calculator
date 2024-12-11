@@ -119,7 +119,7 @@ export type ApiFormData = {
   user?: ApiUserWriteOnly;
   external_id: string | null;
   request_language_code: Language | null;
-  has_benefits: string | null;
+  has_benefits: 'true' | 'false' | 'preferNotToAnswer' | null;
   has_tanf: boolean | null;
   has_wic: boolean | null;
   has_snap: boolean | null;

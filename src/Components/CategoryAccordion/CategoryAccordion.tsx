@@ -25,7 +25,7 @@ const CategoryAccordion = ({ categoryName, categoryOptions, setExpanded, expande
       onChange={(event, isExpanded) => {
         setExpanded(isExpanded ? index : false);
       }}
-      sx={{ marginBottom: '.25rem' }}
+      sx={{ marginBottom: '.25rem', opacity: 0 }}
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon style={{ color: '#ffffff', height: '28.8' }} />}

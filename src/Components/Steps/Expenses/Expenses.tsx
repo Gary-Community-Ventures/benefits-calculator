@@ -168,7 +168,7 @@ const Expenses = () => {
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
-            <RadioGroup {...field} aria-labelledby={translatedAriaLabel} className="expense-radiogroup-margin-bottom">
+            <RadioGroup {...field} aria-label={translatedAriaLabel} className="expense-radiogroup-margin-bottom">
               <FormControlLabel
                 value={'true'}
                 control={<Radio />}

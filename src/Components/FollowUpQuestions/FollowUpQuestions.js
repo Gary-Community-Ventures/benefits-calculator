@@ -1,13 +1,9 @@
 import Radiofield from '../Radiofield/Radiofield';
-import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import Textfield from '../Textfield/Textfield';
 import SignUp from '../SignUp/SignUp';
-import AccordionsContainer from '../AccordionsContainer/AccordionsContainer';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import { useContext, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import './FollowUpQuestions.css';
 
@@ -32,19 +28,6 @@ const FollowUpQuestions = ({
         <div key={index}>
           <QuestionQuestion>{followUp.question}</QuestionQuestion>
           <Radiofield componentDetails={followUp.componentDetails} handleRadioButtonChange={handleRadioButtonChange} />
-        </div>
-      );
-    } else if (followUp.componentDetails.componentType === 'ExpenseBlock') {
-      return (
-        <div key={index}>
-          <Box className="section-container">
-            <Stack className="section">
-              <div className="expense-padding-top">
-                <QuestionQuestion>{followUp.question}</QuestionQuestion>
-              </div>
-            </Stack>
-          </Box>
-          <ExpenseBlock handleExpenseSourcesSubmit={handleExpenseSourcesSubmit} />
         </div>
       );
     } else if (followUp.componentDetails.componentType === 'Textfield') {
@@ -85,13 +68,6 @@ const FollowUpQuestions = ({
             handleCheckboxChange={handleCheckboxChange}
             submitted={followUpSubmitted}
           />
-        </div>
-      );
-    } else if (followUp.componentDetails.componentType === 'AccordionContainer') {
-      return (
-        <div className="accordions-container" key={index}>
-          <QuestionQuestion>{followUp.question}</QuestionQuestion>
-          <AccordionsContainer componentDetails={followUp.componentDetails} submitted={followUpSubmitted} />
         </div>
       );
     }

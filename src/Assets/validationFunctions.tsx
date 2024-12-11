@@ -2,15 +2,7 @@ import { useContext, useState } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
 import type { ErrorController, ValidationFunction, MessageFunction } from '../Types/ErrorController';
-import type {
-  Expense,
-  HealthInsurance,
-  HouseholdData,
-  IncomeStream,
-  SignUpInfo,
-  Benefits,
-  FormData,
-} from '../Types/FormData';
+import type { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo, FormData } from '../Types/FormData';
 import ErrorMessageWrapper from '../Components/ErrorMessage/ErrorMessageWrapper';
 
 function useErrorController(hasErrorFunc: ValidationFunction<any>, messageFunc: MessageFunction<any>): ErrorController {
@@ -498,35 +490,6 @@ const acuteHHConditionsHasError = () => {
   return false;
 };
 
-const benefitsHasError: ValidationFunction<string> = (hasBenefits, formData) => {
-  if (hasBenefits !== 'true') {
-    return false;
-  }
-  if (formData === undefined) {
-    throw new Error('FormData not provided');
-  }
-  const { benefits } = formData;
-  const selectedAtLeastOneBenefit = Object.keys(benefits).some(
-    (benefit) => formData.benefits[benefit as keyof Benefits] === true,
-  );
-
-  //return the opposite since we're indicating whether or not there's an error
-  return !selectedAtLeastOneBenefit;
-};
-
-const displayBenefitsHelperText: MessageFunction<string> = (hasBenefits, formData) => {
-  if (benefitsHasError(hasBenefits, formData)) {
-    return (
-      <ErrorMessageWrapper fontSize="1.5rem">
-        <FormattedMessage
-          id="validation-helperText.benefits"
-          defaultMessage='If your household does not receive any of these benefits, please select the "No" option above.'
-        />
-      </ErrorMessageWrapper>
-    );
-  }
-};
-
 const countySelectHelperText: MessageFunction<string> = () => {
   return (
     <ErrorMessageWrapper fontSize="1rem">
@@ -625,8 +588,6 @@ export {
   healthInsuranceHasError,
   displayHealthInsuranceHelperText,
   acuteHHConditionsHasError,
-  benefitsHasError,
-  displayBenefitsHelperText,
   countySelectHelperText,
   expenseTypeHelperText,
   relationTypeHelperText,

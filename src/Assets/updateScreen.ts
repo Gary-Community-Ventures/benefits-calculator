@@ -28,7 +28,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     expenses: expenses,
     household_assets: formData.householdAssets || 0,
     request_language_code: languageCode,
-    has_benefits: formData.hasBenefits ?? 'preferNotToAnswer',
+    has_benefits: formData.hasBenefits,
     has_acp: formData.benefits.acp,
     has_andcs: formData.benefits.andcs,
     has_cccap: formData.benefits.cccap,
