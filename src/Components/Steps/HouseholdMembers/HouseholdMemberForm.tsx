@@ -377,6 +377,7 @@ const HouseholdMemberForm = () => {
                     );
                   })}
                 </Select>
+                {errors.relationshipToHH !== undefined && <FormHelperText>{renderRelationshipToHHHelperText()}</FormHelperText>}
               </>
             )}
           />
