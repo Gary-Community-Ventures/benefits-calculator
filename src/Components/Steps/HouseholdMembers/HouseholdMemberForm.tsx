@@ -142,14 +142,10 @@ const HouseholdMemberForm = () => {
       // incomeStreams: [],
     }
   })
-  const healthInsuranceFields = watch('healthInsurance');
-  const conditionFields = watch('conditions')
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
     if (uuid) {
-      const updatedFormData = { ...formData };
-      setFormData(updatedFormData);
-      await updateScreen(uuid, updatedFormData, locale);
+      const currentMemberDataAtThisIndex = householdMemberFormData;
       nextStep();
     }
   };
