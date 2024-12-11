@@ -332,17 +332,6 @@ const HouseholdMemberForm = () => {
   };
 
   const createHOfHRelationQuestion = (relationshipOptions: Record<string, FormattedMessageType>) => {
-    // const disabledSelectMenuItem = {
-    //   "disabled-select": <MenuItem value="disabled-select" key="disabled-select" disabled>
-    //     <FormattedMessage
-    //       id="householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText"
-    //       defaultMessage="Click to select relationship"
-    //     />
-    //   </MenuItem>
-    // };
-
-    // const completeRelationshipOptions = [disabledSelectMenuItem, ...Object.entries(relationshipOptions)];
-    // console.log({completeRelationshipOptions})
     return (
       <Box sx={{ marginBottom: '1.5rem' }}>
         <QuestionQuestion>
