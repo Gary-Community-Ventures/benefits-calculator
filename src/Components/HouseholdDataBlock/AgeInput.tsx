@@ -12,6 +12,7 @@ import {
 } from '../../Assets/validationFunctions';
 import AutoComplete from '../AutoComplete/AutoComplete';
 import './AgeInput.css';
+import { getCurrentMonthYear } from '../../Assets/age';
 
 const MONTHS = {
   1: <FormattedMessage id="ageInput.months.january" defaultMessage="January" />,
@@ -28,24 +29,13 @@ const MONTHS = {
   12: <FormattedMessage id="ageInput.months.december" defaultMessage="December" />,
 };
 
-const date = new Date();
-const CURRENT_YEAR = date.getFullYear();
-// January is 0 for getMonth
-const CURRENT_MONTH = date.getMonth() + 1;
-
+const {CURRENT_YEAR} = getCurrentMonthYear();
 const MAX_AGE = 130;
 const YEARS = Array.from({ length: MAX_AGE }, (_, i) => {
   const inputYear = CURRENT_YEAR - i;
   return String(inputYear);
 });
 
-export function calcAge(birthYear: number, birthMonth: number) {
-  if (CURRENT_MONTH >= birthMonth) {
-    return CURRENT_YEAR - birthYear;
-  }
-
-  return CURRENT_YEAR - birthYear - 1;
-}
 
 type Props = {
   birthMonth: number | null;

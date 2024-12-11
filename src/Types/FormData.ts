@@ -11,6 +11,7 @@ export type IncomeStream = {
 };
 
 export type HouseholdData = {
+  age?: number; // deprecated: used for historical screens only
   birthYear?: number;
   birthMonth?: number;
   relationshipToHH: string;
