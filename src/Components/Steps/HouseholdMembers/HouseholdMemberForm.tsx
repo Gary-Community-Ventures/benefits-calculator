@@ -104,7 +104,7 @@ const HouseholdMemberForm = () => {
       disabled: z.boolean(),
       longTermDisability: z.boolean(),
     }),
-    relationshipToHH: z.string().min(1)
+    relationshipToHH: z.string().refine((value) => Object.keys(relationshipOptions).includes(value))
   });
 
   const {
