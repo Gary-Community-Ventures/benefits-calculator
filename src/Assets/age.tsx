@@ -12,16 +12,16 @@ export function getCurrentMonthYear() {
   };
 }
 
-type MemberBirthMonthYear = Required<Pick<HouseholdData, "birthMonth" | "birthYear">>
+type MemberBirthDate = Pick<HouseholdData, "birthMonth" | "birthYear">
 
-export function hasBirthMonthYear(member: MemberBirthMonthYear | Partial<HouseholdData>): member is MemberBirthMonthYear {
-  const {birthMonth, birthYear} = member;
+export function hasBirthMonthYear(birthDate: MemberBirthDate | Required<MemberBirthDate>): birthDate is Required<MemberBirthDate> {
+  const {birthMonth, birthYear} = birthDate;
   const hasBirthYear = birthYear !== undefined && birthYear !== null;
   const hasBirthMonth = birthMonth !== undefined && birthMonth !== null;
   return hasBirthYear && hasBirthMonth;
 }
 
-export function calcAge(member: Partial<HouseholdData>) {
+export function calcAge(member: HouseholdData) {
   const hasBirthDate = hasBirthMonthYear(member);
 
   if (!hasBirthDate) {
@@ -40,10 +40,10 @@ export function calcAge(member: Partial<HouseholdData>) {
 
 export function useFormatBirthMonthYear() {
   const translateNumber = useTranslateNumber();
-  return (member: Partial<HouseholdData>) => {
-    const hasBirthDate = hasBirthMonthYear(member);
+  return (birthDate: MemberBirthDate) => {
+    const hasBirthDate = hasBirthMonthYear(birthDate);
     if (hasBirthDate) {
-      const {birthMonth, birthYear} = member;
+      const {birthMonth, birthYear} = birthDate;
       const formattedMonth = translateNumber(String(birthMonth).padStart(2, '0'));
       const formattedYear = translateNumber(birthYear!);
       return `${formattedMonth}/${formattedYear}`;
