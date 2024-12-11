@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
-import { useContext, useState } from 'react';
+import { ReactNode, useContext, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
@@ -31,8 +31,8 @@ type CategoryBenefitsConfig = {
 };
 
 type CategoryBenefitsProps = {
-  alreadyHasBenefits: string[];
-  onChange: (alreadyHasBenefits: string[]) => void;
+  alreadyHasBenefits: { [key: string]: boolean };
+  onChange: (alreadyHasBenefits: { [key: string]: boolean }) => void;
 };
 
 function CategoryBenefits({ alreadyHasBenefits, onChange }: CategoryBenefitsProps) {
@@ -55,8 +55,6 @@ function CategoryBenefits({ alreadyHasBenefits, onChange }: CategoryBenefitsProp
           };
         });
 
-        const benefitValues = Object.keys(details.benefits);
-
         return (
           <CheckBoxAccordion
             name={details.category_name}
@@ -73,18 +71,9 @@ function CategoryBenefits({ alreadyHasBenefits, onChange }: CategoryBenefitsProp
             }}
             values={alreadyHasBenefits}
             onChange={(values) => {
-              let newAlreadyHas: string[] = [...alreadyHasBenefits];
+              let newAlreadyHas: { [key: string]: boolean } = { ...alreadyHasBenefits };
 
-              for (const value of benefitValues) {
-                if (values.includes(value)) {
-                  if (newAlreadyHas.includes(value)) {
-                    continue;
-                  }
-                  newAlreadyHas.push(value);
-                } else {
-                  newAlreadyHas = newAlreadyHas.filter((v) => v !== value);
-                }
-              }
+              newAlreadyHas = { ...newAlreadyHas, ...values };
 
               onChange(newAlreadyHas);
             }}
@@ -103,21 +92,16 @@ function AlreadyHasBenefits() {
   const backNavigationFunction = useDefaultBackNavigationFunction('hasBenefits');
   const nextStep = useGoToNextStep('hasBenefits');
 
-  const benefits = useConfig<CategoryBenefitsConfig>('category_benefits');
-  const allBenefits = Object.values(benefits)
-    .map((value) => {
-      return Object.keys(value.benefits);
-    })
-    .flat();
-
   const formSchema = z
     .object({
       hasBenefits: z.enum(['true', 'false', 'preferNotToAnswer']),
-      alreadyHasBenefits: z.array(z.string()),
+      alreadyHasBenefits: z.record(z.string(), z.boolean()),
     })
     .refine(
       ({ hasBenefits, alreadyHasBenefits }) => {
-        if (hasBenefits === 'true' && alreadyHasBenefits.length === 0) {
+        const noBenefitsSelected = Object.values(alreadyHasBenefits).every((value) => !value);
+
+        if (hasBenefits === 'true' && noBenefitsSelected) {
           return false;
         }
 
@@ -133,39 +117,28 @@ function AlreadyHasBenefits() {
       },
     );
 
-  const alreadyHasBenefits = Object.entries(formData.benefits)
-    .filter(([_, value]) => value)
-    .map(([name, _]) => name);
-
   const {
     control,
-    formState: { errors },
+    formState: { errors, isSubmitted },
     handleSubmit,
     setValue,
     watch,
-  } = useForm<{ hasBenefits: 'true' | 'false' | 'preferNotToAnswer'; alreadyHasBenefits: string[] }>({
+  } = useForm<{ hasBenefits: 'true' | 'false' | 'preferNotToAnswer'; alreadyHasBenefits: Benefits }>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       hasBenefits: formData.hasBenefits,
-      alreadyHasBenefits: alreadyHasBenefits,
+      alreadyHasBenefits: formData.benefits,
     },
   });
+
+  console.log(errors);
 
   const formSubmitHandler = ({ alreadyHasBenefits, hasBenefits }: z.infer<typeof formSchema>) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
 
-    const newBenefits: Benefits = {};
-    for (const benefit of allBenefits) {
-      if (hasBenefits === 'true') {
-        newBenefits[benefit] = alreadyHasBenefits.includes(benefit);
-      } else {
-        newBenefits[benefit] = false;
-      }
-    }
-
-    const newFormData = { ...formData, hasBenefits: hasBenefits, benefits: newBenefits };
+    const newFormData = { ...formData, hasBenefits: hasBenefits, benefits: alreadyHasBenefits };
 
     setFormData(newFormData);
     updateScreen(uuid, newFormData, locale);
@@ -235,10 +208,18 @@ function AlreadyHasBenefits() {
             </QuestionQuestion>
             <CategoryBenefits
               alreadyHasBenefits={watch('alreadyHasBenefits')}
-              onChange={(values) => setValue('alreadyHasBenefits', values)}
+              onChange={(values) =>
+                setValue('alreadyHasBenefits', values, {
+                  shouldValidate: isSubmitted,
+                  shouldDirty: true,
+                  shouldTouch: true,
+                })
+              }
             />
             {errors.alreadyHasBenefits !== undefined && (
-              <ErrorMessageWrapper fontSize="1.5rem">{errors.alreadyHasBenefits.message}</ErrorMessageWrapper>
+              <ErrorMessageWrapper fontSize="1.5rem">
+                {errors.alreadyHasBenefits.message as ReactNode}
+              </ErrorMessageWrapper>
             )}
           </div>
         )}

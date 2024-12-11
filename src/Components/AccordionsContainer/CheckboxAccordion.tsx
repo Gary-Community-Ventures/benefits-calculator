@@ -8,21 +8,28 @@ import { FormattedMessageType } from '../../Types/Questions';
 import { Checkbox, FormControlLabel } from '@mui/material';
 import './CheckboxAccordion.css';
 
-type Option<T = string> = {
+type Option<T extends string | number> = {
   value: T;
   text: ReactNode;
 };
 
-type Props<T = string> = {
+type Props<T extends string | number> = {
   name: FormattedMessageType;
   options: Option<T>[];
   expanded: boolean;
   onExpand: (isExpanded: boolean) => void;
-  values: T[];
-  onChange: (values: T[]) => void;
+  values: Record<T, boolean>;
+  onChange: (values: Record<T, boolean>) => void;
 };
 
-function CheckBoxAccordion<T = string>({ name, options, onExpand, expanded, values, onChange }: Props<T>) {
+function CheckBoxAccordion<T extends string | number>({
+  name,
+  options,
+  onExpand,
+  expanded,
+  values,
+  onChange,
+}: Props<T>) {
   const { theme } = useContext(Context);
 
   return (
@@ -45,12 +52,9 @@ function CheckBoxAccordion<T = string>({ name, options, onExpand, expanded, valu
       <AccordionDetails>
         {options.map((option, index) => {
           const onCheckboxChange = () => {
-            let newValue: T[] = [];
-            if (values.includes(option.value)) {
-              newValue = values.filter((value) => value !== option.value);
-            } else {
-              newValue = [...values, option.value];
-            }
+            let newValue: Record<T, boolean> = { ...values };
+
+            newValue[option.value] = !newValue[option.value];
 
             onChange(newValue);
           };
@@ -59,7 +63,7 @@ function CheckBoxAccordion<T = string>({ name, options, onExpand, expanded, valu
             <div key={index}>
               <FormControlLabel
                 sx={{ alignItems: 'center', marginTop: '1rem' }}
-                control={<Checkbox checked={values.includes(option.value)} onChange={onCheckboxChange} />}
+                control={<Checkbox checked={values[option.value]} onChange={onCheckboxChange} />}
                 label={option.text}
               />
             </div>
