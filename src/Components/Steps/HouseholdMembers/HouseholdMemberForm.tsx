@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import HHMSummaryCards from './HHMSummaryCards';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -27,6 +27,7 @@ const HouseholdMemberForm = () => {
   const { formData, setFormData, locale } = useContext(Context);
   const { uuid, page } = useParams();
   const navigate = useNavigate();
+  const intl = useIntl();
   const pageNumber = Number(page);
   const currentMemberIndex = pageNumber - 1;
   const householdMemberFormData = formData.householdData[currentMemberIndex];
@@ -69,7 +70,7 @@ const HouseholdMemberForm = () => {
   }, [YEARS]);
 
   // birthYear > CURRENT_YEAR || birthYear < CURRENT_YEAR - MAX_AGE;
-  //page => pageNumber
+  const hasIncomeSchema = z.string().regex(/^true|false$/);
 
   const formSchema = z.object({
     /*
@@ -104,8 +105,10 @@ const HouseholdMemberForm = () => {
       disabled: z.boolean(),
       longTermDisability: z.boolean(),
     }),
-    relationshipToHH: z.string().refine((value) => Object.keys(relationshipOptions).includes(value))
+    relationshipToHH: z.string().refine((value) => Object.keys(relationshipOptions).includes(value)),
+    hasIncome: hasIncomeSchema,
   });
+  type FormSchema = z.infer<typeof formSchema>;
 
   const {
     control,
@@ -138,10 +141,7 @@ const HouseholdMemberForm = () => {
         longTermDisability: false,
       },
       relationshipToHH: householdMemberFormData?.relationshipToHH ? householdMemberFormData.relationshipToHH : pageNumber === 1 ? 'headOfHousehold' : '',
-      // hasIncome: false,
-      // incomeStreams: [],
-    }
-  })
+      hasIncome: 'false',
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
     if (uuid) {
@@ -386,6 +386,54 @@ const HouseholdMemberForm = () => {
     );
   };
 
+  const createIncomeRadioQuestion = (index:number) => {
+    const translatedAriaLabel = intl.formatMessage({
+      id: 'householdDataBlock.createIncomeRadioQuestion-ariaLabel',
+      defaultMessage: 'has an income',
+    });
+
+    const formattedMsgId =
+      index === 1 ? 'questions.hasIncome' : 'householdDataBlock.createIncomeRadioQuestion-questionLabel';
+
+    const formattedMsgDefaultMsg =
+      index === 1
+        ? 'Do you have an income?'
+        : 'Does this individual in your household have significant income you have not already included?';
+
+    return (
+      <Box className="section-container" sx={{ paddingTop: '3rem' }}>
+        <Box className="section">
+          <QuestionQuestion>
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+            <HelpButton
+              helpText="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
+              helpId="householdDataBlock.createIncomeRadioQuestion-questionDescription"
+            />
+          </QuestionQuestion>
+          <Controller
+            name="hasIncome"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <RadioGroup {...field} aria-labelledby={translatedAriaLabel} sx={{ marginBottom: '1rem' }}>
+                <FormControlLabel
+                  value={'true'}
+                  control={<Radio />}
+                  label={<FormattedMessage id="radiofield.label-yes" defaultMessage="Yes" />}
+                />
+                <FormControlLabel
+                  value={'false'}
+                  control={<Radio />}
+                  label={<FormattedMessage id="radiofield.label-no" defaultMessage="No" />}
+                />
+              </RadioGroup>
+            )}
+          />
+        </Box>
+      </Box>
+    );
+  }
+
   return (
     <main className="benefits-form">
       <QuestionHeader>
@@ -401,11 +449,15 @@ const HouseholdMemberForm = () => {
       {/* <HHMSummaryCards activeMemberData={getValues()} page={pageNumber} formData={formData} /> */}
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         {createAgeQuestion(pageNumber)}
-        {pageNumber === 1 && displayHealthInsuranceBlock(pageNumber, healthInsuranceOptions)}
+        {pageNumber !== 1 && createHOfHRelationQuestion(relationshipOptions)}
+        {displayHealthInsuranceBlock(pageNumber, healthInsuranceOptions)}
         {displayConditionsQuestion(pageNumber, conditionOptions)}
-
-
-        <PrevAndContinueButtons backNavigationFunction={() => backNavigationFunction(uuid, currentStepId, pageNumber)}/>
+        <div>
+          <Stack sx={{ margin: '3rem 0' }}>{createIncomeRadioQuestion(pageNumber)}</Stack>
+        </div>
+        <PrevAndContinueButtons
+          backNavigationFunction={() => backNavigationFunction(uuid, currentStepId, pageNumber)}
+        />
       </form>
     </main>
   );
