@@ -177,6 +177,14 @@ const HouseholdMemberForm = () => {
     );
   }
 
+  const renderRelationshipToHHHelperText = () => {
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="errorMessage-HHMemberRelationship" defaultMessage="Please select a relationship" />
+      </ErrorMessageWrapper>
+    );
+  }
+
   const createAgeQuestion = (personIndex: number) => {
     return (
       <Box sx={{ marginBottom: '1.5rem' }}>
