@@ -2,15 +2,7 @@ import { useContext, useState } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
 import type { ErrorController, ValidationFunction, MessageFunction } from '../Types/ErrorController';
-import type {
-  Expense,
-  HealthInsurance,
-  HouseholdData,
-  IncomeStream,
-  SignUpInfo,
-  Benefits,
-  FormData,
-} from '../Types/FormData';
+import type { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo, FormData } from '../Types/FormData';
 import ErrorMessageWrapper from '../Components/ErrorMessage/ErrorMessageWrapper';
 
 function useErrorController(hasErrorFunc: ValidationFunction<any>, messageFunc: MessageFunction<any>): ErrorController {
@@ -596,8 +588,6 @@ export {
   healthInsuranceHasError,
   displayHealthInsuranceHelperText,
   acuteHHConditionsHasError,
-  benefitsHasError,
-  displayBenefitsHelperText,
   countySelectHelperText,
   expenseTypeHelperText,
   relationTypeHelperText,

@@ -1,13 +1,9 @@
 import Radiofield from '../Radiofield/Radiofield';
-import ExpenseBlock from '../ExpenseBlock/ExpenseBlock';
 import Textfield from '../Textfield/Textfield';
 import SignUp from '../SignUp/SignUp';
-import AccordionsContainer from '../AccordionsContainer/AccordionsContainer';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import { useContext, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import './FollowUpQuestions.css';
 
