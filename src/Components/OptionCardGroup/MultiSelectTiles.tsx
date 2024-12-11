@@ -5,19 +5,19 @@ import { ReactComponent as Checkmark } from '../../Assets/OptionCardIcons/checkm
 import './MultiSelectTiles.css';
 import { useIntl } from 'react-intl';
 
-type Option<T = string | number> = {
+type Option<T extends string | number> = {
   value: T;
   text: FormattedMessageType;
   icon: ReactNode;
 };
 
-type TileProps<T> = {
+type TileProps<T extends string | number> = {
   option: Option<T>;
   selected: boolean;
   onClick: () => void;
 };
 
-function Tile<T = string | number>({ option, selected, onClick }: TileProps<T>) {
+function Tile<T extends string | number>({ option, selected, onClick }: TileProps<T>) {
   const { formatMessage } = useIntl();
   return (
     <CardActionArea sx={{ width: '15rem' }} className="card-action-area" onClick={onClick}>
@@ -41,28 +41,24 @@ function Tile<T = string | number>({ option, selected, onClick }: TileProps<T>) 
   );
 }
 
-type MultiSelectTilesProps<T = string | number> = {
+type MultiSelectTilesProps<T extends string | number> = {
   options: Option<T>[];
-  values: T[];
-  onChange: (value: T[]) => void;
+  values: Record<T, boolean>;
+  onChange: (value: Record<T, boolean>) => void;
 };
 
-function MultiSelectTiles<T = string | number>({ options, values, onChange }: MultiSelectTilesProps<T>) {
+function MultiSelectTiles<T extends string | number>({ options, values, onChange }: MultiSelectTilesProps<T>) {
   return (
     <div className="multiselect-tiles-container">
       {options.map((option, index) => {
         const onClick = () => {
-          let newValues: T[];
-          if (values.includes(option.value)) {
-            newValues = values.filter((value) => value !== option.value);
-          } else {
-            newValues = [...values, option.value];
-          }
+          let newValues: Record<T, boolean> = { ...values };
+          newValues[option.value] = !newValues[option.value];
 
           onChange(newValues);
         };
 
-        const selected = values.includes(option.value);
+        const selected = values[option.value];
 
         return <Tile option={option} onClick={onClick} key={index} selected={selected} />;
       })}
