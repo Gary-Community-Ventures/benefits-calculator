@@ -34,6 +34,8 @@ const HouseholdMemberForm = () => {
     useConfig<Record<keyof HealthInsurance, { text: FormattedMessageType; icon: ReactNode }>>('health_insurance_options');
   const conditionOptions =
     useConfig<Record<keyof Conditions, { text: FormattedMessageType; icon: ReactNode }>>('condition_options');
+  const relationshipOptions =
+    useConfig<Record<string,FormattedMessageType>>('relationship_options');
   const currentStepId = useStepNumber('householdData', formData.immutableReferrer);
   // const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
   //   const setPage = (uuid: string, currentStepId: number, pageNumber: number) => {
@@ -101,7 +103,8 @@ const HouseholdMemberForm = () => {
       blindOrVisuallyImpaired: z.boolean(),
       disabled: z.boolean(),
       longTermDisability: z.boolean(),
-    })
+    }),
+    relationshipToHH: z.string().min(1)
   });
 
   const {
@@ -134,14 +137,7 @@ const HouseholdMemberForm = () => {
         disabled: false,
         longTermDisability: false,
       },
-      // relationshipToHH: pageNumber === 1 ? 'headOfHousehold' : '',
-      // conditions: {
-      //   student: false,
-      //   pregnant: false,
-      //   blindOrVisuallyImpaired: false,
-      //   disabled: false,
-      //   longTermDisability: false,
-      // },
+      relationshipToHH: householdMemberFormData?.relationshipToHH ? householdMemberFormData.relationshipToHH : pageNumber === 1 ? 'headOfHousehold' : '',
       // hasIncome: false,
       // incomeStreams: [],
     }
@@ -331,6 +327,67 @@ const HouseholdMemberForm = () => {
           name="conditions"
           options={pageNumber === 1 ? conditionOptions.you : conditionOptions.them}
         />
+      </Box>
+    );
+  };
+
+  const createHOfHRelationQuestion = (relationshipOptions: Record<string, FormattedMessageType>) => {
+    // const disabledSelectMenuItem = {
+    //   "disabled-select": <MenuItem value="disabled-select" key="disabled-select" disabled>
+    //     <FormattedMessage
+    //       id="householdDataBlock.createDropdownCompProps-disabledSelectMenuItemText"
+    //       defaultMessage="Click to select relationship"
+    //     />
+    //   </MenuItem>
+    // };
+
+    // const completeRelationshipOptions = [disabledSelectMenuItem, ...Object.entries(relationshipOptions)];
+    // console.log({completeRelationshipOptions})
+    return (
+      <Box sx={{ marginBottom: '1.5rem' }}>
+        <QuestionQuestion>
+          <FormattedMessage
+            id="householdDataBlock.createHOfHRelationQuestion-relation"
+            defaultMessage="What is this person’s relationship to you?"
+          />
+        </QuestionQuestion>
+        <FormControl
+          sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
+          error={errors.relationshipToHH !== undefined}
+        >
+          <InputLabel id="relation-to-hh-label">
+            <FormattedMessage
+              id="householdDataBlock.createDropdownCompProps-inputLabelText"
+              defaultMessage="Relation"
+            />
+          </InputLabel>
+          <Controller
+            name="relationshipToHH"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Select
+                  {...field}
+                  labelId="relationship-To-HH"
+                  label={
+                    <FormattedMessage
+                      id="householdDataBlock.createDropdownCompProps-label"
+                      defaultMessage="Relation Type"
+                    />
+                  }
+                >
+                  {Object.entries(relationshipOptions).map(([key, value]) => {
+                    return (
+                      <MenuItem value={key} key={key}>
+                        {value}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </>
+            )}
+          />
+        </FormControl>
       </Box>
     );
   };
