@@ -37,6 +37,11 @@ const HouseholdMemberForm = () => {
     useConfig<Record<keyof Conditions, { text: FormattedMessageType; icon: ReactNode }>>('condition_options');
   const relationshipOptions =
     useConfig<Record<string,FormattedMessageType>>('relationship_options');
+    const incomeOptions = useConfig<Record<string,FormattedMessageType>>('income_options');
+    const incomeStreamsMenuItems = createMenuItems(
+      incomeOptions,
+      <FormattedMessage id="personIncomeBlock.createMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
+    );
   const currentStepId = useStepNumber('householdData', formData.immutableReferrer);
   // const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
   //   const setPage = (uuid: string, currentStepId: number, pageNumber: number) => {
@@ -70,6 +75,14 @@ const HouseholdMemberForm = () => {
   }, [YEARS]);
 
   // birthYear > CURRENT_YEAR || birthYear < CURRENT_YEAR - MAX_AGE;
+  const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
+  const incomeSourcesSchema = z.object({
+    incomeStreamName:  z.string().min(1),
+    incomeAmount: z.string().regex(oneOrMoreDigitsButNotAllZero),
+    incomeFrequency: z.string().min(1),
+    hoursPerWeek: z.string().regex(oneOrMoreDigitsButNotAllZero),
+  });
+  const incomeStreamsSchema = z.array(incomeSourcesSchema);
   const hasIncomeSchema = z.string().regex(/^true|false$/);
 
   const formSchema = z.object({
@@ -107,6 +120,7 @@ const HouseholdMemberForm = () => {
     }),
     relationshipToHH: z.string().refine((value) => Object.keys(relationshipOptions).includes(value)),
     hasIncome: hasIncomeSchema,
+    incomeStreams: incomeStreamsSchema,
   });
   type FormSchema = z.infer<typeof formSchema>;
 
@@ -115,9 +129,9 @@ const HouseholdMemberForm = () => {
     formState: { errors },
     handleSubmit,
     watch,
-    getValues,
     setValue,
-  } = useForm<z.infer<typeof formSchema>>({
+    getValues
+  } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       birthMonth: householdMemberFormData?.birthMonth ? String(householdMemberFormData.birthMonth) : '',
@@ -142,6 +156,15 @@ const HouseholdMemberForm = () => {
       },
       relationshipToHH: householdMemberFormData?.relationshipToHH ? householdMemberFormData.relationshipToHH : pageNumber === 1 ? 'headOfHousehold' : '',
       hasIncome: 'false',
+      incomeStreams: householdMemberFormData?.incomeStreams ?? []
+    }
+  });
+  const watchHasIncome = watch('hasIncome');
+  const hasTruthyIncome = watchHasIncome === 'true';
+  const { fields, append, remove, replace } = useFieldArray({
+    control,
+    name: 'incomeStreams',
+  });
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
     if (uuid) {
