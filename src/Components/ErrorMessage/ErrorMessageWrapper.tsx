@@ -2,9 +2,9 @@ import { PropsWithChildren } from 'react';
 import ErrorIcon from '@mui/icons-material/Error';
 import './ErrorMessageWrapper.css';
 
-type Props = {
+type Props = PropsWithChildren<{
   fontSize: string;
-} & PropsWithChildren;
+}>;
 
 export default function ErrorMessageWrapper({ children, fontSize }: Props) {
   return (
