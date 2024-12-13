@@ -78,17 +78,7 @@ export type SignUpInfo = {
   serverError?: boolean;
 };
 
-export type AcuteHHConditions = {
-  food: boolean;
-  babySupplies: boolean;
-  housing: boolean;
-  support: boolean;
-  childDevelopment: boolean;
-  familyPlanning: boolean;
-  jobResources: boolean;
-  dentalCare: boolean;
-  legalServices: boolean;
-};
+export type AcuteHHConditions = { [key: string]: boolean };
 
 export type FormData = {
   whiteLabel: string;
