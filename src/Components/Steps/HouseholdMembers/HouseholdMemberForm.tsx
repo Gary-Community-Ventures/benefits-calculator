@@ -481,7 +481,7 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const renderIncomeStreamNameDropdownMenu = (field: FieldArrayWithId<FormSchema>, index: number) => {
+  const renderIncomeStreamNameSelect = (field: FieldArrayWithId<FormSchema>, index: number) => {
     return (
       <FormControl
         sx={{ minWidth: 210, maxWidth: '100%' }}
