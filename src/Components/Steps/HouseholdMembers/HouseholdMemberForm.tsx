@@ -166,6 +166,23 @@ const HouseholdMemberForm = () => {
     name: 'incomeStreams',
   });
 
+  useEffect(() => {
+    const noIncomeStreamsAreListed = Number(getValues('incomeStreams').length === 0);
+    if (hasTruthyIncome && noIncomeStreamsAreListed) {
+      append({
+        incomeStreamName: '',
+        incomeAmount: '',
+        incomeFrequency: '',
+        hoursPerWeek: '',
+      });
+    }
+
+    if (!hasTruthyIncome) {
+      replace([]);
+    }
+
+  }, [watchHasIncome]);
+
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
     if (uuid) {
       const currentMemberDataAtThisIndex = householdMemberFormData;
