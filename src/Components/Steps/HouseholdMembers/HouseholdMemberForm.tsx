@@ -474,6 +474,47 @@ const HouseholdMemberForm = () => {
     );
   }
 
+  const renderIncomeStreamNameDropdownMenu = (field: FieldArrayWithId<FormSchema>, index: number) => {
+    return (
+      <FormControl
+        sx={{ minWidth: 210, maxWidth: '100%' }}
+        error={errors.incomeStreams?.[index]?.incomeStreamName !== undefined}
+      >
+        <InputLabel id={`income-type-label-${index}`}>
+          <FormattedMessage
+            id="personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel"
+            defaultMessage="Income Type"
+          />
+        </InputLabel>
+        <Controller
+          name={`incomeStreams.${index}.incomeStreamName`}
+          control={control}
+          render={({ field }) => (
+            <>
+              <Select
+                {...field}
+                labelId={`income-type-label-${index}`}
+                id={`incomeStreams.${index}.incomeStreamName`}
+                label={
+                  <FormattedMessage
+                    id="personIncomeBlock.createIncomeStreamsDropdownMenu-inputLabel"
+                    defaultMessage="Income Type"
+                  />
+                }
+                sx={{ backgroundColor: '#fff' }}
+              >
+                {incomeStreamsMenuItems}
+              </Select>
+              {errors.incomeStreams?.[index]?.incomeStreamName !== undefined && (
+                <FormHelperText>income stream error here</FormHelperText>
+              )}
+            </>
+          )}
+        />
+      </FormControl>
+    );
+  };
+
   return (
     <main className="benefits-form">
       <QuestionHeader>
