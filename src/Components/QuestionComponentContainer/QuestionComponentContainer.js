@@ -25,6 +25,7 @@ import questions from '../../Assets/questions';
 import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
 import AlreadyHasBenefits from '../Steps/AlreadyHasBenefits';
 import ImmediateNeeds from '../Steps/ImmediateNeeds';
+import SignUp from '../Steps/SignUp';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -260,6 +261,12 @@ const QuestionComponentContainer = ({
       return (
         <main className="benefits-form">
           <ImmediateNeeds />
+        </main>
+      );
+    case 'signUpInfo':
+      return (
+        <main className="benefits-form">
+          <SignUp />
         </main>
       );
     default:
