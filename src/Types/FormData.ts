@@ -11,6 +11,7 @@ export type IncomeStream = {
 };
 
 export type HouseholdData = {
+  age?: number; // deprecated: used for historical screens only
   birthYear?: number;
   birthMonth?: number;
   relationshipToHH: string;
@@ -48,17 +49,7 @@ export type SignUpInfo = {
   serverError?: boolean;
 };
 
-export type AcuteHHConditions = {
-  food: boolean;
-  babySupplies: boolean;
-  housing: boolean;
-  support: boolean;
-  childDevelopment: boolean;
-  familyPlanning: boolean;
-  jobResources: boolean;
-  dentalCare: boolean;
-  legalServices: boolean;
-};
+export type AcuteHHConditions = { [key: string]: boolean };
 
 export type FormData = {
   whiteLabel: string;

@@ -24,6 +24,7 @@ import ReferralSourceStep from '../Steps/Referrer';
 import questions from '../../Assets/questions';
 import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
 import AlreadyHasBenefits from '../Steps/AlreadyHasBenefits';
+import ImmediateNeeds from '../Steps/ImmediateNeeds';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -253,6 +254,12 @@ const QuestionComponentContainer = ({
       return (
         <main className="benefits-form">
           <AlreadyHasBenefits />
+        </main>
+      );
+    case 'acuteHHConditions':
+      return (
+        <main className="benefits-form">
+          <ImmediateNeeds />
         </main>
       );
     default:
