@@ -490,7 +490,7 @@ function HasBenefits() {
         />
       }
       editAriaLabel={editHasBenefitsAriaLabel}
-      stepName="householdAssets"
+      stepName="hasBenefits"
     >
       {alreadyHasBenefits()}
     </ConfirmationBlock>
@@ -534,7 +534,7 @@ function AcuteConditions() {
         <FormattedMessage id="confirmation.displayAllFormData-acuteHHConditions" defaultMessage="Immediate Needs" />
       }
       editAriaLabel={editAcuteConditionsAriaLabel}
-      stepName="hasBenefits"
+      stepName="acuteHHConditions"
     >
       {formatedNeeds()}
     </ConfirmationBlock>
