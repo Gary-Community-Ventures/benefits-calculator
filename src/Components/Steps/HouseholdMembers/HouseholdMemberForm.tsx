@@ -473,6 +473,13 @@ const HouseholdMemberForm = () => {
       </Box>
     );
   }
+  const renderIncomeStreamNameHelperText = () => {
+    return (
+      <ErrorMessageWrapper fontSize="1rem">
+        <FormattedMessage id="errorMessage-incomeType" defaultMessage="Please select an income type" />
+      </ErrorMessageWrapper>
+    );
+  };
 
   const renderIncomeStreamNameDropdownMenu = (field: FieldArrayWithId<FormSchema>, index: number) => {
     return (
@@ -506,7 +513,7 @@ const HouseholdMemberForm = () => {
                 {incomeStreamsMenuItems}
               </Select>
               {errors.incomeStreams?.[index]?.incomeStreamName !== undefined && (
-                <FormHelperText>income stream error here</FormHelperText>
+                <FormHelperText>{renderIncomeStreamNameHelperText()}</FormHelperText>
               )}
             </>
           )}
