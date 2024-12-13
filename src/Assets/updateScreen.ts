@@ -87,6 +87,7 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
   const incomes = getIncomeStreamsBodies(householdMemberData);
 
   return {
+    age: householdMemberData.age ?? null,
     birth_year: householdMemberData.birthYear ?? null,
     birth_month: householdMemberData.birthMonth ?? null,
     relationship: householdMemberData.relationshipToHH,
