@@ -5,9 +5,9 @@ import { z } from 'zod';
 function SignUp() {
   const contactInfoSchema = z
     .object({
-      firstName: z.string().min(1), // TODO: add error message
-      lastName: z.string().min(1), // TODO: add error message
-      email: z.string().min(1).email().optional(), // TODO: add error message
+      firstName: z.string().min(1).trim(), // TODO: add error message
+      lastName: z.string().min(1).trim(), // TODO: add error message
+      email: z.string().min(1).email().trim().optional(), // TODO: add error message
       cell: z.number().int().pipe(z.string().length(10)).optional(), // TODO: add error message
       tcpa: z.literal(true), // TODO: add error message
     })
