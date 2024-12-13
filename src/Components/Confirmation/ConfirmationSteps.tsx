@@ -13,8 +13,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useTranslateNumber } from '../../Assets/languageOptions';
 import { FormattedMessageType, QuestionName } from '../../Types/Questions';
 import { useConfig } from '../Config/configHook';
-import { calcAge } from '../HouseholdDataBlock/AgeInput';
 import { Conditions, IncomeStream, Benefits as BenefitsType } from '../../Types/FormData';
+import { calcAge, hasBirthMonthYear, useFormatBirthMonthYear } from '../../Assets/age';
 
 function ZipCode() {
   const { formData } = useContext(Context);
@@ -111,6 +111,7 @@ function HouseholdData() {
   const { formatMessage } = useIntl();
 
   const translateNumber = useTranslateNumber();
+  const formatBirthMonthYear = useFormatBirthMonthYear();
 
   const relationshipOptions = useConfig<FormattedMessageMap>('relationship_options');
   const incomeOptions = useConfig<FormattedMessageMap>('income_options');
@@ -251,12 +252,8 @@ function HouseholdData() {
   };
 
   const householdMemberDataBlocks = householdData.map((member, i) => {
-    if (member.birthYear === undefined || member.birthMonth === undefined) {
-      throw new Error('Birth year and month are undefined');
-    }
-
     const { hasIncome, incomeStreams } = member;
-    const age = calcAge(member.birthYear, member.birthMonth);
+    const age = calcAge(member);
     let relationship: FormattedMessageType;
     if (i === 0) {
       relationship = <FormattedMessage id="qcc.hoh-text" defaultMessage="Head of Household (You)" />;
@@ -299,10 +296,12 @@ function HouseholdData() {
           label={<FormattedMessage id="questions.age-inputLabel" defaultMessage="Age:" />}
           value={translateNumber(age)}
         />
-        <ConfirmationItem
-          label={<FormattedMessage id="confirmation.member.birthYearMonth" defaultMessage="Birth Month/Year:" />}
-          value={translateNumber(String(member.birthMonth).padStart(2, '0')) + '/' + translateNumber(member.birthYear)}
-        />
+        {hasBirthMonthYear(member) && (
+          <ConfirmationItem
+            label={<FormattedMessage id="confirmation.member.birthYearMonth" defaultMessage="Birth Month/Year:" />}
+            value={formatBirthMonthYear(member)}
+          />
+        )}
         <ConfirmationItem
           label={
             <FormattedMessage id="confirmation.headOfHouseholdDataBlock-conditionsText" defaultMessage="Conditions:" />
@@ -490,7 +489,7 @@ function HasBenefits() {
         />
       }
       editAriaLabel={editHasBenefitsAriaLabel}
-      stepName="householdAssets"
+      stepName="hasBenefits"
     >
       {alreadyHasBenefits()}
     </ConfirmationBlock>
