@@ -534,7 +534,7 @@ function AcuteConditions() {
         <FormattedMessage id="confirmation.displayAllFormData-acuteHHConditions" defaultMessage="Immediate Needs" />
       }
       editAriaLabel={editAcuteConditionsAriaLabel}
-      stepName="acuteHHConditions"
+      stepName="hasBenefits"
     >
       {formatedNeeds()}
     </ConfirmationBlock>
