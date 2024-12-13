@@ -29,13 +29,12 @@ const MONTHS = {
   12: <FormattedMessage id="ageInput.months.december" defaultMessage="December" />,
 };
 
-const {CURRENT_YEAR} = getCurrentMonthYear();
+const { CURRENT_YEAR } = getCurrentMonthYear();
 const MAX_AGE = 130;
 const YEARS = Array.from({ length: MAX_AGE }, (_, i) => {
   const inputYear = CURRENT_YEAR - i;
   return String(inputYear);
 });
-
 
 type Props = {
   birthMonth: number | null;

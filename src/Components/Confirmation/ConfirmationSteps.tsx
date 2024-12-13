@@ -252,7 +252,6 @@ function HouseholdData() {
   };
 
   const householdMemberDataBlocks = householdData.map((member, i) => {
-
     const { hasIncome, incomeStreams } = member;
     const age = calcAge(member);
     let relationship: FormattedMessageType;
@@ -298,10 +297,10 @@ function HouseholdData() {
           value={translateNumber(age)}
         />
         {hasBirthMonthYear(member) && (
-        <ConfirmationItem
-          label={<FormattedMessage id="confirmation.member.birthYearMonth" defaultMessage="Birth Month/Year:" />}
-          value={formatBirthMonthYear(member)}
-        />
+          <ConfirmationItem
+            label={<FormattedMessage id="confirmation.member.birthYearMonth" defaultMessage="Birth Month/Year:" />}
+            value={formatBirthMonthYear(member)}
+          />
         )}
         <ConfirmationItem
           label={
