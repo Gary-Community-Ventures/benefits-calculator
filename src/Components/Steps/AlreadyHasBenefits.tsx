@@ -131,8 +131,6 @@ function AlreadyHasBenefits() {
     },
   });
 
-  console.log(errors);
-
   const formSubmitHandler = ({ alreadyHasBenefits, hasBenefits }: z.infer<typeof formSchema>) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
