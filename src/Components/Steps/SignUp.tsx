@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Checkbox, FormControl, FormControlLabel, InputLabel, TextField } from '@mui/material';
+import { error } from 'console';
 import { ReactNode, useContext, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -52,9 +53,10 @@ function SignUp() {
           },
         })
         .email()
-        .trim(),
-      cell: z.coerce
-        .number({
+        .trim()
+        .or(z.literal('')),
+      cell: z
+        .string({
           errorMap: () => {
             return {
               message: formatMessage({
@@ -64,21 +66,24 @@ function SignUp() {
             };
           },
         })
-        .int()
-        .pipe(
-          z.coerce
-            .string({
-              errorMap: () => {
-                return {
-                  message: formatMessage({
-                    id: 'validation-helperText.phoneNumber',
-                    defaultMessage: 'Please enter a 10 digit phone number',
-                  }),
-                };
-              },
-            })
-            .length(10),
-        ),
+        .trim()
+        .transform((value) => {
+          let newString = '';
+
+          for (const char of value) {
+            if (/\d/.test(char)) {
+              newString += char;
+            }
+          }
+
+          return newString;
+        })
+        .refine((value) => value.length === 0 || value.length === 10, {
+          message: formatMessage({
+            id: 'validation-helperText.phoneNumber',
+            defaultMessage: 'Please enter a 10 digit phone number',
+          }),
+        }),
       tcpa: z.boolean().refine((value) => value, {
         message: formatMessage({ id: 'signUp.tcpa.error', defaultMessage: 'Please check the box to continue.' }),
       }),
@@ -91,6 +96,7 @@ function SignUp() {
       });
 
       if (noEmailAndCell) {
+        console.log('email or cell');
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: message,
@@ -128,16 +134,17 @@ function SignUp() {
 
   const {
     control,
-    formState: { errors },
+    formState: { errors, isSubmitted },
     getValues,
     setValue,
     handleSubmit,
+    trigger,
     watch,
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       contactType: {
-        sendOffers: formData.signUpInfo.sendOffers,
+        sendOffers: true || formData.signUpInfo.sendOffers, // FIXME:
         sendUpdates: formData.signUpInfo.sendUpdates,
       },
     },
@@ -156,6 +163,8 @@ function SignUp() {
   const submitHandler = (data: z.infer<typeof formSchema>) => {
     console.log(data);
   };
+
+  console.log(errors);
 
   return (
     <div>
@@ -193,100 +202,90 @@ function SignUp() {
         {watch('contactInfo') !== undefined && (sendUpdates || sendOffers) && (
           <div>
             <div className="sign-up-input-row">
-              <FormControl
-                sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
-                error={errors.contactInfo?.firstName !== undefined}
-              >
-                <Controller
-                  name="contactInfo.firstName"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={<FormattedMessage id="z" defaultMessage="z" />}
-                      variant="outlined"
-                      error={errors.contactInfo?.firstName !== undefined}
-                      helperText={
-                        errors.contactInfo?.firstName !== undefined && (
-                          <ErrorMessageWrapper fontSize="1rem">
-                            {errors.contactInfo.firstName.message}
-                          </ErrorMessageWrapper>
-                        )
-                      }
-                    />
-                  )}
-                />
-              </FormControl>
-              <FormControl
-                sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
-                error={errors.contactInfo?.lastName !== undefined}
-              >
-                <Controller
-                  name="contactInfo.lastName"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={<FormattedMessage id="z" defaultMessage="z" />}
-                      variant="outlined"
-                      error={errors.contactInfo?.lastName !== undefined}
-                      helperText={
-                        errors.contactInfo?.lastName !== undefined && (
-                          <ErrorMessageWrapper fontSize="1rem">
-                            {errors.contactInfo.lastName.message}
-                          </ErrorMessageWrapper>
-                        )
-                      }
-                    />
-                  )}
-                />
-              </FormControl>
+              <Controller
+                name="contactInfo.firstName"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label={<FormattedMessage id="z" defaultMessage="z" />}
+                    variant="outlined"
+                    error={errors.contactInfo?.firstName !== undefined}
+                    helperText={
+                      errors.contactInfo?.firstName !== undefined && (
+                        <ErrorMessageWrapper fontSize="1rem">
+                          {errors.contactInfo.firstName.message}
+                        </ErrorMessageWrapper>
+                      )
+                    }
+                  />
+                )}
+              />
+              <Controller
+                name="contactInfo.lastName"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label={<FormattedMessage id="z" defaultMessage="z" />}
+                    variant="outlined"
+                    error={errors.contactInfo?.lastName !== undefined}
+                    helperText={
+                      errors.contactInfo?.lastName !== undefined && (
+                        <ErrorMessageWrapper fontSize="1rem">{errors.contactInfo.lastName.message}</ErrorMessageWrapper>
+                      )
+                    }
+                  />
+                )}
+              />
             </div>
             <div className="sign-up-input-row">
-              <FormControl
-                sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
-                error={errors.contactInfo?.email !== undefined}
-              >
-                <Controller
-                  name="contactInfo.email"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={<FormattedMessage id="z" defaultMessage="z" />}
-                      variant="outlined"
-                      error={errors.contactInfo?.email !== undefined}
-                      helperText={
-                        errors.contactInfo?.email !== undefined && (
-                          <ErrorMessageWrapper fontSize="1rem">{errors.contactInfo.email.message}</ErrorMessageWrapper>
-                        )
+              <Controller
+                name="contactInfo.email"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    onChange={(...args) => {
+                      field.onChange(...args);
+                      if (isSubmitted) {
+                        trigger(['contactInfo.cell', 'contactInfo.email']);
                       }
-                    />
-                  )}
-                />
-              </FormControl>
-              <FormControl
-                sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
-                error={errors.contactInfo?.cell !== undefined}
-              >
-                <Controller
-                  name="contactInfo.cell"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={<FormattedMessage id="z" defaultMessage="z" />}
-                      variant="outlined"
-                      error={errors.contactInfo?.cell !== undefined}
-                      helperText={
-                        errors.contactInfo?.cell !== undefined && (
-                          <ErrorMessageWrapper fontSize="1rem">{errors.contactInfo.cell.message}</ErrorMessageWrapper>
-                        )
+                    }}
+                    label={<FormattedMessage id="z" defaultMessage="z" />}
+                    variant="outlined"
+                    error={errors.contactInfo?.email !== undefined}
+                    helperText={
+                      errors.contactInfo?.email !== undefined && (
+                        <ErrorMessageWrapper fontSize="1rem">{errors.contactInfo.email.message}</ErrorMessageWrapper>
+                      )
+                    }
+                  />
+                )}
+              />
+              <Controller
+                name="contactInfo.cell"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    onChange={(...args) => {
+                      field.onChange(...args);
+                      if (isSubmitted) {
+                        trigger(['contactInfo.cell', 'contactInfo.email']);
                       }
-                    />
-                  )}
-                />
-              </FormControl>
+                    }}
+                    label={<FormattedMessage id="z" defaultMessage="z" />}
+                    variant="outlined"
+                    error={errors.contactInfo?.cell !== undefined}
+                    helperText={
+                      errors.contactInfo?.cell !== undefined && (
+                        <ErrorMessageWrapper fontSize="1rem">{errors.contactInfo.cell.message}</ErrorMessageWrapper>
+                      )
+                    }
+                  />
+                )}
+              />
             </div>
             <div>
               <Controller
