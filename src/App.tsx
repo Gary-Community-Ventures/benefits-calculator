@@ -88,22 +88,8 @@ const App = () => {
         commConsent: false,
       };
     }
-
-    if (formData.hasBenefits !== 'true') {
-      for (const benefit in formData.benefits) {
-        // @ts-ignore
-        updatedFormData.benefits[benefit] = false;
-      }
-    }
-
     setFormData(updatedFormData);
-  }, [
-    formData.hasExpenses,
-    formData.referralSource,
-    formData.signUpInfo.sendOffers,
-    formData.signUpInfo.sendUpdates,
-    formData.hasBenefits,
-  ]);
+  }, [formData.hasExpenses, formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates]);
 
   useEffect(() => {
     const referrerParam = searchParams.get('referrer');
