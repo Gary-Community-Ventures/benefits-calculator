@@ -653,6 +653,73 @@ const HouseholdMemberForm = () => {
     );
   }
 
+  const renderIncomeAmountTextfield = (page: number, index: number, selectedIncomeFrequency: string, selectedIncomeStreamSource:string) => {
+    let questionHeader;
+
+    if (selectedIncomeFrequency === 'hourly') {
+      let hourlyFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
+      let hourlyFormattedMsgDefaultMsg = 'What is your hourly rate ';
+
+      if (page !== 1) {
+        hourlyFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
+        hourlyFormattedMsgDefaultMsg = 'What is their hourly rate ';
+      }
+
+      questionHeader = <FormattedMessage id={hourlyFormattedMsgId} defaultMessage={hourlyFormattedMsgDefaultMsg} />;
+    } else {
+      let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
+      let payPeriodFormattedMsgDefaultMsg = 'How much do you receive before taxes each pay period for ';
+
+      if (page !== 1) {
+        payPeriodFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-questionLabel';
+        payPeriodFormattedMsgDefaultMsg = 'How much do they receive before taxes each pay period for ';
+      }
+
+      questionHeader = (
+        <FormattedMessage id={payPeriodFormattedMsgId} defaultMessage={payPeriodFormattedMsgDefaultMsg} />
+      );
+    }
+
+    return (
+      <div>
+        <div className="income-textfield-margin-bottom">
+          <QuestionQuestion>
+            {questionHeader}
+            {getIncomeStreamSourceLabel(incomeOptions, selectedIncomeStreamSource)}
+          </QuestionQuestion>
+        </div>
+        <Controller
+          name={`incomeStreams.${index}.incomeAmount`}
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <>
+              <TextField
+                {...field}
+                label={
+                  <FormattedMessage
+                    id="personIncomeBlock.createIncomeAmountTextfield-amountLabel"
+                    defaultMessage="Amount"
+                  />
+                }
+                variant="outlined"
+                sx={{ backgroundColor: '#fff' }}
+                error={errors.incomeStreams?.[index]?.incomeAmount !== undefined}
+                InputProps={{
+                  startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                  sx: { backgroundColor: '#FFFFFF' },
+                }}
+              />
+              {errors.incomeStreams?.[index]?.incomeAmount !== undefined && (
+                <FormHelperText sx={{ marginLeft: 0 }}>{renderIncomeAmountHelperText()}</FormHelperText>
+              )}
+            </>
+          )}
+        />
+      </div>
+    );
+  };
+
   return (
     <main className="benefits-form">
       <QuestionHeader>
