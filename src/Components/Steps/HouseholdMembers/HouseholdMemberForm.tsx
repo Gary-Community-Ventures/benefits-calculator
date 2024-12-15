@@ -42,6 +42,7 @@ const HouseholdMemberForm = () => {
       incomeOptions,
       <FormattedMessage id="personIncomeBlock.createMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
     );
+  const frequencyOptions = useConfig<Record<string,FormattedMessageType>>('frequency_options');
   const currentStepId = useStepNumber('householdData', formData.immutableReferrer);
   // const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
   //   const setPage = (uuid: string, currentStepId: number, pageNumber: number) => {
