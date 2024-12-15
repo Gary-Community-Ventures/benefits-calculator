@@ -218,7 +218,10 @@ const HouseholdMemberForm = () => {
           )}
         </QuestionQuestion>
         <div className="age-input-container">
-          <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.birthMonth !== undefined}>
+          <FormControl
+            sx={{ mt: 1, mb: 2, minWidth: '13.125rem', maxWidth: '100%' }}
+            error={errors.birthMonth !== undefined}
+          >
             <InputLabel id="birth-month">
               <FormattedMessage id="ageInput.month.label" defaultMessage="Birth Month" />
             </InputLabel>
@@ -240,12 +243,15 @@ const HouseholdMemberForm = () => {
                       );
                     })}
                   </Select>
-                  {errors.birthMonth !== undefined && <FormHelperText>{renderBirthMonthHelperText()}</FormHelperText>}
+                  {errors.birthMonth !== undefined && <FormHelperText sx={{ marginLeft: 0 }}>{renderBirthMonthHelperText()}</FormHelperText>}
                 </>
               )}
             />
           </FormControl>
-          <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.birthYear !== undefined}>
+          <FormControl
+            sx={{ mt: 1, mb: 2, minWidth: '13.125rem', maxWidth: '100%' }}
+            error={errors.birthYear !== undefined}
+          >
             <Controller
               name="birthYear"
               control={control}
@@ -261,7 +267,7 @@ const HouseholdMemberForm = () => {
                     getOptionLabel={(option) => option.label ?? ''}
                     value={{ label: field.value }}
                     onChange={(_, newValue) => {
-                      field.onChange(newValue?.label)
+                      field.onChange(newValue?.label);
                     }}
                     renderInput={(params) => (
                       <TextField
@@ -271,7 +277,7 @@ const HouseholdMemberForm = () => {
                       />
                     )}
                   />
-                  {errors.birthYear !== undefined && <FormHelperText>{renderBirthYearHelperText()}</FormHelperText>}
+                  {errors.birthYear !== undefined && <FormHelperText sx={{ marginLeft: 0 }}>{renderBirthYearHelperText()}</FormHelperText>}
                 </>
               )}
             />
@@ -314,7 +320,7 @@ const HouseholdMemberForm = () => {
             name="healthInsurance"
             options={pageNumber === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
           />
-          {errors.healthInsurance !== undefined && <FormHelperText>{renderHealthInsuranceHelperText()}</FormHelperText>}
+          {errors.healthInsurance !== undefined && <FormHelperText sx={{ marginLeft: 0 }}>{renderHealthInsuranceHelperText()}</FormHelperText>}
         </Stack>
       </Box>
     );
@@ -361,7 +367,7 @@ const HouseholdMemberForm = () => {
           />
         </QuestionQuestion>
         <FormControl
-          sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
+          sx={{ mt: 1, mb: 2, minWidth: '13.125rem', maxWidth: '100%' }}
           error={errors.relationshipToHH !== undefined}
         >
           <InputLabel id="relation-to-hh-label">
@@ -393,7 +399,9 @@ const HouseholdMemberForm = () => {
                     );
                   })}
                 </Select>
-                {errors.relationshipToHH !== undefined && <FormHelperText>{renderRelationshipToHHHelperText()}</FormHelperText>}
+                {errors.relationshipToHH !== undefined && (
+                  <FormHelperText sx={{ marginLeft: 0 }}>{renderRelationshipToHHHelperText()}</FormHelperText>
+                )}
               </>
             )}
           />
@@ -457,10 +465,10 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const renderIncomeStreamNameSelect = (field: FieldArrayWithId<FormSchema>, index: number) => {
+  const renderIncomeStreamNameSelect = (index: number) => {
     return (
       <FormControl
-        sx={{ minWidth: 210, maxWidth: '100%' }}
+        sx={{ minWidth: '13.125rem', maxWidth: '100%' }}
         error={errors.incomeStreams?.[index]?.incomeStreamName !== undefined}
       >
         <InputLabel id={`income-type-label-${index}`}>
@@ -489,7 +497,7 @@ const HouseholdMemberForm = () => {
                 {incomeStreamsMenuItems}
               </Select>
               {errors.incomeStreams?.[index]?.incomeStreamName !== undefined && (
-                <FormHelperText>{renderIncomeStreamNameHelperText()}</FormHelperText>
+                <FormHelperText sx={{ marginLeft: 0 }}>{renderIncomeStreamNameHelperText()}</FormHelperText>
               )}
             </>
           )}
