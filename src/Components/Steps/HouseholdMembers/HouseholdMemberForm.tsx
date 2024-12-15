@@ -761,6 +761,26 @@ const HouseholdMemberForm = () => {
         <div>
           <Stack sx={{ margin: '3rem 0' }}>
             {createIncomeRadioQuestion(pageNumber)}
+            {hasTruthyIncome && (
+              <div>
+                <Button
+                  variant="outlined"
+                  onClick={() =>
+                    append({
+                      incomeStreamName: '',
+                      incomeAmount: '',
+                      incomeFrequency: '',
+                      hoursPerWeek: '',
+                    })
+                  }
+                  startIcon={<AddIcon />}
+                  type="button"
+                >
+                  <FormattedMessage id="personIncomeBlock.return-addIncomeButton" defaultMessage="Add another income" />
+                </Button>
+              </div>
+            )}
+          </Stack>
         </div>
         <PrevAndContinueButtons
           backNavigationFunction={() => backNavigationFunction(uuid, currentStepId, pageNumber)}
