@@ -195,44 +195,11 @@ const HouseholdMemberForm = () => {
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
     if (uuid) {
       const currentMemberDataAtThisIndex = householdMemberFormData;
+      }
       nextStep();
     }
   };
 
-  const renderBirthMonthHelperText = () => {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="ageInput.month.error" defaultMessage="Please enter a birth month." />
-      </ErrorMessageWrapper>
-    );
-  }
-
-  const renderBirthYearHelperText = () => {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="ageInput.year.error" defaultMessage="Please enter a birth year." />
-      </ErrorMessageWrapper>
-    );
-  }
-
-  const renderHealthInsuranceHelperText = () => {
-    return (
-      <ErrorMessageWrapper fontSize="1.5rem">
-        <FormattedMessage
-          id="validation-helperText.healthInsurance"
-          defaultMessage='If none of these apply, please select "One or more household member(s) do not have health insurance"'
-        />
-      </ErrorMessageWrapper>
-    );
-  }
-
-  const renderRelationshipToHHHelperText = () => {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="errorMessage-HHMemberRelationship" defaultMessage="Please select a relationship" />
-      </ErrorMessageWrapper>
-    );
-  }
 
   const createAgeQuestion = (personIndex: number) => {
     return (
