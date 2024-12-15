@@ -523,6 +523,20 @@ const HouseholdMemberForm = () => {
     );
   };
 
+  const getIncomeStreamSourceLabel = (incomeOptions: Record<string, FormattedMessageType>, incomeStreamName:string) => {
+    if (incomeStreamName) {
+      return (
+        <>
+          {'('}
+          {incomeOptions[incomeStreamName]}
+          {')'}?
+        </>
+      );
+    }
+
+    return '?';
+  };
+
   return (
     <main className="benefits-form">
       <QuestionHeader>
