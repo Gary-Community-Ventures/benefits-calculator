@@ -759,7 +759,8 @@ const HouseholdMemberForm = () => {
         {displayHealthInsuranceBlock(pageNumber, healthInsuranceOptions)}
         {displayConditionsQuestion(pageNumber, conditionOptions)}
         <div>
-          <Stack sx={{ margin: '3rem 0' }}>{createIncomeRadioQuestion(pageNumber)}</Stack>
+          <Stack sx={{ margin: '3rem 0' }}>
+            {createIncomeRadioQuestion(pageNumber)}
         </div>
         <PrevAndContinueButtons
           backNavigationFunction={() => backNavigationFunction(uuid, currentStepId, pageNumber)}
