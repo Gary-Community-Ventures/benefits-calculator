@@ -582,6 +582,48 @@ const HouseholdMemberForm = () => {
     );
   }
 
+  const renderHoursWorkedTextfield = (page:number, index:number, selectedIncomeSource:string) => {
+    let formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-youQLabel';
+    let formattedMsgDefaultMsg = 'How many hours do you work per week ';
+
+    if (page !== 1) {
+      formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-questionLabel';
+      formattedMsgDefaultMsg = 'How many hours do they work per week ';
+    }
+
+    return (
+      <>
+        <div className="income-margin-bottom">
+          <QuestionQuestion>
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+            {getIncomeStreamSourceLabel(incomeOptions, selectedIncomeSource)}
+          </QuestionQuestion>
+        </div>
+        <Controller
+          name={`incomeStreams.${index}.hoursPerWeek`}
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <>
+              <TextField
+                {...field}
+                label={
+                  <FormattedMessage id="incomeBlock.createHoursWorkedTextfield-amountLabel" defaultMessage="Hours" />
+                }
+                variant="outlined"
+                sx={{ backgroundColor: '#fff' }}
+                error={errors.incomeStreams?.[index]?.hoursPerWeek !== undefined}
+              />
+              {errors.incomeStreams?.[index]?.hoursPerWeek !== undefined && (
+                <FormHelperText sx={{ marginLeft: 0 }}>{renderHoursWorkedHelperText()}</FormHelperText>
+              )}
+            </>
+          )}
+        />
+      </>
+    );
+  }
+
   return (
     <main className="benefits-form">
       <QuestionHeader>
