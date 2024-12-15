@@ -761,6 +761,36 @@ const HouseholdMemberForm = () => {
         <div>
           <Stack sx={{ margin: '3rem 0' }}>
             {createIncomeRadioQuestion(pageNumber)}
+            {fields.map((field, index) => {
+                const selectedIncomeStreamSource = watch('incomeStreams')[index].incomeStreamName;
+                const selectedIncomeFrequency = watch('incomeStreams')[index].incomeFrequency;
+
+                return (
+                  <div className="section-container income-block-container" key={field.id}>
+                    <div className={index % 2 === 0 ? 'section' : ''}>
+                      {index !== 0 && (
+                        <div className="delete-button-container">
+                          <CloseButton handleClose={() => remove(index)} />
+                        </div>
+                      )}
+                      <div>
+                        {index !== 0 && renderIncomeStreamBlockQuestion(pageNumber)}
+                        {renderIncomeStreamNameSelect(index)}
+                        {renderIncomeFrequencySelect(incomeOptions, selectedIncomeStreamSource, index, pageNumber)}
+                        {selectedIncomeFrequency === 'hourly' &&
+                          renderHoursPerWeekTextfield(pageNumber, index, selectedIncomeStreamSource)}
+                        {renderIncomeAmountTextfield(
+                          pageNumber,
+                          index,
+                          selectedIncomeFrequency,
+                          selectedIncomeStreamSource,
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            }
             {hasTruthyIncome && (
               <div>
                 <Button
