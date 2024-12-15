@@ -720,6 +720,26 @@ const HouseholdMemberForm = () => {
     );
   };
 
+  const renderIncomeStreamBlockQuestion = (page:number) => {
+    let formattedMsgId = 'incomeBlock.createIncomeBlockQuestions-questionLabel';
+    let formattedMsgDefaultMsg = 'If you receive another type of income, select it below.';
+
+    if (page !== 1) {
+      formattedMsgId = 'personIncomeBlock.createIncomeBlockQuestions-questionLabel';
+      formattedMsgDefaultMsg = 'If they receive another type of income, select it below.';
+    }
+
+    return (
+      <div className="income-margin-bottom">
+        <QuestionQuestion>
+          <span className="income-stream-q-padding">
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          </span>
+        </QuestionQuestion>
+      </div>
+    );
+  };
+
   return (
     <main className="benefits-form">
       <QuestionHeader>
