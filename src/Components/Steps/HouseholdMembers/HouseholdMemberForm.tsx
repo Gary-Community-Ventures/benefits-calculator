@@ -52,19 +52,21 @@ const HouseholdMemberForm = () => {
     );
 
   const currentStepId = useStepNumber('householdData', formData.immutableReferrer);
-  // const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
-  //   const setPage = (uuid: string, currentStepId: number, pageNumber: number) => {
-  //     navigate(`/${uuid}/step-${currentStepId}/${pageNumber}`);
-  //   };
+  const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
+    const setPage = (uuid: string, currentStepId: number, pageNumber: number) => {
+      navigate(`/${uuid}/step-${currentStepId}/${pageNumber}`);
+    };
 
-  //   if (pageNumber <= 1) {
-  //     navigate(`/${uuid}/step-${currentStepId - 1}`);
-  //   } else {
-  //     setPage(uuid, currentStepId, pageNumber - 1);
-  //   }
-  // };
+    if (pageNumber <= 1) {
+      navigate(`/${uuid}/step-${currentStepId - 1}`);
+    } else {
+      setPage(uuid, currentStepId, currentMemberIndex);
+    }
+  };
   const nextStep = useGoToNextStep('householdData', `${pageNumber + 1}`);
-  // console.log(`${pageNumber + 1}`);
+
+
+
   const date = new Date();
   const CURRENT_YEAR = date.getFullYear();
   // the getMonth method returns January as 0
@@ -87,9 +89,9 @@ const HouseholdMemberForm = () => {
   const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
   const incomeSourcesSchema = z.object({
     incomeStreamName:  z.string().min(1),
-    incomeAmount: z.string().regex(oneOrMoreDigitsButNotAllZero),
     incomeFrequency: z.string().min(1),
     hoursPerWeek: z.string().regex(oneOrMoreDigitsButNotAllZero),
+    incomeAmount: z.string().regex(oneOrMoreDigitsButNotAllZero),
   });
   const incomeStreamsSchema = z.array(incomeSourcesSchema);
   const hasIncomeSchema = z.string().regex(/^true|false$/);
@@ -103,6 +105,10 @@ const HouseholdMemberForm = () => {
     then birthMonth would have a minimum string length of 1 which passes validation.
     */
     birthMonth: z.string().min(1),
+    birthYear: z.string().trim().min(4),
+    // .number()
+    // .lte(CURRENT_YEAR)
+    // .gte(CURRENT_YEAR - MAX_AGE),
     healthInsurance: z
       .object({
         none: z.boolean(),
@@ -118,7 +124,7 @@ const HouseholdMemberForm = () => {
       .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
         message: 'Please select at least one health insurance option.',
         path: ['healthInsurance'],
-        //make sure that this only shows up for the person at this index
+        //TODO: make sure that this only shows up for the person at this index
       }),
     conditions: z.object({
       student: z.boolean(),
@@ -195,6 +201,29 @@ const HouseholdMemberForm = () => {
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
     if (uuid) {
       const currentMemberDataAtThisIndex = householdMemberFormData;
+      if (currentMemberDataAtThisIndex) {
+        // if we have data at this index then replace it
+        const updatedHouseholdData = [...formData.householdData].map((currentMemberData, index) => {
+          if (index === currentMemberIndex) {
+            return memberData;
+          } else {
+            return currentMemberData;
+          }
+        });
+
+        const updatedFormData = { ...formData, householdData: updatedHouseholdData };
+        // console.log(updatedFormData)
+        setFormData(updatedFormData);
+        await updateScreen(uuid, updatedFormData, locale);
+      } else {
+        // if there is no data at this index then we need to push it to the array
+        console.log(formData.householdData)
+        const copyOfHouseholdData = [...formData.householdData];
+        copyOfHouseholdData.push(memberData);
+        const updatedFormData = { ...formData, householdData: copyOfHouseholdData };
+        console.log(`updatedFormData`, updatedFormData);
+        setFormData(updatedFormData);
+        await updateScreen(uuid, updatedFormData, locale);
       }
       nextStep();
     }
@@ -520,7 +549,7 @@ const HouseholdMemberForm = () => {
     return '?';
   };
 
-  const renderIncomeStreamFrequencySelect = (incomeOptions: Record<string, FormattedMessageType>, selectedIncomeSource: string, index:number, pageNumber: number) => {
+  const renderIncomeFrequencySelect  = (incomeOptions: Record<string, FormattedMessageType>, selectedIncomeSource: string, index:number, pageNumber: number) => {
     let formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel';
     let formattedMsgDefaultMsg = 'How often are you paid this income ';
     if (pageNumber !== 1) {
@@ -582,7 +611,7 @@ const HouseholdMemberForm = () => {
     );
   }
 
-  const renderHoursWorkedTextfield = (page:number, index:number, selectedIncomeSource:string) => {
+  const renderHoursPerWeekTextfield  = (page:number, index:number, selectedIncomeSource:string) => {
     let formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-youQLabel';
     let formattedMsgDefaultMsg = 'How many hours do you work per week ';
 
