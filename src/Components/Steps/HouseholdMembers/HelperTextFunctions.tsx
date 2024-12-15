@@ -37,10 +37,18 @@ export const renderRelationshipToHHHelperText = () => {
   );
 };
 
-export const renderIncomeFrequencyHelperText: MessageFunction<string> = () => {
+export const renderIncomeFrequencyHelperText = () => {
   return (
     <ErrorMessageWrapper fontSize="1rem">
       <FormattedMessage id="errorMessage-incomeFrequency" defaultMessage="Please select a frequency" />
+    </ErrorMessageWrapper>
+  );
+};
+
+export const renderHoursWorkedHelperText = () => {
+  return (
+    <ErrorMessageWrapper fontSize="1rem">
+      <FormattedMessage id="errorMessage-greaterThanZero" defaultMessage="Please enter a number greater than 0" />
     </ErrorMessageWrapper>
   );
 };
