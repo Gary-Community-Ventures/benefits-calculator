@@ -37,12 +37,20 @@ const HouseholdMemberForm = () => {
     useConfig<Record<keyof Conditions, { text: FormattedMessageType; icon: ReactNode }>>('condition_options');
   const relationshipOptions =
     useConfig<Record<string,FormattedMessageType>>('relationship_options');
-    const incomeOptions = useConfig<Record<string,FormattedMessageType>>('income_options');
-    const incomeStreamsMenuItems = createMenuItems(
-      incomeOptions,
-      <FormattedMessage id="personIncomeBlock.createMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
-    );
+  const incomeOptions = useConfig<Record<string,FormattedMessageType>>('income_options');
+  const incomeStreamsMenuItems = createMenuItems(
+    incomeOptions,
+    <FormattedMessage id="personIncomeBlock.createMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
+  );
   const frequencyOptions = useConfig<Record<string,FormattedMessageType>>('frequency_options');
+  const frequencyMenuItems = createMenuItems(
+      frequencyOptions,
+      <FormattedMessage
+        id="personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem"
+        defaultMessage="Select"
+      />
+    );
+
   const currentStepId = useStepNumber('householdData', formData.immutableReferrer);
   // const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
   //   const setPage = (uuid: string, currentStepId: number, pageNumber: number) => {
