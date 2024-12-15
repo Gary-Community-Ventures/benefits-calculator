@@ -53,3 +53,11 @@ export const renderHoursWorkedHelperText = () => {
   );
 };
 
+export const renderIncomeAmountHelperText = () => {
+  return (
+    <ErrorMessageWrapper fontSize="1rem">
+      <FormattedMessage id="errorMessage-greaterThanZero" defaultMessage="Please enter a number greater than 0" />
+    </ErrorMessageWrapper>
+  );
+};
+
