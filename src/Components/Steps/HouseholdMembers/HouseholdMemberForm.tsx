@@ -520,6 +520,68 @@ const HouseholdMemberForm = () => {
     return '?';
   };
 
+  const renderIncomeStreamFrequencySelect = (incomeOptions: Record<string, FormattedMessageType>, selectedIncomeSource: string, index:number, pageNumber: number) => {
+    let formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel';
+    let formattedMsgDefaultMsg = 'How often are you paid this income ';
+    if (pageNumber !== 1) {
+      formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-questionLabel';
+      formattedMsgDefaultMsg = 'How often are they paid this income ';
+    }
+
+    return (
+      <div>
+        <div className="income-margin-bottom">
+          <QuestionQuestion>
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+            {getIncomeStreamSourceLabel(incomeOptions, selectedIncomeSource)}
+            <HelpButton
+              helpText='"Every 2 weeks" means you get paid every other week. "Twice a month" means you get paid two times a month on the same dates each month.'
+              helpId="personIncomeBlock.income-freq-help-text"
+            />
+          </QuestionQuestion>
+        </div>
+        <>
+          <FormControl
+            sx={{ minWidth: '13.125rem', maxWidth: '100%' }}
+            error={errors.incomeStreams?.[index]?.incomeFrequency !== undefined}
+          >
+            <InputLabel id={`income-frequency-label-${index}`}>
+              <FormattedMessage
+                id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel"
+                defaultMessage="Frequency"
+              />
+            </InputLabel>
+            <Controller
+              name={`incomeStreams.${index}.incomeFrequency`}
+              control={control}
+              render={({ field }) => (
+                <>
+                  <Select
+                    {...field}
+                    labelId={`income-frequency-label-${index}`}
+                    id={`incomeStreams.${index}.incomeFrequency`}
+                    label={
+                      <FormattedMessage
+                        id="personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-freqLabel"
+                        defaultMessage="Frequency"
+                      />
+                    }
+                    sx={{ backgroundColor: '#fff' }}
+                  >
+                    {frequencyMenuItems}
+                  </Select>
+                  {errors.incomeStreams?.[index]?.incomeFrequency !== undefined && (
+                    <FormHelperText sx={{ marginLeft: 0 }}>{renderIncomeFrequencyHelperText()}</FormHelperText>
+                  )}
+                </>
+              )}
+            />
+          </FormControl>
+        </>
+      </div>
+    );
+  }
+
   return (
     <main className="benefits-form">
       <QuestionHeader>
