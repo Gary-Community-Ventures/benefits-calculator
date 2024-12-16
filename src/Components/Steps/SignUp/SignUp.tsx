@@ -220,7 +220,7 @@ function SignUp() {
     console.log(newFormData.signUpInfo);
 
     try {
-      await updateUser(uuid, formData, setFormData, locale);
+      await updateUser(uuid, formData, locale);
       newFormData.signUpInfo.hasUser = true;
       setFormData(newFormData);
     } catch {

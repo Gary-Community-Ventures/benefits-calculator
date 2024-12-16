@@ -151,12 +151,7 @@ const createScreen = (formData: FormData, languageCode: Language) => {
   return uuid;
 };
 
-const updateUser = async (
-  uuid: string,
-  formData: FormData,
-  setFormData: (formData: FormData) => void,
-  languageCode: Language,
-) => {
+const updateUser = async (uuid: string, formData: FormData, languageCode: Language) => {
   const userBody = getUserBody(formData, languageCode);
   if (!formData.signUpInfo.hasUser && userBody.email_or_cell === '+1') {
     return;
