@@ -356,6 +356,7 @@ const HouseholdMemberForm = () => {
             setValue={setValue}
             name="healthInsurance"
             options={pageNumber === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
+            triggerValidation={trigger}
           />
           {errors.healthInsurance !== undefined && <FormHelperText sx={{ marginLeft: 0 }}>{renderHealthInsuranceHelperText()}</FormHelperText>}
         </Stack>

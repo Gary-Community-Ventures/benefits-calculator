@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack, Box } from '@mui/material';
 import { ReactComponent as Checkmark } from '../../Assets/OptionCardIcons/checkmark.svg';
-import { Controller, FieldValues } from 'react-hook-form';
+import { FieldValues, UseFormTrigger } from 'react-hook-form';
 import '../OptionCardGroup/OptionCardGroup.css';
 import { ReactNode } from 'react';
 import { FormattedMessageType } from '../../Types/Questions';
@@ -19,17 +19,26 @@ type RHFOptionCardGroupProps<T extends FieldValues> = {
   setValue: (name: string, value: unknown, config?: Object) => void;
   name: string;
   options: Option<T>[];
+  triggerValidation: UseFormTrigger<FormSchema>;
 };
 
-const RHFOptionCardGroup = <T extends FieldValues>({ fields, setValue, name, options }:RHFOptionCardGroupProps<T>) => {
+const RHFOptionCardGroup = <T extends FieldValues>({
+  fields,
+  setValue,
+  name,
+  options,
+  triggerValidation,
+}: RHFOptionCardGroupProps<T>) => {
   const intl = useIntl();
 
-  const handleOptionCardClick = (optionName:string) => {
-    const updatedValue = !(fields[optionName]);
+  const handleOptionCardClick = async (optionName: string) => {
+    const updatedValue = !fields[optionName];
     setValue(`${name}.${optionName}`, updatedValue, { shouldValidate: true, shouldDirty: true });
+
+    await triggerValidation(name);
   };
 
-  const displayOptionCards = (options: Record<any, any>, name:string, values: Record<string, boolean>) => {
+  const displayOptionCards = (options: Record<any, any>, name: string, values: Record<string, boolean>) => {
     const optionCards = Object.keys(options).map((optionKey, index) => {
       const translatedAriaLabel = intl.formatMessage({
         id: options[optionKey].text.props.id,
