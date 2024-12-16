@@ -144,6 +144,10 @@ function SignUp() {
       contactInfo: contactInfoSchema.optional(),
     })
     .refine((data) => {
+      if (formData.signUpInfo.hasUser) {
+        return true;
+      }
+
       const { contactType, contactInfo } = data;
       const showContactInfo = someContactType(contactType);
 
@@ -160,7 +164,6 @@ function SignUp() {
     getValues,
     setValue,
     handleSubmit,
-    resetField,
     trigger,
     watch,
   } = useForm<z.infer<typeof formSchema>>({
@@ -176,17 +179,17 @@ function SignUp() {
   const contactType = watch('contactType');
 
   useEffect(() => {
-    if (someContactType(contactType)) {
+    if (someContactType(contactType) && !formData.signUpInfo.hasUser) {
       setValue('contactInfo', { firstName: '', lastName: '', email: '', cell: '', tcpa: false });
       if (isSubmitted) {
         trigger('contactInfo');
         setHasServerError(false);
       }
     } else {
-      resetField('contactInfo');
+      setValue('contactInfo', undefined);
       setHasServerError(false);
     }
-  }, [someContactType(contactType)]);
+  }, [someContactType(contactType), formData.signUpInfo.hasUser]);
 
   const submitHandler = async (data: z.infer<typeof formSchema>) => {
     if (uuid === undefined) {
@@ -203,26 +206,26 @@ function SignUp() {
       },
     };
 
-    const signUpInfo = newFormData.signUpInfo;
     const updatedSignUpInfo = data.contactInfo;
 
-    if (updatedSignUpInfo === undefined) {
+    if (updatedSignUpInfo === undefined && formData.signUpInfo.hasUser === false) {
       nextStep();
       return;
+    } else if (updatedSignUpInfo !== undefined) {
+      const signUpInfo = newFormData.signUpInfo;
+
+      signUpInfo.firstName = updatedSignUpInfo.firstName;
+      signUpInfo.lastName = updatedSignUpInfo.lastName;
+      signUpInfo.email = updatedSignUpInfo.email;
+      signUpInfo.phone = updatedSignUpInfo.cell;
+      signUpInfo.commConsent = updatedSignUpInfo.tcpa;
     }
 
-    signUpInfo.firstName = updatedSignUpInfo.firstName;
-    signUpInfo.lastName = updatedSignUpInfo.lastName;
-    signUpInfo.email = updatedSignUpInfo.email;
-    signUpInfo.phone = updatedSignUpInfo.cell;
-    signUpInfo.commConsent = updatedSignUpInfo.tcpa;
-
-    console.log(newFormData.signUpInfo);
-
     try {
-      await updateUser(uuid, formData, locale);
+      await updateUser(uuid, newFormData, locale);
       newFormData.signUpInfo.hasUser = true;
       setFormData(newFormData);
+      nextStep();
     } catch {
       setHasServerError(true);
       setFormData(newFormData);
