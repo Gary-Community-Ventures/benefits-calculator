@@ -1,6 +1,5 @@
 import Radiofield from '../Radiofield/Radiofield';
 import Textfield from '../Textfield/Textfield';
-import SignUp from '../SignUp/SignUp';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import { useContext, useState } from 'react';
 import { Context } from '../Wrapper/Wrapper';
@@ -11,8 +10,6 @@ const FollowUpQuestions = ({
   followUpQuestions,
   submitted,
   formData,
-  handleCheckboxChange,
-  handleExpenseSourcesSubmit,
   handleTextfieldChange,
   handleRadioButtonChange,
 }) => {
@@ -53,19 +50,6 @@ const FollowUpQuestions = ({
             componentDetails={followUp.componentDetails}
             options={finalOptions}
             formDataProperty={followUp.componentDetails.inputName}
-            submitted={followUpSubmitted}
-          />
-        </div>
-      );
-    } else if (followUp.componentDetails.componentType === 'SignUp') {
-      return (
-        <div key={index}>
-          <div className="follow-up-q-margin-top">
-            <QuestionQuestion>{followUp.question}</QuestionQuestion>
-          </div>
-          <SignUp
-            handleTextfieldChange={handleTextfieldChange}
-            handleCheckboxChange={handleCheckboxChange}
             submitted={followUpSubmitted}
           />
         </div>

@@ -25,6 +25,7 @@ import questions from '../../Assets/questions';
 import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
 import AlreadyHasBenefits from '../Steps/AlreadyHasBenefits';
 import ImmediateNeeds from '../Steps/ImmediateNeeds';
+import SignUp from '../Steps/SignUp/SignUp';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
@@ -38,7 +39,6 @@ const QuestionComponentContainer = ({
   const { formData, setFormData } = useContext(Context);
   const acuteConditionOptions = useConfig('acute_condition_options');
   const referralOptions = useConfig('referral_options');
-  const signUpOptions = useConfig('sign_up_options');
   let { id } = useParams();
   const questionName = useStepName(+id, formData.immutable_referrer);
   const matchingQuestion = questions[questionName];
@@ -70,17 +70,6 @@ const QuestionComponentContainer = ({
         componentDetails={question.componentDetails}
         handleRadioButtonChange={handleNoAnswerChange}
         preferNotToAnswer={true}
-      />
-    );
-  };
-
-  const renderBasicCheckboxGroup = (question) => {
-    if (question.name === 'signUpInfo')
-      return <BasicCheckboxGroup stateVariable={question.componentDetails.inputName} options={signUpOptions} />;
-    return (
-      <BasicCheckboxGroup
-        stateVariable={question.componentDetails.inputName}
-        options={matchingQuestion.componentDetails.options}
       />
     );
   };
@@ -147,8 +136,6 @@ const QuestionComponentContainer = ({
             followUpQuestions={matchingQuestion.followUpQuestions}
             submitted={errorController.submittedCount}
             formData={formData}
-            handleCheckboxChange={handleCheckboxChange}
-            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
             handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
             handleTextfieldChange={handleTextfieldChange}
           />
@@ -260,6 +247,12 @@ const QuestionComponentContainer = ({
       return (
         <main className="benefits-form">
           <ImmediateNeeds />
+        </main>
+      );
+    case 'signUpInfo':
+      return (
+        <main className="benefits-form">
+          <SignUp />
         </main>
       );
     default:

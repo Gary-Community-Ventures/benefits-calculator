@@ -70,28 +70,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const updatedFormData = { ...formData };
-
-    if (formData.hasExpenses === false) {
-      updatedFormData.expenses = [];
-    }
-
-    if (formData.signUpInfo.sendOffers === false && formData.signUpInfo.sendUpdates === false) {
-      updatedFormData.signUpInfo = {
-        email: '',
-        phone: '',
-        firstName: '',
-        lastName: '',
-        hasUser: formData.signUpInfo.hasUser,
-        sendOffers: false,
-        sendUpdates: false,
-        commConsent: false,
-      };
-    }
-    setFormData(updatedFormData);
-  }, [formData.hasExpenses, formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates]);
-
-  useEffect(() => {
     const referrerParam = searchParams.get('referrer');
     const utmParam = searchParams.get('utm_source');
     const testParam = searchParams.get('test') ? true : false;
@@ -193,14 +171,6 @@ const App = () => {
     if (!hasError) {
       if (isZipcodeQuestionAndCountyIsEmpty || isEmptyAssets) {
         return;
-      } else if (questionName === 'signUpInfo') {
-        updateUser(uuid, formData, setFormData, locale)
-          .then(() => {
-            navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`);
-          })
-          .catch(() => {
-            setFormData({ ...formData, signUpInfo: { ...formData.signUpInfo, serverError: true } });
-          });
       } else if (questionName === 'householdSize') {
         const updatedHouseholdData = formData.householdData.slice(0, Number(formData.householdSize));
         const updatedFormData = { ...formData, householdData: updatedHouseholdData };
