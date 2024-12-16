@@ -6,7 +6,6 @@ import { Context } from '../../Wrapper/Wrapper';
 import { ReactNode, useContext, useEffect, useMemo } from 'react';
 import { Conditions, HealthInsurance, HouseholdData } from '../../../Types/FormData';
 import { Autocomplete, Box, Button, FormControl, FormControlLabel, FormHelperText, InputAdornment, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, TextField } from '@mui/material';
-import AgeInput from '../../HouseholdDataBlock/AgeInput';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useStepNumber } from '../../../Assets/stepDirectory';
 import '../../HouseholdDataBlock/HouseholdDataBlock.css';
@@ -150,6 +149,7 @@ const HouseholdMemberForm = () => {
     watch,
     setValue,
     getValues,
+    trigger,
     reset
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -759,7 +759,14 @@ const HouseholdMemberForm = () => {
           />
         )}
       </QuestionHeader>
-      {/* <HHMSummaryCards activeMemberData={getValues()} page={pageNumber} formData={formData} /> */}
+      <HHMSummaryCards
+        activeMemberData={getValues()}
+        page={pageNumber}
+        formData={formData}
+        uuid={uuid}
+        step={currentStepId}
+        triggerValidation={trigger}
+      />
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         {createAgeQuestion(pageNumber)}
         {pageNumber !== 1 && createHOfHRelationQuestion(relationshipOptions)}
