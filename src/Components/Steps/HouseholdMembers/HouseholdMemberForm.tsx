@@ -26,6 +26,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { createMenuItems } from '../SelectHelperFunctions/SelectHelperFunctions';
 import CloseButton from '../../CloseButton/CloseButton';
 import { renderBirthMonthHelperText, renderBirthYearHelperText, renderHealthInsuranceHelperText, renderRelationshipToHHHelperText, renderIncomeFrequencyHelperText, renderHoursWorkedHelperText, renderIncomeAmountHelperText } from './HelperTextFunctions';
+import './PersonIncomeBlock.css';
 
 const HouseholdMemberForm = () => {
   const { formData, setFormData, locale } = useContext(Context);
