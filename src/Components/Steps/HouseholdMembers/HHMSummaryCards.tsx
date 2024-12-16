@@ -7,6 +7,7 @@ import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { FormData, HouseholdData } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
 import { useNavigate } from 'react-router-dom';
+import './HHMSummaryCards.css';
 
 type HHMSummariesProps = {
   activeMemberData: HouseholdData;
