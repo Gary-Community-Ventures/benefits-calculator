@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { Context } from '../../Wrapper/Wrapper';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Box, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
@@ -8,14 +6,18 @@ import { useConfig } from '../../Config/configHook';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { FormData, HouseholdData } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
+import { useNavigate } from 'react-router-dom';
 
 type HHMSummariesProps = {
   activeMemberData: HouseholdData;
   page: number;
   formData: FormData;
+  uuid?: string;
+  step: number;
+  triggerValidation: () => Promise<boolean>;
 };
 
-const HHMSummaries = ({ activeMemberData, page, formData }: HHMSummariesProps) => {
+const HHMSummaries = ({ activeMemberData, page, formData, uuid, step, triggerValidation }: HHMSummariesProps) => {
   const relationshipOptions = useConfig('relationship_options');
   const headOfHHInfoWasEntered = formData.householdData.length >= 1;
   const translateNumber = useTranslateNumber();
@@ -24,14 +26,13 @@ const HHMSummaries = ({ activeMemberData, page, formData }: HHMSummariesProps) =
     id: 'editHHMember.ariaText',
     defaultMessage: 'edit household member',
   });
+  const navigate = useNavigate();
 
-  const handleEditBtnSubmit = (memberIndex: number) => {
-    //TODO: once validated through zod, update this function
-    // const validPersonData = personDataIsValid(memberData);
-    // if (validPersonData) {
-    // handleHouseholdDataSubmit(memberData, page - 1, uuid);
-    // navigate(`/${uuid}/step-${step}/${memberIndex + 1}`);
-    // }
+  const handleEditBtnSubmit = async (memberIndex: number) => {
+    const isValid = await triggerValidation()
+    if (isValid) {
+      navigate(`/${formData.whiteLabel}/${uuid}/step-${step}/${memberIndex + 1}`);
+    }
   };
 
   const formatToUSD = (num: number) => {
