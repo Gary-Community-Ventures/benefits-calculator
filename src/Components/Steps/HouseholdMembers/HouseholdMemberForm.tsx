@@ -727,7 +727,7 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const renderIncomeStreamBlockQuestion = (page:number) => {
+  const renderAdditionalIncomeBlockQ = (page:number) => {
     let formattedMsgId = 'incomeBlock.createIncomeBlockQuestions-questionLabel';
     let formattedMsgDefaultMsg = 'If you receive another type of income, select it below.';
 
@@ -788,7 +788,7 @@ const HouseholdMemberForm = () => {
                         </div>
                       )}
                       <div>
-                        {index !== 0 && renderIncomeStreamBlockQuestion(pageNumber)}
+                        {index !== 0 && renderAdditionalIncomeBlockQ(pageNumber)}
                         {renderIncomeStreamNameSelect(index)}
                         {renderIncomeFrequencySelect(incomeOptions, selectedIncomeStreamSource, index, pageNumber)}
                         {selectedIncomeFrequency === 'hourly' &&
