@@ -18,6 +18,7 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
   const totalStepCount = stepDirectory.length + STARTING_QUESTION_NUMBER - 1;
   const redirectToConfirmationPage = useShouldRedirectToConfirmation();
   const navigate = useNavigate();
+  const { formData } = useContext(Context);
 
   return () => {
     if (redirectToConfirmationPage) {
@@ -29,6 +30,7 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
       navigate(`/${whiteLabel}/${uuid}/confirm-information`);
       return;
     }
+
     if (questionName === 'householdData' && Number(routeEnding) <= formData.householdSize) {
       navigate(`/${whiteLabel}/${uuid}/step-${stepNumber}/${routeEnding}`);
       return;
@@ -36,6 +38,7 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
       navigate(`/${whiteLabel}/${uuid}/step-${stepNumber + 1}`);
       return;
     }
+
     navigate(`/${whiteLabel}/${uuid}/step-${stepNumber + 1}/${routeEnding}`);
   };
 }
