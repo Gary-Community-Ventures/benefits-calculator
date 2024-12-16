@@ -4,7 +4,7 @@ import HHMSummaryCards from './HHMSummaryCards';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../../Wrapper/Wrapper';
 import { ReactNode, useContext, useEffect, useMemo } from 'react';
-import { Conditions, HealthInsurance, } from '../../../Types/FormData';
+import { Conditions, HealthInsurance, HouseholdData } from '../../../Types/FormData';
 import { Autocomplete, Box, Button, FormControl, FormControlLabel, FormHelperText, InputAdornment, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, TextField } from '@mui/material';
 import AgeInput from '../../HouseholdDataBlock/AgeInput';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
@@ -103,9 +103,6 @@ const HouseholdMemberForm = () => {
     */
     birthMonth: z.string().min(1),
     birthYear: z.string().trim().min(4),
-    // .number()
-    // .lte(CURRENT_YEAR)
-    // .gte(CURRENT_YEAR - MAX_AGE),
     healthInsurance: z
       .object({
         none: z.boolean(),
