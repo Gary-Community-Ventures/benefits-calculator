@@ -206,7 +206,7 @@ const HouseholdMemberForm = () => {
 
   }, [watchHasIncome]);
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (memberData) => {
     if (uuid) {
       const currentMemberDataAtThisIndex = householdMemberFormData;
       if (currentMemberDataAtThisIndex) {
@@ -220,20 +220,21 @@ const HouseholdMemberForm = () => {
         });
 
         const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-        // console.log(updatedFormData)
         setFormData(updatedFormData);
-        await updateScreen(uuid, updatedFormData, locale);
+        updateScreen(uuid, updatedFormData, locale);
       } else {
         // if there is no data at this index then we need to push it to the array
-        console.log(formData.householdData)
         const copyOfHouseholdData = [...formData.householdData];
         copyOfHouseholdData.push(memberData);
         const updatedFormData = { ...formData, householdData: copyOfHouseholdData };
-        console.log(`updatedFormData`, updatedFormData);
         setFormData(updatedFormData);
-        await updateScreen(uuid, updatedFormData, locale);
+        updateScreen(uuid, updatedFormData, locale);
       }
       nextStep();
+      if (pageNumber < formData.householdSize) {
+        // reset the form when moving to the next person
+        reset();
+      }
     }
   };
 
