@@ -25,7 +25,7 @@ import questions from '../../Assets/questions';
 import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
 import AlreadyHasBenefits from '../Steps/AlreadyHasBenefits';
 import ImmediateNeeds from '../Steps/ImmediateNeeds';
-import SignUp from '../Steps/SignUp';
+import SignUp from '../Steps/SignUp/SignUp';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,

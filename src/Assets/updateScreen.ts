@@ -163,11 +163,6 @@ const updateUser = async (
   }
 
   await putUser(userBody, uuid);
-
-  setFormData({
-    ...formData,
-    signUpInfo: { ...formData.signUpInfo, hasUser: true },
-  });
 };
 
 export { updateScreen, createScreen, updateUser };
