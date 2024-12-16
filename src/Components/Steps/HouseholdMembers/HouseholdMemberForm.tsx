@@ -136,13 +136,24 @@ const HouseholdMemberForm = () => {
   });
   type FormSchema = z.infer<typeof formSchema>;
 
+  const determineDefaultRelationshipToHH = (householdMemberFormData: HouseholdData | undefined) => {
+    if (householdMemberFormData && householdMemberFormData.relationshipToHH) {
+      return householdMemberFormData.relationshipToHH;
+    } else if (pageNumber === 1) {
+      return 'headOfHousehold'
+    } else {
+      return ''
+    }
+  }
+
   const {
     control,
     formState: { errors },
     handleSubmit,
     watch,
     setValue,
-    getValues
+    getValues,
+    reset
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -166,7 +177,7 @@ const HouseholdMemberForm = () => {
         disabled: false,
         longTermDisability: false,
       },
-      relationshipToHH: householdMemberFormData?.relationshipToHH ? householdMemberFormData.relationshipToHH : pageNumber === 1 ? 'headOfHousehold' : '',
+      relationshipToHH: determineDefaultRelationshipToHH(householdMemberFormData),
       hasIncome: 'false',
       incomeStreams: householdMemberFormData?.incomeStreams ?? []
     }
