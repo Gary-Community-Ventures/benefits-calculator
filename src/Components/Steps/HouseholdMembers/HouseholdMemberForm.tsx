@@ -204,35 +204,36 @@ const HouseholdMemberForm = () => {
   }, [watchHasIncome]);
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (memberData) => {
-    if (uuid) {
-      const currentMemberDataAtThisIndex = householdMemberFormData;
-      if (currentMemberDataAtThisIndex) {
-        // if we have data at this index then replace it
-        const updatedHouseholdData = [...formData.householdData].map((currentMemberData, index) => {
-          if (index === currentMemberIndex) {
-            return memberData;
-          } else {
-            return currentMemberData;
-          }
-        });
+    if (!uuid) return;
 
-        const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-        setFormData(updatedFormData);
-        updateScreen(uuid, updatedFormData, locale);
-      } else {
-        // if there is no data at this index then we need to push it to the array
-        const copyOfHouseholdData = [...formData.householdData];
-        copyOfHouseholdData.push(memberData);
-        const updatedFormData = { ...formData, householdData: copyOfHouseholdData };
-        setFormData(updatedFormData);
-        updateScreen(uuid, updatedFormData, locale);
-      }
-      nextStep();
-      if (pageNumber < formData.householdSize) {
-        // reset the form when moving to the next person
-        reset();
-      }
+    const currentMemberDataAtThisIndex = householdMemberFormData;
+    if (currentMemberDataAtThisIndex) {
+      // if we have data at this index then replace it
+      const updatedHouseholdData = [...formData.householdData].map((currentMemberData, index) => {
+        if (index === currentMemberIndex) {
+          return memberData;
+        } else {
+          return currentMemberData;
+        }
+      });
+
+      const updatedFormData = { ...formData, householdData: updatedHouseholdData };
+      setFormData(updatedFormData);
+      updateScreen(uuid, updatedFormData, locale);
+    } else {
+      // if there is no data at this index then we need to push it to the array
+      const copyOfHouseholdData = [...formData.householdData];
+      copyOfHouseholdData.push(memberData);
+      const updatedFormData = { ...formData, householdData: copyOfHouseholdData };
+      setFormData(updatedFormData);
+      updateScreen(uuid, updatedFormData, locale);
     }
+
+    nextStep();
+    // if (pageNumber < formData.householdSize) {
+    //   // reset the form when moving to the next person
+    //   reset();
+    // }
   };
 
 
