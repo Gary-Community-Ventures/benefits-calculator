@@ -8,7 +8,6 @@ import { Conditions, HealthInsurance, HouseholdData } from '../../../Types/FormD
 import { Autocomplete, Box, Button, FormControl, FormControlLabel, FormHelperText, InputAdornment, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, TextField } from '@mui/material';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useStepNumber } from '../../../Assets/stepDirectory';
-import '../../HouseholdDataBlock/HouseholdDataBlock.css';
 import * as z from 'zod';
 import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { updateScreen } from '../../../Assets/updateScreen';
