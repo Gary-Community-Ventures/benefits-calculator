@@ -24,7 +24,7 @@ import { useForm, Controller, SubmitHandler, useFieldArray } from 'react-hook-fo
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { updateScreen } from '../../../Assets/updateScreen';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import { useConfig } from '../../Config/configHook';
@@ -36,9 +36,7 @@ import './Expenses.css';
 
 const Expenses = () => {
   const { formData, setFormData, locale } = useContext(Context);
-  const { uuid, id } = useParams();
-  const currentStepId = Number(id);
-  const navigate = useNavigate();
+  const { uuid } = useParams();
   const intl = useIntl();
   const translatedAriaLabel = intl.formatMessage({
     id: 'questions.hasExpenses-ariaLabel',
