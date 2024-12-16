@@ -747,6 +747,31 @@ const HouseholdMemberForm = () => {
     );
   };
 
+  const renderFirstIncomeBlockQ = (pageNumber: number) => {
+    let formattedMsgId = 'questions.hasIncome-a';
+    let formattedMsgDefaultMsg = 'What type of income have you had most recently?';
+
+    if (pageNumber !== 1) {
+      formattedMsgId = 'personIncomeBlock.return-questionLabel';
+      formattedMsgDefaultMsg = 'What type of income have they had most recently?';
+    }
+
+    return (
+      <div className="section">
+        <QuestionQuestion>
+          <FormattedMessage
+            id={formattedMsgId}
+            defaultMessage={formattedMsgDefaultMsg}
+          />
+          <HelpButton
+            helpText="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
+            helpId="personIncomeBlock.return-questionDescription"
+          />
+        </QuestionQuestion>
+      </div>
+    );
+  }
+
   return (
     <main className="benefits-form">
       <QuestionHeader>
@@ -788,6 +813,7 @@ const HouseholdMemberForm = () => {
                         </div>
                       )}
                       <div>
+                        {index === 0 && renderFirstIncomeBlockQ(pageNumber)}
                         {index !== 0 && renderAdditionalIncomeBlockQ(pageNumber)}
                         {renderIncomeStreamNameSelect(index)}
                         {renderIncomeFrequencySelect(incomeOptions, selectedIncomeStreamSource, index, pageNumber)}
