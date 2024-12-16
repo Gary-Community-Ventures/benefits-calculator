@@ -14,7 +14,7 @@ import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-fo
 import { updateScreen } from '../../../Assets/updateScreen';
 import { useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MONTHS } from '../../HouseholdDataBlock/MONTHS';
+import { MONTHS } from './MONTHS';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
