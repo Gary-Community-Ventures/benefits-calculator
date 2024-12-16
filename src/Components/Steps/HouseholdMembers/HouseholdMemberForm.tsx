@@ -58,24 +58,16 @@ const HouseholdMemberForm = () => {
 
   const currentStepId = useStepNumber('householdData', formData.immutableReferrer);
   const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
-    const setPage = (uuid: string, currentStepId: number, pageNumber: number) => {
-      navigate(`/${uuid}/step-${currentStepId}/${pageNumber}`);
-    };
-
     if (pageNumber <= 1) {
-      navigate(`/${uuid}/step-${currentStepId - 1}`);
+      navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId - 1}`);
     } else {
-      setPage(uuid, currentStepId, currentMemberIndex);
+      navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber - 1}`);
     }
   };
   const nextStep = useGoToNextStep('householdData', `${pageNumber + 1}`);
 
-
-
   const date = new Date();
   const CURRENT_YEAR = date.getFullYear();
-  // the getMonth method returns January as 0
-  const CURRENT_MONTH = date.getMonth() + 1;
   const MAX_AGE = 130;
   const YEARS = Array.from({ length: MAX_AGE }, (_, i) => {
     const inputYear = CURRENT_YEAR - i;
