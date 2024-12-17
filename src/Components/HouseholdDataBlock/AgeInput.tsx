@@ -11,8 +11,8 @@ import {
   useErrorController,
 } from '../../Assets/validationFunctions';
 import AutoComplete from '../AutoComplete/AutoComplete';
-import './AgeInput.css';
 import { getCurrentMonthYear } from '../../Assets/age';
+import './AgeInput.css';
 
 const MONTHS = {
   1: <FormattedMessage id="ageInput.months.january" defaultMessage="January" />,

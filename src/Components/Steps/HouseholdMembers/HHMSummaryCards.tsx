@@ -1,7 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Box, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import { calcAge } from '../../HouseholdDataBlock/AgeInput';
+import { calcAge } from '../../../Assets/age.tsx';
 import { useConfig } from '../../Config/configHook';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { FormData, HouseholdData } from '../../../Types/FormData';
@@ -101,7 +101,7 @@ const HHMSummaries = ({ activeMemberData, page, formData, uuid, step, triggerVal
     relationship_options: Record<string, FormattedMessageType>,
   ) => {
     if (member.birthYear && member.birthMonth) {
-      let age = calcAge(member.birthYear, member.birthMonth);
+      let age = calcAge(member);
 
       if (Number.isNaN(age)) {
         age = 0;
