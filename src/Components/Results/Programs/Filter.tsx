@@ -1,8 +1,12 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useResultsContext } from '../Results';
 import { Button, Popover, Checkbox } from '@mui/material';
-import { CitizenLabelOptions, CitizenLabels } from '../../../Assets/citizenshipFilterFormControlLabels';
+import {
+  CitizenLabelOptions,
+  CitizenLabels,
+  filterNestedMap,
+} from '../../../Assets/citizenshipFilterFormControlLabels';
 import citizenshipFilterFormControlLabels from '../../../Assets/citizenshipFilterFormControlLabels';
 import { FormattedMessageType } from '../../../Types/Questions';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -21,32 +25,6 @@ export const Filter = () => {
   const intl = useIntl();
 
   useEffect(() => {
-    const filtersCheckedStrArr = Object.entries(filtersChecked)
-      .filter((filterKeyValPair) => {
-        return filterKeyValPair[1];
-      })
-      .map((filteredKeyValPair) => filteredKeyValPair[0]);
-
-    //if a filter is selected/truthy then remove citizen from the filtersCheckedStrArray and set citizen state to false
-    //and add the active-blue css class to the citizenshipButtonClass
-    if (filtersCheckedStrArr.includes('citizen') && filtersCheckedStrArr.length > 1) {
-      filtersCheckedStrArr.filter((filter) => filter !== 'citizen');
-      setFiltersChecked({ ...filtersChecked, citizen: false });
-      setCitButtonClass(citButtonClass + ' active-blue');
-    }
-
-    //if they deselect all of the filters then we want the filtersChecked to start with a truthy citizen value
-    //and the default citButtonClass
-    if (filtersCheckedStrArr.length === 0 && !citizenshipFilterIsOpen) {
-      setFiltersChecked({ ...filtersChecked, citizen: true });
-      setCitButtonClass('citizenship-button');
-    } else if (filtersCheckedStrArr.length === 0 && citizenshipFilterIsOpen) {
-      setFiltersChecked({ ...filtersChecked, citizen: true });
-      setCitButtonClass('citizenship-button flat-white-border-bottom');
-    }
-  }, [filtersChecked]);
-
-  useEffect(() => {
     if (citizenshipFilterIsOpen) {
       setCitButtonClass(citButtonClass + ' flat-white-border-bottom');
     }
@@ -57,78 +35,74 @@ export const Filter = () => {
     setCitizenshipPopoverAnchor(event.currentTarget);
   };
 
-  const handleFilterSelect = (selectedFilterStr: CitizenLabels) => {
-    const updatedSelectedFilterValue = !filtersChecked[selectedFilterStr];
-    const greenCardSubFilters: CitizenLabels[] = ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5'];
-    const otherSubFilters: CitizenLabels[] = [
-      'otherWithWorkPermission',
-      'otherHealthCareUnder19',
-      'otherHealthCarePregnant',
-    ];
+  const handleFilterSelect = (selectedFilterStr: CitizenLabelOptions) => {
+    const newFiltersChecked = { ...filtersChecked };
 
-    if (selectedFilterStr === 'green_card') {
-      const updatedFiltersChecked = { ...filtersChecked };
-      greenCardSubFilters.forEach((subfilter) => {
-        updatedFiltersChecked[subfilter] = updatedSelectedFilterValue;
-      });
+    const newSelected = !newFiltersChecked[selectedFilterStr];
 
-      setFiltersChecked({ ...updatedFiltersChecked, [selectedFilterStr]: updatedSelectedFilterValue });
-    } else if (selectedFilterStr === 'other') {
-      const updatedFiltersChecked = { ...filtersChecked };
-      otherSubFilters.forEach((subfilter) => {
-        updatedFiltersChecked[subfilter] = updatedSelectedFilterValue;
-      });
+    newFiltersChecked[selectedFilterStr] = newSelected;
 
-      setFiltersChecked({ ...updatedFiltersChecked, [selectedFilterStr]: updatedSelectedFilterValue });
-    } else {
-      setFiltersChecked({ ...filtersChecked, [selectedFilterStr]: updatedSelectedFilterValue });
+    // select or deselect all subfilters when main filter is selected
+    const subFilters = filterNestedMap.get(selectedFilterStr);
+    if (subFilters !== undefined) {
+      for (const subFilter of subFilters) {
+        newFiltersChecked[subFilter] = newSelected;
+      }
     }
+
+    // if all subfilters are unchecked, uncheck the main filter
+    filterNestedMap.forEach((subFilters, mainFilter) => {
+      if (!subFilters.includes(selectedFilterStr)) {
+        return;
+      }
+
+      const allSubFiltersDeselected = subFilters.every((subFilter) => !newFiltersChecked[subFilter]);
+
+      if (allSubFiltersDeselected) {
+        newFiltersChecked[mainFilter] = false;
+      }
+    });
+
+    // if all filters are unchecked set citzenship to false
+    let isCitizen = true;
+    for (const unTypedFilter in citizenshipFilterFormControlLabels) {
+      const filter = unTypedFilter as CitizenLabelOptions;
+
+      if (newFiltersChecked[filter]) {
+        isCitizen = false;
+
+        break;
+      }
+    }
+    newFiltersChecked.citizen = isCitizen;
+
+    setFiltersChecked(newFiltersChecked);
   };
 
-  const renderCitizenshipFilters = (
-    citizenshipFCLabels: Record<CitizenLabelOptions, FormattedMessageType>,
-    filtersChecked: Record<CitizenLabels, boolean>,
-  ) => {
-    const greenCardSubFilters = ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5'];
-    const otherSubFilters = ['otherWithWorkPermission', 'otherHealthCareUnder19', 'otherHealthCarePregnant'];
-    const filters: JSX.Element[] = [];
+  const renderCitizenshipFilters = () => {
+    const filters: ReactNode[] = [];
+    filterNestedMap.forEach((subFilters, mainFilter) => {
+      const mainFilterIsChecked = filtersChecked[mainFilter];
 
-    Object.entries(citizenshipFCLabels).forEach((citizenshipFCLEntry) => {
-      const citizenshipFCLKey = citizenshipFCLEntry[0] as CitizenLabelOptions;
-      const citizenshipFCLabel = citizenshipFCLEntry[1];
+      filters.push(
+        <FormControlLabel
+          key={mainFilter}
+          label={citizenshipFilterFormControlLabels[mainFilter]}
+          control={<Checkbox checked={mainFilterIsChecked} onChange={() => handleFilterSelect(mainFilter)} />}
+          className="vertical-align"
+        />,
+      );
 
-      const isAMainFilter =
-        !greenCardSubFilters.includes(citizenshipFCLKey) && !otherSubFilters.includes(citizenshipFCLKey);
-      const isSubfilterAndMainFilterIsChecked =
-        (greenCardSubFilters.includes(citizenshipFCLKey) && filtersChecked.green_card === true) ||
-        (otherSubFilters.includes(citizenshipFCLKey) && filtersChecked.other === true);
+      if (!mainFilterIsChecked) {
+        return;
+      }
 
-      //if this is a main filter push it otherwise check to see if the main filter is truthy and then push it
-      if (isAMainFilter) {
+      for (const subFilter of subFilters) {
         filters.push(
           <FormControlLabel
-            key={citizenshipFCLKey}
-            label={citizenshipFCLabel}
-            control={
-              <Checkbox
-                checked={filtersChecked[citizenshipFCLKey]}
-                onChange={() => handleFilterSelect(citizenshipFCLKey)}
-              />
-            }
-            className="vertical-align"
-          />,
-        );
-      } else if (isSubfilterAndMainFilterIsChecked) {
-        filters.push(
-          <FormControlLabel
-            key={citizenshipFCLKey}
-            label={citizenshipFCLabel}
-            control={
-              <Checkbox
-                checked={filtersChecked[citizenshipFCLKey]}
-                onChange={() => handleFilterSelect(citizenshipFCLKey)}
-              />
-            }
+            key={subFilter}
+            label={citizenshipFilterFormControlLabels[subFilter]}
+            control={<Checkbox checked={filtersChecked[subFilter]} onChange={() => handleFilterSelect(subFilter)} />}
             className="subcategory-indentation vertical-align"
             sx={{ padding: '.5rem 0' }}
           />,
@@ -184,7 +158,7 @@ export const Filter = () => {
               <CloseIcon fontSize="small" />
             </IconButton>
           </div>
-          {renderCitizenshipFilters(citizenshipFilterFormControlLabels, filtersChecked)}
+          {renderCitizenshipFilters()}
         </Popover>
       </section>
     );

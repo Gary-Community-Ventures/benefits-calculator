@@ -26,7 +26,7 @@ export type CitizenLabelOptions =
   | 'otherHealthCareUnder19'
   | 'otherHealthCarePregnant';
 
-export const filterNestedMap = new Map<CitizenLabels, CitizenLabelOptions[]>([
+export const filterNestedMap = new Map<CitizenLabelOptions, CitizenLabelOptions[]>([
   ['non_citizen', []],
   ['green_card', ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5']],
   ['refugee', []],
