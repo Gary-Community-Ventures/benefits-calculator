@@ -18,7 +18,8 @@ import HelpButton from '../HelpBubbleIcon/HelpButton.tsx';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
-import AgeInput, { calcAge } from './AgeInput';
+import AgeInput from './AgeInput';
+import { calcAge, hasBirthMonthYear, useFormatBirthMonthYear } from '../../Assets/age.tsx';
 import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
 import HHMSummaryCards from '../Steps/HouseholdMembers/HHMSummaryCards.tsx';
 import './HouseholdDataBlock.css';
@@ -169,7 +170,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
       relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
     }
 
-    let age = calcAge(member.birthYear, member.birthMonth);
+    let age = calcAge(member);
     if (Number.isNaN(age)) {
       age = 0;
     }
@@ -211,6 +212,7 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
   };
 
   const translateNumber = useTranslateNumber();
+  const formatBirthMonthYear = useFormatBirthMonthYear();
   const createMemberCard = (index, relationship, birthYear, birthMonth, age, income, page) => {
     const containerClassName = `member-added-container ${index + 1 === page ? 'current-household-member' : ''}`;
 
@@ -235,14 +237,14 @@ const HouseholdDataBlock = ({ handleHouseholdDataSubmit }) => {
           </strong>
           {translateNumber(age)}
         </div>
-        <div className="member-added-age">
-          <strong>
-            <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
-          </strong>
-          {birthMonth !== undefined &&
-            birthYear !== undefined &&
-            translateNumber(String(birthMonth).padStart(2, '0')) + '/' + translateNumber(birthYear)}
-        </div>
+        {hasBirthMonthYear({ birthMonth, birthYear }) && (
+          <div className="member-added-age">
+            <strong>
+              <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
+            </strong>
+            {formatBirthMonthYear({ birthMonth, birthYear })}
+          </div>
+        )}
         <div className="member-added-income">
           <strong>
             <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income" />:{' '}

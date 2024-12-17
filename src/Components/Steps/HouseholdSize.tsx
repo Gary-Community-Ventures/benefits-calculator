@@ -47,7 +47,7 @@ const HouseholdSize = () => {
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async ({ householdSize }) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ householdSize }) => {
     if (uuid) {
       const updatedFormData = {
         ...formData,
@@ -55,7 +55,7 @@ const HouseholdSize = () => {
         householdData: formData.householdData.slice(0, householdSize),
       };
       setFormData(updatedFormData);
-      await updateScreen(uuid, updatedFormData, locale);
+      updateScreen(uuid, updatedFormData, locale);
       nextStep();
     }
   };

@@ -80,6 +80,7 @@ const FetchScreen = () => {
         pell: response.has_pell_grant ?? false,
         rtdlive: response.has_rtdlive ?? false,
         snap: response.has_snap ?? false,
+        sunbucks: response.has_sunbucks ?? false,
         ssdi: response.has_ssdi ?? false,
         ssi: response.has_ssi ?? false,
         tanf: response.has_tanf ?? false,
@@ -141,6 +142,7 @@ const FetchScreen = () => {
       }
 
       initialFormData.householdData.push({
+        age: member.age ?? undefined,
         birthYear: member.birth_year ?? undefined,
         birthMonth: member.birth_month ?? undefined,
         relationshipToHH: member.relationship ? member.relationship : defaultRelationship,

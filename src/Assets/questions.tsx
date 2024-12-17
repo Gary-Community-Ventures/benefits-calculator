@@ -85,52 +85,6 @@ const questions: Record<QuestionName, Question> = {
       required: true,
     },
   },
-  hasBenefits: {
-    name: 'hasBenefits',
-    header: (
-      <FormattedMessage
-        id="qcc.tell-us-final-text"
-        defaultMessage="Tell us some final information about your household."
-      />
-    ),
-    question: (
-      <>
-        <FormattedMessage
-          id="questions.hasBenefits"
-          defaultMessage="Does your household currently have any benefits?"
-        />
-        <HelpButton
-          helpText="This information will help make sure we don't give you results for benefits you already have."
-          helpId="questions.hasBenefits-description"
-        />
-      </>
-    ),
-    componentDetails: {
-      componentType: 'PreferNotToAnswer',
-      ariaLabel: 'questions.hasBenefits-ariaLabel',
-      inputName: 'hasBenefits',
-      inputError: benefitsHasError,
-      inputHelperText: displayBenefitsHelperText,
-    },
-    followUpQuestions: [
-      {
-        question: (
-          <FormattedMessage
-            id="questions.hasBenefits-a"
-            defaultMessage="Please tell us what benefits your household currently has."
-          />
-        ),
-        name: 'benefits',
-        componentDetails: {
-          componentType: 'AccordionContainer',
-          ariaLabel: 'questions.hasBenefits-a-ariaLabel',
-          inputName: 'benefits',
-          inputError: benefitsHasError,
-          inputHelperText: displayBenefitsHelperText,
-        },
-      },
-    ],
-  },
   acuteHHConditions: {
     name: 'acuteHHConditions',
     header: (

@@ -90,22 +90,8 @@ const App = () => {
         commConsent: false,
       };
     }
-
-    if (formData.hasBenefits !== 'true') {
-      for (const benefit in formData.benefits) {
-        // @ts-ignore
-        updatedFormData.benefits[benefit] = false;
-      }
-    }
-
     setFormData(updatedFormData);
-  }, [
-    formData.hasExpenses,
-    formData.referralSource,
-    formData.signUpInfo.sendOffers,
-    formData.signUpInfo.sendUpdates,
-    formData.hasBenefits,
-  ]);
+  }, [formData.hasExpenses, formData.referralSource, formData.signUpInfo.sendOffers, formData.signUpInfo.sendUpdates]);
 
   useEffect(() => {
     const referrerParam = searchParams.get('referrer');
@@ -271,6 +257,14 @@ const App = () => {
               <Route path="jeffcohs" element={<RedirectToWhiteLabel whiteLabel="co" />} />
               <Route path="jeffcohscm" element={<RedirectToWhiteLabel whiteLabel="co" />} />
               <Route path="ccig" element={<RedirectToWhiteLabel whiteLabel="co" />} />
+              <Route
+                path="step-1"
+                element={
+                  <RedirectToWhiteLabel>
+                    <FetchScreen />
+                  </RedirectToWhiteLabel>
+                }
+              />
               <Route path=":whiteLabel/:uuid">
                 <Route path="" element={<FetchScreen />} />
                 <Route path="*" element={<FetchScreen />} />

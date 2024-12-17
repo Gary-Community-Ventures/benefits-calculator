@@ -22,6 +22,8 @@ import { useStepName } from '../../Assets/stepDirectory';
 import ReferralSourceStep from '../Steps/Referrer';
 import questions from '../../Assets/questions';
 import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
+import AlreadyHasBenefits from '../Steps/AlreadyHasBenefits';
+import ImmediateNeeds from '../Steps/ImmediateNeeds';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({
@@ -246,6 +248,18 @@ const QuestionComponentContainer = ({
       return (
         <main className="benefits-form">
           <Expenses />
+        </main>
+      );
+    case 'hasBenefits':
+      return (
+        <main className="benefits-form">
+          <AlreadyHasBenefits />
+        </main>
+      );
+    case 'acuteHHConditions':
+      return (
+        <main className="benefits-form">
+          <ImmediateNeeds />
         </main>
       );
     default:

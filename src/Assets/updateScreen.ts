@@ -28,7 +28,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     expenses: expenses,
     household_assets: formData.householdAssets || 0,
     request_language_code: languageCode,
-    has_benefits: formData.hasBenefits ?? 'preferNotToAnswer',
+    has_benefits: formData.hasBenefits,
     has_acp: formData.benefits.acp,
     has_andcs: formData.benefits.andcs,
     has_cccap: formData.benefits.cccap,
@@ -50,6 +50,7 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     has_nfp: formData.benefits.nfp,
     has_rtdlive: formData.benefits.rtdlive,
     has_snap: formData.benefits.snap,
+    has_sunbucks: formData.benefits.sunbucks,
     has_ssdi: formData.benefits.ssdi,
     has_ssi: formData.benefits.ssi,
     has_cowap: formData.benefits.cowap,
@@ -61,15 +62,15 @@ const getScreensBody = (formData: FormData, languageCode: Language) => {
     has_fatc: formData.benefits.fatc,
     referral_source: formData.referralSource ?? null,
     referrer_code: formData.immutableReferrer ?? null,
-    needs_food: formData.acuteHHConditions.food,
-    needs_baby_supplies: formData.acuteHHConditions.babySupplies,
-    needs_housing_help: formData.acuteHHConditions.housing,
-    needs_mental_health_help: formData.acuteHHConditions.support,
-    needs_child_dev_help: formData.acuteHHConditions.childDevelopment,
-    needs_family_planning_help: formData.acuteHHConditions.familyPlanning,
-    needs_job_resources: formData.acuteHHConditions.jobResources,
-    needs_dental_care: formData.acuteHHConditions.dentalCare,
-    needs_legal_services: formData.acuteHHConditions.legalServices,
+    needs_food: formData.acuteHHConditions.food ?? null,
+    needs_baby_supplies: formData.acuteHHConditions.babySupplies ?? null,
+    needs_housing_help: formData.acuteHHConditions.housing ?? null,
+    needs_mental_health_help: formData.acuteHHConditions.support ?? null,
+    needs_child_dev_help: formData.acuteHHConditions.childDevelopment ?? null,
+    needs_family_planning_help: formData.acuteHHConditions.familyPlanning ?? null,
+    needs_job_resources: formData.acuteHHConditions.jobResources ?? null,
+    needs_dental_care: formData.acuteHHConditions.dentalCare ?? null,
+    needs_legal_services: formData.acuteHHConditions.legalServices ?? null,
   };
 
   return screenBody;
@@ -86,6 +87,7 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
   const incomes = getIncomeStreamsBodies(householdMemberData);
 
   return {
+    age: householdMemberData.age ?? null,
     birth_year: householdMemberData.birthYear ?? null,
     birth_month: householdMemberData.birthMonth ?? null,
     relationship: householdMemberData.relationshipToHH,

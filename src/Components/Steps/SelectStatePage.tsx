@@ -14,7 +14,7 @@ import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 
 // This will get removed once NC is moved into the main server
 export const STATES: { [key: string]: string } =
-  process.env.REACT_APP_STATE === 'CO' ? { co: 'Colorado', nc: 'North Carolina' } : { nc: 'North Carolina' };
+  process.env.REACT_APP_STATE === 'CO' ? { co: 'Colorado' } : { nc: 'North Carolina' };
 
 const SelectStatePage = () => {
   const { formData, setFormData } = useContext(Context);
@@ -92,7 +92,7 @@ const SelectStatePage = () => {
         <FormattedMessage id="stateStep.header" defaultMessage="Before you begin..." />
       </QuestionHeader>
       <QuestionQuestion>
-        <FormattedMessage id="stateStep.header" defaultMessage="What is your state?" />
+        <FormattedMessage id="stateStep.question" defaultMessage="What is your state?" />
       </QuestionQuestion>
       <form onSubmit={handleSubmit(submitHandler)}>
         <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.state !== undefined}>

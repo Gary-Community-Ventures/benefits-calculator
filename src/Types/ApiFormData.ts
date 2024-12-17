@@ -37,6 +37,7 @@ export type ApiHouseholdMemberReadOnly = {
 };
 
 export type ApiHouseholdMember = {
+  age: number | null; // deprecated: used for historical screens only
   birth_year: number | null;
   birth_month: number | null;
   relationship: string | null;
@@ -119,10 +120,11 @@ export type ApiFormData = {
   user?: ApiUserWriteOnly;
   external_id: string | null;
   request_language_code: Language | null;
-  has_benefits: string | null;
+  has_benefits: 'true' | 'false' | 'preferNotToAnswer' | null;
   has_tanf: boolean | null;
   has_wic: boolean | null;
   has_snap: boolean | null;
+  has_sunbucks: boolean | null;
   has_lifeline: boolean | null;
   has_acp: boolean | null;
   has_eitc: boolean | null;
