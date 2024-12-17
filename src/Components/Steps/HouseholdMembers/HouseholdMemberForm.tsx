@@ -158,8 +158,7 @@ const HouseholdMemberForm = () => {
     watch,
     setValue,
     getValues,
-    trigger,
-    reset
+    trigger
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -239,10 +238,6 @@ const HouseholdMemberForm = () => {
     }
 
     nextStep();
-    // if (pageNumber < formData.householdSize) {
-    //   // reset the form when moving to the next person
-    //   reset();
-    // }
   };
 
 

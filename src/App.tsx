@@ -329,7 +329,7 @@ const App = () => {
                       //   key={window.location.href}
                       //   handleHouseholdDataSubmit={handleHouseholdDataSubmit}
                       // />
-                      <HouseholdMemberForm />
+                      <HouseholdMemberForm key={window.location.href} />
                     }
                   />
                   <Route
