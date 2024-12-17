@@ -110,7 +110,11 @@ const HouseholdMemberForm = () => {
     then birthMonth would have a minimum string length of 1 which passes validation.
     */
     birthMonth: z.string().min(1),
-    birthYear: z.string().trim().min(4),
+    birthYear: z.string().trim().refine((value) => {
+      const year = Number(value);
+      const age = CURRENT_YEAR - year;
+      return year <= CURRENT_YEAR && age < MAX_AGE
+    }),
     healthInsurance: z
       .object({
         none: z.boolean(),
