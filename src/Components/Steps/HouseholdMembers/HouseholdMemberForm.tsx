@@ -83,12 +83,21 @@ const HouseholdMemberForm = () => {
 
   // birthYear > CURRENT_YEAR || birthYear < CURRENT_YEAR - MAX_AGE;
   const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
+  const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
   const incomeSourcesSchema = z.object({
-    incomeStreamName:  z.string().min(1),
+    incomeStreamName: z.string().min(1),
     incomeFrequency: z.string().min(1),
-    hoursPerWeek: z.string().regex(oneOrMoreDigitsButNotAllZero),
-    incomeAmount: z.string().regex(oneOrMoreDigitsButNotAllZero),
-  });
+    hoursPerWeek: z.string().trim(),
+    incomeAmount: z.string().trim().refine((value) => {
+      return Number(value) > 0 && incomeAmountRegex.test(value);
+    }),
+  }).refine((data) => {
+    if (data.incomeFrequency === 'hourly') {
+      return oneOrMoreDigitsButNotAllZero.test(data.hoursPerWeek.trim());
+    } else {
+      return true
+    }
+  }, { path: ['hoursPerWeek'] });
   const incomeStreamsSchema = z.array(incomeSourcesSchema);
   const hasIncomeSchema = z.string().regex(/^true|false$/);
 
@@ -175,7 +184,7 @@ const HouseholdMemberForm = () => {
         longTermDisability: false,
       },
       relationshipToHH: determineDefaultRelationshipToHH(householdMemberFormData),
-      hasIncome: 'false',
+      hasIncome: householdMemberFormData?.incomeStreams.length > 0 ? 'true' : 'false',
       incomeStreams: householdMemberFormData?.incomeStreams ?? []
     }
   });
