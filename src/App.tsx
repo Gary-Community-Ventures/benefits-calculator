@@ -318,13 +318,7 @@ const App = () => {
                   <Route path="step-2" element={<Disclaimer />} />
                   <Route
                     path={`step-${householdMemberStepNumber}/:page`}
-                    element={
-                      // <HouseholdDataBlock
-                      //   key={window.location.href}
-                      //   handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-                      // />
-                      <HouseholdMemberForm key={window.location.href} />
-                    }
+                    element={<HouseholdMemberForm key={window.location.href} />}
                   />
                   <Route
                     path="step-:id"
