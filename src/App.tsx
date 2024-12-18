@@ -163,12 +163,6 @@ const App = () => {
     }
   };
 
-  const handleRadioButtonChange = (event: Event) => {
-    const { name, value } = event.target as HTMLInputElement;
-    let boolValue = value === 'true';
-    setFormData({ ...formData, [name]: boolValue });
-  };
-
   const handleNoAnswerChange = (event: Event) => {
     const { name, value } = event.target as HTMLInputElement;
     setFormData({ ...formData, [name]: value });
@@ -218,25 +212,6 @@ const App = () => {
           : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
       }
     }
-  };
-
-  const handleIncomeStreamsSubmit = (validatedIncomeStreams: IncomeStream[], stepId: number, uuid: string) => {
-    const updatedFormData = { ...formData, incomeStreams: validatedIncomeStreams };
-    updateScreen(uuid, updatedFormData, locale);
-    setFormData(updatedFormData);
-    navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
-  };
-
-  const handleExpenseSourcesSubmit = (validatedExpenseSources: Expense[], stepId: number, uuid: string) => {
-    const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
-      ? location.state.routedFromConfirmationPg
-      : false;
-    const updatedFormData = { ...formData, expenses: validatedExpenseSources };
-    updateScreen(uuid, updatedFormData, locale);
-    setFormData(updatedFormData);
-    isComingFromConfirmationPg
-      ? navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`)
-      : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
   };
 
   if (pageIsLoading) {
@@ -319,10 +294,7 @@ const App = () => {
                         key={window.location.href}
                         handleTextfieldChange={handleTextfieldChange}
                         handleContinueSubmit={handleContinueSubmit}
-                        handleRadioButtonChange={handleRadioButtonChange}
                         handleNoAnswerChange={handleNoAnswerChange}
-                        handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-                        handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
                         handleCheckboxChange={handleCheckboxChange}
                       />
                     }
