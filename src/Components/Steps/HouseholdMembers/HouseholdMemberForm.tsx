@@ -5,7 +5,22 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../../Wrapper/Wrapper';
 import { ReactNode, useContext, useEffect, useMemo } from 'react';
 import { Conditions, HealthInsurance, HouseholdData } from '../../../Types/FormData';
-import { Autocomplete, Box, Button, FormControl, FormControlLabel, FormHelperText, InputAdornment, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, TextField } from '@mui/material';
+import {
+  Autocomplete,
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormHelperText,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
+  Stack,
+  TextField,
+} from '@mui/material';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useStepNumber } from '../../../Assets/stepDirectory';
 import * as z from 'zod';
@@ -24,7 +39,15 @@ import HelpButton from '../../HelpBubbleIcon/HelpButton';
 import AddIcon from '@mui/icons-material/Add';
 import { createMenuItems } from '../SelectHelperFunctions/SelectHelperFunctions';
 import CloseButton from '../../CloseButton/CloseButton';
-import { renderBirthMonthHelperText, renderBirthYearHelperText, renderHealthInsuranceHelperText, renderRelationshipToHHHelperText, renderIncomeFrequencyHelperText, renderHoursWorkedHelperText, renderIncomeAmountHelperText } from './HelperTextFunctions';
+import {
+  renderBirthMonthHelperText,
+  renderBirthYearHelperText,
+  renderHealthInsuranceHelperText,
+  renderRelationshipToHHHelperText,
+  renderIncomeFrequencyHelperText,
+  renderHoursWorkedHelperText,
+  renderIncomeAmountHelperText,
+} from './HelperTextFunctions';
 import './PersonIncomeBlock.css';
 
 const HouseholdMemberForm = () => {
@@ -36,24 +59,22 @@ const HouseholdMemberForm = () => {
   const currentMemberIndex = pageNumber - 1;
   const householdMemberFormData = formData.householdData[currentMemberIndex];
   const healthInsuranceOptions =
-    useConfig<Record<keyof HealthInsurance, { text: FormattedMessageType; icon: ReactNode }>>('health_insurance_options');
+    useConfig<Record<keyof HealthInsurance, { text: FormattedMessageType; icon: ReactNode }>>(
+      'health_insurance_options',
+    );
   const conditionOptions =
     useConfig<Record<keyof Conditions, { text: FormattedMessageType; icon: ReactNode }>>('condition_options');
-  const relationshipOptions =
-    useConfig<Record<string,FormattedMessageType>>('relationship_options');
-  const incomeOptions = useConfig<Record<string,FormattedMessageType>>('income_options');
+  const relationshipOptions = useConfig<Record<string, FormattedMessageType>>('relationship_options');
+  const incomeOptions = useConfig<Record<string, FormattedMessageType>>('income_options');
   const incomeStreamsMenuItems = createMenuItems(
     incomeOptions,
     <FormattedMessage id="personIncomeBlock.createMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
   );
-  const frequencyOptions = useConfig<Record<string,FormattedMessageType>>('frequency_options');
+  const frequencyOptions = useConfig<Record<string, FormattedMessageType>>('frequency_options');
   const frequencyMenuItems = createMenuItems(
-      frequencyOptions,
-      <FormattedMessage
-        id="personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem"
-        defaultMessage="Select"
-      />
-    );
+    frequencyOptions,
+    <FormattedMessage id="personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
+  );
 
   const currentStepId = useStepNumber('householdData', formData.immutableReferrer);
   const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
@@ -84,20 +105,28 @@ const HouseholdMemberForm = () => {
   // birthYear > CURRENT_YEAR || birthYear < CURRENT_YEAR - MAX_AGE;
   const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
   const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
-  const incomeSourcesSchema = z.object({
-    incomeStreamName: z.string().min(1),
-    incomeFrequency: z.string().min(1),
-    hoursPerWeek: z.string().trim(),
-    incomeAmount: z.string().trim().refine((value) => {
-      return Number(value) > 0 && incomeAmountRegex.test(value);
-    }),
-  }).refine((data) => {
-    if (data.incomeFrequency === 'hourly') {
-      return oneOrMoreDigitsButNotAllZero.test(data.hoursPerWeek.trim());
-    } else {
-      return true
-    }
-  }, { path: ['hoursPerWeek'] });
+  const incomeSourcesSchema = z
+    .object({
+      incomeStreamName: z.string().min(1),
+      incomeFrequency: z.string().min(1),
+      hoursPerWeek: z.string().trim(),
+      incomeAmount: z
+        .string()
+        .trim()
+        .refine((value) => {
+          return Number(value) > 0 && incomeAmountRegex.test(value);
+        }),
+    })
+    .refine(
+      (data) => {
+        if (data.incomeFrequency === 'hourly') {
+          return oneOrMoreDigitsButNotAllZero.test(data.hoursPerWeek.trim());
+        } else {
+          return true;
+        }
+      },
+      { path: ['hoursPerWeek'] },
+    );
   const incomeStreamsSchema = z.array(incomeSourcesSchema);
   const hasIncomeSchema = z.string().regex(/^true|false$/);
 
@@ -110,11 +139,14 @@ const HouseholdMemberForm = () => {
     then birthMonth would have a minimum string length of 1 which passes validation.
     */
     birthMonth: z.string().min(1),
-    birthYear: z.string().trim().refine((value) => {
-      const year = Number(value);
-      const age = CURRENT_YEAR - year;
-      return year <= CURRENT_YEAR && age < MAX_AGE
-    }),
+    birthYear: z
+      .string()
+      .trim()
+      .refine((value) => {
+        const year = Number(value);
+        const age = CURRENT_YEAR - year;
+        return year <= CURRENT_YEAR && age < MAX_AGE;
+      }),
     healthInsurance: z
       .object({
         none: z.boolean(),
@@ -139,7 +171,9 @@ const HouseholdMemberForm = () => {
       disabled: z.boolean(),
       longTermDisability: z.boolean(),
     }),
-    relationshipToHH: z.string().refine((value) => [...Object.keys(relationshipOptions)].includes(value) || pageNumber === 1),
+    relationshipToHH: z
+      .string()
+      .refine((value) => [...Object.keys(relationshipOptions)].includes(value) || pageNumber === 1),
     hasIncome: hasIncomeSchema,
     incomeStreams: incomeStreamsSchema,
   });
@@ -149,11 +183,11 @@ const HouseholdMemberForm = () => {
     if (householdMemberFormData && householdMemberFormData.relationshipToHH) {
       return householdMemberFormData.relationshipToHH;
     } else if (pageNumber === 1) {
-      return 'headOfHousehold'
+      return 'headOfHousehold';
     } else {
-      return ''
+      return '';
     }
-  }
+  };
 
   const {
     control,
@@ -162,23 +196,25 @@ const HouseholdMemberForm = () => {
     watch,
     setValue,
     getValues,
-    trigger
+    trigger,
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       birthMonth: householdMemberFormData?.birthMonth ? String(householdMemberFormData.birthMonth) : '',
       birthYear: householdMemberFormData?.birthYear ? String(householdMemberFormData.birthYear) : '',
-      healthInsurance: householdMemberFormData?.healthInsurance ? householdMemberFormData.healthInsurance : {
-        none: false,
-        employer: false,
-        private: false,
-        medicaid: false,
-        medicare: false,
-        chp: false,
-        emergency_medicaid: false,
-        family_planning: false,
-        va: false,
-      },
+      healthInsurance: householdMemberFormData?.healthInsurance
+        ? householdMemberFormData.healthInsurance
+        : {
+            none: false,
+            employer: false,
+            private: false,
+            medicaid: false,
+            medicare: false,
+            chp: false,
+            emergency_medicaid: false,
+            family_planning: false,
+            va: false,
+          },
       conditions: {
         student: false,
         pregnant: false,
@@ -188,8 +224,8 @@ const HouseholdMemberForm = () => {
       },
       relationshipToHH: determineDefaultRelationshipToHH(householdMemberFormData),
       hasIncome: householdMemberFormData?.incomeStreams.length > 0 ? 'true' : 'false',
-      incomeStreams: householdMemberFormData?.incomeStreams ?? []
-    }
+      incomeStreams: householdMemberFormData?.incomeStreams ?? [],
+    },
   });
   const watchHasIncome = watch('hasIncome');
   const hasTruthyIncome = watchHasIncome === 'true';
@@ -212,7 +248,6 @@ const HouseholdMemberForm = () => {
     if (!hasTruthyIncome) {
       replace([]);
     }
-
   }, [watchHasIncome]);
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (memberData) => {
@@ -243,7 +278,6 @@ const HouseholdMemberForm = () => {
 
     nextStep();
   };
-
 
   const createAgeQuestion = (personIndex: number) => {
     return (
@@ -287,7 +321,9 @@ const HouseholdMemberForm = () => {
                       );
                     })}
                   </Select>
-                  {errors.birthMonth !== undefined && <FormHelperText sx={{ marginLeft: 0 }}>{renderBirthMonthHelperText()}</FormHelperText>}
+                  {errors.birthMonth !== undefined && (
+                    <FormHelperText sx={{ marginLeft: 0 }}>{renderBirthMonthHelperText()}</FormHelperText>
+                  )}
                 </>
               )}
             />
@@ -321,7 +357,9 @@ const HouseholdMemberForm = () => {
                       />
                     )}
                   />
-                  {errors.birthYear !== undefined && <FormHelperText sx={{ marginLeft: 0 }}>{renderBirthYearHelperText()}</FormHelperText>}
+                  {errors.birthYear !== undefined && (
+                    <FormHelperText sx={{ marginLeft: 0 }}>{renderBirthYearHelperText()}</FormHelperText>
+                  )}
                 </>
               )}
             />
@@ -331,7 +369,7 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const displayHealthCareQuestion = (page:number) => {
+  const displayHealthCareQuestion = (page: number) => {
     if (page === 1) {
       return (
         <QuestionQuestion>
@@ -365,21 +403,22 @@ const HouseholdMemberForm = () => {
             options={pageNumber === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
             triggerValidation={trigger}
           />
-          {errors.healthInsurance !== undefined && <FormHelperText sx={{ marginLeft: 0 }}>{renderHealthInsuranceHelperText()}</FormHelperText>}
+          {errors.healthInsurance !== undefined && (
+            <FormHelperText sx={{ marginLeft: 0 }}>{renderHealthInsuranceHelperText()}</FormHelperText>
+          )}
         </Stack>
       </Box>
     );
   };
 
-  const displayConditionsQuestion = (
-    pageNumber: number,
-    conditionOptions) => {
+  const displayConditionsQuestion = (pageNumber: number, conditionOptions) => {
     const formattedMsgId =
       pageNumber === 1
         ? 'householdDataBlock.createConditionsQuestion-do-these-apply-to-you'
         : 'householdDataBlock.createConditionsQuestion-do-these-apply';
 
-    const formattedMsgDefaultMsg = pageNumber === 1 ? 'Do any of these apply to you?' : 'Do any of these apply to them?';
+    const formattedMsgDefaultMsg =
+      pageNumber === 1 ? 'Do any of these apply to you?' : 'Do any of these apply to them?';
 
     return (
       <Box sx={{ margin: '3rem 0' }}>
@@ -455,7 +494,7 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const createIncomeRadioQuestion = (index:number) => {
+  const createIncomeRadioQuestion = (index: number) => {
     const translatedAriaLabel = intl.formatMessage({
       id: 'householdDataBlock.createIncomeRadioQuestion-ariaLabel',
       defaultMessage: 'has an income',
@@ -501,7 +540,7 @@ const HouseholdMemberForm = () => {
         </Box>
       </Box>
     );
-  }
+  };
   const renderIncomeStreamNameHelperText = () => {
     return (
       <ErrorMessageWrapper fontSize="1rem">
@@ -551,7 +590,10 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const getIncomeStreamSourceLabel = (incomeOptions: Record<string, FormattedMessageType>, incomeStreamName:string) => {
+  const getIncomeStreamSourceLabel = (
+    incomeOptions: Record<string, FormattedMessageType>,
+    incomeStreamName: string,
+  ) => {
     if (incomeStreamName) {
       return (
         <>
@@ -565,7 +607,12 @@ const HouseholdMemberForm = () => {
     return '?';
   };
 
-  const renderIncomeFrequencySelect  = (incomeOptions: Record<string, FormattedMessageType>, selectedIncomeSource: string, index:number, pageNumber: number) => {
+  const renderIncomeFrequencySelect = (
+    incomeOptions: Record<string, FormattedMessageType>,
+    selectedIncomeSource: string,
+    index: number,
+    pageNumber: number,
+  ) => {
     let formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel';
     let formattedMsgDefaultMsg = 'How often are you paid this income ';
     if (pageNumber !== 1) {
@@ -625,9 +672,9 @@ const HouseholdMemberForm = () => {
         </>
       </div>
     );
-  }
+  };
 
-  const renderHoursPerWeekTextfield  = (page:number, index:number, selectedIncomeSource:string) => {
+  const renderHoursPerWeekTextfield = (page: number, index: number, selectedIncomeSource: string) => {
     let formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-youQLabel';
     let formattedMsgDefaultMsg = 'How many hours do you work per week ';
 
@@ -667,9 +714,14 @@ const HouseholdMemberForm = () => {
         />
       </>
     );
-  }
+  };
 
-  const renderIncomeAmountTextfield = (page: number, index: number, selectedIncomeFrequency: string, selectedIncomeStreamSource:string) => {
+  const renderIncomeAmountTextfield = (
+    page: number,
+    index: number,
+    selectedIncomeFrequency: string,
+    selectedIncomeStreamSource: string,
+  ) => {
     let questionHeader;
 
     if (selectedIncomeFrequency === 'hourly') {
@@ -736,7 +788,7 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const renderAdditionalIncomeBlockQ = (page:number) => {
+  const renderAdditionalIncomeBlockQ = (page: number) => {
     let formattedMsgId = 'incomeBlock.createIncomeBlockQuestions-questionLabel';
     let formattedMsgDefaultMsg = 'If you receive another type of income, select it below.';
 
@@ -768,10 +820,7 @@ const HouseholdMemberForm = () => {
     return (
       <div className="section">
         <QuestionQuestion>
-          <FormattedMessage
-            id={formattedMsgId}
-            defaultMessage={formattedMsgDefaultMsg}
-          />
+          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
           <HelpButton
             helpText="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
             helpId="personIncomeBlock.return-questionDescription"
@@ -779,7 +828,7 @@ const HouseholdMemberForm = () => {
         </QuestionQuestion>
       </div>
     );
-  }
+  };
 
   return (
     <main className="benefits-form">
@@ -810,36 +859,35 @@ const HouseholdMemberForm = () => {
           <Stack sx={{ margin: '3rem 0' }}>
             {createIncomeRadioQuestion(pageNumber)}
             {fields.map((field, index) => {
-                const selectedIncomeStreamSource = watch('incomeStreams')[index].incomeStreamName;
-                const selectedIncomeFrequency = watch('incomeStreams')[index].incomeFrequency;
+              const selectedIncomeStreamSource = watch('incomeStreams')[index].incomeStreamName;
+              const selectedIncomeFrequency = watch('incomeStreams')[index].incomeFrequency;
 
-                return (
-                  <div className="section-container income-block-container" key={field.id}>
-                    <div className={index % 2 === 0 ? 'section' : ''}>
-                      {index !== 0 && (
-                        <div className="delete-button-container">
-                          <CloseButton handleClose={() => remove(index)} />
-                        </div>
-                      )}
-                      <div>
-                        {index === 0 && renderFirstIncomeBlockQ(pageNumber)}
-                        {index !== 0 && renderAdditionalIncomeBlockQ(pageNumber)}
-                        {renderIncomeStreamNameSelect(index)}
-                        {renderIncomeFrequencySelect(incomeOptions, selectedIncomeStreamSource, index, pageNumber)}
-                        {selectedIncomeFrequency === 'hourly' &&
-                          renderHoursPerWeekTextfield(pageNumber, index, selectedIncomeStreamSource)}
-                        {renderIncomeAmountTextfield(
-                          pageNumber,
-                          index,
-                          selectedIncomeFrequency,
-                          selectedIncomeStreamSource,
-                        )}
+              return (
+                <div className="section-container income-block-container" key={field.id}>
+                  <div className={index % 2 === 0 ? 'section' : ''}>
+                    {index !== 0 && (
+                      <div className="delete-button-container">
+                        <CloseButton handleClose={() => remove(index)} />
                       </div>
+                    )}
+                    <div>
+                      {index === 0 && renderFirstIncomeBlockQ(pageNumber)}
+                      {index !== 0 && renderAdditionalIncomeBlockQ(pageNumber)}
+                      {renderIncomeStreamNameSelect(index)}
+                      {renderIncomeFrequencySelect(incomeOptions, selectedIncomeStreamSource, index, pageNumber)}
+                      {selectedIncomeFrequency === 'hourly' &&
+                        renderHoursPerWeekTextfield(pageNumber, index, selectedIncomeStreamSource)}
+                      {renderIncomeAmountTextfield(
+                        pageNumber,
+                        index,
+                        selectedIncomeFrequency,
+                        selectedIncomeStreamSource,
+                      )}
                     </div>
                   </div>
-                );
-              })
-            }
+                </div>
+              );
+            })}
             {hasTruthyIncome && (
               <div>
                 <Button

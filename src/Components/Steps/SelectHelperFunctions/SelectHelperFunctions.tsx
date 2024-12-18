@@ -1,7 +1,10 @@
-import { MenuItem } from "@mui/material";
-import { FormattedMessageType } from "../../../Types/Questions";
+import { MenuItem } from '@mui/material';
+import { FormattedMessageType } from '../../../Types/Questions';
 
-export const createMenuItems = (options: Record<string, FormattedMessageType>, disabledSelectFM:FormattedMessageType) => {
+export const createMenuItems = (
+  options: Record<string, FormattedMessageType>,
+  disabledSelectFM: FormattedMessageType,
+) => {
   const disabledSelectMenuItem = (
     <MenuItem value="select" key="disabled-select-value" disabled>
       {disabledSelectFM}
@@ -17,4 +20,4 @@ export const createMenuItems = (options: Record<string, FormattedMessageType>, d
   });
 
   return [disabledSelectMenuItem, menuItems];
-}
+};

@@ -30,7 +30,7 @@ const HHMSummaries = ({ activeMemberData, page, formData, uuid, step, triggerVal
   const navigate = useNavigate();
 
   const handleEditBtnSubmit = async (memberIndex: number) => {
-    const isValid = await triggerValidation()
+    const isValid = await triggerValidation();
     if (isValid) {
       navigate(`/${formData.whiteLabel}/${uuid}/step-${step}/${memberIndex + 1}`);
     }

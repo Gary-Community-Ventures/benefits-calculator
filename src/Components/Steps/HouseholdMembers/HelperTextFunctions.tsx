@@ -1,6 +1,6 @@
-import { FormattedMessage } from "react-intl";
-import { MessageFunction } from "../../../Types/ErrorController";
-import ErrorMessageWrapper from "../../ErrorMessage/ErrorMessageWrapper";
+import { FormattedMessage } from 'react-intl';
+import { MessageFunction } from '../../../Types/ErrorController';
+import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 
 export const renderBirthMonthHelperText = () => {
   return (
@@ -60,4 +60,3 @@ export const renderIncomeAmountHelperText = () => {
     </ErrorMessageWrapper>
   );
 };
-
