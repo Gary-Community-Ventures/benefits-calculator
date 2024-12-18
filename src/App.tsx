@@ -239,14 +239,6 @@ const App = () => {
       : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
   };
 
-  const handleHouseholdDataSubmit = (memberData: HouseholdData, stepId: number, uuid: string) => {
-    const updatedMembers = [...formData.householdData];
-    updatedMembers[stepId] = memberData;
-    const updatedFormData = { ...formData, householdData: updatedMembers };
-    updateScreen(uuid, updatedFormData, locale);
-    setFormData(updatedFormData);
-  };
-
   if (pageIsLoading) {
     return (
       <ThemeProvider theme={theme}>
