@@ -25,7 +25,6 @@ import AddIcon from '@mui/icons-material/Add';
 import { createMenuItems } from '../SelectHelperFunctions/SelectHelperFunctions';
 import CloseButton from '../../CloseButton/CloseButton';
 import { renderBirthMonthHelperText, renderBirthYearHelperText, renderHealthInsuranceHelperText, renderRelationshipToHHHelperText, renderIncomeFrequencyHelperText, renderHoursWorkedHelperText, renderIncomeAmountHelperText } from './HelperTextFunctions';
-import MultiSelectTiles from '../../OptionCardGroup/MultiSelectTiles';
 import './PersonIncomeBlock.css';
 
 const HouseholdMemberForm = () => {
@@ -355,24 +354,18 @@ const HouseholdMemberForm = () => {
   };
 
   const displayHealthInsuranceBlock = (pageNumber: number, healthInsuranceOptions: any) => {
-    const indexBasedHIOptions = pageNumber === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them;
     return (
       <Box className="section-container">
         <Stack sx={{ padding: '3rem 0' }} className="section">
           {displayHealthCareQuestion(pageNumber)}
-          <MultiSelectTiles
-            values={watch('healthInsurance')}
-            onChange={(values) => {
-              setValue('healthInsurance', values, { shouldValidate: true, shouldDirty: true });
-              trigger('healthInsurance');
-            }}
-            options={Object.entries(indexBasedHIOptions).map(([value, content]) => {
-              return { value: value, text: content.text, icon: content.icon };
-            })}
+          <RHFOptionCardGroup
+            fields={watch('healthInsurance')}
+            setValue={setValue}
+            name="healthInsurance"
+            options={pageNumber === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
+            triggerValidation={trigger}
           />
-          {errors.healthInsurance !== undefined && (
-            <FormHelperText sx={{ marginLeft: 0 }}>{renderHealthInsuranceHelperText()}</FormHelperText>
-          )}
+          {errors.healthInsurance !== undefined && <FormHelperText sx={{ marginLeft: 0 }}>{renderHealthInsuranceHelperText()}</FormHelperText>}
         </Stack>
       </Box>
     );
