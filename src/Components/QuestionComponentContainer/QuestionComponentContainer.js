@@ -8,7 +8,6 @@ import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
-import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { Zipcode } from '../Steps/Zipcode.tsx';
@@ -81,27 +80,6 @@ const QuestionComponentContainer = ({
       <BasicCheckboxGroup
         stateVariable={question.componentDetails.inputName}
         options={matchingQuestion.componentDetails.options}
-      />
-    );
-  };
-
-  const renderOptionCardGroup = (question) => {
-    if (question.name === 'acuteHHConditions')
-      return (
-        <OptionCardGroup
-          options={acuteConditionOptions}
-          stateVariable={question.componentDetails.inputName}
-          memberData={formData}
-          setMemberData={setFormData}
-        />
-      );
-
-    return (
-      <OptionCardGroup
-        options={matchingQuestion.componentDetails.options}
-        stateVariable={question.componentDetails.inputName}
-        memberData={formData}
-        setMemberData={setFormData}
       />
     );
   };
@@ -274,8 +252,6 @@ const QuestionComponentContainer = ({
               createComponent(renderNoAnswerComponent(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
               createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
-            (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
-              createComponent(renderOptionCardGroup(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
               createComponent(renderBasicSelectComponent(matchingQuestion)))}
         </main>
