@@ -19,7 +19,7 @@ type RHFOptionCardGroupProps<T extends FieldValues> = {
   setValue: (name: string, value: unknown, config?: Object) => void;
   name: string;
   options: Option<T>[];
-  triggerValidation: UseFormTrigger<FormSchema>;
+  triggerValidation?: UseFormTrigger<FormSchema>;
 };
 
 const RHFOptionCardGroup = <T extends FieldValues>({
@@ -35,7 +35,7 @@ const RHFOptionCardGroup = <T extends FieldValues>({
     const updatedValue = !fields[optionName];
     setValue(`${name}.${optionName}`, updatedValue, { shouldValidate: true, shouldDirty: true });
 
-    await triggerValidation(name);
+    triggerValidation && await triggerValidation(name);
   };
 
   const displayOptionCards = (options: Record<any, any>, name: string, values: Record<string, boolean>) => {
