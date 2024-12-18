@@ -35,7 +35,9 @@ const RHFOptionCardGroup = <T extends FieldValues>({
     const updatedValue = !fields[optionName];
     setValue(`${name}.${optionName}`, updatedValue, { shouldValidate: true, shouldDirty: true });
 
-    triggerValidation && await triggerValidation(name);
+    if (triggerValidation) {
+      await triggerValidation(name);
+    }
   };
 
   const displayOptionCards = (options: Record<any, any>, name: string, values: Record<string, boolean>) => {
