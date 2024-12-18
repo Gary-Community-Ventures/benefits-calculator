@@ -28,10 +28,7 @@ import './QuestionComponentContainer.css';
 const QuestionComponentContainer = ({
   handleTextfieldChange,
   handleContinueSubmit,
-  handleRadioButtonChange,
   handleNoAnswerChange,
-  handleIncomeStreamsSubmit,
-  handleExpenseSourcesSubmit,
   handleCheckboxChange,
 }) => {
   const { formData, setFormData } = useContext(Context);
@@ -54,12 +51,6 @@ const QuestionComponentContainer = ({
         handleTextfieldChange={handleTextfieldChange}
         submitted={errorController.submittedCount}
       />
-    );
-  };
-
-  const renderRadiofieldComponent = (question) => {
-    return (
-      <Radiofield componentDetails={question.componentDetails} handleRadioButtonChange={handleRadioButtonChange} />
     );
   };
 
@@ -126,8 +117,6 @@ const QuestionComponentContainer = ({
             submitted={errorController.submittedCount}
             formData={formData}
             handleCheckboxChange={handleCheckboxChange}
-            handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
             handleTextfieldChange={handleTextfieldChange}
           />
         )}
@@ -246,8 +235,6 @@ const QuestionComponentContainer = ({
           {renderHeaderAndSubheader()}
           {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
             createComponent(renderTextfieldComponent(matchingQuestion))) ||
-            (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
-              createComponent(renderRadiofieldComponent(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
               createComponent(renderNoAnswerComponent(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
