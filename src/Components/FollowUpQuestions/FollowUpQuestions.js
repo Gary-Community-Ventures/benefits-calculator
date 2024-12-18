@@ -12,7 +12,6 @@ const FollowUpQuestions = ({
   submitted,
   formData,
   handleCheckboxChange,
-  handleExpenseSourcesSubmit,
   handleTextfieldChange,
   handleRadioButtonChange,
 }) => {

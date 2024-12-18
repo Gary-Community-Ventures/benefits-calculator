@@ -1,6 +1,5 @@
 import PreviousButton from '../PreviousButton/PreviousButton';
 import FormContinueButton from '../ContinueButton/FormContinueButton';
-import { FormattedMessageType } from '../../Types/Questions';
 
 type PrevAndContinueButtonsProps = {
   backNavigationFunction: () => void;
