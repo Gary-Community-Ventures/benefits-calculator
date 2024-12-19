@@ -1,14 +1,14 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useContext, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useResultsContext } from '../Results';
 import { Button, Popover, Checkbox } from '@mui/material';
 import {
+  CalculatedCitizenLabel,
+  calculatedCitizenshipFilters,
   CitizenLabelOptions,
-  CitizenLabels,
   filterNestedMap,
 } from '../../../Assets/citizenshipFilterFormControlLabels';
 import citizenshipFilterFormControlLabels from '../../../Assets/citizenshipFilterFormControlLabels';
-import { FormattedMessageType } from '../../../Types/Questions';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -16,11 +16,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import './Filter.css';
 import HelpButton from '../../HelpBubbleIcon/HelpButton';
+import { Context } from '../../Wrapper/Wrapper';
 
 export const Filter = () => {
   const [citizenshipFilterIsOpen, setCitizenshipFilterIsOpen] = useState(false);
   const [citizenshipPopoverAnchor, setCitizenshipPopoverAnchor] = useState<null | Element>(null);
   const { filtersChecked, setFiltersChecked } = useResultsContext();
+  const { formData } = useContext(Context);
   const [citButtonClass, setCitButtonClass] = useState('citizenship-button');
   const intl = useIntl();
 
@@ -65,16 +67,24 @@ export const Filter = () => {
 
     // if all filters are unchecked set citzenship to false
     let isCitizen = true;
-    for (const unTypedFilter in citizenshipFilterFormControlLabels) {
-      const filter = unTypedFilter as CitizenLabelOptions;
-
-      if (newFiltersChecked[filter]) {
+    for (const filter in citizenshipFilterFormControlLabels) {
+      if (newFiltersChecked[filter as CitizenLabelOptions]) {
         isCitizen = false;
 
         break;
       }
     }
     newFiltersChecked.citizen = isCitizen;
+
+    // calculate hidden filters if the user is not a citizen
+    Object.entries(calculatedCitizenshipFilters).map(([filterName, func]) => {
+      if (isCitizen) {
+        newFiltersChecked[filterName as CalculatedCitizenLabel] = false;
+        return;
+      }
+
+      newFiltersChecked[filterName as CalculatedCitizenLabel] = func(formData);
+    });
 
     setFiltersChecked(newFiltersChecked);
   };
@@ -194,7 +204,6 @@ export const Filter = () => {
       gc_5plus: false,
       gc_18plus_no5: false,
       gc_under18_no5: false,
-      other: false,
       otherWithWorkPermission: false,
       otherHealthCareUnder19: false,
       otherHealthCarePregnant: false,
