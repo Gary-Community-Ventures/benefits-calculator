@@ -1,3 +1,4 @@
+import { CitizenLabels } from '../Assets/citizenshipFilterFormControlLabels';
 import { Language } from './Language';
 
 export type Translation = {
@@ -21,6 +22,11 @@ export type ProgramNavigator = {
 export type ProgramCategoryCap = {
   programs: string[];
   cap: number;
+};
+
+export type WarningMessage = {
+  message: Translation;
+  legal_statuses: CitizenLabels[];
 };
 
 export type Program = {
@@ -48,7 +54,7 @@ export type Program = {
   low_confidence: boolean;
   navigators: ProgramNavigator[];
   documents: ProgramDocument[];
-  warning_messages: Translation[];
+  warning_messages: WarningMessage[];
 };
 
 export type ProgramDocument = {
