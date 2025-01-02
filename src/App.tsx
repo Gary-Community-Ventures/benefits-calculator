@@ -124,21 +124,6 @@ const App = () => {
     }
   };
 
-  const handleCheckboxChange = (event: React.FormEvent<HTMLInputElement>) => {
-    //the value is the name of the formData property for everything except the commConsent
-    const { value, name } = event.target as HTMLInputElement;
-
-    if (name === 'commConsent') {
-      const updatedCommConsent = !formData.signUpInfo.commConsent;
-      const updatedSignUpInfo = { ...formData.signUpInfo, commConsent: updatedCommConsent };
-      setFormData({ ...formData, signUpInfo: updatedSignUpInfo });
-      return;
-    } else {
-      // @ts-ignore
-      setFormData({ ...formData, [value]: !formData[value] });
-    }
-  };
-
   const handleRadioButtonChange = (event: Event) => {
     const { name, value } = event.target as HTMLInputElement;
     let boolValue = value === 'true';
@@ -193,18 +178,6 @@ const App = () => {
     updateScreen(uuid, updatedFormData, locale);
     setFormData(updatedFormData);
     navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
-  };
-
-  const handleExpenseSourcesSubmit = (validatedExpenseSources: Expense[], stepId: number, uuid: string) => {
-    const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
-      ? location.state.routedFromConfirmationPg
-      : false;
-    const updatedFormData = { ...formData, expenses: validatedExpenseSources };
-    updateScreen(uuid, updatedFormData, locale);
-    setFormData(updatedFormData);
-    isComingFromConfirmationPg
-      ? navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`)
-      : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
   };
 
   const handleHouseholdDataSubmit = (memberData: HouseholdData, stepId: number, uuid: string) => {
@@ -303,8 +276,6 @@ const App = () => {
                         handleRadioButtonChange={handleRadioButtonChange}
                         handleNoAnswerChange={handleNoAnswerChange}
                         handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-                        handleExpenseSourcesSubmit={handleExpenseSourcesSubmit}
-                        handleCheckboxChange={handleCheckboxChange}
                       />
                     }
                   />

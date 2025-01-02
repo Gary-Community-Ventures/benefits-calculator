@@ -7,7 +7,6 @@ import Textfield from '../Textfield/Textfield.js';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import BasicSelect from '../DropdownMenu/BasicSelect';
-import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
@@ -33,8 +32,6 @@ const QuestionComponentContainer = ({
   handleRadioButtonChange,
   handleNoAnswerChange,
   handleIncomeStreamsSubmit,
-  handleExpenseSourcesSubmit,
-  handleCheckboxChange,
 }) => {
   const { formData, setFormData } = useContext(Context);
   const acuteConditionOptions = useConfig('acute_condition_options');
@@ -265,8 +262,6 @@ const QuestionComponentContainer = ({
               createComponent(renderRadiofieldComponent(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
               createComponent(renderNoAnswerComponent(matchingQuestion))) ||
-            (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
-              createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
               createComponent(renderOptionCardGroup(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
