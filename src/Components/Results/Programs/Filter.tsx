@@ -65,7 +65,7 @@ export const Filter = () => {
       }
     });
 
-    // if all filters are unchecked set citzenship to false
+    // if all filters are unchecked set citizenship to false
     let isCitizen = true;
     for (const filter in citizenshipFilterFormControlLabels) {
       if (newFiltersChecked[filter as CitizenLabelOptions]) {

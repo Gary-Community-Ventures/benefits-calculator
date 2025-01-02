@@ -114,6 +114,8 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
   const warningMessages = useMemo(() => {
     return program.warning_messages.filter((warningMessage) => {
       if (warningMessage.legal_statuses.length === 0) {
+        // if no legal statuses are selected,
+        // then assume that the waring is for all legal statuses
         return true;
       }
 
