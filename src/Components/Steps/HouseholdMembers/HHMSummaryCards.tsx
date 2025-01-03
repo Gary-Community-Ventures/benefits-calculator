@@ -130,7 +130,6 @@ const HHMSummaries = ({ activeMemberData, page, formData, uuid, step, triggerVal
         income += Number(num);
       }
 
-      // return createMemberCard(memberIndex, relationship, member.birthYear, member.birthMonth, age, income, page);
       return createMemberCard(memberIndex, member, age, income, relationship_options);
     }
   };
