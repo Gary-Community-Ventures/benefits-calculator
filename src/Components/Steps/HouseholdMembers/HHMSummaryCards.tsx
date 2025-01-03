@@ -51,7 +51,7 @@ const HHMSummaries = ({ activeMemberData, page, formData, uuid, step, triggerVal
     const containerClassName = `member-added-container ${memberIndex + 1 === page ? 'current-household-member' : ''}`;
 
     let relationship = relationship_options[relationshipToHH];
-    if (relationship === undefined) {
+    if (memberIndex === 0) {
       relationship = <FormattedMessage id="relationshipOptions.yourself" defaultMessage="Yourself" />;
     }
 
