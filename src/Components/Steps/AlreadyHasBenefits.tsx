@@ -136,6 +136,12 @@ function AlreadyHasBenefits() {
       throw new Error('uuid is not defined');
     }
 
+    if (['false', 'preferNotToAnswer'].includes(hasBenefits)) {
+      for (const key in alreadyHasBenefits) {
+        alreadyHasBenefits[key] = false;
+      }
+    }
+
     const newFormData = { ...formData, hasBenefits: hasBenefits, benefits: alreadyHasBenefits };
 
     setFormData(newFormData);
