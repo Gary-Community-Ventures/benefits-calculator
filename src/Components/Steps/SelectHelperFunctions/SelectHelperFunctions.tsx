@@ -11,7 +11,7 @@ export const createMenuItems = (
     </MenuItem>
   );
 
-  const menuItems = Object.keys(options).map((menuItemKey, i) => {
+  const menuItems = Object.keys(options).map((menuItemKey) => {
     return (
       <MenuItem value={menuItemKey} key={menuItemKey}>
         {options[menuItemKey]}
