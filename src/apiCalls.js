@@ -32,19 +32,6 @@ const getTranslations = (lang) => {
   });
 };
 
-const postUser = (userData) => {
-  return fetch(userEndpoint, {
-    method: 'POST',
-    body: JSON.stringify(userData),
-    headers: header,
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error('A user with this email or phone number already exists in our system.');
-    }
-    return response.json();
-  });
-};
-
 const putUser = (userData, uuid) => {
   return fetch(userEndpoint + uuid + '/', {
     method: 'PUT',
@@ -244,7 +231,6 @@ export {
   postScreen,
   getScreen,
   putScreen,
-  postUser,
   putUser,
   postMessage,
   getEligibility,
