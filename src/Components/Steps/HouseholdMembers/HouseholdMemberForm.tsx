@@ -26,7 +26,6 @@ import { useStepNumber } from '../../../Assets/stepDirectory';
 import * as z from 'zod';
 import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { updateScreen } from '../../../Assets/updateScreen';
-import { useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MONTHS } from './MONTHS';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
@@ -84,7 +83,15 @@ const HouseholdMemberForm = () => {
       navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber - 1}`);
     }
   };
-  const nextStep = useGoToNextStep('householdData', `${pageNumber + 1}`);
+  const nextStep = (uuid: string, currentStepId: number, pageNumber:number) => {
+    if (Number(pageNumber + 1) <= formData.householdSize) {
+      navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber + 1}`);
+      return;
+    } else {
+      navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId + 1}`);
+      return;
+    }
+  }
 
   const date = new Date();
   const CURRENT_YEAR = date.getFullYear();
@@ -276,7 +283,7 @@ const HouseholdMemberForm = () => {
       updateScreen(uuid, updatedFormData, locale);
     }
 
-    nextStep();
+    nextStep(uuid, currentStepId, pageNumber);
   };
 
   const createAgeQuestion = (personIndex: number) => {
