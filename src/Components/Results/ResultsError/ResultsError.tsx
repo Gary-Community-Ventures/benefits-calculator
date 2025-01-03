@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import './ResultsError.css';
 
 const ResultsError = () => {
-  const { uuid } = useParams();
+  const { uuid, whiteLabel } = useParams();
   const navigate = useNavigate();
 
   return (
@@ -24,7 +24,7 @@ const ResultsError = () => {
         <Button
           className="error-button"
           onClick={() => {
-            navigate(`/${uuid}/confirm-information`);
+            navigate(`/${whiteLabel}/${uuid}/confirm-information`);
           }}
           variant="contained"
         >

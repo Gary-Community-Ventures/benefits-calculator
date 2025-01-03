@@ -1,5 +1,7 @@
 import { FormattedMessage } from 'react-intl';
+import { FormData } from '../Types/FormData';
 import { FormattedMessageType } from '../Types/Questions';
+import { calcAge } from './age';
 
 export type CitizenLabels =
   | 'citizen'
@@ -9,7 +11,6 @@ export type CitizenLabels =
   | 'gc_5plus'
   | 'gc_18plus_no5'
   | 'gc_under18_no5'
-  | 'other'
   | 'otherWithWorkPermission'
   | 'otherHealthCareUnder19'
   | 'otherHealthCarePregnant';
@@ -21,17 +22,25 @@ export type CitizenLabelOptions =
   | 'gc_5plus'
   | 'gc_18plus_no5'
   | 'gc_under18_no5'
-  | 'other'
-  | 'otherWithWorkPermission'
-  | 'otherHealthCareUnder19'
-  | 'otherHealthCarePregnant';
+  | 'otherWithWorkPermission';
 
-export const filterNestedMap = new Map<CitizenLabels, CitizenLabelOptions[]>([
+export type CalculatedCitizenLabel = 'otherHealthCareUnder19' | 'otherHealthCarePregnant';
+
+export const filterNestedMap = new Map<CitizenLabelOptions, CitizenLabelOptions[]>([
   ['non_citizen', []],
   ['green_card', ['gc_5plus', 'gc_18plus_no5', 'gc_under18_no5']],
   ['refugee', []],
-  ['other', ['otherWithWorkPermission', 'otherHealthCareUnder19', 'otherHealthCarePregnant']],
+  ['otherWithWorkPermission', []],
 ]);
+
+export const calculatedCitizenshipFilters: Record<CalculatedCitizenLabel, (formData: FormData) => boolean> = {
+  otherHealthCarePregnant: (formData) => {
+    return formData.householdData.some((member) => member.conditions.pregnant);
+  },
+  otherHealthCareUnder19: (formData) => {
+    return formData.householdData.some((member) => calcAge(member) < 19);
+  },
+};
 
 const citizenshipFilterFormControlLabels: Record<CitizenLabelOptions, FormattedMessageType> = {
   non_citizen: (
@@ -60,28 +69,10 @@ const citizenshipFilterFormControlLabels: Record<CitizenLabelOptions, FormattedM
       defaultMessage="Admitted refugees or asylees (special rules or waiting periods may apply)"
     />
   ),
-  other: (
-    <FormattedMessage
-      id="citizenshipFCtrlLabel-other"
-      defaultMessage="Other lawfully present noncitizens (includes DACA recipients)"
-    />
-  ),
   otherWithWorkPermission: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-other_work_permission"
-      defaultMessage="with permission to live or work in the U.S. (other rules may apply)"
-    />
-  ),
-  otherHealthCareUnder19: (
-    <FormattedMessage
-      id="citizenshipFCtrlLabel-other_health_care_under19"
-      defaultMessage="for health care benefits - younger than 19"
-    />
-  ),
-  otherHealthCarePregnant: (
-    <FormattedMessage
-      id="citizenshipFCtrlLabel-other_health_care_pregnant"
-      defaultMessage="for health care benefits - pregnant"
+      defaultMessage="Other lawfully present noncitizens with permission to live or work in the U.S. (includes DACA recipients, other rules may apply)"
     />
   ),
 };

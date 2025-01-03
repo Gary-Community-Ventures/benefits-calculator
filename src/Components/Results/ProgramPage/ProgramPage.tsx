@@ -1,18 +1,19 @@
 import { useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
-import ResultsTranslate from '../Translate/Translate.tsx';
-import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading.tsx';
-import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
+import ResultsTranslate from '../Translate/Translate';
+import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading';
+import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons';
 import { FormattedMessage } from 'react-intl';
 import { useFormatYearlyValue } from '../FormattedValue';
 import './ProgramPage.css';
-import WarningMessage from '../../WarningComponent/WarningMessage.tsx';
-import { useContext } from 'react';
+import WarningMessage from '../../WarningComponent/WarningMessage';
+import { useContext, useMemo } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import { findValidationForProgram, useResultsContext, useResultsLink } from '../Results';
 import { deleteValidation, postValidation } from '../../../apiCalls';
-import { Language } from '../../../Assets/languageOptions.tsx';
-import { allNavigatorLanguages } from './NavigatorLanguages.tsx';
+import { Language } from '../../../Assets/languageOptions';
+import { allNavigatorLanguages } from './NavigatorLanguages';
+import { CitizenLabels } from '../../../Assets/citizenshipFilterFormControlLabels';
 
 type ProgramPageProps = {
   program: Program;
@@ -25,7 +26,7 @@ type IconRendererProps = {
 const ProgramPage = ({ program }: ProgramPageProps) => {
   const { uuid } = useParams();
   const { formData, setFormData, staffToken } = useContext(Context);
-  const { isAdminView, validations, setValidations, programCategories } = useResultsContext();
+  const { isAdminView, validations, setValidations, programCategories, filtersChecked } = useResultsContext();
   const IconRenderer: React.FC<IconRendererProps> = ({ headingType }) => {
     const IconComponent = headingOptionsMappings[headingType];
 
@@ -110,6 +111,24 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
   };
   const value = useFormatYearlyValue(program);
 
+  const warningMessages = useMemo(() => {
+    return program.warning_messages.filter((warningMessage) => {
+      if (warningMessage.legal_statuses.length === 0) {
+        // if no legal statuses are selected,
+        // then assume that the waring is for all legal statuses
+        return true;
+      }
+
+      for (const status of warningMessage.legal_statuses) {
+        if (filtersChecked[status]) {
+          return true;
+        }
+      }
+
+      return false;
+    });
+  }, [filtersChecked, program]);
+
   const displayEstimatedValueAndTime = (program: Program) => {
     return (
       <section className="estimation">
@@ -160,8 +179,8 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         {displayEstimatedValueAndTime(program)}
       </div>
       <div className="results-program-page-warning-container">
-        {program.warning_messages.map((message, key) => {
-          return <WarningMessage message={message} key={key} />;
+        {warningMessages.map((warning, key) => {
+          return <WarningMessage message={warning.message} key={key} />;
         })}
       </div>
       <div className="apply-button-container">
