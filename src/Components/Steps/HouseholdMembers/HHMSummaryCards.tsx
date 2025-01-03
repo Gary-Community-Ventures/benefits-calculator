@@ -19,7 +19,7 @@ type HHMSummariesProps = {
 };
 
 const HHMSummaries = ({ activeMemberData, page, formData, uuid, step, triggerValidation }: HHMSummariesProps) => {
-  const relationshipOptions = useConfig('relationship_options');
+  const relationshipOptions = useConfig<{ [key: string]: FormattedMessageType }>('relationship_options');
   const headOfHHInfoWasEntered = formData.householdData.length >= 1;
   const translateNumber = useTranslateNumber();
   const intl = useIntl();
