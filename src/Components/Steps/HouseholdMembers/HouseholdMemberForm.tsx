@@ -169,7 +169,6 @@ const HouseholdMemberForm = () => {
       .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
         message: 'Please select at least one health insurance option.',
         path: ['healthInsurance'],
-        //TODO: make sure that this only shows up for the person at this index
       }),
     conditions: z.object({
       student: z.boolean(),
@@ -222,13 +221,15 @@ const HouseholdMemberForm = () => {
             family_planning: false,
             va: false,
           },
-      conditions: {
-        student: false,
-        pregnant: false,
-        blindOrVisuallyImpaired: false,
-        disabled: false,
-        longTermDisability: false,
-      },
+      conditions: householdMemberFormData?.conditions
+        ? householdMemberFormData.conditions
+        : {
+          student: false,
+          pregnant: false,
+          blindOrVisuallyImpaired: false,
+          disabled: false,
+          longTermDisability: false,
+        },
       relationshipToHH: determineDefaultRelationshipToHH(householdMemberFormData),
       hasIncome: householdMemberFormData?.incomeStreams.length > 0 ? 'true' : 'false',
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
