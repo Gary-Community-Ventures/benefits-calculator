@@ -75,7 +75,7 @@ const HouseholdMemberForm = () => {
     <FormattedMessage id="personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
   );
 
-  const currentStepId = useStepNumber('householdData', formData.immutableReferrer);
+  const currentStepId = useStepNumber('householdData');
   const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
     if (pageNumber <= 1) {
       navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId - 1}`);
