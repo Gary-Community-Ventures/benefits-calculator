@@ -124,12 +124,6 @@ const App = () => {
     }
   };
 
-  const handleRadioButtonChange = (event: Event) => {
-    const { name, value } = event.target as HTMLInputElement;
-    let boolValue = value === 'true';
-    setFormData({ ...formData, [name]: boolValue });
-  };
-
   const handleNoAnswerChange = (event: Event) => {
     const { name, value } = event.target as HTMLInputElement;
     setFormData({ ...formData, [name]: value });
@@ -278,7 +272,6 @@ const App = () => {
                         handleContinueSubmit={handleContinueSubmit}
                         handleRadioButtonChange={handleRadioButtonChange}
                         handleNoAnswerChange={handleNoAnswerChange}
-                        handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
                       />
                     }
                   />

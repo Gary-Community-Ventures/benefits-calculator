@@ -14,9 +14,9 @@ import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { Context } from '../../Wrapper/Wrapper';
-import './SignUp.css';
-import { useParams } from 'react-router-dom';
 import useScreenApi from '../../../Assets/updateScreen';
+import { useParams } from 'react-router-dom';
+import './SignUp.css';
 
 function SignUp() {
   const { formData, setFormData, locale } = useContext(Context);

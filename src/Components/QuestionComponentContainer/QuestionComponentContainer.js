@@ -7,7 +7,6 @@ import Textfield from '../Textfield/Textfield.js';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import BasicSelect from '../DropdownMenu/BasicSelect';
-import OptionCardGroup from '../OptionCardGroup/OptionCardGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { ZipcodeStep } from '../Steps/ZipcodeStep';
@@ -25,13 +24,13 @@ import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
 import AlreadyHasBenefits from '../Steps/AlreadyHasBenefits';
 import ImmediateNeeds from '../Steps/ImmediateNeeds';
 import SignUp from '../Steps/SignUp/SignUp';
+import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = ({
   handleTextfieldChange,
   handleContinueSubmit,
   handleRadioButtonChange,
   handleNoAnswerChange,
-  handleIncomeStreamsSubmit,
 }) => {
   const { formData, setFormData } = useContext(Context);
   const acuteConditionOptions = useConfig('acute_condition_options');
@@ -67,27 +66,6 @@ const QuestionComponentContainer = ({
         componentDetails={question.componentDetails}
         handleRadioButtonChange={handleNoAnswerChange}
         preferNotToAnswer={true}
-      />
-    );
-  };
-
-  const renderOptionCardGroup = (question) => {
-    if (question.name === 'acuteHHConditions')
-      return (
-        <OptionCardGroup
-          options={acuteConditionOptions}
-          stateVariable={question.componentDetails.inputName}
-          memberData={formData}
-          setMemberData={setFormData}
-        />
-      );
-
-    return (
-      <OptionCardGroup
-        options={matchingQuestion.componentDetails.options}
-        stateVariable={question.componentDetails.inputName}
-        memberData={formData}
-        setMemberData={setFormData}
       />
     );
   };
@@ -133,7 +111,6 @@ const QuestionComponentContainer = ({
             followUpQuestions={matchingQuestion.followUpQuestions}
             submitted={errorController.submittedCount}
             formData={formData}
-            handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
             handleTextfieldChange={handleTextfieldChange}
           />
         )}
@@ -262,8 +239,6 @@ const QuestionComponentContainer = ({
               createComponent(renderRadiofieldComponent(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
               createComponent(renderNoAnswerComponent(matchingQuestion))) ||
-            (matchingQuestion.componentDetails.componentType === 'OptionCardGroup' &&
-              createComponent(renderOptionCardGroup(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
               createComponent(renderBasicSelectComponent(matchingQuestion)))}
         </main>

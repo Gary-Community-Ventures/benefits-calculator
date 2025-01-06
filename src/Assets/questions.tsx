@@ -1,12 +1,6 @@
 import {
   radiofieldHasError,
   householdAssetsHasError,
-  benefitsHasError,
-  selectHasError,
-  displayReferralSourceHelperText,
-  signUpOptionsHaveError,
-  acuteHHConditionsHasError,
-  displayBenefitsHelperText,
   displayHouseholdAssetsHelperText,
   otherReferalSourceHelperText,
 } from './validationFunctions.tsx';
@@ -91,26 +85,6 @@ const questions: Record<QuestionName, Question> = {
       dollarField: true,
       numericField: true,
       required: true,
-    },
-  },
-  acuteHHConditions: {
-    name: 'acuteHHConditions',
-    header: (
-      <FormattedMessage
-        id="qcc.tell-us-final-text"
-        defaultMessage="Tell us some final information about your household."
-      />
-    ),
-    question: (
-      <FormattedMessage
-        id="questions.acuteHHConditions"
-        defaultMessage="Is anyone in your household in immediate need of help with any of the following?"
-      />
-    ),
-    componentDetails: {
-      componentType: 'OptionCardGroup',
-      inputName: 'acuteHHConditions',
-      inputError: acuteHHConditionsHasError,
     },
   },
 };
