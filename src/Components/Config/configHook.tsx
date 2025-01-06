@@ -28,7 +28,6 @@ import { ReactComponent as Housing } from '../../Assets/OptionCardIcons/AcuteCon
 import { ReactComponent as Job_resources } from '../../Assets/OptionCardIcons/AcuteConditions/job_resources.svg';
 import { ReactComponent as Legal_services } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
 import { ReactComponent as Support } from '../../Assets/OptionCardIcons/AcuteConditions/support.svg';
-import { useParams } from 'react-router-dom';
 
 type Item = {
   _label: string;
@@ -204,6 +203,7 @@ export function useGetConfig(screenLoading: boolean, whiteLabel: string) {
       // get data and set loading to false
       try {
         if (value !== undefined) {
+          console.log('trying');
           const transformedOutput: Config = transformConfigData(value);
           setConfigResponse(transformedOutput);
         }
