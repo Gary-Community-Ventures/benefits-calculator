@@ -14,6 +14,7 @@ import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLab
 
 const SelectLanguagePage = () => {
   const { locale, selectLanguage } = useContext(Context);
+  const { locale, selectLanguage, formData, setFormData, configLoading } = useContext(Context);
   const languageOptions = useConfig<{ [key: string]: string }>('language_options');
   const { whiteLabel, uuid } = useParams();
 
@@ -78,6 +79,14 @@ const SelectLanguagePage = () => {
     }
 
     updateWhiteLabelAndNavigate(stateCodes[0], `/${stateCodes[0]}/step-2${queryString}`);
+    setFormData({ ...formData, whiteLabel: stateCodes[0] });
+    // wait for the new config to be loaded
+    const interval = setInterval(() => {
+      if (!configLoading) {
+        navigate(`/${stateCodes[0]}/step-2${queryString}`);
+        clearInterval(interval);
+      }
+    }, 1);
   };
 
   return (
