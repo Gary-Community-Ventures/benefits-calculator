@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom';
 import { updateScreen } from '../../Assets/updateScreen';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
 import HelpButton from '../HelpBubbleIcon/HelpButton';
+import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 
 const HouseholdSize = () => {
   const { formData, setFormData, locale } = useContext(Context);
@@ -87,6 +88,8 @@ const HouseholdSize = () => {
               {...field}
               label={<FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size" />}
               variant="outlined"
+              inputProps={NUM_PAD_PROPS}
+              onChange={handleNumbersOnly(field.onChange)}
               error={errors.householdSize !== undefined}
               helperText={errors.householdSize !== undefined && errors.householdSize?.message}
             />
