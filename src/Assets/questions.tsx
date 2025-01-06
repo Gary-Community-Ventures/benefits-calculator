@@ -1,7 +1,4 @@
-import {
-  householdAssetsHasError,
-  displayHouseholdAssetsHelperText,
-} from './validationFunctions.tsx';
+import { householdAssetsHasError, displayHouseholdAssetsHelperText } from './validationFunctions.tsx';
 import { FormattedMessage } from 'react-intl';
 import type { QuestionName, Question } from '../Types/Questions.ts';
 import HelpButton from '../Components/HelpBubbleIcon/HelpButton.tsx';

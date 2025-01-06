@@ -25,11 +25,7 @@ import ImmediateNeeds from '../Steps/ImmediateNeeds';
 import SignUp from '../Steps/SignUp/SignUp';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({
-  handleTextfieldChange,
-  handleContinueSubmit,
-  handleNoAnswerChange,
-}) => {
+const QuestionComponentContainer = ({ handleTextfieldChange, handleContinueSubmit, handleNoAnswerChange }) => {
   const { formData, setFormData } = useContext(Context);
   const acuteConditionOptions = useConfig('acute_condition_options');
   const referralOptions = useConfig('referral_options');
@@ -61,7 +57,6 @@ const QuestionComponentContainer = ({
       />
     );
   };
-
 
   const renderBasicSelectComponent = (question) => {
     if (question.name === 'referralSource')
