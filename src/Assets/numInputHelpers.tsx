@@ -22,3 +22,10 @@ export function handleNumbersOnly(onChange: ReactEventHandler<EventElements> = (
     onChange(event);
   };
 }
+
+export function numberInputProps(onChange: ReactEventHandler<EventElements> = () => {}, regex: RegExp = INTEGERS) {
+  return {
+    ...NUM_PAD_PROPS,
+    onChange: handleNumbersOnly(onChange, regex),
+  };
+}

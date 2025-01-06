@@ -49,6 +49,8 @@ import {
   renderIncomeAmountHelperText,
 } from './HelperTextFunctions';
 import './PersonIncomeBlock.css';
+import { DOLLARS, handleNumbersOnly, numberInputProps, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
+import { PartyMode } from '@mui/icons-material';
 
 const HouseholdMemberForm = () => {
   const { formData, setFormData, locale } = useContext(Context);
@@ -353,6 +355,10 @@ const HouseholdMemberForm = () => {
                       <TextField
                         {...params}
                         label={<FormattedMessage id="ageInput.year.label" defaultMessage="Birth Year" />}
+                        inputProps={{
+                          ...params.inputProps,
+                          ...numberInputProps(params.inputProps.onChange),
+                        }}
                         error={errors.birthYear !== undefined}
                       />
                     )}
@@ -703,6 +709,8 @@ const HouseholdMemberForm = () => {
                   <FormattedMessage id="incomeBlock.createHoursWorkedTextfield-amountLabel" defaultMessage="Hours" />
                 }
                 variant="outlined"
+                inputProps={NUM_PAD_PROPS}
+                onChange={handleNumbersOnly(field.onChange)}
                 sx={{ backgroundColor: '#fff' }}
                 error={errors.incomeStreams?.[index]?.hoursPerWeek !== undefined}
               />
@@ -771,6 +779,8 @@ const HouseholdMemberForm = () => {
                   />
                 }
                 variant="outlined"
+                inputProps={NUM_PAD_PROPS}
+                onChange={handleNumbersOnly(field.onChange, DOLLARS)}
                 sx={{ backgroundColor: '#fff' }}
                 error={errors.incomeStreams?.[index]?.incomeAmount !== undefined}
                 InputProps={{
