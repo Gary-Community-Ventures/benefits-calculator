@@ -17,6 +17,7 @@ import { Context } from '../../Wrapper/Wrapper';
 import { updateUser } from '../../../Assets/updateScreen';
 import './SignUp.css';
 import { useParams } from 'react-router-dom';
+import { handleNumbersOnly, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
 
 function SignUp() {
   const { formData, setFormData, locale } = useContext(Context);
@@ -333,14 +334,15 @@ function SignUp() {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    onChange={(...args) => {
+                    label={<FormattedMessage id="signUp.createPhoneTextfield-label" defaultMessage="Cell Phone" />}
+                    variant="outlined"
+                    inputProps={NUM_PAD_PROPS}
+                    onChange={handleNumbersOnly((...args) => {
                       field.onChange(...args);
                       if (isSubmitted) {
                         trigger(['contactInfo.cell', 'contactInfo.email']);
                       }
-                    }}
-                    label={<FormattedMessage id="signUp.createPhoneTextfield-label" defaultMessage="Cell Phone" />}
-                    variant="outlined"
+                    })}
                     error={errors.contactInfo?.cell !== undefined}
                     helperText={
                       errors.contactInfo?.cell !== undefined && (
