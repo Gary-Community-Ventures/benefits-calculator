@@ -33,6 +33,7 @@ import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import CloseButton from '../../CloseButton/CloseButton';
 import AddIcon from '@mui/icons-material/Add';
 import './Expenses.css';
+import { NUM_PAD_PROPS, handleNumbersOnly } from '../../../Assets/numInputHelpers';
 
 const Expenses = () => {
   const { formData, setFormData, locale } = useContext(Context);
@@ -267,6 +268,8 @@ const Expenses = () => {
                             />
                           }
                           variant="outlined"
+                          inputProps={NUM_PAD_PROPS}
+                          onChange={handleNumbersOnly(field.onChange)}
                           sx={{ backgroundColor: '#fff' }}
                           error={!!errors.expenses?.[index]?.expenseAmount}
                           InputProps={{
