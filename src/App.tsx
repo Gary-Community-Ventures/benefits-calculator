@@ -8,26 +8,26 @@ import QuestionComponentContainer from './Components/QuestionComponentContainer/
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
 import Disclaimer from './Components/Steps/Disclaimer/Disclaimer.tsx';
-import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlock.js';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
-import SelectLanguagePage from './Components/Steps/SelectLanguagePage.tsx';
+import SelectLanguagePage from './Components/Steps/SelectLanguage.tsx';
 import { updateScreen, updateUser } from './Assets/updateScreen.ts';
 import { STARTING_QUESTION_NUMBER, useStepNumber, useStepDirectory } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
-import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
+import { Expense, HealthInsurance, SignUpInfo } from './Types/FormData.js';
 import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx';
 import { useErrorController } from './Assets/validationFunctions.tsx';
 import dataLayerPush from './Assets/analytics.ts';
 import { OTHER_PAGE_TITLES } from './Assets/pageTitleTags.ts';
 import { isCustomTypedLocationState } from './Types/FormData.ts';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
-import './App.css';
 import CcigLandingPage from './Components/CcigComponents/CcigLandingPage';
 import languageRouteWrapper from './Components/RouterUtil/LanguageRouter';
 import SelectStatePage from './Components/Steps/SelectStatePage';
 import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
+import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm.tsx';
+import './App.css';
 
 const App = () => {
   const navigate = useNavigate();
@@ -124,12 +124,6 @@ const App = () => {
     }
   };
 
-  const handleRadioButtonChange = (event: Event) => {
-    const { name, value } = event.target as HTMLInputElement;
-    let boolValue = value === 'true';
-    setFormData({ ...formData, [name]: boolValue });
-  };
-
   const handleNoAnswerChange = (event: Event) => {
     const { name, value } = event.target as HTMLInputElement;
     setFormData({ ...formData, [name]: value });
@@ -171,21 +165,6 @@ const App = () => {
           : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
       }
     }
-  };
-
-  const handleIncomeStreamsSubmit = (validatedIncomeStreams: IncomeStream[], stepId: number, uuid: string) => {
-    const updatedFormData = { ...formData, incomeStreams: validatedIncomeStreams };
-    updateScreen(uuid, updatedFormData, locale);
-    setFormData(updatedFormData);
-    navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
-  };
-
-  const handleHouseholdDataSubmit = (memberData: HouseholdData, stepId: number, uuid: string) => {
-    const updatedMembers = [...formData.householdData];
-    updatedMembers[stepId] = memberData;
-    const updatedFormData = { ...formData, householdData: updatedMembers };
-    updateScreen(uuid, updatedFormData, locale);
-    setFormData(updatedFormData);
   };
 
   if (pageIsLoading) {
@@ -259,12 +238,7 @@ const App = () => {
                   <Route path="step-2" element={<Disclaimer />} />
                   <Route
                     path={`step-${householdMemberStepNumber}/:page`}
-                    element={
-                      <HouseholdDataBlock
-                        key={window.location.href}
-                        handleHouseholdDataSubmit={handleHouseholdDataSubmit}
-                      />
-                    }
+                    element={<HouseholdMemberForm key={window.location.href} />}
                   />
                   <Route
                     path="step-:id"
@@ -273,9 +247,7 @@ const App = () => {
                         key={window.location.href}
                         handleTextfieldChange={handleTextfieldChange}
                         handleContinueSubmit={handleContinueSubmit}
-                        handleRadioButtonChange={handleRadioButtonChange}
                         handleNoAnswerChange={handleNoAnswerChange}
-                        handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
                       />
                     }
                   />
