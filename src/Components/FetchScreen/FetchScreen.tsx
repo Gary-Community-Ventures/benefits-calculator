@@ -5,7 +5,6 @@ import { Context } from '../Wrapper/Wrapper';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData';
 import type { FormData } from '../../Types/FormData';
-import { flushSync } from 'react-dom';
 
 const FetchScreen = () => {
   const { formData, setFormData, setScreenLoading, setWhiteLabel } = useContext(Context);

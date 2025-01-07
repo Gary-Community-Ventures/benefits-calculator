@@ -64,7 +64,9 @@ export function useUpdateWhiteLabelAndNavigate() {
 
   return (whiteLabel: string, url: string) => {
     // the new config has to be loaded before we can navigate.
-    setWhiteLabel(whiteLabel);
+    flushSync(() => {
+      setWhiteLabel(whiteLabel);
+    });
 
     // wait for the config to update before navigating
     setTimeout(() => {
