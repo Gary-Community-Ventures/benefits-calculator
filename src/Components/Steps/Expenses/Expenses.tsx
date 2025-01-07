@@ -24,8 +24,7 @@ import { useForm, Controller, SubmitHandler, useFieldArray } from 'react-hook-fo
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
-import { useNavigate, useParams } from 'react-router-dom';
-import { updateScreen } from '../../../Assets/updateScreen';
+import { useParams } from 'react-router-dom';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import { useConfig } from '../../Config/configHook';
 import { FormattedMessageType } from '../../../Types/Questions';
@@ -33,15 +32,17 @@ import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import CloseButton from '../../CloseButton/CloseButton';
 import AddIcon from '@mui/icons-material/Add';
 import './Expenses.css';
+import useScreenApi from '../../../Assets/updateScreen';
 
 const Expenses = () => {
-  const { formData, setFormData, locale } = useContext(Context);
-  const { uuid, id } = useParams();
+  const { formData, setFormData } = useContext(Context);
+  const { uuid } = useParams();
   const intl = useIntl();
   const translatedAriaLabel = intl.formatMessage({
     id: 'questions.hasExpenses-ariaLabel',
     defaultMessage: 'has expenses',
   });
+  const { updateScreen } = useScreenApi();
   const backNavigationFunction = useDefaultBackNavigationFunction('hasExpenses');
   const nextStep = useGoToNextStep('hasExpenses');
   const expenseOptions = useConfig('expense_options') as Record<string, FormattedMessageType>;
@@ -97,7 +98,7 @@ const Expenses = () => {
     if (uuid) {
       const updatedFormData = { ...formData, ...expensesObject };
       setFormData(updatedFormData);
-      await updateScreen(uuid, updatedFormData, locale);
+      await updateScreen(updatedFormData);
       nextStep();
     }
   };

@@ -1,34 +1,35 @@
 import { useContext, useEffect } from 'react';
-import { Context } from '../../Wrapper/Wrapper.tsx';
+import { Context } from '../../Wrapper/Wrapper';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
-import { STARTING_QUESTION_NUMBER } from '../../../Assets/stepDirectory.ts';
-import { createScreen, updateScreen } from '../../../Assets/updateScreen.ts';
+import { STARTING_QUESTION_NUMBER } from '../../../Assets/stepDirectory';
 import { Checkbox, FormControlLabel } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
-import dataLayerPush from '../../../Assets/analytics.ts';
-import QuestionHeader from '../../QuestionComponents/QuestionHeader.tsx';
-import { useConfig } from '../../Config/configHook.tsx';
-import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper.tsx';
-import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons.tsx';
-import { useQueryString } from '../../QuestionComponents/questionHooks.ts';
+import dataLayerPush from '../../../Assets/analytics';
+import QuestionHeader from '../../QuestionComponents/QuestionHeader';
+import { useConfig } from '../../Config/configHook';
+import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
+import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
+import { useQueryString } from '../../QuestionComponents/questionHooks';
 import './Disclaimer.css';
 import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
+import useScreenApi from '../../../Assets/updateScreen';
 
 const isTrue = (value: boolean) => {
   return value;
 };
 
 const Disclaimer = () => {
-  const { formData, setFormData, locale, setScreenLoading } = useContext(Context);
+  const { formData, setFormData, setScreenLoading, locale } = useContext(Context);
   let { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
   const publicChargeOption = useConfig('public_charge_rule');
   const privacyLink = useConfig('privacy_policy');
   const consentToContactLink = useConfig('consent_to_contact');
   const queryString = useQueryString();
+  const { createScreen, updateScreen } = useScreenApi();
   const backNavigationFunction = () => {
     if (uuid !== undefined) {
       navigate(`/${whiteLabel}/${uuid}/step-1${queryString}`);
@@ -65,10 +66,10 @@ const Disclaimer = () => {
     setFormData(updatedFormData);
 
     if (uuid) {
-      await updateScreen(uuid, updatedFormData, locale);
+      await updateScreen(updatedFormData);
       navigate(`/${whiteLabel}/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
     } else {
-      const response = await createScreen(updatedFormData, locale);
+      const response = await createScreen(updatedFormData);
       setScreenLoading(false);
       navigate(`/${whiteLabel}/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
     }

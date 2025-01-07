@@ -59,14 +59,12 @@ export default function RedirectToWhiteLabel({ whiteLabel, children }: Props) {
 }
 
 export function useUpdateWhiteLabelAndNavigate() {
-  const { formData, setFormData } = useContext(Context);
+  const { setWhiteLabel } = useContext(Context);
   const navigate = useNavigate();
 
   return (whiteLabel: string, url: string) => {
     // the new config has to be loaded before we can navigate.
-    flushSync(() => {
-      setFormData({ ...formData, whiteLabel });
-    });
+    setWhiteLabel(whiteLabel);
 
     // wait for the config to update before navigating
     setTimeout(() => {
