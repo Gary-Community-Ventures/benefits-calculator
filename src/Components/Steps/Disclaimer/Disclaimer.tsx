@@ -16,6 +16,7 @@ import { useQueryString } from '../../QuestionComponents/questionHooks';
 import './Disclaimer.css';
 import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import useScreenApi from '../../../Assets/updateScreen';
+import { Language } from '../../../Assets/languageOptions';
 
 const isTrue = (value: boolean) => {
   return value;
@@ -25,9 +26,11 @@ const Disclaimer = () => {
   const { formData, setFormData, setScreenLoading, locale } = useContext(Context);
   let { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
-  const publicChargeOption = useConfig('public_charge_rule');
-  const privacyLink = useConfig('privacy_policy');
-  const consentToContactLink = useConfig('consent_to_contact');
+  // use defaults for the config on this page because the config won't be loaded
+  // when the page is first rendered when coming from /select-state
+  const publicChargeOption = useConfig<{ link: string }>('public_charge_rule', { link: '' });
+  const privacyLinks = useConfig<Partial<Record<Language, string>>>('privacy_policy', {});
+  const consentToContactLinks = useConfig<Partial<Record<Language, string>>>('consent_to_contact', {});
   const queryString = useQueryString();
   const { createScreen, updateScreen } = useScreenApi();
   const backNavigationFunction = () => {
@@ -119,17 +122,30 @@ const Disclaimer = () => {
   };
 
   const getLinksForCheckbox = () => {
-    if (locale in privacyLink && locale in consentToContactLink) {
+    let privacylink = privacyLinks['en-us'];
+    let consentToContactLink = consentToContactLinks['en-us'];
+
+    const localePrivacyLink = privacyLinks[locale];
+    if (localePrivacyLink !== undefined) {
+      privacylink = localePrivacyLink;
+    }
+
+    const localeConsentToContactLink = consentToContactLinks[locale];
+    if (localeConsentToContactLink !== undefined) {
+      consentToContactLink = localeConsentToContactLink;
+    }
+
+    if (privacylink === undefined || consentToContactLink === undefined) {
       return {
-        privacyPolicyLink: privacyLink[locale],
-        addTermsConsentToContact: consentToContactLink[locale],
-      };
-    } else {
-      return {
-        privacyPolicyLink: privacyLink['en-us'],
-        addTermsConsentToContact: consentToContactLink['en-us'],
+        privacyPolicyLink: '',
+        addTermsConsentToContact: '',
       };
     }
+
+    return {
+      privacyPolicyLink: privacylink,
+      addTermsConsentToContact: consentToContactLink,
+    };
   };
 
   const createAgreeTTSCheckboxLabel = () => {
