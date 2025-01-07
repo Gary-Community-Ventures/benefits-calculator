@@ -12,7 +12,7 @@ import HouseholdDataBlock from './Components/HouseholdDataBlock/HouseholdDataBlo
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
 import SelectLanguagePage from './Components/Steps/SelectLanguagePage.tsx';
-import { updateScreen, updateUser } from './Assets/updateScreen.ts';
+import { updateScreen } from './Assets/updateScreen.ts';
 import { STARTING_QUESTION_NUMBER, useStepNumber, useStepDirectory } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, HouseholdData, IncomeStream, SignUpInfo } from './Types/FormData.js';
@@ -28,6 +28,7 @@ import languageRouteWrapper from './Components/RouterUtil/LanguageRouter';
 import SelectStatePage from './Components/Steps/SelectStatePage';
 import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
+import './App.css';
 
 const App = () => {
   const navigate = useNavigate();
@@ -77,12 +78,10 @@ const App = () => {
 
     // referrer priority = stored referrer -> referrer param -> utm_source param -> ''
     const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
-    let referrerSource = formData.referralSource || referrer;
+    const referrerSource = formData.referralSource || referrer;
     const isTest = formData.isTest || testParam;
     const externalId = formData.externalID ?? externalIdParam ?? undefined;
 
-    // if the referrer source is not in the dropdown list then
-    // make the referrer "other" and fill in the other field
     setFormData({
       ...formData,
       isTest: isTest,

@@ -1,10 +1,11 @@
-import { useEffect, useContext, useMemo } from 'react';
+import { useEffect, useContext, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getScreen } from '../../apiCalls.js';
 import { Context } from '../Wrapper/Wrapper.tsx';
 import LoadingPage from '../LoadingPage/LoadingPage.tsx';
 import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData.ts';
 import type { FormData } from '../../Types/FormData.ts';
+import { flushSync } from 'react-dom';
 
 const FetchScreen = () => {
   const { formData, setFormData, setScreenLoading } = useContext(Context);
@@ -178,13 +179,15 @@ const FetchScreen = () => {
 
   useEffect(() => {
     if (uuid === undefined) {
-      // don't run immediately because it will be overriden by another setFormData in App.tsx
+      // setTimout updates state on the next render while flushSync makes the update happen immediatly
       setTimeout(() => {
-        if (whiteLabel !== undefined) {
-          setFormData({ ...formData, whiteLabel });
-        }
-        setScreenLoading(false);
-      }, 1);
+        flushSync(() => {
+          if (whiteLabel !== undefined) {
+            setFormData({ ...formData, whiteLabel });
+          }
+          setScreenLoading(false);
+        });
+      });
       return;
     }
     fetchScreen(uuid);
