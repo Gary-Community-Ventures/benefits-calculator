@@ -25,7 +25,6 @@ import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useStepNumber } from '../../../Assets/stepDirectory';
 import * as z from 'zod';
 import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
-import { updateScreen } from '../../../Assets/updateScreen';
 import { useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MONTHS } from './MONTHS';
@@ -50,7 +49,6 @@ import {
 } from './HelperTextFunctions';
 import './PersonIncomeBlock.css';
 import { DOLLARS, handleNumbersOnly, numberInputProps, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
-import { PartyMode } from '@mui/icons-material';
 
 const HouseholdMemberForm = () => {
   const { formData, setFormData, locale } = useContext(Context);
