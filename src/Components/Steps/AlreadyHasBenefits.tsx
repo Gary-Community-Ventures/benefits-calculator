@@ -5,7 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { z } from 'zod';
-import { updateScreen } from '../../Assets/updateScreen';
+import useScreenApi from '../../Assets/updateScreen';
 import { Benefits } from '../../Types/FormData';
 import { FormattedMessageType } from '../../Types/Questions';
 import CheckBoxAccordion from '../AccordionsContainer/CheckboxAccordion';
@@ -86,11 +86,12 @@ function CategoryBenefits({ alreadyHasBenefits, onChange }: CategoryBenefitsProp
 }
 
 function AlreadyHasBenefits() {
-  const { formData, setFormData, locale } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const { formatMessage } = useIntl();
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('hasBenefits');
   const nextStep = useGoToNextStep('hasBenefits');
+  const { updateScreen } = useScreenApi();
 
   const formSchema = z
     .object({
@@ -139,7 +140,7 @@ function AlreadyHasBenefits() {
     const newFormData = { ...formData, hasBenefits: hasBenefits, benefits: alreadyHasBenefits };
 
     setFormData(newFormData);
-    updateScreen(uuid, newFormData, locale);
+    updateScreen(newFormData);
     nextStep();
   };
 

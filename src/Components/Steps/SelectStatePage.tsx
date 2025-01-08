@@ -11,6 +11,7 @@ import * as z from 'zod';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
+import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLabel';
 
 // This will get removed once NC is moved into the main server
 export const STATES: { [key: string]: string } =
@@ -46,17 +47,15 @@ const SelectStatePage = () => {
     },
   });
 
-  const submitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ state }) => {
-    setFormData({ ...formData, whiteLabel: state });
+  const updateWhiteLabelAndNavigate = useUpdateWhiteLabelAndNavigate();
 
-    // wait for the new config to be loaded
-    setTimeout(() => {
-      if (uuid !== undefined) {
-        navigate(`/${state}/${uuid}/step-2${queryString}`);
-      } else {
-        navigate(`/${state}/step-2${queryString}`);
-      }
-    });
+  const submitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ state }) => {
+    let navUrl = `/${state}/step-2${queryString}`;
+    if (uuid !== undefined) {
+      navUrl = `/${state}/${uuid}/step-2${queryString}`;
+    }
+
+    updateWhiteLabelAndNavigate(state, navUrl);
   };
 
   const createMenuItems = () => {
