@@ -49,10 +49,12 @@ import {
 } from './HelperTextFunctions';
 import './PersonIncomeBlock.css';
 import { DOLLARS, handleNumbersOnly, numberInputProps, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
+import useScreenApi from '../../../Assets/updateScreen';
 
 const HouseholdMemberForm = () => {
-  const { formData, setFormData, locale } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const { uuid, page } = useParams();
+  const { updateScreen } = useScreenApi();
   const navigate = useNavigate();
   const intl = useIntl();
   const pageNumber = Number(page);
@@ -266,14 +268,14 @@ const HouseholdMemberForm = () => {
 
       const updatedFormData = { ...formData, householdData: updatedHouseholdData };
       setFormData(updatedFormData);
-      updateScreen(uuid, updatedFormData, locale);
+      updateScreen(updatedFormData);
     } else {
       // if there is no data at this index then we need to push it to the array
       const copyOfHouseholdData = [...formData.householdData];
       copyOfHouseholdData.push(memberData);
       const updatedFormData = { ...formData, householdData: copyOfHouseholdData };
       setFormData(updatedFormData);
-      updateScreen(uuid, updatedFormData, locale);
+      updateScreen(updatedFormData);
     }
 
     nextStep();
