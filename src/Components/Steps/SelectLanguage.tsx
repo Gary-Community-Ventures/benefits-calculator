@@ -10,9 +10,10 @@ import FormContinueButton from '../ContinueButton/FormContinueButton';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { STATES } from './SelectStatePage';
 import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
+import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLabel';
 
 const SelectLanguagePage = () => {
-  const { locale, selectLanguage, formData, setFormData, configLoading } = useContext(Context);
+  const { locale, selectLanguage } = useContext(Context);
   const languageOptions = useConfig<{ [key: string]: string }>('language_options');
   const { whiteLabel, uuid } = useParams();
 
@@ -54,6 +55,8 @@ const SelectLanguagePage = () => {
     };
   });
 
+  const updateWhiteLabelAndNavigate = useUpdateWhiteLabelAndNavigate();
+
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
@@ -74,14 +77,7 @@ const SelectLanguagePage = () => {
       return;
     }
 
-    setFormData({ ...formData, whiteLabel: stateCodes[0] });
-    // wait for the new config to be loaded
-    const interval = setInterval(() => {
-      if (!configLoading) {
-        navigate(`/${stateCodes[0]}/step-2${queryString}`);
-        clearInterval(interval);
-      }
-    }, 1);
+    updateWhiteLabelAndNavigate(stateCodes[0], `/${stateCodes[0]}/step-2${queryString}`);
   };
 
   return (

@@ -14,7 +14,6 @@ export default function CcigLandingPage() {
   const queryString = useQueryString();
 
   useEffect(() => {
-    // this causes the screen to flash as the config needs to reload
     setFormData({ ...formData, immutableReferrer: 'ccig' });
   }, []);
 

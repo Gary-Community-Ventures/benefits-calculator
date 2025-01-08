@@ -1,5 +1,6 @@
 import { PropsWithChildren, useContext } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { flushSync } from 'react-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper';
 
 type Props = PropsWithChildren<{
@@ -55,4 +56,16 @@ export default function RedirectToWhiteLabel({ whiteLabel, children }: Props) {
   const url = `${redirectWhiteLabel}${location.pathname}${location.search}`;
 
   return <Navigate to={url} replace />;
+}
+
+export function useUpdateWhiteLabelAndNavigate() {
+  const { setWhiteLabel } = useContext(Context);
+  const navigate = useNavigate();
+
+  return (whiteLabel: string, url: string) => {
+    // Technically, the config won't be loaded for a second,
+    // so we add defaults on the disclaimer page
+    setWhiteLabel(whiteLabel);
+    navigate(url);
+  };
 }

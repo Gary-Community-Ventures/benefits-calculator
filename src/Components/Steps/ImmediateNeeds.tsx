@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { z } from 'zod';
-import { updateScreen } from '../../Assets/updateScreen';
+import useScreenApi from '../../Assets/updateScreen';
 import { AcuteHHConditions } from '../../Types/FormData';
 import { FormattedMessageType } from '../../Types/Questions';
 import { useConfig } from '../Config/configHook';
@@ -16,11 +16,12 @@ import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { Context } from '../Wrapper/Wrapper';
 
 function ImmediateNeeds() {
-  const { formData, setFormData, locale } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const formSchema = z.object({
     needs: z.record(z.string(), z.boolean()),
   });
+  const { updateScreen } = useScreenApi();
 
   const immediateNeeds =
     useConfig<Record<string, { text: FormattedMessageType; icon: ReactNode }>>('acute_condition_options');
@@ -42,7 +43,7 @@ function ImmediateNeeds() {
 
     const newFormData = { ...formData, acuteHHConditions: needs };
     setFormData(newFormData);
-    updateScreen(uuid, newFormData, locale);
+    updateScreen(newFormData);
     nextStep();
   };
 

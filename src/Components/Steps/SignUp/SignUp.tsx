@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Checkbox, FormControl, FormControlLabel, InputLabel, TextField } from '@mui/material';
+import { Checkbox, FormControlLabel, TextField } from '@mui/material';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -14,15 +14,16 @@ import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { Context } from '../../Wrapper/Wrapper';
-import { updateUser } from '../../../Assets/updateScreen';
 import './SignUp.css';
 import { useParams } from 'react-router-dom';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
+import useScreenApi from '../../../Assets/updateScreen';
 
 function SignUp() {
   const { formData, setFormData, locale } = useContext(Context);
   const { uuid } = useParams();
   const [hasServerError, setHasServerError] = useState(false);
+  const { updateUser } = useScreenApi();
   const { formatMessage } = useIntl();
   const backNavigationFunction = useDefaultBackNavigationFunction('signUpInfo');
   const nextStep = useGoToNextStep('signUpInfo');
@@ -223,7 +224,7 @@ function SignUp() {
     }
 
     try {
-      await updateUser(uuid, newFormData, locale);
+      await updateUser(newFormData);
       newFormData.signUpInfo.hasUser = true;
       setFormData(newFormData);
       nextStep();

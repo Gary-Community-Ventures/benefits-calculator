@@ -174,7 +174,7 @@ function transformConfigData(configData: ConfigApiResponse[]): Config {
 
 async function getConfig(whiteLabel: string) {
   // fetch data
-  return fetch(configEndpoint + whiteLabel, {
+  return fetch(configEndpoint + whiteLabel + '/', {
     method: 'GET',
     headers: header,
   }).then((response) => {

@@ -11,7 +11,6 @@ import Disclaimer from './Components/Steps/Disclaimer/Disclaimer.tsx';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
 import SelectLanguagePage from './Components/Steps/SelectLanguage.tsx';
-import { updateScreen, updateUser } from './Assets/updateScreen.ts';
 import { STARTING_QUESTION_NUMBER, useStepNumber, useStepDirectory } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
 import { Expense, HealthInsurance, SignUpInfo } from './Types/FormData.js';
@@ -28,6 +27,7 @@ import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
 import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm.tsx';
 import './App.css';
+import useScreenApi from './Assets/updateScreen';
 
 const App = () => {
   const navigate = useNavigate();
@@ -35,14 +35,15 @@ const App = () => {
   const urlSearchParams = location.search;
   const [searchParams] = useSearchParams();
   const {
-    locale,
     formData,
     setFormData,
     styleOverride,
     setTheme: changeTheme,
     pageIsLoading,
     getReferrer,
+    whiteLabel,
   } = useContext(Context);
+  const { updateScreen } = useScreenApi();
 
   const stepDirectory = useStepDirectory();
   const totalSteps = stepDirectory.length + STARTING_QUESTION_NUMBER;
@@ -77,12 +78,10 @@ const App = () => {
 
     // referrer priority = stored referrer -> referrer param -> utm_source param -> ''
     const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
-    let referrerSource = formData.referralSource || referrer;
+    const referrerSource = formData.referralSource || referrer;
     const isTest = formData.isTest || testParam;
     const externalId = formData.externalID ?? externalIdParam ?? undefined;
 
-    // if the referrer source is not in the dropdown list then
-    // make the referrer "other" and fill in the other field
     setFormData({
       ...formData,
       isTest: isTest,
@@ -129,6 +128,7 @@ const App = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  // TODO: update updateScreen hook to not take in override uuid
   const handleContinueSubmit = (
     event: Event,
     errorController: ReturnType<typeof useErrorController>, // update this when validationFunctions is converted to typescript
@@ -153,16 +153,16 @@ const App = () => {
       } else if (questionName === 'householdSize') {
         const updatedHouseholdData = formData.householdData.slice(0, Number(formData.householdSize));
         const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-        updateScreen(uuid, updatedFormData, locale);
+        updateScreen(updatedFormData, uuid);
         setFormData(updatedFormData);
         isComingFromConfirmationPg
-          ? navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`)
-          : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}/1`);
+          ? navigate(`/${whiteLabel}/${uuid}/confirm-information`)
+          : navigate(`/${whiteLabel}/${uuid}/step-${stepId + 1}/1`);
       } else {
-        updateScreen(uuid, formData, locale);
+        updateScreen(formData, uuid);
         isComingFromConfirmationPg || isLastStep
-          ? navigate(`/${formData.whiteLabel}/${uuid}/confirm-information`)
-          : navigate(`/${formData.whiteLabel}/${uuid}/step-${stepId + 1}`);
+          ? navigate(`/${whiteLabel}/${uuid}/confirm-information`)
+          : navigate(`/${whiteLabel}/${uuid}/step-${stepId + 1}`);
       }
     }
   };
