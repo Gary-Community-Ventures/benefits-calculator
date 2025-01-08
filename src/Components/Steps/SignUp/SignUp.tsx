@@ -14,9 +14,9 @@ import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { Context } from '../../Wrapper/Wrapper';
-import useScreenApi from '../../../Assets/updateScreen';
 import { useParams } from 'react-router-dom';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
+import useScreenApi from '../../../Assets/updateScreen';
 import './SignUp.css';
 
 function SignUp() {

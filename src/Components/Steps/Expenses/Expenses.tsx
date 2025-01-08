@@ -32,6 +32,7 @@ import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import CloseButton from '../../CloseButton/CloseButton';
 import AddIcon from '@mui/icons-material/Add';
 import './Expenses.css';
+import { NUM_PAD_PROPS, handleNumbersOnly } from '../../../Assets/numInputHelpers';
 import useScreenApi from '../../../Assets/updateScreen';
 import { NUM_PAD_PROPS, handleNumbersOnly } from '../../../Assets/numInputHelpers';
 

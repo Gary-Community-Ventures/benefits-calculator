@@ -9,7 +9,7 @@ import ContinueButton from '../ContinueButton/ContinueButton';
 import BasicSelect from '../DropdownMenu/BasicSelect';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
-import { ZipcodeStep } from '../Steps/ZipcodeStep';
+import { Zipcode } from '../Steps/Zipcode.tsx';
 import Expenses from '../Steps/Expenses/Expenses.tsx';
 import HouseholdSize from '../Steps/HouseholdSize';
 import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
@@ -17,7 +17,6 @@ import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { useStepName } from '../../Assets/stepDirectory';
-import './QuestionComponentContainer.css';
 import ReferralSourceStep from '../Steps/Referrer';
 import questions from '../../Assets/questions';
 import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
@@ -26,17 +25,12 @@ import ImmediateNeeds from '../Steps/ImmediateNeeds';
 import SignUp from '../Steps/SignUp/SignUp';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({
-  handleTextfieldChange,
-  handleContinueSubmit,
-  handleRadioButtonChange,
-  handleNoAnswerChange,
-}) => {
+const QuestionComponentContainer = ({ handleTextfieldChange, handleContinueSubmit, handleNoAnswerChange }) => {
   const { formData, setFormData } = useContext(Context);
   const acuteConditionOptions = useConfig('acute_condition_options');
   const referralOptions = useConfig('referral_options');
   let { id } = useParams();
-  const questionName = useStepName(+id, formData.immutable_referrer);
+  const questionName = useStepName(+id, formData.immutableReferrer);
   const matchingQuestion = questions[questionName];
   const errorController = useErrorController(
     matchingQuestion?.componentDetails.inputError,
@@ -51,12 +45,6 @@ const QuestionComponentContainer = ({
         handleTextfieldChange={handleTextfieldChange}
         submitted={errorController.submittedCount}
       />
-    );
-  };
-
-  const renderRadiofieldComponent = (question) => {
-    return (
-      <Radiofield componentDetails={question.componentDetails} handleRadioButtonChange={handleRadioButtonChange} />
     );
   };
 
@@ -190,7 +178,7 @@ const QuestionComponentContainer = ({
     case 'zipcode':
       return (
         <main className="benefits-form">
-          <ZipcodeStep />
+          <Zipcode />
         </main>
       );
     case 'householdSize':
@@ -235,8 +223,6 @@ const QuestionComponentContainer = ({
           {renderHeaderAndSubheader()}
           {(matchingQuestion.componentDetails.componentType === 'Textfield' &&
             createComponent(renderTextfieldComponent(matchingQuestion))) ||
-            (matchingQuestion.componentDetails.componentType === 'Radiofield' &&
-              createComponent(renderRadiofieldComponent(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
               createComponent(renderNoAnswerComponent(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
