@@ -1,7 +1,6 @@
 import { InputBaseComponentProps } from '@mui/material';
 import { ChangeEvent, ReactEventHandler } from 'react';
 
-// export const NUM_PAD_PROPS: InputBaseComponentProps = { pattern: '[0-9]* .', inputMode: 'decimal' };
 export const NUM_PAD_PROPS: InputBaseComponentProps = { inputMode: 'decimal' };
 
 type EventElements = HTMLInputElement | HTMLTextAreaElement;

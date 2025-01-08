@@ -203,7 +203,6 @@ export function useGetConfig(screenLoading: boolean, whiteLabel: string) {
       // get data and set loading to false
       try {
         if (value !== undefined) {
-          console.log('trying');
           const transformedOutput: Config = transformConfigData(value);
           setConfigResponse(transformedOutput);
         }
