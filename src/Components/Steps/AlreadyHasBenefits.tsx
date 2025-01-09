@@ -18,6 +18,8 @@ import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionCo
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { Context } from '../Wrapper/Wrapper';
 
+const HAS_BENEFITS_SHOW = 'true';
+
 type CategoryBenefitsConfig = {
   [key: string]: {
     benefits: {
@@ -94,14 +96,14 @@ function AlreadyHasBenefits() {
 
   const formSchema = z
     .object({
-      hasBenefits: z.enum(['true', 'false', 'preferNotToAnswer']),
+      hasBenefits: z.enum([HAS_BENEFITS_SHOW, 'false', 'preferNotToAnswer']),
       alreadyHasBenefits: z.record(z.string(), z.boolean()),
     })
     .refine(
       ({ hasBenefits, alreadyHasBenefits }) => {
         const noBenefitsSelected = Object.values(alreadyHasBenefits).every((value) => !value);
 
-        if (hasBenefits === 'true' && noBenefitsSelected) {
+        if (hasBenefits === HAS_BENEFITS_SHOW && noBenefitsSelected) {
           return false;
         }
 
@@ -136,7 +138,7 @@ function AlreadyHasBenefits() {
       throw new Error('uuid is not defined');
     }
 
-    if (['false', 'preferNotToAnswer'].includes(hasBenefits)) {
+    if (HAS_BENEFITS_SHOW !== hasBenefits) {
       for (const key in alreadyHasBenefits) {
         alreadyHasBenefits[key] = false;
       }
@@ -182,7 +184,7 @@ function AlreadyHasBenefits() {
                 sx={{ marginBottom: '1rem' }}
               >
                 <FormControlLabel
-                  value={'true'}
+                  value={HAS_BENEFITS_SHOW}
                   control={<Radio />}
                   label={<FormattedMessage id="radiofield.label-yes" defaultMessage="Yes" />}
                 />
@@ -202,7 +204,7 @@ function AlreadyHasBenefits() {
             );
           }}
         />
-        {watch('hasBenefits') === 'true' && (
+        {watch('hasBenefits') === HAS_BENEFITS_SHOW && (
           <div>
             <QuestionQuestion>
               <FormattedMessage
