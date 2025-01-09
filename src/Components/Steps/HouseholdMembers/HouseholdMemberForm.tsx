@@ -47,9 +47,10 @@ import {
   renderHoursWorkedHelperText,
   renderIncomeAmountHelperText,
 } from './HelperTextFunctions';
-import './PersonIncomeBlock.css';
 import { DOLLARS, handleNumbersOnly, numberInputProps, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
 import useScreenApi from '../../../Assets/updateScreen';
+import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
+import './PersonIncomeBlock.css';
 
 const HouseholdMemberForm = () => {
   const { formData, setFormData } = useContext(Context);
@@ -191,6 +192,10 @@ const HouseholdMemberForm = () => {
   });
   type FormSchema = z.infer<typeof formSchema>;
 
+  useEffect(() => {
+    document.title = QUESTION_TITLES.householdData;
+  }, []);
+
   const determineDefaultRelationshipToHH = (householdMemberFormData: HouseholdData | undefined) => {
     if (householdMemberFormData && householdMemberFormData.relationshipToHH) {
       return householdMemberFormData.relationshipToHH;
@@ -230,12 +235,12 @@ const HouseholdMemberForm = () => {
       conditions: householdMemberFormData?.conditions
         ? householdMemberFormData.conditions
         : {
-          student: false,
-          pregnant: false,
-          blindOrVisuallyImpaired: false,
-          disabled: false,
-          longTermDisability: false,
-        },
+            student: false,
+            pregnant: false,
+            blindOrVisuallyImpaired: false,
+            disabled: false,
+            longTermDisability: false,
+          },
       relationshipToHH: determineDefaultRelationshipToHH(householdMemberFormData),
       hasIncome: householdMemberFormData?.incomeStreams.length > 0 ? 'true' : 'false',
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
@@ -864,10 +869,7 @@ const HouseholdMemberForm = () => {
           />
         )}
       </QuestionHeader>
-      <HHMSummaryCards
-        activeMemberData={getValues()}
-        triggerValidation={trigger}
-      />
+      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} />
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         {createAgeQuestion(pageNumber)}
         {pageNumber !== 1 && createHOfHRelationQuestion(relationshipOptions)}
@@ -927,9 +929,7 @@ const HouseholdMemberForm = () => {
             )}
           </Stack>
         </div>
-        <PrevAndContinueButtons
-          backNavigationFunction={backNavigationFunction}
-        />
+        <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
     </main>
   );
