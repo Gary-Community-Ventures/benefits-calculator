@@ -130,7 +130,7 @@ const HouseholdMemberForm = () => {
     .refine(
       (data) => {
         if (data.incomeFrequency === 'hourly') {
-          return oneOrMoreDigitsButNotAllZero.test(data.hoursPerWeek.trim());
+          return oneOrMoreDigitsButNotAllZero.test(data.hoursPerWeek);
         } else {
           return true;
         }
