@@ -113,7 +113,6 @@ const HouseholdMemberForm = () => {
     });
   }, [YEARS]);
 
-  // birthYear > CURRENT_YEAR || birthYear < CURRENT_YEAR - MAX_AGE;
   const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
   const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
   const incomeSourcesSchema = z
