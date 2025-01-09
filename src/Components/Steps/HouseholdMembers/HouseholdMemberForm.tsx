@@ -109,7 +109,7 @@ const HouseholdMemberForm = () => {
 
   const autoCompleteOptions = useMemo(() => {
     return YEARS_AND_INITIAL_EMPTY_STR.map((year) => {
-      return { label: String(year) };
+      return { label: year };
     });
   }, [YEARS]);
 
