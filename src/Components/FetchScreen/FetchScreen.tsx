@@ -142,6 +142,7 @@ const FetchScreen = () => {
       }
 
       initialFormData.householdData.push({
+        frontendId: member.frontend_id,
         age: member.age ?? undefined,
         birthYear: member.birth_year ?? undefined,
         birthMonth: member.birth_month ?? undefined,

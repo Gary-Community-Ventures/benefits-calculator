@@ -23,12 +23,19 @@ export type ProgramCategoryCap = {
   cap: number;
 };
 
+export type MemberEligibility = {
+    frontend_id: string;
+    eligible: boolean;
+    value: number;
+}
+
 export type Program = {
   program_id: number;
   name: Translation;
   name_abbreviated: string;
   external_name: string;
   estimated_value: number;
+  household_value: number;
   estimated_delivery_time: Translation;
   estimated_application_time: Translation;
   description_short: Translation;
@@ -41,6 +48,7 @@ export type Program = {
   legal_status_required: string[];
   estimated_value_override: Translation;
   eligible: boolean;
+  members: MemberEligibility[];
   failed_tests: TestMessage[];
   passed_tests: TestMessage[];
   already_has: boolean;

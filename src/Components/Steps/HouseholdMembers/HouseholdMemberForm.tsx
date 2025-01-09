@@ -258,7 +258,7 @@ const HouseholdMemberForm = () => {
       // if we have data at this index then replace it
       const updatedHouseholdData = [...formData.householdData].map((currentMemberData, index) => {
         if (index === currentMemberIndex) {
-          return memberData;
+          return { ...memberData, frontendId: crypto.randomUUID() };
         } else {
           return currentMemberData;
         }
