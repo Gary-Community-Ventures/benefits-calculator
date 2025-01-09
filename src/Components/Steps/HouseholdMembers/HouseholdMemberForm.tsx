@@ -124,7 +124,7 @@ const HouseholdMemberForm = () => {
         .string()
         .trim()
         .refine((value) => {
-          return Number(value) > 0 && incomeAmountRegex.test(value);
+          return incomeAmountRegex.test(value) && Number(value) > 0;
         }),
     })
     .refine(
