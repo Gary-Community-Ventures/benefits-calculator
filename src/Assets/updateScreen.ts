@@ -6,16 +6,19 @@ import {
   ApiUser,
   ApiUserWriteOnly,
 } from '../Types/ApiFormData.js';
-import { FormData, HouseholdData } from '../Types/FormData.js';
-import { putScreen, postScreen, putUser } from '../apiCalls.js';
-import { Language } from './languageOptions.js';
+import { FormData, HouseholdData } from '../Types/FormData';
+import { putScreen, postScreen, putUser } from '../apiCalls';
+import { Language } from './languageOptions';
+import { useContext } from 'react';
+import { Context } from '../Components/Wrapper/Wrapper';
+import { useParams } from 'react-router-dom';
 
-const getScreensBody = (formData: FormData, languageCode: Language) => {
+const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: string) => {
   const householdMembers = getHouseholdMembersBodies(formData);
   const expenses = getExpensesBodies(formData);
 
   const screenBody: ApiFormData = {
-    white_label: formData.whiteLabel,
+    white_label: whiteLabel,
     is_test: formData.isTest ?? false,
     external_id: formData.externalID ?? null,
     agree_to_tos: formData.agreeToTermsOfService,
@@ -142,32 +145,25 @@ const getUserBody = (formData: FormData, languageCode: Language): ApiUser & ApiU
   return user;
 };
 
-const updateScreen = (uuid: string, formData: FormData, languageCode: Language) => {
-  putScreen(getScreensBody(formData, languageCode), uuid);
-};
+export default function useScreenApi() {
+  const { whiteLabel, locale } = useContext(Context);
+  const { uuid } = useParams();
 
-const createScreen = (formData: FormData, languageCode: Language) => {
-  const uuid = postScreen(getScreensBody(formData, languageCode));
-  return uuid;
-};
+  return {
+    updateScreen: async (formData: FormData, overrideUuid?: string) => {
+      // TODO: Remove overrideUuid when we remove all the handle submit functions in App.tsx
+      await putScreen(getScreensBody(formData, locale, whiteLabel), overrideUuid ?? uuid);
+    },
+    createScreen: async (formData: FormData) => {
+      return await postScreen(getScreensBody(formData, locale, whiteLabel));
+    },
+    updateUser: async (formData: FormData) => {
+      const userBody = getUserBody(formData, locale);
+      if (!formData.signUpInfo.hasUser && userBody.email_or_cell === '+1') {
+        return;
+      }
 
-const updateUser = async (
-  uuid: string,
-  formData: FormData,
-  setFormData: (formData: FormData) => void,
-  languageCode: Language,
-) => {
-  const userBody = getUserBody(formData, languageCode);
-  if (!formData.signUpInfo.hasUser && userBody.email_or_cell === '+1') {
-    return;
-  }
-
-  await putUser(userBody, uuid);
-
-  setFormData({
-    ...formData,
-    signUpInfo: { ...formData.signUpInfo, hasUser: true },
-  });
-};
-
-export { updateScreen, createScreen, updateUser };
+      await putUser(userBody, uuid);
+    },
+  };
+}

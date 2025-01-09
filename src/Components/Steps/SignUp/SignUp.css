@@ -1,0 +1,24 @@
+.sign-up-checkbox-container {
+  padding-top: 1rem;
+}
+
+.sign-up-contact-info-container {
+  padding-top: 2rem;
+}
+
+.sign-up-input-row {
+  padding: 0.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sign-up-disclaimer-text {
+  margin: 1rem 0;
+  font-weight: 600;
+  font-family: 'Open Sans';
+}
+
+.sign-up-server-error-container {
+  padding-top: 1rem;
+}

@@ -129,7 +129,6 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     gc_5plus: false,
     gc_18plus_no5: false,
     gc_under18_no5: false,
-    other: false,
     otherWithWorkPermission: false,
     otherHealthCareUnder19: false,
     otherHealthCarePregnant: false,

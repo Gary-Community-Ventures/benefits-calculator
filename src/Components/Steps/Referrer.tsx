@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { FormattedMessageType } from '../../Types/Questions';
 import { Context } from '../Wrapper/Wrapper';
-import { updateScreen } from '../../Assets/updateScreen';
 import * as z from 'zod';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
@@ -14,6 +13,7 @@ import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueBut
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
 import { useConfig } from '../Config/configHook';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
+import useScreenApi from '../../Assets/updateScreen';
 
 type ReferralOptions = {
   other: string;
@@ -21,8 +21,9 @@ type ReferralOptions = {
 };
 
 export default function ReferralSourceStep() {
-  const { formData, setFormData, locale } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
+  const { updateScreen } = useScreenApi();
 
   if (uuid === undefined) {
     throw new Error('no uuid');
@@ -86,7 +87,7 @@ export default function ReferralSourceStep() {
     const source = otherReferrer !== '' ? otherReferrer : referralSource;
     const updatedFormData = { ...formData, referralSource: source };
     setFormData(updatedFormData);
-    updateScreen(uuid, updatedFormData, locale);
+    updateScreen(updatedFormData);
     nextStep();
   };
 
