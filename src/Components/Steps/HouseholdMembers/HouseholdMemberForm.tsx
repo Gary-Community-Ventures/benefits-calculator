@@ -48,6 +48,7 @@ import {
   renderIncomeAmountHelperText,
 } from './HelperTextFunctions';
 import './PersonIncomeBlock.css';
+import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
 
 const HouseholdMemberForm = () => {
   const { formData, setFormData, locale } = useContext(Context);
@@ -187,6 +188,10 @@ const HouseholdMemberForm = () => {
     incomeStreams: incomeStreamsSchema,
   });
   type FormSchema = z.infer<typeof formSchema>;
+
+  useEffect(() => {
+    document.title = QUESTION_TITLES.householdData;
+  }, []);
 
   const determineDefaultRelationshipToHH = (householdMemberFormData: HouseholdData | undefined) => {
     if (householdMemberFormData && householdMemberFormData.relationshipToHH) {
