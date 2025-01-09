@@ -852,10 +852,6 @@ const HouseholdMemberForm = () => {
       </QuestionHeader>
       <HHMSummaryCards
         activeMemberData={getValues()}
-        page={pageNumber}
-        formData={formData}
-        uuid={uuid}
-        step={currentStepId}
         triggerValidation={trigger}
       />
       <form onSubmit={handleSubmit(formSubmitHandler)}>

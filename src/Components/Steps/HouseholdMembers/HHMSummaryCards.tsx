@@ -6,19 +6,22 @@ import { useConfig } from '../../Config/configHook';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { FormData, HouseholdData } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { useStepNumber } from '../../../Assets/stepDirectory.ts';
+import { Context } from '../../Wrapper/Wrapper.tsx';
 import './HHMSummaryCards.css';
 
 type HHMSummariesProps = {
   activeMemberData: HouseholdData;
-  page: number;
-  formData: FormData;
-  uuid?: string;
-  step: number;
   triggerValidation: () => Promise<boolean>;
 };
 
-const HHMSummaries = ({ activeMemberData, page, formData, uuid, step, triggerValidation }: HHMSummariesProps) => {
+const HHMSummaries = ({ activeMemberData, triggerValidation }: HHMSummariesProps) => {
+  const { formData } = useContext(Context);
+  const { uuid, page } = useParams();
+  const pageNumber = Number(page);
+  const currentStepId = useStepNumber('householdData');
   const relationshipOptions = useConfig<{ [key: string]: FormattedMessageType }>('relationship_options');
   const headOfHHInfoWasEntered = formData.householdData.length >= 1;
   const translateNumber = useTranslateNumber();
@@ -32,7 +35,7 @@ const HHMSummaries = ({ activeMemberData, page, formData, uuid, step, triggerVal
   const handleEditBtnSubmit = async (memberIndex: number) => {
     const isValid = await triggerValidation();
     if (isValid) {
-      navigate(`/${formData.whiteLabel}/${uuid}/step-${step}/${memberIndex + 1}`);
+      navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId}/${memberIndex + 1}`);
     }
   };
 
@@ -48,7 +51,7 @@ const HHMSummaries = ({ activeMemberData, page, formData, uuid, step, triggerVal
     relationship_options: Record<string, FormattedMessageType>,
   ) => {
     const { relationshipToHH, birthYear, birthMonth } = memberData;
-    const containerClassName = `member-added-container ${memberIndex + 1 === page ? 'current-household-member' : ''}`;
+    const containerClassName = `member-added-container ${memberIndex + 1 === pageNumber ? 'current-household-member' : ''}`;
 
     let relationship = relationship_options[relationshipToHH];
     if (memberIndex === 0) {
@@ -144,7 +147,7 @@ const HHMSummaries = ({ activeMemberData, page, formData, uuid, step, triggerVal
   //We want the active/current member's summary card to update synchronously as we change their information
   //so we swap out the current one for the one we create using the memberData in state
   const summariesWActiveMemberCard = hHMemberSummaries.map((member, memberIndex) => {
-    if (memberIndex === page - 1) {
+    if (memberIndex === pageNumber - 1) {
       return createFormDataMemberCard(memberIndex, activeMemberData, relationshipOptions);
     } else {
       return member;
@@ -152,7 +155,7 @@ const HHMSummaries = ({ activeMemberData, page, formData, uuid, step, triggerVal
   });
 
   return (
-    <article key={page}>
+    <article key={pageNumber}>
       {headOfHHInfoWasEntered && (
         <Box sx={{ marginBottom: '1.5rem' }}>
           <h2 className="household-data-sub-header secondary-heading">
