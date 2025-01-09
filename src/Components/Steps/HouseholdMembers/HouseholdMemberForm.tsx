@@ -76,7 +76,11 @@ const HouseholdMemberForm = () => {
   );
 
   const currentStepId = useStepNumber('householdData');
-  const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
+  const backNavigationFunction = () => {
+    if (uuid === undefined) {
+      throw new Error('uuid is undefined');
+    }
+
     if (pageNumber <= 1) {
       navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId - 1}`);
     } else {
@@ -914,7 +918,7 @@ const HouseholdMemberForm = () => {
           </Stack>
         </div>
         <PrevAndContinueButtons
-          backNavigationFunction={() => backNavigationFunction(uuid, currentStepId, pageNumber)}
+          backNavigationFunction={backNavigationFunction}
         />
       </form>
     </main>
