@@ -77,13 +77,13 @@ export const Filter = () => {
     newFiltersChecked.citizen = isCitizen;
 
     // calculate hidden filters if the user is not a citizen
-    Object.entries(calculatedCitizenshipFilters).map(([filterName, func]) => {
-      if (isCitizen) {
+    Object.entries(calculatedCitizenshipFilters).map(([filterName, calculator]) => {
+      if (!calculator.linkedFilters.some((linkedFilter) => newFiltersChecked[linkedFilter])) {
         newFiltersChecked[filterName as CalculatedCitizenLabel] = false;
         return;
       }
 
-      newFiltersChecked[filterName as CalculatedCitizenLabel] = func(formData);
+      newFiltersChecked[filterName as CalculatedCitizenLabel] = formData.householdData.some(calculator.func);
     });
 
     setFiltersChecked(newFiltersChecked);
