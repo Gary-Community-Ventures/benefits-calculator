@@ -33,7 +33,7 @@ export type MemberEligibility = {
   frontend_id: string;
   eligible: boolean;
   value: number;
-}
+};
 
 export type Program = {
   program_id: number;
