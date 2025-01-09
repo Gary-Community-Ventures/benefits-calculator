@@ -138,21 +138,17 @@ const HHMSummaries = ({ activeMemberData, triggerValidation }: HHMSummariesProps
   };
 
   //hHMemberSummaries will have the length of members that have already been saved to formData
-  const hHMemberSummaries = [
+  //We want the active/current member's summary card to update synchronously as we change their information
+  //so we swap out the current one for the one we create using the memberData in state
+  const summariesWActiveMemberCard = [
     ...formData.householdData.map((member, memberIndex) => {
+      if (memberIndex === pageNumber - 1) {
+        // Update the current member synchronously
+        return createFormDataMemberCard(memberIndex, activeMemberData, relationshipOptions);
+      }
       return createFormDataMemberCard(memberIndex, member, relationshipOptions);
     }),
   ];
-
-  //We want the active/current member's summary card to update synchronously as we change their information
-  //so we swap out the current one for the one we create using the memberData in state
-  const summariesWActiveMemberCard = hHMemberSummaries.map((member, memberIndex) => {
-    if (memberIndex === pageNumber - 1) {
-      return createFormDataMemberCard(memberIndex, activeMemberData, relationshipOptions);
-    } else {
-      return member;
-    }
-  });
 
   return (
     <article key={pageNumber}>
