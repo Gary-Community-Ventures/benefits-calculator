@@ -89,7 +89,7 @@ const HHMSummaries = ({ activeMemberData, triggerValidation }: HHMSummariesProps
         </div>
         <div className="member-added-income">
           <strong>
-            <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income" />:{' '}
+            <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income: " />
           </strong>
           {translateNumber(formatToUSD(Number(income)))}
           <FormattedMessage id="displayAnnualIncome.annual" defaultMessage=" annually" />
