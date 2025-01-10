@@ -68,18 +68,7 @@
 }
 
 .eaglecounty-logo-size {
-  display: block;
-  max-height: 80%;
   max-width: 90%;
-}
-
-.larimercounty-logo-size {
+  max-height: 80%;
   display: block;
-  max-height: 90%;
-}
-
-.tellercounty-logo-size {
-  display: block;
-  max-height: 91%;
-  max-width: 95%;
 }
