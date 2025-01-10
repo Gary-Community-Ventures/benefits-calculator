@@ -228,7 +228,7 @@ const Expenses = () => {
                       <Select
                         {...field}
                         labelId={`expense-type-label-${index}`}
-                        id={`expenses.${index}.expenseSourceName`}                        
+                        id={`expenses.${index}.expenseSourceName`}
                         label={
                           <FormattedMessage
                             id="expenseBlock.createExpenseDropdownMenu-expenseTypeSelectLabel"
