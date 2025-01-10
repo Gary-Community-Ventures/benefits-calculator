@@ -13,8 +13,8 @@ import DHSMFBLogo from '../../Assets/States/CO/WhiteLabels/DenverHumanServices/d
 import CCIGLogo from '../../Assets/States/CO/WhiteLabels/CCIG/ccigLogo.png';
 import ECMFBLogo from '../../Assets/States/CO/WhiteLabels/EagleCounty/ECMFBLogo.png';
 import ACHSMFBLogo from '../../Assets/States/CO/WhiteLabels/AdamsCountyHumanServices/achs.png';
-import LC_MFBLogo from '../../Assets/States/CO/WhiteLabels/LarimerCounty/LC_MFBLogo.png'
-import TC_MFBLogo from '../../Assets/States/CO/WhiteLabels/TellerCounty/TC_MFBLogo.png'
+import LC_MFBLogo from '../../Assets/States/CO/WhiteLabels/LarimerCounty/LC_MFBLogo.png';
+import TC_MFBLogo from '../../Assets/States/CO/WhiteLabels/TellerCounty/TC_MFBLogo.png';
 
 const logoMap: { [key: string]: string | undefined } = {
   MFB_COLogo: MFBCOLogo,
@@ -33,7 +33,7 @@ const logoMap: { [key: string]: string | undefined } = {
   EC_MFBLogo: ECMFBLogo,
   ACHS_MFBLogo: ACHSMFBLogo,
   LC_MFBLogo: LC_MFBLogo,
-  TC_MFBLogo: TC_MFBLogo
+  TC_MFBLogo: TC_MFBLogo,
 };
 
 export const renderLogoSource = (sourceLabel: string, logoAlt: string, logoClass: string) => {
