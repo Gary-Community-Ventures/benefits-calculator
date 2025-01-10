@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
-import { ReactNode, useContext, useState } from 'react';
+import { ReactNode, useContext, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
@@ -131,6 +131,20 @@ function AlreadyHasBenefits() {
       alreadyHasBenefits: formData.benefits,
     },
   });
+
+  const hasBenefits = 'true' !== watch('hasBenefits');
+
+  useEffect(() => {
+    const newAlreadyHasBenefits = { ...watch('alreadyHasBenefits') };
+
+    if (!hasBenefits) {
+      for (const key in newAlreadyHasBenefits) {
+        newAlreadyHasBenefits[key] = false;
+      }
+    }
+
+    setValue('alreadyHasBenefits', newAlreadyHasBenefits);
+  }, [hasBenefits]);
 
   const formSubmitHandler = ({ alreadyHasBenefits, hasBenefits }: z.infer<typeof formSchema>) => {
     if (uuid === undefined) {
