@@ -13,7 +13,6 @@ import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionCo
 import HelpButton from '../HelpBubbleIcon/HelpButton';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
-import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 
 const HouseholdSize = () => {
   const { formData, setFormData } = useContext(Context);

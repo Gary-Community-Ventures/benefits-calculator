@@ -17,7 +17,6 @@ import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueBut
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
-import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 
 export const Zipcode = () => {
   const { formData, setFormData } = useContext(Context);
