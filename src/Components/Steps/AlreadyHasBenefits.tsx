@@ -18,8 +18,6 @@ import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionCo
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { Context } from '../Wrapper/Wrapper';
 
-const HAS_BENEFITS_SHOW = 'true';
-
 type CategoryBenefitsConfig = {
   [key: string]: {
     benefits: {
@@ -96,14 +94,14 @@ function AlreadyHasBenefits() {
 
   const formSchema = z
     .object({
-      hasBenefits: z.enum([HAS_BENEFITS_SHOW, 'false', 'preferNotToAnswer']),
+      hasBenefits: z.enum(['true', 'false', 'preferNotToAnswer']),
       alreadyHasBenefits: z.record(z.string(), z.boolean()),
     })
     .refine(
       ({ hasBenefits, alreadyHasBenefits }) => {
         const noBenefitsSelected = Object.values(alreadyHasBenefits).every((value) => !value);
 
-        if (hasBenefits === HAS_BENEFITS_SHOW && noBenefitsSelected) {
+        if (hasBenefits === 'true' && noBenefitsSelected) {
           return false;
         }
 
@@ -133,7 +131,7 @@ function AlreadyHasBenefits() {
     },
   });
 
-  const hasBenefits = HAS_BENEFITS_SHOW !== watch('hasBenefits');
+  const hasBenefits = 'true' !== watch('hasBenefits');
 
   useEffect(() => {
     const newAlreadyHasBenefits = { ...watch('alreadyHasBenefits') };
@@ -192,7 +190,7 @@ function AlreadyHasBenefits() {
                 sx={{ marginBottom: '1rem' }}
               >
                 <FormControlLabel
-                  value={HAS_BENEFITS_SHOW}
+                  value={'true'}
                   control={<Radio />}
                   label={<FormattedMessage id="radiofield.label-yes" defaultMessage="Yes" />}
                 />
@@ -212,7 +210,7 @@ function AlreadyHasBenefits() {
             );
           }}
         />
-        {watch('hasBenefits') === HAS_BENEFITS_SHOW && (
+        {watch('hasBenefits') === 'true' && (
           <div>
             <QuestionQuestion>
               <FormattedMessage
