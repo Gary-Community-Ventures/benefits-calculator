@@ -1,7 +1,7 @@
 .expense-section-container {
   position: relative;
   padding-bottom: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem;  
 }
 
 .first-expense-q-padding {
@@ -17,6 +17,10 @@
   width: 300vw;
   background: var(--secondary-background-color);
   z-index: -1;
+}
+
+.expense-section-container .expense-section-type {
+  margin-left: 0;
 }
 
 .expense-radiogroup-margin-bottom {
