@@ -13,7 +13,6 @@ import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
 import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLabel';
 
 const SelectLanguagePage = () => {
-  const { locale, selectLanguage } = useContext(Context);
   const { locale, selectLanguage, formData, setFormData, configLoading } = useContext(Context);
   const languageOptions = useConfig<{ [key: string]: string }>('language_options');
   const { whiteLabel, uuid } = useParams();
