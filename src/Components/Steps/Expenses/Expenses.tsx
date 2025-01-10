@@ -123,7 +123,7 @@ const Expenses = () => {
 
   const getExpenseSourceLabel = (expenseOptions: Record<string, FormattedMessageType>, expenseSourceName: string) => {
     if (expenseSourceName) {
-      return <> ({expenseSourceName})</>;
+      return <> ({expenseOptions[expenseSourceName]})</>;
     }
   };
 
@@ -212,6 +212,7 @@ const Expenses = () => {
               <FormControl
                 sx={{ m: 1, minWidth: '13.125rem', maxWidth: '100%' }}
                 error={!!errors.expenses?.[index]?.expenseSourceName}
+                className="expense-section-type"
               >
                 <InputLabel id={`expense-type-label-${index}`}>
                   <FormattedMessage
