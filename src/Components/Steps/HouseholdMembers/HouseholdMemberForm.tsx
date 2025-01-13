@@ -62,11 +62,13 @@ const HouseholdMemberForm = () => {
   const currentMemberIndex = pageNumber - 1;
   const householdMemberFormData = formData.householdData[currentMemberIndex] as HouseholdData | undefined;
   const healthInsuranceOptions =
-    useConfig<Record<keyof HealthInsurance, { text: FormattedMessageType; icon: ReactNode }>>(
+    useConfig<Record<'you' | 'them', Record<keyof HealthInsurance, { text: FormattedMessageType; icon: ReactNode }>>>(
       'health_insurance_options',
     );
   const conditionOptions =
-    useConfig<Record<keyof Conditions, { text: FormattedMessageType; icon: ReactNode }>>('condition_options');
+    useConfig<Record<'you' | 'them', Record<keyof Conditions, { text: FormattedMessageType; icon: ReactNode }>>>(
+      'condition_options',
+    );
   const relationshipOptions = useConfig<Record<string, FormattedMessageType>>('relationship_options');
   const incomeOptions = useConfig<Record<string, FormattedMessageType>>('income_options');
   const incomeStreamsMenuItems = createMenuItems(
@@ -422,8 +424,8 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const displayHealthCareQuestion = (page: number) => {
-    if (page === 1) {
+  const displayHealthCareQuestion = () => {
+    if (pageNumber === 1) {
       return (
         <QuestionQuestion>
           <FormattedMessage
@@ -464,7 +466,7 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const displayConditionsQuestion = (pageNumber: number, conditionOptions) => {
+  const displayConditionsQuestion = () => {
     const formattedMsgId =
       pageNumber === 1
         ? 'householdDataBlock.createConditionsQuestion-do-these-apply-to-you'
@@ -494,7 +496,7 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const createHOfHRelationQuestion = (relationshipOptions: Record<string, FormattedMessageType>) => {
+  const createHOfHRelationQuestion = () => {
     return (
       <Box sx={{ marginBottom: '1.5rem' }}>
         <QuestionQuestion>
@@ -547,17 +549,17 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const createIncomeRadioQuestion = (index: number) => {
+  const createIncomeRadioQuestion = () => {
     const translatedAriaLabel = intl.formatMessage({
       id: 'householdDataBlock.createIncomeRadioQuestion-ariaLabel',
       defaultMessage: 'has an income',
     });
 
     const formattedMsgId =
-      index === 1 ? 'questions.hasIncome' : 'householdDataBlock.createIncomeRadioQuestion-questionLabel';
+      pageNumber === 1 ? 'questions.hasIncome' : 'householdDataBlock.createIncomeRadioQuestion-questionLabel';
 
     const formattedMsgDefaultMsg =
-      index === 1
+      pageNumber === 1
         ? 'Do you have an income?'
         : 'Does this individual in your household have significant income you have not already included?';
 
