@@ -307,7 +307,12 @@ const HouseholdMemberForm = () => {
     }
 
     const updatedHouseholdData = [...formData.householdData];
-    updatedHouseholdData[currentMemberIndex] = memberData;
+    updatedHouseholdData[currentMemberIndex] = {
+      ...memberData,
+      birthYear: Number(memberData.birthYear),
+      birthMonth: Number(memberData.birthMonth),
+      hasIncome: memberData.hasIncome === 'true',
+    };
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
     setFormData(updatedFormData);
     updateScreen(updatedFormData);
