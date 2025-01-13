@@ -578,7 +578,7 @@ const HouseholdMemberForm = () => {
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <RadioGroup {...field} aria-labelledby={translatedAriaLabel} sx={{ marginBottom: '1rem' }}>
+              <RadioGroup {...field} aria-label={translatedAriaLabel} sx={{ marginBottom: '1rem' }}>
                 <FormControlLabel
                   value={'true'}
                   control={<Radio />}
@@ -645,10 +645,7 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const getIncomeStreamSourceLabel = (
-    incomeOptions: Record<string, FormattedMessageType>,
-    incomeStreamName: string,
-  ) => {
+  const getIncomeStreamSourceLabel = (incomeStreamName: string) => {
     if (incomeStreamName) {
       return (
         <>
@@ -662,12 +659,7 @@ const HouseholdMemberForm = () => {
     return '?';
   };
 
-  const renderIncomeFrequencySelect = (
-    incomeOptions: Record<string, FormattedMessageType>,
-    selectedIncomeSource: string,
-    index: number,
-    pageNumber: number,
-  ) => {
+  const renderIncomeFrequencySelect = (selectedIncomeSource: string, index: number) => {
     let formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel';
     let formattedMsgDefaultMsg = 'How often are you paid this income ';
     if (pageNumber !== 1) {
@@ -680,7 +672,7 @@ const HouseholdMemberForm = () => {
         <div className="income-margin-bottom">
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-            {getIncomeStreamSourceLabel(incomeOptions, selectedIncomeSource)}
+            {getIncomeStreamSourceLabel(selectedIncomeSource)}
             <HelpButton
               helpText='"Every 2 weeks" means you get paid every other week. "Twice a month" means you get paid two times a month on the same dates each month.'
               helpId="personIncomeBlock.income-freq-help-text"
@@ -729,11 +721,11 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const renderHoursPerWeekTextfield = (page: number, index: number, selectedIncomeSource: string) => {
+  const renderHoursPerWeekTextfield = (index: number, selectedIncomeSource: string) => {
     let formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-youQLabel';
     let formattedMsgDefaultMsg = 'How many hours do you work per week ';
 
-    if (page !== 1) {
+    if (pageNumber !== 1) {
       formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-questionLabel';
       formattedMsgDefaultMsg = 'How many hours do they work per week ';
     }
@@ -743,7 +735,7 @@ const HouseholdMemberForm = () => {
         <div className="income-margin-bottom">
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-            {getIncomeStreamSourceLabel(incomeOptions, selectedIncomeSource)}
+            {getIncomeStreamSourceLabel(selectedIncomeSource)}
           </QuestionQuestion>
         </div>
         <Controller
@@ -774,7 +766,6 @@ const HouseholdMemberForm = () => {
   };
 
   const renderIncomeAmountTextfield = (
-    page: number,
     index: number,
     selectedIncomeFrequency: string,
     selectedIncomeStreamSource: string,
@@ -785,7 +776,7 @@ const HouseholdMemberForm = () => {
       let hourlyFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
       let hourlyFormattedMsgDefaultMsg = 'What is your hourly rate ';
 
-      if (page !== 1) {
+      if (pageNumber !== 1) {
         hourlyFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
         hourlyFormattedMsgDefaultMsg = 'What is their hourly rate ';
       }
@@ -795,7 +786,7 @@ const HouseholdMemberForm = () => {
       let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
       let payPeriodFormattedMsgDefaultMsg = 'How much do you receive before taxes each pay period for ';
 
-      if (page !== 1) {
+      if (pageNumber !== 1) {
         payPeriodFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-questionLabel';
         payPeriodFormattedMsgDefaultMsg = 'How much do they receive before taxes each pay period for ';
       }
@@ -810,7 +801,7 @@ const HouseholdMemberForm = () => {
         <div className="income-textfield-margin-bottom">
           <QuestionQuestion>
             {questionHeader}
-            {getIncomeStreamSourceLabel(incomeOptions, selectedIncomeStreamSource)}
+            {getIncomeStreamSourceLabel(selectedIncomeStreamSource)}
           </QuestionQuestion>
         </div>
         <Controller
@@ -847,11 +838,11 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const renderAdditionalIncomeBlockQ = (page: number) => {
+  const renderAdditionalIncomeBlockQ = () => {
     let formattedMsgId = 'incomeBlock.createIncomeBlockQuestions-questionLabel';
     let formattedMsgDefaultMsg = 'If you receive another type of income, select it below.';
 
-    if (page !== 1) {
+    if (pageNumber !== 1) {
       formattedMsgId = 'personIncomeBlock.createIncomeBlockQuestions-questionLabel';
       formattedMsgDefaultMsg = 'If they receive another type of income, select it below.';
     }
@@ -867,7 +858,7 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const renderFirstIncomeBlockQ = (pageNumber: number) => {
+  const renderFirstIncomeBlockQ = () => {
     let formattedMsgId = 'questions.hasIncome-a';
     let formattedMsgDefaultMsg = 'What type of income have you had most recently?';
 
