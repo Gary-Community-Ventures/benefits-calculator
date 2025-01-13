@@ -393,6 +393,14 @@ const HouseholdMemberForm = () => {
                     renderInput={(params) => (
                       <TextField
                         {...params}
+                        onChange={(event) => {
+                          const value = event.target.value;
+                          if (YEARS.includes(value)) {
+                            // set value if the value is valid,
+                            // so the user does not need to select an option if they type the whole year.
+                            setValue('birthYear', value);
+                          }
+                        }}
                         label={<FormattedMessage id="ageInput.year.label" defaultMessage="Birth Year" />}
                         inputProps={{
                           ...params.inputProps,
