@@ -306,28 +306,11 @@ const HouseholdMemberForm = () => {
       throw new Error('uuid is not defined');
     }
 
-    const currentMemberDataAtThisIndex = householdMemberFormData;
-    if (currentMemberDataAtThisIndex) {
-      // if we have data at this index then replace it
-      const updatedHouseholdData = [...formData.householdData].map((currentMemberData, index) => {
-        if (index === currentMemberIndex) {
-          return memberData;
-        } else {
-          return currentMemberData;
-        }
-      });
-
-      const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-      setFormData(updatedFormData);
-      updateScreen(updatedFormData);
-    } else {
-      // if there is no data at this index then we need to push it to the array
-      const copyOfHouseholdData = [...formData.householdData];
-      copyOfHouseholdData.push(memberData);
-      const updatedFormData = { ...formData, householdData: copyOfHouseholdData };
-      setFormData(updatedFormData);
-      updateScreen(updatedFormData);
-    }
+    const updatedHouseholdData = [...formData.householdData];
+    updatedHouseholdData[currentMemberIndex] = memberData;
+    const updatedFormData = { ...formData, householdData: updatedHouseholdData };
+    setFormData(updatedFormData);
+    updateScreen(updatedFormData);
 
     nextStep(uuid, currentStepId, pageNumber);
   };
