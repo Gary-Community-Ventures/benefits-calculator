@@ -320,11 +320,11 @@ const HouseholdMemberForm = () => {
     nextStep(uuid, currentStepId, pageNumber);
   };
 
-  const createAgeQuestion = (personIndex: number) => {
+  const createAgeQuestion = () => {
     return (
       <Box sx={{ marginBottom: '1.5rem' }}>
         <QuestionQuestion>
-          {personIndex === 1 ? (
+          {pageNumber === 1 ? (
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-how-headOfHH"
               defaultMessage="Please enter your month and year of birth"
