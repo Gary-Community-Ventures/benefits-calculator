@@ -49,7 +49,7 @@ import {
 import { DOLLARS, handleNumbersOnly, numberInputProps, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
 import useScreenApi from '../../../Assets/updateScreen';
 import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
-import { getCurrentMonthYear } from '../../../Assets/age';
+import { getCurrentMonthYear, YEARS, MAX_AGE } from '../../../Assets/age';
 import './PersonIncomeBlock.css';
 
 const HouseholdMemberForm = () => {
@@ -102,11 +102,6 @@ const HouseholdMemberForm = () => {
   };
 
   const CURRENT_YEAR = getCurrentMonthYear().CURRENT_YEAR;
-  const MAX_AGE = 130;
-  const YEARS = Array.from({ length: MAX_AGE }, (_, i) => {
-    const inputYear = CURRENT_YEAR - i;
-    return String(inputYear);
-  });
   // I added an empty string to the years array to fix the initial invalid Autocomplete value warning
   const YEARS_AND_INITIAL_EMPTY_STR = ['', ...YEARS];
 
