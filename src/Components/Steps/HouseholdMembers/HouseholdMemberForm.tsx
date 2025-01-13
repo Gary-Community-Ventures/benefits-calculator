@@ -25,7 +25,6 @@ import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useStepNumber } from '../../../Assets/stepDirectory';
 import * as z from 'zod';
 import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
-import { useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MONTHS } from './MONTHS';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
@@ -50,6 +49,7 @@ import {
 import { DOLLARS, handleNumbersOnly, numberInputProps, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
 import useScreenApi from '../../../Assets/updateScreen';
 import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
+import { getCurrentMonthYear } from '../../../Assets/age';
 import './PersonIncomeBlock.css';
 
 const HouseholdMemberForm = () => {
@@ -101,8 +101,7 @@ const HouseholdMemberForm = () => {
     }
   };
 
-  const date = new Date();
-  const CURRENT_YEAR = date.getFullYear();
+  const CURRENT_YEAR = getCurrentMonthYear().CURRENT_YEAR;
   const MAX_AGE = 130;
   const YEARS = Array.from({ length: MAX_AGE }, (_, i) => {
     const inputYear = CURRENT_YEAR - i;
