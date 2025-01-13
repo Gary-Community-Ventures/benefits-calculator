@@ -101,7 +101,7 @@ const HouseholdMemberForm = () => {
     }
   };
 
-  const CURRENT_YEAR = getCurrentMonthYear().CURRENT_YEAR;
+  const { CURRENT_MONTH, CURRENT_YEAR } = getCurrentMonthYear();
   // I added an empty string to the years array to fix the initial invalid Autocomplete value warning
   const YEARS_AND_INITIAL_EMPTY_STR = ['', ...YEARS];
 
@@ -138,56 +138,64 @@ const HouseholdMemberForm = () => {
   const incomeStreamsSchema = z.array(incomeSourcesSchema);
   const hasIncomeSchema = z.string().regex(/^true|false$/);
 
-  const formSchema = z.object({
-    /*
+  const formSchema = z
+    .object({
+      /*
     z.string().min(1) validates that an option was selected.
     The default value of birthMonth is '' when no option is selected.
     The possible values that can be selected are '1', '2', ..., '12',
     so if one of those options are selected,
     then birthMonth would have a minimum string length of 1 which passes validation.
     */
-    birthMonth: z.string().min(1),
-    birthYear: z
-      .string()
-      .trim()
-      .refine((value) => {
-        if (value === '') {
-          return false; // Filter out empty strings
+      birthMonth: z.string().min(1),
+      birthYear: z
+        .string()
+        .trim()
+        .min(1)
+        .refine((value) => {
+          const year = Number(value);
+          const age = CURRENT_YEAR - year;
+          return year <= CURRENT_YEAR && age < MAX_AGE;
+        }),
+      healthInsurance: z
+        .object({
+          none: z.boolean(),
+          employer: z.boolean(),
+          private: z.boolean(),
+          medicaid: z.boolean(),
+          medicare: z.boolean(),
+          chp: z.boolean(),
+          emergency_medicaid: z.boolean(),
+          family_planning: z.boolean(),
+          va: z.boolean(),
+        })
+        .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
+          message: 'Please select at least one health insurance option.',
+          path: ['healthInsurance'],
+        }),
+      conditions: z.object({
+        student: z.boolean(),
+        pregnant: z.boolean(),
+        blindOrVisuallyImpaired: z.boolean(),
+        disabled: z.boolean(),
+        longTermDisability: z.boolean(),
+      }),
+      relationshipToHH: z
+        .string()
+        .refine((value) => [...Object.keys(relationshipOptions)].includes(value) || pageNumber === 1),
+      hasIncome: hasIncomeSchema,
+      incomeStreams: incomeStreamsSchema,
+    })
+    .refine(
+      ({ birthMonth, birthYear }) => {
+        //this checks that the date they've selected is not in the future
+        if (Number(birthYear) === CURRENT_YEAR) {
+          return Number(birthMonth) <= CURRENT_MONTH;
         }
-
-        const year = Number(value);
-        const age = CURRENT_YEAR - year;
-        return year <= CURRENT_YEAR && age < MAX_AGE;
-      }),
-    healthInsurance: z
-      .object({
-        none: z.boolean(),
-        employer: z.boolean(),
-        private: z.boolean(),
-        medicaid: z.boolean(),
-        medicare: z.boolean(),
-        chp: z.boolean(),
-        emergency_medicaid: z.boolean(),
-        family_planning: z.boolean(),
-        va: z.boolean(),
-      })
-      .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
-        message: 'Please select at least one health insurance option.',
-        path: ['healthInsurance'],
-      }),
-    conditions: z.object({
-      student: z.boolean(),
-      pregnant: z.boolean(),
-      blindOrVisuallyImpaired: z.boolean(),
-      disabled: z.boolean(),
-      longTermDisability: z.boolean(),
-    }),
-    relationshipToHH: z
-      .string()
-      .refine((value) => [...Object.keys(relationshipOptions)].includes(value) || pageNumber === 1),
-    hasIncome: hasIncomeSchema,
-    incomeStreams: incomeStreamsSchema,
-  });
+        return true;
+      },
+      { message: 'This birth month is in the future', path: ['birthMonth'] },
+    );
   type FormSchema = z.infer<typeof formSchema>;
 
   useEffect(() => {
