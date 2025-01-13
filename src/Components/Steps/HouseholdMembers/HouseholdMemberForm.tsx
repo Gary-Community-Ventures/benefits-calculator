@@ -151,6 +151,10 @@ const HouseholdMemberForm = () => {
       .string()
       .trim()
       .refine((value) => {
+        if (value === '') {
+          return false; // Filter out empty strings
+        }
+
         const year = Number(value);
         const age = CURRENT_YEAR - year;
         return year <= CURRENT_YEAR && age < MAX_AGE;
