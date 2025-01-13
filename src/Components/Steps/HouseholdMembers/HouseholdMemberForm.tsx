@@ -172,7 +172,21 @@ const HouseholdMemberForm = () => {
         .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
           message: 'Please select at least one health insurance option.',
           path: ['healthInsurance'],
-        }),
+        })
+        .refine(
+          (insuranceOptions) => {
+            if (insuranceOptions.none) {
+              return Object.entries(insuranceOptions)
+                .filter(([key, _]) => key !== 'none')
+                .every(([_, value]) => value === false);
+            }
+            return true;
+          },
+          {
+            message: 'Please do not select any other options if you do not have health insurance',
+            path: ['healthInsurance'],
+          },
+        ), //TODO: Render this error message to the user
       conditions: z.object({
         student: z.boolean(),
         pregnant: z.boolean(),
@@ -194,7 +208,7 @@ const HouseholdMemberForm = () => {
         }
         return true;
       },
-      { message: 'This birth month is in the future', path: ['birthMonth'] },
+      { message: 'This birth month is in the future', path: ['birthMonth'] }, //TODO: Render this error message to the user
     );
   type FormSchema = z.infer<typeof formSchema>;
 
