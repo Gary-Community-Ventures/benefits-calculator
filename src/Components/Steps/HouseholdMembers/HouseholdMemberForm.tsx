@@ -893,7 +893,11 @@ const HouseholdMemberForm = () => {
         )}
       </QuestionHeader>
       <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} />
-      <form onSubmit={handleSubmit(formSubmitHandler)}>
+      <form
+        onSubmit={handleSubmit(formSubmitHandler, () => {
+          window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+        })}
+      >
         {createAgeQuestion()}
         {pageNumber !== 1 && createHOfHRelationQuestion()}
         {displayHealthInsuranceBlock()}
