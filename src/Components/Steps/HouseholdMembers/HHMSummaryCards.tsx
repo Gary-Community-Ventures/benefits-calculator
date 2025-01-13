@@ -1,7 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Box, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import { calcAge } from '../../../Assets/age.tsx';
+import { calcAge, hasBirthMonthYear, useFormatBirthMonthYear } from '../../../Assets/age.tsx';
 import { useConfig } from '../../Config/configHook';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { FormData, HouseholdData } from '../../../Types/FormData';
@@ -31,6 +31,7 @@ const HHMSummaries = ({ activeMemberData, triggerValidation }: HHMSummariesProps
     defaultMessage: 'edit household member',
   });
   const navigate = useNavigate();
+  const formatBirthMonthYear = useFormatBirthMonthYear();
 
   const handleEditBtnSubmit = async (memberIndex: number) => {
     const isValid = await triggerValidation();
@@ -51,7 +52,9 @@ const HHMSummaries = ({ activeMemberData, triggerValidation }: HHMSummariesProps
     relationship_options: Record<string, FormattedMessageType>,
   ) => {
     const { relationshipToHH, birthYear, birthMonth } = memberData;
-    const containerClassName = `member-added-container ${memberIndex + 1 === pageNumber ? 'current-household-member' : ''}`;
+    const containerClassName = `member-added-container ${
+      memberIndex + 1 === pageNumber ? 'current-household-member' : ''
+    }`;
 
     let relationship = relationship_options[relationshipToHH];
     if (memberIndex === 0) {
@@ -79,14 +82,14 @@ const HHMSummaries = ({ activeMemberData, triggerValidation }: HHMSummariesProps
           </strong>
           {translateNumber(age)}
         </div>
-        <div className="member-added-age">
-          <strong>
-            <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
-          </strong>
-          {birthMonth !== undefined &&
-            birthYear !== undefined &&
-            translateNumber(String(birthMonth).padStart(2, '0')) + '/' + translateNumber(birthYear)}
-        </div>
+        {hasBirthMonthYear({ birthMonth, birthYear }) && (
+          <div className="member-added-age">
+            <strong>
+              <FormattedMessage id="householdDataBlock.memberCard.birthYearMonth" defaultMessage="Birth Month/Year: " />
+            </strong>
+            {formatBirthMonthYear({ birthMonth, birthYear })}
+          </div>
+        )}
         <div className="member-added-income">
           <strong>
             <FormattedMessage id="householdDataBlock.member-income" defaultMessage="Income: " />
