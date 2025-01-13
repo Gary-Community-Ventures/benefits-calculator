@@ -446,11 +446,11 @@ const HouseholdMemberForm = () => {
     }
   };
 
-  const displayHealthInsuranceBlock = (pageNumber: number, healthInsuranceOptions: any) => {
+  const displayHealthInsuranceBlock = () => {
     return (
       <div className="section-container">
         <Stack sx={{ padding: '3rem 0' }} className="section">
-          {displayHealthCareQuestion(pageNumber)}
+          {displayHealthCareQuestion()}
           <RHFOptionCardGroup
             fields={watch('healthInsurance')}
             setValue={setValue}
@@ -894,13 +894,13 @@ const HouseholdMemberForm = () => {
       </QuestionHeader>
       <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} />
       <form onSubmit={handleSubmit(formSubmitHandler)}>
-        {createAgeQuestion(pageNumber)}
-        {pageNumber !== 1 && createHOfHRelationQuestion(relationshipOptions)}
-        {displayHealthInsuranceBlock(pageNumber, healthInsuranceOptions)}
-        {displayConditionsQuestion(pageNumber, conditionOptions)}
+        {createAgeQuestion()}
+        {pageNumber !== 1 && createHOfHRelationQuestion()}
+        {displayHealthInsuranceBlock()}
+        {displayConditionsQuestion()}
         <div>
           <Stack sx={{ margin: '3rem 0' }}>
-            {createIncomeRadioQuestion(pageNumber)}
+            {createIncomeRadioQuestion()}
             {fields.map((field, index) => {
               const selectedIncomeStreamSource = watch('incomeStreams')[index].incomeStreamName;
               const selectedIncomeFrequency = watch('incomeStreams')[index].incomeFrequency;
@@ -914,18 +914,13 @@ const HouseholdMemberForm = () => {
                       </div>
                     )}
                     <div>
-                      {index === 0 && renderFirstIncomeBlockQ(pageNumber)}
-                      {index !== 0 && renderAdditionalIncomeBlockQ(pageNumber)}
+                      {index === 0 && renderFirstIncomeBlockQ()}
+                      {index !== 0 && renderAdditionalIncomeBlockQ()}
                       {renderIncomeStreamNameSelect(index)}
-                      {renderIncomeFrequencySelect(incomeOptions, selectedIncomeStreamSource, index, pageNumber)}
+                      {renderIncomeFrequencySelect(selectedIncomeStreamSource, index)}
                       {selectedIncomeFrequency === 'hourly' &&
-                        renderHoursPerWeekTextfield(pageNumber, index, selectedIncomeStreamSource)}
-                      {renderIncomeAmountTextfield(
-                        pageNumber,
-                        index,
-                        selectedIncomeFrequency,
-                        selectedIncomeStreamSource,
-                      )}
+                        renderHoursPerWeekTextfield(index, selectedIncomeStreamSource)}
+                      {renderIncomeAmountTextfield(index, selectedIncomeFrequency, selectedIncomeStreamSource)}
                     </div>
                   </div>
                 </div>
