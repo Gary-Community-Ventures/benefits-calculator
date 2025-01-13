@@ -446,7 +446,7 @@ const HouseholdMemberForm = () => {
 
   const displayHealthInsuranceBlock = (pageNumber: number, healthInsuranceOptions: any) => {
     return (
-      <Box className="section-container">
+      <div className="section-container">
         <Stack sx={{ padding: '3rem 0' }} className="section">
           {displayHealthCareQuestion(pageNumber)}
           <RHFOptionCardGroup
@@ -460,7 +460,7 @@ const HouseholdMemberForm = () => {
             <FormHelperText sx={{ marginLeft: 0 }}>{renderHealthInsuranceHelperText()}</FormHelperText>
           )}
         </Stack>
-      </Box>
+      </div>
     );
   };
 
@@ -563,7 +563,7 @@ const HouseholdMemberForm = () => {
 
     return (
       <Box className="section-container" sx={{ paddingTop: '3rem' }}>
-        <Box className="section">
+        <div className="section">
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
             <HelpButton
@@ -590,7 +590,7 @@ const HouseholdMemberForm = () => {
               </RadioGroup>
             )}
           />
-        </Box>
+        </div>
       </Box>
     );
   };
