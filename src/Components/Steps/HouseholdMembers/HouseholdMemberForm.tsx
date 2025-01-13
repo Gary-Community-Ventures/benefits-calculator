@@ -54,13 +54,13 @@ import './PersonIncomeBlock.css';
 
 const HouseholdMemberForm = () => {
   const { formData, setFormData } = useContext(Context);
-  const { uuid, page } = useParams();
+  const { uuid, page, whiteLabel } = useParams();
   const { updateScreen } = useScreenApi();
   const navigate = useNavigate();
   const intl = useIntl();
   const pageNumber = Number(page);
   const currentMemberIndex = pageNumber - 1;
-  const householdMemberFormData = formData.householdData[currentMemberIndex];
+  const householdMemberFormData = formData.householdData[currentMemberIndex] as HouseholdData | undefined;
   const healthInsuranceOptions =
     useConfig<Record<keyof HealthInsurance, { text: FormattedMessageType; icon: ReactNode }>>(
       'health_insurance_options',
@@ -86,17 +86,17 @@ const HouseholdMemberForm = () => {
     }
 
     if (pageNumber <= 1) {
-      navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId - 1}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${currentStepId - 1}`);
     } else {
-      navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber - 1}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber - 1}`);
     }
   };
   const nextStep = (uuid: string, currentStepId: number, pageNumber: number) => {
     if (Number(pageNumber + 1) <= formData.householdSize) {
-      navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber + 1}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber + 1}`);
       return;
     } else {
-      navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId + 1}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${currentStepId + 1}`);
       return;
     }
   };
@@ -216,7 +216,7 @@ const HouseholdMemberForm = () => {
     document.title = QUESTION_TITLES.householdData;
   }, []);
 
-  const determineDefaultRelationshipToHH = (householdMemberFormData: HouseholdData | undefined) => {
+  const determineDefaultRelationshipToHH = () => {
     if (householdMemberFormData && householdMemberFormData.relationshipToHH) {
       return householdMemberFormData.relationshipToHH;
     } else if (pageNumber === 1) {
@@ -224,6 +224,18 @@ const HouseholdMemberForm = () => {
     } else {
       return '';
     }
+  };
+
+  const determineDefaultHasIncome = () => {
+    if (householdMemberFormData === undefined) {
+      return 'false';
+    }
+
+    if (householdMemberFormData.incomeStreams.length > 0) {
+      return 'true';
+    }
+
+    return 'false';
   };
 
   const {
@@ -261,8 +273,8 @@ const HouseholdMemberForm = () => {
             disabled: false,
             longTermDisability: false,
           },
-      relationshipToHH: determineDefaultRelationshipToHH(householdMemberFormData),
-      hasIncome: householdMemberFormData?.incomeStreams.length > 0 ? 'true' : 'false',
+      relationshipToHH: determineDefaultRelationshipToHH(),
+      hasIncome: determineDefaultHasIncome(),
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
     },
   });
