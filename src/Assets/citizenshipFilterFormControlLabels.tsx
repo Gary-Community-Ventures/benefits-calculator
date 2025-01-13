@@ -13,7 +13,9 @@ export type CitizenLabels =
   | 'gc_under18_no5'
   | 'otherWithWorkPermission'
   | 'otherHealthCareUnder19'
-  | 'otherHealthCarePregnant';
+  | 'otherHealthCarePregnant'
+  | 'notPregnantOrUnder19ForOmniSalud'
+  | 'notPregnantOrUnder19ForEmergencyMedicaid';
 
 export type CitizenLabelOptions =
   | 'non_citizen'
@@ -24,7 +26,11 @@ export type CitizenLabelOptions =
   | 'gc_under18_no5'
   | 'otherWithWorkPermission';
 
-export type CalculatedCitizenLabel = 'otherHealthCareUnder19' | 'otherHealthCarePregnant';
+export type CalculatedCitizenLabel =
+  | 'otherHealthCareUnder19'
+  | 'otherHealthCarePregnant'
+  | 'notPregnantOrUnder19ForOmniSalud'
+  | 'notPregnantOrUnder19ForEmergencyMedicaid';
 
 export const filterNestedMap = new Map<CitizenLabelOptions, CitizenLabelOptions[]>([
   ['non_citizen', []],
@@ -34,9 +40,13 @@ export const filterNestedMap = new Map<CitizenLabelOptions, CitizenLabelOptions[
 ]);
 
 type CalculatedCitizenshipFilter = {
-  func: (formData: HouseholdData) => boolean;
+  func: (member: HouseholdData) => boolean;
   linkedFilters: CitizenLabelOptions[];
 };
+
+function notPregnantOrUnder19(member: HouseholdData) {
+  return !member.conditions.pregnant && calcAge(member) >= 19;
+}
 
 export const calculatedCitizenshipFilters: Record<CalculatedCitizenLabel, CalculatedCitizenshipFilter> = {
   otherHealthCarePregnant: {
@@ -66,6 +76,14 @@ export const calculatedCitizenshipFilters: Record<CalculatedCitizenLabel, Calcul
       'gc_under18_no5',
       'otherWithWorkPermission',
     ],
+  },
+  notPregnantOrUnder19ForOmniSalud: {
+    func: notPregnantOrUnder19,
+    linkedFilters: ['non_citizen', 'refugee'],
+  },
+  notPregnantOrUnder19ForEmergencyMedicaid: {
+    func: notPregnantOrUnder19,
+    linkedFilters: ['gc_18plus_no5', 'non_citizen', 'otherWithWorkPermission'],
   },
 };
 

@@ -1,7 +1,14 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import ResultsError from './ResultsError/ResultsError';
 import Loading from './Loading/Loading';
-import { EligibilityResults, Program, ProgramCategory, UrgentNeed, Validation } from '../../Types/Results';
+import {
+  EligibilityResults,
+  MemberEligibility,
+  Program,
+  ProgramCategory,
+  UrgentNeed,
+  Validation,
+} from '../../Types/Results';
 import { getEligibility } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import { Navigate, useParams, useSearchParams } from 'react-router-dom';
@@ -11,7 +18,11 @@ import Needs from './Needs/Needs';
 import Programs from './Programs/Programs';
 import ProgramPage from './ProgramPage/ProgramPage';
 import ResultsTabs from './Tabs/Tabs';
-import { CitizenLabels } from '../../Assets/citizenshipFilterFormControlLabels';
+import {
+  CalculatedCitizenLabel,
+  calculatedCitizenshipFilters,
+  CitizenLabels,
+} from '../../Assets/citizenshipFilterFormControlLabels';
 import dataLayerPush from '../../Assets/analytics';
 import HelpButton from './211Button/211Button';
 import MoreHelp from '../MoreHelp/MoreHelp';
@@ -19,6 +30,8 @@ import BackAndSaveButtons from './BackAndSaveButtons/BackAndSaveButtons';
 import { FormattedMessage } from 'react-intl';
 import './Results.css';
 import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
+import { FormData } from '../../Types/FormData';
+import { programValue } from './FormattedValue';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -47,6 +60,16 @@ export function useResultsContext() {
   }
 
   return context;
+}
+
+export function findMemberEligibilityMember(formData: FormData, memberEligibility: MemberEligibility) {
+  const member = formData.householdData.find(({ frontendId }) => frontendId === memberEligibility.frontend_id);
+
+  if (member === undefined) {
+    throw new Error(`Member with frontend id of ${memberEligibility.frontend_id} could not be found in formData`);
+  }
+
+  return member;
 }
 
 function findProgramById(programs: Program[], id: number) {
@@ -132,12 +155,71 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     otherWithWorkPermission: false,
     otherHealthCareUnder19: false,
     otherHealthCarePregnant: false,
+    notPregnantOrUnder19ForOmniSalud: false,
+    notPregnantOrUnder19ForEmergencyMedicaid: false,
   });
   const [programs, setPrograms] = useState<Program[]>([]);
   const [programCategories, setProgramCategories] = useState<ProgramCategory[]>([]);
   const [needs, setNeeds] = useState<UrgentNeed[]>([]);
   const [missingPrograms, setMissingPrograms] = useState(false);
   const [validations, setValidations] = useState<Validation[]>([]);
+
+  // TODO: move to own file
+  function updateMemberEligibility(program: Program) {
+    // Check if one of the non calculated filters is checked
+    // then we don't apply any more calculations
+    const filtersCheckedStrArr = Object.entries(filtersChecked)
+      .filter(([key, value]) => {
+        if (key in calculatedCitizenshipFilters) {
+          return false;
+        }
+
+        return value;
+      })
+      .map(([key, _]) => key);
+
+    const meetsLegalStatus = program.legal_status_required.some((status) => filtersCheckedStrArr.includes(status));
+
+    if (meetsLegalStatus) {
+      return program;
+    }
+
+    for (const memberEligibility of program.members) {
+      const member = findMemberEligibilityMember(formData, memberEligibility);
+
+      let meetsCondition = false;
+      let hasMemberCondition = false;
+
+      for (const [filterNameUntyped, calculator] of Object.entries(calculatedCitizenshipFilters)) {
+        const filterName = filterNameUntyped as CalculatedCitizenLabel;
+
+        // If the filter is not checked don't calculate eligibility
+        if (filtersChecked[filterName] === false) {
+          continue;
+        }
+
+        // If the program does not require the citizenship status don't calculate eligibility
+        if (program.legal_status_required.every((status) => status !== filterName)) {
+          continue;
+        }
+
+        hasMemberCondition = true;
+
+        if (calculator.func(member)) {
+          meetsCondition = true;
+        }
+      }
+
+      // Make members ineligble if they don't meet any of the conditions
+      // and at least one of the condtions is being used
+      if (hasMemberCondition && !meetsCondition) {
+        memberEligibility.value = 0;
+        memberEligibility.eligible = false;
+      }
+    }
+
+    return program;
+  }
 
   function showProgram(program: Program) {
     // show all programs in the admin view
@@ -153,10 +235,15 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
 
     const meetsLegalStatus = program.legal_status_required.some((status) => filtersCheckedStrArr.includes(status));
     const isEligible = program.eligible;
+    const hasValue = programValue(program) > 0;
     const doesNotHave = !program.already_has;
 
-    return meetsLegalStatus && isEligible && doesNotHave;
+    return meetsLegalStatus && isEligible && hasValue && doesNotHave;
   }
+
+  const updateProgramArray = (programs: Program[]) => {
+    return structuredClone(programs).map(updateMemberEligibility).filter(showProgram);
+  };
 
   useEffect(() => {
     if (apiResults === undefined) {
@@ -169,12 +256,12 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     }
 
     setNeeds(apiResults.urgent_needs);
-    setPrograms(apiResults.programs.filter(showProgram));
+    setPrograms(updateProgramArray(apiResults.programs));
     setProgramCategories(
       apiResults.program_categories.map((category) => {
         return {
           ...category,
-          programs: category.programs.filter(showProgram),
+          programs: updateProgramArray(category.programs),
         };
       }),
     );

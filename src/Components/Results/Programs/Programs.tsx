@@ -4,7 +4,7 @@ import Filter from './Filter';
 import ProgramCard from './ProgramCard';
 import CategoryHeading from '../CategoryHeading/CategoryHeading';
 import { useMemo } from 'react';
-import { calculateTotalValue } from '../FormattedValue';
+import { calculateTotalValue, programValue } from '../FormattedValue';
 import { ResultsMessage } from '../../Referrer/Referrer';
 
 function sortProgramsIntoCategories(categories: ProgramCategory[]): ProgramCategory[] {
@@ -17,7 +17,7 @@ function sortProgramsIntoCategories(categories: ProgramCategory[]): ProgramCateg
 
   // sort programs in each category by decending estimated value
   for (const category of sortedCategories) {
-    category.programs = [...category.programs].sort((a, b) => b.estimated_value - a.estimated_value);
+    category.programs = [...category.programs].sort((a, b) => programValue(b) - programValue(a));
   }
 
   return sortedCategories;
