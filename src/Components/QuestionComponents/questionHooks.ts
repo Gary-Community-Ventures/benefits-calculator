@@ -18,6 +18,7 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
   const totalStepCount = stepDirectory.length + STARTING_QUESTION_NUMBER - 1;
   const redirectToConfirmationPage = useShouldRedirectToConfirmation();
   const navigate = useNavigate();
+  const { formData } = useContext(Context);
 
   return () => {
     if (redirectToConfirmationPage) {
