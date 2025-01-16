@@ -53,7 +53,6 @@ export type SignUpInfo = {
 export type AcuteHHConditions = { [key: string]: boolean };
 
 export type FormData = {
-  whiteLabel: string;
   isTest: boolean;
   isTestData?: boolean;
   frozen: boolean;

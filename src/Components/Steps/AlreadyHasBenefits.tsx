@@ -1,11 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
-import { ReactNode, useContext, useState } from 'react';
+import { ReactNode, useContext, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { z } from 'zod';
-import { updateScreen } from '../../Assets/updateScreen';
+import useScreenApi from '../../Assets/updateScreen';
 import { Benefits } from '../../Types/FormData';
 import { FormattedMessageType } from '../../Types/Questions';
 import CheckBoxAccordion from '../AccordionsContainer/CheckboxAccordion';
@@ -86,11 +86,12 @@ function CategoryBenefits({ alreadyHasBenefits, onChange }: CategoryBenefitsProp
 }
 
 function AlreadyHasBenefits() {
-  const { formData, setFormData, locale } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const { formatMessage } = useIntl();
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('hasBenefits');
   const nextStep = useGoToNextStep('hasBenefits');
+  const { updateScreen } = useScreenApi();
 
   const formSchema = z
     .object({
@@ -131,6 +132,20 @@ function AlreadyHasBenefits() {
     },
   });
 
+  const hasBenefits = 'true' !== watch('hasBenefits');
+
+  useEffect(() => {
+    const newAlreadyHasBenefits = { ...watch('alreadyHasBenefits') };
+
+    if (!hasBenefits) {
+      for (const key in newAlreadyHasBenefits) {
+        newAlreadyHasBenefits[key] = false;
+      }
+    }
+
+    setValue('alreadyHasBenefits', newAlreadyHasBenefits);
+  }, [hasBenefits]);
+
   const formSubmitHandler = ({ alreadyHasBenefits, hasBenefits }: z.infer<typeof formSchema>) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
@@ -139,7 +154,7 @@ function AlreadyHasBenefits() {
     const newFormData = { ...formData, hasBenefits: hasBenefits, benefits: alreadyHasBenefits };
 
     setFormData(newFormData);
-    updateScreen(uuid, newFormData, locale);
+    updateScreen(newFormData);
     nextStep();
   };
 

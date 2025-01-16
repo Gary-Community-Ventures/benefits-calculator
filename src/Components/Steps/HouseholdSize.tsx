@@ -9,16 +9,18 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useParams } from 'react-router-dom';
-import { updateScreen } from '../../Assets/updateScreen';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
 import HelpButton from '../HelpBubbleIcon/HelpButton';
+import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
+import useScreenApi from '../../Assets/updateScreen';
 
 const HouseholdSize = () => {
-  const { formData, setFormData, locale } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('householdSize');
   const nextStep = useGoToNextStep('householdSize', '1');
   const intl = useIntl();
+  const { updateScreen } = useScreenApi();
 
   const formSchema = z.object({
     householdSize: z.coerce
@@ -55,7 +57,7 @@ const HouseholdSize = () => {
         householdData: formData.householdData.slice(0, householdSize),
       };
       setFormData(updatedFormData);
-      updateScreen(uuid, updatedFormData, locale);
+      updateScreen(updatedFormData);
       nextStep();
     }
   };
@@ -87,6 +89,8 @@ const HouseholdSize = () => {
               {...field}
               label={<FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size" />}
               variant="outlined"
+              inputProps={NUM_PAD_PROPS}
+              onChange={handleNumbersOnly(field.onChange)}
               error={errors.householdSize !== undefined}
               helperText={errors.householdSize !== undefined && errors.householdSize?.message}
             />

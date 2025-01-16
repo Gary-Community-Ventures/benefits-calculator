@@ -8,22 +8,23 @@ import { useIntl } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import './Header.css';
 import { useLogo } from '../Referrer/useLogo.tsx';
+import { DEFAULT_WHITE_LABEL } from '../Wrapper/Wrapper';
 
 const Header = () => {
   const context = useContext(Context);
-  const { formData, getReferrer } = context;
+  const { formData, getReferrer, whiteLabel } = context;
   const languageOptions = useConfig('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
   const logoClass = getReferrer('logoClass', 'logo');
 
   const homeUrl = useMemo(() => {
-    if (formData.whiteLabel === undefined || formData.whiteLabel === '_default') {
+    if (whiteLabel === undefined || whiteLabel === DEFAULT_WHITE_LABEL) {
       return `/step-1${queryString}`;
     }
 
-    return `/${formData.whiteLabel}/step-1${queryString}`;
-  }, [formData.whiteLabel]);
+    return `/${whiteLabel}/step-1${queryString}`;
+  }, [whiteLabel]);
 
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',

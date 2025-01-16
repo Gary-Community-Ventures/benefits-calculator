@@ -19,4 +19,6 @@ export interface WrapperContext {
   getReferrer: (id: keyof ReferrerData, defaultValue?: ReferrerDataValue) => any;
   staffToken: string | undefined;
   setStaffToken: (token: string | undefined) => void;
+  whiteLabel: string;
+  setWhiteLabel: (whiteLabel: string) => void;
 }

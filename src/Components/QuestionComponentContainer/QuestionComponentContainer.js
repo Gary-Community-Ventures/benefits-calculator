@@ -7,7 +7,6 @@ import Textfield from '../Textfield/Textfield.js';
 import PreviousButton from '../PreviousButton/PreviousButton';
 import ContinueButton from '../ContinueButton/ContinueButton';
 import BasicSelect from '../DropdownMenu/BasicSelect';
-import BasicCheckboxGroup from '../CheckboxGroup/BasicCheckboxGroup';
 import FollowUpQuestions from '../FollowUpQuestions/FollowUpQuestions';
 import { useErrorController } from '../../Assets/validationFunctions.tsx';
 import { Zipcode } from '../Steps/Zipcode.tsx';
@@ -23,18 +22,13 @@ import questions from '../../Assets/questions';
 import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
 import AlreadyHasBenefits from '../Steps/AlreadyHasBenefits';
 import ImmediateNeeds from '../Steps/ImmediateNeeds';
+import SignUp from '../Steps/SignUp/SignUp';
 import './QuestionComponentContainer.css';
 
-const QuestionComponentContainer = ({
-  handleTextfieldChange,
-  handleContinueSubmit,
-  handleNoAnswerChange,
-  handleCheckboxChange,
-}) => {
+const QuestionComponentContainer = ({ handleTextfieldChange, handleContinueSubmit, handleNoAnswerChange }) => {
   const { formData, setFormData } = useContext(Context);
   const acuteConditionOptions = useConfig('acute_condition_options');
   const referralOptions = useConfig('referral_options');
-  const signUpOptions = useConfig('sign_up_options');
   let { id } = useParams();
   const questionName = useStepName(+id, formData.immutableReferrer);
   const matchingQuestion = questions[questionName];
@@ -60,17 +54,6 @@ const QuestionComponentContainer = ({
         componentDetails={question.componentDetails}
         handleRadioButtonChange={handleNoAnswerChange}
         preferNotToAnswer={true}
-      />
-    );
-  };
-
-  const renderBasicCheckboxGroup = (question) => {
-    if (question.name === 'signUpInfo')
-      return <BasicCheckboxGroup stateVariable={question.componentDetails.inputName} options={signUpOptions} />;
-    return (
-      <BasicCheckboxGroup
-        stateVariable={question.componentDetails.inputName}
-        options={matchingQuestion.componentDetails.options}
       />
     );
   };
@@ -116,7 +99,6 @@ const QuestionComponentContainer = ({
             followUpQuestions={matchingQuestion.followUpQuestions}
             submitted={errorController.submittedCount}
             formData={formData}
-            handleCheckboxChange={handleCheckboxChange}
             handleTextfieldChange={handleTextfieldChange}
           />
         )}
@@ -229,6 +211,12 @@ const QuestionComponentContainer = ({
           <ImmediateNeeds />
         </main>
       );
+    case 'signUpInfo':
+      return (
+        <main className="benefits-form">
+          <SignUp />
+        </main>
+      );
     default:
       return (
         <main className="benefits-form">
@@ -237,8 +225,6 @@ const QuestionComponentContainer = ({
             createComponent(renderTextfieldComponent(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'PreferNotToAnswer' &&
               createComponent(renderNoAnswerComponent(matchingQuestion))) ||
-            (matchingQuestion.componentDetails.componentType === 'BasicCheckboxGroup' &&
-              createComponent(renderBasicCheckboxGroup(matchingQuestion))) ||
             (matchingQuestion.componentDetails.componentType === 'BasicSelect' &&
               createComponent(renderBasicSelectComponent(matchingQuestion)))}
         </main>

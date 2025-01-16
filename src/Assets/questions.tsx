@@ -1,8 +1,4 @@
-import {
-  householdAssetsHasError,
-  signUpOptionsHaveError,
-  displayHouseholdAssetsHelperText,
-} from './validationFunctions.tsx';
+import { householdAssetsHasError, displayHouseholdAssetsHelperText } from './validationFunctions.tsx';
 import { FormattedMessage } from 'react-intl';
 import type { QuestionName, Question } from '../Types/Questions.ts';
 import HelpButton from '../Components/HelpBubbleIcon/HelpButton.tsx';
@@ -34,36 +30,6 @@ const questions: Record<QuestionName, Question> = {
       numericField: true,
       required: true,
     },
-  },
-  signUpInfo: {
-    name: 'signUpInfo',
-    header: (
-      <FormattedMessage
-        id="qcc.optional-sign-up-text"
-        defaultMessage="Optional: Sign up for benefits updates and/or paid feedback opportunities"
-      />
-    ),
-    question: (
-      <FormattedMessage id="questions.signUpInfo" defaultMessage="What would you like us to contact you about?" />
-    ),
-    componentDetails: {
-      componentType: 'BasicCheckboxGroup',
-      inputName: 'signUpInfo',
-      inputError: signUpOptionsHaveError,
-    },
-    followUpQuestions: [
-      {
-        name: 'emailOrCell',
-        question: (
-          <FormattedMessage id="questions.signUpInfo-a" defaultMessage="Please provide your contact info below: " />
-        ),
-        componentDetails: {
-          componentType: 'SignUp',
-          inputName: 'signUpInfo',
-          ariaLabel: 'questions.signUpInfo-ariaLabel',
-        },
-      },
-    ],
   },
 };
 

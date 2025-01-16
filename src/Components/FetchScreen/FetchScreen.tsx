@@ -1,13 +1,13 @@
 import { useEffect, useContext, useMemo } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getScreen } from '../../apiCalls.js';
-import { Context } from '../Wrapper/Wrapper.tsx';
-import LoadingPage from '../LoadingPage/LoadingPage.tsx';
-import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData.ts';
-import type { FormData } from '../../Types/FormData.ts';
+import { Context } from '../Wrapper/Wrapper';
+import LoadingPage from '../LoadingPage/LoadingPage';
+import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData';
+import type { FormData } from '../../Types/FormData';
 
 const FetchScreen = () => {
-  const { formData, setFormData, setScreenLoading } = useContext(Context);
+  const { formData, setFormData, setScreenLoading, setWhiteLabel } = useContext(Context);
   const location = useLocation();
   const navigate = useNavigate();
   const { uuid: rawUuid, whiteLabel: rawWhiteLabel } = useParams();
@@ -44,7 +44,6 @@ const FetchScreen = () => {
   const createFormData = (response: ApiFormDataReadOnly & ApiFormData) => {
     const initialFormData: FormData = {
       ...formData,
-      whiteLabel: response.white_label,
       isTest: response.is_test ?? false,
       isTestData: response.is_test_data ?? false,
       frozen: response.frozen,
@@ -168,24 +167,23 @@ const FetchScreen = () => {
       });
     }
 
+    setWhiteLabel(response.white_label);
+
     setFormData({ ...initialFormData });
 
     if (whiteLabel === undefined) {
-      navigate(`/${initialFormData.whiteLabel}${location.pathname}`);
-    } else if (whiteLabel !== initialFormData.whiteLabel) {
-      navigate(location.pathname.replace(whiteLabel, initialFormData.whiteLabel));
+      navigate(`/${response.white_label}${location.pathname}`);
+    } else if (whiteLabel !== response.white_label) {
+      navigate(location.pathname.replace(whiteLabel, response.white_label));
     }
   };
 
   useEffect(() => {
     if (uuid === undefined) {
-      // don't run immediately because it will be overriden by another setFormData in App.tsx
-      setTimeout(() => {
-        if (whiteLabel !== undefined) {
-          setFormData({ ...formData, whiteLabel });
-        }
+      if (whiteLabel !== undefined) {
+        setWhiteLabel(whiteLabel);
         setScreenLoading(false);
-      }, 1);
+      }
       return;
     }
     fetchScreen(uuid);

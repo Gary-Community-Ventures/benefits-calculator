@@ -82,6 +82,8 @@ const initialFormData: FormData = {
   },
 };
 
+export const DEFAULT_WHITE_LABEL = '_default';
+
 export const Context = React.createContext<WrapperContext>({} as WrapperContext);
 
 const Wrapper = (props: PropsWithChildren<{}>) => {
@@ -93,7 +95,9 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
-  const { configLoading, configResponse: config } = useGetConfig(screenLoading, formData.whiteLabel);
+  const [whiteLabel, setWhiteLabel] = useState(DEFAULT_WHITE_LABEL);
+
+  const { configLoading, configResponse: config } = useGetConfig(screenLoading, whiteLabel);
   const { language_options: languageOptions = {} } = config ?? {};
   const languages = Object.keys(languageOptions) as Language[];
   const { referrer_data: referrerData = undefined } = config ?? {};
@@ -212,6 +216,8 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         staffToken,
         setStaffToken,
         getReferrer: getReferrer as (id: keyof ReferrerData) => string,
+        whiteLabel,
+        setWhiteLabel,
       }}
     >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>

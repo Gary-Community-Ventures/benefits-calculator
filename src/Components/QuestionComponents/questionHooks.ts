@@ -31,14 +31,6 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
       return;
     }
 
-    if (questionName === 'householdData' && Number(routeEnding) <= formData.householdSize) {
-      navigate(`/${whiteLabel}/${uuid}/step-${stepNumber}/${routeEnding}`);
-      return;
-    } else if (questionName === 'householdData') {
-      navigate(`/${whiteLabel}/${uuid}/step-${stepNumber + 1}`);
-      return;
-    }
-
     navigate(`/${whiteLabel}/${uuid}/step-${stepNumber + 1}/${routeEnding}`);
   };
 }

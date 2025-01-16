@@ -25,8 +25,6 @@ import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useStepNumber } from '../../../Assets/stepDirectory';
 import * as z from 'zod';
 import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
-import { updateScreen } from '../../../Assets/updateScreen';
-import { useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MONTHS } from './MONTHS';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
@@ -48,22 +46,29 @@ import {
   renderHoursWorkedHelperText,
   renderIncomeAmountHelperText,
 } from './HelperTextFunctions';
+import { DOLLARS, handleNumbersOnly, numberInputProps, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
+import useScreenApi from '../../../Assets/updateScreen';
+import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
+import { getCurrentMonthYear, YEARS, MAX_AGE } from '../../../Assets/age';
 import './PersonIncomeBlock.css';
 
 const HouseholdMemberForm = () => {
-  const { formData, setFormData, locale } = useContext(Context);
-  const { uuid, page } = useParams();
+  const { formData, setFormData } = useContext(Context);
+  const { uuid, page, whiteLabel } = useParams();
+  const { updateScreen } = useScreenApi();
   const navigate = useNavigate();
   const intl = useIntl();
   const pageNumber = Number(page);
   const currentMemberIndex = pageNumber - 1;
-  const householdMemberFormData = formData.householdData[currentMemberIndex];
+  const householdMemberFormData = formData.householdData[currentMemberIndex] as HouseholdData | undefined;
   const healthInsuranceOptions =
-    useConfig<Record<keyof HealthInsurance, { text: FormattedMessageType; icon: ReactNode }>>(
+    useConfig<Record<'you' | 'them', Record<keyof HealthInsurance, { text: FormattedMessageType; icon: ReactNode }>>>(
       'health_insurance_options',
     );
   const conditionOptions =
-    useConfig<Record<keyof Conditions, { text: FormattedMessageType; icon: ReactNode }>>('condition_options');
+    useConfig<Record<'you' | 'them', Record<keyof Conditions, { text: FormattedMessageType; icon: ReactNode }>>>(
+      'condition_options',
+    );
   const relationshipOptions = useConfig<Record<string, FormattedMessageType>>('relationship_options');
   const incomeOptions = useConfig<Record<string, FormattedMessageType>>('income_options');
   const incomeStreamsMenuItems = createMenuItems(
@@ -76,33 +81,38 @@ const HouseholdMemberForm = () => {
     <FormattedMessage id="personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
   );
 
-  const currentStepId = useStepNumber('householdData', formData.immutableReferrer);
-  const backNavigationFunction = (uuid: string, currentStepId: number, pageNumber: number) => {
+  const currentStepId = useStepNumber('householdData');
+  const backNavigationFunction = () => {
+    if (uuid === undefined) {
+      throw new Error('uuid is undefined');
+    }
+
     if (pageNumber <= 1) {
-      navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId - 1}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${currentStepId - 1}`);
     } else {
-      navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber - 1}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber - 1}`);
     }
   };
-  const nextStep = useGoToNextStep('householdData', `${pageNumber + 1}`);
+  const nextStep = (uuid: string, currentStepId: number, pageNumber: number) => {
+    if (Number(pageNumber + 1) <= formData.householdSize) {
+      navigate(`/${whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber + 1}`);
+      return;
+    } else {
+      navigate(`/${whiteLabel}/${uuid}/step-${currentStepId + 1}`);
+      return;
+    }
+  };
 
-  const date = new Date();
-  const CURRENT_YEAR = date.getFullYear();
-  const MAX_AGE = 130;
-  const YEARS = Array.from({ length: MAX_AGE }, (_, i) => {
-    const inputYear = CURRENT_YEAR - i;
-    return String(inputYear);
-  });
+  const { CURRENT_MONTH, CURRENT_YEAR } = getCurrentMonthYear();
   // I added an empty string to the years array to fix the initial invalid Autocomplete value warning
-  const YEARSANDINITIALEMPTYSTR = ['', ...YEARS];
+  const YEARS_AND_INITIAL_EMPTY_STR = ['', ...YEARS];
 
   const autoCompleteOptions = useMemo(() => {
-    return YEARSANDINITIALEMPTYSTR.map((year) => {
-      return { label: String(year) };
+    return YEARS_AND_INITIAL_EMPTY_STR.map((year) => {
+      return { label: year };
     });
   }, [YEARS]);
 
-  // birthYear > CURRENT_YEAR || birthYear < CURRENT_YEAR - MAX_AGE;
   const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
   const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
   const incomeSourcesSchema = z
@@ -114,13 +124,13 @@ const HouseholdMemberForm = () => {
         .string()
         .trim()
         .refine((value) => {
-          return Number(value) > 0 && incomeAmountRegex.test(value);
+          return incomeAmountRegex.test(value) && Number(value) > 0;
         }),
     })
     .refine(
       (data) => {
         if (data.incomeFrequency === 'hourly') {
-          return oneOrMoreDigitsButNotAllZero.test(data.hoursPerWeek.trim());
+          return oneOrMoreDigitsButNotAllZero.test(data.hoursPerWeek);
         } else {
           return true;
         }
@@ -130,56 +140,85 @@ const HouseholdMemberForm = () => {
   const incomeStreamsSchema = z.array(incomeSourcesSchema);
   const hasIncomeSchema = z.string().regex(/^true|false$/);
 
-  const formSchema = z.object({
-    /*
+  const formSchema = z
+    .object({
+      /*
     z.string().min(1) validates that an option was selected.
     The default value of birthMonth is '' when no option is selected.
     The possible values that can be selected are '1', '2', ..., '12',
     so if one of those options are selected,
     then birthMonth would have a minimum string length of 1 which passes validation.
     */
-    birthMonth: z.string().min(1),
-    birthYear: z
-      .string()
-      .trim()
-      .refine((value) => {
-        const year = Number(value);
-        const age = CURRENT_YEAR - year;
-        return year <= CURRENT_YEAR && age < MAX_AGE;
+      birthMonth: z.string().min(1),
+      birthYear: z
+        .string()
+        .trim()
+        .min(1)
+        .refine((value) => {
+          const year = Number(value);
+          const age = CURRENT_YEAR - year;
+          return year <= CURRENT_YEAR && age < MAX_AGE;
+        }),
+      healthInsurance: z
+        .object({
+          none: z.boolean(),
+          employer: z.boolean(),
+          private: z.boolean(),
+          medicaid: z.boolean(),
+          medicare: z.boolean(),
+          chp: z.boolean(),
+          emergency_medicaid: z.boolean(),
+          family_planning: z.boolean(),
+          va: z.boolean(),
+        })
+        .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
+          message: 'Please select at least one health insurance option.',
+          path: ['healthInsurance'],
+        })
+        .refine(
+          (insuranceOptions) => {
+            if (insuranceOptions.none) {
+              return Object.entries(insuranceOptions)
+                .filter(([key, _]) => key !== 'none')
+                .every(([_, value]) => value === false);
+            }
+            return true;
+          },
+          {
+            message: 'Please do not select any other options if you do not have health insurance',
+            path: ['healthInsurance'],
+          },
+        ), //TODO: Render this error message to the user
+      conditions: z.object({
+        student: z.boolean(),
+        pregnant: z.boolean(),
+        blindOrVisuallyImpaired: z.boolean(),
+        disabled: z.boolean(),
+        longTermDisability: z.boolean(),
       }),
-    healthInsurance: z
-      .object({
-        none: z.boolean(),
-        employer: z.boolean(),
-        private: z.boolean(),
-        medicaid: z.boolean(),
-        medicare: z.boolean(),
-        chp: z.boolean(),
-        emergency_medicaid: z.boolean(),
-        family_planning: z.boolean(),
-        va: z.boolean(),
-      })
-      .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
-        message: 'Please select at least one health insurance option.',
-        path: ['healthInsurance'],
-        //TODO: make sure that this only shows up for the person at this index
-      }),
-    conditions: z.object({
-      student: z.boolean(),
-      pregnant: z.boolean(),
-      blindOrVisuallyImpaired: z.boolean(),
-      disabled: z.boolean(),
-      longTermDisability: z.boolean(),
-    }),
-    relationshipToHH: z
-      .string()
-      .refine((value) => [...Object.keys(relationshipOptions)].includes(value) || pageNumber === 1),
-    hasIncome: hasIncomeSchema,
-    incomeStreams: incomeStreamsSchema,
-  });
+      relationshipToHH: z
+        .string()
+        .refine((value) => [...Object.keys(relationshipOptions)].includes(value) || pageNumber === 1),
+      hasIncome: hasIncomeSchema,
+      incomeStreams: incomeStreamsSchema,
+    })
+    .refine(
+      ({ birthMonth, birthYear }) => {
+        //this checks that the date they've selected is not in the future
+        if (Number(birthYear) === CURRENT_YEAR) {
+          return Number(birthMonth) <= CURRENT_MONTH;
+        }
+        return true;
+      },
+      { message: 'This birth month is in the future', path: ['birthMonth'] }, //TODO: Render this error message to the user
+    );
   type FormSchema = z.infer<typeof formSchema>;
 
-  const determineDefaultRelationshipToHH = (householdMemberFormData: HouseholdData | undefined) => {
+  useEffect(() => {
+    document.title = QUESTION_TITLES.householdData;
+  }, []);
+
+  const determineDefaultRelationshipToHH = () => {
     if (householdMemberFormData && householdMemberFormData.relationshipToHH) {
       return householdMemberFormData.relationshipToHH;
     } else if (pageNumber === 1) {
@@ -187,6 +226,18 @@ const HouseholdMemberForm = () => {
     } else {
       return '';
     }
+  };
+
+  const determineDefaultHasIncome = () => {
+    if (householdMemberFormData === undefined) {
+      return 'false';
+    }
+
+    if (householdMemberFormData.incomeStreams.length > 0) {
+      return 'true';
+    }
+
+    return 'false';
   };
 
   const {
@@ -215,15 +266,17 @@ const HouseholdMemberForm = () => {
             family_planning: false,
             va: false,
           },
-      conditions: {
-        student: false,
-        pregnant: false,
-        blindOrVisuallyImpaired: false,
-        disabled: false,
-        longTermDisability: false,
-      },
-      relationshipToHH: determineDefaultRelationshipToHH(householdMemberFormData),
-      hasIncome: householdMemberFormData?.incomeStreams.length > 0 ? 'true' : 'false',
+      conditions: householdMemberFormData?.conditions
+        ? householdMemberFormData.conditions
+        : {
+            student: false,
+            pregnant: false,
+            blindOrVisuallyImpaired: false,
+            disabled: false,
+            longTermDisability: false,
+          },
+      relationshipToHH: determineDefaultRelationshipToHH(),
+      hasIncome: determineDefaultHasIncome(),
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
     },
   });
@@ -251,39 +304,30 @@ const HouseholdMemberForm = () => {
   }, [watchHasIncome]);
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (memberData) => {
-    if (!uuid) return;
-
-    const currentMemberDataAtThisIndex = householdMemberFormData;
-    if (currentMemberDataAtThisIndex) {
-      // if we have data at this index then replace it
-      const updatedHouseholdData = [...formData.householdData].map((currentMemberData, index) => {
-        if (index === currentMemberIndex) {
-          return { ...memberData, frontendId: crypto.randomUUID() };
-        } else {
-          return currentMemberData;
-        }
-      });
-
-      const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-      setFormData(updatedFormData);
-      updateScreen(uuid, updatedFormData, locale);
-    } else {
-      // if there is no data at this index then we need to push it to the array
-      const copyOfHouseholdData = [...formData.householdData];
-      copyOfHouseholdData.push(memberData);
-      const updatedFormData = { ...formData, householdData: copyOfHouseholdData };
-      setFormData(updatedFormData);
-      updateScreen(uuid, updatedFormData, locale);
+    if (uuid === undefined) {
+      throw new Error('uuid is not defined');
     }
 
-    nextStep();
+    const updatedHouseholdData = [...formData.householdData];
+    updatedHouseholdData[currentMemberIndex] = {
+      ...memberData,
+      birthYear: Number(memberData.birthYear),
+      birthMonth: Number(memberData.birthMonth),
+      hasIncome: memberData.hasIncome === 'true',
+      frontendId: crypto.randomUUID(),
+    };
+    const updatedFormData = { ...formData, householdData: updatedHouseholdData };
+    setFormData(updatedFormData);
+    updateScreen(updatedFormData);
+
+    nextStep(uuid, currentStepId, pageNumber);
   };
 
-  const createAgeQuestion = (personIndex: number) => {
+  const createAgeQuestion = () => {
     return (
       <Box sx={{ marginBottom: '1.5rem' }}>
         <QuestionQuestion>
-          {personIndex === 1 ? (
+          {pageNumber === 1 ? (
             <FormattedMessage
               id="householdDataBlock.createAgeQuestion-how-headOfHH"
               defaultMessage="Please enter your month and year of birth"
@@ -352,7 +396,19 @@ const HouseholdMemberForm = () => {
                     renderInput={(params) => (
                       <TextField
                         {...params}
+                        onChange={(event) => {
+                          const value = event.target.value;
+                          if (YEARS.includes(value)) {
+                            // set value if the value is valid,
+                            // so the user does not need to select an option if they type the whole year.
+                            setValue('birthYear', value);
+                          }
+                        }}
                         label={<FormattedMessage id="ageInput.year.label" defaultMessage="Birth Year" />}
+                        inputProps={{
+                          ...params.inputProps,
+                          ...numberInputProps(params.inputProps.onChange),
+                        }}
                         error={errors.birthYear !== undefined}
                       />
                     )}
@@ -369,8 +425,8 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const displayHealthCareQuestion = (page: number) => {
-    if (page === 1) {
+  const displayHealthCareQuestion = () => {
+    if (pageNumber === 1) {
       return (
         <QuestionQuestion>
           <FormattedMessage
@@ -391,11 +447,11 @@ const HouseholdMemberForm = () => {
     }
   };
 
-  const displayHealthInsuranceBlock = (pageNumber: number, healthInsuranceOptions: any) => {
+  const displayHealthInsuranceBlock = () => {
     return (
-      <Box className="section-container">
+      <div className="section-container">
         <Stack sx={{ padding: '3rem 0' }} className="section">
-          {displayHealthCareQuestion(pageNumber)}
+          {displayHealthCareQuestion()}
           <RHFOptionCardGroup
             fields={watch('healthInsurance')}
             setValue={setValue}
@@ -407,11 +463,11 @@ const HouseholdMemberForm = () => {
             <FormHelperText sx={{ marginLeft: 0 }}>{renderHealthInsuranceHelperText()}</FormHelperText>
           )}
         </Stack>
-      </Box>
+      </div>
     );
   };
 
-  const displayConditionsQuestion = (pageNumber: number, conditionOptions) => {
+  const displayConditionsQuestion = () => {
     const formattedMsgId =
       pageNumber === 1
         ? 'householdDataBlock.createConditionsQuestion-do-these-apply-to-you'
@@ -441,7 +497,7 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const createHOfHRelationQuestion = (relationshipOptions: Record<string, FormattedMessageType>) => {
+  const createHOfHRelationQuestion = () => {
     return (
       <Box sx={{ marginBottom: '1.5rem' }}>
         <QuestionQuestion>
@@ -494,23 +550,23 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const createIncomeRadioQuestion = (index: number) => {
+  const createIncomeRadioQuestion = () => {
     const translatedAriaLabel = intl.formatMessage({
       id: 'householdDataBlock.createIncomeRadioQuestion-ariaLabel',
       defaultMessage: 'has an income',
     });
 
     const formattedMsgId =
-      index === 1 ? 'questions.hasIncome' : 'householdDataBlock.createIncomeRadioQuestion-questionLabel';
+      pageNumber === 1 ? 'questions.hasIncome' : 'householdDataBlock.createIncomeRadioQuestion-questionLabel';
 
     const formattedMsgDefaultMsg =
-      index === 1
+      pageNumber === 1
         ? 'Do you have an income?'
         : 'Does this individual in your household have significant income you have not already included?';
 
     return (
       <Box className="section-container" sx={{ paddingTop: '3rem' }}>
-        <Box className="section">
+        <div className="section">
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
             <HelpButton
@@ -523,7 +579,7 @@ const HouseholdMemberForm = () => {
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <RadioGroup {...field} aria-labelledby={translatedAriaLabel} sx={{ marginBottom: '1rem' }}>
+              <RadioGroup {...field} aria-label={translatedAriaLabel} sx={{ marginBottom: '1rem' }}>
                 <FormControlLabel
                   value={'true'}
                   control={<Radio />}
@@ -537,7 +593,7 @@ const HouseholdMemberForm = () => {
               </RadioGroup>
             )}
           />
-        </Box>
+        </div>
       </Box>
     );
   };
@@ -590,10 +646,7 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const getIncomeStreamSourceLabel = (
-    incomeOptions: Record<string, FormattedMessageType>,
-    incomeStreamName: string,
-  ) => {
+  const getIncomeStreamSourceLabel = (incomeStreamName: string) => {
     if (incomeStreamName) {
       return (
         <>
@@ -607,12 +660,7 @@ const HouseholdMemberForm = () => {
     return '?';
   };
 
-  const renderIncomeFrequencySelect = (
-    incomeOptions: Record<string, FormattedMessageType>,
-    selectedIncomeSource: string,
-    index: number,
-    pageNumber: number,
-  ) => {
+  const renderIncomeFrequencySelect = (selectedIncomeSource: string, index: number) => {
     let formattedMsgId = 'personIncomeBlock.createIncomeStreamFrequencyDropdownMenu-youQLabel';
     let formattedMsgDefaultMsg = 'How often are you paid this income ';
     if (pageNumber !== 1) {
@@ -625,7 +673,7 @@ const HouseholdMemberForm = () => {
         <div className="income-margin-bottom">
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-            {getIncomeStreamSourceLabel(incomeOptions, selectedIncomeSource)}
+            {getIncomeStreamSourceLabel(selectedIncomeSource)}
             <HelpButton
               helpText='"Every 2 weeks" means you get paid every other week. "Twice a month" means you get paid two times a month on the same dates each month.'
               helpId="personIncomeBlock.income-freq-help-text"
@@ -674,11 +722,11 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const renderHoursPerWeekTextfield = (page: number, index: number, selectedIncomeSource: string) => {
+  const renderHoursPerWeekTextfield = (index: number, selectedIncomeSource: string) => {
     let formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-youQLabel';
     let formattedMsgDefaultMsg = 'How many hours do you work per week ';
 
-    if (page !== 1) {
+    if (pageNumber !== 1) {
       formattedMsgId = 'personIncomeBlock.createHoursWorkedTextfield-questionLabel';
       formattedMsgDefaultMsg = 'How many hours do they work per week ';
     }
@@ -688,7 +736,7 @@ const HouseholdMemberForm = () => {
         <div className="income-margin-bottom">
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-            {getIncomeStreamSourceLabel(incomeOptions, selectedIncomeSource)}
+            {getIncomeStreamSourceLabel(selectedIncomeSource)}
           </QuestionQuestion>
         </div>
         <Controller
@@ -703,6 +751,8 @@ const HouseholdMemberForm = () => {
                   <FormattedMessage id="incomeBlock.createHoursWorkedTextfield-amountLabel" defaultMessage="Hours" />
                 }
                 variant="outlined"
+                inputProps={NUM_PAD_PROPS}
+                onChange={handleNumbersOnly(field.onChange)}
                 sx={{ backgroundColor: '#fff' }}
                 error={errors.incomeStreams?.[index]?.hoursPerWeek !== undefined}
               />
@@ -717,7 +767,6 @@ const HouseholdMemberForm = () => {
   };
 
   const renderIncomeAmountTextfield = (
-    page: number,
     index: number,
     selectedIncomeFrequency: string,
     selectedIncomeStreamSource: string,
@@ -728,7 +777,7 @@ const HouseholdMemberForm = () => {
       let hourlyFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
       let hourlyFormattedMsgDefaultMsg = 'What is your hourly rate ';
 
-      if (page !== 1) {
+      if (pageNumber !== 1) {
         hourlyFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-hourly-questionLabel';
         hourlyFormattedMsgDefaultMsg = 'What is their hourly rate ';
       }
@@ -738,7 +787,7 @@ const HouseholdMemberForm = () => {
       let payPeriodFormattedMsgId = 'incomeBlock.createIncomeAmountTextfield-questionLabel';
       let payPeriodFormattedMsgDefaultMsg = 'How much do you receive before taxes each pay period for ';
 
-      if (page !== 1) {
+      if (pageNumber !== 1) {
         payPeriodFormattedMsgId = 'personIncomeBlock.createIncomeAmountTextfield-questionLabel';
         payPeriodFormattedMsgDefaultMsg = 'How much do they receive before taxes each pay period for ';
       }
@@ -753,7 +802,7 @@ const HouseholdMemberForm = () => {
         <div className="income-textfield-margin-bottom">
           <QuestionQuestion>
             {questionHeader}
-            {getIncomeStreamSourceLabel(incomeOptions, selectedIncomeStreamSource)}
+            {getIncomeStreamSourceLabel(selectedIncomeStreamSource)}
           </QuestionQuestion>
         </div>
         <Controller
@@ -771,6 +820,8 @@ const HouseholdMemberForm = () => {
                   />
                 }
                 variant="outlined"
+                inputProps={NUM_PAD_PROPS}
+                onChange={handleNumbersOnly(field.onChange, DOLLARS)}
                 sx={{ backgroundColor: '#fff' }}
                 error={errors.incomeStreams?.[index]?.incomeAmount !== undefined}
                 InputProps={{
@@ -788,11 +839,11 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const renderAdditionalIncomeBlockQ = (page: number) => {
+  const renderAdditionalIncomeBlockQ = () => {
     let formattedMsgId = 'incomeBlock.createIncomeBlockQuestions-questionLabel';
     let formattedMsgDefaultMsg = 'If you receive another type of income, select it below.';
 
-    if (page !== 1) {
+    if (pageNumber !== 1) {
       formattedMsgId = 'personIncomeBlock.createIncomeBlockQuestions-questionLabel';
       formattedMsgDefaultMsg = 'If they receive another type of income, select it below.';
     }
@@ -808,7 +859,7 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const renderFirstIncomeBlockQ = (pageNumber: number) => {
+  const renderFirstIncomeBlockQ = () => {
     let formattedMsgId = 'questions.hasIncome-a';
     let formattedMsgDefaultMsg = 'What type of income have you had most recently?';
 
@@ -842,22 +893,19 @@ const HouseholdMemberForm = () => {
           />
         )}
       </QuestionHeader>
-      <HHMSummaryCards
-        activeMemberData={getValues()}
-        page={pageNumber}
-        formData={formData}
-        uuid={uuid}
-        step={currentStepId}
-        triggerValidation={trigger}
-      />
-      <form onSubmit={handleSubmit(formSubmitHandler)}>
-        {createAgeQuestion(pageNumber)}
-        {pageNumber !== 1 && createHOfHRelationQuestion(relationshipOptions)}
-        {displayHealthInsuranceBlock(pageNumber, healthInsuranceOptions)}
-        {displayConditionsQuestion(pageNumber, conditionOptions)}
+      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} />
+      <form
+        onSubmit={handleSubmit(formSubmitHandler, () => {
+          window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+        })}
+      >
+        {createAgeQuestion()}
+        {pageNumber !== 1 && createHOfHRelationQuestion()}
+        {displayHealthInsuranceBlock()}
+        {displayConditionsQuestion()}
         <div>
           <Stack sx={{ margin: '3rem 0' }}>
-            {createIncomeRadioQuestion(pageNumber)}
+            {createIncomeRadioQuestion()}
             {fields.map((field, index) => {
               const selectedIncomeStreamSource = watch('incomeStreams')[index].incomeStreamName;
               const selectedIncomeFrequency = watch('incomeStreams')[index].incomeFrequency;
@@ -871,18 +919,13 @@ const HouseholdMemberForm = () => {
                       </div>
                     )}
                     <div>
-                      {index === 0 && renderFirstIncomeBlockQ(pageNumber)}
-                      {index !== 0 && renderAdditionalIncomeBlockQ(pageNumber)}
+                      {index === 0 && renderFirstIncomeBlockQ()}
+                      {index !== 0 && renderAdditionalIncomeBlockQ()}
                       {renderIncomeStreamNameSelect(index)}
-                      {renderIncomeFrequencySelect(incomeOptions, selectedIncomeStreamSource, index, pageNumber)}
+                      {renderIncomeFrequencySelect(selectedIncomeStreamSource, index)}
                       {selectedIncomeFrequency === 'hourly' &&
-                        renderHoursPerWeekTextfield(pageNumber, index, selectedIncomeStreamSource)}
-                      {renderIncomeAmountTextfield(
-                        pageNumber,
-                        index,
-                        selectedIncomeFrequency,
-                        selectedIncomeStreamSource,
-                      )}
+                        renderHoursPerWeekTextfield(index, selectedIncomeStreamSource)}
+                      {renderIncomeAmountTextfield(index, selectedIncomeFrequency, selectedIncomeStreamSource)}
                     </div>
                   </div>
                 </div>
@@ -909,9 +952,7 @@ const HouseholdMemberForm = () => {
             )}
           </Stack>
         </div>
-        <PrevAndContinueButtons
-          backNavigationFunction={() => backNavigationFunction(uuid, currentStepId, pageNumber)}
-        />
+        <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
     </main>
   );

@@ -7,7 +7,6 @@ import { FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } 
 import { FormattedMessageType } from '../../Types/Questions';
 import { FormData } from '../../Types/FormData';
 import { Context } from '../Wrapper/Wrapper';
-import { updateScreen } from '../../Assets/updateScreen';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import { useConfig } from '../Config/configHook';
 import * as z from 'zod';
@@ -16,11 +15,14 @@ import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
+import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
+import useScreenApi from '../../Assets/updateScreen';
 
 export const Zipcode = () => {
-  const { formData, locale, setFormData } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('zipcode');
+  const { updateScreen } = useScreenApi();
 
   const countiesByZipcode = useConfig<{ [key: string]: { [key: string]: string } }>('counties_by_zipcode');
 
@@ -69,7 +71,7 @@ export const Zipcode = () => {
     if (uuid) {
       const updatedFormData = { ...formData, ...zipCodeAndCountyData };
       setFormData(updatedFormData);
-      updateScreen(uuid, updatedFormData, locale);
+      updateScreen(updatedFormData);
       nextStep();
     }
   };
@@ -136,6 +138,8 @@ export const Zipcode = () => {
               {...field}
               label={<FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />}
               variant="outlined"
+              inputProps={NUM_PAD_PROPS}
+              onChange={handleNumbersOnly(field.onChange)}
               error={errors.zipcode !== undefined}
               helperText={getZipcodeHelperText(errors.zipcode !== undefined)}
             />

@@ -10,9 +10,10 @@ import FormContinueButton from '../ContinueButton/FormContinueButton';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { STATES } from './SelectStatePage';
 import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
+import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLabel';
 
 const SelectLanguagePage = () => {
-  const { locale, selectLanguage, formData, setFormData } = useContext(Context);
+  const { locale, selectLanguage, formData, setFormData, configLoading } = useContext(Context);
   const languageOptions = useConfig<{ [key: string]: string }>('language_options');
   const { whiteLabel, uuid } = useParams();
 
@@ -54,6 +55,8 @@ const SelectLanguagePage = () => {
     };
   });
 
+  const updateWhiteLabelAndNavigate = useUpdateWhiteLabelAndNavigate();
+
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
@@ -74,11 +77,15 @@ const SelectLanguagePage = () => {
       return;
     }
 
+    updateWhiteLabelAndNavigate(stateCodes[0], `/${stateCodes[0]}/step-2${queryString}`);
     setFormData({ ...formData, whiteLabel: stateCodes[0] });
     // wait for the new config to be loaded
-    setTimeout(() => {
-      navigate(`/${stateCodes[0]}/step-2${queryString}`);
-    });
+    const interval = setInterval(() => {
+      if (!configLoading) {
+        navigate(`/${stateCodes[0]}/step-2${queryString}`);
+        clearInterval(interval);
+      }
+    }, 1);
   };
 
   return (

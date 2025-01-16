@@ -28,7 +28,6 @@ import { ReactComponent as Housing } from '../../Assets/OptionCardIcons/AcuteCon
 import { ReactComponent as Job_resources } from '../../Assets/OptionCardIcons/AcuteConditions/job_resources.svg';
 import { ReactComponent as Legal_services } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
 import { ReactComponent as Support } from '../../Assets/OptionCardIcons/AcuteConditions/support.svg';
-import { useParams } from 'react-router-dom';
 
 type Item = {
   _label: string;
@@ -175,7 +174,7 @@ function transformConfigData(configData: ConfigApiResponse[]): Config {
 
 async function getConfig(whiteLabel: string) {
   // fetch data
-  return fetch(configEndpoint + whiteLabel, {
+  return fetch(configEndpoint + whiteLabel + '/', {
     method: 'GET',
     headers: header,
   }).then((response) => {

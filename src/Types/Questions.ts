@@ -102,15 +102,6 @@ export type AccordionContainerDetails = {
   inputHelperText: ValidationFunction<string>;
 };
 
-export type BasicCheckboxGroupDetails = {
-  componentType: 'BasicCheckboxGroup';
-  inputName: string;
-  options?: {
-    [key: string]: FormattedMessageType;
-  };
-  inputError: ValidationFunction<SignUpInfo>;
-};
-
 export type SignUpDetails = {
   componentType: 'SignUp';
   inputName: string;
@@ -126,7 +117,6 @@ export type ComponentDetails =
   | ExpenseBlockDetails
   | PreferNotToAnswerDetails
   | AccordionContainerDetails
-  | BasicCheckboxGroupDetails
   | SignUpDetails;
 
 export type Question = {
