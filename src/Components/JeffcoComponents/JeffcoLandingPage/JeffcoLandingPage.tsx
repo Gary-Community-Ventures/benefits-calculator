@@ -16,7 +16,7 @@ const JeffcoLandingPage = ({ referrer }: Props) => {
   const queryString = useQueryString();
 
   useEffect(() => {
-    setFormData({ ...formData, immutableReferrer: referrer });
+    setFormData({ ...formData, immutableReferrer: referrer, referralSource: 'jeffcoHS' });
   }, []);
 
   const handleGetStarted = () => {
