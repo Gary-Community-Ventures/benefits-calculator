@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper.tsx';
-import { ZipcodeStep } from '../Steps/ZipcodeStep';
+import { Zipcode } from '../Steps/Zipcode';
 import Expenses from '../Steps/Expenses/Expenses.tsx';
 import HouseholdSize from '../Steps/HouseholdSize';
 import { useStepName } from '../../Assets/stepDirectory';
@@ -26,7 +26,7 @@ const QuestionComponentContainer = () => {
     case 'zipcode':
       return (
         <main className="benefits-form">
-          <ZipcodeStep />
+          <Zipcode />
         </main>
       );
     case 'householdSize':

@@ -1,6 +1,13 @@
 import { HouseholdData } from '../Types/FormData';
 import { useTranslateNumber } from './languageOptions';
 
+export const MAX_AGE = 130;
+export const YEARS = Array.from({ length: MAX_AGE }, (_, i) => {
+  const CURRENT_YEAR = getCurrentMonthYear().CURRENT_YEAR;
+  const inputYear = CURRENT_YEAR - i;
+  return String(inputYear);
+});
+
 export function getCurrentMonthYear() {
   const date = new Date();
   const CURRENT_YEAR = date.getFullYear();
