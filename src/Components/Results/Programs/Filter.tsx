@@ -202,6 +202,7 @@ export const Filter = () => {
       green_card: false,
       refugee: false,
       gc_5plus: false,
+      gc_5less: false,
       gc_18plus_no5: false,
       gc_under18_no5: false,
       otherWithWorkPermission: false,
