@@ -269,19 +269,7 @@ const App = () => {
                       />
                     }
                   />
-                  <Route
-                    path="step-:id"
-                    element={
-                      <QuestionComponentContainer
-                        key={window.location.href}
-                        handleTextfieldChange={handleTextfieldChange}
-                        handleContinueSubmit={handleContinueSubmit}
-                        handleRadioButtonChange={handleRadioButtonChange}
-                        handleNoAnswerChange={handleNoAnswerChange}
-                        handleIncomeStreamsSubmit={handleIncomeStreamsSubmit}
-                      />
-                    }
-                  />
+                  <Route path="step-:id" element={<QuestionComponentContainer key={window.location.href} />} />
                   <Route path="confirm-information" element={<Confirmation />} />
                   <Route
                     path="results/benefits"
