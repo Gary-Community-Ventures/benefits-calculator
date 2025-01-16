@@ -1,5 +1,5 @@
-import { Controller, Path, SubmitHandler, useForm } from 'react-hook-form';
-import { TextField } from '@mui/material';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { InputAdornment, TextField } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import HelpButton from '../../HelpBubbleIcon/HelpButton';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
@@ -12,6 +12,7 @@ import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../Questio
 import useScreenApi from '../../../Assets/updateScreen';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { NUM_PAD_PROPS, handleNumbersOnly } from '../../../Assets/numInputHelpers';
 
 const HouseholdAssets = () => {
   const { formData, setFormData } = useContext(Context);
@@ -89,9 +90,14 @@ const HouseholdAssets = () => {
               {...field}
               label={<FormattedMessage id="questions.householdAssets-inputLabel" defaultMessage="Dollar Amount" />}
               variant="outlined"
+              InputProps={{
+                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                sx: { backgroundColor: '#FFFFFF' },
+              }}
+              inputProps={NUM_PAD_PROPS}
+              onChange={handleNumbersOnly(field.onChange)}
               error={errors.householdAssets !== undefined}
               helperText={errors.householdAssets !== undefined && errors.householdAssets?.message}
-              // TODO: add input props
             />
           )}
         />
