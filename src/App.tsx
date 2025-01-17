@@ -240,17 +240,7 @@ const App = () => {
                     path={`step-${householdMemberStepNumber}/:page`}
                     element={<HouseholdMemberForm key={window.location.href} />}
                   />
-                  <Route
-                    path="step-:id"
-                    element={
-                      <QuestionComponentContainer
-                        key={window.location.href}
-                        handleTextfieldChange={handleTextfieldChange}
-                        handleContinueSubmit={handleContinueSubmit}
-                        handleNoAnswerChange={handleNoAnswerChange}
-                      />
-                    }
-                  />
+                  <Route path="step-:id" element={<QuestionComponentContainer key={window.location.href} />} />
                   <Route path="confirm-information" element={<Confirmation />} />
                   <Route
                     path="results/benefits"
