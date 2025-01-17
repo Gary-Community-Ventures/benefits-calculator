@@ -15,9 +15,10 @@ import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
+import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
 
-export const ZipcodeStep = () => {
+export const Zipcode = () => {
   const { formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('zipcode');
@@ -137,6 +138,8 @@ export const ZipcodeStep = () => {
               {...field}
               label={<FormattedMessage id="questions.zipcode-inputLabel" defaultMessage="Zip Code" />}
               variant="outlined"
+              inputProps={NUM_PAD_PROPS}
+              onChange={handleNumbersOnly(field.onChange)}
               error={errors.zipcode !== undefined}
               helperText={getZipcodeHelperText(errors.zipcode !== undefined)}
             />
