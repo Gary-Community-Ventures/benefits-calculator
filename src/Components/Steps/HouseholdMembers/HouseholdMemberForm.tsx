@@ -314,6 +314,7 @@ const HouseholdMemberForm = () => {
       birthYear: Number(memberData.birthYear),
       birthMonth: Number(memberData.birthMonth),
       hasIncome: memberData.hasIncome === 'true',
+      frontendId: crypto.randomUUID(),
     };
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
     setFormData(updatedFormData);
