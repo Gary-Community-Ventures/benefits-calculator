@@ -28,6 +28,10 @@ const SaveMyResultsModal = forwardRef(function SaveMyResultsModal({ close }: Sav
     id: 'emailResults.close-AL',
     defaultMessage: 'close',
   };
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+  });
 
   const formSchema = z.object({
     email: z
@@ -125,14 +129,13 @@ const SaveMyResultsModal = forwardRef(function SaveMyResultsModal({ close }: Sav
     const { email } = data;
     console.log({ email });
 
-    let snackbarMessage: string = '';
-
     if (email) {
-      snackbarMessage = intl.formatMessage({
+      const snackbarMessage = intl.formatMessage({
         id: 'emailResults.return-signupCompleted-email',
         defaultMessage:
           'A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder.',
       });
+      setSnackbar({ open: true, message: snackbarMessage });
 
       try {
         console.log('in here');
@@ -154,16 +157,29 @@ const SaveMyResultsModal = forwardRef(function SaveMyResultsModal({ close }: Sav
     // }
   };
 
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label={intl.formatMessage(closeAriaLabelProps)}
+        color="inherit"
+        onClick={() => setSnackbar({ ...snackbar, open: false })}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
+
   return (
     <div className="email-results-container">
-      {/* <Snackbar
+      <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        open={state.open}
+        open={snackbar.open}
         autoHideDuration={6000}
-        onClose={handleClose}
-        message={state.snackbarMessage}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        message={snackbar.message}
         action={action}
-      /> */}
+      />
       <IconButton
         aria-label={intl.formatMessage(closeAriaLabelProps)}
         onClick={close}
@@ -209,10 +225,7 @@ const SaveMyResultsModal = forwardRef(function SaveMyResultsModal({ close }: Sav
           <button className="send-button" type="submit" onClick={handleSubmit(submitHandler)}>
             <FormattedMessage id="emailResults.sendButton" defaultMessage="Send" />
           </button>
-          {/* TODO: when you click send, it has to have at least one (email or phone) filled out
-          look up how to deal with optional inputs */}
         </div>
-
         {/* <div className="flex-direction-column">
           <article className="bottom-margin">
             <FormattedMessage id="emailResults.enter-phoneNumberLabel" defaultMessage="Text my results" />
