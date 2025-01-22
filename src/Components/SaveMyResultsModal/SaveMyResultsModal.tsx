@@ -130,21 +130,19 @@ const SaveMyResultsModal = forwardRef(function SaveMyResultsModal({ close }: Sav
     console.log({ email });
 
     if (email) {
-      const snackbarMessage = intl.formatMessage({
-        id: 'emailResults.return-signupCompleted-email',
-        defaultMessage:
-          'A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder.',
-      });
-      setSnackbar({ open: true, message: snackbarMessage });
-
       try {
-        console.log('in here');
         const message = {
           screen: uuid,
           email: email,
           type: 'emailScreen',
         };
         await postMessage(message);
+        const snackbarMessage = intl.formatMessage({
+          id: 'emailResults.return-signupCompleted-email',
+          defaultMessage:
+            'A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder.',
+        });
+        setSnackbar({ open: true, message: snackbarMessage });
       } catch (error) {
         throw new Error(`${error}`);
       }
