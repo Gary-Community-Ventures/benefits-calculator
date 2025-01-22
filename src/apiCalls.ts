@@ -1,4 +1,16 @@
+import { Language } from './Assets/languageOptions';
 import { cleanTranslationDefaultMessage } from './cleanAPICategoryTranslation';
+import { Category, Program } from './Components/CurrentBenefits/CurrentBenefits';
+import {
+  AdminTokenResponse,
+  ProgramCategoryResponse,
+  SendMessageRequestData,
+  TranslationResponse,
+  UrgentNeedProgramsResponse,
+  UserRequestData,
+} from './Types/ApiCalls';
+import { ApiFormData, ApiFormDataReadOnly } from './Types/ApiFormData';
+import { EligibilityResults } from './Types/Results';
 
 const apiKey = 'Token ' + process.env.REACT_APP_API_KEY;
 const domain = process.env.REACT_APP_DOMAIN_URL;
@@ -20,7 +32,7 @@ export const header = {
   Authorization: apiKey,
 };
 
-const getTranslations = (lang) => {
+const getTranslations = async (lang: Language) => {
   return fetch(translationsEndpoint + `?lang=${lang}`, {
     method: 'GET',
     headers: header,
@@ -28,11 +40,11 @@ const getTranslations = (lang) => {
     if (!response.ok) {
       throw new Error(`${response.status} ${response.statusText}`);
     }
-    return response.json();
+    return response.json() as Promise<TranslationResponse>;
   });
 };
 
-const putUser = (userData, uuid) => {
+const putUser = (userData: UserRequestData, uuid: string) => {
   return fetch(userEndpoint + uuid + '/', {
     method: 'PUT',
     body: JSON.stringify(userData),
@@ -44,7 +56,7 @@ const putUser = (userData, uuid) => {
   });
 };
 
-const postMessage = (messageData) => {
+const postMessage = async (messageData: SendMessageRequestData) => {
   return fetch(messageEndpoint, {
     method: 'POST',
     body: JSON.stringify(messageData),
@@ -57,7 +69,7 @@ const postMessage = (messageData) => {
   });
 };
 
-const getScreen = (uuid) => {
+const getScreen = async (uuid: string) => {
   return fetch(screensEndpoint + uuid, {
     method: 'GET',
     headers: header,
@@ -65,11 +77,11 @@ const getScreen = (uuid) => {
     if (!response.ok) {
       throw new Error(`${response.status} ${response.statusText}`);
     }
-    return response.json();
+    return response.json() as Promise<ApiFormDataReadOnly>;
   });
 };
 
-const postScreen = (partialFormData) => {
+const postScreen = async (partialFormData: ApiFormData) => {
   return fetch(screensEndpoint, {
     method: 'POST',
     body: JSON.stringify(partialFormData),
@@ -82,7 +94,7 @@ const postScreen = (partialFormData) => {
   });
 };
 
-const putScreen = (partialFormData, uuid) => {
+const putScreen = async (partialFormData: ApiFormData, uuid: string) => {
   return fetch(screensEndpoint + uuid + '/', {
     method: 'PUT',
     body: JSON.stringify(partialFormData),
@@ -95,24 +107,23 @@ const putScreen = (partialFormData, uuid) => {
   });
 };
 
-const getEligibility = (screenerId, locale) => {
+const getEligibility = async (uuid: string) => {
   const headerWithLocale = {
     ...header,
-    'Accept-Language': locale === 'es' ? 'es,en-us' : 'en-us',
   };
 
-  return fetch(eligibilityEndpoint + screenerId, {
+  return fetch(eligibilityEndpoint + uuid, {
     method: 'GET',
     headers: headerWithLocale,
   }).then((response) => {
     if (!response.ok) {
       throw new Error(`${response.status} ${response.statusText}`);
     }
-    return response.json();
+    return response.json() as Promise<EligibilityResults>;
   });
 };
 
-const getAllLongTermPrograms = async (whiteLabel) => {
+const getAllLongTermPrograms = async (whiteLabel: string) => {
   const response = await fetch(apiProgramCategoriesEndPoint + whiteLabel, {
     method: 'GET',
     headers: header,
@@ -121,18 +132,22 @@ const getAllLongTermPrograms = async (whiteLabel) => {
     throw new Error(`${response.status} ${response.statusText}`);
   }
 
-  const data = await response.json();
+  const data = (await response.json()) as ProgramCategoryResponse;
 
-  for (const category of Object.values(data)) {
-    category.programs = category.programs.map((program) => {
+  const categories: Category[] = [];
+
+  for (const category of data) {
+    const programs: Program[] = category.programs.map((program) => {
       return { name: program.name, description: program.website_description };
     });
+
+    categories.push({ ...category, programs });
   }
 
-  return data;
+  return categories;
 };
 
-const getAllNearTermPrograms = async (whiteLabel) => {
+const getAllNearTermPrograms = async (whiteLabel: string) => {
   const response = await fetch(apiUrgentNeedsEndpoint + whiteLabel, {
     method: 'GET',
     headers: header,
@@ -141,13 +156,13 @@ const getAllNearTermPrograms = async (whiteLabel) => {
     throw new Error(`${response.status} ${response.statusText}`);
   }
 
-  const programs = await response.json();
+  const programs = (await response.json()) as UrgentNeedProgramsResponse;
   const programsWithNormalizedTypeTranslations = programs.map((program) => {
     const categoryWithNormalizedDefaultMessage = cleanTranslationDefaultMessage(program.type);
     return { ...program, category: categoryWithNormalizedDefaultMessage };
   });
 
-  const categoryMap = {};
+  const categoryMap: { [key: string]: Category } = {};
 
   for (const program of programsWithNormalizedTypeTranslations) {
     const id = program.category.default_message;
@@ -158,7 +173,7 @@ const getAllNearTermPrograms = async (whiteLabel) => {
     categoryMap[id].programs.push({ name: program.name, description: program.website_description });
   }
 
-  const categories = [];
+  const categories: Category[] = [];
   for (const category of Object.values(categoryMap)) {
     categories.push(category);
   }
@@ -166,7 +181,7 @@ const getAllNearTermPrograms = async (whiteLabel) => {
   return categories;
 };
 
-const postValidation = async (validationBody, key) => {
+const postValidation = async (validationBody: ValidationRequestData, key: string) => {
   const staffHeader = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -185,7 +200,7 @@ const postValidation = async (validationBody, key) => {
   });
 };
 
-const deleteValidation = async (validationid, key) => {
+const deleteValidation = async (validationid: number, key: string) => {
   const staffHeader = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -202,28 +217,26 @@ const deleteValidation = async (validationid, key) => {
   });
 };
 
-const getAuthToken = async (email, password) => {
+const getAuthToken = async (email: string, password: string) => {
   const header = {
     'Content-Type': 'application/json',
   };
 
-  return await fetch(authTokenEndpoint, {
+  const response = await fetch(authTokenEndpoint, {
     method: 'POST',
     headers: header,
     body: JSON.stringify({
       username: email,
       password: password,
     }),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then((response) => {
-      return response.token;
-    });
+  });
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+
+  const data = (await response.json()) as AdminTokenResponse;
+
+  return data.token;
 };
 
 export {
