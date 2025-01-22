@@ -124,35 +124,46 @@ const SaveMyResultsModal = forwardRef(function SaveMyResultsModal({ close }: Sav
     );
   };
 
-  const submitHandler = async (data: z.infer<typeof formSchema>) => {
-    // const { email, phone } = data;
-    const { email } = data;
-    console.log({ email });
+  const submitHandler = async (data: z.infer<typeof formSchema>, event: Event) => {
+    console.log({ data }); //will have {email: X, phone: Y}
+    const buttonId = event.target?.id;
+    const { email, phone } = data;
+    let snackbarMessage = '';
+    let messageBody = {};
+    // TODO: maybe move the handler to inside of each button?
 
-    if (email) {
-      try {
-        const message = {
-          screen: uuid,
-          email: email,
-          type: 'emailScreen',
-        };
-        await postMessage(message);
-        const snackbarMessage = intl.formatMessage({
-          id: 'emailResults.return-signupCompleted-email',
-          defaultMessage:
-            'A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder.',
-        });
-        setSnackbar({ open: true, message: snackbarMessage });
-      } catch (error) {
-        throw new Error(`${error}`);
-      }
+    if (buttonId === 'email') {
+      snackbarMessage = intl.formatMessage({
+        id: 'emailResults.return-signupCompleted-email',
+        defaultMessage:
+          'A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder.',
+      });
+
+      messageBody = {
+        screen: uuid,
+        email: email,
+        type: 'emailScreen',
+      };
+    } else if (buttonId === 'phone') {
+      snackbarMessage = intl.formatMessage({
+        id: 'emailResults.return-signupCompleted',
+        defaultMessage: 'A copy of your results have been sent.',
+      });
+
+      messageBody = {
+        screen: uuid,
+        phone: phone,
+        type: 'textScreen',
+      };
     }
-    // else if (phone) {
-    //   snackbarMessage = intl.formatMessage({
-    //     id: 'emailResults.return-signupCompleted',
-    //     defaultMessage: 'A copy of your results have been sent.',
-    //   });
-    // }
+
+    try {
+      const message = messageBody;
+      await postMessage(message);
+      setSnackbar({ open: true, message: snackbarMessage });
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
   };
 
   const action = (
