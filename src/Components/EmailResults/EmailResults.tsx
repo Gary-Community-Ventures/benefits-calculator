@@ -214,6 +214,7 @@ const EmailResults = forwardRef(function EmailResults(
         <article className="bottom-margin">
           <FormattedMessage id="emailResults.enter-emailLabel" defaultMessage="Email my results" />
         </article>
+
         {createEmailTextfield(
           'email',
           emailSubmitted,
@@ -221,6 +222,7 @@ const EmailResults = forwardRef(function EmailResults(
           emailHasError,
           displayEmailHelperText,
         )}
+
         <button
           onClick={(event) => {
             setEmailSubmitted(true);

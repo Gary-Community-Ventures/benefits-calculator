@@ -200,6 +200,7 @@ function SignUp() {
 
     const newFormData: FormData = {
       ...formData,
+
       signUpInfo: {
         ...formData.signUpInfo,
         sendOffers: data.contactType.sendOffers,
