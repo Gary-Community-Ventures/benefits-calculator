@@ -6,6 +6,7 @@ import LeftArrowIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { ReactComponent as SaveIcon } from '../../../Assets/save.svg';
 import { Modal } from '@mui/material';
 import { FormattedMessageType } from '../../../Types/Questions';
+import SaveMyResultsModal from '../../SaveMyResultsModal/SaveMyResultsModal';
 import './BackAndSaveButtons.css';
 
 type BackAndSaveButtons = {
@@ -62,11 +63,7 @@ const BackAndSaveButtons = ({ handleTextfieldChange, navigateToLink, BackToThisP
         </div>
       </button>
       <Modal open={openSaveModal} aria-label={intl.formatMessage(emailResultsModalALProps)}>
-        <EmailResults
-          handleTextfieldChange={handleTextfieldChange}
-          screenId={definedScreenerId}
-          close={() => setOpenSaveModal(!openSaveModal)}
-        />
+        <SaveMyResultsModal close={() => setOpenSaveModal(!openSaveModal)} />
       </Modal>
     </div>
   );
