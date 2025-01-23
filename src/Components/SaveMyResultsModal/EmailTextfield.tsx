@@ -1,0 +1,111 @@
+import { TextField } from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
+import { useParams } from 'react-router-dom';
+import { Dispatch, SetStateAction, useContext } from 'react';
+import { z } from 'zod';
+import { Context } from '../Wrapper/Wrapper';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { postMessage } from '../../apiCalls.js';
+import './SaveMyResultsModal.css';
+
+type EmailTextfieldProps = {
+  setSnackbar: Dispatch<SetStateAction<{ open: boolean; message: string }>>;
+};
+
+const EmailTextfield = ({ setSnackbar }: EmailTextfieldProps) => {
+  const { formData } = useContext(Context);
+  const { uuid } = useParams();
+  const intl = useIntl();
+  const { formatMessage } = useIntl();
+
+  const emailFormSchema = z.object({
+    email: z
+      .string({
+        errorMap: () => {
+          return {
+            message: formatMessage({
+              id: 'validation-helperText.email',
+              defaultMessage: 'Please enter a valid email address',
+            }),
+          };
+        },
+      })
+      .email()
+      .trim(),
+  });
+
+  const {
+    control,
+    formState: { errors, isSubmitted },
+    trigger,
+    handleSubmit,
+  } = useForm<z.infer<typeof emailFormSchema>>({
+    resolver: zodResolver(emailFormSchema),
+    defaultValues: {
+      email: formData.signUpInfo.email ?? '',
+    },
+  });
+
+  const emailSubmitHandler = async (data: z.infer<typeof emailFormSchema>) => {
+    const snackbarMessage = intl.formatMessage({
+      id: 'emailResults.return-signupCompleted-email',
+      defaultMessage:
+        'A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder.',
+    });
+
+    const messageBody = {
+      screen: uuid,
+      email: data.email,
+      type: 'emailScreen',
+    };
+
+    try {
+      await postMessage(messageBody);
+      setSnackbar({ open: true, message: snackbarMessage });
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit(emailSubmitHandler)}>
+      <div className="flex-direction-column">
+        <article className="bottom-margin">
+          <FormattedMessage id="emailResults.enter-emailLabel" defaultMessage="Email my results" />
+        </article>
+        <Controller
+          name="email"
+          control={control}
+          rules={{ required: false }}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label={<FormattedMessage id="signUp.createEmailTextfield-label" defaultMessage="Email" />}
+              variant="outlined"
+              error={errors.email !== undefined}
+              helperText={
+                errors.email !== undefined && (
+                  <ErrorMessageWrapper fontSize="1rem">{errors.email.message}</ErrorMessageWrapper>
+                )
+              }
+              onChange={(...args) => {
+                field.onChange(...args);
+                if (isSubmitted) {
+                  trigger('email');
+                }
+              }}
+              sx={{ mb: '1rem' }}
+            />
+          )}
+        />
+        <button className="send-button" type="submit">
+          <FormattedMessage id="emailResults.sendButton" defaultMessage="Send" />
+        </button>
+      </div>
+    </form>
+  );
+};
+
+export default EmailTextfield;
