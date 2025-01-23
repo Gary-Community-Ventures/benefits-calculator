@@ -78,6 +78,8 @@ const QuestionComponentContainer = () => {
         </main>
       );
   }
+
+  return null;
 };
 
 export default QuestionComponentContainer;

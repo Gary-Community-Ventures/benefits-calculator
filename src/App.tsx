@@ -1,6 +1,6 @@
 import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
 import { useState, useEffect, useContext } from 'react';
-import { useNavigate, useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
+import { useLocation, Navigate, Routes, Route, useSearchParams } from 'react-router-dom';
 import { LicenseInfo } from '@mui/x-license-pro';
 import { Context } from './Components/Wrapper/Wrapper';
 import FetchScreen from './Components/FetchScreen/FetchScreen';
@@ -13,12 +13,9 @@ import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/J
 import SelectLanguagePage from './Components/Steps/SelectLanguage';
 import { STARTING_QUESTION_NUMBER, useStepNumber, useStepDirectory } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
-import { Expense, HealthInsurance, SignUpInfo } from './Types/FormData';
 import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer';
-import { useErrorController } from './Assets/validationFunctions';
 import dataLayerPush from './Assets/analytics';
 import { OTHER_PAGE_TITLES } from './Assets/pageTitleTags';
-import { isCustomTypedLocationState } from './Types/FormData';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 import CcigLandingPage from './Components/CcigComponents/CcigLandingPage';
 import languageRouteWrapper from './Components/RouterUtil/LanguageRouter';
@@ -27,10 +24,8 @@ import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
 import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm';
 import './App.css';
-import useScreenApi from './Assets/updateScreen';
 
 const App = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const urlSearchParams = location.search;
   const [searchParams] = useSearchParams();
@@ -41,10 +36,7 @@ const App = () => {
     setTheme: changeTheme,
     pageIsLoading,
     getReferrer,
-    whiteLabel,
   } = useContext(Context);
-  const { updateScreen } = useScreenApi();
-
   const stepDirectory = useStepDirectory();
   const totalSteps = stepDirectory.length + STARTING_QUESTION_NUMBER;
   const [theme, setTheme] = useState(createTheme(styleOverride));
@@ -95,33 +87,6 @@ const App = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-
-  const handleTextfieldChange = (event: Event) => {
-    const { name, value } = event.target as HTMLInputElement;
-    const numberUpToEightDigitsLongRegex = /^\d{0,8}$/; //for zipcode
-    const numberUpToTenDigitsLongRegex = /^\d{0,10}$/; //for phone number
-    const isFirstLastOrEmail = name === 'firstName' || name === 'lastName' || name === 'email';
-
-    if (isFirstLastOrEmail) {
-      const updatedSignUpInfo = { ...formData.signUpInfo, [name]: value };
-      setFormData({ ...formData, signUpInfo: updatedSignUpInfo });
-      return;
-    }
-
-    if (name === 'phone' && numberUpToTenDigitsLongRegex.test(value)) {
-      const updatedSignUpInfo = { ...formData.signUpInfo, [name]: value };
-      setFormData({ ...formData, signUpInfo: updatedSignUpInfo });
-      return;
-    }
-
-    if (numberUpToEightDigitsLongRegex.test(value)) {
-      if (value === '') {
-        setFormData({ ...formData, [name]: value });
-        return;
-      }
-      setFormData({ ...formData, [name]: Number(value) });
-    }
-  };
 
   if (pageIsLoading) {
     return (
@@ -198,26 +163,11 @@ const App = () => {
                   />
                   <Route path="step-:id" element={<QuestionComponentContainer key={window.location.href} />} />
                   <Route path="confirm-information" element={<Confirmation />} />
-                  <Route
-                    path="results/benefits"
-                    element={<Results type="program" handleTextfieldChange={handleTextfieldChange} />}
-                  />
-                  <Route
-                    path="results/near-term-needs"
-                    element={<Results type="need" handleTextfieldChange={handleTextfieldChange} />}
-                  />
-                  <Route
-                    path="results/benefits/:programId"
-                    element={<Results type="program" handleTextfieldChange={handleTextfieldChange} />}
-                  />
-                  <Route
-                    path="results/benefits/:programId/navigators"
-                    element={<Results type="navigator" handleTextfieldChange={handleTextfieldChange} />}
-                  />
-                  <Route
-                    path="results/more-help"
-                    element={<Results type="help" handleTextfieldChange={handleTextfieldChange} />}
-                  />
+                  <Route path="results/benefits" element={<Results type="program" />} />
+                  <Route path="results/near-term-needs" element={<Results type="need" />} />
+                  <Route path="results/benefits/:programId" element={<Results type="program" />} />
+                  <Route path="results/benefits/:programId/navigators" element={<Results type="navigator" />} />
+                  <Route path="results/more-help" element={<Results type="help" />} />
                   <Route path="results" element={<Navigate to="benefits" replace />} />
                   <Route path="*" element={<Navigate to="/step-1" replace />} />
                 </Route>
