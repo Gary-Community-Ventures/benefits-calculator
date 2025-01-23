@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { Context } from '../Wrapper/Wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { postMessage } from '../../apiCalls.js';
+import './SaveMyResultsModal.css';
 
 type EmailTextfieldProps = {
   setSnackbar: Dispatch<SetStateAction<{ open: boolean; message: string }>>;
@@ -95,6 +96,7 @@ const EmailTextfield = ({ setSnackbar }: EmailTextfieldProps) => {
                   trigger('email');
                 }
               }}
+              sx={{ mb: '1rem' }}
             />
           )}
         />

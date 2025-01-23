@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { Context } from '../Wrapper/Wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { postMessage } from '../../apiCalls.js';
+import './SaveMyResultsModal.css';
 
 type PhoneTextfieldProps = {
   setSnackbar: Dispatch<SetStateAction<{ open: boolean; message: string }>>;
@@ -110,6 +111,7 @@ const PhoneTextfield = ({ setSnackbar }: PhoneTextfieldProps) => {
                   trigger('phone');
                 }
               }}
+              sx={{ mb: '1rem' }}
             />
           )}
         />

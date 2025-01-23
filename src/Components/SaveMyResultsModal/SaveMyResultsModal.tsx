@@ -62,7 +62,6 @@ const SaveMyResultsModal = forwardRef(function SaveMyResultsModal({ close }: Sav
       </div>
     );
   };
-
   return (
     <div className="email-results-container">
       <Snackbar
