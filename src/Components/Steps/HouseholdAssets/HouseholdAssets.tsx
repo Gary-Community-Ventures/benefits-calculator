@@ -50,12 +50,13 @@ const HouseholdAssets = () => {
   });
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ householdAssets }) => {
-    if (uuid) {
-      const updatedFormData = { ...formData, householdAssets: householdAssets };
-      setFormData(updatedFormData);
-      updateScreen(updatedFormData);
-      nextStep();
+    if (!uuid) {
+      throw new Error('no uuid');
     }
+    const updatedFormData = { ...formData, householdAssets: householdAssets };
+    setFormData(updatedFormData);
+    updateScreen(updatedFormData);
+    nextStep();
   };
 
   return (
