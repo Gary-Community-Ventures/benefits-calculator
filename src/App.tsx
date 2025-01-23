@@ -7,25 +7,25 @@ import FetchScreen from './Components/FetchScreen/FetchScreen';
 import QuestionComponentContainer from './Components/QuestionComponentContainer/QuestionComponentContainer';
 import Confirmation from './Components/Confirmation/Confirmation';
 import Results from './Components/Results/Results';
-import Disclaimer from './Components/Steps/Disclaimer/Disclaimer.tsx';
+import Disclaimer from './Components/Steps/Disclaimer/Disclaimer';
 import ProgressBar from './Components/ProgressBar/ProgressBar';
 import JeffcoLandingPage from './Components/JeffcoComponents/JeffcoLandingPage/JeffcoLandingPage';
-import SelectLanguagePage from './Components/Steps/SelectLanguage.tsx';
+import SelectLanguagePage from './Components/Steps/SelectLanguage';
 import { STARTING_QUESTION_NUMBER, useStepNumber, useStepDirectory } from './Assets/stepDirectory';
 import Box from '@mui/material/Box';
-import { Expense, HealthInsurance, SignUpInfo } from './Types/FormData.js';
-import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer.tsx';
-import { useErrorController } from './Assets/validationFunctions.tsx';
-import dataLayerPush from './Assets/analytics.ts';
-import { OTHER_PAGE_TITLES } from './Assets/pageTitleTags.ts';
-import { isCustomTypedLocationState } from './Types/FormData.ts';
+import { Expense, HealthInsurance, SignUpInfo } from './Types/FormData';
+import { BrandedFooter, BrandedHeader } from './Components/Referrer/Referrer';
+import { useErrorController } from './Assets/validationFunctions';
+import dataLayerPush from './Assets/analytics';
+import { OTHER_PAGE_TITLES } from './Assets/pageTitleTags';
+import { isCustomTypedLocationState } from './Types/FormData';
 LicenseInfo.setLicenseKey(process.env.REACT_APP_MUI_LICENSE_KEY + '=');
 import CcigLandingPage from './Components/CcigComponents/CcigLandingPage';
 import languageRouteWrapper from './Components/RouterUtil/LanguageRouter';
 import SelectStatePage from './Components/Steps/SelectStatePage';
 import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
-import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm.tsx';
+import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm';
 import './App.css';
 import useScreenApi from './Assets/updateScreen';
 
@@ -120,50 +120,6 @@ const App = () => {
         return;
       }
       setFormData({ ...formData, [name]: Number(value) });
-    }
-  };
-
-  const handleNoAnswerChange = (event: Event) => {
-    const { name, value } = event.target as HTMLInputElement;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  // TODO: update updateScreen hook to not take in override uuid
-  const handleContinueSubmit = (
-    event: Event,
-    errorController: ReturnType<typeof useErrorController>, // update this when validationFunctions is converted to typescript
-    inputToBeValidated: string | number | Expense[] | SignUpInfo | HealthInsurance,
-    stepId: number,
-    questionName: string,
-    uuid: string,
-  ) => {
-    event.preventDefault();
-    errorController.incrementSubmitted();
-    const hasError = errorController.updateError(inputToBeValidated, formData);
-    const isZipcodeQuestionAndCountyIsEmpty = questionName === 'zipcode' && formData.county === '';
-    const isEmptyAssets = questionName === 'householdAssets' && formData.householdAssets < 0;
-    const isComingFromConfirmationPg = isCustomTypedLocationState(location.state)
-      ? location.state.routedFromConfirmationPg
-      : false;
-    const isLastStep = questionName === stepDirectory.at(-1);
-
-    if (!hasError) {
-      if (isZipcodeQuestionAndCountyIsEmpty || isEmptyAssets) {
-        return;
-      } else if (questionName === 'householdSize') {
-        const updatedHouseholdData = formData.householdData.slice(0, Number(formData.householdSize));
-        const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-        updateScreen(updatedFormData, uuid);
-        setFormData(updatedFormData);
-        isComingFromConfirmationPg
-          ? navigate(`/${whiteLabel}/${uuid}/confirm-information`)
-          : navigate(`/${whiteLabel}/${uuid}/step-${stepId + 1}/1`);
-      } else {
-        updateScreen(formData, uuid);
-        isComingFromConfirmationPg || isLastStep
-          ? navigate(`/${whiteLabel}/${uuid}/confirm-information`)
-          : navigate(`/${whiteLabel}/${uuid}/step-${stepId + 1}`);
-      }
     }
   };
 
