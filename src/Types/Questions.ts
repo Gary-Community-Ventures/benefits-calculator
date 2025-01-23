@@ -1,5 +1,4 @@
 import { JSXElementConstructor, ReactElement } from 'react';
-import { MessageFunction, ValidationFunction } from './ErrorController';
 
 export type QuestionName =
   | 'zipcode'
