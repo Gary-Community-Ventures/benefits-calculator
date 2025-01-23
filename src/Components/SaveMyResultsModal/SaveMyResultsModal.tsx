@@ -16,14 +16,14 @@ type SaveMyResultsModalProps = {
 const SaveMyResultsModal = forwardRef(function SaveMyResultsModal({ close }: SaveMyResultsModalProps, ref) {
   const intl = useIntl();
   const [copied, setCopied] = useState(false);
-  const closeAriaLabelProps = {
-    id: 'emailResults.close-AL',
-    defaultMessage: 'close',
-  };
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
   });
+  const closeAriaLabelProps = {
+    id: 'emailResults.close-AL',
+    defaultMessage: 'close',
+  };
 
   const action = (
     <>
@@ -62,6 +62,7 @@ const SaveMyResultsModal = forwardRef(function SaveMyResultsModal({ close }: Sav
       </div>
     );
   };
+
   return (
     <div className="email-results-container">
       <Snackbar
