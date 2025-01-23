@@ -7,6 +7,7 @@ import { Dispatch, SetStateAction, useContext } from 'react';
 import { z } from 'zod';
 import { Context } from '../Wrapper/Wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { postMessage } from '../../apiCalls.js';
 
 type EmailTextfieldProps = {
   setSnackbar: Dispatch<SetStateAction<{ open: boolean; message: string }>>;
@@ -55,13 +56,12 @@ const EmailTextfield = ({ setSnackbar }: EmailTextfieldProps) => {
 
     const messageBody = {
       screen: uuid,
-      email: data,
+      email: data.email,
       type: 'emailScreen',
     };
 
     try {
-      const message = messageBody;
-      await postMessage(message);
+      await postMessage(messageBody);
       setSnackbar({ open: true, message: snackbarMessage });
     } catch (error) {
       throw new Error(`${error}`);
