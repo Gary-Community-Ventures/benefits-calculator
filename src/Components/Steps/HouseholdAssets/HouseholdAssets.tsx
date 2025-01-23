@@ -35,12 +35,7 @@ const HouseholdAssets = () => {
         },
       })
       .int()
-      .min(0, {
-        message: intl.formatMessage({
-          id: 'validation-helperText.assets',
-          defaultMessage: 'Enter 0 or a positive number.',
-        }),
-      }),
+      .min(0),
   });
 
   const {
