@@ -1,6 +1,5 @@
 import { JSXElementConstructor, ReactElement } from 'react';
 import { MessageFunction, ValidationFunction } from './ErrorController';
-import { SignUpInfo } from './FormData';
 
 export type QuestionName =
   | 'zipcode'
