@@ -38,8 +38,7 @@ const EmailTextfield = ({ setSnackbar }: EmailTextfieldProps) => {
 
   const {
     control,
-    formState: { errors, isSubmitted },
-    trigger,
+    formState: { errors },
     handleSubmit,
   } = useForm<z.infer<typeof emailFormSchema>>({
     resolver: zodResolver(emailFormSchema),
@@ -49,6 +48,10 @@ const EmailTextfield = ({ setSnackbar }: EmailTextfieldProps) => {
   });
 
   const emailSubmitHandler = async (data: z.infer<typeof emailFormSchema>) => {
+    if (uuid === undefined) {
+      throw new Error('uuid is not defined');
+    }
+
     try {
       const snackbarMessage = intl.formatMessage({
         id: 'emailResults.return-signupCompleted-email',

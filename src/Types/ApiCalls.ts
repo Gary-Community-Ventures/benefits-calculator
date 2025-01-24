@@ -1,4 +1,4 @@
-import { ApiFormData, ApiUser, ApiUserWriteOnly } from './ApiFormData';
+import { ApiUser, ApiUserWriteOnly } from './ApiFormData';
 import { Translation } from './Results';
 
 export type TranslationResponse = {
@@ -10,9 +10,10 @@ export type TranslationResponse = {
 export type UserRequestData = ApiUser & ApiUserWriteOnly;
 
 export type SendMessageRequestData = {
-  email: string;
-  phone: string;
+  email?: string;
+  phone?: string;
   screen: string;
+  type: string;
 };
 
 export type ProgramCategoryResponse = {

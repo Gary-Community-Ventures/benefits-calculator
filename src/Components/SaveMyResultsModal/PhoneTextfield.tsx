@@ -9,6 +9,7 @@ import { Context } from '../Wrapper/Wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { postMessage } from '../../apiCalls';
 import './SaveMyResultsModal.css';
+import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 
 type PhoneTextfieldProps = {
   setSnackbar: Dispatch<SetStateAction<{ open: boolean; message: string }>>;
@@ -54,8 +55,7 @@ const PhoneTextfield = ({ setSnackbar }: PhoneTextfieldProps) => {
 
   const {
     control,
-    formState: { errors, isSubmitted },
-    trigger,
+    formState: { errors },
     handleSubmit,
   } = useForm<z.infer<typeof phoneFormSchema>>({
     resolver: zodResolver(phoneFormSchema),
@@ -65,6 +65,10 @@ const PhoneTextfield = ({ setSnackbar }: PhoneTextfieldProps) => {
   });
 
   const phoneSubmitHandler = async (data: z.infer<typeof phoneFormSchema>) => {
+    if (uuid === undefined) {
+      throw new Error('uuid is not defined');
+    }
+
     try {
       const snackbarMessage = intl.formatMessage({
         id: 'emailResults.return-signupCompleted',
@@ -100,6 +104,8 @@ const PhoneTextfield = ({ setSnackbar }: PhoneTextfieldProps) => {
           render={({ field }) => (
             <TextField
               {...field}
+              inputProps={NUM_PAD_PROPS}
+              onChange={handleNumbersOnly(field.onChange)}
               label={<FormattedMessage id="signUp.createPhoneTextfield-label" defaultMessage="Cell Phone" />}
               variant="outlined"
               error={errors.phone !== undefined}
