@@ -73,6 +73,7 @@ const FetchScreen = () => {
         eitc: response.has_eitc ?? false,
         lifeline: response.has_lifeline ?? false,
         leap: response.has_leap ?? false,
+        nc_lieap: response.has_nc_lieap ?? false,
         mydenver: response.has_mydenver ?? false,
         nslp: response.has_nslp ?? false,
         oap: response.has_oap ?? false,
