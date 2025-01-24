@@ -38,8 +38,7 @@ const EmailTextfield = ({ setSnackbar }: EmailTextfieldProps) => {
 
   const {
     control,
-    formState: { errors, isSubmitted },
-    trigger,
+    formState: { errors },
     handleSubmit,
   } = useForm<z.infer<typeof emailFormSchema>>({
     resolver: zodResolver(emailFormSchema),
@@ -49,23 +48,31 @@ const EmailTextfield = ({ setSnackbar }: EmailTextfieldProps) => {
   });
 
   const emailSubmitHandler = async (data: z.infer<typeof emailFormSchema>) => {
-    const snackbarMessage = intl.formatMessage({
-      id: 'emailResults.return-signupCompleted-email',
-      defaultMessage:
-        'A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder.',
-    });
-
-    const messageBody = {
-      screen: uuid,
-      email: data.email,
-      type: 'emailScreen',
-    };
+    if (uuid === undefined) {
+      throw new Error('uuid is not defined');
+    }
 
     try {
+      const snackbarMessage = intl.formatMessage({
+        id: 'emailResults.return-signupCompleted-email',
+        defaultMessage:
+          'A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder.',
+      });
+
+      const messageBody = {
+        screen: uuid,
+        email: data.email,
+        type: 'emailScreen',
+      };
+
       await postMessage(messageBody);
       setSnackbar({ open: true, message: snackbarMessage });
     } catch (error) {
-      throw new Error(`${error}`);
+      const snackbarMessage = intl.formatMessage({
+        id: 'emailResults.error',
+        defaultMessage: 'An error occurred on our end, please try submitting again.',
+      });
+      setSnackbar({ open: true, message: snackbarMessage });
     }
   };
 
@@ -90,12 +97,6 @@ const EmailTextfield = ({ setSnackbar }: EmailTextfieldProps) => {
                   <ErrorMessageWrapper fontSize="1rem">{errors.email.message}</ErrorMessageWrapper>
                 )
               }
-              onChange={(...args) => {
-                field.onChange(...args);
-                if (isSubmitted) {
-                  trigger('email');
-                }
-              }}
               sx={{ mb: '1rem' }}
             />
           )}

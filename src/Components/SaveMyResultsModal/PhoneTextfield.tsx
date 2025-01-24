@@ -9,6 +9,7 @@ import { Context } from '../Wrapper/Wrapper';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { postMessage } from '../../apiCalls';
 import './SaveMyResultsModal.css';
+import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 
 type PhoneTextfieldProps = {
   setSnackbar: Dispatch<SetStateAction<{ open: boolean; message: string }>>;
@@ -54,8 +55,7 @@ const PhoneTextfield = ({ setSnackbar }: PhoneTextfieldProps) => {
 
   const {
     control,
-    formState: { errors, isSubmitted },
-    trigger,
+    formState: { errors },
     handleSubmit,
   } = useForm<z.infer<typeof phoneFormSchema>>({
     resolver: zodResolver(phoneFormSchema),
@@ -65,22 +65,29 @@ const PhoneTextfield = ({ setSnackbar }: PhoneTextfieldProps) => {
   });
 
   const phoneSubmitHandler = async (data: z.infer<typeof phoneFormSchema>) => {
-    const snackbarMessage = intl.formatMessage({
-      id: 'emailResults.return-signupCompleted',
-      defaultMessage: 'A copy of your results have been sent.',
-    });
-
-    const messageBody = {
-      screen: uuid,
-      phone: data.phone,
-      type: 'textScreen',
-    };
+    if (uuid === undefined) {
+      throw new Error('uuid is not defined');
+    }
 
     try {
+      const snackbarMessage = intl.formatMessage({
+        id: 'emailResults.return-signupCompleted',
+        defaultMessage: 'A copy of your results have been sent.',
+      });
+
+      const messageBody = {
+        screen: uuid,
+        phone: data.phone,
+        type: 'textScreen',
+      };
       await postMessage(messageBody);
       setSnackbar({ open: true, message: snackbarMessage });
     } catch (error) {
-      throw new Error(`${error}`);
+      const snackbarMessage = intl.formatMessage({
+        id: 'emailResults.error',
+        defaultMessage: 'An error occurred on our end, please try submitting again.',
+      });
+      setSnackbar({ open: true, message: snackbarMessage });
     }
   };
 
@@ -97,6 +104,8 @@ const PhoneTextfield = ({ setSnackbar }: PhoneTextfieldProps) => {
           render={({ field }) => (
             <TextField
               {...field}
+              inputProps={NUM_PAD_PROPS}
+              onChange={handleNumbersOnly(field.onChange)}
               label={<FormattedMessage id="signUp.createPhoneTextfield-label" defaultMessage="Cell Phone" />}
               variant="outlined"
               error={errors.phone !== undefined}
@@ -105,12 +114,6 @@ const PhoneTextfield = ({ setSnackbar }: PhoneTextfieldProps) => {
                   <ErrorMessageWrapper fontSize="1rem">{errors.phone.message}</ErrorMessageWrapper>
                 )
               }
-              onChange={(...args) => {
-                field.onChange(...args);
-                if (isSubmitted) {
-                  trigger('phone');
-                }
-              }}
               sx={{ mb: '1rem' }}
             />
           )}
