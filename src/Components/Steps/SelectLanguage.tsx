@@ -106,8 +106,7 @@ const SelectLanguagePage = () => {
             id="language-select"
             value={locale}
             label={<FormattedMessage id="selectLang.text" defaultMessage="Language" />}
-            //@ts-ignore
-            onChange={(event: SelectChangeEvent<string>) => selectLanguage(event)}
+            onChange={(event) => selectLanguage(event.target.value)}
           >
             {createMenuItems(languageOptions, 'selectLang.disabledSelectMenuItemText', 'Select a language')}
           </Select>

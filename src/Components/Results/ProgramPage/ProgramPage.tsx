@@ -39,6 +39,14 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
   const currentValidation = findValidationForProgram(validations, program);
 
   const saveValidation = async () => {
+    if (uuid === undefined) {
+      throw new Error('somehow the uuid does not exist');
+    }
+
+    if (staffToken === undefined) {
+      throw new Error('you must be logged in to create a validation');
+    }
+
     const body = {
       screen_uuid: uuid,
       program_name: program.external_name,
@@ -56,8 +64,15 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
   };
 
   const removeValidation = async () => {
+    if (currentValidation === undefined) {
+      throw new Error('there are no validations for this program');
+    }
+    if (staffToken === undefined) {
+      throw new Error('you must be logged in to create a validation');
+    }
+
     try {
-      await deleteValidation(currentValidation?.id, staffToken);
+      await deleteValidation(currentValidation.id, staffToken);
       const newValidations = validations.filter((validation) => validation.id !== currentValidation?.id);
       setValidations(newValidations);
       if (newValidations.length === 0) {
