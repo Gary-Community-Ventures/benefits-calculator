@@ -1,7 +1,14 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import ResultsError from './ResultsError/ResultsError';
 import Loading from './Loading/Loading';
-import { EligibilityResults, Program, ProgramCategory, UrgentNeed, Validation } from '../../Types/Results';
+import {
+  EligibilityResults,
+  MemberEligibility,
+  Program,
+  ProgramCategory,
+  UrgentNeed,
+  Validation,
+} from '../../Types/Results';
 import { getEligibility } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import { Navigate, useParams, useSearchParams } from 'react-router-dom';
@@ -19,6 +26,8 @@ import BackAndSaveButtons from './BackAndSaveButtons/BackAndSaveButtons';
 import { FormattedMessage } from 'react-intl';
 import './Results.css';
 import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
+import { FormData } from '../../Types/FormData';
+import filterProgramsGenerator from './filterPrograms';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -46,6 +55,16 @@ export function useResultsContext() {
   }
 
   return context;
+}
+
+export function findMemberEligibilityMember(formData: FormData, memberEligibility: MemberEligibility) {
+  const member = formData.householdData.find(({ frontendId }) => frontendId === memberEligibility.frontend_id);
+
+  if (member === undefined) {
+    throw new Error(`Member with frontend id of ${memberEligibility.frontend_id} could not be found in formData`);
+  }
+
+  return member;
 }
 
 function findProgramById(programs: Program[], id: number) {
@@ -130,11 +149,14 @@ const Results = ({ type }: ResultsProps) => {
     green_card: false,
     refugee: false,
     gc_5plus: false,
+    gc_5less: false,
     gc_18plus_no5: false,
     gc_under18_no5: false,
     otherWithWorkPermission: false,
     otherHealthCareUnder19: false,
     otherHealthCarePregnant: false,
+    notPregnantOrUnder19ForOmniSalud: false,
+    notPregnantOrUnder19ForEmergencyMedicaid: false,
   });
   const [programs, setPrograms] = useState<Program[]>([]);
   const [programCategories, setProgramCategories] = useState<ProgramCategory[]>([]);
@@ -142,24 +164,7 @@ const Results = ({ type }: ResultsProps) => {
   const [missingPrograms, setMissingPrograms] = useState(false);
   const [validations, setValidations] = useState<Validation[]>([]);
 
-  function showProgram(program: Program) {
-    // show all programs in the admin view
-    if (isAdminView) {
-      return true;
-    }
-
-    const filtersCheckedStrArr = Object.entries(filtersChecked)
-      .filter((filterKeyValPair) => {
-        return filterKeyValPair[1];
-      })
-      .map((filteredKeyValPair) => filteredKeyValPair[0]);
-
-    const meetsLegalStatus = program.legal_status_required.some((status) => filtersCheckedStrArr.includes(status));
-    const isEligible = program.eligible;
-    const doesNotHave = !program.already_has;
-
-    return meetsLegalStatus && isEligible && doesNotHave;
-  }
+  const filterPrograms = filterProgramsGenerator(formData, filtersChecked, isAdminView);
 
   useEffect(() => {
     if (apiResults === undefined) {
@@ -172,12 +177,12 @@ const Results = ({ type }: ResultsProps) => {
     }
 
     setNeeds(apiResults.urgent_needs);
-    setPrograms(apiResults.programs.filter(showProgram));
+    setPrograms(filterPrograms(apiResults.programs));
     setProgramCategories(
       apiResults.program_categories.map((category) => {
         return {
           ...category,
-          programs: category.programs.filter(showProgram),
+          programs: filterPrograms(category.programs),
         };
       }),
     );

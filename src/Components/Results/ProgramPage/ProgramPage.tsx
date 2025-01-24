@@ -13,7 +13,6 @@ import { findValidationForProgram, useResultsContext, useResultsLink } from '../
 import { deleteValidation, postValidation } from '../../../apiCalls';
 import { Language } from '../../../Assets/languageOptions';
 import { allNavigatorLanguages } from './NavigatorLanguages';
-import { CitizenLabels } from '../../../Assets/citizenshipFilterFormControlLabels';
 
 type ProgramPageProps = {
   program: Program;
