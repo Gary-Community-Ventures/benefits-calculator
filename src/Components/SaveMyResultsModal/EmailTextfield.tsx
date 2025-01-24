@@ -49,23 +49,27 @@ const EmailTextfield = ({ setSnackbar }: EmailTextfieldProps) => {
   });
 
   const emailSubmitHandler = async (data: z.infer<typeof emailFormSchema>) => {
-    const snackbarMessage = intl.formatMessage({
-      id: 'emailResults.return-signupCompleted-email',
-      defaultMessage:
-        'A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder.',
-    });
-
-    const messageBody = {
-      screen: uuid,
-      email: data.email,
-      type: 'emailScreen',
-    };
-
     try {
+      const snackbarMessage = intl.formatMessage({
+        id: 'emailResults.return-signupCompleted-email',
+        defaultMessage:
+          'A copy of your results have been sent. If you do not see the email in your inbox, please check your spam folder.',
+      });
+
+      const messageBody = {
+        screen: uuid,
+        email: data.email,
+        type: 'emailScreen',
+      };
+
       await postMessage(messageBody);
       setSnackbar({ open: true, message: snackbarMessage });
     } catch (error) {
-      throw new Error(`${error}`);
+      const snackbarMessage = intl.formatMessage({
+        id: 'emailResults.error',
+        defaultMessage: 'An error occurred on our end, please try submitting again.',
+      });
+      setSnackbar({ open: true, message: snackbarMessage });
     }
   };
 

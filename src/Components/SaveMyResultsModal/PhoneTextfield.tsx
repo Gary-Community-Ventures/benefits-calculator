@@ -65,22 +65,25 @@ const PhoneTextfield = ({ setSnackbar }: PhoneTextfieldProps) => {
   });
 
   const phoneSubmitHandler = async (data: z.infer<typeof phoneFormSchema>) => {
-    const snackbarMessage = intl.formatMessage({
-      id: 'emailResults.return-signupCompleted',
-      defaultMessage: 'A copy of your results have been sent.',
-    });
-
-    const messageBody = {
-      screen: uuid,
-      phone: data.phone,
-      type: 'textScreen',
-    };
-
     try {
+      const snackbarMessage = intl.formatMessage({
+        id: 'emailResults.return-signupCompleted',
+        defaultMessage: 'A copy of your results have been sent.',
+      });
+
+      const messageBody = {
+        screen: uuid,
+        phone: data.phone,
+        type: 'textScreen',
+      };
       await postMessage(messageBody);
       setSnackbar({ open: true, message: snackbarMessage });
     } catch (error) {
-      throw new Error(`${error}`);
+      const snackbarMessage = intl.formatMessage({
+        id: 'emailResults.error',
+        defaultMessage: 'An error occurred on our end, please try submitting again.',
+      });
+      setSnackbar({ open: true, message: snackbarMessage });
     }
   };
 
