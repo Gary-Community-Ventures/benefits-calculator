@@ -1,19 +1,19 @@
 import { AppBar, MenuItem, Select } from '@mui/material';
 import { useContext, useMemo, useState } from 'react';
-import { Context } from '../Wrapper/Wrapper.tsx';
+import { Context } from '../Wrapper/Wrapper';
 import LanguageIcon from '@mui/icons-material/Language';
-import { useConfig } from '../Config/configHook.tsx';
+import { useConfig } from '../Config/configHook';
 import Paper from '@mui/material/Paper';
 import { useIntl } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import './Header.css';
-import { useLogo } from '../Referrer/useLogo.tsx';
+import { useLogo } from '../Referrer/useLogo';
 import { DEFAULT_WHITE_LABEL } from '../Wrapper/Wrapper';
 
 const Header = () => {
   const context = useContext(Context);
   const { formData, getReferrer, whiteLabel } = context;
-  const languageOptions = useConfig('language_options');
+  const languageOptions = useConfig<{ [key: string]: string }>('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
   const logoClass = getReferrer('logoClass', 'logo');
@@ -41,7 +41,7 @@ const Header = () => {
     setIsLanguageSelectOpen(true);
   };
 
-  const createMenuItems = (optionList) => {
+  const createMenuItems = (optionList: { [key: string]: string }) => {
     const menuItemKeyLabelPairArr = Object.entries(optionList);
 
     const dropdownMenuItems = menuItemKeyLabelPairArr.map((key) => {
@@ -80,7 +80,7 @@ const Header = () => {
               placeholder="Change Language"
               value={context.locale}
               label="Language"
-              onChange={(event) => context.selectLanguage(event)}
+              onChange={(event) => context.selectLanguage(event.target.value)}
               aria-label={intl.formatMessage(selectLangAriaLabelProps)}
               variant="standard"
               disableUnderline={true}

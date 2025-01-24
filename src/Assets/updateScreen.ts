@@ -150,9 +150,12 @@ export default function useScreenApi() {
   const { uuid } = useParams();
 
   return {
-    updateScreen: async (formData: FormData, overrideUuid?: string) => {
-      // TODO: Remove overrideUuid when we remove all the handle submit functions in App.tsx
-      await putScreen(getScreensBody(formData, locale, whiteLabel), overrideUuid ?? uuid);
+    updateScreen: async (formData: FormData) => {
+      if (uuid === undefined) {
+        return;
+      }
+
+      await putScreen(getScreensBody(formData, locale, whiteLabel), uuid);
     },
     createScreen: async (formData: FormData) => {
       return await postScreen(getScreensBody(formData, locale, whiteLabel));
@@ -160,6 +163,10 @@ export default function useScreenApi() {
     updateUser: async (formData: FormData) => {
       const userBody = getUserBody(formData, locale);
       if (!formData.signUpInfo.hasUser && userBody.email_or_cell === '+1') {
+        return;
+      }
+
+      if (uuid === undefined) {
         return;
       }
 

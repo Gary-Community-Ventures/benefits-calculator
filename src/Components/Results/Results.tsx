@@ -34,7 +34,6 @@ type WrapperResultsContext = {
 
 type ResultsProps = {
   type: 'program' | 'need' | 'navigator' | 'help';
-  handleTextfieldChange: (event: Event) => void;
 };
 
 export const ResultsContext = createContext<WrapperResultsContext | undefined>(undefined);
@@ -72,7 +71,7 @@ export function useResultsLink(link: string) {
   return addAdminToLink(`/${whiteLabel}/${uuid}/${link}`, isAdminView);
 }
 
-const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
+const Results = ({ type }: ResultsProps) => {
   const { locale, formData } = useContext(Context);
   const { whiteLabel, uuid, programId } = useParams();
   const is211Co = formData.immutableReferrer === '211co';
@@ -94,11 +93,15 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
 
   const fetchResults = async () => {
     try {
-      const rawEligibilityResponse = await getEligibility(uuid, locale);
+      if (uuid === undefined) {
+        throw new Error('can not find uuid');
+      }
+      const rawEligibilityResponse = await getEligibility(uuid);
 
       // replace the program id in the categories with the program
       for (const category of rawEligibilityResponse.program_categories) {
-        category.programs = category.programs.map((programId: number) => {
+        const programs: number[] = category.programs as unknown[] as number[];
+        category.programs = programs.map((programId: number) => {
           const program = findProgramById(rawEligibilityResponse.programs, programId);
 
           if (program === undefined) {
@@ -196,7 +199,6 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
       <Grid container>
         <Grid item xs={12}>
           <BackAndSaveButtons
-            handleTextfieldChange={handleTextfieldChange}
             navigateToLink={addAdminToLink(`/${whiteLabel}/${uuid}/results/benefits`, isAdminView)}
             BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
           />

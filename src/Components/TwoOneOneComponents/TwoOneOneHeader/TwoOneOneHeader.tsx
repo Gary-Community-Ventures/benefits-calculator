@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { AppBar, MenuItem, Select, Link, IconButton, Dialog } from '@mui/material';
+import { AppBar, MenuItem, Select, Link, IconButton, Dialog, SelectChangeEvent } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -15,10 +15,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import TwoOneOneShare from '../TwoOneOneShare/TwoOneOneShare';
 import './TwoOneOneHeader.css';
 
+type LanguageOptions = {
+  [key: string]: string;
+};
+
 const TwoOneOneHeader = () => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
   const { formData, locale, selectLanguage } = useContext(Context);
-  const languageOptions = useConfig('language_options');
+  const languageOptions = useConfig<LanguageOptions>('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
 
@@ -76,8 +80,8 @@ const TwoOneOneHeader = () => {
     setIsLanguageSelectOpen(true);
   };
 
-  const handleLanguageChange = (event) => {
-    selectLanguage(event);
+  const handleLanguageChange = (event: SelectChangeEvent) => {
+    selectLanguage(event.target.value);
   };
 
   const handleOpenMenu = () => {
@@ -123,7 +127,7 @@ const TwoOneOneHeader = () => {
     return <Stack id="hamburger-drawer">{create211Links()}</Stack>;
   };
 
-  const createMenuItems = (optionList) => {
+  const createMenuItems = (optionList: LanguageOptions) => {
     const menuItemKeyLabelPairArr = Object.entries(optionList);
 
     const dropdownMenuItems = menuItemKeyLabelPairArr.map((key) => {
