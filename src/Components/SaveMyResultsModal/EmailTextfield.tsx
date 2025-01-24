@@ -94,12 +94,6 @@ const EmailTextfield = ({ setSnackbar }: EmailTextfieldProps) => {
                   <ErrorMessageWrapper fontSize="1rem">{errors.email.message}</ErrorMessageWrapper>
                 )
               }
-              onChange={(...args) => {
-                field.onChange(...args);
-                if (isSubmitted) {
-                  trigger('email');
-                }
-              }}
               sx={{ mb: '1rem' }}
             />
           )}

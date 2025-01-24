@@ -108,12 +108,6 @@ const PhoneTextfield = ({ setSnackbar }: PhoneTextfieldProps) => {
                   <ErrorMessageWrapper fontSize="1rem">{errors.phone.message}</ErrorMessageWrapper>
                 )
               }
-              onChange={(...args) => {
-                field.onChange(...args);
-                if (isSubmitted) {
-                  trigger('phone');
-                }
-              }}
               sx={{ mb: '1rem' }}
             />
           )}
