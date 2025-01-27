@@ -77,13 +77,13 @@ export const Filter = () => {
     newFiltersChecked.citizen = isCitizen;
 
     // calculate hidden filters if the user is not a citizen
-    Object.entries(calculatedCitizenshipFilters).map(([filterName, func]) => {
-      if (isCitizen) {
+    Object.entries(calculatedCitizenshipFilters).map(([filterName, calculator]) => {
+      if (!calculator.linkedFilters.some((linkedFilter) => newFiltersChecked[linkedFilter])) {
         newFiltersChecked[filterName as CalculatedCitizenLabel] = false;
         return;
       }
 
-      newFiltersChecked[filterName as CalculatedCitizenLabel] = func(formData);
+      newFiltersChecked[filterName as CalculatedCitizenLabel] = formData.householdData.some(calculator.func);
     });
 
     setFiltersChecked(newFiltersChecked);
@@ -202,11 +202,14 @@ export const Filter = () => {
       green_card: false,
       refugee: false,
       gc_5plus: false,
+      gc_5less: false,
       gc_18plus_no5: false,
       gc_under18_no5: false,
       otherWithWorkPermission: false,
       otherHealthCareUnder19: false,
       otherHealthCarePregnant: false,
+      notPregnantOrUnder19ForOmniSalud: false,
+      notPregnantOrUnder19ForEmergencyMedicaid: false,
     });
 
     setCitButtonClass('citizenship-button');

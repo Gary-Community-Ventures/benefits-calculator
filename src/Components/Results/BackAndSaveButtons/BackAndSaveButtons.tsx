@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
-import EmailResults from '../../EmailResults/EmailResults';
 import LeftArrowIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { ReactComponent as SaveIcon } from '../../../Assets/save.svg';
 import { Modal } from '@mui/material';
 import { FormattedMessageType } from '../../../Types/Questions';
+import SaveMyResultsModal from '../../SaveMyResultsModal/SaveMyResultsModal';
 import './BackAndSaveButtons.css';
 
 type BackAndSaveButtons = {
-  handleTextfieldChange: (event: Event) => void;
   navigateToLink: string;
   BackToThisPageText: FormattedMessageType;
 };
 
-const BackAndSaveButtons = ({ handleTextfieldChange, navigateToLink, BackToThisPageText }: BackAndSaveButtons) => {
+const BackAndSaveButtons = ({ navigateToLink, BackToThisPageText }: BackAndSaveButtons) => {
   const navigate = useNavigate();
   const { uuid: screenerId } = useParams();
   const intl = useIntl();
@@ -62,11 +61,7 @@ const BackAndSaveButtons = ({ handleTextfieldChange, navigateToLink, BackToThisP
         </div>
       </button>
       <Modal open={openSaveModal} aria-label={intl.formatMessage(emailResultsModalALProps)}>
-        <EmailResults
-          handleTextfieldChange={handleTextfieldChange}
-          screenId={definedScreenerId}
-          close={() => setOpenSaveModal(!openSaveModal)}
-        />
+        <SaveMyResultsModal close={() => setOpenSaveModal(!openSaveModal)} />
       </Modal>
     </div>
   );

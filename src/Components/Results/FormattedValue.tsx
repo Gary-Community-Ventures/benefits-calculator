@@ -5,6 +5,16 @@ import { Program, ProgramCategory } from '../../Types/Results';
 import { findValidationForProgram, useResultsContext } from './Results';
 import ResultsTranslate from './Translate/Translate';
 
+export function programValue(program: Program) {
+  let total = program.household_value;
+
+  for (const member of program.members) {
+    total += member.value;
+  }
+
+  return total;
+}
+
 export function calculateTotalValue(category: ProgramCategory) {
   // assume that none of the caps are overlapping
   if (hasOverlappingCaps(category)) {
@@ -22,14 +32,14 @@ export function calculateTotalValue(category: ProgramCategory) {
     for (let i = 0; i < category.caps.length; i++) {
       const cap = category.caps[i];
       if (cap.programs.includes(program.external_name)) {
-        capValues[i] += program.estimated_value;
+        capValues[i] += programValue(program);
         isInCap = true;
         break;
       }
     }
 
     if (!isInCap) {
-      nonCapTotal += program.estimated_value;
+      nonCapTotal += programValue(program);
     }
   }
 
@@ -100,7 +110,7 @@ export function useFormatMonthlyValue(program: Program) {
   const validation = findValidationForProgram(validations, program);
 
   const perMonth = intl.formatMessage({ id: 'program-card-month-txt', defaultMessage: '/month' });
-  const value = translateNumber(formatToUSD(program.estimated_value / 12)) + perMonth;
+  const value = translateNumber(formatToUSD(programValue(program) / 12)) + perMonth;
 
   if (validation !== undefined) {
     const expextedValue = translateNumber(formatToUSD(Number(validation.value) / 12));
@@ -115,7 +125,7 @@ export function useFormatYearlyValue(program: Program) {
   const { validations } = useResultsContext();
   const validation = findValidationForProgram(validations, program);
 
-  const value = translateNumber(formatToUSD(program.estimated_value));
+  const value = translateNumber(formatToUSD(programValue(program)));
 
   if (validation !== undefined) {
     const expextedValue = translateNumber(formatToUSD(Number(validation.value)));

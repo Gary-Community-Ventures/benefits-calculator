@@ -1,7 +1,14 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import ResultsError from './ResultsError/ResultsError';
 import Loading from './Loading/Loading';
-import { EligibilityResults, Program, ProgramCategory, UrgentNeed, Validation } from '../../Types/Results';
+import {
+  EligibilityResults,
+  MemberEligibility,
+  Program,
+  ProgramCategory,
+  UrgentNeed,
+  Validation,
+} from '../../Types/Results';
 import { getEligibility } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import { Navigate, useParams, useSearchParams } from 'react-router-dom';
@@ -19,6 +26,8 @@ import BackAndSaveButtons from './BackAndSaveButtons/BackAndSaveButtons';
 import { FormattedMessage } from 'react-intl';
 import './Results.css';
 import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
+import { FormData } from '../../Types/FormData';
+import filterProgramsGenerator from './filterPrograms';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -34,7 +43,6 @@ type WrapperResultsContext = {
 
 type ResultsProps = {
   type: 'program' | 'need' | 'navigator' | 'help';
-  handleTextfieldChange: (event: Event) => void;
 };
 
 export const ResultsContext = createContext<WrapperResultsContext | undefined>(undefined);
@@ -47,6 +55,16 @@ export function useResultsContext() {
   }
 
   return context;
+}
+
+export function findMemberEligibilityMember(formData: FormData, memberEligibility: MemberEligibility) {
+  const member = formData.householdData.find(({ frontendId }) => frontendId === memberEligibility.frontend_id);
+
+  if (member === undefined) {
+    throw new Error(`Member with frontend id of ${memberEligibility.frontend_id} could not be found in formData`);
+  }
+
+  return member;
 }
 
 function findProgramById(programs: Program[], id: number) {
@@ -72,7 +90,7 @@ export function useResultsLink(link: string) {
   return addAdminToLink(`/${whiteLabel}/${uuid}/${link}`, isAdminView);
 }
 
-const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
+const Results = ({ type }: ResultsProps) => {
   const { locale, formData } = useContext(Context);
   const { whiteLabel, uuid, programId } = useParams();
   const is211Co = formData.immutableReferrer === '211co';
@@ -94,11 +112,15 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
 
   const fetchResults = async () => {
     try {
-      const rawEligibilityResponse = await getEligibility(uuid, locale);
+      if (uuid === undefined) {
+        throw new Error('can not find uuid');
+      }
+      const rawEligibilityResponse = await getEligibility(uuid);
 
       // replace the program id in the categories with the program
       for (const category of rawEligibilityResponse.program_categories) {
-        category.programs = category.programs.map((programId: number) => {
+        const programs: number[] = category.programs as unknown[] as number[];
+        category.programs = programs.map((programId: number) => {
           const program = findProgramById(rawEligibilityResponse.programs, programId);
 
           if (program === undefined) {
@@ -127,11 +149,14 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     green_card: false,
     refugee: false,
     gc_5plus: false,
+    gc_5less: false,
     gc_18plus_no5: false,
     gc_under18_no5: false,
     otherWithWorkPermission: false,
     otherHealthCareUnder19: false,
     otherHealthCarePregnant: false,
+    notPregnantOrUnder19ForOmniSalud: false,
+    notPregnantOrUnder19ForEmergencyMedicaid: false,
   });
   const [programs, setPrograms] = useState<Program[]>([]);
   const [programCategories, setProgramCategories] = useState<ProgramCategory[]>([]);
@@ -139,24 +164,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
   const [missingPrograms, setMissingPrograms] = useState(false);
   const [validations, setValidations] = useState<Validation[]>([]);
 
-  function showProgram(program: Program) {
-    // show all programs in the admin view
-    if (isAdminView) {
-      return true;
-    }
-
-    const filtersCheckedStrArr = Object.entries(filtersChecked)
-      .filter((filterKeyValPair) => {
-        return filterKeyValPair[1];
-      })
-      .map((filteredKeyValPair) => filteredKeyValPair[0]);
-
-    const meetsLegalStatus = program.legal_status_required.some((status) => filtersCheckedStrArr.includes(status));
-    const isEligible = program.eligible;
-    const doesNotHave = !program.already_has;
-
-    return meetsLegalStatus && isEligible && doesNotHave;
-  }
+  const filterPrograms = filterProgramsGenerator(formData, filtersChecked, isAdminView);
 
   useEffect(() => {
     if (apiResults === undefined) {
@@ -169,12 +177,12 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
     }
 
     setNeeds(apiResults.urgent_needs);
-    setPrograms(apiResults.programs.filter(showProgram));
+    setPrograms(filterPrograms(apiResults.programs));
     setProgramCategories(
       apiResults.program_categories.map((category) => {
         return {
           ...category,
-          programs: category.programs.filter(showProgram),
+          programs: filterPrograms(category.programs),
         };
       }),
     );
@@ -196,7 +204,6 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
       <Grid container>
         <Grid item xs={12}>
           <BackAndSaveButtons
-            handleTextfieldChange={handleTextfieldChange}
             navigateToLink={addAdminToLink(`/${whiteLabel}/${uuid}/results/benefits`, isAdminView)}
             BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
           />
@@ -220,7 +227,7 @@ const Results = ({ type, handleTextfieldChange }: ResultsProps) => {
             setValidations,
           }}
         >
-          <ResultsHeader type={type} handleTextfieldChange={handleTextfieldChange} />
+          <ResultsHeader type={type} />
           <ResultsTabs />
           <Grid container sx={{ p: 2 }}>
             <Grid item xs={12}>

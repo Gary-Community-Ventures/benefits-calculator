@@ -6,7 +6,7 @@ import { Config } from './Config';
 
 export interface WrapperContext {
   locale: Language;
-  selectLanguage: (event: Event) => void;
+  selectLanguage: (event: string) => void;
   formData: FormData;
   config: Config | undefined;
   configLoading: boolean;

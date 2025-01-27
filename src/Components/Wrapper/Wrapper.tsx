@@ -187,10 +187,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
     document.documentElement.removeAttribute('dir');
   }, [locale]);
 
-  const selectLanguage = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-    const newLocale = target.value;
-
+  const selectLanguage = (newLocale: string) => {
     if (languages.every((lang) => lang !== newLocale)) {
       setLocale('en-us');
       return;
