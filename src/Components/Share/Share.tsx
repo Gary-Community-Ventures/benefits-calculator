@@ -66,11 +66,6 @@ const Share = forwardRef(function Share() {
     };
   };
 
-  const handleEmailShare = () => {
-    trackOutboundLinks('Share With Email');
-    window.location.href = `${email}`;
-  };
-
   return (
     <div>
       <div className="feedback-buttons-container">
@@ -97,11 +92,6 @@ const Share = forwardRef(function Share() {
             <XIcon sx={iconSize} />
           </Icon>
         </TwitterShareButton>
-        <button onClick={handleEmailShare} className="email-hover">
-          <Icon name={labels.email}>
-            <EmailIcon sx={iconSize} />
-          </Icon>
-        </button>
         <WhatsappShareButton url={shareUrl} onClick={trackOutboundLinks('Share With WhatsApp')}>
           <Icon name="whatsApp">
             <WhatsAppIcon sx={iconSize} />
