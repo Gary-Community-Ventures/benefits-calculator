@@ -29,6 +29,25 @@ export type ApiIncome = {
   hours_worked: number | null;
 };
 
+export type ApiEnergyCalculatorFormData = {
+  is_home_owner: boolean;
+  is_renter: boolean;
+  electric_provider: string;
+  gas_provider: string;
+  electricity_is_disconnected: boolean;
+  has_past_due_energy_bills: boolean;
+  needs_water_heater: boolean;
+  needs_hvac: boolean;
+  needs_stove: boolean;
+  needs_dryer: boolean;
+};
+
+export type ApiEnergyCalculatorMember = {
+  surviving_spouse: boolean;
+  totally_disabled: boolean;
+  recieves_ssi: boolean;
+};
+
 export type ApiHouseholdMemberReadOnly = {
   screen: number;
   id: number;
@@ -54,6 +73,7 @@ export type ApiHouseholdMember = {
   disability_medicaid?: boolean | null;
   long_term_disability: boolean | null;
   has_income: boolean | null;
+  energy_calculator: ApiEnergyCalculatorMember | null;
   income_streams: ApiIncome[];
   insurance: ApiInsurance;
 };
@@ -121,6 +141,7 @@ export type ApiFormData = {
   user?: ApiUserWriteOnly;
   external_id: string | null;
   request_language_code: Language | null;
+  energy_calculator: ApiEnergyCalculatorFormData | null;
   has_benefits: 'true' | 'false' | 'preferNotToAnswer' | null;
   has_tanf: boolean | null;
   has_wic: boolean | null;
