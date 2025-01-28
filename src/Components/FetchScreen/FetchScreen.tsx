@@ -160,7 +160,7 @@ const FetchScreen = () => {
       if (member.energy_calculator !== null) {
         energyCalculator = {
           survivingSpouse: member.energy_calculator.surviving_spouse,
-          totallyDisabled: member.energy_calculator.totally_disabled,
+          disabled: member.energy_calculator.disabled,
           recievesSsi: member.energy_calculator.recieves_ssi,
         };
       }
