@@ -82,27 +82,27 @@ const Share = forwardRef(function Share() {
         </p>
       </div>
       <div className="row-group">
-        <FacebookShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Facebook')}>
+        <FacebookShareButton url={shareUrl} onClick={() => trackOutboundLinks('Share to Facebook')}>
           <Icon name="facebook">
             <FacebookIcon sx={iconSize} />
           </Icon>
         </FacebookShareButton>
-        <TwitterShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Twitter')}>
+        <TwitterShareButton url={shareUrl} onClick={() => trackOutboundLinks('Share to Twitter')}>
           <Icon name="twitter">
             <XIcon sx={iconSize} />
           </Icon>
         </TwitterShareButton>
-        <EmailShareButton url={shareUrl} onClick={trackOutboundLinks('Share With Email')}>
+        <EmailShareButton url={shareUrl} onClick={() => trackOutboundLinks('Share With Email')}>
           <Icon name={labels.email}>
             <EmailIcon sx={iconSize} />
           </Icon>
         </EmailShareButton>
-        <WhatsappShareButton url={shareUrl} onClick={trackOutboundLinks('Share With WhatsApp')}>
+        <WhatsappShareButton url={shareUrl} onClick={() => trackOutboundLinks('Share With WhatsApp')}>
           <Icon name="whatsApp">
             <WhatsAppIcon sx={iconSize} />
           </Icon>
         </WhatsappShareButton>
-        <LinkedinShareButton url={shareUrl} onClick={trackOutboundLinks('Share With LinkedIn')}>
+        <LinkedinShareButton url={shareUrl} onClick={() => trackOutboundLinks('Share With LinkedIn')}>
           <Icon name="linkedIn">
             <LinkedInIcon sx={iconSize} />
           </Icon>
