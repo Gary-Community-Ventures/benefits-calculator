@@ -4,7 +4,7 @@ import { getScreen } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData';
-import type { FormData } from '../../Types/FormData';
+import type { EnergyCalculatorMember, FormData } from '../../Types/FormData';
 
 const FetchScreen = () => {
   const { formData, setFormData, setScreenLoading, setWhiteLabel } = useContext(Context);
@@ -116,6 +116,21 @@ const FetchScreen = () => {
       },
     };
 
+    if (response.energy_calculator !== null) {
+      initialFormData.energyCalculator = {
+        isHomeOwner: response.energy_calculator.is_home_owner,
+        isRenter: response.energy_calculator.is_renter,
+        electricProvider: response.energy_calculator.electric_provider,
+        gasProvider: response.energy_calculator.gas_provider,
+        electricityIsDisconnected: response.energy_calculator.electricity_is_disconnected,
+        hasPastDueEnergyBills: response.energy_calculator.has_past_due_energy_bills,
+        needsWaterHeater: response.energy_calculator.needs_water_heater,
+        needsHvac: response.energy_calculator.needs_hvac,
+        needsStove: response.energy_calculator.needs_stove,
+        needsDryer: response.energy_calculator.needs_dryer,
+      };
+    }
+
     let defaultRelationship = 'headOfHousehold';
     const initialHHMHealthInsurance = {
       none: false,
@@ -138,6 +153,15 @@ const FetchScreen = () => {
           incomeFrequency: income.frequency ?? '',
           hoursPerWeek: String(income.hours_worked) ?? '',
         });
+      }
+
+      let energyCalculator: EnergyCalculatorMember | undefined = undefined;
+      if (member.energy_calculator !== null) {
+        energyCalculator = {
+          survivingSpouse: member.energy_calculator.surviving_spouse,
+          disabled: member.energy_calculator.disabled,
+          receivesSsi: member.energy_calculator.recieves_ssi,
+        };
       }
 
       initialFormData.householdData.push({

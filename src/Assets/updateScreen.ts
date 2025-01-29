@@ -1,4 +1,6 @@
 import {
+  ApiEnergyCalculatorFormData,
+  ApiEnergyCalculatorMember,
   ApiExpense,
   ApiFormData,
   ApiHouseholdMember,
@@ -6,7 +8,7 @@ import {
   ApiUser,
   ApiUserWriteOnly,
 } from '../Types/ApiFormData.js';
-import { FormData, HouseholdData } from '../Types/FormData';
+import { EnergyCalculatorFormData, EnergyCalculatorMember, FormData, HouseholdData } from '../Types/FormData';
 import { putScreen, postScreen, putUser } from '../apiCalls';
 import { Language } from './languageOptions';
 import { useContext } from 'react';
@@ -31,6 +33,7 @@ const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: 
     expenses: expenses,
     household_assets: formData.householdAssets || 0,
     request_language_code: languageCode,
+    energy_calculator: getEnergyCalculatorFormDataBody(formData.energyCalculator),
     has_benefits: formData.hasBenefits,
     has_acp: formData.benefits.acp,
     has_andcs: formData.benefits.andcs,
@@ -86,6 +89,41 @@ const getHouseholdMembersBodies = (formData: FormData): ApiHouseholdMember[] => 
   return householdMembers;
 };
 
+const getEnergyCalculatorMemberBody = (
+  energyCalculatorMember: EnergyCalculatorMember | undefined,
+): ApiEnergyCalculatorMember | null => {
+  if (energyCalculatorMember === undefined) {
+    return null;
+  }
+
+  return {
+    surviving_spouse: energyCalculatorMember.survivingSpouse,
+    disabled: energyCalculatorMember.disabled,
+    receives_ssi: energyCalculatorMember.receivesSsi,
+  };
+};
+
+const getEnergyCalculatorFormDataBody = (
+  energyCalculatorFormData: EnergyCalculatorFormData | undefined,
+): ApiEnergyCalculatorFormData | null => {
+  if (energyCalculatorFormData === undefined) {
+    return null;
+  }
+
+  return {
+    is_home_owner: energyCalculatorFormData.isHomeOwner,
+    is_renter: energyCalculatorFormData.isRenter,
+    electric_provider: energyCalculatorFormData.electricProvider,
+    gas_provider: energyCalculatorFormData.gasProvider,
+    electricity_is_disconnected: energyCalculatorFormData.electricityIsDisconnected,
+    has_past_due_energy_bills: energyCalculatorFormData.hasPastDueEnergyBills,
+    needs_water_heater: energyCalculatorFormData.needsWaterHeater,
+    needs_hvac: energyCalculatorFormData.needsHvac,
+    needs_stove: energyCalculatorFormData.needsStove,
+    needs_dryer: energyCalculatorFormData.needsDryer,
+  };
+};
+
 const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHouseholdMember => {
   const incomes = getIncomeStreamsBodies(householdMemberData);
 
@@ -102,6 +140,7 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
     long_term_disability: householdMemberData.conditions.longTermDisability,
     has_income: householdMemberData.hasIncome,
     income_streams: incomes,
+    energy_calculator: getEnergyCalculatorMemberBody(householdMemberData.energyCalculator),
     insurance: householdMemberData.healthInsurance,
   };
 };
