@@ -6,6 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { z } from 'zod';
 import useScreenApi from '../../../Assets/updateScreen';
+import { EnergyCalculatorFormData, FormData } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
@@ -15,9 +16,11 @@ import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { createMenuItems } from '../../Steps/SelectHelperFunctions/SelectHelperFunctions';
 import { Context } from '../../Wrapper/Wrapper';
 import ELECTRICITY_PROVIDERS from '../electricityProviders';
+import { useEnergyFormData } from '../hooks';
 
 export default function ElectricityProvider() {
   const { formData, setFormData } = useContext(Context);
+  const energyDataAvailable = useEnergyFormData(formData);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorElectricityProvider');
   const nextStep = useGoToNextStep('energyCalculatorElectricityProvider');
@@ -46,7 +49,7 @@ export default function ElectricityProvider() {
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      electricityProvider: '',
+      electricityProvider: formData.energyCalculator?.electricProvider ?? '',
     },
   });
 
@@ -54,12 +57,19 @@ export default function ElectricityProvider() {
     if (!uuid) {
       throw new Error('no uuid');
     }
+    if (!energyDataAvailable) {
+      throw new Error('energy data is not set up');
+    }
 
-    console.log(electricityProvider);
-    // const updatedFormData = { ...formData };
-    // setFormData(updatedFormData);
-    // updateScreen(updatedFormData);
-    // nextStep();
+    const updatedEnergyData: EnergyCalculatorFormData = {
+      ...formData.energyCalculator,
+      electricProvider: electricityProvider,
+    };
+
+    const updatedFormData: FormData = { ...formData, energyCalculator: updatedEnergyData };
+    setFormData(updatedFormData);
+    updateScreen(updatedFormData);
+    nextStep();
   };
 
   const providerOptions = useMemo(() => {
@@ -116,7 +126,10 @@ export default function ElectricityProvider() {
                 >
                   {createMenuItems(
                     providerOptions,
-                    <FormattedMessage id="energyCalculator.electricityProvider.placeholder" defaultMessage="Select a provider" />,
+                    <FormattedMessage
+                      id="energyCalculator.electricityProvider.placeholder"
+                      defaultMessage="Select a provider"
+                    />,
                   )}
                 </Select>
                 {errors.electricityProvider !== undefined && (
