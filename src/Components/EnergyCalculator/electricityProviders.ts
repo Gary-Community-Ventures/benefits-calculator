@@ -1,4 +1,5 @@
-const ELECTRICITY_PROVIDERS = {
+type ElectricityProviders = { [key: string]: { [key: string]: { name: string } } };
+const ELECTRICITY_PROVIDERS: ElectricityProviders = {
   '80002': {
     'co-xcel-energy': {
       name: 'Xcel Energy',
