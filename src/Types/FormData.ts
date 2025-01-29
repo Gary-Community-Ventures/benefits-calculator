@@ -10,6 +10,25 @@ export type IncomeStream = {
   hoursPerWeek: string;
 };
 
+export type EnergyCalculatorFormData = {
+  isHomeOwner: boolean;
+  isRenter: boolean;
+  electricProvider: string;
+  gasProvider: string;
+  electricityIsDisconnected: boolean;
+  hasPastDueEnergyBills: boolean;
+  needsWaterHeater: boolean;
+  needsHvac: boolean;
+  needsStove: boolean;
+  needsDryer: boolean;
+};
+
+export type EnergyCalculatorMember = {
+  survivingSpouse: boolean;
+  disabled: boolean;
+  recievesSsi: boolean;
+};
+
 export type HouseholdData = {
   frontendId: string;
   age?: number; // deprecated: used for historical screens only
@@ -19,6 +38,7 @@ export type HouseholdData = {
   conditions: Conditions;
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
+  energyCalculator?: EnergyCalculatorMember;
   healthInsurance: HealthInsurance;
 };
 
@@ -73,6 +93,7 @@ export type FormData = {
   immutableReferrer?: string;
   signUpInfo: SignUpInfo;
   urlSearchParams: string;
+  energyCalculator?: EnergyCalculatorFormData;
   acuteHHConditions: AcuteHHConditions;
 };
 
