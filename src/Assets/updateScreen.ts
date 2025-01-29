@@ -89,7 +89,7 @@ const getHouseholdMembersBodies = (formData: FormData): ApiHouseholdMember[] => 
   return householdMembers;
 };
 
-const getEnergyCalculaorMemberBody = (
+const getEnergyCalculatorMemberBody = (
   energyCalculatorMember: EnergyCalculatorMember | undefined,
 ): ApiEnergyCalculatorMember | null => {
   if (energyCalculatorMember === undefined) {
@@ -99,7 +99,7 @@ const getEnergyCalculaorMemberBody = (
   return {
     surviving_spouse: energyCalculatorMember.survivingSpouse,
     disabled: energyCalculatorMember.disabled,
-    recieves_ssi: energyCalculatorMember.recievesSsi,
+    receives_ssi: energyCalculatorMember.receivesSsi,
   };
 };
 
@@ -140,7 +140,7 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
     long_term_disability: householdMemberData.conditions.longTermDisability,
     has_income: householdMemberData.hasIncome,
     income_streams: incomes,
-    energy_calculator: getEnergyCalculaorMemberBody(householdMemberData.energyCalculator),
+    energy_calculator: getEnergyCalculatorMemberBody(householdMemberData.energyCalculator),
     insurance: householdMemberData.healthInsurance,
   };
 };

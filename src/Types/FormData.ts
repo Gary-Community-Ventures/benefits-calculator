@@ -26,7 +26,7 @@ export type EnergyCalculatorFormData = {
 export type EnergyCalculatorMember = {
   survivingSpouse: boolean;
   disabled: boolean;
-  recievesSsi: boolean;
+  receivesSsi: boolean;
 };
 
 export type HouseholdData = {
