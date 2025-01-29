@@ -12,8 +12,8 @@ export function useEnergyFormData(
   useEffect(() => {
     if (formData.energyCalculator === undefined) {
       const initialEnergyCalculator: EnergyCalculatorFormData = {
-        isRenter: false,
-        isHomeOwner: false,
+        isRenter: formData.path === 'renter',
+        isHomeOwner: formData.path !== 'renter',
         electricProvider: '',
         gasProvider: '',
         electricityIsDisconnected: false,
