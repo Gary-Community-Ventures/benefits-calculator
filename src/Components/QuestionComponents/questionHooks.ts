@@ -47,6 +47,10 @@ export function useQueryString() {
     query.append('referrer', formData.immutableReferrer);
   }
 
+  if (formData.path !== undefined) {
+    query.append('path', formData.path);
+  }
+
   let queryString = query.toString();
   if (queryString !== '') {
     queryString = '?' + queryString;

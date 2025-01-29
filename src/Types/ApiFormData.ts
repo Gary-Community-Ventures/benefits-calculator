@@ -132,6 +132,7 @@ export type ApiFormData = {
   county: string | null;
   referral_source: string | null;
   referrer_code: string | null;
+  path: string | null;
   household_size: number | null;
   household_assets: number | null;
   housing_situation?: string | null;

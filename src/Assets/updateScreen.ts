@@ -68,6 +68,7 @@ const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: 
     has_fatc: formData.benefits.fatc,
     referral_source: formData.referralSource ?? null,
     referrer_code: formData.immutableReferrer ?? null,
+    path: formData.path ?? null,
     needs_food: formData.acuteHHConditions.food ?? null,
     needs_baby_supplies: formData.acuteHHConditions.babySupplies ?? null,
     needs_housing_help: formData.acuteHHConditions.housing ?? null,
