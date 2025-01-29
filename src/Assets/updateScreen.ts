@@ -33,7 +33,7 @@ const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: 
     expenses: expenses,
     household_assets: formData.householdAssets || 0,
     request_language_code: languageCode,
-    energy_calculator: getEnergyCalculaorFormDataBody(formData.energyCalculator),
+    energy_calculator: getEnergyCalculatorFormDataBody(formData.energyCalculator),
     has_benefits: formData.hasBenefits,
     has_acp: formData.benefits.acp,
     has_andcs: formData.benefits.andcs,
@@ -103,7 +103,7 @@ const getEnergyCalculatorMemberBody = (
   };
 };
 
-const getEnergyCalculaorFormDataBody = (
+const getEnergyCalculatorFormDataBody = (
   energyCalculatorFormData: EnergyCalculatorFormData | undefined,
 ): ApiEnergyCalculatorFormData | null => {
   if (energyCalculatorFormData === undefined) {
