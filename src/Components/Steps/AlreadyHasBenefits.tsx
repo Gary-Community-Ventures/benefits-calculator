@@ -132,7 +132,7 @@ function AlreadyHasBenefits() {
     },
   });
 
-  const hasBenefits = 'true' !== watch('hasBenefits');
+  const hasBenefits = 'true' === watch('hasBenefits');
 
   useEffect(() => {
     const newAlreadyHasBenefits = { ...watch('alreadyHasBenefits') };
