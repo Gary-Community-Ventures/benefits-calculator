@@ -221,7 +221,7 @@ const ECHouseholdMemberForm = () => {
         : {
             survivingSpouse: false,
             disabled: false,
-            receivesSsi: false,
+            receivesSsi: 'false',
           },
       relationshipToHH: determineDefaultRelationshipToHH(),
       hasIncome: determineDefaultHasIncome(),
