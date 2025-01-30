@@ -893,7 +893,8 @@ const HouseholdMemberForm = () => {
           />
         )}
       </QuestionHeader>
-      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} />
+
+      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} questionName="householdData" />
       <form
         onSubmit={handleSubmit(formSubmitHandler, () => {
           window.scroll({ top: 0, left: 0, behavior: 'smooth' });
