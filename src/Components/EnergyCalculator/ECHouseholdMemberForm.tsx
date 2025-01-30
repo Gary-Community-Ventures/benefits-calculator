@@ -155,9 +155,9 @@ const ECHouseholdMemberForm = () => {
           return year <= CURRENT_YEAR && age < MAX_AGE;
         }),
       conditions: z.object({
-        blindOrVisuallyImpaired: z.boolean(),
+        survivingSpouse: z.boolean(),
         disabled: z.boolean(),
-        longTermDisability: z.boolean(),
+        receivesSsi: z.enum(['true', 'false']),
       }),
       relationshipToHH: z
         .string()
