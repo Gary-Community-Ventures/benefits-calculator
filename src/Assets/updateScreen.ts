@@ -99,7 +99,7 @@ const getEnergyCalculaorMemberBody = (
   return {
     surviving_spouse: energyCalculatorMember.survivingSpouse,
     disabled: energyCalculatorMember.disabled,
-    recieves_ssi: energyCalculatorMember.recievesSsi,
+    receives_ssi: energyCalculatorMember.receivesSsi,
   };
 };
 
