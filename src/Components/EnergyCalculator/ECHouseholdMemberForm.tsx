@@ -40,7 +40,6 @@ import CloseButton from '../CloseButton/CloseButton';
 import {
   renderBirthMonthHelperText,
   renderBirthYearHelperText,
-  renderHealthInsuranceHelperText,
   renderRelationshipToHHHelperText,
   renderIncomeFrequencyHelperText,
   renderHoursWorkedHelperText,
@@ -61,40 +60,10 @@ const ECHouseholdMemberForm = () => {
   const pageNumber = Number(page);
   const currentMemberIndex = pageNumber - 1;
   const householdMemberFormData = formData.householdData[currentMemberIndex] as HouseholdData | undefined;
-  const conditionOptions = {
-    you: {
-      survivingSpouse: {
-        icon: { _icon: 'SurvivingSpouse', _classname: 'option-card-icon' },
-        text: {
-          _label: 'eCConditionOptions.survivingSpouse',
-          _default_message: 'Surviving Spouse',
-        },
-      },
-      totallyDisabled: {
-        icon: { _icon: 'TotallyDisabled', _classname: 'option-card-icon' },
-        text: {
-          _label: 'eCConditionOptions.totallyDisabled',
-          _default_message: 'Have a disability',
-        },
-      },
-    },
-    them: {
-      survivingSpouse: {
-        icon: { _icon: 'SurvivingSpouse', _classname: 'option-card-icon' },
-        text: {
-          _label: 'eCConditionOptions.survivingSpouse',
-          _default_message: 'Surviving Spouse',
-        },
-      },
-      totallyDisabled: {
-        icon: { _icon: 'TotallyDisabled', _classname: 'option-card-icon' },
-        text: {
-          _label: 'eCConditionOptions.totallyDisabled',
-          _default_message: 'Have a disability',
-        },
-      },
-    },
-  };
+  const conditionOptions =
+    useConfig<Record<'you' | 'them', Record<string, { text: FormattedMessageType; icon: ReactNode }>>>(
+      'condition_options',
+    );
   const relationshipOptions = useConfig<Record<string, FormattedMessageType>>('relationship_options');
   const incomeOptions = useConfig<Record<string, FormattedMessageType>>('income_options');
   const incomeStreamsMenuItems = createMenuItems(
