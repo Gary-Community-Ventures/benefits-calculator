@@ -46,7 +46,7 @@ const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: 
     has_erc: null,
     has_lifeline: formData.benefits.lifeline,
     has_leap: formData.benefits.leap,
-    has_ncci: formData.benefits.NCCrisisIntervention,
+    has_nccip: formData.benefits.nccip,
     has_mydenver: formData.benefits.mydenver,
     has_nslp: formData.benefits.nslp,
     has_oap: formData.benefits.oap,
