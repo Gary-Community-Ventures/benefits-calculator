@@ -256,9 +256,17 @@ const ECHouseholdMemberForm = () => {
       throw new Error('uuid is not defined');
     }
 
+    const updatedMemberData = {
+      ...memberData,
+      conditions: {
+        ...memberData.conditions,
+        receivesSsi: memberData.conditions.receivesSsi === 'true',
+      },
+    };
+
     const updatedHouseholdData = [...formData.householdData];
     updatedHouseholdData[currentMemberIndex] = {
-      ...memberData,
+      ...updatedMemberData,
       birthYear: Number(memberData.birthYear),
       birthMonth: Number(memberData.birthMonth),
       hasIncome: memberData.hasIncome === 'true',
