@@ -22,6 +22,7 @@ import languageRouteWrapper from './Components/RouterUtil/LanguageRouter';
 import SelectStatePage from './Components/Steps/SelectStatePage';
 import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
+import EcHouseholdMemberForm from './Components/EnergyCalculator/ECHouseholdMemberForm';
 import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm';
 import './App.css';
 
@@ -42,6 +43,7 @@ const App = () => {
   const [theme, setTheme] = useState(createTheme(styleOverride));
   const themeName = getReferrer('theme', 'default');
   const householdMemberStepNumber = useStepNumber('householdData', false);
+  const ecHouseholdMemberStepNumber = useStepNumber('ecHouseholdData', false);
 
   useEffect(() => {
     changeTheme(themeName as 'default' | 'twoOneOne');
@@ -160,6 +162,10 @@ const App = () => {
                   <Route
                     path={`step-${householdMemberStepNumber}/:page`}
                     element={<HouseholdMemberForm key={window.location.href} />}
+                  />
+                  <Route
+                    path={`step-${ecHouseholdMemberStepNumber}/:page`}
+                    element={<EcHouseholdMemberForm key={window.location.href} />}
                   />
                   <Route path="step-:id" element={<QuestionComponentContainer key={window.location.href} />} />
                   <Route path="confirm-information" element={<Confirmation />} />
