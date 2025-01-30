@@ -76,7 +76,7 @@ const ECHouseholdMemberForm = () => {
     <FormattedMessage id="personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
   );
 
-  const currentStepId = useStepNumber('householdData');
+  const currentStepId = useStepNumber('ecHouseholdData');
   const backNavigationFunction = () => {
     if (uuid === undefined) {
       throw new Error('uuid is undefined');
