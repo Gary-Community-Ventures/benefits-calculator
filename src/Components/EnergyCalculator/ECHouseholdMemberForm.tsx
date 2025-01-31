@@ -216,13 +216,11 @@ const ECHouseholdMemberForm = () => {
     defaultValues: {
       birthMonth: householdMemberFormData?.birthMonth ? String(householdMemberFormData.birthMonth) : '',
       birthYear: householdMemberFormData?.birthYear ? String(householdMemberFormData.birthYear) : '',
-      conditions: householdMemberFormData?.energyCalculator
-        ? householdMemberFormData.energyCalculator
-        : {
-            survivingSpouse: false,
-            disabled: false,
-            receivesSsi: 'false',
-          },
+      conditions: {
+        survivingSpouse: householdMemberFormData?.energyCalculator?.survivingSpouse ?? false,
+        disabled: householdMemberFormData?.conditions.disabled ?? false,
+        receivesSsi: householdMemberFormData?.energyCalculator?.receivesSsi ? 'true' : 'false',
+      },
       relationshipToHH: determineDefaultRelationshipToHH(),
       hasIncome: determineDefaultHasIncome(),
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
