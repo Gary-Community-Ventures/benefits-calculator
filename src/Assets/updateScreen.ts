@@ -133,15 +133,15 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
     birth_year: householdMemberData.birthYear ?? null,
     birth_month: householdMemberData.birthMonth ?? null,
     relationship: householdMemberData.relationshipToHH,
-    student: householdMemberData.conditions.student,
-    pregnant: householdMemberData.conditions.pregnant,
-    visually_impaired: householdMemberData.conditions.blindOrVisuallyImpaired,
-    disabled: householdMemberData.conditions.disabled,
-    long_term_disability: householdMemberData.conditions.longTermDisability,
+    student: householdMemberData.conditions.student ?? null,
+    pregnant: householdMemberData.conditions.pregnant ?? null,
+    visually_impaired: householdMemberData.conditions.blindOrVisuallyImpaired ?? null,
+    disabled: householdMemberData.conditions.disabled ?? null,
+    long_term_disability: householdMemberData.conditions.longTermDisability ?? null,
     has_income: householdMemberData.hasIncome,
     income_streams: incomes,
     energy_calculator: getEnergyCalculaorMemberBody(householdMemberData.energyCalculator),
-    insurance: householdMemberData.healthInsurance,
+    insurance: householdMemberData.healthInsurance ?? null,
   };
 };
 

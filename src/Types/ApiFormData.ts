@@ -75,7 +75,7 @@ export type ApiHouseholdMember = {
   has_income: boolean | null;
   energy_calculator: ApiEnergyCalculatorMember | null;
   income_streams: ApiIncome[];
-  insurance: ApiInsurance;
+  insurance: ApiInsurance | null;
 };
 
 export type ApiExpenseReadOnly = {
