@@ -1,19 +1,18 @@
 import { CardContent } from '@mui/material';
 import { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Context } from '../../Wrapper/Wrapper.tsx';
-import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons.tsx';
+import { Context } from '../../Wrapper/Wrapper';
+import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons';
 import { useParams } from 'react-router-dom';
-import { useResultsContext } from '../Results.tsx';
-import { calculateTotalValue } from '../FormattedValue.tsx';
+import { useResultsContext } from '../Results';
+import { calculateTotalValue } from '../FormattedValue';
 import '../../Results/Results.css';
-import { TAX_CREDIT_CATEGORY } from '../../../Assets/resultsConstants.ts';
+import { TAX_CREDIT_CATEGORY } from '../../../Assets/resultsConstants';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import Login from '../../Login/Login';
 
 type ResultsHeaderProps = {
   type: 'program' | 'need';
-  handleTextfieldChange: (event: Event) => void;
 };
 
 const ProgramsHeader = () => {
@@ -84,7 +83,7 @@ const NeedsHeader = () => {
   );
 };
 
-const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
+const ResultsHeader = ({ type }: ResultsHeaderProps) => {
   const { whiteLabel, uuid } = useParams();
   const { staffToken, setStaffToken } = useContext(Context);
   const { isAdminView } = useResultsContext();
@@ -92,7 +91,6 @@ const ResultsHeader = ({ type, handleTextfieldChange }: ResultsHeaderProps) => {
   return (
     <>
       <BackAndSaveButtons
-        handleTextfieldChange={handleTextfieldChange}
         navigateToLink={`/${whiteLabel}/${uuid}/confirm-information`}
         BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO SCREENER" />}
       />

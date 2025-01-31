@@ -3,9 +3,11 @@ import ErrorIcon from '../../../Assets/icons/error-icon.svg';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import './ResultsError.css';
+import { useConfig } from '../../Config/configHook';
 
 const ResultsError = () => {
   const { uuid, whiteLabel } = useParams();
+  const { email } = useConfig('feedback_links');
   const navigate = useNavigate();
 
   return (
@@ -18,8 +20,9 @@ const ResultsError = () => {
         <p className="error-message">
           <FormattedMessage
             id="results-error.message"
-            defaultMessage="We're sorry. We are having some trouble completing your request. Please make sure you have completed all of the questions on the screen and try again. If you are still unable to load your benefits results, please contact myfriendben@garycommunity.org."
+            defaultMessage="We're sorry. We are having some trouble completing your request. Please make sure you have completed all of the questions on the screen and try again. If you are still unable to load your benefits results, please contact "
           />
+          {email}
         </p>
         <Button
           className="error-button"

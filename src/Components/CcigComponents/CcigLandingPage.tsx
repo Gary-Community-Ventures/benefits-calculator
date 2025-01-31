@@ -14,7 +14,7 @@ export default function CcigLandingPage() {
   const queryString = useQueryString();
 
   useEffect(() => {
-    setFormData({ ...formData, immutableReferrer: 'ccig' });
+    setFormData({ ...formData, immutableReferrer: 'ccig', referralSource: 'ccig' });
   }, []);
 
   const handleGetStarted = () => {

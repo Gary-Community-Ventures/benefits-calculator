@@ -40,7 +40,6 @@ import CloseButton from '../../CloseButton/CloseButton';
 import {
   renderBirthMonthHelperText,
   renderBirthYearHelperText,
-  renderHealthInsuranceHelperText,
   renderRelationshipToHHHelperText,
   renderIncomeFrequencyHelperText,
   renderHoursWorkedHelperText,
@@ -140,6 +139,17 @@ const HouseholdMemberForm = () => {
   const incomeStreamsSchema = z.array(incomeSourcesSchema);
   const hasIncomeSchema = z.string().regex(/^true|false$/);
 
+  let healthInsuranceNoInsuranceErrorMessage = intl.formatMessage({
+    id: 'validation-helperText.hhMemberInsuranceNone-you',
+    defaultMessage: 'Please do not select any other options if you do not have health insurance',
+  });
+  if (pageNumber !== 1) {
+    healthInsuranceNoInsuranceErrorMessage = intl.formatMessage({
+      id: 'validation-helperText.hhMemberInsuranceNone-they',
+      defaultMessage: 'Please do not select any other options if they do not have health insurance',
+    });
+  }
+
   const formSchema = z
     .object({
       /*
@@ -172,8 +182,11 @@ const HouseholdMemberForm = () => {
           va: z.boolean(),
         })
         .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
-          message: 'Please select at least one health insurance option.',
-          path: ['healthInsurance'],
+          message: intl.formatMessage({
+            id: 'validation-helperText.hhMemberInsurance',
+            defaultMessage: 'Please select at least one health insurance option',
+          }),
+          path: [],
         })
         .refine(
           (insuranceOptions) => {
@@ -185,8 +198,8 @@ const HouseholdMemberForm = () => {
             return true;
           },
           {
-            message: 'Please do not select any other options if you do not have health insurance',
-            path: ['healthInsurance'],
+            message: healthInsuranceNoInsuranceErrorMessage,
+            path: [],
           },
         ), //TODO: Render this error message to the user
       conditions: z.object({
@@ -314,6 +327,7 @@ const HouseholdMemberForm = () => {
       birthYear: Number(memberData.birthYear),
       birthMonth: Number(memberData.birthMonth),
       hasIncome: memberData.hasIncome === 'true',
+      frontendId: crypto.randomUUID(),
     };
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
     setFormData(updatedFormData);
@@ -458,8 +472,10 @@ const HouseholdMemberForm = () => {
             options={pageNumber === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
             triggerValidation={trigger}
           />
-          {errors.healthInsurance !== undefined && (
-            <FormHelperText sx={{ marginLeft: 0 }}>{renderHealthInsuranceHelperText()}</FormHelperText>
+          {errors.healthInsurance?.message !== undefined && (
+            <FormHelperText sx={{ marginLeft: 0 }}>
+              {<ErrorMessageWrapper fontSize="1rem">{errors.healthInsurance.message}</ErrorMessageWrapper>}
+            </FormHelperText>
           )}
         </Stack>
       </div>

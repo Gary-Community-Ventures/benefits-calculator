@@ -37,6 +37,7 @@ export type ApiHouseholdMemberReadOnly = {
 };
 
 export type ApiHouseholdMember = {
+  frontend_id: string;
   age: number | null; // deprecated: used for historical screens only
   birth_year: number | null;
   birth_month: number | null;
@@ -147,6 +148,7 @@ export type ApiFormData = {
   has_erc: boolean | null;
   has_leap: boolean | null;
   has_nc_lieap: boolean | null;
+  has_nccip: boolean | null;
   has_oap: boolean | null;
   has_coctc: boolean | null;
   has_upk: boolean | null;

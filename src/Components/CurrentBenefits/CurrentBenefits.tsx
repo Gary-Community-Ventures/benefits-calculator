@@ -44,12 +44,12 @@ export const iconCategoryMap: { [key: string]: React.ComponentType } = {
   'Civil legal needs': LegalServices,
 };
 
-type Program = {
+export type Program = {
   name: Translation;
   description: Translation;
 };
 
-type Category = {
+export type Category = {
   name: Translation;
   icon: string;
   programs: Program[];
@@ -72,6 +72,10 @@ const CurrentBenefits = () => {
   const [urgentNeedsLoaded, setUrgentNeedsLoaded] = useState(false);
   const { whiteLabel } = useParams();
   const intl = useIntl();
+
+  if (whiteLabel === undefined) {
+    throw new Error('white label is not defined');
+  }
 
   useEffect(() => {
     getAllLongTermPrograms(whiteLabel).then((programs: Category[]) => {

@@ -47,6 +47,7 @@ const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: 
     has_lifeline: formData.benefits.lifeline,
     has_leap: formData.benefits.leap,
     has_nc_lieap: formData.benefits.nc_lieap,
+    has_nccip: formData.benefits.nccip,
     has_mydenver: formData.benefits.mydenver,
     has_nslp: formData.benefits.nslp,
     has_oap: formData.benefits.oap,
@@ -91,6 +92,7 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
   const incomes = getIncomeStreamsBodies(householdMemberData);
 
   return {
+    frontend_id: householdMemberData.frontendId,
     age: householdMemberData.age ?? null,
     birth_year: householdMemberData.birthYear ?? null,
     birth_month: householdMemberData.birthMonth ?? null,
@@ -151,9 +153,12 @@ export default function useScreenApi() {
   const { uuid } = useParams();
 
   return {
-    updateScreen: async (formData: FormData, overrideUuid?: string) => {
-      // TODO: Remove overrideUuid when we remove all the handle submit functions in App.tsx
-      await putScreen(getScreensBody(formData, locale, whiteLabel), overrideUuid ?? uuid);
+    updateScreen: async (formData: FormData) => {
+      if (uuid === undefined) {
+        return;
+      }
+
+      await putScreen(getScreensBody(formData, locale, whiteLabel), uuid);
     },
     createScreen: async (formData: FormData) => {
       return await postScreen(getScreensBody(formData, locale, whiteLabel));
@@ -161,6 +166,10 @@ export default function useScreenApi() {
     updateUser: async (formData: FormData) => {
       const userBody = getUserBody(formData, locale);
       if (!formData.signUpInfo.hasUser && userBody.email_or_cell === '+1') {
+        return;
+      }
+
+      if (uuid === undefined) {
         return;
       }
 

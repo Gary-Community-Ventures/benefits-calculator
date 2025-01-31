@@ -1,6 +1,6 @@
 import { useEffect, useContext, useMemo } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getScreen } from '../../apiCalls.js';
+import { getScreen } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData';
@@ -74,6 +74,7 @@ const FetchScreen = () => {
         lifeline: response.has_lifeline ?? false,
         leap: response.has_leap ?? false,
         nc_lieap: response.has_nc_lieap ?? false,
+        nccip: response.has_nccip ?? false,
         mydenver: response.has_mydenver ?? false,
         nslp: response.has_nslp ?? false,
         oap: response.has_oap ?? false,
@@ -142,6 +143,7 @@ const FetchScreen = () => {
       }
 
       initialFormData.householdData.push({
+        frontendId: member.frontend_id,
         age: member.age ?? undefined,
         birthYear: member.birth_year ?? undefined,
         birthMonth: member.birth_month ?? undefined,

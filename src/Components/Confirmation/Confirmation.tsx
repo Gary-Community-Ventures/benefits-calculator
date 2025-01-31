@@ -19,7 +19,7 @@ const Confirmation = () => {
   }, []);
 
   useEffect(() => {
-    const continueOnEnter = (event) => {
+    const continueOnEnter = (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
         navigate(`/${whiteLabel}/${uuid}/results/benefits`);
       }
