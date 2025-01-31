@@ -92,11 +92,6 @@ const Share = forwardRef(function Share() {
             <XIcon sx={iconSize} />
           </Icon>
         </TwitterShareButton>
-        <EmailShareButton url={shareUrl} onClick={trackOutboundLinks('Share With Email')}>
-          <Icon name={labels.email}>
-            <EmailIcon sx={iconSize} />
-          </Icon>
-        </EmailShareButton>
         <WhatsappShareButton url={shareUrl} onClick={trackOutboundLinks('Share With WhatsApp')}>
           <Icon name="whatsApp">
             <WhatsAppIcon sx={iconSize} />
