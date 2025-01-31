@@ -254,22 +254,24 @@ const ECHouseholdMemberForm = () => {
       throw new Error('uuid is not defined');
     }
 
-    const updatedMemberData = {
+    const updatedMemberData: HouseholdData = {
       ...memberData,
       conditions: {
         ...memberData.conditions,
+        disabled: memberData.conditions.disabled,
+      },
+      birthYear: Number(memberData.birthYear),
+      birthMonth: Number(memberData.birthMonth),
+      hasIncome: memberData.hasIncome === 'true',
+      frontendId: crypto.randomUUID(),
+      energyCalculator: {
+        survivingSpouse: memberData.conditions.survivingSpouse,
         receivesSsi: memberData.conditions.receivesSsi === 'true',
       },
     };
 
     const updatedHouseholdData = [...formData.householdData];
-    updatedHouseholdData[currentMemberIndex] = {
-      ...updatedMemberData,
-      birthYear: Number(memberData.birthYear),
-      birthMonth: Number(memberData.birthMonth),
-      hasIncome: memberData.hasIncome === 'true',
-      frontendId: crypto.randomUUID(),
-    };
+    updatedHouseholdData[currentMemberIndex] = updatedMemberData;
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
     setFormData(updatedFormData);
     updateScreen(updatedFormData);
