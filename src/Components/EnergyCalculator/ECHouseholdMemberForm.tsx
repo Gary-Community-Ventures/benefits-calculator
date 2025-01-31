@@ -4,7 +4,7 @@ import HHMSummaryCards from '../Steps/HouseholdMembers/HHMSummaryCards';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper';
 import { ReactNode, useContext, useEffect, useMemo } from 'react';
-import { Conditions, HealthInsurance, HouseholdData } from '../../Types/FormData';
+import { Conditions, HouseholdData } from '../../Types/FormData';
 import {
   Autocomplete,
   Box,
@@ -795,6 +795,48 @@ const ECHouseholdMemberForm = () => {
     );
   };
 
+  const createReceivesSsiQuestion = () => {
+    const translatedAriaLabel = intl.formatMessage({
+      id: 'ecHHMF.createReceivesSsiQuestion-ariaLabel',
+      defaultMessage: 'has ssi',
+    });
+    const formattedMsgId = pageNumber === 1 ? 'ecHHMF.you-receiveSsi' : 'ecHHMF.they-receiveSsi';
+    const formattedMsgDefaultMsg =
+      pageNumber === 1
+        ? 'Based on this disability, did you receive full benefits from Social Security, SSI, the Department of Human Services, or a public or private plan?'
+        : 'Based on this disability, do they receive full benefits from Social Security, SSI, the Department of Human Services, or a public or private plan?';
+    return (
+      // <Box className="section-container" sx={{ paddingTop: '3rem' }}>
+      //   <div className="section">
+      <>
+        <QuestionQuestion>
+          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+        </QuestionQuestion>
+        <Controller
+          name="conditions.receivesSsi"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <RadioGroup {...field} aria-label={translatedAriaLabel} sx={{ marginBottom: '1rem' }}>
+              <FormControlLabel
+                value={'true'}
+                control={<Radio />}
+                label={<FormattedMessage id="radiofield.label-yes" defaultMessage="Yes" />}
+              />
+              <FormControlLabel
+                value={'false'}
+                control={<Radio />}
+                label={<FormattedMessage id="radiofield.label-no" defaultMessage="No" />}
+              />
+            </RadioGroup>
+          )}
+        />
+      </>
+      //   </div>
+      // </Box>
+    );
+  };
+
   return (
     <main className="benefits-form">
       <QuestionHeader>
@@ -807,18 +849,17 @@ const ECHouseholdMemberForm = () => {
           />
         )}
       </QuestionHeader>
-
-      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} />
+      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} questionName="ecHouseholdData" />
       <form
         onSubmit={handleSubmit(formSubmitHandler, () => {
           window.scroll({ top: 0, left: 0, behavior: 'smooth' });
         })}
       >
         {createAgeQuestion()}
-        {/* {pageNumber !== 1 && createHOfHRelationQuestion()} */}
-
+        {pageNumber !== 1 && createHOfHRelationQuestion()}
         {displayConditionsQuestion()}
-        {/* <div>
+        {(getValues('conditions.disabled') && createReceivesSsiQuestion()) || null}
+        <div>
           <Stack sx={{ margin: '3rem 0' }}>
             {createIncomeRadioQuestion()}
             {fields.map((field, index) => {
@@ -866,7 +907,7 @@ const ECHouseholdMemberForm = () => {
               </div>
             )}
           </Stack>
-        </div> */}
+        </div>
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
     </main>
