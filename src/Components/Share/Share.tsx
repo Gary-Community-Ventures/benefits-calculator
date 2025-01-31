@@ -69,7 +69,7 @@ const Share = forwardRef(function Share() {
   return (
     <div>
       <div className="feedback-buttons-container">
-        <a className="feedback-button-and-text" href={email}>
+        <a className="feedback-button-and-text" href={`mailto:${email}`}>
           <FormattedMessage id="contactUsButton" defaultMessage="CONTACT US" />
         </a>
         <a className="feedback-button-and-text" href={surveyLink} target="_blank">
