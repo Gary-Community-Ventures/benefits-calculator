@@ -24,7 +24,7 @@
 }
 
 .confirmation-icon {
-  min-width: 4.75rem;
+  min-width: 6rem;
   margin: 2rem;
 }
 
@@ -108,13 +108,14 @@ svg.edit-button polygon {
   width: 4rem;
 }
 
+.confirmation-block-content {
+  display: block;
+  align-content: center;
+}
+
 @media (max-width: 630px) {
   .confirmation-container {
     margin: 0;
-  }
-
-  .confirmation-icon {
-    width: 100%;
   }
 
   .edit-button {
