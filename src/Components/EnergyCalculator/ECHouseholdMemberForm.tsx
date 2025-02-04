@@ -232,6 +232,7 @@ const ECHouseholdMemberForm = () => {
     control,
     name: 'incomeStreams',
   });
+  const watchIsDisabled = watch('conditions.disabled');
 
   useEffect(() => {
     const noIncomeStreamsAreListed = Number(getValues('incomeStreams').length === 0);
@@ -248,6 +249,14 @@ const ECHouseholdMemberForm = () => {
       replace([]);
     }
   }, [watchHasIncome]);
+
+  useEffect(() => {
+    const notDisabled = getValues('conditions.disabled') === false;
+
+    if (notDisabled) {
+      setValue('conditions.receivesSsi', 'false');
+    }
+  }, [watchIsDisabled]);
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (memberData) => {
     if (uuid === undefined) {
