@@ -178,6 +178,7 @@ const FetchScreen = () => {
         },
         hasIncome: member.has_income ?? false,
         incomeStreams: incomes,
+        energyCalculator: energyCalculator,
         healthInsurance: member.insurance ?? initialHHMHealthInsurance,
       });
       defaultRelationship = '';
