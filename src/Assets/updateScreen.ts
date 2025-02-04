@@ -98,7 +98,6 @@ const getEnergyCalculatorMemberBody = (
 
   return {
     surviving_spouse: energyCalculatorMember.survivingSpouse,
-    disabled: energyCalculatorMember.disabled,
     receives_ssi: energyCalculatorMember.receivesSsi,
   };
 };
@@ -141,7 +140,7 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
     has_income: householdMemberData.hasIncome,
     income_streams: incomes,
     energy_calculator: getEnergyCalculatorMemberBody(householdMemberData.energyCalculator),
-    insurance: householdMemberData.healthInsurance,
+    insurance: householdMemberData.healthInsurance ?? null,
   };
 };
 
