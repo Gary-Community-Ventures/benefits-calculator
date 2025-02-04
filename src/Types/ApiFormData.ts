@@ -44,7 +44,6 @@ export type ApiEnergyCalculatorFormData = {
 
 export type ApiEnergyCalculatorMember = {
   surviving_spouse: boolean;
-  disabled: boolean;
   receives_ssi: boolean;
 };
 
