@@ -16,23 +16,30 @@ import { ReactComponent as Stove } from '../Icons/Heat.svg';
 import { ReactComponent as AcUnit } from '../Icons/AcUnit.svg';
 import { Context } from '../../Wrapper/Wrapper';
 import QuestionDescription from '../../QuestionComponents/QuestionDescription';
+import { FormattedMessageType } from '../../../Types/Questions';
 
-type ExpenseType = 'cooling' | 'heating' | 'otherUtilities';
+export type EnergyCalculatorExpenseType = 'cooling' | 'heating' | 'otherUtilities';
 
-const EXPENSE_OPTIONS: MultiSelectTileOption<ExpenseType>[] = [
+export const ENERGY_CALCULATOR_EXPENSE_NAME_MAP: Record<EnergyCalculatorExpenseType, FormattedMessageType> = {
+  heating: <FormattedMessage id="energyCalculator.expenses.heating" defaultMessage="Heating" />,
+  cooling: <FormattedMessage id="energyCalculator.expenses.cooling" defaultMessage="Cooling" />,
+  otherUtilities: <FormattedMessage id="energyCalculator.expenses.otherUtilities" defaultMessage="Other Utilities" />,
+};
+
+const EXPENSE_OPTIONS: MultiSelectTileOption<EnergyCalculatorExpenseType>[] = [
   {
     value: 'heating',
-    text: <FormattedMessage id="energyCalculator.expenses.question" defaultMessage="Heating" />,
+    text: ENERGY_CALCULATOR_EXPENSE_NAME_MAP.heating,
     icon: <Stove className="option-card-icon" />,
   },
   {
     value: 'cooling',
-    text: <FormattedMessage id="energyCalculator.expenses.question" defaultMessage="Cooling" />,
+    text: ENERGY_CALCULATOR_EXPENSE_NAME_MAP.cooling,
     icon: <AcUnit className="option-card-icon" />,
   },
   {
     value: 'otherUtilities',
-    text: <FormattedMessage id="energyCalculator.expenses.question" defaultMessage="Other Utilities" />,
+    text: ENERGY_CALCULATOR_EXPENSE_NAME_MAP.otherUtilities,
     icon: <Housing className="option-card-icon" />,
   },
 ];
