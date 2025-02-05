@@ -15,6 +15,7 @@ import { FormattedMessageType, QuestionName } from '../../Types/Questions';
 import { useConfig } from '../Config/configHook';
 import { Conditions, IncomeStream, Benefits as BenefitsType } from '../../Types/FormData';
 import { calcAge, hasBirthMonthYear, useFormatBirthMonthYear } from '../../Assets/age';
+import EnergyCalculatorElectricityProvider from '../EnergyCalculator/ConfirmationPage/ElectricityProvider';
 
 function ZipCode() {
   const { formData } = useContext(Context);
@@ -581,6 +582,9 @@ const STEP_CONFIRMATIONS: Record<QuestionName, ReactNode | null> = {
   hasBenefits: <HasBenefits key="hasBenefits" />,
   acuteHHConditions: <AcuteConditions key="acuteHHConditions" />,
   referralSource: <ReferralSource key="referralSource" />,
+  energyCalculatorElectricityProvider: (
+    <EnergyCalculatorElectricityProvider key="energyCalculatorElectricityProvider" />
+  ),
   signUpInfo: null,
 };
 
