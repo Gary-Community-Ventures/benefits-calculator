@@ -2,7 +2,7 @@ import { ReactNode, useContext } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useFormatBirthMonthYear, calcAge, hasBirthMonthYear } from '../../../Assets/age';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
-import { Conditions, IncomeStream } from '../../../Types/FormData';
+import { Conditions, HouseholdData, IncomeStream } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
 import { useConfig } from '../../Config/configHook';
 import ConfirmationBlock, { formatToUSD, ConfirmationItem } from '../ConfirmationBlock';
@@ -199,6 +199,49 @@ const ConfirmationHHData = ({ energyCalculator }: ConfirmationHHDataProps) => {
       return <>{allOtherSelectedOptionsString}</>;
     };
 
+    const energyCalculatorConditionsList = (member: HouseholdData) => {
+      const { conditions, energyCalculator } = member;
+      const hasConditions = conditions.disabled || energyCalculator?.receivesSsi || energyCalculator?.survivingSpouse;
+      const survivingSpouseText = formatMessage({
+        id: 'eCConditionOptions.survivingSpouse',
+        defaultMessage: 'Surviving Spouse',
+      });
+      const disabledText = formatMessage({
+        id: 'confirmationHHData.disability',
+        defaultMessage: 'Disability',
+      });
+      const receiveSsiText = formatMessage({
+        id: 'ecHHMF.they-receiveSsi',
+        defaultMessage:
+          'Received full benefits from Social Security, SSI, the Department of Human Services, or a public or private plan:',
+      });
+      const receivesSsiDisplayedValue = energyCalculator?.receivesSsi
+        ? formatMessage({
+            id: 'radiofield.label-yes',
+            defaultMessage: 'Yes',
+          })
+        : formatMessage({
+            id: 'radiofield.label-no',
+            defaultMessage: 'No',
+          });
+
+      if (hasConditions) {
+        return (
+          <ul>
+            {energyCalculator?.survivingSpouse && <li key="survivingSpouse">{survivingSpouseText}</li>}
+            {conditions?.disabled && (
+              <li key="disabled">
+                {disabledText}
+                <li>
+                  {receiveSsiText} {receivesSsiDisplayedValue}
+                </li>
+              </li>
+            )}
+          </ul>
+        );
+      }
+    };
+
     return (
       <ConfirmationBlock
         icon={<Head title={formatMessage(householdMemberIconAlt)} />}
@@ -222,7 +265,7 @@ const ConfirmationHHData = ({ energyCalculator }: ConfirmationHHDataProps) => {
           label={
             <FormattedMessage id="confirmation.headOfHouseholdDataBlock-conditionsText" defaultMessage="Conditions:" />
           }
-          value={conditionsString(member.conditions)}
+          value={energyCalculator ? energyCalculatorConditionsList(member) : conditionsString(member.conditions)}
         />
         <ConfirmationItem
           label={<FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />}
