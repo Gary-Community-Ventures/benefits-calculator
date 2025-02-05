@@ -277,15 +277,17 @@ const ConfirmationHHData = ({ energyCalculator }: ConfirmationHHDataProps) => {
             )
           }
         />
-        <ConfirmationItem
-          label={
-            <FormattedMessage
-              id="confirmation.headOfHouseholdDataBlock-healthInsuranceText"
-              defaultMessage="Health Insurance: "
-            />
-          }
-          value={displayHealthInsurance()}
-        />
+        {!energyCalculator && (
+          <ConfirmationItem
+            label={
+              <FormattedMessage
+                id="confirmation.headOfHouseholdDataBlock-healthInsuranceText"
+                defaultMessage="Health Insurance: "
+              />
+            }
+            value={displayHealthInsurance()}
+          />
+        )}
       </ConfirmationBlock>
     );
   });
