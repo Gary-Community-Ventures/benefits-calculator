@@ -38,7 +38,8 @@ import AddIcon from '@mui/icons-material/Add';
 import { createMenuItems } from '../SelectHelperFunctions/SelectHelperFunctions';
 import CloseButton from '../../CloseButton/CloseButton';
 import {
-  renderBirthMonthHelperText,
+  getMissingBirthMonthText,
+  getInvalidFutureBirthMonthText,
   renderBirthYearHelperText,
   renderHealthInsuranceHelperText,
   renderRelationshipToHHHelperText,
@@ -149,7 +150,7 @@ const HouseholdMemberForm = () => {
     so if one of those options are selected,
     then birthMonth would have a minimum string length of 1 which passes validation.
     */
-      birthMonth: z.string().min(1),
+      birthMonth: z.string().min(1, { message: getMissingBirthMonthText(intl) }),
       birthYear: z
         .string()
         .trim()
@@ -210,7 +211,7 @@ const HouseholdMemberForm = () => {
         }
         return true;
       },
-      { message: 'This birth month is in the future', path: ['birthMonth'] }, //TODO: Render this error message to the user
+      { message: getInvalidFutureBirthMonthText(intl), path: ['birthMonth'] },
     );
   type FormSchema = z.infer<typeof formSchema>;
 
@@ -366,7 +367,9 @@ const HouseholdMemberForm = () => {
                     })}
                   </Select>
                   {errors.birthMonth !== undefined && (
-                    <FormHelperText sx={{ marginLeft: 0 }}>{renderBirthMonthHelperText()}</FormHelperText>
+                    <FormHelperText sx={{ ml: 0 }}>
+                      <ErrorMessageWrapper fontSize="1rem">{errors.birthMonth.message}</ErrorMessageWrapper>
+                    </FormHelperText>
                   )}
                 </>
               )}
