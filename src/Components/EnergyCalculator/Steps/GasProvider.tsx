@@ -86,7 +86,12 @@ export default function GasProvider() {
       options[code] = name;
     }
 
-    options.propane = <FormattedMessage id="energyCalculator.gasProvider.propane" defaultMessage="Propane" />;
+    options.propane = (
+      <FormattedMessage
+        id="energyCalculator.gasProvider.propane"
+        defaultMessage="Propane tank / firewood / heating pellets"
+      />
+    );
     options.other = <FormattedMessage id="energyCalculator.gasProvider.other" defaultMessage="Other" />;
 
     return options;
