@@ -1,14 +1,14 @@
 import { FormattedMessage, IntlShape } from 'react-intl';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 
-export const getMissingBirthMonthText = (intlHook: IntlShape) => {
+export const renderMissingBirthMonthHelperText = (intlHook: IntlShape) => {
   return intlHook.formatMessage({
     id: 'ageInput.month.error',
     defaultMessage: 'Please enter a birth month."',
   });
 };
 
-export const getInvalidFutureBirthMonthText = (intlHook: IntlShape) => {
+export const renderFutureBirthMonthHelperText = (intlHook: IntlShape) => {
   return intlHook.formatMessage({
     id: 'hhmform.invalidBirthMonth',
     defaultMessage: 'This birth month is in the future',

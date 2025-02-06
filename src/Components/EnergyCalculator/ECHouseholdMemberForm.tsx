@@ -38,8 +38,8 @@ import AddIcon from '@mui/icons-material/Add';
 import { createMenuItems } from '../Steps/SelectHelperFunctions/SelectHelperFunctions';
 import CloseButton from '../CloseButton/CloseButton';
 import {
-  getMissingBirthMonthText,
-  getInvalidFutureBirthMonthText,
+  renderMissingBirthMonthHelperText,
+  renderFutureBirthMonthHelperText,
   renderBirthYearHelperText,
   renderRelationshipToHHHelperText,
   renderIncomeFrequencyHelperText,
@@ -145,7 +145,7 @@ const ECHouseholdMemberForm = () => {
     so if one of those options are selected,
     then birthMonth would have a minimum string length of 1 which passes validation.
     */
-      birthMonth: z.string().min(1, { message: getMissingBirthMonthText(intl) }),
+      birthMonth: z.string().min(1, { message: renderMissingBirthMonthHelperText(intl) }),
       birthYear: z
         .string()
         .trim()
@@ -174,7 +174,7 @@ const ECHouseholdMemberForm = () => {
         }
         return true;
       },
-      { message: getInvalidFutureBirthMonthText(intl), path: ['birthMonth'] },
+      { message: renderFutureBirthMonthHelperText(intl), path: ['birthMonth'] },
     );
   type FormSchema = z.infer<typeof formSchema>;
 
