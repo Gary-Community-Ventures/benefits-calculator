@@ -3,7 +3,7 @@ import { QuestionName } from '../../Types/Questions';
 
 type ReferrerOptions<T> = {
   default: T;
-  [key: string]: T;
+  [key: string]: T | undefined;
 };
 
 export type ReferrerData = {
@@ -51,7 +51,7 @@ export default function useReferrer(referrerCode?: string, referrerData?: Referr
       throw new Error(`${key} is not in referrerData`);
     }
 
-    return referrerData[key][referrer ?? 'default'] as ReferrerDataValue<T>;
+    return (referrerData[key][referrer ?? 'default'] ?? referrerData[key].default) as ReferrerDataValue<T>;
   }
 
   return { getReferrer, setReferrer };
