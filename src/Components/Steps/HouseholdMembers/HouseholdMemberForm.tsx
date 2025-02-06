@@ -154,7 +154,7 @@ const HouseholdMemberForm = () => {
       birthYear: z
         .string()
         .trim()
-        .min(1)
+        .min(1, { message: renderBirthYearHelperText(intl) })
         .refine((value) => {
           const year = Number(value);
           const age = CURRENT_YEAR - year;
@@ -417,7 +417,9 @@ const HouseholdMemberForm = () => {
                     )}
                   />
                   {errors.birthYear !== undefined && (
-                    <FormHelperText sx={{ marginLeft: 0 }}>{renderBirthYearHelperText()}</FormHelperText>
+                    <FormHelperText sx={{ ml: 0 }}>
+                      <ErrorMessageWrapper fontSize="1rem">{errors.birthYear.message}</ErrorMessageWrapper>
+                    </FormHelperText>
                   )}
                 </>
               )}
