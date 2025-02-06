@@ -91,7 +91,7 @@ export function useResultsLink(link: string) {
 }
 
 const Results = ({ type }: ResultsProps) => {
-  const { locale, formData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { whiteLabel, uuid, programId } = useParams();
   const is211Co = formData.immutableReferrer === '211co';
 
