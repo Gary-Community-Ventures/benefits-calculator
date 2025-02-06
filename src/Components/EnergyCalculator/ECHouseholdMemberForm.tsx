@@ -4,7 +4,7 @@ import HHMSummaryCards from '../Steps/HouseholdMembers/HHMSummaryCards';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper';
 import { ReactNode, useContext, useEffect, useMemo } from 'react';
-import { Conditions, HouseholdData } from '../../Types/FormData';
+import { HouseholdData } from '../../Types/FormData';
 import {
   Autocomplete,
   Box,
