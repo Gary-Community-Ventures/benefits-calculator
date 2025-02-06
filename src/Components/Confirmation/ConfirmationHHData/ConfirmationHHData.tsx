@@ -229,12 +229,10 @@ const ConfirmationHHData = ({ energyCalculator }: ConfirmationHHDataProps) => {
         return (
           <ul>
             {energyCalculator?.survivingSpouse && <li key="survivingSpouse">{survivingSpouseText}</li>}
-            {conditions?.disabled && (
-              <li key="disabled">
-                {disabledText}
-                <li>
-                  {receiveSsiText} {receivesSsiDisplayedValue}
-                </li>
+            {conditions?.disabled && <li key="disabled">{disabledText}</li>}
+            {energyCalculator?.receivesSsi && (
+              <li key="receivesSsi">
+                {receiveSsiText} {receivesSsiDisplayedValue}
               </li>
             )}
           </ul>
