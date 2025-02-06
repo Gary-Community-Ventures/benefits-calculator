@@ -146,6 +146,17 @@ const HouseholdMemberForm = () => {
   const incomeStreamsSchema = z.array(incomeSourcesSchema);
   const hasIncomeSchema = z.string().regex(/^true|false$/);
 
+  let healthInsuranceNoInsuranceErrorMessage = intl.formatMessage({
+    id: 'validation-helperText.hhMemberInsuranceNone-you',
+    defaultMessage: 'Please do not select any other options if you do not have health insurance',
+  });
+  if (pageNumber !== 1) {
+    healthInsuranceNoInsuranceErrorMessage = intl.formatMessage({
+      id: 'validation-helperText.hhMemberInsuranceNone-they',
+      defaultMessage: 'Please do not select any other options if they do not have health insurance',
+    });
+  }
+
   const formSchema = z
     .object({
       /*

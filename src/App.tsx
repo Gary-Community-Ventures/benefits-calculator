@@ -100,6 +100,7 @@ const App = () => {
               <Route path="jeffcohs" element={<RedirectToWhiteLabel whiteLabel="co" />} />
               <Route path="jeffcohscm" element={<RedirectToWhiteLabel whiteLabel="co" />} />
               <Route path="ccig" element={<RedirectToWhiteLabel whiteLabel="co" />} />
+              <Route path="current-benefits" element={<RedirectToWhiteLabel whiteLabel="co" />} />
               <Route
                 path="step-1"
                 element={
