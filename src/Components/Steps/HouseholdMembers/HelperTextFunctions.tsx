@@ -43,6 +43,13 @@ export const renderRelationshipToHHHelperText = (intlHook: IntlShape) => {
   });
 };
 
+export const renderIncomeStreamNameHelperText = (intlHook: IntlShape) => {
+  return intlHook.formatMessage({
+    id: 'errorMessage-incomeType',
+    defaultMessage: 'Please select an income type.',
+  });
+};
+
 export const renderIncomeFrequencyHelperText = (intlHook: IntlShape) => {
   return intlHook.formatMessage({
     id: 'errorMessage-incomeFrequency',
