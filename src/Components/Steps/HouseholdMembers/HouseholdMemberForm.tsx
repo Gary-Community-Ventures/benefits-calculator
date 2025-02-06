@@ -41,7 +41,8 @@ import {
   renderMissingBirthMonthHelperText,
   renderFutureBirthMonthHelperText,
   renderBirthYearHelperText,
-  renderHealthInsuranceHelperText,
+  renderHealthInsSelectOneHelperText,
+  renderHealthInsNonePlusHelperText,
   renderRelationshipToHHHelperText,
   renderIncomeFrequencyHelperText,
   renderHoursWorkedHelperText,
@@ -173,8 +174,7 @@ const HouseholdMemberForm = () => {
           va: z.boolean(),
         })
         .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
-          message: 'Please select at least one health insurance option.',
-          path: ['healthInsurance'],
+          message: renderHealthInsSelectOneHelperText(intl),
         })
         .refine(
           (insuranceOptions) => {
@@ -186,10 +186,9 @@ const HouseholdMemberForm = () => {
             return true;
           },
           {
-            message: 'Please do not select any other options if you do not have health insurance',
-            path: ['healthInsurance'],
+            message: renderHealthInsNonePlusHelperText(intl),
           },
-        ), //TODO: Render this error message to the user
+        ),
       conditions: z.object({
         student: z.boolean(),
         pregnant: z.boolean(),
@@ -465,7 +464,9 @@ const HouseholdMemberForm = () => {
             triggerValidation={trigger}
           />
           {errors.healthInsurance !== undefined && (
-            <FormHelperText sx={{ marginLeft: 0 }}>{renderHealthInsuranceHelperText()}</FormHelperText>
+            <FormHelperText sx={{ ml: 0 }}>
+              <ErrorMessageWrapper fontSize="1rem">{errors.healthInsurance.message}</ErrorMessageWrapper>
+            </FormHelperText>
           )}
         </Stack>
       </div>
