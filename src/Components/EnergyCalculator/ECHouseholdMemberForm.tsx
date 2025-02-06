@@ -162,7 +162,9 @@ const ECHouseholdMemberForm = () => {
       }),
       relationshipToHH: z
         .string()
-        .refine((value) => [...Object.keys(relationshipOptions)].includes(value) || pageNumber === 1),
+        .refine((value) => [...Object.keys(relationshipOptions)].includes(value) || pageNumber === 1, {
+          message: renderRelationshipToHHHelperText(intl),
+        }),
       hasIncome: hasIncomeSchema,
       incomeStreams: incomeStreamsSchema,
     })
@@ -468,7 +470,9 @@ const ECHouseholdMemberForm = () => {
                   })}
                 </Select>
                 {errors.relationshipToHH !== undefined && (
-                  <FormHelperText sx={{ marginLeft: 0 }}>{renderRelationshipToHHHelperText()}</FormHelperText>
+                  <FormHelperText sx={{ ml: 0 }}>
+                    <ErrorMessageWrapper fontSize="1rem">{errors.relationshipToHH.message}</ErrorMessageWrapper>
+                  </FormHelperText>
                 )}
               </>
             )}
