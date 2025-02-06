@@ -15,23 +15,25 @@ export const renderFutureBirthMonthHelperText = (intlHook: IntlShape) => {
   });
 };
 
-export const renderBirthYearHelperText = () => {
-  return (
-    <ErrorMessageWrapper fontSize="1rem">
-      <FormattedMessage id="ageInput.year.error" defaultMessage="Please enter a birth year." />
-    </ErrorMessageWrapper>
-  );
+export const renderBirthYearHelperText = (intlHook: IntlShape) => {
+  return intlHook.formatMessage({
+    id: 'ageInput.year.error',
+    defaultMessage: 'Please enter a birth year.',
+  });
 };
 
-export const renderHealthInsuranceHelperText = () => {
-  return (
-    <ErrorMessageWrapper fontSize="1.5rem">
-      <FormattedMessage
-        id="validation-helperText.healthInsurance"
-        defaultMessage='If none of these apply, please select "One or more household member(s) do not have health insurance"'
-      />
-    </ErrorMessageWrapper>
-  );
+export const renderHealthInsSelectOneHelperText = (intlHook: IntlShape) => {
+  return intlHook.formatMessage({
+    id: 'validation-helperText.selectOneHealthIns',
+    defaultMessage: 'Please select at least one health insurance option.',
+  });
+};
+
+export const renderHealthInsNonePlusHelperText = (intlHook: IntlShape) => {
+  return intlHook.formatMessage({
+    id: 'validation-helperText.nonePlusHealthIns',
+    defaultMessage: 'Please do not select any other options if you do not have health insurance.',
+  });
 };
 
 export const renderRelationshipToHHHelperText = () => {
