@@ -36,34 +36,30 @@ export const renderHealthInsNonePlusHelperText = (intlHook: IntlShape) => {
   });
 };
 
-export const renderRelationshipToHHHelperText = () => {
-  return (
-    <ErrorMessageWrapper fontSize="1rem">
-      <FormattedMessage id="errorMessage-HHMemberRelationship" defaultMessage="Please select a relationship" />
-    </ErrorMessageWrapper>
-  );
+export const renderRelationshipToHHHelperText = (intlHook: IntlShape) => {
+  return intlHook.formatMessage({
+    id: 'errorMessage-HHMemberRelationship',
+    defaultMessage: 'Please select a relationship.',
+  });
 };
 
-export const renderIncomeFrequencyHelperText = () => {
-  return (
-    <ErrorMessageWrapper fontSize="1rem">
-      <FormattedMessage id="errorMessage-incomeFrequency" defaultMessage="Please select a frequency" />
-    </ErrorMessageWrapper>
-  );
+export const renderIncomeFrequencyHelperText = (intlHook: IntlShape) => {
+  return intlHook.formatMessage({
+    id: 'errorMessage-incomeFrequency',
+    defaultMessage: 'Please select a frequency.',
+  });
 };
 
-export const renderHoursWorkedHelperText = () => {
-  return (
-    <ErrorMessageWrapper fontSize="1rem">
-      <FormattedMessage id="errorMessage-greaterThanZero" defaultMessage="Please enter a number greater than 0" />
-    </ErrorMessageWrapper>
-  );
+export const renderHoursWorkedHelperText = (intlHook: IntlShape) => {
+  return intlHook.formatMessage({
+    id: 'errorMessage-greaterThanZero',
+    defaultMessage: 'Please enter a number greater than 0.',
+  });
 };
 
-export const renderIncomeAmountHelperText = () => {
-  return (
-    <ErrorMessageWrapper fontSize="1rem">
-      <FormattedMessage id="errorMessage-greaterThanZero" defaultMessage="Please enter a number greater than 0" />
-    </ErrorMessageWrapper>
-  );
+export const renderIncomeAmountHelperText = (intlHook: IntlShape) => {
+  return intlHook.formatMessage({
+    id: 'errorMessage-greaterThanZero',
+    defaultMessage: 'Please enter a number greater than 0.',
+  });
 };
