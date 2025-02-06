@@ -7,7 +7,7 @@ export const STARTING_QUESTION_NUMBER = 3;
 export function useStepDirectory() {
   const { getReferrer } = useContext(Context);
 
-  const stepDirectory = getReferrer('stepDirectory', []) as QuestionName[];
+  const stepDirectory = getReferrer('stepDirectory', []);
 
   return stepDirectory;
 }
