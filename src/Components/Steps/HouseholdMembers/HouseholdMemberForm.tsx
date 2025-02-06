@@ -44,6 +44,7 @@ import {
   renderHealthInsSelectOneHelperText,
   renderHealthInsNonePlusHelperText,
   renderRelationshipToHHHelperText,
+  renderIncomeStreamNameHelperText,
   renderIncomeFrequencyHelperText,
   renderHoursWorkedHelperText,
   renderIncomeAmountHelperText,
@@ -119,15 +120,18 @@ const HouseholdMemberForm = () => {
   const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
   const incomeSourcesSchema = z
     .object({
-      incomeStreamName: z.string().min(1),
-      incomeFrequency: z.string().min(1),
+      incomeStreamName: z.string().min(1, { message: renderIncomeStreamNameHelperText(intl) }),
+      incomeFrequency: z.string().min(1, { message: renderIncomeFrequencyHelperText(intl) }),
       hoursPerWeek: z.string().trim(),
       incomeAmount: z
         .string()
         .trim()
-        .refine((value) => {
-          return incomeAmountRegex.test(value) && Number(value) > 0;
-        }),
+        .refine(
+          (value) => {
+            return incomeAmountRegex.test(value) && Number(value) > 0;
+          },
+          { message: renderIncomeAmountHelperText(intl) },
+        ),
     })
     .refine(
       (data) => {
@@ -137,7 +141,7 @@ const HouseholdMemberForm = () => {
           return true;
         }
       },
-      { path: ['hoursPerWeek'] },
+      { message: renderHoursWorkedHelperText(intl), path: ['hoursPerWeek'] },
     );
   const incomeStreamsSchema = z.array(incomeSourcesSchema);
   const hasIncomeSchema = z.string().regex(/^true|false$/);
@@ -607,13 +611,6 @@ const HouseholdMemberForm = () => {
       </Box>
     );
   };
-  const renderIncomeStreamNameHelperText = () => {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="errorMessage-incomeType" defaultMessage="Please select an income type" />
-      </ErrorMessageWrapper>
-    );
-  };
 
   const renderIncomeStreamNameSelect = (index: number) => {
     return (
@@ -647,7 +644,11 @@ const HouseholdMemberForm = () => {
                 {incomeStreamsMenuItems}
               </Select>
               {errors.incomeStreams?.[index]?.incomeStreamName !== undefined && (
-                <FormHelperText sx={{ marginLeft: 0 }}>{renderIncomeStreamNameHelperText()}</FormHelperText>
+                <FormHelperText sx={{ ml: 0 }}>
+                  <ErrorMessageWrapper fontSize="1rem">
+                    {errors.incomeStreams?.[index]?.incomeStreamName.message}
+                  </ErrorMessageWrapper>
+                </FormHelperText>
               )}
             </>
           )}
@@ -721,7 +722,11 @@ const HouseholdMemberForm = () => {
                     {frequencyMenuItems}
                   </Select>
                   {errors.incomeStreams?.[index]?.incomeFrequency !== undefined && (
-                    <FormHelperText sx={{ marginLeft: 0 }}>{renderIncomeFrequencyHelperText()}</FormHelperText>
+                    <FormHelperText sx={{ ml: 0 }}>
+                      <ErrorMessageWrapper fontSize="1rem">
+                        {errors.incomeStreams?.[index]?.incomeFrequency.message}
+                      </ErrorMessageWrapper>
+                    </FormHelperText>
                   )}
                 </>
               )}
@@ -767,7 +772,11 @@ const HouseholdMemberForm = () => {
                 error={errors.incomeStreams?.[index]?.hoursPerWeek !== undefined}
               />
               {errors.incomeStreams?.[index]?.hoursPerWeek !== undefined && (
-                <FormHelperText sx={{ marginLeft: 0 }}>{renderHoursWorkedHelperText()}</FormHelperText>
+                <FormHelperText sx={{ ml: 0 }}>
+                  <ErrorMessageWrapper fontSize="1rem">
+                    {errors.incomeStreams?.[index]?.hoursPerWeek.message}
+                  </ErrorMessageWrapper>
+                </FormHelperText>
               )}
             </>
           )}
@@ -840,7 +849,11 @@ const HouseholdMemberForm = () => {
                 }}
               />
               {errors.incomeStreams?.[index]?.incomeAmount !== undefined && (
-                <FormHelperText sx={{ marginLeft: 0 }}>{renderIncomeAmountHelperText()}</FormHelperText>
+                <FormHelperText sx={{ ml: 0 }}>
+                  <ErrorMessageWrapper fontSize="1rem">
+                    {errors.incomeStreams?.[index]?.incomeAmount.message}
+                  </ErrorMessageWrapper>
+                </FormHelperText>
               )}
             </>
           )}
