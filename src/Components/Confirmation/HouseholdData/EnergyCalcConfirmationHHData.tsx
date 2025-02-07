@@ -9,18 +9,7 @@ import ConfirmationBlock, { formatToUSD, ConfirmationItem } from '../Confirmatio
 import { Context } from '../../Wrapper/Wrapper';
 import { ReactComponent as Head } from '../../../Assets/icons/head.svg';
 
-type IconAndFormattedMessageMap = {
-  [key: string]: {
-    text: FormattedMessageType;
-    icon: ReactNode;
-  };
-};
-
-type ConfirmationHHDataProps = {
-  energyCalculator: boolean;
-};
-
-const ConfirmationHHData = ({ energyCalculator }: ConfirmationHHDataProps) => {
+const EnergyCalcConfirmationHHData = () => {
   const { formData } = useContext(Context);
   const { householdData } = formData;
 
@@ -32,68 +21,6 @@ const ConfirmationHHData = ({ energyCalculator }: ConfirmationHHDataProps) => {
   const relationshipOptions = useConfig<FormattedMessageType>('relationship_options');
   const incomeOptions = useConfig<FormattedMessageType>('income_options');
   const frequencyOptions = useConfig<FormattedMessageType>('frequency_options');
-  const healthInsuranceOptions = useConfig<{
-    you: IconAndFormattedMessageMap;
-    them: IconAndFormattedMessageMap;
-  }>('health_insurance_options');
-
-  const conditionsString = (conditions: Conditions) => {
-    const conditionText = [];
-
-    if (conditions.student) {
-      conditionText.push(
-        formatMessage({
-          id: 'confirmation.headOfHouseholdDataBlock-studentText',
-          defaultMessage: 'Student',
-        }),
-      );
-    }
-
-    if (conditions.pregnant) {
-      conditionText.push(
-        formatMessage({
-          id: 'confirmation.headOfHouseholdDataBlock-pregnantText',
-          defaultMessage: 'Pregnant',
-        }),
-      );
-    }
-
-    if (conditions.blindOrVisuallyImpaired) {
-      conditionText.push(
-        formatMessage({
-          id: 'confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText',
-          defaultMessage: 'Blind or visually impaired',
-        }),
-      );
-    }
-
-    if (conditions.disabled) {
-      conditionText.push(
-        formatMessage({
-          id: 'confirmation.headOfHouseholdDataBlock-disabledText',
-          defaultMessage: 'Disabled',
-        }),
-      );
-    }
-
-    if (conditions.longTermDisability) {
-      conditionText.push(
-        formatMessage({
-          id: 'confirmation.longTermDisability',
-          defaultMessage:
-            'Has a medical or developmental condition that has lasted, or is expected to last, more than 12 months',
-        }),
-      );
-    }
-
-    if (conditionText.length === 0) {
-      return formatMessage({ id: 'confirmation.none', defaultMessage: 'None' });
-    }
-
-    // NOTE: we might want to redesign this to be more like a bullet list because
-    // not every language will use commas to seperate a list.
-    return conditionText.join(', ');
-  };
 
   const listAllIncomeStreams = (incomeStreams: IncomeStream[]) => {
     const mappedListItems = incomeStreams.map((incomeStream, index) => {
@@ -177,28 +104,6 @@ const ConfirmationHHData = ({ energyCalculator }: ConfirmationHHDataProps) => {
       relationship = relationshipOptions[member.relationshipToHH];
     }
 
-    const displayHealthInsurance = () => {
-      const insurance = member.healthInsurance;
-      const selectedNone = insurance?.none === true;
-
-      const youVsThemHealthInsuranceOptions = i === 0 ? healthInsuranceOptions.you : healthInsuranceOptions.them;
-
-      const allOtherSelectedOptions = Object.entries(insurance)
-        .filter((hHMemberInsEntry) => hHMemberInsEntry[1] === true)
-        .map((insurance) => {
-          const formattedMessageProp = youVsThemHealthInsuranceOptions[insurance[0]].text.props;
-          return formatMessage({ ...formattedMessageProp });
-        });
-
-      if (selectedNone) {
-        return <>{youVsThemHealthInsuranceOptions.none.text}</>;
-      }
-
-      const allOtherSelectedOptionsString = allOtherSelectedOptions.join(', ');
-
-      return <>{allOtherSelectedOptionsString}</>;
-    };
-
     const energyCalculatorConditionsList = (member: HouseholdData) => {
       const { conditions, energyCalculator } = member;
       const hasConditions = conditions.disabled || energyCalculator?.receivesSsi || energyCalculator?.survivingSpouse;
@@ -245,7 +150,7 @@ const ConfirmationHHData = ({ energyCalculator }: ConfirmationHHDataProps) => {
         icon={<Head title={formatMessage(householdMemberIconAlt)} />}
         title={relationship}
         editAriaLabel={editHouseholdMemberAriaLabel}
-        stepName={energyCalculator ? 'ecHouseholdData' : 'householdData'}
+        stepName="ecHouseholdData"
         editUrlEnding={String(i + 1)}
         key={i}
       >
@@ -263,7 +168,7 @@ const ConfirmationHHData = ({ energyCalculator }: ConfirmationHHDataProps) => {
           label={
             <FormattedMessage id="confirmation.headOfHouseholdDataBlock-conditionsText" defaultMessage="Conditions:" />
           }
-          value={energyCalculator ? energyCalculatorConditionsList(member) : conditionsString(member.conditions)}
+          value={energyCalculatorConditionsList(member)}
         />
         <ConfirmationItem
           label={<FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />}
@@ -275,17 +180,6 @@ const ConfirmationHHData = ({ energyCalculator }: ConfirmationHHDataProps) => {
             )
           }
         />
-        {!energyCalculator && (
-          <ConfirmationItem
-            label={
-              <FormattedMessage
-                id="confirmation.headOfHouseholdDataBlock-healthInsuranceText"
-                defaultMessage="Health Insurance: "
-              />
-            }
-            value={displayHealthInsurance()}
-          />
-        )}
       </ConfirmationBlock>
     );
   });
@@ -293,4 +187,4 @@ const ConfirmationHHData = ({ energyCalculator }: ConfirmationHHDataProps) => {
   return <>{householdMemberDataBlocks}</>;
 };
 
-export default ConfirmationHHData;
+export default EnergyCalcConfirmationHHData;
