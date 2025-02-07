@@ -879,7 +879,11 @@ const ECHouseholdMemberForm = () => {
           />
         )}
       </QuestionHeader>
-      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} questionName="energyCalculatorHouseholdData" />
+      <HHMSummaryCards
+        activeMemberData={getValues()}
+        triggerValidation={trigger}
+        questionName="energyCalculatorHouseholdData"
+      />
       <form
         onSubmit={handleSubmit(formSubmitHandler, () => {
           window.scroll({ top: 0, left: 0, behavior: 'smooth' });
