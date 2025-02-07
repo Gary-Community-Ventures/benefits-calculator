@@ -36,6 +36,13 @@ export const renderHealthInsNonePlusHelperText = (intlHook: IntlShape) => {
   });
 };
 
+export const renderHealthInsNonePlusTheyHelperText = (intlHook: IntlShape) => {
+  return intlHook.formatMessage({
+    id: 'validation-helperText.hhMemberInsuranceNone-they',
+    defaultMessage: 'Please do not select any other options if they do not have health insurance',
+  });
+};
+
 export const renderRelationshipToHHHelperText = (intlHook: IntlShape) => {
   return intlHook.formatMessage({
     id: 'errorMessage-HHMemberRelationship',
