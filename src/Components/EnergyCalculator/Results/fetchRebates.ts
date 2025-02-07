@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { calcTotalIncome } from '../../../Assets/income';
 import { Language } from '../../../Assets/languageOptions';
 import { FormData } from '../../../Types/FormData';
 import { Context } from '../../Wrapper/Wrapper';
@@ -36,7 +37,7 @@ function createQueryString(formData: FormData, lang: Language) {
   let ownerStatus = 'homeowner';
   query.append('owner_status', ownerStatus);
 
-  let income = 0; // TODO: calculate income
+  const income = calcTotalIncome(formData);
   query.append('household_income', String(income));
 
   let filingStatus = calcFilingStatus(formData);
