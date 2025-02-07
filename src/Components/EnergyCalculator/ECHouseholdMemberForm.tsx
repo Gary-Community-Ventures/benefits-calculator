@@ -429,7 +429,7 @@ const ECHouseholdMemberForm = () => {
             options={pageNumber === 1 ? conditionOptions.you : conditionOptions.them}
           />
         </Stack>
-        {(getValues('conditions.disabled') && createReceivesSsiQuestion()) || null}
+        {getValues('conditions.disabled') && createReceivesSsiQuestion()}
       </div>
     );
   };
