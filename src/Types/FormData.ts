@@ -90,6 +90,7 @@ export type FormData = {
   benefits: Benefits;
   referralSource?: string;
   immutableReferrer?: string;
+  path?: string;
   signUpInfo: SignUpInfo;
   urlSearchParams: string;
   energyCalculator?: EnergyCalculatorFormData;

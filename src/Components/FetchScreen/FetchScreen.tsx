@@ -98,6 +98,7 @@ const FetchScreen = () => {
       },
       referralSource: response.referral_source ?? undefined,
       immutableReferrer: response.referrer_code ?? undefined,
+      path: response.path ?? undefined,
       acuteHHConditions: {
         food: response.needs_food ?? false,
         babySupplies: response.needs_baby_supplies ?? false,

@@ -69,12 +69,14 @@ const App = () => {
     const utmParam = searchParams.get('utm_source');
     const testParam = searchParams.get('test') ? true : false;
     const externalIdParam = searchParams.get('externalid');
+    const pathParam = searchParams.get('path') ?? 'default';
 
     // referrer priority = stored referrer -> referrer param -> utm_source param -> ''
     const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
     const referrerSource = formData.referralSource || referrer;
     const isTest = formData.isTest || testParam;
     const externalId = formData.externalID ?? externalIdParam ?? undefined;
+    const path = formData.path ?? pathParam;
 
     setFormData({
       ...formData,
@@ -82,6 +84,7 @@ const App = () => {
       externalID: externalId,
       referralSource: referrerSource,
       immutableReferrer: referrer,
+      path: path,
       urlSearchParams: urlSearchParams,
     });
   }, [formData.immutableReferrer]);
