@@ -89,6 +89,7 @@ const FetchScreen = () => {
         upk: response.has_upk ?? false,
         coctc: response.has_coctc ?? false,
         cowap: response.has_cowap ?? false,
+        ncwap: response.has_ncwap ?? false,
         ubp: response.has_ubp ?? false,
         nfp: response.has_nfp ?? false,
         fatc: response.has_fatc ?? false,
