@@ -345,7 +345,7 @@ const STEP_CONFIRMATIONS: Record<QuestionName, ReactNode | null> = {
   zipcode: <ZipCode key="zipcode" />,
   householdSize: <HouseholdSize key="householdSize" />,
   ecHouseholdData: <ConfirmationHHData key="ecHouseholdData" energyCalculator={true} />,
-  householdData: <ConfirmationHHData key="HouseholdData" energyCalculator={false} />,
+  householdData: <ConfirmationHHData key="householdData" energyCalculator={false} />,
   hasExpenses: <Expenses key="hasExpenses" />,
   householdAssets: <Assets key="householdAssets" />,
   hasBenefits: <HasBenefits key="hasBenefits" />,
