@@ -1,5 +1,8 @@
 // NOTE: source: https://github.com/rewiringamerica/embed.rewiringamerica.org/blob/main/src/api/calculator-types-v1.ts
 
+import { ReactNode } from 'react';
+import { FormattedMessageType } from '../../../Types/Questions';
+
 export type EnergyCalculatorIncentiveType =
   | 'tax_credit'
   | 'pos_rebate'
@@ -122,3 +125,13 @@ export interface EnergyCalculatorAPIResponse {
   is_under_80_ami: boolean;
   is_under_150_ami: boolean;
 }
+
+export type EnergyCalculatorRebate = EnergyCalculatorIncentive;
+
+export type EnergyCalculatorRebateCategoryTypes = 'water-heater' | 'hvac' | 'stove';
+
+export type EnergyCalculatorRebateCategory = {
+  type: EnergyCalculatorRebateCategoryTypes;
+  name: FormattedMessageType;
+  rebates: EnergyCalculatorRebate[];
+};

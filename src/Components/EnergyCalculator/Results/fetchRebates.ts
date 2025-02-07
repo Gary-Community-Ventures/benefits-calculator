@@ -3,11 +3,30 @@ import { Language } from '../../../Assets/languageOptions';
 import { FormData } from '../../../Types/FormData';
 import { Context } from '../../Wrapper/Wrapper';
 import { useIsEnergyCalculator } from '../hooks';
-import { EnergyCalculatorAPIResponse } from './rebateTypes';
-
-type Rebate = {};
+import { EnergyCalculatorAPIResponse, EnergyCalculatorRebateCategory } from './rebateTypes';
 
 const API_KEY = `Bearer ${process.env.REACT_APP_ENERGY_CALCULATOR_REWIRING_AMERICA_API_KEY}`;
+
+function calcFilingStatus(formData: FormData) {
+  // no children or spouse
+  let filingStatus = 'single';
+
+  for (const member of formData.householdData) {
+    if (member.relationshipToHH === 'headOfHousehold') {
+      continue;
+    }
+
+    if (member.relationshipToHH === 'spouse') {
+      // has a spouse
+      filingStatus = 'joint';
+    } else if (filingStatus !== 'joint') {
+      // has dependents but no spouse
+      filingStatus = 'hoh';
+    }
+  }
+
+  return filingStatus;
+}
 
 function createQueryString(formData: FormData, lang: Language) {
   const query = new URLSearchParams();
@@ -20,7 +39,7 @@ function createQueryString(formData: FormData, lang: Language) {
   let income = 0; // TODO: calculate income
   query.append('household_income', String(income));
 
-  let filingStatus = 'hoh'; // TODO: caclulate filing status
+  let filingStatus = calcFilingStatus(formData);
   query.append('tax_filing', filingStatus);
 
   query.append('household_size', String(formData.householdSize));
@@ -52,7 +71,7 @@ async function getRebates(formData: FormData, lang: Language) {
 
 export default function useFetchEnergyCalculatorRebates() {
   const { formData, locale } = useContext(Context);
-  const [rebates, setRebates] = useState<Rebate[]>([]);
+  const [rebates, setRebates] = useState<EnergyCalculatorRebateCategory[]>([]);
   const isEnergyCalculator = useIsEnergyCalculator();
 
   useEffect(() => {
