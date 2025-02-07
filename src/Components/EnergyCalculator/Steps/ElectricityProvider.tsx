@@ -28,18 +28,12 @@ export default function ElectricityProvider() {
   const { updateScreen } = useScreenApi();
 
   const formSchema = z.object({
-    electricityProvider: z
-      .string({
-        errorMap: () => {
-          return {
-            message: formatMessage({
-              id: 'energyCalculator.electricityProvider.errorMessage',
-              defaultMessage: 'Please select an electricity provider',
-            }),
-          };
-        },
-      })
-      .min(1),
+    electricityProvider: z.string().min(1, {
+      message: formatMessage({
+        id: 'energyCalculator.electricityProvider.errorMessage',
+        defaultMessage: 'Please select an electricity provider',
+      }),
+    }),
   });
 
   const {
