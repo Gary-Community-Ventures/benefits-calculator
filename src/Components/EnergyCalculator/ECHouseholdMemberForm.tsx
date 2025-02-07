@@ -840,9 +840,7 @@ const ECHouseholdMemberForm = () => {
         ? 'Based on this disability, did you receive full benefits from Social Security, SSI, the Department of Human Services, or a public or private plan?'
         : 'Based on this disability, do they receive full benefits from Social Security, SSI, the Department of Human Services, or a public or private plan?';
     return (
-      // <Box className="section-container" sx={{ paddingTop: '3rem' }}>
-      //   <div className="section">
-      <>
+      <Box sx={{ pb: '2rem' }}>
         <QuestionQuestion>
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </QuestionQuestion>
@@ -865,9 +863,7 @@ const ECHouseholdMemberForm = () => {
             </RadioGroup>
           )}
         />
-      </>
-      //   </div>
-      // </Box>
+      </Box>
     );
   };
 
@@ -892,7 +888,6 @@ const ECHouseholdMemberForm = () => {
         {createAgeQuestion()}
         {pageNumber !== 1 && createHOfHRelationQuestion()}
         {displayConditionsQuestion()}
-        {(getValues('conditions.disabled') && createReceivesSsiQuestion()) || null}
         <div>
           <Stack sx={{ margin: '3rem 0' }}>
             {createIncomeRadioQuestion()}
