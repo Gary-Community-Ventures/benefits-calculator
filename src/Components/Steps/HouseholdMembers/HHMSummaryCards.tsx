@@ -5,7 +5,7 @@ import { calcAge, hasBirthMonthYear, useFormatBirthMonthYear } from '../../../As
 import { useConfig } from '../../Config/configHook';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { FormData, HouseholdData } from '../../../Types/FormData';
-import { FormattedMessageType } from '../../../Types/Questions';
+import { FormattedMessageType, QuestionName } from '../../../Types/Questions';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { useStepNumber } from '../../../Assets/stepDirectory.ts';
@@ -15,13 +15,14 @@ import './HHMSummaryCards.css';
 type HHMSummariesProps = {
   activeMemberData: HouseholdData;
   triggerValidation: () => Promise<boolean>;
+  questionName: QuestionName;
 };
 
-const HHMSummaries = ({ activeMemberData, triggerValidation }: HHMSummariesProps) => {
+const HHMSummaries = ({ activeMemberData, triggerValidation, questionName }: HHMSummariesProps) => {
   const { formData } = useContext(Context);
   const { uuid, page } = useParams();
   const pageNumber = Number(page);
-  const currentStepId = useStepNumber('householdData');
+  const currentStepId = useStepNumber(questionName);
   const relationshipOptions = useConfig<{ [key: string]: FormattedMessageType }>('relationship_options');
   const headOfHHInfoWasEntered = formData.householdData.length >= 1;
   const translateNumber = useTranslateNumber();

@@ -4,11 +4,15 @@ export type QuestionName =
   | 'zipcode'
   | 'householdSize'
   | 'householdData'
+  | 'ecHouseholdData'
   | 'hasExpenses'
   | 'householdAssets'
   | 'hasBenefits'
   | 'acuteHHConditions'
   | 'referralSource'
-  | 'signUpInfo';
+  | 'signUpInfo'
+  | 'energyCalculatorElectricityProvider'
+  | 'energyCalculatorGasProvider'
+  | 'energyCalculatorExpenses';
 
 export type FormattedMessageType = ReactElement<any, string | JSXElementConstructor<any>>;

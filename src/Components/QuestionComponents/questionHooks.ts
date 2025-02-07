@@ -47,6 +47,10 @@ export function useQueryString() {
     query.append('referrer', formData.immutableReferrer);
   }
 
+  if (formData.path !== undefined) {
+    query.append('path', formData.path);
+  }
+
   let queryString = query.toString();
   if (queryString !== '') {
     queryString = '?' + queryString;
@@ -54,6 +58,8 @@ export function useQueryString() {
 
   return queryString;
 }
+
+const MEMBER_QUESTIONS: QuestionName[] = ['householdData', 'ecHouseholdData'];
 
 export function useDefaultBackNavigationFunction(questionName: QuestionName) {
   const { formData } = useContext(Context);
@@ -63,7 +69,7 @@ export function useDefaultBackNavigationFunction(questionName: QuestionName) {
   const prevStepName = useStepName(currentStepId - 1);
 
   const prevUrl = useMemo(() => {
-    if (prevStepName === 'householdData') {
+    if (prevStepName && MEMBER_QUESTIONS.includes(prevStepName)) {
       return `/${whiteLabel}/${uuid}/step-${currentStepId - 1}/${formData.householdData.length}`;
     }
 

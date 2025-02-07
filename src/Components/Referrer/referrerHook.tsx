@@ -6,6 +6,8 @@ type ReferrerOptions<T> = {
   [key: string]: T;
 };
 
+export type StepDirectory = QuestionName[] | { default: QuestionName[]; [key: string]: QuestionName[] };
+
 export type ReferrerData = {
   theme: ReferrerOptions<string>;
   logoSource: ReferrerOptions<string>;
@@ -14,8 +16,8 @@ export type ReferrerData = {
   logoFooterAlt: ReferrerOptions<{ id: string; defaultMessage: string }>;
   logoClass: ReferrerOptions<string>;
   shareLink: ReferrerOptions<string>;
-  stepDirectory: ReferrerOptions<QuestionName[]>;
   featureFlags: ReferrerOptions<string[]>;
+  stepDirectory: ReferrerOptions<StepDirectory>;
 };
 
 export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
