@@ -48,6 +48,7 @@ import {
   renderIncomeFrequencyHelperText,
   renderHoursWorkedHelperText,
   renderIncomeAmountHelperText,
+  renderHealthInsNonePlusTheyHelperText,
 } from './HelperTextFunctions';
 import { DOLLARS, handleNumbersOnly, numberInputProps, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
 import useScreenApi from '../../../Assets/updateScreen';
@@ -146,15 +147,9 @@ const HouseholdMemberForm = () => {
   const incomeStreamsSchema = z.array(incomeSourcesSchema);
   const hasIncomeSchema = z.string().regex(/^true|false$/);
 
-  let healthInsuranceNoInsuranceErrorMessage = intl.formatMessage({
-    id: 'validation-helperText.hhMemberInsuranceNone-you',
-    defaultMessage: 'Please do not select any other options if you do not have health insurance',
-  });
+  let healthInsNonPlusHelperText = renderHealthInsNonePlusHelperText(intl);
   if (pageNumber !== 1) {
-    healthInsuranceNoInsuranceErrorMessage = intl.formatMessage({
-      id: 'validation-helperText.hhMemberInsuranceNone-they',
-      defaultMessage: 'Please do not select any other options if they do not have health insurance',
-    });
+    healthInsNonPlusHelperText = renderHealthInsNonePlusTheyHelperText(intl);
   }
 
   const formSchema = z
@@ -201,7 +196,7 @@ const HouseholdMemberForm = () => {
             return true;
           },
           {
-            message: renderHealthInsNonePlusHelperText(intl),
+            message: healthInsNonPlusHelperText,
           },
         ),
       conditions: z.object({
