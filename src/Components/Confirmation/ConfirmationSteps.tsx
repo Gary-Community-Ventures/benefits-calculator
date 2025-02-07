@@ -19,6 +19,7 @@ import ConfirmationHHData from './ConfirmationHHData/ConfirmationHHData';
 import { Conditions, IncomeStream, Benefits as BenefitsType } from '../../Types/FormData';
 import { calcAge, hasBirthMonthYear, useFormatBirthMonthYear } from '../../Assets/age';
 import EnergyCalculatorElectricityProvider from '../EnergyCalculator/ConfirmationPage/ElectricityProvider';
+import EnergyCalculatorGasProvider from '../EnergyCalculator/ConfirmationPage/GasProvider';
 import EnergyCalculatorExpenses from '../EnergyCalculator/ConfirmationPage/Expenses';
 
 function ZipCode() {
@@ -360,6 +361,7 @@ const STEP_CONFIRMATIONS: Record<QuestionName, ReactNode | null> = {
   energyCalculatorElectricityProvider: (
     <EnergyCalculatorElectricityProvider key="energyCalculatorElectricityProvider" />
   ),
+  energyCalculatorGasProvider: <EnergyCalculatorGasProvider key="energyCalculatorGasProvider" />,
   energyCalculatorExpenses: <EnergyCalculatorExpenses key="energyCalculatorExpenses" />,
   signUpInfo: null,
 };

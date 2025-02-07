@@ -12,6 +12,7 @@ export type QuestionName =
   | 'referralSource'
   | 'signUpInfo'
   | 'energyCalculatorElectricityProvider'
+  | 'energyCalculatorGasProvider'
   | 'energyCalculatorExpenses';
 
 export type FormattedMessageType = ReactElement<any, string | JSXElementConstructor<any>>;
