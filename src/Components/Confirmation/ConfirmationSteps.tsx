@@ -13,7 +13,8 @@ import { useTranslateNumber } from '../../Assets/languageOptions';
 import { FormattedMessageType, QuestionName } from '../../Types/Questions';
 import { useConfig } from '../Config/configHook';
 import { Benefits as BenefitsType } from '../../Types/FormData';
-import ConfirmationHHData from './ConfirmationHHData/ConfirmationHHData';
+import DefaultConfirmationHHData from './HouseholdData/DefaultConfirmationHHData';
+import EnergyCalcConfirmationHHData from './HouseholdData/EnergyCalcConfirmationHHData';
 
 function ZipCode() {
   const { formData } = useContext(Context);
@@ -344,8 +345,8 @@ function ReferralSource() {
 const STEP_CONFIRMATIONS: Record<QuestionName, ReactNode | null> = {
   zipcode: <ZipCode key="zipcode" />,
   householdSize: <HouseholdSize key="householdSize" />,
-  ecHouseholdData: <ConfirmationHHData key="ecHouseholdData" energyCalculator={true} />,
-  householdData: <ConfirmationHHData key="householdData" energyCalculator={false} />,
+  ecHouseholdData: <EnergyCalcConfirmationHHData key="ecHouseholdData" />,
+  householdData: <DefaultConfirmationHHData key="householdData" />,
   hasExpenses: <Expenses key="hasExpenses" />,
   householdAssets: <Assets key="householdAssets" />,
   hasBenefits: <HasBenefits key="hasBenefits" />,
