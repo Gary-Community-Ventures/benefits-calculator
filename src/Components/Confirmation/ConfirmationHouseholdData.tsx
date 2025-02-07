@@ -1,13 +1,13 @@
 import { ReactNode, useContext } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
-import { useFormatBirthMonthYear, calcAge, hasBirthMonthYear } from '../../../Assets/age';
-import { useTranslateNumber } from '../../../Assets/languageOptions';
-import { Conditions, IncomeStream } from '../../../Types/FormData';
-import { FormattedMessageType } from '../../../Types/Questions';
-import { useConfig } from '../../Config/configHook';
-import ConfirmationBlock, { formatToUSD, ConfirmationItem } from '../ConfirmationBlock';
-import { Context } from '../../Wrapper/Wrapper';
-import { ReactComponent as Head } from '../../../Assets/icons/head.svg';
+import { useFormatBirthMonthYear, calcAge, hasBirthMonthYear } from '../../Assets/age';
+import { useTranslateNumber } from '../../Assets/languageOptions';
+import { Conditions, IncomeStream } from '../../Types/FormData';
+import { FormattedMessageType } from '../../Types/Questions';
+import { useConfig } from '../Config/configHook';
+import ConfirmationBlock, { formatToUSD, ConfirmationItem } from './ConfirmationBlock';
+import { Context } from '../Wrapper/Wrapper';
+import { ReactComponent as Head } from '../../Assets/icons/head.svg';
 
 type IconAndFormattedMessageMap = {
   [key: string]: {

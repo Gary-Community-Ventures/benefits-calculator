@@ -1,13 +1,15 @@
-import { ReactNode, useContext } from 'react';
+import { useContext } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useFormatBirthMonthYear, calcAge, hasBirthMonthYear } from '../../../Assets/age';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
-import { Conditions, HouseholdData, IncomeStream } from '../../../Types/FormData';
+import { HouseholdData, IncomeStream } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
 import { useConfig } from '../../Config/configHook';
-import ConfirmationBlock, { formatToUSD, ConfirmationItem } from '../ConfirmationBlock';
+import ConfirmationBlock, { formatToUSD, ConfirmationItem } from '../../Confirmation/ConfirmationBlock';
 import { Context } from '../../Wrapper/Wrapper';
 import { ReactComponent as Head } from '../../../Assets/icons/head.svg';
+
+type OptionMap = { [key: string]: FormattedMessageType };
 
 const EnergyCalcConfirmationHHData = () => {
   const { formData } = useContext(Context);
@@ -18,9 +20,9 @@ const EnergyCalcConfirmationHHData = () => {
   const translateNumber = useTranslateNumber();
   const formatBirthMonthYear = useFormatBirthMonthYear();
 
-  const relationshipOptions = useConfig<FormattedMessageType>('relationship_options');
-  const incomeOptions = useConfig<FormattedMessageType>('income_options');
-  const frequencyOptions = useConfig<FormattedMessageType>('frequency_options');
+  const relationshipOptions = useConfig<OptionMap>('relationship_options');
+  const incomeOptions = useConfig<OptionMap>('income_options');
+  const frequencyOptions = useConfig<OptionMap>('frequency_options');
 
   const listAllIncomeStreams = (incomeStreams: IncomeStream[]) => {
     const mappedListItems = incomeStreams.map((incomeStream, index) => {
