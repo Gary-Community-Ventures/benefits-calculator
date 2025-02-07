@@ -3,7 +3,6 @@ import { Context } from '../Wrapper/Wrapper';
 import ConfirmationBlock, { ConfirmationItem, formatToUSD } from './ConfirmationBlock';
 import { ReactComponent as Residence } from '../../Assets/icons/residence.svg';
 import { ReactComponent as Household } from '../../Assets/icons/household.svg';
-import { ReactComponent as Head } from '../../Assets/icons/head.svg';
 import { ReactComponent as Expense } from '../../Assets/icons/expenses.svg';
 import { ReactComponent as Resources } from '../../Assets/icons/resources.svg';
 import { ReactComponent as Benefits } from '../../Assets/icons/benefits.svg';
@@ -13,10 +12,15 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useTranslateNumber } from '../../Assets/languageOptions';
 import { FormattedMessageType, QuestionName } from '../../Types/Questions';
 import { useConfig } from '../Config/configHook';
+import { Benefits as BenefitsType } from '../../Types/FormData';
+import DefaultConfirmationHHData from './HouseholdData/DefaultConfirmationHHData';
+import EnergyCalcConfirmationHHData from './HouseholdData/EnergyCalcConfirmationHHData';
+import ConfirmationHHData from './ConfirmationHHData/ConfirmationHHData';
 import { Conditions, IncomeStream, Benefits as BenefitsType } from '../../Types/FormData';
 import { calcAge, hasBirthMonthYear, useFormatBirthMonthYear } from '../../Assets/age';
 import EnergyCalculatorElectricityProvider from '../EnergyCalculator/ConfirmationPage/ElectricityProvider';
 import EnergyCalculatorGasProvider from '../EnergyCalculator/ConfirmationPage/GasProvider';
+import EnergyCalculatorExpenses from '../EnergyCalculator/ConfirmationPage/Expenses';
 
 function ZipCode() {
   const { formData } = useContext(Context);
@@ -105,236 +109,6 @@ type IconAndFormattedMessageMap = {
     icon: ReactNode;
   };
 };
-
-function HouseholdData() {
-  const { formData } = useContext(Context);
-  const { householdData } = formData;
-
-  const { formatMessage } = useIntl();
-
-  const translateNumber = useTranslateNumber();
-  const formatBirthMonthYear = useFormatBirthMonthYear();
-
-  const relationshipOptions = useConfig<FormattedMessageMap>('relationship_options');
-  const incomeOptions = useConfig<FormattedMessageMap>('income_options');
-  const frequencyOptions = useConfig<FormattedMessageMap>('frequency_options');
-  const healthInsuranceOptions = useConfig<{
-    you: IconAndFormattedMessageMap;
-    them: IconAndFormattedMessageMap;
-  }>('health_insurance_options');
-
-  const conditionsString = (conditions: Conditions) => {
-    const conditionText = [];
-
-    if (conditions.student) {
-      conditionText.push(
-        formatMessage({
-          id: 'confirmation.headOfHouseholdDataBlock-studentText',
-          defaultMessage: 'Student',
-        }),
-      );
-    }
-
-    if (conditions.pregnant) {
-      conditionText.push(
-        formatMessage({
-          id: 'confirmation.headOfHouseholdDataBlock-pregnantText',
-          defaultMessage: 'Pregnant',
-        }),
-      );
-    }
-
-    if (conditions.blindOrVisuallyImpaired) {
-      conditionText.push(
-        formatMessage({
-          id: 'confirmation.headOfHouseholdDataBlock-blindOrVisuallyImpairedText',
-          defaultMessage: 'Blind or visually impaired',
-        }),
-      );
-    }
-
-    if (conditions.disabled) {
-      conditionText.push(
-        formatMessage({
-          id: 'confirmation.headOfHouseholdDataBlock-disabledText',
-          defaultMessage: 'Disabled',
-        }),
-      );
-    }
-
-    if (conditions.longTermDisability) {
-      conditionText.push(
-        formatMessage({
-          id: 'confirmation.longTermDisability',
-          defaultMessage:
-            'Has a medical or developmental condition that has lasted, or is expected to last, more than 12 months',
-        }),
-      );
-    }
-
-    if (conditionText.length === 0) {
-      return formatMessage({ id: 'confirmation.none', defaultMessage: 'None' });
-    }
-
-    // NOTE: we might want to redesign this to be more like a bullet list because
-    // not every language will use commas to seperate a list.
-    return conditionText.join(', ');
-  };
-
-  const listAllIncomeStreams = (incomeStreams: IncomeStream[]) => {
-    const mappedListItems = incomeStreams.map((incomeStream, index) => {
-      const incomeStreamName = incomeOptions[incomeStream.incomeStreamName];
-      const incomeAmount = formatToUSD(Number(incomeStream.incomeAmount));
-      const incomeFrequency = frequencyOptions[incomeStream.incomeFrequency];
-      const hoursPerWeek = incomeStream.hoursPerWeek;
-      const translatedHrsPerWkText = formatMessage({
-        id: 'listAllIncomeStreams.hoursPerWeek',
-        defaultMessage: ' hours/week ',
-      });
-
-      const translatedAnnualText = formatMessage({
-        id: 'displayAnnualIncome.annual',
-        defaultMessage: ' annually',
-      });
-      let num = 0;
-
-      switch (incomeStream.incomeFrequency) {
-        case 'weekly':
-          num = Number(incomeStream.incomeAmount) * 52;
-          break;
-        case 'biweekly':
-          num = Number(incomeStream.incomeAmount) * 26;
-          break;
-        case 'semimonthly':
-          num = Number(incomeStream.incomeAmount) * 24;
-          break;
-        case 'monthly':
-          num = Number(incomeStream.incomeAmount) * 12;
-          break;
-        case 'yearly':
-          num = Number(incomeStream.incomeAmount);
-          break;
-        case 'hourly':
-          num = Number(incomeStream.incomeAmount) * Number(incomeStream.hoursPerWeek) * 52;
-          break;
-      }
-      const annualAmount = `(${formatToUSD(num)}` + translatedAnnualText + `)`;
-
-      return (
-        <li key={index}>
-          <ConfirmationItem
-            label={<>{incomeStreamName}:</>}
-            value={
-              incomeStream.incomeFrequency === 'hourly' ? (
-                <>
-                  {translateNumber(incomeAmount)} {incomeFrequency} ~{translateNumber(hoursPerWeek)}{' '}
-                  {translatedHrsPerWkText} {translateNumber(annualAmount)}
-                </>
-              ) : (
-                <>
-                  {translateNumber(incomeAmount)} {incomeFrequency} {translateNumber(annualAmount)}
-                </>
-              )
-            }
-          />
-        </li>
-      );
-    });
-
-    return mappedListItems;
-  };
-
-  const editHouseholdMemberAriaLabel = {
-    id: 'confirmation.hhMember.edit-AL',
-    defaultMessage: 'edit household member',
-  };
-  const householdMemberIconAlt = {
-    id: 'confirmation.hhMember.icon-AL',
-    defaultMessage: 'household member',
-  };
-
-  const householdMemberDataBlocks = householdData.map((member, i) => {
-    const { hasIncome, incomeStreams } = member;
-    const age = calcAge(member);
-    let relationship: FormattedMessageType;
-    if (i === 0) {
-      relationship = <FormattedMessage id="qcc.hoh-text" defaultMessage="Head of Household (You)" />;
-    } else {
-      relationship = relationshipOptions[member.relationshipToHH];
-    }
-
-    const displayHealthInsurance = () => {
-      const insurance = member.healthInsurance;
-      const selectedNone = insurance.none === true;
-
-      const youVsThemHealthInsuranceOptions = i === 0 ? healthInsuranceOptions.you : healthInsuranceOptions.them;
-
-      const allOtherSelectedOptions = Object.entries(insurance)
-        .filter((hHMemberInsEntry) => hHMemberInsEntry[1] === true)
-        .map((insurance) => {
-          const formattedMessageProp = youVsThemHealthInsuranceOptions[insurance[0]].text.props;
-          return formatMessage({ ...formattedMessageProp });
-        });
-
-      if (selectedNone) {
-        return <>{youVsThemHealthInsuranceOptions.none.text}</>;
-      }
-
-      const allOtherSelectedOptionsString = allOtherSelectedOptions.join(', ');
-
-      return <>{allOtherSelectedOptionsString}</>;
-    };
-
-    return (
-      <ConfirmationBlock
-        icon={<Head title={formatMessage(householdMemberIconAlt)} />}
-        title={relationship}
-        editAriaLabel={editHouseholdMemberAriaLabel}
-        stepName="householdData"
-        editUrlEnding={String(i + 1)}
-        key={i}
-      >
-        <ConfirmationItem
-          label={<FormattedMessage id="questions.age-inputLabel" defaultMessage="Age:" />}
-          value={translateNumber(age)}
-        />
-        {hasBirthMonthYear(member) && (
-          <ConfirmationItem
-            label={<FormattedMessage id="confirmation.member.birthYearMonth" defaultMessage="Birth Month/Year:" />}
-            value={formatBirthMonthYear(member)}
-          />
-        )}
-        <ConfirmationItem
-          label={
-            <FormattedMessage id="confirmation.headOfHouseholdDataBlock-conditionsText" defaultMessage="Conditions:" />
-          }
-          value={conditionsString(member.conditions)}
-        />
-        <ConfirmationItem
-          label={<FormattedMessage id="confirmation.headOfHouseholdDataBlock-incomeLabel" defaultMessage="Income:" />}
-          value={
-            hasIncome && incomeStreams.length > 0 ? (
-              <ul>{listAllIncomeStreams(incomeStreams)}</ul>
-            ) : (
-              <FormattedMessage id="confirmation.noIncome" defaultMessage="None" />
-            )
-          }
-        />
-        <ConfirmationItem
-          label={
-            <FormattedMessage
-              id="confirmation.headOfHouseholdDataBlock-healthInsuranceText"
-              defaultMessage="Health Insurance: "
-            />
-          }
-          value={displayHealthInsurance()}
-        />
-      </ConfirmationBlock>
-    );
-  });
-
-  return <>{householdMemberDataBlocks}</>;
-}
 
 function Expenses() {
   const { formData } = useContext(Context);
@@ -577,7 +351,8 @@ function ReferralSource() {
 const STEP_CONFIRMATIONS: Record<QuestionName, ReactNode | null> = {
   zipcode: <ZipCode key="zipcode" />,
   householdSize: <HouseholdSize key="householdSize" />,
-  householdData: <HouseholdData key="HouseholdData" />,
+  ecHouseholdData: <EnergyCalcConfirmationHHData key="ecHouseholdData" />,
+  householdData: <DefaultConfirmationHHData key="householdData" />,
   hasExpenses: <Expenses key="hasExpenses" />,
   householdAssets: <Assets key="householdAssets" />,
   hasBenefits: <HasBenefits key="hasBenefits" />,
@@ -587,6 +362,7 @@ const STEP_CONFIRMATIONS: Record<QuestionName, ReactNode | null> = {
     <EnergyCalculatorElectricityProvider key="energyCalculatorElectricityProvider" />
   ),
   energyCalculatorGasProvider: <EnergyCalculatorGasProvider key="energyCalculatorGasProvider" />,
+  energyCalculatorExpenses: <EnergyCalculatorExpenses key="energyCalculatorExpenses" />,
   signUpInfo: null,
 };
 
