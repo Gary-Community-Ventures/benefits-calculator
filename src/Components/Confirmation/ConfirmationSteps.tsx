@@ -15,6 +15,11 @@ import { useConfig } from '../Config/configHook';
 import { Benefits as BenefitsType } from '../../Types/FormData';
 import DefaultConfirmationHHData from './HouseholdData/DefaultConfirmationHHData';
 import EnergyCalcConfirmationHHData from './HouseholdData/EnergyCalcConfirmationHHData';
+import ConfirmationHHData from './ConfirmationHHData/ConfirmationHHData';
+import { Conditions, IncomeStream, Benefits as BenefitsType } from '../../Types/FormData';
+import { calcAge, hasBirthMonthYear, useFormatBirthMonthYear } from '../../Assets/age';
+import EnergyCalculatorElectricityProvider from '../EnergyCalculator/ConfirmationPage/ElectricityProvider';
+import EnergyCalculatorExpenses from '../EnergyCalculator/ConfirmationPage/Expenses';
 
 function ZipCode() {
   const { formData } = useContext(Context);
@@ -352,6 +357,10 @@ const STEP_CONFIRMATIONS: Record<QuestionName, ReactNode | null> = {
   hasBenefits: <HasBenefits key="hasBenefits" />,
   acuteHHConditions: <AcuteConditions key="acuteHHConditions" />,
   referralSource: <ReferralSource key="referralSource" />,
+  energyCalculatorElectricityProvider: (
+    <EnergyCalculatorElectricityProvider key="energyCalculatorElectricityProvider" />
+  ),
+  energyCalculatorExpenses: <EnergyCalculatorExpenses key="energyCalculatorExpenses" />,
   signUpInfo: null,
 };
 
