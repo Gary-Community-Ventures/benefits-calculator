@@ -504,7 +504,7 @@ const ECHouseholdMemberForm = () => {
         : 'Does this individual in your household have significant income you have not already included?';
 
     return (
-      <Box className="section-container" sx={{ paddingTop: '3rem' }}>
+      <Box className="section-container" sx={{ padding: '3rem 0' }}>
         <div>
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
