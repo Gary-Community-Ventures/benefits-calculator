@@ -11,6 +11,8 @@ import ImmediateNeeds from '../Steps/ImmediateNeeds';
 import SignUp from '../Steps/SignUp/SignUp';
 import HouseholdAssets from '../Steps/HouseholdAssets/HouseholdAssets';
 import './QuestionComponentContainer.css';
+import ElectricityProvider from '../EnergyCalculator/Steps/ElectricityProvider';
+import EnergyCalculatorExpenses from '../EnergyCalculator/Steps/Expenses';
 
 const QuestionComponentContainer = () => {
   let { id } = useParams();
@@ -75,6 +77,18 @@ const QuestionComponentContainer = () => {
       return (
         <main className="benefits-form">
           <SignUp />
+        </main>
+      );
+    case 'energyCalculatorElectricityProvider':
+      return (
+        <main className="benefits-form">
+          <ElectricityProvider />
+        </main>
+      );
+    case 'energyCalculatorExpenses':
+      return (
+        <main className="benefits-form">
+          <EnergyCalculatorExpenses />
         </main>
       );
   }

@@ -178,6 +178,7 @@ export type ApiFormData = {
   has_pell_grant: boolean | null;
   has_nfp: boolean | null;
   has_fatc: boolean | null;
+  has_section_8: boolean | null;
   has_employer_hi?: boolean | null;
   has_private_hi?: boolean | null;
   has_medicaid_hi?: boolean | null;

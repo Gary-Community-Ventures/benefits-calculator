@@ -1,4 +1,17 @@
-const ELECTRICITY_PROVIDERS = {
+export function getProviderNames() {
+  const providerNames: { [key: string]: string } = {};
+
+  for (const providers of Object.values(ELECTRICITY_PROVIDERS)) {
+    for (const [code, details] of Object.entries(providers)) {
+      providerNames[code] = details.name;
+    }
+  }
+
+  return providerNames;
+}
+
+type ElectricityProviders = { [key: string]: { [key: string]: { name: string } } };
+const ELECTRICITY_PROVIDERS: ElectricityProviders = {
   '80002': {
     'co-xcel-energy': {
       name: 'Xcel Energy',
