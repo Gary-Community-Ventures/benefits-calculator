@@ -28,18 +28,12 @@ export default function GasProvider() {
   const { updateScreen } = useScreenApi();
 
   const formSchema = z.object({
-    gasProvider: z
-      .string({
-        errorMap: () => {
-          return {
-            message: formatMessage({
-              id: 'energyCalculator.gasProvider.errorMessage',
-              defaultMessage: 'Please select an gas provider',
-            }),
-          };
-        },
-      })
-      .min(1),
+    gasProvider: z.string().min(1, {
+      message: formatMessage({
+        id: 'energyCalculator.gasProvider.errorMessage',
+        defaultMessage: 'Please select an gas provider',
+      }),
+    }),
   });
 
   const {
