@@ -5,7 +5,6 @@ import { Context } from '../Wrapper/Wrapper';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData';
 import type { EnergyCalculatorMember, FormData } from '../../Types/FormData';
-import { on } from 'events';
 
 const FetchScreen = () => {
   const { formData, setFormData, setScreenLoading, setWhiteLabel } = useContext(Context);
@@ -161,7 +160,7 @@ const FetchScreen = () => {
         energyCalculator = {
           survivingSpouse: member.energy_calculator.surviving_spouse,
           disabled: member.energy_calculator.disabled,
-          recievesSsi: member.energy_calculator.recieves_ssi,
+          receivesSsi: member.energy_calculator.recieves_ssi,
         };
       }
 

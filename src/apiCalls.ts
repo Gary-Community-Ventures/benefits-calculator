@@ -77,7 +77,7 @@ const getScreen = async (uuid: string) => {
     if (!response.ok) {
       throw new Error(`${response.status} ${response.statusText}`);
     }
-    return response.json() as Promise<ApiFormDataReadOnly>;
+    return response.json() as Promise<ApiFormDataReadOnly & ApiFormData>;
   });
 };
 
