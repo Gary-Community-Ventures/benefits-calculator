@@ -15,23 +15,23 @@ import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../Questio
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { createMenuItems } from '../../Steps/SelectHelperFunctions/SelectHelperFunctions';
 import { Context } from '../../Wrapper/Wrapper';
-import ELECTRICITY_PROVIDERS from '../electricityProviders';
+import { GAS_PROVIDERS } from '../gasProviders';
 import { useEnergyFormData } from '../hooks';
 
-export default function ElectricityProvider() {
+export default function GasProvider() {
   const { formData, setFormData } = useContext(Context);
   const energyDataAvailable = useEnergyFormData(formData);
   const { uuid } = useParams();
-  const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorElectricityProvider');
-  const nextStep = useGoToNextStep('energyCalculatorElectricityProvider');
+  const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorGasProvider');
+  const nextStep = useGoToNextStep('energyCalculatorGasProvider');
   const { formatMessage } = useIntl();
   const { updateScreen } = useScreenApi();
 
   const formSchema = z.object({
-    electricityProvider: z.string().min(1, {
+    gasProvider: z.string().min(1, {
       message: formatMessage({
-        id: 'energyCalculator.electricityProvider.errorMessage',
-        defaultMessage: 'Please select an electricity provider',
+        id: 'energyCalculator.gasProvider.errorMessage',
+        defaultMessage: 'Please select an gas provider',
       }),
     }),
   });
@@ -43,11 +43,11 @@ export default function ElectricityProvider() {
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      electricityProvider: formData.energyCalculator?.electricProvider ?? '',
+      gasProvider: formData.energyCalculator?.gasProvider ?? '',
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ electricityProvider }) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ gasProvider }) => {
     if (!uuid) {
       throw new Error('no uuid');
     }
@@ -57,7 +57,7 @@ export default function ElectricityProvider() {
 
     const updatedEnergyData: EnergyCalculatorFormData = {
       ...formData.energyCalculator,
-      electricProvider: electricityProvider,
+      gasProvider: gasProvider,
     };
 
     const updatedFormData: FormData = { ...formData, energyCalculator: updatedEnergyData };
@@ -69,66 +69,64 @@ export default function ElectricityProvider() {
   const providerOptions = useMemo(() => {
     const options: { [key: string]: string | FormattedMessageType } = {};
 
-    const providerOptions = ELECTRICITY_PROVIDERS[formData.zipcode];
+    const providerOptions = GAS_PROVIDERS[formData.county];
 
     if (providerOptions === undefined) {
-      throw new Error('an invalid zip code was provided');
+      throw new Error('an invalid county was provided');
     }
 
-    for (const [code, data] of Object.entries(providerOptions)) {
-      options[code] = data.name;
+    for (const [code, name] of Object.entries(providerOptions)) {
+      options[code] = name;
     }
 
-    options['other'] = <FormattedMessage id="energyCalculator.electricityProvider.other" defaultMessage="Other" />;
+    options.propane = (
+      <FormattedMessage
+        id="energyCalculator.gasProvider.propane"
+        defaultMessage="Propane tank / firewood / heating pellets"
+      />
+    );
+    options.other = <FormattedMessage id="energyCalculator.gasProvider.other" defaultMessage="Other" />;
 
     return options;
-  }, [formData.zipcode]);
+  }, [formData.county]);
 
   return (
     <div>
       <QuestionHeader>
-        <FormattedMessage
-          id="energyCalculator.electricityProvider.header"
-          defaultMessage="Tell us about your utilities"
-        />
+        <FormattedMessage id="energyCalculator.gasProvider.header" defaultMessage="Tell us about your utilities" />
       </QuestionHeader>
       <QuestionQuestion>
         <FormattedMessage
-          id="energyCalculator.electricityProvider.question"
-          defaultMessage="Who is your electric utility provider?"
+          id="energyCalculator.gasProvider.question"
+          defaultMessage="Who is your gas utility provider?"
         />
       </QuestionQuestion>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
-        <FormControl
-          sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
-          error={errors.electricityProvider !== undefined}
-        >
+        <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.gasProvider !== undefined}>
           <InputLabel>
-            <FormattedMessage id="energyCalculator.electricityProvider.label" defaultMessage="Energy Utility" />
+            <FormattedMessage id="energyCalculator.gasProvider.label" defaultMessage="Gas Utility" />
           </InputLabel>
           <Controller
-            name="electricityProvider"
+            name="gasProvider"
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
               <>
                 <Select
                   {...field}
-                  label={
-                    <FormattedMessage id="energyCalculator.electricityProvider.label" defaultMessage="Energy Utility" />
-                  }
+                  label={<FormattedMessage id="energyCalculator.gasProvider.label" defaultMessage="Gas Utility" />}
                 >
                   {createMenuItems(
                     providerOptions,
                     <FormattedMessage
-                      id="energyCalculator.electricityProvider.placeholder"
+                      id="energyCalculator.gasProvider.placeholder"
                       defaultMessage="Select a provider"
                     />,
                   )}
                 </Select>
-                {errors.electricityProvider !== undefined && (
+                {errors.gasProvider !== undefined && (
                   <FormHelperText>
-                    <ErrorMessageWrapper fontSize="1rem">{errors.electricityProvider.message}</ErrorMessageWrapper>
+                    <ErrorMessageWrapper fontSize="1rem">{errors.gasProvider.message}</ErrorMessageWrapper>
                   </FormHelperText>
                 )}
               </>

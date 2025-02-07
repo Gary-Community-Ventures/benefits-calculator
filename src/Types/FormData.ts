@@ -38,7 +38,7 @@ export type HouseholdData = {
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
   energyCalculator?: EnergyCalculatorMember;
-  healthInsurance: HealthInsurance;
+  healthInsurance?: HealthInsurance;
 };
 
 export type Benefits = {
@@ -90,6 +90,7 @@ export type FormData = {
   benefits: Benefits;
   referralSource?: string;
   immutableReferrer?: string;
+  path?: string;
   signUpInfo: SignUpInfo;
   urlSearchParams: string;
   energyCalculator?: EnergyCalculatorFormData;
@@ -97,11 +98,11 @@ export type FormData = {
 };
 
 export type Conditions = {
-  student: boolean;
-  pregnant: boolean;
-  blindOrVisuallyImpaired: boolean;
-  disabled: boolean;
-  longTermDisability: boolean;
+  student?: boolean;
+  pregnant?: boolean;
+  blindOrVisuallyImpaired?: boolean;
+  disabled?: boolean;
+  longTermDisability?: boolean;
 };
 
 export const isCustomTypedLocationState = (

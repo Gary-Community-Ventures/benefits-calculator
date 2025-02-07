@@ -22,6 +22,7 @@ import languageRouteWrapper from './Components/RouterUtil/LanguageRouter';
 import SelectStatePage from './Components/Steps/SelectStatePage';
 import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
+import EcHouseholdMemberForm from './Components/EnergyCalculator/Steps/HouseholdMemberForm';
 import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm';
 import './App.css';
 
@@ -42,6 +43,7 @@ const App = () => {
   const [theme, setTheme] = useState(createTheme(styleOverride));
   const themeName = getReferrer('theme', 'default');
   const householdMemberStepNumber = useStepNumber('householdData', false);
+  const ecHouseholdMemberStepNumber = useStepNumber('energyCalculatorHouseholdData', false);
 
   useEffect(() => {
     changeTheme(themeName as 'default' | 'twoOneOne');
@@ -67,12 +69,14 @@ const App = () => {
     const utmParam = searchParams.get('utm_source');
     const testParam = searchParams.get('test') ? true : false;
     const externalIdParam = searchParams.get('externalid');
+    const pathParam = searchParams.get('path') ?? 'default';
 
     // referrer priority = stored referrer -> referrer param -> utm_source param -> ''
     const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
     const referrerSource = formData.referralSource || referrer;
     const isTest = formData.isTest || testParam;
     const externalId = formData.externalID ?? externalIdParam ?? undefined;
+    const path = formData.path ?? pathParam;
 
     setFormData({
       ...formData,
@@ -80,6 +84,7 @@ const App = () => {
       externalID: externalId,
       referralSource: referrerSource,
       immutableReferrer: referrer,
+      path: path,
       urlSearchParams: urlSearchParams,
     });
   }, [formData.immutableReferrer]);
@@ -98,6 +103,7 @@ const App = () => {
               <Route path="jeffcohs" element={<RedirectToWhiteLabel whiteLabel="co" />} />
               <Route path="jeffcohscm" element={<RedirectToWhiteLabel whiteLabel="co" />} />
               <Route path="ccig" element={<RedirectToWhiteLabel whiteLabel="co" />} />
+              <Route path="current-benefits" element={<RedirectToWhiteLabel whiteLabel="co" />} />
               <Route
                 path="step-1"
                 element={
@@ -160,6 +166,10 @@ const App = () => {
                   <Route
                     path={`step-${householdMemberStepNumber}/:page`}
                     element={<HouseholdMemberForm key={window.location.href} />}
+                  />
+                  <Route
+                    path={`step-${ecHouseholdMemberStepNumber}/:page`}
+                    element={<EcHouseholdMemberForm key={window.location.href} />}
                   />
                   <Route path="step-:id" element={<QuestionComponentContainer key={window.location.href} />} />
                   <Route path="confirm-information" element={<Confirmation />} />
