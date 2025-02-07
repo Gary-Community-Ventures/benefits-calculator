@@ -15,7 +15,6 @@ import { useConfig } from '../Config/configHook';
 import { Benefits as BenefitsType } from '../../Types/FormData';
 import DefaultConfirmationHHData from './HouseholdData/DefaultConfirmationHHData';
 import EnergyCalcConfirmationHHData from './HouseholdData/EnergyCalcConfirmationHHData';
-import { Benefits as BenefitsType } from '../../Types/FormData';
 import EnergyCalculatorElectricityProvider from '../EnergyCalculator/ConfirmationPage/ElectricityProvider';
 import EnergyCalculatorGasProvider from '../EnergyCalculator/ConfirmationPage/GasProvider';
 import EnergyCalculatorExpenses from '../EnergyCalculator/ConfirmationPage/Expenses';
