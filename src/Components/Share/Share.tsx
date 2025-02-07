@@ -69,7 +69,7 @@ const Share = forwardRef(function Share() {
   return (
     <div>
       <div className="feedback-buttons-container">
-        <a className="feedback-button-and-text" href={email}>
+        <a className="feedback-button-and-text" href={`mailto:${email}`}>
           <FormattedMessage id="contactUsButton" defaultMessage="CONTACT US" />
         </a>
         <a className="feedback-button-and-text" href={surveyLink} target="_blank">
@@ -92,11 +92,6 @@ const Share = forwardRef(function Share() {
             <XIcon sx={iconSize} />
           </Icon>
         </TwitterShareButton>
-        <EmailShareButton url={shareUrl} onClick={trackOutboundLinks('Share With Email')}>
-          <Icon name={labels.email}>
-            <EmailIcon sx={iconSize} />
-          </Icon>
-        </EmailShareButton>
         <WhatsappShareButton url={shareUrl} onClick={trackOutboundLinks('Share With WhatsApp')}>
           <Icon name="whatsApp">
             <WhatsAppIcon sx={iconSize} />

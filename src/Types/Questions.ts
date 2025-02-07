@@ -4,6 +4,7 @@ export type QuestionName =
   | 'zipcode'
   | 'householdSize'
   | 'householdData'
+  | 'ecHouseholdData'
   | 'hasExpenses'
   | 'householdAssets'
   | 'hasBenefits'

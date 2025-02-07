@@ -55,6 +55,8 @@ export function useQueryString() {
   return queryString;
 }
 
+const MEMBER_QUESTIONS: QuestionName[] = ['householdData', 'ecHouseholdData'];
+
 export function useDefaultBackNavigationFunction(questionName: QuestionName) {
   const { formData } = useContext(Context);
   const { whiteLabel, uuid } = useParams();
@@ -63,7 +65,7 @@ export function useDefaultBackNavigationFunction(questionName: QuestionName) {
   const prevStepName = useStepName(currentStepId - 1);
 
   const prevUrl = useMemo(() => {
-    if (prevStepName === 'householdData') {
+    if (prevStepName && MEMBER_QUESTIONS.includes(prevStepName)) {
       return `/${whiteLabel}/${uuid}/step-${currentStepId - 1}/${formData.householdData.length}`;
     }
 
