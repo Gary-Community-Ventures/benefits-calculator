@@ -411,23 +411,26 @@ const ECHouseholdMemberForm = () => {
       pageNumber === 1 ? 'Do any of these apply to you?' : 'Do any of these apply to them?';
 
     return (
-      <Box sx={{ margin: '3rem 0' }}>
-        <QuestionQuestion>
-          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-        </QuestionQuestion>
-        <QuestionDescription>
-          <FormattedMessage
-            id="householdDataBlock.createConditionsQuestion-pick"
-            defaultMessage="Choose all that apply."
+      <div className="section-container">
+        <Stack sx={{ padding: '3rem 0' }} className="section">
+          <QuestionQuestion>
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          </QuestionQuestion>
+          <QuestionDescription>
+            <FormattedMessage
+              id="householdDataBlock.createConditionsQuestion-pick"
+              defaultMessage="Choose all that apply."
+            />
+          </QuestionDescription>
+          <RHFOptionCardGroup
+            fields={watch('conditions')}
+            setValue={setValue}
+            name="conditions"
+            options={pageNumber === 1 ? conditionOptions.you : conditionOptions.them}
           />
-        </QuestionDescription>
-        <RHFOptionCardGroup
-          fields={watch('conditions')}
-          setValue={setValue}
-          name="conditions"
-          options={pageNumber === 1 ? conditionOptions.you : conditionOptions.them}
-        />
-      </Box>
+        </Stack>
+        {(getValues('conditions.disabled') && createReceivesSsiQuestion()) || null}
+      </div>
     );
   };
 
