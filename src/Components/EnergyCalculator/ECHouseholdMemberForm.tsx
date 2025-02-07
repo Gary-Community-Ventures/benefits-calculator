@@ -502,7 +502,7 @@ const ECHouseholdMemberForm = () => {
 
     return (
       <Box className="section-container" sx={{ paddingTop: '3rem' }}>
-        <div className="section">
+        <div>
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
             <HelpButton
