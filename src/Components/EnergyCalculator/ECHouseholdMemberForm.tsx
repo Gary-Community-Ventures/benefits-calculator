@@ -814,7 +814,7 @@ const ECHouseholdMemberForm = () => {
     }
 
     return (
-      <div className="section">
+      <div className="section top-padding-mb">
         <QuestionQuestion>
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
           <HelpButton
