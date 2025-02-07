@@ -9,6 +9,8 @@ export type QuestionName =
   | 'hasBenefits'
   | 'acuteHHConditions'
   | 'referralSource'
-  | 'signUpInfo';
+  | 'signUpInfo'
+  | 'energyCalculatorElectricityProvider'
+  | 'energyCalculatorExpenses';
 
 export type FormattedMessageType = ReactElement<any, string | JSXElementConstructor<any>>;

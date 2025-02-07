@@ -101,7 +101,6 @@ const getEnergyCalculatorMemberBody = (
 
   return {
     surviving_spouse: energyCalculatorMember.survivingSpouse,
-    disabled: energyCalculatorMember.disabled,
     receives_ssi: energyCalculatorMember.receivesSsi,
   };
 };
