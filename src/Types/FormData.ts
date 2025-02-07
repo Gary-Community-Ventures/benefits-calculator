@@ -25,7 +25,6 @@ export type EnergyCalculatorFormData = {
 
 export type EnergyCalculatorMember = {
   survivingSpouse: boolean;
-  disabled: boolean;
   receivesSsi: boolean;
 };
 
@@ -39,7 +38,7 @@ export type HouseholdData = {
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
   energyCalculator?: EnergyCalculatorMember;
-  healthInsurance: HealthInsurance;
+  healthInsurance?: HealthInsurance;
 };
 
 export type Benefits = {
@@ -98,11 +97,11 @@ export type FormData = {
 };
 
 export type Conditions = {
-  student: boolean;
-  pregnant: boolean;
-  blindOrVisuallyImpaired: boolean;
-  disabled: boolean;
-  longTermDisability: boolean;
+  student?: boolean;
+  pregnant?: boolean;
+  blindOrVisuallyImpaired?: boolean;
+  disabled?: boolean;
+  longTermDisability?: boolean;
 };
 
 export const isCustomTypedLocationState = (

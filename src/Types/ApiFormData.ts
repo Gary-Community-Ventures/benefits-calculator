@@ -44,7 +44,6 @@ export type ApiEnergyCalculatorFormData = {
 
 export type ApiEnergyCalculatorMember = {
   surviving_spouse: boolean;
-  disabled: boolean;
   receives_ssi: boolean;
 };
 
@@ -75,7 +74,7 @@ export type ApiHouseholdMember = {
   has_income: boolean | null;
   energy_calculator: ApiEnergyCalculatorMember | null;
   income_streams: ApiIncome[];
-  insurance: ApiInsurance;
+  insurance: ApiInsurance | null;
 };
 
 export type ApiExpenseReadOnly = {
@@ -168,6 +167,8 @@ export type ApiFormData = {
   has_ede: boolean | null;
   has_erc: boolean | null;
   has_leap: boolean | null;
+  has_nc_lieap: boolean | null;
+  has_nccip: boolean | null;
   has_oap: boolean | null;
   has_coctc: boolean | null;
   has_upk: boolean | null;
@@ -177,6 +178,7 @@ export type ApiFormData = {
   has_pell_grant: boolean | null;
   has_nfp: boolean | null;
   has_fatc: boolean | null;
+  has_section_8: boolean | null;
   has_employer_hi?: boolean | null;
   has_private_hi?: boolean | null;
   has_medicaid_hi?: boolean | null;

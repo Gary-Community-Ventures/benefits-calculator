@@ -73,6 +73,8 @@ const FetchScreen = () => {
         eitc: response.has_eitc ?? false,
         lifeline: response.has_lifeline ?? false,
         leap: response.has_leap ?? false,
+        nc_lieap: response.has_nc_lieap ?? false,
+        nccip: response.has_nccip ?? false,
         mydenver: response.has_mydenver ?? false,
         nslp: response.has_nslp ?? false,
         oap: response.has_oap ?? false,
@@ -90,6 +92,9 @@ const FetchScreen = () => {
         ubp: response.has_ubp ?? false,
         nfp: response.has_nfp ?? false,
         fatc: response.has_fatc ?? false,
+        section_8: response.has_section_8 ?? false,
+        chp: response.has_chp ?? false,
+        medicaid: response.has_medicaid ?? false,
       },
       referralSource: response.referral_source ?? undefined,
       immutableReferrer: response.referrer_code ?? undefined,
@@ -159,8 +164,7 @@ const FetchScreen = () => {
       if (member.energy_calculator !== null) {
         energyCalculator = {
           survivingSpouse: member.energy_calculator.surviving_spouse,
-          disabled: member.energy_calculator.disabled,
-          receivesSsi: member.energy_calculator.recieves_ssi,
+          receivesSsi: member.energy_calculator.receives_ssi,
         };
       }
 
@@ -179,6 +183,7 @@ const FetchScreen = () => {
         },
         hasIncome: member.has_income ?? false,
         incomeStreams: incomes,
+        energyCalculator: energyCalculator,
         healthInsurance: member.insurance ?? initialHHMHealthInsurance,
       });
       defaultRelationship = '';
