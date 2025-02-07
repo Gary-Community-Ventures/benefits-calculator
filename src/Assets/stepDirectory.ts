@@ -1,14 +1,14 @@
 import type { QuestionName } from '../Types/Questions';
 import { useContext } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
-import { StepDirectiory } from '../Components/Referrer/referrerHook';
+import { StepDirectory } from '../Components/Referrer/referrerHook';
 
 export const STARTING_QUESTION_NUMBER = 3;
 
 export function useStepDirectory() {
   const { getReferrer, formData } = useContext(Context);
 
-  const stepDirectory = getReferrer('stepDirectory', []) as StepDirectiory;
+  const stepDirectory = getReferrer('stepDirectory', []) as StepDirectory;
 
   if (Array.isArray(stepDirectory)) {
     return stepDirectory;

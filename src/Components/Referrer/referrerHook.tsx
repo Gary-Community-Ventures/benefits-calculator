@@ -8,7 +8,7 @@ type ReferrerOptions<T> = {
 
 export type ReferrerDataValue = any;
 
-export type StepDirectiory = QuestionName[] | { default: QuestionName[]; [key: string]: QuestionName[] };
+export type StepDirectory = QuestionName[] | { default: QuestionName[]; [key: string]: QuestionName[] };
 
 export type ReferrerData = {
   theme: ReferrerOptions<string>;
@@ -18,7 +18,7 @@ export type ReferrerData = {
   logoFooterAlt: ReferrerOptions<{ id: string; defaultMessage: string }>;
   logoClass: ReferrerOptions<string>;
   shareLink: ReferrerOptions<string>;
-  stepDirectory: ReferrerOptions<StepDirectiory>;
+  stepDirectory: ReferrerOptions<StepDirectory>;
 };
 
 export default function useReferrer(referrerCode?: string, referrerData?: ReferrerData) {
