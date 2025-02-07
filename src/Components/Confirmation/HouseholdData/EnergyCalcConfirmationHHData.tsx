@@ -150,7 +150,7 @@ const EnergyCalcConfirmationHHData = () => {
         icon={<Head title={formatMessage(householdMemberIconAlt)} />}
         title={relationship}
         editAriaLabel={editHouseholdMemberAriaLabel}
-        stepName="ecHouseholdData"
+        stepName="energyCalculatorHouseholdData"
         editUrlEnding={String(i + 1)}
         key={i}
       >

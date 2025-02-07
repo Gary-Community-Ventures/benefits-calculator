@@ -30,7 +30,7 @@ export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
   : T extends 'logoAlt' | 'logoFooterAlt'
   ? { id: string; defaultMessage: string }
   : T extends 'stepDirectory'
-  ? QuestionName[]
+  ? StepDirectory
   : T extends 'featureFlags'
   ? string[]
   : never;

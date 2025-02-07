@@ -78,7 +78,7 @@ const ECHouseholdMemberForm = () => {
     <FormattedMessage id="personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
   );
 
-  const currentStepId = useStepNumber('ecHouseholdData');
+  const currentStepId = useStepNumber('energyCalculatorHouseholdData');
   const backNavigationFunction = () => {
     if (uuid === undefined) {
       throw new Error('uuid is undefined');
@@ -879,7 +879,7 @@ const ECHouseholdMemberForm = () => {
           />
         )}
       </QuestionHeader>
-      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} questionName="ecHouseholdData" />
+      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} questionName="energyCalculatorHouseholdData" />
       <form
         onSubmit={handleSubmit(formSubmitHandler, () => {
           window.scroll({ top: 0, left: 0, behavior: 'smooth' });

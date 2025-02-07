@@ -59,7 +59,7 @@ export function useQueryString() {
   return queryString;
 }
 
-const MEMBER_QUESTIONS: QuestionName[] = ['householdData', 'ecHouseholdData'];
+const MEMBER_QUESTIONS: QuestionName[] = ['householdData', 'energyCalculatorHouseholdData'];
 
 export function useDefaultBackNavigationFunction(questionName: QuestionName) {
   const { formData } = useContext(Context);

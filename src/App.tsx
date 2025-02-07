@@ -43,7 +43,7 @@ const App = () => {
   const [theme, setTheme] = useState(createTheme(styleOverride));
   const themeName = getReferrer('theme', 'default');
   const householdMemberStepNumber = useStepNumber('householdData', false);
-  const ecHouseholdMemberStepNumber = useStepNumber('ecHouseholdData', false);
+  const ecHouseholdMemberStepNumber = useStepNumber('energyCalculatorHouseholdData', false);
 
   useEffect(() => {
     changeTheme(themeName as 'default' | 'twoOneOne');

@@ -1,7 +1,6 @@
 import type { QuestionName } from '../Types/Questions';
 import { useContext } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
-import { StepDirectory } from '../Components/Referrer/referrerHook';
 
 export const STARTING_QUESTION_NUMBER = 3;
 

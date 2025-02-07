@@ -348,7 +348,7 @@ function ReferralSource() {
 const STEP_CONFIRMATIONS: Record<QuestionName, ReactNode | null> = {
   zipcode: <ZipCode key="zipcode" />,
   householdSize: <HouseholdSize key="householdSize" />,
-  ecHouseholdData: <EnergyCalcConfirmationHHData key="ecHouseholdData" />,
+  energyCalculatorHouseholdData: <EnergyCalcConfirmationHHData key="energyCalculatorHouseholdData" />,
   householdData: <DefaultConfirmationHHData key="householdData" />,
   hasExpenses: <Expenses key="hasExpenses" />,
   householdAssets: <Assets key="householdAssets" />,
