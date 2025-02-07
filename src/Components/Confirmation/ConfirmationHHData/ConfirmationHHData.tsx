@@ -245,7 +245,7 @@ const ConfirmationHHData = ({ energyCalculator }: ConfirmationHHDataProps) => {
         icon={<Head title={formatMessage(householdMemberIconAlt)} />}
         title={relationship}
         editAriaLabel={editHouseholdMemberAriaLabel}
-        stepName={energyCalculator ? 'ecHouseholdData' : 'householdData'} //this fixed the cannot find step name for this referrer error
+        stepName={energyCalculator ? 'ecHouseholdData' : 'householdData'}
         editUrlEnding={String(i + 1)}
         key={i}
       >
