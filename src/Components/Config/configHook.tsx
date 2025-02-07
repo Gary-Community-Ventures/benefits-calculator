@@ -28,6 +28,7 @@ import { ReactComponent as Housing } from '../../Assets/OptionCardIcons/AcuteCon
 import { ReactComponent as Job_resources } from '../../Assets/OptionCardIcons/AcuteConditions/job_resources.svg';
 import { ReactComponent as Legal_services } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
 import { ReactComponent as Support } from '../../Assets/OptionCardIcons/AcuteConditions/support.svg';
+import { ReactComponent as SurvivingSpouse } from '../../Assets/icons/head.svg';
 
 type Item = {
   _label: string;
@@ -113,6 +114,9 @@ function transformItemIcon(item: unknown): any {
       break;
     case 'PrivateInsurance':
       iconComponent = <PrivateInsurance className={icon._classname} />;
+      break;
+    case 'SurvivingSpouse':
+      iconComponent = <SurvivingSpouse className={icon._classname} />;
       break;
     // Needs a generic catch-all
     default:

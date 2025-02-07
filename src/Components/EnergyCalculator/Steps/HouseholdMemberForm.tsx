@@ -1,10 +1,10 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
-import HHMSummaryCards from './HHMSummaryCards';
+import HHMSummaryCards from '../../Steps/HouseholdMembers/HHMSummaryCards';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../../Wrapper/Wrapper';
 import { ReactNode, useContext, useEffect, useMemo } from 'react';
-import { Conditions, HealthInsurance, HouseholdData } from '../../../Types/FormData';
+import { HouseholdData } from '../../../Types/FormData';
 import {
   Autocomplete,
   Box,
@@ -26,7 +26,7 @@ import { useStepNumber } from '../../../Assets/stepDirectory';
 import * as z from 'zod';
 import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MONTHS } from './MONTHS';
+import { MONTHS } from '../../Steps/HouseholdMembers/MONTHS';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
@@ -35,28 +35,25 @@ import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import { FormattedMessageType } from '../../../Types/Questions';
 import HelpButton from '../../HelpBubbleIcon/HelpButton';
 import AddIcon from '@mui/icons-material/Add';
-import { createMenuItems } from '../SelectHelperFunctions/SelectHelperFunctions';
+import { createMenuItems } from '../../Steps/SelectHelperFunctions/SelectHelperFunctions';
 import CloseButton from '../../CloseButton/CloseButton';
 import {
   renderMissingBirthMonthHelperText,
   renderFutureBirthMonthHelperText,
   renderBirthYearHelperText,
-  renderHealthInsSelectOneHelperText,
-  renderHealthInsNonePlusHelperText,
   renderRelationshipToHHHelperText,
   renderIncomeStreamNameHelperText,
   renderIncomeFrequencyHelperText,
   renderHoursWorkedHelperText,
   renderIncomeAmountHelperText,
-  renderHealthInsNonePlusTheyHelperText,
-} from './HelperTextFunctions';
+} from '../../Steps/HouseholdMembers/HelperTextFunctions';
 import { DOLLARS, handleNumbersOnly, numberInputProps, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
 import useScreenApi from '../../../Assets/updateScreen';
 import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
 import { getCurrentMonthYear, YEARS, MAX_AGE } from '../../../Assets/age';
-import './PersonIncomeBlock.css';
+import '../../../Components/Steps/HouseholdMembers/PersonIncomeBlock.css';
 
-const HouseholdMemberForm = () => {
+const ECHouseholdMemberForm = () => {
   const { formData, setFormData } = useContext(Context);
   const { uuid, page, whiteLabel } = useParams();
   const { updateScreen } = useScreenApi();
@@ -65,12 +62,8 @@ const HouseholdMemberForm = () => {
   const pageNumber = Number(page);
   const currentMemberIndex = pageNumber - 1;
   const householdMemberFormData = formData.householdData[currentMemberIndex] as HouseholdData | undefined;
-  const healthInsuranceOptions =
-    useConfig<Record<'you' | 'them', Record<keyof HealthInsurance, { text: FormattedMessageType; icon: ReactNode }>>>(
-      'health_insurance_options',
-    );
   const conditionOptions =
-    useConfig<Record<'you' | 'them', Record<keyof Conditions, { text: FormattedMessageType; icon: ReactNode }>>>(
+    useConfig<Record<'you' | 'them', Record<string, { text: FormattedMessageType; icon: ReactNode }>>>(
       'condition_options',
     );
   const relationshipOptions = useConfig<Record<string, FormattedMessageType>>('relationship_options');
@@ -85,7 +78,7 @@ const HouseholdMemberForm = () => {
     <FormattedMessage id="personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
   );
 
-  const currentStepId = useStepNumber('householdData');
+  const currentStepId = useStepNumber('energyCalculatorHouseholdData');
   const backNavigationFunction = () => {
     if (uuid === undefined) {
       throw new Error('uuid is undefined');
@@ -147,11 +140,6 @@ const HouseholdMemberForm = () => {
   const incomeStreamsSchema = z.array(incomeSourcesSchema);
   const hasIncomeSchema = z.string().regex(/^true|false$/);
 
-  let healthInsNonPlusHelperText = renderHealthInsNonePlusHelperText(intl);
-  if (pageNumber !== 1) {
-    healthInsNonPlusHelperText = renderHealthInsNonePlusTheyHelperText(intl);
-  }
-
   const formSchema = z
     .object({
       /*
@@ -171,40 +159,10 @@ const HouseholdMemberForm = () => {
           const age = CURRENT_YEAR - year;
           return year <= CURRENT_YEAR && age < MAX_AGE;
         }),
-      healthInsurance: z
-        .object({
-          none: z.boolean(),
-          employer: z.boolean(),
-          private: z.boolean(),
-          medicaid: z.boolean(),
-          medicare: z.boolean(),
-          chp: z.boolean(),
-          emergency_medicaid: z.boolean(),
-          family_planning: z.boolean(),
-          va: z.boolean(),
-        })
-        .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
-          message: renderHealthInsSelectOneHelperText(intl),
-        })
-        .refine(
-          (insuranceOptions) => {
-            if (insuranceOptions.none) {
-              return Object.entries(insuranceOptions)
-                .filter(([key, _]) => key !== 'none')
-                .every(([_, value]) => value === false);
-            }
-            return true;
-          },
-          {
-            message: healthInsNonPlusHelperText,
-          },
-        ),
       conditions: z.object({
-        student: z.boolean(),
-        pregnant: z.boolean(),
-        blindOrVisuallyImpaired: z.boolean(),
+        survivingSpouse: z.boolean(),
         disabled: z.boolean(),
-        longTermDisability: z.boolean(),
+        receivesSsi: z.enum(['true', 'false']),
       }),
       relationshipToHH: z
         .string()
@@ -265,28 +223,11 @@ const HouseholdMemberForm = () => {
     defaultValues: {
       birthMonth: householdMemberFormData?.birthMonth ? String(householdMemberFormData.birthMonth) : '',
       birthYear: householdMemberFormData?.birthYear ? String(householdMemberFormData.birthYear) : '',
-      healthInsurance: householdMemberFormData?.healthInsurance
-        ? householdMemberFormData.healthInsurance
-        : {
-            none: false,
-            employer: false,
-            private: false,
-            medicaid: false,
-            medicare: false,
-            chp: false,
-            emergency_medicaid: false,
-            family_planning: false,
-            va: false,
-          },
-      conditions: householdMemberFormData?.conditions
-        ? householdMemberFormData.conditions
-        : {
-            student: false,
-            pregnant: false,
-            blindOrVisuallyImpaired: false,
-            disabled: false,
-            longTermDisability: false,
-          },
+      conditions: {
+        survivingSpouse: householdMemberFormData?.energyCalculator?.survivingSpouse ?? false,
+        disabled: householdMemberFormData?.conditions.disabled ?? false,
+        receivesSsi: householdMemberFormData?.energyCalculator?.receivesSsi ? 'true' : 'false',
+      },
       relationshipToHH: determineDefaultRelationshipToHH(),
       hasIncome: determineDefaultHasIncome(),
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
@@ -298,6 +239,7 @@ const HouseholdMemberForm = () => {
     control,
     name: 'incomeStreams',
   });
+  const watchIsDisabled = watch('conditions.disabled');
 
   useEffect(() => {
     const noIncomeStreamsAreListed = Number(getValues('incomeStreams').length === 0);
@@ -315,19 +257,37 @@ const HouseholdMemberForm = () => {
     }
   }, [watchHasIncome]);
 
+  useEffect(() => {
+    const notDisabled = getValues('conditions.disabled') === false;
+
+    if (notDisabled) {
+      setValue('conditions.receivesSsi', 'false');
+    }
+  }, [watchIsDisabled]);
+
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (memberData) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
 
-    const updatedHouseholdData = [...formData.householdData];
-    updatedHouseholdData[currentMemberIndex] = {
+    const updatedMemberData: HouseholdData = {
       ...memberData,
+      conditions: {
+        ...memberData.conditions,
+        disabled: memberData.conditions.disabled,
+      },
       birthYear: Number(memberData.birthYear),
       birthMonth: Number(memberData.birthMonth),
       hasIncome: memberData.hasIncome === 'true',
       frontendId: crypto.randomUUID(),
+      energyCalculator: {
+        survivingSpouse: memberData.conditions.survivingSpouse,
+        receivesSsi: memberData.conditions.receivesSsi === 'true',
+      },
     };
+
+    const updatedHouseholdData = [...formData.householdData];
+    updatedHouseholdData[currentMemberIndex] = updatedMemberData;
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
     setFormData(updatedFormData);
     updateScreen(updatedFormData);
@@ -441,50 +401,6 @@ const HouseholdMemberForm = () => {
     );
   };
 
-  const displayHealthCareQuestion = () => {
-    if (pageNumber === 1) {
-      return (
-        <QuestionQuestion>
-          <FormattedMessage
-            id="questions.healthInsurance-you"
-            defaultMessage="Which type of health insurance do you have?"
-          />
-        </QuestionQuestion>
-      );
-    } else {
-      return (
-        <QuestionQuestion>
-          <FormattedMessage
-            id="questions.healthInsurance-they"
-            defaultMessage="What type of health insurance do they have?"
-          />
-        </QuestionQuestion>
-      );
-    }
-  };
-
-  const displayHealthInsuranceBlock = () => {
-    return (
-      <div className="section-container">
-        <Stack sx={{ padding: '3rem 0' }} className="section">
-          {displayHealthCareQuestion()}
-          <RHFOptionCardGroup
-            fields={watch('healthInsurance')}
-            setValue={setValue}
-            name="healthInsurance"
-            options={pageNumber === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
-            triggerValidation={trigger}
-          />
-          {errors.healthInsurance !== undefined && (
-            <FormHelperText sx={{ ml: 0 }}>
-              <ErrorMessageWrapper fontSize="1rem">{errors.healthInsurance.message}</ErrorMessageWrapper>
-            </FormHelperText>
-          )}
-        </Stack>
-      </div>
-    );
-  };
-
   const displayConditionsQuestion = () => {
     const formattedMsgId =
       pageNumber === 1
@@ -495,23 +411,26 @@ const HouseholdMemberForm = () => {
       pageNumber === 1 ? 'Do any of these apply to you?' : 'Do any of these apply to them?';
 
     return (
-      <Box sx={{ margin: '3rem 0' }}>
-        <QuestionQuestion>
-          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-        </QuestionQuestion>
-        <QuestionDescription>
-          <FormattedMessage
-            id="householdDataBlock.createConditionsQuestion-pick"
-            defaultMessage="Choose all that apply."
+      <div className="section-container">
+        <Stack sx={{ padding: '3rem 0' }} className="section">
+          <QuestionQuestion>
+            <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+          </QuestionQuestion>
+          <QuestionDescription>
+            <FormattedMessage
+              id="householdDataBlock.createConditionsQuestion-pick"
+              defaultMessage="Choose all that apply."
+            />
+          </QuestionDescription>
+          <RHFOptionCardGroup
+            fields={watch('conditions')}
+            setValue={setValue}
+            name="conditions"
+            options={pageNumber === 1 ? conditionOptions.you : conditionOptions.them}
           />
-        </QuestionDescription>
-        <RHFOptionCardGroup
-          fields={watch('conditions')}
-          setValue={setValue}
-          name="conditions"
-          options={pageNumber === 1 ? conditionOptions.you : conditionOptions.them}
-        />
-      </Box>
+        </Stack>
+        {getValues('conditions.disabled') && createReceivesSsiQuestion()}
+      </div>
     );
   };
 
@@ -585,8 +504,8 @@ const HouseholdMemberForm = () => {
         : 'Does this individual in your household have significant income you have not already included?';
 
     return (
-      <Box className="section-container" sx={{ paddingTop: '3rem' }}>
-        <div className="section">
+      <Box className="section-container" sx={{ padding: '3rem 0' }}>
+        <div>
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
             <HelpButton
@@ -898,7 +817,7 @@ const HouseholdMemberForm = () => {
     }
 
     return (
-      <div className="section">
+      <div className="section top-padding-mb">
         <QuestionQuestion>
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
           <HelpButton
@@ -907,6 +826,44 @@ const HouseholdMemberForm = () => {
           />
         </QuestionQuestion>
       </div>
+    );
+  };
+
+  const createReceivesSsiQuestion = () => {
+    const translatedAriaLabel = intl.formatMessage({
+      id: 'ecHHMF.createReceivesSsiQuestion-ariaLabel',
+      defaultMessage: 'has ssi',
+    });
+    const formattedMsgId = pageNumber === 1 ? 'ecHHMF.you-receiveSsi' : 'ecHHMF.they-receiveSsi';
+    const formattedMsgDefaultMsg =
+      pageNumber === 1
+        ? 'Based on this disability, did you receive full benefits from Social Security, SSI, the Department of Human Services, or a public or private plan?'
+        : 'Based on this disability, do they receive full benefits from Social Security, SSI, the Department of Human Services, or a public or private plan?';
+    return (
+      <Box sx={{ pb: '2rem' }}>
+        <QuestionQuestion>
+          <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
+        </QuestionQuestion>
+        <Controller
+          name="conditions.receivesSsi"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <RadioGroup {...field} aria-label={translatedAriaLabel} sx={{ marginBottom: '1rem' }}>
+              <FormControlLabel
+                value={'true'}
+                control={<Radio />}
+                label={<FormattedMessage id="radiofield.label-yes" defaultMessage="Yes" />}
+              />
+              <FormControlLabel
+                value={'false'}
+                control={<Radio />}
+                label={<FormattedMessage id="radiofield.label-no" defaultMessage="No" />}
+              />
+            </RadioGroup>
+          )}
+        />
+      </Box>
     );
   };
 
@@ -922,8 +879,11 @@ const HouseholdMemberForm = () => {
           />
         )}
       </QuestionHeader>
-
-      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} questionName="householdData" />
+      <HHMSummaryCards
+        activeMemberData={getValues()}
+        triggerValidation={trigger}
+        questionName="energyCalculatorHouseholdData"
+      />
       <form
         onSubmit={handleSubmit(formSubmitHandler, () => {
           window.scroll({ top: 0, left: 0, behavior: 'smooth' });
@@ -931,7 +891,6 @@ const HouseholdMemberForm = () => {
       >
         {createAgeQuestion()}
         {pageNumber !== 1 && createHOfHRelationQuestion()}
-        {displayHealthInsuranceBlock()}
         {displayConditionsQuestion()}
         <div>
           <Stack sx={{ margin: '3rem 0' }}>
@@ -988,4 +947,4 @@ const HouseholdMemberForm = () => {
   );
 };
 
-export default HouseholdMemberForm;
+export default ECHouseholdMemberForm;
