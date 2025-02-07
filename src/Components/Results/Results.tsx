@@ -28,6 +28,7 @@ import './Results.css';
 import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
 import { FormData } from '../../Types/FormData';
 import filterProgramsGenerator from './filterPrograms';
+import useFetchEnergyCalculatorRebates from '../EnergyCalculator/Results/fetchRebates';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -163,6 +164,7 @@ const Results = ({ type }: ResultsProps) => {
   const [needs, setNeeds] = useState<UrgentNeed[]>([]);
   const [missingPrograms, setMissingPrograms] = useState(false);
   const [validations, setValidations] = useState<Validation[]>([]);
+  const energyCalculatorRebates = useFetchEnergyCalculatorRebates();
 
   const filterPrograms = filterProgramsGenerator(formData, filtersChecked, isAdminView);
 
