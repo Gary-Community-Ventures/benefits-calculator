@@ -6,6 +6,7 @@ import CategoryHeading from '../CategoryHeading/CategoryHeading';
 import { useMemo } from 'react';
 import { calculateTotalValue, programValue } from '../FormattedValue';
 import { ResultsMessage } from '../../Referrer/Referrer';
+import CcigResultsMessage from '../../CcigComponents/CcigResultsMessage';
 
 function sortProgramsIntoCategories(categories: ProgramCategory[]): ProgramCategory[] {
   // sort categories by total category value in decending order
@@ -57,25 +58,31 @@ const ValidationCategory = () => {
 };
 
 const Programs = () => {
-  const { programCategories } = useResultsContext();
+  const { programCategories, programs } = useResultsContext();
 
   const categories = useMemo(() => sortProgramsIntoCategories(programCategories), [programCategories]);
 
   return (
     <>
-      <ResultsMessage />
-      <Filter />
-      <ValidationCategory />
-      {categories.map((category) => {
-        return (
-          <div key={category.name.default_message}>
-            <CategoryHeading category={category} />
-            {category.programs.map((program, index) => {
-              return <ProgramCard program={program} key={index} />;
-            })}
-          </div>
-        );
-      })}
+      {programs.length === 0 ? (
+        <CcigResultsMessage />
+      ) : (
+        <>
+          <ResultsMessage />
+          <Filter />
+          <ValidationCategory />
+          {categories.map((category) => {
+            return (
+              <div key={category.name.default_message}>
+                <CategoryHeading category={category} />
+                {category.programs.map((program, index) => {
+                  return <ProgramCard program={program} key={index} />;
+                })}
+              </div>
+            );
+          })}
+        </>
+      )}
     </>
   );
 };
