@@ -99,7 +99,7 @@ const QuestionComponentContainer = () => {
           <EnergyCalculatorExpenses />
         </main>
       );
-    case 'energyCalculatorUtilities':
+    case 'energyCalculatorUtilityStatus':
       return (
         <main className="benefits-form">
           <Utilities />
