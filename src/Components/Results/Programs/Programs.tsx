@@ -3,10 +3,14 @@ import { findValidationForProgram, useResultsContext } from '../Results';
 import Filter from './Filter';
 import ProgramCard from './ProgramCard';
 import CategoryHeading from '../CategoryHeading/CategoryHeading';
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { calculateTotalValue, programValue } from '../FormattedValue';
 import { ResultsMessage } from '../../Referrer/Referrer';
 import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
+import EnergyCalculatorRebateCategoryList, {
+  useEnergyCalculatorNeedsRebates,
+} from '../../EnergyCalculator/Results/RebateCategories';
+import { Context } from '../../Wrapper/Wrapper';
 
 function sortProgramsIntoCategories(categories: ProgramCategory[]): ProgramCategory[] {
   // sort categories by total category value in decending order
@@ -63,12 +67,14 @@ const Programs = () => {
   const categories = useMemo(() => sortProgramsIntoCategories(programCategories), [programCategories]);
 
   const isEnergyCalculator = useIsEnergyCalculator();
+  const needsRebates = useEnergyCalculatorNeedsRebates();
 
   return (
     <>
       <ResultsMessage />
       {!isEnergyCalculator && <Filter />}
       <ValidationCategory />
+      {isEnergyCalculator && needsRebates && <EnergyCalculatorRebateCategoryList />}
       {categories.map((category) => {
         return (
           <div key={category.name.default_message}>
@@ -79,6 +85,7 @@ const Programs = () => {
           </div>
         );
       })}
+      {isEnergyCalculator && !needsRebates && <EnergyCalculatorRebateCategoryList />}
     </>
   );
 };

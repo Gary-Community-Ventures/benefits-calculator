@@ -23,9 +23,10 @@ export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
 
 type CategoryHeadingProps = {
   category: ProgramCategory;
+  showAmount?: boolean;
 };
 
-const CategoryHeading = ({ category }: CategoryHeadingProps) => {
+const CategoryHeading = ({ category, showAmount = true }: CategoryHeadingProps) => {
   const intl = useIntl();
   const translateNumber = useTranslateNumber();
 
@@ -58,12 +59,14 @@ const CategoryHeading = ({ category }: CategoryHeadingProps) => {
             <ResultsTranslate translation={category.name} />
           </h2>
         </div>
-        <div className="box-right">
-          <h2 className="category-heading-text-style normal-weight">
-            {translateNumber(formatToUSD(monthlyCategoryAmt))}
-            <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
-          </h2>
-        </div>
+        {showAmount && (
+          <div className="box-right">
+            <h2 className="category-heading-text-style normal-weight">
+              {translateNumber(formatToUSD(monthlyCategoryAmt))}
+              <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
+            </h2>
+          </div>
+        )}
       </div>
       {category.description.default_message !== '' && (
         <p className="child-care-warning-text">

@@ -41,7 +41,7 @@ type WrapperResultsContext = {
   isAdminView: boolean;
   validations: Validation[];
   setValidations: (validations: Validation[]) => void;
-  energyCalculatorRebates: EnergyCalculatorRebateCategory[]; // NOTE: will be empty if not using the energy calculator
+  energyCalculatorRebateCategories: EnergyCalculatorRebateCategory[]; // NOTE: will be empty if not using the energy calculator
 };
 
 type ResultsProps = {
@@ -229,7 +229,7 @@ const Results = ({ type }: ResultsProps) => {
             isAdminView,
             validations,
             setValidations,
-            energyCalculatorRebates,
+            energyCalculatorRebateCategories: energyCalculatorRebates,
           }}
         >
           <ResultsHeader type={type} />
@@ -267,7 +267,7 @@ const Results = ({ type }: ResultsProps) => {
         isAdminView,
         validations,
         setValidations,
-        energyCalculatorRebates,
+        energyCalculatorRebateCategories: energyCalculatorRebates,
       }}
     >
       <ProgramPage program={program} />
