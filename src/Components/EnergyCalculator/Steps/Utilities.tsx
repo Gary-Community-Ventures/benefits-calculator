@@ -11,9 +11,14 @@ import { ReactComponent as Plug } from '../Icons/Plug.svg';
 import { ReactComponent as LowFuel } from '../Icons/LowFuel.svg';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useContext } from 'react';
+import { Context } from '../../Wrapper/Wrapper';
+import useScreenApi from '../../../Assets/updateScreen';
 
 const Utilities = () => {
+  const { formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
+  const { updateScreen } = useScreenApi();
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorUtilityStatus');
   const nextStep = useGoToNextStep('energyCalculatorUtilityStatus');
   const utilityStatusOptions = {
@@ -59,8 +64,12 @@ const Utilities = () => {
       throw new Error('uuid is not defined');
     }
 
-    // const updatedEnergyCalculatorData = []
-    console.log({ memberData });
+    const updatedEnergyCalculatorData = { ...formData.energyCalculator, ...memberData.energyCalculator };
+    const updatedFormData = { ...formData, energyCalculator: updatedEnergyCalculatorData };
+    console.log({ updatedFormData });
+    setFormData(updatedFormData);
+    updateScreen(updatedFormData);
+    nextStep();
   };
 
   return (
