@@ -48,8 +48,8 @@ const Utilities = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       energyCalculator: {
-        electricityIsDisconnected: false,
-        hasPastDueEnergyBills: false,
+        electricityIsDisconnected: formData.energyCalculator?.electricityIsDisconnected ?? false,
+        hasPastDueEnergyBills: formData.energyCalculator?.hasPastDueEnergyBills ?? false,
       },
     },
   });
