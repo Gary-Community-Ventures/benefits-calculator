@@ -40,11 +40,13 @@ const Utilities = () => {
     }),
   });
 
-  const { control, handleSubmit, watch, setValue } = useForm<z.infer<typeof formSchema>>({
+  const { handleSubmit, watch, setValue } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      electricityIsDisconnected: false,
-      hasPastDueEnergyBills: false,
+      energyCalculator: {
+        electricityIsDisconnected: false,
+        hasPastDueEnergyBills: false,
+      },
     },
   });
 
