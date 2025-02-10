@@ -93,7 +93,6 @@ const Utilities = () => {
           options={utilityStatusOptions}
         />
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
-        {/* TODO: add selections to confirmation page */}
       </form>
     </>
   );
