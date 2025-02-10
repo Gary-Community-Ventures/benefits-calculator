@@ -16,7 +16,7 @@ type GasProviders = {
 
 export const GAS_PROVIDERS: GasProviders = {
   'Adams County': {
-    'co-colorado-natural-gas-co': 'Colorado Natural Gas Co.',
+    'co-colorado-natural-gas': 'Colorado Natural Gas',
     'co-eastern-colorado-utility-company': 'Eastern Colorado Utility Company',
     'co-xcel-energy': 'Xcel Energy',
   },
@@ -40,7 +40,7 @@ export const GAS_PROVIDERS: GasProviders = {
     'co-citizens-utility-company': 'Citizens Utility Company',
   },
   'Boulder County': {
-    'co-colorado-natural-gas-co': 'Colorado Natural Gas Co.',
+    'co-colorado-natural-gas': 'Colorado Natural Gas',
     'co-xcel-energy': 'Xcel Energy',
   },
   'Broomfield County': {
@@ -90,7 +90,7 @@ export const GAS_PROVIDERS: GasProviders = {
   },
   'Elbert County': {
     'co-black-hills-energy': 'Black Hills Energy',
-    'co-colorado-natural-gas-co': 'Colorado Natural Gas Co.',
+    'co-colorado-natural-gas': 'Colorado Natural Gas',
   },
   'Fremont County': {
     'co-atmos-energy': 'Atmos Energy',
@@ -100,7 +100,7 @@ export const GAS_PROVIDERS: GasProviders = {
     'co-xcel-energy': 'Xcel Energy',
   },
   'Gilpin County': {
-    'co-colorado-natural-gas-co': 'Colorado Natural Gas Co.',
+    'co-colorado-natural-gas': 'Colorado Natural Gas',
     'co-xcel-energy': 'Xcel Energy',
   },
   'Grand County': {
@@ -119,7 +119,7 @@ export const GAS_PROVIDERS: GasProviders = {
     'co-walden-gas': 'Walden Gas',
   },
   'Jefferson County': {
-    'co-colorado-natural-gas-co': 'Colorado Natural Gas Co.',
+    'co-colorado-natural-gas': 'Colorado Natural Gas',
     'co-xcel-energy': 'Xcel Energy',
   },
   'Kiowa County': {
@@ -184,7 +184,7 @@ export const GAS_PROVIDERS: GasProviders = {
     'co-black-hills-energy': 'Black Hills Energy',
   },
   'Park County': {
-    'co-colorado-natural-gas-co': 'Colorado Natural Gas Co.',
+    'co-colorado-natural-gas': 'Colorado Natural Gas',
   },
   'Phillips County': {
     'co-black-hills-energy': 'Black Hills Energy',
@@ -197,7 +197,7 @@ export const GAS_PROVIDERS: GasProviders = {
     'co-atmos-energy': 'Atmos Energy',
   },
   'Pueblo County': {
-    'co-colorado-natural-gas-co': 'Colorado Natural Gas Co.',
+    'co-colorado-natural-gas': 'Colorado Natural Gas',
     'co-xcel-energy': 'Xcel Energy',
   },
   'Rio Blanco County': {
@@ -229,13 +229,13 @@ export const GAS_PROVIDERS: GasProviders = {
   },
   'Summit County': {
     'co-black-hills-energy': 'Black Hills Energy',
-    'co-colorado-natural-gas-co': 'Colorado Natural Gas Co.',
+    'co-colorado-natural-gas': 'Colorado Natural Gas',
     'co-xcel-energy': 'Xcel Energy',
   },
   'Teller County': {
     'co-atmos-energy': 'Atmos Energy',
     'co-black-hills-energy': 'Black Hills Energy',
-    'co-colorado-natural-gas-co': 'Colorado Natural Gas Co.',
+    'co-colorado-natural-gas': 'Colorado Natural Gas',
   },
   'Washington County': {
     'co-black-hills-energy': 'Black Hills Energy',
@@ -248,3 +248,5 @@ export const GAS_PROVIDERS: GasProviders = {
     'co-black-hills-energy': 'Black Hills Energy',
   },
 };
+
+console.log(getProviderNames())
