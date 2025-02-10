@@ -9,9 +9,13 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { ReactComponent as Plug } from '../Icons/Plug.svg';
 import { ReactComponent as LowFuel } from '../Icons/LowFuel.svg';
+import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
+import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
 
 const Utilities = () => {
   const { uuid } = useParams();
+  const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorUtilityStatus');
+  const nextStep = useGoToNextStep('energyCalculatorUtilityStatus');
   const utilityStatusOptions = {
     electricityIsDisconnected: {
       icon: <Plug className="option-card-icon" />,
@@ -80,6 +84,7 @@ const Utilities = () => {
           name="energyCalculator"
           options={utilityStatusOptions}
         />
+        <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
     </>
   );
