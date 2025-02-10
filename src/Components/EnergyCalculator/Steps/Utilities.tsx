@@ -7,15 +7,32 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import { FormattedMessageType } from '../../../Types/Questions';
-import { ReactNode } from 'react';
-import { useConfig } from '../../Config/configHook';
+import { ReactComponent as Plug } from '../Icons/Plug.svg';
+import { ReactComponent as LowFuel } from '../Icons/LowFuel.svg';
 
 const Utilities = () => {
   const { uuid } = useParams();
-  const utilityStatusOptions =
-    useConfig<Record<string, { text: FormattedMessageType; icon: ReactNode }>>('utility_status_options');
-  console.log(utilityStatusOptions);
+  const utilityStatusOptions = {
+    electricityIsDisconnected: {
+      icon: <Plug className="option-card-icon" />,
+      text: {
+        props: {
+          id: 'utilityStatusOptions.electricityIsDisconnected',
+          default_message: 'Your electricity and/or gas has been disconnected.',
+        },
+      },
+    },
+    hasPastDueEnergyBills: {
+      icon: <LowFuel className="option-card-icon" />,
+      text: {
+        props: {
+          id: 'utilityStatusOptions.hasPastDueEnergyBills',
+          default_message: 'You have a past-due electric or heating bill or you are low on fuel.',
+        },
+      },
+    },
+  };
+
   const formSchema = z.object({
     electricityIsDisconnected: z.boolean(),
     hasPastDueEnergyBills: z.boolean(),
