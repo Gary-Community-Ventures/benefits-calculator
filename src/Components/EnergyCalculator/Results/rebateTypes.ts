@@ -128,7 +128,7 @@ export interface EnergyCalculatorAPIResponse {
 
 export type EnergyCalculatorRebate = EnergyCalculatorIncentive;
 
-export type EnergyCalculatorRebateCategoryTypes = 'water-heater' | 'hvac' | 'stove';
+export type EnergyCalculatorRebateCategoryTypes = string;
 
 export type EnergyCalculatorRebateCategory = {
   type: EnergyCalculatorRebateCategoryTypes;

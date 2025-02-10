@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { calcTotalIncome } from '../../../Assets/income';
 import { Language } from '../../../Assets/languageOptions';
 import { FormData } from '../../../Types/FormData';
+import { FormattedMessageType } from '../../../Types/Questions';
 import { Context } from '../../Wrapper/Wrapper';
 import { useIsEnergyCalculator } from '../hooks';
 import { EnergyCalculatorAPIResponse, EnergyCalculatorRebateCategory } from './rebateTypes';
@@ -64,10 +65,28 @@ async function getRebates(formData: FormData, lang: Language) {
   });
 
   const data = (await res.json()) as EnergyCalculatorAPIResponse;
+  console.log(data); // FIXME: remove
 
-  console.log(data);
+  const rebateCategories: EnergyCalculatorRebateCategory[] = [];
 
-  return [];
+  for (const rebate of data.incentives) {
+    const rebateCategory = rebate.items[0]; // TODO: figure this out
+    const rebateCategoryName = rebateCategory as unknown as FormattedMessageType; // FIXME: figure out the category names
+    let category = rebateCategories.find((category) => category.type === rebateCategory);
+
+    if (category === undefined) {
+      category = {
+        type: rebateCategory,
+        name: rebateCategoryName,
+        rebates: [],
+      };
+      rebateCategories.push(category);
+    }
+
+    category.rebates.push(rebate);
+  }
+
+  return rebateCategories;
 }
 
 export default function useFetchEnergyCalculatorRebates() {

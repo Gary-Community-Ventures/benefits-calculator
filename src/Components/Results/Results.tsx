@@ -29,6 +29,7 @@ import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
 import { FormData } from '../../Types/FormData';
 import filterProgramsGenerator from './filterPrograms';
 import useFetchEnergyCalculatorRebates from '../EnergyCalculator/Results/fetchRebates';
+import { EnergyCalculatorRebateCategory } from '../EnergyCalculator/Results/rebateTypes';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -40,6 +41,7 @@ type WrapperResultsContext = {
   isAdminView: boolean;
   validations: Validation[];
   setValidations: (validations: Validation[]) => void;
+  energyCalculatorRebates: EnergyCalculatorRebateCategory[]; // NOTE: will be empty if not using the energy calculator
 };
 
 type ResultsProps = {
@@ -227,6 +229,7 @@ const Results = ({ type }: ResultsProps) => {
             isAdminView,
             validations,
             setValidations,
+            energyCalculatorRebates,
           }}
         >
           <ResultsHeader type={type} />
@@ -264,6 +267,7 @@ const Results = ({ type }: ResultsProps) => {
         isAdminView,
         validations,
         setValidations,
+        energyCalculatorRebates,
       }}
     >
       <ProgramPage program={program} />
