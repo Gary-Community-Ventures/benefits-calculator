@@ -6,7 +6,7 @@ import CategoryHeading from '../CategoryHeading/CategoryHeading';
 import { useMemo } from 'react';
 import { calculateTotalValue, programValue } from '../FormattedValue';
 import { ResultsMessage } from '../../Referrer/Referrer';
-import CcigResultsMessage from '../../CcigComponents/CcigResultsMessage';
+import NoProgramEligibleMessage from '../NoProgramEligibleMessage';
 
 function sortProgramsIntoCategories(categories: ProgramCategory[]): ProgramCategory[] {
   // sort categories by total category value in decending order
@@ -65,7 +65,7 @@ const Programs = () => {
   return (
     <>
       {programs.length === 0 ? (
-        <CcigResultsMessage />
+        <NoProgramEligibleMessage />
       ) : (
         <>
           <ResultsMessage />
