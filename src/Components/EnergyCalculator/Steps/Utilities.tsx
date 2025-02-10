@@ -73,14 +73,14 @@ const Utilities = () => {
       <QuestionDescription>
         <FormattedMessage id="questions.energyCalculator-utilities-q-desc" defaultMessage="Select all that apply." />
       </QuestionDescription>
-      {/* <form onSubmit={handleSubmit(formSubmitHandler)}>
+      <form onSubmit={handleSubmit(formSubmitHandler)}>
         <RHFOptionCardGroup
-          fields={watch()}
+          fields={watch('energyCalculator')}
           setValue={setValue}
           name="energyCalculator"
           options={utilityStatusOptions}
         />
-      </form> */}
+      </form>
     </>
   );
 };
