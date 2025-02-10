@@ -34,8 +34,10 @@ const Utilities = () => {
   };
 
   const formSchema = z.object({
-    electricityIsDisconnected: z.boolean(),
-    hasPastDueEnergyBills: z.boolean(),
+    energyCalculator: z.object({
+      electricityIsDisconnected: z.boolean(),
+      hasPastDueEnergyBills: z.boolean(),
+    }),
   });
 
   const { control, handleSubmit, watch, setValue } = useForm<z.infer<typeof formSchema>>({
