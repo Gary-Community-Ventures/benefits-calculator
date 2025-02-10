@@ -66,7 +66,6 @@ const Utilities = () => {
 
     const updatedEnergyCalculatorData = { ...formData.energyCalculator, ...memberData.energyCalculator };
     const updatedFormData = { ...formData, energyCalculator: updatedEnergyCalculatorData };
-    console.log({ updatedFormData });
     setFormData(updatedFormData);
     updateScreen(updatedFormData);
     nextStep();
@@ -94,6 +93,7 @@ const Utilities = () => {
           options={utilityStatusOptions}
         />
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
+        {/* TODO: add selections to confirmation page */}
       </form>
     </>
   );
