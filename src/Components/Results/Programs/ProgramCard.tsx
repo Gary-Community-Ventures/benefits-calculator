@@ -53,7 +53,7 @@ export function ResultsCard({ name, detail1, detail2, link, flags = [], containe
     };
   }, []);
 
-  const isMobile = size < 769 ? true : false;
+  const isMobile = size < 775 ? true : false;
 
   type ConditonalWrapperProps = {
     children: React.ReactElement;
@@ -171,10 +171,10 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
         title: <FormattedMessage id="results.estimated_application_time" defaultMessage="Application Time: " />,
         value: <ResultsTranslate translation={estimatedAppTime} />,
       }}
-      // detail2={{
-      //   title: <FormattedMessage id="program-card.estimated-savings" defaultMessage="Estimated Savings: " />,
-      //   value: value,
-      // }}
+      detail2={{
+        title: <FormattedMessage id="program-card.estimated-savings" defaultMessage="Estimated Savings: " />,
+        value: value,
+      }}
       flags={flags}
       link={programPageLink}
       containerClassNames={containerClass}
