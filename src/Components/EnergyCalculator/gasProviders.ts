@@ -248,5 +248,3 @@ export const GAS_PROVIDERS: GasProviders = {
     'co-black-hills-energy': 'Black Hills Energy',
   },
 };
-
-console.log(getProviderNames())
