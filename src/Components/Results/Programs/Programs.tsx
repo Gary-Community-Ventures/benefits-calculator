@@ -58,7 +58,7 @@ const ValidationCategory = () => {
 };
 
 const Programs = () => {
-  const { programCategories, programs } = useResultsContext();
+  const { programCategories } = useResultsContext();
 
   const categories = useMemo(() => sortProgramsIntoCategories(programCategories), [programCategories]);
 
