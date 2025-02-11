@@ -17,50 +17,51 @@ import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import useScreenApi from '../../../Assets/updateScreen';
 
+export const applianceStatusOptions = {
+  needsWaterHeater: {
+    icon: <WaterHeater className="option-card-icon" />,
+    text: {
+      props: {
+        id: 'applianceStatusOptions.needsWaterHeater',
+        default_message: 'Water Heater',
+      },
+    },
+  },
+  needsHvac: {
+    icon: <Heater className="option-card-icon" />,
+    text: {
+      props: {
+        id: 'applianceStatusOptions.needsHvac',
+        default_message: 'Heating, ventilation, and/or cooling',
+      },
+    },
+  },
+  needsStove: {
+    icon: <Stove className="option-card-icon" />,
+    text: {
+      props: {
+        id: 'applianceStatusOptions.needsStove',
+        default_message: 'Cooking stove/range',
+      },
+    },
+  },
+  needsDryer: {
+    icon: <Washer className="option-card-icon" />,
+    text: {
+      props: {
+        id: 'applianceStatusOptions.needsDryer',
+        default_message: 'Clothes dryer',
+      },
+    },
+  },
+};
+
 const Utilities = () => {
   const { formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const { updateScreen } = useScreenApi();
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorApplianceStatus');
   const nextStep = useGoToNextStep('energyCalculatorApplianceStatus');
-  const applianceStatusOptions = {
-    needsWaterHeater: {
-      icon: <WaterHeater className="option-card-icon" />,
-      text: {
-        props: {
-          id: 'applianceStatusOptions.needsWaterHeater',
-          default_message: 'Water Heater',
-        },
-      },
-    },
-    needsHvac: {
-      icon: <Heater className="option-card-icon" />,
-      text: {
-        props: {
-          id: 'applianceStatusOptions.needsHvac',
-          default_message: 'Heating, ventilation, and/or cooling',
-        },
-      },
-    },
-    needsStove: {
-      icon: <Stove className="option-card-icon" />,
-      text: {
-        props: {
-          id: 'applianceStatusOptions.needsStove',
-          default_message: 'Cooking stove/range',
-        },
-      },
-    },
-    needsDryer: {
-      icon: <Washer className="option-card-icon" />,
-      text: {
-        props: {
-          id: 'applianceStatusOptions.needsDryer',
-          default_message: 'Clothes dryer',
-        },
-      },
-    },
-  };
 
   const formSchema = z.object({
     energyCalculator: z.object({
