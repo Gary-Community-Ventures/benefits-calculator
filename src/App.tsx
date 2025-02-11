@@ -175,8 +175,11 @@ const App = () => {
                   <Route path="confirm-information" element={<Confirmation />} />
                   <Route path="results/benefits" element={<Results type="program" />} />
                   <Route path="results/near-term-needs" element={<Results type="need" />} />
+                  <Route
+                    path="results/energy-rebates/:energyCalculatorRebateType"
+                    element={<Results type="energy-calculator-rebates" />}
+                  />
                   <Route path="results/benefits/:programId" element={<Results type="program" />} />
-                  <Route path="results/benefits/:programId/navigators" element={<Results type="navigator" />} />
                   <Route path="results/more-help" element={<Results type="help" />} />
                   <Route path="results" element={<Navigate to="benefits" replace />} />
                   <Route path="*" element={<Navigate to="/step-1" replace />} />
