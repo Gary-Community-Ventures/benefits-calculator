@@ -115,7 +115,7 @@ const Utilities = () => {
           setValue={setValue}
           name="energyCalculator"
           options={applianceStatusOptions}
-          customColumnCss="two-columns"
+          customColumnNo="two-columns"
         />
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>

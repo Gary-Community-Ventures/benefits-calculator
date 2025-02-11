@@ -20,6 +20,7 @@ type RHFOptionCardGroupProps<T extends FieldValues> = {
   name: string;
   options: Option<T>[];
   triggerValidation?: UseFormTrigger<FormSchema>;
+  customColumnNo?: string;
 };
 
 const RHFOptionCardGroup = <T extends FieldValues>({
@@ -28,6 +29,7 @@ const RHFOptionCardGroup = <T extends FieldValues>({
   name,
   options,
   triggerValidation,
+  customColumnNo,
 }: RHFOptionCardGroupProps<T>) => {
   const intl = useIntl();
 
@@ -41,6 +43,8 @@ const RHFOptionCardGroup = <T extends FieldValues>({
   };
 
   const displayOptionCards = (options: Record<any, any>, name: string, values: Record<string, boolean>) => {
+    const finalClassname = customColumnNo ? `option-cards-container ${customColumnNo}` : 'option-cards-container';
+
     const optionCards = Object.keys(options).map((optionKey, index) => {
       const translatedAriaLabel = intl.formatMessage({
         id: options[optionKey].text.props.id,
@@ -78,7 +82,7 @@ const RHFOptionCardGroup = <T extends FieldValues>({
       );
     });
 
-    return <div className="option-cards-container">{optionCards}</div>;
+    return <div className={finalClassname}>{optionCards}</div>;
   };
 
   return <Stack sx={{ alignItems: 'center' }}>{fields && displayOptionCards(options, name, fields)}</Stack>;
