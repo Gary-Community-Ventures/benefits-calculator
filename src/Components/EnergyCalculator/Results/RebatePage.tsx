@@ -10,7 +10,7 @@ export default function EnergyCalculatorRebatePage({ rebateCategory }: RebatePag
       <h1>{rebateCategory.name}</h1>
       <section>
         {rebateCategory.rebates.map((rebate, i) => {
-          return <RebateCard rebate={rebate} key={i}/>;
+          return <RebateCard rebate={rebate} key={i} />;
         })}
       </section>
     </div>
