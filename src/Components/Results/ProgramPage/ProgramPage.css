@@ -261,9 +261,16 @@ li.apply-info {
   font-size: 1.5rem;
   color: var(--primary-color);
 }
+
 .program-page-required-programs-container p {
-  font-size: .9rem;
+  font-size: 0.9rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
+
 .program-page-required-programs-container .result-program-more-info-button {
   width: fit-content;
   margin: 0;

@@ -1,6 +1,5 @@
 // NOTE: source: https://github.com/rewiringamerica/embed.rewiringamerica.org/blob/main/src/api/calculator-types-v1.ts
-
-import { ReactNode } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { FormattedMessageType } from '../../../Types/Questions';
 
 export type EnergyCalculatorIncentiveType =
@@ -22,42 +21,21 @@ export interface EnergyCalculatorAmount {
 }
 
 export const ENERGY_CALCULATOR_ITEMS = [
-  'air_sealing',
+  // hvac
   'air_to_water_heat_pump',
-  'attic_or_roof_insulation',
-  'basement_insulation',
-  'battery_storage_installation',
   'central_air_conditioner',
-  'crawlspace_insulation',
-  'door_replacement',
-  'duct_replacement',
-  'duct_sealing',
   'ducted_heat_pump',
   'ductless_heat_pump',
-  'ebike',
-  'efficiency_rebates',
-  'electric_outdoor_equipment',
-  'electric_panel',
-  'electric_stove',
-  'electric_vehicle_charger',
-  'electric_wiring',
-  'energy_audit',
-  'floor_insulation',
   'geothermal_heating_installation',
-  'heat_pump_clothes_dryer',
-  'heat_pump_water_heater',
-  'new_electric_vehicle',
-  'new_plugin_hybrid_vehicle',
-  'non_heat_pump_clothes_dryer',
-  'non_heat_pump_water_heater',
   'other_heat_pump',
-  'other_insulation',
-  'other_weatherization',
-  'rooftop_solar_installation',
-  'used_electric_vehicle',
-  'used_plugin_hybrid_vehicle',
-  'wall_insulation',
-  'window_replacement',
+  // water heater
+  'heat_pump_water_heater',
+  'non_heat_pump_water_heater',
+  // stove
+  'electric_stove',
+  // dryer
+  'heat_pump_clothes_dryer',
+  'non_heat_pump_clothes_dryer',
 ] as const;
 
 export type EnergyCalculatorItemType = (typeof ENERGY_CALCULATOR_ITEMS)[number];
@@ -128,10 +106,31 @@ export interface EnergyCalculatorAPIResponse {
 
 export type EnergyCalculatorRebate = EnergyCalculatorIncentive;
 
-export type EnergyCalculatorRebateCategoryTypes = string;
+export type EnergyCalculatorRebateCategoryType = 'hvac' | 'waterHeater' | 'stove' | 'dryer';
+
+export const ENERGY_CALCULATOR_CATEGORY_MAP: Record<EnergyCalculatorItemType, EnergyCalculatorRebateCategoryType> = {
+  air_to_water_heat_pump: 'hvac',
+  central_air_conditioner: 'hvac',
+  ducted_heat_pump: 'hvac',
+  ductless_heat_pump: 'hvac',
+  geothermal_heating_installation: 'hvac',
+  other_heat_pump: 'hvac',
+  heat_pump_water_heater: 'waterHeater',
+  non_heat_pump_water_heater: 'waterHeater',
+  electric_stove: 'stove',
+  heat_pump_clothes_dryer: 'dryer',
+  non_heat_pump_clothes_dryer: 'dryer',
+};
+
+export const ENERGY_CALCULATOR_CATEGORY_TITLE_MAP: Record<EnergyCalculatorRebateCategoryType, FormattedMessageType> = {
+  hvac: <FormattedMessage id="energyCalculator.results.category.hvac.title" defaultMessage="HVAC" />,
+  waterHeater: <FormattedMessage id="energyCalculator.results.category.hvac.title" defaultMessage="Water Heater" />,
+  stove: <FormattedMessage id="energyCalculator.results.category.hvac.title" defaultMessage="Stove" />,
+  dryer: <FormattedMessage id="energyCalculator.results.category.hvac.title" defaultMessage="Dryer" />,
+};
 
 export type EnergyCalculatorRebateCategory = {
-  type: EnergyCalculatorRebateCategoryTypes;
+  type: EnergyCalculatorRebateCategoryType;
   name: FormattedMessageType;
   rebates: EnergyCalculatorRebate[];
 };

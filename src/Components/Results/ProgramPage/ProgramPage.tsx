@@ -331,7 +331,6 @@ function RequiredProgram({ programId }: RequiredProgramProps) {
     return null;
   }
 
-  ('program-page-required-programs');
   return (
     <div className="program-page-required-programs-container">
       <strong>

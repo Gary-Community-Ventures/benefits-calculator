@@ -5,7 +5,14 @@ import { FormData } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
 import { Context } from '../../Wrapper/Wrapper';
 import { useIsEnergyCalculator } from '../hooks';
-import { EnergyCalculatorAPIResponse, EnergyCalculatorRebateCategory } from './rebateTypes';
+import {
+  EnergyCalculatorAPIResponse,
+  EnergyCalculatorRebateCategory,
+  EnergyCalculatorRebateCategoryType,
+  ENERGY_CALCULATOR_CATEGORY_MAP,
+  ENERGY_CALCULATOR_CATEGORY_TITLE_MAP,
+  ENERGY_CALCULATOR_ITEMS,
+} from './rebateTypes';
 
 const API_KEY = `Bearer ${process.env.REACT_APP_ENERGY_CALCULATOR_REWIRING_AMERICA_API_KEY}`;
 
@@ -52,6 +59,10 @@ function createQueryString(formData: FormData, lang: Language) {
   }
   query.append('language', reqLang);
 
+  for (const item of ENERGY_CALCULATOR_ITEMS) {
+    query.append('items', item);
+  }
+
   return `?${query.toString()}`;
 }
 
@@ -65,25 +76,38 @@ async function getRebates(formData: FormData, lang: Language) {
   });
 
   const data = (await res.json()) as EnergyCalculatorAPIResponse;
-  console.log(data); // FIXME: remove
 
   const rebateCategories: EnergyCalculatorRebateCategory[] = [];
 
   for (const rebate of data.incentives) {
-    const rebateCategory = rebate.items[0]; // TODO: figure this out
-    const rebateCategoryName = rebateCategory as unknown as FormattedMessageType; // FIXME: figure out the category names
-    let category = rebateCategories.find((category) => category.type === rebateCategory);
+    const categories = new Set<EnergyCalculatorRebateCategoryType>();
 
-    if (category === undefined) {
-      category = {
-        type: rebateCategory,
-        name: rebateCategoryName,
-        rebates: [],
-      };
-      rebateCategories.push(category);
+    for (const item of rebate.items) {
+      const category = ENERGY_CALCULATOR_CATEGORY_MAP[item];
+
+      if (category === undefined) {
+        continue;
+      }
+
+      categories.add(category);
     }
 
-    category.rebates.push(rebate);
+    for (const categoryName of categories) {
+      const rebateCategory = categoryName;
+      const rebateCategoryName = ENERGY_CALCULATOR_CATEGORY_TITLE_MAP[categoryName];
+      let category = rebateCategories.find((category) => category.type === rebateCategory);
+
+      if (category === undefined) {
+        category = {
+          type: rebateCategory,
+          name: rebateCategoryName,
+          rebates: [],
+        };
+        rebateCategories.push(category);
+      }
+
+      category.rebates.push(rebate);
+    }
   }
 
   return rebateCategories;

@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useResultsContext } from '../../Results/Results';
 import { Context } from '../../Wrapper/Wrapper';
+import './ResultsHeader.css';
 
 // TODO: fix mobile
 
@@ -14,16 +15,16 @@ export default function EnergyCalculatorResultsHeader() {
 
   return (
     <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor, padding: '1rem' }}>
-      <header className="results-header">
-        <section className="results-header-programs-count-text">
-          <div className="results-header-programs-count">{programs.length}</div>
+      <header className="energy-calculator-results-header">
+        <section className="energy-calculator-results-header-programs-count-text">
+          <div className="energy-calculator-results-header-programs-count">{programs.length}</div>
           <div>
             <FormattedMessage id="energyCalculator.results.header.programsFound" defaultMessage="Programs Found" />
           </div>
         </section>
         {rebateCount > 0 && (
-          <section className="results-header-programs-count-text">
-            <div className="results-header-programs-count">{rebateCount}</div>
+          <section className="energy-calculator-results-header-programs-count-text">
+            <div className="energy-calculator-results-header-programs-count">{rebateCount}</div>
             <div>
               <FormattedMessage id="energyCalculator.results.header.rebatesFound" defaultMessage="Rebates Found" />
             </div>
