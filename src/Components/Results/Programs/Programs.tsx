@@ -6,7 +6,6 @@ import CategoryHeading from '../CategoryHeading/CategoryHeading';
 import { useMemo } from 'react';
 import { calculateTotalValue, programValue } from '../FormattedValue';
 import { ResultsMessage } from '../../Referrer/Referrer';
-import NoProgramEligibleMessage from '../NoProgramEligibleMessage';
 
 function sortProgramsIntoCategories(categories: ProgramCategory[]): ProgramCategory[] {
   // sort categories by total category value in decending order
