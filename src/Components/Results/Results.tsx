@@ -70,7 +70,7 @@ export function findMemberEligibilityMember(formData: FormData, memberEligibilit
   return member;
 }
 
-function findProgramById(programs: Program[], id: number) {
+export function findProgramById(programs: Program[], id: number) {
   return programs.find((program) => program.program_id === id);
 }
 

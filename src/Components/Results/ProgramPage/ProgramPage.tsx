@@ -1,15 +1,15 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons';
 import { FormattedMessage } from 'react-intl';
-import { useFormatYearlyValue } from '../FormattedValue';
+import { programValue, useFormatYearlyValue } from '../FormattedValue';
 import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage';
 import { useContext, useMemo } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
-import { findValidationForProgram, useResultsContext, useResultsLink } from '../Results';
+import { findProgramById, findValidationForProgram, useResultsContext, useResultsLink } from '../Results';
 import { deleteValidation, postValidation } from '../../../apiCalls';
 import { Language } from '../../../Assets/languageOptions';
 import { allNavigatorLanguages } from './NavigatorLanguages';
@@ -183,7 +183,6 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     <main className="program-page-container">
       <section className="back-to-results-button-container">
         <BackAndSaveButtons
-          handleTextfieldChange={() => {}}
           navigateToLink={backLink}
           BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
         />
@@ -198,13 +197,15 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         })}
       </div>
       <div className="apply-button-container">
-        <a className="apply-online-button" href={program.apply_button_link.default_message} target="_blank">
-          {program.apply_button_description.default_message == '' ? (
-            <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
-          ) : (
-            <ResultsTranslate translation={program.apply_button_description} />
-          )}
-        </a>
+        {program.apply_button_link.default_message !== '' && (
+          <a className="apply-online-button" href={program.apply_button_link.default_message} target="_blank">
+            {program.apply_button_description.default_message == '' ? (
+              <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
+            ) : (
+              <ResultsTranslate translation={program.apply_button_description} />
+            )}
+          </a>
+        )}
         {isAdminView && staffToken !== undefined && formData.isTestData && (
           <button className="apply-online-button" onClick={toggleValidation}>
             {currentValidation === undefined ? (
@@ -290,9 +291,60 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         <section className="program-description">
           <ResultsTranslate translation={program.description} />
         </section>
+        {program.required_programs.length > 0 && (
+          <section className="program-page-required-programs-section">
+            <h3 className="program-page-required-programs-header">
+              <FormattedMessage
+                id="programPage.requiredPrograms.header"
+                defaultMessage="Enrollment in one of the following programs is required to be eligible for this program:"
+              />
+            </h3>
+            {program.required_programs.map((programId) => {
+              return <RequiredProgram programId={programId} key={programId} />;
+            })}
+          </section>
+        )}
       </div>
     </main>
   );
 };
 
 export default ProgramPage;
+
+type RequiredProgramProps = {
+  programId: number;
+};
+
+function RequiredProgram({ programId }: RequiredProgramProps) {
+  const { programs } = useResultsContext();
+
+  const program = findProgramById(programs, programId);
+  const programLink = useResultsLink(`results/benefits/${programId}`);
+
+  if (program === undefined) {
+    return null;
+  }
+
+  const value = programValue(program);
+
+  if (value <= 0) {
+    return null;
+  }
+
+  ('program-page-required-programs');
+  return (
+    <div className="program-page-required-programs-container">
+      <strong>
+        <ResultsTranslate translation={program.name} />
+      </strong>
+      <p>
+        <ResultsTranslate translation={program.description} />
+      </p>
+      <div className="result-program-more-info-button">
+        <Link to={programLink}>
+          <FormattedMessage id="programPage.requiredPrograms.link" defaultMessage="Learn More" />
+        </Link>
+      </div>
+    </div>
+  );
+}
