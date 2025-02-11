@@ -72,7 +72,6 @@ export default function GasProvider() {
     const providerOptions = GAS_PROVIDERS[formData.county];
 
     if (providerOptions === undefined) {
-      console.log(formData.county);
       throw new Error('an invalid county was provided');
     }
 

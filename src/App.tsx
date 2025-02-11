@@ -22,7 +22,7 @@ import languageRouteWrapper from './Components/RouterUtil/LanguageRouter';
 import SelectStatePage from './Components/Steps/SelectStatePage';
 import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
-import EcHouseholdMemberForm from './Components/EnergyCalculator/ECHouseholdMemberForm';
+import EcHouseholdMemberForm from './Components/EnergyCalculator/Steps/HouseholdMemberForm';
 import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm';
 import './App.css';
 
@@ -43,7 +43,7 @@ const App = () => {
   const [theme, setTheme] = useState(createTheme(styleOverride));
   const themeName = getReferrer('theme', 'default');
   const householdMemberStepNumber = useStepNumber('householdData', false);
-  const ecHouseholdMemberStepNumber = useStepNumber('ecHouseholdData', false);
+  const ecHouseholdMemberStepNumber = useStepNumber('energyCalculatorHouseholdData', false);
 
   useEffect(() => {
     changeTheme(themeName as 'default' | 'twoOneOne');

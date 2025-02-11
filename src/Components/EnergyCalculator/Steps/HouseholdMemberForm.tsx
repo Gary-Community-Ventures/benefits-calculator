@@ -1,10 +1,10 @@
 import { FormattedMessage, useIntl } from 'react-intl';
-import QuestionHeader from '../QuestionComponents/QuestionHeader';
-import HHMSummaryCards from '../Steps/HouseholdMembers/HHMSummaryCards';
+import QuestionHeader from '../../QuestionComponents/QuestionHeader';
+import HHMSummaryCards from '../../Steps/HouseholdMembers/HHMSummaryCards';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Context } from '../Wrapper/Wrapper';
+import { Context } from '../../Wrapper/Wrapper';
 import { ReactNode, useContext, useEffect, useMemo } from 'react';
-import { HouseholdData } from '../../Types/FormData';
+import { HouseholdData } from '../../../Types/FormData';
 import {
   Autocomplete,
   Box,
@@ -21,22 +21,22 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
-import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
-import { useStepNumber } from '../../Assets/stepDirectory';
+import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
+import { useStepNumber } from '../../../Assets/stepDirectory';
 import * as z from 'zod';
 import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MONTHS } from '../Steps/HouseholdMembers/MONTHS';
-import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
-import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
-import RHFOptionCardGroup from '../RHFComponents/RHFOptionCardGroup';
-import { useConfig } from '../Config/configHook';
-import QuestionDescription from '../QuestionComponents/QuestionDescription';
-import { FormattedMessageType } from '../../Types/Questions';
-import HelpButton from '../HelpBubbleIcon/HelpButton';
+import { MONTHS } from '../../Steps/HouseholdMembers/MONTHS';
+import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
+import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
+import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
+import { useConfig } from '../../Config/configHook';
+import QuestionDescription from '../../QuestionComponents/QuestionDescription';
+import { FormattedMessageType } from '../../../Types/Questions';
+import HelpButton from '../../HelpBubbleIcon/HelpButton';
 import AddIcon from '@mui/icons-material/Add';
-import { createMenuItems } from '../Steps/SelectHelperFunctions/SelectHelperFunctions';
-import CloseButton from '../CloseButton/CloseButton';
+import { createMenuItems } from '../../Steps/SelectHelperFunctions/SelectHelperFunctions';
+import CloseButton from '../../CloseButton/CloseButton';
 import {
   renderMissingBirthMonthHelperText,
   renderFutureBirthMonthHelperText,
@@ -46,12 +46,12 @@ import {
   renderIncomeFrequencyHelperText,
   renderHoursWorkedHelperText,
   renderIncomeAmountHelperText,
-} from '../Steps/HouseholdMembers/HelperTextFunctions';
-import { DOLLARS, handleNumbersOnly, numberInputProps, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
-import useScreenApi from '../../Assets/updateScreen';
-import { QUESTION_TITLES } from '../../Assets/pageTitleTags';
-import { getCurrentMonthYear, YEARS, MAX_AGE } from '../../Assets/age';
-import '../../Components/Steps/HouseholdMembers/PersonIncomeBlock.css';
+} from '../../Steps/HouseholdMembers/HelperTextFunctions';
+import { DOLLARS, handleNumbersOnly, numberInputProps, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
+import useScreenApi from '../../../Assets/updateScreen';
+import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
+import { getCurrentMonthYear, YEARS, MAX_AGE } from '../../../Assets/age';
+import '../../../Components/Steps/HouseholdMembers/PersonIncomeBlock.css';
 
 const ECHouseholdMemberForm = () => {
   const { formData, setFormData } = useContext(Context);
@@ -78,7 +78,7 @@ const ECHouseholdMemberForm = () => {
     <FormattedMessage id="personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
   );
 
-  const currentStepId = useStepNumber('ecHouseholdData');
+  const currentStepId = useStepNumber('energyCalculatorHouseholdData');
   const backNavigationFunction = () => {
     if (uuid === undefined) {
       throw new Error('uuid is undefined');
@@ -879,7 +879,11 @@ const ECHouseholdMemberForm = () => {
           />
         )}
       </QuestionHeader>
-      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} questionName="ecHouseholdData" />
+      <HHMSummaryCards
+        activeMemberData={getValues()}
+        triggerValidation={trigger}
+        questionName="energyCalculatorHouseholdData"
+      />
       <form
         onSubmit={handleSubmit(formSubmitHandler, () => {
           window.scroll({ top: 0, left: 0, behavior: 'smooth' });

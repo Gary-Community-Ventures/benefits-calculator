@@ -47,7 +47,7 @@ export function useQueryString() {
     query.append('referrer', formData.immutableReferrer);
   }
 
-  if (formData.path !== undefined) {
+  if (formData.path !== undefined && formData.path !== 'default') {
     query.append('path', formData.path);
   }
 
@@ -59,7 +59,7 @@ export function useQueryString() {
   return queryString;
 }
 
-const MEMBER_QUESTIONS: QuestionName[] = ['householdData', 'ecHouseholdData'];
+const MEMBER_QUESTIONS: QuestionName[] = ['householdData', 'energyCalculatorHouseholdData'];
 
 export function useDefaultBackNavigationFunction(questionName: QuestionName) {
   const { formData } = useContext(Context);
