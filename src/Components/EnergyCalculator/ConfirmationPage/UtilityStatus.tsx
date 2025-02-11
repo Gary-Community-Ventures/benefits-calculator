@@ -1,8 +1,9 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 import ConfirmationBlock from '../../Confirmation/ConfirmationBlock';
-import { ReactComponent as Referral } from '../../EnergyCalculator/Icons/Heat.svg';
+import { ReactComponent as WarningIcon } from '../../../Assets/icons/warning.svg';
 import { Context } from '../../Wrapper/Wrapper';
 import { useContext } from 'react';
+// TODO: swap out Referral for WarningMessage
 
 const UtilityStatus = () => {
   const { formData } = useContext(Context);
@@ -21,7 +22,7 @@ const UtilityStatus = () => {
 
   return (
     <ConfirmationBlock
-      icon={<Referral title={formatMessage(utilityStatusIconAlt)} />}
+      icon={<WarningIcon title={formatMessage(utilityStatusIconAlt)} />}
       title={
         <FormattedMessage
           id="energyCalculator.confirmation.utilityStatus"
