@@ -6,7 +6,7 @@ import TwoOneOneHeader from '../TwoOneOneComponents/TwoOneOneHeader/TwoOneOneHea
 import Footer from '../Footer/Footer';
 import BackToScreen from '../BackToScreen/BackToScreen';
 import { useResultsContext } from '../Results/Results';
-import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
+import NoProgramEligibleMessage from '../Results/NoProgramEligibleMessage';
 
 export const BrandedHeader = () => {
   const { formData } = useContext(Context);
@@ -27,16 +27,15 @@ export const BrandedFooter = () => {
 };
 
 export const ResultsMessage = () => {
-  const { formData } = useContext(Context);
+  const { formData, getReferrer } = useContext(Context);
   const { missingPrograms } = useResultsContext();
+
+  const {id, defaultMessage} =  getReferrer('noResultMessage');
 
   if (formData.immutableReferrer === 'lgs' && missingPrograms) {
     return <BackToScreen />;
   }
 
-  if (formData.immutableReferrer === 'ccig') {
-    return <CcigResultsMessage />;
-  }
 
-  return null;
+  return <NoProgramEligibleMessage id={id} defaultMessage={defaultMessage} />
 };

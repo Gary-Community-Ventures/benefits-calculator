@@ -64,25 +64,19 @@ const Programs = () => {
 
   return (
     <>
-      {programs.length === 0 ? (
-        <NoProgramEligibleMessage />
-      ) : (
-        <>
-          <ResultsMessage />
-          <Filter />
-          <ValidationCategory />
-          {categories.map((category) => {
-            return (
-              <div key={category.name.default_message}>
-                <CategoryHeading category={category} />
-                {category.programs.map((program, index) => {
-                  return <ProgramCard program={program} key={index} />;
-                })}
-              </div>
-            );
-          })}
-        </>
-      )}
+      <ResultsMessage />
+      <Filter />
+      <ValidationCategory />
+      {categories.map((category) => {
+        return (
+          <div key={category.name.default_message}>
+            <CategoryHeading category={category} />
+            {category.programs.map((program, index) => {
+              return <ProgramCard program={program} key={index} />;
+            })}
+          </div>
+        );
+      })}
     </>
   );
 };
