@@ -30,12 +30,11 @@ export const ResultsMessage = () => {
   const { formData, getReferrer } = useContext(Context);
   const { missingPrograms } = useResultsContext();
 
-  const {id, defaultMessage} =  getReferrer('noResultMessage');
+  const { id, defaultMessage } = getReferrer('noResultMessage');
 
   if (formData.immutableReferrer === 'lgs' && missingPrograms) {
     return <BackToScreen />;
   }
 
-
-  return <NoProgramEligibleMessage id={id} defaultMessage={defaultMessage} />
+  return <NoProgramEligibleMessage id={id} defaultMessage={defaultMessage} />;
 };

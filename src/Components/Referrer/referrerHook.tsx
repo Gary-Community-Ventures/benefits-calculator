@@ -19,7 +19,6 @@ export type ReferrerData = {
   featureFlags: ReferrerOptions<string[]>;
   stepDirectory: ReferrerOptions<StepDirectory>;
   noResultMessage: ReferrerOptions<{ id: string; defaultMessage: string }>;
-
 };
 
 export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
