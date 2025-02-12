@@ -336,7 +336,13 @@ export function EnergyCalculatorRebateCalculator({ rebate }: RebateComponentProp
           inputProps={NUM_PAD_PROPS}
           value={cost > 0 ? cost : ''}
           onChange={handleNumbersOnly((event) => {
-            setCost(Number(event.target.value));
+            const value = event.target.value;
+
+            if (value.length > 10) {
+              return;
+            }
+
+            setCost(Number(value));
           })}
           sx={{ backgroundColor: '#fff' }}
           InputProps={{
