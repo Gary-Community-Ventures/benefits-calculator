@@ -334,7 +334,7 @@ export function EnergyCalculatorRebateCalculator({ rebate }: RebateComponentProp
           label={<FormattedMessage id="energyCalculator.rebatePage.calculator.input.cost" defaultMessage="Cost" />}
           variant="outlined"
           inputProps={NUM_PAD_PROPS}
-          value={cost > 0 ? cost : null}
+          value={cost > 0 ? cost : ''}
           onChange={handleNumbersOnly((event) => {
             setCost(Number(event.target.value));
           })}

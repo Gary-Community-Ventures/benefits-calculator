@@ -7,7 +7,7 @@ import { ReactComponent as CashAssistance } from '../../../Assets/CategoryHeadin
 import { ReactComponent as ChildCareYouthEducation } from '../../../Assets/CategoryHeadingIcons/childCareYouthEducation.svg';
 import { calculateTotalValue, formatToUSD } from '../FormattedValue';
 import { FormattedMessage, useIntl } from 'react-intl';
-import ResultsTranslate from '../Translate/Translate.tsx';
+import ResultsTranslate from '../Translate/Translate';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { ProgramCategory } from '../../../Types/Results';
 
