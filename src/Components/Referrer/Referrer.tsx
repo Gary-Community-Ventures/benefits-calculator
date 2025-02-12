@@ -7,6 +7,7 @@ import Footer from '../Footer/Footer';
 import BackToScreen from '../BackToScreen/BackToScreen';
 import { useResultsContext } from '../Results/Results';
 import NoProgramEligibleMessage from '../Results/NoProgramEligibleMessage';
+import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
 
 export const BrandedHeader = () => {
   const { formData } = useContext(Context);
@@ -27,14 +28,15 @@ export const BrandedFooter = () => {
 };
 
 export const ResultsMessage = () => {
-  const { formData, getReferrer } = useContext(Context);
+  const { formData } = useContext(Context);
   const { missingPrograms } = useResultsContext();
-
-  const { id, defaultMessage } = getReferrer('noResultMessage');
 
   if (formData.immutableReferrer === 'lgs' && missingPrograms) {
     return <BackToScreen />;
   }
+  if (formData.immutableReferrer === 'ccig') {
+    return <CcigResultsMessage />;
+  }
 
-  return <NoProgramEligibleMessage id={id} defaultMessage={defaultMessage} />;
+  return <NoProgramEligibleMessage />;
 };
