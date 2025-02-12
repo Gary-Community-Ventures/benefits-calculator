@@ -19,6 +19,7 @@ import EnergyCalculatorElectricityProvider from '../EnergyCalculator/Confirmatio
 import EnergyCalculatorGasProvider from '../EnergyCalculator/ConfirmationPage/GasProvider';
 import EnergyCalculatorExpenses from '../EnergyCalculator/ConfirmationPage/Expenses';
 import EnergyCalculatorUtilityStatus from '../EnergyCalculator/ConfirmationPage/UtilityStatus';
+import EnergyCalculatorApplianceStatus from '../EnergyCalculator/ConfirmationPage/ApplianceStatus';
 
 function ZipCode() {
   const { formData } = useContext(Context);
@@ -362,6 +363,7 @@ const STEP_CONFIRMATIONS: Record<QuestionName, ReactNode | null> = {
   energyCalculatorGasProvider: <EnergyCalculatorGasProvider key="energyCalculatorGasProvider" />,
   energyCalculatorExpenses: <EnergyCalculatorExpenses key="energyCalculatorExpenses" />,
   energyCalculatorUtilityStatus: <EnergyCalculatorUtilityStatus key="energyCalculatorUtilityStatus" />,
+  energyCalculatorApplianceStatus: <EnergyCalculatorApplianceStatus key="energyCalculatorApplianceStatus" />,
   signUpInfo: null,
 };
 

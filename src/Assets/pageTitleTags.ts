@@ -12,6 +12,7 @@ export const QUESTION_TITLES: Record<QuestionName, string> = {
   signUpInfo: 'Optional Sign Up',
   energyCalculatorHouseholdData: 'Household Member',
   energyCalculatorUtilityStatus: 'Utility Service Status',
+  energyCalculatorApplianceStatus: 'Appliance Broken or Needs Replacement?',
 };
 
 export type OtherStepName = 'language' | 'disclaimer' | 'state' | 'confirmation' | 'results' | 'default';
