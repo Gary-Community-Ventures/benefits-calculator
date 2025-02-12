@@ -3,6 +3,7 @@ import MFBCOLogo from '../../Assets/Logos/mfb_colorado_logo.png';
 import MFBNCLogo from '../../Assets/Logos/mfb_nc_logo.png';
 import BIAMFBLogo from '../../Assets/States/CO/WhiteLabels/BIA/biamfbcombinedlogo.png';
 import JHSAMFBLogo from '../../Assets/States/CO/WhiteLabels/JeffcoAssets/jeffcobrand.png';
+import JPSMLogo from '../../Assets/States/CO/WhiteLabels/JeffcoAssets/jeffcopublicschoolslogo.png';
 import VELogo from '../../Assets/States/CO/WhiteLabels/VillageExchange/villageExchangeLogo.png';
 import CCHMFBLogo from '../../Assets/States/CO/WhiteLabels/ColoradoCoalitionHomeless/cchcobrand.png';
 import LGSLogo from '../../Assets/States/CO/WhiteLabels/LetsGetSet/lgsLogo.png';
@@ -22,6 +23,7 @@ const logoMap: { [key: string]: string | undefined } = {
   BIA_MFBLogo: BIAMFBLogo,
   JHS_AMFBLogo: JHSAMFBLogo,
   JHSA_MFBLogo: JHSAMFBLogo,
+  JPS_MFBLogo: JPSMLogo,
   VE_Logo: VELogo,
   CCH_MFBLogo: CCHMFBLogo,
   LGS_Logo: LGSLogo,
