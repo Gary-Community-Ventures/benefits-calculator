@@ -105,6 +105,7 @@ const QuestionComponentContainer = () => {
         <main className="benefits-form">
           <Utilities />
         </main>
+      );
     case 'energyCalculatorApplianceStatus':
       return (
         <main className="benefits-form">
