@@ -40,7 +40,7 @@ const CategoryHeading = ({ category, showAmount = true }: CategoryHeadingProps) 
   const monthlyCategoryAmt = calculateTotalValue(category) / 12;
   const categoryImageAriaLabelProps = {
     id: category.name.label,
-    defaultMsg: category.name.default_message,
+    defaultMessage: category.name.default_message,
   };
   const iconTranslation = intl.formatMessage({ id: 'categoryHeading.icon', defaultMessage: 'icon' });
 
