@@ -26,13 +26,6 @@ const NoExpenses = () => {
 
     navigate(`/${whiteLabel}/${uuid}/step-${expensesStepId}`);
   };
-
-  const nextStep = () => {
-    // TODO: where do we want to route them to? should we put the energy calc as a referrer?
-    navigate(`/${whiteLabel}/${uuid}/step-${currentStepId + 1}`);
-    return;
-  };
-
   useEffect(() => {
     document.title = QUESTION_TITLES.energyCalculatorRedirectToMFB;
   }, []);
@@ -61,6 +54,9 @@ const NoExpenses = () => {
           startIcon={<NavigateBeforeIcon sx={{ mr: '-8px' }} className="rtl-mirror" />}
         >
           <FormattedMessage id="previousButton" defaultMessage="Back" />
+        </Button>
+        <Button variant="contained" href="/co/step-1?referrer=coenergycalculator" sx={{ textTransform: 'none' }}>
+          <FormattedMessage id="noExpenses.continueButton" defaultMessage="Meet MyFriendBen" />
         </Button>
       </div>
     </div>
