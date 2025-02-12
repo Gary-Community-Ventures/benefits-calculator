@@ -331,7 +331,12 @@ export function EnergyCalculatorRebateCalculator({ rebate }: RebateComponentProp
       </h3>
       <div>
         <TextField
-          label={<FormattedMessage id="energyCalculator.rebatePage.calculator.input.cost" defaultMessage="Cost" />}
+          label={
+            <>
+              <FormattedMessage id="energyCalculator.rebatePage.calculator.input.cost" defaultMessage="Cost of " />
+              <ItemName rebate={rebate} />
+            </>
+          }
           variant="outlined"
           inputProps={NUM_PAD_PROPS}
           value={cost > 0 ? cost : ''}
@@ -344,7 +349,7 @@ export function EnergyCalculatorRebateCalculator({ rebate }: RebateComponentProp
 
             setCost(Number(value));
           })}
-          sx={{ backgroundColor: '#fff' }}
+          sx={{ backgroundColor: '#fff', width: '18rem' }}
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
             sx: { backgroundColor: '#FFFFFF' },
