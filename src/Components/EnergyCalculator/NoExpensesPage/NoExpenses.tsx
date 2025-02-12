@@ -13,11 +13,14 @@ import './NoExpenses.css';
 const NoExpenses = () => {
   const { uuid } = useParams();
   const navigate = useNavigate();
+  const { formatMessage } = useIntl();
+  const errorIconAlt = formatMessage({ id: 'no-expenses-error-icon-alt', defaultMessage: 'error icon' });
   const { whiteLabel } = useContext(Context);
   const expensesStepId = useStepNumber('energyCalculatorExpenses');
 
-  const { formatMessage } = useIntl();
-  const errorIconAlt = formatMessage({ id: 'no-expenses-error-icon-alt', defaultMessage: 'error icon' });
+  useEffect(() => {
+    document.title = QUESTION_TITLES.energyCalculatorRedirectToMFB;
+  }, []);
 
   const backNavigationFunction = () => {
     if (uuid === undefined) {
@@ -26,9 +29,6 @@ const NoExpenses = () => {
 
     navigate(`/${whiteLabel}/${uuid}/step-${expensesStepId}`);
   };
-  useEffect(() => {
-    document.title = QUESTION_TITLES.energyCalculatorRedirectToMFB;
-  }, []);
 
   return (
     <div className="no-expenses-container">
