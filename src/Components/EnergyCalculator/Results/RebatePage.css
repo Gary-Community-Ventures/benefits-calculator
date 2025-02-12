@@ -52,3 +52,13 @@
   font-weight: normal;
   color: var(--primary-color);
 }
+
+.energy-calculator-rebate-page-rebate-card h3 {
+  color: var(--secondary-color);
+  font-family: 'Roboto Slab', serif;
+  margin-bottom: 0.5rem;
+}
+
+.energy-calculator-rebate-page-calculator-result {
+  font-weight: bold;
+}

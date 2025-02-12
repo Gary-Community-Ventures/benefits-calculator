@@ -1,4 +1,9 @@
+import { InputAdornment, TextField } from '@mui/material';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { useTranslateNumber } from '../../../Assets/languageOptions';
+import { handleNumbersOnly, INTEGERS, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
+import { formatToUSD } from '../../Results/FormattedValue';
 import { EnergyCalculatorAmountUnit, EnergyCalculatorItemType, EnergyCalculatorRebate } from './rebateTypes';
 
 type ItemGroup = 'air_source_heat_pump' | 'clothes_dryer' | 'generic_heat_pump' | 'water_heater';
@@ -284,4 +289,70 @@ export function EnergyCalculatorRebateCardTitle({ rebate }: RebateComponentProps
   }
 
   return null;
+}
+
+type RebateSavingsCalculator = (cost: number) => number;
+
+function percentSavingCalculatorGenerator(percent: number, maxAmount: number = Infinity): RebateSavingsCalculator {
+  return (cost) => {
+    return Math.min(cost * percent, maxAmount);
+  };
+}
+function staticAmountSavingCalculatorGenerator(amount: number, maxAmount: number = Infinity): RebateSavingsCalculator {
+  return (cost) => {
+    return Math.min(cost, amount, maxAmount);
+  };
+}
+
+export function EnergyCalculatorRebateCalculator({ rebate }: RebateComponentProps) {
+  const [cost, setCost] = useState(0);
+  const translateNumber = useTranslateNumber();
+
+  let calculator: RebateSavingsCalculator;
+
+  const amount = rebate.amount;
+  if (amount.type === 'percent') {
+    calculator = percentSavingCalculatorGenerator(amount.number, amount.maximum);
+  } else if (amount.type === 'dollar_amount') {
+    calculator = staticAmountSavingCalculatorGenerator(amount.number, amount.maximum);
+  } else {
+    // don't add a calculator for the per unit amounts
+    return null;
+  }
+
+  const formatDollarAmount = (amount: number) => translateNumber(formatToUSD(amount));
+
+  const savings = Math.round(calculator(cost));
+
+  return (
+    <div>
+      <h3>
+        <FormattedMessage id="energyCalculator.rebatePage.calculator.title" defaultMessage="Savings Calculator:" />
+      </h3>
+      <div>
+        <TextField
+          label={<FormattedMessage id="energyCalculator.rebatePage.calculator.input.cost" defaultMessage="Cost" />}
+          variant="outlined"
+          inputProps={NUM_PAD_PROPS}
+          value={cost > 0 ? cost : null}
+          onChange={handleNumbersOnly((event) => {
+            setCost(Number(event.target.value));
+          })}
+          sx={{ backgroundColor: '#fff' }}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+            sx: { backgroundColor: '#FFFFFF' },
+          }}
+        />
+      </div>
+      <div className="energy-calculator-rebate-page-calculator-result">
+        <FormattedMessage id="energyCalculator.rebatePage.calculator.results.youPay" defaultMessage="You Pay: " />
+        {formatDollarAmount(Math.max(cost - savings, 0))}
+      </div>
+      <div className="energy-calculator-rebate-page-calculator-result">
+        <FormattedMessage id="energyCalculator.rebatePage.calculator.results.theyPay" defaultMessage="They Pay: " />
+        {formatDollarAmount(savings)}
+      </div>
+    </div>
+  );
 }

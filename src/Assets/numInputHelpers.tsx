@@ -10,8 +10,11 @@ export const DECIMALS = /^\d*\.?\d*$/; // any numbers with unlimited decimal pla
 export const DOLLARS = /^\d*\.?\d{0,2}$/; // any numbers with a maximum of 2 decimal places
 
 // restrict what a user can enter into a text field
-export function handleNumbersOnly(onChange: ReactEventHandler<EventElements> = () => {}, regex: RegExp = INTEGERS) {
-  return (event: ChangeEvent<EventElements>) => {
+export function handleNumbersOnly<EventElement extends EventElements>(
+  onChange: (func: ChangeEvent<EventElement>) => void = () => {},
+  regex: RegExp = INTEGERS,
+) {
+  return (event: ChangeEvent<EventElement>) => {
     const value = event.target.value;
 
     if (!regex.test(value)) {

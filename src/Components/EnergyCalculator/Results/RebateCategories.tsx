@@ -68,11 +68,11 @@ export default function EnergyCalculatorRebateCategoryList() {
   }
 
   return (
-    <>
+    <div>
       <CategoryHeading category={REBATE_CATEGORY_HEADING} showAmount={false} />
       {energyCalculatorRebateCategories.map((category) => {
         return <RebateCategoryCard rebateCategory={category} key={category.type} />;
       })}
-    </>
+    </div>
   );
 }

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import BackAndSaveButtons from '../../Results/BackAndSaveButtons/BackAndSaveButtons';
 import { useResultsLink } from '../../Results/Results';
 import './RebatePage.css';
-import { EnergyCalculatorRebateCardTitle } from './RebatePageMappings';
+import { EnergyCalculatorRebateCalculator, EnergyCalculatorRebateCardTitle } from './RebatePageMappings';
 import { ReactComponent as Housing } from '../../../Assets/CategoryHeadingIcons/housing.svg';
 
 type RebatePageProps = {
@@ -50,6 +50,7 @@ function RebateCard({ rebate }: RebateProps) {
         {<strong>{rebate.program}</strong>}
       </div>
       <p>{rebate.short_description}</p>
+      <EnergyCalculatorRebateCalculator rebate={rebate} />
       <div className="result-program-more-info-button energy-calculator-rebate-page-more-info">
         <a href={rebate.program_url} target="_blank">
           <FormattedMessage id="energyCalculator.rebatePage.applyButton" defaultMessage="Learn how to apply" />
