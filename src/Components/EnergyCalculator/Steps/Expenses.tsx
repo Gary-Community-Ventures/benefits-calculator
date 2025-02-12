@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { z } from 'zod';
 import useScreenApi from '../../../Assets/updateScreen';
 import { Expense, FormData } from '../../../Types/FormData';
@@ -52,6 +52,8 @@ export default function EnergyCalculatorExpenses() {
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorExpenses');
   const nextStep = useGoToNextStep('energyCalculatorExpenses');
   const { updateScreen } = useScreenApi();
+  const navigate = useNavigate();
+  const { whiteLabel } = useContext(Context);
 
   const formSchema = z.object({
     expenses: z
@@ -93,8 +95,7 @@ export default function EnergyCalculatorExpenses() {
     }
 
     if (!expenses.heating && !expenses.cooling && !expenses.otherUtilities) {
-      // TODO: Redirect to no utilities page.
-      console.error('no expenses [TODO: redirect to no expenses page]');
+      navigate(`/${whiteLabel}/${uuid}/no-expenses`);
       return;
     }
 
