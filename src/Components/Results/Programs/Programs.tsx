@@ -3,14 +3,13 @@ import { findValidationForProgram, useResultsContext } from '../Results';
 import Filter from './Filter';
 import ProgramCard from './ProgramCard';
 import CategoryHeading from '../CategoryHeading/CategoryHeading';
-import { useContext, useMemo } from 'react';
+import { useMemo } from 'react';
 import { calculateTotalValue, programValue } from '../FormattedValue';
 import { ResultsMessage } from '../../Referrer/Referrer';
 import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
 import EnergyCalculatorRebateCategoryList, {
   useEnergyCalculatorNeedsRebates,
 } from '../../EnergyCalculator/Results/RebateCategories';
-import { Context } from '../../Wrapper/Wrapper';
 
 function sortProgramsIntoCategories(categories: ProgramCategory[]): ProgramCategory[] {
   // sort categories by total category value in decending order

@@ -1,0 +1,287 @@
+import { FormattedMessage } from 'react-intl';
+import { EnergyCalculatorAmountUnit, EnergyCalculatorItemType, EnergyCalculatorRebate } from './rebateTypes';
+
+type ItemGroup = 'air_source_heat_pump' | 'clothes_dryer' | 'generic_heat_pump' | 'water_heater';
+
+/**
+ * Some incentives are for multiple items. These groups define headlines for
+ * such incentives: if the incentive's items are a subset of one of these
+ * groups, it will be shown with a unified name.
+ *
+ * Note that the groups are checked in order, so if one group is a subset of
+ * another, the smaller group should be listed first. (E.g. air source heat
+ * pumps and generic heat pumps.)
+ */
+const ITEM_GROUPS: { group: ItemGroup; members: Set<EnergyCalculatorItemType> }[] = [
+  {
+    group: 'air_source_heat_pump',
+    members: new Set(['ducted_heat_pump', 'ductless_heat_pump', 'air_to_water_heat_pump']),
+  },
+  {
+    group: 'clothes_dryer',
+    members: new Set(['heat_pump_clothes_dryer', 'non_heat_pump_clothes_dryer']),
+  },
+  {
+    group: 'generic_heat_pump',
+    members: new Set([
+      'air_to_water_heat_pump',
+      'ducted_heat_pump',
+      'ductless_heat_pump',
+      'geothermal_heating_installation',
+      'other_heat_pump',
+    ]),
+  },
+  {
+    group: 'water_heater',
+    members: new Set(['heat_pump_water_heater', 'non_heat_pump_water_heater']),
+  },
+];
+
+const itemsBelongToGroup = (items: EnergyCalculatorItemType[], members: Set<EnergyCalculatorItemType>) => {
+  return items.every((i) => members.has(i));
+};
+
+const multipleItemsName = (items: EnergyCalculatorItemType[]) => {
+  // For a multiple-items case, check whether all the items are in one of the
+  // defined groups.
+  for (const { group, members } of ITEM_GROUPS) {
+    if (itemsBelongToGroup(items, members)) {
+      switch (group) {
+        case 'air_source_heat_pump':
+          return (
+            <FormattedMessage
+              id="energyCalculator.rebatePage.title.itemName.airSourceHeatPump"
+              defaultMessage="an air source heat pump"
+            />
+          );
+        case 'clothes_dryer':
+          return (
+            <FormattedMessage
+              id="energyCalculator.rebatePage.title.itemName.clothesDryer"
+              defaultMessage="a clothes dryer"
+            />
+          );
+        case 'generic_heat_pump':
+          return (
+            <FormattedMessage
+              id="energyCalculator.rebatePage.title.itemName.genericHeatPump"
+              defaultMessage="a heat pump"
+            />
+          );
+        case 'water_heater':
+          return (
+            <FormattedMessage
+              id="energyCalculator.rebatePage.title.itemName.waterHeater"
+              defaultMessage="a water heater"
+            />
+          );
+        default: {
+          // This will be a type error if the above switch is not exhaustive
+          const unknownGroup: never = group;
+          console.error(`no name for ${unknownGroup}`);
+        }
+      }
+    }
+  }
+
+  return null;
+};
+
+type RebateComponentProps = {
+  rebate: EnergyCalculatorRebate;
+};
+
+function ItemName({ rebate }: RebateComponentProps) {
+  const itemsToRender = rebate.items;
+
+  if (itemsToRender.length > 1) {
+    return multipleItemsName(itemsToRender);
+  }
+
+  if (itemsToRender.length !== 1) {
+    return null;
+  }
+
+  const item = itemsToRender[0];
+  switch (item) {
+    case 'air_to_water_heat_pump':
+      return (
+        <FormattedMessage
+          id="energyCalculator.rebatePage.title.itemName.airToWaterHeatPump"
+          defaultMessage="an air-to-water heat pump"
+        />
+      );
+    case 'central_air_conditioner':
+      return (
+        <FormattedMessage
+          id="energyCalculator.rebatePage.title.itemName.centralAirConditioner"
+          defaultMessage="a central air conditioner"
+        />
+      );
+    case 'ducted_heat_pump':
+      return (
+        <FormattedMessage
+          id="energyCalculator.rebatePage.title.itemName.ductedHeatPump"
+          defaultMessage="a ducted heat pump"
+        />
+      );
+    case 'ductless_heat_pump':
+      return (
+        <FormattedMessage
+          id="energyCalculator.rebatePage.title.itemName.ductlessHeatPump"
+          defaultMessage="a ductless heat pump"
+        />
+      );
+    case 'electric_stove':
+      return (
+        <FormattedMessage
+          id="energyCalculator.rebatePage.title.itemName.electricStove"
+          defaultMessage="an electric/induction stove"
+        />
+      );
+    case 'geothermal_heating_installation':
+      return (
+        <FormattedMessage
+          id="energyCalculator.rebatePage.title.itemName.geothermalHeatingInstallation"
+          defaultMessage="geothermal heating installation"
+        />
+      );
+    case 'heat_pump_clothes_dryer':
+      return (
+        <FormattedMessage
+          id="energyCalculator.rebatePage.title.itemName.heatPumpClothesDryer"
+          defaultMessage="a heat pump clothes dryer"
+        />
+      );
+    case 'heat_pump_water_heater':
+      return (
+        <FormattedMessage
+          id="energyCalculator.rebatePage.title.itemName.heatPumpWaterHeater"
+          defaultMessage="a heat pump water heater"
+        />
+      );
+    case 'non_heat_pump_clothes_dryer':
+      return (
+        <FormattedMessage
+          id="energyCalculator.rebatePage.title.itemName.nonHeatPumpClothesDryer"
+          defaultMessage="an electric clothes dryer"
+        />
+      );
+    case 'non_heat_pump_water_heater':
+      return (
+        <FormattedMessage
+          id="energyCalculator.rebatePage.title.itemName.nonHeatPumpWaterHeater"
+          defaultMessage="an electric water heater"
+        />
+      );
+    case 'other_heat_pump':
+      return (
+        <FormattedMessage id="energyCalculator.rebatePage.title.itemName.otherHeatPump" defaultMessage="a heat pump" />
+      );
+    default: {
+      // This will be a type error if the above if-else is not exhaustive
+      const unknownItem: never = item;
+      console.error(`no name for item ${unknownItem}`);
+      return null;
+    }
+  }
+}
+
+type FormatUnitProps = {
+  unit: EnergyCalculatorAmountUnit;
+};
+
+const FormatUnit = ({ unit }: FormatUnitProps) => {
+  switch (unit) {
+    case 'btuh10k':
+      return (
+        <FormattedMessage id="energyCalculator.rebatePage.title.amountUnit.btuh10k" defaultMessage="10,000 Btuh" />
+      );
+    case 'kilowatt':
+      return <FormattedMessage id="energyCalculator.rebatePage.title.amountUnit.kilowatt" defaultMessage="kilowatt" />;
+    case 'kilowatt_hour':
+      return (
+        <FormattedMessage
+          id="energyCalculator.rebatePage.title.amountUnit.kilowattHour"
+          defaultMessage="kilowatt-hour"
+        />
+      );
+    case 'square_foot':
+      return (
+        <FormattedMessage id="energyCalculator.rebatePage.title.amountUnit.squareFoot" defaultMessage="square foot" />
+      );
+    case 'ton':
+      return <FormattedMessage id="energyCalculator.rebatePage.title.amountUnit.ton" defaultMessage="ton" />;
+    case 'watt':
+      return <FormattedMessage id="energyCalculator.rebatePage.title.amountUnit.watt" defaultMessage="watt" />;
+  }
+};
+
+export function EnergyCalculatorRebateCardTitle({ rebate }: RebateComponentProps) {
+  const amount = rebate.amount;
+  if (amount.type === 'dollar_amount') {
+    if (amount.maximum !== undefined) {
+      return (
+        <>
+          <FormattedMessage id="energyCalculator.rebatePage.title.dollarAmount.max.1" defaultMessage="Up to $" />
+          {amount.maximum.toLocaleString()}
+          <FormattedMessage id="energyCalculator.rebatePage.title.dollarAmount.max.2" defaultMessage=" off " />
+          <ItemName rebate={rebate} />
+        </>
+      );
+    }
+    return (
+      <>
+        ${amount.number.toLocaleString()}
+        <FormattedMessage id="energyCalculator.rebatePage.title.dollarAmount.noMax.1" defaultMessage=" off " />
+        <ItemName rebate={rebate} />
+      </>
+    );
+  } else if (amount.type === 'percent') {
+    const percentStr = `${Math.round(amount.number * 100)}%`;
+    if (amount.maximum !== undefined) {
+      return (
+        <>
+          {percentStr}
+          <FormattedMessage id="energyCalculator.rebatePage.title.percent.max.1" defaultMessage=" of cost of " />
+          <ItemName rebate={rebate} />
+          <FormattedMessage id="energyCalculator.rebatePage.title.percent.max.2" defaultMessage=", up to $" />
+          {amount.maximum.toLocaleString()}
+        </>
+      );
+    }
+    return (
+      <>
+        {percentStr}
+        <FormattedMessage id="energyCalculator.rebatePage.title.percent.noMax.1" defaultMessage=" of cost of " />
+        <ItemName rebate={rebate} />
+      </>
+    );
+  } else if (amount.type === 'dollars_per_unit') {
+    if (amount.unit === undefined) {
+      return null;
+    }
+
+    if (amount.maximum !== undefined) {
+      return (
+        <>
+          ${amount.number.toLocaleString()}/<FormatUnit unit={amount.unit} />
+          <FormattedMessage id="energyCalculator.rebatePage.title.perUnit.max.1" defaultMessage=" off " />
+          <ItemName rebate={rebate} />
+          <FormattedMessage id="energyCalculator.rebatePage.title.perUnit.max.2" defaultMessage=", up to $" />
+          {amount.maximum.toLocaleString()}
+        </>
+      );
+    }
+
+    return (
+      <>
+        ${amount.number.toLocaleString()}/<FormatUnit unit={amount.unit} />
+        <FormattedMessage id="energyCalculator.rebatePage.title.perUnit.noMax.1" defaultMessage=" off " />
+        <ItemName rebate={rebate} />
+      </>
+    );
+  }
+
+  return null;
+}

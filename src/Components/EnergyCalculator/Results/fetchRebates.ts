@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import { calcTotalIncome } from '../../../Assets/income';
 import { Language } from '../../../Assets/languageOptions';
 import { FormData } from '../../../Types/FormData';
-import { FormattedMessageType } from '../../../Types/Questions';
 import { Context } from '../../Wrapper/Wrapper';
 import { useIsEnergyCalculator } from '../hooks';
 import {

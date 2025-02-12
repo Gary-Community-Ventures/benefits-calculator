@@ -5,8 +5,6 @@ import { useResultsContext } from '../../Results/Results';
 import { Context } from '../../Wrapper/Wrapper';
 import './ResultsHeader.css';
 
-// TODO: fix mobile
-
 export default function EnergyCalculatorResultsHeader() {
   const { theme } = useContext(Context);
   const { programs, energyCalculatorRebateCategories } = useResultsContext();
