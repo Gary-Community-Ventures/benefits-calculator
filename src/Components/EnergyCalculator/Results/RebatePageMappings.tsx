@@ -327,7 +327,7 @@ export function EnergyCalculatorRebateCalculator({ rebate }: RebateComponentProp
   return (
     <div>
       <h3>
-        <FormattedMessage id="energyCalculator.rebatePage.calculator.title" defaultMessage="Savings Calculator:" />
+        <FormattedMessage id="energyCalculator.rebatePage.calculator.title" defaultMessage="Estimated Savings:" />
       </h3>
       <div>
         <TextField
@@ -357,12 +357,18 @@ export function EnergyCalculatorRebateCalculator({ rebate }: RebateComponentProp
         />
       </div>
       <div className="energy-calculator-rebate-page-calculator-result">
-        <FormattedMessage id="energyCalculator.rebatePage.calculator.results.youPay" defaultMessage="You Pay: " />
-        {formatDollarAmount(Math.max(cost - savings, 0))}
+        <FormattedMessage
+          id="energyCalculator.rebatePage.calculator.results.theyPay"
+          defaultMessage="Rebate Reimburses: "
+        />
+        {formatDollarAmount(savings)}
       </div>
       <div className="energy-calculator-rebate-page-calculator-result">
-        <FormattedMessage id="energyCalculator.rebatePage.calculator.results.theyPay" defaultMessage="They Pay: " />
-        {formatDollarAmount(savings)}
+        <FormattedMessage
+          id="energyCalculator.rebatePage.calculator.results.youPay"
+          defaultMessage="Your Net Out of Pocket: "
+        />
+        {formatDollarAmount(Math.max(cost - savings, 0))}
       </div>
     </div>
   );
