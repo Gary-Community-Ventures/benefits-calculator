@@ -1,6 +1,7 @@
 import { QuestionName } from '../Types/Questions';
 
 export const QUESTION_TITLES: Record<QuestionName, string> = {
+  // This is for steps that get rendered in the QCC
   zipcode: 'Zip and County',
   householdSize: 'Number of Household Members',
   householdData: 'Household Member',
@@ -10,10 +11,16 @@ export const QUESTION_TITLES: Record<QuestionName, string> = {
   acuteHHConditions: 'Near Term Help',
   referralSource: 'Referral',
   signUpInfo: 'Optional Sign Up',
-  energyCalculatorLandingPage: 'Energy Calculator',
 };
 
-export type OtherStepName = 'language' | 'disclaimer' | 'state' | 'confirmation' | 'results' | 'default';
+export type OtherStepName =
+  | 'language'
+  | 'disclaimer'
+  | 'state'
+  | 'confirmation'
+  | 'results'
+  | 'default'
+  | 'energyCalculatorLandingPage';
 
 export const OTHER_PAGE_TITLES: Record<OtherStepName, string> = {
   language: 'Preferred Language',
@@ -22,4 +29,5 @@ export const OTHER_PAGE_TITLES: Record<OtherStepName, string> = {
   confirmation: 'Confirmation',
   results: 'Results',
   default: 'MyFriendBen',
+  energyCalculatorLandingPage: 'Energy Calculator',
 };
