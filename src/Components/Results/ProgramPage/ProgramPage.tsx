@@ -181,7 +181,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     );
   };
 
-  const programApplyButtonLink = intl.formatMessage({ id: program.apply_button_link.label });
+  const programApplyButtonLink = intl.formatMessage({ id: program.apply_button_link.label, defaultMessage: program.apply_button_link.default_message });
 
   return (
     <main className="program-page-container">
