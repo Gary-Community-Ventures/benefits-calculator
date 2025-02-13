@@ -3,7 +3,7 @@ import { Program } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useFormatYearlyValue } from '../FormattedValue';
 import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage';
@@ -26,6 +26,8 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
   const { uuid } = useParams();
   const { formData, setFormData, staffToken } = useContext(Context);
   const { isAdminView, validations, setValidations, programCategories, filtersChecked } = useResultsContext();
+  const intl = useIntl();
+
   const IconRenderer: React.FC<IconRendererProps> = ({ headingType }) => {
     const IconComponent = headingOptionsMappings[headingType];
 
@@ -179,6 +181,8 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     );
   };
 
+  const programApplyButtonLink = intl.formatMessage({ id: program.apply_button_link.label });
+
   return (
     <main className="program-page-container">
       <section className="back-to-results-button-container">
@@ -198,7 +202,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
         })}
       </div>
       <div className="apply-button-container">
-        <a className="apply-online-button" href={program.apply_button_link.default_message} target="_blank">
+        <a className="apply-online-button" href={programApplyButtonLink} target="_blank">
           {program.apply_button_description.default_message == '' ? (
             <FormattedMessage id="results.apply-online" defaultMessage="Apply Online" />
           ) : (
