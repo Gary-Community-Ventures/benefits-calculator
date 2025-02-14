@@ -11,7 +11,7 @@ const ApplianceStatus = () => {
   const truthyApplianceStatuses = Object.entries(applianceStatusOptions).filter(([applianceKey]) => {
     return formData.energyCalculator?.[applianceKey as keyof EnergyCalculatorFormData] === true;
   });
-  const notApplicable = !needsWaterHeater && !needsHvac && !needsStove && !needsDryer;
+  const notApplicable = truthyApplianceStatuses.length === 0;
   const { formatMessage } = useIntl();
   const editApplianceStatusAriaLabel = {
     id: 'energyCalculator.confirmation.applianceStatus.edit-AL',
