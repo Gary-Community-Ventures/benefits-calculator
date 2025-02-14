@@ -31,7 +31,7 @@ const NoExpenses = () => {
   };
 
   return (
-    <div className="no-expenses-container">
+    <main className="no-expenses-container">
       <img src={errorIcon} className="no-expenses-error-icon" alt={errorIconAlt} />
       <div className="no-expenses-text-container">
         <QuestionHeader>
@@ -59,7 +59,7 @@ const NoExpenses = () => {
           <FormattedMessage id="noExpenses.continueButton" defaultMessage="Meet MyFriendBen" />
         </Button>
       </div>
-    </div>
+    </main>
   );
 };
 
