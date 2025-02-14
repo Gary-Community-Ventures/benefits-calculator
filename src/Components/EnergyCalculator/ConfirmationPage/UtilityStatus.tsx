@@ -3,7 +3,6 @@ import ConfirmationBlock from '../../Confirmation/ConfirmationBlock';
 import { ReactComponent as WarningIcon } from '../../../Assets/icons/warning.svg';
 import { Context } from '../../Wrapper/Wrapper';
 import { useContext } from 'react';
-// TODO: swap out Referral for WarningMessage
 
 const UtilityStatus = () => {
   const { formData } = useContext(Context);
