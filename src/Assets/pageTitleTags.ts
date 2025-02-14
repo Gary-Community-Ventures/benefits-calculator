@@ -10,10 +10,16 @@ export const QUESTION_TITLES: Record<QuestionName, string> = {
   acuteHHConditions: 'Near Term Help',
   referralSource: 'Referral',
   signUpInfo: 'Optional Sign Up',
-  energyCalculatorRedirectToMFB: 'Redirect to MFB',
 };
 
-export type OtherStepName = 'language' | 'disclaimer' | 'state' | 'confirmation' | 'results' | 'default';
+export type OtherStepName =
+  | 'language'
+  | 'disclaimer'
+  | 'state'
+  | 'confirmation'
+  | 'results'
+  | 'default'
+  | 'energyCalculatorRedirectToMFB';
 
 export const OTHER_PAGE_TITLES: Record<OtherStepName, string> = {
   language: 'Preferred Language',
@@ -22,4 +28,5 @@ export const OTHER_PAGE_TITLES: Record<OtherStepName, string> = {
   confirmation: 'Confirmation',
   results: 'Results',
   default: 'MyFriendBen',
+  energyCalculatorRedirectToMFB: 'Redirect to MFB',
 };

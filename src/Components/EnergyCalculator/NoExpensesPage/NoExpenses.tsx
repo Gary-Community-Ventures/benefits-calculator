@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
+import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import { FormattedMessage, useIntl } from 'react-intl';
 import errorIcon from '../../../Assets/icons/error-icon.svg';
@@ -19,7 +19,7 @@ const NoExpenses = () => {
   const expensesStepId = useStepNumber('energyCalculatorExpenses');
 
   useEffect(() => {
-    document.title = QUESTION_TITLES.energyCalculatorRedirectToMFB;
+    document.title = OTHER_PAGE_TITLES.energyCalculatorRedirectToMFB;
   }, []);
 
   const backNavigationFunction = () => {
