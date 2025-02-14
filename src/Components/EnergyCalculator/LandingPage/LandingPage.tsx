@@ -14,7 +14,7 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="eCalc-container">
       <div className="eCalc-landingPage.header">
         <QuestionHeader>
           <FormattedMessage id="eCalcLandingPage.qHeader" defaultMessage="Energy Calculator" />
@@ -32,7 +32,7 @@ const LandingPage = () => {
           defaultMessage="To get started, are you a renter or homeowner?"
         />
       </QuestionQuestion>
-      <div className="option-cards-container">
+      <div className="center-container">
         <CardActionArea
           key="homeownerCard"
           sx={{ width: '15rem' }}
