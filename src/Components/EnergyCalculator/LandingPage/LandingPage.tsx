@@ -14,21 +14,21 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="eCalc-container">
-      <div className="eCalc-landingPage.header">
+    <main className="energyCalculator-container">
+      <div className="energyCalculator-landingPage.header">
         <QuestionHeader>
-          <FormattedMessage id="eCalcLandingPage.qHeader" defaultMessage="Energy Calculator" />
+          <FormattedMessage id="energyCalculator-landingPage.qHeader" defaultMessage="Energy Calculator" />
         </QuestionHeader>
       </div>
-      <article className="eCalc-body-text">
+      <article className="energyCalculator-body-text">
         <FormattedMessage
-          id="eCalc.bodyText"
+          id="energyCalculator.bodyText"
           defaultMessage="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus, nec vehicula risus tincidunt a. Sed euismod, nisl nec aliquam."
         />
       </article>
       <QuestionQuestion>
         <FormattedMessage
-          id="eCalc-landingPage.question"
+          id="energyCalculator-landingPage.question"
           defaultMessage="To get started, are you a renter or homeowner?"
         />
       </QuestionQuestion>
@@ -45,7 +45,7 @@ const LandingPage = () => {
                 <Box>
                   <Housing className="option-card-icon" />
                 </Box>
-                <FormattedMessage id="energyCalculatorPaths.homeowner" defaultMessage="Homeowner" />
+                <FormattedMessage id="energyCalculator-paths.homeowner" defaultMessage="Homeowner" />
               </CardContent>
             </Stack>
           </Card>
@@ -62,13 +62,13 @@ const LandingPage = () => {
                 <Box>
                   <Apartment className="option-card-icon" />
                 </Box>
-                <FormattedMessage id="energyCalculatorPaths.renter" defaultMessage="Renter" />
+                <FormattedMessage id="energyCalculator-paths.renter" defaultMessage="Renter" />
               </CardContent>
             </Stack>
           </Card>
         </CardActionArea>
       </div>
-    </div>
+    </main>
   );
 };
 
