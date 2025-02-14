@@ -8,18 +8,27 @@ import '../OptionCardGroup/OptionCardGroup.css';
 import { ReactNode } from 'react';
 import { FormattedMessageType } from '../../Types/Questions';
 
-type Option<T = string | number> = {
-  value: T;
-  text: FormattedMessageType;
-  icon: ReactNode;
+type IconType =
+  | React.ReactNode // // For energy_calculator options
+  | { _icon: string; _classname: string }; // // For nested config options
+
+type TextType =
+  | { props: { id: string; default_message: string } } // For energy_calculator options
+  | { _label: string; _default_message: string }; // For nested config options
+
+type Option = {
+  icon: IconType;
+  text: TextType;
 };
+
+type Options = Record<string, Option | Record<string, Option>>;
 
 type RHFOptionCardGroupProps<T extends FieldValues> = {
   fields: Record<string, boolean>;
   setValue: (name: string, value: unknown, config?: Object) => void;
   name: string;
-  options: Option<T>[];
-  triggerValidation?: UseFormTrigger<FormSchema>;
+  options: Options;
+  triggerValidation?: UseFormTrigger<T>;
   customColumnNo?: string;
 };
 
