@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack, Box } from '@mui/material';
 import { ReactComponent as Checkmark } from '../../Assets/OptionCardIcons/checkmark.svg';
-import { FieldValues, UseFormTrigger } from 'react-hook-form';
+import { FieldValues, Path, UseFormTrigger } from 'react-hook-form';
 import '../OptionCardGroup/OptionCardGroup.css';
 import { ReactNode } from 'react';
 import { FormattedMessageType } from '../../Types/Questions';
@@ -26,7 +26,7 @@ type Options = Record<string, Option | Record<string, Option>>;
 type RHFOptionCardGroupProps<T extends FieldValues> = {
   fields: Record<string, boolean>;
   setValue: (name: string, value: unknown, config?: Object) => void;
-  name: string;
+  name: Path<T>;
   options: Options;
   triggerValidation?: UseFormTrigger<T>;
   customColumnNo?: string;
