@@ -8,12 +8,8 @@ import { EnergyCalculatorFormData } from '../../../Types/FormData';
 
 const ApplianceStatus = () => {
   const { formData } = useContext(Context);
-  const { energyCalculator } = formData;
-  const { needsWaterHeater, needsHvac, needsStove, needsDryer }: EnergyCalculatorFormData = energyCalculator;
   const truthyApplianceStatuses = Object.entries(applianceStatusOptions).filter(([applianceKey]) => {
-    if (energyCalculator) {
-      return energyCalculator[applianceKey];
-    }
+    return formData.energyCalculator?.[applianceKey as keyof EnergyCalculatorFormData] === true;
   });
   const notApplicable = !needsWaterHeater && !needsHvac && !needsStove && !needsDryer;
   const { formatMessage } = useIntl();
