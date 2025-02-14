@@ -5,8 +5,6 @@ import { CardActionArea, Typography, Stack, Box } from '@mui/material';
 import { ReactComponent as Checkmark } from '../../Assets/OptionCardIcons/checkmark.svg';
 import { FieldValues, Path, UseFormTrigger } from 'react-hook-form';
 import '../OptionCardGroup/OptionCardGroup.css';
-import { ReactNode } from 'react';
-import { FormattedMessageType } from '../../Types/Questions';
 
 type IconType =
   | React.ReactNode // // For energy_calculator options
