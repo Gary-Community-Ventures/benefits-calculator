@@ -25,8 +25,7 @@ const ApplianceStatus = () => {
   const mappedApplianceStatuses = () => {
     if (truthyApplianceStatuses.length) {
       return truthyApplianceStatuses.map((applianceStatus) => {
-        const applianceStatusName = applianceStatus[0];
-        const applianceStatusProps = applianceStatus[1];
+        const [applianceStatusName, applianceStatusProps] = applianceStatus;
 
         return (
           <p style={{ marginBottom: '.5rem' }} key={applianceStatusName}>
