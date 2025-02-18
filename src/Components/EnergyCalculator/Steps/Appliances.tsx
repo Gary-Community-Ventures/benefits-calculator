@@ -16,6 +16,7 @@ import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../Questio
 import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import useScreenApi from '../../../Assets/updateScreen';
+import { useEnergyFormData } from '../hooks';
 
 export const applianceStatusOptions = {
   needsWaterHeater: {
@@ -60,6 +61,7 @@ const Utilities = () => {
   const { formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const { updateScreen } = useScreenApi();
+  const energyDataAvailable = useEnergyFormData(formData);
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorApplianceStatus');
   const nextStep = useGoToNextStep('energyCalculatorApplianceStatus');
 
@@ -84,12 +86,15 @@ const Utilities = () => {
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (memberData) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (rhfData) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
+    if (!energyDataAvailable) {
+      throw new Error('energy data is not set up');
+    }
 
-    const updatedEnergyCalculatorData = { ...formData.energyCalculator, ...memberData.energyCalculator };
+    const updatedEnergyCalculatorData = { ...formData.energyCalculator, ...rhfData.energyCalculator };
     const updatedFormData = { ...formData, energyCalculator: updatedEnergyCalculatorData };
     setFormData(updatedFormData);
     updateScreen(updatedFormData);

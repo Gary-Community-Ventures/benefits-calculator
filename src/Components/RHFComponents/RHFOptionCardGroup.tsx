@@ -3,23 +3,30 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack, Box } from '@mui/material';
 import { ReactComponent as Checkmark } from '../../Assets/OptionCardIcons/checkmark.svg';
-import { FieldValues, UseFormTrigger } from 'react-hook-form';
+import { FieldValues, Path, UseFormTrigger } from 'react-hook-form';
 import '../OptionCardGroup/OptionCardGroup.css';
-import { ReactNode } from 'react';
-import { FormattedMessageType } from '../../Types/Questions';
 
-type Option<T = string | number> = {
-  value: T;
-  text: FormattedMessageType;
-  icon: ReactNode;
+type IconType =
+  | React.ReactNode // // For energy_calculator options
+  | { _icon: string; _classname: string }; // // For nested config options
+
+type TextType =
+  | { props: { id: string; default_message: string } } // For energy_calculator options
+  | { _label: string; _default_message: string }; // For nested config options
+
+type Option = {
+  icon: IconType;
+  text: TextType;
 };
+
+type Options = Record<string, Option | Record<string, Option>>;
 
 type RHFOptionCardGroupProps<T extends FieldValues> = {
   fields: Record<string, boolean>;
   setValue: (name: string, value: unknown, config?: Object) => void;
-  name: string;
-  options: Option<T>[];
-  triggerValidation?: UseFormTrigger<FormSchema>;
+  name: Path<T>;
+  options: Options;
+  triggerValidation?: UseFormTrigger<T>;
   customColumnNo?: string;
 };
 

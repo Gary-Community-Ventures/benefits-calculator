@@ -8,14 +8,10 @@ import { EnergyCalculatorFormData } from '../../../Types/FormData';
 
 const ApplianceStatus = () => {
   const { formData } = useContext(Context);
-  const { energyCalculator } = formData;
-  const { needsWaterHeater, needsHvac, needsStove, needsDryer }: EnergyCalculatorFormData = energyCalculator;
   const truthyApplianceStatuses = Object.entries(applianceStatusOptions).filter(([applianceKey]) => {
-    if (energyCalculator) {
-      return energyCalculator[applianceKey];
-    }
+    return formData.energyCalculator?.[applianceKey as keyof EnergyCalculatorFormData] === true;
   });
-  const notApplicable = !needsWaterHeater && !needsHvac && !needsStove && !needsDryer;
+  const notApplicable = truthyApplianceStatuses.length === 0;
   const { formatMessage } = useIntl();
   const editApplianceStatusAriaLabel = {
     id: 'energyCalculator.confirmation.applianceStatus.edit-AL',
@@ -29,8 +25,7 @@ const ApplianceStatus = () => {
   const mappedApplianceStatuses = () => {
     if (truthyApplianceStatuses.length) {
       return truthyApplianceStatuses.map((applianceStatus) => {
-        const applianceStatusName = applianceStatus[0];
-        const applianceStatusProps = applianceStatus[1];
+        const [applianceStatusName, applianceStatusProps] = applianceStatus;
 
         return (
           <p style={{ marginBottom: '.5rem' }} key={applianceStatusName}>
