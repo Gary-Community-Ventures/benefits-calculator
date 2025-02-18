@@ -10,6 +10,8 @@ export const QUESTION_TITLES: Record<QuestionName, string> = {
   acuteHHConditions: 'Near Term Help',
   referralSource: 'Referral',
   signUpInfo: 'Optional Sign Up',
+  energyCalculatorHouseholdData: 'Household Member',
+  energyCalculatorUtilityStatus: 'Utility Service Status',
 };
 
 export type OtherStepName = 'language' | 'disclaimer' | 'state' | 'confirmation' | 'results' | 'default';
