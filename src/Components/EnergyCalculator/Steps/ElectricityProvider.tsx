@@ -79,7 +79,10 @@ export default function ElectricityProvider() {
       options[code] = data.name;
     }
 
-    options['other'] = <FormattedMessage id="energyCalculator.electricityProvider.other" defaultMessage="Other" />;
+    options.other = <FormattedMessage id="energyCalculator.electricityProvider.other" defaultMessage="Other" />;
+    options.none = (
+      <FormattedMessage id="energyCalculator.electricityProvider.none" defaultMessage="None / Don't Pay" />
+    );
 
     return options;
   }, [formData.zipcode]);

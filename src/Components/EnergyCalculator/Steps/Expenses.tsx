@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { z } from 'zod';
 import useScreenApi from '../../../Assets/updateScreen';
 import { Expense, FormData } from '../../../Types/FormData';
@@ -18,12 +18,13 @@ import { Context } from '../../Wrapper/Wrapper';
 import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import { FormattedMessageType } from '../../../Types/Questions';
 
-export type EnergyCalculatorExpenseType = 'cooling' | 'heating' | 'otherUtilities';
+const EXPENSE_TYPES = ['heating', 'cooling', 'electricity'] as const;
+export type EnergyCalculatorExpenseType = (typeof EXPENSE_TYPES)[number];
 
 export const ENERGY_CALCULATOR_EXPENSE_NAME_MAP: Record<EnergyCalculatorExpenseType, FormattedMessageType> = {
   heating: <FormattedMessage id="energyCalculator.expenses.heating" defaultMessage="Heating" />,
   cooling: <FormattedMessage id="energyCalculator.expenses.cooling" defaultMessage="Cooling" />,
-  otherUtilities: <FormattedMessage id="energyCalculator.expenses.otherUtilities" defaultMessage="Other Utilities" />,
+  electricity: <FormattedMessage id="energyCalculator.expenses.electricity" defaultMessage="Electricity" />,
 };
 
 const EXPENSE_OPTIONS: MultiSelectTileOption<EnergyCalculatorExpenseType>[] = [
@@ -38,13 +39,11 @@ const EXPENSE_OPTIONS: MultiSelectTileOption<EnergyCalculatorExpenseType>[] = [
     icon: <AcUnit className="option-card-icon" />,
   },
   {
-    value: 'otherUtilities',
-    text: ENERGY_CALCULATOR_EXPENSE_NAME_MAP.otherUtilities,
+    value: 'electricity',
+    text: ENERGY_CALCULATOR_EXPENSE_NAME_MAP.electricity,
     icon: <Housing className="option-card-icon" />,
   },
 ];
-
-const EXPENSE_TYPES: ['heating', 'cooling', 'otherUtilities'] = ['heating', 'cooling', 'otherUtilities'];
 
 export default function EnergyCalculatorExpenses() {
   const { formData, setFormData } = useContext(Context);
@@ -52,6 +51,8 @@ export default function EnergyCalculatorExpenses() {
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorExpenses');
   const nextStep = useGoToNextStep('energyCalculatorExpenses');
   const { updateScreen } = useScreenApi();
+  const navigate = useNavigate();
+  const { whiteLabel } = useContext(Context);
 
   const formSchema = z.object({
     expenses: z
@@ -75,7 +76,7 @@ export default function EnergyCalculatorExpenses() {
       expenses: {
         heating: hasExpense('heating'),
         cooling: hasExpense('cooling'),
-        otherUtilities: hasExpense('otherUtilities'),
+        electricity: hasExpense('electricity'),
       },
     },
   });
@@ -92,9 +93,8 @@ export default function EnergyCalculatorExpenses() {
       throw new Error('no uuid');
     }
 
-    if (!expenses.heating && !expenses.cooling && !expenses.otherUtilities) {
-      // TODO: Redirect to no utilities page.
-      console.error('no expenses [TODO: redirect to no expenses page]');
+    if (!expenses.heating && !expenses.cooling && !expenses.electricity) {
+      navigate(`/${whiteLabel}/${uuid}/no-expenses`);
       return;
     }
 

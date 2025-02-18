@@ -1,0 +1,18 @@
+.energy-calculator-container {
+  text-align: center;
+  margin: 2rem 0;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.energy-calculator-body-text {
+  margin: 2rem 0;
+  text-align: start;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 0;
+}

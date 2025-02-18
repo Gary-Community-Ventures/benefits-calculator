@@ -86,6 +86,7 @@ export default function GasProvider() {
       />
     );
     options.other = <FormattedMessage id="energyCalculator.gasProvider.other" defaultMessage="Other" />;
+    options.none = <FormattedMessage id="energyCalculator.gasProvider.none" defaultMessage="None / Don't Pay" />;
 
     return options;
   }, [formData.county]);

@@ -3,7 +3,7 @@ import { QuestionName } from '../../Types/Questions';
 
 type ReferrerOptions<T> = {
   default: T;
-  [key: string]: T;
+  [key: string]: T | undefined;
 };
 
 export type StepDirectory = QuestionName[] | { default: QuestionName[]; [key: string]: QuestionName[] };

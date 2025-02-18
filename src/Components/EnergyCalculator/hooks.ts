@@ -30,3 +30,9 @@ export function useEnergyFormData(
 
   return formData.energyCalculator !== undefined;
 }
+
+export function useIsEnergyCalculator() {
+  const { getReferrer } = useContext(Context);
+
+  return getReferrer('featureFlags').includes('energy_calculator');
+}
