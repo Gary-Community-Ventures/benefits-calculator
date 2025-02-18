@@ -90,7 +90,6 @@ const Utilities = () => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
-
     if (!energyDataAvailable) {
       throw new Error('energy data is not set up');
     }

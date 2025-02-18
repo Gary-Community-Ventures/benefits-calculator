@@ -23,6 +23,8 @@ export default function EnergyCalculatorGasProvider() {
         defaultMessage="Propane tank / firewood / heating pellets"
       />
     );
+  } else if (gasProvider === 'none') {
+    providerName = <FormattedMessage id="energyCalculator.gasProvider.none" defaultMessage="None / Don't Pay" />;
   }
 
   const editGasProviderAriaLabel = {

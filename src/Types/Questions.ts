@@ -14,7 +14,7 @@ export type QuestionName =
   | 'energyCalculatorElectricityProvider'
   | 'energyCalculatorGasProvider'
   | 'energyCalculatorExpenses'
-  | 'energyCalculatorApplianceStatus'
-  | 'energyCalculatorUtilityStatus';
+  | 'energyCalculatorUtilityStatus'
+  | 'energyCalculatorApplianceStatus';
 
 export type FormattedMessageType = ReactElement<any, string | JSXElementConstructor<any>>;

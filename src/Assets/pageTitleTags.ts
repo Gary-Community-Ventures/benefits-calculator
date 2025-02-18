@@ -13,6 +13,10 @@ export const QUESTION_TITLES: Record<QuestionName, string> = {
   energyCalculatorApplianceStatus: 'Appliance Broken or Needs Replacement?',
   energyCalculatorHouseholdData: 'Household Member',
   energyCalculatorUtilityStatus: 'Utility Service Status',
+  energyCalculatorApplianceStatus: 'Appliance Broken or Needs Replacement?',
+  energyCalculatorElectricityProvider: 'Electricity Provider',
+  energyCalculatorGasProvider: 'Gas Provider',
+  energyCalculatorExpenses: 'Expenses',
 };
 
 export type OtherStepName =
