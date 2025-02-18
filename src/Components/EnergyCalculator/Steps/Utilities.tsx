@@ -29,7 +29,7 @@ const Utilities = () => {
       text: {
         props: {
           id: 'utilityStatusOptions.electricityIsDisconnected',
-          default_message: 'Your electricity and/or gas has been disconnected.',
+          defaultMessage: 'Your electricity and/or gas has been disconnected.',
         },
       },
     },
@@ -38,7 +38,7 @@ const Utilities = () => {
       text: {
         props: {
           id: 'utilityStatusOptions.hasPastDueEnergyBills',
-          default_message: 'You have a past-due electric or heating bill or you are low on fuel.',
+          defaultMessage: 'You have a past-due electric or heating bill or you are low on fuel.',
         },
       },
     },

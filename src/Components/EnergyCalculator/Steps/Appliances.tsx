@@ -24,7 +24,7 @@ export const applianceStatusOptions = {
     text: {
       props: {
         id: 'applianceStatusOptions.needsWaterHeater',
-        default_message: 'Water Heater',
+        defaultMessage: 'Water Heater',
       },
     },
   },
@@ -33,7 +33,7 @@ export const applianceStatusOptions = {
     text: {
       props: {
         id: 'applianceStatusOptions.needsHvac',
-        default_message: 'Heating, ventilation, and/or cooling',
+        defaultMessage: 'Heating, ventilation, and/or cooling',
       },
     },
   },
@@ -42,7 +42,7 @@ export const applianceStatusOptions = {
     text: {
       props: {
         id: 'applianceStatusOptions.needsStove',
-        default_message: 'Cooking stove/range',
+        defaultMessage: 'Cooking stove/range',
       },
     },
   },
@@ -51,7 +51,7 @@ export const applianceStatusOptions = {
     text: {
       props: {
         id: 'applianceStatusOptions.needsDryer',
-        default_message: 'Clothes dryer',
+        defaultMessage: 'Clothes dryer',
       },
     },
   },
