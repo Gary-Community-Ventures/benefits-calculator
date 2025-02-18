@@ -15,7 +15,6 @@ import GasProvider from '../EnergyCalculator/Steps/GasProvider';
 import EnergyCalculatorExpenses from '../EnergyCalculator/Steps/Expenses';
 import Appliances from '../EnergyCalculator/Steps/Appliances';
 import Utilities from '../EnergyCalculator/Steps/Utilities';
-import Appliances from '../EnergyCalculator/Steps/Appliances';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = () => {
