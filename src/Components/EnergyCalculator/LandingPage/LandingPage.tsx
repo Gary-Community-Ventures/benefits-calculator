@@ -14,13 +14,11 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <main className="energyCalculator-container">
-      <div className="energyCalculator-landingPage.header">
-        <QuestionHeader>
-          <FormattedMessage id="energyCalculator-landingPage.qHeader" defaultMessage="Energy Calculator" />
-        </QuestionHeader>
-      </div>
-      <article className="energyCalculator-body-text">
+    <main className="energy-calculator-container">
+      <QuestionHeader>
+        <FormattedMessage id="energyCalculator-landingPage.qHeader" defaultMessage="Energy Calculator" />
+      </QuestionHeader>
+      <article className="energy-calculator-body-text">
         <FormattedMessage
           id="energyCalculator.bodyText"
           defaultMessage="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus, nec vehicula risus tincidunt a. Sed euismod, nisl nec aliquam."

@@ -1,11 +1,11 @@
-.energyCalculator-container {
+.energy-calculator-container {
   text-align: center;
   margin: 2rem 0;
   width: 100%;
   padding: 0 2rem;
 }
 
-.energyCalculator-body-text {
+.energy-calculator-body-text {
   margin: 2rem 0;
   text-align: start;
 }
