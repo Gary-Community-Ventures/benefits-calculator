@@ -31,7 +31,7 @@ const ApplianceStatus = () => {
           <p style={{ marginBottom: '.5rem' }} key={applianceStatusName}>
             <FormattedMessage
               id={applianceStatusProps.text.props.id}
-              defaultMessage={applianceStatusProps.text.props.default_message}
+              defaultMessage={applianceStatusProps.text.props.defaultMessage}
             />
           </p>
         );
