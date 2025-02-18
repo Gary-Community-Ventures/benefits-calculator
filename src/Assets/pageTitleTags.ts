@@ -15,7 +15,14 @@ export const QUESTION_TITLES: Record<QuestionName, string> = {
   energyCalculatorUtilityStatus: 'Utility Service Status',
 };
 
-export type OtherStepName = 'language' | 'disclaimer' | 'state' | 'confirmation' | 'results' | 'default';
+export type OtherStepName =
+  | 'language'
+  | 'disclaimer'
+  | 'state'
+  | 'confirmation'
+  | 'results'
+  | 'default'
+  | 'energyCalculatorRedirectToMFB';
 
 export const OTHER_PAGE_TITLES: Record<OtherStepName, string> = {
   language: 'Preferred Language',
@@ -24,4 +31,5 @@ export const OTHER_PAGE_TITLES: Record<OtherStepName, string> = {
   confirmation: 'Confirmation',
   results: 'Results',
   default: 'MyFriendBen',
+  energyCalculatorRedirectToMFB: 'Redirect to MFB',
 };

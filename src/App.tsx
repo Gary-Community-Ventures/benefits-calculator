@@ -24,6 +24,7 @@ import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
 import EcHouseholdMemberForm from './Components/EnergyCalculator/Steps/HouseholdMemberForm';
 import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm';
+import EnergyCalculatorNoExpenses from './Components/EnergyCalculator/NoExpensesPage/NoExpenses';
 import './App.css';
 
 const App = () => {
@@ -163,6 +164,7 @@ const App = () => {
                   <Route path="" element={<Navigate to="/step-1" replace />} />
                   <Route path="step-1" element={<SelectLanguagePage />} />
                   <Route path="step-2" element={<Disclaimer />} />
+                  <Route path="no-expenses" element={<EnergyCalculatorNoExpenses />} />
                   <Route
                     path={`step-${householdMemberStepNumber}/:page`}
                     element={<HouseholdMemberForm key={window.location.href} />}
