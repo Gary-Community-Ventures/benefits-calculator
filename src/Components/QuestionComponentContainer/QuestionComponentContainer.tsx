@@ -14,6 +14,7 @@ import ElectricityProvider from '../EnergyCalculator/Steps/ElectricityProvider';
 import GasProvider from '../EnergyCalculator/Steps/GasProvider';
 import EnergyCalculatorExpenses from '../EnergyCalculator/Steps/Expenses';
 import Appliances from '../EnergyCalculator/Steps/Appliances';
+import Utilities from '../EnergyCalculator/Steps/Utilities';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = () => {
@@ -103,6 +104,12 @@ const QuestionComponentContainer = () => {
       return (
         <main className="benefits-form">
           <Appliances />
+        </main>
+      );
+    case 'energyCalculatorUtilityStatus':
+      return (
+        <main className="benefits-form">
+          <Utilities />
         </main>
       );
   }

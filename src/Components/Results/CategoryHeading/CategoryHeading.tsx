@@ -7,7 +7,7 @@ import { ReactComponent as CashAssistance } from '../../../Assets/CategoryHeadin
 import { ReactComponent as ChildCareYouthEducation } from '../../../Assets/CategoryHeadingIcons/childCareYouthEducation.svg';
 import { calculateTotalValue, formatToUSD } from '../FormattedValue';
 import { FormattedMessage, useIntl } from 'react-intl';
-import ResultsTranslate from '../Translate/Translate.tsx';
+import ResultsTranslate from '../Translate/Translate';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { ProgramCategory } from '../../../Types/Results';
 
@@ -23,9 +23,10 @@ export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
 
 type CategoryHeadingProps = {
   category: ProgramCategory;
+  showAmount?: boolean;
 };
 
-const CategoryHeading = ({ category }: CategoryHeadingProps) => {
+const CategoryHeading = ({ category, showAmount = true }: CategoryHeadingProps) => {
   const intl = useIntl();
   const translateNumber = useTranslateNumber();
 
@@ -39,7 +40,7 @@ const CategoryHeading = ({ category }: CategoryHeadingProps) => {
   const monthlyCategoryAmt = calculateTotalValue(category) / 12;
   const categoryImageAriaLabelProps = {
     id: category.name.label,
-    defaultMsg: category.name.default_message,
+    defaultMessage: category.name.default_message,
   };
   const iconTranslation = intl.formatMessage({ id: 'categoryHeading.icon', defaultMessage: 'icon' });
 
@@ -58,12 +59,14 @@ const CategoryHeading = ({ category }: CategoryHeadingProps) => {
             <ResultsTranslate translation={category.name} />
           </h2>
         </div>
-        <div className="box-right">
-          <h2 className="category-heading-text-style normal-weight">
-            {translateNumber(formatToUSD(monthlyCategoryAmt))}
-            <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
-          </h2>
-        </div>
+        {showAmount && (
+          <div className="box-right">
+            <h2 className="category-heading-text-style normal-weight">
+              {translateNumber(formatToUSD(monthlyCategoryAmt))}
+              <FormattedMessage id="program-card-month-txt" defaultMessage="/month" />
+            </h2>
+          </div>
+        )}
       </div>
       {category.description.default_message !== '' && (
         <p className="child-care-warning-text">

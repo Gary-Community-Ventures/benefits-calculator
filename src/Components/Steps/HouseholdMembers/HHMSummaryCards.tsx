@@ -11,6 +11,7 @@ import { useContext } from 'react';
 import { useStepNumber } from '../../../Assets/stepDirectory.ts';
 import { Context } from '../../Wrapper/Wrapper.tsx';
 import './HHMSummaryCards.css';
+import { calcMemberYearlyIncome } from '../../../Assets/income';
 
 type HHMSummariesProps = {
   activeMemberData: HouseholdData;
@@ -114,28 +115,7 @@ const HHMSummaries = ({ activeMemberData, triggerValidation, questionName }: HHM
         age = 0;
       }
 
-      let income = 0;
-      for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {
-        let num = 0;
-        switch (incomeFrequency) {
-          case 'weekly':
-            num = Number(incomeAmount) * 52;
-            break;
-          case 'biweekly':
-            num = Number(incomeAmount) * 26;
-            break;
-          case 'semimonthly':
-            num = Number(incomeAmount) * 24;
-            break;
-          case 'monthly':
-            num = Number(incomeAmount) * 12;
-            break;
-          case 'hourly':
-            num = Number(incomeAmount) * Number(hoursPerWeek) * 52;
-            break;
-        }
-        income += Number(num);
-      }
+      const income = calcMemberYearlyIncome(member);
 
       return createMemberCard(memberIndex, member, age, income, relationship_options);
     }
