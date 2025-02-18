@@ -8,6 +8,7 @@ import { useConfig } from '../Config/configHook';
 import ConfirmationBlock, { formatToUSD, ConfirmationItem } from './ConfirmationBlock';
 import { Context } from '../Wrapper/Wrapper';
 import { ReactComponent as Head } from '../../Assets/icons/head.svg';
+import { calcIncomeStreamAmount } from '../../Assets/income';
 
 type IconAndFormattedMessageMap = {
   [key: string]: {
@@ -15,6 +16,8 @@ type IconAndFormattedMessageMap = {
     icon: ReactNode;
   };
 };
+
+type OptionMap = { [key: string]: FormattedMessageType };
 
 const DefaultConfirmationHHData = () => {
   const { formData } = useContext(Context);
@@ -25,9 +28,9 @@ const DefaultConfirmationHHData = () => {
   const translateNumber = useTranslateNumber();
   const formatBirthMonthYear = useFormatBirthMonthYear();
 
-  const relationshipOptions = useConfig<FormattedMessageType>('relationship_options');
-  const incomeOptions = useConfig<FormattedMessageType>('income_options');
-  const frequencyOptions = useConfig<FormattedMessageType>('frequency_options');
+  const relationshipOptions = useConfig<OptionMap>('relationship_options');
+  const incomeOptions = useConfig<OptionMap>('income_options');
+  const frequencyOptions = useConfig<OptionMap>('frequency_options');
   const healthInsuranceOptions = useConfig<{
     you: IconAndFormattedMessageMap;
     them: IconAndFormattedMessageMap;
@@ -106,29 +109,10 @@ const DefaultConfirmationHHData = () => {
         id: 'displayAnnualIncome.annual',
         defaultMessage: ' annually',
       });
-      let num = 0;
 
-      switch (incomeStream.incomeFrequency) {
-        case 'weekly':
-          num = Number(incomeStream.incomeAmount) * 52;
-          break;
-        case 'biweekly':
-          num = Number(incomeStream.incomeAmount) * 26;
-          break;
-        case 'semimonthly':
-          num = Number(incomeStream.incomeAmount) * 24;
-          break;
-        case 'monthly':
-          num = Number(incomeStream.incomeAmount) * 12;
-          break;
-        case 'yearly':
-          num = Number(incomeStream.incomeAmount);
-          break;
-        case 'hourly':
-          num = Number(incomeStream.incomeAmount) * Number(incomeStream.hoursPerWeek) * 52;
-          break;
-      }
-      const annualAmount = `(${formatToUSD(num)}` + translatedAnnualText + `)`;
+      const incomeStreamAmount = calcIncomeStreamAmount(incomeStream);
+
+      const annualAmount = `(${formatToUSD(incomeStreamAmount)}` + translatedAnnualText + `)`;
 
       return (
         <li key={index}>

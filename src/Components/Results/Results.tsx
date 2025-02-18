@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, PropsWithChildren, useContext, useEffect, useMemo, useState } from 'react';
 import ResultsError from './ResultsError/ResultsError';
 import Loading from './Loading/Loading';
 import {
@@ -28,6 +28,9 @@ import './Results.css';
 import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
 import { FormData } from '../../Types/FormData';
 import filterProgramsGenerator from './filterPrograms';
+import useFetchEnergyCalculatorRebates from '../EnergyCalculator/Results/fetchRebates';
+import { EnergyCalculatorRebateCategory } from '../EnergyCalculator/Results/rebateTypes';
+import EnergyCalculatorRebatePage from '../EnergyCalculator/Results/RebatePage';
 
 type WrapperResultsContext = {
   programs: Program[];
@@ -39,10 +42,11 @@ type WrapperResultsContext = {
   isAdminView: boolean;
   validations: Validation[];
   setValidations: (validations: Validation[]) => void;
+  energyCalculatorRebateCategories: EnergyCalculatorRebateCategory[]; // NOTE: will be empty if not using the energy calculator
 };
 
 type ResultsProps = {
-  type: 'program' | 'need' | 'navigator' | 'help';
+  type: 'program' | 'need' | 'help' | 'energy-calculator-rebates';
 };
 
 export const ResultsContext = createContext<WrapperResultsContext | undefined>(undefined);
@@ -67,7 +71,7 @@ export function findMemberEligibilityMember(formData: FormData, memberEligibilit
   return member;
 }
 
-function findProgramById(programs: Program[], id: number) {
+export function findProgramById(programs: Program[], id: number) {
   return programs.find((program) => program.program_id === id);
 }
 
@@ -91,8 +95,8 @@ export function useResultsLink(link: string) {
 }
 
 const Results = ({ type }: ResultsProps) => {
-  const { locale, formData } = useContext(Context);
-  const { whiteLabel, uuid, programId } = useParams();
+  const { formData } = useContext(Context);
+  const { whiteLabel, uuid, programId, energyCalculatorRebateType } = useParams();
   const is211Co = formData.immutableReferrer === '211co';
 
   const [searchParams] = useSearchParams();
@@ -163,6 +167,7 @@ const Results = ({ type }: ResultsProps) => {
   const [needs, setNeeds] = useState<UrgentNeed[]>([]);
   const [missingPrograms, setMissingPrograms] = useState(false);
   const [validations, setValidations] = useState<Validation[]>([]);
+  const energyCalculatorRebateCategories = useFetchEnergyCalculatorRebates();
 
   const filterPrograms = filterProgramsGenerator(formData, filtersChecked, isAdminView);
 
@@ -191,42 +196,57 @@ const Results = ({ type }: ResultsProps) => {
     setLoading(false);
   }, [filtersChecked, apiResults, isAdminView]);
 
+  const ResultsContextProvider = ({ children }: PropsWithChildren) => {
+    return (
+      <ResultsContext.Provider
+        value={{
+          programs,
+          programCategories,
+          needs,
+          filtersChecked,
+          setFiltersChecked,
+          missingPrograms,
+          isAdminView,
+          validations,
+          setValidations,
+          energyCalculatorRebateCategories,
+        }}
+      >
+        {children}
+      </ResultsContext.Provider>
+    );
+  };
+
   if (loading) {
     return (
-      <div className="results-loading-container">
-        <Loading />
-      </div>
+      <main>
+        <div className="results-loading-container">
+          <Loading />
+        </div>
+      </main>
     );
   } else if (apiError) {
     return <ResultsError />;
   } else if (programId === undefined && type === 'help') {
     return (
-      <Grid container>
-        <Grid item xs={12}>
-          <BackAndSaveButtons
-            navigateToLink={addAdminToLink(`/${whiteLabel}/${uuid}/results/benefits`, isAdminView)}
-            BackToThisPageText={<FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />}
-          />
-          <MoreHelp />
+      <main>
+        <Grid container>
+          <Grid item xs={12}>
+            <BackAndSaveButtons
+              navigateToLink={addAdminToLink(`/${whiteLabel}/${uuid}/results/benefits`, isAdminView)}
+              BackToThisPageText={
+                <FormattedMessage id="results.back-to-results-btn" defaultMessage="BACK TO RESULTS" />
+              }
+            />
+            <MoreHelp />
+          </Grid>
         </Grid>
-      </Grid>
+      </main>
     );
   } else if (programId === undefined && (type === 'program' || type === 'need')) {
     return (
       <main>
-        <ResultsContext.Provider
-          value={{
-            programs,
-            programCategories,
-            needs,
-            filtersChecked,
-            setFiltersChecked,
-            missingPrograms,
-            isAdminView,
-            validations,
-            setValidations,
-          }}
-        >
+        <ResultsContextProvider>
           <ResultsHeader type={type} />
           <ResultsTabs />
           <Grid container sx={{ p: 2 }}>
@@ -235,38 +255,44 @@ const Results = ({ type }: ResultsProps) => {
             </Grid>
           </Grid>
           {!is211Co && <HelpButton />}
-        </ResultsContext.Provider>
+        </ResultsContextProvider>
       </main>
     );
   }
 
-  if (programId === undefined) {
+  const NavigateToMainResultsPage = () => {
     return <Navigate to={addAdminToLink(`/${whiteLabel}/${uuid}/results/benefits`, isAdminView)} />;
+  };
+
+  if (programId !== undefined) {
+    const program = findProgramById(programs, Number(programId));
+
+    if (program === undefined) {
+      return <NavigateToMainResultsPage />;
+    }
+
+    return (
+      <ResultsContextProvider>
+        <ProgramPage program={program} />
+      </ResultsContextProvider>
+    );
+  } else if (energyCalculatorRebateType !== undefined) {
+    const rebateCategory = energyCalculatorRebateCategories.find(
+      (category) => category.type === energyCalculatorRebateType,
+    );
+
+    if (rebateCategory === undefined) {
+      return <NavigateToMainResultsPage />;
+    }
+
+    return (
+      <ResultsContextProvider>
+        <EnergyCalculatorRebatePage rebateCategory={rebateCategory} />
+      </ResultsContextProvider>
+    );
+  } else {
+    return <NavigateToMainResultsPage />;
   }
-
-  const program = findProgramById(programs, Number(programId));
-
-  if (program === undefined) {
-    return <Navigate to={addAdminToLink(`/${whiteLabel}/${uuid}/results/benefits`, isAdminView)} />;
-  }
-
-  return (
-    <ResultsContext.Provider
-      value={{
-        programs,
-        programCategories,
-        needs,
-        filtersChecked,
-        setFiltersChecked,
-        missingPrograms,
-        isAdminView,
-        validations,
-        setValidations,
-      }}
-    >
-      <ProgramPage program={program} />
-    </ResultsContext.Provider>
-  );
 };
 
 export default Results;
