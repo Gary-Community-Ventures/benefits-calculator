@@ -7,8 +7,7 @@ import { useContext } from 'react';
 const UtilityStatus = () => {
   const { formData } = useContext(Context);
   const { energyCalculator } = formData;
-  const { electricityIsDisconnected, hasPastDueEnergyBills } = energyCalculator;
-  const notApplicable = !electricityIsDisconnected && !hasPastDueEnergyBills;
+  const notApplicable = !energyCalculator?.electricityIsDisconnected && !energyCalculator?.hasPastDueEnergyBills;
   const { formatMessage } = useIntl();
   const editUtilityStatusAriaLabel = {
     id: 'energyCalculator.confirmation.utilityStatus.edit-AL',
@@ -31,7 +30,7 @@ const UtilityStatus = () => {
       editAriaLabel={editUtilityStatusAriaLabel}
       stepName="energyCalculatorUtilityStatus"
     >
-      {electricityIsDisconnected && (
+      {energyCalculator?.electricityIsDisconnected && (
         <p style={{ marginBottom: '.5rem' }}>
           <FormattedMessage
             id="energyCalculator.confirmation.energyIsDisconnected"
@@ -39,7 +38,7 @@ const UtilityStatus = () => {
           />
         </p>
       )}
-      {hasPastDueEnergyBills && (
+      {energyCalculator?.hasPastDueEnergyBills && (
         <p>
           <FormattedMessage
             id="energyCalculator.confirmation.hasPastDueEnergyBills"
