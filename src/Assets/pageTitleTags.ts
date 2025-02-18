@@ -10,6 +10,7 @@ export const QUESTION_TITLES: Record<QuestionName, string> = {
   acuteHHConditions: 'Near Term Help',
   referralSource: 'Referral',
   signUpInfo: 'Optional Sign Up',
+  energyCalculatorApplianceStatus: 'Appliance Broken or Needs Replacement?',
   energyCalculatorHouseholdData: 'Household Member',
   energyCalculatorUtilityStatus: 'Utility Service Status',
 };
