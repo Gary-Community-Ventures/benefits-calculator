@@ -18,6 +18,8 @@ import { Benefits as BenefitsType } from '../../Types/FormData';
 import EnergyCalculatorElectricityProvider from '../EnergyCalculator/ConfirmationPage/ElectricityProvider';
 import EnergyCalculatorGasProvider from '../EnergyCalculator/ConfirmationPage/GasProvider';
 import EnergyCalculatorExpenses from '../EnergyCalculator/ConfirmationPage/Expenses';
+import EnergyCalculatorApplianceStatus from '../EnergyCalculator/ConfirmationPage/ApplianceStatus';
+import EnergyCalculatorUtilityStatus from '../EnergyCalculator/ConfirmationPage/UtilityStatus';
 
 function ZipCode() {
   const { formData } = useContext(Context);
@@ -360,6 +362,8 @@ const STEP_CONFIRMATIONS: Record<QuestionName, ReactNode | null> = {
   ),
   energyCalculatorGasProvider: <EnergyCalculatorGasProvider key="energyCalculatorGasProvider" />,
   energyCalculatorExpenses: <EnergyCalculatorExpenses key="energyCalculatorExpenses" />,
+  energyCalculatorApplianceStatus: <EnergyCalculatorApplianceStatus key="energyCalculatorApplianceStatus" />,
+  energyCalculatorUtilityStatus: <EnergyCalculatorUtilityStatus key="energyCalculatorUtilityStatus" />,
   signUpInfo: null,
 };
 

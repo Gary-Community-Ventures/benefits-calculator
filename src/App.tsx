@@ -25,6 +25,7 @@ import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
 import EcHouseholdMemberForm from './Components/EnergyCalculator/Steps/HouseholdMemberForm';
 import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm';
 import EnergyCalculatorLandingPage from './Components/EnergyCalculator/LandingPage/LandingPage';
+import EnergyCalculatorNoExpenses from './Components/EnergyCalculator/NoExpensesPage/NoExpenses';
 import './App.css';
 
 const App = () => {
@@ -165,6 +166,7 @@ const App = () => {
                   <Route path="" element={<Navigate to="/step-1" replace />} />
                   <Route path="step-1" element={<SelectLanguagePage />} />
                   <Route path="step-2" element={<Disclaimer />} />
+                  <Route path="no-expenses" element={<EnergyCalculatorNoExpenses />} />
                   <Route
                     path={`step-${householdMemberStepNumber}/:page`}
                     element={<HouseholdMemberForm key={window.location.href} />}
@@ -177,8 +179,11 @@ const App = () => {
                   <Route path="confirm-information" element={<Confirmation />} />
                   <Route path="results/benefits" element={<Results type="program" />} />
                   <Route path="results/near-term-needs" element={<Results type="need" />} />
+                  <Route
+                    path="results/energy-rebates/:energyCalculatorRebateType"
+                    element={<Results type="energy-calculator-rebates" />}
+                  />
                   <Route path="results/benefits/:programId" element={<Results type="program" />} />
-                  <Route path="results/benefits/:programId/navigators" element={<Results type="navigator" />} />
                   <Route path="results/more-help" element={<Results type="help" />} />
                   <Route path="results" element={<Navigate to="benefits" replace />} />
                   <Route path="*" element={<Navigate to="/step-1" replace />} />

@@ -11,6 +11,9 @@ export const QUESTION_TITLES: Record<QuestionName, string> = {
   acuteHHConditions: 'Near Term Help',
   referralSource: 'Referral',
   signUpInfo: 'Optional Sign Up',
+  energyCalculatorApplianceStatus: 'Appliance Broken or Needs Replacement?',
+  energyCalculatorHouseholdData: 'Household Member',
+  energyCalculatorUtilityStatus: 'Utility Service Status',
 };
 
 export type OtherStepName =
@@ -20,7 +23,8 @@ export type OtherStepName =
   | 'confirmation'
   | 'results'
   | 'default'
-  | 'energyCalculatorLandingPage';
+  | 'energyCalculatorLandingPage'
+  | 'energyCalculatorRedirectToMFB';
 
 export const OTHER_PAGE_TITLES: Record<OtherStepName, string> = {
   language: 'Preferred Language',
@@ -30,4 +34,5 @@ export const OTHER_PAGE_TITLES: Record<OtherStepName, string> = {
   results: 'Results',
   default: 'MyFriendBen',
   energyCalculatorLandingPage: 'Energy Calculator',
+  energyCalculatorRedirectToMFB: 'Redirect to MFB',
 };

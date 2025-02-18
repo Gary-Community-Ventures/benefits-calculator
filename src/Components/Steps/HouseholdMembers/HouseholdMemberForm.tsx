@@ -55,6 +55,7 @@ import useScreenApi from '../../../Assets/updateScreen';
 import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
 import { getCurrentMonthYear, YEARS, MAX_AGE } from '../../../Assets/age';
 import './PersonIncomeBlock.css';
+import { useShouldRedirectToConfirmation } from '../../QuestionComponents/questionHooks';
 
 const HouseholdMemberForm = () => {
   const { formData, setFormData } = useContext(Context);
@@ -84,6 +85,7 @@ const HouseholdMemberForm = () => {
     frequencyOptions,
     <FormattedMessage id="personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
   );
+  const redirectToConfirmationPage = useShouldRedirectToConfirmation();
 
   const currentStepId = useStepNumber('householdData');
   const backNavigationFunction = () => {
@@ -98,6 +100,11 @@ const HouseholdMemberForm = () => {
     }
   };
   const nextStep = (uuid: string, currentStepId: number, pageNumber: number) => {
+    if (redirectToConfirmationPage) {
+      navigate(`/${whiteLabel}/${uuid}/confirm-information`);
+      return;
+    }
+
     if (Number(pageNumber + 1) <= formData.householdSize) {
       navigate(`/${whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber + 1}`);
       return;
