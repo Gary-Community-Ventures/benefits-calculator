@@ -24,6 +24,7 @@ import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
 import EcHouseholdMemberForm from './Components/EnergyCalculator/Steps/HouseholdMemberForm';
 import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm';
+import EnergyCalculatorLandingPage from './Components/EnergyCalculator/LandingPage/LandingPage';
 import EnergyCalculatorNoExpenses from './Components/EnergyCalculator/NoExpensesPage/NoExpenses';
 import './App.css';
 
@@ -154,6 +155,7 @@ const App = () => {
                 <Route path="co/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
                 <Route path="co/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
                 <Route path="co/ccig" element={<CcigLandingPage />} />
+                <Route path="co_energy_calculator/landing-page" element={<EnergyCalculatorLandingPage />} />
                 <Route path="step-1" element={<SelectLanguagePage />} />
                 <Route path="select-state" element={<SelectStatePage />} />
                 <Route path=":whiteLabel/current-benefits" element={<CurrentBenefits />} />
