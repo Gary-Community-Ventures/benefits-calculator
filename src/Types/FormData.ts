@@ -10,6 +10,24 @@ export type IncomeStream = {
   hoursPerWeek: string;
 };
 
+export type EnergyCalculatorFormData = {
+  isHomeOwner: boolean;
+  isRenter: boolean;
+  electricProvider: string;
+  gasProvider: string;
+  electricityIsDisconnected: boolean;
+  hasPastDueEnergyBills: boolean;
+  needsWaterHeater: boolean;
+  needsHvac: boolean;
+  needsStove: boolean;
+  needsDryer: boolean;
+};
+
+export type EnergyCalculatorMember = {
+  survivingSpouse: boolean;
+  receivesSsi: boolean;
+};
+
 export type HouseholdData = {
   frontendId: string;
   age?: number; // deprecated: used for historical screens only
@@ -19,7 +37,8 @@ export type HouseholdData = {
   conditions: Conditions;
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
-  healthInsurance: HealthInsurance;
+  energyCalculator?: EnergyCalculatorMember;
+  healthInsurance?: HealthInsurance;
 };
 
 export type Benefits = {
@@ -71,17 +90,19 @@ export type FormData = {
   benefits: Benefits;
   referralSource?: string;
   immutableReferrer?: string;
+  path?: string;
   signUpInfo: SignUpInfo;
   urlSearchParams: string;
+  energyCalculator?: EnergyCalculatorFormData;
   acuteHHConditions: AcuteHHConditions;
 };
 
 export type Conditions = {
-  student: boolean;
-  pregnant: boolean;
-  blindOrVisuallyImpaired: boolean;
-  disabled: boolean;
-  longTermDisability: boolean;
+  student?: boolean;
+  pregnant?: boolean;
+  blindOrVisuallyImpaired?: boolean;
+  disabled?: boolean;
+  longTermDisability?: boolean;
 };
 
 export const isCustomTypedLocationState = (

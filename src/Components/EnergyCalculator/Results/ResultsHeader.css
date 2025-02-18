@@ -1,0 +1,38 @@
+.energy-calculator-results-header-programs-count-text {
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.energy-calculator-results-header-programs-count {
+  font-size: x-large;
+  font-weight: 700;
+  margin: auto;
+  font-family: 'Roboto Slab', serif;
+  display: flex;
+  margin-right: 0.5rem;
+}
+
+.energy-calculator-results-header {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  height: 7rem;
+  gap: 1rem;
+}
+
+@media (max-width: 630px) {
+  .energy-calculator-results-header {
+    flex-direction: column;
+    align-items: baseline;
+  }
+}

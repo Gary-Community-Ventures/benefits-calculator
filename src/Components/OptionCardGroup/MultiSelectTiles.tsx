@@ -5,14 +5,14 @@ import { ReactComponent as Checkmark } from '../../Assets/OptionCardIcons/checkm
 import './MultiSelectTiles.css';
 import { useIntl } from 'react-intl';
 
-type Option<T extends string | number> = {
+export type MultiSelectTileOption<T extends string | number> = {
   value: T;
   text: FormattedMessageType;
   icon: ReactNode;
 };
 
 type TileProps<T extends string | number> = {
-  option: Option<T>;
+  option: MultiSelectTileOption<T>;
   selected: boolean;
   onClick: () => void;
 };
@@ -42,7 +42,7 @@ function Tile<T extends string | number>({ option, selected, onClick }: TileProp
 }
 
 type MultiSelectTilesProps<T extends string | number> = {
-  options: Option<T>[];
+  options: MultiSelectTileOption<T>[];
   values: Record<T, boolean>;
   onChange: (value: Record<T, boolean>) => void;
 };

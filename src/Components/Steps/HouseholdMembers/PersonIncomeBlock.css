@@ -48,3 +48,8 @@
   padding: 0 0 3rem 0;
   margin-bottom: 1rem;
 }
+
+.top-padding-mb {
+  padding-top: 3rem;
+  margin-bottom: 1rem;
+}

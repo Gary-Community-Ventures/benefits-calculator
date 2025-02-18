@@ -187,13 +187,6 @@
   border: 1px solid var(--primary-color);
 }
 
-.result-program-details-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 45%;
-}
-
 .result-program-details {
   font-size: 0.9rem;
   flex-grow: 1;
@@ -385,18 +378,10 @@
     vertical-align: top;
     line-height: normal;
   }
-
-  .result-program-details-wrapper {
-    width: 100%;
-  }
 }
 
 /* MOBILE */
 @media (max-width: 480px) {
-  .result-program-details-wrapper {
-    width: 100%;
-  }
-
   .results-header-programs-count-text {
     width: 7rem;
     height: 7rem;

@@ -18,7 +18,6 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
   const totalStepCount = stepDirectory.length + STARTING_QUESTION_NUMBER - 1;
   const redirectToConfirmationPage = useShouldRedirectToConfirmation();
   const navigate = useNavigate();
-  const { formData } = useContext(Context);
 
   return () => {
     if (redirectToConfirmationPage) {
@@ -47,6 +46,10 @@ export function useQueryString() {
     query.append('referrer', formData.immutableReferrer);
   }
 
+  if (formData.path !== undefined && formData.path !== 'default') {
+    query.append('path', formData.path);
+  }
+
   let queryString = query.toString();
   if (queryString !== '') {
     queryString = '?' + queryString;
@@ -54,6 +57,8 @@ export function useQueryString() {
 
   return queryString;
 }
+
+const MEMBER_QUESTIONS: QuestionName[] = ['householdData', 'energyCalculatorHouseholdData'];
 
 export function useDefaultBackNavigationFunction(questionName: QuestionName) {
   const { formData } = useContext(Context);
@@ -63,7 +68,7 @@ export function useDefaultBackNavigationFunction(questionName: QuestionName) {
   const prevStepName = useStepName(currentStepId - 1);
 
   const prevUrl = useMemo(() => {
-    if (prevStepName === 'householdData') {
+    if (prevStepName && MEMBER_QUESTIONS.includes(prevStepName)) {
       return `/${whiteLabel}/${uuid}/step-${currentStepId - 1}/${formData.householdData.length}`;
     }
 

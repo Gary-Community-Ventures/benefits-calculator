@@ -38,18 +38,24 @@ import AddIcon from '@mui/icons-material/Add';
 import { createMenuItems } from '../SelectHelperFunctions/SelectHelperFunctions';
 import CloseButton from '../../CloseButton/CloseButton';
 import {
-  renderBirthMonthHelperText,
+  renderMissingBirthMonthHelperText,
+  renderFutureBirthMonthHelperText,
   renderBirthYearHelperText,
+  renderHealthInsSelectOneHelperText,
+  renderHealthInsNonePlusHelperText,
   renderRelationshipToHHHelperText,
+  renderIncomeStreamNameHelperText,
   renderIncomeFrequencyHelperText,
   renderHoursWorkedHelperText,
   renderIncomeAmountHelperText,
+  renderHealthInsNonePlusTheyHelperText,
 } from './HelperTextFunctions';
 import { DOLLARS, handleNumbersOnly, numberInputProps, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
 import useScreenApi from '../../../Assets/updateScreen';
 import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
 import { getCurrentMonthYear, YEARS, MAX_AGE } from '../../../Assets/age';
 import './PersonIncomeBlock.css';
+import { useShouldRedirectToConfirmation } from '../../QuestionComponents/questionHooks';
 
 const HouseholdMemberForm = () => {
   const { formData, setFormData } = useContext(Context);
@@ -79,6 +85,7 @@ const HouseholdMemberForm = () => {
     frequencyOptions,
     <FormattedMessage id="personIncomeBlock.createFrequencyMenuItems-disabledSelectMenuItem" defaultMessage="Select" />,
   );
+  const redirectToConfirmationPage = useShouldRedirectToConfirmation();
 
   const currentStepId = useStepNumber('householdData');
   const backNavigationFunction = () => {
@@ -93,6 +100,11 @@ const HouseholdMemberForm = () => {
     }
   };
   const nextStep = (uuid: string, currentStepId: number, pageNumber: number) => {
+    if (redirectToConfirmationPage) {
+      navigate(`/${whiteLabel}/${uuid}/confirm-information`);
+      return;
+    }
+
     if (Number(pageNumber + 1) <= formData.householdSize) {
       navigate(`/${whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber + 1}`);
       return;
@@ -116,15 +128,18 @@ const HouseholdMemberForm = () => {
   const incomeAmountRegex = /^\d{0,7}(?:\d\.\d{0,2})?$/;
   const incomeSourcesSchema = z
     .object({
-      incomeStreamName: z.string().min(1),
-      incomeFrequency: z.string().min(1),
+      incomeStreamName: z.string().min(1, { message: renderIncomeStreamNameHelperText(intl) }),
+      incomeFrequency: z.string().min(1, { message: renderIncomeFrequencyHelperText(intl) }),
       hoursPerWeek: z.string().trim(),
       incomeAmount: z
         .string()
         .trim()
-        .refine((value) => {
-          return incomeAmountRegex.test(value) && Number(value) > 0;
-        }),
+        .refine(
+          (value) => {
+            return incomeAmountRegex.test(value) && Number(value) > 0;
+          },
+          { message: renderIncomeAmountHelperText(intl) },
+        ),
     })
     .refine(
       (data) => {
@@ -134,20 +149,14 @@ const HouseholdMemberForm = () => {
           return true;
         }
       },
-      { path: ['hoursPerWeek'] },
+      { message: renderHoursWorkedHelperText(intl), path: ['hoursPerWeek'] },
     );
   const incomeStreamsSchema = z.array(incomeSourcesSchema);
   const hasIncomeSchema = z.string().regex(/^true|false$/);
 
-  let healthInsuranceNoInsuranceErrorMessage = intl.formatMessage({
-    id: 'validation-helperText.hhMemberInsuranceNone-you',
-    defaultMessage: 'Please do not select any other options if you do not have health insurance',
-  });
+  let healthInsNonPlusHelperText = renderHealthInsNonePlusHelperText(intl);
   if (pageNumber !== 1) {
-    healthInsuranceNoInsuranceErrorMessage = intl.formatMessage({
-      id: 'validation-helperText.hhMemberInsuranceNone-they',
-      defaultMessage: 'Please do not select any other options if they do not have health insurance',
-    });
+    healthInsNonPlusHelperText = renderHealthInsNonePlusTheyHelperText(intl);
   }
 
   const formSchema = z
@@ -159,11 +168,11 @@ const HouseholdMemberForm = () => {
     so if one of those options are selected,
     then birthMonth would have a minimum string length of 1 which passes validation.
     */
-      birthMonth: z.string().min(1),
+      birthMonth: z.string().min(1, { message: renderMissingBirthMonthHelperText(intl) }),
       birthYear: z
         .string()
         .trim()
-        .min(1)
+        .min(1, { message: renderBirthYearHelperText(intl) })
         .refine((value) => {
           const year = Number(value);
           const age = CURRENT_YEAR - year;
@@ -182,11 +191,7 @@ const HouseholdMemberForm = () => {
           va: z.boolean(),
         })
         .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
-          message: intl.formatMessage({
-            id: 'validation-helperText.hhMemberInsurance',
-            defaultMessage: 'Please select at least one health insurance option',
-          }),
-          path: [],
+          message: renderHealthInsSelectOneHelperText(intl),
         })
         .refine(
           (insuranceOptions) => {
@@ -198,10 +203,9 @@ const HouseholdMemberForm = () => {
             return true;
           },
           {
-            message: healthInsuranceNoInsuranceErrorMessage,
-            path: [],
+            message: healthInsNonPlusHelperText,
           },
-        ), //TODO: Render this error message to the user
+        ),
       conditions: z.object({
         student: z.boolean(),
         pregnant: z.boolean(),
@@ -211,7 +215,9 @@ const HouseholdMemberForm = () => {
       }),
       relationshipToHH: z
         .string()
-        .refine((value) => [...Object.keys(relationshipOptions)].includes(value) || pageNumber === 1),
+        .refine((value) => [...Object.keys(relationshipOptions)].includes(value) || pageNumber === 1, {
+          message: renderRelationshipToHHHelperText(intl),
+        }),
       hasIncome: hasIncomeSchema,
       incomeStreams: incomeStreamsSchema,
     })
@@ -223,7 +229,7 @@ const HouseholdMemberForm = () => {
         }
         return true;
       },
-      { message: 'This birth month is in the future', path: ['birthMonth'] }, //TODO: Render this error message to the user
+      { message: renderFutureBirthMonthHelperText(intl), path: ['birthMonth'] },
     );
   type FormSchema = z.infer<typeof formSchema>;
 
@@ -379,7 +385,9 @@ const HouseholdMemberForm = () => {
                     })}
                   </Select>
                   {errors.birthMonth !== undefined && (
-                    <FormHelperText sx={{ marginLeft: 0 }}>{renderBirthMonthHelperText()}</FormHelperText>
+                    <FormHelperText sx={{ ml: 0 }}>
+                      <ErrorMessageWrapper fontSize="1rem">{errors.birthMonth.message}</ErrorMessageWrapper>
+                    </FormHelperText>
                   )}
                 </>
               )}
@@ -427,7 +435,9 @@ const HouseholdMemberForm = () => {
                     )}
                   />
                   {errors.birthYear !== undefined && (
-                    <FormHelperText sx={{ marginLeft: 0 }}>{renderBirthYearHelperText()}</FormHelperText>
+                    <FormHelperText sx={{ ml: 0 }}>
+                      <ErrorMessageWrapper fontSize="1rem">{errors.birthYear.message}</ErrorMessageWrapper>
+                    </FormHelperText>
                   )}
                 </>
               )}
@@ -472,9 +482,9 @@ const HouseholdMemberForm = () => {
             options={pageNumber === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
             triggerValidation={trigger}
           />
-          {errors.healthInsurance?.message !== undefined && (
-            <FormHelperText sx={{ marginLeft: 0 }}>
-              {<ErrorMessageWrapper fontSize="1rem">{errors.healthInsurance.message}</ErrorMessageWrapper>}
+          {errors.healthInsurance !== undefined && (
+            <FormHelperText sx={{ ml: 0 }}>
+              <ErrorMessageWrapper fontSize="1rem">{errors.healthInsurance.message}</ErrorMessageWrapper>
             </FormHelperText>
           )}
         </Stack>
@@ -555,7 +565,9 @@ const HouseholdMemberForm = () => {
                   })}
                 </Select>
                 {errors.relationshipToHH !== undefined && (
-                  <FormHelperText sx={{ marginLeft: 0 }}>{renderRelationshipToHHHelperText()}</FormHelperText>
+                  <FormHelperText sx={{ ml: 0 }}>
+                    <ErrorMessageWrapper fontSize="1rem">{errors.relationshipToHH.message}</ErrorMessageWrapper>
+                  </FormHelperText>
                 )}
               </>
             )}
@@ -612,13 +624,6 @@ const HouseholdMemberForm = () => {
       </Box>
     );
   };
-  const renderIncomeStreamNameHelperText = () => {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="errorMessage-incomeType" defaultMessage="Please select an income type" />
-      </ErrorMessageWrapper>
-    );
-  };
 
   const renderIncomeStreamNameSelect = (index: number) => {
     return (
@@ -652,7 +657,11 @@ const HouseholdMemberForm = () => {
                 {incomeStreamsMenuItems}
               </Select>
               {errors.incomeStreams?.[index]?.incomeStreamName !== undefined && (
-                <FormHelperText sx={{ marginLeft: 0 }}>{renderIncomeStreamNameHelperText()}</FormHelperText>
+                <FormHelperText sx={{ ml: 0 }}>
+                  <ErrorMessageWrapper fontSize="1rem">
+                    {errors.incomeStreams?.[index]?.incomeStreamName.message}
+                  </ErrorMessageWrapper>
+                </FormHelperText>
               )}
             </>
           )}
@@ -726,7 +735,11 @@ const HouseholdMemberForm = () => {
                     {frequencyMenuItems}
                   </Select>
                   {errors.incomeStreams?.[index]?.incomeFrequency !== undefined && (
-                    <FormHelperText sx={{ marginLeft: 0 }}>{renderIncomeFrequencyHelperText()}</FormHelperText>
+                    <FormHelperText sx={{ ml: 0 }}>
+                      <ErrorMessageWrapper fontSize="1rem">
+                        {errors.incomeStreams?.[index]?.incomeFrequency.message}
+                      </ErrorMessageWrapper>
+                    </FormHelperText>
                   )}
                 </>
               )}
@@ -772,7 +785,11 @@ const HouseholdMemberForm = () => {
                 error={errors.incomeStreams?.[index]?.hoursPerWeek !== undefined}
               />
               {errors.incomeStreams?.[index]?.hoursPerWeek !== undefined && (
-                <FormHelperText sx={{ marginLeft: 0 }}>{renderHoursWorkedHelperText()}</FormHelperText>
+                <FormHelperText sx={{ ml: 0 }}>
+                  <ErrorMessageWrapper fontSize="1rem">
+                    {errors.incomeStreams?.[index]?.hoursPerWeek.message}
+                  </ErrorMessageWrapper>
+                </FormHelperText>
               )}
             </>
           )}
@@ -845,7 +862,11 @@ const HouseholdMemberForm = () => {
                 }}
               />
               {errors.incomeStreams?.[index]?.incomeAmount !== undefined && (
-                <FormHelperText sx={{ marginLeft: 0 }}>{renderIncomeAmountHelperText()}</FormHelperText>
+                <FormHelperText sx={{ ml: 0 }}>
+                  <ErrorMessageWrapper fontSize="1rem">
+                    {errors.incomeStreams?.[index]?.incomeAmount.message}
+                  </ErrorMessageWrapper>
+                </FormHelperText>
               )}
             </>
           )}
@@ -908,7 +929,8 @@ const HouseholdMemberForm = () => {
           />
         )}
       </QuestionHeader>
-      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} />
+
+      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} questionName="householdData" />
       <form
         onSubmit={handleSubmit(formSubmitHandler, () => {
           window.scroll({ top: 0, left: 0, behavior: 'smooth' });

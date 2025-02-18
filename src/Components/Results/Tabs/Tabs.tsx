@@ -3,6 +3,7 @@ import { useResultsContext, useResultsLink } from '../Results';
 import { Grid } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
+import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
 
 const ResultsTabs = () => {
   const { programs, needs } = useResultsContext();
@@ -10,6 +11,11 @@ const ResultsTabs = () => {
 
   const benefitsLink = useResultsLink(`results/benefits`);
   const needsLink = useResultsLink(`results/near-term-needs`);
+
+  const isEnergyCalculator = useIsEnergyCalculator();
+  if (isEnergyCalculator) {
+    return null;
+  }
   return (
     <Grid container className="results-tab-container">
       <Grid item xs={6} className="results-tab">

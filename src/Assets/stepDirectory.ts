@@ -5,11 +5,21 @@ import { Context } from '../Components/Wrapper/Wrapper';
 export const STARTING_QUESTION_NUMBER = 3;
 
 export function useStepDirectory() {
-  const { getReferrer } = useContext(Context);
+  const { getReferrer, formData } = useContext(Context);
 
-  const stepDirectory = getReferrer('stepDirectory', []) as QuestionName[];
+  const stepDirectory = getReferrer('stepDirectory', []);
 
-  return stepDirectory;
+  if (Array.isArray(stepDirectory)) {
+    return stepDirectory;
+  }
+
+  const pathStepDirectory = stepDirectory[formData.path ?? 'default'];
+
+  if (pathStepDirectory !== undefined) {
+    return pathStepDirectory;
+  }
+
+  return stepDirectory.default;
 }
 
 export function useStepNumber(name: QuestionName, raise: boolean = true) {

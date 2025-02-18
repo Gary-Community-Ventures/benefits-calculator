@@ -45,7 +45,6 @@ export type Program = {
   estimated_delivery_time: Translation;
   estimated_application_time: Translation;
   description_short: Translation;
-  short_name: string;
   description: Translation;
   value_type: Translation;
   learn_more_link: Translation;
@@ -63,6 +62,7 @@ export type Program = {
   navigators: ProgramNavigator[];
   documents: ProgramDocument[];
   warning_messages: WarningMessage[];
+  required_programs: number[];
 };
 
 export type ProgramDocument = {

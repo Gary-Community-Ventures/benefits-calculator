@@ -2,7 +2,7 @@ import { MenuItem } from '@mui/material';
 import { FormattedMessageType } from '../../../Types/Questions';
 
 export const createMenuItems = (
-  options: Record<string, FormattedMessageType>,
+  options: Record<string, FormattedMessageType | string>,
   disabledSelectFM: FormattedMessageType,
 ) => {
   const disabledSelectMenuItem = (

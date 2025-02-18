@@ -16,7 +16,7 @@ export interface WrapperContext {
   styleOverride: any;
   pageIsLoading: boolean;
   setScreenLoading: (loading: boolean) => void;
-  getReferrer: (id: keyof ReferrerData, defaultValue?: ReferrerDataValue) => any;
+  getReferrer: <T extends keyof ReferrerData>(key: T, defaultValue?: ReferrerDataValue<T>) => ReferrerDataValue<T>;
   staffToken: string | undefined;
   setStaffToken: (token: string | undefined) => void;
   whiteLabel: string;

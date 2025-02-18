@@ -9,12 +9,13 @@ import { FormattedMessage } from 'react-intl';
 import './Header.css';
 import { useLogo } from '../Referrer/useLogo';
 import { DEFAULT_WHITE_LABEL } from '../Wrapper/Wrapper';
+import { useQueryString } from '../QuestionComponents/questionHooks';
 
 const Header = () => {
   const context = useContext(Context);
   const { formData, getReferrer, whiteLabel } = context;
   const languageOptions = useConfig<{ [key: string]: string }>('language_options');
-  const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
+  const queryString = useQueryString();
   const intl = useIntl();
   const logoClass = getReferrer('logoClass', 'logo');
 

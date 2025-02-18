@@ -10,6 +10,8 @@ import '../../Results/Results.css';
 import { TAX_CREDIT_CATEGORY } from '../../../Assets/resultsConstants';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import Login from '../../Login/Login';
+import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
+import EnergyCalculatorResultsHeader from '../../EnergyCalculator/Results/ResultsHeader';
 
 type ResultsHeaderProps = {
   type: 'program' | 'need';
@@ -87,6 +89,13 @@ const ResultsHeader = ({ type }: ResultsHeaderProps) => {
   const { whiteLabel, uuid } = useParams();
   const { staffToken, setStaffToken } = useContext(Context);
   const { isAdminView } = useResultsContext();
+  const isEnergyCalculator = useIsEnergyCalculator();
+
+  let header = type === 'need' ? <NeedsHeader /> : <ProgramsHeader />;
+
+  if (isEnergyCalculator) {
+    header = <EnergyCalculatorResultsHeader />;
+  }
 
   return (
     <>
@@ -95,7 +104,7 @@ const ResultsHeader = ({ type }: ResultsHeaderProps) => {
         BackToThisPageText={<FormattedMessage id="results.back-to-screen-btn" defaultMessage="BACK TO SCREENER" />}
       />
       {isAdminView && <Login setToken={setStaffToken} loggedIn={staffToken !== undefined} />}
-      <div className="results-header-container">{type === 'need' ? <NeedsHeader /> : <ProgramsHeader />}</div>
+      <div className="results-header-container">{header}</div>
     </>
   );
 };

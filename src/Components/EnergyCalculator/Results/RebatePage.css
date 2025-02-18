@@ -1,0 +1,64 @@
+.energy-calculator-rebate-page-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem 0;
+  gap: 1rem;
+}
+
+.energy-calculator-rebate-page-container h1 {
+  display: flex;
+  align-items: center;
+  color: var(--secondary-color);
+  gap: 0.5rem;
+}
+
+.energy-calculator-rebate-page-container svg {
+  width: 5rem;
+  height: 5rem;
+}
+
+.energy-calculator-rebate-page-container section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 80%;
+  padding: 1rem;
+}
+
+.energy-calculator-rebate-page-rebate-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--secondary-background-color);
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 0.3rem;
+  width: 100%;
+}
+
+.energy-calculator-rebate-page-rebate-card .energy-calculator-rebate-page-more-info {
+  margin: 0;
+  width: fit-content;
+}
+
+.energy-calculator-rebate-page-rebate-card h2 {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-family: 'Roboto Slab', serif;
+}
+
+.energy-calculator-rebate-page-rebate-card strong {
+  font-weight: normal;
+  color: var(--primary-color);
+}
+
+.energy-calculator-rebate-page-rebate-card h3 {
+  color: var(--secondary-color);
+  font-family: 'Roboto Slab', serif;
+  margin-bottom: 0.5rem;
+}
+
+.energy-calculator-rebate-page-calculator-result {
+  font-weight: bold;
+}
