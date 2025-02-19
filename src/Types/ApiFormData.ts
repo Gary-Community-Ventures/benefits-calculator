@@ -37,6 +37,7 @@ export type ApiHouseholdMemberReadOnly = {
 };
 
 export type ApiHouseholdMember = {
+  age: number | null; // deprecated: used for historical screens only
   birth_year: number | null;
   birth_month: number | null;
   relationship: string | null;
