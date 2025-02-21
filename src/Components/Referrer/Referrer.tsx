@@ -7,12 +7,17 @@ import Footer from '../Footer/Footer';
 import BackToScreen from '../BackToScreen/BackToScreen';
 import { useResultsContext } from '../Results/Results';
 import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
+import NCTwoOneOneHeader from '../TwoOneOneComponents/TwoOneOneHeader/NCTwoOneOneHeader';
+import NCTwoOneOneFooter from '../TwoOneOneComponents/TwoOneOneFooter/NCTwoOneOneFooter';
 
 export const BrandedHeader = () => {
   const { formData } = useContext(Context);
 
   if (formData.immutableReferrer === '211co') {
     return <TwoOneOneHeader />;
+  }
+  if (formData.immutableReferrer === '211nc') {
+    return <NCTwoOneOneHeader />;
   }
   return <Header />;
 };
@@ -22,6 +27,9 @@ export const BrandedFooter = () => {
 
   if (formData.immutableReferrer === '211co') {
     return <TwoOneOneFooter />;
+  }
+  if (formData.immutableReferrer === '211nc') {
+    return <NCTwoOneOneFooter />;
   }
   return <Footer />;
 };

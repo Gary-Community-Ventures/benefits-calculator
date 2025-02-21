@@ -83,6 +83,12 @@
   display: inline;
 }
 
+.twoOneOneNC-footer-icon {
+  max-width: 150px;
+  height: 130px;
+  color: #0044b5;
+}
+
 @media (max-width: 870px) {
   .flexIntoRow,
   .flexLinksIntoRow {

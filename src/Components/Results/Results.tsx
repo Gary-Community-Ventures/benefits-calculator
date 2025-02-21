@@ -98,6 +98,7 @@ const Results = ({ type }: ResultsProps) => {
   const { formData } = useContext(Context);
   const { whiteLabel, uuid, programId, energyCalculatorRebateType } = useParams();
   const is211Co = formData.immutableReferrer === '211co';
+  const is211Nc = formData.immutableReferrer === '211nc';
 
   const [searchParams] = useSearchParams();
   const isAdminView = useMemo(() => searchParams.get('admin') === 'true', [searchParams.get('admin')]);
@@ -255,6 +256,7 @@ const Results = ({ type }: ResultsProps) => {
             </Grid>
           </Grid>
           {!is211Co && <HelpButton />}
+          {!is211Nc && <HelpButton />}
         </ResultsContextProvider>
       </main>
     );
