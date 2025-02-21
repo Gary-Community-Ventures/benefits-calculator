@@ -192,7 +192,7 @@ const getUserBody = (formData: FormData, languageCode: Language): ApiUser & ApiU
 };
 
 export default function useScreenApi() {
-  const { whiteLabel, locale } = useContext(Context);
+  const { whiteLabel, locale, setFormData } = useContext(Context);
   const { uuid } = useParams();
 
   return {
@@ -201,10 +201,22 @@ export default function useScreenApi() {
         return;
       }
 
-      await putScreen(getScreensBody(formData, locale, whiteLabel), uuid);
+      const updatedFormData = await putScreen(getScreensBody(formData, locale, whiteLabel), uuid);
+      setFormData((prevData) => ({
+        ...prevData,        
+      screen_id: updatedFormData.id,
+      })); 
+      
     },
     createScreen: async (formData: FormData) => {
-      return await postScreen(getScreensBody(formData, locale, whiteLabel));
+      // return await postScreen(getScreensBody(formData, locale, whiteLabel));
+      const newFormData = await postScreen(getScreensBody(formData, locale, whiteLabel));
+      setFormData((prevData) => ({
+        ...prevData,        
+        screen_id: newFormData.id,        
+      }));
+      
+      return newFormData
     },
     updateUser: async (formData: FormData) => {
       const userBody = getUserBody(formData, locale);
