@@ -212,7 +212,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
         setScreenLoading,
         staffToken,
         setStaffToken,
-        getReferrer: getReferrer as (id: keyof ReferrerData) => string,
+        getReferrer,
         whiteLabel,
         setWhiteLabel,
       }}
