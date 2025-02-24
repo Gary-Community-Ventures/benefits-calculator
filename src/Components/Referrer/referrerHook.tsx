@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { QuestionName } from '../../Types/Questions';
+import { FormattedMessageType, QuestionName } from '../../Types/Questions';
 
 type ReferrerOptions<T> = {
   default: T;
@@ -7,6 +7,15 @@ type ReferrerOptions<T> = {
 };
 
 export type StepDirectory = QuestionName[] | { default: QuestionName[]; [key: string]: QuestionName[] };
+
+export type Link211MessageType = {
+  _default_message: string;
+  link: string;
+};
+
+export type Link211MessageType1 = {
+  _default_message: string;
+}
 
 export type ReferrerData = {
   theme: ReferrerOptions<string>;
@@ -18,6 +27,9 @@ export type ReferrerData = {
   shareLink: ReferrerOptions<string>;
   featureFlags: ReferrerOptions<string[]>;
   stepDirectory: ReferrerOptions<StepDirectory>;
+  noResultMessage: ReferrerOptions<FormattedMessageType>;
+  link211Message?: ReferrerOptions<Link211MessageType> | null;
+  link211Message1?: ReferrerOptions<Link211MessageType1> | null;
 };
 
 export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
@@ -25,7 +37,7 @@ export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
   | 'logoSource'
   | 'logoFooterSource'
   | 'logoClass'
-  | 'shareLink'
+  | 'shareLink' 
   ? string
   : T extends 'logoAlt' | 'logoFooterAlt'
   ? { id: string; defaultMessage: string }
@@ -33,6 +45,10 @@ export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
   ? StepDirectory
   : T extends 'featureFlags'
   ? string[]
+  : T extends 'noResultMessage'  
+  ? FormattedMessageType
+  : T extends 'link211Message'
+  ? Link211MessageType
   : never;
 
 export default function useReferrer(referrerCode?: string, referrerData?: ReferrerData) {
@@ -54,6 +70,9 @@ export default function useReferrer(referrerCode?: string, referrerData?: Referr
     }
 
     return (referrerData[key][referrer ?? 'default'] ?? referrerData[key].default) as ReferrerDataValue<T>;
+    // const data = referrerData[key][referrer ?? 'default'] ?? referrerData[key].default;
+    // console.log(`getReferrer - key: ${key}, data:`, data); // Add this line to log the fetched data
+    // return data as ReferrerDataValue<T>;
   }
 
   return { getReferrer, setReferrer };

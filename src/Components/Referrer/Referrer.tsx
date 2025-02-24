@@ -6,8 +6,11 @@ import TwoOneOneHeader from '../TwoOneOneComponents/TwoOneOneHeader/TwoOneOneHea
 import Footer from '../Footer/Footer';
 import BackToScreen from '../BackToScreen/BackToScreen';
 import { useResultsContext } from '../Results/Results';
+import NoProgramEligibleMessage from '../Results/NoProgramEligibleMessage';
+import Link211Message from '../Results/Link211Message';
+import Link211Message1 from '../Results/Link211Message1';
 import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
-
+import { useParams } from 'react-router-dom';
 export const BrandedHeader = () => {
   const { formData } = useContext(Context);
 
@@ -25,7 +28,19 @@ export const BrandedFooter = () => {
   }
   return <Footer />;
 };
+export const ResultsMessageForNeeds = () => {
+  const { formData } = useContext(Context);
+  const { whiteLabel } = useParams();
+  
+  if (whiteLabel === 'nc')
+  {
+    return 
+    <><Link211Message /><Link211Message1 /></>
 
+  }
+  
+  return null;
+}
 export const ResultsMessage = () => {
   const { formData } = useContext(Context);
   const { missingPrograms } = useResultsContext();
@@ -37,6 +52,7 @@ export const ResultsMessage = () => {
   if (formData.immutableReferrer === 'ccig') {
     return <CcigResultsMessage />;
   }
-
-  return null;
+  
+  return <NoProgramEligibleMessage />;
+  // return <Link211Message />
 };
