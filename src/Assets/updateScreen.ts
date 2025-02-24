@@ -208,8 +208,7 @@ export default function useScreenApi() {
       })); 
       
     },
-    createScreen: async (formData: FormData) => {
-      // return await postScreen(getScreensBody(formData, locale, whiteLabel));
+    createScreen: async (formData: FormData) => {      
       const newFormData = await postScreen(getScreensBody(formData, locale, whiteLabel));
       setFormData((prevData) => ({
         ...prevData,        
