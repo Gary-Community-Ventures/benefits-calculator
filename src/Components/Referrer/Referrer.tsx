@@ -45,10 +45,8 @@ export const ResultsMessage = () => {
   if (formData.immutableReferrer === 'lgs' && missingPrograms) {
     return <BackToScreen />;
   }
-
   if (formData.immutableReferrer === 'ccig') {
     return <CcigResultsMessage />;
   }
-  
   return <NoProgramEligibleMessage />;  
 };
