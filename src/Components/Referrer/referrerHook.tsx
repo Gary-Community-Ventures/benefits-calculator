@@ -10,11 +10,6 @@ export type StepDirectory = QuestionName[] | { default: QuestionName[]; [key: st
 
 export type Link211MessageType = {
   _default_message: string;
-  link: string;
-};
-
-export type Link211MessageType1 = {
-  _default_message: string;
 }
 
 export type ReferrerData = {
@@ -28,8 +23,7 @@ export type ReferrerData = {
   featureFlags: ReferrerOptions<string[]>;
   stepDirectory: ReferrerOptions<StepDirectory>;
   noResultMessage: ReferrerOptions<FormattedMessageType>;
-  link211Message?: ReferrerOptions<Link211MessageType> | null;
-  link211Message1?: ReferrerOptions<Link211MessageType1> | null;
+  link211Message?: ReferrerOptions<Link211MessageType> | null;  
 };
 
 export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
@@ -48,7 +42,7 @@ export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
   : T extends 'noResultMessage'  
   ? FormattedMessageType
   : T extends 'link211Message'
-  ? Link211MessageType
+  ? Link211MessageType  
   : never;
 
 export default function useReferrer(referrerCode?: string, referrerData?: ReferrerData) {
@@ -69,10 +63,7 @@ export default function useReferrer(referrerCode?: string, referrerData?: Referr
       throw new Error(`${key} is not in referrerData`);
     }
 
-    return (referrerData[key][referrer ?? 'default'] ?? referrerData[key].default) as ReferrerDataValue<T>;
-    // const data = referrerData[key][referrer ?? 'default'] ?? referrerData[key].default;
-    // console.log(`getReferrer - key: ${key}, data:`, data); // Add this line to log the fetched data
-    // return data as ReferrerDataValue<T>;
+    return (referrerData[key][referrer ?? 'default'] ?? referrerData[key].default) as ReferrerDataValue<T>;    
   }
 
   return { getReferrer, setReferrer };
