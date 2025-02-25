@@ -66,7 +66,6 @@ const Disclaimer = () => {
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (termsOfServiceAndAgeData) => {
     const updatedFormData = { ...formData, ...termsOfServiceAndAgeData };
-    setFormData(updatedFormData);
 
     if (uuid) {
       await updateScreen(updatedFormData);

@@ -153,7 +153,6 @@ function AlreadyHasBenefits() {
 
     const newFormData = { ...formData, hasBenefits: hasBenefits, benefits: alreadyHasBenefits };
 
-    setFormData(newFormData);
     updateScreen(newFormData);
     nextStep();
   };

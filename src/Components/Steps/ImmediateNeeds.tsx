@@ -42,7 +42,6 @@ function ImmediateNeeds() {
     }
 
     const newFormData = { ...formData, acuteHHConditions: needs };
-    setFormData(newFormData);
     updateScreen(newFormData);
     nextStep();
   };

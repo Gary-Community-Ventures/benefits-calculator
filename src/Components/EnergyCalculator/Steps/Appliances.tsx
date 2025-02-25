@@ -96,7 +96,6 @@ const Utilities = () => {
 
     const updatedEnergyCalculatorData = { ...formData.energyCalculator, ...rhfData.energyCalculator };
     const updatedFormData = { ...formData, energyCalculator: updatedEnergyCalculatorData };
-    setFormData(updatedFormData);
     updateScreen(updatedFormData);
     nextStep();
   };

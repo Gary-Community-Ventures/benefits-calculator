@@ -336,7 +336,6 @@ const HouseholdMemberForm = () => {
       frontendId: crypto.randomUUID(),
     };
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-    setFormData(updatedFormData);
     updateScreen(updatedFormData);
 
     nextStep(uuid, currentStepId, pageNumber);

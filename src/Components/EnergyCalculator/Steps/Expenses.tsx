@@ -107,7 +107,6 @@ export default function EnergyCalculatorExpenses() {
     }
 
     const updatedFormData: FormData = { ...formData, expenses: updatedExpenses };
-    setFormData(updatedFormData);
     updateScreen(updatedFormData);
     nextStep();
   };

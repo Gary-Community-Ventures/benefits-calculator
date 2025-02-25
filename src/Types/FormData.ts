@@ -29,6 +29,7 @@ export type EnergyCalculatorMember = {
 };
 
 export type HouseholdData = {
+  id: number;
   frontendId: string;
   age?: number; // deprecated: used for historical screens only
   birthYear?: number;
@@ -71,11 +72,6 @@ export type SignUpInfo = {
 
 export type AcuteHHConditions = { [key: string]: boolean };
 
-export type HouseholdMemberReadOnly = {
-  screen: number;
-  id: number;
-};
-
 export type FormData = {
   isTest: boolean;
   isTestData?: boolean;
@@ -100,7 +96,6 @@ export type FormData = {
   urlSearchParams: string;
   energyCalculator?: EnergyCalculatorFormData;
   acuteHHConditions: AcuteHHConditions;
-  screen_id: HouseholdMemberReadOnly[];
 };
 
 export type Conditions = {

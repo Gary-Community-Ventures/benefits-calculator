@@ -295,7 +295,6 @@ const ECHouseholdMemberForm = () => {
     const updatedHouseholdData = [...formData.householdData];
     updatedHouseholdData[currentMemberIndex] = updatedMemberData;
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-    setFormData(updatedFormData);
     updateScreen(updatedFormData);
 
     nextStep(uuid, currentStepId, pageNumber);
