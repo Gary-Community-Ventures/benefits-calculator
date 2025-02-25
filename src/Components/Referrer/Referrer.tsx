@@ -7,8 +7,8 @@ import Footer from '../Footer/Footer';
 import BackToScreen from '../BackToScreen/BackToScreen';
 import { useResultsContext } from '../Results/Results';
 import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
-import NCTwoOneOneHeader from '../TwoOneOneComponents/TwoOneOneHeader/NCTwoOneOneHeader';
-import NCTwoOneOneFooter from '../TwoOneOneComponents/TwoOneOneFooter/NCTwoOneOneFooter';
+import TwoOneOneHeaderNC from '../TwoOneOneNCComponents/TwoOneOneHeader/TwoOneOneHeaderNC';
+import TwoOneOneFooterNC from '../TwoOneOneNCComponents/TwoOneOneFooter/TwoOneOneFooterNC';
 
 export const BrandedHeader = () => {
   const { formData } = useContext(Context);
@@ -17,7 +17,7 @@ export const BrandedHeader = () => {
     return <TwoOneOneHeader />;
   }
   if (formData.immutableReferrer === '211nc') {
-    return <NCTwoOneOneHeader />;
+    return <TwoOneOneHeaderNC />;
   }
   return <Header />;
 };
@@ -29,7 +29,7 @@ export const BrandedFooter = () => {
     return <TwoOneOneFooter />;
   }
   if (formData.immutableReferrer === '211nc') {
-    return <NCTwoOneOneFooter />;
+    return <TwoOneOneFooterNC />;
   }
   return <Footer />;
 };

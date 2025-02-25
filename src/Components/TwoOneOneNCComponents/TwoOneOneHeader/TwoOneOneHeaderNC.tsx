@@ -12,14 +12,15 @@ import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import TwoOneOneShare from '../TwoOneOneShare/TwoOneOneShare';
-import './TwoOneOneHeader.css';
+
+import './TwoOneOneHeaderNC.css';
+import TwoOneOneShareNC from '../TwoOneOneShare/TwoOneOneShareNC';
 
 type LanguageOptions = {
   [key: string]: string;
 };
 
-const NCTwoOneOneHeader = () => {
+const TwoOneOneHeaderNC = () => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
   const { formData, locale, selectLanguage } = useContext(Context);
   const languageOptions = useConfig<LanguageOptions>('language_options');
@@ -188,7 +189,7 @@ const NCTwoOneOneHeader = () => {
               aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}
               sx={{ '& .MuiPaper-root': { borderRadius: '1rem' } }}
             >
-              <TwoOneOneShare close={handleCloseShare} />
+              <TwoOneOneShareNC close={handleCloseShare} />
             </Dialog>
           </Stack>
         </AppBar>
@@ -198,4 +199,4 @@ const NCTwoOneOneHeader = () => {
   );
 };
 
-export default NCTwoOneOneHeader;
+export default TwoOneOneHeaderNC;

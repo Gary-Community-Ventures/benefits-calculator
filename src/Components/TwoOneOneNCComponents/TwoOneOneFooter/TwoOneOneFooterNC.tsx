@@ -2,9 +2,9 @@ import { Paper, Stack, Typography, Link } from '@mui/material';
 import Box from '@mui/material/Box';
 import dialIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/dialIcon.png';
 import { FormattedMessage, useIntl } from 'react-intl';
-import './TwoOneOneFooter.css';
+import './TwoOneOneFooterNC.css';
 
-const NCTwoOneOneFooter = () => {
+const TwoOneOneFooterNC = () => {
   const intl = useIntl();
 
   const twoOneOneChatALProps = {
@@ -151,4 +151,4 @@ const NCTwoOneOneFooter = () => {
   );
 };
 
-export default NCTwoOneOneFooter;
+export default TwoOneOneFooterNC;

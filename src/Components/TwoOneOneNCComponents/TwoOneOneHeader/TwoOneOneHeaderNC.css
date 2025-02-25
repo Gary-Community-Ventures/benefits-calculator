@@ -50,6 +50,15 @@ button.hamburger-icon {
   display: none;
 }
 
+#twoOneOne-NC-select-language {
+  padding: 0;
+  color: #0044b5;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  margin-right: 1.5rem;
+  text-transform: uppercase;
+}
+
 @media (max-width: 1280px) {
   button.hamburger-icon {
     display: flex;

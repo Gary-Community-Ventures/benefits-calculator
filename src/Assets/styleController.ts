@@ -86,7 +86,7 @@ const themes: IThemes = {
   twoOneOneNC: {
     primaryColor: '#0044B5',
     secondaryColor: '#0044B5',
-    midBlueColor: '#0044B5',
+    midBlueColor: '#41528C',
     secondaryBackgroundColor: '#F7F7F7',
     creamColor: '#F9EFE6',
     hoverColor: '#FFFFFF',
@@ -104,7 +104,7 @@ const themes: IThemes = {
       '--midBlue-color': '#41528C',
       '--hover-color': '#FFFFFF',
       '--icon-color': '#ff443b',
-      '--secondary-icon-color': '#0044B5',
+      '--secondary-icon-color': '#21296B',
       '--option-card-hover-font-color': '#1D1C1E',
     },
   },

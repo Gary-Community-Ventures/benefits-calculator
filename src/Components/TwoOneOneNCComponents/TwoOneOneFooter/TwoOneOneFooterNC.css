@@ -24,7 +24,7 @@
 .twoOneOne-footer-icon {
   max-width: 150px;
   height: 130px;
-  color: #0044B5;
+  color: #005191;
 }
 
 .font-weight {
@@ -44,13 +44,13 @@
   flex-direction: row;
 }
 
-.getHelp-text {
+/* .getHelp-text {
   padding-top: 3rem;
   margin-bottom: 2.5rem;
-}
+} */
 
 .icon-section {
-  padding-bottom: 3rem;
+  padding: 1rem;
 }
 
 .footer-paragraph {
@@ -83,6 +83,18 @@
   display: inline;
 }
 
+.twoOneOneNC-footer-icon {
+  max-width: 150px;
+  height: 130px;
+  color: #0044b5;
+}
+
+.MuiPaper-root.paper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 870px) {
   .flexIntoRow,
   .flexLinksIntoRow {
@@ -92,6 +104,8 @@
 
   .MuiPaper-root.paper-container {
     margin-top: 5.4375rem;
+    flex-direction: column;
+    padding: 1rem;
   }
 
   .icon-section {
