@@ -13,16 +13,19 @@ import { useConfig } from '../../Config/configHook';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useQueryString } from '../../QuestionComponents/questionHooks';
-import './Disclaimer.css';
 import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import useScreenApi from '../../../Assets/updateScreen';
 import { Language } from '../../../Assets/languageOptions';
+import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
+import EnergyCalculatorDisclaimer from '../../EnergyCalculator/Steps/Disclaimer';
+import './Disclaimer.css';
 
 const isTrue = (value: boolean) => {
   return value;
 };
 
 const Disclaimer = () => {
+  const isEnergyCalculator = useIsEnergyCalculator();
   const { formData, setFormData, setScreenLoading, locale } = useContext(Context);
   let { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
@@ -175,67 +178,71 @@ const Disclaimer = () => {
     );
   };
 
-  return (
-    <main className="benefits-form">
-      <QuestionHeader>
-        <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
-      </QuestionHeader>
-      {renderDisclaimerText()}
-      <form onSubmit={handleSubmit(formSubmitHandler)}>
-        <div className="checkbox-container">
-          <Controller
-            name="agreeToTermsOfService"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      {...field}
-                      checked={getValues('agreeToTermsOfService')}
-                      sx={errors.agreeToTermsOfService ? { color: '#c6252b' } : {}}
-                    />
-                  }
-                  label={createAgreeTTSCheckboxLabel()}
-                />
-                {errors.agreeToTermsOfService && renderCheckboxHelperText()}
-              </>
-            )}
-          />
-          <Controller
-            name="is13OrOlder"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      {...field}
-                      checked={getValues('is13OrOlder')}
-                      sx={errors.is13OrOlder ? { color: '#c6252b' } : {}}
-                    />
-                  }
-                  label={
-                    <div className="disclaimer-font">
-                      <FormattedMessage
-                        id="disclaimer-label-age"
-                        defaultMessage="I confirm I am 13 years of age or older."
+  if (isEnergyCalculator) {
+    return <EnergyCalculatorDisclaimer />;
+  } else {
+    return (
+      <main className="benefits-form">
+        <QuestionHeader>
+          <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
+        </QuestionHeader>
+        {renderDisclaimerText()}
+        <form onSubmit={handleSubmit(formSubmitHandler)}>
+          <div className="checkbox-container">
+            <Controller
+              name="agreeToTermsOfService"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        {...field}
+                        checked={getValues('agreeToTermsOfService')}
+                        sx={errors.agreeToTermsOfService ? { color: '#c6252b' } : {}}
                       />
-                    </div>
-                  }
-                  className="top-margin"
-                />
-                {errors.is13OrOlder && renderCheckboxHelperText()}
-              </>
-            )}
-          />
-        </div>
-        <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
-      </form>
-    </main>
-  );
+                    }
+                    label={createAgreeTTSCheckboxLabel()}
+                  />
+                  {errors.agreeToTermsOfService && renderCheckboxHelperText()}
+                </>
+              )}
+            />
+            <Controller
+              name="is13OrOlder"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        {...field}
+                        checked={getValues('is13OrOlder')}
+                        sx={errors.is13OrOlder ? { color: '#c6252b' } : {}}
+                      />
+                    }
+                    label={
+                      <div className="disclaimer-font">
+                        <FormattedMessage
+                          id="disclaimer-label-age"
+                          defaultMessage="I confirm I am 13 years of age or older."
+                        />
+                      </div>
+                    }
+                    className="top-margin"
+                  />
+                  {errors.is13OrOlder && renderCheckboxHelperText()}
+                </>
+              )}
+            />
+          </div>
+          <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
+        </form>
+      </main>
+    );
+  }
 };
 
 export default Disclaimer;
