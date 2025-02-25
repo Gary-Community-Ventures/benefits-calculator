@@ -33,7 +33,8 @@
 
 .flexIntoRow {
   max-width: var(--main-max-width);
-  margin: auto;
+  /* margin: auto; */
+  justify-content: center;
   padding: 0 1rem;
   display: flex;
   flex-direction: row;
@@ -89,10 +90,8 @@
   color: #0044b5;
 }
 
-.MuiPaper-root.paper-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.MuiPaper-root.paper-container { 
+  padding: 1rem;
 }
 
 @media (max-width: 870px) {
