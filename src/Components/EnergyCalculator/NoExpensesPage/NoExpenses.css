@@ -1,0 +1,20 @@
+.no-expenses-container {
+  display: grid;
+  align-content: center;
+  vertical-align: middle;
+}
+
+.no-expenses-error-icon {
+  margin: auto;
+  width: 15rem;
+}
+
+.no-expenses-text-container {
+  text-align: center;
+}
+
+.noExpenses-body-text {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  padding: 1rem;
+}

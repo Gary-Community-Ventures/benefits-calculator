@@ -28,6 +28,20 @@
   align-items: center;
 }
 
+.result-program-details {
+  flex: 0.5 0.5;
+}
+
+.result-program-details-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 45%;
+}
+
+.result-program-details:only-child {
+  margin-left: auto;
+}
+
 .result-program-more-info {
   width: 70%;
   display: block;
@@ -200,7 +214,7 @@ h1.header-text-bottom {
 
   .result-program-details strong {
     display: inline-block;
-    color: var(--primary-color);
+    color: var(--midBlue-color);
   }
 }
 
@@ -254,5 +268,13 @@ h1.header-text-bottom {
   .results-header {
     display: flex;
     flex-direction: row;
+  }
+
+  .result-program-details-wrapper {
+    width: 100%;
+  }
+
+  .result-program-details:only-child {
+    margin-left: 0;
   }
 }

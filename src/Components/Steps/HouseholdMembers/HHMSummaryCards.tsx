@@ -5,23 +5,25 @@ import { calcAge, hasBirthMonthYear, useFormatBirthMonthYear } from '../../../As
 import { useConfig } from '../../Config/configHook';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { FormData, HouseholdData } from '../../../Types/FormData';
-import { FormattedMessageType } from '../../../Types/Questions';
+import { FormattedMessageType, QuestionName } from '../../../Types/Questions';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { useStepNumber } from '../../../Assets/stepDirectory.ts';
 import { Context } from '../../Wrapper/Wrapper.tsx';
 import './HHMSummaryCards.css';
+import { calcMemberYearlyIncome } from '../../../Assets/income';
 
 type HHMSummariesProps = {
   activeMemberData: HouseholdData;
   triggerValidation: () => Promise<boolean>;
+  questionName: QuestionName;
 };
 
-const HHMSummaries = ({ activeMemberData, triggerValidation }: HHMSummariesProps) => {
+const HHMSummaries = ({ activeMemberData, triggerValidation, questionName }: HHMSummariesProps) => {
   const { formData } = useContext(Context);
   const { uuid, page } = useParams();
   const pageNumber = Number(page);
-  const currentStepId = useStepNumber('householdData');
+  const currentStepId = useStepNumber(questionName);
   const relationshipOptions = useConfig<{ [key: string]: FormattedMessageType }>('relationship_options');
   const headOfHHInfoWasEntered = formData.householdData.length >= 1;
   const translateNumber = useTranslateNumber();
@@ -113,28 +115,7 @@ const HHMSummaries = ({ activeMemberData, triggerValidation }: HHMSummariesProps
         age = 0;
       }
 
-      let income = 0;
-      for (const { incomeFrequency, incomeAmount, hoursPerWeek } of member.incomeStreams) {
-        let num = 0;
-        switch (incomeFrequency) {
-          case 'weekly':
-            num = Number(incomeAmount) * 52;
-            break;
-          case 'biweekly':
-            num = Number(incomeAmount) * 26;
-            break;
-          case 'semimonthly':
-            num = Number(incomeAmount) * 24;
-            break;
-          case 'monthly':
-            num = Number(incomeAmount) * 12;
-            break;
-          case 'hourly':
-            num = Number(incomeAmount) * Number(hoursPerWeek) * 52;
-            break;
-        }
-        income += Number(num);
-      }
+      const income = calcMemberYearlyIncome(member);
 
       return createMemberCard(memberIndex, member, age, income, relationship_options);
     }

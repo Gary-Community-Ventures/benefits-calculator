@@ -22,7 +22,10 @@ import languageRouteWrapper from './Components/RouterUtil/LanguageRouter';
 import SelectStatePage from './Components/Steps/SelectStatePage';
 import RedirectToWhiteLabel from './Components/RouterUtil/RedirectToWhiteLabel';
 import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
+import EcHouseholdMemberForm from './Components/EnergyCalculator/Steps/HouseholdMemberForm';
 import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm';
+import EnergyCalculatorLandingPage from './Components/EnergyCalculator/LandingPage/LandingPage';
+import EnergyCalculatorNoExpenses from './Components/EnergyCalculator/NoExpensesPage/NoExpenses';
 import './App.css';
 
 const App = () => {
@@ -42,6 +45,7 @@ const App = () => {
   const [theme, setTheme] = useState(createTheme(styleOverride));
   const themeName = getReferrer('theme', 'default');
   const householdMemberStepNumber = useStepNumber('householdData', false);
+  const ecHouseholdMemberStepNumber = useStepNumber('energyCalculatorHouseholdData', false);
 
   useEffect(() => {
     changeTheme(themeName as 'default' | 'twoOneOne');
@@ -67,12 +71,14 @@ const App = () => {
     const utmParam = searchParams.get('utm_source');
     const testParam = searchParams.get('test') ? true : false;
     const externalIdParam = searchParams.get('externalid');
+    const pathParam = searchParams.get('path') ?? 'default';
 
     // referrer priority = stored referrer -> referrer param -> utm_source param -> ''
     const referrer = formData.immutableReferrer ?? referrerParam ?? utmParam ?? '';
     const referrerSource = formData.referralSource || referrer;
     const isTest = formData.isTest || testParam;
     const externalId = formData.externalID ?? externalIdParam ?? undefined;
+    const path = formData.path ?? pathParam;
 
     setFormData({
       ...formData,
@@ -80,6 +86,7 @@ const App = () => {
       externalID: externalId,
       referralSource: referrerSource,
       immutableReferrer: referrer,
+      path: path,
       urlSearchParams: urlSearchParams,
     });
   }, [formData.immutableReferrer]);
@@ -107,6 +114,7 @@ const App = () => {
                   </RedirectToWhiteLabel>
                 }
               />
+              <Route path=":whiteLabel/current-benefits" element={<FetchScreen />} />
               <Route path=":whiteLabel/:uuid">
                 <Route path="" element={<FetchScreen />} />
                 <Route path="*" element={<FetchScreen />} />
@@ -148,6 +156,7 @@ const App = () => {
                 <Route path="co/jeffcohs" element={<JeffcoLandingPage referrer="jeffcoHS" />} />
                 <Route path="co/jeffcohscm" element={<JeffcoLandingPage referrer="jeffcoHSCM" />} />
                 <Route path="co/ccig" element={<CcigLandingPage />} />
+                <Route path="co_energy_calculator/landing-page" element={<EnergyCalculatorLandingPage />} />
                 <Route path="step-1" element={<SelectLanguagePage />} />
                 <Route path="select-state" element={<SelectStatePage />} />
                 <Route path=":whiteLabel/current-benefits" element={<CurrentBenefits />} />
@@ -158,16 +167,24 @@ const App = () => {
                   <Route path="" element={<Navigate to="/step-1" replace />} />
                   <Route path="step-1" element={<SelectLanguagePage />} />
                   <Route path="step-2" element={<Disclaimer />} />
+                  <Route path="no-expenses" element={<EnergyCalculatorNoExpenses />} />
                   <Route
                     path={`step-${householdMemberStepNumber}/:page`}
                     element={<HouseholdMemberForm key={window.location.href} />}
+                  />
+                  <Route
+                    path={`step-${ecHouseholdMemberStepNumber}/:page`}
+                    element={<EcHouseholdMemberForm key={window.location.href} />}
                   />
                   <Route path="step-:id" element={<QuestionComponentContainer key={window.location.href} />} />
                   <Route path="confirm-information" element={<Confirmation />} />
                   <Route path="results/benefits" element={<Results type="program" />} />
                   <Route path="results/near-term-needs" element={<Results type="need" />} />
+                  <Route
+                    path="results/energy-rebates/:energyCalculatorRebateType"
+                    element={<Results type="energy-calculator-rebates" />}
+                  />
                   <Route path="results/benefits/:programId" element={<Results type="program" />} />
-                  <Route path="results/benefits/:programId/navigators" element={<Results type="navigator" />} />
                   <Route path="results/more-help" element={<Results type="help" />} />
                   <Route path="results" element={<Navigate to="benefits" replace />} />
                   <Route path="*" element={<Navigate to="/step-1" replace />} />

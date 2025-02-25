@@ -1,4 +1,6 @@
 import {
+  ApiEnergyCalculatorFormData,
+  ApiEnergyCalculatorMember,
   ApiExpense,
   ApiFormData,
   ApiHouseholdMember,
@@ -6,7 +8,7 @@ import {
   ApiUser,
   ApiUserWriteOnly,
 } from '../Types/ApiFormData.js';
-import { FormData, HouseholdData } from '../Types/FormData';
+import { EnergyCalculatorFormData, EnergyCalculatorMember, FormData, HouseholdData } from '../Types/FormData';
 import { putScreen, postScreen, putUser } from '../apiCalls';
 import { Language } from './languageOptions';
 import { useContext } from 'react';
@@ -31,42 +33,48 @@ const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: 
     expenses: expenses,
     household_assets: formData.householdAssets || 0,
     request_language_code: languageCode,
+    energy_calculator: getEnergyCalculatorFormDataBody(formData.energyCalculator),
     has_benefits: formData.hasBenefits,
-    has_acp: formData.benefits.acp,
-    has_andcs: formData.benefits.andcs,
-    has_cccap: formData.benefits.cccap,
-    has_coeitc: formData.benefits.coeitc,
-    has_chs: formData.benefits.coheadstart,
-    has_cpcr: formData.benefits.coPropTaxRentHeatCreditRebate,
-    has_ctc: formData.benefits.ctc,
-    has_cdhcs: formData.benefits.dentallowincseniors,
-    has_dpp: formData.benefits.denverpresc,
-    has_ede: formData.benefits.ede,
-    has_eitc: formData.benefits.eitc,
+    has_acp: formData.benefits.acp ?? null,
+    has_andcs: formData.benefits.andcs ?? null,
+    has_cccap: formData.benefits.cccap ?? null,
+    has_coeitc: formData.benefits.coeitc ?? null,
+    has_chs: formData.benefits.coheadstart ?? null,
+    has_cpcr: formData.benefits.coPropTaxRentHeatCreditRebate ?? null,
+    has_ctc: formData.benefits.ctc ?? null,
+    has_cdhcs: formData.benefits.dentallowincseniors ?? null,
+    has_dpp: formData.benefits.denverpresc ?? null,
+    has_ede: formData.benefits.ede ?? null,
+    has_eitc: formData.benefits.eitc ?? null,
     has_erc: null,
-    has_lifeline: formData.benefits.lifeline,
-    has_leap: formData.benefits.leap,
-    has_nc_lieap: formData.benefits.nc_lieap,
-    has_nccip: formData.benefits.nccip,
-    has_mydenver: formData.benefits.mydenver,
-    has_nslp: formData.benefits.nslp,
-    has_oap: formData.benefits.oap,
-    has_pell_grant: formData.benefits.pell,
-    has_nfp: formData.benefits.nfp,
-    has_rtdlive: formData.benefits.rtdlive,
-    has_snap: formData.benefits.snap,
-    has_sunbucks: formData.benefits.sunbucks,
-    has_ssdi: formData.benefits.ssdi,
-    has_ssi: formData.benefits.ssi,
-    has_cowap: formData.benefits.cowap,
-    has_ubp: formData.benefits.ubp,
-    has_tanf: formData.benefits.tanf,
-    has_wic: formData.benefits.wic,
-    has_upk: formData.benefits.upk,
-    has_coctc: formData.benefits.coctc,
-    has_fatc: formData.benefits.fatc,
+    has_lifeline: formData.benefits.lifeline ?? null,
+    has_leap: formData.benefits.leap ?? null,
+    has_mydenver: formData.benefits.mydenver ?? null,
+    has_nslp: formData.benefits.nslp ?? null,
+    has_oap: formData.benefits.oap ?? null,
+    has_pell_grant: formData.benefits.pell ?? null,
+    has_nfp: formData.benefits.nfp ?? null,
+    has_rtdlive: formData.benefits.rtdlive ?? null,
+    has_snap: formData.benefits.snap ?? null,
+    has_sunbucks: formData.benefits.sunbucks ?? null,
+    has_ssdi: formData.benefits.ssdi ?? null,
+    has_ssi: formData.benefits.ssi ?? null,
+    has_cowap: formData.benefits.cowap ?? null,
+    has_ubp: formData.benefits.ubp ?? null,
+    has_tanf: formData.benefits.tanf ?? null,
+    has_wic: formData.benefits.wic ?? null,
+    has_upk: formData.benefits.upk ?? null,
+    has_coctc: formData.benefits.coctc ?? null,
+    has_fatc: formData.benefits.fatc ?? null,
+    has_section_8: formData.benefits.section_8 ?? null,
+    has_chp: formData.benefits.chp ?? null,
+    has_medicaid: formData.benefits.medicaid ?? null,
+    has_nc_lieap: formData.benefits.nc_lieap ?? null,
+    has_ncwap: formData.benefits.ncwap ?? null,
+    has_nccip: formData.benefits.nccip ?? null,
     referral_source: formData.referralSource ?? null,
     referrer_code: formData.immutableReferrer ?? null,
+    path: formData.path ?? null,
     needs_food: formData.acuteHHConditions.food ?? null,
     needs_baby_supplies: formData.acuteHHConditions.babySupplies ?? null,
     needs_housing_help: formData.acuteHHConditions.housing ?? null,
@@ -88,6 +96,40 @@ const getHouseholdMembersBodies = (formData: FormData): ApiHouseholdMember[] => 
   return householdMembers;
 };
 
+const getEnergyCalculatorMemberBody = (
+  energyCalculatorMember: EnergyCalculatorMember | undefined,
+): ApiEnergyCalculatorMember | null => {
+  if (energyCalculatorMember === undefined) {
+    return null;
+  }
+
+  return {
+    surviving_spouse: energyCalculatorMember.survivingSpouse,
+    receives_ssi: energyCalculatorMember.receivesSsi,
+  };
+};
+
+const getEnergyCalculatorFormDataBody = (
+  energyCalculatorFormData: EnergyCalculatorFormData | undefined,
+): ApiEnergyCalculatorFormData | null => {
+  if (energyCalculatorFormData === undefined) {
+    return null;
+  }
+
+  return {
+    is_home_owner: energyCalculatorFormData.isHomeOwner,
+    is_renter: energyCalculatorFormData.isRenter,
+    electric_provider: energyCalculatorFormData.electricProvider,
+    gas_provider: energyCalculatorFormData.gasProvider,
+    electricity_is_disconnected: energyCalculatorFormData.electricityIsDisconnected,
+    has_past_due_energy_bills: energyCalculatorFormData.hasPastDueEnergyBills,
+    needs_water_heater: energyCalculatorFormData.needsWaterHeater,
+    needs_hvac: energyCalculatorFormData.needsHvac,
+    needs_stove: energyCalculatorFormData.needsStove,
+    needs_dryer: energyCalculatorFormData.needsDryer,
+  };
+};
+
 const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHouseholdMember => {
   const incomes = getIncomeStreamsBodies(householdMemberData);
 
@@ -97,14 +139,15 @@ const getHouseholdMemberBody = (householdMemberData: HouseholdData): ApiHousehol
     birth_year: householdMemberData.birthYear ?? null,
     birth_month: householdMemberData.birthMonth ?? null,
     relationship: householdMemberData.relationshipToHH,
-    student: householdMemberData.conditions.student,
-    pregnant: householdMemberData.conditions.pregnant,
-    visually_impaired: householdMemberData.conditions.blindOrVisuallyImpaired,
-    disabled: householdMemberData.conditions.disabled,
-    long_term_disability: householdMemberData.conditions.longTermDisability,
+    student: householdMemberData.conditions.student ?? null,
+    pregnant: householdMemberData.conditions.pregnant ?? null,
+    visually_impaired: householdMemberData.conditions.blindOrVisuallyImpaired ?? null,
+    disabled: householdMemberData.conditions.disabled ?? null,
+    long_term_disability: householdMemberData.conditions.longTermDisability ?? null,
     has_income: householdMemberData.hasIncome,
     income_streams: incomes,
-    insurance: householdMemberData.healthInsurance,
+    energy_calculator: getEnergyCalculatorMemberBody(householdMemberData.energyCalculator),
+    insurance: householdMemberData.healthInsurance ?? null,
   };
 };
 

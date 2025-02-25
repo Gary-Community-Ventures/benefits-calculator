@@ -55,6 +55,10 @@
   margin-bottom: 1.5rem;
 }
 
+.two-columns {
+  max-width: 32rem;
+}
+
 @media (max-width: 38.125rem) {
   div.option-cards-container {
     gap: 0.938rem;

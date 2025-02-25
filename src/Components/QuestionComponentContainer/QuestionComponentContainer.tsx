@@ -10,6 +10,11 @@ import AlreadyHasBenefits from '../Steps/AlreadyHasBenefits';
 import ImmediateNeeds from '../Steps/ImmediateNeeds';
 import SignUp from '../Steps/SignUp/SignUp';
 import HouseholdAssets from '../Steps/HouseholdAssets/HouseholdAssets';
+import ElectricityProvider from '../EnergyCalculator/Steps/ElectricityProvider';
+import GasProvider from '../EnergyCalculator/Steps/GasProvider';
+import EnergyCalculatorExpenses from '../EnergyCalculator/Steps/Expenses';
+import Appliances from '../EnergyCalculator/Steps/Appliances';
+import Utilities from '../EnergyCalculator/Steps/Utilities';
 import './QuestionComponentContainer.css';
 
 const QuestionComponentContainer = () => {
@@ -75,6 +80,42 @@ const QuestionComponentContainer = () => {
       return (
         <main className="benefits-form">
           <SignUp />
+        </main>
+      );
+    case 'energyCalculatorElectricityProvider':
+      return (
+        <main className="benefits-form">
+          <ElectricityProvider />
+        </main>
+      );
+    case 'energyCalculatorGasProvider':
+      return (
+        <main className="benefits-form">
+          <GasProvider />
+        </main>
+      );
+    case 'energyCalculatorExpenses':
+      return (
+        <main className="benefits-form">
+          <EnergyCalculatorExpenses />
+        </main>
+      );
+    case 'energyCalculatorApplianceStatus':
+      return (
+        <main className="benefits-form">
+          <Appliances />
+        </main>
+      );
+    case 'energyCalculatorUtilityStatus':
+      return (
+        <main className="benefits-form">
+          <Utilities />
+        </main>
+      );
+    case 'energyCalculatorApplianceStatus':
+      return (
+        <main className="benefits-form">
+          <Appliances />
         </main>
       );
   }

@@ -29,6 +29,24 @@ export type ApiIncome = {
   hours_worked: number | null;
 };
 
+export type ApiEnergyCalculatorFormData = {
+  is_home_owner: boolean;
+  is_renter: boolean;
+  electric_provider: string;
+  gas_provider: string;
+  electricity_is_disconnected: boolean;
+  has_past_due_energy_bills: boolean;
+  needs_water_heater: boolean;
+  needs_hvac: boolean;
+  needs_stove: boolean;
+  needs_dryer: boolean;
+};
+
+export type ApiEnergyCalculatorMember = {
+  surviving_spouse: boolean;
+  receives_ssi: boolean;
+};
+
 export type ApiHouseholdMemberReadOnly = {
   screen: number;
   id: number;
@@ -54,8 +72,9 @@ export type ApiHouseholdMember = {
   disability_medicaid?: boolean | null;
   long_term_disability: boolean | null;
   has_income: boolean | null;
+  energy_calculator: ApiEnergyCalculatorMember | null;
   income_streams: ApiIncome[];
-  insurance: ApiInsurance;
+  insurance: ApiInsurance | null;
 };
 
 export type ApiExpenseReadOnly = {
@@ -112,6 +131,7 @@ export type ApiFormData = {
   county: string | null;
   referral_source: string | null;
   referrer_code: string | null;
+  path: string | null;
   household_size: number | null;
   household_assets: number | null;
   housing_situation?: string | null;
@@ -121,6 +141,7 @@ export type ApiFormData = {
   user?: ApiUserWriteOnly;
   external_id: string | null;
   request_language_code: Language | null;
+  energy_calculator: ApiEnergyCalculatorFormData | null;
   has_benefits: 'true' | 'false' | 'preferNotToAnswer' | null;
   has_tanf: boolean | null;
   has_wic: boolean | null;
@@ -154,10 +175,12 @@ export type ApiFormData = {
   has_upk: boolean | null;
   has_ssdi: boolean | null;
   has_cowap: boolean | null;
+  has_ncwap: boolean | null;
   has_ubp: boolean | null;
   has_pell_grant: boolean | null;
   has_nfp: boolean | null;
   has_fatc: boolean | null;
+  has_section_8: boolean | null;
   has_employer_hi?: boolean | null;
   has_private_hi?: boolean | null;
   has_medicaid_hi?: boolean | null;
