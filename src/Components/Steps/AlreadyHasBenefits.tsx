@@ -17,6 +17,7 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { Context } from '../Wrapper/Wrapper';
+import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
 
 type CategoryBenefitsConfig = {
   [key: string]: {
@@ -92,6 +93,7 @@ function AlreadyHasBenefits() {
   const backNavigationFunction = useDefaultBackNavigationFunction('hasBenefits');
   const nextStep = useGoToNextStep('hasBenefits');
   const { updateScreen } = useScreenApi();
+  const isEnergyCalculator = useIsEnergyCalculator();
 
   const formSchema = z
     .object({
@@ -158,6 +160,18 @@ function AlreadyHasBenefits() {
     nextStep();
   };
 
+  const renderHelpBubbleSection = () => {
+    let helpText = "This information will help make sure we don't give you results for benefits you already have.";
+    let helpId = 'questions.hasBenefits-description';
+
+    if (isEnergyCalculator) {
+      helpText =
+        'Information about current benefits you already have could help determine your eligibility for other programs.';
+      helpId = 'energyCalculator.hasBenefits-description';
+    }
+    return <HelpButton helpText={helpText} helpId={helpId} />;
+  };
+
   return (
     <div>
       <QuestionHeader>
@@ -171,10 +185,7 @@ function AlreadyHasBenefits() {
           id="questions.hasBenefits"
           defaultMessage="Does your household currently have any benefits?"
         />
-        <HelpButton
-          helpText="This information will help make sure we don't give you results for benefits you already have."
-          helpId="questions.hasBenefits-description"
-        />
+        {renderHelpBubbleSection()}
       </QuestionQuestion>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
