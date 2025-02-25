@@ -114,6 +114,7 @@ const App = () => {
                   </RedirectToWhiteLabel>
                 }
               />
+              <Route path=":whiteLabel/current-benefits" element={<FetchScreen />} />
               <Route path=":whiteLabel/:uuid">
                 <Route path="" element={<FetchScreen />} />
                 <Route path="*" element={<FetchScreen />} />

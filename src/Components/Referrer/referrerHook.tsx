@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { QuestionName } from '../../Types/Questions';
+import { FormattedMessageType, QuestionName } from '../../Types/Questions';
 
 type ReferrerOptions<T> = {
   default: T;
@@ -18,6 +18,7 @@ export type ReferrerData = {
   shareLink: ReferrerOptions<string>;
   featureFlags: ReferrerOptions<string[]>;
   stepDirectory: ReferrerOptions<StepDirectory>;
+  noResultMessage: ReferrerOptions<FormattedMessageType>;
 };
 
 export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
@@ -33,6 +34,8 @@ export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
   ? StepDirectory
   : T extends 'featureFlags'
   ? string[]
+  : T extends 'noResultMessage'
+  ? FormattedMessageType
   : never;
 
 export default function useReferrer(referrerCode?: string, referrerData?: ReferrerData) {

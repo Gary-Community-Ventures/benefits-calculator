@@ -6,6 +6,7 @@ import TwoOneOneHeader from '../TwoOneOneComponents/TwoOneOneHeader/TwoOneOneHea
 import Footer from '../Footer/Footer';
 import BackToScreen from '../BackToScreen/BackToScreen';
 import { useResultsContext } from '../Results/Results';
+import NoProgramEligibleMessage from '../Results/NoProgramEligibleMessage';
 import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
 import TwoOneOneHeaderNC from '../TwoOneOneNCComponents/TwoOneOneHeader/TwoOneOneHeaderNC';
 import TwoOneOneFooterNC from '../TwoOneOneNCComponents/TwoOneOneFooter/TwoOneOneFooterNC';
@@ -41,10 +42,9 @@ export const ResultsMessage = () => {
   if (formData.immutableReferrer === 'lgs' && missingPrograms) {
     return <BackToScreen />;
   }
-
   if (formData.immutableReferrer === 'ccig') {
     return <CcigResultsMessage />;
   }
 
-  return null;
+  return <NoProgramEligibleMessage />;
 };

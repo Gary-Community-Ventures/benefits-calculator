@@ -54,7 +54,7 @@ const REBATE_CATEGORY_HEADING: ProgramCategory = {
   description: {
     label: 'energyCalculator.results.rebates.description',
     default_message:
-      'Insert some guiding copy here about rebate programs...Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'You may qualify for savings on the cost of electric appliances. Check your results below for rebates, tax credits, and discounts.',
   },
   caps: [],
   programs: [],

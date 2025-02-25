@@ -24,6 +24,8 @@ import './CurrentBenefits.css';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { useTranslateNumber } from '../../Assets/languageOptions';
 import { useParams } from 'react-router-dom';
+import { useConfig } from '../Config/configHook';
+import { FormattedMessageType } from '../../Types/Questions';
 
 export const iconCategoryMap: { [key: string]: React.ComponentType } = {
   housing: Housing,
@@ -71,6 +73,11 @@ const CurrentBenefits = () => {
   const [progamsLoaded, setProgramsLoaded] = useState(false);
   const [urgentNeedsLoaded, setUrgentNeedsLoaded] = useState(false);
   const { whiteLabel } = useParams();
+  const { title, program_heading, urgent_need_heading } = useConfig<{
+    title: FormattedMessageType;
+    program_heading: FormattedMessageType;
+    urgent_need_heading: FormattedMessageType;
+  }>('current_benefits');
   const intl = useIntl();
 
   if (whiteLabel === undefined) {
@@ -146,27 +153,26 @@ const CurrentBenefits = () => {
     return (
       <main className="current-benefits-container">
         <QuestionHeader>
-          <div className="current-benefits-header">
-            <FormattedMessage
-              id="currentBenefits.pg-header"
-              defaultMessage="Government Benefits, Nonprofit Programs and Tax Credits in MyFriendBen"
-            />
-          </div>
+          <div className="current-benefits-header">{title}</div>
         </QuestionHeader>
-        <div className="header-and-programs-container">
-          <h2 className="long-near-term-header">
-            <FormattedMessage id="currentBenefits.long-term-benefits" defaultMessage="LONG-TERM BENEFITS" />
-            {` (${translateNumber(programCount(programCategories))})`}
-          </h2>
-          {displayProgramsByCategory(programCategories)}
-        </div>
-        <div className="header-and-programs-container">
-          <h2 className="long-near-term-header">
-            <FormattedMessage id="currentBenefits.near-term-benefits" defaultMessage="NEAR-TERM BENEFITS" />
-            {` (${translateNumber(programCount(urgentNeedCategories))})`}
-          </h2>
-          {displayProgramsByCategory(urgentNeedCategories)}
-        </div>
+        {programCategories.length > 0 && (
+          <div className="header-and-programs-container">
+            <h2 className="long-near-term-header">
+              {program_heading}
+              {` (${translateNumber(programCount(programCategories))})`}
+            </h2>
+            {displayProgramsByCategory(programCategories)}
+          </div>
+        )}
+        {urgentNeedCategories.length > 0 && (
+          <div className="header-and-programs-container">
+            <h2 className="long-near-term-header">
+              {urgent_need_heading}
+              {` (${translateNumber(programCount(urgentNeedCategories))})`}
+            </h2>
+            {displayProgramsByCategory(urgentNeedCategories)}
+          </div>
+        )}
       </main>
     );
   } else {
