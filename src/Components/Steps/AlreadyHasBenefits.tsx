@@ -160,16 +160,24 @@ function AlreadyHasBenefits() {
     nextStep();
   };
 
-  const renderHelpBubbleSection = () => {
-    let helpText = "This information will help make sure we don't give you results for benefits you already have.";
-    let helpId = 'questions.hasBenefits-description';
-
+  const renderHelpSection = () => {
     if (isEnergyCalculator) {
-      helpText =
-        'Information about current benefits you already have could help determine your eligibility for other programs.';
-      helpId = 'energyCalculator.hasBenefits-description';
+      return (
+        <p className={'help-text'}>
+          <FormattedMessage
+            id="energyCalculator.hasBenefits-description"
+            defaultMessage="Information about current benefits you already have could help determine your eligibility for other programs."
+          />
+        </p>
+      );
     }
-    return <HelpButton helpText={helpText} helpId={helpId} />;
+
+    return (
+      <HelpButton
+        helpText="This information will help make sure we don't give you results for benefits you already have."
+        helpId="questions.hasBenefits-description"
+      />
+    );
   };
 
   return (
@@ -185,7 +193,7 @@ function AlreadyHasBenefits() {
           id="questions.hasBenefits"
           defaultMessage="Does your household currently have any benefits?"
         />
-        {renderHelpBubbleSection()}
+        {renderHelpSection()}
       </QuestionQuestion>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
