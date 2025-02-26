@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer';
 import BackToScreen from '../BackToScreen/BackToScreen';
 import { useResultsContext } from '../Results/Results';
 import NoProgramEligibleMessage from '../Results/NoProgramEligibleMessage';
-import Link211Message from '../Results/Link211Message';
+import NcLink211Message from '../Results/NcLink211Message';
 import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
 import { useParams } from 'react-router-dom';
 export const BrandedHeader = () => {
@@ -28,11 +28,22 @@ export const BrandedFooter = () => {
   return <Footer />;
 };
 export const ResultsMessageForNeeds = () => {  
-  const { whiteLabel } = useParams();  
+  const { getReferrer } = useContext(Context);
+  const featureFlags = getReferrer('featureFlags');
+  console.log('ResultsMessageForNeeds - featureFlags:', featureFlags);
+  const { whiteLabel } = useParams(); 
+  // if (getReferrer('featureFlags').includes('nc_show_211_link')) 
   if (whiteLabel === 'nc')
   {    
-    return  <Link211Message />
+    return  <NcLink211Message />
   }
+  // const featureFlagsArray = Array.isArray(featureFlags)
+  //   ? featureFlags
+  //   : [featureFlags._label];
+
+  // if (featureFlagsArray.includes('nc_show_211_link')) {
+  //   return <NcLink211Message />;
+  // }
   
   return null;
 }

@@ -8,10 +8,6 @@ type ReferrerOptions<T> = {
 
 export type StepDirectory = QuestionName[] | { default: QuestionName[]; [key: string]: QuestionName[] };
 
-export type Link211MessageType = {
-  _default_message: string;
-}
-
 export type ReferrerData = {
   theme: ReferrerOptions<string>;
   logoSource: ReferrerOptions<string>;
@@ -20,10 +16,9 @@ export type ReferrerData = {
   logoFooterAlt: ReferrerOptions<{ id: string; defaultMessage: string }>;
   logoClass: ReferrerOptions<string>;
   shareLink: ReferrerOptions<string>;
-  featureFlags: ReferrerOptions<string[]>;
+  featureFlags: ReferrerOptions<{ _label: string; text: string; url: string }>;
   stepDirectory: ReferrerOptions<StepDirectory>;
-  noResultMessage: ReferrerOptions<FormattedMessageType>;
-  link211Message?: ReferrerOptions<Link211MessageType> | null;  
+  noResultMessage: ReferrerOptions<FormattedMessageType>;  
 };
 
 export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
@@ -38,11 +33,9 @@ export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
   : T extends 'stepDirectory'
   ? StepDirectory
   : T extends 'featureFlags'
-  ? string[]
+  ? { _label: string; text: string; url: string } | string[]  
   : T extends 'noResultMessage'  
-  ? FormattedMessageType
-  : T extends 'link211Message'
-  ? Link211MessageType  
+  ? FormattedMessageType  
   : never;
 
 export default function useReferrer(referrerCode?: string, referrerData?: ReferrerData) {
