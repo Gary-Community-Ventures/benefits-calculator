@@ -9,7 +9,7 @@ import { useResultsContext } from '../Results/Results';
 import NoProgramEligibleMessage from '../Results/NoProgramEligibleMessage';
 import NcLink211Message from '../Results/NcLink211Message';
 import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
-import { useParams } from 'react-router-dom';
+
 export const BrandedHeader = () => {
   const { formData } = useContext(Context);
 
