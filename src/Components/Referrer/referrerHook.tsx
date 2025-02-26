@@ -16,7 +16,7 @@ export type ReferrerData = {
   logoFooterAlt: ReferrerOptions<{ id: string; defaultMessage: string }>;
   logoClass: ReferrerOptions<string>;
   shareLink: ReferrerOptions<string>;
-  featureFlags: ReferrerOptions<{ _label: string; text: string; url: string }>;
+  featureFlags: ReferrerOptions<{ _label: string; text: string; url: string }> | string[];
   stepDirectory: ReferrerOptions<StepDirectory>;
   noResultMessage: ReferrerOptions<FormattedMessageType>;  
 };

@@ -29,21 +29,15 @@ export const BrandedFooter = () => {
 };
 export const ResultsMessageForNeeds = () => {  
   const { getReferrer } = useContext(Context);
-  const featureFlags = getReferrer('featureFlags');
-  console.log('ResultsMessageForNeeds - featureFlags:', featureFlags);
-  const { whiteLabel } = useParams(); 
-  // if (getReferrer('featureFlags').includes('nc_show_211_link')) 
-  if (whiteLabel === 'nc')
-  {    
-    return  <NcLink211Message />
-  }
-  // const featureFlagsArray = Array.isArray(featureFlags)
-  //   ? featureFlags
-  //   : [featureFlags._label];
+  const featureFlags = getReferrer('featureFlags');  
+ 
+  const featureFlagsArray = Array.isArray(featureFlags)
+    ? featureFlags
+    : [featureFlags._label];
 
-  // if (featureFlagsArray.includes('nc_show_211_link')) {
-  //   return <NcLink211Message />;
-  // }
+  if (featureFlagsArray.includes('nc_show_211_link')) {
+    return <NcLink211Message />;
+  }
   
   return null;
 }
