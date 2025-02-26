@@ -25,15 +25,15 @@ const BackAndSaveButtons = ({ navigateToLink, BackToThisPageText }: BackAndSaveB
   }
   const backBtnALProps = {
     id: 'backAndSaveBtns.backBtnAL',
-    defaultMsg: 'back',
+    defaultMessage: 'back',
   };
   const saveMyResultsBtnALProps = {
     id: 'backAndSaveBtns.saveMyResultsBtnAL',
-    defaultMsg: 'save my results',
+    defaultMessage: 'save my results',
   };
   const emailResultsModalALProps = {
     id: 'backAndSaveBtns.emailResultsModalAL',
-    defaultMsg: 'send me my results modal',
+    defaultMessage: 'send me my results modal',
   };
 
   return (
