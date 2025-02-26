@@ -133,7 +133,7 @@ const TwoOneOneHeaderNC = () => {
 
     const dropdownMenuItems = menuItemKeyLabelPairArr.map((key) => {
       return (
-        <MenuItem value={key[0]} key={key[0]} sx={{ color: '#0044B5' }}>
+        <MenuItem value={key[0]} key={key[0]} sx={{ color: '#21296B' }}>
           {key[1]}
         </MenuItem>
       );
@@ -169,7 +169,7 @@ const TwoOneOneHeaderNC = () => {
                 open={isLanguageSelectOpen}
                 onOpen={handleOpenLanguage}
                 onClose={handleCloseLanguage}
-                sx={{ '& .MuiSvgIcon-root': { color: '#0044B5' } }}
+                sx={{ '& .MuiSvgIcon-root': { color: '#21296B' } }}
               >
                 {createMenuItems(languageOptions)}
               </Select>

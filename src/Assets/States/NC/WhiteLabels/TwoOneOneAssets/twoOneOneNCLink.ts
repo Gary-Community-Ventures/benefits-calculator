@@ -1,21 +1,27 @@
 const twoOneOneNCLinks = [
   {
-    defaultMsg: 'ABOUT US',
-    formattedMsgId: 'TwoOneOneHeader.aboutUs',
-    href: 'https://nc211.org/about/',
-    ariaLabel: 'To learn more about 211, visit the About Us page which opens in a new window',
-  },
-  {
-    defaultMsg: 'COMMUNITY AGENCIES',
-    formattedMsgId: 'TwoOneOneHeader.agencies',
-    href: 'https://nc211.org/add-your-agency/',
-    ariaLabel: 'To learn more about 211, visit the Community Agencies page which opens in a new window',
-  },
-  {
-    defaultMsg: 'SEARCH RESOURCES',
-    formattedMsgId: 'TwoOneOneHeader.resources',
+    defaultMsg: 'HOME',
+    formattedMsgId: 'TwoOneOneNCHeader.home',
     href: 'https://nc211.org/',
-    ariaLabel: 'To learn more about 211, visit the Search Resources page which opens in a new window',
+    ariaLabel: 'To learn more about 211, visit the Home page which opens in a new window',
+  },
+  {
+    defaultMsg: 'ABOUT',
+    formattedMsgId: 'TwoOneOneNCHeader.about',
+    href: 'https://nc211.org/about/',
+    ariaLabel: 'To learn more about 211, visit the About page which opens in a new window',
+  },
+  {
+    defaultMsg: 'AGENCIES',
+    formattedMsgId: 'TwoOneOneNCHeader.agencies',
+    href: 'https://nc211.org/add-your-agency/',
+    ariaLabel: 'To learn more about 211, visit the Agencies page which opens in a new window',
+  },
+  {
+    defaultMsg: 'RESOURCES',
+    formattedMsgId: 'TwoOneOneNCHeader.resources',
+    href: 'https://nc211.org/',
+    ariaLabel: 'To learn more about 211, visit the Resources page which opens in a new window',
   },
 ];
 
