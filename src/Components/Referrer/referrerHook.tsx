@@ -48,13 +48,14 @@ export default function useReferrer(referrerCode?: string, referrerData?: Referr
     defaultValue?: ReferrerDataValue<T>,
   ): ReferrerDataValue<T> {
     if (referrerData === undefined) {
-      if (defaultValue) {
-        return defaultValue;
-      }
+      if (defaultValue !== undefined) return defaultValue;
+
       throw new Error('referrerData is not loaded yet. Consider adding a default value.');
     }
     
     if (referrerData[key] === undefined) {
+      if (defaultValue !== undefined) return defaultValue;
+      
       throw new Error(`${key} is not in referrerData`);
     }
 
