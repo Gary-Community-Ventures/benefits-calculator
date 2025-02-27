@@ -21,9 +21,7 @@ export default function EnergyCalculatorExpenses() {
   return (
     <ConfirmationBlock
       icon={<Expense title={formatMessage(electricityProviderIconAlt)} />}
-      title={
-        <FormattedMessage id="energyCalculator.confirmation.expenses" defaultMessage="Utility Bills" />
-      }
+      title={<FormattedMessage id="energyCalculator.confirmation.expenses" defaultMessage="Utility Bills" />}
       editAriaLabel={editElectricityProviderAriaLabel}
       stepName="energyCalculatorExpenses"
     >
