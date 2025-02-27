@@ -18,7 +18,7 @@ export type ReferrerData = {
   shareLink: ReferrerOptions<string>;
   featureFlags: ReferrerOptions<string[]>;
   stepDirectory: ReferrerOptions<StepDirectory>;
-  noResultMessage: ReferrerOptions<FormattedMessageType>;  
+  noResultMessage: ReferrerOptions<FormattedMessageType>;
 };
 
 export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
@@ -26,7 +26,7 @@ export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
   | 'logoSource'
   | 'logoFooterSource'
   | 'logoClass'
-  | 'shareLink' 
+  | 'shareLink'
   ? string
   : T extends 'logoAlt' | 'logoFooterAlt'
   ? { id: string; defaultMessage: string }

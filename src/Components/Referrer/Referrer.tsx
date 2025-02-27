@@ -48,5 +48,6 @@ export const ResultsMessage = () => {
   if (formData.immutableReferrer === 'ccig') {
     return <CcigResultsMessage />;
   }
+  
   return <NoProgramEligibleMessage />;  
 };
