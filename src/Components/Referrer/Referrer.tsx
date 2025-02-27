@@ -49,5 +49,5 @@ export const ResultsMessage = () => {
     return <CcigResultsMessage />;
   }
   
-  return <NoProgramEligibleMessage />;  
+  return <NoProgramEligibleMessage />;
 };

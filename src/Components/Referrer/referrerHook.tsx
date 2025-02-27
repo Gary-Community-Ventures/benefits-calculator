@@ -33,9 +33,9 @@ export type ReferrerDataValue<T extends keyof ReferrerData> = T extends
   : T extends 'stepDirectory'
   ? StepDirectory
   : T extends 'featureFlags'
-  ? string[]  
-  : T extends 'noResultMessage'  
-  ? FormattedMessageType  
+  ? string[]
+  : T extends 'noResultMessage'
+  ? FormattedMessageType
   : never;
 
 export default function useReferrer(referrerCode?: string, referrerData?: ReferrerData) {
@@ -56,7 +56,7 @@ export default function useReferrer(referrerCode?: string, referrerData?: Referr
       throw new Error(`${key} is not in referrerData`);
     }
 
-    return (referrerData[key][referrer ?? 'default'] ?? referrerData[key].default) as ReferrerDataValue<T>;    
+    return (referrerData[key][referrer ?? 'default'] ?? referrerData[key].default) as ReferrerDataValue<T>;
   }
 
   return { getReferrer, setReferrer };
