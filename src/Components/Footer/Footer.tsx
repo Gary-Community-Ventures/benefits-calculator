@@ -10,6 +10,8 @@ import { useLogo } from '../Referrer/useLogo';
 const Footer = () => {
   const footerData = useConfig('footer_data');
   const context = useContext(Context);
+  const { getReferrer } = context;
+  const footerLogoClass = getReferrer('footerLogoClass');
 
   const { theme } = context;
   const { address_one, address_two, city, state, zip_code, email, privacy_policy_link } = footerData;
@@ -18,7 +20,7 @@ const Footer = () => {
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: theme.midBlueColor }} square={true}>
         <div className="footer-content-container">
           <div>
-            {useLogo('logoFooterSource', 'logoFooterAlt', 'logo footer-logo')}
+            {useLogo('logoFooterSource', 'logoFooterAlt', `logo footer-logo ${footerLogoClass}`)}
             <p className="white-font">{address_one}</p>
             <p className="white-font">{address_two}</p>
             <p className="white-font">
