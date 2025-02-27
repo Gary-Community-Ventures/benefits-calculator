@@ -163,7 +163,7 @@ function AlreadyHasBenefits() {
   const renderHelpSection = () => {
     if (isEnergyCalculator) {
       return (
-        <p className={'help-text'}>
+        <p className="help-text">
           <FormattedMessage
             id="energyCalculator.hasBenefits-description"
             defaultMessage="Information about current benefits you already have could help determine your eligibility for other programs."
