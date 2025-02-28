@@ -16,13 +16,24 @@ const LandingPage = () => {
   return (
     <main className="energy-calculator-container">
       <QuestionHeader>
-        <FormattedMessage id="energyCalculator-landingPage.qHeader" defaultMessage="Energy Calculator" />
+        <FormattedMessage id="energyCalculator-landingPage.qHeader" defaultMessage="Colorado Energy Navigator" />
       </QuestionHeader>
       <article className="energy-calculator-body-text">
-        <FormattedMessage
-          id="energyCalculator.bodyText"
-          defaultMessage="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus, nec vehicula risus tincidunt a. Sed euismod, nisl nec aliquam."
-        />
+        <p>
+          <FormattedMessage
+            id="energyCalculator.bodyText1"
+            defaultMessage="Looking for a program to help you with energy-related bill assistance or rebates you are likely eligible for?"
+          />
+        </p>
+        <p className="energy-calculator-p-spacing">
+          <FormattedMessage
+            id="energyCalculator.bodyText2"
+            defaultMessage="We can help! All it takes is 10 minutes of your time. See all the programs this tool is screening for "
+          />
+          <a href="/co_energy_calculator/current-benefits" className="link-color">
+            <FormattedMessage id="energyCalculator.linkText" defaultMessage="here." />
+          </a>
+        </p>
       </article>
       <QuestionQuestion>
         <FormattedMessage

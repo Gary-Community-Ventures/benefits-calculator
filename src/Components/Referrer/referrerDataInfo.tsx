@@ -16,6 +16,7 @@ import ECMFBLogo from '../../Assets/States/CO/WhiteLabels/EagleCounty/ECMFBLogo.
 import ACHSMFBLogo from '../../Assets/States/CO/WhiteLabels/AdamsCountyHumanServices/achs.png';
 import LC_MFBLogo from '../../Assets/States/CO/WhiteLabels/LarimerCounty/LC_MFBLogo.png';
 import TC_MFBLogo from '../../Assets/States/CO/WhiteLabels/TellerCounty/TC_MFBLogo.png';
+import PoweredByLogo from '../../Assets/Logos/powered_by_mfb.png';
 
 const logoMap: { [key: string]: string | undefined } = {
   MFB_COLogo: MFBCOLogo,
@@ -36,6 +37,7 @@ const logoMap: { [key: string]: string | undefined } = {
   ACHS_MFBLogo: ACHSMFBLogo,
   LC_MFBLogo: LC_MFBLogo,
   TC_MFBLogo: TC_MFBLogo,
+  PoweredByLogo: PoweredByLogo,
 };
 
 export const renderLogoSource = (sourceLabel: string, logoAlt: string, logoClass: string) => {
