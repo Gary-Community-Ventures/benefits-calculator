@@ -61,7 +61,6 @@ export default function ElectricityProvider() {
     };
 
     const updatedFormData: FormData = { ...formData, energyCalculator: updatedEnergyData };
-    setFormData(updatedFormData);
     updateScreen(updatedFormData);
     nextStep();
   };

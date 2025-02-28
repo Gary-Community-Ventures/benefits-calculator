@@ -56,7 +56,6 @@ const HouseholdSize = () => {
         householdSize,
         householdData: formData.householdData.slice(0, householdSize),
       };
-      setFormData(updatedFormData);
       updateScreen(updatedFormData);
       nextStep();
     }

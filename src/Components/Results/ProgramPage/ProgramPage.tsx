@@ -58,7 +58,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     try {
       const response = await postValidation(body, staffToken);
       setValidations([...validations, response]);
-      setFormData({ ...formData, frozen: true });
+      setFormData({ ...formData, frozen: true }); // TODO: this breaks the pattern of having formdata pull from api, should we refetch?
     } catch (error) {
       console.error(error);
     }
@@ -77,7 +77,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       const newValidations = validations.filter((validation) => validation.id !== currentValidation?.id);
       setValidations(newValidations);
       if (newValidations.length === 0) {
-        setFormData({ ...formData, frozen: false });
+        setFormData({ ...formData, frozen: false }); // TODO: this breaks the pattern of having formdata pull from api, should we refetch?
       }
     } catch (error) {
       console.error(error);

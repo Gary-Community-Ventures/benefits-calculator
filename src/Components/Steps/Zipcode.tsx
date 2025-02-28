@@ -70,7 +70,6 @@ export const Zipcode = () => {
   const formSubmitHandler = (zipCodeAndCountyData: FormData) => {
     if (uuid) {
       const updatedFormData = { ...formData, ...zipCodeAndCountyData };
-      setFormData(updatedFormData);
       updateScreen(updatedFormData);
       nextStep();
     }

@@ -54,7 +54,6 @@ const HouseholdAssets = () => {
       throw new Error('no uuid');
     }
     const updatedFormData = { ...formData, householdAssets: householdAssets };
-    setFormData(updatedFormData);
     updateScreen(updatedFormData);
     nextStep();
   };

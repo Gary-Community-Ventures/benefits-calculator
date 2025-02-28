@@ -98,7 +98,6 @@ const Expenses = () => {
   const formSubmitHandler: SubmitHandler<FormSchema> = async (expensesObject) => {
     if (uuid) {
       const updatedFormData = { ...formData, ...expensesObject };
-      setFormData(updatedFormData);
       await updateScreen(updatedFormData);
       nextStep();
     }

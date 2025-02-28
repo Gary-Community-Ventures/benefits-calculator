@@ -14,6 +14,7 @@ import { Language } from './languageOptions';
 import { useContext } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
+import { useUpdateFormData } from '../Components/FetchScreen/manageFormData';
 
 const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: string) => {
   const householdMembers = getHouseholdMembersBodies(formData);
@@ -194,17 +195,20 @@ const getUserBody = (formData: FormData, languageCode: Language): ApiUser & ApiU
 export default function useScreenApi() {
   const { whiteLabel, locale } = useContext(Context);
   const { uuid } = useParams();
+  const updateFormData = useUpdateFormData();
 
   return {
     updateScreen: async (formData: FormData) => {
       if (uuid === undefined) {
         return;
       }
-
-      await putScreen(getScreensBody(formData, locale, whiteLabel), uuid);
+      const updatedFormData = await putScreen(getScreensBody(formData, locale, whiteLabel), uuid);
+      updateFormData(updatedFormData);
     },
     createScreen: async (formData: FormData) => {
-      return await postScreen(getScreensBody(formData, locale, whiteLabel));
+      const newFormData = await postScreen(getScreensBody(formData, locale, whiteLabel));
+      updateFormData(newFormData);
+      return newFormData;
     },
     updateUser: async (formData: FormData) => {
       const userBody = getUserBody(formData, locale);

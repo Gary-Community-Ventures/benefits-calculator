@@ -29,6 +29,7 @@ export type EnergyCalculatorMember = {
 };
 
 export type HouseholdData = {
+  id: number;
   frontendId: string;
   age?: number; // deprecated: used for historical screens only
   birthYear?: number;

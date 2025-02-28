@@ -90,7 +90,7 @@ const postScreen = async (partialFormData: ApiFormData) => {
     if (!response.ok) {
       throw new Error(`${response.status} ${response.statusText}`);
     }
-    return response.json();
+    return response.json() as Promise<ApiFormDataReadOnly & ApiFormData>; // TODO: is this the right type?
   });
 };
 
@@ -103,7 +103,7 @@ const putScreen = async (partialFormData: ApiFormData, uuid: string) => {
     if (!response.ok) {
       throw new Error(`${response.status} ${response.statusText}`);
     }
-    return response.json();
+    return response.json() as Promise<ApiFormDataReadOnly & ApiFormData>; // TODO: is this the right type?
   });
 };
 
