@@ -140,6 +140,7 @@ export default function ReferralSourceStep() {
                   label={
                     <FormattedMessage id="qcc.createReferralDropdownMenu-label" defaultMessage="Referral Source" />
                   }
+                  MenuProps={{ PaperProps: { sx: { maxHeight: 400 } } }}
                 >
                   {createMenuItems()}
                 </Select>
