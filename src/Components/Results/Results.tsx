@@ -249,7 +249,7 @@ const Results = ({ type }: ResultsProps) => {
         <ResultsContextProvider>
           <ResultsHeader type={type} />
           <ResultsTabs />
-          <Grid container sx={{ p: 2 }}>
+          <Grid container sx={{ p: '1rem', mt: '2rem' }}>
             <Grid item xs={12}>
               {type === 'need' ? <Needs /> : <Programs />}
             </Grid>
