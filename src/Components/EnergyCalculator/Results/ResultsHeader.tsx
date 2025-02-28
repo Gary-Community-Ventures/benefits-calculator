@@ -12,7 +12,7 @@ export default function EnergyCalculatorResultsHeader() {
   const rebateCount = energyCalculatorRebateCategories.reduce((acc, category) => acc + category.rebates.length, 0);
 
   return (
-    <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor, padding: '1rem' }}>
+    <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor, margin: '1rem' }}>
       <header className="energy-calculator-results-header">
         <section className="energy-calculator-results-header-programs-count-text">
           <div className="energy-calculator-results-header-programs-count">{programs.length}</div>

@@ -29,7 +29,7 @@ const Header = () => {
 
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
-    defaultMsg: 'select a language',
+    defaultMessage: 'select a language',
   };
 
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);

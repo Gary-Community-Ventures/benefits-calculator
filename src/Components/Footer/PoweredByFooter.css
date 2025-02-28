@@ -1,0 +1,15 @@
+.powered-by-footer-content-container {
+  margin: auto;
+  max-width: var(--main-max-width);
+  padding: 1.5rem 1rem 1rem 0;
+}
+
+.powered-by-footer-logo {
+  width: 15rem;
+  margin: auto;
+}
+
+.powered-by-footer-policy-container {
+  display: flex;
+  justify-content: center;
+}

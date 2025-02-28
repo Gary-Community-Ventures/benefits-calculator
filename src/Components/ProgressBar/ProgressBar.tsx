@@ -21,7 +21,7 @@ const ProgressBar = ({ step }: ProgressBarProps) => {
 
   const progressBarTranslatedAL = {
     id: 'progressBar.ariaLabel',
-    defaultMsg: 'progress bar',
+    defaultMessage: 'progress bar',
   };
 
   useEffect(() => {

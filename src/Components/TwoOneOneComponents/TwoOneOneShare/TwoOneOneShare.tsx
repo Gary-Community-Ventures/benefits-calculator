@@ -80,7 +80,7 @@ const TwoOneOneShare = ({ close }: TwoOneOneShareProps) => {
 
   const closeALProps = {
     id: 'share.closeAL',
-    defaultMsg: 'close',
+    defaultMessage: 'close',
   };
 
   return (

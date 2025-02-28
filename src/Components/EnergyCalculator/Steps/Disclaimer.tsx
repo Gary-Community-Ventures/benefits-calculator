@@ -16,18 +16,15 @@ import { useQueryString } from '../../QuestionComponents/questionHooks';
 import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import useScreenApi from '../../../Assets/updateScreen';
 import { Language } from '../../../Assets/languageOptions';
-import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
-import EnergyCalculatorDisclaimer from '../../EnergyCalculator/Steps/Disclaimer';
-import './Disclaimer.css';
+import '../../../Components/Steps/Disclaimer/Disclaimer.css';
 
 const isTrue = (value: boolean) => {
   return value;
 };
 
 const Disclaimer = () => {
-  const isEnergyCalculator = useIsEnergyCalculator();
   const { formData, setFormData, setScreenLoading, locale } = useContext(Context);
-  let { whiteLabel, uuid } = useParams();
+  let { uuid } = useParams();
   const navigate = useNavigate();
   // use defaults for the config on this page because the config won't be loaded
   // when the page is first rendered when coming from /select-state
@@ -38,11 +35,11 @@ const Disclaimer = () => {
   const { createScreen, updateScreen } = useScreenApi();
   const backNavigationFunction = () => {
     if (uuid !== undefined) {
-      navigate(`/${whiteLabel}/${uuid}/step-1${queryString}`);
+      navigate(`/co_energy_calculator/${uuid}/step-1${queryString}`);
       return;
     }
 
-    navigate(`/${whiteLabel}/step-1${queryString}`);
+    navigate(`/co_energy_calculator/step-1${queryString}`);
   };
 
   useEffect(() => {
@@ -73,11 +70,11 @@ const Disclaimer = () => {
 
     if (uuid) {
       await updateScreen(updatedFormData);
-      navigate(`/${whiteLabel}/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      navigate(`/co_energy_calculator/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
     } else {
       const response = await createScreen(updatedFormData);
       setScreenLoading(false);
-      navigate(`/${whiteLabel}/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      navigate(`/co_energy_calculator/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
     }
   };
 
@@ -85,20 +82,26 @@ const Disclaimer = () => {
     return (
       <section className="disclaimer-text-section">
         <FormattedMessage
-          id="landingPage.body"
-          defaultMessage="MyFriendBen is a tool that can help determine benefits you are likely eligible for. Here's what you should know before you get started:"
+          id="energyCalculatorDisclaimer.body"
+          defaultMessage="The Colorado Energy Navigator is a tool that can help determine energy-related bill assistance and rebates you are likely eligible for. Here's what you should know before you get started:"
         />
         <ul className="disclaimer-list-container">
           <li>
             <FormattedMessage
-              id="landingPage.firstBulletItem"
-              defaultMessage="MyFriendBen only provides estimates of what you may qualify for. You should not rely on these estimates. You must confirm your final eligibility and benefit amount with the proper agency or other decision maker."
+              id="energyCalculatorDisclaimer.firstBulletItem"
+              defaultMessage="The Colorado Energy Navigator only provides estimates of what you may qualify for. You should not rely on these estimates. You must confirm your final eligibility and benefit amount with the proper agency or other decision maker."
+            />
+          </li>
+          <li>
+            <FormattedMessage
+              id="energyCalculatorDisclaimer.secondBulletItem"
+              defaultMessage="Your responses will remain anonymous unless you provide optional contact information and consent to receive future communication."
             />
           </li>
           <li>
             <div>
               <FormattedMessage
-                id="landingPage.publicCharge"
+                id="energyCalculatorDisclaimer.publicCharge"
                 defaultMessage="Some benefits are available to Non-U.S. citizens. Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits may affect their immigration status. For more information, please review the "
               />
               <a
@@ -112,11 +115,11 @@ const Disclaimer = () => {
                 }}
               >
                 <FormattedMessage
-                  id="landingPage.publicChargeLink"
+                  id="energyCalculatorDisclaimer.publicChargeLink"
                   defaultMessage="Colorado Department of Human Services Public Charge Rule"
                 />
               </a>
-              <FormattedMessage id="landingPage.publicCharge.afterLink" defaultMessage="." />
+              <FormattedMessage id="energyCalculatorDisclaimer.publicCharge.afterLink" defaultMessage="." />
             </div>
           </li>
         </ul>
@@ -178,71 +181,67 @@ const Disclaimer = () => {
     );
   };
 
-  if (isEnergyCalculator) {
-    return <EnergyCalculatorDisclaimer />;
-  } else {
-    return (
-      <main className="benefits-form">
-        <QuestionHeader>
-          <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
-        </QuestionHeader>
-        {renderDisclaimerText()}
-        <form onSubmit={handleSubmit(formSubmitHandler)}>
-          <div className="checkbox-container">
-            <Controller
-              name="agreeToTermsOfService"
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        {...field}
-                        checked={getValues('agreeToTermsOfService')}
-                        sx={errors.agreeToTermsOfService ? { color: '#c6252b' } : {}}
+  return (
+    <main className="benefits-form">
+      <QuestionHeader>
+        <FormattedMessage id="disclaimer.header" defaultMessage="What you should know: " />
+      </QuestionHeader>
+      {renderDisclaimerText()}
+      <form onSubmit={handleSubmit(formSubmitHandler)}>
+        <div className="checkbox-container">
+          <Controller
+            name="agreeToTermsOfService"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      {...field}
+                      checked={getValues('agreeToTermsOfService')}
+                      sx={errors.agreeToTermsOfService ? { color: '#c6252b' } : {}}
+                    />
+                  }
+                  label={createAgreeTTSCheckboxLabel()}
+                />
+                {errors.agreeToTermsOfService && renderCheckboxHelperText()}
+              </>
+            )}
+          />
+          <Controller
+            name="is13OrOlder"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      {...field}
+                      checked={getValues('is13OrOlder')}
+                      sx={errors.is13OrOlder ? { color: '#c6252b' } : {}}
+                    />
+                  }
+                  label={
+                    <div className="disclaimer-font">
+                      <FormattedMessage
+                        id="disclaimer-label-age"
+                        defaultMessage="I confirm I am 13 years of age or older."
                       />
-                    }
-                    label={createAgreeTTSCheckboxLabel()}
-                  />
-                  {errors.agreeToTermsOfService && renderCheckboxHelperText()}
-                </>
-              )}
-            />
-            <Controller
-              name="is13OrOlder"
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        {...field}
-                        checked={getValues('is13OrOlder')}
-                        sx={errors.is13OrOlder ? { color: '#c6252b' } : {}}
-                      />
-                    }
-                    label={
-                      <div className="disclaimer-font">
-                        <FormattedMessage
-                          id="disclaimer-label-age"
-                          defaultMessage="I confirm I am 13 years of age or older."
-                        />
-                      </div>
-                    }
-                    className="top-margin"
-                  />
-                  {errors.is13OrOlder && renderCheckboxHelperText()}
-                </>
-              )}
-            />
-          </div>
-          <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
-        </form>
-      </main>
-    );
-  }
+                    </div>
+                  }
+                  className="top-margin"
+                />
+                {errors.is13OrOlder && renderCheckboxHelperText()}
+              </>
+            )}
+          />
+        </div>
+        <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
+      </form>
+    </main>
+  );
 };
 
 export default Disclaimer;
