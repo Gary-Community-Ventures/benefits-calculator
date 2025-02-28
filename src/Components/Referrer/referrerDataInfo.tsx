@@ -1,6 +1,7 @@
 import MFBDEFAULT from '../../Assets/Logos/mfb_default_logo_header.png';
 import MFBCOLogo from '../../Assets/Logos/mfb_colorado_logo.png';
 import MFBNCLogo from '../../Assets/Logos/mfb_nc_logo.png';
+import MFB_NCFooterLogo from '../../Assets/Logos/MFB_NCFooterLogo.png';
 import BIAMFBLogo from '../../Assets/States/CO/WhiteLabels/BIA/biamfbcombinedlogo.png';
 import JHSAMFBLogo from '../../Assets/States/CO/WhiteLabels/JeffcoAssets/jeffcobrand.png';
 import JPSMLogo from '../../Assets/States/CO/WhiteLabels/JeffcoAssets/jeffcopublicschoolslogo.png';
@@ -21,6 +22,7 @@ import PoweredByLogo from '../../Assets/Logos/powered_by_mfb.png';
 const logoMap: { [key: string]: string | undefined } = {
   MFB_COLogo: MFBCOLogo,
   MFB_NCLogo: MFBNCLogo,
+  MFB_NCFooterLogo: MFB_NCFooterLogo,
   BIA_MFBLogo: BIAMFBLogo,
   JHS_AMFBLogo: JHSAMFBLogo,
   JHSA_MFBLogo: JHSAMFBLogo,
