@@ -78,7 +78,8 @@
   max-height: 90%;
 }
 
-.tellercounty-logo-size {
+.tellercounty-logo-size,
+.pueblocounty-logo-size {
   display: block;
   max-height: 91%;
   max-width: 95%;

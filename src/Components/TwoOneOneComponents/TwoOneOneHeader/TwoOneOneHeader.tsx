@@ -28,27 +28,27 @@ const TwoOneOneHeader = () => {
 
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
-    defaultMsg: 'select a language',
+    defaultMessage: 'select a language',
   };
   const shareButtonAriaLabelProps = {
     id: 'header.shareBtn-AL',
-    defaultMsg: 'share button',
+    defaultMessage: 'share button',
   };
   const openMenuBtnAriaLabelProps = {
     id: '211Header.openMenuBtn-AL',
-    defaultMsg: 'open menu',
+    defaultMessage: 'open menu',
   };
   const closeBtnAriaLabelProps = {
     id: '211Header.closeMenuBtn-AL',
-    defaultMsg: 'close menu',
+    defaultMessage: 'close menu',
   };
   const shareMFBModalAriaLabelProps = {
     id: 'header.shareMFBModal-AL',
-    defaultMsg: 'share my friend ben modal',
+    defaultMessage: 'share my friend ben modal',
   };
   const logoAltText = {
     id: '211Header.logo.alt',
-    defaultMsg: '211 and myfriendben logo',
+    defaultMessage: '211 and myfriendben logo',
   };
 
   const [openShare, setOpenShare] = useState(false);
@@ -97,9 +97,9 @@ const TwoOneOneHeader = () => {
           target="_blank"
           aria-label={link.ariaLabel}
           className="twoOneOneMenuLink"
-          key={link.defaultMsg + index}
+          key={link.defaultMessage + index}
         >
-          <FormattedMessage id={link.formattedMsgId} defaultMessage={link.defaultMsg} />
+          <FormattedMessage id={link.formattedMsgId} defaultMessage={link.defaultMessage} />
         </Link>
       );
     });

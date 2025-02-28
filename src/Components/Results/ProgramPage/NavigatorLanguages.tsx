@@ -1,6 +1,8 @@
 import { FormattedMessage } from 'react-intl';
+import { Language } from '../../../Assets/languageOptions';
+import { FormattedMessageType } from '../../../Types/Questions';
 
-export const allNavigatorLanguages = {
+export const allNavigatorLanguages: Record<Language, FormattedMessageType> = {
   'en-us': <FormattedMessage id="navLanguage.en-us" defaultMessage="English Available" />,
   es: <FormattedMessage id="navLanguage.es" defaultMessage="Spanish Available" />,
   vi: <FormattedMessage id="navLanguage.vi" defaultMessage="Vietnamese Available" />,
@@ -12,4 +14,5 @@ export const allNavigatorLanguages = {
   my: <FormattedMessage id="navLanguage.my" defaultMessage="Burmese Available" />,
   zh: <FormattedMessage id="navLanguage.zh" defaultMessage="Chinese Available" />,
   ar: <FormattedMessage id="navLanguage.ar" defaultMessage="Arabic Available" />,
+  sw: <FormattedMessage id="navLanguage.sw" defaultMessage="Swahili Available" />,
 };
