@@ -12,14 +12,14 @@ import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import TwoOneOneShare from '../TwoOneOneShare/TwoOneOneShare';
-import './TwoOneOneHeader.css';
+import TwoOneOneShareCO from '../TwoOneOneShareCO/TwoOneOneShareCO';
+import './TwoOneOneHeaderCO.css';
 
 type LanguageOptions = {
   [key: string]: string;
 };
 
-const TwoOneOneHeader = () => {
+const TwoOneOneHeaderCO = () => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
   const { formData, locale, selectLanguage } = useContext(Context);
   const languageOptions = useConfig<LanguageOptions>('language_options');
@@ -28,27 +28,27 @@ const TwoOneOneHeader = () => {
 
   const selectLangAriaLabelProps = {
     id: 'header.selectLang-AL',
-    defaultMsg: 'select a language',
+    defaultMessage: 'select a language',
   };
   const shareButtonAriaLabelProps = {
     id: 'header.shareBtn-AL',
-    defaultMsg: 'share button',
+    defaultMessage: 'share button',
   };
   const openMenuBtnAriaLabelProps = {
     id: '211Header.openMenuBtn-AL',
-    defaultMsg: 'open menu',
+    defaultMessage: 'open menu',
   };
   const closeBtnAriaLabelProps = {
     id: '211Header.closeMenuBtn-AL',
-    defaultMsg: 'close menu',
+    defaultMessage: 'close menu',
   };
   const shareMFBModalAriaLabelProps = {
     id: 'header.shareMFBModal-AL',
-    defaultMsg: 'share my friend ben modal',
+    defaultMessage: 'share my friend ben modal',
   };
   const logoAltText = {
     id: '211Header.logo.alt',
-    defaultMsg: '211 and myfriendben logo',
+    defaultMessage: '211 and myfriendben logo',
   };
 
   const [openShare, setOpenShare] = useState(false);
@@ -188,7 +188,7 @@ const TwoOneOneHeader = () => {
               aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}
               sx={{ '& .MuiPaper-root': { borderRadius: '1rem' } }}
             >
-              <TwoOneOneShare close={handleCloseShare} />
+              <TwoOneOneShareCO close={handleCloseShare} />
             </Dialog>
           </Stack>
         </AppBar>
@@ -198,4 +198,4 @@ const TwoOneOneHeader = () => {
   );
 };
 
-export default TwoOneOneHeader;
+export default TwoOneOneHeaderCO;

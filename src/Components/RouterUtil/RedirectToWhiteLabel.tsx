@@ -19,7 +19,6 @@ const REFERRER_REDIRECT: { [key: string]: string | undefined } = {
   jeffcoHS: 'co',
   jeffcoHSCM: 'co',
   '211co': 'co',
-  '211nc': 'nc',
   villageExchange: 'co',
   achs: 'co',
   arapahoectypublichealth: 'co',

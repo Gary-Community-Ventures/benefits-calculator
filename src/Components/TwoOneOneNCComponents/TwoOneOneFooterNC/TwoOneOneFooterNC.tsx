@@ -94,21 +94,11 @@ const TwoOneOneFooterNC = () => {
     return (
       <Box className="twoOneOne-font flexIntoRow copyright-container">
         <Typography className="privacy-policy-links">
-          <FormattedMessage id="footer-copyright" defaultMessage="© Copyright 2-1-1 Colorado" />
+          <FormattedMessage id="footer-copyright" defaultMessage="© Copyright 2-1-1 North Carolina" />
         </Typography>
-        <Box className="flexLinksIntoRow">
+        <Box className="flexLinksIntoRow">          
           <Link
-            href="https://www.211colorado.org/terms-of-service/"
-            underline="none"
-            target="_blank"
-            aria-label={intl.formatMessage(twoOneOneTOSALProps)}
-            className="privacy-policy-links"
-          >
-            <FormattedMessage id="footer-terms-of-service-link" defaultMessage="2-1-1 Terms of Service |" />
-            &nbsp;
-          </Link>
-          <Link
-            href="https://www.211colorado.org/privacy-policy/"
+            href="http://prod211nc.wpengine.com/wp-content/uploads/2020/06/PRIVACY-POLICY.pdf"
             underline="none"
             target="_blank"
             aria-label={intl.formatMessage(twoOneOneTOSALProps)}

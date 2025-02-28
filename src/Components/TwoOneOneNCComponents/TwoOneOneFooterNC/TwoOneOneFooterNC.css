@@ -33,7 +33,6 @@
 
 .flexIntoRow {
   max-width: var(--main-max-width);
-  /* margin: auto; */
   justify-content: center;
   padding: 0 1rem;
   display: flex;
@@ -44,11 +43,6 @@
   display: flex;
   flex-direction: row;
 }
-
-/* .getHelp-text {
-  padding-top: 3rem;
-  margin-bottom: 2.5rem;
-} */
 
 .icon-section {
   padding: 1rem;
@@ -85,8 +79,8 @@
 }
 
 .twoOneOneNC-footer-icon {
-  max-width: 150px;
-  height: 130px;
+  max-width: 8rem;
+  height: 7rem;
   color: #0044b5;
 }
 
