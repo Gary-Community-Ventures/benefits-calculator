@@ -132,15 +132,15 @@ export const Filter = () => {
   };
   const citizenshipFiltersModalALProps = {
     id: 'filter.citFilterModalAL',
-    defaultMsg: 'citizenship filters modal',
+    defaultMessage: 'citizenship filters modal',
   };
   const closeCitFiltersALProps = {
     id: 'filter.closeCitFilterAL',
-    defaultMsg: 'close citizenship filters modal',
+    defaultMessage: 'close citizenship filters modal',
   };
   const citFiltersALProps = {
     id: 'filter.citFiltersAL',
-    defaultMsg: 'citizenship filters',
+    defaultMessage: 'citizenship filters',
   };
 
   const displayCitizenshipPopover = () => {

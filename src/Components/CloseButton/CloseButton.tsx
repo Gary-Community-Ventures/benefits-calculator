@@ -11,7 +11,7 @@ const CloseButton = ({ handleClose }: CloseButtonProps) => {
   const intl = useIntl();
   const closeAriaLabelProps = {
     id: 'emailResults.close-AL',
-    defaultMsg: 'close',
+    defaultMessage: 'close',
   };
 
   return (
