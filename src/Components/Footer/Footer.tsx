@@ -11,7 +11,7 @@ const Footer = () => {
   const footerData = useConfig('footer_data');
   const context = useContext(Context);
   const { getReferrer } = context;
-  
+
   // Only add the footerLogoClass if it exists in the config
   const baseLogoClass = 'logo footer-logo';
   const footerLogoClass = getReferrer('footerLogoClass', ''); // Provide empty string as fallback
