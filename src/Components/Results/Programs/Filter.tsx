@@ -227,10 +227,12 @@ export const Filter = () => {
     <div className="filter-section-container">
       <h2 className="results-section-header">
         <FormattedMessage id="filterSection.header" defaultMessage="Filter Results by Citizenship" />
-        <HelpButton
-          helpId="filterSection.citizenHelpText"
-          helpText="Household members may have mixed immigration status. This means that some people in your home may qualify for benefits even if others do not. Use this filter to see how a person's status affects their ability to qualify."
-        />
+        <HelpButton>
+          <FormattedMessage
+            id="filterSection.citizenHelpText"
+            defaultMessage="Household members may have mixed immigration status. This means that some people in your home may qualify for benefits even if others do not. Use this filter to see how a person's status affects their ability to qualify."
+          />
+        </HelpButton>
       </h2>
       <div className="flex-direction-row">
         {displayCitizenshipButton()}
