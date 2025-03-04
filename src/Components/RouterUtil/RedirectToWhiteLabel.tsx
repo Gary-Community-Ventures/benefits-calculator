@@ -61,10 +61,10 @@ export function useUpdateWhiteLabelAndNavigate() {
   const { setWhiteLabel } = useContext(Context);
   const navigate = useNavigate();
 
-  return (whiteLabel: string, url: string) => {
+  return (whiteLabel: string, url: string, replace: boolean = false) => {
     // Technically, the config won't be loaded for a second,
     // so we add defaults on the disclaimer page
     setWhiteLabel(whiteLabel);
-    navigate(url);
+    navigate(url, { replace: replace });
   };
 }

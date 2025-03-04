@@ -1,19 +1,24 @@
-import { useContext } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ALL_VALID_WHITE_LABELS, WhiteLabel } from '../../Types/WhiteLabel';
 import { useQueryString } from '../QuestionComponents/questionHooks';
-import { Context } from '../Wrapper/Wrapper';
+import { useUpdateWhiteLabelAndNavigate } from './RedirectToWhiteLabel';
 
 // route the path /:whiteLabel to /:whiteLabel/step-1
 export default function WhiteLabelRouter() {
-  const { setWhiteLabel } = useContext(Context);
   const { whiteLabel } = useParams();
   const query = useQueryString();
+  const navigate = useNavigate();
+  const updateWhiteLabelAndNavigate = useUpdateWhiteLabelAndNavigate();
 
-  if (whiteLabel === undefined || !ALL_VALID_WHITE_LABELS.includes(whiteLabel as WhiteLabel)) {
-    return <Navigate to={`/step-1${query}`} replace />;
-  }
+  useEffect(() => {
+    if (whiteLabel === undefined || !ALL_VALID_WHITE_LABELS.includes(whiteLabel as WhiteLabel)) {
+      navigate(`/step-1${query}`, { replace: true });
+      return;
+    }
 
-  setWhiteLabel(whiteLabel);
-  return <Navigate to={`step-1${query}`} replace />;
+    updateWhiteLabelAndNavigate(whiteLabel, `step-1${query}`, true);
+  }, []);
+
+  return null;
 }
