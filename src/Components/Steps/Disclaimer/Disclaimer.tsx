@@ -7,6 +7,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { STARTING_QUESTION_NUMBER } from '../../../Assets/stepDirectory';
 import { Checkbox, FormControlLabel } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
+import { FormattedMessageType } from '../../../Types/Questions';
 import dataLayerPush from '../../../Assets/analytics';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import { useConfig } from '../../Config/configHook';
@@ -28,11 +29,13 @@ const Disclaimer = () => {
   const isEnergyCalculator = useIsEnergyCalculator();
   const { formData, setFormData, setScreenLoading, locale } = useContext(Context);
   let { whiteLabel, uuid } = useParams();
-  console.log('whiteLabel', whiteLabel, 'uuid', uuid);
   const navigate = useNavigate();
   // use defaults for the config on this page because the config won't be loaded
   // when the page is first rendered when coming from /select-state
-  const publicChargeOption = useConfig<{ link: string; text: { props: { id: string; defaultMessage: string; } } }>('public_charge_rule', { link: '', text: { props: { id: '', defaultMessage: '' } } });
+  const publicChargeOption = useConfig<{ link: string; text: FormattedMessageType }>('public_charge_rule', {
+    link: '',
+    text: <FormattedMessage id="landingPage.defaultPublicChargeLink" defaultMessage="Public Charge Rule" />,
+  });
   const privacyLinks = useConfig<Partial<Record<Language, string>>>('privacy_policy', {});
   const consentToContactLinks = useConfig<Partial<Record<Language, string>>>('consent_to_contact', {});
   const queryString = useQueryString();
@@ -112,10 +115,7 @@ const Disclaimer = () => {
                   });
                 }}
               >
-                <FormattedMessage
-                  id={publicChargeOption.text.props.id}
-                  defaultMessage={publicChargeOption.text.props.defaultMessage}
-                />
+                {publicChargeOption.text}
               </a>
               <FormattedMessage id="landingPage.publicCharge.afterLink" defaultMessage="." />
             </div>
