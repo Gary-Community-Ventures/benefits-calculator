@@ -97,9 +97,9 @@ const TwoOneOneHeaderCO = () => {
           target="_blank"
           aria-label={link.ariaLabel}
           className="twoOneOneMenuLink"
-          key={link.defaultMsg + index}
+          key={link.defaultMessage + index}
         >
-          <FormattedMessage id={link.formattedMsgId} defaultMessage={link.defaultMsg} />
+          <FormattedMessage id={link.formattedMsgId} defaultMessage={link.defaultMessage} />
         </Link>
       );
     });

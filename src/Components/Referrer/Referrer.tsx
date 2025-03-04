@@ -8,6 +8,7 @@ import BackToScreen from '../BackToScreen/BackToScreen';
 import { useResultsContext } from '../Results/Results';
 import NoProgramEligibleMessage from '../Results/NoProgramEligibleMessage';
 import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
+import EnergyCalculatorFooter from '../Footer/PoweredByFooter';
 import TwoOneOneHeaderNC from '../TwoOneOneNCComponents/TwoOneOneHeaderNC/TwoOneOneHeaderNC';
 import TwoOneOneFooterNC from '../TwoOneOneNCComponents/TwoOneOneFooterNC/TwoOneOneFooterNC';
 
@@ -24,7 +25,7 @@ export const BrandedHeader = () => {
 };
 
 export const BrandedFooter = () => {
-  const { formData } = useContext(Context);
+  const { formData, getReferrer } = useContext(Context);
 
   if (formData.immutableReferrer === '211co') {
     return <TwoOneOneFooterCO />;
@@ -32,6 +33,11 @@ export const BrandedFooter = () => {
   if (formData.immutableReferrer === '211nc') {
     return <TwoOneOneFooterNC />;
   }
+  
+  if (getReferrer('featureFlags').includes('powered_by_mfb_footer')) {
+    return <EnergyCalculatorFooter />;
+  }
+
   return <Footer />;
 };
 

@@ -11,15 +11,15 @@ const TwoOneOneFooterCO = () => {
 
   const twoOneOneChatALProps = {
     id: 'twoOneOneFooter.chatAL',
-    defaultMsg: '211 chat link',
+    defaultMessage: '211 chat link',
   };
   const twoOneOneDialALProps = {
     id: 'twoOneOneFooter.dialAL',
-    defaultMsg: '211 dial link',
+    defaultMessage: '211 dial link',
   };
   const twoOneOneTOSALProps = {
     id: 'twoOneOneFooter.termsOfSvcAL',
-    defaultMsg: '211 terms of service',
+    defaultMessage: '211 terms of service',
   };
 
   const displayChatStack = () => {

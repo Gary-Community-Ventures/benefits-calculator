@@ -11,5 +11,5 @@ export const useLogo = (src: keyof ReferrerData, alt: keyof ReferrerData, classN
   const logoSourceValue = getReferrer(src) as string;
   const logoAlt = getReferrer(alt) as MessageDescriptor;
 
-  return renderLogoSource(logoSourceValue, intl.formatMessage(logoAlt), className);
+  return renderLogoSource(logoSourceValue.trim(), intl.formatMessage(logoAlt), className);
 };

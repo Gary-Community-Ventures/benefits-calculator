@@ -31,20 +31,31 @@ const NoExpenses = () => {
   };
 
   return (
-    <main className="no-expenses-container">
+    <main className="benefits-form no-expenses-container">
       <img src={errorIcon} className="no-expenses-error-icon" alt={errorIconAlt} />
       <div className="no-expenses-text-container">
-        <QuestionHeader>
-          <FormattedMessage
-            id="noExpenses.qHeader"
-            defaultMessage="Oops! It looks like you may not have any utility expenses."
-          />
-        </QuestionHeader>
-        <article className="noExpenses-body-text">
-          <FormattedMessage
-            id="noExpenses.bodyText"
-            defaultMessage="We're sorry. Based on the information provided so far, it looks like you may not have any utility expenses and therefore may not qualify for any of the energy assistance programs in this screener. If you would like to see what other benefits you may be eligible for outside of energy programs, please visit MyFriendBen."
-          />
+        <article>
+          <p>
+            <FormattedMessage
+              id="noExpenses.bodyText1"
+              defaultMessage="It is unlikely you will qualify for any energy assistance programs."
+            />
+          </p>
+          <p className="no-expenses-p-margin">
+            <FormattedMessage
+              id="noExpenses.bodyText2"
+              defaultMessage="Because you have indicated you do not pay a utility company directly, it is unlikely that you will be eligible for the energy assistance programs available in this screener. If you would like to update your responses, click "
+            />
+            <a onClick={backNavigationFunction} className="link-color">
+              <FormattedMessage id="noExpenses.bodyHere" defaultMessage="here." />
+            </a>
+          </p>
+          <p className="no-expenses-p-margin">
+            <FormattedMessage
+              id="noExpenses.bodyText3"
+              defaultMessage="If you would like to see what other benefits you may be eligible for outside of energy programs, please visit MyFriendBen."
+            />
+          </p>
         </article>
       </div>
       <div className="question-buttons">

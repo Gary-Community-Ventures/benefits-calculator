@@ -1,6 +1,7 @@
 import MFBDEFAULT from '../../Assets/Logos/mfb_default_logo_header.png';
 import MFBCOLogo from '../../Assets/Logos/mfb_colorado_logo.png';
 import MFBNCLogo from '../../Assets/Logos/mfb_nc_logo.png';
+import MFB_NCFooterLogo from '../../Assets/Logos/MFB_NCFooterLogo.png';
 import BIAMFBLogo from '../../Assets/States/CO/WhiteLabels/BIA/biamfbcombinedlogo.png';
 import JHSAMFBLogo from '../../Assets/States/CO/WhiteLabels/JeffcoAssets/jeffcobrand.png';
 import JPSMLogo from '../../Assets/States/CO/WhiteLabels/JeffcoAssets/jeffcopublicschoolslogo.png';
@@ -16,10 +17,13 @@ import ECMFBLogo from '../../Assets/States/CO/WhiteLabels/EagleCounty/ECMFBLogo.
 import ACHSMFBLogo from '../../Assets/States/CO/WhiteLabels/AdamsCountyHumanServices/achs.png';
 import LC_MFBLogo from '../../Assets/States/CO/WhiteLabels/LarimerCounty/LC_MFBLogo.png';
 import TC_MFBLogo from '../../Assets/States/CO/WhiteLabels/TellerCounty/TC_MFBLogo.png';
+import PC_MFBLogo from '../../Assets/States/CO/WhiteLabels/PuebloCounty/PC_MFBLogo.png';
+import PoweredByLogo from '../../Assets/Logos/powered_by_mfb.png';
 
 const logoMap: { [key: string]: string | undefined } = {
   MFB_COLogo: MFBCOLogo,
   MFB_NCLogo: MFBNCLogo,
+  MFB_NCFooterLogo: MFB_NCFooterLogo,
   BIA_MFBLogo: BIAMFBLogo,
   JHS_AMFBLogo: JHSAMFBLogo,
   JHSA_MFBLogo: JHSAMFBLogo,
@@ -36,6 +40,8 @@ const logoMap: { [key: string]: string | undefined } = {
   ACHS_MFBLogo: ACHSMFBLogo,
   LC_MFBLogo: LC_MFBLogo,
   TC_MFBLogo: TC_MFBLogo,
+  PC_MFBLogo: PC_MFBLogo,
+  PoweredByLogo: PoweredByLogo,
 };
 
 export const renderLogoSource = (sourceLabel: string, logoAlt: string, logoClass: string) => {

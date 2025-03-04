@@ -126,6 +126,8 @@ const EnergyCalcConfirmationHHData = () => {
             )}
           </ul>
         );
+      } else {
+        return <FormattedMessage id="confirmation.none" defaultMessage="None" />;
       }
     };
 
