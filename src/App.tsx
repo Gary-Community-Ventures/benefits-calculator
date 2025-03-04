@@ -189,6 +189,7 @@ const App = () => {
                   <Route path="results" element={<Navigate to="benefits" replace />} />
                   <Route path="*" element={<Navigate to="/step-1" replace />} />
                 </Route>
+                <Route path=":whiteLabel" element={<Navigate to={`step-1${urlSearchParams}`} replace />} />
                 <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
               </>,
             )}
