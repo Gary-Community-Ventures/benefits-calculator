@@ -222,7 +222,7 @@ export function useGetConfig(screenLoading: boolean, whiteLabel: string) {
 
 export function useConfig<T>(name: string, defaultValue?: T): T {
   const { config } = useContext(Context);
-
+  
   if (config === undefined || config[name] === undefined) {
     if (defaultValue !== undefined) {
       return defaultValue;
