@@ -47,7 +47,7 @@ function RebateCard({ rebate }: RebateProps) {
         <h2>
           <EnergyCalculatorRebateCardTitle rebate={rebate} />
         </h2>
-        {<strong>{rebate.program}</strong>}
+        <strong>{rebate.program}</strong>
         <div className="energy-calculator-rebate-page-rebate-card-type-container">
           {rebateTypes(rebate).map((type, index) => {
             return <span key={index}>{type}</span>;

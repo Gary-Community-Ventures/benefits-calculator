@@ -44,11 +44,11 @@
 }
 
 .energy-calculator-rebate-page-rebate-card-type-container span {
-  font-size: 0.8rem;
-  background-color: var(--secondary-color);
-  color: #ffffff;
-  padding: 0.3rem;
-  border-radius: 999rem;
+  font-size: 0.75rem;
+  background-color: var(--cream-color);
+  padding: 0.3rem 0.5rem;
+  /* font-weight: bold; */
+  /* border-radius: 999rem; */
 }
 
 .energy-calculator-rebate-page-rebate-card .energy-calculator-rebate-page-more-info {
