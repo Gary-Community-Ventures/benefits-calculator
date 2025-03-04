@@ -28,10 +28,11 @@ const Disclaimer = () => {
   const isEnergyCalculator = useIsEnergyCalculator();
   const { formData, setFormData, setScreenLoading, locale } = useContext(Context);
   let { whiteLabel, uuid } = useParams();
+  console.log('whiteLabel', whiteLabel, 'uuid', uuid);
   const navigate = useNavigate();
   // use defaults for the config on this page because the config won't be loaded
   // when the page is first rendered when coming from /select-state
-  const publicChargeOption = useConfig<{ link: string }>('public_charge_rule', { link: '' });
+  const publicChargeOption = useConfig<{ link: string; text: { props: { id: string; defaultMessage: string; } } }>('public_charge_rule', { link: '', text: { props: { id: '', defaultMessage: '' } } });
   const privacyLinks = useConfig<Partial<Record<Language, string>>>('privacy_policy', {});
   const consentToContactLinks = useConfig<Partial<Record<Language, string>>>('consent_to_contact', {});
   const queryString = useQueryString();
@@ -112,8 +113,8 @@ const Disclaimer = () => {
                 }}
               >
                 <FormattedMessage
-                  id="landingPage.publicChargeLink"
-                  defaultMessage="Colorado Department of Human Services Public Charge Rule"
+                  id={publicChargeOption.text.props.id}
+                  defaultMessage={publicChargeOption.text.props.defaultMessage}
                 />
               </a>
               <FormattedMessage id="landingPage.publicCharge.afterLink" defaultMessage="." />
