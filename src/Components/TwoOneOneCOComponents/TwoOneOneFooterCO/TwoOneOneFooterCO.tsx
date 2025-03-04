@@ -4,9 +4,9 @@ import chatIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/chat
 import dialIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/dialIcon.png';
 import textIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/textIcon.png';
 import { FormattedMessage, useIntl } from 'react-intl';
-import './TwoOneOneFooter.css';
+import './TwoOneOneFooterCO.css';
 
-const TwoOneOneFooter = () => {
+const TwoOneOneFooterCO = () => {
   const intl = useIntl();
 
   const twoOneOneChatALProps = {
@@ -217,4 +217,4 @@ const TwoOneOneFooter = () => {
   );
 };
 
-export default TwoOneOneFooter;
+export default TwoOneOneFooterCO;

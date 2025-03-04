@@ -12,7 +12,7 @@ export interface WrapperContext {
   configLoading: boolean;
   setFormData: (formData: FormData) => void;
   theme: ITheme;
-  setTheme: React.Dispatch<React.SetStateAction<'default' | 'twoOneOne'>>;
+  setTheme: React.Dispatch<React.SetStateAction<'default' | 'twoOneOne' | 'twoOneOneNC'>>;
   styleOverride: any;
   pageIsLoading: boolean;
   setScreenLoading: (loading: boolean) => void;
