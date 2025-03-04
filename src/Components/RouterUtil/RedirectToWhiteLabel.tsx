@@ -1,5 +1,4 @@
 import { PropsWithChildren, useContext } from 'react';
-import { flushSync } from 'react-dom';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper';
 

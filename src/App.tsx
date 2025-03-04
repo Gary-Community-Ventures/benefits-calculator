@@ -27,6 +27,7 @@ import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMe
 import EnergyCalculatorLandingPage from './Components/EnergyCalculator/LandingPage/LandingPage';
 import EnergyCalculatorNoExpenses from './Components/EnergyCalculator/NoExpensesPage/NoExpenses';
 import './App.css';
+import WhiteLabelRouter from './Components/RouterUtil/WhiteLabelRouter';
 
 const App = () => {
   const location = useLocation();
@@ -189,7 +190,7 @@ const App = () => {
                   <Route path="results" element={<Navigate to="benefits" replace />} />
                   <Route path="*" element={<Navigate to="/step-1" replace />} />
                 </Route>
-                <Route path=":whiteLabel" element={<Navigate to={`step-1${urlSearchParams}`} replace />} />
+                <Route path=":whiteLabel" element={<WhiteLabelRouter />} />
                 <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
               </>,
             )}
