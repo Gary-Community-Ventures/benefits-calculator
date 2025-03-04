@@ -120,11 +120,14 @@ export default function EnergyCalculatorExpenses() {
       <QuestionQuestion>
         <FormattedMessage
           id="energyCalculator.expenses.question"
-          defaultMessage="Does your household have any of the following expenses?"
+          defaultMessage="Are any of the following utility bills in yours or another household member's name?"
         />
       </QuestionQuestion>
       <QuestionDescription>
-        <FormattedMessage id="energyCalculator.expenses.description" defaultMessage="Select all that apply." />
+        <FormattedMessage
+          id="energyCalculator.expenses.description"
+          defaultMessage="Do not select if the bills are rolled into your rent. Select all that apply."
+        />
       </QuestionDescription>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <MultiSelectTiles
