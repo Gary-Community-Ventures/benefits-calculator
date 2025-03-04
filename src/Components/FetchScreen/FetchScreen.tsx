@@ -213,8 +213,8 @@ const FetchScreen = () => {
     if (uuid === undefined) {
       if (whiteLabel !== undefined) {
         setWhiteLabel(whiteLabel);
-        setScreenLoading(false);
       }
+      setScreenLoading(false);
       return;
     }
     fetchScreen(uuid);
