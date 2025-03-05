@@ -15,7 +15,8 @@ import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLab
 
 // This will get removed once NC is moved into the main server
 export const STATES: { [key: string]: string } =
-  process.env.REACT_APP_STATE === 'CO' ? { co: 'Colorado' } : { nc: 'North Carolina' };
+  // process.env.REACT_APP_STATE === 'CO' ? { co: 'Colorado' } : { nc: 'North Carolina' };
+  { co: 'Colorado', nc: 'North Carolina' }
 
 const SelectStatePage = () => {
   const { formData, setFormData } = useContext(Context);
