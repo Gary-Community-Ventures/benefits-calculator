@@ -25,6 +25,7 @@ export const Filter = () => {
   const { formData } = useContext(Context);
   const [citButtonClass, setCitButtonClass] = useState('citizenship-button');
   const intl = useIntl();
+  const [choosenFilters, setChoosenFilters] = useState(filtersChecked);
 
   useEffect(() => {
     if (citizenshipFilterIsOpen) {
@@ -38,7 +39,7 @@ export const Filter = () => {
   };
 
   const handleFilterSelect = (selectedFilterStr: CitizenLabelOptions) => {
-    const newFiltersChecked = { ...filtersChecked };
+    const newFiltersChecked = { ...choosenFilters };
 
     const newSelected = !newFiltersChecked[selectedFilterStr];
 
@@ -86,13 +87,14 @@ export const Filter = () => {
       newFiltersChecked[filterName as CalculatedCitizenLabel] = formData.householdData.some(calculator.func);
     });
 
-    setFiltersChecked(newFiltersChecked);
+    setChoosenFilters(newFiltersChecked);
   };
+
 
   const renderCitizenshipFilters = () => {
     const filters: ReactNode[] = [];
     filterNestedMap.forEach((subFilters, mainFilter) => {
-      const mainFilterIsChecked = filtersChecked[mainFilter];
+      const mainFilterIsChecked = choosenFilters[mainFilter];
 
       filters.push(
         <FormControlLabel
@@ -112,7 +114,7 @@ export const Filter = () => {
           <FormControlLabel
             key={subFilter}
             label={citizenshipFilterFormControlLabels[subFilter]}
-            control={<Checkbox checked={filtersChecked[subFilter]} onChange={() => handleFilterSelect(subFilter)} />}
+            control={<Checkbox checked={choosenFilters[subFilter]} onChange={() => handleFilterSelect(subFilter)} />}
             className="subcategory-indentation vertical-align"
             sx={{ padding: '.5rem 0' }}
           />,
@@ -125,7 +127,7 @@ export const Filter = () => {
 
   const handleFilterClose = () => {
     const updatedCitButtonClass = citButtonClass.replace('flat-white-border-bottom', '');
-
+    setFiltersChecked(choosenFilters);
     setCitizenshipPopoverAnchor(null);
     setCitizenshipFilterIsOpen(false);
     setCitButtonClass(updatedCitButtonClass);
