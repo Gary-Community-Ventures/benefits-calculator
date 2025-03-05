@@ -3,13 +3,13 @@ import { FormattedMessage } from 'react-intl';
 export default function Link211Message1() {   
     return (
     <div>      
-      <p>
+      <p>        
         <FormattedMessage
           id="link211.message"
-          defaultMessage="For more information or to learn more, please visit the following link :"
+          defaultMessage="These resources are provided by NC 211. If you can't find what you need below, "
         />
         <a href="https://nc211.org/" target="_blank" rel="noopener noreferrer">
-          <FormattedMessage id="link211.clickHere" defaultMessage="Click here" />
+          <FormattedMessage id="link211.clickHere" defaultMessage="please visit their website." />
         </a>
       </p>      
     </div>
