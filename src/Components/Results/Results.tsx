@@ -97,7 +97,6 @@ export function useResultsLink(link: string) {
 const Results = ({ type }: ResultsProps) => {
   const { formData, getReferrer } = useContext(Context);
   const { whiteLabel, uuid, programId, energyCalculatorRebateType } = useParams();
-  const is211Co = formData.immutableReferrer === '211co';
   const noHelpButton = getReferrer('featureFlags').includes('no_results_more_help');
   
   const [searchParams] = useSearchParams();
@@ -254,8 +253,7 @@ const Results = ({ type }: ResultsProps) => {
             <Grid item xs={12}>
               {type === 'need' ? <Needs /> : <Programs />}
             </Grid>
-          </Grid>
-          {is211Co  && <HelpButton />}
+          </Grid>          
           {noHelpButton && <HelpButton />}
           </ResultsContextProvider>
       </main>

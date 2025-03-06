@@ -7,10 +7,6 @@ import './TwoOneOneFooterNC.css';
 const TwoOneOneFooterNC = () => {
   const intl = useIntl();
 
-  const twoOneOneChatALProps = {
-    id: 'twoOneOneFooter.chatAL',
-    defaultMsg: '211 chat link',
-  };
   const twoOneOneDialALProps = {
     id: 'twoOneOneFooter.dialAL',
     defaultMsg: '211 dial link',
@@ -26,7 +22,7 @@ const TwoOneOneFooterNC = () => {
         <img src={dialIcon} className="twoOneOneNC-footer-icon" alt="talk to a 2-1-1 navigator via phone" />
         <Box>
           <Typography className="icon-header">
-            <FormattedMessage id="footer-dial-text" defaultMessage="Dial" />
+            <FormattedMessage id="footer-dial-text-nc" defaultMessage="Dial" />
           </Typography>
           <Link
             href="tel:211"
@@ -36,12 +32,12 @@ const TwoOneOneFooterNC = () => {
             color="primary"
             sx={{ display: 'inline-block' }}
           >
-            <FormattedMessage id="footer-dial-text" defaultMessage="Dial " />
+            <FormattedMessage id="footer-dial-text-nc" defaultMessage="Dial " />
             2-1-1
           </Link>
           &nbsp;
           <Typography className="font-color" sx={{ display: 'inline-block' }}>
-            <FormattedMessage id="footer-or-text" defaultMessage=" or" />
+            <FormattedMessage id="footer-or-text-nc" defaultMessage=" or" />
             &nbsp;
           </Typography>
           <Link
@@ -55,7 +51,7 @@ const TwoOneOneFooterNC = () => {
             1-(888)-892-1162
           </Link>
           <Typography className="font-color">
-            <FormattedMessage id="footer-tollFree-text" defaultMessage="toll free" />
+            <FormattedMessage id="footer-tollFree-text-nc" defaultMessage="toll free" />
           </Typography>
         </Box>
       </Stack>
@@ -94,7 +90,7 @@ const TwoOneOneFooterNC = () => {
     return (
       <Box className="twoOneOne-font flexIntoRow copyright-container">
         <Typography className="privacy-policy-links">
-          <FormattedMessage id="footer-copyright" defaultMessage="© Copyright 2-1-1 North Carolina" />
+          <FormattedMessage id="footer-copyright-nc" defaultMessage="© Copyright 2-1-1 North Carolina" />
         </Typography>
         <Box className="flexLinksIntoRow">          
           <Link
@@ -104,11 +100,11 @@ const TwoOneOneFooterNC = () => {
             aria-label={intl.formatMessage(twoOneOneTOSALProps)}
             className="privacy-policy-links"
           >
-            <FormattedMessage id="footer-twoOneOne-privacy" defaultMessage="2-1-1 Privacy Policy |" />
+            <FormattedMessage id="footer-twoOneOne-privacy-nc" defaultMessage="2-1-1 Privacy Policy |" />
             &nbsp;
           </Link>
           <Link
-            href="https://co.myfriendben.org/en/data-privacy-policy"
+            href="https://bennc.org/privacy-policy/"
             underline="none"
             target="_blank"
             aria-label={intl.formatMessage(twoOneOneTOSALProps)}
