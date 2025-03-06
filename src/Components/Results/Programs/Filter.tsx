@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useEffect, useState } from 'react';
+import { ReactNode, useContext, useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useResultsContext } from '../Results';
 import { Button, Popover, Checkbox } from '@mui/material';
@@ -26,12 +26,32 @@ export const Filter = () => {
   const [citButtonClass, setCitButtonClass] = useState('citizenship-button');
   const intl = useIntl();
   const [choosenFilters, setChoosenFilters] = useState(filtersChecked);
+  const filterRef = useRef<HTMLDivElement>(null);
+  let filterHeight;
 
   useEffect(() => {
-    if (citizenshipFilterIsOpen) {
+    if (citizenshipFilterIsOpen && citizenshipPopoverAnchor) {
       setCitButtonClass(citButtonClass + ' flat-white-border-bottom');
+      setTimeout(() => {
+        const buttonRect = citizenshipPopoverAnchor?.getBoundingClientRect();
+        const filterHeight = filterRef.current?.offsetHeight;     
+    
+        if (filterHeight && buttonRect) {
+          const spaceBelowButton = window.innerHeight - buttonRect.bottom;
+          if (spaceBelowButton < filterHeight) {
+            const scrollDistance = filterHeight - spaceBelowButton + 55;            
+            if(scrollDistance > 10) {
+              window.scrollTo({
+                top: scrollDistance,
+                behavior: 'smooth',
+              });
+            }
+          }
+          
+        }
+      }, 300);
     }
-  }, [citizenshipFilterIsOpen]);
+  }, [citizenshipFilterIsOpen, citizenshipPopoverAnchor, filterHeight]);
 
   const handleCitizenshipBtnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setCitizenshipFilterIsOpen(!citizenshipFilterIsOpen);
@@ -170,7 +190,9 @@ export const Filter = () => {
               <CloseIcon fontSize="small" />
             </IconButton>
           </div>
+          <div className='filter-ref-container' ref={filterRef}>
           {renderCitizenshipFilters()}
+          </div>          
         </Popover>
       </section>
     );
