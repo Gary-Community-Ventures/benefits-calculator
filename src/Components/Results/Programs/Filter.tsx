@@ -34,20 +34,19 @@ export const Filter = () => {
       setCitButtonClass(citButtonClass + ' flat-white-border-bottom');
       setTimeout(() => {
         const buttonRect = citizenshipPopoverAnchor?.getBoundingClientRect();
-        const filterHeight = filterRef.current?.offsetHeight;     
-    
+        const filterHeight = filterRef.current?.offsetHeight;
+
         if (filterHeight && buttonRect) {
           const spaceBelowButton = window.innerHeight - buttonRect.bottom;
           if (spaceBelowButton < filterHeight) {
-            const scrollDistance = filterHeight - spaceBelowButton + 55;            
-            if(scrollDistance > 10) {
+            const scrollDistance = filterHeight - spaceBelowButton + 55;
+            if (scrollDistance > 10) {
               window.scrollTo({
                 top: scrollDistance,
                 behavior: 'smooth',
               });
             }
           }
-          
         }
       }, 300);
     }
@@ -109,7 +108,6 @@ export const Filter = () => {
 
     setChoosenFilters(newFiltersChecked);
   };
-
 
   const renderCitizenshipFilters = () => {
     const filters: ReactNode[] = [];
@@ -190,9 +188,9 @@ export const Filter = () => {
               <CloseIcon fontSize="small" />
             </IconButton>
           </div>
-          <div className='filter-ref-container' ref={filterRef}>
-          {renderCitizenshipFilters()}
-          </div>          
+          <div className="filter-ref-container" ref={filterRef}>
+            {renderCitizenshipFilters()}
+          </div>
         </Popover>
       </section>
     );
