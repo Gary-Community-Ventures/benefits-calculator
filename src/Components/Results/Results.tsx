@@ -95,9 +95,9 @@ export function useResultsLink(link: string) {
 }
 
 const Results = ({ type }: ResultsProps) => {
-  const { formData } = useContext(Context);
+  const { formData, getReferrer } = useContext(Context);
   const { whiteLabel, uuid, programId, energyCalculatorRebateType } = useParams();
-  const is211Co = formData.immutableReferrer === '211co';
+  const noHelpButton = getReferrer('featureFlags').includes('no_results_more_help');
 
   const [searchParams] = useSearchParams();
   const isAdminView = useMemo(() => searchParams.get('admin') === 'true', [searchParams.get('admin')]);
@@ -254,7 +254,7 @@ const Results = ({ type }: ResultsProps) => {
               {type === 'need' ? <Needs /> : <Programs />}
             </Grid>
           </Grid>
-          {!is211Co && <HelpButton />}
+          {noHelpButton && <HelpButton />}
         </ResultsContextProvider>
       </main>
     );
