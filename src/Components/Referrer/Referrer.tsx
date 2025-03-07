@@ -7,6 +7,7 @@ import Footer from '../Footer/Footer';
 import BackToScreen from '../BackToScreen/BackToScreen';
 import { useResultsContext } from '../Results/Results';
 import NoProgramEligibleMessage from '../Results/NoProgramEligibleMessage';
+import NcLink211Message from '../Results/NcLink211Message';
 import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
 import EnergyCalculatorFooter from '../Footer/PoweredByFooter';
 import TwoOneOneHeaderNC from '../TwoOneOneNCComponents/TwoOneOneHeaderNC/TwoOneOneHeaderNC';
@@ -40,6 +41,16 @@ export const BrandedFooter = () => {
 
   return <Footer />;
 };
+export const ResultsMessageForNeeds = () => {  
+  const { getReferrer } = useContext(Context);
+  const featureFlags = getReferrer('featureFlags');  
+  
+  if (getReferrer('featureFlags').includes('nc_show_211_link')){
+    return <NcLink211Message />;
+  }  
+  return null;
+}
+
 
 export const ResultsMessage = () => {
   const { formData } = useContext(Context);
@@ -51,6 +62,6 @@ export const ResultsMessage = () => {
   if (formData.immutableReferrer === 'ccig') {
     return <CcigResultsMessage />;
   }
-
+  
   return <NoProgramEligibleMessage />;
 };
