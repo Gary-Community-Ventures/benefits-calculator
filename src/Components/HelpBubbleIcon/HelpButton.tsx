@@ -2,6 +2,7 @@ import { IconButton } from '@mui/material';
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { ReactComponent as HelpBubble } from '../../Assets/icons/helpBubble.svg';
+import './HelpButton.css';
 
 const HelpButton = ({ className, helpText, helpId }: { className?: string; helpText: string; helpId: string }) => {
   const intl = useIntl();
@@ -14,7 +15,7 @@ const HelpButton = ({ className, helpText, helpId }: { className?: string; helpT
   return (
     <>
       <IconButton onClick={handleClick} aria-label={translatedAriaLabel}>
-        <HelpBubble style={{ height: '20px', width: '20px' }} />
+        <HelpBubble style={{ height: '20px', width: '20px' }} className="help-button-icon-color" />
       </IconButton>
       {showHelpText && (
         <p className={`help-text ${className}`}>
