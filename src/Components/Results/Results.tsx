@@ -254,7 +254,7 @@ const Results = ({ type }: ResultsProps) => {
               {type === 'need' ? <Needs /> : <Programs />}
             </Grid>
           </Grid>
-          {noHelpButton && <HelpButton />}
+          {!noHelpButton && <HelpButton />}
         </ResultsContextProvider>
       </main>
     );
