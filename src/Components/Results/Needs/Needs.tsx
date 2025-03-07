@@ -16,7 +16,7 @@ const Needs = () => {
 
   return (
     <>
-      <ResultsMessageForNeeds />      
+      <ResultsMessageForNeeds />
       {needsSortedByCategory.map((need, index) => {
         return <NeedCard need={need} key={index} />;
       })}

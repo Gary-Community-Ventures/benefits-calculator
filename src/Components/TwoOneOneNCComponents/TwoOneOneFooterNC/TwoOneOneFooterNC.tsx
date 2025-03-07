@@ -92,7 +92,7 @@ const TwoOneOneFooterNC = () => {
         <Typography className="privacy-policy-links">
           <FormattedMessage id="footer-copyright-nc" defaultMessage="© Copyright 2-1-1 North Carolina" />
         </Typography>
-        <Box className="flexLinksIntoRow">          
+        <Box className="flexLinksIntoRow">
           <Link
             href="http://prod211nc.wpengine.com/wp-content/uploads/2020/06/PRIVACY-POLICY.pdf"
             underline="none"

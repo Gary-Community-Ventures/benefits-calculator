@@ -34,23 +34,22 @@ export const BrandedFooter = () => {
   if (formData.immutableReferrer === '211nc') {
     return <TwoOneOneFooterNC />;
   }
-  
+
   if (getReferrer('featureFlags').includes('powered_by_mfb_footer')) {
     return <EnergyCalculatorFooter />;
   }
 
   return <Footer />;
 };
-export const ResultsMessageForNeeds = () => {  
+export const ResultsMessageForNeeds = () => {
   const { getReferrer } = useContext(Context);
-  const featureFlags = getReferrer('featureFlags');  
-  
-  if (getReferrer('featureFlags').includes('nc_show_211_link')){
-    return <NcLink211Message />;
-  }  
-  return null;
-}
+  const featureFlags = getReferrer('featureFlags');
 
+  if (getReferrer('featureFlags').includes('nc_show_211_link')) {
+    return <NcLink211Message />;
+  }
+  return null;
+};
 
 export const ResultsMessage = () => {
   const { formData } = useContext(Context);
@@ -62,6 +61,6 @@ export const ResultsMessage = () => {
   if (formData.immutableReferrer === 'ccig') {
     return <CcigResultsMessage />;
   }
-  
+
   return <NoProgramEligibleMessage />;
 };

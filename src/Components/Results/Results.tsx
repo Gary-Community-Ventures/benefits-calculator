@@ -98,7 +98,7 @@ const Results = ({ type }: ResultsProps) => {
   const { formData, getReferrer } = useContext(Context);
   const { whiteLabel, uuid, programId, energyCalculatorRebateType } = useParams();
   const noHelpButton = getReferrer('featureFlags').includes('no_results_more_help');
-  
+
   const [searchParams] = useSearchParams();
   const isAdminView = useMemo(() => searchParams.get('admin') === 'true', [searchParams.get('admin')]);
 
@@ -253,9 +253,9 @@ const Results = ({ type }: ResultsProps) => {
             <Grid item xs={12}>
               {type === 'need' ? <Needs /> : <Programs />}
             </Grid>
-          </Grid>          
+          </Grid>
           {noHelpButton && <HelpButton />}
-          </ResultsContextProvider>
+        </ResultsContextProvider>
       </main>
     );
   }
