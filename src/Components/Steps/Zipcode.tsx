@@ -17,17 +17,14 @@ import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueBut
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
-import QuestionDescription from '../QuestionComponents/QuestionDescription';
 
 export const Zipcode = () => {
-  const { formData, setFormData, getReferrer } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('zipcode');
   const { updateScreen } = useScreenApi();
 
-  const noChangeStateMessage = getReferrer('featureFlags').includes('no_zipcode_change_state');
   const countiesByZipcode = useConfig<{ [key: string]: { [key: string]: string } }>('counties_by_zipcode');
-  const state = useConfig<{ name: string }>('state');
 
   const checkCountyIsValid = ({ zipcode, county }: { zipcode: string; county: string }) => {
     const validCounties = countiesByZipcode[zipcode];
@@ -108,16 +105,8 @@ export const Zipcode = () => {
   };
 
   const getZipcodeHelperText = (hasZipcodeErrors: boolean) => {
-    if (!hasZipcodeErrors) {
-      return null;
-    }
-
-    return (
-      <>
-        <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid zip code for " />
-        {state.name}
-      </>
-    );
+    if (!hasZipcodeErrors) return '';
+    return <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid zip code" />;
   };
 
   const renderCountyHelperText = () => {
@@ -139,20 +128,6 @@ export const Zipcode = () => {
       <QuestionQuestion>
         <FormattedMessage id="questions.zipcode" defaultMessage="What is your zip code?" />
       </QuestionQuestion>
-      {!noChangeStateMessage && (
-        <QuestionDescription>
-          <FormattedMessage
-            id="questions.zipcode.description.1"
-            defaultMessage="If you are not filling out MyFriendBen in "
-          />
-          {state.name}
-          <FormattedMessage id="questions.zipcode.description.2" defaultMessage=", please click " />
-          <a href="/select-state" className="link-color">
-            <FormattedMessage id="questions.zipcode.description.link" defaultMessage="here" />
-          </a>
-          <FormattedMessage id="questions.zipcode.description.3" defaultMessage=" for other state options." />
-        </QuestionDescription>
-      )}
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name="zipcode"
