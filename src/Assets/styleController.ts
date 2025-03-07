@@ -29,6 +29,7 @@ export interface ITheme {
 interface IThemes {
   default: ITheme;
   twoOneOne: ITheme;
+  twoOneOneNC: ITheme;
 }
 
 const themes: IThemes = {
@@ -82,9 +83,34 @@ const themes: IThemes = {
       '--option-card-hover-font-color': '#1D1C1E',
     },
   },
+  twoOneOneNC: {
+    primaryColor: '#21296B',
+    secondaryColor: '#21296B',
+    midBlueColor: '#41528C',
+    secondaryBackgroundColor: '#F7F7F7',
+    creamColor: '#F9EFE6',
+    hoverColor: '#FFFFFF',
+    outlineHoverBackgroundColor: '#21296B',
+    outlineHoverColor: '#FFFFFF',
+    progressBarColor: '#5082F0',
+    cssVariables: {
+      '--primary-color': '#21296B',
+      '--secondary-color': '#21296B',
+      '--secondary-background-color': '#F7F7F7',
+      '--cream-color': '#F9EFE6',
+      '--main-max-width': '1310px',
+      'font-size': '18px',
+      '--main-header-color': '#B85A27',
+      '--midBlue-color': '#41528C',
+      '--hover-color': '#FFFFFF',
+      '--icon-color': '#ff443b',
+      '--secondary-icon-color': '#21296B',
+      '--option-card-hover-font-color': '#1D1C1E',
+    },
+  },
 };
 
-type ThemeReturnType = [ITheme, React.Dispatch<React.SetStateAction<'default' | 'twoOneOne'>>, any];
+type ThemeReturnType = [ITheme, React.Dispatch<React.SetStateAction<'default' | 'twoOneOne' | 'twoOneOneNC'>>, any];
 
 function generateMuiOverides(theme: ITheme) {
   const deepBlueColor = theme.primaryColor;
