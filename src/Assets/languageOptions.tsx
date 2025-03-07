@@ -3,7 +3,7 @@ import { englishToNepaliNumber } from 'nepali-number';
 import { ReactNode, useContext, useMemo } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
 
-export type Language = 'en-us' | 'es' | 'vi' | 'fr' | 'am' | 'so' | 'ru' | 'ne' | 'my' | 'zh' | 'ar';
+export type Language = 'en-us' | 'es' | 'vi' | 'fr' | 'am' | 'so' | 'ru' | 'ne' | 'my' | 'zh' | 'ar' | 'sw';
 export const LANGUAGE_OPTIONS: Record<Language, string> = {
   'en-us': 'English',
   es: 'Español',
@@ -16,6 +16,7 @@ export const LANGUAGE_OPTIONS: Record<Language, string> = {
   my: 'မြန်မာဘာသာစကား',
   zh: '中文',
   ar: 'عربي',
+  sw: 'Kiswahili',
 };
 
 export const rightToLeftLanguages = ['ar'];

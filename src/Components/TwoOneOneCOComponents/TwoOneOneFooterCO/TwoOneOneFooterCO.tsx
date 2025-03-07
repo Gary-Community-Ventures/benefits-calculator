@@ -4,22 +4,22 @@ import chatIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/chat
 import dialIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/dialIcon.png';
 import textIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/textIcon.png';
 import { FormattedMessage, useIntl } from 'react-intl';
-import './TwoOneOneFooter.css';
+import './TwoOneOneFooterCO.css';
 
-const TwoOneOneFooter = () => {
+const TwoOneOneFooterCO = () => {
   const intl = useIntl();
 
   const twoOneOneChatALProps = {
     id: 'twoOneOneFooter.chatAL',
-    defaultMsg: '211 chat link',
+    defaultMessage: '211 chat link',
   };
   const twoOneOneDialALProps = {
     id: 'twoOneOneFooter.dialAL',
-    defaultMsg: '211 dial link',
+    defaultMessage: '211 dial link',
   };
   const twoOneOneTOSALProps = {
     id: 'twoOneOneFooter.termsOfSvcAL',
-    defaultMsg: '211 terms of service',
+    defaultMessage: '211 terms of service',
   };
 
   const displayChatStack = () => {
@@ -217,4 +217,4 @@ const TwoOneOneFooter = () => {
   );
 };
 
-export default TwoOneOneFooter;
+export default TwoOneOneFooterCO;

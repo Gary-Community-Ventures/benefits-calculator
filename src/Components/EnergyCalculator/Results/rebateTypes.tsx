@@ -129,9 +129,11 @@ export const ENERGY_CALCULATOR_CATEGORY_TITLE_MAP: Record<EnergyCalculatorRebate
       defaultMessage="Heating, Ventilation & Cooling"
     />
   ),
-  waterHeater: <FormattedMessage id="energyCalculator.results.category.hvac.title" defaultMessage="Water Heater" />,
-  stove: <FormattedMessage id="energyCalculator.results.category.hvac.title" defaultMessage="Cooking Stove/Range" />,
-  dryer: <FormattedMessage id="energyCalculator.results.category.hvac.title" defaultMessage="Clothes Dryer" />,
+  waterHeater: (
+    <FormattedMessage id="energyCalculator.results.category.waterHeater.title" defaultMessage="Water Heater" />
+  ),
+  stove: <FormattedMessage id="energyCalculator.results.category.stove.title" defaultMessage="Cooking Stove/Range" />,
+  dryer: <FormattedMessage id="energyCalculator.results.category.dryer.title" defaultMessage="Clothes Dryer" />,
 };
 
 export type EnergyCalculatorRebateCategory = {

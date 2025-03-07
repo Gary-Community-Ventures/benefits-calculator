@@ -57,7 +57,7 @@ button {
   margin-bottom: 1.25rem;
   padding-bottom: 1.25rem;
   border-bottom: 1px solid rgb(176, 175, 182);
-  margin-left: 1rem;
+  gap: 1rem;
 }
 
 .feedback-button-and-text {

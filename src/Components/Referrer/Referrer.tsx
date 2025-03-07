@@ -1,29 +1,43 @@
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import Header from '../Header/Header';
-import TwoOneOneFooter from '../TwoOneOneComponents/TwoOneOneFooter/TwoOneOneFooter';
-import TwoOneOneHeader from '../TwoOneOneComponents/TwoOneOneHeader/TwoOneOneHeader';
+import TwoOneOneFooterCO from '../TwoOneOneCOComponents/TwoOneOneFooterCO/TwoOneOneFooterCO';
+import TwoOneOneHeaderCO from '../TwoOneOneCOComponents/TwoOneOneHeaderCO/TwoOneOneHeaderCO';
 import Footer from '../Footer/Footer';
 import BackToScreen from '../BackToScreen/BackToScreen';
 import { useResultsContext } from '../Results/Results';
 import NoProgramEligibleMessage from '../Results/NoProgramEligibleMessage';
 import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
+import EnergyCalculatorFooter from '../Footer/PoweredByFooter';
+import TwoOneOneHeaderNC from '../TwoOneOneNCComponents/TwoOneOneHeaderNC/TwoOneOneHeaderNC';
+import TwoOneOneFooterNC from '../TwoOneOneNCComponents/TwoOneOneFooterNC/TwoOneOneFooterNC';
 
 export const BrandedHeader = () => {
   const { formData } = useContext(Context);
 
   if (formData.immutableReferrer === '211co') {
-    return <TwoOneOneHeader />;
+    return <TwoOneOneHeaderCO />;
+  }
+  if (formData.immutableReferrer === '211nc') {
+    return <TwoOneOneHeaderNC />;
   }
   return <Header />;
 };
 
 export const BrandedFooter = () => {
-  const { formData } = useContext(Context);
+  const { formData, getReferrer } = useContext(Context);
 
   if (formData.immutableReferrer === '211co') {
-    return <TwoOneOneFooter />;
+    return <TwoOneOneFooterCO />;
   }
+  if (formData.immutableReferrer === '211nc') {
+    return <TwoOneOneFooterNC />;
+  }
+  
+  if (getReferrer('featureFlags').includes('powered_by_mfb_footer')) {
+    return <EnergyCalculatorFooter />;
+  }
+
   return <Footer />;
 };
 

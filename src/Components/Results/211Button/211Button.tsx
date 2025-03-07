@@ -7,7 +7,7 @@ const HelpButton = () => {
   const intl = useIntl();
   const moreHelpALProps = {
     id: 'helpButton.AL',
-    defaultMsg: 'more help button',
+    defaultMessage: 'more help button',
   };
 
   const moreHelpLink = useResultsLink(`results/more-help`);
