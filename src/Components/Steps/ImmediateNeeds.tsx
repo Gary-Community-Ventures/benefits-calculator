@@ -16,7 +16,7 @@ import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { Context } from '../Wrapper/Wrapper';
 
 function ImmediateNeeds() {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const formSchema = z.object({
     needs: z.record(z.string(), z.boolean()),

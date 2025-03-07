@@ -9,7 +9,7 @@ import {
   ApiUserWriteOnly,
 } from '../Types/ApiFormData.js';
 import { EnergyCalculatorFormData, EnergyCalculatorMember, FormData, HouseholdData } from '../Types/FormData';
-import { putScreen, postScreen, putUser } from '../apiCalls';
+import { putScreen, postScreen, putUser, getScreen } from '../apiCalls';
 import { Language } from './languageOptions';
 import { useContext } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
@@ -198,6 +198,14 @@ export default function useScreenApi() {
   const updateFormData = useUpdateFormData();
 
   return {
+    fetchScreen: async () => {
+      if (uuid === undefined) {
+        return;
+      }
+      const response = await getScreen(uuid);
+      updateFormData(response);
+      return response;
+    },
     updateScreen: async (formData: FormData) => {
       if (uuid === undefined) {
         return;

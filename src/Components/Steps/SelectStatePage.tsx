@@ -8,8 +8,6 @@ import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueBut
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLabel';
 
@@ -18,7 +16,6 @@ export const STATES: { [key: string]: string } =
   process.env.REACT_APP_STATE === 'CO' ? { co: 'Colorado' } : { nc: 'North Carolina' };
 
 const SelectStatePage = () => {
-  const { formData, setFormData } = useContext(Context);
   const { whiteLabel, uuid } = useParams();
 
   const queryString = useQueryString();

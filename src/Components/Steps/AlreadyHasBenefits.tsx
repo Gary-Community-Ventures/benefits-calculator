@@ -86,7 +86,7 @@ function CategoryBenefits({ alreadyHasBenefits, onChange }: CategoryBenefitsProp
 }
 
 function AlreadyHasBenefits() {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { formatMessage } = useIntl();
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('hasBenefits');

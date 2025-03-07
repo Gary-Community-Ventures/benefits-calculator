@@ -23,7 +23,7 @@ const isTrue = (value: boolean) => {
 };
 
 const Disclaimer = () => {
-  const { formData, setFormData, setScreenLoading, locale } = useContext(Context);
+  const { formData, setScreenLoading, locale } = useContext(Context);
   let { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
   // use defaults for the config on this page because the config won't be loaded

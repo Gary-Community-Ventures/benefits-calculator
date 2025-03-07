@@ -15,7 +15,7 @@ import { useParams } from 'react-router-dom';
 import { NUM_PAD_PROPS, handleNumbersOnly } from '../../../Assets/numInputHelpers';
 
 const HouseholdAssets = () => {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('householdAssets');
   const nextStep = useGoToNextStep('householdAssets');

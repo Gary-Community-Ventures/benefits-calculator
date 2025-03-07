@@ -19,7 +19,7 @@ import { GAS_PROVIDERS } from '../gasProviders';
 import { useEnergyFormData } from '../hooks';
 
 export default function GasProvider() {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const energyDataAvailable = useEnergyFormData(formData);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorGasProvider');

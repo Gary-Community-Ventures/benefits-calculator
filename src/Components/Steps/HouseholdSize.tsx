@@ -15,7 +15,7 @@ import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
 
 const HouseholdSize = () => {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('householdSize');
   const nextStep = useGoToNextStep('householdSize', '1');

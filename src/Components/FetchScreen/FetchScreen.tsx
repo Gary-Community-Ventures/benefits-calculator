@@ -1,17 +1,16 @@
 import { useEffect, useContext, useMemo } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getScreen } from '../../apiCalls';
 import { Context } from '../Wrapper/Wrapper';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData';
-import { useUpdateFormData } from './manageFormData';
+import useScreenApi from '../../Assets/updateScreen';
 
 const FetchScreen = () => {
   const { setScreenLoading, setWhiteLabel } = useContext(Context);
   const location = useLocation();
   const navigate = useNavigate();
   const { uuid: rawUuid, whiteLabel: rawWhiteLabel } = useParams();
-  const updateFormData = useUpdateFormData();
+  const { fetchScreen } = useScreenApi();
 
   const { uuid, whiteLabel } = useMemo(() => {
     // https://stackoverflow.com/questions/20041051/how-to-judge-a-string-is-uuid-type
@@ -30,10 +29,12 @@ const FetchScreen = () => {
     return { uuid: rawUuid, whiteLabel: rawWhiteLabel };
   }, [rawUuid, rawWhiteLabel]);
 
-  const fetchScreen = async (uuid: string) => {
+  const initializeScreen = async (uuid: string) => {
     try {
-      const response = await getScreen(uuid);
-      handleScreenResponse(response);
+      const response = await fetchScreen(); // TODO will it work to pull the uuid from params at this point?
+      if(response) {
+        handleScreenResponse(response);
+      }
     } catch (err) {
       console.error(err);
       navigate('/step-1');
@@ -45,8 +46,6 @@ const FetchScreen = () => {
   const handleScreenResponse = (response: ApiFormDataReadOnly & ApiFormData) => {
 
     setWhiteLabel(response.white_label);
-
-    updateFormData(response);
 
     if (whiteLabel === undefined) {
       navigate(`/${response.white_label}${location.pathname}`);
@@ -63,7 +62,7 @@ const FetchScreen = () => {
       }
       return;
     }
-    fetchScreen(uuid);
+    initializeScreen(uuid);
   }, [uuid, whiteLabel]);
 
   return <LoadingPage />;

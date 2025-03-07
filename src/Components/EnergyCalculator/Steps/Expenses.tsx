@@ -46,7 +46,7 @@ const EXPENSE_OPTIONS: MultiSelectTileOption<EnergyCalculatorExpenseType>[] = [
 ];
 
 export default function EnergyCalculatorExpenses() {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorExpenses');
   const nextStep = useGoToNextStep('energyCalculatorExpenses');

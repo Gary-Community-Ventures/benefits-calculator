@@ -13,6 +13,7 @@ import { findProgramById, findValidationForProgram, useResultsContext, useResult
 import { deleteValidation, postValidation } from '../../../apiCalls';
 import { Language } from '../../../Assets/languageOptions';
 import { allNavigatorLanguages } from './NavigatorLanguages';
+import useScreenApi from '../../../Assets/updateScreen';
 
 type ProgramPageProps = {
   program: Program;
@@ -24,9 +25,10 @@ type IconRendererProps = {
 
 const ProgramPage = ({ program }: ProgramPageProps) => {
   const { uuid } = useParams();
-  const { formData, setFormData, staffToken } = useContext(Context);
+  const { formData, staffToken } = useContext(Context);
   const { isAdminView, validations, setValidations, programCategories, filtersChecked } = useResultsContext();
   const intl = useIntl();
+  const {fetchScreen} = useScreenApi();
 
   const IconRenderer: React.FC<IconRendererProps> = ({ headingType }) => {
     const IconComponent = headingOptionsMappings[headingType];
@@ -58,7 +60,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
     try {
       const response = await postValidation(body, staffToken);
       setValidations([...validations, response]);
-      setFormData({ ...formData, frozen: true }); // TODO: this breaks the pattern of having formdata pull from api, should we refetch?
+      fetchScreen();
     } catch (error) {
       console.error(error);
     }
@@ -77,7 +79,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       const newValidations = validations.filter((validation) => validation.id !== currentValidation?.id);
       setValidations(newValidations);
       if (newValidations.length === 0) {
-        setFormData({ ...formData, frozen: false }); // TODO: this breaks the pattern of having formdata pull from api, should we refetch?
+        fetchScreen();
       }
     } catch (error) {
       console.error(error);

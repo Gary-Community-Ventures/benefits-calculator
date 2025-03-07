@@ -58,7 +58,7 @@ import './PersonIncomeBlock.css';
 import { useShouldRedirectToConfirmation } from '../../QuestionComponents/questionHooks';
 
 const HouseholdMemberForm = () => {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid, page, whiteLabel } = useParams();
   const { updateScreen } = useScreenApi();
   const navigate = useNavigate();

@@ -36,7 +36,7 @@ import useScreenApi from '../../../Assets/updateScreen';
 import './Expenses.css';
 
 const Expenses = () => {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const intl = useIntl();
   const translatedAriaLabel = intl.formatMessage({

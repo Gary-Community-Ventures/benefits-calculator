@@ -199,6 +199,7 @@ function SignUp() {
     }
     setHasServerError(false);
 
+    // TODO: clean up how we are setting this form data, it seems we add it to the form data here just to pull it in the updateScreen.ts
     const newFormData: FormData = {
       ...formData,
 
@@ -231,7 +232,7 @@ function SignUp() {
       nextStep();
     } catch {
       setHasServerError(true);
-      setFormData(newFormData);
+      setFormData(newFormData); // TODO: why do we set teh form data even if this threw an error?
     }
   };
 

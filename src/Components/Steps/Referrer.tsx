@@ -21,7 +21,7 @@ type ReferralOptions = {
 };
 
 export default function ReferralSourceStep() {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const { updateScreen } = useScreenApi();
 

@@ -58,7 +58,7 @@ export const applianceStatusOptions = {
 };
 
 const Utilities = () => {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const { updateScreen } = useScreenApi();
   const energyDataAvailable = useEnergyFormData(formData);
