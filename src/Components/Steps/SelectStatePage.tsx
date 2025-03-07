@@ -12,8 +12,8 @@ import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLabel';
-import QuestionDescription from '../QuestionComponents/QuestionDescription';
 
+// This will get removed once NC is moved into the main server
 export const STATES: { [key: string]: string } =
   process.env.REACT_APP_STATE === 'CO' ? { co: 'Colorado' } : { nc: 'North Carolina' };
 
@@ -93,12 +93,6 @@ const SelectStatePage = () => {
       <QuestionQuestion>
         <FormattedMessage id="stateStep.question" defaultMessage="What is your state?" />
       </QuestionQuestion>
-      <QuestionDescription>
-        <FormattedMessage id="stateStep.missingState.1" defaultMessage="Don't see your state? Click " />
-        <a href="https://www.myfriendben.org/" className="link-color">
-          <FormattedMessage id="stateStep.missingState.link" defaultMessage="here" />
-        </a>
-      </QuestionDescription>
       <form onSubmit={handleSubmit(submitHandler)}>
         <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.state !== undefined}>
           <InputLabel>
