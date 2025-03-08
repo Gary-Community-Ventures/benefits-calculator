@@ -148,7 +148,7 @@ export const Filter = () => {
     setCitizenshipPopoverAnchor(null);
     setCitizenshipFilterIsOpen(false);
     setCitButtonClass('citizenship-button');
-    setFilterHeight(0)
+    setFilterHeight(0);
   };
   const citizenshipFiltersModalALProps = {
     id: 'filter.citFilterModalAL',
@@ -235,7 +235,7 @@ export const Filter = () => {
     });
 
     setCitButtonClass('citizenship-button');
-    setFilterHeight(0)
+    setFilterHeight(0);
   };
 
   const displayResetFiltersButton = () => {
