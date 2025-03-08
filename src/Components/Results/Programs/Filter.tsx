@@ -27,14 +27,14 @@ export const Filter = () => {
   const intl = useIntl();
   const [choosenFilters, setChoosenFilters] = useState(filtersChecked);
   const filterRef = useRef<HTMLDivElement>(null);
-  let filterHeight;
+  const [filterHeight, setFilterHeight] = useState<number | undefined>(0);
 
   useEffect(() => {
     if (citizenshipFilterIsOpen && citizenshipPopoverAnchor) {
       setCitButtonClass(citButtonClass + ' flat-white-border-bottom');
       setTimeout(() => {
         const buttonRect = citizenshipPopoverAnchor?.getBoundingClientRect();
-        const filterHeight = filterRef.current?.offsetHeight;
+        setFilterHeight(filterRef.current?.offsetHeight);
 
         if (filterHeight && buttonRect) {
           const spaceBelowButton = window.innerHeight - buttonRect.bottom;
@@ -144,11 +144,11 @@ export const Filter = () => {
   };
 
   const handleFilterClose = () => {
-    const updatedCitButtonClass = citButtonClass.replace('flat-white-border-bottom', '');
     setFiltersChecked(choosenFilters);
     setCitizenshipPopoverAnchor(null);
     setCitizenshipFilterIsOpen(false);
-    setCitButtonClass(updatedCitButtonClass);
+    setCitButtonClass('citizenship-button');
+    setFilterHeight(0)
   };
   const citizenshipFiltersModalALProps = {
     id: 'filter.citFilterModalAL',
@@ -235,6 +235,7 @@ export const Filter = () => {
     });
 
     setCitButtonClass('citizenship-button');
+    setFilterHeight(0)
   };
 
   const displayResetFiltersButton = () => {
