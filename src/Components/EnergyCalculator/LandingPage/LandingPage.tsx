@@ -31,8 +31,12 @@ const LandingPage = () => {
             defaultMessage="We can help! All it takes is 10 minutes of your time. See all the programs this tool is screening for "
           />
           <a href="/co_energy_calculator/current-benefits" className="link-color">
-            <FormattedMessage id="energyCalculator.linkText" defaultMessage="here." />
+            <FormattedMessage id="energyCalculator.linkText" defaultMessage="here" />
           </a>
+          <FormattedMessage
+            id="energyCalculator.bodyText2.2"
+            defaultMessage=". Whether you're a homeowner or a renter, you may find programs like LEAP or Utility Bill Help to help pay your winter heating bills. You may also find programs that help you save money on your energy bills. For example, the Weatherization Assistance Program can help with LED light bulbs or furnace repair or replacement. Homeowners may also find savings on the cost of electric appliances."
+          />
         </p>
       </article>
       <QuestionQuestion>
