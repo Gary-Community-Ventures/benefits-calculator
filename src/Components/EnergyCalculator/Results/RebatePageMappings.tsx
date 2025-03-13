@@ -2,8 +2,8 @@ import { InputAdornment, TextField } from '@mui/material';
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
-import { handleNumbersOnly, INTEGERS, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
 import { FormattedMessageType } from '../../../Types/Questions';
+import { handleNumbersOnly, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
 import { formatToUSD } from '../../Results/FormattedValue';
 import {
   EnergyCalculatorAmountUnit,

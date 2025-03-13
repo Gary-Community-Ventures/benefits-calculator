@@ -2,6 +2,7 @@ import { IconButton } from '@mui/material';
 import { PropsWithChildren, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { ReactComponent as HelpBubble } from '../../Assets/icons/helpBubble.svg';
+import './HelpButton.css';
 
 type HelpButtonProps = PropsWithChildren<{ className?: string }>;
 const HelpButton = ({ className, children }: HelpButtonProps) => {
@@ -15,7 +16,7 @@ const HelpButton = ({ className, children }: HelpButtonProps) => {
   return (
     <>
       <IconButton onClick={handleClick} aria-label={translatedAriaLabel}>
-        <HelpBubble style={{ height: '20px', width: '20px' }} />
+        <HelpBubble style={{ height: '20px', width: '20px' }} className="help-button-icon-color" />
       </IconButton>
       {showHelpText && <p className={`help-text ${className}`}>{children}</p>}
     </>

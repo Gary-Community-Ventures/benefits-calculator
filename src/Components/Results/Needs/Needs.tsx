@@ -1,5 +1,6 @@
 import { useResultsContext } from '../Results';
 import NeedCard from './NeedCard';
+import { ResultsMessageForNeeds } from '../../Referrer/Referrer';
 
 const Needs = () => {
   const { needs } = useResultsContext();
@@ -15,6 +16,7 @@ const Needs = () => {
 
   return (
     <>
+      <ResultsMessageForNeeds />
       {needsSortedByCategory.map((need, index) => {
         return <NeedCard need={need} key={index} />;
       })}

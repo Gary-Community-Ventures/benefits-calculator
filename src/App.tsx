@@ -26,6 +26,8 @@ import EcHouseholdMemberForm from './Components/EnergyCalculator/Steps/Household
 import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm';
 import EnergyCalculatorLandingPage from './Components/EnergyCalculator/LandingPage/LandingPage';
 import EnergyCalculatorNoExpenses from './Components/EnergyCalculator/NoExpensesPage/NoExpenses';
+import WhiteLabelRouter from './Components/RouterUtil/WhiteLabelRouter';
+import ValidateUuid from './Components/RouterUtil/ValidateUuid';
 import './App.css';
 
 const App = () => {
@@ -48,7 +50,7 @@ const App = () => {
   const ecHouseholdMemberStepNumber = useStepNumber('energyCalculatorHouseholdData', false);
 
   useEffect(() => {
-    changeTheme(themeName as 'default' | 'twoOneOne');
+    changeTheme(themeName as 'default' | 'twoOneOne' | 'twoOneOneNC');
   }, [themeName]);
 
   useEffect(() => {
@@ -165,30 +167,106 @@ const App = () => {
                 <Route path=":whiteLabel/step-2" element={<Disclaimer />} />
                 <Route path=":whiteLabel/:uuid">
                   <Route path="" element={<Navigate to="/step-1" replace />} />
-                  <Route path="step-1" element={<SelectLanguagePage />} />
-                  <Route path="step-2" element={<Disclaimer />} />
-                  <Route path="no-expenses" element={<EnergyCalculatorNoExpenses />} />
+                  <Route
+                    path="step-1"
+                    element={
+                      <ValidateUuid>
+                        <SelectLanguagePage />
+                      </ValidateUuid>
+                    }
+                  />
+                  <Route
+                    path="step-2"
+                    element={
+                      <ValidateUuid>
+                        <Disclaimer />
+                      </ValidateUuid>
+                    }
+                  />
+                  <Route
+                    path="no-expenses"
+                    element={
+                      <ValidateUuid>
+                        <EnergyCalculatorNoExpenses />
+                      </ValidateUuid>
+                    }
+                  />
                   <Route
                     path={`step-${householdMemberStepNumber}/:page`}
-                    element={<HouseholdMemberForm key={window.location.href} />}
+                    element={
+                      <ValidateUuid>
+                        <HouseholdMemberForm key={window.location.href} />
+                      </ValidateUuid>
+                    }
                   />
                   <Route
                     path={`step-${ecHouseholdMemberStepNumber}/:page`}
-                    element={<EcHouseholdMemberForm key={window.location.href} />}
+                    element={
+                      <ValidateUuid>
+                        <EcHouseholdMemberForm key={window.location.href} />
+                      </ValidateUuid>
+                    }
                   />
-                  <Route path="step-:id" element={<QuestionComponentContainer key={window.location.href} />} />
-                  <Route path="confirm-information" element={<Confirmation />} />
-                  <Route path="results/benefits" element={<Results type="program" />} />
-                  <Route path="results/near-term-needs" element={<Results type="need" />} />
+                  <Route
+                    path="step-:id"
+                    element={
+                      <ValidateUuid>
+                        <QuestionComponentContainer key={window.location.href} />
+                      </ValidateUuid>
+                    }
+                  />
+                  <Route
+                    path="confirm-information"
+                    element={
+                      <ValidateUuid>
+                        <Confirmation />
+                      </ValidateUuid>
+                    }
+                  />
+                  <Route
+                    path="results/benefits"
+                    element={
+                      <ValidateUuid>
+                        <Results type="program" />
+                      </ValidateUuid>
+                    }
+                  />
+                  <Route
+                    path="results/near-term-needs"
+                    element={
+                      <ValidateUuid>
+                        <Results type="need" />
+                      </ValidateUuid>
+                    }
+                  />
                   <Route
                     path="results/energy-rebates/:energyCalculatorRebateType"
-                    element={<Results type="energy-calculator-rebates" />}
+                    element={
+                      <ValidateUuid>
+                        <Results type="energy-calculator-rebates" />
+                      </ValidateUuid>
+                    }
                   />
-                  <Route path="results/benefits/:programId" element={<Results type="program" />} />
-                  <Route path="results/more-help" element={<Results type="help" />} />
+                  <Route
+                    path="results/benefits/:programId"
+                    element={
+                      <ValidateUuid>
+                        <Results type="program" />
+                      </ValidateUuid>
+                    }
+                  />
+                  <Route
+                    path="results/more-help"
+                    element={
+                      <ValidateUuid>
+                        <Results type="help" />
+                      </ValidateUuid>
+                    }
+                  />
                   <Route path="results" element={<Navigate to="benefits" replace />} />
                   <Route path="*" element={<Navigate to="/step-1" replace />} />
                 </Route>
+                <Route path=":whiteLabel" element={<WhiteLabelRouter />} />
                 <Route path="*" element={<Navigate to={`/step-1${urlSearchParams}`} replace />} />
               </>,
             )}
