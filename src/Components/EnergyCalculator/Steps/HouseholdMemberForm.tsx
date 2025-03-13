@@ -521,6 +521,14 @@ const ECHouseholdMemberForm = () => {
               />
             </HelpButton>
           </QuestionQuestion>
+          {pageNumber === 1 && (
+            <QuestionDescription>
+              <FormattedMessage
+                id="householdDataBlock.createIncomeRadioQuestion-questionDescription.you"
+                defaultMessage="Enter income for yourself. You can enter income for other household members later."
+              />
+            </QuestionDescription>
+          )}
           <Controller
             name="hasIncome"
             control={control}

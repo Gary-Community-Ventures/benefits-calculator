@@ -13,7 +13,6 @@ import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionCo
 import HelpButton from '../HelpBubbleIcon/HelpButton';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
-import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
 import { OverrideableTranslation } from '../../Assets/languageOptions';
 
 const HouseholdSize = () => {
@@ -23,7 +22,6 @@ const HouseholdSize = () => {
   const nextStep = useGoToNextStep('householdSize', '1');
   const intl = useIntl();
   const { updateScreen } = useScreenApi();
-  const isEnergy_calculator = useIsEnergyCalculator();
 
   const formSchema = z.object({
     householdSize: z.coerce
