@@ -363,7 +363,10 @@ export function EnergyCalculatorRebateCalculator({ rebate }: RebateComponentProp
   return (
     <div>
       <h3>
-        <FormattedMessage id="energyCalculator.rebatePage.calculator.title" defaultMessage="Estimated Savings:" />
+        <FormattedMessage
+          id="energyCalculator.rebatePage.calculator.title"
+          defaultMessage="Estimated Savings Calculator:"
+        />
       </h3>
       <div>
         <TextField
