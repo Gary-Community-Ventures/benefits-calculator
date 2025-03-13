@@ -11,6 +11,7 @@ import {
   EnergyCalculatorItemType,
   EnergyCalculatorRebate,
 } from './rebateTypes';
+import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 
 type ItemGroup = 'air_source_heat_pump' | 'clothes_dryer' | 'generic_heat_pump' | 'water_heater';
 
@@ -368,6 +369,12 @@ export function EnergyCalculatorRebateCalculator({ rebate }: RebateComponentProp
           defaultMessage="Estimated Savings Calculator:"
         />
       </h3>
+      <QuestionDescription>
+        <FormattedMessage
+          id="energyCalculator.rebatePage.calculator.description"
+          defaultMessage="Please enter the dollar value of the appliance you are looking to purchase to see what your estimated rebates savings could be."
+        />
+      </QuestionDescription>
       <div>
         <TextField
           label={
