@@ -120,7 +120,7 @@ export default function EnergyCalculatorExpenses() {
       <QuestionQuestion>
         <FormattedMessage
           id="energyCalculator.expenses.question"
-          defaultMessage="Are any of the following utility bills in yours or another household member's name?"
+          defaultMessage="Are any of the following utility bills in your name or another household member's name"
         />
       </QuestionQuestion>
       <QuestionDescription>
