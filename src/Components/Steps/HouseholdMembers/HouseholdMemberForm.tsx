@@ -509,7 +509,7 @@ const HouseholdMemberForm = () => {
         <QuestionDescription>
           <FormattedMessage
             id="householdDataBlock.createConditionsQuestion-pick"
-            defaultMessage="Choose all that apply."
+            defaultMessage="Choose all that apply. If none apply, skip this question."
           />
         </QuestionDescription>
         <RHFOptionCardGroup
