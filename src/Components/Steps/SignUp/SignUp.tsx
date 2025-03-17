@@ -108,8 +108,11 @@ function SignUp() {
             defaultMessage: 'Please enter a 10 digit phone number',
           }),
         }),
+      consent: z.boolean().refine((value) => value, {
+        message: formatMessage({ id: 'signUp.checkbox.error', defaultMessage: 'Please check the box to continue.' }),
+      }),
       tcpa: z.boolean().refine((value) => value, {
-        message: formatMessage({ id: 'signUp.tcpa.error', defaultMessage: 'Please check the box to continue.' }),
+        message: formatMessage({ id: 'signUp.checkbox.error', defaultMessage: 'Please check the box to continue.' }),
       }),
     })
     .superRefine(({ email, cell }, ctx) => {
@@ -182,7 +185,7 @@ function SignUp() {
 
   useEffect(() => {
     if (someContactType(contactType) && !formData.signUpInfo.hasUser) {
-      setValue('contactInfo', { firstName: '', lastName: '', email: '', cell: '', tcpa: false });
+      setValue('contactInfo', { firstName: '', lastName: '', email: '', cell: '', tcpa: false, consent: false });
       if (isSubmitted) {
         trigger('contactInfo');
         setHasServerError(false);
@@ -358,12 +361,12 @@ function SignUp() {
             <p className="sign-up-disclaimer-text">
               <FormattedMessage
                 id="signUp.displayDisclosureSection-consentText"
-                defaultMessage="By filling out this form, you agree to future contact from Gary Philanthropy or our affiliates regarding your use of MyFriendBen or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication. Additionally, a copy of your MyFriendBen results will automatically be sent to the email/phone number you provided."
+                defaultMessage="By filling out this form, you agree to future contact from MyFriendBen or our affiliates regarding your use of MyFriendBen or to offer additional programs that may be of interest to you and your family. Communications will be sent via text message only if you consented to text messaging below. You may opt out of receiving these communications at any time through the opt-out link in the communication. Additionally, a copy of your MyFriendBen results will automatically be sent to the email/phone number you provided."
               />
             </p>
-            <div>
+            <div className="sign-up-checkbox-container">
               <Controller
-                name="contactInfo.tcpa"
+                name="contactInfo.consent"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => (
@@ -372,8 +375,8 @@ function SignUp() {
                       control={
                         <Checkbox
                           {...field}
-                          checked={getValues('contactInfo.tcpa')}
-                          sx={errors.contactInfo?.tcpa !== undefined ? { color: '#c6252b' } : {}}
+                          checked={getValues('contactInfo.consent')}
+                          sx={errors.contactInfo?.consent !== undefined ? { color: '#c6252b' } : {}}
                         />
                       }
                       label={
@@ -409,6 +412,41 @@ function SignUp() {
                             }}
                           />
                           <FormattedMessage id="signUp.consentToContact5" defaultMessage="." />
+                        </div>
+                      }
+                    />
+                    {errors.contactInfo?.consent && (
+                      <ErrorMessageWrapper fontSize="1rem">{errors.contactInfo.consent.message}</ErrorMessageWrapper>
+                    )}
+                  </>
+                )}
+              />
+            </div>
+            <div className="sign-up-checkbox-container">
+              <Controller
+                name="contactInfo.tcpa"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          {...field}
+                          checked={getValues('contactInfo.tcpa')}
+                          sx={
+                            errors.contactInfo?.tcpa !== undefined
+                              ? { color: '#c6252b', alignSelf: 'flex-start' }
+                              : { alignSelf: 'flex-start' }
+                          }
+                        />
+                      }
+                      label={
+                        <div className="sign-up-text">
+                          <FormattedMessage
+                            id="signUp.displayDisclosureSection.tcpa"
+                            defaultMessage="I consent to MyFriendBen and its affiliates contacting me via text message to offer additional programs or opportunities that may be of interest to me and my family, for marketing purposes, updates and alerts, and to solicit feedback. I understand that the frequency of these text messages may vary, and that standard message and data costs may apply. I understand that I may opt-out of receiving these text messages at any time by replying “STOP” to unsubscribe."
+                          />
                         </div>
                       }
                     />
