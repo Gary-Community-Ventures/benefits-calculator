@@ -1,15 +1,12 @@
 import { FormattedMessage } from 'react-intl';
 
-export default function Link211Message1() {
+export default function NcLink211Message() {
   return (
     <div>
       <p>
-        <FormattedMessage
-          id="link211.message"
-          defaultMessage="These resources are provided by NC 211. If you can't find what you need below, "
-        />
+        <FormattedMessage id="link211.message" defaultMessage="For more local resources please visit " />
         <a href="https://nc211.org/" target="_blank" rel="noopener noreferrer">
-          <FormattedMessage id="link211.clickHere" defaultMessage="please visit their website." />
+          <FormattedMessage id="link211.clickHere" defaultMessage="NC 211's website." />
         </a>
       </p>
     </div>
