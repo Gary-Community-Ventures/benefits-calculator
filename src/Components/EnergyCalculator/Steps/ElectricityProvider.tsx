@@ -13,7 +13,7 @@ import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinue
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
-import { createMenuItems } from '../../Steps/SelectHelperFunctions/SelectHelperFunctions';
+import { createMenuItems } from '../../Steps/Utils/SelectHelperFunctions';
 import { Context } from '../../Wrapper/Wrapper';
 import ELECTRICITY_PROVIDERS from '../electricityProviders';
 import { useEnergyFormData } from '../hooks';

@@ -35,7 +35,7 @@ import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import { FormattedMessageType } from '../../../Types/Questions';
 import HelpButton from '../../HelpBubbleIcon/HelpButton';
 import AddIcon from '@mui/icons-material/Add';
-import { createMenuItems } from '../SelectHelperFunctions/SelectHelperFunctions';
+import { createMenuItems } from '../Utils/SelectHelperFunctions';
 import CloseButton from '../../CloseButton/CloseButton';
 import {
   renderMissingBirthMonthHelperText,
