@@ -19,13 +19,13 @@ import IconButton from '@mui/material/IconButton';
 import { Context } from '../../Wrapper/Wrapper';
 import dataLayerPush from '../../../Assets/analytics';
 import { Stack } from '@mui/material';
-import './TwoOneOneShare.css';
+import './TwoOneOneShareCO.css';
 
 type TwoOneOneShareProps = {
   close: () => void;
 };
 
-const TwoOneOneShare = ({ close }: TwoOneOneShareProps) => {
+const TwoOneOneShareCO = ({ close }: TwoOneOneShareProps) => {
   const [copied, setCopied] = useState(false);
   const { getReferrer } = useContext(Context);
   const intl = useIntl();
@@ -135,4 +135,4 @@ const TwoOneOneShare = ({ close }: TwoOneOneShareProps) => {
   );
 };
 
-export default TwoOneOneShare;
+export default TwoOneOneShareCO;

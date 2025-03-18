@@ -4,6 +4,7 @@ import { Context } from '../Wrapper/Wrapper';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData';
 import useScreenApi from '../../Assets/updateScreen';
+import { isValidUuid } from '../RouterUtil/ValidateUuid';
 
 const FetchScreen = () => {
   const { setScreenLoading, setWhiteLabel } = useContext(Context);
@@ -13,25 +14,22 @@ const FetchScreen = () => {
   const { fetchScreen } = useScreenApi();
 
   const { uuid, whiteLabel } = useMemo(() => {
-    // https://stackoverflow.com/questions/20041051/how-to-judge-a-string-is-uuid-type
-    const uuidRegx = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
-
     if (rawUuid === undefined) {
       return { uuid: undefined, whiteLabel: rawWhiteLabel };
     }
 
-    if (rawWhiteLabel !== undefined && rawWhiteLabel.match(uuidRegx)) {
+    if (rawWhiteLabel !== undefined && isValidUuid(rawWhiteLabel ?? '')) {
       return { uuid: rawWhiteLabel, whiteLabel: undefined };
-    } else if (!rawUuid.match(uuidRegx)) {
+    } else if (!isValidUuid(rawUuid)) {
       return { uuid: undefined, whiteLabel: rawWhiteLabel };
     }
 
     return { uuid: rawUuid, whiteLabel: rawWhiteLabel };
   }, [rawUuid, rawWhiteLabel]);
 
-  const initializeScreen = async (uuid: string) => {
+  const initializeScreen = async () => {
     try {
-      const response = await fetchScreen(); // TODO will it work to pull the uuid from params at this point?
+      const response = await fetchScreen();
       if(response) {
         handleScreenResponse(response);
       }
@@ -58,11 +56,12 @@ const FetchScreen = () => {
     if (uuid === undefined) {
       if (whiteLabel !== undefined) {
         setWhiteLabel(whiteLabel);
-        setScreenLoading(false);
       }
+      setScreenLoading(false);
       return;
+    } else {
+      initializeScreen();
     }
-    initializeScreen(uuid);
   }, [uuid, whiteLabel]);
 
   return <LoadingPage />;

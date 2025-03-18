@@ -88,4 +88,8 @@
     max-height: 24rem;
     overflow-y: scroll;
   }
+
+  .filter-ref-container {
+    max-height: 18rem;
+  }
 }

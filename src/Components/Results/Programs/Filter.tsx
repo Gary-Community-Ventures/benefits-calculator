@@ -1,4 +1,4 @@
-import { ReactNode, useContext, useEffect, useState } from 'react';
+import { ReactNode, useContext, useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useResultsContext } from '../Results';
 import { Button, Popover, Checkbox } from '@mui/material';
@@ -25,12 +25,32 @@ export const Filter = () => {
   const { formData } = useContext(Context);
   const [citButtonClass, setCitButtonClass] = useState('citizenship-button');
   const intl = useIntl();
+  const [choosenFilters, setChoosenFilters] = useState(filtersChecked);
+  const filterRef = useRef<HTMLDivElement>(null);
+  const [filterHeight, setFilterHeight] = useState<number | undefined>(0);
 
   useEffect(() => {
-    if (citizenshipFilterIsOpen) {
+    if (citizenshipFilterIsOpen && citizenshipPopoverAnchor) {
       setCitButtonClass(citButtonClass + ' flat-white-border-bottom');
+      setTimeout(() => {
+        const buttonRect = citizenshipPopoverAnchor?.getBoundingClientRect();
+        setFilterHeight(filterRef.current?.offsetHeight);
+
+        if (filterHeight && buttonRect) {
+          const spaceBelowButton = window.innerHeight - buttonRect.bottom;
+          if (spaceBelowButton < filterHeight) {
+            const scrollDistance = filterHeight - spaceBelowButton + 55;
+            if (scrollDistance > 10) {
+              window.scrollTo({
+                top: scrollDistance,
+                behavior: 'smooth',
+              });
+            }
+          }
+        }
+      }, 300);
     }
-  }, [citizenshipFilterIsOpen]);
+  }, [citizenshipFilterIsOpen, citizenshipPopoverAnchor, filterHeight]);
 
   const handleCitizenshipBtnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setCitizenshipFilterIsOpen(!citizenshipFilterIsOpen);
@@ -38,7 +58,7 @@ export const Filter = () => {
   };
 
   const handleFilterSelect = (selectedFilterStr: CitizenLabelOptions) => {
-    const newFiltersChecked = { ...filtersChecked };
+    const newFiltersChecked = { ...choosenFilters };
 
     const newSelected = !newFiltersChecked[selectedFilterStr];
 
@@ -86,13 +106,13 @@ export const Filter = () => {
       newFiltersChecked[filterName as CalculatedCitizenLabel] = formData.householdData.some(calculator.func);
     });
 
-    setFiltersChecked(newFiltersChecked);
+    setChoosenFilters(newFiltersChecked);
   };
 
   const renderCitizenshipFilters = () => {
     const filters: ReactNode[] = [];
     filterNestedMap.forEach((subFilters, mainFilter) => {
-      const mainFilterIsChecked = filtersChecked[mainFilter];
+      const mainFilterIsChecked = choosenFilters[mainFilter];
 
       filters.push(
         <FormControlLabel
@@ -112,7 +132,7 @@ export const Filter = () => {
           <FormControlLabel
             key={subFilter}
             label={citizenshipFilterFormControlLabels[subFilter]}
-            control={<Checkbox checked={filtersChecked[subFilter]} onChange={() => handleFilterSelect(subFilter)} />}
+            control={<Checkbox checked={choosenFilters[subFilter]} onChange={() => handleFilterSelect(subFilter)} />}
             className="subcategory-indentation vertical-align"
             sx={{ padding: '.5rem 0' }}
           />,
@@ -124,23 +144,23 @@ export const Filter = () => {
   };
 
   const handleFilterClose = () => {
-    const updatedCitButtonClass = citButtonClass.replace('flat-white-border-bottom', '');
-
+    setFiltersChecked(choosenFilters);
     setCitizenshipPopoverAnchor(null);
     setCitizenshipFilterIsOpen(false);
-    setCitButtonClass(updatedCitButtonClass);
+    setCitButtonClass('citizenship-button');
+    setFilterHeight(0);
   };
   const citizenshipFiltersModalALProps = {
     id: 'filter.citFilterModalAL',
-    defaultMsg: 'citizenship filters modal',
+    defaultMessage: 'citizenship filters modal',
   };
   const closeCitFiltersALProps = {
     id: 'filter.closeCitFilterAL',
-    defaultMsg: 'close citizenship filters modal',
+    defaultMessage: 'close citizenship filters modal',
   };
   const citFiltersALProps = {
     id: 'filter.citFiltersAL',
-    defaultMsg: 'citizenship filters',
+    defaultMessage: 'citizenship filters',
   };
 
   const displayCitizenshipPopover = () => {
@@ -168,7 +188,9 @@ export const Filter = () => {
               <CloseIcon fontSize="small" />
             </IconButton>
           </div>
-          {renderCitizenshipFilters()}
+          <div className="filter-ref-container" ref={filterRef}>
+            {renderCitizenshipFilters()}
+          </div>
         </Popover>
       </section>
     );
@@ -213,6 +235,7 @@ export const Filter = () => {
     });
 
     setCitButtonClass('citizenship-button');
+    setFilterHeight(0);
   };
 
   const displayResetFiltersButton = () => {

@@ -59,7 +59,7 @@ const CategoryHeading = ({ category, showAmount = true }: CategoryHeadingProps) 
             <ResultsTranslate translation={category.name} />
           </h2>
         </div>
-        {showAmount && (
+        {showAmount && monthlyCategoryAmt !== 0 && (
           <div className="box-right">
             <h2 className="category-heading-text-style normal-weight">
               {translateNumber(formatToUSD(monthlyCategoryAmt))}
