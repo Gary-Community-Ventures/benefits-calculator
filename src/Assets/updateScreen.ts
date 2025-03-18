@@ -182,7 +182,7 @@ const getUserBody = (formData: FormData, languageCode: Language): ApiUser & ApiU
     email: email ? email : null,
     first_name: firstName,
     last_name: lastName,
-    tcpa_consent: commConsent,
+    explicit_tcpa_consent: commConsent,
     language_code: languageCode,
     send_offers: sendOffers,
     send_updates: sendUpdates,
