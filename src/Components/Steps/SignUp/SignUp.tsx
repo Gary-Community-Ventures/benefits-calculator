@@ -1,10 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Checkbox, FormControlLabel, TextField } from '@mui/material';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { z } from 'zod';
-import { Language } from '../../../Assets/languageOptions';
 import { FormData } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
 import { useConfig } from '../../Config/configHook';
@@ -20,7 +19,7 @@ import useScreenApi from '../../../Assets/updateScreen';
 import './SignUp.css';
 
 function SignUp() {
-  const { formData, setFormData, locale } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const [hasServerError, setHasServerError] = useState(false);
   const { updateUser } = useScreenApi();
@@ -28,14 +27,6 @@ function SignUp() {
   const backNavigationFunction = useDefaultBackNavigationFunction('signUpInfo');
   const nextStep = useGoToNextStep('signUpInfo');
   const signUpOptions = useConfig<{ [key: string]: FormattedMessageType }>('sign_up_options');
-  const privacyLinks = useConfig<Record<Language, string | undefined>>('privacy_policy');
-  const consentToContactLinks = useConfig<Record<Language, string | undefined>>('consent_to_contact');
-
-  const privacyLink = useMemo(() => privacyLinks[locale] ?? privacyLinks['en-us'], [locale, privacyLinks]);
-  const consentToContactLink = useMemo(
-    () => consentToContactLinks[locale] ?? consentToContactLinks['en-us'],
-    [locale, consentToContactLinks],
-  );
 
   const contactInfoSchema = z
     .object({
@@ -108,9 +99,6 @@ function SignUp() {
             defaultMessage: 'Please enter a 10 digit phone number',
           }),
         }),
-      consent: z.boolean().refine((value) => value, {
-        message: formatMessage({ id: 'signUp.checkbox.error', defaultMessage: 'Please check the box to continue.' }),
-      }),
       tcpa: z.boolean().refine((value) => value, {
         message: formatMessage({ id: 'signUp.checkbox.error', defaultMessage: 'Please check the box to continue.' }),
       }),
@@ -185,7 +173,7 @@ function SignUp() {
 
   useEffect(() => {
     if (someContactType(contactType) && !formData.signUpInfo.hasUser) {
-      setValue('contactInfo', { firstName: '', lastName: '', email: '', cell: '', tcpa: false, consent: false });
+      setValue('contactInfo', { firstName: '', lastName: '', email: '', cell: '', tcpa: false });
       if (isSubmitted) {
         trigger('contactInfo');
         setHasServerError(false);
@@ -361,68 +349,10 @@ function SignUp() {
             <p className="sign-up-disclaimer-text">
               <FormattedMessage
                 id="signUp.displayDisclosureSection-consentText"
-                defaultMessage="By filling out this form, you agree to future contact from MyFriendBen or our affiliates regarding your use of MyFriendBen or to offer additional programs that may be of interest to you and your family. Communications will be sent via text message only if you consented to text messaging below. You may opt out of receiving these communications at any time through the opt-out link in the communication. Additionally, a copy of your MyFriendBen results will automatically be sent to the email/phone number you provided."
+                defaultMessage="A copy of your MyFriendBen results will automatically be sent to the email/phone number you provided."
               />
             </p>
-            <div className="sign-up-checkbox-container">
-              <Controller
-                name="contactInfo.consent"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          {...field}
-                          checked={getValues('contactInfo.consent')}
-                          sx={errors.contactInfo?.consent !== undefined ? { color: '#c6252b' } : {}}
-                        />
-                      }
-                      label={
-                        <div className="sign-up-text">
-                          <FormattedMessage
-                            id="signUp.displayDisclosureSection-consentCheck1"
-                            defaultMessage="I have read, understand, and agree to the terms of MyFriendBen's "
-                          />
-                          <FormattedMessage
-                            id="emailResults.return-consentCheck"
-                            defaultMessage="{linkVal}"
-                            values={{
-                              linkVal: (
-                                <a className="link-color" href={privacyLink} target="_blank">
-                                  <FormattedMessage
-                                    id="signUp.displayDisclosureSection-consentCheckLink"
-                                    defaultMessage="data privacy policy "
-                                  />
-                                </a>
-                              ),
-                            }}
-                          />
-                          <FormattedMessage id="signUp.and" defaultMessage=" and " />
-                          <FormattedMessage
-                            id="signUp.consentToContact4"
-                            defaultMessage="{linkVal}"
-                            values={{
-                              linkVal: (
-                                <a className="link-color" href={consentToContactLink} target="_blank">
-                                  <FormattedMessage id="signUp.consentToContact" defaultMessage=" consent to contact" />
-                                </a>
-                              ),
-                            }}
-                          />
-                          <FormattedMessage id="signUp.consentToContact5" defaultMessage="." />
-                        </div>
-                      }
-                    />
-                    {errors.contactInfo?.consent && (
-                      <ErrorMessageWrapper fontSize="1rem">{errors.contactInfo.consent.message}</ErrorMessageWrapper>
-                    )}
-                  </>
-                )}
-              />
-            </div>
-            <div className="sign-up-checkbox-container">
+            <div>
               <Controller
                 name="contactInfo.tcpa"
                 control={control}
