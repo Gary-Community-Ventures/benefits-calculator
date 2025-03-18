@@ -109,7 +109,7 @@ const Utilities = () => {
       <QuestionQuestion>
         <FormattedMessage
           id="questions.energyCalculator-appliances-subquestion"
-          defaultMessage="Do you currently have any appliances that are broken or in need of replacement?"
+          defaultMessage="Do you have appliances you are considering replacing, or are broken and in need of replacement?"
         />
       </QuestionQuestion>
       <QuestionDescription>
