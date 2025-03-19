@@ -181,14 +181,15 @@ const HouseholdMemberForm = () => {
       healthInsurance: z
         .object({
           none: z.boolean(),
-          employer: z.boolean(),
-          private: z.boolean(),
-          medicaid: z.boolean(),
-          medicare: z.boolean(),
-          chp: z.boolean(),
-          emergency_medicaid: z.boolean(),
-          family_planning: z.boolean(),
-          va: z.boolean(),
+          employer: z.boolean().optional().default(false),
+          private: z.boolean().optional().default(false),
+          medicaid: z.boolean().optional().default(false),
+          medicare: z.boolean().optional().default(false),
+          chp: z.boolean().optional().default(false),
+          emergency_medicaid: z.boolean().optional().default(false),
+          family_planning: z.boolean().optional().default(false),
+          va: z.boolean().optional().default(false),
+          mass_health: z.boolean().optional().default(false),
         })
         .refine((insuranceOptions) => Object.values(insuranceOptions).some((option) => option === true), {
           message: renderHealthInsSelectOneHelperText(intl),
