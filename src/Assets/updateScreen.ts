@@ -126,7 +126,6 @@ const getEnergyCalculatorFormDataBody = (
     needs_water_heater: energyCalculatorFormData.needsWaterHeater,
     needs_hvac: energyCalculatorFormData.needsHvac,
     needs_stove: energyCalculatorFormData.needsStove,
-    needs_dryer: energyCalculatorFormData.needsDryer,
   };
 };
 
