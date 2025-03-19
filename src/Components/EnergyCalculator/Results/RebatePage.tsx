@@ -13,6 +13,38 @@ type RebatePageProps = {
 export default function EnergyCalculatorRebatePage({ rebateCategory }: RebatePageProps) {
   const backLink = useResultsLink(`results/benefits`);
 
+  const renderCategoryDescription = (rebateType: string) => {
+    switch (rebateType) {
+      case 'hvac':
+        return (
+          <article>
+            <FormattedMessage
+              id="hvac.categoryDescription"
+              defaultMessage="You may qualify for savings on the cost of a heat pump to make your home heating, ventilation, and/or cooling system more efficient. Heat pumps use less energy than other systems like gas furnaces and central air. You can type the estimated cost of a heat pump into one or more of the white boxes below to estimate your savings. For more information, visit our partners at Rewiring America"
+            />
+          </article>
+        );
+      case 'waterHeater':
+        return (
+          <article>
+            <FormattedMessage
+              id="waterHeater.categoryDescription"
+              defaultMessage="You may qualify for savings on the cost of a heat pump water heater (HPWH). HPWHs are energy-efficient water heaters. They can help the average homeowner save hundreds of dollars in energy costs each year. You can type the estimated cost of a HPWH into one or more of the white boxes below to estimate your savings. For more information, visit our partners at Rewiring America"
+            />
+          </article>
+        );
+      case 'stove':
+        return (
+          <article>
+            <FormattedMessage
+              id="stove.categoryDescription"
+              defaultMessage="You may qualify for savings on the cost of an electric / induction stove. These stoves are more energy-efficient than gas or traditional electric stoves. You can type the estimated cost of an electric /induction stove into one or more of the white boxes below to estimate your savings. For more information, visit our partners at Rewiring America"
+            />
+          </article>
+        );
+    }
+  };
+
   return (
     <main>
       <section className="back-to-results-button-container">
@@ -26,6 +58,7 @@ export default function EnergyCalculatorRebatePage({ rebateCategory }: RebatePag
           <Housing />
           <span>{rebateCategory.name}</span>
         </h1>
+        {renderCategoryDescription(rebateCategory.type)}
         <section>
           {rebateCategory.rebates.map((rebate, i) => {
             return <RebateCard rebate={rebate} key={i} />;
