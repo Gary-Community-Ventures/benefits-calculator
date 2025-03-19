@@ -17,6 +17,7 @@ import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueBut
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
+import { OverrideableTranslation } from '../../Assets/languageOptions';
 
 export const Zipcode = () => {
   const { formData, setFormData } = useContext(Context);
@@ -112,7 +113,7 @@ export const Zipcode = () => {
   const renderCountyHelperText = () => {
     return (
       <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="errorMessage-county" defaultMessage="Please Select a county" />
+        <OverrideableTranslation id="errorMessage-county" defaultMessage="Please Select a county" />
       </ErrorMessageWrapper>
     );
   };
@@ -148,11 +149,11 @@ export const Zipcode = () => {
         {parsedZipCode.success && (
           <div>
             <QuestionQuestion>
-              <FormattedMessage id="questions.zipcode-a" defaultMessage="Please select a county:" />
+              <OverrideableTranslation id="questions.zipcode-a" defaultMessage="Please select a county:" />
             </QuestionQuestion>
             <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.county !== undefined}>
               <InputLabel id="county">
-                <FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />
+                <OverrideableTranslation id="questions.zipcode-a-inputLabel" defaultMessage="County" />
               </InputLabel>
               <Controller
                 name="county"
@@ -164,10 +165,10 @@ export const Zipcode = () => {
                       {...field}
                       labelId="county-select-label"
                       id="county-source-select"
-                      label={<FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />}
+                      label={<OverrideableTranslation id="questions.zipcode-a-inputLabel" defaultMessage="County" />}
                     >
                       {createMenuItems(
-                        <FormattedMessage
+                        <OverrideableTranslation
                           id="questions.zipcode-a-disabledSelectMenuItemText"
                           defaultMessage="Select a county"
                         />,

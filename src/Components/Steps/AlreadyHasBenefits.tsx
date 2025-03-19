@@ -173,10 +173,12 @@ function AlreadyHasBenefits() {
     }
 
     return (
-      <HelpButton
-        helpText="This information will help make sure we don't give you results for benefits you already have."
-        helpId="questions.hasBenefits-description"
-      />
+      <HelpButton>
+        <FormattedMessage
+          id="questions.hasBenefits-description"
+          defaultMessage="This information will help make sure we don't give you results for benefits you already have."
+        />
+      </HelpButton>
     );
   };
 

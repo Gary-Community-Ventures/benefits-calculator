@@ -2,9 +2,16 @@ import { InputAdornment, TextField } from '@mui/material';
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
+import { FormattedMessageType } from '../../../Types/Questions';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
 import { formatToUSD } from '../../Results/FormattedValue';
-import { EnergyCalculatorAmountUnit, EnergyCalculatorItemType, EnergyCalculatorRebate } from './rebateTypes';
+import {
+  EnergyCalculatorAmountUnit,
+  EnergyCalculatorIncentive,
+  EnergyCalculatorItemType,
+  EnergyCalculatorRebate,
+} from './rebateTypes';
+import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 
 type ItemGroup = 'air_source_heat_pump' | 'clothes_dryer' | 'generic_heat_pump' | 'water_heater';
 
@@ -291,6 +298,36 @@ export function EnergyCalculatorRebateCardTitle({ rebate }: RebateComponentProps
   return null;
 }
 
+export function rebateTypes(rebate: EnergyCalculatorIncentive) {
+  const types: FormattedMessageType[] = [];
+  for (const method of rebate.payment_methods) {
+    if (method === 'tax_credit') {
+      types.push(<FormattedMessage id="energyCalculator.rebatePage.type.tax_credit" defaultMessage="Tax credit" />);
+    } else if (method === 'pos_rebate') {
+      types.push(
+        <FormattedMessage id="energyCalculator.rebatePage.type.pos_rebate" defaultMessage="Upfront discount" />,
+      );
+    } else if (method === 'rebate') {
+      types.push(<FormattedMessage id="energyCalculator.rebatePage.type.rebate" defaultMessage="Rebate" />);
+    } else if (method === 'account_credit') {
+      types.push(
+        <FormattedMessage id="energyCalculator.rebatePage.type.account_credit" defaultMessage="Account credit" />,
+      );
+    } else if (method === 'performance_rebate') {
+      types.push(
+        <FormattedMessage
+          id="energyCalculator.rebatePage.type.performance_rebate"
+          defaultMessage="Performance rebate"
+        />,
+      );
+    } else {
+      types.push(<FormattedMessage id="energyCalculator.rebatePage.type.incentive" defaultMessage="Incentive" />);
+    }
+  }
+
+  return types;
+}
+
 type RebateSavingsCalculator = (cost: number) => number;
 
 function percentSavingCalculatorGenerator(percent: number, maxAmount: number = Infinity): RebateSavingsCalculator {
@@ -327,8 +364,17 @@ export function EnergyCalculatorRebateCalculator({ rebate }: RebateComponentProp
   return (
     <div>
       <h3>
-        <FormattedMessage id="energyCalculator.rebatePage.calculator.title" defaultMessage="Estimated Savings:" />
+        <FormattedMessage
+          id="energyCalculator.rebatePage.calculator.title"
+          defaultMessage="Estimated Savings Calculator:"
+        />
       </h3>
+      <QuestionDescription>
+        <FormattedMessage
+          id="energyCalculator.rebatePage.calculator.description"
+          defaultMessage="Please enter the dollar value of the appliance you are looking to purchase to see what your estimated rebates savings could be."
+        />
+      </QuestionDescription>
       <div>
         <TextField
           label={
