@@ -106,7 +106,7 @@ export interface EnergyCalculatorAPIResponse {
 
 export type EnergyCalculatorRebate = EnergyCalculatorIncentive;
 
-export type EnergyCalculatorRebateCategoryType = 'hvac' | 'waterHeater' | 'stove' | 'dryer';
+export type EnergyCalculatorRebateCategoryType = 'hvac' | 'waterHeater' | 'stove';
 
 export const ENERGY_CALCULATOR_CATEGORY_MAP: Record<EnergyCalculatorItemType, EnergyCalculatorRebateCategoryType> = {
   air_to_water_heat_pump: 'hvac',
