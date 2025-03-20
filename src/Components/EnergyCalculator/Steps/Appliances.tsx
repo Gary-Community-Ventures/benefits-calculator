@@ -10,7 +10,6 @@ import { useParams } from 'react-router-dom';
 import { ReactComponent as WaterHeater } from '../Icons/WaterHeater.svg';
 import { ReactComponent as Heater } from '../Icons/Heat.svg';
 import { ReactComponent as Stove } from '../Icons/Stove.svg';
-import { ReactComponent as Washer } from '../Icons/Washer.svg';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import { useContext } from 'react';
@@ -46,15 +45,6 @@ export const applianceStatusOptions = {
       },
     },
   },
-  needsDryer: {
-    icon: <Washer className="option-card-icon" />,
-    text: {
-      props: {
-        id: 'applianceStatusOptions.needsDryer',
-        defaultMessage: 'Clothes dryer',
-      },
-    },
-  },
 };
 
 const Utilities = () => {
@@ -70,7 +60,6 @@ const Utilities = () => {
       needsWaterHeater: z.boolean(),
       needsHvac: z.boolean(),
       needsStove: z.boolean(),
-      needsDryer: z.boolean(),
     }),
   });
 
@@ -81,7 +70,6 @@ const Utilities = () => {
         needsWaterHeater: formData.energyCalculator?.needsWaterHeater ?? false,
         needsHvac: formData.energyCalculator?.needsHvac ?? false,
         needsStove: formData.energyCalculator?.needsStove ?? false,
-        needsDryer: formData.energyCalculator?.needsDryer ?? false,
       },
     },
   });
@@ -121,7 +109,6 @@ const Utilities = () => {
           setValue={setValue}
           name="energyCalculator"
           options={applianceStatusOptions}
-          customColumnNo="two-columns"
         />
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>

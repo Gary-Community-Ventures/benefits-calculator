@@ -39,7 +39,6 @@ export type ApiEnergyCalculatorFormData = {
   needs_water_heater: boolean;
   needs_hvac: boolean;
   needs_stove: boolean;
-  needs_dryer: boolean;
 };
 
 export type ApiEnergyCalculatorMember = {

@@ -2,9 +2,10 @@ import { EnergyCalculatorRebate, EnergyCalculatorRebateCategory } from './rebate
 import { FormattedMessage } from 'react-intl';
 import BackAndSaveButtons from '../../Results/BackAndSaveButtons/BackAndSaveButtons';
 import { useResultsLink } from '../../Results/Results';
-import './RebatePage.css';
 import { EnergyCalculatorRebateCalculator, EnergyCalculatorRebateCardTitle, rebateTypes } from './RebatePageMappings';
 import { ReactComponent as Housing } from '../../../Assets/CategoryHeadingIcons/housing.svg';
+import { renderCategoryDescription } from './rebateTypes';
+import './RebatePage.css';
 
 type RebatePageProps = {
   rebateCategory: EnergyCalculatorRebateCategory;
@@ -26,6 +27,7 @@ export default function EnergyCalculatorRebatePage({ rebateCategory }: RebatePag
           <Housing />
           <span>{rebateCategory.name}</span>
         </h1>
+        {renderCategoryDescription(rebateCategory.type)}
         <section>
           {rebateCategory.rebates.map((rebate, i) => {
             return <RebateCard rebate={rebate} key={i} />;
