@@ -70,10 +70,12 @@ const HouseholdAssets = () => {
             id="questions.householdAssets"
             defaultMessage="How much does your whole household have right now in cash, checking or savings accounts, stocks, bonds, or mutual funds?"
           />
-          <HelpButton
-            helpText="In some cases, eligibility for benefits may be affected if your household owns other valuable assets such as a car or life insurance policy."
-            helpId="questions.householdAssets-description"
-          />
+          <HelpButton>
+            <FormattedMessage
+              id="questions.householdAssets-description"
+              defaultMessage="In some cases, eligibility for benefits may be affected if your household owns other valuable assets such as a car or life insurance policy."
+            />
+          </HelpButton>
         </>
       </QuestionQuestion>
       <form onSubmit={handleSubmit(formSubmitHandler)}>

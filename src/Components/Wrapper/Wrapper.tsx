@@ -5,9 +5,8 @@ import { WrapperContext } from '../../Types/WrapperContext';
 import { FormData } from '../../Types/FormData';
 import { getTranslations } from '../../apiCalls';
 import useReferrer, { ReferrerData } from '../Referrer/referrerHook';
-import { Language } from '../../Types/Language';
 import { useGetConfig } from '../Config/configHook';
-import { rightToLeftLanguages } from '../../Assets/languageOptions';
+import { rightToLeftLanguages, Language } from '../../Assets/languageOptions';
 
 const initialFormData: FormData = {
   whiteLabel: '_default',

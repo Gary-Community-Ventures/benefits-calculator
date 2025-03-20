@@ -2,7 +2,7 @@ import { EnergyCalculatorRebate, EnergyCalculatorRebateCategory } from './rebate
 import { FormattedMessage } from 'react-intl';
 import BackAndSaveButtons from '../../Results/BackAndSaveButtons/BackAndSaveButtons';
 import { useResultsLink } from '../../Results/Results';
-import { EnergyCalculatorRebateCalculator, EnergyCalculatorRebateCardTitle } from './RebatePageMappings';
+import { EnergyCalculatorRebateCalculator, EnergyCalculatorRebateCardTitle, rebateTypes } from './RebatePageMappings';
 import { ReactComponent as Housing } from '../../../Assets/CategoryHeadingIcons/housing.svg';
 import { renderCategoryDescription } from './rebateTypes';
 import './RebatePage.css';
@@ -49,7 +49,12 @@ function RebateCard({ rebate }: RebateProps) {
         <h2>
           <EnergyCalculatorRebateCardTitle rebate={rebate} />
         </h2>
-        {<strong>{rebate.program}</strong>}
+        <strong>{rebate.program}</strong>
+        <div className="energy-calculator-rebate-page-rebate-card-type-container">
+          {rebateTypes(rebate).map((type, index) => {
+            return <span key={index}>{type}</span>;
+          })}
+        </div>
       </div>
       <p>{rebate.short_description}</p>
       <EnergyCalculatorRebateCalculator rebate={rebate} />

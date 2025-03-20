@@ -10,6 +10,7 @@ import { EnergyCalculatorFormData, FormData } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
+import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
@@ -97,11 +98,14 @@ export default function GasProvider() {
         <FormattedMessage id="energyCalculator.gasProvider.header" defaultMessage="Tell us about your utilities" />
       </QuestionHeader>
       <QuestionQuestion>
-        <FormattedMessage
-          id="energyCalculator.gasProvider.question"
-          defaultMessage="Who is your gas utility provider?"
-        />
+        <FormattedMessage id="energyCalculator.gasProvider.question" defaultMessage="How do you heat your home?" />
       </QuestionQuestion>
+      <QuestionDescription>
+        <FormattedMessage
+          id="energyCalculator.gasProvider.description"
+          defaultMessage="If you heat your home with a gas provider, please select the company."
+        />
+      </QuestionDescription>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.gasProvider !== undefined}>
           <InputLabel>

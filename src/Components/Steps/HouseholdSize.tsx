@@ -13,6 +13,8 @@ import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionCo
 import HelpButton from '../HelpBubbleIcon/HelpButton';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
+import { OverrideableTranslation } from '../../Assets/languageOptions';
+import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
 
 const HouseholdSize = () => {
   const { formData, setFormData } = useContext(Context);
@@ -21,6 +23,7 @@ const HouseholdSize = () => {
   const nextStep = useGoToNextStep('householdSize', '1');
   const intl = useIntl();
   const { updateScreen } = useScreenApi();
+  const isEnergyCalculator = useIsEnergyCalculator();
 
   const formSchema = z.object({
     householdSize: z.coerce
@@ -73,10 +76,20 @@ const HouseholdSize = () => {
             id="questions.householdSize"
             defaultMessage="Including you, how many people are in your household?"
           />
-          <HelpButton
-            helpText="If other adults 18 or older in your household file their own tax return, ask them to complete this tool to determine if they qualify for benefits. But even if you and your spouse file taxes separately, include your spouse in the household."
-            helpId="questions.householdSize-helpText"
-          ></HelpButton>
+          {!isEnergyCalculator && (
+            <HelpButton>
+              <OverrideableTranslation
+                id="questions.householdSize-helpText"
+                defaultMessage="This is usually family members whom you live with and share important resources with like food and bills. If other adults 18 or older in your household file their own tax return, ask them to complete this tool to determine if they qualify for benefits. But even if you and your spouse file taxes separately, include your spouse in the household."
+              />
+            </HelpButton>
+          )}
+          {isEnergyCalculator && (
+            <OverrideableTranslation
+              id="questions.householdSize-helpText"
+              defaultMessage="This is usually family members whom you live with and share important resources with like food and bills. If other adults 18 or older in your household file their own tax return, ask them to complete this tool to determine if they qualify for benefits. But even if you and your spouse file taxes separately, include your spouse in the household."
+            />
+          )}
         </>
       </QuestionQuestion>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
