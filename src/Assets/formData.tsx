@@ -1,11 +1,10 @@
-// TODO: Find better place for this code
 import { useContext } from 'react';
-import { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData';
-import { EnergyCalculatorMember, FormData } from '../../Types/FormData';
-import { Context } from '../Wrapper/Wrapper';
+import { ApiFormData, ApiFormDataReadOnly } from '../Types/ApiFormData';
+import { EnergyCalculatorMember, FormData } from '../Types/FormData';
+import { Context } from '../Components/Wrapper/Wrapper';
 
 // Hook to update the context's form data from an api response
-export const useUpdateFormData = () => {
+export function useUpdateFormData() {
   const { formData, setFormData } = useContext(Context);
   return (response: ApiFormDataReadOnly & ApiFormData) => {
     const updatedFormData: FormData = {
@@ -167,4 +166,4 @@ export const useUpdateFormData = () => {
 
     setFormData(updatedFormData);
   };
-};
+}

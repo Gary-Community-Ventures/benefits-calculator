@@ -14,7 +14,7 @@ import { Language } from './languageOptions';
 import { useContext } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
-import { useUpdateFormData } from '../Components/FetchScreen/manageFormData';
+import { useUpdateFormData } from './formData.tsx';
 
 const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: string) => {
   const householdMembers = getHouseholdMembersBodies(formData);
