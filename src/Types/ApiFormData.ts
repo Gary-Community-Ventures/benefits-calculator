@@ -100,7 +100,7 @@ export type ApiUserWriteOnly = {
   last_name: string | null;
   email_or_cell: string | null;
   language_code: Language | null;
-  tcpa_consent: boolean;
+  explicit_tcpa_consent: boolean;
 };
 
 export type ApiUser = {

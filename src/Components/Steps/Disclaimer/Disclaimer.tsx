@@ -164,7 +164,7 @@ const Disclaimer = () => {
         </a>
         <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />
         <a href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" className="link-color">
-          <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
+          <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Terms and Conditions" />
         </a>
         <FormattedMessage id="landingPage-disclaimer-lable-end" defaultMessage="." />
       </div>
