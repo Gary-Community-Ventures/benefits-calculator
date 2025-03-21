@@ -160,7 +160,7 @@ export const renderCategoryDescription = (rebateType: EnergyCalculatorRebateCate
       formattedMessage: (
         <FormattedMessage
           id="stove.categoryDescription"
-          defaultMessage="You may qualify for savings on the cost of an electric / induction stove. These stoves are more energy-efficient than gas or traditional electric stoves. You can type the estimated cost of an electric /induction stove into the white box below to estimate your savings. For more information, visit our partners at "
+          defaultMessage="You may qualify for savings on the cost of an electric / induction stove. These stoves are more energy-efficient than gas or traditional electric stoves. You can type the estimated cost of an electric / induction stove into the white box below to estimate your savings. For more information, visit our partners at "
         />
       ),
       href: 'https://homes.rewiringamerica.org/projects/cooking-homeowner',
