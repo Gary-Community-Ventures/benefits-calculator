@@ -69,6 +69,13 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    if (window.location.protocol !== 'https:' && !isLocal) {
+      window.location.protocol = 'https';
+    }
+  }, []);
+
+  useEffect(() => {
     const referrerParam = searchParams.get('referrer');
     const utmParam = searchParams.get('utm_source');
     const testParam = searchParams.get('test') ? true : false;

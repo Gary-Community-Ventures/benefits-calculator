@@ -1,10 +1,11 @@
 import { IconButton } from '@mui/material';
-import { useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { PropsWithChildren, useState } from 'react';
+import { useIntl } from 'react-intl';
 import { ReactComponent as HelpBubble } from '../../Assets/icons/helpBubble.svg';
 import './HelpButton.css';
 
-const HelpButton = ({ className, helpText, helpId }: { className?: string; helpText: string; helpId: string }) => {
+type HelpButtonProps = PropsWithChildren<{ className?: string }>;
+const HelpButton = ({ className, children }: HelpButtonProps) => {
   const intl = useIntl();
   const [showHelpText, setShowHelpText] = useState(false);
   const handleClick = () => {
@@ -17,11 +18,7 @@ const HelpButton = ({ className, helpText, helpId }: { className?: string; helpT
       <IconButton onClick={handleClick} aria-label={translatedAriaLabel}>
         <HelpBubble style={{ height: '20px', width: '20px' }} className="help-button-icon-color" />
       </IconButton>
-      {showHelpText && (
-        <p className={`help-text ${className}`}>
-          <FormattedMessage id={helpId} defaultMessage={helpText} />
-        </p>
-      )}
+      {showHelpText && <p className={`help-text ${className}`}>{children}</p>}
     </>
   );
 };

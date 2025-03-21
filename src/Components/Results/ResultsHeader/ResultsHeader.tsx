@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom';
 import { useResultsContext } from '../Results';
 import { calculateTotalValue } from '../FormattedValue';
 import '../../Results/Results.css';
-import { TAX_CREDIT_CATEGORY } from '../../../Assets/resultsConstants';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import Login from '../../Login/Login';
 import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
@@ -20,7 +19,7 @@ type ResultsHeaderProps = {
 const ProgramsHeader = () => {
   const { programs, programCategories } = useResultsContext();
   const { theme, formData } = useContext(Context);
-  const taxCreditsCategory = programCategories.find((category) => category.external_name === TAX_CREDIT_CATEGORY);
+  const taxCreditsCategory = programCategories.find((category) => category.tax_category);
   let taxCredit = 0;
   if (taxCreditsCategory !== undefined) {
     taxCredit = calculateTotalValue(taxCreditsCategory);
@@ -30,7 +29,7 @@ const ProgramsHeader = () => {
   // don't add tax credits to total value
   let estimatedMonthlySavings = 0;
   for (const category of programCategories) {
-    if (category.external_name === TAX_CREDIT_CATEGORY) {
+    if (category.tax_category) {
       continue;
     }
 

@@ -1,7 +1,10 @@
 import { Language } from '@mui/icons-material';
 import { englishToNepaliNumber } from 'nepali-number';
 import { ReactNode, useContext, useMemo } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { useConfig } from '../Components/Config/configHook';
 import { Context } from '../Components/Wrapper/Wrapper';
+import { FormattedMessageType } from '../Types/Questions';
 
 export type Language = 'en-us' | 'es' | 'vi' | 'fr' | 'am' | 'so' | 'ru' | 'ne' | 'my' | 'zh' | 'ar' | 'sw';
 export const LANGUAGE_OPTIONS: Record<Language, string> = {
@@ -55,6 +58,20 @@ export function useTranslateNumber() {
   return (number: number | string) => {
     return translateNumber(number, locale);
   };
+}
+
+type OverrideableTranslationProps = {
+  id: string;
+  defaultMessage: string;
+};
+export function OverrideableTranslation({ id, defaultMessage }: OverrideableTranslationProps) {
+  const overrides = useConfig<{ [key: string]: FormattedMessageType }>('override_text');
+
+  if (id in overrides) {
+    return overrides[id];
+  }
+
+  return <FormattedMessage id={id} defaultMessage={defaultMessage} />;
 }
 
 export default LANGUAGE_OPTIONS;

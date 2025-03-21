@@ -33,9 +33,6 @@ export const ENERGY_CALCULATOR_ITEMS = [
   'non_heat_pump_water_heater',
   // stove
   'electric_stove',
-  // dryer
-  'heat_pump_clothes_dryer',
-  'non_heat_pump_clothes_dryer',
 ] as const;
 
 export type EnergyCalculatorItemType = (typeof ENERGY_CALCULATOR_ITEMS)[number];
@@ -106,7 +103,7 @@ export interface EnergyCalculatorAPIResponse {
 
 export type EnergyCalculatorRebate = EnergyCalculatorIncentive;
 
-export type EnergyCalculatorRebateCategoryType = 'hvac' | 'waterHeater' | 'stove' | 'dryer';
+export type EnergyCalculatorRebateCategoryType = 'hvac' | 'waterHeater' | 'stove';
 
 export const ENERGY_CALCULATOR_CATEGORY_MAP: Record<EnergyCalculatorItemType, EnergyCalculatorRebateCategoryType> = {
   air_to_water_heat_pump: 'hvac',
@@ -118,8 +115,6 @@ export const ENERGY_CALCULATOR_CATEGORY_MAP: Record<EnergyCalculatorItemType, En
   heat_pump_water_heater: 'waterHeater',
   non_heat_pump_water_heater: 'waterHeater',
   electric_stove: 'stove',
-  heat_pump_clothes_dryer: 'dryer',
-  non_heat_pump_clothes_dryer: 'dryer',
 };
 
 export const ENERGY_CALCULATOR_CATEGORY_TITLE_MAP: Record<EnergyCalculatorRebateCategoryType, FormattedMessageType> = {
@@ -133,11 +128,53 @@ export const ENERGY_CALCULATOR_CATEGORY_TITLE_MAP: Record<EnergyCalculatorRebate
     <FormattedMessage id="energyCalculator.results.category.waterHeater.title" defaultMessage="Water Heater" />
   ),
   stove: <FormattedMessage id="energyCalculator.results.category.stove.title" defaultMessage="Cooking Stove/Range" />,
-  dryer: <FormattedMessage id="energyCalculator.results.category.dryer.title" defaultMessage="Clothes Dryer" />,
 };
 
 export type EnergyCalculatorRebateCategory = {
   type: EnergyCalculatorRebateCategoryType;
   name: FormattedMessageType;
   rebates: EnergyCalculatorRebate[];
+};
+
+export const renderCategoryDescription = (rebateType: EnergyCalculatorRebateCategoryType) => {
+  const categoryDescriptionMap = {
+    hvac: {
+      formattedMessage: (
+        <FormattedMessage
+          id="hvac.categoryDescription"
+          defaultMessage="You may qualify for savings on the cost of a heat pump to make your home heating, ventilation, and/or cooling system more efficient. Heat pumps use less energy than other systems like gas furnaces and central air. You can type the estimated cost of a heat pump into one or more of the white boxes below to estimate your savings. For more information, visit our partners at "
+        />
+      ),
+      href: 'https://homes.rewiringamerica.org/projects/heating-and-cooling-homeowner',
+    },
+    waterHeater: {
+      formattedMessage: (
+        <FormattedMessage
+          id="waterHeater.categoryDescription"
+          defaultMessage="You may qualify for savings on the cost of a heat pump water heater (HPWH). HPWHs are energy-efficient water heaters. They can help the average homeowner save hundreds of dollars in energy costs each year. You can type the estimated cost of a HPWH into one or more of the white boxes below to estimate your savings. For more information, visit our partners at "
+        />
+      ),
+      href: 'https://homes.rewiringamerica.org/projects/heating-and-cooling-homeowner',
+    },
+    stove: {
+      formattedMessage: (
+        <FormattedMessage
+          id="stove.categoryDescription"
+          defaultMessage="You may qualify for savings on the cost of an electric / induction stove. These stoves are more energy-efficient than gas or traditional electric stoves. You can type the estimated cost of an electric / induction stove into the white box below to estimate your savings. For more information, visit our partners at "
+        />
+      ),
+      href: 'https://homes.rewiringamerica.org/projects/cooking-homeowner',
+    },
+  };
+  const categoryDescription = categoryDescriptionMap[rebateType].formattedMessage;
+  const href = categoryDescriptionMap[rebateType].href;
+
+  return (
+    <article className="category-description-article">
+      {categoryDescription}
+      <a className="link-color" target="_blank" href={href}>
+        Rewiring America.
+      </a>
+    </article>
+  );
 };

@@ -1,10 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Checkbox, FormControlLabel, TextField } from '@mui/material';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { z } from 'zod';
-import { Language } from '../../../Assets/languageOptions';
 import { FormData } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
 import { useConfig } from '../../Config/configHook';
@@ -20,7 +19,7 @@ import useScreenApi from '../../../Assets/updateScreen';
 import './SignUp.css';
 
 function SignUp() {
-  const { formData, setFormData, locale } = useContext(Context);
+  const { formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const [hasServerError, setHasServerError] = useState(false);
   const { updateUser } = useScreenApi();
@@ -28,14 +27,6 @@ function SignUp() {
   const backNavigationFunction = useDefaultBackNavigationFunction('signUpInfo');
   const nextStep = useGoToNextStep('signUpInfo');
   const signUpOptions = useConfig<{ [key: string]: FormattedMessageType }>('sign_up_options');
-  const privacyLinks = useConfig<Record<Language, string | undefined>>('privacy_policy');
-  const consentToContactLinks = useConfig<Record<Language, string | undefined>>('consent_to_contact');
-
-  const privacyLink = useMemo(() => privacyLinks[locale] ?? privacyLinks['en-us'], [locale, privacyLinks]);
-  const consentToContactLink = useMemo(
-    () => consentToContactLinks[locale] ?? consentToContactLinks['en-us'],
-    [locale, consentToContactLinks],
-  );
 
   const contactInfoSchema = z
     .object({
@@ -109,7 +100,7 @@ function SignUp() {
           }),
         }),
       tcpa: z.boolean().refine((value) => value, {
-        message: formatMessage({ id: 'signUp.tcpa.error', defaultMessage: 'Please check the box to continue.' }),
+        message: formatMessage({ id: 'signUp.checkbox.error', defaultMessage: 'Please check the box to continue.' }),
       }),
     })
     .superRefine(({ email, cell }, ctx) => {
@@ -240,7 +231,7 @@ function SignUp() {
       <QuestionHeader>
         <FormattedMessage
           id="qcc.optional-sign-up-text"
-          defaultMessage="Optional: Sign up for benefits updates and/or paid feedback opportunities"
+          defaultMessage="Optional: Sign up for benefits updates and/or feedback opportunities"
         />
       </QuestionHeader>
       <QuestionQuestion>
@@ -358,7 +349,7 @@ function SignUp() {
             <p className="sign-up-disclaimer-text">
               <FormattedMessage
                 id="signUp.displayDisclosureSection-consentText"
-                defaultMessage="By filling out this form, you agree to future contact from Gary Philanthropy or our affiliates regarding your use of MyFriendBen or to offer additional programs that may be of interest to you and your family. Standard message and data costs may apply to these communications. You may opt out of receiving these communications at any time through the opt-out link in the communication. Additionally, a copy of your MyFriendBen results will automatically be sent to the email/phone number you provided."
+                defaultMessage="A copy of your MyFriendBen results will automatically be sent to the email/phone number you provided."
               />
             </p>
             <div>
@@ -373,42 +364,19 @@ function SignUp() {
                         <Checkbox
                           {...field}
                           checked={getValues('contactInfo.tcpa')}
-                          sx={errors.contactInfo?.tcpa !== undefined ? { color: '#c6252b' } : {}}
+                          sx={
+                            errors.contactInfo?.tcpa !== undefined
+                              ? { color: '#c6252b', alignSelf: 'flex-start' }
+                              : { alignSelf: 'flex-start' }
+                          }
                         />
                       }
                       label={
                         <div className="sign-up-text">
                           <FormattedMessage
-                            id="signUp.displayDisclosureSection-consentCheck1"
-                            defaultMessage="I have read, understand, and agree to the terms of MyFriendBen's "
+                            id="signUp.displayDisclosureSection.tcpa"
+                            defaultMessage="I consent to MyFriendBen and its affiliates contacting me via text message to offer additional programs or opportunities that may be of interest to me and my family, for marketing purposes, updates and alerts, and to solicit feedback. I understand that the frequency of these text messages may vary, and that standard message and data costs may apply. I understand that I may opt-out of receiving these text messages at any time by replying “STOP” to unsubscribe."
                           />
-                          <FormattedMessage
-                            id="emailResults.return-consentCheck"
-                            defaultMessage="{linkVal}"
-                            values={{
-                              linkVal: (
-                                <a className="link-color" href={privacyLink} target="_blank">
-                                  <FormattedMessage
-                                    id="signUp.displayDisclosureSection-consentCheckLink"
-                                    defaultMessage="data privacy policy "
-                                  />
-                                </a>
-                              ),
-                            }}
-                          />
-                          <FormattedMessage id="signUp.and" defaultMessage=" and " />
-                          <FormattedMessage
-                            id="signUp.consentToContact4"
-                            defaultMessage="{linkVal}"
-                            values={{
-                              linkVal: (
-                                <a className="link-color" href={consentToContactLink} target="_blank">
-                                  <FormattedMessage id="signUp.consentToContact" defaultMessage=" consent to contact" />
-                                </a>
-                              ),
-                            }}
-                          />
-                          <FormattedMessage id="signUp.consentToContact5" defaultMessage="." />
                         </div>
                       }
                     />

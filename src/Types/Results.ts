@@ -77,6 +77,7 @@ export type ProgramCategory = {
   name: Translation;
   description: Translation;
   caps: ProgramCategoryCap[];
+  tax_category: boolean;
   programs: Program[];
 };
 
