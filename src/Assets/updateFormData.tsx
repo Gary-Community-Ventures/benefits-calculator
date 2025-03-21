@@ -2,11 +2,12 @@ import { useContext } from 'react';
 import { ApiFormData, ApiFormDataReadOnly } from '../Types/ApiFormData';
 import { EnergyCalculatorMember, FormData } from '../Types/FormData';
 import { Context } from '../Components/Wrapper/Wrapper';
+import { ScreenApiResponse } from '../apiCalls';
 
 // Hook to update the context's form data from an api response
 export function useUpdateFormData() {
   const { formData, setFormData } = useContext(Context);
-  return (response: ApiFormDataReadOnly & ApiFormData) => {
+  return (response: ScreenApiResponse) => {
     const updatedFormData: FormData = {
       ...formData,
       isTest: response.is_test ?? false,

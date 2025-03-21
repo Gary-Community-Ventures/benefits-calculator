@@ -2,9 +2,9 @@ import { useEffect, useContext, useMemo } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../Wrapper/Wrapper';
 import LoadingPage from '../LoadingPage/LoadingPage';
-import type { ApiFormData, ApiFormDataReadOnly } from '../../Types/ApiFormData';
 import useScreenApi from '../../Assets/updateScreen';
 import { isValidUuid } from '../RouterUtil/ValidateUuid';
+import { ScreenApiResponse } from '../../apiCalls';
 
 const FetchScreen = () => {
   const { setScreenLoading, setWhiteLabel } = useContext(Context);
@@ -41,7 +41,7 @@ const FetchScreen = () => {
     setScreenLoading(false);
   };
 
-  const handleScreenResponse = (response: ApiFormDataReadOnly & ApiFormData) => {
+  const handleScreenResponse = (response: ScreenApiResponse) => {
 
     setWhiteLabel(response.white_label);
 

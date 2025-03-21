@@ -14,7 +14,7 @@ import { Language } from './languageOptions';
 import { useContext } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
-import { useUpdateFormData } from './formData.tsx';
+import { useUpdateFormData } from './updateFormData.tsx';
 
 const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: string) => {
   const householdMembers = getHouseholdMembersBodies(formData);
@@ -172,11 +172,13 @@ const getExpensesBodies = (formData: FormData): ApiExpense[] => {
   });
 };
 
-const getUserBody = (formData: FormData, languageCode: Language): ApiUser & ApiUserWriteOnly => {
+type ApiUserBody = ApiUser & ApiUserWriteOnly;
+
+const getUserBody = (formData: FormData, languageCode: Language): ApiUserBody => {
   const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = formData.signUpInfo;
   const phoneNumber = '+1' + phone;
 
-  const user: ApiUser & ApiUserWriteOnly = {
+  const user: ApiUserBody = {
     email_or_cell: email ? email : phoneNumber,
     cell: phone ? phoneNumber : null,
     email: email ? email : null,
