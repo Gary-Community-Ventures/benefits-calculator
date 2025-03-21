@@ -55,7 +55,7 @@ import '../../../Components/Steps/HouseholdMembers/PersonIncomeBlock.css';
 import { useShouldRedirectToConfirmation } from '../../QuestionComponents/questionHooks';
 
 const ECHouseholdMemberForm = () => {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid, page, whiteLabel } = useParams();
   const { updateScreen } = useScreenApi();
   const navigate = useNavigate();
@@ -295,7 +295,6 @@ const ECHouseholdMemberForm = () => {
     const updatedHouseholdData = [...formData.householdData];
     updatedHouseholdData[currentMemberIndex] = updatedMemberData;
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-    setFormData(updatedFormData);
     updateScreen(updatedFormData);
 
     nextStep(uuid, currentStepId, pageNumber);

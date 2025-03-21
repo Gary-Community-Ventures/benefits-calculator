@@ -26,8 +26,8 @@ const isTrue = (value: boolean) => {
 };
 
 const Disclaimer = () => {
+  const { formData, setScreenLoading, locale } = useContext(Context);
   const isEnergyCalculator = useIsEnergyCalculator();
-  const { formData, setFormData, setScreenLoading, locale } = useContext(Context);
   let { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
   // use defaults for the config on this page because the config won't be loaded
@@ -73,7 +73,6 @@ const Disclaimer = () => {
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (termsOfServiceAndAgeData) => {
     const updatedFormData = { ...formData, ...termsOfServiceAndAgeData };
-    setFormData(updatedFormData);
 
     if (uuid) {
       await updateScreen(updatedFormData);
