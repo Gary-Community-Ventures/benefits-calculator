@@ -99,7 +99,6 @@ export function useUpdateFormData() {
         needsWaterHeater: response.energy_calculator.needs_water_heater,
         needsHvac: response.energy_calculator.needs_hvac,
         needsStove: response.energy_calculator.needs_stove,
-        needsDryer: response.energy_calculator.needs_dryer,
       };
     }
 
