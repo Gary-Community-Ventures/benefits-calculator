@@ -15,6 +15,7 @@ import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
 import { OverrideableTranslation } from '../../Assets/languageOptions';
 import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
+import QuestionDescription from '../QuestionComponents/QuestionDescription';
 
 const HouseholdSize = () => {
   const { formData, setFormData } = useContext(Context);
@@ -84,14 +85,16 @@ const HouseholdSize = () => {
               />
             </HelpButton>
           )}
-          {isEnergyCalculator && (
-            <OverrideableTranslation
-              id="questions.householdSize-helpText"
-              defaultMessage="This is usually family members whom you live with and share important resources with like food and bills. If other adults 18 or older in your household file their own tax return, ask them to complete this tool to determine if they qualify for benefits. But even if you and your spouse file taxes separately, include your spouse in the household."
-            />
-          )}
         </>
       </QuestionQuestion>
+      {isEnergyCalculator && (
+        <QuestionDescription>
+          <OverrideableTranslation
+            id="questions.householdSize-helpText"
+            defaultMessage="This is usually family members whom you live with and share important resources with like food and bills. If other adults 18 or older in your household file their own tax return, ask them to complete this tool to determine if they qualify for benefits. But even if you and your spouse file taxes separately, include your spouse in the household."
+          />
+        </QuestionDescription>
+      )}
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           name="householdSize"
