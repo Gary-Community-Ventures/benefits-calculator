@@ -20,7 +20,7 @@ import useScreenApi from '../../Assets/updateScreen';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 
 export const Zipcode = () => {
-  const { formData, setFormData, getReferrer } = useContext(Context);
+  const { formData, getReferrer } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('zipcode');
   const { updateScreen } = useScreenApi();
@@ -73,7 +73,6 @@ export const Zipcode = () => {
   const formSubmitHandler = (zipCodeAndCountyData: FormData) => {
     if (uuid) {
       const updatedFormData = { ...formData, ...zipCodeAndCountyData };
-      setFormData(updatedFormData);
       updateScreen(updatedFormData);
       nextStep();
     }

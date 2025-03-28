@@ -78,7 +78,6 @@ const SelectLanguagePage = () => {
     }
 
     updateWhiteLabelAndNavigate(stateCodes[0], `/${stateCodes[0]}/step-2${queryString}`);
-    setFormData({ ...formData, whiteLabel: stateCodes[0] });
     // wait for the new config to be loaded
     const interval = setInterval(() => {
       if (!configLoading) {
