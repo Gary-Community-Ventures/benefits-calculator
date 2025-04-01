@@ -425,7 +425,7 @@ const ECHouseholdMemberForm = () => {
           <QuestionDescription>
             <FormattedMessage
               id="householdDataBlock.createConditionsQuestion-pick"
-              defaultMessage="Choose all that apply."
+              defaultMessage="Choose all that apply. If none apply, skip this question."
             />
           </QuestionDescription>
           <RHFOptionCardGroup
@@ -514,11 +514,21 @@ const ECHouseholdMemberForm = () => {
         <div>
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-            <HelpButton
-              helpText="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
-              helpId="householdDataBlock.createIncomeRadioQuestion-questionDescription"
-            />
+            <HelpButton>
+              <FormattedMessage
+                id="householdDataBlock.createIncomeRadioQuestion-questionDescription"
+                defaultMessage="This includes money from jobs, alimony, investments, or gifts. Income is the money earned or received before deducting taxes"
+              />
+            </HelpButton>
           </QuestionQuestion>
+          {pageNumber === 1 && (
+            <QuestionDescription>
+              <FormattedMessage
+                id="householdDataBlock.createIncomeRadioQuestion-questionDescription.you"
+                defaultMessage="Enter income for yourself. You can enter income for other household members later."
+              />
+            </QuestionDescription>
+          )}
           <Controller
             name="hasIncome"
             control={control}
@@ -616,10 +626,12 @@ const ECHouseholdMemberForm = () => {
           <QuestionQuestion>
             <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
             {getIncomeStreamSourceLabel(selectedIncomeSource)}
-            <HelpButton
-              helpText='"Every 2 weeks" means you get paid every other week. "Twice a month" means you get paid two times a month on the same dates each month.'
-              helpId="personIncomeBlock.income-freq-help-text"
-            />
+            <HelpButton>
+              <FormattedMessage
+                id="personIncomeBlock.income-freq-help-text"
+                defaultMessage='"Every 2 weeks" means you get paid every other week. "Twice a month" means you get paid two times a month on the same dates each month.'
+              />
+            </HelpButton>
           </QuestionQuestion>
         </div>
         <>
@@ -826,10 +838,12 @@ const ECHouseholdMemberForm = () => {
       <div className="section top-padding-mb">
         <QuestionQuestion>
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
-          <HelpButton
-            helpText="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
-            helpId="personIncomeBlock.return-questionDescription"
-          />
+          <HelpButton>
+            <FormattedMessage
+              defaultMessage="Answer the best you can. You will be able to include additional types of income. The more you include, the more accurate your results will be."
+              id="personIncomeBlock.return-questionDescription"
+            />
+          </HelpButton>
         </QuestionQuestion>
       </div>
     );

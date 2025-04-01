@@ -20,7 +20,6 @@ export type EnergyCalculatorFormData = {
   needsWaterHeater: boolean;
   needsHvac: boolean;
   needsStove: boolean;
-  needsDryer: boolean;
 };
 
 export type EnergyCalculatorMember = {

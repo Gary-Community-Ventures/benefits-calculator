@@ -126,7 +126,6 @@ const getEnergyCalculatorFormDataBody = (
     needs_water_heater: energyCalculatorFormData.needsWaterHeater,
     needs_hvac: energyCalculatorFormData.needsHvac,
     needs_stove: energyCalculatorFormData.needsStove,
-    needs_dryer: energyCalculatorFormData.needsDryer,
   };
 };
 
@@ -182,7 +181,7 @@ const getUserBody = (formData: FormData, languageCode: Language): ApiUser & ApiU
     email: email ? email : null,
     first_name: firstName,
     last_name: lastName,
-    tcpa_consent: commConsent,
+    explicit_tcpa_consent: commConsent,
     language_code: languageCode,
     send_offers: sendOffers,
     send_updates: sendUpdates,
