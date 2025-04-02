@@ -28,7 +28,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
   const { formData, staffToken } = useContext(Context);
   const { isAdminView, validations, setValidations, programCategories, filtersChecked } = useResultsContext();
   const intl = useIntl();
-  const {fetchScreen} = useScreenApi();
+  const { fetchScreen } = useScreenApi();
 
   const IconRenderer: React.FC<IconRendererProps> = ({ headingType }) => {
     const IconComponent = headingOptionsMappings[headingType];
