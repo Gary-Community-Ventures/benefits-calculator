@@ -69,7 +69,7 @@ export function useDefaultBackNavigationFunction(questionName: QuestionName) {
 
   const prevUrl = useMemo(() => {
     if (prevStepName && MEMBER_QUESTIONS.includes(prevStepName)) {
-      return `/${whiteLabel}/${uuid}/step-${currentStepId - 1}/${formData.householdData.length}`;
+      return `/${whiteLabel}/${uuid}/step-${currentStepId - 1}/${formData.householdData.length || 1}`;
     }
 
     return `/${whiteLabel}/${uuid}/step-${currentStepId - 1}`;
