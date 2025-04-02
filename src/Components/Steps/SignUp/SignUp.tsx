@@ -230,7 +230,7 @@ function SignUp() {
       <QuestionHeader>
         <FormattedMessage
           id="qcc.optional-sign-up-text"
-          defaultMessage="Optional: Sign up for benefits updates and/or paid feedback opportunities"
+          defaultMessage="Optional: Sign up for benefits updates and/or feedback opportunities"
         />
       </QuestionHeader>
       <QuestionQuestion>
