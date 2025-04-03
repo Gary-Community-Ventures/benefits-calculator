@@ -79,7 +79,8 @@
 }
 
 .tellercounty-logo-size,
-.pueblocounty-logo-size, .pitkincounty-logo-size {
+.pueblocounty-logo-size,
+.pitkincounty-logo-size {
   display: block;
   max-height: 91%;
   max-width: 95%;
