@@ -40,7 +40,7 @@ function notPregnantOrUnder19(member: HouseholdData) {
 export const calculatedCitizenshipFilters: Record<CalculatedCitizenLabel, CalculatedCitizenshipFilter> = {
   otherHealthCarePregnant: {
     func: (member) => {
-      return member.conditions.pregnant;
+      return member.conditions.pregnant ?? false;
     },
     linkedFilters: ['non_citizen', 'green_card', 'refugee', 'gc_5plus', 'gc_5less', 'otherWithWorkPermission'],
   },
