@@ -30,7 +30,7 @@ const FetchScreen = () => {
   const initializeScreen = async () => {
     try {
       const response = await fetchScreen();
-      if(response) {
+      if (response) {
         handleScreenResponse(response);
       }
     } catch (err) {
@@ -42,7 +42,6 @@ const FetchScreen = () => {
   };
 
   const handleScreenResponse = (response: ScreenApiResponse) => {
-
     setWhiteLabel(response.white_label);
 
     if (whiteLabel === undefined) {
