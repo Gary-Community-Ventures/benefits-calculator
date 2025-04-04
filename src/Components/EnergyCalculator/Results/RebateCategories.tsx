@@ -28,7 +28,7 @@ function RebateCategoryCard({ rebateCategory }: RebateCategoryCardProps) {
   );
 }
 
-const NEEDS_REBATE_FIELDS = ['needsHvac', 'needsDryer', 'needsStove', 'needsWaterHeater'] as const;
+const NEEDS_REBATE_FIELDS = ['needsHvac', 'needsStove', 'needsWaterHeater'] as const;
 
 export function useEnergyCalculatorNeedsRebates() {
   const { formData } = useContext(Context);

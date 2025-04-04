@@ -58,7 +58,7 @@ import './PersonIncomeBlock.css';
 import { useShouldRedirectToConfirmation } from '../../QuestionComponents/questionHooks';
 
 const HouseholdMemberForm = () => {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid, page, whiteLabel } = useParams();
   const { updateScreen } = useScreenApi();
   const navigate = useNavigate();
@@ -337,7 +337,6 @@ const HouseholdMemberForm = () => {
       frontendId: crypto.randomUUID(),
     };
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-    setFormData(updatedFormData);
     updateScreen(updatedFormData);
 
     nextStep(uuid, currentStepId, pageNumber);

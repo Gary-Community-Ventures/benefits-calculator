@@ -70,7 +70,6 @@ const Disclaimer = () => {
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (termsOfServiceAndAgeData) => {
     const updatedFormData = { ...formData, ...termsOfServiceAndAgeData };
-    setFormData(updatedFormData);
 
     if (uuid) {
       await updateScreen(updatedFormData);
@@ -111,6 +110,7 @@ const Disclaimer = () => {
               <a
                 className="link-color"
                 href={publicChargeOption.link}
+                target="_blank"
                 onClick={() => {
                   dataLayerPush({
                     event: 'public_charge',
@@ -167,7 +167,7 @@ const Disclaimer = () => {
         </a>
         <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />
         <a href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" className="link-color">
-          <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Additional Terms & Consent to Contact" />
+          <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Terms and Conditions" />
         </a>
         <FormattedMessage id="landingPage-disclaimer-lable-end" defaultMessage="." />
       </div>

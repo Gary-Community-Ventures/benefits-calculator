@@ -36,7 +36,7 @@ import useScreenApi from '../../../Assets/updateScreen';
 import './Expenses.css';
 
 const Expenses = () => {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const intl = useIntl();
   const translatedAriaLabel = intl.formatMessage({
@@ -98,7 +98,6 @@ const Expenses = () => {
   const formSubmitHandler: SubmitHandler<FormSchema> = async (expensesObject) => {
     if (uuid) {
       const updatedFormData = { ...formData, ...expensesObject };
-      setFormData(updatedFormData);
       await updateScreen(updatedFormData);
       nextStep();
     }
