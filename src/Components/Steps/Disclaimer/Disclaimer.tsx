@@ -108,7 +108,6 @@ const Disclaimer = () => {
                 className="link-color"
                 target="_blank"
                 href={publicChargeOption.link}
-                target="_blank"
                 onClick={() => {
                   dataLayerPush({
                     event: 'public_charge',
