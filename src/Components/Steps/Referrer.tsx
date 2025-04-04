@@ -21,7 +21,7 @@ type ReferralOptions = {
 };
 
 export default function ReferralSourceStep() {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const { updateScreen } = useScreenApi();
 
@@ -86,7 +86,6 @@ export default function ReferralSourceStep() {
   const formSubmitHandler = async ({ referralSource, otherReferrer }: FormSchema) => {
     const source = otherReferrer !== '' ? otherReferrer : referralSource;
     const updatedFormData = { ...formData, referralSource: source };
-    setFormData(updatedFormData);
     updateScreen(updatedFormData);
     nextStep();
   };

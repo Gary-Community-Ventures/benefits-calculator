@@ -9,11 +9,12 @@ import {
   ApiUserWriteOnly,
 } from '../Types/ApiFormData.js';
 import { EnergyCalculatorFormData, EnergyCalculatorMember, FormData, HouseholdData } from '../Types/FormData';
-import { putScreen, postScreen, putUser } from '../apiCalls';
+import { putScreen, postScreen, putUser, getScreen } from '../apiCalls';
 import { Language } from './languageOptions';
 import { useContext } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
+import { useUpdateFormData } from './updateFormData.tsx';
 
 const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: string) => {
   const householdMembers = getHouseholdMembersBodies(formData);
@@ -171,11 +172,13 @@ const getExpensesBodies = (formData: FormData): ApiExpense[] => {
   });
 };
 
-const getUserBody = (formData: FormData, languageCode: Language): ApiUser & ApiUserWriteOnly => {
+type ApiUserBody = ApiUser & ApiUserWriteOnly;
+
+const getUserBody = (formData: FormData, languageCode: Language): ApiUserBody => {
   const { email, phone, firstName, lastName, sendUpdates, sendOffers, commConsent } = formData.signUpInfo;
   const phoneNumber = '+1' + phone;
 
-  const user: ApiUser & ApiUserWriteOnly = {
+  const user: ApiUserBody = {
     email_or_cell: email ? email : phoneNumber,
     cell: phone ? phoneNumber : null,
     email: email ? email : null,
@@ -193,17 +196,28 @@ const getUserBody = (formData: FormData, languageCode: Language): ApiUser & ApiU
 export default function useScreenApi() {
   const { whiteLabel, locale } = useContext(Context);
   const { uuid } = useParams();
+  const updateFormData = useUpdateFormData();
 
   return {
+    fetchScreen: async () => {
+      if (uuid === undefined) {
+        return;
+      }
+      const response = await getScreen(uuid);
+      updateFormData(response);
+      return response;
+    },
     updateScreen: async (formData: FormData) => {
       if (uuid === undefined) {
         return;
       }
-
-      await putScreen(getScreensBody(formData, locale, whiteLabel), uuid);
+      const updatedFormData = await putScreen(getScreensBody(formData, locale, whiteLabel), uuid);
+      updateFormData(updatedFormData);
     },
     createScreen: async (formData: FormData) => {
-      return await postScreen(getScreensBody(formData, locale, whiteLabel));
+      const newFormData = await postScreen(getScreensBody(formData, locale, whiteLabel));
+      updateFormData(newFormData);
+      return newFormData;
     },
     updateUser: async (formData: FormData) => {
       const userBody = getUserBody(formData, locale);

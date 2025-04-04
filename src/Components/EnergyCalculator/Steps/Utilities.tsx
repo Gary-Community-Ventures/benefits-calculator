@@ -17,7 +17,7 @@ import useScreenApi from '../../../Assets/updateScreen';
 import { useEnergyFormData } from '../hooks';
 
 const Utilities = () => {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const { updateScreen } = useScreenApi();
   const energyDataAvailable = useEnergyFormData(formData);
@@ -72,7 +72,6 @@ const Utilities = () => {
 
     const updatedEnergyCalculatorData = { ...formData.energyCalculator, ...rhfData.energyCalculator };
     const updatedFormData = { ...formData, energyCalculator: updatedEnergyCalculatorData };
-    setFormData(updatedFormData);
     updateScreen(updatedFormData);
     nextStep();
   };

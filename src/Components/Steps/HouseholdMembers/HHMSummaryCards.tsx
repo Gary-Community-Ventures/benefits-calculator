@@ -20,7 +20,7 @@ type HHMSummariesProps = {
 };
 
 const HHMSummaries = ({ activeMemberData, triggerValidation, questionName }: HHMSummariesProps) => {
-  const { formData } = useContext(Context);
+  const { formData, whiteLabel } = useContext(Context);
   const { uuid, page } = useParams();
   const pageNumber = Number(page);
   const currentStepId = useStepNumber(questionName);
@@ -38,7 +38,7 @@ const HHMSummaries = ({ activeMemberData, triggerValidation, questionName }: HHM
   const handleEditBtnSubmit = async (memberIndex: number) => {
     const isValid = await triggerValidation();
     if (isValid) {
-      navigate(`/${formData.whiteLabel}/${uuid}/step-${currentStepId}/${memberIndex + 1}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${currentStepId}/${memberIndex + 1}`);
     }
   };
 
