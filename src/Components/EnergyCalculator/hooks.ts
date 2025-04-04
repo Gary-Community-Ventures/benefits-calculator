@@ -19,7 +19,6 @@ export function useEnergyFormData(
         electricityIsDisconnected: false,
         hasPastDueEnergyBills: false,
         needsHvac: false,
-        needsDryer: false,
         needsStove: false,
         needsWaterHeater: false,
       };

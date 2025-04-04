@@ -19,6 +19,7 @@ import ACHSMFBLogo from '../../Assets/States/CO/WhiteLabels/AdamsCountyHumanServ
 import LC_MFBLogo from '../../Assets/States/CO/WhiteLabels/LarimerCounty/LC_MFBLogo.png';
 import TC_MFBLogo from '../../Assets/States/CO/WhiteLabels/TellerCounty/TC_MFBLogo.png';
 import PC_MFBLogo from '../../Assets/States/CO/WhiteLabels/PuebloCounty/PC_MFBLogo.png';
+import PitkinCounty_MFBLogo from '../../Assets/States/CO/WhiteLabels/PitkenCounty/PitkinCountyLogo.png';
 import PoweredByLogo from '../../Assets/Logos/powered_by_mfb.png';
 
 const logoMap: { [key: string]: string | undefined } = {
@@ -43,6 +44,7 @@ const logoMap: { [key: string]: string | undefined } = {
   LC_MFBLogo: LC_MFBLogo,
   TC_MFBLogo: TC_MFBLogo,
   PC_MFBLogo: PC_MFBLogo,
+  PitkinCounty_MFBLogo: PitkinCounty_MFBLogo,
   PoweredByLogo: PoweredByLogo,
 };
 

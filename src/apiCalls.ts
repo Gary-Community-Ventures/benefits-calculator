@@ -26,6 +26,8 @@ const eligibilityEndpoint = `${domain}/api/eligibility/`;
 const validationEndpoint = `${domain}/api/validations/`;
 const authTokenEndpoint = `${domain}/api/auth-token/`;
 
+export type ScreenApiResponse = ApiFormDataReadOnly & ApiFormData;
+
 export const header = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
@@ -77,7 +79,7 @@ const getScreen = async (uuid: string) => {
     if (!response.ok) {
       throw new Error(`${response.status} ${response.statusText}`);
     }
-    return response.json() as Promise<ApiFormDataReadOnly & ApiFormData>;
+    return response.json() as Promise<ScreenApiResponse>;
   });
 };
 
@@ -90,7 +92,7 @@ const postScreen = async (partialFormData: ApiFormData) => {
     if (!response.ok) {
       throw new Error(`${response.status} ${response.statusText}`);
     }
-    return response.json();
+    return response.json() as Promise<ScreenApiResponse>;
   });
 };
 
@@ -103,7 +105,7 @@ const putScreen = async (partialFormData: ApiFormData, uuid: string) => {
     if (!response.ok) {
       throw new Error(`${response.status} ${response.statusText}`);
     }
-    return response.json();
+    return response.json() as Promise<ScreenApiResponse>;
   });
 };
 

@@ -40,7 +40,6 @@ export type ApiEnergyCalculatorFormData = {
   needs_water_heater: boolean;
   needs_hvac: boolean;
   needs_stove: boolean;
-  needs_dryer: boolean;
 };
 
 export type ApiEnergyCalculatorMember = {
@@ -101,7 +100,7 @@ export type ApiUserWriteOnly = {
   last_name: string | null;
   email_or_cell: string | null;
   language_code: Language | null;
-  tcpa_consent: boolean;
+  explicit_tcpa_consent: boolean;
 };
 
 export type ApiUser = {

@@ -19,7 +19,7 @@ import ELECTRICITY_PROVIDERS from '../electricityProviders';
 import { useEnergyFormData } from '../hooks';
 
 export default function ElectricityProvider() {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const energyDataAvailable = useEnergyFormData(formData);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorElectricityProvider');
@@ -61,7 +61,6 @@ export default function ElectricityProvider() {
     };
 
     const updatedFormData: FormData = { ...formData, energyCalculator: updatedEnergyData };
-    setFormData(updatedFormData);
     updateScreen(updatedFormData);
     nextStep();
   };
