@@ -14,6 +14,7 @@ export type ApiInsurance = {
   emergency_medicaid: boolean;
   family_planning: boolean;
   va: boolean;
+  mass_health: boolean;
 };
 
 export type ApiIncomeReadOnly = {
@@ -180,6 +181,13 @@ export type ApiFormData = {
   has_nfp: boolean | null;
   has_fatc: boolean | null;
   has_section_8: boolean | null;
+  has_csfp: boolean | null;
+  has_ccfa: boolean | null;
+  has_ma_eaedc: boolean | null;
+  has_ma_ssp: boolean | null;
+  has_ma_mbta: boolean | null;
+  has_ma_maeitc: boolean | null;
+  has_ma_macftc: boolean | null;
   has_employer_hi?: boolean | null;
   has_private_hi?: boolean | null;
   has_medicaid_hi?: boolean | null;

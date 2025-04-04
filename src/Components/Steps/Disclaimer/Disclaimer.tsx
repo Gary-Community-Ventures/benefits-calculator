@@ -16,7 +16,7 @@ import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinue
 import { useQueryString } from '../../QuestionComponents/questionHooks';
 import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import useScreenApi from '../../../Assets/updateScreen';
-import { Language } from '../../../Assets/languageOptions';
+import { Language, OverrideableTranslation } from '../../../Assets/languageOptions';
 import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
 import EnergyCalculatorDisclaimer from '../../EnergyCalculator/Steps/Disclaimer';
 import './Disclaimer.css';
@@ -100,12 +100,13 @@ const Disclaimer = () => {
           </li>
           <li>
             <div>
-              <FormattedMessage
+              <OverrideableTranslation
                 id="landingPage.publicCharge"
                 defaultMessage="Some benefits are available to Non-U.S. citizens. Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits may affect their immigration status. For more information, please review the "
               />
               <a
                 className="link-color"
+                target="_blank"
                 href={publicChargeOption.link}
                 target="_blank"
                 onClick={() => {

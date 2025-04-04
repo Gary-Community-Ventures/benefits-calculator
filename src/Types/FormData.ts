@@ -55,6 +55,7 @@ export type HealthInsurance = {
   emergency_medicaid: boolean;
   family_planning: boolean;
   va: boolean;
+  mass_health: boolean;
 };
 
 export type SignUpInfo = {
