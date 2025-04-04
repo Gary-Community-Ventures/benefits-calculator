@@ -21,7 +21,7 @@ const PreviousButton = ({ navFunction }: Props) => {
 
   const defaultNavigate = () => {
     if (id && +id === householdStep + 1) {
-      navigate(`/${whiteLabel}/${uuid}/step-${householdStep}/${formData.householdData.length}`);
+      navigate(`/${whiteLabel}/${uuid}/step-${householdStep}/${formData.householdData.length || 1}`);
       return;
     }
     navigate(`/${whiteLabel}/${uuid}/step-${stepNumberId - 1}`);

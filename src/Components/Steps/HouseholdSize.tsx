@@ -18,7 +18,7 @@ import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 
 const HouseholdSize = () => {
-  const { formData, setFormData } = useContext(Context);
+  const { formData } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('householdSize');
   const nextStep = useGoToNextStep('householdSize', '1');
@@ -60,7 +60,6 @@ const HouseholdSize = () => {
         householdSize,
         householdData: formData.householdData.slice(0, householdSize),
       };
-      setFormData(updatedFormData);
       updateScreen(updatedFormData);
       nextStep();
     }

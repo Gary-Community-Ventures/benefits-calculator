@@ -222,7 +222,6 @@ function SignUp() {
       nextStep();
     } catch {
       setHasServerError(true);
-      setFormData(newFormData);
     }
   };
 

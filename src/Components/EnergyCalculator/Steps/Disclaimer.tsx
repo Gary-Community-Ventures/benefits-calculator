@@ -70,7 +70,6 @@ const Disclaimer = () => {
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (termsOfServiceAndAgeData) => {
     const updatedFormData = { ...formData, ...termsOfServiceAndAgeData };
-    setFormData(updatedFormData);
 
     if (uuid) {
       await updateScreen(updatedFormData);
@@ -111,6 +110,7 @@ const Disclaimer = () => {
               <a
                 className="link-color"
                 href={publicChargeOption.link}
+                target="_blank"
                 onClick={() => {
                   dataLayerPush({
                     event: 'public_charge',

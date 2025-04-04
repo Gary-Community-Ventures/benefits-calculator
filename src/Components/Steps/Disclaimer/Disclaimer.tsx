@@ -16,7 +16,7 @@ import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinue
 import { useQueryString } from '../../QuestionComponents/questionHooks';
 import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import useScreenApi from '../../../Assets/updateScreen';
-import { Language } from '../../../Assets/languageOptions';
+import { Language, OverrideableTranslation } from '../../../Assets/languageOptions';
 import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
 import EnergyCalculatorDisclaimer from '../../EnergyCalculator/Steps/Disclaimer';
 import './Disclaimer.css';
@@ -26,8 +26,8 @@ const isTrue = (value: boolean) => {
 };
 
 const Disclaimer = () => {
+  const { formData, setScreenLoading, locale } = useContext(Context);
   const isEnergyCalculator = useIsEnergyCalculator();
-  const { formData, setFormData, setScreenLoading, locale } = useContext(Context);
   let { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
   // use defaults for the config on this page because the config won't be loaded
@@ -73,7 +73,6 @@ const Disclaimer = () => {
 
   const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (termsOfServiceAndAgeData) => {
     const updatedFormData = { ...formData, ...termsOfServiceAndAgeData };
-    setFormData(updatedFormData);
 
     if (uuid) {
       await updateScreen(updatedFormData);
@@ -101,12 +100,13 @@ const Disclaimer = () => {
           </li>
           <li>
             <div>
-              <FormattedMessage
+              <OverrideableTranslation
                 id="landingPage.publicCharge"
                 defaultMessage="Some benefits are available to Non-U.S. citizens. Non-U.S. citizens planning to apply for legal permanent residency or a visa should consider how applying for any benefits may affect their immigration status. For more information, please review the "
               />
               <a
                 className="link-color"
+                target="_blank"
                 href={publicChargeOption.link}
                 onClick={() => {
                   dataLayerPush({
