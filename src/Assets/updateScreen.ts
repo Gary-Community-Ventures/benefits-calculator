@@ -201,7 +201,7 @@ const getUserBody = (formData: FormData, languageCode: Language): ApiUserBody =>
 };
 
 export default function useScreenApi() {
-  const { whiteLabel, locale } = useContext(Context);
+  const { whiteLabel, locale, formData, setFormData } = useContext(Context);
   const { uuid } = useParams();
   const updateFormData = useUpdateFormData();
 
@@ -211,20 +211,28 @@ export default function useScreenApi() {
         return;
       }
       const response = await getScreen(uuid);
-      updateFormData(response);
+      updateFormData(formData, response);
       return response;
     },
-    updateScreen: async (formData: FormData) => {
+    updateScreen: async (updatedFormData: FormData) => {
       if (uuid === undefined) {
         return;
       }
-      const updatedFormData = await putScreen(getScreensBody(formData, locale, whiteLabel), uuid);
-      updateFormData(updatedFormData);
+
+      // TODO: This could still have a race conditon potentially if multiple requests go through
+      const originalFormData = JSON.parse(JSON.stringify(formData));
+
+      // Optimistically update the formdata, before we get the response back
+      setFormData(updatedFormData);
+      const response = await putScreen(getScreensBody(updatedFormData, locale, whiteLabel), uuid);
+
+      // Update the form data from the response, using the formdata from before the optimistic update
+      updateFormData(originalFormData, response);
     },
-    createScreen: async (formData: FormData) => {
-      const newFormData = await postScreen(getScreensBody(formData, locale, whiteLabel));
-      updateFormData(newFormData);
-      return newFormData;
+    createScreen: async (updatedFormData: FormData) => {
+      const response = await postScreen(getScreensBody(updatedFormData, locale, whiteLabel));
+      updateFormData(formData, response);
+      return response;
     },
     updateUser: async (formData: FormData) => {
       const userBody = getUserBody(formData, locale);
