@@ -69,6 +69,7 @@
 
 .need-desc-paragraph {
   margin-bottom: 1rem;
+  white-space: pre-line;
 }
 
 .phone-number {
