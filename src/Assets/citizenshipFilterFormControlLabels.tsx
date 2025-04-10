@@ -40,7 +40,7 @@ function notPregnantOrUnder19(member: HouseholdData) {
 export const calculatedCitizenshipFilters: Record<CalculatedCitizenLabel, CalculatedCitizenshipFilter> = {
   otherHealthCarePregnant: {
     func: (member) => {
-      return member.conditions.pregnant;
+      return member.conditions.pregnant ?? false;
     },
     linkedFilters: ['non_citizen', 'green_card', 'refugee', 'gc_5plus', 'gc_5less', 'otherWithWorkPermission'],
   },
@@ -80,8 +80,10 @@ const citizenshipFilterFormControlLabels: Record<CitizenLabelOptions, FormattedM
     />
   ),
   green_card: <FormattedMessage id="citizenshipFCtrlLabel-green_card" defaultMessage="Green card holders" />,
-  gc_5plus: <FormattedMessage id="citizenshipFCtrlLabel-gc_5plus" defaultMessage="5+ years in the U.S." />,
-  gc_5less: <FormattedMessage id="citizenshipFCtrlLabel-gc_5less" defaultMessage="Less than 5 years in the U.S." />,
+  gc_5plus: <FormattedMessage id="citizenshipFCtrlLabel-gc_5plus" defaultMessage="Had green card for 5+ years" />,
+  gc_5less: (
+    <FormattedMessage id="citizenshipFCtrlLabel-gc_5less" defaultMessage="Had green card for less than 5 years" />
+  ),
   refugee: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-refugee"
