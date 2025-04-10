@@ -2,7 +2,7 @@ import { useContext, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ConfirmationBlock from '../../Confirmation/ConfirmationBlock';
 import { Context } from '../../Wrapper/Wrapper';
-import { ReactComponent as Referral } from '../../../Assets/icons/referral.svg';
+import { ReactComponent as Referral } from '../../../Assets/icons/General/referral.svg';
 import { getProviderNames } from '../electricityProviders';
 import { FormattedMessageType } from '../../../Types/Questions';
 
