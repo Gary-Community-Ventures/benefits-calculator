@@ -22,7 +22,7 @@ import EnergyCalculatorUtilityStatus from '../EnergyCalculator/ConfirmationPage/
 import EnergyCalculatorApplianceStatus from '../EnergyCalculator/ConfirmationPage/ApplianceStatus';
 
 function ZipCode() {
-  const { formData } = useContext(Context);
+  const { formData, getReferrer } = useContext(Context);
   const { zipcode, county } = formData;
   const { formatMessage } = useIntl();
   const translateNumber = useTranslateNumber();
@@ -42,6 +42,7 @@ function ZipCode() {
       title={<FormattedMessage id="confirmation.residenceInfo" defaultMessage="Residence Information" />}
       editAriaLabel={editZipAriaLabel}
       stepName="zipcode"
+      noReturn={getReferrer('featureFlags').includes('no_confirmation_return_zipcode')}
     >
       <ConfirmationItem
         label={<FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />}
