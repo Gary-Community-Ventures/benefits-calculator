@@ -25,12 +25,12 @@
   width: 4.375rem;
 }
 
-.option-card-icon path, .option-card-icon rect {
+.option-card-icon path,
+.option-card-icon rect {
   fill: var(--icon-color);
 }
 
 .checkmark {
-
   height: 1.75rem;
   width: 1.75rem;
   margin: -2.25rem 0.5rem 0.5rem 0;
