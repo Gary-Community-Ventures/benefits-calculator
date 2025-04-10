@@ -150,6 +150,20 @@ export const Filter = () => {
     setCitButtonClass('citizenship-button');
     setFilterHeight(0);
   };
+
+  const handleScroll = () => {
+    if (citizenshipFilterIsOpen) {
+      handleFilterClose();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [citizenshipFilterIsOpen]);
+
   const citizenshipFiltersModalALProps = {
     id: 'filter.citFilterModalAL',
     defaultMessage: 'citizenship filters modal',
