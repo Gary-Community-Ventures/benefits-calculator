@@ -7,7 +7,7 @@ import { FormattedMessageType } from '../../Types/Questions';
 import { useConfig } from '../Config/configHook';
 import ConfirmationBlock, { formatToUSD, ConfirmationItem } from './ConfirmationBlock';
 import { Context } from '../Wrapper/Wrapper';
-import { ReactComponent as Head } from '../../Assets/icons/head.svg';
+import { ReactComponent as Head } from '../../Assets/icons/General/head.svg';
 import { calcIncomeStreamAmount } from '../../Assets/income';
 
 type IconAndFormattedMessageMap = {

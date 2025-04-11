@@ -1,10 +1,10 @@
-import { ReactComponent as Food } from '../../../Assets/CategoryHeadingIcons/food.svg';
-import { ReactComponent as Housing } from '../../../Assets/CategoryHeadingIcons/housing.svg';
-import { ReactComponent as HealthCare } from '../../../Assets/CategoryHeadingIcons/healthcare.svg';
-import { ReactComponent as Transportation } from '../../../Assets/CategoryHeadingIcons/transportation.svg';
-import { ReactComponent as TaxCredits } from '../../../Assets/CategoryHeadingIcons/taxCredits.svg';
-import { ReactComponent as CashAssistance } from '../../../Assets/CategoryHeadingIcons/cashAssistant.svg';
-import { ReactComponent as ChildCareYouthEducation } from '../../../Assets/CategoryHeadingIcons/childCareYouthEducation.svg';
+import { ReactComponent as Food } from '../../../Assets/icons/Programs/CategoryHeading/food.svg';
+import { ReactComponent as Housing } from '../../../Assets/icons/Programs/CategoryHeading/housing.svg';
+import { ReactComponent as HealthCare } from '../../../Assets/icons/Programs/CategoryHeading/healthcare.svg';
+import { ReactComponent as Transportation } from '../../../Assets/icons/Programs/CategoryHeading/transportation.svg';
+import { ReactComponent as TaxCredits } from '../../../Assets/icons/Programs/CategoryHeading/taxCredits.svg';
+import { ReactComponent as CashAssistance } from '../../../Assets/icons/Programs/CategoryHeading/cashAssistant.svg';
+import { ReactComponent as ChildCareYouthEducation } from '../../../Assets/icons/Programs/CategoryHeading/childCareYouthEducation.svg';
 import { calculateTotalValue, formatToUSD } from '../FormattedValue';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate';
