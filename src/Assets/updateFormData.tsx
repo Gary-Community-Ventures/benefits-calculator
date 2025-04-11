@@ -69,6 +69,7 @@ export function useUpdateFormData() {
         ma_mbta: response.has_ma_mbta ?? false,
         ma_maeitc: response.has_ma_maeitc ?? false,
         ma_macftc: response.has_ma_macftc ?? false,
+        co_ab: response.has_co_ab ?? false,
       },
       referralSource: response.referral_source ?? undefined,
       immutableReferrer: response.referrer_code ?? undefined,
