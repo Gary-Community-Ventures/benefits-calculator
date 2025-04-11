@@ -5,8 +5,8 @@ import { ScreenApiResponse } from '../apiCalls';
 
 // Hook to update the context's form data from an api response
 export function useUpdateFormData() {
-  const { setFormData } = useContext(Context);
-  return (formData: FormData, response: ScreenApiResponse) => {
+  const { formData, setFormData } = useContext(Context);
+  return (response: ScreenApiResponse) => {
     const updatedFormData: FormData = {
       ...formData,
       isTest: response.is_test ?? false,
