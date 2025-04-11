@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
@@ -29,7 +29,7 @@ export const Zipcode = () => {
   const noChangeStateMessage = getReferrer('featureFlags').includes('no_zipcode_change_state');
   const countiesByZipcode = useConfig<{ [key: string]: { [key: string]: string } }>('counties_by_zipcode');
   const state = useConfig<{ name: string }>('state');
-
+  const { formatMessage } = useIntl();
   const checkCountyIsValid = ({ zipcode, county }: { zipcode: string; county: string }) => {
     const validCounties = countiesByZipcode[zipcode];
 
@@ -41,7 +41,16 @@ export const Zipcode = () => {
 
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
   const zipcodeSchema = z
-    .string()
+    .string({
+      errorMap: () => {
+        return {
+          message: formatMessage({
+            id: 'validation-helperText.zipcode',
+            defaultMessage: `Please enter a valid zip code for ${state.name}`,
+          }),
+        };
+      },
+    })
     .trim()
     .regex(numberMustBeFiveDigitsLongRegex)
     .refine((data) => data in countiesByZipcode);
@@ -51,7 +60,7 @@ export const Zipcode = () => {
       zipcode: zipcodeSchema,
       county: z.string(),
     })
-    .refine((data) => checkCountyIsValid(data), { message: 'invalid county', path: ['county'] });
+    .refine((data) => checkCountyIsValid(data), { message: 'Invalid county', path: ['county'] });
 
   const {
     control,
@@ -107,19 +116,6 @@ export const Zipcode = () => {
     return [disabledSelectMenuItem, dropdownMenuItems];
   };
 
-  const getZipcodeHelperText = (hasZipcodeErrors: boolean) => {
-    if (!hasZipcodeErrors) {
-      return null;
-    }
-
-    return (
-      <>
-        <FormattedMessage id="validation-helperText.zipcode" defaultMessage="Please enter a valid zip code for " />
-        {state.name}
-      </>
-    );
-  };
-
   const renderCountyHelperText = () => {
     return (
       <ErrorMessageWrapper fontSize="1rem">
@@ -166,7 +162,11 @@ export const Zipcode = () => {
               inputProps={NUM_PAD_PROPS}
               onChange={handleNumbersOnly(field.onChange)}
               error={errors.zipcode !== undefined}
-              helperText={getZipcodeHelperText(errors.zipcode !== undefined)}
+              helperText={
+                errors.zipcode !== undefined && (
+                  <ErrorMessageWrapper fontSize="1rem">{errors.zipcode.message}</ErrorMessageWrapper>
+                )
+              }
             />
           )}
         />
