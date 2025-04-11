@@ -5,12 +5,12 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { useQueryString } from '../QuestionComponents/questionHooks';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import * as z from 'zod';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLabel';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import useStepForm from './stepForm';
 
 export const STATES: { [key: string]: string } = { co: 'Colorado', nc: 'North Carolina' };
 
@@ -32,12 +32,14 @@ const SelectStatePage = () => {
       .min(1),
   });
 
+  type SchemaType = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<SchemaType>({
+    formSchema,
     defaultValues: {
       state: whiteLabel ?? '',
     },

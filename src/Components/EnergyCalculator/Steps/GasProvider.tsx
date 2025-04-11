@@ -48,7 +48,7 @@ export default function GasProvider() {
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ gasProvider }) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async ({ gasProvider }) => {
     if (!uuid) {
       throw new Error('no uuid');
     }
@@ -62,7 +62,7 @@ export default function GasProvider() {
     };
 
     const updatedFormData: FormData = { ...formData, energyCalculator: updatedEnergyData };
-    updateScreen(updatedFormData);
+    await updateScreen(updatedFormData);
     nextStep();
   };
 

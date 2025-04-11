@@ -1,11 +1,17 @@
-import { Button } from '@mui/material';
-import { PropsWithChildren } from 'react';
+import { Button, CircularProgress } from '@mui/material';
+import { PropsWithChildren, useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Context } from '../Wrapper/Wrapper';
 
 const FormContinueButton = ({ children }: PropsWithChildren) => {
+  const { stepLoading } = useContext(Context);
   return (
     <Button variant="contained" type="submit">
-      {children ?? <FormattedMessage id="continueButton" defaultMessage="Continue" />}
+      {stepLoading ? (
+        <CircularProgress />
+      ) : (
+        children ?? <FormattedMessage id="continueButton" defaultMessage="Continue" />
+      )}
     </Button>
   );
 };

@@ -271,7 +271,7 @@ const ECHouseholdMemberForm = () => {
     }
   }, [watchIsDisabled]);
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (memberData) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
@@ -295,7 +295,7 @@ const ECHouseholdMemberForm = () => {
     const updatedHouseholdData = [...formData.householdData];
     updatedHouseholdData[currentMemberIndex] = updatedMemberData;
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-    updateScreen(updatedFormData);
+    await updateScreen(updatedFormData);
 
     nextStep(uuid, currentStepId, pageNumber);
   };

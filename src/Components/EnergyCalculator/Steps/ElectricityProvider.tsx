@@ -47,7 +47,7 @@ export default function ElectricityProvider() {
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ electricityProvider }) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async ({ electricityProvider }) => {
     if (!uuid) {
       throw new Error('no uuid');
     }
@@ -61,7 +61,7 @@ export default function ElectricityProvider() {
     };
 
     const updatedFormData: FormData = { ...formData, energyCalculator: updatedEnergyData };
-    updateScreen(updatedFormData);
+    await updateScreen(updatedFormData);
     nextStep();
   };
 

@@ -9,12 +9,17 @@ import {
   ApiUserWriteOnly,
 } from '../Types/ApiFormData.js';
 import { EnergyCalculatorFormData, EnergyCalculatorMember, FormData, HouseholdData } from '../Types/FormData';
-import { putScreen, postScreen, putUser, getScreen, ScreenApiResponse } from '../apiCalls';
+import { putScreen, postScreen, putUser, getScreen } from '../apiCalls';
 import { Language } from './languageOptions';
-import { useCallback, useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
 import { useUpdateFormData } from './updateFormData';
+
+// TODO: This is just for testing
+const wait = async (ms: number) => {
+  await new Promise((resolve) => setTimeout(resolve, ms));
+};
 
 const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: string) => {
   const householdMembers = getHouseholdMembersBodies(formData);
@@ -200,40 +205,10 @@ const getUserBody = (formData: FormData, languageCode: Language): ApiUserBody =>
   return user;
 };
 
-function wait(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 export default function useScreenApi() {
-  const { whiteLabel, locale, formData, setFormData } = useContext(Context);
+  const { whiteLabel, locale } = useContext(Context);
   const { uuid } = useParams();
   const updateFormData = useUpdateFormData();
-
-  // State to hold the update screen promise chain
-  const [requestQueue, setRequestQueue] = useState<Promise<ScreenApiResponse | null>>(Promise.resolve(null));
-
-  // This will prevent race conditions by ensuring that the previous update is completed,
-  // and the formData is updated, before making another request.
-  const queueScreenUpdate = async (updatedFormData: FormData) => {
-    const newQueue = new Promise<ScreenApiResponse | null>((resolve) => {
-      // Create a new promise that continues the chain
-      requestQueue
-        .then(async () => {
-          await wait(5000);
-          const result = await putScreen(getScreensBody(updatedFormData, locale, whiteLabel), uuid as string);
-          if (result) {
-            updateFormData(result);
-          }
-          resolve(result); // Resolve the promise returned to the caller
-        })
-        .catch((error) => {
-          console.error('API call failed:', error);
-          resolve(null);
-        });
-    });
-    setRequestQueue(newQueue);
-    return newQueue;
-  };
 
   return {
     fetchScreen: async () => {
@@ -244,19 +219,18 @@ export default function useScreenApi() {
       updateFormData(response);
       return response;
     },
-    // TODO: this still won't prevent issues because the caller of this create the updatedFormData from the outdated form dadta.
-    // We would need to refactor those too.
-    updateScreen: async (updatedFormData: FormData) => {
+    updateScreen: async (formData: FormData) => {
       if (uuid === undefined) {
         return;
       }
-      const response = await queueScreenUpdate(updatedFormData);
-      return response;
+      await wait(3000);
+      const updatedFormData = await putScreen(getScreensBody(formData, locale, whiteLabel), uuid);
+      updateFormData(updatedFormData);
     },
-    createScreen: async (updatedFormData: FormData) => {
-      const response = await postScreen(getScreensBody(updatedFormData, locale, whiteLabel));
-      updateFormData(response);
-      return response;
+    createScreen: async (formData: FormData) => {
+      const newFormData = await postScreen(getScreensBody(formData, locale, whiteLabel));
+      updateFormData(newFormData);
+      return newFormData;
     },
     updateUser: async (formData: FormData) => {
       const userBody = getUserBody(formData, locale);

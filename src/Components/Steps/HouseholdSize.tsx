@@ -16,6 +16,7 @@ import useScreenApi from '../../Assets/updateScreen';
 import { OverrideableTranslation } from '../../Assets/languageOptions';
 import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import useStepForm from './stepForm';
 
 const HouseholdSize = () => {
   const { formData } = useContext(Context);
@@ -42,25 +43,28 @@ const HouseholdSize = () => {
       .positive()
       .lte(8),
   });
+
+  type SchemaType = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<SchemaType>({
+    formSchema,
     defaultValues: {
       householdSize: formData.householdSize ?? 0,
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ householdSize }) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async ({ householdSize }) => {
     if (uuid) {
       const updatedFormData = {
         ...formData,
         householdSize,
         householdData: formData.householdData.slice(0, householdSize),
       };
-      updateScreen(updatedFormData);
+      await updateScreen(updatedFormData);
       nextStep();
     }
   };

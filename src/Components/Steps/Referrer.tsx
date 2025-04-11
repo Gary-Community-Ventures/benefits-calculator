@@ -86,7 +86,7 @@ export default function ReferralSourceStep() {
   const formSubmitHandler = async ({ referralSource, otherReferrer }: FormSchema) => {
     const source = otherReferrer !== '' ? otherReferrer : referralSource;
     const updatedFormData = { ...formData, referralSource: source };
-    updateScreen(updatedFormData);
+    await updateScreen(updatedFormData);
     nextStep();
   };
 

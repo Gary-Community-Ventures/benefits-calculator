@@ -148,14 +148,14 @@ function AlreadyHasBenefits() {
     setValue('alreadyHasBenefits', newAlreadyHasBenefits);
   }, [hasBenefits]);
 
-  const formSubmitHandler = ({ alreadyHasBenefits, hasBenefits }: z.infer<typeof formSchema>) => {
+  const formSubmitHandler = async ({ alreadyHasBenefits, hasBenefits }: z.infer<typeof formSchema>) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
 
     const newFormData = { ...formData, hasBenefits: hasBenefits, benefits: alreadyHasBenefits };
 
-    updateScreen(newFormData);
+    await updateScreen(newFormData);
     nextStep();
   };
 

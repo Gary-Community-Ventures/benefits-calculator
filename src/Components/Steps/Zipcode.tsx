@@ -19,6 +19,7 @@ import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
 import { OverrideableTranslation } from '../../Assets/languageOptions';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import useStepForm from './stepForm';
 
 export const Zipcode = () => {
   const { formData, getReferrer } = useContext(Context);
@@ -53,13 +54,15 @@ export const Zipcode = () => {
     })
     .refine((data) => checkCountyIsValid(data), { message: 'invalid county', path: ['county'] });
 
+  type SchemaType = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     handleSubmit,
     watch,
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<SchemaType>({
+    formSchema,
     defaultValues: {
       zipcode: formData.zipcode ?? '',
       county: formData.county ?? 'disabled-select',
@@ -71,10 +74,10 @@ export const Zipcode = () => {
 
   const nextStep = useGoToNextStep('zipcode');
 
-  const formSubmitHandler = (zipCodeAndCountyData: FormData) => {
+  const formSubmitHandler = async (zipCodeAndCountyData: SchemaType) => {
     if (uuid) {
       const updatedFormData = { ...formData, ...zipCodeAndCountyData };
-      updateScreen(updatedFormData);
+      await updateScreen(updatedFormData);
       nextStep();
     }
   };

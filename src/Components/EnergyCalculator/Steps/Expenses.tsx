@@ -88,7 +88,7 @@ export default function EnergyCalculatorExpenses() {
     };
   };
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ expenses }) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async ({ expenses }) => {
     if (!uuid) {
       throw new Error('no uuid');
     }
@@ -107,7 +107,7 @@ export default function EnergyCalculatorExpenses() {
     }
 
     const updatedFormData: FormData = { ...formData, expenses: updatedExpenses };
-    updateScreen(updatedFormData);
+    await updateScreen(updatedFormData);
     nextStep();
   };
 

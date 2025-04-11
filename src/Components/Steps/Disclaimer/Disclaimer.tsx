@@ -20,6 +20,7 @@ import { Language, OverrideableTranslation } from '../../../Assets/languageOptio
 import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
 import EnergyCalculatorDisclaimer from '../../EnergyCalculator/Steps/Disclaimer';
 import './Disclaimer.css';
+import useStepForm from '../stepForm';
 
 const isTrue = (value: boolean) => {
   return value;
@@ -58,20 +59,22 @@ const Disclaimer = () => {
     is13OrOlder: z.boolean().refine(isTrue),
   });
 
+  type FormSchemaType = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     getValues,
     handleSubmit,
-  } = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<FormSchemaType>({
+    formSchema,
     defaultValues: {
       agreeToTermsOfService: formData.agreeToTermsOfService ?? false,
       is13OrOlder: formData.is13OrOlder ?? false,
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (termsOfServiceAndAgeData) => {
+  const formSubmitHandler: SubmitHandler<FormSchemaType> = async (termsOfServiceAndAgeData) => {
     const updatedFormData = { ...formData, ...termsOfServiceAndAgeData };
 
     if (uuid) {

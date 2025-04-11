@@ -36,13 +36,13 @@ function ImmediateNeeds() {
     },
   });
 
-  const submitHandler = ({ needs }: z.infer<typeof formSchema>) => {
+  const submitHandler = async ({ needs }: z.infer<typeof formSchema>) => {
     if (!uuid) {
       throw new Error('uuid is not defined');
     }
 
     const newFormData = { ...formData, acuteHHConditions: needs };
-    updateScreen(newFormData);
+    await updateScreen(newFormData);
     nextStep();
   };
 

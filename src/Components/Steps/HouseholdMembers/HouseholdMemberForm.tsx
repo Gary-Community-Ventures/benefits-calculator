@@ -323,7 +323,7 @@ const HouseholdMemberForm = () => {
     }
   }, [watchHasIncome]);
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (memberData) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
@@ -337,7 +337,7 @@ const HouseholdMemberForm = () => {
       frontendId: crypto.randomUUID(),
     };
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-    updateScreen(updatedFormData);
+    await updateScreen(updatedFormData);
 
     nextStep(uuid, currentStepId, pageNumber);
   };

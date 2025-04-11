@@ -61,7 +61,7 @@ const Utilities = () => {
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (rhfData) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (rhfData) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
@@ -72,7 +72,7 @@ const Utilities = () => {
 
     const updatedEnergyCalculatorData = { ...formData.energyCalculator, ...rhfData.energyCalculator };
     const updatedFormData = { ...formData, energyCalculator: updatedEnergyCalculatorData };
-    updateScreen(updatedFormData);
+    await updateScreen(updatedFormData);
     nextStep();
   };
 

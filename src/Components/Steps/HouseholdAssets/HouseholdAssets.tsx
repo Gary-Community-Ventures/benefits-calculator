@@ -49,12 +49,12 @@ const HouseholdAssets = () => {
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ householdAssets }) => {
+  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async ({ householdAssets }) => {
     if (!uuid) {
       throw new Error('no uuid');
     }
     const updatedFormData = { ...formData, householdAssets: householdAssets };
-    updateScreen(updatedFormData);
+    await updateScreen(updatedFormData);
     nextStep();
   };
 
