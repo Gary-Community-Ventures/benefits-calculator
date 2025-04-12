@@ -16,6 +16,7 @@ import useScreenApi from '../../Assets/updateScreen';
 import { OverrideableTranslation } from '../../Assets/languageOptions';
 import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 
 const HouseholdSize = () => {
   const { formData } = useContext(Context);
@@ -107,7 +108,11 @@ const HouseholdSize = () => {
               inputProps={NUM_PAD_PROPS}
               onChange={handleNumbersOnly(field.onChange)}
               error={errors.householdSize !== undefined}
-              helperText={errors.householdSize !== undefined && errors.householdSize?.message}
+              helperText={
+                errors.householdSize !== undefined && (
+                  <ErrorMessageWrapper fontSize="1rem">{errors.householdSize?.message}</ErrorMessageWrapper>
+                )
+              }
             />
           )}
         />
