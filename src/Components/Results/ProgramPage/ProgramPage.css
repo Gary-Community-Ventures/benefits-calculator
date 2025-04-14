@@ -175,6 +175,7 @@ li.apply-info {
 .program-description {
   margin-bottom: 2rem;
   font-size: 1rem;
+  white-space: pre-line;
 }
 
 .icon-header-est-values {
@@ -208,6 +209,7 @@ li.apply-info {
 
 .navigator-desc {
   color: black;
+  white-space: pre-line;
 }
 
 .navigator-lang-flag {

@@ -1,4 +1,4 @@
-import { ReactComponent as WarningIcon } from '../../Assets/icons/warning.svg';
+import { ReactComponent as WarningIcon } from '../../Assets/icons/General/warning.svg';
 import './WarningMessage.css';
 import ResultsTranslate from '../Results/Translate/Translate';
 import { Translation } from '../../Types/Results';

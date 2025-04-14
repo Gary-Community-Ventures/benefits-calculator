@@ -4,7 +4,7 @@ import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useEffect } from 'react';
 import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import { ReactComponent as Apartment } from '../Icons/Apartment.svg';
-import { ReactComponent as Housing } from '../../../Assets/icons/residence.svg';
+import { ReactComponent as Housing } from '../../../Assets/icons/General/residence.svg';
 import { CardActionArea, Card, Stack, CardContent, Box } from '@mui/material';
 import './LandingPage.css';
 

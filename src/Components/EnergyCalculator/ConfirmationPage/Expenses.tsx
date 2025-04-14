@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import ConfirmationBlock from '../../Confirmation/ConfirmationBlock';
 import { Context } from '../../Wrapper/Wrapper';
 import { EnergyCalculatorExpenseType, ENERGY_CALCULATOR_EXPENSE_NAME_MAP } from '../Steps/Expenses';
-import { ReactComponent as Expense } from '../../../Assets/icons/expenses.svg';
+import { ReactComponent as Expense } from '../../../Assets/icons/General/expenses.svg';
 
 export default function EnergyCalculatorExpenses() {
   const { formData } = useContext(Context);

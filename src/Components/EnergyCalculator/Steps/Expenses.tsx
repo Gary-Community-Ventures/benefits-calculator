@@ -11,7 +11,7 @@ import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinue
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
-import { ReactComponent as Housing } from '../../../Assets/OptionCardIcons/AcuteConditions/housing.svg';
+import { ReactComponent as Housing } from '../../../Assets/icons/UrgentNeeds/AcuteConditions/housing.svg';
 import { ReactComponent as Stove } from '../Icons/Heat.svg';
 import { ReactComponent as AcUnit } from '../Icons/AcUnit.svg';
 import { Context } from '../../Wrapper/Wrapper';

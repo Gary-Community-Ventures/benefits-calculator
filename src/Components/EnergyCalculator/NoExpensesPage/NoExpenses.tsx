@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import { FormattedMessage, useIntl } from 'react-intl';
-import errorIcon from '../../../Assets/icons/error-icon.svg';
+import errorIcon from '../../../Assets/icons/General/error-icon.svg';
 import { Button } from '@mui/material';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import { useNavigate, useParams } from 'react-router-dom';

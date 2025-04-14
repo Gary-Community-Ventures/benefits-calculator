@@ -1,7 +1,7 @@
 import { Card, CardActionArea, CardContent, Stack } from '@mui/material';
 import { ReactNode } from 'react';
 import { FormattedMessageType } from '../../Types/Questions';
-import { ReactComponent as Checkmark } from '../../Assets/OptionCardIcons/checkmark.svg';
+import { ReactComponent as Checkmark } from '../../Assets/icons/General/OptionCard/checkmark.svg';
 import './MultiSelectTiles.css';
 import { useIntl } from 'react-intl';
 
