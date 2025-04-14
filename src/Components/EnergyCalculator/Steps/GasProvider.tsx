@@ -51,7 +51,7 @@ export default function GasProvider() {
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async ({ gasProvider }) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async ({ gasProvider }) => {
     if (!uuid) {
       throw new Error('no uuid');
     }

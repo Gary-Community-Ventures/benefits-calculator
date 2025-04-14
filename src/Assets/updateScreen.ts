@@ -16,11 +16,6 @@ import { Context } from '../Components/Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
 import { useUpdateFormData } from './updateFormData';
 
-// TODO: This is just for testing
-const wait = async (ms: number) => {
-  await new Promise((resolve) => setTimeout(resolve, ms));
-};
-
 const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: string) => {
   const householdMembers = getHouseholdMembersBodies(formData);
   const expenses = getExpensesBodies(formData);
@@ -223,7 +218,6 @@ export default function useScreenApi() {
       if (uuid === undefined) {
         return;
       }
-      await wait(3000);
       const updatedFormData = await putScreen(getScreensBody(formData, locale, whiteLabel), uuid);
       updateFormData(updatedFormData);
     },

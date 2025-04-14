@@ -7,7 +7,7 @@ export default function useStepForm<T extends FieldValues>({
   formSchema,
   defaultValues,
 }: {
-  formSchema: any; // TODO fix this any type
+  formSchema: any;
   defaultValues: DefaultValues<T>;
 }) {
   const { setStepLoading } = useContext(Context);
@@ -20,7 +20,6 @@ export default function useStepForm<T extends FieldValues>({
   const isSubmitting = form.formState.isSubmitting;
 
   useEffect(() => {
-    console.log('SETTING STEP LOADING', isSubmitting);
     setStepLoading(isSubmitting);
   }, [isSubmitting]);
 

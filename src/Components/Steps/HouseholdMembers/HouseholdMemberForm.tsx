@@ -324,7 +324,7 @@ const HouseholdMemberForm = () => {
     }
   }, [watchHasIncome]);
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (memberData) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async (memberData) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }

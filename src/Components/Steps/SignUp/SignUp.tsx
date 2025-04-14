@@ -17,6 +17,7 @@ import { useParams } from 'react-router-dom';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
 import useScreenApi from '../../../Assets/updateScreen';
 import './SignUp.css';
+import useStepForm from '../stepForm';
 
 function SignUp() {
   const { formData, setFormData } = useContext(Context);
@@ -151,6 +152,8 @@ function SignUp() {
       return true;
     });
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors, isSubmitted },
@@ -159,8 +162,8 @@ function SignUp() {
     handleSubmit,
     trigger,
     watch,
-  } = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<FormSchema>({
+    formSchema,
     defaultValues: {
       contactType: {
         sendOffers: formData.signUpInfo.sendOffers,
@@ -184,7 +187,7 @@ function SignUp() {
     }
   }, [someContactType(contactType), formData.signUpInfo.hasUser]);
 
-  const submitHandler = async (data: z.infer<typeof formSchema>) => {
+  const submitHandler = async (data: FormSchema) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }

@@ -47,7 +47,7 @@ const SelectStatePage = () => {
 
   const updateWhiteLabelAndNavigate = useUpdateWhiteLabelAndNavigate();
 
-  const submitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ state }) => {
+  const submitHandler: SubmitHandler<FormSchema> = ({ state }) => {
     let navUrl = `/${state}/step-2${queryString}`;
     if (uuid !== undefined) {
       navUrl = `/${state}/${uuid}/step-2${queryString}`;
