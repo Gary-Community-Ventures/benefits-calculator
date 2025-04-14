@@ -183,7 +183,7 @@ export default function ReferralSourceStep() {
                   error={errors.otherReferrer !== undefined}
                   helperText={
                     errors.otherReferrer !== undefined && (
-                      <ErrorMessageWrapper fontSize="1rem">{errors.otherReferrer?.message}</ErrorMessageWrapper>
+                      <ErrorMessageWrapper fontSize="1rem">{errors.otherReferrer.message}</ErrorMessageWrapper>
                     )
                   }
                 />
