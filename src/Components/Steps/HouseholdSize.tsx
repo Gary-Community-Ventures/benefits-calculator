@@ -1,9 +1,8 @@
 import { TextField } from '@mui/material';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import { Context } from '../Wrapper/Wrapper';
 import { useContext } from 'react';
 import * as z from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { FormattedMessage, useIntl } from 'react-intl';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
@@ -55,6 +54,7 @@ const HouseholdSize = () => {
     defaultValues: {
       householdSize: formData.householdSize ?? 0,
     },
+    successCallback: nextStep,
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async ({ householdSize }) => {
@@ -65,7 +65,6 @@ const HouseholdSize = () => {
         householdData: formData.householdData.slice(0, householdSize),
       };
       await updateScreen(updatedFormData);
-      nextStep();
     }
   };
 

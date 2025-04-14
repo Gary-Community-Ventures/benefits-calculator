@@ -75,6 +75,7 @@ const Utilities = () => {
         needsStove: formData.energyCalculator?.needsStove ?? false,
       },
     },
+    successCallback: nextStep,
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async (rhfData) => {
@@ -88,7 +89,6 @@ const Utilities = () => {
     const updatedEnergyCalculatorData = { ...formData.energyCalculator, ...rhfData.energyCalculator };
     const updatedFormData = { ...formData, energyCalculator: updatedEnergyCalculatorData };
     await updateScreen(updatedFormData);
-    nextStep();
   };
 
   return (
