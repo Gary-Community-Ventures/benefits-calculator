@@ -15,6 +15,7 @@ import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import useScreenApi from '../../../Assets/updateScreen';
 import { useEnergyFormData } from '../hooks';
+import useStepForm from '../../Steps/stepForm';
 
 const Utilities = () => {
   const { formData } = useContext(Context);
@@ -51,8 +52,10 @@ const Utilities = () => {
     }),
   });
 
-  const { handleSubmit, watch, setValue } = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  type FormSchema = z.infer<typeof formSchema>;
+
+  const { handleSubmit, watch, setValue } = useStepForm<FormSchema>({
+    formSchema,
     defaultValues: {
       energyCalculator: {
         electricityIsDisconnected: formData.energyCalculator?.electricityIsDisconnected ?? false,
@@ -61,7 +64,7 @@ const Utilities = () => {
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (rhfData) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async (rhfData) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }

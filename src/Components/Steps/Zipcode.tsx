@@ -54,14 +54,14 @@ export const Zipcode = () => {
     })
     .refine((data) => checkCountyIsValid(data), { message: 'invalid county', path: ['county'] });
 
-  type SchemaType = z.infer<typeof formSchema>;
+  type FormSchema = z.infer<typeof formSchema>;
 
   const {
     control,
     formState: { errors },
     handleSubmit,
     watch,
-  } = useStepForm<SchemaType>({
+  } = useStepForm<FormSchema>({
     formSchema,
     defaultValues: {
       zipcode: formData.zipcode ?? '',
@@ -74,7 +74,7 @@ export const Zipcode = () => {
 
   const nextStep = useGoToNextStep('zipcode');
 
-  const formSubmitHandler = async (zipCodeAndCountyData: SchemaType) => {
+  const formSubmitHandler = async (zipCodeAndCountyData: FormSchema) => {
     if (uuid) {
       const updatedFormData = { ...formData, ...zipCodeAndCountyData };
       await updateScreen(updatedFormData);

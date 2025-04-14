@@ -17,6 +17,7 @@ import { createMenuItems } from '../../Steps/SelectHelperFunctions/SelectHelperF
 import { Context } from '../../Wrapper/Wrapper';
 import ELECTRICITY_PROVIDERS from '../electricityProviders';
 import { useEnergyFormData } from '../hooks';
+import useStepForm from '../../Steps/stepForm';
 
 export default function ElectricityProvider() {
   const { formData } = useContext(Context);
@@ -36,18 +37,20 @@ export default function ElectricityProvider() {
     }),
   });
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<FormSchema>({
+    formSchema,
     defaultValues: {
       electricityProvider: formData.energyCalculator?.electricProvider ?? '',
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async ({ electricityProvider }) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async ({ electricityProvider }) => {
     if (!uuid) {
       throw new Error('no uuid');
     }

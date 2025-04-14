@@ -13,6 +13,7 @@ import useScreenApi from '../../../Assets/updateScreen';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { NUM_PAD_PROPS, handleNumbersOnly } from '../../../Assets/numInputHelpers';
+import useStepForm from '../stepForm';
 
 const HouseholdAssets = () => {
   const { formData } = useContext(Context);
@@ -38,18 +39,20 @@ const HouseholdAssets = () => {
       .min(0),
   });
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<FormSchema>({
+    formSchema,
     defaultValues: {
       householdAssets: formData.householdAssets ?? 0,
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async ({ householdAssets }) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async ({ householdAssets }) => {
     if (!uuid) {
       throw new Error('no uuid');
     }

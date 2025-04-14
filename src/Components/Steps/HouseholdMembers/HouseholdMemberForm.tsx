@@ -56,6 +56,7 @@ import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
 import { getCurrentMonthYear, YEARS, MAX_AGE } from '../../../Assets/age';
 import './PersonIncomeBlock.css';
 import { useShouldRedirectToConfirmation } from '../../QuestionComponents/questionHooks';
+import useStepForm from '../stepForm';
 
 const HouseholdMemberForm = () => {
   const { formData } = useContext(Context);
@@ -268,8 +269,8 @@ const HouseholdMemberForm = () => {
     setValue,
     getValues,
     trigger,
-  } = useForm<FormSchema>({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<FormSchema>({
+    formSchema,
     defaultValues: {
       birthMonth: householdMemberFormData?.birthMonth ? String(householdMemberFormData.birthMonth) : '',
       birthYear: householdMemberFormData?.birthYear ? String(householdMemberFormData.birthYear) : '',

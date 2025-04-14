@@ -18,6 +18,7 @@ import { createMenuItems } from '../../Steps/SelectHelperFunctions/SelectHelperF
 import { Context } from '../../Wrapper/Wrapper';
 import { GAS_PROVIDERS } from '../gasProviders';
 import { useEnergyFormData } from '../hooks';
+import useStepForm from '../../Steps/stepForm';
 
 export default function GasProvider() {
   const { formData } = useContext(Context);
@@ -37,12 +38,14 @@ export default function GasProvider() {
     }),
   });
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<FormSchema>({
+    formSchema,
     defaultValues: {
       gasProvider: formData.energyCalculator?.gasProvider ?? '',
     },

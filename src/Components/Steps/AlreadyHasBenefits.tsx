@@ -18,6 +18,7 @@ import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionCo
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { Context } from '../Wrapper/Wrapper';
 import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
+import useStepForm from './stepForm';
 
 type CategoryBenefitsConfig = {
   [key: string]: {
@@ -120,14 +121,16 @@ function AlreadyHasBenefits() {
       },
     );
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors, isSubmitted },
     handleSubmit,
     setValue,
     watch,
-  } = useForm<{ hasBenefits: 'true' | 'false' | 'preferNotToAnswer'; alreadyHasBenefits: Benefits }>({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<FormSchema>({
+    formSchema,
     defaultValues: {
       hasBenefits: formData.hasBenefits,
       alreadyHasBenefits: formData.benefits,

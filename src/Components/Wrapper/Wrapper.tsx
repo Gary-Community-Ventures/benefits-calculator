@@ -91,7 +91,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
   const [translationsLoading, setTranslationsLoading] = useState<boolean>(true);
   const [screenLoading, setScreenLoading] = useState<boolean>(true);
   const [pageIsLoading, setPageIsLoading] = useState<boolean>(true);
-  const [stepLoading, setStepLoading] = useState<boolean>(true);
+  const [stepLoading, setStepLoading] = useState<boolean>(false);
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
 

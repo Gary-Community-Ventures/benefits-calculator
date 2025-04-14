@@ -44,20 +44,20 @@ const HouseholdSize = () => {
       .lte(8),
   });
 
-  type SchemaType = z.infer<typeof formSchema>;
+  type FormSchema = z.infer<typeof formSchema>;
 
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useStepForm<SchemaType>({
+  } = useStepForm<FormSchema>({
     formSchema,
     defaultValues: {
       householdSize: formData.householdSize ?? 0,
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async ({ householdSize }) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async ({ householdSize }) => {
     if (uuid) {
       const updatedFormData = {
         ...formData,

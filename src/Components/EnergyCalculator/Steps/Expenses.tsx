@@ -17,6 +17,7 @@ import { ReactComponent as AcUnit } from '../Icons/AcUnit.svg';
 import { Context } from '../../Wrapper/Wrapper';
 import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import { FormattedMessageType } from '../../../Types/Questions';
+import useStepForm from '../../Steps/stepForm';
 
 const EXPENSE_TYPES = ['heating', 'cooling', 'electricity'] as const;
 export type EnergyCalculatorExpenseType = (typeof EXPENSE_TYPES)[number];
@@ -70,8 +71,10 @@ export default function EnergyCalculatorExpenses() {
     return false;
   };
 
-  const { handleSubmit, watch, setValue } = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  type FormSchema = z.infer<typeof formSchema>;
+
+  const { handleSubmit, watch, setValue } = useStepForm<FormSchema>({
+    formSchema,
     defaultValues: {
       expenses: {
         heating: hasExpense('heating'),
@@ -88,7 +91,7 @@ export default function EnergyCalculatorExpenses() {
     };
   };
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async ({ expenses }) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async ({ expenses }) => {
     if (!uuid) {
       throw new Error('no uuid');
     }

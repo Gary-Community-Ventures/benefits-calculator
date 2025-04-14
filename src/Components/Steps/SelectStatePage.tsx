@@ -32,13 +32,13 @@ const SelectStatePage = () => {
       .min(1),
   });
 
-  type SchemaType = z.infer<typeof formSchema>;
+  type FormSchema = z.infer<typeof formSchema>;
 
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useStepForm<SchemaType>({
+  } = useStepForm<FormSchema>({
     formSchema,
     defaultValues: {
       state: whiteLabel ?? '',

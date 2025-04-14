@@ -18,6 +18,7 @@ import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import useScreenApi from '../../../Assets/updateScreen';
 import { Language } from '../../../Assets/languageOptions';
 import '../../../Components/Steps/Disclaimer/Disclaimer.css';
+import useStepForm from '../../Steps/stepForm';
 
 const isTrue = (value: boolean) => {
   return value;
@@ -55,20 +56,22 @@ const Disclaimer = () => {
     is13OrOlder: z.boolean().refine(isTrue),
   });
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     getValues,
     handleSubmit,
-  } = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<FormSchema>({
+    formSchema,
     defaultValues: {
       agreeToTermsOfService: formData.agreeToTermsOfService ?? false,
       is13OrOlder: formData.is13OrOlder ?? false,
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (termsOfServiceAndAgeData) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async (termsOfServiceAndAgeData) => {
     const updatedFormData = { ...formData, ...termsOfServiceAndAgeData };
 
     if (uuid) {

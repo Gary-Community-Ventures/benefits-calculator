@@ -59,14 +59,14 @@ const Disclaimer = () => {
     is13OrOlder: z.boolean().refine(isTrue),
   });
 
-  type FormSchemaType = z.infer<typeof formSchema>;
+  type FormSchema = z.infer<typeof formSchema>;
 
   const {
     control,
     formState: { errors },
     getValues,
     handleSubmit,
-  } = useStepForm<FormSchemaType>({
+  } = useStepForm<FormSchema>({
     formSchema,
     defaultValues: {
       agreeToTermsOfService: formData.agreeToTermsOfService ?? false,
@@ -74,7 +74,7 @@ const Disclaimer = () => {
     },
   });
 
-  const formSubmitHandler: SubmitHandler<FormSchemaType> = async (termsOfServiceAndAgeData) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async (termsOfServiceAndAgeData) => {
     const updatedFormData = { ...formData, ...termsOfServiceAndAgeData };
 
     if (uuid) {

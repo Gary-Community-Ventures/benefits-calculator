@@ -34,6 +34,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { NUM_PAD_PROPS, handleNumbersOnly } from '../../../Assets/numInputHelpers';
 import useScreenApi from '../../../Assets/updateScreen';
 import './Expenses.css';
+import useStepForm from '../stepForm';
 
 const Expenses = () => {
   const { formData } = useContext(Context);
@@ -67,13 +68,14 @@ const Expenses = () => {
     handleSubmit,
     watch,
     getValues,
-  } = useForm<FormSchema>({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<FormSchema>({
+    formSchema,
     defaultValues: {
       hasExpenses: formData.hasExpenses ?? 'false',
       expenses: formData.expenses ?? [],
     },
   });
+
   const watchHasExpenses = watch('hasExpenses');
   const hasTruthyExpenses = watchHasExpenses === 'true';
   const { fields, append, remove, replace } = useFieldArray({

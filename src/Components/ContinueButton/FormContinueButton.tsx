@@ -8,7 +8,7 @@ const FormContinueButton = ({ children }: PropsWithChildren) => {
   return (
     <Button variant="contained" type="submit">
       {stepLoading ? (
-        <CircularProgress />
+        <CircularProgress size="1rem" color="inherit" />
       ) : (
         children ?? <FormattedMessage id="continueButton" defaultMessage="Continue" />
       )}

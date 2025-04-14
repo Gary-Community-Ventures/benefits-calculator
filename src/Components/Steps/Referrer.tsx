@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { FormattedMessageType } from '../../Types/Questions';
@@ -14,6 +14,7 @@ import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionCo
 import { useConfig } from '../Config/configHook';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import useScreenApi from '../../Assets/updateScreen';
+import useStepForm from './stepForm';
 
 type ReferralOptions = {
   other: string;
@@ -72,8 +73,8 @@ export default function ReferralSourceStep() {
     formState: { errors },
     handleSubmit,
     watch,
-  } = useForm<FormSchema>({
-    resolver: zodResolver(formSchema),
+  } = useStepForm<FormSchema>({
+    formSchema,
     defaultValues: {
       referralSource: isOtherSource ? 'other' : formData.referralSource ?? '',
       otherReferrer: isOtherSource ? formData.referralSource ?? '' : '',
@@ -83,7 +84,7 @@ export default function ReferralSourceStep() {
   const referralSource = watch('referralSource');
   const showOtherSource = referralSource === 'other';
 
-  const formSubmitHandler = async ({ referralSource, otherReferrer }: FormSchema) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async ({ referralSource, otherReferrer }: FormSchema) => {
     const source = otherReferrer !== '' ? otherReferrer : referralSource;
     const updatedFormData = { ...formData, referralSource: source };
     await updateScreen(updatedFormData);
