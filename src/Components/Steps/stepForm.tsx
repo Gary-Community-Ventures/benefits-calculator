@@ -19,6 +19,10 @@ export default function useStepForm<T extends FieldValues>({
 
   const isSubmitting = form.formState.isSubmitting;
 
+  // TODO: when a form submission is complete, stepLoading is never set to false again
+  // This is because in the form submit handlers we go to the next page
+  // It appears to work because the next form is rendered and sets it to false
+  // But this can cause unexpected bugs on the last page
   useEffect(() => {
     setStepLoading(isSubmitting);
   }, [isSubmitting]);

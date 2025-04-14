@@ -85,14 +85,11 @@ export default function ReferralSourceStep() {
   const showOtherSource = referralSource === 'other';
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async ({ referralSource, otherReferrer }) => {
-    try {
-      const source = otherReferrer !== '' ? otherReferrer : referralSource;
-      const updatedFormData = { ...formData, referralSource: source };
-      await updateScreen(updatedFormData);
-      nextStep();
-    } catch (e) {
-      console.error(e);
-    }
+    const source = otherReferrer !== '' ? otherReferrer : referralSource;
+    const updatedFormData = { ...formData, referralSource: source };
+    await updateScreen(updatedFormData);
+
+    nextStep();
   };
 
   const createMenuItems = () => {
