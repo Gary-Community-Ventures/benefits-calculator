@@ -99,9 +99,11 @@ function SignUp() {
             defaultMessage: 'Please enter a 10 digit phone number',
           }),
         }),
-      tcpa: z.boolean().refine((value) => value, {
-        message: formatMessage({ id: 'signUp.checkbox.error', defaultMessage: 'Please check the box to continue.' }),
-      }),
+      tcpa: z.boolean(),
+    })
+    .refine(({ tcpa, cell }) => tcpa || cell === '', {
+      path: ['tcpa'],
+      message: formatMessage({ id: 'signUp.checkbox.error', defaultMessage: 'Please check the box to continue.' }),
     })
     .superRefine(({ email, cell }, ctx) => {
       const noEmailAndCell = email.length === 0 && cell.length === 0;
@@ -332,7 +334,7 @@ function SignUp() {
                     onChange={handleNumbersOnly((...args) => {
                       field.onChange(...args);
                       if (isSubmitted) {
-                        trigger(['contactInfo.cell', 'contactInfo.email']);
+                        trigger(['contactInfo.cell', 'contactInfo.email', 'contactInfo.tcpa']);
                       }
                     })}
                     error={errors.contactInfo?.cell !== undefined}
@@ -368,6 +370,12 @@ function SignUp() {
                               ? { color: '#c6252b', alignSelf: 'flex-start' }
                               : { alignSelf: 'flex-start' }
                           }
+                          onChange={(...args) => {
+                            field.onChange(...args);
+                            if (isSubmitted) {
+                              trigger(['contactInfo.cell', 'contactInfo.tcpa']);
+                            }
+                          }}
                         />
                       }
                       label={

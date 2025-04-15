@@ -1,13 +1,13 @@
 import { ReactNode, useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
 import ConfirmationBlock, { ConfirmationItem, formatToUSD } from './ConfirmationBlock';
-import { ReactComponent as Residence } from '../../Assets/icons/residence.svg';
-import { ReactComponent as Household } from '../../Assets/icons/household.svg';
-import { ReactComponent as Expense } from '../../Assets/icons/expenses.svg';
-import { ReactComponent as Resources } from '../../Assets/icons/resources.svg';
-import { ReactComponent as Benefits } from '../../Assets/icons/benefits.svg';
-import { ReactComponent as Immediate } from '../../Assets/icons/immediate.svg';
-import { ReactComponent as Referral } from '../../Assets/icons/referral.svg';
+import { ReactComponent as Residence } from '../../Assets/icons/General/residence.svg';
+import { ReactComponent as Household } from '../../Assets/icons/General/household.svg';
+import { ReactComponent as Expense } from '../../Assets/icons/General/expenses.svg';
+import { ReactComponent as Resources } from '../../Assets/icons/General/resources.svg';
+import { ReactComponent as Benefits } from '../../Assets/icons/General/benefits.svg';
+import { ReactComponent as Immediate } from '../../Assets/icons/General/immediate.svg';
+import { ReactComponent as Referral } from '../../Assets/icons/General/referral.svg';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useTranslateNumber } from '../../Assets/languageOptions';
 import { FormattedMessageType, QuestionName } from '../../Types/Questions';
@@ -22,7 +22,7 @@ import EnergyCalculatorUtilityStatus from '../EnergyCalculator/ConfirmationPage/
 import EnergyCalculatorApplianceStatus from '../EnergyCalculator/ConfirmationPage/ApplianceStatus';
 
 function ZipCode() {
-  const { formData } = useContext(Context);
+  const { formData, getReferrer } = useContext(Context);
   const { zipcode, county } = formData;
   const { formatMessage } = useIntl();
   const translateNumber = useTranslateNumber();
@@ -42,6 +42,7 @@ function ZipCode() {
       title={<FormattedMessage id="confirmation.residenceInfo" defaultMessage="Residence Information" />}
       editAriaLabel={editZipAriaLabel}
       stepName="zipcode"
+      noReturn={getReferrer('featureFlags').includes('no_confirmation_return_zipcode')}
     >
       <ConfirmationItem
         label={<FormattedMessage id="confirmation.displayAllFormData-zipcodeText" defaultMessage="Zip code: " />}
