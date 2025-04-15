@@ -34,21 +34,34 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
   };
 }
 
-export function useQueryString() {
+type MainQueryParamName = 'externalid' | 'referrer' | 'path' | 'test';
+export function useQueryString(override?: Partial<Record<MainQueryParamName, string>>) {
   const { formData } = useContext(Context);
   const query = new URLSearchParams();
 
-  if (formData.externalID !== undefined) {
-    query.append('externalid', formData.externalID);
-  }
+  const setParam = (name: MainQueryParamName, value: string | undefined, ...dontShowConditions: unknown[]) => {
+    let overrideValue = override?.[name];
+    if (overrideValue !== undefined) {
+      query.append(name, overrideValue);
+      return;
+    }
 
-  if (formData.immutableReferrer !== undefined && formData.immutableReferrer !== '') {
-    query.append('referrer', formData.immutableReferrer);
-  }
+    if (value === undefined) {
+      return;
+    }
+    for (const condition of dontShowConditions) {
+      if (value === condition) {
+        return;
+      }
+    }
 
-  if (formData.path !== undefined && formData.path !== 'default') {
-    query.append('path', formData.path);
-  }
+    query.append(name, value);
+  };
+
+  setParam('externalid', formData.externalID);
+  setParam('referrer', formData.immutableReferrer, '');
+  setParam('path', formData.path, 'default');
+  setParam('test', formData.isTest ? 'true' : undefined);
 
   let queryString = query.toString();
   if (queryString !== '') {
