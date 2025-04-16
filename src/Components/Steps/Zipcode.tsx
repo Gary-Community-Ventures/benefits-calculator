@@ -19,6 +19,7 @@ import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
 import { OverrideableTranslation } from '../../Assets/languageOptions';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import { HelperText } from '../HelperText/HelperText';
 
 export const Zipcode = () => {
   const { formData, getReferrer } = useContext(Context);
@@ -41,16 +42,14 @@ export const Zipcode = () => {
 
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
   const zipcodeSchema = z
-    .string({
-      errorMap: () => {
-        return {
-          message: formatMessage({
-            id: 'validation-helperText.zipcode',
-            defaultMessage: `Please enter a valid zip code for ${state.name}`,
-          }),
-        };
-      },
-    })
+    .string(
+      HelperText(
+        formatMessage({
+          id: 'validation-helperText.zipcode',
+          defaultMessage: `Please enter a valid zip code for ${state.name}`,
+        }),
+      ),
+    )
     .trim()
     .regex(numberMustBeFiveDigitsLongRegex)
     .refine((data) => data in countiesByZipcode);
