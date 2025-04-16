@@ -35,7 +35,7 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
 }
 
 type MainQueryParamName = 'externalid' | 'referrer' | 'path' | 'test';
-export function useQueryString(override?: Partial<Record<MainQueryParamName, string>>) {
+export function useQueryString(override?: Partial<Record<MainQueryParamName, string>>): string {
   const { formData } = useContext(Context);
   const query = new URLSearchParams();
 
