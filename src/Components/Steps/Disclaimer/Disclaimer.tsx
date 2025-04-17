@@ -20,14 +20,13 @@ import { Language, OverrideableTranslation } from '../../../Assets/languageOptio
 import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
 import EnergyCalculatorDisclaimer from '../../EnergyCalculator/Steps/Disclaimer';
 import './Disclaimer.css';
-import useStepForm from '../stepForm';
 
 const isTrue = (value: boolean) => {
   return value;
 };
 
 const Disclaimer = () => {
-  const { formData, setScreenLoading, locale, setStepLoading } = useContext(Context);
+  const { formData, setScreenLoading, locale } = useContext(Context);
   const isEnergyCalculator = useIsEnergyCalculator();
   let { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
@@ -66,7 +65,7 @@ const Disclaimer = () => {
     formState: { errors },
     getValues,
     handleSubmit,
-  } = useStepForm<FormSchema>({
+  } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       agreeToTermsOfService: formData.agreeToTermsOfService ?? false,
@@ -88,7 +87,6 @@ const Disclaimer = () => {
   };
 
   const startScreen = async (uuid: string) => {
-    setStepLoading(false);
     navigate(`/${whiteLabel}/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
   };
 

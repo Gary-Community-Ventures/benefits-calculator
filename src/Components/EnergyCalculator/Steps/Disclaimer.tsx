@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, SubmitHandler } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { STARTING_QUESTION_NUMBER } from '../../../Assets/stepDirectory';
 import { Checkbox, FormControlLabel } from '@mui/material';
@@ -18,14 +18,13 @@ import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import useScreenApi from '../../../Assets/updateScreen';
 import { Language } from '../../../Assets/languageOptions';
 import '../../../Components/Steps/Disclaimer/Disclaimer.css';
-import useStepForm from '../../Steps/stepForm';
 
 const isTrue = (value: boolean) => {
   return value;
 };
 
 const Disclaimer = () => {
-  const { formData, setScreenLoading, locale, setStepLoading } = useContext(Context);
+  const { formData, setScreenLoading, locale } = useContext(Context);
   let { uuid } = useParams();
   const navigate = useNavigate();
   // use defaults for the config on this page because the config won't be loaded
@@ -63,7 +62,7 @@ const Disclaimer = () => {
     formState: { errors },
     getValues,
     handleSubmit,
-  } = useStepForm<FormSchema>({
+  } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       agreeToTermsOfService: formData.agreeToTermsOfService ?? false,
@@ -85,7 +84,6 @@ const Disclaimer = () => {
   };
 
   const startScreen = async (uuid: string) => {
-    setStepLoading(false);
     navigate(`/co_energy_calculator/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
   };
 

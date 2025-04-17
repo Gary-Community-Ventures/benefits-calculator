@@ -17,7 +17,7 @@ export default function useStepForm<T extends FieldValues>({
   onSubmitSuccessful,
   ...useFormProps
 }: UseFormProps<T> & {
-  onSubmitSuccessful?: () => void;
+  onSubmitSuccessful: () => void; // TODO: could default to calling next step?
 }) {
   const { setStepLoading } = useContext(Context);
 
