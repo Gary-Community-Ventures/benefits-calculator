@@ -62,7 +62,7 @@ export const Zipcode = () => {
     handleSubmit,
     watch,
   } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       zipcode: formData.zipcode ?? '',
       county: formData.county ?? 'disabled-select',

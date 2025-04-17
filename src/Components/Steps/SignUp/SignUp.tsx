@@ -163,7 +163,7 @@ function SignUp() {
     trigger,
     watch,
   } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       contactType: {
         sendOffers: formData.signUpInfo.sendOffers,

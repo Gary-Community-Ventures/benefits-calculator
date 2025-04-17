@@ -67,7 +67,7 @@ const Utilities = () => {
   type FormSchema = z.infer<typeof formSchema>;
 
   const { handleSubmit, watch, setValue } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       energyCalculator: {
         needsWaterHeater: formData.energyCalculator?.needsWaterHeater ?? false,
@@ -75,7 +75,7 @@ const Utilities = () => {
         needsStove: formData.energyCalculator?.needsStove ?? false,
       },
     },
-    successCallback: nextStep,
+    onSubmitSuccessful: nextStep,
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async (rhfData) => {

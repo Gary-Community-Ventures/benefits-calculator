@@ -270,7 +270,7 @@ const HouseholdMemberForm = () => {
     getValues,
     trigger,
   } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       birthMonth: householdMemberFormData?.birthMonth ? String(householdMemberFormData.birthMonth) : '',
       birthYear: householdMemberFormData?.birthYear ? String(householdMemberFormData.birthYear) : '',

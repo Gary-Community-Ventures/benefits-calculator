@@ -11,6 +11,7 @@ import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLabel';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import useStepForm from './stepForm';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const STATES: { [key: string]: string } = { co: 'Colorado', nc: 'North Carolina' };
 
@@ -39,7 +40,7 @@ const SelectStatePage = () => {
     formState: { errors },
     handleSubmit,
   } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       state: whiteLabel ?? '',
     },

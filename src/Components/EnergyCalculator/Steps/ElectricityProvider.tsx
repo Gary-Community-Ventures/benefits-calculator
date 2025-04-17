@@ -44,7 +44,7 @@ export default function ElectricityProvider() {
     formState: { errors },
     handleSubmit,
   } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       electricityProvider: formData.energyCalculator?.electricProvider ?? '',
     },

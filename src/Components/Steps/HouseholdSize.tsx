@@ -16,6 +16,7 @@ import { OverrideableTranslation } from '../../Assets/languageOptions';
 import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import useStepForm from './stepForm';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const HouseholdSize = () => {
   const { formData } = useContext(Context);
@@ -50,11 +51,11 @@ const HouseholdSize = () => {
     formState: { errors },
     handleSubmit,
   } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       householdSize: formData.householdSize ?? 0,
     },
-    successCallback: nextStep,
+    onSubmitSuccessful: nextStep,
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async ({ householdSize }) => {

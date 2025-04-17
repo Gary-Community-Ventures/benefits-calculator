@@ -33,7 +33,7 @@ function ImmediateNeeds() {
   type FormSchema = z.infer<typeof formSchema>;
 
   const { handleSubmit, watch, setValue } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       needs: formData.acuteHHConditions,
     },

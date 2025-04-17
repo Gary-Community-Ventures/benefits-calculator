@@ -45,7 +45,7 @@ export default function GasProvider() {
     formState: { errors },
     handleSubmit,
   } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       gasProvider: formData.energyCalculator?.gasProvider ?? '',
     },

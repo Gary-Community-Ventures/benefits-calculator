@@ -64,7 +64,7 @@ const Disclaimer = () => {
     getValues,
     handleSubmit,
   } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       agreeToTermsOfService: formData.agreeToTermsOfService ?? false,
       is13OrOlder: formData.is13OrOlder ?? false,

@@ -74,7 +74,7 @@ export default function EnergyCalculatorExpenses() {
   type FormSchema = z.infer<typeof formSchema>;
 
   const { handleSubmit, watch, setValue } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       expenses: {
         heating: hasExpense('heating'),

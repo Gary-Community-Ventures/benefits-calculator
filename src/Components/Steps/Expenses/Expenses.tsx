@@ -69,7 +69,7 @@ const Expenses = () => {
     watch,
     getValues,
   } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       hasExpenses: formData.hasExpenses ?? 'false',
       expenses: formData.expenses ?? [],

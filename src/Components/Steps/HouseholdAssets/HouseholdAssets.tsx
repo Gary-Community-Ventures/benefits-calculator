@@ -46,7 +46,7 @@ const HouseholdAssets = () => {
     formState: { errors },
     handleSubmit,
   } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       householdAssets: formData.householdAssets ?? 0,
     },

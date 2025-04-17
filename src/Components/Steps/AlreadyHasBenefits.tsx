@@ -130,7 +130,7 @@ function AlreadyHasBenefits() {
     setValue,
     watch,
   } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       hasBenefits: formData.hasBenefits,
       alreadyHasBenefits: formData.benefits,

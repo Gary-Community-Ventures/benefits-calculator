@@ -74,7 +74,7 @@ export default function ReferralSourceStep() {
     handleSubmit,
     watch,
   } = useStepForm<FormSchema>({
-    formSchema,
+    resolver: zodResolver(formSchema),
     defaultValues: {
       referralSource: isOtherSource ? 'other' : formData.referralSource ?? '',
       otherReferrer: isOtherSource ? formData.referralSource ?? '' : '',
