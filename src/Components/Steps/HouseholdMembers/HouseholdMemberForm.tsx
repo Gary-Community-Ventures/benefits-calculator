@@ -100,7 +100,10 @@ const HouseholdMemberForm = () => {
       navigate(`/${whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber - 1}`);
     }
   };
-  const nextStep = (uuid: string, currentStepId: number, pageNumber: number) => {
+  const nextStep = (uuid: string | undefined, currentStepId: number, pageNumber: number) => {
+    if (uuid === undefined) {
+      throw new Error('uuid is undefined');
+    }
     if (redirectToConfirmationPage) {
       navigate(`/${whiteLabel}/${uuid}/confirm-information`);
       return;
@@ -300,6 +303,7 @@ const HouseholdMemberForm = () => {
       hasIncome: determineDefaultHasIncome(),
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
     },
+    onSubmitSuccessful: () => nextStep(uuid, currentStepId, pageNumber),
   });
   const watchHasIncome = watch('hasIncome');
   const hasTruthyIncome = watchHasIncome === 'true';
@@ -339,8 +343,6 @@ const HouseholdMemberForm = () => {
     };
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
     await updateScreen(updatedFormData);
-
-    nextStep(uuid, currentStepId, pageNumber);
   };
 
   const createAgeQuestion = () => {

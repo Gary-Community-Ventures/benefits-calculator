@@ -49,6 +49,7 @@ export default function GasProvider() {
     defaultValues: {
       gasProvider: formData.energyCalculator?.gasProvider ?? '',
     },
+    onSubmitSuccessful: nextStep,
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async ({ gasProvider }) => {
@@ -66,7 +67,6 @@ export default function GasProvider() {
 
     const updatedFormData: FormData = { ...formData, energyCalculator: updatedEnergyData };
     await updateScreen(updatedFormData);
-    nextStep();
   };
 
   const providerOptions = useMemo(() => {

@@ -79,6 +79,7 @@ export default function ReferralSourceStep() {
       referralSource: isOtherSource ? 'other' : formData.referralSource ?? '',
       otherReferrer: isOtherSource ? formData.referralSource ?? '' : '',
     },
+    onSubmitSuccessful: nextStep,
   });
 
   const referralSource = watch('referralSource');
@@ -88,8 +89,6 @@ export default function ReferralSourceStep() {
     const source = otherReferrer !== '' ? otherReferrer : referralSource;
     const updatedFormData = { ...formData, referralSource: source };
     await updateScreen(updatedFormData);
-
-    nextStep();
   };
 
   const createMenuItems = () => {

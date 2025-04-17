@@ -53,7 +53,7 @@ export default function EnergyCalculatorExpenses() {
   const nextStep = useGoToNextStep('energyCalculatorExpenses');
   const { updateScreen } = useScreenApi();
   const navigate = useNavigate();
-  const { whiteLabel } = useContext(Context);
+  const { whiteLabel, setStepLoading } = useContext(Context);
 
   const formSchema = z.object({
     expenses: z
@@ -82,6 +82,7 @@ export default function EnergyCalculatorExpenses() {
         electricity: hasExpense('electricity'),
       },
     },
+    onSubmitSuccessful: nextStep,
   });
 
   const createExpense = (expenseName: string): Expense => {
@@ -97,6 +98,7 @@ export default function EnergyCalculatorExpenses() {
     }
 
     if (!expenses.heating && !expenses.cooling && !expenses.electricity) {
+      setStepLoading(false);
       navigate(`/${whiteLabel}/${uuid}/no-expenses`);
       return;
     }
@@ -111,7 +113,6 @@ export default function EnergyCalculatorExpenses() {
 
     const updatedFormData: FormData = { ...formData, expenses: updatedExpenses };
     await updateScreen(updatedFormData);
-    nextStep();
   };
 
   return (

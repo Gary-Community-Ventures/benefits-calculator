@@ -170,6 +170,7 @@ function SignUp() {
         sendUpdates: formData.signUpInfo.sendUpdates,
       },
     },
+    onSubmitSuccessful: nextStep,
   });
 
   const contactType = watch('contactType');
@@ -206,7 +207,6 @@ function SignUp() {
     const updatedSignUpInfo = data.contactInfo;
 
     if (updatedSignUpInfo === undefined && formData.signUpInfo.hasUser === false) {
-      nextStep();
       return;
     } else if (updatedSignUpInfo !== undefined) {
       const signUpInfo = newFormData.signUpInfo;
@@ -222,9 +222,9 @@ function SignUp() {
       await updateUser(newFormData);
       newFormData.signUpInfo.hasUser = true;
       setFormData(newFormData);
-      nextStep();
-    } catch {
+    } catch (e) {
       setHasServerError(true);
+      throw e;
     }
   };
 

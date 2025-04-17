@@ -24,7 +24,7 @@ import {
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useStepNumber } from '../../../Assets/stepDirectory';
 import * as z from 'zod';
-import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MONTHS } from '../../Steps/HouseholdMembers/MONTHS';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
@@ -93,7 +93,10 @@ const ECHouseholdMemberForm = () => {
       navigate(`/${whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber - 1}`);
     }
   };
-  const nextStep = (uuid: string, currentStepId: number, pageNumber: number) => {
+  const nextStep = (uuid: string | undefined, currentStepId: number, pageNumber: number) => {
+    if (uuid === undefined) {
+      throw new Error('uuid is undefined');
+    }
     if (redirectToConfirmationPage) {
       navigate(`/${whiteLabel}/${uuid}/confirm-information`);
       return;
@@ -239,6 +242,7 @@ const ECHouseholdMemberForm = () => {
       hasIncome: determineDefaultHasIncome(),
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
     },
+    onSubmitSuccessful: () => nextStep(uuid, currentStepId, pageNumber),
   });
   const watchHasIncome = watch('hasIncome');
   const hasTruthyIncome = watchHasIncome === 'true';
@@ -297,8 +301,6 @@ const ECHouseholdMemberForm = () => {
     updatedHouseholdData[currentMemberIndex] = updatedMemberData;
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
     await updateScreen(updatedFormData);
-
-    nextStep(uuid, currentStepId, pageNumber);
   };
 
   const createAgeQuestion = () => {

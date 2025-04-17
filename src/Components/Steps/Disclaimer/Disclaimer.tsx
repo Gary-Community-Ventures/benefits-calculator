@@ -27,7 +27,7 @@ const isTrue = (value: boolean) => {
 };
 
 const Disclaimer = () => {
-  const { formData, setScreenLoading, locale } = useContext(Context);
+  const { formData, setScreenLoading, locale, setStepLoading } = useContext(Context);
   const isEnergyCalculator = useIsEnergyCalculator();
   let { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
@@ -79,12 +79,17 @@ const Disclaimer = () => {
 
     if (uuid) {
       await updateScreen(updatedFormData);
-      navigate(`/${whiteLabel}/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      startScreen(uuid);
     } else {
       const response = await createScreen(updatedFormData);
       setScreenLoading(false);
-      navigate(`/${whiteLabel}/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      startScreen(response.uuid);
     }
+  };
+
+  const startScreen = async (uuid: string) => {
+    setStepLoading(false);
+    navigate(`/${whiteLabel}/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
   };
 
   const renderDisclaimerText = () => {

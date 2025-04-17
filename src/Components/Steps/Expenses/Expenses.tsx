@@ -74,6 +74,7 @@ const Expenses = () => {
       hasExpenses: formData.hasExpenses ?? 'false',
       expenses: formData.expenses ?? [],
     },
+    onSubmitSuccessful: nextStep,
   });
 
   const watchHasExpenses = watch('hasExpenses');
@@ -98,11 +99,12 @@ const Expenses = () => {
   }, [watchHasExpenses]);
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async (expensesObject) => {
-    if (uuid) {
-      const updatedFormData = { ...formData, ...expensesObject };
-      await updateScreen(updatedFormData);
-      nextStep();
+    if (uuid === undefined) {
+      throw new Error('uuid is not defined');
     }
+
+    const updatedFormData = { ...formData, ...expensesObject };
+    await updateScreen(updatedFormData);
   };
 
   const createExpenseMenuItems = (expenseOptions: Record<string, FormattedMessageType>) => {

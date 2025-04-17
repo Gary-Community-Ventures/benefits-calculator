@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControl, FormHelperText, InputLabel, Select } from '@mui/material';
 import { useContext, useMemo } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { z } from 'zod';
@@ -48,6 +48,7 @@ export default function ElectricityProvider() {
     defaultValues: {
       electricityProvider: formData.energyCalculator?.electricProvider ?? '',
     },
+    onSubmitSuccessful: nextStep,
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async ({ electricityProvider }) => {
@@ -65,7 +66,6 @@ export default function ElectricityProvider() {
 
     const updatedFormData: FormData = { ...formData, energyCalculator: updatedEnergyData };
     await updateScreen(updatedFormData);
-    nextStep();
   };
 
   const providerOptions = useMemo(() => {

@@ -37,6 +37,7 @@ function ImmediateNeeds() {
     defaultValues: {
       needs: formData.acuteHHConditions,
     },
+    onSubmitSuccessful: nextStep,
   });
 
   const submitHandler = async ({ needs }: FormSchema) => {
@@ -46,7 +47,6 @@ function ImmediateNeeds() {
 
     const newFormData = { ...formData, acuteHHConditions: needs };
     await updateScreen(newFormData);
-    nextStep();
   };
 
   return (

@@ -30,6 +30,7 @@ export const Zipcode = () => {
   const noChangeStateMessage = getReferrer('featureFlags').includes('no_zipcode_change_state');
   const countiesByZipcode = useConfig<{ [key: string]: { [key: string]: string } }>('counties_by_zipcode');
   const state = useConfig<{ name: string }>('state');
+  const nextStep = useGoToNextStep('zipcode');
 
   const checkCountyIsValid = ({ zipcode, county }: { zipcode: string; county: string }) => {
     const validCounties = countiesByZipcode[zipcode];
@@ -67,19 +68,18 @@ export const Zipcode = () => {
       zipcode: formData.zipcode ?? '',
       county: formData.county ?? 'disabled-select',
     },
+    onSubmitSuccessful: nextStep,
   });
 
   const currentZipcodeValue = watch('zipcode');
   const parsedZipCode = zipcodeSchema.safeParse(currentZipcodeValue);
 
-  const nextStep = useGoToNextStep('zipcode');
-
   const formSubmitHandler = async (zipCodeAndCountyData: FormSchema) => {
-    if (uuid) {
-      const updatedFormData = { ...formData, ...zipCodeAndCountyData };
-      await updateScreen(updatedFormData);
-      nextStep();
+    if (uuid === undefined) {
+      throw new Error('uuid is not defined');
     }
+    const updatedFormData = { ...formData, ...zipCodeAndCountyData };
+    await updateScreen(updatedFormData);
   };
 
   const createMenuItems = (disabledSelectMenuItemText: FormattedMessageType, options: Record<string, string>) => {

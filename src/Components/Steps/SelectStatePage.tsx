@@ -5,12 +5,11 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { useQueryString } from '../QuestionComponents/questionHooks';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
-import { Controller, SubmitHandler } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLabel';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
-import useStepForm from './stepForm';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export const STATES: { [key: string]: string } = { co: 'Colorado', nc: 'North Carolina' };
@@ -39,7 +38,7 @@ const SelectStatePage = () => {
     control,
     formState: { errors },
     handleSubmit,
-  } = useStepForm<FormSchema>({
+  } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       state: whiteLabel ?? '',
@@ -53,7 +52,6 @@ const SelectStatePage = () => {
     if (uuid !== undefined) {
       navUrl = `/${state}/${uuid}/step-2${queryString}`;
     }
-
     updateWhiteLabelAndNavigate(state, navUrl);
   };
 

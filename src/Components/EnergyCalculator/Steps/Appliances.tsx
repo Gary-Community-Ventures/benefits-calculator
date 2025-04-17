@@ -5,7 +5,7 @@ import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { ReactComponent as WaterHeater } from '../Icons/WaterHeater.svg';
 import { ReactComponent as Heater } from '../Icons/Heat.svg';

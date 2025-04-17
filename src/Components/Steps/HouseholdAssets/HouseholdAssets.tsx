@@ -50,6 +50,7 @@ const HouseholdAssets = () => {
     defaultValues: {
       householdAssets: formData.householdAssets ?? 0,
     },
+    onSubmitSuccessful: nextStep,
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async ({ householdAssets }) => {
@@ -58,7 +59,6 @@ const HouseholdAssets = () => {
     }
     const updatedFormData = { ...formData, householdAssets: householdAssets };
     await updateScreen(updatedFormData);
-    nextStep();
   };
 
   return (

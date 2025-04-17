@@ -1,12 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import { ReactNode, useContext, useEffect, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { z } from 'zod';
 import useScreenApi from '../../Assets/updateScreen';
-import { Benefits } from '../../Types/FormData';
 import { FormattedMessageType } from '../../Types/Questions';
 import CheckBoxAccordion from '../AccordionsContainer/CheckboxAccordion';
 import { useConfig } from '../Config/configHook';
@@ -135,6 +134,7 @@ function AlreadyHasBenefits() {
       hasBenefits: formData.hasBenefits,
       alreadyHasBenefits: formData.benefits,
     },
+    onSubmitSuccessful: nextStep,
   });
 
   const hasBenefits = 'true' === watch('hasBenefits');
@@ -159,7 +159,6 @@ function AlreadyHasBenefits() {
     const newFormData = { ...formData, hasBenefits: hasBenefits, benefits: alreadyHasBenefits };
 
     await updateScreen(newFormData);
-    nextStep();
   };
 
   const renderHelpSection = () => {

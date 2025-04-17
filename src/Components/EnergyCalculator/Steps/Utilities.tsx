@@ -62,6 +62,7 @@ const Utilities = () => {
         hasPastDueEnergyBills: formData.energyCalculator?.hasPastDueEnergyBills ?? false,
       },
     },
+    onSubmitSuccessful: nextStep,
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async (rhfData) => {
@@ -76,7 +77,6 @@ const Utilities = () => {
     const updatedEnergyCalculatorData = { ...formData.energyCalculator, ...rhfData.energyCalculator };
     const updatedFormData = { ...formData, energyCalculator: updatedEnergyCalculatorData };
     await updateScreen(updatedFormData);
-    nextStep();
   };
 
   return (

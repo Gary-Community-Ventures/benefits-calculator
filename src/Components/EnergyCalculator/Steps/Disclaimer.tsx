@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { STARTING_QUESTION_NUMBER } from '../../../Assets/stepDirectory';
 import { Checkbox, FormControlLabel } from '@mui/material';
@@ -25,7 +25,7 @@ const isTrue = (value: boolean) => {
 };
 
 const Disclaimer = () => {
-  const { formData, setFormData, setScreenLoading, locale } = useContext(Context);
+  const { formData, setScreenLoading, locale, setStepLoading } = useContext(Context);
   let { uuid } = useParams();
   const navigate = useNavigate();
   // use defaults for the config on this page because the config won't be loaded
@@ -76,12 +76,17 @@ const Disclaimer = () => {
 
     if (uuid) {
       await updateScreen(updatedFormData);
-      navigate(`/co_energy_calculator/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      startScreen(uuid);
     } else {
       const response = await createScreen(updatedFormData);
       setScreenLoading(false);
-      navigate(`/co_energy_calculator/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      startScreen(response.uuid);
     }
+  };
+
+  const startScreen = async (uuid: string) => {
+    setStepLoading(false);
+    navigate(`/co_energy_calculator/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
   };
 
   const renderDisclaimerText = () => {
