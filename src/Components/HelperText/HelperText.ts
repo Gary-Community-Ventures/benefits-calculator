@@ -1,4 +1,4 @@
-export const HelperText = (message: string) => {
+export const helperText = (message: string) => {
   return {
     errorMap: () => ({
       message: message,

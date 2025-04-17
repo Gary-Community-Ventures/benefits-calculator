@@ -33,7 +33,7 @@ import CloseButton from '../../CloseButton/CloseButton';
 import AddIcon from '@mui/icons-material/Add';
 import { NUM_PAD_PROPS, handleNumbersOnly } from '../../../Assets/numInputHelpers';
 import useScreenApi from '../../../Assets/updateScreen';
-import { HelperText } from '../../HelperText/HelperText';
+import { helperText } from '../../HelperText/HelperText';
 import './Expenses.css';
 
 const Expenses = () => {
@@ -53,14 +53,14 @@ const Expenses = () => {
   const expenseSourceSchema = z.object({
     expenseSourceName: z
       .string(
-        HelperText(
+        helperText(
           intl.formatMessage({ id: 'errorMessage-expenseType', defaultMessage: 'Please select an expense type' }),
         ),
       )
       .min(1),
     expenseAmount: z
       .string(
-        HelperText(
+        helperText(
           intl.formatMessage({
             id: 'errorMessage-greaterThanZero',
             defaultMessage: 'Please enter a number greater than 0',
