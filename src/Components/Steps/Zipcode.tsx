@@ -1,11 +1,10 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { Controller } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { FormattedMessageType } from '../../Types/Questions';
-import { FormData } from '../../Types/FormData';
 import { Context } from '../Wrapper/Wrapper';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import { useConfig } from '../Config/configHook';
@@ -14,11 +13,12 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../QuestionComponents/questionHooks';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
 import { OverrideableTranslation } from '../../Assets/languageOptions';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import useStepForm from './stepForm';
 import { helperText } from '../HelperText/HelperText';
 
 export const Zipcode = () => {
@@ -61,30 +61,31 @@ export const Zipcode = () => {
     })
     .refine((data) => checkCountyIsValid(data), { message: 'Invalid county', path: ['county'] });
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     handleSubmit,
     watch,
-  } = useForm<FormData>({
+  } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       zipcode: formData.zipcode ?? '',
       county: formData.county ?? 'disabled-select',
     },
+    questionName: 'zipcode',
   });
 
   const currentZipcodeValue = watch('zipcode');
   const parsedZipCode = zipcodeSchema.safeParse(currentZipcodeValue);
 
-  const nextStep = useGoToNextStep('zipcode');
-
-  const formSubmitHandler = (zipCodeAndCountyData: FormData) => {
-    if (uuid) {
-      const updatedFormData = { ...formData, ...zipCodeAndCountyData };
-      updateScreen(updatedFormData);
-      nextStep();
+  const formSubmitHandler = async (zipCodeAndCountyData: FormSchema) => {
+    if (uuid === undefined) {
+      throw new Error('uuid is not defined');
     }
+    const updatedFormData = { ...formData, ...zipCodeAndCountyData };
+    await updateScreen(updatedFormData);
   };
 
   const createMenuItems = (disabledSelectMenuItemText: FormattedMessageType, options: Record<string, string>) => {

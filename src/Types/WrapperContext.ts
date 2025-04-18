@@ -14,6 +14,8 @@ export interface WrapperContext {
   theme: ITheme;
   setTheme: React.Dispatch<React.SetStateAction<'default' | 'twoOneOne' | 'twoOneOneNC'>>;
   styleOverride: any;
+  stepLoading: boolean;
+  setStepLoading: (loading: boolean) => void;
   pageIsLoading: boolean;
   setScreenLoading: (loading: boolean) => void;
   getReferrer: <T extends keyof ReferrerData>(key: T, defaultValue?: ReferrerDataValue<T>) => ReferrerDataValue<T>;

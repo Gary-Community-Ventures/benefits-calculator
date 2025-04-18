@@ -68,12 +68,14 @@ const Disclaimer = () => {
     is13OrOlder: z.boolean().refine(isTrue, isChecked()),
   });
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     getValues,
     handleSubmit,
-  } = useForm<z.infer<typeof formSchema>>({
+  } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       agreeToTermsOfService: formData.agreeToTermsOfService ?? false,
@@ -81,17 +83,21 @@ const Disclaimer = () => {
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (termsOfServiceAndAgeData) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async (termsOfServiceAndAgeData) => {
     const updatedFormData = { ...formData, ...termsOfServiceAndAgeData };
 
     if (uuid) {
       await updateScreen(updatedFormData);
-      navigate(`/${whiteLabel}/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      startScreen(uuid);
     } else {
       const response = await createScreen(updatedFormData);
       setScreenLoading(false);
-      navigate(`/${whiteLabel}/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      startScreen(response.uuid);
     }
+  };
+
+  const startScreen = async (uuid: string) => {
+    navigate(`/${whiteLabel}/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
   };
 
   const renderDisclaimerText = () => {

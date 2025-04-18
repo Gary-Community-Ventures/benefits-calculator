@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Checkbox, FormControlLabel, TextField } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { z } from 'zod';
 import { FormData } from '../../../Types/FormData';
@@ -10,13 +10,14 @@ import { useConfig } from '../../Config/configHook';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { Context } from '../../Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../../Assets/numInputHelpers';
 import useScreenApi from '../../../Assets/updateScreen';
 import './SignUp.css';
+import useStepForm from '../stepForm';
 
 function SignUp() {
   const { formData, setFormData } = useContext(Context);
@@ -25,7 +26,6 @@ function SignUp() {
   const { updateUser } = useScreenApi();
   const { formatMessage } = useIntl();
   const backNavigationFunction = useDefaultBackNavigationFunction('signUpInfo');
-  const nextStep = useGoToNextStep('signUpInfo');
   const signUpOptions = useConfig<{ [key: string]: FormattedMessageType }>('sign_up_options');
 
   const contactInfoSchema = z
@@ -153,6 +153,8 @@ function SignUp() {
       return true;
     });
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors, isSubmitted },
@@ -161,7 +163,7 @@ function SignUp() {
     handleSubmit,
     trigger,
     watch,
-  } = useForm<z.infer<typeof formSchema>>({
+  } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       contactType: {
@@ -169,6 +171,7 @@ function SignUp() {
         sendUpdates: formData.signUpInfo.sendUpdates,
       },
     },
+    questionName: 'signUpInfo',
   });
 
   const contactType = watch('contactType');
@@ -186,7 +189,7 @@ function SignUp() {
     }
   }, [someContactType(contactType), formData.signUpInfo.hasUser]);
 
-  const submitHandler = async (data: z.infer<typeof formSchema>) => {
+  const submitHandler = async (data: FormSchema) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
@@ -205,7 +208,6 @@ function SignUp() {
     const updatedSignUpInfo = data.contactInfo;
 
     if (updatedSignUpInfo === undefined && formData.signUpInfo.hasUser === false) {
-      nextStep();
       return;
     } else if (updatedSignUpInfo !== undefined) {
       const signUpInfo = newFormData.signUpInfo;
@@ -221,9 +223,9 @@ function SignUp() {
       await updateUser(newFormData);
       newFormData.signUpInfo.hasUser = true;
       setFormData(newFormData);
-      nextStep();
-    } catch {
+    } catch (e) {
       setHasServerError(true);
+      throw e;
     }
   };
 

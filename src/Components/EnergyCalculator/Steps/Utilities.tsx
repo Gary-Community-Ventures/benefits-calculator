@@ -5,16 +5,17 @@ import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { ReactComponent as Plug } from '../Icons/Plug.svg';
 import { ReactComponent as LowFuel } from '../Icons/LowFuel.svg';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import useScreenApi from '../../../Assets/updateScreen';
 import { useEnergyFormData } from '../hooks';
+import useStepForm from '../../Steps/stepForm';
 
 const Utilities = () => {
   const { formData } = useContext(Context);
@@ -22,7 +23,6 @@ const Utilities = () => {
   const { updateScreen } = useScreenApi();
   const energyDataAvailable = useEnergyFormData(formData);
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorUtilityStatus');
-  const nextStep = useGoToNextStep('energyCalculatorUtilityStatus');
   const utilityStatusOptions = {
     electricityIsDisconnected: {
       icon: <Plug className="option-card-icon" />,
@@ -51,7 +51,9 @@ const Utilities = () => {
     }),
   });
 
-  const { handleSubmit, watch, setValue } = useForm<z.infer<typeof formSchema>>({
+  type FormSchema = z.infer<typeof formSchema>;
+
+  const { handleSubmit, watch, setValue } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       energyCalculator: {
@@ -59,9 +61,10 @@ const Utilities = () => {
         hasPastDueEnergyBills: formData.energyCalculator?.hasPastDueEnergyBills ?? false,
       },
     },
+    questionName: 'energyCalculatorUtilityStatus',
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (rhfData) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async (rhfData) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
@@ -72,8 +75,7 @@ const Utilities = () => {
 
     const updatedEnergyCalculatorData = { ...formData.energyCalculator, ...rhfData.energyCalculator };
     const updatedFormData = { ...formData, energyCalculator: updatedEnergyCalculatorData };
-    updateScreen(updatedFormData);
-    nextStep();
+    await updateScreen(updatedFormData);
   };
 
   return (

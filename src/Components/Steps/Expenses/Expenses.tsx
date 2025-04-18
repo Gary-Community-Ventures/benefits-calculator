@@ -35,6 +35,7 @@ import { NUM_PAD_PROPS, handleNumbersOnly } from '../../../Assets/numInputHelper
 import useScreenApi from '../../../Assets/updateScreen';
 import { helperText } from '../../HelperText/HelperText';
 import './Expenses.css';
+import useStepForm from '../stepForm';
 
 const Expenses = () => {
   const { formData } = useContext(Context);
@@ -46,7 +47,6 @@ const Expenses = () => {
   });
   const { updateScreen } = useScreenApi();
   const backNavigationFunction = useDefaultBackNavigationFunction('hasExpenses');
-  const nextStep = useGoToNextStep('hasExpenses');
   const expenseOptions = useConfig('expense_options') as Record<string, FormattedMessageType>;
 
   const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
@@ -84,13 +84,15 @@ const Expenses = () => {
     handleSubmit,
     watch,
     getValues,
-  } = useForm<FormSchema>({
+  } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       hasExpenses: formData.hasExpenses ?? 'false',
       expenses: formData.expenses ?? [],
     },
+    questionName: 'hasExpenses',
   });
+
   const watchHasExpenses = watch('hasExpenses');
   const hasTruthyExpenses = watchHasExpenses === 'true';
   const { fields, append, remove, replace } = useFieldArray({
@@ -113,11 +115,12 @@ const Expenses = () => {
   }, [watchHasExpenses]);
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async (expensesObject) => {
-    if (uuid) {
-      const updatedFormData = { ...formData, ...expensesObject };
-      await updateScreen(updatedFormData);
-      nextStep();
+    if (uuid === undefined) {
+      throw new Error('uuid is not defined');
     }
+
+    const updatedFormData = { ...formData, ...expensesObject };
+    await updateScreen(updatedFormData);
   };
 
   const createExpenseMenuItems = (expenseOptions: Record<string, FormattedMessageType>) => {

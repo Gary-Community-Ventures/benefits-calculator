@@ -1,4 +1,4 @@
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import { InputAdornment, TextField } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import HelpButton from '../../HelpBubbleIcon/HelpButton';
@@ -8,18 +8,18 @@ import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinue
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Context } from '../../Wrapper/Wrapper';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import useScreenApi from '../../../Assets/updateScreen';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { NUM_PAD_PROPS, handleNumbersOnly } from '../../../Assets/numInputHelpers';
+import useStepForm from '../stepForm';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 
 const HouseholdAssets = () => {
   const { formData } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('householdAssets');
-  const nextStep = useGoToNextStep('householdAssets');
   const intl = useIntl();
   const { updateScreen } = useScreenApi();
 
@@ -39,24 +39,26 @@ const HouseholdAssets = () => {
       .min(0),
   });
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<z.infer<typeof formSchema>>({
+  } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       householdAssets: formData.householdAssets ?? 0,
     },
+    questionName: 'householdAssets',
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ householdAssets }) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async ({ householdAssets }) => {
     if (!uuid) {
       throw new Error('no uuid');
     }
     const updatedFormData = { ...formData, householdAssets: householdAssets };
-    updateScreen(updatedFormData);
-    nextStep();
+    await updateScreen(updatedFormData);
   };
 
   return (

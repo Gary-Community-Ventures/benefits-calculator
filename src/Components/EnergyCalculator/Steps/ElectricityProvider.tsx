@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControl, FormHelperText, InputLabel, Select } from '@mui/material';
 import { useContext, useMemo } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { z } from 'zod';
@@ -11,19 +11,19 @@ import { FormattedMessageType } from '../../../Types/Questions';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { createMenuItems } from '../../Steps/SelectHelperFunctions/SelectHelperFunctions';
 import { Context } from '../../Wrapper/Wrapper';
 import ELECTRICITY_PROVIDERS from '../electricityProviders';
 import { useEnergyFormData } from '../hooks';
+import useStepForm from '../../Steps/stepForm';
 
 export default function ElectricityProvider() {
   const { formData } = useContext(Context);
   const energyDataAvailable = useEnergyFormData(formData);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorElectricityProvider');
-  const nextStep = useGoToNextStep('energyCalculatorElectricityProvider');
   const { formatMessage } = useIntl();
   const { updateScreen } = useScreenApi();
 
@@ -36,18 +36,21 @@ export default function ElectricityProvider() {
     }),
   });
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<z.infer<typeof formSchema>>({
+  } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       electricityProvider: formData.energyCalculator?.electricProvider ?? '',
     },
+    questionName: 'energyCalculatorElectricityProvider',
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ electricityProvider }) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async ({ electricityProvider }) => {
     if (!uuid) {
       throw new Error('no uuid');
     }
@@ -61,8 +64,7 @@ export default function ElectricityProvider() {
     };
 
     const updatedFormData: FormData = { ...formData, energyCalculator: updatedEnergyData };
-    updateScreen(updatedFormData);
-    nextStep();
+    await updateScreen(updatedFormData);
   };
 
   const providerOptions = useMemo(() => {
