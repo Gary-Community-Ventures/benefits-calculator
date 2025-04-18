@@ -229,7 +229,7 @@ export function useConfig<T>(name: string, defaultValue?: T): T {
     }
 
     throw new Error(
-      `'${name}' does not exist in the config. Consider using a defualt value if useConfig is used before the config is loaded.`,
+      `'${name}' does not exist in the config. Consider using a default value if useConfig is used before the config is loaded.`,
     );
   }
 
