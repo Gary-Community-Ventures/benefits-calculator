@@ -46,7 +46,7 @@ export const Zipcode = () => {
       helperText(
         formatMessage({
           id: 'validation-helperText.zipcode',
-          defaultMessage: `Please enter a valid zip code for `,
+          defaultMessage: 'Please enter a valid zip code for ',
         }) + state.name,
       ),
     )
