@@ -1,4 +1,4 @@
-import { ReactComponent as Edit } from '../../Assets/icons/edit.svg';
+import { ReactComponent as Edit } from '../../Assets/icons/General/edit.svg';
 import { PropsWithChildren, ReactNode } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { QuestionName } from '../../Types/Questions';

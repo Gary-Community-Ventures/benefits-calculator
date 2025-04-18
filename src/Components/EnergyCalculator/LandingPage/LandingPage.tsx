@@ -4,14 +4,18 @@ import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useEffect } from 'react';
 import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import { ReactComponent as Apartment } from '../Icons/Apartment.svg';
-import { ReactComponent as Housing } from '../../../Assets/icons/residence.svg';
+import { ReactComponent as Housing } from '../../../Assets/icons/General/residence.svg';
 import { CardActionArea, Card, Stack, CardContent, Box } from '@mui/material';
 import './LandingPage.css';
+import { useQueryString } from '../../QuestionComponents/questionHooks';
 
 const LandingPage = () => {
   useEffect(() => {
     document.title = OTHER_PAGE_TITLES.energyCalculatorLandingPage;
   }, []);
+
+  const homeownerQueryString = useQueryString();
+  const renterQueryString = useQueryString({ path: 'renter' });
 
   return (
     <main className="energy-calculator-container">
@@ -50,7 +54,7 @@ const LandingPage = () => {
           key="homeownerCard"
           sx={{ width: '15rem' }}
           className="card-action-area"
-          href="/co_energy_calculator/step-1"
+          href={`/co_energy_calculator/step-1${homeownerQueryString}`}
         >
           <Card className="option-card">
             <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>
@@ -67,7 +71,7 @@ const LandingPage = () => {
           key="renterCard"
           sx={{ width: '15rem' }}
           className="card-action-area"
-          href="/co_energy_calculator/step-1?path=renter"
+          href={`/co_energy_calculator/step-1${renterQueryString}`}
         >
           <Card className="option-card">
             <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>

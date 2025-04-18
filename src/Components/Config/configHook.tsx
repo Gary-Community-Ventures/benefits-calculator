@@ -5,30 +5,30 @@ import { ConfigApiResponse, ConfigValue } from '../../Types/Config';
 import { Config } from '../../Types/Config';
 import { FormattedMessage } from 'react-intl';
 
-import { ReactComponent as Student } from '../../Assets/OptionCardIcons/Conditions/student.svg';
-import { ReactComponent as Pregnant } from '../../Assets/OptionCardIcons/Conditions/pregnant.svg';
-import { ReactComponent as BlindOrVisuallyImpaired } from '../../Assets/OptionCardIcons/Conditions/blindOrVisuallyImpaired.svg';
-import { ReactComponent as Disabled } from '../../Assets/OptionCardIcons/Conditions/disabled.svg';
-import { ReactComponent as LongTermDisability } from '../../Assets/OptionCardIcons/Conditions/longTermDisability.svg';
-import { ReactComponent as Chp } from '../../Assets/OptionCardIcons/HealthInsurance/chp.svg';
-import { ReactComponent as Dont_know } from '../../Assets/OptionCardIcons/HealthInsurance/dont_know.svg';
-import { ReactComponent as Emergency_medicaid } from '../../Assets/OptionCardIcons/HealthInsurance/emergency_medicaid.svg';
-import { ReactComponent as Employer } from '../../Assets/OptionCardIcons/HealthInsurance/employer.svg';
-import { ReactComponent as Family_planning } from '../../Assets/OptionCardIcons/HealthInsurance/family_planning.svg';
-import { ReactComponent as Medicaid } from '../../Assets/OptionCardIcons/HealthInsurance/medicaid.svg';
-import { ReactComponent as Medicare } from '../../Assets/OptionCardIcons/HealthInsurance/medicare.svg';
-import { ReactComponent as None } from '../../Assets/OptionCardIcons/HealthInsurance/none.svg';
-import { ReactComponent as PrivateInsurance } from '../../Assets/OptionCardIcons/HealthInsurance/privateInsurance.svg';
+import { ReactComponent as Student } from '../../Assets/icons/General/OptionCard/Conditions/student.svg';
+import { ReactComponent as Pregnant } from '../../Assets/icons/General/OptionCard/Conditions/pregnant.svg';
+import { ReactComponent as BlindOrVisuallyImpaired } from '../../Assets/icons/General/OptionCard/Conditions/blindOrVisuallyImpaired.svg';
+import { ReactComponent as Disabled } from '../../Assets/icons/General/OptionCard/Conditions/disabled.svg';
+import { ReactComponent as LongTermDisability } from '../../Assets/icons/General/OptionCard/Conditions/longTermDisability.svg';
+import { ReactComponent as Chp } from '../../Assets/icons/General/OptionCard/HealthInsurance/chp.svg';
+import { ReactComponent as Dont_know } from '../../Assets/icons/General/OptionCard/HealthInsurance/dont_know.svg';
+import { ReactComponent as Emergency_medicaid } from '../../Assets/icons/General/OptionCard/HealthInsurance/emergency_medicaid.svg';
+import { ReactComponent as Employer } from '../../Assets/icons/General/OptionCard/HealthInsurance/employer.svg';
+import { ReactComponent as Family_planning } from '../../Assets/icons/General/OptionCard/HealthInsurance/family_planning.svg';
+import { ReactComponent as Medicaid } from '../../Assets/icons/General/OptionCard/HealthInsurance/medicaid.svg';
+import { ReactComponent as Medicare } from '../../Assets/icons/General/OptionCard/HealthInsurance/medicare.svg';
+import { ReactComponent as None } from '../../Assets/icons/General/OptionCard/HealthInsurance/none.svg';
+import { ReactComponent as PrivateInsurance } from '../../Assets/icons/General/OptionCard/HealthInsurance/privateInsurance.svg';
 
-import { ReactComponent as Baby_supplies } from '../../Assets/OptionCardIcons/AcuteConditions/baby_supplies.svg';
-import { ReactComponent as Child_development } from '../../Assets/OptionCardIcons/AcuteConditions/child_development.svg';
-import { ReactComponent as Dental_care } from '../../Assets/OptionCardIcons/AcuteConditions/dental_care.svg';
-import { ReactComponent as Food } from '../../Assets/OptionCardIcons/AcuteConditions/food.svg';
-import { ReactComponent as Housing } from '../../Assets/OptionCardIcons/AcuteConditions/housing.svg';
-import { ReactComponent as Job_resources } from '../../Assets/OptionCardIcons/AcuteConditions/job_resources.svg';
-import { ReactComponent as Legal_services } from '../../Assets/OptionCardIcons/AcuteConditions/legal_services.svg';
-import { ReactComponent as Support } from '../../Assets/OptionCardIcons/AcuteConditions/support.svg';
-import { ReactComponent as SurvivingSpouse } from '../../Assets/icons/head.svg';
+import { ReactComponent as Baby_supplies } from '../../Assets/icons/UrgentNeeds/AcuteConditions/baby_supplies.svg';
+import { ReactComponent as Child_development } from '../../Assets/icons/UrgentNeeds/AcuteConditions/child_development.svg';
+import { ReactComponent as Dental_care } from '../../Assets/icons/UrgentNeeds/AcuteConditions/dental_care.svg';
+import { ReactComponent as Food } from '../../Assets/icons/UrgentNeeds/AcuteConditions/food.svg';
+import { ReactComponent as Housing } from '../../Assets/icons/UrgentNeeds/AcuteConditions/housing.svg';
+import { ReactComponent as Job_resources } from '../../Assets/icons/UrgentNeeds/AcuteConditions/job_resources.svg';
+import { ReactComponent as Legal_services } from '../../Assets/icons/UrgentNeeds/AcuteConditions/legal_services.svg';
+import { ReactComponent as Support } from '../../Assets/icons/UrgentNeeds/AcuteConditions/support.svg';
+import { ReactComponent as SurvivingSpouse } from '../../Assets/icons/General/head.svg';
 
 type Item = {
   _label: string;
@@ -229,7 +229,7 @@ export function useConfig<T>(name: string, defaultValue?: T): T {
     }
 
     throw new Error(
-      `'${name}' does not exist in the config. Consider using a defualt value if useConfig is used before the config is loaded.`,
+      `'${name}' does not exist in the config. Consider using a default value if useConfig is used before the config is loaded.`,
     );
   }
 

@@ -25,7 +25,8 @@
   width: 4.375rem;
 }
 
-.option-card-icon path {
+.option-card-icon path,
+.option-card-icon rect {
   fill: var(--icon-color);
 }
 

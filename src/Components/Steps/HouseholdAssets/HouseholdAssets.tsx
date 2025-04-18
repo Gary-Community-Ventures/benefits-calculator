@@ -1,4 +1,4 @@
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import { InputAdornment, TextField } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import HelpButton from '../../HelpBubbleIcon/HelpButton';
@@ -14,6 +14,7 @@ import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { NUM_PAD_PROPS, handleNumbersOnly } from '../../../Assets/numInputHelpers';
 import useStepForm from '../stepForm';
+import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 
 const HouseholdAssets = () => {
   const { formData } = useContext(Context);
@@ -96,7 +97,11 @@ const HouseholdAssets = () => {
               inputProps={NUM_PAD_PROPS}
               onChange={handleNumbersOnly(field.onChange)}
               error={errors.householdAssets !== undefined}
-              helperText={errors.householdAssets !== undefined && errors.householdAssets?.message}
+              helperText={
+                errors.householdAssets !== undefined && (
+                  <ErrorMessageWrapper fontSize="1rem">{errors.householdAssets?.message}</ErrorMessageWrapper>
+                )
+              }
             />
           )}
         />

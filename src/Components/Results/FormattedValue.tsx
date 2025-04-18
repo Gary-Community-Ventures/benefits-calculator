@@ -15,6 +15,10 @@ export function programValue(program: Program) {
   return total;
 }
 
+function capValuesInitializer(): { household_value: number; member_values: { [key: string]: number } } {
+  return { household_value: 0, member_values: {} };
+}
+
 export function calculateTotalValue(category: ProgramCategory) {
   // assume that none of the caps are overlapping
   if (hasOverlappingCaps(category)) {
@@ -22,7 +26,7 @@ export function calculateTotalValue(category: ProgramCategory) {
   }
 
   let nonCapTotal = 0;
-  const capValues = Array.from({ length: category.caps.length }, () => 0);
+  const capValues = Array.from({ length: category.caps.length }, capValuesInitializer);
   for (const program of category.programs) {
     if (program.estimated_value_override.default_message !== '') {
       continue;
@@ -31,8 +35,14 @@ export function calculateTotalValue(category: ProgramCategory) {
     let isInCap = false;
     for (let i = 0; i < category.caps.length; i++) {
       const cap = category.caps[i];
-      if (cap.programs.includes(program.external_name)) {
-        capValues[i] += programValue(program);
+      if (cap.programs.includes(program.name_abbreviated)) {
+        capValues[i].household_value += program.estimated_value;
+        for (const member of program.members) {
+          if (!(member.frontend_id in capValues[i].member_values)) {
+            capValues[i].member_values[member.frontend_id] = 0;
+          }
+          capValues[i].member_values[member.frontend_id] += member.value;
+        }
         isInCap = true;
         break;
       }
@@ -46,14 +56,19 @@ export function calculateTotalValue(category: ProgramCategory) {
   let total = nonCapTotal;
   for (let i = 0; i < category.caps.length; i++) {
     const cap = category.caps[i];
-    const capValue = capValues[i];
+    const value = capValues[i];
 
-    if (capValue > cap.cap) {
-      total += cap.cap;
+    let cappedValue = Math.min(cap.household_cap, value.household_value);
+
+    if (cap.member_caps === null) {
+      total += cappedValue;
       continue;
     }
+    for (const [id, memberValue] of Object.entries(value.member_values)) {
+      cappedValue += Math.min(cap.member_caps[id], memberValue);
+    }
 
-    total += capValue;
+    total += cappedValue;
   }
 
   return total;

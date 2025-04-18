@@ -21,7 +21,8 @@ export type ProgramNavigator = {
 
 export type ProgramCategoryCap = {
   programs: string[];
-  cap: number;
+  household_cap: number;
+  member_caps: { [key: string]: number } | null;
 };
 
 export type WarningMessage = {

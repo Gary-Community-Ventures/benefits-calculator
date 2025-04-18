@@ -68,6 +68,7 @@ export function useUpdateFormData() {
         ma_mbta: response.has_ma_mbta ?? false,
         ma_maeitc: response.has_ma_maeitc ?? false,
         ma_macftc: response.has_ma_macftc ?? false,
+        co_andso: response.has_co_andso ?? false,
       },
       referralSource: response.referral_source ?? undefined,
       immutableReferrer: response.referrer_code ?? undefined,
@@ -82,6 +83,7 @@ export function useUpdateFormData() {
         jobResources: response.needs_job_resources ?? false,
         dentalCare: response.needs_dental_care ?? false,
         legalServices: response.needs_legal_services ?? false,
+        veteranServices: response.needs_veteran_services ?? false,
       },
       signUpInfo: {
         email: '',
