@@ -20,7 +20,7 @@ export default function useStepForm<T extends FieldValues>({
   onSubmitSuccessfulOverride?: () => void;
 }) {
   const { setStepLoading } = useContext(Context);
-  const nextPage = useGoToNextStep(questionName); // Generate the nextPage function using questionName
+  const nextPage = useGoToNextStep(questionName);
 
   const form = useForm<T>({
     ...useFormProps,
@@ -40,7 +40,7 @@ export default function useStepForm<T extends FieldValues>({
         nextPage();
       }
     }
-  }, [isSubmitSuccessful, nextPage]);
+  }, [isSubmitSuccessful, nextPage, onSubmitSuccessfulOverride]);
 
   return form as UseFormReturn<T>;
 }
