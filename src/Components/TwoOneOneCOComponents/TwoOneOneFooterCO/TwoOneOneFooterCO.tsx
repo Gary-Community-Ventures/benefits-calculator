@@ -5,9 +5,11 @@ import dialIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/dial
 import textIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/textIcon.png';
 import { FormattedMessage, useIntl } from 'react-intl';
 import './TwoOneOneFooterCO.css';
+import { useLocalizedLink } from '../../Config/configHook';
 
 const TwoOneOneFooterCO = () => {
   const intl = useIntl();
+  const privacyPolicyLink = useLocalizedLink('privacy_policy');
 
   const twoOneOneChatALProps = {
     id: 'twoOneOneFooter.chatAL',
@@ -180,7 +182,7 @@ const TwoOneOneFooterCO = () => {
             &nbsp;
           </Link>
           <Link
-            href="https://co.myfriendben.org/en/data-privacy-policy"
+            href={privacyPolicyLink}
             underline="none"
             target="_blank"
             aria-label={intl.formatMessage(twoOneOneTOSALProps)}

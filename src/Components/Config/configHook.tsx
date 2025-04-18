@@ -3,7 +3,7 @@ import { Context } from '../Wrapper/Wrapper';
 import { configEndpoint, header } from '../../apiCalls';
 import { ConfigApiResponse, ConfigValue } from '../../Types/Config';
 import { Config } from '../../Types/Config';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ReactComponent as Student } from '../../Assets/icons/General/OptionCard/Conditions/student.svg';
 import { ReactComponent as Pregnant } from '../../Assets/icons/General/OptionCard/Conditions/pregnant.svg';
@@ -235,3 +235,19 @@ export function useConfig<T>(name: string, defaultValue?: T): T {
 
   return config[name] as T;
 }
+
+export function useLocalizedLink(configKey: 'privacy_policy' | 'consent_to_contact') {
+  const intl = useIntl();
+  const locale = intl.locale as string;
+  const links = useConfig<Partial<Record<string, string>>>(configKey, {});
+
+  return links[locale] || links['en-us'] || '';
+}
+
+// export function useLocalizedConfig<T extends Record<string, string>>(key: string, defaultVal?: T): string {
+//   const intl = useIntl();
+//   const locale = intl.locale;
+//   const values = useConfig<T>(key, defaultVal || {} as T);
+
+//   return values[locale] || values['en-us'] || '';
+// }

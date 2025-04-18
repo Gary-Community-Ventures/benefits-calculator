@@ -10,13 +10,13 @@ import { FormattedMessage } from 'react-intl';
 import { FormattedMessageType } from '../../../Types/Questions';
 import dataLayerPush from '../../../Assets/analytics';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
-import { useConfig } from '../../Config/configHook';
+import { useConfig, useLocalizedLink } from '../../Config/configHook';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useQueryString } from '../../QuestionComponents/questionHooks';
 import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import useScreenApi from '../../../Assets/updateScreen';
-import { Language, OverrideableTranslation } from '../../../Assets/languageOptions';
+import { OverrideableTranslation } from '../../../Assets/languageOptions';
 import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
 import EnergyCalculatorDisclaimer from '../../EnergyCalculator/Steps/Disclaimer';
 import './Disclaimer.css';
@@ -36,8 +36,8 @@ const Disclaimer = () => {
     link: '',
     text: <FormattedMessage id="landingPage.defaultPublicChargeLink" defaultMessage="Public Charge Rule" />,
   });
-  const privacyLinks = useConfig<Partial<Record<Language, string>>>('privacy_policy', {});
-  const consentToContactLinks = useConfig<Partial<Record<Language, string>>>('consent_to_contact', {});
+  const privacyPolicyLink = useLocalizedLink('privacy_policy');
+  const consentToContactLinks = useLocalizedLink('consent_to_contact');
   const queryString = useQueryString();
   const { createScreen, updateScreen } = useScreenApi();
   const backNavigationFunction = () => {
@@ -125,33 +125,6 @@ const Disclaimer = () => {
     );
   };
 
-  const getLinksForCheckbox = () => {
-    let privacylink = privacyLinks['en-us'];
-    let consentToContactLink = consentToContactLinks['en-us'];
-
-    const localePrivacyLink = privacyLinks[locale];
-    if (localePrivacyLink !== undefined) {
-      privacylink = localePrivacyLink;
-    }
-
-    const localeConsentToContactLink = consentToContactLinks[locale];
-    if (localeConsentToContactLink !== undefined) {
-      consentToContactLink = localeConsentToContactLink;
-    }
-
-    if (privacylink === undefined || consentToContactLink === undefined) {
-      return {
-        privacyPolicyLink: '',
-        addTermsConsentToContact: '',
-      };
-    }
-
-    return {
-      privacyPolicyLink: privacylink,
-      addTermsConsentToContact: consentToContactLink,
-    };
-  };
-
   const createAgreeTTSCheckboxLabel = () => {
     return (
       <div className="disclaimer-font">
@@ -159,11 +132,11 @@ const Disclaimer = () => {
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
         />
-        <a href={getLinksForCheckbox().privacyPolicyLink} target="_blank" className="link-color">
+        <a href={privacyPolicyLink} target="_blank" className="link-color">
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
         </a>
         <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />
-        <a href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" className="link-color">
+        <a href={consentToContactLinks} target="_blank" className="link-color">
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Terms and Conditions" />
         </a>
         <FormattedMessage id="landingPage-disclaimer-lable-end" defaultMessage="." />

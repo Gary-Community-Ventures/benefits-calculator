@@ -3,9 +3,11 @@ import Box from '@mui/material/Box';
 import dialIcon from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/dialIcon.png';
 import { FormattedMessage, useIntl } from 'react-intl';
 import './TwoOneOneFooterNC.css';
+import { useLocalizedLink } from '../../Config/configHook';
 
 const TwoOneOneFooterNC = () => {
   const intl = useIntl();
+  const privacyPolicyLink = useLocalizedLink('privacy_policy');
 
   const twoOneOneDialALProps = {
     id: 'twoOneOneFooter.dialAL',
@@ -104,7 +106,7 @@ const TwoOneOneFooterNC = () => {
             &nbsp;
           </Link>
           <Link
-            href="https://bennc.org/privacy-policy/"
+            href={privacyPolicyLink}
             underline="none"
             target="_blank"
             aria-label={intl.formatMessage(twoOneOneTOSALProps)}
