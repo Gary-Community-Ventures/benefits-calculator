@@ -11,7 +11,7 @@ import { FormattedMessageType } from '../../../Types/Questions';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { createMenuItems } from '../../Steps/SelectHelperFunctions/SelectHelperFunctions';
 import { Context } from '../../Wrapper/Wrapper';
@@ -24,7 +24,6 @@ export default function ElectricityProvider() {
   const energyDataAvailable = useEnergyFormData(formData);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorElectricityProvider');
-  const nextStep = useGoToNextStep('energyCalculatorElectricityProvider');
   const { formatMessage } = useIntl();
   const { updateScreen } = useScreenApi();
 
@@ -48,7 +47,7 @@ export default function ElectricityProvider() {
     defaultValues: {
       electricityProvider: formData.energyCalculator?.electricProvider ?? '',
     },
-    onSubmitSuccessful: nextStep,
+    questionName: 'energyCalculatorElectricityProvider',
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async ({ electricityProvider }) => {

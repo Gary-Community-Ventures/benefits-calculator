@@ -46,7 +46,6 @@ const Expenses = () => {
   });
   const { updateScreen } = useScreenApi();
   const backNavigationFunction = useDefaultBackNavigationFunction('hasExpenses');
-  const nextStep = useGoToNextStep('hasExpenses');
   const expenseOptions = useConfig('expense_options') as Record<string, FormattedMessageType>;
 
   const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
@@ -74,7 +73,7 @@ const Expenses = () => {
       hasExpenses: formData.hasExpenses ?? 'false',
       expenses: formData.expenses ?? [],
     },
-    onSubmitSuccessful: nextStep,
+    questionName: 'hasExpenses',
   });
 
   const watchHasExpenses = watch('hasExpenses');

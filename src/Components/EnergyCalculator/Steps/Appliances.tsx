@@ -54,7 +54,6 @@ const Utilities = () => {
   const { updateScreen } = useScreenApi();
   const energyDataAvailable = useEnergyFormData(formData);
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorApplianceStatus');
-  const nextStep = useGoToNextStep('energyCalculatorApplianceStatus');
 
   const formSchema = z.object({
     energyCalculator: z.object({
@@ -75,7 +74,7 @@ const Utilities = () => {
         needsStove: formData.energyCalculator?.needsStove ?? false,
       },
     },
-    onSubmitSuccessful: nextStep,
+    questionName: 'energyCalculatorApplianceStatus',
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async (rhfData) => {

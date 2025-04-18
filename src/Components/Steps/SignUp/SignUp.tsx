@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Checkbox, FormControlLabel, TextField } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { z } from 'zod';
 import { FormData } from '../../../Types/FormData';
@@ -10,7 +10,7 @@ import { useConfig } from '../../Config/configHook';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { Context } from '../../Wrapper/Wrapper';
 import { useParams } from 'react-router-dom';
@@ -26,7 +26,6 @@ function SignUp() {
   const { updateUser } = useScreenApi();
   const { formatMessage } = useIntl();
   const backNavigationFunction = useDefaultBackNavigationFunction('signUpInfo');
-  const nextStep = useGoToNextStep('signUpInfo');
   const signUpOptions = useConfig<{ [key: string]: FormattedMessageType }>('sign_up_options');
 
   const contactInfoSchema = z
@@ -170,7 +169,7 @@ function SignUp() {
         sendUpdates: formData.signUpInfo.sendUpdates,
       },
     },
-    onSubmitSuccessful: nextStep,
+    questionName: 'signUpInfo',
   });
 
   const contactType = watch('contactType');

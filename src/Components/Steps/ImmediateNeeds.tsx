@@ -1,17 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ReactNode, useContext } from 'react';
-import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { z } from 'zod';
 import useScreenApi from '../../Assets/updateScreen';
-import { AcuteHHConditions } from '../../Types/FormData';
 import { FormattedMessageType } from '../../Types/Questions';
 import { useConfig } from '../Config/configHook';
 import MultiSelectTiles from '../OptionCardGroup/MultiSelectTiles';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../QuestionComponents/questionHooks';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { Context } from '../Wrapper/Wrapper';
 import useStepForm from './stepForm';
@@ -27,7 +25,6 @@ function ImmediateNeeds() {
   const immediateNeeds =
     useConfig<Record<string, { text: FormattedMessageType; icon: ReactNode }>>('acute_condition_options');
 
-  const nextStep = useGoToNextStep('acuteHHConditions');
   const backNavigationFunction = useDefaultBackNavigationFunction('acuteHHConditions');
 
   type FormSchema = z.infer<typeof formSchema>;
@@ -37,7 +34,7 @@ function ImmediateNeeds() {
     defaultValues: {
       needs: formData.acuteHHConditions,
     },
-    onSubmitSuccessful: nextStep,
+    questionName: 'acuteHHConditions',
   });
 
   const submitHandler = async ({ needs }: FormSchema) => {

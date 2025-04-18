@@ -91,7 +91,6 @@ function AlreadyHasBenefits() {
   const { formatMessage } = useIntl();
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('hasBenefits');
-  const nextStep = useGoToNextStep('hasBenefits');
   const { updateScreen } = useScreenApi();
   const isEnergyCalculator = useIsEnergyCalculator();
 
@@ -134,7 +133,7 @@ function AlreadyHasBenefits() {
       hasBenefits: formData.hasBenefits,
       alreadyHasBenefits: formData.benefits,
     },
-    onSubmitSuccessful: nextStep,
+    questionName: 'hasBenefits',
   });
 
   const hasBenefits = 'true' === watch('hasBenefits');

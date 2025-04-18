@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControl, FormHelperText, InputLabel, Select } from '@mui/material';
 import { useContext, useMemo } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { z } from 'zod';
@@ -12,7 +12,7 @@ import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { createMenuItems } from '../../Steps/SelectHelperFunctions/SelectHelperFunctions';
 import { Context } from '../../Wrapper/Wrapper';
@@ -25,7 +25,6 @@ export default function GasProvider() {
   const energyDataAvailable = useEnergyFormData(formData);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorGasProvider');
-  const nextStep = useGoToNextStep('energyCalculatorGasProvider');
   const { formatMessage } = useIntl();
   const { updateScreen } = useScreenApi();
 
@@ -49,7 +48,7 @@ export default function GasProvider() {
     defaultValues: {
       gasProvider: formData.energyCalculator?.gasProvider ?? '',
     },
-    onSubmitSuccessful: nextStep,
+    questionName: 'energyCalculatorGasProvider',
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async ({ gasProvider }) => {

@@ -5,12 +5,12 @@ import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { ReactComponent as Plug } from '../Icons/Plug.svg';
 import { ReactComponent as LowFuel } from '../Icons/LowFuel.svg';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import useScreenApi from '../../../Assets/updateScreen';
@@ -23,7 +23,6 @@ const Utilities = () => {
   const { updateScreen } = useScreenApi();
   const energyDataAvailable = useEnergyFormData(formData);
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorUtilityStatus');
-  const nextStep = useGoToNextStep('energyCalculatorUtilityStatus');
   const utilityStatusOptions = {
     electricityIsDisconnected: {
       icon: <Plug className="option-card-icon" />,
@@ -62,7 +61,7 @@ const Utilities = () => {
         hasPastDueEnergyBills: formData.energyCalculator?.hasPastDueEnergyBills ?? false,
       },
     },
-    onSubmitSuccessful: nextStep,
+    questionName: 'energyCalculatorUtilityStatus',
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async (rhfData) => {

@@ -303,7 +303,8 @@ const HouseholdMemberForm = () => {
       hasIncome: determineDefaultHasIncome(),
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
     },
-    onSubmitSuccessful: () => nextStep(uuid, currentStepId, pageNumber),
+    questionName: 'householdData',
+    onSubmitSuccessfulOverride: () => nextStep(uuid, currentStepId, pageNumber),
   });
   const watchHasIncome = watch('hasIncome');
   const hasTruthyIncome = watchHasIncome === 'true';

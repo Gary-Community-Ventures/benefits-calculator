@@ -1,25 +1,26 @@
 import { useContext, useEffect } from 'react';
 import { FieldValues, useForm, UseFormProps, UseFormReturn } from 'react-hook-form';
 import { Context } from '../Wrapper/Wrapper';
+import { QuestionName } from '../../Types/Questions';
+import { useGoToNextStep } from '../QuestionComponents/questionHooks';
 
 // This hook is used to create a form for screener steps.
-// It should be used when you need to show loading state while the form is submitting.
+// By default, it will navigate to the next step when the form is submitted successfully.
+// The onSubmitSuccessfulOverride callback should be used when custom logic is needed.
 //
-// It wraps the useForm hook from react-hook-form and adds some additional functionality
-// to manage the loading state and submission success callback.
-// The onSubmitSuccessful callback should be used for navigating to the next step,
-// rather than putting navigation in the submit handler. Otherwise, the isSubmitSuccessful
+// If you must navigate within the submit handler, use the setStepLoading function
+// to set the loading state to false before navigating. Otherwise, the isSubmitSuccessful
 // state will not be updated correctly and the loading state will not be set to false.
-//
-// If you must navigate during the submit handler, use the setStepLoading function
-// to set the loading state to false before navigating.
 export default function useStepForm<T extends FieldValues>({
-  onSubmitSuccessful,
+  questionName,
+  onSubmitSuccessfulOverride,
   ...useFormProps
 }: UseFormProps<T> & {
-  onSubmitSuccessful: () => void; // TODO: could default to calling next step?
+  questionName: QuestionName;
+  onSubmitSuccessfulOverride?: () => void;
 }) {
   const { setStepLoading } = useContext(Context);
+  const nextPage = useGoToNextStep(questionName); // Generate the nextPage function using questionName
 
   const form = useForm<T>({
     ...useFormProps,
@@ -32,10 +33,14 @@ export default function useStepForm<T extends FieldValues>({
   }, [isSubmitting]);
 
   useEffect(() => {
-    if (isSubmitSuccessful && onSubmitSuccessful) {
-      onSubmitSuccessful();
+    if (isSubmitSuccessful) {
+      if (onSubmitSuccessfulOverride) {
+        onSubmitSuccessfulOverride();
+      } else {
+        nextPage();
+      }
     }
-  }, [isSubmitSuccessful]);
+  }, [isSubmitSuccessful, nextPage]);
 
   return form as UseFormReturn<T>;
 }

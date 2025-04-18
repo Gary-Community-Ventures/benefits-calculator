@@ -55,7 +55,8 @@ const HouseholdSize = () => {
     defaultValues: {
       householdSize: formData.householdSize ?? 0,
     },
-    onSubmitSuccessful: nextStep,
+    questionName: 'householdSize',
+    onSubmitSuccessfulOverride: nextStep,
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async ({ householdSize }) => {

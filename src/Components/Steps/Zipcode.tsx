@@ -1,11 +1,10 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { FormattedMessageType } from '../../Types/Questions';
-import { FormData } from '../../Types/FormData';
 import { Context } from '../Wrapper/Wrapper';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import { useConfig } from '../Config/configHook';
@@ -14,7 +13,7 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionLeadText from '../QuestionComponents/QuestionLeadText';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../QuestionComponents/questionHooks';
 import { handleNumbersOnly, NUM_PAD_PROPS } from '../../Assets/numInputHelpers';
 import useScreenApi from '../../Assets/updateScreen';
 import { OverrideableTranslation } from '../../Assets/languageOptions';
@@ -30,7 +29,6 @@ export const Zipcode = () => {
   const noChangeStateMessage = getReferrer('featureFlags').includes('no_zipcode_change_state');
   const countiesByZipcode = useConfig<{ [key: string]: { [key: string]: string } }>('counties_by_zipcode');
   const state = useConfig<{ name: string }>('state');
-  const nextStep = useGoToNextStep('zipcode');
 
   const checkCountyIsValid = ({ zipcode, county }: { zipcode: string; county: string }) => {
     const validCounties = countiesByZipcode[zipcode];
@@ -68,7 +66,7 @@ export const Zipcode = () => {
       zipcode: formData.zipcode ?? '',
       county: formData.county ?? 'disabled-select',
     },
-    onSubmitSuccessful: nextStep,
+    questionName: 'zipcode',
   });
 
   const currentZipcodeValue = watch('zipcode');

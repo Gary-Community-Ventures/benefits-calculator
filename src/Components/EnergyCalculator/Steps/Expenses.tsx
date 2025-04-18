@@ -50,7 +50,6 @@ export default function EnergyCalculatorExpenses() {
   const { formData } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorExpenses');
-  const nextStep = useGoToNextStep('energyCalculatorExpenses');
   const { updateScreen } = useScreenApi();
   const navigate = useNavigate();
   const { whiteLabel, setStepLoading } = useContext(Context);
@@ -82,7 +81,7 @@ export default function EnergyCalculatorExpenses() {
         electricity: hasExpense('electricity'),
       },
     },
-    onSubmitSuccessful: nextStep,
+    questionName: 'energyCalculatorExpenses',
   });
 
   const createExpense = (expenseName: string): Expense => {

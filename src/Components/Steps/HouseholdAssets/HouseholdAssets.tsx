@@ -8,7 +8,7 @@ import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinue
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Context } from '../../Wrapper/Wrapper';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import useScreenApi from '../../../Assets/updateScreen';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
@@ -19,7 +19,6 @@ const HouseholdAssets = () => {
   const { formData } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('householdAssets');
-  const nextStep = useGoToNextStep('householdAssets');
   const intl = useIntl();
   const { updateScreen } = useScreenApi();
 
@@ -50,7 +49,7 @@ const HouseholdAssets = () => {
     defaultValues: {
       householdAssets: formData.householdAssets ?? 0,
     },
-    onSubmitSuccessful: nextStep,
+    questionName: 'householdAssets',
   });
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async ({ householdAssets }) => {
