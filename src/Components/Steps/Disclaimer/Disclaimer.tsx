@@ -6,7 +6,7 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { STARTING_QUESTION_NUMBER } from '../../../Assets/stepDirectory';
 import { Checkbox, FormControlLabel } from '@mui/material';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { FormattedMessageType } from '../../../Types/Questions';
 import dataLayerPush from '../../../Assets/analytics';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
@@ -53,9 +53,19 @@ const Disclaimer = () => {
     document.title = OTHER_PAGE_TITLES.disclaimer;
   }, []);
 
+  const { formatMessage } = useIntl();
+  const isChecked = () => {
+    return {
+      message: formatMessage({
+        id: 'disclaimer.error',
+        defaultMessage: 'Please check the box to continue.',
+      }),
+    };
+  };
+
   const formSchema = z.object({
-    agreeToTermsOfService: z.boolean().refine(isTrue),
-    is13OrOlder: z.boolean().refine(isTrue),
+    agreeToTermsOfService: z.boolean().refine(isTrue, isChecked()),
+    is13OrOlder: z.boolean().refine(isTrue, isChecked()),
   });
 
   const {
@@ -171,14 +181,6 @@ const Disclaimer = () => {
     );
   };
 
-  const renderCheckboxHelperText = () => {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="disclaimer.error" defaultMessage="Please check the box to continue." />
-      </ErrorMessageWrapper>
-    );
-  };
-
   if (isEnergyCalculator) {
     return <EnergyCalculatorDisclaimer />;
   } else {
@@ -206,7 +208,9 @@ const Disclaimer = () => {
                     }
                     label={createAgreeTTSCheckboxLabel()}
                   />
-                  {errors.agreeToTermsOfService && renderCheckboxHelperText()}
+                  {errors.agreeToTermsOfService && (
+                    <ErrorMessageWrapper fontSize="1rem">{errors.agreeToTermsOfService.message}</ErrorMessageWrapper>
+                  )}
                 </>
               )}
             />
@@ -234,7 +238,9 @@ const Disclaimer = () => {
                     }
                     className="top-margin"
                   />
-                  {errors.is13OrOlder && renderCheckboxHelperText()}
+                  {errors.is13OrOlder && (
+                    <ErrorMessageWrapper fontSize="1rem">{errors.is13OrOlder.message}</ErrorMessageWrapper>
+                  )}
                 </>
               )}
             />

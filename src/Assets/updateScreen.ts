@@ -80,6 +80,7 @@ const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: 
     has_ma_mbta: formData.benefits.ma_mbta ?? null,
     has_ma_maeitc: formData.benefits.ma_maeitc ?? null,
     has_ma_macftc: formData.benefits.ma_macftc ?? null,
+    has_co_andso: formData.benefits.co_andso ?? null,
     referral_source: formData.referralSource ?? null,
     referrer_code: formData.immutableReferrer ?? null,
     path: formData.path ?? null,
@@ -92,6 +93,7 @@ const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: 
     needs_job_resources: formData.acuteHHConditions.jobResources ?? null,
     needs_dental_care: formData.acuteHHConditions.dentalCare ?? null,
     needs_legal_services: formData.acuteHHConditions.legalServices ?? null,
+    needs_veteran_services: formData.acuteHHConditions.veteranServices ?? null,
   };
 
   return screenBody;

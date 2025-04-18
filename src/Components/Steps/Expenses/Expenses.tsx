@@ -33,6 +33,7 @@ import CloseButton from '../../CloseButton/CloseButton';
 import AddIcon from '@mui/icons-material/Add';
 import { NUM_PAD_PROPS, handleNumbersOnly } from '../../../Assets/numInputHelpers';
 import useScreenApi from '../../../Assets/updateScreen';
+import { helperText } from '../../HelperText/HelperText';
 import './Expenses.css';
 
 const Expenses = () => {
@@ -50,8 +51,24 @@ const Expenses = () => {
 
   const oneOrMoreDigitsButNotAllZero = /^(?!0+$)\d+$/;
   const expenseSourceSchema = z.object({
-    expenseSourceName: z.string().min(1),
-    expenseAmount: z.string().trim().regex(oneOrMoreDigitsButNotAllZero),
+    expenseSourceName: z
+      .string(
+        helperText(
+          intl.formatMessage({ id: 'errorMessage-expenseType', defaultMessage: 'Please select an expense type' }),
+        ),
+      )
+      .min(1),
+    expenseAmount: z
+      .string(
+        helperText(
+          intl.formatMessage({
+            id: 'errorMessage-greaterThanZero',
+            defaultMessage: 'Please enter a number greater than 0',
+          }),
+        ),
+      )
+      .trim()
+      .regex(oneOrMoreDigitsButNotAllZero),
   });
   const expenseSourcesSchema = z.array(expenseSourceSchema);
   const hasExpensesSchema = z.string().regex(/^true|false$/);
@@ -125,22 +142,6 @@ const Expenses = () => {
     if (expenseSourceName) {
       return <> ({expenseOptions[expenseSourceName]})</>;
     }
-  };
-
-  const renderExpenseSourceHelperText = () => {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="errorMessage-expenseType" defaultMessage="Please select an expense type" />
-      </ErrorMessageWrapper>
-    );
-  };
-
-  const renderExpenseAmountHelperText = () => {
-    return (
-      <ErrorMessageWrapper fontSize="1rem">
-        <FormattedMessage id="errorMessage-greaterThanZero" defaultMessage="Please enter a number greater than 0" />
-      </ErrorMessageWrapper>
-    );
   };
 
   return (
@@ -242,7 +243,11 @@ const Expenses = () => {
                         {createExpenseMenuItems(expenseOptions)}
                       </Select>
                       {!!errors.expenses?.[index]?.expenseSourceName && (
-                        <FormHelperText sx={{ marginLeft: 0 }}>{renderExpenseSourceHelperText()}</FormHelperText>
+                        <FormHelperText sx={{ marginLeft: 0 }}>
+                          <ErrorMessageWrapper fontSize="1rem">
+                            {errors.expenses?.[index]?.expenseSourceName.message}
+                          </ErrorMessageWrapper>
+                        </FormHelperText>
                       )}
                     </>
                   )}
@@ -281,7 +286,11 @@ const Expenses = () => {
                           }}
                         />
                         {!!errors.expenses?.[index]?.expenseAmount && (
-                          <FormHelperText sx={{ marginLeft: 0 }}>{renderExpenseAmountHelperText()}</FormHelperText>
+                          <FormHelperText sx={{ marginLeft: 0 }}>
+                            <ErrorMessageWrapper fontSize="1rem">
+                              {errors.expenses?.[index]?.expenseAmount.message}
+                            </ErrorMessageWrapper>
+                          </FormHelperText>
                         )}
                       </>
                     )}

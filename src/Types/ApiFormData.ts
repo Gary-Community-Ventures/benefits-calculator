@@ -188,6 +188,7 @@ export type ApiFormData = {
   has_ma_mbta: boolean | null;
   has_ma_maeitc: boolean | null;
   has_ma_macftc: boolean | null;
+  has_co_andso: boolean | null;
   has_employer_hi?: boolean | null;
   has_private_hi?: boolean | null;
   has_medicaid_hi?: boolean | null;
@@ -204,4 +205,5 @@ export type ApiFormData = {
   needs_job_resources: boolean | null;
   needs_dental_care: boolean | null;
   needs_legal_services: boolean | null;
+  needs_veteran_services: boolean | null;
 };
