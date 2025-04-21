@@ -29,6 +29,7 @@ import { ReactComponent as Job_resources } from '../../Assets/icons/UrgentNeeds/
 import { ReactComponent as Legal_services } from '../../Assets/icons/UrgentNeeds/AcuteConditions/legal_services.svg';
 import { ReactComponent as Support } from '../../Assets/icons/UrgentNeeds/AcuteConditions/support.svg';
 import { ReactComponent as SurvivingSpouse } from '../../Assets/icons/General/head.svg';
+import { Language } from '../../Assets/languageOptions';
 
 type Item = {
   _label: string;
@@ -237,17 +238,8 @@ export function useConfig<T>(name: string, defaultValue?: T): T {
 }
 
 export function useLocalizedLink(configKey: 'privacy_policy' | 'consent_to_contact') {
-  const intl = useIntl();
-  const locale = intl.locale as string;
-  const links = useConfig<Partial<Record<string, string>>>(configKey, {});
+  const { locale } = useContext(Context);
+  const links = useConfig<Partial<Record<Language, string>>>(configKey, {});
 
-  return links[locale] || links['en-us'] || '';
+  return links[locale] ?? links['en-us'] ?? '';
 }
-
-// export function useLocalizedConfig<T extends Record<string, string>>(key: string, defaultVal?: T): string {
-//   const intl = useIntl();
-//   const locale = intl.locale;
-//   const values = useConfig<T>(key, defaultVal || {} as T);
-
-//   return values[locale] || values['en-us'] || '';
-// }
