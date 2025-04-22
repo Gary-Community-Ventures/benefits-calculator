@@ -74,7 +74,7 @@ const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: 
     has_ncwap: formData.benefits.ncwap ?? null,
     has_nccip: formData.benefits.nccip ?? null,
     has_csfp: formData.benefits.csfp ?? null,
-    has_ccfa: formData.benefits.ccfa ?? null,
+    has_ccdf: formData.benefits.ccdf ?? null,
     has_aca: formData.benefits.aca ?? null,
     has_ma_eaedc: formData.benefits.ma_eaedc ?? null,
     has_ma_ssp: formData.benefits.ma_ssp ?? null,

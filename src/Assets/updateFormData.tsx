@@ -63,7 +63,7 @@ export function useUpdateFormData() {
         chp: response.has_chp ?? false,
         medicaid: response.has_medicaid ?? false,
         csfp: response.has_csfp ?? false,
-        ccfa: response.has_ccfa ?? false,
+        ccdf: response.has_ccdf ?? false,
         aca: response.has_aca ?? false,
         ma_eaedc: response.has_ma_eaedc ?? false,
         ma_ssp: response.has_ma_ssp ?? false,
