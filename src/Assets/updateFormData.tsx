@@ -69,7 +69,7 @@ export function useUpdateFormData() {
         ma_ssp: response.has_ma_ssp ?? false,
         ma_mbta: response.has_ma_mbta ?? false,
         ma_maeitc: response.has_ma_maeitc ?? false,
-        ma_macftc: response.has_ma_macftc ?? false,
+        ma_macfc: response.has_ma_macfc ?? false,
         co_andso: response.has_co_andso ?? false,
       },
       referralSource: response.referral_source ?? undefined,

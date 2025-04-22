@@ -80,7 +80,7 @@ const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: 
     has_ma_ssp: formData.benefits.ma_ssp ?? null,
     has_ma_mbta: formData.benefits.ma_mbta ?? null,
     has_ma_maeitc: formData.benefits.ma_maeitc ?? null,
-    has_ma_macftc: formData.benefits.ma_macftc ?? null,
+    has_ma_macftc: formData.benefits.ma_macfc ?? null,
     has_co_andso: formData.benefits.co_andso ?? null,
     referral_source: formData.referralSource ?? null,
     referrer_code: formData.immutableReferrer ?? null,
