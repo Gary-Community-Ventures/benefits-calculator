@@ -7,6 +7,7 @@ import { getTranslations } from '../../apiCalls';
 import useReferrer, { ReferrerData } from '../Referrer/referrerHook';
 import { useGetConfig } from '../Config/configHook';
 import { rightToLeftLanguages, Language } from '../../Assets/languageOptions';
+import { HtmlLangUpdater } from '../HtmlLangUpdater/HtmlLangUpdater';
 
 const initialFormData: FormData = {
   whiteLabel: '_default',
@@ -217,6 +218,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
       }}
     >
       <IntlProvider locale={locale} messages={messages} defaultLocale={locale}>
+        <HtmlLangUpdater />
         {props.children}
       </IntlProvider>
     </Context.Provider>
