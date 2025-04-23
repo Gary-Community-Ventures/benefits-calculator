@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
+export type ThemeName = 'default' | 'twoOneOne' | 'twoOneOneNC' | 'co_energy';
+
 export interface ITheme {
   primaryColor: string;
   secondaryColor: string;
   midBlueColor: string;
   secondaryBackgroundColor: string;
-  creamColor: string;
   hoverColor: string;
   outlineHoverBackgroundColor: string;
   outlineHoverColor: string;
@@ -14,30 +15,24 @@ export interface ITheme {
     '--primary-color': string;
     '--secondary-color': string;
     '--secondary-background-color': string;
-    '--cream-color': string;
     '--main-max-width': string;
     'font-size': string;
-    '--main-header-color': string;
     '--midBlue-color': string;
     '--hover-color': string;
     '--icon-color': string;
     '--secondary-icon-color': string;
     '--option-card-hover-font-color': string;
+    '--header-color': string;
   };
 }
 
-interface IThemes {
-  default: ITheme;
-  twoOneOne: ITheme;
-  twoOneOneNC: ITheme;
-}
+export type Themes = Record<ThemeName, ITheme>;
 
-const themes: IThemes = {
+const themes: Themes = {
   default: {
     primaryColor: '#293457',
     secondaryColor: '#B85A27',
     secondaryBackgroundColor: '#FBF9FC',
-    creamColor: '#F9EFE6',
     midBlueColor: '#41528C',
     hoverColor: '#ECDEED',
     outlineHoverColor: '#293457',
@@ -47,15 +42,14 @@ const themes: IThemes = {
       '--primary-color': '#293457',
       '--secondary-color': '#B85A27',
       '--secondary-background-color': '#FBF9FC',
-      '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '16px',
-      '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
       '--hover-color': '#ECDEED',
       '--icon-color': '#D6743F',
       '--secondary-icon-color': '#D6743F',
       '--option-card-hover-font-color': '#1D1C1E',
+      '--header-color': 'var(--primary-color)',
     },
   },
   twoOneOne: {
@@ -63,7 +57,6 @@ const themes: IThemes = {
     secondaryColor: '#005191',
     midBlueColor: '#005191',
     secondaryBackgroundColor: '#F7F7F7',
-    creamColor: '#F9EFE6',
     hoverColor: '#FFFFFF',
     outlineHoverBackgroundColor: '#005191',
     outlineHoverColor: '#FFFFFF',
@@ -72,15 +65,14 @@ const themes: IThemes = {
       '--primary-color': '#005191',
       '--secondary-color': '#005191',
       '--secondary-background-color': '#F7F7F7',
-      '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '18px',
-      '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
       '--hover-color': '#EFEFEF',
       '--icon-color': '#ff443b',
       '--secondary-icon-color': '#005191',
       '--option-card-hover-font-color': '#1D1C1E',
+      '--header-color': '#FFFFFF',
     },
   },
   twoOneOneNC: {
@@ -88,7 +80,6 @@ const themes: IThemes = {
     secondaryColor: '#21296B',
     midBlueColor: '#41528C',
     secondaryBackgroundColor: '#F7F7F7',
-    creamColor: '#F9EFE6',
     hoverColor: '#FFFFFF',
     outlineHoverBackgroundColor: '#21296B',
     outlineHoverColor: '#FFFFFF',
@@ -97,20 +88,42 @@ const themes: IThemes = {
       '--primary-color': '#21296B',
       '--secondary-color': '#21296B',
       '--secondary-background-color': '#F7F7F7',
-      '--cream-color': '#F9EFE6',
       '--main-max-width': '1310px',
       'font-size': '18px',
-      '--main-header-color': '#B85A27',
       '--midBlue-color': '#41528C',
       '--hover-color': '#FFFFFF',
       '--icon-color': '#ff443b',
       '--secondary-icon-color': '#21296B',
       '--option-card-hover-font-color': '#1D1C1E',
+      '--header-color': '#FFFFFF',
+    },
+  },
+  co_energy: {
+    primaryColor: '#6D3A5D',
+    secondaryColor: '#21296B',
+    midBlueColor: '#373737',
+    secondaryBackgroundColor: '#FBFBFB',
+    hoverColor: '#FFFFFF',
+    outlineHoverBackgroundColor: '#6D3A5D',
+    outlineHoverColor: '#FFFFFF',
+    progressBarColor: '#35647E',
+    cssVariables: {
+      '--primary-color': '#6D3A5D',
+      '--secondary-color': '#21296B',
+      '--secondary-background-color': '#FBFBFB',
+      '--main-max-width': '1310px',
+      'font-size': '18px',
+      '--midBlue-color': '#373737',
+      '--hover-color': '#FFFFFF',
+      '--icon-color': '#6D3A5D', // TODO: hover version
+      '--secondary-icon-color': '#6D3A5D',
+      '--option-card-hover-font-color': '#1D1C1E',
+      '--header-color': '#001970',
     },
   },
 };
 
-type ThemeReturnType = [ITheme, React.Dispatch<React.SetStateAction<'default' | 'twoOneOne' | 'twoOneOneNC'>>, any];
+type ThemeReturnType = [ITheme, React.Dispatch<React.SetStateAction<ThemeName>>, any];
 
 function generateMuiOverides(theme: ITheme) {
   const deepBlueColor = theme.primaryColor;
@@ -206,7 +219,7 @@ function generateMuiOverides(theme: ITheme) {
   };
 }
 
-export default function useStyle(initialStyle: keyof IThemes): ThemeReturnType {
+export default function useStyle(initialStyle: ThemeName): ThemeReturnType {
   const [themeName, setTheme] = useState(initialStyle);
 
   const theme = themes[themeName];
