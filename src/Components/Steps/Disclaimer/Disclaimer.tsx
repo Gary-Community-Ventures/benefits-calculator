@@ -26,7 +26,7 @@ const isTrue = (value: boolean) => {
 };
 
 const Disclaimer = () => {
-  const { formData, setScreenLoading, locale } = useContext(Context);
+  const { formData, setScreenLoading, locale, setStepLoading } = useContext(Context);
   const isEnergyCalculator = useIsEnergyCalculator();
   let { whiteLabel, uuid } = useParams();
   const navigate = useNavigate();
@@ -85,6 +85,7 @@ const Disclaimer = () => {
 
   const formSubmitHandler: SubmitHandler<FormSchema> = async (termsOfServiceAndAgeData) => {
     const updatedFormData = { ...formData, ...termsOfServiceAndAgeData };
+    setStepLoading(true);
 
     if (uuid) {
       await updateScreen(updatedFormData);
@@ -97,6 +98,7 @@ const Disclaimer = () => {
   };
 
   const startScreen = async (uuid: string) => {
+    setStepLoading(false);
     navigate(`/${whiteLabel}/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
   };
 
