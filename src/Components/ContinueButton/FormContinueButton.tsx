@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import { PropsWithChildren, useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Context } from '../Wrapper/Wrapper';
