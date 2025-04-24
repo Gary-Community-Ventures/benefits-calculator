@@ -24,7 +24,7 @@ import {
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useStepNumber } from '../../../Assets/stepDirectory';
 import * as z from 'zod';
-import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MONTHS } from '../../Steps/HouseholdMembers/MONTHS';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
@@ -53,6 +53,7 @@ import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
 import { getCurrentMonthYear, YEARS, MAX_AGE } from '../../../Assets/age';
 import '../../../Components/Steps/HouseholdMembers/PersonIncomeBlock.css';
 import { useShouldRedirectToConfirmation } from '../../QuestionComponents/questionHooks';
+import useStepForm from '../../Steps/stepForm';
 
 const ECHouseholdMemberForm = () => {
   const { formData } = useContext(Context);
@@ -92,7 +93,10 @@ const ECHouseholdMemberForm = () => {
       navigate(`/${whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber - 1}`);
     }
   };
-  const nextStep = (uuid: string, currentStepId: number, pageNumber: number) => {
+  const nextStep = (uuid: string | undefined, currentStepId: number, pageNumber: number) => {
+    if (uuid === undefined) {
+      throw new Error('uuid is undefined');
+    }
     if (redirectToConfirmationPage) {
       navigate(`/${whiteLabel}/${uuid}/confirm-information`);
       return;
@@ -224,7 +228,7 @@ const ECHouseholdMemberForm = () => {
     setValue,
     getValues,
     trigger,
-  } = useForm<FormSchema>({
+  } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       birthMonth: householdMemberFormData?.birthMonth ? String(householdMemberFormData.birthMonth) : '',
@@ -238,6 +242,8 @@ const ECHouseholdMemberForm = () => {
       hasIncome: determineDefaultHasIncome(),
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
     },
+    questionName: 'energyCalculatorHouseholdData',
+    onSubmitSuccessfulOverride: () => nextStep(uuid, currentStepId, pageNumber),
   });
   const watchHasIncome = watch('hasIncome');
   const hasTruthyIncome = watchHasIncome === 'true';
@@ -271,7 +277,7 @@ const ECHouseholdMemberForm = () => {
     }
   }, [watchIsDisabled]);
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (memberData) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async (memberData) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
@@ -295,9 +301,7 @@ const ECHouseholdMemberForm = () => {
     const updatedHouseholdData = [...formData.householdData];
     updatedHouseholdData[currentMemberIndex] = updatedMemberData;
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-    updateScreen(updatedFormData);
-
-    nextStep(uuid, currentStepId, pageNumber);
+    await updateScreen(updatedFormData);
   };
 
   const createAgeQuestion = () => {

@@ -56,6 +56,7 @@ import { QUESTION_TITLES } from '../../../Assets/pageTitleTags';
 import { getCurrentMonthYear, YEARS, MAX_AGE } from '../../../Assets/age';
 import './PersonIncomeBlock.css';
 import { useShouldRedirectToConfirmation } from '../../QuestionComponents/questionHooks';
+import useStepForm from '../stepForm';
 
 const HouseholdMemberForm = () => {
   const { formData } = useContext(Context);
@@ -99,7 +100,10 @@ const HouseholdMemberForm = () => {
       navigate(`/${whiteLabel}/${uuid}/step-${currentStepId}/${pageNumber - 1}`);
     }
   };
-  const nextStep = (uuid: string, currentStepId: number, pageNumber: number) => {
+  const nextStep = (uuid: string | undefined, currentStepId: number, pageNumber: number) => {
+    if (uuid === undefined) {
+      throw new Error('uuid is undefined');
+    }
     if (redirectToConfirmationPage) {
       navigate(`/${whiteLabel}/${uuid}/confirm-information`);
       return;
@@ -268,7 +272,7 @@ const HouseholdMemberForm = () => {
     setValue,
     getValues,
     trigger,
-  } = useForm<FormSchema>({
+  } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       birthMonth: householdMemberFormData?.birthMonth ? String(householdMemberFormData.birthMonth) : '',
@@ -299,6 +303,8 @@ const HouseholdMemberForm = () => {
       hasIncome: determineDefaultHasIncome(),
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
     },
+    questionName: 'householdData',
+    onSubmitSuccessfulOverride: () => nextStep(uuid, currentStepId, pageNumber),
   });
   const watchHasIncome = watch('hasIncome');
   const hasTruthyIncome = watchHasIncome === 'true';
@@ -323,7 +329,7 @@ const HouseholdMemberForm = () => {
     }
   }, [watchHasIncome]);
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (memberData) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async (memberData) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
@@ -337,9 +343,7 @@ const HouseholdMemberForm = () => {
       frontendId: crypto.randomUUID(),
     };
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
-    updateScreen(updatedFormData);
-
-    nextStep(uuid, currentStepId, pageNumber);
+    await updateScreen(updatedFormData);
   };
 
   const createAgeQuestion = () => {

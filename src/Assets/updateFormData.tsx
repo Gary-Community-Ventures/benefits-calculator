@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { ApiFormData, ApiFormDataReadOnly } from '../Types/ApiFormData';
 import { EnergyCalculatorMember, FormData } from '../Types/FormData';
 import { Context } from '../Components/Wrapper/Wrapper';
 import { ScreenApiResponse } from '../apiCalls';

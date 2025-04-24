@@ -45,7 +45,7 @@ export const ResultsMessageForNeeds = () => {
   const { getReferrer } = useContext(Context);
   const featureFlags = getReferrer('featureFlags');
 
-  if (getReferrer('featureFlags').includes('nc_show_211_link')) {
+  if (featureFlags.includes('nc_show_211_link')) {
     return <NcLink211Message />;
   }
   return null;
