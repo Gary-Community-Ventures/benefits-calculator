@@ -22,7 +22,6 @@ export interface ITheme {
     '--icon-color': string;
     '--secondary-icon-color': string;
     '--option-card-hover-font-color': string;
-    '--header-color': string;
   };
 }
 
@@ -49,7 +48,6 @@ const themes: Themes = {
       '--icon-color': '#D6743F',
       '--secondary-icon-color': '#D6743F',
       '--option-card-hover-font-color': '#1D1C1E',
-      '--header-color': 'var(--primary-color)',
     },
   },
   twoOneOne: {
@@ -72,7 +70,6 @@ const themes: Themes = {
       '--icon-color': '#ff443b',
       '--secondary-icon-color': '#005191',
       '--option-card-hover-font-color': '#1D1C1E',
-      '--header-color': '#FFFFFF',
     },
   },
   twoOneOneNC: {
@@ -95,7 +92,6 @@ const themes: Themes = {
       '--icon-color': '#ff443b',
       '--secondary-icon-color': '#21296B',
       '--option-card-hover-font-color': '#1D1C1E',
-      '--header-color': '#FFFFFF',
     },
   },
   co_energy: {
@@ -118,7 +114,6 @@ const themes: Themes = {
       '--icon-color': '#6D3A5D', // TODO: hover version
       '--secondary-icon-color': '#6D3A5D',
       '--option-card-hover-font-color': '#1D1C1E',
-      '--header-color': '#001970',
     },
   },
 };
