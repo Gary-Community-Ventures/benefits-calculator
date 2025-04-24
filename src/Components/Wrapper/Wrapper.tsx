@@ -119,11 +119,7 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
   let [translations, setTranslations] = useState<{ Language: { [key: string]: string } } | {}>({});
 
-  const [theme, setTheme, styleOverride] = useStyle('default');
-  const [locale, setLocale] = useState<Language>('en-us');
-  const [messages, setMessages] = useState({});
-
-  useEffect(() => {
+  const initializeLocale = () => {
     let defaultLanguage = localStorage.getItem('language') as Language;
 
     const userLanguage = navigator.language.toLowerCase() as Language;
@@ -144,8 +140,12 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
       }
     });
 
-    setLocale(defaultLanguage);
-  }, [languages.length]);
+    return defaultLanguage;
+  };
+
+  const [theme, setTheme, styleOverride] = useStyle('default');
+  const [locale, setLocale] = useState<Language>(initializeLocale);
+  const [messages, setMessages] = useState({});
 
   useEffect(() => {
     if (locale in translations) {
@@ -154,7 +154,9 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
 
     setTranslationsLoading(true);
     getTranslations(locale).then((value) => {
-      setTranslations({ ...translations, ...value });
+      setTranslations((translations) => {
+        return { ...translations, ...value };
+      });
     });
   }, [locale]);
 
