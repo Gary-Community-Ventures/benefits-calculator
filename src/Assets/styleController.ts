@@ -22,6 +22,7 @@ export interface ITheme {
     '--icon-color': string;
     '--secondary-icon-color': string;
     '--option-card-hover-font-color': string;
+    '--footer-color': string;
   };
 }
 
@@ -48,6 +49,7 @@ const themes: Themes = {
       '--icon-color': '#D6743F',
       '--secondary-icon-color': '#D6743F',
       '--option-card-hover-font-color': '#1D1C1E',
+      '--footer-color': '#41528C',
     },
   },
   twoOneOne: {
@@ -70,6 +72,7 @@ const themes: Themes = {
       '--icon-color': '#ff443b',
       '--secondary-icon-color': '#005191',
       '--option-card-hover-font-color': '#1D1C1E',
+      '--footer-color': '#ffffff',
     },
   },
   twoOneOneNC: {
@@ -92,28 +95,30 @@ const themes: Themes = {
       '--icon-color': '#ff443b',
       '--secondary-icon-color': '#21296B',
       '--option-card-hover-font-color': '#1D1C1E',
+      '--footer-color': '#ffffff',
     },
   },
   co_energy: {
     primaryColor: '#001970',
     secondaryColor: '#001970',
-    midBlueColor: '#373737',
+    midBlueColor: '#001970',
     secondaryBackgroundColor: '#FBFBFB',
     hoverColor: '#FFFFFF',
-    outlineHoverBackgroundColor: '#6D3A5D',
-    outlineHoverColor: '#FFFFFF',
+    outlineHoverBackgroundColor: '#FBFBFB',
+    outlineHoverColor: '#001970',
     progressBarColor: '#FFD100',
     cssVariables: {
       '--primary-color': '#001970',
       '--secondary-color': '#001970',
       '--secondary-background-color': '#FBFBFB',
       '--main-max-width': '1310px',
-      'font-size': '18px',
-      '--midBlue-color': '#373737',
+      'font-size': '16px',
+      '--midBlue-color': '#001970',
       '--hover-color': '#FFFFFF',
       '--icon-color': '#6D3A5D', // TODO: hover version
       '--secondary-icon-color': '#6D3A5D',
       '--option-card-hover-font-color': '#1D1C1E',
+      '--footer-color': '#373737',
     },
   },
 };
