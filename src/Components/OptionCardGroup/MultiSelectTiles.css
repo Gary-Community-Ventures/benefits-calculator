@@ -43,8 +43,20 @@
   margin: -2.25rem 0.5rem 0.5rem 0;
 }
 
+.selected-option-card.white-icons .multi-select-icon path {
+  fill: #ffffff;
+}
+
 .cls-checkmark-fill {
   fill: var(--icon-color);
+}
+
+.white-icons .cls-checkmark-fill {
+  fill: #ffffff;
+}
+
+.white-icons .cls-checkmark {
+  fill: var(--primary-color);
 }
 
 @media (max-width: 38.125rem) {

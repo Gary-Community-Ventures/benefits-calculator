@@ -119,8 +119,8 @@ const themes: Themes = {
       'font-size': '16px',
       '--midBlue-color': '#001970',
       '--hover-color': '#FFFFFF',
-      '--icon-color': '#6D3A5D', // TODO: hover version
-      '--secondary-icon-color': '#6D3A5D',
+      '--icon-color': '#c3002f',
+      '--secondary-icon-color': '#001970',
       '--option-card-hover-font-color': '#1D1C1E',
       '--footer-color': '#373737',
       '--active-border-color': '#FFD100',
