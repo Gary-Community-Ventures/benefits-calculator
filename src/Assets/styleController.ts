@@ -102,7 +102,7 @@ const themes: Themes = {
     hoverColor: '#FFFFFF',
     outlineHoverBackgroundColor: '#6D3A5D',
     outlineHoverColor: '#FFFFFF',
-    progressBarColor: '#35647E',
+    progressBarColor: '#FFD100',
     cssVariables: {
       '--primary-color': '#6D3A5D',
       '--secondary-color': '#21296B',
