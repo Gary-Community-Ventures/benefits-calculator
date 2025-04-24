@@ -95,8 +95,8 @@ const themes: Themes = {
     },
   },
   co_energy: {
-    primaryColor: '#6D3A5D',
-    secondaryColor: '#21296B',
+    primaryColor: '#001970',
+    secondaryColor: '#001970',
     midBlueColor: '#373737',
     secondaryBackgroundColor: '#FBFBFB',
     hoverColor: '#FFFFFF',
@@ -104,8 +104,8 @@ const themes: Themes = {
     outlineHoverColor: '#FFFFFF',
     progressBarColor: '#FFD100',
     cssVariables: {
-      '--primary-color': '#6D3A5D',
-      '--secondary-color': '#21296B',
+      '--primary-color': '#001970',
+      '--secondary-color': '#001970',
       '--secondary-background-color': '#FBFBFB',
       '--main-max-width': '1310px',
       'font-size': '18px',
