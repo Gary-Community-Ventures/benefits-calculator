@@ -23,6 +23,7 @@ export interface ITheme {
     '--secondary-icon-color': string;
     '--option-card-hover-font-color': string;
     '--footer-color': string;
+    '--active-border-color': string;
   };
 }
 
@@ -50,6 +51,7 @@ const themes: Themes = {
       '--secondary-icon-color': '#D6743F',
       '--option-card-hover-font-color': '#1D1C1E',
       '--footer-color': '#41528C',
+      '--active-border-color': '#B85A27',
     },
   },
   twoOneOne: {
@@ -73,6 +75,7 @@ const themes: Themes = {
       '--secondary-icon-color': '#005191',
       '--option-card-hover-font-color': '#1D1C1E',
       '--footer-color': '#ffffff',
+      '--active-border-color': '#005191',
     },
   },
   twoOneOneNC: {
@@ -96,6 +99,7 @@ const themes: Themes = {
       '--secondary-icon-color': '#21296B',
       '--option-card-hover-font-color': '#1D1C1E',
       '--footer-color': '#ffffff',
+      '--active-border-color': '#21296B',
     },
   },
   co_energy: {
@@ -119,6 +123,7 @@ const themes: Themes = {
       '--secondary-icon-color': '#6D3A5D',
       '--option-card-hover-font-color': '#1D1C1E',
       '--footer-color': '#373737',
+      '--active-border-color': '#FFD100',
     },
   },
 };
