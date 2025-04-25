@@ -15,9 +15,7 @@ export const HtmlLangUpdater = () => {
     document.documentElement.setAttribute('lang', htmlLang);
 
     if (htmlLang !== 'en') {
-      const supportedLanguageCodes = Object.keys(LANGUAGE_OPTIONS).map(
-        (langKey) => (langKey as Language).slice(0, 2)
-      );
+      const supportedLanguageCodes = Object.keys(LANGUAGE_OPTIONS).map((langKey) => (langKey as Language).slice(0, 2));
 
       if (supportedLanguageCodes.includes(htmlLang)) {
         document.documentElement.setAttribute('translate', 'no');
@@ -27,7 +25,6 @@ export const HtmlLangUpdater = () => {
     } else {
       document.documentElement.removeAttribute('translate');
     }
-
   }, [locale]);
 
   return null;
