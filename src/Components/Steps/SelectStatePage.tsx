@@ -6,11 +6,11 @@ import { useQueryString } from '../QuestionComponents/questionHooks';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLabel';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const STATES: { [key: string]: string } = { co: 'Colorado', nc: 'North Carolina' };
 
@@ -32,11 +32,13 @@ const SelectStatePage = () => {
       .min(1),
   });
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm({
+  } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       state: whiteLabel ?? '',
@@ -45,12 +47,11 @@ const SelectStatePage = () => {
 
   const updateWhiteLabelAndNavigate = useUpdateWhiteLabelAndNavigate();
 
-  const submitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ state }) => {
+  const submitHandler: SubmitHandler<FormSchema> = ({ state }) => {
     let navUrl = `/${state}/step-2${queryString}`;
     if (uuid !== undefined) {
       navUrl = `/${state}/${uuid}/step-2${queryString}`;
     }
-
     updateWhiteLabelAndNavigate(state, navUrl);
   };
 

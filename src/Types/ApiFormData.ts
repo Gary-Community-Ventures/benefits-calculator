@@ -182,12 +182,13 @@ export type ApiFormData = {
   has_fatc: boolean | null;
   has_section_8: boolean | null;
   has_csfp: boolean | null;
-  has_ccfa: boolean | null;
+  has_ccdf: boolean | null;
+  has_aca: boolean | null;
   has_ma_eaedc: boolean | null;
   has_ma_ssp: boolean | null;
   has_ma_mbta: boolean | null;
   has_ma_maeitc: boolean | null;
-  has_ma_macftc: boolean | null;
+  has_ma_macfc: boolean | null;
   has_co_andso: boolean | null;
   has_employer_hi?: boolean | null;
   has_private_hi?: boolean | null;

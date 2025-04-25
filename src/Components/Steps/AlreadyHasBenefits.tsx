@@ -1,12 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
 import { ReactNode, useContext, useEffect, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { z } from 'zod';
 import useScreenApi from '../../Assets/updateScreen';
-import { Benefits } from '../../Types/FormData';
 import { FormattedMessageType } from '../../Types/Questions';
 import CheckBoxAccordion from '../AccordionsContainer/CheckboxAccordion';
 import { useConfig } from '../Config/configHook';
@@ -18,6 +17,7 @@ import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionCo
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { Context } from '../Wrapper/Wrapper';
 import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
+import useStepForm from './stepForm';
 
 type CategoryBenefitsConfig = {
   [key: string]: {
@@ -91,7 +91,6 @@ function AlreadyHasBenefits() {
   const { formatMessage } = useIntl();
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('hasBenefits');
-  const nextStep = useGoToNextStep('hasBenefits');
   const { updateScreen } = useScreenApi();
   const isEnergyCalculator = useIsEnergyCalculator();
 
@@ -120,18 +119,21 @@ function AlreadyHasBenefits() {
       },
     );
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors, isSubmitted },
     handleSubmit,
     setValue,
     watch,
-  } = useForm<{ hasBenefits: 'true' | 'false' | 'preferNotToAnswer'; alreadyHasBenefits: Benefits }>({
+  } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       hasBenefits: formData.hasBenefits,
       alreadyHasBenefits: formData.benefits,
     },
+    questionName: 'hasBenefits',
   });
 
   const hasBenefits = 'true' === watch('hasBenefits');
@@ -148,15 +150,14 @@ function AlreadyHasBenefits() {
     setValue('alreadyHasBenefits', newAlreadyHasBenefits);
   }, [hasBenefits]);
 
-  const formSubmitHandler = ({ alreadyHasBenefits, hasBenefits }: z.infer<typeof formSchema>) => {
+  const formSubmitHandler = async ({ alreadyHasBenefits, hasBenefits }: z.infer<typeof formSchema>) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
 
     const newFormData = { ...formData, hasBenefits: hasBenefits, benefits: alreadyHasBenefits };
 
-    updateScreen(newFormData);
-    nextStep();
+    await updateScreen(newFormData);
   };
 
   const renderHelpSection = () => {

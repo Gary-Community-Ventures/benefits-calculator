@@ -3,7 +3,7 @@ import { Context } from '../Wrapper/Wrapper';
 import { configEndpoint, header } from '../../apiCalls';
 import { ConfigApiResponse, ConfigValue } from '../../Types/Config';
 import { Config } from '../../Types/Config';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ReactComponent as Student } from '../../Assets/icons/General/OptionCard/Conditions/student.svg';
 import { ReactComponent as Pregnant } from '../../Assets/icons/General/OptionCard/Conditions/pregnant.svg';
@@ -28,7 +28,9 @@ import { ReactComponent as Housing } from '../../Assets/icons/UrgentNeeds/AcuteC
 import { ReactComponent as Job_resources } from '../../Assets/icons/UrgentNeeds/AcuteConditions/job_resources.svg';
 import { ReactComponent as Legal_services } from '../../Assets/icons/UrgentNeeds/AcuteConditions/legal_services.svg';
 import { ReactComponent as Support } from '../../Assets/icons/UrgentNeeds/AcuteConditions/support.svg';
+import { ReactComponent as Military } from '../../Assets/icons/UrgentNeeds/AcuteConditions/military.svg';
 import { ReactComponent as SurvivingSpouse } from '../../Assets/icons/General/head.svg';
+import { Language } from '../../Assets/languageOptions';
 
 type Item = {
   _label: string;
@@ -70,6 +72,9 @@ function transformItemIcon(item: unknown): any {
       break;
     case 'Support':
       iconComponent = <Support className={icon._classname} />;
+      break;
+    case 'Military':
+      iconComponent = <Military className={icon._classname} />;
       break;
     // Conditions
     case 'BlindOrVisuallyImpaired':
@@ -234,4 +239,11 @@ export function useConfig<T>(name: string, defaultValue?: T): T {
   }
 
   return config[name] as T;
+}
+
+export function useLocalizedLink(configKey: 'privacy_policy' | 'consent_to_contact') {
+  const { locale } = useContext(Context);
+  const links = useConfig<Partial<Record<Language, string>>>(configKey, {});
+
+  return links[locale] ?? links['en-us'] ?? '';
 }

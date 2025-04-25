@@ -5,7 +5,7 @@ import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { ReactComponent as WaterHeater } from '../Icons/WaterHeater.svg';
 import { ReactComponent as Heater } from '../Icons/Heat.svg';
@@ -16,6 +16,7 @@ import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import useScreenApi from '../../../Assets/updateScreen';
 import { useEnergyFormData } from '../hooks';
+import useStepForm from '../../Steps/stepForm';
 
 export const applianceStatusOptions = {
   needsWaterHeater: {
@@ -53,7 +54,6 @@ const Utilities = () => {
   const { updateScreen } = useScreenApi();
   const energyDataAvailable = useEnergyFormData(formData);
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorApplianceStatus');
-  const nextStep = useGoToNextStep('energyCalculatorApplianceStatus');
 
   const formSchema = z.object({
     energyCalculator: z.object({
@@ -63,7 +63,9 @@ const Utilities = () => {
     }),
   });
 
-  const { handleSubmit, watch, setValue } = useForm<z.infer<typeof formSchema>>({
+  type FormSchema = z.infer<typeof formSchema>;
+
+  const { handleSubmit, watch, setValue } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       energyCalculator: {
@@ -72,9 +74,10 @@ const Utilities = () => {
         needsStove: formData.energyCalculator?.needsStove ?? false,
       },
     },
+    questionName: 'energyCalculatorApplianceStatus',
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = (rhfData) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async (rhfData) => {
     if (uuid === undefined) {
       throw new Error('uuid is not defined');
     }
@@ -84,8 +87,7 @@ const Utilities = () => {
 
     const updatedEnergyCalculatorData = { ...formData.energyCalculator, ...rhfData.energyCalculator };
     const updatedFormData = { ...formData, energyCalculator: updatedEnergyCalculatorData };
-    updateScreen(updatedFormData);
-    nextStep();
+    await updateScreen(updatedFormData);
   };
 
   return (

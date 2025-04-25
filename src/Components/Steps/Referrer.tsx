@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { FormattedMessageType } from '../../Types/Questions';
@@ -10,10 +10,11 @@ import * as z from 'zod';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../QuestionComponents/questionHooks';
 import { useConfig } from '../Config/configHook';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import useScreenApi from '../../Assets/updateScreen';
+import useStepForm from './stepForm';
 
 type ReferralOptions = {
   other: string;
@@ -30,7 +31,6 @@ export default function ReferralSourceStep() {
   }
 
   const backNavigationFunction = useDefaultBackNavigationFunction('referralSource');
-  const nextStep = useGoToNextStep('referralSource');
   const referralOptions = useConfig<ReferralOptions>('referral_options');
   const { formatMessage } = useIntl();
 
@@ -72,22 +72,22 @@ export default function ReferralSourceStep() {
     formState: { errors },
     handleSubmit,
     watch,
-  } = useForm<FormSchema>({
+  } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       referralSource: isOtherSource ? 'other' : formData.referralSource ?? '',
       otherReferrer: isOtherSource ? formData.referralSource ?? '' : '',
     },
+    questionName: 'referralSource',
   });
 
   const referralSource = watch('referralSource');
   const showOtherSource = referralSource === 'other';
 
-  const formSubmitHandler = async ({ referralSource, otherReferrer }: FormSchema) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async ({ referralSource, otherReferrer }) => {
     const source = otherReferrer !== '' ? otherReferrer : referralSource;
     const updatedFormData = { ...formData, referralSource: source };
-    updateScreen(updatedFormData);
-    nextStep();
+    await updateScreen(updatedFormData);
   };
 
   const createMenuItems = () => {

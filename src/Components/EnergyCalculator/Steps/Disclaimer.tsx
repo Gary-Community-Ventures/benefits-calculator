@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { STARTING_QUESTION_NUMBER } from '../../../Assets/stepDirectory';
 import { Checkbox, FormControlLabel } from '@mui/material';
@@ -10,13 +10,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { FormattedMessageType } from '../../../Types/Questions';
 import dataLayerPush from '../../../Assets/analytics';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
-import { useConfig } from '../../Config/configHook';
+import { useConfig, useLocalizedLink } from '../../Config/configHook';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useQueryString } from '../../QuestionComponents/questionHooks';
 import { OTHER_PAGE_TITLES } from '../../../Assets/pageTitleTags';
 import useScreenApi from '../../../Assets/updateScreen';
-import { Language } from '../../../Assets/languageOptions';
 import '../../../Components/Steps/Disclaimer/Disclaimer.css';
 
 const isTrue = (value: boolean) => {
@@ -24,7 +23,7 @@ const isTrue = (value: boolean) => {
 };
 
 const Disclaimer = () => {
-  const { formData, setFormData, setScreenLoading, locale } = useContext(Context);
+  const { formData, setScreenLoading, locale, setStepLoading } = useContext(Context);
   let { uuid } = useParams();
   const navigate = useNavigate();
   // use defaults for the config on this page because the config won't be loaded
@@ -33,8 +32,8 @@ const Disclaimer = () => {
     link: '',
     text: <FormattedMessage id="landingPage.defaultPublicChargeLink" defaultMessage="Public Charge Rule" />,
   });
-  const privacyLinks = useConfig<Partial<Record<Language, string>>>('privacy_policy', {});
-  const consentToContactLinks = useConfig<Partial<Record<Language, string>>>('consent_to_contact', {});
+  const privacyPolicyLink = useLocalizedLink('privacy_policy');
+  const consentToContactLinks = useLocalizedLink('consent_to_contact');
   const queryString = useQueryString();
   const { createScreen, updateScreen } = useScreenApi();
   const backNavigationFunction = () => {
@@ -65,12 +64,14 @@ const Disclaimer = () => {
     is13OrOlder: z.boolean().refine(isTrue, isChecked()),
   });
 
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     getValues,
     handleSubmit,
-  } = useForm<z.infer<typeof formSchema>>({
+  } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       agreeToTermsOfService: formData.agreeToTermsOfService ?? false,
@@ -78,17 +79,23 @@ const Disclaimer = () => {
     },
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = async (termsOfServiceAndAgeData) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async (termsOfServiceAndAgeData) => {
     const updatedFormData = { ...formData, ...termsOfServiceAndAgeData };
+    setStepLoading(true);
 
     if (uuid) {
       await updateScreen(updatedFormData);
-      navigate(`/co_energy_calculator/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      startScreen(uuid);
     } else {
       const response = await createScreen(updatedFormData);
       setScreenLoading(false);
-      navigate(`/co_energy_calculator/${response.uuid}/step-${STARTING_QUESTION_NUMBER}`);
+      startScreen(response.uuid);
     }
+  };
+
+  const startScreen = async (uuid: string) => {
+    setStepLoading(false);
+    navigate(`/co_energy_calculator/${uuid}/step-${STARTING_QUESTION_NUMBER}`);
   };
 
   const renderDisclaimerText = () => {
@@ -138,33 +145,6 @@ const Disclaimer = () => {
     );
   };
 
-  const getLinksForCheckbox = () => {
-    let privacylink = privacyLinks['en-us'];
-    let consentToContactLink = consentToContactLinks['en-us'];
-
-    const localePrivacyLink = privacyLinks[locale];
-    if (localePrivacyLink !== undefined) {
-      privacylink = localePrivacyLink;
-    }
-
-    const localeConsentToContactLink = consentToContactLinks[locale];
-    if (localeConsentToContactLink !== undefined) {
-      consentToContactLink = localeConsentToContactLink;
-    }
-
-    if (privacylink === undefined || consentToContactLink === undefined) {
-      return {
-        privacyPolicyLink: '',
-        addTermsConsentToContact: '',
-      };
-    }
-
-    return {
-      privacyPolicyLink: privacylink,
-      addTermsConsentToContact: consentToContactLink,
-    };
-  };
-
   const createAgreeTTSCheckboxLabel = () => {
     return (
       <div className="disclaimer-font">
@@ -172,11 +152,11 @@ const Disclaimer = () => {
           id="disclaimer-label"
           defaultMessage="By proceeding, you confirm that you have read and agree to the "
         />
-        <a href={getLinksForCheckbox().privacyPolicyLink} target="_blank" className="link-color">
+        <a href={privacyPolicyLink} target="_blank" className="link-color">
           <FormattedMessage id="landingPage-policyText" defaultMessage="Privacy Policy" />
         </a>
         <FormattedMessage id="landingPage-and-text" defaultMessage=" and " />
-        <a href={getLinksForCheckbox().addTermsConsentToContact} target="_blank" className="link-color">
+        <a href={consentToContactLinks} target="_blank" className="link-color">
           <FormattedMessage id="landingPage-additionalTerms" defaultMessage="Terms and Conditions" />
         </a>
         <FormattedMessage id="landingPage-disclaimer-lable-end" defaultMessage="." />

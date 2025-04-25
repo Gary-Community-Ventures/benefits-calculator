@@ -1,9 +1,8 @@
 import { TextField } from '@mui/material';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import { Context } from '../Wrapper/Wrapper';
 import { useContext } from 'react';
 import * as z from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { FormattedMessage, useIntl } from 'react-intl';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
@@ -16,6 +15,8 @@ import useScreenApi from '../../Assets/updateScreen';
 import { OverrideableTranslation } from '../../Assets/languageOptions';
 import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
+import useStepForm from './stepForm';
+import { zodResolver } from '@hookform/resolvers/zod';
 import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 
 const HouseholdSize = () => {
@@ -43,26 +44,30 @@ const HouseholdSize = () => {
       .positive()
       .lte(8),
   });
+
+  type FormSchema = z.infer<typeof formSchema>;
+
   const {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<z.infer<typeof formSchema>>({
+  } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       householdSize: formData.householdSize ?? 0,
     },
+    questionName: 'householdSize',
+    onSubmitSuccessfulOverride: nextStep,
   });
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ householdSize }) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async ({ householdSize }) => {
     if (uuid) {
       const updatedFormData = {
         ...formData,
         householdSize,
         householdData: formData.householdData.slice(0, householdSize),
       };
-      updateScreen(updatedFormData);
-      nextStep();
+      await updateScreen(updatedFormData);
     }
   };
 

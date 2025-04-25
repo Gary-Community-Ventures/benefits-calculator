@@ -17,6 +17,7 @@ import { ReactComponent as AcUnit } from '../Icons/AcUnit.svg';
 import { Context } from '../../Wrapper/Wrapper';
 import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import { FormattedMessageType } from '../../../Types/Questions';
+import useStepForm from '../../Steps/stepForm';
 
 const EXPENSE_TYPES = ['heating', 'cooling', 'electricity'] as const;
 export type EnergyCalculatorExpenseType = (typeof EXPENSE_TYPES)[number];
@@ -49,10 +50,9 @@ export default function EnergyCalculatorExpenses() {
   const { formData } = useContext(Context);
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorExpenses');
-  const nextStep = useGoToNextStep('energyCalculatorExpenses');
   const { updateScreen } = useScreenApi();
   const navigate = useNavigate();
-  const { whiteLabel } = useContext(Context);
+  const { whiteLabel, setStepLoading } = useContext(Context);
 
   const formSchema = z.object({
     expenses: z
@@ -70,7 +70,9 @@ export default function EnergyCalculatorExpenses() {
     return false;
   };
 
-  const { handleSubmit, watch, setValue } = useForm<z.infer<typeof formSchema>>({
+  type FormSchema = z.infer<typeof formSchema>;
+
+  const { handleSubmit, watch, setValue } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       expenses: {
@@ -79,6 +81,7 @@ export default function EnergyCalculatorExpenses() {
         electricity: hasExpense('electricity'),
       },
     },
+    questionName: 'energyCalculatorExpenses',
   });
 
   const createExpense = (expenseName: string): Expense => {
@@ -88,12 +91,13 @@ export default function EnergyCalculatorExpenses() {
     };
   };
 
-  const formSubmitHandler: SubmitHandler<z.infer<typeof formSchema>> = ({ expenses }) => {
+  const formSubmitHandler: SubmitHandler<FormSchema> = async ({ expenses }) => {
     if (!uuid) {
       throw new Error('no uuid');
     }
 
     if (!expenses.heating && !expenses.cooling && !expenses.electricity) {
+      setStepLoading(false);
       navigate(`/${whiteLabel}/${uuid}/no-expenses`);
       return;
     }
@@ -107,8 +111,7 @@ export default function EnergyCalculatorExpenses() {
     }
 
     const updatedFormData: FormData = { ...formData, expenses: updatedExpenses };
-    updateScreen(updatedFormData);
-    nextStep();
+    await updateScreen(updatedFormData);
   };
 
   return (
