@@ -19,7 +19,7 @@ root.render(
 
 type FplYear = 2024 | 2025;
 // get a certain income limit as a monthly value
-function fpl(size: number, percent: number, year: FplYear = 2025) {
+function fpl(size: number, percent: number = 100, year: FplYear = 2025) {
   const fpl: Record<FplYear, Record<number, number>> = {
     2024: {
       1: 15_060,
