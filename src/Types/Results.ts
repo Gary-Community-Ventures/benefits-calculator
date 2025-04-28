@@ -64,6 +64,7 @@ export type Program = {
   documents: ProgramDocument[];
   warning_messages: WarningMessage[];
   required_programs: number[];
+  value_format: string;
 };
 
 export type ProgramDocument = {

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
-import { useFormatMonthlyValue } from '../FormattedValue';
+import {  useFormatDisplayValue } from '../FormattedValue';
 import ResultsTranslate from '../Translate/Translate';
 import { useEffect, useMemo, useState } from 'react';
 import './ProgramCard.css';
@@ -162,7 +162,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   }, []);
 
   const programPageLink = useResultsLink(`results/benefits/${programId}`);
-  const value = useFormatMonthlyValue(program);
+  const value = useFormatDisplayValue(program);
 
   return (
     <ResultsCard

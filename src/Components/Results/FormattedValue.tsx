@@ -118,6 +118,38 @@ function useOverrideValue(program: Program, value: string, expectedValue?: strin
   return value;
 }
 
+const formats: Record<string, any> = {
+  default: (program: Program) => {
+    const translateNumber = useTranslateNumber();
+    const intl = useIntl();
+
+    const perMonth = intl.formatMessage({ id: 'program-card-month-txt', defaultMessage: '/month' });
+    return translateNumber(formatToUSD(programValue(program) / 12)) + perMonth;
+  },
+  lump_sum: (program: Program) => {
+    const translateNumber = useTranslateNumber();
+    return 'One time payment of ' + translateNumber(formatToUSD(programValue(program)));
+  },
+  estimated_annual: (program: Program) => {
+    const translateNumber = useTranslateNumber();
+    return 'Estimated annual value of ' + translateNumber(formatToUSD(programValue(program)));
+  }
+};
+
+export function useFormatDisplayValue(program: Program) {
+  const calculator = formats[program.value_format ?? 'default'];
+  const value = calculator(program);
+  const { validations } = useResultsContext();
+  const validation = findValidationForProgram(validations, program);
+  const translateNumber = useTranslateNumber();
+  if (validation !== undefined) {
+    const expextedValue = translateNumber(formatToUSD(Number(validation.value) / 12));
+    return useOverrideValue(program, value, expextedValue);
+  }
+
+  return useOverrideValue(program, value);
+}
+
 export function useFormatMonthlyValue(program: Program) {
   const translateNumber = useTranslateNumber();
   const intl = useIntl();
