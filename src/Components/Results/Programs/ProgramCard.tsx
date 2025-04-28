@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Program } from '../../../Types/Results';
 import { FormattedMessage } from 'react-intl';
-import {  useFormatDisplayValue } from '../FormattedValue';
+import { useFormatDisplayValue } from '../FormattedValue';
 import ResultsTranslate from '../Translate/Translate';
 import { useEffect, useMemo, useState } from 'react';
 import './ProgramCard.css';

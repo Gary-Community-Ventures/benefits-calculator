@@ -133,7 +133,7 @@ const formats: Record<string, any> = {
   estimated_annual: (program: Program) => {
     const translateNumber = useTranslateNumber();
     return 'Estimated annual value of ' + translateNumber(formatToUSD(programValue(program)));
-  }
+  },
 };
 
 export function useFormatDisplayValue(program: Program) {
