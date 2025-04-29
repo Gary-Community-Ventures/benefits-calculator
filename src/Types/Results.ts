@@ -34,6 +34,7 @@ export type MemberEligibility = {
   frontend_id: string;
   eligible: boolean;
   value: number;
+  already_has: boolean;
 };
 
 export type Program = {
