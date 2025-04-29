@@ -135,7 +135,7 @@ export default function ReferralSourceStep() {
                 <Select
                   {...field}
                   labelId="county-select-label"
-                  id="county-source-select"
+                  id="referral-source-select"
                   label={
                     <FormattedMessage id="qcc.createReferralDropdownMenu-label" defaultMessage="Referral Source" />
                   }

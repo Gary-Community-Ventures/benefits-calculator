@@ -9,7 +9,7 @@ test.describe('MyFriendBen Sample Screen Test', () => {
     await page.getByRole('button', { name: 'Get Started' }).click();
 
     await expect(page).toHaveURL('/select-state');
-    await page.getByLabel('', { exact: true }).click();
+    await page.locator('#state-source-select').click();
     await page.getByRole('option', { name: 'North Carolina' }).click();
     await page.getByRole('button', { name: 'Continue' }).click();
 
@@ -22,7 +22,7 @@ test.describe('MyFriendBen Sample Screen Test', () => {
     await expect(page).toHaveURL(/\/nc\/.*\/step-3/);
     await page.getByRole('textbox', { name: 'Zip Code' }).click();
     await page.getByRole('textbox', { name: 'Zip Code' }).fill('27704');
-    await page.getByLabel('', { exact: true }).click();
+    await page.locator('#county-source-select').click();
     await page.getByRole('option', { name: 'Durham County' }).click();
     await page.getByRole('button', { name: 'Continue' }).click();
 
@@ -51,7 +51,7 @@ test.describe('MyFriendBen Sample Screen Test', () => {
     await page.getByRole('option', { name: 'February' }).click();
     await page.getByRole('button', { name: 'Open' }).click();
     await page.getByRole('option', { name: '2020' }).click();
-    await page.getByLabel('', { exact: true }).click();
+    await page.locator('#relationship-to-hh-select').click();
     await page.getByRole('option', { name: 'Child', exact: true }).click();
     await page.getByRole('button', { name: 'They don\'t have or know if' }).click();
     await page.getByRole('button', { name: 'Continue' }).click();
@@ -79,15 +79,17 @@ test.describe('MyFriendBen Sample Screen Test', () => {
     await page.getByRole('button', { name: 'Continue' }).click();
 
     await expect(page).toHaveURL(/\/nc\/.*\/step-10/);
-    await page.getByLabel('', { exact: true }).click();
+    await page.locator('#referral-source-select').click();
     await page.getByRole('option', { name: 'Test / Prospective Partner' }).click();
     await page.getByRole('button', { name: 'Continue' }).click();
-    
+
     await expect(page).toHaveURL(/\/nc\/.*\/step-11/);
     await page.getByRole('button', { name: 'Continue' }).click();
-    
+
     await expect(page).toHaveURL(/\/nc\/.*\/confirm-information/);
     await page.getByRole('button', { name: 'Continue' }).click();
+
+    await expect(page).toHaveURL(/\/nc\/.*\/results\/benefits/);
     await page.getByRole('button', { name: 'save my results' }).click();
   });
 });
