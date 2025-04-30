@@ -246,6 +246,7 @@ export const Filter = () => {
       otherHealthCarePregnant: false,
       notPregnantOrUnder19ForOmniSalud: false,
       notPregnantOrUnder19ForEmergencyMedicaid: false,
+      notPregnant: false,
     });
 
     setCitButtonClass('citizenship-button');
