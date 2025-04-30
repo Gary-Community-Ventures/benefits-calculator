@@ -18,7 +18,7 @@ export type CalculatedCitizenLabel =
   | 'otherHealthCarePregnant'
   | 'notPregnantOrUnder19ForOmniSalud'
   | 'notPregnantOrUnder19ForEmergencyMedicaid'
-  | 'notPregnant';
+  | 'notPregnantForMassHealthLimited';
 
 export type CitizenLabels = 'citizen' | CitizenLabelOptions | CalculatedCitizenLabel;
 
@@ -71,7 +71,7 @@ export const calculatedCitizenshipFilters: Record<CalculatedCitizenLabel, Calcul
     },
     linkedFilters: ['gc_5less'],
   },
-  notPregnant: {
+  notPregnantForMassHealthLimited: {
     func: (member) => {
       return !(member.conditions.pregnant ?? false);
     },
