@@ -43,8 +43,10 @@
   margin: -2.25rem 0.5rem 0.5rem 0;
 }
 
-.selected-option-card.white-icons .multi-select-icon path {
+.selected-option-card.white-icons .multi-select-icon path,
+.selected-option-card.white-icons .multi-select-icon rect {
   fill: #ffffff;
+  stroke: #ffffff;
 }
 
 .cls-checkmark-fill {
