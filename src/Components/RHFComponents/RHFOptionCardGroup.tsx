@@ -5,6 +5,8 @@ import { CardActionArea, Typography, Stack, Box } from '@mui/material';
 import { ReactComponent as Checkmark } from '../../Assets/icons/General/OptionCard/checkmark.svg';
 import { FieldValues, Path, UseFormTrigger } from 'react-hook-form';
 import '../OptionCardGroup/OptionCardGroup.css';
+import { Context } from '../Wrapper/Wrapper';
+import { useContext } from 'react';
 
 type IconType =
   | React.ReactNode // // For energy_calculator options
@@ -38,6 +40,7 @@ const RHFOptionCardGroup = <T extends FieldValues>({
   triggerValidation,
   customColumnNo,
 }: RHFOptionCardGroupProps<T>) => {
+  const { getReferrer } = useContext(Context);
   const intl = useIntl();
 
   const handleOptionCardClick = async (optionName: string) => {
@@ -59,6 +62,15 @@ const RHFOptionCardGroup = <T extends FieldValues>({
       });
 
       const isSelected = values[optionKey];
+      let containerClass = 'option-card';
+
+      if (isSelected) {
+        containerClass += ' selected-option-card';
+      }
+
+      if (getReferrer('featureFlags').includes('white_multi_select_tile_icon')) {
+        containerClass += ' white-icons';
+      }
 
       return (
         <CardActionArea
@@ -72,10 +84,10 @@ const RHFOptionCardGroup = <T extends FieldValues>({
             }
           }}
         >
-          <Card className={isSelected ? 'option-card selected-option-card' : 'option-card'}>
+          <Card className={containerClass}>
             <Stack direction="column" justifyContent="center" sx={{ flex: 1 }}>
               <CardContent sx={{ textAlign: 'center', padding: '0.5rem' }}>
-                <Box>{options[optionKey].icon}</Box>
+                <Box className="multi-select-icon">{options[optionKey].icon}</Box>
                 <Typography className={isSelected ? 'option-card-text' : ''}>{translatedAriaLabel}</Typography>
               </CardContent>
             </Stack>

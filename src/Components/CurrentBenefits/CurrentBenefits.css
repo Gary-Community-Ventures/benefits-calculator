@@ -19,7 +19,6 @@
 
 .program-name {
   padding: 0;
-  color: var(--primary-color);
   font-family: 'Roboto Slab', serif;
   font-weight: 700;
   font-size: 1.25rem;
