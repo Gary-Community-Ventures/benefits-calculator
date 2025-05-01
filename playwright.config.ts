@@ -14,10 +14,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [
-    ['html'],
-    ['list']
-  ],
+  reporter: [['html'], ['list']],
   // See https://playwright.dev/docs/api/class-testoptions
   use: {
     baseURL: process.env.BASE_URL || 'http://localhost:3000',

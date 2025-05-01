@@ -36,7 +36,7 @@ test.describe('MyFriendBen Sample Screen Test', () => {
     await page.getByRole('option', { name: 'March' }).click();
     await page.getByRole('button', { name: 'Open' }).click();
     await page.getByRole('option', { name: '1990' }).click();
-    await page.getByRole('button', { name: 'I don\'t have or know if I' }).click();
+    await page.getByRole('button', { name: "I don't have or know if I" }).click();
     await page.getByRole('radio', { name: 'Yes' }).check();
     await page.getByRole('button', { name: 'Income Type' }).click();
     await page.getByRole('option', { name: 'Wages, salaries, tips' }).click();
@@ -53,7 +53,7 @@ test.describe('MyFriendBen Sample Screen Test', () => {
     await page.getByRole('option', { name: '2020' }).click();
     await page.locator('#relationship-to-hh-select').click();
     await page.getByRole('option', { name: 'Child', exact: true }).click();
-    await page.getByRole('button', { name: 'They don\'t have or know if' }).click();
+    await page.getByRole('button', { name: "They don't have or know if" }).click();
     await page.getByRole('button', { name: 'Continue' }).click();
 
     await expect(page).toHaveURL(/\/nc\/.*\/step-6/);
@@ -74,7 +74,7 @@ test.describe('MyFriendBen Sample Screen Test', () => {
 
     await expect(page).toHaveURL(/\/nc\/.*\/step-9/);
     await page.getByRole('button', { name: 'Food or groceries' }).click();
-    await page.getByRole('button', { name: 'Concern about your child\'s' }).click();
+    await page.getByRole('button', { name: "Concern about your child's" }).click();
     await page.getByRole('button', { name: 'Free or low-cost help with' }).click();
     await page.getByRole('button', { name: 'Continue' }).click();
 

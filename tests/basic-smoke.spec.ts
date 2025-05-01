@@ -16,6 +16,6 @@ test.describe('MyFriendBen Smoke Test', () => {
     await expect(getStartedButton).toBeVisible();
     await getStartedButton.click();
 
-    await expect(page).toHaveURL(/select-state/)
+    await expect(page).toHaveURL(/select-state/);
   });
 });
