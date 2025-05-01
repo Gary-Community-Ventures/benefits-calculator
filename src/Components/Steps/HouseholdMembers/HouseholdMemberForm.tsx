@@ -553,6 +553,7 @@ const HouseholdMemberForm = () => {
                 <Select
                   {...field}
                   labelId="relationship-To-HH"
+                  id="relationship-to-hh-select"
                   label={
                     <FormattedMessage
                       id="householdDataBlock.createDropdownCompProps-label"

@@ -43,6 +43,7 @@ const ValidationCategory = () => {
       description: { label: '', default_message: '' },
       caps: [],
       programs: validationPrograms,
+      tax_category: false,
     };
   }, [validationPrograms]);
 

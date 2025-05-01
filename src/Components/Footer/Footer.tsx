@@ -2,11 +2,11 @@ import Paper from '@mui/material/Paper';
 import Share from '../Share/Share';
 import { useContext } from 'react';
 import { Context } from '../Wrapper/Wrapper';
-import { useConfig, useLocalizedLink } from '../Config/configHook.tsx';
+import { useConfig, useLocalizedLink } from '../Config/configHook';
 import { FormattedMessage } from 'react-intl';
 import './Footer.css';
 import { useLogo } from '../Referrer/useLogo';
-import { FooterDataConfig } from '../../Types/Config.ts';
+import { FooterDataConfig } from '../../Types/Config';
 
 const Footer = () => {
   const footerData: FooterDataConfig = useConfig('footer_data');
@@ -19,11 +19,10 @@ const Footer = () => {
   const footerLogoClass = getReferrer('footerLogoClass', ''); // Provide empty string as fallback
   const logoClassName = footerLogoClass ? `${baseLogoClass} ${footerLogoClass}` : baseLogoClass;
 
-  const { theme } = context;
   const { address_one, address_two, city, state, zip_code, email } = footerData;
   return (
     <footer>
-      <Paper elevation={0} sx={{ width: '100%', backgroundColor: theme.midBlueColor }} square={true}>
+      <Paper elevation={0} sx={{ width: '100%', backgroundColor: 'var(--footer-color)' }} square={true}>
         <div className="footer-content-container">
           <div>
             {useLogo('logoFooterSource', 'logoFooterAlt', logoClassName)}
