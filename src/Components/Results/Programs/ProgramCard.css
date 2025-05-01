@@ -1,6 +1,7 @@
 .result-program-container {
   position: relative;
   border: 2px solid var(--secondary-color);
+  color: #000000;
   margin-bottom: 1rem;
 }
 
@@ -170,7 +171,6 @@ h1.header-text-bottom {
   .results-header-values {
     font-family: 'Roboto Slab', serif;
     font-weight: 700;
-    color: var(--primary-color);
     border-top: 1.5px solid var(--primary-color);
     display: flex;
     justify-content: space-between;
@@ -179,7 +179,6 @@ h1.header-text-bottom {
   .results-header-label {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
-    color: var(--primary-color);
   }
 
   .result-program-container {
@@ -198,7 +197,6 @@ h1.header-text-bottom {
     font-weight: 400;
     width: 20%;
     vertical-align: text-bottom;
-    color: var(--midBlue-color);
   }
 
   .result-program-container hr {
@@ -214,7 +212,6 @@ h1.header-text-bottom {
 
   .result-program-details strong {
     display: inline-block;
-    color: var(--midBlue-color);
   }
 }
 
@@ -253,7 +250,6 @@ h1.header-text-bottom {
   .results-header-values {
     font-family: 'Roboto Slab', serif;
     font-weight: 700;
-    color: var(--primary-color);
     border-bottom: 1.5px solid var(--primary-color);
     display: flex;
     justify-content: space-between;
@@ -262,7 +258,6 @@ h1.header-text-bottom {
   .results-header-label {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
-    color: var(--primary-color);
   }
 
   .results-header {

@@ -63,6 +63,10 @@ const Header = () => {
       className += ' frozen';
     }
 
+    if (getReferrer('featureFlags').includes('white_header')) {
+      className += ' white-header';
+    }
+
     return className;
   }, [formData.frozen]);
 
