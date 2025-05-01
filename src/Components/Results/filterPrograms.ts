@@ -84,11 +84,7 @@ export default function filterProgramsGenerator(
     const meetsLegalStatus = program.legal_status_required.some((status) => filtersCheckedStrArr.includes(status));
     const isEligible = program.eligible;
     const hasValue = programValue(program) > 0;
-    let doesNotHave = !program.already_has;
-
-    if (program.name_abbreviated.includes("medicaid")){
-      doesNotHave = program.members.some(member => member.already_has === false);
-    }
+    const doesNotHave = !program.already_has;
 
     return meetsLegalStatus && isEligible && hasValue && doesNotHave;
   }
