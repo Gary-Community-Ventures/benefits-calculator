@@ -84,7 +84,7 @@ export type FormData = {
   startTime: string;
   hasExpenses: string;
   expenses: Expense[];
-  householdSize: number | string;
+  householdSize: number;
   householdData: HouseholdData[];
   householdAssets: number;
   hasBenefits: 'true' | 'false' | 'preferNotToAnswer';

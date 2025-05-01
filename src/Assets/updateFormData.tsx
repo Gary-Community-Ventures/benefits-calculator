@@ -20,7 +20,7 @@ export function useUpdateFormData() {
       startTime: response.start_date ?? formData.startTime,
       hasExpenses: response.expenses.length ? 'true' : 'false',
       expenses: [],
-      householdSize: String(response.household_size ?? ''),
+      householdSize: Number(response.household_size ?? ''),
       householdData: [],
       householdAssets: Math.round(response.household_assets ?? 0),
       hasBenefits: response.has_benefits ?? 'preferNotToAnswer',
