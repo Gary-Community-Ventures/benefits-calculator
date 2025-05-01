@@ -17,6 +17,9 @@
   width: 5rem;
   height: 5rem;
 }
+.energy-calculator-rebate-page-container svg path {
+  fill: var(--icon-color);
+}
 
 .energy-calculator-rebate-page-container section {
   display: flex;
@@ -45,7 +48,7 @@
 
 .energy-calculator-rebate-page-rebate-card-type-container span {
   font-size: 0.75rem;
-  background-color: var(--cream-color);
+  background-color: #7a853b20;
   padding: 0.3rem 0.5rem;
 }
 

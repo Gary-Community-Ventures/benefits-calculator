@@ -16,7 +16,7 @@
 }
 
 .current-household-member {
-  outline: 3px solid var(--secondary-color);
+  outline: 3px solid var(--active-border-color);
   box-shadow: 1px 1px 10px rgb(0 0 0 / 0.4);
 }
 
