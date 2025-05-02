@@ -9,6 +9,9 @@ export function programValue(program: Program) {
   let total = program.household_value;
 
   for (const member of program.members) {
+    if (member.already_has){
+      continue
+    }
     total += member.value;
   }
 
