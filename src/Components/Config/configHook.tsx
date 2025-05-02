@@ -3,8 +3,7 @@ import { Context } from '../Wrapper/Wrapper';
 import { configEndpoint, header } from '../../apiCalls';
 import { ConfigApiResponse, ConfigValue } from '../../Types/Config';
 import { Config } from '../../Types/Config';
-import { FormattedMessage, useIntl } from 'react-intl';
-
+import { FormattedMessage } from 'react-intl';
 import { ReactComponent as Student } from '../../Assets/icons/General/OptionCard/Conditions/student.svg';
 import { ReactComponent as Pregnant } from '../../Assets/icons/General/OptionCard/Conditions/pregnant.svg';
 import { ReactComponent as BlindOrVisuallyImpaired } from '../../Assets/icons/General/OptionCard/Conditions/blindOrVisuallyImpaired.svg';

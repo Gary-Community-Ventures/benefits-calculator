@@ -1,9 +1,10 @@
 import { Card, CardActionArea, CardContent, Stack } from '@mui/material';
-import { ReactNode } from 'react';
+import { ReactNode, useContext, useMemo } from 'react';
 import { FormattedMessageType } from '../../Types/Questions';
 import { ReactComponent as Checkmark } from '../../Assets/icons/General/OptionCard/checkmark.svg';
 import './MultiSelectTiles.css';
 import { useIntl } from 'react-intl';
+import { Context } from '../Wrapper/Wrapper';
 
 export type MultiSelectTileOption<T extends string | number> = {
   value: T;
@@ -18,13 +19,30 @@ type TileProps<T extends string | number> = {
 };
 
 function Tile<T extends string | number>({ option, selected, onClick }: TileProps<T>) {
+  const { getReferrer } = useContext(Context);
   const { formatMessage } = useIntl();
+
+  const featureFlags = getReferrer('featureFlags');
+  const containerClass = useMemo(() => {
+    let className = 'option-card';
+
+    if (selected) {
+      className += ' selected-option-card';
+    }
+
+    if (featureFlags.includes('white_multi_select_tile_icon')) {
+      className += ' white-icons';
+    }
+
+    return className;
+  }, [selected, featureFlags]);
+
   return (
     <CardActionArea sx={{ width: '15rem' }} className="card-action-area" onClick={onClick}>
-      <Card className={selected ? 'option-card selected-option-card' : 'option-card'}>
+      <Card className={containerClass}>
         <div className="multi-select-card-container">
           <CardContent sx={{ textAlign: 'center', padding: '0.5rem' }}>
-            <div>{option.icon}</div>
+            <div className="multi-select-icon">{option.icon}</div>
             <div className={selected ? 'option-card-text' : ''}>{option.text}</div>
           </CardContent>
         </div>
