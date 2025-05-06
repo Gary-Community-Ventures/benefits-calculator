@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { UrgentNeed } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate';
 import { acuteConditionResultMapping } from '../../../Assets/acuteConditionOptions';
+import { formatPhoneNumber } from '../helpers';
 import './NeedCard.css';
 
 type NeedsCardProps = {
@@ -72,7 +73,7 @@ const NeedCard = ({ need }: NeedsCardProps) => {
           <p className="need-desc-paragraph">{translatedNeedDesc}</p>
           {need.phone_number && (
             <a href={`tel:${need.phone_number}`} className="phone-number">
-              {need.phone_number}
+              {formatPhoneNumber(need.phone_number)}
             </a>
           )}
           {translatedLink !== '' && (
