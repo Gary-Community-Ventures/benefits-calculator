@@ -75,7 +75,7 @@ export const calculatedCitizenshipFilters: Record<CalculatedCitizenLabel, Calcul
     func: (member) => {
       return !(member.conditions.pregnant ?? false);
     },
-    linkedFilters: ['non_citizen', 'green_card', 'refugee', 'gc_5plus', 'gc_5less', 'otherWithWorkPermission'],
+    linkedFilters: ['non_citizen', 'green_card', 'gc_5plus', 'gc_5less', 'otherWithWorkPermission'],
   },
 };
 
