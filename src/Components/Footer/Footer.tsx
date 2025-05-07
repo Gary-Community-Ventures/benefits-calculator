@@ -20,18 +20,14 @@ const Footer = () => {
   const logoClassName = footerLogoClass ? `${baseLogoClass} ${footerLogoClass}` : baseLogoClass;
 
   const { theme } = context;
-  const { address_one, address_two, city, state, zip_code, email } = footerData;
+  const { email } = footerData;
+
   return (
     <footer>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: theme.midBlueColor }} square={true}>
         <div className="footer-content-container">
           <div>
             {useLogo('logoFooterSource', 'logoFooterAlt', logoClassName)}
-            <p className="white-font">{address_one}</p>
-            <p className="white-font">{address_two}</p>
-            <p className="white-font">
-              {city}, {state} {zip_code}
-            </p>
             <div className="bottom-top-margin">
               <p className="white-font italicized">
                 <FormattedMessage id="footer-questions" defaultMessage="Questions? Contact" />
