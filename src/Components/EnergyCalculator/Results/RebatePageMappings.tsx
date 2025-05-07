@@ -31,9 +31,7 @@ const ITEM_GROUPS: { group: ItemGroup; members: Set<EnergyCalculatorItemType> }[
   },
   {
     group: 'clothes_dryer',
-    // Removed 'heat_pump_clothes_dryer' and 'non_heat_pump_clothes_dryer' as they are not valid EnergyCalculatorItemType values
-// members: new Set(['heat_pump_clothes_dryer', 'non_heat_pump_clothes_dryer']),
-members: new Set(),
+    members: new Set(['heat_pump_clothes_dryer', 'non_heat_pump_clothes_dryer']),
   },
   {
     group: 'generic_heat_pump',
