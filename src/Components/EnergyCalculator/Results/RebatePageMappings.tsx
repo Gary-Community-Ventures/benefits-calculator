@@ -160,7 +160,7 @@ function ItemName({ rebate }: RebateComponentProps) {
           defaultMessage="geothermal heating installation"
         />
       );
-    case 'heat_pump_clothes_dryer': // Removed, not a valid type
+    case 'heat_pump_clothes_dryer':
       return (
         <FormattedMessage
           id="energyCalculator.rebatePage.title.itemName.heatPumpClothesDryer"
