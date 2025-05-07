@@ -101,6 +101,7 @@
   font-weight: 700;
   font-family: 'Roboto Slab', serif;
   border: 1px solid var(--primary-color);
+  text-decoration: none;
 }
 
 @media (max-width: 500px) {
