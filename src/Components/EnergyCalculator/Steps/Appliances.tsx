@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../../QuestionComponents/QuestionDescription';
-import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
+import RHFOptionCardGroup, { Options } from '../../RHFComponents/RHFOptionCardGroup';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler } from 'react-hook-form';
@@ -18,13 +18,13 @@ import useScreenApi from '../../../Assets/updateScreen';
 import { useEnergyFormData } from '../hooks';
 import useStepForm from '../../Steps/stepForm';
 
-export const applianceStatusOptions = {
+export const applianceStatusOptions: Options = {
   needsWaterHeater: {
     icon: <WaterHeater className="option-card-icon" />,
     text: {
       props: {
         id: 'applianceStatusOptions.needsWaterHeater',
-        defaultMessage: 'Water Heater',
+        default_message: 'Water Heater',
       },
     },
   },
@@ -33,7 +33,7 @@ export const applianceStatusOptions = {
     text: {
       props: {
         id: 'applianceStatusOptions.needsHvac',
-        defaultMessage: 'Heating, ventilation, and/or cooling',
+        default_message: 'Heating, ventilation, and/or cooling',
       },
     },
   },
@@ -42,7 +42,7 @@ export const applianceStatusOptions = {
     text: {
       props: {
         id: 'applianceStatusOptions.needsStove',
-        defaultMessage: 'Cooking stove/range',
+        default_message: 'Cooking stove/range',
       },
     },
   },

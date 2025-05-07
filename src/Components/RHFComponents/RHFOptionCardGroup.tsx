@@ -21,11 +21,13 @@ type Option = {
   text: TextType;
 };
 
-type Options = Record<string, Option | Record<string, Option>>;
+export type Options = Record<string, Option | Record<string, Option>>;
+
+import { UseFormSetValue } from 'react-hook-form';
 
 type RHFOptionCardGroupProps<T extends FieldValues> = {
   fields: Record<string, boolean>;
-  setValue: (name: string, value: unknown, config?: Object) => void;
+  setValue: UseFormSetValue<T>;
   name: Path<T>;
   options: Options;
   triggerValidation?: UseFormTrigger<T>;
@@ -45,7 +47,7 @@ const RHFOptionCardGroup = <T extends FieldValues>({
 
   const handleOptionCardClick = async (optionName: string) => {
     const updatedValue = !fields[optionName];
-    setValue(`${name}.${optionName}`, updatedValue, { shouldValidate: true, shouldDirty: true });
+    setValue(`${name}.${optionName}` as Path<T>, updatedValue as any, { shouldValidate: true, shouldDirty: true });
 
     if (triggerValidation) {
       await triggerValidation(name);

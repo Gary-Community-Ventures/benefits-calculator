@@ -284,6 +284,8 @@ const ECHouseholdMemberForm = () => {
 
     const updatedMemberData: HouseholdData = {
       ...memberData,
+      id: formData.householdData[currentMemberIndex]?.id ?? Date.now(),
+      frontendId: formData.householdData[currentMemberIndex]?.frontendId ?? crypto.randomUUID(),
       conditions: {
         ...memberData.conditions,
         disabled: memberData.conditions.disabled,
@@ -291,7 +293,7 @@ const ECHouseholdMemberForm = () => {
       birthYear: Number(memberData.birthYear),
       birthMonth: Number(memberData.birthMonth),
       hasIncome: memberData.hasIncome === 'true',
-      frontendId: crypto.randomUUID(),
+
       energyCalculator: {
         survivingSpouse: memberData.conditions.survivingSpouse,
         receivesSsi: memberData.conditions.receivesSsi === 'true',
@@ -432,8 +434,8 @@ const ECHouseholdMemberForm = () => {
             />
           </QuestionDescription>
           <RHFOptionCardGroup
-            fields={watch('conditions')}
-            setValue={setValue}
+            fields={Object.fromEntries(Object.entries(watch('conditions') || {}).map(([k, v]) => [k, v === true || v === 'true']))}
+            setValue={setValue as unknown as (name: string, value: unknown, config?: Object) => void}
             name="conditions"
             options={pageNumber === 1 ? conditionOptions.you : conditionOptions.them}
           />
@@ -590,7 +592,7 @@ const ECHouseholdMemberForm = () => {
               {errors.incomeStreams?.[index]?.incomeStreamName !== undefined && (
                 <FormHelperText sx={{ ml: 0 }}>
                   <ErrorMessageWrapper fontSize="1rem">
-                    {errors.incomeStreams?.[index]?.incomeStreamName.message}
+                    {errors.incomeStreams?.[index]?.incomeStreamName?.message}
                   </ErrorMessageWrapper>
                 </FormHelperText>
               )}
@@ -670,7 +672,7 @@ const ECHouseholdMemberForm = () => {
                   {errors.incomeStreams?.[index]?.incomeFrequency !== undefined && (
                     <FormHelperText sx={{ ml: 0 }}>
                       <ErrorMessageWrapper fontSize="1rem">
-                        {errors.incomeStreams?.[index]?.incomeFrequency.message}
+                        {errors.incomeStreams?.[index]?.incomeFrequency?.message}
                       </ErrorMessageWrapper>
                     </FormHelperText>
                   )}
@@ -720,7 +722,7 @@ const ECHouseholdMemberForm = () => {
               {errors.incomeStreams?.[index]?.hoursPerWeek !== undefined && (
                 <FormHelperText sx={{ ml: 0 }}>
                   <ErrorMessageWrapper fontSize="1rem">
-                    {errors.incomeStreams?.[index]?.hoursPerWeek.message}
+                    {errors.incomeStreams?.[index]?.hoursPerWeek?.message}
                   </ErrorMessageWrapper>
                 </FormHelperText>
               )}
@@ -797,7 +799,7 @@ const ECHouseholdMemberForm = () => {
               {errors.incomeStreams?.[index]?.incomeAmount !== undefined && (
                 <FormHelperText sx={{ ml: 0 }}>
                   <ErrorMessageWrapper fontSize="1rem">
-                    {errors.incomeStreams?.[index]?.incomeAmount.message}
+                    {errors.incomeStreams?.[index]?.incomeAmount?.message}
                   </ErrorMessageWrapper>
                 </FormHelperText>
               )}
@@ -903,7 +905,14 @@ const ECHouseholdMemberForm = () => {
         )}
       </QuestionHeader>
       <HHMSummaryCards
-        activeMemberData={getValues()}
+        activeMemberData={{
+          ...getValues(),
+          id: formData.householdData[currentMemberIndex]?.id ?? Date.now(),
+          frontendId: formData.householdData[currentMemberIndex]?.frontendId ?? crypto.randomUUID(),
+          birthYear: getValues().birthYear ? Number(getValues().birthYear) : undefined,
+          birthMonth: getValues().birthMonth ? Number(getValues().birthMonth) : undefined,
+          hasIncome: Boolean(getValues().hasIncome),
+        }}
         triggerValidation={trigger}
         questionName="energyCalculatorHouseholdData"
       />

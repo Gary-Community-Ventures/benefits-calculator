@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../../QuestionComponents/QuestionDescription';
-import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
+import RHFOptionCardGroup, { Options } from '../../RHFComponents/RHFOptionCardGroup';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler } from 'react-hook-form';
@@ -29,7 +29,7 @@ const Utilities = () => {
       text: {
         props: {
           id: 'utilityStatusOptions.electricityIsDisconnected',
-          defaultMessage: 'Your electricity and/or gas has been disconnected.',
+          default_message: 'Your electricity and/or gas has been disconnected.',
         },
       },
     },
@@ -38,7 +38,7 @@ const Utilities = () => {
       text: {
         props: {
           id: 'utilityStatusOptions.hasPastDueEnergyBills',
-          defaultMessage: 'You have a past-due electric or heating bill or you are low on fuel.',
+          default_message: 'You have a past-due electric or heating bill or you are low on fuel.',
         },
       },
     },
@@ -95,9 +95,15 @@ const Utilities = () => {
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <RHFOptionCardGroup
           fields={watch('energyCalculator')}
-          setValue={setValue}
+          setValue={setValue as unknown as (name: string, value: unknown, config?: Object) => void}
           name="energyCalculator"
-          options={utilityStatusOptions}
+          options={Object.keys(utilityStatusOptions).reduce((acc, key) => {
+            acc[key] = {
+              icon: utilityStatusOptions[key as keyof typeof utilityStatusOptions].icon,
+              text: utilityStatusOptions[key as keyof typeof utilityStatusOptions].text,
+            };
+            return acc;
+          }, {} as Options)}
         />
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>

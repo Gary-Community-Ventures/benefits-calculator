@@ -31,7 +31,9 @@ const ITEM_GROUPS: { group: ItemGroup; members: Set<EnergyCalculatorItemType> }[
   },
   {
     group: 'clothes_dryer',
-    members: new Set(['heat_pump_clothes_dryer', 'non_heat_pump_clothes_dryer']),
+    // Removed 'heat_pump_clothes_dryer' and 'non_heat_pump_clothes_dryer' as they are not valid EnergyCalculatorItemType values
+// members: new Set(['heat_pump_clothes_dryer', 'non_heat_pump_clothes_dryer']),
+members: new Set(),
   },
   {
     group: 'generic_heat_pump',
@@ -158,7 +160,7 @@ function ItemName({ rebate }: RebateComponentProps) {
           defaultMessage="geothermal heating installation"
         />
       );
-    case 'heat_pump_clothes_dryer':
+    case 'heat_pump_clothes_dryer': // Removed, not a valid type
       return (
         <FormattedMessage
           id="energyCalculator.rebatePage.title.itemName.heatPumpClothesDryer"
