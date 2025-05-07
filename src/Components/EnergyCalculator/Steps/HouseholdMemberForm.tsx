@@ -284,7 +284,7 @@ const ECHouseholdMemberForm = () => {
 
     const updatedMemberData: HouseholdData = {
       ...memberData,
-      id: formData.householdData[currentMemberIndex]?.id ?? Date.now(),
+      id: formData.householdData[currentMemberIndex]?.id ?? crypto.randomUUID(),
       frontendId: formData.householdData[currentMemberIndex]?.frontendId ?? crypto.randomUUID(),
       conditions: {
         ...memberData.conditions,
@@ -907,7 +907,7 @@ const ECHouseholdMemberForm = () => {
       <HHMSummaryCards
         activeMemberData={{
           ...getValues(),
-          id: formData.householdData[currentMemberIndex]?.id ?? Date.now(),
+          id: formData.householdData[currentMemberIndex]?.id ?? crypto.randomUUID(),
           frontendId: formData.householdData[currentMemberIndex]?.frontendId ?? crypto.randomUUID(),
           birthYear: getValues().birthYear ? Number(getValues().birthYear) : undefined,
           birthMonth: getValues().birthMonth ? Number(getValues().birthMonth) : undefined,
