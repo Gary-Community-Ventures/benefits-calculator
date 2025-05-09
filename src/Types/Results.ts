@@ -1,5 +1,5 @@
 import { CitizenLabels } from '../Assets/citizenshipFilterFormControlLabels';
-import { Language } from './Language';
+import { Language } from '../Assets/languageOptions';
 
 export type Translation = {
   default_message: string;
