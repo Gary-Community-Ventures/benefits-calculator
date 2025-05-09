@@ -29,7 +29,7 @@ const getScreensBody = (formData: FormData, languageCode: Language, whiteLabel: 
     zipcode: formData.zipcode,
     county: formData.county,
     start_date: formData.startTime,
-    household_size: formData.householdSize === '' ? null : Number(formData.householdSize),
+    household_size: formData.householdSize === 0 ? null : Number(formData.householdSize),
     household_members: householdMembers,
     expenses: expenses,
     household_assets: formData.householdAssets || 0,
