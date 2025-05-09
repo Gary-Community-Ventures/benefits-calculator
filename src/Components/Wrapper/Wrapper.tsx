@@ -10,7 +10,6 @@ import { rightToLeftLanguages, Language } from '../../Assets/languageOptions';
 import { HtmlLangUpdater } from '../HtmlLangUpdater/HtmlLangUpdater';
 
 const initialFormData: FormData = {
-  whiteLabel: '_default',
   isTest: false,
   frozen: false,
   externalID: undefined,
@@ -21,7 +20,7 @@ const initialFormData: FormData = {
   startTime: new Date().toJSON(),
   hasExpenses: 'false',
   expenses: [],
-  householdSize: '',
+  householdSize: 0,
   householdData: [],
   householdAssets: 0,
   hasBenefits: 'preferNotToAnswer',

@@ -59,7 +59,7 @@ const TwoOneOneShareCO = ({ close }: TwoOneOneShareProps) => {
     }, 5000);
   };
 
-  const Icon = ({ name, children, color }) => {
+  const Icon = ({ name, children, color }: { name: string; children: React.ReactNode; color: string }) => {
     return (
       <span className={`${color} icon`}>
         {children}

@@ -7,7 +7,7 @@ import { useConfig } from '../../Config/configHook';
 
 const ResultsError = () => {
   const { uuid, whiteLabel } = useParams();
-  const { email } = useConfig('feedback_links');
+  const { email } = useConfig('feedback_links') as { email: string };
   const navigate = useNavigate();
 
   return (

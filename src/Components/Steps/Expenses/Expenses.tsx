@@ -248,7 +248,7 @@ const Expenses = () => {
                       {!!errors.expenses?.[index]?.expenseSourceName && (
                         <FormHelperText sx={{ marginLeft: 0 }}>
                           <ErrorMessageWrapper fontSize="1rem">
-                            {errors.expenses?.[index]?.expenseSourceName.message}
+                            {errors.expenses?.[index]?.expenseSourceName?.message}
                           </ErrorMessageWrapper>
                         </FormHelperText>
                       )}
@@ -291,7 +291,7 @@ const Expenses = () => {
                         {!!errors.expenses?.[index]?.expenseAmount && (
                           <FormHelperText sx={{ marginLeft: 0 }}>
                             <ErrorMessageWrapper fontSize="1rem">
-                              {errors.expenses?.[index]?.expenseAmount.message}
+                              {errors.expenses?.[index]?.expenseAmount?.message}
                             </ErrorMessageWrapper>
                           </FormHelperText>
                         )}

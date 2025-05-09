@@ -58,6 +58,7 @@ const REBATE_CATEGORY_HEADING: ProgramCategory = {
   },
   caps: [],
   programs: [],
+  tax_category: false,
 };
 
 export default function EnergyCalculatorRebateCategoryList() {

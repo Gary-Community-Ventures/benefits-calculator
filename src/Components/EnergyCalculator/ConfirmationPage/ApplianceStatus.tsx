@@ -29,10 +29,12 @@ const ApplianceStatus = () => {
 
         return (
           <p style={{ marginBottom: '.5rem' }} key={applianceStatusName}>
-            <FormattedMessage
-              id={applianceStatusProps.text.props.id}
-              defaultMessage={applianceStatusProps.text.props.defaultMessage}
-            />
+            {('props' in applianceStatusProps.text) ? (
+  <FormattedMessage
+    id={applianceStatusProps.text.props.id}
+    defaultMessage={applianceStatusProps.text.props.default_message}
+  />
+) : null}
           </p>
         );
       });
