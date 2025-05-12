@@ -26,6 +26,13 @@
   fill: var(--secondary-background-color);
 }
 
+.header-icon-box path,
+.header-icon-box rect,
+.header-icon-box circle {
+  fill: var(--icon-color);
+  stroke: var(--icon-color);
+}
+
 .header-text {
   display: flex;
   flex-direction: column;
