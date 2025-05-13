@@ -151,18 +151,16 @@ export const Filter = () => {
     setFilterHeight(0);
   };
 
-  const handleScroll = () => {
-    if (citizenshipFilterIsOpen) {
+  const handleScroll = (event: Event) => {
+    if (!citizenshipFilterIsOpen) return;    
+    
+    const target = event.target as Node;
+    const filterContainer = filterRef.current;
+    
+    if (filterContainer && !filterContainer.contains(target) && target !== filterContainer) {
       handleFilterClose();
     }
   };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [citizenshipFilterIsOpen]);
 
   const citizenshipFiltersModalALProps = {
     id: 'filter.citFilterModalAL',
@@ -191,6 +189,12 @@ export const Filter = () => {
           }}
           transformOrigin={{ vertical: 2, horizontal: 0 }}
           aria-label={intl.formatMessage(citizenshipFiltersModalALProps)}
+          keepMounted
+          disableScrollLock={false}
+          style={{ position: 'fixed' }}
+          PaperProps={{
+            style: { overscrollBehavior: 'contain' }
+          }}
         >
           <div className="filters-close-button">
             <IconButton
