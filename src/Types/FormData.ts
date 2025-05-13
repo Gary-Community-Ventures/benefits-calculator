@@ -17,6 +17,7 @@ export type EnergyCalculatorFormData = {
   gasProvider: string;
   electricityIsDisconnected: boolean;
   hasPastDueEnergyBills: boolean;
+  hasOldCar: boolean
   needsWaterHeater: boolean;
   needsHvac: boolean;
   needsStove: boolean;
