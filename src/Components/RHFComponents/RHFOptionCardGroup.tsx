@@ -62,7 +62,7 @@ const RHFOptionCardGroup = <T extends FieldValues>({
     const optionCards = Object.keys(options).map((optionKey, index) => {
       const translatedAriaLabel = intl.formatMessage({
         id: options[optionKey].text.props.id,
-        defaultMessage: options[optionKey].text.props.defaultMessage,
+        defaultMessage: options[optionKey].text.props.default_message,
       });
 
       const isSelected = values[optionKey];
