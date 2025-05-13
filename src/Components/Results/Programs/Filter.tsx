@@ -151,17 +151,6 @@ export const Filter = () => {
     setFilterHeight(0);
   };
 
-  const handleScroll = (event: Event) => {
-    if (!citizenshipFilterIsOpen) return;    
-    
-    const target = event.target as Node;
-    const filterContainer = filterRef.current;
-    
-    if (filterContainer && !filterContainer.contains(target) && target !== filterContainer) {
-      handleFilterClose();
-    }
-  };
-
   const citizenshipFiltersModalALProps = {
     id: 'filter.citFilterModalAL',
     defaultMessage: 'citizenship filters modal',
