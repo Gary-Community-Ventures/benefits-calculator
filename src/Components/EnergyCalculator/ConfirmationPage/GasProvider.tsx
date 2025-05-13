@@ -2,7 +2,7 @@ import { useContext, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ConfirmationBlock from '../../Confirmation/ConfirmationBlock';
 import { Context } from '../../Wrapper/Wrapper';
-import { ReactComponent as Referral } from '../../../Assets/icons/General/referral.svg';
+import { ReactComponent as Stove } from '../Icons/Stove.svg';
 import { getProviderNames } from '../gasProviders';
 import { FormattedMessageType } from '../../../Types/Questions';
 
@@ -38,7 +38,7 @@ export default function EnergyCalculatorGasProvider() {
 
   return (
     <ConfirmationBlock
-      icon={<Referral title={formatMessage(gasProviderIconAlt)} />}
+      icon={<Stove title={formatMessage(gasProviderIconAlt)} />}
       title={<FormattedMessage id="energyCalculator.confirmation.gasProvider" defaultMessage="Gas Utility Provider" />}
       editAriaLabel={editGasProviderAriaLabel}
       stepName="energyCalculatorGasProvider"

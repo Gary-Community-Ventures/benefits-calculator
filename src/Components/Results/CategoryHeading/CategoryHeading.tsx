@@ -5,6 +5,11 @@ import { ReactComponent as Transportation } from '../../../Assets/icons/Programs
 import { ReactComponent as TaxCredits } from '../../../Assets/icons/Programs/CategoryHeading/taxCredits.svg';
 import { ReactComponent as CashAssistance } from '../../../Assets/icons/Programs/CategoryHeading/cashAssistant.svg';
 import { ReactComponent as ChildCareYouthEducation } from '../../../Assets/icons/Programs/CategoryHeading/childCareYouthEducation.svg';
+import { ReactComponent as WaterHeater } from '../../EnergyCalculator/Icons/WaterHeater.svg';
+import { ReactComponent as LightBulb } from '../../../Assets/icons/UrgentNeeds/AcuteConditions/housing.svg';
+import { ReactComponent as Heat } from '../../EnergyCalculator/Icons/Heat.svg';
+import { ReactComponent as LowFuel } from '../../EnergyCalculator/Icons/LowFuel.svg';
+import { ReactComponent as Talk } from '../../../Assets/icons/UrgentNeeds/AcuteConditions/support.svg';
 import { calculateTotalValue, formatToUSD } from '../FormattedValue';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate';
@@ -19,6 +24,11 @@ export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   tax_credit: TaxCredits,
   cash: CashAssistance,
   child_care: ChildCareYouthEducation,
+  water_heater: WaterHeater,
+  light_bulb: LightBulb,
+  heat: Heat,
+  low_fuel: LowFuel,
+  talk: Talk,
 };
 
 type CategoryHeadingProps = {
