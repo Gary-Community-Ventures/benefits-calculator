@@ -11,7 +11,7 @@ type Resource = {
 };
 
 const MoreHelp = () => {
-  const { moreHelpOptions } = useConfig('more_help_options') as { moreHelpOptions: Resource[] };
+  const { moreHelpOptions } = useConfig<{ moreHelpOptions: Resource[] }>('more_help_options');
   const resources: Resource[] = moreHelpOptions;
 
   const displayResources = (resources: Resource[]) => {

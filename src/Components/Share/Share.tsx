@@ -22,7 +22,7 @@ import { useConfig } from '../Config/configHook';
 const Share = forwardRef(function Share() {
   const [copied, setCopied] = useState(false);
   const { getReferrer } = useContext(Context);
-  const { email, survey } = useConfig('feedback_links') as { email: string; survey: string };
+  const { email, survey } = useConfig<{ email: string; survey: string }>('feedback_links');
   const surveyLink = survey;
   const intl = useIntl();
 

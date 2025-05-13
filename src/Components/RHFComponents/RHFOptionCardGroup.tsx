@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack, Box } from '@mui/material';
 import { ReactComponent as Checkmark } from '../../Assets/icons/General/OptionCard/checkmark.svg';
-import { FieldValues, Path, UseFormTrigger } from 'react-hook-form';
+import { FieldValues, Path, PathValue, UseFormTrigger, UseFormSetValue } from 'react-hook-form';
 import '../OptionCardGroup/OptionCardGroup.css';
 import { Context } from '../Wrapper/Wrapper';
 import { useContext } from 'react';
@@ -22,8 +22,6 @@ type Option = {
 };
 
 export type Options = Record<string, Option | Record<string, Option>>;
-
-import { UseFormSetValue } from 'react-hook-form';
 
 type RHFOptionCardGroupProps<T extends FieldValues> = {
   fields: Record<string, boolean>;
@@ -47,7 +45,11 @@ const RHFOptionCardGroup = <T extends FieldValues>({
 
   const handleOptionCardClick = async (optionName: string) => {
     const updatedValue = !fields[optionName];
-    setValue(`${name}.${optionName}` as Path<T>, updatedValue as any, { shouldValidate: true, shouldDirty: true });
+    setValue(
+      `${name}.${optionName}` as Path<T>,
+      updatedValue as PathValue<T, Path<T>>,
+      { shouldValidate: true, shouldDirty: true }
+    );
 
     if (triggerValidation) {
       await triggerValidation(name);

@@ -28,9 +28,6 @@ export const ENERGY_CALCULATOR_ITEMS = [
   'ductless_heat_pump',
   'geothermal_heating_installation',
   'other_heat_pump',
-  // dryer
-  'heat_pump_clothes_dryer',
-  'non_heat_pump_clothes_dryer',
   // water heater
   'heat_pump_water_heater',
   'non_heat_pump_water_heater',
@@ -106,7 +103,7 @@ export interface EnergyCalculatorAPIResponse {
 
 export type EnergyCalculatorRebate = EnergyCalculatorIncentive;
 
-export type EnergyCalculatorRebateCategoryType = 'hvac' | 'waterHeater' | 'stove' | 'dryer';
+export type EnergyCalculatorRebateCategoryType = 'hvac' | 'waterHeater' | 'stove';
 
 export const ENERGY_CALCULATOR_CATEGORY_MAP: Record<EnergyCalculatorItemType, EnergyCalculatorRebateCategoryType> = {
   air_to_water_heat_pump: 'hvac',
@@ -115,8 +112,6 @@ export const ENERGY_CALCULATOR_CATEGORY_MAP: Record<EnergyCalculatorItemType, En
   ductless_heat_pump: 'hvac',
   geothermal_heating_installation: 'hvac',
   other_heat_pump: 'hvac',
-  heat_pump_clothes_dryer: 'dryer',
-  non_heat_pump_clothes_dryer: 'dryer',
   heat_pump_water_heater: 'waterHeater',
   non_heat_pump_water_heater: 'waterHeater',
   electric_stove: 'stove',
@@ -129,7 +124,6 @@ export const ENERGY_CALCULATOR_CATEGORY_TITLE_MAP: Record<EnergyCalculatorRebate
       defaultMessage="Heating, Ventilation & Cooling"
     />
   ),
-  dryer: <FormattedMessage id="energyCalculator.results.category.dryer.title" defaultMessage="Dryer" />,
   waterHeater: (
     <FormattedMessage id="energyCalculator.results.category.waterHeater.title" defaultMessage="Water Heater" />
   ),
@@ -152,15 +146,6 @@ export const renderCategoryDescription = (rebateType: EnergyCalculatorRebateCate
         />
       ),
       href: 'https://homes.rewiringamerica.org/projects/heating-and-cooling-homeowner',
-    },
-    dryer: {
-      formattedMessage: (
-        <FormattedMessage
-          id="dryer.categoryDescription"
-          defaultMessage="You may qualify for savings on the cost of a heat pump clothes dryer. Heat pump clothes dryers use less energy than other types of clothes dryers. You can type the estimated cost of a heat pump clothes dryer into one or more of the white boxes below to estimate your savings. For more information, visit our partners at "
-        />
-      ),
-      href: 'https://homes.rewiringamerica.org/projects/electric-clothes-dryer-homeowner',
     },
     waterHeater: {
       formattedMessage: (

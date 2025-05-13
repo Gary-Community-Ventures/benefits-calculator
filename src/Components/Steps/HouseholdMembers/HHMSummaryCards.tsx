@@ -21,7 +21,7 @@ type HHMSummariesProps = {
 };
 
 const HHMSummaries = ({ activeMemberData, triggerValidation, questionName }: HHMSummariesProps) => {
-  const { formData, whiteLabel } = useContext(Context) as WrapperContext;
+  const { formData, whiteLabel } = useContext(Context);
   const { uuid, page } = useParams();
   const pageNumber = Number(page);
   const currentStepId = useStepNumber(questionName);

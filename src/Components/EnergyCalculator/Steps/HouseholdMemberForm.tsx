@@ -29,7 +29,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { MONTHS } from '../../Steps/HouseholdMembers/MONTHS';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
-import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
+import MultiSelectTiles from '../../OptionCardGroup/MultiSelectTiles';
 import { useConfig } from '../../Config/configHook';
 import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import { FormattedMessageType } from '../../../Types/Questions';
@@ -433,11 +433,28 @@ const ECHouseholdMemberForm = () => {
               defaultMessage="Choose all that apply. If none apply, skip this question."
             />
           </QuestionDescription>
-          <RHFOptionCardGroup
-            fields={Object.fromEntries(Object.entries(watch('conditions') || {}).map(([k, v]) => [k, v === true || v === 'true']))}
-            setValue={setValue as unknown as (name: string, value: unknown, config?: Object) => void}
-            name="conditions"
-            options={pageNumber === 1 ? conditionOptions.you : conditionOptions.them}
+          <MultiSelectTiles
+            options={Object.entries(pageNumber === 1 ? conditionOptions.you : conditionOptions.them).map(([key, option]) => ({
+              value: key,
+              text: option.text,
+              icon: option.icon
+            }))}
+            values={{
+              survivingSpouse: Boolean(watch('conditions.survivingSpouse')),
+              disabled: Boolean(watch('conditions.disabled')),
+              // Skip receivesSsi as it's not a direct toggle but set by a different control
+            }}
+            onChange={(newValues) => {
+              // Create a new conditions object that preserves correct types
+              const conditions = {
+                survivingSpouse: newValues.survivingSpouse,
+                disabled: newValues.disabled,
+                // Preserve the existing receivesSsi value or default to 'false'
+                receivesSsi: watch('conditions.receivesSsi') || 'false'
+              };
+              
+              setValue('conditions', conditions, { shouldValidate: true, shouldDirty: true });
+            }}
           />
         </Stack>
         {getValues('conditions.disabled') && createReceivesSsiQuestion()}

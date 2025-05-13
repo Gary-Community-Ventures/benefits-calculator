@@ -9,7 +9,7 @@ import dataLayerPush from '../../Assets/analytics';
 
 const BackToScreen = () => {
   const { uuid } = useParams();
-  const { formData } = useContext(Context) as WrapperContext;
+  const { formData } = useContext(Context);
   const navigate = useNavigate();
   return (
     <div className="back-to-screen-message">
