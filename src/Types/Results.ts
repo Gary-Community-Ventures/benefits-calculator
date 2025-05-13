@@ -80,6 +80,7 @@ export type ProgramCategory = {
   description: Translation;
   caps: ProgramCategoryCap[];
   tax_category: boolean;
+  priority: number | null;
   programs: Program[];
 };
 
