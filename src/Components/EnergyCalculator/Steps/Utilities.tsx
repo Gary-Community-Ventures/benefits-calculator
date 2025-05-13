@@ -70,7 +70,7 @@ const Utilities = () => {
       energyCalculator: {
         electricityIsDisconnected: formData.energyCalculator?.electricityIsDisconnected ?? false,
         hasPastDueEnergyBills: formData.energyCalculator?.hasPastDueEnergyBills ?? false,
-        hasOldCar: formData.energyCalculator?.hasOldCar ?? false
+        hasOldCar: formData.energyCalculator?.hasOldCar ?? false,
       },
     },
     questionName: 'energyCalculatorUtilityStatus',
@@ -93,7 +93,10 @@ const Utilities = () => {
   return (
     <>
       <QuestionHeader>
-        <FormattedMessage id="questions.energyCalculator-utilities" defaultMessage="Tell us about your utilities" />
+        <FormattedMessage
+          id="qcc.tell-us-final-text"
+          defaultMessage="Tell us some final information about your household."
+        />
       </QuestionHeader>
       <QuestionQuestion>
         <FormattedMessage

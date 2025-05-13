@@ -13,7 +13,7 @@ import ErrorMessageWrapper from '../ErrorMessage/ErrorMessageWrapper';
 import HelpButton from '../HelpBubbleIcon/HelpButton';
 import PrevAndContinueButtons from '../PrevAndContinueButtons/PrevAndContinueButtons';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../QuestionComponents/questionHooks';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { Context } from '../Wrapper/Wrapper';
 import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
