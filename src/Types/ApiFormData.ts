@@ -190,6 +190,7 @@ export type ApiFormData = {
   has_ma_maeitc: boolean | null;
   has_ma_macfc: boolean | null;
   has_co_andso: boolean | null;
+  has_co_care: boolean | null;
   has_employer_hi?: boolean | null;
   has_private_hi?: boolean | null;
   has_medicaid_hi?: boolean | null;

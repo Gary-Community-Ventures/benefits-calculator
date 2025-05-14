@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { useState, useEffect } from 'react';
 import { getAllLongTermPrograms, getAllNearTermPrograms } from '../../apiCalls';
 import { Translation } from '../../Types/Results';
