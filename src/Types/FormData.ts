@@ -35,6 +35,7 @@ export type HouseholdData = {
   birthMonth?: number;
   relationshipToHH: string;
   conditions: Conditions;
+  receivesSsi?: 'true' | 'false';
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
   energyCalculator?: EnergyCalculatorMember;

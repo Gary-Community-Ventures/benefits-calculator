@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../../QuestionComponents/QuestionDescription';
-import RHFOptionCardGroup, { Options } from '../../RHFComponents/RHFOptionCardGroup';
+import MultiSelectTiles from '../../OptionCardGroup/MultiSelectTiles';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler } from 'react-hook-form';
@@ -23,24 +23,21 @@ const Utilities = () => {
   const { updateScreen } = useScreenApi();
   const energyDataAvailable = useEnergyFormData(formData);
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorUtilityStatus');
+  
   const utilityStatusOptions = {
     electricityIsDisconnected: {
       icon: <Plug className="option-card-icon" />,
-      text: {
-        props: {
-          id: 'utilityStatusOptions.electricityIsDisconnected',
-          default_message: 'Your electricity and/or gas has been disconnected.',
-        },
-      },
+      text: <FormattedMessage 
+              id="utilityStatusOptions.electricityIsDisconnected"
+              defaultMessage="Your electricity and/or gas has been disconnected."
+            />,
     },
     hasPastDueEnergyBills: {
       icon: <LowFuel className="option-card-icon" />,
-      text: {
-        props: {
-          id: 'utilityStatusOptions.hasPastDueEnergyBills',
-          default_message: 'You have a past-due electric or heating bill or you are low on fuel.',
-        },
-      },
+      text: <FormattedMessage 
+              id="utilityStatusOptions.hasPastDueEnergyBills"
+              defaultMessage="You have a past-due electric or heating bill or you are low on fuel."
+            />,
     },
   };
 
@@ -93,17 +90,24 @@ const Utilities = () => {
         <FormattedMessage id="questions.energyCalculator-utilities-q-desc" defaultMessage="Select all that apply." />
       </QuestionDescription>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
-        <RHFOptionCardGroup
-          fields={watch('energyCalculator')}
-          setValue={setValue as unknown as (name: string, value: unknown, config?: Object) => void}
-          name="energyCalculator"
-          options={Object.keys(utilityStatusOptions).reduce((acc, key) => {
-            acc[key] = {
-              icon: utilityStatusOptions[key as keyof typeof utilityStatusOptions].icon,
-              text: utilityStatusOptions[key as keyof typeof utilityStatusOptions].text,
+        <MultiSelectTiles
+          options={Object.entries(utilityStatusOptions).map(([key, option]) => ({
+            value: key,
+            text: option.text,
+            icon: option.icon
+          }))}
+          values={watch('energyCalculator') || {
+            electricityIsDisconnected: false,
+            hasPastDueEnergyBills: false
+          }}
+          onChange={(newValues) => {
+            // Cast to the expected type structure to satisfy TypeScript
+            const typedValues = {
+              electricityIsDisconnected: newValues.electricityIsDisconnected || false,
+              hasPastDueEnergyBills: newValues.hasPastDueEnergyBills || false
             };
-            return acc;
-          }, {} as Options)}
+            setValue('energyCalculator', typedValues, { shouldValidate: true, shouldDirty: true });
+          }}
         />
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>

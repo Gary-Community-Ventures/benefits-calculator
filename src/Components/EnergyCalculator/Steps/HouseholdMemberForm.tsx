@@ -172,8 +172,8 @@ const ECHouseholdMemberForm = () => {
       conditions: z.object({
         survivingSpouse: z.boolean(),
         disabled: z.boolean(),
-        receivesSsi: z.enum(['true', 'false']),
       }),
+      receivesSsi: z.enum(['true', 'false']).optional(),
       relationshipToHH: z
         .string()
         .refine((value) => [...Object.keys(relationshipOptions)].includes(value) || pageNumber === 1, {
@@ -236,8 +236,8 @@ const ECHouseholdMemberForm = () => {
       conditions: {
         survivingSpouse: householdMemberFormData?.energyCalculator?.survivingSpouse ?? false,
         disabled: householdMemberFormData?.conditions.disabled ?? false,
-        receivesSsi: householdMemberFormData?.energyCalculator?.receivesSsi ? 'true' : 'false',
       },
+      receivesSsi: householdMemberFormData?.receivesSsi ?? 'false',
       relationshipToHH: determineDefaultRelationshipToHH(),
       hasIncome: determineDefaultHasIncome(),
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
@@ -273,7 +273,7 @@ const ECHouseholdMemberForm = () => {
     const notDisabled = getValues('conditions.disabled') === false;
 
     if (notDisabled) {
-      setValue('conditions.receivesSsi', 'false');
+      setValue('receivesSsi', 'false');
     }
   }, [watchIsDisabled]);
 
@@ -296,7 +296,7 @@ const ECHouseholdMemberForm = () => {
 
       energyCalculator: {
         survivingSpouse: memberData.conditions.survivingSpouse,
-        receivesSsi: memberData.conditions.receivesSsi === 'true',
+        receivesSsi: memberData.receivesSsi === 'true',
       },
     };
 
@@ -448,9 +448,7 @@ const ECHouseholdMemberForm = () => {
               // Create a new conditions object that preserves correct types
               const conditions = {
                 survivingSpouse: newValues.survivingSpouse,
-                disabled: newValues.disabled,
-                // Preserve the existing receivesSsi value or default to 'false'
-                receivesSsi: watch('conditions.receivesSsi') || 'false'
+                disabled: newValues.disabled
               };
               
               setValue('conditions', conditions, { shouldValidate: true, shouldDirty: true });
@@ -887,7 +885,7 @@ const ECHouseholdMemberForm = () => {
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </QuestionQuestion>
         <Controller
-          name="conditions.receivesSsi"
+          name="receivesSsi"
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
