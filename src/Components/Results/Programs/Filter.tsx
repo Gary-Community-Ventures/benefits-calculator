@@ -151,19 +151,6 @@ export const Filter = () => {
     setFilterHeight(0);
   };
 
-  const handleScroll = () => {
-    if (citizenshipFilterIsOpen) {
-      handleFilterClose();
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [citizenshipFilterIsOpen]);
-
   const citizenshipFiltersModalALProps = {
     id: 'filter.citFilterModalAL',
     defaultMessage: 'citizenship filters modal',
@@ -190,7 +177,7 @@ export const Filter = () => {
             horizontal: 'left',
           }}
           transformOrigin={{ vertical: 2, horizontal: 0 }}
-          aria-label={intl.formatMessage(citizenshipFiltersModalALProps)}
+          aria-label={intl.formatMessage(citizenshipFiltersModalALProps)}          
         >
           <div className="filters-close-button">
             <IconButton
