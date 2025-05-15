@@ -29,7 +29,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { MONTHS } from '../../Steps/HouseholdMembers/MONTHS';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
-import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
+import MultiSelectTiles from '../../OptionCardGroup/MultiSelectTiles';
 import { useConfig } from '../../Config/configHook';
 import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import { FormattedMessageType } from '../../../Types/Questions';
@@ -172,8 +172,8 @@ const ECHouseholdMemberForm = () => {
       conditions: z.object({
         survivingSpouse: z.boolean(),
         disabled: z.boolean(),
-        receivesSsi: z.enum(['true', 'false']),
       }),
+      receivesSsi: z.enum(['true', 'false']).optional(),
       relationshipToHH: z
         .string()
         .refine((value) => [...Object.keys(relationshipOptions)].includes(value) || pageNumber === 1, {
@@ -236,8 +236,8 @@ const ECHouseholdMemberForm = () => {
       conditions: {
         survivingSpouse: householdMemberFormData?.energyCalculator?.survivingSpouse ?? false,
         disabled: householdMemberFormData?.conditions.disabled ?? false,
-        receivesSsi: householdMemberFormData?.energyCalculator?.receivesSsi ? 'true' : 'false',
       },
+      receivesSsi: householdMemberFormData?.receivesSsi ?? 'false',
       relationshipToHH: determineDefaultRelationshipToHH(),
       hasIncome: determineDefaultHasIncome(),
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
@@ -273,7 +273,7 @@ const ECHouseholdMemberForm = () => {
     const notDisabled = getValues('conditions.disabled') === false;
 
     if (notDisabled) {
-      setValue('conditions.receivesSsi', 'false');
+      setValue('receivesSsi', 'false');
     }
   }, [watchIsDisabled]);
 
@@ -284,6 +284,8 @@ const ECHouseholdMemberForm = () => {
 
     const updatedMemberData: HouseholdData = {
       ...memberData,
+      id: formData.householdData[currentMemberIndex]?.id ?? crypto.randomUUID(),
+      frontendId: formData.householdData[currentMemberIndex]?.frontendId ?? crypto.randomUUID(),
       conditions: {
         ...memberData.conditions,
         disabled: memberData.conditions.disabled,
@@ -291,10 +293,10 @@ const ECHouseholdMemberForm = () => {
       birthYear: Number(memberData.birthYear),
       birthMonth: Number(memberData.birthMonth),
       hasIncome: memberData.hasIncome === 'true',
-      frontendId: crypto.randomUUID(),
+
       energyCalculator: {
         survivingSpouse: memberData.conditions.survivingSpouse,
-        receivesSsi: memberData.conditions.receivesSsi === 'true',
+        receivesSsi: memberData.receivesSsi === 'true',
       },
     };
 
@@ -431,11 +433,26 @@ const ECHouseholdMemberForm = () => {
               defaultMessage="Choose all that apply. If none apply, skip this question."
             />
           </QuestionDescription>
-          <RHFOptionCardGroup
-            fields={watch('conditions')}
-            setValue={setValue}
-            name="conditions"
-            options={pageNumber === 1 ? conditionOptions.you : conditionOptions.them}
+          <MultiSelectTiles
+            options={Object.entries(pageNumber === 1 ? conditionOptions.you : conditionOptions.them).map(([key, option]) => ({
+              value: key,
+              text: option.text,
+              icon: option.icon
+            }))}
+            values={{
+              survivingSpouse: Boolean(watch('conditions.survivingSpouse')),
+              disabled: Boolean(watch('conditions.disabled')),
+              // Skip receivesSsi as it's not a direct toggle but set by a different control
+            }}
+            onChange={(newValues) => {
+              // Create a new conditions object that preserves correct types
+              const conditions = {
+                survivingSpouse: newValues.survivingSpouse,
+                disabled: newValues.disabled
+              };
+              
+              setValue('conditions', conditions, { shouldValidate: true, shouldDirty: true });
+            }}
           />
         </Stack>
         {getValues('conditions.disabled') && createReceivesSsiQuestion()}
@@ -590,7 +607,7 @@ const ECHouseholdMemberForm = () => {
               {errors.incomeStreams?.[index]?.incomeStreamName !== undefined && (
                 <FormHelperText sx={{ ml: 0 }}>
                   <ErrorMessageWrapper fontSize="1rem">
-                    {errors.incomeStreams?.[index]?.incomeStreamName.message}
+                    {errors.incomeStreams?.[index]?.incomeStreamName?.message}
                   </ErrorMessageWrapper>
                 </FormHelperText>
               )}
@@ -670,7 +687,7 @@ const ECHouseholdMemberForm = () => {
                   {errors.incomeStreams?.[index]?.incomeFrequency !== undefined && (
                     <FormHelperText sx={{ ml: 0 }}>
                       <ErrorMessageWrapper fontSize="1rem">
-                        {errors.incomeStreams?.[index]?.incomeFrequency.message}
+                        {errors.incomeStreams?.[index]?.incomeFrequency?.message}
                       </ErrorMessageWrapper>
                     </FormHelperText>
                   )}
@@ -720,7 +737,7 @@ const ECHouseholdMemberForm = () => {
               {errors.incomeStreams?.[index]?.hoursPerWeek !== undefined && (
                 <FormHelperText sx={{ ml: 0 }}>
                   <ErrorMessageWrapper fontSize="1rem">
-                    {errors.incomeStreams?.[index]?.hoursPerWeek.message}
+                    {errors.incomeStreams?.[index]?.hoursPerWeek?.message}
                   </ErrorMessageWrapper>
                 </FormHelperText>
               )}
@@ -797,7 +814,7 @@ const ECHouseholdMemberForm = () => {
               {errors.incomeStreams?.[index]?.incomeAmount !== undefined && (
                 <FormHelperText sx={{ ml: 0 }}>
                   <ErrorMessageWrapper fontSize="1rem">
-                    {errors.incomeStreams?.[index]?.incomeAmount.message}
+                    {errors.incomeStreams?.[index]?.incomeAmount?.message}
                   </ErrorMessageWrapper>
                 </FormHelperText>
               )}
@@ -868,7 +885,7 @@ const ECHouseholdMemberForm = () => {
           <FormattedMessage id={formattedMsgId} defaultMessage={formattedMsgDefaultMsg} />
         </QuestionQuestion>
         <Controller
-          name="conditions.receivesSsi"
+          name="receivesSsi"
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
@@ -903,7 +920,14 @@ const ECHouseholdMemberForm = () => {
         )}
       </QuestionHeader>
       <HHMSummaryCards
-        activeMemberData={getValues()}
+        activeMemberData={{
+          ...getValues(),
+          id: formData.householdData[currentMemberIndex]?.id ?? crypto.randomUUID(),
+          frontendId: formData.householdData[currentMemberIndex]?.frontendId ?? crypto.randomUUID(),
+          birthYear: getValues().birthYear ? Number(getValues().birthYear) : undefined,
+          birthMonth: getValues().birthMonth ? Number(getValues().birthMonth) : undefined,
+          hasIncome: Boolean(getValues().hasIncome),
+        }}
         triggerValidation={trigger}
         questionName="energyCalculatorHouseholdData"
       />

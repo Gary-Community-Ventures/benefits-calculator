@@ -1,10 +1,11 @@
 import { useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper.tsx';
+import { WrapperContext } from '../../Types/WrapperContext';
+import { Context } from '../Wrapper/Wrapper';
 import { FormattedMessage } from 'react-intl';
 import { ReactComponent as WarningIcon } from '../../Assets/icons/General/warning.svg';
 import './BackToScreen.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import dataLayerPush from '../../Assets/analytics.ts';
+import dataLayerPush from '../../Assets/analytics';
 
 const BackToScreen = () => {
   const { uuid } = useParams();

@@ -19,10 +19,12 @@ const Footer = () => {
   const footerLogoClass = getReferrer('footerLogoClass', ''); // Provide empty string as fallback
   const logoClassName = footerLogoClass ? `${baseLogoClass} ${footerLogoClass}` : baseLogoClass;
 
+  const { theme } = context;
   const { email } = footerData;
+
   return (
     <footer>
-      <Paper elevation={0} sx={{ width: '100%', backgroundColor: 'var(--footer-color)' }} square={true}>
+      <Paper elevation={0} sx={{ width: '100%', backgroundColor: theme.footerColor }} square={true}>
         <div className="footer-content-container">
           <div>
             {useLogo('logoFooterSource', 'logoFooterAlt', logoClassName)}

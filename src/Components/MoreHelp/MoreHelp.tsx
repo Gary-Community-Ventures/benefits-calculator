@@ -1,5 +1,5 @@
 import { FormattedMessage } from 'react-intl';
-import { useConfig } from '../Config/configHook.tsx';
+import { useConfig } from '../Config/configHook';
 import './MoreHelp.css';
 
 type Resource = {
@@ -11,7 +11,7 @@ type Resource = {
 };
 
 const MoreHelp = () => {
-  const { moreHelpOptions } = useConfig('more_help_options');
+  const { moreHelpOptions } = useConfig<{ moreHelpOptions: Resource[] }>('more_help_options');
   const resources: Resource[] = moreHelpOptions;
 
   const displayResources = (resources: Resource[]) => {

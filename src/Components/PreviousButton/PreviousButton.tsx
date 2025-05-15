@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { useContext } from 'react';
-import { Context } from '../Wrapper/Wrapper.tsx';
+import { Context } from '../Wrapper/Wrapper';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
