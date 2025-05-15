@@ -106,6 +106,7 @@ export function useUpdateFormData() {
         gasProvider: response.energy_calculator.gas_provider,
         electricityIsDisconnected: response.energy_calculator.electricity_is_disconnected,
         hasPastDueEnergyBills: response.energy_calculator.has_past_due_energy_bills,
+        hasOldCar: response.energy_calculator.has_old_car,
         needsWaterHeater: response.energy_calculator.needs_water_heater,
         needsHvac: response.energy_calculator.needs_hvac,
         needsStove: response.energy_calculator.needs_stove,

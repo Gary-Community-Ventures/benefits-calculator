@@ -134,6 +134,7 @@ const getEnergyCalculatorFormDataBody = (
     gas_provider: energyCalculatorFormData.gasProvider,
     electricity_is_disconnected: energyCalculatorFormData.electricityIsDisconnected,
     has_past_due_energy_bills: energyCalculatorFormData.hasPastDueEnergyBills,
+    has_old_car: energyCalculatorFormData.hasOldCar,
     needs_water_heater: energyCalculatorFormData.needsWaterHeater,
     needs_hvac: energyCalculatorFormData.needsHvac,
     needs_stove: energyCalculatorFormData.needsStove,
