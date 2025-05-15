@@ -31,7 +31,7 @@ const Utilities = () => {
       text: (
         <FormattedMessage
           id="utilityStatusOptions.electricityIsDisconnected"
-          defaultMessage="Your electricity and/or gas has been disconnected."
+          defaultMessage="Your electricity and/or gas is currently disconnected."
         />
       ),
     },

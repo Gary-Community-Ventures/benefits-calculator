@@ -37,7 +37,7 @@ const UtilityStatus = () => {
         <p style={{ marginBottom: '.5rem' }}>
           <FormattedMessage
             id="energyCalculator.confirmation.energyIsDisconnected"
-            defaultMessage="Your electricity and/or gas has been disconnected"
+            defaultMessage="Your electricity and/or gas is currently disconnected."
           />
         </p>
       )}
