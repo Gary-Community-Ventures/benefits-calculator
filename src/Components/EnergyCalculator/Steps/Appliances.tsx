@@ -21,24 +21,17 @@ import useStepForm from '../../Steps/stepForm';
 export const applianceStatusOptions = {
   needsWaterHeater: {
     icon: <WaterHeater className="option-card-icon" />,
-    text: <FormattedMessage
-      id="applianceStatusOptions.needsWaterHeater"
-      defaultMessage="Water Heater"
-    />,
+    text: <FormattedMessage id="applianceStatusOptions.needsWaterHeater" defaultMessage="Water Heater" />,
   },
   needsHvac: {
     icon: <Heater className="option-card-icon" />,
-    text: <FormattedMessage
-      id="applianceStatusOptions.needsHvac"
-      defaultMessage="Heating, ventilation, and/or cooling"
-    />,
+    text: (
+      <FormattedMessage id="applianceStatusOptions.needsHvac" defaultMessage="Heating, ventilation, and/or cooling" />
+    ),
   },
   needsStove: {
     icon: <Stove className="option-card-icon" />,
-    text: <FormattedMessage
-      id="applianceStatusOptions.needsStove"
-      defaultMessage="Cooking stove/range"
-    />,
+    text: <FormattedMessage id="applianceStatusOptions.needsStove" defaultMessage="Cooking stove/range" />,
   },
 };
 
@@ -103,19 +96,21 @@ const Appliances = () => {
           options={Object.entries(applianceStatusOptions).map(([key, option]) => ({
             value: key,
             text: option.text,
-            icon: option.icon
+            icon: option.icon,
           }))}
-          values={watch('energyCalculator') || {
-            needsWaterHeater: false,
-            needsHvac: false,
-            needsStove: false
-          }}
+          values={
+            watch('energyCalculator') || {
+              needsWaterHeater: false,
+              needsHvac: false,
+              needsStove: false,
+            }
+          }
           onChange={(newValues) => {
             // Cast to the expected type structure to satisfy TypeScript
             const typedValues = {
               needsWaterHeater: newValues.needsWaterHeater || false,
               needsHvac: newValues.needsHvac || false,
-              needsStove: newValues.needsStove || false
+              needsStove: newValues.needsStove || false,
             };
             setValue('energyCalculator', typedValues, { shouldValidate: true, shouldDirty: true });
           }}

@@ -45,11 +45,10 @@ const RHFOptionCardGroup = <T extends FieldValues>({
 
   const handleOptionCardClick = async (optionName: string) => {
     const updatedValue = !fields[optionName];
-    setValue(
-      `${name}.${optionName}` as Path<T>,
-      updatedValue as PathValue<T, Path<T>>,
-      { shouldValidate: true, shouldDirty: true }
-    );
+    setValue(`${name}.${optionName}` as Path<T>, updatedValue as PathValue<T, Path<T>>, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
 
     if (triggerValidation) {
       await triggerValidation(name);

@@ -950,18 +950,18 @@ const HouseholdMemberForm = () => {
         )}
       </QuestionHeader>
 
-      <HHMSummaryCards 
-  activeMemberData={{
-    ...getValues(),
-    id: formData.householdData[currentMemberIndex]?.id ?? crypto.randomUUID(),
-    frontendId: formData.householdData[currentMemberIndex]?.frontendId ?? crypto.randomUUID(),
-    birthYear: getValues().birthYear ? Number(getValues().birthYear) : undefined,
-    birthMonth: getValues().birthMonth ? Number(getValues().birthMonth) : undefined,
-    hasIncome: Boolean(getValues().hasIncome),
-  }}
-  triggerValidation={trigger}
-  questionName="householdData"
-/>
+      <HHMSummaryCards
+        activeMemberData={{
+          ...getValues(),
+          id: formData.householdData[currentMemberIndex]?.id ?? crypto.randomUUID(),
+          frontendId: formData.householdData[currentMemberIndex]?.frontendId ?? crypto.randomUUID(),
+          birthYear: getValues().birthYear ? Number(getValues().birthYear) : undefined,
+          birthMonth: getValues().birthMonth ? Number(getValues().birthMonth) : undefined,
+          hasIncome: Boolean(getValues().hasIncome),
+        }}
+        triggerValidation={trigger}
+        questionName="householdData"
+      />
       <form
         onSubmit={handleSubmit(formSubmitHandler, () => {
           window.scroll({ top: 0, left: 0, behavior: 'smooth' });

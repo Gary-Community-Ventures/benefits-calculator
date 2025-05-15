@@ -177,7 +177,7 @@ export const Filter = () => {
             horizontal: 'left',
           }}
           transformOrigin={{ vertical: 2, horizontal: 0 }}
-          aria-label={intl.formatMessage(citizenshipFiltersModalALProps)}          
+          aria-label={intl.formatMessage(citizenshipFiltersModalALProps)}
         >
           <div className="filters-close-button">
             <IconButton
