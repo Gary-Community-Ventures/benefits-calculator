@@ -1,5 +1,5 @@
 import { FormData } from './FormData';
-import { ITheme } from '../Assets/styleController';
+import { ITheme, ThemeName } from '../Assets/styleController';
 import { ReferrerData, ReferrerDataValue } from '../Components/Referrer/referrerHook';
 import { Language } from '../Assets/languageOptions';
 import { Config } from './Config';
@@ -12,7 +12,7 @@ export interface WrapperContext {
   configLoading: boolean;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   theme: ITheme;
-  setTheme: React.Dispatch<React.SetStateAction<'default' | 'twoOneOne' | 'twoOneOneNC'>>;
+  setTheme: React.Dispatch<React.SetStateAction<ThemeName>>;
   styleOverride: any;
   stepLoading: boolean;
   setStepLoading: (loading: boolean) => void;

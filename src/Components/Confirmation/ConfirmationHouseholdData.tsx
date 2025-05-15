@@ -163,7 +163,7 @@ const DefaultConfirmationHHData = () => {
 
       const youVsThemHealthInsuranceOptions = i === 0 ? healthInsuranceOptions.you : healthInsuranceOptions.them;
 
-      const allOtherSelectedOptions = Object.entries(insurance)
+      const allOtherSelectedOptions = Object.entries(insurance ?? {})
         .filter((hHMemberInsEntry) => hHMemberInsEntry[1] === true)
         .map((insurance) => {
           const formattedMessageProp = youVsThemHealthInsuranceOptions[insurance[0]].text.props;
