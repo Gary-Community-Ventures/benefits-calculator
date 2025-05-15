@@ -434,11 +434,13 @@ const ECHouseholdMemberForm = () => {
             />
           </QuestionDescription>
           <MultiSelectTiles
-            options={Object.entries(pageNumber === 1 ? conditionOptions.you : conditionOptions.them).map(([key, option]) => ({
-              value: key,
-              text: option.text,
-              icon: option.icon
-            }))}
+            options={Object.entries(pageNumber === 1 ? conditionOptions.you : conditionOptions.them).map(
+              ([key, option]) => ({
+                value: key,
+                text: option.text,
+                icon: option.icon,
+              }),
+            )}
             values={{
               survivingSpouse: Boolean(watch('conditions.survivingSpouse')),
               disabled: Boolean(watch('conditions.disabled')),
@@ -448,9 +450,9 @@ const ECHouseholdMemberForm = () => {
               // Create a new conditions object that preserves correct types
               const conditions = {
                 survivingSpouse: newValues.survivingSpouse,
-                disabled: newValues.disabled
+                disabled: newValues.disabled,
               };
-              
+
               setValue('conditions', conditions, { shouldValidate: true, shouldDirty: true });
             }}
           />
