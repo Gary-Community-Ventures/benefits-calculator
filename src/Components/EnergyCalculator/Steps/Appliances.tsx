@@ -11,7 +11,7 @@ import { ReactComponent as WaterHeater } from '../Icons/WaterHeater.svg';
 import { ReactComponent as Heater } from '../Icons/Heat.svg';
 import { ReactComponent as Stove } from '../Icons/Stove.svg';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import useScreenApi from '../../../Assets/updateScreen';

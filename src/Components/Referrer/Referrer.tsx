@@ -14,24 +14,27 @@ import TwoOneOneHeaderNC from '../TwoOneOneNCComponents/TwoOneOneHeaderNC/TwoOne
 import TwoOneOneFooterNC from '../TwoOneOneNCComponents/TwoOneOneFooterNC/TwoOneOneFooterNC';
 
 export const BrandedHeader = () => {
-  const { formData } = useContext(Context);
+  const { formData, getReferrer } = useContext(Context);
 
-  if (formData.immutableReferrer === '211co') {
+  if (getReferrer('featureFlags').includes('211co')) {
     return <TwoOneOneHeaderCO />;
   }
-  if (formData.immutableReferrer === '211nc') {
+
+  if (getReferrer('featureFlags').includes('211nc')) {
     return <TwoOneOneHeaderNC />;
   }
+
   return <Header />;
 };
 
 export const BrandedFooter = () => {
   const { formData, getReferrer } = useContext(Context);
 
-  if (formData.immutableReferrer === '211co') {
+  if (getReferrer('featureFlags').includes('211co')) {
     return <TwoOneOneFooterCO />;
   }
-  if (formData.immutableReferrer === '211nc') {
+
+  if (getReferrer('featureFlags').includes('211nc')) {
     return <TwoOneOneFooterNC />;
   }
 
@@ -41,6 +44,7 @@ export const BrandedFooter = () => {
 
   return <Footer />;
 };
+
 export const ResultsMessageForNeeds = () => {
   const { getReferrer } = useContext(Context);
   const featureFlags = getReferrer('featureFlags');

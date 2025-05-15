@@ -161,6 +161,9 @@ const Results = ({ type }: ResultsProps) => {
     otherHealthCarePregnant: false,
     notPregnantOrUnder19ForOmniSalud: false,
     notPregnantOrUnder19ForEmergencyMedicaid: false,
+    notPregnantForMassHealthLimited: false,
+    notPregnantOrChildForMassHealthLimited: false,
+    otherHealthCareUnder21: false,
   });
   const [programs, setPrograms] = useState<Program[]>([]);
   const [programCategories, setProgramCategories] = useState<ProgramCategory[]>([]);
