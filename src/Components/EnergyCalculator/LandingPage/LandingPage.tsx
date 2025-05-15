@@ -20,7 +20,10 @@ const LandingPage = () => {
   return (
     <main className="energy-calculator-container">
       <QuestionHeader>
-        <FormattedMessage id="energyCalculator-landingPage.qHeader" defaultMessage="Colorado Energy Savings Finder" />
+        <FormattedMessage
+          id="energyCalculator-landingPage.qHeader"
+          defaultMessage="Colorado Energy Savings Navigator"
+        />
       </QuestionHeader>
       <article className="energy-calculator-body-text">
         <p>
