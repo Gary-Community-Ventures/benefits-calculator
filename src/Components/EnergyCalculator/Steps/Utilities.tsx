@@ -9,6 +9,7 @@ import { SubmitHandler } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { ReactComponent as Plug } from '../Icons/Plug.svg';
 import { ReactComponent as LowFuel } from '../Icons/LowFuel.svg';
+import { ReactComponent as Car } from '../Icons/Car.svg';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import { useContext } from 'react';
@@ -42,12 +43,22 @@ const Utilities = () => {
         },
       },
     },
+    hasOldCar: {
+      icon: <Car className="option-card-icon" />,
+      text: {
+        props: {
+          id: 'utilityStatusOptions.oldCar',
+          defaultMessage: 'Have a gas or diesel-powered vehicle 12+ years old or has failed an emissions test',
+        },
+      },
+    },
   };
 
   const formSchema = z.object({
     energyCalculator: z.object({
       electricityIsDisconnected: z.boolean(),
       hasPastDueEnergyBills: z.boolean(),
+      hasOldCar: z.boolean(),
     }),
   });
 
@@ -59,6 +70,7 @@ const Utilities = () => {
       energyCalculator: {
         electricityIsDisconnected: formData.energyCalculator?.electricityIsDisconnected ?? false,
         hasPastDueEnergyBills: formData.energyCalculator?.hasPastDueEnergyBills ?? false,
+        hasOldCar: formData.energyCalculator?.hasOldCar ?? false,
       },
     },
     questionName: 'energyCalculatorUtilityStatus',
@@ -81,7 +93,10 @@ const Utilities = () => {
   return (
     <>
       <QuestionHeader>
-        <FormattedMessage id="questions.energyCalculator-utilities" defaultMessage="Tell us about your utilities" />
+        <FormattedMessage
+          id="qcc.tell-us-final-text"
+          defaultMessage="Tell us some final information about your household."
+        />
       </QuestionHeader>
       <QuestionQuestion>
         <FormattedMessage
