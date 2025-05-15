@@ -18,6 +18,7 @@ export function useEnergyFormData(
         gasProvider: '',
         electricityIsDisconnected: false,
         hasPastDueEnergyBills: false,
+        hasOldCar: false,
         needsHvac: false,
         needsStove: false,
         needsWaterHeater: false,
