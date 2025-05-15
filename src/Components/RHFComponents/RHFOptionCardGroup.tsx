@@ -8,13 +8,9 @@ import '../OptionCardGroup/OptionCardGroup.css';
 import { Context } from '../Wrapper/Wrapper';
 import { useContext } from 'react';
 
-type IconType =
-  | React.ReactNode // // For energy_calculator options
-  | { _icon: string; _classname: string }; // // For nested config options
+type IconType = React.ReactNode;
 
-type TextType =
-  | { props: { id: string; default_message: string } } // For energy_calculator options
-  | { _label: string; _default_message: string }; // For nested config options
+type TextType = { props: { id: string; defaultMessage: string } };
 
 type Option = {
   icon: IconType;
@@ -61,7 +57,7 @@ const RHFOptionCardGroup = <T extends FieldValues>({
     const optionCards = Object.keys(options).map((optionKey, index) => {
       const translatedAriaLabel = intl.formatMessage({
         id: options[optionKey].text.props.id,
-        defaultMessage: options[optionKey].text.props.default_message,
+        defaultMessage: options[optionKey].text.props.defaultMessage,
       });
 
       const isSelected = values[optionKey];
