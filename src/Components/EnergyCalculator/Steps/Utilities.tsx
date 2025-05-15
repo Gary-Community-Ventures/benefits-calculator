@@ -24,30 +24,34 @@ const Utilities = () => {
   const { updateScreen } = useScreenApi();
   const energyDataAvailable = useEnergyFormData(formData);
   const backNavigationFunction = useDefaultBackNavigationFunction('energyCalculatorUtilityStatus');
-  
+
   const utilityStatusOptions = {
     electricityIsDisconnected: {
       icon: <Plug className="option-card-icon" />,
-      text: <FormattedMessage 
-              id="utilityStatusOptions.electricityIsDisconnected"
-              defaultMessage="Your electricity and/or gas has been disconnected."
-            />,
+      text: (
+        <FormattedMessage
+          id="utilityStatusOptions.electricityIsDisconnected"
+          defaultMessage="Your electricity and/or gas has been disconnected."
+        />
+      ),
     },
     hasPastDueEnergyBills: {
       icon: <LowFuel className="option-card-icon" />,
-      text: <FormattedMessage 
-              id="utilityStatusOptions.hasPastDueEnergyBills"
-              defaultMessage="You have a past-due electric or heating bill or you are low on fuel."
-            />,
+      text: (
+        <FormattedMessage
+          id="utilityStatusOptions.hasPastDueEnergyBills"
+          defaultMessage="You have a past-due electric or heating bill or you are low on fuel."
+        />
+      ),
     },
     hasOldCar: {
       icon: <Car className="option-card-icon" />,
-      text: {
-        props: {
-          id: 'utilityStatusOptions.oldCar',
-          defaultMessage: 'Have a gas or diesel-powered vehicle 12+ years old or has failed an emissions test',
-        },
-      },
+      text: (
+        <FormattedMessage
+          id="utilityStatusOptions.oldCar"
+          defaultMessage="Have a gas or diesel-powered vehicle 12+ years old or has failed an emissions test."
+        />
+      ),
     },
   };
 
@@ -109,17 +113,19 @@ const Utilities = () => {
           options={Object.entries(utilityStatusOptions).map(([key, option]) => ({
             value: key,
             text: option.text,
-            icon: option.icon
+            icon: option.icon,
           }))}
-          values={watch('energyCalculator') || {
-            electricityIsDisconnected: false,
-            hasPastDueEnergyBills: false
-          }}
+          values={
+            watch('energyCalculator') || {
+              electricityIsDisconnected: false,
+              hasPastDueEnergyBills: false,
+            }
+          }
           onChange={(newValues) => {
             // Cast to the expected type structure to satisfy TypeScript
             const typedValues = {
               electricityIsDisconnected: newValues.electricityIsDisconnected || false,
-              hasPastDueEnergyBills: newValues.hasPastDueEnergyBills || false
+              hasPastDueEnergyBills: newValues.hasPastDueEnergyBills || false,
             };
             setValue('energyCalculator', typedValues, { shouldValidate: true, shouldDirty: true });
           }}
