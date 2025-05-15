@@ -119,6 +119,7 @@ const Utilities = () => {
             watch('energyCalculator') || {
               electricityIsDisconnected: false,
               hasPastDueEnergyBills: false,
+              hasOldCar: false,
             }
           }
           onChange={(newValues) => {
@@ -126,6 +127,7 @@ const Utilities = () => {
             const typedValues = {
               electricityIsDisconnected: newValues.electricityIsDisconnected || false,
               hasPastDueEnergyBills: newValues.hasPastDueEnergyBills || false,
+              hasOldCar: newValues.hasOldCar || false,
             };
             setValue('energyCalculator', typedValues, { shouldValidate: true, shouldDirty: true });
           }}
