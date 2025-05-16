@@ -24,7 +24,7 @@ import {
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useStepNumber } from '../../../Assets/stepDirectory';
 import * as z from 'zod';
-import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MONTHS } from './MONTHS';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';

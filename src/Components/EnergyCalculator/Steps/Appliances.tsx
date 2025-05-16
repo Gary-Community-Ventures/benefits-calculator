@@ -89,7 +89,10 @@ const Appliances = () => {
         />
       </QuestionQuestion>
       <QuestionDescription>
-        <FormattedMessage id="questions.energyCalculator-appliances-q-desc" defaultMessage="Select all that apply." />
+        <FormattedMessage
+          id="questions.energyCalculator-appliances-q-desc"
+          defaultMessage="Select all that apply. Your selection(s) will help surface programs about rebates and incentives that can assist you in future purchases."
+        />
       </QuestionDescription>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <MultiSelectTiles

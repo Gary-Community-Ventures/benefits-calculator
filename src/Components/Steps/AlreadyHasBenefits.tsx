@@ -18,6 +18,7 @@ import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { Context } from '../Wrapper/Wrapper';
 import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
 import useStepForm from './stepForm';
+import { OverrideableTranslation } from '../../Assets/languageOptions';
 
 type CategoryBenefitsConfig = {
   [key: string]: {
@@ -191,7 +192,7 @@ function AlreadyHasBenefits() {
         />
       </QuestionHeader>
       <QuestionQuestion>
-        <FormattedMessage
+        <OverrideableTranslation
           id="questions.hasBenefits"
           defaultMessage="Does your household currently have any benefits?"
         />
