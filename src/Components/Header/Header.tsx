@@ -24,6 +24,10 @@ const Header = () => {
       return `/step-1${queryString}`;
     }
 
+    if (getReferrer('featureFlags').includes('logo_landing_page_link')) {
+      return `/${whiteLabel}/landing-page${queryString}`;
+    }
+
     return `/${whiteLabel}/step-1${queryString}`;
   }, [whiteLabel]);
 
