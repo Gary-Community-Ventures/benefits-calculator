@@ -24,7 +24,7 @@ import {
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { useStepNumber } from '../../../Assets/stepDirectory';
 import * as z from 'zod';
-import { Controller, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MONTHS } from './MONTHS';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
@@ -337,10 +337,11 @@ const HouseholdMemberForm = () => {
     const updatedHouseholdData = [...formData.householdData];
     updatedHouseholdData[currentMemberIndex] = {
       ...memberData,
+      id: formData.householdData[currentMemberIndex]?.id ?? crypto.randomUUID(),
+      frontendId: formData.householdData[currentMemberIndex]?.frontendId ?? crypto.randomUUID(),
       birthYear: Number(memberData.birthYear),
       birthMonth: Number(memberData.birthMonth),
       hasIncome: memberData.hasIncome === 'true',
-      frontendId: crypto.randomUUID(),
     };
     const updatedFormData = { ...formData, householdData: updatedHouseholdData };
     await updateScreen(updatedFormData);
@@ -481,7 +482,7 @@ const HouseholdMemberForm = () => {
           {displayHealthCareQuestion()}
           <RHFOptionCardGroup
             fields={watch('healthInsurance')}
-            setValue={setValue}
+            setValue={setValue as unknown as (name: string, value: unknown, config?: Object) => void}
             name="healthInsurance"
             options={pageNumber === 1 ? healthInsuranceOptions.you : healthInsuranceOptions.them}
             triggerValidation={trigger}
@@ -518,7 +519,7 @@ const HouseholdMemberForm = () => {
         </QuestionDescription>
         <RHFOptionCardGroup
           fields={watch('conditions')}
-          setValue={setValue}
+          setValue={setValue as unknown as (name: string, value: unknown, config?: Object) => void}
           name="conditions"
           options={pageNumber === 1 ? conditionOptions.you : conditionOptions.them}
         />
@@ -674,7 +675,7 @@ const HouseholdMemberForm = () => {
               {errors.incomeStreams?.[index]?.incomeStreamName !== undefined && (
                 <FormHelperText sx={{ ml: 0 }}>
                   <ErrorMessageWrapper fontSize="1rem">
-                    {errors.incomeStreams?.[index]?.incomeStreamName.message}
+                    {errors.incomeStreams?.[index]?.incomeStreamName?.message ?? ''}
                   </ErrorMessageWrapper>
                 </FormHelperText>
               )}
@@ -754,7 +755,7 @@ const HouseholdMemberForm = () => {
                   {errors.incomeStreams?.[index]?.incomeFrequency !== undefined && (
                     <FormHelperText sx={{ ml: 0 }}>
                       <ErrorMessageWrapper fontSize="1rem">
-                        {errors.incomeStreams?.[index]?.incomeFrequency.message}
+                        {errors.incomeStreams?.[index]?.incomeFrequency?.message ?? ''}
                       </ErrorMessageWrapper>
                     </FormHelperText>
                   )}
@@ -804,7 +805,7 @@ const HouseholdMemberForm = () => {
               {errors.incomeStreams?.[index]?.hoursPerWeek !== undefined && (
                 <FormHelperText sx={{ ml: 0 }}>
                   <ErrorMessageWrapper fontSize="1rem">
-                    {errors.incomeStreams?.[index]?.hoursPerWeek.message}
+                    {errors.incomeStreams?.[index]?.hoursPerWeek?.message ?? ''}
                   </ErrorMessageWrapper>
                 </FormHelperText>
               )}
@@ -881,7 +882,7 @@ const HouseholdMemberForm = () => {
               {errors.incomeStreams?.[index]?.incomeAmount !== undefined && (
                 <FormHelperText sx={{ ml: 0 }}>
                   <ErrorMessageWrapper fontSize="1rem">
-                    {errors.incomeStreams?.[index]?.incomeAmount.message}
+                    {errors.incomeStreams?.[index]?.incomeAmount?.message ?? ''}
                   </ErrorMessageWrapper>
                 </FormHelperText>
               )}
@@ -949,7 +950,18 @@ const HouseholdMemberForm = () => {
         )}
       </QuestionHeader>
 
-      <HHMSummaryCards activeMemberData={getValues()} triggerValidation={trigger} questionName="householdData" />
+      <HHMSummaryCards
+        activeMemberData={{
+          ...getValues(),
+          id: formData.householdData[currentMemberIndex]?.id ?? crypto.randomUUID(),
+          frontendId: formData.householdData[currentMemberIndex]?.frontendId ?? crypto.randomUUID(),
+          birthYear: getValues().birthYear ? Number(getValues().birthYear) : undefined,
+          birthMonth: getValues().birthMonth ? Number(getValues().birthMonth) : undefined,
+          hasIncome: Boolean(getValues().hasIncome),
+        }}
+        triggerValidation={trigger}
+        questionName="householdData"
+      />
       <form
         onSubmit={handleSubmit(formSubmitHandler, () => {
           window.scroll({ top: 0, left: 0, behavior: 'smooth' });

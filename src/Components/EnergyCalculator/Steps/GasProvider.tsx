@@ -99,7 +99,10 @@ export default function GasProvider() {
         <FormattedMessage id="energyCalculator.gasProvider.header" defaultMessage="Tell us about your utilities" />
       </QuestionHeader>
       <QuestionQuestion>
-        <FormattedMessage id="energyCalculator.gasProvider.question" defaultMessage="How do you heat your home?" />
+        <FormattedMessage
+          id="energyCalculator.gasProvider.question"
+          defaultMessage="What is your home's heating source?"
+        />
       </QuestionQuestion>
       <QuestionDescription>
         <FormattedMessage

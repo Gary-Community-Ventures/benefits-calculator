@@ -103,13 +103,13 @@ const Disclaimer = () => {
       <section className="disclaimer-text-section">
         <FormattedMessage
           id="energyCalculatorDisclaimer.body"
-          defaultMessage="The Colorado Energy Navigator is a tool that can help determine energy-related bill assistance and rebates you are likely eligible for. Here's what you should know before you get started:"
+          defaultMessage="The Colorado Energy Savings Navigator is a tool that can help determine energy-related bill assistance and rebates you are likely eligible for. Here's what you should know before you get started:"
         />
         <ul className="disclaimer-list-container">
           <li>
             <FormattedMessage
               id="energyCalculatorDisclaimer.firstBulletItem"
-              defaultMessage="The Colorado Energy Navigator only provides estimates of what you may qualify for. You should not rely on these estimates. You must confirm your final eligibility and benefit amount with the proper agency or other decision maker."
+              defaultMessage="The Colorado Energy Savings Navigator only provides estimates of what you may qualify for. You should not rely on these estimates. You must confirm your final eligibility and benefit amount with the proper agency or other decision maker."
             />
           </li>
           <li>

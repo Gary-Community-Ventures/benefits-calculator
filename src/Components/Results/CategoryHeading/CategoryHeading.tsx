@@ -5,11 +5,18 @@ import { ReactComponent as Transportation } from '../../../Assets/icons/Programs
 import { ReactComponent as TaxCredits } from '../../../Assets/icons/Programs/CategoryHeading/taxCredits.svg';
 import { ReactComponent as CashAssistance } from '../../../Assets/icons/Programs/CategoryHeading/cashAssistant.svg';
 import { ReactComponent as ChildCareYouthEducation } from '../../../Assets/icons/Programs/CategoryHeading/childCareYouthEducation.svg';
+import { ReactComponent as WaterHeater } from '../../EnergyCalculator/Icons/WaterHeater.svg';
+import { ReactComponent as LightBulb } from '../../../Assets/icons/UrgentNeeds/AcuteConditions/housing.svg';
+import { ReactComponent as Heat } from '../../EnergyCalculator/Icons/Heat.svg';
+import { ReactComponent as LowFuel } from '../../EnergyCalculator/Icons/LowFuel.svg';
+import { ReactComponent as Talk } from '../../../Assets/icons/UrgentNeeds/AcuteConditions/support.svg';
 import { calculateTotalValue, formatToUSD } from '../FormattedValue';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ResultsTranslate from '../Translate/Translate';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { ProgramCategory } from '../../../Types/Results';
+import { useContext } from 'react';
+import { Context } from '../../Wrapper/Wrapper';
 
 export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   housing: Housing,
@@ -19,6 +26,11 @@ export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   tax_credit: TaxCredits,
   cash: CashAssistance,
   child_care: ChildCareYouthEducation,
+  water_heater: WaterHeater,
+  light_bulb: LightBulb,
+  heat: Heat,
+  low_fuel: LowFuel,
+  talk: Talk,
 };
 
 type CategoryHeadingProps = {
@@ -26,7 +38,8 @@ type CategoryHeadingProps = {
   showAmount?: boolean;
 };
 
-const CategoryHeading = ({ category, showAmount = true }: CategoryHeadingProps) => {
+const CategoryHeading = ({ category, showAmount }: CategoryHeadingProps) => {
+  const { getReferrer } = useContext(Context);
   const intl = useIntl();
   const translateNumber = useTranslateNumber();
 
@@ -38,6 +51,8 @@ const CategoryHeading = ({ category, showAmount = true }: CategoryHeadingProps) 
   }
 
   const monthlyCategoryAmt = calculateTotalValue(category) / 12;
+  const shouldShowAmount = showAmount ?? !getReferrer('featureFlags').includes('dont_show_category_values');
+
   const categoryImageAriaLabelProps = {
     id: category.name.label,
     defaultMessage: category.name.default_message,
@@ -59,7 +74,7 @@ const CategoryHeading = ({ category, showAmount = true }: CategoryHeadingProps) 
             <ResultsTranslate translation={category.name} />
           </h2>
         </div>
-        {showAmount && monthlyCategoryAmt !== 0 && (
+        {shouldShowAmount && monthlyCategoryAmt !== 0 && (
           <div className="box-right">
             <h2 className="category-heading-text-style normal-weight">
               {translateNumber(formatToUSD(monthlyCategoryAmt))}

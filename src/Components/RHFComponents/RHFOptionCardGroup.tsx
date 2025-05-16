@@ -3,29 +3,25 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea, Typography, Stack, Box } from '@mui/material';
 import { ReactComponent as Checkmark } from '../../Assets/icons/General/OptionCard/checkmark.svg';
-import { FieldValues, Path, UseFormTrigger } from 'react-hook-form';
+import { FieldValues, Path, PathValue, UseFormTrigger, UseFormSetValue } from 'react-hook-form';
 import '../OptionCardGroup/OptionCardGroup.css';
 import { Context } from '../Wrapper/Wrapper';
 import { useContext } from 'react';
 
-type IconType =
-  | React.ReactNode // // For energy_calculator options
-  | { _icon: string; _classname: string }; // // For nested config options
+type IconType = React.ReactNode;
 
-type TextType =
-  | { props: { id: string; default_message: string } } // For energy_calculator options
-  | { _label: string; _default_message: string }; // For nested config options
+type TextType = { props: { id: string; defaultMessage: string } };
 
 type Option = {
   icon: IconType;
   text: TextType;
 };
 
-type Options = Record<string, Option | Record<string, Option>>;
+export type Options = Record<string, Option | Record<string, Option>>;
 
 type RHFOptionCardGroupProps<T extends FieldValues> = {
   fields: Record<string, boolean>;
-  setValue: (name: string, value: unknown, config?: Object) => void;
+  setValue: UseFormSetValue<T>;
   name: Path<T>;
   options: Options;
   triggerValidation?: UseFormTrigger<T>;
@@ -45,7 +41,10 @@ const RHFOptionCardGroup = <T extends FieldValues>({
 
   const handleOptionCardClick = async (optionName: string) => {
     const updatedValue = !fields[optionName];
-    setValue(`${name}.${optionName}`, updatedValue, { shouldValidate: true, shouldDirty: true });
+    setValue(`${name}.${optionName}` as Path<T>, updatedValue as PathValue<T, Path<T>>, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
 
     if (triggerValidation) {
       await triggerValidation(name);

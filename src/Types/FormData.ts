@@ -17,6 +17,7 @@ export type EnergyCalculatorFormData = {
   gasProvider: string;
   electricityIsDisconnected: boolean;
   hasPastDueEnergyBills: boolean;
+  hasOldCar: boolean;
   needsWaterHeater: boolean;
   needsHvac: boolean;
   needsStove: boolean;
@@ -35,6 +36,7 @@ export type HouseholdData = {
   birthMonth?: number;
   relationshipToHH: string;
   conditions: Conditions;
+  receivesSsi?: 'true' | 'false';
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
   energyCalculator?: EnergyCalculatorMember;

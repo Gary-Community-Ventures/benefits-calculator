@@ -7,7 +7,10 @@ import { useContext } from 'react';
 const UtilityStatus = () => {
   const { formData } = useContext(Context);
   const { energyCalculator } = formData;
-  const notApplicable = !energyCalculator?.electricityIsDisconnected && !energyCalculator?.hasPastDueEnergyBills;
+  const notApplicable =
+    !energyCalculator?.electricityIsDisconnected &&
+    !energyCalculator?.hasPastDueEnergyBills &&
+    !energyCalculator?.hasOldCar;
   const { formatMessage } = useIntl();
   const editUtilityStatusAriaLabel = {
     id: 'energyCalculator.confirmation.utilityStatus.edit-AL',
@@ -34,7 +37,7 @@ const UtilityStatus = () => {
         <p style={{ marginBottom: '.5rem' }}>
           <FormattedMessage
             id="energyCalculator.confirmation.energyIsDisconnected"
-            defaultMessage="Your electricity and/or gas has been disconnected"
+            defaultMessage="Your electricity and/or gas is currently disconnected"
           />
         </p>
       )}
@@ -43,6 +46,14 @@ const UtilityStatus = () => {
           <FormattedMessage
             id="energyCalculator.confirmation.hasPastDueEnergyBills"
             defaultMessage="You have a past-due electric or heating bill or you are low on fuel"
+          />
+        </p>
+      )}
+      {energyCalculator?.hasOldCar && (
+        <p>
+          <FormattedMessage
+            id="energyCalculator.confirmation.hasOldCar"
+            defaultMessage="You have a gas or diesel-powered vehicle that is 12+ years old or has failed an emissions test"
           />
         </p>
       )}

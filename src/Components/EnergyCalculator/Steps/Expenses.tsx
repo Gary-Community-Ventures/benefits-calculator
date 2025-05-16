@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useContext } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
 import { z } from 'zod';
@@ -9,7 +9,7 @@ import { Expense, FormData } from '../../../Types/FormData';
 import MultiSelectTiles, { MultiSelectTileOption } from '../../OptionCardGroup/MultiSelectTiles';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { ReactComponent as Housing } from '../../../Assets/icons/UrgentNeeds/AcuteConditions/housing.svg';
 import { ReactComponent as Stove } from '../Icons/Heat.svg';
@@ -94,12 +94,6 @@ export default function EnergyCalculatorExpenses() {
   const formSubmitHandler: SubmitHandler<FormSchema> = async ({ expenses }) => {
     if (!uuid) {
       throw new Error('no uuid');
-    }
-
-    if (!expenses.heating && !expenses.cooling && !expenses.electricity) {
-      setStepLoading(false);
-      navigate(`/${whiteLabel}/${uuid}/no-expenses`);
-      return;
     }
 
     const updatedExpenses: Expense[] = [];

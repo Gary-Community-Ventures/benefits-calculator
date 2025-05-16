@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import QuestionDescription from '../../QuestionComponents/QuestionDescription';
-import RHFOptionCardGroup from '../../RHFComponents/RHFOptionCardGroup';
+import MultiSelectTiles from '../../OptionCardGroup/MultiSelectTiles';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler } from 'react-hook-form';
@@ -11,7 +11,7 @@ import { ReactComponent as WaterHeater } from '../Icons/WaterHeater.svg';
 import { ReactComponent as Heater } from '../Icons/Heat.svg';
 import { ReactComponent as Stove } from '../Icons/Stove.svg';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
-import { useDefaultBackNavigationFunction, useGoToNextStep } from '../../QuestionComponents/questionHooks';
+import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 import useScreenApi from '../../../Assets/updateScreen';
@@ -21,34 +21,21 @@ import useStepForm from '../../Steps/stepForm';
 export const applianceStatusOptions = {
   needsWaterHeater: {
     icon: <WaterHeater className="option-card-icon" />,
-    text: {
-      props: {
-        id: 'applianceStatusOptions.needsWaterHeater',
-        defaultMessage: 'Water Heater',
-      },
-    },
+    text: <FormattedMessage id="applianceStatusOptions.needsWaterHeater" defaultMessage="Water Heater" />,
   },
   needsHvac: {
     icon: <Heater className="option-card-icon" />,
-    text: {
-      props: {
-        id: 'applianceStatusOptions.needsHvac',
-        defaultMessage: 'Heating, ventilation, and/or cooling',
-      },
-    },
+    text: (
+      <FormattedMessage id="applianceStatusOptions.needsHvac" defaultMessage="Heating, ventilation, and/or cooling" />
+    ),
   },
   needsStove: {
     icon: <Stove className="option-card-icon" />,
-    text: {
-      props: {
-        id: 'applianceStatusOptions.needsStove',
-        defaultMessage: 'Cooking stove/range',
-      },
-    },
+    text: <FormattedMessage id="applianceStatusOptions.needsStove" defaultMessage="Cooking stove/range" />,
   },
 };
 
-const Utilities = () => {
+const Appliances = () => {
   const { formData } = useContext(Context);
   const { uuid } = useParams();
   const { updateScreen } = useScreenApi();
@@ -102,18 +89,38 @@ const Utilities = () => {
         />
       </QuestionQuestion>
       <QuestionDescription>
-        <FormattedMessage id="questions.energyCalculator-appliances-q-desc" defaultMessage="Select all that apply." />
+        <FormattedMessage
+          id="questions.energyCalculator-appliances-q-desc"
+          defaultMessage="Select all that apply. Your selection(s) will help surface programs about rebates and incentives that can assist you in future purchases."
+        />
       </QuestionDescription>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
-        <RHFOptionCardGroup
-          fields={watch('energyCalculator')}
-          setValue={setValue}
-          name="energyCalculator"
-          options={applianceStatusOptions}
+        <MultiSelectTiles
+          options={Object.entries(applianceStatusOptions).map(([key, option]) => ({
+            value: key,
+            text: option.text,
+            icon: option.icon,
+          }))}
+          values={
+            watch('energyCalculator') || {
+              needsWaterHeater: false,
+              needsHvac: false,
+              needsStove: false,
+            }
+          }
+          onChange={(newValues) => {
+            // Cast to the expected type structure to satisfy TypeScript
+            const typedValues = {
+              needsWaterHeater: newValues.needsWaterHeater || false,
+              needsHvac: newValues.needsHvac || false,
+              needsStove: newValues.needsStove || false,
+            };
+            setValue('energyCalculator', typedValues, { shouldValidate: true, shouldDirty: true });
+          }}
         />
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
       </form>
     </>
   );
 };
-export default Utilities;
+export default Appliances;

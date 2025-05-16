@@ -6,6 +6,7 @@ export interface ITheme {
   primaryColor: string;
   secondaryColor: string;
   midBlueColor: string;
+  footerColor: string;
   secondaryBackgroundColor: string;
   hoverColor: string;
   outlineHoverBackgroundColor: string;
@@ -35,6 +36,7 @@ const themes: Themes = {
     secondaryColor: '#B85A27',
     secondaryBackgroundColor: '#FBF9FC',
     midBlueColor: '#41528C',
+    footerColor: '#41528C',
     hoverColor: '#ECDEED',
     outlineHoverColor: '#293457',
     outlineHoverBackgroundColor: '#ECDEED',
@@ -58,6 +60,7 @@ const themes: Themes = {
     primaryColor: '#005191',
     secondaryColor: '#005191',
     midBlueColor: '#005191',
+    footerColor: '#ffffff',
     secondaryBackgroundColor: '#F7F7F7',
     hoverColor: '#FFFFFF',
     outlineHoverBackgroundColor: '#005191',
@@ -82,6 +85,7 @@ const themes: Themes = {
     primaryColor: '#21296B',
     secondaryColor: '#21296B',
     midBlueColor: '#41528C',
+    footerColor: '#ffffff',
     secondaryBackgroundColor: '#F7F7F7',
     hoverColor: '#FFFFFF',
     outlineHoverBackgroundColor: '#21296B',
@@ -106,6 +110,7 @@ const themes: Themes = {
     primaryColor: '#001970',
     secondaryColor: '#001970',
     midBlueColor: '#001970',
+    footerColor: '#373737',
     secondaryBackgroundColor: '#FBFBFB',
     hoverColor: '#FFFFFF',
     outlineHoverBackgroundColor: '#FBFBFB',

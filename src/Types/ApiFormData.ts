@@ -37,6 +37,7 @@ export type ApiEnergyCalculatorFormData = {
   gas_provider: string;
   electricity_is_disconnected: boolean;
   has_past_due_energy_bills: boolean;
+  has_old_car: boolean;
   needs_water_heater: boolean;
   needs_hvac: boolean;
   needs_stove: boolean;
@@ -190,6 +191,7 @@ export type ApiFormData = {
   has_ma_maeitc: boolean | null;
   has_ma_macfc: boolean | null;
   has_co_andso: boolean | null;
+  has_co_care: boolean | null;
   has_employer_hi?: boolean | null;
   has_private_hi?: boolean | null;
   has_medicaid_hi?: boolean | null;
