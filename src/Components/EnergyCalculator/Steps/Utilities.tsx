@@ -49,7 +49,7 @@ const Utilities = () => {
       text: (
         <FormattedMessage
           id="utilityStatusOptions.oldCar"
-          defaultMessage="Have a gas or diesel-powered vehicle 12+ years old or has failed an emissions test."
+          defaultMessage="You have a gas or diesel-powered vehicle that is 12+ years old or has failed an emissions test."
         />
       ),
     },
