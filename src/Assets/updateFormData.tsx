@@ -70,6 +70,7 @@ export function useUpdateFormData() {
         ma_maeitc: response.has_ma_maeitc ?? false,
         ma_macfc: response.has_ma_macfc ?? false,
         co_andso: response.has_co_andso ?? false,
+        co_care: response.has_co_care ?? false,
       },
       referralSource: response.referral_source ?? undefined,
       immutableReferrer: response.referrer_code ?? undefined,
