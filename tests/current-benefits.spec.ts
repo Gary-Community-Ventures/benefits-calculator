@@ -71,7 +71,7 @@ test.describe('Current Benefits Pages Test', () => {
           /urgent_need\.[a-z0-9_-]+/,
         ];
 
-        for (const text of textContent as string[]) {
+        for (const text of textContent) {
           for (const pattern of untranslatedLabelPatterns) {
             if (pattern.test(text.trim())) {
               foundUntranslatedLabels.push(text.trim());
