@@ -1,0 +1,54 @@
+name: Run Playwright E2E Tests on PR to dev
+
+on:
+  pull_request:
+    branches: [dev, test-dev]
+  workflow_dispatch:  # Allows manual runs
+
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create test environment file
+        run: |
+          echo "BASE_URL=http://localhost:3000" > .env.test
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+
+      - name: Save failure summary for comment
+        if: failure()
+        run: |
+          echo "## ❌ Playwright E2E Test Failed" > e2e-summary.md
+          echo "See the [Playwright Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details." >> e2e-summary.md
+
+      - name: Comment on PR with test summary
+        if: failure()
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body-path: e2e-summary.md
