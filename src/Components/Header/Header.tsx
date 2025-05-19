@@ -16,6 +16,7 @@ const Header = () => {
   const { formData, getReferrer, whiteLabel } = context;
   const languageOptions = useConfig<{ [key: string]: string }>('language_options');
   const queryString = useQueryString();
+  const landingPageQueryString = useQueryString({ path: null });
   const intl = useIntl();
   const logoClass = getReferrer('logoClass', 'logo');
 
@@ -25,7 +26,7 @@ const Header = () => {
     }
 
     if (getReferrer('featureFlags').includes('logo_landing_page_link')) {
-      return `/${whiteLabel}/landing-page${queryString}`;
+      return `/${whiteLabel}/landing-page${landingPageQueryString}`;
     }
 
     return `/${whiteLabel}/step-1${queryString}`;
