@@ -67,7 +67,8 @@ test.describe('Current Benefits Pages Test', () => {
 
         const untranslatedLabelPatterns = [
           /program\.[a-z0-9_-]+/,
-          /program_category\.[a-z0-9_-]+/
+          /program_category\.[a-z0-9_-]+/,
+          /urgent_need\.[a-z0-9_-]+/,
         ];
 
         for (const text of textContent as string[]) {
