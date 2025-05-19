@@ -2,7 +2,7 @@ name: Run Playwright E2E Tests on PR to dev
 
 on:
   pull_request:
-    branches: [dev, test-dev]
+    branches: [dev, test/workflow-test-dev]
   workflow_dispatch:  # Allows manual runs
 
 
