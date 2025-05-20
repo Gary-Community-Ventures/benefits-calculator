@@ -112,10 +112,10 @@ const EnergyCalcConfirmationHHData = () => {
       if (hasConditions) {
         return (
           <ul>
-            {energyCalculator?.survivingSpouse && <li key="survivingSpouse">{survivingSpouseText}</li>}
-            {conditions?.disabled && <li key="disabled">{disabledText}</li>}
-            {energyCalculator?.medicalEquipment && <li key="disabled">{medicalEquipmentText}</li>}
-            {energyCalculator?.receivesSsi && <li key="receivesSsi">{receiveSsiText}</li>}
+            {energyCalculator?.survivingSpouse && <li>{survivingSpouseText}</li>}
+            {conditions?.disabled && <li>{disabledText}</li>}
+            {energyCalculator?.medicalEquipment && <li>{medicalEquipmentText}</li>}
+            {energyCalculator?.receivesSsi && <li>{receiveSsiText}</li>}
           </ul>
         );
       } else {
