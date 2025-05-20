@@ -48,8 +48,9 @@ test.describe('MyFriendBen Sample Screen Test', () => {
 
     await expect(page).toHaveURL(/\/nc\/.*\/step-5/);
     await page.getByRole('button', { name: 'Birth Month' }).click();
-    await page.getByRole('option', { name: 'February' }).waitFor({state: 'visible'});
-    await page.getByRole('option', { name: 'February' }).click();
+    const febOption = page.getByRole('option', { name: 'February' });
+    await febOption.waitFor({ state: 'visible' });
+    await febOption.click();
     await page.getByRole('button', { name: 'Open' }).click();
     await page.getByRole('option', { name: '2020' }).click();
     await page.locator('#relationship-to-hh-select').click();

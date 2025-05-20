@@ -49,5 +49,5 @@ jobs:
         uses: daun/playwright-report-summary@v3
         if: always()
         with:
-          report-file: .last-run.json
+          report-file: results.json
           icon-style: 'emojis'
