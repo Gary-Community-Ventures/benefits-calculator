@@ -20,8 +20,8 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      - name: Install Playwright Chromium Browser
+        run: npx playwright install chromium
 
       - name: Run Playwright Tests
         run: npm run test:e2e
