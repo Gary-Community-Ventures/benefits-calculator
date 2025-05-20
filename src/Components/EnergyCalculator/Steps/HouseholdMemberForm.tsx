@@ -172,6 +172,7 @@ const ECHouseholdMemberForm = () => {
       conditions: z.object({
         survivingSpouse: z.boolean(),
         disabled: z.boolean(),
+        medicalEquipment: z.boolean(),
       }),
       receivesSsi: z.enum(['true', 'false']).optional(),
       relationshipToHH: z
@@ -236,6 +237,7 @@ const ECHouseholdMemberForm = () => {
       conditions: {
         survivingSpouse: householdMemberFormData?.energyCalculator?.survivingSpouse ?? false,
         disabled: householdMemberFormData?.conditions.disabled ?? false,
+        medicalEquipment: householdMemberFormData?.energyCalculator?.medicalEquipment ?? false,
       },
       receivesSsi: householdMemberFormData?.receivesSsi ?? 'false',
       relationshipToHH: determineDefaultRelationshipToHH(),
@@ -297,6 +299,7 @@ const ECHouseholdMemberForm = () => {
       energyCalculator: {
         survivingSpouse: memberData.conditions.survivingSpouse,
         receivesSsi: memberData.receivesSsi === 'true',
+        medicalEquipment: memberData.conditions.medicalEquipment,
       },
     };
 
@@ -444,13 +447,14 @@ const ECHouseholdMemberForm = () => {
             values={{
               survivingSpouse: Boolean(watch('conditions.survivingSpouse')),
               disabled: Boolean(watch('conditions.disabled')),
-              // Skip receivesSsi as it's not a direct toggle but set by a different control
+              medicalEquipment: Boolean(watch('conditions.medicalEquipment')),
             }}
             onChange={(newValues) => {
               // Create a new conditions object that preserves correct types
               const conditions = {
                 survivingSpouse: newValues.survivingSpouse,
                 disabled: newValues.disabled,
+                medicalEquipment: newValues.medicalEquipment,
               };
 
               setValue('conditions', conditions, { shouldValidate: true, shouldDirty: true });

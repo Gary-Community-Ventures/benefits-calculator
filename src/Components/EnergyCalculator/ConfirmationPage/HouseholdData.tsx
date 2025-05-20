@@ -99,31 +99,23 @@ const EnergyCalcConfirmationHHData = () => {
         id: 'confirmationHHData.disability',
         defaultMessage: 'Disability',
       });
+      const medicalEquipmentText = formatMessage({
+        id: 'confirmationHHData.medicalEquipment',
+        defaultMessage: 'In home medical equipment',
+      });
       const receiveSsiText = formatMessage({
         id: 'ecHHMF.they-receiveSsi',
         defaultMessage:
-          'Received full benefits from Social Security, SSI, the Department of Human Services, or a public or private plan:',
+          'Received full benefits from Social Security, SSI, the Department of Human Services, or a public or private plan',
       });
-      const receivesSsiDisplayedValue = energyCalculator?.receivesSsi
-        ? formatMessage({
-            id: 'radiofield.label-yes',
-            defaultMessage: 'Yes',
-          })
-        : formatMessage({
-            id: 'radiofield.label-no',
-            defaultMessage: 'No',
-          });
 
       if (hasConditions) {
         return (
           <ul>
             {energyCalculator?.survivingSpouse && <li key="survivingSpouse">{survivingSpouseText}</li>}
             {conditions?.disabled && <li key="disabled">{disabledText}</li>}
-            {energyCalculator?.receivesSsi && (
-              <li key="receivesSsi">
-                {receiveSsiText} {receivesSsiDisplayedValue}
-              </li>
-            )}
+            {energyCalculator?.medicalEquipment && <li key="disabled">{medicalEquipmentText}</li>}
+            {energyCalculator?.receivesSsi && <li key="receivesSsi">{receiveSsiText}</li>}
           </ul>
         );
       } else {
