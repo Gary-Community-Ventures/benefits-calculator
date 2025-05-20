@@ -28,6 +28,7 @@ import { ReactComponent as Legal_services } from '../../Assets/icons/UrgentNeeds
 import { ReactComponent as Support } from '../../Assets/icons/UrgentNeeds/AcuteConditions/support.svg';
 import { ReactComponent as Military } from '../../Assets/icons/UrgentNeeds/AcuteConditions/military.svg';
 import { ReactComponent as SurvivingSpouse } from '../../Assets/icons/General/head.svg';
+import { ReactComponent as Dialysis } from '../../Assets/icons/General/OptionCard/Conditions/dialysis.svg';
 import { Language } from '../../Assets/languageOptions';
 
 type Item = {
@@ -89,6 +90,9 @@ function transformItemIcon(item: unknown): any {
       break;
     case 'Student':
       iconComponent = <Student className={icon._classname} />;
+      break;
+    case 'Dialysis':
+      iconComponent = <Dialysis className={icon._classname} />;
       break;
     // Health Insurance
     case 'Chp':

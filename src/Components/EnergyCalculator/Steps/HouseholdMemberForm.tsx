@@ -239,7 +239,7 @@ const ECHouseholdMemberForm = () => {
         disabled: householdMemberFormData?.conditions.disabled ?? false,
         medicalEquipment: householdMemberFormData?.energyCalculator?.medicalEquipment ?? false,
       },
-      receivesSsi: householdMemberFormData?.receivesSsi ?? 'false',
+      receivesSsi: householdMemberFormData?.energyCalculator?.receivesSsi ? 'true' : 'false',
       relationshipToHH: determineDefaultRelationshipToHH(),
       hasIncome: determineDefaultHasIncome(),
       incomeStreams: householdMemberFormData?.incomeStreams ?? [],
