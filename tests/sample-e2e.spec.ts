@@ -48,6 +48,7 @@ test.describe('MyFriendBen Sample Screen Test', () => {
 
     await expect(page).toHaveURL(/\/nc\/.*\/step-5/);
     await page.getByRole('button', { name: 'Birth Month' }).click();
+    await page.getByRole('option', { name: 'February' }).waitFor({state: 'visible'});
     await page.getByRole('option', { name: 'February' }).click();
     await page.getByRole('button', { name: 'Open' }).click();
     await page.getByRole('option', { name: '2020' }).click();
