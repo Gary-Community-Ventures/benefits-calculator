@@ -1,0 +1,31 @@
+name: Playwright E2E Tests
+
+on:
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout frontend repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright Tests
+        run: npm run test:e2e
+        env:
+          REACT_APP_DOMAIN_URL: ${{ secrets.REACT_APP_DOMAIN_URL }}
+          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+
