@@ -87,14 +87,50 @@ const CurrentBenefits = () => {
     throw new Error('white label is not defined');
   }
 
+  const normalizeString = (str: Translation) => {
+    return intl
+      .formatMessage({
+        id: str.label,
+        defaultMessage: str.default_message,
+      })
+      .toUpperCase();
+  };
+
+  function sortNames<T extends { name: Translation }>(a: T, b: T): number {
+    const nameA = normalizeString(a.name);
+    const nameB = normalizeString(b.name);
+
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    return 0;
+  }
+
+  const sortAlphabetically = (categories: Category[]) => {
+    return [...categories]
+      .map((category) => {
+        return {
+          ...category,
+          programs: category.programs.sort(sortNames),
+        };
+      })
+      .sort(sortNames);
+  };
+
   useEffect(() => {
     getAllLongTermPrograms(whiteLabel).then((programs: Category[]) => {
-      setProgramCategories(programs);
+      const sorted = sortAlphabetically(programs);
+      setProgramCategories(sorted);
       setProgramsLoaded(true);
     });
 
     getAllNearTermPrograms(whiteLabel).then((urgentNeeds: Category[]) => {
-      setUrgentNeedCategories(urgentNeeds);
+      const sorted = sortAlphabetically(urgentNeeds);
+      setUrgentNeedCategories(sorted);
       setUrgentNeedsLoaded(true);
     });
   }, []);
