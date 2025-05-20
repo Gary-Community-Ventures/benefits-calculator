@@ -29,3 +29,25 @@ jobs:
           REACT_APP_DOMAIN_URL: ${{ secrets.REACT_APP_DOMAIN_URL }}
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
 
+      - name: Upload Playwright HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-html-report
+          path: playwright-report/
+          retention-days: 14
+
+      # - name: Deploy Playwright report to GitHub Pages
+      #   if: always()
+      #   uses: peaceiris/actions-gh-pages@v4
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: playwright-report
+      #     publish_branch: gh-pages
+
+      - name: Add Github Actions report
+        uses: daun/playwright-report-summary@v3
+        if: always()
+        with:
+          report-file: .last-run.json
+          icon-style: 'emojis'
