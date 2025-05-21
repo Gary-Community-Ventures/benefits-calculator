@@ -27,7 +27,9 @@ export const Zipcode = () => {
   const backNavigationFunction = useDefaultBackNavigationFunction('zipcode');
   const { updateScreen } = useScreenApi();
 
-  const noChangeStateMessage = getReferrer('featureFlags').includes('no_zipcode_change_state');
+  const featureFlags = getReferrer('featureFlags');
+  const noChangeStateMessage = featureFlags.includes('no_zipcode_change_state');
+  const noLetsGetStarted = featureFlags.includes('no_lets_get_started');
   const countiesByZipcode = useConfig<{ [key: string]: { [key: string]: string } }>('counties_by_zipcode');
   const state = useConfig<{ name: string }>('state');
   const { formatMessage } = useIntl();
@@ -126,9 +128,11 @@ export const Zipcode = () => {
 
   return (
     <div>
-      <QuestionLeadText>
-        <FormattedMessage id="qcc.tell-us-text" defaultMessage="Let's Get Started!" />
-      </QuestionLeadText>
+      {!noLetsGetStarted && (
+        <QuestionLeadText>
+          <FormattedMessage id="qcc.tell-us-text" defaultMessage="Let's Get Started!" />
+        </QuestionLeadText>
+      )}
       <QuestionHeader>
         <FormattedMessage id="qcc.zipcode-header" defaultMessage="Tell us where you live." />
       </QuestionHeader>
