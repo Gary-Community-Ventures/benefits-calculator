@@ -1,25 +1,32 @@
 import { ReactComponent as WarningIcon } from '../../Assets/icons/General/warning.svg';
 import './WarningMessage.css';
 import ResultsTranslate from '../Results/Translate/Translate';
-import { Translation } from '../../Types/Results';
+import { WarningMsg } from '../../Types/Results';
+import { useIntl } from 'react-intl';
 
 type WarningMessageProps = {
-  warning: {
-    message: Translation;
-    link_url: Translation;
-    link_text: Translation;
-  };
+  warning: WarningMsg;
 };
 
 const WarningMessage = ({ warning }: WarningMessageProps) => {
+  const intl = useIntl();
+
+  let translatedLink = '';
+  if (warning.link_url.default_message !== '') {
+    translatedLink = intl.formatMessage({
+      id: warning.link_url.label,
+      defaultMessage: warning.link_url.default_message,
+    });
+  }
+
   return (
     <div className="warning-message">
       <WarningIcon className="warning-icon" />
       <p>
         <ResultsTranslate translation={warning.message} />
-        {warning.link_url.default_message && warning.link_text.default_message && (
+        {translatedLink !== '' && (
           <span className="warning-message-link">
-            <a href={warning.link_url.default_message} target="_blank" className="link-color">
+            <a href={translatedLink} target="_blank" className="link-color">
               <ResultsTranslate translation={warning.link_text} />
             </a>
           </span>
