@@ -27,6 +27,8 @@ export type ProgramCategoryCap = {
 
 export type WarningMessage = {
   message: Translation;
+  link_url: Translation;
+  link_text: Translation;
   legal_statuses: CitizenLabels[];
 };
 

@@ -203,7 +203,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       </div>
       <div className="results-program-page-warning-container">
         {warningMessages.map((warning, key) => {
-          return <WarningMessage message={warning.message} key={key} />;
+          return <WarningMessage warning={warning} key={key} />;
         })}
       </div>
       <div className="apply-button-container">
