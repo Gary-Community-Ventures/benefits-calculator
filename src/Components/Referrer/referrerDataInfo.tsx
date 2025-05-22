@@ -22,6 +22,7 @@ import TC_MFBLogo from '../../Assets/States/CO/WhiteLabels/TellerCounty/TC_MFBLo
 import PC_MFBLogo from '../../Assets/States/CO/WhiteLabels/PuebloCounty/PC_MFBLogo.png';
 import PitkinCounty_MFBLogo from '../../Assets/States/CO/WhiteLabels/PitkenCounty/PitkinCountyLogo.png';
 import PoweredByLogo from '../../Assets/Logos/powered_by_mfb.png';
+import RewiringAmericaLogo from '../../Assets/States/CO/Logos/rewiring_america_logo.png';
 
 const logoMap: { [key: string]: string | undefined } = {
   MFB_COLogo: MFBCOLogo,
@@ -48,6 +49,7 @@ const logoMap: { [key: string]: string | undefined } = {
   PC_MFBLogo: PC_MFBLogo,
   PitkinCounty_MFBLogo: PitkinCounty_MFBLogo,
   PoweredByLogo: PoweredByLogo,
+  RewiringAmericaLogo: RewiringAmericaLogo,
 };
 
 export const renderLogoSource = (sourceLabel: string, logoAlt: string, logoClass: string) => {

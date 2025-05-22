@@ -113,7 +113,7 @@ export default function GasProvider() {
       <form onSubmit={handleSubmit(formSubmitHandler)}>
         <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.gasProvider !== undefined}>
           <InputLabel>
-            <FormattedMessage id="energyCalculator.gasProvider.label" defaultMessage="Gas Utility" />
+            <FormattedMessage id="energyCalculator.gasProvider.label" defaultMessage="Heating Source" />
           </InputLabel>
           <Controller
             name="gasProvider"
@@ -123,7 +123,7 @@ export default function GasProvider() {
               <>
                 <Select
                   {...field}
-                  label={<FormattedMessage id="energyCalculator.gasProvider.label" defaultMessage="Gas Utility" />}
+                  label={<FormattedMessage id="energyCalculator.gasProvider.label" defaultMessage="Heating Source" />}
                 >
                   {createMenuItems(
                     providerOptions,

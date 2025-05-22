@@ -1,5 +1,5 @@
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useState } from 'react';
+import { ComponentType, useState } from 'react';
 import { UrgentNeed } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate';
 import { acuteConditionResultMapping } from '../../../Assets/acuteConditionOptions';
@@ -10,25 +10,14 @@ type NeedsCardProps = {
   need: UrgentNeed;
 };
 
-interface ResponseObject {
-  icon: React.ReactNode | null;
-  defaultMessage: string;
-}
+const getIcon = (messageType: string, acuteConditionResultMapping: Record<string, ComponentType>) => {
+  const Icon = acuteConditionResultMapping[messageType];
 
-const getIconAndDefaultMessage = (
-  messageType: string,
-  acuteConditionResultMapping: Record<string, any>,
-): ResponseObject => {
-  const matchingType = Object.keys(acuteConditionResultMapping).find(
-    (key) => acuteConditionResultMapping[key]?.api_default_message.toLowerCase() === messageType.toLowerCase(),
-  );
-
-  if (matchingType) {
-    const { icon, default_message } = acuteConditionResultMapping[matchingType];
-    return { icon, defaultMessage: default_message };
+  if (Icon !== undefined) {
+    return <Icon />;
   }
 
-  return { icon: null, defaultMessage: '' };
+  return null;
 };
 
 const NeedCard = ({ need }: NeedsCardProps) => {
@@ -40,8 +29,8 @@ const NeedCard = ({ need }: NeedsCardProps) => {
     translatedLink = intl.formatMessage({ id: need.link.label, defaultMessage: need.link.default_message });
   }
 
-  const needType = need.type.default_message;
-  const urgentNeed = getIconAndDefaultMessage(needType, acuteConditionResultMapping);
+  const needType = need.type.default_message.toLowerCase();
+  const icon = getIcon(needType, acuteConditionResultMapping);
   const translatedNeedDesc = intl.formatMessage({
     id: need.description.label,
     defaultMessage: need.description.default_message,
@@ -51,7 +40,7 @@ const NeedCard = ({ need }: NeedsCardProps) => {
     <div className="need-card-container">
       <div className="header-and-button-divider">
         <div className="result-resource-more-info">
-          {urgentNeed.icon}
+          {icon}
           <span>
             <ResultsTranslate translation={need.type} />
             <strong>

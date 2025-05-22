@@ -33,12 +33,12 @@
   font-style: italic;
 }
 
-.resource-link,
-.resource-phone {
-  color: var(--icon-color);
-  display: block;
+.resource-link-container {
+  padding: 0.5rem 0;
 }
 
 .resource-phone {
   text-decoration: none;
+  color: var(--icon-color);
+  display: block;
 }

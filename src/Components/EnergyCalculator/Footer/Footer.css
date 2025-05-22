@@ -1,0 +1,12 @@
+.energy-calculator-footer-logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.energy-calculator-footer-logo-container img {
+  margin: 0;
+  padding: 0.5rem;
+  max-height: 4rem;
+  width: auto;
+  height: auto;
+}
