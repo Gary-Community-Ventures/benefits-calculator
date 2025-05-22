@@ -143,6 +143,7 @@ export function useUpdateFormData() {
         energyCalculator = {
           survivingSpouse: member.energy_calculator.surviving_spouse,
           receivesSsi: member.energy_calculator.receives_ssi,
+          medicalEquipment: member.energy_calculator.medical_equipment,
         };
       }
 
