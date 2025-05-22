@@ -16,12 +16,17 @@ const Header = () => {
   const { formData, getReferrer, whiteLabel } = context;
   const languageOptions = useConfig<{ [key: string]: string }>('language_options');
   const queryString = useQueryString();
+  const landingPageQueryString = useQueryString({ path: null });
   const intl = useIntl();
   const logoClass = getReferrer('logoClass', 'logo');
 
   const homeUrl = useMemo(() => {
     if (whiteLabel === undefined || whiteLabel === DEFAULT_WHITE_LABEL) {
       return `/step-1${queryString}`;
+    }
+
+    if (getReferrer('featureFlags').includes('logo_landing_page_link')) {
+      return `/${whiteLabel}/landing-page${landingPageQueryString}`;
     }
 
     return `/${whiteLabel}/step-1${queryString}`;
@@ -61,6 +66,10 @@ const Header = () => {
 
     if (formData.frozen) {
       className += ' frozen';
+    }
+
+    if (getReferrer('featureFlags').includes('white_header')) {
+      className += ' white-header';
     }
 
     return className;

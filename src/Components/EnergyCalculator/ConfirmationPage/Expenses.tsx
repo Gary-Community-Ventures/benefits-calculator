@@ -18,13 +18,12 @@ export default function EnergyCalculatorExpenses() {
     defaultMessage: 'expenses',
   };
 
-  return (
-    <ConfirmationBlock
-      icon={<Expense title={formatMessage(electricityProviderIconAlt)} />}
-      title={<FormattedMessage id="energyCalculator.confirmation.expenses" defaultMessage="Utility Bills" />}
-      editAriaLabel={editElectricityProviderAriaLabel}
-      stepName="energyCalculatorExpenses"
-    >
+  const formatExpenses = () => {
+    if (formData.expenses.length === 0) {
+      return <FormattedMessage id="confirmation.noIncome" defaultMessage="None" />;
+    }
+
+    return (
       <ul className="confirmation-acute-need-list">
         {formData.expenses.map((expense, index) => {
           const text = ENERGY_CALCULATOR_EXPENSE_NAME_MAP[expense.expenseSourceName as EnergyCalculatorExpenseType];
@@ -36,6 +35,17 @@ export default function EnergyCalculatorExpenses() {
           return <li key={index}>{text}</li>;
         })}
       </ul>
+    );
+  };
+
+  return (
+    <ConfirmationBlock
+      icon={<Expense title={formatMessage(electricityProviderIconAlt)} />}
+      title={<FormattedMessage id="energyCalculator.confirmation.expenses" defaultMessage="Utility Bills" />}
+      editAriaLabel={editElectricityProviderAriaLabel}
+      stepName="energyCalculatorExpenses"
+    >
+      {formatExpenses()}
     </ConfirmationBlock>
   );
 }

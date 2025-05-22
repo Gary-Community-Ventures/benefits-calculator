@@ -1,5 +1,4 @@
 import { Language } from './Assets/languageOptions';
-import { cleanTranslationDefaultMessage } from './cleanAPICategoryTranslation';
 import { Category, Program } from './Components/CurrentBenefits/CurrentBenefits';
 import {
   AdminTokenResponse,
@@ -160,14 +159,13 @@ const getAllNearTermPrograms = async (whiteLabel: string) => {
   }
 
   const programs = (await response.json()) as UrgentNeedProgramsResponse;
-  const programsWithNormalizedTypeTranslations = programs.map((program) => {
-    const categoryWithNormalizedDefaultMessage = cleanTranslationDefaultMessage(program.type);
-    return { ...program, category: categoryWithNormalizedDefaultMessage };
+  const programsWithCategory = programs.map((program) => {
+    return { ...program, category: program.type };
   });
 
   const categoryMap: { [key: string]: Category } = {};
 
-  for (const program of programsWithNormalizedTypeTranslations) {
+  for (const program of programsWithCategory) {
     const id = program.category.default_message;
     if (!(id in categoryMap)) {
       categoryMap[id] = { programs: [], name: program.category, icon: program.category.default_message };

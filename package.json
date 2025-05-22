@@ -48,10 +48,13 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build",
-    "cypress": "./node_modules/.bin/cypress open",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --write . --config .prettierrc.json"
+    "format": "prettier --write . --config .prettierrc.json",
+    "test:e2e": "playwright test --project=chromium",
+    "test:e2e:ui": "playwright test --project=chromium --ui",
+    "test:e2e:report": "playwright show-report",
+    "test:e2e:visual": "playwright test --project=debug --ui"
   },
   "eslintConfig": {
     "extends": [
@@ -72,7 +75,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^13.13.0",
+    "@playwright/test": "^1.52.0",
     "eslint": "^8.41.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.8.0",

@@ -25,7 +25,6 @@ import CurrentBenefits from './Components/CurrentBenefits/CurrentBenefits';
 import EcHouseholdMemberForm from './Components/EnergyCalculator/Steps/HouseholdMemberForm';
 import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMemberForm';
 import EnergyCalculatorLandingPage from './Components/EnergyCalculator/LandingPage/LandingPage';
-import EnergyCalculatorNoExpenses from './Components/EnergyCalculator/NoExpensesPage/NoExpenses';
 import WhiteLabelRouter from './Components/RouterUtil/WhiteLabelRouter';
 import ValidateUuid from './Components/RouterUtil/ValidateUuid';
 import './App.css';
@@ -187,14 +186,6 @@ const App = () => {
                     element={
                       <ValidateUuid>
                         <Disclaimer />
-                      </ValidateUuid>
-                    }
-                  />
-                  <Route
-                    path="no-expenses"
-                    element={
-                      <ValidateUuid>
-                        <EnergyCalculatorNoExpenses />
                       </ValidateUuid>
                     }
                   />

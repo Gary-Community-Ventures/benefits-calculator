@@ -54,8 +54,36 @@
   width: 21rem;
   border: 1px solid var(--primary-color);
   box-shadow: none;
-  box-sizing: content-box;
-  max-height: 50vh;
+  box-sizing: border-box;
+  max-height: 80vh;
+  overflow: hidden;
+  contain: content;
+  position: relative;
+}
+
+.filter-ref-container {
+  max-height: calc(80vh - 40px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) transparent;
+  position: relative;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  contain: content;
+}
+
+.filter-ref-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.filter-ref-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.filter-ref-container::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 3px;
 }
 
 .filters-container {
@@ -84,12 +112,13 @@
 }
 
 @media (max-width: 500px), (max-height: 700px) {
-  .MuiPaper-root.MuiPopover-paper {
-    max-height: 24rem;
-    overflow-y: scroll;
+  #citizenshipPopover .MuiPaper-root.MuiPopover-paper {
+    max-height: 70vh;
+    width: 95vw;
+    margin: 0 8px;
   }
 
   .filter-ref-container {
-    max-height: 18rem;
+    max-height: calc(70vh - 40px);
   }
 }

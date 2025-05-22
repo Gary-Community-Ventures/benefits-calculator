@@ -20,7 +20,7 @@ export function useUpdateFormData() {
       startTime: response.start_date ?? formData.startTime,
       hasExpenses: response.expenses.length ? 'true' : 'false',
       expenses: [],
-      householdSize: String(response.household_size ?? ''),
+      householdSize: Number(response.household_size ?? 0),
       householdData: [],
       householdAssets: Math.round(response.household_assets ?? 0),
       hasBenefits: response.has_benefits ?? 'preferNotToAnswer',
@@ -70,6 +70,7 @@ export function useUpdateFormData() {
         ma_maeitc: response.has_ma_maeitc ?? false,
         ma_macfc: response.has_ma_macfc ?? false,
         co_andso: response.has_co_andso ?? false,
+        co_care: response.has_co_care ?? false,
       },
       referralSource: response.referral_source ?? undefined,
       immutableReferrer: response.referrer_code ?? undefined,
@@ -106,6 +107,7 @@ export function useUpdateFormData() {
         gasProvider: response.energy_calculator.gas_provider,
         electricityIsDisconnected: response.energy_calculator.electricity_is_disconnected,
         hasPastDueEnergyBills: response.energy_calculator.has_past_due_energy_bills,
+        hasOldCar: response.energy_calculator.has_old_car,
         needsWaterHeater: response.energy_calculator.needs_water_heater,
         needsHvac: response.energy_calculator.needs_hvac,
         needsStove: response.energy_calculator.needs_stove,
@@ -141,6 +143,7 @@ export function useUpdateFormData() {
         energyCalculator = {
           survivingSpouse: member.energy_calculator.surviving_spouse,
           receivesSsi: member.energy_calculator.receives_ssi,
+          medicalEquipment: member.energy_calculator.medical_equipment,
         };
       }
 

@@ -13,6 +13,7 @@ import { findProgramById, findValidationForProgram, useResultsContext, useResult
 import { deleteValidation, postValidation } from '../../../apiCalls';
 import { Language } from '../../../Assets/languageOptions';
 import { allNavigatorLanguages } from './NavigatorLanguages';
+import { formatPhoneNumber } from '../helpers';
 import useScreenApi from '../../../Assets/updateScreen';
 
 type ProgramPageProps = {
@@ -202,7 +203,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       </div>
       <div className="results-program-page-warning-container">
         {warningMessages.map((warning, key) => {
-          return <WarningMessage message={warning.message} key={key} />;
+          return <WarningMessage warning={warning} key={key} />;
         })}
       </div>
       <div className="apply-button-container">
@@ -263,7 +264,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
                     {navigator.phone_number && (
                       <div>
                         <a href={`tel:${navigator.phone_number}`} className="link-color phone-link">
-                          {navigator.phone_number}
+                          {formatPhoneNumber(navigator.phone_number)}
                         </a>
                       </div>
                     )}

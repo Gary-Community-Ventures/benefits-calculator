@@ -151,19 +151,6 @@ export const Filter = () => {
     setFilterHeight(0);
   };
 
-  const handleScroll = () => {
-    if (citizenshipFilterIsOpen) {
-      handleFilterClose();
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [citizenshipFilterIsOpen]);
-
   const citizenshipFiltersModalALProps = {
     id: 'filter.citFilterModalAL',
     defaultMessage: 'citizenship filters modal',
@@ -246,6 +233,9 @@ export const Filter = () => {
       otherHealthCarePregnant: false,
       notPregnantOrUnder19ForOmniSalud: false,
       notPregnantOrUnder19ForEmergencyMedicaid: false,
+      notPregnantForMassHealthLimited: false,
+      notPregnantOrChildForMassHealthLimited: false,
+      otherHealthCareUnder21: false,
     });
 
     setCitButtonClass('citizenship-button');

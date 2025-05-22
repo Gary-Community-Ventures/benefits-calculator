@@ -110,7 +110,7 @@ const SelectStatePage = () => {
                 <Select
                   {...field}
                   labelId="county-select-label"
-                  id="county-source-select"
+                  id="state-source-select"
                   label={<FormattedMessage id="stateStep.placeholder" defaultMessage="State" />}
                 >
                   {createMenuItems()}

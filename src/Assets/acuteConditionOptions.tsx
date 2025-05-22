@@ -7,6 +7,7 @@ import { ReactComponent as Housing } from './icons/UrgentNeeds/AcuteConditions/h
 import { ReactComponent as Job_resources } from './icons/UrgentNeeds/AcuteConditions/job_resources.svg';
 import { ReactComponent as Legal_services } from './icons/UrgentNeeds/AcuteConditions/legal_services.svg';
 import { ReactComponent as Support } from './icons/UrgentNeeds/AcuteConditions/support.svg';
+import { ReactComponent as Military } from './icons/UrgentNeeds/AcuteConditions/military.svg';
 
 export const acuteConditionResultMapping = {
   food: {
@@ -44,5 +45,9 @@ export const acuteConditionResultMapping = {
   legalServices: {
     api_default_message: 'Civil legal needs',
     icon: <Legal_services />,
+  },
+  veteranServices: {
+    api_default_message: 'Veterans resources',
+    icon: <Military />,
   },
 };

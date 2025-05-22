@@ -66,8 +66,11 @@
   width: 2.5rem;
 }
 
-.category-heading-icon svg path {
+.category-heading-icon svg path,
+.category-heading-icon svg rect,
+.category-heading-icon svg circle {
   fill: var(--icon-color);
+  stroke: var(--icon-color);
 }
 
 .category-heading-column {
@@ -136,35 +139,12 @@
   margin-bottom: 0.5rem;
 }
 
-.child-care-warning-text {
-  background-color: var(--secondary-background-color);
-  font-size: 1.25rem;
-  color: var(--primary-color);
-  padding: 0.5rem;
-}
-
-.result-program-container {
-  border: 2px solid var(--secondary-color);
-  margin-bottom: 1rem;
-}
-
 .result-program-container hr {
   background-color: var(--secondary-color);
   width: 98%;
   margin: 0 auto;
   height: 2px;
   border: none;
-}
-
-.result-program-more-info {
-  width: 70%;
-  display: block;
-  line-height: normal;
-  font-family: 'Roboto Slab', serif;
-  font-weight: 700;
-  font-size: 1.25rem;
-  padding: 1rem 2rem;
-  color: var(--primary-color);
 }
 
 .result-program-more-info-button {
@@ -187,17 +167,6 @@
   border: 1px solid var(--primary-color);
 }
 
-.result-program-details {
-  font-size: 0.9rem;
-  flex-grow: 1;
-  flex-direction: column;
-  font-weight: 100;
-  line-height: normal;
-  width: 50%;
-  padding: 1rem 2rem;
-  color: var(--primary-color);
-}
-
 .result-program-details-box {
   display: flex;
 }
@@ -213,9 +182,10 @@
 .child-care-warning-text {
   background-color: var(--secondary-background-color);
   font-size: 1.25rem;
-  color: var(--primary-color);
+  color: #000000;
   padding: 0.5rem;
 }
+
 /* the following two result-program styles are for the more-info buttons on the long-term pg */
 .result-program-more-info-wrapper {
   display: flex;
@@ -298,24 +268,12 @@
     line-height: normal;
   }
 
-  .result-program-details {
-    font-weight: 400;
-    width: 20%;
-    vertical-align: text-bottom;
-    color: var(--midBlue-color);
-  }
-
   .result-program-container hr {
     display: none;
   }
 
   .result-program-more-info a {
     padding: 0.5rem 1rem;
-  }
-
-  .result-program-details strong {
-    display: inline-block;
-    color: var(--primary-color);
   }
 }
 

@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import ErrorIcon from '../../../Assets/icons/General/error-icon.svg';
+import { ReactComponent as ErrorIcon } from '../../../Assets/icons/General/error-icon.svg';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import './ResultsError.css';
@@ -7,13 +7,13 @@ import { useConfig } from '../../Config/configHook';
 
 const ResultsError = () => {
   const { uuid, whiteLabel } = useParams();
-  const { email } = useConfig('feedback_links');
+  const { email } = useConfig<{ email: string; survey: string }>('feedback_links');
   const navigate = useNavigate();
 
   return (
     <main>
       <div className="error-container">
-        <img className="error-icon" src={ErrorIcon} />
+        <ErrorIcon className="error-icon" />
         <h1 className="error-header">
           <FormattedMessage id="results-error.header" defaultMessage="Oops! Looks like something went wrong." />
         </h1>

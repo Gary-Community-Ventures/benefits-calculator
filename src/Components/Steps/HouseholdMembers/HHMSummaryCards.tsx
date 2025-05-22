@@ -1,15 +1,16 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Box, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import { calcAge, hasBirthMonthYear, useFormatBirthMonthYear } from '../../../Assets/age.tsx';
+import { calcAge, hasBirthMonthYear, useFormatBirthMonthYear } from '../../../Assets/age';
 import { useConfig } from '../../Config/configHook';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { FormData, HouseholdData } from '../../../Types/FormData';
 import { FormattedMessageType, QuestionName } from '../../../Types/Questions';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
-import { useStepNumber } from '../../../Assets/stepDirectory.ts';
-import { Context } from '../../Wrapper/Wrapper.tsx';
+import { WrapperContext } from '../../../Types/WrapperContext';
+import { useStepNumber } from '../../../Assets/stepDirectory';
+import { Context } from '../../Wrapper/Wrapper';
 import './HHMSummaryCards.css';
 import { calcMemberYearlyIncome } from '../../../Assets/income';
 

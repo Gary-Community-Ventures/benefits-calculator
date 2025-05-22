@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { UrgentNeed } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate';
 import { acuteConditionResultMapping } from '../../../Assets/acuteConditionOptions';
+import { formatPhoneNumber } from '../helpers';
 import './NeedCard.css';
 
 type NeedsCardProps = {
@@ -34,8 +35,10 @@ const NeedCard = ({ need }: NeedsCardProps) => {
   const intl = useIntl();
   const [infoIsOpen, setInfoIsOpen] = useState(false);
 
-  const needLink = need.link.default_message;
-  const translatedLink = intl.formatMessage({ id: need.link.label, defaultMessage: needLink });
+  let translatedLink = '';
+  if (need.link.default_message !== '') {
+    translatedLink = intl.formatMessage({ id: need.link.label, defaultMessage: need.link.default_message });
+  }
 
   const needType = need.type.default_message;
   const urgentNeed = getIconAndDefaultMessage(needType, acuteConditionResultMapping);
@@ -70,14 +73,16 @@ const NeedCard = ({ need }: NeedsCardProps) => {
           <p className="need-desc-paragraph">{translatedNeedDesc}</p>
           {need.phone_number && (
             <a href={`tel:${need.phone_number}`} className="phone-number">
-              {need.phone_number}
+              {formatPhoneNumber(need.phone_number)}
             </a>
           )}
-          <div className="visit-website-btn-container">
-            <a onClick={() => window.open(translatedLink, '_blank')} className="visit-website-btn">
-              <FormattedMessage id="visit-website-btn" defaultMessage="Visit Website" />
-            </a>
-          </div>
+          {translatedLink !== '' && (
+            <div className="visit-website-btn-container">
+              <a href={translatedLink} target="_blank" className="visit-website-btn">
+                <FormattedMessage id="visit-website-btn" defaultMessage="Visit Website" />
+              </a>
+            </div>
+          )}
         </>
       )}
     </div>

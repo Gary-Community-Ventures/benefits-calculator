@@ -3,8 +3,7 @@ import { Context } from '../Wrapper/Wrapper';
 import { configEndpoint, header } from '../../apiCalls';
 import { ConfigApiResponse, ConfigValue } from '../../Types/Config';
 import { Config } from '../../Types/Config';
-import { FormattedMessage, useIntl } from 'react-intl';
-
+import { FormattedMessage } from 'react-intl';
 import { ReactComponent as Student } from '../../Assets/icons/General/OptionCard/Conditions/student.svg';
 import { ReactComponent as Pregnant } from '../../Assets/icons/General/OptionCard/Conditions/pregnant.svg';
 import { ReactComponent as BlindOrVisuallyImpaired } from '../../Assets/icons/General/OptionCard/Conditions/blindOrVisuallyImpaired.svg';
@@ -19,7 +18,6 @@ import { ReactComponent as Medicaid } from '../../Assets/icons/General/OptionCar
 import { ReactComponent as Medicare } from '../../Assets/icons/General/OptionCard/HealthInsurance/medicare.svg';
 import { ReactComponent as None } from '../../Assets/icons/General/OptionCard/HealthInsurance/none.svg';
 import { ReactComponent as PrivateInsurance } from '../../Assets/icons/General/OptionCard/HealthInsurance/privateInsurance.svg';
-
 import { ReactComponent as Baby_supplies } from '../../Assets/icons/UrgentNeeds/AcuteConditions/baby_supplies.svg';
 import { ReactComponent as Child_development } from '../../Assets/icons/UrgentNeeds/AcuteConditions/child_development.svg';
 import { ReactComponent as Dental_care } from '../../Assets/icons/UrgentNeeds/AcuteConditions/dental_care.svg';
@@ -30,6 +28,7 @@ import { ReactComponent as Legal_services } from '../../Assets/icons/UrgentNeeds
 import { ReactComponent as Support } from '../../Assets/icons/UrgentNeeds/AcuteConditions/support.svg';
 import { ReactComponent as Military } from '../../Assets/icons/UrgentNeeds/AcuteConditions/military.svg';
 import { ReactComponent as SurvivingSpouse } from '../../Assets/icons/General/head.svg';
+import { ReactComponent as Dialysis } from '../../Assets/icons/General/OptionCard/Conditions/dialysis.svg';
 import { Language } from '../../Assets/languageOptions';
 
 type Item = {
@@ -91,6 +90,9 @@ function transformItemIcon(item: unknown): any {
       break;
     case 'Student':
       iconComponent = <Student className={icon._classname} />;
+      break;
+    case 'Dialysis':
+      iconComponent = <Dialysis className={icon._classname} />;
       break;
     // Health Insurance
     case 'Chp':

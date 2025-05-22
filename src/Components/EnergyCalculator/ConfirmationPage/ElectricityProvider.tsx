@@ -2,7 +2,7 @@ import { useContext, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ConfirmationBlock from '../../Confirmation/ConfirmationBlock';
 import { Context } from '../../Wrapper/Wrapper';
-import { ReactComponent as Referral } from '../../../Assets/icons/General/referral.svg';
+import { ReactComponent as Housing } from '../../../Assets/icons/UrgentNeeds/AcuteConditions/housing.svg';
 import { getProviderNames } from '../electricityProviders';
 import { FormattedMessageType } from '../../../Types/Questions';
 
@@ -33,7 +33,7 @@ export default function EnergyCalculatorElectricityProvider() {
 
   return (
     <ConfirmationBlock
-      icon={<Referral title={formatMessage(electricityProviderIconAlt)} />}
+      icon={<Housing title={formatMessage(electricityProviderIconAlt)} />}
       title={
         <FormattedMessage
           id="energyCalculator.confirmation.electricityProvider"

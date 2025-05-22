@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { useState, useEffect } from 'react';
 import { getAllLongTermPrograms, getAllNearTermPrograms } from '../../apiCalls';
 import { Translation } from '../../Types/Results';
@@ -19,6 +19,7 @@ import { ReactComponent as FamilyPlanning } from '../../Assets/icons/UrgentNeeds
 import { ReactComponent as JobResources } from '../../Assets/icons/UrgentNeeds/AcuteConditions/job_resources.svg';
 import { ReactComponent as DentalCare } from '../../Assets/icons/UrgentNeeds/AcuteConditions/dental_care.svg';
 import { ReactComponent as LegalServices } from '../../Assets/icons/UrgentNeeds/AcuteConditions/legal_services.svg';
+import { ReactComponent as Military } from '../../Assets/icons/UrgentNeeds/AcuteConditions/military.svg';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import './CurrentBenefits.css';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
@@ -28,6 +29,7 @@ import { useConfig } from '../Config/configHook';
 import { FormattedMessageType } from '../../Types/Questions';
 
 export const iconCategoryMap: { [key: string]: React.ComponentType } = {
+  default: CashAssistance,
   housing: Housing,
   food: Food,
   health_care: HealthCare,
@@ -44,6 +46,7 @@ export const iconCategoryMap: { [key: string]: React.ComponentType } = {
   'Job resources': JobResources,
   'Low-cost dental care': DentalCare,
   'Civil legal needs': LegalServices,
+  'Veterans resources': Military,
 };
 
 export type Program = {
@@ -112,11 +115,15 @@ const CurrentBenefits = () => {
   const displayProgramsByCategory = (categories: Category[]) => {
     const categoryHeaderIconAndPrograms = Object.values(categories).map((category, index) => {
       const { name, programs, icon } = category;
-      if (!(icon in iconCategoryMap)) {
-        throw new Error(`"${icon}" is not a valid icon name`);
-      }
 
-      const CategoryIcon = iconCategoryMap[icon];
+      let CategoryIcon = iconCategoryMap[icon];
+
+      if (CategoryIcon === undefined) {
+        // NOTE: The urgent needs are mapped by the default_message of the name of the category,
+        // if the name of the category changes, need to update the icon category map
+        console.error(`No icon exists for ${icon} in category ${name.default_message}`);
+        CategoryIcon = iconCategoryMap['default'];
+      }
 
       return (
         <div key={index} className="category-section-container">

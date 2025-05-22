@@ -78,7 +78,7 @@ const HouseholdSize = () => {
       </QuestionHeader>
       <QuestionQuestion>
         <>
-          <FormattedMessage
+          <OverrideableTranslation
             id="questions.householdSize"
             defaultMessage="Including you, how many people are in your household?"
           />

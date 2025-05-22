@@ -2,6 +2,7 @@ import MFBDEFAULT from '../../Assets/Logos/mfb_default_logo_header.png';
 import MFBCOLogo from '../../Assets/States/CO/Logos/mfb_co_logo.png';
 import MFBNCLogo from '../../Assets/States/NC/Logos/mfb_nc_logo.png';
 import MFBMALogo from '../../Assets/States/MA/Logos/mfb_massachusetts_logo.png';
+import MFBCOEnergyLogo from '../../Assets/States/CO/Logos/mfb_co_energy_logo.png';
 import MFB_NCFooterLogo from '../../Assets/States/NC/Logos/MFB_NCFooterLogo.png';
 import BIAMFBLogo from '../../Assets/States/CO/WhiteLabels/BIA/biamfbcombinedlogo.png';
 import JHSAMFBLogo from '../../Assets/States/CO/WhiteLabels/JeffcoAssets/jeffcobrand.png';
@@ -26,6 +27,7 @@ const logoMap: { [key: string]: string | undefined } = {
   MFB_COLogo: MFBCOLogo,
   MFB_NCLogo: MFBNCLogo,
   MFB_MALogo: MFBMALogo,
+  MFB_COEnergyLogo: MFBCOEnergyLogo,
   MFB_NCFooterLogo: MFB_NCFooterLogo,
   BIA_MFBLogo: BIAMFBLogo,
   JHS_AMFBLogo: JHSAMFBLogo,

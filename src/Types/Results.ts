@@ -1,5 +1,5 @@
 import { CitizenLabels } from '../Assets/citizenshipFilterFormControlLabels';
-import { Language } from './Language';
+import { Language } from '../Assets/languageOptions';
 
 export type Translation = {
   default_message: string;
@@ -25,8 +25,10 @@ export type ProgramCategoryCap = {
   member_caps: { [key: string]: number } | null;
 };
 
-export type WarningMessage = {
+export type WarningMsg = {
   message: Translation;
+  link_url: Translation;
+  link_text: Translation;
   legal_statuses: CitizenLabels[];
 };
 
@@ -34,6 +36,7 @@ export type MemberEligibility = {
   frontend_id: string;
   eligible: boolean;
   value: number;
+  already_has: boolean;
 };
 
 export type Program = {
@@ -80,6 +83,7 @@ export type ProgramCategory = {
   description: Translation;
   caps: ProgramCategoryCap[];
   tax_category: boolean;
+  priority: number | null;
   programs: Program[];
 };
 

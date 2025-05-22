@@ -16,6 +16,13 @@ function sortProgramsIntoCategories(categories: ProgramCategory[]): ProgramCateg
   const sortedCategories = categories
     .filter((category) => category.programs.length > 0)
     .sort((a, b) => {
+      const aPriority = a.priority === null ? Infinity : a.priority;
+      const bPriority = b.priority === null ? Infinity : b.priority;
+
+      if (bPriority !== aPriority) {
+        return aPriority - bPriority;
+      }
+
       return calculateTotalValue(b) - calculateTotalValue(a);
     });
 
@@ -43,6 +50,8 @@ const ValidationCategory = () => {
       description: { label: '', default_message: '' },
       caps: [],
       programs: validationPrograms,
+      priority: null,
+      tax_category: false,
     };
   }, [validationPrograms]);
 

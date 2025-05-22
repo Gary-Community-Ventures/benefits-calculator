@@ -23,7 +23,14 @@
   align-items: center;
   height: 6rem;
   width: 6rem;
-  fill: var(--main-header-color);
+  fill: var(--secondary-background-color);
+}
+
+.header-icon-box path,
+.header-icon-box rect,
+.header-icon-box circle {
+  fill: var(--icon-color);
+  stroke: var(--icon-color);
 }
 
 .header-text {
@@ -54,12 +61,12 @@
 
 .divider {
   margin: 0.25rem 0;
-  border-bottom: 0.07rem solid var(--main-header-color);
+  border-bottom: 0.07rem solid var(--secondary-color);
   width: 100%;
 }
 
 .estimation {
-  background-color: var(--main-header-color);
+  background-color: var(--secondary-color);
   padding: 1rem;
   display: flex;
   flex-direction: column;

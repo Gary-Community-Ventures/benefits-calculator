@@ -45,7 +45,7 @@ function createQueryString(formData: FormData, lang: Language) {
   query.append('owner_status', ownerStatus);
 
   const income = calcTotalIncome(formData);
-  query.append('household_income', String(income));
+  query.append('household_income', String(Math.round(income)));
 
   let filingStatus = calcFilingStatus(formData);
   query.append('tax_filing', filingStatus);
