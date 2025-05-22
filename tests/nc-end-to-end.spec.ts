@@ -14,15 +14,13 @@ test.describe('NC Screen Test', () => {
       await page.locator('#state-source-select').click();
       await page.getByRole('option', { name: 'North Carolina' }).click();
       await page.getByRole('button', { name: 'Continue' }).click();
-    }
-    );
+    });
     await test.step('Step-2: Disclaimer', async () => {
       await expect(page).toHaveURL('/nc/step-2');
       await page.getByRole('checkbox', { name: 'By proceeding, you confirm' }).check();
       await page.getByRole('checkbox', { name: 'I confirm I am 13 years of' }).check();
       await page.getByRole('button', { name: 'Continue' }).click();
-    }
-    );
+    });
     await test.step('Step-3: Zipcode', async () => {
       // Using regular expression to match the URL with any UUID
       await expect(page).toHaveURL(/\/nc\/.*\/step-3/);
@@ -31,15 +29,13 @@ test.describe('NC Screen Test', () => {
       await page.locator('#county-source-select').click();
       await page.getByRole('option', { name: 'Durham County' }).click();
       await page.getByRole('button', { name: 'Continue' }).click();
-    }
-    );
+    });
     await test.step('Step-4: Household Size', async () => {
       await expect(page).toHaveURL(/\/nc\/.*\/step-4/);
       await page.getByRole('textbox', { name: 'Household Size' }).click();
       await page.getByRole('textbox', { name: 'Household Size' }).fill('2');
       await page.getByRole('button', { name: 'Continue' }).click();
-    }
-    );
+    });
     await test.step('Step-5: Household Member 1', async () => {
       await expect(page).toHaveURL(/\/nc\/.*\/step-5/);
       await page.getByRole('button', { name: 'Birth Month' }).click();
@@ -60,7 +56,7 @@ test.describe('NC Screen Test', () => {
       await page.getByRole('button', { name: 'Birth Month' }).click();
       await page.getByRole('listbox', { name: 'Birth Month' }).waitFor({ state: 'visible' });
       const febOption = page.locator('li[role="option"]', { hasText: 'February' }).first();
-      await expect(febOption).toBeVisible(); 
+      await expect(febOption).toBeVisible();
       await febOption.click();
       await page.getByRole('button', { name: 'Open' }).click();
       await page.getByRole('option', { name: '2020' }).click();
@@ -68,8 +64,7 @@ test.describe('NC Screen Test', () => {
       await page.getByRole('option', { name: 'Child', exact: true }).click();
       await page.getByRole('button', { name: "They don't have or know if" }).click();
       await page.getByRole('button', { name: 'Continue' }).click();
-    }
-    );
+    });
     await test.step('Step-6: Expenses', async () => {
       await expect(page).toHaveURL(/\/nc\/.*\/step-6/);
       await page.getByRole('radio', { name: 'Yes' }).check();
@@ -78,49 +73,41 @@ test.describe('NC Screen Test', () => {
       await page.getByRole('textbox', { name: 'Amount' }).click();
       await page.getByRole('textbox', { name: 'Amount' }).fill('2500');
       await page.getByRole('button', { name: 'Continue' }).click();
-    }
-    );
+    });
     await test.step('Step-7: Household Assets', async () => {
       await expect(page).toHaveURL(/\/nc\/.*\/step-7/);
       await page.getByRole('textbox', { name: 'Dollar Amount' }).click();
       await page.getByRole('textbox', { name: 'Dollar Amount' }).fill('1000');
       await page.getByRole('button', { name: 'Continue' }).click();
-    }
-    );
+    });
     await test.step('Step-8: Household Benefits', async () => {
       await expect(page).toHaveURL(/\/nc\/.*\/step-8/);
       await page.getByRole('button', { name: 'Continue' }).click();
-    }
-    );
+    });
     await test.step('Step-9: Immediate Needs', async () => {
       await expect(page).toHaveURL(/\/nc\/.*\/step-9/);
       await page.getByRole('button', { name: 'Food or groceries' }).click();
       await page.getByRole('button', { name: "Concern about your child's" }).click();
       await page.getByRole('button', { name: 'Free or low-cost help with' }).click();
       await page.getByRole('button', { name: 'Continue' }).click();
-    }
-    );
+    });
     await test.step('Step-10: Referral Source', async () => {
       await expect(page).toHaveURL(/\/nc\/.*\/step-10/);
       await page.locator('#referral-source-select').click();
       await page.getByRole('option', { name: 'Test / Prospective Partner' }).click();
       await page.getByRole('button', { name: 'Continue' }).click();
-    }
-    );
+    });
     await test.step('Step-11: Sign Up', async () => {
       await expect(page).toHaveURL(/\/nc\/.*\/step-11/);
       await page.getByRole('button', { name: 'Continue' }).click();
-    }
-    );
+    });
     await test.step('Confirmation Page', async () => {
       await expect(page).toHaveURL(/\/nc\/.*\/confirm-information/);
       await page.getByRole('button', { name: 'Continue' }).click();
-    }
-    );
+    });
     await test.step('Results Page', async () => {
       await expect(page).toHaveURL(/\/nc\/.*\/results\/benefits/);
       await page.getByRole('button', { name: 'save my results' }).click();
-    }
-    );
+    });
   });
 });
