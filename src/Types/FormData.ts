@@ -26,6 +26,7 @@ export type EnergyCalculatorFormData = {
 export type EnergyCalculatorMember = {
   survivingSpouse: boolean;
   receivesSsi: boolean;
+  medicalEquipment: boolean;
 };
 
 export type HouseholdData = {
@@ -36,7 +37,6 @@ export type HouseholdData = {
   birthMonth?: number;
   relationshipToHH: string;
   conditions: Conditions;
-  receivesSsi?: 'true' | 'false';
   hasIncome: boolean;
   incomeStreams: IncomeStream[];
   energyCalculator?: EnergyCalculatorMember;
