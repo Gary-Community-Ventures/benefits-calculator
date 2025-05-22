@@ -29,3 +29,4 @@ yarn-error.log*
 /blob-report/
 /playwright/.cache/
 .env.test
+results.json
