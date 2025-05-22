@@ -7,6 +7,7 @@ test.describe('MyFriendBen Smoke Test', () => {
   test('application loads', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('body')).toBeVisible();
+    await page.waitForURL(/step-1/)
     await expect(page).toHaveURL(/step-1/);
 
     const languageSelector = page.locator('select, [aria-label*="language"], [data-testid*="language"]');
