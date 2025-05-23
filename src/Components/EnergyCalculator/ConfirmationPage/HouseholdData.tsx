@@ -90,7 +90,11 @@ const EnergyCalcConfirmationHHData = () => {
 
     const energyCalculatorConditionsList = (member: HouseholdData) => {
       const { conditions, energyCalculator } = member;
-      const hasConditions = conditions.disabled || energyCalculator?.receivesSsi || energyCalculator?.survivingSpouse;
+      const hasConditions =
+        conditions.disabled ||
+        energyCalculator?.receivesSsi ||
+        energyCalculator?.survivingSpouse ||
+        energyCalculator?.medicalEquipment;
       const survivingSpouseText = formatMessage({
         id: 'eCConditionOptions.survivingSpouse',
         defaultMessage: 'Surviving Spouse',
