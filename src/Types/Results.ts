@@ -65,8 +65,9 @@ export type Program = {
   low_confidence: boolean;
   navigators: ProgramNavigator[];
   documents: ProgramDocument[];
-  warning_messages: WarningMessage[];
+  warning_messages: WarningMsg[];
   required_programs: number[];
+  value_format: string | null;
 };
 
 export type ProgramDocument = {
