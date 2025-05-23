@@ -18,6 +18,7 @@ import { ProgramCategory } from '../../../Types/Results';
 import { useContext } from 'react';
 import { Context } from '../../Wrapper/Wrapper';
 
+// NOTE: keys must be lower case
 export const headingOptionsMappings: { [key: string]: React.ComponentType } = {
   housing: Housing,
   food: Food,

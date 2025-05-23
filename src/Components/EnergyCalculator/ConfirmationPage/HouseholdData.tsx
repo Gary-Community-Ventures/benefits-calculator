@@ -90,7 +90,11 @@ const EnergyCalcConfirmationHHData = () => {
 
     const energyCalculatorConditionsList = (member: HouseholdData) => {
       const { conditions, energyCalculator } = member;
-      const hasConditions = conditions.disabled || energyCalculator?.receivesSsi || energyCalculator?.survivingSpouse;
+      const hasConditions =
+        conditions.disabled ||
+        energyCalculator?.receivesSsi ||
+        energyCalculator?.survivingSpouse ||
+        energyCalculator?.medicalEquipment;
       const survivingSpouseText = formatMessage({
         id: 'eCConditionOptions.survivingSpouse',
         defaultMessage: 'Surviving Spouse',
@@ -99,31 +103,23 @@ const EnergyCalcConfirmationHHData = () => {
         id: 'confirmationHHData.disability',
         defaultMessage: 'Disability',
       });
-      const receiveSsiText = formatMessage({
-        id: 'ecHHMF.they-receiveSsi',
-        defaultMessage:
-          'Received full benefits from Social Security, SSI, the Department of Human Services, or a public or private plan:',
+      const medicalEquipmentText = formatMessage({
+        id: 'confirmationHHData.medicalEquipment',
+        defaultMessage: 'In-home medical equipment',
       });
-      const receivesSsiDisplayedValue = energyCalculator?.receivesSsi
-        ? formatMessage({
-            id: 'radiofield.label-yes',
-            defaultMessage: 'Yes',
-          })
-        : formatMessage({
-            id: 'radiofield.label-no',
-            defaultMessage: 'No',
-          });
+      const receiveSsiText = formatMessage({
+        id: 'confirmation.ecHHMF.they-receiveSsi',
+        defaultMessage:
+          'Received full benefits from Social Security, SSI, the Department of Human Services, or a public or private plan',
+      });
 
       if (hasConditions) {
         return (
           <ul>
-            {energyCalculator?.survivingSpouse && <li key="survivingSpouse">{survivingSpouseText}</li>}
-            {conditions?.disabled && <li key="disabled">{disabledText}</li>}
-            {energyCalculator?.receivesSsi && (
-              <li key="receivesSsi">
-                {receiveSsiText} {receivesSsiDisplayedValue}
-              </li>
-            )}
+            {energyCalculator?.survivingSpouse && <li>{survivingSpouseText}</li>}
+            {conditions?.disabled && <li>{disabledText}</li>}
+            {energyCalculator?.medicalEquipment && <li>{medicalEquipmentText}</li>}
+            {energyCalculator?.receivesSsi && <li>{receiveSsiText}</li>}
           </ul>
         );
       } else {

@@ -42,7 +42,7 @@ const UtilityStatus = () => {
         </p>
       )}
       {energyCalculator?.hasPastDueEnergyBills && (
-        <p>
+        <p style={{ marginBottom: '.5rem' }}>
           <FormattedMessage
             id="energyCalculator.confirmation.hasPastDueEnergyBills"
             defaultMessage="You have a past-due electric or heating bill or you are low on fuel"
@@ -50,7 +50,7 @@ const UtilityStatus = () => {
         </p>
       )}
       {energyCalculator?.hasOldCar && (
-        <p>
+        <p style={{ marginBottom: '.5rem' }}>
           <FormattedMessage
             id="energyCalculator.confirmation.hasOldCar"
             defaultMessage="You have a gas or diesel-powered vehicle that is 12+ years old or has failed an emissions test"

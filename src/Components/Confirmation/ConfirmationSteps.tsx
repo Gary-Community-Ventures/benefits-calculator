@@ -92,7 +92,7 @@ function HouseholdSize() {
       noReturn
     >
       <ConfirmationItem
-        label={<FormattedMessage id="questions.householdSize-inputLabel" defaultMessage="Household Size:" />}
+        label={<FormattedMessage id="confirmation.householdSize-inputLabel" defaultMessage="Household Size:" />}
         value={`${translateNumber(householdSize)} ${formatMessage(householdSizeDescriptor)}`}
       />
     </ConfirmationBlock>

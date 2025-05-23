@@ -108,7 +108,7 @@ export default function ElectricityProvider() {
           error={errors.electricityProvider !== undefined}
         >
           <InputLabel>
-            <FormattedMessage id="energyCalculator.electricityProvider.label" defaultMessage="Energy Utility" />
+            <FormattedMessage id="energyCalculator.electricityProvider.label" defaultMessage="Electric Provider" />
           </InputLabel>
           <Controller
             name="electricityProvider"
@@ -119,7 +119,10 @@ export default function ElectricityProvider() {
                 <Select
                   {...field}
                   label={
-                    <FormattedMessage id="energyCalculator.electricityProvider.label" defaultMessage="Energy Utility" />
+                    <FormattedMessage
+                      id="energyCalculator.electricityProvider.label"
+                      defaultMessage="Electric Provider"
+                    />
                   }
                 >
                   {createMenuItems(

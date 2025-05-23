@@ -9,18 +9,20 @@ import { useResultsContext } from '../Results/Results';
 import NoProgramEligibleMessage from '../Results/NoProgramEligibleMessage';
 import NcLink211Message from '../Results/NcLink211Message';
 import CcigResultsMessage from '../CcigComponents/CcigResultsMessage';
-import EnergyCalculatorFooter from '../Footer/PoweredByFooter';
 import TwoOneOneHeaderNC from '../TwoOneOneNCComponents/TwoOneOneHeaderNC/TwoOneOneHeaderNC';
 import TwoOneOneFooterNC from '../TwoOneOneNCComponents/TwoOneOneFooterNC/TwoOneOneFooterNC';
+import PoweredByFooter from '../Footer/PoweredByFooter';
+import EnergyCalculatorFooter from '../EnergyCalculator/Footer/Footer';
 
 export const BrandedHeader = () => {
-  const { formData, getReferrer } = useContext(Context);
+  const { getReferrer } = useContext(Context);
+  const featureFlags = getReferrer('featureFlags');
 
-  if (getReferrer('featureFlags').includes('211co')) {
+  if (featureFlags.includes('211co')) {
     return <TwoOneOneHeaderCO />;
   }
 
-  if (getReferrer('featureFlags').includes('211nc')) {
+  if (featureFlags.includes('211nc')) {
     return <TwoOneOneHeaderNC />;
   }
 
@@ -28,18 +30,23 @@ export const BrandedHeader = () => {
 };
 
 export const BrandedFooter = () => {
-  const { formData, getReferrer } = useContext(Context);
+  const { getReferrer } = useContext(Context);
+  const featureFlags = getReferrer('featureFlags');
 
-  if (getReferrer('featureFlags').includes('211co')) {
+  if (featureFlags.includes('211co')) {
     return <TwoOneOneFooterCO />;
   }
 
-  if (getReferrer('featureFlags').includes('211nc')) {
+  if (featureFlags.includes('211nc')) {
     return <TwoOneOneFooterNC />;
   }
 
-  if (getReferrer('featureFlags').includes('powered_by_mfb_footer')) {
+  if (featureFlags.includes('energy_calculator')) {
     return <EnergyCalculatorFooter />;
+  }
+
+  if (featureFlags.includes('powered_by_mfb_footer')) {
+    return <PoweredByFooter />;
   }
 
   return <Footer />;
