@@ -111,7 +111,7 @@ const citizenshipFilterFormControlLabels: Record<CitizenLabelOptions, FormattedM
   refugee: (
     <FormattedMessage
       id="citizenshipFCtrlLabel-refugee"
-      defaultMessage="Admitted refugees or asylees (special rules or waiting periods may apply)"
+      defaultMessage="Granted refugee or asylee status (special rules or waiting periods may apply)"
     />
   ),
   otherWithWorkPermission: (
