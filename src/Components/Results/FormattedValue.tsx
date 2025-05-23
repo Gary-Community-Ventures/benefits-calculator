@@ -1,10 +1,8 @@
-import { ReactNode } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useTranslateNumber } from '../../Assets/languageOptions';
 import { FormattedMessageType } from '../../Types/Questions';
 import { Program, ProgramCategory } from '../../Types/Results';
 import { findValidationForProgram, useResultsContext } from './Results';
-import ResultsTranslate from './Translate/Translate';
 
 export function programValue(program: Program) {
   let total = program.household_value;
