@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useTranslateNumber } from '../../Assets/languageOptions';
+import { FormattedMessageType } from '../../Types/Questions';
 import { Program, ProgramCategory } from '../../Types/Results';
 import { findValidationForProgram, useResultsContext } from './Results';
 import ResultsTranslate from './Translate/Translate';
@@ -96,22 +97,15 @@ export const formatToUSD = (num: number) => {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num);
 };
 
-const overrideValue = (func: (program: Program) => ReactNode) => {
-  /* eslint-disable react/display-name */
-  return (program: Program) => {
-    if (program.estimated_value_override.default_message !== '') {
-      return <ResultsTranslate translation={program.estimated_value_override} />;
-    }
-
-    return func(program);
-  };
-};
-
 function useOverrideValue(program: Program, value: string, expectedValue?: string) {
   const { isAdminView } = useResultsContext();
+  const intl = useIntl();
 
   if (program.estimated_value_override.default_message !== '') {
-    return <ResultsTranslate translation={program.estimated_value_override} />;
+    return intl.formatMessage({
+      id: program.estimated_value_override.label,
+      defaultMessage: program.estimated_value_override.default_message,
+    });
   }
 
   if (isAdminView && expectedValue !== undefined) {
@@ -121,30 +115,45 @@ function useOverrideValue(program: Program, value: string, expectedValue?: strin
   return value;
 }
 
-const formats: Record<string, any> = {
-  default: (program: Program) => {
-    const translateNumber = useTranslateNumber();
-    const intl = useIntl();
-
-    const perMonth = intl.formatMessage({ id: 'program-card-month-txt', defaultMessage: '/month' });
-    return translateNumber(formatToUSD(programValue(program) / 12)) + perMonth;
-  },
-  lump_sum: (program: Program) => {
-    const translateNumber = useTranslateNumber();
-    return 'One time payment of ' + translateNumber(formatToUSD(programValue(program)));
-  },
-  estimated_annual: (program: Program) => {
-    const translateNumber = useTranslateNumber();
-    return 'Estimated annual value of ' + translateNumber(formatToUSD(programValue(program)));
-  },
+type DefaultMap<T> = {
+  default: T;
+  [key: string]: T | undefined;
 };
 
+function useValueFormats(): DefaultMap<(program: Program) => string> {
+  const translateNumber = useTranslateNumber();
+  const intl = useIntl();
+
+  return {
+    default: (program: Program) => {
+      const perMonth = intl.formatMessage({ id: 'program-card-month-txt', defaultMessage: '/month' });
+      return translateNumber(formatToUSD(programValue(program) / 12)) + perMonth;
+    },
+    lump_sum: (program: Program) => {
+      return (
+        intl.formatMessage({ id: 'results.programs.values.formats.lump_sum', defaultMessage: 'One-time payment of ' }) +
+        translateNumber(formatToUSD(programValue(program)))
+      );
+    },
+    estimated_annual: (program: Program) => {
+      return (
+        intl.formatMessage({
+          id: 'results.programs.values.formats.estimated_annual',
+          defaultMessage: 'Average annual savings of ',
+        }) + translateNumber(formatToUSD(programValue(program)))
+      );
+    },
+  };
+}
+
 export function useFormatDisplayValue(program: Program) {
-  const calculator = formats[program.value_format ?? 'default'];
+  const formats = useValueFormats();
+  const calculator = formats[program.value_format ?? 'default'] ?? formats.default;
   const value = calculator(program);
   const { validations } = useResultsContext();
   const validation = findValidationForProgram(validations, program);
   const translateNumber = useTranslateNumber();
+
   if (validation !== undefined) {
     const expextedValue = translateNumber(formatToUSD(Number(validation.value) / 12));
     return useOverrideValue(program, value, expextedValue);
@@ -153,21 +162,24 @@ export function useFormatDisplayValue(program: Program) {
   return useOverrideValue(program, value);
 }
 
-export function useFormatMonthlyValue(program: Program) {
-  const translateNumber = useTranslateNumber();
-  const intl = useIntl();
-  const { validations } = useResultsContext();
-  const validation = findValidationForProgram(validations, program);
+export function AnnualValueLabel({ program }: { program: Program }) {
+  const formats: DefaultMap<FormattedMessageType> = {
+    default: <FormattedMessage id="results.estimated-annual-value" defaultMessage="Estimated Annual Value" />,
+    lump_sum: (
+      <FormattedMessage
+        id="results.programs.values.formats.programPage.lump_sum"
+        defaultMessage="Estimated One-Time Payment"
+      />
+    ),
+    estimated_annual: (
+      <FormattedMessage
+        id="results.programs.values.formats.programPage.estimated_annual"
+        defaultMessage="Average Annual Savings"
+      />
+    ),
+  };
 
-  const perMonth = intl.formatMessage({ id: 'program-card-month-txt', defaultMessage: '/month' });
-  const value = translateNumber(formatToUSD(programValue(program) / 12)) + perMonth;
-
-  if (validation !== undefined) {
-    const expextedValue = translateNumber(formatToUSD(Number(validation.value) / 12));
-    return useOverrideValue(program, value, expextedValue);
-  }
-
-  return useOverrideValue(program, value);
+  return formats[program.value_format ?? 'default'] ?? formats.default;
 }
 
 export function useFormatYearlyValue(program: Program) {
