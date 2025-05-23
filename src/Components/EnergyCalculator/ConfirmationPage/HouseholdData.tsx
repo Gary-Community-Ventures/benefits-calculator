@@ -108,7 +108,7 @@ const EnergyCalcConfirmationHHData = () => {
         defaultMessage: 'In-home medical equipment',
       });
       const receiveSsiText = formatMessage({
-        id: 'ecHHMF.they-receiveSsi',
+        id: 'confirmation.ecHHMF.they-receiveSsi',
         defaultMessage:
           'Received full benefits from Social Security, SSI, the Department of Human Services, or a public or private plan',
       });
