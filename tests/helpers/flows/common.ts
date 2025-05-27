@@ -1,0 +1,374 @@
+/**
+ * Common Flow Helpers - Higher-level helpers for common flows
+ * 
+ * This file contains helpers that encapsulate common multi-step flows
+ * in the application, combining multiple lower-level actions.
+ */
+
+import { Page } from '@playwright/test';
+import { 
+  clickContinue, 
+  verifyCurrentUrl 
+} from '../navigation';
+import { 
+  selectDropdownOption, 
+  fillTextField, 
+  checkCheckbox,
+  selectRadio,
+  selectDate,
+  selectIncomeType,
+  selectFrequency,
+  selectExpenseType
+} from '../form';
+import { 
+  FORM_INPUTS,
+  BUTTONS
+} from '../selectors';
+import { 
+  URL_PATTERNS 
+} from '../utils/constants';
+import {
+  FlowResult,
+  PrimaryUserInfo,
+  HouseholdMemberInfo,
+  ExpenseInfo
+} from './types';
+
+/**
+ * Completes the state selection step
+ * @param page - Playwright page instance
+ * @param state - State name to select
+ * @returns Promise with flow result
+ */
+export async function completeStateSelection(
+  page: Page, 
+  state: string
+): Promise<FlowResult> {
+  try {
+    await verifyCurrentUrl(page, URL_PATTERNS.SELECT_STATE);
+    await selectDropdownOption(page, FORM_INPUTS.STATE_SELECT, state);
+    await clickContinue(page);
+    return { success: true, step: 'state-selection' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'state-selection', 
+      error: error as Error 
+    };
+  }
+}
+
+/**
+ * Completes the disclaimer step
+ * @param page - Playwright page instance
+ * @returns Promise with flow result
+ */
+export async function completeDisclaimer(page: Page): Promise<FlowResult> {
+  try {
+    await checkCheckbox(page, FORM_INPUTS.DISCLAIMER_CHECKBOX_1.name);
+    await checkCheckbox(page, FORM_INPUTS.DISCLAIMER_CHECKBOX_2.name);
+    await clickContinue(page);
+    return { success: true, step: 'disclaimer' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'disclaimer', 
+      error: error as Error 
+    };
+  }
+}
+
+/**
+ * Completes the location information step
+ * @param page - Playwright page instance
+ * @param zipCode - Zip code to enter
+ * @param county - County to select
+ * @returns Promise with flow result
+ */
+export async function completeLocationInfo(
+  page: Page, 
+  zipCode: string, 
+  county: string
+): Promise<FlowResult> {
+  try {
+    await verifyCurrentUrl(page, URL_PATTERNS.LOCATION_INFO);
+    await fillTextField(page, FORM_INPUTS.ZIP_CODE.name, zipCode);
+    await selectDropdownOption(page, FORM_INPUTS.COUNTY_SELECT, county);
+    await clickContinue(page);
+    return { success: true, step: 'location-info' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'location-info', 
+      error: error as Error 
+    };
+  }
+}
+
+/**
+ * Completes the household size step
+ * @param page - Playwright page instance
+ * @param householdSize - Household size to enter
+ * @returns Promise with flow result
+ */
+export async function completeHouseholdSize(
+  page: Page, 
+  householdSize: string
+): Promise<FlowResult> {
+  try {
+    await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_SIZE);
+    await fillTextField(page, FORM_INPUTS.HOUSEHOLD_SIZE.name, householdSize);
+    await clickContinue(page);
+    return { success: true, step: 'household-size' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'household-size', 
+      error: error as Error 
+    };
+  }
+}
+
+/**
+ * Completes primary user information
+ * @param page - Playwright page instance
+ * @param userInfo - Primary user information
+ * @returns Promise with flow result
+ */
+export async function completePrimaryUserInfo(
+  page: Page, 
+  userInfo: PrimaryUserInfo
+): Promise<FlowResult> {
+  try {
+    await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_MEMBER);
+    
+    // Enter birth date
+    await selectDate(page, userInfo.birthMonth, userInfo.birthYear);
+    
+    // Skip SSN if applicable
+    await page.getByRole('button', { name: "I don't have or know if I" }).click();
+    
+    // Handle income
+    if (userInfo.hasIncome && userInfo.income) {
+      await selectRadio(page, FORM_INPUTS.YES_RADIO.name);
+      await selectIncomeType(page, userInfo.income.type);
+      await selectFrequency(page, userInfo.income.frequency);
+      await fillTextField(page, FORM_INPUTS.AMOUNT.name, userInfo.income.amount);
+    }
+    
+    await clickContinue(page);
+    return { success: true, step: 'primary-user-info' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'primary-user-info', 
+      error: error as Error 
+    };
+  }
+}
+
+/**
+ * Completes household member information
+ * @param page - Playwright page instance
+ * @param memberInfo - Household member information
+ * @returns Promise with flow result
+ */
+export async function completeHouseholdMemberInfo(
+  page: Page, 
+  memberInfo: HouseholdMemberInfo
+): Promise<FlowResult> {
+  try {
+    await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_MEMBER);
+    
+    // Enter birth date
+    await selectDate(page, memberInfo.birthMonth, memberInfo.birthYear);
+    
+    // Select relationship - use exact matching to avoid ambiguity with similar options
+    await selectDropdownOption(page, FORM_INPUTS.RELATIONSHIP_SELECT, memberInfo.relationship, true);
+    
+    // Skip SSN if applicable
+    await page.getByRole('button', { name: "They don't have or know if" }).click();
+    
+    // Handle income if applicable
+    if (memberInfo.hasIncome && memberInfo.income) {
+      await selectRadio(page, FORM_INPUTS.YES_RADIO.name);
+      await selectIncomeType(page, memberInfo.income.type);
+      await selectFrequency(page, memberInfo.income.frequency);
+      await fillTextField(page, FORM_INPUTS.AMOUNT.name, memberInfo.income.amount);
+    }
+    
+    await clickContinue(page);
+    return { success: true, step: 'household-member-info' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'household-member-info', 
+      error: error as Error 
+    };
+  }
+}
+
+/**
+ * Completes expenses information
+ * @param page - Playwright page instance
+ * @param expenseInfo - Expense information
+ * @returns Promise with flow result
+ */
+export async function completeExpenses(
+  page: Page, 
+  expenseInfo: ExpenseInfo
+): Promise<FlowResult> {
+  try {
+    await verifyCurrentUrl(page, URL_PATTERNS.EXPENSES);
+    
+    if (expenseInfo.hasExpenses) {
+      await selectRadio(page, FORM_INPUTS.YES_RADIO.name);
+      await selectExpenseType(page, expenseInfo.type);
+      await fillTextField(page, FORM_INPUTS.AMOUNT.name, expenseInfo.amount);
+    }
+    
+    await clickContinue(page);
+    return { success: true, step: 'expenses' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'expenses', 
+      error: error as Error 
+    };
+  }
+}
+
+/**
+ * Completes assets information
+ * @param page - Playwright page instance
+ * @param assetAmount - Asset amount to enter
+ * @returns Promise with flow result
+ */
+export async function completeAssets(
+  page: Page, 
+  assetAmount: string
+): Promise<FlowResult> {
+  try {
+    await verifyCurrentUrl(page, URL_PATTERNS.ASSETS);
+    await fillTextField(page, FORM_INPUTS.DOLLAR_AMOUNT.name, assetAmount);
+    await clickContinue(page);
+    return { success: true, step: 'assets' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'assets', 
+      error: error as Error 
+    };
+  }
+}
+
+/**
+ * Completes public benefits step (typically just continues)
+ * @param page - Playwright page instance
+ * @returns Promise with flow result
+ */
+export async function completePublicBenefits(page: Page): Promise<FlowResult> {
+  try {
+    await verifyCurrentUrl(page, URL_PATTERNS.PUBLIC_BENEFITS);
+    await clickContinue(page);
+    return { success: true, step: 'public-benefits' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'public-benefits', 
+      error: error as Error 
+    };
+  }
+}
+
+/**
+ * Completes needs selection
+ * @param page - Playwright page instance
+ * @param needs - Array of need options to select
+ * @returns Promise with flow result
+ */
+export async function completeNeeds(
+  page: Page, 
+  needs: string[]
+): Promise<FlowResult> {
+  try {
+    await verifyCurrentUrl(page, URL_PATTERNS.NEEDS);
+    
+    // Select each need
+    for (const need of needs) {
+      await page.getByRole('button', { name: need }).click();
+    }
+    
+    await clickContinue(page);
+    return { success: true, step: 'needs' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'needs', 
+      error: error as Error 
+    };
+  }
+}
+
+/**
+ * Completes referral source selection
+ * @param page - Playwright page instance
+ * @param referralSource - Referral source to select
+ * @returns Promise with flow result
+ */
+export async function completeReferralSource(
+  page: Page, 
+  referralSource: string
+): Promise<FlowResult> {
+  try {
+    await verifyCurrentUrl(page, URL_PATTERNS.REFERRAL_SOURCE);
+    await selectDropdownOption(page, FORM_INPUTS.REFERRAL_SOURCE_SELECT, referralSource);
+    await clickContinue(page);
+    return { success: true, step: 'referral-source' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'referral-source', 
+      error: error as Error 
+    };
+  }
+}
+
+/**
+ * Completes additional information step (typically just continues)
+ * @param page - Playwright page instance
+ * @returns Promise with flow result
+ */
+export async function completeAdditionalInfo(page: Page): Promise<FlowResult> {
+  try {
+    await verifyCurrentUrl(page, URL_PATTERNS.ADDITIONAL_INFO);
+    await clickContinue(page);
+    return { success: true, step: 'additional-info' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'additional-info', 
+      error: error as Error 
+    };
+  }
+}
+
+/**
+ * Confirms information and navigates to results
+ * @param page - Playwright page instance
+ * @returns Promise with flow result
+ */
+export async function navigateToResults(page: Page): Promise<FlowResult> {
+  try {
+    await verifyCurrentUrl(page, URL_PATTERNS.CONFIRM_INFORMATION);
+    await clickContinue(page);
+    await verifyCurrentUrl(page, URL_PATTERNS.RESULTS);
+    return { success: true, step: 'navigate-to-results' };
+  } catch (error) {
+    return { 
+      success: false, 
+      step: 'navigate-to-results', 
+      error: error as Error 
+    };
+  }
+}
