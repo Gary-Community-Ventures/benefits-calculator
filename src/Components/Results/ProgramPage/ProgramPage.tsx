@@ -4,7 +4,7 @@ import ResultsTranslate from '../Translate/Translate';
 import { headingOptionsMappings } from '../CategoryHeading/CategoryHeading';
 import BackAndSaveButtons from '../BackAndSaveButtons/BackAndSaveButtons';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { AnnualValueLabel, programValue, useFormatYearlyValue } from '../FormattedValue';
+import { YearlyValueLabel, programValue, useFormatYearlyValue } from '../FormattedValue';
 import './ProgramPage.css';
 import WarningMessage from '../../WarningComponent/WarningMessage';
 import { useContext, useMemo } from 'react';
@@ -153,7 +153,7 @@ const ProgramPage = ({ program }: ProgramPageProps) => {
       <section className="estimation">
         <div className="estimation-text">
           <article className="estimation-text-left">
-            <AnnualValueLabel program={program} />
+            <YearlyValueLabel program={program} />
           </article>
           <article className="estimation-text-right slim-text">{value}</article>
         </div>

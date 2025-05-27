@@ -160,7 +160,7 @@ export function useFormatDisplayValue(program: Program) {
   return useOverrideValue(program, value);
 }
 
-export function AnnualValueLabel({ program }: { program: Program }) {
+export function YearlyValueLabel({ program }: { program: Program }) {
   const formats: DefaultMap<FormattedMessageType> = {
     default: <FormattedMessage id="results.estimated-annual-value" defaultMessage="Estimated Annual Value" />,
     lump_sum: (
