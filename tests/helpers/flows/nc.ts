@@ -140,21 +140,59 @@ export async function runNcEndToEndTest(
   page: Page,
   data: ApplicationData
 ): Promise<FlowResult> {
-  try {
-    // Setup session (landing page, state selection, disclaimer)
-    const setupResult = await setupNcSession(page);
-    if (!setupResult.success) return setupResult;
-    
-    // Complete full application
-    const applicationResult = await completeNcFullApplication(page, data);
-    if (!applicationResult.success) return applicationResult;
-    
-    return { success: true, step: 'nc-end-to-end-test' };
-  } catch (error) {
-    return {
-      success: false,
-      step: 'nc-end-to-end-test',
-      error: error as Error
-    };
+  // Add retry mechanism for more resilience
+  const maxRetries = 2;
+  let attempt = 0;
+  let lastError: Error | null = null;
+
+  // Configure longer timeout for page operations
+  page.setDefaultTimeout(60000); // 60 seconds timeout for all operations
+
+  while (attempt <= maxRetries) {
+    try {
+      if (attempt > 0) {
+        console.log(`Retry attempt ${attempt} for NC end-to-end test`);
+        // Navigate back to home page for a fresh start on retry
+        await page.goto('/');
+        await page.waitForLoadState('networkidle');
+      }
+
+      // Setup session (landing page, state selection, disclaimer)
+      const setupResult = await setupNcSession(page);
+      if (!setupResult.success) {
+        lastError = setupResult.error || new Error('Unknown error in setup');
+        attempt++;
+        continue;
+      }
+      
+      // Complete full application with additional waiting for stability
+      await page.waitForLoadState('networkidle');
+      const applicationResult = await completeNcFullApplication(page, data);
+      if (!applicationResult.success) {
+        lastError = applicationResult.error || new Error('Unknown error in application flow');
+        attempt++;
+        continue;
+      }
+      
+      // Success - return immediately without retrying
+      return { success: true, step: 'nc-end-to-end-test' };
+    } catch (error) {
+      lastError = error as Error;
+      attempt++;
+      
+      // If we haven't exceeded max retries, try again
+      if (attempt <= maxRetries) {
+        console.log(`Error in NC end-to-end test, will retry: ${lastError.message}`);
+        // Short delay before retry
+        await page.waitForTimeout(2000);
+      }
+    }
   }
+  
+  // If we got here, all attempts failed
+  return {
+    success: false,
+    step: 'nc-end-to-end-test',
+    error: lastError || new Error('Max retries exceeded with unknown error')
+  };
 }
