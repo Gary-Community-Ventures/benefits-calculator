@@ -35,12 +35,17 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
 }
 
 type MainQueryParamName = 'externalid' | 'referrer' | 'path' | 'test';
-export function useQueryString(override?: Partial<Record<MainQueryParamName, string>>): string {
+export function useQueryString(override?: Partial<Record<MainQueryParamName, string | null>>): string {
   const { formData } = useContext(Context);
   const query = new URLSearchParams();
 
   const setParam = (name: MainQueryParamName, value: string | undefined, ...dontShowConditions: unknown[]) => {
     let overrideValue = override?.[name];
+
+    if (overrideValue === null) {
+      return;
+    }
+
     if (overrideValue !== undefined) {
       query.append(name, overrideValue);
       return;

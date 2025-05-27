@@ -25,8 +25,10 @@ export type ProgramCategoryCap = {
   member_caps: { [key: string]: number } | null;
 };
 
-export type WarningMessage = {
+export type WarningMsg = {
   message: Translation;
+  link_url: Translation;
+  link_text: Translation;
   legal_statuses: CitizenLabels[];
 };
 

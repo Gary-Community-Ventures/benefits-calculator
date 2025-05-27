@@ -14,7 +14,7 @@ const LandingPage = () => {
     document.title = OTHER_PAGE_TITLES.energyCalculatorLandingPage;
   }, []);
 
-  const homeownerQueryString = useQueryString();
+  const homeownerQueryString = useQueryString({ path: null });
   const renterQueryString = useQueryString({ path: 'renter' });
 
   return (

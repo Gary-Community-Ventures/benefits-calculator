@@ -3,23 +3,6 @@ import { useState, useEffect } from 'react';
 import { getAllLongTermPrograms, getAllNearTermPrograms } from '../../apiCalls';
 import { Translation } from '../../Types/Results';
 import ResultsTranslate from '../Results/Translate/Translate';
-import { ReactComponent as Food } from '../../Assets/icons/Programs/CategoryHeading/food.svg';
-import { ReactComponent as Housing } from '../../Assets/icons/Programs/CategoryHeading/housing.svg';
-import { ReactComponent as HealthCare } from '../../Assets/icons/Programs/CategoryHeading/healthcare.svg';
-import { ReactComponent as Transportation } from '../../Assets/icons/Programs/CategoryHeading/transportation.svg';
-import { ReactComponent as TaxCredits } from '../../Assets/icons/Programs/CategoryHeading/taxCredits.svg';
-import { ReactComponent as CashAssistance } from '../../Assets/icons/Programs/CategoryHeading/cashAssistant.svg';
-import { ReactComponent as ChildCareYouthEducation } from '../../Assets/icons/Programs/CategoryHeading/childCareYouthEducation.svg';
-import { ReactComponent as FoodOrGroceries } from '../../Assets/icons/UrgentNeeds/AcuteConditions/food.svg';
-import { ReactComponent as BabySupplies } from '../../Assets/icons/UrgentNeeds/AcuteConditions/baby_supplies.svg';
-import { ReactComponent as ManagingHousingCosts } from '../../Assets/icons/UrgentNeeds/AcuteConditions/housing.svg';
-import { ReactComponent as BehavioralHealth } from '../../Assets/icons/UrgentNeeds/AcuteConditions/support.svg';
-import { ReactComponent as ChildDevelopment } from '../../Assets/icons/UrgentNeeds/AcuteConditions/child_development.svg';
-import { ReactComponent as FamilyPlanning } from '../../Assets/icons/UrgentNeeds/AcuteConditions/family_planning.svg';
-import { ReactComponent as JobResources } from '../../Assets/icons/UrgentNeeds/AcuteConditions/job_resources.svg';
-import { ReactComponent as DentalCare } from '../../Assets/icons/UrgentNeeds/AcuteConditions/dental_care.svg';
-import { ReactComponent as LegalServices } from '../../Assets/icons/UrgentNeeds/AcuteConditions/legal_services.svg';
-import { ReactComponent as Military } from '../../Assets/icons/UrgentNeeds/AcuteConditions/military.svg';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import './CurrentBenefits.css';
 import QuestionHeader from '../QuestionComponents/QuestionHeader';
@@ -27,26 +10,14 @@ import { useTranslateNumber } from '../../Assets/languageOptions';
 import { useParams } from 'react-router-dom';
 import { useConfig } from '../Config/configHook';
 import { FormattedMessageType } from '../../Types/Questions';
+import { headingOptionsMappings } from '../Results/CategoryHeading/CategoryHeading';
+import { acuteConditionResultMapping } from '../../Assets/acuteConditionOptions';
+import { ReactComponent as CashAssistance } from '../../Assets/icons/Programs/CategoryHeading/cashAssistant.svg';
 
 export const iconCategoryMap: { [key: string]: React.ComponentType } = {
   default: CashAssistance,
-  housing: Housing,
-  food: Food,
-  health_care: HealthCare,
-  transportation: Transportation,
-  tax_credit: TaxCredits,
-  cash: CashAssistance,
-  child_care: ChildCareYouthEducation,
-  'Food or Groceries': FoodOrGroceries,
-  'Baby Supplies': BabySupplies,
-  'Managing housing costs': ManagingHousingCosts,
-  'Behavioral health': BehavioralHealth,
-  "Child's development": ChildDevelopment,
-  'Family planning': FamilyPlanning,
-  'Job resources': JobResources,
-  'Low-cost dental care': DentalCare,
-  'Civil legal needs': LegalServices,
-  'Veterans resources': Military,
+  ...acuteConditionResultMapping,
+  ...headingOptionsMappings,
 };
 
 export type Program = {
@@ -87,14 +58,50 @@ const CurrentBenefits = () => {
     throw new Error('white label is not defined');
   }
 
+  const normalizeString = (str: Translation) => {
+    return intl
+      .formatMessage({
+        id: str.label,
+        defaultMessage: str.default_message,
+      })
+      .toUpperCase();
+  };
+
+  function sortNames<T extends { name: Translation }>(a: T, b: T): number {
+    const nameA = normalizeString(a.name);
+    const nameB = normalizeString(b.name);
+
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    return 0;
+  }
+
+  const sortAlphabetically = (categories: Category[]) => {
+    return [...categories]
+      .map((category) => {
+        return {
+          ...category,
+          programs: category.programs.sort(sortNames),
+        };
+      })
+      .sort(sortNames);
+  };
+
   useEffect(() => {
     getAllLongTermPrograms(whiteLabel).then((programs: Category[]) => {
-      setProgramCategories(programs);
+      const sorted = sortAlphabetically(programs);
+      setProgramCategories(sorted);
       setProgramsLoaded(true);
     });
 
     getAllNearTermPrograms(whiteLabel).then((urgentNeeds: Category[]) => {
-      setUrgentNeedCategories(urgentNeeds);
+      const sorted = sortAlphabetically(urgentNeeds);
+      setUrgentNeedCategories(sorted);
       setUrgentNeedsLoaded(true);
     });
   }, []);
@@ -116,7 +123,7 @@ const CurrentBenefits = () => {
     const categoryHeaderIconAndPrograms = Object.values(categories).map((category, index) => {
       const { name, programs, icon } = category;
 
-      let CategoryIcon = iconCategoryMap[icon];
+      let CategoryIcon = iconCategoryMap[icon.toLowerCase()];
 
       if (CategoryIcon === undefined) {
         // NOTE: The urgent needs are mapped by the default_message of the name of the category,

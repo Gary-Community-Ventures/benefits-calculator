@@ -8,46 +8,18 @@ import { ReactComponent as Job_resources } from './icons/UrgentNeeds/AcuteCondit
 import { ReactComponent as Legal_services } from './icons/UrgentNeeds/AcuteConditions/legal_services.svg';
 import { ReactComponent as Support } from './icons/UrgentNeeds/AcuteConditions/support.svg';
 import { ReactComponent as Military } from './icons/UrgentNeeds/AcuteConditions/military.svg';
+import { ComponentType } from 'react';
 
-export const acuteConditionResultMapping = {
-  food: {
-    api_default_message: 'Food or groceries',
-    icon: <Food />,
-  },
-  babySupplies: {
-    api_default_message: 'Baby Supplies',
-    icon: <Baby_supplies />,
-  },
-  housing: {
-    api_default_message: 'Managing housing costs',
-    icon: <Housing />,
-  },
-  support: {
-    api_default_message: 'Behavioral Health',
-    icon: <Support />,
-  },
-  childDevelopment: {
-    api_default_message: "Child's development",
-    icon: <Child_development />,
-  },
-  familyPlanning: {
-    api_default_message: 'Family planning',
-    icon: <Family_planning />,
-  },
-  jobResources: {
-    api_default_message: 'Job resources',
-    icon: <Job_resources />,
-  },
-  dentalCare: {
-    api_default_message: 'Low-cost dental care',
-    icon: <Dental_care />,
-  },
-  legalServices: {
-    api_default_message: 'Civil legal needs',
-    icon: <Legal_services />,
-  },
-  veteranServices: {
-    api_default_message: 'Veterans resources',
-    icon: <Military />,
-  },
+// NOTE: keys must be lower case
+export const acuteConditionResultMapping: { [key: string]: ComponentType } = {
+  'food or groceries': Food,
+  'baby supplies': Baby_supplies,
+  'managing housing costs': Housing,
+  'behavioral health': Support,
+  "child's development": Child_development,
+  'family planning': Family_planning,
+  'job resources': Job_resources,
+  'low-cost dental care': Dental_care,
+  'civil legal needs': Legal_services,
+  'veterans resources': Military,
 };

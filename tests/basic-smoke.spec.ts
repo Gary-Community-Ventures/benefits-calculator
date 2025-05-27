@@ -1,11 +1,11 @@
 import { test } from '@playwright/test';
-import { 
+import {
   navigateToHomePage,
   verifyCurrentUrl,
   clickGetStarted,
   verifyPageLoaded,
   verifyLanguageSelectorVisible,
-  verifyButtonVisible
+  verifyButtonVisible,
 } from './helpers';
 import { URL_PATTERNS } from './helpers/utils/constants';
 
@@ -17,10 +17,10 @@ test.describe('MyFriendBen Smoke Test', () => {
   test('application loads', async ({ page }) => {
     // Navigate to homepage
     await navigateToHomePage(page);
-    
+
     // Verify page has loaded
     await verifyPageLoaded(page);
-    
+
     // Verify we're on the landing page
     await verifyCurrentUrl(page, URL_PATTERNS.LANDING_PAGE);
 

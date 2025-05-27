@@ -17,3 +17,7 @@
   height: 2rem;
   fill: #ff0000;
 }
+
+.warning-message-link {
+  padding-left: 0.25rem;
+}

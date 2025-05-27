@@ -22,12 +22,14 @@ const MoreHelp = () => {
             {resource.name}
           </h1>
           {resource.description && <p className="resource-desc">{resource.description}</p>}
-          {resource.link && (
-            <a href={resource.link} className="resource-link" target="_blank">
-              {resource.link}
-            </a>
-          )}
           {resource.phone && <p className="resource-phone">{resource.phone}</p>}
+          <div className="resource-link-container">
+            {resource.link && (
+              <a href={resource.link} className="visit-website-btn" target="_blank">
+                <FormattedMessage id="visit-website-btn" defaultMessage="Visit Website" />
+              </a>
+            )}
+          </div>
         </article>
       );
     });
