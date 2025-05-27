@@ -145,7 +145,7 @@ export async function completePrimaryUserInfo(
     // Enter birth date
     await selectDate(page, userInfo.birthMonth, userInfo.birthYear);
     
-    // Skip SSN if applicable
+    // Handle health insurance
     await page.getByRole('button', { name: "I don't have or know if I" }).click();
     
     // Handle income
@@ -186,7 +186,7 @@ export async function completeHouseholdMemberInfo(
     // Select relationship - use exact matching to avoid ambiguity with similar options
     await selectDropdownOption(page, FORM_INPUTS.RELATIONSHIP_SELECT, memberInfo.relationship, true);
     
-    // Skip SSN if applicable
+    // Handle health insurance
     await page.getByRole('button', { name: "They don't have or know if" }).click();
     
     // Handle income if applicable

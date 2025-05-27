@@ -11,7 +11,6 @@ import { URL_PATTERNS } from './helpers/utils/constants';
 
 /**
  * Basic smoke test: verify the application loads and has expected elements
- * Refactored to use helper functions for better maintainability
  */
 test.describe('MyFriendBen Smoke Test', () => {
   test('application loads', async ({ page }) => {

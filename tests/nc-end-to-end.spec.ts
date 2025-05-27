@@ -9,7 +9,6 @@ import { URL_PATTERNS } from './helpers/utils/constants';
 
 /**
  * NC white label end-to-end test
- * Refactored to use the helper framework for improved stability
  */
 test.describe('NC Screen Test', () => {
   // Set a longer timeout for this test to avoid issues with UI interactions
