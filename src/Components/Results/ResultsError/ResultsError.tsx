@@ -24,6 +24,10 @@ const ResultsError = () => {
           />
           {email}
         </p>
+        <p className="error-uuid">
+          <FormattedMessage id="results-error.uuid" defaultMessage="Reference ID: " />
+          {uuid}
+        </p>
         <Button
           className="error-button"
           onClick={() => {
