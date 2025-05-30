@@ -26,3 +26,10 @@
 button.error-button {
   margin-top: 3rem;
 }
+
+.error-uuid {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 1rem;
+  font-family: 'Open Sans', sans-serif;
+}
