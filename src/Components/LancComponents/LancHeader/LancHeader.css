@@ -1,0 +1,86 @@
+.cobranded-logo {
+  max-width: 20rem;
+  display: block;
+}
+
+.MuiTypography-root.MuiLink-root.lancMenuLink {
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.lanc-globe-icon {
+  color: var(--primary-color);
+}
+
+.lanc-header-container {
+  height: 5rem;
+  width: 100%;
+}
+
+#lanc-select-language {
+  padding: 0;
+  color: #005191;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  margin-right: 1.5rem;
+  text-transform: uppercase;
+}
+
+#lanc-nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--main-max-width);
+  margin: auto;
+  height: 100%;
+  padding: 0 1rem;
+}
+
+#lanc-select-language:focus-visible {
+  outline: -webkit-focus-ring-color auto 1px;
+}
+
+button.hamburger-icon {
+  display: none;
+}
+
+#hamburger-drawer {
+  display: none;
+}
+
+#lanc-NC-select-language {
+  padding: 0;
+  color: #21296b;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  margin-right: 1.5rem;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1280px) {
+  button.hamburger-icon {
+    display: flex;
+  }
+
+  #hamburger-drawer {
+    display: flex;
+    background-color: #fff;
+    position: relative;
+    z-index: 1000;
+    padding: 1rem;
+    align-items: flex-end;
+    gap: 1rem;
+    height: 100vh;
+  }
+
+  div.lanc-desktop-links {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .cobranded-logo {
+    width: 90%;
+  }
+}

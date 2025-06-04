@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export type ThemeName = 'default' | 'twoOneOne' | 'twoOneOneNC' | 'co_energy';
+export type ThemeName = 'default' | 'twoOneOne' | 'twoOneOneNC' | 'co_energy' | 'lanc';
 
 export interface ITheme {
   primaryColor: string;
@@ -82,6 +82,31 @@ const themes: Themes = {
     },
   },
   twoOneOneNC: {
+    primaryColor: '#21296B',
+    secondaryColor: '#21296B',
+    midBlueColor: '#41528C',
+    footerColor: '#ffffff',
+    secondaryBackgroundColor: '#F7F7F7',
+    hoverColor: '#FFFFFF',
+    outlineHoverBackgroundColor: '#21296B',
+    outlineHoverColor: '#FFFFFF',
+    progressBarColor: '#5082F0',
+    cssVariables: {
+      '--primary-color': '#21296B',
+      '--secondary-color': '#21296B',
+      '--secondary-background-color': '#F7F7F7',
+      '--main-max-width': '1310px',
+      'font-size': '18px',
+      '--midBlue-color': '#41528C',
+      '--hover-color': '#FFFFFF',
+      '--icon-color': '#ff443b',
+      '--secondary-icon-color': '#21296B',
+      '--option-card-hover-font-color': '#1D1C1E',
+      '--footer-color': '#ffffff',
+      '--active-border-color': '#21296B',
+    },
+  },
+  lanc: {
     primaryColor: '#21296B',
     secondaryColor: '#21296B',
     midBlueColor: '#41528C',

@@ -13,17 +13,25 @@ import TwoOneOneHeaderNC from '../TwoOneOneNCComponents/TwoOneOneHeaderNC/TwoOne
 import TwoOneOneFooterNC from '../TwoOneOneNCComponents/TwoOneOneFooterNC/TwoOneOneFooterNC';
 import PoweredByFooter from '../Footer/PoweredByFooter';
 import EnergyCalculatorFooter from '../EnergyCalculator/Footer/Footer';
+import LancHeader from '../LancComponents/LancHeader/LancHeader';
+import LancFooter from '../LancComponents/LancFooter/LancFooter';
 
 export const BrandedHeader = () => {
   const { getReferrer } = useContext(Context);
   const featureFlags = getReferrer('featureFlags');
+console.log("featureFlags: ", featureFlags)
 
+console.log('getReferrer("featureFlags"):', getReferrer('featureFlags'));
   if (featureFlags.includes('211co')) {
     return <TwoOneOneHeaderCO />;
   }
 
   if (featureFlags.includes('211nc')) {
     return <TwoOneOneHeaderNC />;
+  }
+
+  if (featureFlags.includes('lanc')) {
+    return <LancHeader />;
   }
 
   return <Header />;
@@ -39,6 +47,10 @@ export const BrandedFooter = () => {
 
   if (featureFlags.includes('211nc')) {
     return <TwoOneOneFooterNC />;
+  }
+
+  if (featureFlags.includes('lanc')) {
+    return <LancFooter />;
   }
 
   if (featureFlags.includes('energy_calculator')) {
