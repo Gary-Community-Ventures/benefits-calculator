@@ -27,7 +27,7 @@ const LancFooter = () => {
       <Stack direction="row" gap="1rem">
         <img src={dialIcon} className="lanc-footer-icon" alt="talk to a LANC navigator via phone" />
         <Box sx={{ textAlign: 'center' }}>
-          <Typography className="font-color">
+          <Typography>
             <FormattedMessage id="footer-dial-text-lanc" defaultMessage="Call the Helpline at " />
           </Typography>
           <Link
@@ -36,17 +36,14 @@ const LancFooter = () => {
             target="_blank"
             aria-label={intl.formatMessage(lancDialALProps)}
             color="primary"
-            // sx={{ display: 'inline-block' }}
           >
             1-866-219-LANC (5262)
           </Link>
-          {/* &nbsp; */}
-          {/* <Typography className="font-color" sx={{ display: 'inline-block' }}> */}
           <Typography>
             <FormattedMessage id="footer-or-text-nc" defaultMessage=" or" />
             &nbsp;
           </Typography>
-          <Typography className="font-color">
+          <Typography>
             <FormattedMessage id="footer-apply-text-lanc" defaultMessage="Apply online at " />
           </Typography>
           <Link
@@ -55,7 +52,6 @@ const LancFooter = () => {
             target="_blank"
             aria-label={intl.formatMessage(lancApplyALProps)}
             color="primary"
-            // sx={{ display: 'inline-block' }}
           >
             https://legalaidnc.org/apply
           </Link>

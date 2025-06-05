@@ -111,7 +111,6 @@ const LancHeader = () => {
     return (
       <IconButton
         edge="end"
-        color="primary"
         aria-label={
           openMenu ? intl.formatMessage(closeBtnAriaLabelProps) : intl.formatMessage(openMenuBtnAriaLabelProps)
         }
@@ -132,7 +131,7 @@ const LancHeader = () => {
 
     const dropdownMenuItems = menuItemKeyLabelPairArr.map((key) => {
       return (
-        <MenuItem value={key[0]} key={key[0]} sx={{ color: '#21296B' }}>
+        <MenuItem value={key[0]} key={key[0]} sx={{ color: '#000000' }}>
           {key[1]}
         </MenuItem>
       );
@@ -159,7 +158,7 @@ const LancHeader = () => {
               <LanguageIcon className="lanc-globe-icon" />
               <Select
                 labelId="select-language-label"
-                id="lanc-NC-select-language"
+                id="lanc-select-language"
                 value={locale}
                 label="Language"
                 onChange={handleLanguageChange}
@@ -169,15 +168,14 @@ const LancHeader = () => {
                 open={isLanguageSelectOpen}
                 onOpen={handleOpenLanguage}
                 onClose={handleCloseLanguage}
-                sx={{ '& .MuiSvgIcon-root': { color: '#21296B' } }}
+                sx={{ '& .MuiSvgIcon-root': { color: '#000000' } }}
               >
                 {createMenuItems(languageOptions)}
               </Select>
               <IconButton
-                color="primary"
                 onClick={handleOpenShare}
                 aria-label={intl.formatMessage(shareButtonAriaLabelProps)}
-                sx={{ padding: '0' }}
+                sx={{ padding: '0', color: '#000000' }}
               >
                 <ShareIcon role="img" />
               </IconButton>

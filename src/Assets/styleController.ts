@@ -107,28 +107,29 @@ const themes: Themes = {
     },
   },
   lanc: {
-    primaryColor: '#21296B',
-    secondaryColor: '#21296B',
-    midBlueColor: '#41528C',
-    footerColor: '#ffffff',
-    secondaryBackgroundColor: '#F7F7F7',
-    hoverColor: '#FFFFFF',
-    outlineHoverBackgroundColor: '#21296B',
-    outlineHoverColor: '#FFFFFF',
-    progressBarColor: '#5082F0',
+    // deeper blue didn't use so far, #003863
+    primaryColor: '#268FBF',
+    secondaryColor: '#268FBF', // get help and share link, estimate value section bg color
+    midBlueColor: '#268FBF', // BACK button text color
+    footerColor: '#FFFFFF', 
+    secondaryBackgroundColor: '#F7F7F7', // Results page banner
+    hoverColor: '#FFFFFF', // CONTINUE button hover bg color
+    outlineHoverBackgroundColor: '#268FBF', // BACK button hover bg color
+    outlineHoverColor: '#FFFFFF', // BACK button text color -- hover
+    progressBarColor: '#8CCCF2',
     cssVariables: {
-      '--primary-color': '#21296B',
-      '--secondary-color': '#21296B',
-      '--secondary-background-color': '#F7F7F7',
+      '--primary-color': '#268FBF',
+      '--secondary-color': '#268FBF',
+      '--secondary-background-color': '#F7F7F7', // tos, income, confirm block bg
       '--main-max-width': '1310px',
       'font-size': '18px',
-      '--midBlue-color': '#41528C',
-      '--hover-color': '#FFFFFF',
-      '--icon-color': '#ff443b',
-      '--secondary-icon-color': '#21296B',
-      '--option-card-hover-font-color': '#1D1C1E',
-      '--footer-color': '#ffffff',
-      '--active-border-color': '#21296B',
+      '--midBlue-color': '#268FBF', // not in use so far
+      '--hover-color': '#ffffff',
+      '--icon-color': '#D6743F', // tile icons and help bubbles
+      '--secondary-icon-color': '#000000', // tile icons on Confirm page
+      '--option-card-hover-font-color': '#1D1C1E', // hover color for tiles text on Urgent Need, step 9
+      '--footer-color': '#ffffff', // not in use so far
+      '--active-border-color': '#8CCCF2', // You, them card border color
     },
   },
   co_energy: {
