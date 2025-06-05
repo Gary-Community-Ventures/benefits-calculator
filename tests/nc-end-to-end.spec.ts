@@ -58,7 +58,7 @@ test.describe('NC Screen Test', () => {
       const febOption = page.locator('li[role="option"]', { hasText: 'February' }).first();
       await febOption.waitFor({ state: 'visible' });
       // await expect(febOption).toBeVisible();
-      await febOption.click();
+      await febOption.click({ force: true });
       await page.getByRole('button', { name: 'Open' }).click();
       await page.getByRole('option', { name: '2020' }).click();
       await page.locator('#relationship-to-hh-select').click();
