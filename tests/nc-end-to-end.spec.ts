@@ -26,8 +26,8 @@ test.describe('NC Screen Test', () => {
       await expect(page).toHaveURL(/\/nc\/.*\/step-3/);
       await page.getByRole('textbox', { name: 'Zip Code' }).click();
       await page.getByRole('textbox', { name: 'Zip Code' }).fill('27704');
-      await page.locator('#county-source-select').click();
-      await page.getByRole('option', { name: 'Durham County' }).click();
+      // await page.locator('#county-source-select').click();
+      // await page.getByRole('option', { name: 'Durham County' }).click();
       await page.getByRole('button', { name: 'Continue' }).click();
     });
     await test.step('Step-4: Household Size', async () => {
