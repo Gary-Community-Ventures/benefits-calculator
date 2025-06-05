@@ -56,7 +56,8 @@ test.describe('NC Screen Test', () => {
       await page.getByRole('button', { name: 'Birth Month' }).click();
       await page.getByRole('listbox', { name: 'Birth Month' }).waitFor({ state: 'visible' });
       const febOption = page.locator('li[role="option"]', { hasText: 'February' }).first();
-      await expect(febOption).toBeVisible();
+      await febOption.waitFor({ state: 'visible' });
+      // await expect(febOption).toBeVisible();
       await febOption.click();
       await page.getByRole('button', { name: 'Open' }).click();
       await page.getByRole('option', { name: '2020' }).click();
