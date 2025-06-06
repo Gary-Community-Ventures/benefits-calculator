@@ -55,7 +55,6 @@ const LancFooter = () => {
           >
             https://legalaidnc.org/apply
           </Link>
-
         </Box>
       </Stack>
     );
@@ -85,11 +84,11 @@ const LancFooter = () => {
 
   const displayCopyrightPolicySection = () => {
     return (
-      <Box className="lanc-font flexIntoRow copyright-container">
+      <Box className="lanc-font flex-row copyright-container">
         <Typography className="privacy-policy-links">
           <FormattedMessage id="footer-copyright-lanc" defaultMessage="© Copyright LANC North Carolina" />
         </Typography>
-        <Box className="flexLinksIntoRow">
+        <Box className="flex-row-links">
           <Link
             href="https://legalaidnc.org/privacy-policy-2/"
             underline="none"
@@ -117,16 +116,16 @@ const LancFooter = () => {
   return (
     <footer>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef' }} className="paper-container" square={true}>
-        <Box className="lanc-font flexIntoRow getHelp-text">
+        <Box className="lanc-font flex-row get-help-text">
           <FormattedMessage
             id="footer-header-lanc"
             defaultMessage="To apply for help from Legal Aid of North Carolina:"
           />
         </Box>
-        <Box className="flexIntoRow icon-section">{displayDialStack()}</Box>
+        <Box className="flex-row icon-section">{displayDialStack()}</Box>
       </Paper>
-      <Box className="flexIntoRow footer-paragraph first-paragraph">{displayFirstParagraph()}</Box>
-      <Box className="flexIntoRow footer-paragraph second-paragraph">{displaySecondParagraph()}</Box>
+      <Box className="flex-row footer-paragraph first-paragraph">{displayFirstParagraph()}</Box>
+      <Box className="flex-row footer-paragraph second-paragraph">{displaySecondParagraph()}</Box>
       <Paper elevation={0} sx={{ width: '100%', backgroundColor: '#efefef', padding: '1rem 1rem' }} square={true}>
         {displayCopyrightPolicySection()}
       </Paper>

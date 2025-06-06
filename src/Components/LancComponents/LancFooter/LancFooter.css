@@ -6,27 +6,21 @@
   word-spacing: 1px;
 }
 
-.MuiTypography-root.icon-header {
-  color: #505050;
-  font-family: 'league-gothic', Helvetica, Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: 550;
-  line-height: 1.1em;
-  margin-bottom: 1rem;
-  word-spacing: 1px;
-}
-
 .lanc-footer-icon {
   max-width: 150px;
   height: 130px;
   color: #005191;
 }
 
+.get-help-text {
+  margin-bottom: 2.5rem;
+}
+
 .font-weight {
   font-weight: 700;
 }
 
-.flexIntoRow {
+.flex-row {
   max-width: var(--main-max-width);
   justify-content: center;
   padding: 0 1rem;
@@ -34,7 +28,7 @@
   flex-direction: row;
 }
 
-.flexLinksIntoRow {
+.flex-row-links {
   display: flex;
   flex-direction: row;
 }
@@ -69,25 +63,15 @@
   font-family: 'league-gothic', Helvetica, Arial, sans-serif;
 }
 
-.displayInline {
-  display: inline;
-}
-
-.lancNC-footer-icon {
-  max-width: 8rem;
-  height: 7rem;
-  color: #0044b5;
-}
-
 .MuiPaper-root.paper-container {
   padding: 1rem;
 }
 
 @media (max-width: 870px) {
-  .flexIntoRow,
-  .flexLinksIntoRow {
+  .flex-row,
+  .flex-row-links {
     flex-direction: column;
-    align-items: start;
+    align-items: center;
   }
 
   .MuiPaper-root.paper-container {

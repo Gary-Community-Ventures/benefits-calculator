@@ -19,9 +19,7 @@ import LancFooter from '../LancComponents/LancFooter/LancFooter';
 export const BrandedHeader = () => {
   const { getReferrer } = useContext(Context);
   const featureFlags = getReferrer('featureFlags');
-console.log("featureFlags: ", featureFlags)
 
-console.log('getReferrer("featureFlags"):', getReferrer('featureFlags'));
   if (featureFlags.includes('211co')) {
     return <TwoOneOneHeaderCO />;
   }

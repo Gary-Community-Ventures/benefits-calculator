@@ -108,27 +108,27 @@ const themes: Themes = {
   },
   nc_lanc: {
     primaryColor: '#003863',
-    secondaryColor: '#003863', // get help and share link, estimate value section bg color
-    midBlueColor: '#003863', // BACK button text color
-    footerColor: '#FFFFFF', 
-    secondaryBackgroundColor: '#F7F7F7', // Results page banner
-    hoverColor: '#FFFFFF', // CONTINUE button hover bg color
-    outlineHoverBackgroundColor: '#003863', // BACK button hover bg color
-    outlineHoverColor: '#FFFFFF', // BACK button text color -- hover
+    secondaryColor: '#003863',
+    midBlueColor: '#003863',
+    footerColor: '#FFFFFF',
+    secondaryBackgroundColor: '#F7F7F7',
+    hoverColor: '#FFFFFF',
+    outlineHoverBackgroundColor: '#003863',
+    outlineHoverColor: '#FFFFFF',
     progressBarColor: '#268FBF',
     cssVariables: {
       '--primary-color': '#003863',
       '--secondary-color': '#003863',
-      '--secondary-background-color': '#F7F7F7', // tos, income, confirm block bg
+      '--secondary-background-color': '#F7F7F7',
       '--main-max-width': '1310px',
       'font-size': '18px',
-      '--midBlue-color': '#003863', // not in use so far
-      '--hover-color': '#ffffff',
-      '--icon-color': '#D6743F', // tile icons and help bubbles
-      '--secondary-icon-color': '#000000', // tile icons on Confirm page
-      '--option-card-hover-font-color': '#1D1C1E', // hover color for tiles text on Urgent Need, step 9
-      '--footer-color': '#ffffff', // not in use so far
-      '--active-border-color': '#8CCCF2', // You, them card border color
+      '--midBlue-color': '#003863',
+      '--hover-color': '#FFFFFF',
+      '--icon-color': '#D6743F',
+      '--secondary-icon-color': '#000000',
+      '--option-card-hover-font-color': '#1D1C1E',
+      '--footer-color': '#FFFFFF',
+      '--active-border-color': '#8CCCF2',
     },
   },
   co_energy: {

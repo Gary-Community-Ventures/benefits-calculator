@@ -34,22 +34,22 @@ const LancHeader = () => {
     id: 'header.shareBtn-AL',
     defaultMessage: 'share button',
   };
-  const openMenuBtnAriaLabelProps = { // needs to more universal
-    id: '211Header.openMenuBtn-AL',
+  const openMenuBtnAriaLabelProps = {
+    id: 'header.openMenuBtn-AL',
     defaultMessage: 'open menu',
   };
-  const closeBtnAriaLabelProps = { // needs to more universal
-    id: '211Header.closeMenuBtn-AL',
+  const closeBtnAriaLabelProps = {
+    id: 'header.closeMenuBtn-AL',
     defaultMessage: 'close menu',
   };
   const shareMFBModalAriaLabelProps = {
     id: 'header.shareMFBModal-AL',
     defaultMessage: 'share my friend ben modal',
   };
-  const logoAltText = { 
-    id: 'LancHeader.logo.alt',
+  const logoAltText = {
+    id: 'lancHeader.logo.alt',
     defaultMessage: 'LANC and myfriendben logo',
-  }; 
+  };
 
   const [openShare, setOpenShare] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
@@ -96,7 +96,7 @@ const LancHeader = () => {
           underline="none"
           target="_blank"
           aria-label={link.ariaLabel}
-          className="lancMenuLink"
+          className="lanc-menu-link"
           key={link.defaultMsg + index}
         >
           <FormattedMessage id={link.formattedMsgId} defaultMessage={link.defaultMsg} />
@@ -140,11 +140,10 @@ const LancHeader = () => {
     return dropdownMenuItems;
   };
 
-
   return (
     <nav>
       <Paper elevation={4} square={true} className="lanc-header-container">
-        <AppBar position="sticky" id="lanc-nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
+        <AppBar position="sticky" id="lanc-nav-container" elevation={0}>
           <Box>
             <a href={`/step-1${queryString}`}>
               <img src={LancLogo} alt={intl.formatMessage(logoAltText)} className="cobranded-logo" />

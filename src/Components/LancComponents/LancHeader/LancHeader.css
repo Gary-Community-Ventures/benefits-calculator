@@ -3,10 +3,10 @@
   display: block;
 }
 
-.MuiTypography-root.MuiLink-root.lancMenuLink {
+.MuiTypography-root.MuiLink-root.lanc-menu-link {
   font-weight: 600;
   font-size: 0.7rem;
-  color:#000000;
+  color: #000000;
 }
 
 .lanc-globe-icon {
@@ -35,6 +35,7 @@
   margin: auto;
   height: 100%;
   padding: 0 1rem;
+  background-color: #ffffff;
 }
 
 #lanc-select-language:focus-visible {
@@ -52,7 +53,7 @@ button.hamburger-icon {
 @media (max-width: 1280px) {
   button.hamburger-icon {
     display: flex;
-    color:#000000;
+    color: #000000;
   }
 
   #hamburger-drawer {
