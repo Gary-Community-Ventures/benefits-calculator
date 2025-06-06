@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export type ThemeName = 'default' | 'twoOneOne' | 'twoOneOneNC' | 'co_energy' | 'lanc';
+export type ThemeName = 'default' | 'twoOneOne' | 'twoOneOneNC' | 'co_energy' | 'nc_lanc';
 
 export interface ITheme {
   primaryColor: string;
@@ -106,24 +106,23 @@ const themes: Themes = {
       '--active-border-color': '#21296B',
     },
   },
-  lanc: {
-    // deeper blue didn't use so far, #003863
-    primaryColor: '#268FBF',
-    secondaryColor: '#268FBF', // get help and share link, estimate value section bg color
-    midBlueColor: '#268FBF', // BACK button text color
+  nc_lanc: {
+    primaryColor: '#003863',
+    secondaryColor: '#003863', // get help and share link, estimate value section bg color
+    midBlueColor: '#003863', // BACK button text color
     footerColor: '#FFFFFF', 
     secondaryBackgroundColor: '#F7F7F7', // Results page banner
     hoverColor: '#FFFFFF', // CONTINUE button hover bg color
-    outlineHoverBackgroundColor: '#268FBF', // BACK button hover bg color
+    outlineHoverBackgroundColor: '#003863', // BACK button hover bg color
     outlineHoverColor: '#FFFFFF', // BACK button text color -- hover
-    progressBarColor: '#8CCCF2',
+    progressBarColor: '#268FBF',
     cssVariables: {
-      '--primary-color': '#268FBF',
-      '--secondary-color': '#268FBF',
+      '--primary-color': '#003863',
+      '--secondary-color': '#003863',
       '--secondary-background-color': '#F7F7F7', // tos, income, confirm block bg
       '--main-max-width': '1310px',
       'font-size': '18px',
-      '--midBlue-color': '#268FBF', // not in use so far
+      '--midBlue-color': '#003863', // not in use so far
       '--hover-color': '#ffffff',
       '--icon-color': '#D6743F', // tile icons and help bubbles
       '--secondary-icon-color': '#000000', // tile icons on Confirm page

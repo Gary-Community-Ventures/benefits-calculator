@@ -49,7 +49,7 @@ const App = () => {
   const ecHouseholdMemberStepNumber = useStepNumber('energyCalculatorHouseholdData', false);
 
   useEffect(() => {
-    changeTheme(themeName as 'default' | 'twoOneOne' | 'twoOneOneNC' | 'lanc');
+    changeTheme(themeName as 'default' | 'twoOneOne' | 'twoOneOneNC' | 'nc_lanc');
   }, [themeName]);
 
   useEffect(() => {

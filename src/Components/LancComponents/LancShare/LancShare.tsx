@@ -118,7 +118,7 @@ const LancShareNC = ({ close }: LancShareProps) => {
           <FacebookMessengerShareButton
             url={shareUrl}
             appId={appId}
-            onClick={trackOutboundLinks('Share With Facebook Messanger')}
+            onClick={trackOutboundLinks('Share With Facebook Messenger')}
           >
             <Icon name="Messenger" color="lanc-messenger">
               <FacebookMessengerIcon size={20.5} />

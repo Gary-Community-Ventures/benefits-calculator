@@ -1,9 +1,9 @@
 const LancLinks = [
   {
-    defaultMsg: 'Get Help',
+    defaultMsg: 'GET HELP',
     formattedMsgId: 'LancHeader.getHelp',
     href: 'https://legalaidnc.org/get-help/',
-    ariaLabel: 'placeholder message',
+    ariaLabel: 'LANC get help link',
   },
 ];
 

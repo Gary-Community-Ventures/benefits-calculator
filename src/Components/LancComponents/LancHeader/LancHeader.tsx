@@ -34,11 +34,11 @@ const LancHeader = () => {
     id: 'header.shareBtn-AL',
     defaultMessage: 'share button',
   };
-  const openMenuBtnAriaLabelProps = {
+  const openMenuBtnAriaLabelProps = { // needs to more universal
     id: '211Header.openMenuBtn-AL',
     defaultMessage: 'open menu',
   };
-  const closeBtnAriaLabelProps = {
+  const closeBtnAriaLabelProps = { // needs to more universal
     id: '211Header.closeMenuBtn-AL',
     defaultMessage: 'close menu',
   };
@@ -46,10 +46,10 @@ const LancHeader = () => {
     id: 'header.shareMFBModal-AL',
     defaultMessage: 'share my friend ben modal',
   };
-  const logoAltText = {
-    id: '211Header.logo.alt',
-    defaultMessage: '211 and myfriendben logo',
-  }; // change here
+  const logoAltText = { 
+    id: 'LancHeader.logo.alt',
+    defaultMessage: 'LANC and myfriendben logo',
+  }; 
 
   const [openShare, setOpenShare] = useState(false);
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);

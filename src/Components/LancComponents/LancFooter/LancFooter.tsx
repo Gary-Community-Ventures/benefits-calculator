@@ -25,7 +25,7 @@ const LancFooter = () => {
   const displayDialStack = () => {
     return (
       <Stack direction="row" gap="1rem">
-        <img src={dialIcon} className="lanc-footer-icon" alt="talk to a LANC navigator via phone" />
+        <img src={dialIcon} className="lanc-footer-icon" alt="talk to a LANC navigator via phone or apply online" />
         <Box sx={{ textAlign: 'center' }}>
           <Typography>
             <FormattedMessage id="footer-dial-text-lanc" defaultMessage="Call the Helpline at " />
