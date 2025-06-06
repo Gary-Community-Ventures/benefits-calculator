@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Controller } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -70,6 +70,7 @@ export const Zipcode = () => {
     formState: { errors },
     handleSubmit,
     watch,
+    setValue,
   } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -81,6 +82,22 @@ export const Zipcode = () => {
 
   const currentZipcodeValue = watch('zipcode');
   const parsedZipCode = zipcodeSchema.safeParse(currentZipcodeValue);
+
+  const counties = parsedZipCode.success ? countiesByZipcode[parsedZipCode.data] : undefined;
+  const countyKeys = counties ? Object.keys(counties) : [];
+
+  useEffect(() => {
+    if (parsedZipCode.success) {
+      const counties = countiesByZipcode[parsedZipCode.data];
+      const countyKeys = Object.keys(counties);
+
+      if (countyKeys.length === 1) {
+        setValue('county', countyKeys[0]);
+      } else {
+        setValue('county', 'disabled-select');
+      }
+    }
+  }, [parsedZipCode, setValue, countiesByZipcode]);
 
   const formSubmitHandler = async (zipCodeAndCountyData: FormSchema) => {
     if (uuid === undefined) {
@@ -179,35 +196,48 @@ export const Zipcode = () => {
             <QuestionQuestion>
               <OverrideableTranslation id="questions.zipcode-a" defaultMessage="Please select a county:" />
             </QuestionQuestion>
-            <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.county !== undefined}>
-              <InputLabel id="county">
-                <OverrideableTranslation id="questions.zipcode-a-inputLabel" defaultMessage="County" />
-              </InputLabel>
-              <Controller
-                name="county"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <>
-                    <Select
-                      {...field}
-                      labelId="county-select-label"
-                      id="county-source-select"
-                      label={<OverrideableTranslation id="questions.zipcode-a-inputLabel" defaultMessage="County" />}
-                    >
-                      {createMenuItems(
-                        <OverrideableTranslation
-                          id="questions.zipcode-a-disabledSelectMenuItemText"
-                          defaultMessage="Select a county"
-                        />,
-                        countiesByZipcode[parsedZipCode.data],
-                      )}
-                    </Select>
-                    <FormHelperText>{errors.county !== undefined && renderCountyHelperText()}</FormHelperText>
-                  </>
-                )}
+            {countyKeys.length === 1 && counties ? (
+              <TextField
+                label={<FormattedMessage id="questions.zipcode-a-inputLabel" defaultMessage="County" />}
+                value={counties[countyKeys[0]]}
+                InputProps={{
+                  readOnly: true,
+                }}
+                variant="outlined"
+                sx={{ mt: 1, mb: 2 }}
               />
-            </FormControl>
+            ) : (
+              <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.county !== undefined}>
+                <InputLabel id="county">
+                  <OverrideableTranslation id="questions.zipcode-a-inputLabel" defaultMessage="County" />
+                </InputLabel>
+                <Controller
+                  name="county"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <>
+                      <Select
+                        {...field}
+                        labelId="county-select-label"
+                        id="county-source-select"
+                        label={<OverrideableTranslation id="questions.zipcode-a-inputLabel" defaultMessage="County" />}
+                      >
+                        {counties &&
+                          createMenuItems(
+                            <OverrideableTranslation
+                              id="questions.zipcode-a-disabledSelectMenuItemText"
+                              defaultMessage="Select a county"
+                            />,
+                            counties
+                          )}
+                      </Select>
+                      <FormHelperText>{errors.county !== undefined && renderCountyHelperText()}</FormHelperText>
+                    </>
+                  )}
+                />
+              </FormControl>
+            )}
           </div>
         )}
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />
