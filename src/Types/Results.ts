@@ -91,10 +91,17 @@ export type UrgentNeed = {
   name: Translation;
   description: Translation;
   link: Translation;
-  type: Translation;
+  category_type: Translation;
   warning: Translation;
   phone_number: string;
+  icon: string;
 };
+
+export type UrgentNeedType = {
+  external_name: string;
+  name: Translation;
+  urgentneeds: UrgentNeed[];
+}
 
 export type Validation = {
   id: number;

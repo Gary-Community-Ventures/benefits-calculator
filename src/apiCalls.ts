@@ -6,6 +6,7 @@ import {
   SendMessageRequestData,
   TranslationResponse,
   UrgentNeedProgramsResponse,
+  UrgentNeedTypeResponse,
   UserRequestData,
   ValidationRequestData,
 } from './Types/ApiCalls';
@@ -21,6 +22,7 @@ const userEndpoint = `${domain}/api/users/`;
 const messageEndpoint = `${domain}/api/messages/`;
 const apiProgramCategoriesEndPoint = `${domain}/api/program_categories/`;
 const apiUrgentNeedsEndpoint = `${domain}/api/urgent_needs/`;
+const apiUrgentNeedTypesEndpoint = `${domain}/api/urgent_need_types/`;
 export const configEndpoint = `${domain}/api/configuration/`;
 const eligibilityEndpoint = `${domain}/api/eligibility/`;
 const validationEndpoint = `${domain}/api/validations/`;
@@ -150,7 +152,7 @@ const getAllLongTermPrograms = async (whiteLabel: string) => {
 };
 
 const getAllNearTermPrograms = async (whiteLabel: string) => {
-  const response = await fetch(apiUrgentNeedsEndpoint + whiteLabel, {
+  const response = await fetch(apiUrgentNeedTypesEndpoint + whiteLabel, {
     method: 'GET',
     headers: header,
   });
@@ -158,28 +160,20 @@ const getAllNearTermPrograms = async (whiteLabel: string) => {
     throw new Error(`${response.status} ${response.statusText}`);
   }
 
-  const programs = (await response.json()) as UrgentNeedProgramsResponse;
-  const programsWithCategory = programs.map((program) => {
-    return { ...program, category: program.type };
-  });
+  const data = (await response.json()) as UrgentNeedTypeResponse;
 
-  const categoryMap: { [key: string]: Category } = {};
+  const types: Category[] = []
 
-  for (const program of programsWithCategory) {
-    const id = program.category.default_message;
-    if (!(id in categoryMap)) {
-      categoryMap[id] = { programs: [], name: program.category, icon: program.category.default_message };
-    }
+  for (const type of data) {
+    const urgentNeeds: Program[] = type.urgent_needs.map((program) => {
+      return { name: program.name, description: program.website_description };
+    });
 
-    categoryMap[id].programs.push({ name: program.name, description: program.website_description });
+    const { urgent_needs, ...rest } = type;
+
+    types.push({ ...rest, programs: urgentNeeds });
   }
-
-  const categories: Category[] = [];
-  for (const category of Object.values(categoryMap)) {
-    categories.push(category);
-  }
-
-  return categories;
+  return types;
 };
 
 const postValidation = async (validationBody: ValidationRequestData, key: string) => {

@@ -5,9 +5,9 @@ import { ResultsMessageForNeeds } from '../../Referrer/Referrer';
 const Needs = () => {
   const { needs } = useResultsContext();
   const needsSortedByCategory = needs.sort((a, b) => {
-    if (a.type.default_message > b.type.default_message) {
+    if (a.category_type.default_message > b.category_type.default_message) {
       return 1;
-    } else if (a.type.default_message < b.type.default_message) {
+    } else if (a.category_type.default_message < b.category_type.default_message) {
       return -1;
     }
 
