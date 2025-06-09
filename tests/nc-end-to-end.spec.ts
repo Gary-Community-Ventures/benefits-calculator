@@ -53,11 +53,10 @@ test.describe('NC Screen Test', () => {
       await page.getByRole('button', { name: 'Continue' }).click();
 
       await expect(page).toHaveURL(/\/nc\/.*\/step-5/);
+      await page.getByRole('heading', { name: 'Tell us about the next person' }).waitFor({state: "visible"});
       await page.getByRole('button', { name: 'Birth Month' }).click();
       await page.getByRole('listbox', { name: 'Birth Month' }).waitFor({ state: 'visible' });
-      const febOption = page.locator('li[role="option"]', { hasText: 'February' }).first();
-      await expect(febOption).toBeVisible();
-      await febOption.click();
+      await page.getByRole('option', { name: 'February' }).click();
       await page.getByRole('button', { name: 'Open' }).click();
       await page.getByRole('option', { name: '2020' }).click();
       await page.locator('#relationship-to-hh-select').click();

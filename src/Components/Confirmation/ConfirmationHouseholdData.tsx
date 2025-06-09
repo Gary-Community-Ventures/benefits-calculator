@@ -174,7 +174,7 @@ const DefaultConfirmationHHData = () => {
         return <>{youVsThemHealthInsuranceOptions.none.text}</>;
       }
       return (
-        <ul className="selected-insurances-list">
+        <ul>
           {allOtherSelectedOptions.map((option, idx) => (
             <li key={idx}>{option}</li>
           ))}

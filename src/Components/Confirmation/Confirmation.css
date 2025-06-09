@@ -73,10 +73,6 @@ svg.edit-button polygon {
   padding: 0;
 }
 
-.confirmation-acute-need-list > li {
-  margin-bottom: 1rem;
-}
-
 .prev-continue-results-buttons.confirmation {
   display: flex;
   justify-content: space-between;
@@ -151,10 +147,5 @@ svg.edit-button polygon {
   .confirmation-icon {
     min-width: 4rem;
     margin: 0 1rem 0 0;
-  }
-
-  .confirmation-acute-need-list > li,
-  .selected-insurances-list > li {
-    margin-bottom: 5px;
   }
 }
