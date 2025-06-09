@@ -57,7 +57,7 @@ type ConfirmationItemParams = {
 export function ConfirmationItem({ label, value }: ConfirmationItemParams) {
   return (
     <div className="section-p">
-      <strong>{label}</strong> {value}
+      {label && <strong>{label}</strong>} {value}
     </div>
   );
 }

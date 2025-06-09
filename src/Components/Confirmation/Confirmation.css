@@ -18,14 +18,14 @@
 
 .confirmation-container > div {
   background-color: var(--secondary-background-color);
-  padding: 2rem;
+  padding: 1rem;
   margin-bottom: 2rem;
   position: relative;
 }
 
 .confirmation-icon {
   min-width: 6rem;
-  margin: 2rem;
+  margin: 0 2rem;
 }
 
 .confirmation-icon svg path,
@@ -146,5 +146,15 @@ svg.edit-button polygon {
 
   .bottom-margin {
     margin-bottom: 0.5rem;
+  }
+
+  .confirmation-icon {
+    min-width: 4rem;
+    margin: 0 1rem 0 0;
+  }
+
+  .confirmation-acute-need-list > li,
+  .selected-insurances-list > li {
+    margin-bottom: 5px;
   }
 }
