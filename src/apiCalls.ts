@@ -5,7 +5,6 @@ import {
   ProgramCategoryResponse,
   SendMessageRequestData,
   TranslationResponse,
-  UrgentNeedProgramsResponse,
   UrgentNeedTypeResponse,
   UserRequestData,
   ValidationRequestData,
@@ -21,7 +20,6 @@ const screensEndpoint = `${domain}/api/screens/`;
 const userEndpoint = `${domain}/api/users/`;
 const messageEndpoint = `${domain}/api/messages/`;
 const apiProgramCategoriesEndPoint = `${domain}/api/program_categories/`;
-const apiUrgentNeedsEndpoint = `${domain}/api/urgent_needs/`;
 const apiUrgentNeedTypesEndpoint = `${domain}/api/urgent_need_types/`;
 export const configEndpoint = `${domain}/api/configuration/`;
 const eligibilityEndpoint = `${domain}/api/eligibility/`;
@@ -162,7 +160,7 @@ const getAllNearTermPrograms = async (whiteLabel: string) => {
 
   const data = (await response.json()) as UrgentNeedTypeResponse;
 
-  const types: Category[] = []
+  const types: Category[] = [];
 
   for (const type of data) {
     const urgentNeeds: Program[] = type.urgent_needs.map((program) => {
