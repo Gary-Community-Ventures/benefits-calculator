@@ -139,9 +139,6 @@ const HHMSummaries = ({ activeMemberData, triggerValidation, questionName }: HHM
     <article key={pageNumber}>
       {headOfHHInfoWasEntered && (
         <Box sx={{ marginBottom: '1.5rem' }}>
-          <h2 className="household-data-sub-header secondary-heading">
-            <FormattedMessage id="qcc.so-far-text" defaultMessage="So far you've told us about:" />
-          </h2>
           <div>{summariesWActiveMemberCard}</div>
         </Box>
       )}
