@@ -86,7 +86,11 @@ export function ResultsCard({ name, detail1, detail2, link, flags = [], containe
         wrapper={(children) => <div className="result-program-more-info-wrapper">{children}</div>}
       >
         <>
-          <div className="result-program-more-info">{name}</div>
+          <div className="result-program-more-info">
+            <Link to={link}>
+              {name}
+            </Link>
+          </div>
           {isMobile && (
             <div className="result-program-more-info-button">
               <Link to={link}>
