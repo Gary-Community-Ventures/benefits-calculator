@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { z } from 'zod';
+import InformationalText from '../../Common/InformationalText/InformationalText';
 import { FormData } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
 import { useConfig } from '../../Config/configHook';
@@ -234,11 +235,11 @@ function SignUp() {
       <QuestionHeader>
         <FormattedMessage
           id="qcc.optional-sign-up-text"
-          defaultMessage="Optional: Sign up for benefits updates and/or feedback opportunities"
+          defaultMessage="Sign up for benefits updates and/or feedback opportunities."
         />
       </QuestionHeader>
       <QuestionQuestion>
-        <FormattedMessage id="questions.signUpInfo" defaultMessage="What would you like us to contact you about?" />
+        <FormattedMessage id="questions.signUpInfo" defaultMessage="OPTIONAL: Would you like us to contact you about either of the following?" />
       </QuestionQuestion>
       <form onSubmit={handleSubmit(submitHandler)}>
         <div>
@@ -257,6 +258,12 @@ function SignUp() {
             );
           })}
         </div>
+        <InformationalText>
+          <FormattedMessage 
+            id="signup.optional-continue" 
+            defaultMessage="If you do not want to sign up for either of these notifications, please click continue." 
+          />
+        </InformationalText>
         {watch('contactInfo') !== undefined && !formData.signUpInfo.hasUser && (
           <div className="sign-up-contact-info-container">
             <QuestionQuestion>
