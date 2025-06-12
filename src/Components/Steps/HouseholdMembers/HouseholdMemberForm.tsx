@@ -480,6 +480,12 @@ const HouseholdMemberForm = () => {
       <div className="section-container">
         <Stack sx={{ padding: '3rem 0' }} className="section">
           {displayHealthCareQuestion()}
+          <QuestionDescription>
+            <FormattedMessage
+              id="insurance.chooseAllThatApply"
+              defaultMessage="Choose all that apply"
+            />
+          </QuestionDescription>
           <RHFOptionCardGroup
             fields={watch('healthInsurance')}
             setValue={setValue as unknown as (name: string, value: unknown, config?: Object) => void}
@@ -533,12 +539,12 @@ const HouseholdMemberForm = () => {
         <QuestionQuestion>
           <FormattedMessage
             id="householdDataBlock.createHOfHRelationQuestion-relation"
-            defaultMessage="What is this person’s relationship to you?"
+            defaultMessage="What is the next person in your household's relationship to you?"
           />
         </QuestionQuestion>
         <FormControl
           sx={{ mt: 1, mb: 2, minWidth: '13.125rem', maxWidth: '100%' }}
-          error={errors.relationshipToHH !== undefined}
+          error={!!errors.relationshipToHH}
         >
           <InputLabel id="relation-to-hh-label">
             <FormattedMessage
@@ -553,26 +559,33 @@ const HouseholdMemberForm = () => {
               <>
                 <Select
                   {...field}
-                  labelId="relationship-To-HH"
+                  labelId="relation-to-hh-label"
                   id="relationship-to-hh-select"
                   label={
                     <FormattedMessage
-                      id="householdDataBlock.createDropdownCompProps-label"
-                      defaultMessage="Relation Type"
+                      id="householdDataBlock.createDropdownCompProps-inputLabelText"
+                      defaultMessage="Relation"
                     />
                   }
+                  sx={{ backgroundColor: '#fff' }}
                 >
-                  {Object.entries(relationshipOptions).map(([key, value]) => {
-                    return (
-                      <MenuItem value={key} key={key}>
-                        {value}
-                      </MenuItem>
-                    );
-                  })}
+                  <MenuItem value="" disabled>
+                    <FormattedMessage 
+                      id="select.placeholder" 
+                      defaultMessage="Select" 
+                    />
+                  </MenuItem>
+                  {Object.entries(relationshipOptions).map(([key, value]) => (
+                    <MenuItem value={key} key={key}>
+                      {value}
+                    </MenuItem>
+                  ))}
                 </Select>
-                {errors.relationshipToHH !== undefined && (
+                {errors.relationshipToHH && (
                   <FormHelperText sx={{ ml: 0 }}>
-                    <ErrorMessageWrapper fontSize="1rem">{errors.relationshipToHH.message}</ErrorMessageWrapper>
+                    <ErrorMessageWrapper fontSize="1rem">
+                      {errors.relationshipToHH.message}
+                    </ErrorMessageWrapper>
                   </FormHelperText>
                 )}
               </>
@@ -944,31 +957,36 @@ const HouseholdMemberForm = () => {
           <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
         ) : (
           <FormattedMessage
-            id="questions.householdData"
-            defaultMessage="Tell us about the next person in your household."
+            id="householdDataBlock.soFarToldAbout"
+            defaultMessage="So far you've told us about:"
           />
         )}
       </QuestionHeader>
 
-      <HHMSummaryCards
-        activeMemberData={{
-          ...getValues(),
-          id: formData.householdData[currentMemberIndex]?.id ?? crypto.randomUUID(),
-          frontendId: formData.householdData[currentMemberIndex]?.frontendId ?? crypto.randomUUID(),
-          birthYear: getValues().birthYear ? Number(getValues().birthYear) : undefined,
-          birthMonth: getValues().birthMonth ? Number(getValues().birthMonth) : undefined,
-          hasIncome: Boolean(getValues().hasIncome),
-        }}
-        triggerValidation={trigger}
-        questionName="householdData"
-      />
+      {pageNumber > 1 && (
+        <Box sx={{ marginBottom: '2rem' }}>
+          <HHMSummaryCards
+            activeMemberData={{
+              ...getValues(),
+              id: formData.householdData[currentMemberIndex]?.id ?? crypto.randomUUID(),
+              frontendId: formData.householdData[currentMemberIndex]?.frontendId ?? crypto.randomUUID(),
+              birthYear: getValues().birthYear ? Number(getValues().birthYear) : undefined,
+              birthMonth: getValues().birthMonth ? Number(getValues().birthMonth) : undefined,
+              hasIncome: Boolean(getValues().hasIncome),
+            }}
+            triggerValidation={trigger}
+            questionName="householdData"
+          />
+        </Box>
+      )}
+
       <form
         onSubmit={handleSubmit(formSubmitHandler, () => {
           window.scroll({ top: 0, left: 0, behavior: 'smooth' });
         })}
       >
-        {createAgeQuestion()}
         {pageNumber !== 1 && createHOfHRelationQuestion()}
+        {createAgeQuestion()}
         {displayHealthInsuranceBlock()}
         {displayConditionsQuestion()}
         <div>

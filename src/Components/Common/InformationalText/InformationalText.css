@@ -1,0 +1,17 @@
+.informational-text {
+  background-color: var(--secondary-background-color);
+  color: var(--primary-color);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+}
+
+.informational-text a {
+  color: var(--primary-color);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.informational-text a:hover {
+  text-decoration: none;
+}

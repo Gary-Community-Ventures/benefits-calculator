@@ -29,7 +29,7 @@ const ResultsTabs = () => {
       <Grid item xs={6} className="results-tab">
         <NavLink to={needsLink} className={({ isActive }) => (isActive ? 'active' : '')}>
           <h1 style={{ fontSize: '1rem' }}>
-            <FormattedMessage id="resultsOptions.nearTermBenefits" defaultMessage="Near-Term Benefits " />(
+            <FormattedMessage id="resultsOptions.nearTermBenefits" defaultMessage="Additional Resources " />(
             {translateNumber(needs.length)})
           </h1>
         </NavLink>

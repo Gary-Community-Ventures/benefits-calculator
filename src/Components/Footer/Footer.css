@@ -51,7 +51,15 @@
 .policy-link {
   text-decoration: none;
   color: #fff;
-  margin-bottom: 1rem;
+  margin: 0 1rem 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.policy-link-separator {
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 @media (max-width: 700px) {
