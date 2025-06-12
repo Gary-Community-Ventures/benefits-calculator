@@ -10,6 +10,7 @@ const REFERRER_REDIRECT: { [key: string]: string | undefined } = {
   bayaud: 'co',
   bia: 'co',
   brightbytext: 'co',
+  broomfield: 'co',
   cch: 'co',
   ccig: 'co',
   cedp: 'co',
