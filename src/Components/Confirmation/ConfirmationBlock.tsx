@@ -49,7 +49,7 @@ export default function ConfirmationBlock({
 }
 
 type ConfirmationItemParams = {
-  label: ReactNode;
+  label?: ReactNode;
   value: ReactNode;
 };
 

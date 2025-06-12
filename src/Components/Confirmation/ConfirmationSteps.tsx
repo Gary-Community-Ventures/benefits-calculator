@@ -129,7 +129,6 @@ function Expenses() {
     if (formData.expenses.length === 0) {
       return (
         <ConfirmationItem
-          label=""
           value={<FormattedMessage id="confirmation.none" defaultMessage="None" />}
         />
 
@@ -301,7 +300,6 @@ function AcuteConditions() {
 
     return (
       <ConfirmationItem
-        label=""
         value={
           <ul className="confirmation-acute-need-list">
             {allNeeds.map(([key, _]) => (
@@ -355,7 +353,6 @@ function ReferralSource() {
       stepName="referralSource"
     >
       <ConfirmationItem
-        label=""
         value={
           formData.referralSource in referralOptions
             ? referralOptions[formData.referralSource]
