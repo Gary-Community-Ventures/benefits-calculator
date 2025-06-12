@@ -35,7 +35,7 @@ test.describe('NC Screen Test', () => {
       await page.getByRole('button', { name: 'Continue' }).click();
     });
     await test.step('Step-5: Household Member 1', async () => {
-      await expect(page).toHaveURL(/\/nc\/.*\/step-5/);
+      await expect(page).toHaveURL(/\/nc\/.*\/step-5\/1$/);
       await page.getByRole('button', { name: 'Birth Month' }).click();
       await page.getByRole('option', { name: 'March' }).click();
       await page.getByRole('button', { name: 'Open' }).click();
@@ -50,8 +50,7 @@ test.describe('NC Screen Test', () => {
       await page.getByRole('textbox', { name: 'Amount' }).fill('2200');
       await page.getByRole('button', { name: 'Continue' }).click();
 
-      await expect(page).toHaveURL(/\/nc\/.*\/step-5/);
-      await page.getByRole('heading', { name: 'Tell us about the next person' }).waitFor({state: "visible"});
+      await expect(page).toHaveURL(/\/nc\/.*\/step-5\/2$/);
       await page.getByRole('button', { name: 'Birth Month' }).click();
       await page.getByRole('listbox', { name: 'Birth Month' }).waitFor({ state: 'visible' });
       await page.getByRole('option', { name: 'February' }).click();
