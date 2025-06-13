@@ -25,12 +25,10 @@ const Needs = () => {
       <InformationalText>
         <FormattedMessage
           id="nearTermBenefits.editSelections"
-          defaultMessage="If you would like to see additional types of resources, please edit your selections in {thisStepLink}."
+          defaultMessage="If you would like to see additional types of resources, please edit your selections in <link>this step</link>."
           values={{
-            thisStepLink: (
-              <Link to={immediateNeedsLink}>
-                <FormattedMessage id="nearTermBenefits.thisStep" defaultMessage="this step" />
-              </Link>
+            link: (chunks) => (
+              <Link to={immediateNeedsLink} state={{ routeBackToResults: true }}>{chunks}</Link>
             ),
           }}
         />
