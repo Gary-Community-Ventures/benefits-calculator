@@ -483,7 +483,7 @@ const HouseholdMemberForm = () => {
           <QuestionDescription>
             <FormattedMessage
               id="insurance.chooseAllThatApply"
-              defaultMessage="Choose all that apply"
+              defaultMessage="Choose all that apply."
             />
           </QuestionDescription>
           <RHFOptionCardGroup
