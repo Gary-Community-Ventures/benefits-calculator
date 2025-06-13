@@ -127,12 +127,7 @@ function Expenses() {
 
   const allExpenses = () => {
     if (formData.expenses.length === 0) {
-      return (
-        <ConfirmationItem
-          value={<FormattedMessage id="confirmation.none" defaultMessage="None" />}
-        />
-
-      )
+      return <ConfirmationItem value={<FormattedMessage id="confirmation.none" defaultMessage="None" />} />;
     }
     const mappedExpenses = formData.expenses.map((expense, i) => {
       return (

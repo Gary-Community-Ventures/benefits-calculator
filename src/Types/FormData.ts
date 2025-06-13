@@ -111,6 +111,9 @@ export type Conditions = {
 export const isCustomTypedLocationState = (
   locationState: unknown,
 ): locationState is { routedFromConfirmationPg?: boolean; routeBackToResults?: boolean } => {
-  return typeof locationState === 'object' && locationState !== null && 
-    ('routedFromConfirmationPg' in locationState || 'routeBackToResults' in locationState);
+  return (
+    typeof locationState === 'object' &&
+    locationState !== null &&
+    ('routedFromConfirmationPg' in locationState || 'routeBackToResults' in locationState)
+  );
 };

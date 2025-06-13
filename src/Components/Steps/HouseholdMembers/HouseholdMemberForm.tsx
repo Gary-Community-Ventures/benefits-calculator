@@ -481,10 +481,7 @@ const HouseholdMemberForm = () => {
         <Stack sx={{ padding: '3rem 0' }} className="section">
           {displayHealthCareQuestion()}
           <QuestionDescription>
-            <FormattedMessage
-              id="insurance.chooseAllThatApply"
-              defaultMessage="Choose all that apply."
-            />
+            <FormattedMessage id="insurance.chooseAllThatApply" defaultMessage="Choose all that apply." />
           </QuestionDescription>
           <RHFOptionCardGroup
             fields={watch('healthInsurance')}
@@ -542,10 +539,7 @@ const HouseholdMemberForm = () => {
             defaultMessage="What is the next person in your household's relationship to you?"
           />
         </QuestionQuestion>
-        <FormControl
-          sx={{ mt: 1, mb: 2, minWidth: '13.125rem', maxWidth: '100%' }}
-          error={!!errors.relationshipToHH}
-        >
+        <FormControl sx={{ mt: 1, mb: 2, minWidth: '13.125rem', maxWidth: '100%' }} error={!!errors.relationshipToHH}>
           <InputLabel id="relation-to-hh-label">
             <FormattedMessage
               id="householdDataBlock.createDropdownCompProps-inputLabelText"
@@ -570,10 +564,7 @@ const HouseholdMemberForm = () => {
                   sx={{ backgroundColor: '#fff' }}
                 >
                   <MenuItem value="" disabled>
-                    <FormattedMessage 
-                      id="select.placeholder" 
-                      defaultMessage="Select" 
-                    />
+                    <FormattedMessage id="select.placeholder" defaultMessage="Select" />
                   </MenuItem>
                   {Object.entries(relationshipOptions).map(([key, value]) => (
                     <MenuItem value={key} key={key}>
@@ -583,9 +574,7 @@ const HouseholdMemberForm = () => {
                 </Select>
                 {errors.relationshipToHH && (
                   <FormHelperText sx={{ ml: 0 }}>
-                    <ErrorMessageWrapper fontSize="1rem">
-                      {errors.relationshipToHH.message}
-                    </ErrorMessageWrapper>
+                    <ErrorMessageWrapper fontSize="1rem">{errors.relationshipToHH.message}</ErrorMessageWrapper>
                   </FormHelperText>
                 )}
               </>
@@ -956,10 +945,7 @@ const HouseholdMemberForm = () => {
         {pageNumber === 1 ? (
           <FormattedMessage id="householdDataBlock.questionHeader" defaultMessage="Tell us about yourself." />
         ) : (
-          <FormattedMessage
-            id="householdDataBlock.soFarToldAbout"
-            defaultMessage="So far you've told us about:"
-          />
+          <FormattedMessage id="householdDataBlock.soFarToldAbout" defaultMessage="So far you've told us about:" />
         )}
       </QuestionHeader>
 

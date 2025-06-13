@@ -240,10 +240,16 @@ function SignUp() {
         />
       </QuestionHeader>
       <QuestionQuestion>
-        <FormattedMessage id="questions.signUpInfo" defaultMessage="OPTIONAL: Would you like us to contact you about either of the following?" />
+        <FormattedMessage
+          id="questions.signUpInfo"
+          defaultMessage="OPTIONAL: Would you like us to contact you about either of the following?"
+        />
       </QuestionQuestion>
       <QuestionDescription>
-        <FormattedMessage id="questions.signUpInfo.description" defaultMessage="If you do not want to sign up for either of these notifications, please click continue." />
+        <FormattedMessage
+          id="questions.signUpInfo.description"
+          defaultMessage="If you do not want to sign up for either of these notifications, please click continue."
+        />
       </QuestionDescription>
       <form onSubmit={handleSubmit(submitHandler)}>
         <div>

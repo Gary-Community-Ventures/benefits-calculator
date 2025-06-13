@@ -28,7 +28,9 @@ const Needs = () => {
           defaultMessage="If you would like to see additional types of resources, please edit your selections in <link>this step</link>."
           values={{
             link: (chunks) => (
-              <Link to={immediateNeedsLink} state={{ routeBackToResults: true }}>{chunks}</Link>
+              <Link to={immediateNeedsLink} state={{ routeBackToResults: true }}>
+                {chunks}
+              </Link>
             ),
           }}
         />

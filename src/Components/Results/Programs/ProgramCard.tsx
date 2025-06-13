@@ -87,9 +87,7 @@ export function ResultsCard({ name, detail1, detail2, link, flags = [], containe
       >
         <>
           <div className="result-program-more-info">
-            <Link to={link}>
-              {name}
-            </Link>
+            <Link to={link}>{name}</Link>
           </div>
           {isMobile && (
             <div className="result-program-more-info-button">

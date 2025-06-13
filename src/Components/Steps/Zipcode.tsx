@@ -229,7 +229,7 @@ export const Zipcode = () => {
                               id="questions.zipcode-a-disabledSelectMenuItemText"
                               defaultMessage="Select a county"
                             />,
-                            counties
+                            counties,
                           )}
                       </Select>
                       <FormHelperText>{errors.county !== undefined && renderCountyHelperText()}</FormHelperText>
