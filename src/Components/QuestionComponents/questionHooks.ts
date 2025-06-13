@@ -7,7 +7,12 @@ import { Context } from '../Wrapper/Wrapper';
 
 export function useShouldRedirectToConfirmation() {
   const location = useLocation();
-  return isCustomTypedLocationState(location.state);
+  return isCustomTypedLocationState(location.state) && location.state.routedFromConfirmationPg;
+}
+
+export function useShouldRedirectToResults() {
+  const location = useLocation();
+  return isCustomTypedLocationState(location.state) && location.state.routeBackToResults;
 }
 
 // routeEnding will be added to the end of the route when going to the next step
@@ -17,11 +22,17 @@ export function useGoToNextStep(questionName: QuestionName, routeEnding: string 
   const stepDirectory = useStepDirectory();
   const totalStepCount = stepDirectory.length + STARTING_QUESTION_NUMBER - 1;
   const redirectToConfirmationPage = useShouldRedirectToConfirmation();
+  const redirectToResults = useShouldRedirectToResults();
   const navigate = useNavigate();
 
   return () => {
     if (redirectToConfirmationPage) {
       navigate(`/${whiteLabel}/${uuid}/confirm-information`);
+      return;
+    }
+
+    if (redirectToResults) {
+      navigate(`/${whiteLabel}/${uuid}/results/near-term-needs`);
       return;
     }
 
