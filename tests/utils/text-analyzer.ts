@@ -1,25 +1,43 @@
 import textReadability from 'text-readability';
 
-export function getWordCount(text: string): number {
-  return text.trim().split(/\s+/).filter(word => word.length > 0).length;
+export function getWordCount(texts: string[] | string): number {
+  if (Array.isArray(texts)) {
+    return texts.reduce((total, text) => total + text.trim().split(/\s+/).filter(word => word.length > 0).length, 0);
+  }
+  return texts.trim().split(/\s+/).filter(word => word.length > 0).length;
 }
 
-export function getSentenceCount(text: string): number {
-  return text.split(/[.!?]+/).filter(sentence => sentence.trim().length > 0).length;
+export function getSentenceCount(texts: string[] | string): number {
+  if (Array.isArray(texts)) {
+    return texts.reduce((total, text) => total + text.split(/[.!?]+/).filter(sentence => sentence.trim().length > 0).length, 0);
+  }
+  return texts.split(/[.!?]+/).filter(sentence => sentence.trim().length > 0).length;
 }
 
-export function getLongestSentence(text: string): string {
-  return text
+export function getLongestSentence(texts: string[] | string): string {
+  if (Array.isArray(texts)) {
+    return texts
+      .map(text => text.split(/[.!?]+/).map(s => s.trim()).filter(s => s.length > 0))
+      .flat()
+      .reduce((longest, current) => current.length > longest.length ? current : longest, '');
+  }
+  return texts
     .split(/[.!?]+/)
     .map(s => s.trim())
     .filter(s => s.length > 0)
-    .reduce((longest, current) => 
-      current.length > longest.length ? current : longest
-    , '');
+    .reduce((longest, current) => current.length > longest.length ? current : longest, '');
 }
 
-export function getPolysyllabicWords(text: string): string[] {
-  return text
+export function getPolysyllabicWords(texts: string[] | string): string[] {
+  if (Array.isArray(texts)) {
+    return texts.flatMap(text => 
+      text.split(/\s+/).filter(word => {
+        const syllableCount = countSyllables(word);
+        return syllableCount > 2;
+      })
+    );
+  }
+  return texts
     .split(/\s+/)
     .filter(word => {
       const syllableCount = countSyllables(word);
@@ -27,18 +45,24 @@ export function getPolysyllabicWords(text: string): string[] {
     });
 }
 
-export function getPassiveVoice(text: string): string[] {
+export function getPassiveVoice(texts: string[] | string): string[] {
   const passivePatterns = [
     /\b(?:am|is|are|was|were|be|been|being)\s+\w+ed\b/gi,
     /\b(?:have|has|had)\s+been\s+\w+ed\b/gi
   ];
 
-  return text
+  if (Array.isArray(texts)) {
+    return texts.flatMap(text =>
+      text.split(/[.!?]+/)
+        .map(s => s.trim())
+        .filter(sentence => passivePatterns.some(pattern => pattern.test(sentence)))
+    );
+  }
+  
+  return texts
     .split(/[.!?]+/)
     .map(s => s.trim())
-    .filter(sentence => 
-      passivePatterns.some(pattern => pattern.test(sentence))
-    );
+    .filter(sentence => passivePatterns.some(pattern => pattern.test(sentence)));
 }
 
 // Helper function to count syllables
@@ -50,7 +74,8 @@ function countSyllables(word: string): number {
 }
 
 // Custom readability score functions
-export function fleschKincaidGrade(text: string): number {
+export function fleschKincaidGrade(texts: string[] | string): number {
+  const text = Array.isArray(texts) ? texts.join(' ') : texts;
   // Custom implementation since text-readability's implementation seems broken
   const words = text.split(/\s+/).filter(word => word.length > 0);
   const sentences = text.split(/[.!?]+/).filter(sent => sent.trim().length > 0);
@@ -63,7 +88,8 @@ export function fleschKincaidGrade(text: string): number {
          11.8 * (syllables / words.length) - 15.59;
 }
 
-export function fleschKincaidReadingEase(text: string): number {
+export function fleschKincaidReadingEase(texts: string[] | string): number {
+  const text = Array.isArray(texts) ? texts.join(' ') : texts;
   // Custom implementation for better accuracy
   const words = text.split(/\s+/).filter(word => word.length > 0);
   const sentences = text.split(/[.!?]+/).filter(sent => sent.trim().length > 0);

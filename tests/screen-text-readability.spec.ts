@@ -368,7 +368,66 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
       JSON.stringify(detailedReport, null, 2)
     );
 
-    // Console output for immediate feedback
+    // Calculate overall metrics first before any CSV generation
+    const overall = {
+      averageFleschScore: average(readabilityResults.map(r => r.scores.fleschReadingEase)),
+      averageGradeLevel: average(readabilityResults.map(r => r.scores.fleschKincaidGrade)),
+      averageWordsPerSentence: average(readabilityResults.map(r => r.wordCount / r.sentenceCount)),
+      totalComplexWords: readabilityResults.reduce((sum, r) => sum + r.polysyllabicWordCount, 0),
+      totalPassiveVoice: readabilityResults.reduce((sum, r) => sum + r.passiveVoiceCount, 0)
+    };
+
+    // Console output for overall metrics
+    console.log('\nOverall Content Metrics:');
+    console.table({
+      'Average Reading Level': getReadingLevel(overall.averageFleschScore),
+      'Average Grade Level': `Grade ${overall.averageGradeLevel.toFixed(1)}`,
+      'Average Words/Sentence': overall.averageWordsPerSentence.toFixed(1),
+      'Total Complex Words': overall.totalComplexWords,
+      'Total Passive Voice': overall.totalPassiveVoice
+    });
+
+    // Generate CSV for console.table data
+    const tableDataCsv = [
+      // Header row
+      ['Page', 'Reading Level', 'Flesch Score', 'Grade Level', 'Avg Words/Sentence', 'Syllables/Word', 'Complex Words', 'Passive Voice'].join(','),
+      // Data rows
+      ...readabilityResults.map(r => [
+        r.pageName,
+        getReadingLevel(r.scores.fleschReadingEase),
+        r.scores.fleschReadingEase.toFixed(1),
+        `Grade ${r.scores.fleschKincaidGrade.toFixed(1)}`,
+        (r.wordCount / r.sentenceCount).toFixed(1),
+        (r.polysyllabicWordCount / r.wordCount).toFixed(2),
+        r.polysyllabicWordCount,
+        r.passiveVoiceCount
+      ].join(','))
+    ].join('\n');
+
+    // Generate CSV for overall metrics
+    const overallMetricsCsv = [
+      // Header row
+      ['Metric', 'Value'].join(','),
+      // Data rows
+      ['Average Reading Level', getReadingLevel(overall.averageFleschScore)].join(','),
+      ['Average Grade Level', `Grade ${overall.averageGradeLevel.toFixed(1)}`].join(','),
+      ['Average Words/Sentence', overall.averageWordsPerSentence.toFixed(1)].join(','),
+      ['Total Complex Words', overall.totalComplexWords].join(','),
+      ['Total Passive Voice', overall.totalPassiveVoice].join(',')
+    ].join('\n');
+
+    // Write the CSV files
+    fs.writeFileSync(
+      path.join(outputDir, `readability-table-${timestamp}.csv`),
+      tableDataCsv
+    );
+    
+    fs.writeFileSync(
+      path.join(outputDir, `readability-overall-${timestamp}.csv`),
+      overallMetricsCsv
+    );
+
+    // Original console.table outputs
     console.log('\nReadability Analysis Summary:');
     console.table(readabilityResults.map(r => ({
       Page: r.pageName,
@@ -380,23 +439,6 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
       'Complex Words': r.polysyllabicWordCount,
       'Passive Voice': r.passiveVoiceCount
     })));
-    // Add overall summary
-    const overall = {
-      averageFleschScore: average(readabilityResults.map(r => r.scores.fleschReadingEase)),
-      averageGradeLevel: average(readabilityResults.map(r => r.scores.fleschKincaidGrade)),
-      averageWordsPerSentence: average(readabilityResults.map(r => r.wordCount / r.sentenceCount)),
-      totalComplexWords: readabilityResults.reduce((sum, r) => sum + r.polysyllabicWordCount, 0),
-      totalPassiveVoice: readabilityResults.reduce((sum, r) => sum + r.passiveVoiceCount, 0)
-    };
-
-    console.log('\nOverall Content Metrics:');
-    console.table({
-      'Average Reading Level': getReadingLevel(overall.averageFleschScore),
-      'Average Grade Level': `Grade ${overall.averageGradeLevel.toFixed(1)}`,
-      'Average Words/Sentence': overall.averageWordsPerSentence.toFixed(1),
-      'Total Complex Words': overall.totalComplexWords,
-      'Total Passive Voice': overall.totalPassiveVoice
-    });
   });
 });
 

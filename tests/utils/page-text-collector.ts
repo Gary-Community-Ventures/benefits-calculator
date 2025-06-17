@@ -127,3 +127,34 @@ export async function collectFormElements(page: Page): Promise<{ [key: string]: 
     return elements;
   });
 }
+
+export async function collectProgramDetails(page: Page): Promise<{ [key: string]: string[] }> {
+  const programTexts: { [key: string]: string[] } = {};
+  
+  // Get all "More Info" buttons
+  const moreInfoButtons = page.getByRole('button', { name: 'More Info' });
+  const count = await moreInfoButtons.count();
+
+  for (let i = 0; i < count; i++) {
+    try {
+      // Get fresh reference to buttons since page reloads
+      const buttons = page.getByRole('button', { name: 'More Info' });
+      await buttons.nth(i).click();
+      
+      // Wait for program details page to load
+      await page.waitForLoadState('networkidle');
+      
+      // Collect texts from program details page
+      const texts = await collectPageTexts(page);
+      programTexts[`Program-${i + 1}`] = texts;
+      
+      // Click "Back to Results" and wait for navigation
+      await page.getByRole('link', { name: /back to results/i }).click();
+      await page.waitForLoadState('networkidle');
+    } catch (error) {
+      console.error(`Error collecting program ${i + 1} details:`, error);
+    }
+  }
+
+  return programTexts;
+}
