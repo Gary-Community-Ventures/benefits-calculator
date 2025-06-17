@@ -30,6 +30,8 @@ const REFERRER_REDIRECT: { [key: string]: string | undefined } = {
   thegatheringplace: 'co',
   childfirst: 'co',
   eaglecounty: 'co',
+  '211nc': 'nc',
+  lanc: 'nc',
 };
 
 export default function RedirectToWhiteLabel({ whiteLabel, children }: Props) {
