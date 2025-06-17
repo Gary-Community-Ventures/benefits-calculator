@@ -217,16 +217,7 @@ test.describe('Google Translate Prevention Tests', () => {
         await expect(page.locator('html')).toHaveAttribute('translate', 'no');
       } else {
         await expect(page.locator('html')).not.toHaveAttribute('translate');
-      }
-
-      // Log the current state for debugging
-      const currentAttributes = await page.evaluate(() => {
-        const html = document.documentElement;
-        return {
-          lang: html.getAttribute('lang'),
-          translate: html.getAttribute('translate')
-        };
-      });      
+      }      
     }
   });
 });
