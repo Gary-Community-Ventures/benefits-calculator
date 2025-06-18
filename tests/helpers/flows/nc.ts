@@ -5,7 +5,7 @@
  * composing common flow helpers into higher-level flows for this specific white label.
  */
 
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { 
   navigateToHomePage, 
   clickGetStarted, 
@@ -28,6 +28,7 @@ import {
 } from './common';
 import { URL_PATTERNS, STATES, WHITE_LABELS } from '../utils/constants';
 import { ApplicationData, FlowResult } from './types';
+import { BUTTONS } from '../selectors';
 
 /**
  * Sets up a test session for the NC white label, getting to the first step after disclaimer
@@ -144,9 +145,15 @@ export async function runNcEndToEndTest(
   const maxRetries = 2;
   let attempt = 0;
   let lastError: Error | null = null;
-
-  // Configure longer timeout for page operations
-  page.setDefaultTimeout(60000); // 60 seconds timeout for all operations
+  
+  // Check if we're in debug mode (can be detected by looking at the browser name from the page's context)
+  const isDebugMode = page.context().browser()?.browserType().name() === 'chromium' && 
+                     process.env.PWDEBUG === '1';
+  
+  // Configure longer timeout for page operations, even longer for debug mode
+  const timeoutMs = isDebugMode ? 120000 : 60000; // 2 minutes for debug, 1 minute otherwise
+  console.log(`Setting timeout to ${timeoutMs}ms${isDebugMode ? ' (debug mode)' : ''}`);
+  page.setDefaultTimeout(timeoutMs); // Set timeout for all operations
 
   while (attempt <= maxRetries) {
     try {
@@ -154,7 +161,8 @@ export async function runNcEndToEndTest(
         console.log(`Retry attempt ${attempt} for NC end-to-end test`);
         // Navigate back to home page for a fresh start on retry
         await page.goto('/');
-        await page.waitForLoadState('networkidle');
+        // Wait for a key element on the landing page to ensure it's loaded
+        await expect(page.getByRole(BUTTONS.GET_STARTED.role, { name: BUTTONS.GET_STARTED.name })).toBeVisible();
       }
 
       // Setup session (landing page, state selection, disclaimer)
@@ -165,8 +173,7 @@ export async function runNcEndToEndTest(
         continue;
       }
       
-      // Complete full application with additional waiting for stability
-      await page.waitForLoadState('networkidle');
+      // completeNcFullApplication (starting with completeLocationInfo) now has its own initial waits.
       const applicationResult = await completeNcFullApplication(page, data);
       if (!applicationResult.success) {
         lastError = applicationResult.error || new Error('Unknown error in application flow');
@@ -183,8 +190,13 @@ export async function runNcEndToEndTest(
       // If we haven't exceeded max retries, try again
       if (attempt <= maxRetries) {
         console.log(`Error in NC end-to-end test, will retry: ${lastError.message}`);
-        // Short delay before retry
-        await page.waitForTimeout(2000);
+        
+        // Brief recovery delay before retry to allow for any pending async operations to settle
+        // This is an intentional brief delay in the error recovery path to prevent rapid-fire retries
+        // Longer delay in debug mode to accommodate slower processing
+        const retryDelayMs = isDebugMode ? 4000 : 2000;
+        console.log(`Waiting ${retryDelayMs}ms before retry attempt ${attempt}/${maxRetries}`);
+        await page.waitForTimeout(retryDelayMs);
       }
     }
   }

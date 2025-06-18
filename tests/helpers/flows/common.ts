@@ -5,7 +5,7 @@
  * in the application, combining multiple lower-level actions.
  */
 
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { 
   clickContinue, 
   verifyCurrentUrl 
@@ -22,7 +22,8 @@ import {
 } from '../form';
 import { 
   FORM_INPUTS,
-  BUTTONS
+  BUTTONS,
+  DROPDOWN
 } from '../selectors';
 import { 
   URL_PATTERNS 
@@ -86,21 +87,32 @@ export async function completeDisclaimer(page: Page): Promise<FlowResult> {
  * @returns Promise with flow result
  */
 export async function completeLocationInfo(
-  page: Page, 
-  zipCode: string, 
+  page: Page,
+  zipCode: string,
   county: string
 ): Promise<FlowResult> {
   try {
     await verifyCurrentUrl(page, URL_PATTERNS.LOCATION_INFO);
+
+    const zipCodeInputLocator = page.getByRole(FORM_INPUTS.ZIP_CODE.role, { name: FORM_INPUTS.ZIP_CODE.name });
+    await expect(zipCodeInputLocator).toBeVisible();
     await fillTextField(page, FORM_INPUTS.ZIP_CODE.name, zipCode);
+
+    const countyDropdownLocator = page.locator(FORM_INPUTS.COUNTY_SELECT);
+    await expect(countyDropdownLocator).toBeVisible();
     await selectDropdownOption(page, FORM_INPUTS.COUNTY_SELECT, county);
+
+    const continueButtonLocator = page.getByRole(BUTTONS.CONTINUE.role, { name: BUTTONS.CONTINUE.name });
+    await expect(continueButtonLocator).toBeVisible();
+    await expect(continueButtonLocator).toBeEnabled();
     await clickContinue(page);
+
     return { success: true, step: 'location-info' };
   } catch (error) {
-    return { 
-      success: false, 
-      step: 'location-info', 
-      error: error as Error 
+    return {
+      success: false,
+      step: 'location-info',
+      error: error as Error
     };
   }
 }
@@ -136,33 +148,53 @@ export async function completeHouseholdSize(
  * @returns Promise with flow result
  */
 export async function completePrimaryUserInfo(
-  page: Page, 
+  page: Page,
   userInfo: PrimaryUserInfo
 ): Promise<FlowResult> {
   try {
     await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_MEMBER);
-    
+
     // Enter birth date
+    // Assuming selectDate handles its own internal waits.
     await selectDate(page, userInfo.birthMonth, userInfo.birthYear);
-    
+
     // Handle health insurance
-    await page.getByRole('button', { name: "I don't have or know if I" }).click();
-    
+    const healthInsuranceButtonLocator = page.getByRole('button', { name: "I don't have or know if I" });
+    await expect(healthInsuranceButtonLocator).toBeVisible();
+    await healthInsuranceButtonLocator.click();
+
     // Handle income
     if (userInfo.hasIncome && userInfo.income) {
+      const yesRadioLocator = page.getByRole(FORM_INPUTS.YES_RADIO.role, { name: FORM_INPUTS.YES_RADIO.name });
+      await expect(yesRadioLocator).toBeVisible();
+      // selectRadio will perform the click, ensure it handles actionability.
       await selectRadio(page, FORM_INPUTS.YES_RADIO.name);
+
+      // Wait for dropdown triggers to be visible before calling helpers
+      const incomeTypeDropdownTriggerLocator = page.getByRole(DROPDOWN.INCOME_TYPE.role, { name: DROPDOWN.INCOME_TYPE.name });
+      await expect(incomeTypeDropdownTriggerLocator).toBeVisible();
       await selectIncomeType(page, userInfo.income.type);
+
+      const frequencyDropdownTriggerLocator = page.getByRole(DROPDOWN.FREQUENCY.role, { name: DROPDOWN.FREQUENCY.name });
+      await expect(frequencyDropdownTriggerLocator).toBeVisible();
       await selectFrequency(page, userInfo.income.frequency);
+
+      const amountInputLocator = page.getByRole(FORM_INPUTS.AMOUNT.role, { name: FORM_INPUTS.AMOUNT.name });
+      await expect(amountInputLocator).toBeVisible();
       await fillTextField(page, FORM_INPUTS.AMOUNT.name, userInfo.income.amount);
     }
-    
+
+    const continueButtonLocator = page.getByRole(BUTTONS.CONTINUE.role, { name: BUTTONS.CONTINUE.name });
+    await expect(continueButtonLocator).toBeVisible();
+    await expect(continueButtonLocator).toBeEnabled();
     await clickContinue(page);
+
     return { success: true, step: 'primary-user-info' };
   } catch (error) {
-    return { 
-      success: false, 
-      step: 'primary-user-info', 
-      error: error as Error 
+    return {
+      success: false,
+      step: 'primary-user-info',
+      error: error as Error
     };
   }
 }

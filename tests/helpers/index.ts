@@ -32,5 +32,3 @@ export * from './flows/common';
 // Export white-label specific helpers
 export * from './flows/nc';
 
-// Export base page object models
-export * from './flows/base';
