@@ -5,10 +5,10 @@
  * across different tests to ensure consistency.
  */
 
-import { WHITE_LABELS, STATES } from './constants';
+import { WHITE_LABELS, REFERRERS, STATES } from './constants';
 
 /**
- * Test user data by white label
+ * Test user data by white label and referrer
  */
 export const testUsers = {
   [WHITE_LABELS.NC]: {
@@ -44,8 +44,41 @@ export const testUsers = {
     referralSource: 'Test / Prospective Partner'
   },
   
-  // Template for other white labels, to be expanded as needed
-  [WHITE_LABELS.JEFFERSON_COUNTY]: {
+  // Template for CO white label
+  [WHITE_LABELS.CO]: {
+    zipCode: '80401',
+    county: 'Jefferson County',
+    householdSize: '2',
+    primaryUser: {
+      birthMonth: 'March',
+      birthYear: '1990',
+      hasIncome: true,
+      income: {
+        type: 'Wages, salaries, tips',
+        frequency: 'every month',
+        amount: '2400'
+      }
+    },
+    householdMember: {
+      birthMonth: 'February',
+      birthYear: '2020',
+      relationship: 'Child'
+    },
+    expenses: {
+      hasExpenses: true,
+      type: 'Rent',
+      amount: '2500'
+    },
+    assets: '1000',
+    needs: [
+      'Food or groceries', 
+      'Health insurance'
+    ],
+    referralSource: 'Test / Prospective Partner'
+  },
+  
+  // Templates for other white labels/referrers, to be expanded as needed
+  [REFERRERS.JEFFERSON_COUNTY]: {
     zipCode: '80401',
     county: 'Jefferson County',
     householdSize: '3',

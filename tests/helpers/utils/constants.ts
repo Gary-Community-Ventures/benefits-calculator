@@ -26,10 +26,19 @@ export const URL_PATTERNS = {
 };
 
 /**
- * White label identifiers
+ * White label identifiers - these identify the actual application instances
  */
 export const WHITE_LABELS = {
   NC: 'nc',
+  CO: 'co',
+  MA: 'ma',
+  CO_ENERGY_CALCULATOR: 'co_energy_calculator',
+};
+
+/**
+ * Referrer identifiers - these identify referral sources, not white labels
+ */
+export const REFERRERS = {
   JEFFERSON_COUNTY: 'jeffco',
   COLORADO_211: '211co',
   NC_211: '211nc',
