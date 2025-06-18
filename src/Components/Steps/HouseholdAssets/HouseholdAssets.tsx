@@ -96,6 +96,9 @@ const HouseholdAssets = () => {
               }}
               inputProps={NUM_PAD_PROPS}
               onChange={handleNumbersOnly(field.onChange)}
+              onFocus={(e) => {
+                e.target.select();
+              }}
               error={errors.householdAssets !== undefined}
               helperText={
                 errors.householdAssets !== undefined && (

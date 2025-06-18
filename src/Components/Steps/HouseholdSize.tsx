@@ -112,6 +112,9 @@ const HouseholdSize = () => {
               variant="outlined"
               inputProps={NUM_PAD_PROPS}
               onChange={handleNumbersOnly(field.onChange)}
+              onFocus={(e) => {
+                e.target.select();
+              }}
               error={errors.householdSize !== undefined}
               helperText={
                 errors.householdSize !== undefined && (
