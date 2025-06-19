@@ -1,10 +1,15 @@
 import { test, expect } from '@playwright/test';
+import { runNcEndToEndTest, verifyCurrentUrl, saveResults } from './helpers';
+import { testUsers } from './helpers/utils/test-data';
+import { URL_PATTERNS } from './helpers/utils/constants';
 
 /**
- * Sample end-to-end screen test
+ * NC white label end-to-end test
  */
-
 test.describe('NC Screen Test', () => {
+  // Set a longer timeout for this test to avoid issues with UI interactions
+  test.setTimeout(120000); // 2 minutes
+
   test('start to finish screen test', async ({ page }) => {
     await test.step('Step-1: Language and State selection', async () => {
       await page.goto('/');
