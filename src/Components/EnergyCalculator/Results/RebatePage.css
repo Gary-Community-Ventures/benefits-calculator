@@ -57,6 +57,23 @@
   width: fit-content;
 }
 
+.energy-calculator-rebate-page-more-info a {
+  font-size: 0.8rem;
+  color: white;
+  text-decoration: none;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--primary-color);
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  border: 1px solid var(--primary-color);
+}
+
+.energy-calculator-rebate-page-more-info a:hover {
+  background-color: white;
+  color: var(--primary-color);
+}
+
 .energy-calculator-rebate-page-rebate-card h2 {
   font-size: 1.2rem;
   color: var(--primary-color);
