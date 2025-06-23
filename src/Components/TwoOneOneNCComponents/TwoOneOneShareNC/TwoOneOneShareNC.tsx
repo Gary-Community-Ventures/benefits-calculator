@@ -103,11 +103,6 @@ const TwoOneOneShareNC = ({ close }: TwoOneOneShareProps) => {
               <TwitterIcon sx={iconSize} />
             </Icon>
           </TwitterShareButton>
-          <EmailShareButton url={shareUrl} onClick={trackOutboundLinks('Share With Email')}>
-            <Icon name={labels.email} color="twoOneOne-gray">
-              <EmailIcon sx={iconSize} />
-            </Icon>
-          </EmailShareButton>
         </div>
         <div className="twoOneOne-row-group">
           <WhatsappShareButton url={shareUrl} onClick={trackOutboundLinks('Share With WhatsApp')}>

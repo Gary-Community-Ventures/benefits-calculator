@@ -103,11 +103,6 @@ const LancShareNC = ({ close }: LancShareProps) => {
               <TwitterIcon sx={iconSize} />
             </Icon>
           </TwitterShareButton>
-          <EmailShareButton url={shareUrl} onClick={trackOutboundLinks('Share With Email')}>
-            <Icon name={labels.email} color="lanc-gray">
-              <EmailIcon sx={iconSize} />
-            </Icon>
-          </EmailShareButton>
         </div>
         <div className="lanc-row-group">
           <WhatsappShareButton url={shareUrl} onClick={trackOutboundLinks('Share With WhatsApp')}>

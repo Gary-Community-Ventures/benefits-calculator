@@ -1,4 +1,4 @@
-const LancLinks = [
+const LANC_LINKS = [
   {
     defaultMsg: 'GET HELP',
     formattedMsgId: 'LancHeader.getHelp',
@@ -7,4 +7,4 @@ const LancLinks = [
   },
 ];
 
-export default LancLinks;
+export default LANC_LINKS;
