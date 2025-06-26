@@ -26,8 +26,6 @@ test.describe('NC Screen Test', () => {
       await expect(page).toHaveURL(/\/nc\/.*\/step-3/);
       await page.getByRole('textbox', { name: 'Zip Code' }).click();
       await page.getByRole('textbox', { name: 'Zip Code' }).fill('27704');
-      await page.locator('#county-source-select').click();
-      await page.getByRole('option', { name: 'Durham County' }).click();
       await page.getByRole('button', { name: 'Continue' }).click();
     });
     await test.step('Step-4: Household Size', async () => {
@@ -37,7 +35,7 @@ test.describe('NC Screen Test', () => {
       await page.getByRole('button', { name: 'Continue' }).click();
     });
     await test.step('Step-5: Household Member 1', async () => {
-      await expect(page).toHaveURL(/\/nc\/.*\/step-5/);
+      await expect(page).toHaveURL(/\/nc\/.*\/step-5\/1$/);
       await page.getByRole('button', { name: 'Birth Month' }).click();
       await page.getByRole('option', { name: 'March' }).click();
       await page.getByRole('button', { name: 'Open' }).click();
@@ -52,12 +50,10 @@ test.describe('NC Screen Test', () => {
       await page.getByRole('textbox', { name: 'Amount' }).fill('2200');
       await page.getByRole('button', { name: 'Continue' }).click();
 
-      await expect(page).toHaveURL(/\/nc\/.*\/step-5/);
+      await expect(page).toHaveURL(/\/nc\/.*\/step-5\/2$/);
       await page.getByRole('button', { name: 'Birth Month' }).click();
       await page.getByRole('listbox', { name: 'Birth Month' }).waitFor({ state: 'visible' });
-      const febOption = page.locator('li[role="option"]', { hasText: 'February' }).first();
-      await expect(febOption).toBeVisible();
-      await febOption.click();
+      await page.getByRole('option', { name: 'February' }).click();
       await page.getByRole('button', { name: 'Open' }).click();
       await page.getByRole('option', { name: '2020' }).click();
       await page.locator('#relationship-to-hh-select').click();

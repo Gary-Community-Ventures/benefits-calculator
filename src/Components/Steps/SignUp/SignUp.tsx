@@ -4,12 +4,14 @@ import { useContext, useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { z } from 'zod';
+import InformationalText from '../../Common/InformationalText/InformationalText';
 import { FormData } from '../../../Types/FormData';
 import { FormattedMessageType } from '../../../Types/Questions';
 import { useConfig } from '../../Config/configHook';
 import ErrorMessageWrapper from '../../ErrorMessage/ErrorMessageWrapper';
 import PrevAndContinueButtons from '../../PrevAndContinueButtons/PrevAndContinueButtons';
 import QuestionHeader from '../../QuestionComponents/QuestionHeader';
+import QuestionDescription from '../../QuestionComponents/QuestionDescription';
 import { useDefaultBackNavigationFunction } from '../../QuestionComponents/questionHooks';
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { Context } from '../../Wrapper/Wrapper';
@@ -234,12 +236,21 @@ function SignUp() {
       <QuestionHeader>
         <FormattedMessage
           id="qcc.optional-sign-up-text"
-          defaultMessage="Optional: Sign up for benefits updates and/or feedback opportunities"
+          defaultMessage="Sign up for benefits updates and/or feedback opportunities."
         />
       </QuestionHeader>
       <QuestionQuestion>
-        <FormattedMessage id="questions.signUpInfo" defaultMessage="What would you like us to contact you about?" />
+        <FormattedMessage
+          id="questions.signUpInfo"
+          defaultMessage="OPTIONAL: Would you like us to contact you about either of the following?"
+        />
       </QuestionQuestion>
+      <QuestionDescription>
+        <FormattedMessage
+          id="questions.signUpInfo.description"
+          defaultMessage="If you do not want to sign up for either of these notifications, please click continue."
+        />
+      </QuestionDescription>
       <form onSubmit={handleSubmit(submitHandler)}>
         <div>
           {Object.entries(signUpOptions).map(([name, value]) => {
