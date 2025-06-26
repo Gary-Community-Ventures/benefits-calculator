@@ -107,7 +107,7 @@ export default function GasProvider() {
       <QuestionDescription>
         <FormattedMessage
           id="energyCalculator.gasProvider.description"
-          defaultMessage="If you heat your home with a gas provider, please select the company."
+          defaultMessage="If you heat your home with gas or electricity, please select your provider."
         />
       </QuestionDescription>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
