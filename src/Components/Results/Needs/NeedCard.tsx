@@ -1,8 +1,8 @@
 import { FormattedMessage, useIntl } from 'react-intl';
-import { ComponentType, useState } from 'react';
+import { useState } from 'react';
 import { UrgentNeed } from '../../../Types/Results';
 import ResultsTranslate from '../Translate/Translate';
-import { acuteConditionResultMapping } from '../../../Assets/acuteConditionOptions';
+import { iconCategoryMap } from '../../CurrentBenefits/CurrentBenefits';
 import { formatPhoneNumber } from '../helpers';
 import './NeedCard.css';
 
@@ -10,8 +10,8 @@ type NeedsCardProps = {
   need: UrgentNeed;
 };
 
-const getIcon = (messageType: string, acuteConditionResultMapping: Record<string, ComponentType>) => {
-  const Icon = acuteConditionResultMapping[messageType];
+const getIcon = (messageType: string) => {
+  const Icon = iconCategoryMap[messageType];
 
   if (Icon !== undefined) {
     return <Icon />;
@@ -29,8 +29,8 @@ const NeedCard = ({ need }: NeedsCardProps) => {
     translatedLink = intl.formatMessage({ id: need.link.label, defaultMessage: need.link.default_message });
   }
 
-  const needType = need.type.default_message.toLowerCase();
-  const icon = getIcon(needType, acuteConditionResultMapping);
+  const needType = need.icon.toLowerCase();
+  const icon = getIcon(needType);
   const translatedNeedDesc = intl.formatMessage({
     id: need.description.label,
     defaultMessage: need.description.default_message,
@@ -42,7 +42,7 @@ const NeedCard = ({ need }: NeedsCardProps) => {
         <div className="result-resource-more-info">
           {icon}
           <span>
-            <ResultsTranslate translation={need.type} />
+            <ResultsTranslate translation={need.category_type} />
             <strong>
               <ResultsTranslate translation={need.name} />
             </strong>
