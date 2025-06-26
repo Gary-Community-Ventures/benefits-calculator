@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FormControl, FormHelperText, InputLabel, Select } from '@mui/material';
-import { useContext, useMemo } from 'react';
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material';
+import { useContext, useEffect, useMemo } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useParams } from 'react-router-dom';
@@ -16,7 +16,7 @@ import { useDefaultBackNavigationFunction } from '../../QuestionComponents/quest
 import QuestionQuestion from '../../QuestionComponents/QuestionQuestion';
 import { createMenuItems } from '../../Steps/SelectHelperFunctions/SelectHelperFunctions';
 import { Context } from '../../Wrapper/Wrapper';
-import { GAS_PROVIDERS } from '../gasProviders';
+import { OTHER_GAS_PROVIDERS, useUtilityProviders } from '../providers';
 import { useEnergyFormData } from '../hooks';
 import useStepForm from '../../Steps/stepForm';
 
@@ -28,13 +28,47 @@ export default function GasProvider() {
   const { formatMessage } = useIntl();
   const { updateScreen } = useScreenApi();
 
+  const { providers, hasError: hasProviderError } = useUtilityProviders();
+
+  const providerOptions = useMemo(() => {
+    if (providers === undefined || hasProviderError) {
+      return {};
+    }
+
+    const options: { [key: string]: string | FormattedMessageType } = { ...providers.gas };
+
+    for (const [code, text] of Object.entries(OTHER_GAS_PROVIDERS)) {
+      options[code] = text;
+    }
+
+    return options;
+  }, [formData.zipcode, providers]);
+
   const formSchema = z.object({
-    gasProvider: z.string().min(1, {
-      message: formatMessage({
-        id: 'energyCalculator.gasProvider.errorMessage',
-        defaultMessage: 'Please select an gas provider',
-      }),
-    }),
+    gasProvider: z
+      .string()
+      .min(1, {
+        message: formatMessage({
+          id: 'energyCalculator.gasProvider.errorMessage',
+          defaultMessage: 'Please select an gas provider',
+        }),
+      })
+      .refine(
+        (provider) => {
+          // make sure that the providers are loaded
+          if (providers === undefined || hasProviderError) {
+            return false;
+          }
+
+          return provider in providerOptions;
+        },
+        {
+          message: formatMessage({
+            id: 'energyCalculator.gasProvider.errorMessage',
+            defaultMessage: 'Please select a gas provider',
+          }),
+        },
+      ),
   });
 
   type FormSchema = z.infer<typeof formSchema>;
@@ -42,7 +76,9 @@ export default function GasProvider() {
   const {
     control,
     formState: { errors },
+    trigger,
     handleSubmit,
+    getValues,
   } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -62,36 +98,25 @@ export default function GasProvider() {
     const updatedEnergyData: EnergyCalculatorFormData = {
       ...formData.energyCalculator,
       gasProvider: gasProvider,
+      gasProviderName: providers?.gas[gasProvider] ?? '',
     };
 
     const updatedFormData: FormData = { ...formData, energyCalculator: updatedEnergyData };
     await updateScreen(updatedFormData);
   };
 
-  const providerOptions = useMemo(() => {
-    const options: { [key: string]: string | FormattedMessageType } = {};
+  useEffect(() => {
+    // trigger validation after the providers have loaded
+    // this removes any error messages that may have been shown if
+    // the user tries to continue before the providers are loaded
+    if (providers !== undefined) {
+      if (getValues('gasProvider') === '') {
+        return;
+      }
 
-    const providerOptions = GAS_PROVIDERS[formData.county];
-
-    if (providerOptions === undefined) {
-      throw new Error('an invalid county was provided');
+      trigger('gasProvider');
     }
-
-    for (const [code, name] of Object.entries(providerOptions)) {
-      options[code] = name;
-    }
-
-    options.propane = (
-      <FormattedMessage
-        id="energyCalculator.gasProvider.propane"
-        defaultMessage="Propane tank / firewood / heating pellets"
-      />
-    );
-    options.other = <FormattedMessage id="energyCalculator.gasProvider.other" defaultMessage="Other" />;
-    options.none = <FormattedMessage id="energyCalculator.gasProvider.none" defaultMessage="None / Don't Pay" />;
-
-    return options;
-  }, [formData.county]);
+  }, [providerOptions, providers]);
 
   return (
     <div>
@@ -111,7 +136,10 @@ export default function GasProvider() {
         />
       </QuestionDescription>
       <form onSubmit={handleSubmit(formSubmitHandler)}>
-        <FormControl sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }} error={errors.gasProvider !== undefined}>
+        <FormControl
+          sx={{ mt: 1, mb: 2, minWidth: 210, maxWidth: '100%' }}
+          error={errors.gasProvider !== undefined || hasProviderError}
+        >
           <InputLabel>
             <FormattedMessage id="energyCalculator.gasProvider.label" defaultMessage="Heating Source" />
           </InputLabel>
@@ -119,27 +147,61 @@ export default function GasProvider() {
             name="gasProvider"
             control={control}
             rules={{ required: true }}
-            render={({ field }) => (
-              <>
-                <Select
-                  {...field}
-                  label={<FormattedMessage id="energyCalculator.gasProvider.label" defaultMessage="Heating Source" />}
-                >
-                  {createMenuItems(
-                    providerOptions,
+            render={({ field }) => {
+              let errorMessage: null | FormattedMessageType = null;
+              if (hasProviderError) {
+                errorMessage = (
+                  <FormHelperText>
                     <FormattedMessage
-                      id="energyCalculator.gasProvider.placeholder"
-                      defaultMessage="Select a provider"
-                    />,
-                  )}
-                </Select>
-                {errors.gasProvider !== undefined && (
+                      id="energyCalculator.gasProvider.apiError"
+                      defaultMessage="There was an issue loading the gas providers. Please refresh the page."
+                    />
+                  </FormHelperText>
+                );
+              } else if (errors.gasProvider !== undefined) {
+                errorMessage = (
                   <FormHelperText>
                     <ErrorMessageWrapper fontSize="1rem">{errors.gasProvider.message}</ErrorMessageWrapper>
                   </FormHelperText>
-                )}
-              </>
-            )}
+                );
+              }
+
+              if (providers === undefined) {
+                return (
+                  <>
+                    <Select
+                      value=""
+                      label={
+                        <FormattedMessage id="energyCalculator.gasProvider.label" defaultMessage="Heating Source" />
+                      }
+                    >
+                      <MenuItem value="loading" disabled>
+                        <FormattedMessage id="energyCalculator.gasProvider.loading" defaultMessage="Loading" />
+                      </MenuItem>
+                    </Select>
+                    {errorMessage}
+                  </>
+                );
+              }
+
+              return (
+                <>
+                  <Select
+                    {...field}
+                    label={<FormattedMessage id="energyCalculator.gasProvider.label" defaultMessage="Heating Source" />}
+                  >
+                    {createMenuItems(
+                      providerOptions,
+                      <FormattedMessage
+                        id="energyCalculator.gasProvider.placeholder"
+                        defaultMessage="Select a provider"
+                      />,
+                    )}
+                  </Select>
+                  {errorMessage}
+                </>
+              );
+            }}
           />
         </FormControl>
         <PrevAndContinueButtons backNavigationFunction={backNavigationFunction} />

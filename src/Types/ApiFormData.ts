@@ -34,7 +34,11 @@ export type ApiEnergyCalculatorFormData = {
   is_home_owner: boolean;
   is_renter: boolean;
   electric_provider: string;
+  /** the human readable electric provider name */
+  electric_provider_name: string;
   gas_provider: string;
+  /** the human readable gas provider name */
+  gas_provider_name: string;
   electricity_is_disconnected: boolean;
   has_past_due_energy_bills: boolean;
   has_old_car: boolean;
