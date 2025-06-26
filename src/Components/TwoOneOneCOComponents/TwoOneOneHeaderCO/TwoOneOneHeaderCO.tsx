@@ -21,7 +21,7 @@ type LanguageOptions = {
 
 const TwoOneOneHeaderCO = () => {
   //this is so that when the users click on the cobranded logo, they're navigated back to step-1
-  const { formData, locale, selectLanguage } = useContext(Context);
+  const { formData, locale, selectLanguage, whiteLabel } = useContext(Context);
   const languageOptions = useConfig<LanguageOptions>('language_options');
   const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
   const intl = useIntl();
@@ -146,7 +146,7 @@ const TwoOneOneHeaderCO = () => {
       <Paper elevation={4} square={true} className="twoOneOne-header-container">
         <AppBar position="sticky" id="twoOneOne-nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
           <Box>
-            <a href={`/step-1${queryString}`}>
+            <a href={`/${whiteLabel}/step-1${queryString}`}>
               <img src={twoOneOneMFBLogo} alt={intl.formatMessage(logoAltText)} className="cobranded-logo" />
             </a>
           </Box>
