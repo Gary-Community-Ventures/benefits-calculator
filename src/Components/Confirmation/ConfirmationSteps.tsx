@@ -310,7 +310,10 @@ function AcuteConditions() {
     <ConfirmationBlock
       icon={<Immediate title={formatMessage(acuteConditionsIconAlt)} />}
       title={
-        <FormattedMessage id="confirmation.displayAllFormData-acuteHHConditions" defaultMessage="Immediate Needs" />
+        <FormattedMessage
+          id="confirmation.displayAllFormData-acuteHHConditions"
+          defaultMessage="Additional Resources"
+        />
       }
       editAriaLabel={editAcuteConditionsAriaLabel}
       stepName="acuteHHConditions"

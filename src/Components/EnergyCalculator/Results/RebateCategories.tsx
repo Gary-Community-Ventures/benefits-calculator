@@ -29,12 +29,19 @@ function RebateCategoryCard({ rebateCategory }: RebateCategoryCardProps) {
 }
 
 const NEEDS_REBATE_FIELDS = ['needsHvac', 'needsStove', 'needsWaterHeater'] as const;
+const PAST_DUE_UTILITIES = ['electricityIsDisconnected', 'hasPastDueEnergyBills'] as const;
 
 export function useEnergyCalculatorNeedsRebates() {
   const { formData } = useContext(Context);
 
   return useMemo(
     () => {
+      for (const field of PAST_DUE_UTILITIES) {
+        if (formData.energyCalculator?.[field] === true) {
+          return false;
+        }
+      }
+
       for (const field of NEEDS_REBATE_FIELDS) {
         if (formData.energyCalculator?.[field] === true) {
           return true;
