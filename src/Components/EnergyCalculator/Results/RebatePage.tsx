@@ -6,6 +6,7 @@ import { EnergyCalculatorRebateCalculator, EnergyCalculatorRebateCardTitle, reba
 import { ReactComponent as Housing } from '../../../Assets/icons/Programs/CategoryHeading/housing.svg';
 import { renderCategoryDescription } from './rebateTypes';
 import './RebatePage.css';
+import { useMemo } from 'react';
 
 type RebatePageProps = {
   rebateCategory: EnergyCalculatorRebateCategory;
@@ -43,6 +44,19 @@ type RebateProps = {
 };
 
 function RebateCard({ rebate }: RebateProps) {
+  const rebateUrl = useMemo(() => {
+    const url = new URL(rebate.program_url);
+
+    const urlParams = url.searchParams;
+
+    urlParams.set('utm_source', 'cesn');
+    urlParams.set('utm_medium', 'web');
+    urlParams.set('utm_campaign', 'cesn');
+    urlParams.set('utm_id', 'cesn');
+
+    return url.href;
+  }, [rebate.program_url]);
+
   return (
     <div className="energy-calculator-rebate-page-rebate-card">
       <div>
@@ -58,8 +72,8 @@ function RebateCard({ rebate }: RebateProps) {
       </div>
       <p>{rebate.short_description}</p>
       <EnergyCalculatorRebateCalculator rebate={rebate} />
-      <div className="result-program-more-info-button energy-calculator-rebate-page-more-info">
-        <a href={rebate.program_url} target="_blank">
+      <div className="energy-calculator-rebate-page-more-info">
+        <a href={rebateUrl} target="_blank">
           <FormattedMessage id="energyCalculator.rebatePage.applyButton" defaultMessage="Learn how to apply" />
         </a>
       </div>
