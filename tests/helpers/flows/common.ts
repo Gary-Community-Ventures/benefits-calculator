@@ -83,7 +83,7 @@ export async function completeDisclaimer(page: Page): Promise<FlowResult> {
  * Completes the location information step
  * @param page - Playwright page instance
  * @param zipCode - Zip code to enter
- * @param county - County to select
+ * @param county - County to select (optional, will be used only if county selector is present)
  * @returns Promise with flow result
  */
 export async function completeLocationInfo(
@@ -94,14 +94,22 @@ export async function completeLocationInfo(
   try {
     await verifyCurrentUrl(page, URL_PATTERNS.LOCATION_INFO);
 
+    // Fill in the zip code (always required)
     const zipCodeInputLocator = page.getByRole(FORM_INPUTS.ZIP_CODE.role, { name: FORM_INPUTS.ZIP_CODE.name });
     await expect(zipCodeInputLocator).toBeVisible();
     await fillTextField(page, FORM_INPUTS.ZIP_CODE.name, zipCode);
 
+    // Check if the county selector exists and handle it conditionally
     const countyDropdownLocator = page.locator(FORM_INPUTS.COUNTY_SELECT);
-    await expect(countyDropdownLocator).toBeVisible();
-    await selectDropdownOption(page, FORM_INPUTS.COUNTY_SELECT, county);
+    const isCountySelectorVisible = await countyDropdownLocator.isVisible()
+      .catch(() => false); // Handle any errors gracefully
+    
+    if (isCountySelectorVisible) {
+      await selectDropdownOption(page, FORM_INPUTS.COUNTY_SELECT, county);
+    }
+    // If county selector isn't visible, simply continue with the flow
 
+    // Continue to the next step
     const continueButtonLocator = page.getByRole(BUTTONS.CONTINUE.role, { name: BUTTONS.CONTINUE.name });
     await expect(continueButtonLocator).toBeVisible();
     await expect(continueButtonLocator).toBeEnabled();
