@@ -7,6 +7,7 @@ import { ReactComponent as Housing } from '../../../Assets/icons/Programs/Catego
 import { renderCategoryDescription } from './rebateTypes';
 import './RebatePage.css';
 import { useMemo } from 'react';
+import { TrackedOutboundLink } from '../../Common/TrackedOutboundLink';
 
 type RebatePageProps = {
   rebateCategory: EnergyCalculatorRebateCategory;
@@ -31,7 +32,7 @@ export default function EnergyCalculatorRebatePage({ rebateCategory }: RebatePag
         {renderCategoryDescription(rebateCategory.type)}
         <section>
           {rebateCategory.rebates.map((rebate, i) => {
-            return <RebateCard rebate={rebate} key={i} />;
+            return <RebateCard rebate={rebate} rebateCategory={rebateCategory} key={i} />;
           })}
         </section>
       </div>
@@ -41,9 +42,10 @@ export default function EnergyCalculatorRebatePage({ rebateCategory }: RebatePag
 
 type RebateProps = {
   rebate: EnergyCalculatorRebate;
+  rebateCategory: EnergyCalculatorRebateCategory;
 };
 
-function RebateCard({ rebate }: RebateProps) {
+function RebateCard({ rebate, rebateCategory }: RebateProps) {
   const rebateUrl = useMemo(() => {
     const url = new URL(rebate.program_url);
 
@@ -73,9 +75,17 @@ function RebateCard({ rebate }: RebateProps) {
       <p>{rebate.short_description}</p>
       <EnergyCalculatorRebateCalculator rebate={rebate} />
       <div className="energy-calculator-rebate-page-more-info">
-        <a href={rebateUrl} target="_blank">
+        <TrackedOutboundLink
+          href={rebateUrl}
+          action="rebate_link_click"
+          label={rebate.program}
+          category={rebateCategory.type}
+          additionalData={{
+            rebate_type: rebate.payment_methods.join(', '),
+          }}
+        >
           <FormattedMessage id="energyCalculator.rebatePage.applyButton" defaultMessage="Learn how to apply" />
-        </a>
+        </TrackedOutboundLink>
       </div>
     </div>
   );

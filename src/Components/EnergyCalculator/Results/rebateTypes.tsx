@@ -1,6 +1,7 @@
 // NOTE: source: https://github.com/rewiringamerica/embed.rewiringamerica.org/blob/main/src/api/calculator-types-v1.ts
 import { FormattedMessage } from 'react-intl';
 import { FormattedMessageType } from '../../../Types/Questions';
+import TrackedOutboundLink from '../../Common/TrackedOutboundLink/TrackedOutboundLink';
 
 export type EnergyCalculatorIncentiveType =
   | 'tax_credit'
@@ -172,9 +173,15 @@ export const renderCategoryDescription = (rebateType: EnergyCalculatorRebateCate
   return (
     <article className="category-description-article">
       {categoryDescription}
-      <a className="link-color" target="_blank" href={href}>
+      <TrackedOutboundLink
+        href={href}
+        className="link-color"
+        action="rewiring_america_link_click"
+        label="Rewiring America"
+        category={rebateType}
+      >
         Rewiring America.
-      </a>
+      </TrackedOutboundLink>
     </article>
   );
 };
