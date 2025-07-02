@@ -1,25 +1,24 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ConfirmationBlock from '../../Confirmation/ConfirmationBlock';
 import { Context } from '../../Wrapper/Wrapper';
 import { ReactComponent as Housing } from '../../../Assets/icons/UrgentNeeds/AcuteConditions/housing.svg';
-import { getProviderNames } from '../electricityProviders';
 import { FormattedMessageType } from '../../../Types/Questions';
+import { OTHER_ELECTRIC_PROVIDERS } from '../providers';
 
 export default function EnergyCalculatorElectricityProvider() {
   const { formData } = useContext(Context);
   const { formatMessage } = useIntl();
 
-  const providerNames = useMemo(getProviderNames, []);
-
   const electricProvider = formData.energyCalculator?.electricProvider ?? 'other';
-  let providerName: string | FormattedMessageType = providerNames[electricProvider];
-  if (electricProvider === 'other') {
+
+  let providerName: string | FormattedMessageType;
+  if (formData.energyCalculator?.electricProviderName) {
+    providerName = formData.energyCalculator?.electricProviderName;
+  } else if (OTHER_ELECTRIC_PROVIDERS[electricProvider]) {
+    providerName = OTHER_ELECTRIC_PROVIDERS[electricProvider];
+  } else {
     providerName = <FormattedMessage id="energyCalculator.electricityProvider.other" defaultMessage="Other" />;
-  } else if (electricProvider === 'none') {
-    providerName = (
-      <FormattedMessage id="energyCalculator.electricityProvider.none" defaultMessage="None / Don't Pay" />
-    );
   }
 
   const editElectricityProviderAriaLabel = {

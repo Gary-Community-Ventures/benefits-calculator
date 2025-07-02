@@ -43,6 +43,11 @@ export const Zipcode = () => {
   };
 
   const numberMustBeFiveDigitsLongRegex = /^\d{5}$/;
+  const errorMessage =
+    formatMessage({
+      id: 'validation-helperText.zipcode',
+      defaultMessage: 'Please enter a valid zip code for ',
+    }) + state.name;
   const zipcodeSchema = z
     .string(
       helperText(
@@ -54,7 +59,7 @@ export const Zipcode = () => {
     )
     .trim()
     .regex(numberMustBeFiveDigitsLongRegex)
-    .refine((data) => data in countiesByZipcode);
+    .refine((data) => data in countiesByZipcode, { message: errorMessage }); // refine does not use the error map
 
   const formSchema = z
     .object({

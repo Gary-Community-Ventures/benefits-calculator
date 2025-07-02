@@ -56,6 +56,7 @@ function RebateCard({ rebate }: RebateProps) {
 
     return url.href;
   }, [rebate.program_url]);
+
   return (
     <div className="energy-calculator-rebate-page-rebate-card">
       <div>
