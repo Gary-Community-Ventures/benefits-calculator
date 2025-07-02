@@ -97,7 +97,6 @@ export type UrgentNeed = {
   icon: string;
 };
 
-
 export type Validation = {
   id: number;
   screen_uuid: string;
