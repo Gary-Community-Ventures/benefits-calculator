@@ -97,11 +97,6 @@ export type UrgentNeed = {
   icon: string;
 };
 
-export type UrgentNeedType = {
-  external_name: string;
-  name: Translation;
-  urgentneeds: UrgentNeed[];
-}
 
 export type Validation = {
   id: number;
