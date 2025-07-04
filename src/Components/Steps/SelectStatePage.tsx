@@ -12,7 +12,7 @@ import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLab
 import QuestionDescription from '../QuestionComponents/QuestionDescription';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-export const STATES: { [key: string]: string } = { co: 'Colorado', nc: 'North Carolina' };
+export const STATES: { [key: string]: string } = { co: 'Colorado', nc: 'North Carolina', il: 'Illinois' };
 
 const SelectStatePage = () => {
   const { whiteLabel, uuid } = useParams();
