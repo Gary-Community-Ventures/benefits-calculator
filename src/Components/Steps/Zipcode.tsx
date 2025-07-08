@@ -76,6 +76,7 @@ export const Zipcode = () => {
     handleSubmit,
     watch,
     setValue,
+    getValues,
   } = useStepForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -93,24 +94,24 @@ export const Zipcode = () => {
 
   useEffect(() => {
     if (!parsedZipCode.success) return; // guard clause
-  
-    const counties     = countiesByZipcode[parsedZipCode.data] || {};
-    const countyKeys   = Object.keys(counties);
-    const currentCounty = watch('county');
-  
+
+    const counties = countiesByZipcode[parsedZipCode.data] || {};
+    const countyKeys = Object.keys(counties);
+    const currentCounty = getValues('county');
+
     // If there’s exactly one county, select it
     if (countyKeys.length === 1) {
-      if (currentCounty !== countyKeys[0]) setValue('county', countyKeys[0]);
-      return;
+      if (currentCounty !== countyKeys[0]) setValue('county', countyKeys[0]);{ 
+        return 
+      }
     }
-  
+
     // More than one county: set to disabled-select if the current county is invalid
     const isValid = countyKeys.includes(currentCounty) && currentCounty !== 'disabled-select';
     if (!isValid && currentCounty !== 'disabled-select') {
       setValue('county', 'disabled-select');
     }
-  }, [parsedZipCode, countiesByZipcode, watch, setValue]);
-  
+  }, [parsedZipCode, countiesByZipcode, getValues, setValue]);
 
   const formSubmitHandler = async (zipCodeAndCountyData: FormSchema) => {
     if (uuid === undefined) {
