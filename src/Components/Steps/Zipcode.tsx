@@ -103,8 +103,8 @@ export const Zipcode = () => {
     if (countyKeys.length === 1) {
       if (currentCounty !== countyKeys[0]) { 
         setValue('county', countyKeys[0]); 
-        return;
       }
+      return;
     }
 
     // More than one county: set to disabled-select if the current county is invalid
