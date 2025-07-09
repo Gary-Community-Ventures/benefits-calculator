@@ -79,9 +79,10 @@ function RebateCard({ rebate, rebateCategory }: RebateProps) {
           href={rebateUrl}
           action="rebate_link_click"
           label={rebate.program}
-          category={rebateCategory.type}
+          category="energy_rebate"
           additionalData={{
             rebate_type: rebate.payment_methods.join(', '),
+            rebate_category: rebateCategory.type,
           }}
         >
           <FormattedMessage id="energyCalculator.rebatePage.applyButton" defaultMessage="Learn how to apply" />

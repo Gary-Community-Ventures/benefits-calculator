@@ -178,7 +178,10 @@ export const renderCategoryDescription = (rebateType: EnergyCalculatorRebateCate
         className="link-color"
         action="rewiring_america_link_click"
         label="Rewiring America"
-        category={rebateType}
+        category="energy_rebate"
+        additionalData={{
+          rebate_category: rebateType,
+        }}
       >
         Rewiring America.
       </TrackedOutboundLink>
