@@ -101,8 +101,8 @@ export const Zipcode = () => {
 
     // If there’s exactly one county, select it
     if (countyKeys.length === 1) {
-      if (currentCounty !== countyKeys[0]) setValue('county', countyKeys[0]);
-      {
+      if (currentCounty !== countyKeys[0]) { 
+        setValue('county', countyKeys[0]); 
         return;
       }
     }
