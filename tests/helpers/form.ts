@@ -61,70 +61,63 @@ export async function checkCheckbox(page: Page, labelText: string): Promise<void
  * @param year - Year to select (e.g., '1990')
  */
 export async function selectDate(page: Page, month: string, year: string): Promise<void> {
-  // Get locators for all elements we'll interact with
-  const monthSelector = page.getByRole(FORM_INPUTS.BIRTH_MONTH.role, { name: FORM_INPUTS.BIRTH_MONTH.name });
-  const yearSelector = page.getByRole(FORM_INPUTS.YEAR_SELECTOR.role, { name: FORM_INPUTS.YEAR_SELECTOR.name });
-  
-  // Log for debugging
-  console.log(`[Form Helper] Selecting date: ${month} ${year}`);
-  
-  // Select month with retry logic
-  await monthSelector.waitFor({ state: 'visible' });
+  // We'll use a simplified but robust approach
   try {
-    // Try to select month
-    await monthSelector.click();
+    // Get selectors for the buttons that open the dropdowns
+    const birthMonthButton = page.getByRole('button', { name: 'Birth Month' });
     
-    // Wait briefly for dropdown to be fully rendered
-    await page.waitForTimeout(300);
+    // 1. Select month - first make sure the button is visible and clickable
+    await birthMonthButton.waitFor({ state: 'visible', timeout: 15000 });
+    await birthMonthButton.click();
+    await page.waitForTimeout(300); // Give dropdown time to appear
     
-    // Use force: true to ensure the click happens even if the element might be moving
-    const monthOption = page.getByRole(OPTION.byName(month).role, { name: OPTION.byName(month).name });
-    await monthOption.waitFor({ state: 'visible' });
+    // Use a more reliable way to find the month in the dropdown
+    const monthOption = page.getByRole('option', { name: month, exact: true });
+    await monthOption.waitFor({ state: 'visible', timeout: 5000 });
     await monthOption.click({ force: true });
+    await page.waitForTimeout(300); // Wait for dropdown to close and DOM to stabilize
     
-    // Wait briefly for the dropdown to close
-    await page.waitForTimeout(300);
-  } catch (error) {
-    console.warn(`[Form Helper] First attempt to select month ${month} failed, retrying: ${error}`);
+    // 2. Select year - find the year button, which has 'Open' as its accessible name
+    const yearButton = page.getByRole('button', { name: 'Open' });
+    await yearButton.waitFor({ state: 'visible', timeout: 15000 });
+    await yearButton.click();
+    await page.waitForTimeout(300); // Give dropdown time to appear
     
-    // Retry once more with a different approach
-    await monthSelector.click();
-    await page.waitForTimeout(500);
-    
-    // Use a more specific selector with .first() to ensure we get a stable element
-    await page.getByRole(OPTION.byName(month).role, { name: OPTION.byName(month).name }).first().click({ force: true });
-    await page.waitForTimeout(300);
-  }
-  
-  // Select year with similar retry logic
-  await yearSelector.waitFor({ state: 'visible' });
-  try {
-    // Try to select year
-    await yearSelector.click();
-    
-    // Wait briefly for dropdown to be fully rendered
-    await page.waitForTimeout(300);
-    
-    // Use force: true to ensure the click happens even if the element might be moving
-    const yearOption = page.getByRole(OPTION.byName(year).role, { name: OPTION.byName(year).name });
-    await yearOption.waitFor({ state: 'visible' });
+    // Select the year from the dropdown
+    const yearOption = page.getByRole('option', { name: year, exact: true });
+    await yearOption.waitFor({ state: 'visible', timeout: 5000 });
     await yearOption.click({ force: true });
+    await page.waitForTimeout(300); // Wait for dropdown to close
+    
   } catch (error) {
-    console.warn(`[Form Helper] First attempt to select year ${year} failed, retrying: ${error}`);
+    // If our primary approach fails, try a more forceful fallback approach
+    console.warn(`Date selection failed on first attempt for ${month} ${year}. Using fallback approach.`);
     
-    // Retry once more with a different approach
-    await yearSelector.click();
-    await page.waitForTimeout(500);
-    
-    // Use a more specific selector with .first() to ensure we get a stable element
-    await page.getByRole(OPTION.byName(year).role, { name: OPTION.byName(year).name }).first().click({ force: true });
+    try {
+      // Try with the first button first, which should be the month
+      const buttons = page.getByRole('button').filter({ hasText: /Birth Month|Open/ });
+      const birthMonthButton = await buttons.first();
+      await birthMonthButton.click({ force: true });
+      await page.waitForTimeout(500);
+      
+      // Find and click month option by text content, not by role
+      await page.locator(`text="${month}"`).first().click({ force: true });
+      await page.waitForTimeout(500);
+      
+      // Now find the second button, which should be the year
+      const yearButton = await buttons.nth(1);
+      await yearButton.click({ force: true });
+      await page.waitForTimeout(500);
+      
+      // Find and click year option by text content
+      await page.locator(`text="${year}"`).first().click({ force: true });
+      await page.waitForTimeout(500);
+      
+    } catch (fallbackError) {
+      // If both approaches fail, throw a more helpful error
+      throw new Error(`Failed to select date ${month} ${year}. Original error: ${error.message}, Fallback error: ${fallbackError.message}`);
+    }
   }
-  
-  // Verify both month and year selectors show the expected values
-  const monthSelectorText = await monthSelector.textContent();
-  const yearSelectorText = await yearSelector.textContent();
-  
-  console.log(`[Form Helper] Date selection complete: ${monthSelectorText} ${yearSelectorText}`);
 }
 
 /**
