@@ -5,7 +5,7 @@
  * dropdowns, text fields, checkboxes, radio buttons, etc.
  */
 
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { OPTION } from './selectors';
 
 /**
@@ -61,65 +61,35 @@ export async function checkCheckbox(page: Page, labelText: string): Promise<void
  * @param year - Year to select (e.g., '1990')
  */
 export async function selectDate(page: Page, month: string, year: string): Promise<void> {
-  // We'll use a simplified but robust approach
-  try {
-    // Get selectors for the buttons that open the dropdowns
-    const birthMonthButton = page.getByRole('button', { name: 'Birth Month' });
-    
-    // 1. Select month - first make sure the button is visible and clickable
-    await birthMonthButton.waitFor({ state: 'visible', timeout: 15000 });
-    await birthMonthButton.click();
-    await page.waitForTimeout(300); // Give dropdown time to appear
-    
-    // Use a more reliable way to find the month in the dropdown
-    const monthOption = page.getByRole('option', { name: month, exact: true });
-    await monthOption.waitFor({ state: 'visible', timeout: 5000 });
-    await monthOption.click({ force: true });
-    await page.waitForTimeout(300); // Wait for dropdown to close and DOM to stabilize
-    
-    // 2. Select year - find the year button, which has 'Open' as its accessible name
-    const yearButton = page.getByRole('button', { name: 'Open' });
-    await yearButton.waitFor({ state: 'visible', timeout: 15000 });
-    await yearButton.click();
-    await page.waitForTimeout(300); // Give dropdown time to appear
-    
-    // Select the year from the dropdown
-    const yearOption = page.getByRole('option', { name: year, exact: true });
-    await yearOption.waitFor({ state: 'visible', timeout: 5000 });
-    await yearOption.click({ force: true });
-    await page.waitForTimeout(300); // Wait for dropdown to close
-    
-  } catch (error) {
-    // If our primary approach fails, try a more forceful fallback approach
-    console.warn(`Date selection failed on first attempt for ${month} ${year}. Using fallback approach.`);
-    
-    try {
-      // Try with the first button first, which should be the month
-      const buttons = page.getByRole('button').filter({ hasText: /Birth Month|Open/ });
-      const birthMonthButton = await buttons.first();
-      await birthMonthButton.click({ force: true });
-      await page.waitForTimeout(500);
-      
-      // Find and click month option by text content, not by role
-      await page.locator(`text="${month}"`).first().click({ force: true });
-      await page.waitForTimeout(500);
-      
-      // Now find the second button, which should be the year
-      const yearButton = await buttons.nth(1);
-      await yearButton.click({ force: true });
-      await page.waitForTimeout(500);
-      
-      // Find and click year option by text content
-      await page.locator(`text="${year}"`).first().click({ force: true });
-      await page.waitForTimeout(500);
-      
-    } catch (fallbackError) {
-      // If both approaches fail, throw a more helpful error
-      throw new Error(`Failed to select date ${month} ${year}. Original error: ${error.message}, Fallback error: ${fallbackError.message}`);
-    }
-  }
-}
+  const isCI = process.env.CI === 'true';
+  const renderTimeout = isCI ? 20000 : 10000;   // listbox visible
+  const optionTimeout  = isCI ? 20000 : 10000;   // option visible
 
+  /* -------------------- MONTH -------------------- */
+  const monthBtn = page.getByRole('button', { name: 'Birth Month' });
+  await monthBtn.waitFor({ state: 'visible', timeout: renderTimeout });
+  await monthBtn.click();
+
+  // Wait until the MUI listbox (role=listbox) is rendered and contains 12 options
+  const monthListbox = page.locator('[role="listbox"]');
+  await expect(monthListbox).toBeVisible({ timeout: renderTimeout });
+  await expect(monthListbox.locator('[role="option"]')).toHaveCount(12, { timeout: renderTimeout });
+
+  // Click the desired month option
+  await monthListbox.locator('[role="option"]', { hasText: month }).first().click({ timeout: optionTimeout, force: true });
+
+  /* -------------------- YEAR -------------------- */
+  const yearBtn = page.getByRole('button', { name: 'Open' });
+  await yearBtn.waitFor({ state: 'visible', timeout: renderTimeout });
+  await yearBtn.click();
+
+  const yearListbox = page.locator('[role="listbox"]');
+  await expect(yearListbox).toBeVisible({ timeout: renderTimeout });
+  // Wait until at least one year option exists
+  await yearListbox.locator('[role="option"]').first().waitFor({ state: 'visible', timeout: renderTimeout });
+
+  await yearListbox.locator('[role="option"]', { hasText: year }).first().click({ timeout: optionTimeout, force: true });
+}
 /**
  * Selects an income type
  * @param page - Playwright page instance
