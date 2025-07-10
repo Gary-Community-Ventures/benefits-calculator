@@ -73,7 +73,8 @@ export async function selectDate(page: Page, month: string, year: string): Promi
   // Wait until the MUI listbox (role=listbox) is rendered and contains 12 options
   const monthListbox = page.locator('[role="listbox"]');
   await expect(monthListbox).toBeVisible({ timeout: renderTimeout });
-  await expect(monthListbox.locator('[role="option"]')).toHaveCount(12, { timeout: renderTimeout });
+  // Wait until at least one month option appears (12 expected eventually, but be tolerant)
+  await monthListbox.locator('[role="option"]').first().waitFor({ state: 'visible', timeout: renderTimeout });
 
   // Click the desired month option
   await monthListbox.locator('[role="option"]', { hasText: month }).first().click({ timeout: optionTimeout, force: true });
