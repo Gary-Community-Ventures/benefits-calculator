@@ -6,7 +6,7 @@
  */
 
 import { Page } from '@playwright/test';
-import { FORM_INPUTS, OPTION } from './selectors';
+import { OPTION } from './selectors';
 
 /**
  * Selects an option from a dropdown menu

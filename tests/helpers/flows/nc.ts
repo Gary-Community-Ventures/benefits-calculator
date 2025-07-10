@@ -26,7 +26,7 @@ import {
   completeAdditionalInfo,
   navigateToResults
 } from './common';
-import { URL_PATTERNS, STATES, WHITE_LABELS } from '../utils/constants';
+import { URL_PATTERNS, STATES } from '../utils/constants';
 import { ApplicationData, FlowResult } from './types';
 import { BUTTONS } from '../selectors';
 
