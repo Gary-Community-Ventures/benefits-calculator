@@ -50,7 +50,7 @@ export default function GasProvider() {
       .min(1, {
         message: formatMessage({
           id: 'energyCalculator.gasProvider.errorMessage',
-          defaultMessage: 'Please select a heating provider',
+          defaultMessage: 'Please select a heating source',
         }),
       })
       .refine(
@@ -65,7 +65,7 @@ export default function GasProvider() {
         {
           message: formatMessage({
             id: 'energyCalculator.gasProvider.errorMessage',
-            defaultMessage: 'Please select a heating provider',
+            defaultMessage: 'Please select a heating source',
           }),
         },
       ),
