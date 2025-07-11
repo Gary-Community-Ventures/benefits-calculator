@@ -40,15 +40,24 @@ interface ReadabilityMetrics {
   }>;
 }
 
-test.describe('Screen Text Collection and Readability Analysis', () => {  
+test.describe('Screen Text Collection and Readability Analysis (Spanish)', () => {
   test.setTimeout(120000);
-  test('collect and analyze text readability', async ({ page }) => {        
+  test('collect and analyze text readability in Spanish', async ({ page }) => {
+    // Step 1: Go to home and select Spanish
+    await page.goto('/');
+    await page.waitForSelector('#language-select');
+    await page.locator('#language-select').click();
+    await page.getByRole('option', { name: 'Español' }).click();
+    await page.waitForTimeout(500); // Wait for language switch
+
+    // Define navigation steps (same as English, but after language switch)
     const navigationSteps = [
       {
         url: '/',
         name: 'Home Page',
         action: async () => {
-          await page.getByRole('button', { name: 'Get Started' }).click();
+          // await page.getByRole('button', { name: /Comenzar|GET STARTED/i }).click();
+          await page.getByRole('button', { name: 'EMPEZAR' }).click();
         }
       },
       {
@@ -57,130 +66,136 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
         action: async () => {
           await page.locator('#state-source-select').click();
           await page.getByRole('option', { name: 'North Carolina' }).click();
-          await page.getByRole('button', { name: 'Continue' }).click();
+          await page.getByRole('button', { name: 'CONTINUAR' }).click();
         }
       },
       {
-        url: '/nc/step-2',
+        url: /\/nc\/.*\/step-2/,
         name: 'Step 2',
         action: async () => {
-          await page.getByRole('checkbox', { name: 'By proceeding, you confirm' }).check();
-          await page.getByRole('checkbox', { name: 'I confirm I am 13 years of' }).check();
-          await page.getByRole('button', { name: 'Continue' }).click();
+          // await page.getByRole('checkbox', { name: /confirmo/i }).check();
+          // await page.getByRole('checkbox', { name: /13/i }).check();
+          await page.getByRole('checkbox', { name: 'Al continuar, confirma que ha leído y acepta la política de privacidad, y Términos y condiciones.' }).check();
+          await page.getByRole('checkbox', { name: 'Yo confirmo que tengo 13 años de edad o más.' }).check();
+          await page.getByRole('button', { name: 'CONTINUAR' }).click();
         }
       },
       {
         url: /\/nc\/.*\/step-3/,
         name: 'Step 3',
         action: async () => {
-          await page.getByRole('textbox', { name: 'Zip Code' }).fill('27704');
+          await page.getByRole('textbox', { name: 'Código postal' }).fill('27704');
+          // await page.getByRole('textbox', { name: /Código postal|Zip Code/i }).fill('27704');
           await page.locator('#county-source-select').click();
           await page.getByRole('option', { name: 'Durham County' }).click();
-          await page.getByRole('button', { name: 'Continue' }).click();
+          await page.getByRole('button', { name: 'Continuar' }).click();
         }
       },
       {
         url: /\/nc\/.*\/step-4/,
         name: 'Step 4',
         action: async () => {
-          await page.getByRole('textbox', { name: 'Household Size' }).fill('2');
-          await page.getByRole('button', { name: 'Continue' }).click();
+          await page.getByRole('textbox', { name: /Número de integrantes del hogar|Household Size/i }).fill('2');
+          await page.getByRole('button', { name: 'CONTINUAR' }).click();
+          // await page.getByRole('button', { name: /CONTINUAR|Continue/i }).click();
         }
       },
       {
         url: /\/nc\/.*\/step-5/,
         name: 'Step 5',
         action: async () => {
-            await page.getByRole('button', { name: 'Birth Month' }).click();
-            await page.getByRole('option', { name: 'March' }).click();
-            await page.getByRole('button', { name: 'Open' }).click();
+            await page.getByRole('button', { name: 'Mes de nacimiento' }).click();
+            await page.getByRole('option', { name: 'Marzo' }).click();            
+            // await page.getByRole('button', { name: 'Abierto' }).click();
+            await page.getByRole('button', { name: /Abrir|Open/i }).click();
+            // await page.getByRole('button', { name: 'Año de nacimiento' }).click();
             await page.getByRole('option', { name: '1990' }).click();
-            await page.getByRole('button', { name: "I don't have or know if I" }).click();
-            await page.getByRole('radio', { name: 'Yes' }).check();
-            await page.getByRole('button', { name: 'Income Type' }).click();
-            await page.getByRole('option', { name: 'Wages, salaries, tips' }).click();
-            await page.getByRole('button', { name: 'Frequency' }).click();
-            await page.getByRole('option', { name: 'every month' }).click();
-            await page.getByRole('textbox', { name: 'Amount' }).fill('2200');
-            await page.getByRole('button', { name: 'Continue' }).click();
-        }        
+            await page.getByRole('button', { name: "No tengo o no sé si tengo seguro" }).click();
+            await page.getByRole('radio', { name: 'Sí' }).check();
+            await page.getByRole('button', { name: 'Tipo de ingresos' }).click();
+            await page.getByRole('option', { name: 'Sueldos, salarios, propinas' }).click();
+            await page.getByRole('button', { name: 'Frecuencia' }).click();
+            await page.getByRole('option', { name: 'cada semana' }).click();
+            await page.getByRole('textbox', { name: /Monto|Amount/i }).fill('1000');
+            await page.getByRole('button', { name: 'CONTINUAR' }).click();        
+          
+        }//¿Cuánto recibe antes de impuestos en cada período de pago por (Sueldos, salarios, propinas)?
+        //Cada cuánto le pagan estos ingresos ?
+        //¿Qué tipo de ingresos ha recibido más recientemente?
       },
       {
         url: /\/nc\/.*\/step-5/,
         name: 'Step 5',
-        action: 
-          async () => {
-            await page.getByRole('button', { name: 'Birth Month' }).click();
-            await page.getByRole('option', { name: 'March' }).click();
-            await page.getByRole('button', { name: 'Open' }).click();
-            await page.getByRole('option', { name: '1989' }).click();
-            await page.locator('#relationship-to-hh-select').click();
-            await page.getByRole('option', { name: 'Child', exact: true }).click();
-            await page.getByRole('button', { name: "They don't have or know if" }).click();
-            await page.getByRole('button', { name: 'Continue' }).click();
-          }        
+        action: async () => {
+          await page.getByRole('button', { name: /Mes de nacimiento|Birth Month/i }).click();
+          await page.getByRole('option', { name: /Marzo|March/i }).click();
+          await page.getByRole('button', { name: /Abrir|Open/i }).click();
+          await page.getByRole('option', { name: '2020' }).click();
+          await page.locator('#relationship-to-hh-select').click();
+          await page.getByRole('option', { name: /Hijo|Child/i, exact: true }).click();
+          await page.getByRole('button', { name: /No tienen|They don't have/i }).click();
+          await page.getByRole('button', { name: /Continuar|Continue/i }).click();
+        }
       },
       {
         url: /\/nc\/.*\/step-6/,
-
         name: 'Step 6',
-        action: 
-          async () => {
-            await page.getByRole('radio', { name: 'Yes' }).check();
-            await page.getByRole('button', { name: 'Expense Type' }).click();
-            await page.getByRole('option', { name: 'Rent' }).click();
-            await page.getByRole('textbox', { name: 'Amount' }).fill('2500');
-            await page.getByRole('button', { name: 'Continue' }).click();
-          }        
+        action: async () => {
+          await page.getByRole('radio', { name: 'Sí' }).check();
+          // await page.getByRole('button', { name: /Tipo de gasto|Expense Type/i }).click();
+          await page.getByRole('button', { name: 'Tipo de gasto' }).click();
+          await page.getByRole('option', { name: /Alquiler|Rent/i }).click();
+          await page.getByRole('textbox', { name: /Monto|Amount/i }).fill('2500');
+          await page.getByRole('button', { name: /Continuar|Continue/i }).click();
+        }
       },
       {
         url: /\/nc\/.*\/step-7/,
         name: 'Step 7',
-        action: 
-          async () => {
-            await page.getByRole('textbox', { name: 'Dollar Amount' }).fill('100');
-            await page.getByRole('button', { name: 'Continue' }).click();
-          }        
+        action: async () => {
+          await page.getByRole('textbox', { name: /Cantidad en dólares|Dollar Amount/i }).fill('100');
+          await page.getByRole('button', { name: /Continuar|Continue/i }).click();
+        }
       },
       {
         url: /\/nc\/.*\/step-8/,
         name: 'Step 8',
-        action: 
-          async () => await page.getByRole('button', { name: 'Continue' }).click()        
+        action: async () => await page.getByRole('button', { name: /Continuar|Continue/i }).click()
       },
       {
         url: /\/nc\/.*\/step-9/,
         name: 'Step 9',
-        action: 
-          async () => {
-            await page.getByRole('button', { name: 'Food or groceries' }).click();
-            await page.getByRole('button', { name: "Concern about your child's" }).click();
-            await page.getByRole('button', { name: 'Free or low-cost help with' }).click();
-            await page.getByRole('button', { name: 'Continue' }).click();
-          }        
+        action: async () => {
+          await page.getByRole('button', { name: /Alimentos|Food|groceries/i }).click();
+          await page.getByRole('button', { name: /Preocupación|Concern/i }).click();
+          await page.getByRole('button', { name: /Ayuda gratuita|Free or low-cost/i }).click();
+          await page.getByRole('button', { name: /Continuar|Continue/i }).click();
+        }
       },
       {
         url: /\/nc\/.*\/step-10/,
         name: 'Step 10',
-        action: 
-          async () => {
-            await page.locator('#referral-source-select').click();
-            await page.getByRole('option', { name: 'Test / Prospective Partner' }).click();
-            await page.getByRole('button', { name: 'Continue' }).click();
-          }        
+        action: async () => {
+          await page.locator('#referral-source-select').click();
+            // await page.getByRole('button', { name: 'Fuente de referencia' }).click();
+          await page.getByRole('option', { name: '2-1-1 North Carolina' }).click();
+          await page.getByRole('button', { name: 'CONTINUAR' }).click();
+      
+          // await page.locator('#referral-source-select').click();
+          // await page.getByRole('option', { name: /Prueba|Test/i }).click();
+          // await page.getByRole('button', { name: /Continuar|Continue/i }).click();
+        }
       },
       {
         url: /\/nc\/.*\/step-11/,
         name: 'Step 11',
-        action: 
-          async () => await page.getByRole('button', { name: 'Continue' }).click()        
+        action: async () => await page.getByRole('button', { name: /Continuar|Continue/i }).click()
       },
       {
         url: /\/nc\/.*\/confirm-information/,
         name: 'Step confirm',
-        action: 
-          async () => await page.getByRole('button', { name: 'Continue' }).click()        
-      },       
+        action: async () => await page.getByRole('button', { name: /Continuar|Continue/i }).click()
+      },
       {
         url: /\/nc\/.*\/results\/benefits\/?admin=true/,
         name: 'Benefits',
@@ -203,7 +218,8 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
                   await page.waitForLoadState('networkidle');
                   
                   const programTexts = await collectPageTexts(page);
-                  prgMoreInfoscreenTexts[`Long-Term-Benefits-Program-${i + 1}`] = programTexts;
+                  // prgMoreInfoscreenTexts[`Long-Term-Benefits-Program-${i + 1}`] = programTexts;
+                  prgMoreInfoscreenTexts[`BENEFICIOS A LARGO PLAZO-${i + 1}`] = programTexts;
                   
                   await page.goBack();
                   await page.waitForLoadState('networkidle');
@@ -219,14 +235,14 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
 
             // Switch to Near-Term Benefits tab
             // const nearTermTab = page.getByRole('heading', { name: /near-term benefits/i }).first();
-            const nearTermTab = page.getByRole('heading', { name: /ADDITIONAL RESOURCES/i }).first();
+            const nearTermTab = page.getByRole('heading', { name: /RECURSOS ADICIONALES/i }).first();
             //additional types of resources
             await nearTermTab.click();
             await page.waitForLoadState('networkidle');
 
             // Collect Near-Term Benefits data
             await page.waitForSelector('.need-card-container', { timeout: 10000 });
-            const needCards = await page.$$('.need-card-container');
+            // const needCards = await page.$$('.need-card-container');
 
             // Process each Near-Term Benefits program
             // for (let i = 0; i < needCards.length; i++) {
@@ -255,9 +271,10 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
             await page.waitForTimeout(1000);
             
             // Find and click save results button
-            const saveButton = page.getByRole('button', { name: 'save my results' });
-            await saveButton.waitFor({ state: 'visible', timeout: 5000 });
-            await saveButton.click();
+            // const saveButton = page.getByRole('button', { name: 'GUARDA MIS RESULTADOS' });
+            // // const saveButton = page.getByRole('button', { name: 'save my results' });
+            // await saveButton.waitFor({ state: 'visible', timeout: 5000 });
+            // await saveButton.click();
             
             // Wait for final navigation
             await page.waitForLoadState('networkidle');
@@ -265,60 +282,36 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
             console.error('Error in Benefits section:', error);
             throw error;
           }
-        }        
+        } 
       },
     ];
 
     const screenTexts: { [key: string]: string[] } = {};
-    const prgMoreInfoscreenTexts: { [key: string]: string[] } = {};
     const readabilityResults: ReadabilityMetrics[] = [];
+    const prgMoreInfoscreenTexts: { [key: string]: string[] } = {};
     const uniqueTexts = new Set<string>();
 
-    // Helper function to filter texts
     function filterTexts(texts: string[]): string[] {
       return texts.filter(text => {
-        // Skip if already seen
         if (uniqueTexts.has(text)) return false;
-
-        // Skip if text is just numbers or contains currency
         if (/^\d+$/.test(text) || text.includes('$')) return false;
-
-        // Skip if text is a date format (both MM/DD/YYYY and MM/YYYY)
         if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(text) || /^\d{2}\/\d{4}$/.test(text)) return false;
-
-        // Skip CSS class names and SVG styling
         if (text.startsWith('.cls-') || text.startsWith('.question-mark-icon')) return false;
-
-        // Skip if text is very short (like single letters or numbers)
         if (text.length < 2) return false;
-
-        // Add to unique set and return true to keep this text
         uniqueTexts.add(text);
         return true;
       });
     }
 
-    // console.log("Navigation steps :", navigationSteps);
-    // Navigate through each step
     for (const step of navigationSteps) {
-      // Navigate to the page if it's a direct URL
-      // console.log("navigationSteps url link:", step);
       if (typeof step.url === 'string') {
         await page.goto(step.url);
       }
-      
-      // Wait for page to load
       await page.waitForLoadState('networkidle');
-
-      // Collect text for current page
-      
       const texts = await collectPageTexts(page);
-      // console.log("collected text data", texts);
-      // Filter for unique, non-numeric texts
       const filteredTexts = filterTexts(texts);
       screenTexts[step.name] = filteredTexts;
 
-      // Analyze readability for each text element individually
       const metrics: ReadabilityMetrics = {
         pageName: step.name,
         textElements: filteredTexts.map(text => ({
@@ -343,26 +336,20 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
       };
 
       readabilityResults.push(metrics);
-      // console.log("Readability Result value:", readabilityResults);
 
-      // Perform the navigation action for this step
       try {
-        await step.action();        
-      } catch (error) {        
+        await step.action();
+      } catch (error) {
         throw error;
       }
-
-      // Wait for navigation to complete
       await page.waitForLoadState('networkidle');
     }
 
-    // Generate reports
+    // Output directory and timestamp
     const outputDir = './test-results/readability';
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
-
-    // Generate timestamp for filenames
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
 
     // Generate CSV report
@@ -425,7 +412,7 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
           totalSentences: readabilityResults.reduce((sum, r) => sum + r.textElements.reduce((s, e) => s + e.sentenceCount, 0), 0),
           totalPolysyllabicWords: readabilityResults.reduce((sum, r) => sum + r.textElements.reduce((s, e) => s + e.polysyllabicWordCount, 0), 0),
           averageSyllablesPerWord: readabilityResults.reduce((sum, r) => sum + r.textElements.reduce((s, e) => s + e.polysyllabicWordCount, 0), 0) / 
-                                   readabilityResults.reduce((sum, r) => sum + r.textElements.reduce((s, e) => s + e.wordCount, 0), 0)
+                                    readabilityResults.reduce((sum, r) => sum + r.textElements.reduce((s, e) => s + e.wordCount, 0), 0)
         }
       },
       pageDetails: readabilityResults.map(result => ({
@@ -517,10 +504,10 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
 
       // Combine all parts
       return `┌${columns.map((_, i) => '─'.repeat(columnWidths[i])).join('┬')}┐\n` +
-             `│${header}│\n` +
-             `├${separator}┤\n` +
-             `${rows.map(row => `│${row}│`).join('\n')}\n` +
-             `└${columns.map((_, i) => '─'.repeat(columnWidths[i])).join('┴')}┘`;
+              `│${header}│\n` +
+              `├${separator}┤\n` +
+              `${rows.map(row => `│${row}│`).join('\n')}\n` +
+              `└${columns.map((_, i) => '─'.repeat(columnWidths[i])).join('┴')}┘`;
     }
 
     // Program Details Readability Analysis
@@ -821,7 +808,6 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
     );
   });
 });
-  
 
 // Helper function
 function average(numbers: number[]): number {

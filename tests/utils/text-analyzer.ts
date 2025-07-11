@@ -73,10 +73,30 @@ function countSyllables(word: string): number {
   return word.match(/[aeiouy]{1,2}/g)?.length ?? 0;
 }
 
-// Custom readability score functions
-export function fleschKincaidGrade(texts: string[] | string): number {
+function isShortText(text: string): boolean {
+  // Consider "short" as 1 or 2 words
+  return text.trim().split(/\s+/).length < 3;
+}
+
+// Add language parameter to functions
+export function fleschKincaidGrade(texts: string[] | string, language: 'en' | 'es' = 'en'): number {
   const text = Array.isArray(texts) ? texts.join(' ') : texts;
-  // Custom implementation since text-readability's implementation seems broken
+  if (isShortText(text)) return 1; // Default to grade 1 for short text
+  
+  // Spanish readability adjustments
+  if (language === 'es') {
+    // Huerta Formula - Spanish adaptation of Flesch-Kincaid
+    const words = text.split(/\s+/).filter(word => word.length > 0);
+    const sentences = text.split(/[.!?]+/).filter(sent => sent.trim().length > 0);
+    const syllables = words.reduce((count, word) => count + countSyllablesSpanish(word), 0);
+    
+    if (words.length === 0 || sentences.length === 0) return 0;
+    
+    return 206.84 - 60 * (syllables / words.length) - 
+           1.02 * (words.length / sentences.length);
+  }
+
+  // Original English implementation
   const words = text.split(/\s+/).filter(word => word.length > 0);
   const sentences = text.split(/[.!?]+/).filter(sent => sent.trim().length > 0);
   const syllables = words.reduce((count, word) => count + countSyllables(word), 0);
@@ -90,6 +110,7 @@ export function fleschKincaidGrade(texts: string[] | string): number {
 
 export function fleschKincaidReadingEase(texts: string[] | string): number {
   const text = Array.isArray(texts) ? texts.join(' ') : texts;
+  if (isShortText(text)) return 100; // Default to very easy for short text
   // Custom implementation for better accuracy
   const words = text.split(/\s+/).filter(word => word.length > 0);
   const sentences = text.split(/[.!?]+/).filter(sent => sent.trim().length > 0);
@@ -103,6 +124,7 @@ export function fleschKincaidReadingEase(texts: string[] | string): number {
 }
 
 export function daleChallReadabilityScore(text: string): number {
+  if (isShortText(text)) return 1; // Default to easy
   try {
     return textReadability.daleChallReadabilityScore(text);
   } catch {
@@ -111,6 +133,7 @@ export function daleChallReadabilityScore(text: string): number {
 }
 
 export function automatedReadabilityIndex(text: string): number {
+  if (isShortText(text)) return 1;
   try {
     return textReadability.automatedReadabilityIndex(text);
   } catch {
@@ -119,6 +142,7 @@ export function automatedReadabilityIndex(text: string): number {
 }
 
 export function colemanLiauIndex(text: string): number {
+  if (isShortText(text)) return 1;
   try {
     return textReadability.colemanLiauIndex(text);
   } catch {
@@ -127,6 +151,7 @@ export function colemanLiauIndex(text: string): number {
 }
 
 export function gunningFog(text: string): number {
+  if (isShortText(text)) return 1;
   try {
     return textReadability.gunningFog(text);
   } catch {
@@ -135,9 +160,35 @@ export function gunningFog(text: string): number {
 }
 
 export function smogIndex(text: string): number {
+  if (isShortText(text)) return 1;
   try {
     return textReadability.smogIndex(text);
   } catch {
     return 0;
   }
+}
+
+// Add Spanish syllable counter
+function countSyllablesSpanish(word: string): number {
+  word = word.toLowerCase();
+  let count = 0;
+  let prevIsVowel = false;
+
+  // Spanish vowels including accented ones
+  const vowels = /[aeiouáéíóúü]/i;
+  const diphthongs = /[aeiou][aeiou]/i;
+
+  for (let i = 0; i < word.length; i++) {
+    const isVowel = vowels.test(word[i]);
+    
+    if (isVowel) {
+      // Don't count second vowel in diphthongs
+      if (!prevIsVowel || diphthongs.test(word.substring(i-1, i+1))) {
+        count++;
+      }
+    }
+    prevIsVowel = isVowel;
+  }
+
+  return count || 1; // Every word has at least one syllable
 }
