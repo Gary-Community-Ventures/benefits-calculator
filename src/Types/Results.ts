@@ -91,9 +91,10 @@ export type UrgentNeed = {
   name: Translation;
   description: Translation;
   link: Translation;
-  type: Translation;
+  category_type: Translation;
   warning: Translation;
   phone_number: string;
+  icon: string;
 };
 
 export type Validation = {
