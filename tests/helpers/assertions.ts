@@ -1,6 +1,6 @@
 /**
  * Assertions - Common test assertion helpers
- * 
+ *
  * This file contains helpers for common assertions used across tests,
  * making it easier to verify application state consistently.
  */

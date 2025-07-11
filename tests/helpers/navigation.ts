@@ -1,6 +1,6 @@
 /**
  * Navigation - Navigation helper functions
- * 
+ *
  * This file contains helpers for common navigation patterns used in tests,
  * such as clicking the continue button, navigating to specific pages, etc.
  */
@@ -38,7 +38,11 @@ export async function navigateToHomePage(page: Page): Promise<void> {
  * @param urlPattern - Regular expression or string pattern to match against URL
  * @param timeoutMs - Optional timeout in milliseconds (defaults to 15000ms)
  */
-export async function verifyCurrentUrl(page: Page, urlPattern: RegExp | string, timeoutMs: number = 15000): Promise<void> {
+export async function verifyCurrentUrl(
+  page: Page,
+  urlPattern: RegExp | string,
+  timeoutMs: number = 15000,
+): Promise<void> {
   // Use a longer timeout than the default 5000ms to accommodate slower navigation in debug mode
   await expect(page).toHaveURL(urlPattern, { timeout: timeoutMs });
 }

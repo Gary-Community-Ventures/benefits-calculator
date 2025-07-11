@@ -1,7 +1,7 @@
 /**
  * Index - Export all helpers
- * 
- * This file exports all helper functions and utilities to allow for 
+ *
+ * This file exports all helper functions and utilities to allow for
  * cleaner imports in test files.
  */
 
@@ -31,4 +31,3 @@ export * from './flows/common';
 
 // Export white-label specific helpers
 export * from './flows/nc';
-

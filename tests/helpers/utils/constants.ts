@@ -1,6 +1,6 @@
 /**
  * Constants - Common constants used across tests
- * 
+ *
  * This file contains URL patterns, timeouts, and other constants
  * used throughout the test suite.
  */
@@ -48,9 +48,9 @@ export const REFERRERS = {
  * Test timeouts
  */
 export const TIMEOUTS = {
-  SHORT: 5000,  // 5 seconds
+  SHORT: 5000, // 5 seconds
   MEDIUM: 15000, // 15 seconds
-  LONG: 30000,  // 30 seconds
+  LONG: 30000, // 30 seconds
 };
 
 /**

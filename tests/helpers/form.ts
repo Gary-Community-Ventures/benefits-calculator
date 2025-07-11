@@ -1,6 +1,6 @@
 /**
  * Form - Form interaction helper functions
- * 
+ *
  * This file contains helpers for interacting with form elements like
  * dropdowns, text fields, checkboxes, radio buttons, etc.
  */
@@ -16,10 +16,10 @@ import { OPTION } from './selectors';
  * @param exact - Whether to match the option text exactly (default: false)
  */
 export async function selectDropdownOption(
-  page: Page, 
-  dropdownSelector: string, 
-  optionText: string, 
-  exact: boolean = false
+  page: Page,
+  dropdownSelector: string,
+  optionText: string,
+  exact: boolean = false,
 ): Promise<void> {
   await page.locator(dropdownSelector).click();
   await page.getByRole('option', { name: optionText, exact }).click();
@@ -62,8 +62,8 @@ export async function checkCheckbox(page: Page, labelText: string): Promise<void
  */
 export async function selectDate(page: Page, month: string, year: string): Promise<void> {
   const isCI = process.env.CI === 'true';
-  const renderTimeout = isCI ? 20000 : 10000;   // listbox visible
-  const optionTimeout  = isCI ? 20000 : 10000;   // option visible
+  const renderTimeout = isCI ? 20000 : 10000; // listbox visible
+  const optionTimeout = isCI ? 20000 : 10000; // option visible
 
   /* -------------------- MONTH -------------------- */
   const monthBtn = page.getByRole('button', { name: 'Birth Month' });
@@ -77,7 +77,10 @@ export async function selectDate(page: Page, month: string, year: string): Promi
   await monthListbox.locator('[role="option"]').first().waitFor({ state: 'visible', timeout: renderTimeout });
 
   // Click the desired month option
-  await monthListbox.locator('[role="option"]', { hasText: month }).first().click({ timeout: optionTimeout, force: true });
+  await monthListbox
+    .locator('[role="option"]', { hasText: month })
+    .first()
+    .click({ timeout: optionTimeout, force: true });
 
   /* -------------------- YEAR -------------------- */
   const yearBtn = page.getByRole('button', { name: 'Open' });
@@ -89,7 +92,10 @@ export async function selectDate(page: Page, month: string, year: string): Promi
   // Wait until at least one year option exists
   await yearListbox.locator('[role="option"]').first().waitFor({ state: 'visible', timeout: renderTimeout });
 
-  await yearListbox.locator('[role="option"]', { hasText: year }).first().click({ timeout: optionTimeout, force: true });
+  await yearListbox
+    .locator('[role="option"]', { hasText: year })
+    .first()
+    .click({ timeout: optionTimeout, force: true });
 }
 /**
  * Selects an income type
