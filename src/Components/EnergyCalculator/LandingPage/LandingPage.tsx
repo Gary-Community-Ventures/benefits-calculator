@@ -38,6 +38,16 @@ const LandingPage = () => {
             defaultMessage="We can help! All it takes is 10 minutes of your time."
           />
         </p>
+        <p className="energy-calculator-p-spacing">
+          <FormattedMessage id="energyCalculator.bodyText3" defaultMessage="Learn more about this screener " />
+          <a
+            href="https://puc.colorado.gov/energy-savings?utm_source=cesn&utm_medium=web&utm_campaign=cesn&utm_id=cesn"
+            target="_blank"
+            className="link-color"
+          >
+            <FormattedMessage id="energyCalculator.bodyText3.link" defaultMessage="here" />
+          </a>
+        </p>
       </article>
       <QuestionQuestion>
         <FormattedMessage
