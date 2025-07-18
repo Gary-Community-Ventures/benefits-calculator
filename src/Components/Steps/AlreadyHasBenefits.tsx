@@ -16,7 +16,6 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { useDefaultBackNavigationFunction } from '../QuestionComponents/questionHooks';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
 import { Context } from '../Wrapper/Wrapper';
-import { useIsEnergyCalculator } from '../EnergyCalculator/hooks';
 import useStepForm from './stepForm';
 import { OverrideableTranslation } from '../../Assets/languageOptions';
 
@@ -93,7 +92,6 @@ function AlreadyHasBenefits() {
   const { uuid } = useParams();
   const backNavigationFunction = useDefaultBackNavigationFunction('hasBenefits');
   const { updateScreen } = useScreenApi();
-  const isEnergyCalculator = useIsEnergyCalculator();
 
   const formSchema = z
     .object({
@@ -162,17 +160,6 @@ function AlreadyHasBenefits() {
   };
 
   const renderHelpSection = () => {
-    if (isEnergyCalculator) {
-      return (
-        <p className="help-text">
-          <FormattedMessage
-            id="energyCalculator.hasBenefits-description"
-            defaultMessage="Information about current benefits you already have could help determine your eligibility for other programs."
-          />
-        </p>
-      );
-    }
-
     return (
       <HelpButton>
         <FormattedMessage
