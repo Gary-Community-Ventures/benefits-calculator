@@ -6,24 +6,24 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { useConfig } from '../../Config/configHook';
 import { Context } from '../../Wrapper/Wrapper';
-import twoOneOneMFBLogo from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/twoOneOneMFBLogo.png';
-import twoOneOneLinks from '../../../Assets/States/CO/WhiteLabels/TwoOneOneAssets/twoOneOneLinks';
+import LancLogo from '../../../Assets/States/NC/WhiteLabels/LancAssets/lanc_mfb_logo.png';
+import lancNCLinks from '../../../Assets/States/NC/WhiteLabels/LancAssets/lancLink';
 import LanguageIcon from '@mui/icons-material/Language';
 import ShareIcon from '@mui/icons-material/Share';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import TwoOneOneShareCO from '../TwoOneOneShareCO/TwoOneOneShareCO';
-import './TwoOneOneHeaderCO.css';
+import './LancHeader.css';
+import LancShareNC from '../LancShare/LancShare';
+import { useQueryString } from '../../QuestionComponents/questionHooks';
 
 type LanguageOptions = {
   [key: string]: string;
 };
 
-const TwoOneOneHeaderCO = () => {
-  //this is so that when the users click on the cobranded logo, they're navigated back to step-1
-  const { formData, locale, selectLanguage, whiteLabel } = useContext(Context);
+const LancHeader = () => {
+  const { locale, selectLanguage, whiteLabel } = useContext(Context);
   const languageOptions = useConfig<LanguageOptions>('language_options');
-  const queryString = formData.immutableReferrer ? `?referrer=${formData.immutableReferrer}` : '';
+  const queryString = useQueryString();
   const intl = useIntl();
 
   const selectLangAriaLabelProps = {
@@ -35,11 +35,11 @@ const TwoOneOneHeaderCO = () => {
     defaultMessage: 'share button',
   };
   const openMenuBtnAriaLabelProps = {
-    id: '211Header.openMenuBtn-AL',
+    id: 'header.openMenuBtn-AL',
     defaultMessage: 'open menu',
   };
   const closeBtnAriaLabelProps = {
-    id: '211Header.closeMenuBtn-AL',
+    id: 'header.closeMenuBtn-AL',
     defaultMessage: 'close menu',
   };
   const shareMFBModalAriaLabelProps = {
@@ -47,8 +47,8 @@ const TwoOneOneHeaderCO = () => {
     defaultMessage: 'share my friend ben modal',
   };
   const logoAltText = {
-    id: '211Header.logo.alt',
-    defaultMessage: '211 and myfriendben logo',
+    id: 'lancHeader.logo.alt',
+    defaultMessage: 'LANC and myfriendben logo',
   };
 
   const [openShare, setOpenShare] = useState(false);
@@ -88,18 +88,18 @@ const TwoOneOneHeaderCO = () => {
     setOpenMenu(!openMenu);
   };
 
-  const create211Links = () => {
-    const mappedLinks = twoOneOneLinks.map((link, index) => {
+  const createLinks = () => {
+    const mappedLinks = lancNCLinks.map((link, index) => {
       return (
         <Link
           href={link.href}
           underline="none"
           target="_blank"
           aria-label={link.ariaLabel}
-          className="twoOneOneMenuLink"
-          key={link.defaultMessage + index}
+          className="lanc-menu-link"
+          key={link.defaultMsg + index}
         >
-          <FormattedMessage id={link.formattedMsgId} defaultMessage={link.defaultMessage} />
+          <FormattedMessage id={link.formattedMsgId} defaultMessage={link.defaultMsg} />
         </Link>
       );
     });
@@ -111,7 +111,6 @@ const TwoOneOneHeaderCO = () => {
     return (
       <IconButton
         edge="end"
-        color="primary"
         aria-label={
           openMenu ? intl.formatMessage(closeBtnAriaLabelProps) : intl.formatMessage(openMenuBtnAriaLabelProps)
         }
@@ -124,7 +123,7 @@ const TwoOneOneHeaderCO = () => {
   };
 
   const displayHamburgerMenu = () => {
-    return <Stack id="hamburger-drawer">{create211Links()}</Stack>;
+    return <Stack id="hamburger-drawer">{createLinks()}</Stack>;
   };
 
   const createMenuItems = (optionList: LanguageOptions) => {
@@ -132,7 +131,7 @@ const TwoOneOneHeaderCO = () => {
 
     const dropdownMenuItems = menuItemKeyLabelPairArr.map((key) => {
       return (
-        <MenuItem value={key[0]} key={key[0]} sx={{ color: '#005191' }}>
+        <MenuItem value={key[0]} key={key[0]} sx={{ color: '#000000' }}>
           {key[1]}
         </MenuItem>
       );
@@ -143,22 +142,22 @@ const TwoOneOneHeaderCO = () => {
 
   return (
     <nav>
-      <Paper elevation={4} square={true} className="twoOneOne-header-container">
-        <AppBar position="sticky" id="twoOneOne-nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
+      <Paper elevation={4} square={true} className="lanc-header-container">
+        <AppBar position="sticky" id="lanc-nav-container" elevation={0}>
           <Box>
             <a href={`/${whiteLabel}/step-1${queryString}`}>
-              <img src={twoOneOneMFBLogo} alt={intl.formatMessage(logoAltText)} className="cobranded-logo" />
+              <img src={LancLogo} alt={intl.formatMessage(logoAltText)} className="cobranded-logo" />
             </a>
           </Box>
           <Stack direction="row" gap=".55rem">
-            <Stack direction="row" gap="0.55rem" alignItems="center" className="twoOneOne-desktop-links">
-              {create211Links()}
+            <Stack direction="row" gap="0.55rem" alignItems="center" className="lanc-desktop-links">
+              {createLinks()}
             </Stack>
             <Stack direction="row" gap=".25rem" alignItems="center">
-              <LanguageIcon className="twoOneOne-globe-icon" />
+              <LanguageIcon className="lanc-globe-icon" />
               <Select
                 labelId="select-language-label"
-                id="twoOneOne-select-language"
+                id="lanc-select-language"
                 value={locale}
                 label="Language"
                 onChange={handleLanguageChange}
@@ -168,15 +167,14 @@ const TwoOneOneHeaderCO = () => {
                 open={isLanguageSelectOpen}
                 onOpen={handleOpenLanguage}
                 onClose={handleCloseLanguage}
-                sx={{ '& .MuiSvgIcon-root': { color: '#005191' } }}
+                sx={{ '& .MuiSvgIcon-root': { color: '#000000' } }}
               >
                 {createMenuItems(languageOptions)}
               </Select>
               <IconButton
-                color="primary"
                 onClick={handleOpenShare}
                 aria-label={intl.formatMessage(shareButtonAriaLabelProps)}
-                sx={{ padding: '0' }}
+                sx={{ padding: '0', color: '#000000' }}
               >
                 <ShareIcon role="img" />
               </IconButton>
@@ -188,7 +186,7 @@ const TwoOneOneHeaderCO = () => {
               aria-label={intl.formatMessage(shareMFBModalAriaLabelProps)}
               sx={{ '& .MuiPaper-root': { borderRadius: '1rem' } }}
             >
-              <TwoOneOneShareCO close={handleCloseShare} />
+              <LancShareNC close={handleCloseShare} />
             </Dialog>
           </Stack>
         </AppBar>
@@ -198,4 +196,4 @@ const TwoOneOneHeaderCO = () => {
   );
 };
 
-export default TwoOneOneHeaderCO;
+export default LancHeader;

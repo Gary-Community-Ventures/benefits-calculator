@@ -1,15 +1,15 @@
-button.twoOneOne-share-close {
+button.lanc-share-close {
   position: absolute;
   right: 0;
   top: 0;
 }
 
-[dir='rtl'] button.twoOneOne-share-close {
+[dir='rtl'] button.lanc-share-close {
   left: 0;
   right: unset;
 }
 
-.twoOneOne-share-container {
+.lanc-share-container {
   padding: 2rem;
 }
 
@@ -20,24 +20,24 @@ button.copy-link-btn {
   cursor: pointer;
 }
 
-.twoOneOne-share-header {
+.lanc-share-header {
   text-align: center;
   font-size: 1.1rem;
   margin-bottom: 5px;
 }
 
-.twoOneOne-share-icons {
+.lanc-share-icons {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.twoOneOne-row-group {
+.lanc-row-group {
   margin-top: 0.4rem;
   white-space: nowrap;
 }
 
-.twoOneOne-icon-name {
+.lanc-icon-name {
   overflow: hidden;
   white-space: nowrap;
   margin-left: 0;
@@ -48,27 +48,27 @@ button.copy-link-btn {
   color: #fff;
 }
 
-.twoOneOne-fb {
+.lanc-fb {
   background-color: #3b5998;
   color: white;
 }
 
-.twoOneOne-twitter {
+.lanc-twitter {
   background-color: #00aced;
   color: white;
 }
 
-.twoOneOne-gray {
+.lanc-gray {
   background-color: #686565;
   color: white;
 }
 
-.twoOneOne-whatsApp {
+.lanc-whatsApp {
   background-color: #25d366;
   color: white;
 }
 
-.twoOneOne-messenger {
+.lanc-messenger {
   background-color: #0a7cff;
   color: white;
 }
