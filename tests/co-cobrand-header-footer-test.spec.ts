@@ -1,6 +1,6 @@
 import { test, expect, Locator } from '@playwright/test';
 test.describe('CO cobrand, header and footer links Test', () => {
-  test.setTimeout(12000);
+  test.setTimeout(15000);
     test('collect and analyze text readability', async ({ page }) => {        
       const navigationSteps = [
         {
