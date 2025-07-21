@@ -1,5 +1,5 @@
-import { ReactComponent as Food } from '../../../Assets/icons/Programs/CategoryHeading/food.svg';
-import { ReactComponent as Housing } from '../../../Assets/icons/Programs/CategoryHeading/housing.svg';
+import { ReactComponent as Food } from '../../../Assets/icons/UrgentNeeds/AcuteConditions/food.svg';
+import { ReactComponent as Housing } from '../../../Assets/icons/General/residence.svg';
 import { ReactComponent as HealthCare } from '../../../Assets/icons/Programs/CategoryHeading/healthcare.svg';
 import { ReactComponent as Transportation } from '../../../Assets/icons/Programs/CategoryHeading/transportation.svg';
 import { ReactComponent as TaxCredits } from '../../../Assets/icons/Programs/CategoryHeading/taxCredits.svg';
