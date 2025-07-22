@@ -42,7 +42,6 @@ test.describe('CO cobrand, header and footer links Test', () => {
         await page.setViewportSize({ width: 1400, height: 800 });
         await page.goto('/co/step-2/?referrer=211co');
         
-        // Wait for page to load
         await page.waitForLoadState('networkidle');
         
         // Header links - these are from the twoOneOneLinks array
