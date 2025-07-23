@@ -14,7 +14,7 @@ test.describe('NC Screen Test', () => {
   // Set a longer timeout for this test to avoid issues with UI interactions
   test.setTimeout(120000); // 2 minutes
 
-  test.skip('start to finish screen test', async ({ page }) => {
+  test('start to finish screen test', async ({ page }) => {
     /**
      * Using runNcEndToEndTest helper to execute the complete flow with:
      * - Shared test data from testUsers
