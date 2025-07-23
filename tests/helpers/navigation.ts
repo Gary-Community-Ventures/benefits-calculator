@@ -13,7 +13,17 @@ import { BUTTONS } from './selectors';
  * @param page - Playwright page instance
  */
 export async function clickContinue(page: Page): Promise<void> {
-  await page.getByRole(BUTTONS.CONTINUE.role, { name: BUTTONS.CONTINUE.name }).click();
+  const continueButton = page.getByRole(BUTTONS.CONTINUE.role, { name: BUTTONS.CONTINUE.name });
+  
+  // Ensure button is visible and enabled before clicking
+  await continueButton.waitFor({ state: 'visible' });
+  await continueButton.waitFor({ state: 'attached' });
+  
+  if (!(await continueButton.isEnabled())) {
+    throw new Error('Continue button is not enabled');
+  }
+  
+  await continueButton.click();
 }
 
 /**

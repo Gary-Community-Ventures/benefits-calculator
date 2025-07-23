@@ -395,7 +395,7 @@ export function EnergyCalculatorRebateCalculator({ rebate }: RebateComponentProp
 
             setCost(Number(value));
           })}
-          sx={{ backgroundColor: '#fff', width: '18rem' }}
+          sx={{ backgroundColor: '#fff', width: '18rem', maxWidth: '100%' }}
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
             sx: { backgroundColor: '#FFFFFF' },
