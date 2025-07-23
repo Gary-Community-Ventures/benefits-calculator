@@ -29,16 +29,16 @@ test.describe('Current Benefits Pages Test', () => {
          */
         // Wait for the main container to be visible
         await expect(page.locator('.current-benefits-container')).toBeVisible({ timeout: 15000 });
-        
+
         // Wait for the header to be visible
         await expect(page.locator('.current-benefits-header')).toBeVisible();
-        
+
         // Wait for either program categories or loading state to be complete
         await Promise.any([
           expect(page.locator('.long-near-term-header').first()).toBeVisible(),
-          expect(page.locator('.category-section-container').first()).toBeVisible()
+          expect(page.locator('.category-section-container').first()).toBeVisible(),
         ]);
-        
+
         const visibleText = await page.evaluate(() => {
           return document.body.innerText;
         });

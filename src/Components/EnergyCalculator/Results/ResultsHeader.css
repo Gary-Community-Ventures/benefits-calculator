@@ -1,8 +1,7 @@
 .energy-calculator-results-header-programs-count-text {
   height: 3rem;
-  border-radius: 0.5rem;
-  background-color: var(--primary-color);
-  color: white;
+  background-color: #ffffff;
+  color: var(--primary-color);
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   padding-left: 1rem;
@@ -10,6 +9,8 @@
   margin-right: 1rem;
   display: flex;
   align-items: center;
+  border-radius: 0.5rem;
+  border: 2px solid var(--primary-color);
 }
 
 .energy-calculator-results-header-programs-count {

@@ -1,6 +1,6 @@
 /**
  * Selectors - Common selectors used across the application tests
- * 
+ *
  * This file contains reusable selectors for common UI elements to ensure
  * consistency across tests and make maintenance easier if selectors change.
  */
@@ -36,7 +36,7 @@ export const FORM_INPUTS = {
 
   // Radio buttons
   YES_RADIO: { role: 'radio' as const, name: 'Yes' },
-  
+
   // Date selectors
   BIRTH_MONTH: { role: 'button' as const, name: 'Birth Month' },
   YEAR_SELECTOR: { role: 'button' as const, name: 'Open' },
