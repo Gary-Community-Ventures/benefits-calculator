@@ -24,6 +24,7 @@ import PitkinCounty_MFBLogo from '../../Assets/States/CO/WhiteLabels/PitkenCount
 import PoweredByLogo from '../../Assets/Logos/powered_by_mfb.png';
 import RewiringAmericaLogo from '../../Assets/States/CO/Logos/rewiring_america_logo.png';
 import Broomfield_MFBLogo from '../../Assets/States/CO/WhiteLabels/Broomfield/Broomfield_MFBLogo.png';
+import TheActionCenter_MFBLogo from '../../Assets/States/CO/WhiteLabels/TheActionCenter/TheActionCenter_MFBLogo.png';
 
 const logoMap: { [key: string]: string | undefined } = {
   MFB_COLogo: MFBCOLogo,
@@ -52,6 +53,7 @@ const logoMap: { [key: string]: string | undefined } = {
   PoweredByLogo: PoweredByLogo,
   RewiringAmericaLogo: RewiringAmericaLogo,
   Broomfield_MFBLogo: Broomfield_MFBLogo,
+  TheActionCenter_MFBLogo: TheActionCenter_MFBLogo,
 };
 
 export const renderLogoSource = (sourceLabel: string, logoAlt: string, logoClass: string) => {
