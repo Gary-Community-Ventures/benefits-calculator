@@ -12,7 +12,7 @@ import {
   selectNearTernNeeds,
   selectReferralSource,
   selectState,
-} from './utils/steps';
+} from './helpers/steps';
 import {
   selectElectricProvider,
   selectHeatingSource,
@@ -21,7 +21,7 @@ import {
   selectOwnerOrRenter,
   selectStatus,
   selectUtility,
-} from './utils/energy-calculator';
+} from './helpers/energy-calculator';
 import { URL_PATTERNS } from './helpers/utils/constants';
 import { verifyCurrentUrl } from './helpers/navigation';
 
@@ -29,7 +29,7 @@ const whiteLabels = {
   nc: {
     state: 'North Carolina',
     zipcode: '27708',
-    county: 'Durham County',
+    county: '',
     householdSize: 1,
     dobMonth: 'February',
     dobYear: '1989',
@@ -74,7 +74,10 @@ const whiteLabels = {
       annualTaxCredit: '$177Annual Tax Credit',
     },
   },
-  energyCalculator: {
+};
+
+const energyCalculators = {
+  co_energy_calculator: {
     ownerOrRenter: 'Renter',
     utility: 'Heating',
     zipcode: '80012',
@@ -90,197 +93,81 @@ const whiteLabels = {
     expectedResult: {
       programsCount: '7Programs Found',
     },
-  },
+  }
 };
-test.describe('Bbasic e2e tests for each white label ', () => {
-  test('NC white label', async ({ page }) => {
-    await navigateHomePage(page);
-    await clickGetStartedButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.SELECT_STATE);
+test.describe('Basic e2e tests for each white label', () => {
+  for (const [whiteLabel, config] of Object.entries(whiteLabels)) {
+    const skip = whiteLabel === 'ma'; // skipping MA for now
+    const runner = skip ? test.skip : test;
 
-    await selectState(page, whiteLabels.nc.state);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.DISCLAIMER);
+    runner(`${whiteLabel.toUpperCase()} white label`, async ({ page }) => {
+      await navigateHomePage(page);
+      await clickGetStartedButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.SELECT_STATE);
 
-    await acceptDisclaimer(page);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.LOCATION_INFO);
+      await selectState(page, config.state);
+      await clickContinueButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.DISCLAIMER);
 
-    await fillZipCode(page, whiteLabels.nc.zipcode);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_SIZE);
+      await acceptDisclaimer(page);
+      await clickContinueButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.LOCATION_INFO);
 
-    await fillHouseholdSize(page, 1);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_MEMBER);
+      await fillZipCode(page, config.zipcode);
+      if (config.county !== '') {
+        await selectCounty(page, config.county);
+      }
+      await clickContinueButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_SIZE);
 
-    await fillDateOfBirth(page, whiteLabels.nc.dobMonth, whiteLabels.nc.dobYear);
-    await selectInsurance(page, whiteLabels.nc.insurance);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.EXPENSES);
+      await fillHouseholdSize(page, config.householdSize);
+      await clickContinueButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_MEMBER);
 
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.ASSETS);
+      await fillDateOfBirth(page, config.dobMonth, config.dobYear);
+      await selectInsurance(page, config.insurance);
+      await clickContinueButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.EXPENSES);
 
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.PUBLIC_BENEFITS);
+      await clickContinueButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.ASSETS);
 
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.NEEDS);
+      await clickContinueButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.PUBLIC_BENEFITS);
 
-    await selectNearTernNeeds(page, whiteLabels.nc.nearTernNeeds);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.REFERRAL_SOURCE);
+      await clickContinueButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.NEEDS);
 
-    await selectReferralSource(page, whiteLabels.nc.referralSource);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.ADDITIONAL_INFO);
+      await selectNearTernNeeds(page, config.nearTernNeeds);
+      await clickContinueButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.REFERRAL_SOURCE);
 
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.CONFIRM_INFORMATION);
+      await selectReferralSource(page, config.referralSource);
+      await clickContinueButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.ADDITIONAL_INFO);
 
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.RESULTS);
+      await clickContinueButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.CONFIRM_INFORMATION);
 
-    await page.locator('.results-header').waitFor({ state: 'visible' });
-    await expect(page.locator('.results-header .results-header-programs-count-text')).toHaveText(
-      whiteLabels.nc.expectedResult.programsCount,
-    );
-    await expect(page.locator('.results-header .results-data-cell').first()).toHaveText(
-      whiteLabels.nc.expectedResult.estimatedMonthlySavings,
-    );
-    await expect(page.locator('.results-header .results-data-cell').last()).toHaveText(
-      whiteLabels.nc.expectedResult.annualTaxCredit,
-    );
-  });
+      await clickContinueButton(page);
+      await verifyCurrentUrl(page, URL_PATTERNS.RESULTS);
 
-  test('CO white label', async ({ page }) => {
-    await navigateHomePage(page);
-    await clickGetStartedButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.SELECT_STATE);
-
-    await selectState(page, whiteLabels.co.state);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.DISCLAIMER);
-
-    await acceptDisclaimer(page);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.LOCATION_INFO);
-
-    await fillZipCode(page, whiteLabels.co.zipcode);
-    await selectCounty(page, whiteLabels.co.county);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_SIZE);
-
-    await fillHouseholdSize(page, 1);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_MEMBER);
-
-    await fillDateOfBirth(page, whiteLabels.co.dobMonth, whiteLabels.co.dobYear);
-    await selectInsurance(page, whiteLabels.co.insurance);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.EXPENSES);
-
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.ASSETS);
-
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.PUBLIC_BENEFITS);
-
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.NEEDS);
-
-    await selectNearTernNeeds(page, whiteLabels.co.nearTernNeeds);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.REFERRAL_SOURCE);
-
-    await selectReferralSource(page, whiteLabels.co.referralSource);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.ADDITIONAL_INFO);
-
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.CONFIRM_INFORMATION);
-
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.RESULTS);
-
-    await page.locator('.results-header').waitFor({ state: 'visible' });
-    await expect(page.locator('.results-header .results-header-programs-count-text')).toHaveText(
-      whiteLabels.co.expectedResult.programsCount,
-    );
-    await expect(page.locator('.results-header .results-data-cell').first()).toHaveText(
-      whiteLabels.co.expectedResult.estimatedMonthlySavings,
-    );
-    await expect(page.locator('.results-header .results-data-cell').last()).toHaveText(
-      whiteLabels.co.expectedResult.annualTaxCredit,
-    );
-  });
-
-  test.skip('MA white label', async ({ page }) => {
-    await navigateHomePage(page);
-    await clickGetStartedButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.SELECT_STATE);
-
-    await selectState(page, whiteLabels.ma.state);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.DISCLAIMER);
-
-    await acceptDisclaimer(page);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.LOCATION_INFO);
-
-    await fillZipCode(page, whiteLabels.ma.zipcode);
-    await selectCounty(page, whiteLabels.ma.county);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_SIZE);
-
-    await fillHouseholdSize(page, 1);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_MEMBER);
-
-    await fillDateOfBirth(page, whiteLabels.ma.dobMonth, whiteLabels.ma.dobYear);
-    await selectInsurance(page, whiteLabels.ma.insurance);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.EXPENSES);
-
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.ASSETS);
-
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.PUBLIC_BENEFITS);
-
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.NEEDS);
-
-    await selectNearTernNeeds(page, whiteLabels.ma.nearTernNeeds);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.REFERRAL_SOURCE);
-
-    await selectReferralSource(page, whiteLabels.ma.referralSource);
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.ADDITIONAL_INFO);
-
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.CONFIRM_INFORMATION);
-
-    await clickContinueButton(page);
-    await verifyCurrentUrl(page, URL_PATTERNS.RESULTS);
-
-    await page.locator('.results-header').waitFor({ state: 'visible' });
-    await expect(page.locator('.results-header .results-header-programs-count-text')).toHaveText(
-      whiteLabels.ma.expectedResult.programsCount,
-    );
-    await expect(page.locator('.results-header .results-data-cell').first()).toHaveText(
-      whiteLabels.ma.expectedResult.estimatedMonthlySavings,
-    );
-    await expect(page.locator('.results-header .results-data-cell').last()).toHaveText(
-      whiteLabels.ma.expectedResult.annualTaxCredit,
-    );
-  });
+      await page.locator('.results-header').waitFor({ state: 'visible' });
+      await expect(page.locator('.results-header .results-header-programs-count-text')).toHaveText(
+        config.expectedResult.programsCount,
+      );
+      await expect(page.locator('.results-header .results-data-cell').first()).toHaveText(
+        config.expectedResult.estimatedMonthlySavings,
+      );
+      await expect(page.locator('.results-header .results-data-cell').last()).toHaveText(
+        config.expectedResult.annualTaxCredit,
+      );
+    });
+  }
 
   test('Energy Calculator White label', async ({ page }) => {
     await navigateHomePage(page, 'energy-calculator');
-    await selectOwnerOrRenter(page, whiteLabels.energyCalculator.ownerOrRenter);
+    await selectOwnerOrRenter(page, energyCalculators.co_energy_calculator.ownerOrRenter);
     await clickGetStartedButton(page);
     await expect(page).toHaveURL('/co_energy_calculator/step-2?path=renter');
 
@@ -288,12 +175,12 @@ test.describe('Bbasic e2e tests for each white label ', () => {
     await clickContinueButton(page);
     await expect(page).toHaveURL(/\/co_energy_calculator\/.*\/step-3/);
 
-    await selectUtility(page, whiteLabels.energyCalculator.utility);
+    await selectUtility(page, energyCalculators.co_energy_calculator.utility);
     await clickContinueButton(page);
     await expect(page).toHaveURL(/\/co_energy_calculator\/.*\/step-4/);
 
-    await fillZipCode(page, whiteLabels.energyCalculator.zipcode);
-    await selectCounty(page, whiteLabels.energyCalculator.county);
+    await fillZipCode(page, energyCalculators.co_energy_calculator.zipcode);
+    await selectCounty(page, energyCalculators.co_energy_calculator.county);
     await clickContinueButton(page);
     await expect(page).toHaveURL(/\/co_energy_calculator\/.*\/step-5/);
 
@@ -301,20 +188,20 @@ test.describe('Bbasic e2e tests for each white label ', () => {
     await clickContinueButton(page);
     await expect(page).toHaveURL(/\/co_energy_calculator\/.*\/step-6/);
 
-    await fillDateOfBirth(page, whiteLabels.energyCalculator.dobMonth, whiteLabels.energyCalculator.dobYear);
-    await selectStatus(page, whiteLabels.energyCalculator.status);
+    await fillDateOfBirth(page, energyCalculators.co_energy_calculator.dobMonth, energyCalculators.co_energy_calculator.dobYear);
+    await selectStatus(page, energyCalculators.co_energy_calculator.status);
     await clickContinueButton(page);
     await expect(page).toHaveURL(/\/co_energy_calculator\/.*\/step-7/);
 
-    await selectElectricProvider(page, whiteLabels.energyCalculator.electricProvider);
+    await selectElectricProvider(page, energyCalculators.co_energy_calculator.electricProvider);
     await clickContinueButton(page);
     await expect(page).toHaveURL(/\/co_energy_calculator\/.*\/step-8/);
 
-    await selectHeatingSource(page, whiteLabels.energyCalculator.heatingSource);
+    await selectHeatingSource(page, energyCalculators.co_energy_calculator.heatingSource);
     await clickContinueButton(page);
     await expect(page).toHaveURL(/\/co_energy_calculator\/.*\/step-9/);
 
-    await selectHouseholdInfo(page, whiteLabels.energyCalculator.householdInfo);
+    await selectHouseholdInfo(page, energyCalculators.co_energy_calculator.householdInfo);
     await clickContinueButton(page);
     await expect(page).toHaveURL(/\/co_energy_calculator\/.*\/step-10/);
 
@@ -327,7 +214,9 @@ test.describe('Bbasic e2e tests for each white label ', () => {
 
     await page.locator('header.energy-calculator-results-header').waitFor({ state: 'visible' });
     await expect(page.locator('header.energy-calculator-results-header')).toHaveText(
-      whiteLabels.energyCalculator.expectedResult.programsCount,
+      energyCalculators.co_energy_calculator.expectedResult.programsCount,
     );
   });
 });
+
+ 
