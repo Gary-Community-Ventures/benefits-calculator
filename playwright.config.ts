@@ -18,8 +18,12 @@ export default defineConfig({
   // See https://playwright.dev/docs/api/class-testoptions
   use: {
     baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    headless: !!process.env.CI,
+    screenshot: 'only-on-failure',
+    trace: 'retain-on-failure',
   },
-
+  /* Save visual comparisons screnshots*/
+  snapshotPathTemplate: '{testDir}/__screenshots__/{testFilePath}/{arg}{ext}',
   // See https://playwright.dev/docs/test-projects
   projects: [
     {
