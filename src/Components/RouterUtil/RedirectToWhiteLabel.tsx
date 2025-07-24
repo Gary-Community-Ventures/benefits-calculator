@@ -27,6 +27,7 @@ const REFERRER_REDIRECT: { [key: string]: string | undefined } = {
   DPSCommunityHubs: 'co',
   fircsummitresourcecenter: 'co',
   salud: 'co',
+  theactioncenter: 'co',
   thegatheringplace: 'co',
   childfirst: 'co',
   eaglecounty: 'co',
