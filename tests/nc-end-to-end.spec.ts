@@ -1,5 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { runNcEndToEndTest, verifyCurrentUrl, saveResults } from './helpers';
+import {
+  runNcEndToEndTest,
+  verifyCurrentUrl,
+  saveResults,
+  TEST_TIMEOUTS,
+} from './helpers';
 import { testUsers } from './helpers/utils/test-data';
 import { URL_PATTERNS, WHITE_LABELS } from './helpers/utils/constants';
 
@@ -11,10 +16,11 @@ import { URL_PATTERNS, WHITE_LABELS } from './helpers/utils/constants';
  * provide proper error handling, retry logic, and debug mode support.
  */
 test.describe('NC Screen Test', () => {
-  // Set a longer timeout for this test to avoid issues with UI interactions
-  test.setTimeout(120000); // 2 minutes
+  // Set extended timeout for end-to-end workflow tests (longer than default 60s)
+  test.setTimeout(TEST_TIMEOUTS.END_TO_END);
 
   test('start to finish screen test', async ({ page }) => {
+    // Uses default desktop viewport from playwright.config.ts
     /**
      * Using runNcEndToEndTest helper to execute the complete flow with:
      * - Shared test data from testUsers
