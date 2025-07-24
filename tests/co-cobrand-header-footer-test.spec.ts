@@ -1,48 +1,14 @@
 import { test, expect, Locator } from '@playwright/test';
+import { acceptDisclaimer, clickContinueButton, navigateHomePage } from './helpers/steps';
 test.describe('CO cobrand, header and footer links Test', () => {
   test.setTimeout(15000);
-    test('collect and analyze text readability', async ({ page }) => {        
-      const navigationSteps = [
-        {
-          url: '/',
-          name: 'Home Page',
-          action: async () => {
-            await page.getByRole('button', { name: 'Get Started' }).click();
-          }
-        },
-        {
-          url: '/select-state',
-          name: 'State Selection',
-          action: async () => {
-            await page.locator('#state-source-select').click();
-            await page.getByRole('option', { name: 'North Carolina' }).click();
-            await page.getByRole('button', { name: 'Continue' }).click();
-          }
-        },
-        {
-          url: '/co/step-2/?referrer=211co',
-          name: 'Step 2',
-          action: async () => {
-            await page.getByRole('checkbox', { name: 'By proceeding, you confirm' }).check();
-            await page.getByRole('checkbox', { name: 'I confirm I am 13 years of' }).check();
-            await page.getByRole('button', { name: 'Continue' }).click();
-          }
-        },
-       
-      ];
-      for (const step of navigationSteps) {
-      // Navigate to the page if it's a direct URL      
-        if (typeof step.url === 'string') {
-          await page.goto(step.url);
-        }
-      }
-    });
+   
     test('verify header and footer links are working', async ({ page }) => {
         // Set viewport to desktop size to ensure header links are visible (must be > 1280px)
         await page.setViewportSize({ width: 1400, height: 800 });
-        await page.goto('/co/step-2/?referrer=211co');
-        
-        await page.waitForLoadState('networkidle');
+        await navigateHomePage(page, '/co/step-2/?referrer=211co');   
+        await acceptDisclaimer(page);
+        await clickContinueButton(page);        
         
         // Header links - these are from the twoOneOneLinks array
         const headerLinks = [
