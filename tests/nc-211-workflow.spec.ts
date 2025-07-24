@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import {
   navigateToNC211Workflow,
   verifyReferrerUrl,
@@ -6,83 +6,77 @@ import {
   verifyNC211LandingPageContent,
   verifyCurrentUrl,
   clickGetStarted,
+  saveResults,
   VIEWPORTS,
+  runNC211EndToEndTest,
+  testUsers,
+  TEST_TIMEOUTS,
 } from './helpers';
 import { URL_PATTERNS, REFERRERS } from './helpers/utils/constants';
 
 /**
- * NC 211 Referrer Workflow Tests - Phase 1: Static Content Validation
+ * NC 211 Referrer Workflow Tests
  *
- * This test suite validates the NC 211 referrer workflow landing page
- * static content including header, navigation, footer, and disclaimer text.
- * 
- * Following the established patterns from existing tests while extending
- * functionality for NC 211 specific branding and content.
- * 
- * Key Features:
- * - Multi-strategy selectors for robust element detection
- * - Comprehensive static content validation
- * - Referrer parameter persistence testing
- * - Desktop viewport for consistent navigation visibility
+ * Tests NC 211 landing page content and referrer parameter persistence.
+ * Uses desktop viewport for consistent navigation visibility.
  */
 
-test.describe('NC 211 Referrer Workflow - Phase 1', () => {
+test.describe('NC 211 Referrer Workflow', () => {
   // Use default timeout from playwright.config.ts (60 seconds)
 
   test('NC 211 landing page static content validation', async ({ page }) => {
-    // Setup desktop viewport to ensure navigation links are visible
     await page.setViewportSize(VIEWPORTS.DESKTOP);
-    /**
-     * Navigate to NC 211 workflow with referrer parameter
-     * Expected URL: http://localhost:3000/nc/step-1?referrer=211nc
-     */
+    
+    // Navigate to NC 211 workflow and verify landing page
     await navigateToNC211Workflow(page, REFERRERS.NC_211);
-
-    // Verify page has loaded
     await verifyPageLoaded(page);
-
-    // Verify we're on the correct landing page with referrer parameter
     await verifyCurrentUrl(page, URL_PATTERNS.LANDING_PAGE);
     await verifyReferrerUrl(page, REFERRERS.NC_211);
 
-    /**
-     * Comprehensive validation of all NC 211 static content:
-     * - 211 and MyFriendBen co-branded logo in header
-     * - Navigation menu with HOME, ABOUT, AGENCIES, RESOURCES links
-     * - Get Help section with contact information and resources
-     * - Both disclaimer paragraphs (eligibility criteria and NC 211 info)
-     * - Privacy policy and copyright information section
-     * - Language selector and globe icon
-     */
+    // Validate NC 211 specific content (branding, navigation, disclaimers)
     await verifyNC211LandingPageContent(page);
 
-    /**
-     * Test basic navigation functionality
-     * Verify Get Started button works and maintains referrer parameter
-     */
+    // Test navigation maintains referrer parameter
     await clickGetStarted(page);
-
-    // Verify we've navigated to step 2 and maintained the referrer parameter
     await verifyCurrentUrl(page, URL_PATTERNS.DISCLAIMER);
     await verifyReferrerUrl(page, REFERRERS.NC_211);
   });
 
   test('NC 211 referrer parameter persistence', async ({ page }) => {
-    // Setup desktop viewport for consistent behavior
     await page.setViewportSize(VIEWPORTS.DESKTOP);
     
-    /**
-     * Test that referrer parameter persists through navigation
-     * This is critical for proper analytics and workflow tracking
-     */
+    // Test referrer parameter persists through navigation
     await navigateToNC211Workflow(page, REFERRERS.NC_211);
     await verifyPageLoaded(page);
-
-    // Navigate through first step
     await clickGetStarted(page);
     
-    // Verify referrer parameter is maintained in step 2
+    // Verify referrer parameter maintained after navigation
     await verifyCurrentUrl(page, URL_PATTERNS.DISCLAIMER);
     await verifyReferrerUrl(page, REFERRERS.NC_211);
+  });
+});
+
+/**
+ * NC 211 Referrer Workflow Tests - Complete End-to-End Test
+ *
+ * Tests the complete NC 211 workflow from landing page to results.
+ * Uses shared helpers and follows the same pattern as NC end-to-end test.
+ */
+test.describe('NC 211 Referrer Workflow - Complete End-to-End', () => {
+  // Set extended timeout for end-to-end workflow tests (same as NC end-to-end)
+  test.setTimeout(TEST_TIMEOUTS.END_TO_END);
+
+  test('NC 211 start to finish workflow test', async ({ page }) => {
+    // Run complete NC 211 workflow using shared helper
+    const result = await runNC211EndToEndTest(page, testUsers[REFERRERS.NC_211]);
+
+    // Verify test was successful
+    expect(result.success, `NC 211 end-to-end test failed at step: ${result.step}`).toBeTruthy();
+
+    // Verify results page and save functionality
+    if (result.success) {
+      await verifyCurrentUrl(page, URL_PATTERNS.RESULTS);
+      await saveResults(page);
+    }
   });
 });

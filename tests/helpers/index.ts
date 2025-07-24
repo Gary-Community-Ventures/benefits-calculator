@@ -23,5 +23,6 @@ export * from './test-setup';
 export * from './flows/types';
 export * from './flows/common';
 export * from './flows/nc';
+export * from './flows/nc-211';
 
 // Note: NC 211 specific helpers are already exported via './assertions' and './navigation'
