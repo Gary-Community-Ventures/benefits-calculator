@@ -6,6 +6,7 @@ import {
   verifyNC211LandingPageContent,
   verifyCurrentUrl,
   clickGetStarted,
+  VIEWPORTS,
 } from './helpers';
 import { URL_PATTERNS, REFERRERS } from './helpers/utils/constants';
 
@@ -25,16 +26,12 @@ import { URL_PATTERNS, REFERRERS } from './helpers/utils/constants';
  * - Desktop viewport for consistent navigation visibility
  */
 
-// Shared configuration for consistent test behavior
-const DESKTOP_VIEWPORT = { width: 1440, height: 900 };
-const TEST_TIMEOUT = 60000; // 1 minute
-
 test.describe('NC 211 Referrer Workflow - Phase 1', () => {
-  test.setTimeout(TEST_TIMEOUT);
+  // Use default timeout from playwright.config.ts (60 seconds)
 
   test('NC 211 landing page static content validation', async ({ page }) => {
-    // Set viewport to desktop size to ensure navigation links are visible
-    await page.setViewportSize(DESKTOP_VIEWPORT);
+    // Setup desktop viewport to ensure navigation links are visible
+    await page.setViewportSize(VIEWPORTS.DESKTOP);
     /**
      * Navigate to NC 211 workflow with referrer parameter
      * Expected URL: http://localhost:3000/nc/step-1?referrer=211nc
@@ -71,8 +68,8 @@ test.describe('NC 211 Referrer Workflow - Phase 1', () => {
   });
 
   test('NC 211 referrer parameter persistence', async ({ page }) => {
-    // Set viewport to desktop size for consistent behavior
-    await page.setViewportSize(DESKTOP_VIEWPORT);
+    // Setup desktop viewport for consistent behavior
+    await page.setViewportSize(VIEWPORTS.DESKTOP);
     
     /**
      * Test that referrer parameter persists through navigation

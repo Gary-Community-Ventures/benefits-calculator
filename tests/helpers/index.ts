@@ -14,6 +14,10 @@ export * from './assertions';
 // Utility constants and test data
 export * from './utils/constants';
 export * from './utils/test-data';
+export * from './utils/test-config';
+
+// Test setup utilities
+export * from './test-setup';
 
 // Flow helpers for complex user journeys
 export * from './flows/types';
