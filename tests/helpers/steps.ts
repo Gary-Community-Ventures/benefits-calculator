@@ -2,8 +2,8 @@ import { Page } from '@playwright/test';
 
 export async function navigateHomePage(page: Page, specificPath?: string) {
   await page.goto('/');
-  if (specificPath === 'energy-calculator') {
-    await page.goto('/co_energy_calculator/landing-page');
+  if (specificPath) {
+    await page.goto(specificPath);
   }
 }
 

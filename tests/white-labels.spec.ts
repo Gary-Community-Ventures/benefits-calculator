@@ -93,7 +93,7 @@ const energyCalculators = {
     expectedResult: {
       programsCount: '7Programs Found',
     },
-  }
+  },
 };
 test.describe('Basic e2e tests for each white label', () => {
   for (const [whiteLabel, config] of Object.entries(whiteLabels)) {
@@ -166,7 +166,7 @@ test.describe('Basic e2e tests for each white label', () => {
   }
 
   test('Energy Calculator White label', async ({ page }) => {
-    await navigateHomePage(page, 'energy-calculator');
+    await navigateHomePage(page, '/co_energy_calculator/landing-page');
     await selectOwnerOrRenter(page, energyCalculators.co_energy_calculator.ownerOrRenter);
     await clickGetStartedButton(page);
     await expect(page).toHaveURL('/co_energy_calculator/step-2?path=renter');
@@ -188,7 +188,11 @@ test.describe('Basic e2e tests for each white label', () => {
     await clickContinueButton(page);
     await expect(page).toHaveURL(/\/co_energy_calculator\/.*\/step-6/);
 
-    await fillDateOfBirth(page, energyCalculators.co_energy_calculator.dobMonth, energyCalculators.co_energy_calculator.dobYear);
+    await fillDateOfBirth(
+      page,
+      energyCalculators.co_energy_calculator.dobMonth,
+      energyCalculators.co_energy_calculator.dobYear,
+    );
     await selectStatus(page, energyCalculators.co_energy_calculator.status);
     await clickContinueButton(page);
     await expect(page).toHaveURL(/\/co_energy_calculator\/.*\/step-7/);
@@ -218,5 +222,3 @@ test.describe('Basic e2e tests for each white label', () => {
     );
   });
 });
-
- 
