@@ -247,5 +247,11 @@ export function useLocalizedLink(configKey: 'privacy_policy' | 'consent_to_conta
   const { locale } = useContext(Context);
   const links = useConfig<Partial<Record<Language, string>>>(configKey, {});
 
-  return links[locale] ?? links['en-us'] ?? '';
+  // Fallback URLs if not found in config
+  const fallbackUrls = {
+    privacy_policy: 'https://www.myfriendben.org/privacy-policy/',
+    consent_to_contact: 'https://www.myfriendben.org/terms-and-conditions/',
+  };
+
+  return links[locale] ?? links['en-us'] ?? fallbackUrls[configKey] ?? '';
 }

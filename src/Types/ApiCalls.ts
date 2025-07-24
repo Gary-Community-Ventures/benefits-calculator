@@ -31,6 +31,15 @@ export type UrgentNeedProgramsResponse = {
   website_description: Translation;
 }[];
 
+export type UrgentNeedTypeResponse = {
+  name: Translation;
+  icon: string;
+  urgent_needs: {
+    name: Translation;
+    website_description: Translation;
+  }[];
+}[];
+
 export type ValidationRequestData = {
   screen_uuid: string;
   program_name: string;

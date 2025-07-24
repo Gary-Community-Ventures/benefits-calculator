@@ -127,7 +127,7 @@ function Expenses() {
 
   const allExpenses = () => {
     if (formData.expenses.length === 0) {
-      return <FormattedMessage id="confirmation.none" defaultMessage="None" />;
+      return <ConfirmationItem value={<FormattedMessage id="confirmation.none" defaultMessage="None" />} />;
     }
     const mappedExpenses = formData.expenses.map((expense, i) => {
       return (
@@ -294,11 +294,15 @@ function AcuteConditions() {
     }
 
     return (
-      <ul className="confirmation-acute-need-list">
-        {allNeeds.map(([key, _]) => {
-          return <li key={key}>{acuteConditionOptions[key].text}</li>;
-        })}
-      </ul>
+      <ConfirmationItem
+        value={
+          <ul className="confirmation-acute-need-list">
+            {allNeeds.map(([key, _]) => (
+              <li key={key}>{acuteConditionOptions[key].text}</li>
+            ))}
+          </ul>
+        }
+      />
     );
   };
 
@@ -306,7 +310,10 @@ function AcuteConditions() {
     <ConfirmationBlock
       icon={<Immediate title={formatMessage(acuteConditionsIconAlt)} />}
       title={
-        <FormattedMessage id="confirmation.displayAllFormData-acuteHHConditions" defaultMessage="Immediate Needs" />
+        <FormattedMessage
+          id="confirmation.displayAllFormData-acuteHHConditions"
+          defaultMessage="Additional Resources"
+        />
       }
       editAriaLabel={editAcuteConditionsAriaLabel}
       stepName="acuteHHConditions"
@@ -343,7 +350,13 @@ function ReferralSource() {
       editAriaLabel={editReferralSourceAriaLabel}
       stepName="referralSource"
     >
-      {formData.referralSource in referralOptions ? referralOptions[formData.referralSource] : formData.referralSource}
+      <ConfirmationItem
+        value={
+          formData.referralSource in referralOptions
+            ? referralOptions[formData.referralSource]
+            : formData.referralSource
+        }
+      />
     </ConfirmationBlock>
   );
 }

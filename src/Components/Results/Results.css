@@ -271,10 +271,6 @@
   .result-program-container hr {
     display: none;
   }
-
-  .result-program-more-info a {
-    padding: 0.5rem 1rem;
-  }
 }
 
 /* Please keep all media queries at the end of the file so that the styles cascade correctly */

@@ -4,6 +4,7 @@ import { Language } from '../../../Assets/languageOptions';
 import { FormData } from '../../../Types/FormData';
 import { Context } from '../../Wrapper/Wrapper';
 import { useIsEnergyCalculator } from '../hooks';
+import { OTHER_ELECTRIC_PROVIDERS, OTHER_GAS_PROVIDERS } from '../providers';
 import {
   EnergyCalculatorAPIResponse,
   EnergyCalculatorRebateCategory,
@@ -51,6 +52,16 @@ function createQueryString(formData: FormData, lang: Language) {
   query.append('tax_filing', filingStatus);
 
   query.append('household_size', String(formData.householdSize));
+
+  const electricityProvider = formData.energyCalculator?.electricProvider;
+  if (electricityProvider !== undefined && !(electricityProvider in OTHER_ELECTRIC_PROVIDERS)) {
+    query.append('utility', formData.energyCalculator?.electricProvider ?? '');
+  }
+
+  const gasProvider = formData.energyCalculator?.gasProvider;
+  if (gasProvider !== undefined && !(gasProvider in OTHER_GAS_PROVIDERS)) {
+    query.append('gas_utility', formData.energyCalculator?.gasProvider ?? '');
+  }
 
   let reqLang = 'en';
   if (lang === 'es') {

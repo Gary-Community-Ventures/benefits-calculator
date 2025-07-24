@@ -74,6 +74,16 @@
   fill: #000000;
 }
 
+.small-header-language-dropdown #select-language {
+  font-size: 0.75rem;
+}
+
+.small-header-language-dropdown svg {
+  width: 1rem;
+  height: 1rem;
+  transform: translateY(0.2rem);
+}
+
 #select-language:focus-visible {
   outline: -webkit-focus-ring-color auto 1px;
 }
@@ -96,9 +106,10 @@
   max-height: 90%;
 }
 
-.tellercounty-logo-size,
+.broomfield-logo-size,
+.pitkincounty-logo-size,
 .pueblocounty-logo-size,
-.pitkincounty-logo-size {
+.tellercounty-logo-size {
   display: block;
   max-height: 91%;
   max-width: 95%;

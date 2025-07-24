@@ -112,7 +112,7 @@ const DefaultConfirmationHHData = () => {
 
       const incomeStreamAmount = calcIncomeStreamAmount(incomeStream);
 
-      const annualAmount = `(${formatToUSD(incomeStreamAmount)}` + translatedAnnualText + `)`;
+      const annualAmount = `(${formatToUSD(incomeStreamAmount, 0)}` + translatedAnnualText + `)`;
 
       return (
         <li key={index}>
@@ -173,10 +173,13 @@ const DefaultConfirmationHHData = () => {
       if (selectedNone) {
         return <>{youVsThemHealthInsuranceOptions.none.text}</>;
       }
-
-      const allOtherSelectedOptionsString = allOtherSelectedOptions.join(', ');
-
-      return <>{allOtherSelectedOptionsString}</>;
+      return (
+        <ul>
+          {allOtherSelectedOptions.map((option, idx) => (
+            <li key={idx}>{option}</li>
+          ))}
+        </ul>
+      );
     };
 
     return (
