@@ -208,6 +208,13 @@ export async function completeHouseholdMemberInfo(page: Page, memberInfo: Househ
       await selectIncomeType(page, memberInfo.income.type);
       await selectFrequency(page, memberInfo.income.frequency);
       await fillTextField(page, FORM_INPUTS.AMOUNT.name, memberInfo.income.amount);
+    } else {
+      // Check if we need to select "No" for income
+      const noRadio = page.getByRole('radio', { name: 'No' });
+      const isNoRadioVisible = await noRadio.isVisible().catch(() => false);
+      if (isNoRadioVisible) {
+        await selectRadio(page, 'No');
+      }
     }
 
     await clickContinue(page);
@@ -235,6 +242,13 @@ export async function completeExpenses(page: Page, expenseInfo: ExpenseInfo): Pr
       await selectRadio(page, FORM_INPUTS.YES_RADIO.name);
       await selectExpenseType(page, expenseInfo.type);
       await fillTextField(page, FORM_INPUTS.AMOUNT.name, expenseInfo.amount);
+    } else {
+      // Handle the case where hasExpenses is false
+      const noRadio = page.getByRole('radio', { name: 'No' });
+      const isNoRadioVisible = await noRadio.isVisible().catch(() => false);
+      if (isNoRadioVisible) {
+        await selectRadio(page, 'No');
+      }
     }
 
     await clickContinue(page);
