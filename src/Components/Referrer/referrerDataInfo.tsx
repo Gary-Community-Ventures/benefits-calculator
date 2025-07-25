@@ -1,6 +1,7 @@
 import MFBDEFAULT from '../../Assets/Logos/mfb_default_logo_header.png';
 import MFBCOLogo from '../../Assets/States/CO/Logos/mfb_co_logo.png';
 import MFBNCLogo from '../../Assets/States/NC/Logos/mfb_nc_logo.png';
+import MFBILLogo from '../../Assets/States/IL/Logos/mfb_il_logo.png';
 import MFBMALogo from '../../Assets/States/MA/Logos/mfb_massachusetts_logo.png';
 import MFBCOEnergyLogo from '../../Assets/States/CO/Logos/mfb_co_energy_logo.png';
 import MFB_NCFooterLogo from '../../Assets/States/NC/Logos/MFB_NCFooterLogo.png';
@@ -28,6 +29,7 @@ import TheActionCenter_MFBLogo from '../../Assets/States/CO/WhiteLabels/TheActio
 
 const logoMap: { [key: string]: string | undefined } = {
   MFB_COLogo: MFBCOLogo,
+  MFB_ILLogo: MFBILLogo,
   MFB_NCLogo: MFBNCLogo,
   MFB_MALogo: MFBMALogo,
   MFB_COEnergyLogo: MFBCOEnergyLogo,
