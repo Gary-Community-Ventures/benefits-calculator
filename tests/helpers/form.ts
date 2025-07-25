@@ -62,40 +62,60 @@ export async function checkCheckbox(page: Page, labelText: string): Promise<void
  */
 export async function selectDate(page: Page, month: string, year: string): Promise<void> {
   const isCI = process.env.CI === 'true';
-  const renderTimeout = isCI ? 20000 : 10000; // listbox visible
-  const optionTimeout = isCI ? 20000 : 10000; // option visible
+  const renderTimeout = isCI ? 20000 : 10000;
+  const optionTimeout = isCI ? 20000 : 10000;
+  const maxRetries = 3;
+  const debugMode = process.env.PWDEBUG === '1' || process.env.DEBUG_TESTS === 'true';
 
-  /* -------------------- MONTH -------------------- */
-  const monthBtn = page.getByRole('button', { name: 'Birth Month' });
-  await monthBtn.waitFor({ state: 'visible', timeout: renderTimeout });
-  await monthBtn.click();
+  // Helper function to select dropdown option with retry logic
+  const selectDropdownOption = async (buttonName: string, optionText: string, context: string) => {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        if (debugMode && attempt > 1) {
+          console.log(`[FORM] ${context} selection attempt ${attempt}/${maxRetries}`);
+        }
 
-  // Wait until the MUI listbox (role=listbox) is rendered and contains 12 options
-  const monthListbox = page.locator('[role="listbox"]');
-  await expect(monthListbox).toBeVisible({ timeout: renderTimeout });
-  // Wait until at least one month option appears (12 expected eventually, but be tolerant)
-  await monthListbox.locator('[role="option"]').first().waitFor({ state: 'visible', timeout: renderTimeout });
+        // Click the dropdown button
+        const button = page.getByRole('button', { name: buttonName });
+        await button.waitFor({ state: 'visible', timeout: renderTimeout });
+        await button.click();
 
-  // Click the desired month option
-  await monthListbox
-    .locator('[role="option"]', { hasText: month })
-    .first()
-    .click({ timeout: optionTimeout, force: true });
+        // Wait for listbox to appear
+        const listbox = page.locator('[role="listbox"]');
+        await expect(listbox).toBeVisible({ timeout: renderTimeout });
 
-  /* -------------------- YEAR -------------------- */
-  const yearBtn = page.getByRole('button', { name: 'Open' });
-  await yearBtn.waitFor({ state: 'visible', timeout: renderTimeout });
-  await yearBtn.click();
+        // Wait for options to be available
+        await listbox.locator('[role="option"]').first().waitFor({ state: 'visible', timeout: renderTimeout });
 
-  const yearListbox = page.locator('[role="listbox"]');
-  await expect(yearListbox).toBeVisible({ timeout: renderTimeout });
-  // Wait until at least one year option exists
-  await yearListbox.locator('[role="option"]').first().waitFor({ state: 'visible', timeout: renderTimeout });
+        // Find and click the target option
+        const option = listbox.locator('[role="option"]').filter({ hasText: optionText }).first();
+        await option.waitFor({ state: 'visible', timeout: renderTimeout });
 
-  await yearListbox
-    .locator('[role="option"]', { hasText: year })
-    .first()
-    .click({ timeout: optionTimeout, force: true });
+        // Small delay for DOM stability (addresses the detachment issue)
+        await page.waitForTimeout(300);
+
+        await option.click({ timeout: optionTimeout });
+
+        // Verify selection by checking dropdown closes
+        await expect(listbox).not.toBeVisible({ timeout: 5000 });
+
+        return; // Success
+      } catch (error) {
+        if (attempt === maxRetries) {
+          throw new Error(
+            `Failed to select ${optionText} from ${buttonName} after ${maxRetries} attempts: ${error.message}`,
+          );
+        }
+
+        // Brief pause before retry
+        await page.waitForTimeout(500);
+      }
+    }
+  };
+
+  // Select month and year
+  await selectDropdownOption('Birth Month', month, 'Month');
+  await selectDropdownOption('Open', year, 'Year');
 }
 /**
  * Selects an income type
