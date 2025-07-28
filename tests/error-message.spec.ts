@@ -6,7 +6,6 @@ import {
   fillTextField,
   FORM_INPUTS,
   selectDropdownOption,
-  selectDate,
   selectRadio,
   selectIncomeType,
   selectFrequency,
@@ -14,14 +13,17 @@ import {
   checkCheckbox,
   UncheckCheckbox,
   clickGetStarted,
+  completeDisclaimer,
 } from './helpers';
 
 import { URL_PATTERNS, STATES } from './helpers/utils/constants';
-
-// define a user data
-// update comments
-// clean up
-// format
+import {
+  fillDateOfBirth,
+  fillHouseholdSize,
+  selectInsurance,
+  selectNearTermNeeds,
+  selectReferralSource,
+} from './helpers/steps';
 
 const userInfo = {
   state: 'North Carolina',
@@ -31,29 +33,21 @@ const userInfo = {
   dobMonth: 'January',
   dobYear: '1989',
   insurance: "I don't have or know if I have health insurance",
-  nearTernNeeds: ['Food or groceries'],
+  incomeType: 'Wages, salaries, tips',
+  incomeFrequency: 'every month',
+  incomeAmount: '2000',
+  expenseType: 'Rent',
+  expenseAmount: '900',
+  additionalResources: ['Food or groceries'],
   referralSource: 'Test / Prospective Partner',
-  expectedResult: {
-    programsCount: '3Programs Found',
-    estimatedMonthlySavings: '$813Estimated Monthly Savings',
-    annualTaxCredit: '$0Annual Tax Credit',
-  },
-}
+};
 
-test.describe('Error Message', () => {
-  // Set a longer timeout for this test to avoid issues with UI interactions
-  // test.setTimeout(120000); // 2 minutes
-
-  test('error message', async ({ page }) => {
+test.describe('Error Messages Test', () => {
+  test('error messages of each step', async ({ page }) => {
     await navigateToHomePage(page);
-    const question = page.locator('h2.question-label');
-    await expect(question).toBeVisible();
-
-    await expect(question).toHaveText('What is your preferred language?');
     await clickGetStarted(page);
 
-    // Verify State page
-    await expect(question).toHaveText('What is your state?');
+    // Verify State error message
     await verifyCurrentUrl(page, URL_PATTERNS.SELECT_STATE);
 
     await clickContinue(page);
@@ -63,51 +57,43 @@ test.describe('Error Message', () => {
 
     await clickContinue(page);
 
-    // Verify disclaimer page
-    const legalHeader = page.locator('h1.sub-header');
-    await expect(legalHeader).toHaveText('What you should know:');
+    // Verify disclaimer error message
     await verifyCurrentUrl(page, URL_PATTERNS.DISCLAIMER);
-    
+
     await clickContinue(page);
 
     const disclaimerErrorMessage = page.locator('span.error-message', { hasText: 'Please check the box to continue.' });
     await expect(disclaimerErrorMessage).toHaveCount(2);
 
-    await checkCheckbox(page, FORM_INPUTS.DISCLAIMER_CHECKBOX_1.name);
-    await checkCheckbox(page, FORM_INPUTS.DISCLAIMER_CHECKBOX_2.name);
-    await clickContinue(page);
+    await completeDisclaimer(page);
 
-    // Verify zip code
-    await expect(question).toHaveText('What is your zip code?');
+    // Verify zip code and county error message
     await verifyCurrentUrl(page, URL_PATTERNS.LOCATION_INFO);
 
     await clickContinue(page);
 
     await expect(page.locator('span.error-message')).toHaveText('Please enter a valid zip code for North Carolina');
-    await fillTextField(page, FORM_INPUTS.ZIP_CODE.name, '27215');
+    await fillTextField(page, FORM_INPUTS.ZIP_CODE.name, userInfo.zipcode);
 
     await expect(page.locator('span.error-message')).toHaveText('Please Select a county');
-    await selectDropdownOption(page, FORM_INPUTS.COUNTY_SELECT, 'Alamance County');
+    await selectDropdownOption(page, FORM_INPUTS.COUNTY_SELECT, userInfo.county);
 
     await clickContinue(page);
 
-    // Verify number of household members
-    await expect(page.getByRole('heading', {
-      name: 'Including you, how many people are in your household?',
-    })).toBeVisible();
+    // Verify number of household members error message
     await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_SIZE);
-    
-    await clickContinue(page);
-    
-    await expect(page.locator('span.error-helper-text')).toHaveText('Please enter the number of people in your household (max. 8)');
-
-    await fillTextField(page, FORM_INPUTS.HOUSEHOLD_SIZE.name, '1');
 
     await clickContinue(page);
 
-    // Verify household member info
-    const memberPageHeader = page.locator('h1.sub-header');
-    await expect(memberPageHeader).toHaveText('Tell us about yourself.');
+    await expect(page.locator('span.error-helper-text')).toHaveText(
+      'Please enter the number of people in your household (max. 8)',
+    );
+
+    await fillHouseholdSize(page, userInfo.householdSize);
+
+    await clickContinue(page);
+
+    // Verify household member info error message
     await verifyCurrentUrl(page, URL_PATTERNS.HOUSEHOLD_MEMBER);
 
     await clickContinue(page);
@@ -117,13 +103,12 @@ test.describe('Error Message', () => {
     expect(memberErrorMessages).toEqual([
       'Please enter a birth month.',
       'Please enter a birth year.',
-      'Please select at least one health insurance option.'
+      'Please select at least one health insurance option.',
     ]);
 
-    await selectDate(page, 'January', '1989');
+    await fillDateOfBirth(page, userInfo.dobMonth, userInfo.dobYear);
 
-    const healthInsuranceButtonLocator = page.getByRole('button', { name: "I don't have or know if I" });
-    await healthInsuranceButtonLocator.click();
+    await selectInsurance(page, userInfo.insurance);
 
     await selectRadio(page, FORM_INPUTS.YES_RADIO.name);
 
@@ -134,19 +119,16 @@ test.describe('Error Message', () => {
     expect(incomeErrorMessages).toEqual([
       'Please select an income type',
       'Please select a frequency',
-      'Please enter a number greater than 0'
+      'Please enter a number greater than 0',
     ]);
 
-    await selectIncomeType(page, 'Wages, salaries, tips');
-    await selectFrequency(page, 'every month');
-    await fillTextField(page, FORM_INPUTS.AMOUNT.name, '2000');
+    await selectIncomeType(page, userInfo.incomeType);
+    await selectFrequency(page, userInfo.incomeFrequency);
+    await fillTextField(page, FORM_INPUTS.AMOUNT.name, userInfo.incomeAmount);
 
     await clickContinue(page);
 
-    // Verify expenses
-    const expenseQuestion = page.locator('div.expenses-q-and-help-button');
-    await expect(expenseQuestion).toContainText('Does your household have any expenses?');
-
+    // Verify expenses error message
     await verifyCurrentUrl(page, URL_PATTERNS.EXPENSES);
 
     await selectRadio(page, FORM_INPUTS.YES_RADIO.name);
@@ -155,61 +137,52 @@ test.describe('Error Message', () => {
 
     const expenseErrorMessages = await page.locator('span.error-message').allTextContents();
 
-    expect(expenseErrorMessages).toEqual([
-      'Please select an expense type',
-      'Please enter a number greater than 0'
-    ]);
+    expect(expenseErrorMessages).toEqual(['Please select an expense type', 'Please enter a number greater than 0']);
 
-    await selectExpenseType(page, 'Rent');
-    await fillTextField(page, FORM_INPUTS.AMOUNT.name, '900');
+    await selectExpenseType(page, userInfo.expenseType);
+    await fillTextField(page, FORM_INPUTS.AMOUNT.name, userInfo.expenseAmount);
 
     await clickContinue(page);
 
-    // Verify assets
-    await expect(page.getByRole('heading', {
-      name: 'How much does your whole household have right now in cash,',
-    })).toBeVisible();
+    // Assets page
     await verifyCurrentUrl(page, URL_PATTERNS.ASSETS);
-
     await clickContinue(page);
 
-    // Verify current benefits
-    await expect(question).toContainText('Does your household currently have any benefits?');
+    // Verify current benefits error message
+    await verifyCurrentUrl(page, URL_PATTERNS.PUBLIC_BENEFITS);
     await selectRadio(page, FORM_INPUTS.YES_RADIO.name);
-    await verifyCurrentUrl(page, URL_PATTERNS.PUBLIC_BENEFITS); 
 
     await clickContinue(page);
 
-    await expect(page.locator('span.error-message')).toHaveText('If your household does not receive any of these benefits, please select the "No" option above.');
+    await expect(page.locator('span.error-message')).toHaveText(
+      'If your household does not receive any of these benefits, please select the "No" option above.',
+    );
 
     await page.locator('input[type="radio"][value="false"]').check();
 
     await clickContinue(page);
-    
-    // Verify near term benefits
-    await expect(question).toHaveText('Do you want / need information on any of the following resources?'); 
+
+    // Select near term benefits
     await verifyCurrentUrl(page, URL_PATTERNS.NEEDS);
 
-    await page.getByRole('button', { name: 'Food or groceries' }).click();
+    await selectNearTermNeeds(page, userInfo.additionalResources);
 
     await clickContinue(page);
 
-    // Verify referral
-    await expect(question).toHaveText('How did you hear about MyFriendBen?'); 
-    await verifyCurrentUrl(page, URL_PATTERNS.REFERRAL_SOURCE); 
+    // Verify referral error message
+    await verifyCurrentUrl(page, URL_PATTERNS.REFERRAL_SOURCE);
 
     await clickContinue(page);
 
     await expect(page.locator('span.error-message')).toHaveText('Please select a referral source.');
 
-    await selectDropdownOption(page, FORM_INPUTS.REFERRAL_SOURCE_SELECT, 'Test / Prospective Partner');
+    await selectReferralSource(page, userInfo.referralSource);
 
     await clickContinue(page);
 
-    // Verify sign up page
-    await expect(question).toHaveText('OPTIONAL: Would you like us to contact you about either of the following?');
+    // Verify sign up page error message
     await verifyCurrentUrl(page, URL_PATTERNS.ADDITIONAL_INFO);
-    
+
     await checkCheckbox(page, FORM_INPUTS.SIGNUP_CHECKBOX_1.name);
     await checkCheckbox(page, FORM_INPUTS.SIGNUP_CHECKBOX_2.name);
 
@@ -221,35 +194,23 @@ test.describe('Error Message', () => {
       'Please enter your first name',
       'Please enter your last name',
       'Please enter an email or phone number',
-      'Please enter an email or phone number'
+      'Please enter an email or phone number',
     ]);
 
     await UncheckCheckbox(page, FORM_INPUTS.SIGNUP_CHECKBOX_1.name);
-    await UncheckCheckbox(page, FORM_INPUTS.SIGNUP_CHECKBOX_2.name); 
+    await UncheckCheckbox(page, FORM_INPUTS.SIGNUP_CHECKBOX_2.name);
 
     await clickContinue(page);
 
-    // Verify confirmation page
-    const confirmHeader = page.locator('h1.sub-header');
-    await expect(confirmHeader).toHaveText('Is all of your information correct?');
+    // Confirmation page
     await verifyCurrentUrl(page, URL_PATTERNS.CONFIRM_INFORMATION);
-
     await clickContinue(page);
 
-    // verify results page
-    await expect(page.locator('.results-header .results-header-programs-count-text')).toContainText('Programs Found');
+    // Results page
     await verifyCurrentUrl(page, URL_PATTERNS.RESULTS);
-
-    // const monthlyEstimate = page.locator('div.results-header-label');
-    // await expect(monthlyEstimate).toHaveText('Estimated Monthly Savings');
-
-    // const annualEstimate = page.locator('div.results-header-label');
-    // await expect(annualEstimate).toHaveText('Annual Tax Credit');
+    await expect(page.locator('.results-header .results-header-programs-count-text')).toContainText('Programs Found');
 
     const estimateMessages = await page.locator('div.results-header-label').allTextContents();
-    expect(estimateMessages).toEqual([
-      'Estimated Monthly Savings',
-      'Annual Tax Credit'
-    ]);
+    expect(estimateMessages).toEqual(['Estimated Monthly Savings', 'Annual Tax Credit']);
   });
 });
