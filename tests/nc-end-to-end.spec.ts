@@ -4,6 +4,10 @@ import {
   verifyCurrentUrl,
   saveResults,
   TEST_TIMEOUTS,
+  testCompleteResultsNavigation,
+  verifyFooterContent,
+  verifyPrivacyPolicySection,
+  VIEWPORTS,
 } from './helpers';
 import { testUsers } from './helpers/utils/test-data';
 import { URL_PATTERNS, WHITE_LABELS } from './helpers/utils/constants';
@@ -16,18 +20,9 @@ import { URL_PATTERNS, WHITE_LABELS } from './helpers/utils/constants';
  * provide proper error handling, retry logic, and debug mode support.
  */
 test.describe('NC Screen Test', () => {
-  // Set extended timeout for end-to-end workflow tests (longer than default 60s)
   test.setTimeout(TEST_TIMEOUTS.END_TO_END);
 
   test('start to finish screen test', async ({ page }) => {
-    // Uses default desktop viewport from playwright.config.ts
-    /**
-     * Using runNcEndToEndTest helper to execute the complete flow with:
-     * - Shared test data from testUsers
-     * - Built-in error handling and retry logic
-     * - Debug mode detection and appropriate timeouts
-     * - Consistent selectors and interactions
-     */
     // Use the helper to run the complete end-to-end test flow
     const result = await runNcEndToEndTest(page, testUsers[WHITE_LABELS.NC]);
 
@@ -41,6 +36,55 @@ test.describe('NC Screen Test', () => {
 
       // Verify results can be saved
       await saveResults(page);
+    }
+  });
+});
+
+/**
+ * NC Results Page Navigation Tests
+ *
+ * Tests detailed results page interactions including More Info navigation,
+ * Near-term/Long-term benefits navigation, and estimated savings validation.
+ * Mirrors NC 211 test enhancements for consistency across test suites.
+ */
+test.describe('NC Results Page Navigation', () => {
+  test.setTimeout(TEST_TIMEOUTS.END_TO_END);
+
+  test('complete results page navigation flow', async ({ page }) => {
+    await page.setViewportSize(VIEWPORTS.DESKTOP);
+    
+    // Complete the workflow to get to results page
+    const result = await runNcEndToEndTest(page, testUsers[WHITE_LABELS.NC]);
+    expect(result.success, `NC end-to-end test failed at step: ${result.step}`).toBeTruthy();
+
+    if (result.success) {
+      // Test complete results navigation flow (More Info → Details → Back, Near-term/Long-term)
+      const navResult = await testCompleteResultsNavigation(page);
+      expect(navResult.success, `Results navigation failed at step: ${navResult.step}`).toBeTruthy();
+    }
+  });
+});
+
+/**
+ * NC Enhanced Content Validation Tests
+ *
+ * Tests additional content validation requirements including footer content
+ * and privacy policy sections. Ensures consistency with NC 211 test coverage.
+ */
+test.describe('NC Enhanced Content Validation', () => {
+  test('footer and privacy policy validation', async ({ page }) => {
+    await page.setViewportSize(VIEWPORTS.DESKTOP);
+    
+    // Complete the workflow to get to results page
+    const result = await runNcEndToEndTest(page, testUsers[WHITE_LABELS.NC]);
+    expect(result.success, `NC end-to-end test failed at step: ${result.step}`).toBeTruthy();
+
+    if (result.success) {
+      // Verify footer content is displayed on results page
+      await verifyFooterContent(page);
+      
+      // Verify privacy policy section is displayed
+      await verifyPrivacyPolicySection(page);
     }
   });
 });

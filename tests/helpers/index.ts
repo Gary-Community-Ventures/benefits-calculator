@@ -10,6 +10,8 @@ export * from './navigation';
 export * from './form';
 export * from './selectors';
 export * from './assertions';
+export * from './results';
+export * from './navigation-menu';
 
 // Utility constants and test data
 export * from './utils/constants';
@@ -25,4 +27,4 @@ export * from './flows/common';
 export * from './flows/nc';
 export * from './flows/nc-211';
 
-// Note: NC 211 specific helpers are already exported via './assertions' and './navigation'
+

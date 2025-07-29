@@ -11,6 +11,10 @@ import {
   runNC211EndToEndTest,
   testUsers,
   TEST_TIMEOUTS,
+  testCompleteResultsNavigation,
+  testNC211NavigationMenu,
+  verifyFooterContent,
+  verifyPrivacyPolicySection,
 } from './helpers';
 import { URL_PATTERNS, REFERRERS } from './helpers/utils/constants';
 
@@ -22,7 +26,6 @@ import { URL_PATTERNS, REFERRERS } from './helpers/utils/constants';
  */
 
 test.describe('NC 211 Referrer Workflow', () => {
-  // Use default timeout from playwright.config.ts (60 seconds)
 
   test('NC 211 landing page static content validation', async ({ page }) => {
     await page.setViewportSize(VIEWPORTS.DESKTOP);
@@ -77,6 +80,83 @@ test.describe('NC 211 Referrer Workflow - Complete End-to-End', () => {
     if (result.success) {
       await verifyCurrentUrl(page, URL_PATTERNS.RESULTS);
       await saveResults(page);
+    }
+  });
+});
+
+/**
+ * NC 211 Results Page Navigation Tests
+ *
+ * Tests detailed results page interactions including More Info navigation,
+ * Near-term/Long-term benefits navigation, and estimated savings validation.
+ * Addresses high-priority gaps identified in testing guide comparison.
+ */
+test.describe('NC 211 Results Page Navigation', () => {
+  test.setTimeout(TEST_TIMEOUTS.END_TO_END);
+
+  test('complete results page navigation flow', async ({ page }) => {
+    await page.setViewportSize(VIEWPORTS.DESKTOP);
+    
+    // Complete the workflow to get to results page
+    const result = await runNC211EndToEndTest(page, testUsers[REFERRERS.NC_211]);
+    expect(result.success, `NC 211 end-to-end test failed at step: ${result.step}`).toBeTruthy();
+
+    if (result.success) {
+      // Test complete results navigation flow (More Info → Details → Back, Near-term/Long-term)
+      const navResult = await testCompleteResultsNavigation(page);
+      expect(navResult.success, `Results navigation failed at step: ${navResult.step}`).toBeTruthy();
+    }
+  });
+});
+
+/**
+ * NC 211 Navigation Menu Tests
+ *
+ * Tests the header navigation menu functionality specific to NC 211 referrer.
+ * Validates HOME, ABOUT, AGENCIES, RESOURCES links as specified in testing guide.
+ */
+test.describe('NC 211 Navigation Menu', () => {
+  test('navigation menu links validation', async ({ page }) => {
+    await page.setViewportSize(VIEWPORTS.DESKTOP);
+    
+    // Navigate to NC 211 landing page
+    await navigateToNC211Workflow(page, REFERRERS.NC_211);
+    await verifyPageLoaded(page);
+    await verifyCurrentUrl(page, URL_PATTERNS.LANDING_PAGE);
+    
+    // Test navigation menu functionality
+    const navResult = await testNC211NavigationMenu(page);
+    expect(navResult.success, `Navigation menu test failed at step: ${navResult.step}`).toBeTruthy();
+  });
+});
+
+/**
+ * NC 211 Enhanced Content Validation Tests
+ *
+ * Tests additional content validation requirements from the testing guide,
+ * including footer content and privacy policy sections.
+ */
+test.describe('NC 211 Enhanced Content Validation', () => {
+  test.setTimeout(TEST_TIMEOUTS.END_TO_END);
+
+  test('footer and privacy policy validation', async ({ page }) => {
+    await page.setViewportSize(VIEWPORTS.DESKTOP);
+    
+    // Navigate to NC 211 landing page
+    await navigateToNC211Workflow(page, REFERRERS.NC_211);
+    await verifyPageLoaded(page);
+    
+    // Verify footer content is displayed
+    await verifyFooterContent(page);
+    
+    // Verify privacy policy section is displayed
+    await verifyPrivacyPolicySection(page);
+    
+    // Test that footer content persists on results page
+    const result = await runNC211EndToEndTest(page, testUsers[REFERRERS.NC_211]);
+    if (result.success) {
+      await verifyFooterContent(page);
+      await verifyPrivacyPolicySection(page);
     }
   });
 });

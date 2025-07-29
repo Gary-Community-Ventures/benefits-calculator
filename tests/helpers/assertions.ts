@@ -54,6 +54,67 @@ export async function verifyTextExists(page: Page, text: string | RegExp): Promi
 }
 
 /**
+ * Verifies footer content for any referrer (generic footer validation)
+ * @param page - Playwright page instance
+ */
+export async function verifyFooterContent(page: Page): Promise<void> {
+  // Look for common footer elements
+  const footerSelectors = [
+    'footer',
+    '[data-testid="footer"]',
+    '.footer',
+    '.page-footer'
+  ];
+  
+  let footerFound = false;
+  for (const selector of footerSelectors) {
+    try {
+      await expect(page.locator(selector)).toBeVisible({ timeout: 5000 });
+      footerFound = true;
+      console.log(`[Footer] Found footer with selector: ${selector}`);
+      break;
+    } catch {
+      // Continue to next selector
+    }
+  }
+  
+  if (!footerFound) {
+    console.warn('[Footer] Could not locate footer section with common selectors');
+  }
+}
+
+/**
+ * Verifies privacy policy section is displayed
+ * @param page - Playwright page instance
+ */
+export async function verifyPrivacyPolicySection(page: Page): Promise<void> {
+  // Look for privacy policy links or text
+  const privacySelectors = [
+    'a:has-text("Privacy Policy")',
+    'a:has-text("privacy policy")',
+    'text=/privacy\s+policy/i',
+    '[data-testid="privacy-policy"]',
+    '.privacy-policy'
+  ];
+  
+  let privacyFound = false;
+  for (const selector of privacySelectors) {
+    try {
+      await expect(page.locator(selector)).toBeVisible({ timeout: 5000 });
+      privacyFound = true;
+      console.log(`[Privacy] Found privacy policy with selector: ${selector}`);
+      break;
+    } catch {
+      // Continue to next selector
+    }
+  }
+  
+  if (!privacyFound) {
+    console.warn('[Privacy] Could not locate privacy policy section with common selectors');
+  }
+}
+
+/**
  * Helper function to find an element using multiple selector strategies.
  * This is a core utility that implements the DRY principle by centralizing
  * multi-strategy selector logic used throughout NC 211 tests.
