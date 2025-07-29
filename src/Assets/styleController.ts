@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export type ThemeName = 'default' | 'twoOneOne' | 'twoOneOneNC' | 'co_energy';
+export type ThemeName = 'default' | 'twoOneOne' | 'twoOneOneNC' | 'co_energy' | 'nc_lanc';
 
 export interface ITheme {
   primaryColor: string;
@@ -104,6 +104,31 @@ const themes: Themes = {
       '--option-card-hover-font-color': '#1D1C1E',
       '--footer-color': '#ffffff',
       '--active-border-color': '#21296B',
+    },
+  },
+  nc_lanc: {
+    primaryColor: '#003863',
+    secondaryColor: '#003863',
+    midBlueColor: '#003863',
+    footerColor: '#FFFFFF',
+    secondaryBackgroundColor: '#F7F7F7',
+    hoverColor: '#FFFFFF',
+    outlineHoverBackgroundColor: '#003863',
+    outlineHoverColor: '#FFFFFF',
+    progressBarColor: '#268FBF',
+    cssVariables: {
+      '--primary-color': '#003863',
+      '--secondary-color': '#003863',
+      '--secondary-background-color': '#F7F7F7',
+      '--main-max-width': '1310px',
+      'font-size': '18px',
+      '--midBlue-color': '#003863',
+      '--hover-color': '#FFFFFF',
+      '--icon-color': '#D6743F',
+      '--secondary-icon-color': '#000000',
+      '--option-card-hover-font-color': '#1D1C1E',
+      '--footer-color': '#FFFFFF',
+      '--active-border-color': '#8CCCF2',
     },
   },
   co_energy: {

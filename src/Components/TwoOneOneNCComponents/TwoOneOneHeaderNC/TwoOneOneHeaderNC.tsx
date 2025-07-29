@@ -21,7 +21,7 @@ type LanguageOptions = {
 };
 
 const TwoOneOneHeaderNC = () => {
-  const { formData, locale, selectLanguage } = useContext(Context);
+  const { locale, selectLanguage, whiteLabel } = useContext(Context);
   const languageOptions = useConfig<LanguageOptions>('language_options');
   const queryString = useQueryString();
   const intl = useIntl();
@@ -146,7 +146,7 @@ const TwoOneOneHeaderNC = () => {
       <Paper elevation={4} square={true} className="twoOneOne-header-container">
         <AppBar position="sticky" id="twoOneOne-nav-container" elevation={0} sx={{ backgroundColor: '#FFFFFF' }}>
           <Box>
-            <a href={`/step-1${queryString}`}>
+            <a href={`/${whiteLabel}/step-1${queryString}`}>
               <img src={NCtwoOneOneMFBLogo} alt={intl.formatMessage(logoAltText)} className="cobranded-logo" />
             </a>
           </Box>

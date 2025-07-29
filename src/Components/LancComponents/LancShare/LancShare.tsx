@@ -19,13 +19,13 @@ import IconButton from '@mui/material/IconButton';
 import { Context } from '../../Wrapper/Wrapper';
 import dataLayerPush from '../../../Assets/analytics';
 import { Stack } from '@mui/material';
-import './TwoOneOneShareNC.css';
+import './LancShare.css';
 
-type TwoOneOneShareProps = {
+type LancShareProps = {
   close: () => void;
 };
 
-const TwoOneOneShareNC = ({ close }: TwoOneOneShareProps) => {
+const LancShareNC = ({ close }: LancShareProps) => {
   const [copied, setCopied] = useState(false);
   const { getReferrer } = useContext(Context);
   const intl = useIntl();
@@ -63,7 +63,7 @@ const TwoOneOneShareNC = ({ close }: TwoOneOneShareProps) => {
     return (
       <span className={`${color} icon`}>
         {children}
-        <span className="twoOneOne-icon-name">{name}</span>
+        <span className="lanc-icon-name">{name}</span>
       </span>
     );
   };
@@ -84,43 +84,43 @@ const TwoOneOneShareNC = ({ close }: TwoOneOneShareProps) => {
   };
 
   return (
-    <Stack className="twoOneOne-share-container">
-      <IconButton aria-label={intl.formatMessage(closeALProps)} onClick={close} className="twoOneOne-share-close">
+    <Stack className="lanc-share-container">
+      <IconButton aria-label={intl.formatMessage(closeALProps)} onClick={close} className="lanc-share-close">
         <CloseIcon />
       </IconButton>
-      <h2 className="twoOneOne-share-header">
-        <FormattedMessage id="results.twoOneOne-share-header" defaultMessage="Share MyFriendBen with a friend:" />
+      <h2 className="lanc-share-header">
+        <FormattedMessage id="results.lanc-share-header" defaultMessage="Share MyFriendBen with a friend:" />
       </h2>
-      <div className="twoOneOne-share-icons">
-        <div className="twoOneOne-row-group">
+      <div className="lanc-share-icons">
+        <div className="lanc-row-group">
           <FacebookShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Facebook')}>
-            <Icon name="Facebook" color="twoOneOne-fb">
+            <Icon name="Facebook" color="lanc-fb">
               <FacebookIcon sx={iconSize} />
             </Icon>
           </FacebookShareButton>
           <TwitterShareButton url={shareUrl} onClick={trackOutboundLinks('Share to Twitter')}>
-            <Icon name="Twitter" color="twoOneOne-twitter">
+            <Icon name="Twitter" color="lanc-twitter">
               <TwitterIcon sx={iconSize} />
             </Icon>
           </TwitterShareButton>
         </div>
-        <div className="twoOneOne-row-group">
+        <div className="lanc-row-group">
           <WhatsappShareButton url={shareUrl} onClick={trackOutboundLinks('Share With WhatsApp')}>
-            <Icon name="WhatsApp" color="twoOneOne-whatsApp">
+            <Icon name="WhatsApp" color="lanc-whatsApp">
               <WhatsAppIcon sx={iconSize} />
             </Icon>
           </WhatsappShareButton>
           <FacebookMessengerShareButton
             url={shareUrl}
             appId={appId}
-            onClick={trackOutboundLinks('Share With Facebook Messanger')}
+            onClick={trackOutboundLinks('Share With Facebook Messenger')}
           >
-            <Icon name="Messenger" color="twoOneOne-messenger">
+            <Icon name="Messenger" color="lanc-messenger">
               <FacebookMessengerIcon size={20.5} />
             </Icon>
           </FacebookMessengerShareButton>
           <button onClick={copyLink} className="copy-link-btn">
-            <Icon name={copied ? labels.copied : labels.copyLink} color="twoOneOne-gray">
+            <Icon name={copied ? labels.copied : labels.copyLink} color="lanc-gray">
               {copied ? <CheckIcon sx={iconSize} /> : <LinkIcon sx={iconSize} />}
             </Icon>
           </button>
@@ -130,4 +130,4 @@ const TwoOneOneShareNC = ({ close }: TwoOneOneShareProps) => {
   );
 };
 
-export default TwoOneOneShareNC;
+export default LancShareNC;

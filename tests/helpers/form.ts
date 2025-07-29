@@ -89,29 +89,30 @@ export async function selectDate(page: Page, month: string, year: string): Promi
         // Wait for listbox to appear
         const listbox = page.locator('[role="listbox"]');
         await expect(listbox).toBeVisible({ timeout: renderTimeout });
-        
+
         // Wait for options to be available
         await listbox.locator('[role="option"]').first().waitFor({ state: 'visible', timeout: renderTimeout });
 
         // Find and click the target option
         const option = listbox.locator('[role="option"]').filter({ hasText: optionText }).first();
         await option.waitFor({ state: 'visible', timeout: renderTimeout });
-        
+
         // Small delay for DOM stability (addresses the detachment issue)
         await page.waitForTimeout(300);
-        
+
         await option.click({ timeout: optionTimeout });
 
         // Verify selection by checking dropdown closes
         await expect(listbox).not.toBeVisible({ timeout: 5000 });
-        
+
         return; // Success
-        
       } catch (error) {
         if (attempt === maxRetries) {
-          throw new Error(`Failed to select ${optionText} from ${buttonName} after ${maxRetries} attempts: ${error.message}`);
+          throw new Error(
+            `Failed to select ${optionText} from ${buttonName} after ${maxRetries} attempts: ${error.message}`,
+          );
         }
-        
+
         // Brief pause before retry
         await page.waitForTimeout(500);
       }
