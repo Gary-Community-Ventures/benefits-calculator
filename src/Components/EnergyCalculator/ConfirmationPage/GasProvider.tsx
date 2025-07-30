@@ -1,30 +1,24 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import ConfirmationBlock from '../../Confirmation/ConfirmationBlock';
 import { Context } from '../../Wrapper/Wrapper';
 import { ReactComponent as Stove } from '../Icons/Stove.svg';
-import { getProviderNames } from '../gasProviders';
 import { FormattedMessageType } from '../../../Types/Questions';
+import { OTHER_GAS_PROVIDERS } from '../providers';
 
 export default function EnergyCalculatorGasProvider() {
   const { formData } = useContext(Context);
   const { formatMessage } = useIntl();
 
-  const providerNames = useMemo(getProviderNames, []);
-
   const gasProvider = formData.energyCalculator?.gasProvider ?? 'other';
-  let providerName: string | FormattedMessageType = providerNames[gasProvider];
-  if (gasProvider === 'other') {
+
+  let providerName: string | FormattedMessageType;
+  if (formData.energyCalculator?.gasProviderName) {
+    providerName = formData.energyCalculator.gasProviderName;
+  } else if (OTHER_GAS_PROVIDERS[gasProvider]) {
+    providerName = OTHER_GAS_PROVIDERS[gasProvider];
+  } else {
     providerName = <FormattedMessage id="energyCalculator.gasProvider.other" defaultMessage="Other" />;
-  } else if (gasProvider === 'propane') {
-    providerName = (
-      <FormattedMessage
-        id="energyCalculator.gasProvider.propane"
-        defaultMessage="Propane tank / firewood / heating pellets"
-      />
-    );
-  } else if (gasProvider === 'none') {
-    providerName = <FormattedMessage id="energyCalculator.gasProvider.none" defaultMessage="None / Don't Pay" />;
   }
 
   const editGasProviderAriaLabel = {

@@ -72,6 +72,10 @@ const Header = () => {
       className += ' white-header';
     }
 
+    if (getReferrer('featureFlags').includes('small_header_language_dropdown')) {
+      className += ' small-header-language-dropdown';
+    }
+
     return className;
   }, [formData.frozen]);
 

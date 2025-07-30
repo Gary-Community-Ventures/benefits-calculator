@@ -14,7 +14,11 @@ export type EnergyCalculatorFormData = {
   isHomeOwner: boolean;
   isRenter: boolean;
   electricProvider: string;
+  /** the human readable electric provider name */
+  electricProviderName: string;
   gasProvider: string;
+  /** the human readable gas provider name */
+  gasProviderName: string;
   electricityIsDisconnected: boolean;
   hasPastDueEnergyBills: boolean;
   hasOldCar: boolean;
@@ -32,7 +36,8 @@ export type EnergyCalculatorMember = {
 export type HouseholdData = {
   id: number;
   frontendId: string;
-  age?: number; // deprecated: used for historical screens only
+  /** deprecated: used for historical screens only */
+  age?: number;
   birthYear?: number;
   birthMonth?: number;
   relationshipToHH: string;
@@ -110,6 +115,10 @@ export type Conditions = {
 
 export const isCustomTypedLocationState = (
   locationState: unknown,
-): locationState is { routedFromConfirmationPg: boolean } => {
-  return typeof locationState === 'object' && locationState !== null && 'routedFromConfirmationPg' in locationState;
+): locationState is { routedFromConfirmationPg?: boolean; routeBackToResults?: boolean } => {
+  return (
+    typeof locationState === 'object' &&
+    locationState !== null &&
+    ('routedFromConfirmationPg' in locationState || 'routeBackToResults' in locationState)
+  );
 };

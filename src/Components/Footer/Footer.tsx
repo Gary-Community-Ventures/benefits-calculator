@@ -11,6 +11,7 @@ import { FooterDataConfig } from '../../Types/Config';
 const Footer = () => {
   const footerData: FooterDataConfig = useConfig('footer_data');
   const privacyPolicyLink = useLocalizedLink('privacy_policy');
+  const termsAndConditionsLink = useLocalizedLink('consent_to_contact');
   const context = useContext(Context);
   const { getReferrer } = context;
 
@@ -44,6 +45,9 @@ const Footer = () => {
         <div className="footer-policy-container">
           <a href={privacyPolicyLink} target="_blank" className="policy-link">
             <FormattedMessage id="footer.privacyPolicy" defaultMessage="Privacy Policy" />
+          </a>
+          <a href={termsAndConditionsLink} target="_blank" className="policy-link">
+            <FormattedMessage id="footer.termsAndConditions" defaultMessage="Terms and Conditions" />
           </a>
         </div>
       </Paper>

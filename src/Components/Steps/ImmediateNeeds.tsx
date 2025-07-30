@@ -57,7 +57,7 @@ function ImmediateNeeds() {
       <QuestionQuestion>
         <FormattedMessage
           id="acuteHHConditions"
-          defaultMessage="Is anyone in your household in immediate need of help with any of the following?"
+          defaultMessage="Do you want / need information on any of the following resources?"
         />
       </QuestionQuestion>
       <form onSubmit={handleSubmit(submitHandler)}>
