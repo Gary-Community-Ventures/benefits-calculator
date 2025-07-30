@@ -15,6 +15,7 @@ import PoweredByFooter from '../Footer/PoweredByFooter';
 import EnergyCalculatorFooter from '../EnergyCalculator/Footer/Footer';
 import LancHeader from '../LancComponents/LancHeader/LancHeader';
 import LancFooter from '../LancComponents/LancFooter/LancFooter';
+import NCHispanicFederationFooter from '../NCHispanicFederation/NCHispanicFederationFooter/NCHispanicFederationFooter';
 
 export const BrandedHeader = () => {
   const { getReferrer } = useContext(Context);
@@ -45,6 +46,10 @@ export const BrandedFooter = () => {
 
   if (featureFlags.includes('211nc')) {
     return <TwoOneOneFooterNC />;
+  }
+
+  if (featureFlags.includes('hfed')) {
+    return <NCHispanicFederationFooter />;
   }
 
   if (featureFlags.includes('lanc')) {
