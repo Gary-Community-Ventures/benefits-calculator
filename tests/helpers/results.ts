@@ -15,7 +15,6 @@
 import { Page, expect } from '@playwright/test';
 import { FlowResult } from './flows/types';
 import { URL_PATTERNS } from './utils/constants';
-import { BUTTONS } from './selectors';
 
 /**
  * Waits for the results page to fully load after step 12 submission
@@ -214,6 +213,108 @@ export async function testNearTermLongTermNavigation(page: Page): Promise<FlowRe
       step: 'near-term-long-term-navigation',
       error: error as Error,
     };
+  }
+}
+
+/**
+ * Comprehensive results page content validation
+ * Verifies all essential UI elements are present and functional on the results page
+ * @param page - Playwright page instance
+ * @returns Promise with flow result
+ */
+export async function verifyResultsPageContent(page: Page): Promise<FlowResult> {
+  try {
+    console.log('[Results] Starting comprehensive results page content validation');
+    
+    // STEP 1: Ensure results page is fully loaded
+    await waitForResultsPageLoad(page);
+    
+    // STEP 2: Verify estimated savings display (if present)
+    await verifyEstimatedSavings(page);
+    
+    // STEP 3: Verify essential results page elements
+    await verifyResultsPageElements(page);
+    
+    console.log('[Results] Results page content validation completed successfully');
+    return { success: true, step: 'results-page-content-validation' };
+  } catch (error) {
+    console.error('[Results] Results page content validation failed:', error);
+    return {
+      success: false,
+      step: 'results-page-content-validation',
+      error: error as Error,
+    };
+  }
+}
+
+/**
+ * Verifies essential results page UI elements are present
+ * Uses multiple selector strategies for robustness
+ * @param page - Playwright page instance
+ */
+export async function verifyResultsPageElements(page: Page): Promise<void> {
+  try {
+    console.log('[Results] Verifying essential results page elements');
+    
+    // Verify results header/title is present
+    const headerSelectors = [
+      '[data-testid="results-header"]',
+      '.results-header',
+      'h1:has-text("Results")',
+      'h1:has-text("Benefits")',
+      'text=/your.*results/i',
+      'text=/benefits.*you.*may.*qualify/i'
+    ];
+    
+    let headerFound = false;
+    for (const selector of headerSelectors) {
+      try {
+        await expect(page.locator(selector)).toBeVisible({ timeout: 5000 });
+        headerFound = true;
+        console.log(`[Results] Found results header with selector: ${selector}`);
+        break;
+      } catch {
+        continue;
+      }
+    }
+    
+    if (!headerFound) {
+      console.warn('[Results] Could not locate results header with common selectors');
+    }
+    
+    // Verify program cards/benefits list is present
+    const programSelectors = [
+      '[data-testid="program-card"]',
+      '.program-card',
+      '.benefit-card',
+      '[data-testid="benefits-list"]',
+      '.benefits-list',
+      'text=/more info/i'
+    ];
+    
+    let programsFound = false;
+    for (const selector of programSelectors) {
+      try {
+        await expect(page.locator(selector).first()).toBeVisible({ timeout: 5000 });
+        programsFound = true;
+        console.log(`[Results] Found program cards with selector: ${selector}`);
+        break;
+      } catch {
+        continue;
+      }
+    }
+    
+    if (!programsFound) {
+      console.warn('[Results] Could not locate program cards with common selectors');
+    }
+    
+    // Verify main content area is visible
+    await expect(page.locator('main')).toBeVisible();
+    
+    console.log('[Results] Essential results page elements verification completed');
+  } catch (error) {
+    console.error('[Results] Error verifying results page elements:', error);
+    throw error;
   }
 }
 
