@@ -34,6 +34,16 @@ export const ENERGY_CALCULATOR_ITEMS = [
   'non_heat_pump_water_heater',
   // stove
   'electric_stove',
+  // efficiency & weatherization
+  'rooftop_solar_installation',
+  'battery_storage_installation',
+  'electric_wiring',
+  'electric_panel',
+  'smart_thermostat',
+  'electric_outdoor_equipment',
+  'heat_pump_clothes_dryer',
+  'non_heat_pump_clothes_dryer',
+  'energy_audit',
 ] as const;
 
 export type EnergyCalculatorItemType = (typeof ENERGY_CALCULATOR_ITEMS)[number];
@@ -104,7 +114,7 @@ export interface EnergyCalculatorAPIResponse {
 
 export type EnergyCalculatorRebate = EnergyCalculatorIncentive;
 
-export type EnergyCalculatorRebateCategoryType = 'hvac' | 'waterHeater' | 'stove';
+export type EnergyCalculatorRebateCategoryType = 'hvac' | 'waterHeater' | 'stove' | 'efficiencyWeatherization';
 
 export const ENERGY_CALCULATOR_CATEGORY_MAP: Record<EnergyCalculatorItemType, EnergyCalculatorRebateCategoryType> = {
   air_to_water_heat_pump: 'hvac',
@@ -116,6 +126,15 @@ export const ENERGY_CALCULATOR_CATEGORY_MAP: Record<EnergyCalculatorItemType, En
   heat_pump_water_heater: 'waterHeater',
   non_heat_pump_water_heater: 'waterHeater',
   electric_stove: 'stove',
+  rooftop_solar_installation: 'efficiencyWeatherization',
+  battery_storage_installation: 'efficiencyWeatherization',
+  electric_wiring: 'efficiencyWeatherization',
+  electric_panel: 'efficiencyWeatherization',
+  smart_thermostat: 'efficiencyWeatherization',
+  electric_outdoor_equipment: 'efficiencyWeatherization',
+  heat_pump_clothes_dryer: 'efficiencyWeatherization',
+  non_heat_pump_clothes_dryer: 'efficiencyWeatherization',
+  energy_audit: 'efficiencyWeatherization',
 };
 
 export const ENERGY_CALCULATOR_CATEGORY_TITLE_MAP: Record<EnergyCalculatorRebateCategoryType, FormattedMessageType> = {
@@ -129,6 +148,12 @@ export const ENERGY_CALCULATOR_CATEGORY_TITLE_MAP: Record<EnergyCalculatorRebate
     <FormattedMessage id="energyCalculator.results.category.waterHeater.title" defaultMessage="Water Heater" />
   ),
   stove: <FormattedMessage id="energyCalculator.results.category.stove.title" defaultMessage="Cooking Stove/Range" />,
+  efficiencyWeatherization: (
+    <FormattedMessage
+      id="energyCalculator.results.category.efficiencyWeatherization.title"
+      defaultMessage="Efficiency & Weatherization"
+    />
+  ),
 };
 
 export type EnergyCalculatorRebateCategory = {
@@ -165,6 +190,15 @@ export const renderCategoryDescription = (rebateType: EnergyCalculatorRebateCate
         />
       ),
       href: 'https://homes.rewiringamerica.org/projects/cooking-homeowner',
+    },
+    efficiencyWeatherization: {
+      formattedMessage: (
+        <FormattedMessage
+          id="efficiencyWeatherization.categoryDescription"
+          defaultMessage="You may qualify for rebates that reduce the cost of making your home more energy efficient. Inspections or work done on a rented home may require a landlord's consent. For more information, visit our partners at "
+        />
+      ),
+      href: 'https://homes.rewiringamerica.org/projects',
     },
   };
   const categoryDescription = categoryDescriptionMap[rebateType].formattedMessage;
