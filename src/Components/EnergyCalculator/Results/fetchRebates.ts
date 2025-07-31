@@ -43,6 +43,9 @@ function createQueryString(formData: FormData, lang: Language) {
   query.append('zip', formData.zipcode);
 
   let ownerStatus = 'homeowner';
+  if (formData.energyCalculator?.isRenter) {
+    ownerStatus = 'renter';
+  }
   query.append('owner_status', ownerStatus);
 
   const income = calcTotalIncome(formData);
@@ -129,7 +132,7 @@ export default function useFetchEnergyCalculatorRebates() {
   const isEnergyCalculator = useIsEnergyCalculator();
 
   useEffect(() => {
-    if (!isEnergyCalculator || !formData.energyCalculator?.isHomeOwner) {
+    if (!isEnergyCalculator || (!formData.energyCalculator?.isHomeOwner && !formData.energyCalculator?.isRenter)) {
       setRebates([]);
       return;
     }

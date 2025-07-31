@@ -91,7 +91,7 @@ const energyCalculators = {
     householdInfo: 'You have a past-due electric',
     noBenefit: true,
     expectedResult: {
-      programsCount: '7Programs Found',
+      programsCount: '7Programs Found8Rebates Found',
     },
   },
 };
