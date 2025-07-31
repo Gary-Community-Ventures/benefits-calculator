@@ -195,7 +195,7 @@ export const renderCategoryDescription = (rebateType: EnergyCalculatorRebateCate
       formattedMessage: (
         <FormattedMessage
           id="efficiencyWeatherization.categoryDescription"
-          defaultMessage="You may qualify for rebates that reduce the cost of making your home more energy efficient. Inspections or work done on a rented home may require a landlord's consent. For more information, visit our partners at "
+          defaultMessage="You may qualify for rebates that reduce the cost of electrifying your home or making it more energy efficient. Inspections or work done on a rented home may require a landlord's consent. For more information, visit our partners at "
         />
       ),
       href: 'https://homes.rewiringamerica.org/projects',
