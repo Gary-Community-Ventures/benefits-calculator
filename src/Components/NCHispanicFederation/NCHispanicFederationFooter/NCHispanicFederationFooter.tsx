@@ -25,7 +25,11 @@ const NCHispanicFederationFooter = () => {
   const displayDialStack = () => {
     return (
       <Stack direction="row" gap="2rem">
-        <img src={dialIcon} className="hfed-footer-icon" alt="talk to a HFED navigator via phone or get referral online" />
+        <img
+          src={dialIcon}
+          className="hfed-footer-icon"
+          alt="talk to a HFED navigator via phone or get referral online"
+        />
         <Box sx={{ textAlign: 'center' }}>
           <Typography>
             <FormattedMessage id="footer-dial-text-hfed" defaultMessage="Call the Helpline at " />
@@ -53,7 +57,7 @@ const NCHispanicFederationFooter = () => {
             aria-label={intl.formatMessage(hfedApplyALProps)}
             color="primary"
           >
-            Salud NC referral form 
+            Salud NC referral form
           </Link>
         </Box>
       </Stack>

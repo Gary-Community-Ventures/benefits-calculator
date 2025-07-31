@@ -48,7 +48,7 @@ export const BrandedFooter = () => {
     { flag: 'energy_calculator', component: EnergyCalculatorFooter },
     { flag: 'powered_by_mfb_footer', component: PoweredByFooter },
   ];
-  
+
   for (const { flag, component: Component } of footerMap) {
     if (featureFlags.includes(flag)) {
       return <Component />;
