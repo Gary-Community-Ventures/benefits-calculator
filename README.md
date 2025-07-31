@@ -15,7 +15,7 @@ Install dependencies: `npm install`
 
 #### Set environment variables:
 
-  Create an `.env` file and add the following
+  Create an `.env` file and add the following (available in "Frontend ENV Vars" in our 1Password Engineering vault):
 
   - REACT_APP_API_KEY
 
@@ -28,7 +28,6 @@ Install dependencies: `npm install`
   - REACT_APP_GOOGLE_ANALYTICS_ID [optional]
 
     - App id for google analytics
-
 
   Run server: `npm run dev`
 
