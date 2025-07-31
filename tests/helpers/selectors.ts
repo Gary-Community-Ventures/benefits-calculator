@@ -34,6 +34,9 @@ export const FORM_INPUTS = {
   DISCLAIMER_CHECKBOX_1: { role: 'checkbox' as const, name: 'By proceeding, you confirm' },
   DISCLAIMER_CHECKBOX_2: { role: 'checkbox' as const, name: 'I confirm I am 13 years of' },
 
+  SIGNUP_CHECKBOX_1: { role: 'checkbox' as const, name: 'Please notify me when new benefits' },
+  SIGNUP_CHECKBOX_2: { role: 'checkbox' as const, name: 'Please notify me about other programs or opportunities' },
+
   // Radio buttons
   YES_RADIO: { role: 'radio' as const, name: 'Yes' },
 
