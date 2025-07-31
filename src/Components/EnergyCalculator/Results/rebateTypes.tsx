@@ -168,7 +168,7 @@ export const renderCategoryDescription = (rebateType: EnergyCalculatorRebateCate
       formattedMessage: (
         <FormattedMessage
           id="hvac.categoryDescription"
-          defaultMessage="You may qualify for savings on the cost of a heat pump to make your home heating, ventilation, and/or cooling system more efficient. Heat pumps use less energy than other systems like gas furnaces and central air. You can type the estimated cost of a heat pump into one or more of the white boxes below to estimate your savings. For more information, visit our partners at "
+          defaultMessage="You may qualify for savings on the cost of a heat pump to make your home heating, ventilation, and/or cooling system more efficient. Heat pumps use less energy than other systems like gas furnaces and central air. You can type the estimated cost of a heat pump into one or more of the white boxes below to estimate your savings. Inspections or work done on a rented home may require a landlord's consent. For more information, visit our partners at "
         />
       ),
       href: 'https://homes.rewiringamerica.org/projects/heating-and-cooling-homeowner',
@@ -177,7 +177,7 @@ export const renderCategoryDescription = (rebateType: EnergyCalculatorRebateCate
       formattedMessage: (
         <FormattedMessage
           id="waterHeater.categoryDescription"
-          defaultMessage="You may qualify for savings on the cost of a heat pump water heater (HPWH). HPWHs are energy-efficient water heaters. They can help the average homeowner save hundreds of dollars in energy costs each year. You can type the estimated cost of a HPWH into one or more of the white boxes below to estimate your savings. For more information, visit our partners at "
+          defaultMessage="You may qualify for savings on the cost of a heat pump water heater (HPWH). HPWHs are energy-efficient water heaters. They can help the average homeowner save hundreds of dollars in energy costs each year. You can type the estimated cost of a HPWH into one or more of the white boxes below to estimate your savings. Inspections or work done on a rented home may require a landlord's consent. For more information, visit our partners at "
         />
       ),
       href: 'https://homes.rewiringamerica.org/projects/heating-and-cooling-homeowner',
@@ -186,7 +186,7 @@ export const renderCategoryDescription = (rebateType: EnergyCalculatorRebateCate
       formattedMessage: (
         <FormattedMessage
           id="stove.categoryDescription"
-          defaultMessage="You may qualify for savings on the cost of an electric / induction stove. These stoves are more energy-efficient than gas or traditional electric stoves. You can type the estimated cost of an electric / induction stove into the white box below to estimate your savings. For more information, visit our partners at "
+          defaultMessage="You may qualify for savings on the cost of an electric / induction stove. These stoves are more energy-efficient than gas or traditional electric stoves. You can type the estimated cost of an electric / induction stove into the white box below to estimate your savings. Inspections or work done on a rented home may require a landlord's consent. For more information, visit our partners at "
         />
       ),
       href: 'https://homes.rewiringamerica.org/projects/cooking-homeowner',
