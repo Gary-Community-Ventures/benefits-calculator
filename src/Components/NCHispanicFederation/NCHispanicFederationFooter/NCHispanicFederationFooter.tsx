@@ -44,7 +44,7 @@ const NCHispanicFederationFooter = () => {
             &nbsp;
           </Typography>
           <Typography>
-            <FormattedMessage id="footer-apply-text-hfed" defaultMessage="Apply online at " />
+            <FormattedMessage id="footer-apply-text-hfed" defaultMessage="Fill out the " />
           </Typography>
           <Link
             href="https://forms.office.com/r/TzwDbk2ixY"

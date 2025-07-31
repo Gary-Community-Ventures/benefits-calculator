@@ -40,28 +40,19 @@ export const BrandedFooter = () => {
   const { getReferrer } = useContext(Context);
   const featureFlags = getReferrer('featureFlags');
 
-  if (featureFlags.includes('211co')) {
-    return <TwoOneOneFooterCO />;
-  }
-
-  if (featureFlags.includes('211nc')) {
-    return <TwoOneOneFooterNC />;
-  }
-
-  if (featureFlags.includes('hfed')) {
-    return <NCHispanicFederationFooter />;
-  }
-
-  if (featureFlags.includes('lanc')) {
-    return <LancFooter />;
-  }
-
-  if (featureFlags.includes('energy_calculator')) {
-    return <EnergyCalculatorFooter />;
-  }
-
-  if (featureFlags.includes('powered_by_mfb_footer')) {
-    return <PoweredByFooter />;
+  const footerMap = [
+    { flag: '211co', component: TwoOneOneFooterCO },
+    { flag: '211nc', component: TwoOneOneFooterNC },
+    { flag: 'lanc', component: LancFooter },
+    { flag: 'hfed', component: NCHispanicFederationFooter },
+    { flag: 'energy_calculator', component: EnergyCalculatorFooter },
+    { flag: 'powered_by_mfb_footer', component: PoweredByFooter },
+  ];
+  
+  for (const { flag, component: Component } of footerMap) {
+    if (featureFlags.includes(flag)) {
+      return <Component />;
+    }
   }
 
   return <Footer />;
