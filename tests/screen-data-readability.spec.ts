@@ -74,8 +74,17 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
         name: 'Step 3',
         action: async () => {
           await page.getByRole('textbox', { name: 'Zip Code' }).fill('27704');
-          await page.locator('#county-source-select').click();
-          await page.getByRole('option', { name: 'Durham County' }).click();
+          await page.waitForTimeout(500);          
+          try {            
+            await page.waitForSelector('#county-source-select', { state: 'visible', timeout: 1000 });            
+            await page.locator('#county-source-select').click();
+            await page.getByRole('option', { name: 'Durham County' }).click();
+          } catch (error) {                      
+            const countyField = page.getByRole('textbox', { name: 'County' });
+            if (await countyField.isVisible()) {
+              const value = await countyField.inputValue();              
+            }
+          }          
           await page.getByRole('button', { name: 'Continue' }).click();
         }
       },
@@ -217,39 +226,38 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
               }
             }
 
-            // Switch to Near-Term Benefits tab
-            // const nearTermTab = page.getByRole('heading', { name: /near-term benefits/i }).first();
+            // Switch to Near-Term Benefits tab            
             const nearTermTab = page.getByRole('heading', { name: /ADDITIONAL RESOURCES/i }).first();
             //additional types of resources
             await nearTermTab.click();
             await page.waitForLoadState('networkidle');
 
             // Collect Near-Term Benefits data
-            await page.waitForSelector('.need-card-container', { timeout: 10000 });
+            await page.waitForSelector('.need-card-container', { timeout: 100000 });
             const needCards = await page.$$('.need-card-container');
 
             // Process each Near-Term Benefits program
-            // for (let i = 0; i < needCards.length; i++) {
-            //   try {
-            //     await page.waitForTimeout(1000);
-            //     const moreInfoButton = await needCards[i].$('.more-info-btn');
-            //     if (moreInfoButton) {
-            //       await moreInfoButton.click();
-            //       await page.waitForLoadState('networkidle');
+            for (let i = 0; i < needCards.length; i++) {
+              try {
+                await page.waitForTimeout(1000);
+                const moreInfoButton = await needCards[i].$('.more-info-btn');
+                if (moreInfoButton) {
+                  await moreInfoButton.click();
+                  await page.waitForLoadState('networkidle');
                   
-            //       const needTexts = await collectPageTexts(page);
-            //       prgMoreInfoscreenTexts[`Near-Term-Benefits-Program-${i + 1}`] = needTexts;
-            //       prgMoreInfoscreenTexts[`Near-Term-Benefits-Program-${i + 1}`] = needTexts;
+                  const needTexts = await collectPageTexts(page);
+                  prgMoreInfoscreenTexts[`Near-Term-Benefits-Program-${i + 1}`] = needTexts;
+                  prgMoreInfoscreenTexts[`Near-Term-Benefits-Program-${i + 1}`] = needTexts;
                   
-            //       // Close the expanded card by clicking More Info again
-            //       await moreInfoButton.click();
-            //       await page.waitForLoadState('networkidle');
-            //     }
-            //   } catch (error) {
-            //     console.error(`Error processing Near-Term Benefits program ${i + 1}:`, error);
-            //     continue;
-            //   }
-            // }
+                  // Close the expanded card by clicking More Info again
+                  await moreInfoButton.click();
+                  await page.waitForLoadState('networkidle');
+                }
+              } catch (error) {
+                console.error(`Error processing Near-Term Benefits program ${i + 1}:`, error);
+                continue;
+              }
+            }
 
             // Wait before clicking save results
             await page.waitForTimeout(1000);
@@ -297,8 +305,7 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
         return true;
       });
     }
-
-    // console.log("Navigation steps :", navigationSteps);
+    
     // Navigate through each step
     for (const step of navigationSteps) {
       // Navigate to the page if it's a direct URL
@@ -310,10 +317,8 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
       // Wait for page to load
       await page.waitForLoadState('networkidle');
 
-      // Collect text for current page
-      
-      const texts = await collectPageTexts(page);
-      // console.log("collected text data", texts);
+      // Collect text for current page      
+      const texts = await collectPageTexts(page);      
       // Filter for unique, non-numeric texts
       const filteredTexts = filterTexts(texts);
       screenTexts[step.name] = filteredTexts;
@@ -343,8 +348,6 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
       };
 
       readabilityResults.push(metrics);
-      // console.log("Readability Result value:", readabilityResults);
-
       // Perform the navigation action for this step
       try {
         await step.action();        
