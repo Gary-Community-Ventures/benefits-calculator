@@ -198,7 +198,7 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
           await page.waitForLoadState('domcontentloaded');
 
           try {
-            
+
             // First collect Long-Term Benefits data
             await page.waitForSelector('.result-program-container', { timeout: 10000 });
             const programCards = await page.$$('.result-program-container');
@@ -207,7 +207,16 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
             for (let i = 0; i < programCards.length; i++) {
               try {
                 await page.waitForTimeout(1000);
-                const moreInfoButton = await programCards[i].$('.result-program-more-info-button a');
+                // Re-query the program cards to ensure we have fresh elements
+                const currentCards = await page.$$('.result-program-container');
+                
+                // Check if the current index is still valid
+                if (i >= currentCards.length) {
+                  console.log(`Program card ${i + 1} no longer exists, skipping`);
+                  continue;
+                }
+                
+                const moreInfoButton = await currentCards[i].$('.result-program-more-info-button a');
                 if (moreInfoButton) {
                   await moreInfoButton.click();
                   await page.waitForLoadState('networkidle');
@@ -217,9 +226,6 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
                   
                   await page.goBack();
                   await page.waitForLoadState('networkidle');
-
-                  const updatedCards = await page.$$('.result-program-container');
-                  programCards[i + 1] = updatedCards[i + 1];
                 }
               } catch (error) {
                 console.error(`Error processing Long-Term Benefits program ${i + 1}:`, error);
@@ -241,13 +247,21 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
             for (let i = 0; i < needCards.length; i++) {
               try {
                 await page.waitForTimeout(1000);
-                const moreInfoButton = await needCards[i].$('.more-info-btn');
+                // Re-query the need cards to ensure we have fresh elements
+                const currentNeedCards = await page.$$('.need-card-container');
+                
+                // Check if the current index is still valid
+                if (i >= currentNeedCards.length) {
+                  console.log(`Need card ${i + 1} no longer exists, skipping`);
+                  continue;
+                }
+                
+                const moreInfoButton = await currentNeedCards[i].$('.more-info-btn');
                 if (moreInfoButton) {
                   await moreInfoButton.click();
                   await page.waitForLoadState('networkidle');
                   
                   const needTexts = await collectPageTexts(page);
-                  prgMoreInfoscreenTexts[`Near-Term-Benefits-Program-${i + 1}`] = needTexts;
                   prgMoreInfoscreenTexts[`Near-Term-Benefits-Program-${i + 1}`] = needTexts;
                   
                   // Close the expanded card by clicking More Info again
