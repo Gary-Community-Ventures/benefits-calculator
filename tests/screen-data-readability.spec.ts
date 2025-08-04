@@ -41,7 +41,7 @@ interface ReadabilityMetrics {
 }
 
 test.describe('Screen Text Collection and Readability Analysis', () => {  
-  test.setTimeout(120000);
+  test.setTimeout(180000); // Increased timeout for CI
   test('collect and analyze text readability', async ({ page }) => {        
     const navigationSteps = [
       {
@@ -56,6 +56,7 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
         name: 'State Selection',
         action: async () => {
           await page.locator('#state-source-select').click();
+          await page.waitForSelector('[role="option"]', { state: 'visible', timeout: 10000 });
           await page.getByRole('option', { name: 'North Carolina' }).click();
           await page.getByRole('button', { name: 'Continue' }).click();
         }
@@ -100,43 +101,65 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
         url: /\/nc\/.*\/step-5/,
         name: 'Step 5',
         action: async () => {
+            // Birth Month dropdown
             await page.getByRole('button', { name: 'Birth Month' }).click();
+            await page.waitForSelector('[role="option"]', { state: 'visible', timeout: 10000 });
             await page.getByRole('option', { name: 'March' }).click();
+            
+            // Birth Year dropdown  
             await page.getByRole('button', { name: 'Open' }).click();
+            await page.waitForSelector('[role="option"]', { state: 'visible', timeout: 10000 });
             await page.getByRole('option', { name: '1990' }).click();
+            
             await page.getByRole('button', { name: "I don't have or know if I" }).click();
             await page.getByRole('radio', { name: 'Yes' }).check();
+            
+            // Income Type dropdown
             await page.getByRole('button', { name: 'Income Type' }).click();
+            await page.waitForSelector('[role="option"]', { state: 'visible', timeout: 10000 });
             await page.getByRole('option', { name: 'Wages, salaries, tips' }).click();
+            
+            // Frequency dropdown
             await page.getByRole('button', { name: 'Frequency' }).click();
+            await page.waitForSelector('[role="option"]', { state: 'visible', timeout: 10000 });
             await page.getByRole('option', { name: 'every month' }).click();
+            
             await page.getByRole('textbox', { name: 'Amount' }).fill('2200');
             await page.getByRole('button', { name: 'Continue' }).click();
         }        
       },
       {
         url: /\/nc\/.*\/step-5/,
-        name: 'Step 5',
+        name: 'Step 5 - Second Member',
         action: 
           async () => {
+            // Birth Month dropdown
             await page.getByRole('button', { name: 'Birth Month' }).click();
+            await page.waitForSelector('[role="option"]', { state: 'visible', timeout: 10000 });
             await page.getByRole('option', { name: 'March' }).click();
+            
+            // Birth Year dropdown
             await page.getByRole('button', { name: 'Open' }).click();
+            await page.waitForSelector('[role="option"]', { state: 'visible', timeout: 10000 });
             await page.getByRole('option', { name: '1989' }).click();
+            
+            // Relationship dropdown
             await page.locator('#relationship-to-hh-select').click();
+            await page.waitForSelector('[role="option"]', { state: 'visible', timeout: 10000 });
             await page.getByRole('option', { name: 'Child', exact: true }).click();
+            
             await page.getByRole('button', { name: "They don't have or know if" }).click();
             await page.getByRole('button', { name: 'Continue' }).click();
           }        
       },
       {
         url: /\/nc\/.*\/step-6/,
-
         name: 'Step 6',
         action: 
           async () => {
             await page.getByRole('radio', { name: 'Yes' }).check();
             await page.getByRole('button', { name: 'Expense Type' }).click();
+            await page.waitForSelector('[role="option"]', { state: 'visible', timeout: 10000 });
             await page.getByRole('option', { name: 'Rent' }).click();
             await page.getByRole('textbox', { name: 'Amount' }).fill('2500');
             await page.getByRole('button', { name: 'Continue' }).click();
@@ -174,6 +197,7 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
         action: 
           async () => {
             await page.locator('#referral-source-select').click();
+            await page.waitForSelector('[role="option"]', { state: 'visible', timeout: 10000 });
             await page.getByRole('option', { name: 'Test / Prospective Partner' }).click();
             await page.getByRole('button', { name: 'Continue' }).click();
           }        
