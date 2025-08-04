@@ -228,7 +228,7 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
 
             // Switch to Near-Term Benefits tab            
             const nearTermTab = page.getByRole('heading', { name: /ADDITIONAL RESOURCES/i }).first();
-            
+            //additional types of resources
             await nearTermTab.click();
             await page.waitForLoadState('networkidle');
 
