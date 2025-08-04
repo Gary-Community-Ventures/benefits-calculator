@@ -92,7 +92,7 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
         url: /\/nc\/.*\/step-4/,
         name: 'Step 4',
         action: async () => {
-          await page.getByRole('textbox', { name: 'Household Size' }).fill('1');
+          await page.getByRole('textbox', { name: 'Household Size' }).fill('2');
           await page.getByRole('button', { name: 'Continue' }).click();
         }
       },
@@ -114,21 +114,21 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
             await page.getByRole('button', { name: 'Continue' }).click();
         }        
       },
-      // {
-      //   url: /\/nc\/.*\/step-5/,
-      //   name: 'Step 5',
-      //   action: 
-      //     async () => {
-      //       await page.getByRole('button', { name: 'Birth Month' }).click();
-      //       await page.getByRole('option', { name: 'March' }).click();
-      //       await page.getByRole('button', { name: 'Open' }).click();
-      //       await page.getByRole('option', { name: '1989' }).click();
-      //       await page.locator('#relationship-to-hh-select').click();
-      //       await page.getByRole('option', { name: 'Child', exact: true }).click();
-      //       await page.getByRole('button', { name: "They don't have or know if" }).click();
-      //       await page.getByRole('button', { name: 'Continue' }).click();
-      //     }        
-      // },
+      {
+        url: /\/nc\/.*\/step-5/,
+        name: 'Step 5',
+        action: 
+          async () => {
+            await page.getByRole('button', { name: 'Birth Month' }).click();
+            await page.getByRole('option', { name: 'March' }).click();
+            await page.getByRole('button', { name: 'Open' }).click();
+            await page.getByRole('option', { name: '1989' }).click();
+            await page.locator('#relationship-to-hh-select').click();
+            await page.getByRole('option', { name: 'Child', exact: true }).click();
+            await page.getByRole('button', { name: "They don't have or know if" }).click();
+            await page.getByRole('button', { name: 'Continue' }).click();
+          }        
+      },
       {
         url: /\/nc\/.*\/step-6/,
 
