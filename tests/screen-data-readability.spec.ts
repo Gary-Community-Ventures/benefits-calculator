@@ -198,6 +198,7 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
           await page.waitForLoadState('domcontentloaded');
 
           try {
+            
             // First collect Long-Term Benefits data
             await page.waitForSelector('.result-program-container', { timeout: 10000 });
             const programCards = await page.$$('.result-program-container');
