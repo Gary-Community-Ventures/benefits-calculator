@@ -28,6 +28,7 @@ import EnergyCalculatorLandingPage from './Components/EnergyCalculator/LandingPa
 import WhiteLabelRouter from './Components/RouterUtil/WhiteLabelRouter';
 import ValidateUuid from './Components/RouterUtil/ValidateUuid';
 import './App.css';
+import useCampaign from './Components/CampaignAnalytics/useCampaign';
 
 const App = () => {
   const location = useLocation();
@@ -47,6 +48,7 @@ const App = () => {
   const themeName = getReferrer('theme', 'default');
   const householdMemberStepNumber = useStepNumber('householdData', false);
   const ecHouseholdMemberStepNumber = useStepNumber('energyCalculatorHouseholdData', false);
+  useCampaign();
 
   useEffect(() => {
     changeTheme(themeName as 'default' | 'twoOneOne' | 'twoOneOneNC' | 'nc_lanc');
