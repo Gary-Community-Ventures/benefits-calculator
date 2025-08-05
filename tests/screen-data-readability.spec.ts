@@ -3,6 +3,21 @@ import { collectPageTexts } from './utils/page-text-collector';
 import * as fs from 'fs';
 import * as path from 'path';
 import {
+  completeStateSelection,
+  completeDisclaimer,
+  completeLocationInfo,
+  completeHouseholdSize,
+  completePrimaryUserInfo,
+  completeHouseholdMemberInfo,
+  completeExpenses,
+  completeAssets,
+  completePublicBenefits,
+  completeNeeds,
+  completeReferralSource,
+  completeAdditionalInfo,
+  navigateToResults,
+} from './helpers/flows/common';
+import {
   fleschKincaidGrade,
   fleschKincaidReadingEase,
   daleChallReadabilityScore,
@@ -41,7 +56,7 @@ interface ReadabilityMetrics {
 }
 
 test.describe('Screen Text Collection and Readability Analysis', () => {  
-  test.setTimeout(180000); // Increased timeout for CI
+  test.setTimeout(180000); 
   test('collect and analyze text readability', async ({ page }) => {        
     const navigationSteps = [
       {
@@ -55,63 +70,44 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
         url: '/select-state',
         name: 'State Selection',
         action: async () => {
-          await page.locator('#state-source-select').click();
-          await page.getByRole('option', { name: 'North Carolina' }).click();
-          await page.getByRole('button', { name: 'Continue' }).click();
+          await completeStateSelection(page, 'North Carolina');
         }
       },
       {
         url: '/nc/step-2',
         name: 'Step 2',
         action: async () => {
-          await page.getByRole('checkbox', { name: 'By proceeding, you confirm' }).check();
-          await page.getByRole('checkbox', { name: 'I confirm I am 13 years of' }).check();
-          await page.getByRole('button', { name: 'Continue' }).click();
+          await completeDisclaimer(page);
         }
       },
       {
         url: /\/nc\/.*\/step-3/,
         name: 'Step 3',
         action: async () => {
-          await page.getByRole('textbox', { name: 'Zip Code' }).fill('27704');
-          await page.waitForTimeout(500);          
-          try {            
-            await page.waitForSelector('#county-source-select', { state: 'visible', timeout: 1000 });            
-            await page.locator('#county-source-select').click();
-            await page.getByRole('option', { name: 'Durham County' }).click();
-          } catch (error) {                      
-            const countyField = page.getByRole('textbox', { name: 'County' });
-            if (await countyField.isVisible()) {
-              const value = await countyField.inputValue();              
-            }
-          }          
-          await page.getByRole('button', { name: 'Continue' }).click();
+          await completeLocationInfo(page, '27704', 'Durham County');
         }
       },
       {
         url: /\/nc\/.*\/step-4/,
         name: 'Step 4',
         action: async () => {
-          await page.getByRole('textbox', { name: 'Household Size' }).fill('2');
-          await page.getByRole('button', { name: 'Continue' }).click();
+          await completeHouseholdSize(page, '2');
         }
       },
       {
         url: /\/nc\/.*\/step-5/,
         name: 'Step 5',
         action: async () => {
-            await page.getByRole('button', { name: 'Birth Month' }).click();
-            await page.getByRole('option', { name: 'March' }).click();
-            await page.getByRole('button', { name: 'Open' }).click();
-            await page.getByRole('option', { name: '1990' }).click();
-            await page.getByRole('button', { name: "I don't have or know if I" }).click();
-            await page.getByRole('radio', { name: 'Yes' }).check();
-            await page.getByRole('button', { name: 'Income Type' }).click();
-            await page.getByRole('option', { name: 'Wages, salaries, tips' }).click();
-            await page.getByRole('button', { name: 'Frequency' }).click();
-            await page.getByRole('option', { name: 'every month' }).click();
-            await page.getByRole('textbox', { name: 'Amount' }).fill('2200');
-            await page.getByRole('button', { name: 'Continue' }).click();
+            await completePrimaryUserInfo(page, {
+                birthMonth: 'March',
+                birthYear: '1990',
+                hasIncome: true,
+                income: {
+                    type: 'Wages, salaries, tips',
+                    frequency: 'every month',
+                    amount: '2200'
+                }
+            });
         }        
       },
       {
@@ -119,27 +115,24 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
         name: 'Step 5',
         action: 
           async () => {
-            await page.getByRole('button', { name: 'Birth Month' }).click();
-            await page.getByRole('option', { name: 'March' }).click();
-            await page.getByRole('button', { name: 'Open' }).click();
-            await page.getByRole('option', { name: '1989' }).click();
-            await page.locator('#relationship-to-hh-select').click();
-            await page.getByRole('option', { name: 'Child', exact: true }).click();
-            await page.getByRole('button', { name: "They don't have or know if" }).click();
-            await page.getByRole('button', { name: 'Continue' }).click();
+            await completeHouseholdMemberInfo(page, {
+              birthMonth: 'March',
+              birthYear: '1989',
+              relationship: 'Child',
+              hasIncome: false  
+            });
           }        
       },
       {
         url: /\/nc\/.*\/step-6/,
-
         name: 'Step 6',
         action: 
           async () => {
-            await page.getByRole('radio', { name: 'Yes' }).check();
-            await page.getByRole('button', { name: 'Expense Type' }).click();
-            await page.getByRole('option', { name: 'Rent' }).click();
-            await page.getByRole('textbox', { name: 'Amount' }).fill('2500');
-            await page.getByRole('button', { name: 'Continue' }).click();
+            await completeExpenses(page, {
+              hasExpenses: true,
+              type: 'Rent',
+              amount: '2500'
+            });
           }        
       },
       {
@@ -147,48 +140,47 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
         name: 'Step 7',
         action: 
           async () => {
-            await page.getByRole('textbox', { name: 'Dollar Amount' }).fill('100');
-            await page.getByRole('button', { name: 'Continue' }).click();
+            await completeAssets(page, '100');
           }        
       },
       {
         url: /\/nc\/.*\/step-8/,
         name: 'Step 8',
-        action: 
-          async () => await page.getByRole('button', { name: 'Continue' }).click()        
+        action: async () => {
+          await completePublicBenefits(page);
+        }
       },
       {
         url: /\/nc\/.*\/step-9/,
         name: 'Step 9',
-        action: 
-          async () => {
-            await page.getByRole('button', { name: 'Food or groceries' }).click();
-            await page.getByRole('button', { name: "Concern about your child's" }).click();
-            await page.getByRole('button', { name: 'Free or low-cost help with' }).click();
-            await page.getByRole('button', { name: 'Continue' }).click();
-          }        
+        action: async () => {
+          await completeNeeds(page, [
+            'Food or groceries',
+            "Concern about your child's",
+            'Free or low-cost help with'
+          ]);
+        }
       },
       {
         url: /\/nc\/.*\/step-10/,
         name: 'Step 10',
-        action: 
-          async () => {
-            await page.locator('#referral-source-select').click();
-            await page.getByRole('option', { name: 'Test / Prospective Partner' }).click();
-            await page.getByRole('button', { name: 'Continue' }).click();
-          }        
+        action: async () => {
+          await completeReferralSource(page, 'Test / Prospective Partner');
+        }
       },
       {
         url: /\/nc\/.*\/step-11/,
         name: 'Step 11',
-        action: 
-          async () => await page.getByRole('button', { name: 'Continue' }).click()        
+        action: async () => {
+          await completeAdditionalInfo(page);
+        }
       },
       {
         url: /\/nc\/.*\/confirm-information/,
         name: 'Step confirm',
-        action: 
-          async () => await page.getByRole('button', { name: 'Continue' }).click()        
+        action: async () => {
+          await navigateToResults(page);
+        }
       },       
       {
         url: /\/nc\/.*\/results\/benefits\/?admin=true/,
@@ -323,8 +315,7 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
     
     // Navigate through each step
     for (const step of navigationSteps) {
-      // Navigate to the page if it's a direct URL
-      // console.log("navigationSteps url link:", step);
+      // Navigate to the page if it's a direct URL      
       if (typeof step.url === 'string') {
         await page.goto(step.url);
       }
@@ -332,7 +323,6 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
       // Wait for page to load
       await page.waitForLoadState('networkidle');
 
-      // Collect text for current page      
       const texts = await collectPageTexts(page);      
       // Filter for unique, non-numeric texts
       const filteredTexts = filterTexts(texts);
@@ -370,8 +360,7 @@ test.describe('Screen Text Collection and Readability Analysis', () => {
         throw error;
       }
 
-      // Wait for navigation to complete
-      await page.waitForLoadState('networkidle');
+     await page.waitForLoadState('networkidle');
     }
 
     // Generate reports
