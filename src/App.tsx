@@ -27,6 +27,7 @@ import HouseholdMemberForm from './Components/Steps/HouseholdMembers/HouseholdMe
 import EnergyCalculatorLandingPage from './Components/EnergyCalculator/LandingPage/LandingPage';
 import WhiteLabelRouter from './Components/RouterUtil/WhiteLabelRouter';
 import ValidateUuid from './Components/RouterUtil/ValidateUuid';
+import FaviconManager from './Components/FaviconManager/FaviconManager';
 import './App.css';
 
 const App = () => {
@@ -144,6 +145,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div className="app">
         <CssBaseline />
+        <FaviconManager />
         <BrandedHeader />
         <Box className="main-max-width">
           <Routes>
