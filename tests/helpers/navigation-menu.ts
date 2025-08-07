@@ -195,9 +195,6 @@ export async function testNC211NavigationMenu(page: Page): Promise<FlowResult> {
   try {
     console.log('[Navigation] Starting NC 211 navigation menu test');
     
-    // Store original URL to return to after testing
-    const originalUrl = page.url();
-    
     // Verify all navigation links are present
     await verifyAllNC211NavigationLinks(page);
     

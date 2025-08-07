@@ -11,7 +11,7 @@
  * - Follows same patterns as nc.ts for consistency
  */
 
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { navigateToNC211Workflow, clickGetStarted, verifyCurrentUrl, verifyReferrerUrl } from '../navigation';
 import {
   completeDisclaimer,
@@ -29,7 +29,6 @@ import {
 } from './common';
 import { URL_PATTERNS, REFERRERS } from '../utils/constants';
 import { ApplicationData, FlowResult } from './types';
-import { BUTTONS } from '../selectors';
 
 /**
  * Sets up a test session for the NC 211 referrer workflow, getting to the first step after disclaimer

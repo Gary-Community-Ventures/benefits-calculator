@@ -18,9 +18,6 @@ export * from './utils/constants';
 export * from './utils/test-data';
 export * from './utils/test-config';
 
-// Test setup utilities
-export * from './test-setup';
-
 // Flow helpers for complex user journeys
 export * from './flows/types';
 export * from './flows/common';

@@ -4,6 +4,19 @@
 
 This guide explains the NC (North Carolina) workflow testing framework for developers, covering both the standard NC workflow and the NC 211 referrer workflow. These tests validate white-labeled versions of the benefits calculator with different branding and entry points but identical form functionality.
 
+## Prerequisites & Setup
+
+### Environment Variables
+
+Before running tests, create a `.env.test` file in the project root:
+
+```bash
+# Required for Playwright tests
+BASE_URL=http://localhost:3000
+```
+
+**Note**: The dev server starts automatically when running tests via npm scripts.
+
 ## Key Concepts
 
 ### NC Workflows Overview
@@ -295,11 +308,23 @@ export const testUsers = {
 
 ## Running Tests
 
-### Run All NC Workflow Tests
+### Quick Start Commands
 ```bash
-# Run all end-to-end tests (includes both NC and NC 211)
+# Run all Playwright tests
 npm run test:e2e
 
+# Interactive UI mode (recommended for debugging)
+npm run test:e2e:ui
+
+# Visual mode (shows browser)
+npm run test:e2e:visual
+
+# View test report
+npm run test:e2e:report
+```
+
+### Run Specific NC Workflow Tests
+```bash
 # Run specific test files
 npx playwright test tests/nc-end-to-end.spec.ts
 npx playwright test tests/nc-211-workflow.spec.ts
@@ -308,35 +333,42 @@ npx playwright test tests/nc-211-workflow.spec.ts
 npx playwright test tests/nc-end-to-end.spec.ts tests/nc-211-workflow.spec.ts
 ```
 
-### Run Specific Tests
+### Run Tests by Pattern
 ```bash
 # Run specific NC 211 test by name
 npx playwright test tests/nc-211-workflow.spec.ts -g "landing page static content"
 
 # Run specific NC test by name
 npx playwright test tests/nc-end-to-end.spec.ts -g "start to finish"
-```
 
-### Debug and UI Mode
-```bash
-# Run tests with Playwright UI (recommended for debugging)
-npm run test:e2e:ui
-
-# Run specific test in UI mode
-npx playwright test tests/nc-211-workflow.spec.ts --ui
-
-# Run tests in debug mode
+# Debug specific test
 npx playwright test tests/nc-211-workflow.spec.ts --debug
-
-# Run visual tests in UI mode
-npm run test:e2e:visual
 ```
 
-### View Test Reports
-```bash
-# Show test report after running tests
-npm run test:e2e:report
+## Basic Test Example
+
+Here's a simple smoke test that demonstrates the basic structure:
+
+```typescript
+import { test, expect } from '@playwright/test';
+
+test('application loads with expected elements', async ({ page }) => {
+  // Navigate to the application
+  await page.goto('/');
+
+  // Verify page loaded and URL contains 'step-1'
+  await expect(page).toHaveURL(/step-1/);
+
+  // Check for language selector and Get Started button
+  const languageSelector = page.locator('select, [aria-label*="language"]');
+  await expect(languageSelector).toBeVisible();
+  
+  const getStartedButton = page.getByRole('button', { name: /get started/i });
+  await expect(getStartedButton).toBeVisible();
+});
 ```
+
+This test verifies basic application loading and navigation. For more complex workflows, see the NC workflow examples above.
 
 ## Best Practices for Developers
 
@@ -391,4 +423,9 @@ npm run test:e2e:report
 2. **Add explicit waits** - Wait for specific conditions
 3. **Check DOM stability** - Ensure elements are stable before interaction
 
-This guide should help developers understand and maintain the NC 211 testing framework effectively.
+## Additional Resources
+
+- [Playwright Documentation](https://playwright.dev/docs/intro) - Official Playwright documentation
+- Main configuration: `playwright.config.ts`
+- Test helpers: `tests/helpers/` directory
+- Test data: `tests/helpers/utils/test-data.ts`
