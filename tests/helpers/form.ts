@@ -55,6 +55,15 @@ export async function checkCheckbox(page: Page, labelText: string): Promise<void
 }
 
 /**
+ * Unchecks a checkbox with the specified label
+ * @param page - Playwright page instance
+ * @param labelText - Label text of the checkbox
+ */
+export async function UncheckCheckbox(page: Page, labelText: string): Promise<void> {
+  await page.getByRole('checkbox', { name: labelText }).uncheck();
+}
+
+/**
  * Selects birth month and year with improved stability for flaky dropdowns
  * @param page - Playwright page instance
  * @param month - Month to select (e.g., 'January')
