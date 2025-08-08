@@ -189,6 +189,17 @@ const Wrapper = (props: PropsWithChildren<{}>) => {
     document.documentElement.removeAttribute('dir');
   }, [locale]);
 
+  useEffect(() => {
+    if (!referrerData) return;
+    const defaultLang = getReferrer('defaultLanguage', 'en-us');
+    const theme = getReferrer('theme', 'default');
+
+    const isCobrand = theme !== 'default';
+    if (isCobrand && defaultLang !== 'en-us') {
+      setLocale(defaultLang as Language);
+    }
+  }, [referrerData]);
+
   const selectLanguage = (newLocale: string) => {
     if (languages.every((lang) => lang !== newLocale)) {
       setLocale('en-us');
