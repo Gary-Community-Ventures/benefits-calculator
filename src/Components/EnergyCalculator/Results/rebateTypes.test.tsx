@@ -25,8 +25,7 @@ describe('renderCategoryDescription hvac provider copy', () => {
     for (const copy of sharedCopy) {
       expect(screen.getByText(copy)).toBeInTheDocument();
     }
-    // MFB-1680 removed the Efficiency Works service provider line; neither
-    // provider gets a contractor link.
+    // Neither provider gets a contractor link.
     expect(screen.queryByText(/consult with an/i)).not.toBeInTheDocument();
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
   });
