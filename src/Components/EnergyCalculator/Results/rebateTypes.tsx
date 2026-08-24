@@ -251,43 +251,10 @@ export const renderCategoryDescription = (rebateType: EnergyCalculatorRebateCate
   if (rebateType === 'hvac' && formData) {
     const providerType = getHeatPumpProviderType(formData);
 
-    // Provider-specific content for heat pumps
-    if (providerType === 'xcel') {
-      return (
-        <article className="category-description-article">
-          {renderSharedHeatPumpContent()}
-        </article>
-      );
-    }
-
-    if (providerType === 'efficiency_works') {
-      return (
-        <article className="category-description-article">
-          {renderSharedHeatPumpContent()}
-          <p className="energy-calculator-p-spacing">
-            <FormattedMessage
-              id="co.energy.heat_pump_efficiency_works_p3"
-              defaultMessage="Consult with an {contractorLink} to determine your heat pump unit size and potential rebate."
-              values={{
-                contractorLink: (
-                  <TrackedOutboundLink
-                    href="https://efficiencyworks.my.site.com/tradeally/s/findtradeally"
-                    className="link-color"
-                    action="efficiency_works_contractor_click"
-                    label="Efficiency Works service provider"
-                    category="energy_rebate"
-                  >
-                    <FormattedMessage
-                      id="co.energy.heat_pump_contractor_link_efficiency_works"
-                      defaultMessage="Efficiency Works service provider"
-                    />
-                  </TrackedOutboundLink>
-                ),
-              }}
-            />
-          </p>
-        </article>
-      );
+    // Xcel and Efficiency Works customers get the shared copy only; other
+    // providers also get the generic contractor search link below.
+    if (providerType === 'xcel' || providerType === 'efficiency_works') {
+      return <article className="category-description-article">{renderSharedHeatPumpContent()}</article>;
     }
 
     // Default/Other providers
