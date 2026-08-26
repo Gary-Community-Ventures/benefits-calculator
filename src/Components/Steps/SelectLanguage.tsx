@@ -8,7 +8,7 @@ import QuestionHeader from '../QuestionComponents/QuestionHeader';
 import { useQueryString } from '../QuestionComponents/questionHooks';
 import FormContinueButton from '../ContinueButton/FormContinueButton';
 import QuestionQuestion from '../QuestionComponents/QuestionQuestion';
-import { STATES } from './SelectStatePage';
+import { useStateOptions } from '../../Assets/stateOptions';
 import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
 import { useUpdateWhiteLabelAndNavigate } from '../RouterUtil/RedirectToWhiteLabel';
 import { usePageTitle } from '../Common/usePageTitle';
@@ -21,6 +21,8 @@ const SelectLanguagePage = () => {
   const { locale, selectLanguage, configLoading } = useContext(Context);
   const languageOptions = useConfig<{ [key: string]: string }>('language_options');
   const { whiteLabel, uuid } = useParams();
+  // The referrer can narrow this list; see useStateOptions.
+  const states = useStateOptions();
 
   const queryString = useQueryString();
   const navigate = useNavigate();
@@ -106,7 +108,7 @@ const SelectLanguagePage = () => {
       return;
     }
 
-    const stateCodes = Object.keys(STATES);
+    const stateCodes = Object.keys(states);
 
     if (stateCodes.length > 1) {
       navigate(`/select-state${queryString}`);

@@ -16,25 +16,14 @@ import { OTHER_PAGE_TITLES } from '../../Assets/pageTitleTags';
 import { usePageTitle } from '../Common/usePageTitle';
 import { useTrackEvent } from '../../Assets/analytics';
 import { PRE_DIRECTORY_STEP_IDS } from '../../Assets/analytics/stepIds';
+import { useStateOptions } from '../../Assets/stateOptions';
 
 const SELECT_STATE_STEP_ANALYTICS_ID = PRE_DIRECTORY_STEP_IDS.selectState;
 
-// States shown in the public "What is your state?" dropdown. A white label can
-// be live and directly reachable at /{state} (see ALL_VALID_WHITE_LABELS) without
-// appearing here — KS and MO are omitted because they are not yet publicly launched.
-export const STATES: { [key: string]: string } = {
-  co: 'Colorado',
-  il: 'Illinois',
-  // ks: 'Kansas',
-  ma: 'Massachusetts',
-  // mo: 'Missouri',
-  nc: 'North Carolina',
-  tx: 'Texas',
-  wa: 'Washington',
-};
-
 const SelectStatePage = () => {
   const { whiteLabel, uuid } = useParams();
+  // The referrer can narrow this list; see useStateOptions.
+  const states = useStateOptions();
 
   const queryString = useQueryString();
   const navigate = useNavigate();
@@ -98,7 +87,7 @@ const SelectStatePage = () => {
       </MenuItem>
     );
 
-    const dropdownMenuItems = Object.entries(STATES).map(([value, message]) => {
+    const dropdownMenuItems = Object.entries(states).map(([value, message]) => {
       return (
         <MenuItem value={value} key={value}>
           {message}
