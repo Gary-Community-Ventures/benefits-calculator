@@ -21,7 +21,6 @@ const SelectLanguagePage = () => {
   const { locale, selectLanguage, configLoading } = useContext(Context);
   const languageOptions = useConfig<{ [key: string]: string }>('language_options');
   const { whiteLabel, uuid } = useParams();
-  // The referrer can narrow this list; see useStateOptions.
   const states = useStateOptions();
 
   const queryString = useQueryString();
@@ -108,18 +107,19 @@ const SelectLanguagePage = () => {
       return;
     }
 
-    const stateCodes = Object.keys(states);
-
-    if (stateCodes.length > 1) {
+    // Only skip the state page when there is exactly one state to skip it for.
+    if (states.length !== 1) {
       navigate(`/select-state${queryString}`);
       return;
     }
 
-    updateWhiteLabelAndNavigate(stateCodes[0], `/${stateCodes[0]}/step-2${queryString}`);
+    const stateCode = states[0].code;
+
+    updateWhiteLabelAndNavigate(stateCode, `/${stateCode}/step-2${queryString}`);
     // wait for the new config to be loaded
     const interval = setInterval(() => {
       if (!configLoading) {
-        navigate(`/${stateCodes[0]}/step-2${queryString}`);
+        navigate(`/${stateCode}/step-2${queryString}`);
         clearInterval(interval);
       }
     }, 1);

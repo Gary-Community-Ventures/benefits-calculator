@@ -1,38 +1,27 @@
 import { useContext } from 'react';
 import { Context } from '../Components/Wrapper/Wrapper';
+import { useConfig } from '../Components/Config/configHook';
+import { ALL_VALID_WHITE_LABELS, WhiteLabel } from '../Types/WhiteLabel';
 
-// Display names for every white label that is a state, including ones that are not publicly
-// launched, so a referrer can be pointed at them by code.
-export const STATE_NAMES: { [key: string]: string } = {
-  co: 'Colorado',
-  il: 'Illinois',
-  ks: 'Kansas',
-  ma: 'Massachusetts',
-  mo: 'Missouri',
-  nc: 'North Carolina',
-  tx: 'Texas',
-  wa: 'Washington',
+export type StateOption = {
+  code: string;
+  name: string;
+  public: boolean;
 };
 
-// States shown in the public "What is your state?" dropdown. A white label can be live and
-// directly reachable at /{state} (see ALL_VALID_WHITE_LABELS) without appearing here — KS and MO
-// are omitted because they are not yet publicly launched.
-export const PUBLIC_STATE_CODES = ['co', 'il', 'ma', 'nc', 'tx', 'wa'];
-
-/**
- * The state dropdown options as `{ code: name }`, in the order they should be listed.
- *
- * A referrer can replace the public list through the `stateOptions` referrer config on the
- * `_default` white label (the only config loaded before a state is chosen): the KS and MO 2-1-1s
- * serve the Kansas City metro on both sides of the state line, so their links offer KS and MO
- * even though neither is public yet. An empty or unrecognized override falls back to the public
- * list rather than rendering an empty dropdown.
- */
-export function useStateOptions(): { [key: string]: string } {
+/** The states the "What is your state?" dropdown should offer, in display order. */
+export function useStateOptions(): StateOption[] {
   const { getReferrer } = useContext(Context);
+  // Derived by the API from its white label registry, so a new or newly launched state needs no change here.
+  const catalog = useConfig<StateOption[]>('state_options', []);
 
-  const referrerStateCodes = getReferrer('stateOptions', []).filter((code) => code in STATE_NAMES);
-  const stateCodes = referrerStateCodes.length > 0 ? referrerStateCodes : PUBLIC_STATE_CODES;
+  // A state the API offers but this build has no route for would dead-end at /{code}.
+  const routable = catalog.filter((state) => ALL_VALID_WHITE_LABELS.includes(state.code as WhiteLabel));
 
-  return Object.fromEntries(stateCodes.map((code) => [code, STATE_NAMES[code]]));
+  // A referrer may name states that are not public yet, as the KS and MO 2-1-1s do for the Kansas City metro.
+  const selected = getReferrer('stateOptions', [])
+    .map((code) => routable.find((state) => state.code === code))
+    .filter((state): state is StateOption => state !== undefined);
+
+  return selected.length > 0 ? selected : routable.filter((state) => state.public);
 }

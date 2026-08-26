@@ -27,8 +27,16 @@ jest.mock('../../Assets/analytics', () => ({
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
+const CATALOG = [
+  { code: 'co', name: 'Colorado', public: true },
+  { code: 'ks', name: 'Kansas', public: false },
+  { code: 'mo', name: 'Missouri', public: false },
+  { code: 'wa', name: 'Washington', public: true },
+];
+
 function renderPage(referrerStates: string[]) {
   const contextValue = createMockContextValue({
+    config: { state_options: CATALOG } as any,
     getReferrer: ((key: string, defaultValue: unknown) =>
       key === 'stateOptions' ? referrerStates : defaultValue) as any,
   });
@@ -58,12 +66,12 @@ function openStateDropdown() {
 // ─── Tests ───────────────────────────────────────────────────────────────────
 
 describe('SelectStatePage', () => {
-  it('offers the public states when the referrer sets no state options', () => {
+  it("offers the catalog's public states when the referrer sets no state options", () => {
     renderPage([]);
 
     const states = openStateDropdown();
 
-    expect(states).toEqual(['Colorado', 'Illinois', 'Massachusetts', 'North Carolina', 'Texas', 'Washington']);
+    expect(states).toEqual(['Colorado', 'Washington']);
   });
 
   it('offers only Kansas and Missouri for a referrer scoped to those states', () => {

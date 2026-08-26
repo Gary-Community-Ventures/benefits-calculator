@@ -22,7 +22,6 @@ const SELECT_STATE_STEP_ANALYTICS_ID = PRE_DIRECTORY_STEP_IDS.selectState;
 
 const SelectStatePage = () => {
   const { whiteLabel, uuid } = useParams();
-  // The referrer can narrow this list; see useStateOptions.
   const states = useStateOptions();
 
   const queryString = useQueryString();
@@ -87,10 +86,10 @@ const SelectStatePage = () => {
       </MenuItem>
     );
 
-    const dropdownMenuItems = Object.entries(states).map(([value, message]) => {
+    const dropdownMenuItems = states.map(({ code, name }) => {
       return (
-        <MenuItem value={value} key={value}>
-          {message}
+        <MenuItem value={code} key={code}>
+          {name}
         </MenuItem>
       );
     });
