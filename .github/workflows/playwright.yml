@@ -41,7 +41,7 @@ jobs:
       #     publish_branch: gh-pages
 
       - name: Add Github Actions report
-        uses: daun/playwright-report-summary@v3
+        uses: daun/playwright-report-summary@v4
         if: always()
         with:
           report-file: results.json
