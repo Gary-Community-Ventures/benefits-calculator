@@ -33,7 +33,7 @@ jobs:
         uses: ./.github/actions/setup-node-dependencies
 
       - name: Run linters
-        uses: wearerequired/lint-action@v2
+        uses: wearerequired/lint-action@v3.0.2
         with:
           eslint: true
           prettier: true
