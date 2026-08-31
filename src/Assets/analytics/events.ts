@@ -197,7 +197,8 @@ export interface ScreenerEventMap {
   screener_feedback_click: { channel: 'survey' | 'email' };
 
   // ---- BenBot chatbot ----
-  screener_benbot_opened: { entry: 'fab' | 'guide_me' };
+  // 'auto' = the widget opened itself on results-page load (MFB-1737).
+  screener_benbot_opened: { entry: 'fab' | 'auto' };
   screener_benbot_closed: {};
   screener_benbot_message_sent: {};
   screener_benbot_error: {};
