@@ -8,6 +8,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { parseMarkdown } from '../../../utils/parseMarkdown';
 import {
   startAssistantConversation,
+  getAssistantHistory,
   sendAssistantMessage,
   AssistantApiMessage,
   AssistantVisibleProgram,
@@ -79,7 +80,8 @@ export function useChatbotContext() {
 }
 
 function renderFormattedMessage(text: string): React.ReactNode {
-  const PRIMARY_COLOR = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() || '#1976d2';
+  const PRIMARY_COLOR =
+    getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() || '#1976d2';
   const lines = text.split('\n');
   const elements: React.ReactNode[] = [];
   let bulletBuffer: string[] = [];
@@ -223,6 +225,42 @@ export function ChatbotProvider({ visiblePrograms, children }: PropsWithChildren
     }, AUTO_OPEN_DELAY_MS);
     return () => clearTimeout(timer);
   }, [panel, uuid, visiblePrograms, track]);
+
+  // Restore a returning household's transcript when the widget opens.
+  //
+  // The emailed results link brings them back to the same screen_uuid, so their
+  // conversation is still there — but nothing used to fetch it until they sent a
+  // message, so they landed on the generic welcome and their history appeared all at
+  // once above their next question. This reads it on open instead.
+  //
+  // Two deliberate choices:
+  //
+  // 1. It does NOT set `conversationIdRef`. That looks like an obvious optimization
+  //    (we know the id now, so why let the next send POST the start endpoint again?)
+  //    and it would be a bug: `ensureConversation` returns early when the ref is set,
+  //    and the start call is what refreshes ai-service's stored context snapshot.
+  //    Skipping it would leave a returning household's assistant reasoning from the
+  //    program list as it was on their last visit — the MFB-1427 failure, reintroduced
+  //    through the back door. The start call on their first message returns this same
+  //    history, so nothing is duplicated and nothing is lost.
+  // 2. It only fills an EMPTY transcript. A fast first send can land before this
+  //    resolves, and overwriting state at that point would drop the message the user
+  //    just typed.
+  //
+  // Best-effort: a failure here leaves the welcome exactly as it was before, so it
+  // deliberately emits no error event.
+  const historyRequestedRef = useRef(false);
+  useEffect(() => {
+    if (panel === 'closed' || historyRequestedRef.current || !uuid) return;
+    historyRequestedRef.current = true;
+    getAssistantHistory(uuid)
+      .then((conversation) => {
+        if (!conversation || conversation.messages.length === 0) return;
+        const restored = conversation.messages.map(toWidgetMessage);
+        setMessages((prev) => (prev.length === 0 ? restored : prev));
+      })
+      .catch(() => {});
+  }, [panel, uuid]);
 
   // Start (or reuse) the conversation; returns the conversation id, or null on failure.
   // Deduped via startPromiseRef so concurrent opens/sends don't create two conversations.
