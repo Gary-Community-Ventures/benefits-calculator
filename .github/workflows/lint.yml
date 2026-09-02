@@ -12,13 +12,13 @@ jobs:
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js and dependencies
         uses: ./.github/actions/setup-node-dependencies
 
       - name: Run linters
-        uses: wearerequired/lint-action@v2
+        uses: wearerequired/lint-action@v3.0.2
         with:
           eslint: true
           prettier: true
@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js and dependencies
         uses: ./.github/actions/setup-node-dependencies
