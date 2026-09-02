@@ -349,28 +349,40 @@ const Results = ({ type }: ResultsProps) => {
     setPolicyEngineData(apiResults.pe_data);
   }, [filterPrograms, apiResults, isEnergyCalculator, energyCalculatorRebateCategories]);
 
-  const ResultsContextProvider = ({ children }: PropsWithChildren) => {
-    return (
-      <ResultsContext.Provider
-        value={{
-          programs,
-          programCategories,
-          needs,
-          filterState,
-          setFilterState,
-          missingPrograms,
-          isAdminView,
-          validations,
-          setValidations,
-          energyCalculatorRebateCategories: energyCalculatorRebateCategories ?? [],
-          policyEngineData,
-          externalApiFailures,
-        }}
-      >
-        {children}
-      </ResultsContext.Provider>
-    );
-  };
+  // MFB-1737: this used to be a `ResultsContextProvider` component defined here in
+  // the render body. A component defined inside another component gets a new
+  // identity on every render, so React unmounted and remounted the entire results
+  // subtree on any state change (e.g. a filter change) — silently destroying all
+  // subtree state, including an open Benbot conversation. A memoized value passed
+  // to <ResultsContext.Provider> directly keeps the tree stable.
+  const resultsContextValue = useMemo<WrapperResultsContext>(
+    () => ({
+      programs,
+      programCategories,
+      needs,
+      filterState,
+      setFilterState,
+      missingPrograms,
+      isAdminView,
+      validations,
+      setValidations,
+      energyCalculatorRebateCategories: energyCalculatorRebateCategories ?? [],
+      policyEngineData,
+      externalApiFailures,
+    }),
+    [
+      programs,
+      programCategories,
+      needs,
+      filterState,
+      missingPrograms,
+      isAdminView,
+      validations,
+      energyCalculatorRebateCategories,
+      policyEngineData,
+      externalApiFailures,
+    ],
+  );
 
   if (loading) {
     return (
@@ -420,7 +432,7 @@ const Results = ({ type }: ResultsProps) => {
     const panel = panels[type];
 
     return (
-      <ResultsContextProvider>
+      <ResultsContext.Provider value={resultsContextValue}>
         <BenbotWrapper enabled={isBenbotEnabled} visiblePrograms={visiblePrograms}>
           <main>
             <ResultsHeader />
@@ -448,7 +460,7 @@ const Results = ({ type }: ResultsProps) => {
             </div>
           </main>
         </BenbotWrapper>
-      </ResultsContextProvider>
+      </ResultsContext.Provider>
     );
   }
 
@@ -464,9 +476,9 @@ const Results = ({ type }: ResultsProps) => {
     }
 
     return (
-      <ResultsContextProvider>
+      <ResultsContext.Provider value={resultsContextValue}>
         <ProgramPage program={program} />
-      </ResultsContextProvider>
+      </ResultsContext.Provider>
     );
   } else if (energyCalculatorRebateType !== undefined) {
     const rebateCategory = energyCalculatorRebateCategories?.find(
@@ -478,9 +490,9 @@ const Results = ({ type }: ResultsProps) => {
     }
 
     return (
-      <ResultsContextProvider>
+      <ResultsContext.Provider value={resultsContextValue}>
         <EnergyCalculatorRebatePage rebateCategory={rebateCategory} />
-      </ResultsContextProvider>
+      </ResultsContext.Provider>
     );
   } else {
     return <NavigateToMainResultsPage />;
