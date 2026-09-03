@@ -18,7 +18,7 @@ import { PRE_DIRECTORY_STEP_IDS } from '../../Assets/analytics/stepIds';
 const STEP_1_ANALYTICS_ID = PRE_DIRECTORY_STEP_IDS.language;
 
 const SelectLanguagePage = () => {
-  const { locale, selectLanguage, configLoading } = useContext(Context);
+  const { locale, selectLanguage } = useContext(Context);
   const languageOptions = useConfig<{ [key: string]: string }>('language_options');
   const { whiteLabel, uuid } = useParams();
   const states = useStateOptions();
@@ -115,14 +115,10 @@ const SelectLanguagePage = () => {
 
     const stateCode = states[0].code;
 
+    // Let updateWhiteLabelAndNavigate own the navigation, as it already does on the state page.
+    // There is nothing to wait for: App gates rendering on pageIsLoading, so step 2 does not
+    // render until the new config resolves.
     updateWhiteLabelAndNavigate(stateCode, `/${stateCode}/step-2${queryString}`);
-    // wait for the new config to be loaded
-    const interval = setInterval(() => {
-      if (!configLoading) {
-        navigate(`/${stateCode}/step-2${queryString}`);
-        clearInterval(interval);
-      }
-    }, 1);
   };
 
   return (

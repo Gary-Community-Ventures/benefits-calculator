@@ -66,6 +66,40 @@ describe('useStateOptions', () => {
     expect(codesFrom(['kansas'])).toEqual(['co', 'wa']);
   });
 
+  describe('reporting an unresolved referrer config', () => {
+    // The fallback serves the public list, which for a KS/MO referrer contains neither state, so
+    // the mismatch has to reach us as something other than "the wrong states".
+    beforeEach(() => {
+      window.dataLayer = [];
+    });
+
+    function eventsFrom(referrerCodes: string[] | undefined, catalog?: unknown) {
+      codesFrom(referrerCodes, catalog);
+
+      return (window.dataLayer as Record<string, unknown>[]).filter(
+        (entry) => entry.event === 'screener_state_options_unresolved',
+      );
+    }
+
+    it('reports the named codes when none of them resolve', () => {
+      expect(eventsFrom(['kansas'])).toEqual([
+        expect.objectContaining({
+          event: 'screener_state_options_unresolved',
+          referrer_state_options: 'kansas',
+        }),
+      ]);
+    });
+
+    it('stays quiet when the referrer resolves', () => {
+      expect(eventsFrom(['ks', 'mo'])).toEqual([]);
+    });
+
+    it('stays quiet when the referrer names no states at all', () => {
+      expect(eventsFrom([])).toEqual([]);
+      expect(eventsFrom(undefined)).toEqual([]);
+    });
+  });
+
   it('returns nothing when the catalog has not loaded', () => {
     expect(codesFrom([], null)).toEqual([]);
   });
