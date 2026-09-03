@@ -397,11 +397,11 @@ export function ChatbotProvider({ visiblePrograms, children }: PropsWithChildren
         <div
           className={`chatbot-panel${panel === 'peek' ? ' chatbot-panel--peek' : ''}`}
           role="dialog"
-          aria-label={formatMessage({ id: 'chatbot.ariaLabel', defaultMessage: 'BenBot Assistant chat' })}
+          aria-label={formatMessage({ id: 'chatbot.ariaLabel', defaultMessage: 'Benji Assistant chat' })}
         >
           <div className="chatbot-header">
             <span className="chatbot-header-title">
-              <FormattedMessage id="chatbot.title" defaultMessage="BenBot Assistant" />
+              <FormattedMessage id="chatbot.title" defaultMessage="Benji Assistant" />
             </span>
             <span className="chatbot-header-actions">
               {panel === 'peek' && (
@@ -432,7 +432,7 @@ export function ChatbotProvider({ visiblePrograms, children }: PropsWithChildren
                   // and free; the model is only engaged once the user replies.
                   <FormattedMessage
                     id="chatbot.welcomePersonalized"
-                    defaultMessage="Hi, I'm BenBot! Your results show {count, plural, one {# program} other {# programs}} you may qualify for, worth about {totalValue} per year. Ask me anything — like which one to apply for first."
+                    defaultMessage="Hi, I'm Benji! Your results show {count, plural, one {# program} other {# programs}} you may qualify for, worth about {totalValue} per year. Ask me anything — like which one to apply for first."
                     values={{
                       count: visiblePrograms.length,
                       totalValue: formatNumber(totalAnnualValue, {
@@ -459,7 +459,7 @@ export function ChatbotProvider({ visiblePrograms, children }: PropsWithChildren
               <div
                 className="chatbot-message chatbot-message-bot chatbot-message-loading"
                 role="status"
-                aria-label={formatMessage({ id: 'chatbot.loading', defaultMessage: 'BenBot is typing' })}
+                aria-label={formatMessage({ id: 'chatbot.loading', defaultMessage: 'Benji is typing' })}
               >
                 <span className="chatbot-typing-dot" />
                 <span className="chatbot-typing-dot" />
@@ -497,7 +497,7 @@ export function ChatbotProvider({ visiblePrograms, children }: PropsWithChildren
           type="button"
           className="chatbot-fab"
           onClick={handleOpen}
-          aria-label={formatMessage({ id: 'chatbot.open', defaultMessage: 'Open BenBot Assistant chat' })}
+          aria-label={formatMessage({ id: 'chatbot.open', defaultMessage: 'Open Benji Assistant chat' })}
         >
           <ChatIcon />
         </button>
