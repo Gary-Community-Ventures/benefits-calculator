@@ -20,7 +20,7 @@ type ResultsSummaryProps = {
 
 const ProgramsHeader = () => {
   const { programs, programCategories } = useResultsContext();
-  const { theme, formData } = useContext(Context);
+  const { formData } = useContext(Context);
   const taxCreditsCategory = programCategories.find((category) => category.tax_category);
   let taxCredit = 0;
   if (taxCreditsCategory !== undefined) {
@@ -40,7 +40,7 @@ const ProgramsHeader = () => {
   }
 
   return (
-    <CardContent sx={{ backgroundColor: theme.secondaryBackgroundColor, padding: '1rem' }}>
+    <CardContent className="results-header-summary-box">
       <header className="results-header">
         <div className="results-header-programs-count-text">
           <div className="results-header-programs-count">{translateNumber(programs.length)}</div>
@@ -73,8 +73,7 @@ const ProgramsHeader = () => {
 
 // Rendered below the tab bar, inside the results card — separate from ResultsHeader,
 // which stays above. The wrapper div lives here (not in Results) so the Immediate Help
-// tab renders nothing: `.results-header-container` has a fixed height: 9rem, and an
-// empty wrapper would leave a gap.
+// and Additional Resources tabs render nothing at all, instead of an empty wrapper.
 export const ResultsSummary = ({ type }: ResultsSummaryProps) => {
   const isEnergyCalculator = useIsEnergyCalculator();
 

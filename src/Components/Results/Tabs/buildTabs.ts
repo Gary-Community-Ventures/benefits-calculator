@@ -1,3 +1,5 @@
+import { Heart, BookOpen, CircleAlert, type LucideIcon } from 'lucide-react';
+
 export type ResultsTabId = 'program' | 'need' | 'help';
 
 export type TabDescriptor = {
@@ -10,6 +12,8 @@ export type TabDescriptor = {
   count?: number;
   // GA4 `tab_name`; single source of truth so the literal isn't copy-pasted per tab.
   trackName: string;
+  icon: LucideIcon;
+  iconFillMode: 'always' | 'active' | 'never';
 };
 
 type BuildTabsArgs = {
@@ -39,6 +43,8 @@ export function buildTabs({
       defaultMessage: 'Long-Term Benefits ',
       count: programCount,
       trackName: 'long_term_benefits',
+      icon: Heart,
+      iconFillMode: 'active',
     },
     {
       id: 'need',
@@ -48,6 +54,8 @@ export function buildTabs({
       defaultMessage: 'Additional Resources ',
       count: needCount,
       trackName: 'additional_resources',
+      icon: BookOpen,
+      iconFillMode: 'never',
     },
   ];
 
@@ -61,6 +69,8 @@ export function buildTabs({
       labelId: 'resultsOptions.immediateHelp',
       defaultMessage: 'Immediate Help',
       trackName: 'immediate_help',
+      icon: CircleAlert,
+      iconFillMode: 'never',
     });
   }
 

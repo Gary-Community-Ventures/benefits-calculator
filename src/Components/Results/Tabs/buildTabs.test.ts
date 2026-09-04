@@ -1,3 +1,4 @@
+import { Heart, BookOpen, CircleAlert } from 'lucide-react';
 import { buildTabs, getNextTabIndex } from './buildTabs';
 
 const args = {
@@ -54,6 +55,14 @@ describe('buildTabs', () => {
     expect(tabs.find((tab) => tab.id === 'program')?.to).toBe(args.benefitsLink);
     expect(tabs.find((tab) => tab.id === 'need')?.to).toBe(args.needsLink);
     expect(tabs.find((tab) => tab.id === 'help')?.to).toBe(args.helpLink);
+  });
+
+  it('gives each tab its matching icon', () => {
+    const tabs = buildTabs(args);
+
+    expect(tabs.find((tab) => tab.id === 'program')?.icon).toBe(Heart);
+    expect(tabs.find((tab) => tab.id === 'need')?.icon).toBe(BookOpen);
+    expect(tabs.find((tab) => tab.id === 'help')?.icon).toBe(CircleAlert);
   });
 });
 

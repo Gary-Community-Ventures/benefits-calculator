@@ -104,6 +104,16 @@ const ResultsTabs = ({ activeTab }: ResultsTabsProps) => {
                 }}
               >
                 <span className="results-tab-label">
+                  <tab.icon
+                    aria-hidden="true"
+                    className="results-tab-icon"
+                    size={20}
+                    fill={
+                      tab.iconFillMode === 'always' || (tab.iconFillMode === 'active' && isActive)
+                        ? 'currentColor'
+                        : 'none'
+                    }
+                  />
                   <FormattedMessage id={tab.labelId} defaultMessage={tab.defaultMessage} />
                   {tab.count !== undefined && `(${translateNumber(tab.count)})`}
                 </span>

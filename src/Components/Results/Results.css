@@ -11,6 +11,7 @@
 .results-back-save-strip {
   background-color: #ffffff;
   width: 100%;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .results-back-save-strip .results-back-save-btn-container {
@@ -22,70 +23,79 @@
   max-width: var(--content-max-width);
   width: 100%;
   margin: 0 auto 1.5rem auto;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
 }
 
 .benefits-form.results-card-body {
-  margin: 0;
-  padding: 0 1rem 1.5rem 1rem;
+  margin: 1.5rem 0 0 0;
+  padding: 1rem 1rem 1.5rem 1rem;
+  border-radius: 0.5rem;
   box-shadow: none;
 }
 
 .results-tab-container {
-  background-color: var(--primary-color);
-  padding: 1rem 1rem 0 1rem;
+  padding: 1rem 0 0 0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .results-tab {
   color: var(--primary-color);
   font-family: var(--font-body);
-  border-left: 2px solid var(--primary-color);
-  border-right: 2px solid var(--primary-color);
   font-weight: bold;
 }
 
+/* Flex at every tab count, not just 3, so the icon sits beside the label instead of stacking above it. */
 .results-tab a {
   width: 100%;
   height: 100%;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   text-transform: uppercase;
   padding: 0.5rem;
   text-decoration: none;
-  background-color: #e6e7e8;
   color: var(--primary-color);
-  border-radius: 1rem 1rem 0 0;
 }
 
 .results-tab a .results-tab-label {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
   font-size: 1rem;
   margin: 0;
 }
 
-/* Three-tab-only adjustments. Scoped to [data-tab-count='3'] so the two-tab layout —
-   still rendered for referrers carrying `no_results_more_help` — is byte-identical to
-   before this change. At ~33% width the labels can wrap, so the anchor becomes a
-   centering flex container (Grid items stretch to equal height, and without this a
-   one-line tab would sit top-aligned next to a two-line neighbour). */
-.results-tab-container[data-tab-count='3'] .results-tab a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.results-tab-icon {
+  flex-shrink: 0;
 }
 
+/* Scoped to 3 tabs — at ~33% width, the label needs a smaller icon/font/gap to fit
+   on one line; two-tab has enough room to stay at the base sizing. */
 .results-tab-container[data-tab-count='3'] .results-tab a .results-tab-label {
-  /* Only breaks where a word would otherwise overflow its tab; no hyphens inserted. */
+  gap: 0.25rem;
+  font-size: 0.85rem;
   overflow-wrap: break-word;
 }
 
+.results-tab-container[data-tab-count='3'] .results-tab-icon {
+  width: 16px;
+  height: 16px;
+}
+
 .results-tab a.active {
-  background-color: white;
+  color: var(--active-border-color);
+  border-bottom: 3px solid var(--active-border-color);
 }
 
 .results-tab a:focus-visible {
   outline: 3px solid var(--primary-color);
   outline-offset: -3px;
+}
+
+/* Hides the focus ring for a mouse click only — keyboard users still need to see it. */
+.results-tab a.active:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .info-circle {
@@ -169,12 +179,11 @@
   font-size: 1.2rem;
 }
 
-.results-header-container {
-  height: 9rem;
-}
-
-.results-header {
-  height: 7rem;
+.results-header-summary-box {
+  background-color: var(--secondary-background-color);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1.5rem 2rem;
 }
 
 .result-program-container hr {
@@ -220,7 +229,7 @@
 
 .results-category-description {
   background-color: var(--secondary-background-color);
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: #000000;
   padding: 0.5rem;
 }
@@ -409,7 +418,7 @@
   }
 
   .results-tab a .results-tab-label {
-    font-size: .9rem;
+    font-size: 0.9rem;
     margin: 0;
   }
 
@@ -424,7 +433,7 @@
   }
 
   .results-tab-container {
-    padding: 0.5rem 0.5rem 0 0.5rem;
+    padding: 0.5rem 0 0 0;
   }
 
   .results-section-header {
