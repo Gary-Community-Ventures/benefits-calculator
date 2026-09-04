@@ -3,13 +3,19 @@ import userEvent from '@testing-library/user-event';
 import { IntlProvider } from 'react-intl';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { ChatbotProvider } from './Chatbot';
-import { startAssistantConversation, sendAssistantMessage, AssistantVisibleProgram } from '../../../apiCalls';
+import {
+  startAssistantConversation,
+  getAssistantHistory,
+  sendAssistantMessage,
+  AssistantVisibleProgram,
+} from '../../../apiCalls';
 
 // requireActual so a future import of a third export from apiCalls doesn't silently
 // become undefined at runtime.
 jest.mock('../../../apiCalls', () => ({
   ...jest.requireActual('../../../apiCalls'),
   startAssistantConversation: jest.fn(),
+  getAssistantHistory: jest.fn(),
   sendAssistantMessage: jest.fn(),
 }));
 
@@ -18,6 +24,7 @@ jest.mock('../../../Assets/analytics', () => ({
 }));
 
 const mockStart = startAssistantConversation as jest.MockedFunction<typeof startAssistantConversation>;
+const mockHistory = getAssistantHistory as jest.MockedFunction<typeof getAssistantHistory>;
 const mockSend = sendAssistantMessage as jest.MockedFunction<typeof sendAssistantMessage>;
 
 const SCREEN_UUID = 'c0ffee00-0000-4000-8000-000000000001';
@@ -64,6 +71,8 @@ beforeEach(() => {
     prompt_version: 'v3',
     messages: [],
   });
+  // No prior conversation is the default; the restore tests below override it.
+  mockHistory.mockResolvedValue(null);
   mockSend.mockResolvedValue({
     user_message: { message_id: 'u1', role: 'user', text: 'hello', created_at: '' },
     assistant_message: { message_id: 'a1', role: 'assistant', text: 'hi there', created_at: '' },
@@ -282,5 +291,121 @@ describe('auto-open (MFB-1737)', () => {
 
     expect(screen.getByRole('dialog').className).not.toContain('chatbot-panel--peek');
     expect(screen.queryByRole('button', { name: /expand chat/i })).not.toBeInTheDocument();
+  });
+});
+
+describe('ChatbotProvider history restore', () => {
+  const priorConversation = {
+    conversation_id: 'conv-prior',
+    screen_uuid: SCREEN_UUID,
+    status: 'active',
+    mode: 'live',
+    prompt_version: 'v3',
+    messages: [
+      { message_id: 'm1', role: 'user' as const, text: 'what about WIC?', created_at: '' },
+      { message_id: 'm2', role: 'assistant' as const, text: 'here is how WIC works', created_at: '' },
+    ],
+  };
+
+  const open = () => userEvent.click(screen.getByRole('button', { name: /chat/i }));
+
+  it('shows a returning household their transcript when the widget opens', async () => {
+    // The emailed results link brings them back to the same screen_uuid, so their
+    // conversation is still on the server. Before this, nothing fetched it until they
+    // sent another message, so they landed on the generic welcome.
+    mockHistory.mockResolvedValue(priorConversation);
+    renderChatbot([SNAP]);
+
+    await open();
+
+    expect(await screen.findByText('what about WIC?')).toBeInTheDocument();
+    expect(screen.getByText('here is how WIC works')).toBeInTheDocument();
+  });
+
+  it('reads history without starting a conversation', async () => {
+    // The whole point of the separate read endpoint: the widget opens on nearly every
+    // results page, and the start call would mint an empty conversation for every
+    // visitor who never types.
+    mockHistory.mockResolvedValue(priorConversation);
+    renderChatbot([SNAP]);
+
+    await open();
+    await screen.findByText('what about WIC?');
+
+    expect(mockStart).not.toHaveBeenCalled();
+  });
+
+  it('still calls the start endpoint on the first message, so context is refreshed', async () => {
+    // The regression guard for the tempting optimization: caching the restored
+    // conversation_id would make ensureConversation return early and skip the start
+    // call — which is what refreshes ai-service's stored context snapshot. A returning
+    // household's assistant would then reason from the program list as it was on their
+    // last visit, which is the MFB-1427 failure via the back door.
+    mockHistory.mockResolvedValue(priorConversation);
+    renderChatbot([SNAP, WIC]);
+
+    await open();
+    await screen.findByText('what about WIC?');
+    await userEvent.type(screen.getByRole('textbox'), 'and SNAP?');
+    await userEvent.keyboard('{Enter}');
+
+    await waitFor(() => expect(mockStart).toHaveBeenCalledWith(SCREEN_UUID, undefined, [SNAP, WIC]));
+  });
+
+  it('leaves the welcome in place when there is no history', async () => {
+    mockHistory.mockResolvedValue(null);
+    renderChatbot([SNAP]);
+
+    await open();
+
+    await waitFor(() => expect(mockHistory).toHaveBeenCalled());
+    expect(screen.queryByText('what about WIC?')).not.toBeInTheDocument();
+  });
+
+  it('survives a failed history read without surfacing an error', async () => {
+    // Best-effort: a failed restore should look exactly like having no history, not
+    // like a broken assistant.
+    mockHistory.mockRejectedValue(new Error('500 Server Error'));
+    renderChatbot([SNAP]);
+
+    await open();
+
+    await waitFor(() => expect(mockHistory).toHaveBeenCalled());
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    expect(screen.queryByText(/something went wrong/i)).not.toBeInTheDocument();
+  });
+
+  it('does not drop a message the user sent before history arrived', async () => {
+    // A fast first send can land before the read resolves; overwriting state at that
+    // point would discard what they just typed.
+    let resolveHistory: (value: typeof priorConversation) => void = () => {};
+    mockHistory.mockReturnValue(
+      new Promise((resolve) => {
+        resolveHistory = resolve;
+      }),
+    );
+    renderChatbot([SNAP]);
+
+    await open();
+    await userEvent.type(screen.getByRole('textbox'), 'urgent question');
+    await userEvent.keyboard('{Enter}');
+    await screen.findByText('urgent question');
+
+    resolveHistory(priorConversation);
+
+    await waitFor(() => expect(screen.getByText('urgent question')).toBeInTheDocument());
+    expect(screen.queryByText('what about WIC?')).not.toBeInTheDocument();
+  });
+
+  it('reads history once per mount, not on every open', async () => {
+    mockHistory.mockResolvedValue(priorConversation);
+    renderChatbot([SNAP]);
+
+    await open();
+    await screen.findByText('what about WIC?');
+    await userEvent.click(screen.getByRole('button', { name: /close/i }));
+    await open();
+
+    expect(mockHistory).toHaveBeenCalledTimes(1);
   });
 });
