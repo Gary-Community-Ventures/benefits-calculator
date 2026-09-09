@@ -21,8 +21,8 @@ const MoreHelpButton = () => {
         className="button211"
         onClick={() => track('screener_get_help_click', { location: 'results' })}
       >
-        {/* Shares the tab's translation ID, not moreHelp.211-link: this button and the
-            Immediate Help tab go to the same page, so they carry the same label. */}
+        {/* Shares the Immediate Help tab's translation ID so both routes to this page
+            carry one label. */}
         <FormattedMessage id="resultsOptions.immediateHelp" defaultMessage="Immediate Help" />
       </Link>
     </div>

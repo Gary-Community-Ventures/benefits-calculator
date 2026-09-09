@@ -46,23 +46,26 @@
   margin: 0 auto 1.5rem auto;
 }
 
-/* No top border: a hairline spanning the full card width reads as a stray rule on
-   the right, where there is no tab to connect to. The tabs carry their own borders,
-   and the active tab's white background is what merges it into this panel.
-   The shadow is inherited from .benefits-form so this card matches every other card
-   in the app. */
-.benefits-form.results-card-body {
+/* Standalone card, for the tabless CESN results page. */
+.benefits-form.results-card-body:not(.has-tabs) {
+  margin: 1.5rem 0 0 0;
+  padding: 1rem 1rem 1.5rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: none;
+}
+
+/* Squared off and flush against the tab row above, so the active tab's white
+   background runs straight into the panel. Keeps .benefits-form's shadow, which ties
+   the tabs and panel together as one surface. */
+.benefits-form.results-card-body.has-tabs {
   margin: 0;
   padding: 1rem var(--results-gutter) 1.5rem;
   border-radius: 0;
 }
 
-/* Tabs are left-aligned and sized to their labels; the page background shows
-   between and behind them, which is what marks them as separate clickable objects.
-   align-items: flex-end lets the shorter inactive tabs sit flush with the panel
-   while the taller active one appears lifted. No side padding, so the first tab's
-   left edge sits on the card's own edge; the top margin separates the row from the
-   back/save strip above. */
+/* Left-aligned row with the page background showing between the tabs, marking them
+   as separate controls. flex-end keeps the shorter inactive tabs seated on the panel
+   while the taller active one rises above them. */
 .results-tab-container {
   display: flex;
   align-items: flex-end;
@@ -119,20 +122,9 @@
   white-space: nowrap;
 }
 
-/* Sized here rather than via the component's `size` prop so it tracks the label. */
+/* Dimensions come from each tab's `iconSize` (see buildTabs.ts). */
 .results-tab-icon {
   flex-shrink: 0;
-  width: 17px;
-  height: 17px;
-}
-
-/* Optical correction, not a real size difference: hand-heart draws a small heart
-   inside a hand, so its artwork sits well within the icon box, while book-open and
-   triangle-alert fill theirs edge to edge. Rendering it larger makes the three read
-   as the same size. */
-#long-term-benefits-tab .results-tab-icon {
-  width: 20px;
-  height: 20px;
 }
 
 /* A pill rather than "(n)" so the number reads as a count, not part of the title.
@@ -286,13 +278,13 @@
   margin-top: 0.75rem;
 }
 
-/* 4px matches .informational-text, the equivalent tinted box on the Additional
-   Resources tab, so the two tabs share one box treatment. */
+/* Radius matches .informational-text, the equivalent tinted box on the Additional
+   Resources tab, so both tabs open with the same box treatment. */
 .results-header-summary-box {
   background-color: var(--secondary-background-color);
   border-radius: 4px;
   margin: 0;
-  padding: 1rem !important;
+  padding: 1rem;
 }
 
 .result-program-container hr {
@@ -473,7 +465,7 @@
 
   .results-header-summary-box {
     margin: 0;
-    padding: 1rem 0.75rem !important;
+    padding: 1rem 0.75rem;
   }
 
   .results-header-programs-count {

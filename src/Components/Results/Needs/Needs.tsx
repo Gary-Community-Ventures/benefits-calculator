@@ -77,9 +77,8 @@ const Needs = () => {
           }}
         />
       </InformationalText>
-      {/* Wrapped so the divider above the cards attaches to a stable element: the
-          referrer message before the intro box renders only for some white labels,
-          so a sibling-position selector would miss on those. */}
+      {/* Carries the divider above the cards. A wrapper rather than a sibling selector
+          because the referrer message above renders for only some white labels. */}
       <div className="results-needs-list">
         {needsSortedByCategory.map((need, index) => {
           return <NeedCard need={need} key={index} />;

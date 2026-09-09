@@ -7,6 +7,8 @@ import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
 import { useTrackEvent } from '../../../Assets/analytics';
 import { buildTabs, getNextTabIndex, ResultsTabId } from './buildTabs';
 
+const DEFAULT_TAB_ICON_SIZE = 17;
+
 type ResultsTabsProps = {
   // Supplied by Results, which already knows which tab is rendering. Deriving it from
   // the URL here instead would re-parse information the caller already has.
@@ -65,11 +67,9 @@ const ResultsTabs = ({ activeTab }: ResultsTabsProps) => {
 
   return (
     <nav aria-label="Results">
-      {/* A flex row, not a Grid: tabs size to their labels and left-align, which is the
-          desktop tab convention. Equal-width columns would stretch each tab's hit area
-          arbitrarily wide and leave the label floating in empty space.
-          data-tab-count scopes the mobile three-tab sizing, where the tabs do share the
-          width equally. */}
+      {/* Each tab is sized to its own label, so the row reads as a set of discrete
+          controls rather than three equal slabs. data-tab-count scopes the mobile
+          sizing, where the tabs do share the width equally. */}
       <div className="results-tab-container" data-tab-count={tabs.length} role="tablist" onKeyDown={handleKeyDown}>
         {tabs.map((tab, index) => {
           const isActive = tab.id === activeTab;
@@ -100,11 +100,14 @@ const ResultsTabs = ({ activeTab }: ResultsTabsProps) => {
                 }}
               >
                 <span className="results-tab-label">
-                  {/* Sizing lives in .results-tab-icon so it tracks the label across
-                      breakpoints; this is only the pre-CSS fallback size. strokeWidth
-                      matches the shared Icon component, so these don't render heavier
-                      than every other icon on the page. */}
-                  <tab.icon aria-hidden="true" className="results-tab-icon" size={17} strokeWidth={1.5} />
+                  {/* strokeWidth matches the shared Icon component so tab icons carry the
+                      same weight as the rest of the page. */}
+                  <tab.icon
+                    aria-hidden="true"
+                    className="results-tab-icon"
+                    size={tab.iconSize ?? DEFAULT_TAB_ICON_SIZE}
+                    strokeWidth={1.5}
+                  />
                   <FormattedMessage id={tab.labelId} defaultMessage={tab.defaultMessage} />
                   {tab.count !== undefined && <span className="results-tab-count">{translateNumber(tab.count)}</span>}
                 </span>

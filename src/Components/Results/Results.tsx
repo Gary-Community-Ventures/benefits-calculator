@@ -438,20 +438,23 @@ const Results = ({ type }: ResultsProps) => {
             <ResultsHeader />
             <div className="results-card-wrapper">
               <ResultsTabs activeTab={type} />
+              {/* `has-tabs` only when a tab row renders above: it squares off the top of
+                  the card so the active tab merges into it. CESN has no tab bar, so it
+                  keeps the standalone card's rounded corners and top margin. */}
               <div
                 id="results-tabpanel"
                 role="tabpanel"
                 aria-labelledby={panel.tabId}
-                className="benefits-form results-card-body"
+                className={`benefits-form results-card-body${isEnergyCalculator ? '' : ' has-tabs'}`}
               >
                 {/* Inside the panel, not above it — per-tab content should be reachable
                     when a screen reader enters the active panel. */}
                 <ResultsSummary type={type} />
                 {type === 'program' && <ExternalApiFailureBanner />}
                 {type === 'program' && <UrgentNeedBanner />}
-                {/* No top padding: each tab's first section supplies its own gap above
-                    its divider, so padding here would double it. */}
-                <Grid container>
+                {/* In the tabbed layout each tab's first section owns the gap above its
+                    own divider. CESN has no such section, so it keeps the padding. */}
+                <Grid container sx={{ pt: isEnergyCalculator ? '1rem' : 0 }}>
                   <Grid item xs={12}>
                     <panel.Content />
                   </Grid>
@@ -460,10 +463,8 @@ const Results = ({ type }: ResultsProps) => {
                     entry point to the Immediate Help resources. */}
                 {isEnergyCalculator && !immediateHelpSuppressed && <MoreHelpButton />}
                 <NPSWidget uuid={uuid} />
-                {/* Off the help tab: it fires screener_share_popup_shown on a 5s timer, so
-                    including it here would inflate that impression count. NPS has no
-                    impression event — it only reports submitted scores — so it renders on
-                    every tab. */}
+                {/* Kept off the help tab: it fires screener_share_popup_shown on a 5s
+                    timer, which would count an impression per tab visit. */}
                 {type !== 'help' && <ShareModalAutoPopup />}
               </div>
             </div>

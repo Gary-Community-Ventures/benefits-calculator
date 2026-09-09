@@ -1,7 +1,3 @@
-// hand-heart for ongoing support, a book for reference material, and the same
-// triangle-alert the rest of the app uses for urgent messaging. hand-heart is
-// distinct from the heart-handshake already mapped to family planning in
-// ../helpers.ts, so the two don't read as the same icon.
 import { HandHeart, BookOpen, TriangleAlert, type LucideIcon } from 'lucide-react';
 
 export type ResultsTabId = 'program' | 'need' | 'help';
@@ -17,6 +13,9 @@ export type TabDescriptor = {
   // GA4 `tab_name`; single source of truth so the literal isn't copy-pasted per tab.
   trackName: string;
   icon: LucideIcon;
+  // Pixel size, where an icon needs to differ from the default to look the same size
+  // as its neighbours. Icons whose artwork sits inside its box render small otherwise.
+  iconSize?: number;
 };
 
 type BuildTabsArgs = {
@@ -47,6 +46,9 @@ export function buildTabs({
       count: programCount,
       trackName: 'long_term_benefits',
       icon: HandHeart,
+      // Draws a small heart inside a hand, so it needs the extra pixels to match the
+      // other two icons, which fill their boxes edge to edge.
+      iconSize: 20,
     },
     {
       id: 'need',

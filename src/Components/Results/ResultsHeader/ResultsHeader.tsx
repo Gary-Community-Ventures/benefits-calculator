@@ -1,4 +1,3 @@
-import { CardContent } from '@mui/material';
 import { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Context } from '../../Wrapper/Wrapper';
@@ -40,7 +39,7 @@ const ProgramsHeader = () => {
   }
 
   return (
-    <CardContent className="results-header-summary-box">
+    <div className="results-header-summary-box">
       <header className="results-header">
         <div className="results-header-programs-count-text">
           <div className="results-header-programs-count">{translateNumber(programs.length)}</div>
@@ -67,7 +66,7 @@ const ProgramsHeader = () => {
           )}
         </div>
       </header>
-    </CardContent>
+    </div>
   );
 };
 
