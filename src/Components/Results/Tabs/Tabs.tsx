@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useImmediateHelpSuppressed, useResultsContext, useResultsLink } from '../Results';
-import { Grid } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
@@ -66,20 +65,17 @@ const ResultsTabs = ({ activeTab }: ResultsTabsProps) => {
 
   return (
     <nav aria-label="Results">
-      {/* data-tab-count scopes the three-tab CSS adjustments, so the two-tab layout
-          (referrers with `no_results_more_help`) renders exactly as it did before. */}
-      <Grid
-        container
-        className="results-tab-container"
-        data-tab-count={tabs.length}
-        role="tablist"
-        onKeyDown={handleKeyDown}
-      >
+      {/* A flex row, not a Grid: tabs size to their labels and left-align, which is the
+          desktop tab convention. Equal-width columns would stretch each tab's hit area
+          arbitrarily wide and leave the label floating in empty space.
+          data-tab-count scopes the mobile three-tab sizing, where the tabs do share the
+          width equally. */}
+      <div className="results-tab-container" data-tab-count={tabs.length} role="tablist" onKeyDown={handleKeyDown}>
         {tabs.map((tab, index) => {
           const isActive = tab.id === activeTab;
 
           return (
-            <Grid item xs={12 / tabs.length} key={tab.id} className="results-tab" role="presentation">
+            <div key={tab.id} className="results-tab" role="presentation">
               <NavLink
                 ref={(el) => {
                   tabRefs.current[index] = el;
@@ -104,24 +100,19 @@ const ResultsTabs = ({ activeTab }: ResultsTabsProps) => {
                 }}
               >
                 <span className="results-tab-label">
-                  <tab.icon
-                    aria-hidden="true"
-                    className="results-tab-icon"
-                    size={20}
-                    fill={
-                      tab.iconFillMode === 'always' || (tab.iconFillMode === 'active' && isActive)
-                        ? 'currentColor'
-                        : 'none'
-                    }
-                  />
+                  {/* Sizing lives in .results-tab-icon so it tracks the label across
+                      breakpoints; this is only the pre-CSS fallback size. strokeWidth
+                      matches the shared Icon component, so these don't render heavier
+                      than every other icon on the page. */}
+                  <tab.icon aria-hidden="true" className="results-tab-icon" size={17} strokeWidth={1.5} />
                   <FormattedMessage id={tab.labelId} defaultMessage={tab.defaultMessage} />
-                  {tab.count !== undefined && `(${translateNumber(tab.count)})`}
+                  {tab.count !== undefined && <span className="results-tab-count">{translateNumber(tab.count)}</span>}
                 </span>
               </NavLink>
-            </Grid>
+            </div>
           );
         })}
-      </Grid>
+      </div>
     </nav>
   );
 };

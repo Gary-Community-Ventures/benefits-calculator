@@ -19,73 +19,166 @@
   margin: 0 auto;
 }
 
+/**
+ * Results page type scale. Six steps, so sizes carry meaning instead of drifting;
+ * pick the nearest step rather than introducing an intermediate value.
+ *
+ *   display   2rem     the programs-found count
+ *   stat      1.6rem   the dollar figures beside it
+ *   category  1.25rem  program-category titles, the list's top level
+ *   heading   1.1rem   section titles within a tab
+ *   body      0.95rem  descriptions and card copy
+ *   meta      0.8rem   labels, tab text, badges, help text
+ *
+ * --results-gutter is the space between text and the card edge. Declared here so the
+ * panel and the sections inside it share one value.
+ */
 .results-card-wrapper {
+  --results-gutter: 1.5rem;
+  --results-font-display: 2rem;
+  --results-font-stat: 1.6rem;
+  --results-font-category: 1.25rem;
+  --results-font-heading: 1.1rem;
+  --results-font-body: 0.95rem;
+  --results-font-meta: 0.8rem;
   max-width: var(--content-max-width);
   width: 100%;
   margin: 0 auto 1.5rem auto;
 }
 
+/* No top border: a hairline spanning the full card width reads as a stray rule on
+   the right, where there is no tab to connect to. The tabs carry their own borders,
+   and the active tab's white background is what merges it into this panel.
+   The shadow is inherited from .benefits-form so this card matches every other card
+   in the app. */
 .benefits-form.results-card-body {
-  margin: 1.5rem 0 0 0;
-  padding: 1rem 1rem 1.5rem 1rem;
-  border-radius: 0.5rem;
-  box-shadow: none;
+  margin: 0;
+  padding: 1rem var(--results-gutter) 1.5rem;
+  border-radius: 0;
 }
 
+/* Tabs are left-aligned and sized to their labels; the page background shows
+   between and behind them, which is what marks them as separate clickable objects.
+   align-items: flex-end lets the shorter inactive tabs sit flush with the panel
+   while the taller active one appears lifted. No side padding, so the first tab's
+   left edge sits on the card's own edge; the top margin separates the row from the
+   back/save strip above. */
 .results-tab-container {
-  padding: 1rem 0 0 0;
-  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.25rem;
+  margin-top: 1.25rem;
+  padding: 0;
 }
 
+/* flex-shrink: 0 keeps each tab at its label's natural width; without it the flex
+   items compress and the labels wrap to two lines. */
 .results-tab {
   color: var(--primary-color);
   font-family: var(--font-body);
   font-weight: bold;
+  flex-shrink: 0;
 }
 
-/* Flex at every tab count, not just 3, so the icon sits beside the label instead of stacking above it. */
+/* Borders on three sides only (top/left/right) with rounded top corners: the
+   canonical tab shape. Inactive tabs are shorter than the active one, so the
+   selected tab reads as lifted. */
 .results-tab a {
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
   text-transform: uppercase;
-  padding: 0.5rem;
+  padding: 0.625rem 1rem;
   text-decoration: none;
+  color: var(--primary-color);
+  background-color: #f4f2f6; /* fallback if color-mix is unsupported */
+  background-color: color-mix(in srgb, var(--secondary-background-color) 96%, #000000);
+  /* #e0e0e0 is the app-wide divider/border gray (see .filter-section-container,
+     NPS.css, ModalShell.css). */
+  border: 1px solid #e0e0e0;
+  border-bottom: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+/* Lightens toward the active tab's white on hover, hinting at what selecting does. */
+.results-tab a:hover:not(.active) {
+  background-color: #faf9fb; /* fallback if color-mix is unsupported */
+  background-color: color-mix(in srgb, var(--secondary-background-color) 99%, #000000);
   color: var(--primary-color);
 }
 
 .results-tab a .results-tab-label {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  font-size: 1rem;
+  gap: 0.5rem;
+  font-size: var(--results-font-meta);
+  letter-spacing: 0.02em;
   margin: 0;
+  /* One line per tab: the row is sized to the labels, so wrapping here would
+     break the tab shapes. */
+  white-space: nowrap;
 }
 
+/* Sized here rather than via the component's `size` prop so it tracks the label. */
 .results-tab-icon {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+}
+
+/* Optical correction, not a real size difference: hand-heart draws a small heart
+   inside a hand, so its artwork sits well within the icon box, while book-open and
+   triangle-alert fill theirs edge to edge. Rendering it larger makes the three read
+   as the same size. */
+#long-term-benefits-tab .results-tab-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* A pill rather than "(n)" so the number reads as a count, not part of the title.
+   min-width keeps single digits circular; padding lets 2+ digits grow. */
+.results-tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35rem;
+  padding: 0 0.3rem;
+  border-radius: 0.75rem;
+  /* Navy on the light inactive tab; the active tab overrides to the orange accent. */
+  background-color: var(--primary-color);
+  color: #ffffff;
+  /* Deliberately below the meta step: a badge reads as an annotation on the label,
+     not as label-level text. */
+  font-size: 0.75rem;
+  line-height: 1.45;
   flex-shrink: 0;
 }
 
-/* Scoped to 3 tabs — at ~33% width, the label needs a smaller icon/font/gap to fit
-   on one line; two-tab has enough room to stay at the base sizing. */
-.results-tab-container[data-tab-count='3'] .results-tab a .results-tab-label {
-  gap: 0.25rem;
-  font-size: 0.85rem;
-  overflow-wrap: break-word;
+.results-tab a.active .results-tab-count {
+  background-color: var(--active-border-color);
+  color: #ffffff;
 }
 
-.results-tab-container[data-tab-count='3'] .results-tab-icon {
-  width: 16px;
-  height: 16px;
-}
-
+/* White, matching the panel below, so the two read as one continuous surface —
+   the tab has no bottom border, so nothing separates them. */
 .results-tab a.active {
   color: var(--active-border-color);
-  border-bottom: 3px solid var(--active-border-color);
+  background-color: #ffffff;
+  /* Taller than the inactive tabs so it reads as lifted; the top value absorbs the
+     3px accent so the label stays vertically centered. */
+  padding-top: 0.625rem;
+  padding-bottom: 0.75rem;
+  border-top: 3px solid var(--active-border-color);
+  position: relative;
+  z-index: 1;
+}
+
+/* The first tab sits flush with the card's left edge, so its left border has nothing
+   below it to meet and reads as floating. The rounded corner stays, so the accent
+   still curves in. Only when it's the active tab — an inactive first tab still needs
+   the border to close its shape against the panel. */
+.results-tab:first-child a.active {
+  border-left-color: transparent;
 }
 
 .results-tab a:focus-visible {
@@ -165,7 +258,7 @@
   font-family: var(--font-heading);
   font-weight: 700;
   color: var(--secondary-color);
-  font-size: 1.3rem;
+  font-size: var(--results-font-category);
 }
 
 /* Top-align the title with the icon inside the heading column
@@ -176,14 +269,30 @@
 
 .category-heading-text-style.normal-weight {
   font-weight: normal;
-  font-size: 1.2rem;
+  font-size: var(--results-font-category);
 }
 
+/* A tinted card inset from the panel edges, filling most of the available width.
+   Zero margins: the even white ring around it comes from .results-card-body's own
+   padding, so the gap is identical on all four sides. !important overrides
+   MuiCardContent-root's own padding, which would otherwise stack with this one. */
+/* The divider sits below the intro box, separating the preamble from the resource
+   cards — the same role .filter-section-container's rule plays on Long-Term
+   Benefits, where it divides the summary from the section beneath it. On the list
+   rather than the box, so the rule spans the panel instead of hugging the tint. */
+.results-needs-list {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+/* 4px matches .informational-text, the equivalent tinted box on the Additional
+   Resources tab, so the two tabs share one box treatment. */
 .results-header-summary-box {
   background-color: var(--secondary-background-color);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  margin: 1.5rem 2rem;
+  border-radius: 4px;
+  margin: 0;
+  padding: 1rem !important;
 }
 
 .result-program-container hr {
@@ -256,7 +365,7 @@
 /* DESKTOP - 768px and above (matches BREAKPOINTS.desktop in src/utils/breakpoints.ts) */
 @media (min-width: 768px) {
   .results-header-programs-count-text {
-    height: 3rem;
+    height: 3.5rem;
     border-radius: 0.2rem;
     background-color: var(--primary-color);
     color: white;
@@ -272,7 +381,7 @@
   .results-data-cell {
     display: flex;
     flex-direction: column;
-    margin: 0.5rem 1rem;
+    margin: 0.5rem 1.5rem;
   }
 
   .column-row {
@@ -288,7 +397,7 @@
   }
 
   .results-header-programs-count {
-    font-size: 1.5rem;
+    font-size: var(--results-font-display);
     font-weight: 700;
     margin: 0;
     font-family: var(--font-heading);
@@ -300,7 +409,7 @@
   .results-header-values {
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: var(--results-font-stat);
     color: var(--primary-color);
     display: flex;
     justify-content: space-between;
@@ -309,7 +418,7 @@
   .results-header-label {
     font-family: var(--font-body);
     font-weight: 400;
-    font-size: 0.85rem;
+    font-size: var(--results-font-meta);
     color: var(--primary-color);
     border-bottom: 1.5px solid var(--primary-color);
   }
@@ -360,6 +469,11 @@
     flex-direction: row;
     align-items: center;
     gap: 1rem;
+  }
+
+  .results-header-summary-box {
+    margin: 0;
+    padding: 1rem 0.75rem !important;
   }
 
   .results-header-programs-count {
@@ -413,13 +527,24 @@
     margin-bottom: 0.5rem;
   }
 
-  .results-tab a {
-    padding: 0.5rem 0.25rem;
-  }
-
+  /* Wrapping is allowed again here: the tabs share a narrow viewport rather than
+     sizing to their labels, so the text has to be able to break. */
   .results-tab a .results-tab-label {
     font-size: 0.9rem;
     margin: 0;
+    white-space: normal;
+  }
+
+  /* Content-sized tabs would overflow a narrow viewport, so they share the width
+     equally here instead — the standard mobile tab pattern. */
+  .results-tab {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .results-tab a {
+    width: 100%;
+    padding: 0.5rem 0.25rem;
   }
 
   /* Three tabs share a narrow viewport, so each gets ~33% instead of 50%. Tightened
@@ -434,6 +559,7 @@
 
   .results-tab-container {
     padding: 0.5rem 0 0 0;
+    gap: 0.125rem;
   }
 
   .results-section-header {

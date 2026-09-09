@@ -1,4 +1,8 @@
-import { Heart, BookOpen, CircleAlert, type LucideIcon } from 'lucide-react';
+// hand-heart for ongoing support, a book for reference material, and the same
+// triangle-alert the rest of the app uses for urgent messaging. hand-heart is
+// distinct from the heart-handshake already mapped to family planning in
+// ../helpers.ts, so the two don't read as the same icon.
+import { HandHeart, BookOpen, TriangleAlert, type LucideIcon } from 'lucide-react';
 
 export type ResultsTabId = 'program' | 'need' | 'help';
 
@@ -13,7 +17,6 @@ export type TabDescriptor = {
   // GA4 `tab_name`; single source of truth so the literal isn't copy-pasted per tab.
   trackName: string;
   icon: LucideIcon;
-  iconFillMode: 'always' | 'active' | 'never';
 };
 
 type BuildTabsArgs = {
@@ -43,8 +46,7 @@ export function buildTabs({
       defaultMessage: 'Long-Term Benefits ',
       count: programCount,
       trackName: 'long_term_benefits',
-      icon: Heart,
-      iconFillMode: 'active',
+      icon: HandHeart,
     },
     {
       id: 'need',
@@ -55,7 +57,6 @@ export function buildTabs({
       count: needCount,
       trackName: 'additional_resources',
       icon: BookOpen,
-      iconFillMode: 'never',
     },
   ];
 
@@ -69,8 +70,7 @@ export function buildTabs({
       labelId: 'resultsOptions.immediateHelp',
       defaultMessage: 'Immediate Help',
       trackName: 'immediate_help',
-      icon: CircleAlert,
-      iconFillMode: 'never',
+      icon: TriangleAlert,
     });
   }
 

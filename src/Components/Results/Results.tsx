@@ -438,13 +438,20 @@ const Results = ({ type }: ResultsProps) => {
             <ResultsHeader />
             <div className="results-card-wrapper">
               <ResultsTabs activeTab={type} />
-              <div id="results-tabpanel" role="tabpanel" aria-labelledby={panel.tabId} className="benefits-form results-card-body">
+              <div
+                id="results-tabpanel"
+                role="tabpanel"
+                aria-labelledby={panel.tabId}
+                className="benefits-form results-card-body"
+              >
                 {/* Inside the panel, not above it — per-tab content should be reachable
                     when a screen reader enters the active panel. */}
                 <ResultsSummary type={type} />
                 {type === 'program' && <ExternalApiFailureBanner />}
                 {type === 'program' && <UrgentNeedBanner />}
-                <Grid container sx={{ pt: '1rem' }}>
+                {/* No top padding: each tab's first section supplies its own gap above
+                    its divider, so padding here would double it. */}
+                <Grid container>
                   <Grid item xs={12}>
                     <panel.Content />
                   </Grid>
@@ -452,9 +459,11 @@ const Results = ({ type }: ResultsProps) => {
                 {/* CESN renders no tab bar (see Tabs.tsx), so this button remains its only
                     entry point to the Immediate Help resources. */}
                 {isEnergyCalculator && !immediateHelpSuppressed && <MoreHelpButton />}
-                {/* Both fire impression events on a timer, so they stay off the help tab to
-                    avoid inflating impressions and diluting the NPS response denominator. */}
-                {type !== 'help' && <NPSWidget uuid={uuid} />}
+                <NPSWidget uuid={uuid} />
+                {/* Off the help tab: it fires screener_share_popup_shown on a 5s timer, so
+                    including it here would inflate that impression count. NPS has no
+                    impression event — it only reports submitted scores — so it renders on
+                    every tab. */}
                 {type !== 'help' && <ShareModalAutoPopup />}
               </div>
             </div>
