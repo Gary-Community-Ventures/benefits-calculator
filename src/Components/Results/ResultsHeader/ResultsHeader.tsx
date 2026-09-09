@@ -73,18 +73,13 @@ const ProgramsHeader = () => {
 // Rendered below the tab bar, inside the results card — separate from ResultsHeader,
 // which stays above. The wrapper div lives here (not in Results) so the Immediate Help
 // and Additional Resources tabs render nothing at all, instead of an empty wrapper.
+//
+// CESN is absent here on purpose: its counts sit above the card, on the page
+// background, so they render from ResultsHeader instead.
 export const ResultsSummary = ({ type }: ResultsSummaryProps) => {
   const isEnergyCalculator = useIsEnergyCalculator();
 
-  if (isEnergyCalculator) {
-    return (
-      <div className="energy-calculator-results-header-container">
-        <EnergyCalculatorResultsHeader />
-      </div>
-    );
-  }
-
-  if (type !== 'program') {
+  if (isEnergyCalculator || type !== 'program') {
     return null;
   }
 
@@ -102,6 +97,7 @@ const ResultsHeader = () => {
   const { staffToken, setStaffToken } = useContext(Context);
   const { isAdminView } = useResultsContext();
   const track = useTrackEvent();
+  const isEnergyCalculator = useIsEnergyCalculator();
 
   return (
     <>
@@ -113,6 +109,13 @@ const ResultsHeader = () => {
         />
       </div>
       {isAdminView && <Login setToken={setStaffToken} loggedIn={staffToken !== undefined} />}
+      {/* Above the card, so CESN's counts float on the page background rather than
+          sitting inside the panel the way the tabbed layout's summary does. */}
+      {isEnergyCalculator && (
+        <div className="energy-calculator-results-header-container">
+          <EnergyCalculatorResultsHeader />
+        </div>
+      )}
       <ResultsSurvey />
     </>
   );
