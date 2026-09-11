@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { useTranslateNumber } from '../../../Assets/languageOptions';
 import { useIsEnergyCalculator } from '../../EnergyCalculator/hooks';
 import { useTrackEvent } from '../../../Assets/analytics';
-import { buildTabs, getNextTabIndex, ResultsTabId } from './buildTabs';
+import { buildTabs, getNextTabIndex, ResultsTabId, TabDescriptor } from './buildTabs';
 
 const DEFAULT_TAB_ICON_SIZE = 17;
 
@@ -41,6 +41,20 @@ const ResultsTabs = ({ activeTab }: ResultsTabsProps) => {
     [benefitsLink, needsLink, helpLink, programs.length, needs.length, immediateHelpSuppressed],
   );
 
+  // Shared so click and keyboard both track the same events.
+  const trackTabActivation = useCallback(
+    (tab: TabDescriptor) => {
+      track('screener_results_tab_click', { tab_name: tab.trackName });
+
+      if (tab.id === 'help') {
+        // Energy-calculator referrers have no tab bar, so they use a separate
+        // More Help button for this. `location` tells the two apart.
+        track('screener_get_help_click', { location: 'immediate_help_tab' });
+      }
+    },
+    [track],
+  );
+
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       const currentIndex = tabs.findIndex((tab) => tab.id === activeTab);
@@ -54,10 +68,11 @@ const ResultsTabs = ({ activeTab }: ResultsTabsProps) => {
       if (nextIndex !== null) {
         e.preventDefault();
         tabRefs.current[nextIndex]?.focus();
+        trackTabActivation(tabs[nextIndex]);
         navigate(tabs[nextIndex].to);
       }
     },
-    [activeTab, navigate, tabs],
+    [activeTab, navigate, tabs, trackTabActivation],
   );
 
   const isEnergyCalculator = useIsEnergyCalculator();
@@ -88,16 +103,7 @@ const ResultsTabs = ({ activeTab }: ResultsTabsProps) => {
                 aria-selected={isActive}
                 aria-controls="results-tabpanel"
                 tabIndex={isActive ? 0 : -1}
-                onClick={() => {
-                  track('screener_results_tab_click', { tab_name: tab.trackName });
-
-                  if (tab.id === 'help') {
-                    // Continuity for GA4 "get help": this event used to fire only from
-                    // the bottom More Help button, which this tab replaces. Distinct
-                    // `location` keeps the rollup comparable while still separating the two surfaces.
-                    track('screener_get_help_click', { location: 'immediate_help_tab' });
-                  }
-                }}
+                onClick={() => trackTabActivation(tab)}
               >
                 <span className="results-tab-label">
                   {/* strokeWidth matches the shared Icon component so tab icons carry the
