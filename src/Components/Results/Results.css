@@ -504,26 +504,15 @@
     font-size: 1.1rem;
   }
 
-  .category-heading-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .category-heading-column {
-    margin-bottom: 0.25rem;
-  }
-
-  .box-right {
-    width: 100%;
-    margin-bottom: 0.5rem;
-  }
-
   /* Wrapping is allowed again here: the tabs share a narrow viewport rather than
      sizing to their labels, so the text has to be able to break. */
+  /* min-width: 0 added so the label can shrink small enough to wrap — a flex
+     item does not shrink smaller than its content by default. */
   .results-tab a .results-tab-label {
     font-size: 0.9rem;
     margin: 0;
     white-space: normal;
+    min-width: 0;
   }
 
   /* Content-sized tabs would overflow a narrow viewport, so they share the width
@@ -533,27 +522,87 @@
     min-width: 0;
   }
 
+  /* position: relative so the count number below can place itself using this
+     tab as the reference point. */
   .results-tab a {
+    position: relative;
     width: 100%;
-    padding: 0.5rem 0.25rem;
+    height: 100%;
+    /* Right padding fits the badge below (0.25rem gap + 1.35rem width). */
+    padding: 0.5rem 1.6rem 0.5rem 0.25rem;
   }
 
-  /* Three tabs share a narrow viewport, so each gets ~33% instead of 50%. Tightened
-     only for that case; the two-tab mobile rendering above is unchanged. */
-  .results-tab-container[data-tab-count='3'] .results-tab a {
-    padding: 0.5rem 0.15rem;
+  /* Badge sits at the tab's edge, not next to the label — icon, wrapped text,
+     and badge don't all fit in one row. Centered up and down so its position
+     stays the same no matter how many lines the label takes. */
+  .results-tab a .results-tab-count {
+    position: absolute;
+    top: 50%;
+    right: 0.25rem;
+    transform: translateY(-50%);
   }
 
+  /* Text shrinks step by step as the screen narrows, instead of jumping
+     straight to 2 lines and making every tab taller at once. */
   .results-tab-container[data-tab-count='3'] .results-tab a .results-tab-label {
-    font-size: max(0.7rem, min(0.9rem, 2.8vw));
+    font-size: max(0.58rem, min(0.85rem, 1.8vw));
   }
 
+  /* All tabs get the same height, since labels can now wrap to a different
+     number of lines each. */
   .results-tab-container {
+    align-items: stretch;
     padding: 0.5rem 0 0 0;
     gap: 0.125rem;
   }
 
   .results-section-header {
     margin-top: 0.5rem;
+  }
+}
+
+/* Narrower than the general mobile size — only shrinks things where space is
+   truly tight. Same width reused for the 3-tab rules below, instead of two
+   numbers. Not covered: a very long category name could still wrap above
+   this width. */
+@media (max-width: 500px) {
+  .category-heading-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .category-heading-column {
+    margin-bottom: 0.25rem;
+  }
+
+  /* The amount starts at the same place as the category title text (after
+     the icon and its small gap), not at the same place as the icon. */
+  .box-right {
+    width: calc(100% - 2.75rem);
+    margin-left: 2.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Fits the count number's size (0.2rem + 1.1rem). Right and left set
+     separately, so the active tab's taller top/bottom padding stays untouched. */
+  .results-tab-container[data-tab-count='3'] .results-tab a {
+    padding-right: 1.3rem;
+    padding-left: 0.15rem;
+  }
+
+  /* No new text-size rule needed — the rule above already applies here.
+     Icons stay 16px too, hand-heart included, even though it is normally a
+     little bigger to match the others (see buildTabs.ts, iconSize) — bigger
+     here would push "Long-Term Benefits" onto a 3rd line. */
+  .results-tab-container[data-tab-count='3'] .results-tab-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .results-tab-container[data-tab-count='3'] .results-tab a .results-tab-count {
+    right: 0.2rem;
+    min-width: 1.1rem;
+    padding: 0 0.2rem;
+    font-size: 0.65rem;
   }
 }
