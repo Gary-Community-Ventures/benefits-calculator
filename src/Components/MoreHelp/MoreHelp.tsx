@@ -38,7 +38,7 @@ const MoreHelp = ({ isStandalonePage = false }: MoreHelpProps) => {
   const { moreHelpOptions } = useConfig<{ moreHelpOptions: Resource[] }>('more_help_options', {
     moreHelpOptions: [],
   });
-  const resources: Resource[] = moreHelpOptions;
+  const resources: Resource[] = moreHelpOptions ?? [];
   const track = useTrackEvent();
 
   const displayResources = (resources: Resource[]) => {
